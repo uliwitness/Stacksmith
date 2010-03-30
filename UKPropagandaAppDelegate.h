@@ -1,0 +1,21 @@
+//
+//  UKPropagandaAppDelegate.h
+//  Propaganda
+//
+//  Created by Uli Kusterer on 13.03.10.
+//  Copyright 2010 The Void Software. All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+
+
+@interface UKPropagandaAppDelegate : NSResponder <NSApplicationDelegate>
+{
+	BOOL		mPeeking;
+	BOOL		mBackgroundEditMode;
+}
+
+
+-(IBAction)	toggleBackgroundEditMode: (id)sender;
+
+@end

@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE stackfile PUBLIC "-//Apple, Inc.//DTD stackfile V 2.0//EN" "" >
+<stackfile>
+	<media>
+		<id>129</id>
+		<type>icon</type>
+		<name>Visual Effect</name>
+		<file>ICON_129.pbm</file>
+	</media>
+	<media>
+		<id>128</id>
+		<type>icon</type>
+		<name>Link To</name>
+		<file>ICON_128.pbm</file>
+	</media>
+	<media>
+		<id>26665</id>
+		<type>icon</type>
+		<name>Music</name>
+		<file>ICON_26665.pbm</file>
+	</media>
+	<media>
+		<id>2106</id>
+		<type>icon</type>
+		<name>Dice,6</name>
+		<file>ICON_2106.pbm</file>
+	</media>
+	<media>
+		<id>2105</id>
+		<type>icon</type>
+		<name>Dice,5</name>
+		<file>ICON_2105.pbm</file>
+	</media>
+	<media>
+		<id>2104</id>
+		<type>icon</type>
+		<name>Dice,4</name>
+		<file>ICON_2104.pbm</file>
+	</media>
+	<media>
+		<id>2103</id>
+		<type>icon</type>
+		<name>Dice,3</name>
+		<file>ICON_2103.pbm</file>
+	</media>
+	<media>
+		<id>2102</id>
+		<type>icon</type>
+		<name>Dice,2</name>
+		<file>ICON_2102.pbm</file>
+	</media>
+	<media>
+		<id>2101</id>
+		<type>icon</type>
+		<name>Dice,1</name>
+		<file>ICON_2101.pbm</file>
+	</media>
+	<media>
+		<id>16321</id>
+		<type>icon</type>
+		<name>Med Int'l Help</name>
+		<file>ICON_16321.pbm</file>
+	</media>
+	<media>
+		<id>11216</id>
+		<type>icon</type>
+		<name>Lg Int'l Help</name>
+		<file>ICON_11216.pbm</file>
+	</media>
+	<media>
+		<id>3333</id>
+		<type>icon</type>
+		<name>Stack Help?</name>
+		<file>ICON_3333.pbm</file>
+	</media>
+	<media>
+		<id>17169</id>
+		<type>icon</type>
+		<name>Mystery  Dot</name>
+		<file>ICON_17169.pbm</file>
+	</media>
+	<media>
+		<id>11714</id>
+		<type>icon</type>
+		<name>Boxed Question</name>
+		<file>ICON_11714.pbm</file>
+	</media>
+	<media>
+		<id>17264</id>
+		<type>icon</type>
+		<name>Stacky</name>
+		<file>ICON_17264.pbm</file>
+	</media>
+	<media>
+		<id>19638</id>
+		<type>icon</type>
+		<name>help 1</name>
+		<file>ICON_19638.pbm</file>
+	</media>
+	<media>
+		<id>12411</id>
+		<type>icon</type>
+		<name>help 3</name>
+		<file>ICON_12411.pbm</file>
+	</media>
+	<media>
+		<id>10181</id>
+		<type>icon</type>
+		<name>New Sort</name>
+		<file>ICON_10181.pbm</file>
+	</media>
+	<media>
+		<id>9104</id>
+		<type>icon</type>
+		<name>Stack Info Rt Tri</name>
+		<file>ICON_9104.pbm</file>
+	</media>
+	<media>
+		<id>27969</id>
+		<type>icon</type>
+		<name>New Home prefs</name>
+		<file>ICON_27969.pbm</file>
+	</media>
+	<media>
+		<id>3358</id>
+		<type>icon</type>
+		<name>Clicked Close Box</name>
+		<file>ICON_3358.pbm</file>
+	</media>
+	<media>
+		<id>3071</id>
+		<type>icon</type>
+		<name>Close Box</name>
+		<file>ICON_3071.pbm</file>
+	</media>
+	<media>
+		<id>27774</id>
+		<type>icon</type>
+		<name>Icon Substitute</name>
+		<file>ICON_27774.pbm</file>
+	</media>
+	<media>
+		<id>28654</id>
+		<type>icon</type>
+		<name>Search</name>
+		<file>ICON_28654.pbm</file>
+	</media>
+	<media>
+		<id>23718</id>
+		<type>icon</type>
+		<name>Sm Left Triangle</name>
+		<file>ICON_23718.pbm</file>
+	</media>
+	<media>
+		<id>23717</id>
+		<type>icon</type>
+		<name>Small Rt Triangle</name>
+		<file>ICON_23717.pbm</file>
+	</media>
+	<media>
+		<id>8349</id>
+		<type>icon</type>
+		<name>Prev. Double</name>
+		<file>ICON_8349.pbm</file>
+	</media>
+	<media>
+		<id>8350</id>
+		<type>icon</type>
+		<name>Next Double </name>
+		<file>ICON_8350.pbm</file>
+	</media>
+	<media>
+		<id>28810</id>
+		<type>icon</type>
+		<name>LEFT tri</name>
+		<file>ICON_28810.pbm</file>
+	</media>
+	<media>
+		<id>28811</id>
+		<type>icon</type>
+		<name>right tri</name>
+		<file>ICON_28811.pbm</file>
+	</media>
+	<media>
+		<id>6043</id>
+		<type>icon</type>
+		<name>PREV</name>
+		<file>ICON_6043.pbm</file>
+	</media>
+	<media>
+		<id>6044</id>
+		<type>icon</type>
+		<name>NXT</name>
+		<file>ICON_6044.pbm</file>
+	</media>
+	<media>
+		<id>8980</id>
+		<type>icon</type>
+		<name>Blk Help</name>
+		<file>ICON_8980.pbm</file>
+	</media>
+	<media>
+		<id>8964</id>
+		<type>icon</type>
+		<name>Blk Prev Arrow</name>
+		<file>ICON_8964.pbm</file>
+	</media>
+	<media>
+		<id>8979</id>
+		<type>icon</type>
+		<name>Blk Next Arrow</name>
+		<file>ICON_8979.pbm</file>
+	</media>
+	<media>
+		<id>8347</id>
+		<type>icon</type>
+		<name>Lt Arrow Prev</name>
+		<file>ICON_8347.pbm</file>
+	</media>
+	<media>
+		<id>8348</id>
+		<type>icon</type>
+		<name>Lt Arrow Next</name>
+		<file>ICON_8348.pbm</file>
+	</media>
+	<media>
+		<id>23613</id>
+		<type>icon</type>
+		<name>TINY Phone</name>
+		<file>ICON_23613.pbm</file>
+	</media>
+	<media>
+		<id>17937</id>
+		<type>icon</type>
+		<name>Wrong Number</name>
+		<file>ICON_17937.pbm</file>
+	</media>
+	<media>
+		<id>17890</id>
+		<type>icon</type>
+		<name>Big Tone</name>
+		<file>ICON_17890.pbm</file>
+	</media>
+	<media>
+		<id>17896</id>
+		<type>icon</type>
+		<name>Cordy</name>
+		<file>ICON_17896.pbm</file>
+	</media>
+	<media>
+		<id>17838</id>
+		<type>icon</type>
+		<name>Robin Stylee</name>
+		<file>ICON_17838.pbm</file>
+	</media>
+	<media>
+		<id>10935</id>
+		<type>icon</type>
+		<name>Home Brew</name>
+		<file>ICON_10935.pbm</file>
+	</media>
+	<media>
+		<id>8323</id>
+		<type>icon</type>
+		<name>Home Baked</name>
+		<file>ICON_8323.pbm</file>
+	</media>
+	<media>
+		<id>13745</id>
+		<type>icon</type>
+		<name>Home Alone</name>
+		<file>ICON_13745.pbm</file>
+	</media>
+	<media>
+		<id>13744</id>
+		<type>icon</type>
+		<name>Home Loan</name>
+		<file>ICON_13744.pbm</file>
+	</media>
+	<media>
+		<id>2181</id>
+		<type>icon</type>
+		<name>TINY Home</name>
+		<file>ICON_2181.pbm</file>
+	</media>
+	<media>
+		<id>15993</id>
+		<type>icon</type>
+		<name>Home Made</name>
+		<file>ICON_15993.pbm</file>
+	</media>
+	<media>
+		<id>22978</id>
+		<type>icon</type>
+		<name>Home Big 2</name>
+		<file>ICON_22978.pbm</file>
+	</media>
+	<media>
+		<id>27328</id>
+		<type>icon</type>
+		<name>Home Again</name>
+		<file>ICON_27328.pbm</file>
+	</media>
+	<media>
+		<id>24081</id>
+		<type>icon</type>
+		<name>Addresses!</name>
+		<file>ICON_24081.pbm</file>
+	</media>
+	<media>
+		<id>12722</id>
+		<type>icon</type>
+		<name>Appointments</name>
+		<file>ICON_12722.pbm</file>
+	</media>
+	<media>
+		<id>6491</id>
+		<type>icon</type>
+		<name>National Directory</name>
+		<file>ICON_6491.pbm</file>
+	</media>
+	<media>
+		<id>6560</id>
+		<type>icon</type>
+		<name>HC Tour</name>
+		<file>ICON_6560.pbm</file>
+	</media>
+	<media>
+		<id>24694</id>
+		<type>icon</type>
+		<name>HC Help</name>
+		<file>ICON_24694.pbm</file>
+	</media>
+	<media>
+		<id>21576</id>
+		<type>icon</type>
+		<name>Juggler 4</name>
+		<file>ICON_21576.pbm</file>
+	</media>
+	<media>
+		<id>21575</id>
+		<type>icon</type>
+		<name>Juggler 3</name>
+		<file>ICON_21575.pbm</file>
+	</media>
+	<media>
+		<id>21574</id>
+		<type>icon</type>
+		<name>Juggler 2</name>
+		<file>ICON_21574.pbm</file>
+	</media>
+	<media>
+		<id>21573</id>
+		<type>icon</type>
+		<name>Practice Stack</name>
+		<file>ICON_21573.pbm</file>
+	</media>
+	<media>
+		<id>18607</id>
+		<type>icon</type>
+		<name>Phone Dialer</name>
+		<file>ICON_18607.pbm</file>
+	</media>
+	<media>
+		<id>7142</id>
+		<type>icon</type>
+		<name>Graph Maker</name>
+		<file>ICON_7142.pbm</file>
+	</media>
+	<media>
+		<id>11260</id>
+		<type>icon</type>
+		<name>TrainSet</name>
+		<file>ICON_11260.pbm</file>
+	</media>
+	<media>
+		<id>6544</id>
+		<type>icon</type>
+		<name>Puzzle</name>
+		<file>ICON_6544.pbm</file>
+	</media>
+	<media>
+		<id>17214</id>
+		<type>icon</type>
+		<name>Readymade Buttons</name>
+		<file>ICON_17214.pbm</file>
+	</media>
+	<media>
+		<id>21711</id>
+		<type>icon</type>
+		<name>Readymade Fields</name>
+		<file>ICON_21711.pbm</file>
+	</media>
+	<media>
+		<id>16735</id>
+		<type>icon</type>
+		<name>Beanie Copter</name>
+		<file>ICON_16735.pbm</file>
+	</media>
+	<media>
+		<id>29589</id>
+		<type>icon</type>
+		<name>Background Art</name>
+		<file>ICON_29589.pbm</file>
+	</media>
+	<media>
+		<id>31885</id>
+		<type>icon</type>
+		<name>HT Reference</name>
+		<file>ICON_31885.pbm</file>
+	</media>
+	<media>
+		<id>21437</id>
+		<type>icon</type>
+		<name>Scanned Art2</name>
+		<file>ICON_21437.pbm</file>
+	</media>
+	<media>
+		<id>24753</id>
+		<type>icon</type>
+		<name>Stack Templates</name>
+		<file>ICON_24753.pbm</file>
+	</media>
+	<media>
+		<id>25309</id>
+		<type>icon</type>
+		<name>Art Bits</name>
+		<file>ICON_25309.pbm</file>
+	</media>
+	<media>
+		<id>2980</id>
+		<type>icon</type>
+		<name>Address</name>
+		<file>ICON_2980.pbm</file>
+	</media>
+	<media>
+		<id>18223</id>
+		<type>icon</type>
+		<name>Info</name>
+		<file>ICON_18223.pbm</file>
+	</media>
+	<media>
+		<id>18222</id>
+		<type>icon</type>
+		<name>Stack Info</name>
+		<file>ICON_18222.pbm</file>
+	</media>
+	<media>
+		<id>28022</id>
+		<type>icon</type>
+		<name>Small Home Base</name>
+		<file>ICON_28022.pbm</file>
+	</media>
+	<media>
+		<id>28024</id>
+		<type>icon</type>
+		<name>Home Base</name>
+		<file>ICON_28024.pbm</file>
+	</media>
+	<media>
+		<id>28023</id>
+		<type>icon</type>
+		<name>Large Home Base</name>
+		<file>ICON_28023.pbm</file>
+	</media>
+	<media>
+		<id>12195</id>
+		<type>icon</type>
+		<name>Document</name>
+		<file>ICON_12195.pbm</file>
+	</media>
+	<media>
+		<id>17343</id>
+		<type>icon</type>
+		<name>Application</name>
+		<file>ICON_17343.pbm</file>
+	</media>
+	<media>
+		<id>16344</id>
+		<type>icon</type>
+		<name>Draw Doc</name>
+		<file>ICON_16344.pbm</file>
+	</media>
+	<media>
+		<id>13149</id>
+		<type>icon</type>
+		<name>MacDraw</name>
+		<file>ICON_13149.pbm</file>
+	</media>
+	<media>
+		<id>7012</id>
+		<type>icon</type>
+		<name>Stack Ideas</name>
+		<file>ICON_7012.pbm</file>
+	</media>
+	<media>
+		<id>9761</id>
+		<type>icon</type>
+		<name>Compass</name>
+		<file>ICON_9761.pbm</file>
+	</media>
+	<media>
+		<id>8538</id>
+		<type>icon</type>
+		<name>Closer Look</name>
+		<file>ICON_8538.pbm</file>
+	</media>
+	<media>
+		<id>1009</id>
+		<type>icon</type>
+		<name>Eye</name>
+		<file>ICON_1009.pbm</file>
+	</media>
+	<media>
+		<id>1015</id>
+		<type>icon</type>
+		<name>Small Button</name>
+		<file>ICON_1015.pbm</file>
+	</media>
+	<media>
+		<id>1018</id>
+		<type>icon</type>
+		<name>Marker Cross</name>
+		<file>ICON_1018.pbm</file>
+	</media>
+	<media>
+		<id>14767</id>
+		<type>icon</type>
+		<name>Lge Tell About...</name>
+		<file>ICON_14767.pbm</file>
+	</media>
+	<media>
+		<id>2478</id>
+		<type>icon</type>
+		<name>Med Tell About...</name>
+		<file>ICON_2478.pbm</file>
+	</media>
+	<media>
+		<id>19678</id>
+		<type>icon</type>
+		<name>Sm Tell About...</name>
+		<file>ICON_19678.pbm</file>
+	</media>
+	<media>
+		<id>23078</id>
+		<type>icon</type>
+		<name>Game?</name>
+		<file>ICON_23078.pbm</file>
+	</media>
+	<media>
+		<id>1020</id>
+		<type>icon</type>
+		<name>Good Question</name>
+		<file>ICON_1020.pbm</file>
+	</media>
+	<media>
+		<id>31685</id>
+		<type>icon</type>
+		<name>Black ?</name>
+		<file>ICON_31685.pbm</file>
+	</media>
+	<media>
+		<id>2507</id>
+		<type>icon</type>
+		<name>White ?</name>
+		<file>ICON_2507.pbm</file>
+	</media>
+	<media>
+		<id>21060</id>
+		<type>icon</type>
+		<name>Outline ?</name>
+		<file>ICON_21060.pbm</file>
+	</media>
+	<media>
+		<id>32462</id>
+		<type>icon</type>
+		<name>Lge Help</name>
+		<file>ICON_32462.pbm</file>
+	</media>
+	<media>
+		<id>25002</id>
+		<type>icon</type>
+		<name>Med Help</name>
+		<file>ICON_25002.pbm</file>
+	</media>
+	<media>
+		<id>26635</id>
+		<type>icon</type>
+		<name>Sml Help</name>
+		<file>ICON_26635.pbm</file>
+	</media>
+	<media>
+		<id>32670</id>
+		<type>icon</type>
+		<name>Scan</name>
+		<file>ICON_32670.pbm</file>
+	</media>
+	<media>
+		<id>20186</id>
+		<type>icon</type>
+		<name>Sort</name>
+		<file>ICON_20186.pbm</file>
+	</media>
+	<media>
+		<id>15972</id>
+		<type>icon</type>
+		<name>Calendar Page</name>
+		<file>ICON_15972.pbm</file>
+	</media>
+	<media>
+		<id>4263</id>
+		<type>icon</type>
+		<name>Datebook Year-Gray</name>
+		<file>ICON_4263.pbm</file>
+	</media>
+	<media>
+		<id>22855</id>
+		<type>icon</type>
+		<name>Datebook Year</name>
+		<file>ICON_22855.pbm</file>
+	</media>
+	<media>
+		<id>8961</id>
+		<type>icon</type>
+		<name>Datebook Day-Gray</name>
+		<file>ICON_8961.pbm</file>
+	</media>
+	<media>
+		<id>21209</id>
+		<type>icon</type>
+		<name>Datebook Day</name>
+		<file>ICON_21209.pbm</file>
+	</media>
+	<media>
+		<id>17357</id>
+		<type>icon</type>
+		<name>Memo-Gray</name>
+		<file>ICON_17357.pbm</file>
+	</media>
+	<media>
+		<id>20965</id>
+		<type>icon</type>
+		<name>Memo</name>
+		<file>ICON_20965.pbm</file>
+	</media>
+	<media>
+		<id>4432</id>
+		<type>icon</type>
+		<name>To Do</name>
+		<file>ICON_4432.pbm</file>
+	</media>
+	<media>
+		<id>11645</id>
+		<type>icon</type>
+		<name>Bill's Rolo</name>
+		<file>ICON_11645.pbm</file>
+	</media>
+	<media>
+		<id>3430</id>
+		<type>icon</type>
+		<name>Address Card A</name>
+		<file>ICON_3430.pbm</file>
+	</media>
+	<media>
+		<id>17481</id>
+		<type>icon</type>
+		<name>Address Card B </name>
+		<file>ICON_17481.pbm</file>
+	</media>
+	<media>
+		<id>30696</id>
+		<type>icon</type>
+		<name>Old Style Phone</name>
+		<file>ICON_30696.pbm</file>
+	</media>
+	<media>
+		<id>10610</id>
+		<type>icon</type>
+		<name>Touch Tone</name>
+		<file>ICON_10610.pbm</file>
+	</media>
+	<media>
+		<id>1017</id>
+		<type>icon</type>
+		<name>Phone</name>
+		<file>ICON_1017.pbm</file>
+	</media>
+	<media>
+		<id>21847</id>
+		<type>icon</type>
+		<name>Minute Home</name>
+		<file>ICON_21847.pbm</file>
+	</media>
+	<media>
+		<id>20689</id>
+		<type>icon</type>
+		<name>Sml Home</name>
+		<file>ICON_20689.pbm</file>
+	</media>
+	<media>
+		<id>21700</id>
+		<type>icon</type>
+		<name>Sml White Home</name>
+		<file>ICON_21700.pbm</file>
+	</media>
+	<media>
+		<id>20098</id>
+		<type>icon</type>
+		<name>White Home</name>
+		<file>ICON_20098.pbm</file>
+	</media>
+	<media>
+		<id>11045</id>
+		<type>icon</type>
+		<name>Sml Black Home</name>
+		<file>ICON_11045.pbm</file>
+	</media>
+	<media>
+		<id>1011</id>
+		<type>icon</type>
+		<name>Home</name>
+		<file>ICON_1011.pbm</file>
+	</media>
+	<media>
+		<id>32650</id>
+		<type>icon</type>
+		<name>Ex Lge Next Hand</name>
+		<file>ICON_32650.pbm</file>
+	</media>
+	<media>
+		<id>1016</id>
+		<type>icon</type>
+		<name>Ex Lge Prev Hand</name>
+		<file>ICON_1016.pbm</file>
+	</media>
+	<media>
+		<id>19162</id>
+		<type>icon</type>
+		<name>Lge Next Hand</name>
+		<file>ICON_19162.pbm</file>
+	</media>
+	<media>
+		<id>9120</id>
+		<type>icon</type>
+		<name>Lge Prev Hand</name>
+		<file>ICON_9120.pbm</file>
+	</media>
+	<media>
+		<id>29484</id>
+		<type>icon</type>
+		<name>Med Next Hand</name>
+		<file>ICON_29484.pbm</file>
+	</media>
+	<media>
+		<id>3835</id>
+		<type>icon</type>
+		<name>Med Prev Hand</name>
+		<file>ICON_3835.pbm</file>
+	</media>
+	<media>
+		<id>6179</id>
+		<type>icon</type>
+		<name>Sml Next Hand</name>
+		<file>ICON_6179.pbm</file>
+	</media>
+	<media>
+		<id>6460</id>
+		<type>icon</type>
+		<name>Sml Prev Hand</name>
+		<file>ICON_6460.pbm</file>
+	</media>
+	<media>
+		<id>14953</id>
+		<type>icon</type>
+		<name>Fleet Return Arrow</name>
+		<file>ICON_14953.pbm</file>
+	</media>
+	<media>
+		<id>22308</id>
+		<type>icon</type>
+		<name>Fleet Next Arrow</name>
+		<file>ICON_22308.pbm</file>
+	</media>
+	<media>
+		<id>19381</id>
+		<type>icon</type>
+		<name>Fleet Prev Arrow</name>
+		<file>ICON_19381.pbm</file>
+	</media>
+	<media>
+		<id>15279</id>
+		<type>icon</type>
+		<name>Black Down Arrow</name>
+		<file>ICON_15279.pbm</file>
+	</media>
+	<media>
+		<id>26020</id>
+		<type>icon</type>
+		<name>Black Up Arrow</name>
+		<file>ICON_26020.pbm</file>
+	</media>
+	<media>
+		<id>7417</id>
+		<type>icon</type>
+		<name>Black Return Arrow</name>
+		<file>ICON_7417.pbm</file>
+	</media>
+	<media>
+		<id>8419</id>
+		<type>icon</type>
+		<name>Black Next Arrow</name>
+		<file>ICON_8419.pbm</file>
+	</media>
+	<media>
+		<id>17779</id>
+		<type>icon</type>
+		<name>Black Prev Arrow</name>
+		<file>ICON_17779.pbm</file>
+	</media>
+	<media>
+		<id>24830</id>
+		<type>icon</type>
+		<name>XL Last Card Arrow</name>
+		<file>ICON_24830.pbm</file>
+	</media>
+	<media>
+		<id>21449</id>
+		<type>icon</type>
+		<name>XL First Card Arrow</name>
+		<file>ICON_21449.pbm</file>
+	</media>
+	<media>
+		<id>6724</id>
+		<type>icon</type>
+		<name>XL Down Arrow</name>
+		<file>ICON_6724.pbm</file>
+	</media>
+	<media>
+		<id>4895</id>
+		<type>icon</type>
+		<name>XL Up Arrow</name>
+		<file>ICON_4895.pbm</file>
+	</media>
+	<media>
+		<id>29114</id>
+		<type>icon</type>
+		<name>XL Return Arrow</name>
+		<file>ICON_29114.pbm</file>
+	</media>
+	<media>
+		<id>26425</id>
+		<type>icon</type>
+		<name>XL Next Arrow</name>
+		<file>ICON_26425.pbm</file>
+	</media>
+	<media>
+		<id>902</id>
+		<type>icon</type>
+		<name>XL Prev Arrow</name>
+		<file>ICON_902.pbm</file>
+	</media>
+	<media>
+		<id>766</id>
+		<type>icon</type>
+		<name>Lge Last Card Arrow</name>
+		<file>ICON_766.pbm</file>
+	</media>
+	<media>
+		<id>5472</id>
+		<type>icon</type>
+		<name>Lge First Card Arrow</name>
+		<file>ICON_5472.pbm</file>
+	</media>
+	<media>
+		<id>2335</id>
+		<type>icon</type>
+		<name>Lge Down Arrow</name>
+		<file>ICON_2335.pbm</file>
+	</media>
+	<media>
+		<id>32488</id>
+		<type>icon</type>
+		<name>Lge Up Arrow</name>
+		<file>ICON_32488.pbm</file>
+	</media>
+	<media>
+		<id>2162</id>
+		<type>icon</type>
+		<name>Lge Return Arrow</name>
+		<file>ICON_2162.pbm</file>
+	</media>
+	<media>
+		<id>27009</id>
+		<type>icon</type>
+		<name>Lge Next Arrow</name>
+		<file>ICON_27009.pbm</file>
+	</media>
+	<media>
+		<id>9301</id>
+		<type>icon</type>
+		<name>Lge Prev Arrow</name>
+		<file>ICON_9301.pbm</file>
+	</media>
+	<media>
+		<id>26865</id>
+		<type>icon</type>
+		<name>Last Card Arrow</name>
+		<file>ICON_26865.pbm</file>
+	</media>
+	<media>
+		<id>30557</id>
+		<type>icon</type>
+		<name>First Card Arrow</name>
+		<file>ICON_30557.pbm</file>
+	</media>
+	<media>
+		<id>2730</id>
+		<type>icon</type>
+		<name>Down Arrow</name>
+		<file>ICON_2730.pbm</file>
+	</media>
+	<media>
+		<id>29019</id>
+		<type>icon</type>
+		<name>Up Arrow</name>
+		<file>ICON_29019.pbm</file>
+	</media>
+	<media>
+		<id>1012</id>
+		<type>icon</type>
+		<name>Return Arrow</name>
+		<file>ICON_1012.pbm</file>
+	</media>
+	<media>
+		<id>1013</id>
+		<type>icon</type>
+		<name>Next Arrow</name>
+		<file>ICON_1013.pbm</file>
+	</media>
+	<media>
+		<id>1014</id>
+		<type>icon</type>
+		<name>Prev Arrow</name>
+		<file>ICON_1014.pbm</file>
+	</media>
+	<media>
+		<id>29903</id>
+		<type>icon</type>
+		<name>Sml Last Card Arrow</name>
+		<file>ICON_29903.pbm</file>
+	</media>
+	<media>
+		<id>24317</id>
+		<type>icon</type>
+		<name>Sml First Card Arrow</name>
+		<file>ICON_24317.pbm</file>
+	</media>
+	<media>
+		<id>3584</id>
+		<type>icon</type>
+		<name>Sml Down Arrow</name>
+		<file>ICON_3584.pbm</file>
+	</media>
+	<media>
+		<id>16692</id>
+		<type>icon</type>
+		<name>Sml Up Arrow</name>
+		<file>ICON_16692.pbm</file>
+	</media>
+	<media>
+		<id>6720</id>
+		<type>icon</type>
+		<name>Sml Return Arrow</name>
+		<file>ICON_6720.pbm</file>
+	</media>
+	<media>
+		<id>16560</id>
+		<type>icon</type>
+		<name>Sml Next Arrow</name>
+		<file>ICON_16560.pbm</file>
+	</media>
+	<media>
+		<id>15420</id>
+		<type>icon</type>
+		<name>Sml Prev Arrow</name>
+		<file>ICON_15420.pbm</file>
+	</media>
+	<media>
+		<id>27056</id>
+		<type>icon</type>
+		<name>Button Ideas</name>
+		<file>ICON_27056.pbm</file>
+	</media>
+	<media>
+		<id>18814</id>
+		<type>icon</type>
+		<name>Card Ideas</name>
+		<file>ICON_18814.pbm</file>
+	</media>
+	<media>
+		<id>26884</id>
+		<type>icon</type>
+		<name>Art Ideas</name>
+		<file>ICON_26884.pbm</file>
+	</media>
+	<media>
+		<id>1019</id>
+		<type>icon</type>
+		<name>ResEdit</name>
+		<file>ICON_1019.pbm</file>
+	</media>
+	<media>
+		<id>1008</id>
+		<type>icon</type>
+		<name>LaserWriter</name>
+		<file>ICON_1008.pbm</file>
+	</media>
+	<media>
+		<id>1007</id>
+		<type>icon</type>
+		<name>ImageWriter</name>
+		<file>ICON_1007.pbm</file>
+	</media>
+	<media>
+		<id>1006</id>
+		<type>icon</type>
+		<name>Mac</name>
+		<file>ICON_1006.pbm</file>
+	</media>
+	<media>
+		<id>1005</id>
+		<type>icon</type>
+		<name>MacWrite</name>
+		<file>ICON_1005.pbm</file>
+	</media>
+	<media>
+		<id>1004</id>
+		<type>icon</type>
+		<name>Write Doc</name>
+		<file>ICON_1004.pbm</file>
+	</media>
+	<media>
+		<id>1003</id>
+		<type>icon</type>
+		<name>MacPaint</name>
+		<file>ICON_1003.pbm</file>
+	</media>
+	<media>
+		<id>1002</id>
+		<type>icon</type>
+		<name>Paint Doc</name>
+		<file>ICON_1002.pbm</file>
+	</media>
+	<media>
+		<id>1001</id>
+		<type>icon</type>
+		<name>HyperCard</name>
+		<file>ICON_1001.pbm</file>
+	</media>
+	<media>
+		<id>1000</id>
+		<type>icon</type>
+		<name>Stack</name>
+		<file>ICON_1000.pbm</file>
+	</media>
+	<media>
+		<id>2002</id>
+		<type>icon</type>
+		<name>Bill</name>
+		<file>ICON_2002.pbm</file>
+	</media>
+	<media>
+		<id>128</id>
+		<type>picture</type>
+		<name>Navigator</name>
+		<file>PICT_128.pict</file>
+	</media>
+	<media>
+		<id>131</id>
+		<type>cursor</type>
+		<name>VBarMover</name>
+		<file>CURS_131.pbm</file>
+		<hotspot>
+			<left>7</left>
+			<top>7</top>
+		</hotspot>
+	</media>
+	<media>
+		<id>130</id>
+		<type>cursor</type>
+		<name>HBarMover</name>
+		<file>CURS_130.pbm</file>
+		<hotspot>
+			<left>7</left>
+			<top>7</top>
+		</hotspot>
+	</media>
+	<media>
+		<id>129</id>
+		<type>cursor</type>
+		<name>Checkpoint</name>
+		<file>CURS_129.pbm</file>
+		<hotspot>
+			<left>7</left>
+			<top>8</top>
+		</hotspot>
+	</media>
+	<media>
+		<id>128</id>
+		<type>cursor</type>
+		<name>Hand</name>
+		<file>CURS_128.pbm</file>
+		<hotspot>
+			<left>7</left>
+			<top>0</top>
+		</hotspot>
+	</media>
+	<media>
+		<id>146</id>
+		<name>flute</name>
+		<file>snd_146.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>145</id>
+		<name>Dial#</name>
+		<file>snd_145.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>144</id>
+		<name>Dial*</name>
+		<file>snd_144.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>143</id>
+		<name>DialD</name>
+		<file>snd_143.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>142</id>
+		<name>DialC</name>
+		<file>snd_142.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>141</id>
+		<name>DialB</name>
+		<file>snd_141.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>140</id>
+		<name>DialA</name>
+		<file>snd_140.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>139</id>
+		<name>Dial9</name>
+		<file>snd_139.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>138</id>
+		<name>Dial8</name>
+		<file>snd_138.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>137</id>
+		<name>Dial7</name>
+		<file>snd_137.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>136</id>
+		<name>Dial6</name>
+		<file>snd_136.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>135</id>
+		<name>Dial5</name>
+		<file>snd_135.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>134</id>
+		<name>Dial4</name>
+		<file>snd_134.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>133</id>
+		<name>Dial3</name>
+		<file>snd_133.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>132</id>
+		<name>Dial2</name>
+		<file>snd_132.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>131</id>
+		<name>Dial1</name>
+		<file>snd_131.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>130</id>
+		<name>Dial0</name>
+		<file>snd_130.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>129</id>
+		<name>Boing</name>
+		<file>snd_129.aiff</file>
+		<type>sound</type>
+	</media>
+	<media>
+		<id>128</id>
+		<name>Harpsichord</name>
+		<file>snd_128.aiff</file>
+		<type>sound</type>
+	</media>
+</stackfile>
