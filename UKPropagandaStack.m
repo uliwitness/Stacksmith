@@ -212,7 +212,10 @@
 		mCantAbort = UKPropagandaBoolFromSubElementInElement( @"cantAbort", elem );
 		mCantPeek = UKPropagandaBoolFromSubElementInElement( @"cantPeek", elem );
 		
-		mVersions = [UKPropagandaStringsFromSubElementInElement( @"version", elem ) retain];
+		mCreatedByVersion = [UKPropagandaStringFromSubElementInElement( @"createdByVersion", elem ) retain];
+		mLastCompactedVersion = [UKPropagandaStringFromSubElementInElement( @"lastCompactedVersion", elem ) retain];
+		mFirstEditedVersion = [UKPropagandaStringFromSubElementInElement( @"firstEditedVersion", elem ) retain];
+		mLastEditedVersion = [UKPropagandaStringFromSubElementInElement( @"lastEditedVersion", elem ) retain];
 		
 		mCardSize = UKPropagandaSizeFromSubElementInElement( @"cardSize", elem );
 		
@@ -239,8 +242,14 @@
 	mBackgrounds = nil;
 	[mCards release];
 	mCards = nil;
-	[mVersions release];
-	mVersions = nil;
+	[mCreatedByVersion release];
+	mCreatedByVersion = nil;
+	[mLastCompactedVersion release];
+	mLastCompactedVersion = nil;
+	[mFirstEditedVersion release];
+	mFirstEditedVersion = nil;
+	[mLastEditedVersion release];
+	mLastEditedVersion = nil;
 	[mPatterns release];
 	mPatterns = nil;
 	[mScript release];

@@ -24,7 +24,10 @@
 	NSMutableArray*			mPatterns;			// (Possibly customized) patterns for drawing using paint tools.
 	NSString*				mScript;			// Script of this stack.
 	NSSize					mCardSize;			// Size of cards in this stack.
-	NSArray*				mVersions;			// Various version numbers stored in the stack.
+	NSString*				mCreatedByVersion;
+	NSString*				mLastCompactedVersion;
+	NSString*				mFirstEditedVersion;
+	NSString*				mLastEditedVersion;
 	BOOL					mCantPeek;			// Do we prevent "peeking" of button rects using Cmd-Option?
 	BOOL					mCantAbort;			// Do we prohibit Cmd-. from canceling scripts?
 	BOOL					mPrivateAccess;		// Do we require a password before opening this stack?
