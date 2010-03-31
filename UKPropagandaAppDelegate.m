@@ -23,10 +23,17 @@
 
 -(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
 {
-	NSString	*	homeStackPath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"Home.xstk"];
+	NSString	*	homeStackPath = nil;
+	NSString	*	standaloneStackPath = [[[[NSBundle mainBundle] bundlePath] pathForResource: @"Home" ofType: @"xstk"];
+	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
+		homeStackPath = standaloneStackPath;
+	else
+		standaloneStackPath = nil;
+	homeStackPath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"Home.xstk"];
 	NSError		*	theError = nil;
 	NSDocument	*	theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: homeStackPath] display: YES error: &theError];
 	[theDoc showWindows];
+	
 	return theDoc != nil;
 }
 
