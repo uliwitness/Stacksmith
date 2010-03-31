@@ -37,6 +37,18 @@
 }
 
 
+-(BOOL)	validateMenuItem: (NSMenuItem *)menuItem
+{
+	if( [menuItem action] == @selector(toggleBackgroundEditMode:) )
+	{
+		[menuItem setState: mBackgroundEditMode ? NSOnState : NSOffState];
+		return YES;
+	}
+	else
+		return NO;
+}
+
+
 -(IBAction)	toggleBackgroundEditMode: (id)sender
 {
 	mBackgroundEditMode = !mBackgroundEditMode;
