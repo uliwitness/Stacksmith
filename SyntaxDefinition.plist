@@ -38,8 +38,22 @@
 				<string>on</string>
 				<string>function</string>
 				<string>openCard</string>
+				<string>closeCard</string>
+				<string>newCard</string>
+				<string>deleteCard</string>
+				<string>closeField</string>
+				<string>exitField</string>
 				<string>mouseUp</string>
 				<string>mouseDown</string>
+				<string>mouseStillDown</string>
+				<string>mouseEnter</string>
+				<string>mouseLeave</string>
+				<string>openStack</string>
+				<string>suspendStack</string>
+				<string>resumeStack</string>
+				<string>closeStack</string>
+				<string>openBackground</string>
+				<string>closeBackground</string>
 				<string>return</string>
 				<string>put</string>
 				<string>into</string>
@@ -55,16 +69,101 @@
 				<string>before</string>
 				<string>go</string>
 				<string>card</string>
+				<string>cards</string>
 				<string>cd</string>
+				<string>cds</string>
 				<string>background</string>
+				<string>backgrounds</string>
 				<string>bkgd</string>
+				<string>bkgds</string>
 				<string>bgd</string>
+				<string>bgds</string>
 				<string>bg</string>
+				<string>bgs</string>
 				<string>part</string>
+				<string>parts</string>
 				<string>button</string>
+				<string>buttons</string>
 				<string>btn</string>
+				<string>btns</string>
 				<string>field</string>
+				<string>fields</string>
 				<string>fld</string>
+				<string>flds</string>
+				<string>if</string>
+				<string>else</string>
+				<string>then</string>
+				<string>me</string>
+				<string>empty</string>
+				<string>the</string>
+				<string>line</string>
+				<string>lines</string>
+				<string>word</string>
+				<string>words</string>
+				<string>char</string>
+				<string>chars</string>
+				<string>character</string>
+				<string>characters</string>
+				<string>item</string>
+				<string>items</string>
+				<string>select</string>
+				<string>first</string>
+				<string>previous</string>
+				<string>next</string>
+				<string>last</string>
+				<string>delete</string>
+				<string>number</string>
+				<string>sort</string>
+				<string>lines</string>
+				<string>cursor</string>
+				<string>busy</string>
+				<string>watch</string>
+				<string>plus</string>
+				<string>ibeam</string>
+				<string>optionkey</string>
+				<string>ask</string>
+				<string>answer</string>
+				<string>name</string>
+				<string>pass</string>
+				<string>short</string>
+				<string>long</string>
+				<string>abbr</string>
+				<string>abbrev</string>
+				<string>abbreviated</string>
+				<string>date</string>
+				<string>stack</string>
+				<string>visual</string>
+				<string>effect</string>
+				<string>global</string>
+				<string>show</string>
+				<string>hide</string>
+				<string>is</string>
+				<string>not</string>
+				<string>menu</string>
+				<string>me</string>
+				<string>this</string>
+				<string>target</string>
+				<string>menubar</string>
+				<string>push</string>
+				<string>pop</string>
+				<string>lock</string>
+				<string>unlock</string>
+				<string>screen</string>
+				<string>messages</string>
+				<string>exit</string>
+				<string>true</string>
+				<string>false</string>
+				<string>beep</string>
+				<string>choose</string>
+				<string>tool</string>
+				<string>quote</string>
+				<string>colon</string>
+				<string>while</string>
+				<string>until</string>
+				<string>do</string>
+				<string>get</string>
+				<string>contains</string>
+				<string>wait</string>
 			</array>
 			<key>Name</key>
 			<string>Identifiers</string>
