@@ -22,6 +22,7 @@
 	NSMutableDictionary			*	mPartViews;
 	UKPropagandaSearchContext	*	mSearchContext;
 	NSString					*	mCurrentSearchString;
+	IBOutlet NSTextField		*	mSearchField;
 }
 
 -(void)	loadCard: (UKPropagandaCard*)theCard;

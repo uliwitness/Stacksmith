@@ -16,10 +16,10 @@
 
 @interface UKPropagandaDocument : NSDocument
 {
-	UKPropagandaStack					*	mStack;
-	IBOutlet UKPropagandaWindowBodyView	*	mView;	
-	UKPropagandaCardViewController		*	mCardViewController;
-	NSMutableArray						*	mErrorsAndWarnings;
+	UKPropagandaStack						*	mStack;
+	IBOutlet UKPropagandaWindowBodyView		*	mView;	
+	IBOutlet UKPropagandaCardViewController	*	mCardViewController;
+	NSMutableArray							*	mErrorsAndWarnings;
 }
 
 @end

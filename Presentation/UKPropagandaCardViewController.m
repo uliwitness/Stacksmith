@@ -289,6 +289,8 @@
 	[container setAutoresizingMask: NSViewMaxYMargin];
 	[wd setFrame: wdBox display: YES animate: YES];
 	[container setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable | NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+
+	[mSearchField setEnabled: NO];
 }
 
 
@@ -302,6 +304,9 @@
 	
 	if( NSMaxY([container frame]) == wdBounds.size.height )	// Already have find panel in view!
 		return;
+	
+	[mSearchField setEnabled: YES];
+	[[mSearchField window] makeFirstResponder: mSearchField];
 	
 	wdFrame.size.height += searchBarHeight;
 	wdFrame.origin.y -= searchBarHeight;

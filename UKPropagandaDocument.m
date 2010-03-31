@@ -69,7 +69,6 @@
 	
 	[aController setShouldCloseDocument: YES];
 	
-	mCardViewController = [[UKPropagandaCardViewController alloc] init];
 	[mCardViewController setView: mView];
 	[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];
 	

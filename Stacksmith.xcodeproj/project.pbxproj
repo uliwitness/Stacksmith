@@ -645,6 +645,7 @@
 		55C2B646115E5780008B094D /* UKPropagandaSearchContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPropagandaSearchContext.m; path = Model/UKPropagandaSearchContext.m; sourceTree = "<group>"; };
 		55C2B69B115EA2CD008B094D /* NSView+SizeWindowForViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSView+SizeWindowForViewSize.h"; path = "../UliKit/NSView+SizeWindowForViewSize.h"; sourceTree = SOURCE_ROOT; };
 		55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSView+SizeWindowForViewSize.m"; path = "../UliKit/NSView+SizeWindowForViewSize.m"; sourceTree = SOURCE_ROOT; };
+		55C68C9D116413E300D8B44C /* svn_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svn_version.h; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D6B257115C16E700D17619 /* UKPropagandaTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaTextView.h; sourceTree = "<group>"; };
 		55D6B258115C16E700D17619 /* UKPropagandaTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaTextView.m; sourceTree = "<group>"; };
@@ -748,6 +749,7 @@
 			isa = PBXGroup;
 			children = (
 				2564AD2C0F5327BB00F57823 /* Stacksmith_Prefix.pch */,
+				55C68C9D116413E300D8B44C /* svn_version.h */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -1147,6 +1149,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Propaganda" */;
 			buildPhases = (
+				55C68C7D116412A700D8B44C /* git_version */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
@@ -1465,6 +1468,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		55C68C7D116412A700D8B44C /* git_version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = git_version;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ../UliKit/make_git_version_header.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8D15AC300486D014006FF6A4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1574,6 +1594,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Stacksmith_Prefix.pch;
 				INFOPLIST_FILE = "Stacksmith-Info.plist";
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Stacksmith;
 			};
@@ -1588,6 +1609,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Stacksmith_Prefix.pch;
 				INFOPLIST_FILE = "Stacksmith-Info.plist";
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Stacksmith;
 			};

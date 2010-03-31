@@ -1,0 +1,3 @@
+#define SVN_VERSION	"345"
+#define GIT_HASH	"7b81bd3d62092bd9f3bd54cf209addb4143ee2c4"
+#define SVN_VERSION_NUM	345
