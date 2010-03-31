@@ -231,41 +231,7 @@
 		
 		[card loadAddColorObjects: theCardElem];
 	}
-	
-	// Build a list of all page tables in the stack:
-	NSMutableDictionary	*	pageTables = [NSMutableDictionary dictionary];
-	NSArray				*	ptElems = [stackfileElement elementsForName: @"pagetable"];
-	
-	for( NSXMLElement* ptElem in ptElems )
-	{
-		NSInteger		theTableID = UKPropagandaIntegerFromSubElementInElement( @"id", ptElem );
-		NSArray		*	cardsElems = [ptElem elementsForName: @"cards"];
-		NSXMLElement* 	ptCardsElem = (cardsElems && [cardsElems count] > 0) ? [cardsElems objectAtIndex: 0] : nil;
-		NSArray		*	orderedCardIDs = UKPropagandaIntegersFromSubElementInElement( @"cardID", ptCardsElem );
-		[pageTables setObject: orderedCardIDs forKey: [NSNumber numberWithInteger: theTableID]];
-	}
-	
-	// Now go through them *in order* and build an ordered list of cards:
-	NSArray		*	ptlElems = [stackfileElement elementsForName: @"pagetablelist"];
-	NSXMLElement* 	ptlElem = (ptlElems && [ptlElems count] > 0) ? [ptlElems objectAtIndex: 0] : nil;
-	NSArray		*	pagetableIDs = UKPropagandaIntegersFromSubElementInElement( @"pagetable", ptlElem );
-	NSMutableArray*	orderedCards = [NSMutableArray array];
-	
-	for( NSNumber* currPagetableID in pagetableIDs )
-	{
-		NSArray*	orderedCardIDs = [pageTables objectForKey: currPagetableID];
-		for( NSNumber* currCardID in orderedCardIDs )
-		{
-			UKPropagandaCard*	theCard = [mStack cardWithID: [currCardID integerValue]];
-			if( theCard )
-				[orderedCards addObject: theCard];
-		}
-	}
-	
-	// Actually re-order cards:
-	if( [orderedCards count] == [[mStack cards] count] )
-		[mStack setCards: orderedCards];
-	
+		
 	// Make sure window fits the cards:
 	NSSize		cardSize = [mStack cardSize];
 	if( cardSize.width == 0 || cardSize.height == 0 )
