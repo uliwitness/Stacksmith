@@ -24,7 +24,7 @@
 -(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
 {
 	NSString	*	homeStackPath = nil;
-	NSString	*	standaloneStackPath = [[[[NSBundle mainBundle] bundlePath] pathForResource: @"Home" ofType: @"xstk"];
+	NSString	*	standaloneStackPath = [[NSBundle mainBundle] pathForResource: @"Home" ofType: @"xstk"];
 	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
 		homeStackPath = standaloneStackPath;
 	else
