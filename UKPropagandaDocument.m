@@ -37,8 +37,7 @@
 
 -(void)	dealloc
 {
-	[mCardViewController release];
-	mCardViewController = nil;
+	mCardViewController = nil;	// It's an outlet now.
 	
 	[mStack release];
 	mStack = nil;
