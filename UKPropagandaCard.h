@@ -20,6 +20,7 @@
 
 -(NSInteger)				backgroundID;	// ID of *owning* background.
 -(UKPropagandaBackground*)	owningBackground;
+-(void)						setOwningBackground: (UKPropagandaBackground*)theBg;
 
 -(NSInteger)				cardID;			// ID of this card block.
 

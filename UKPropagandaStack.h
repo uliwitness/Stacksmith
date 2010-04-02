@@ -47,10 +47,15 @@
 -(void)			addFont: (NSString*)fontName withID: (NSInteger)fontID;
 -(void)			addStyleFormatWithID: (NSInteger)styleID forFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
 
+-(NSInteger)				uniqueIDForCardOrBackground;
+
 -(NSArray*)					cards;
 -(void)						setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.
 -(UKPropagandaCard*)		cardWithID: (NSInteger)theID;
+
+-(void)						setBackgrounds: (NSArray*)theBkgds;
 -(UKPropagandaBackground*)	backgroundWithID: (NSInteger)theID;
+
 -(NSString*)				fontNameForID: (NSInteger)fontID;
 -(void)			provideStyleFormatWithID: (NSInteger)oneBasedIdx font: (NSString**)outFontName
 						size: (NSInteger*)outFontSize styles: (NSArray**)outFontStyles;

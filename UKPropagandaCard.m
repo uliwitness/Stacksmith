@@ -13,6 +13,17 @@
 
 @implementation UKPropagandaCard
 
+-(id)	initForStack: (UKPropagandaStack*)theStack
+{
+	if(( self = [super initForStack: theStack] ))
+	{
+		
+	}
+	
+	return self;
+}
+
+
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (UKPropagandaStack*)theStack
 {
 	if(( self = [super initWithXMLElement: elem forStack: theStack] ))
@@ -36,6 +47,12 @@
 -(UKPropagandaBackground*)	owningBackground
 {
 	return mOwner;
+}
+
+
+-(void)	setOwningBackground: (UKPropagandaBackground*)theBg
+{
+	mOwner = theBg;
 }
 
 

@@ -11,6 +11,18 @@
 #import "UKPropagandaBackground.h"
 #import "UKPropagandaCard.h"
 #import <QTKit/QTKit.h>
+#import "UKPropagandaStack.h"
+
+
+NSInteger	UKRandomInteger()
+{
+	#if __LP64__
+	return (((NSInteger)rand()) | ((NSInteger)rand()) >> 32);
+	#else
+	return rand();
+	#endif
+}
+
 
 
 @interface UKPropPictureEntry : NSObject
@@ -200,6 +212,47 @@
 
 @implementation UKPropagandaStack
 
+-(id)	init
+{
+	if(( self = [super init] ))
+	{
+		mUserLevel = 5;
+		
+		mCantModify = NO;
+		mCantDelete = NO;
+		mPrivateAccess = NO;
+		mCantAbort = NO;
+		mCantPeek = NO;
+		
+		NSString*	appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleVersion"];
+		mCreatedByVersion = [appVersion retain];
+		mLastCompactedVersion = [appVersion retain];
+		mFirstEditedVersion = [appVersion retain];
+		mLastEditedVersion = [appVersion retain];
+		
+		mCardSize = NSMakeSize( 512, 342 );
+		
+		mPatterns = [[NSMutableArray alloc] initWithCapacity: 40];
+		for( int x = 0; x < 40; x++ )
+			[mPatterns addObject: [NSString stringWithFormat: @"PAT_%d.pbm", x+1]];
+		
+		mScript = [@"" retain];
+		
+		UKPropagandaBackground*		firstBg = [[[UKPropagandaBackground alloc] initForStack: self] autorelease];
+		mBackgrounds = [[NSMutableArray alloc] initWithObjects: firstBg, nil];
+		UKPropagandaCard*			firstCard = [[[UKPropagandaCard alloc] initForStack: self] autorelease];
+		[firstCard setOwningBackground: firstBg];
+		
+		mCards = [[NSMutableArray alloc] initWithObjects: firstCard, nil];
+		mFontIDTable = [[NSMutableDictionary alloc] init];
+		mTextStyles = [[NSMutableDictionary alloc] init];
+		mPictures = [[NSMutableArray alloc] init];
+	}
+	
+	return self;
+}
+
+
 -(id)	initWithXMLElement: (NSXMLElement*)elem path: (NSString*)thePath
 {
 	if(( self = [super init] ))
@@ -340,6 +393,53 @@
 	}
 	
 	return nil;
+}
+
+
+-(NSInteger)	uniqueIDForCardOrBackground
+{
+	NSInteger	cardID = UKRandomInteger();
+	BOOL		notUnique = YES;
+	
+	while( notUnique )
+	{
+		notUnique = NO;
+		
+		for( UKPropagandaCard* currCard in mCards )
+		{
+			if( [currCard cardID] == cardID )
+			{
+				notUnique = YES;
+				cardID = UKRandomInteger();
+				break;
+			}
+		}
+
+		if( !notUnique )
+		{
+			for( UKPropagandaBackground* currBkgd in mBackgrounds )
+			{
+				if( [currBkgd backgroundID] == cardID )
+				{
+					notUnique = YES;
+					cardID = UKRandomInteger();
+					break;
+				}
+			}
+		}
+	}
+	
+	return cardID;
+}
+
+
+-(void)	setBackgrounds: (NSArray*)theBkgds
+{
+	if( mBackgrounds != theBkgds )
+	{
+		[mBackgrounds release];
+		mBackgrounds = [theBkgds mutableCopy];
+	}
 }
 
 

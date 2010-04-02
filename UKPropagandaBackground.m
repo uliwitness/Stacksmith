@@ -11,9 +11,35 @@
 #import "UKPropagandaPartContents.h"
 #import "UKPropagandaXMLUtils.h"
 #import "UKMultiMap.h"
+#import "UKPropagandaStack.h"
 
 
 @implementation UKPropagandaBackground
+
+-(id)	initForStack: (UKPropagandaStack*)theStack
+{
+	if(( self = [super init] ))
+	{
+		mStack = theStack;
+		
+		mID = [mStack uniqueIDForCardOrBackground];
+		mName = [@"" retain];
+
+		mShowPict = YES;
+		mCantDelete = NO;
+		mDontSearch = NO;
+		
+		mScript = [@"" retain];
+		mButtonFamilies = [[UKMultiMap alloc] init];
+
+		mParts = [[NSMutableArray alloc] init];
+		mAddColorParts = [[NSMutableArray alloc] init];
+		mContents = [[NSMutableArray alloc] init];
+	}
+	
+	return self;
+}
+
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (UKPropagandaStack*)theStack
 {

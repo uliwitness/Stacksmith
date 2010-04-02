@@ -32,6 +32,7 @@
 	UKPropagandaStack*			mStack;
 }
 
+-(id)							initForStack: (UKPropagandaStack*)theStack;
 -(id)							initWithXMLElement: (NSXMLElement*)elem
 										forStack: (UKPropagandaStack*)theStack;
 
