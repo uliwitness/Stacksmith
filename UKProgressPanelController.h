@@ -17,16 +17,19 @@
 
 +(UKProgressPanelController*)	sharedProgressController;
 
--(void)	show;
+-(void)		show;
 
--(void)	setIndeterminate: (BOOL)inState;
+-(void)		setIndeterminate: (BOOL)inState;
 
--(void)	setDoubleValue: (double)currValue;
--(void)	setMinValue: (double)minValue;
--(void)	setMaxValue: (double)maxValue;
+-(void)		setDoubleValue: (double)currValue;
+-(double)	doubleValue;
+-(void)		setMinValue: (double)minValue;
+-(double)	minValue;
+-(void)		setMaxValue: (double)maxValue;
+-(double)	maxValue;
 
--(void)	setStringValue: (NSString*)inStatus;
+-(void)		setStringValue: (NSString*)inStatus;
 
--(void)	hide;
+-(void)		hide;
 
 @end

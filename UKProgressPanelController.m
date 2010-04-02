@@ -16,7 +16,12 @@ static UKProgressPanelController*	sSharedProgressController = nil;
 
 +(UKProgressPanelController*)sharedProgressController
 {
-	return sSharedProgressController;
+	@synchronized(self)
+	{
+		return sSharedProgressController;
+	}
+	
+	return nil;
 }
 
 
@@ -24,8 +29,11 @@ static UKProgressPanelController*	sSharedProgressController = nil;
 {
 	if(( self = [super init] ))
 	{
-		if( !sSharedProgressController )
-			sSharedProgressController = [self retain];
+		@synchronized([self class])
+		{
+			if( !sSharedProgressController )
+				sSharedProgressController = [self retain];
+		}
 	}
 	
 	return sSharedProgressController;
@@ -48,7 +56,13 @@ static UKProgressPanelController*	sSharedProgressController = nil;
 -(void)	setDoubleValue: (double)currValue
 {
 	[progress setDoubleValue: currValue];
-	[progress display];
+	//[progress display];
+}
+
+
+-(double)	doubleValue
+{
+	return [progress doubleValue];
 }
 
 
@@ -58,16 +72,28 @@ static UKProgressPanelController*	sSharedProgressController = nil;
 }
 
 
+-(double)	minValue
+{
+	return [progress minValue];
+}
+
+
 -(void)	setMaxValue: (double)maxValue;
 {
 	[progress setMaxValue: maxValue];
 }
 
 
+-(double)	maxValue
+{
+	return [progress maxValue];
+}
+
+
 -(void)	setStringValue: (NSString*)inStatus
 {
 	[statusField setStringValue: inStatus];
-	[progress display];
+	//[progress display];
 }
 
 

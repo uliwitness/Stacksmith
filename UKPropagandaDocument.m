@@ -82,15 +82,24 @@
 
 -(void)	fileHandle: (NSFileHandle*)fh ofImporterDidReadLine: (NSString*)currLine
 {
-	[[UKProgressPanelController sharedProgressController] setStringValue: currLine];
-}
-
-
--(void)	fileHandle: (NSFileHandle*)fh ofImporterDidReadErrorLine: (NSString*)currLine
-{
-	[[UKProgressPanelController sharedProgressController] setStringValue: currLine];
-	[mErrorsAndWarnings addObject: currLine];
+	if( !currLine )
+		[[UKProgressPanelController sharedProgressController] setDoubleValue: [[UKProgressPanelController sharedProgressController] maxValue]];
+	
 	NSLog( @"%@", currLine );
+	if( [currLine hasPrefix: @"Progress: "] )
+	{
+		NSRange		theOfRange = [currLine rangeOfString: @" of "];
+		NSString*	currVal = [currLine substringWithRange: NSMakeRange( 10, theOfRange.location -10 )];
+		NSString*	maxVal = [currLine substringFromIndex: theOfRange.location +theOfRange.length];
+		[[UKProgressPanelController sharedProgressController] setIndeterminate: NO];
+		[[UKProgressPanelController sharedProgressController] setMaxValue: [maxVal integerValue]];
+		[[UKProgressPanelController sharedProgressController] setDoubleValue: [currVal integerValue]];
+	}
+	else
+	{
+		[[UKProgressPanelController sharedProgressController] setStringValue: currLine];
+		[mErrorsAndWarnings addObject: currLine];
+	}
 }
 
 
@@ -112,7 +121,11 @@
 		NSTask*	converterTask = [[[NSTask alloc] init] autorelease];
 		[converterTask setLaunchPath: [[NSBundle mainBundle] pathForResource: @"stackimport" ofType: @""]];
 		[converterTask setArguments: [NSArray arrayWithObject: [absoluteURL path]]];
-		[[converterTask standardError] readLinesToEndOfFileNotifyingTarget: self newLineSelector: @selector(fileHandle:ofImporterDidReadErrorLine:)];
+		NSPipe*			thePipe = [NSPipe pipe];
+		[converterTask setStandardOutput: [thePipe fileHandleForWriting]];
+		[converterTask setStandardError: [thePipe fileHandleForWriting]];
+		NSFileHandle*	theFileHandle = [thePipe fileHandleForReading];
+		[theFileHandle readLinesToEndOfFileNotifyingTarget: self newLineSelector: @selector(fileHandle:ofImporterDidReadLine:)];
 		[converterTask launch];
 		[converterTask waitUntilExit];
 		

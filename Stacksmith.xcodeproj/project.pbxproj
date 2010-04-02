@@ -292,6 +292,7 @@
 		55E3A6FB11519B45008411BB /* HCSV.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6F911519B45008411BB /* HCSV.icns */; };
 		55E3A6FC11519B45008411BB /* Stack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6FA11519B45008411BB /* Stack.icns */; };
 		55E509E71156B06D001D0762 /* UKMultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E509E61156B06D001D0762 /* UKMultiMap.m */; };
+		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
 		55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC406114C273400BAA09D /* SyntaxDefinition.plist */; };
 		55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */; };
 		55EBC42B114C2CCE00BAA09D /* UKPropagandaScriptContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EBC42A114C2CCE00BAA09D /* UKPropagandaScriptContainer.m */; };
@@ -654,6 +655,8 @@
 		55E3A6FA11519B45008411BB /* Stack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stack.icns; sourceTree = "<group>"; };
 		55E509E51156B06D001D0762 /* UKMultiMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMultiMap.h; sourceTree = "<group>"; };
 		55E509E61156B06D001D0762 /* UKMultiMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMultiMap.m; sourceTree = "<group>"; };
+		55E8535C1166341100745C86 /* NSString+FetchNextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FetchNextLine.h"; path = "../UliKit/NSString+FetchNextLine.h"; sourceTree = SOURCE_ROOT; };
+		55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FetchNextLine.m"; path = "../UliKit/NSString+FetchNextLine.m"; sourceTree = SOURCE_ROOT; };
 		55EBC406114C273400BAA09D /* SyntaxDefinition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinition.plist; sourceTree = "<group>"; };
 		55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxColorDefaults.plist; path = ../UKSyntaxColoredTextDocument/SyntaxColorDefaults.plist; sourceTree = SOURCE_ROOT; };
 		55EBC429114C2CCE00BAA09D /* UKPropagandaScriptContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaScriptContainer.h; sourceTree = "<group>"; };
@@ -880,6 +883,8 @@
 				55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */,
 				550B30761152D9DE0049C593 /* AGIconFamily.h */,
 				550B30771152D9DE0049C593 /* AGIconFamily.m */,
+				55E8535C1166341100745C86 /* NSString+FetchNextLine.h */,
+				55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1478,6 +1483,7 @@
 			);
 			name = git_version;
 			outputPaths = (
+				svn_version.h,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1525,6 +1531,7 @@
 				55C2B5CA115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m in Sources */,
 				55C2B647115E5780008B094D /* UKPropagandaSearchContext.m in Sources */,
 				55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */,
+				55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
