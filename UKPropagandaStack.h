@@ -36,7 +36,7 @@
 	NSInteger				mUserLevel;			// Maximum user level for this stack.
 	NSString*				mPath;				// Path of our package.
 	NSMutableDictionary*	mFontIDTable;		// Font ID --> name mappings
-	NSMutableArray*			mTextStyles;		// STBL-extracted text/style info.
+	NSMutableDictionary*	mTextStyles;		// STBL-extracted text/style info.
 	NSMutableArray*			mPictures;			// Media.
 }
 
@@ -45,7 +45,7 @@
 -(void)			addCard: (UKPropagandaCard*)theCard;
 -(void)			addBackground: (UKPropagandaBackground*)theBg;
 -(void)			addFont: (NSString*)fontName withID: (NSInteger)fontID;
--(void)			addStyleFormatForFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray*)fontStyles;
+-(void)			addStyleFormatWithID: (NSInteger)styleID forFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
 
 -(NSArray*)					cards;
 -(void)						setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.

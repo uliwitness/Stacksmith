@@ -83,9 +83,11 @@
 -(void)	fileHandle: (NSFileHandle*)fh ofImporterDidReadLine: (NSString*)currLine
 {
 	if( !currLine )
+	{
 		[[UKProgressPanelController sharedProgressController] setDoubleValue: [[UKProgressPanelController sharedProgressController] maxValue]];
+		return;
+	}
 	
-	NSLog( @"%@", currLine );
 	if( [currLine hasPrefix: @"Progress: "] )
 	{
 		NSRange		theOfRange = [currLine rangeOfString: @" of "];
@@ -95,10 +97,14 @@
 		[[UKProgressPanelController sharedProgressController] setMaxValue: [maxVal integerValue]];
 		[[UKProgressPanelController sharedProgressController] setDoubleValue: [currVal integerValue]];
 	}
+	else if( [currLine hasPrefix: @"Status: "] )
+	{
+		[[UKProgressPanelController sharedProgressController] setStringValue: [currLine substringFromIndex: 8]];
+	}
 	else
 	{
-		[[UKProgressPanelController sharedProgressController] setStringValue: currLine];
 		[mErrorsAndWarnings addObject: currLine];
+		NSLog( @"%@", currLine );
 	}
 }
 
@@ -168,16 +174,21 @@
 	
 	// Load style table so others can access it:
 	NSArray			*	pictures = [stackfileElement elementsForName: @"styleentry"];
+	int					x = 0;
 	for( NSXMLElement* thePic in pictures )
 	{
 		NSArray		*	fontElems = [thePic elementsForName: @"font"];
 		NSString	*	fontID = ([fontElems count] > 0) ? [[fontElems objectAtIndex: 0] stringValue] : nil;
+		NSArray		*	idElems = [thePic elementsForName: @"id"];
+		NSString	*	styleID = ([idElems count] > 0) ? [[idElems objectAtIndex: 0] stringValue] : nil;
 		NSArray		*	textStyles = UKPropagandaStringsFromSubElementInElement( @"textStyle",thePic);
 		NSArray		*	sizeElems = [thePic elementsForName: @"size"];
 		NSString	*	fontSize = ([sizeElems count] > 0) ? [[sizeElems objectAtIndex: 0] stringValue] : nil;
-		[mStack addStyleFormatForFontID: fontID ? [fontID intValue] : -1
-								   size: fontSize ? [fontSize intValue] : -1
+		[mStack addStyleFormatWithID: styleID ? [styleID intValue] : x
+								forFontID: fontID ? [fontID intValue] : -1
+								     size: fontSize ? [fontSize intValue] : -1
 								   styles: textStyles];
+		x++;
 	}
 	
 	// Load standard picture table so others can access it: (ICONs, PICTs, CURSs and SNDs)

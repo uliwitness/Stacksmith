@@ -228,7 +228,7 @@
 		mCards = [[NSMutableArray alloc] init];
 		mBackgrounds = [[NSMutableArray alloc] init];
 		mFontIDTable = [[NSMutableDictionary alloc] init];
-		mTextStyles = [[NSMutableArray alloc] init];
+		mTextStyles = [[NSMutableDictionary alloc] init];
 		mPictures = [[NSMutableArray alloc] init];
 	}
 	
@@ -291,29 +291,27 @@
 }
 
 
--(void)		addStyleFormatForFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray*)fontStyles
+-(void)		addStyleFormatWithID: (NSInteger)styleID forFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray*)fontStyles
 {
 	UKPropStyleEntry*	pse = [[[UKPropStyleEntry alloc] initWithFontID: fontID fontSize: fontSize
 			styles: fontStyles] autorelease];
 	NSString*	fontName = [self fontNameForID: fontID];	// Look up font by ID.
 	[pse setFontName: fontName];	// Remember it for the future.
 	
-	[mTextStyles addObject: pse];
+	[mTextStyles setObject: pse forKey: [NSNumber numberWithInteger: styleID]];
 }
 
 
 -(void)	provideStyleFormatWithID: (NSInteger)oneBasedIdx font: (NSString**)outFontName
 			size: (NSInteger*)outFontSize styles: (NSArray**)outFontStyles
 {
-	if( oneBasedIdx > [mTextStyles count] )
+	UKPropStyleEntry*	pse = [mTextStyles objectForKey: [NSNumber numberWithInteger: oneBasedIdx]];
+	if( pse )
 	{
-		NSLog( @"Can't get style format %d, only have %d", oneBasedIdx, [mTextStyles count] );
-		return;
+		*outFontName = [pse fontName];
+		*outFontSize = [pse fontSize];
+		*outFontStyles = [pse styles];
 	}
-	UKPropStyleEntry*	pse = [mTextStyles objectAtIndex: oneBasedIdx -1];
-	*outFontName = [pse fontName];
-	*outFontSize = [pse fontSize];
-	*outFontStyles = [pse styles];
 }
 
 
