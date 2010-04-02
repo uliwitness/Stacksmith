@@ -34,3 +34,8 @@ NSString*	UKPropagandaPartWillChangeNotification = @"UKPropagandaPartWillChange"
 NSString*	UKPropagandaPartDidChangeNotification = @"UKPropagandaPartDidChange";
 
 NSString*	UKPropagandaAffectedPropertyKey = @"UKPropagandaAffectedProperty";
+
+
+// Notifications when the user changes the tool:
+NSString*	UKPropagandaCurrentToolWillChangeNotification = @"UKPropagandaCurrentToolWillChange";
+NSString*	UKPropagandaCurrentToolDidChangeNotification = @"UKPropagandaCurrentToolDidChange";

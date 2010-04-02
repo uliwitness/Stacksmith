@@ -35,6 +35,9 @@
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(backgroundEditModeChanged:)
 												name: UKPropagandaBackgroundEditModeChangedNotification
 												object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
+												name: UKPropagandaCurrentToolDidChangeNotification
+												object: nil];
 	}
 	
 	return self;
@@ -48,6 +51,9 @@
 											object: nil];
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: UKPropagandaBackgroundEditModeChangedNotification
+											object: nil];
+	[[NSNotificationCenter defaultCenter] removeObserver: self
+											name: UKPropagandaCurrentToolDidChangeNotification
 											object: nil];
 	
 	[mPartViews release];
@@ -388,7 +394,30 @@
 
 -(BOOL)	validateMenuItem: (NSMenuItem *)menuItem
 {
-	return( [self respondsToSelector: [menuItem action]] );
+	if( [menuItem action] == @selector(chooseToolWithTag:) )
+	{
+		[menuItem setState: ([menuItem tag] == [[UKPropagandaTools propagandaTools] currentTool]) ? NSOnState : NSOffState];
+		return YES;
+	}
+	else if( [menuItem action] == @selector(showButtonInfoPanel:) )
+	{
+		return( [[UKPropagandaTools propagandaTools] numberOfSelectedClients] > 0
+			&& [[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaButtonTool );
+	}
+	else if( [menuItem action] == @selector(showFieldInfoPanel:) )
+	{
+		return( [[UKPropagandaTools propagandaTools] numberOfSelectedClients] > 0
+			&& [[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaFieldTool );
+	}
+	else if( [menuItem action] == @selector(bringObjectCloser:)
+				|| [menuItem action] == @selector(sendObjectFarther:) )
+	{
+		return( [[UKPropagandaTools propagandaTools] numberOfSelectedClients] > 0
+			&& ([[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaButtonTool
+				|| [[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaFieldTool) );
+	}
+	else
+		return( [self respondsToSelector: [menuItem action]] );
 }
 
 
@@ -699,7 +728,6 @@
 
 -(void)	loadCard: (UKPropagandaCard*)theCard
 {
-	
 	UKPropagandaCard*		prevCard = mCurrentCard;
 	NSMutableDictionary*	uiDict = nil;
 	if( theCard != prevCard )
@@ -820,6 +848,11 @@
 }
 
 
+-(IBAction)	goHome: (id)sender
+{
+	[[NSApp delegate] applicationOpenUntitledFile: NSApp];
+}
+
 -(IBAction)	goFirstCard: (id)sender
 {
 	UKPropagandaStack*	theStack = [mCurrentCard stack];
@@ -880,6 +913,68 @@
 {
 	mBackgroundEditMode = [[[notification userInfo] objectForKey: UKPropagandaBackgroundEditModeKey] boolValue];
 	[self loadCard: mCurrentCard];
+}
+
+
+-(void)	currentToolDidChange: (NSNotification*)notification
+{
+	[[self view] setNeedsDisplay: YES];
+}
+
+
+-(IBAction)	showButtonInfoPanel: (id)sender
+{
+	
+}
+
+-(IBAction)	showFieldInfoPanel: (id)sender
+{
+	
+}
+
+-(IBAction)	showCardInfoPanel: (id)sender
+{
+	
+}
+
+-(IBAction)	showBackgroundInfoPanel: (id)sender
+{
+	
+}
+
+-(IBAction)	showStackInfoPanel: (id)sender
+{
+	
+}
+
+-(IBAction)	bringObjectCloser: (id)sender
+{
+	
+}
+
+-(IBAction)	sendObjectFarther: (id)sender
+{
+	
+}
+
+-(IBAction)	createNewButton: (id)sender
+{
+	
+}
+
+-(IBAction)	createNewField: (id)sender
+{
+	
+}
+
+-(IBAction)	createNewBackground: (id)sender
+{
+	
+}
+
+-(IBAction)	chooseToolWithTag: (id)sender
+{
+	[[UKPropagandaTools propagandaTools] setCurrentTool: [sender tag]];
 }
 
 @end

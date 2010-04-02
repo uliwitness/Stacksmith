@@ -11,6 +11,7 @@
 #import "UKPropagandaCard.h"
 #import "UKPropagandaNotifications.h"
 #import "UKPropagandaScriptEditorWindowController.h"
+#import "UKPropagandaSelectionView.h"
 
 
 @implementation UKPropagandaWindowBodyView
@@ -81,6 +82,11 @@
 		UKPropagandaScriptEditorWindowController*	sewc = [[[UKPropagandaScriptEditorWindowController alloc] initWithScriptContainer: mBackgroundEditMode ? [mCard owningBackground] : mCard] autorelease];
 		[[[[self window] windowController] document] addWindowController: sewc];
 		[sewc showWindow: nil];
+	}
+	else if( [[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaButtonTool
+				|| [[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaFieldTool )
+	{
+		[[UKPropagandaTools propagandaTools] deselectAllClients];
 	}
 	else
 		[super mouseDown: event];

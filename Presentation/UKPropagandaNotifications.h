@@ -44,3 +44,10 @@ NSString*	UKPropagandaPartDidChangeNotification;	// Part has new state.
 
 // Info dictionary keys:
 NSString*	UKPropagandaAffectedPropertyKey;
+
+
+// -----------------------------------------------------------------------------
+// Notifications when the user changes the tool:
+NSString*	UKPropagandaCurrentToolWillChangeNotification;
+NSString*	UKPropagandaCurrentToolDidChangeNotification;
+

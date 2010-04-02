@@ -48,8 +48,24 @@
 // The different tools the selection view can support:
 enum
 {
-	UKPropagandaBrowseTool = 0,			// Regular tool for browsing, clicking, using.
-	UKPropagandaPointerTool				// Pointer tool for editing all objects.
+	UKPropagandaBrowseTool = 1,
+	UKPropagandaButtonTool,
+	UKPropagandaFieldTool,
+	UKPropagandaSelectTool,
+	UKPropagandaLassoTool,
+	UKPropagandaPencilTool,
+	UKPropagandaBrushTool,
+	UKPropagandaEraserTool,
+	UKPropagandaLineTool,
+	UKPropagandaSprayTool,
+	UKPropagandaRectangleTool,
+	UKPropagandaRoundRectTool,
+	UKPropagandaBucketTool,
+	UKPropagandaOvalTool,
+	UKPropagandaCurveTool,
+	UKPropagandaTextTool,
+	UKPropagandaRegularPolygonTool,
+	UKPropagandaPolygonTool
 };
 typedef NSInteger	UKPropagandaTool;
 
@@ -79,5 +95,8 @@ typedef NSInteger	UKPropagandaTool;
 -(NSColor*)				peekPattern;
 
 -(UKPropagandaTool)		currentTool;
+-(void)					setCurrentTool: (UKPropagandaTool)theTool;
+
+-(NSInteger)			numberOfSelectedClients;
 
 @end

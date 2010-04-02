@@ -27,6 +27,7 @@
 
 -(void)	loadCard: (UKPropagandaCard*)theCard;
 
+-(IBAction)	goHome: (id)sender;
 -(IBAction)	goFirstCard: (id)sender;
 -(IBAction)	goPrevCard: (id)sender;
 -(IBAction)	goNextCard: (id)sender;
@@ -39,8 +40,23 @@
 -(IBAction)	findPrevious: (id)sender;
 -(IBAction)	performFindPanelAction: (id)sender;
 
--(void)	findNextForward: (BOOL)forwardNotBackward;
--(BOOL)	searchForPattern: (NSString *)inPattern flags: (UKPropagandaSearchFlags)inFlags;
--(BOOL)	searchAgainForPattern: (NSString *)inPattern flags: (UKPropagandaSearchFlags)inFlags;
+-(void)		findNextForward: (BOOL)forwardNotBackward;
+-(BOOL)		searchForPattern: (NSString *)inPattern flags: (UKPropagandaSearchFlags)inFlags;
+-(BOOL)		searchAgainForPattern: (NSString *)inPattern flags: (UKPropagandaSearchFlags)inFlags;
+
+-(IBAction)	showButtonInfoPanel: (id)sender;
+-(IBAction)	showFieldInfoPanel: (id)sender;
+-(IBAction)	showCardInfoPanel: (id)sender;
+-(IBAction)	showBackgroundInfoPanel: (id)sender;
+-(IBAction)	showStackInfoPanel: (id)sender;
+
+-(IBAction)	bringObjectCloser: (id)sender;
+-(IBAction)	sendObjectFarther: (id)sender;
+
+-(IBAction)	createNewButton: (id)sender;
+-(IBAction)	createNewField: (id)sender;
+-(IBAction)	createNewBackground: (id)sender;
+
+-(IBAction)	chooseToolWithTag: (id)sender;
 
 @end

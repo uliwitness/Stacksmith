@@ -31,6 +31,7 @@ static UKPropagandaTools*		sAnimator = nil;
 	if(( self = [super init] ))
 	{
 		nonRetainingClients = (NSMutableArray*) CFArrayCreateMutable( kCFAllocatorDefault, 0, NULL );
+		tool = UKPropagandaBrowseTool;
 	}
 	return self;
 }
@@ -85,6 +86,11 @@ static UKPropagandaTools*		sAnimator = nil;
 	}
 }
 
+-(NSInteger)	numberOfSelectedClients
+{
+	return [nonRetainingClients count];
+}
+
 -(NSColor*)	peekPattern
 {
 	if( !peekPattern )
@@ -97,6 +103,14 @@ static UKPropagandaTools*		sAnimator = nil;
 -(UKPropagandaTool)	currentTool
 {
 	return tool;
+}
+
+
+-(void)	setCurrentTool: (UKPropagandaTool)theTool
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaCurrentToolWillChangeNotification object: nil];
+	tool = theTool;
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaCurrentToolDidChangeNotification object: nil];
 }
 
 @end
@@ -141,6 +155,9 @@ static UKPropagandaTools*		sAnimator = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: UKPropagandaPartDidChangeNotification
 											object: mPart];
+	[[NSNotificationCenter defaultCenter] removeObserver: self
+											name: UKPropagandaCurrentToolDidChangeNotification
+											object: nil];
 }
 
 
@@ -158,6 +175,9 @@ static UKPropagandaTools*		sAnimator = nil;
 	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(partDidChange:)
 											name: UKPropagandaPartDidChangeNotification
 											object: mPart];
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
+											name: UKPropagandaCurrentToolDidChangeNotification
+											object: nil];
 }
 
 
@@ -185,6 +205,9 @@ static UKPropagandaTools*		sAnimator = nil;
 
 -(void)	drawRect: (NSRect)dirtyRect
 {
+	BOOL	isMyTool = ([[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaButtonTool && [[mPart partType] isEqualToString: @"button"])
+						|| ([[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaFieldTool && [[mPart partType] isEqualToString: @"field"]);
+   
     if( mPeeking )
 	{
 		NSRect	peekBox = NSInsetRect( [self bounds], 1, 1 );
@@ -195,7 +218,8 @@ static UKPropagandaTools*		sAnimator = nil;
 		[NSBezierPath strokeRect: peekBox];
 		[NSBezierPath setDefaultLineWidth: 1];
 	}
-	else if( mSelected )
+	
+	if( mSelected )
 	{
 		[[NSColor keyboardFocusIndicatorColor] set];
 		NSRect	clampedBounds = [self bounds];
@@ -211,16 +235,27 @@ static UKPropagandaTools*		sAnimator = nil;
 		[[NSColor keyboardFocusIndicatorColor] set];
 		[selPath stroke];
 	}
+	else if( isMyTool )
+	{
+		[[NSColor grayColor] set];
+		NSRect	peekBox = NSInsetRect( [self bounds], 1.5, 1.5 );
+		[NSBezierPath strokeRect: peekBox];
+		[[NSColor blackColor] set];
+	}
 }
 
 
 -(NSView *)	hitTest: (NSPoint)aPoint	// Equivalent to Carbon kEventControlInterceptSubviewClick.
 {
+	BOOL	isMyTool = ([[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaButtonTool && [[mPart partType] isEqualToString: @"button"])
+						|| ([[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaFieldTool && [[mPart partType] isEqualToString: @"field"]);
 	NSView*	hitView = [super hitTest: aPoint];
 	if( hitView != nil )	// Was in our view or a sub view, not outside us?
 	{
-		if( mPeeking || [[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaPointerTool )
+		if( mPeeking || isMyTool )
 			hitView = self;		// Redirect to us.
+		else if( [[UKPropagandaTools propagandaTools] currentTool] != UKPropagandaBrowseTool )	// Another tool than the ones we support?
+			hitView = nil;	// Pretend we weren't hit at all.
 	}
 	
 	return hitView;
@@ -229,13 +264,15 @@ static UKPropagandaTools*		sAnimator = nil;
 
 -(void)	mouseDown: (NSEvent*)event
 {
+	BOOL	isMyTool = ([[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaButtonTool && [[mPart partType] isEqualToString: @"button"])
+						|| ([[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaFieldTool && [[mPart partType] isEqualToString: @"field"]);
 	if( mPeeking )
 	{
 		UKPropagandaScriptEditorWindowController*	sewc = [[[UKPropagandaScriptEditorWindowController alloc] initWithScriptContainer: mPart] autorelease];
 		[[[[self window] windowController] document] addWindowController: sewc];
 		[sewc showWindow: nil];
 	}
-	else if( [[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaPointerTool )
+	else if( isMyTool )
 	{
 		if( [event modifierFlags] & NSShiftKeyMask
 			|| [event modifierFlags] & NSCommandKeyMask )
@@ -285,6 +322,13 @@ static UKPropagandaTools*		sAnimator = nil;
 		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
 		[(NSButton*)mControl setState: [mPart highlighted] ? NSOnState : NSOffState];
 	}
+}
+
+
+-(void)	currentToolDidChange: (NSNotification*)notification
+{
+	[self setSelected: NO];
+	[self setNeedsDisplay: YES];
 }
 
 @end

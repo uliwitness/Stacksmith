@@ -1484,10 +1484,12 @@
 			name = git_version;
 			outputPaths = (
 				svn_version.h,
+				"Stacksmith-Info.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = ../UliKit/make_git_version_header.sh;
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
