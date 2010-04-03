@@ -9,6 +9,7 @@
 #import "UKPropagandaTextView.h"
 #import "UKPropagandaPart.h"
 #import "UKPropagandaStack.h"
+#import "UKPropagandaSelectionView.h"
 
 
 @implementation UKPropagandaTextView
@@ -19,7 +20,9 @@
 //	re-sets the cursor on mouse-moves:
 -(void)	mouseMoved: (NSEvent*)event
 {
-	if( [self isEditable] )
+	if( [[UKPropagandaTools propagandaTools] currentTool] != UKPropagandaBrowseTool )
+		[[NSCursor arrowCursor] set];
+	else if( [self isEditable] )
 		[super mouseMoved: event];
 	else
 		[[[mPart stack] cursorWithID: 128] set];
