@@ -284,6 +284,8 @@
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
 		55B9220A11674E880073EC6C /* UKPropagandaTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9220911674E880073EC6C /* UKPropagandaTools.m */; };
+		55B9223D1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B9223C1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib */; };
+		55B9224311675A260073EC6C /* UKPropagandaButtonInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9224211675A260073EC6C /* UKPropagandaButtonInfoWindowController.m */; };
 		55C2B5CA115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B5C9115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m */; };
 		55C2B647115E5780008B094D /* UKPropagandaSearchContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* UKPropagandaSearchContext.m */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
@@ -643,6 +645,9 @@
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		55B9220811674E880073EC6C /* UKPropagandaTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPropagandaTools.h; path = Presentation/UKPropagandaTools.h; sourceTree = "<group>"; };
 		55B9220911674E880073EC6C /* UKPropagandaTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPropagandaTools.m; path = Presentation/UKPropagandaTools.m; sourceTree = "<group>"; };
+		55B92239116753180073EC6C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/UKPropagandaButtonInfoWindowController.xib; sourceTree = "<group>"; };
+		55B9224111675A260073EC6C /* UKPropagandaButtonInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaButtonInfoWindowController.h; sourceTree = "<group>"; };
+		55B9224211675A260073EC6C /* UKPropagandaButtonInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaButtonInfoWindowController.m; sourceTree = "<group>"; };
 		55C2B5C8115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaClickablePopUpButtonLabel.h; sourceTree = "<group>"; };
 		55C2B5C9115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaClickablePopUpButtonLabel.m; sourceTree = "<group>"; };
 		55C2B645115E5780008B094D /* UKPropagandaSearchContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPropagandaSearchContext.h; path = Model/UKPropagandaSearchContext.h; sourceTree = "<group>"; };
@@ -744,7 +749,7 @@
 				558DCD20115571FE002C9195 /* UKPropagandaNotifications.m */,
 				5542CE3B113ADFBC00555C64 /* Document */,
 				5542CE3A113ADFAC00555C64 /* Presentation */,
-				55255AB7114C196B00279B03 /* Script Editor */,
+				55255AB7114C196B00279B03 /* Editor */,
 				5542CE3C113ADFCE00555C64 /* Utilities */,
 				55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */,
 			);
@@ -770,6 +775,7 @@
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				1DDD58280DA1D0D100B32029 /* UKPropagandaDocument.xib */,
 				55255ABF114C19CF00279B03 /* UKPropagandaScriptEditorWindowController.xib */,
+				55B9223C1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
@@ -814,13 +820,15 @@
 			name = UKSyntaxColoredTextViewController;
 			sourceTree = "<group>";
 		};
-		55255AB7114C196B00279B03 /* Script Editor */ = {
+		55255AB7114C196B00279B03 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
 				55255ABA114C19AB00279B03 /* UKPropagandaScriptEditorWindowController.h */,
 				55255ABB114C19AB00279B03 /* UKPropagandaScriptEditorWindowController.m */,
+				55B9224111675A260073EC6C /* UKPropagandaButtonInfoWindowController.h */,
+				55B9224211675A260073EC6C /* UKPropagandaButtonInfoWindowController.m */,
 			);
-			name = "Script Editor";
+			name = Editor;
 			sourceTree = "<group>";
 		};
 		5542CE3A113ADFAC00555C64 /* Presentation */ = {
@@ -1473,6 +1481,7 @@
 				55E3A69E11503456008411BB /* CURS_128.pbm in Resources */,
 				55E3A6FB11519B45008411BB /* HCSV.icns in Resources */,
 				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
+				55B9223D1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1540,6 +1549,7 @@
 				55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */,
 				55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */,
 				55B9220A11674E880073EC6C /* UKPropagandaTools.m in Sources */,
+				55B9224311675A260073EC6C /* UKPropagandaButtonInfoWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1592,6 +1602,14 @@
 				55255AC0114C19CF00279B03 /* English */,
 			);
 			name = UKPropagandaScriptEditorWindowController.xib;
+			sourceTree = "<group>";
+		};
+		55B9223C1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55B92239116753180073EC6C /* English */,
+			);
+			name = UKPropagandaButtonInfoWindowController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

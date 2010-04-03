@@ -3,7 +3,7 @@
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 03.04.10.
-//  Copyright 2010 Apple Inc. All rights reserved.
+//  Copyright 2010 The Void Software. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
