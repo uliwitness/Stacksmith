@@ -10,6 +10,7 @@
 #import "UKPropagandaNotifications.h"
 #import "UKPropagandaScriptEditorWindowController.h"
 #import "UKPropagandaPart.h"
+#import "UKPropagandaButtonInfoWindowController.h"
 
 
 @implementation UKPropagandaSelectionView
@@ -171,15 +172,23 @@
 	}
 	else if( isMyTool )
 	{
-		if( [event modifierFlags] & NSShiftKeyMask
-			|| [event modifierFlags] & NSCommandKeyMask )
-			[self setSelected: !mSelected];
+		if( [event clickCount] == 2 && mSelected )
+		{
+			UKPropagandaButtonInfoWindowController*	buttonInfo = [[UKPropagandaButtonInfoWindowController alloc] initWithPart: mPart];
+			[buttonInfo showWindow: self];
+		}
 		else
 		{
-			[[UKPropagandaTools propagandaTools] deselectAllClients];
-			[self setSelected: YES];
+			if( [event modifierFlags] & NSShiftKeyMask
+				|| [event modifierFlags] & NSCommandKeyMask )
+				[self setSelected: !mSelected];
+			else
+			{
+				[[UKPropagandaTools propagandaTools] deselectAllClients];
+				[self setSelected: YES];
+			}
+			[self setNeedsDisplay: YES];
 		}
-		[self setNeedsDisplay: YES];
 	}
 	else
 		[super mouseDown: event];

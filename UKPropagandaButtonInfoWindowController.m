@@ -41,6 +41,8 @@
 	
 	//[mStylePopUp selectItemAtIndex: [mPart style]];
 	[mFamilyPopUp selectItemAtIndex: [mPart family]];
+	
+	//[mContentsTextField setString: ];
 }
 
 -(IBAction)	doOKButton: (id)sender
