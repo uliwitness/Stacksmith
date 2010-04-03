@@ -29,6 +29,17 @@ static UKPropagandaTools*		sAnimator = nil;
 }
 
 
++(NSCursor*)	cursorForTool: (UKPropagandaTool)theTool
+{
+	if( theTool == UKPropagandaBrowseTool )
+		return nil;	// Default cursor -- need to ask stack.
+	else if( [self toolIsPaintTool: theTool] )
+		return [NSCursor crosshairCursor];
+	else
+		return [NSCursor arrowCursor];
+}
+
+
 -(id)	init
 {
 	if(( self = [super init] ))

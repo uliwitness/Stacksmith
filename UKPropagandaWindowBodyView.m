@@ -74,10 +74,13 @@
 
 -(void)	resetCursorRects
 {
-	if( mPeeking || [[UKPropagandaTools propagandaTools] currentTool] != UKPropagandaBrowseTool )
-		[self addCursorRect: [self visibleRect] cursor: [NSCursor arrowCursor]];
-	else
-		[self addCursorRect: [self visibleRect] cursor: [[mCard stack] cursorWithID: 128]];
+	UKPropagandaTool	currTool = [[UKPropagandaTools propagandaTools] currentTool];
+	NSCursor*			currCursor = [UKPropagandaTools cursorForTool: currTool];
+	if( mPeeking )
+		currCursor = [NSCursor arrowCursor];
+	if( !currCursor )
+		currCursor = [[mCard stack] cursorWithID: 128];
+	[self addCursorRect: [self visibleRect] cursor: currCursor];
 }
 
 

@@ -58,6 +58,7 @@ typedef NSInteger	UKPropagandaTool;
 +(UKPropagandaTools*)	propagandaTools;
 
 +(BOOL)					toolIsPaintTool: (UKPropagandaTool)theTool;
++(NSCursor*)			cursorForTool: (UKPropagandaTool)theTool;
 
 -(void)					animate: (id)sender;
 -(NSInteger)			animationPhase;

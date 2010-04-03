@@ -20,12 +20,15 @@
 //	re-sets the cursor on mouse-moves:
 -(void)	mouseMoved: (NSEvent*)event
 {
-	if( [[UKPropagandaTools propagandaTools] currentTool] != UKPropagandaBrowseTool )
-		[[NSCursor arrowCursor] set];
-	else if( [self isEditable] )
+	UKPropagandaTool	currTool = [[UKPropagandaTools propagandaTools] currentTool];
+	NSCursor*			currCursor = [UKPropagandaTools cursorForTool: currTool];
+	if( !currCursor )
+		currCursor = [[mPart stack] cursorWithID: 128];
+	
+	if( [self isEditable] && currTool == UKPropagandaBrowseTool )
 		[super mouseMoved: event];
 	else
-		[[[mPart stack] cursorWithID: 128] set];
+		[currCursor set];
 }
 
 @end

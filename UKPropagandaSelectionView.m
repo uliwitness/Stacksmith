@@ -150,7 +150,7 @@
 		if( mPeeking || isMyTool )
 			hitView = self;		// Redirect to us.
 		else if( [[UKPropagandaTools propagandaTools] currentTool] != UKPropagandaBrowseTool )	// Another tool than the ones we support?
-			hitView = nil;	// Pretend we weren't hit at all.
+			hitView = nil;	// Pretend we (or our subviews) weren't hit at all.
 		else if( [[UKPropagandaTools propagandaTools] currentTool] == UKPropagandaBrowseTool && hitView == self )	// Browse tool but not in our subviews?
 			hitView = nil;	// Pretend we weren't hit at all. Maybe a view under us does better.
 	}
