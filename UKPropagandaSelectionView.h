@@ -85,6 +85,8 @@ typedef NSInteger	UKPropagandaTool;
 
 +(UKPropagandaTools*)	propagandaTools;
 
++(BOOL)					toolIsPaintTool: (UKPropagandaTool)theTool;
+
 -(void)					animate: (id)sender;
 -(NSInteger)			animationPhase;
 
@@ -96,6 +98,7 @@ typedef NSInteger	UKPropagandaTool;
 
 -(UKPropagandaTool)		currentTool;
 -(void)					setCurrentTool: (UKPropagandaTool)theTool;
+
 
 -(NSInteger)			numberOfSelectedClients;
 

@@ -26,6 +26,12 @@ static UKPropagandaTools*		sAnimator = nil;
 }
 
 
++(BOOL)		toolIsPaintTool: (UKPropagandaTool)theTool
+{
+	return ( theTool >= UKPropagandaSelectTool );
+}
+
+
 -(id)	init
 {
 	if(( self = [super init] ))

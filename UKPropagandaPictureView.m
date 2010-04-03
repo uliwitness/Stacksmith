@@ -7,6 +7,7 @@
 //
 
 #import "UKPropagandaPictureView.h"
+#import "UKPropagandaSelectionView.h"
 
 
 @implementation UKPropagandaPictureView
@@ -55,6 +56,12 @@
 
 -(id)	hitTest: (NSPoint)aPoint
 {
+	if( [UKPropagandaTools toolIsPaintTool: [[UKPropagandaTools propagandaTools] currentTool]] )
+	{
+		if( NSPointInRect( aPoint, [self visibleRect] ) )
+			return self;
+	}
+	
 	return nil;
 }
 
