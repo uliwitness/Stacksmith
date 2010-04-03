@@ -23,6 +23,9 @@
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(peekingStateChanged:)
 												name: UKPropagandaPeekingStateChangedNotification
 												object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
+												name: UKPropagandaCurrentToolDidChangeNotification
+												object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(backgroundEditModeChanged:)
 												name: UKPropagandaBackgroundEditModeChangedNotification
 												object: nil];
@@ -38,6 +41,9 @@
 	{
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(peekingStateChanged:)
 												name: UKPropagandaPeekingStateChangedNotification
+												object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
+												name: UKPropagandaCurrentToolDidChangeNotification
 												object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(backgroundEditModeChanged:)
 												name: UKPropagandaBackgroundEditModeChangedNotification
@@ -68,7 +74,7 @@
 
 -(void)	resetCursorRects
 {
-	if( mPeeking )
+	if( mPeeking || [[UKPropagandaTools propagandaTools] currentTool] != UKPropagandaBrowseTool )
 		[self addCursorRect: [self visibleRect] cursor: [NSCursor arrowCursor]];
 	else
 		[self addCursorRect: [self visibleRect] cursor: [[mCard stack] cursorWithID: 128]];
@@ -102,6 +108,12 @@
 -(void)	backgroundEditModeChanged: (NSNotification*)notification
 {
 	mBackgroundEditMode = [[[notification userInfo] objectForKey: UKPropagandaBackgroundEditModeKey] boolValue];
+}
+
+
+-(void)	currentToolDidChange: (NSNotification*)notification
+{
+	[[self window] invalidateCursorRectsForView: self];
 }
 
 
