@@ -7,17 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UKPropagandaTools.h"
+
 
 @class UKPropagandaPart;
-
-
-@protocol UKPropagandaSelectableView
-
--(void)	setNeedsDisplay: (BOOL)inState;
--(void)	setSelected: (BOOL)inState;
-
-@end
-
 
 
 @interface UKPropagandaSelectionView : NSView <UKPropagandaSelectableView>
@@ -45,61 +38,3 @@
 
 
 
-// The different tools the selection view can support:
-enum
-{
-	UKPropagandaBrowseTool = 1,
-	UKPropagandaButtonTool,
-	UKPropagandaFieldTool,
-	UKPropagandaSelectTool,
-	UKPropagandaLassoTool,
-	UKPropagandaPencilTool,
-	UKPropagandaBrushTool,
-	UKPropagandaEraserTool,
-	UKPropagandaLineTool,
-	UKPropagandaSprayTool,
-	UKPropagandaRectangleTool,
-	UKPropagandaRoundRectTool,
-	UKPropagandaBucketTool,
-	UKPropagandaOvalTool,
-	UKPropagandaCurveTool,
-	UKPropagandaTextTool,
-	UKPropagandaRegularPolygonTool,
-	UKPropagandaPolygonTool
-};
-typedef NSInteger	UKPropagandaTool;
-
-
-// Helper class that has a timer and tells all currently selected views to
-//	update. It also maintains the pattern phase used for the selection's
-//	marching ants animation, so they all march the same way.
-
-@interface UKPropagandaTools : NSObject
-{
-	NSMutableArray*		nonRetainingClients;
-	NSInteger			animationPhase;
-	NSTimer*			animationTimer;
-	NSColor*			peekPattern;
-	UKPropagandaTool	tool;
-}
-
-+(UKPropagandaTools*)	propagandaTools;
-
-+(BOOL)					toolIsPaintTool: (UKPropagandaTool)theTool;
-
--(void)					animate: (id)sender;
--(NSInteger)			animationPhase;
-
--(void)					addClient: (id<UKPropagandaSelectableView>)theClient;
--(void)					removeClient: (id<UKPropagandaSelectableView>)theClient;
--(void)					deselectAllClients;
-
--(NSColor*)				peekPattern;
-
--(UKPropagandaTool)		currentTool;
--(void)					setCurrentTool: (UKPropagandaTool)theTool;
-
-
--(NSInteger)			numberOfSelectedClients;
-
-@end

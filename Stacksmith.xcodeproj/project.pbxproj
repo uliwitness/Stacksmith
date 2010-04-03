@@ -283,6 +283,7 @@
 		558DCFE51156209A002C9195 /* UKPropagandaWindowBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFE41156209A002C9195 /* UKPropagandaWindowBodyView.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
+		55B9220A11674E880073EC6C /* UKPropagandaTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9220911674E880073EC6C /* UKPropagandaTools.m */; };
 		55C2B5CA115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B5C9115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m */; };
 		55C2B647115E5780008B094D /* UKPropagandaSearchContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* UKPropagandaSearchContext.m */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
@@ -640,6 +641,8 @@
 		558DCFE41156209A002C9195 /* UKPropagandaWindowBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaWindowBodyView.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		55B9220811674E880073EC6C /* UKPropagandaTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPropagandaTools.h; path = Presentation/UKPropagandaTools.h; sourceTree = "<group>"; };
+		55B9220911674E880073EC6C /* UKPropagandaTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPropagandaTools.m; path = Presentation/UKPropagandaTools.m; sourceTree = "<group>"; };
 		55C2B5C8115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaClickablePopUpButtonLabel.h; sourceTree = "<group>"; };
 		55C2B5C9115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaClickablePopUpButtonLabel.m; sourceTree = "<group>"; };
 		55C2B645115E5780008B094D /* UKPropagandaSearchContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPropagandaSearchContext.h; path = Model/UKPropagandaSearchContext.h; sourceTree = "<group>"; };
@@ -827,6 +830,8 @@
 				558DC882115507EA002C9195 /* UKPropagandaCardViewController.m */,
 				558DCB5311553EAC002C9195 /* UKPropagandaButtonCell.h */,
 				558DCB5411553EAC002C9195 /* UKPropagandaButtonCell.m */,
+				55B9220811674E880073EC6C /* UKPropagandaTools.h */,
+				55B9220911674E880073EC6C /* UKPropagandaTools.m */,
 				558DCD7C11557B6D002C9195 /* UKPropagandaSelectionView.h */,
 				558DCD7D11557B6D002C9195 /* UKPropagandaSelectionView.m */,
 				558DCFE31156209A002C9195 /* UKPropagandaWindowBodyView.h */,
@@ -1534,6 +1539,7 @@
 				55C2B647115E5780008B094D /* UKPropagandaSearchContext.m in Sources */,
 				55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */,
 				55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */,
+				55B9220A11674E880073EC6C /* UKPropagandaTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
