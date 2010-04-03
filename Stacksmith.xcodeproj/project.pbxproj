@@ -286,6 +286,7 @@
 		55B9220A11674E880073EC6C /* UKPropagandaTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9220911674E880073EC6C /* UKPropagandaTools.m */; };
 		55B9223D1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B9223C1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib */; };
 		55B9224311675A260073EC6C /* UKPropagandaButtonInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9224211675A260073EC6C /* UKPropagandaButtonInfoWindowController.m */; };
+		55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B9225C11675D270073EC6C /* Quartz.framework */; };
 		55C2B5CA115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B5C9115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m */; };
 		55C2B647115E5780008B094D /* UKPropagandaSearchContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* UKPropagandaSearchContext.m */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
@@ -648,6 +649,7 @@
 		55B92239116753180073EC6C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/UKPropagandaButtonInfoWindowController.xib; sourceTree = "<group>"; };
 		55B9224111675A260073EC6C /* UKPropagandaButtonInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaButtonInfoWindowController.h; sourceTree = "<group>"; };
 		55B9224211675A260073EC6C /* UKPropagandaButtonInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaButtonInfoWindowController.m; sourceTree = "<group>"; };
+		55B9225C11675D270073EC6C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		55C2B5C8115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaClickablePopUpButtonLabel.h; sourceTree = "<group>"; };
 		55C2B5C9115E2FD8008B094D /* UKPropagandaClickablePopUpButtonLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaClickablePopUpButtonLabel.m; sourceTree = "<group>"; };
 		55C2B645115E5780008B094D /* UKPropagandaSearchContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPropagandaSearchContext.h; path = Model/UKPropagandaSearchContext.h; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 				552FF245113F247A005742C8 /* QTKit.framework in Frameworks */,
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
+				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +704,7 @@
 				552FF244113F247A005742C8 /* QTKit.framework */,
 				55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */,
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
+				55B9225C11675D270073EC6C /* Quartz.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";

@@ -39,6 +39,7 @@
 	BOOL				mWideMargins;
 	BOOL				mMultipleLines;
 	BOOL				mShowName;
+	BOOL				mEnabled;
 	BOOL				mHighlightedForTracking;	// For most buttons same as highlight.
 	NSMutableIndexSet*	mSelectedLines;				// The indexes into the contents' list items array of the selected items.
 	NSTextAlignment		mTextAlignment;
@@ -80,6 +81,7 @@
 -(NSTextAlignment)		textAlignment;
 
 -(BOOL)			showName;
+-(BOOL)			isEnabled;
 -(BOOL)			visible;
 -(void)			setVisible: (BOOL)theState;
 -(BOOL)			wideMargins;

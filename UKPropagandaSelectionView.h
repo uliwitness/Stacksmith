@@ -25,7 +25,8 @@
 @property (assign) NSControl*	control;
 @property (assign) NSView*		helperView;
 
--(void)	setRepresentedPart: (UKPropagandaPart*)inPart;
+-(void)					setRepresentedPart: (UKPropagandaPart*)inPart;
+-(UKPropagandaPart*)	representedPart;
 
 -(void)	setSelected: (BOOL)inState;
 

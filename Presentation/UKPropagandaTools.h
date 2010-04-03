@@ -72,7 +72,7 @@ typedef NSInteger	UKPropagandaTool;
 -(UKPropagandaTool)		currentTool;
 -(void)					setCurrentTool: (UKPropagandaTool)theTool;
 
-
 -(NSInteger)			numberOfSelectedClients;
+-(NSSet*)				clients;
 
 @end

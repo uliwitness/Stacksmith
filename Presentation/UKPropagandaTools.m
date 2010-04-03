@@ -105,6 +105,12 @@ static UKPropagandaTools*		sAnimator = nil;
 	return [nonRetainingClients count];
 }
 
+
+-(NSSet*)	clients
+{
+	return [NSSet setWithArray: nonRetainingClients];
+}
+
 -(NSColor*)	peekPattern
 {
 	if( !peekPattern )

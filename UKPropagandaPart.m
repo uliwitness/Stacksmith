@@ -56,6 +56,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mTitleWidth = UKPropagandaIntegerFromSubElementInElement( @"titleWidth", elem );
 		mHighlight = UKPropagandaBoolFromSubElementInElement( @"highlight", elem );
 		mSharedHighlight = UKPropagandaBoolFromSubElementInElement( @"sharedHighlight", elem );
+		mEnabled = UKPropagandaBoolFromSubElementInElement( @"enabled", elem );
 		mFamily = UKPropagandaIntegerFromSubElementInElement( @"family", elem );
 		
 		NSString*		alignStr = UKPropagandaStringFromSubElementInElement( @"textAlign", elem );
@@ -322,6 +323,12 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 -(BOOL)	showName
 {
 	return mShowName;
+}
+
+
+-(BOOL)	isEnabled
+{
+	return mEnabled;
 }
 
 

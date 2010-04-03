@@ -21,6 +21,7 @@
 #import "UKPropagandaWindowBodyView.h"
 #import "UKPropagandaTextView.h"
 #import "UKPropagandaClickablePopUpButtonLabel.h"
+#import "UKPropagandaButtonInfoWindowController.h"
 
 
 @implementation UKPropagandaCardViewController
@@ -924,7 +925,10 @@
 
 -(IBAction)	showButtonInfoPanel: (id)sender
 {
-	
+	NSArray*			allSels = [[[UKPropagandaTools propagandaTools] clients] allObjects];
+	UKPropagandaPart*	thePart = [[allSels objectAtIndex: 0] representedPart];
+	UKPropagandaButtonInfoWindowController*	buttonInfo = [[UKPropagandaButtonInfoWindowController alloc] initWithPart: thePart];
+	[buttonInfo showWindow: self];
 }
 
 -(IBAction)	showFieldInfoPanel: (id)sender

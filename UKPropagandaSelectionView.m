@@ -205,6 +205,12 @@
 }
 
 
+-(UKPropagandaPart*)	representedPart
+{
+	return mPart;
+}
+
+
 -(void)	partWillChange: (NSNotification*)notification
 {
 	
