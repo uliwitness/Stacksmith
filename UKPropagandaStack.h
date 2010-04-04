@@ -69,8 +69,12 @@
 			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos;
 -(NSImage*)		pictureOfType: (NSString*)typ name: (NSString*)theName;
 -(NSImage*)		pictureOfType: (NSString*)typ id: (NSInteger)theID;
+-(NSInteger)	numberOfPictures;
+-(NSImage*)		pictureAtIndex: (NSInteger)idx;
+
 -(NSCursor*)	cursorWithName: (NSString*)theName;
 -(NSCursor*)	cursorWithID: (NSInteger)theID;
+
 -(QTMovie*)		movieOfType: (NSString*)typ name: (NSString*)theName;	// Movies & sounds.
 -(QTMovie*)		movieOfType: (NSString*)typ id: (NSInteger)theID;		// Movies & sounds.
 

@@ -70,6 +70,8 @@
 -(NSString*)	partType;
 -(void)			setPartType: (NSString*)partType;
 -(NSInteger)	partID;
+-(NSInteger)	partNumber;
+-(NSInteger)	partNumberAmongPartsOfType: (NSString*)partType;
 
 -(void)						setPartLayer: (NSString*)theLayer;
 -(NSString*)				partLayer;

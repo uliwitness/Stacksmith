@@ -202,6 +202,27 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
+-(NSInteger)	partNumber
+{
+	return [[mOwner parts] indexOfObject: self];
+}
+
+
+-(NSInteger)	partNumberAmongPartsOfType: (NSString*)partType
+{
+	NSInteger		pbn = -1;
+	for( UKPropagandaPart* currPart in [mOwner parts] )
+	{
+		if( [[currPart partType] isEqualToString: partType] )
+			pbn++;
+		if( currPart == self )
+			break;
+	}
+	
+	return pbn;
+}
+
+
 -(void)		setPartLayer: (NSString*)theLayer
 {
 	if( theLayer != mLayer )

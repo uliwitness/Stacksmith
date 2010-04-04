@@ -72,6 +72,12 @@
 }
 
 
+-(UKPropagandaCard*)	card;
+{
+	return mCard;
+}
+
+
 -(void)	resetCursorRects
 {
 	UKPropagandaTool	currTool = [[UKPropagandaTools propagandaTools] currentTool];

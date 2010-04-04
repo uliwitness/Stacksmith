@@ -10,12 +10,14 @@
 
 
 @class UKPropagandaPart;
+@class UKPropagandaWindowBodyView;
 @class IKImageBrowserView;
 
 
 @interface UKPropagandaButtonInfoWindowController : NSWindowController
 {
-	UKPropagandaPart*				mPart;
+	UKPropagandaPart*				mPart;				// The card/bg part we're editing.
+	UKPropagandaWindowBodyView*		mCardView;			// BG parts can have different values/contents on each card, so we need to know which one.
 	IBOutlet NSTextField*			mNameField;
 	IBOutlet NSTextField*			mButtonNumberField;
 	IBOutlet NSTextField*			mButtonNumberLabel;
@@ -32,7 +34,7 @@
 	IBOutlet NSTextView*			mContentsTextField;
 }
 
--(id)		initWithPart: (UKPropagandaPart*)inPart;
+-(id)		initWithPart: (UKPropagandaPart*)inPart ofCardView: (UKPropagandaWindowBodyView*)owningView;
 
 -(IBAction)	doOKButton: (id)sender;
 -(IBAction)	doCancelButton: (id)sender;

@@ -11,6 +11,10 @@
 #import "UKPropagandaScriptEditorWindowController.h"
 #import "UKPropagandaPart.h"
 #import "UKPropagandaButtonInfoWindowController.h"
+#import "UKPropagandaWindowBodyView.h"
+
+
+@class UKPropagandaWindowBodyView;
 
 
 @implementation UKPropagandaSelectionView
@@ -174,7 +178,7 @@
 	{
 		if( [event clickCount] == 2 && mSelected )
 		{
-			UKPropagandaButtonInfoWindowController*	buttonInfo = [[UKPropagandaButtonInfoWindowController alloc] initWithPart: mPart];
+			UKPropagandaButtonInfoWindowController*	buttonInfo = [[UKPropagandaButtonInfoWindowController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 			[buttonInfo showWindow: self];
 		}
 		else
@@ -219,6 +223,15 @@
 	return mPart;
 }
 
+
+-(UKPropagandaWindowBodyView*)	enclosingCardView
+{
+	UKPropagandaWindowBodyView*		mySuper = (UKPropagandaWindowBodyView*) [self superview];
+	if( mySuper && [mySuper isKindOfClass: [UKPropagandaWindowBodyView class]] )
+		return mySuper;
+	else
+		return nil;
+}
 
 -(void)	partWillChange: (NSNotification*)notification
 {

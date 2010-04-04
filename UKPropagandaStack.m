@@ -599,6 +599,45 @@ NSInteger	UKRandomInteger()
 }
 
 
+-(NSInteger)	numberOfPictures
+{
+	NSInteger		numPics = 0;
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: @"icon"] )
+			numPics++;
+	}
+	
+	return numPics;
+}
+
+
+-(NSImage*)		pictureAtIndex: (NSInteger)idx
+{
+	NSInteger		numPics = 0;
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: @"icon"] )
+		{
+			if( numPics == idx )
+			{
+				if( ![currPic imageOrCursor] )
+				{
+					NSImage*	img = [self imageNamed: [currPic filename]];
+					[currPic setImageOrCursor: img];
+					return img;
+				}
+				else
+					return [currPic imageOrCursor];
+			}
+			numPics++;
+		}
+	}
+	
+	return numPics;
+}
+
+
 -(NSCursor*)	cursorWithName: (NSString*)theName
 {
 	theName = [theName lowercaseString];

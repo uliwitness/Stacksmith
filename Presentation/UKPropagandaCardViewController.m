@@ -927,7 +927,7 @@
 {
 	NSArray*			allSels = [[[UKPropagandaTools propagandaTools] clients] allObjects];
 	UKPropagandaPart*	thePart = [[allSels objectAtIndex: 0] representedPart];
-	UKPropagandaButtonInfoWindowController*	buttonInfo = [[UKPropagandaButtonInfoWindowController alloc] initWithPart: thePart];
+	UKPropagandaButtonInfoWindowController*	buttonInfo = [[UKPropagandaButtonInfoWindowController alloc] initWithPart: thePart ofCardView: (UKPropagandaWindowBodyView*) [self view]];
 	[buttonInfo showWindow: self];
 }
 

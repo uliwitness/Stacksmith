@@ -11,6 +11,7 @@
 
 
 @class UKPropagandaPart;
+@class UKPropagandaWindowBodyView;
 
 
 @interface UKPropagandaSelectionView : NSView <UKPropagandaSelectableView>
@@ -34,6 +35,8 @@
 -(void)	unsubscribeNotifications;
 
 -(void)	highlightSearchResultInRange: (NSRange)theRange;
+
+-(UKPropagandaWindowBodyView*)	enclosingCardView;
 
 @end
 

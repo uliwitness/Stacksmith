@@ -19,6 +19,7 @@
 	BOOL				mBackgroundEditMode;
 }
 
--(void)	setCard: (UKPropagandaCard*)inCard;
+-(void)					setCard: (UKPropagandaCard*)inCard;
+-(UKPropagandaCard*)	card;
 
 @end

@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="46"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -64,7 +64,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSTabView" id="148791345">
 							<reference key="NSNextResponder" ref="1006"/>
-							<int key="NSvFlags">36</int>
+							<int key="NSvFlags">12</int>
 							<string key="NSFrame">{{-8, 52}, {521, 362}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<object class="NSMutableArray" key="NSTabViewItems">
@@ -907,12 +907,12 @@
 																<bool key="cellsHaveSubtitle">NO</bool>
 																<bool key="cellsHaveTitle">YES</bool>
 																<bool key="outlinesCells">NO</bool>
-																<bool key="shadowsCells">YES</bool>
+																<bool key="shadowsCells">NO</bool>
 																<bool key="animates">YES</bool>
 																<bool key="allowsReordering">NO</bool>
 																<bool key="allowsMultipleSelection">NO</bool>
-																<float key="cellWidth">100</float>
-																<float key="cellHeight">100</float>
+																<float key="cellWidth">54</float>
+																<float key="cellHeight">54</float>
 																<reference key="dataSource"/>
 																<reference key="delegate"/>
 															</object>
@@ -2047,10 +2047,10 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{337, 436}, {505, 420}}</string>
+					<string>{{794, 433}, {505, 420}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{337, 436}, {505, 420}}</string>
+					<string>{{794, 433}, {505, 420}}</string>
 					<boolean value="NO"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>
@@ -2123,7 +2123,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{448, 585}, {229, 223}}</string>
+					<string>{{939, 525}, {229, 223}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
