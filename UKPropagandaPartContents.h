@@ -21,14 +21,18 @@
 	NSInteger					mID;			// ID of the part this object provides contents for.
 	NSArray*					mListItems;		// The contents of this part re-interpreted as a list (ATM, each line as a separate item).
 	NSMutableArray*				mStyles;		// Style data for this text.
+	BOOL						mHighlighted;	// Buttons can have sharedHighlight == FALSE, in which case their highlight is stored here.
 }
 
 -(id)	initWithXMLElement: (NSXMLElement*)theElem forStack: (UKPropagandaStack*)theStack;
 
 -(NSString*)			text;
+-(void)					setText: (NSString*)inString;	// Nukes any styles and list item caches that may be there.
 -(NSAttributedString*)	styledTextForPart: (UKPropagandaPart*)currPart;	// May return NIL.
 -(NSString*)			partLayer;
 -(NSInteger)			partID;
+-(BOOL)					highlighted;
+-(void)					setHighlighted: (BOOL)inState;
 
 -(NSArray*)				listItems;
 

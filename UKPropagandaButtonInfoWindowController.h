@@ -11,7 +11,7 @@
 
 @class UKPropagandaPart;
 @class UKPropagandaWindowBodyView;
-@class IKImageBrowserView;
+@class UKPropagandaIconListDataSource;
 
 
 @interface UKPropagandaButtonInfoWindowController : NSWindowController
@@ -29,13 +29,16 @@
 	IBOutlet NSPopUpButton*			mFamilyPopUp;
 	IBOutlet NSButton*				mShowNameSwitch;
 	IBOutlet NSButton*				mAutoHighlightSwitch;
+	IBOutlet NSButton*				mHighlightedSwitch;
 	IBOutlet NSButton*				mEnabledSwitch;
-	IBOutlet IKImageBrowserView*	mIconListView;
+	IBOutlet NSButton*				mVisibleSwitch;
+	IBOutlet UKPropagandaIconListDataSource*	mIconListController;
 	IBOutlet NSTextView*			mContentsTextField;
 }
 
 -(id)		initWithPart: (UKPropagandaPart*)inPart ofCardView: (UKPropagandaWindowBodyView*)owningView;
 
+-(IBAction)	doEditScriptButton: (id)sender;
 -(IBAction)	doOKButton: (id)sender;
 -(IBAction)	doCancelButton: (id)sender;
 

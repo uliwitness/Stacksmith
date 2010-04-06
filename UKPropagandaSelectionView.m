@@ -179,6 +179,7 @@
 		if( [event clickCount] == 2 && mSelected )
 		{
 			UKPropagandaButtonInfoWindowController*	buttonInfo = [[UKPropagandaButtonInfoWindowController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+			[[[[self window] windowController] document] addWindowController: buttonInfo];
 			[buttonInfo showWindow: self];
 		}
 		else

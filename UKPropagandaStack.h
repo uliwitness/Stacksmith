@@ -71,6 +71,8 @@
 -(NSImage*)		pictureOfType: (NSString*)typ id: (NSInteger)theID;
 -(NSInteger)	numberOfPictures;
 -(NSImage*)		pictureAtIndex: (NSInteger)idx;
+-(void)			infoForPictureAtIndex: (NSInteger)idx name: (NSString**)outName id: (NSInteger*)outID
+						image: (NSImage**)outImage fileName: (NSString**)outFileName;
 
 -(NSCursor*)	cursorWithName: (NSString*)theName;
 -(NSCursor*)	cursorWithID: (NSInteger)theID;

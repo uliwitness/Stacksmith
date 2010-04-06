@@ -84,7 +84,8 @@
 }
 
 
--(void)	loadPopupButton: (UKPropagandaPart*)currPart withContents: (UKPropagandaPartContents*)contents
+-(void)	loadPopupButton: (UKPropagandaPart*)currPart withCardContents: (UKPropagandaPartContents*)contents
+			 withBgContents: (UKPropagandaPartContents*)bgContents
 {
 	NSRect			partRect = [currPart rectangle];
 	NSTextField*	label = nil;
@@ -128,7 +129,7 @@
 	[bt setWantsLayer: YES];
 	[bt setFont: [currPart textFont]];
 	
-	NSArray*	popupItems = [contents listItems];
+	NSArray*	popupItems = ([contents text] != nil) ? [contents listItems] : [bgContents listItems];
 	for( NSString* itemName in popupItems )
 	{
 		if( [itemName hasPrefix: @"-"] )
@@ -153,7 +154,8 @@
 }
 
 
--(void)	loadPushButton: (UKPropagandaPart*)currPart withContents: (UKPropagandaPartContents*)contents
+-(void)	loadPushButton: (UKPropagandaPart*)currPart withCardContents: (UKPropagandaPartContents*)contents
+			 withBgContents: (UKPropagandaPartContents*)bgContents
 {
 	NSRect						partRect = [currPart rectangle];
 	UKPropagandaSelectionView*	selView = [[[UKPropagandaSelectionView alloc] initWithFrame: NSInsetRect(partRect, -2, -2)] autorelease];
@@ -244,7 +246,10 @@
 	[bt setTitle: [currPart name]];
 	[bt setTarget: currPart];
 	[bt setAction: @selector(updateOnClick:)];
-	[bt setState: [currPart highlighted] ? NSOnState : NSOffState];
+	BOOL		isHighlighted = [currPart highlighted];
+	if( ![currPart sharedHighlight] && [[currPart partLayer] isEqualToString: @"background"] )
+		isHighlighted = [contents highlighted];
+	[bt setState: isHighlighted ? NSOnState : NSOffState];
 	
 	if( canHaveIcon )
 	{
@@ -267,15 +272,16 @@
 }
 
 
--(void)	loadButton: (UKPropagandaPart*)currPart withContents: (UKPropagandaPartContents*)contents
+-(void)	loadButton: (UKPropagandaPart*)currPart withCardContents: (UKPropagandaPartContents*)contents
+			 withBgContents: (UKPropagandaPartContents*)bgContents
 {
 	if( [[currPart style] isEqualToString: @"popup"] )
 	{
-		[self loadPopupButton: currPart withContents: contents];
+		[self loadPopupButton: currPart withCardContents: contents withBgContents: bgContents];
 	}
 	else
 	{
-		[self loadPushButton: currPart withContents: contents];
+		[self loadPushButton: currPart withCardContents: contents withBgContents: bgContents];
 	}
 }
 
@@ -466,7 +472,8 @@
 }
 
 
--(void)	loadEditField: (UKPropagandaPart*)currPart withContents: (UKPropagandaPartContents*)contents
+-(void)	loadEditField: (UKPropagandaPart*)currPart withCardContents: (UKPropagandaPartContents*)contents
+			 withBgContents: (UKPropagandaPartContents*)bgContents
 {
 	NSRect						partRect = [currPart rectangle];
 	UKPropagandaSelectionView*	selView = [[[UKPropagandaSelectionView alloc] initWithFrame: NSInsetRect(partRect, -2, -2)] autorelease];
@@ -559,7 +566,8 @@
 }
 
 
--(void)	loadListField: (UKPropagandaPart*)currPart withContents: (UKPropagandaPartContents*)contents
+-(void)	loadListField: (UKPropagandaPart*)currPart withCardContents: (UKPropagandaPartContents*)contents
+			 withBgContents: (UKPropagandaPartContents*)bgContents
 {
 	NSRect						partRect = [currPart rectangle];
 	UKPropagandaSelectionView*	selView = [[[UKPropagandaSelectionView alloc] initWithFrame: NSInsetRect(partRect, -2, -2)] autorelease];
@@ -658,31 +666,33 @@
 }
 
 
--(void)	loadField: (UKPropagandaPart*)currPart withContents: (UKPropagandaPartContents*)contents
+-(void)	loadField: (UKPropagandaPart*)currPart withCardContents: (UKPropagandaPartContents*)contents
+			 withBgContents: (UKPropagandaPartContents*)bgContents
 {
 	if( [currPart autoSelect] && [currPart textLocked] )
 	{
-		[self loadListField: currPart withContents: contents];
+		[self loadListField: currPart withCardContents: contents withBgContents: bgContents];
 	}
 	else if( [[currPart style] isEqualToString: @"transparent"] || [[currPart style] isEqualToString: @"opaque"]
 		 || [[currPart style] isEqualToString: @"rectangle"] || [[currPart style] isEqualToString: @"shadow"]
 		|| [[currPart style] isEqualToString: @"scrolling"] )
 	{
-		[self loadEditField: currPart withContents: contents];
+		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents];
 	}
 	else
 	{
-		[self loadEditField: currPart withContents: contents];
+		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents];
 	}
 }
 
 
--(void)	loadPart: (UKPropagandaPart*)currPart withContents: (UKPropagandaPartContents*)contents
+-(void)	loadPart: (UKPropagandaPart*)currPart withCardContents: (UKPropagandaPartContents*)contents
+			 withBgContents: (UKPropagandaPartContents*)bgContents
 {
 	if( [[currPart partType] isEqualToString: @"button"] )
-		[self loadButton: currPart withContents: contents];
+		[self loadButton: currPart withCardContents: contents withBgContents: bgContents];
 	else
-		[self loadField: currPart withContents: contents];
+		[self loadField: currPart withCardContents: contents withBgContents: bgContents];
 }
 
 
@@ -775,12 +785,14 @@
 	for( UKPropagandaPart* currPart in [theBg parts] )
 	{
 		UKPropagandaPartContents*	contents = nil;
+		UKPropagandaPartContents*	bgContents = nil;
+		bgContents = [theBg contentsForPart: currPart];
 		if( [currPart sharedText] )
-			contents = [theBg contentsForPart: currPart];
+			contents = bgContents;
 		else
 			contents = mBackgroundEditMode ? nil : [theCard contentsForPart: currPart];
 		
-		[self loadPart: currPart withContents: contents];
+		[self loadPart: currPart withCardContents: contents withBgContents: bgContents];
 	}
 	
 	// Load the actual card parts:
@@ -800,7 +812,8 @@
 		for( UKPropagandaPart* currPart in [theCard parts] )
 		{
 			UKPropagandaPartContents*	contents = [theCard contentsForPart: currPart];
-			[self loadPart: currPart withContents: contents];
+			UKPropagandaPartContents*	bgContents = [[theCard owningBackground] contentsForPart: currPart];
+			[self loadPart: currPart withCardContents: contents withBgContents: bgContents];
 		}
 	}
 	
@@ -928,6 +941,7 @@
 	NSArray*			allSels = [[[UKPropagandaTools propagandaTools] clients] allObjects];
 	UKPropagandaPart*	thePart = [[allSels objectAtIndex: 0] representedPart];
 	UKPropagandaButtonInfoWindowController*	buttonInfo = [[UKPropagandaButtonInfoWindowController alloc] initWithPart: thePart ofCardView: (UKPropagandaWindowBodyView*) [self view]];
+	[[[[[self view] window] windowController] document] addWindowController: buttonInfo];
 	[buttonInfo showWindow: self];
 }
 

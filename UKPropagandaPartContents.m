@@ -62,6 +62,7 @@
 		mText = [UKPropagandaStringFromSubElementInElement( @"text", theElem ) retain];
 		mID = UKPropagandaIntegerFromSubElementInElement( @"id", theElem );
 		mLayer = [UKPropagandaStringFromSubElementInElement( @"layer", theElem ) retain];
+		mHighlighted = UKPropagandaBoolFromSubElementInElement( @"highlight", theElem );
 		
 		// Style runs contain their start offsets, so we apply them from the end,
 		//	to be able to start with the length as the end offset, and then just
@@ -121,6 +122,19 @@
 -(NSString*)	text
 {
 	return mText;
+}
+
+
+-(void)	setText: (NSString*)inString
+{
+	[mText release];
+	mText = [inString copy];
+	[mStyledText release];
+	mStyledText = nil;
+	[mStyles release];
+	mStyles = nil;
+	[mListItems release];
+	mListItems = nil;
 }
 
 
@@ -232,6 +246,18 @@
 -(NSInteger)	partID
 {
 	return mID;
+}
+
+
+-(BOOL)	highlighted
+{
+	return mHighlighted;
+}
+
+
+-(void)					setHighlighted: (BOOL)inState
+{
+	mHighlighted = inState;
 }
 
 

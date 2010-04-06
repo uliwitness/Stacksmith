@@ -43,7 +43,7 @@ NSString*	UKPropagandaPartWillChangeNotification;	// Part has old state.
 NSString*	UKPropagandaPartDidChangeNotification;	// Part has new state.
 
 // Info dictionary keys:
-NSString*	UKPropagandaAffectedPropertyKey;
+NSString*	UKPropagandaAffectedPropertyKey;	// Property on the UKPropagandaPart, not the xTalk property name.
 
 
 // -----------------------------------------------------------------------------

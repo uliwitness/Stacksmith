@@ -12,72 +12,34 @@
 #import "UKPropagandaCard.h"
 #import "UKPropagandaStack.h"
 #import "UKPropagandaWindowBodyView.h"
-#import <Quartz/Quartz.h>
+#import "UKPropagandaIconListDataSource.h"
+#import "UKPropagandaScriptEditorWindowController.h"
 
 
-@interface UKPropagandaSimpleImageBrowserItem : NSObject // IKImageBrowserItem
-{
-	NSImage*		mImage;
-}
-
-@property (retain) NSImage*	image;
-
--(id)	initWithNSImage: (NSImage*)theImg;
-
-@end
-
-
-@implementation UKPropagandaSimpleImageBrowserItem
-
-@synthesize image = mImage;
-
--(id)	initWithNSImage: (NSImage*)theImg
-{
-	if(( self = [super init] ))
-	{
-		mImage = [theImg retain];
-	}
+static 	NSArray*	sStylesInMenuOrder = nil;
 	
-	return self;
-}
 
-
--(void)	dealloc
-{
-	[mImage release];
-	mImage = nil;
-	
-	[super dealloc];
-}
-
-
--(NSString *)  imageUID
-{
-	return [NSString stringWithFormat: @"%p", mImage];	// +++ Should really be icon ID for correct animations after icon editing.
-}
-
--(NSString *) imageRepresentationType
-{
-	return IKImageBrowserNSImageRepresentationType;
-}
-
--(id) imageRepresentation
-{
-	return mImage;
-}
-
--(NSString *) imageTitle
-{
-	return [mImage name];
-}
-
-@end
 
 
 @implementation UKPropagandaButtonInfoWindowController
 
 -(id)	initWithPart: (UKPropagandaPart*)inPart ofCardView: (UKPropagandaWindowBodyView*)owningView
 {
+	if( !sStylesInMenuOrder )
+		sStylesInMenuOrder = [[NSArray alloc] initWithObjects:
+													@"transparent",
+													@"opaque",
+													@"rectangle",
+													@"roundrect",
+													@"shadow",
+													@"checkbox",
+													@"radiobutton",
+													@"standard",
+													@"default",
+													@"oval",
+													@"popup",
+													nil];
+	
 	if(( self = [super initWithWindowNibName: NSStringFromClass([self class])] ))
 	{
 		mPart = inPart;
@@ -87,6 +49,14 @@
 	}
 	
 	return self;
+}
+
+
+-(void)	dealloc
+{
+	mIconListController = nil;
+	
+	[super dealloc];
 }
 
 
@@ -106,23 +76,11 @@
 	
 	[mShowNameSwitch setState: [mPart showName]];
 	[mAutoHighlightSwitch setState: [mPart autoHighlight]];
+	[mHighlightedSwitch setState: [mPart highlighted]];
 	[mEnabledSwitch setState: [mPart isEnabled]];
+	[mVisibleSwitch setState: [mPart visible]];
 	
-	NSArray*	stylesInMenuOrder = [NSArray arrayWithObjects:
-													@"transparent",
-													@"opaque",
-													@"rectangle",
-													@"roundrect",
-													@"shadow",
-													@"checkbox",
-													@"radiobutton",
-													@"standard",
-													@"default",
-													@"oval",
-													@"popup",
-													nil];
-	
-	[mStylePopUp selectItemAtIndex: [stylesInMenuOrder indexOfObject: [mPart style]]];
+	[mStylePopUp selectItemAtIndex: [sStylesInMenuOrder indexOfObject: [mPart style]]];
 	[mFamilyPopUp selectItemAtIndex: [mPart family]];
 	
 	UKPropagandaPartContents*	theContents = nil;
@@ -133,7 +91,14 @@
 	NSString*					contentsStr = [theContents text];
 	[mContentsTextField setString: contentsStr ? contentsStr : @""];
 	
-	[mIconListView reloadData];
+	[mIconListController setStack: [mPart stack]];
+	[mIconListController setSelectedIconID: [mPart iconID]];
+}
+
+
+-(NSString *)	windowTitleForDocumentDisplayName: (NSString *)displayName
+{
+	return [NSString stringWithFormat: @"%@ Info", [mPart displayName]];
 }
 
 
@@ -153,6 +118,29 @@
 
 -(IBAction)	doOKButton: (id)sender
 {
+	[mPart setName: [mNameField stringValue]];
+	
+	[mPart setShowName: [mShowNameSwitch state] == NSOnState];
+	[mPart setAutoHighlight: [mAutoHighlightSwitch state] == NSOnState];
+	[mPart setHighlighted: [mHighlightedSwitch state] == NSOnState];
+	[mPart setEnabled: [mEnabledSwitch state] == NSOnState];
+	[mPart setVisible: [mVisibleSwitch state] == NSOnState];
+	
+	[mPart setStyle: [sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]]];
+	[mPart setFamily: [mFamilyPopUp indexOfSelectedItem]];
+	
+	UKPropagandaPartContents*	theContents = nil;
+	if( [mPart sharedText] )
+		theContents = [[[mCardView card] owningBackground] contentsForPart: mPart];
+	else
+		theContents = [[mCardView card] contentsForPart: mPart];
+	[theContents setText: [mContentsTextField string]];
+
+	NSInteger	theIconID = [mIconListController selectedIconID];
+	[mPart setIconID: theIconID];
+	
+	[[[[self window] windowController] document] updateChangeCount: NSChangeDone];
+	
 	[self close];
 }
 
@@ -163,17 +151,11 @@
 }
 
 
--(NSUInteger) numberOfItemsInImageBrowser: (IKImageBrowserView *)aBrowser
+-(IBAction)	doEditScriptButton: (id)sender
 {
-	return [[mPart stack] numberOfPictures];
-}
-
-
--(id /*IKImageBrowserItem*/) imageBrowser: (IKImageBrowserView *) aBrowser itemAtIndex: (NSUInteger)idx
-{
-	NSImage*	img = [[mPart stack] pictureAtIndex: idx];
-	
-	return [[[UKPropagandaSimpleImageBrowserItem alloc] initWithNSImage: img] autorelease];
+	UKPropagandaScriptEditorWindowController*	se = [[[UKPropagandaScriptEditorWindowController alloc] initWithScriptContainer: mPart] autorelease];
+	[[[[self window] windowController] document] addWindowController: se];
+	[se showWindow: self];
 }
 
 @end

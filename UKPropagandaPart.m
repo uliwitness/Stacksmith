@@ -347,9 +347,33 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
+-(void)		setShowName: (BOOL)theState
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"showName"
+															forKey: UKPropagandaAffectedPropertyKey]];
+	mShowName = theState;
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"showName"
+															forKey: UKPropagandaAffectedPropertyKey]];
+}
+
+
 -(BOOL)	isEnabled
 {
 	return mEnabled;
+}
+
+
+-(void)		setEnabled: (BOOL)theState
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"enabled"
+															forKey: UKPropagandaAffectedPropertyKey]];
+	mEnabled = theState;
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"enabled"
+															forKey: UKPropagandaAffectedPropertyKey]];
 }
 
 
@@ -375,6 +399,19 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 {
 	return mTitleWidth;
 }
+
+
+-(void)	setIconID: (NSInteger)theID
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"iconID"
+															forKey: UKPropagandaAffectedPropertyKey]];
+	mIconID = theID;
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"iconID"
+															forKey: UKPropagandaAffectedPropertyKey]];
+}
+
 
 -(NSInteger)	iconID
 {
@@ -417,7 +454,11 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(void)	setAutoHighlight: (BOOL)inState
 {
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"autoHighlight" forKey: UKPropagandaAffectedPropertyKey]];
 	mAutoHighlight = inState;
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"autoHighlight" forKey: UKPropagandaAffectedPropertyKey]];
 }
 
 
@@ -430,6 +471,22 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 -(BOOL)	sharedText
 {
 	return mSharedText;
+}
+
+
+-(BOOL)	sharedHighlight
+{
+	return mSharedHighlight;
+}
+
+
+-(void)	setSharedHighlight: (BOOL)inState
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"sharedHighlight" forKey: UKPropagandaAffectedPropertyKey]];
+	mSharedHighlight = inState;
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"sharedHighlight" forKey: UKPropagandaAffectedPropertyKey]];
 }
 
 
@@ -449,6 +506,18 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 {
 	return mFamily;
 }
+
+
+-(void)	setFamily: (NSInteger)inFamilyNumber
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"family" forKey: UKPropagandaAffectedPropertyKey]];
+	mFamily = inFamilyNumber;
+	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"family" forKey: UKPropagandaAffectedPropertyKey]];
+}
+
+
 
 
 -(BOOL)	textLocked

@@ -83,22 +83,28 @@
 -(NSTextAlignment)		textAlignment;
 
 -(BOOL)			showName;
+-(void)			setShowName: (BOOL)theState;
 -(BOOL)			isEnabled;
+-(void)			setEnabled: (BOOL)theState;
 -(BOOL)			visible;
 -(void)			setVisible: (BOOL)theState;
 -(BOOL)			wideMargins;
 -(NSInteger)	popupTitleWidth;
 -(NSInteger)	iconID;
+-(void)			setIconID: (NSInteger)theID;
 -(NSImage*)		iconImage;
 -(void)			setHighlighted: (BOOL)inState;
 -(BOOL)			highlighted;
 -(void)			setAutoHighlight: (BOOL)inState;
 -(BOOL)			autoHighlight;
 -(BOOL)			sharedText;
+-(BOOL)			sharedHighlight;
+-(void)			setSharedHighlight: (BOOL)inState;
 -(void)			setHighlightedForTracking: (BOOL)inState;
 -(BOOL)			highlightedForTracking;
 -(BOOL)			toggleHighlightAfterTracking;
 -(NSInteger)	family;
+-(void)			setFamily: (NSInteger)inFamilyNumber;
 -(BOOL)			textLocked;
 -(BOOL)			showLines;
 

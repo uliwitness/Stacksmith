@@ -634,8 +634,43 @@ NSInteger	UKRandomInteger()
 		}
 	}
 	
-	return numPics;
+	return nil;
 }
+
+
+-(void)	infoForPictureAtIndex: (NSInteger)idx name: (NSString**)outName id: (NSInteger*)outID
+			image: (NSImage**)outImage fileName: (NSString**)outFileName
+{
+	NSInteger		numPics = 0;
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: @"icon"] )
+		{
+			if( numPics == idx )
+			{
+				if( outImage )
+				{
+					if( ![currPic imageOrCursor] )
+					{
+						*outImage = [self imageNamed: [currPic filename]];
+						[currPic setImageOrCursor: *outImage];
+					}
+					else
+						*outImage = [currPic imageOrCursor];
+				}
+
+				if( outName )
+					*outName = [currPic name];
+				if( outID )
+					*outID = [currPic pictureID];
+				if( outFileName )
+					*outFileName = [currPic filename];
+			}
+			numPics++;
+		}
+	}
+}
+
 
 
 -(NSCursor*)	cursorWithName: (NSString*)theName
