@@ -17,88 +17,40 @@
 #import "UKPBMImageRep.h"
 
 
-#if 0
+@interface NSColorSpace (UKCalibratedBlackColorSpace)
 
-@implementation UKPBMImageRep
++(CGColorSpaceRef)	calibratedBlackColorSpace;
 
-+(BOOL) canInitWithData: (NSData*)theData
+@end
+
+
+@implementation NSColorSpace (UKCalibratedBlackColorSpace)
+
++(CGColorSpaceRef)	calibratedBlackColorSpace
 {
-    const char*	bytes = [theData bytes];
-	return( bytes[0] == 'P' && bytes[1] == '4' && bytes[2] == '\n' );
-}
-
-
-+(NSArray*) imageUnfilteredFileTypes
-{
-    return [NSArray arrayWithObject: @"pbm"];
-}
-
-
-+(NSArray*) imageUnfilteredPasteboardTypes
-{
-    return [NSArray array];
-}
-
-
-+(id)	imageRepWithData: (NSData*)theData
-{
-    const char*	bytes = [theData bytes];
-	if( bytes[0] != 'P' || bytes[1] != '4' || bytes[2] != '\n' )
-		return nil;
-    
-	NSMutableString*	widthStr = [NSMutableString string];
-	NSMutableString*	heightStr = [NSMutableString string];
-	int					x = 3;
-	for( x = 3; x < [theData length] && bytes[x] != ' '; x++ )
-		[widthStr appendFormat: @"%c", bytes[x]];
-	
-	++x;
-	for( ; x < [theData length] && bytes[x] != '\n'; x++ )
-		[heightStr appendFormat: @"%c", bytes[x]];
-	
-	NSSize	size = NSMakeSize( [widthStr intValue], [heightStr intValue] );
-	int leftOverData = [theData length] -x -1;
-	if( leftOverData <= 0 )
-		return nil;
-	
-	NSInteger		rowBytes = size.width * 4;
-	
-	NSBitmapImageRep*	theRep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes: NULL
-									pixelsWide: size.width pixelsHigh: size.height
-									bitsPerSample: 8 samplesPerPixel: 4 hasAlpha: YES isPlanar: NO
-									colorSpaceName: NSCalibratedRGBColorSpace
-									bytesPerRow: rowBytes bitsPerPixel: 32] autorelease];
-    if( !theRep )
-        return nil;
-	
-	unsigned char*	destByte = [theRep bitmapData];
-	int				currDestIdx = 0;
-	for( int x = 0; x < (size.width * size.height); x++ )
+	static CGColorSpaceRef	sColorSpace = nil;
+	if( !sColorSpace )
 	{
-		destByte[currDestIdx++] = 0x00;
-		destByte[currDestIdx++] = 0x88;
-		destByte[currDestIdx++] = 0x88;
-		destByte[currDestIdx++] = 0x00;
+		CGFloat			theWhite[3] = { 0, 0, 0 };
+		CGFloat			theBlack[3] = { 1, 1, 1 };
+		sColorSpace = CGColorSpaceCreateCalibratedGray( theWhite, theBlack, 1.8 );
 	}
 	
-	return theRep;
-}
-
-
--(void) dealloc
-{
-    @synchronized( self )
-    {
-        [pixelData release];
-        pixelData = nil;
-    }
-    
-    [super dealloc];
+	return sColorSpace;
 }
 
 @end
 
+
+#if 0
+#define UKCalibratedBlackColorSpace		NSCalibratedBlackColorSpace
 #else
+#define UKCalibratedBlackColorSpace		NSCustomColorSpace
+//#else
+//#define UKCalibratedBlackColorSpace		@"NSCalibratedBlackColorSpace"
+#endif
+
+
 
 @implementation UKPBMImageRep
 
@@ -201,10 +153,14 @@
 	BOOL		haveMask = YES; //maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
+	[NSGraphicsContext saveGraphicsState];
+	CGContextSetFillColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
+	CGContextSetStrokeColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
-					NSDeviceBlackColorSpace, data );
+					UKCalibratedBlackColorSpace, data );
+	[NSGraphicsContext restoreGraphicsState];
 	
 	return YES;
 }
@@ -226,10 +182,14 @@
 	BOOL		haveMask = YES; //maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
+	[NSGraphicsContext saveGraphicsState];
+	CGContextSetFillColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
+	CGContextSetStrokeColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
-					NSDeviceBlackColorSpace, data );
+					UKCalibratedBlackColorSpace, data );
+	[NSGraphicsContext restoreGraphicsState];
     
 	return YES;
 }
@@ -249,10 +209,14 @@
 	BOOL		haveMask = YES; //maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
+	[NSGraphicsContext saveGraphicsState];
+	CGContextSetFillColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
+	CGContextSetStrokeColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
-					NSDeviceBlackColorSpace, data );
+					UKCalibratedBlackColorSpace, data );
+	[NSGraphicsContext restoreGraphicsState];
     
 	return YES;
 }
@@ -271,7 +235,7 @@
 
 -(NSString*)    colorSpaceName
 {
-	return NSDeviceBlackColorSpace;
+	return UKCalibratedBlackColorSpace;
 }
 
 
@@ -322,4 +286,3 @@
 @end
 
 
-#endif
