@@ -18,5 +18,6 @@
 
 
 -(IBAction)	toggleBackgroundEditMode: (id)sender;
+-(IBAction)	toolsMenuRowDummyAction: (id)sender;
 
 @end
