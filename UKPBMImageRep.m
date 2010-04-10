@@ -17,37 +17,12 @@
 #import "UKPBMImageRep.h"
 
 
-@interface NSColorSpace (UKCalibratedBlackColorSpace)
-
-+(CGColorSpaceRef)	calibratedBlackColorSpace;
-
-@end
-
-
-@implementation NSColorSpace (UKCalibratedBlackColorSpace)
-
-+(CGColorSpaceRef)	calibratedBlackColorSpace
-{
-	static CGColorSpaceRef	sColorSpace = nil;
-	if( !sColorSpace )
-	{
-		CGFloat			theWhite[3] = { 0, 0, 0 };
-		CGFloat			theBlack[3] = { 1, 1, 1 };
-		sColorSpace = CGColorSpaceCreateCalibratedGray( theWhite, theBlack, 1.8 );
-	}
-	
-	return sColorSpace;
-}
-
-@end
-
-
+// NSCalibratedBlackColorSpace is deprecated, however I can find no working
+//	replacement so far. So to compile warnings-as-errors
 #if 0
 #define UKCalibratedBlackColorSpace		NSCalibratedBlackColorSpace
 #else
-#define UKCalibratedBlackColorSpace		NSCustomColorSpace
-//#else
-//#define UKCalibratedBlackColorSpace		@"NSCalibratedBlackColorSpace"
+#define UKCalibratedBlackColorSpace		@"NSCalibratedBlackColorSpace"
 #endif
 
 
@@ -146,21 +121,17 @@
 	const unsigned char*		data[5] = { 0 };
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
-		data[1] = [pixelData bytes] +maskOffset;
+		data[1] = (char*)[pixelData bytes] +maskOffset;
 	else
 		data[1] = [pixelData bytes];
 	
 	BOOL		haveMask = YES; //maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
-	[NSGraphicsContext saveGraphicsState];
-	CGContextSetFillColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
-	CGContextSetStrokeColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
 					UKCalibratedBlackColorSpace, data );
-	[NSGraphicsContext restoreGraphicsState];
 	
 	return YES;
 }
@@ -176,20 +147,16 @@
 	const unsigned char*		data[5] = { 0 };
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
-		data[1] = [pixelData bytes] +maskOffset;
+		data[1] = (char*)[pixelData bytes] +maskOffset;
 	else
 		data[1] = [pixelData bytes];
 	BOOL		haveMask = YES; //maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
-	[NSGraphicsContext saveGraphicsState];
-	CGContextSetFillColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
-	CGContextSetStrokeColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
 					UKCalibratedBlackColorSpace, data );
-	[NSGraphicsContext restoreGraphicsState];
     
 	return YES;
 }
@@ -203,20 +170,16 @@
 	const unsigned char*		data[5] = { 0 };
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
-		data[1] = [pixelData bytes] +maskOffset;
+		data[1] = (char*)[pixelData bytes] +maskOffset;
 	else
 		data[1] = [pixelData bytes];
 	BOOL		haveMask = YES; //maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
-	[NSGraphicsContext saveGraphicsState];
-	CGContextSetFillColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
-	CGContextSetStrokeColorSpace( [[NSGraphicsContext currentContext] graphicsPort], [NSColorSpace calibratedBlackColorSpace] );
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
 					UKCalibratedBlackColorSpace, data );
-	[NSGraphicsContext restoreGraphicsState];
     
 	return YES;
 }
