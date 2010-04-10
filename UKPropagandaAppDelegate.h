@@ -11,8 +11,9 @@
 
 @interface UKPropagandaAppDelegate : NSResponder <NSApplicationDelegate>
 {
-	BOOL		mPeeking;
-	BOOL		mBackgroundEditMode;
+	IBOutlet NSMenu*	mToolsMenu;
+	BOOL				mPeeking;
+	BOOL				mBackgroundEditMode;
 }
 
 

@@ -15,6 +15,129 @@
 
 @implementation UKPropagandaAppDelegate
 
+-(void)	applicationDidFinishLaunching:(NSNotification *)notification
+{
+	NSView	*	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect(0, 0, 94, 32)] autorelease];
+	
+	NSButton*	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(-1, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(32 -2, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(64 -3, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+
+	[[mToolsMenu itemAtIndex: 0] setView: oneRow];
+
+	
+	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect(0, 0, 94, 31)] autorelease];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(-1, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(32 -2, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(64 -3, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+
+	[[mToolsMenu itemAtIndex: 1] setView: oneRow];
+
+
+	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect(0, 0, 94, 31)] autorelease];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(-1, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(32 -2, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(64 -3, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	[[mToolsMenu itemAtIndex: 2] setView: oneRow];
+
+
+	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect(0, 0, 94, 31)] autorelease];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(-1, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(32 -2, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(64 -3, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	[[mToolsMenu itemAtIndex: 3] setView: oneRow];
+
+
+	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect(0, 0, 94, 31)] autorelease];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(-1, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(32 -2, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(64 -3, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	[[mToolsMenu itemAtIndex: 4] setView: oneRow];
+
+
+	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect(0, 0, 94, 31)] autorelease];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(-1, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(32 -2, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect(64 -3, 0, 32, 32)] autorelease];
+	[oneButton setImage: [NSImage imageNamed: @"CURS_128"]];
+	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
+	[oneRow addSubview: oneButton];
+	
+	[[mToolsMenu itemAtIndex: 5] setView: oneRow];
+}
+
 -(BOOL)	applicationShouldHandleReopen: (NSApplication *)sender hasVisibleWindows: (BOOL)hasVisibleWindows
 {
 	return !hasVisibleWindows;

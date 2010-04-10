@@ -10,6 +10,7 @@
 		1DDD582C0DA1D0D100B32029 /* UKPropagandaDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58280DA1D0D100B32029 /* UKPropagandaDocument.xib */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		550B30781152D9DE0049C593 /* AGIconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = 550B30771152D9DE0049C593 /* AGIconFamily.m */; };
+		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
 		5525575E114BBF2B00279B03 /* UKPropagandaDrawAddColorBezel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525575D114BBF2B00279B03 /* UKPropagandaDrawAddColorBezel.m */; };
 		552558FE114BDE7C00279B03 /* UKPropagandaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* UKPropagandaAppDelegate.m */; };
 		55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */; };
@@ -347,6 +348,8 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		550B30761152D9DE0049C593 /* AGIconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGIconFamily.h; path = ../AGIconFamily/AGIconFamily.h; sourceTree = "<group>"; };
 		550B30771152D9DE0049C593 /* AGIconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGIconFamily.m; path = ../AGIconFamily/AGIconFamily.m; sourceTree = "<group>"; };
+		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
+		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
 		5525575C114BBF2B00279B03 /* UKPropagandaDrawAddColorBezel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaDrawAddColorBezel.h; sourceTree = "<group>"; };
 		5525575D114BBF2B00279B03 /* UKPropagandaDrawAddColorBezel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaDrawAddColorBezel.m; sourceTree = "<group>"; };
 		552558FC114BDE7C00279B03 /* UKPropagandaAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaAppDelegate.h; sourceTree = "<group>"; };
@@ -910,6 +913,8 @@
 				550B30771152D9DE0049C593 /* AGIconFamily.m */,
 				55E8535C1166341100745C86 /* NSString+FetchNextLine.h */,
 				55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */,
+				551FBEEC1170A11D00F32FBF /* UKGraphics.h */,
+				551FBEEA1170A11000F32FBF /* UKGraphics.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1180,9 +1185,9 @@
 			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Propaganda" */;
 			buildPhases = (
 				55C68C7D116412A700D8B44C /* git_version */,
-				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
+				8D15AC2B0486D014006FF6A4 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1516,7 +1521,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = ../UliKit/make_git_version_header.sh;
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1564,6 +1568,7 @@
 				55B9220A11674E880073EC6C /* UKPropagandaTools.m in Sources */,
 				55B9224311675A260073EC6C /* UKPropagandaButtonInfoWindowController.m in Sources */,
 				55B9244A1169DB150073EC6C /* UKPropagandaIconListDataSource.m in Sources */,
+				551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

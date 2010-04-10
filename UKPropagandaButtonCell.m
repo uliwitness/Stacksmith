@@ -9,6 +9,7 @@
 #import "UKPropagandaButtonCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Carbon/Carbon.h>
+#import "UKGraphics.h"
 
 
 NSImage*	UKPropagandaInvertedImage( NSImage* img )
@@ -101,7 +102,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 	}
 	
 	[NSGraphicsContext saveGraphicsState];
-	[buttonShape setClip];
+	//[buttonShape setClip];
 	NSRect				imgBox = origCellFrame;
 	imgBox.origin.x = imgBox.origin.x +truncf((origCellFrame.size.width -[self image].size.width) /2);
 	imgBox.origin.y = imgBox.origin.y +truncf((origCellFrame.size.height -[self image].size.height) /2);
@@ -152,7 +153,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 		NSImage*		img = [self isHighlighted] ? UKPropagandaInvertedImage([self image]) : [self image];
 		CGImageRef		theCGImage = [img CGImageForProposedRect: nil
 											context: [NSGraphicsContext currentContext] hints: nil];
-		HIViewDrawCGImage( theContext, (HIRect*)&imgBox, theCGImage );
+		UKCGContextDrawImageFlipped( theContext, imgBox, theCGImage );
 	}
 	else if( [self image] != nil && [self imagePosition] == NSImageOnly )
 	{
@@ -160,7 +161,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 		NSImage*		img = [self isHighlighted] ? UKPropagandaInvertedImage([self image]) : [self image];
 		CGImageRef		theCGImage = [img CGImageForProposedRect: nil
 											context: [NSGraphicsContext currentContext] hints: nil];
-		HIViewDrawCGImage( theContext, (HIRect*)&imgBox, theCGImage );
+		UKCGContextDrawImageFlipped( theContext, imgBox, theCGImage );
 	}
 	
 	if( [self imagePosition] != NSImageOnly )
