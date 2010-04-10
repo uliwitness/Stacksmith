@@ -6,7 +6,7 @@
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 
 @protocol UKPropagandaSelectableView <NSObject>
