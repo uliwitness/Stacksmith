@@ -17,15 +17,6 @@
 #import "UKPBMImageRep.h"
 
 
-// NSCalibratedBlackColorSpace is deprecated, however I can find no working
-//	replacement so far. So to compile warnings-as-errors
-#if 0
-#define UKCalibratedBlackColorSpace		NSCalibratedBlackColorSpace
-#else
-#define UKCalibratedBlackColorSpace		@"NSCalibratedBlackColorSpace"
-#endif
-
-
 
 @implementation UKPBMImageRep
 
@@ -97,6 +88,10 @@
 	}
 	
 	pixelData = [[NSData alloc] initWithBytes: bytes +imgOffset length: [theData length] -imgOffset];
+	NSUInteger	theLen = [pixelData length];
+	char*		theBytes = [pixelData bytes];
+	for( NSUInteger x = 0; x < maskOffset; x++ )
+		theBytes[x] ^= 0xff;	// Invert pixels so we can use NSCalibratedWhiteColorSpace instead of the deprecated NSCalibratedBlackColorSpace.
 	
 	return self;
 }
@@ -131,7 +126,7 @@
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
-					UKCalibratedBlackColorSpace, data );
+					NSCalibratedWhiteColorSpace, data );
 	
 	return YES;
 }
@@ -140,8 +135,6 @@
 -(BOOL) drawAtPoint: (NSPoint)point
 {
 	NSRect  box = { { 0, 0 }, { 0, 0 } };
-//	box.origin.x = truncf(point.x) +0.5;
-//	box.origin.y = truncf(point.y) +0.5;
 	box.size = size;
 	
 	const unsigned char*		data[5] = { 0 };
@@ -156,7 +149,7 @@
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
-					UKCalibratedBlackColorSpace, data );
+					NSCalibratedWhiteColorSpace, data );
     
 	return YES;
 }
@@ -164,8 +157,6 @@
 -(BOOL) drawInRect: (NSRect)rect
 {
 	NSRect		box = rect;
-//	box.origin.x = truncf(rect.origin.x) +0.5;
-//	box.origin.y = truncf(rect.origin.y) +0.5;
 	
 	const unsigned char*		data[5] = { 0 };
 	data[0] = [pixelData bytes];
@@ -179,26 +170,26 @@
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
 					1 /*bps*/, samplesPerPixel /*spp*/, 1 /*bpp*/, (7 + actualSize.width) / 8 /*Bpr*/,
 					YES /*planar*/, haveMask /*alpha*/,
-					UKCalibratedBlackColorSpace, data );
+					NSCalibratedWhiteColorSpace, data );
     
 	return YES;
 }
 
 -(BOOL) hasAlpha
 {
-	return NO;
+	return YES;
 }
 
 
 -(BOOL) isOpaque
 {
-	return YES;
+	return NO;
 }
 
 
 -(NSString*)    colorSpaceName
 {
-	return UKCalibratedBlackColorSpace;
+	return NSCalibratedWhiteColorSpace;
 }
 
 
