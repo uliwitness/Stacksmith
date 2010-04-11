@@ -36,11 +36,9 @@
 {
 	mCardViewController = nil;	// It's an outlet now.
 	
-	[mStack release];
-	mStack = nil;
+	DESTROY(mStack);
 	
-	[mErrorsAndWarnings release];
-	mErrorsAndWarnings = nil;
+	DESTROY(mErrorsAndWarnings);
 	
 	[super dealloc];
 }
@@ -113,9 +111,7 @@
 	BOOL		isDir = NO;
 	if( [[NSFileManager defaultManager] fileExistsAtPath: [absoluteURL path] isDirectory: &isDir] && !isDir )
 	{
-		[mErrorsAndWarnings release];
-		mErrorsAndWarnings = nil;
-		mErrorsAndWarnings = [[NSMutableArray alloc] init];
+		ASSIGN(mErrorsAndWarnings,[NSMutableArray array]);
 		
 		[[UKProgressPanelController sharedProgressController] setIndeterminate: YES];
 		[[UKProgressPanelController sharedProgressController] setStringValue: @"Converting HyperCard Stack..."];
@@ -156,7 +152,7 @@
 	NSXMLElement	*	stackfileElement = [xmlDoc rootElement];
 	NSXMLElement	*	stackElement = [[stackfileElement elementsForName: @"stack"] objectAtIndex: 0];
 	
-	[mStack release];
+	DESTROY(mStack);
 	mStack = [[UKPropagandaStack alloc] initWithXMLElement: stackElement
 								path: folderPath];
 	

@@ -648,6 +648,8 @@
 		552FF143113F23F3005742C8 /* snd_145.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = snd_145.aiff; path = Resources/snd_145.aiff; sourceTree = "<group>"; };
 		552FF144113F23F3005742C8 /* snd_146.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = snd_146.aiff; path = Resources/snd_146.aiff; sourceTree = "<group>"; };
 		552FF244113F247A005742C8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		55382EE21171FFFA0006B381 /* UKHelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKHelperMacros.h; path = ../UliKit/UKHelperMacros.h; sourceTree = SOURCE_ROOT; };
+		55382EEA117201E40006B381 /* UKTypecastMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKTypecastMacros.h; path = ../UliKit/UKTypecastMacros.h; sourceTree = SOURCE_ROOT; };
 		5542C9451139D7A000555C64 /* UKPropagandaStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaStack.h; sourceTree = "<group>"; };
 		5542C9461139D7A000555C64 /* UKPropagandaStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaStack.m; sourceTree = "<group>"; };
 		5542C94B1139DD5C00555C64 /* UKPropagandaXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaXMLUtils.h; sourceTree = "<group>"; };
@@ -951,6 +953,8 @@
 				55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */,
 				551FBEEC1170A11D00F32FBF /* UKGraphics.h */,
 				551FBEEA1170A11000F32FBF /* UKGraphics.m */,
+				55382EE21171FFFA0006B381 /* UKHelperMacros.h */,
+				55382EEA117201E40006B381 /* UKTypecastMacros.h */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";

@@ -103,11 +103,7 @@ NSInteger	UKRandomInteger()
 
 -(void)	setImageOrCursor: (id)theImage
 {
-	if( mImage != theImage )
-	{
-		[mImage release];
-		mImage = [theImage retain];
-	}
+	ASSIGN(mImage,theImage);
 }
 
 
@@ -157,10 +153,8 @@ NSInteger	UKRandomInteger()
 
 -(void)	dealloc
 {
-	[mFontName release];
-	mFontName = nil;
-	[mFontStyles release];
-	mFontStyles = nil;
+	DESTROY(mFontName);
+	DESTROY(mFontStyles);
 	
 	[super dealloc];
 }
@@ -179,11 +173,7 @@ NSInteger	UKRandomInteger()
 
 -(void)			setFontName: (NSString*)fName
 {
-	if( mFontName != fName )
-	{
-		[mFontName release];
-		mFontName = [fName retain];
-	}
+	ASSIGN(mFontName,fName);
 }
 
 
@@ -291,30 +281,18 @@ NSInteger	UKRandomInteger()
 
 -(void)	dealloc
 {
-	[mBackgrounds release];
-	mBackgrounds = nil;
-	[mCards release];
-	mCards = nil;
-	[mCreatedByVersion release];
-	mCreatedByVersion = nil;
-	[mLastCompactedVersion release];
-	mLastCompactedVersion = nil;
-	[mFirstEditedVersion release];
-	mFirstEditedVersion = nil;
-	[mLastEditedVersion release];
-	mLastEditedVersion = nil;
-	[mPatterns release];
-	mPatterns = nil;
-	[mScript release];
-	mScript = nil;
-	[mPath release];
-	mPath = nil;
-	[mFontIDTable release];
-	mFontIDTable = nil;
-	[mTextStyles release];
-	mTextStyles = nil;
-	[mPictures release];
-	mPictures = nil;
+	DESTROY(mBackgrounds);
+	DESTROY(mCards);
+	DESTROY(mCreatedByVersion);
+	DESTROY(mLastCompactedVersion);
+	DESTROY(mFirstEditedVersion);
+	DESTROY(mLastEditedVersion);
+	DESTROY(mPatterns);
+	DESTROY(mScript);
+	DESTROY(mPath);
+	DESTROY(mFontIDTable);
+	DESTROY(mTextStyles);
+	DESTROY(mPictures);
 	
 	[super dealloc];
 }
@@ -376,11 +354,7 @@ NSInteger	UKRandomInteger()
 
 -(void)	setCards: (NSArray*)theCards
 {
-	if( mCards != theCards )
-	{
-		[mCards release];
-		mCards = [theCards mutableCopy];
-	}
+	ASSIGNMUTABLECOPY(mCards,theCards);
 }
 
 
@@ -435,11 +409,7 @@ NSInteger	UKRandomInteger()
 
 -(void)	setBackgrounds: (NSArray*)theBkgds
 {
-	if( mBackgrounds != theBkgds )
-	{
-		[mBackgrounds release];
-		mBackgrounds = [theBkgds mutableCopy];
-	}
+	ASSIGNMUTABLECOPY(mBackgrounds,theBkgds);
 }
 
 
@@ -742,11 +712,7 @@ NSInteger	UKRandomInteger()
 
 -(void)	setScript: (NSString*)theScript
 {
-	if( mScript != theScript )
-	{
-		[mScript release];
-		mScript = [theScript retain];
-	}
+	ASSIGN(mScript,theScript);
 }
 
 

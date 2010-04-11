@@ -88,18 +88,12 @@
 
 -(void)	dealloc
 {
-	[mButtonFamilies release];
-	mButtonFamilies = nil;
-	[mName release];
-	mName = nil;
-	[mScript release];
-	mScript = nil;
-	[mPicture release];
-	mPicture = nil;
-	[mParts release];
-	mParts = nil;
-	[mAddColorParts release];
-	mAddColorParts = nil;
+	DESTROY(mButtonFamilies);
+	DESTROY(mName);
+	DESTROY(mScript);
+	DESTROY(mPicture);
+	DESTROY(mParts);
+	DESTROY(mAddColorParts);
 	
 	mStack = nil;
 	
@@ -122,11 +116,7 @@
 		return mPicture;
 	
 	NSImage*	img = [mStack imageNamed: (NSString*)mPicture];
-	if( img )
-	{
-		[mPicture release];
-		mPicture = [img retain];
-	}
+	ASSIGN(mPicture,img);
 	
 	return img;
 }
@@ -268,11 +258,7 @@
 
 -(void)	setScript: (NSString*)theScript
 {
-	if( mScript != theScript )
-	{
-		[mScript release];
-		mScript = [theScript retain];
-	}
+	ASSIGN(mScript,theScript);
 }
 
 
