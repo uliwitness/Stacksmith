@@ -38,6 +38,9 @@
 
 -(UKPropagandaWindowBodyView*)	enclosingCardView;
 
+-(void)	loadPart: (UKPropagandaPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode;
+-(void)	unloadPart;
+
 @end
 
 

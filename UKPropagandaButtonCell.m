@@ -42,6 +42,8 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 {
 	[[NSColor blackColor] set];
 	
+	NSLog( @"state = %s", ([self state] == NSOnState) ? "on" : "off" );
+	BOOL			isHighlighted = [self isHighlighted] /*|| [self state] == NSOnState*/;
 	NSRect			cellFrame = origCellFrame;
 	NSBezierPath*	buttonShape = nil;
 	NSBezierPath*	buttonStrokeShape = nil;
@@ -85,9 +87,9 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 	}
 
 	if( [self backgroundColor]
-		|| ([self isHighlighted] && [self image] == nil) )
+		|| (isHighlighted && [self image] == nil) )
 	{
-		if( [self isHighlighted] )
+		if( isHighlighted )
 			[[NSColor blackColor] set];
 		else
 			[[self backgroundColor] set];
@@ -117,7 +119,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 	txBox.origin.y = txBox.origin.y +yHalf;
 	txBox.size = textExtents;
 		
-	BOOL		iconHighlight = [self isHighlighted] && [self image];
+	BOOL		iconHighlight = isHighlighted && [self image];
 	if( iconHighlight )
 	{
 		NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
@@ -129,7 +131,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 						range: NSMakeRange(0,[muAttrTitle length])];
 		attrTitle = muAttrTitle;
 	}
-	else if( [self isHighlighted] )
+	else if( isHighlighted )
 	{
 		NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
 		
@@ -144,13 +146,13 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 		txBox.origin.y += truncf([self image].size.height /2);
 		imgBox.origin.y -= truncf(textExtents.height /2);
 		
-		if( [self isHighlighted] )
+		if( isHighlighted )
 			[[NSColor blackColor] set];
 		else
 			[[NSColor whiteColor] set];
 		[NSBezierPath fillRect: txBox];
 		
-		NSImage*		img = [self isHighlighted] ? UKPropagandaInvertedImage([self image]) : [self image];
+		NSImage*		img = isHighlighted ? UKPropagandaInvertedImage([self image]) : [self image];
 		CGImageRef		theCGImage = [img CGImageForProposedRect: nil
 											context: [NSGraphicsContext currentContext] hints: nil];
 		UKCGContextDrawImageFlipped( theContext, imgBox, theCGImage );
@@ -158,7 +160,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 	else if( [self image] != nil && [self imagePosition] == NSImageOnly )
 	{
 		CGContextRef	theContext = [[NSGraphicsContext currentContext] graphicsPort];
-		NSImage*		img = [self isHighlighted] ? UKPropagandaInvertedImage([self image]) : [self image];
+		NSImage*		img = isHighlighted ? UKPropagandaInvertedImage([self image]) : [self image];
 		CGImageRef		theCGImage = [img CGImageForProposedRect: nil
 											context: [NSGraphicsContext currentContext] hints: nil];
 		UKCGContextDrawImageFlipped( theContext, imgBox, theCGImage );

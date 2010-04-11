@@ -28,6 +28,15 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 @implementation UKPropagandaPart
 
+@synthesize dontWrap = mDontWrap;
+@synthesize autoTab = mAutoTab;
+@synthesize dontSearch = mDontSearch;
+@synthesize lockText = mLockText;
+@synthesize wideMargins = mWideMargins;
+@synthesize fixedLineHeight = mFixedLineHeight;
+@synthesize showLines = mShowLines;
+@synthesize sharedText = mSharedText;
+
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (UKPropagandaStack*)inStack
 {
 	if(( self = [super init] ))

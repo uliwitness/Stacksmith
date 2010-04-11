@@ -56,6 +56,16 @@
 	UKPropagandaStack*		mStack;					// Stack this part belongs to.
 }
 
+@property (assign) BOOL		dontWrap;
+@property (assign) BOOL		autoTab;
+@property (assign) BOOL		dontSearch;
+@property (assign) BOOL		lockText;
+@property (assign) BOOL		wideMargins;
+@property (assign) BOOL		fixedLineHeight;
+@property (assign) BOOL		showLines;
+@property (assign) BOOL		sharedText;
+
+
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (UKPropagandaStack*)inStack;
 
 -(void)			setRectangle: (NSRect)theBox;

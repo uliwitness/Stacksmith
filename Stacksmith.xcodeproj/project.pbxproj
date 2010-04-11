@@ -282,6 +282,8 @@
 		552FF240113F23F3005742C8 /* snd_145.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552FF143113F23F3005742C8 /* snd_145.aiff */; };
 		552FF241113F23F3005742C8 /* snd_146.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552FF144113F23F3005742C8 /* snd_146.aiff */; };
 		552FF245113F247A005742C8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FF244113F247A005742C8 /* QTKit.framework */; };
+		55382F6B117238350006B381 /* UKPropagandaFieldInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55382F69117238350006B381 /* UKPropagandaFieldInfoWindowController.xib */; };
+		55382F6D117238B10006B381 /* UKPropagandaFieldInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55382F6C117238B10006B381 /* UKPropagandaFieldInfoWindowController.m */; };
 		5542C9471139D7A000555C64 /* UKPropagandaStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9461139D7A000555C64 /* UKPropagandaStack.m */; };
 		5542C94D1139DD5C00555C64 /* UKPropagandaXMLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C94C1139DD5C00555C64 /* UKPropagandaXMLUtils.m */; };
 		5542C9B71139F43C00555C64 /* UKPropagandaCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9B61139F43C00555C64 /* UKPropagandaCard.m */; };
@@ -650,6 +652,9 @@
 		552FF244113F247A005742C8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		55382EE21171FFFA0006B381 /* UKHelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKHelperMacros.h; path = ../UliKit/UKHelperMacros.h; sourceTree = SOURCE_ROOT; };
 		55382EEA117201E40006B381 /* UKTypecastMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKTypecastMacros.h; path = ../UliKit/UKTypecastMacros.h; sourceTree = SOURCE_ROOT; };
+		55382F6A117238350006B381 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/UKPropagandaFieldInfoWindowController.xib; sourceTree = "<group>"; };
+		55382F6C117238B10006B381 /* UKPropagandaFieldInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaFieldInfoWindowController.m; sourceTree = "<group>"; };
+		55382F72117238D90006B381 /* UKPropagandaFieldInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaFieldInfoWindowController.h; sourceTree = "<group>"; };
 		5542C9451139D7A000555C64 /* UKPropagandaStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaStack.h; sourceTree = "<group>"; };
 		5542C9461139D7A000555C64 /* UKPropagandaStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaStack.m; sourceTree = "<group>"; };
 		5542C94B1139DD5C00555C64 /* UKPropagandaXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaXMLUtils.h; sourceTree = "<group>"; };
@@ -826,6 +831,7 @@
 				1DDD58280DA1D0D100B32029 /* UKPropagandaDocument.xib */,
 				55255ABF114C19CF00279B03 /* UKPropagandaScriptEditorWindowController.xib */,
 				55B9223C1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib */,
+				55382F69117238350006B381 /* UKPropagandaFieldInfoWindowController.xib */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
@@ -878,6 +884,8 @@
 				55255ABB114C19AB00279B03 /* UKPropagandaScriptEditorWindowController.m */,
 				55B9224111675A260073EC6C /* UKPropagandaButtonInfoWindowController.h */,
 				55B9224211675A260073EC6C /* UKPropagandaButtonInfoWindowController.m */,
+				55382F72117238D90006B381 /* UKPropagandaFieldInfoWindowController.h */,
+				55382F6C117238B10006B381 /* UKPropagandaFieldInfoWindowController.m */,
 				55B924481169DB150073EC6C /* UKPropagandaIconListDataSource.h */,
 				55B924491169DB150073EC6C /* UKPropagandaIconListDataSource.m */,
 			);
@@ -889,14 +897,14 @@
 			children = (
 				558DC881115507EA002C9195 /* UKPropagandaCardViewController.h */,
 				558DC882115507EA002C9195 /* UKPropagandaCardViewController.m */,
+				558DCFE31156209A002C9195 /* UKPropagandaWindowBodyView.h */,
+				558DCFE41156209A002C9195 /* UKPropagandaWindowBodyView.m */,
+				558DCD7C11557B6D002C9195 /* UKPropagandaSelectionView.h */,
+				558DCD7D11557B6D002C9195 /* UKPropagandaSelectionView.m */,
 				558DCB5311553EAC002C9195 /* UKPropagandaButtonCell.h */,
 				558DCB5411553EAC002C9195 /* UKPropagandaButtonCell.m */,
 				55B9220811674E880073EC6C /* UKPropagandaTools.h */,
 				55B9220911674E880073EC6C /* UKPropagandaTools.m */,
-				558DCD7C11557B6D002C9195 /* UKPropagandaSelectionView.h */,
-				558DCD7D11557B6D002C9195 /* UKPropagandaSelectionView.m */,
-				558DCFE31156209A002C9195 /* UKPropagandaWindowBodyView.h */,
-				558DCFE41156209A002C9195 /* UKPropagandaWindowBodyView.m */,
 				558DCFBD1155B9B1002C9195 /* UKPropagandaPictureView.h */,
 				558DCFBE1155B9B1002C9195 /* UKPropagandaPictureView.m */,
 				55D6B257115C16E700D17619 /* UKPropagandaTextView.h */,
@@ -1576,6 +1584,7 @@
 				551FC0121170CF3500F32FBF /* SprayTool.png in Resources */,
 				551FC0131170CF3500F32FBF /* TextTool.png in Resources */,
 				551FC01A1170CF8300F32FBF /* LassoTool.png in Resources */,
+				55382F6B117238350006B381 /* UKPropagandaFieldInfoWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1645,6 +1654,7 @@
 				55B9224311675A260073EC6C /* UKPropagandaButtonInfoWindowController.m in Sources */,
 				55B9244A1169DB150073EC6C /* UKPropagandaIconListDataSource.m in Sources */,
 				551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */,
+				55382F6D117238B10006B381 /* UKPropagandaFieldInfoWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1699,6 +1709,14 @@
 			name = UKPropagandaScriptEditorWindowController.xib;
 			sourceTree = "<group>";
 		};
+		55382F69117238350006B381 /* UKPropagandaFieldInfoWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55382F6A117238350006B381 /* English */,
+			);
+			name = UKPropagandaFieldInfoWindowController.xib;
+			sourceTree = "<group>";
+		};
 		55B9223C1167532A0073EC6C /* UKPropagandaButtonInfoWindowController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1724,7 +1742,7 @@
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_GLOBAL_CONSTRUCTORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1758,14 +1776,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Stacksmith_Prefix.pch;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_GLOBAL_CONSTRUCTORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
