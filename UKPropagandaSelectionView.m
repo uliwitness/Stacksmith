@@ -359,7 +359,7 @@
 	[self setControl: bt];
 	
 	if( label )
-		[bt accessibilitySetOverrideValue: label forAttribute: NSAccessibilityTitleUIElementAttribute];
+		[[bt cell] accessibilitySetOverrideValue: [label cell] forAttribute: NSAccessibilityTitleUIElementAttribute];
 	
 	[bt release];
 }
