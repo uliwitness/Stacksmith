@@ -15,9 +15,10 @@
 
 @interface UKPropagandaIconListDataSource : NSObject
 {
-	UKPropagandaStack*				mStack;			// This is who we get the icons from.
-	NSMutableArray*					mIcons;			// Cached lists of icon names/IDs.
-	IBOutlet IKImageBrowserView*	mIconListView;	// View in which we show the icons.
+	UKPropagandaStack*				mStack;				// This is who we get the icons from.
+	NSMutableArray*					mIcons;				// Cached lists of icon names/IDs.
+	IBOutlet IKImageBrowserView*	mIconListView;		// View in which we show the icons.
+	IBOutlet NSTextField*			mImagePathField;	// Field where we show where the icon comes from.
 }
 
 @property (assign) UKPropagandaStack*		stack;

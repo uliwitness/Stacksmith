@@ -47,7 +47,8 @@
 -(void)			addFont: (NSString*)fontName withID: (NSInteger)fontID;
 -(void)			addStyleFormatWithID: (NSInteger)styleID forFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
 
--(NSInteger)				uniqueIDForCardOrBackground;
+-(NSInteger)	uniqueIDForCardOrBackground;
+-(NSInteger)	uniqueIDForMedia;
 
 -(NSArray*)					cards;
 -(void)						setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.
@@ -61,12 +62,14 @@
 						size: (NSInteger*)outFontSize styles: (NSArray**)outFontStyles;
 
 -(NSImage*)		imageNamed: (NSString*)theName;
+-(NSString*)	pathForImageNamed: (NSString*)theName;
 -(NSImage*)		imageForPatternAtIndex: (NSInteger)idx;
 
 -(NSSize)		cardSize;
 
 -(void)	addMediaFile: (NSString*)fileName withType: (NSString*)type
-			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos;
+			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos
+			imageOrCursor: (id)imgOrCursor;
 -(NSImage*)		pictureOfType: (NSString*)typ name: (NSString*)theName;
 -(NSImage*)		pictureOfType: (NSString*)typ id: (NSInteger)theID;
 -(NSInteger)	numberOfPictures;

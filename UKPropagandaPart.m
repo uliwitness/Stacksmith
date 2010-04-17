@@ -434,6 +434,8 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		return [mStack pictureOfType: @"picture" name: mName];
 	else if( mIconID == -1 )
 		return [mStack pictureOfType: @"picture" name: mName];
+	else if( mIconID == 0 )
+		return nil;
 	else
 		return [mStack pictureOfType: @"icon" id: mIconID];
 }

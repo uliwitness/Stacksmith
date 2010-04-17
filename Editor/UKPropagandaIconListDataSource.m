@@ -133,6 +133,7 @@
 			[mIcons addObject: sibi];
 		}
 		
+		[mIconListView setAllowsEmptySelection: NO];
 		[mIconListView reloadData];
 	}
 }
@@ -177,5 +178,59 @@
 	
 	return [mIcons objectAtIndex: idx];
 }
+
+
+-(void)	imageBrowserSelectionDidChange: (IKImageBrowserView *)aBrowser
+{
+	NSInteger							selectedIndex = [[mIconListView selectionIndexes] firstIndex];
+	if( selectedIndex != NSNotFound )
+	{
+		UKPropagandaSimpleImageBrowserItem*	theItem = [mIcons objectAtIndex: selectedIndex];
+		NSString*							thePath = [[theItem filename] stringByDeletingLastPathComponent];
+		NSString*							resPath = [[NSBundle mainBundle] resourcePath];
+		if( [thePath hasPrefix:	resPath] )
+			thePath = [[NSBundle mainBundle] bundlePath];
+		NSString*							theName = [[NSFileManager defaultManager] displayNameAtPath: thePath];
+		NSString*							statusMsg = @"No Icon";
+		if( theName )
+			statusMsg = [NSString stringWithFormat: @"From %@", theName];
+		[mImagePathField setStringValue: statusMsg];
+	}
+}
+
+
+-(IBAction)	paste: (id)sender
+{
+	NSInteger		iconToSelect = 0;
+	NSPasteboard*	thePastie = [NSPasteboard generalPasteboard];
+	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options:[NSDictionary dictionary]];
+	for( NSImage* theImg in images )
+	{
+		NSString*		pictureName = @"From Clipboard";
+		NSInteger		pictureID = [mStack uniqueIDForMedia];
+		[mStack addMediaFile: nil withType: @"icon" name: pictureName
+			andID: pictureID
+			hotSpot: NSZeroPoint 
+			imageOrCursor: theImg];
+		
+		UKPropagandaSimpleImageBrowserItem	*sibi = [[[UKPropagandaSimpleImageBrowserItem alloc] init] autorelease];
+		sibi.name = pictureName;
+		sibi.filename = nil;
+		sibi.pictureID = pictureID;
+		sibi.image = theImg;
+		sibi.owner = self;
+		[mIcons addObject: sibi];
+		iconToSelect = pictureID;
+	}
+	[mIconListView reloadData];
+	if( iconToSelect != 0 )
+		[self setSelectedIconID: iconToSelect];
+}
+
+
+//-(void)	delete:(id)sender
+//{
+//	
+//}
 
 @end

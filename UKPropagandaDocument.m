@@ -196,7 +196,8 @@
 		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
 		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
 		NSPoint			pos = UKPropagandaPointFromSubElementInElement( @"hotspot", thePic );
-		[mStack addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos];
+		[mStack addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
+			imageOrCursor: nil];
 	}
 	
 	// Load media table so others can access it: (ICONs, PICTs, CURSs and SNDs)
@@ -208,7 +209,8 @@
 		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
 		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
 		NSPoint			pos = UKPropagandaPointFromSubElementInElement( @"hotspot", thePic );
-		[mStack addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos];
+		[mStack addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
+			imageOrCursor: nil];
 	}
 		
 	//NSLog( @"%@", mStack );

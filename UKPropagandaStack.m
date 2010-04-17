@@ -407,6 +407,30 @@ NSInteger	UKRandomInteger()
 }
 
 
+-(NSInteger)	uniqueIDForMedia
+{
+	NSInteger	mediaID = UKRandomInteger();
+	BOOL		notUnique = YES;
+	
+	while( notUnique )
+	{
+		notUnique = NO;
+		
+		for( UKPropPictureEntry* currPict in mPictures )
+		{
+			if( [currPict pictureID] == mediaID )
+			{
+				notUnique = YES;
+				mediaID = UKRandomInteger();
+				break;
+			}
+		}
+	}
+	
+	return mediaID;
+}
+
+
 -(void)	setBackgrounds: (NSArray*)theBkgds
 {
 	ASSIGNMUTABLECOPY(mBackgrounds,theBkgds);
@@ -422,6 +446,18 @@ NSInteger	UKRandomInteger()
 	}
 	
 	return nil;
+}
+
+
+-(NSString*)	pathForImageNamed: (NSString*)theName
+{
+	NSString*	thePath = [mPath stringByAppendingPathComponent: theName];
+	if( ![[NSFileManager defaultManager] fileExistsAtPath: thePath] )
+		thePath = [[NSBundle mainBundle] pathForImageResource: theName];
+	if( [[NSFileManager defaultManager] fileExistsAtPath: thePath] )
+		return thePath;
+	else
+		return nil;
 }
 
 
@@ -459,8 +495,13 @@ NSInteger	UKRandomInteger()
 
 -(void)	addMediaFile: (NSString*)fileName withType: (NSString*)type
 			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos
+			imageOrCursor: (id)imgOrCursor
 {
-	UKPropPictureEntry*	pentry = [[[UKPropPictureEntry alloc] initWithFilename: fileName withType: type name: iconName andID: iconID hotSpot: pos] autorelease];
+	NSString*			filePath = [self pathForImageNamed: fileName];
+	UKPropPictureEntry*	pentry = [[[UKPropPictureEntry alloc] initWithFilename: filePath
+																withType: type name: iconName andID: iconID hotSpot: pos] autorelease];
+	if( imgOrCursor )
+		[pentry setImageOrCursor: imgOrCursor];
 	[mPictures addObject: pentry];
 }
 
@@ -502,7 +543,7 @@ NSInteger	UKRandomInteger()
 			{
 				QTMovie*	img = [[[QTMovie alloc] initWithFile: [mPath stringByAppendingPathComponent: [currPic filename]] error: nil] autorelease];
 				if( !img )
-					img = [[[QTMovie alloc] initWithFile: [[NSBundle mainBundle] pathForResource: [currPic filename] ofType: @""] error: nil] autorelease];
+					img = [[[QTMovie alloc] initWithFile: [currPic filename] error: nil] autorelease];
 				[currPic setImageOrCursor: img];
 				return img;
 			}
@@ -529,7 +570,7 @@ NSInteger	UKRandomInteger()
 		{
 			if( ![currPic imageOrCursor] )
 			{
-				NSImage*	img = [self imageNamed: [currPic filename]];
+				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
 				[currPic setImageOrCursor: img];
 				return img;
 			}
@@ -555,7 +596,7 @@ NSInteger	UKRandomInteger()
 		{
 			if( ![currPic imageOrCursor] )
 			{
-				NSImage*	img = [self imageNamed: [currPic filename]];
+				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
 				[currPic setImageOrCursor: img];
 				return img;
 			}
@@ -593,7 +634,7 @@ NSInteger	UKRandomInteger()
 			{
 				if( ![currPic imageOrCursor] )
 				{
-					NSImage*	img = [self imageNamed: [currPic filename]];
+					NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
 					[currPic setImageOrCursor: img];
 					return img;
 				}
@@ -622,7 +663,7 @@ NSInteger	UKRandomInteger()
 				{
 					if( ![currPic imageOrCursor] )
 					{
-						*outImage = [self imageNamed: [currPic filename]];
+						*outImage = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
 						[currPic setImageOrCursor: *outImage];
 					}
 					else
@@ -653,7 +694,7 @@ NSInteger	UKRandomInteger()
 		{
 			if( ![currPic imageOrCursor] )
 			{
-				NSImage*	img = [self imageNamed: [currPic filename]];
+				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
 				NSCursor*	curs = [[[NSCursor alloc] initWithImage: img hotSpot: [currPic hotSpot]] autorelease];
 				[currPic setImageOrCursor: curs];
 				return curs;
@@ -680,7 +721,7 @@ NSInteger	UKRandomInteger()
 		{
 			if( ![currPic imageOrCursor] )
 			{
-				NSImage*	img = [self imageNamed: [currPic filename]];
+				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
 				NSCursor*	curs = [[[NSCursor alloc] initWithImage: img hotSpot: [currPic hotSpot]] autorelease];
 				[currPic setImageOrCursor: curs];
 				return curs;
