@@ -431,13 +431,13 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 -(NSImage*)	iconImage
 {
 	if( [mType isEqualToString: @"picture"] )
-		return [mStack pictureOfType: @"picture" name: mName];
+		return [[mStack document] pictureOfType: @"picture" name: mName];
 	else if( mIconID == -1 )
-		return [mStack pictureOfType: @"picture" name: mName];
+		return [[mStack document] pictureOfType: @"picture" name: mName];
 	else if( mIconID == 0 )
 		return nil;
 	else
-		return [mStack pictureOfType: @"icon" id: mIconID];
+		return [[mStack document] pictureOfType: @"icon" id: mIconID];
 }
 
 

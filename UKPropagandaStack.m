@@ -17,7 +17,7 @@
 
 @implementation UKPropagandaStack
 
--(id)	init
+-(id)	initWithDocument: (UKPropagandaDocument*)theDocument
 {
 	if(( self = [super init] ))
 	{
@@ -28,6 +28,8 @@
 		mPrivateAccess = NO;
 		mCantAbort = NO;
 		mCantPeek = NO;
+		
+		mDocument = theDocument;
 		
 //		NSString*	appVersion = [NSString stringWithFormat: @"Stacksmith %@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleVersion"]];
 //		mCreatedByVersion = [appVersion retain];

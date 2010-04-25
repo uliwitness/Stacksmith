@@ -19,6 +19,7 @@
 #import "UKPropStyleEntry.h"
 #import "UKPropPictureEntry.h"
 #import "UKRandomInteger.h"
+#import "UKPropagandaCardWindowController.h"
 #import <Quartz/Quartz.h>
 
 
@@ -33,6 +34,7 @@
 		mTextStyles = [[NSMutableDictionary alloc] init];
 		mPictures = [[NSMutableArray alloc] init];
 		mStacks = [[NSMutableArray alloc] init];
+		[mStacks addObject: [[[UKPropagandaStack alloc] initWithDocument: self] autorelease]];
     }
     return self;
 }
@@ -54,7 +56,9 @@
 {
 	for( UKPropagandaStack* currStack in mStacks )
 	{
-		NSLog(@"%@",currStack);
+		UKPropagandaCardWindowController*	cardWC = [[UKPropagandaCardWindowController alloc] initWithStack: currStack];
+		[self addWindowController: cardWC];
+		[cardWC release];
 	}
 }
 
@@ -169,14 +173,14 @@
 	for( NSXMLElement* thePic in pictures )
 	{
 		NSArray		*	fontElems = [thePic elementsForName: @"font"];
-		NSString	*	fontID = ([fontElems count] > 0) ? [[fontElems objectAtIndex: 0] stringValue] : nil;
+		NSString	*	fontName = ([fontElems count] > 0) ? [[fontElems objectAtIndex: 0] stringValue] : nil;
 		NSArray		*	idElems = [thePic elementsForName: @"id"];
 		NSString	*	styleID = ([idElems count] > 0) ? [[idElems objectAtIndex: 0] stringValue] : nil;
 		NSArray		*	textStyles = UKPropagandaStringsFromSubElementInElement( @"textStyle",thePic);
 		NSArray		*	sizeElems = [thePic elementsForName: @"size"];
 		NSString	*	fontSize = ([sizeElems count] > 0) ? [[sizeElems objectAtIndex: 0] stringValue] : nil;
 		[self addStyleFormatWithID: styleID ? [styleID intValue] : x
-								forFontID: fontID ? [fontID intValue] : -1
+								forFontName: fontName
 								     size: fontSize ? [fontSize intValue] : -1
 								   styles: textStyles];
 		x++;
@@ -230,22 +234,6 @@
 		[currStack release];
 	}
 	
-	
-//	// Make sure window fits the cards:
-//	NSSize		cardSize = [mStack cardSize];
-//	if( cardSize.width == 0 || cardSize.height == 0 )
-//		cardSize = NSMakeSize( 512, 342 );
-//	[mView sizeWindowForViewSize: cardSize];
-//	
-//	[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];
-//		
-//	if( [self fileURL] )
-//	{
-//		NSString*	iconPath = [[[self fileURL] path] stringByAppendingPathComponent: @"Icon\r"];
-//		if( ![[NSFileManager defaultManager] fileExistsAtPath: iconPath] )
-//			[self performSelector: @selector(generatePreview) withObject: nil afterDelay: 0.0];
-//	}
-
 	return YES;
 }
 
@@ -319,12 +307,10 @@
 }
 
 
--(void)		addStyleFormatWithID: (NSInteger)styleID forFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray*)fontStyles
+-(void)		addStyleFormatWithID: (NSInteger)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray*)fontStyles
 {
-	UKPropStyleEntry*	pse = [[[UKPropStyleEntry alloc] initWithFontID: fontID fontSize: fontSize
+	UKPropStyleEntry*	pse = [[[UKPropStyleEntry alloc] initWithFontName: fontName fontSize: fontSize
 			styles: fontStyles] autorelease];
-	NSString*	fontName = [self fontNameForID: fontID];	// Look up font by ID.
-	[pse setFontName: fontName];	// Remember it for the future.
 	
 	[mTextStyles setObject: pse forKey: [NSNumber numberWithInteger: styleID]];
 }

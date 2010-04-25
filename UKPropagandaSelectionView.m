@@ -387,7 +387,7 @@
 		if( [[currPart style] isEqualToString: @"oval"] )
 			[bt setBezelStyle: NSCircularBezelStyle];
 		[bt setAlignment: [currPart textAlignment]];	
-		[bt setButtonType: NSToggleButton];
+		[bt setButtonType: NSMomentaryPushInButton];
 	}
 	else if( [[currPart style] isEqualToString: @"opaque"] )
 	{
@@ -395,7 +395,7 @@
 		[bt setBordered: NO];
 		[[bt cell] setBackgroundColor: [NSColor whiteColor]];
 		[bt setAlignment: [currPart textAlignment]];	
-		[bt setButtonType: NSToggleButton];
+		[bt setButtonType: NSMomentaryPushInButton];
 	}
 	else if( [[currPart style] isEqualToString: @"rectangle"]
 			|| [[currPart style] isEqualToString: @"shadow"]
@@ -436,7 +436,7 @@
 			[ourCell setDrawAsDefault: YES];
 		}
 		[bt setAlignment: [currPart textAlignment]];	
-		[bt setButtonType: NSToggleButton];
+		[bt setButtonType: NSMomentaryPushInButton];
 	}
 	else if( [[currPart style] isEqualToString: @"checkbox"] )
 	{
@@ -525,7 +525,7 @@
 	[tv setSelectable: ![currPart textLocked]];
 	
 	NSScrollView*	sv = [[NSScrollView alloc] initWithFrame: partRect];
-	[sv setDocumentCursor: [[[[self enclosingCardView] card] stack] cursorWithID: 128]];
+	[sv setDocumentCursor: [[[[[self enclosingCardView] card] stack] document] cursorWithID: 128]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = partRect;
 	txBox.origin = NSZeroPoint;
@@ -623,7 +623,7 @@
 	
 	// Build surrounding scroll view:
 	NSScrollView*	sv = [[NSScrollView alloc] initWithFrame: partRect];
-	[sv setDocumentCursor: [[[[self enclosingCardView] card] stack] cursorWithID: 128]];
+	[sv setDocumentCursor: [[[[[self enclosingCardView] card] stack] document] cursorWithID: 128]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = [currPart rectangle];
 	txBox.origin = NSZeroPoint;

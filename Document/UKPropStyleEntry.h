@@ -11,16 +11,14 @@
 
 @interface UKPropStyleEntry : NSObject
 {
-	NSInteger	mFontID;
 	NSString*	mFontName;
 	NSInteger	mFontSize;
 	NSArray*	mFontStyles;
 }
 
--(id)	initWithFontID: (NSInteger)theID fontSize: (NSInteger)theSize
+-(id)	initWithFontName: (NSString*)theName fontSize: (NSInteger)theSize
 			styles: (NSArray*)theStyles;
 
--(NSInteger)	fontID;
 -(NSString*)	fontName;
 -(void)			setFontName: (NSString*)fName;
 -(NSInteger)	fontSize;

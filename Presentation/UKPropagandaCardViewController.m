@@ -80,8 +80,11 @@
 	
 	[view setWantsLayer: YES];
 	NSResponder*	nxResp = [[view window] nextResponder];
-	[[view window] setNextResponder: self];
-	[self setNextResponder: nxResp];
+	if( nxResp != self )
+	{
+		[[view window] setNextResponder: self];
+		[self setNextResponder: nxResp];
+	}
 }
 
 

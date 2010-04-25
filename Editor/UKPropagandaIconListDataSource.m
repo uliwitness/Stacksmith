@@ -63,7 +63,7 @@
 -(id) imageRepresentation
 {
 	if( !mImage )
-		mImage = [[[mOwner stack] pictureOfType: @"icon" id: mID] retain];
+		mImage = [[[mOwner document] pictureOfType: @"icon" id: mID] retain];
 	
 	return mImage;
 }
@@ -78,13 +78,13 @@
 
 @implementation UKPropagandaIconListDataSource
 
-@synthesize stack = mStack;
+@synthesize document = mDocument;
 
--(id)	initWithStack: (UKPropagandaStack*)inStack
+-(id)	initWithDocument: (UKPropagandaDocument*)inDocument
 {
 	if(( self = [super init] ))
 	{
-		mStack = inStack;
+		mDocument = inDocument;
 	}
 	
 	return self;
@@ -114,7 +114,7 @@
 		sibi.owner = self;
 		[mIcons addObject: sibi];
 
-		NSInteger	x = 0, count = [mStack numberOfPictures];
+		NSInteger	x = 0, count = [mDocument numberOfPictures];
 		for( x = 0; x < count; x++ )
 		{
 			NSString*	theName = nil;
@@ -122,7 +122,7 @@
 			NSString*	fileName = nil;
 			sibi = [[[UKPropagandaSimpleImageBrowserItem alloc] init] autorelease];
 			
-			[mStack infoForPictureAtIndex: x name: &theName id: &theID
+			[mDocument infoForPictureAtIndex: x name: &theName id: &theID
 					image: nil fileName: &fileName];
 			
 			sibi.name = theName;
@@ -207,8 +207,8 @@
 	for( NSImage* theImg in images )
 	{
 		NSString*		pictureName = @"From Clipboard";
-		NSInteger		pictureID = [mStack uniqueIDForMedia];
-		[mStack addMediaFile: nil withType: @"icon" name: pictureName
+		NSInteger		pictureID = [mDocument uniqueIDForMedia];
+		[mDocument addMediaFile: nil withType: @"icon" name: pictureName
 			andID: pictureID
 			hotSpot: NSZeroPoint 
 			imageOrCursor: theImg];

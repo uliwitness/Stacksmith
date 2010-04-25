@@ -23,7 +23,7 @@
 	UKPropagandaTool	currTool = [[UKPropagandaTools propagandaTools] currentTool];
 	NSCursor*			currCursor = [UKPropagandaTools cursorForTool: currTool];
 	if( !currCursor )
-		currCursor = [[mPart stack] cursorWithID: 128];
+		currCursor = [[[mPart stack] document] cursorWithID: 128];
 	
 	if( [self isEditable] && currTool == UKPropagandaBrowseTool )
 		[super mouseMoved: event];

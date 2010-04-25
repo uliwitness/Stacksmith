@@ -91,7 +91,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	NSString*					contentsStr = [theContents text];
 	[mContentsTextField setString: contentsStr ? contentsStr : @""];
 	
-	[mIconListController setStack: [mPart stack]];
+	[mIconListController setDocument: [[mPart stack] document]];
 	[mIconListController setSelectedIconID: [mPart iconID]];
 }
 

@@ -38,6 +38,7 @@
 }
 
 -(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (UKPropagandaDocument*)owner;
+-(id)	initWithDocument: (UKPropagandaDocument*)owner;
 
 -(void)			addCard: (UKPropagandaCard*)theCard;
 -(void)			addBackground: (UKPropagandaBackground*)theBg;

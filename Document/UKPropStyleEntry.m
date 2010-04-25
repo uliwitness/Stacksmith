@@ -12,12 +12,12 @@
 
 @implementation UKPropStyleEntry
 
--(id)	initWithFontID: (NSInteger)theID fontSize: (NSInteger)theSize
+-(id)	initWithFontName: (NSString*)theName fontSize: (NSInteger)theSize
 			styles: (NSArray*)theStyles
 {
 	if(( self = [super init] ))
 	{
-		mFontID = theID;
+		mFontName = theName;
 		mFontSize = theSize;
 		mFontStyles = [theStyles retain];
 	}
@@ -32,12 +32,6 @@
 	
 	[super dealloc];
 }
-
--(NSInteger)	fontID
-{
-	return mFontID;
-}
-
 
 -(NSString*)	fontName
 {
@@ -64,8 +58,8 @@
 
 -(NSString*)	description
 {
-	return [NSString stringWithFormat: @"%@ { font = %@ (%ld), size = %d, style = %@ }",
-						[self class], mFontName, mFontID, mFontSize, [mFontStyles componentsJoinedByString: @", "]];
+	return [NSString stringWithFormat: @"%@ { font = %@, size = %d, style = %@ }",
+						[self class], mFontName, mFontSize, [mFontStyles componentsJoinedByString: @", "]];
 }
 
 @end

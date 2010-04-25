@@ -42,8 +42,8 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 {
 	[[NSColor blackColor] set];
 	
-	NSLog( @"state = %s", ([self state] == NSOnState) ? "on" : "off" );
-	BOOL			isHighlighted = [self isHighlighted] /*|| [self state] == NSOnState*/;
+	//NSLog( @"state = %s", ([self state] == NSOnState) ? "on" : "off" );
+	BOOL			isHighlighted = [self isHighlighted] || [self state] == NSOnState;
 	NSRect			cellFrame = origCellFrame;
 	NSBezierPath*	buttonShape = nil;
 	NSBezierPath*	buttonStrokeShape = nil;

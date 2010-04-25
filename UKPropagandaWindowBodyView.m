@@ -85,7 +85,7 @@
 	if( mPeeking )
 		currCursor = [NSCursor arrowCursor];
 	if( !currCursor )
-		currCursor = [[mCard stack] cursorWithID: 128];
+		currCursor = [[[mCard stack] document] cursorWithID: 128];
 	[self addCursorRect: [self visibleRect] cursor: currCursor];
 }
 

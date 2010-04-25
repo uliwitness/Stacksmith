@@ -3,7 +3,7 @@
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.04.10.
-//  Copyright 2010 Apple Inc. All rights reserved.
+//  Copyright 2010 The Void Software. All rights reserved.
 //
 
 #import "UKPropagandaCardWindowController.h"
@@ -22,12 +22,12 @@
 
 @implementation UKPropagandaCardWindowController
 
-- (id)init
+- (id)initWithStack: (UKPropagandaStack*)inStack
 {
-    self = [super init];
-    if (self)
+    self = [super initWithWindowNibName: NSStringFromClass([self class])];
+    if( self )
 	{
-		mStack = [[UKPropagandaStack alloc] init];
+		mStack = inStack;
     }
     return self;
 }
@@ -36,8 +36,7 @@
 -(void)	dealloc
 {
 	mCardViewController = nil;	// It's an outlet now.
-	
-	DESTROY(mStack);
+	mStack = nil;
 	
 	[super dealloc];
 }
@@ -53,6 +52,13 @@
 	
 	[mCardViewController setView: mView];
 	[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];
+		
+//	if( [self fileURL] )
+//	{
+//		NSString*	iconPath = [[[self fileURL] path] stringByAppendingPathComponent: @"Icon\r"];
+//		if( ![[NSFileManager defaultManager] fileExistsAtPath: iconPath] )
+//			[self performSelector: @selector(generatePreview) withObject: nil afterDelay: 0.0];
+//	}
 }
 
 @end

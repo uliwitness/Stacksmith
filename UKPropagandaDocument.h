@@ -22,7 +22,7 @@
 }
 
 -(void)			addFont: (NSString*)fontName withID: (NSInteger)fontID;
--(void)			addStyleFormatWithID: (NSInteger)styleID forFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
+-(void)			addStyleFormatWithID: (NSInteger)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
 
 -(NSInteger)	uniqueIDForMedia;
 

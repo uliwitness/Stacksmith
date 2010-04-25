@@ -118,7 +118,7 @@
 	if( [mPicture isKindOfClass: [NSImage class]] )
 		return mPicture;
 	
-	NSImage*	img = [mStack imageNamed: (NSString*)mPicture];
+	NSImage*	img = [[mStack document] imageNamed: (NSString*)mPicture];
 	ASSIGN(mPicture,img);
 	
 	return img;
