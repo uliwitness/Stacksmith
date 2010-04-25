@@ -279,4 +279,10 @@
 	return [NSImage imageNamed: @"BackgroundIconSmall"];
 }
 
+
+-(NSString*)	description
+{
+	return [NSString stringWithFormat: @"%@ {\nid = %d\nname = %@\nparts = %@\n}", [self class], mID, mName, mParts];
+}
+
 @end

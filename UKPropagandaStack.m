@@ -88,7 +88,7 @@
 			NSURL*					theFileAttrURL = [[mDocument fileURL] URLByAppendingPathComponent: theFileAttr];
 			NSXMLDocument*			bgDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
 																error: nil];
-			UKPropagandaBackground*	theBg = [[[UKPropagandaBackground alloc] initWithXMLDocument: bgDoc forStack: self] autorelease];
+			UKPropagandaBackground*	theBg = [[UKPropagandaBackground alloc] initWithXMLDocument: bgDoc forStack: self];
 			
 			[self addBackground: theBg];
 			
@@ -105,9 +105,9 @@
 			NSURL*					theFileAttrURL = [[mDocument fileURL] URLByAppendingPathComponent: theFileAttr];
 			NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
 																error: nil];
-			UKPropagandaBackground*	theCd = [[[UKPropagandaCard alloc] initWithXMLDocument: cdDoc forStack: self] autorelease];
+			UKPropagandaBackground*	theCd = [[UKPropagandaCard alloc] initWithXMLDocument: cdDoc forStack: self];
 			
-			[self addBackground: theCd];
+			[self addCard: theCd];
 			
 			[cdDoc release];
 			[theCd release];
@@ -231,7 +231,7 @@
 
 -(NSString*)	description
 {
-	return [NSString stringWithFormat: @"%@ {  }", [self class]];
+	return [NSString stringWithFormat: @"%@ {\ncardSize = %@\nbackgrounds = %@\ncards = %@\nscript = %@\n}", [self class], NSStringFromSize(mCardSize), mBackgrounds, mCards, mScript];
 }
 
 

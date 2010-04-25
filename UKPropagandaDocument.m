@@ -44,29 +44,39 @@
 	DESTROY(mFontIDTable);
 	DESTROY(mTextStyles);
 	DESTROY(mPictures);
+	DESTROY(mStacks);
 	
 	[super dealloc];
 }
 
 
-- (NSString *)windowNibName
+-(void)	makeWindowControllers
 {
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-    return @"UKPropagandaDocument";
+	for( UKPropagandaStack* currStack in mStacks )
+	{
+		NSLog(@"%@",currStack);
+	}
 }
 
-- (void)windowControllerDidLoadNib:(NSWindowController *) aController
-{
-    [super windowControllerDidLoadNib: aController];
 
+//- (NSString *)windowNibName
+//{
+//    // Override returning the nib file name of the document
+//    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
+//    return @"UKPropagandaDocument";
+//}
+//
+//- (void)windowControllerDidLoadNib:(NSWindowController *) aController
+//{
+//    [super windowControllerDidLoadNib: aController];
+//
 //	if( [self fileURL] )
 //	{
 //		NSString*	iconPath = [[[self fileURL] path] stringByAppendingPathComponent: @"Icon\r"];
 //		if( ![[NSFileManager defaultManager] fileExistsAtPath: iconPath] )
 //			[self performSelector: @selector(generatePreview) withObject: nil afterDelay: 0.0];
 //	}
-}
+//}
 
 
 -(void)	fileHandle: (NSFileHandle*)fh ofImporterDidReadLine: (NSString*)currLine
