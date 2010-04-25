@@ -24,12 +24,13 @@
 }
 
 
--(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (UKPropagandaStack*)theStack
+-(id)	initWithXMLDocument: (NSXMLDocument*)theDoc forStack: (UKPropagandaStack*)theStack
 {
-	if(( self = [super initWithXMLElement: elem forStack: theStack] ))
+	if(( self = [super initWithXMLDocument: theDoc forStack: theStack] ))
 	{
-		// mID is set by the superclass already.
+		NSXMLElement*	elem = [theDoc rootElement];
 		
+		// mID is set by the superclass already.
 		NSInteger bkgdID = UKPropagandaIntegerFromSubElementInElement( @"owner", elem );
 		mOwner = [theStack backgroundWithID: bkgdID];
 	}

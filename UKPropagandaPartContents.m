@@ -81,7 +81,7 @@
 				NSInteger	fontSize = -1;
 				NSArray*	styles = nil;
 				
-				[theStack provideStyleFormatWithID: styleID font: &fontName size: &fontSize styles: &styles];
+				[[theStack document] provideStyleFormatWithID: styleID font: &fontName size: &fontSize styles: &styles];
 				
 				UKPropagandaStyleRun*	currStyleRun = [[UKPropagandaStyleRun alloc] init];
 				NSRange					txRange = { startOffset, endOffset -startOffset };

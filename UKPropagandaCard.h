@@ -16,7 +16,7 @@
 	UKPropagandaBackground	*	mOwner;
 }
 
--(id)						initWithXMLElement: (NSXMLElement*)elem forStack: (UKPropagandaStack*)theStack;
+-(id)						initWithXMLDocument: (NSXMLElement*)elem forStack: (UKPropagandaStack*)theStack;
 
 -(NSInteger)				backgroundID;	// ID of *owning* background.
 -(UKPropagandaBackground*)	owningBackground;

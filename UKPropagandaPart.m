@@ -81,7 +81,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 			mTextAlignment = NSNaturalTextAlignment;
 		
 		NSInteger	textFontID = UKPropagandaIntegerFromSubElementInElement( @"textFontID", elem );
-		mTextFontName = [[mStack fontNameForID: textFontID] retain];
+		mTextFontName = [[[mStack document] fontNameForID: textFontID] retain];
 		
 		mTextFontSize = UKPropagandaIntegerFromSubElementInElement( @"textSize", elem );
 		mTextHeight = UKPropagandaIntegerFromSubElementInElement( @"textHeight", elem );

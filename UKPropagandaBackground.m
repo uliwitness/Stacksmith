@@ -41,10 +41,12 @@
 }
 
 
--(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (UKPropagandaStack*)theStack
+-(id)	initWithXMLDocument: (NSXMLDocument*)theDoc forStack: (UKPropagandaStack*)theStack
 {
 	if(( self = [super init] ))
 	{
+		NSXMLElement*	elem = [theDoc rootElement];
+		
 		mID = UKPropagandaIntegerFromSubElementInElement( @"id", elem );
 		mName = [UKPropagandaStringFromSubElementInElement( @"name", elem ) retain];
 		
@@ -80,6 +82,7 @@
 			[mContents setObject: newCont forKey: theKey];
 		}
 		
+		[self loadAddColorObjects: elem];
 	}
 	
 	return self;

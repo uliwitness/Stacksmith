@@ -16,6 +16,9 @@
 #import "UKProgressPanelController.h"
 #import "NSView+SizeWindowForViewSize.h"
 #import "AGIconFamily.h"
+#import "UKPropStyleEntry.h"
+#import "UKPropPictureEntry.h"
+#import "UKRandomInteger.h"
 #import <Quartz/Quartz.h>
 
 
@@ -24,9 +27,12 @@
 - (id)init
 {
     self = [super init];
-    if (self)
+    if( self )
 	{
-		mStack = [[UKPropagandaStack alloc] init];
+		mFontIDTable = [[NSMutableDictionary alloc] init];
+		mTextStyles = [[NSMutableDictionary alloc] init];
+		mPictures = [[NSMutableArray alloc] init];
+		mStacks = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -34,11 +40,10 @@
 
 -(void)	dealloc
 {
-	mCardViewController = nil;	// It's an outlet now.
-	
-	DESTROY(mStack);
-	
 	DESTROY(mErrorsAndWarnings);
+	DESTROY(mFontIDTable);
+	DESTROY(mTextStyles);
+	DESTROY(mPictures);
 	
 	[super dealloc];
 }
@@ -55,23 +60,12 @@
 {
     [super windowControllerDidLoadNib: aController];
 
-	// Make sure window fits the cards:
-	NSSize		cardSize = [mStack cardSize];
-	if( cardSize.width == 0 || cardSize.height == 0 )
-		cardSize = NSMakeSize( 512, 342 );
-	[mView sizeWindowForViewSize: cardSize];
-	
-	[aController setShouldCloseDocument: YES];
-	
-	[mCardViewController setView: mView];
-	[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];
-	
-	if( [self fileURL] )
-	{
-		NSString*	iconPath = [[[self fileURL] path] stringByAppendingPathComponent: @"Icon\r"];
-		if( ![[NSFileManager defaultManager] fileExistsAtPath: iconPath] )
-			[self performSelector: @selector(generatePreview) withObject: nil afterDelay: 0.0];
-	}
+//	if( [self fileURL] )
+//	{
+//		NSString*	iconPath = [[[self fileURL] path] stringByAppendingPathComponent: @"Icon\r"];
+//		if( ![[NSFileManager defaultManager] fileExistsAtPath: iconPath] )
+//			[self performSelector: @selector(generatePreview) withObject: nil afterDelay: 0.0];
+//	}
 }
 
 
@@ -148,13 +142,7 @@
 		return NO;
 	}
 	
-	// Create a stack root object:
 	NSXMLElement	*	stackfileElement = [xmlDoc rootElement];
-	NSXMLElement	*	stackElement = [[stackfileElement elementsForName: @"stack"] objectAtIndex: 0];
-	
-	DESTROY(mStack);
-	mStack = [[UKPropagandaStack alloc] initWithXMLElement: stackElement
-								path: folderPath];
 	
 	// Load font table so others can access it:
 	NSArray			*	fonts = [stackfileElement elementsForName: @"font"];
@@ -162,7 +150,7 @@
 	{
 		NSString	*	fontID = [[[theFontElem elementsForName: @"id"] objectAtIndex: 0] stringValue];
 		NSString	*	fontName = [[[theFontElem elementsForName: @"name"] objectAtIndex: 0] stringValue];
-		[mStack addFont: fontName withID: [fontID integerValue]];
+		[self addFont: fontName withID: [fontID integerValue]];
 	}
 	
 	// Load style table so others can access it:
@@ -177,14 +165,14 @@
 		NSArray		*	textStyles = UKPropagandaStringsFromSubElementInElement( @"textStyle",thePic);
 		NSArray		*	sizeElems = [thePic elementsForName: @"size"];
 		NSString	*	fontSize = ([sizeElems count] > 0) ? [[sizeElems objectAtIndex: 0] stringValue] : nil;
-		[mStack addStyleFormatWithID: styleID ? [styleID intValue] : x
+		[self addStyleFormatWithID: styleID ? [styleID intValue] : x
 								forFontID: fontID ? [fontID intValue] : -1
 								     size: fontSize ? [fontSize intValue] : -1
 								   styles: textStyles];
 		x++;
 	}
 	
-	// Load standard picture table so others can access it: (ICONs, PICTs, CURSs and SNDs)
+	// Load built-in standard picture table so others can access it: (ICONs, PICTs, CURSs and SNDs)
 	NSXMLDocument	*	stdDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"]]
 														options: 0 error: outError] autorelease];
 	NSXMLElement	*	stdStackfileElement = [stdDoc rootElement];
@@ -196,11 +184,11 @@
 		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
 		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
 		NSPoint			pos = UKPropagandaPointFromSubElementInElement( @"hotspot", thePic );
-		[mStack addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
+		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
 			imageOrCursor: nil];
 	}
 	
-	// Load media table so others can access it: (ICONs, PICTs, CURSs and SNDs)
+	// Load media table of this document so others can access it: (ICONs, PICTs, CURSs and SNDs)
 	pictures = [stackfileElement elementsForName: @"media"];
 	for( NSXMLElement* thePic in pictures )
 	{
@@ -209,120 +197,447 @@
 		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
 		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
 		NSPoint			pos = UKPropagandaPointFromSubElementInElement( @"hotspot", thePic );
-		[mStack addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
+		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
 			imageOrCursor: nil];
 	}
-		
-	//NSLog( @"%@", mStack );
 	
-	// Load backgrounds:
-	NSArray			*	backgrounds = [stackfileElement elementsForName: @"background"];
-	for( NSXMLElement* theBgElem in backgrounds )
+	// Create a stack root object:
+	NSArray			*	stacks = [stackfileElement elementsForName: @"stack"];
+	[mStacks removeAllObjects];
+	
+	for( NSXMLElement* currStackElem in stacks )
 	{
-		[mStack addBackground: [[[UKPropagandaBackground alloc] initWithXMLElement: theBgElem forStack: mStack] autorelease]];
+		NSXMLNode	*	theFileAttr = [currStackElem attributeForName: @"file"];
+		NSString	*	theFileName = [theFileAttr stringValue];
+		NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
+		NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0
+									error: outError];
+		
+		UKPropagandaStack*	currStack = [[UKPropagandaStack alloc] initWithXMLDocument: theDoc
+											document: self];
+		[mStacks addObject: currStack];
+		[theDoc release];
+		[currStack release];
 	}
 	
-	// Load AddColor background elements:
-	backgrounds = [stackfileElement elementsForName: @"addcolorbackground"];
-	for( NSXMLElement* theBkgdElem in backgrounds )
-	{
-		NSString				*	bkgdID = [[[theBkgdElem elementsForName: @"id"] objectAtIndex: 0] stringValue];
-		UKPropagandaBackground	*	bkgd = [mStack backgroundWithID: [bkgdID integerValue]];
-		
-		[bkgd loadAddColorObjects: theBkgdElem];
-	}
 	
-	// Load cards:
-	NSArray			*	cards = [stackfileElement elementsForName: @"card"];
-	for( NSXMLElement* theCardElem in cards )
-	{
-		[mStack addCard: [[[UKPropagandaCard alloc] initWithXMLElement: theCardElem forStack: mStack] autorelease]];
-	}
-
-	// Load AddColor card elements:
-	cards = [stackfileElement elementsForName: @"addcolorcard"];
-	for( NSXMLElement* theCardElem in cards )
-	{
-		NSString			*	cardID = [[[theCardElem elementsForName: @"id"] objectAtIndex: 0] stringValue];
-		UKPropagandaCard	*	card = [mStack cardWithID: [cardID integerValue]];
-		
-		[card loadAddColorObjects: theCardElem];
-	}
-		
-	// Make sure window fits the cards:
-	NSSize		cardSize = [mStack cardSize];
-	if( cardSize.width == 0 || cardSize.height == 0 )
-		cardSize = NSMakeSize( 512, 342 );
-	[mView sizeWindowForViewSize: cardSize];
-	
-	[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];
-		
-	if( [self fileURL] )
-	{
-		NSString*	iconPath = [[[self fileURL] path] stringByAppendingPathComponent: @"Icon\r"];
-		if( ![[NSFileManager defaultManager] fileExistsAtPath: iconPath] )
-			[self performSelector: @selector(generatePreview) withObject: nil afterDelay: 0.0];
-	}
+//	// Make sure window fits the cards:
+//	NSSize		cardSize = [mStack cardSize];
+//	if( cardSize.width == 0 || cardSize.height == 0 )
+//		cardSize = NSMakeSize( 512, 342 );
+//	[mView sizeWindowForViewSize: cardSize];
+//	
+//	[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];
+//		
+//	if( [self fileURL] )
+//	{
+//		NSString*	iconPath = [[[self fileURL] path] stringByAppendingPathComponent: @"Icon\r"];
+//		if( ![[NSFileManager defaultManager] fileExistsAtPath: iconPath] )
+//			[self performSelector: @selector(generatePreview) withObject: nil afterDelay: 0.0];
+//	}
 
 	return YES;
 }
 
 
--(void)	generatePreview
-{
-	@try
-	{
-		NSImage*		cardSnapshot = nil;
-		NSRect			theBox = [mView bounds];
-		
-		cardSnapshot = [[[NSImage alloc] initWithSize: theBox.size] autorelease];
-		[cardSnapshot lockFocus];
-			[[mView layer] renderInContext: [[NSGraphicsContext currentContext] graphicsPort]];
-		[cardSnapshot unlockFocus];
-		
-		NSImage*			stackIcon = [NSImage imageNamed: @"Stack"];
-		CGDataProviderRef	fileProvider = CGDataProviderCreateWithURL( (CFURLRef) [[NSBundle mainBundle] URLForResource: @"Stack-Mask" withExtension: @"png"] );
-		[(id)fileProvider autorelease];
-		CGImageRef			maskImage = CGImageCreateWithPNGDataProvider( fileProvider, NULL, false, kCGRenderingIntentDefault );
-		[(id)maskImage autorelease];
-		NSRect				iconBox = NSZeroRect;
-		iconBox.size = [stackIcon size];
-		NSImage*			thumbImg = [[[NSImage alloc] initWithSize: iconBox.size] autorelease];
-		[thumbImg lockFocus];
-			[stackIcon drawInRect: iconBox fromRect: NSZeroRect operation: NSCompositeCopy fraction: 1.0];
+//-(void)	generatePreview
+//{
+//	@try
+//	{
+//		NSImage*		cardSnapshot = nil;
+//		NSRect			theBox = [mView bounds];
+//		
+//		cardSnapshot = [[[NSImage alloc] initWithSize: theBox.size] autorelease];
+//		[cardSnapshot lockFocus];
+//			[[mView layer] renderInContext: [[NSGraphicsContext currentContext] graphicsPort]];
+//		[cardSnapshot unlockFocus];
+//		
+//		NSImage*			stackIcon = [NSImage imageNamed: @"Stack"];
+//		CGDataProviderRef	fileProvider = CGDataProviderCreateWithURL( (CFURLRef) [[NSBundle mainBundle] URLForResource: @"Stack-Mask" withExtension: @"png"] );
+//		[(id)fileProvider autorelease];
+//		CGImageRef			maskImage = CGImageCreateWithPNGDataProvider( fileProvider, NULL, false, kCGRenderingIntentDefault );
+//		[(id)maskImage autorelease];
+//		NSRect				iconBox = NSZeroRect;
+//		iconBox.size = [stackIcon size];
+//		NSImage*			thumbImg = [[[NSImage alloc] initWithSize: iconBox.size] autorelease];
+//		[thumbImg lockFocus];
+//			[stackIcon drawInRect: iconBox fromRect: NSZeroRect operation: NSCompositeCopy fraction: 1.0];
+//
+//			// Fit the snapshot into rect of first card of icon:
+//			NSRect				possibleThumbBox = NSMakeRect( 36, 60, iconBox.size.width -72, iconBox.size.height -34 -160 );
+//			NSRect				thumbBox = theBox;
+//			thumbBox.size.width = possibleThumbBox.size.width;
+//			thumbBox.size.height = thumbBox.size.height / (theBox.size.width / possibleThumbBox.size.width);
+//			if( thumbBox.size.height > possibleThumbBox.size.height )
+//			{
+//				thumbBox.size.height = possibleThumbBox.size.height;
+//				thumbBox.size.width = thumbBox.size.width / (theBox.size.height / possibleThumbBox.size.height);
+//			}
+//			
+//			// Center in possible thumb box
+//			thumbBox.origin.x = possibleThumbBox.origin.x +truncf((possibleThumbBox.size.width -thumbBox.size.width) /2);
+//			thumbBox.origin.y = possibleThumbBox.origin.y +truncf((possibleThumbBox.size.height -thumbBox.size.height) /2);
+//			
+//			CGContextRef	theCtx = [[NSGraphicsContext currentContext] graphicsPort];
+//			CGContextSetBlendMode( theCtx, kCGBlendModeDarken );
+//			CGContextSetAlpha( theCtx, 0.8 );
+//			CGContextDrawImage( theCtx, NSRectToCGRect( thumbBox ), [cardSnapshot CGImageForProposedRect: NULL context: nil hints: nil] );
+//		[thumbImg unlockFocus];
+//		
+//		[[cardSnapshot TIFFRepresentation] writeToURL: [[self fileURL] URLByAppendingPathComponent: @"preview.tiff"] atomically: YES];
+//		
+//		AGIconFamily*	theIcon = [AGIconFamily iconFamilyWithThumbnailsOfImage: thumbImg
+//									imageInterpolation: NSImageInterpolationMedium];
+//		[theIcon setAsCustomIconForURL: [self fileURL]];
+//		[[thumbImg TIFFRepresentation] writeToURL: [[self fileURL] URLByAppendingPathComponent: @"thumbnail.tiff"] atomically: YES];
+//	}
+//	@catch( NSException * e )
+//	{
+//		NSLog( @"%@", e );
+//	}
+//}
 
-			// Fit the snapshot into rect of first card of icon:
-			NSRect				possibleThumbBox = NSMakeRect( 36, 60, iconBox.size.width -72, iconBox.size.height -34 -160 );
-			NSRect				thumbBox = theBox;
-			thumbBox.size.width = possibleThumbBox.size.width;
-			thumbBox.size.height = thumbBox.size.height / (theBox.size.width / possibleThumbBox.size.width);
-			if( thumbBox.size.height > possibleThumbBox.size.height )
-			{
-				thumbBox.size.height = possibleThumbBox.size.height;
-				thumbBox.size.width = thumbBox.size.width / (theBox.size.height / possibleThumbBox.size.height);
-			}
-			
-			// Center in possible thumb box
-			thumbBox.origin.x = possibleThumbBox.origin.x +truncf((possibleThumbBox.size.width -thumbBox.size.width) /2);
-			thumbBox.origin.y = possibleThumbBox.origin.y +truncf((possibleThumbBox.size.height -thumbBox.size.height) /2);
-			
-			CGContextRef	theCtx = [[NSGraphicsContext currentContext] graphicsPort];
-			CGContextSetBlendMode( theCtx, kCGBlendModeDarken );
-			CGContextSetAlpha( theCtx, 0.8 );
-			CGContextDrawImage( theCtx, NSRectToCGRect( thumbBox ), [cardSnapshot CGImageForProposedRect: NULL context: nil hints: nil] );
-		[thumbImg unlockFocus];
-		
-		[[cardSnapshot TIFFRepresentation] writeToURL: [[self fileURL] URLByAppendingPathComponent: @"preview.tiff"] atomically: YES];
-		
-		AGIconFamily*	theIcon = [AGIconFamily iconFamilyWithThumbnailsOfImage: thumbImg
-									imageInterpolation: NSImageInterpolationMedium];
-		[theIcon setAsCustomIconForURL: [self fileURL]];
-		[[thumbImg TIFFRepresentation] writeToURL: [[self fileURL] URLByAppendingPathComponent: @"thumbnail.tiff"] atomically: YES];
-	}
-	@catch( NSException * e )
+-(void)		addFont: (NSString*)fontName withID: (NSInteger)fontID
+{
+	[mFontIDTable setObject: fontName forKey: [NSNumber numberWithInteger: fontID]];
+}
+
+
+-(NSString*)	fontNameForID: (NSInteger)fontID
+{
+	return [mFontIDTable objectForKey: [NSNumber numberWithInteger: fontID]];
+}
+
+
+-(void)		addStyleFormatWithID: (NSInteger)styleID forFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray*)fontStyles
+{
+	UKPropStyleEntry*	pse = [[[UKPropStyleEntry alloc] initWithFontID: fontID fontSize: fontSize
+			styles: fontStyles] autorelease];
+	NSString*	fontName = [self fontNameForID: fontID];	// Look up font by ID.
+	[pse setFontName: fontName];	// Remember it for the future.
+	
+	[mTextStyles setObject: pse forKey: [NSNumber numberWithInteger: styleID]];
+}
+
+
+-(void)	provideStyleFormatWithID: (NSInteger)oneBasedIdx font: (NSString**)outFontName
+			size: (NSInteger*)outFontSize styles: (NSArray**)outFontStyles
+{
+	UKPropStyleEntry*	pse = [mTextStyles objectForKey: [NSNumber numberWithInteger: oneBasedIdx]];
+	if( pse )
 	{
-		NSLog( @"%@", e );
+		*outFontName = [pse fontName];
+		*outFontSize = [pse fontSize];
+		*outFontStyles = [pse styles];
 	}
+}
+
+
+-(NSInteger)	uniqueIDForMedia
+{
+	NSInteger	mediaID = UKRandomInteger();
+	BOOL		notUnique = YES;
+	
+	while( notUnique )
+	{
+		notUnique = NO;
+		
+		for( UKPropPictureEntry* currPict in mPictures )
+		{
+			if( [currPict pictureID] == mediaID )
+			{
+				notUnique = YES;
+				mediaID = UKRandomInteger();
+				break;
+			}
+		}
+	}
+	
+	return mediaID;
+}
+
+
+-(NSString*)	URLForImageNamed: (NSString*)theName
+{
+	NSURL*	theURL = [[self fileURL] URLByAppendingPathComponent: theName];
+	if( ![theURL checkResourceIsReachableAndReturnError: nil] )
+		theURL = [[NSBundle mainBundle] URLForImageResource: theName];
+	if( [theURL checkResourceIsReachableAndReturnError: nil] )
+		return theURL;
+	else
+		return nil;
+}
+
+
+-(NSImage*)	imageNamed: (NSString*)theName
+{
+	NSURL*		imgURL = [[self fileURL] URLByAppendingPathComponent: theName];
+	NSImage*	img = [[[NSImage alloc] initWithContentsOfURL: imgURL] autorelease];
+	if( !img )
+		img = [NSImage imageNamed: theName];
+	else
+		[img setName: theName];
+	return img;
+}
+
+
+//-(NSImage*)	imageForPatternAtIndex: (NSInteger)idx
+//{
+//	NSImage*	img = [mPatterns objectAtIndex: idx];
+//	if( [img isKindOfClass: [NSImage class]] )
+//		return img;	// Already cached.
+//	
+//	img = [self imageNamed: (NSString*)img];
+//	if( img )
+//		[mPatterns replaceObjectAtIndex: idx withObject: img];
+//	
+//	return img;
+//}
+
+
+-(void)	addMediaFile: (NSString*)fileName withType: (NSString*)type
+			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos
+			imageOrCursor: (id)imgOrCursor
+{
+	NSURL*				fileURL = [self URLForImageNamed: fileName];
+	UKPropPictureEntry*	pentry = [[[UKPropPictureEntry alloc] initWithFilename: [fileURL path]
+																withType: type name: iconName andID: iconID hotSpot: pos] autorelease];
+	if( imgOrCursor )
+		[pentry setImageOrCursor: imgOrCursor];
+	[mPictures addObject: pentry];
+}
+
+
+-(QTMovie*)		movieOfType: (NSString*)typ name: (NSString*)theName
+{
+	theName = [theName lowercaseString];
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: typ]
+			&& [[currPic name] isEqualToString: theName] )
+		{
+			if( ![currPic imageOrCursor] )
+			{
+				QTMovie*	img = [[[QTMovie alloc] initWithURL: [[self fileURL] URLByAppendingPathComponent: [currPic filename]] error: nil] autorelease];
+				if( !img )
+					img = [[[QTMovie alloc] initWithFile: [[NSBundle mainBundle] pathForResource: [currPic filename] ofType: @""] error: nil] autorelease];
+				[currPic setImageOrCursor: img];
+				return img;
+			}
+			else
+				return [currPic imageOrCursor];
+			break;
+		}
+	}
+	
+	return nil;
+}
+
+
+-(QTMovie*)		movieOfType: (NSString*)typ id: (NSInteger)theID
+{
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [currPic pictureID] == theID
+			&& [[currPic pictureType] isEqualToString: typ] )
+		{
+			if( ![currPic imageOrCursor] )
+			{
+				QTMovie*	img = [[[QTMovie alloc] initWithURL: [[self fileURL] URLByAppendingPathComponent: [currPic filename]] error: nil] autorelease];
+				if( !img )
+					img = [[[QTMovie alloc] initWithFile: [currPic filename] error: nil] autorelease];
+				[currPic setImageOrCursor: img];
+				return img;
+			}
+			else
+				return [currPic imageOrCursor];
+			break;
+		}
+	}
+	
+	return nil;
+}
+
+
+-(NSImage*)		pictureOfType: (NSString*)typ name: (NSString*)theName
+{
+	assert(![typ isEqualToString: @"cursor"]);
+	assert(![typ isEqualToString: @"sound"]);
+	
+	theName = [theName lowercaseString];
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: typ]
+			&& [[currPic name] isEqualToString: theName] )
+		{
+			if( ![currPic imageOrCursor] )
+			{
+				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
+				[currPic setImageOrCursor: img];
+				return img;
+			}
+			else
+				return [currPic imageOrCursor];
+			break;
+		}
+	}
+	
+	return nil;
+}
+
+
+-(NSImage*)		pictureOfType: (NSString*)typ id: (NSInteger)theID
+{
+	assert(![typ isEqualToString: @"cursor"]);
+	assert(![typ isEqualToString: @"sound"]);
+	
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [currPic pictureID] == theID
+			&& [[currPic pictureType] isEqualToString: typ] )
+		{
+			if( ![currPic imageOrCursor] )
+			{
+				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
+				[currPic setImageOrCursor: img];
+				return img;
+			}
+			else
+				return [currPic imageOrCursor];
+			break;
+		}
+	}
+	
+	return nil;
+}
+
+
+-(NSInteger)	numberOfPictures
+{
+	NSInteger		numPics = 0;
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: @"icon"] )
+			numPics++;
+	}
+	
+	return numPics;
+}
+
+
+-(NSImage*)		pictureAtIndex: (NSInteger)idx
+{
+	NSInteger		numPics = 0;
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: @"icon"] )
+		{
+			if( numPics == idx )
+			{
+				if( ![currPic imageOrCursor] )
+				{
+					NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
+					[currPic setImageOrCursor: img];
+					return img;
+				}
+				else
+					return [currPic imageOrCursor];
+			}
+			numPics++;
+		}
+	}
+	
+	return nil;
+}
+
+
+-(void)	infoForPictureAtIndex: (NSInteger)idx name: (NSString**)outName id: (NSInteger*)outID
+			image: (NSImage**)outImage fileName: (NSString**)outFileName
+{
+	NSInteger		numPics = 0;
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: @"icon"] )
+		{
+			if( numPics == idx )
+			{
+				if( outImage )
+				{
+					if( ![currPic imageOrCursor] )
+					{
+						*outImage = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
+						[currPic setImageOrCursor: *outImage];
+					}
+					else
+						*outImage = [currPic imageOrCursor];
+				}
+
+				if( outName )
+					*outName = [currPic name];
+				if( outID )
+					*outID = [currPic pictureID];
+				if( outFileName )
+					*outFileName = [currPic filename];
+			}
+			numPics++;
+		}
+	}
+}
+
+
+
+-(NSCursor*)	cursorWithName: (NSString*)theName
+{
+	theName = [theName lowercaseString];
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [[currPic pictureType] isEqualToString: @"cursor"]
+			&& [[currPic name] isEqualToString: theName])
+		{
+			if( ![currPic imageOrCursor] )
+			{
+				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
+				NSCursor*	curs = [[[NSCursor alloc] initWithImage: img hotSpot: [currPic hotSpot]] autorelease];
+				[currPic setImageOrCursor: curs];
+				return curs;
+			}
+			else
+				return [currPic imageOrCursor];
+			break;
+		}
+	}
+	
+	if( [theName isEqualToString: @"hand"] )
+		return [NSCursor pointingHandCursor];
+	else
+		return nil;
+}
+
+
+-(NSCursor*)	cursorWithID: (NSInteger)theID
+{
+	for( UKPropPictureEntry* currPic in mPictures )
+	{
+		if( [currPic pictureID] == theID
+			&& [[currPic pictureType] isEqualToString: @"cursor"] )
+		{
+			if( ![currPic imageOrCursor] )
+			{
+				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
+				NSCursor*	curs = [[[NSCursor alloc] initWithImage: img hotSpot: [currPic hotSpot]] autorelease];
+				[currPic setImageOrCursor: curs];
+				return curs;
+			}
+			else
+				return [currPic imageOrCursor];
+			break;
+		}
+	}
+	
+	if( theID == 128 )
+		return [NSCursor pointingHandCursor];
+	else
+		return nil;
 }
 
 @end

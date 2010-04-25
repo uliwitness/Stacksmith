@@ -10,16 +10,44 @@
 #import <Cocoa/Cocoa.h>
 
 @class UKPropagandaStack;
-@class UKPropagandaCardViewController;
-@class UKPropagandaWindowBodyView;
 
 
 @interface UKPropagandaDocument : NSDocument
 {
-	UKPropagandaStack						*	mStack;
-	IBOutlet UKPropagandaWindowBodyView		*	mView;	
-	IBOutlet UKPropagandaCardViewController	*	mCardViewController;
-	NSMutableArray							*	mErrorsAndWarnings;
+	NSMutableArray		*	mErrorsAndWarnings;	// Errors and warnings when opening old documents, or stacks imported from HyperCard.
+	NSMutableDictionary	*	mFontIDTable;		// Font ID --> name mappings
+	NSMutableDictionary	*	mTextStyles;		// STBL-extracted text/style info.
+	NSMutableArray		*	mPictures;			// Media.
+	NSMutableArray		*	mStacks;			// List of stacks in this document.
 }
+
+-(void)			addFont: (NSString*)fontName withID: (NSInteger)fontID;
+-(void)			addStyleFormatWithID: (NSInteger)styleID forFontID: (NSInteger)fontID size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
+
+-(NSInteger)	uniqueIDForMedia;
+
+-(NSString*)	fontNameForID: (NSInteger)fontID;
+-(void)			provideStyleFormatWithID: (NSInteger)oneBasedIdx font: (NSString**)outFontName
+						size: (NSInteger*)outFontSize styles: (NSArray**)outFontStyles;
+
+-(NSImage*)		imageNamed: (NSString*)theName;
+-(NSURL*)		URLForImageNamed: (NSString*)theName;
+-(NSImage*)		imageForPatternAtIndex: (NSInteger)idx;
+
+-(void)	addMediaFile: (NSString*)fileName withType: (NSString*)type
+			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos
+			imageOrCursor: (id)imgOrCursor;
+-(NSImage*)		pictureOfType: (NSString*)typ name: (NSString*)theName;
+-(NSImage*)		pictureOfType: (NSString*)typ id: (NSInteger)theID;
+-(NSInteger)	numberOfPictures;
+-(NSImage*)		pictureAtIndex: (NSInteger)idx;
+-(void)			infoForPictureAtIndex: (NSInteger)idx name: (NSString**)outName id: (NSInteger*)outID
+						image: (NSImage**)outImage fileName: (NSString**)outFileName;
+
+-(NSCursor*)	cursorWithName: (NSString*)theName;
+-(NSCursor*)	cursorWithID: (NSInteger)theID;
+
+-(QTMovie*)		movieOfType: (NSString*)typ name: (NSString*)theName;	// Movies & sounds.
+-(QTMovie*)		movieOfType: (NSString*)typ id: (NSInteger)theID;		// Movies & sounds.
 
 @end

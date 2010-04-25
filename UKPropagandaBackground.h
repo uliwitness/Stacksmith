@@ -33,7 +33,7 @@
 }
 
 -(id)							initForStack: (UKPropagandaStack*)theStack;
--(id)							initWithXMLElement: (NSXMLElement*)elem
+-(id)							initWithXMLDocument: (NSXMLDocument*)elem
 										forStack: (UKPropagandaStack*)theStack;
 
 -(void)							loadAddColorObjects: (NSXMLElement*)theElem;
