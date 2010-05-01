@@ -31,4 +31,13 @@
 		[currCursor set];
 }
 
+
+-(void)	mouseDown: (NSEvent*)evt
+{
+	if( ![self isEditable] && ![self isSelectable] )
+		[[self window] makeFirstResponder: [self superview]];
+	else
+		[super mouseDown: evt];
+}
+
 @end
