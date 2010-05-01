@@ -41,6 +41,8 @@
 -(void)	loadPart: (UKPropagandaPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode;
 -(void)	unloadPart;
 
+-(NSImage*)	imageForPeerViews: (NSArray*)views dragStartImagePos: (NSPoint*)dragStartImagePos;
+
 @end
 
 

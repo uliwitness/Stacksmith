@@ -295,6 +295,7 @@
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
+		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		558DC883115507EA002C9195 /* UKPropagandaCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DC882115507EA002C9195 /* UKPropagandaCardViewController.m */; };
 		558DCB5511553EAC002C9195 /* UKPropagandaButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCB5411553EAC002C9195 /* UKPropagandaButtonCell.m */; };
 		558DCD21115571FE002C9195 /* UKPropagandaNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCD20115571FE002C9195 /* UKPropagandaNotifications.m */; };
@@ -680,6 +681,8 @@
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
+		558970E5118C853600F92788 /* UKIsDragStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKIsDragStart.h; path = ../UliKit/UKIsDragStart.h; sourceTree = SOURCE_ROOT; };
+		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		558DC881115507EA002C9195 /* UKPropagandaCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPropagandaCardViewController.h; path = Presentation/UKPropagandaCardViewController.h; sourceTree = "<group>"; };
 		558DC882115507EA002C9195 /* UKPropagandaCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPropagandaCardViewController.m; path = Presentation/UKPropagandaCardViewController.m; sourceTree = "<group>"; };
 		558DCB5311553EAC002C9195 /* UKPropagandaButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaButtonCell.h; sourceTree = "<group>"; };
@@ -981,6 +984,8 @@
 				551FBEEA1170A11000F32FBF /* UKGraphics.m */,
 				55E3B6D911845E01000062C1 /* UKRandomInteger.h */,
 				55E3B6DA11845E01000062C1 /* UKRandomInteger.m */,
+				558970E5118C853600F92788 /* UKIsDragStart.h */,
+				558970E6118C853600F92788 /* UKIsDragStart.m */,
 				55382EE21171FFFA0006B381 /* UKHelperMacros.h */,
 				55382EEA117201E40006B381 /* UKTypecastMacros.h */,
 			);
@@ -1679,6 +1684,7 @@
 				55E3B6AD1184417A000062C1 /* UKPropPictureEntry.m in Sources */,
 				55E3B6C91184420E000062C1 /* UKPropStyleEntry.m in Sources */,
 				55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */,
+				558970E7118C853600F92788 /* UKIsDragStart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,7 @@
 #import "UKPropagandaClickablePopUpButtonLabel.h"
 #import "UKPropagandaButtonCell.h"
 #import "UKPropagandaTextView.h"
+#import "UKIsDragStart.h"
 
 
 @class UKPropagandaWindowBodyView;
@@ -194,38 +195,33 @@
 		}
 		else
 		{
-			if( [event modifierFlags] & NSShiftKeyMask
-				|| [event modifierFlags] & NSCommandKeyMask )
-				[self setSelected: !mSelected];
-			else
+			BOOL		justSelected = NO;
+			if( !mSelected )
 			{
-				[[UKPropagandaTools propagandaTools] deselectAllClients];
-				[self setSelected: YES];
+				[self selectionClick: event];
+				justSelected = YES;
 			}
-			[self setNeedsDisplay: YES];
-		}
-		
-		if( mSelected )
-		{
-			NSPasteboard   		*pb = [NSPasteboard pasteboardWithName: NSDragPboard];
-			NSImage				*theDragImg = [[[NSImage alloc] initWithSize: [self frame].size] autorelease];
-			NSBitmapImageRep	*theRep = nil;
-			NSPoint				dragStartImagePos = NSZeroPoint;
 			
-			mSelected = NO;	// Don't draw selection while dragging, looks like ass.
-			[theDragImg lockFocus];
-			[[self layer] renderInContext: [[NSGraphicsContext currentContext] graphicsPort]];
-			[theDragImg unlockFocus];
-			mSelected = YES;	// But restore flag once drawing has happened.
-			
-			[theDragImg addRepresentation: theRep];
-			
-			[pb addTypes: [NSArray arrayWithObject: NSStringPboardType] owner: self];
-			[pb setPropertyList: @"dummy" forType: NSStringPboardType];
-			
-			// Actually commence the drag:
-			[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
-						event: event pasteboard: pb source:self slideBack: YES];
+			if( UKIsDragStart( event, 0.0 ) )
+			{
+				NSLog( @"starting drag" );
+				
+				NSPasteboard   		*pb = [NSPasteboard pasteboardWithName: NSDragPboard];
+				NSPoint				dragStartImagePos = NSZeroPoint;
+				NSImage				*theDragImg = [self imageForPeerViews: [[[UKPropagandaTools propagandaTools] clients] allObjects]
+														dragStartImagePos: &dragStartImagePos];
+				
+				[pb addTypes: [NSArray arrayWithObject: NSStringPboardType] owner: self];
+				[pb setPropertyList: @"dummy" forType: NSStringPboardType];
+				
+				// Actually commence the drag:
+				[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
+							event: event pasteboard: pb source:self slideBack: YES];
+			}
+			else if( !justSelected )
+			{
+				[self selectionClick: event];
+			}
 		}
 	}
 	else
@@ -233,6 +229,71 @@
 		[[self window] makeFirstResponder: [self superview]];
 		[super mouseDown: event];
 	}
+}
+
+
+-(void)	selectionClick: (NSEvent*)event
+{
+	if( [event modifierFlags] & NSShiftKeyMask
+		|| [event modifierFlags] & NSCommandKeyMask )
+		[self setSelected: !mSelected];
+	else
+	{
+		[[UKPropagandaTools propagandaTools] deselectAllClients];
+		[self setSelected: YES];
+	}
+	[self setNeedsDisplay: YES];
+}
+
+
+-(NSImage*)	imageForPeerViews: (NSArray*)views dragStartImagePos: (NSPoint*)dragStartImagePos
+{
+	CGFloat		minX = LONG_MAX, maxX = LONG_MIN, minY = LONG_MAX, maxY = LONG_MIN;
+	
+	for( NSView* theView in views )
+	{
+		NSRect		box = [theView frame];
+		if( minX > NSMinX(box) )
+			minX = NSMinX(box);
+		if( maxX < NSMaxX(box) )
+			maxX = NSMaxX(box);
+		if( minY > NSMinY(box) )
+			minY = NSMinY(box);
+		if( maxY < NSMaxY(box) )
+			maxY = NSMaxY(box);
+	}
+	
+	NSImage*		theImage = [[[NSImage alloc] initWithSize: NSMakeSize( maxX -minX, maxY -minY)] autorelease];
+	
+	[theImage lockFocus];
+	CGContextRef		currContext = [[NSGraphicsContext currentContext] graphicsPort];
+
+	[[NSColor redColor] set];
+	
+	for( NSView* theView in views )
+	{
+		[NSGraphicsContext saveGraphicsState];
+		
+		CALayer*	theLayer = [theView layer];
+		NSRect		layerFrame = [theLayer frame];
+		
+		layerFrame.origin.x -= minX;
+		layerFrame.origin.y -= minY;
+		
+		NSAffineTransform*	transform = [NSAffineTransform transform];
+		[transform translateXBy: layerFrame.origin.x yBy: layerFrame.origin.y];
+		[transform concat];
+		
+		[theLayer renderInContext: currContext];
+		
+		[NSGraphicsContext restoreGraphicsState];
+	}
+	[theImage unlockFocus];
+	
+	dragStartImagePos->x = -[self frame].origin.x +minX;
+	dragStartImagePos->y = -[self frame].origin.y +minY;
+	
+	return theImage;
 }
 
 
