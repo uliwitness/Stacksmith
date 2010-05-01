@@ -104,7 +104,10 @@
 		[[UKPropagandaTools propagandaTools] deselectAllClients];
 	}
 	else
+	{
+		[[self window] makeFirstResponder: self];
 		[super mouseDown: event];
+	}
 }
 
 
@@ -125,5 +128,10 @@
 	[[self window] invalidateCursorRectsForView: self];
 }
 
+
+-(BOOL)	acceptsFirstResponder
+{
+	return YES;
+}
 
 @end
