@@ -17,9 +17,9 @@
 {
 	if(( self = [super init] ))
 	{
-		mFontName = theName;
+		ASSIGN(mFontName,theName);
 		mFontSize = theSize;
-		mFontStyles = [theStyles retain];
+		ASSIGN(mFontStyles,theStyles);
 	}
 	
 	return self;
