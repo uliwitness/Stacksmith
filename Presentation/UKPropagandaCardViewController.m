@@ -344,6 +344,7 @@
 	
 	// Tell the view about the new current card:
 	[(UKPropagandaWindowBodyView*)[self view] setCard: mCurrentCard];
+	[[[self view] window] makeFirstResponder: [self view]];
 	
 	// Load the background for this card:
 	UKPropagandaStack*		theStack = [theCard stack];
