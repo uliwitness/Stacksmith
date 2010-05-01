@@ -204,9 +204,35 @@
 			}
 			[self setNeedsDisplay: YES];
 		}
+		
+		if( mSelected )
+		{
+			NSPasteboard   		*pb = [NSPasteboard pasteboardWithName: NSDragPboard];
+			NSImage				*theDragImg = [[[NSImage alloc] initWithSize: [self frame].size] autorelease];
+			NSBitmapImageRep	*theRep = nil;
+			NSPoint				dragStartImagePos = NSZeroPoint;
+			
+			mSelected = NO;	// Don't draw selection while dragging, looks like ass.
+			[theDragImg lockFocus];
+			[[self layer] renderInContext: [[NSGraphicsContext currentContext] graphicsPort]];
+			[theDragImg unlockFocus];
+			mSelected = YES;	// But restore flag once drawing has happened.
+			
+			[theDragImg addRepresentation: theRep];
+			
+			[pb addTypes: [NSArray arrayWithObject: NSStringPboardType] owner: self];
+			[pb setPropertyList: @"dummy" forType: NSStringPboardType];
+			
+			// Actually commence the drag:
+			[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
+						event: event pasteboard: pb source:self slideBack: YES];
+		}
 	}
 	else
+	{
+		[[self window] makeFirstResponder: [self superview]];
 		[super mouseDown: event];
+	}
 }
 
 
