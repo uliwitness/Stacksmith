@@ -140,6 +140,8 @@
 -(BOOL)			fixedLineHeight;
 -(NSInteger)	textHeight;
 
+-(NSString*)	xmlString;
+
 -(UKPropagandaStack*)	stack;
 
 -(void)	updateOnClick: (NSButton*)thePart;

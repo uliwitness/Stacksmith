@@ -204,19 +204,34 @@
 			
 			if( UKIsDragStart( event, 0.0 ) )
 			{
-				NSLog( @"starting drag" );
-				
-				NSPasteboard   		*pb = [NSPasteboard pasteboardWithName: NSDragPboard];
-				NSPoint				dragStartImagePos = NSZeroPoint;
-				NSImage				*theDragImg = [self imageForPeerViews: [[[UKPropagandaTools propagandaTools] clients] allObjects]
+				NSPasteboard*   		pb = [NSPasteboard pasteboardWithName: NSDragPboard];
+				[pb clearContents];
+				NSPoint					dragStartImagePos = NSZeroPoint;
+				NSArray*				selectedObjects = [[[UKPropagandaTools propagandaTools] clients] allObjects];
+				NSImage*				theDragImg = [self imageForPeerViews: selectedObjects
 														dragStartImagePos: &dragStartImagePos];
+				UKPropagandaCard*		currCard = [[self enclosingCardView] card];
+				UKPropagandaBackground*	currBg = [currCard owningBackground];
+				
+				NSMutableString*		xmlString = [[[NSMutableString alloc] init] autorelease];
+				for( UKPropagandaSelectionView* selView in selectedObjects )
+				{
+					UKPropagandaPart*	thePart = [selView representedPart];
+					[xmlString appendString: [thePart xmlString]];
+					NSString*	cdXmlStr = [[currCard contentsForPart: thePart] xmlString];
+					if( cdXmlStr )
+						[xmlString appendString: cdXmlStr];
+					NSString*	bgXmlStr = [[currBg contentsForPart: thePart] xmlString];
+					if( bgXmlStr )
+						[xmlString appendString: bgXmlStr];
+				}
 				
 				[pb addTypes: [NSArray arrayWithObject: NSStringPboardType] owner: self];
-				[pb setPropertyList: @"dummy" forType: NSStringPboardType];
+				[pb setString: xmlString forType: NSStringPboardType];
 				
 				// Actually commence the drag:
 				[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
-							event: event pasteboard: pb source:self slideBack: YES];
+							event: event pasteboard: pb source: self slideBack: YES];
 			}
 			else if( !justSelected )
 			{

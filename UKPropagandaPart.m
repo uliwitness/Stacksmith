@@ -80,9 +80,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		else //if( [alignStr isEqualToString: @"left"] )
 			mTextAlignment = NSNaturalTextAlignment;
 		
-		NSInteger	textFontID = UKPropagandaIntegerFromSubElementInElement( @"textFontID", elem );
-		mTextFontName = [[[mStack document] fontNameForID: textFontID] retain];
-		
+		mTextFontName = [UKPropagandaStringFromSubElementInElement( @"font", elem ) retain];
 		mTextFontSize = UKPropagandaIntegerFromSubElementInElement( @"textSize", elem );
 		mTextHeight = UKPropagandaIntegerFromSubElementInElement( @"textHeight", elem );
 		mTextStyles = [UKPropagandaStringsFromSubElementInElement( @"textStyle", elem ) retain];
@@ -775,6 +773,55 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		;//NSLog( @"Found nothing in %@", [self displayName] );
 	
 	return NO;
+}
+
+
+-(NSString*)	xmlString
+{
+	NSMutableString*	outString = [[[NSMutableString alloc] init] autorelease];
+	
+	[outString appendString: @"\t<part>\n"];
+	
+	[outString appendFormat: @"\t\t<id>%d</id>\n", mID];
+	[outString appendFormat: @"\t\t<type>%@</type>\n", [self partType]];
+	[outString appendFormat: @"\t\t<visible>%@</visible>\n", (mVisible ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<enabled>%@</enabled>\n", (mEnabled ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<rect>\n\t\t\t<left>%d</left>\n\t\t\t<top>%d</top>\n\t\t\t<right>%d</right>\n\t\t\t<bottom>%d</bottom>\n\t\t</rect>\n",
+								(int)NSMinX(mRectangle), (int)NSMinY(mRectangle), (int)NSMaxX(mRectangle), (int)NSMaxY(mRectangle)];
+	[outString appendFormat: @"\t\t<style>%@</style>\n", [self style]];
+	[outString appendFormat: @"\t\t<showName>%@</showName>\n", (mShowName ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<highlight>%@</highlight>\n", (mHighlight ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<autoHighlight>%@</autoHighlight>\n", (mAutoHighlight ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<sharedHighlight>%@</sharedHighlight>\n", (mSharedHighlight ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<family>%d</family>\n", mFamily];
+	[outString appendFormat: @"\t\t<titleWidth>%d</titleWidth>\n", mTitleWidth];
+	[outString appendFormat: @"\t\t<icon>%d</icon>\n", mIconID];
+	NSString*	textAlignment = @"left";
+	if( mTextAlignment == NSCenterTextAlignment )
+		textAlignment = @"center";
+	if( mTextAlignment == NSRightTextAlignment )
+		textAlignment = @"right";
+	[outString appendFormat: @"\t\t<textAlign>%@</textAlign>\n", textAlignment];
+	[outString appendFormat: @"\t\t<font>%@</font>\n", mTextFontName];
+	[outString appendFormat: @"\t\t<textSize>%d</textSize>\n", mTextFontSize];
+	for( NSString* styleName in mTextStyles )
+		[outString appendFormat: @"\t\t<textStyle>%@</textStyle>\n", styleName];
+	
+	NSMutableString*	nameStr = [[mName mutableCopy] autorelease];
+	[nameStr replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0, [nameStr length])];
+	[nameStr replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0, [nameStr length])];
+	[nameStr replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [nameStr length])];
+	[outString appendFormat: @"\t\t<name>%@</name>\n", nameStr];
+	
+	NSMutableString*	scriptStr = [[mScript mutableCopy] autorelease];
+	[scriptStr replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0, [scriptStr length])];
+	[scriptStr replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0, [scriptStr length])];
+	[scriptStr replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [scriptStr length])];
+	[outString appendFormat: @"\t\t<script>%@</script>\n", scriptStr];
+	
+	[outString appendString: @"\t</part>\n"];
+	
+	return outString;
 }
 
 @end
