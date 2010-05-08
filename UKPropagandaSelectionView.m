@@ -15,7 +15,7 @@
 #import "UKPropagandaFieldInfoWindowController.h"
 #import "UKPropagandaWindowBodyView.h"
 #import "UKPropagandaClickablePopUpButtonLabel.h"
-#import "UKPropagandaButtonCell.h"
+#import "WILDButtonCell.h"
 #import "UKPropagandaTextView.h"
 #import "UKIsDragStart.h"
 
@@ -487,7 +487,7 @@
 	if( [[currPart style] isEqualToString: @"transparent"]
 		|| [[currPart style] isEqualToString: @"oval"] )
 	{
-		[bt setCell: [[[UKPropagandaButtonCell alloc] initTextCell: @""] autorelease]];
+		[bt setCell: [[[WILDButtonCell alloc] initTextCell: @""] autorelease]];
 		[bt setBordered: NO];
 
 		if( [[currPart style] isEqualToString: @"oval"] )
@@ -497,7 +497,7 @@
 	}
 	else if( [[currPart style] isEqualToString: @"opaque"] )
 	{
-		[bt setCell: [[[UKPropagandaButtonCell alloc] initTextCell: @""] autorelease]];
+		[bt setCell: [[[WILDButtonCell alloc] initTextCell: @""] autorelease]];
 		[bt setBordered: NO];
 		[[bt cell] setBackgroundColor: [NSColor whiteColor]];
 		[bt setAlignment: [currPart textAlignment]];	
@@ -509,7 +509,7 @@
 			|| [[currPart style] isEqualToString: @"standard"]
 			|| [[currPart style] isEqualToString: @"default"] )
 	{
-		UKPropagandaButtonCell*	ourCell = [[[UKPropagandaButtonCell alloc] initTextCell: @""] autorelease];
+		WILDButtonCell*	ourCell = [[[WILDButtonCell alloc] initTextCell: @""] autorelease];
 		[bt setCell: ourCell];
 		[[bt cell] setBackgroundColor: [NSColor whiteColor]];
 		[bt setBordered: YES];

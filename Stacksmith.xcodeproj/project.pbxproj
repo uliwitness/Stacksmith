@@ -297,7 +297,7 @@
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		558DC883115507EA002C9195 /* UKPropagandaCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DC882115507EA002C9195 /* UKPropagandaCardViewController.m */; };
-		558DCB5511553EAC002C9195 /* UKPropagandaButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCB5411553EAC002C9195 /* UKPropagandaButtonCell.m */; };
+		558DCB5511553EAC002C9195 /* WILDButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCB5411553EAC002C9195 /* WILDButtonCell.m */; };
 		558DCD21115571FE002C9195 /* UKPropagandaNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCD20115571FE002C9195 /* UKPropagandaNotifications.m */; };
 		558DCD7E11557B6D002C9195 /* UKPropagandaSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCD7D11557B6D002C9195 /* UKPropagandaSelectionView.m */; };
 		558DCDAB11557E28002C9195 /* UKPropagandaApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCDAA11557E28002C9195 /* UKPropagandaApplication.m */; };
@@ -685,8 +685,8 @@
 		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		558DC881115507EA002C9195 /* UKPropagandaCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPropagandaCardViewController.h; path = Presentation/UKPropagandaCardViewController.h; sourceTree = "<group>"; };
 		558DC882115507EA002C9195 /* UKPropagandaCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPropagandaCardViewController.m; path = Presentation/UKPropagandaCardViewController.m; sourceTree = "<group>"; };
-		558DCB5311553EAC002C9195 /* UKPropagandaButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaButtonCell.h; sourceTree = "<group>"; };
-		558DCB5411553EAC002C9195 /* UKPropagandaButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPropagandaButtonCell.m; sourceTree = "<group>"; };
+		558DCB5311553EAC002C9195 /* WILDButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDButtonCell.h; sourceTree = "<group>"; };
+		558DCB5411553EAC002C9195 /* WILDButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDButtonCell.m; sourceTree = "<group>"; };
 		558DCD1F115571FE002C9195 /* UKPropagandaNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPropagandaNotifications.h; path = Presentation/UKPropagandaNotifications.h; sourceTree = "<group>"; };
 		558DCD20115571FE002C9195 /* UKPropagandaNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPropagandaNotifications.m; path = Presentation/UKPropagandaNotifications.m; sourceTree = "<group>"; };
 		558DCD7C11557B6D002C9195 /* UKPropagandaSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPropagandaSelectionView.h; sourceTree = "<group>"; };
@@ -916,8 +916,8 @@
 				558DCFE41156209A002C9195 /* UKPropagandaWindowBodyView.m */,
 				558DCD7C11557B6D002C9195 /* UKPropagandaSelectionView.h */,
 				558DCD7D11557B6D002C9195 /* UKPropagandaSelectionView.m */,
-				558DCB5311553EAC002C9195 /* UKPropagandaButtonCell.h */,
-				558DCB5411553EAC002C9195 /* UKPropagandaButtonCell.m */,
+				558DCB5311553EAC002C9195 /* WILDButtonCell.h */,
+				558DCB5411553EAC002C9195 /* WILDButtonCell.m */,
 				55B9220811674E880073EC6C /* UKPropagandaTools.h */,
 				55B9220911674E880073EC6C /* UKPropagandaTools.m */,
 				558DCFBD1155B9B1002C9195 /* UKPropagandaPictureView.h */,
@@ -1661,7 +1661,7 @@
 				55EBC42B114C2CCE00BAA09D /* UKPropagandaScriptContainer.m in Sources */,
 				550B30781152D9DE0049C593 /* AGIconFamily.m in Sources */,
 				558DC883115507EA002C9195 /* UKPropagandaCardViewController.m in Sources */,
-				558DCB5511553EAC002C9195 /* UKPropagandaButtonCell.m in Sources */,
+				558DCB5511553EAC002C9195 /* WILDButtonCell.m in Sources */,
 				558DCD21115571FE002C9195 /* UKPropagandaNotifications.m in Sources */,
 				558DCD7E11557B6D002C9195 /* UKPropagandaSelectionView.m in Sources */,
 				558DCDAB11557E28002C9195 /* UKPropagandaApplication.m in Sources */,

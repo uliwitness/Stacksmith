@@ -6,7 +6,7 @@
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import "UKPropagandaButtonCell.h"
+#import "WILDButtonCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Carbon/Carbon.h>
 #import "UKGraphics.h"
@@ -34,7 +34,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 }
 
 
-@implementation UKPropagandaButtonCell
+@implementation WILDButtonCell
 
 @synthesize drawAsDefault;
 
