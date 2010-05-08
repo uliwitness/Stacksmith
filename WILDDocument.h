@@ -12,12 +12,12 @@
 @class UKPropagandaStack;
 
 
-@interface UKPropagandaDocument : NSDocument
+@interface WILDDocument : NSDocument
 {
 	NSMutableArray		*	mErrorsAndWarnings;	// Errors and warnings when opening old documents, or stacks imported from HyperCard.
 	NSMutableDictionary	*	mFontIDTable;		// Font ID --> name mappings
 	NSMutableDictionary	*	mTextStyles;		// STBL-extracted text/style info.
-	NSMutableArray		*	mPictures;			// Media.
+	NSMutableArray		*	mMediaList;			// Media.
 	NSMutableArray		*	mStacks;			// List of stacks in this document.
 }
 

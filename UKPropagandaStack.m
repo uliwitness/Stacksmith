@@ -17,7 +17,7 @@
 
 @implementation UKPropagandaStack
 
--(id)	initWithDocument: (UKPropagandaDocument*)theDocument
+-(id)	initWithDocument: (WILDDocument*)theDocument
 {
 	if(( self = [super init] ))
 	{
@@ -53,7 +53,7 @@
 }
 
 
--(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (UKPropagandaDocument*)theDocument
+-(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)theDocument
 {
 	if(( self = [super init] ))
 	{
@@ -307,7 +307,7 @@
 }
 
 
--(UKPropagandaDocument*)	document
+-(WILDDocument*)	document
 {
 	return mDocument;
 }

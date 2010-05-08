@@ -80,7 +80,7 @@
 
 @synthesize document = mDocument;
 
--(id)	initWithDocument: (UKPropagandaDocument*)inDocument
+-(id)	initWithDocument: (WILDDocument*)inDocument
 {
 	if(( self = [super init] ))
 	{

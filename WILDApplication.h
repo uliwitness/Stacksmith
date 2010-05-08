@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface UKPropagandaApplication : NSApplication
+@interface WILDApplication : NSApplication
 {
 	BOOL		mPeeking;
 }

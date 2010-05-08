@@ -14,7 +14,7 @@
 @class UKPropagandaStack;
 
 
-@interface UKPropagandaCardWindowController : NSWindowController
+@interface WILDCardWindowController : NSWindowController
 {
 	UKPropagandaStack						*	mStack;
 	IBOutlet UKPropagandaWindowBodyView		*	mView;

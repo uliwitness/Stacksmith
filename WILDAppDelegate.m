@@ -6,7 +6,7 @@
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import "UKPropagandaAppDelegate.h"
+#import "WILDAppDelegate.h"
 #import "UKPropagandaStack.h"
 #import "UKPropagandaCard.h"
 #import "UKPropagandaNotifications.h"
@@ -14,7 +14,7 @@
 #import "UKPropagandaTools.h"
 
 
-@implementation UKPropagandaAppDelegate
+@implementation WILDAppDelegate
 
 -(void)	applicationDidFinishLaunching:(NSNotification *)notification
 {

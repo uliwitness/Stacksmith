@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface UKPropagandaAppDelegate : NSResponder <NSApplicationDelegate>
+@interface WILDAppDelegate : NSResponder <NSApplicationDelegate>
 {
 	IBOutlet NSMenu*	mToolsMenu;
 	BOOL				mPeeking;

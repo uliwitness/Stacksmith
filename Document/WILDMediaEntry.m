@@ -1,15 +1,15 @@
 //
-//  UKPropPictureEntry.m
+//  WILDMediaEntry.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 25.04.10.
 //  Copyright 2010 The Void Software All rights reserved.
 //
 
-#import "UKPropPictureEntry.h"
+#import "WILDMediaEntry.h"
 
 
-@implementation UKPropPictureEntry
+@implementation WILDMediaEntry
 
 -(id)	initWithFilename: (NSString*)fileName withType: (NSString*)type
 			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos
@@ -56,13 +56,13 @@
 }
 
 
--(id)	imageOrCursor
+-(id)	imageMovieOrCursor
 {
 	return mImage;
 }
 
 
--(void)	setImageOrCursor: (id)theImage
+-(void)	setImageMovieOrCursor: (id)theImage
 {
 	ASSIGN(mImage,theImage);
 }

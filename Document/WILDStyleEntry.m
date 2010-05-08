@@ -6,11 +6,11 @@
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import "UKPropStyleEntry.h"
+#import "WILDStyleEntry.h"
 
 
 
-@implementation UKPropStyleEntry
+@implementation WILDStyleEntry
 
 -(id)	initWithFontName: (NSString*)theName fontSize: (NSInteger)theSize
 			styles: (NSArray*)theStyles

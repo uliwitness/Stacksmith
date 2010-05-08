@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface UKPropStyleEntry : NSObject
+@interface WILDStyleEntry : NSObject
 {
 	NSString*	mFontName;
 	NSInteger	mFontSize;

@@ -6,8 +6,8 @@
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import "UKPropagandaCardWindowController.h"
-#import "UKPropagandaDocument.h"
+#import "WILDCardWindowController.h"
+#import "WILDDocument.h"
 #import "UKPropagandaStack.h"
 #import "UKPropagandaCard.h"
 #import "UKPropagandaXMLUtils.h"
@@ -20,7 +20,7 @@
 #import <Quartz/Quartz.h>
 
 
-@implementation UKPropagandaCardWindowController
+@implementation WILDCardWindowController
 
 - (id)initWithStack: (UKPropagandaStack*)inStack
 {

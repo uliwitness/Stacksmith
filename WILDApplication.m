@@ -6,11 +6,11 @@
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import "UKPropagandaApplication.h"
+#import "WILDApplication.h"
 #import "UKPropagandaNotifications.h"
 
 
-@implementation UKPropagandaApplication
+@implementation WILDApplication
 
 -(void)	sendEvent: (NSEvent*)theEvent
 {

@@ -10,20 +10,20 @@
 
 
 @class IKImageBrowserView;
-@class UKPropagandaDocument;
+@class WILDDocument;
 
 
 @interface UKPropagandaIconListDataSource : NSObject
 {
-	UKPropagandaDocument*			mDocument;			// This is who we get the icons from.
+	WILDDocument*			mDocument;			// This is who we get the icons from.
 	NSMutableArray*					mIcons;				// Cached lists of icon names/IDs.
 	IBOutlet IKImageBrowserView*	mIconListView;		// View in which we show the icons.
 	IBOutlet NSTextField*			mImagePathField;	// Field where we show where the icon comes from.
 }
 
-@property (assign) UKPropagandaDocument*		document;
+@property (assign) WILDDocument*		document;
 
--(id)			initWithDocument: (UKPropagandaDocument*)inDocument;
+-(id)			initWithDocument: (WILDDocument*)inDocument;
 
 -(void)			setSelectedIconID: (NSInteger)theID;
 -(NSInteger)	selectedIconID;

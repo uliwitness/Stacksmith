@@ -14,7 +14,7 @@
 @class UKPropagandaBackground;
 @class UKPropagandaCard;
 @class UKPropagandaCardView;
-@class UKPropagandaDocument;
+@class WILDDocument;
 @class QTMovie;
 
 
@@ -34,11 +34,11 @@
 	BOOL					mCantDelete;		// Are scripts allowed to delete this stack?
 	BOOL					mCantModify;		// Is this stack write-protected?
 	NSInteger				mUserLevel;			// Maximum user level for this stack.
-	UKPropagandaDocument*	mDocument;			// Our owner, NOT RETAINED!
+	WILDDocument*	mDocument;			// Our owner, NOT RETAINED!
 }
 
--(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (UKPropagandaDocument*)owner;
--(id)	initWithDocument: (UKPropagandaDocument*)owner;
+-(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;
+-(id)	initWithDocument: (WILDDocument*)owner;
 
 -(void)			addCard: (UKPropagandaCard*)theCard;
 -(void)			addBackground: (UKPropagandaBackground*)theBg;
@@ -57,6 +57,6 @@
 
 +(NSColor*)		peekOutlineColor;
 
--(UKPropagandaDocument*)	document;
+-(WILDDocument*)	document;
 
 @end

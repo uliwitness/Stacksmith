@@ -14,7 +14,7 @@
 #import "UKPropagandaPartContents.h"
 #import "UKPropagandaDrawAddColorBezel.h"
 #import <QuartzCore/QuartzCore.h>
-#import "UKPropagandaButtonCell.h"
+#import "WILDButtonCell.h"
 #import "UKPropagandaNotifications.h"
 #import "UKPropagandaSelectionView.h"
 #import "UKPropagandaPictureView.h"

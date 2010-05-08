@@ -6,7 +6,7 @@
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import "UKPropagandaDocument.h"
+#import "WILDDocument.h"
 #import "UKPropagandaStack.h"
 #import "UKPropagandaCard.h"
 #import "UKPropagandaXMLUtils.h"
@@ -16,14 +16,14 @@
 #import "UKProgressPanelController.h"
 #import "NSView+SizeWindowForViewSize.h"
 #import "AGIconFamily.h"
-#import "UKPropStyleEntry.h"
-#import "UKPropPictureEntry.h"
+#import "WILDStyleEntry.h"
+#import "WILDMediaEntry.h"
 #import "UKRandomInteger.h"
-#import "UKPropagandaCardWindowController.h"
+#import "WILDCardWindowController.h"
 #import <Quartz/Quartz.h>
 
 
-@implementation UKPropagandaDocument
+@implementation WILDDocument
 
 - (id)init
 {
@@ -32,7 +32,7 @@
 	{
 		mFontIDTable = [[NSMutableDictionary alloc] init];
 		mTextStyles = [[NSMutableDictionary alloc] init];
-		mPictures = [[NSMutableArray alloc] init];
+		mMediaList = [[NSMutableArray alloc] init];
 		mStacks = [[NSMutableArray alloc] init];
 		[mStacks addObject: [[[UKPropagandaStack alloc] initWithDocument: self] autorelease]];
     }
@@ -45,7 +45,7 @@
 	DESTROY(mErrorsAndWarnings);
 	DESTROY(mFontIDTable);
 	DESTROY(mTextStyles);
-	DESTROY(mPictures);
+	DESTROY(mMediaList);
 	DESTROY(mStacks);
 	
 	[super dealloc];
@@ -56,7 +56,7 @@
 {
 	for( UKPropagandaStack* currStack in mStacks )
 	{
-		UKPropagandaCardWindowController*	cardWC = [[UKPropagandaCardWindowController alloc] initWithStack: currStack];
+		WILDCardWindowController*	cardWC = [[WILDCardWindowController alloc] initWithStack: currStack];
 		[self addWindowController: cardWC];
 		[cardWC release];
 	}
@@ -309,7 +309,7 @@
 
 -(void)		addStyleFormatWithID: (NSInteger)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray*)fontStyles
 {
-	UKPropStyleEntry*	pse = [[[UKPropStyleEntry alloc] initWithFontName: fontName fontSize: fontSize
+	WILDStyleEntry*	pse = [[[WILDStyleEntry alloc] initWithFontName: fontName fontSize: fontSize
 			styles: fontStyles] autorelease];
 	
 	[mTextStyles setObject: pse forKey: [NSNumber numberWithInteger: styleID]];
@@ -319,7 +319,7 @@
 -(void)	provideStyleFormatWithID: (NSInteger)oneBasedIdx font: (NSString**)outFontName
 			size: (NSInteger*)outFontSize styles: (NSArray**)outFontStyles
 {
-	UKPropStyleEntry*	pse = [mTextStyles objectForKey: [NSNumber numberWithInteger: oneBasedIdx]];
+	WILDStyleEntry*	pse = [mTextStyles objectForKey: [NSNumber numberWithInteger: oneBasedIdx]];
 	if( pse )
 	{
 		*outFontName = [pse fontName];
@@ -338,7 +338,7 @@
 	{
 		notUnique = NO;
 		
-		for( UKPropPictureEntry* currPict in mPictures )
+		for( WILDMediaEntry* currPict in mMediaList )
 		{
 			if( [currPict pictureID] == mediaID )
 			{
@@ -396,32 +396,32 @@
 			imageOrCursor: (id)imgOrCursor
 {
 	NSURL*				fileURL = [self URLForImageNamed: fileName];
-	UKPropPictureEntry*	pentry = [[[UKPropPictureEntry alloc] initWithFilename: [fileURL path]
+	WILDMediaEntry*	pentry = [[[WILDMediaEntry alloc] initWithFilename: [fileURL path]
 																withType: type name: iconName andID: iconID hotSpot: pos] autorelease];
 	if( imgOrCursor )
-		[pentry setImageOrCursor: imgOrCursor];
-	[mPictures addObject: pentry];
+		[pentry setImageMovieOrCursor: imgOrCursor];
+	[mMediaList addObject: pentry];
 }
 
 
 -(QTMovie*)		movieOfType: (NSString*)typ name: (NSString*)theName
 {
 	theName = [theName lowercaseString];
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [[currPic pictureType] isEqualToString: typ]
 			&& [[currPic name] isEqualToString: theName] )
 		{
-			if( ![currPic imageOrCursor] )
+			if( ![currPic imageMovieOrCursor] )
 			{
 				QTMovie*	img = [[[QTMovie alloc] initWithURL: [[self fileURL] URLByAppendingPathComponent: [currPic filename]] error: nil] autorelease];
 				if( !img )
 					img = [[[QTMovie alloc] initWithFile: [[NSBundle mainBundle] pathForResource: [currPic filename] ofType: @""] error: nil] autorelease];
-				[currPic setImageOrCursor: img];
+				[currPic setImageMovieOrCursor: img];
 				return img;
 			}
 			else
-				return [currPic imageOrCursor];
+				return [currPic imageMovieOrCursor];
 			break;
 		}
 	}
@@ -432,21 +432,21 @@
 
 -(QTMovie*)		movieOfType: (NSString*)typ id: (NSInteger)theID
 {
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [currPic pictureID] == theID
 			&& [[currPic pictureType] isEqualToString: typ] )
 		{
-			if( ![currPic imageOrCursor] )
+			if( ![currPic imageMovieOrCursor] )
 			{
 				QTMovie*	img = [[[QTMovie alloc] initWithURL: [[self fileURL] URLByAppendingPathComponent: [currPic filename]] error: nil] autorelease];
 				if( !img )
 					img = [[[QTMovie alloc] initWithFile: [currPic filename] error: nil] autorelease];
-				[currPic setImageOrCursor: img];
+				[currPic setImageMovieOrCursor: img];
 				return img;
 			}
 			else
-				return [currPic imageOrCursor];
+				return [currPic imageMovieOrCursor];
 			break;
 		}
 	}
@@ -461,19 +461,19 @@
 	assert(![typ isEqualToString: @"sound"]);
 	
 	theName = [theName lowercaseString];
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [[currPic pictureType] isEqualToString: typ]
 			&& [[currPic name] isEqualToString: theName] )
 		{
-			if( ![currPic imageOrCursor] )
+			if( ![currPic imageMovieOrCursor] )
 			{
 				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
-				[currPic setImageOrCursor: img];
+				[currPic setImageMovieOrCursor: img];
 				return img;
 			}
 			else
-				return [currPic imageOrCursor];
+				return [currPic imageMovieOrCursor];
 			break;
 		}
 	}
@@ -487,19 +487,19 @@
 	assert(![typ isEqualToString: @"cursor"]);
 	assert(![typ isEqualToString: @"sound"]);
 	
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [currPic pictureID] == theID
 			&& [[currPic pictureType] isEqualToString: typ] )
 		{
-			if( ![currPic imageOrCursor] )
+			if( ![currPic imageMovieOrCursor] )
 			{
 				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
-				[currPic setImageOrCursor: img];
+				[currPic setImageMovieOrCursor: img];
 				return img;
 			}
 			else
-				return [currPic imageOrCursor];
+				return [currPic imageMovieOrCursor];
 			break;
 		}
 	}
@@ -511,7 +511,7 @@
 -(NSInteger)	numberOfPictures
 {
 	NSInteger		numPics = 0;
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [[currPic pictureType] isEqualToString: @"icon"] )
 			numPics++;
@@ -524,20 +524,20 @@
 -(NSImage*)		pictureAtIndex: (NSInteger)idx
 {
 	NSInteger		numPics = 0;
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [[currPic pictureType] isEqualToString: @"icon"] )
 		{
 			if( numPics == idx )
 			{
-				if( ![currPic imageOrCursor] )
+				if( ![currPic imageMovieOrCursor] )
 				{
 					NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
-					[currPic setImageOrCursor: img];
+					[currPic setImageMovieOrCursor: img];
 					return img;
 				}
 				else
-					return [currPic imageOrCursor];
+					return [currPic imageMovieOrCursor];
 			}
 			numPics++;
 		}
@@ -551,7 +551,7 @@
 			image: (NSImage**)outImage fileName: (NSString**)outFileName
 {
 	NSInteger		numPics = 0;
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [[currPic pictureType] isEqualToString: @"icon"] )
 		{
@@ -559,13 +559,13 @@
 			{
 				if( outImage )
 				{
-					if( ![currPic imageOrCursor] )
+					if( ![currPic imageMovieOrCursor] )
 					{
 						*outImage = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
-						[currPic setImageOrCursor: *outImage];
+						[currPic setImageMovieOrCursor: *outImage];
 					}
 					else
-						*outImage = [currPic imageOrCursor];
+						*outImage = [currPic imageMovieOrCursor];
 				}
 
 				if( outName )
@@ -585,20 +585,20 @@
 -(NSCursor*)	cursorWithName: (NSString*)theName
 {
 	theName = [theName lowercaseString];
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [[currPic pictureType] isEqualToString: @"cursor"]
 			&& [[currPic name] isEqualToString: theName])
 		{
-			if( ![currPic imageOrCursor] )
+			if( ![currPic imageMovieOrCursor] )
 			{
 				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
 				NSCursor*	curs = [[[NSCursor alloc] initWithImage: img hotSpot: [currPic hotSpot]] autorelease];
-				[currPic setImageOrCursor: curs];
+				[currPic setImageMovieOrCursor: curs];
 				return curs;
 			}
 			else
-				return [currPic imageOrCursor];
+				return [currPic imageMovieOrCursor];
 			break;
 		}
 	}
@@ -612,20 +612,20 @@
 
 -(NSCursor*)	cursorWithID: (NSInteger)theID
 {
-	for( UKPropPictureEntry* currPic in mPictures )
+	for( WILDMediaEntry* currPic in mMediaList )
 	{
 		if( [currPic pictureID] == theID
 			&& [[currPic pictureType] isEqualToString: @"cursor"] )
 		{
-			if( ![currPic imageOrCursor] )
+			if( ![currPic imageMovieOrCursor] )
 			{
 				NSImage*	img = [[[NSImage alloc] initWithContentsOfFile: [currPic filename]] autorelease];
 				NSCursor*	curs = [[[NSCursor alloc] initWithImage: img hotSpot: [currPic hotSpot]] autorelease];
-				[currPic setImageOrCursor: curs];
+				[currPic setImageMovieOrCursor: curs];
 				return curs;
 			}
 			else
-				return [currPic imageOrCursor];
+				return [currPic imageMovieOrCursor];
 			break;
 		}
 	}
