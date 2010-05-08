@@ -1,5 +1,5 @@
 //
-//  UKPropagandaApplication.m
+//  WILDApplication.m
 //  Propaganda
 //
 //  Created by Uli Kusterer on 20.03.10.
@@ -7,7 +7,7 @@
 //
 
 #import "WILDApplication.h"
-#import "UKPropagandaNotifications.h"
+#import "WILDNotifications.h"
 
 
 @implementation WILDApplication
@@ -20,19 +20,19 @@
 			&& ([theEvent modifierFlags] & NSCommandKeyMask) )
 		{
 			mPeeking = YES;
-			[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPeekingStateChangedNotification
+			[[NSNotificationCenter defaultCenter] postNotificationName: WILDPeekingStateChangedNotification
 													object: nil userInfo:
 														[NSDictionary dictionaryWithObjectsAndKeys:
-															[NSNumber numberWithBool: mPeeking], UKPropagandaPeekingStateKey,
+															[NSNumber numberWithBool: mPeeking], WILDPeekingStateKey,
 														nil]];
 		}
 		else if( mPeeking )
 		{
 			mPeeking = NO;
-			[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaPeekingStateChangedNotification
+			[[NSNotificationCenter defaultCenter] postNotificationName: WILDPeekingStateChangedNotification
 													object: nil userInfo:
 														[NSDictionary dictionaryWithObjectsAndKeys:
-															[NSNumber numberWithBool: mPeeking], UKPropagandaPeekingStateKey,
+															[NSNumber numberWithBool: mPeeking], WILDPeekingStateKey,
 														nil]];
 		}
 	}

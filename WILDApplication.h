@@ -1,5 +1,5 @@
 //
-//  UKPropagandaApplication.h
+//  WILDApplication.h
 //  Propaganda
 //
 //  Created by Uli Kusterer on 20.03.10.

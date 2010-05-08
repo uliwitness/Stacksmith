@@ -1,5 +1,5 @@
 //
-//  UKPropagandaCardWindowController.h
+//  WILDCardWindowController.h
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.04.10.
@@ -9,16 +9,16 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class UKPropagandaCardViewController;
-@class UKPropagandaWindowBodyView;
-@class UKPropagandaStack;
+@class WILDCardViewController;
+@class WILDWindowBodyView;
+@class WILDStack;
 
 
 @interface WILDCardWindowController : NSWindowController
 {
-	UKPropagandaStack						*	mStack;
-	IBOutlet UKPropagandaWindowBodyView		*	mView;
-	IBOutlet UKPropagandaCardViewController	*	mCardViewController;
+	WILDStack						*	mStack;
+	IBOutlet WILDWindowBodyView		*	mView;
+	IBOutlet WILDCardViewController	*	mCardViewController;
 }
 
 @end

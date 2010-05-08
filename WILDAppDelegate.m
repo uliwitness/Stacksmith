@@ -1,5 +1,5 @@
 //
-//  UKPropagandaAppDelegate.m
+//  WILDAppDelegate.m
 //  Propaganda
 //
 //  Created by Uli Kusterer on 13.03.10.
@@ -7,11 +7,11 @@
 //
 
 #import "WILDAppDelegate.h"
-#import "UKPropagandaStack.h"
-#import "UKPropagandaCard.h"
-#import "UKPropagandaNotifications.h"
+#import "WILDStack.h"
+#import "WILDCard.h"
+#import "WILDNotifications.h"
 #import "UKMenuBarOverlay.h"
-#import "UKPropagandaTools.h"
+#import "WILDTools.h"
 
 
 @implementation WILDAppDelegate
@@ -24,7 +24,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"BrowseTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaBrowseTool];
+	[oneButton setTag: WILDBrowseTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -33,7 +33,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"ButtonTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaButtonTool];
+	[oneButton setTag: WILDButtonTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -42,7 +42,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"FieldTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaFieldTool];
+	[oneButton setTag: WILDFieldTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -56,7 +56,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"SelectTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaSelectTool];
+	[oneButton setTag: WILDSelectTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -65,7 +65,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"LassoTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaLassoTool];
+	[oneButton setTag: WILDLassoTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -75,7 +75,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"PencilTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaPencilTool];
+	[oneButton setTag: WILDPencilTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -89,7 +89,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"BrushTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaBrushTool];
+	[oneButton setTag: WILDBrushTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -98,7 +98,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"EraserTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaEraserTool];
+	[oneButton setTag: WILDEraserTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -107,7 +107,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"LineTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaLineTool];
+	[oneButton setTag: WILDLineTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -121,7 +121,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"SprayTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaSprayTool];
+	[oneButton setTag: WILDSprayTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -130,7 +130,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"RectTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaRectangleTool];
+	[oneButton setTag: WILDRectangleTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -139,7 +139,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"RoundRectTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaRoundRectTool];
+	[oneButton setTag: WILDRoundRectTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -153,7 +153,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"BucketTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaBucketTool];
+	[oneButton setTag: WILDBucketTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -162,7 +162,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"OvalTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaOvalTool];
+	[oneButton setTag: WILDOvalTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -171,7 +171,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"CurveTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaCurveTool];
+	[oneButton setTag: WILDCurveTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -185,7 +185,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"TextTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaTextTool];
+	[oneButton setTag: WILDTextTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -194,7 +194,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"RegPolygonTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaRegularPolygonTool];
+	[oneButton setTag: WILDRegularPolygonTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -203,7 +203,7 @@
 	[oneButton setImage: [NSImage imageNamed: @"PolygonTool"]];
 	[oneButton setBezelStyle: NSShadowlessSquareBezelStyle];
 	[oneButton setButtonType: NSPushOnPushOffButton];
-	[oneButton setTag: UKPropagandaPolygonTool];
+	[oneButton setTag: WILDPolygonTool];
 	[oneButton setTarget: nil];
 	[oneButton setAction: @selector(toolsMenuRowDummyAction:)];
 	[oneRow addSubview: oneButton];
@@ -253,7 +253,7 @@
 		for( int x = 0; x < 3; x++ )
 		{
 			NSButton*	theBtn = [[menuView subviews] objectAtIndex: x];
-			BOOL	isCurrent = [theBtn tag] == [[UKPropagandaTools propagandaTools] currentTool];
+			BOOL	isCurrent = [theBtn tag] == [[WILDTools sharedTools] currentTool];
 			[theBtn setState: isCurrent ? NSOnState : NSOffState];
 		}
 		
@@ -267,10 +267,10 @@
 -(IBAction)	toggleBackgroundEditMode: (id)sender
 {
 	mBackgroundEditMode = !mBackgroundEditMode;
-	[[NSNotificationCenter defaultCenter] postNotificationName: UKPropagandaBackgroundEditModeChangedNotification
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDBackgroundEditModeChangedNotification
 											object: nil userInfo:
 												[NSDictionary dictionaryWithObjectsAndKeys:
-													[NSNumber numberWithBool: mBackgroundEditMode], UKPropagandaBackgroundEditModeKey,
+													[NSNumber numberWithBool: mBackgroundEditMode], WILDBackgroundEditModeKey,
 												nil]];
 	if( mBackgroundEditMode )
 		[UKMenuBarOverlay show];

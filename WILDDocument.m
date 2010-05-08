@@ -1,5 +1,5 @@
 //
-//  UKPropagandaDocument.m
+//  WILDDocument.m
 //  Propaganda
 //
 //  Created by Uli Kusterer on 27.02.10.
@@ -7,11 +7,11 @@
 //
 
 #import "WILDDocument.h"
-#import "UKPropagandaStack.h"
-#import "UKPropagandaCard.h"
-#import "UKPropagandaXMLUtils.h"
-#import "UKPropagandaCardViewController.h"
-#import "UKPropagandaWindowBodyView.h"
+#import "WILDStack.h"
+#import "WILDCard.h"
+#import "WILDXMLUtils.h"
+#import "WILDCardViewController.h"
+#import "WILDCardView.h"
 #import "NSFileHandle+UKReadLinewise.h"
 #import "UKProgressPanelController.h"
 #import "NSView+SizeWindowForViewSize.h"
@@ -34,7 +34,7 @@
 		mTextStyles = [[NSMutableDictionary alloc] init];
 		mMediaList = [[NSMutableArray alloc] init];
 		mStacks = [[NSMutableArray alloc] init];
-		[mStacks addObject: [[[UKPropagandaStack alloc] initWithDocument: self] autorelease]];
+		[mStacks addObject: [[[WILDStack alloc] initWithDocument: self] autorelease]];
     }
     return self;
 }
@@ -54,7 +54,7 @@
 
 -(void)	makeWindowControllers
 {
-	for( UKPropagandaStack* currStack in mStacks )
+	for( WILDStack* currStack in mStacks )
 	{
 		WILDCardWindowController*	cardWC = [[WILDCardWindowController alloc] initWithStack: currStack];
 		[self addWindowController: cardWC];
@@ -67,7 +67,7 @@
 //{
 //    // Override returning the nib file name of the document
 //    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-//    return @"UKPropagandaDocument";
+//    return @"WILDDocument";
 //}
 //
 //- (void)windowControllerDidLoadNib:(NSWindowController *) aController
@@ -176,7 +176,7 @@
 		NSString	*	fontName = ([fontElems count] > 0) ? [[fontElems objectAtIndex: 0] stringValue] : nil;
 		NSArray		*	idElems = [thePic elementsForName: @"id"];
 		NSString	*	styleID = ([idElems count] > 0) ? [[idElems objectAtIndex: 0] stringValue] : nil;
-		NSArray		*	textStyles = UKPropagandaStringsFromSubElementInElement( @"textStyle",thePic);
+		NSArray		*	textStyles = WILDStringsFromSubElementInElement( @"textStyle",thePic);
 		NSArray		*	sizeElems = [thePic elementsForName: @"size"];
 		NSString	*	fontSize = ([sizeElems count] > 0) ? [[sizeElems objectAtIndex: 0] stringValue] : nil;
 		[self addStyleFormatWithID: styleID ? [styleID intValue] : x
@@ -197,7 +197,7 @@
 		NSString	*	iconName = [[[thePic elementsForName: @"name"] objectAtIndex: 0] stringValue];
 		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
 		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
-		NSPoint			pos = UKPropagandaPointFromSubElementInElement( @"hotspot", thePic );
+		NSPoint			pos = WILDPointFromSubElementInElement( @"hotspot", thePic );
 		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
 			imageOrCursor: nil];
 	}
@@ -210,7 +210,7 @@
 		NSString	*	iconName = [[[thePic elementsForName: @"name"] objectAtIndex: 0] stringValue];
 		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
 		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
-		NSPoint			pos = UKPropagandaPointFromSubElementInElement( @"hotspot", thePic );
+		NSPoint			pos = WILDPointFromSubElementInElement( @"hotspot", thePic );
 		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
 			imageOrCursor: nil];
 	}
@@ -227,7 +227,7 @@
 		NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0
 									error: outError];
 		
-		UKPropagandaStack*	currStack = [[UKPropagandaStack alloc] initWithXMLDocument: theDoc
+		WILDStack*	currStack = [[WILDStack alloc] initWithXMLDocument: theDoc
 											document: self];
 		[mStacks addObject: currStack];
 		[theDoc release];

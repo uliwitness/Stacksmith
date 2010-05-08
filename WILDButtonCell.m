@@ -1,5 +1,5 @@
 //
-//  UKPropagandaButtonCell.m
+//  WILDButtonCell.m
 //  Propaganda
 //
 //  Created by Uli Kusterer on 20.03.10.
@@ -12,7 +12,7 @@
 #import "UKGraphics.h"
 
 
-NSImage*	UKPropagandaInvertedImage( NSImage* img )
+NSImage*	WILDInvertedImage( NSImage* img )
 {
 	NSRect		iBox = NSZeroRect;
 	iBox.size = [img size];
@@ -152,7 +152,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 			[[NSColor whiteColor] set];
 		[NSBezierPath fillRect: txBox];
 		
-		NSImage*		img = isHighlighted ? UKPropagandaInvertedImage([self image]) : [self image];
+		NSImage*		img = isHighlighted ? WILDInvertedImage([self image]) : [self image];
 		CGImageRef		theCGImage = [img CGImageForProposedRect: nil
 											context: [NSGraphicsContext currentContext] hints: nil];
 		UKCGContextDrawImageFlipped( theContext, imgBox, theCGImage );
@@ -160,7 +160,7 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 	else if( [self image] != nil && [self imagePosition] == NSImageOnly )
 	{
 		CGContextRef	theContext = [[NSGraphicsContext currentContext] graphicsPort];
-		NSImage*		img = isHighlighted ? UKPropagandaInvertedImage([self image]) : [self image];
+		NSImage*		img = isHighlighted ? WILDInvertedImage([self image]) : [self image];
 		CGImageRef		theCGImage = [img CGImageForProposedRect: nil
 											context: [NSGraphicsContext currentContext] hints: nil];
 		UKCGContextDrawImageFlipped( theContext, imgBox, theCGImage );

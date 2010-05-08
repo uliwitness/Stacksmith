@@ -1,5 +1,5 @@
 //
-//  UKPropagandaDocument.h
+//  WILDDocument.h
 //  Propaganda
 //
 //  Created by Uli Kusterer on 27.02.10.
@@ -9,7 +9,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class UKPropagandaStack;
+@class WILDStack;
 
 
 @interface WILDDocument : NSDocument

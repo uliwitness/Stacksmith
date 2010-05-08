@@ -1,5 +1,5 @@
 //
-//  UKPropagandaCardWindowController.m
+//  WILDCardWindowController.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.04.10.
@@ -8,11 +8,11 @@
 
 #import "WILDCardWindowController.h"
 #import "WILDDocument.h"
-#import "UKPropagandaStack.h"
-#import "UKPropagandaCard.h"
-#import "UKPropagandaXMLUtils.h"
-#import "UKPropagandaCardViewController.h"
-#import "UKPropagandaWindowBodyView.h"
+#import "WILDStack.h"
+#import "WILDCard.h"
+#import "WILDXMLUtils.h"
+#import "WILDCardViewController.h"
+#import "WILDCardView.h"
 #import "NSFileHandle+UKReadLinewise.h"
 #import "UKProgressPanelController.h"
 #import "NSView+SizeWindowForViewSize.h"
@@ -22,7 +22,7 @@
 
 @implementation WILDCardWindowController
 
-- (id)initWithStack: (UKPropagandaStack*)inStack
+- (id)initWithStack: (WILDStack*)inStack
 {
     self = [super initWithWindowNibName: NSStringFromClass([self class])];
     if( self )

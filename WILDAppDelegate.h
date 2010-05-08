@@ -1,5 +1,5 @@
 //
-//  UKPropagandaAppDelegate.h
+//  WILDAppDelegate.h
 //  Propaganda
 //
 //  Created by Uli Kusterer on 13.03.10.

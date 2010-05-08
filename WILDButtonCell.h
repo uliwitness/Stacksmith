@@ -1,5 +1,5 @@
 //
-//  UKPropagandaButtonCell.h
+//  WILDButtonCell.h
 //  Propaganda
 //
 //  Created by Uli Kusterer on 20.03.10.
