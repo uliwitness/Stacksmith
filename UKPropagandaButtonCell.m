@@ -171,4 +171,10 @@ NSImage*	UKPropagandaInvertedImage( NSImage* img )
 	[NSGraphicsContext restoreGraphicsState];
 }
 
+
+-(NSInteger)	nextState
+{
+	return [self state];
+}
+
 @end
