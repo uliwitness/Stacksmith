@@ -285,7 +285,7 @@
 
 	[[NSColor redColor] set];
 	
-	for( NSView* theView in views )
+	for( UKPropagandaSelectionView* theView in views )
 	{
 		[NSGraphicsContext saveGraphicsState];
 		
@@ -299,7 +299,11 @@
 		[transform translateXBy: layerFrame.origin.x yBy: layerFrame.origin.y];
 		[transform concat];
 		
+		BOOL	wasSelected = theView->mSelected;
+		theView->mSelected = NO;
+		[theView display];
 		[theLayer renderInContext: currContext];
+		theView->mSelected = wasSelected;
 		
 		[NSGraphicsContext restoreGraphicsState];
 	}
@@ -627,7 +631,7 @@
 	[tv setSelectable: ![currPart textLocked]];
 	
 	NSScrollView*	sv = [[NSScrollView alloc] initWithFrame: partRect];
-	[sv setDocumentCursor: [[[[[self enclosingCardView] card] stack] document] cursorWithID: 128]];
+	[sv setDocumentCursor: [NSCursor arrowCursor]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = partRect;
 	txBox.origin = NSZeroPoint;
@@ -725,7 +729,7 @@
 	
 	// Build surrounding scroll view:
 	NSScrollView*	sv = [[NSScrollView alloc] initWithFrame: partRect];
-	[sv setDocumentCursor: [[[[[self enclosingCardView] card] stack] document] cursorWithID: 128]];
+	[sv setDocumentCursor: [NSCursor arrowCursor]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = [currPart rectangle];
 	txBox.origin = NSZeroPoint;
