@@ -27,6 +27,8 @@
 @property (copy)	NSArray*	styles;
 @property (assign)	NSInteger	styleID;
 
+-(NSString*)	xmlString;
+
 @end
 
 
@@ -46,6 +48,21 @@
 	styles = nil;
 	
 	[super dealloc];
+}
+
+
+-(NSString*)	xmlString
+{
+	NSMutableString*	outStr = [[[NSMutableString alloc] init] autorelease];
+	
+	[outStr appendString: @"\t\t<stylerun>\n"];
+	
+	[outStr appendFormat: @"\t\t\t<offset>%d</offset>", styleRange.location];
+	[outStr appendFormat: @"\t\t\t<id>%d</id>", styleID];
+	
+	[outStr appendString: @"\t\t</stylerun>\n"];
+	
+	return outStr;
 }
 
 @end
@@ -270,6 +287,35 @@
 	}
 	
 	return mListItems;
+}
+
+
+-(NSString*)	xmlString
+{
+	NSMutableString*	outString = [[[NSMutableString alloc] init] autorelease];
+	
+	[outString appendString: @"\t<content>\n"];
+	
+	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
+	[outString appendFormat: @"\t\t<id>%d</id>\n", mID];
+	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
+
+	NSMutableString*	theText = [[mText mutableCopy] autorelease];
+	[theText replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0, [theText length])];
+	[theText replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0, [theText length])];
+	[theText replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [theText length])];
+	[outString appendFormat: @"\t\t<text>%@</text>\n", theText];
+
+	[outString appendFormat: @"\t\t<highlight>%@</highlight>\n", mHighlighted ? @"<true />" : @"<false />"];
+	
+	for( UKPropagandaStyleRun* theStyle in mStyles )
+	{
+		[outString appendString: [theStyle xmlString]];
+	}
+	
+	[outString appendString: @"\t</content>\n"];
+	
+	return outString;
 }
 
 @end

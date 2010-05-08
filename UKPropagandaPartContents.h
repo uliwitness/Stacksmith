@@ -36,4 +36,6 @@
 
 -(NSArray*)				listItems;
 
+-(NSString*)			xmlString;
+
 @end
