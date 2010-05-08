@@ -580,4 +580,15 @@
 	[[UKPropagandaTools propagandaTools] setCurrentTool: [sender tag]];
 }
 
+-(IBAction)	paste: (id)sender
+{
+	NSPasteboard*	pb = [NSPasteboard generalPasteboard];
+	NSArray*		imgs = [pb readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options: [NSDictionary dictionary]];
+	if( [imgs count] > 0 )
+	{
+		NSImage*		anImg = [imgs objectAtIndex: 0];
+		
+	}
+}
+
 @end
