@@ -20,11 +20,11 @@
 	UKPropagandaPart*	mPart;			// The part this view represents.
 	BOOL				mSelected;		// Should we draw the selection as marching ants around this view?
 	NSControl*			mControl;		// The main control in this view representing us.
-	NSView*				mHelperView;	// An additiona view, e.g. a label text field or so.
+	NSView*				mHelperView;	// An additional view, e.g. a label text field or so.
 }
 
-@property (assign) NSControl*	control;
-@property (assign) NSView*		helperView;
+@property (assign) NSControl*			control;
+@property (assign) NSView*				helperView;
 
 -(void)					setRepresentedPart: (UKPropagandaPart*)inPart;
 -(UKPropagandaPart*)	representedPart;
