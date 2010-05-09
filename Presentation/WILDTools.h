@@ -14,6 +14,10 @@
 -(void)	setNeedsDisplay: (BOOL)inState;
 -(void)	setSelected: (BOOL)inState;
 
+@optional
+-(BOOL)	isSelected;
+-(void)	animate: (id)sender;
+
 @end
 
 

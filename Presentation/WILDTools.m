@@ -58,7 +58,10 @@ static WILDTools*		sAnimator = nil;
 	
 	for( id<WILDSelectableView> currView in nonRetainingClients )
 	{
-		[currView setNeedsDisplay: YES];
+		if( [currView respondsToSelector: @selector(animate:)] )
+			[currView animate: self];
+		else
+			[currView setNeedsDisplay: YES];
 	}
 }
 
@@ -96,7 +99,10 @@ static WILDTools*		sAnimator = nil;
 	for( id<WILDSelectableView> currView in clients )
 	{
 		[currView setSelected: NO];
-		[currView setNeedsDisplay: YES];
+		if( [currView respondsToSelector: @selector(animate:)] )
+			[currView animate: self];
+		else
+			[currView setNeedsDisplay: YES];
 	}
 }
 

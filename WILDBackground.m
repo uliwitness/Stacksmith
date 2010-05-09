@@ -211,16 +211,22 @@
 		if( [objectType isEqualToString: @"button"] )
 		{
 			WILDPart*	thePart = [self partWithID: objectID];
-			[thePart setFillColor: objectColor];
-			[thePart setBevel: objectBevel];
-			[mAddColorParts addObject: thePart];
+			if( thePart )
+			{
+				[thePart setFillColor: objectColor];
+				[thePart setBevel: objectBevel];
+				[mAddColorParts addObject: thePart];
+			}
 		}
 		else if( [objectType isEqualToString: @"field"] )
 		{
 			WILDPart*	thePart = [self partWithID: objectID];
-			[thePart setFillColor: objectColor];
-			[thePart setBevel: objectBevel];
-			[mAddColorParts addObject: thePart];
+			if( thePart )
+			{
+				[thePart setFillColor: objectColor];
+				[thePart setBevel: objectBevel];
+				[mAddColorParts addObject: thePart];
+			}
 		}
 		else if( [objectType isEqualToString: @"rectangle"] )
 		{

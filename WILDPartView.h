@@ -19,12 +19,12 @@
 	BOOL				mPeeking;		// Are we currently peeking, and should thus draw our bounding box?
 	WILDPart*			mPart;			// The part this view represents.
 	BOOL				mSelected;		// Should we draw the selection as marching ants around this view?
-	NSControl*			mControl;		// The main control in this view representing us.
+	NSView*				mMainView;		// The main control in this view representing us.
 	NSView*				mHelperView;	// An additional view, e.g. a label text field or so.
 }
 
-@property (assign) NSControl*			control;
-@property (assign) NSView*				helperView;
+@property (assign) NSView*			mainView;
+@property (assign) NSView*			helperView;
 
 -(void)			setPart: (WILDPart*)inPart;
 -(WILDPart*)	part;
@@ -42,6 +42,8 @@
 -(void)	unloadPart;
 
 -(NSImage*)	imageForPeerViews: (NSArray*)views dragStartImagePos: (NSPoint*)dragStartImagePos;
+
+-(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect;
 
 @end
 

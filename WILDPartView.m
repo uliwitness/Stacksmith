@@ -18,6 +18,9 @@
 #import "WILDButtonCell.h"
 #import "WILDTextView.h"
 #import "UKIsDragStart.h"
+#import "WILDPresentationConstants.h"
+#import "WILDButtonView.h"
+#import "WILDScrollView.h"
 
 
 @class WILDCardView;
@@ -25,7 +28,7 @@
 
 @implementation WILDPartView
 
-@synthesize control = mControl;
+@synthesize mainView = mMainView;
 @synthesize helperView = mHelperView;
 
 -(id)	initWithFrame: (NSRect)frameRect
@@ -89,9 +92,17 @@
 
 -(void)	highlightSearchResultInRange: (NSRange)theRange
 {
-	[(NSTextView*)mHelperView setSelectedRange: theRange];
-	[(NSTextView*)mHelperView scrollRangeToVisible: theRange];
-	[(NSTextView*)mHelperView showFindIndicatorForRange: theRange];
+	[(NSTextView*)mMainView setSelectedRange: theRange];
+	[(NSTextView*)mMainView scrollRangeToVisible: theRange];
+	[(NSTextView*)mMainView showFindIndicatorForRange: theRange];
+}
+
+
+-(void)	animate: (id)sender
+{
+	[self setNeedsDisplay: YES];
+	[mMainView setNeedsDisplay: YES];
+	[mHelperView setNeedsDisplay: YES];
 }
 
 
@@ -109,31 +120,27 @@
 }
 
 
--(void)	drawRect: (NSRect)dirtyRect
+-(BOOL)	isSelected
 {
+	return mSelected;
+}
+
+
+-(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect
+{
+	NSRect	subviewBounds = [subview bounds];
 	BOOL	isMyTool = ([[WILDTools sharedTools] currentTool] == WILDButtonTool && [[mPart partType] isEqualToString: @"button"])
 						|| ([[WILDTools sharedTools] currentTool] == WILDFieldTool && [[mPart partType] isEqualToString: @"field"]);
-   
-    if( mPeeking )
-	{
-		NSRect	peekBox = NSInsetRect( [self bounds], 3, 3 );
-		[NSBezierPath setDefaultLineWidth: 2];
-		[[NSColor lightGrayColor] set];
-		[NSBezierPath strokeRect: peekBox];
-		[[[WILDTools sharedTools] peekPattern] set];
-		[NSBezierPath strokeRect: peekBox];
-		[NSBezierPath setDefaultLineWidth: 1];
-	}
 	
 	if( mSelected )
 	{
 		[[NSColor keyboardFocusIndicatorColor] set];
-		NSRect	clampedBounds = [self bounds];
-		clampedBounds.origin.x = truncf(clampedBounds.origin.x) + 2.5;
-		clampedBounds.origin.y = truncf(clampedBounds.origin.y) + 2.5;
-		clampedBounds.size.width -= 5;
-		clampedBounds.size.height -= 5;
-		NSBezierPath*	selPath = [NSBezierPath bezierPathWithRect: NSInsetRect(clampedBounds, 1, 1)];
+		NSRect	clampedBounds = subviewBounds;
+		clampedBounds.origin.x = truncf(clampedBounds.origin.x) + 0.5;
+		clampedBounds.origin.y = truncf(clampedBounds.origin.y) + 0.5;
+		clampedBounds.size.width -= 1;
+		clampedBounds.size.height -= 1;
+		NSBezierPath*	selPath = [NSBezierPath bezierPathWithRect: clampedBounds];
 		CGFloat			pattern[2] = { 4, 4 };
 		[[NSColor whiteColor] set];
 		[selPath stroke];
@@ -144,9 +151,20 @@
 	else if( isMyTool )
 	{
 		[[NSColor grayColor] set];
-		NSRect	peekBox = NSInsetRect( [self bounds], 3.5, 3.5 );
+		NSRect	peekBox = NSInsetRect( subviewBounds, 0.5, 0.5 );
 		[NSBezierPath strokeRect: peekBox];
 		[[NSColor blackColor] set];
+	}
+	
+    if( mPeeking )
+	{
+		NSRect	peekBox = NSInsetRect( subviewBounds, 1, 1 );
+		[NSBezierPath setDefaultLineWidth: 2];
+		[[NSColor lightGrayColor] set];
+		[NSBezierPath strokeRect: peekBox];
+		[[[WILDTools sharedTools] peekPattern] set];
+		[NSBezierPath strokeRect: peekBox];
+		[NSBezierPath setDefaultLineWidth: 1];
 	}
 }
 
@@ -226,8 +244,8 @@
 						[xmlString appendString: bgXmlStr];
 				}
 				
-				[pb addTypes: [NSArray arrayWithObject: NSStringPboardType] owner: self];
-				[pb setString: xmlString forType: NSStringPboardType];
+				[pb addTypes: [NSArray arrayWithObject: WILDPartPboardType] owner: self];
+				[pb setString: xmlString forType: WILDPartPboardType];
 				
 				// Actually commence the drag:
 				[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
@@ -258,6 +276,8 @@
 		[self setSelected: YES];
 	}
 	[self setNeedsDisplay: YES];
+	[mMainView setNeedsDisplay: YES];
+	[mHelperView setNeedsDisplay: YES];
 }
 
 
@@ -320,6 +340,8 @@
 {
 	mPeeking = [[[notification userInfo] objectForKey: WILDPeekingStateKey] boolValue];
 	[self setNeedsDisplay: YES];
+	[mMainView setNeedsDisplay: YES];
+	[mHelperView setNeedsDisplay: YES];
 }
 
 
@@ -359,25 +381,25 @@
 -(void)	partDidChange: (NSNotification*)notification
 {
 	NSString*	thePropName = [[notification userInfo] objectForKey: WILDAffectedPropertyKey];
-	if( [thePropName isEqualToString: @"highlighted"] && [mControl respondsToSelector: @selector(setState:)] )
+	if( [thePropName isEqualToString: @"highlighted"] && [mMainView respondsToSelector: @selector(setState:)] )
 	{
 		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
-		[(NSButton*)mControl setState: [mPart highlighted] ? NSOnState : NSOffState];
+		[(NSButton*)mMainView setState: [mPart highlighted] ? NSOnState : NSOffState];
 	}
-	else if( [thePropName isEqualToString: @"visible"] && [mControl respondsToSelector: @selector(setHidden:)] )
+	else if( [thePropName isEqualToString: @"visible"] && [mMainView respondsToSelector: @selector(setHidden:)] )
 	{
 		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
 		[self setHidden: ![mPart visible]];
 	}
-	else if( [thePropName isEqualToString: @"enabled"] && [mControl respondsToSelector: @selector(setEnabled:)] )
+	else if( [thePropName isEqualToString: @"enabled"] && [mMainView respondsToSelector: @selector(setEnabled:)] )
 	{
 		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
-		[(NSButton*)mControl setEnabled: [mPart isEnabled]];
+		[(NSButton*)mMainView setEnabled: [mPart isEnabled]];
 	}
-	else if( [thePropName isEqualToString: @"icon"] && [mControl respondsToSelector: @selector(setImage:)] )
+	else if( [thePropName isEqualToString: @"icon"] && [mMainView respondsToSelector: @selector(setImage:)] )
 	{
 		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
-		[(NSButton*)mControl setImage: [mPart iconImage]];
+		[(NSButton*)mMainView setImage: [mPart iconImage]];
 	}
 	else
 	{
@@ -391,6 +413,8 @@
 {
 	[self setSelected: NO];
 	[self setNeedsDisplay: YES];
+	[mMainView setNeedsDisplay: YES];
+	[mHelperView setNeedsDisplay: YES];
 }
 
 
@@ -399,7 +423,7 @@
 	NSArray*	subviews = [[[self subviews] copy] autorelease];
 	for( NSView* currView in subviews )
 		[currView removeFromSuperview];
-	[self setControl: nil];
+	[self setMainView: nil];
 	[self setHelperView: nil];
 	[self unsubscribeNotifications];
 }
@@ -462,7 +486,7 @@
 	
 	[self addSubview: bt];
 	
-	[self setControl: bt];
+	[self setMainView: bt];
 	
 	if( label )
 		[[bt cell] accessibilitySetOverrideValue: [label cell] forAttribute: NSAccessibilityTitleUIElementAttribute];
@@ -481,7 +505,7 @@
 	partRect.origin = NSMakePoint( 2, 2 );
 	
 	BOOL			canHaveIcon = YES;
-	NSButton	*	bt = [[NSButton alloc] initWithFrame: partRect];
+	NSButton	*	bt = [[WILDButtonView alloc] initWithFrame: partRect];
 	[bt setWantsLayer: YES];
 	
 	if( [[currPart style] isEqualToString: @"transparent"]
@@ -579,7 +603,7 @@
 	}
 	
 	[self addSubview: bt];
-	[self setControl: bt];
+	[self setMainView: bt];
 	
 	[bt release];
 }
@@ -630,7 +654,7 @@
 	[tv setEditable: ![currPart textLocked]];
 	[tv setSelectable: ![currPart textLocked]];
 	
-	NSScrollView*	sv = [[NSScrollView alloc] initWithFrame: partRect];
+	NSScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
 	[sv setDocumentCursor: [NSCursor arrowCursor]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = partRect;
@@ -683,7 +707,8 @@
 	[tv setFrame: txBox];
 	[sv setDocumentView: tv];
 	[self addSubview: sv];
-	[self setHelperView: tv];
+	[self setHelperView: sv];
+	[self setMainView: tv];
 	
 	[tv release];
 }
@@ -728,7 +753,7 @@
 	[arrayc release];
 	
 	// Build surrounding scroll view:
-	NSScrollView*	sv = [[NSScrollView alloc] initWithFrame: partRect];
+	NSScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
 	[sv setDocumentCursor: [NSCursor arrowCursor]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = [currPart rectangle];
@@ -775,7 +800,8 @@
 	[tc setMinWidth: 10.0];
 	[sv setDocumentView: tv];
 	[self addSubview: sv];
-	[self setHelperView: tv];
+	[self setHelperView: sv];
+	[self setMainView: tv];
 
 	NSIndexSet*	idxes = [currPart selectedListItemIndexes];
 	if( idxes )

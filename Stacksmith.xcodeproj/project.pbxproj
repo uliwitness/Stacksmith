@@ -10,6 +10,11 @@
 		1DDD582C0DA1D0D100B32029 /* WILDCardWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		550B30781152D9DE0049C593 /* AGIconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = 550B30771152D9DE0049C593 /* AGIconFamily.m */; };
+		550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09091195E61100351067 /* WILDPresentationConstants.m */; };
+		550C095B1195EC4700351067 /* ICON_128.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 550C09591195EC4700351067 /* ICON_128.pbm */; };
+		550C095C1195EC4700351067 /* ICON_129.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 550C095A1195EC4700351067 /* ICON_129.pbm */; };
+		550C09E61196B9F200351067 /* WILDButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09E51196B9F200351067 /* WILDButtonView.m */; };
+		550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C0A5D1196C52000351067 /* WILDScrollView.m */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
 		551FC0031170CF3500F32FBF /* BrowseTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF21170CF3500F32FBF /* BrowseTool.png */; };
 		551FC0041170CF3500F32FBF /* BrushTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF31170CF3500F32FBF /* BrushTool.png */; };
@@ -42,8 +47,6 @@
 		552FF146113F23F3005742C8 /* CURS_129.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF049113F23F3005742C8 /* CURS_129.pbm */; };
 		552FF147113F23F3005742C8 /* CURS_130.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04A113F23F3005742C8 /* CURS_130.pbm */; };
 		552FF148113F23F3005742C8 /* CURS_131.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04B113F23F3005742C8 /* CURS_131.pbm */; };
-		552FF149113F23F3005742C8 /* ICON_128.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04C113F23F3005742C8 /* ICON_128.pbm */; };
-		552FF14A113F23F3005742C8 /* ICON_129.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04D113F23F3005742C8 /* ICON_129.pbm */; };
 		552FF14B113F23F3005742C8 /* ICON_766.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04E113F23F3005742C8 /* ICON_766.pbm */; };
 		552FF14C113F23F3005742C8 /* ICON_902.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04F113F23F3005742C8 /* ICON_902.pbm */; };
 		552FF14D113F23F3005742C8 /* ICON_1000.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF050113F23F3005742C8 /* ICON_1000.pbm */; };
@@ -373,6 +376,14 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		550B30761152D9DE0049C593 /* AGIconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGIconFamily.h; path = ../AGIconFamily/AGIconFamily.h; sourceTree = "<group>"; };
 		550B30771152D9DE0049C593 /* AGIconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGIconFamily.m; path = ../AGIconFamily/AGIconFamily.m; sourceTree = "<group>"; };
+		550C09081195E61100351067 /* WILDPresentationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPresentationConstants.h; sourceTree = "<group>"; };
+		550C09091195E61100351067 /* WILDPresentationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPresentationConstants.m; sourceTree = "<group>"; };
+		550C09591195EC4700351067 /* ICON_128.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICON_128.pbm; path = Resources/ICON_128.pbm; sourceTree = "<group>"; };
+		550C095A1195EC4700351067 /* ICON_129.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICON_129.pbm; path = Resources/ICON_129.pbm; sourceTree = "<group>"; };
+		550C09E41196B9F200351067 /* WILDButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDButtonView.h; sourceTree = "<group>"; };
+		550C09E51196B9F200351067 /* WILDButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDButtonView.m; sourceTree = "<group>"; };
+		550C0A5C1196C52000351067 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScrollView.h; sourceTree = "<group>"; };
+		550C0A5D1196C52000351067 /* WILDScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScrollView.m; sourceTree = "<group>"; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
 		551FBFF21170CF3500F32FBF /* BrowseTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrowseTool.png; path = Resources/BrowseTool.png; sourceTree = "<group>"; };
@@ -415,8 +426,6 @@
 		552FF049113F23F3005742C8 /* CURS_129.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_129.pbm; path = Resources/CURS_129.pbm; sourceTree = "<group>"; };
 		552FF04A113F23F3005742C8 /* CURS_130.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_130.pbm; path = Resources/CURS_130.pbm; sourceTree = "<group>"; };
 		552FF04B113F23F3005742C8 /* CURS_131.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_131.pbm; path = Resources/CURS_131.pbm; sourceTree = "<group>"; };
-		552FF04C113F23F3005742C8 /* ICON_128.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICON_128.pbm; path = Resources/ICON_128.pbm; sourceTree = "<group>"; };
-		552FF04D113F23F3005742C8 /* ICON_129.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICON_129.pbm; path = Resources/ICON_129.pbm; sourceTree = "<group>"; };
 		552FF04E113F23F3005742C8 /* ICON_766.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICON_766.pbm; path = Resources/ICON_766.pbm; sourceTree = "<group>"; };
 		552FF04F113F23F3005742C8 /* ICON_902.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICON_902.pbm; path = Resources/ICON_902.pbm; sourceTree = "<group>"; };
 		552FF050113F23F3005742C8 /* ICON_1000.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICON_1000.pbm; path = Resources/ICON_1000.pbm; sourceTree = "<group>"; };
@@ -916,16 +925,22 @@
 				558DCFE41156209A002C9195 /* WILDCardView.m */,
 				558DCD7C11557B6D002C9195 /* WILDPartView.h */,
 				558DCD7D11557B6D002C9195 /* WILDPartView.m */,
+				550C09E41196B9F200351067 /* WILDButtonView.h */,
+				550C09E51196B9F200351067 /* WILDButtonView.m */,
 				558DCB5311553EAC002C9195 /* WILDButtonCell.h */,
 				558DCB5411553EAC002C9195 /* WILDButtonCell.m */,
 				55B9220811674E880073EC6C /* WILDTools.h */,
 				55B9220911674E880073EC6C /* WILDTools.m */,
 				558DCFBD1155B9B1002C9195 /* WILDPictureView.h */,
 				558DCFBE1155B9B1002C9195 /* WILDPictureView.m */,
+				550C0A5C1196C52000351067 /* WILDScrollView.h */,
+				550C0A5D1196C52000351067 /* WILDScrollView.m */,
 				55D6B257115C16E700D17619 /* WILDTextView.h */,
 				55D6B258115C16E700D17619 /* WILDTextView.m */,
 				55C2B5C8115E2FD8008B094D /* WILDClickablePopUpButtonLabel.h */,
 				55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */,
+				550C09081195E61100351067 /* WILDPresentationConstants.h */,
+				550C09091195E61100351067 /* WILDPresentationConstants.m */,
 			);
 			name = Presentation;
 			sourceTree = "<group>";
@@ -1017,8 +1032,8 @@
 				552FF049113F23F3005742C8 /* CURS_129.pbm */,
 				552FF04A113F23F3005742C8 /* CURS_130.pbm */,
 				552FF04B113F23F3005742C8 /* CURS_131.pbm */,
-				552FF04C113F23F3005742C8 /* ICON_128.pbm */,
-				552FF04D113F23F3005742C8 /* ICON_129.pbm */,
+				550C09591195EC4700351067 /* ICON_128.pbm */,
+				550C095A1195EC4700351067 /* ICON_129.pbm */,
 				552FF04E113F23F3005742C8 /* ICON_766.pbm */,
 				552FF04F113F23F3005742C8 /* ICON_902.pbm */,
 				552FF050113F23F3005742C8 /* ICON_1000.pbm */,
@@ -1338,8 +1353,6 @@
 				552FF146113F23F3005742C8 /* CURS_129.pbm in Resources */,
 				552FF147113F23F3005742C8 /* CURS_130.pbm in Resources */,
 				552FF148113F23F3005742C8 /* CURS_131.pbm in Resources */,
-				552FF149113F23F3005742C8 /* ICON_128.pbm in Resources */,
-				552FF14A113F23F3005742C8 /* ICON_129.pbm in Resources */,
 				552FF14B113F23F3005742C8 /* ICON_766.pbm in Resources */,
 				552FF14C113F23F3005742C8 /* ICON_902.pbm in Resources */,
 				552FF14D113F23F3005742C8 /* ICON_1000.pbm in Resources */,
@@ -1610,6 +1623,8 @@
 				551FC0131170CF3500F32FBF /* TextTool.png in Resources */,
 				551FC01A1170CF8300F32FBF /* LassoTool.png in Resources */,
 				55382F6B117238350006B381 /* WILDFieldInfoWindowController.xib in Resources */,
+				550C095B1195EC4700351067 /* ICON_128.pbm in Resources */,
+				550C095C1195EC4700351067 /* ICON_129.pbm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1685,6 +1700,9 @@
 				55E3B6C91184420E000062C1 /* WILDStyleEntry.m in Sources */,
 				55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */,
 				558970E7118C853600F92788 /* UKIsDragStart.m in Sources */,
+				550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */,
+				550C09E61196B9F200351067 /* WILDButtonView.m in Sources */,
+				550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
