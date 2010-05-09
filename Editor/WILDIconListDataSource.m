@@ -193,7 +193,7 @@
 		NSString*							theName = [[NSFileManager defaultManager] displayNameAtPath: thePath];
 		NSString*							statusMsg = @"No Icon";
 		if( theName )
-			statusMsg = [NSString stringWithFormat: @"From %@", theName];
+			statusMsg = [NSString stringWithFormat: @"ID = %d, from %@", [theItem pictureID], theName];
 		[mImagePathField setStringValue: statusMsg];
 	}
 }
