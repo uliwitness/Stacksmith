@@ -89,6 +89,11 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	if( [self backgroundColor]
 		|| (isHighlighted && [self image] == nil) )
 	{
+		#if TRANSPARENT_BUTTONS_INVERT
+		if( isHighlighted && ![self backgroundColor] && [self image] == nil )
+			[[NSColor whiteColor] set];
+		else
+		#endif
 		if( isHighlighted )
 			[[NSColor blackColor] set];
 		else

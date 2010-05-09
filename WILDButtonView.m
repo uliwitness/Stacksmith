@@ -20,4 +20,12 @@
 	[pv drawSubView: self dirtyRect: dirtyRect];
 }
 
+
+-(void)	mouseDown: (NSEvent*)event
+{
+	WILDPartView*	pv = [self superview];
+	if( [[pv part] autoHighlight] )
+		[super mouseDown: event];
+}
+
 @end

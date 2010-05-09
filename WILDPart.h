@@ -115,7 +115,6 @@
 -(BOOL)			toggleHighlightAfterTracking;
 -(NSInteger)	family;
 -(void)			setFamily: (NSInteger)inFamilyNumber;
--(BOOL)			textLocked;
 -(BOOL)			showLines;
 
 -(void)			setFillColor: (NSColor*)theColor;

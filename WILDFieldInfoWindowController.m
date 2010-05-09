@@ -66,7 +66,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mIDLabel setStringValue: [NSString stringWithFormat: @"%@ Field ID:", layerName]];
 	[mIDField setIntegerValue: [mPart partID]];
 	
-	[mLockTextSwitch setState: [mPart textLocked]];
+	[mLockTextSwitch setState: [mPart lockText]];
 	[mDontWrapSwitch setState: [mPart dontWrap]];
 	[mAutoSelectSwitch setState: [mPart autoSelect]];
 	[mMultipleLinesSwitch setState: [mPart canSelectMultipleLines]];

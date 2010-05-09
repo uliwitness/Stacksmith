@@ -527,14 +527,6 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
-
-
--(BOOL)	textLocked
-{
-	return mLockText;
-}
-
-
 -(void)	setFillColor: (NSColor*)theColor
 {
 	if( mFillColor != theColor )

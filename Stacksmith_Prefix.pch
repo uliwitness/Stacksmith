@@ -2,8 +2,27 @@
 // Prefix header for all source files of the 'Propaganda' target in the 'Propaganda' project
 //
 
-#define NS_BUILD_32_LIKE_64		1
+#define NS_BUILD_32_LIKE_64			1
+#define TRANSPARENT_BUTTONS_INVERT	0
 
 
 #import "UKHelperMacros.h"
 #import "UKTypecastMacros.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

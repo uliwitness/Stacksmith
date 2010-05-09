@@ -21,6 +21,7 @@
 #import "WILDPresentationConstants.h"
 #import "WILDButtonView.h"
 #import "WILDScrollView.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @class WILDCardView;
@@ -150,8 +151,12 @@
 	}
 	else if( isMyTool )
 	{
-		[[NSColor grayColor] set];
+		if( [[mPart style] isEqualToString: @"opaque"] )
+			[[[WILDTools sharedTools] peekPattern] set];
+		else
+			[[NSColor grayColor] set];
 		NSRect	peekBox = NSInsetRect( subviewBounds, 0.5, 0.5 );
+		[NSBezierPath setDefaultLineWidth: 1];
 		[NSBezierPath strokeRect: peekBox];
 		[[NSColor blackColor] set];
 	}
@@ -161,6 +166,7 @@
 		NSRect	peekBox = NSInsetRect( subviewBounds, 1, 1 );
 		[NSBezierPath setDefaultLineWidth: 2];
 		[[NSColor lightGrayColor] set];
+		[[NSColor blueColor] set];
 		[NSBezierPath strokeRect: peekBox];
 		[[[WILDTools sharedTools] peekPattern] set];
 		[NSBezierPath strokeRect: peekBox];
@@ -322,6 +328,8 @@
 		BOOL	wasSelected = theView->mSelected;
 		theView->mSelected = NO;
 		[theView display];
+		[[theView mainView] display];
+		[[theView helperView] display];
 		[theLayer renderInContext: currContext];
 		theView->mSelected = wasSelected;
 		
@@ -430,7 +438,7 @@
 
 
 -(void)	loadPopupButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents
+			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
 	NSRect			partRect = [currPart rectangle];
 	NSTextField*	label = nil;
@@ -496,13 +504,16 @@
 
 
 -(void)	loadPushButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents
+			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
 	NSRect						partRect = [currPart rectangle];
 	[self setHidden: ![currPart visible]];
 	[self setWantsLayer: YES];
 	[self setPart: currPart];
 	partRect.origin = NSMakePoint( 2, 2 );
+	BOOL		isHighlighted = [currPart highlighted];
+	if( ![currPart sharedHighlight] && [[currPart partLayer] isEqualToString: @"background"] )
+		isHighlighted = [contents highlighted];
 	
 	BOOL			canHaveIcon = YES;
 	NSButton	*	bt = [[WILDButtonView alloc] initWithFrame: partRect];
@@ -518,6 +529,18 @@
 			[bt setBezelStyle: NSCircularBezelStyle];
 		[bt setAlignment: [currPart textAlignment]];	
 		[bt setButtonType: NSMomentaryPushInButton];
+		
+#if TRANSPARENT_BUTTONS_INVERT
+		if( isHighlighted )
+		{
+			CALayer*	theLayer = [self layer];
+			[theLayer setOpaque: NO];
+			CIFilter*	theFilter = [CIFilter filterWithName: @"CIColorInvert"];
+			[theFilter setDefaults];
+			//[theLayer setSize: [self bounds].size];
+			[theLayer setCompositingFilter: theFilter];
+		}
+#endif
 	}
 	else if( [[currPart style] isEqualToString: @"opaque"] )
 	{
@@ -580,15 +603,13 @@
 	}
 
 	[bt setFont: [currPart textFont]];
-	[bt setTitle: [currPart name]];
+	if( [currPart showName] )
+		[bt setTitle: [currPart name]];
 	[bt setTarget: currPart];
 	[bt setAction: @selector(updateOnClick:)];
-	BOOL		isHighlighted = [currPart highlighted];
-	if( ![currPart sharedHighlight] && [[currPart partLayer] isEqualToString: @"background"] )
-		isHighlighted = [contents highlighted];
 	[bt setState: isHighlighted ? NSOnState : NSOffState];
 	
-	if( canHaveIcon )
+	if( canHaveIcon && [currPart iconID] != 0 )
 	{
 		[bt setImage: [currPart iconImage]];
 		
@@ -610,21 +631,21 @@
 
 
 -(void)	loadButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents
+			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
 	if( [[currPart style] isEqualToString: @"popup"] )
 	{
-		[self loadPopupButton: currPart withCardContents: contents withBgContents: bgContents];
+		[self loadPopupButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
 	else
 	{
-		[self loadPushButton: currPart withCardContents: contents withBgContents: bgContents];
+		[self loadPushButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
 }
 
 
 -(void)	loadEditField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents
+			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
 	NSRect						partRect = [currPart rectangle];
 	[self setHidden: ![currPart visible]];
@@ -651,11 +672,15 @@
 			[tv setString: [contents text]];
 	}
 	
-	[tv setEditable: ![currPart textLocked]];
-	[tv setSelectable: ![currPart textLocked]];
+	// A field can be edited if:
+	//	It is a card field and its lockText is FALSE.
+	//	It is a bg field, its lockText is FALSE and we're editing the background.
+	BOOL		shouldBeEditable = ![currPart lockText] && (![currPart sharedText] || backgroundEditMode);
+	[tv setEditable: shouldBeEditable];
+	[tv setSelectable: shouldBeEditable];
 	
 	NSScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
-	[sv setDocumentCursor: [NSCursor arrowCursor]];
+	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = partRect;
 	txBox.origin = NSZeroPoint;
@@ -715,7 +740,7 @@
 
 
 -(void)	loadListField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents
+			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
 	NSRect						partRect = [currPart rectangle];
 	[self setHidden: ![currPart visible]];
@@ -754,7 +779,7 @@
 	
 	// Build surrounding scroll view:
 	NSScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
-	[sv setDocumentCursor: [NSCursor arrowCursor]];
+	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = [currPart rectangle];
 	txBox.origin = NSZeroPoint;
@@ -812,21 +837,21 @@
 
 
 -(void)	loadField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents
+			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
-	if( [currPart autoSelect] && [currPart textLocked] )
+	if( [currPart autoSelect] && [currPart lockText] )
 	{
-		[self loadListField: currPart withCardContents: contents withBgContents: bgContents];
+		[self loadListField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
 	else if( [[currPart style] isEqualToString: @"transparent"] || [[currPart style] isEqualToString: @"opaque"]
 		 || [[currPart style] isEqualToString: @"rectangle"] || [[currPart style] isEqualToString: @"shadow"]
 		|| [[currPart style] isEqualToString: @"scrolling"] )
 	{
-		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents];
+		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
 	else
 	{
-		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents];
+		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
 }
 
@@ -845,9 +870,9 @@
 		contents = backgroundEditMode ? nil : [theCd contentsForPart: currPart];
 
 	if( [[currPart partType] isEqualToString: @"button"] )
-		[self loadButton: currPart withCardContents: contents withBgContents: bgContents];
+		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: (BOOL)backgroundEditMode];
 	else
-		[self loadField: currPart withCardContents: contents withBgContents: bgContents];
+		[self loadField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: (BOOL)backgroundEditMode];
 }
 
 @end

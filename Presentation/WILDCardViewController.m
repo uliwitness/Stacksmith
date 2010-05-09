@@ -364,6 +364,7 @@
 	for( WILDPart* currPart in [theBg parts] )
 	{
 		WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
+		[selView setWantsLayer: YES];
 		[[self view] addSubview: selView];
 		[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
 		[selView loadPart: currPart forBackgroundEditing: mBackgroundEditMode];
@@ -386,6 +387,7 @@
 		for( WILDPart* currPart in [theCard parts] )
 		{
 			WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
+			[selView setWantsLayer: YES];
 			[[self view] addSubview: selView];
 			[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
 			[selView loadPart: currPart forBackgroundEditing: NO];

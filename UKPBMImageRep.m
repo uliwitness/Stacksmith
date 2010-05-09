@@ -117,10 +117,8 @@
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
 		data[1] = (char*)[pixelData bytes] +maskOffset;
-	else
-		data[1] = [pixelData bytes];
 	
-	BOOL		haveMask = YES; //maskOffset != 0;
+	BOOL		haveMask = maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
@@ -141,9 +139,7 @@
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
 		data[1] = (char*)[pixelData bytes] +maskOffset;
-	else
-		data[1] = [pixelData bytes];
-	BOOL		haveMask = YES; //maskOffset != 0;
+	BOOL		haveMask = maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
@@ -162,9 +158,7 @@
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
 		data[1] = (char*)[pixelData bytes] +maskOffset;
-	else
-		data[1] = [pixelData bytes];
-	BOOL		haveMask = YES; //maskOffset != 0;
+	BOOL		haveMask = maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
 	NSDrawBitmap( box, actualSize.width, actualSize.height,
