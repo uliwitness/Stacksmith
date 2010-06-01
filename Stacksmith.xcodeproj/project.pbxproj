@@ -320,7 +320,7 @@
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
-		55E3A69E11503456008411BB /* CURS_128.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.pbm */; };
+		55E3A69E11503456008411BB /* CURS_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.png */; };
 		55E3A6FB11519B45008411BB /* HCSV.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6F911519B45008411BB /* HCSV.icns */; };
 		55E3A6FC11519B45008411BB /* Stack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6FA11519B45008411BB /* Stack.icns */; };
 		55E3B6AD1184417A000062C1 /* WILDMediaEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6AC1184417A000062C1 /* WILDMediaEntry.m */; };
@@ -729,7 +729,7 @@
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D6B257115C16E700D17619 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDTextView.h; sourceTree = "<group>"; };
 		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
-		55E3A69D11503456008411BB /* CURS_128.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_128.pbm; path = Resources/CURS_128.pbm; sourceTree = "<group>"; };
+		55E3A69D11503456008411BB /* CURS_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CURS_128.png; path = Resources/CURS_128.png; sourceTree = "<group>"; };
 		55E3A6F911519B45008411BB /* HCSV.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = HCSV.icns; sourceTree = "<group>"; };
 		55E3A6FA11519B45008411BB /* Stack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stack.icns; sourceTree = "<group>"; };
 		55E3B6AB1184417A000062C1 /* WILDMediaEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMediaEntry.h; path = Document/WILDMediaEntry.h; sourceTree = "<group>"; };
@@ -1028,7 +1028,7 @@
 				551FC0011170CF3500F32FBF /* SprayTool.png */,
 				551FC0021170CF3500F32FBF /* TextTool.png */,
 				551FC0191170CF8300F32FBF /* LassoTool.png */,
-				55E3A69D11503456008411BB /* CURS_128.pbm */,
+				55E3A69D11503456008411BB /* CURS_128.png */,
 				552FF049113F23F3005742C8 /* CURS_129.pbm */,
 				552FF04A113F23F3005742C8 /* CURS_130.pbm */,
 				552FF04B113F23F3005742C8 /* CURS_131.pbm */,
@@ -1599,7 +1599,7 @@
 				55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */,
 				55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */,
 				55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */,
-				55E3A69E11503456008411BB /* CURS_128.pbm in Resources */,
+				55E3A69E11503456008411BB /* CURS_128.png in Resources */,
 				55E3A6FB11519B45008411BB /* HCSV.icns in Resources */,
 				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
 				55B9223D1167532A0073EC6C /* WILDButtonInfoWindowController.xib in Resources */,
