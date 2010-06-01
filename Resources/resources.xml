@@ -1109,7 +1109,7 @@
 		<id>128</id>
 		<type>cursor</type>
 		<name>Hand</name>
-		<file>CURS_128.pbm</file>
+		<file>CURS_128.png</file>
 		<hotspot>
 			<left>7</left>
 			<top>0</top>
