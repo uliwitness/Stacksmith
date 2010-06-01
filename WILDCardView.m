@@ -13,6 +13,9 @@
 #import "WILDScriptEditorWindowController.h"
 #import "WILDPartView.h"
 #import "WILDPresentationConstants.h"
+#import "WILDXMLUtils.h"
+#import "WILDPart.h"
+#import "WILDCardViewController.h"
 
 
 @implementation WILDCardView
@@ -61,6 +64,9 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: WILDPeekingStateChangedNotification
+											object: nil];
+	[[NSNotificationCenter defaultCenter] removeObserver: self
+											name: WILDCurrentToolDidChangeNotification
 											object: nil];
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: WILDBackgroundEditModeChangedNotification
@@ -159,16 +165,47 @@
 	if( [sender draggingSource] == self )	// Internal drag.
 	{
 		NSLog( @"internal" );
+		NSMutableArray*		draggedParts = [NSMutableArray arrayWithCapacity: [parts count]];
 		
 		for( NSXMLElement* currPartXml in parts )
 		{
-			
+			NSInteger	theID = WILDIntegerFromSubElementInElement( @"id", currPartXml );
+			NSString*	theLayer = WILDStringFromSubElementInElement( @"layer", currPartXml );
+			WILDPart*	thePart = nil;
+			if( [theLayer isEqualToString: @"card"] )
+				thePart = [mCard partWithID: theID];
+			else if( [theLayer isEqualToString: @"background"] )
+				thePart = [[mCard owningBackground] partWithID: theID];
+			[draggedParts addObject: thePart];
 		}
+		
+		NSPoint		dragStartImagePos = NSZeroPoint;
+		NSRect		box = [WILDPartView rectForPeers: draggedParts dragStartImagePos: &dragStartImagePos];
+		
+		NSPoint		diff = pos;
+		diff.x -= box.origin.x;
+		diff.y -= box.origin.y;
+		
+		for( WILDPart* currPart in draggedParts )
+		{
+			NSRect		currPartBox;
+			currPartBox = [currPart flippedRectangle];
+			currPartBox = NSOffsetRect( currPartBox, diff.x, diff.y );
+			[currPart setFlippedRectangle: currPartBox];
+		}
+		
+		[mOwner reloadCard];
 	}
 	else
 		NSLog( @"external" );
 	
 	return YES;
+}
+
+
+-(void)		setOwner: (WILDCardViewController*)inOwner
+{
+	mOwner = inOwner;
 }
 
 @end

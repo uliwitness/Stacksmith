@@ -232,7 +232,8 @@
 				[pb clearContents];
 				NSPoint					dragStartImagePos = NSZeroPoint;
 				NSArray*				selectedObjects = [[[WILDTools sharedTools] clients] allObjects];
-				NSImage*				theDragImg = [self imageForPeerViews: selectedObjects
+				NSImage*				theDragImg = [[self class] imageForPeers: selectedObjects
+														ofView: self
 														dragStartImagePos: &dragStartImagePos];
 				WILDCard*		currCard = [[self enclosingCardView] card];
 				WILDBackground*	currBg = [currCard owningBackground];
@@ -289,9 +290,10 @@
 }
 
 
--(NSImage*)	imageForPeerViews: (NSArray*)views dragStartImagePos: (NSPoint*)dragStartImagePos
++(NSImage*)	imageForPeers: (NSArray*)views ofView: (NSView*)inView dragStartImagePos: (NSPoint*)dragStartImagePos
 {
 	CGFloat		minX = LONG_MAX, maxX = LONG_MIN, minY = LONG_MAX, maxY = LONG_MIN;
+	NSPoint		viewOrigin = inView ? [inView frame].origin : NSZeroPoint;
 	
 	for( NSView* theView in views )
 	{
@@ -339,10 +341,35 @@
 	}
 	[theImage unlockFocus];
 	
-	dragStartImagePos->x = -[self frame].origin.x +minX;
-	dragStartImagePos->y = -[self frame].origin.y +minY;
+	dragStartImagePos->x = -viewOrigin.x +minX;
+	dragStartImagePos->y = -viewOrigin.y +minY;
 	
 	return theImage;
+}
+
+
++(NSRect)	rectForPeers: (NSArray*)parts dragStartImagePos: (NSPoint*)dragStartImagePos
+{
+	CGFloat		minX = LONG_MAX, maxX = LONG_MIN, minY = LONG_MAX, maxY = LONG_MIN;
+	NSPoint		viewOrigin = NSZeroPoint;
+	
+	for( WILDPart* thePart in parts )
+	{
+		NSRect		box = [thePart flippedRectangle];
+		if( minX > NSMinX(box) )
+			minX = NSMinX(box);
+		if( maxX < NSMaxX(box) )
+			maxX = NSMaxX(box);
+		if( minY > NSMinY(box) )
+			minY = NSMinY(box);
+		if( maxY < NSMaxY(box) )
+			maxY = NSMaxY(box);
+	}
+		
+	dragStartImagePos->x = -viewOrigin.x +minX;
+	dragStartImagePos->y = -viewOrigin.y +minY;
+	
+	return NSMakeRect(minX, minY, maxX -minX, maxY -minY);
 }
 
 

@@ -15,17 +15,18 @@
 
 @interface WILDCardViewController : NSViewController
 {
-	WILDCard			*	mCurrentCard;
+	WILDCard					*	mCurrentCard;
 	CALayer						*	mAddColorOverlay;
 	BOOL							mPeeking;
 	BOOL							mBackgroundEditMode;
 	NSMutableDictionary			*	mPartViews;
-	WILDSearchContext	*	mSearchContext;
+	WILDSearchContext			*	mSearchContext;
 	NSString					*	mCurrentSearchString;
 	IBOutlet NSTextField		*	mSearchField;
 }
 
--(void)	loadCard: (WILDCard*)theCard;
+-(void)		loadCard: (WILDCard*)theCard;
+-(void)		reloadCard;
 
 -(IBAction)	goHome: (id)sender;
 -(IBAction)	goFirstCard: (id)sender;

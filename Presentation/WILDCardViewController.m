@@ -77,6 +77,7 @@
 -(void)	setView: (NSView *)view
 {
 	[super setView: view];
+	[(WILDCardView*)view setOwner: self];
 	
 	[view setWantsLayer: YES];
 	NSResponder*	nxResp = [[view window] nextResponder];
@@ -312,6 +313,14 @@
 												nil, nil );
 		}
 	}
+}
+
+
+-(void)	reloadCard
+{
+	NSArray*	subviews = [mPartViews allObjects];
+	for( NSView* currSubview in subviews )
+		[currSubview partDidChange: nil];
 }
 
 

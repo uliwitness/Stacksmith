@@ -52,8 +52,8 @@
 	NSInteger			mFamily;
 	NSColor*			mFillColor;
 	NSInteger			mBevel;
-	WILDBackground*	mOwner;					// Layer that this part belongs to.
-	WILDStack*		mStack;					// Stack this part belongs to.
+	WILDBackground*		mOwner;					// Layer that this part belongs to.
+	WILDStack*			mStack;					// Stack this part belongs to.
 }
 
 @property (assign) BOOL		dontWrap;
@@ -68,9 +68,9 @@
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
 
--(void)			setRectangle: (NSRect)theBox;
--(NSRect)		rectangle;
+-(void)			setFlippedRectangle: (NSRect)theBox;
 -(NSRect)		flippedRectangle;
+-(NSRect)		rectangle;
 
 -(void)			setName: (NSString*)theStr;
 -(NSString*)	name;

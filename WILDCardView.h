@@ -10,16 +10,20 @@
 
 
 @class WILDCard;
+@class WILDCardViewController;
 
 
 @interface WILDCardView : NSView
 {
-	WILDCard*			mCard;
-	BOOL				mPeeking;
-	BOOL				mBackgroundEditMode;
+	WILDCard*				mCard;
+	BOOL					mPeeking;
+	BOOL					mBackgroundEditMode;
+	WILDCardViewController	*mOwner;	// Not retained.
 }
 
 -(void)					setCard: (WILDCard*)inCard;
--(WILDCard*)	card;
+-(WILDCard*)			card;
+
+-(void)					setOwner: (WILDCardViewController*)inOwner;
 
 @end

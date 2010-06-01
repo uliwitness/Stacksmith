@@ -123,7 +123,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(void)	setRectangle: (NSRect)theBox
+-(void)	setFlippedRectangle: (NSRect)theBox
 {
 	mRectangle = theBox;
 }
@@ -776,6 +776,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	
 	[outString appendFormat: @"\t\t<id>%d</id>\n", mID];
 	[outString appendFormat: @"\t\t<type>%@</type>\n", [self partType]];
+	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
 	[outString appendFormat: @"\t\t<visible>%@</visible>\n", (mVisible ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<enabled>%@</enabled>\n", (mEnabled ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<rect>\n\t\t\t<left>%d</left>\n\t\t\t<top>%d</top>\n\t\t\t<right>%d</right>\n\t\t\t<bottom>%d</bottom>\n\t\t</rect>\n",

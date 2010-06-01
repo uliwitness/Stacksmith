@@ -41,7 +41,8 @@
 -(void)	loadPart: (WILDPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode;
 -(void)	unloadPart;
 
--(NSImage*)	imageForPeerViews: (NSArray*)views dragStartImagePos: (NSPoint*)dragStartImagePos;
++(NSImage*)	imageForPeers: (NSArray*)views ofView: (NSView*)inView dragStartImagePos: (NSPoint*)dragStartImagePos;
++(NSRect)	rectForPeers: (NSArray*)parts dragStartImagePos: (NSPoint*)dragStartImagePos;
 
 -(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect;
 
