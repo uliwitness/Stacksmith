@@ -12,6 +12,7 @@
 #import "WILDNotifications.h"
 #import "WILDScriptEditorWindowController.h"
 #import "WILDPartView.h"
+#import "WILDPresentationConstants.h"
 
 
 @implementation WILDCardView
@@ -29,6 +30,7 @@
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(backgroundEditModeChanged:)
 												name: WILDBackgroundEditModeChangedNotification
 												object: nil];
+		[self registerForDraggedTypes: [NSArray arrayWithObject: WILDPartPboardType]];
 	}
 	
 	return self;
@@ -48,6 +50,7 @@
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(backgroundEditModeChanged:)
 												name: WILDBackgroundEditModeChangedNotification
 												object: nil];
+		[self registerForDraggedTypes: [NSArray arrayWithObject: WILDPartPboardType]];
 	}
 	
 	return self;
@@ -131,6 +134,40 @@
 
 -(BOOL)	acceptsFirstResponder
 {
+	return YES;
+}
+
+
+-(NSDragOperation)	draggingEntered: (id <NSDraggingInfo>)sender
+{
+	return( ([sender draggingSource] == self) ? NSDragOperationMove : NSDragOperationCopy );
+}
+
+
+-(BOOL)	performDragOperation: (id <NSDraggingInfo>)sender
+{
+	NSDragOperation	op = [sender draggingSourceOperationMask];
+	NSPoint			pos = [sender draggedImageLocation];
+	NSPasteboard*	pb = [sender draggingPasteboard];
+	NSString*		xmlStr = [pb stringForType: WILDPartPboardType];
+	NSError*		err = nil;
+	NSXMLDocument*	doc = [[[NSXMLDocument alloc] initWithXMLString: xmlStr options: 0 error: &err] autorelease];
+	NSArray*		parts = [[doc rootElement] elementsForName: @"part"];
+	
+	NSLog( @"doc = %@", doc );
+	
+	if( [sender draggingSource] == self )	// Internal drag.
+	{
+		NSLog( @"internal" );
+		
+		for( NSXMLElement* currPartXml in parts )
+		{
+			
+		}
+	}
+	else
+		NSLog( @"external" );
+	
 	return YES;
 }
 

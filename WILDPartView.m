@@ -237,7 +237,7 @@
 				WILDCard*		currCard = [[self enclosingCardView] card];
 				WILDBackground*	currBg = [currCard owningBackground];
 				
-				NSMutableString*		xmlString = [[[NSMutableString alloc] init] autorelease];
+				NSMutableString*		xmlString = [[@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE parts PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\" >\n<parts>\n" mutableCopy] autorelease];
 				for( WILDPartView* selView in selectedObjects )
 				{
 					WILDPart*	thePart = [selView part];
@@ -249,13 +249,15 @@
 					if( bgXmlStr )
 						[xmlString appendString: bgXmlStr];
 				}
+				[xmlString appendString: @"</parts>"];
+//				NSLog(@"xmlString = %@",xmlString);
 				
-				[pb addTypes: [NSArray arrayWithObject: WILDPartPboardType] owner: self];
+				[pb addTypes: [NSArray arrayWithObject: WILDPartPboardType] owner: [self enclosingCardView]];
 				[pb setString: xmlString forType: WILDPartPboardType];
 				
 				// Actually commence the drag:
 				[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
-							event: event pasteboard: pb source: self slideBack: YES];
+							event: event pasteboard: pb source: [self enclosingCardView] slideBack: YES];
 			}
 			else if( !justSelected )
 			{
