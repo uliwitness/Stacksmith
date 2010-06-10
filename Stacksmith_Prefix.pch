@@ -3,7 +3,7 @@
 //
 
 #define NS_BUILD_32_LIKE_64			1
-#define TRANSPARENT_BUTTONS_INVERT	0
+#define TRANSPARENT_BUTTONS_INVERT	1
 
 
 #import "UKHelperMacros.h"

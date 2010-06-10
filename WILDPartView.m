@@ -440,6 +440,7 @@
 	}
 	else
 	{
+		[self setFrame: NSInsetRect([mPart rectangle], -1, -1)];
 		[self unloadPart];
 		[self loadPart: mPart forBackgroundEditing: NO];
 	}
@@ -564,7 +565,7 @@
 		{
 			CALayer*	theLayer = [self layer];
 			[theLayer setOpaque: NO];
-			CIFilter*	theFilter = [CIFilter filterWithName: @"CIColorInvert"];
+			CIFilter*	theFilter = [CIFilter filterWithName: @"CIDifferenceBlendMode"];
 			[theFilter setDefaults];
 			//[theLayer setSize: [self bounds].size];
 			[theLayer setCompositingFilter: theFilter];
