@@ -90,7 +90,7 @@
 	pixelData = [[NSData alloc] initWithBytes: bytes +imgOffset length: [theData length] -imgOffset];
 	NSUInteger	theLen = [pixelData length];
 	char*		theBytes = [pixelData bytes];
-	for( NSUInteger x = 0; x < maskOffset; x++ )
+	for( NSUInteger x = 0; x < maskOffset && x < theLen; x++ )
 		theBytes[x] ^= 0xff;	// Invert pixels so we can use NSCalibratedWhiteColorSpace instead of the deprecated NSCalibratedBlackColorSpace.
 	
 	return self;

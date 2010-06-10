@@ -355,91 +355,93 @@
 	[(WILDCardView*)[self view] setCard: mCurrentCard];
 	[[[self view] window] makeFirstResponder: [self view]];
 	
-	// Load the background for this card:
-	WILDStack*		theStack = [theCard stack];
-	WILDBackground*	theBg = [theCard owningBackground];
-	
-	NSImage*		bgPicture = [theBg picture];
-	if( bgPicture )
+	if( theCard )
 	{
-		WILDPictureView*	imgView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
-		[imgView setImage: bgPicture];
-		[imgView setHidden: ![theBg showPicture]];
-		[imgView setWantsLayer: YES];
-		[[self view] addSubview: imgView];
-		[imgView release];
-	}
-	
-	for( WILDPart* currPart in [theBg parts] )
-	{
-		WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
-		[selView setWantsLayer: YES];
-		[[self view] addSubview: selView];
-		[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
-		[selView loadPart: currPart forBackgroundEditing: mBackgroundEditMode];
-	}
-	
-	// Load the actual card parts:
-	NSImage*		cdPicture = [theCard picture];
-	if( cdPicture )
-	{
-		WILDPictureView*	imgView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
-		[imgView setImage: cdPicture];
-		[imgView setHidden: ![theCard showPicture]];
-		[imgView setWantsLayer: YES];
-		[[self view] addSubview: imgView];
-		[imgView release];
-	}
-
-	if( !mBackgroundEditMode )
-	{
-		for( WILDPart* currPart in [theCard parts] )
+		// Load the background for this card:
+		WILDStack*		theStack = [theCard stack];
+		WILDBackground*	theBg = [theCard owningBackground];
+		
+		NSImage*		bgPicture = [theBg picture];
+		if( bgPicture )
+		{
+			WILDPictureView*	imgView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
+			[imgView setImage: bgPicture];
+			[imgView setHidden: ![theBg showPicture]];
+			[imgView setWantsLayer: YES];
+			[[self view] addSubview: imgView];
+			[imgView release];
+		}
+		
+		for( WILDPart* currPart in [theBg parts] )
 		{
 			WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
 			[selView setWantsLayer: YES];
 			[[self view] addSubview: selView];
 			[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
-			[selView loadPart: currPart forBackgroundEditing: NO];
+			[selView loadPart: currPart forBackgroundEditing: mBackgroundEditMode];
 		}
+		
+		// Load the actual card parts:
+		NSImage*		cdPicture = [theCard picture];
+		if( cdPicture )
+		{
+			WILDPictureView*	imgView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
+			[imgView setImage: cdPicture];
+			[imgView setHidden: ![theCard showPicture]];
+			[imgView setWantsLayer: YES];
+			[[self view] addSubview: imgView];
+			[imgView release];
+		}
+
+		if( !mBackgroundEditMode )
+		{
+			for( WILDPart* currPart in [theCard parts] )
+			{
+				WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
+				[selView setWantsLayer: YES];
+				[[self view] addSubview: selView];
+				[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
+				[selView loadPart: currPart forBackgroundEditing: NO];
+			}
+		}
+		
+		// Load AddColor stuff:
+		NSSize          cardSize = [theStack cardSize];
+		CGColorSpaceRef	colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+		CGContextRef	theContext = CGBitmapContextCreate( NULL, cardSize.width, cardSize.height, 8,
+															cardSize.width * 4, colorSpace,
+								kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host );
+		CGColorSpaceRelease( colorSpace );
+		colorSpace = NULL;
+		
+		NSGraphicsContext*	cocoaContext = [NSGraphicsContext graphicsContextWithGraphicsPort: theContext flipped: NO];
+		[NSGraphicsContext saveGraphicsState];
+		[NSGraphicsContext setCurrentContext: cocoaContext];
+		
+		[self drawAddColorPartsInLayer: theBg];
+		if( !mBackgroundEditMode )
+			[self drawAddColorPartsInLayer: theCard];
+		[NSGraphicsContext restoreGraphicsState];
+		
+		CGImageRef	theImage = CGBitmapContextCreateImage( theContext );
+		CGContextRelease( theContext );
+		
+		if( mAddColorOverlay )
+		{
+			[mAddColorOverlay removeFromSuperlayer];
+			[mAddColorOverlay release];
+			mAddColorOverlay = nil;
+		}
+		mAddColorOverlay = [[CALayer layer] retain];
+		[mAddColorOverlay setContents: (id)theImage];
+		[mAddColorOverlay setAnchorPoint: CGPointMake( 0, 0 )];	// Lower left in a 0...1 normalized coordinate system.
+		[mAddColorOverlay setFrame: CGRectMake( 0, 0, cardSize.width, cardSize.height )];
+		CIFilter*	theFilter = [CIFilter filterWithName: @"CIDarkenBlendMode"];
+		[theFilter setDefaults];
+		[mAddColorOverlay setCompositingFilter: theFilter];
+		[[[self view] layer] addSublayer: mAddColorOverlay];
+		CFRelease( theImage );
 	}
-	
-	// Load AddColor stuff:
-	NSSize	cardSize = [theStack cardSize];
-	CGColorSpaceRef	colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-	CGContextRef	theContext = CGBitmapContextCreate( NULL, cardSize.width, cardSize.height, 8,
-														cardSize.width * 4, colorSpace,
-							kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host );
-	CGColorSpaceRelease( colorSpace );
-	colorSpace = NULL;
-	
-	NSGraphicsContext*	cocoaContext = [NSGraphicsContext graphicsContextWithGraphicsPort: theContext flipped: NO];
-	[NSGraphicsContext saveGraphicsState];
-	[NSGraphicsContext setCurrentContext: cocoaContext];
-	
-	[self drawAddColorPartsInLayer: theBg];
-	if( !mBackgroundEditMode )
-		[self drawAddColorPartsInLayer: theCard];
-	[NSGraphicsContext restoreGraphicsState];
-	
-	CGImageRef	theImage = CGBitmapContextCreateImage( theContext );
-	CGContextRelease( theContext );
-	
-	if( mAddColorOverlay )
-	{
-		[mAddColorOverlay removeFromSuperlayer];
-		[mAddColorOverlay release];
-		mAddColorOverlay = nil;
-	}
-	mAddColorOverlay = [[CALayer layer] retain];
-	[mAddColorOverlay setContents: (id)theImage];
-	[mAddColorOverlay setAnchorPoint: CGPointMake( 0, 0 )];	// Lower left in a 0...1 normalized coordinate system.
-	[mAddColorOverlay setFrame: CGRectMake( 0, 0, cardSize.width, cardSize.height )];
-	CIFilter*	theFilter = [CIFilter filterWithName: @"CIDarkenBlendMode"];
-	[theFilter setDefaults];
-	[mAddColorOverlay setCompositingFilter: theFilter];
-	[[[self view] layer] addSublayer: mAddColorOverlay];
-	CFRelease( theImage );
-	
 	if( uiDict )
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDCurrentCardDidChangeNotification
@@ -528,7 +530,7 @@
 	for( WILDPartView* currView in allSels )
 	{
 		WILDPart*	thePart = [currView part];
-		WILDButtonInfoWindowController*	buttonInfo = [[WILDButtonInfoWindowController alloc] initWithPart: thePart ofCardView: (WILDCardView*) [self view]];
+		WILDButtonInfoWindowController*	buttonInfo = [[[WILDButtonInfoWindowController alloc] initWithPart: thePart ofCardView: (WILDCardView*) [self view]] autorelease];
 		[[[[[self view] window] windowController] document] addWindowController: buttonInfo];
 		[buttonInfo showWindow: self];
 	}
@@ -540,7 +542,7 @@
 	for( WILDPartView* currView in allSels )
 	{
 		WILDPart*	thePart = [currView part];
-		WILDFieldInfoWindowController*	fieldInfo = [[WILDFieldInfoWindowController alloc] initWithPart: thePart ofCardView: (WILDCardView*) [self view]];
+		WILDFieldInfoWindowController*	fieldInfo = [[[WILDFieldInfoWindowController alloc] initWithPart: thePart ofCardView: (WILDCardView*) [self view]] autorelease];
 		[[[[[self view] window] windowController] document] addWindowController: fieldInfo];
 		[fieldInfo showWindow: self];
 	}

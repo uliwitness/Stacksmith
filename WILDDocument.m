@@ -115,7 +115,6 @@
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
 	NSURL*		tocURL = absoluteURL;
-	NSString*	folderPath = nil;
 	BOOL		isDir = NO;
 	if( [[NSFileManager defaultManager] fileExistsAtPath: [absoluteURL path] isDirectory: &isDir] && !isDir )
 	{
@@ -146,7 +145,6 @@
 	}
 	
 	tocURL = [absoluteURL URLByAppendingPathComponent: @"toc.xml"];
-	folderPath = [absoluteURL path];
 	
 	NSXMLDocument*	xmlDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: tocURL
 														options: 0 error: outError] autorelease];
