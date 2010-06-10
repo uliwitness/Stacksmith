@@ -1286,9 +1286,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D15AC270486D014006FF6A4 /* Propaganda */ = {
+		8D15AC270486D014006FF6A4 /* Stacksmith */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Propaganda" */;
+			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Stacksmith" */;
 			buildPhases = (
 				55C68C7D116412A700D8B44C /* git_version */,
 				8D15AC300486D014006FF6A4 /* Sources */,
@@ -1300,7 +1300,7 @@
 			dependencies = (
 				55A0BDCD113B68250095CAA6 /* PBXTargetDependency */,
 			);
-			name = Propaganda;
+			name = Stacksmith;
 			productInstallPath = "$(HOME)/Applications";
 			productName = Propaganda;
 			productReference = 8D15AC370486D014006FF6A4 /* Stacksmith.app */;
@@ -1311,6 +1311,9 @@
 /* Begin PBXProject section */
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Uli Kusterer";
+			};
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Stacksmith" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
@@ -1324,7 +1327,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				8D15AC270486D014006FF6A4 /* Propaganda */,
+				8D15AC270486D014006FF6A4 /* Stacksmith */,
 			);
 		};
 /* End PBXProject section */
@@ -1790,7 +1793,7 @@
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_GLOBAL_CONSTRUCTORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1830,7 +1833,7 @@
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_GLOBAL_CONSTRUCTORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1889,7 +1892,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Propaganda" */ = {
+		C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Stacksmith" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C05733C808A9546B00998B17 /* Debug */,
