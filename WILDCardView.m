@@ -153,14 +153,14 @@
 -(BOOL)	performDragOperation: (id <NSDraggingInfo>)sender
 {
 	NSDragOperation	op = [sender draggingSourceOperationMask];
-	NSPoint			pos = [sender draggedImageLocation];
+	NSPoint			pos = [self convertPointFromBase: [sender draggedImageLocation]];
 	NSPasteboard*	pb = [sender draggingPasteboard];
 	NSString*		xmlStr = [pb stringForType: WILDPartPboardType];
 	NSError*		err = nil;
 	NSXMLDocument*	doc = [[[NSXMLDocument alloc] initWithXMLString: xmlStr options: 0 error: &err] autorelease];
 	NSArray*		parts = [[doc rootElement] elementsForName: @"part"];
 	
-	NSLog( @"doc = %@", doc );
+	//NSLog( @"doc = %@", doc );
 	
 	if( [sender draggingSource] == self )	// Internal drag.
 	{
@@ -185,12 +185,13 @@
 		NSPoint		diff = pos;
 		diff.x -= box.origin.x;
 		diff.y -= box.origin.y;
+		NSLog( @"diff = %@ (src = %@ dst = %@)", NSStringFromPoint(diff), NSStringFromPoint(box.origin), NSStringFromPoint(pos) );
 		
 		for( WILDPart* currPart in draggedParts )
 		{
 			NSRect		currPartBox;
 			currPartBox = [currPart flippedRectangle];
-			currPartBox = NSOffsetRect( currPartBox, diff.x, diff.y );
+			currPartBox = NSOffsetRect( currPartBox, diff.x, -diff.y );
 			[currPart setFlippedRectangle: currPartBox];
 		}
 		
