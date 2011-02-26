@@ -255,15 +255,21 @@
 }
 
 
+-(NSURL*)	URLForPartTemplate: (NSString*)inName
+{
+	return [[NSBundle mainBundle] URLForResource: inName withExtension:@"xml" subdirectory: @"WILDObjectTemplates"];
+}
+
+
 -(void)	createNewButton: (id)sender
 {
-	[self addNewPartFromXMLTemplate: [[NSBundle mainBundle] URLForResource: @"ButtonPartTemplate" withExtension:@"xml" subdirectory: @"WILDObjectTemplates"]];
+	[self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"ButtonPartTemplate"]];
 }
 
 
 -(void)	createNewField: (id)sender
 {
-	[self addNewPartFromXMLTemplate: [[NSBundle mainBundle] URLForResource: @"FieldPartTemplate" withExtension:@"xml"subdirectory: @"WILDObjectTemplates"]];
+	[self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"FieldPartTemplate"]];
 }
 
 
