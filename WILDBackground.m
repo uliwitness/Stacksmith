@@ -12,6 +12,8 @@
 #import "WILDXMLUtils.h"
 #import "UKMultiMap.h"
 #import "WILDStack.h"
+#import "WILDNotifications.h"
+#import "UKRandomInteger.h"
 
 
 @implementation WILDBackground
@@ -34,7 +36,7 @@
 
 		mParts = [[NSMutableArray alloc] init];
 		mAddColorParts = [[NSMutableArray alloc] init];
-		mContents = [[NSMutableArray alloc] init];
+		mContents = [[NSMutableDictionary alloc] init];
 	}
 	
 	return self;
@@ -250,6 +252,66 @@
 			[mAddColorParts addObject: thePart];
 		}
 	}
+}
+
+
+-(void)	createNewButton: (id)sender
+{
+	[self addNewPartFromXMLTemplate: [[NSBundle mainBundle] URLForResource: @"ButtonPartTemplate" withExtension:@"xml"]];
+}
+
+
+-(void)	createNewField: (id)sender
+{
+	[self addNewPartFromXMLTemplate: [[NSBundle mainBundle] URLForResource: @"FieldPartTemplate" withExtension:@"xml"]];
+}
+
+
+-(NSInteger)	uniqueIDForPart
+{
+	NSInteger	partID = UKRandomInteger();
+	BOOL		notUnique = YES;
+	
+	while( notUnique )
+	{
+		notUnique = NO;
+		
+		for( WILDPart* currPart in mParts )
+		{
+			if( [currPart partID] == partID )
+			{
+				notUnique = YES;
+				partID = UKRandomInteger();
+				break;
+			}
+		}
+	}
+	
+	return partID;
+}
+
+
+-(void)	addNewPartFromXMLTemplate: (NSURL*)xmlFile
+{
+	NSError			*	outError = nil;
+	NSXMLDocument	*	templateDocument = [[NSXMLDocument alloc] initWithContentsOfURL: xmlFile options: 0 error: &outError];
+	if( !templateDocument && outError )
+	{
+		UKLog(@"Couldn't load XML template for part: %@",outError);
+		return;
+	}
+	
+	NSXMLElement	*	theElement = [templateDocument rootElement];
+	WILDPart		*	newPart = [[[WILDPart alloc] initWithXMLElement: theElement forStack: mStack] autorelease];
+	
+	[newPart setPartID: [self uniqueIDForPart]];
+	[newPart setPartLayer: [self partLayer]];
+	[newPart setPartOwner: self];
+	[mParts addObject: newPart];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidAddPartNotification
+						object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: newPart, WILDAffectedPartKey,
+							nil]];
 }
 
 

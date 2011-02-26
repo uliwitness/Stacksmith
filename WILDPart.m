@@ -209,6 +209,12 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
+-(void)	setPartID: (NSInteger)inID
+{
+	mID = inID;
+}
+
+
 -(NSInteger)	partNumber
 {
 	return [[mOwner parts] indexOfObject: self];
@@ -774,7 +780,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	
 	[outString appendString: @"\t<part>\n"];
 	
-	[outString appendFormat: @"\t\t<id>%d</id>\n", mID];
+	[outString appendFormat: @"\t\t<id>%ld</id>\n", mID];
 	[outString appendFormat: @"\t\t<type>%@</type>\n", [self partType]];
 	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
 	[outString appendFormat: @"\t\t<visible>%@</visible>\n", (mVisible ? @"<true />" : @"<false />")];

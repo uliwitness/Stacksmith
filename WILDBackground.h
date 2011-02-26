@@ -45,12 +45,17 @@
 
 -(NSArray*)						parts;
 -(NSArray*)						addColorParts;
--(WILDPartContents*)	contentsForPart: (WILDPart*)thePart;
--(WILDPart*)			partWithID: (NSInteger)theID;
+-(WILDPartContents*)			contentsForPart: (WILDPart*)thePart;
+-(WILDPart*)					partWithID: (NSInteger)theID;
+-(NSInteger)					uniqueIDForPart;
 
 -(void)							updatePartOnClick: (WILDPart*)thePart;
 
 -(NSString*)					partLayer;
+
+-(void)							createNewButton: (id)sender;
+-(void)							createNewField: (id)sender;
+-(void)							addNewPartFromXMLTemplate: (NSURL*)xmlFile;
 
 -(WILDStack*)					stack;
 

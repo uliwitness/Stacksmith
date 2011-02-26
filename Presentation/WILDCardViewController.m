@@ -48,6 +48,13 @@
 
 -(void)	dealloc
 {
+	if( mCurrentCard )
+	{
+		[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: mCurrentCard];
+		[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: mCurrentCard];
+		[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: [mCurrentCard owningBackground]];
+		[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: [mCurrentCard owningBackground]];
+	}
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: WILDPeekingStateChangedNotification
 											object: nil];
@@ -326,8 +333,8 @@
 
 -(void)	loadCard: (WILDCard*)theCard
 {
-	WILDCard*		prevCard = mCurrentCard;
-	NSMutableDictionary*	uiDict = nil;
+	WILDCard			*	prevCard = mCurrentCard;
+	NSMutableDictionary	*	uiDict = nil;
 	if( theCard != prevCard )
 	{
 		uiDict = [NSMutableDictionary dictionary];
@@ -337,6 +344,14 @@
 			[uiDict setObject: theCard forKey: WILDDestinationCardKey];
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDCurrentCardWillChangeNotification
 							object: self userInfo: uiDict];
+
+		if( prevCard )
+		{
+			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: prevCard];
+			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: prevCard];
+			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: [prevCard owningBackground]];
+			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: [prevCard owningBackground]];
+		}
 	}
 	
 	// Get rid of previous card's views:
@@ -441,6 +456,14 @@
 		[mAddColorOverlay setCompositingFilter: theFilter];
 		[[[self view] layer] addSublayer: mAddColorOverlay];
 		CFRelease( theImage );
+		
+		if( prevCard != theCard )
+		{
+			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerDidAddPart:) name: WILDLayerDidAddPartNotification object: theCard];
+			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerWillRemovePart:) name: WILDLayerWillRemovePartNotification object: theCard];
+			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerDidAddPart:) name: WILDLayerDidAddPartNotification object: [theCard owningBackground]];
+			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerWillRemovePart:) name: WILDLayerWillRemovePartNotification object: [theCard owningBackground]];
+		}
 	}
 	if( uiDict )
 	{
@@ -524,6 +547,18 @@
 }
 
 
+-(void)	layerDidAddPart: (NSNotification*)notif
+{
+	[self loadCard: mCurrentCard];
+}
+
+
+-(void)	layerWillRemovePart: (NSNotification*)notif
+{
+	[self performSelector: @selector(loadCard:) withObject: mCurrentCard afterDelay: 0.0];
+}
+
+
 -(IBAction)	showButtonInfoPanel: (id)sender
 {
 	NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
@@ -575,12 +610,14 @@
 
 -(IBAction)	createNewButton: (id)sender
 {
-	
+	[mCurrentCard createNewButton: sender];
+	[[WILDTools sharedTools] setCurrentTool: WILDButtonTool];
 }
 
 -(IBAction)	createNewField: (id)sender
 {
-	
+	[mCurrentCard createNewField: sender];	
+	[[WILDTools sharedTools] setCurrentTool: WILDFieldTool];
 }
 
 -(IBAction)	createNewBackground: (id)sender

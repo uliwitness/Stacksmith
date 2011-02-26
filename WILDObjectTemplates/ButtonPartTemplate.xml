@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE part PUBLIC "-//Apple, Inc.//DTD part V 2.0//EN" "" >
+<part>
+	<id>-1</id>
+	<type>button</type>
+	<layer>card</layer>
+	<visible><true /></visible>
+	<enabled><true /></enabled>
+	<rect>
+	   <left>100</left>
+	   <top>100</top>
+	   <right>200</right>
+	   <bottom>124</bottom>
+   </rect>
+	<style>default</style>
+	<showName><true /></showName>
+	<highlight><false /></highlight>
+	<autoHighlight><true /></autoHighlight>
+	<sharedHighlight><false /></sharedHighlight>
+	<family>0</family>
+	<titleWidth>0</titleWidth>
+	<icon>0</icon>
+	<textAlign>center</textAlign>
+	<font>Lucida Grande</font>
+	<textSize>13</textSize>
+
+	<name>New Button</name>
+   <script></script>
+</part>

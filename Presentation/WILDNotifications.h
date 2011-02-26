@@ -38,6 +38,17 @@ NSString*	WILDDestinationCardKey;	// May be missing (e.g. when closing a stack).
 
 
 // -----------------------------------------------------------------------------
+// Notifications when parts are created/destroyed (by the user, not just due to
+//	the document being closed or the app being quit):
+// Objects get created/destroyed:
+NSString*	WILDLayerDidAddPartNotification;
+NSString*	WILDLayerWillRemovePartNotification;
+
+// Info dictionary key:
+NSString*	WILDAffectedPartKey;	// The part that was added to the layer that is our sender.
+
+
+// -----------------------------------------------------------------------------
 // Notifications when we change properties of parts:
 NSString*	WILDPartWillChangeNotification;	// Part has old state.
 NSString*	WILDPartDidChangeNotification;	// Part has new state.

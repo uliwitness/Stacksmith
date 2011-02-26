@@ -28,6 +28,11 @@ NSString*	WILDCurrentCardDidChangeNotification = @"WILDCurrentCardDidChange";
 NSString*	WILDSourceCardKey = @"WILDSourceCard";
 NSString*	WILDDestinationCardKey = @"WILDDestinationCard";
 
+// Objects get created/destroyed:
+NSString*	WILDLayerDidAddPartNotification = @"WILDLayerDidAddPart";
+NSString*	WILDLayerWillRemovePartNotification = @"WILDLayerWillRemovePart";
+
+NSString*	WILDAffectedPartKey = @"WILDAffectedPart";
 
 // Properties of part change:
 NSString*	WILDPartWillChangeNotification = @"WILDPartWillChange";
