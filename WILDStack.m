@@ -313,6 +313,36 @@
 }
 
 
+-(NSString*)	xmlString
+{
+	NSMutableString	*	theString = [NSMutableString stringWithString: @"<stack>\n"];
+	
+	[theString appendFormat: @"\t<userLevel>%d</userLevel>\n", mUserLevel];
+	[theString appendFormat: @"\t<cantModify>%@</cantModify>\n", mCantModify ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t<cantDelete>%@</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t<privateAccess>%@</privateAccess>\n", mPrivateAccess ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t<cantAbort>%@</cantAbort>\n", mCantAbort ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t<cantPeek>%@</cantPeek>\n", mCantPeek ? @"<true />" : @"<false />"];
+
+	[theString appendFormat: @"\t<cardSize>\n\t\t<width>%d</width>\n\t\t<height>%d</height>\n\t</cantPeek>\n", mCardSize.width, mCardSize.height];
+	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
+	
+	for( WILDBackground * currBg in mBackgrounds )
+	{
+		[theString appendString: [currBg xmlString]];
+	}
+	
+	for( WILDCard * currCd in mCards )
+	{
+		[theString appendString: [currCd xmlString]];
+	}
+	
+	[theString appendString: @"</stack>\n"];
+	
+	return theString;
+}
+
+
 +(NSColor*)		peekOutlineColor
 {
 	return [NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22.pbm"]];

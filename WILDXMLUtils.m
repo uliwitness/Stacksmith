@@ -177,3 +177,13 @@ NSPoint	WILDPointFromSubElementInElement( NSString* elemName, NSXMLElement* elem
 //}
 
 
+NSString*	WILDStringEscapedForXML( NSString* inString )
+{
+	NSMutableString*	escapedString = [[inString mutableCopy] autorelease];
+	[escapedString replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0, [escapedString length])];
+	[escapedString replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0, [escapedString length])];
+	[escapedString replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [escapedString length])];
+	return escapedString;
+}
+
+

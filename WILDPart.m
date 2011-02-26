@@ -806,16 +806,10 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	for( NSString* styleName in mTextStyles )
 		[outString appendFormat: @"\t\t<textStyle>%@</textStyle>\n", styleName];
 	
-	NSMutableString*	nameStr = [[mName mutableCopy] autorelease];
-	[nameStr replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0, [nameStr length])];
-	[nameStr replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0, [nameStr length])];
-	[nameStr replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [nameStr length])];
+	NSMutableString*	nameStr = WILDStringEscapedForXML(mName);
 	[outString appendFormat: @"\t\t<name>%@</name>\n", nameStr];
 	
-	NSMutableString*	scriptStr = [[mScript mutableCopy] autorelease];
-	[scriptStr replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0, [scriptStr length])];
-	[scriptStr replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0, [scriptStr length])];
-	[scriptStr replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [scriptStr length])];
+	NSMutableString*	scriptStr = WILDStringEscapedForXML(mScript);
 	[outString appendFormat: @"\t\t<script>%@</script>\n", scriptStr];
 	
 	[outString appendString: @"\t</part>\n"];

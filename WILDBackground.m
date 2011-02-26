@@ -327,6 +327,48 @@
 }
 
 
+-(void)	appendInnerAddColorObjectXmlToString: (NSMutableString*)theString
+{
+	// TODO: Implement writing of AddColor data.
+}
+
+
+-(void)	appendInnerXmlToString: (NSMutableString*)theString
+{
+	[theString appendFormat: @"\t\t<id>%ld</id>\n", mID];
+	[theString appendFormat: @"\t\t<name>%@</name>\n", WILDStringEscapedForXML(mName)];
+	[theString appendFormat: @"\t\t<showPict>%ld</showPict>\n", mShowPict ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t\t<cantDelete>%ld</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t\t<dontSearch>%ld</dontSearch>\n", mDontSearch ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t\t<bitmap>%@</bitmap>\n", mPicture];
+	[theString appendFormat: @"\t\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
+	
+	for( WILDPart* currPart in mParts )
+	{
+		[theString appendString: [currPart xmlString]];
+	}
+	
+	for( WILDPartContents* currContents in mParts )
+	{
+		[theString appendString: [currContents xmlString]];
+	}
+	
+	[self appendAddColorObjectXmlToString: theString];
+}
+
+
+-(NSString*)	xmlString
+{
+	NSMutableString	*	theString = [NSMutableString stringWithFormat: @"\t<%@>\n", [self partLayer]];
+	
+	[self appendXmlToString: theString];
+	
+	[theString appendFormat: @"\t</%@>\n", [self partLayer]];
+	
+	return theString;
+}
+
+
 -(NSString*)	script
 {
 	return mScript;

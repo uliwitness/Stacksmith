@@ -202,4 +202,12 @@
 	return foundSomething;
 }
 
+
+-(void)	appendInnerXmlToString: (NSMutableString*)theString
+{
+	[super appendInnerXmlToString: theString];
+	
+	[theString appendFormat: @"<owner>%ld</owner>\n", [mOwner backgroundID]];
+}
+
 @end

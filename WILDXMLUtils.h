@@ -19,3 +19,4 @@ NSRect				WILDRectFromSubElementInElement( NSString* elemName, NSXMLElement* ele
 NSPoint				WILDPointFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSColor*			WILDColorFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSMutableIndexSet*	WILDIndexSetFromSubElementInElement( NSString* elemName, NSXMLElement* elem, NSInteger offsetIndexes );
+NSString*			WILDStringEscapedForXML( NSString* inString );

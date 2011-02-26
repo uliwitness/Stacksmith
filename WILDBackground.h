@@ -62,4 +62,8 @@
 -(NSString*)					script;
 -(void)							setScript: (NSString*)theScript;
 
+-(NSString*)					xmlString;
+-(void)							appendInnerAddColorObjectXmlToString: (NSMutableString*)theString;
+-(void)							appendInnerXmlToString: (NSMutableString*)theString;
+
 @end

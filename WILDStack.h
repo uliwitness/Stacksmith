@@ -59,4 +59,6 @@
 
 -(WILDDocument*)	document;
 
+-(NSString*)	xmlString;
+
 @end
