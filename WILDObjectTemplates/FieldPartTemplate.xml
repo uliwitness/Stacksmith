@@ -10,7 +10,7 @@
 	   <left>100</left>
 	   <top>100</top>
 	   <right>200</right>
-	   <bottom>250</bottom>
+	   <bottom>150</bottom>
    </rect>
 	<style>rectangle</style>
 	<showName><false /></showName>
@@ -20,10 +20,10 @@
 	<family>0</family>
 	<titleWidth>0</titleWidth>
 	<icon>0</icon>
-	<textAlign>center</textAlign>
-	<font>Lucida Grande</font>
-	<textSize>13</textSize>
+	<textAlign>left</textAlign>
+	<font>Geneva</font>
+	<textSize>12</textSize>
 
-	<name>New Field</name>
+	<name></name>
 	<script></script>
 </part>
