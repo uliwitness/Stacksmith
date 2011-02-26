@@ -257,13 +257,13 @@
 
 -(void)	createNewButton: (id)sender
 {
-	[self addNewPartFromXMLTemplate: [[NSBundle mainBundle] URLForResource: @"ButtonPartTemplate" withExtension:@"xml"]];
+	[self addNewPartFromXMLTemplate: [[NSBundle mainBundle] URLForResource: @"ButtonPartTemplate" withExtension:@"xml" subdirectory: @"WILDObjectTemplates"]];
 }
 
 
 -(void)	createNewField: (id)sender
 {
-	[self addNewPartFromXMLTemplate: [[NSBundle mainBundle] URLForResource: @"FieldPartTemplate" withExtension:@"xml"]];
+	[self addNewPartFromXMLTemplate: [[NSBundle mainBundle] URLForResource: @"FieldPartTemplate" withExtension:@"xml"subdirectory: @"WILDObjectTemplates"]];
 }
 
 
