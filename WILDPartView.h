@@ -30,6 +30,7 @@
 -(WILDPart*)	part;
 
 -(void)	setSelected: (BOOL)inState;
+-(BOOL)	myToolIsCurrent;
 
 -(void)	subscribeNotifications;
 -(void)	unsubscribeNotifications;

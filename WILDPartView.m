@@ -107,6 +107,14 @@
 }
 
 
+-(BOOL)	myToolIsCurrent
+{
+	BOOL	isMyTool = ([[WILDTools sharedTools] currentTool] == WILDButtonTool && [[mPart partType] isEqualToString: @"button"])
+						|| ([[WILDTools sharedTools] currentTool] == WILDFieldTool && [[mPart partType] isEqualToString: @"field"]);
+	return isMyTool;
+}
+
+
 -(void)	setSelected: (BOOL)inState
 {
 	if( mSelected != inState )
@@ -130,8 +138,7 @@
 -(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect
 {
 	NSRect	subviewBounds = [subview bounds];
-	BOOL	isMyTool = ([[WILDTools sharedTools] currentTool] == WILDButtonTool && [[mPart partType] isEqualToString: @"button"])
-						|| ([[WILDTools sharedTools] currentTool] == WILDFieldTool && [[mPart partType] isEqualToString: @"field"]);
+	BOOL	isMyTool = [self myToolIsCurrent];
 	
 	if( mSelected )
 	{
@@ -177,8 +184,7 @@
 
 -(NSView *)	hitTest: (NSPoint)aPoint	// Equivalent to Carbon kEventControlInterceptSubviewClick.
 {
-	BOOL	isMyTool = ([[WILDTools sharedTools] currentTool] == WILDButtonTool && [[mPart partType] isEqualToString: @"button"])
-						|| ([[WILDTools sharedTools] currentTool] == WILDFieldTool && [[mPart partType] isEqualToString: @"field"]);
+	BOOL	isMyTool = [self myToolIsCurrent];
 	NSView*	hitView = [super hitTest: aPoint];
 	if( hitView != nil )	// Was in our view or a sub view, not outside us?
 	{
@@ -196,8 +202,7 @@
 
 -(void)	mouseDown: (NSEvent*)event
 {
-	BOOL	isMyTool = ([[WILDTools sharedTools] currentTool] == WILDButtonTool && [[mPart partType] isEqualToString: @"button"])
-						|| ([[WILDTools sharedTools] currentTool] == WILDFieldTool && [[mPart partType] isEqualToString: @"field"]);
+	BOOL	isMyTool = [self myToolIsCurrent];
 	if( mPeeking )
 	{
 		WILDScriptEditorWindowController*	sewc = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: mPart] autorelease];

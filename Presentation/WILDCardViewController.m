@@ -233,6 +233,28 @@
 			&& ([[WILDTools sharedTools] currentTool] == WILDButtonTool
 				|| [[WILDTools sharedTools] currentTool] == WILDFieldTool) );
 	}
+	else if( [menuItem action] == @selector(selectAll:) )
+	{
+		bool canSelect = ( [[WILDTools sharedTools] currentTool] != WILDBrowseTool );
+		if( canSelect )
+		{
+			NSUInteger	numSelectableParts = 0;
+			NSArray	*	views = [[self view] subviews];
+			for( WILDPartView	*	currPartView in views )
+			{
+				if( [currPartView myToolIsCurrent] )
+					numSelectableParts += 1;
+			}
+			
+			return [[WILDTools sharedTools] numberOfSelectedClients] != numSelectableParts;
+		}
+		else
+			return NO;
+	}
+	else if( [menuItem action] == @selector(deselectAll:) )
+	{
+		return ( [[WILDTools sharedTools] numberOfSelectedClients] > 0 );
+	}
 	else
 		return( [self respondsToSelector: [menuItem action]] );
 }
@@ -525,6 +547,24 @@
 -(void)	moveLeft: (id)sender
 {
 	[self goPrevCard: sender];
+}
+
+
+-(void)	selectAll: (id)sender
+{
+	NSArray	*	views = [[self view] subviews];
+	for( WILDPartView	*	currPartView in views )
+	{
+		if( [currPartView respondsToSelector: @selector(setSelected:)]
+			&& [currPartView myToolIsCurrent] )
+			[currPartView setSelected: YES];
+	}
+}
+
+
+-(void)	deselectAll: (id)sender
+{
+	[[WILDTools sharedTools] deselectAllClients];
 }
 
 
