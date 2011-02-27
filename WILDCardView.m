@@ -135,6 +135,7 @@
 -(void)	currentToolDidChange: (NSNotification*)notification
 {
 	[[self window] invalidateCursorRectsForView: self];
+	[[self window] makeFirstResponder: self];
 }
 
 
