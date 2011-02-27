@@ -63,6 +63,12 @@
 }
 
 
+-(void)	windowWillClose: (NSNotification*)notification
+{
+	[mContainer setScript: [mTextView string]];
+}
+
+
 -(void) setDocument: (NSDocument *)document
 {
 	[super setDocument: document];

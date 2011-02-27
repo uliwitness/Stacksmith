@@ -140,7 +140,7 @@ NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 					if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "then", like "athena", right?
 					{
 						[scanny scanCharactersFromSet: wsCS intoString: nil];
-						if( UKScanLineEnding( scanny, outString, &currentLine ) )
+						if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
 						{
 							[openBlockNames addObject: @"if"];
 							addToIndentationAfterThisLine++;
