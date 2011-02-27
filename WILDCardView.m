@@ -183,6 +183,8 @@
 		diff.x -= box.origin.x;
 		diff.y = [self bounds].size.height -diff.y;
 		diff.y -= box.origin.y +box.size.height;
+		diff.x = truncf(diff.x);
+		diff.y = truncf(diff.y);
 		NSLog( @"diff = %@ (src = %@ dst = %@)", NSStringFromPoint(diff), NSStringFromPoint(box.origin), NSStringFromPoint(pos) );
 		
 		for( WILDPart* currPart in draggedParts )

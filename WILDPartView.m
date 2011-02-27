@@ -440,7 +440,7 @@
 	}
 	else
 	{
-		[self setFrame: NSInsetRect([mPart rectangle], -1, -1)];
+		[self setFrame: NSInsetRect([mPart rectangle], -2, -2)];
 		[self unloadPart];
 		[self loadPart: mPart forBackgroundEditing: NO];
 	}
