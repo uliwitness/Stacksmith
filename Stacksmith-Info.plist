@@ -38,7 +38,7 @@
 				<string>STAK</string>
 			</array>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
 			<key>NSDocumentClass</key>
 			<string>WILDDocument</string>
 		</dict>
