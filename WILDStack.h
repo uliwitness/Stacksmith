@@ -34,30 +34,31 @@
 	NSInteger				mID;
 }
 
--(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;
--(id)	initWithDocument: (WILDDocument*)owner;
+-(id)				initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;
+-(id)				initWithDocument: (WILDDocument*)owner;
 
--(void)			addCard: (WILDCard*)theCard;
--(void)			addBackground: (WILDBackground*)theBg;
+-(void)				addCard: (WILDCard*)theCard;
+-(void)				addBackground: (WILDBackground*)theBg;
 
--(NSInteger)	stackID;
+-(NSInteger)		stackID;
 
--(NSInteger)	uniqueIDForCardOrBackground;
--(NSInteger)	uniqueIDForMedia;
+-(NSInteger)		uniqueIDForCardOrBackground;
+-(NSInteger)		uniqueIDForMedia;
 
--(NSArray*)		cards;
--(void)			setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.
--(WILDCard*)	cardWithID: (NSInteger)theID;
+-(NSArray*)			cards;
+-(void)				setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.
+-(WILDCard*)		cardWithID: (NSInteger)theID;
 
 -(void)				setBackgrounds: (NSArray*)theBkgds;
 -(WILDBackground*)	backgroundWithID: (NSInteger)theID;
 
--(NSSize)		cardSize;
+-(NSSize)			cardSize;
 
-+(NSColor*)		peekOutlineColor;
++(NSColor*)			peekOutlineColor;
 
 -(WILDDocument*)	document;
+-(void)				updateChangeCount: (NSDocumentChangeType)inChange;
 
--(NSString*)	xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError;
+-(NSString*)		xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError;
 
 @end

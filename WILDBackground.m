@@ -315,6 +315,7 @@
 	[newPart setPartOwner: self];
 	[mParts addObject: newPart];
 	
+	[self updateChangeCount: NSChangeDone];
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidAddPartNotification
 						object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: newPart, WILDAffectedPartKey,
 							nil]];
@@ -335,14 +336,14 @@
 
 -(void)	appendInnerXmlToString: (NSMutableString*)theString
 {
-	[theString appendFormat: @"\t\t<id>%ld</id>\n", mID];
-	[theString appendFormat: @"\t\t<name>%@</name>\n", WILDStringEscapedForXML(mName)];
-	[theString appendFormat: @"\t\t<showPict>%@</showPict>\n", mShowPict ? @"<true />" : @"<false />"];
-	[theString appendFormat: @"\t\t<cantDelete>%@</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
-	[theString appendFormat: @"\t\t<dontSearch>%@</dontSearch>\n", mDontSearch ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t<id>%ld</id>\n", mID];
+	[theString appendFormat: @"\t<name>%@</name>\n", WILDStringEscapedForXML(mName)];
+	[theString appendFormat: @"\t<showPict>%@</showPict>\n", mShowPict ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t<cantDelete>%@</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t<dontSearch>%@</dontSearch>\n", mDontSearch ? @"<true />" : @"<false />"];
 	if( mPicture )
-		[theString appendFormat: @"\t\t<bitmap>%@</bitmap>\n", mPicture];
-	[theString appendFormat: @"\t\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
+		[theString appendFormat: @"\t<bitmap>%@</bitmap>\n", mPicture];
+	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
 	
 	for( WILDPart* currPart in mParts )
 	{
@@ -362,13 +363,19 @@
 {
 	NSMutableString	*	theString = [NSMutableString stringWithFormat: @"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
 												"<!DOCTYPE %1$@ PUBLIC \"-//Apple, Inc.//DTD %1$@ V 2.0//EN\" \"\" >\n"
-																		"\t<%1$@>\n", [self partLayer]];
+																		"<%1$@>\n", [self partLayer]];
 	
 	[self appendInnerXmlToString: theString];	// Hook-in point for subclasses (like WILDCard).
 	
-	[theString appendFormat: @"\t</%@>\n", [self partLayer]];
+	[theString appendFormat: @"</%@>\n", [self partLayer]];
 	
 	return theString;
+}
+
+
+-(void)	updateChangeCount: (NSDocumentChangeType)inChange
+{
+	[[mStack document] updateChangeCount: inChange];
 }
 
 

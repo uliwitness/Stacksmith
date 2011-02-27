@@ -155,6 +155,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 								object: self userInfo: [NSDictionary dictionaryWithObject: @"name"
 																forKey: WILDAffectedPropertyKey]];
+		[self updateChangeCount: NSChangeDone];
 	}
 }
 
@@ -183,6 +184,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 								object: self userInfo: [NSDictionary dictionaryWithObject: @"style"
 																forKey: WILDAffectedPropertyKey]];
+		[self updateChangeCount: NSChangeDone];
 	}
 }
 
@@ -369,6 +371,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"showName"
 															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -387,6 +390,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"enabled"
 															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -405,6 +409,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"visible"
 															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -423,6 +428,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"iconID"
 															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -458,6 +464,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	mHighlight = inState;
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"highlighted" forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -474,6 +481,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	mAutoHighlight = inState;
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"autoHighlight" forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -502,6 +510,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	mSharedHighlight = inState;
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"sharedHighlight" forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -530,6 +539,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	mFamily = inFamilyNumber;
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"family" forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -545,6 +555,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 								object: self userInfo: [NSDictionary dictionaryWithObject: @"fillColor"
 																forKey: WILDAffectedPropertyKey]];
+		[self updateChangeCount: NSChangeDone];
 	}
 }
 
@@ -566,6 +577,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"bevel"
 															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -587,6 +599,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	{
 		[mScript release];
 		mScript = [theScript retain];
+		[self updateChangeCount: NSChangeDone];
 	}
 }
 
@@ -637,6 +650,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"selectedListItemIndexes"
 															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -648,6 +662,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(void)	setAutoSelect: (BOOL)inState
 {
+	[self updateChangeCount: NSChangeDone];
 	mAutoSelect = inState;
 }
 
@@ -661,6 +676,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 -(void)			setCanSelectMultipleLines: (BOOL)inState
 {
 	mMultipleLines = inState;
+	[self updateChangeCount: NSChangeDone];
 }
 
 
@@ -771,6 +787,12 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		;//NSLog( @"Found nothing in %@", [self displayName] );
 	
 	return NO;
+}
+
+
+-(void)	updateChangeCount: (NSDocumentChangeType)inChange
+{
+	[mOwner updateChangeCount: inChange];
 }
 
 

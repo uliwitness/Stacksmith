@@ -219,6 +219,8 @@
 		[self setFileURL: absoluteURL];
 
 		[[UKProgressPanelController sharedProgressController] hide];
+		
+		[self updateChangeCount: NSChangeReadOtherContents];
 	}
 	
 	tocURL = [absoluteURL URLByAppendingPathComponent: @"toc.xml"];

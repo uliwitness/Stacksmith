@@ -58,6 +58,7 @@
 -(void)							addNewPartFromXMLTemplate: (NSURL*)xmlFile;
 
 -(WILDStack*)					stack;
+-(void)							updateChangeCount: (NSDocumentChangeType)inChange;
 
 -(NSString*)					script;
 -(void)							setScript: (NSString*)theScript;

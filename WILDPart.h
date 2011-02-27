@@ -143,6 +143,7 @@
 -(NSString*)	xmlString;
 
 -(WILDStack*)	stack;
+-(void)			updateChangeCount: (NSDocumentChangeType)inChange;
 
 -(void)	updateOnClick: (NSButton*)thePart;
 

@@ -353,6 +353,12 @@
 }
 
 
+-(void)	updateChangeCount: (NSDocumentChangeType)inChange
+{
+	[mDocument updateChangeCount: inChange];
+}
+
+
 +(NSColor*)		peekOutlineColor
 {
 	return [NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22.pbm"]];
