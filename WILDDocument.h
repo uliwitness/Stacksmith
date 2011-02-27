@@ -20,11 +20,16 @@
 	NSMutableDictionary	*	mTextStyles;		// STBL-extracted text/style info.
 	NSMutableArray		*	mMediaList;			// Media.
 	NSMutableArray		*	mStacks;			// List of stacks in this document.
+	NSString			*	mCreatedByVersion;
+	NSString			*	mLastCompactedVersion;
+	NSString			*	mFirstEditedVersion;
+	NSString			*	mLastEditedVersion;
 }
 
 -(void)			addFont: (NSString*)fontName withID: (NSInteger)fontID;
 -(void)			addStyleFormatWithID: (NSInteger)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
 
+-(NSInteger)	uniqueIDForStack;
 -(NSInteger)	uniqueIDForMedia;
 
 -(NSString*)	fontNameForID: (NSInteger)fontID;

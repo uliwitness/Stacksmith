@@ -21,6 +21,7 @@
 #import "UKRandomInteger.h"
 #import "WILDCardWindowController.h"
 #import <Quartz/Quartz.h>
+#import "WILDXMLUtils.h"
 
 
 @implementation WILDDocument
@@ -35,7 +36,13 @@
 		mMediaList = [[NSMutableArray alloc] init];
 		mStacks = [[NSMutableArray alloc] init];
 		[mStacks addObject: [[[WILDStack alloc] initWithDocument: self] autorelease]];
-    }
+ 
+		NSString*	appVersion = [NSString stringWithFormat: @"Stacksmith %@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleVersion"]];
+		mCreatedByVersion = [appVersion retain];
+		mLastCompactedVersion = [appVersion retain];
+		mFirstEditedVersion = [appVersion retain];
+		mLastEditedVersion = [appVersion retain];
+	}
     return self;
 }
 
@@ -47,6 +54,10 @@
 	DESTROY(mTextStyles);
 	DESTROY(mMediaList);
 	DESTROY(mStacks);
+	DESTROY(mCreatedByVersion);
+	DESTROY(mLastCompactedVersion);
+	DESTROY(mFirstEditedVersion);
+	DESTROY(mLastEditedVersion);
 	
 	[super dealloc];
 }
@@ -112,6 +123,47 @@
 }
 
 
+-(BOOL)	writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
+{
+	if( ![[NSFileManager defaultManager] fileExistsAtPath: [absoluteURL path]] )
+	{
+		if( ![[NSFileManager defaultManager] createDirectoryAtPath: [absoluteURL path] withIntermediateDirectories:NO attributes: nil error: outError] )
+			return NO;
+	}
+	
+	NSMutableString	*	tocXmlString = [NSMutableString stringWithString:
+											@"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
+												"<!DOCTYPE stackfile PUBLIC \"-//Apple, Inc.//DTD stackfile V 2.0//EN\" \"\" >\n"
+												"<stackfile>\n"];
+	
+	// Write out each stack:
+	for( WILDStack * currStack in mStacks )
+	{
+		NSString	*	stackFileName = nil;
+		NSURL		*	stackURL = nil;
+		stackFileName = [NSString stringWithFormat: @"stack_%ld.xml", [currStack stackID]];
+		stackURL = [absoluteURL URLByAppendingPathComponent: stackFileName];
+		
+		if( ![[currStack xmlStringForWritingToURL: absoluteURL error: outError] writeToURL: stackURL atomically: YES encoding: NSUTF8StringEncoding error:outError] )
+			return NO;
+		[tocXmlString appendFormat: @"\t<stack id=\"%1$ld\" file=\"stack_%1$ld.xml\" />\n", [currStack stackID]];
+	}
+	
+	// Write TOC:
+	[tocXmlString appendFormat: @"\t<createdByVersion>%@</createdByVersion>\n", mCreatedByVersion];
+	[tocXmlString appendFormat: @"\t<lastCompactedVersion>%@</lastCompactedVersion>\n", mLastCompactedVersion];
+	[tocXmlString appendFormat: @"\t<lastEditedVersion>%@</lastEditedVersion>\n", mLastEditedVersion];
+	[tocXmlString appendFormat: @"\t<firstEditedVersion>%@</firstEditedVersion>\n", mFirstEditedVersion];
+
+	[tocXmlString appendString: @"</stackfile>\n"];
+	NSURL	*	tocURL = [absoluteURL URLByAppendingPathComponent: @"toc.xml"];
+	if( ![tocXmlString writeToURL: tocURL atomically: YES encoding: NSUTF8StringEncoding error:outError] )
+		return NO;
+		
+	return YES;
+}
+
+
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
 	NSURL*		tocURL = absoluteURL;
@@ -148,13 +200,20 @@
 	
 	NSXMLDocument*	xmlDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: tocURL
 														options: 0 error: outError] autorelease];
-	if( *outError )
+	if( !xmlDoc && *outError )
 	{
 		NSLog( @"%@", *outError );
 		return NO;
 	}
 	
 	NSXMLElement	*	stackfileElement = [xmlDoc rootElement];
+	
+	// Load read/written version numbers so we can conditionally react to them:
+	mCreatedByVersion = [WILDStringFromSubElementInElement( @"createdByVersion", stackfileElement ) retain];
+	mLastCompactedVersion = [WILDStringFromSubElementInElement( @"lastCompactedVersion", stackfileElement ) retain];
+	mFirstEditedVersion = [WILDStringFromSubElementInElement( @"firstEditedVersion", stackfileElement ) retain];
+	mLastEditedVersion = [WILDStringFromSubElementInElement( @"lastEditedVersion", stackfileElement ) retain];
+		
 	
 	// Load font table so others can access it:
 	NSArray			*	fonts = [stackfileElement elementsForName: @"font"];
@@ -324,6 +383,30 @@
 		*outFontSize = [pse fontSize];
 		*outFontStyles = [pse styles];
 	}
+}
+
+
+-(NSInteger)	uniqueIDForStack
+{
+	NSInteger	stackID = UKRandomInteger();
+	BOOL		notUnique = YES;
+	
+	while( notUnique )
+	{
+		notUnique = NO;
+		
+		for( WILDStack* currStack in mStacks )
+		{
+			if( [currStack stackID] == stackID )
+			{
+				notUnique = YES;
+				stackID = UKRandomInteger();
+				break;
+			}
+		}
+	}
+	
+	return stackID;
 }
 
 

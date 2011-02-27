@@ -21,6 +21,8 @@
 {
 	if(( self = [super init] ))
 	{
+		mID = [theDocument uniqueIDForStack];
+		
 		mUserLevel = 5;
 		
 		mCantModify = NO;
@@ -30,12 +32,6 @@
 		mCantPeek = NO;
 		
 		mDocument = theDocument;
-		
-//		NSString*	appVersion = [NSString stringWithFormat: @"Stacksmith %@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleVersion"]];
-//		mCreatedByVersion = [appVersion retain];
-//		mLastCompactedVersion = [appVersion retain];
-//		mFirstEditedVersion = [appVersion retain];
-//		mLastEditedVersion = [appVersion retain];
 		
 		mCardSize = NSMakeSize( 512, 342 );
 		
@@ -59,6 +55,8 @@
 	{
 		NSXMLElement*	elem = [theDoc rootElement];
 		
+		mID = WILDIntegerFromSubElementInElement( @"id", elem );
+		
 		mUserLevel = WILDIntegerFromSubElementInElement( @"userLevel", elem );
 		
 		mCantModify = WILDBoolFromSubElementInElement( @"cantModify", elem );
@@ -66,11 +64,6 @@
 		mPrivateAccess = WILDBoolFromSubElementInElement( @"privateAccess", elem );
 		mCantAbort = WILDBoolFromSubElementInElement( @"cantAbort", elem );
 		mCantPeek = WILDBoolFromSubElementInElement( @"cantPeek", elem );
-		
-//		mCreatedByVersion = [WILDStringFromSubElementInElement( @"createdByVersion", elem ) retain];
-//		mLastCompactedVersion = [WILDStringFromSubElementInElement( @"lastCompactedVersion", elem ) retain];
-//		mFirstEditedVersion = [WILDStringFromSubElementInElement( @"firstEditedVersion", elem ) retain];
-//		mLastEditedVersion = [WILDStringFromSubElementInElement( @"lastEditedVersion", elem ) retain];
 		
 		mCardSize = WILDSizeFromSubElementInElement( @"cardSize", elem );
 		
@@ -124,10 +117,6 @@
 {
 	DESTROY(mBackgrounds);
 	DESTROY(mCards);
-//	DESTROY(mCreatedByVersion);
-//	DESTROY(mLastCompactedVersion);
-//	DESTROY(mFirstEditedVersion);
-//	DESTROY(mLastEditedVersion);
 	DESTROY(mScript);
 	
 	[super dealloc];
@@ -313,9 +302,20 @@
 }
 
 
--(NSString*)	xmlString
+-(NSInteger)	stackID
 {
-	NSMutableString	*	theString = [NSMutableString stringWithString: @"<stack>\n"];
+	return mID;
+}
+
+
+-(NSString*)	xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError
+{
+	NSMutableString	*	theString = [NSMutableString stringWithString:
+											@"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
+												"<!DOCTYPE stack PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\" >\n"
+												"<stack>\n"];
+	
+	[theString appendFormat: @"\t<id>%ld</id>\n", mID];
 	
 	[theString appendFormat: @"\t<userLevel>%d</userLevel>\n", mUserLevel];
 	[theString appendFormat: @"\t<cantModify>%@</cantModify>\n", mCantModify ? @"<true />" : @"<false />"];
@@ -324,17 +324,27 @@
 	[theString appendFormat: @"\t<cantAbort>%@</cantAbort>\n", mCantAbort ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<cantPeek>%@</cantPeek>\n", mCantPeek ? @"<true />" : @"<false />"];
 
-	[theString appendFormat: @"\t<cardSize>\n\t\t<width>%d</width>\n\t\t<height>%d</height>\n\t</cantPeek>\n", mCardSize.width, mCardSize.height];
+	[theString appendFormat: @"\t<cardSize>\n\t\t<width>%d</width>\n\t\t<height>%d</height>\n\t</cardSize>\n", (int)mCardSize.width, (int)mCardSize.height];
 	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
 	
+	// Write out cards and add entries for them:
 	for( WILDBackground * currBg in mBackgrounds )
 	{
-		[theString appendString: [currBg xmlString]];
+		NSString*	bgFileName = [NSString stringWithFormat: @"background_%ld.xml", [currBg backgroundID]];
+		NSURL	*	bgURL = [packageURL URLByAppendingPathComponent: bgFileName];
+		if( ![[currBg xmlStringForWritingToURL: packageURL error: outError] writeToURL: bgURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
+			return nil;
+		[theString appendFormat: @"\t<background id=\"%ld\" file=\"%@\" />\n", [currBg backgroundID], WILDStringEscapedForXML(bgFileName)];
 	}
 	
+	// Write out cards and add entries for them:
 	for( WILDCard * currCd in mCards )
 	{
-		[theString appendString: [currCd xmlString]];
+		NSString*	cdFileName = [NSString stringWithFormat: @"card_%ld.xml", [currCd cardID]];
+		NSURL	*	cdURL = [packageURL URLByAppendingPathComponent: cdFileName];
+		if( ![[currCd xmlStringForWritingToURL: packageURL error: outError] writeToURL: cdURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
+			return nil;
+		[theString appendFormat: @"\t<card id=\"%ld\" file=\"%@\" />\n", [currCd cardID], WILDStringEscapedForXML(cdFileName)];
 	}
 	
 	[theString appendString: @"</stack>\n"];

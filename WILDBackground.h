@@ -62,8 +62,8 @@
 -(NSString*)					script;
 -(void)							setScript: (NSString*)theScript;
 
--(NSString*)					xmlString;
+-(NSString*)					xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError;
 -(void)							appendInnerAddColorObjectXmlToString: (NSMutableString*)theString;
--(void)							appendInnerXmlToString: (NSMutableString*)theString;
+-(void)							appendInnerXmlToString: (NSMutableString*)theString;	// Hook-in point for subclasses like WILDCard.
 
 @end

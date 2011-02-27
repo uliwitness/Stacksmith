@@ -24,17 +24,14 @@
 	NSMutableArray*			mCards;				// List of all cards in this stack.
 	NSString*				mScript;			// Script of this stack.
 	NSSize					mCardSize;			// Size of cards in this stack.
-//	NSString*				mCreatedByVersion;
-//	NSString*				mLastCompactedVersion;
-//	NSString*				mFirstEditedVersion;
-//	NSString*				mLastEditedVersion;
 	BOOL					mCantPeek;			// Do we prevent "peeking" of button rects using Cmd-Option?
 	BOOL					mCantAbort;			// Do we prohibit Cmd-. from canceling scripts?
 	BOOL					mPrivateAccess;		// Do we require a password before opening this stack?
 	BOOL					mCantDelete;		// Are scripts allowed to delete this stack?
 	BOOL					mCantModify;		// Is this stack write-protected?
 	NSInteger				mUserLevel;			// Maximum user level for this stack.
-	WILDDocument*	mDocument;			// Our owner, NOT RETAINED!
+	WILDDocument*			mDocument;			// Our owner, NOT RETAINED!
+	NSInteger				mID;
 }
 
 -(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;
@@ -43,14 +40,16 @@
 -(void)			addCard: (WILDCard*)theCard;
 -(void)			addBackground: (WILDBackground*)theBg;
 
+-(NSInteger)	stackID;
+
 -(NSInteger)	uniqueIDForCardOrBackground;
 -(NSInteger)	uniqueIDForMedia;
 
--(NSArray*)					cards;
--(void)						setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.
--(WILDCard*)		cardWithID: (NSInteger)theID;
+-(NSArray*)		cards;
+-(void)			setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.
+-(WILDCard*)	cardWithID: (NSInteger)theID;
 
--(void)						setBackgrounds: (NSArray*)theBkgds;
+-(void)				setBackgrounds: (NSArray*)theBkgds;
 -(WILDBackground*)	backgroundWithID: (NSInteger)theID;
 
 -(NSSize)		cardSize;
@@ -59,6 +58,6 @@
 
 -(WILDDocument*)	document;
 
--(NSString*)	xmlString;
+-(NSString*)	xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError;
 
 @end

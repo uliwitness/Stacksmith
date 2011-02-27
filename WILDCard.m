@@ -207,7 +207,7 @@
 {
 	[super appendInnerXmlToString: theString];
 	
-	[theString appendFormat: @"<owner>%ld</owner>\n", [mOwner backgroundID]];
+	[theString appendFormat: @"\t<owner>%ld</owner>\n", [mOwner backgroundID]];
 }
 
 @end

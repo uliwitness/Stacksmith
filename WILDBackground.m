@@ -337,10 +337,11 @@
 {
 	[theString appendFormat: @"\t\t<id>%ld</id>\n", mID];
 	[theString appendFormat: @"\t\t<name>%@</name>\n", WILDStringEscapedForXML(mName)];
-	[theString appendFormat: @"\t\t<showPict>%ld</showPict>\n", mShowPict ? @"<true />" : @"<false />"];
-	[theString appendFormat: @"\t\t<cantDelete>%ld</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
-	[theString appendFormat: @"\t\t<dontSearch>%ld</dontSearch>\n", mDontSearch ? @"<true />" : @"<false />"];
-	[theString appendFormat: @"\t\t<bitmap>%@</bitmap>\n", mPicture];
+	[theString appendFormat: @"\t\t<showPict>%@</showPict>\n", mShowPict ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t\t<cantDelete>%@</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t\t<dontSearch>%@</dontSearch>\n", mDontSearch ? @"<true />" : @"<false />"];
+	if( mPicture )
+		[theString appendFormat: @"\t\t<bitmap>%@</bitmap>\n", mPicture];
 	[theString appendFormat: @"\t\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
 	
 	for( WILDPart* currPart in mParts )
@@ -353,15 +354,17 @@
 		[theString appendString: [currContents xmlString]];
 	}
 	
-	[self appendAddColorObjectXmlToString: theString];
+	[self appendInnerAddColorObjectXmlToString: theString];
 }
 
 
--(NSString*)	xmlString
+-(NSString*)	xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError
 {
-	NSMutableString	*	theString = [NSMutableString stringWithFormat: @"\t<%@>\n", [self partLayer]];
+	NSMutableString	*	theString = [NSMutableString stringWithFormat: @"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
+												"<!DOCTYPE %1$@ PUBLIC \"-//Apple, Inc.//DTD %1$@ V 2.0//EN\" \"\" >\n"
+																		"\t<%1$@>\n", [self partLayer]];
 	
-	[self appendXmlToString: theString];
+	[self appendInnerXmlToString: theString];	// Hook-in point for subclasses (like WILDCard).
 	
 	[theString appendFormat: @"\t</%@>\n", [self partLayer]];
 	
