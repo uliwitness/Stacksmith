@@ -40,6 +40,7 @@
 -(NSURL*)		URLForImageNamed: (NSString*)theName;
 -(NSImage*)		imageForPatternAtIndex: (NSInteger)idx;
 
+-(void)	loadStandardResourceTableReturningError: (NSError**)outError;
 -(void)	addMediaFile: (NSString*)fileName withType: (NSString*)type
 			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos
 			imageOrCursor: (id)imgOrCursor;

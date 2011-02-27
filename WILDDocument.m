@@ -42,6 +42,11 @@
 		mLastCompactedVersion = [appVersion retain];
 		mFirstEditedVersion = [appVersion retain];
 		mLastEditedVersion = [appVersion retain];
+
+		[mMediaList removeAllObjects];
+		
+		NSError	*	outError = nil;
+		[self loadStandardResourceTableReturningError: &outError];
 	}
     return self;
 }
@@ -164,6 +169,26 @@
 }
 
 
+-(void)	loadStandardResourceTableReturningError: (NSError**)outError
+{
+	// Load built-in standard picture table so others can access it: (ICONs, PICTs, CURSs and SNDs)
+	NSXMLDocument	*	stdDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"]]
+														options: 0 error: outError] autorelease];
+	NSXMLElement	*	stdStackfileElement = [stdDoc rootElement];
+	NSArray			*	pictures = [stdStackfileElement elementsForName: @"media"];
+	for( NSXMLElement* thePic in pictures )
+	{
+		NSString	*	iconID = [[[thePic elementsForName: @"id"] objectAtIndex: 0] stringValue];
+		NSString	*	iconName = [[[thePic elementsForName: @"name"] objectAtIndex: 0] stringValue];
+		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
+		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
+		NSPoint			pos = WILDPointFromSubElementInElement( @"hotspot", thePic );
+		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
+			imageOrCursor: nil];
+	}
+}
+
+
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
 	NSURL*		tocURL = absoluteURL;
@@ -243,21 +268,9 @@
 		x++;
 	}
 	
-	// Load built-in standard picture table so others can access it: (ICONs, PICTs, CURSs and SNDs)
-	NSXMLDocument	*	stdDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"]]
-														options: 0 error: outError] autorelease];
-	NSXMLElement	*	stdStackfileElement = [stdDoc rootElement];
-	pictures = [stdStackfileElement elementsForName: @"media"];
-	for( NSXMLElement* thePic in pictures )
-	{
-		NSString	*	iconID = [[[thePic elementsForName: @"id"] objectAtIndex: 0] stringValue];
-		NSString	*	iconName = [[[thePic elementsForName: @"name"] objectAtIndex: 0] stringValue];
-		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
-		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
-		NSPoint			pos = WILDPointFromSubElementInElement( @"hotspot", thePic );
-		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
-			imageOrCursor: nil];
-	}
+	[mMediaList removeAllObjects];
+	
+	[self loadStandardResourceTableReturningError: outError];
 	
 	// Load media table of this document so others can access it: (ICONs, PICTs, CURSs and SNDs)
 	pictures = [stackfileElement elementsForName: @"media"];
