@@ -12,6 +12,8 @@
 #import "WILDNotifications.h"
 #import "UKMenuBarOverlay.h"
 #import "WILDTools.h"
+#import "UKLicense.h"
+#include <openssl/err.h>
 
 
 @implementation WILDAppDelegate
@@ -209,6 +211,24 @@
 	[oneRow addSubview: oneButton];
 	
 	[[mToolsMenu itemAtIndex: 5] setView: oneRow];
+	
+	struct UKLicenseInfo	theInfo;
+	NSString			*	textString = [[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"];
+	NSData				*	textData = [textString dataUsingEncoding: NSASCIIStringEncoding];
+	int						numBinaryBytes = UKBinaryLengthForReadableBytesOfLength( [textData length] );
+	NSMutableData		*	binaryBytes = [NSMutableData dataWithLength: numBinaryBytes];
+	UKBinaryDataForReadableBytesOfLength( [textData bytes], [textData length], [binaryBytes mutableBytes] );
+	UKGetLicenseData( [binaryBytes mutableBytes], [binaryBytes length], &theInfo );
+	
+	if( (theInfo.ukli_licenseFlags & UKLicenseFlagValid) == 0 )
+		exit(273);
+	else
+	{
+		NSString	*	person = [[[NSString alloc] initWithBytes: theInfo.ukli_licenseeName length: 40 encoding: NSUTF8StringEncoding] autorelease];
+		NSString	*	company = [[[NSString alloc] initWithBytes: theInfo.ukli_licenseeCompany length: 40 encoding: NSUTF8StringEncoding] autorelease];
+		NSCharacterSet*	ws = [NSCharacterSet whitespaceCharacterSet];
+		NSLog(@"Licensed to %@ (%@)", [person stringByTrimmingCharactersInSet: ws], [company stringByTrimmingCharactersInSet: ws]);
+	}
 }
 
 -(BOOL)	applicationShouldHandleReopen: (NSApplication *)sender hasVisibleWindows: (BOOL)hasVisibleWindows

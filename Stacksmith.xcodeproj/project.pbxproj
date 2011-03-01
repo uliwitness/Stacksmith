@@ -287,6 +287,7 @@
 		552FF245113F247A005742C8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FF244113F247A005742C8 /* QTKit.framework */; };
 		55382F6B117238350006B381 /* WILDFieldInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */; };
 		55382F6D117238B10006B381 /* WILDFieldInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55382F6C117238B10006B381 /* WILDFieldInfoWindowController.m */; };
+		553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 553EB403131C83C6008BFBCE /* libcrypto.dylib */; };
 		5542C9471139D7A000555C64 /* WILDStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9461139D7A000555C64 /* WILDStack.m */; };
 		5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */; };
 		5542C9B71139F43C00555C64 /* WILDCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9B61139F43C00555C64 /* WILDCard.m */; };
@@ -670,6 +671,9 @@
 		55382F6A117238350006B381 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDFieldInfoWindowController.xib; sourceTree = "<group>"; };
 		55382F6C117238B10006B381 /* WILDFieldInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDFieldInfoWindowController.m; sourceTree = "<group>"; };
 		55382F72117238D90006B381 /* WILDFieldInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDFieldInfoWindowController.h; sourceTree = "<group>"; };
+		553EB3F7131C7CF1008BFBCE /* UKLicense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKLicense.h; path = ../UKLicenseMaker/UKLicense.h; sourceTree = "<group>"; };
+		553EB3FA131C8360008BFBCE /* UKLicenseKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKLicenseKey.h; sourceTree = "<group>"; };
+		553EB403131C83C6008BFBCE /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = ../../../../../usr/lib/libcrypto.dylib; sourceTree = "<group>"; };
 		5542C9451139D7A000555C64 /* WILDStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStack.h; sourceTree = "<group>"; };
 		5542C9461139D7A000555C64 /* WILDStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStack.m; sourceTree = "<group>"; };
 		5542C94B1139DD5C00555C64 /* WILDXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDXMLUtils.h; sourceTree = "<group>"; };
@@ -768,6 +772,7 @@
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
+				553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +787,7 @@
 				55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */,
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
+				553EB403131C83C6008BFBCE /* libcrypto.dylib */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -840,6 +846,8 @@
 		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				553EB3F7131C7CF1008BFBCE /* UKLicense.h */,
+				553EB3FA131C8360008BFBCE /* UKLicenseKey.h */,
 				2564AD2C0F5327BB00F57823 /* Stacksmith_Prefix.pch */,
 				55C68C9D116413E300D8B44C /* svn_version.h */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
@@ -1644,7 +1652,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		55C68C7D116412A700D8B44C /* git_version */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
