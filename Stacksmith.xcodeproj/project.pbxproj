@@ -15,6 +15,7 @@
 		550C095C1195EC4700351067 /* ICON_129.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 550C095A1195EC4700351067 /* ICON_129.pbm */; };
 		550C09E61196B9F200351067 /* WILDButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09E51196B9F200351067 /* WILDButtonView.m */; };
 		550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C0A5D1196C52000351067 /* WILDScrollView.m */; };
+		551B3E83131D957700BFCD45 /* WILDLicensePanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
 		551FC0031170CF3500F32FBF /* BrowseTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF21170CF3500F32FBF /* BrowseTool.png */; };
 		551FC0041170CF3500F32FBF /* BrushTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF31170CF3500F32FBF /* BrushTool.png */; };
@@ -310,6 +311,7 @@
 		558DCFE51156209A002C9195 /* WILDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFE41156209A002C9195 /* WILDCardView.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
+		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
 		55B9220A11674E880073EC6C /* WILDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9220911674E880073EC6C /* WILDTools.m */; };
 		55B9223D1167532A0073EC6C /* WILDButtonInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B9223C1167532A0073EC6C /* WILDButtonInfoWindowController.xib */; };
 		55B9224311675A260073EC6C /* WILDButtonInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9224211675A260073EC6C /* WILDButtonInfoWindowController.m */; };
@@ -339,6 +341,9 @@
 		55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */; };
 		55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC644114CFAE000BAA09D /* CardIconSmall.png */; };
 		55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC645114CFAE000BAA09D /* FieldIconSmall.png */; };
+		55ED9471131D930500DB60D6 /* WILDLicensePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ED9470131D930500DB60D6 /* WILDLicensePanelController.m */; };
+		55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */; };
+		55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* WILDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* WILDDocument.m */; settings = {ATTRIBUTES = (); }; };
@@ -386,6 +391,7 @@
 		550C09E51196B9F200351067 /* WILDButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDButtonView.m; sourceTree = "<group>"; };
 		550C0A5C1196C52000351067 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScrollView.h; sourceTree = "<group>"; };
 		550C0A5D1196C52000351067 /* WILDScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScrollView.m; sourceTree = "<group>"; };
+		551B3E82131D957700BFCD45 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDLicensePanelController.xib; sourceTree = "<group>"; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
 		551FBFF21170CF3500F32FBF /* BrowseTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrowseTool.png; path = Resources/BrowseTool.png; sourceTree = "<group>"; };
@@ -714,6 +720,7 @@
 		558DCFE41156209A002C9195 /* WILDCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardView.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
 		55B9220811674E880073EC6C /* WILDTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTools.h; path = Presentation/WILDTools.h; sourceTree = "<group>"; };
 		55B9220911674E880073EC6C /* WILDTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTools.m; path = Presentation/WILDTools.m; sourceTree = "<group>"; };
 		55B92239116753180073EC6C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDButtonInfoWindowController.xib; sourceTree = "<group>"; };
@@ -758,6 +765,11 @@
 		55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonIconSmall.png; sourceTree = "<group>"; };
 		55EBC644114CFAE000BAA09D /* CardIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CardIconSmall.png; sourceTree = "<group>"; };
 		55EBC645114CFAE000BAA09D /* FieldIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FieldIconSmall.png; sourceTree = "<group>"; };
+		55ED946F131D930500DB60D6 /* WILDLicensePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDLicensePanelController.h; path = Windows/WILDLicensePanelController.h; sourceTree = "<group>"; };
+		55ED9470131D930500DB60D6 /* WILDLicensePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDLicensePanelController.m; path = Windows/WILDLicensePanelController.m; sourceTree = "<group>"; };
+		55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDAboutPanelController.h; path = Windows/WILDAboutPanelController.h; sourceTree = "<group>"; };
+		55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDAboutPanelController.m; path = Windows/WILDAboutPanelController.m; sourceTree = "<group>"; };
+		55F2EAF1131DA26700913200 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDAboutPanelController.xib; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Stacksmith-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; path = "Stacksmith-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Stacksmith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stacksmith.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -830,6 +842,10 @@
 				558DCDAA11557E28002C9195 /* WILDApplication.m */,
 				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
 				552558FD114BDE7C00279B03 /* WILDAppDelegate.m */,
+				55ED946F131D930500DB60D6 /* WILDLicensePanelController.h */,
+				55ED9470131D930500DB60D6 /* WILDLicensePanelController.m */,
+				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
+				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
 				2A37F4AEFDCFA73011CA2CEA /* WILDDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* WILDDocument.m */,
 				558DCD1F115571FE002C9195 /* WILDNotifications.h */,
@@ -866,6 +882,8 @@
 				55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */,
 				55B9223C1167532A0073EC6C /* WILDButtonInfoWindowController.xib */,
 				55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */,
+				551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */,
+				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
@@ -879,6 +897,7 @@
 				55E3A6F911519B45008411BB /* HCSV.icns */,
 				55E3A6FA11519B45008411BB /* Stack.icns */,
 				557B182E113C5CD600F85327 /* OldStack.icns */,
+				55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 			);
 			name = Resources;
@@ -1331,6 +1350,7 @@
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Propaganda */;
 			projectDirPath = "";
@@ -1644,6 +1664,9 @@
 				550C095B1195EC4700351067 /* ICON_128.pbm in Resources */,
 				550C095C1195EC4700351067 /* ICON_129.pbm in Resources */,
 				555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */,
+				551B3E83131D957700BFCD45 /* WILDLicensePanelController.xib in Resources */,
+				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
+				55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1722,6 +1745,8 @@
 				550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */,
 				550C09E61196B9F200351067 /* WILDButtonView.m in Sources */,
 				550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */,
+				55ED9471131D930500DB60D6 /* WILDLicensePanelController.m in Sources */,
+				55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1768,6 +1793,14 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
+		551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				551B3E82131D957700BFCD45 /* English */,
+			);
+			name = WILDLicensePanelController.xib;
+			sourceTree = "<group>";
+		};
 		55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1784,12 +1817,28 @@
 			name = WILDFieldInfoWindowController.xib;
 			sourceTree = "<group>";
 		};
+		55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55AA4B75131DA9CC00511656 /* English */,
+			);
+			name = StacksmithSplashScreen.jpg;
+			sourceTree = "<group>";
+		};
 		55B9223C1167532A0073EC6C /* WILDButtonInfoWindowController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				55B92239116753180073EC6C /* English */,
 			);
 			name = WILDButtonInfoWindowController.xib;
+			sourceTree = "<group>";
+		};
+		55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55F2EAF1131DA26700913200 /* English */,
+			);
+			name = WILDAboutPanelController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

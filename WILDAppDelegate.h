@@ -19,5 +19,6 @@
 
 -(IBAction)	toggleBackgroundEditMode: (id)sender;
 -(IBAction)	toolsMenuRowDummyAction: (id)sender;
+-(IBAction)	orderFrontStandardAboutPanel: (id)sender;
 
 @end

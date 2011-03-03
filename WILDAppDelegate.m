@@ -13,6 +13,8 @@
 #import "UKMenuBarOverlay.h"
 #import "WILDTools.h"
 #import "UKLicense.h"
+#import "WILDLicensePanelController.h"
+#import "WILDAboutPanelController.h"
 #include <openssl/err.h>
 
 
@@ -212,6 +214,32 @@
 	
 	[[mToolsMenu itemAtIndex: 5] setView: oneRow];
 	
+	// Check serial number:
+	while( true )
+	{
+		struct UKLicenseInfo	theInfo;
+		NSString			*	textString = [[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"];
+		NSData				*	textData = [textString dataUsingEncoding: NSASCIIStringEncoding];
+		int						numBinaryBytes = UKBinaryLengthForReadableBytesOfLength( [textData length] );
+		NSMutableData		*	binaryBytes = [NSMutableData dataWithLength: numBinaryBytes];
+		UKBinaryDataForReadableBytesOfLength( [textData bytes], [textData length], [binaryBytes mutableBytes] );
+		UKGetLicenseData( [binaryBytes mutableBytes], [binaryBytes length], &theInfo );
+		
+		if( (theInfo.ukli_licenseFlags & UKLicenseFlagValid) == 0
+			|| (theInfo.ukli_licenseExpiration > 0 && CFAbsoluteTimeGetCurrent() > theInfo.ukli_licenseExpiration) )
+		{
+			WILDLicensePanelController	*	licenseSheet = [[WILDLicensePanelController alloc] init];
+			[licenseSheet runModal];
+			[licenseSheet release];
+		}
+		else
+			break;
+	}
+}
+
+-(BOOL)	applicationShouldHandleReopen: (NSApplication *)sender hasVisibleWindows: (BOOL)hasVisibleWindows
+{
+	// Check serial number:
 	struct UKLicenseInfo	theInfo;
 	NSString			*	textString = [[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"];
 	NSData				*	textData = [textString dataUsingEncoding: NSASCIIStringEncoding];
@@ -221,18 +249,17 @@
 	UKGetLicenseData( [binaryBytes mutableBytes], [binaryBytes length], &theInfo );
 	
 	if( (theInfo.ukli_licenseFlags & UKLicenseFlagValid) == 0 )
-		exit(273);
+		exit(0);
+	else if( theInfo.ukli_licenseExpiration > 0 && CFAbsoluteTimeGetCurrent() > theInfo.ukli_licenseExpiration )
+		exit(0);
 	else
 	{
 		NSString	*	person = [[[NSString alloc] initWithBytes: theInfo.ukli_licenseeName length: 40 encoding: NSUTF8StringEncoding] autorelease];
-		NSString	*	company = [[[NSString alloc] initWithBytes: theInfo.ukli_licenseeCompany length: 40 encoding: NSUTF8StringEncoding] autorelease];
 		NSCharacterSet*	ws = [NSCharacterSet whitespaceCharacterSet];
-		NSLog(@"Licensed to %@ (%@)", [person stringByTrimmingCharactersInSet: ws], [company stringByTrimmingCharactersInSet: ws]);
+		if( [[person stringByTrimmingCharactersInSet: ws] length] == 0 )
+			exit(0);
 	}
-}
 
--(BOOL)	applicationShouldHandleReopen: (NSApplication *)sender hasVisibleWindows: (BOOL)hasVisibleWindows
-{
 	return !hasVisibleWindows;
 }
 
@@ -280,7 +307,13 @@
 		return YES;
 	}
 	else
-		return NO;
+		return [self respondsToSelector: [menuItem action]];
+}
+
+
+-(IBAction)	orderFrontStandardAboutPanel: (id)sender
+{
+	[WILDAboutPanelController showAboutPanel];
 }
 
 
