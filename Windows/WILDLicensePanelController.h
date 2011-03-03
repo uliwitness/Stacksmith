@@ -14,6 +14,7 @@
 @private
     NSTextField			*		mLicenseTextField;
 	NSButton			*		mOKButton;
+	BOOL						mUserChangedText;
 }
 
 @property (retain,nonatomic) IBOutlet NSTextField	*	licenseTextField;

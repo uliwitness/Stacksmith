@@ -46,6 +46,7 @@
 	[mOKButton setEnabled: NO];
 	
 	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(textDidChange:) name:NSControlTextDidChangeNotification object: mLicenseTextField];
+//	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidBecomeKey:) name:NSWindowDidBecomeKeyNotification object: [self window]];
 	
 	[self updateLicenseKeyButtonEnableState];
 }
@@ -79,6 +80,7 @@
 
 -(void)	textDidChange: (NSNotification *)notification
 {
+	mUserChangedText = YES;
 	[mOKButton setEnabled: NO];
 	[self performSelector: @selector(updateLicenseKeyButtonEnableState) withObject: nil afterDelay: 0.0 inModes: [NSArray arrayWithObject: NSModalPanelRunLoopMode]];
 }
@@ -96,6 +98,20 @@
 	UKGetLicenseData( [binaryBytes mutableBytes], [binaryBytes length], &theInfo );
 	
 	[mOKButton setEnabled: (theInfo.ukli_licenseFlags & UKLicenseFlagValid) != 0];
+}
+
+
+-(void)	windowDidBecomeKey: (NSNotification*)notif
+{
+	if( [[mLicenseTextField stringValue] length] == 0 || !mUserChangedText )
+	{
+		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
+		NSString	*	theSerial = [pb stringForType: NSStringPboardType];
+		
+		if( theSerial && [theSerial length] > 0 )
+			[mLicenseTextField setStringValue: theSerial];
+		[self performSelector: @selector(updateLicenseKeyButtonEnableState) withObject: nil afterDelay: 0.0 inModes: [NSArray arrayWithObject: NSModalPanelRunLoopMode]];
+	}
 }
 
 @end
