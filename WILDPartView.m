@@ -200,6 +200,86 @@
 }
 
 
+
+-(WILDPartGrabHandle)	grabHandleAtPoint: (NSPoint)localPoint
+{
+	WILDPartGrabHandle		clickedHandle = 0;
+	NSRect					myRect = self.bounds;
+	CGSize					handleSize = { 8, 8 };
+	
+	if( (myRect.size.width /3) < handleSize.width )
+		handleSize.width = truncf(myRect.size.width /3);
+	if( (myRect.size.height /3) < handleSize.height )
+		handleSize.height = truncf(myRect.size.height /3);
+	
+	if( NSPointInRect(localPoint, myRect ) )
+	{
+		if( NSMinX(myRect) <= localPoint.x && (NSMinX(myRect) +handleSize.width) >= localPoint.x )
+			clickedHandle |= WILDPartGrabHandleLeft;
+		if( NSMaxX(myRect) >= localPoint.x && (NSMaxX(myRect) -handleSize.width) <= localPoint.x )
+			clickedHandle |= WILDPartGrabHandleRight;
+		if( NSMinY(myRect) <= localPoint.y && (NSMinY(myRect) +handleSize.height) >= localPoint.y )
+			clickedHandle |= WILDPartGrabHandleBottom;
+		if( NSMaxY(myRect) >= localPoint.y && (NSMaxY(myRect) -handleSize.height) <= localPoint.y )
+			clickedHandle |= WILDPartGrabHandleTop;
+	}
+	
+	return clickedHandle;
+}
+
+
+-(void)	resizeViewUsingHandle: (WILDPartGrabHandle)inHandle
+{
+	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
+	BOOL					keepDragging = YES;
+	
+	while( keepDragging )
+	{
+		NSEvent		*	theEvent = [NSApp nextEventMatchingMask: NSLeftMouseDraggedMask | NSLeftMouseUpMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
+		if( theEvent )
+		{
+			switch( [theEvent type] )
+			{
+				case NSLeftMouseUp:
+					keepDragging = NO;
+					break;
+				
+				case NSLeftMouseDragged:
+				{
+					NSRect	newBox = [self frame];
+					CGFloat	deltaX = [theEvent deltaX];
+					CGFloat	deltaY = -[theEvent deltaY];
+					
+					if( inHandle & WILDPartGrabHandleLeft )
+					{
+						newBox.origin.x += deltaX;
+						newBox.size.width -= deltaX;
+					}
+					else if( inHandle & WILDPartGrabHandleRight )
+						newBox.size.width += deltaX;
+
+					if( inHandle & WILDPartGrabHandleTop )
+						newBox.size.height += deltaY;
+					else if( inHandle & WILDPartGrabHandleBottom )
+					{
+						newBox.origin.y += deltaY;
+						newBox.size.height -= deltaY;
+					}
+					
+					[self setFrame: newBox];
+					break;
+				}
+			}
+		}
+		
+		[pool drain];
+		pool = [[NSAutoreleasePool alloc] init];
+	}
+
+	[pool drain];
+}
+
+
 -(void)	mouseDown: (NSEvent*)event
 {
 	BOOL	isMyTool = [self myToolIsCurrent];
@@ -211,6 +291,8 @@
 	}
 	else if( isMyTool )
 	{
+		WILDPartGrabHandle	hitHandle = [self grabHandleAtPoint: [self convertPoint: [event locationInWindow] fromView: nil]];
+		
 		if( [event clickCount] == 2 && mSelected )
 		{
 			NSWindow*	infoController = nil;
@@ -231,7 +313,7 @@
 				justSelected = YES;
 			}
 			
-			if( UKIsDragStart( event, 0.0 ) )
+			if( hitHandle == 0 && UKIsDragStart( event, 0.0 ) )
 			{
 				NSPasteboard*   		pb = [NSPasteboard pasteboardWithName: NSDragPboard];
 				[pb clearContents];
@@ -265,10 +347,16 @@
 				[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
 							event: event pasteboard: pb source: [self enclosingCardView] slideBack: YES];
 			}
+			else if( ([event type] == NSLeftMouseDown) && UKIsDragStart( event, 0.0 ) )
+			{
+				[self resizeViewUsingHandle: hitHandle];
+			}
 			else if( !justSelected )
 			{
 				[self selectionClick: event];
 			}
+			else
+				[super mouseDown: event];
 		}
 	}
 	else
@@ -908,6 +996,13 @@
 		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: (BOOL)backgroundEditMode];
 	else
 		[self loadField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: (BOOL)backgroundEditMode];
+}
+
+
+-(void)	drawRect:(NSRect)dirtyRect
+{
+	[[NSColor blueColor] set];
+	[NSBezierPath strokeRect: [self bounds]];
 }
 
 @end
