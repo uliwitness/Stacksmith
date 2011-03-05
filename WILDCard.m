@@ -39,7 +39,7 @@
 }
 
 
--(NSInteger)	backgroundID
+-(WILDObjectID)	backgroundID
 {
 	return [mOwner backgroundID];
 }
@@ -57,7 +57,7 @@
 }
 
 
--(NSInteger)	cardID
+-(WILDObjectID)	cardID
 {
 	return mID;
 }
@@ -87,9 +87,9 @@
 -(NSString*)	displayName
 {
 	if( mName && [mName length] > 0 )
-		return [NSString stringWithFormat: @"card “%1$@” (ID %2$d)", mName, mID];
+		return [NSString stringWithFormat: @"card “%1$@” (ID %2$lld)", mName, mID];
 	else
-		return [NSString stringWithFormat: @"card ID %1$d", mID];
+		return [NSString stringWithFormat: @"card ID %1$lld", mID];
 }
 
 

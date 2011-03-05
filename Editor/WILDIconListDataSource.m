@@ -16,15 +16,17 @@
 	NSImage*						mImage;
 	NSString*						mName;
 	NSString*						mFileName;
-	NSInteger						mID;
-	WILDIconListDataSource*	mOwner;	
+	BOOL							mIsBuiltIn;
+	WILDObjectID					mID;
+	WILDIconListDataSource*			mOwner;	
 }
 
 @property (retain) NSImage*							image;
 @property (retain) NSString*						name;
 @property (retain) NSString*						filename;
-@property (assign) NSInteger						pictureID;
-@property (assign) WILDIconListDataSource*	owner;
+@property (assign) WILDObjectID						pictureID;
+@property (assign) WILDIconListDataSource*			owner;
+@property (assign) BOOL								isBuiltIn;
 
 @end
 
@@ -36,6 +38,7 @@
 @synthesize filename = mFileName;
 @synthesize pictureID = mID;
 @synthesize owner = mOwner;
+@synthesize isBuiltIn = mIsBuiltIn;
 
 -(void)	dealloc
 {
@@ -52,7 +55,7 @@
 
 -(NSString *)  imageUID
 {
-	return [NSString stringWithFormat: @"%d", mID];
+	return [NSString stringWithFormat: @"%lld", mID];
 }
 
 -(NSString *) imageRepresentationType
@@ -117,17 +120,19 @@
 		NSInteger	x = 0, count = [mDocument numberOfPictures];
 		for( x = 0; x < count; x++ )
 		{
-			NSString*	theName = nil;
-			NSInteger	theID = 0;
-			NSString*	fileName = nil;
+			NSString*		theName = nil;
+			WILDObjectID	theID = 0;
+			NSString*		fileName = nil;
+			BOOL			isBuiltIn = NO;
 			sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
 			
 			[mDocument infoForPictureAtIndex: x name: &theName id: &theID
-					image: nil fileName: &fileName];
+					image: nil fileName: &fileName isBuiltIn: &isBuiltIn];
 			
 			sibi.name = theName;
 			sibi.filename = fileName;
 			sibi.pictureID = theID;
+			sibi.isBuiltIn = isBuiltIn;
 			sibi.owner = self;
 			
 			[mIcons addObject: sibi];
@@ -139,7 +144,7 @@
 }
 
 
--(void)	setSelectedIconID: (NSInteger)theID
+-(void)	setSelectedIconID: (WILDObjectID)theID
 {
 	[self ensureIconListExists];
 	
@@ -157,7 +162,7 @@
 }
 
 
--(NSInteger)	selectedIconID
+-(WILDObjectID)	selectedIconID
 {
 	NSInteger	selectedIndex = [[mIconListView selectionIndexes] firstIndex];
 	return [[mIcons objectAtIndex: selectedIndex] pictureID];
@@ -185,15 +190,12 @@
 	NSInteger							selectedIndex = [[mIconListView selectionIndexes] firstIndex];
 	if( selectedIndex != NSNotFound )
 	{
-		WILDSimpleImageBrowserItem*	theItem = [mIcons objectAtIndex: selectedIndex];
-		NSString*							thePath = [[theItem filename] stringByDeletingLastPathComponent];
-		NSString*							resPath = [[NSBundle mainBundle] resourcePath];
-		if( [thePath hasPrefix:	resPath] )
-			thePath = [[NSBundle mainBundle] bundlePath];
+		WILDSimpleImageBrowserItem		*	theItem = [mIcons objectAtIndex: selectedIndex];
+		NSString						*	thePath = theItem.isBuiltIn ? [[NSBundle mainBundle] bundlePath] : [[theItem filename] stringByDeletingLastPathComponent];
 		NSString*							theName = [[NSFileManager defaultManager] displayNameAtPath: thePath];
 		NSString*							statusMsg = @"No Icon";
-		if( theName )
-			statusMsg = [NSString stringWithFormat: @"ID = %d, from %@", [theItem pictureID], theName];
+		if( theName && [theItem pictureID] != 0 )
+			statusMsg = [NSString stringWithFormat: @"ID = %lld, from %@", [theItem pictureID], theName];
 		[mImagePathField setStringValue: statusMsg];
 	}
 }
@@ -201,17 +203,18 @@
 
 -(IBAction)	paste: (id)sender
 {
-	NSInteger		iconToSelect = 0;
+	WILDObjectID	iconToSelect = 0;
 	NSPasteboard*	thePastie = [NSPasteboard generalPasteboard];
 	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options:[NSDictionary dictionary]];
 	for( NSImage* theImg in images )
 	{
 		NSString*		pictureName = @"From Clipboard";
-		NSInteger		pictureID = [mDocument uniqueIDForMedia];
+		WILDObjectID	pictureID = [mDocument uniqueIDForMedia];
 		[mDocument addMediaFile: nil withType: @"icon" name: pictureName
 			andID: pictureID
 			hotSpot: NSZeroPoint 
-			imageOrCursor: theImg];
+			imageOrCursor: theImg
+			isBuiltIn: NO];
 		
 		WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
 		sibi.name = pictureName;

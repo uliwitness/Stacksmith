@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "WILDBackground.h"
 #import "WILDSearchContext.h"
+#import "WILDObjectID.h"
 
 
 @interface WILDCard : WILDBackground <WILDSearchable>
@@ -18,11 +19,11 @@
 
 -(id)						initWithXMLDocument: (NSXMLElement*)elem forStack: (WILDStack*)theStack;
 
--(NSInteger)				backgroundID;	// ID of *owning* background.
+-(WILDObjectID)				backgroundID;	// ID of *owning* background.
 -(WILDBackground*)			owningBackground;
 -(void)						setOwningBackground: (WILDBackground*)theBg;
 
--(NSInteger)				cardID;			// ID of this card block.
+-(WILDObjectID)				cardID;			// ID of this card block.
 
 -(NSInteger)				cardNumber;
 

@@ -22,6 +22,7 @@
 #import "WILDCardWindowController.h"
 #import <Quartz/Quartz.h>
 #import "WILDXMLUtils.h"
+#import "NSFileManager+NameForTempFile.h"
 
 
 @implementation WILDDocument
@@ -37,7 +38,7 @@
 		mStacks = [[NSMutableArray alloc] init];
 		[mStacks addObject: [[[WILDStack alloc] initWithDocument: self] autorelease]];
  
-		NSString*	appVersion = [NSString stringWithFormat: @"Stacksmith %@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleVersion"]];
+		NSString*	appVersion = [NSString stringWithFormat: @"Stacksmith %@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"]];
 		mCreatedByVersion = [appVersion retain];
 		mLastCompactedVersion = [appVersion retain];
 		mFirstEditedVersion = [appVersion retain];
@@ -160,6 +161,16 @@
 	[tocXmlString appendFormat: @"\t<lastEditedVersion>%@</lastEditedVersion>\n", mLastEditedVersion];
 	[tocXmlString appendFormat: @"\t<firstEditedVersion>%@</firstEditedVersion>\n", mFirstEditedVersion];
 
+	// Write media entries:
+	for( WILDMediaEntry	*	currMedia in mMediaList )
+	{
+		if( ![currMedia isBuiltIn] )
+		{
+			[currMedia writeToFolderURLIfNeeded: absoluteURL];
+			[tocXmlString appendString: [currMedia xmlString]];
+		}
+	}
+	
 	[tocXmlString appendString: @"</stackfile>\n"];
 	NSURL	*	tocURL = [absoluteURL URLByAppendingPathComponent: @"toc.xml"];
 	if( ![tocXmlString writeToURL: tocURL atomically: YES encoding: NSUTF8StringEncoding error:outError] )
@@ -184,7 +195,7 @@
 		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
 		NSPoint			pos = WILDPointFromSubElementInElement( @"hotspot", thePic );
 		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
-			imageOrCursor: nil];
+			imageOrCursor: nil isBuiltIn: YES];
 	}
 }
 
@@ -284,7 +295,7 @@
 		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
 		NSPoint			pos = WILDPointFromSubElementInElement( @"hotspot", thePic );
 		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
-			imageOrCursor: nil];
+			imageOrCursor: nil isBuiltIn: NO];
 	}
 	
 	// Create a stack root object:
@@ -367,19 +378,19 @@
 //	}
 //}
 
--(void)		addFont: (NSString*)fontName withID: (NSInteger)fontID
+-(void)		addFont: (NSString*)fontName withID: (WILDObjectID)fontID
 {
-	[mFontIDTable setObject: fontName forKey: [NSNumber numberWithInteger: fontID]];
+	[mFontIDTable setObject: fontName forKey: [NSNumber numberWithLongLong: fontID]];
 }
 
 
--(NSString*)	fontNameForID: (NSInteger)fontID
+-(NSString*)	fontNameForID: (WILDObjectID)fontID
 {
-	return [mFontIDTable objectForKey: [NSNumber numberWithInteger: fontID]];
+	return [mFontIDTable objectForKey: [NSNumber numberWithLongLong: fontID]];
 }
 
 
--(void)		addStyleFormatWithID: (NSInteger)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray*)fontStyles
+-(void)		addStyleFormatWithID: (WILDObjectID)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray*)fontStyles
 {
 	WILDStyleEntry*	pse = [[[WILDStyleEntry alloc] initWithFontName: fontName fontSize: fontSize
 			styles: fontStyles] autorelease];
@@ -401,10 +412,10 @@
 }
 
 
--(NSInteger)	uniqueIDForStack
+-(WILDObjectID)	uniqueIDForStack
 {
-	NSInteger	stackID = UKRandomInteger();
-	BOOL		notUnique = YES;
+	WILDObjectID	stackID = UKRandomInteger();
+	BOOL			notUnique = YES;
 	
 	while( notUnique )
 	{
@@ -425,10 +436,10 @@
 }
 
 
--(NSInteger)	uniqueIDForMedia
+-(WILDObjectID)	uniqueIDForMedia
 {
-	NSInteger	mediaID = UKRandomInteger();
-	BOOL		notUnique = YES;
+	WILDObjectID	mediaID = UKRandomInteger();
+	BOOL			notUnique = YES;
 	
 	while( notUnique )
 	{
@@ -488,14 +499,18 @@
 
 
 -(void)	addMediaFile: (NSString*)fileName withType: (NSString*)type
-			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos
-			imageOrCursor: (id)imgOrCursor
+			name: (NSString*)iconName andID: (WILDObjectID)iconID hotSpot: (NSPoint)pos
+			imageOrCursor: (id)imgOrCursor isBuiltIn: (BOOL)isBuiltIn
 {
-	NSURL*				fileURL = [self URLForImageNamed: fileName];
-	WILDMediaEntry*	pentry = [[[WILDMediaEntry alloc] initWithFilename: [fileURL path]
+	NSURL*				fileURL = nil;
+	if( fileName )
+		fileURL = [self URLForImageNamed: fileName];
+	WILDMediaEntry*		pentry = [[[WILDMediaEntry alloc] initWithFilename: [fileURL path]
 																withType: type name: iconName andID: iconID hotSpot: pos] autorelease];
 	if( imgOrCursor )
 		[pentry setImageMovieOrCursor: imgOrCursor];
+	if( isBuiltIn )
+		[pentry setIsBuiltIn: YES];
 	[mMediaList addObject: pentry];
 }
 
@@ -526,7 +541,7 @@
 }
 
 
--(QTMovie*)		movieOfType: (NSString*)typ id: (NSInteger)theID
+-(QTMovie*)		movieOfType: (NSString*)typ id: (WILDObjectID)theID
 {
 	for( WILDMediaEntry* currPic in mMediaList )
 	{
@@ -578,7 +593,7 @@
 }
 
 
--(NSImage*)		pictureOfType: (NSString*)typ id: (NSInteger)theID
+-(NSImage*)		pictureOfType: (NSString*)typ id: (WILDObjectID)theID
 {
 	assert(![typ isEqualToString: @"cursor"]);
 	assert(![typ isEqualToString: @"sound"]);
@@ -643,8 +658,8 @@
 }
 
 
--(void)	infoForPictureAtIndex: (NSInteger)idx name: (NSString**)outName id: (NSInteger*)outID
-			image: (NSImage**)outImage fileName: (NSString**)outFileName
+-(void)	infoForPictureAtIndex: (NSInteger)idx name: (NSString**)outName id: (WILDObjectID*)outID
+			image: (NSImage**)outImage fileName: (NSString**)outFileName isBuiltIn: (BOOL*)isBuiltIn
 {
 	NSInteger		numPics = 0;
 	for( WILDMediaEntry* currPic in mMediaList )
@@ -670,6 +685,8 @@
 					*outID = [currPic pictureID];
 				if( outFileName )
 					*outFileName = [currPic filename];
+				if( isBuiltIn )
+					*isBuiltIn = [currPic isBuiltIn];
 			}
 			numPics++;
 		}
@@ -706,7 +723,7 @@
 }
 
 
--(NSCursor*)	cursorWithID: (NSInteger)theID
+-(NSCursor*)	cursorWithID: (WILDObjectID)theID
 {
 	for( WILDMediaEntry* currPic in mMediaList )
 	{

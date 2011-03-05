@@ -106,7 +106,7 @@
 }
 
 
--(NSInteger)	backgroundID
+-(WILDObjectID)	backgroundID
 {
 	return mID;
 }
@@ -336,7 +336,7 @@
 
 -(void)	appendInnerXmlToString: (NSMutableString*)theString
 {
-	[theString appendFormat: @"\t<id>%ld</id>\n", mID];
+	[theString appendFormat: @"\t<id>%lld</id>\n", mID];
 	[theString appendFormat: @"\t<name>%@</name>\n", WILDStringEscapedForXML(mName)];
 	[theString appendFormat: @"\t<showPict>%@</showPict>\n", mShowPict ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<cantDelete>%@</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
@@ -394,9 +394,9 @@
 -(NSString*)	displayName
 {
 	if( mName && [mName length] > 0 )
-		return [NSString stringWithFormat: @"background “%1$@” (ID %2$d)", mName, mID];
+		return [NSString stringWithFormat: @"background “%1$@” (ID %2$lld)", mName, mID];
 	else
-		return [NSString stringWithFormat: @"background ID %1$d", mID];
+		return [NSString stringWithFormat: @"background ID %1$lld", mID];
 }
 
 
@@ -408,7 +408,7 @@
 
 -(NSString*)	description
 {
-	return [NSString stringWithFormat: @"%@ {\nid = %d\nname = %@\nparts = %@\n}", [self class], mID, mName, mParts];
+	return [NSString stringWithFormat: @"%@ {\nid = %lld\nname = %@\nparts = %@\n}", [self class], mID, mName, mParts];
 }
 
 @end

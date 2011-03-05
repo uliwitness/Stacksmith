@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "WILDScriptContainer.h"
 #import "WILDSearchContext.h"
+#import "WILDObjectID.h"
 
 
 @class WILDStack;
@@ -17,7 +18,7 @@
 
 @interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable>
 {
-	NSInteger			mID;
+	WILDObjectID		mID;
 	NSRect				mRectangle;
 	NSString*			mName;
 	NSString*			mScript;
@@ -48,7 +49,7 @@
 	NSArray*			mTextStyles;
 	NSInteger			mTextHeight;
 	NSInteger			mTitleWidth;
-	NSInteger			mIconID;
+	WILDObjectID		mIconID;
 	NSInteger			mFamily;
 	NSColor*			mFillColor;
 	NSInteger			mBevel;
@@ -70,6 +71,7 @@
 
 -(void)			setFlippedRectangle: (NSRect)theBox;
 -(NSRect)		flippedRectangle;
+-(NSRect)		setRectangle: (NSRect)theBox;
 -(NSRect)		rectangle;
 
 -(void)			setName: (NSString*)theStr;
@@ -101,8 +103,8 @@
 -(void)			setVisible: (BOOL)theState;
 -(BOOL)			wideMargins;
 -(NSInteger)	popupTitleWidth;
--(NSInteger)	iconID;
--(void)			setIconID: (NSInteger)theID;
+-(WILDObjectID)	iconID;
+-(void)			setIconID: (WILDObjectID)theID;
 -(NSImage*)		iconImage;
 -(void)			setHighlighted: (BOOL)inState;
 -(BOOL)			highlighted;

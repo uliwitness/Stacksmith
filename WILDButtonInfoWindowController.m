@@ -136,7 +136,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 		theContents = [[mCardView card] contentsForPart: mPart];
 	[theContents setText: [mContentsTextField string]];
 
-	NSInteger	theIconID = [mIconListController selectedIconID];
+	WILDObjectID	theIconID = [mIconListController selectedIconID];
 	[mPart setIconID: theIconID];
 	
 	[[[[self window] windowController] document] updateChangeCount: NSChangeDone];

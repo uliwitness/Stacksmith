@@ -159,10 +159,10 @@
 }
 
 
--(NSInteger)	uniqueIDForCardOrBackground
+-(WILDObjectID)	uniqueIDForCardOrBackground
 {
-	NSInteger	cardID = UKRandomInteger();
-	BOOL		notUnique = YES;
+	WILDObjectID	cardID = UKRandomInteger();
+	BOOL			notUnique = YES;
 	
 	while( notUnique )
 	{

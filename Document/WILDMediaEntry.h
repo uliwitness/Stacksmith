@@ -13,28 +13,36 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#import "WILDObjectID.h"
 
 
 @interface WILDMediaEntry : NSObject
 {
-	NSString*	mFilename;
-	NSString*	mType;
-	NSString*	mName;
-	NSInteger	mID;
-	NSPoint		mHotSpot;
-	id			mImage;		// NSImage, NSMovie or NSCursor we've already loaded for this.
+	NSString*		mFilename;
+	NSString*		mType;
+	NSString*		mName;
+	WILDObjectID	mID;
+	NSPoint			mHotSpot;
+	id				mImage;		// NSImage, NSMovie or NSCursor we've already loaded for this.
+	BOOL			mIsBuiltIn;
 }
 
+@property (assign) BOOL	isBuiltIn;
+
 -(id)	initWithFilename: (NSString*)fileName withType: (NSString*)type
-			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos;
+			name: (NSString*)iconName andID: (WILDObjectID)iconID hotSpot: (NSPoint)pos;
 
 -(NSString*)	filename;
 -(NSString*)	pictureType;
 -(NSString*)	name;
--(NSInteger)	pictureID;
+-(WILDObjectID)	pictureID;
 -(NSPoint)		hotSpot;
 -(id)			imageMovieOrCursor;
 -(void)			setImageMovieOrCursor: (id)theImage;
+
+-(void)			writeToFolderURLIfNeeded: (NSURL*)absoluteURL;
+
+-(NSString*)	xmlString;
 
 @end
 

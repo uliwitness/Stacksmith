@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "WILDScriptContainer.h"
+#import "WILDObjectID.h"
 
 
 @class UKMultiMap;
@@ -18,7 +19,7 @@
 
 @interface WILDBackground : NSObject <WILDScriptContainer>
 {
-	NSInteger					mID;				// Unique ID number of this background/card.
+	WILDObjectID				mID;				// Unique ID number of this background/card.
 	NSString*					mName;				// Name of this background/card.
 	NSString*					mScript;			// Script text.
 	BOOL						mShowPict;			// Should we draw mPicture or not?
@@ -38,7 +39,7 @@
 
 -(void)							loadAddColorObjects: (NSXMLElement*)theElem;
 
--(NSInteger)					backgroundID;
+-(WILDObjectID)					backgroundID;
 
 -(NSImage*)						picture;
 -(BOOL)							showPicture;
@@ -46,8 +47,8 @@
 -(NSArray*)						parts;
 -(NSArray*)						addColorParts;
 -(WILDPartContents*)			contentsForPart: (WILDPart*)thePart;
--(WILDPart*)					partWithID: (NSInteger)theID;
--(NSInteger)					uniqueIDForPart;
+-(WILDPart*)					partWithID: (WILDObjectID)theID;
+-(WILDObjectID)					uniqueIDForPart;
 
 -(void)							updatePartOnClick: (WILDPart*)thePart;
 

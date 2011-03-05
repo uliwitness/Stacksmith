@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "WILDScriptContainer.h"
 #import "WILDSearchContext.h"
+#import "WILDObjectID.h"
 
 
 @class WILDBackground;
@@ -31,7 +32,7 @@
 	BOOL					mCantModify;		// Is this stack write-protected?
 	NSInteger				mUserLevel;			// Maximum user level for this stack.
 	WILDDocument*			mDocument;			// Our owner, NOT RETAINED!
-	NSInteger				mID;
+	WILDObjectID			mID;
 }
 
 -(id)				initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;
@@ -40,10 +41,10 @@
 -(void)				addCard: (WILDCard*)theCard;
 -(void)				addBackground: (WILDBackground*)theBg;
 
--(NSInteger)		stackID;
+-(WILDObjectID)		stackID;
 
--(NSInteger)		uniqueIDForCardOrBackground;
--(NSInteger)		uniqueIDForMedia;
+-(WILDObjectID)		uniqueIDForCardOrBackground;
+-(WILDObjectID)		uniqueIDForMedia;
 
 -(NSArray*)			cards;
 -(void)				setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.

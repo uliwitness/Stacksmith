@@ -9,6 +9,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <QTKit/QTKit.h>
+#import "WILDObjectID.h"
 
 @class WILDStack;
 
@@ -26,13 +27,13 @@
 	NSString			*	mLastEditedVersion;
 }
 
--(void)			addFont: (NSString*)fontName withID: (NSInteger)fontID;
--(void)			addStyleFormatWithID: (NSInteger)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
+-(void)			addFont: (NSString*)fontName withID: (WILDObjectID)fontID;
+-(void)			addStyleFormatWithID: (WILDObjectID)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
 
--(NSInteger)	uniqueIDForStack;
--(NSInteger)	uniqueIDForMedia;
+-(WILDObjectID)	uniqueIDForStack;
+-(WILDObjectID)	uniqueIDForMedia;
 
--(NSString*)	fontNameForID: (NSInteger)fontID;
+-(NSString*)	fontNameForID: (WILDObjectID)fontID;
 -(void)			provideStyleFormatWithID: (NSInteger)oneBasedIdx font: (NSString**)outFontName
 						size: (NSInteger*)outFontSize styles: (NSArray**)outFontStyles;
 
@@ -42,19 +43,19 @@
 
 -(void)	loadStandardResourceTableReturningError: (NSError**)outError;
 -(void)	addMediaFile: (NSString*)fileName withType: (NSString*)type
-			name: (NSString*)iconName andID: (NSInteger)iconID hotSpot: (NSPoint)pos
-			imageOrCursor: (id)imgOrCursor;
+			name: (NSString*)iconName andID: (WILDObjectID)iconID hotSpot: (NSPoint)pos
+			imageOrCursor: (id)imgOrCursor isBuiltIn: (BOOL)isBuiltIn;
 -(NSImage*)		pictureOfType: (NSString*)typ name: (NSString*)theName;
--(NSImage*)		pictureOfType: (NSString*)typ id: (NSInteger)theID;
+-(NSImage*)		pictureOfType: (NSString*)typ id: (WILDObjectID)theID;
 -(NSInteger)	numberOfPictures;
 -(NSImage*)		pictureAtIndex: (NSInteger)idx;
--(void)			infoForPictureAtIndex: (NSInteger)idx name: (NSString**)outName id: (NSInteger*)outID
-						image: (NSImage**)outImage fileName: (NSString**)outFileName;
+-(void)			infoForPictureAtIndex: (NSInteger)idx name: (NSString**)outName id: (WILDObjectID*)outID
+						image: (NSImage**)outImage fileName: (NSString**)outFileName isBuiltIn: (BOOL*)isBuiltIn;
 
 -(NSCursor*)	cursorWithName: (NSString*)theName;
--(NSCursor*)	cursorWithID: (NSInteger)theID;
+-(NSCursor*)	cursorWithID: (WILDObjectID)theID;
 
 -(QTMovie*)		movieOfType: (NSString*)typ name: (NSString*)theName;	// Movies & sounds.
--(QTMovie*)		movieOfType: (NSString*)typ id: (NSInteger)theID;		// Movies & sounds.
+-(QTMovie*)		movieOfType: (NSString*)typ id: (WILDObjectID)theID;	// Movies & sounds.
 
 @end
