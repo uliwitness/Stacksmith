@@ -61,4 +61,26 @@
 //	}
 }
 
+
+-(WILDStack*)	stack
+{
+	return mStack;
+}
+
+
+-(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind
+{
+	if( inObjectToFind == [mCardViewController currentCard]
+		|| inObjectToFind == [[mCardViewController currentCard] owningBackground] )
+		return self;	// Window is also visible object for card & bg.
+	
+	return [mCardViewController visibleObjectForWILDObject: inObjectToFind];
+}
+
+
+-(NSRect)	frameInScreenCoordinates
+{
+	return [[self window] frame];
+}
+
 @end

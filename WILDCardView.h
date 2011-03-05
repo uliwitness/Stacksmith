@@ -26,4 +26,6 @@
 
 -(void)					setOwner: (WILDCardViewController*)inOwner;
 
+-(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
+
 @end

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "WILDSearchContext.h"
+#import "WILDVisibleObject.h"
 
 
 @class WILDCard;
@@ -24,6 +25,8 @@
 	NSString					*	mCurrentSearchString;
 	IBOutlet NSTextField		*	mSearchField;
 }
+
+-(WILDCard*)	currentCard;
 
 -(void)		loadCard: (WILDCard*)theCard;
 -(void)		reloadCard;
@@ -59,5 +62,7 @@
 -(IBAction)	createNewBackground: (id)sender;
 
 -(IBAction)	chooseToolWithTag: (id)sender;
+
+-(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 
 @end

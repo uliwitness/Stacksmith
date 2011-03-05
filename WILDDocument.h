@@ -10,6 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import <QTKit/QTKit.h>
 #import "WILDObjectID.h"
+#import "WILDVisibleObject.h"
 
 @class WILDStack;
 
@@ -57,5 +58,7 @@
 
 -(QTMovie*)		movieOfType: (NSString*)typ name: (NSString*)theName;	// Movies & sounds.
 -(QTMovie*)		movieOfType: (NSString*)typ id: (WILDObjectID)theID;	// Movies & sounds.
+
+-(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 
 @end

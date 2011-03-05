@@ -315,7 +315,8 @@
 				justSelected = YES;
 			}
 			
-			if( hitHandle == 0 && UKIsDragStart( event, 0.8 ) )
+			bool	isDragStart = UKIsDragStart( event, 0.8 );
+			if( hitHandle == 0 && isDragStart )
 			{
 				NSPasteboard*   		pb = [NSPasteboard pasteboardWithName: NSDragPboard];
 				[pb clearContents];
@@ -349,7 +350,7 @@
 				[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
 							event: event pasteboard: pb source: [self enclosingCardView] slideBack: YES];
 			}
-			else if( ([event type] == NSLeftMouseDown) && UKIsDragStart( event, 0.8 ) )
+			else if( ([event type] == NSLeftMouseDown) && isDragStart )
 			{
 				[self resizeViewUsingHandle: hitHandle];
 			}
@@ -1021,6 +1022,16 @@
 		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: (BOOL)backgroundEditMode];
 	else
 		[self loadField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: (BOOL)backgroundEditMode];
+}
+
+
+-(NSRect)	frameInScreenCoordinates
+{
+	NSRect				buttonRect = [mPart rectangle];
+	WILDCardView	*	cardView = [self enclosingCardView];
+	buttonRect = [cardView convertRectToBase: buttonRect];
+	buttonRect.origin = [[cardView window] convertBaseToScreen: buttonRect.origin];
+	return buttonRect;
 }
 
 

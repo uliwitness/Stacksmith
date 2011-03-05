@@ -14,6 +14,8 @@
 #import "WILDCardView.h"
 #import "WILDIconListDataSource.h"
 #import "WILDScriptEditorWindowController.h"
+#import "NSWindow+ULIZoomEffect.h"
+#import "WILDVisibleObject.h"
 
 
 static 	NSArray*	sStylesInMenuOrder = nil;
@@ -108,11 +110,13 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	NSRect		buttonRect = [mPart rectangle];
 	buttonRect = [mCardView convertRectToBase: buttonRect];
 	buttonRect.origin = [[mCardView window] convertBaseToScreen: buttonRect.origin];
-	NSRect		desiredFrame = [theWindow contentRectForFrameRect: [theWindow frame]];
-	[theWindow setFrame: buttonRect display: NO];
-	[theWindow makeKeyAndOrderFront: self];
-	desiredFrame = [theWindow frameRectForContentRect: desiredFrame];
-	[theWindow setFrame: desiredFrame display: YES animate: YES];
+//	NSRect		desiredFrame = [theWindow contentRectForFrameRect: [theWindow frame]];
+//	[theWindow setFrame: buttonRect display: NO];
+//	[theWindow makeKeyAndOrderFront: self];
+//	desiredFrame = [theWindow frameRectForContentRect: desiredFrame];
+//	[theWindow setFrame: desiredFrame display: YES animate: YES];
+	
+	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: buttonRect];
 }
 
 
@@ -135,18 +139,22 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	else
 		theContents = [[mCardView card] contentsForPart: mPart];
 	[theContents setText: [mContentsTextField string]];
-
+	
 	WILDObjectID	theIconID = [mIconListController selectedIconID];
 	[mPart setIconID: theIconID];
 	
-	[[[[self window] windowController] document] updateChangeCount: NSChangeDone];
+	[mPart updateChangeCount: NSChangeDone];
 	
+	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mPart] frameInScreenCoordinates];
+	[[self window] orderOutWithZoomEffectToRect: destRect];
 	[self close];
 }
 
 
 -(IBAction)	doCancelButton: (id)sender
 {
+	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mPart] frameInScreenCoordinates];
+	[[self window] orderOutWithZoomEffectToRect: destRect];
 	[self close];
 }
 

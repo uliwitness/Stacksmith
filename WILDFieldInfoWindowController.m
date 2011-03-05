@@ -137,14 +137,16 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 		theContents = [[mCardView card] contentsForPart: mPart];
 	[theContents setText: [mContentsTextField string]];
 	
-	[[[[self window] windowController] document] updateChangeCount: NSChangeDone];
+	[mPart updateChangeCount: NSChangeDone];
 	
+	[[self window] orderOutWithZoomEffectToRect: NSZeroRect];
 	[self close];
 }
 
 
 -(IBAction)	doCancelButton: (id)sender
 {
+	[[self window] orderOutWithZoomEffectToRect: NSZeroRect];
 	[self close];
 }
 

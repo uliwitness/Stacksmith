@@ -21,4 +21,6 @@
 	IBOutlet WILDCardViewController	*	mCardViewController;
 }
 
+-(WILDStack*)	stack;
+
 @end

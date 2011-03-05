@@ -210,4 +210,10 @@
 	mOwner = inOwner;
 }
 
+
+-(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind
+{
+	return [mOwner visibleObjectForWILDObject: inObjectToFind];
+}
+
 @end

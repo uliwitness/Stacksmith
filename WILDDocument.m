@@ -749,4 +749,23 @@
 		return nil;
 }
 
+
+-(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind
+{
+	id<WILDVisibleObject>	foundVisibleObject = nil;
+	
+	for( WILDCardWindowController* currWindow in [self windowControllers] )
+	{
+		if( [currWindow stack] == inObjectToFind )
+			foundVisibleObject = currWindow;
+		else
+			foundVisibleObject = [currWindow visibleObjectForWILDObject: inObjectToFind];
+		
+		if( foundVisibleObject )
+			break;
+	}
+	
+	return foundVisibleObject;
+}
+
 @end

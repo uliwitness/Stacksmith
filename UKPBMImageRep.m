@@ -214,6 +214,8 @@
 
 +(BOOL) canInitWithData: (NSData*)theData
 {
+	if( theData == nil )
+		return NO;
     const char*	bytes = [theData bytes];
 	return( bytes[0] == 'P' && bytes[1] == '4' && bytes[2] == '\n' );
 }

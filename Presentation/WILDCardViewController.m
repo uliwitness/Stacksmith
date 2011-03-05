@@ -81,6 +81,12 @@
 }
 
 
+-(WILDCard*)	currentCard
+{
+	return mCurrentCard;
+}
+
+
 -(void)	setView: (NSView *)view
 {
 	[super setView: view];
@@ -679,6 +685,19 @@
 		NSImage*		anImg = [imgs objectAtIndex: 0];
 		
 	}
+}
+
+
+-(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind
+{
+	NSArray	*	views = [[self view] subviews];
+	for( WILDPartView	*	currPartView in views )
+	{
+		if( [currPartView part] == inObjectToFind )
+			return currPartView;
+	}
+	
+	return nil;
 }
 
 @end

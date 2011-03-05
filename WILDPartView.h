@@ -59,6 +59,8 @@ typedef enum
 
 -(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect;
 
+-(NSRect)	frameInScreenCoordinates;
+
 @end
 
 
