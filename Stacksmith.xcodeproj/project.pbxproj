@@ -331,7 +331,7 @@
 		55E3B6AD1184417A000062C1 /* WILDMediaEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6AC1184417A000062C1 /* WILDMediaEntry.m */; };
 		55E3B6C91184420E000062C1 /* WILDStyleEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6C81184420E000062C1 /* WILDStyleEntry.m */; };
 		55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6DA11845E01000062C1 /* UKRandomInteger.m */; };
-		55E509E71156B06D001D0762 /* UKMultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E509E61156B06D001D0762 /* UKMultiMap.m */; };
+		55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E509E61156B06D001D0762 /* ULIMultiMap.m */; };
 		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
 		55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC406114C273400BAA09D /* SyntaxDefinition.plist */; };
 		55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */; };
@@ -755,8 +755,8 @@
 		55E3B6C81184420E000062C1 /* WILDStyleEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDStyleEntry.m; path = Document/WILDStyleEntry.m; sourceTree = "<group>"; };
 		55E3B6D911845E01000062C1 /* UKRandomInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKRandomInteger.h; path = ../UliKit/UKRandomInteger.h; sourceTree = SOURCE_ROOT; };
 		55E3B6DA11845E01000062C1 /* UKRandomInteger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKRandomInteger.m; path = ../UliKit/UKRandomInteger.m; sourceTree = SOURCE_ROOT; };
-		55E509E51156B06D001D0762 /* UKMultiMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMultiMap.h; sourceTree = "<group>"; };
-		55E509E61156B06D001D0762 /* UKMultiMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMultiMap.m; sourceTree = "<group>"; };
+		55E509E51156B06D001D0762 /* ULIMultiMap.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ULIMultiMap.h; sourceTree = "<group>"; };
+		55E509E61156B06D001D0762 /* ULIMultiMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ULIMultiMap.m; sourceTree = "<group>"; };
 		55E8535C1166341100745C86 /* NSString+FetchNextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FetchNextLine.h"; path = "../UliKit/NSString+FetchNextLine.h"; sourceTree = SOURCE_ROOT; };
 		55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FetchNextLine.m"; path = "../UliKit/NSString+FetchNextLine.m"; sourceTree = SOURCE_ROOT; };
 		55EBC406114C273400BAA09D /* SyntaxDefinition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinition.plist; sourceTree = "<group>"; };
@@ -1018,8 +1018,8 @@
 				5542CFAA113B033800555C64 /* UKMenuBarOverlay.m */,
 				5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */,
 				5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */,
-				55E509E51156B06D001D0762 /* UKMultiMap.h */,
-				55E509E61156B06D001D0762 /* UKMultiMap.m */,
+				55E509E51156B06D001D0762 /* ULIMultiMap.h */,
+				55E509E61156B06D001D0762 /* ULIMultiMap.m */,
 				555E5764115BFC5700AAF9CA /* NSFileHandle+UKReadLinewise.h */,
 				555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */,
 				555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */,
@@ -1731,7 +1731,7 @@
 				558DCDAB11557E28002C9195 /* WILDApplication.m in Sources */,
 				558DCFBF1155B9B1002C9195 /* WILDPictureView.m in Sources */,
 				558DCFE51156209A002C9195 /* WILDCardView.m in Sources */,
-				55E509E71156B06D001D0762 /* UKMultiMap.m in Sources */,
+				55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */,
 				555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */,
 				555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */,
 				55D6B259115C16E700D17619 /* WILDTextView.m in Sources */,

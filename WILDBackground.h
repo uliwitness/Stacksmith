@@ -11,7 +11,7 @@
 #import "WILDObjectID.h"
 
 
-@class UKMultiMap;
+@class ULIMultiMap;
 @class WILDStack;
 @class WILDPart;
 @class WILDPartContents;
@@ -29,7 +29,7 @@
 	NSMutableArray*				mParts;				// Array of parts on this card.
 	NSMutableArray*				mAddColorParts;		// Array of parts for which we have AddColor color information. May contain parts that are already in mParts.
 	NSMutableDictionary*		mContents;			// Dictionary of part ID -> contents mappings
-	UKMultiMap*					mButtonFamilies;	// Family ID as key, and arrays of button parts belonging to these families.
+	ULIMultiMap*					mButtonFamilies;	// Family ID as key, and arrays of button parts belonging to these families.
 	WILDStack*					mStack;
 }
 

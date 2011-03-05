@@ -1,5 +1,5 @@
 //
-//  UKMultiMap.h
+//  ULIMultiMap.h
 //  Propaganda
 //
 //  Created by Uli Kusterer on 21.03.10.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface UKMultiMap : NSObject
+@interface ULIMultiMap : NSObject
 {
 	NSMutableDictionary*	mDictionary;
 }

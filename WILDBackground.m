@@ -10,7 +10,7 @@
 #import "WILDPart.h"
 #import "WILDPartContents.h"
 #import "WILDXMLUtils.h"
-#import "UKMultiMap.h"
+#import "ULIMultiMap.h"
 #import "WILDStack.h"
 #import "WILDNotifications.h"
 #import "UKRandomInteger.h"
@@ -32,7 +32,7 @@
 		mDontSearch = NO;
 		
 		mScript = [@"" retain];
-		mButtonFamilies = [[UKMultiMap alloc] init];
+		mButtonFamilies = [[ULIMultiMap alloc] init];
 
 		mParts = [[NSMutableArray alloc] init];
 		mAddColorParts = [[NSMutableArray alloc] init];
@@ -60,7 +60,7 @@
 		mPicture = [WILDStringFromSubElementInElement( @"bitmap", elem ) retain];
 		
 		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
-		mButtonFamilies = [[UKMultiMap alloc] init];
+		mButtonFamilies = [[ULIMultiMap alloc] init];
 		
 		NSArray*		parts = [elem elementsForName: @"part"];
 		mParts = [[NSMutableArray alloc] initWithCapacity: [parts count]];
