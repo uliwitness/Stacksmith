@@ -277,6 +277,8 @@
 	}
 
 	[pool drain];
+	
+	[mPart setRectangle: NSInsetRect( self.frame, 2, 2)];
 }
 
 
@@ -313,7 +315,7 @@
 				justSelected = YES;
 			}
 			
-			if( hitHandle == 0 && UKIsDragStart( event, 0.0 ) )
+			if( hitHandle == 0 && UKIsDragStart( event, 0.8 ) )
 			{
 				NSPasteboard*   		pb = [NSPasteboard pasteboardWithName: NSDragPboard];
 				[pb clearContents];
@@ -347,7 +349,7 @@
 				[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
 							event: event pasteboard: pb source: [self enclosingCardView] slideBack: YES];
 			}
-			else if( ([event type] == NSLeftMouseDown) && UKIsDragStart( event, 0.0 ) )
+			else if( ([event type] == NSLeftMouseDown) && UKIsDragStart( event, 0.8 ) )
 			{
 				[self resizeViewUsingHandle: hitHandle];
 			}
@@ -592,7 +594,9 @@
 		[label sizeToFit];
 		titleBox.origin.y -= truncf((titleBox.size.height -[label bounds].size.height) /2);
 		[label setFrame: titleBox];
+		
 		[self addSubview: label];
+		[label setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin];
 		
 		[self setHelperView: label];
 	}
@@ -616,6 +620,7 @@
 		[(WILDClickablePopUpButtonLabel*)[self helperView] setPopUpButton: bt];
 	
 	[self addSubview: bt];
+	[bt setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable];
 	
 	[self setMainView: bt];
 	
@@ -747,6 +752,7 @@
 	}
 	
 	[self addSubview: bt];
+	[bt setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable];
 	[self setMainView: bt];
 	
 	[bt release];
@@ -797,7 +803,8 @@
 	
 	// A field can be edited if:
 	//	It is a card field and its lockText is FALSE.
-	//	It is a bg field, its lockText is FALSE and we're editing the background.
+	//	It is a bg field, its lockText is FALSE its sharedText is TRUE and we're editing the background.
+	//	It is a bg field, its lockText is FALSE and its sharedText is FALSE.
 	BOOL		shouldBeEditable = ![currPart lockText] && (![currPart sharedText] || backgroundEditMode);
 	[tv setEditable: shouldBeEditable];
 	[tv setSelectable: shouldBeEditable];
@@ -854,6 +861,7 @@
 	[sv setHasHorizontalScroller: NO];
 	[tv setFrame: txBox];
 	[sv setDocumentView: tv];
+	[sv setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable];
 	[self addSubview: sv];
 	[self setHelperView: sv];
 	[self setMainView: tv];
@@ -947,6 +955,7 @@
 	[tc setMaxWidth: 1000000.0];
 	[tc setMinWidth: 10.0];
 	[sv setDocumentView: tv];
+	[sv setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable];
 	[self addSubview: sv];
 	[self setHelperView: sv];
 	[self setMainView: tv];
@@ -999,10 +1008,10 @@
 }
 
 
--(void)	drawRect:(NSRect)dirtyRect
-{
-	[[NSColor blueColor] set];
-	[NSBezierPath strokeRect: [self bounds]];
-}
+//-(void)	drawRect:(NSRect)dirtyRect
+//{
+//	[[NSColor blueColor] set];
+//	[NSBezierPath strokeRect: [self bounds]];
+//}
 
 @end

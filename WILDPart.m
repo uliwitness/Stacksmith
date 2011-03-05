@@ -143,6 +143,13 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
+-(NSRect)	setRectangle: (NSRect)theBox
+{
+	theBox.origin.y = [mStack cardSize].height -NSMaxY( theBox );
+	mRectangle = theBox;
+}
+
+
 -(void)	setName: (NSString*)theStr
 {
 	if( mName != theStr )
