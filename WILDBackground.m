@@ -70,6 +70,7 @@
 			[newPart setPartLayer: [self partLayer]];
 			[newPart setPartOwner: self];
 			[mParts addObject: newPart];
+			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(partDidChange:) name:WILDPartDidChangeNotification object: newPart];
 			if( [newPart family] > 0 )
 				[mButtonFamilies addObject: newPart forKey: [NSNumber numberWithInteger: [newPart family]]];
 		}
@@ -93,6 +94,11 @@
 
 -(void)	dealloc
 {
+	for( WILDPart* currPart in mParts )
+	{
+		[[NSNotificationCenter defaultCenter] removeObserver: self name: WILDPartDidChangeNotification object: currPart];
+	}
+	
 	DESTROY(mButtonFamilies);
 	DESTROY(mName);
 	DESTROY(mScript);
@@ -314,6 +320,7 @@
 	[newPart setPartLayer: [self partLayer]];
 	[newPart setPartOwner: self];
 	[mParts addObject: newPart];
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(partDidChange:) name:WILDPartDidChangeNotification object: newPart];
 	
 	[self updateChangeCount: NSChangeDone];
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidAddPartNotification
@@ -376,6 +383,23 @@
 -(void)	updateChangeCount: (NSDocumentChangeType)inChange
 {
 	[[mStack document] updateChangeCount: inChange];
+}
+
+
+-(void)	partDidChange: (NSNotification*)notif
+{
+	WILDPart	*	thePart = [notif object];
+	NSString	*	propName = [[notif userInfo] objectForKey: WILDAffectedPropertyKey];
+	SEL				theAction = NSSelectorFromString( [propName stringByAppendingString: @"PropertyDidChangeOfPart:"] );
+	if( [self respondsToSelector: theAction] )
+		[self performSelector: theAction withObject: thePart];
+}
+
+
+-(void)	familyPropertyDidChangeOfPart: (WILDPart*)thePart
+{
+	[mButtonFamilies removeObject: thePart];
+	[mButtonFamilies addObject: thePart forKey: [NSNumber numberWithInteger: [thePart family]]];
 }
 
 

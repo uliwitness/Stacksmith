@@ -504,41 +504,57 @@
 		return nil;
 }
 
--(void)	partWillChange: (NSNotification*)notification
+-(void)	partWillChange: (NSNotification*)notif
 {
-	
+	WILDPart	*	thePart = [notif object];
+	NSString	*	propName = [[notif userInfo] objectForKey: WILDAffectedPropertyKey];
+	SEL				theAction = NSSelectorFromString( [propName stringByAppendingString: @"PropertyWillChangeOfPart:"] );
+	if( [self respondsToSelector: theAction] )
+		[self performSelector: theAction withObject: thePart];
 }
 
 
--(void)	partDidChange: (NSNotification*)notification
+-(void)	partDidChange: (NSNotification*)notif
 {
-	NSString*	thePropName = [[notification userInfo] objectForKey: WILDAffectedPropertyKey];
-	if( [thePropName isEqualToString: @"highlighted"] && [mMainView respondsToSelector: @selector(setState:)] )
-	{
-		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
-		[(NSButton*)mMainView setState: [mPart highlighted] ? NSOnState : NSOffState];
-	}
-	else if( [thePropName isEqualToString: @"visible"] && [mMainView respondsToSelector: @selector(setHidden:)] )
-	{
-		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
-		[self setHidden: ![mPart visible]];
-	}
-	else if( [thePropName isEqualToString: @"enabled"] && [mMainView respondsToSelector: @selector(setEnabled:)] )
-	{
-		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
-		[(NSButton*)mMainView setEnabled: [mPart isEnabled]];
-	}
-	else if( [thePropName isEqualToString: @"icon"] && [mMainView respondsToSelector: @selector(setImage:)] )
-	{
-		//NSLog( @"View got notified that %@ highlight changed to %s", [mPart displayName], [mPart highlighted] ? "true" : "false" );
-		[(NSButton*)mMainView setImage: [mPart iconImage]];
-	}
-	else
+	WILDPart	*	thePart = [notif object];
+	NSString	*	propName = [[notif userInfo] objectForKey: WILDAffectedPropertyKey];
+	SEL				theAction = NSSelectorFromString( [propName stringByAppendingString: @"PropertyDidChangeOfPart:"] );
+	if( [self respondsToSelector: theAction] )
+		[self performSelector: theAction withObject: thePart];
+	else	// Unknown property. Reload the whole thing.
 	{
 		[self setFrame: NSInsetRect([mPart rectangle], -2, -2)];
 		[self unloadPart];
 		[self loadPart: mPart forBackgroundEditing: NO];
 	}
+}
+
+
+-(void)	highlightedPropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	if( [mMainView respondsToSelector: @selector(setState:)] )
+		[(NSButton*)mMainView setState: [mPart highlighted] ? NSOnState : NSOffState];
+}
+
+
+-(void)	visiblePropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	if( [mMainView respondsToSelector: @selector(setHidden:)] )
+		[self setHidden: ![mPart visible]];
+}
+
+
+-(void)	enabledPropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	if( [mMainView respondsToSelector: @selector(setEnabled:)] )
+		[(NSButton*)mMainView setEnabled: [mPart isEnabled]];
+}
+
+
+-(void)	iconPropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	if( [mMainView respondsToSelector: @selector(setImage:)] )
+		[(NSButton*)mMainView setImage: [mPart iconImage]];
 }
 
 
