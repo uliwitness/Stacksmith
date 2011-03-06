@@ -8,6 +8,7 @@
 
 #import "WILDAboutPanelController.h"
 #import "UKLicense.h"
+#import "NSWindow+ULIZoomEffect.h"
 
 
 @implementation WILDAboutPanelController
@@ -22,10 +23,10 @@
 	if( !sAboutPanel )
 	{
 		sAboutPanel = [[WILDAboutPanelController alloc] init];
-		[sAboutPanel showWindow: nil];
+		[[sAboutPanel window] makeKeyAndOrderFrontWithZoomEffectFromRect: NSZeroRect];
 	}
-	
-	[[sAboutPanel window] makeKeyAndOrderFront: nil];
+	else
+		[[sAboutPanel window] makeKeyAndOrderFrontWithPopEffect];
 }
 
 - (id)init
@@ -78,6 +79,14 @@
 	}
 	NSString*	version = [NSString stringWithFormat: @"%@ (%@)", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"], [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleVersion"]];
 	[mVersionField setStringValue: version];
+}
+
+
+-(BOOL)	windowShouldClose: (id)sender
+{
+	[[self window] orderOutWithZoomEffectToRect: NSZeroRect];
+	
+	return YES;
 }
 
 @end
