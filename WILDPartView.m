@@ -479,6 +479,12 @@
 }
 
 
+-(void)	textDidChange: (NSNotification *)notification
+{
+	NSLog( @"textDidChange:" );
+}
+
+
 -(void)	setPart: (WILDPart*)inPart
 {
 	if( inPart == nil )
@@ -638,7 +644,7 @@
 		[(WILDClickablePopUpButtonLabel*)[self helperView] setPopUpButton: bt];
 	
 	[self addSubview: bt];
-	[bt setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable];
+	[bt setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 	
 	[self setMainView: bt];
 	
@@ -770,7 +776,7 @@
 	}
 	
 	[self addSubview: bt];
-	[bt setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable];
+	[bt setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 	[self setMainView: bt];
 	
 	[bt release];
@@ -804,6 +810,7 @@
 	[tv setFont: [currPart textFont]];
 	[tv setWantsLayer: YES];
 	[tv setUsesFindPanel: NO];
+	[tv setDelegate: self];
 	[tv setAlignment: [currPart textAlignment]];
 	if( [currPart wideMargins] )
 		[tv setTextContainerInset: NSMakeSize( 5, 2 )];
@@ -879,7 +886,7 @@
 	[sv setHasHorizontalScroller: NO];
 	[tv setFrame: txBox];
 	[sv setDocumentView: tv];
-	[sv setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable];
+	[sv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 	[self addSubview: sv];
 	[self setHelperView: sv];
 	[self setMainView: tv];
@@ -973,7 +980,7 @@
 	[tc setMaxWidth: 1000000.0];
 	[tc setMinWidth: 10.0];
 	[sv setDocumentView: tv];
-	[sv setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable];
+	[sv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 	[self addSubview: sv];
 	[self setHelperView: sv];
 	[self setMainView: tv];
