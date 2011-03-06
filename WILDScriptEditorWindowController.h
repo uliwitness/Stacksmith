@@ -20,10 +20,13 @@
 	IBOutlet NSTextView*						mTextView;			// Script text.
 	IBOutlet NSPopUpButton*						mPopUpButton;		// Handlers popup.
 	IBOutlet UKSyntaxColoredTextViewController*	mSyntaxController;	// Provides some extra functionality like syntax coloring.
+	NSRect										mGlobalStartRect;	// For opening animation.
 }
 
 -(id)		initWithScriptContainer: (id<WILDScriptContainer>)inContainer;
 
 -(IBAction)	handlerPopupSelectionChanged: (id)sender;
+
+-(void)		setGlobalStartRect: (NSRect)theBox;
 
 @end

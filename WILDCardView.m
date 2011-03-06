@@ -1,5 +1,5 @@
 //
-//  WILDWindowBodyView.m
+//  WILDCardView.m
 //  Propaganda
 //
 //  Created by Uli Kusterer on 21.03.10.
@@ -89,7 +89,7 @@
 
 -(void)	resetCursorRects
 {
-	WILDTool	currTool = [[WILDTools sharedTools] currentTool];
+	WILDTool			currTool = [[WILDTools sharedTools] currentTool];
 	NSCursor*			currCursor = [WILDTools cursorForTool: currTool];
 	if( mPeeking )
 		currCursor = [NSCursor arrowCursor];
@@ -104,6 +104,13 @@
 	if( mPeeking )
 	{
 		WILDScriptEditorWindowController*	sewc = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: mBackgroundEditMode ? [mCard owningBackground] : mCard] autorelease];
+		NSRect	wFrame = [[self window] contentRectForFrameRect: [[self window] frame]];
+		NSRect	theBox = { {0,0}, {32,32} };
+		theBox.origin = [event locationInWindow];
+		
+		theBox.origin.x += wFrame.origin.x -16;
+		theBox.origin.y += wFrame.origin.y -16;
+		[sewc setGlobalStartRect: theBox];
 		[[[[self window] windowController] document] addWindowController: sewc];
 		[sewc showWindow: nil];
 	}

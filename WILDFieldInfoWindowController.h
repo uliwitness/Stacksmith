@@ -38,6 +38,7 @@
 	IBOutlet NSButton*				mEnabledSwitch;
 	IBOutlet NSButton*				mVisibleSwitch;
 	IBOutlet NSTextView*			mContentsTextField;
+	IBOutlet NSButton*				mEditScriptButton;
 }
 
 -(id)		initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView;

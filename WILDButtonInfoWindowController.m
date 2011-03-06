@@ -110,11 +110,6 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	NSRect		buttonRect = [mPart rectangle];
 	buttonRect = [mCardView convertRectToBase: buttonRect];
 	buttonRect.origin = [[mCardView window] convertBaseToScreen: buttonRect.origin];
-//	NSRect		desiredFrame = [theWindow contentRectForFrameRect: [theWindow frame]];
-//	[theWindow setFrame: buttonRect display: NO];
-//	[theWindow makeKeyAndOrderFront: self];
-//	desiredFrame = [theWindow frameRectForContentRect: desiredFrame];
-//	[theWindow setFrame: desiredFrame display: YES animate: YES];
 	
 	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: buttonRect];
 }
@@ -161,7 +156,11 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction)	doEditScriptButton: (id)sender
 {
+	NSRect		box = [mEditScriptButton convertRect: [mEditScriptButton bounds] toView: nil];
+	NSRect		wFrame = [[self window] frame];
+	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
 	WILDScriptEditorWindowController*	se = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: mPart] autorelease];
+	[se setGlobalStartRect: box];
 	[[[[self window] windowController] document] addWindowController: se];
 	[se showWindow: self];
 }

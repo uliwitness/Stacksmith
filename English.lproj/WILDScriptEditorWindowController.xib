@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
 		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1294</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1294</string>
+			<string key="NS.object.0">1305</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -51,7 +51,7 @@
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{429, 180}, {481, 602}}</string>
-				<int key="NSWTFlags">540540928</int>
+				<int key="NSWTFlags">540541952</int>
 				<string key="NSWindowTitle">Window</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
@@ -99,6 +99,7 @@
 											<string key="NSFrameSize">{466, 14}</string>
 											<reference key="NSSuperview" ref="17761992"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="333541691"/>
 											<object class="NSTextContainer" key="NSTextContainer" id="531496365">
 												<object class="NSLayoutManager" key="NSLayoutManager">
 													<object class="NSTextStorage" key="NSTextStorage">
@@ -203,6 +204,7 @@
 									<string key="NSFrame">{{467, 1}, {15, 570}}</string>
 									<reference key="NSSuperview" ref="465168180"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView"/>
 									<reference key="NSTarget" ref="465168180"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSCurValue">1</double>
@@ -214,6 +216,7 @@
 									<string key="NSFrame">{{-100, -100}, {87, 18}}</string>
 									<reference key="NSSuperview" ref="465168180"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="17761992"/>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="465168180"/>
 									<string key="NSAction">_doScroller:</string>
@@ -224,7 +227,7 @@
 							<string key="NSFrame">{{-1, -1}, {483, 572}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="17761992"/>
+							<reference key="NSNextKeyView" ref="8199863"/>
 							<int key="NSsFlags">18</int>
 							<reference key="NSVScroller" ref="333541691"/>
 							<reference key="NSHScroller" ref="8199863"/>
@@ -236,6 +239,7 @@
 							<string key="NSFrame">{{72, 575}, {203, 22}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="465168180"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPopUpButtonCell" key="NSCell" id="536915121">
 								<int key="NSCellFlags">-2076049856</int>
@@ -295,6 +299,7 @@
 							<string key="NSFrame">{{10, 579}, {60, 14}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="668437937"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="65677085">
 								<int key="NSCellFlags">68288064</int>
@@ -320,6 +325,7 @@
 					<string key="NSFrame">{{7, 11}, {481, 602}}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView" ref="849218189"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{1e+13, 1e+13}</string>
@@ -559,7 +565,7 @@
 					<string>{{333, 247}, {481, 602}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{333, 247}, {481, 602}}</string>
-					<integer value="1"/>
+					<boolean value="NO"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

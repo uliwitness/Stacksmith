@@ -288,6 +288,7 @@
 	if( mPeeking )
 	{
 		WILDScriptEditorWindowController*	sewc = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: mPart] autorelease];
+		[sewc setGlobalStartRect: [self frameInScreenCoordinates]];
 		[[[[self window] windowController] document] addWindowController: sewc];
 		[sewc showWindow: nil];
 	}
@@ -315,51 +316,51 @@
 				justSelected = YES;
 			}
 			
-			bool	isDragStart = UKIsDragStart( event, 0.8 );
-			if( hitHandle == 0 && isDragStart )
+			if( UKIsDragStart( event, 0.0 ) )
 			{
-				NSPasteboard*   		pb = [NSPasteboard pasteboardWithName: NSDragPboard];
-				[pb clearContents];
-				NSPoint					dragStartImagePos = NSZeroPoint;
-				NSArray*				selectedObjects = [[[WILDTools sharedTools] clients] allObjects];
-				NSImage*				theDragImg = [[self class] imageForPeers: selectedObjects
-														ofView: self
-														dragStartImagePos: &dragStartImagePos];
-				WILDCard*		currCard = [[self enclosingCardView] card];
-				WILDBackground*	currBg = [currCard owningBackground];
-				
-				NSMutableString*		xmlString = [[@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE parts PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\" >\n<parts>\n" mutableCopy] autorelease];
-				for( WILDPartView* selView in selectedObjects )
+				if( hitHandle == 0 )
 				{
-					WILDPart*	thePart = [selView part];
-					[xmlString appendString: [thePart xmlString]];
-					NSString*	cdXmlStr = [[currCard contentsForPart: thePart] xmlString];
-					if( cdXmlStr )
-						[xmlString appendString: cdXmlStr];
-					NSString*	bgXmlStr = [[currBg contentsForPart: thePart] xmlString];
-					if( bgXmlStr )
-						[xmlString appendString: bgXmlStr];
+					NSPasteboard*   		pb = [NSPasteboard pasteboardWithName: NSDragPboard];
+					[pb clearContents];
+					NSPoint					dragStartImagePos = NSZeroPoint;
+					NSArray*				selectedObjects = [[[WILDTools sharedTools] clients] allObjects];
+					NSImage*				theDragImg = [[self class] imageForPeers: selectedObjects
+															ofView: self
+															dragStartImagePos: &dragStartImagePos];
+					WILDCard*		currCard = [[self enclosingCardView] card];
+					WILDBackground*	currBg = [currCard owningBackground];
+					
+					NSMutableString*		xmlString = [[@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE parts PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\" >\n<parts>\n" mutableCopy] autorelease];
+					for( WILDPartView* selView in selectedObjects )
+					{
+						WILDPart*	thePart = [selView part];
+						[xmlString appendString: [thePart xmlString]];
+						NSString*	cdXmlStr = [[currCard contentsForPart: thePart] xmlString];
+						if( cdXmlStr )
+							[xmlString appendString: cdXmlStr];
+						NSString*	bgXmlStr = [[currBg contentsForPart: thePart] xmlString];
+						if( bgXmlStr )
+							[xmlString appendString: bgXmlStr];
+					}
+					[xmlString appendString: @"</parts>"];
+	//				NSLog(@"xmlString = %@",xmlString);
+					
+					[pb addTypes: [NSArray arrayWithObject: WILDPartPboardType] owner: [self enclosingCardView]];
+					[pb setString: xmlString forType: WILDPartPboardType];
+					
+					// Actually commence the drag:
+					[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
+								event: event pasteboard: pb source: [self enclosingCardView] slideBack: YES];
 				}
-				[xmlString appendString: @"</parts>"];
-//				NSLog(@"xmlString = %@",xmlString);
-				
-				[pb addTypes: [NSArray arrayWithObject: WILDPartPboardType] owner: [self enclosingCardView]];
-				[pb setString: xmlString forType: WILDPartPboardType];
-				
-				// Actually commence the drag:
-				[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
-							event: event pasteboard: pb source: [self enclosingCardView] slideBack: YES];
-			}
-			else if( ([event type] == NSLeftMouseDown) && isDragStart )
-			{
-				[self resizeViewUsingHandle: hitHandle];
+				else
+				{
+					[self resizeViewUsingHandle: hitHandle];
+				}
 			}
 			else if( !justSelected )
 			{
 				[self selectionClick: event];
 			}
-			else
-				[super mouseDown: event];
 		}
 	}
 	else

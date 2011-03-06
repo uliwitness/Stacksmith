@@ -3,7 +3,7 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
 		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1294</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
@@ -15,7 +15,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>1294</string>
+				<string>1305</string>
 				<string>30</string>
 			</object>
 		</object>
@@ -1249,7 +1249,6 @@
 							<string key="NSFrame">{{395, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="62063651">
 								<int key="NSCellFlags">67239424</int>
@@ -1525,6 +1524,14 @@
 						<reference key="destination" ref="848050370"/>
 					</object>
 					<int key="connectionID">129</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mEditScriptButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="177165973"/>
+					</object>
+					<int key="connectionID">130</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2415,7 +2422,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">129</int>
+			<int key="maxID">130</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2530,6 +2537,7 @@
 							<string>mButtonNumberField</string>
 							<string>mButtonNumberLabel</string>
 							<string>mContentsTextField</string>
+							<string>mEditScriptButton</string>
 							<string>mEnabledSwitch</string>
 							<string>mFamilyPopUp</string>
 							<string>mHighlightedSwitch</string>
@@ -2549,6 +2557,7 @@
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSTextView</string>
+							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSPopUpButton</string>
 							<string>NSButton</string>
@@ -2571,6 +2580,7 @@
 							<string>mButtonNumberField</string>
 							<string>mButtonNumberLabel</string>
 							<string>mContentsTextField</string>
+							<string>mEditScriptButton</string>
 							<string>mEnabledSwitch</string>
 							<string>mFamilyPopUp</string>
 							<string>mHighlightedSwitch</string>
@@ -2601,6 +2611,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">mContentsTextField</string>
 								<string key="candidateClassName">NSTextView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">mEditScriptButton</string>
+								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mEnabledSwitch</string>

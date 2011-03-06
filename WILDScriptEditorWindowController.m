@@ -9,6 +9,7 @@
 #import "WILDScriptEditorWindowController.h"
 #import "WILDScriptContainer.h"
 #import "UKSyntaxColoredTextViewController.h"
+#import "NSWindow+ULIZoomEffect.h"
 
 
 @implementation WILDScriptEditorWindowController
@@ -63,6 +64,24 @@
 }
 
 
+-(void)	showWindow:(id)sender
+{
+	NSWindow	*	theWindow = [self window];
+	
+	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: mGlobalStartRect];
+}
+
+
+-(BOOL)	windowShouldClose: (id)sender
+{
+	NSWindow	*	theWindow = [self window];
+	
+	[theWindow orderOutWithZoomEffectToRect: mGlobalStartRect];
+	
+	return YES;
+}
+
+
 -(void)	windowWillClose: (NSNotification*)notification
 {
 	[mContainer setScript: [mTextView string]];
@@ -104,6 +123,12 @@
 	[newItem setImage: [mContainer displayIcon]];
 	
 	return YES;
+}
+
+
+-(void)		setGlobalStartRect: (NSRect)theBox
+{
+	mGlobalStartRect = theBox;
 }
 
 @end
