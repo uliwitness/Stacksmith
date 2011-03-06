@@ -12,6 +12,7 @@
 
 @class WILDPart;
 @class WILDCardView;
+@class WILDPartContents;
 
 
 // Constants for describing which part was clicked during editing (for resizing etc.)
@@ -33,6 +34,7 @@ typedef enum
 	BOOL				mSelected;		// Should we draw the selection as marching ants around this view?
 	NSView*				mMainView;		// The main control in this view representing us.
 	NSView*				mHelperView;	// An additional view, e.g. a label text field or so.
+	BOOL				mIsBackgroundEditing;
 }
 
 @property (assign) NSView*			mainView;
@@ -58,6 +60,8 @@ typedef enum
 +(NSRect)	rectForPeers: (NSArray*)parts dragStartImagePos: (NSPoint*)dragStartImagePos;
 
 -(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect;
+
+-(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents;
 
 -(NSRect)	frameInScreenCoordinates;
 

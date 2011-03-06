@@ -481,7 +481,9 @@
 
 -(void)	textDidChange: (NSNotification *)notification
 {
-	NSLog( @"textDidChange:" );
+	WILDPartContents	*	contents = [self currentPartContentsAndBackgroundContents: nil];
+	
+	
 }
 
 
@@ -620,7 +622,7 @@
 		[label setFrame: titleBox];
 		
 		[self addSubview: label];
-		[label setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin];
+		[label setAutoresizingMask: NSViewMinYMargin | NSViewMaxYMargin];
 		
 		[self setHelperView: label];
 	}
@@ -1015,21 +1017,37 @@
 
 -(void)	loadPart: (WILDPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode
 {
-	WILDCardView*	winView = [self enclosingCardView];
+	WILDPartContents*	contents = nil;
+	WILDPartContents*	bgContents = nil;
+	
+	mIsBackgroundEditing = backgroundEditMode;
+	
+	contents = [self currentPartContentsAndBackgroundContents: &bgContents];
+	
+	if( [[currPart partType] isEqualToString: @"button"] )
+		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
+	else
+		[self loadField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
+}
+
+
+-(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents
+{
+	WILDCardView*		winView = [self enclosingCardView];
 	WILDCard*			theCd = [winView card];
 	WILDBackground*		theBg = [theCd owningBackground];
 	WILDPartContents*	contents = nil;
 	WILDPartContents*	bgContents = nil;
-	bgContents = [theBg contentsForPart: currPart];
-	if( [currPart sharedText] )
+	bgContents = [theBg contentsForPart: mPart];
+	if( [mPart sharedText] )
 		contents = bgContents;
 	else
-		contents = backgroundEditMode ? nil : [theCd contentsForPart: currPart];
-
-	if( [[currPart partType] isEqualToString: @"button"] )
-		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: (BOOL)backgroundEditMode];
-	else
-		[self loadField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: (BOOL)backgroundEditMode];
+		contents = mIsBackgroundEditing ? nil : [theCd contentsForPart: mPart];
+	
+	if( outBgContents )
+		*outBgContents = bgContents;
+	
+	return contents;
 }
 
 
