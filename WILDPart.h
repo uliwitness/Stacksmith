@@ -81,8 +81,8 @@
 -(void)			setStyle: (NSString*)theStyle;
 -(NSString*)	partType;
 -(void)			setPartType: (NSString*)partType;
--(NSInteger)	partID;
--(void)			setPartID: (NSInteger)inID;	// If you set this, make sure it is a unique ID not used by another part in the same background/card!
+-(WILDObjectID)	partID;
+-(void)			setPartID: (WILDObjectID)inID;	// If you set this, make sure it is a unique ID not used by another part in the same background/card!
 -(NSInteger)	partNumber;
 -(NSInteger)	partNumberAmongPartsOfType: (NSString*)partType;
 
@@ -147,6 +147,6 @@
 -(WILDStack*)	stack;
 -(void)			updateChangeCount: (NSDocumentChangeType)inChange;
 
--(void)	updateOnClick: (NSButton*)thePart;
+-(void)	updateViewOnClick: (NSView*)sender withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground;
 
 @end

@@ -72,6 +72,19 @@
 
 @implementation WILDPartContents
 
+-(id)	initWithWILDObjectID: (WILDObjectID)inID layer: (NSString*)inLayer
+{
+	if(( self = [super init] ))
+	{
+		mID = inID;
+		mText = [@"" retain];
+		mLayer = [inLayer retain];
+		mStyles = [[NSMutableArray alloc] init];
+	}
+	
+	return self;
+}
+
 -(id)	initWithXMLElement: (NSXMLElement*)theElem forStack: (WILDStack*)theStack
 {
 	if(( self = [super init] ))
@@ -260,7 +273,7 @@
 }
 
 
--(NSInteger)	partID
+-(WILDObjectID)	partID
 {
 	return mID;
 }
@@ -297,14 +310,9 @@
 	[outString appendString: @"\t<content>\n"];
 	
 	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
-	[outString appendFormat: @"\t\t<id>%d</id>\n", mID];
-	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
+	[outString appendFormat: @"\t\t<id>%ld</id>\n", mID];
 
-	NSMutableString*	theText = [[mText mutableCopy] autorelease];
-	[theText replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0, [theText length])];
-	[theText replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0, [theText length])];
-	[theText replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [theText length])];
-	[outString appendFormat: @"\t\t<text>%@</text>\n", theText];
+	[outString appendFormat: @"\t\t<text>%@</text>\n", WILDStringEscapedForXML(mText)];
 
 	[outString appendFormat: @"\t\t<highlight>%@</highlight>\n", mHighlighted ? @"<true />" : @"<false />"];
 	

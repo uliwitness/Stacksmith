@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "WILDObjectID.h"
 
 
 @class WILDStack;
@@ -18,19 +19,20 @@
 	NSString*					mText;			// Plain-text version of the contents text.
 	NSMutableAttributedString*	mStyledText;	// Version of mText with styles applied, if we have styles.
 	NSString*					mLayer;			// @"card" or @"background".
-	NSInteger					mID;			// ID of the part this object provides contents for.
+	WILDObjectID				mID;			// ID of the part this object provides contents for.
 	NSArray*					mListItems;		// The contents of this part re-interpreted as a list (ATM, each line as a separate item).
 	NSMutableArray*				mStyles;		// Style data for this text.
 	BOOL						mHighlighted;	// Buttons can have sharedHighlight == FALSE, in which case their highlight is stored here.
 }
 
+-(id)	initWithWILDObjectID: (WILDObjectID)inID layer: (NSString*)inLayer;
 -(id)	initWithXMLElement: (NSXMLElement*)theElem forStack: (WILDStack*)theStack;
 
 -(NSString*)			text;
 -(void)					setText: (NSString*)inString;	// Nukes any styles and list item caches that may be there.
 -(NSAttributedString*)	styledTextForPart: (WILDPart*)currPart;	// May return NIL.
 -(NSString*)			partLayer;
--(NSInteger)			partID;
+-(WILDObjectID)			partID;
 -(BOOL)					highlighted;
 -(void)					setHighlighted: (BOOL)inState;
 

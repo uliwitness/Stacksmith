@@ -588,6 +588,15 @@
 }
 
 
+-(void)	updateOnClick: (NSButton*)sender
+{
+	WILDCardView*		winView = [self enclosingCardView];
+	WILDCard*			theCd = [winView card];
+	WILDBackground*		theBg = [theCd owningBackground];
+	[mPart updateViewOnClick: sender withCard: theCd background: theBg];
+}
+
+
 -(void)	loadPopupButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
 			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
@@ -759,7 +768,7 @@
 	[bt setFont: [currPart textFont]];
 	if( [currPart showName] )
 		[bt setTitle: [currPart name]];
-	[bt setTarget: currPart];
+	[bt setTarget: self];
 	[bt setAction: @selector(updateOnClick:)];
 	[bt setState: isHighlighted ? NSOnState : NSOffState];
 	
@@ -1021,6 +1030,7 @@
 	WILDPartContents*	bgContents = nil;
 	
 	mIsBackgroundEditing = backgroundEditMode;
+	mPart = currPart;
 	
 	contents = [self currentPartContentsAndBackgroundContents: &bgContents];
 	

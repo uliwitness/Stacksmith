@@ -81,7 +81,7 @@
 		for( NSXMLElement* currContent in contents )
 		{
 			WILDPartContents*	newCont = [[[WILDPartContents alloc] initWithXMLElement: currContent forStack: theStack] autorelease];
-			NSString*					theKey = [NSString stringWithFormat: @"%@:%d", [newCont partLayer], [newCont partID]];
+			NSString*					theKey = [NSString stringWithFormat: @"%@:%ld", [newCont partLayer], [newCont partID]];
 			[mContents setObject: newCont forKey: theKey];
 		}
 		
@@ -144,11 +144,22 @@
 	return mAddColorParts;
 }
 
-
 -(WILDPartContents*)	contentsForPart: (WILDPart*)thePart
 {
-	NSString*	theKey = [NSString stringWithFormat: @"%@:%d", [thePart partLayer], [thePart partID]];
-	return [mContents objectForKey: theKey];
+	return [self contentsForPart: thePart create: NO];
+}
+
+
+-(WILDPartContents*)	contentsForPart: (WILDPart*)thePart create: (BOOL)createIfNeeded
+{
+	NSString*	theKey = [NSString stringWithFormat: @"%@:%ld", [thePart partLayer], [thePart partID]];
+	WILDPartContents*	contents = [mContents objectForKey: theKey];
+	if( !contents && createIfNeeded )
+	{
+		contents = [[[WILDPartContents alloc] initWithWILDObjectID: thePart.partID layer: thePart.partLayer] autorelease];
+		[mContents setObject: contents forKey: theKey];
+	}
+	return contents;
 }
 
 
@@ -176,7 +187,7 @@
 }
 
 
--(void)	updatePartOnClick: (WILDPart*)thePart
+-(void)	updatePartOnClick: (WILDPart*)thePart withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground
 {
 	if( [thePart family] == 0 )
 	{
@@ -195,6 +206,10 @@
 			|| currPart == thePart )	// Whack the clicked part over the head, in case NSButton turned something off we don't wanna, or if it's a non-toggling type of button we need to toggle manually.
 		{
 			[currPart setHighlighted: newState];
+			if( [currPart.partLayer isEqualToString: @"background"] && ![currPart sharedHighlight] )
+			{
+				[[inCard contentsForPart: currPart create: YES] setHighlighted: newState];
+			}
 			//NSLog( @"Family: Setting highlight of %@ to %s", [currPart displayName], newState?"true":"false" );
 		}
 	}
@@ -357,7 +372,7 @@
 		[theString appendString: [currPart xmlString]];
 	}
 	
-	for( WILDPartContents* currContents in mParts )
+	for( WILDPartContents* currContents in [mContents allObjects] )
 	{
 		[theString appendString: [currContents xmlString]];
 	}

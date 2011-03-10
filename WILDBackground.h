@@ -15,6 +15,7 @@
 @class WILDStack;
 @class WILDPart;
 @class WILDPartContents;
+@class WILDCard;
 
 
 @interface WILDBackground : NSObject <WILDScriptContainer>
@@ -50,7 +51,7 @@
 -(WILDPart*)					partWithID: (WILDObjectID)theID;
 -(WILDObjectID)					uniqueIDForPart;
 
--(void)							updatePartOnClick: (WILDPart*)thePart;
+-(void)							updatePartOnClick: (WILDPart*)thePart withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground;
 
 -(NSString*)					partLayer;
 

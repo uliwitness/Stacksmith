@@ -212,13 +212,13 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(NSInteger)	partID
+-(WILDObjectID)	partID
 {
 	return mID;
 }
 
 
--(void)	setPartID: (NSInteger)inID
+-(void)	setPartID: (WILDObjectID)inID
 {
 	mID = inID;
 }
@@ -717,9 +717,9 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(void)	updateOnClick: (NSButton*)thePart
+-(void)	updateViewOnClick: (NSView*)sender withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground
 {
-	[[self partOwner] updatePartOnClick: self];
+	[[self partOwner] updatePartOnClick: self withCard: inCard background: inBackground];
 }
 
 
@@ -823,7 +823,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[outString appendFormat: @"\t\t<sharedHighlight>%@</sharedHighlight>\n", (mSharedHighlight ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<family>%d</family>\n", mFamily];
 	[outString appendFormat: @"\t\t<titleWidth>%d</titleWidth>\n", mTitleWidth];
-	[outString appendFormat: @"\t\t<icon>%d</icon>\n", mIconID];
+	[outString appendFormat: @"\t\t<icon>%ld</icon>\n", mIconID];
 	NSString*	textAlignment = @"left";
 	if( mTextAlignment == NSCenterTextAlignment )
 		textAlignment = @"center";
