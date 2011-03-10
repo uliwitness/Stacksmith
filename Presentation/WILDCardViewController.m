@@ -629,40 +629,42 @@
 	}
 }
 
--(IBAction)	showCardInfoPanel: (id)sender
-{
-	
-}
-
--(IBAction)	showBackgroundInfoPanel: (id)sender
-{
-	
-}
-
--(IBAction)	showStackInfoPanel: (id)sender
-{
-	
-}
-
--(IBAction)	bringObjectCloser: (id)sender
-{
-	
-}
-
--(IBAction)	sendObjectFarther: (id)sender
-{
-	
-}
+//-(IBAction)	showCardInfoPanel: (id)sender
+//{
+//	
+//}
+//
+//-(IBAction)	showBackgroundInfoPanel: (id)sender
+//{
+//	
+//}
+//
+//-(IBAction)	showStackInfoPanel: (id)sender
+//{
+//	
+//}
+//
+//-(IBAction)	bringObjectCloser: (id)sender
+//{
+//	
+//}
+//
+//-(IBAction)	sendObjectFarther: (id)sender
+//{
+//	
+//}
 
 -(IBAction)	createNewButton: (id)sender
 {
-	[mCurrentCard createNewButton: sender];
+	WILDBackground	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
+	[layer createNewButton: sender];
 	[[WILDTools sharedTools] setCurrentTool: WILDButtonTool];
 }
 
 -(IBAction)	createNewField: (id)sender
 {
-	[mCurrentCard createNewField: sender];	
+	WILDBackground	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
+	[layer createNewField: sender];	
 	[[WILDTools sharedTools] setCurrentTool: WILDFieldTool];
 }
 
@@ -693,7 +695,7 @@
 	NSArray	*	views = [[self view] subviews];
 	for( WILDPartView	*	currPartView in views )
 	{
-		if( [currPartView part] == inObjectToFind )
+		if( [currPartView respondsToSelector: @selector(part)] && [currPartView part] == inObjectToFind )
 			return currPartView;
 	}
 	
