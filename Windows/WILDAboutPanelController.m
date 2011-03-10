@@ -26,7 +26,12 @@
 		[[sAboutPanel window] makeKeyAndOrderFrontWithZoomEffectFromRect: NSZeroRect];
 	}
 	else
-		[[sAboutPanel window] makeKeyAndOrderFrontWithPopEffect];
+	{
+		if( [[sAboutPanel window] isVisible] )
+			[[sAboutPanel window] makeKeyAndOrderFrontWithPopEffect];
+		else
+			[[sAboutPanel window] makeKeyAndOrderFrontWithZoomEffectFromRect: NSZeroRect];
+	}
 }
 
 - (id)init
