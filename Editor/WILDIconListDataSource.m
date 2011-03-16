@@ -82,6 +82,8 @@
 @implementation WILDIconListDataSource
 
 @synthesize document = mDocument;
+@synthesize iconListView = mIconListView;
+@synthesize imagePathField = mImagePathField;
 
 -(id)	initWithDocument: (WILDDocument*)inDocument
 {
@@ -98,8 +100,24 @@
 {
 	[mIcons release];
 	mIcons = nil;
+	[mIconListView release];
+	mIconListView = nil;
+	[mImagePathField release];
+	mImagePathField = nil;
 	
 	[super dealloc];
+}
+
+
+-(void)	setIconListView: (IKImageBrowserView*)inIconListView
+{
+	if( mIconListView != inIconListView )
+	{
+		[mIconListView release];
+		mIconListView = [inIconListView retain];
+		
+		[mIconListView registerForDraggedTypes: [NSArray arrayWithObject: NSURLPboardType]];
+	}
 }
 
 
@@ -235,5 +253,61 @@
 //{
 //	
 //}
+
+
+- (NSDragOperation)draggingEntered: (id <NSDraggingInfo>)sender
+{
+	return [self draggingUpdated: sender];
+}
+
+
+- (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
+{
+	NSPasteboard*	pb = [sender draggingPasteboard];
+	if( [pb canReadObjectForClasses: [NSArray arrayWithObject: [NSURL class]] options: [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool: YES], NSPasteboardURLReadingFileURLsOnlyKey, [NSArray arrayWithObject: @"public.image"], NSPasteboardURLReadingContentsConformToTypesKey, nil]] )
+	{
+		[mIconListView setDropIndex: -1 dropOperation: IKImageBrowserDropOn];
+		
+		return NSDragOperationCopy;
+	}
+	else
+		return NSDragOperationNone;
+}
+
+
+- (BOOL)performDragOperation: (id <NSDraggingInfo>)sender
+{
+	NSPasteboard*	pb = [sender draggingPasteboard];
+	NSArray	*		urls = [pb readObjectsForClasses: [NSArray arrayWithObject: [NSURL class]] options: [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool: YES], NSPasteboardURLReadingFileURLsOnlyKey, [NSArray arrayWithObject: @"public.image"], NSPasteboardURLReadingContentsConformToTypesKey, nil]];
+	
+	WILDObjectID	iconToSelect = 0;
+	NSPasteboard*	thePastie = [NSPasteboard generalPasteboard];
+	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options:[NSDictionary dictionary]];
+	for( NSURL* theImgFile in urls )
+	{
+		NSImage *		theImg = [[[NSImage alloc] initWithContentsOfURL: theImgFile] autorelease];
+		NSString*		pictureName = [[NSFileManager defaultManager] displayNameAtPath: [theImgFile path]];
+		WILDObjectID	pictureID = [mDocument uniqueIDForMedia];
+		[mDocument addMediaFile: nil withType: @"icon" name: pictureName
+			andID: pictureID
+			hotSpot: NSZeroPoint 
+			imageOrCursor: theImg
+			isBuiltIn: NO];
+		
+		WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
+		sibi.name = pictureName;
+		sibi.filename = nil;
+		sibi.pictureID = pictureID;
+		sibi.image = theImg;
+		sibi.owner = self;
+		[mIcons addObject: sibi];
+		iconToSelect = pictureID;
+	}
+	[mIconListView reloadData];
+	if( iconToSelect != 0 )
+		[self setSelectedIconID: iconToSelect];
+	
+	return( urls != 0 && [urls count] > 0 );
+}
 
 @end
