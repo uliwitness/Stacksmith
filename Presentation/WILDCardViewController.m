@@ -668,10 +668,48 @@
 	[[WILDTools sharedTools] setCurrentTool: WILDFieldTool];
 }
 
+-(IBAction)	createNewCard: (id)sender
+{
+	WILDStack		*	theStack = [mCurrentCard stack];
+	WILDBackground	*	owningBackground = [mCurrentCard owningBackground];
+	WILDCard		*	theNewCard = [[[WILDCard alloc] initForStack: theStack] autorelease];
+	[theNewCard setOwningBackground: owningBackground];
+	[theStack addCard: theNewCard];
+	
+	[self loadCard: theNewCard];
+}
+
+
+//-(IBAction)	cutCard: (id)sender
+//{
+//	
+//}
+//
+//
+//-(IBAction)	copyCard: (id)sender
+//{
+//	
+//}
+//
+//
+//-(IBAction)	deleteCard: (id)sender
+//{
+//	
+//}
+
+
 -(IBAction)	createNewBackground: (id)sender
 {
+	WILDStack		*	theStack = [mCurrentCard stack];
+	WILDBackground	*	theNewBackground = [[[WILDBackground alloc] initForStack: theStack] autorelease];
+	[theStack addBackground: theNewBackground];
+	WILDCard		*	theNewCard = [[[WILDCard alloc] initForStack: theStack] autorelease];
+	[theNewCard setOwningBackground: theNewBackground];
+	[theStack addCard: theNewCard];
 	
+	[self loadCard: theNewCard];
 }
+
 
 -(IBAction)	chooseToolWithTag: (id)sender
 {

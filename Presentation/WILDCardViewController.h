@@ -59,6 +59,10 @@
 
 -(IBAction)	createNewButton: (id)sender;
 -(IBAction)	createNewField: (id)sender;
+-(IBAction)	createNewCard: (id)sender;
+-(IBAction)	cutCard: (id)sender;
+-(IBAction)	copyCard: (id)sender;
+-(IBAction)	deleteCard: (id)sender;
 -(IBAction)	createNewBackground: (id)sender;
 
 -(IBAction)	chooseToolWithTag: (id)sender;
