@@ -32,6 +32,9 @@
     self = [super init];
     if( self )
 	{
+		mMediaIDSeed = 128;
+		mStackIDSeed = 1;
+		
 		mFontIDTable = [[NSMutableDictionary alloc] init];
 		mTextStyles = [[NSMutableDictionary alloc] init];
 		mMediaList = [[NSMutableArray alloc] init];
@@ -44,8 +47,6 @@
 		mFirstEditedVersion = [appVersion retain];
 		mLastEditedVersion = [appVersion retain];
 
-		[mMediaList removeAllObjects];
-		
 		NSError	*	outError = nil;
 		[self loadStandardResourceTableReturningError: &outError];
 	}
@@ -414,7 +415,6 @@
 
 -(WILDObjectID)	uniqueIDForStack
 {
-	WILDObjectID	stackID = UKRandomInteger();
 	BOOL			notUnique = YES;
 	
 	while( notUnique )
@@ -423,22 +423,21 @@
 		
 		for( WILDStack* currStack in mStacks )
 		{
-			if( [currStack stackID] == stackID )
+			if( [currStack stackID] == mStackIDSeed )
 			{
 				notUnique = YES;
-				stackID = UKRandomInteger();
+				mStackIDSeed++;
 				break;
 			}
 		}
 	}
 	
-	return stackID;
+	return mStackIDSeed;
 }
 
 
 -(WILDObjectID)	uniqueIDForMedia
 {
-	WILDObjectID	mediaID = UKRandomInteger();
 	BOOL			notUnique = YES;
 	
 	while( notUnique )
@@ -447,16 +446,16 @@
 		
 		for( WILDMediaEntry* currPict in mMediaList )
 		{
-			if( [currPict pictureID] == mediaID )
+			if( [currPict pictureID] == mMediaIDSeed )
 			{
 				notUnique = YES;
-				mediaID = UKRandomInteger();
+				mMediaIDSeed++;
 				break;
 			}
 		}
 	}
 	
-	return mediaID;
+	return mMediaIDSeed;
 }
 
 

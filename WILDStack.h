@@ -32,7 +32,9 @@
 	BOOL					mCantModify;		// Is this stack write-protected?
 	NSInteger				mUserLevel;			// Maximum user level for this stack.
 	WILDDocument*			mDocument;			// Our owner, NOT RETAINED!
-	WILDObjectID			mID;
+	WILDObjectID			mID;				// Unique ID number of this stack in the document.
+	
+	WILDObjectID			mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
 }
 
 -(id)				initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;
@@ -48,10 +50,10 @@
 
 -(NSArray*)			cards;
 -(void)				setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.
--(WILDCard*)		cardWithID: (NSInteger)theID;
+-(WILDCard*)		cardWithID: (WILDObjectID)theID;
 
 -(void)				setBackgrounds: (NSArray*)theBkgds;
--(WILDBackground*)	backgroundWithID: (NSInteger)theID;
+-(WILDBackground*)	backgroundWithID: (WILDObjectID)theID;
 
 -(NSSize)			cardSize;
 

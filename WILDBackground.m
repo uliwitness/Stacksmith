@@ -37,6 +37,8 @@
 		mParts = [[NSMutableArray alloc] init];
 		mAddColorParts = [[NSMutableArray alloc] init];
 		mContents = [[NSMutableDictionary alloc] init];
+		
+		mPartIDSeed = 1;
 	}
 	
 	return self;
@@ -86,6 +88,8 @@
 		}
 		
 		[self loadAddColorObjects: elem];
+		
+		mPartIDSeed = 1;
 	}
 	
 	return self;
@@ -163,7 +167,7 @@
 }
 
 
--(WILDPart*)	partWithID: (NSInteger)theID
+-(WILDPart*)	partWithID: (WILDObjectID)theID
 {
 	for( WILDPart* thePart in mParts )
 	{
@@ -222,14 +226,14 @@
 	
 	for( NSXMLElement* theObject in theObjects )
 	{
-		NSInteger	objectID = WILDIntegerFromSubElementInElement( @"id", theObject );
-		NSInteger	objectBevel = WILDIntegerFromSubElementInElement( @"bevel", theObject );
-		NSString*	objectType = WILDStringFromSubElementInElement( @"type", theObject );
-		NSString*	objectName = WILDStringFromSubElementInElement( @"name", theObject );
-		BOOL		objectTransparent = WILDBoolFromSubElementInElement( @"transparent", theObject );
-		BOOL		objectVisible = WILDBoolFromSubElementInElement( @"visible", theObject );
-		NSRect		objectRect = WILDRectFromSubElementInElement( @"rect", theObject );
-		NSColor*	objectColor = WILDColorFromSubElementInElement( @"color", theObject );
+		WILDObjectID	objectID = WILDIntegerFromSubElementInElement( @"id", theObject );
+		NSInteger		objectBevel = WILDIntegerFromSubElementInElement( @"bevel", theObject );
+		NSString*		objectType = WILDStringFromSubElementInElement( @"type", theObject );
+		NSString*		objectName = WILDStringFromSubElementInElement( @"name", theObject );
+		BOOL			objectTransparent = WILDBoolFromSubElementInElement( @"transparent", theObject );
+		BOOL			objectVisible = WILDBoolFromSubElementInElement( @"visible", theObject );
+		NSRect			objectRect = WILDRectFromSubElementInElement( @"rect", theObject );
+		NSColor*		objectColor = WILDColorFromSubElementInElement( @"color", theObject );
 		
 		if( [objectType isEqualToString: @"button"] )
 		{
@@ -294,10 +298,9 @@
 }
 
 
--(NSInteger)	uniqueIDForPart
+-(WILDObjectID)	uniqueIDForPart
 {
-	NSInteger	partID = UKRandomInteger();
-	BOOL		notUnique = YES;
+	BOOL				notUnique = YES;
 	
 	while( notUnique )
 	{
@@ -305,16 +308,16 @@
 		
 		for( WILDPart* currPart in mParts )
 		{
-			if( [currPart partID] == partID )
+			if( [currPart partID] == mPartIDSeed )
 			{
 				notUnique = YES;
-				partID = UKRandomInteger();
+				mPartIDSeed++;
 				break;
 			}
 		}
 	}
 	
-	return partID;
+	return mPartIDSeed;
 }
 
 

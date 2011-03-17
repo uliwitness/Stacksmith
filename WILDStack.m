@@ -37,6 +37,8 @@
 		
 		mScript = [@"" retain];
 		
+		mCardIDSeed = 3000;
+		
 		WILDBackground*		firstBg = [[[WILDBackground alloc] initForStack: self] autorelease];
 		mBackgrounds = [[NSMutableArray alloc] initWithObjects: firstBg, nil];
 		WILDCard*			firstCard = [[[WILDCard alloc] initForStack: self] autorelease];
@@ -107,6 +109,8 @@
 			[cdDoc release];
 			[theCd release];
 		}
+		
+		mCardIDSeed = 3000;
 	}
 	
 	return self;
@@ -147,7 +151,7 @@
 }
 
 
--(WILDCard*)	cardWithID: (NSInteger)theID
+-(WILDCard*)	cardWithID: (WILDObjectID)theID
 {
 	for( WILDCard* theCd in mCards )
 	{
@@ -161,7 +165,6 @@
 
 -(WILDObjectID)	uniqueIDForCardOrBackground
 {
-	WILDObjectID	cardID = UKRandomInteger();
 	BOOL			notUnique = YES;
 	
 	while( notUnique )
@@ -170,10 +173,10 @@
 		
 		for( WILDCard* currCard in mCards )
 		{
-			if( [currCard cardID] == cardID )
+			if( [currCard cardID] == mCardIDSeed )
 			{
 				notUnique = YES;
-				cardID = UKRandomInteger();
+				mCardIDSeed++;
 				break;
 			}
 		}
@@ -182,17 +185,17 @@
 		{
 			for( WILDBackground* currBkgd in mBackgrounds )
 			{
-				if( [currBkgd backgroundID] == cardID )
+				if( [currBkgd backgroundID] == mCardIDSeed )
 				{
 					notUnique = YES;
-					cardID = UKRandomInteger();
+					mCardIDSeed++;
 					break;
 				}
 			}
 		}
 	}
 	
-	return cardID;
+	return mCardIDSeed;
 }
 
 
@@ -202,7 +205,7 @@
 }
 
 
--(WILDBackground*)	backgroundWithID: (NSInteger)theID
+-(WILDBackground*)	backgroundWithID: (WILDObjectID)theID
 {
 	for( WILDBackground* theBg in mBackgrounds )
 	{
@@ -302,7 +305,7 @@
 }
 
 
--(NSInteger)	stackID
+-(WILDObjectID)	stackID
 {
 	return mID;
 }

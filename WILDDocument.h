@@ -26,6 +26,9 @@
 	NSString			*	mLastCompactedVersion;
 	NSString			*	mFirstEditedVersion;
 	NSString			*	mLastEditedVersion;
+	
+	WILDObjectID			mMediaIDSeed;		// ID number for next new icon etc. (unless already taken, then we'll add to it until we hit a free one).
+	WILDObjectID			mStackIDSeed;		// ID number for next new stack in document (unless already taken, then we'll add to it until we hit a free one).
 }
 
 -(void)			addFont: (NSString*)fontName withID: (WILDObjectID)fontID;
