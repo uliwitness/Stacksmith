@@ -295,7 +295,7 @@
 {
 	if( !mListItems )
 	{
-		mListItems = [[mText componentsSeparatedByString: @"\n"] retain];	// +++
+		mListItems = [[mText componentsSeparatedByString: @"\n"] retain];	// TODO: Parse all kinds of line breaks.
 		//NSLog( @"%d: %@", [mListItems count], mListItems );
 	}
 	

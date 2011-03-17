@@ -73,7 +73,7 @@
 
 -(void)	writeToFolderURLIfNeeded:(NSURL *)absoluteURL
 {
-	NSData		*	fileData = [mImage TIFFRepresentation];	// +++ Handle movies, sounds etc.
+	NSData		*	fileData = [mImage TIFFRepresentation];	// TODO: Handle movies, sounds etc.
 	NSString	*	fileExtension = @"tiff";
 	if( mFilename == nil )	// New, never been saved?
 	{

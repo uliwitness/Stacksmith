@@ -36,7 +36,7 @@ void	WILDDrawAddColorBezel( NSBezierPath* inShape, NSColor* inBodyColor,
 		[shiftedPath transformUsingAffineTransform: trans];
 		[shiftedPath appendBezierPath: inShape];
 		
-		float		diagonalAngle = -45.0;	// +++ Calc actual angle
+		float		diagonalAngle = -45.0;	// TODO: Calc actual angle
 		
 		[inShape addClip];
 		NSGradient*	theGradient = [[[NSGradient alloc] initWithStartingColor: highlightColor endingColor: inBodyColor] autorelease];
