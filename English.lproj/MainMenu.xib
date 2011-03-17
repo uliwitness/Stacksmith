@@ -447,7 +447,7 @@
 								<object class="NSMenuItem" id="125944715">
 									<reference key="NSMenu" ref="789758025"/>
 									<string key="NSTitle">Delete Card</string>
-									<string key="NSKeyEquiv"/>
+									<string type="base64-UTF8" key="NSKeyEquiv">CA</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>

@@ -698,13 +698,19 @@
 	WILDCard		*	cardToDelete = [[mCurrentCard retain] autorelease];
 	WILDBackground	*	owningBackground = [cardToDelete owningBackground];
 	WILDStack		*	theStack = [mCurrentCard stack];
-	[self goNextCard: self];
-	[cardToDelete setOwningBackground: nil];
-	[owningBackground removeCard: cardToDelete];
-	[theStack removeCard: cardToDelete];
 	
-	if( ![owningBackground hasCards] )
-		[theStack removeBackground: owningBackground];
+	if( [[theStack cards] count] > 1 )
+	{
+		[self goNextCard: self];
+		[cardToDelete setOwningBackground: nil];
+		[owningBackground removeCard: cardToDelete];
+		[theStack removeCard: cardToDelete];
+		
+		if( ![owningBackground hasCards] )
+			[theStack removeBackground: owningBackground];
+	}
+	else
+		; // TODO: Show err msg. if last card.
 }
 
 

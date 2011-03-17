@@ -43,6 +43,7 @@
 -(void)				addCard: (WILDCard*)theCard;
 -(void)				removeCard: (WILDCard*)theCard;
 -(void)				addBackground: (WILDBackground*)theBg;
+-(void)				removeBackground: (WILDBackground*)theBg;
 
 -(WILDObjectID)		stackID;
 

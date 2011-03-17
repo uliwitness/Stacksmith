@@ -146,6 +146,11 @@
 }
 
 
+-(void)	removeBackground: (WILDBackground*)theBg
+{
+	[mBackgrounds removeObject: theBg];
+}
+
 -(NSArray*)	cards
 {
 	return mCards;
