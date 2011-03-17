@@ -41,6 +41,7 @@
 -(id)				initWithDocument: (WILDDocument*)owner;
 
 -(void)				addCard: (WILDCard*)theCard;
+-(void)				removeCard: (WILDCard*)theCard;
 -(void)				addBackground: (WILDBackground*)theBg;
 
 -(WILDObjectID)		stackID;

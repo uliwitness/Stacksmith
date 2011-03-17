@@ -310,7 +310,7 @@
 }
 
 
--(void)	drawAddColorPartsInLayer: (WILDBackground*)theLayer
+-(void)	drawAddColorPartsInLayer: (WILDLayer*)theLayer
 {
 	for( WILDPart* currPart in [theLayer addColorParts] )
 	{
@@ -656,14 +656,14 @@
 
 -(IBAction)	createNewButton: (id)sender
 {
-	WILDBackground	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
+	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewButton: sender];
 	[[WILDTools sharedTools] setCurrentTool: WILDButtonTool];
 }
 
 -(IBAction)	createNewField: (id)sender
 {
-	WILDBackground	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
+	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewField: sender];	
 	[[WILDTools sharedTools] setCurrentTool: WILDFieldTool];
 }
@@ -675,6 +675,7 @@
 	WILDCard		*	theNewCard = [[[WILDCard alloc] initForStack: theStack] autorelease];
 	[theNewCard setOwningBackground: owningBackground];
 	[theStack addCard: theNewCard];
+	[owningBackground addCard: theNewCard];
 	
 	[self loadCard: theNewCard];
 }
@@ -690,12 +691,21 @@
 //{
 //	
 //}
-//
-//
-//-(IBAction)	deleteCard: (id)sender
-//{
-//	
-//}
+
+
+-(IBAction)	deleteCard: (id)sender
+{
+	WILDCard		*	cardToDelete = [[mCurrentCard retain] autorelease];
+	WILDBackground	*	owningBackground = [cardToDelete owningBackground];
+	WILDStack		*	theStack = [mCurrentCard stack];
+	[self goNextCard: self];
+	[cardToDelete setOwningBackground: nil];
+	[owningBackground removeCard: cardToDelete];
+	[theStack removeCard: cardToDelete];
+	
+	if( ![owningBackground hasCards] )
+		[theStack removeBackground: owningBackground];
+}
 
 
 -(IBAction)	createNewBackground: (id)sender
@@ -705,6 +715,7 @@
 	[theStack addBackground: theNewBackground];
 	WILDCard		*	theNewCard = [[[WILDCard alloc] initForStack: theStack] autorelease];
 	[theNewCard setOwningBackground: theNewBackground];
+	[theNewBackground addCard: theNewCard];
 	[theStack addCard: theNewCard];
 	
 	[self loadCard: theNewCard];

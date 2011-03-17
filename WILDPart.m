@@ -8,7 +8,7 @@
 
 #import "WILDPart.h"
 #import "WILDXMLUtils.h"
-#import "WILDBackground.h"
+#import "WILDLayer.h"
 #import "WILDStack.h"
 #import "WILDPartContents.h"
 #import "WILDNotifications.h"
@@ -260,13 +260,13 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(void)	setPartOwner: (WILDBackground*)cardOrBg
+-(void)	setPartOwner: (WILDLayer*)cardOrBg
 {
 	mOwner = cardOrBg;
 }
 
 
--(WILDBackground*)	partOwner
+-(WILDLayer*)	partOwner
 {
 	return mOwner;
 }

@@ -43,6 +43,7 @@
 		mBackgrounds = [[NSMutableArray alloc] initWithObjects: firstBg, nil];
 		WILDCard*			firstCard = [[[WILDCard alloc] initForStack: self] autorelease];
 		[firstCard setOwningBackground: firstBg];
+		[firstBg addCard: firstCard];
 		
 		mCards = [[NSMutableArray alloc] initWithObjects: firstCard, nil];
 	}
@@ -102,7 +103,7 @@
 			NSURL*					theFileAttrURL = [[mDocument fileURL] URLByAppendingPathComponent: theFileAttr];
 			NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
 																error: nil];
-			WILDBackground*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
+			WILDLayer*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
 			
 			[self addCard: theCd];
 			
@@ -130,6 +131,12 @@
 -(void)	addCard: (WILDCard*)theCard
 {
 	[mCards addObject: theCard];
+}
+
+
+-(void)	removeCard: (WILDCard*)theCard
+{
+	[mCards removeObject: theCard];
 }
 
 
@@ -330,7 +337,7 @@
 	[theString appendFormat: @"\t<cardSize>\n\t\t<width>%d</width>\n\t\t<height>%d</height>\n\t</cardSize>\n", (int)mCardSize.width, (int)mCardSize.height];
 	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
 	
-	// Write out cards and add entries for them:
+	// Write out backgrounds and add entries for them:
 	for( WILDBackground * currBg in mBackgrounds )
 	{
 		NSString*	bgFileName = [NSString stringWithFormat: @"background_%ld.xml", [currBg backgroundID]];

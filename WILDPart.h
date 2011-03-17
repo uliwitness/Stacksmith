@@ -13,6 +13,8 @@
 
 
 @class WILDStack;
+@class WILDLayer;
+@class WILDCard;
 @class WILDBackground;
 
 
@@ -53,7 +55,7 @@
 	NSInteger			mFamily;
 	NSColor*			mFillColor;
 	NSInteger			mBevel;
-	WILDBackground*		mOwner;					// Layer that this part belongs to.
+	WILDLayer*			mOwner;					// Layer that this part belongs to.
 	WILDStack*			mStack;					// Stack this part belongs to.
 }
 
@@ -86,10 +88,10 @@
 -(NSInteger)	partNumber;
 -(NSInteger)	partNumberAmongPartsOfType: (NSString*)partType;
 
--(void)						setPartLayer: (NSString*)theLayer;
--(NSString*)				partLayer;
--(void)						setPartOwner: (WILDBackground*)cardOrBg;
--(WILDBackground*)	partOwner;
+-(void)			setPartLayer: (NSString*)theLayer;
+-(NSString*)	partLayer;
+-(void)			setPartOwner: (WILDLayer*)cardOrBg;
+-(WILDLayer*)	partOwner;
 
 -(NSFont*)				textFont;
 -(NSMutableDictionary*)	textAttributes;

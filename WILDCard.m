@@ -33,6 +33,7 @@
 		// mID is set by the superclass already.
 		NSInteger bkgdID = WILDIntegerFromSubElementInElement( @"owner", elem );
 		mOwner = [theStack backgroundWithID: bkgdID];
+		[mOwner addCard: self];
 	}
 	
 	return self;

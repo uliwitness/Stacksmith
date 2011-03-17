@@ -12,7 +12,7 @@
 #import "WILDObjectID.h"
 
 
-@interface WILDCard : WILDBackground <WILDSearchable>
+@interface WILDCard : WILDLayer <WILDSearchable>
 {
 	WILDBackground	*	mOwner;
 }
