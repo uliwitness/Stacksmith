@@ -301,6 +301,7 @@
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
+		55818A78133199AC00480D30 /* Home.xstk in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		558DC883115507EA002C9195 /* WILDCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DC882115507EA002C9195 /* WILDCardViewController.m */; };
 		558DCB5511553EAC002C9195 /* WILDButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCB5411553EAC002C9195 /* WILDButtonCell.m */; };
@@ -369,6 +370,19 @@
 			remoteInfo = stackimport;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		55818A761331999000480D30 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				55818A78133199AC00480D30 /* Home.xstk in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -704,6 +718,7 @@
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
+		55818A77133199AC00480D30 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home.xstk; sourceTree = "<group>"; };
 		558970E5118C853600F92788 /* UKIsDragStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKIsDragStart.h; path = ../UliKit/UKIsDragStart.h; sourceTree = SOURCE_ROOT; };
 		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		558DC881115507EA002C9195 /* WILDCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardViewController.h; path = Presentation/WILDCardViewController.h; sourceTree = "<group>"; };
@@ -833,6 +848,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Propaganda */ = {
 			isa = PBXGroup;
 			children = (
+				55818A77133199AC00480D30 /* Home.xstk */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
@@ -1338,6 +1354,7 @@
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
+				55818A761331999000480D30 /* CopyFiles */,
 			);
 			buildRules = (
 			);

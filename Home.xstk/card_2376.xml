@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>2376</id>
+	<filler1>0</filler1>
+	<cantDelete> <true /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>16078</owner>
+	<content>
+		<layer>background</layer>
+		<id>37</id>
+		<text>HyperCard uses the information in the field below to find your stacks.</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>24</id>
+		<text>Search Paths</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>53</id>
+		<text>Each line on this card indicates the location of a folder, including the disk name (and folder name, and subfolder names, if appropriate).  These locations are called search paths.  Each name in a search path is separated by a colon.When you tell HyperCard to open a stack, document, or application, it looks for the file you want by searching through the folders listed on this card. If HyperCard can’t find the file, it displays the directory dialog box.  Once you’ve located the file, HyperCard records the file’s location on this card.  The next time you ask for the file, HyperCard will know where to look for it.You can type folder locations on this card to tell HyperCard where to look for your files, for example:my disk:hypercard folder:my stacks:</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>49</id>
+		<highlight> <true /> </highlight>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>6</id>
+		<text>:HyperCard Stacks::More Stacks::HyperCard Help::AppleScript Stacks::Your Tour of HyperCard::HyperCard 2.4::HyperCard 2.4:HyperCard Stacks::HyperCard 2.4:More Stacks::HyperCard 2.4:HyperCard Help::HyperCard 2.4:AppleScript Stacks::HyperCard 2.4:Your Tour of HyperCard:::HyperCard Stacks:::More Stacks:::HyperCard Help:::AppleScript Stacks:::Your Tour of HyperCard:</text>
+	</content>
+	<name>Stacks</name>
+	<script></script>
+</card>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>5101</id>
+	<filler1>0</filler1>
+	<cantDelete> <true /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>2717</owner>
+	<part>
+		<id>1</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>93</left>
+			<top>259</top>
+			<right>406</right>
+			<bottom>284</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>14</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>18</textHeight>
+		<name></name>
+		<script>on mouseUp-- Requires handlers: setUserLevelFive,restoreUserLevel-- allow user to delete fieldanswer "Delete this field?" with "OK" or "Cancel" -- ∆if it is "OK" then -- ∆setUserLevelFiveselect medoMenu "Cut Field"choose browse toolrestoreUserLevelend ifend mouseUp</script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>7</id>
+		<text>Card 4</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>1</id>
+		<text>You can add your own buttons to this card.</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>178</id>
+		<text>4</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>107</id>
+		<highlight> <true /> </highlight>
+	</content>
+	<name>Card 4</name>
+	<script></script>
+</card>

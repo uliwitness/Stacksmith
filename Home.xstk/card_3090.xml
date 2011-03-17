@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>3090</id>
+	<filler1>0</filler1>
+	<cantDelete> <true /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>16078</owner>
+	<content>
+		<layer>background</layer>
+		<id>24</id>
+		<text>Search Paths</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>37</id>
+		<text>HyperCard uses the information in the field below to find your documents. </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>53</id>
+		<text>This field will be a shared field when the time is right.  In the meantime, I didn't want to copy the same text into this bkgnd field because I was afraid I might forget to make this a shared field later.  See this field on the "stacks" card for the real info.Consider this feature "under construction"</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>50</id>
+		<highlight> <true /> </highlight>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>6</id>
+		<text>:HyperCard Stacks::More Stacks::HyperCard Help::AppleScript Stacks::Your Tour of HyperCard:</text>
+	</content>
+	<name>Documents</name>
+	<script></script>
+</card>
