@@ -23,6 +23,7 @@
 #import "WILDClickablePopUpButtonLabel.h"
 #import "WILDButtonInfoWindowController.h"
 #import "WILDFieldInfoWindowController.h"
+#import "WILDPresentationConstants.h"
 
 
 @implementation WILDCardViewController
@@ -661,12 +662,14 @@
 	[[WILDTools sharedTools] setCurrentTool: WILDButtonTool];
 }
 
+
 -(IBAction)	createNewField: (id)sender
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewField: sender];	
 	[[WILDTools sharedTools] setCurrentTool: WILDFieldTool];
 }
+
 
 -(IBAction)	createNewCard: (id)sender
 {
@@ -681,16 +684,23 @@
 }
 
 
-//-(IBAction)	cutCard: (id)sender
-//{
-//	
-//}
-//
-//
-//-(IBAction)	copyCard: (id)sender
-//{
-//	
-//}
+-(IBAction)	cutCard: (id)sender
+{
+	[self copyCard: sender];
+	[self deleteCard: sender];
+}
+
+
+-(IBAction)	copyCard: (id)sender
+{
+	NSString	*	cdXmlString = [mCurrentCard xmlStringForWritingToURL: nil error: nil];
+	NSString	*	bgXmlString = [[mCurrentCard owningBackground] xmlStringForWritingToURL: nil error: nil];
+	NSPasteboard*	pb = [NSPasteboard generalPasteboard];
+	[pb clearContents];
+	[pb addTypes: [NSArray arrayWithObjects: WILDCardPboardType, WILDBackgroundPboardType, nil] owner: self];
+	[pb setString: cdXmlString forType: WILDCardPboardType];
+	[pb setString: bgXmlString forType: WILDBackgroundPboardType];
+}
 
 
 -(IBAction)	deleteCard: (id)sender

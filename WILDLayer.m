@@ -367,7 +367,7 @@
 	[theString appendFormat: @"\t<cantDelete>%@</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<dontSearch>%@</dontSearch>\n", mDontSearch ? @"<true />" : @"<false />"];
 	if( mPicture )
-		[theString appendFormat: @"\t<bitmap>%@</bitmap>\n", mPicture];
+		[theString appendFormat: @"\t<bitmap>%@</bitmap>\n", mPicture];	// TODO: Get bitmap from media and reference it from there.
 	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
 	
 	for( WILDPart* currPart in mParts )

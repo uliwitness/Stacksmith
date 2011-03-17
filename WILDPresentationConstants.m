@@ -10,3 +10,5 @@
 
 
 NSString*	WILDPartPboardType = @"com.thevoidsoftware.stacksmith.pboard-type.part";
+NSString*	WILDCardPboardType = @"com.thevoidsoftware.stacksmith.pboard-type.card";
+NSString*	WILDBackgroundPboardType = @"com.thevoidsoftware.stacksmith.pboard-type.background";
