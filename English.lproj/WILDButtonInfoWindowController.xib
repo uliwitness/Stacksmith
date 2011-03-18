@@ -63,12 +63,12 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSWindowTemplate" id="1005">
-				<int key="NSWindowStyleMask">69</int>
+				<int key="NSWindowStyleMask">5</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{196, 90}, {505, 420}}</string>
 				<int key="NSWTFlags">1618478080</int>
 				<string key="NSWindowTitle">Button Info</string>
-				<string key="NSWindowClass">NSPanel</string>
+				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<object class="NSView" key="NSWindowView" id="1006">
 					<reference key="NSNextResponder"/>
@@ -1045,7 +1045,6 @@
 												<string key="NSFrame">{{14, 10}, {474, 14}}</string>
 												<reference key="NSSuperview" ref="246352328"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView" ref="177165973"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="267933936">
 													<int key="NSCellFlags">68288064</int>

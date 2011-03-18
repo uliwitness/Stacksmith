@@ -24,6 +24,7 @@
 #import "WILDButtonInfoWindowController.h"
 #import "WILDFieldInfoWindowController.h"
 #import "WILDPresentationConstants.h"
+#import "WILDCardInfoWindowController.h"
 
 
 @implementation WILDCardViewController
@@ -630,11 +631,13 @@
 	}
 }
 
-//-(IBAction)	showCardInfoPanel: (id)sender
-//{
-//	
-//}
-//
+-(IBAction)	showCardInfoPanel: (id)sender
+{
+	WILDCardInfoWindowController*	cardInfo = [[[WILDCardInfoWindowController alloc] initWithCard: mCurrentCard ofCardView: (WILDCardView*) [self view]] autorelease];
+	[[[[[self view] window] windowController] document] addWindowController: cardInfo];
+	[cardInfo showWindow: self];
+}
+
 //-(IBAction)	showBackgroundInfoPanel: (id)sender
 //{
 //	

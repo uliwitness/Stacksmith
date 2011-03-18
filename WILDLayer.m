@@ -18,6 +18,10 @@
 
 @implementation WILDLayer
 
+@synthesize name = mName;
+@synthesize dontSearch = mDontSearch;
+@synthesize cantDelete = mCantDelete;
+
 -(id)	initForStack: (WILDStack*)theStack
 {
 	if(( self = [super init] ))

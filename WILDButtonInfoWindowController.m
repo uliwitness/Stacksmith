@@ -104,6 +104,31 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 }
 
 
+-(BOOL)	window: (NSWindow *)window shouldPopUpDocumentPathMenu: (NSMenu *)menu
+{
+	// Make sure the former top item (pointing to the file) selects the main doc window:
+	NSMenuItem*		fileItem = [menu itemAtIndex: 0];
+	[fileItem setTarget: [[[[self document] windowControllers] objectAtIndex: 0] window]];
+	[fileItem setAction: @selector(makeKeyAndOrderFront:)];
+	
+	// Now add a new item above that for this window, the script:
+	NSMenuItem*		newItem = [menu insertItemWithTitle: [NSString stringWithFormat: @"%1$@ Info", [mPart displayName]]
+											action: nil keyEquivalent: @"" atIndex: 0];
+	[newItem setImage: [mPart displayIcon]];
+	
+	return YES;
+}
+
+
+-(void) setDocument: (NSDocument *)document
+{
+	[super setDocument: document];
+	
+	NSButton*	btn = [[self window] standardWindowButton: NSWindowDocumentIconButton];
+	[btn setImage: [mPart displayIcon]];
+}
+
+
 -(IBAction)	showWindow: (id)sender
 {
 	NSWindow*	theWindow = [self window];

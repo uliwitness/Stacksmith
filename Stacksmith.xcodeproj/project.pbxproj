@@ -324,6 +324,8 @@
 		55C2B5CA115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */; };
 		55C2B647115E5780008B094D /* WILDSearchContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* WILDSearchContext.m */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
+		55C88B011332CDA300ACB615 /* WILDCardInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */; };
+		55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */; };
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
@@ -760,6 +762,9 @@
 		55C2B69B115EA2CD008B094D /* NSView+SizeWindowForViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSView+SizeWindowForViewSize.h"; path = "../UliKit/NSView+SizeWindowForViewSize.h"; sourceTree = SOURCE_ROOT; };
 		55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSView+SizeWindowForViewSize.m"; path = "../UliKit/NSView+SizeWindowForViewSize.m"; sourceTree = SOURCE_ROOT; };
 		55C68C9D116413E300D8B44C /* svn_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svn_version.h; sourceTree = "<group>"; };
+		55C88AFF1332CDA300ACB615 /* WILDCardInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardInfoWindowController.h; sourceTree = "<group>"; };
+		55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardInfoWindowController.m; sourceTree = "<group>"; };
+		55C88B031332D05B00ACB615 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDCardInfoWindowController.xib; sourceTree = "<group>"; };
 		55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardWindowController.h; path = Document/WILDCardWindowController.h; sourceTree = "<group>"; };
 		55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardWindowController.m; path = Document/WILDCardWindowController.m; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -908,6 +913,7 @@
 				55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */,
 				55B9223C1167532A0073EC6C /* WILDButtonInfoWindowController.xib */,
 				55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */,
+				55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */,
 				551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
@@ -969,6 +975,8 @@
 				55382F6C117238B10006B381 /* WILDFieldInfoWindowController.m */,
 				55B924481169DB150073EC6C /* WILDIconListDataSource.h */,
 				55B924491169DB150073EC6C /* WILDIconListDataSource.m */,
+				55C88AFF1332CDA300ACB615 /* WILDCardInfoWindowController.h */,
+				55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -1703,6 +1711,7 @@
 				551B3E83131D957700BFCD45 /* WILDLicensePanelController.xib in Resources */,
 				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
 				55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */,
+				55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1786,6 +1795,7 @@
 				55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */,
 				55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */,
 				55818A8F1332108300480D30 /* WILDBackground.m in Sources */,
+				55C88B011332CDA300ACB615 /* WILDCardInfoWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1870,6 +1880,14 @@
 				55B92239116753180073EC6C /* English */,
 			);
 			name = WILDButtonInfoWindowController.xib;
+			sourceTree = "<group>";
+		};
+		55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55C88B031332D05B00ACB615 /* English */,
+			);
+			name = WILDCardInfoWindowController.xib;
 			sourceTree = "<group>";
 		};
 		55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */ = {

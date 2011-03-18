@@ -37,6 +37,10 @@
 	WILDObjectID				mPartIDSeed;
 }
 
+@property (copy) NSString*	name;
+@property (assign) BOOL		dontSearch;
+@property (assign) BOOL		cantDelete;
+
 -(id)							initForStack: (WILDStack*)theStack;
 -(id)							initWithXMLDocument: (NSXMLDocument*)elem
 										forStack: (WILDStack*)theStack;
