@@ -298,7 +298,7 @@
 		
 		if( [event clickCount] == 2 && mSelected )
 		{
-			NSWindow*	infoController = nil;
+			NSWindowController*	infoController = nil;
 			if( [[mPart partType] isEqualToString: @"button"] )
 				infoController = [[WILDButtonInfoWindowController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 			else
