@@ -483,7 +483,9 @@
 {
 	WILDPartContents	*	contents = [self currentPartContentsAndBackgroundContents: nil];
 	
+	[contents setStyledText: [mMainView textStorage]];
 	
+	[mPart updateChangeCount: NSChangeDone];
 }
 
 
@@ -1045,19 +1047,8 @@
 {
 	WILDCardView*		winView = [self enclosingCardView];
 	WILDCard*			theCd = [winView card];
-	WILDBackground*		theBg = [theCd owningBackground];
-	WILDPartContents*	contents = nil;
-	WILDPartContents*	bgContents = nil;
-	bgContents = [theBg contentsForPart: mPart];
-	if( [mPart sharedText] )
-		contents = bgContents;
-	else
-		contents = mIsBackgroundEditing ? nil : [theCd contentsForPart: mPart];
 	
-	if( outBgContents )
-		*outBgContents = bgContents;
-	
-	return contents;
+	return [mPart currentPartContentsAndBackgroundContents: outBgContents onCard: theCd forBackgroundEditing: mIsBackgroundEditing];
 }
 
 

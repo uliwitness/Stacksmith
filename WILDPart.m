@@ -803,6 +803,24 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
+-(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents onCard: (WILDCard*)inCard forBackgroundEditing: (BOOL)isBgEditing
+{
+	WILDBackground*		theBg = [inCard owningBackground];
+	WILDPartContents*	contents = nil;
+	WILDPartContents*	bgContents = nil;
+	bgContents = [theBg contentsForPart: self];
+	if( [self sharedText] )
+		contents = bgContents;
+	else
+		contents = isBgEditing ? nil : [inCard contentsForPart: self];
+	
+	if( outBgContents )
+		*outBgContents = bgContents;
+	
+	return contents;
+}
+
+
 -(NSString*)	xmlString
 {
 	NSMutableString*	outString = [[[NSMutableString alloc] init] autorelease];

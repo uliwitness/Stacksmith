@@ -168,6 +168,12 @@
 }
 
 
+-(void)	setStyledText: (NSAttributedString*)inString
+{
+	ASSIGN(mStyledText,inString);
+}
+
+
 -(NSAttributedString*)	styledTextForPart: (WILDPart*)currPart
 {
 	if( !mStyledText )
@@ -285,7 +291,7 @@
 }
 
 
--(void)					setHighlighted: (BOOL)inState
+-(void)	setHighlighted: (BOOL)inState
 {
 	mHighlighted = inState;
 }
@@ -316,6 +322,7 @@
 
 	[outString appendFormat: @"\t\t<highlight>%@</highlight>\n", mHighlighted ? @"<true />" : @"<false />"];
 	
+	// TODO: Rebuild mStyles based on NSAttributedString in mStyledText.
 	for( WILDStyleRun* theStyle in mStyles )
 	{
 		[outString appendString: [theStyle xmlString]];

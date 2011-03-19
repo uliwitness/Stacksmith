@@ -31,6 +31,8 @@
 -(NSString*)			text;
 -(void)					setText: (NSString*)inString;	// Nukes any styles and list item caches that may be there.
 -(NSAttributedString*)	styledTextForPart: (WILDPart*)currPart;	// May return NIL.
+-(void)	setStyledText: (NSAttributedString*)inString;
+
 -(NSString*)			partLayer;
 -(WILDObjectID)			partID;
 -(BOOL)					highlighted;
