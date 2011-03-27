@@ -42,6 +42,18 @@
 			<key>NSDocumentClass</key>
 			<string>WILDDocument</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>StacksmithLicense</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Stack</string>
+			<key>CFBundleTypeName</key>
+			<string>Stacksmith License Key</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
@@ -99,7 +111,7 @@
 			<key>UTTypeIconFile</key>
 			<string>MikeYencoHyperCardStack</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.thevoidsoftware.propaganda.stack</string>
+			<string>com.thevoidsoftware.stacksmith.stack</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

@@ -372,6 +372,13 @@
 			remoteGlobalIDString = 8DD76F620486A84900D96B5E;
 			remoteInfo = stackimport;
 		};
+		55E23BFF133FAC0200E6B444 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55E23BF4133FAB9E00E6B444;
+			remoteInfo = BuildVersionHeader;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -770,6 +777,7 @@
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D6B257115C16E700D17619 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDTextView.h; sourceTree = "<group>"; };
 		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
+		55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BuildVersionHeader; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E397E61322481500C3739D /* WILDObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectID.h; path = Model/WILDObjectID.h; sourceTree = "<group>"; };
 		55E397E71322520700C3739D /* NSFileManager+NameForTempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+NameForTempFile.h"; path = "../UliKit/NSFileManager+NameForTempFile.h"; sourceTree = "<group>"; };
 		55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+NameForTempFile.m"; path = "../UliKit/NSFileManager+NameForTempFile.m"; sourceTree = "<group>"; };
@@ -849,6 +857,7 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Stacksmith.app */,
+				55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1359,11 +1368,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55E23BFB133FAB9E00E6B444 /* Build configuration list for PBXNativeTarget "BuildVersionHeader" */;
+			buildPhases = (
+				55E23BFE133FABBB00E6B444 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BuildVersionHeader;
+			productName = BuildVersionHeader;
+			productReference = 55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */;
+			productType = "com.apple.product-type.tool";
+		};
 		8D15AC270486D014006FF6A4 /* Stacksmith */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Stacksmith" */;
 			buildPhases = (
-				55C68C7D116412A700D8B44C /* git_version */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
@@ -1373,6 +1396,7 @@
 			);
 			dependencies = (
 				55A0BDCD113B68250095CAA6 /* PBXTargetDependency */,
+				55E23C00133FAC0200E6B444 /* PBXTargetDependency */,
 			);
 			name = Stacksmith;
 			productInstallPath = "$(HOME)/Applications";
@@ -1407,6 +1431,7 @@
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Stacksmith */,
+				55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */,
 			);
 		};
 /* End PBXProject section */
@@ -1718,14 +1743,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		55C68C7D116412A700D8B44C /* git_version */ = {
+		55E23BFE133FABBB00E6B444 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = git_version;
 			outputPaths = (
 				svn_version.h,
 				"Stacksmith-Info.plist",
@@ -1806,6 +1830,11 @@
 			isa = PBXTargetDependency;
 			name = stackimport;
 			targetProxy = 55A0BDCC113B68250095CAA6 /* PBXContainerItemProxy */;
+		};
+		55E23C00133FAC0200E6B444 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */;
+			targetProxy = 55E23BFF133FAC0200E6B444 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1901,6 +1930,37 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		55E23BFC133FAB9E00E6B444 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		55E23BFD133FAB9E00E6B444 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		C05733C808A9546B00998B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1912,6 +1972,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Stacksmith_Prefix.pch;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "DEBUG=1";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1952,6 +2013,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Stacksmith_Prefix.pch;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "DEBUG=0";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -2014,6 +2076,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		55E23BFB133FAB9E00E6B444 /* Build configuration list for PBXNativeTarget "BuildVersionHeader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55E23BFC133FAB9E00E6B444 /* Debug */,
+				55E23BFD133FAB9E00E6B444 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Stacksmith" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

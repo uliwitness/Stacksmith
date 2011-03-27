@@ -20,10 +20,14 @@
 @property (retain,nonatomic) IBOutlet NSTextField	*	licenseTextField;
 @property (retain,nonatomic) IBOutlet NSButton		*	OKButton;
 
++(WILDLicensePanelController*)	currentLicensePanelController;	// Returns NIL if no license panel is currently open.
+
 -(NSInteger)	runModal;
 
 -(IBAction)	doOK: (id)sender;
 -(IBAction)	doCancel: (id)sender;
+
+-(void)	setLicenseKeyString: (NSString*)inLicenseKey;
 
 -(void)	updateLicenseKeyButtonEnableState;
 
