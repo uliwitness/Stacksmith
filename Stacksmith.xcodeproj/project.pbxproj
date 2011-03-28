@@ -2000,6 +2000,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = "Stacksmith-Info.plist";
+				INFOPLIST_PREFIX_HEADER = svn_version.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Stacksmith;
@@ -2041,6 +2042,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = "Stacksmith-Info.plist";
+				INFOPLIST_PREFIX_HEADER = svn_version.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Stacksmith;
