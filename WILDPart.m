@@ -48,24 +48,24 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
 		mStyle = [WILDStringFromSubElementInElement( @"style", elem ) retain];
 		mType = [WILDStringFromSubElementInElement( @"type", elem ) retain];
-		mVisible = (!elem) ? YES : WILDBoolFromSubElementInElement( @"visible", elem );
-		mDontWrap = WILDBoolFromSubElementInElement( @"dontWrap", elem );
-		mDontSearch = WILDBoolFromSubElementInElement( @"dontSearch", elem );
-		mSharedText = WILDBoolFromSubElementInElement( @"sharedText", elem );
-		mFixedLineHeight = WILDBoolFromSubElementInElement( @"fixedLineHeight", elem );
-		mAutoTab = WILDBoolFromSubElementInElement( @"autoTab", elem );
-		mLockText = WILDBoolFromSubElementInElement( @"lockText", elem );
-		mAutoSelect = WILDBoolFromSubElementInElement( @"autoSelect", elem );
-		mShowLines = WILDBoolFromSubElementInElement( @"showLines", elem );
-		mAutoHighlight = WILDBoolFromSubElementInElement( @"autoHighlight", elem );
-		mWideMargins = WILDBoolFromSubElementInElement( @"wideMargins", elem );
-		mMultipleLines = WILDBoolFromSubElementInElement( @"multipleLines", elem );
-		mShowName = WILDBoolFromSubElementInElement( @"showName", elem );
+		mVisible = (!elem) ? YES : WILDBoolFromSubElementInElement( @"visible", elem, YES );
+		mDontWrap = WILDBoolFromSubElementInElement( @"dontWrap", elem, NO );
+		mDontSearch = WILDBoolFromSubElementInElement( @"dontSearch", elem, NO );
+		mSharedText = WILDBoolFromSubElementInElement( @"sharedText", elem, NO );
+		mFixedLineHeight = WILDBoolFromSubElementInElement( @"fixedLineHeight", elem, NO );
+		mAutoTab = WILDBoolFromSubElementInElement( @"autoTab", elem, NO );
+		mLockText = WILDBoolFromSubElementInElement( @"lockText", elem, NO );
+		mAutoSelect = WILDBoolFromSubElementInElement( @"autoSelect", elem, NO );
+		mShowLines = WILDBoolFromSubElementInElement( @"showLines", elem, NO );
+		mAutoHighlight = WILDBoolFromSubElementInElement( @"autoHighlight", elem, NO );
+		mWideMargins = WILDBoolFromSubElementInElement( @"wideMargins", elem, NO );
+		mMultipleLines = WILDBoolFromSubElementInElement( @"multipleLines", elem, NO );
+		mShowName = WILDBoolFromSubElementInElement( @"showName", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
 		mSelectedLines = [WILDIndexSetFromSubElementInElement( @"selectedLines", elem, -1 ) retain];
 		mTitleWidth = WILDIntegerFromSubElementInElement( @"titleWidth", elem );
-		mHighlight = WILDBoolFromSubElementInElement( @"highlight", elem );
-		mSharedHighlight = WILDBoolFromSubElementInElement( @"sharedHighlight", elem );
-		mEnabled = WILDBoolFromSubElementInElement( @"enabled", elem );
+		mHighlight = WILDBoolFromSubElementInElement( @"highlight", elem, NO );
+		mSharedHighlight = WILDBoolFromSubElementInElement( @"sharedHighlight", elem, YES );
+		mEnabled = WILDBoolFromSubElementInElement( @"enabled", elem, YES );
 		mFamily = WILDIntegerFromSubElementInElement( @"family", elem );
 		
 		NSString*		alignStr = WILDStringFromSubElementInElement( @"textAlign", elem );
@@ -842,6 +842,18 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[outString appendFormat: @"\t\t<family>%d</family>\n", mFamily];
 	[outString appendFormat: @"\t\t<titleWidth>%d</titleWidth>\n", mTitleWidth];
 	[outString appendFormat: @"\t\t<icon>%ld</icon>\n", mIconID];
+
+	[outString appendFormat: @"\t\t<dontWrap>%@</dontWrap>\n", (mDontWrap ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<dontSearch>%@</dontSearch>\n", (mDontSearch ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<sharedText>%@</sharedText>\n", (mSharedText ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<fixedLineHeight>%@</fixedLineHeight>\n", (mFixedLineHeight ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<autoTab>%@</autoTab>\n", (mAutoTab ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<lockText>%@</lockText>\n", (mLockText ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<autoSelect>%@</autoSelect>\n", (mAutoSelect ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<multipleLines>%@</multipleLines>\n", (mMultipleLines ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<showLines>%@</showLines>\n", (mShowLines ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<wideMargins>%@</wideMargins>\n", (mWideMargins ? @"<true />" : @"<false />")];
+
 	NSString*	textAlignment = @"left";
 	if( mTextAlignment == NSCenterTextAlignment )
 		textAlignment = @"center";

@@ -37,7 +37,7 @@
 		mOwner = [theStack backgroundWithID: bkgdID];
 		[mOwner addCard: self];
 		
-		mMarked = WILDBoolFromSubElementInElement( @"marked", elem );
+		mMarked = WILDBoolFromSubElementInElement( @"marked", elem, NO );
 	}
 	
 	return self;

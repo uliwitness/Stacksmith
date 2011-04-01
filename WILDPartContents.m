@@ -92,7 +92,7 @@
 		mText = [WILDStringFromSubElementInElement( @"text", theElem ) retain];
 		mID = WILDIntegerFromSubElementInElement( @"id", theElem );
 		mLayer = [WILDStringFromSubElementInElement( @"layer", theElem ) retain];
-		mHighlighted = WILDBoolFromSubElementInElement( @"highlight", theElem );
+		mHighlighted = WILDBoolFromSubElementInElement( @"highlight", theElem, NO );
 		
 		// Style runs contain their start offsets, so we apply them from the end,
 		//	to be able to start with the length as the end offset, and then just

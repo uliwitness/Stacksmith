@@ -76,6 +76,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mAutoTabSwitch setState: [mPart autoTab]];
 	[mDontSearchSwitch setState: [mPart dontSearch]];
 	[mSharedTextSwitch setState: [mPart sharedText]];
+	[mSharedTextSwitch setEnabled: [[mPart partLayer] isEqualToString: @"background"]];
 	[mEnabledSwitch setState: [mPart isEnabled]];
 	[mVisibleSwitch setState: [mPart visible]];
 	

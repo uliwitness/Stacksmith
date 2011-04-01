@@ -58,9 +58,9 @@
 		mID = WILDIntegerFromSubElementInElement( @"id", elem );
 		mName = [WILDStringFromSubElementInElement( @"name", elem ) retain];
 		
-		mShowPict = WILDBoolFromSubElementInElement( @"showPict", elem );
-		mCantDelete = WILDBoolFromSubElementInElement( @"cantDelete", elem );
-		mDontSearch = WILDBoolFromSubElementInElement( @"dontSearch", elem );
+		mShowPict = WILDBoolFromSubElementInElement( @"showPict", elem, YES );
+		mCantDelete = WILDBoolFromSubElementInElement( @"cantDelete", elem, NO );
+		mDontSearch = WILDBoolFromSubElementInElement( @"dontSearch", elem, NO );
 		
 		mStack = theStack;
 		mPicture = [WILDStringFromSubElementInElement( @"bitmap", elem ) retain];
@@ -234,8 +234,8 @@
 		NSInteger		objectBevel = WILDIntegerFromSubElementInElement( @"bevel", theObject );
 		NSString*		objectType = WILDStringFromSubElementInElement( @"type", theObject );
 		NSString*		objectName = WILDStringFromSubElementInElement( @"name", theObject );
-		BOOL			objectTransparent = WILDBoolFromSubElementInElement( @"transparent", theObject );
-		BOOL			objectVisible = WILDBoolFromSubElementInElement( @"visible", theObject );
+		BOOL			objectTransparent = WILDBoolFromSubElementInElement( @"transparent", theObject, NO );
+		BOOL			objectVisible = WILDBoolFromSubElementInElement( @"visible", theObject, YES );
 		NSRect			objectRect = WILDRectFromSubElementInElement( @"rect", theObject );
 		NSColor*		objectColor = WILDColorFromSubElementInElement( @"color", theObject );
 		

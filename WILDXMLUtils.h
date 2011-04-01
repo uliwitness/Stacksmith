@@ -12,7 +12,7 @@
 NSString*			WILDStringFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSMutableArray*		WILDStringsFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSMutableArray*		WILDIntegersFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
-BOOL				WILDBoolFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
+BOOL				WILDBoolFromSubElementInElement( NSString* elemName, NSXMLElement* elem, BOOL defaultValue );
 NSInteger			WILDIntegerFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSSize				WILDSizeFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSRect				WILDRectFromSubElementInElement( NSString* elemName, NSXMLElement* elem );

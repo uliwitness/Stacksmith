@@ -63,11 +63,11 @@
 		
 		mUserLevel = WILDIntegerFromSubElementInElement( @"userLevel", elem );
 		
-		mCantModify = WILDBoolFromSubElementInElement( @"cantModify", elem );
-		mCantDelete = WILDBoolFromSubElementInElement( @"cantDelete", elem );
-		mPrivateAccess = WILDBoolFromSubElementInElement( @"privateAccess", elem );
-		mCantAbort = WILDBoolFromSubElementInElement( @"cantAbort", elem );
-		mCantPeek = WILDBoolFromSubElementInElement( @"cantPeek", elem );
+		mCantModify = WILDBoolFromSubElementInElement( @"cantModify", elem, NO );
+		mCantDelete = WILDBoolFromSubElementInElement( @"cantDelete", elem, NO );
+		mPrivateAccess = WILDBoolFromSubElementInElement( @"privateAccess", elem, NO );
+		mCantAbort = WILDBoolFromSubElementInElement( @"cantAbort", elem, NO );
+		mCantPeek = WILDBoolFromSubElementInElement( @"cantPeek", elem, NO );
 		
 		mCardSize = WILDSizeFromSubElementInElement( @"cardSize", elem );
 		

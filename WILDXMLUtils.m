@@ -18,11 +18,11 @@ NSString*	WILDStringFromSubElementInElement( NSString* elemName, NSXMLElement* e
 }
 
 
-BOOL	WILDBoolFromSubElementInElement( NSString* elemName, NSXMLElement* elem )
+BOOL	WILDBoolFromSubElementInElement( NSString* elemName, NSXMLElement* elem, BOOL defaultValue )
 {
 	NSArray*	items = [elem elementsForName: elemName];
 	if( [items count] < 1 )
-		return NO;
+		return defaultValue;
 	NSXMLElement*	container = [items objectAtIndex: 0];
 	NSString*		tagName = [[container childAtIndex: 0] name];
 	
