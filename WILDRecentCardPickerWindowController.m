@@ -82,8 +82,8 @@
 	[super windowDidLoad];
 	
 	WILDRecentCardsList	*	rcc = [WILDRecentCardsList sharedRecentCardsList];
-	NSUInteger	numCards = [rcc count];
-	for( NSUInteger x = 0; x < numCards; x++ )
+	NSInteger				numCards = [rcc count];
+	for( NSInteger x = (numCards -1); x >= 0; x-- )
 	{
 		WILDRecentCardListItem	* rcli = [[WILDRecentCardListItem alloc] init];
 		[rcli setThumbnail: [rcc thumbnailForCardAtIndex: x]];
@@ -91,6 +91,15 @@
 		[mRecentCardsList addObject: rcli];
 		[rcli release];
 	}
+	
+	CGFloat		numItemsPerRow = sqrt(numCards);
+	if( numItemsPerRow < 4 )
+		numItemsPerRow = 4;
+	CGFloat		theWidth = [mRecentCardsListView bounds].size.width -15;
+	theWidth -= [mRecentCardsListView intercellSpacing].width * (numItemsPerRow + 2);
+	theWidth /= numItemsPerRow;
+	[mRecentCardsListView setCellSize: NSMakeSize(theWidth,(theWidth/4.0)*3.0)];
+	
 	[mRecentCardsListView reloadData];
 }
 
@@ -117,6 +126,20 @@
 -(id /*IKImageBrowserItem*/) imageBrowser: (IKImageBrowserView *) aBrowser itemAtIndex: (NSUInteger)itemIdx
 {
 	return [mRecentCardsList objectAtIndex: itemIdx];
+}
+
+
+-(void) imageBrowserSelectionDidChange: (IKImageBrowserView *)aBrowser
+{
+	NSUInteger	selectedIdx = [[mRecentCardsListView selectionIndexes] firstIndex];
+	if( selectedIdx != NSNotFound )
+	{
+		WILDCard*	theCard = [[mRecentCardsList objectAtIndex: selectedIdx] card];
+		[mCardViewController loadCard: theCard];
+	}
+	
+	[[self window] orderOutWithZoomEffectToRect: NSZeroRect];
+	[self close];
 }
 
 @end
