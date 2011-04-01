@@ -130,7 +130,7 @@
 }
 
 
--(BOOL)	writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
+- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error:(NSError **)outError
 {
 	if( ![[NSFileManager defaultManager] fileExistsAtPath: [absoluteURL path]] )
 	{
@@ -167,7 +167,8 @@
 	{
 		if( ![currMedia isBuiltIn] )
 		{
-			[currMedia writeToFolderURLIfNeeded: absoluteURL];
+			if( ![currMedia writeToFolderURLIfNeeded: absoluteURL withOriginalFolderURL: absoluteOriginalContentsURL] )
+				return NO;
 			[tocXmlString appendString: [currMedia xmlString]];
 		}
 	}
