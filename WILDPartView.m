@@ -481,7 +481,7 @@
 
 -(void)	textDidChange: (NSNotification *)notification
 {
-	WILDPartContents	*	contents = [self currentPartContentsAndBackgroundContents: nil];
+	WILDPartContents	*	contents = [self currentPartContentsAndBackgroundContents: nil create: YES];
 	
 	[contents setStyledText: [mMainView textStorage]];
 	
@@ -1034,7 +1034,7 @@
 	mIsBackgroundEditing = backgroundEditMode;
 	mPart = currPart;
 	
-	contents = [self currentPartContentsAndBackgroundContents: &bgContents];
+	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO];
 	
 	if( [[currPart partType] isEqualToString: @"button"] )
 		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
@@ -1043,12 +1043,12 @@
 }
 
 
--(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents
+-(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents create: (BOOL)inDoCreate
 {
 	WILDCardView*		winView = [self enclosingCardView];
 	WILDCard*			theCd = [winView card];
 	
-	return [mPart currentPartContentsAndBackgroundContents: outBgContents onCard: theCd forBackgroundEditing: mIsBackgroundEditing];
+	return [mPart currentPartContentsAndBackgroundContents: outBgContents create: inDoCreate onCard: theCd forBackgroundEditing: mIsBackgroundEditing];
 }
 
 

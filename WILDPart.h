@@ -150,7 +150,7 @@
 -(WILDStack*)	stack;
 -(void)			updateChangeCount: (NSDocumentChangeType)inChange;
 
--(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents onCard: (WILDCard*)inCard forBackgroundEditing: (BOOL)isBgEditing;
+-(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents create: (BOOL)inDoCreate onCard: (WILDCard*)inCard forBackgroundEditing: (BOOL)isBgEditing;
 
 -(void)	updateViewOnClick: (NSView*)sender withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground;
 

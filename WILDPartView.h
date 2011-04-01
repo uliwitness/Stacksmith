@@ -61,7 +61,7 @@ typedef enum
 
 -(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect;
 
--(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents;
+-(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents create: (BOOL)inDoCreate;
 
 -(NSRect)	frameInScreenCoordinates;
 

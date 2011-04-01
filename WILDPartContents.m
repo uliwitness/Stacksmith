@@ -171,6 +171,7 @@
 -(void)	setStyledText: (NSAttributedString*)inString
 {
 	ASSIGN(mStyledText,inString);
+	ASSIGN(mText,[inString string]);
 }
 
 

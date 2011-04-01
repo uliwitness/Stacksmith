@@ -803,16 +803,16 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents onCard: (WILDCard*)inCard forBackgroundEditing: (BOOL)isBgEditing
+-(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents create: (BOOL)inDoCreate onCard: (WILDCard*)inCard forBackgroundEditing: (BOOL)isBgEditing
 {
 	WILDBackground*		theBg = [inCard owningBackground];
 	WILDPartContents*	contents = nil;
 	WILDPartContents*	bgContents = nil;
-	bgContents = [theBg contentsForPart: self];
+	bgContents = [theBg contentsForPart: self create: inDoCreate];
 	if( [self sharedText] )
 		contents = bgContents;
 	else
-		contents = isBgEditing ? nil : [inCard contentsForPart: self];
+		contents = isBgEditing ? nil : [inCard contentsForPart: self create: inDoCreate];
 	
 	if( outBgContents )
 		*outBgContents = bgContents;
