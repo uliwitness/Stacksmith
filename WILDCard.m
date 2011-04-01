@@ -37,7 +37,7 @@
 		mOwner = [theStack backgroundWithID: bkgdID];
 		[mOwner addCard: self];
 		
-		mMarked = WILDBoolFromSubElementInElement( @"marked", elem, NO );
+		mMarked = WILDBoolFromSubElementInElement( @"marked", elem, NO );	// Only used for copy/paste. In the file, the canonical copy of the marked state is kept in the stack's card list!
 	}
 	
 	return self;
@@ -213,7 +213,7 @@
 	[super appendInnerXmlToString: theString];
 	
 	[theString appendFormat: @"\t<owner>%ld</owner>\n", [mOwner backgroundID]];
-	[theString appendFormat: @"\t<marked>%@</marked>\n", (mMarked ? @"<true />" : @"<false />")];
+	[theString appendFormat: @"\t<marked>%@</marked>\n", (mMarked ? @"<true />" : @"<false />")];	// Only used for copy/paste. The canonical value for the "marked" property is kept in the stack's card list.
 }
 
 @end

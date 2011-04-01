@@ -47,6 +47,7 @@
 		[firstBg addCard: firstCard];
 		
 		mCards = [[NSMutableArray alloc] initWithObjects: firstCard, nil];
+		mMarkedCards = [[NSMutableSet alloc] init];
 	}
 	
 	return self;
@@ -75,8 +76,9 @@
 		
 		mDocument = theDocument;
 		
-		mCards = [[NSMutableArray alloc] init];
 		mBackgrounds = [[NSMutableArray alloc] init];
+		mCards = [[NSMutableArray alloc] init];
+		mMarkedCards = [[NSMutableSet alloc] init];
 
 		// Load backgrounds:
 		NSArray			*	backgrounds = [elem elementsForName: @"background"];
@@ -100,13 +102,15 @@
 		for( NSXMLElement* theCdElem in cards )
 		{
 			NSXMLNode*				theFileAttrNode = [theCdElem attributeForName: @"file"];
+			NSXMLNode*				theMarkedAttrNode = [theCdElem attributeForName: @"marked"];
+			BOOL					isMarked = [[theMarkedAttrNode stringValue] isEqualToString: @"true"];
 			NSString*				theFileAttr = [theFileAttrNode stringValue];
 			NSURL*					theFileAttrURL = [[mDocument fileURL] URLByAppendingPathComponent: theFileAttr];
 			NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
 																error: nil];
 			WILDLayer*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
-			
 			[self addCard: theCd];
+			[self setMarked: isMarked forCard: theCd];
 			
 			[cdDoc release];
 			[theCd release];
@@ -128,6 +132,7 @@
 
 	DESTROY(mBackgrounds);
 	DESTROY(mCards);
+	DESTROY(mMarkedCards);
 	DESTROY(mScript);
 	
 	[super dealloc];
@@ -137,12 +142,25 @@
 -(void)	addCard: (WILDCard*)theCard
 {
 	[mCards addObject: theCard];
+	if( [theCard marked] )
+		[self setMarked: YES forCard: theCard];
 }
 
 
 -(void)	removeCard: (WILDCard*)theCard
 {
 	[mCards removeObject: theCard];
+	[mMarkedCards removeObject: theCard];
+}
+
+
+-(void)	setMarked: (BOOL)isMarked forCard: (WILDCard*)inCard
+{
+	[inCard setMarked: isMarked];
+	if( isMarked )
+		[mMarkedCards addObject: inCard];
+	else
+		[mMarkedCards removeObject: inCard];
 }
 
 
@@ -160,12 +178,6 @@
 -(NSArray*)	cards
 {
 	return mCards;
-}
-
-
--(void)	setCards: (NSArray*)theCards
-{
-	ASSIGNMUTABLECOPY(mCards,theCards);
 }
 
 
@@ -365,7 +377,9 @@
 		NSURL	*	cdURL = [packageURL URLByAppendingPathComponent: cdFileName];
 		if( ![[currCd xmlStringForWritingToURL: packageURL error: outError] writeToURL: cdURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
-		[theString appendFormat: @"\t<card id=\"%ld\" file=\"%@\" />\n", [currCd cardID], WILDStringEscapedForXML(cdFileName)];
+		[theString appendFormat: @"\t<card id=\"%ld\" file=\"%@\" marked=\"%@\" />\n",
+							[currCd cardID], WILDStringEscapedForXML(cdFileName),
+		 					([mMarkedCards containsObject: currCd] ? @"true" : @"false")];
 	}
 	
 	[theString appendString: @"</stack>\n"];

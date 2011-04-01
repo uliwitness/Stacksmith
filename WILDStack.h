@@ -23,6 +23,7 @@
 {
 	NSMutableArray*			mBackgrounds;		// List of all backgrounds in this stack.
 	NSMutableArray*			mCards;				// List of all cards in this stack.
+	NSMutableSet*			mMarkedCards;		// List of all cards whose "marked" property has been set.
 	NSString*				mScript;			// Script of this stack.
 	NSSize					mCardSize;			// Size of cards in this stack.
 	BOOL					mCantPeek;			// Do we prevent "peeking" of button rects using Cmd-Option?
@@ -42,6 +43,7 @@
 
 -(void)				addCard: (WILDCard*)theCard;
 -(void)				removeCard: (WILDCard*)theCard;
+-(void)				setMarked: (BOOL)isMarked forCard: (WILDCard*)inCard;
 -(void)				addBackground: (WILDBackground*)theBg;
 -(void)				removeBackground: (WILDBackground*)theBg;
 
@@ -51,7 +53,6 @@
 -(WILDObjectID)		uniqueIDForMedia;
 
 -(NSArray*)			cards;
--(void)				setCards: (NSArray*)theCards;	// For use by loading code to generate an ordered card list.
 -(WILDCard*)		cardWithID: (WILDObjectID)theID;
 
 -(void)				setBackgrounds: (NSArray*)theBkgds;

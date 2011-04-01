@@ -18,7 +18,7 @@
 	BOOL				mMarked;
 }
 
-@property (assign) BOOL	marked;
+@property (assign) BOOL	marked;	// Don't set directly, ask the stack to do so.
 
 -(id)						initWithXMLDocument: (NSXMLElement*)elem forStack: (WILDStack*)theStack;
 
