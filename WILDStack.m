@@ -12,6 +12,7 @@
 #import "WILDCard.h"
 #import "WILDStack.h"
 #import "UKRandomInteger.h"
+#import "WILDRecentCardsList.h"
 #import <QTKit/QTKit.h>
 
 
@@ -120,6 +121,11 @@
 
 -(void)	dealloc
 {
+	for( WILDCard * currCard in mCards )
+	{
+		[[WILDRecentCardsList sharedRecentCardsList] removeCard: currCard];
+	}
+
 	DESTROY(mBackgrounds);
 	DESTROY(mCards);
 	DESTROY(mScript);

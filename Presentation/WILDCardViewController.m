@@ -729,6 +729,7 @@
 	if( [[theStack cards] count] > 1 )
 	{
 		[self goNextCard: self];
+		[[WILDRecentCardsList sharedRecentCardsList] removeCard: cardToDelete];
 		[cardToDelete setOwningBackground: nil];
 		[owningBackground removeCard: cardToDelete];
 		[theStack removeCard: cardToDelete];
