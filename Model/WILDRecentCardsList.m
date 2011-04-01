@@ -31,8 +31,7 @@ static WILDRecentCardsList	*	sSharedRecentCardsList = nil;
     self = [super init];
     if( self )
 	{
-        mRecentCards = [[NSMutableArray alloc] init];
-        mRecentCardThumbnails = [[NSMutableArray alloc] init];
+        mRecentCardInfos = [[NSMutableArray alloc] init];
 		
 		mMaxRecentsToKeep = 7 * 6;	// HyperCard's "Recent" dialog has 7 columns & 6 rows.
     }
@@ -42,7 +41,7 @@ static WILDRecentCardsList	*	sSharedRecentCardsList = nil;
 
 -(void)	dealloc
 {
-	DESTROY( mRecentCards );
+	DESTROY( mRecentCardInfos );
 	
     [super dealloc];
 }
@@ -50,49 +49,93 @@ static WILDRecentCardsList	*	sSharedRecentCardsList = nil;
 
 -(void)	addCard: (WILDCard*)inCard inCardView: (WILDCardView*)inCardView
 {
-	NSUInteger	idx = [mRecentCards indexOfObject: inCard];
-	if( idx != NSNotFound )
+	// Remove any previous entries for the same card. We only show each card once:
+	NSUInteger	currIdx = 0;
+	for( WILDRecentCardInfo * currInfo in mRecentCardInfos )
 	{
-		[mRecentCards removeObjectAtIndex: idx];
-		[mRecentCardThumbnails removeObjectAtIndex: idx];
+		if( [currInfo card] == inCard )
+		{
+			[mRecentCardInfos removeObjectAtIndex: currIdx];
+			break;
+		}
+		
+		currIdx ++;
 	}
-	[mRecentCards addObject: inCard];
-	[mRecentCardThumbnails addObject: [inCardView thumbnailImage]];
+
+	WILDRecentCardInfo	*	newInfo = [[[WILDRecentCardInfo alloc] init] autorelease];
+	newInfo.card = inCard;
+	newInfo.thumbnail = [inCardView thumbnailImage];
+	newInfo.documentURL = [[[inCard stack] document] fileURL];
+	[mRecentCardInfos addObject: newInfo];
 	
-	if( [mRecentCards count] > mMaxRecentsToKeep )
+	if( [mRecentCardInfos count] > mMaxRecentsToKeep )
+		[mRecentCardInfos removeObjectAtIndex: 0];
+}
+
+
+-(void)	unloadCard: (WILDCard*)inCard
+{
+	for( WILDRecentCardInfo * currInfo in mRecentCardInfos )
 	{
-		[mRecentCards removeObjectAtIndex: 0];
-		[mRecentCardThumbnails removeObjectAtIndex: 0];
+		if( [currInfo card] == inCard )
+		{
+			[currInfo setCard: nil];
+			break;
+		}
 	}
 }
 
 
 -(void)	removeCard: (WILDCard*)inCard
 {
-	NSUInteger	idx = [mRecentCards indexOfObject: inCard];
-	if( idx != NSNotFound )
+	NSUInteger	currIdx = 0;
+	for( WILDRecentCardInfo * currInfo in mRecentCardInfos )
 	{
-		[mRecentCards removeObjectAtIndex: idx];
-		[mRecentCardThumbnails removeObjectAtIndex: idx];
+		if( [currInfo card] == inCard )
+		{
+			[mRecentCardInfos removeObjectAtIndex: currIdx];
+			break;
+		}
+		
+		currIdx ++;
 	}
 }
 
 
 -(NSUInteger)	count
 {
-	return [mRecentCards count];
+	return [mRecentCardInfos count];
 }
 
 
 -(WILDCard*)	cardAtIndex: (NSUInteger)inCardIndex
 {
-	return [mRecentCards objectAtIndex: inCardIndex];
+	return [[mRecentCardInfos objectAtIndex: inCardIndex] card];
 }
 
 
 -(NSImage*)		thumbnailForCardAtIndex: (NSUInteger)inCardIndex
 {
-	return [mRecentCardThumbnails objectAtIndex: inCardIndex];
+	return [[mRecentCardInfos objectAtIndex: inCardIndex] thumbnail];
+}
+
+@end
+
+
+@implementation WILDRecentCardInfo
+
+@synthesize thumbnail;
+@synthesize documentURL;
+@synthesize cardID;
+@synthesize card;
+
+-(void)	dealloc
+{
+	DESTROY(thumbnail);
+	DESTROY(documentURL);
+	DESTROY(card);
+	
+	[super dealloc];
 }
 
 @end
