@@ -15,7 +15,10 @@
 @interface WILDCard : WILDLayer <WILDSearchable>
 {
 	WILDBackground	*	mOwner;
+	BOOL				mMarked;
 }
+
+@property (assign) BOOL	marked;
 
 -(id)						initWithXMLDocument: (NSXMLElement*)elem forStack: (WILDStack*)theStack;
 

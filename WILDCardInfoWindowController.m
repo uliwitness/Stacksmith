@@ -65,7 +65,19 @@
 	[mNameField setStringValue: [mCard name]];
 	[mCantDeleteSwitch setState: [mCard cantDelete] ? NSOnState : NSOffState];
 	[mDontSearchSwitch setState: [mCard dontSearch] ? NSOnState : NSOffState];
+	[mMarkedSwitch setState: [mCard marked] ? NSOnState : NSOffState];
 	[mIDField setIntegerValue: [mCard cardID]];
+	
+	NSArray	*		cards = [[mCard stack] cards];
+	unsigned long	cardNum = [cards indexOfObject: mCard] +1;
+	unsigned long	numOfCards = [cards count];
+	[mNumberField setStringValue: [NSString stringWithFormat: @"%1$ld out of %2$ld", cardNum, numOfCards]];
+	
+	unsigned long	numFields = [mCard numberOfPartsOfType: @"field"];
+	[mFieldCountField setStringValue: [NSString stringWithFormat: @"Contains %ld card fields", numFields]];
+
+	unsigned long	numButtons = [mCard numberOfPartsOfType: @"button"];
+	[mButtonCountField setStringValue: [NSString stringWithFormat: @"Contains %ld card buttons", numButtons]];
 }
 
 
@@ -79,7 +91,10 @@
 
 -(IBAction)	doOKButton: (id)sender
 {
-	
+	[mCard setName: [mNameField stringValue]];
+	[mCard setCantDelete: [mCantDeleteSwitch state] == NSOnState];
+	[mCard setDontSearch: [mDontSearchSwitch state] == NSOnState];
+	[mCard setMarked: [mMarkedSwitch state] == NSOnState];
 	
 	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mCard] frameInScreenCoordinates];
 	[[self window] orderOutWithZoomEffectToRect: destRect];

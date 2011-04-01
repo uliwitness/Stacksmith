@@ -325,6 +325,20 @@
 }
 
 
+-(NSInteger)	numberOfPartsOfType: (NSString*)inPartType
+{
+	NSInteger	partCount = 0;
+	
+	for( WILDPart* currPart in mParts )
+	{
+		if( [[currPart partType] isEqualToString: inPartType] )
+			partCount++;
+	}
+	
+	return partCount;
+}
+
+
 -(void)	addNewPartFromXMLTemplate: (NSURL*)xmlFile
 {
 	NSError			*	outError = nil;

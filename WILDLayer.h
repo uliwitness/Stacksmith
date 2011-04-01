@@ -58,6 +58,8 @@
 -(WILDPart*)					partWithID: (WILDObjectID)theID;
 -(WILDObjectID)					uniqueIDForPart;
 
+-(NSInteger)					numberOfPartsOfType: (NSString*)inPartType;
+
 -(void)							updatePartOnClick: (WILDPart*)thePart withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground;
 
 -(NSString*)					partLayer;

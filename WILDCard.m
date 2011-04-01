@@ -13,6 +13,8 @@
 
 @implementation WILDCard
 
+@synthesize marked = mMarked;
+
 -(id)	initForStack: (WILDStack*)theStack
 {
 	if(( self = [super initForStack: theStack] ))
@@ -34,6 +36,8 @@
 		NSInteger bkgdID = WILDIntegerFromSubElementInElement( @"owner", elem );
 		mOwner = [theStack backgroundWithID: bkgdID];
 		[mOwner addCard: self];
+		
+		mMarked = WILDBoolFromSubElementInElement( @"marked", elem );
 	}
 	
 	return self;
@@ -209,6 +213,7 @@
 	[super appendInnerXmlToString: theString];
 	
 	[theString appendFormat: @"\t<owner>%ld</owner>\n", [mOwner backgroundID]];
+	[theString appendFormat: @"\t<marked>%@</marked>\n", (mMarked ? @"<true />" : @"<false />")];
 }
 
 @end
