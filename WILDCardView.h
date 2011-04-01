@@ -22,11 +22,14 @@
 	WILDCardViewController	*mOwner;	// Not retained.
 }
 
--(void)					setCard: (WILDCard*)inCard;
--(WILDCard*)			card;
+-(void)						setCard: (WILDCard*)inCard;
+-(WILDCard*)				card;
 
--(void)					setOwner: (WILDCardViewController*)inOwner;
+-(void)						setOwner: (WILDCardViewController*)inOwner;
 
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
+
+-(NSImage*)					snapshotImage;	// Full-size image of the entire card.
+-(NSImage*)					thumbnailImage;	// Smaller size for use as a preview in lists etc.
 
 @end

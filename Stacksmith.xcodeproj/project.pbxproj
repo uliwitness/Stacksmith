@@ -35,6 +35,10 @@
 		551FC0121170CF3500F32FBF /* SprayTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FC0011170CF3500F32FBF /* SprayTool.png */; };
 		551FC0131170CF3500F32FBF /* TextTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FC0021170CF3500F32FBF /* TextTool.png */; };
 		551FC01A1170CF8300F32FBF /* LassoTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FC0191170CF8300F32FBF /* LassoTool.png */; };
+		552365381344B0BA000145A0 /* WILDRecentCardsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 552365371344B0B9000145A0 /* WILDRecentCardsList.m */; };
+		5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */; };
+		5523653E1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */; };
+		552365401344CA1D000145A0 /* WILDRecentCardPickerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */; };
 		5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */; };
 		552558FE114BDE7C00279B03 /* WILDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* WILDAppDelegate.m */; };
 		55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */; };
@@ -438,6 +442,13 @@
 		551FC0011170CF3500F32FBF /* SprayTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SprayTool.png; path = Resources/SprayTool.png; sourceTree = "<group>"; };
 		551FC0021170CF3500F32FBF /* TextTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TextTool.png; path = Resources/TextTool.png; sourceTree = "<group>"; };
 		551FC0191170CF8300F32FBF /* LassoTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LassoTool.png; path = Resources/LassoTool.png; sourceTree = "<group>"; };
+		552365361344B0B9000145A0 /* WILDRecentCardsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDRecentCardsList.h; path = Model/WILDRecentCardsList.h; sourceTree = "<group>"; };
+		552365371344B0B9000145A0 /* WILDRecentCardsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDRecentCardsList.m; path = Model/WILDRecentCardsList.m; sourceTree = "<group>"; };
+		552365391344C24C000145A0 /* NSImage+NiceScaling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+NiceScaling.h"; path = "../UliKit/NSImage+NiceScaling.h"; sourceTree = "<group>"; };
+		5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImage+NiceScaling.m"; path = "../UliKit/NSImage+NiceScaling.m"; sourceTree = "<group>"; };
+		5523653C1344C9ED000145A0 /* WILDRecentCardPickerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDRecentCardPickerWindowController.h; sourceTree = "<group>"; };
+		5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDRecentCardPickerWindowController.m; sourceTree = "<group>"; };
+		5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WILDRecentCardPickerWindowController.xib; sourceTree = "<group>"; };
 		5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDDrawAddColorBezel.h; sourceTree = "<group>"; };
 		5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDDrawAddColorBezel.m; sourceTree = "<group>"; };
 		552558FC114BDE7C00279B03 /* WILDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDAppDelegate.h; sourceTree = "<group>"; };
@@ -888,6 +899,8 @@
 				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
 				2A37F4AEFDCFA73011CA2CEA /* WILDDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* WILDDocument.m */,
+				552365361344B0B9000145A0 /* WILDRecentCardsList.h */,
+				552365371344B0B9000145A0 /* WILDRecentCardsList.m */,
 				558DCD1F115571FE002C9195 /* WILDNotifications.h */,
 				558DCD20115571FE002C9195 /* WILDNotifications.m */,
 				5542CE3B113ADFBC00555C64 /* Document */,
@@ -923,6 +936,7 @@
 				55B9223C1167532A0073EC6C /* WILDButtonInfoWindowController.xib */,
 				55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */,
 				55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */,
+				5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */,
 				551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
@@ -986,6 +1000,8 @@
 				55B924491169DB150073EC6C /* WILDIconListDataSource.m */,
 				55C88AFF1332CDA300ACB615 /* WILDCardInfoWindowController.h */,
 				55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */,
+				5523653C1344C9ED000145A0 /* WILDRecentCardPickerWindowController.h */,
+				5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -1069,6 +1085,8 @@
 				555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */,
 				55C2B69B115EA2CD008B094D /* NSView+SizeWindowForViewSize.h */,
 				55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */,
+				552365391344C24C000145A0 /* NSImage+NiceScaling.h */,
+				5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */,
 				550B30761152D9DE0049C593 /* AGIconFamily.h */,
 				550B30771152D9DE0049C593 /* AGIconFamily.m */,
 				55E8535C1166341100745C86 /* NSString+FetchNextLine.h */,
@@ -1737,6 +1755,7 @@
 				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
 				55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */,
 				55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */,
+				552365401344CA1D000145A0 /* WILDRecentCardPickerWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1820,6 +1839,9 @@
 				55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */,
 				55818A8F1332108300480D30 /* WILDBackground.m in Sources */,
 				55C88B011332CDA300ACB615 /* WILDCardInfoWindowController.m in Sources */,
+				552365381344B0BA000145A0 /* WILDRecentCardsList.m in Sources */,
+				5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */,
+				5523653E1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

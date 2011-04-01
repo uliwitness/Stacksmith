@@ -16,6 +16,7 @@
 #import "WILDXMLUtils.h"
 #import "WILDPart.h"
 #import "WILDCardViewController.h"
+#import "NSImage+NiceScaling.h"
 
 
 @implementation WILDCardView
@@ -221,6 +222,24 @@
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind
 {
 	return [mOwner visibleObjectForWILDObject: inObjectToFind];
+}
+
+-(NSImage*)	snapshotImage
+{
+	NSImage*	img = [[[NSImage alloc] initWithSize: [self bounds].size] autorelease];
+	
+	[img lockFocus];
+		[[self layer] renderInContext: [[NSGraphicsContext currentContext] graphicsPort]];
+	[img unlockFocus];
+	
+	return img;
+}
+
+
+-(NSImage*)	thumbnailImage
+{
+	NSImage*	img = [self snapshotImage];
+	return [img scaledImageToFitSize: NSMakeSize(128,96)];	// 4:3 aspect ratio.
 }
 
 @end

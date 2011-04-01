@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
+		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1294</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">462.00</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1305</string>
+			<string key="NS.object.0">1294</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -820,6 +820,15 @@
 									<reference key="NSMenu" ref="128094225"/>
 									<string key="NSTitle">Home</string>
 									<string key="NSKeyEquiv">H</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="236896286">
+									<reference key="NSMenu" ref="128094225"/>
+									<string key="NSTitle">Recent</string>
+									<string key="NSKeyEquiv">R</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
@@ -1725,7 +1734,7 @@
 					</object>
 					<string key="NSFrameSize">{381, 98}</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1366, 746}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{1e+13, 1e+13}</string>
 				<string key="NSFrameAutosaveName">UKPropagandaProgressSheetPosition</string>
 			</object>
@@ -2647,6 +2656,14 @@
 						<reference key="destination" ref="125944715"/>
 					</object>
 					<int key="connectionID">706</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">goRecentCard:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="236896286"/>
+					</object>
+					<int key="connectionID">709</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3702,6 +3719,7 @@
 							<reference ref="610394147"/>
 							<reference ref="517832653"/>
 							<reference ref="122654133"/>
+							<reference ref="236896286"/>
 						</object>
 						<reference key="parent" ref="183012325"/>
 					</object>
@@ -3970,6 +3988,11 @@
 						<int key="objectID">701</int>
 						<reference key="object" ref="99234703"/>
 						<reference key="parent" ref="789758025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">707</int>
+						<reference key="object" ref="236896286"/>
+						<reference key="parent" ref="128094225"/>
 					</object>
 				</object>
 			</object>
@@ -4263,6 +4286,7 @@
 					<string>699.ImportedFromIB2</string>
 					<string>701.IBPluginDependency</string>
 					<string>701.ImportedFromIB2</string>
+					<string>707.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>72.ImportedFromIB2</string>
 					<string>73.IBPluginDependency</string>
@@ -4579,6 +4603,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -4618,7 +4643,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">706</int>
+			<int key="maxID">709</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4812,6 +4837,7 @@
 							<string>goLastCard:</string>
 							<string>goNextCard:</string>
 							<string>goPrevCard:</string>
+							<string>goRecentCard:</string>
 							<string>hideFindPanel:</string>
 							<string>performFindPanelAction:</string>
 							<string>sendObjectFarther:</string>
@@ -4824,6 +4850,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4873,6 +4900,7 @@
 							<string>goLastCard:</string>
 							<string>goNextCard:</string>
 							<string>goPrevCard:</string>
+							<string>goRecentCard:</string>
 							<string>hideFindPanel:</string>
 							<string>performFindPanelAction:</string>
 							<string>sendObjectFarther:</string>
@@ -4951,6 +4979,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">goPrevCard:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">goRecentCard:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

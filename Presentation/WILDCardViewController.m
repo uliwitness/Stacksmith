@@ -25,6 +25,8 @@
 #import "WILDFieldInfoWindowController.h"
 #import "WILDPresentationConstants.h"
 #import "WILDCardInfoWindowController.h"
+#import "WILDRecentCardsList.h"
+#import "WILDRecentCardPickerWindowController.h"
 
 
 @implementation WILDCardViewController
@@ -367,6 +369,9 @@
 	NSMutableDictionary	*	uiDict = nil;
 	if( theCard != prevCard )
 	{
+		if( mCurrentCard )
+			[[WILDRecentCardsList sharedRecentCardsList] addCard: mCurrentCard inCardView: self.view];
+		
 		uiDict = [NSMutableDictionary dictionary];
 		if( prevCard )
 			[uiDict setObject: prevCard forKey: WILDSourceCardKey];
@@ -374,7 +379,7 @@
 			[uiDict setObject: theCard forKey: WILDDestinationCardKey];
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDCurrentCardWillChangeNotification
 							object: self userInfo: uiDict];
-
+		
 		if( prevCard )
 		{
 			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: prevCard];
@@ -507,6 +512,15 @@
 {
 	[[NSApp delegate] applicationOpenUntitledFile: NSApp];
 }
+
+
+-(IBAction)	goRecentCard: (id)sender
+{
+	WILDRecentCardPickerWindowController	*	recentWindowController = [[[WILDRecentCardPickerWindowController alloc] initWithCardViewController: self] autorelease];
+	[[[[[self view] window] windowController] document] addWindowController: recentWindowController];
+	[recentWindowController showWindow: self];
+}
+
 
 -(IBAction)	goFirstCard: (id)sender
 {
