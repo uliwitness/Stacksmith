@@ -637,6 +637,22 @@
 }
 
 
+-(void)	stackDidChange: (NSNotification*)notif
+{
+	if( [[[notif userInfo] objectForKey: WILDAffectedPropertyKey] isEqualToString: @"cardSize"] )
+	{
+		NSWindow	*wd = [[self view] window];
+		NSRect		theFrame = [wd contentRectForFrameRect: [wd frame]];
+		theFrame.size = [[mCurrentCard stack] cardSize];
+		[wd setFrame: [wd frameRectForContentRect: theFrame] display: NO];
+		
+		NSRect		viewFrame = [[self view] frame];
+		viewFrame.size = [[mCurrentCard stack] cardSize];
+		[[self view] setFrame: viewFrame];
+	}
+}
+
+
 -(IBAction)	showButtonInfoPanel: (id)sender
 {
 	NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
