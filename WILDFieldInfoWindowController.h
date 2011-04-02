@@ -43,6 +43,8 @@
 
 -(id)		initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView;
 
+-(IBAction)	doAutoSelectSwitchChanged: (id)sender;
+
 -(IBAction)	doEditScriptButton: (id)sender;
 -(IBAction)	doOKButton: (id)sender;
 -(IBAction)	doCancelButton: (id)sender;

@@ -71,6 +71,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mDontWrapSwitch setState: [mPart dontWrap]];
 	[mAutoSelectSwitch setState: [mPart autoSelect]];
 	[mMultipleLinesSwitch setState: [mPart canSelectMultipleLines]];
+	[mMultipleLinesSwitch setEnabled: [mPart autoSelect]];
 	[mWideMarginsSwitch setState: [mPart wideMargins]];
 	[mFixedLineHeightSwitch setState: [mPart fixedLineHeight]];
 	[mShowLinesSwitch setState: [mPart showLines]];
@@ -135,6 +136,12 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	buttonRect.origin = [[mCardView window] convertBaseToScreen: buttonRect.origin];
 	
 	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: buttonRect];
+}
+
+
+-(IBAction)	doAutoSelectSwitchChanged: (id)sender
+{
+	[mMultipleLinesSwitch setEnabled: [sender state] == NSOnState];
 }
 
 
