@@ -61,4 +61,10 @@
 	return( [mCards count] > 0 );
 }
 
+
+-(NSArray*)	cards
+{
+	return mCards;
+}
+
 @end

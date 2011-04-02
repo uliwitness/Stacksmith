@@ -11,16 +11,14 @@
 
 
 @class WILDCardView;
-@class WILDCard;
+@class WILDBackground;
 
 
-@interface WILDCardInfoWindowController : WILDLayerInfoWindowController
+@interface WILDBackgroundInfoWindowController : WILDLayerInfoWindowController
 {
-	NSButton		*	mMarkedSwitch;
+	
 }
 
-@property (retain) IBOutlet	NSButton		*	markedSwitch;
-
--(id)		initWithCard: (WILDCard*)inCard ofCardView: (WILDCardView*)owningView;
+-(id)		initWithBackground: (WILDBackground*)inCard ofCardView: (WILDCardView*)owningView;
 
 @end

@@ -22,4 +22,6 @@
 -(void)	removeCard: (WILDCard*)theCard;
 -(BOOL)	hasCards;
 
+-(NSArray*)	cards;
+
 @end

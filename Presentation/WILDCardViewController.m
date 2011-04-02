@@ -25,6 +25,7 @@
 #import "WILDFieldInfoWindowController.h"
 #import "WILDPresentationConstants.h"
 #import "WILDCardInfoWindowController.h"
+#import "WILDBackgroundInfoWindowController.h"
 #import "WILDRecentCardsList.h"
 #import "WILDRecentCardPickerWindowController.h"
 
@@ -659,11 +660,13 @@
 	[cardInfo showWindow: self];
 }
 
-//-(IBAction)	showBackgroundInfoPanel: (id)sender
-//{
-//	
-//}
-//
+-(IBAction)	showBackgroundInfoPanel: (id)sender
+{
+	WILDBackgroundInfoWindowController*	backgroundInfo = [[[WILDBackgroundInfoWindowController alloc] initWithBackground: [mCurrentCard owningBackground] ofCardView: (WILDCardView*) [self view]] autorelease];
+	[[[[[self view] window] windowController] document] addWindowController: backgroundInfo];
+	[backgroundInfo showWindow: self];
+}
+
 //-(IBAction)	showStackInfoPanel: (id)sender
 //{
 //	
