@@ -244,6 +244,11 @@
 			&& ([[WILDTools sharedTools] currentTool] == WILDButtonTool
 				|| [[WILDTools sharedTools] currentTool] == WILDFieldTool) );
 	}
+	else if( [menuItem action] == @selector(goRecentCard:)
+				|| [menuItem action] == @selector(goBack:) )
+	{
+		return( [[WILDRecentCardsList sharedRecentCardsList] count] > 0 );
+	}
 	else if( [menuItem action] == @selector(selectAll:) )
 	{
 		bool canSelect = ( [[WILDTools sharedTools] currentTool] != WILDBrowseTool );
@@ -525,8 +530,11 @@
 
 -(IBAction)	goBack: (id)sender
 {
-	WILDCard	*	theCard = [[WILDRecentCardsList sharedRecentCardsList] cardAtIndex: [[WILDRecentCardsList sharedRecentCardsList] count] -1];
-	[self loadCard: theCard];
+	if( [[WILDRecentCardsList sharedRecentCardsList] count] > 0 )
+	{
+		WILDCard	*	theCard = [[WILDRecentCardsList sharedRecentCardsList] cardAtIndex: [[WILDRecentCardsList sharedRecentCardsList] count] -1];
+		[self loadCard: theCard];
+	}
 }
 
 
