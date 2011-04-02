@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>92658</id>
+	<filler1>0</filler1>
+	<bitmap>BMAP_38049.pbm</bitmap>
+	<cantDelete> <true /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <true /> </dontSearch>
+	<owner>7507</owner>
+	<part>
+		<id>24</id>
+		<type>button</type>
+		<visible> <false /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>165</left>
+			<top>270</top>
+			<right>188</right>
+			<bottom>292</bottom>
+		</rect>
+		<style>opaque</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>17317</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>30</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>268</left>
+			<top>272</top>
+			<right>476</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>31</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>300</left>
+			<top>273</top>
+			<right>470</right>
+			<bottom>292</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Go Back</name>
+		<script></script>
+	</part>
+	<part>
+		<id>32</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>278</left>
+			<top>272</top>
+			<right>302</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>6720</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>14</textSize>
+		<textStyle>plain</textStyle>
+		<name>Return Arow</name>
+		<script></script>
+	</part>
+	<part>
+		<id>33</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>268</left>
+			<top>273</top>
+			<right>474</right>
+			<bottom>290</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Go Back</name>
+		<script>on mouseUpgoBackend mouseUp</script>
+	</part>
+	<part>
+		<id>34</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>8</left>
+			<top>35</top>
+			<right>385</right>
+			<bottom>86</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>Find</name>
+		<script></script>
+	</part>
+	<part>
+		<id>35</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>8</left>
+			<top>81</top>
+			<right>68</right>
+			<bottom>104</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>bold</textStyle>
+		<textHeight>13</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>36</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <true /> </autoTab>
+		<lockText> <false /> </lockText>
+		<rect>
+			<left>66</left>
+			<top>81</top>
+			<right>381</right>
+			<bottom>104</bottom>
+		</rect>
+		<style>rectangle</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>User Keys</name>
+		<script>on returnInFieldclick at loc of button "Find" -- ∆end returnInFieldon EnterInFieldclick at loc of button "Find" -- ∆end EnterInField</script>
+	</part>
+	<part>
+		<id>37</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>387</left>
+			<top>79</top>
+			<right>449</right>
+			<bottom>104</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>14</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>38</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>388</left>
+			<top>80</top>
+			<right>448</right>
+			<bottom>103</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>14</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>40</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>390</left>
+			<top>82</top>
+			<right>446</right>
+			<bottom>101</bottom>
+		</rect>
+		<style>rectangle</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>14</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>18</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>39</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>391</left>
+			<top>83</top>
+			<right>445</right>
+			<bottom>100</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>14</textSize>
+		<textStyle>bold</textStyle>
+		<name>Find</name>
+		<script>on mouseUplookItUpif the mouse is down then exit mouseUp -- trap double clickend mouseUp</script>
+	</part>
+	<part>
+		<id>41</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>8</left>
+			<top>108</top>
+			<right>169</right>
+			<bottom>264</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>bold</textStyle>
+		<textHeight>12</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>42</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>8</left>
+			<top>128</top>
+			<right>167</right>
+			<bottom>262</bottom>
+		</rect>
+		<style>scrolling</style>
+		<autoSelect> <true /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>Sample Subjects</name>
+		<script>on mouseUpget the selectedText of meif it is not empty AND it is not card field "User Keys" thenput it into card field "User Keys"click at the loc of card button "Find" -- ∆select text of card field "User Keys"end ifend mouseUp</script>
+	</part>
+	<part>
+		<id>43</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>175</left>
+			<top>108</top>
+			<right>468</right>
+			<bottom>264</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>bold</textStyle>
+		<textHeight>12</textHeight>
+		<name>Topics Found</name>
+		<script></script>
+	</part>
+	<part>
+		<id>44</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>175</left>
+			<top>128</top>
+			<right>466</right>
+			<bottom>262</bottom>
+		</rect>
+		<style>scrolling</style>
+		<autoSelect> <true /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<selectedLines>
+			<integer>1</integer>
+		</selectedLines>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>The Hits</name>
+		<script>on mouseUpgoTopic the selectedText of meend mouseUp</script>
+	</part>
+	<part>
+		<id>16</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>8</left>
+			<top>108</top>
+			<right>468</right>
+			<bottom>265</bottom>
+		</rect>
+		<style>scrolling</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Geneva</font>
+		<textSize>10</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>13</textHeight>
+		<name>Keys</name>
+		<script></script>
+	</part>
+	<part>
+		<id>18</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>310</left>
+			<top>24</top>
+			<right>480</right>
+			<bottom>172</bottom>
+		</rect>
+		<style>scrolling</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Geneva</font>
+		<textSize>10</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>13</textHeight>
+		<name>Stop List</name>
+		<script></script>
+	</part>
+	<part>
+		<id>46</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>175</left>
+			<top>128</top>
+			<right>466</right>
+			<bottom>262</bottom>
+		</rect>
+		<style>scrolling</style>
+		<autoSelect> <true /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>All Topics</name>
+		<script>on mouseUppop card into theReturnCardgoTopicend mouseUp</script>
+	</part>
+	<part>
+		<id>19</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>310</left>
+			<top>174</top>
+			<right>480</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>scrolling</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Geneva</font>
+		<textSize>10</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>13</textHeight>
+		<name>Thesaurus</name>
+		<script></script>
+	</part>
+	<part>
+		<id>49</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>142</left>
+			<top>272</top>
+			<right>264</right>
+			<bottom>293</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>26</id>
+		<text>Find Topic</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>18</id>
+		<text>aaboutanarebeingbetweenfromhashowinmanymoreofonthanthethroughvs.whenyouyou’veyour</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>19</id>
+		<text>adding	addalign	alignmentarrows	arrowauthoring	authorbackgrounds	backgroundbg	backgroundbgs	backgroundbkgnd	backgroundbkgnds	backgroundboolean	trueOrFalsebox	message boxbrowsing	browsebtn	buttonbtns	buttonbuttons	buttoncan’t	cantcan't	cantcards	cardcards	cardcd	cardcds	cardclicks	clickclicked	clickdeleting	deletedon’t	dontdon't	dontdragging	dragediting	editexport	export paintfields	fieldfld	fieldflds	fieldfunctions	functiongraphics	paintgrey	graygrouped	grouphighlight	hiliteicons	iconimport	import paintkeys	keymenubar	menu barmenuItem	menu itemsmenuItems	menu itemsmsg	messagemsg box	message boxpainting	paintpop-up	popupposInteger	positiveprevious	prevproperties	propertyquote	quotation marksaving	savescripting	scriptsselected	selectselects	selectspacing	spacestyping	typevariables	variableXCMD	external commandXFCN	external commandXWindow	external window</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>34</id>
+		<text>To find topics related to a subject, type one or more wordsinto the box and click Find. Or click one of the Sample Subjects.</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>35</id>
+		<text>Subject:</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>40</id>
+		<text>Find</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>41</id>
+		<text>Sample Subjects:</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>42</id>
+		<text>all topicsnew features&amp;&amp;&amp;*+-/&lt;&lt;=&lt;&gt;=&gt;&gt;=^≠≤≥abortallandarrowautobackgroundbrowse toolbrush toolbucket toolbusinessbuttonbutton messagesbutton propertiesbutton toolcan’tcardcard messagescard propertiescard windowchunkclickcommentscontainercurve tooldatedebugdragediteditoremptyeraser toolfieldfield messagesfield propertiesfield toolfilefilenamefontglobal propertiesinputintegerintoititemkeylasso toollistlocationlockmathmemorymenumenu itemmenu propertiesmessagemessagesmodulomousemultifindernewnonotnotenumberobjectsopenoperatorsoptionorordinaloutputpaint propertiesparameterspathpeekpencil toolpolygon toolpowerprintrangeraterectanglerectangle propertiesreportsscriptsearchshadowshiftshowspray can toolstackstack propertiesstepstopstringsuspendsynonymstemplatetempotexttraptrigonometrictrueOrFalseusingvariablewholewindowswindow propertieswithinwordwrapXCMDzoom</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>43</id>
+		<text>Topics found: 1</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>46</id>
+		<text>absaddAdd comments to a scriptaddressannuityanswerappleEventArithmetic operatorsarrowKeyaskatanautoHiliteautoSelectautoTabaveragebeepblindTypingbottombottomRightbrushcantAbortcantDeletecantModifycantPeekcenteredcharToNumcheckMarkchooseclick atclickChunkclickH and clickVclickLineclickLocclickTextcloseClose a script windowcloseBackgroundcloseCardcloseFieldcloseStackcommandCharcommandKeycommandKeyDownCommands sent automaticallyComparison operatorscompoundConstantscontrolKeyconvertcopy templatecoscreatecursordatedebugDebug a scriptdebuggerdeletedeleteBackgrounddeleteButtondeleteCarddeleteFielddeleteStackdestinationdialdialingTimedialingVolumedisablediskSpacedividedodoMenudontSearchdontWrapdragdragSpeededit scripteditBkgndenableenabledenterInFieldenterKeyenvironmenterrorDialogexitexitFieldexp, exp1, exp2export paintfamilyfilledfindfixedLineHeightfoundChunkfoundFieldfoundLinefoundTextfreeSizefunctionfunctionKeygetglobalgogridHandling messagesheapSpaceheighthelphidehiliteHyperTalk and scriptsiconID idleif (multiple-statement)if (single-statement)import paintitemDelimiterkeyDownlanguageleftlengthlineSizeln, ln1, log2locationlock lockErrorDialogslockMessageslockRecentlockScreenlockTextLogical operatorslongWindowTitlesmarkmarkCharmarkedmaxmenuMessagemenusMessage sending ordersmessageWatcherminmousemouseClickmouseDoubleClickmouseDownmouseEntermouseH and mouseVmouseLeavemouseLocmouseStillDownmouseUpmouseWithinMove between open scriptsmoveWindowmultiplemultipleLinesmultiplymultiSpacenamenewBackgroundnewButtonnewCardnewFieldnewStacknumbernumber (property)numberFormatnumToCharoffsetonopenOpen a script windowopen fileopen printingopen report printingopenBackgroundopenCardopenFieldopenStackoptionKeyownerparamparamCountparamspartNumberpasspatternplaypolySidespoppowerKeysprintprintMarginsprintTextAlignprintTextFontprintTextHeightprintTextSizeprintTextStyleprogramspushputquitrandomreadrectangleReferring to objectsrepeatrepeat forrepeat untilrepeat whilerepeat withreplyreportTemplatesrequestresetresultresumeresumeStackreturnreturnInFieldreturnKeyrightroundrunsaveSave a scriptscreenRectscriptscriptEditorscriptingLanguagescriptTextFontscriptTextSizescrollsecondsselectselectedButtonselectedChunkselectedFieldselectedLineselectedLocselectedTextsendsetSet the font and size of a scriptSet the user level to scriptingsharedHilitesharedTextshiftKeyshowshowLinesshowNameshowPictsinsizesizeWindowsortsoundsqrtstacksstacksInUsestackSpacestart usingstartUpstop usingString operatorsstylesubtractsumsuspendsuspendedsuspendStacksystemVersionsystemVersiontabKeytantargettextAligntextArrowstextFonttextHeighttextSizetextStyleThe building blocksThe message-passing ordertickstimetitleWidthtooltoptopLefttraceDelaytrunctypeType and existence operatorsunlock unmarkuserLeveluserModifyUsing parameter variablesvaluevariableWatcherversionvisiblevisualwaitWhat are messages?Where messages are sent initiallywideMarginswidthwindowswriteWriting function handlersWriting message handlerszoomed</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>16</id>
+		<text>≠	89783≤	89783≥	89783&amp;	90270&amp;&amp;	90270*	89523+	89523-	89523/	89523&lt;	89783&lt;=	89783&lt;&gt;	89783=	89783&gt;	89783&gt;=	89783^	89523abbreviated	33535 55207 66404abort	13231 68357abs	51285accidental	43407activate	24386 25274 47827active	24386 25274active text	52836 53252 53775add	12290 29791 102760 89523after	44101 45460 47006alignment	90631 83738all	41060 44420 47827 50277alphabetic	48321and	14008 14879 53066 59060 90049 6157Apple event	32483 97817 98925 103709appleEvent	32483 97817 98925AppleScript	73723 25485 97817 104294 100648application	103709arc	52019Arithmetic	52417 89523arrow	30663 70204 84197arrowKey	3428 30663ascend	48321ascii	52559 60292at	32047 47827audio	34624auto	46143 67503 76921 71811Auto Select	12857autoSelect	100041autoTab	46143 76921background	4312 105361 18315 21577 22993 36226 38981 39797 59877 65969 68822 69105 70576 71150 73264 77648 77883 102019 80353 82724 83697bar	39797 39797 45965 47827 58014barn	50441base	57488before	44101 45460 47006bind	10721black	50441blind	67829blocks	11056boing	43407bottom	50441 85301bound	10721break	13231 34213 84490breakpoint	13231browse	31855 66705brush	31855 45965 66705 67958bucket	31855 66705bug	34213building	11056business	51607 54407button	6031 18636 21952 31855 36226 39797 47006 47827 59877 103123 65969 66705 67503 85301 91818 99648 86710 72540 72855 73264 74022 74795 77648 77883 100450 79936 86116 80353 81699 82576 83265 83738 84911 85522 85825 86415 101319 86868 87153 88724 89143button messages	18636 20071 20340 20661 20820 21197 21286 21952by	41060 50277bytes	55302call	10721can	31855 66705cant	68357 68822 69105 69328cantDelete	69105cantModify	68822card	4312 6031 17192 18888 22221 23197 36226 38981 41060 44101 44420 45173 47827 50277 50441 59877 62431 65969 85301 91818 68822 69105 70576 86710 73264 74022 76367 77648 77883 79936 86116 80353 82724 86868 87153 89143card messages	105361 17192 17907 18315 18888 19234 19769 20071 20820 21197 35844 21577 22221 22569 22993 23197 23747 23995 24298 24386 16789 24600 25005 25274 30663 31855 32483 8287 33000 35579 36714 38567 39675 40449 46524 49516card window	35844 24386 16789 25274 32483 39797 47827 7047 85301 91818 86710 74022 74795 79936 86116 81344 86868 87153 88724 89143centered	45965 50441 69837 83738char	8287 40449 45683 52559 57200 60292 60426 70039 76221characters	8287 37172 40449 41060 45683 48321 50277 52559 57200 59877 60292 60426 70039 76221chars	37172 41060 48321 50277 59877check	13231 69523 83265checker	50441checkpoint	13231choose	3428 31855chunks	11056 29791 33535 34478 35162 41612 44101 45460 47006 48321 49191 52836 56033 59877 63264 84911 85825 86415circle	31855 66705clear checkpoint	13231click	96465 32047 52836 53066 53252 53693 53775 58695Close	12744 3428 105361 17192 17449 17907 32483 36487 50441command	29791 30026 30663 31208 31649 31855 32047 32483 8287 33000 33535 95696 34045 34213 34478 34624 34993 35162 35579 35701 36226 61996 36487 36714 36906 37172 38567 38686 38981 39675 39797 40224 40449 40922 41060 41612 41778 41996 42410 42512 43407 44101 44420 45173 45460 45683 45965 46143 46524 46772 47503 47827 48321 48812 48929 49191 49516 49918 50046 50277 50441 50819 51002commandKeyDown	3428 8287Commands	3428comments	12290Comparison	89783constants	11056 91279container	11056 29791 33535 34478 35162 41612 44101 45460 49191 52836 53252contains	89783control	25485 25835 25888 26361 26404 26805 26982 27256 27427 27895 28073 28298 28477 28715 29297 33000control panel	96465controlKey	3428 33000coordinates	53066 53693 62877copy	95696 46772cosine	54961count	61390creator	102019cross	70204curve	31855 66705cut	4312date	33535 55207dateItems	33535debug	13231 34213 79684 87839delay	13231 94238delete	18315 18636 18888 19146 19234 34478 68822delimiter	101716descend	48321development	99402dial	99166dialog box	97279 30026 31208 42410 42512 97387direction	30663 48321disk	55302divide	35162 89523do	25485 35579document	41778doMenu	3428 35579done	64990dont	70576 84490dontWrap	12857door	50441double-click	96465down	20071 20820 28477 30663 8287 40449 50441 54096 58372 58695 60915 64480 91279drag	35701 70900draw	31855 66705duration	43407dynamic	8578edit	12290 12744 14356 11969 14667 14879 34213 36226 71150editor	12290 12744 14356 11969 14667 14879 92176 80403 80859 81132effects	50441eight	91279else	26404 26805empty	47006 91279end	6658 9950 10397 25888 26404 26982enter	20340 36487 36714enterInField	3428 36487enterKey	3428 36714eraser	31855 34478 66705error	97279 97387errorDialog message	97387evaluate	25485 67163executing programs	103709existence	6157exit	19615 25835exponent	55719 89523expression	11056 38686 45460 47503 48321 67163extended	38567external	32483 39797 47827 92176 74795 79684 80403 87839 88724external command	92176 79684 80403 87839external window	32483 39797 47827 74795 88724false	91279family	103123fast	50441field	11056 6031 17449 19146 19615 22421 23457 31855 36226 36487 37172 39797 46143 47006 47827 56310 59877 63565 65969 66705 76921 85301 91818 70576 84490 71811 86710 73264 74022 74795 75848 100041 77648 77883 100450 79936 86116 80353 81344 82124 82338 83265 83738 84911 85522 85825 86415 86868 87153 88724 88854 89143field messages	17449 19146 19615 20071 20340 20661 20820 21197 21286 22421 23457 8287 36487 40449 46143 49516file	41778 41996 45683 46772 51002file type	99402filename	32483 41996 45683 46772 51002filled	45965 71536find	37172 41060 56033 56310 56528 56722 62431finding	41060 50277five	91279flute	43407font	14879 90961 80859 84911for	27895 45683 50819forever	27427format	33535 35162 41612 44420 78162formFeed	91279found	56033 56310 56528 56722 62431four	91279free	55302 72105frontmost	47827function	10397 11056 25888 28715 51285 51607 52019 52417 52559 52836 53066 53252 53693 53775 54096 54407 54961 55207 103363 55302 55719 56033 56310 56528 56722 56991 57488 57627 58014 58185 58372 58695 59060 59412 59877 60292 60426 60915 61134 61390 61645 103709 61729 62431 62709 62877 63225 103123 63264 63565 63809 2765 64031 64480 64752 64990 65137 7047 102760 102613 65714 65969 66203 66404 66705 66892 67163 95475 88369functionKey	3428 38567global	26361 67829 70204 92176 70900 71150 73795 75037 75404 75546 74508 79684 78162 78944 79600 90631 90961 91426 91932 92736 80403 80859 81132 85008 83697 84197 94238 87536 87651 87839global variable	11056go	13231 14356 38981 62431gray	50441grid	45965 72386group	47827group text	52836 53252 53775 86415hand	70204handlers	9950 10397Handling	6658harpsichord	43407hBarLoc	13231 87839heap	56991height	71811 86710 91426 85522heirarchy	5306help	3428 39675hideIdle	13231 34213 79684hideUnused	13231 34213 79684hierarchy	8578highlight	72540highlight field lines	12857highlighted button	103123hilite	47006 67503 72540 81699horizontal	53066 59060 81344hot	52836 86415hour	66404HyperCard	25835 29297HyperTalk	14008hypertext	52836 53252 53775ID	11326 73264idle	19769if	26404 26805image	50441import	40224inf	35162initially	6031input	30026 31208 45683 49918insertion point	47006integer	33000 38567 43407 44420 45683 47827 52559 60292 61134 61729 62709 66892 67958 70900 74454 78411 78788 91426 91932into	44101 45460inverse	50441 52019iris	50441is	89783 6157is a	6157is an	6157is in	89783is not	89783is not in	89783is not within	89783is within	89783it	11056 30026 31208 33535 38686 45683item	33535 34478 34993 35579 61996 45460 69523 70039 71193 76221 76567 77648iterate	27427key	30663 32047 8287 33000 35701 36487 36714 38567 40449 46143 46524 49516 49918 54096 60915 64480 76921 78944keyboard	38567keyDown	3428 40449keyword	25485 25835 25888 26361 26404 26805 26982 27256 27427 27895 28073 28298 28477 28715 29297language	100648lasso	31855 66705launch	41778leaf name	103363 102019leave	20661left	30663 50441 74022 83738level	2179 87536line	31855 53252 56528 63809 66705 84490 71811 74454lineFeed	91279lines	82338lineSize	45965 74454list	52417 57627 58185 101716list field	12857 100041literal	11056local	11056location	53066 53693 59060 59412 2765 102341 74795lock	40922 50046 75037 75404 75546 75848lockScreen	40922 50046 75546lockText	12857logarithm	57488Logical	90049long	33535 55207 66404 74508loudness	99166margins	79600 88854mark	37172 38981 41060 44420 47827 48321 50277 59877 69523 76221 76367marked	37172 38981 44420 47827 48321 50277 59877 76367math	29791 41612 49191 51285 51607 52019 52417 54407 54961 55719 57488 57627 58185 61729 62709 64752 65137 65714 66892maximum	57627me	11326mean	52417memory	56991menu	34045 34478 34993 35579 61996 45460 45965 59877 69523 70039 71193 76221 76567 77648menu bar	39797 47827 58014menu items	34478 34993 35579 61996 45460 59877 69523 70039 71193 76221 76567 77648 86415message	5306 9950 3428 4312 105361 17192 17449 17907 18315 18636 18888 19146 19234 97279 19615 19769 96465 20071 20340 20661 20820 21197 21286 35844 21577 21952 22221 22421 22569 22993 23197 23457 23747 23995 24298 24386 16789 24600 25005 25274 25835 26982 27256 28715 29297 30663 31855 8287 33000 35579 36487 36714 38567 39675 39797 40449 45460 46143 46524 47006 48812 48929 49516 61134 61390 61645 62431 65969 76567 79684 87839message box	11056 39797 47827message passing path	5306message watcher	13231 79684message-passing	8578messages	6658 8578 6031 75037minimum	58185minus	49191 89523minutes	66404mod	89523modem	34624 98571modify	69105 87651modulo	89523mouse	96465 20071 20340 20661 20820 21197 21286 32047 35701 52836 53066 53252 53693 53775 58372 58695 59060 59412 70900move	14356 35844 47827 74795multifinder	83697multiple	45965 77229 77376Multiple Lines	100041multipleLines	12857multiply	41612 89523multiSpace	45965 77376name	11326 35579 77648 82576NAN(001)	65137nearest	62709network	102341new	6658 9950 10397 4312 21577 21952 22221 22421 22569 25888 26982new features	13231 19615 35844 24386 16789 25274 30026 31208 32483 8287 34045 34213 34478 34993 35579 61996 36906 37172 39797 40224 40449 41060 42512 44420 45460 45965 46772 47827 48321 48812 48929 50277 50441 52836 53252 53775 54096 58014 59877 2765 7047 95475 68357 69328 69523 70039 92176 70576 84490 71193 71811 74795 74508 76221 76367 76567 79684 79600 90631 90961 91426 91932 92736 41254 80403 80859 81132 81344 81699 82124 85008 83697 84911 85825 86415 94238 87839 88724 6157next	14356 27427 27895 28073 28298 28477 44420nextLine	13231 34213 79684nine	91279no	62431 6157not	62431 90049 6157note	43407number	11056 11326 29791 35162 41612 49191 51285 51607 52019 52417 52559 54407 54961 55719 57200 57627 58185 59877 60292 61390 61729 62709 64752 65137 65714 66892 77883 78162 100450numberFormat	35162 41612 78162numeric	48321object	100648objects	11326 47006 47503 59877 65969 73264 77648octave	43407offset	60426 81344one	91279opaque	83265open	14356 11969 22993 23197 23457 23747 40224 41778 41996 42410 42512 50441operators	11056 89523 89783 90049 90270 6157option	32047 35701 49918 60915or	90049orders	8578 4312ordinal	11326ordinal position	100450OSA	100648output	32483 34624 41996 43407 44420 51002oval	31855 66705paint	36906 40224 45965 67958 69837 71536 72386 74454 77229 77376 78411 78788 83738 84911 85522 85825 86415parameters	10721 25888 26982 61134 61390 61645part	60426 66892 100450part number	100450pass	8578 10721 27256password	31208paste	4312path	8578 48812 48929 74508path name	103363 102019patterns	45965 78411peek	11969 69328pencil	31855 66705period	51607 54407phone	34624pi	91279pictures	39797 47827 82724plain	50441play	43407 64990player	99402plus	29791 70204 89523point	32047 35701 47827 53066 53693 59412 88724polygon	31855 45965 66705 78788polySides	45965 78788popup menu's name	101319position	11326positive	33000 38567 91426 91932power	78944 89523PPC Toolbox	73723 30026precedence	89523 89783 90049 90270 6157prev	44420printing	32483 95696 42410 42512 44420 79600 90631 90961 91426 91932 92736 41254property	47503 102341 67503 12857 76921 67829 85301 91818 67958 68357 68822 69105 69328 69837 69523 70039 70204 92176 98571 99166 70576 84490 70900 71150 71193 99402 99648 71536 71811 72105 72386 86710 72540 72855 73264 101716 73795 74022 74454 74795 97387 75037 75404 75546 75848 74508 76221 76367 76567 79684 77229 100041 77376 77648 77883 78162 102019 78411 78788 78944 79600 90631 90961 91426 91932 92736 79936 41254 86116 80353 80403 100648 80859 81132 81344 81699 82124 82338 82576 82724 83131 85008 83265 83697 83738 84197 84911 85522 85825 86415 86868 87153 94238 87536 87651 87839 88724 88854 89143quotation mark	91279radio	83265raise	89523range	52836 53252 53775rate	51607 54407read	40224 45683recent	75404rect	62877 79600rectangle	31855 66705 85301 91818 86710 74022 79936 86116 83265 86868 87153 89143regular	31855 66705remainder	89523repeat	25835 27427 27895 28073 28298 28477report	95696reports	42512 41254resource	64990restore	45965result	28715 37172 62431resume	4312 24298 83697return	28715 46143 46524 76921 91279returnInField	3428 46143returnKey	3428 46524right	30663 50441 86116 83738root	65137round	31855 62709 66705 83265running programs	103709save	14667 36906 46772screen	40922 50046 59412 62877 75546script	100648scripts	2179 14008 12290 12744 13231 14356 11969 14667 14879 34213 36226 92176 80353 80403 80859 81132scrolling	50441 81344 83265searching	70576seconds	33535 50819 63225 66404select	31855 31855 47006 63264 63565 63809 2765 64031 12857 100041selectedLine	12857 100041selectedText	12857 100041selection	11056 47006 63264 63565 63809 2765 64031 66705sent	3428 6031separator	101716serial port	98571set	2179 14879 47503set checkpoint	13231seven	91279shadow	83265shared	81699 82124sharedHilite	99648shift	32047 35701 49918 64480short	33535 55207 66404show	47827 82338 82576 82724shrink	50441sides	78788sine	64752six	91279size	14879 16789 62877 72105 74454 91932 81132 83131 85825slow	50441sound	31649 34624 43407 64990source	11056spaces	55302 56991 72105 77376 91279speaker	34624speed	50441 70900spray	31855 66705square	65137stacks	4312 17907 19234 22569 23747 24386 25274 34045 36226 38981 46772 48812 48929 7047 65969 68357 68822 69105 69328 72105 77648 41254 80353 83131 85008stacksInUse	48812 48929 85008standalone application	99402start	24600 41778 48812startup	4312 24600static	8578step	13231 34213step into	13231sticky button	52836 53252 53775 86415still	20820stop	48929stretch	50441string	37172 60426 90270structures	25485 25835 25888 26361 26404 26805 26982 27256 27427 27895 28073 28298 28477 28715 29297style	48321 92736 83265 86415substring	60426subtract	49191 89523such	62431suspend	25005 83697synonyms	11326system	3428 105361 17192 17449 17907 18315 18636 18888 19146 19234 97279 19615 19769 96465 20071 20340 20661 20820 21197 21286 35844 21577 21952 22221 22421 22569 22993 23197 23457 23747 23995 24298 24386 16789 24600 25005 25274 102613system software version	102613tab	3428 46143 49516 76921 91279tabKey	3428 49516tangent	52019 65714target	11326 65969telephone	98571 99166template	95696 42512 41254tempo	43407ten	91279test	26404 26805text	30026 31208 31855 34478 37172 47006 49918 51002 52559 53775 56722 57200 59877 60426 64031 66705 75848 76567 77648 90631 90961 91426 91932 92736 80353 80859 81132 82124 83738 84197 84911 85522 85825 86415textalign	45965 83738textstyle	45965 86415textStyleList	92736then	26404 26805there	6157there is a	6157there is an	6157there is no	6157there is not a	6157three	91279ticks	66203time	33535 50819 63225 66203 66404times	27895 41612title	39797 47827 74508 101319title width	101319to	2179 11326 12290 28477 29297 38981 47503 50441 51002tones	99166tool	31855 39797 66705top	50441 86868total	102760trace	13231 34213 79684 94238trace delay	13231trace into	13231transcendental	55719 57488transparent	83265trap	26982trigonometric	52019 54961 64752 65714true	91279trueOrFalse	11056 26404 26805 28073 28298 50277 50819 67503 76921 67829 68357 69328 69837 69523 70576 84490 71150 71193 71536 71811 72386 72540 75037 75546 75848 76367 77229 77376 78944 81699 82124 82338 82576 82724 83697 84197 87651 88854 90049truncate	66892two	91279type	49918 67829 87536 6157unlock	50046until	28073 45683 50819up	21197 24600 30663 50441 54096 58372 58695 60915 64480 91279use	48812 48929 85008user	2179 87536 87651using	10721 48812 48929 85008values	10721 11056 51285 67163variable	10721 11056 26361 87839variable watcher	13231 87839vBarLoc	13231 87839version	102613vertical	53066 59060 81344volume	99166watch	34213 70204watcher	13231 92176 79684 87839where	6031 41060 50277while	28298 50819white	50441whole	37172wide	88854width	101319window	102019windows	12744 11969 4312 35844 24386 16789 25274 32483 39797 47503 47827 7047 95475 85301 91818 86710 74022 74795 74508 79936 86116 81344 86868 87153 88724 89143wipe	50441with	28477 41778 42410 42512within	21286 89783word	37172wrap	84490write	41996 51002zero	91279zone	102341zoom	50441</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>36</id>
+		<text>markchar</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>44</id>
+		<text>markChar</text>
+	</content>
+	<name>Find Topic</name>
+	<script>on openCardselect line 1 of cd fld "User Keys"pass openCardend openCardon returnKeyif the selectedField is emptythen click at the loc of button "Find" -- ∆else pass ReturnKeyend returnKeyon EnterKeyif the selectedField is emptythen click at the loc of button "Find" -- ∆else pass EnterKeyend EnterKey</script>
+</card>

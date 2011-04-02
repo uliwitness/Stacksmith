@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>78411</id>
+	<filler1>0</filler1>
+	<bitmap>BMAP_2929.pbm</bitmap>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>6</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>277</left>
+			<top>187</top>
+			<right>453</right>
+			<bottom>227</bottom>
+		</rect>
+		<style>roundrect</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>3</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>256</left>
+			<top>48</top>
+			<right>330</right>
+			<bottom>180</bottom>
+		</rect>
+		<style>rectangle</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Geneva</font>
+		<textSize>9</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>13</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>5</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>272</left>
+			<top>169</top>
+			<right>320</right>
+			<bottom>188</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>9876</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>7</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>279</left>
+			<top>191</top>
+			<right>454</right>
+			<bottom>224</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Geneva</font>
+		<textSize>10</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>13</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>4</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>256</left>
+			<top>49</top>
+			<right>330</right>
+			<bottom>180</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script>on mouseDownshow card field 1wait until the mouse is uphide card field 1end mouseDown</script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>pattern</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] pattern to posIntegerwhere posInteger is an integer in the range 1 through 40.The pattern property returns or sets the current pattern used to fill shapesor to paint with the Brush tool.If you edit one of the patterns, HyperCard saves the new patternwith the stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the pattern to 1 -- whiteset the pattern to 12 -- blackset the pattern to 22 -- gray</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>3</id>
+		<text>1    11  21  312    12  22  323    13  23  334    14  24  345    15  25  356    16  26  367    17  27  378    18  28  389    19  29  3910  20  30  40</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>7</id>
+		<text>Press and hold the mouse button over a pattern to see its number.</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties67958 74454 45965 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>integer	paint	patterns	property</text>
+	</content>
+	<name>pattern</name>
+	<script>on showCardStuff booleanset the showPict of this card to booleanset the visible of card button 1 to booleanset the visible of card button 2 to booleanset the visible of card field 2 to booleanhide card field 1end showCardStuff</script>
+</card>

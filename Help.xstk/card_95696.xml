@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>95696</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>copy template</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands41254 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>opy template templateName ¬                 to stack The copy template command makes a copy of  printing report template templateName  from the current stack and moves it into the stack stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>189</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>190</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>195</offset>
+			<id>291</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>copy template "Monthly Report" to stack "Business Plan"copy template theTemplate to stack theStack</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>copy	template	command	printing	report</text>
+	</content>
+	<name>copy template</name>
+	<script></script>
+</card>

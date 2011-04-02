@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>39675</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>help</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>elpThe help command goes to the first card of the HyperCard Help stack.HyperCard sends the help commandto the current card when the user chooses Help from the Go menu(or presses ⌘-?).Note: The command go help is equivalent to go stack "help", while the help command tries to execute  go stack "HyperCard Help".</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>185</offset>
+			<id>45</id>
+		</stylerun>
+		<stylerun>
+			<offset>186</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>209</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>218</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>234</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>250</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>261</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>267</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>292</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>318</offset>
+			<id>315</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>You can handle the help messageas follows:on help   statementsend help</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands3428 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>card messages	command	help	message</text>
+	</content>
+	<name>help</name>
+	<script></script>
+</card>

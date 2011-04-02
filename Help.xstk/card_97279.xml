@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>97279</id>
+	<filler1>0</filler1>
+	<cantDelete> <true /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>errorDialog</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages97387 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>rrorDialog errorMessageTextHandler:on errorDialog whatText   statementsend errorDialogHyperCard sends the errorDialog message and its text to the current card if it encounters an error when the lockErrorDialogs property is set true.(In such a case, the ordinary error dialog box is not displayed.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>77</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>114</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>127</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>296</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>219</offset>
+			<id>296</id>
+		</stylerun>
+		<stylerun>
+			<offset>220</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>235</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>240</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>293</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>296</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>errorMessageText is the contents of the error dialog box that would be displayed if the lockErrorDialogs property were false.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>1</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>18</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>on errorDialog what  if what is "User level is too low to edit scripts."   then set userLevel to 5end errorDialog</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>message	system	error	dialog box</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n errorDemo  set the cantDelete of this card to true  set lockErrorDialogs to true  doMenu "Delete Card"end errorDemo-- handler in the script of this cardon errorDialog whichError  answer "Had lockErrorDialogs not been set to true," &amp;&amp;¬  "HyperCard would have displayed the error, “" &amp; whichError &amp; "”"end errorDialog</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<name>errorDialog</name>
+	<script>-- handler in the script of this cardon errorDialog whichErroranswer "Had lockErrorDialogs not been set to true," &amp;&amp;¬"HyperCard would have displayed the error, “" &amp; whichError &amp; "”"end errorDialog</script>
+</card>

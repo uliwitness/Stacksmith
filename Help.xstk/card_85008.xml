@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>85008</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>stacksInUse</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>the stacksInUseThe stacksInUse property returns a return-separated list of stacks that have been inserted into the message-passing path via the start using command.  Each stack appears in the order it will receive messages. The stacksInUse contains the full path names of the stacks being used.HyperCard can use up to 16 stacks.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>146</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>159</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>230</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>243</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>he number of lines of the stacksInUse -- total stacks in useif "My Cool Scripts" is not in the stacksInUse then ... -- complain</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Note: You can’t compact a stack that’s being used.</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n whatStacksInUse  answer "The stacks in use are:" &amp; return &amp; return &amp; the stacksInUseend whatStacksInUse</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties2465 48812 48929 8578 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>global	new features	property	stacks	stacksInUse	use	using</text>
+	</content>
+	<name>stacksInUse</name>
+	<script></script>
+</card>

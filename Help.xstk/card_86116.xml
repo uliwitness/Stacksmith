@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>86116</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>right</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he right of cardset [the] right of button to integerset [the] right of field to integerset [the] right of window to integerget [the] right of menuBarThe right property returns or setsan integer equal to item 3 of an element’s rectangle.  If you set the right of an object, it moves horizontally; the object's size remains the same. You can’t set the right of cards: use the rect, height, or width properties to resize the cards in a stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>18</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>44</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>64</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>91</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>128</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>137</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>156</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>157</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>167</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>354</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>365</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>382</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>387</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>388</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>395</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>399</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>405</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>ou can't set the right of the menu bar.HyperCard determines the rightof buttons, fields, and HyperCard’s built-in windows relative to the top-left corner of the  current card. HyperCard determines the right ofthe card window relative to the top-left corner of the screen with the menu bar.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>213</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the right of card button 1the right of bkgnd field id 34the right of this cardthe right of message boxthe right of tool windowthe right of card windowset the right of bkgnd button "Next" to the right of bg btn "Prev"</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n moveButton  put the right of bkgnd btn "Run the Script" into savedRight  set cursor to none  repeat for 23    put the right of bkgnd btn "Run the Script" - 26 into newRight    set the right of bkgnd btn "Run the Script" to newRight    if the right of bkgnd btn "Run the Script" &lt; 0    then set the left of bkgnd btn "Run the Script" to ¬    the width of card window  end repeat  set the right of bkgnd btn "Run the Script" to savedRightend moveButton</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>192</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>251</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>257</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>400</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>406</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties85301 91818 86710 74022 74795 79936 62877 81344 86868 87153 89143 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	card	card window	field	property	rectangle	right	windows</text>
+	</content>
+	<name>right</name>
+	<script></script>
+</card>

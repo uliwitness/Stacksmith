@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>10721</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>Using parameter variables</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>n mouseUp  sayMessage "red", "apple"end mouseUpon sayMessage color, fruit  put "I want a" &amp;&amp; color &amp;&amp; fruitend sayMessageYou can use the variables color and fruit anywhere inside the handler. When HyperCard sees them, it usesthe values currently bound to them.(The variables remain bound only while the handler runs.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>128</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>162</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>172</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text> handler can receive values (called parameters) and use them as it runs. You represent each value with a  parameter variable. A parameter variable always follows the handler name in a comma-separated list.For example, when running the following mouseUp handler, HyperCard calls sayMessage with two values, "red" and "apple". It then binds these values to the parameter variables color and fruit in the sayMessage handler.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>141</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>247</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>280</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>292</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>307</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>315</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>318</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>326</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>381</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>388</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>391</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>398</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>404</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>416</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  sayMessage "red", "apple"end mouseUpon sayMessage color, fruit  put "I want a" &amp;&amp; color &amp;&amp; fruit &amp; "." into the Message boxend sayMessage</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>86</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>HyperTalk basics25888 26982 10397 9950 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>bind	bound	call	parameters	pass	using	values	variable</text>
+	</content>
+	<name>Using parameter variables</name>
+	<script></script>
+</card>

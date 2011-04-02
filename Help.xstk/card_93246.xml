@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>93246</id>
+	<filler1>0</filler1>
+	<cantDelete> <true /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <true /> </dontSearch>
+	<owner>7507</owner>
+	<part>
+		<id>10</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>53</left>
+			<top>211</top>
+			<right>73</right>
+			<bottom>233</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Geneva</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>Current Hilite</name>
+		<script></script>
+	</part>
+	<part>
+		<id>12</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>268</left>
+			<top>272</top>
+			<right>476</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>13</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>294</left>
+			<top>272</top>
+			<right>464</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Go Back</name>
+		<script></script>
+	</part>
+	<part>
+		<id>14</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>271</left>
+			<top>272</top>
+			<right>295</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>6720</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>14</textSize>
+		<textStyle>plain</textStyle>
+		<name>Return Arow</name>
+		<script></script>
+	</part>
+	<part>
+		<id>15</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>268</left>
+			<top>273</top>
+			<right>475</right>
+			<bottom>290</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Go Back</name>
+		<script>on mouseUpgoBackend mouseUp</script>
+	</part>
+	<part>
+		<id>16</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>11</left>
+			<top>52</top>
+			<right>129</right>
+			<bottom>73</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <true /> </showName>
+		<highlight> <true /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Where am I?</name>
+		<script>on mouseUptoggleButtons -- in the script of this cardend mouseUp</script>
+	</part>
+	<part>
+		<id>17</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>11</left>
+			<top>80</top>
+			<right>129</right>
+			<bottom>101</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>What can I do?</name>
+		<script>on mouseUptoggleButtons -- in the script of this cardend mouseUp</script>
+	</part>
+	<part>
+		<id>18</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>11</left>
+			<top>109</top>
+			<right>129</right>
+			<bottom>130</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Where can I go?</name>
+		<script>on mouseUptoggleButtons -- in the script of this cardend mouseUp</script>
+	</part>
+	<part>
+		<id>19</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>11</left>
+			<top>6</top>
+			<right>159</right>
+			<bottom>30</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Overview</name>
+		<script>on mouseUptoggleButtons -- in the script of this cardend mouseUp</script>
+	</part>
+	<part>
+		<id>20</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>138</left>
+			<top>44</top>
+			<right>472</right>
+			<bottom>264</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>Where am I?</name>
+		<script></script>
+	</part>
+	<part>
+		<id>21</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>138</left>
+			<top>44</top>
+			<right>472</right>
+			<bottom>264</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>15</textHeight>
+		<name>What can I do?</name>
+		<script>on mouseUpcheckActiveTextend mouseUp</script>
+	</part>
+	<part>
+		<id>23</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>138</left>
+			<top>44</top>
+			<right>472</right>
+			<bottom>264</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>Overview</name>
+		<script></script>
+	</part>
+	<part>
+		<id>26</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>138</left>
+			<top>44</top>
+			<right>472</right>
+			<bottom>264</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>Where can I go?</name>
+		<script>on mouseUp-- trap this messageend mouseUp</script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>26</id>
+		<text>Overview of Help</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>10</id>
+		<text>5</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>20</id>
+		<text>ou’re currently in the HyperTalk Reference stack.This stack describes HyperTalk, HyperCard’s script language. By writing your own scripts, you have much more control over HyperCard than is available using just the menu commands. You can make a stack do what you want it to do.If you’re new to scripting, you should go throughthe third chapter of  the HyperCard Reference Manual  for some beginning practice.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>355</offset>
+			<id>297</id>
+		</stylerun>
+		<stylerun>
+			<offset>382</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>21</id>
+		<text>esides using the Main Topics card to locate topics,you can:• Click the Find Topic button at the bottom of every card    to look for topics matching words that you enter.• Click the Examples, Demo Scripts, and Tips buttons   at the bottom of a topic card to see more information.    Click Related Topics to jump to other topics in this    stack related to the one you’re on.• Click active text (text with a thick gray underline)    to see pop-up definitions. This includes HyperTalk    placeholders (in italics) such as card.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>188</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>210</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>216</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>220</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>297</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>311</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>393</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>404</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>533</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>537</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>23</id>
+		<text>An Instructional Products productstack by:                          jim, eric, and patsage advice by:              jeromeillustrations by:            mimiedited by:                        seancool demo scripts by:   elilots of help from:         eli, sarah, jeffery, jody,                                         robin, bob, ken, jay, craig2.2 update by:                 eli, pat, sarah, and scotwith help from:            alan, brian, catherine, elaine, paul,                                           pete, ray, and susan</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>26</id>
+		<text>yperCard has three Help stacks. You can movebetween them by choosing the one you want fromthe Help menu:• The HyperCard Help stack describes how    to browse through and author HyperCard stacks.• This stack, the HyperTalk Reference stack, describes     HyperTalk, the language you use to write scripts.• The Help Extras stack contains glossary items, tips,    and troubleshooting information used by this stack    and by the HyperCard Help stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>220</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>239</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>319</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>330</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<name>Overview of Help</name>
+	<script>on openCardupdateOverviewItem falseresetCardpass openCardend openCardon resumeStacksend "resumeStack" to this bgupdateOverviewItem falseend resumeStackon closeCardupdateOverviewItem truepass closeCardend closeCardon suspendStackupdateOverviewItem truepass suspendStackend suspendStackon toggleButtonslock screenget the short name of card button (card field "Current Hilite")set the hilite of card button it to falsehide card field itset the hilite of the target to trueshow card field (the short name of the target)unlock screenput the number of the target into card field "Current Hilite"end toggleButtonson resetCardclick at the loc of card button "Where am i?" -- ∆end resetCardon mouseUpresetCardend mouseUpon updateOverviewItem EnabledStateglobal gHMnuif there is a menu gHMnuthen set enabled of menuItem 1 of menu gHMnu to EnabledStateend updateOverviewItem</script>
+</card>

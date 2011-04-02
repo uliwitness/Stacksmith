@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>17192</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>loseCardHandler:on closeCard   statementsend closeCardHyperCard sends the closeCard message to a card when a user (or script) goes to another card; deletes a card, background, or stack; or quits HyperCard.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>closeCard</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages98925 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>card	card messages	Close	message	system</text>
+	</content>
+	<name>closeCard</name>
+	<script></script>
+</card>

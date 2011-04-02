@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>98399</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands73723 98925 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>eply (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>se reply only if you're handling Apple events yourself. If HyperCard handles an Apple event, it will provide the appropriate information in the reply.See the documentation for the sending program to know which reply keywords it expects. (errs and errn are standard keywords.)In AppleScript, you may need to reply with both an error string and an error number to trigger an error clause.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>212</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>219</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>241</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>246</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>249</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>255</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<name></name>
+	<script></script>
+</card>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>100041</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>multipleLines</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties12857 75848 47006 63809 64031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] multipleLines of field ¬ to trueOrFalseThe multipleLines property returns or sets whether a user can extend the range of highlighted lines in a list field . When the multipleLines is true, the user can extend highlighted lines either by shift-clicking any point before or after the insertion point in a field or by dragging through text.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>1</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>294</id>
+		</stylerun>
+		<stylerun>
+			<offset>168</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>MultipleLines appears as the  “Multiple Lines” option in the Field Info dialog box, where it is disabled if autoSelect is set to false. To learn which lines are selected, get the selectedLine of field.  To learn the contents of those lines, get the selectedText of field.  To preselect lines, use   select line x [to y] of field</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>1</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>253</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>270</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>275</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>307</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>331</offset>
+			<id>289</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>get the multipleLines of field 6if the multipleLines of field list is truethen answer "You may choose three items in this list."</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>property	list field	selectedText	selectedLine	select	autoSelect	Multiple Lines	field</text>
+	</content>
+	<name>multipleLines</name>
+	<script></script>
+</card>

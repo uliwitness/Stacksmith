@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>38981</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>go</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>o [to] ordinalgo [to] positiongo [to] card [of bkgnd ] [of stack ] go [to] bkgnd [of stack ]go [to] stackgo [to] [card of] [bkgnd of ] stack ¬      [in a new window] [without dialog]The go command takes the user toa card in a stack. The ordinal and position forms take the user to a cardin the current stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>79</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>86</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>87</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>122</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>126</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>132</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>137</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>143</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>148</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>175</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>190</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>248</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>249</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>257</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>260</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>261</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>269</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>270</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>If you name a stack (or background) without specifying a card, HyperCard goes to the first card of the stack(or background). HyperCard puts empty into the function the result when the go command succeeds; it puts "No such card." or "No such stack." into the result when it can’t go to the card or stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>143</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>150</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>167</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>179</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>191</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>216</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>233</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>235</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>252</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>257</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>269</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n goFirstCardAndBack  set cursor to watch  set lockMessages to true -- to leave the demo script up  go first card  go backend goFirstCardAndBack</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>122</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>--Go to an ordinal in the current stack (referring to cards):go firstgo lastgo secondgo third--Go to a position in the current stack (referring to cards):go thisgo nextgo prev-- Go to a different card, perhaps in a different stack:go back -- could be in another stackgo forth -- could be in another stackgo card 4go card id 23405go first cardgo next cardgo previous cardgo recent card -- could be in another stackgo last cardgo mid cardgo any cardgo first card of bkgnd 2go card 1 of second bkgnd of stack "My Stack"-- Go to a different background in the current stack:go bkgnd "Index"go bkgnd "Index" of stack "My Stack"-- Go to a different stack:go to stack "Address"go stack "Address"go "Address"go home  go help-- Use full pathname:go "Simonides:Fly II:Current Fly:Help" -- Go to new stack, but open it in a new window:go stack "My Stack" in a new windowif the result is not empty then ... -- couldn't open it in a new window-- Go to a new stack, but skip the dialog asking where the stack is if -- HyperCard can't find it:go stack "My Stack" without dialogif the result is not empty then ... -- didn't go there-- Go to a new stack,open it in a new window, and skip the dialog:go to stack "Home" in new window without dialog</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands27092 11943 40922 75037 75404 75546 41060 44101 45173 50046 50441 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	card	command	go	mark	marked	stacks	to</text>
+	</content>
+	<name>go</name>
+	<script></script>
+</card>

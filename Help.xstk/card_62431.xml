@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>62431</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>result</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he result  Values returned: • the value set by a return keyword    during the execution of  a message• empty if most commands succeed;     otherwise, a message string</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>124</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>go card "ZZ" if the result is not empty then ... -- didn't go therefind "XZZ" in field "Title"if the result is not empty then ... -- didn't find it</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n resultDemo  find "Pat, Jim, Eric, and Eli" in bkgnd field "title"  answer "Pat, Jim, Eric, Eli:" &amp;&amp; the result  go to card "Pat, Jim, Eric, and Eli"  answer "Pat, Jim, Eric, and Eli:" &amp;&amp; the resultend resultDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>204</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>n handlers, it’s usually best to test a command with an expression such asif the result is not empty then ...That way, the handler doesn’t rely on the specific value of a string.Click Related Topics for more information about the value returned by the result for each command.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>114</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>254</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>266</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions30026 31208 33535 34045 36906 37172 25888 38981 72855 40224 26982 41778 42410 42512 44420 28715 46772</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>card	find	found	function	go	message	no	not	result	such</text>
+	</content>
+	<name>result</name>
+	<script></script>
+</card>

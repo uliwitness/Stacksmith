@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>50441</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>visual</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>isual [effect] effect [speed ] ¬       [to image ]The visual command specifies a visual effect for HyperCard to use as it moves from one card to another. (Click the  placeholders effect, speed, and image to see their possible replacements.) Visual must be followed by a go command to have any effect.The optional speed parameter tells HyperCard to perform the visual effect faster or slower than normal.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>182</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>189</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>191</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>197</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>201</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>207</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>208</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>244</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>251</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>273</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>277</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>318</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>319</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>324</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>325</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>334</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he to image option changes the screen to white, gray, black, inverse,or the image of the destination card before applying the visual effect. HyperCard uses the visual effect plain as its default effect. The default imageis card. Note: Only the effects push, scroll, shrink, stretch, and zoom  work with the command go this card.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>184</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>227</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>232</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>258</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>263</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>265</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>271</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>272</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>280</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>288</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>293</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>298</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>321</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>334</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  set cursor to watch  set lockMessages to true -- leave the demo script up  visual effect shrink to top to grey  visual effect stretch from top to card  go next card  wait 10  visual effect shrink to bottom slow to white  visual effect stretch from top to card  go prev card  visual effect barn door close to black  visual effect iris open slow to card  go last card  wait 10  visual effect venetian blinds very slow  go backend mouseUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>128</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>194</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>241</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>247</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>297</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>303</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>338</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>344</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>402</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>408</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>visual zoom openvisual effect zoom openvisual effect zoom open fastvisual effect zoom open to blackvisual effect zoom open very fast to black</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands38981 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>barn	black	bottom	card	centered	checker	Close	command	door	down	effects	fast	gray	image	inverse	iris	left	new features	open	plain	right	scrolling	shrink	slow	speed	stretch	to	top	up	white	wipe	zoom</text>
+	</content>
+	<name>visual</name>
+	<script></script>
+</card>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>18085</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>ersion (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>70</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>The version of stack returns a comma-separated list of five numbersin the format of Macintosh version resources:• Item 1 is the version of HyperCard    that created the stack. • Item 2 is the version that last    compacted the stack. • Item 3 is the oldest version to change    the stack since the last Compact Stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>• Item 4 is the version that has most    recently changed the stack. • Item 5 is the number of seconds from    12:00 midnight 1/1/04 to the last time    that the stack was changed.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties</text>
+	</content>
+	<name>version 2</name>
+	<script></script>
+</card>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>65969</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>target</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he [adjective ] targetValue returned: a text string that identifies the object that originally receives a message sent by HyperCard or by the send keyword. If an object does not have a name, the target returns its ID. The adjectives abbreviated, long,and short return various forms of an object’s name as with the property the name. (Click Related Topics for more information about name.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>144</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>150</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>205</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>237</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>249</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>250</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>255</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>260</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>267</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>328</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>339</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>387</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>392</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>ote: the abbreviated target is the same as the target.HyperTalk distinguishes between the target and target: the target always returns a string that identifies an object, but the single word target is a container. If the target is a button or field, target refers to the contents of that button or field.  If not, target returns an error.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>103</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>110</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>123</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>201</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>221</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>233</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>254</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>262</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>319</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>326</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n whoIsTheTarget  -- Since the Run the Script button sends a message to the demo script  -- field, the target is set to it while this handler runs.  answer "The target is:" &amp;&amp; the target  answer "target (a container) is:" &amp; return &amp; return &amp; ¬  char 1 to 200 of target -- string must be &lt; 255 charsend whoIsTheTarget</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>180</offset>
+			<id>273</id>
+		</stylerun>
+		<stylerun>
+			<offset>190</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>268</offset>
+			<id>273</id>
+		</stylerun>
+		<stylerun>
+			<offset>275</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the short targetthe long targetthe abbreviated targetthe abbrev targetthe abbr targetput word 2 of the clickLine into Nselect line N of the target -- a fieldif the target contains "button" then ...else if the target contains "field" then ...</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions77648 27256 29297 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	button	card	field	function	message	objects	stacks	target</text>
+	</content>
+	<name>target</name>
+	<script></script>
+</card>

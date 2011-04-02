@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>86710</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>height</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] height of button to integerset [the] height of field to integerset [the] height of card to integerset [the] height of window to integerget [the] height of menuBarThe height property returns or sets an integer equal to the height in pixels of an object or window. Setting the height of a button, field, or window resizes it. HyperCard maintains the location (center coordinate) of the object, expanding or shrinking it on both sides evenly.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>44</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>64</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>132</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>150</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>154</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>159</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>178</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>182</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>190</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>249</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>254</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the height of card button 1the height of bkgnd field id 34the height of this cardthe height of message boxthe height of tool windowthe height of card windowset the height of bkgnd button "Next" to the height of bg btn "Prev"</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Setting the height of a card resizes all the cards in a stack. HyperCard forces the integer specifying the height to bean even number greater than 64 pixels.You can't set the height of the menu bar.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties85301 91818 74022 74795 79936 86116 62877 81344 86868 87153 89143 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	card	card window	field	height	property	rectangle	windows</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n growAndShrinkButton  repeat 15    set height of bkgnd btn "Run the Script" to ¬    (the height of bkgnd btn "Run the Script") + 2    wait 1  end repeat  repeat 15    set height of bkgnd btn "Run the Script" to ¬    (the height of bkgnd btn "Run the Script") - 2    wait 1  end repeatend growAndShrinkButton</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>180</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>186</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>231</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>237</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<name>height</name>
+	<script></script>
+</card>

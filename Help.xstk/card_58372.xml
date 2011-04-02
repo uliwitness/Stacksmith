@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>58372</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>mouse</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he mouseValue returned: one of the constants up or down indicating whether the mouse button is up or downNote: Use the mouse to return the current state of the mouse button and the mouseClick to return whether the mouse has been clicked in the current handler.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>110</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>184</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n theMouse  show bkgnd field "demo field"  displayMessage "Click the mouse to continue . . ."  wait until the mouse is down  hide bkgnd field "demo field"end theMouse</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>f the mouse is up then ...if (the mouse is down) or (the commandKey is down) then ...wait until the mouse is up</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions32809 32047 58695 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>down	function	mouse	up</text>
+	</content>
+	<name>mouse</name>
+	<script></script>
+</card>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>61134</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>param</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he param of posIntegerValue returned: the value (as opposed to the name) of a parameter variablein the current handler, or empty if the parameter variable doesn't existThe param of 0 is the name of the message itself.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>122</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>126</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>189</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>param of 1param(1)put param(0) into theMessageName</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n paramDemo   showParams 1, "a", "this is fun", the number of cardsend paramDemoon showParams   repeat with N = 0 to the paramCount     put N &amp; ":" &amp;&amp; space &amp;&amp; param(N) &amp; return after theMessage   end repeat   answer "The parameters are:" &amp; return &amp; return &amp; theMessageend showParams   </text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>167</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>172</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions32809 25888 26982 61390 61645 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>function	integer	message	parameters</text>
+	</content>
+	<name>param</name>
+	<script></script>
+</card>

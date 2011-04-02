@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>6157</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>1</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>9</left>
+			<top>32</top>
+			<right>183</right>
+			<bottom>55</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>bold</textStyle>
+		<textHeight>14</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>2</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>9</left>
+			<top>52</top>
+			<right>183</right>
+			<bottom>239</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <true /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Monaco</font>
+		<textSize>9</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>The List</name>
+		<script>on mouseUpdescribeLineend mouseUp</script>
+	</part>
+	<part>
+		<id>3</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>37</top>
+			<right>471</right>
+			<bottom>228</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>4</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>is a, is an</name>
+		<script></script>
+	</part>
+	<part>
+		<id>5</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>there is a, there is an</name>
+		<script></script>
+	</part>
+	<part>
+		<id>6</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>there is no</name>
+		<script></script>
+	</part>
+	<part>
+		<id>8</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>there is not a</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>Type and existence operators</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>1</id>
+		<text>Operators</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>2</id>
+		<text>is a, is anthere is a, there is anthere is nothere is not a</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>3</id>
+		<text>lick an operator for a description of it.(Click Tips for more information about operator precedence.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>4</id>
+		<text>esults in true if the expression to its leftis the same type as the type identifier on the right. The type identifiers are: number, integer, point, rect, date, and logical.23 is a number      -- truepi is an integer    -- false"0,0,0" is a point  -- false"0,0,0,0" is a rect -- true"8/09/65" is a date -- truefalse is a logical  -- true</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>132</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>141</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>148</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>154</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>5</id>
+		<text>esults in true if the expression to the rightof the operator exists. The expression can take  any of the following forms (with appropriate adjectives and/or names):window    menu     menuItem   stackfile      disk     document   applicationfolder    picture  field      program [ID]*button    part     scriptingLanguagecard      background          *Under system 7 only</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>168</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>6</id>
+		<text>esults in true if the expression to the rightof the operator does not exist. The expression can identify the same elements as there is a.there is no window "message watcher"there is no menu "MayBe"there is no menuItem "Back" of menu "Go"there is no file "Simonides:References"there is no stack "Home"there is no card button 1there is no disk "External Hard Disk"there is no card 6there is no bkgnd "fish bowl sizes"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>128</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>8</id>
+		<text>ame as the operator there is no.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Operators and constants8338 26404 26805 27427 27895 28073 28298 28477 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>and	existence	is	is a	is an	new features	no	not	operators	precedence	there	there is a	there is an	there is no	there is not a	type</text>
+	</content>
+	<name>Type and existence operators</name>
+	<script>-- ∆ Localize: the names of the fields that are displayed--             is the same as text in the "The List" field.on closeCardmouseUppass closeCardend closeCardon mouseUphideDescriptionsend mouseUp</script>
+</card>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>88724</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>visible</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] visible of button ¬    to trueOrFalseset [the] visible of field ¬    to trueOrFalseset [the] visible of window ¬    to trueOrFalseset [the] visible of externalWindow ¬    to trueOrFalseset [the] visible of menuBar ¬    to trueOrFalseThe visible property returns or sets whether a button, field, window, or the menu bar is visible on the screen.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>86</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>103</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>146</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>151</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>152</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>156</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>168</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>182</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>192</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>208</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>209</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>212</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>213</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>242</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>253</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>255</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>258</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>267</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>he visible of card button 1the visible of bkgnd field id 34the visible of message boxthe visible of tool windowthe visible of card windowthe visible of message watcherthe visible of variable watcherset the visible of bkgnd button "Next" to falseset the visible of card window to trueset the visible of field 1 to not (the visible of field 1)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n flashButton  hideShowObject "bkgnd btn id 57", 6end flashButtonon hideShowObject whatObject, howManyTimes  repeat for (howManyTimes * 2) times    set the visible of whatObject to not the visible of whatObject  end repeatend hideShowObject</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>163</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>170</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Setting the visible of a window to true makes it the frontmost window.With external windows, an external command or external function must first create a window before the visible will work on it. Setting the visible of a window to true (showing it) will not create the window. Similarly, setting the visible of a window to false (hiding it) doesn't remove it from the window list (from memory); use the close command to dispose of a window.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>136</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>211</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>220</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>258</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>261</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>303</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>312</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>406</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>413</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties32483 39797 47827 82724 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	card window	external	external window	field	new features	point	property	windows</text>
+	</content>
+	<name>visible</name>
+	<script></script>
+</card>

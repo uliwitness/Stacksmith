@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>71536</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>filled</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] filled to trueOrFalseThe filled property returns or sets whether HyperCard fills shapes withthe current pattern on the Patterns palette as you draw them. It corresponds to the Filled command in the Options menu (which appears when you selecta Paint tool).The default value is false.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>292</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>298</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>The filled property affects the Rectangle, Rounded Rectangle,Oval, Curve, Regular Polygon,and Polygon tools.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  show bkgnd field "demo field"  paintSetUp  set filled to false  choose rect tool  displayMessage "Painting an UNFILLED shape:"  drag from 180,100 to 300,220  wait 2 seconds  set filled to true  choose oval tool  displayMessage "Painting a FILLED shape:"  drag from 180,100 to 300,220  wait 1 second  doMenu "Revert"  hide bkgnd field "demo field"   choose browse toolend mouseUpon paintSetUp  show card pict  set the dragSpeed to 125  set the grid to false  set the linesize to 2  set the pattern to 33  set the centered to falseend paintSetUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>94</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>94</id>
+		</stylerun>
+		<stylerun>
+			<offset>204</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the filled to true</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties69837 77229 77376 45965 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>filled	paint	property	trueOrFalse</text>
+	</content>
+	<name>filled</name>
+	<script></script>
+</card>

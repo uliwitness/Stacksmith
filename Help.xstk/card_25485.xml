@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>25485</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>3</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>393</left>
+			<top>272</top>
+			<right>418</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>20002</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Prev</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>do</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>o expression [as scriptLanguage]The do keyword forces HyperCard to evaluate expression and to send the result as a message to the current card.  The value of expression  can contain more than one line. For example, if you have a series of statements in a card field called Example, HyperCard will apply do to each line:do card field "Example"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>18</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>79</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>89</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>118</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>162</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>163</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>307</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>311</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>326</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n doLast3Lines  put the number of lines of bkgnd field "Demo Script" into N  do line (N - 2) to N of bkgnd field "Demo Script"end doLast3Linesput sqrt(2)beepflash</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>hen you use the as scriptLanguage form, HyperCard executes the script in expression using the OSA-compliant scripting component named in scriptLanguage:do field 1 as AppleScriptdo theScript as UserTalkYou can also send do fromthe Message box.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>74</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>152</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>153</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>205</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>224</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>228</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Keywords67163 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>control	do	evaluate	keyword	structures	AppleScript</text>
+	</content>
+	<name>do</name>
+	<script></script>
+</card>

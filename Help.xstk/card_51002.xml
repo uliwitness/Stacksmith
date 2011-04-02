@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>51002</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>2</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <false /> </enabled>
+		<rect>
+			<left>451</left>
+			<top>272</top>
+			<right>476</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>20003</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Next</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>write</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>rite text to file fileName ¬  [at { eof|end|[-]integer]}The write command copies text to a file. You must have already opened the file with the open file command, and you should close it when writing is completed with the close file command.  The first write command after opening a file begins at the start of a file unless you use the at integer option, with integer as the character position within the file where writing is to begin.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>147</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>225</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>237</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>258</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>265</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>343</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>346</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>353</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>354</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>367</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>374</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>375</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he -integer  option begins writing at  integer characters from the file's end.Warning: HyperCard does not ask if you want to write over existing text.Subsequent write commands append text to the file’s contents after the last character written until you close the file.Note: You must provide the full path name of the file if it’s not at the same directory level as HyperCard.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>172</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>write "Hello" to file "My Data"write field 1 &amp; return &amp; field 2 to file "My Data"write someStuff to file "My File" at -15on writeData theData  ask file "Write to what text file?" with "Untitled"  if it is empty then exit writeData  put it into theFileName  open file theFileName  write theData to file theFileName  close file theFileNameend writeData</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands32483 41996 44420 45683 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>command	file	filename	output	text	to	write</text>
+	</content>
+	<name>write</name>
+	<script></script>
+</card>

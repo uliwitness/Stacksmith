@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>75404</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>lockRecent</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] lockRecent to trueOrFalseThe lockRecent property returnsor sets whether HyperCard displays miniature pictures for the last 42 cards visited by the user (or a handler) inthe Recent card dialog box. (LockRecent does not affect the trail of cards you can go back to.)The default setting is false, meaning HyperCard does display miniature pictures of the cards visited.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>213</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>224</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>329</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>333</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the lockRecent to true</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Setting lockRecent to true speeds up scripts that go to cards.HyperCard sets lockRecent to falseon idle.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>79</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>91</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties38981 40922 75037 75546 50046 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>global	lock	property	recent</text>
+	</content>
+	<name>lockRecent</name>
+	<script></script>
+</card>

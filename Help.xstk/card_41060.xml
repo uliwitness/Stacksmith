@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>41060</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>mark</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ark all cardsmark cardmark cards where trueOrFalsemark cards by finding ¬      [international] text [in field ]mark cards by finding chars ¬      [international] text [in field ]mark cards by finding word ¬      [international] text [in field ]mark cards by finding whole ¬      [international] text [in field ]mark cards by finding string ¬      [international] text [in field ]</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>77</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>110</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>118</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>170</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>175</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>179</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>184</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>238</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>242</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>243</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>244</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>247</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>252</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>255</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>307</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>311</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>312</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>313</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>316</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>321</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>324</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>377</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>381</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>382</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>383</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>386</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>391</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>mark all cardsmark card 1mark any cardmark last card of next bkgndmark cards where field "title" contains "select"mark cards where (word 2 of field "Pages" = 1)mark cards where isaCommand() -- a function that returns true or falsemark cards by finding "Duffy" in bkgnd field "Author"mark cards by finding whole "Cupertino, CA" in field "Address"mark cards by finding international "schøål" in field 5</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he mark command sets the marked property of the specified cards to true.  You can operate on the set of marked cards with commands such as print, go, show, and sort.Mark cards where  evaluates the given expression for every card in the stack. If its value is true, the card is marked.Mark cards by finding marks cards using the same mechanism as the find command. It marks cards very quickly.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>72</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>139</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>145</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>146</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>150</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>168</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>184</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>185</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>186</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>261</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>267</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>289</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>311</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>354</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>360</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands21415 17447 37172 38981 76367 44420 47827 48321 50277 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>all	by	card	characters	chars	command	find	finding	mark	new features	where</text>
+	</content>
+	<name>mark</name>
+	<script></script>
+</card>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>87536</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>userLevel</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] userLevel to posIntegerwhere posInteger is 1, 2, 3, 4, or 5.The userLevel property returns or sets the user level as follows:1  = Browsing2  = Typing3  = Painting4  = Authoring5  = Scripting</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>89</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>147</offset>
+			<id>15</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>161</offset>
+			<id>15</id>
+		</stylerun>
+		<stylerun>
+			<offset>167</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>15</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>15</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>15</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>HyperCard determines the default setting for userLevel from the Preferences card of the Home stack at startup and when HyperCard resumes after being suspended.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et the userLevel to 5if the userLevel &lt; 4 then ...-- Save and restore the user level:put the userLevel into savedUserLevelset the userLevel to 5... -- do stuff hereset the userLevel to savedUserLevel</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n whatUserLevel  answer "The current user level is:" &amp;&amp; the userLevelend whatUserLevel</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties32501 67829 78944 84197 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>global	level	property	type	user</text>
+	</content>
+	<name>userLevel</name>
+	<script></script>
+</card>

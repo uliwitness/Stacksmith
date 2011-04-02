@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>47315</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>elect (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>Select empty removes the current selection.  Use select empty insteadof click at to deselect text or objects.Select text applies to all the text ina field or in the Message box. You can select all the text or place the insertion point before the first character or after the last character of text.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Select chunk applies to a specified range of text in the Message box or in a field, to one or more lines in a list field, or to a line (that is, a “menu” item) in a popup button. In the Message box or in a field you can select the entire range of text or place the insertion point before the first character or after the last character of the range.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>315</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands24266 12857 100041 63264 63565 63809 2765 64031 </text>
+	</content>
+	<name>select 2</name>
+	<script></script>
+</card>

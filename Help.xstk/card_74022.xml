@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>74022</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>left</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he left of cardset [the] left of button to integerset [the] left of field to integerset [the] left of window to integerget [the] left of menuBarThe left property returns or sets an integer equal to item 1 of an object’s rectangle. If you set the left of an object, it moves horizontally. The sizeof the object remains the same. You can’t set the left of cards: use the rect, height, and width properties to resize the cards in a stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>72</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>77</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>98</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>124</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>151</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>161</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>253</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>259</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>354</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>360</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>377</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>382</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>383</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>390</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>395</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>401</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>ou can't set the left of the menu bar.HyperCard determines the leftof buttons, fields, and HyperCard’s built-in windows relative to the top-left corner of the current card.HyperCard determines the left ofthe card window relative to the top-left corner of the screen with the menu bar.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>208</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the left of card button 1the left of bkgnd field id 34the left of this cardthe left of message boxthe left of tool windowthe left of card windowset the left of bkgnd button "Next" to the left of bg btn "Prev"</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties85301 91818 86710 74795 79936 86116 62877 81344 86868 87153 89143 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	card	card window	field	left	property	rectangle	windows</text>
+	</content>
+	<name>left</name>
+	<script></script>
+</card>

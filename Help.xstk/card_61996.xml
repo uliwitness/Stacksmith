@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>61996</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>enable</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>nable menuenable menuItem of menuenable buttonThe enable command activates menu items, entire menus, or buttons that are  inactive (dimmed).  It’s a shortcut for setting the enabled property to true.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>11</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>178</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he enable command enables only items in HyperCard’s menus that are currently available to the user.  For example, the following command will not enable the Button Info command in the Objects menu unless a button is currently selected:enable menuItem 1 of menu "Objects"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>11</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>237</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>enable menu "File"enable menu 2enable second menuenable menuItem "New" of menu "File"enable menuItem 2 of menu 2enable second menuItem of second menuenable background button 3enable last button</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands34927 69523 70039 34045 34993 35579 71193 76221 58014 76567 45460 45965 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>command	item	menu	menu items	new features</text>
+	</content>
+	<name>enable</name>
+	<script></script>
+</card>

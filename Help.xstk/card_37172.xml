@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>37172</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>find</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ind [international] text ¬         [in field ]  [of marked cards]find chars [international] text ¬         [in field ]  [of marked cards]find word [international] text ¬         [in field ]  [of marked cards]find whole [international] text ¬         [in field ]  [of marked cards]find string [international] text ¬         [in field ]  [of marked cards]The find command searches fora text string in all the card and background fields (visible or not)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>141</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>169</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>186</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>189</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>194</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>214</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>215</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>243</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>248</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>260</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>263</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>268</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>273</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>288</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>289</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>318</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>323</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>335</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>338</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>343</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>348</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>363</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>369</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>375</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>413</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>416</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>f the current stack.International considers diphthongs and diacritical marks as it searches. In field  searches only a specific card or background field.  Of marked cards restricts its search to marked cards.When find succeeds, a box appears around found text (or the first part of the text if the targets are discontinuous); the result is set to empty. When find fails, the result  is set to the string "Not found".</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>157</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>223</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>331</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>342</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>351</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>357</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>363</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>369</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>375</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>387</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>408</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>420</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 3</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>find "HyperCard"-- Restrict the search:find "select" in bkgnd field "Title"find "select" in card field id 8293find "select" in marked cardsfind "select" in field 2 of marked cards-- Find partial matches or whole words only:find chars "elect" in bkgnd fld "title" -- will match selectfind word "msg" in second card field  find chars international "bøhr"-- Find whole and find string include any spaces as part of the string:find whole "lets you search for a whole phrase" find string "ets you search for part of a phr"-- Find the contents of a variable:find whole currentFindVar-- Find the contents of a field:find whole (field "title") in field "index"-- Find any general expression:find string (char 1 to 4 of the short name of this card)</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n findDemo  -- find a contiguous string of characters, including spaces:   set cursor to watch   find string "ind a contig" in field "Demo Script"   wait 2 seconds   -- next, find a phrase:   find whole "find a phrase" in field "Demo Script"   wait 2 secondsend findDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>210</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands21415 70576 56033 56310 56528 56722 41060 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>characters	chars	command	field	find	mark	marked	new features	result	string	text	whole	word</text>
+	</content>
+	<name>find</name>
+	<script></script>
+</card>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>79684</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <false /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>messageWatcher</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] messageWatcher ¬    to resourceNameThe messageWatcher property returns or sets the name of the external command (or XCMD) that displays the Message Watcher window for tracing scripts.  The name of HyperCard’s message watcher is MessageWatcher.Third-party developers might supply other message watchers that you can install into HyperCard.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>294</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>241</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Click Tips for information about the properties of the message watcher.</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et messageWatcher to "Cool Message Watcher" -- if it's installed</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties53830 13231 92176 80403 87839 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>debug	external	external command	global	hideIdle	hideUnused	message	message watcher	new features	nextLine	property	trace	watcher</text>
+	</content>
+	<name>messageWatcher</name>
+	<script></script>
+</card>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>71150</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>editBkgnd</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] editBkgnd to trueOrFalseThe editBkgnd property returns or sets the layer where new painting or new buttons and fields will appear––in the card layer or in the background layer.It corresponds to the Background command in the Edit menu, and it’s available only when the user level is Painting (3) or higher.The default setting is false, meaning that new images and  parts will appear on the card layer.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>282</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>292</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>296</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>304</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>343</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>349</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  set cursor to watch  set editBkgnd to true  wait 2 seconds  set editBkgnd to falseend mouseUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>89</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the editBkgnd to true</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	edit	global	property	trueOrFalse</text>
+	</content>
+	<name>editBkgnd</name>
+	<script></script>
+</card>

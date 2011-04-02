@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>77229</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>multiple</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] multiple to trueOrFalseThe multiple property returns or sets whether HyperCard draws multiple images when the user (or a handler) drags with a Paint tool. It correspondsto the Draw Multiple command in the Options menu (which appears when you select a Paint tool).  The multiSpace property affects the number of multiple shapes drawn.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>284</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>296</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the multiple to true</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n multipleDemo  setUpPaint  set multiple to false  set dragspeed to 150  drag from "240,150" to "290,230"  set multiple to true  drag from "240,150" to "290,230"  wait 25  domenu "revert"  choose browse toolend multipleDemoon setUpPaint  set lineSize to 2  choose regular polygon tool  set polysides to 4  show card picture  set centered to true  set filled to false  set grid to false  set multiSpace to 5end setUpPaint</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>The multiple property affects the Line, Rectangle, Rounded Rectangle, Oval, and Regular Polygon tools. Its default value is false.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties69837 71536 77376 45965 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>multiple	paint	property	trueOrFalse</text>
+	</content>
+	<name>multiple</name>
+	<script></script>
+</card>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>93145</id>
+	<filler1>0</filler1>
+	<cantDelete> <true /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <true /> </dontSearch>
+	<owner>7507</owner>
+	<part>
+		<id>2</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>12</left>
+			<top>86</top>
+			<right>260</right>
+			<bottom>257</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>Right Shadow</name>
+		<script></script>
+	</part>
+	<part>
+		<id>3</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>12</left>
+			<top>86</top>
+			<right>258</right>
+			<bottom>255</bottom>
+		</rect>
+		<style>scrolling</style>
+		<autoSelect> <true /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<selectedLines>
+			<integer>4</integer>
+		</selectedLines>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>Related Topics</name>
+		<script>on mouseUpvisitTopicend mouseUp</script>
+	</part>
+	<part>
+		<id>5</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>169</left>
+			<top>272</top>
+			<right>476</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>7</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>169</left>
+			<top>272</top>
+			<right>193</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>6720</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>14</textSize>
+		<textStyle>plain</textStyle>
+		<name>Return to  “What are messages?”</name>
+		<script></script>
+	</part>
+	<part>
+		<id>6</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>189</left>
+			<top>273</top>
+			<right>475</right>
+			<bottom>290</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Return to  “scriptTextFont”</name>
+		<script></script>
+	</part>
+	<part>
+		<id>8</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>170</left>
+			<top>273</top>
+			<right>476</right>
+			<bottom>290</bottom>
+		</rect>
+		<style>transparent</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Go Back</name>
+		<script>on mouseUplock screenput empty into card field "Related Topics"put line 2 of card field "Related To" into theTopicif theTopic is emptythen put "Main Topics for HyperTalk Reference" into theTopicput card field "Return To" into theReturnCardif theReturnCard is emptythen goCard theTopicelseput empty into card field "Return To"go theReturnCardend ifend mouseUp</script>
+	</part>
+	<part>
+		<id>14</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>12</left>
+			<top>42</top>
+			<right>258</right>
+			<bottom>82</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>bold</textStyle>
+		<textHeight>16</textHeight>
+		<name>Related To</name>
+		<script></script>
+	</part>
+	<part>
+		<id>15</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>275</left>
+			<top>86</top>
+			<right>467</right>
+			<bottom>262</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>15</textHeight>
+		<name>Help Text</name>
+		<script></script>
+	</part>
+	<part>
+		<id>16</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <false /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>276</left>
+			<top>35</top>
+			<right>469</right>
+			<bottom>59</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Geneva</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>Return To</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>26</id>
+		<text>Related Topics</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>14</id>
+		<text>opics related to:scriptTextFont</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>288</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>15</id>
+		<text>lick a related topic to go to it.Related topics that you’ve already visited appear with a “√”.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>16</id>
+		<text>card id 80859</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>3</id>
+		<text>   script√ scriptEditor   scriptTextSize√ Set the font and size of a script</text>
+	</content>
+	<name>Related Topics</name>
+	<script></script>
+</card>

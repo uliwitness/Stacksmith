@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>19769</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>idle</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>dleHandler:on idle   statementsend idleHyperCard repeatedly sends the idle message to the current card when no other events are occurring (that is, when all handlers have finished running and HyperCard itself isn’t sending other messages).</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages4312 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>card messages	idle	message	system</text>
+	</content>
+	<name>idle</name>
+	<script></script>
+</card>

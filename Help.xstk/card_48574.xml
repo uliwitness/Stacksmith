@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>48574</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>ort (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 3</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he last form of the sort command (by expression ) sorts lines or items of a container by any expression. If you don’t specify, sort orders by lines.  Before expression is evaluated for each line or item of the container, the local variable each is set to the contents of the chunk. (Click the Examples button to see syntax examples using each.)For all forms of the sort command,the default sort direction is ascending, and the default sort style is text.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>127</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>157</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>168</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>169</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>240</offset>
+			<id>296</id>
+		</stylerun>
+		<stylerun>
+			<offset>246</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>338</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>343</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>367</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>373</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>411</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>423</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>452</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>457</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>ort direction ascending ordersthe sort elements—the value of the expression on each card or the linesor items in the container—from lower to higher values.Sort direction descending orders the sort elements from higher to lower values.Sort style text compares the sort elements based on their ASCII values: "1" &lt; "101" &lt; "2" &lt; "a" &lt; "ab" &lt; "b"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>186</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>251</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>257</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>315</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands41060 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>-- Sort a container:sort lines of card field 1sort items of card field 1sort lines of myVariable descending numericsort items of Message boxsort lines of the selectionsort lines of field 1 by last word of each -- by last word of each linesort items of fld 1 descending numeric by word 2 of eachsort items of myList by the random of 2000 -- reorder myList randomlysort lines of fld 1 numeric by length(cd fld each) -- if field 1            -- contains names of cd flds, orders names according             -- to number of characters in each field.-- Sort cards:sort by bkgnd field "Name"sort this stack by bkgnd field "Name"sort stack by bkgnd field "Name"sort marked cards of this stack by bkgnd field "Name"sort this background by bkgnd field "Name"sort background 2 by bkgnd field "Name"sort marked cards of previous background by bkgnd field "Name"sort descending by bkgnd field "Name"sort descending international by bkgnd field "Name"sort numeric by bkgnd field 2sort numeric by the id of this cardsort by (bkgnd field "Last Name" &amp; bkgnd field "First Name")sort by mySortFunction()</text>
+	</content>
+	<name>sort 2</name>
+	<script></script>
+</card>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>102613</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>systemVersion</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he systemVersionValue returned: a decimal string representing the running version of system softwareUse this function, for example, to determine if a particular command or handler will run correctly under the current version of the system software.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>if the systemVersion &lt; 7 then answer "AppleEvents not available under this system"put the systemVersion</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>system software version	version	function	system</text>
+	</content>
+	<name>systemVersion</name>
+	<script></script>
+</card>

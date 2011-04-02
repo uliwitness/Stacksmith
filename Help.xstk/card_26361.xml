@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>26361</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>global</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>lobal variableListThe global keyword makes a variable and its contents available to any handler in HyperCard. Changing the value of a global variable in any handler changes its value everywhere.  Note: You must use the global keyword in each handler to declare the global variables you want to use.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>91</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>98</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>224</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>230</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>242</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>254</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>lobal variables are not savedbetween sessions of HyperCard. Global variables are also lost under System 6's single Finder when a user (or handler) suspends HyperCard by launching another application with the open command.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>209</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>215</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  global theName  ask "What is your name?"  if it is empty then exit mouseUp  put it into theName  answerReverseNameend mouseUpon answerReverseName  global theName  repeat with i = the number of chars in theName down to 1    put char i of theName after reverseName  end repeat  answer "Your name spelled backwards is" &amp;&amp; reverseName &amp; "."  -- put empty into the global when you are done with it:  put empty into theNameend answerReverseName</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>168</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>global myVarglobal pages,sections,chapters</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Keywords11056 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>control	global	keyword	structures	variable</text>
+	</content>
+	<name>global</name>
+	<script></script>
+</card>

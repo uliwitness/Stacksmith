@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>74795</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>location</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>et [the] loc of button to pointset [the] loc of field to pointset [the] loc of window to pointset [the] loc of externalWindow ¬    to pointThe location (or loc) property returns or sets the center point of a button or field and the top-left corner of a window. Setting the location of button, field, or window moves it to the new location.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>64</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>69</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>74</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>92</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>103</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>139</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>144</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>145</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>159</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>162</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>166</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>197</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>239</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>248</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>HyperCard determines the locationof buttons, fields, and HyperCard’s built-in windows relative to the top-left corner of the current card. For a window displaying a stack, HyperCard determines the location of the card window relative to the top-left corner of the screen with the menu bar.HyperCard adjusts the horizontal offset of the card window to the closest multiple of 16 to the number specified.</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the location of card button 1the loc of bkgnd field id 34set the loc of bkgnd button "Next" to the clickLocthe loc of card window-- built-in windows:the loc of message boxthe loc of tool window-- external windows:set the loc of window "Script of stack My HD:Home" to 100,100</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties85301 91818 86710 74022 79936 86116 62877 81344 47827 86868 87153 89143 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	card window	external	external window	field	location	move	new features	property	windows</text>
+	</content>
+	<name>location</name>
+	<script></script>
+</card>

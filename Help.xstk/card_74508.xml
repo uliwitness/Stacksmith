@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>74508</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>longWindowTitles</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n longWindowTitlesDemo  set the cursor to watch  set the longWindowTitles to not the longWindowTitles  wait 2 second  set the longWindowTitles to not the longWindowTitlesend longWindowTitlesDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>147</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>159</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>175</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>et the longWindowTitles ¬    to trueOrFalseThe longWindowTitles returns or sets whether HyperCard displays the full path name of a stack in the title bar of all windows that contain stacks. Its default value is false.WARNING: Commands or properties that reference stack windows by name won't work once you set the longWindowTitles to true because the name becomes the full path name of a stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>223</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>232</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>319</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>337</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>get the longWindowTitlesset the longWindowTitles to true</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties77648 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>or example, compare the following two commands:show window "Home" show window "My HD:HyperCard:Home"The first works only when the longWindowTitles is false, the second only when it's true. Check the value of the longWindowTitles before you use such commands or properties, or force it to be false in your stack (which takes away the feature).</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>152</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>234</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>global	long	new features	path	property	title	windows</text>
+	</content>
+	<name>longWindowTitles</name>
+	<script></script>
+</card>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>3428</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>1</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>393</left>
+			<top>272</top>
+			<right>418</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>20002</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Prev</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>Commands sent automatically</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>yperCard sends some commands automatically in response to events, just as it sends system messages. But unlike system messages, if the command passes all the way to HyperCard, HyperCard performs a built-in action. So if you trap the command, the action won't happen.HyperCard sends choose and doMenuas messages when the user choosesa tool or an item from one of HyperCard’s menus. It sends closeas a message when the user clicksthe close box of a window.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>64</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>284</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>292</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>295</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>303</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>394</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>400</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>yperCard sends help as a message when the user chooses Help from the Go menu (or presses ⌘-?).HyperCard sends arrowKey, commandKeyDown, controlKey, enterInField, enterKey, functionKey, keyDown, returnInField, returnKey, and tabKey as messages when the user presses a key.  It automatically sends errorDialog and appleEvent messages.Click Related Topics for more information about each command.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>45</id>
+		</stylerun>
+		<stylerun>
+			<offset>91</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>122</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>137</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>150</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>163</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>164</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>186</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>195</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>221</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>226</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>233</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>299</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>311</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>314</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>326</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages73723 30663 31855 32483 8287 33000 35579 36487 36714 97279 38567 39675 40449 46143 46524 49516 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>arrowKey	choose	Close	commandKeyDown	Commands	controlKey	doMenu	enterInField	enterKey	functionKey	help	keyDown	message	returnInField	returnKey	sent	system	tab	tabKey</text>
+	</content>
+	<name>Commands sent automatically</name>
+	<script></script>
+</card>

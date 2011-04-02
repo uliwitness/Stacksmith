@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>50819</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>wait</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ait [for] posInteger [ticks]wait [for] posInteger secondswait until trueOrFalsewait while trueOrFalseThe wait command causes HyperCard to pause before executing the rest of a handler, either for a specific lengthof time, until a specified condition becomes true, or while a specified condition remains true.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>11</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>110</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>188</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n waitUntilTheMouse  set the cursor to arrow  show bkgnd field "demo field"  displayMessage "Click the mouse to continue . . ."  wait until the mouseClick  hide bkgnd field "demo field"end waitUntilTheMouse</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>wait 7wait for 7wait 7 tickswait for 7 tickswait for 1 secondwait 3 secondswait until the mouse is upwait until the mouseLoc is within the rect of button 1wait until the sound is donewait while the commandKey is downwait while the mouseLoc is within the rect of button 1wait until the mouseClick</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>f you do not specify seconds as the unit of time, HyperCard uses ticks. (One tick equals one-sixtieth of a second.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands63225 64990 66203 66404 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>command	for	seconds	time	trueOrFalse	until	while</text>
+	</content>
+	<name>wait</name>
+	<script></script>
+</card>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>2179</id>
+	<filler1>0</filler1>
+	<bitmap>BMAP_2502.pbm</bitmap>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>2</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>176</left>
+			<top>129</top>
+			<right>199</right>
+			<bottom>148</bottom>
+		</rect>
+		<style>transparent</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>16</textHeight>
+		<name>User Level</name>
+		<script></script>
+	</part>
+	<part>
+		<id>3</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <false /> </enabled>
+		<rect>
+			<left>60</left>
+			<top>187</top>
+			<right>181</right>
+			<bottom>209</bottom>
+		</rect>
+		<style>standard</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Set to Scripting</name>
+		<script>on mouseUpset userLevel to 5put 5 into card field "User Level"disable meend mouseUp</script>
+	</part>
+	<part>
+		<id>7</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>393</left>
+			<top>272</top>
+			<right>418</right>
+			<bottom>291</bottom>
+		</rect>
+		<style>rectangle</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <true /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>20001</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Previous Special</name>
+		<script>on mouseUp-- Goes to the first card and highlights the name of the topiclock screengo first cardshowSection "HyperTalk Basics"select line textToLineNum("Set the user level to scripting",card field "Topics List") ¬of card field "Topics List"unlock screen with scroll rightend mouseUp</script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>Set the user level to scripting</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>Before you can write your ownscripts, you must set your user levelto Scripting  (5).          Your current user level is: Click Set to Scripting if it is less than 5.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>72</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>2</id>
+		<text>5</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Go to the Preferences card of your Home stack and set your user level there if you want it set to Scripting every time you start HyperCard.</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>HyperTalk basics</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>level	scripts	set	to	user</text>
+	</content>
+	<name>Set the user level to scripting</name>
+	<script>on openCardput the userLevel into card field "User Level"if the userLevel is 5 then disable card button "Set to Scripting" -- ∆else enable card button "Set to Scripting" -- ∆pass openCardend openCard</script>
+</card>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>8287</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>commandKeyDown</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ommandKeyDown charThe commandKeyDown command provides a way of sending a ⌘-keyevent from a handler. It acts exactlyas if you had pressed ⌘ at the sametime as the specified character.HyperCard sends the commandKeyDown command to a field (if the insertion point is set) or to the current card when the user presses a ⌘-key combination. The value passed to the parameter variable char corresponds to the key pressed.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>45</id>
+		</stylerun>
+		<stylerun>
+			<offset>77</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>45</id>
+		</stylerun>
+		<stylerun>
+			<offset>143</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>209</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>225</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>323</offset>
+			<id>45</id>
+		</stylerun>
+		<stylerun>
+			<offset>324</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>384</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>385</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>389</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>390</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>ou can handle the commandKeyDown message as follows:on commandKeyDown theKey   statementsend commandKeyDownNote: commandKeyDown is not sentfor characters typed using the type command.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>18</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>114</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>ommandKeyDown "V" -- paste; same as type "v" with commandKeycommandKeyDown "B" -- edit backgroundon commandKeyDown theKey  if theKey = "?" then goMyHelp -- trap normal help key  else pass commandKeyDownend commandKeyDown</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>on iconEditor  commandKeyDown "I" -- Shortcut for Icon command in Edit menuend iconEditor</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands54096 3428 40449 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>card messages	char	characters	command	commandKeyDown	down	field messages	key	message	new features</text>
+	</content>
+	<name>commandKeyDown</name>
+	<script>on doItselect after text of field "help text b"commandKeyDown "V"end Doit</script>
+</card>

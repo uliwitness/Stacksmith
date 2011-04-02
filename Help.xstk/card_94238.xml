@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>94238</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>traceDelay</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set the traceDelay to posIntegerwhere posInteger specifies ticks.The traceDelay property returns or sets the number of ticks HyperCard pauses between each statement as it traces a handler while in the debugger. Its default value is 0.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>74</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>86</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>186</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et the traceDelay to 10</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties13231 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>delay	global	new features	property	trace</text>
+	</content>
+	<name>traceDelay</name>
+	<script></script>
+</card>

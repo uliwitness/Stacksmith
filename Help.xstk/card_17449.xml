@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>17449</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>loseFieldHandler:on closeField   statementsend closeFieldHyperCard sends the closeField message to an unlocked field when, after editing, a user (or handler) performs an action that closes (that is, removes the insertion point from) the field. HyperCard sends closeField only when the text actually changes.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>268</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>280</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>closeField</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he following actions close a field, saving any changes that were madeto the text:• Clicking outside the field• Moving the insertion point   to the next field with the Tab key• Pressing the Enter key• Pressing ⌘-Shift-Z to revert   the field to the last saved version • Going to another card• Quitting HyperCard</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>45</id>
+		</stylerun>
+		<stylerun>
+			<offset>218</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages19146 36487 19615 22421 23457 46143 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>Close	field	field messages	message	system</text>
+	</content>
+	<name>closeField</name>
+	<script></script>
+</card>

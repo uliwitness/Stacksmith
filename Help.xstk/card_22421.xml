@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>22421</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>newField</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ewFieldHandler:on newField   statementsend newFieldHyperCard sends the newField message to a field just after HyperCard creates it.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>79</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>89</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>lthough the new field will not havea script with which to respond to the message, any other object along the message-passing path can handle it.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages17449 19146 36487 19615 23457 46143 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>field	field messages	message	new	system</text>
+	</content>
+	<name>newField</name>
+	<script></script>
+</card>

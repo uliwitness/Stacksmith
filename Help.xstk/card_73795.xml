@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>73795</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>language</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] language to resourceNamewhere resourceName is a language supported by HyperCard.The language property returns or sets the language in which HyperCard displays scripts. The default setting is English, and it’s always available.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>98</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>205</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>213</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>if the language is not "English" then    sort international by field 1else   sort by field 1end if</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>To use other languages, a script translator resource must exist in the current stack, any stack later in the message-passing order, or in HyperCard itself.Contrast this property with the scriptingLanguage of object, which describes an object's scripting system.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>185</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>211</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>global	property</text>
+	</content>
+	<name>language</name>
+	<script></script>
+</card>

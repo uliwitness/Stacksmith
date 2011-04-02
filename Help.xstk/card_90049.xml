@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>90049</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>3</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>9</left>
+			<top>32</top>
+			<right>183</right>
+			<bottom>55</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>bold</textStyle>
+		<textHeight>14</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>4</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>9</left>
+			<top>52</top>
+			<right>183</right>
+			<bottom>239</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <true /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Monaco</font>
+		<textSize>9</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>The List</name>
+		<script>on mouseUpdescribeLineend mouseUp</script>
+	</part>
+	<part>
+		<id>6</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>37</top>
+			<right>471</right>
+			<bottom>228</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>10</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>not</name>
+		<script></script>
+	</part>
+	<part>
+		<id>11</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>and</name>
+		<script></script>
+	</part>
+	<part>
+		<id>12</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>or</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>Logical operators</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>4</id>
+		<text>notandor</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>3</id>
+		<text>Operators</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>10</id>
+		<text>esults in true if the expression on its rightis false, and false if the expression on its right is true. not (it contains "stack")not (the number of this card is 1)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>6</id>
+		<text>lick an operator for a description of it.(Click Tips for more information about operator precedence.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>11</id>
+		<text>esults in true if both the expression to itsleft and the expression to its right are true.  (N = 0) and (the number of this card = 1)(the name of this card is "index") and¬(the number of this card = 1) and¬(myVar is not false)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>12</id>
+		<text>esults in true if either the expression toits left or the expression to its right is true.(N = 1) or (the number of this card &lt; 10)basicTerm is "button" or¬basicTerm is "field" or¬basicTerm is "card" or¬basicTerm is "background" or¬basicTerm is "stack"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Operators and constants8338 26404 26805 27427 27895 28073 28298 28477 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>and	Logical	not	operators	or	precedence	trueOrFalse</text>
+	</content>
+	<name>Logical operators</name>
+	<script>-- ∆ Localize: the names of the fields that are displayed--             is the same as text in the "The List" field.on closeCardmouseUppass closeCardend closeCardon mouseUphideDescriptionsend mouseUp</script>
+</card>

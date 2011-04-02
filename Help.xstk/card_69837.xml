@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>69837</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>centered</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] centered to trueOrFalseThe centered property returns or sets whether HyperCard draws shapes from the center rather than from a corner. It corresponds to the Centered command in the Options menu (which appears when you select a Paint tool).The centered property affects the Line, Rectangle, Rounded Rectangle, and Oval tools. Its default value is false.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>257</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>267</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>360</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>366</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  show bkgnd field "demo field"  setUpPaint  -- See Below  displayMessage "Drag with centered set to TRUE:"  set the centered to true  drag from 240,160 to 305,225 with optionKey  wait 2 seconds  displayMessage "The same drag with centered set to FALSE:"  set the centered to false  drag from 240,160 to 305,225  wait 2 seconds  doMenu "Revert"  put empty into bkgnd field "demo field"  hide bkgnd field "demo field"  choose browse toolend mouseUpon setUpPaint  choose rect tool  set pattern to 22  set the linesize to 2  set filled to false  set the dragSpeed to 100  set multiSpace to 4  set multiple to trueend setUpPaint</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>139</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>282</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>290</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the centered to true</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties71536 77229 77376 45965 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>centered	paint	property	trueOrFalse</text>
+	</content>
+	<name>centered</name>
+	<script>on showCardStuffshow card pictureend showCardStuff</script>
+</card>

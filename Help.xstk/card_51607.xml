@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>51607</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>nnuity(number1, number2)where number1 represents the interest rate (expressed as a decimal) and number2 represents the numberof periods over which you receive annuity payments.Value returned: the total cost of an annuity now that will pay you one unit per period over the specified number of periods, or a number equal to(1 - (1 + rate) ^ -periods) / rate</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>141</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>330</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>annuity</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>se annuity to compute values as follows:amountLoaned = onePayment * annuity(rate,periods) oronePayment = amountLoaned / (annuity(rate,periods))Example 1: You want to purchase an annuity that pays you $10,000 a year for 10 years. The interest rate on the annuity is 10%. How much will it cost you now?amountLoaned = 10000 * annuity(.10,10) = 61445.67Note that the annuity costs you $61,445.67, but over 10 years you actually receive $100,000. The difference, $38,554.33, is the interest you earned.Example 2: You borrow $10,000 over 3 years at 10% interest with monthly payments. How much is each monthly payment?onePayment = 10000 / (annuity(.10/12,3*12)) = 322.67 per month</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>86</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>11</offset>
+			<id>86</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>86</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>86</id>
+		</stylerun>
+		<stylerun>
+			<offset>308</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>359</offset>
+			<id>86</id>
+		</stylerun>
+		<stylerun>
+			<offset>626</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>n interest rate involves a certain percentage (expressed as a decimal) per some unit of time—usually per year. You must use the same unit of time to measure the number of periods.For example, if you have a yearly percentage rate but your annuity pays you monthly, use rate / 12, and be sure to express the number of periods as months (2 years = 24 months).</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>271</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>281</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions89523 54407 78162 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>business	function	math	number	period	rate</text>
+	</content>
+	<name>annuity</name>
+	<script></script>
+</card>

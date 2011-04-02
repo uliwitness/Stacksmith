@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>53693</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>clickLoc</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he clickLocValue returned: point equal to the place on the screen where the user most recently clicked relative to the top left corner of the current cardHyperCard does not reset the clickLoc at idle, nor does it reset when a handler is running, unless  you use the wait command:wait until the mouseClick</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>197</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>206</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>270</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>276</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>285</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  answer "Click anywhere on the screen."  wait until the mouseClick  answer "You clicked at" &amp;&amp; the clickLoc &amp;&amp;¬  "relative to the top left corner of the card."end mouseUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions32809 32047 59412 2765 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>click	coordinates	function	location	mouse	point</text>
+	</content>
+	<name>clickLoc</name>
+	<script></script>
+</card>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>89143</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>width</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>et [the] width of button to integerset [the] width of field to integerset [the] width of card to integerset [the] width of window to integerget [the] width of menuBarThe width property returns or sets an integer equal to the width in pixels of the specified object or window. Setting the width of a button, field, or card window resizes it. Setting the width of a card resizes allthe cards in a stack. You can't set the menu bar's width.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>72</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>77</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>92</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>127</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>150</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>153</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>154</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>172</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>241</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>246</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the width of card button 1the width of bkgnd field id 34the width of this cardthe width of message boxthe width of tool windowthe width of card windowset the width of bkgnd button "Next" to the width of bg btn "Prev"</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Note: HyperCard restricts the width of a card to 32-pixel increments beginning from 64, the smallest width. For example, setting the width of a card to 420 results in a width of 416.HyperCard maintains the location (center coordinate) of the object, expanding or shrinking it on bothsides evenly.</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties85301 91818 86710 74022 74795 79936 86116 62877 81344 86868 87153 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	card	card window	field	property	rectangle	windows</text>
+	</content>
+	<name>width</name>
+	<script></script>
+</card>

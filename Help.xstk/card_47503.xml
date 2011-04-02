@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>47503</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>set</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>et [the] property to expressionset [the] property of object ¬    to expressionset [the] property of window ¬    to expressionset [the] property of [menuItem of] ¬     menu to expressionset [the] property of chunk ¬    of field to expressionNote: expression must yield a valid setting for the specified property.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>18</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>87</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>91</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>92</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>132</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>136</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>137</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>141</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>154</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>163</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>166</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>167</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>175</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>179</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>204</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>212</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>216</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>221</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>231</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>236</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>240</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>250</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>257</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>258</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>268</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>269</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he set command changes the stateof a specified property. If the object or element to which the property belongs is not specified, the property must be a global property or painting property. You can use the Info dialog box of an object to set many of its properties.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>72</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n madScroller  put the rect of card window into theRect  set the rect of card window to left of cd window,top of cd window,¬  left of cd window + 172, top of cd window + 64  repeat 10 times    set the scroll of card window to ¬    random(width of this card),random(height of this card)    wait 30  end repeat  set the rect of card window to theRectend madScroller</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>54</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>54</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>320</offset>
+			<id>54</id>
+		</stylerun>
+		<stylerun>
+			<offset>323</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the userLevel to 5set the style of bkgnd button 1 to rectangleset the wideMargins of card field id 34 to trueset the cantModify of this stack to trueset the top of Message box to (bottom of this card + 12)set the scroll of card window to 0,0set the enabled of menu 2 to falseset the cmdChar of first menuItem of second menu to "0"set the textSize of field "Index" to (the textSize of field "Index" + 4)set the textStyle of the clickChunk to boldset the visible of menuBar to false</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands27092 38686 45460 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>command	expression	objects	property	set	to	windows</text>
+	</content>
+	<name>set</name>
+	<script></script>
+</card>

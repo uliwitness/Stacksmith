@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>72105</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>freeSize</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he freeSize of stackThe freeSize property returns the amount of free space, in bytes, in the specified stack. (Free space is created ina stack each time you add or delete an object or graphics.) To set the freeSize property to 0, choose Compact Stack from the File menu or use the command doMenu "Compact Stack"from a handler or the Message box.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>178</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>184</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>211</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>221</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>297</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>319</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et the freeSize of this stackif it &gt; 10240 then doMenu "Compact Stack"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n checkFreeSize  get the freeSize of this stack  answer "The freeSize of this stack is" &amp;&amp; it div 1024 &amp; "K."end checkFreeSize</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties55302 83131 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>free	property	size	spaces	stacks</text>
+	</content>
+	<name>freeSize</name>
+	<script></script>
+</card>

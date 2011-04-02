@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>76921</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>autoTab</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] autoTab of field to ¬    trueOrFalseThe autoTab property returns or sets whether HyperCard inserts a return character when the insertion point is on the last line of a field (autoTab is false) or moves the insertion point to the next editable field on the card (autoTab is true). Note: Auto tabbing doesn't workwith scrolling fields.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>189</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>197</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>276</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>284</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>The autoTab property corresponds to the Auto Tab check box in a Field Info dialog box.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et autoTab of card field 3 to trueset autoTab of field "address" to false</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties46524 49516 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>auto	autoTab	field	key	property	return	tab	trueOrFalse</text>
+	</content>
+	<name>autoTab</name>
+	<script></script>
+</card>

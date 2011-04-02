@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>101319</id>
+	<filler1>0</filler1>
+	<bitmap>BMAP_101531.pbm</bitmap>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>2</id>
+		<type>button</type>
+		<visible> <true /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>53</left>
+			<top>183</top>
+			<right>185</right>
+			<bottom>204</bottom>
+		</rect>
+		<style>popup</style>
+		<showName> <true /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>42</titleWidth>
+		<selectedLines>
+			<integer>3</integer>
+		</selectedLines>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Coins</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>titleWidth</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] titleWidth of button ¬                 to integerThe titleWidth property retrieves or sets the width in pixels of a pop-up button's title area.  (The pop-up button's name appears as the menu title to the left of the collapsed button.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>1</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>64</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>79</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>124</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>You can also change the space allocated to the title  by dragging the left side of the button's content area with the Button tool or by changing the Title Width setting  in the Button Info dialog box.</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>2</id>
+		<text>CentNickelDimeQuarterHalfDollar</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>get the titleWidth of bg button 6set the titleWidth of button Maps to 36 -- about 1/2 inch</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>title width	width	button	popup menu's name	title</text>
+	</content>
+	<name>titleWidth</name>
+	<script></script>
+</card>

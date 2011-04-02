@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>10005</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>riting message handlers (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>f course, HyperCard doesn’t know about the doubleBeep command, soit will never be sent automatically in response to an event. But you can send doubleBeep from the Message box or use it as a statement in other handlers.For example, the script of a card button might contain the following handler for the system message mouseUp:on mouseUp  doubleBeepend mouseUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>126</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>144</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>156</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>321</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>329</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>332</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>f the script also contains the doubleBeep handler (or if the script of any object later in the message-passing path contains it), the mouseUp message will send the doubleBeep message, and doubleBeep will send two beep commands. Because beep is a built-in command, HyperCard beeps twice.If HyperCard can’t find the doubleBeep message, it will complain (with a dialog box) that it “can’t understand” the message.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>143</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>164</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>188</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>213</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>219</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>236</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>242</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>316</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>328</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>on mouseUp  doubleBeepend mouseUpon doubleBeep  beep  beepend doubleBeep</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>HyperTalk basics20813 6658 26982 8578 10721 5306 </text>
+	</content>
+	<name>Writing message handlers 2</name>
+	<script></script>
+</card>

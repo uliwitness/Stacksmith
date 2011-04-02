@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>21197</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>mouseUp</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ouseUpHandler:on mouseUp   statementsend mouseUpHyperCard sends the mouseUp message to a button or locked field when the user releases the mouse buttonand  the pointer is inside the rectangle of the same button or field it was in when the user pressed the mouse button.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>297</id>
+		</stylerun>
+		<stylerun>
+			<offset>163</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>yperCard sends mouseUp to the current card when the user both presses and releases the mouse button while the pointer is not in the rectangle of a button or field.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>297</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  answer "Hello"end mouseUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>48</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages32047 58372 58695 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button messages	card messages	field messages	message	mouse	system	up</text>
+	</content>
+	<name>mouseUp</name>
+	<script></script>
+</card>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>71193</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>enabled</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] enabled of{menu|menuItem }¬    to trueOrFalseset [the] enabled of button ¬    to trueOrFalseThe enabled property returns or sets whether a menu item, menu, or button is active or inactive (dimmed). Users cannot choose dimmed elements.   If you set the enabled of a menu to false, all items on the menu become inactive.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>79</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>269</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>278</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>298</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>301</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he enabled property won't enable items in HyperCard’s menus unless they're currently available to the user. For example, the following code won't enable the Button Info command unless a button is selected:set the enabled of menuItem 1 of ¬ menu "Objects" to trueThe default state is true, meaning that the element is enabled.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>210</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>268</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>289</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>294</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  if there is a menu "Reference"  then set enabled of menuItem 4 of menu "Reference" to ¬       not (enabled of menuItem 4 of menu "Reference")end mouseUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the enabled of menu "File" to trueset the enabled of menu 2 to falseset the enabled of second menu to trueset the enabled of menuItem "New" of menu "File" to falseset the enabled of menuItem 2 of menu 2 to trueset the enabled of second menuItem of second menu to falseset the enabled of button 5 to falseif the enabled of bg btn "Scores" is true then show field "Players"</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties34927 69523 70039 34045 34993 35579 61996 76221 58014 76567 45460 45965 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>item	menu	menu items	new features	property	trueOrFalse</text>
+	</content>
+	<name>enabled</name>
+	<script>on showCardStuffglobal gHMnuset enabled of menuItem "HyperTalk Reference" of menu gHMnu to true -- ∆pass showCardStuffend showCardStuff</script>
+</card>

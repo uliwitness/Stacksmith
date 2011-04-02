@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>9517</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>lose (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>70</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 3</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he close [document {in|with}] application command closes the named running document, application,  or desk accessory.   (The words in and with are synonymous.)Note: This command works only with Apple event-aware applications running under System 7 on the same Macintosh as HyperCard.If the document or application isn’t running, the result is set to No such document or No such application  as appropriate.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>11</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>132</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>144</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>162</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>168</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>333</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>345</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>354</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>372</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>374</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>394</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands3428 39797 35844 41996 42410 42512 44420 45683 45965 16789 6031 51002 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he form close application sends a quit Apple event, while the form  close document {in|with} application  sends a clos Apple event. All Apple event-aware applications support the quit Apple event, but they don’t all support clos.The close externalWindow command closes an external window—a palette or other window displayed by an external command or external function—and removes it from the window list.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>114</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>226</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>234</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>237</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>244</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>258</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>259</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>335</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>351</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>355</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>372</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<name>close 2</name>
+	<script></script>
+</card>

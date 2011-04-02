@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>48812</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>start using</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>tart using stackThe start using command inserts the specified stack into the message-passing order between the current stack and the Home stack (or between the current stack and any other stacks being used).Handlers in the stack script of the newly inserted stack can intercept messages as the messages move through the message-passing order.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>yperCard records the full path nameof the stacks being used as lines in the global property the stacksInUse. You can add up to 16 stacks.The first stack in use is on line 1 of the stacksInUse, the second stack is on line 2 of the stacksInUse, and so on. The order of items in the StacksInUse determines the message-passing order:from the current stack to line 1 of the StacksInUse, to line 2, and so on, to the Home stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>139</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>179</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>195</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>229</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>245</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>296</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>369</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>385</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>start using stack "My Favorite Scripts"answer file "What stack do you want to use?"if it is not empty then start using stack it</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands2465 85008 48929 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>command	message	new features	path	stacks	stacksInUse	start	use	using</text>
+	</content>
+	<name>start using</name>
+	<script></script>
+</card>

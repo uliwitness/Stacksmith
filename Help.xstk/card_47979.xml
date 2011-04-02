@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>47979</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>how (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>68</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>how groups displays a two-pixel gray underline for all text that has the group text style. (By default, the group text style is invisible.) The underline appears for grouped text in every field (in all stacks). Use the hide groups command to remove the underline.The show card forms display the specified cards in the current stackin turn, beginning with the next cardor the next marked card.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>219</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>232</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>269</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>280</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he other forms of the show command display the card or background picture,a window, or an object at a specified location on the screen. If the point is not given, the window or object is displayed at its previous location.Showing a window makes it the frontmost window. With external windows, an external command or external function must first create a window before show will work on it. Show does not create windows.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>300</offset>
+			<id>55</id>
+		</stylerun>
+		<stylerun>
+			<offset>316</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>320</offset>
+			<id>55</id>
+		</stylerun>
+		<stylerun>
+			<offset>337</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>371</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>377</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>393</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>399</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>404</offset>
+			<id>54</id>
+		</stylerun>
+		<stylerun>
+			<offset>407</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands27092 18600 32483 39797 74795 41060 82724 88724 50441 </text>
+	</content>
+	<name>show 2</name>
+	<script></script>
+</card>

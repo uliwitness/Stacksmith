@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>4312</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>1</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>9</left>
+			<top>32</top>
+			<right>183</right>
+			<bottom>55</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>bold</textStyle>
+		<textHeight>12</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>2</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>9</left>
+			<top>52</top>
+			<right>183</right>
+			<bottom>232</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <true /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Monaco</font>
+		<textSize>9</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>The List</name>
+		<script>on mouseUpdescribeLineend mouseUp</script>
+	</part>
+	<part>
+		<id>3</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>32</top>
+			<right>471</right>
+			<bottom>228</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name></name>
+		<script>on mouseUpcheckActiveTextend mouseUp</script>
+	</part>
+	<part>
+		<id>4</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>HyperCard Startup</name>
+		<script></script>
+	</part>
+	<part>
+		<id>5</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>Resume</name>
+		<script></script>
+	</part>
+	<part>
+		<id>6</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>New stack</name>
+		<script></script>
+	</part>
+	<part>
+		<id>7</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>New stack in a new window</name>
+		<script></script>
+	</part>
+	<part>
+		<id>8</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>New background</name>
+		<script></script>
+	</part>
+	<part>
+		<id>9</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>New card</name>
+		<script></script>
+	</part>
+	<part>
+		<id>10</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>Delete stack</name>
+		<script></script>
+	</part>
+	<part>
+		<id>11</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>Delete background</name>
+		<script></script>
+	</part>
+	<part>
+		<id>12</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>Delete card</name>
+		<script></script>
+	</part>
+	<part>
+		<id>13</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>Cut Card</name>
+		<script></script>
+	</part>
+	<part>
+		<id>14</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>Paste card</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>Message sending orders</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>1</id>
+		<text>Events</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>2</id>
+		<text>HyperCard startupResumeNew stackNew stack in a new windowNew backgroundNew cardDelete stackDelete backgroundDelete cardCut cardPaste card</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>3</id>
+		<text>or some events, HyperCard automatically sends a sequence of system messages. For example, when you close an existing stack by opening another one, HyperCard sends the following system messages in order: closeCard, closeBackground, closeStack, openStack, openBackground, openCard.Click an event to see the order in which HyperCard sends multiple system messagesin response to it.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>204</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>215</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>216</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>232</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>233</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>244</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>245</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>255</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>271</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>272</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>281</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>4</id>
+		<text>hen HyperCard first starts up, it sends the following messages in order:startupopenStackopenBackgroundopenCard(In version 1.2.5, the order was openStack openBackground openCard startup.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>150</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>192</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>5</id>
+		<text>hen HyperCard first resumes after being suspended, it sends the following messages in order:resumeopenStackopenBackgroundopenCard(In version 1.2.5, the order was openStack openBackground openCard resume.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>137</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>169</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>210</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>6</id>
+		<text>hen HyperCard creates a new stack, it sends the following messages in order:closeCard closeBackground closeStacknewStack newBackground newCard openStack openBackground openCard(In version 1.2.5, the order was closeCard closeBackground closeStack openStack openBackground openCard newStack.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>79</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>215</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>296</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>7</id>
+		<text>hen HyperCard creates a new stack in a new window, it sends the following messages in order:suspendStacknewStacknewBackgroundnewCard openStack openBackground openCard(This event does not occur in version 1.2.5.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>8</id>
+		<text>hen HyperCard creates a new background, it sends the following messages in order:closeCardcloseBackgroundnewBackgroundnewCard openBackgroundopenCard(In version 1.2.5, the order was closeCard closeBackground openBackground openCard newBackground newCard.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>190</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>263</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>9</id>
+		<text>hen HyperCard creates a new card, it sends the following messages in order:closeCardnewCard openCard(In version 1.2.5, the order was openCard newCard.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>139</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>157</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>10</id>
+		<text>hen HyperCard deletes a stack, it sends the following messages in order:closeCard closeBackground closeStackdeleteStack(In version 1.2.5, the order was deleteStack closeCard closeBackground closeStack.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>127</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>159</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>209</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>11</id>
+		<text>hen HyperCard deletes a background, it sends the following messages in order:closeCard closeBackground deleteCarddeleteBackground(In version 1.2.5, the order was deleteBackground deleteCard.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>137</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>169</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>12</id>
+		<text>hen HyperCard deletes a card, it sends the following messages in order:closeCard [closeBackground]deleteCard[deleteBackground][openBackground]openCardThe messages in braces are sent only if the deleted card was the last card of a background. (In version 1.2.5, the order was deleteCard closeCard.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>74</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>86</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>114</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>132</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>148</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>159</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>284</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>306</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>13</id>
+		<text>hen HyperCard cuts a card, it sends the following messages in order:closeCard [closeBackground]deleteCard[deleteBackground][openBackground]openCardThe messages in braces are sent only if the cut card was the last card of a background. (No messages were sent in version 1.2.5 for this event.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>98</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>128</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>145</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>146</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>157</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>244</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>245</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>14</id>
+		<text>hen HyperCard pastes a card, it sends the following messages in order:closeCard[closeBackground][newBackground]newCard[openBackground]openCardThe messages in braces are sent only if the pasted card is the first card of a new background. (In version 1.2.5, the order was openCard.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>126</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>141</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>152</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>289</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages8578 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	card	cut	message	new	orders	paste	resume	stacks	startup	windows</text>
+	</content>
+	<name>Message sending orders</name>
+	<script>on closeCardmouseUppass closeCardend closeCardon mouseUphideDescriptionsend mouseUp</script>
+</card>

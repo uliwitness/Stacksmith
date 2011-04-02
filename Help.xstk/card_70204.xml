@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>70204</id>
+	<filler1>0</filler1>
+	<bitmap>BMAP_7968.pbm</bitmap>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>cursor</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>et [the] cursor to cursorThe cursor property sets the image that appears as the pointer on the screen. Note: cursor is a set-only property. You cannot get the current value of the cursor from a script.HyperCard provides a number of built-in cursors that you can use. (HyperCard automatically resets the cursor to the image for the current tool on idle—when no other action is happening.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>12</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>114</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>126</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>148</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>184</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>192</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he built-in cursors are:Ibeam     cross     plus     watch1         2         3        4hand      arrow     busy    noneThe busy cursor rotates an eighth of a turn each time you call it.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n rotateCursors  repeat with cursorNumber = 1 to 4    set the cursor to cursorNumber    wait 30  end repeat  set the cursor to hand  wait 30  set the cursor to arrow  wait 30  set the cursor to balloon -- a cursor in the HyperCard Help stack  wait 30  repeat for 73    set the cursor to busy    wait 1  end repeatend rotateCursors</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>123</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>164</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>194</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>290</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>296</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the cursor to 1set the cursor to 4set the cursor to Ibeamset the cursor to noneset the cursor to watchrepeat with i = 1 to 100  set the cursor to busy -- spins the beach ball  ...end repeat</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>arrow	cross	global	hand	plus	property	watch</text>
+	</content>
+	<name>cursor</name>
+	<script></script>
+</card>

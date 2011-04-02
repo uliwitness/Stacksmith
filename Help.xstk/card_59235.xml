@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>59235</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>onvert (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 4</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>here are four types of date formats:• seconds, a positive integer equal to    the number of seconds since 12:00    midnight on January 1, 1904• dateItems, a comma-delimited list of    seven positive integers equal to the    following values:  year, month, day, hour, minute,   second, dayNumber   where dayNumber 1 = Sunday and    7 = Saturday.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>151</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>252</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>308</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>316</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>337</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>346</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text> date, which has one of three formats:  [dayName,] monthName, day, year  month/day/year  month-day-year where dayName = Sunday, Sun,   Monday, Mon, Tuesday, Tue,   Wednesday, Wed, Thursday, Thur,   Friday, Fri, Saturday, or Sat</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>44</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>230</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>233</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands27092 11187 24266 55207 66404 </text>
+	</content>
+	<name>convert 2</name>
+	<script></script>
+</card>

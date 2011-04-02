@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>67829</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>blindTyping</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] blindTyping to trueOrFalseThe blindTyping global property returns or sets whether you can type into the Message box and send messages from it even when it isn't visible.HyperCard determines the default setting for blindTyping at startup(and when HyperCard resumes after being suspended) from the Blind Typing option on the Preferences card of the Home stack.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>228</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>241</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>312</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>324</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the blindTyping to true</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties49918 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>blind	global	property	trueOrFalse	type</text>
+	</content>
+	<name>blindTyping</name>
+	<script></script>
+</card>

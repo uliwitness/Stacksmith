@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE stackfile PUBLIC "-//Apple, Inc.//DTD stackfile V 2.0//EN" "" >
+<stackfile>
+	<stack id="-1" file="stack_-1.xml" />
+	<userLevel>5</userLevel>
+	<privateAccess> <false /> </privateAccess>
+	<cantPeek> <false /> </cantPeek>
+	<createdByVersion>HyperCard 2.0b21</createdByVersion>
+	<lastCompactedVersion>HyperCard 2.4.1</lastCompactedVersion>
+	<lastEditedVersion>HyperCard 2.4.1</lastEditedVersion>
+	<firstEditedVersion>HyperCard 2.4.1</firstEditedVersion>
+	<fontTableID>6520</fontTableID>
+	<styleTableID>3215</styleTableID>
+	<patterns>
+		<pattern>PAT_1.pbm</pattern>
+		<pattern>PAT_2.pbm</pattern>
+		<pattern>PAT_3.pbm</pattern>
+		<pattern>PAT_4.pbm</pattern>
+		<pattern>PAT_5.pbm</pattern>
+		<pattern>PAT_6.pbm</pattern>
+		<pattern>PAT_7.pbm</pattern>
+		<pattern>PAT_8.pbm</pattern>
+		<pattern>PAT_9.pbm</pattern>
+		<pattern>PAT_10.pbm</pattern>
+		<pattern>PAT_11.pbm</pattern>
+		<pattern>PAT_12.pbm</pattern>
+		<pattern>PAT_13.pbm</pattern>
+		<pattern>PAT_14.pbm</pattern>
+		<pattern>PAT_15.pbm</pattern>
+		<pattern>PAT_16.pbm</pattern>
+		<pattern>PAT_17.pbm</pattern>
+		<pattern>PAT_18.pbm</pattern>
+		<pattern>PAT_19.pbm</pattern>
+		<pattern>PAT_20.pbm</pattern>
+		<pattern>PAT_21.pbm</pattern>
+		<pattern>PAT_22.pbm</pattern>
+		<pattern>PAT_23.pbm</pattern>
+		<pattern>PAT_24.pbm</pattern>
+		<pattern>PAT_25.pbm</pattern>
+		<pattern>PAT_26.pbm</pattern>
+		<pattern>PAT_27.pbm</pattern>
+		<pattern>PAT_28.pbm</pattern>
+		<pattern>PAT_29.pbm</pattern>
+		<pattern>PAT_30.pbm</pattern>
+		<pattern>PAT_31.pbm</pattern>
+		<pattern>PAT_32.pbm</pattern>
+		<pattern>PAT_33.pbm</pattern>
+		<pattern>PAT_34.pbm</pattern>
+		<pattern>PAT_35.pbm</pattern>
+		<pattern>PAT_36.pbm</pattern>
+		<pattern>PAT_37.pbm</pattern>
+		<pattern>PAT_38.pbm</pattern>
+		<pattern>PAT_39.pbm</pattern>
+		<pattern>PAT_40.pbm</pattern>
+	</patterns>
+	<!-- 'FTBL' #6520 (84 bytes) -->
+	<font>
+		<id>16</id>
+		<name>Palatino</name>
+	</font>
+	<font>
+		<id>3</id>
+		<name>Geneva</name>
+	</font>
+	<font>
+		<id>4</id>
+		<name>Monaco</name>
+	</font>
+	<font>
+		<id>0</id>
+		<name>Chicago</name>
+	</font>
+	<!-- 'STBL' #3215 (45 styles) -->
+	<nextStyleID>322</nextStyleID>
+	<styleentry>
+		<id>1</id>
+		<font>Palatino</font>
+		<textStyle>plain</textStyle>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>2</id>
+		<font>Palatino</font>
+		<textStyle>bold</textStyle>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>6</id>
+		<font>Palatino</font>
+		<textStyle>group</textStyle>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>7</id>
+		<font>Chicago</font>
+		<textStyle>plain</textStyle>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>10</id>
+		<font>Monaco</font>
+		<textStyle>plain</textStyle>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>11</id>
+		<font>Monaco</font>
+		<textStyle>group</textStyle>
+		<textStyle>underline</textStyle>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>12</id>
+		<font>Monaco</font>
+		<textStyle>underline</textStyle>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>13</id>
+		<font>Geneva</font>
+		<textStyle>bold</textStyle>
+		<size>10</size>
+	</styleentry>
+	<styleentry>
+		<id>15</id>
+		<font>Monaco</font>
+		<textStyle>group</textStyle>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>23</id>
+		<font>Monaco</font>
+		<textStyle>bold</textStyle>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>43</id>
+	</styleentry>
+	<styleentry>
+		<id>44</id>
+		<font>Monaco</font>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>45</id>
+		<font>Chicago</font>
+	</styleentry>
+	<styleentry>
+		<id>47</id>
+		<textStyle>group</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>48</id>
+		<textStyle>bold</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>51</id>
+		<size>14</size>
+	</styleentry>
+	<styleentry>
+		<id>54</id>
+		<textStyle>bold</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>55</id>
+		<textStyle>group</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>62</id>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>63</id>
+		<textStyle>plain</textStyle>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>68</id>
+		<textStyle>plain</textStyle>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>70</id>
+		<textStyle>plain</textStyle>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>74</id>
+		<size>4</size>
+	</styleentry>
+	<styleentry>
+		<id>81</id>
+		<font>Geneva</font>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>84</id>
+		<size>8</size>
+	</styleentry>
+	<styleentry>
+		<id>86</id>
+		<font>Palatino</font>
+		<size>12</size>
+	</styleentry>
+	<styleentry>
+		<id>89</id>
+		<textStyle>underline</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>94</id>
+		<textStyle>bold</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>141</id>
+		<textStyle>group</textStyle>
+		<textStyle>bold</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>273</id>
+		<textStyle>bold</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>288</id>
+		<textStyle>plain</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>289</id>
+		<font>Monaco</font>
+		<textStyle>group</textStyle>
+		<textStyle>italic</textStyle>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>291</id>
+		<font>Monaco</font>
+		<textStyle>italic</textStyle>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>294</id>
+		<textStyle>group</textStyle>
+		<textStyle>italic</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>296</id>
+		<font>Monaco</font>
+	</styleentry>
+	<styleentry>
+		<id>297</id>
+		<textStyle>italic</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>298</id>
+		<font>Monaco</font>
+		<size>10</size>
+	</styleentry>
+	<styleentry>
+		<id>302</id>
+		<size>10</size>
+	</styleentry>
+	<styleentry>
+		<id>304</id>
+		<font>Geneva</font>
+	</styleentry>
+	<styleentry>
+		<id>307</id>
+		<font>Chicago</font>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>314</id>
+		<textStyle>extend</textStyle>
+	</styleentry>
+	<styleentry>
+		<id>315</id>
+		<size>9</size>
+	</styleentry>
+	<styleentry>
+		<id>317</id>
+		<textStyle>italic</textStyle>
+		<size>10</size>
+	</styleentry>
+	<styleentry>
+		<id>319</id>
+		<size>3</size>
+	</styleentry>
+	<styleentry>
+		<id>321</id>
+		<textStyle>italic</textStyle>
+		<size>9</size>
+	</styleentry>
+	<!-- Processed 'BMAP' #2502 (84 bytes) -->
+	<!-- Processed 'BMAP' #2929 (1268 bytes) -->
+	<!-- Processed 'BMAP' #3765 (436 bytes) -->
+	<!-- Processed 'BMAP' #4016 (2260 bytes) -->
+	<!-- Processed 'BMAP' #4749 (692 bytes) -->
+	<!-- Processed 'BMAP' #5087 (692 bytes) -->
+	<!-- Processed 'BMAP' #5592 (1012 bytes) -->
+	<!-- Processed 'BMAP' #7968 (308 bytes) -->
+	<!-- Processed 'BMAP' #8841 (820 bytes) -->
+	<!-- Processed 'BMAP' #10957 (2676 bytes) -->
+	<!-- Processed 'BMAP' #14308 (212 bytes) -->
+	<!-- Processed 'BMAP' #15118 (212 bytes) -->
+	<!-- Processed 'BMAP' #15898 (180 bytes) -->
+	<!-- Processed 'BMAP' #16595 (308 bytes) -->
+	<!-- Processed 'BMAP' #33266 (52 bytes) -->
+	<!-- Processed 'BMAP' #38049 (84 bytes) -->
+	<!-- Processed 'BMAP' #42988 (180 bytes) -->
+	<!-- Processed 'BMAP' #68321 (532 bytes) -->
+	<!-- Processed 'BMAP' #72969 (340 bytes) -->
+	<!-- Processed 'BMAP' #101531 (180 bytes) -->
+	<media>
+		<id>20000</id>
+		<type>icon</type>
+		<name>Main Topics</name>
+		<file>ICON_20000.pbm</file>
+	</media>
+	<media>
+		<id>20008</id>
+		<type>icon</type>
+		<name>Related Topics True</name>
+		<file>ICON_20008.pbm</file>
+	</media>
+	<media>
+		<id>20009</id>
+		<type>icon</type>
+		<name>Related Topics False</name>
+		<file>ICON_20009.pbm</file>
+	</media>
+	<media>
+		<id>20007</id>
+		<type>icon</type>
+		<name>Left Pointer</name>
+		<file>ICON_20007.pbm</file>
+	</media>
+	<media>
+		<id>20006</id>
+		<type>icon</type>
+		<name>Overview</name>
+		<file>ICON_20006.pbm</file>
+	</media>
+	<media>
+		<id>20005</id>
+		<type>icon</type>
+		<name>find</name>
+		<file>ICON_20005.pbm</file>
+	</media>
+	<media>
+		<id>20003</id>
+		<type>icon</type>
+		<name>Next</name>
+		<file>ICON_20003.pbm</file>
+	</media>
+	<media>
+		<id>20001</id>
+		<type>icon</type>
+		<name>Prev</name>
+		<file>ICON_20001.pbm</file>
+	</media>
+	<media>
+		<id>19201</id>
+		<type>icon</type>
+		<name>juanda1</name>
+		<file>ICON_19201.pbm</file>
+	</media>
+	<media>
+		<id>19202</id>
+		<type>icon</type>
+		<name>juanda2</name>
+		<file>ICON_19202.pbm</file>
+	</media>
+	<media>
+		<id>19003</id>
+		<type>icon</type>
+		<name>juanda3</name>
+		<file>ICON_19003.pbm</file>
+	</media>
+	<media>
+		<id>19004</id>
+		<type>icon</type>
+		<name>juanda4</name>
+		<file>ICON_19004.pbm</file>
+	</media>
+	<media>
+		<id>19000</id>
+		<type>icon</type>
+		<name>juanda</name>
+		<file>ICON_19000.pbm</file>
+	</media>
+	<media>
+		<id>19010</id>
+		<type>icon</type>
+		<name>juanda0</name>
+		<file>ICON_19010.pbm</file>
+	</media>
+	<media>
+		<id>19011</id>
+		<type>icon</type>
+		<name>Juanda turn 1</name>
+		<file>ICON_19011.pbm</file>
+	</media>
+	<media>
+		<id>19012</id>
+		<type>icon</type>
+		<name>Juanda turn 2</name>
+		<file>ICON_19012.pbm</file>
+	</media>
+	<media>
+		<id>19013</id>
+		<type>icon</type>
+		<name>Juanda turn 3</name>
+		<file>ICON_19013.pbm</file>
+	</media>
+	<media>
+		<id>19014</id>
+		<type>icon</type>
+		<name>Juanda turn 4</name>
+		<file>ICON_19014.pbm</file>
+	</media>
+	<media>
+		<id>19015</id>
+		<type>icon</type>
+		<name>Juanda turn 5</name>
+		<file>ICON_19015.pbm</file>
+	</media>
+	<media>
+		<id>19016</id>
+		<type>icon</type>
+		<name>Juanda turn 6</name>
+		<file>ICON_19016.pbm</file>
+	</media>
+	<media>
+		<id>19017</id>
+		<type>icon</type>
+		<name>Juanda turn 7</name>
+		<file>ICON_19017.pbm</file>
+	</media>
+	<media>
+		<id>20010</id>
+		<type>icon</type>
+		<name>Home</name>
+		<file>ICON_20010.pbm</file>
+	</media>
+	<media>
+		<id>20002</id>
+		<type>icon</type>
+		<name>Grey Prev</name>
+		<file>ICON_20002.pbm</file>
+	</media>
+	<media>
+		<id>28022</id>
+		<type>icon</type>
+		<name>Small Stack</name>
+		<file>ICON_28022.pbm</file>
+	</media>
+</stackfile>

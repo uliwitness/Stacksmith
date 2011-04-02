@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>82724</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>showPict</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] showPict of card ¬    to trueOrFalseset [the] showPict of bkgnd ¬    to trueOrFalseThe showPict property returns or sets whether HyperCard shows any graphics or paint text for a card and background. The default value is true, meaning that all graphics and paint appear.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>86</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>12</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et showPict of this card to trueset showPict of prev background to trueset showPict of card id 23484 to false-- Get the current status of showPict:get showPict of first cardget showPict of myBackgroundVariable</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n flashPicture   -- Flash the background picture 3 times:   repeat 6 times      set showPict of this bkgnd to not the showPict of this bkgnd   end repeatend flashPicture</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>122</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>When a card picture or background picture is hidden and you try to use a Paint tool on it or paste a picture onto it, a dialog box appears asking if you want to make the picture visible. Clicking OK shows the picture; clicking the Cancel button cancels the action. If you draw on a hidden picture froma handler, you do not get the dialog box, and whatever you draw will appear after you set showPict to true.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>394</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>404</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties39797 47827 88724 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	card	pictures	property	show	trueOrFalse</text>
+	</content>
+	<name>showPict</name>
+	<script></script>
+</card>

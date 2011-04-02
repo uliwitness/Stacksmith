@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>9168</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>ut (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>70</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>The lines of text that you put into a pop-up button become the items of the  menu that appears when you click the button.Before you can add items to a menu, the menu must already exist. The menuItemList is a comma-separated list of the items you want to add to the menu. Use the single character "-" to get a gray line. You can put up to 64 items into a menu with a single put statement.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>194</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>195</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>207</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>208</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>300</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>305</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>377</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>382</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>The optional messageList is a comma-separated list of message names that HyperCard sends to the current card when the user chooses one of the menu items. The number of items in the messageList must equal the number of items in menuItemList. To skip a message name, use an empty item—a null between two commas:"myMessage 1,,myMessage 3"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>182</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>194</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>227</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>228</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>240</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>241</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>314</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands24266 27092 34927 34045 34478 38686 47503 </text>
+	</content>
+	<name>put 2</name>
+	<script></script>
+</card>

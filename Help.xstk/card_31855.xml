@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>31855</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>choose</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>hoose tool posIntegerchoose toolName toolwhere posInteger is between 1 and 18.The choose command chooses the tool with the specified number or name from the Tools palette. HyperCard sends the choose command to the current card when you choose a tool from the Tools menu.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>87</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>169</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>207</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>yperCard passes the word tool  to the first parameter variable and the tool number to the second parameter variable. You can handle the choose command as follows:on choose what, toolNumber   statementsend choose</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>297</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>136</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>144</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>195</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>205</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>choose browse toolchoose tool 1choose button toolchoose tool 2choose field toolchoose tool 3choose select toolchoose tool 4choose lasso toolchoose tool 5choose pencil toolchoose tool 6choose brush toolchoose tool 7choose eraser toolchoose tool 8choose line toolchoose tool 9choose spray toolchoose tool 10choose rectangle toolchoose rect toolchoose tool 11choose round rectangle toolchoose round rect toolchoose tool 12choose bucket toolchoose tool 13choose oval toolchoose tool 14choose curve toolchoose tool 15choose text toolchoose tool 16choose regular polygon toolchoose reg poly toolchoose tool 17choose polygon toolchoose poly toolchoose tool 18</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands27092 3428 66705 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>browse	brush	bucket	button	can	card messages	choose	circle	command	curve	draw	eraser	field	lasso	line	message	oval	pencil	polygon	rectangle	regular	round	select	select	spray	text	tool</text>
+	</content>
+	<name>choose</name>
+	<script></script>
+</card>

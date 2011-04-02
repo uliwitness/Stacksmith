@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>56033</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>foundChunk</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he foundChunkValue returned: a character chunk expression that indicates where the most recent find command located its target string. If nothing was found, it returns empty. The chunk expression returned has the following form:char posInteger to posInteger ¬    of container</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>103</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>170</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>233</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>237</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>238</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>248</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>252</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>262</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>272</offset>
+			<id>289</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>find "Maria"put the foundChunk--Using foundChunk to find and highlight a string:find string userName in field "names"select the foundChunk</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n foundChunkDemo  find "foundChunkDemo" in field "Demo Script"  get the foundChunk -- before select removes it  wait 1 second  select it  answer "The foundChunk is:" &amp; return &amp; itend foundChunkDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>54</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions24266 32809 52836 37172 63264 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>chunks	find	found	function</text>
+	</content>
+	<name>foundChunk</name>
+	<script></script>
+</card>

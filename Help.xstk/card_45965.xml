@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>45965</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>reset</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>eset menuBarreset printingreset paintReset menuBar restores the menu barto HyperCard’s standard menus. Reset printing restores the default values for the printing properties, as follows: printMargins: 0,0,0,0printTextAlign: leftprintTextFont: GenevaprintTextHeight:13printTextSize: 10printTextStyle: plain</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>124</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>192</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>eset paint reinstates the default values for all the painting properties,as follows: brush: 8           textAlign: leftcentered: false    textFont: Genevafilled: false      textHeight: 16grid: false        textSize: 12lineSize: 1        textStyle: plainmultiple: falsemultiSpace: 1pattern: 12polySides: 4</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands67958 69837 34045 71536 72386 74454 77229 78411 78788 44420 79600 90631 90961 91426 91932 92736 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>bar	brush	centered	command	filled	grid	lineSize	menu	multiple	multiSpace	new features	paint	patterns	polygon	polySides	restore	textalign	textstyle</text>
+	</content>
+	<name>reset</name>
+	<script></script>
+</card>

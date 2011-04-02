@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>20071</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>mouseDown</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ouseDownHandler:on mouseDown   statementsend mouseDownHyperCard sends the mouseDown message to a button or to a locked field when the user presses the mouse button down and the pointer is inside the rectangle of the button or field.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>yperCard sends mouseDown to the current card when the user presses the mouse button down and the pointer is not in the rectangle of a button or field.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages58372 58695 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button messages	card messages	down	field messages	message	mouse	system</text>
+	</content>
+	<name>mouseDown</name>
+	<script></script>
+</card>

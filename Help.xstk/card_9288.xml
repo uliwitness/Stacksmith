@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>9288</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>1</id>
+		<type>button</type>
+		<visible> <false /> </visible>
+		<reserved5> 0 </reserved5>
+		<reserved4> 0 </reserved4>
+		<reserved3> 0 </reserved3>
+		<reserved2> 0 </reserved2>
+		<reserved1> 0 </reserved1>
+		<enabled> <true /> </enabled>
+		<rect>
+			<left>452</left>
+			<top>273</top>
+			<right>475</right>
+			<bottom>290</bottom>
+		</rect>
+		<style>opaque</style>
+		<showName> <false /> </showName>
+		<highlight> <false /> </highlight>
+		<autoHighlight> <false /> </autoHighlight>
+		<sharedHighlight> <true /> </sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>20004</icon>
+		<textAlign>center</textAlign>
+		<font>Chicago</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Next Mask</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>end (cont’d.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 4</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>or example, if you send a message to another stack, and the handler refers to a field that’s specific to that stack, you’ll get a script error.HyperCard evaluates any parameters before it sends the message, even though the entire message is in quota- tion marks. (You don’t need quotation marks if the message is a single word.)When an object receives a message from send, HyperCard sets the value of the target to the name of the object.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>372</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>376</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>405</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>417</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>f the object doesn’t handle the message, the message continues along the message-passing path from that point.If you send a message directly to HyperCard, you ensure that no other objects will handle the message. For example,  send "doMenu next" to HyperCardalways takes you to the next card.You can type send as a message in the Message box.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>231</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>263</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>311</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>317</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Keywords26982 27256 104294 65969 8578 </text>
+	</content>
+	<name>send 2</name>
+	<script></script>
+</card>

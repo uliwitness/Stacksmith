@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>56722</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>foundText</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he foundTextValue returned: a string equal tothe characters enclosed in the box after the most recent find command has located its target string. If nothing was found, it returns empty.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>182</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>188</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>find "Jo"put the foundText--Using foundText for  conditional processing:find "Edd" in field "last names"if the foundText is "Eddings" then   multiply hoursWorked by 35.50else   multiply hoursWorked by 25.50end if</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n foundTextDemo  set cursor to watch  find string "TextDemo" in field "Demo Script"  answer "The foundText is “" &amp; the foundText &amp; "”."end foundTextDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>123</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>132</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions24266 32809 53775 37172 64031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>find	found	function	text</text>
+	</content>
+	<name>foundText</name>
+	<script></script>
+</card>

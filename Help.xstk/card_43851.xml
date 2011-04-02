@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>43851</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>lay (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 3 of 3</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>n the current stack, a stack being used, or the Home stack.HyperCard requires more RAMto play large digitized sounds—about 22K for every second the sound plays.If HyperCard can't find the sound or load it into memory, the result gets Couldn't load sound.  If the volume is set to 0, if an XCMD is using the sound channel, or if HyperCard is running in the background, the result gets Sound is off.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>223</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>235</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>239</offset>
+			<id>315</id>
+		</stylerun>
+		<stylerun>
+			<offset>241</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>260</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>374</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>386</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>390</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>403</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>Specify the note r to get a rest.For example:  re  --eighth note restA duration followed by a period (.) means a dotted note. A duration followed by the number 3 means one note of a triplet.HyperCard can also play digitized sounds stored as 'snd ' resources.Use play with the name of the resource as the sound. The resource must appear</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>249</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>270</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>276</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>313</offset>
+			<id>12</id>
+		</stylerun>
+		<stylerun>
+			<offset>318</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands31649 64990 50819 </text>
+	</content>
+	<name>play 3</name>
+	<script></script>
+</card>

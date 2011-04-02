@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>49191</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>subtract</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ubtract number from [chunk of] ¬         containerwhere container  or chunk  must contain a number.The subtract command subtracts number from the specified container (or chunk) and puts the result into the container (or chunk), replacing what was there.(You can use the is a operator to seeif the container is a number.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>12</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>297</id>
+		</stylerun>
+		<stylerun>
+			<offset>69</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>74</offset>
+			<id>297</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>118</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>136</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>143</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>277</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>283</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>subtract 4 from bkgnd field "total"subtract last line of card field "debits" from item 1 of theTotalif the Message box is a number then subtract 15 from Message box</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands24266 29791 89523 6157 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>or example, if you saysubtract 3 from theTotaland theTotal previously held 7, it will now hold 4.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>64</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>chunks	command	container	math	minus	number	subtract</text>
+	</content>
+	<name>subtract</name>
+	<script></script>
+</card>

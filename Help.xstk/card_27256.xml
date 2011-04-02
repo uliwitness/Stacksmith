@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>27256</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>pass</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ass functionNamepass messageNameThe pass keyword ends executionof the current handler and sends the entire message that initiated execution of the handler to the next object in the message-passing order. (Ordinarily, once a message is handled, it does not  continue along the message- passing order.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>172</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>178</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>259</offset>
+			<id>297</id>
+		</stylerun>
+		<stylerun>
+			<offset>262</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>n general, a stack should pass any system messages that it handles so that other stacks later in the message-passing order also get a chance to handle the message.For example, a mouseWithin handler in your Home stack won't ever run if you also have a mouseWithin handler without a pass statement in a stack before Home in the message-passing path.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>180</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>253</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>266</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>283</offset>
+			<id>298</id>
+		</stylerun>
+		<stylerun>
+			<offset>289</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>n openCard  put the number of this card  pass openCard -- so other openCard handlers can runend openCard</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Keywords6658 26982 29297 8578 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>control	keyword	message	pass	structures</text>
+	</content>
+	<name>pass</name>
+	<script></script>
+</card>

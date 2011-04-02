@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>103709</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>programs</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions30026 73723 97817 98925 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he programs [of machine "zone:Mac"]Value returned: a return-delimited list of applications currently running on the same machine as HyperCardIf you use the optional form of machine "zone:Mac", you get a list of Apple event-aware programs running on a remote machine.This function requires System 7 to work. (See Demo Script.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>296</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>296</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>186</offset>
+			<id>296</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>195</offset>
+			<id>296</id>
+		</stylerun>
+		<stylerun>
+			<offset>197</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>put the programs into card field 2answer programs()get the programs of machine "Zone 3:Freda's Mac"</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>on mouseUp  if the systemVersion &lt; 7.0 then    answer "Requires System 7 or greater!"    exit to HyperCard  end if  answer "The programs running at present are:"¬  &amp; return &amp; return &amp; the programsend mouseUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>application	running programs	executing programs	Apple event	function</text>
+	</content>
+	<name>programs</name>
+	<script></script>
+</card>

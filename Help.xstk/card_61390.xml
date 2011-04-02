@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>61390</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>paramCount</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he paramCountValue returned: a positive integer equal to the total number of parameters  passed to the current handler</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>114</offset>
+			<id>47</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n paramDemo   showParams 1, "a", "this is fun", the number of cardsend paramDemoon showParams   repeat with N = 0 to the paramCount     put N &amp; ":" &amp;&amp; space &amp;&amp; param(N) &amp; return after theMessage   end repeat   answer "The parameters are:" &amp; return &amp; return &amp; theMessageend showParams</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>123</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>137</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions32809 25888 26982 61134 61645 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>count	function	message	number	parameters</text>
+	</content>
+	<name>paramCount</name>
+	<script></script>
+</card>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>72540</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>hilite</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] hilite of button ¬    to trueOrFalseThe hilite property returns or sets whether a button is highlighted (shown in inverse video).  With check boxes and radio buttons, hilite determines whether the button is selected.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>182</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>190</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et the hilite of bkgnd button 1 to trueset the hilite of card button id 37 to ¬not (the hilite of card button id 37)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n hiliteDemo  flashButton "bkgnd btn id 61",3  flashButton "bkgnd btn id 57",3  flashButton "bkgnd btn id 58",3end hiliteDemoon flashButton whichBtn, howManyTimes  repeat for (howManyTimes * 2)    set the hilite of whichBtn to not the hilite of whichBtn  end repeatend flashButton</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>214</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>220</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>244</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>250</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties27092 67503 81699 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>If a button belongs to a family  and its hilite property is set to true from a script,  the hilite property of each of the other buttons in the family is set to false.(Click Tips to see a list of synonyms you can use for hilite.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>294</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>92</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>161</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>167</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>224</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>230</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	highlight	hilite	property	trueOrFalse</text>
+	</content>
+	<name>hilite</name>
+	<script></script>
+</card>

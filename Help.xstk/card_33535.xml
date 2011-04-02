@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>33535</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>convert</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>onvert {value |container}[from  ¬ formatName  [and formatName ] ]   ¬ to formatName   [and formatName ]The convert command changes a value expressed as a valid date, time, or date and time format to another format.You use and formatName in combination with the first formatName to convert a value to any two formats (often the  date and time).</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>302</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>86</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>87</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>138</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>143</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>229</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>233</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>243</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>244</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>274</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>284</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 4</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he  form convert value  to formatName returns the converted value  in the local variable it. The form convert container to formatName converts a value in a chunk or container  (including variables) and places the result in that chunk or container.You use the form from format  in situations where you don't want HyperCard to do the conversion automatically.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>18</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>302</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>89</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>92</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>103</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>124</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>166</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>175</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>266</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>272</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>278</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n daysOld  repeat until birthTime is a date    put "What is your birthdate?" after sayIt    ask sayIt with the short date    if (it is empty) OR (the result is "Cancel") then exit daysOld    put it into birthTime    if birthTime is not a number    then put birthTime &amp;&amp; "is not a valid date." &amp; return into sayIt  end repeat  convert birthTime to seconds -- change birthTime to seconds  convert the date to seconds  -- get the current date  put (it - birthTime) / 86400 into daysOld   -- 86400 seconds in 1 day  convert birthTime to long date  answer "You were born on" &amp;&amp; birthTime &amp; ", and you are currently" &amp;&amp;¬  daysOld &amp;&amp; "days old."end daysOld</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>336</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>343</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>398</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>405</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>525</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>532</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>convert "1/1/1960" to seconds -- the result goes into the variable itconvert "1/1/1960" to seconds and long dateconvert (the seconds - startSeconds) to abbreviated timeconvert bkgnd field "date" to seconds -- the result goes into the fieldconvert last word of field "Info" to short dateconvert totalTime to abbreviated time -- the result goes into totalTimeconvert field 1 from date to dateItemsconvert myVar from seconds to long dateconvert card field "Date and Time" from date and time to dateItems</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands27092 11187 24266 55207 66404 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>abbreviated	chunks	command	container	date	dateItems	format	it	item	long	seconds	short	time</text>
+	</content>
+	<name>convert</name>
+	<script></script>
+</card>

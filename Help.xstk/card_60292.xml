@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>60292</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>numToChar</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he numToChar of posInteger  Value returned: the character whose ASCII equivalent equals posInteger</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>72</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>91</offset>
+			<id>289</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n nameUpperCase  ask "Please enter your name:"  if it is empty then exit nameUpperCase  answer uppercase(it)end nameUpperCasefunction upperCase whatStr  repeat with charNum = 1 to the number of chars in whatStr    put charToNum(char charNum of whatStr) into thisChar    if thisChar ≥ 97 AND thisChar ≤ 122    then put numToChar(thisChar - 32) into char charNum of whatStr  end repeat  return whatStrend upperCase</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>329</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>338</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the numToChar of 65numToChar(65)put charToNum(numToChar(65)) = 65</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions32809 52559 57200 60426 90270 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>ascii	char	characters	function	integer	number</text>
+	</content>
+	<name>numToChar</name>
+	<script></script>
+</card>

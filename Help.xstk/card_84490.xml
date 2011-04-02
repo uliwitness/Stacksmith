@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>84490</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>dontWrap</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] dontWrap of field ¬    to trueOrFalseThe dontWrap property returns or sets whether a field wraps text that is longer than the width of the field or instead truncates the viewable text at the right edge of the field. (In HyperTalk, a return character determines a line.)This property corresponds to the Don’t Wrap option in a Field Info dialog box.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>64</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n toggleWrap  set the cursor to watch  set the dontWrap of me to true  wait 2 sec  set the dontWrap of me to falseend toggleWrap-- Here is some text that will illustrate the dontWrap feature:-- Normally, when dontWrap is set to false, the text wraps to the next display line of the field.-- When dontWrap is set to true, the text does not wrap to the next line; the field looks more like a list.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the dontWrap of card field "Index" of last card to false</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties12857 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>Truncated viewable text isn't lost. If you set the dontWrap to true, the “missing” text appears in the field.This property is set to true when autoSelect is set to true; and it sets autoSelect to false when it is set to false.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>146</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>157</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>185</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>break	dont	field	line	new features	property	trueOrFalse	wrap</text>
+	</content>
+	<name>dontWrap</name>
+	<script></script>
+</card>

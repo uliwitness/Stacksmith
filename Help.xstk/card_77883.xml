@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>77883</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>number (property)</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he number of buttonthe number of fieldthe number of cardthe number of bkgndthe number of windowThe number property returns the number of a button, field, card,  background, or window. (You cannot set a number.) The number of a button or field determines whether it’s on top of other buttons and fields within the same layer (background or card) that contains it. Card objects are always on top of background objects.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>74</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>79</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>207</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>o change the number of a button or field, select it and choose Send Farther and Bring Closer from the Objects menu, or change its partNumber property.The number of a window reflects its front to back order (similar to the number of a button or field).  You can change a window's number by bringing it to the front (for example, by clicking it or by using the show command), or by covering it with other windws.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>361</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>367</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the number of bkgnd button "Prev"the number of card field id 90the number of this cardthe number of this backgroundif the number of this card = 1 then ...</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n nameDemo  answer "The number of bkgnd field “Demo Script” is:" &amp;&amp; ¬  the number of bkgnd field "Demo Script" &amp; return &amp; return &amp; ¬  "The number of this card is:" &amp;&amp; ¬  the number of this card &amp; return &amp; return &amp; ¬  "The total number of cards in the stack is:" &amp;&amp; ¬  the number of cards &amp; return &amp; return &amp; ¬  "The number of this background is:" &amp;&amp; ¬  the number of this bkgndend nameDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>179</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>185</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>285</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>366</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>372</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties73264 77648 59877 100450 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	button	card	field	number	property</text>
+	</content>
+	<name>number (property)</name>
+	<script></script>
+</card>

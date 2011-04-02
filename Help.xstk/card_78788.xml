@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>78788</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>polySides</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] polySides to posIntegerwhere posInteger is 0 or a number from 3 to 50.The polySides property returns or sets the number of sides of a polygon created by the Regular Polygon tool.  Set polySides to 0 to draw a circle.(You can also select one of six standard polygons by choosing Polygon Sides from the Options menu.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>198</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>209</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>If you set polySides to a number lower than 3 (other than 0) or higher than 50, it automatically reverts to 3 or 50.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>11</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et the polySides to 0 -- circleset the polySides to 4set the polySides to 28</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n polySidesDemo  show bkgnd field "demo field"  setUpPaint  set dragspeed to 250  put "50,16,12,10,9,8,7,6,5,4,3" into theSides  repeat with itemNum = 1 to the number of items in theSides    set polysides to (item itemNum of theSides)    drag from "240,160" to "240,250"  end repeat  displayMessage "Click the mouse" &amp; return &amp; "to continue . . ."  set the cursor to arrow  wait until the mouseClick  domenu "revert"  hide bkgnd field "demo field"  choose browse toolend polySidesDemoon setUpPaint  show card picture  set lineSize to 1  choose regular polygon tool  set the pattern to 1  set centered to true  set filled to true  set grid to falseend setUpPaint</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>211</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties45965 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>integer	paint	polygon	polySides	property	sides</text>
+	</content>
+	<name>polySides</name>
+	<script></script>
+</card>

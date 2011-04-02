@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>63565</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>selectedField</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he selectedFieldValue returned: a field expressionthat indicates the field in which a range of characters is currently highlighted. If nothing is highlighted, it returns empty. The field expression returned has oneof the following forms:card field nbkgnd field nwhere n is the number of the field.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>179</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>244</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>255</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>269</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>270</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>272</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>277</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>278</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>280</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et the selectedFieldput the selectedField into theField</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n selectedFieldDemo  select line 1 of field 1  wait 15  answer "The field containing the selection is:" &amp; return &amp;¬  the name of the selectedFieldend selectedFieldDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions32809 56310 47006 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>field	function	select	selection</text>
+	</content>
+	<name>selectedField</name>
+	<script></script>
+</card>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>36226</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>edit script</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>dit [the] script of objectThe edit script command opens the script of an object with the HyperCard script editor.  When run as a statement in a handler, edit script suspends execution of the handler until the user closes the script editor or activates the card window.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>69</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>156</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>170</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>261</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>272</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>ote: Even though HyperCard itselfis an object (it can receive messages),it does not have a script. The following statement yields an error:edit the script of HyperCardFor this command to work, the userLevel property must be set to 5.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>86</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>143</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>204</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>214</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n openScriptWindow  set the script of bkgnd field "Demo Script" to¬  "-- Click the close box to close this script window!"  edit script of bkgnd field "Demo Script"end openScriptWindow</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>128</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>132</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>edit the script of this cardedit script of background 2edit script of card button 1 of card 1edit script of last background partedit script of stack "Home"edit script of this stack</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands80353 80403 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	button	card	command	edit	field	scripts	stacks</text>
+	</content>
+	<name>edit script</name>
+	<script></script>
+</card>

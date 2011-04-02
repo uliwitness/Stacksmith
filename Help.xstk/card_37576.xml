@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>37576</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties84490 75848 100041 47006 63809 64031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>utoSelect (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 2 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>To learn which lines are selected, get the selectedLine of field.  To learn the contents of those lines, get the selectedText of field.  To preselect, use select line x [to y] of field.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>156</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>180</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>185</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<name></name>
+	<script></script>
+</card>

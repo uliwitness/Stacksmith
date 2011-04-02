@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>39797</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <false /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>hide</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ide menuBarhide titleBarhide groupshide card picturehide background picturehide picture of cardhide picture of bkgndhide fieldhide buttonhide windowhide externalWindow</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>98</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>12</id>
+		</stylerun>
+		<stylerun>
+			<offset>103</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>124</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>136</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>148</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>154</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>166</offset>
+			<id>289</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he hide command  removes HyperCard objects and elementsfrom view.hide menuBar removes the menu bar from the top of the screen. hide titleBar removes the title bar on the card window.Use both of these commands with care: hiding the menu bar, or the title bar of a window, may confuse your users.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>69</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>147</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>ide card window -- built-in windows:hide tool windowhide window "tools"hide Message boxhide window "Message"hide message watcherhide window "Message Watcher"hide variable watcherhide window "Variable Watcher"-- external windows:hide window "Navigator"hide window "Script of My HD:Home"hide button 1hide second bkgnd fieldhide picture of card 3hide pict of first cdhide picture of background "jazz"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n hideDemo  set cursor to watch  hide titleBar  lock screen  hide bkgnd field "demo script"  show bkgnd field "demo field"  displayMessage "Let us go then you and I"  unlock screen with dissolve  wait 2 seconds  lock screen  hide bkgnd field "demo field"  show bkgnd field "demo script"  unlock screen with dissolve  show titleBarend hideDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>236</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>240</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands27092 32483 47827 82724 88724 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	bar	bar	button	card window	command	external	external window	field	menu bar	message	message box	new features	pictures	title	tool	windows</text>
+	</content>
+	<name>hide</name>
+	<script>on showCardStuff--always hide cd picture on this cardhide card pictureend showCardStuff</script>
+</card>

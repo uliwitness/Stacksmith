@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>43014</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands3428 39797 35844 41996 42410 42512 44420 45683 45965 16789 6031 51002 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>lose (cont’d)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>62</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>63</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 3 of 3</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>hus you can’t show an external window once you’ve closed it; you’ll have to create a new one using its external command or external function.The close card window command closes the frontmost stack if at least two stacks are open.HyperCard also sends the close command to the current card when the user clicks the close box of the card window.  You can handle the message as follows:</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>20</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>147</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>166</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>259</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>266</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>on close  statementsend close</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>1</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<name>close 3</name>
+	<script></script>
+</card>

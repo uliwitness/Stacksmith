@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>59412</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>mouseLoc</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he mouseLocValue returned: a point equal to the current position of the mouse pointer relative to the current card</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseLocDemo  set the cursor to arrow  show bkgnd field "demo field"  put "Move the mouse to change the mouseLoc." &amp; return &amp; return &amp;¬  "The mouseLoc is:" &amp;&amp; the mouseLoc into bkgnd field "demo field"  put spaces(20) &amp; "Click the mouse to stop . . ." into ¬  line 5 of bkgnd field "demo field"  repeat until the mouseClick    put the mouseLoc into last word of line 3 of ¬    bkgnd field "demo field"  end repeat  hide bkgnd field "demo field"  put empty into bkgnd field "demo field"end mouseLocDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>170</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>178</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>346</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>354</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>get the mouseLocif it is within the rect of card button 1 then ...set the loc of button 1 to mouseLoc()if the mouseLoc is not within the rect of card window then beep</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions32809 18600 53693 59060 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>function	location	mouse	point	screen</text>
+	</content>
+	<name>mouseLoc</name>
+	<script></script>
+</card>

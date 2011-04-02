@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>44101</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>pop</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>op cardpop card { into | after | before }  ¬         [chunk of] container The pop card command retrievesthe identification (full card ID and stack path name) of a card previously saved with the push card command.If you don’t provide a container to hold the card information, pop goes directly to the popped card.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>77</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>92</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>199</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>210</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>282</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>287</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>f you do specify a container, popputs the card’s identification into the container, and you don’t go anywhere. You can then check the card ID or stack to decide whether you want to returnto that card.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n goHomeAndBack  set lockmessages to true -- to leave this field up  push this card  go to card 3 of stack "Home"  wait 30  pop cardend goHomeAndBack</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>op cardpop card into theCardpop card before bkgnd field "History List"pop card after last line of bkgnd field "History List"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands38981 45173 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>after	before	card	chunks	command	container	into</text>
+	</content>
+	<name>pop</name>
+	<script></script>
+</card>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>79936</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>ectangle</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] rect of button to rectangleset [the] rect of field to rectangleset [the] rect of card to rectangleset [the] rect of window to rectangleget [the] rect of menuBarThe rectangle property returns or sets the rectangular coordinates of buttons, fields, cards, and windows, and it returns the coordinates of the menu bar. Setting the rectangle of a card changes the size of all the cards in a stack; setting the rectangle of the card window resizes the window, not the card.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>44</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>80</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>81</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>98</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>11</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>121</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>136</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>180</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>191</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>384</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>397</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>439</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>450</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>HyperCard determines the rectangle of buttons, fields, cards, and its built-in windows relative to the top-left corner of the current card. HyperCard determines the rectangle of the card window relative to the top-left corner of the screen with the menu bar. Note: You can’t set the rect of an inactive card window or of the menu bar.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>161</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>285</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>291</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>the rectangle of card button 1the rectangle of bkgnd field id 34the rectangle of this cardthe rect of message boxthe rect of tool windowthe rect of card windowset the rect of bkgnd button "Next" to the rect of bg btn "Prev"set the rect of card window to the rect of this card</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n talkAboutRects  answer "The rect of bkgnd btn “Run the Script” is:" &amp;&amp; ¬  the rect of bkgnd btn "Run the Script" &amp; return &amp; return &amp; ¬  "The rect of this card is:" &amp;&amp; the rect of this card &amp; return &amp; ¬  return &amp;"The rect of the card window is:" &amp;&amp; the rect of the card windowend talkAboutRects</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>87</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>259</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>263</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties85301 91818 86710 74022 74795 86116 62877 81344 86868 87153 89143 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	card	card window	field	property	rectangle	windows</text>
+	</content>
+	<name>rectangle</name>
+	<script></script>
+</card>

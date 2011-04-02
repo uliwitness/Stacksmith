@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>28073</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>repeat until</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>epeat until trueOrFalse   statementsend repeatThe statements in a repeat until structure repeat as long as the conditionfollowing the word until is false. HyperCard checks the condition before the first and any subsequent iterations of the loop.If HyperCard executes an exit repeatstatement in the loop, it continues running the handler starting from the first statement after end repeat.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>144</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>151</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>277</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>290</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>306</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>307</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>385</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>396</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>f HyperCard executes a next repeat statement, it returns immediately to the beginning of the repeat loop.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>93</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  show bkgnd field "demo field"  put return &amp; "    Point at the number to stop counting..." ¬  into bkgnd field "demo field"  put 0 into theCount  put space &amp; space &amp; theCount after bkgnd field "demo field"  repeat until the mouseLoc is within "321,81,370,110"    add 1 to theCount    put theCount into last word of bkgnd field "demo field"    if theCount = 100 then exit repeat -- just in case.  end repeat  wait 20  hide bkgnd field "demo field"  put empty into bkgnd field "demo field"end mouseUp</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>224</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>236</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>417</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>427</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Keywords89783 25835 90049 27427 27895 28298 28477 6157 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>control	keyword	next	repeat	structures	trueOrFalse	until</text>
+	</content>
+	<name>repeat until</name>
+	<script></script>
+</card>

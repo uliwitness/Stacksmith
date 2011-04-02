@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>26982</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>on</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>n messageName [parameterList ]    statementsend messageNameThe on keyword defines a new message handler of the specified name.The optional parameterList letsthe handler receive values sent along with a message. HyperCard assigns each value to a parameter variable in the parameterList.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>36</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>101</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>145</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>146</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>159</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>253</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>271</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>278</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>292</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n mouseUp  flashTheButton "bkgnd btn id 57",2end mouseUpon flashTheButton whichBtn, howMany  repeat for (howMany * 2) times    set the hilite of whichBtn to not the hilite of whichBtn  end repeatend flashTheButton</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>63</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>204</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>207</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Keywords25835 6658 61134 61390 61645 27256 62431 28715 29297 65969 8578 10721 5306 9950 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>control	end	keyword	message	new	parameters	structures	trap</text>
+	</content>
+	<name>on</name>
+	<script></script>
+</card>

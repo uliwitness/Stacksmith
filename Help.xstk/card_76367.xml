@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>76367</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>marked</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] marked of card ¬    to trueOrFalseThe marked property returns or sets whether a card is marked. It corre-sponds to the Card Marked check boxin a Card Info dialog box.You can operate on the set of marked cards with commands such as print,go, show, and sort.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>59</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>248</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>254</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>255</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>258</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>259</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>264</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>269</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>274</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>et the marked of this card to trueset the marked of last card of next background to falseset the marked of marked card 1 to false</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties41060 50277 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>card	mark	marked	new features	property	trueOrFalse</text>
+	</content>
+	<name>marked</name>
+	<script></script>
+</card>

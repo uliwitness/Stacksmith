@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>28715</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>return</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>eturn expressionThe return keyword ends executionof a handler and, in function handlers, returns the value of expression to the handler that called the function.If return appears in a message handler (as opposed to a function handler),it ends execution of the handler and places the value of the expression into the HyperTalk function the result.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>58</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>114</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>124</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>169</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>341</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>352</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he value of the result as set bya return statement is valid only immediately after the return statement executes; each new statement resets the result to empty.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>141</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>153</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n whatDisk  answer "This stack resides on the disk named" &amp;&amp; diskName() &amp; "."end whatDiskfunction diskName longStackName  if longStackName is empty  then put the long name of this stack into longStackName  delete char 1 to 7 of longStackName -- remove “stack "”  return char 1 to (offset(":",longStackName) - 1) of longStackNameend diskName</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>272</offset>
+			<id>23</id>
+		</stylerun>
+		<stylerun>
+			<offset>278</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Keywords25888 26982 62431 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>control	function	keyword	message	result	return	structures</text>
+	</content>
+	<name>return</name>
+	<script></script>
+</card>

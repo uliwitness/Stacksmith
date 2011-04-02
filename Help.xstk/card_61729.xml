@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>61729</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>random</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he random of posIntegerValue returned: a random integer between 1 and posIntegerRandom returns values for integersup to 2^31 - 2.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>72</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>92</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n hyperMath  -- This is a very simple math flash card script.  put random(50) into intOne  put random(50) into intTwo  put item random(2) of "+,-" into theOperator  put intOne &amp;&amp; theOperator &amp;&amp; intTwo &amp;&amp; "=" &amp;&amp; ¬  (the value of (intOne &amp;&amp; theOperator &amp;&amp; intTwo)) into theAnswer  put 0 into theCount  ask "What is" &amp;&amp; intOne &amp;&amp; theOperator &amp;&amp; intTwo  if it is empty then exit hyperMath  if it is last word of theAnswer then put "That's right!" &amp; ¬  return before theAnswer  answer theAnswerend hyperMath</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>76</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>139</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions32809 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>function	integer	math	number</text>
+	</content>
+	<name>random</name>
+	<script></script>
+</card>

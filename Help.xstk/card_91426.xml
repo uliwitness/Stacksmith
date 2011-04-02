@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>91426</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>printTextHeight</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>et the printTextHeight ¬    to posIntegerThe printTextHeight property returns or sets the value of the default text height (or line spacing) used by the print command. The default valueis 13.When you print a report, HyperCard determines the default text height fora report item as follows:</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>12</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>156</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>163</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>195</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text> If the report item is the text of a card    or  background field, HyperCard uses    the text height of the field.• If the report item is generated from    any other HyperTalk expression,    HyperCard uses the value of    printTextHeight.In either case, the user can override the default height by selecting a height in the Item Info dialog box of the report item.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>229</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>245</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the printTextHeight to 20</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties44420 79600 90631 90961 91932 92736 45965 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>global	height	integer	new features	positive	printing	property	text</text>
+	</content>
+	<name>printTextHeight</name>
+	<script></script>
+</card>

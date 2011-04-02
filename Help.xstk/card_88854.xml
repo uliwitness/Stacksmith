@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>88854</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>wideMargins</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] wideMargins of field ¬    to trueOrFalseThe wideMargins property returns or sets whether HyperCard adds extra space between the edges of a field and its text (to make it easier to read). It corresponds to the Wide Margins check box in a Field Info dialog box.The default value is false.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>41</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>52</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the wideMargins of bkgnd field 2 to true</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n wideMarginsDemo  set the wideMargins of me to false  wait 2 seconds  set the wideMargins of me to trueend wideMarginsDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties83265 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>field	margins	property	trueOrFalse	wide</text>
+	</content>
+	<name>wideMargins</name>
+	<script></script>
+</card>

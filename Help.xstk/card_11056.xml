@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>11056</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<part>
+		<id>1</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>9</left>
+			<top>32</top>
+			<right>183</right>
+			<bottom>243</bottom>
+		</rect>
+		<style>shadow</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <false /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>center</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>bold</textStyle>
+		<textHeight>18</textHeight>
+		<name></name>
+		<script></script>
+	</part>
+	<part>
+		<id>2</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <true /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>9</left>
+			<top>52</top>
+			<right>181</right>
+			<bottom>241</bottom>
+		</rect>
+		<style>scrolling</style>
+		<autoSelect> <true /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Monaco</font>
+		<textSize>9</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>The List</name>
+		<script>on mouseUpdescribeLineend mouseUp</script>
+	</part>
+	<part>
+		<id>4</id>
+		<type>field</type>
+		<visible> <true /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <false /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>37</top>
+			<right>471</right>
+			<bottom>228</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name></name>
+		<script>on mouseUpcheckActiveTextend mouseUp</script>
+	</part>
+	<part>
+		<id>6</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>basic sources of value</name>
+		<script></script>
+	</part>
+	<part>
+		<id>15</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>operator</name>
+		<script></script>
+	</part>
+	<part>
+		<id>5</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>expression</name>
+		<script></script>
+	</part>
+	<part>
+		<id>7</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>Constant</name>
+		<script></script>
+	</part>
+	<part>
+		<id>13</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>local variable</name>
+		<script></script>
+	</part>
+	<part>
+		<id>16</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>global variable</name>
+		<script></script>
+	</part>
+	<part>
+		<id>17</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>it</name>
+		<script></script>
+	</part>
+	<part>
+		<id>18</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>button</name>
+		<script></script>
+	</part>
+	<part>
+		<id>8</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>field</name>
+		<script></script>
+	</part>
+	<part>
+		<id>11</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>message box</name>
+		<script></script>
+	</part>
+	<part>
+		<id>12</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>selection</name>
+		<script></script>
+	</part>
+	<part>
+		<id>14</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>chunk expression</name>
+		<script></script>
+	</part>
+	<part>
+		<id>9</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>property</name>
+		<script></script>
+	</part>
+	<part>
+		<id>10</id>
+		<type>field</type>
+		<visible> <false /> </visible>
+		<dontWrap> <false /> </dontWrap>
+		<dontSearch> <true /> </dontSearch>
+		<sharedText> <false /> </sharedText>
+		<fixedLineHeight> <true /> </fixedLineHeight>
+		<autoTab> <false /> </autoTab>
+		<lockText> <true /> </lockText>
+		<rect>
+			<left>193</left>
+			<top>31</top>
+			<right>471</right>
+			<bottom>245</bottom>
+		</rect>
+		<style>opaque</style>
+		<autoSelect> <false /> </autoSelect>
+		<showLines> <false /> </showLines>
+		<wideMargins> <true /> </wideMargins>
+		<multipleLines> <false /> </multipleLines>
+		<reservedFamily> 0 </reservedFamily>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<textAlign>left</textAlign>
+		<font>Palatino</font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<textHeight>14</textHeight>
+		<name>function</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>The building blocks</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>1</id>
+		<text>Building blocks</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>2</id>
+		<text>basic sources of valueoperatorexpressionconstantlocal variableglobal variableitbuttonfieldmessage boxselectionchunk expressionpropertyfunction</text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>4</id>
+		<text>yperTalk scripts use a number of basic building blocks as sources of value.Click one for more information about it.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>5</id>
+		<text>n expression is simply a description of how to get a value; it is either a basic source of value or a complex expression built from sources of value and operators. For example, the expression 8 * (2 + 2) refers to the value 32.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>194</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>207</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>226</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>229</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>6</id>
+		<text>he basic sources of value in HyperTalk are as follows:• a number (3, -99.9, and so on)• a literal, a string of characters set off    (delimited) by quotation marks:   "The quick brown fox"• a boolean value (true or false)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>2</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>2</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>69</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>77</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>2</id>
+		</stylerun>
+		<stylerun>
+			<offset>102</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>175</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>196</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>2</id>
+		</stylerun>
+		<stylerun>
+			<offset>209</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>222</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>224</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>230</offset>
+			<id>1</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>7</id>
+		<text> constant is a named value that never changes. For example:emptypireturntabtwozero</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>2</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>8</id>
+		<text> field, like a variable, is also a container (a place where you can store values). The value of a field is equal to whatever text it contains. For example:background field "address" = emptyis true if the field has nothing in it;"Cupertino" is in card field "Address"is true if the literal "Cupertino" appears somewhere in the field.  Fields generally contain text you want users to see.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>234</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>273</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>297</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>310</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>9</id>
+		<text> property is a named value that defines a characteristic of a HyperCard object or the HyperCard environment. For example, setting the user level to Scripting changes the userLevel property of HyperCard to the value 5. Properties are often selected as options in dialog boxes or on palettes, and they often can be set from handlers. For example:get the name of card 1get the location of the card windowset the name of card 1 to "Index"set the style of field 1 to "scrolling"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>170</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>216</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>347</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>12</id>
+		<text>he selection is a container that holds the currently selected area of text. The text can appear in any field or in the Message box. (Note: text found by the find command is not selected.) The value of the selection equals the text that is highlighted. For example:the selection is empty"Cupertino" is in the selection</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>157</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>163</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>201</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>216</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>267</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>11</id>
+		<text>he Message box (also called the Message window) is a single-line container.the Message box is emptyis true if there is nothing in the Message box;"go" is in the Message boxis true if the literal "go" appears in the Message box.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>4</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>103</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>153</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>179</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>209</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>10</id>
+		<text> function is a named value that HyperCard calculates each time it is used. The way in which the value is calculated is defined internally for HyperTalk’s built-in functions. You can define your own functions by writing function handlers. Sometimes a script must supply a function with starting values or parameters. By definition, functions return a value. For example:get the sin of 0get sin(0)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>2</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>374</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>13</id>
+		<text> local variable is a named container (a place to store values) whose value is whatever you put into it. A local variable is valid only within the handler in which it is used—the variable goes out of existence when the handler ends. You create a local variable by using its name with the put command and putting a value into it. For example, the statement put 7 into counterputs the value 7 into a variable named counter. (Don’t use quotation marks around the names of variables.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>287</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>292</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>357</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>378</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>392</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>395</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>416</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>424</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>15</id>
+		<text>n operator is a character or group of characters that causes a particular calculation or comparison to occur. In HyperTalk, operators operate on values. For example, the plus sign (+) is an arithmetic operator that adds numerical values.3 + 44 * 5theCount = 0the number of card buttons &lt; 10"this" &amp;&amp; "that"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>3</offset>
+			<id>2</id>
+		</stylerun>
+		<stylerun>
+			<offset>11</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>182</offset>
+			<id>10</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>1</id>
+		</stylerun>
+		<stylerun>
+			<offset>240</offset>
+			<id>10</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>14</id>
+		<text> chunk expression is a description of a unique piece of the contents of any container or other source of value. A chunk expression can refer to a specific character, word (separated by blank spaces), item (separated by commas), line (separated by Return characters), or a combination or range of these. For example:char 1 of background field "Name"word 1 to 10 of card field 1char 1 of word 2 of item 3 of line 4 to 6 ¬ of bkgnd field "Address" of card 20</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>18</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>166</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>172</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>206</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>228</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>234</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>318</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>16</id>
+		<text> global variable is a named container (a place where you can store values) whose value is whatever you choose to put into it, but it is valid for all handlers in which it is declared. To declare a global variable, precede its name with the keyword global:on myHandler   global Total   put 100 into Totalend myHandlerYou also create a global variable when you put a value into a variable from the Message box.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>248</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>255</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>258</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>323</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>17</id>
+		<text>t is a pre-defined variable. HyperCard uses it to store information that’s returned by commands such as ask, answer, convert, and read. You can also place a value directly into it using the get command (put 3 into it and get 3 are equivalent). When set in a handler, the value of it is local to the handler. When set from the Message box, the value is global.Use it when you need a variable temporarily. Use a named, local variable when you want to refer to a value throughout a handler—it’s too easy to change the value of it accidentally.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>44</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>108</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>117</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>125</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>177</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>190</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>195</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>205</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>219</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>222</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>229</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>245</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>246</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>281</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>285</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>366</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>370</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>527</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>531</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>HyperTalk basics24266 27092 10397 </text>
+	</content>
+	<content>
+		<layer>card</layer>
+		<id>18</id>
+		<text> button, like a variable, is also a container (a place where you can store values). The value of a button is equal to whatever text it contains. For example:"biscuits" is in bg button "Menu"is true if the literal "biscuits" appears somewhere in the contents of the button.  As with variables, the text that buttons hold is invisible; as with fields, the text in a button remains there—even between HyperCard sessions—until you change it.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>2</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>160</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>229</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>blocks	building	chunks	constants	container	expression	field	function	global variable	it	literal	local	message box	number	operators	selection	source	trueOrFalse	values	variable</text>
+	</content>
+	<name>The building blocks</name>
+	<script>on closeCardmouseUppass closeCardend closeCardon mouseUphideDescriptionsend mouseUp</script>
+</card>

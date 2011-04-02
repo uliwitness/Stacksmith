@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>56528</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>foundLine</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he foundLineValue returned: a line expression equal to the line of a field where the most recent find command located its target string. If nothing was found, it returns empty.  The line expression has the following form:line i of card field nline i of bkgnd field n</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>172</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>178</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>228</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>233</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>234</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>249</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>250</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>257</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>273</offset>
+			<id>291</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>find "Ann"put the foundLine-- Using foundLine to select a line:find currentTopic in field "Topics"select word 1 to 2 of the foundLine</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>here i is the line number and nis the number of the field.Note: A return character determinesa line, not the line wrap. A line that wraps and is displayed as two lines is treated as one line by HyperTalk.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>7</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>30</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>31</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>33</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n foundLineDemo  set cursor to watch  find string "on foundLineDemo"  answer "The foundLine is" &amp;&amp; the foundLine &amp; "." &amp; return ¬  &amp; return &amp; "The value of the foundLine is “" &amp;¬  the value of the foundLine &amp; "”."end foundLineDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>107</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>203</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>212</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions24266 32809 53252 37172 63809 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>find	found	function	line</text>
+	</content>
+	<name>foundLine</name>
+	<script></script>
+</card>

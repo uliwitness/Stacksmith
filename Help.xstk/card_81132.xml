@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>81132</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>scriptTextSize</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] scriptTextSize ¬    to posIntegerThe scriptTextSize property returnsor sets the size of font used to display scripts in all the script editor windows.  HyperCard uses 9 as the default size.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>181</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>184</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>set the scriptTextSize to 10</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties80353 80403 80859 14879 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>editor	global	new features	property	scripts	size	text</text>
+	</content>
+	<name>scriptTextSize</name>
+	<script></script>
+</card>

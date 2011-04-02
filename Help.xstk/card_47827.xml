@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>47827</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>show</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>how menuBarshow titleBarshow groupsshow all cardsshow marked cardsshow posInteger cardsshow card pictureshow background pictureshow picture of cardshow picture of bkgndshow field [at point ]show button [at point ]</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>72</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>154</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>12</id>
+		</stylerun>
+		<stylerun>
+			<offset>159</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>175</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>180</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>192</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>194</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>197</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>202</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>204</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>210</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>216</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>218</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>221</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>226</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>how window [at point ]show externalWindow [at point ]The show command displays HyperCard objects and elements.Show menuBar displays the menu barat the top of the screen (unless the screen is locked). Show titleBardisplays the title bar on the card window if it’s been hidden. (Normally, the title bar is visible.)</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>11</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>13</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>29</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>44</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>48</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>116</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>128</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>206</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>220</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>251</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>262</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>- show a series of cardsshow all cards  show ten cards  put 26 into howMany  show howMany cardsshow card window-- built-in windows:show tool windowshow window "tools"show Message box at 100,100show window "Message"show message watchershow window "Message Watcher"show variable watchershow window "Variable Watcher" at 70,280-- external windows:show window (line 9 of the windows)show window "Navigator" -- only if it already existsshow window "Script of My HD:Home" at 100,100 -- only if it is open-- show objects:show card field 1show field "Names" at 1,1  show bkgnd btn id 35 at 10,10-- show the picture of a specified card or bkgnd:show picture of card 3show pict of first cdshow picture of background "jazz"</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n showPictureDemo  -- draw a picture and show it only when done:  show bkgnd field "demo field"  hide card picture  drawPicture -- see below  show card picture  displayMessage "Click the mouse" &amp; return &amp; "to continue..."  set the cursor to arrow  wait until the mouseClick  lock screen  doMenu "revert" -- Don't keep the new picture  choose browse tool  unlock screen with dissolve slowly  hide bkgnd field "demo field"end showPictureDemoon drawPicture  setUpPaint  put "50,16,12,10,9,8,7,6,5,4,3" into theSides  repeat with itemNum = 1 to the number of items in theSides    set polysides to (item itemNum of theSides)    drag from "240,160" to "240,250"  end repeatend drawPictureon setUpPaint  set lineSize to 1  choose regular polygon tool  set the pattern to 1  set centered to true  set filled to true  set grid to falseend setUpPaint</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>69</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>73</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>148</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>166</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands27092 18600 32483 39797 74795 41060 82724 88724 50441 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>activate	all	at	bar	button	card	card window	command	external	external window	field	frontmost	group	integer	mark	marked	menu bar	message box	move	new features	pictures	point	show	title	windows</text>
+	</content>
+	<name>show</name>
+	<script></script>
+</card>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>24600</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>startUp</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>tartUpHandler:on startUp    statementsend startUpHyperCard sends the startUp message to the first card displayed when HyperCard is first started.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>8</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>44</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>77</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>86</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages4312 23995 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>card messages	message	start	startup	system	up</text>
+	</content>
+	<name>startUp</name>
+	<script></script>
+</card>

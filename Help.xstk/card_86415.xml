@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>86415</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>textStyle</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>set [the] textStyle to textStyleListset [the] textStyle of [chunk of] ¬    field to textStyleListset [the] textStyle of button ¬    to textStyleListset the textStyle of menuItem ¬    of menu to textStyleListset [the] textStyle of ¬the message box to textStyleListThe textStyle property returns or sets the styles in which Paint text, field text, button names, menu items, or text in the Message box appear.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>24</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>38</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>42</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>43</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>47</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>71</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>78</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>83</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>87</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>100</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>110</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>124</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>153</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>175</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>183</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>193</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>197</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>201</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>214</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>219</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>220</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>223</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>224</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>259</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>273</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>274</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>277</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>288</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>The style can be a single text style ora comma-separated list of styles. The available styles are plain, bold, italic, underline, outline, shadow, condense, extend, and group. (To see group text, issue the command show groups.)The default text style is plain.Note: if a chunk of a field contains a mixture of styles, HyperCard returns mixed when you ask for the textStyle.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>120</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>130</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>131</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>139</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>140</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>147</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>148</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>157</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>158</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>170</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>176</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>215</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>228</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>262</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>265</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>269</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>340</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>347</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>363</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>377</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>he textStyle of field 1the textStyle of the clickChunkthe textStyle of the foundChunkif the textStyle of the clickChunk contains "group" then ...if the textStyle of the clickChunk contains "bold" then ...set the textStyle to 10 -- for the text toolset the textStyle of field 1 to plainset the textStyle of card button 1 to boldset the textStyle of char 1 to 19 of line 2 of field 3 to bold,italic</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Properties34776 24266 45965 47827 83738 84911 85522 85825 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>button	chunks	field	group text	hot	menu items	new features	paint	property	sticky button	style	text	textstyle</text>
+	</content>
+	<name>textStyle</name>
+	<script></script>
+</card>

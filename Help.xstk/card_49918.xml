@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>49918</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>type</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ype texttype text with commandKeyThe type command acts exactly as if the user had typed text from the keyboard. The text appears in the Message box when it’s visible (or also when it’s hidden if blindTyping is set to true).To type text into a field or to add paint text, a handler must first set the insertion point (using either the select or click at command).</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>9</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>10</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>46</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>54</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>91</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>92</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>96</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>213</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>223</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>227</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>341</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>349</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>351</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>361</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n typeIntoMe  show bkgnd field "demo field"  set the lockText of bkgnd field "demo field" to false  select text of bkgnd field "demo field"  type line 6 of bkgnd field "Help Text A"  type return &amp; return &amp; "Click the mouse to continue..."  select empty  wait until the mouseClick  hide bkgnd field "demo field"  set the lockText of bkgnd field "demo field" to trueend typeIntoMe</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>type "Hello there world" -- in the Message boxselect before text of card field 1type "Hello there world"type "P" with commandKey -- print card  type "V" with commandKey,shiftKey -- paste a field and its text</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>o perform a menu command,use the form type text with commandKey. For example, if you have a graphic on the Clipboard, you can paste it with the commandtype "V" with commandKey</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>39</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>49</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>65</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>155</offset>
+			<id>44</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands32047 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>command	input	key	option	shift	text	type</text>
+	</content>
+	<name>type</name>
+	<script></script>
+</card>

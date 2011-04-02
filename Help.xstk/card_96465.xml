@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>96465</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>mouseDoubleClick</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 2</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages58695 20071 20820 21197 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ouseDoubleClickHandler:on mouseDoubleClick   statementsend mouseDoubleClickHyperCard sends this message to a button, field, or card after the mouse is clicked twice at the same place. When the message is sent, it's the only one sent during the second click;  there's no mouseDown, mouseStillDown, or mouseUp message sent after the first mouseUp.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>28</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>51</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>84</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>228</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>232</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>288</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>290</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>304</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>309</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>316</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>346</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>353</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>or HyperCard to send this message, the following conditions must all be true:(a) The downstroke of a second click follows the downstroke of a previous click within the double-click speed set in the Mouse control panel; and(b) the second click occurs within four pixels of the first; and (c) the second click occurs within the same object as the first.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>222</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>226</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>288</offset>
+			<id>89</id>
+		</stylerun>
+		<stylerun>
+			<offset>291</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>message	system	mouse	click	double-click	control panel</text>
+	</content>
+	<name>mouseDoubleClick</name>
+	<script></script>
+</card>

@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>48321</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>sort</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ort [sortDirection ] [sortStyle ] ¬     by expressionsort [this] stack [sortDirection ] ¬          [sortStyle ] by expressionsort [marked] cards [of this stack] ¬     [sortDirection ] [sortStyle ] ¬         by expressionsort bkgnd [sortDirection ] ¬          [sortStyle ] by expressionsort [marked] cards of bkgnd ¬     [sortDirection ] [sortStyle ] ¬         by expression</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>19</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>21</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>22</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>23</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>32</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>34</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>35</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>37</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>61</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>62</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>67</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>74</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>88</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>90</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>91</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>113</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>115</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>119</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>129</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>135</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>136</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>142</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>143</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>150</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>151</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>164</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>165</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>166</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>167</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>173</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>174</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>187</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>189</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>190</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>191</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>200</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>213</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>217</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>227</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>234</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>239</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>240</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>241</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>254</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>256</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>257</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>270</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>279</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>281</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>285</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>295</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>301</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>302</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>308</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>309</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>319</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>324</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>325</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>326</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>332</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>333</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>346</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>348</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>349</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>350</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>359</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>372</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>376</offset>
+			<id>289</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>ort [chunks of] container ¬          [sortDirection ] [sortStyle ] ¬          [by expression ]where chunks are limited to either lines or items. (See next card for details.)The first five forms of the sort command order all the cards ina stack or background by the valueof expression, evaluated  for each card in the stack or background.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>5</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>6</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>12</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>16</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>17</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>26</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>27</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>40</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>53</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>56</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>57</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>66</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>68</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>69</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>82</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>85</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>95</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>104</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>291</id>
+		</stylerun>
+		<stylerun>
+			<offset>111</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>112</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>133</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>134</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>148</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>149</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>207</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>213</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>281</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>282</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>292</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>293</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 3</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>-- Sort a container:sort lines of card field 1sort items of card field 1sort lines of myVariable descending numericsort items of Message boxsort lines of the selectionsort lines of field 1 by last word of each -- by last word of each linesort items of fld 1 descending numeric by word 2 of eachsort items of myList by the random of 2000 -- reorder myList randomlysort lines of fld 1 numeric by length(cd fld each) -- if field 1            -- contains names of cd flds, orders names according             -- to number of characters in each field.-- Sort cards:sort by bkgnd field "Name"sort this stack by bkgnd field "Name"sort stack by bkgnd field "Name"sort marked cards of this stack by bkgnd field "Name"sort this background by bkgnd field "Name"sort background 2 by bkgnd field "Name"sort marked cards of previous background by bkgnd field "Name"sort descending by bkgnd field "Name"sort descending international by bkgnd field "Name"sort numeric by bkgnd field 2sort numeric by the id of this cardsort by (bkgnd field "Last Name" &amp; bkgnd field "First Name")sort by mySortFunction()</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n sortMe  put line 10 to 13 of me into theLines  select line 10 to 13 of me  wait 30  sort lines of the selection  wait 1 second  put theLines into line 10 to 13 of meend sortMeZeppoChicoGrouchoHarpo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>212</offset>
+			<id>48</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Commands41060 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>alphabetic	ascend	characters	chars	chunks	command	descend	direction	expression	mark	marked	new features	numeric	style</text>
+	</content>
+	<name>sort</name>
+	<script></script>
+</card>

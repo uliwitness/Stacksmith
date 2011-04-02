@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>21577</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>newBackground</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>ewBackgroundHandler:on newBackground   statementsend newBackgroundHyperCard sends the newBackground message to the current card (in this case, the first card of the new background) just after HyperCard creates the background.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>14</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>25</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>45</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>75</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>94</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>109</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>lthough the new background willnot have a script with which to respond to the message, any other object along the message-passing path can handle it.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>44</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>50</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>99</offset>
+			<id>47</id>
+		</stylerun>
+		<stylerun>
+			<offset>105</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>System messages105361 18315 4312 22993 6031 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>background	card messages	message	new	system</text>
+	</content>
+	<name>newBackground</name>
+	<script></script>
+</card>

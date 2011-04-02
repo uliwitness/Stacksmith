@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>53252</id>
+	<filler1>0</filler1>
+	<cantDelete> <false /> </cantDelete>
+	<showPict> <true /> </showPict>
+	<dontSearch> <false /> </dontSearch>
+	<owner>4421</owner>
+	<content>
+		<layer>background</layer>
+		<id>1</id>
+		<text>clickLine</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>9</id>
+		<text>he clickLineValue returned: line chunk expression equal to the line that the user  clicked or, if the text has been grouped,  the first line of the longest range of lines with the text style Group around the character that the user clickedThe text style Group allows the clickLine to extend beyond one line.</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>15</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>271</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>286</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>2</id>
+		<text>Card 1 of 1</text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>60</id>
+		<text>n clickDemo  answer "Click any line of the Demo Script."  wait until the mouseClick  get the clickLine  select it  wait 1 second  answer "The clickline is:" &amp; return &amp; it &amp; returnend clickDemo</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>97</offset>
+			<id>48</id>
+		</stylerun>
+		<stylerun>
+			<offset>106</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>59</id>
+		<text>ut the clickLine into theLineselect theLineput the value of the clickLine into theLineClickedput the textFont of the clickLine into theFontput the textStyle of the clickLine into theStyle</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>10</id>
+		<text>he chunk expression returned has the following form:line posInteger of container</text>
+		<stylerun>
+			<offset>0</offset>
+			<id>43</id>
+		</stylerun>
+		<stylerun>
+			<offset>55</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>60</offset>
+			<id>289</id>
+		</stylerun>
+		<stylerun>
+			<offset>70</offset>
+			<id>44</id>
+		</stylerun>
+		<stylerun>
+			<offset>74</offset>
+			<id>289</id>
+		</stylerun>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>103</id>
+		<text>Functions34776 24266 32809 56528 63809 47827 86415 </text>
+	</content>
+	<content>
+		<layer>background</layer>
+		<id>114</id>
+		<text>active text	click	container	function	group text	hypertext	line	mouse	new features	range	sticky button</text>
+	</content>
+	<name>clickLine</name>
+	<script></script>
+</card>
