@@ -12,6 +12,20 @@
 #import "WILDStack.h"
 
 
+static NSSize		sPopUpMenuSizes[] =
+{
+	{ 416, 240 },
+	{ 512, 342 },
+	{ 640, 400 },
+	{ 640, 480 },
+	{ 576, 720 },
+	{ -1, -1 },
+	{ -2, -2 },
+	{ 0, 0 }
+};
+#define NUM_POPUP_MENU_SIZES	(sizeof(sPopUpMenuSizes) / sizeof(NSSize))
+
+
 @implementation WILDStackInfoWindowController
 
 @synthesize cardView = mCardView;
@@ -24,6 +38,8 @@
 @synthesize editScriptButton = mEditScriptButton;
 @synthesize widthField = mWidthField;
 @synthesize heightField = mHeightField;
+
+@synthesize sizePopUpButton = mSizePopUpButton;
 
 -(id)	initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView
 {
@@ -51,6 +67,8 @@
 	DESTROY( mWidthField );
 	DESTROY( mHeightField );
 	
+	DESTROY(mSizePopUpButton);
+	
 	[super dealloc];
 }
 
@@ -69,8 +87,38 @@
 	unsigned long	numBackgrounds = [[mStack backgrounds] count];
 	[mBackgroundCountField setStringValue: [NSString stringWithFormat: @"Contains %ld backgrounds.", numBackgrounds]];
 	
-	[mWidthField setIntValue: [mStack cardSize].width];
-	[mHeightField setIntValue: [mStack cardSize].height];
+	[self updateCardSizePopUpAndFields];
+}
+
+
+-(void)	updateCardSizePopUpAndFields
+{
+	NSSize		cardSize = [mStack cardSize];
+	if( (cardSize.width <= 1 || cardSize.height <= 1) )
+		cardSize = NSMakeSize(512, 342);
+	
+	BOOL		foundSomething = NO;
+	for( int x = 0; x < NUM_POPUP_MENU_SIZES; x++ )
+	{
+		if( sPopUpMenuSizes[x].width == cardSize.width
+			|| sPopUpMenuSizes[x].height == cardSize.height )
+		{
+			[mSizePopUpButton selectItemAtIndex: x];
+			foundSomething = YES;
+			break;
+		}
+	}
+	
+	if( !foundSomething )
+		[mSizePopUpButton selectItemAtIndex: [mSizePopUpButton numberOfItems] -1];
+	else
+	{
+		[mWidthField setEnabled: NO];
+		[mHeightField setEnabled: NO];
+	}
+	
+	[mWidthField setIntValue: cardSize.width];
+	[mHeightField setIntValue: cardSize.height];
 }
 
 
@@ -90,7 +138,7 @@
 	NSSize	newSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
 	[mStack setCardSize: newSize];
 	
-	[self updateChangeCount: NSChangeDone];
+	[mStack updateChangeCount: NSChangeDone];
 
 	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mStack] frameInScreenCoordinates];
 	[[self window] orderOutWithZoomEffectToRect: destRect];
@@ -115,6 +163,40 @@
 	[se setGlobalStartRect: box];
 	[[[[self window] windowController] document] addWindowController: se];
 	[se showWindow: self];
+}
+
+
+-(IBAction)	sizePopUpSelectionChanged: (id)sender
+{
+	NSUInteger	selectedItem = [mSizePopUpButton indexOfSelectedItem];
+	BOOL		shouldEnableFields = (selectedItem == ([mSizePopUpButton numberOfItems] -1));
+	
+	[mWidthField setEnabled: shouldEnableFields];
+	[mHeightField setEnabled: shouldEnableFields];
+	
+	NSSize		currentSize = sPopUpMenuSizes[selectedItem];
+	
+	if( currentSize.width == -1 )
+	{
+		currentSize = [[mCardView window] contentRectForFrameRect: [[mCardView window] frame]].size;
+		[mWidthField setIntValue: currentSize.width];
+		[mHeightField setIntValue: currentSize.height];
+	}
+	else if( currentSize.width == -2 )
+	{
+		currentSize = [[[mCardView window] screen] frame].size;
+		[mWidthField setIntValue: currentSize.width];
+		[mHeightField setIntValue: currentSize.height];
+	}
+	else if( currentSize.width == 0 )
+	{
+		currentSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
+	}
+	else
+	{
+		[mWidthField setIntValue: currentSize.width];
+		[mHeightField setIntValue: currentSize.height];
+	}
 }
 
 

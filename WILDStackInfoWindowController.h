@@ -25,6 +25,8 @@
 	NSButton		*	mEditScriptButton;
 	NSTextField		*	mWidthField;
 	NSTextField		*	mHeightField;
+	
+	NSPopUpButton	*	mSizePopUpButton;
 }
 
 @property (retain) WILDCardView				*	cardView;
@@ -38,10 +40,14 @@
 @property (retain) IBOutlet	NSTextField		*	widthField;
 @property (retain) IBOutlet	NSTextField		*	heightField;
 
+@property (retain) IBOutlet	NSPopUpButton	*	sizePopUpButton;
+
 -(id)		initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView;
 
 -(IBAction)	doOKButton: (id)sender;
 -(IBAction)	doCancelButton: (id)sender;
 -(IBAction)	doEditScriptButton: (id)sender;
+
+-(IBAction)	sizePopUpSelectionChanged: (id)sender;
 
 @end
