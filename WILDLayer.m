@@ -302,6 +302,17 @@
 }
 
 
+-(void)	deletePart: (WILDPart*)inPart
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillRemovePartNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: inPart, WILDAffectedPartKey, nil]];
+	
+	[mParts removeObject: inPart];
+	[mAddColorParts removeObject: inPart];
+	
+	[self updateChangeCount: NSChangeDone];
+}
+
+
 -(WILDObjectID)	uniqueIDForPart
 {
 	BOOL				notUnique = YES;

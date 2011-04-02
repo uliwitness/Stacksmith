@@ -28,6 +28,7 @@
 #import "WILDBackgroundInfoWindowController.h"
 #import "WILDRecentCardsList.h"
 #import "WILDRecentCardPickerWindowController.h"
+#import "WILDStackInfoWindowController.h"
 
 
 @implementation WILDCardViewController
@@ -238,7 +239,10 @@
 			&& [[WILDTools sharedTools] currentTool] == WILDFieldTool );
 	}
 	else if( [menuItem action] == @selector(bringObjectCloser:)
-				|| [menuItem action] == @selector(sendObjectFarther:) )
+				|| [menuItem action] == @selector(sendObjectFarther:)
+				|| [menuItem action] == @selector(delete:)
+				|| [menuItem action] == @selector(copy:)
+				|| [menuItem action] == @selector(cut:) )
 	{
 		return( [[WILDTools sharedTools] numberOfSelectedClients] > 0
 			&& ([[WILDTools sharedTools] currentTool] == WILDButtonTool
@@ -258,7 +262,8 @@
 			NSArray	*	views = [[self view] subviews];
 			for( WILDPartView	*	currPartView in views )
 			{
-				if( [currPartView myToolIsCurrent] )
+				if( [currPartView respondsToSelector: @selector(myToolIsCurrent)]
+					&& [currPartView myToolIsCurrent] )
 					numSelectableParts += 1;
 			}
 			
@@ -392,6 +397,7 @@
 			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: prevCard];
 			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: [prevCard owningBackground]];
 			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: [prevCard owningBackground]];
+			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDStackDidChangeNotification object: [prevCard stack]];
 		}
 	}
 	
@@ -504,6 +510,7 @@
 			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerWillRemovePart:) name: WILDLayerWillRemovePartNotification object: theCard];
 			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerDidAddPart:) name: WILDLayerDidAddPartNotification object: [theCard owningBackground]];
 			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerWillRemovePart:) name: WILDLayerWillRemovePartNotification object: [theCard owningBackground]];
+			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(stackDidChange:) name: WILDStackDidChangeNotification object: [theCard stack]];
 		}
 	}
 	if( uiDict )
@@ -797,6 +804,23 @@
 	[[WILDTools sharedTools] setCurrentTool: [sender tag]];
 }
 
+
+-(void)	keyDown: (NSEvent *)event
+{
+	if( [[event characters] length] == 0 )
+		return;
+	unichar		firstChar = [[event characters] characterAtIndex: 0];
+	
+	// if the user pressed delete and the delegate supports deleteKeyPressed
+	if( firstChar == NSDeleteFunctionKey
+		|| firstChar == NSDeleteCharFunctionKey
+		|| firstChar == NSDeleteCharacter )
+	{
+		[self delete: self];
+	}
+}
+
+
 -(IBAction)	paste: (id)sender
 {
 	NSPasteboard*	pb = [NSPasteboard generalPasteboard];
@@ -805,6 +829,18 @@
 	{
 		NSImage*		anImg = [imgs objectAtIndex: 0];
 		
+	}
+}
+
+
+-(IBAction)	delete: (id)sender
+{
+	NSSet	*	theSet = [[WILDTools sharedTools] clients];
+	
+	for( WILDPartView	*	currPartView in theSet )
+	{
+		WILDPart	*	thePart = [currPartView part];
+		[[thePart partOwner] deletePart: thePart];
 	}
 }
 
