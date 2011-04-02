@@ -282,7 +282,10 @@
 
 -(NSString*)	displayName
 {
-	return [NSString stringWithFormat: @"Stack “%@”", [[[mDocument fileURL] lastPathComponent] stringByDeletingPathExtension]];
+	NSString	*	stackName = [[[mDocument fileURL] lastPathComponent] stringByDeletingPathExtension];
+	if( !stackName )
+		stackName = @"Untitled";
+	return [NSString stringWithFormat: @"Stack “%@”", stackName];
 }
 
 
