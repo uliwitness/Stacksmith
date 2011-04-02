@@ -672,6 +672,7 @@
 	}
 }
 
+
 -(IBAction)	showFieldInfoPanel: (id)sender
 {
 	NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
