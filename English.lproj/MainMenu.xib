@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1294</string>
+		<string key="IBDocument.SystemVersion">10J567</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1294</string>
+			<string key="NS.object.0">1305</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -818,9 +818,26 @@
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSMenuItem" id="194304608">
 									<reference key="NSMenu" ref="128094225"/>
+									<string key="NSTitle">Back</string>
+									<string key="NSKeyEquiv">`</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="771830873">
+									<reference key="NSMenu" ref="128094225"/>
 									<string key="NSTitle">Home</string>
 									<string key="NSKeyEquiv">H</string>
 									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="636795243">
+									<reference key="NSMenu" ref="128094225"/>
+									<string key="NSTitle">Help</string>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
@@ -1734,7 +1751,7 @@
 					</object>
 					<string key="NSFrameSize">{381, 98}</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1366, 746}}</string>
 				<string key="NSMaxSize">{1e+13, 1e+13}</string>
 				<string key="NSFrameAutosaveName">UKPropagandaProgressSheetPosition</string>
 			</object>
@@ -2267,14 +2284,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showHelp:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="253952766"/>
-					</object>
-					<int key="connectionID">494</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">alignCenter:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="184724819"/>
@@ -2546,14 +2555,6 @@
 					<int key="connectionID">673</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">goHome:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="194304608"/>
-					</object>
-					<int key="connectionID">675</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">mToolsMenu</string>
 						<reference key="source" ref="493422503"/>
@@ -2664,6 +2665,38 @@
 						<reference key="destination" ref="236896286"/>
 					</object>
 					<int key="connectionID">709</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">goHome:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="771830873"/>
+					</object>
+					<int key="connectionID">711</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">goHelp:</string>
+						<reference key="source" ref="493422503"/>
+						<reference key="destination" ref="636795243"/>
+					</object>
+					<int key="connectionID">714</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">goHelp:</string>
+						<reference key="source" ref="493422503"/>
+						<reference key="destination" ref="253952766"/>
+					</object>
+					<int key="connectionID">715</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">goBack:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="194304608"/>
+					</object>
+					<int key="connectionID">716</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3720,6 +3753,8 @@
 							<reference ref="517832653"/>
 							<reference ref="122654133"/>
 							<reference ref="236896286"/>
+							<reference ref="771830873"/>
+							<reference ref="636795243"/>
 						</object>
 						<reference key="parent" ref="183012325"/>
 					</object>
@@ -3992,6 +4027,16 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">707</int>
 						<reference key="object" ref="236896286"/>
+						<reference key="parent" ref="128094225"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">710</int>
+						<reference key="object" ref="771830873"/>
+						<reference key="parent" ref="128094225"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">712</int>
+						<reference key="object" ref="636795243"/>
 						<reference key="parent" ref="128094225"/>
 					</object>
 				</object>
@@ -4287,6 +4332,8 @@
 					<string>701.IBPluginDependency</string>
 					<string>701.ImportedFromIB2</string>
 					<string>707.IBPluginDependency</string>
+					<string>710.IBPluginDependency</string>
+					<string>712.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>72.ImportedFromIB2</string>
 					<string>73.IBPluginDependency</string>
@@ -4604,6 +4651,8 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -4643,7 +4692,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">709</int>
+			<int key="maxID">716</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4762,12 +4811,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>goHelp:</string>
 							<string>orderFrontStandardAboutPanel:</string>
 							<string>toggleBackgroundEditMode:</string>
 							<string>toolsMenuRowDummyAction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4777,12 +4828,17 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>goHelp:</string>
 							<string>orderFrontStandardAboutPanel:</string>
 							<string>toggleBackgroundEditMode:</string>
 							<string>toolsMenuRowDummyAction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">goHelp:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">orderFrontStandardAboutPanel:</string>
 								<string key="candidateClassName">id</string>
@@ -4832,6 +4888,7 @@
 							<string>findNext:</string>
 							<string>findPrevious:</string>
 							<string>findStringOfObject:</string>
+							<string>goBack:</string>
 							<string>goFirstCard:</string>
 							<string>goHome:</string>
 							<string>goLastCard:</string>
@@ -4877,6 +4934,7 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
@@ -4895,6 +4953,7 @@
 							<string>findNext:</string>
 							<string>findPrevious:</string>
 							<string>findStringOfObject:</string>
+							<string>goBack:</string>
 							<string>goFirstCard:</string>
 							<string>goHome:</string>
 							<string>goLastCard:</string>
@@ -4959,6 +5018,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">findStringOfObject:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">goBack:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

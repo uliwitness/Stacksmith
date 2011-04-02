@@ -522,6 +522,13 @@
 }
 
 
+-(IBAction)	goBack: (id)sender
+{
+	WILDCard	*	theCard = [[WILDRecentCardsList sharedRecentCardsList] cardAtIndex: [[WILDRecentCardsList sharedRecentCardsList] count] -1];
+	[self loadCard: theCard];
+}
+
+
 -(IBAction)	goFirstCard: (id)sender
 {
 	WILDStack*	theStack = [mCurrentCard stack];

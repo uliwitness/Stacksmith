@@ -33,6 +33,7 @@
 
 -(IBAction)	goHome: (id)sender;
 -(IBAction)	goRecentCard: (id)sender;
+-(IBAction)	goBack: (id)sender;
 -(IBAction)	goFirstCard: (id)sender;
 -(IBAction)	goPrevCard: (id)sender;
 -(IBAction)	goNextCard: (id)sender;

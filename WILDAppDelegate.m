@@ -267,20 +267,26 @@
 }
 
 
--(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
+-(BOOL)	openStandardStackNamed: (NSString*)inStackName
 {
 	NSString	*	homeStackPath = nil;
-	NSString	*	standaloneStackPath = [[NSBundle mainBundle] pathForResource: @"Home" ofType: @"xstk"];
+	NSString	*	standaloneStackPath = [[NSBundle mainBundle] pathForResource: inStackName ofType: @"xstk"];
 	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
 		homeStackPath = standaloneStackPath;
 	else
-        homeStackPath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"Home.xstk"];
+        homeStackPath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: [inStackName stringByAppendingString: @".xstk"]];
 	NSError		*	theError = nil;
 	NSDocument	*	theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: homeStackPath]
                                                                                                  display: YES error: &theError];
 	[theDoc showWindows];
 	
 	return theDoc != nil;
+}
+
+
+-(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
+{
+	return [self openStandardStackNamed: @"Home"];
 }
 
 
@@ -349,6 +355,16 @@
 -(IBAction)	orderFrontStandardAboutPanel: (id)sender
 {
 	[WILDAboutPanelController showAboutPanel];
+}
+
+
+-(IBAction)	goHelp: (id)sender;
+{
+	if( ![self openStandardStackNamed: @"Help"] )
+	{
+		if( ![self openStandardStackNamed: @"HyperCard Help"] )
+			[self openStandardStackNamed: @"HyperCard Help/HyperCard Help"];
+	}
 }
 
 
