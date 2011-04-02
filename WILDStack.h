@@ -55,10 +55,11 @@
 -(NSArray*)			cards;
 -(WILDCard*)		cardWithID: (WILDObjectID)theID;
 
--(void)				setBackgrounds: (NSArray*)theBkgds;
+-(NSArray*)			backgrounds;
 -(WILDBackground*)	backgroundWithID: (WILDObjectID)theID;
 
 -(NSSize)			cardSize;
+-(void)				setCardSize: (NSSize)inSize;
 
 +(NSColor*)			peekOutlineColor;
 
@@ -66,5 +67,8 @@
 -(void)				updateChangeCount: (NSDocumentChangeType)inChange;
 
 -(NSString*)		xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError;
+
+-(NSString*)		name;
+-(void)				setName: (NSString*)inName;
 
 @end

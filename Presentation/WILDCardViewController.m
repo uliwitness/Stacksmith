@@ -675,11 +675,13 @@
 	[backgroundInfo showWindow: self];
 }
 
-//-(IBAction)	showStackInfoPanel: (id)sender
-//{
-//	
-//}
-//
+-(IBAction)	showStackInfoPanel: (id)sender
+{
+	WILDStackInfoWindowController*	stackInfo = [[[WILDStackInfoWindowController alloc] initWithStack: [mCurrentCard stack] ofCardView: (WILDCardView*) [self view]] autorelease];
+	[[[[[self view] window] windowController] document] addWindowController: stackInfo];
+	[stackInfo showWindow: self];
+}
+
 //-(IBAction)	bringObjectCloser: (id)sender
 //{
 //	

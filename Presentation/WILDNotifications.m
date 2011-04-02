@@ -41,6 +41,13 @@ NSString*	WILDPartDidChangeNotification = @"WILDPartDidChange";
 NSString*	WILDAffectedPropertyKey = @"WILDAffectedProperty";
 
 
+// Properties of stack change:
+NSString*	WILDStackWillChangeNotification = @"WILDStackWillChange";
+NSString*	WILDStackDidChangeNotification = @"WILDStackDidChange";
+
+//WILDAffectedPropertyKey
+
+
 // Notifications when the user changes the tool:
 NSString*	WILDCurrentToolWillChangeNotification = @"WILDCurrentToolWillChange";
 NSString*	WILDCurrentToolDidChangeNotification = @"WILDCurrentToolDidChange";

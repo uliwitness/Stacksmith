@@ -315,6 +315,8 @@
 		558DCDAB11557E28002C9195 /* WILDApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCDAA11557E28002C9195 /* WILDApplication.m */; };
 		558DCFBF1155B9B1002C9195 /* WILDPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFBE1155B9B1002C9195 /* WILDPictureView.m */; };
 		558DCFE51156209A002C9195 /* WILDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFE41156209A002C9195 /* WILDCardView.m */; };
+		55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */; };
+		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
 		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
@@ -763,6 +765,9 @@
 		558DCFBE1155B9B1002C9195 /* WILDPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPictureView.m; sourceTree = "<group>"; };
 		558DCFE31156209A002C9195 /* WILDCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardView.h; sourceTree = "<group>"; };
 		558DCFE41156209A002C9195 /* WILDCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardView.m; sourceTree = "<group>"; };
+		55993B6713476DE3001624A2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDStackInfoWindowController.xib; sourceTree = "<group>"; };
+		55993B6913476E1D001624A2 /* WILDStackInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStackInfoWindowController.h; sourceTree = "<group>"; };
+		55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoWindowController.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
@@ -948,6 +953,7 @@
 				55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */,
 				55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */,
 				55EA6384134758B40039FE0D /* WILDBackgroundInfoWindowController.xib */,
+				55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */,
 				5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */,
 				551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
@@ -1017,6 +1023,8 @@
 				55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */,
 				55EA6381134756C20039FE0D /* WILDBackgroundInfoWindowController.h */,
 				55EA6382134756CF0039FE0D /* WILDBackgroundInfoWindowController.m */,
+				55993B6913476E1D001624A2 /* WILDStackInfoWindowController.h */,
+				55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */,
 				5523653C1344C9ED000145A0 /* WILDRecentCardPickerWindowController.h */,
 				5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */,
 			);
@@ -1774,6 +1782,7 @@
 				55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */,
 				552365401344CA1D000145A0 /* WILDRecentCardPickerWindowController.xib in Resources */,
 				55EA6386134758B40039FE0D /* WILDBackgroundInfoWindowController.xib in Resources */,
+				55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1862,6 +1871,7 @@
 				5523653E1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m in Sources */,
 				55EA63801347532C0039FE0D /* WILDLayerInfoWindowController.m in Sources */,
 				55EA6383134756D00039FE0D /* WILDBackgroundInfoWindowController.m in Sources */,
+				55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1935,6 +1945,14 @@
 				55382F6A117238350006B381 /* English */,
 			);
 			name = WILDFieldInfoWindowController.xib;
+			sourceTree = "<group>";
+		};
+		55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55993B6713476DE3001624A2 /* English */,
+			);
+			name = WILDStackInfoWindowController.xib;
 			sourceTree = "<group>";
 		};
 		55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */ = {

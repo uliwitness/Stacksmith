@@ -12,53 +12,63 @@
 // -----------------------------------------------------------------------------
 // Notification sent when user holds down or releases the Cmd-Option key
 //	combination:
-NSString*	WILDPeekingStateChangedNotification;
+extern NSString*	WILDPeekingStateChangedNotification;
 
 // Info dictionary keys:
-NSString*	WILDPeekingStateKey;
+extern NSString*	WILDPeekingStateKey;
 
 
 // -----------------------------------------------------------------------------
 // Notification sent when user chooses the "Background" menu item to edit the
 //	background alone:
-NSString*	WILDBackgroundEditModeChangedNotification;
+extern NSString*	WILDBackgroundEditModeChangedNotification;
 
 // Info dictionary keys:
-NSString*	WILDBackgroundEditModeKey;
+extern NSString*	WILDBackgroundEditModeKey;
 
 
 // -----------------------------------------------------------------------------
 // Notifications when we change between cards:
-NSString*	WILDCurrentCardWillChangeNotification;	// We're on the source card.
-NSString*	WILDCurrentCardDidChangeNotification;	// We're on the destination card.
+extern NSString*	WILDCurrentCardWillChangeNotification;	// We're on the source card.
+extern NSString*	WILDCurrentCardDidChangeNotification;	// We're on the destination card.
 
 // Info dictionary keys:
-NSString*	WILDSourceCardKey;		// May be missing (e.g. when loading the first card after opening a stack window).
-NSString*	WILDDestinationCardKey;	// May be missing (e.g. when closing a stack).
+extern NSString*	WILDSourceCardKey;		// May be missing (e.g. when loading the first card after opening a stack window).
+extern NSString*	WILDDestinationCardKey;	// May be missing (e.g. when closing a stack).
 
 
 // -----------------------------------------------------------------------------
 // Notifications when parts are created/destroyed (by the user, not just due to
 //	the document being closed or the app being quit):
 // Objects get created/destroyed:
-NSString*	WILDLayerDidAddPartNotification;
-NSString*	WILDLayerWillRemovePartNotification;
+extern NSString*	WILDLayerDidAddPartNotification;
+extern NSString*	WILDLayerWillRemovePartNotification;
 
 // Info dictionary key:
-NSString*	WILDAffectedPartKey;	// The part that was added to the layer that is our sender.
+extern NSString*	WILDAffectedPartKey;	// The part that was added to the layer that is our sender.
 
 
 // -----------------------------------------------------------------------------
 // Notifications when we change properties of parts:
-NSString*	WILDPartWillChangeNotification;	// Part has old state.
-NSString*	WILDPartDidChangeNotification;	// Part has new state.
+extern NSString*	WILDPartWillChangeNotification;	// Part has old state.
+extern NSString*	WILDPartDidChangeNotification;	// Part has new state.
 
 // Info dictionary keys:
-NSString*	WILDAffectedPropertyKey;	// Property on the WILDPart, not the xTalk property name.
+extern NSString*	WILDAffectedPropertyKey;	// Property on the WILDPart, not the xTalk property name.
+
+
+// -----------------------------------------------------------------------------
+// Notifications when we change properties of stacks:
+
+extern NSString*	WILDStackWillChangeNotification;
+extern NSString*	WILDStackDidChangeNotification;
+
+// Info dictionary keys:
+//					WILDAffectedPropertyKey
 
 
 // -----------------------------------------------------------------------------
 // Notifications when the user changes the tool:
-NSString*	WILDCurrentToolWillChangeNotification;
-NSString*	WILDCurrentToolDidChangeNotification;
+extern NSString*	WILDCurrentToolWillChangeNotification;
+extern NSString*	WILDCurrentToolDidChangeNotification;
 

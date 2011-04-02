@@ -13,6 +13,7 @@
 #import "WILDStack.h"
 #import "UKRandomInteger.h"
 #import "WILDRecentCardsList.h"
+#import "WILDNotifications.h"
 #import <QTKit/QTKit.h>
 
 
@@ -229,9 +230,9 @@
 }
 
 
--(void)	setBackgrounds: (NSArray*)theBkgds
+-(NSArray*)	backgrounds
 {
-	ASSIGNMUTABLECOPY(mBackgrounds,theBkgds);
+	return mBackgrounds;
 }
 
 
@@ -250,6 +251,14 @@
 -(NSSize)	cardSize
 {
 	return mCardSize;
+}
+
+
+-(void)	setCardSize: (NSSize)inSize
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"cardSize", WILDAffectedPropertyKey, nil]];
+	mCardSize = inSize;
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"cardSize", WILDAffectedPropertyKey, nil]];
 }
 
 
@@ -391,6 +400,30 @@
 -(void)	updateChangeCount: (NSDocumentChangeType)inChange
 {
 	[mDocument updateChangeCount: inChange];
+}
+
+
+-(NSString*)	name
+{
+	NSString	*stackName = [[[mDocument fileName] lastPathComponent] stringByDeletingPathExtension];
+	if( stackName == nil )
+		stackName = @"Untitled";
+	return stackName;
+}
+
+
+-(void)		setName: (NSString*)inName
+{
+	if( ![inName hasSuffix: @".xstk"] )	// TODO: Get suffix from Info.plist for standalones.
+		inName = [inName stringByAppendingPathExtension: @"xstk"];
+	if( [mDocument fileName] == nil )
+	{
+		
+	}
+	else
+	{
+		[mDocument setFileName: [[[mDocument fileName] stringByDeletingLastPathComponent] stringByAppendingPathComponent: inName]];
+	}
 }
 
 
