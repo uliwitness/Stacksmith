@@ -16,6 +16,7 @@
 #import "WILDScriptEditorWindowController.h"
 #import "NSWindow+ULIZoomEffect.h"
 #import "WILDVisibleObject.h"
+#import "WILDNotifications.h"
 
 
 static 	NSArray*	sStylesInMenuOrder = nil;
@@ -142,6 +143,8 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction)	doOKButton: (id)sender
 {
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: mPart];
+
 	[mPart setName: [mNameField stringValue]];
 	
 	[mPart setShowName: [mShowNameSwitch state] == NSOnState];
@@ -163,6 +166,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	WILDObjectID	theIconID = [mIconListController selectedIconID];
 	[mPart setIconID: theIconID];
 	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: mPart];
 	[mPart updateChangeCount: NSChangeDone];
 	
 	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mPart] frameInScreenCoordinates];

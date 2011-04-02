@@ -13,6 +13,7 @@
 #import "WILDStack.h"
 #import "WILDCardView.h"
 #import "WILDScriptEditorWindowController.h"
+#import "WILDNotifications.h"
 
 
 static 	NSArray*	sStylesInMenuOrder = nil;
@@ -87,8 +88,11 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 		theContents = [[[mCardView card] owningBackground] contentsForPart: mPart];
 	else
 		theContents = [[mCardView card] contentsForPart: mPart];
-	NSString*					contentsStr = [theContents text];
-	[mContentsTextField setString: contentsStr ? contentsStr : @""];
+	NSAttributedString*			contentsStr = [theContents styledTextForPart: mPart];
+	if( contentsStr )
+		[[mContentsTextField textStorage] setAttributedString: contentsStr];
+	else
+		[mContentsTextField setString: @""];
 }
 
 
@@ -136,6 +140,8 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction)	doOKButton: (id)sender
 {
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: mPart];
+
 	[mPart setName: [mNameField stringValue]];
 	
 	[mPart setLockText: [mLockTextSwitch state] == NSOnState];
@@ -158,7 +164,9 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 		theContents = [[[mCardView card] owningBackground] contentsForPart: mPart];
 	else
 		theContents = [[mCardView card] contentsForPart: mPart];
-	[theContents setText: [mContentsTextField string]];
+	[theContents setStyledText: [mContentsTextField textStorage]];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: mPart];
 	
 	[mPart updateChangeCount: NSChangeDone];
 	
