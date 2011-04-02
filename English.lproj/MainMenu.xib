@@ -682,8 +682,7 @@
 											<object class="NSMenuItem" id="605118523">
 												<reference key="NSMenu" ref="698887838"/>
 												<string key="NSTitle">Smart Copy/Paste</string>
-												<string key="NSKeyEquiv">f</string>
-												<int key="NSKeyEquivModMask">1048576</int>
+												<string key="NSKeyEquiv"/>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<reference key="NSOnImage" ref="1033313550"/>
 												<reference key="NSMixedImage" ref="310636482"/>
@@ -692,8 +691,7 @@
 											<object class="NSMenuItem" id="197661976">
 												<reference key="NSMenu" ref="698887838"/>
 												<string key="NSTitle">Smart Quotes</string>
-												<string key="NSKeyEquiv">g</string>
-												<int key="NSKeyEquivModMask">1048576</int>
+												<string key="NSKeyEquiv"/>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<reference key="NSOnImage" ref="1033313550"/>
 												<reference key="NSMixedImage" ref="310636482"/>
@@ -710,8 +708,7 @@
 											<object class="NSMenuItem" id="708854459">
 												<reference key="NSMenu" ref="698887838"/>
 												<string key="NSTitle">Smart Links</string>
-												<string key="NSKeyEquiv">G</string>
-												<int key="NSKeyEquivModMask">1179648</int>
+												<string key="NSKeyEquiv"/>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<reference key="NSOnImage" ref="1033313550"/>
 												<reference key="NSMixedImage" ref="310636482"/>
