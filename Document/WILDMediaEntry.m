@@ -71,34 +71,34 @@
 }
 
 
--(BOOL)	writeToFolderURLIfNeeded:(NSURL *)absoluteURL withOriginalFolderURL: (NSURL*)absoluteOriginalContentsURL
+-(BOOL)	writeToFolderURLIfNeeded:(NSURL *)absoluteURL withOriginalFolderURL: (NSURL*)absoluteOriginalContentsURL forSaveOperation: (NSSaveOperationType)saveOperation
 {
 	BOOL			success = NO;
-	NSData		*	fileData = [mImage TIFFRepresentation];	// TODO: Handle movies, sounds etc.
 	NSString	*	fileExtension = @"tiff";
 	if( mFilename == nil )	// New, never been saved?
 	{
+		NSData		*	fileData = [mImage TIFFRepresentation];	// TODO: Handle movies, sounds etc.
 		NSString	*	sanitizedName = [[mName stringByReplacingOccurrencesOfString: @"/" withString: @"-"] stringByAppendingPathExtension:fileExtension];
 		NSString	*	filePath = [[absoluteURL path] stringByAppendingPathComponent: sanitizedName];
 		filePath = [[NSFileManager defaultManager] uniqueFileName: filePath];
 		ASSIGN(mFilename, sanitizedName);
 		success = [fileData writeToFile: filePath atomically: YES];
 	}
-	else	// Must be a "save as" ... ?
+	else	// Must be a "save" or "save as" ... ?
 	{
 		NSString	*	fileBaseName = [mFilename lastPathComponent];
 		NSString	*	filePath = [[absoluteURL path] stringByAppendingPathComponent: fileBaseName];
 		NSString	*	originalFilePath = [[absoluteOriginalContentsURL path] stringByAppendingPathComponent: fileBaseName];
 		BOOL			fileAlreadyThere = [[NSFileManager defaultManager] fileExistsAtPath: filePath];
-		if( fileData && !fileAlreadyThere )
-			success = [fileData writeToFile: filePath atomically: YES];
-		else if( !fileAlreadyThere )
+		NSError		*	theError = nil;
+		
+		if( !fileAlreadyThere && (saveOperation == NSSaveOperation|| saveOperation == NSAutosaveOperation) )
 		{
-			NSError		*	theError = nil;
-			if( ![[NSFileManager defaultManager] linkItemAtPath: originalFilePath toPath: filePath error:&theError] )
-			{
-				success = [[NSFileManager defaultManager] copyItemAtPath: originalFilePath toPath: filePath error: &theError];
-			}
+			success = [[NSFileManager defaultManager] linkItemAtPath: originalFilePath toPath: filePath error: &theError];
+		}
+		if( !success && !fileAlreadyThere )
+		{
+			success = [[NSFileManager defaultManager] copyItemAtPath: originalFilePath toPath: filePath error: &theError];
 		}
 	}
 	

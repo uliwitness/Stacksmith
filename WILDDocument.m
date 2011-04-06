@@ -167,7 +167,7 @@
 	{
 		if( ![currMedia isBuiltIn] )
 		{
-			if( ![currMedia writeToFolderURLIfNeeded: absoluteURL withOriginalFolderURL: absoluteOriginalContentsURL] )
+			if( ![currMedia writeToFolderURLIfNeeded: absoluteURL withOriginalFolderURL: absoluteOriginalContentsURL forSaveOperation: saveOperation] )
 				return NO;
 			[tocXmlString appendString: [currMedia xmlString]];
 		}

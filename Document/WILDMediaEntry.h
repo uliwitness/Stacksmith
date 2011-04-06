@@ -40,7 +40,7 @@
 -(id)			imageMovieOrCursor;
 -(void)			setImageMovieOrCursor: (id)theImage;
 
--(void)			writeToFolderURLIfNeeded: (NSURL*)absoluteURL;
+-(BOOL)	writeToFolderURLIfNeeded:(NSURL *)absoluteURL withOriginalFolderURL: (NSURL*)absoluteOriginalContentsURL forSaveOperation: (NSSaveOperationType)saveOperation;
 
 -(NSString*)	xmlString;
 
