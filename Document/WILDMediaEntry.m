@@ -92,7 +92,7 @@
 		BOOL			fileAlreadyThere = [[NSFileManager defaultManager] fileExistsAtPath: filePath];
 		NSError		*	theError = nil;
 		
-		if( !fileAlreadyThere && (saveOperation == NSSaveOperation|| saveOperation == NSAutosaveOperation) )
+		if( !fileAlreadyThere && (saveOperation == NSSaveOperation || saveOperation == NSAutosaveOperation) )
 		{
 			success = [[NSFileManager defaultManager] linkItemAtPath: originalFilePath toPath: filePath error: &theError];
 		}
