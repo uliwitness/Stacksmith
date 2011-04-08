@@ -27,6 +27,8 @@
     self = [super initWithWindowNibName: NSStringFromClass([self class])];
     if( self )
 	{
+		[self setShouldCascadeWindows: NO];
+		
 		mStack = inStack;
     }
     return self;
@@ -49,6 +51,7 @@
 	if( cardSize.width == 0 || cardSize.height == 0 )
 		cardSize = NSMakeSize( 512, 342 );
 	[mView sizeWindowForViewSize: cardSize];
+	[self.window centerHorizontallyAndVertically];
 	
 	[mCardViewController setView: mView];
 	[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];

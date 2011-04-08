@@ -336,6 +336,7 @@
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
+		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
 		55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */; };
 		55E3A69E11503456008411BB /* CURS_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.png */; };
 		55E3A6FB11519B45008411BB /* HCSV.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6F911519B45008411BB /* HCSV.icns */; };
@@ -799,6 +800,8 @@
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D6B257115C16E700D17619 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDTextView.h; sourceTree = "<group>"; };
 		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
+		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
+		55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+centerHorizontallyAndVertically.m"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.m"; sourceTree = "<group>"; };
 		55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BuildVersionHeader; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E397E61322481500C3739D /* WILDObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectID.h; path = Model/WILDObjectID.h; sourceTree = "<group>"; };
 		55E397E71322520700C3739D /* NSFileManager+NameForTempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+NameForTempFile.h"; path = "../UliKit/NSFileManager+NameForTempFile.h"; sourceTree = "<group>"; };
@@ -1128,6 +1131,8 @@
 				55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */,
 				55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */,
 				55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */,
+				55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */,
+				55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1872,6 +1877,7 @@
 				55EA63801347532C0039FE0D /* WILDLayerInfoWindowController.m in Sources */,
 				55EA6383134756D00039FE0D /* WILDBackgroundInfoWindowController.m in Sources */,
 				55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */,
+				55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
