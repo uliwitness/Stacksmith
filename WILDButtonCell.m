@@ -182,4 +182,18 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	return [self state];
 }
 
+
+-(NSUInteger)	hitTestForEvent: (NSEvent *)event inRect: (NSRect)cellFrame ofView: (NSView *)controlView
+{
+	NSUInteger		hitPart = NSCellHitNone;
+	NSPoint			mousePos = [controlView convertPoint: [event locationInWindow] fromView: controlView];
+	
+	if( NSPointInRect( mousePos, cellFrame ) )
+	{
+		hitPart = NSCellHitContentArea | NSCellHitTrackableArea;
+	}
+	
+	return hitPart;
+}
+
 @end

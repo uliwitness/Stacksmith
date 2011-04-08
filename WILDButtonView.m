@@ -28,4 +28,14 @@
 		[super mouseDown: event];
 }
 
+
+-(NSView *)	hitTest: (NSPoint)aPoint
+{
+	NSView	*	theView = [super hitTest: aPoint];
+	if( !theView && [self mouse: aPoint inRect: [self bounds]] )
+		return self;
+	else
+		return theView;
+}
+
 @end
