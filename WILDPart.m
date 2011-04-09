@@ -653,7 +653,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		
 		LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
 		
-		paramFormats = [[parts objectAtIndex: 1] componentsSeparatedByString: @","];
+		NSArray	*	paramFormats = [[parts objectAtIndex: 1] componentsSeparatedByString: @","];
 		for( NSString* currPart in paramFormats )
 		{
 			currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
@@ -668,7 +668,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		}
 		
 		// Send message:
-		LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( group, [msg UTF8String] );
+		LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [[mStack document] contextGroup], [msg UTF8String] );
 		LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( [self scriptObject], handlerID );
 		if( !theHandler )
 			return NULL;	// TODO: Forward message to mLayer.
