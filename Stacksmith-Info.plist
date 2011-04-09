@@ -69,14 +69,20 @@
 	<string>1.0a1</string>
 	<key>CFBundleSignature</key>
 	<string>WILD</string>
+	<key>CFBundleURLTypes</key>
+	<array/>
 	<key>CFBundleVersion</key>
 	<string>SVN_VERSION_NUM</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.education</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>WILDApplication</string>
+	<key>NSServices</key>
+	<array/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -88,13 +94,11 @@
 			<key>UTTypeDescription</key>
 			<string>HyperCard Stack</string>
 			<key>UTTypeIconFile</key>
-			<string>MikeYencoHyperCardStack</string>
+			<string>OldStack</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.apple.hypercard.stack</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>.apple.ostype</key>
-				<string>STAK</string>
 				<key>public.filename-extension</key>
 				<string>stak</string>
 			</dict>
@@ -107,7 +111,7 @@
 			<key>UTTypeDescription</key>
 			<string>Propaganda Stack</string>
 			<key>UTTypeIconFile</key>
-			<string>MikeYencoHyperCardStack</string>
+			<string>OldStack</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.thevoidsoftware.stacksmith.stack</string>
 			<key>UTTypeTagSpecification</key>
@@ -117,5 +121,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array/>
 </dict>
 </plist>
