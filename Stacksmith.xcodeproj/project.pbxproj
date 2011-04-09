@@ -301,11 +301,13 @@
 		5542CD7D113ABB8B00555C64 /* WILDPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CD7C113ABB8B00555C64 /* WILDPart.m */; };
 		5542CE48113AE27500555C64 /* WILDPartContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CE47113AE27500555C64 /* WILDPartContents.m */; };
 		5542CFAB113B033800555C64 /* UKMenuBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* UKMenuBarOverlay.m */; };
+		554CBC301350D05B003692E7 /* ForgeFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554CBC2F1350D05B003692E7 /* ForgeFramework.framework */; };
+		554CBC581350D1E5003692E7 /* ForgeFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554CBC2F1350D05B003692E7 /* ForgeFramework.framework */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
-		55818A78133199AC00480D30 /* Home.xstk in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
+		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		55818A8F1332108300480D30 /* WILDBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 55818A8E1332108100480D30 /* WILDBackground.m */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		558DC883115507EA002C9195 /* WILDCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DC882115507EA002C9195 /* WILDCardViewController.m */; };
@@ -319,11 +321,9 @@
 		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
-		55A869021350A7700036AA4B /* ForgeFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55A869011350A7700036AA4B /* ForgeFramework.framework */; };
-		55A869041350A7860036AA4B /* ForgeFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A869031350A7860036AA4B /* ForgeFramework.framework */; };
 		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
 		55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */; };
-		55AE22E31346C9D9000B5BBE /* Help.xstk in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55AE22E11346C99E000B5BBE /* Help.xstk */; };
+		55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55AE22E11346C99E000B5BBE /* Help.xstk */; };
 		55B9220A11674E880073EC6C /* WILDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9220911674E880073EC6C /* WILDTools.m */; };
 		55B9223D1167532A0073EC6C /* WILDButtonInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B9223C1167532A0073EC6C /* WILDButtonInfoWindowController.xib */; };
 		55B9224311675A260073EC6C /* WILDButtonInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9224211675A260073EC6C /* WILDButtonInfoWindowController.m */; };
@@ -416,25 +416,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		55818A761331999000480D30 /* CopyFiles */ = {
+		55818A761331999000480D30 /* Copy Included Stacks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				55818A78133199AC00480D30 /* Home.xstk in CopyFiles */,
-				55AE22E31346C9D9000B5BBE /* Help.xstk in CopyFiles */,
+				55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */,
+				55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */,
 			);
+			name = "Copy Included Stacks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		55A869001350A7600036AA4B /* CopyFiles */ = {
+		55A869001350A7600036AA4B /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				55A869021350A7700036AA4B /* ForgeFramework.framework in CopyFiles */,
+				554CBC301350D05B003692E7 /* ForgeFramework.framework in Copy Frameworks */,
 			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -774,6 +776,7 @@
 		5542CE47113AE27500555C64 /* WILDPartContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPartContents.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* UKMenuBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMenuBarOverlay.h; sourceTree = "<group>"; };
 		5542CFAA113B033800555C64 /* UKMenuBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMenuBarOverlay.m; sourceTree = "<group>"; };
+		554CBC2F1350D05B003692E7 /* ForgeFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ForgeFramework.framework; path = ../Forge/ForgeFramework/build/Debug/ForgeFramework.framework; sourceTree = SOURCE_ROOT; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
 		555E5764115BFC5700AAF9CA /* NSFileHandle+UKReadLinewise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileHandle+UKReadLinewise.h"; path = "../UliKit/NSFileHandle+UKReadLinewise.h"; sourceTree = SOURCE_ROOT; };
 		555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileHandle+UKReadLinewise.m"; path = "../UliKit/NSFileHandle+UKReadLinewise.m"; sourceTree = SOURCE_ROOT; };
@@ -805,8 +808,6 @@
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ForgeFramework.xcodeproj; path = ../Forge/ForgeFramework/ForgeFramework.xcodeproj; sourceTree = "<group>"; };
-		55A869011350A7700036AA4B /* ForgeFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ForgeFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		55A869031350A7860036AA4B /* ForgeFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForgeFramework.framework; path = "../../../Library/Developer/Xcode/DerivedData/Stacksmith-emyjogwslpipgvdhomcpqygxdhfh/Build/Products/Debug/ForgeFramework.framework"; sourceTree = "<group>"; };
 		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
@@ -890,7 +891,7 @@
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
 				553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */,
-				55A869041350A7860036AA4B /* ForgeFramework.framework in Frameworks */,
+				554CBC581350D1E5003692E7 /* ForgeFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,7 +907,7 @@
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
 				553EB403131C83C6008BFBCE /* libcrypto.dylib */,
-				55A869031350A7860036AA4B /* ForgeFramework.framework */,
+				554CBC2F1350D05B003692E7 /* ForgeFramework.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -933,7 +934,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* Propaganda */ = {
 			isa = PBXGroup;
 			children = (
-				55A869011350A7700036AA4B /* ForgeFramework.framework */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
@@ -1487,8 +1487,8 @@
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
-				55818A761331999000480D30 /* CopyFiles */,
-				55A869001350A7600036AA4B /* CopyFiles */,
+				55818A761331999000480D30 /* Copy Included Stacks */,
+				55A869001350A7600036AA4B /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2117,6 +2117,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Stacksmith-emyjogwslpipgvdhomcpqygxdhfh/Build/Products/Debug\"",
+					"\"$(SRCROOT)/../Forge/ForgeFramework/build/Debug\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2167,6 +2168,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Stacksmith-emyjogwslpipgvdhomcpqygxdhfh/Build/Products/Debug\"",
+					"\"$(SRCROOT)/../Forge/ForgeFramework/build/Debug\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

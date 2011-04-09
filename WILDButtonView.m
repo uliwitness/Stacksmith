@@ -34,6 +34,9 @@
 	
 	if( autoHighlight && isInside )
 		[[self cell] setHighlighted: YES];
+	
+	[[pv part] resultFromSendingMessageWithFormat: @"mouseDown"];
+	
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	
 	while( keepLooping )
@@ -52,11 +55,12 @@
 				case NSLeftMouseDragged:
 				case NSRightMouseDragged:
 				case NSOtherMouseDragged:
+					[[pv part] resultFromSendingMessageWithFormat: @"mouseStillDown"];
 					newIsInside = [[self cell] hitTestForEvent: evt inRect: [self bounds] ofView: self] != NSCellHitNone;
 					if( isInside != newIsInside )
 					{
 						isInside = newIsInside;
-						
+
 						if( autoHighlight )
 							[[self cell] setHighlighted: isInside];
 					}
@@ -72,20 +76,13 @@
 	{
 		if( autoHighlight )
 			[[self cell] setHighlighted: NO];
+		[[pv part] resultFromSendingMessageWithFormat: @"mouseUp"];
 		[[self target] performSelector: [self action]];
 	}
+	else
+		[[pv part] resultFromSendingMessageWithFormat: @"mouseRelease"];
 	
 	[pool release];
 }
-
-
-//-(NSView *)	hitTest: (NSPoint)aPoint
-//{
-//	NSView	*	theView = [super hitTest: aPoint];
-//	if( !theView && [self mouse: aPoint inRect: [self bounds]] )
-//		return self;
-//	else
-//		return theView;
-//}
 
 @end

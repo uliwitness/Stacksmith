@@ -134,6 +134,7 @@
 	mPeeking = [[[notification userInfo] objectForKey: WILDPeekingStateKey] boolValue];
 }
 
+
 -(void)	backgroundEditModeChanged: (NSNotification*)notification
 {
 	mBackgroundEditMode = [[[notification userInfo] objectForKey: WILDBackgroundEditModeKey] boolValue];
