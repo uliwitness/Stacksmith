@@ -36,6 +36,7 @@
 	WILDObjectID			mID;				// Unique ID number of this stack in the document.
 	
 	WILDObjectID			mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
+	struct LEOScript*		mScriptObject;		// Compiled script, lazily created/recreated on changes.
 }
 
 -(id)				initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;

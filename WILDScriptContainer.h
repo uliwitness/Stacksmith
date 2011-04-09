@@ -9,13 +9,19 @@
 #import <Cocoa/Cocoa.h>
 
 
+struct LEOScript;
+
+
 @protocol WILDScriptContainer
 
--(NSString*)	script;								// Script to be used by script editors etc.
--(void)			setScript: (NSString*)inScript;		// How script editors etc. provide changed scripts.
+@required
+-(NSString*)			script;								// Script to be used by script editors etc.
+-(void)					setScript: (NSString*)inScript;		// How script editors etc. provide changed scripts.
 
--(NSString*)	displayName;	// Name of this item to display in window titles etc.
--(NSImage*)		displayIcon;	// Small icon to display for this item in popups etc.
+-(NSString*)			displayName;	// Name of this item to display in window titles etc.
+-(NSImage*)				displayIcon;	// Small icon to display for this item in popups etc.
+
+-(struct LEOScript*)	scriptObject;
 
 @end
 

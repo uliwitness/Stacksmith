@@ -24,6 +24,7 @@
 	WILDObjectID				mID;				// Unique ID number of this background/card.
 	NSString*					mName;				// Name of this background/card.
 	NSString*					mScript;			// Script text.
+	struct LEOScript*			mScriptObject;		// Compiled script.
 	BOOL						mShowPict;			// Should we draw mPicture or not?
 	BOOL						mDontSearch;		// Do not include this card in searches.
 	BOOL						mCantDelete;		// Prevent scripts from deleting this card?
@@ -31,10 +32,11 @@
 	NSMutableArray*				mParts;				// Array of parts on this card.
 	NSMutableArray*				mAddColorParts;		// Array of parts for which we have AddColor color information. May contain parts that are already in mParts.
 	NSMutableDictionary*		mContents;			// Dictionary of part ID -> contents mappings
-	ULIMultiMap*					mButtonFamilies;	// Family ID as key, and arrays of button parts belonging to these families.
+	ULIMultiMap*				mButtonFamilies;	// Family ID as key, and arrays of button parts belonging to these families.
 	WILDStack*					mStack;
 	
 	WILDObjectID				mPartIDSeed;
+	
 }
 
 @property (copy) NSString*	name;

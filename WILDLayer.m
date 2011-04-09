@@ -14,6 +14,7 @@
 #import "WILDStack.h"
 #import "WILDNotifications.h"
 #import "UKRandomInteger.h"
+#import <ForgeFramework/ForgeFramework.h>
 
 
 @implementation WILDLayer
@@ -113,6 +114,12 @@
 	DESTROY_DEALLOC(mPicture);
 	DESTROY_DEALLOC(mParts);
 	DESTROY_DEALLOC(mAddColorParts);
+	
+	if( mScriptObject )
+	{
+		LEOScriptRelease( mScriptObject );
+		mScriptObject = NULL;
+	}
 	
 	mStack = UKInvalidPointer;
 	
@@ -459,6 +466,35 @@
 -(void)	setScript: (NSString*)theScript
 {
 	ASSIGN(mScript,theScript);
+	if( mScriptObject )
+	{
+		LEOScriptRelease( mScriptObject );
+		mScriptObject = NULL;
+	}
+}
+
+
+-(struct LEOScript*)	scriptObject
+{
+	if( !mScriptObject )
+	{
+		const char*		scriptStr = [mScript UTF8String];
+		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), [[self displayName] UTF8String] );
+		if( LEOParserGetLastErrorMessage() == NULL )
+		{
+			mScriptObject = LEOScriptCreateForOwner( 0, 0 );	// TODO: Store owner reference and use here!
+			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
+		}
+		if( LEOParserGetLastErrorMessage() )
+			NSLog( @"Script Error: %@", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
+		else
+		{
+			LEOScriptRelease( mScriptObject );
+			mScriptObject = NULL;
+		}
+	}
+	
+	return mScriptObject;
 }
 
 

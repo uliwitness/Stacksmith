@@ -12,6 +12,7 @@
 #import "WILDStack.h"
 #import "WILDPartContents.h"
 #import "WILDNotifications.h"
+#import <ForgeFramework/ForgeFramework.h>
 
 
 static NSInteger UKMinimum( NSInteger a, NSInteger b )
@@ -110,7 +111,13 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[mFillColor release];
 	mFillColor = nil;
 	
-	mStack = nil;
+	mStack = UKInvalidPointer;
+	
+	if( mScriptObject )
+	{
+		LEOScriptRelease( mScriptObject );
+		mScriptObject = NULL;
+	}
 	
 	[super dealloc];
 }
@@ -602,11 +609,72 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(void)	setScript: (NSString*)theScript
 {
-	if( mScript != theScript )
+	ASSIGN(mScript,theScript);
+	if( mScriptObject )
 	{
-		[mScript release];
-		mScript = [theScript retain];
-		[self updateChangeCount: NSChangeDone];
+		LEOScriptRelease( mScriptObject );
+		mScriptObject = NULL;
+	}
+}
+
+
+-(struct LEOScript*)	scriptObject
+{
+	if( !mScriptObject )
+	{
+		const char*		scriptStr = [mScript UTF8String];
+		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), [[self displayName] UTF8String] );
+		if( LEOParserGetLastErrorMessage() == NULL )
+		{
+			mScriptObject = LEOScriptCreateForOwner( 0, 0 );	// TODO: Store owner reference and use here!
+			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
+		}
+		if( LEOParserGetLastErrorMessage() )
+			NSLog( @"Script Error: %@", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
+		else
+		{
+			LEOScriptRelease( mScriptObject );
+			mScriptObject = NULL;
+		}
+	}
+	
+	return mScriptObject;
+}
+
+
+-(NSString*)	resultFromSendingMessageWithFormat: (NSString*)fmt, ...
+{
+	LEOContext	ctx;
+	NSArray*	parts = [fmt componentsSeparatedByString: @" "];
+	NSString*	msg = [parts objectAtIndex: 0];
+	if( [parts count] > 1 )
+	{
+		LEOInitContext( &ctx, [[mStack document] contextGroup] );
+		
+		LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
+		
+		paramFormats = [[parts objectAtIndex: 1] componentsSeparatedByString: @","];
+		for( NSString* currPart in paramFormats )
+		{
+			currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+			if( [currPart isEqualToString: @"%s"] )
+				;
+			else if( [currPart isEqualToString: @"%d"] )
+				;
+			else if( [currPart isEqualToString: @"%f"] )
+				;
+			else if( [currPart isEqualToString: @"%b"] )
+				;
+		}
+		
+		// Send message:
+		LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( group, [msg UTF8String] );
+		LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( [self scriptObject], handlerID );
+		if( !theHandler )
+			return NULL;	// TODO: Forward message to mLayer.
+		
+		
+		LEOCleanUpContext( &ctx );
 	}
 }
 

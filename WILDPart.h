@@ -25,6 +25,7 @@
 	NSRect				mRectangle;
 	NSString*			mName;
 	NSString*			mScript;
+	struct LEOScript*	mScriptObject;
 	NSString*			mStyle;
 	NSString*			mType;
 	NSString*			mLayer;

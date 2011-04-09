@@ -23,6 +23,7 @@
 #import <Quartz/Quartz.h>
 #import "WILDXMLUtils.h"
 #import "NSFileManager+NameForTempFile.h"
+#import <ForgeFramework/ForgeFramework.h>
 
 
 @implementation WILDDocument
@@ -65,6 +66,12 @@
 	DESTROY_DEALLOC(mLastCompactedVersion);
 	DESTROY_DEALLOC(mFirstEditedVersion);
 	DESTROY_DEALLOC(mLastEditedVersion);
+	
+	if( mContextGroup )
+	{
+		LEOContextGroupRelease( mContextGroup );
+		mContextGroup = NULL;
+	}
 	
 	[super dealloc];
 }
@@ -766,6 +773,15 @@
 	}
 	
 	return foundVisibleObject;
+}
+
+
+-(struct LEOContextGroup*)	contextGroup;
+{
+	if( !mContextGroup )
+		mContextGroup = LEOContextGroupCreate();
+	
+	return mContextGroup;
 }
 
 @end

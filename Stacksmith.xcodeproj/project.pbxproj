@@ -319,6 +319,8 @@
 		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
+		55A869021350A7700036AA4B /* ForgeFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55A869011350A7700036AA4B /* ForgeFramework.framework */; };
+		55A869041350A7860036AA4B /* ForgeFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A869031350A7860036AA4B /* ForgeFramework.framework */; };
 		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
 		55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */; };
 		55AE22E31346C9D9000B5BBE /* Help.xstk in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55AE22E11346C99E000B5BBE /* Help.xstk */; };
@@ -383,6 +385,27 @@
 			remoteGlobalIDString = 8DD76F620486A84900D96B5E;
 			remoteInfo = stackimport;
 		};
+		55A868FA1350A6C40036AA4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55A867A513508E620036AA4B;
+			remoteInfo = ForgeFramework;
+		};
+		55A868FC1350A6C40036AA4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55A867BA13508E620036AA4B;
+			remoteInfo = ForgeFrameworkTests;
+		};
+		55A868FE1350A71A0036AA4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 55A867A413508E620036AA4B;
+			remoteInfo = ForgeFramework;
+		};
 		55E23BFF133FAC0200E6B444 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -401,6 +424,16 @@
 			files = (
 				55818A78133199AC00480D30 /* Home.xstk in CopyFiles */,
 				55AE22E31346C9D9000B5BBE /* Help.xstk in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55A869001350A7600036AA4B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				55A869021350A7700036AA4B /* ForgeFramework.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,6 +804,9 @@
 		55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoWindowController.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ForgeFramework.xcodeproj; path = ../Forge/ForgeFramework/ForgeFramework.xcodeproj; sourceTree = "<group>"; };
+		55A869011350A7700036AA4B /* ForgeFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ForgeFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A869031350A7860036AA4B /* ForgeFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForgeFramework.framework; path = "../../../Library/Developer/Xcode/DerivedData/Stacksmith-emyjogwslpipgvdhomcpqygxdhfh/Build/Products/Debug/ForgeFramework.framework"; sourceTree = "<group>"; };
 		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
@@ -854,6 +890,7 @@
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
 				553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */,
+				55A869041350A7860036AA4B /* ForgeFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,6 +906,7 @@
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
 				553EB403131C83C6008BFBCE /* libcrypto.dylib */,
+				55A869031350A7860036AA4B /* ForgeFramework.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -895,11 +933,13 @@
 		2A37F4AAFDCFA73011CA2CEA /* Propaganda */ = {
 			isa = PBXGroup;
 			children = (
+				55A869011350A7700036AA4B /* ForgeFramework.framework */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
+				55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */,
 				55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */,
 			);
 			name = Propaganda;
@@ -1413,6 +1453,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		55A868F31350A6C40036AA4B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55A868FB1350A6C40036AA4B /* ForgeFramework.framework */,
+				55A868FD1350A6C40036AA4B /* ForgeFrameworkTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1439,12 +1488,14 @@
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				55818A761331999000480D30 /* CopyFiles */,
+				55A869001350A7600036AA4B /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				55A0BDCD113B68250095CAA6 /* PBXTargetDependency */,
 				55E23C00133FAC0200E6B444 /* PBXTargetDependency */,
+				55A0BDCD113B68250095CAA6 /* PBXTargetDependency */,
+				55A868FF1350A71A0036AA4B /* PBXTargetDependency */,
 			);
 			name = Stacksmith;
 			productInstallPath = "$(HOME)/Applications";
@@ -1472,6 +1523,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 55A868F31350A6C40036AA4B /* Products */;
+					ProjectRef = 55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */;
+				},
+				{
 					ProductGroup = 55A0BDC6113B67CC0095CAA6 /* Products */;
 					ProjectRef = 55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */;
 				},
@@ -1490,6 +1545,20 @@
 			fileType = "compiled.mach-o.executable";
 			path = stackimport;
 			remoteRef = 55A0BDC9113B67CC0095CAA6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55A868FB1350A6C40036AA4B /* ForgeFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ForgeFramework.framework;
+			remoteRef = 55A868FA1350A6C40036AA4B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55A868FD1350A6C40036AA4B /* ForgeFrameworkTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ForgeFrameworkTests.octest;
+			remoteRef = 55A868FC1350A6C40036AA4B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1889,6 +1958,11 @@
 			name = stackimport;
 			targetProxy = 55A0BDCC113B68250095CAA6 /* PBXContainerItemProxy */;
 		};
+		55A868FF1350A71A0036AA4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ForgeFramework;
+			targetProxy = 55A868FE1350A71A0036AA4B /* PBXContainerItemProxy */;
+		};
 		55E23C00133FAC0200E6B444 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */;
@@ -2040,6 +2114,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Stacksmith-emyjogwslpipgvdhomcpqygxdhfh/Build/Products/Debug\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -2077,6 +2155,7 @@
 				INFOPLIST_PREFIX_HEADER = svn_version.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = Stacksmith;
 			};
 			name = Debug;
@@ -2085,6 +2164,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Stacksmith-emyjogwslpipgvdhomcpqygxdhfh/Build/Products/Debug\"",
+				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Stacksmith_Prefix.pch;
@@ -2119,6 +2202,7 @@
 				INFOPLIST_PREFIX_HEADER = svn_version.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = Stacksmith;
 			};
 			name = Release;
