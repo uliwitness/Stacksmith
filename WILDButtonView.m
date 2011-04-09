@@ -26,9 +26,13 @@
 	WILDPartView*			pv = [self superview];
 	BOOL					keepLooping = YES;
 	BOOL					autoHighlight = [[pv part] autoHighlight];
-	BOOL					isInside = YES;
+	BOOL					isInside = [[self cell] hitTestForEvent: event inRect: [self bounds] ofView: self] != NSCellHitNone;
+	BOOL					newIsInside = isInside;
 	
-	if( autoHighlight )
+	if( !isInside )
+		return;
+	
+	if( autoHighlight && isInside )
 		[[self cell] setHighlighted: YES];
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	
@@ -48,9 +52,10 @@
 				case NSLeftMouseDragged:
 				case NSRightMouseDragged:
 				case NSOtherMouseDragged:
-					if( isInside != ([self hitTest: [self convertPoint: [evt locationInWindow] fromView: nil]] != nil) )
+					newIsInside = [[self cell] hitTestForEvent: evt inRect: [self bounds] ofView: self] != NSCellHitNone;
+					if( isInside != newIsInside )
 					{
-						isInside = !isInside;
+						isInside = newIsInside;
 						
 						if( autoHighlight )
 							[[self cell] setHighlighted: isInside];
@@ -74,13 +79,13 @@
 }
 
 
--(NSView *)	hitTest: (NSPoint)aPoint
-{
-	NSView	*	theView = [super hitTest: aPoint];
-	if( !theView && [self mouse: aPoint inRect: [self bounds]] )
-		return self;
-	else
-		return theView;
-}
+//-(NSView *)	hitTest: (NSPoint)aPoint
+//{
+//	NSView	*	theView = [super hitTest: aPoint];
+//	if( !theView && [self mouse: aPoint inRect: [self bounds]] )
+//		return self;
+//	else
+//		return theView;
+//}
 
 @end
