@@ -39,9 +39,10 @@ static WILDRecentCardsList	*	sSharedRecentCardsList = nil;
     return self;
 }
 
+
 -(void)	dealloc
 {
-	DESTROY( mRecentCardInfos );
+	DESTROY_DEALLOC( mRecentCardInfos );
 	
     [super dealloc];
 }
@@ -131,9 +132,9 @@ static WILDRecentCardsList	*	sSharedRecentCardsList = nil;
 
 -(void)	dealloc
 {
-	DESTROY(thumbnail);
-	DESTROY(documentURL);
-	DESTROY(card);
+	DESTROY_DEALLOC(thumbnail);
+	DESTROY_DEALLOC(documentURL);
+	DESTROY_DEALLOC(card);
 	
 	[super dealloc];
 }

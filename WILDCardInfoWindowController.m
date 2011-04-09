@@ -26,7 +26,7 @@
 
 -(void)	dealloc
 {
-	DESTROY( mMarkedSwitch );
+	DESTROY_DEALLOC( mMarkedSwitch );
 	
 	[super dealloc];
 }

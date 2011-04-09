@@ -40,17 +40,17 @@
 
 -(void)	dealloc
 {
-	DESTROY( mCardView );
-	DESTROY( mLayer );
+	DESTROY_DEALLOC( mCardView );
+	DESTROY_DEALLOC( mLayer );
 	
-	DESTROY( mEditScriptButton );
-	DESTROY( mDontSearchSwitch );
-	DESTROY( mCantDeleteSwitch );
-	DESTROY( mNameField );
-	DESTROY( mNumberField );
-	DESTROY( mIDField );
-	DESTROY( mFieldCountField );
-	DESTROY( mButtonCountField );
+	DESTROY_DEALLOC( mEditScriptButton );
+	DESTROY_DEALLOC( mDontSearchSwitch );
+	DESTROY_DEALLOC( mCantDeleteSwitch );
+	DESTROY_DEALLOC( mNameField );
+	DESTROY_DEALLOC( mNumberField );
+	DESTROY_DEALLOC( mIDField );
+	DESTROY_DEALLOC( mFieldCountField );
+	DESTROY_DEALLOC( mButtonCountField );
 	
 	[super dealloc];
 }

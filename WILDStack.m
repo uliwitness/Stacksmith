@@ -131,10 +131,10 @@
 		[[WILDRecentCardsList sharedRecentCardsList] removeCard: currCard];
 	}
 
-	DESTROY(mBackgrounds);
-	DESTROY(mCards);
-	DESTROY(mMarkedCards);
-	DESTROY(mScript);
+	DESTROY_DEALLOC(mBackgrounds);
+	DESTROY_DEALLOC(mCards);
+	DESTROY_DEALLOC(mMarkedCards);
+	DESTROY_DEALLOC(mScript);
 	
 	[super dealloc];
 }

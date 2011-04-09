@@ -107,14 +107,14 @@
 		[[NSNotificationCenter defaultCenter] removeObserver: self name: WILDPartDidChangeNotification object: currPart];
 	}
 	
-	DESTROY(mButtonFamilies);
-	DESTROY(mName);
-	DESTROY(mScript);
-	DESTROY(mPicture);
-	DESTROY(mParts);
-	DESTROY(mAddColorParts);
+	DESTROY_DEALLOC(mButtonFamilies);
+	DESTROY_DEALLOC(mName);
+	DESTROY_DEALLOC(mScript);
+	DESTROY_DEALLOC(mPicture);
+	DESTROY_DEALLOC(mParts);
+	DESTROY_DEALLOC(mAddColorParts);
 	
-	mStack = nil;
+	mStack = UKInvalidPointer;
 	
 	[super dealloc];
 }

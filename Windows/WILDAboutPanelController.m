@@ -47,9 +47,9 @@
 
 - (void)dealloc
 {
-	DESTROY(mLicenseeField);
-	DESTROY(mCompanyField);
-	DESTROY(mVersionField);
+	DESTROY_DEALLOC(mLicenseeField);
+	DESTROY_DEALLOC(mCompanyField);
+	DESTROY_DEALLOC(mVersionField);
 	
     [super dealloc];
 }

@@ -56,18 +56,18 @@ static NSSize		sPopUpMenuSizes[] =
 
 -(void)	dealloc
 {
-	DESTROY( mCardView );
-	DESTROY( mStack );
+	DESTROY_DEALLOC( mCardView );
+	DESTROY_DEALLOC( mStack );
 	
-	DESTROY( mEditScriptButton );
-	DESTROY( mNameField );
-	DESTROY( mIDField );
-	DESTROY( mCardCountField );
-	DESTROY( mBackgroundCountField );
-	DESTROY( mWidthField );
-	DESTROY( mHeightField );
+	DESTROY_DEALLOC( mEditScriptButton );
+	DESTROY_DEALLOC( mNameField );
+	DESTROY_DEALLOC( mIDField );
+	DESTROY_DEALLOC( mCardCountField );
+	DESTROY_DEALLOC( mBackgroundCountField );
+	DESTROY_DEALLOC( mWidthField );
+	DESTROY_DEALLOC( mHeightField );
 	
-	DESTROY(mSizePopUpButton);
+	DESTROY_DEALLOC(mSizePopUpButton);
 	
 	[super dealloc];
 }

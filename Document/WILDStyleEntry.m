@@ -27,8 +27,8 @@
 
 -(void)	dealloc
 {
-	DESTROY(mFontName);
-	DESTROY(mFontStyles);
+	DESTROY_DEALLOC(mFontName);
+	DESTROY_DEALLOC(mFontStyles);
 	
 	[super dealloc];
 }

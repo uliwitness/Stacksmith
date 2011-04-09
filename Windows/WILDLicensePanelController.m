@@ -51,8 +51,8 @@ NSString*	WILDLicensePanelTriggerOKAfterwards = @"WILDLicensePanelTriggerOKAfter
 	
 	[[NSNotificationCenter defaultCenter] removeObserver: self name: NSControlTextDidChangeNotification object: mLicenseTextField];
 	
-	DESTROY( mLicenseTextField );
-	DESTROY( mOKButton );
+	DESTROY_DEALLOC( mLicenseTextField );
+	DESTROY_DEALLOC( mOKButton );
 	
     [super dealloc];
 }

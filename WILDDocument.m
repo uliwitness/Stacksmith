@@ -56,15 +56,15 @@
 
 -(void)	dealloc
 {
-	DESTROY(mErrorsAndWarnings);
-	DESTROY(mFontIDTable);
-	DESTROY(mTextStyles);
-	DESTROY(mMediaList);
-	DESTROY(mStacks);
-	DESTROY(mCreatedByVersion);
-	DESTROY(mLastCompactedVersion);
-	DESTROY(mFirstEditedVersion);
-	DESTROY(mLastEditedVersion);
+	DESTROY_DEALLOC(mErrorsAndWarnings);
+	DESTROY_DEALLOC(mFontIDTable);
+	DESTROY_DEALLOC(mTextStyles);
+	DESTROY_DEALLOC(mMediaList);
+	DESTROY_DEALLOC(mStacks);
+	DESTROY_DEALLOC(mCreatedByVersion);
+	DESTROY_DEALLOC(mLastCompactedVersion);
+	DESTROY_DEALLOC(mFirstEditedVersion);
+	DESTROY_DEALLOC(mLastEditedVersion);
 	
 	[super dealloc];
 }

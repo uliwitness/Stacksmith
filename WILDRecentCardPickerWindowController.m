@@ -69,9 +69,9 @@
 
 -(void)	dealloc
 {
-	DESTROY( mRecentCardsList );
-	DESTROY( mRecentCardsListView );
-	DESTROY( mCardViewController );
+	DESTROY_DEALLOC( mRecentCardsList );
+	DESTROY_DEALLOC( mRecentCardsListView );
+	DESTROY_DEALLOC( mCardViewController );
 	
 	[super dealloc];
 }
