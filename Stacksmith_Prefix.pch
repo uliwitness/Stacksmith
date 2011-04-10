@@ -5,12 +5,10 @@
 #define NS_BUILD_32_LIKE_64			1
 #define TRANSPARENT_BUTTONS_INVERT	1
 
-
+#if __OBJC__
 #import "UKHelperMacros.h"
 #import "UKTypecastMacros.h"
-
-
-
+#endif //__OBJC__
 
 
 
