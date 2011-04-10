@@ -15,13 +15,17 @@
 #import "UKLicense.h"
 #import "WILDLicensePanelController.h"
 #import "WILDAboutPanelController.h"
-#include <openssl/err.h>
+#import <ForgeFramework/ForgeFramework.h>
+#import <openssl/err.h>
 
 
 @implementation WILDAppDelegate
 
 -(void)	applicationWillFinishLaunching:(NSNotification *)notification
 {
+	LEOInitInstructionArray();
+	LEOAddInstructionsToInstructionArray( gMsgInstructions, gMsgInstructionNames, LEO_NUMBER_OF_MSG_INSTRUCTIONS, &kFirstMsgInstruction );
+	
 	NSView	*	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect( 0, 0, 106, 32)] autorelease];
 	
 	NSButton*	oneButton = [[[NSButton alloc] initWithFrame: NSMakeRect( 6, 0, 32, 32)] autorelease];

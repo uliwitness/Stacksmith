@@ -647,8 +647,6 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(NSString*)	resultFromSendingMessageWithFormat: (NSString*)fmt, ...
 {
-	LEOInitInstructionArray();
-
 	LEOScript*	theScript = [self scriptObject];
 	NSString*	resultString = nil;
 	LEOContext	ctx;
