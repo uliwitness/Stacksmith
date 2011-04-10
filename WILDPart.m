@@ -631,10 +631,13 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		}
 		if( LEOParserGetLastErrorMessage() )
 		{
-			NSLog( @"Script Error: %@", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
-
-			LEOScriptRelease( mScriptObject );
-			mScriptObject = NULL;
+			NSLog( @"Script Error: %s", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
+			
+			if( mScriptObject )
+			{
+				LEOScriptRelease( mScriptObject );
+				mScriptObject = NULL;
+			}
 		}
 	}
 	
