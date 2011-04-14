@@ -778,7 +778,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
 	LEORunInContext( theHandler->instructions, &ctx );
 	if( ctx.errMsg[0] != 0 )
-		NSLog( @"ERROR: %s\n", ctx.errMsg );
+		NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", ctx.errMsg );
 	
 	char	returnValue[1024] = { 0 };
 	LEOGetValueAsString( ctx.stack, returnValue, sizeof(returnValue), &ctx );
