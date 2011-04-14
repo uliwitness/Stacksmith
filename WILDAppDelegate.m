@@ -15,7 +15,8 @@
 #import "UKLicense.h"
 #import "WILDLicensePanelController.h"
 #import "WILDAboutPanelController.h"
-#import <ForgeFramework/ForgeFramework.h>
+#import "WILDMessageBox.h"
+#import "Forge.h"
 #import <openssl/err.h>
 
 
@@ -391,6 +392,12 @@
 {
 	[NSApp sendAction: @selector(chooseToolWithTag:) to: nil from: sender];
 	[mToolsMenu cancelTracking];
+}
+
+
+-(IBAction)	orderFrontMessageBox: (id)sender
+{
+	[[WILDMessageBox sharedMessageBox] orderFrontMessageBox: self];
 }
 
 @end

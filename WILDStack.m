@@ -14,7 +14,7 @@
 #import "UKRandomInteger.h"
 #import "WILDRecentCardsList.h"
 #import "WILDNotifications.h"
-#import <ForgeFramework/ForgeFramework.h>
+#import "Forge.h"
 #import <QTKit/QTKit.h>
 
 
@@ -304,7 +304,7 @@
 			LEOScriptCompileAndAddParseTree( mScriptObject, [mDocument contextGroup], parseTree );
 		}
 		if( LEOParserGetLastErrorMessage() )
-			NSLog( @"Script Error: %@", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
+			NSLog( @"Script Error: %s", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
 		else
 		{
 			LEOScriptRelease( mScriptObject );

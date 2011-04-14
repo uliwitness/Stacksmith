@@ -19,6 +19,7 @@
 
 -(IBAction)	toggleBackgroundEditMode: (id)sender;
 -(IBAction)	toolsMenuRowDummyAction: (id)sender;
+-(IBAction)	orderFrontMessageBox: (id)sender;
 -(IBAction)	orderFrontStandardAboutPanel: (id)sender;
 -(IBAction)	goHelp: (id)sender;
 

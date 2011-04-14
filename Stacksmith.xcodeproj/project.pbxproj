@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -292,6 +292,46 @@
 		552FF245113F247A005742C8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FF244113F247A005742C8 /* QTKit.framework */; };
 		55382F6B117238350006B381 /* WILDFieldInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */; };
 		55382F6D117238B10006B381 /* WILDFieldInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55382F6C117238B10006B381 /* WILDFieldInfoWindowController.m */; };
+		553C46EE13577334000219FA /* Forge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C469F13577334000219FA /* Forge.cpp */; };
+		553C46EF13577334000219FA /* CCodeBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A113577334000219FA /* CCodeBlock.cpp */; };
+		553C46F013577334000219FA /* CVariableEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A313577334000219FA /* CVariableEntry.cpp */; };
+		553C46F113577334000219FA /* CToken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A613577334000219FA /* CToken.cpp */; };
+		553C46F213577334000219FA /* CParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A813577334000219FA /* CParser.cpp */; };
+		553C46F313577334000219FA /* CParseTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46AC13577334000219FA /* CParseTree.cpp */; };
+		553C46F413577334000219FA /* CNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46AE13577334000219FA /* CNode.cpp */; };
+		553C46F513577334000219FA /* CValueNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B013577334000219FA /* CValueNode.cpp */; };
+		553C46F613577334000219FA /* CCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B413577334000219FA /* CCommandNode.cpp */; };
+		553C46F713577334000219FA /* CPushValueCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B613577334000219FA /* CPushValueCommandNode.cpp */; };
+		553C46F813577334000219FA /* CAssignCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B813577334000219FA /* CAssignCommandNode.cpp */; };
+		553C46F913577334000219FA /* CPutCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46BA13577334000219FA /* CPutCommandNode.cpp */; };
+		553C46FA13577334000219FA /* CGetParamCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46BC13577334000219FA /* CGetParamCommandNode.cpp */; };
+		553C46FB13577334000219FA /* CPrintCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46BE13577334000219FA /* CPrintCommandNode.cpp */; };
+		553C46FC13577334000219FA /* CReturnCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C013577334000219FA /* CReturnCommandNode.cpp */; };
+		553C46FD13577334000219FA /* CFunctionCallNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C213577334000219FA /* CFunctionCallNode.cpp */; };
+		553C46FE13577334000219FA /* COperatorNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C413577334000219FA /* COperatorNode.cpp */; };
+		553C46FF13577334000219FA /* CAddCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C613577334000219FA /* CAddCommandNode.cpp */; };
+		553C470013577334000219FA /* CLineMarkerNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C813577334000219FA /* CLineMarkerNode.cpp */; };
+		553C470113577334000219FA /* CAssignChunkArrayNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46CA13577334000219FA /* CAssignChunkArrayNode.cpp */; };
+		553C470213577334000219FA /* CGetArrayItemCountNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46CC13577334000219FA /* CGetArrayItemCountNode.cpp */; };
+		553C470313577334000219FA /* CGetArrayItemNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46CE13577334000219FA /* CGetArrayItemNode.cpp */; };
+		553C470413577334000219FA /* CMakeChunkRefNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D013577334000219FA /* CMakeChunkRefNode.cpp */; };
+		553C470513577334000219FA /* CMakeChunkConstNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D213577334000219FA /* CMakeChunkConstNode.cpp */; };
+		553C470613577334000219FA /* CCodeBlockNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D413577334000219FA /* CCodeBlockNode.cpp */; };
+		553C470713577334000219FA /* CFunctionDefinitionNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D613577334000219FA /* CFunctionDefinitionNode.cpp */; };
+		553C470813577334000219FA /* CWhileLoopNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D813577334000219FA /* CWhileLoopNode.cpp */; };
+		553C470913577334000219FA /* CIfNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46DA13577334000219FA /* CIfNode.cpp */; };
+		553C470A13577334000219FA /* LEOValue.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46DC13577334000219FA /* LEOValue.c */; };
+		553C470B13577334000219FA /* LEOInterpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46DE13577334000219FA /* LEOInterpreter.c */; };
+		553C470C13577334000219FA /* LEOInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E013577334000219FA /* LEOInstructions.c */; };
+		553C470D13577334000219FA /* LEOScript.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E213577334000219FA /* LEOScript.c */; };
+		553C470E13577334000219FA /* LEODebugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E413577334000219FA /* LEODebugger.c */; };
+		553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E613577334000219FA /* LEORemoteDebugger.c */; };
+		553C471013577334000219FA /* LEOChunks.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E813577334000219FA /* LEOChunks.c */; };
+		553C471113577334000219FA /* LEOContextGroup.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46EA13577334000219FA /* LEOContextGroup.c */; };
+		553C471213577334000219FA /* LEOMsgInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46ED13577334000219FA /* LEOMsgInstructions.c */; };
+		553C47141357779C000219FA /* LEOMsgInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C47131357779C000219FA /* LEOMsgInstructionsStacksmith.m */; };
+		553C471713577989000219FA /* WILDMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C471613577989000219FA /* WILDMessageBox.m */; };
+		553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C471813577A2E000219FA /* WILDMessageBox.xib */; };
 		553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 553EB403131C83C6008BFBCE /* libcrypto.dylib */; };
 		5542C9471139D7A000555C64 /* WILDStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9461139D7A000555C64 /* WILDStack.m */; };
 		5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */; };
@@ -335,9 +375,6 @@
 		55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */; };
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
-		55D3404E135225E3006A197D /* LEOMsgInstructionsGeneric.c in Sources */ = {isa = PBXBuildFile; fileRef = 55D3404D135225E3006A197D /* LEOMsgInstructionsGeneric.c */; };
-		55D3407B13522FD9006A197D /* ForgeFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3407A13522FD9006A197D /* ForgeFramework.framework */; };
-		55D3407D13522FE5006A197D /* ForgeFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3407C13522FE5006A197D /* ForgeFramework.framework */; };
 		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
 		55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */; };
@@ -386,27 +423,6 @@
 			remoteGlobalIDString = 8DD76F620486A84900D96B5E;
 			remoteInfo = stackimport;
 		};
-		55A868FA1350A6C40036AA4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55A867A513508E620036AA4B;
-			remoteInfo = ForgeFramework;
-		};
-		55A868FC1350A6C40036AA4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55A867BA13508E620036AA4B;
-			remoteInfo = ForgeFrameworkTests;
-		};
-		55A868FE1350A71A0036AA4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 55A867A413508E620036AA4B;
-			remoteInfo = ForgeFramework;
-		};
 		55E23BFF133FAC0200E6B444 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -435,7 +451,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				55D3407B13522FD9006A197D /* ForgeFramework.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,6 +773,86 @@
 		55382F6A117238350006B381 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDFieldInfoWindowController.xib; sourceTree = "<group>"; };
 		55382F6C117238B10006B381 /* WILDFieldInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDFieldInfoWindowController.m; sourceTree = "<group>"; };
 		55382F72117238D90006B381 /* WILDFieldInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDFieldInfoWindowController.h; sourceTree = "<group>"; };
+		553C469E13577334000219FA /* Forge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forge.h; sourceTree = "<group>"; };
+		553C469F13577334000219FA /* Forge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Forge.cpp; sourceTree = "<group>"; };
+		553C46A013577334000219FA /* CCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCodeBlock.h; path = ../../CCodeBlock.h; sourceTree = "<group>"; };
+		553C46A113577334000219FA /* CCodeBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCodeBlock.cpp; path = ../../CCodeBlock.cpp; sourceTree = "<group>"; };
+		553C46A213577334000219FA /* CVariableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVariableEntry.h; path = ../../CVariableEntry.h; sourceTree = "<group>"; };
+		553C46A313577334000219FA /* CVariableEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVariableEntry.cpp; path = ../../CVariableEntry.cpp; sourceTree = "<group>"; };
+		553C46A413577334000219FA /* UTF32CaseTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF32CaseTables.h; path = ../../UTF32CaseTables.h; sourceTree = "<group>"; };
+		553C46A513577334000219FA /* CToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CToken.h; path = ../../CToken.h; sourceTree = "<group>"; };
+		553C46A613577334000219FA /* CToken.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CToken.cpp; path = ../../CToken.cpp; sourceTree = "<group>"; };
+		553C46A713577334000219FA /* CParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CParser.h; path = ../../CParser.h; sourceTree = "<group>"; };
+		553C46A813577334000219FA /* CParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParser.cpp; path = ../../CParser.cpp; sourceTree = "<group>"; };
+		553C46AB13577334000219FA /* CParseTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CParseTree.h; path = ../../CParseTree.h; sourceTree = "<group>"; };
+		553C46AC13577334000219FA /* CParseTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParseTree.cpp; path = ../../CParseTree.cpp; sourceTree = "<group>"; };
+		553C46AD13577334000219FA /* CNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNode.h; path = ../../CNode.h; sourceTree = "<group>"; };
+		553C46AE13577334000219FA /* CNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNode.cpp; path = ../../CNode.cpp; sourceTree = "<group>"; };
+		553C46AF13577334000219FA /* CValueNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CValueNode.h; path = ../../CValueNode.h; sourceTree = "<group>"; };
+		553C46B013577334000219FA /* CValueNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CValueNode.cpp; path = ../../CValueNode.cpp; sourceTree = "<group>"; };
+		553C46B313577334000219FA /* CCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCommandNode.h; path = ../../CCommandNode.h; sourceTree = "<group>"; };
+		553C46B413577334000219FA /* CCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCommandNode.cpp; path = ../../CCommandNode.cpp; sourceTree = "<group>"; };
+		553C46B513577334000219FA /* CPushValueCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPushValueCommandNode.h; path = ../../CPushValueCommandNode.h; sourceTree = "<group>"; };
+		553C46B613577334000219FA /* CPushValueCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPushValueCommandNode.cpp; path = ../../CPushValueCommandNode.cpp; sourceTree = "<group>"; };
+		553C46B713577334000219FA /* CAssignCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAssignCommandNode.h; path = ../../CAssignCommandNode.h; sourceTree = "<group>"; };
+		553C46B813577334000219FA /* CAssignCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAssignCommandNode.cpp; path = ../../CAssignCommandNode.cpp; sourceTree = "<group>"; };
+		553C46B913577334000219FA /* CPutCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPutCommandNode.h; path = ../../CPutCommandNode.h; sourceTree = "<group>"; };
+		553C46BA13577334000219FA /* CPutCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPutCommandNode.cpp; path = ../../CPutCommandNode.cpp; sourceTree = "<group>"; };
+		553C46BB13577334000219FA /* CGetParamCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGetParamCommandNode.h; path = ../../CGetParamCommandNode.h; sourceTree = "<group>"; };
+		553C46BC13577334000219FA /* CGetParamCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGetParamCommandNode.cpp; path = ../../CGetParamCommandNode.cpp; sourceTree = "<group>"; };
+		553C46BD13577334000219FA /* CPrintCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPrintCommandNode.h; path = ../../CPrintCommandNode.h; sourceTree = "<group>"; };
+		553C46BE13577334000219FA /* CPrintCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPrintCommandNode.cpp; path = ../../CPrintCommandNode.cpp; sourceTree = "<group>"; };
+		553C46BF13577334000219FA /* CReturnCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CReturnCommandNode.h; path = ../../CReturnCommandNode.h; sourceTree = "<group>"; };
+		553C46C013577334000219FA /* CReturnCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CReturnCommandNode.cpp; path = ../../CReturnCommandNode.cpp; sourceTree = "<group>"; };
+		553C46C113577334000219FA /* CFunctionCallNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFunctionCallNode.h; path = ../../CFunctionCallNode.h; sourceTree = "<group>"; };
+		553C46C213577334000219FA /* CFunctionCallNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFunctionCallNode.cpp; path = ../../CFunctionCallNode.cpp; sourceTree = "<group>"; };
+		553C46C313577334000219FA /* COperatorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COperatorNode.h; path = ../../COperatorNode.h; sourceTree = "<group>"; };
+		553C46C413577334000219FA /* COperatorNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COperatorNode.cpp; path = ../../COperatorNode.cpp; sourceTree = "<group>"; };
+		553C46C513577334000219FA /* CAddCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAddCommandNode.h; path = ../../CAddCommandNode.h; sourceTree = "<group>"; };
+		553C46C613577334000219FA /* CAddCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAddCommandNode.cpp; path = ../../CAddCommandNode.cpp; sourceTree = "<group>"; };
+		553C46C713577334000219FA /* CLineMarkerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLineMarkerNode.h; path = ../../CLineMarkerNode.h; sourceTree = "<group>"; };
+		553C46C813577334000219FA /* CLineMarkerNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLineMarkerNode.cpp; path = ../../CLineMarkerNode.cpp; sourceTree = "<group>"; };
+		553C46C913577334000219FA /* CAssignChunkArrayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAssignChunkArrayNode.h; path = ../../CAssignChunkArrayNode.h; sourceTree = "<group>"; };
+		553C46CA13577334000219FA /* CAssignChunkArrayNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAssignChunkArrayNode.cpp; path = ../../CAssignChunkArrayNode.cpp; sourceTree = "<group>"; };
+		553C46CB13577334000219FA /* CGetArrayItemCountNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGetArrayItemCountNode.h; path = ../../CGetArrayItemCountNode.h; sourceTree = "<group>"; };
+		553C46CC13577334000219FA /* CGetArrayItemCountNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGetArrayItemCountNode.cpp; path = ../../CGetArrayItemCountNode.cpp; sourceTree = "<group>"; };
+		553C46CD13577334000219FA /* CGetArrayItemNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGetArrayItemNode.h; path = ../../CGetArrayItemNode.h; sourceTree = "<group>"; };
+		553C46CE13577334000219FA /* CGetArrayItemNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGetArrayItemNode.cpp; path = ../../CGetArrayItemNode.cpp; sourceTree = "<group>"; };
+		553C46CF13577334000219FA /* CMakeChunkRefNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMakeChunkRefNode.h; path = ../../CMakeChunkRefNode.h; sourceTree = "<group>"; };
+		553C46D013577334000219FA /* CMakeChunkRefNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMakeChunkRefNode.cpp; path = ../../CMakeChunkRefNode.cpp; sourceTree = "<group>"; };
+		553C46D113577334000219FA /* CMakeChunkConstNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMakeChunkConstNode.h; path = ../../CMakeChunkConstNode.h; sourceTree = "<group>"; };
+		553C46D213577334000219FA /* CMakeChunkConstNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMakeChunkConstNode.cpp; path = ../../CMakeChunkConstNode.cpp; sourceTree = "<group>"; };
+		553C46D313577334000219FA /* CCodeBlockNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCodeBlockNode.h; path = ../../CCodeBlockNode.h; sourceTree = "<group>"; };
+		553C46D413577334000219FA /* CCodeBlockNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCodeBlockNode.cpp; path = ../../CCodeBlockNode.cpp; sourceTree = "<group>"; };
+		553C46D513577334000219FA /* CFunctionDefinitionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFunctionDefinitionNode.h; path = ../../CFunctionDefinitionNode.h; sourceTree = "<group>"; };
+		553C46D613577334000219FA /* CFunctionDefinitionNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFunctionDefinitionNode.cpp; path = ../../CFunctionDefinitionNode.cpp; sourceTree = "<group>"; };
+		553C46D713577334000219FA /* CWhileLoopNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWhileLoopNode.h; path = ../../CWhileLoopNode.h; sourceTree = "<group>"; };
+		553C46D813577334000219FA /* CWhileLoopNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CWhileLoopNode.cpp; path = ../../CWhileLoopNode.cpp; sourceTree = "<group>"; };
+		553C46D913577334000219FA /* CIfNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIfNode.h; path = ../../CIfNode.h; sourceTree = "<group>"; };
+		553C46DA13577334000219FA /* CIfNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIfNode.cpp; path = ../../CIfNode.cpp; sourceTree = "<group>"; };
+		553C46DB13577334000219FA /* LEOValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOValue.h; path = ../../../Leonie/common/LEOValue.h; sourceTree = "<group>"; };
+		553C46DC13577334000219FA /* LEOValue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOValue.c; path = ../../../Leonie/common/LEOValue.c; sourceTree = "<group>"; };
+		553C46DD13577334000219FA /* LEOInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOInterpreter.h; path = ../../../Leonie/common/LEOInterpreter.h; sourceTree = "<group>"; };
+		553C46DE13577334000219FA /* LEOInterpreter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOInterpreter.c; path = ../../../Leonie/common/LEOInterpreter.c; sourceTree = "<group>"; };
+		553C46DF13577334000219FA /* LEOInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOInstructions.h; path = ../../../Leonie/common/LEOInstructions.h; sourceTree = "<group>"; };
+		553C46E013577334000219FA /* LEOInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOInstructions.c; path = ../../../Leonie/common/LEOInstructions.c; sourceTree = "<group>"; };
+		553C46E113577334000219FA /* LEOScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOScript.h; path = ../../../Leonie/common/LEOScript.h; sourceTree = "<group>"; };
+		553C46E213577334000219FA /* LEOScript.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOScript.c; path = ../../../Leonie/common/LEOScript.c; sourceTree = "<group>"; };
+		553C46E313577334000219FA /* LEODebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEODebugger.h; path = ../../../Leonie/common/LEODebugger.h; sourceTree = "<group>"; };
+		553C46E413577334000219FA /* LEODebugger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODebugger.c; path = ../../../Leonie/common/LEODebugger.c; sourceTree = "<group>"; };
+		553C46E513577334000219FA /* LEORemoteDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEORemoteDebugger.h; path = ../../../Leonie/macosx/LEORemoteDebugger.h; sourceTree = "<group>"; };
+		553C46E613577334000219FA /* LEORemoteDebugger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEORemoteDebugger.c; path = ../../../Leonie/macosx/LEORemoteDebugger.c; sourceTree = "<group>"; };
+		553C46E713577334000219FA /* LEOChunks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOChunks.h; path = ../../../Leonie/common/LEOChunks.h; sourceTree = "<group>"; };
+		553C46E813577334000219FA /* LEOChunks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOChunks.c; path = ../../../Leonie/common/LEOChunks.c; sourceTree = "<group>"; };
+		553C46E913577334000219FA /* LEOContextGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOContextGroup.h; path = ../../../Leonie/common/LEOContextGroup.h; sourceTree = "<group>"; };
+		553C46EA13577334000219FA /* LEOContextGroup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOContextGroup.c; path = ../../../Leonie/common/LEOContextGroup.c; sourceTree = "<group>"; };
+		553C46EB13577334000219FA /* LEOHandlerID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOHandlerID.h; path = ../../../Leonie/common/LEOHandlerID.h; sourceTree = "<group>"; };
+		553C46EC13577334000219FA /* LEOMsgInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOMsgInstructions.h; path = ../../../Leonie/generic/LEOMsgInstructions.h; sourceTree = "<group>"; };
+		553C46ED13577334000219FA /* LEOMsgInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOMsgInstructions.c; path = ../../../Leonie/generic/LEOMsgInstructions.c; sourceTree = "<group>"; };
+		553C47131357779C000219FA /* LEOMsgInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LEOMsgInstructionsStacksmith.m; path = Instructions/LEOMsgInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
+		553C471513577989000219FA /* WILDMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMessageBox.h; path = Editor/WILDMessageBox.h; sourceTree = "<group>"; };
+		553C471613577989000219FA /* WILDMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMessageBox.m; path = Editor/WILDMessageBox.m; sourceTree = "<group>"; };
+		553C471913577A2E000219FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDMessageBox.xib; sourceTree = "<group>"; };
 		553EB3F7131C7CF1008BFBCE /* UKLicense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKLicense.h; path = ../UKLicenseMaker/UKLicense.h; sourceTree = "<group>"; };
 		553EB3FA131C8360008BFBCE /* UKLicenseKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKLicenseKey.h; sourceTree = "<group>"; };
 		553EB403131C83C6008BFBCE /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = ../../../../../usr/lib/libcrypto.dylib; sourceTree = "<group>"; };
@@ -807,7 +902,6 @@
 		55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoWindowController.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ForgeFramework.xcodeproj; path = ../Forge/ForgeFramework/ForgeFramework.xcodeproj; sourceTree = "<group>"; };
 		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
@@ -835,10 +929,7 @@
 		55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardWindowController.h; path = Document/WILDCardWindowController.h; sourceTree = "<group>"; };
 		55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardWindowController.m; path = Document/WILDCardWindowController.m; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		55D3404C135225E3006A197D /* LEOMsgInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOMsgInstructions.h; path = ../Leonie/generic/LEOMsgInstructions.h; sourceTree = "<group>"; };
-		55D3404D135225E3006A197D /* LEOMsgInstructionsGeneric.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOMsgInstructionsGeneric.c; path = ../Leonie/generic/LEOMsgInstructionsGeneric.c; sourceTree = "<group>"; };
-		55D3407A13522FD9006A197D /* ForgeFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ForgeFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		55D3407C13522FE5006A197D /* ForgeFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ForgeFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55D3404C135225E3006A197D /* LEOMsgInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOMsgInstructions.h; path = ../../../Leonie/generic/LEOMsgInstructions.h; sourceTree = "<group>"; };
 		55D6B257115C16E700D17619 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDTextView.h; sourceTree = "<group>"; };
 		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
@@ -894,7 +985,6 @@
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
-				55D3407D13522FE5006A197D /* ForgeFramework.framework in Frameworks */,
 				553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -910,7 +1000,6 @@
 				55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */,
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
-				55D3407C13522FE5006A197D /* ForgeFramework.framework */,
 				553EB403131C83C6008BFBCE /* libcrypto.dylib */,
 			);
 			name = "Linked Frameworks";
@@ -938,13 +1027,11 @@
 		2A37F4AAFDCFA73011CA2CEA /* Propaganda */ = {
 			isa = PBXGroup;
 			children = (
-				55D3407A13522FD9006A197D /* ForgeFramework.framework */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
-				55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */,
 				55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */,
 			);
 			name = Propaganda;
@@ -970,9 +1057,9 @@
 				5542CE3B113ADFBC00555C64 /* Document */,
 				5542CE3A113ADFAC00555C64 /* Presentation */,
 				55255AB7114C196B00279B03 /* Editor */,
-				55D3404F135225E9006A197D /* Interpreter */,
 				5542CE3C113ADFCE00555C64 /* Utilities */,
 				55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */,
+				553C469D13577334000219FA /* Interpreter */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1006,6 +1093,7 @@
 				5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */,
 				551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
+				553C471813577A2E000219FA /* WILDMessageBox.xib */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
@@ -1076,8 +1164,128 @@
 				55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */,
 				5523653C1344C9ED000145A0 /* WILDRecentCardPickerWindowController.h */,
 				5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */,
+				553C471513577989000219FA /* WILDMessageBox.h */,
+				553C471613577989000219FA /* WILDMessageBox.m */,
 			);
 			name = Editor;
+			sourceTree = "<group>";
+		};
+		553C469D13577334000219FA /* Interpreter */ = {
+			isa = PBXGroup;
+			children = (
+				553C469E13577334000219FA /* Forge.h */,
+				553C469F13577334000219FA /* Forge.cpp */,
+				553C46A013577334000219FA /* CCodeBlock.h */,
+				553C46A113577334000219FA /* CCodeBlock.cpp */,
+				553C46A213577334000219FA /* CVariableEntry.h */,
+				553C46A313577334000219FA /* CVariableEntry.cpp */,
+				553C46A413577334000219FA /* UTF32CaseTables.h */,
+				553C46A513577334000219FA /* CToken.h */,
+				553C46A613577334000219FA /* CToken.cpp */,
+				553C46A713577334000219FA /* CParser.h */,
+				553C46A813577334000219FA /* CParser.cpp */,
+				553C46A913577334000219FA /* Parse Tree */,
+				553C46AA13577334000219FA /* Leonie */,
+				55D3404C135225E3006A197D /* LEOMsgInstructions.h */,
+				553C47131357779C000219FA /* LEOMsgInstructionsStacksmith.m */,
+			);
+			name = Interpreter;
+			path = ../Forge/ForgeFramework/ForgeFramework;
+			sourceTree = "<group>";
+		};
+		553C46A913577334000219FA /* Parse Tree */ = {
+			isa = PBXGroup;
+			children = (
+				553C46AB13577334000219FA /* CParseTree.h */,
+				553C46AC13577334000219FA /* CParseTree.cpp */,
+				553C46AD13577334000219FA /* CNode.h */,
+				553C46AE13577334000219FA /* CNode.cpp */,
+				553C46AF13577334000219FA /* CValueNode.h */,
+				553C46B013577334000219FA /* CValueNode.cpp */,
+				553C46B113577334000219FA /* Commands */,
+				553C46B213577334000219FA /* Code Blocks */,
+			);
+			name = "Parse Tree";
+			sourceTree = "<group>";
+		};
+		553C46AA13577334000219FA /* Leonie */ = {
+			isa = PBXGroup;
+			children = (
+				553C46DB13577334000219FA /* LEOValue.h */,
+				553C46DC13577334000219FA /* LEOValue.c */,
+				553C46DD13577334000219FA /* LEOInterpreter.h */,
+				553C46DE13577334000219FA /* LEOInterpreter.c */,
+				553C46DF13577334000219FA /* LEOInstructions.h */,
+				553C46E013577334000219FA /* LEOInstructions.c */,
+				553C46E113577334000219FA /* LEOScript.h */,
+				553C46E213577334000219FA /* LEOScript.c */,
+				553C46E313577334000219FA /* LEODebugger.h */,
+				553C46E413577334000219FA /* LEODebugger.c */,
+				553C46E513577334000219FA /* LEORemoteDebugger.h */,
+				553C46E613577334000219FA /* LEORemoteDebugger.c */,
+				553C46E713577334000219FA /* LEOChunks.h */,
+				553C46E813577334000219FA /* LEOChunks.c */,
+				553C46E913577334000219FA /* LEOContextGroup.h */,
+				553C46EA13577334000219FA /* LEOContextGroup.c */,
+				553C46EB13577334000219FA /* LEOHandlerID.h */,
+				553C46EC13577334000219FA /* LEOMsgInstructions.h */,
+				553C46ED13577334000219FA /* LEOMsgInstructions.c */,
+			);
+			name = Leonie;
+			sourceTree = "<group>";
+		};
+		553C46B113577334000219FA /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				553C46B313577334000219FA /* CCommandNode.h */,
+				553C46B413577334000219FA /* CCommandNode.cpp */,
+				553C46B513577334000219FA /* CPushValueCommandNode.h */,
+				553C46B613577334000219FA /* CPushValueCommandNode.cpp */,
+				553C46B713577334000219FA /* CAssignCommandNode.h */,
+				553C46B813577334000219FA /* CAssignCommandNode.cpp */,
+				553C46B913577334000219FA /* CPutCommandNode.h */,
+				553C46BA13577334000219FA /* CPutCommandNode.cpp */,
+				553C46BB13577334000219FA /* CGetParamCommandNode.h */,
+				553C46BC13577334000219FA /* CGetParamCommandNode.cpp */,
+				553C46BD13577334000219FA /* CPrintCommandNode.h */,
+				553C46BE13577334000219FA /* CPrintCommandNode.cpp */,
+				553C46BF13577334000219FA /* CReturnCommandNode.h */,
+				553C46C013577334000219FA /* CReturnCommandNode.cpp */,
+				553C46C113577334000219FA /* CFunctionCallNode.h */,
+				553C46C213577334000219FA /* CFunctionCallNode.cpp */,
+				553C46C313577334000219FA /* COperatorNode.h */,
+				553C46C413577334000219FA /* COperatorNode.cpp */,
+				553C46C513577334000219FA /* CAddCommandNode.h */,
+				553C46C613577334000219FA /* CAddCommandNode.cpp */,
+				553C46C713577334000219FA /* CLineMarkerNode.h */,
+				553C46C813577334000219FA /* CLineMarkerNode.cpp */,
+				553C46C913577334000219FA /* CAssignChunkArrayNode.h */,
+				553C46CA13577334000219FA /* CAssignChunkArrayNode.cpp */,
+				553C46CB13577334000219FA /* CGetArrayItemCountNode.h */,
+				553C46CC13577334000219FA /* CGetArrayItemCountNode.cpp */,
+				553C46CD13577334000219FA /* CGetArrayItemNode.h */,
+				553C46CE13577334000219FA /* CGetArrayItemNode.cpp */,
+				553C46CF13577334000219FA /* CMakeChunkRefNode.h */,
+				553C46D013577334000219FA /* CMakeChunkRefNode.cpp */,
+				553C46D113577334000219FA /* CMakeChunkConstNode.h */,
+				553C46D213577334000219FA /* CMakeChunkConstNode.cpp */,
+			);
+			name = Commands;
+			sourceTree = "<group>";
+		};
+		553C46B213577334000219FA /* Code Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				553C46D313577334000219FA /* CCodeBlockNode.h */,
+				553C46D413577334000219FA /* CCodeBlockNode.cpp */,
+				553C46D513577334000219FA /* CFunctionDefinitionNode.h */,
+				553C46D613577334000219FA /* CFunctionDefinitionNode.cpp */,
+				553C46D713577334000219FA /* CWhileLoopNode.h */,
+				553C46D813577334000219FA /* CWhileLoopNode.cpp */,
+				553C46D913577334000219FA /* CIfNode.h */,
+				553C46DA13577334000219FA /* CIfNode.cpp */,
+			);
+			name = "Code Blocks";
 			sourceTree = "<group>";
 		};
 		5542CE3A113ADFAC00555C64 /* Presentation */ = {
@@ -1459,24 +1667,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		55A868F31350A6C40036AA4B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				55A868FB1350A6C40036AA4B /* ForgeFramework.framework */,
-				55A868FD1350A6C40036AA4B /* ForgeFrameworkTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		55D3404F135225E9006A197D /* Interpreter */ = {
-			isa = PBXGroup;
-			children = (
-				55D3404C135225E3006A197D /* LEOMsgInstructions.h */,
-				55D3404D135225E3006A197D /* LEOMsgInstructionsGeneric.c */,
-			);
-			name = Interpreter;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1510,7 +1700,6 @@
 			dependencies = (
 				55E23C00133FAC0200E6B444 /* PBXTargetDependency */,
 				55A0BDCD113B68250095CAA6 /* PBXTargetDependency */,
-				55A868FF1350A71A0036AA4B /* PBXTargetDependency */,
 			);
 			name = Stacksmith;
 			productInstallPath = "$(HOME)/Applications";
@@ -1527,7 +1716,7 @@
 				ORGANIZATIONNAME = "Uli Kusterer";
 			};
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Stacksmith" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -1537,10 +1726,6 @@
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Propaganda */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 55A868F31350A6C40036AA4B /* Products */;
-					ProjectRef = 55A868F21350A6C40036AA4B /* ForgeFramework.xcodeproj */;
-				},
 				{
 					ProductGroup = 55A0BDC6113B67CC0095CAA6 /* Products */;
 					ProjectRef = 55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */;
@@ -1560,20 +1745,6 @@
 			fileType = "compiled.mach-o.executable";
 			path = stackimport;
 			remoteRef = 55A0BDC9113B67CC0095CAA6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		55A868FB1350A6C40036AA4B /* ForgeFramework.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ForgeFramework.framework;
-			remoteRef = 55A868FA1350A6C40036AA4B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		55A868FD1350A6C40036AA4B /* ForgeFrameworkTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ForgeFrameworkTests.octest;
-			remoteRef = 55A868FC1350A6C40036AA4B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1872,6 +2043,7 @@
 				552365401344CA1D000145A0 /* WILDRecentCardPickerWindowController.xib in Resources */,
 				55EA6386134758B40039FE0D /* WILDBackgroundInfoWindowController.xib in Resources */,
 				55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */,
+				553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1962,7 +2134,45 @@
 				55EA6383134756D00039FE0D /* WILDBackgroundInfoWindowController.m in Sources */,
 				55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */,
 				55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */,
-				55D3404E135225E3006A197D /* LEOMsgInstructionsGeneric.c in Sources */,
+				553C46EE13577334000219FA /* Forge.cpp in Sources */,
+				553C46EF13577334000219FA /* CCodeBlock.cpp in Sources */,
+				553C46F013577334000219FA /* CVariableEntry.cpp in Sources */,
+				553C46F113577334000219FA /* CToken.cpp in Sources */,
+				553C46F213577334000219FA /* CParser.cpp in Sources */,
+				553C46F313577334000219FA /* CParseTree.cpp in Sources */,
+				553C46F413577334000219FA /* CNode.cpp in Sources */,
+				553C46F513577334000219FA /* CValueNode.cpp in Sources */,
+				553C46F613577334000219FA /* CCommandNode.cpp in Sources */,
+				553C46F713577334000219FA /* CPushValueCommandNode.cpp in Sources */,
+				553C46F813577334000219FA /* CAssignCommandNode.cpp in Sources */,
+				553C46F913577334000219FA /* CPutCommandNode.cpp in Sources */,
+				553C46FA13577334000219FA /* CGetParamCommandNode.cpp in Sources */,
+				553C46FB13577334000219FA /* CPrintCommandNode.cpp in Sources */,
+				553C46FC13577334000219FA /* CReturnCommandNode.cpp in Sources */,
+				553C46FD13577334000219FA /* CFunctionCallNode.cpp in Sources */,
+				553C46FE13577334000219FA /* COperatorNode.cpp in Sources */,
+				553C46FF13577334000219FA /* CAddCommandNode.cpp in Sources */,
+				553C470013577334000219FA /* CLineMarkerNode.cpp in Sources */,
+				553C470113577334000219FA /* CAssignChunkArrayNode.cpp in Sources */,
+				553C470213577334000219FA /* CGetArrayItemCountNode.cpp in Sources */,
+				553C470313577334000219FA /* CGetArrayItemNode.cpp in Sources */,
+				553C470413577334000219FA /* CMakeChunkRefNode.cpp in Sources */,
+				553C470513577334000219FA /* CMakeChunkConstNode.cpp in Sources */,
+				553C470613577334000219FA /* CCodeBlockNode.cpp in Sources */,
+				553C470713577334000219FA /* CFunctionDefinitionNode.cpp in Sources */,
+				553C470813577334000219FA /* CWhileLoopNode.cpp in Sources */,
+				553C470913577334000219FA /* CIfNode.cpp in Sources */,
+				553C470A13577334000219FA /* LEOValue.c in Sources */,
+				553C470B13577334000219FA /* LEOInterpreter.c in Sources */,
+				553C470C13577334000219FA /* LEOInstructions.c in Sources */,
+				553C470D13577334000219FA /* LEOScript.c in Sources */,
+				553C470E13577334000219FA /* LEODebugger.c in Sources */,
+				553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */,
+				553C471013577334000219FA /* LEOChunks.c in Sources */,
+				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
+				553C471213577334000219FA /* LEOMsgInstructions.c in Sources */,
+				553C47141357779C000219FA /* LEOMsgInstructionsStacksmith.m in Sources */,
+				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1973,11 +2183,6 @@
 			isa = PBXTargetDependency;
 			name = stackimport;
 			targetProxy = 55A0BDCC113B68250095CAA6 /* PBXContainerItemProxy */;
-		};
-		55A868FF1350A71A0036AA4B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ForgeFramework;
-			targetProxy = 55A868FE1350A71A0036AA4B /* PBXContainerItemProxy */;
 		};
 		55E23C00133FAC0200E6B444 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2041,6 +2246,14 @@
 				55382F6A117238350006B381 /* English */,
 			);
 			name = WILDFieldInfoWindowController.xib;
+			sourceTree = "<group>";
+		};
+		553C471813577A2E000219FA /* WILDMessageBox.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				553C471913577A2E000219FA /* English */,
+			);
+			name = WILDMessageBox.xib;
 			sourceTree = "<group>";
 		};
 		55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */ = {
@@ -2133,6 +2346,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(CONTENTS_FOLDER_PATH)/Frameworks",
+					"\"$(SRCROOT)/../Forge/ForgeFramework/build/Debug\"",
+					"\"$(SRCROOT)/build/Debug/Stacksmith.app/Contents/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2183,6 +2398,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(CONTENTS_FOLDER_PATH)/Frameworks",
+					"\"$(SRCROOT)/../Forge/ForgeFramework/build/Debug\"",
+					"\"$(SRCROOT)/build/Debug/Stacksmith.app/Contents/Frameworks\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

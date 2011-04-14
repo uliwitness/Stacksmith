@@ -23,7 +23,7 @@
 #import <Quartz/Quartz.h>
 #import "WILDXMLUtils.h"
 #import "NSFileManager+NameForTempFile.h"
-#import <ForgeFramework/ForgeFramework.h>
+#import "Forge.h"
 
 
 @implementation WILDDocument

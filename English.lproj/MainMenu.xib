@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">10J567</string>
+		<string key="IBDocument.SystemVersion">10J869</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">462.00</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">1305</string>
@@ -889,6 +889,25 @@
 									<reference key="NSMenu" ref="128094225"/>
 									<string key="NSTitle">Last Card</string>
 									<string key="NSKeyEquiv">4</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="303950884">
+									<reference key="NSMenu" ref="128094225"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="482690166">
+									<reference key="NSMenu" ref="128094225"/>
+									<string key="NSTitle">Message</string>
+									<string key="NSKeyEquiv">M</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
@@ -2695,6 +2714,14 @@
 					</object>
 					<int key="connectionID">716</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">orderFrontMessageBox:</string>
+						<reference key="source" ref="493422503"/>
+						<reference key="destination" ref="482690166"/>
+					</object>
+					<int key="connectionID">720</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -3752,6 +3779,8 @@
 							<reference ref="236896286"/>
 							<reference ref="771830873"/>
 							<reference ref="636795243"/>
+							<reference ref="303950884"/>
+							<reference ref="482690166"/>
 						</object>
 						<reference key="parent" ref="183012325"/>
 					</object>
@@ -4034,6 +4063,16 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">712</int>
 						<reference key="object" ref="636795243"/>
+						<reference key="parent" ref="128094225"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">717</int>
+						<reference key="object" ref="303950884"/>
+						<reference key="parent" ref="128094225"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">718</int>
+						<reference key="object" ref="482690166"/>
 						<reference key="parent" ref="128094225"/>
 					</object>
 				</object>
@@ -4331,6 +4370,8 @@
 					<string>707.IBPluginDependency</string>
 					<string>710.IBPluginDependency</string>
 					<string>712.IBPluginDependency</string>
+					<string>717.IBPluginDependency</string>
+					<string>718.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>72.ImportedFromIB2</string>
 					<string>73.IBPluginDependency</string>
@@ -4650,6 +4691,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -4689,7 +4732,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">716</int>
+			<int key="maxID">720</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4809,12 +4852,14 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>goHelp:</string>
+							<string>orderFrontMessageBox:</string>
 							<string>orderFrontStandardAboutPanel:</string>
 							<string>toggleBackgroundEditMode:</string>
 							<string>toolsMenuRowDummyAction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4826,6 +4871,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>goHelp:</string>
+							<string>orderFrontMessageBox:</string>
 							<string>orderFrontStandardAboutPanel:</string>
 							<string>toggleBackgroundEditMode:</string>
 							<string>toolsMenuRowDummyAction:</string>
@@ -4834,6 +4880,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">goHelp:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">orderFrontMessageBox:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

@@ -12,7 +12,7 @@
 #import "WILDStack.h"
 #import "WILDPartContents.h"
 #import "WILDNotifications.h"
-#import <ForgeFramework/ForgeFramework.h>
+#import "Forge.h"
 
 
 static NSInteger UKMinimum( NSInteger a, NSInteger b )

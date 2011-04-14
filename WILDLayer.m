@@ -14,7 +14,7 @@
 #import "WILDStack.h"
 #import "WILDNotifications.h"
 #import "UKRandomInteger.h"
-#import <ForgeFramework/ForgeFramework.h>
+#import "Forge.h"
 
 
 @implementation WILDLayer
@@ -486,7 +486,7 @@
 			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
 		}
 		if( LEOParserGetLastErrorMessage() )
-			NSLog( @"Script Error: %@", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
+			NSLog( @"Script Error: %s", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
 		else
 		{
 			LEOScriptRelease( mScriptObject );
