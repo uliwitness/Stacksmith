@@ -632,7 +632,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		if( LEOParserGetLastErrorMessage() )
 		{
 			if( showError )
-				NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", LEOParserGetLastErrorMessage() );
+				NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] );
 			if( mScriptObject )
 			{
 				LEOScriptRelease( mScriptObject );
@@ -774,7 +774,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
 		LEORunInContext( theHandler->instructions, &ctx );
 		if( ctx.errMsg[0] != 0 )
-			NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", ctx.errMsg );
+			NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: ctx.errMsg encoding: NSUTF8StringEncoding] );
 	}
 	else
 	{

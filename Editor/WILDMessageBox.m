@@ -80,7 +80,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	
 	if( LEOParserGetLastErrorMessage() )
 	{
-		NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", LEOParserGetLastErrorMessage() );
+		NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] );
 	}
 	else
 	{
@@ -100,7 +100,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		LEORunInContext( theHandler->instructions, &ctx );
 		if( ctx.errMsg[0] != 0 )
 		{
-			NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", ctx.errMsg );
+			NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: ctx.errMsg encoding: NSUTF8StringEncoding] );
 		}
 		else
 		{

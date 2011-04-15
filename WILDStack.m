@@ -306,7 +306,7 @@
 		if( LEOParserGetLastErrorMessage() )
 		{
 			if( showError )
-				NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", LEOParserGetLastErrorMessage() );
+				NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] );
 			if( mScriptObject )
 			{
 				LEOScriptRelease( mScriptObject );
