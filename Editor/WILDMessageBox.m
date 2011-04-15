@@ -130,7 +130,10 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 
 -(IBAction)	orderFrontMessageBox: (id)sender
 {
-	[self showWindow: self];
+	if( [[self window] isVisible] )
+		[[self window] orderOut: sender];
+	else
+		[self showWindow: self];
 }
 
 @end
