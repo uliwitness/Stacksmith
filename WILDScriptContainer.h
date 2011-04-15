@@ -21,7 +21,7 @@ struct LEOScript;
 -(NSString*)			displayName;	// Name of this item to display in window titles etc.
 -(NSImage*)				displayIcon;	// Small icon to display for this item in popups etc.
 
--(struct LEOScript*)	scriptObject;
+-(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError;
 
 @end
 

@@ -618,7 +618,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(struct LEOScript*)	scriptObject
+-(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError
 {
 	if( !mScriptObject )
 	{
@@ -631,8 +631,8 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		}
 		if( LEOParserGetLastErrorMessage() )
 		{
-			NSLog( @"Script Error: %s", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
-			
+			if( showError )
+				NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", LEOParserGetLastErrorMessage() );
 			if( mScriptObject )
 			{
 				LEOScriptRelease( mScriptObject );
@@ -647,7 +647,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(NSString*)	resultFromSendingMessageWithFormat: (NSString*)fmt, ...
 {
-	LEOScript*	theScript = [self scriptObject];
+	LEOScript*	theScript = [self scriptObjectShowingErrorMessage: YES];
 	NSString*	resultString = nil;
 	LEOContext	ctx;
 	NSArray*	parts = [fmt componentsSeparatedByString: @" "];
@@ -769,16 +769,17 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	// Send message:
 	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [[mStack document] contextGroup], [msg UTF8String] );
 	LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
-	if( !theHandler )
+	if( theHandler )
 	{
-		LEOCleanUpContext( &ctx );
-		return nil;	// TODO: Forward message to mLayer.
+		LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
+		LEORunInContext( theHandler->instructions, &ctx );
+		if( ctx.errMsg[0] != 0 )
+			NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", ctx.errMsg );
 	}
-	
-	LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
-	LEORunInContext( theHandler->instructions, &ctx );
-	if( ctx.errMsg[0] != 0 )
-		NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", ctx.errMsg );
+	else
+	{
+		// TODO: Pass handler call to mLayer.
+	}
 	
 	char	returnValue[1024] = { 0 };
 	LEOGetValueAsString( ctx.stack, returnValue, sizeof(returnValue), &ctx );

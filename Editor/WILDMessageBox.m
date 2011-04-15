@@ -102,10 +102,12 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		{
 			NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", ctx.errMsg );
 		}
-		
-		char	returnValue[1024] = { 0 };
-		LEOGetValueAsString( ctx.stack, returnValue, sizeof(returnValue), &ctx );
-		resultString = [[[NSString alloc] initWithBytes: returnValue length: strlen(returnValue) encoding: NSUTF8StringEncoding] autorelease];
+		else
+		{
+			char	returnValue[1024] = { 0 };
+			LEOGetValueAsString( ctx.stack, returnValue, sizeof(returnValue), &ctx );
+			resultString = [[[NSString alloc] initWithBytes: returnValue length: strlen(returnValue) encoding: NSUTF8StringEncoding] autorelease];
+		}
 		
 		LEOCleanUpContext( &ctx );
 	}

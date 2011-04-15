@@ -474,7 +474,7 @@
 }
 
 
--(struct LEOScript*)	scriptObject
+-(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError
 {
 	if( !mScriptObject )
 	{
@@ -486,11 +486,14 @@
 			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
 		}
 		if( LEOParserGetLastErrorMessage() )
-			NSLog( @"Script Error: %s", LEOParserGetLastErrorMessage() );	// TODO: Attach to object and display to user asynchronously?
-		else
 		{
-			LEOScriptRelease( mScriptObject );
-			mScriptObject = NULL;
+			if( showError )
+				NSRunAlertPanel( @"Script Error", @"%s", @"OK", @"", @"", LEOParserGetLastErrorMessage() );
+			if( mScriptObject )
+			{
+				LEOScriptRelease( mScriptObject );
+				mScriptObject = NULL;
+			}
 		}
 	}
 	
