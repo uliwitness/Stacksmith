@@ -445,16 +445,6 @@
 			name = "Copy Included Stacks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		55A869001350A7600036AA4B /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -1689,7 +1679,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Stacksmith" */;
 			buildPhases = (
-				55A869001350A7600036AA4B /* Copy Frameworks */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
@@ -2343,12 +2332,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(CONTENTS_FOLDER_PATH)/Frameworks",
-					"\"$(SRCROOT)/../Forge/ForgeFramework/build/Debug\"",
-					"\"$(SRCROOT)/build/Debug/Stacksmith.app/Contents/Frameworks\"",
-				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -2395,12 +2378,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(CONTENTS_FOLDER_PATH)/Frameworks",
-					"\"$(SRCROOT)/../Forge/ForgeFramework/build/Debug\"",
-					"\"$(SRCROOT)/build/Debug/Stacksmith.app/Contents/Frameworks\"",
-				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Stacksmith_Prefix.pch;
