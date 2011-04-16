@@ -50,6 +50,8 @@
 		
 		mCards = [[NSMutableArray alloc] initWithObjects: firstCard, nil];
 		mMarkedCards = [[NSMutableSet alloc] init];
+		
+		mName = [@"Untitled" retain];
 	}
 	
 	return self;
@@ -63,6 +65,9 @@
 		NSXMLElement*	elem = [theDoc rootElement];
 		
 		mID = WILDIntegerFromSubElementInElement( @"id", elem );
+		mName = [WILDStringFromSubElementInElement( @"name", elem ) retain];
+		if( !mName )
+			mName = [@"Untitled" retain];
 		
 		mUserLevel = WILDIntegerFromSubElementInElement( @"userLevel", elem );
 		
@@ -136,6 +141,7 @@
 	DESTROY_DEALLOC(mCards);
 	DESTROY_DEALLOC(mMarkedCards);
 	DESTROY_DEALLOC(mScript);
+	DESTROY_DEALLOC(mName);
 	
 	if( mScriptObject )
 	{
@@ -321,10 +327,7 @@
 
 -(NSString*)	displayName
 {
-	NSString	*	stackName = [[[mDocument fileURL] lastPathComponent] stringByDeletingPathExtension];
-	if( !stackName )
-		stackName = @"Untitled";
-	return [NSString stringWithFormat: @"Stack “%@”", stackName];
+	return [NSString stringWithFormat: @"Stack “%@”", [self name]];
 }
 
 
@@ -400,6 +403,7 @@
 												"<stack>\n"];
 	
 	[theString appendFormat: @"\t<id>%ld</id>\n", mID];
+	[theString appendFormat: @"\t<name>%l@</name>\n", WILDStringEscapedForXML(mName)];
 	
 	[theString appendFormat: @"\t<userLevel>%d</userLevel>\n", mUserLevel];
 	[theString appendFormat: @"\t<cantModify>%@</cantModify>\n", mCantModify ? @"<true />" : @"<false />"];
@@ -449,7 +453,7 @@
 {
 	NSString	*stackName = [[[mDocument fileName] lastPathComponent] stringByDeletingPathExtension];
 	if( stackName == nil )
-		stackName = @"Untitled";
+		stackName = mName;
 	return stackName;
 }
 
@@ -460,12 +464,29 @@
 		inName = [inName stringByAppendingPathExtension: @"xstk"];
 	if( [mDocument fileName] == nil )
 	{
-		
+		ASSIGN(mName,[inName lastPathComponent]);
 	}
 	else
 	{
 		[mDocument setFileName: [[[mDocument fileName] stringByDeletingLastPathComponent] stringByAppendingPathComponent: inName]];
 	}
+}
+
+
+-(NSString*)	textContents
+{
+	return @"";
+}
+
+
+-(void)	setTextContents: (NSString*)inString
+{
+	
+}
+
+-(void)	goThereInNewWindow: (BOOL)inNewWindow
+{
+	[[[mDocument windowControllers] objectAtIndex: 0] showWindow: self];
 }
 
 

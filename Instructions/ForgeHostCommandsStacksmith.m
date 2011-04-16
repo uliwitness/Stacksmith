@@ -7,18 +7,19 @@
 //
 
 #include "ForgeHostCommandsStacksmith.h"
+#include "ForgeWILDObjectValue.h"
+
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
 
 
 void	WILDGoInstruction( LEOContext* inContext )
 {
-	char	cardName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, cardName, sizeof(cardName), inContext );
+	LEOValuePtr			theValue = inContext->stackEndPtr -1;
+	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+		[(id<WILDObject>)theValue->object.object goThereInNewWindow: NO];
 	
-	printf( "go to \"%s\"\n", cardName );	// TODO: Actually implement "go" command here.
-	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
 	inContext->currentInstruction++;
 }
@@ -39,7 +40,7 @@ struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INS
 	{
 		EGoIdentifier, WILD_GO_INSTRUCTION,
 		{
-			{ EHostParamIdentifier, EToIdentifier, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParamIdentifier, EToIdentifier, EHostParameterOptional, WILD_GO_INSTRUCTION },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },

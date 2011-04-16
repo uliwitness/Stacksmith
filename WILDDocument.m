@@ -467,6 +467,43 @@
 }
 
 
+-(WILDStack*)	stackNamed: (NSString*)inName
+{
+	if( [inName rangeOfString: @"/"].location != NSNotFound )
+	{
+		if( [inName isEqualToString: [self fileName]] )
+			return [mStacks objectAtIndex: 0];
+		if( ![[inName stringByDeletingLastPathComponent] isEqualToString: [self fileName]] )
+			return nil;
+		else
+			inName = [inName lastPathComponent];
+	}
+	
+	for( WILDStack* currStack in mStacks )
+	{
+		if( [[currStack name] isEqualToString: inName] )
+			return currStack;
+	}
+	
+	if( [inName isEqualToString: [[self fileName] lastPathComponent]] )
+		return [mStacks objectAtIndex: 0];
+	
+	return nil;
+}
+
+
+-(WILDStack*)	stackWithID: (WILDObjectID)inID;
+{
+	for( WILDStack* currStack in mStacks )
+	{
+		if( [currStack stackID] == inID )
+			return currStack;
+	}
+	
+	return nil;
+}
+
+
 -(NSString*)	URLForImageNamed: (NSString*)theName
 {
 	NSURL*	theURL = [[self fileURL] URLByAppendingPathComponent: theName];

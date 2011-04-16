@@ -35,6 +35,9 @@
 -(void)			addFont: (NSString*)fontName withID: (WILDObjectID)fontID;
 -(void)			addStyleFormatWithID: (WILDObjectID)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray *)fontStyles;
 
+-(WILDStack*)	stackNamed: (NSString*)inName;
+-(WILDStack*)	stackWithID: (WILDObjectID)inID;
+
 -(WILDObjectID)	uniqueIDForStack;
 -(WILDObjectID)	uniqueIDForMedia;
 

@@ -7,6 +7,10 @@
 //
 
 #include "ForgeHostFunctionsStacksmith.h"
+#include "ForgeWILDObjectValue.h"
+#import "WILDDocument.h"
+#import "WILDStack.h"
+
 
 size_t	kFirstStacksmithHostFunctionInstruction = 0;
 
@@ -16,11 +20,32 @@ void	WILDStackInstruction( LEOContext* inContext )
 	char	stackName[1024] = { 0 };
 	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
 	
-	printf( "stack \"%s\"\n", stackName );	// TODO: Actually implement "stack" command here.
+	NSString	*	stackNameObj = [NSString stringWithUTF8String: stackName];
+	WILDStack	*	theStack = nil;
+	WILDDocument*	frontDoc = nil;
+	NSArray*		docs = [[NSDocumentController sharedDocumentController] documents];
+	for( WILDDocument* currDoc in docs )
+	{
+		if( [currDoc isKindOfClass: [WILDDocument class]] )
+		{
+			frontDoc = currDoc;
+			theStack = [frontDoc stackNamed: stackNameObj];
+			if( theStack )
+				break;
+		}
+	}
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( theStack )
+	{
+		LEOValuePtr	valueToReplace = inContext->stackEndPtr -1;
+		LEOCleanUpValue( valueToReplace, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( valueToReplace, theStack, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find stack \"%s\".", stackName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }
