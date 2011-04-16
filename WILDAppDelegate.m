@@ -17,6 +17,7 @@
 #import "WILDAboutPanelController.h"
 #import "WILDMessageBox.h"
 #import "Forge.h"
+#import "ForgeGlobalProperties.h"
 #import <openssl/err.h>
 
 
@@ -26,6 +27,7 @@
 {
 	LEOInitInstructionArray();
 	LEOAddInstructionsToInstructionArray( gMsgInstructions, gMsgInstructionNames, LEO_NUMBER_OF_MSG_INSTRUCTIONS, &kFirstMsgInstruction );
+	LEOAddInstructionsToInstructionArray( gGlobalPropertyInstructions, gGlobalPropertyInstructionNames, LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS, &kFirstGlobalPropertyInstruction );
 	
 	NSView	*	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect( 0, 0, 106, 32)] autorelease];
 	

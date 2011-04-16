@@ -1,5 +1,5 @@
 /*
- *  LEOMsgInstructionsStacksmith.c
+ *  ForgeMsgInstructionsStacksmith.c
  *  Leonie
  *
  *  Created by Uli Kusterer on 09.10.10.
@@ -8,7 +8,7 @@
  */
 
 /*!
-	@header LEOMsgInstructionsStacksmith
+	@header ForgeMsgInstructionsStacksmith
 	These functions implement the actual instructions the Leonie bytecode
 	interpreter actually understands. Or at least those that are not portable
 	between platforms.

@@ -329,7 +329,7 @@
 		553C471013577334000219FA /* LEOChunks.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E813577334000219FA /* LEOChunks.c */; };
 		553C471113577334000219FA /* LEOContextGroup.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46EA13577334000219FA /* LEOContextGroup.c */; };
 		553C471213577334000219FA /* LEOMsgInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46ED13577334000219FA /* LEOMsgInstructions.c */; };
-		553C47141357779C000219FA /* LEOMsgInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C47131357779C000219FA /* LEOMsgInstructionsStacksmith.m */; };
+		553C47141357779C000219FA /* ForgeMsgInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */; };
 		553C471713577989000219FA /* WILDMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C471613577989000219FA /* WILDMessageBox.m */; };
 		553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C471813577A2E000219FA /* WILDMessageBox.xib */; };
 		553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 553EB403131C83C6008BFBCE /* libcrypto.dylib */; };
@@ -344,6 +344,8 @@
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
+		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
+		5568665B1359C5ED00C364D6 /* ForgeGlobalProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = 5568665A1359C5EC00C364D6 /* ForgeGlobalProperties.c */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
 		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		55818A8F1332108300480D30 /* WILDBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 55818A8E1332108100480D30 /* WILDBackground.m */; };
@@ -839,7 +841,7 @@
 		553C46EB13577334000219FA /* LEOHandlerID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOHandlerID.h; path = ../../../Leonie/common/LEOHandlerID.h; sourceTree = "<group>"; };
 		553C46EC13577334000219FA /* LEOMsgInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOMsgInstructions.h; path = ../../../Leonie/generic/LEOMsgInstructions.h; sourceTree = "<group>"; };
 		553C46ED13577334000219FA /* LEOMsgInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOMsgInstructions.c; path = ../../../Leonie/generic/LEOMsgInstructions.c; sourceTree = "<group>"; };
-		553C47131357779C000219FA /* LEOMsgInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LEOMsgInstructionsStacksmith.m; path = Instructions/LEOMsgInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
+		553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeMsgInstructionsStacksmith.m; path = Instructions/ForgeMsgInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
 		553C471513577989000219FA /* WILDMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMessageBox.h; path = Editor/WILDMessageBox.h; sourceTree = "<group>"; };
 		553C471613577989000219FA /* WILDMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMessageBox.m; path = Editor/WILDMessageBox.m; sourceTree = "<group>"; };
 		553C471913577A2E000219FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDMessageBox.xib; sourceTree = "<group>"; };
@@ -867,6 +869,10 @@
 		555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileHandle+UKReadLinewise.m"; path = "../UliKit/NSFileHandle+UKReadLinewise.m"; sourceTree = SOURCE_ROOT; };
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
+		556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeGlobalPropertiesStacksmith.m; path = Instructions/ForgeGlobalPropertiesStacksmith.m; sourceTree = SOURCE_ROOT; };
+		556866591359C5BF00C364D6 /* ForgeGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeGlobalProperties.h; path = ../../../Leonie/generic/ForgeGlobalProperties.h; sourceTree = "<group>"; };
+		5568665A1359C5EC00C364D6 /* ForgeGlobalProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ForgeGlobalProperties.c; path = ../../../Leonie/generic/ForgeGlobalProperties.c; sourceTree = "<group>"; };
+		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
 		55818A77133199AC00480D30 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home.xstk; sourceTree = "<group>"; };
 		55818A8D1332108100480D30 /* WILDBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackground.h; sourceTree = "<group>"; };
@@ -919,7 +925,6 @@
 		55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardWindowController.h; path = Document/WILDCardWindowController.h; sourceTree = "<group>"; };
 		55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardWindowController.m; path = Document/WILDCardWindowController.m; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		55D3404C135225E3006A197D /* LEOMsgInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOMsgInstructions.h; path = ../../../Leonie/generic/LEOMsgInstructions.h; sourceTree = "<group>"; };
 		55D6B257115C16E700D17619 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDTextView.h; sourceTree = "<group>"; };
 		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
@@ -1163,8 +1168,7 @@
 		553C469D13577334000219FA /* Interpreter */ = {
 			isa = PBXGroup;
 			children = (
-				553C469E13577334000219FA /* Forge.h */,
-				553C469F13577334000219FA /* Forge.cpp */,
+				5568665D1359C8CB00C364D6 /* CInterface */,
 				553C46A013577334000219FA /* CCodeBlock.h */,
 				553C46A113577334000219FA /* CCodeBlock.cpp */,
 				553C46A213577334000219FA /* CVariableEntry.h */,
@@ -1176,8 +1180,8 @@
 				553C46A813577334000219FA /* CParser.cpp */,
 				553C46A913577334000219FA /* Parse Tree */,
 				553C46AA13577334000219FA /* Leonie */,
-				55D3404C135225E3006A197D /* LEOMsgInstructions.h */,
-				553C47131357779C000219FA /* LEOMsgInstructionsStacksmith.m */,
+				553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */,
+				556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */,
 			);
 			name = Interpreter;
 			path = ../Forge/ForgeFramework/ForgeFramework;
@@ -1379,6 +1383,18 @@
 				55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		5568665D1359C8CB00C364D6 /* CInterface */ = {
+			isa = PBXGroup;
+			children = (
+				553C469E13577334000219FA /* Forge.h */,
+				553C469F13577334000219FA /* Forge.cpp */,
+				5568665C1359C82200C364D6 /* ForgeTypes.h */,
+				556866591359C5BF00C364D6 /* ForgeGlobalProperties.h */,
+				5568665A1359C5EC00C364D6 /* ForgeGlobalProperties.c */,
+			);
+			name = CInterface;
 			sourceTree = "<group>";
 		};
 		55A0BAFE113B4DF20095CAA6 /* Standard Resources */ = {
@@ -2160,8 +2176,10 @@
 				553C471013577334000219FA /* LEOChunks.c in Sources */,
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
 				553C471213577334000219FA /* LEOMsgInstructions.c in Sources */,
-				553C47141357779C000219FA /* LEOMsgInstructionsStacksmith.m in Sources */,
+				553C47141357779C000219FA /* ForgeMsgInstructionsStacksmith.m in Sources */,
 				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
+				556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */,
+				5568665B1359C5ED00C364D6 /* ForgeGlobalProperties.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
