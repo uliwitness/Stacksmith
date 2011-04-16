@@ -346,6 +346,8 @@
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
 		5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = 5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */; };
+		556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */; };
+		55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
 		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		55818A8F1332108300480D30 /* WILDBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 55818A8E1332108100480D30 /* WILDBackground.m */; };
@@ -870,9 +872,13 @@
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeGlobalPropertiesStacksmith.m; path = Instructions/ForgeGlobalPropertiesStacksmith.m; sourceTree = SOURCE_ROOT; };
-		556866591359C5BF00C364D6 /* LEOGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; name = LEOGlobalProperties.h; path = ../../../Leonie/generic/LEOGlobalProperties.h; sourceTree = "<group>"; };
+		556866591359C5BF00C364D6 /* LEOGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOGlobalProperties.h; path = ../../../Leonie/generic/LEOGlobalProperties.h; sourceTree = "<group>"; };
 		5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOGlobalProperties.c; path = ../../../Leonie/generic/LEOGlobalProperties.c; sourceTree = "<group>"; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
+		5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeHostCommandsStacksmith.m; path = Instructions/ForgeHostCommandsStacksmith.m; sourceTree = SOURCE_ROOT; };
+		5568665F1359EBD000C364D6 /* ForgeHostCommandsStacksmith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeHostCommandsStacksmith.h; path = Instructions/ForgeHostCommandsStacksmith.h; sourceTree = SOURCE_ROOT; };
+		55686661135A161000C364D6 /* ForgeHostFunctionsStacksmith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeHostFunctionsStacksmith.h; path = Instructions/ForgeHostFunctionsStacksmith.h; sourceTree = SOURCE_ROOT; };
+		55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeHostFunctionsStacksmith.m; path = Instructions/ForgeHostFunctionsStacksmith.m; sourceTree = SOURCE_ROOT; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
 		55818A77133199AC00480D30 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home.xstk; sourceTree = "<group>"; };
 		55818A8D1332108100480D30 /* WILDBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackground.h; sourceTree = "<group>"; };
@@ -1182,6 +1188,10 @@
 				553C46AA13577334000219FA /* Leonie */,
 				553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */,
 				556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */,
+				5568665F1359EBD000C364D6 /* ForgeHostCommandsStacksmith.h */,
+				5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */,
+				55686661135A161000C364D6 /* ForgeHostFunctionsStacksmith.h */,
+				55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */,
 			);
 			name = Interpreter;
 			path = ../Forge/ForgeFramework/ForgeFramework;
@@ -2180,6 +2190,8 @@
 				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
 				556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */,
 				5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */,
+				556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */,
+				55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

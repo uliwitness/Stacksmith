@@ -6,7 +6,7 @@
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#include "ForgeGlobalProperties.h"
+#include "LEOGlobalProperties.h"
 
 
 void	LEOSetCursorInstruction( LEOContext* inContext )
@@ -40,4 +40,11 @@ const char*		gGlobalPropertyInstructionNames[LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTR
 {
 	"SetCursor",
 	"PushCursor"
+};
+
+
+extern struct TGlobalPropertyEntry	gHostGlobalProperties[(LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS / 2) +1] =
+{
+	{ ECursorIdentifier, SET_CURSOR_INSTR, PUSH_CURSOR_INSTR },
+	{ ELastIdentifier_Sentinel, INVALID_INSTR, INVALID_INSTR }
 };

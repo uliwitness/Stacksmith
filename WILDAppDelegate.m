@@ -17,17 +17,38 @@
 #import "WILDAboutPanelController.h"
 #import "WILDMessageBox.h"
 #import "Forge.h"
-#import "ForgeGlobalProperties.h"
+#import "LEOGlobalProperties.h"
+#import "ForgeHostCommandsStacksmith.h"
+#import "ForgeHostFunctionsStacksmith.h"
 #import <openssl/err.h>
 
 
 @implementation WILDAppDelegate
 
--(void)	applicationWillFinishLaunching:(NSNotification *)notification
+
+-(void)	initializeParser
 {
 	LEOInitInstructionArray();
+	
+	// Message box related instructions:
 	LEOAddInstructionsToInstructionArray( gMsgInstructions, gMsgInstructionNames, LEO_NUMBER_OF_MSG_INSTRUCTIONS, &kFirstMsgInstruction );
+	
+	// Global properties:
 	LEOAddInstructionsToInstructionArray( gGlobalPropertyInstructions, gGlobalPropertyInstructionNames, LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS, &kFirstGlobalPropertyInstruction );
+	LEOAddGlobalPropertiesAndOffsetInstructions( gHostGlobalProperties, kFirstGlobalPropertyInstruction );
+	
+	// Commands specific to this host application:
+	LEOAddInstructionsToInstructionArray( gStacksmithHostCommandInstructions, gStacksmithHostCommandInstructionNames, WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS, &kFirstStacksmithHostCommandInstruction );
+	LEOAddHostCommandsAndOffsetInstructions( gStacksmithHostCommands, kFirstStacksmithHostCommandInstruction );
+	
+	// Functions specific to this host application:
+	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, gStacksmithHostFunctionInstructionNames, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
+	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
+}
+
+-(void)	applicationWillFinishLaunching:(NSNotification *)notification
+{
+	[self initializeParser];
 	
 	NSView	*	oneRow = [[[NSView alloc] initWithFrame: NSMakeRect( 0, 0, 106, 32)] autorelease];
 	
