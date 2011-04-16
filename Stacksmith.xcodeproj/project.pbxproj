@@ -345,7 +345,7 @@
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
-		5568665B1359C5ED00C364D6 /* ForgeGlobalProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = 5568665A1359C5EC00C364D6 /* ForgeGlobalProperties.c */; };
+		5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = 5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
 		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		55818A8F1332108300480D30 /* WILDBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 55818A8E1332108100480D30 /* WILDBackground.m */; };
@@ -870,8 +870,8 @@
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeGlobalPropertiesStacksmith.m; path = Instructions/ForgeGlobalPropertiesStacksmith.m; sourceTree = SOURCE_ROOT; };
-		556866591359C5BF00C364D6 /* ForgeGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeGlobalProperties.h; path = ../../../Leonie/generic/ForgeGlobalProperties.h; sourceTree = "<group>"; };
-		5568665A1359C5EC00C364D6 /* ForgeGlobalProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ForgeGlobalProperties.c; path = ../../../Leonie/generic/ForgeGlobalProperties.c; sourceTree = "<group>"; };
+		556866591359C5BF00C364D6 /* LEOGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; name = LEOGlobalProperties.h; path = ../../../Leonie/generic/LEOGlobalProperties.h; sourceTree = "<group>"; };
+		5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOGlobalProperties.c; path = ../../../Leonie/generic/LEOGlobalProperties.c; sourceTree = "<group>"; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
 		55818A77133199AC00480D30 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home.xstk; sourceTree = "<group>"; };
@@ -1391,8 +1391,8 @@
 				553C469E13577334000219FA /* Forge.h */,
 				553C469F13577334000219FA /* Forge.cpp */,
 				5568665C1359C82200C364D6 /* ForgeTypes.h */,
-				556866591359C5BF00C364D6 /* ForgeGlobalProperties.h */,
-				5568665A1359C5EC00C364D6 /* ForgeGlobalProperties.c */,
+				556866591359C5BF00C364D6 /* LEOGlobalProperties.h */,
+				5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */,
 			);
 			name = CInterface;
 			sourceTree = "<group>";
@@ -2179,7 +2179,7 @@
 				553C47141357779C000219FA /* ForgeMsgInstructionsStacksmith.m in Sources */,
 				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
 				556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */,
-				5568665B1359C5ED00C364D6 /* ForgeGlobalProperties.c in Sources */,
+				5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
