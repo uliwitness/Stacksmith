@@ -35,13 +35,21 @@ void	WILDStackInstruction( LEOContext* inContext )
 		}
 	}
 	
+	BOOL	reportError = YES;
+	
+	if( !theStack )
+	{
+		if( [[NSApp delegate] openStandardStackNamed: stackNameObj] )
+			reportError = NO;
+	}
+	
 	if( theStack )
 	{
 		LEOValuePtr	valueToReplace = inContext->stackEndPtr -1;
 		LEOCleanUpValue( valueToReplace, kLEOInvalidateReferences, inContext );
 		LEOInitWILDObjectValue( valueToReplace, theStack, kLEOInvalidateReferences, inContext );
 	}
-	else
+	else if( reportError )
 	{
 		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find stack \"%s\".", stackName );
 		inContext->keepRunning = false;
