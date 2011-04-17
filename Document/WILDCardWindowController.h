@@ -24,6 +24,8 @@
 
 -(WILDStack*)	stack;
 
--(void)	goToCard: (WILDCard*)inCard;
+-(void)			goToCard: (WILDCard*)inCard;
+
+-(WILDCard*)	currentCard;
 
 @end

@@ -504,6 +504,15 @@
 }
 
 
+-(WILDCard*)	currentCard
+{
+	WILDDocument	*	theDoc = [self document];
+	if( [[theDoc windowControllers] count] == 0 )
+		[theDoc makeWindowControllers];
+	return [theDoc currentCard];
+}
+
+
 +(NSColor*)		peekOutlineColor
 {
 	return [NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22.pbm"]];

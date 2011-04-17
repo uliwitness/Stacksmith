@@ -831,6 +831,15 @@
 }
 
 
+-(WILDCard*)	currentCard
+{
+	if( [[self windowControllers] count] == 0 )
+		[self makeWindowControllers];
+	WILDCardWindowController*	theWC = [[self windowControllers] objectAtIndex: 0];
+	return [theWC currentCard];
+}
+
+
 +(WILDStack*)	frontStackNamed: (NSString*)stackName
 {
 	WILDStack	*	theStack = nil;

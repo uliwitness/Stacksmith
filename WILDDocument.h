@@ -13,6 +13,7 @@
 #import "WILDVisibleObject.h"
 
 @class WILDStack;
+@class WILDCard;
 
 
 @interface WILDDocument : NSDocument
@@ -70,6 +71,8 @@
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 
 -(struct LEOContextGroup*)	contextGroup;
+
+-(WILDCard*)	currentCard;
 
 +(WILDStack*)	frontStackNamed: (NSString*)stackName;	// If name is NIL, it grabs the main stack of that document.
 +(WILDStack*)	openStackNamed: (NSString*)stackName;

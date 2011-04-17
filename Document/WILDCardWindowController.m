@@ -92,4 +92,10 @@
 	[mCardViewController loadCard: inCard];
 }
 
+
+-(WILDCard*)	currentCard
+{
+	return [mCardViewController currentCard];
+}
+
 @end
