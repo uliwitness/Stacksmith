@@ -24,6 +24,7 @@
 #import "WILDXMLUtils.h"
 #import "NSFileManager+NameForTempFile.h"
 #import "Forge.h"
+#import "WILDSearchPaths.h"
 
 
 @implementation WILDDocument
@@ -469,13 +470,11 @@
 
 -(WILDStack*)	stackNamed: (NSString*)inName
 {
-	// TODO: Add support for looking up stacks without the file name suffix.
-	
 	if( [inName rangeOfString: @"/"].location != NSNotFound )
 	{
-		if( [inName isEqualToString: [self fileName]] )
+		if( [inName caseInsensitiveCompare: [self fileName]] != NSOrderedSame )
 			return [mStacks objectAtIndex: 0];
-		if( ![[inName stringByDeletingLastPathComponent] isEqualToString: [self fileName]] )
+		if( [[inName stringByDeletingLastPathComponent] caseInsensitiveCompare: [self fileName]] != NSOrderedSame )
 			return nil;
 		else
 			inName = [inName lastPathComponent];
@@ -483,11 +482,13 @@
 	
 	for( WILDStack* currStack in mStacks )
 	{
-		if( [[currStack name] isEqualToString: inName] )
+		if( [[[currStack name] stringByDeletingPathExtension] caseInsensitiveCompare: inName] == NSOrderedSame
+			|| [[currStack name] caseInsensitiveCompare: inName] == NSOrderedSame )
 			return currStack;
 	}
 	
-	if( [inName isEqualToString: [[self fileName] lastPathComponent]] )
+	if( [inName caseInsensitiveCompare: [[self fileName] lastPathComponent]] == NSOrderedSame
+		|| [inName caseInsensitiveCompare: [[[self fileName] lastPathComponent] stringByDeletingPathExtension]] == NSOrderedSame )
 		return [mStacks objectAtIndex: 0];
 	
 	return nil;
@@ -503,6 +504,12 @@
 	}
 	
 	return nil;
+}
+
+
+-(WILDStack*)	mainStack
+{
+	return [mStacks objectAtIndex: 0];
 }
 
 
@@ -821,6 +828,78 @@
 		mContextGroup = LEOContextGroupCreate();
 	
 	return mContextGroup;
+}
+
+
++(WILDStack*)	frontStackNamed: (NSString*)stackName
+{
+	WILDStack	*	theStack = nil;
+	WILDDocument*	frontDoc = nil;
+	NSArray*		docs = [[NSDocumentController sharedDocumentController] documents];
+	for( WILDDocument* currDoc in docs )
+	{
+		if( [currDoc isKindOfClass: [WILDDocument class]] )
+		{
+			frontDoc = currDoc;
+			if( stackName )
+				theStack = [frontDoc stackNamed: stackName];
+			else
+				theStack = [frontDoc mainStack];
+			if( theStack )
+				break;
+		}
+	}
+	
+	return theStack;
+}
+
+
++(WILDStack*)	openStackNamed: (NSString*)stackName
+{
+	NSString*	stackFilePath = stackName;
+	WILDStack*	theStack = [self frontStackNamed: stackName];
+	if( !theStack )
+	{
+		BOOL		isFolder = NO;
+		if( ![[NSFileManager defaultManager] fileExistsAtPath: stackName isDirectory: &isFolder] || !isFolder )
+		{
+			stackFilePath = [stackName stringByDeletingLastPathComponent];
+			if( ![[NSFileManager defaultManager] fileExistsAtPath: stackFilePath isDirectory: &isFolder] || !isFolder )
+			{
+				stackFilePath = nil;
+				for( NSString* currPath in [[WILDSearchPaths sharedSearchPaths] paths] )
+				{
+					NSString*	currFullPath = [currPath stringByAppendingPathComponent: stackName];
+					if( [[NSFileManager defaultManager] fileExistsAtPath: currFullPath isDirectory: &isFolder] && isFolder )
+						stackFilePath = currFullPath;
+					if( !stackFilePath )
+					{
+						currFullPath = [[currPath stringByAppendingPathComponent: stackName] stringByDeletingPathExtension];
+						if( [[NSFileManager defaultManager] fileExistsAtPath: currFullPath isDirectory: &isFolder] && isFolder )
+							stackFilePath = currFullPath;
+					}
+					if( !stackFilePath )
+					{
+						currFullPath = [[currPath stringByAppendingPathComponent: stackName] stringByAppendingPathExtension: @"xstk"];
+						if( [[NSFileManager defaultManager] fileExistsAtPath: currFullPath isDirectory: &isFolder] && isFolder )
+							stackFilePath = currFullPath;
+					}
+					
+					if( stackFilePath )
+						break;
+				}
+				
+				if( !stackFilePath )
+					return nil;
+			}
+		}
+		
+		NSError			*	err = nil;
+		WILDDocument	*	theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: stackFilePath] display: NO error: &err];
+		theStack = [theDoc stackNamed: stackName];
+	}
+	
+	return theStack;
 }
 
 @end

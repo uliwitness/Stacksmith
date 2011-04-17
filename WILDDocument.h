@@ -37,6 +37,7 @@
 
 -(WILDStack*)	stackNamed: (NSString*)inName;
 -(WILDStack*)	stackWithID: (WILDObjectID)inID;
+-(WILDStack*)	mainStack;
 
 -(WILDObjectID)	uniqueIDForStack;
 -(WILDObjectID)	uniqueIDForMedia;
@@ -49,10 +50,10 @@
 -(NSURL*)		URLForImageNamed: (NSString*)theName;
 -(NSImage*)		imageForPatternAtIndex: (NSInteger)idx;
 
--(void)	loadStandardResourceTableReturningError: (NSError**)outError;
--(void)	addMediaFile: (NSString*)fileName withType: (NSString*)type
-			name: (NSString*)iconName andID: (WILDObjectID)iconID hotSpot: (NSPoint)pos
-			imageOrCursor: (id)imgOrCursor isBuiltIn: (BOOL)isBuiltIn;
+-(void)			loadStandardResourceTableReturningError: (NSError**)outError;
+-(void)			addMediaFile: (NSString*)fileName withType: (NSString*)type
+					name: (NSString*)iconName andID: (WILDObjectID)iconID hotSpot: (NSPoint)pos
+					imageOrCursor: (id)imgOrCursor isBuiltIn: (BOOL)isBuiltIn;
 -(NSImage*)		pictureOfType: (NSString*)typ name: (NSString*)theName;
 -(NSImage*)		pictureOfType: (NSString*)typ id: (WILDObjectID)theID;
 -(NSInteger)	numberOfPictures;
@@ -69,5 +70,8 @@
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 
 -(struct LEOContextGroup*)	contextGroup;
+
++(WILDStack*)	frontStackNamed: (NSString*)stackName;	// If name is NIL, it grabs the main stack of that document.
++(WILDStack*)	openStackNamed: (NSString*)stackName;
 
 @end

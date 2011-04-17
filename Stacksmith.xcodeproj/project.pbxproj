@@ -349,6 +349,7 @@
 		556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */; };
 		55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */; };
 		55686666135A383A00C364D6 /* ForgeWILDObjectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686664135A383300C364D6 /* ForgeWILDObjectValue.m */; };
+		55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686668135ADC3000C364D6 /* WILDSearchPaths.m */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
 		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		55818A8F1332108300480D30 /* WILDBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 55818A8E1332108100480D30 /* WILDBackground.m */; };
@@ -882,6 +883,8 @@
 		55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeHostFunctionsStacksmith.m; path = Instructions/ForgeHostFunctionsStacksmith.m; sourceTree = SOURCE_ROOT; };
 		55686664135A383300C364D6 /* ForgeWILDObjectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeWILDObjectValue.m; path = Instructions/ForgeWILDObjectValue.m; sourceTree = SOURCE_ROOT; };
 		55686665135A383700C364D6 /* ForgeWILDObjectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeWILDObjectValue.h; path = Instructions/ForgeWILDObjectValue.h; sourceTree = SOURCE_ROOT; };
+		55686667135ADC2B00C364D6 /* WILDSearchPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDSearchPaths.h; sourceTree = "<group>"; };
+		55686668135ADC3000C364D6 /* WILDSearchPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDSearchPaths.m; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
 		55818A77133199AC00480D30 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home.xstk; sourceTree = "<group>"; };
 		55818A8D1332108100480D30 /* WILDBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackground.h; sourceTree = "<group>"; };
@@ -1056,6 +1059,8 @@
 				2A37F4ACFDCFA73011CA2CEA /* WILDDocument.m */,
 				552365361344B0B9000145A0 /* WILDRecentCardsList.h */,
 				552365371344B0B9000145A0 /* WILDRecentCardsList.m */,
+				55686667135ADC2B00C364D6 /* WILDSearchPaths.h */,
+				55686668135ADC3000C364D6 /* WILDSearchPaths.m */,
 				558DCD1F115571FE002C9195 /* WILDNotifications.h */,
 				558DCD20115571FE002C9195 /* WILDNotifications.m */,
 				5542CE3B113ADFBC00555C64 /* Document */,
@@ -2198,6 +2203,7 @@
 				556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */,
 				55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */,
 				55686666135A383A00C364D6 /* ForgeWILDObjectValue.m in Sources */,
+				55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

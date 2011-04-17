@@ -486,6 +486,8 @@
 
 -(void)	goThereInNewWindow: (BOOL)inNewWindow
 {
+	if( [[mDocument windowControllers] count] == 0 )
+		[mDocument makeWindowControllers];
 	[[[mDocument windowControllers] objectAtIndex: 0] showWindow: self];	// TODO: Look up the right window for this stack.
 }
 

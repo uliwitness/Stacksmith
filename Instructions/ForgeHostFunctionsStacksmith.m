@@ -21,52 +21,15 @@ void	WILDStackInstruction( LEOContext* inContext )
 	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
 	
 	NSString	*	stackNameObj = [NSString stringWithUTF8String: stackName];
-	WILDStack	*	theStack = nil;
-	WILDDocument*	frontDoc = nil;
-	NSArray*		docs = [[NSDocumentController sharedDocumentController] documents];
-	for( WILDDocument* currDoc in docs )
-	{
-		if( [currDoc isKindOfClass: [WILDDocument class]] )
-		{
-			frontDoc = currDoc;
-			theStack = [frontDoc stackNamed: stackNameObj];
-			if( theStack )
-				break;
-		}
-	}
-	
-	BOOL	reportError = YES;
-	
-	if( !theStack )
-	{
-		if( [[NSApp delegate] openStandardStackNamed: stackNameObj] )
-			reportError = NO;
-		else
-		{
-			NSError		*	theError = nil;
-			NSDocument	*	theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: stackNameObj]
-																										 display: YES error: &theError];
-			if( !theDoc )
-			{
-				theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: [stackNameObj stringByAppendingString: @".xstk"]]
-																										 display: YES error: &theError];
-			}
-			
-			if( theDoc )
-			{
-				[theDoc showWindows];
-				reportError = NO;
-			}
-		}
-	}
-	
+	WILDStack	*	theStack = [WILDDocument openStackNamed: stackNameObj];
+		
 	if( theStack )
 	{
 		LEOValuePtr	valueToReplace = inContext->stackEndPtr -1;
 		LEOCleanUpValue( valueToReplace, kLEOInvalidateReferences, inContext );
 		LEOInitWILDObjectValue( valueToReplace, theStack, kLEOInvalidateReferences, inContext );
 	}
-	else if( reportError )
+	else
 	{
 		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find stack \"%s\".", stackName );
 		inContext->keepRunning = false;
