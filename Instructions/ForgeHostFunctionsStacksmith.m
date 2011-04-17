@@ -41,6 +41,23 @@ void	WILDStackInstruction( LEOContext* inContext )
 	{
 		if( [[NSApp delegate] openStandardStackNamed: stackNameObj] )
 			reportError = NO;
+		else
+		{
+			NSError		*	theError = nil;
+			NSDocument	*	theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: stackNameObj]
+																										 display: YES error: &theError];
+			if( !theDoc )
+			{
+				theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: [stackNameObj stringByAppendingString: @".xstk"]]
+																										 display: YES error: &theError];
+			}
+			
+			if( theDoc )
+			{
+				[theDoc showWindows];
+				reportError = NO;
+			}
+		}
 	}
 	
 	if( theStack )
