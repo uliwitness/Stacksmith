@@ -9,6 +9,7 @@
 #import "WILDCard.h"
 #import "WILDXMLUtils.h"
 #import "WILDStack.h"
+#import "WILDCardWindowController.h"
 
 
 @implementation WILDCard
@@ -214,6 +215,28 @@
 	
 	[theString appendFormat: @"\t<owner>%ld</owner>\n", [mOwner backgroundID]];
 	[theString appendFormat: @"\t<marked>%@</marked>\n", (mMarked ? @"<true />" : @"<false />")];	// Only used for copy/paste. The canonical value for the "marked" property is kept in the stack's card list.
+}
+
+
+-(NSString*)	textContents
+{
+	return @"";
+}
+
+
+-(void)	setTextContents: (NSString*)inString
+{
+	
+}
+
+-(void)	goThereInNewWindow: (BOOL)inNewWindow
+{
+	WILDDocument	*	theDoc = [[self stack] document];
+	if( [[theDoc windowControllers] count] == 0 )
+		[theDoc makeWindowControllers];
+	WILDCardWindowController*	theWC = [[theDoc windowControllers] objectAtIndex: 0];
+	[theWC goToCard: self];
+	[theWC showWindow: self];	// TODO: Look up the right window for this stack.
 }
 
 @end

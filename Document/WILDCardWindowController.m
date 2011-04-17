@@ -86,4 +86,10 @@
 	return [[self window] frame];
 }
 
+
+-(void)	goToCard: (WILDCard*)inCard
+{
+	[mCardViewController loadCard: inCard];
+}
+
 @end

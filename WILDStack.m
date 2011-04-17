@@ -207,6 +207,18 @@
 }
 
 
+-(WILDCard*)	cardNamed: (NSString*)cardName
+{
+	for( WILDCard* theCd in mCards )
+	{
+		if( [[theCd name] caseInsensitiveCompare: cardName] == NSOrderedSame )
+			return theCd;
+	}
+	
+	return nil;
+}
+
+
 -(WILDObjectID)	uniqueIDForCardOrBackground
 {
 	BOOL			notUnique = YES;

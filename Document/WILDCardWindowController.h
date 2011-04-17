@@ -12,6 +12,7 @@
 @class WILDCardViewController;
 @class WILDWindowBodyView;
 @class WILDStack;
+@class WILDCard;
 
 
 @interface WILDCardWindowController : NSWindowController
@@ -22,5 +23,7 @@
 }
 
 -(WILDStack*)	stack;
+
+-(void)	goToCard: (WILDCard*)inCard;
 
 @end

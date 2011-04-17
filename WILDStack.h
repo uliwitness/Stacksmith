@@ -57,6 +57,7 @@
 
 -(NSArray*)			cards;
 -(WILDCard*)		cardWithID: (WILDObjectID)theID;
+-(WILDCard*)		cardNamed: (NSString*)cardName;
 
 -(NSArray*)			backgrounds;
 -(WILDBackground*)	backgroundWithID: (WILDObjectID)theID;

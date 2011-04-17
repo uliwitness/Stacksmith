@@ -56,14 +56,22 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 
 void	WILDCardInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	char	cardName[1024] = { 0 };
+	LEOGetValueAsString( inContext->stackEndPtr -1, cardName, sizeof(cardName), inContext );
 	
-	printf( "card \"%s\"\n", stackName );	// TODO: Actually implement "card" command here.
+	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDCard	*	theCard = [frontStack cardNamed: [NSString stringWithUTF8String: cardName]];
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( theCard )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, theCard, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find card \"%s\".", cardName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }
@@ -159,6 +167,58 @@ void	WILDBackgroundPartInstruction( LEOContext* inContext )
 }
 
 
+void	WILDNextCardInstruction( LEOContext* inContext )
+{
+	// TODO: Actually determine the next card.
+	
+	WILDCard	*	theCard = nil;
+	
+	LEOInitWILDObjectValue( inContext->stackEndPtr, theCard, kLEOInvalidateReferences, inContext );
+	inContext->stackEndPtr ++;
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDPreviousCardInstruction( LEOContext* inContext )
+{
+	// TODO: Actually determine the previous card.
+	
+	WILDCard	*	theCard = nil;
+	
+	LEOInitWILDObjectValue( inContext->stackEndPtr, theCard, kLEOInvalidateReferences, inContext );
+	inContext->stackEndPtr ++;
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDFirstCardInstruction( LEOContext* inContext )
+{
+	// TODO: Actually determine the first card.
+	
+	WILDCard	*	theCard = nil;
+	
+	LEOInitWILDObjectValue( inContext->stackEndPtr, theCard, kLEOInvalidateReferences, inContext );
+	inContext->stackEndPtr ++;
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDLastCardInstruction( LEOContext* inContext )
+{
+	// TODO: Actually determine the last card.
+	
+	WILDCard	*	theCard = nil;
+	
+	LEOInitWILDObjectValue( inContext->stackEndPtr, theCard, kLEOInvalidateReferences, inContext );
+	inContext->stackEndPtr ++;
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS] =
 {
 	WILDStackInstruction,
@@ -169,7 +229,11 @@ LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_F
 	WILDCardPartInstruction,
 	WILDBackgroundFieldInstruction,
 	WILDBackgroundButtonInstruction,
-	WILDBackgroundPartInstruction
+	WILDBackgroundPartInstruction,
+	WILDNextCardInstruction,
+	WILDPreviousCardInstruction,
+	WILDFirstCardInstruction,
+	WILDLastCardInstruction
 };
 
 const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS] =
@@ -182,7 +246,11 @@ const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNC
 	"WILDCardPartInstruction",
 	"WILDBackgroundFieldInstruction",
 	"WILDBackgroundButtonInstruction",
-	"WILDBackgroundPartInstruction"
+	"WILDBackgroundPartInstruction",
+	"WILDNextCardInstruction",
+	"WILDPreviousCardInstruction",
+	"WILDFirstCardInstruction",
+	"WILDLastCardInstruction"
 };
 
 struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS +1] =
@@ -261,6 +329,62 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 		EPartIdentifier, WILD_CARD_PART_INSTRUCTION,
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR }
+		}
+	},
+	{
+		ENextIdentifier, INVALID_INSTR,
+		{
+			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_NEXT_CARD_INSTRUCTION },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR }
+		}
+	},
+	{
+		EPreviousIdentifier, INVALID_INSTR,
+		{
+			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_PREVIOUS_CARD_INSTRUCTION },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR }
+		}
+	},
+	{
+		EFirstIdentifier, INVALID_INSTR,
+		{
+			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_FIRST_CARD_INSTRUCTION },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR }
+		}
+	},
+	{
+		ELastIdentifier, INVALID_INSTR,
+		{
+			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_LAST_CARD_INSTRUCTION },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR },
