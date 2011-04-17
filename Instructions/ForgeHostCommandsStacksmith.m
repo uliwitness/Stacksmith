@@ -8,6 +8,7 @@
 
 #include "ForgeHostCommandsStacksmith.h"
 #include "ForgeWILDObjectValue.h"
+#include "WILDDocument.h"
 
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
@@ -18,6 +19,14 @@ void	WILDGoInstruction( LEOContext* inContext )
 	LEOValuePtr			theValue = inContext->stackEndPtr -1;
 	if( theValue->base.isa == &kLeoValueTypeWILDObject )
 		[(id<WILDObject>)theValue->object.object goThereInNewWindow: NO];
+	else
+	{
+		char str[1024] = { 0 };
+		LEOGetValueAsString( theValue, str, sizeof(str), inContext );
+		NSString	*	stackName = [NSString stringWithUTF8String: str];
+		id<WILDObject>	theStack = [WILDDocument openStackNamed: stackName];
+		[theStack goThereInNewWindow: NO];
+	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
