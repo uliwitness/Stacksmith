@@ -469,6 +469,8 @@
 
 -(WILDStack*)	stackNamed: (NSString*)inName
 {
+	// TODO: Add support for looking up stacks without the file name suffix.
+	
 	if( [inName rangeOfString: @"/"].location != NSNotFound )
 	{
 		if( [inName isEqualToString: [self fileName]] )
