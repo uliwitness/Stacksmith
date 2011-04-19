@@ -34,14 +34,29 @@ void	WILDGoInstruction( LEOContext* inContext )
 }
 
 
+void	WILDVisualEffectInstruction( LEOContext* inContext )
+{
+	char str[1024] = { 0 };
+	LEOGetValueAsString( inContext->stackEndPtr -1, str, sizeof(str), inContext );
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	// TODO: Actually store the effect somewhere.
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOInstructionFuncPtr		gStacksmithHostCommandInstructions[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS] =
 {
-	WILDGoInstruction
+	WILDGoInstruction,
+	WILDVisualEffectInstruction
 };
 
 const char*					gStacksmithHostCommandInstructionNames[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS] =
 {
-	"WILDGoInstruction"
+	"WILDGoInstruction",
+	"WILDVisualEffectInstruction"
 };
 
 struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS +1] =
@@ -61,7 +76,21 @@ struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INS
 		}
 	},
 	{
-		ELastIdentifier_Sentinel, INVALID_INSTR, 0, 0,
+		EVisualIdentifier, WILD_VISUAL_EFFECT_INSTR, 0, 0,
+		{
+			{ EHostParamIdentifier, EEffectIdentifier, EHostParameterOptional, WILD_VISUAL_EFFECT_INSTR, 0, 0 },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 }
+		}
+	},
+	{
+		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0,
 		{
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
