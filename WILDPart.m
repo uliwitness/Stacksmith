@@ -1056,4 +1056,39 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	return outString;
 }
 
+
+-(NSString*)	textContents
+{
+	WILDCard*			theCard = [[self stack] currentCard];
+	WILDPartContents*	bgContents = nil;
+	WILDPartContents*	contents = nil;
+	
+	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO onCard: theCard forBackgroundEditing: NO];
+	return [contents text];
+}
+
+
+-(void)	setTextContents: (NSString*)inString
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
+															forKey: WILDAffectedPropertyKey]];
+	
+	WILDCard*			theCard = [[self stack] currentCard];
+	WILDPartContents*	bgContents = nil;
+	WILDPartContents*	contents = nil;
+	
+	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO onCard: theCard forBackgroundEditing: NO];
+	[contents setText: inString];
+
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
+															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
+}
+
+-(void)	goThereInNewWindow: (BOOL)inNewWindow
+{
+}
+
 @end

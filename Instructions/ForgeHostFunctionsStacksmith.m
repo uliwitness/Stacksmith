@@ -41,14 +41,35 @@ void	WILDStackInstruction( LEOContext* inContext )
 
 void	WILDBackgroundInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	WILDBackground	*	theBackground = nil;
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	char				backgroundName[1024] = { 0 };
 	
-	printf( "background \"%s\"\n", stackName );	// TODO: Actually implement "background" command here.
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		if( theNumber > 0 && theNumber <= [[frontStack backgrounds] count] )
+			theBackground = [[frontStack cards] objectAtIndex: theNumber -1];
+		else
+			snprintf( backgroundName, sizeof(backgroundName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, backgroundName, sizeof(backgroundName), inContext );
+		
+		theBackground = [frontStack backgroundNamed: [NSString stringWithUTF8String: backgroundName]];
+	}
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( theBackground )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, theBackground, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find background \"%s\".", backgroundName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }
@@ -92,14 +113,36 @@ void	WILDCardInstruction( LEOContext* inContext )
 
 void	WILDCardFieldInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	char			partName[1024] = { 0 };
+	WILDCard	*	theCard = [frontStack currentCard];
 	
-	printf( "card field \"%s\"\n", stackName );	// TODO: Actually implement "field" command here.
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		thePart = [theCard partAtIndex: theNumber -1 ofType: @"field"];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"field"];
+	}
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( thePart )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find field \"%s\".", partName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }
@@ -107,14 +150,36 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 
 void	WILDCardButtonInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	char			partName[1024] = { 0 };
+	WILDCard	*	theCard = [frontStack currentCard];
 	
-	printf( "card button \"%s\"\n", stackName );	// TODO: Actually implement "button" command here.
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		thePart = [theCard partAtIndex: theNumber -1 ofType: @"button"];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"button"];
+	}
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( thePart )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find button \"%s\".", partName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }
@@ -122,14 +187,36 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 
 void	WILDCardPartInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	char			partName[1024] = { 0 };
+	WILDCard	*	theCard = [frontStack currentCard];
 	
-	printf( "card part \"%s\"\n", stackName );	// TODO: Actually implement "part" command here.
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		thePart = [theCard partAtIndex: theNumber -1 ofType: nil];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: nil];
+	}
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( thePart )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find part \"%s\".", partName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }
@@ -137,14 +224,36 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 
 void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	WILDPart		*	thePart = nil;
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	char				partName[1024] = { 0 };
+	WILDBackground	*	theCard = [[frontStack currentCard] owningBackground];
 	
-	printf( "background field \"%s\"\n", stackName );	// TODO: Actually implement "field" command here.
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		thePart = [theCard partAtIndex: theNumber -1 ofType: @"field"];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"field"];
+	}
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( thePart )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find field \"%s\".", partName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }
@@ -152,14 +261,36 @@ void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 
 void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	WILDPart		*	thePart = nil;
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	char				partName[1024] = { 0 };
+	WILDBackground	*	theCard = [[frontStack currentCard] owningBackground];
 	
-	printf( "background button \"%s\"\n", stackName );	// TODO: Actually implement "button" command here.
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		thePart = [theCard partAtIndex: theNumber -1 ofType: @"button"];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"button"];
+	}
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( thePart )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find button \"%s\".", partName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }
@@ -167,14 +298,36 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 
 void	WILDBackgroundPartInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	WILDPart		*	thePart = nil;
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	char				partName[1024] = { 0 };
+	WILDBackground	*	theCard = [[frontStack currentCard] owningBackground];
 	
-	printf( "background part \"%s\"\n", stackName );	// TODO: Actually implement "part" command here.
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		thePart = [theCard partAtIndex: theNumber -1 ofType: nil];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: nil];
+	}
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	LEOPushEmptyValueOnStack( inContext );
+	if( thePart )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find part \"%s\".", partName );
+		inContext->keepRunning = false;
+	}
 	
 	inContext->currentInstruction++;
 }

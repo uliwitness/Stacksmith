@@ -61,6 +61,7 @@
 
 -(NSArray*)			backgrounds;
 -(WILDBackground*)	backgroundWithID: (WILDObjectID)theID;
+-(WILDBackground*)	backgroundNamed: (NSString*)cardName;
 
 -(NSSize)			cardSize;
 -(void)				setCardSize: (NSSize)inSize;

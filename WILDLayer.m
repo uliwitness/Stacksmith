@@ -357,6 +357,48 @@
 }
 
 
+-(WILDPart*)	partAtIndex: (NSUInteger)inPartIndex ofType: (NSString*)inPartType
+{
+	NSInteger	partCount = 0;
+	WILDPart*	foundPart = nil;
+	
+	for( WILDPart* currPart in mParts )
+	{
+		if( inPartType == nil || [[currPart partType] isEqualToString: inPartType] )
+		{
+			if( partCount == inPartIndex )
+			{
+				foundPart = currPart;
+				break;
+			}
+			partCount++;
+		}
+	}
+	
+	return foundPart;
+}
+
+
+-(WILDPart*)	partNamed: (NSString*)inPartName ofType: (NSString*)inPartType
+{
+	WILDPart*	foundPart = nil;
+	
+	for( WILDPart* currPart in mParts )
+	{
+		if( inPartType == nil || [[currPart partType] isEqualToString: inPartType] )
+		{
+			if( [[currPart name] caseInsensitiveCompare: inPartName] )
+			{
+				foundPart = currPart;
+				break;
+			}
+		}
+	}
+	
+	return foundPart;
+}
+
+
 -(void)	addNewPartFromXMLTemplate: (NSURL*)xmlFile
 {
 	NSError			*	outError = nil;

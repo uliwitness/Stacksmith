@@ -273,6 +273,18 @@
 }
 
 
+-(WILDBackground*)	backgroundNamed: (NSString*)cardName
+{
+	for( WILDBackground* theCd in mBackgrounds )
+	{
+		if( [[theCd name] caseInsensitiveCompare: cardName] == NSOrderedSame )
+			return theCd;
+	}
+	
+	return nil;
+}
+
+
 -(NSSize)	cardSize
 {
 	return mCardSize;
