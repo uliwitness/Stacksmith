@@ -46,7 +46,7 @@
 				<string>StacksmithLicense</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>Stack</string>
+			<string>StacksmithLicense</string>
 			<key>CFBundleTypeName</key>
 			<string>Stacksmith License Key</string>
 			<key>CFBundleTypeRole</key>

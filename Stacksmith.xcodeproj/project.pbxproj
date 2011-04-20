@@ -405,6 +405,7 @@
 		55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC644114CFAE000BAA09D /* CardIconSmall.png */; };
 		55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC645114CFAE000BAA09D /* FieldIconSmall.png */; };
 		55ED9471131D930500DB60D6 /* WILDLicensePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ED9470131D930500DB60D6 /* WILDLicensePanelController.m */; };
+		55F0E9DE135F6E1600170377 /* StacksmithLicense.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55F0E9DD135F6E1600170377 /* StacksmithLicense.icns */; };
 		55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */; };
 		55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
@@ -975,6 +976,7 @@
 		55EBC645114CFAE000BAA09D /* FieldIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FieldIconSmall.png; sourceTree = "<group>"; };
 		55ED946F131D930500DB60D6 /* WILDLicensePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDLicensePanelController.h; path = Windows/WILDLicensePanelController.h; sourceTree = "<group>"; };
 		55ED9470131D930500DB60D6 /* WILDLicensePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDLicensePanelController.m; path = Windows/WILDLicensePanelController.m; sourceTree = "<group>"; };
+		55F0E9DD135F6E1600170377 /* StacksmithLicense.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = StacksmithLicense.icns; sourceTree = "<group>"; };
 		55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDAboutPanelController.h; path = Windows/WILDAboutPanelController.h; sourceTree = "<group>"; };
 		55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDAboutPanelController.m; path = Windows/WILDAboutPanelController.m; sourceTree = "<group>"; };
 		55F2EAF1131DA26700913200 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDAboutPanelController.xib; sourceTree = "<group>"; };
@@ -1116,6 +1118,7 @@
 				55E3A6F911519B45008411BB /* HCSV.icns */,
 				55E3A6FA11519B45008411BB /* Stack.icns */,
 				557B182E113C5CD600F85327 /* OldStack.icns */,
+				55F0E9DD135F6E1600170377 /* StacksmithLicense.icns */,
 				55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
@@ -2069,6 +2072,7 @@
 				55EA6386134758B40039FE0D /* WILDBackgroundInfoWindowController.xib in Resources */,
 				55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */,
 				553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */,
+				55F0E9DE135F6E1600170377 /* StacksmithLicense.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
