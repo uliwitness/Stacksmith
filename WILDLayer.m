@@ -387,7 +387,7 @@
 	{
 		if( inPartType == nil || [[currPart partType] isEqualToString: inPartType] )
 		{
-			if( [[currPart name] caseInsensitiveCompare: inPartName] )
+			if( [[currPart name] caseInsensitiveCompare: inPartName] == NSOrderedSame )
 			{
 				foundPart = currPart;
 				break;
