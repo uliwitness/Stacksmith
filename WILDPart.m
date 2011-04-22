@@ -1068,7 +1068,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(void)	setTextContents: (NSString*)inString
+-(BOOL)	setTextContents: (NSString*)inString
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
@@ -1085,11 +1085,13 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
 															forKey: WILDAffectedPropertyKey]];
 	[self updateChangeCount: NSChangeDone];
+	
+	return YES;
 }
 
--(void)	goThereInNewWindow: (BOOL)inNewWindow
+-(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
-	// TODO: Indicate error, can't go to a part.
+	return NO;
 }
 
 

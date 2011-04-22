@@ -49,6 +49,15 @@ extern NSString*	WILDAffectedPartKey;	// The part that was added to the layer th
 
 
 // -----------------------------------------------------------------------------
+// Notifications when we change properties of cards/backgrounds:
+extern NSString*	WILDLayerWillChangeNotification;	// Layer has old state.
+extern NSString*	WILDLayerDidChangeNotification;		// Layer has new state.
+
+// Info dictionary keys:
+//					WILDAffectedPropertyKey
+
+
+// -----------------------------------------------------------------------------
 // Notifications when we change properties of parts:
 extern NSString*	WILDPartWillChangeNotification;	// Part has old state.
 extern NSString*	WILDPartDidChangeNotification;	// Part has new state.

@@ -499,20 +499,54 @@
 
 -(NSString*)	textContents
 {
-	return @"";
+	return nil;
 }
 
 
--(void)	setTextContents: (NSString*)inString
+-(BOOL)	setTextContents: (NSString*)inString
 {
-	
+	return NO;
 }
 
--(void)	goThereInNewWindow: (BOOL)inNewWindow
+-(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
 	if( [[mDocument windowControllers] count] == 0 )
 		[mDocument makeWindowControllers];
 	[[[mDocument windowControllers] objectAtIndex: 0] showWindow: self];	// TODO: Look up the right window for this stack.
+	return YES;
+}
+
+
+-(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName
+{
+	if( [inPropertyName isEqualToString: @"name"] )
+	{
+		return [self name];
+	}
+	else
+		return nil;
+}
+
+
+-(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName
+{
+	BOOL	propExists = YES;
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
+															forKey: WILDAffectedPropertyKey]];
+	if( [inPropertyName isEqualToString: @"name"] )
+		[self setName: inValue];
+	else
+		propExists = NO;
+
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
+															forKey: WILDAffectedPropertyKey]];
+	if( propExists )
+		[self updateChangeCount: NSChangeDone];
+	
+	return propExists;
 }
 
 

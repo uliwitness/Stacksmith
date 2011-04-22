@@ -34,6 +34,10 @@ NSString*	WILDLayerWillRemovePartNotification = @"WILDLayerWillRemovePart";
 
 NSString*	WILDAffectedPartKey = @"WILDAffectedPart";
 
+// Properties of card/background change:
+NSString*	WILDLayerWillChangeNotification = @"WILDLayerWillChange";
+NSString*	WILDLayerDidChangeNotification = @"WILDLayerDidChange";
+
 // Properties of part change:
 NSString*	WILDPartWillChangeNotification = @"WILDPartWillChange";
 NSString*	WILDPartDidChangeNotification = @"WILDPartDidChange";

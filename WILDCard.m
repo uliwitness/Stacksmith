@@ -10,6 +10,7 @@
 #import "WILDXMLUtils.h"
 #import "WILDStack.h"
 #import "WILDCardWindowController.h"
+#import "WILDNotifications.h"
 
 
 @implementation WILDCard
@@ -220,16 +221,16 @@
 
 -(NSString*)	textContents
 {
-	return @"";
+	return nil;
 }
 
 
--(void)	setTextContents: (NSString*)inString
+-(BOOL)	setTextContents: (NSString*)inString
 {
-	
+	return NO;
 }
 
--(void)	goThereInNewWindow: (BOOL)inNewWindow
+-(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
 	WILDDocument	*	theDoc = [[self stack] document];
 	if( [[theDoc windowControllers] count] == 0 )
@@ -237,6 +238,41 @@
 	WILDCardWindowController*	theWC = [[theDoc windowControllers] objectAtIndex: 0];
 	[theWC goToCard: self];
 	[theWC showWindow: self];	// TODO: Look up the right window for this stack.
+	
+	return YES;
+}
+
+
+-(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName
+{
+	if( [inPropertyName isEqualToString: @"name"] )
+	{
+		return [self name];
+	}
+	else
+		return nil;
+}
+
+
+-(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName
+{
+	BOOL	propExists = YES;
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
+															forKey: WILDAffectedPropertyKey]];
+	if( [inPropertyName isEqualToString: @"name"] )
+		[self setName: inValue];
+	else
+		propExists = NO;
+
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
+															forKey: WILDAffectedPropertyKey]];
+	if( propExists )
+		[self updateChangeCount: NSChangeDone];
+	
+	return propExists;
 }
 
 @end

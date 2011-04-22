@@ -15,9 +15,9 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 @protocol WILDObject <NSObject>
 
 -(NSString*)	textContents;
--(void)			setTextContents: (NSString*)inString;
+-(BOOL)			setTextContents: (NSString*)inString;
 
--(void)			goThereInNewWindow: (BOOL)inNewWindow;
+-(BOOL)			goThereInNewWindow: (BOOL)inNewWindow;
 
 -(id)			valueForWILDPropertyNamed: (NSString*)inPropertyName;
 -(BOOL)			setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName;

@@ -96,6 +96,12 @@ LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* in
 {
 	char*		endPtr = NULL;
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	LEONumber	num = strtod( str, &endPtr );
 	if( endPtr != (str +strlen(str)) )
 		LEOCantGetValueAsNumber( self, inContext );
@@ -107,6 +113,12 @@ LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* 
 {
 	char*		endPtr = NULL;
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	LEOInteger	num = strtoll( str, &endPtr, 10 );
 	if( endPtr != (str +strlen(str)) )
 		LEOCantGetValueAsInteger( self, inContext );
@@ -116,13 +128,26 @@ LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* 
 
 void	LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext )
 {
-	strncpy( outBuf, [[(id<WILDObject>)self->object.object textContents] UTF8String], bufSize );
+	const char*		str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
+	strncpy( outBuf, str, bufSize );
 }
 
 
 bool	LEOGetWILDObjectValueAsBoolean( LEOValuePtr self, struct LEOContext* inContext )
 {
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	if( strcasecmp( str, "true" ) == 0 )
 		return true;
 	else if( strcasecmp( str, "false" ) == 0 )
@@ -138,6 +163,12 @@ void	LEOGetWILDObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType
 										char* outBuf, size_t bufSize, struct LEOContext* inContext )
 {
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	size_t		outChunkStart = 0,
 				outChunkEnd = 0,
 				outDelChunkStart = 0,
@@ -156,25 +187,41 @@ void	LEOGetWILDObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType
 
 void	LEOSetWILDObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, struct LEOContext* inContext )
 {
-	[(id<WILDObject>)self->object.object setTextContents:[NSString stringWithFormat: @"%g", inNumber]];
+	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithFormat: @"%g", inNumber]] )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+	}
 }
 
 
 void	LEOSetWILDObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, struct LEOContext* inContext )
 {
-	[(id<WILDObject>)self->object.object setTextContents:[NSString stringWithFormat: @"%lld", inNumber]];
+	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithFormat: @"%lld", inNumber]] )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+	}
 }
 
 
 void	LEOSetWILDObjectValueAsString( LEOValuePtr self, const char* inBuf, struct LEOContext* inContext )
 {
-	[(id<WILDObject>)self->object.object setTextContents:[NSString stringWithUTF8String: inBuf]];
+	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithUTF8String: inBuf]] )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+	}
 }
 
 
 void	LEOSetWILDObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LEOContext* inContext )
 {
-	[(id<WILDObject>)self->object.object setTextContents:inBoolean ? @"true" : @"false"];
+	if( ![(id<WILDObject>)self->object.object setTextContents: inBoolean ? @"true" : @"false"] )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+	}
 }
 
 
@@ -183,6 +230,12 @@ void	LEOSetWILDObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
 								const char* inBuf, struct LEOContext* inContext )
 {
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	size_t		outChunkStart = 0,
 				outChunkEnd = 0,
 				outDelChunkStart = 0,
@@ -209,7 +262,12 @@ void	LEOSetWILDObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
 	memmove( newStr +outChunkStart +inBufLen, str +outChunkEnd, selfLen -outChunkEnd );	// Copy after chunk.
 	newStr[finalLen] = 0;
 	
-	[(id<WILDObject>)self->object.object setTextContents: [NSString stringWithUTF8String: newStr]];
+	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithUTF8String: newStr]] )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object's contents can't be changed." );
+		inContext->keepRunning = false;
+	}
+
 	free(newStr);
 }
 
@@ -219,6 +277,12 @@ void	LEOSetWILDObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 								const char* inBuf, struct LEOContext* inContext )
 {
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	size_t		inBufLen = inBuf ? strlen(inBuf) : 0,
 				selfLen = strlen( str ),
 				finalLen = 0,
@@ -232,7 +296,12 @@ void	LEOSetWILDObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 	memmove( newStr +inRangeStart +inBufLen, str +inRangeEnd, selfLen -inRangeEnd );	// Copy after chunk.
 	newStr[finalLen] = 0;
 	
-	[(id<WILDObject>)self->object.object setTextContents: [NSString stringWithUTF8String: newStr]];
+	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithUTF8String: newStr]] )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object's contents can't be changed." );
+		inContext->keepRunning = false;
+	}
+
 	free( newStr );
 }
 
@@ -249,13 +318,27 @@ void	LEOInitWILDObjectValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepRefe
 void	LEOInitWILDObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
 {
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	LEOInitStringValue( dest, str, strlen(str), keepReferences, inContext );
 }
 
 
 void	LEOPutWILDObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext )
 {
-	LEOSetValueAsString( dest, [[(id<WILDObject>)self->object.object textContents] UTF8String], inContext );
+	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
+
+	LEOSetValueAsString( dest, str, inContext );
 }
 
 
@@ -264,7 +347,13 @@ void	LEODetermineChunkRangeOfSubstringOfWILDObjectValue( LEOValuePtr self, size_
 													LEOChunkType inType, size_t inRangeStart, size_t inRangeEnd,
 													struct LEOContext* inContext )
 {
-	char*		str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	size_t		maxOffs = *ioBytesEnd -((size_t)str);
 	str += (*ioBytesStart);
 	
@@ -307,6 +396,12 @@ void	LEOCleanUpWILDObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepRefe
 bool	LEOCanGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
 {
 	char*		str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	if( !str )
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "This object can have no contents." );
+		inContext->keepRunning = false;
+		return;
+	}
 	
 	for( size_t x = 0; str[x] != 0; x++ )
 	{
