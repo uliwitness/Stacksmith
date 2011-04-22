@@ -10,6 +10,7 @@
 #include "ForgeWILDObjectValue.h"
 #import "WILDDocument.h"
 #import "WILDStack.h"
+#import "LEOScript.h"
 
 
 size_t	kFirstStacksmithHostFunctionInstruction = 0;
@@ -392,6 +393,15 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 }
 
 
+void	WILDMeInstruction( LEOContext* inContext )
+{
+	LEOScript	*	myScript = LEOContextPeekCurrentScript( inContext );
+	
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS] =
 {
 	WILDStackInstruction,
@@ -406,7 +416,8 @@ LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_F
 	WILDNextCardInstruction,
 	WILDPreviousCardInstruction,
 	WILDFirstCardInstruction,
-	WILDLastCardInstruction
+	WILDLastCardInstruction,
+	WILDMeInstruction
 };
 
 const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS] =
@@ -423,7 +434,8 @@ const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNC
 	"WILDNextCardInstruction",
 	"WILDPreviousCardInstruction",
 	"WILDFirstCardInstruction",
-	"WILDLastCardInstruction"
+	"WILDLastCardInstruction",
+	"WILDMeInstruction"
 };
 
 struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS +1] =
@@ -569,7 +581,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 		}
 	},
 	{
-		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0,
+		EMeIdentifier, WILD_ME_INSTRUCTION, 0, 0,
 		{
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
