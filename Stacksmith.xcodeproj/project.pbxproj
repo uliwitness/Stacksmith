@@ -391,6 +391,9 @@
 		55E3B6C91184420E000062C1 /* WILDStyleEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6C81184420E000062C1 /* WILDStyleEntry.m */; };
 		55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6DA11845E01000062C1 /* UKRandomInteger.m */; };
 		55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E509E61156B06D001D0762 /* ULIMultiMap.m */; };
+		55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */; };
+		55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */; };
+		55E805C61360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */; };
 		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
 		55EA63801347532C0039FE0D /* WILDLayerInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA637F1347532C0039FE0D /* WILDLayerInfoWindowController.m */; };
 		55EA6383134756D00039FE0D /* WILDBackgroundInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA6382134756CF0039FE0D /* WILDBackgroundInfoWindowController.m */; };
@@ -957,6 +960,11 @@
 		55E3B6DA11845E01000062C1 /* UKRandomInteger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKRandomInteger.m; path = ../UliKit/UKRandomInteger.m; sourceTree = SOURCE_ROOT; };
 		55E509E51156B06D001D0762 /* ULIMultiMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIMultiMap.h; path = ../UliKit/ULIMultiMap.h; sourceTree = "<group>"; };
 		55E509E61156B06D001D0762 /* ULIMultiMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIMultiMap.m; path = ../UliKit/ULIMultiMap.m; sourceTree = "<group>"; };
+		55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CObjectPropertyNode.cpp; path = ../../CObjectPropertyNode.cpp; sourceTree = "<group>"; };
+		55E805C01360A7B3006F1287 /* CObjectPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CObjectPropertyNode.h; path = ../../CObjectPropertyNode.h; sourceTree = "<group>"; };
+		55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOPropertyInstructions.c; path = ../../../Leonie/generic/LEOPropertyInstructions.c; sourceTree = "<group>"; };
+		55E805C31360AA25006F1287 /* LEOPropertyInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOPropertyInstructions.h; path = ../../../Leonie/generic/LEOPropertyInstructions.h; sourceTree = "<group>"; };
+		55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgePropertyInstructionsStacksmith.m; path = Instructions/ForgePropertyInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
 		55E8535C1166341100745C86 /* NSString+FetchNextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FetchNextLine.h"; path = "../UliKit/NSString+FetchNextLine.h"; sourceTree = SOURCE_ROOT; };
 		55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FetchNextLine.m"; path = "../UliKit/NSString+FetchNextLine.m"; sourceTree = SOURCE_ROOT; };
 		55EA637E1347532C0039FE0D /* WILDLayerInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDLayerInfoWindowController.h; sourceTree = "<group>"; };
@@ -1199,6 +1207,7 @@
 				553C46AA13577334000219FA /* Leonie */,
 				553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */,
 				556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */,
+				55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */,
 				5568665F1359EBD000C364D6 /* ForgeHostCommandsStacksmith.h */,
 				5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */,
 				55686661135A161000C364D6 /* ForgeHostFunctionsStacksmith.h */,
@@ -1247,6 +1256,8 @@
 				553C46EB13577334000219FA /* LEOHandlerID.h */,
 				553C46EC13577334000219FA /* LEOMsgInstructions.h */,
 				553C46ED13577334000219FA /* LEOMsgInstructions.c */,
+				55E805C31360AA25006F1287 /* LEOPropertyInstructions.h */,
+				55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */,
 			);
 			name = Leonie;
 			sourceTree = "<group>";
@@ -1286,6 +1297,8 @@
 				553C46D013577334000219FA /* CMakeChunkRefNode.cpp */,
 				553C46D113577334000219FA /* CMakeChunkConstNode.h */,
 				553C46D213577334000219FA /* CMakeChunkConstNode.cpp */,
+				55E805C01360A7B3006F1287 /* CObjectPropertyNode.h */,
+				55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -2208,6 +2221,9 @@
 				55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */,
 				55686666135A383A00C364D6 /* ForgeWILDObjectValue.m in Sources */,
 				55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */,
+				55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */,
+				55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */,
+				55E805C61360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

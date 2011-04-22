@@ -33,6 +33,9 @@
 	// Message box related instructions:
 	LEOAddInstructionsToInstructionArray( gMsgInstructions, gMsgInstructionNames, LEO_NUMBER_OF_MSG_INSTRUCTIONS, &kFirstMsgInstruction );
 	
+	// Object properties:
+	LEOAddInstructionsToInstructionArray( gPropertyInstructions, gPropertyInstructionNames, LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS, &kFirstPropertyInstruction );
+	
 	// Global properties:
 	LEOAddInstructionsToInstructionArray( gGlobalPropertyInstructions, gGlobalPropertyInstructionNames, LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS, &kFirstGlobalPropertyInstruction );
 	LEOAddGlobalPropertiesAndOffsetInstructions( gHostGlobalProperties, kFirstGlobalPropertyInstruction );

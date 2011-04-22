@@ -1089,6 +1089,24 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(void)	goThereInNewWindow: (BOOL)inNewWindow
 {
+	// TODO: Indicate error, can't go to a part.
+}
+
+
+-(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName
+{
+	if( [inPropertyName isEqualToString: @"name"] )
+	{
+		return [self name];
+	}
+	else
+		return nil;
+}
+
+
+-(void)			setObject: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName
+{
+
 }
 
 @end

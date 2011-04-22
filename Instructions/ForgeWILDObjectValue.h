@@ -19,6 +19,9 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 -(void)			goThereInNewWindow: (BOOL)inNewWindow;
 
+-(id)			valueForWILDPropertyNamed: (NSString*)inPropertyName;
+-(void)			setObject: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName;
+
 @end
 
 
