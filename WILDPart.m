@@ -1104,9 +1104,25 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(void)			setObject: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName
+-(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName
 {
+	BOOL	propExists = YES;
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
+															forKey: WILDAffectedPropertyKey]];
+	if( [inPropertyName isEqualToString: @"name"] )
+		[self setName: inValue];
+	else
+		propExists = NO;
 
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
+															forKey: WILDAffectedPropertyKey]];
+	if( propExists )
+		[self updateChangeCount: NSChangeDone];
+	
+	return propExists;
 }
 
 @end

@@ -47,10 +47,20 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 	
 	char		propNameStr[1024] = { 0 };
 	LEOGetValueAsString( thePropertyName, propNameStr, sizeof(propNameStr), inContext );
-
-	printf( "Set property \"%s\"\n", thePropertyName );
-
-	// TODO: Implement property mutation.
+	
+	char		theValueStrBuf[1024] = { 0 };
+	char*		theValueStr = LEOGetValueAsString( theValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
+	id			theObjCValue = [NSString stringWithUTF8String: theValueStr];
+	
+	if( theObject->base.isa == &kLeoValueTypeWILDObject )
+	{
+		if( ![(id<WILDObject>)theObject->object.object setValue: theObjCValue forWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]] )
+		{
+			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Object does not have property \"%s\".", propNameStr );
+			inContext->keepRunning = false;
+			return;
+		}
+	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -3 );
 	
