@@ -14,6 +14,10 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 @protocol WILDObject <NSObject>
 
+// The BOOL returns on these methods indicate whether the given object can do
+//	what was asked (as in, ever). So if a property doesn't exist, they'd return
+//	NO. If an object has no contents, the same.
+
 -(NSString*)	textContents;
 -(BOOL)			setTextContents: (NSString*)inString;
 
