@@ -781,9 +781,12 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		// TODO: Pass handler call to mLayer.
 	}
 	
-	char	returnValue[1024] = { 0 };
-	LEOGetValueAsString( ctx.stack, returnValue, sizeof(returnValue), &ctx );
-	resultString = [[[NSString alloc] initWithBytes: returnValue length: strlen(returnValue) encoding: NSUTF8StringEncoding] autorelease];
+	if( ctx.stackEndPtr != ctx.stack )
+	{
+		char	returnValue[1024] = { 0 };
+		LEOGetValueAsString( ctx.stack, returnValue, sizeof(returnValue), &ctx );
+		resultString = [[[NSString alloc] initWithBytes: returnValue length: strlen(returnValue) encoding: NSUTF8StringEncoding] autorelease];
+	}
 	
 	LEOCleanUpContext( &ctx );
 	
