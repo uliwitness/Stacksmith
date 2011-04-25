@@ -70,6 +70,7 @@ struct LEOValueType	kLeoValueTypeWILDObject =
 	LEOInitWILDObjectValueCopy,
 	LEOInitWILDObjectValueSimpleCopy,
 	LEOPutWILDObjectValueIntoValue,
+	LEOCantFollowReferencesAndReturnValueOfType,
 	LEODetermineChunkRangeOfSubstringOfWILDObjectValue,
 	
 	LEOCleanUpWILDObjectValue,

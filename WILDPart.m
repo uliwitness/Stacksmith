@@ -86,6 +86,8 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mTextHeight = WILDIntegerFromSubElementInElement( @"textHeight", elem );
 		mTextStyles = [WILDStringsFromSubElementInElement( @"textStyle", elem ) retain];
 		mIconID = WILDIntegerFromSubElementInElement( @"icon", elem );
+		
+		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
 	return self;
@@ -117,6 +119,12 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	{
 		LEOScriptRelease( mScriptObject );
 		mScriptObject = NULL;
+	}
+	
+	if( mIDForScripts != kLEOObjectIDINVALID )
+	{
+		LEOCleanUpValue( &mValueForScripts, kLEOInvalidateReferences, NULL );
+		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
 	[super dealloc];
@@ -626,7 +634,13 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), [[self displayName] UTF8String] );
 		if( LEOParserGetLastErrorMessage() == NULL )
 		{
-			mScriptObject = LEOScriptCreateForOwner( 0, 0 );	// TODO: Store owner reference and use here!
+			if( mIDForScripts == kLEOObjectIDINVALID )
+			{
+				LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
+				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [[mStack document] contextGroup], &mValueForScripts );
+				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[mStack document] contextGroup], mIDForScripts );
+			}
+			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts );
 			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
 		}
 		if( LEOParserGetLastErrorMessage() )

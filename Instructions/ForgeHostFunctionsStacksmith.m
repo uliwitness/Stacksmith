@@ -397,6 +397,10 @@ void	WILDMeInstruction( LEOContext* inContext )
 {
 	LEOScript	*	myScript = LEOContextPeekCurrentScript( inContext );
 	
+	inContext->stackEndPtr++;
+	
+	LEOInitReferenceValueWithIDs( inContext->stackEndPtr -1, myScript->ownerObject, myScript->ownerObjectSeed,
+									  kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }

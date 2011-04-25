@@ -16,12 +16,13 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 	LEOValuePtr		thePropertyName = inContext->stackEndPtr -2;
 	LEOValuePtr		theObject = inContext->stackEndPtr -1;
 	
-	char		propNameStr[1024] = { 0 };
+	char			propNameStr[1024] = { 0 };
 	LEOGetValueAsString( thePropertyName, propNameStr, sizeof(propNameStr), inContext );
 	
-	if( theObject->base.isa == &kLeoValueTypeWILDObject )
+	LEOValuePtr		objectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeWILDObject, inContext );
+	if( objectValue )
 	{
-		NSString*	str = [(id<WILDObject>)theObject->object.object valueForWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]];
+		NSString*	str = [(id<WILDObject>)objectValue->object.object valueForWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]];
 		if( !str )
 		{
 			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Object does not have property \"%s\".", propNameStr );
@@ -32,6 +33,13 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 		const char*	valueStr = [str UTF8String];
 		LEOInitStringValue( thePropertyName, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
 	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't get property \"%s\" of this.", propNameStr );
+		inContext->keepRunning = false;
+		return;
+	}
+		
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
