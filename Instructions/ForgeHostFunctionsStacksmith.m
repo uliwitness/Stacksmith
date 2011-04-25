@@ -406,6 +406,65 @@ void	WILDMeInstruction( LEOContext* inContext )
 }
 
 
+void	WILDThisStackInstruction( LEOContext* inContext )
+{
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+		
+	if( frontStack )
+	{
+		inContext->stackEndPtr++;
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, frontStack, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		strncpy( inContext->errMsg, "No stack open at the moment.", sizeof(inContext->errMsg) );
+		inContext->keepRunning = false;
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDThisBackgroundInstruction( LEOContext* inContext )
+{
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
+	
+	if( theBackground )
+	{
+		inContext->stackEndPtr++;
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, theBackground, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		strncpy( inContext->errMsg, "No stack open at the moment.", sizeof(inContext->errMsg) );
+		inContext->keepRunning = false;
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDThisCardInstruction( LEOContext* inContext )
+{
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDCard		*	theCard = [frontStack currentCard];
+	
+	if( theCard )
+	{
+		inContext->stackEndPtr++;
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, theCard, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		strncpy( inContext->errMsg, "No stack open at the moment.", sizeof(inContext->errMsg) );
+		inContext->keepRunning = false;
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS] =
 {
 	WILDStackInstruction,
@@ -421,7 +480,10 @@ LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_F
 	WILDPreviousCardInstruction,
 	WILDFirstCardInstruction,
 	WILDLastCardInstruction,
-	WILDMeInstruction
+	WILDMeInstruction,
+	WILDThisStackInstruction,
+	WILDThisBackgroundInstruction,
+	WILDThisCardInstruction
 };
 
 const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS] =
@@ -440,6 +502,9 @@ const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNC
 	"WILDFirstCardInstruction",
 	"WILDLastCardInstruction",
 	"WILDMeInstruction"
+	"WILDThisStackInstruction",
+	"WILDThisBackgroundInstruction",
+	"WILDThisCardInstruction"
 };
 
 struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS +1] =
@@ -599,25 +664,11 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 		}
 	},
 	{
-		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0,
+		EThisIdentifier, INVALID_INSTR2, 0, 0,
 		{
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 }
-		}
-	},
-	{
-		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0,
-		{
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParamIdentifier, EStackIdentifier, EHostParameterOptional, WILD_THIS_STACK_INSTRUCTION, 0, 0 },
+			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_THIS_BACKGROUND_INSTRUCTION, 0, 0 },
+			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_THIS_CARD_INSTRUCTION, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
