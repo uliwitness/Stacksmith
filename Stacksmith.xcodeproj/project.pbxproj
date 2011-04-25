@@ -394,6 +394,7 @@
 		55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */; };
 		55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */; };
 		55E805C61360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */; };
+		55E805FA1366161D006F1287 /* The Forge Programming Language.txt in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55E805F51365E8E3006F1287 /* The Forge Programming Language.txt */; };
 		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
 		55EA63801347532C0039FE0D /* WILDLayerInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA637F1347532C0039FE0D /* WILDLayerInfoWindowController.m */; };
 		55EA6383134756D00039FE0D /* WILDBackgroundInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA6382134756CF0039FE0D /* WILDBackgroundInfoWindowController.m */; };
@@ -451,6 +452,7 @@
 			files = (
 				55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */,
 				55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */,
+				55E805FA1366161D006F1287 /* The Forge Programming Language.txt in Copy Included Stacks */,
 			);
 			name = "Copy Included Stacks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -965,6 +967,7 @@
 		55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOPropertyInstructions.c; path = ../../../Leonie/generic/LEOPropertyInstructions.c; sourceTree = "<group>"; };
 		55E805C31360AA25006F1287 /* LEOPropertyInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOPropertyInstructions.h; path = ../../../Leonie/generic/LEOPropertyInstructions.h; sourceTree = "<group>"; };
 		55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgePropertyInstructionsStacksmith.m; path = Instructions/ForgePropertyInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
+		55E805F51365E8E3006F1287 /* The Forge Programming Language.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Forge Programming Language.txt"; sourceTree = "<group>"; };
 		55E8535C1166341100745C86 /* NSString+FetchNextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FetchNextLine.h"; path = "../UliKit/NSString+FetchNextLine.h"; sourceTree = SOURCE_ROOT; };
 		55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FetchNextLine.m"; path = "../UliKit/NSString+FetchNextLine.m"; sourceTree = SOURCE_ROOT; };
 		55EA637E1347532C0039FE0D /* WILDLayerInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDLayerInfoWindowController.h; sourceTree = "<group>"; };
@@ -1044,6 +1047,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Propaganda */ = {
 			isa = PBXGroup;
 			children = (
+				55E805F51365E8E3006F1287 /* The Forge Programming Language.txt */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
