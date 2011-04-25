@@ -2,28 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>OneLineCommentPrefix</key>
-	<string>-- </string>
 	<key>Components</key>
 	<array>
-		<dict>
-			<key>Color</key>
-			<array>
-				<integer>1</integer>
-				<integer>1</integer>
-				<integer>1</integer>
-			</array>
-			<key>End</key>
-			<string>&quot;</string>
-			<key>EscapeChar</key>
-			<string></string>
-			<key>Name</key>
-			<string>Strings</string>
-			<key>Start</key>
-			<string>&quot;</string>
-			<key>Type</key>
-			<string>String</string>
-		</dict>
 		<dict>
 			<key>Charset</key>
 			<string>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890</string>
@@ -202,6 +182,26 @@
 			<key>Type</key>
 			<string>BlockComment</string>
 		</dict>
+		<dict>
+			<key>Color</key>
+			<array>
+				<integer>1</integer>
+				<integer>1</integer>
+				<integer>1</integer>
+			</array>
+			<key>End</key>
+			<string>&quot;</string>
+			<key>EscapeChar</key>
+			<string></string>
+			<key>Name</key>
+			<string>Strings</string>
+			<key>Start</key>
+			<string>&quot;</string>
+			<key>Type</key>
+			<string>String</string>
+		</dict>
 	</array>
+	<key>OneLineCommentPrefix</key>
+	<string>-- </string>
 </dict>
 </plist>
