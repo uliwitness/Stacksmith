@@ -248,6 +248,23 @@
 
 -(void)	applicationDidFinishLaunching:(NSNotification *)notification	// This gets called *after* application:openFile:
 {
+	// If we have no license key, check if there's one right next to the app:
+	//	Less hassle for distributing betas.
+	if( ![[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"] )
+	{
+		NSString*					appFolderPath = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
+		NSDirectoryEnumerator	*	fileEnny = [[NSFileManager defaultManager] enumeratorAtPath: appFolderPath];
+		for( NSString* subpath in fileEnny )
+		{
+			[fileEnny skipDescendants];
+			if( [[subpath pathExtension] isEqualToString: @"StacksmithLicense"] )
+			{
+				[self application: NSApp openFile: [appFolderPath stringByAppendingPathComponent: subpath]];
+				break;
+			}
+		}
+	}
+	
 	// Check serial number:
 	while( true )
 	{
