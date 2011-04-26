@@ -941,16 +941,13 @@
 	[tv setHeaderView: nil];
 	
 	NSTableColumn*		tc = [[NSTableColumn alloc] initWithIdentifier: @"mainColumn"];
-	NSTextFieldCell*	dc = [[NSTextFieldCell alloc] initTextCell: @"Are you my mommy?"];
+	NSTextFieldCell*	dc = [[NSTextFieldCell alloc] initTextCell: @"Are you my mummy?"];
 	[tc setDataCell: dc];
 	[dc release];
 	[tv addTableColumn: tc];
 	[tc release];
-	NSArrayController*	arrayc = [[NSArrayController alloc] init];
-	[arrayc setContent: [contents listItems]];
-	[tv bind: @"content" toObject: arrayc withKeyPath: @"arrangedObjects" options: nil];
-	[tc bind: @"value" toObject: arrayc withKeyPath: @"arrangedObjects.description" options: nil];
-	[arrayc release];
+	[tv setDataSource: self];
+	[tv setDelegate: self];
 	
 	// Build surrounding scroll view:
 	NSScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
@@ -1073,5 +1070,31 @@
 //	[[NSColor blueColor] set];
 //	[NSBezierPath strokeRect: [self bounds]];
 //}
+
+
+-(void)	tableViewSelectionDidChange:(NSNotification *)notification
+{
+	[mPart setSelectedListItemIndexes: [(NSTableView*)mMainView selectedRowIndexes]];
+}
+
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+	WILDPartContents*	contents = nil;
+	WILDPartContents*	bgContents = nil;
+	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO];
+	
+	return [[contents listItems] count];
+}
+
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	WILDPartContents*	contents = nil;
+	WILDPartContents*	bgContents = nil;
+	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO];
+	
+	return [[contents listItems] objectAtIndex: row];
+}
 
 @end

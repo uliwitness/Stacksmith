@@ -865,14 +865,15 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(void)	setSelectedListItemIndexes: (NSIndexSet*)newSelection
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: @"selectedListItemIndexes"
-															forKey: WILDAffectedPropertyKey]];
+// Don't notify from here, gets called when the object is created & causes endless recursion.
+//	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+//							object: self userInfo: [NSDictionary dictionaryWithObject: @"selectedListItemIndexes"
+//															forKey: WILDAffectedPropertyKey]];
 	[mSelectedLines removeAllIndexes];
 	[mSelectedLines addIndexes: newSelection];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: @"selectedListItemIndexes"
-															forKey: WILDAffectedPropertyKey]];
+//	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+//							object: self userInfo: [NSDictionary dictionaryWithObject: @"selectedListItemIndexes"
+//															forKey: WILDAffectedPropertyKey]];
 	[self updateChangeCount: NSChangeDone];
 }
 
