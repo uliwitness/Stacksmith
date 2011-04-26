@@ -754,8 +754,8 @@
 
 -(IBAction)	copyCard: (id)sender
 {
-	NSString	*	cdXmlString = [mCurrentCard xmlStringForWritingToURL: nil error: nil];
-	NSString	*	bgXmlString = [[mCurrentCard owningBackground] xmlStringForWritingToURL: nil error: nil];
+	NSString	*	cdXmlString = [mCurrentCard xmlStringForWritingToURL: nil forSaveOperation: NSSaveAsOperation originalContentsURL: nil error: nil];
+	NSString	*	bgXmlString = [[mCurrentCard owningBackground] xmlStringForWritingToURL: nil forSaveOperation: NSSaveAsOperation originalContentsURL: nil error: nil];
 	NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 	[pb clearContents];
 	[pb addTypes: [NSArray arrayWithObjects: WILDCardPboardType, WILDBackgroundPboardType, nil] owner: self];

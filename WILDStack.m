@@ -419,7 +419,7 @@
 }
 
 
--(NSString*)	xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError
+-(NSString*)	xmlStringForWritingToURL: (NSURL*)packageURL forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error: (NSError**)outError
 {
 	NSMutableString	*	theString = [NSMutableString stringWithString:
 											@"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
@@ -444,7 +444,7 @@
 	{
 		NSString*	bgFileName = [NSString stringWithFormat: @"background_%ld.xml", [currBg backgroundID]];
 		NSURL	*	bgURL = [packageURL URLByAppendingPathComponent: bgFileName];
-		if( ![[currBg xmlStringForWritingToURL: packageURL error: outError] writeToURL: bgURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
+		if( ![[currBg xmlStringForWritingToURL: packageURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: bgURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
 		[theString appendFormat: @"\t<background id=\"%ld\" file=\"%@\" />\n", [currBg backgroundID], WILDStringEscapedForXML(bgFileName)];
 	}
@@ -454,7 +454,7 @@
 	{
 		NSString*	cdFileName = [NSString stringWithFormat: @"card_%ld.xml", [currCd cardID]];
 		NSURL	*	cdURL = [packageURL URLByAppendingPathComponent: cdFileName];
-		if( ![[currCd xmlStringForWritingToURL: packageURL error: outError] writeToURL: cdURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
+		if( ![[currCd xmlStringForWritingToURL: packageURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: cdURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
 		[theString appendFormat: @"\t<card id=\"%ld\" file=\"%@\" marked=\"%@\" />\n",
 							[currCd cardID], WILDStringEscapedForXML(cdFileName),

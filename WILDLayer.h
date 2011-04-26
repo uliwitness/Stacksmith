@@ -28,6 +28,7 @@
 	BOOL						mShowPict;			// Should we draw mPicture or not?
 	BOOL						mDontSearch;		// Do not include this card in searches.
 	BOOL						mCantDelete;		// Prevent scripts from deleting this card?
+	NSString*					mPictureName;		// Card/background picture's file name.
 	NSImage*					mPicture;			// Card/background picture.
 	NSMutableArray*				mParts;				// Array of parts on this card.
 	NSMutableArray*				mAddColorParts;		// Array of parts for which we have AddColor color information. May contain parts that are already in mParts.
@@ -78,7 +79,7 @@
 -(NSString*)					script;
 -(void)							setScript: (NSString*)theScript;
 
--(NSString*)					xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError;
+-(NSString*)					xmlStringForWritingToURL: (NSURL*)packageURL forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error: (NSError**)outError;
 -(void)							appendInnerAddColorObjectXmlToString: (NSMutableString*)theString;
 -(void)							appendInnerXmlToString: (NSMutableString*)theString;	// Hook-in point for subclasses like WILDCard.
 

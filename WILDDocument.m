@@ -159,7 +159,7 @@
 		stackFileName = [NSString stringWithFormat: @"stack_%ld.xml", [currStack stackID]];
 		stackURL = [absoluteURL URLByAppendingPathComponent: stackFileName];
 		
-		if( ![[currStack xmlStringForWritingToURL: absoluteURL error: outError] writeToURL: stackURL atomically: YES encoding: NSUTF8StringEncoding error:outError] )
+		if( ![[currStack xmlStringForWritingToURL: absoluteURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: stackURL atomically: YES encoding: NSUTF8StringEncoding error:outError] )
 			return NO;
 		[tocXmlString appendFormat: @"\t<stack id=\"%1$ld\" file=\"stack_%1$ld.xml\" />\n", [currStack stackID]];
 	}

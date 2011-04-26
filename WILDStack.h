@@ -71,7 +71,7 @@
 -(WILDDocument*)	document;
 -(void)				updateChangeCount: (NSDocumentChangeType)inChange;
 
--(NSString*)		xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError;
+-(NSString*)		xmlStringForWritingToURL: (NSURL*)packageURL forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error: (NSError**)outError;
 
 -(NSString*)		name;
 -(void)				setName: (NSString*)inName;

@@ -64,7 +64,7 @@
 		mDontSearch = WILDBoolFromSubElementInElement( @"dontSearch", elem, NO );
 		
 		mStack = theStack;
-		mPicture = [WILDStringFromSubElementInElement( @"bitmap", elem ) retain];
+		mPictureName = [WILDStringFromSubElementInElement( @"bitmap", elem ) retain];
 		
 		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
 		mButtonFamilies = [[ULIMultiMap alloc] init];
@@ -112,6 +112,7 @@
 	DESTROY_DEALLOC(mName);
 	DESTROY_DEALLOC(mScript);
 	DESTROY_DEALLOC(mPicture);
+	DESTROY_DEALLOC(mPictureName);
 	DESTROY_DEALLOC(mParts);
 	DESTROY_DEALLOC(mAddColorParts);
 	
@@ -135,13 +136,13 @@
 
 -(NSImage*)		picture
 {
-	if( !mPicture )
+	if( !mPictureName )
 		return nil;
 	
-	if( [mPicture isKindOfClass: [NSImage class]] )
+	if( mPicture )
 		return mPicture;
 	
-	NSImage*	img = [[mStack document] imageNamed: (NSString*)mPicture];
+	NSImage*	img = [[mStack document] imageNamed: mPictureName];
 	ASSIGN(mPicture,img);
 	
 	return img;
@@ -444,8 +445,8 @@
 	[theString appendFormat: @"\t<showPict>%@</showPict>\n", mShowPict ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<cantDelete>%@</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<dontSearch>%@</dontSearch>\n", mDontSearch ? @"<true />" : @"<false />"];
-	if( mPicture )
-		[theString appendFormat: @"\t<bitmap>%@</bitmap>\n", mPicture];	// TODO: Get bitmap from media and reference it from there.
+	if( mPictureName )
+		[theString appendFormat: @"\t<bitmap>%@</bitmap>\n", mPictureName];
 	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
 	
 	for( WILDPart* currPart in mParts )
@@ -462,8 +463,34 @@
 }
 
 
--(NSString*)	xmlStringForWritingToURL: (NSURL*)packageURL error: (NSError**)outError
+-(NSString*)	xmlStringForWritingToURL: (NSURL*)packageURL forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error: (NSError**)outError
 {
+	if( mPictureName && !mPicture )
+	{
+		NSURL		*	oldPictureURL = [absoluteOriginalContentsURL URLByAppendingPathComponent: mPictureName];
+		NSURL		*	pictureURL = [packageURL URLByAppendingPathComponent: mPictureName];
+		BOOL			fileAlreadyThere = [[NSFileManager defaultManager] fileExistsAtPath: [pictureURL path]];
+		NSError		*	theError = nil;
+		BOOL			success = NO;
+		
+		if( !fileAlreadyThere && (saveOperation == NSSaveOperation || saveOperation == NSAutosaveOperation) )
+		{
+			success = [[NSFileManager defaultManager] linkItemAtPath: [oldPictureURL path] toPath: [pictureURL path] error: &theError];
+		}
+		if( !success && !fileAlreadyThere )
+		{
+			success = [[NSFileManager defaultManager] copyItemAtPath: [oldPictureURL path] toPath: [pictureURL path] error: &theError];
+		}
+	}
+	else
+	{
+		if( !mPictureName )
+			mPictureName = [[NSString stringWithFormat: @"bitmap_%lld",mID] retain];
+		ASSIGN(mPictureName,[[mPictureName stringByDeletingPathExtension] stringByAppendingPathExtension: @"tiff"]);
+		NSURL*	pictureURL = [packageURL URLByAppendingPathComponent: mPictureName];
+		[[mPicture TIFFRepresentation] writeToURL: pictureURL atomically: YES];
+	}
+
 	NSMutableString	*	theString = [NSMutableString stringWithFormat: @"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
 												"<!DOCTYPE %1$@ PUBLIC \"-//Apple, Inc.//DTD %1$@ V 2.0//EN\" \"\" >\n"
 																		"<%1$@>\n", [self partLayer]];
@@ -471,7 +498,7 @@
 	[self appendInnerXmlToString: theString];	// Hook-in point for subclasses (like WILDCard).
 	
 	[theString appendFormat: @"</%@>\n", [self partLayer]];
-	
+		
 	return theString;
 }
 
