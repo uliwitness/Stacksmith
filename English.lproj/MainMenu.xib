@@ -496,7 +496,7 @@
 								<object class="NSMenuItem" id="956199896">
 									<reference key="NSMenu" ref="789758025"/>
 									<string key="NSTitle">Background</string>
-									<string key="NSKeyEquiv">b</string>
+									<string key="NSKeyEquiv">B</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
