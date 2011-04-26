@@ -324,24 +324,26 @@ commands.
 
 6.1) STACK PROPERTIES
 
-	name	-	The name of the stack, without the ".xstk" file type suffix.
+	[short] name		-	The name of the stack, without the ".xstk" file type
+							suffix.
 
 6.2) BACKGROUND PROPERTIES
 
-	name	-	The name of the background, as displayed in "Background Info".
+	[short] name		-	The name of the background, as displayed in
+							"Background Info".
 
 6.3) CARD PROPERTIES
 
-	name	-	The name of the card, as displayed in "Card Info".
+	[short] name		-	The name of the card, as displayed in "Card Info".
 
 6.4) FIELD PROPERTIES
 
-	name	-	The name of the field, as displayed in "Field Info".
+	[short] name		-	The name of the field, as displayed in "Field Info".
 
 6.5) BUTTON PROPERTIES
 
-	name	-	The name of the button, as displayed on the button when the
-				showName property is true.
+	[short] name		-	The name of the button, as displayed on the button
+							when the showName property is true.
 
 6.6) STACKSMITH PROPERTIES
 
