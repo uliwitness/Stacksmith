@@ -482,7 +482,7 @@
 			success = [[NSFileManager defaultManager] copyItemAtPath: [oldPictureURL path] toPath: [pictureURL path] error: &theError];
 		}
 	}
-	else
+	else if( mPicture )
 	{
 		if( !mPictureName )
 			mPictureName = [[NSString stringWithFormat: @"bitmap_%lld",mID] retain];
