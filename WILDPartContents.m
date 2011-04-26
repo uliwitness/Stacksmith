@@ -159,12 +159,9 @@
 {
 	[mText release];
 	mText = [inString copy];
-	[mStyledText release];
-	mStyledText = nil;
-	[mStyles release];
-	mStyles = nil;
-	[mListItems release];
-	mListItems = nil;
+	DESTROY(mStyledText);
+	DESTROY(mListItems);
+	DESTROY(mStyles);
 }
 
 
@@ -172,6 +169,8 @@
 {
 	ASSIGN(mStyledText,inString);
 	ASSIGN(mText,[inString string]);
+	DESTROY(mListItems);
+	DESTROY(mStyles);
 }
 
 

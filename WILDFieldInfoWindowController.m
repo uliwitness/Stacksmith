@@ -168,9 +168,9 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	
 	WILDPartContents*	theContents = nil;
 	if( [mPart sharedText] )
-		theContents = [[[mCardView card] owningBackground] contentsForPart: mPart];
+		theContents = [[[mCardView card] owningBackground] contentsForPart: mPart create: YES];
 	else
-		theContents = [[mCardView card] contentsForPart: mPart];
+		theContents = [[mCardView card] contentsForPart: mPart create: YES];
 	[theContents setStyledText: [mContentsTextField textStorage]];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: mPart];

@@ -891,7 +891,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(BOOL)			canSelectMultipleLines
+-(BOOL)	canSelectMultipleLines
 {
 	return mMultipleLines;
 }
