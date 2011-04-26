@@ -88,7 +88,7 @@
 
 -(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName
 {
-	if( [inPropertyName isEqualToString: @"name"] )
+	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
 	{
 		return [self name];
 	}
@@ -104,7 +104,7 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
 															forKey: WILDAffectedPropertyKey]];
-	if( [inPropertyName isEqualToString: @"name"] )
+	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
 		[self setName: inValue];
 	else
 		propExists = NO;
