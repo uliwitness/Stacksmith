@@ -291,7 +291,7 @@
 		<textSize>12</textSize>
 		<textStyle>plain</textStyle>
 		<name>right arrow</name>
-		<script>on mouseUpvisual effect wipe leftgo nextend mouseUp</script>
+		<script>on mouseUpvisual effect wipe leftgo next cardend mouseUp</script>
 	</part>
 	<part>
 		<id>59</id>
@@ -322,7 +322,7 @@
 		<textSize>12</textSize>
 		<textStyle>plain</textStyle>
 		<name>left arrow</name>
-		<script>on mouseUpvisual effect wipe rightgo prevend mouseUp</script>
+		<script>on mouseUpvisual effect wipe rightgo previous cardend mouseUp</script>
 	</part>
 	<part>
 		<id>53</id>

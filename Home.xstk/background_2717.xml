@@ -255,7 +255,7 @@
 		<textSize>12</textSize>
 		<textStyle>plain</textStyle>
 		<name>left arrow</name>
-		<script>on mouseUpvisual effect wipe rightgo prev cardend mouseUp</script>
+		<script>on mouseUpvisual effect wipe rightgo previous cardend mouseUp</script>
 	</part>
 	<part>
 		<id>170</id>
