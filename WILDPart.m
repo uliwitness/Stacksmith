@@ -62,7 +62,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mWideMargins = WILDBoolFromSubElementInElement( @"wideMargins", elem, NO );
 		mMultipleLines = WILDBoolFromSubElementInElement( @"multipleLines", elem, NO );
 		mShowName = WILDBoolFromSubElementInElement( @"showName", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
-		mSelectedLines = [WILDIndexSetFromSubElementInElement( @"selectedLines", elem, -1 ) retain];
+		mSelectedLines = [WILDIndexSetFromSubElementInElement( @"selectedLines", elem, -1 ) mutableCopy];
 		mTitleWidth = WILDIntegerFromSubElementInElement( @"titleWidth", elem );
 		mHighlight = WILDBoolFromSubElementInElement( @"highlight", elem, NO );
 		mSharedHighlight = WILDBoolFromSubElementInElement( @"sharedHighlight", elem, YES );
@@ -935,7 +935,10 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(void)	updateViewOnClick: (NSView*)sender withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground
 {
-	[[self partOwner] updatePartOnClick: self withCard: inCard background: inBackground];
+	if( [mStyle isEqualToString: @"popup"] )
+		[self setSelectedListItemIndexes: [NSIndexSet indexSetWithIndex: [(NSPopUpButton*)sender indexOfSelectedItem]]];
+	else
+		[[self partOwner] updatePartOnClick: self withCard: inCard background: inBackground];
 }
 
 
@@ -1069,7 +1072,19 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[outString appendFormat: @"\t\t<multipleLines>%@</multipleLines>\n", (mMultipleLines ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<showLines>%@</showLines>\n", (mShowLines ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<wideMargins>%@</wideMargins>\n", (mWideMargins ? @"<true />" : @"<false />")];
-
+	
+	if( [mSelectedLines count] > 0 )
+	{
+		[outString appendString: @"\t\t<selectedLines>\n"];
+		NSInteger	lineIdx = [mSelectedLines firstIndex];
+		do
+		{
+			[outString appendFormat: @"\t\t\t<integer>%ld</integer>\n", lineIdx +1];
+		}
+		while( (lineIdx = [mSelectedLines indexGreaterThanIndex: lineIdx]) != NSNotFound );
+		[outString appendString: @"\t\t</selectedLines>\n"];
+	}
+	
 	NSString*	textAlignment = @"left";
 	if( mTextAlignment == NSCenterTextAlignment )
 		textAlignment = @"center";

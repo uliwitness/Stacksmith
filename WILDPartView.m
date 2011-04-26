@@ -595,6 +595,7 @@
 	WILDCardView*		winView = [self enclosingCardView];
 	WILDCard*			theCd = [winView card];
 	WILDBackground*		theBg = [theCd owningBackground];
+
 	[mPart updateViewOnClick: sender withCard: theCd background: theBg];
 }
 
@@ -641,6 +642,8 @@
 	NSPopUpButton	*	bt = [[NSPopUpButton alloc] initWithFrame: popupBox];
 	[bt setWantsLayer: YES];
 	[bt setFont: [currPart textFont]];
+	[bt setTarget: self];
+	[bt setAction: @selector(updateOnClick:)];
 	
 	NSArray*	popupItems = ([contents text] != nil) ? [contents listItems] : [bgContents listItems];
 	for( NSString* itemName in popupItems )
@@ -650,7 +653,10 @@
 		else
 			[bt addItemWithTitle: itemName];
 	}
-	[bt selectItemAtIndex: [[currPart selectedListItemIndexes] firstIndex]];
+	NSUInteger selIndex = [[currPart selectedListItemIndexes] firstIndex];
+	if( selIndex == NSNotFound )
+		selIndex = 0;
+	[bt selectItemAtIndex: selIndex];
 	[bt setState: [currPart highlighted] ? NSOnState : NSOffState];
 	
 	if( [self helperView] )
