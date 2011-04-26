@@ -212,6 +212,7 @@ There are several constants whose name consists of one or more identifiers:
 	barn door open
 	barn door close
 	checkerboard
+	dissolve
 	venetian blinds
 	stretch from top
 	stretch from center
