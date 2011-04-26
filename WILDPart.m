@@ -626,6 +626,25 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
+-(NSString*)	defaultScriptReturningSelectionRange: (NSRange*)outSelection
+{
+	NSString	*	outScript = @"";
+	
+	if( [mType isEqualToString: @"button"] )
+	{
+		outScript = @"on mouseUp\n\t\nend mouseUp";
+		
+		if( outSelection )
+		{
+			outSelection->location = 12;	// Behind tab on middle line.
+			outSelection->length = 0;
+		}
+	}
+	
+	return outScript;
+}
+
+
 -(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError
 {
 	if( !mScriptObject )

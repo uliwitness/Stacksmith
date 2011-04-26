@@ -41,7 +41,12 @@
 	[super awakeFromNib];
 	
 	NSArray*		symbols = nil;
-	[mTextView setString: WILDFormatScript( [mContainer script], &symbols )];
+	NSRange			selRange = { 0, 0 };
+	NSString*		theScript = [mContainer script];
+	if( [theScript length] == 0 && [mContainer respondsToSelector: @selector(defaultScriptReturningSelectionRange:)] )
+		theScript = [mContainer defaultScriptReturningSelectionRange: &selRange];
+	[mTextView setString: WILDFormatScript( theScript, &symbols )];
+	[mTextView setSelectedRange: selRange];
 	[mSymbols release];
 	mSymbols = [symbols retain];
 	

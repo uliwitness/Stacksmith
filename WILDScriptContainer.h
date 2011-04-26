@@ -23,6 +23,9 @@ struct LEOScript;
 
 -(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError;
 
+@optional
+-(NSString*)			defaultScriptReturningSelectionRange: (NSRange*)outSelection;
+
 @end
 
 
