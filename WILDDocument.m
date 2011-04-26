@@ -164,6 +164,10 @@
 		[tocXmlString appendFormat: @"\t<stack id=\"%1$ld\" file=\"stack_%1$ld.xml\" />\n", [currStack stackID]];
 	}
 	
+	DESTROY(mLastEditedVersion);
+	mLastEditedVersion = [[NSString stringWithFormat: @"Stacksmith %@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"]] retain];
+;
+	
 	// Write TOC:
 	[tocXmlString appendFormat: @"\t<createdByVersion>%@</createdByVersion>\n", mCreatedByVersion];
 	[tocXmlString appendFormat: @"\t<lastCompactedVersion>%@</lastCompactedVersion>\n", mLastCompactedVersion];
