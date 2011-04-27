@@ -7,14 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UKPaintView.h"
 
 
-@interface WILDPictureView : NSView
+@interface WILDPictureView : UKPaintView
 {
-	NSImage*	image;
+	
 }
-
--(NSImage*)	image;
--(void)		setImage: (NSImage*)theImage;
 
 @end

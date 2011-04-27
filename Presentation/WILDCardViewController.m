@@ -30,6 +30,21 @@
 #import "WILDRecentCardPickerWindowController.h"
 #import "WILDStackInfoWindowController.h"
 
+#import "UKPaintSelectTool.h"
+#import "UKPaintLassoTool.h"
+#import "UKPaintbrushTool.h"
+#import "UKPaintEraserTool.h"
+#import "UKPaintLineTool.h"
+#import "UKPaintbrushTool.h"
+#import "UKPaintRectTool.h"
+#import "UKPaintRoundrectTool.h"
+#import "UKPaintSelectTool.h"
+#import "UKPaintOvalTool.h"
+#import "UKPaintPathTool.h"
+#import "UKPaintTextTool.h"
+#import "UKPaintRectTool.h"
+#import "UKPaintPathTool.h"
+
 
 @implementation WILDCardViewController
 
@@ -71,17 +86,12 @@
 											name: WILDCurrentToolDidChangeNotification
 											object: nil];
 	
-	[mPartViews release];
-	mPartViews = nil;
-	
-	[mAddColorOverlay release];
-	mAddColorOverlay = nil;
-	
-	[mSearchContext release];
-	mSearchContext = nil;
-	
-	[mCurrentSearchString release];
-	mCurrentSearchString = nil;
+	DESTROY_DEALLOC(mPartViews);
+	DESTROY_DEALLOC(mAddColorOverlay);
+	DESTROY_DEALLOC(mSearchContext);
+	DESTROY_DEALLOC(mCurrentSearchString);
+	DESTROY_DEALLOC(mBackgroundPictureView);
+	DESTROY_DEALLOC(mCardPictureView);
 	
 	[super dealloc];
 }
@@ -423,16 +433,14 @@
 		WILDStack*		theStack = [theCard stack];
 		WILDBackground*	theBg = [theCard owningBackground];
 		
+		DESTROY(mBackgroundPictureView);
+		mBackgroundPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
 		NSImage*		bgPicture = [theBg picture];
 		if( bgPicture )
-		{
-			WILDPictureView*	imgView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
-			[imgView setImage: bgPicture];
-			[imgView setHidden: ![theBg showPicture]];
-			[imgView setWantsLayer: YES];
-			[[self view] addSubview: imgView];
-			[imgView release];
-		}
+			[mBackgroundPictureView setImage: bgPicture];
+		[mBackgroundPictureView setHidden: ![theBg showPicture]];
+		[mBackgroundPictureView setWantsLayer: YES];
+		[[self view] addSubview: mBackgroundPictureView];
 		
 		for( WILDPart* currPart in [theBg parts] )
 		{
@@ -444,16 +452,14 @@
 		}
 		
 		// Load the actual card parts:
+		DESTROY(mCardPictureView);
+		mCardPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
 		NSImage*		cdPicture = [theCard picture];
 		if( cdPicture )
-		{
-			WILDPictureView*	imgView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
-			[imgView setImage: cdPicture];
-			[imgView setHidden: ![theCard showPicture]];
-			[imgView setWantsLayer: YES];
-			[[self view] addSubview: imgView];
-			[imgView release];
-		}
+			[mCardPictureView setImage: cdPicture];
+		[mCardPictureView setHidden: ![theCard showPicture]];
+		[mCardPictureView setWantsLayer: YES];
+		[[self view] addSubview: mCardPictureView];
 
 		if( !mBackgroundEditMode )
 		{
@@ -802,7 +808,29 @@
 
 -(IBAction)	chooseToolWithTag: (id)sender
 {
-	[[WILDTools sharedTools] setCurrentTool: [sender tag]];
+	WILDTool		desiredTool = [sender tag];
+	
+	[[WILDTools sharedTools] setCurrentTool: desiredTool];
+	
+	if( [WILDTools toolIsPaintTool: desiredTool] )
+	{
+		NSInteger		idx = desiredTool -WILDFirstPaintTool;
+		static NSArray*	sTools = nil;
+		if( !sTools )
+			sTools = [[NSArray alloc] initWithObjects: [UKPaintSelectTool class], [UKPaintLassoTool class],
+												[UKPaintbrushTool class], [UKPaintbrushTool class],
+												[UKPaintEraserTool class], [UKPaintLineTool class],
+												[UKPaintbrushTool class], [UKPaintRectTool class],
+												[UKPaintRoundrectTool class],
+												[UKPaintSelectTool class], [UKPaintOvalTool class],
+												[UKPaintPathTool class], [UKPaintTextTool class],
+												[UKPaintRectTool class], [UKPaintPathTool class],
+												nil];
+		
+		Class	theTool = [sTools objectAtIndex: idx];
+		[mCardPictureView setCurrentTool: [theTool paintToolWithPaintView: mCardPictureView]];
+		[mBackgroundPictureView setCurrentTool: [theTool paintToolWithPaintView: mBackgroundPictureView]];
+	}
 }
 
 

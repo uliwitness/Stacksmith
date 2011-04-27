@@ -12,6 +12,7 @@
 
 
 @class WILDCard;
+@class WILDPictureView;
 
 
 @interface WILDCardViewController : NSViewController
@@ -24,6 +25,8 @@
 	WILDSearchContext			*	mSearchContext;
 	NSString					*	mCurrentSearchString;
 	IBOutlet NSTextField		*	mSearchField;
+	WILDPictureView				*	mCardPictureView;
+	WILDPictureView				*	mBackgroundPictureView;
 }
 
 -(WILDCard*)	currentCard;

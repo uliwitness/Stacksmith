@@ -25,7 +25,7 @@ static WILDTools*		sAnimator = nil;
 
 +(BOOL)		toolIsPaintTool: (WILDTool)theTool
 {
-	return ( theTool >= WILDSelectTool );
+	return ( theTool >= WILDFirstPaintTool );
 }
 
 

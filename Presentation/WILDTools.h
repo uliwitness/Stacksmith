@@ -46,6 +46,9 @@ enum
 typedef NSInteger	WILDTool;
 
 
+#define	WILDFirstPaintTool		WILDSelectTool
+
+
 // Helper class that has a timer and tells all currently selected views to
 //	update. It also maintains the pattern phase used for the selection's
 //	marching ants animation, so they all march the same way.
