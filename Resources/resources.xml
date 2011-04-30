@@ -5,13 +5,13 @@
 		<id>129</id>
 		<type>icon</type>
 		<name>Visual Effect</name>
-		<file>ICON_129.pbm</file>
+		<file>ICON_129.pdf</file>
 	</media>
 	<media>
 		<id>128</id>
 		<type>icon</type>
 		<name>Link To</name>
-		<file>ICON_128.pbm</file>
+		<file>ICON_128.pdf</file>
 	</media>
 	<media>
 		<id>26665</id>
@@ -407,7 +407,7 @@
 		<id>31885</id>
 		<type>icon</type>
 		<name>HT Reference</name>
-		<file>ICON_31885.pbm</file>
+		<file>ICON_31885.pdf</file>
 	</media>
 	<media>
 		<id>21437</id>
@@ -509,7 +509,7 @@
 		<id>1009</id>
 		<type>icon</type>
 		<name>Eye</name>
-		<file>ICON_1009.pbm</file>
+		<file>ICON_1009.pdf</file>
 	</media>
 	<media>
 		<id>1015</id>
@@ -821,7 +821,7 @@
 		<id>24830</id>
 		<type>icon</type>
 		<name>XL Last Card Arrow</name>
-		<file>ICON_24830.pbm</file>
+		<file>ICON_24830.pdf</file>
 	</media>
 	<media>
 		<id>21449</id>
@@ -851,19 +851,19 @@
 		<id>26425</id>
 		<type>icon</type>
 		<name>XL Next Arrow</name>
-		<file>ICON_26425.pbm</file>
+		<file>ICON_26425.pdf</file>
 	</media>
 	<media>
 		<id>902</id>
 		<type>icon</type>
 		<name>XL Prev Arrow</name>
-		<file>ICON_902.pbm</file>
+		<file>ICON_902.pdf</file>
 	</media>
 	<media>
 		<id>766</id>
 		<type>icon</type>
 		<name>Lge Last Card Arrow</name>
-		<file>ICON_766.pbm</file>
+		<file>ICON_766.pdf</file>
 	</media>
 	<media>
 		<id>5472</id>
@@ -1061,7 +1061,7 @@
 		<id>1000</id>
 		<type>icon</type>
 		<name>Stack</name>
-		<file>ICON_1000.pbm</file>
+		<file>ICON_1000.pdf</file>
 	</media>
 	<media>
 		<id>2002</id>
