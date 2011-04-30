@@ -33,9 +33,9 @@
 #import "UKPaintSelectTool.h"
 #import "UKPaintLassoTool.h"
 #import "UKPaintbrushTool.h"
+#import "UKPixelPaintbrushTool.h"
 #import "UKPaintEraserTool.h"
 #import "UKPaintLineTool.h"
-#import "UKPaintbrushTool.h"
 #import "UKPaintRectTool.h"
 #import "UKPaintRoundrectTool.h"
 #import "UKPaintSelectTool.h"
@@ -44,6 +44,7 @@
 #import "UKPaintTextTool.h"
 #import "UKPaintRectTool.h"
 #import "UKPaintPathTool.h"
+#import "UKPaintShapeTool.h"
 
 
 @implementation WILDCardViewController
@@ -818,13 +819,13 @@
 		static NSArray*	sTools = nil;
 		if( !sTools )
 			sTools = [[NSArray alloc] initWithObjects: [UKPaintSelectTool class], [UKPaintLassoTool class],
-												[UKPaintbrushTool class], [UKPaintbrushTool class],
+												[UKPaintbrushTool class], [UKPixelPaintbrushTool class],
 												[UKPaintEraserTool class], [UKPaintLineTool class],
 												[UKPaintbrushTool class], [UKPaintRectTool class],
 												[UKPaintRoundrectTool class],
 												[UKPaintSelectTool class], [UKPaintOvalTool class],
 												[UKPaintPathTool class], [UKPaintTextTool class],
-												[UKPaintRectTool class], [UKPaintPathTool class],
+												[UKPaintShapeTool class], [UKPaintPathTool class],
 												nil];
 		
 		Class	theTool = [sTools objectAtIndex: idx];

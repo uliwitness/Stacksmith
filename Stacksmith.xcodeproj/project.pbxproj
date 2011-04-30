@@ -9,6 +9,41 @@
 /* Begin PBXBuildFile section */
 		1DDD582C0DA1D0D100B32029 /* WILDCardWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
+		55039F22136B3FA20082E32E /* UKPixelPaintbrushTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039F21136B3FA20082E32E /* UKPixelPaintbrushTool.m */; };
+		55039F43136B52C80082E32E /* brush01.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F23136B52C70082E32E /* brush01.png */; };
+		55039F44136B52C80082E32E /* brush02.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F24136B52C70082E32E /* brush02.png */; };
+		55039F45136B52C80082E32E /* brush03.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F25136B52C70082E32E /* brush03.png */; };
+		55039F46136B52C80082E32E /* brush04.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F26136B52C70082E32E /* brush04.png */; };
+		55039F47136B52C80082E32E /* brush05.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F27136B52C70082E32E /* brush05.png */; };
+		55039F48136B52C80082E32E /* brush06.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F28136B52C70082E32E /* brush06.png */; };
+		55039F49136B52C80082E32E /* brush07.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F29136B52C70082E32E /* brush07.png */; };
+		55039F4A136B52C80082E32E /* brush08.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F2A136B52C70082E32E /* brush08.png */; };
+		55039F4B136B52C80082E32E /* brush09.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F2B136B52C70082E32E /* brush09.png */; };
+		55039F4C136B52C80082E32E /* brush10.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F2C136B52C70082E32E /* brush10.png */; };
+		55039F4D136B52C80082E32E /* brush11.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F2D136B52C70082E32E /* brush11.png */; };
+		55039F4E136B52C80082E32E /* brush12.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F2E136B52C70082E32E /* brush12.png */; };
+		55039F4F136B52C80082E32E /* brush13.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F2F136B52C70082E32E /* brush13.png */; };
+		55039F50136B52C80082E32E /* brush14.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F30136B52C70082E32E /* brush14.png */; };
+		55039F51136B52C80082E32E /* brush15.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F31136B52C70082E32E /* brush15.png */; };
+		55039F52136B52C80082E32E /* brush16.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F32136B52C70082E32E /* brush16.png */; };
+		55039F53136B52C80082E32E /* brush17.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F33136B52C70082E32E /* brush17.png */; };
+		55039F54136B52C80082E32E /* brush18.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F34136B52C70082E32E /* brush18.png */; };
+		55039F55136B52C80082E32E /* brush19.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F35136B52C70082E32E /* brush19.png */; };
+		55039F56136B52C80082E32E /* brush20.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F36136B52C70082E32E /* brush20.png */; };
+		55039F57136B52C80082E32E /* brush21.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F37136B52C70082E32E /* brush21.png */; };
+		55039F58136B52C80082E32E /* brush22.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F38136B52C70082E32E /* brush22.png */; };
+		55039F59136B52C80082E32E /* brush23.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F39136B52C70082E32E /* brush23.png */; };
+		55039F5A136B52C80082E32E /* brush24.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F3A136B52C70082E32E /* brush24.png */; };
+		55039F5B136B52C80082E32E /* brush25.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F3B136B52C70082E32E /* brush25.png */; };
+		55039F5C136B52C80082E32E /* brush26.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F3C136B52C70082E32E /* brush26.png */; };
+		55039F5D136B52C80082E32E /* brush27.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F3D136B52C70082E32E /* brush27.png */; };
+		55039F5E136B52C80082E32E /* brush28.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F3E136B52C70082E32E /* brush28.png */; };
+		55039F5F136B52C80082E32E /* brush29.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F3F136B52C80082E32E /* brush29.png */; };
+		55039F60136B52C80082E32E /* brush30.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F40136B52C80082E32E /* brush30.png */; };
+		55039F61136B52C80082E32E /* brush31.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F41136B52C80082E32E /* brush31.png */; };
+		55039F62136B52C80082E32E /* brush32.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F42136B52C80082E32E /* brush32.png */; };
+		55039F65136C58610082E32E /* UKPaintShapeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039F64136C585F0082E32E /* UKPaintShapeTool.m */; };
+		55039F68136C66ED0082E32E /* NSBezierPath+ULIRegularPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039F67136C66EA0082E32E /* NSBezierPath+ULIRegularPolygon.m */; };
 		550B30781152D9DE0049C593 /* AGIconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = 550B30771152D9DE0049C593 /* AGIconFamily.m */; };
 		550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09091195E61100351067 /* WILDPresentationConstants.m */; };
 		550C095B1195EC4700351067 /* ICON_128.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 550C09591195EC4700351067 /* ICON_128.pbm */; };
@@ -497,6 +532,44 @@
 		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		55039F20136B3FA20082E32E /* UKPixelPaintbrushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPixelPaintbrushTool.h; path = ../UKPaintView/UKPixelPaintbrushTool.h; sourceTree = "<group>"; };
+		55039F21136B3FA20082E32E /* UKPixelPaintbrushTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPixelPaintbrushTool.m; path = ../UKPaintView/UKPixelPaintbrushTool.m; sourceTree = "<group>"; };
+		55039F23136B52C70082E32E /* brush01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush01.png; path = Resources/brush01.png; sourceTree = "<group>"; };
+		55039F24136B52C70082E32E /* brush02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush02.png; path = Resources/brush02.png; sourceTree = "<group>"; };
+		55039F25136B52C70082E32E /* brush03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush03.png; path = Resources/brush03.png; sourceTree = "<group>"; };
+		55039F26136B52C70082E32E /* brush04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush04.png; path = Resources/brush04.png; sourceTree = "<group>"; };
+		55039F27136B52C70082E32E /* brush05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush05.png; path = Resources/brush05.png; sourceTree = "<group>"; };
+		55039F28136B52C70082E32E /* brush06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush06.png; path = Resources/brush06.png; sourceTree = "<group>"; };
+		55039F29136B52C70082E32E /* brush07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush07.png; path = Resources/brush07.png; sourceTree = "<group>"; };
+		55039F2A136B52C70082E32E /* brush08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush08.png; path = Resources/brush08.png; sourceTree = "<group>"; };
+		55039F2B136B52C70082E32E /* brush09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush09.png; path = Resources/brush09.png; sourceTree = "<group>"; };
+		55039F2C136B52C70082E32E /* brush10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush10.png; path = Resources/brush10.png; sourceTree = "<group>"; };
+		55039F2D136B52C70082E32E /* brush11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush11.png; path = Resources/brush11.png; sourceTree = "<group>"; };
+		55039F2E136B52C70082E32E /* brush12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush12.png; path = Resources/brush12.png; sourceTree = "<group>"; };
+		55039F2F136B52C70082E32E /* brush13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush13.png; path = Resources/brush13.png; sourceTree = "<group>"; };
+		55039F30136B52C70082E32E /* brush14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush14.png; path = Resources/brush14.png; sourceTree = "<group>"; };
+		55039F31136B52C70082E32E /* brush15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush15.png; path = Resources/brush15.png; sourceTree = "<group>"; };
+		55039F32136B52C70082E32E /* brush16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush16.png; path = Resources/brush16.png; sourceTree = "<group>"; };
+		55039F33136B52C70082E32E /* brush17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush17.png; path = Resources/brush17.png; sourceTree = "<group>"; };
+		55039F34136B52C70082E32E /* brush18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush18.png; path = Resources/brush18.png; sourceTree = "<group>"; };
+		55039F35136B52C70082E32E /* brush19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush19.png; path = Resources/brush19.png; sourceTree = "<group>"; };
+		55039F36136B52C70082E32E /* brush20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush20.png; path = Resources/brush20.png; sourceTree = "<group>"; };
+		55039F37136B52C70082E32E /* brush21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush21.png; path = Resources/brush21.png; sourceTree = "<group>"; };
+		55039F38136B52C70082E32E /* brush22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush22.png; path = Resources/brush22.png; sourceTree = "<group>"; };
+		55039F39136B52C70082E32E /* brush23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush23.png; path = Resources/brush23.png; sourceTree = "<group>"; };
+		55039F3A136B52C70082E32E /* brush24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush24.png; path = Resources/brush24.png; sourceTree = "<group>"; };
+		55039F3B136B52C70082E32E /* brush25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush25.png; path = Resources/brush25.png; sourceTree = "<group>"; };
+		55039F3C136B52C70082E32E /* brush26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush26.png; path = Resources/brush26.png; sourceTree = "<group>"; };
+		55039F3D136B52C70082E32E /* brush27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush27.png; path = Resources/brush27.png; sourceTree = "<group>"; };
+		55039F3E136B52C70082E32E /* brush28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush28.png; path = Resources/brush28.png; sourceTree = "<group>"; };
+		55039F3F136B52C80082E32E /* brush29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush29.png; path = Resources/brush29.png; sourceTree = "<group>"; };
+		55039F40136B52C80082E32E /* brush30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush30.png; path = Resources/brush30.png; sourceTree = "<group>"; };
+		55039F41136B52C80082E32E /* brush31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush31.png; path = Resources/brush31.png; sourceTree = "<group>"; };
+		55039F42136B52C80082E32E /* brush32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush32.png; path = Resources/brush32.png; sourceTree = "<group>"; };
+		55039F63136C585E0082E32E /* UKPaintShapeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintShapeTool.h; path = ../UKPaintView/UKPaintShapeTool.h; sourceTree = "<group>"; };
+		55039F64136C585F0082E32E /* UKPaintShapeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintShapeTool.m; path = ../UKPaintView/UKPaintShapeTool.m; sourceTree = "<group>"; };
+		55039F66136C66E80082E32E /* NSBezierPath+ULIRegularPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; name = "NSBezierPath+ULIRegularPolygon.h"; path = "../UliKit/NSBezierPath+ULIRegularPolygon.h"; sourceTree = "<group>"; };
+		55039F67136C66EA0082E32E /* NSBezierPath+ULIRegularPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+ULIRegularPolygon.m"; path = "../UliKit/NSBezierPath+ULIRegularPolygon.m"; sourceTree = "<group>"; };
 		550B30761152D9DE0049C593 /* AGIconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGIconFamily.h; path = ../AGIconFamily/AGIconFamily.h; sourceTree = "<group>"; };
 		550B30771152D9DE0049C593 /* AGIconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGIconFamily.m; path = ../AGIconFamily/AGIconFamily.m; sourceTree = "<group>"; };
 		550C09081195E61100351067 /* WILDPresentationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPresentationConstants.h; sourceTree = "<group>"; };
@@ -1759,6 +1832,38 @@
 				552FF123113F23F3005742C8 /* PAT_38.pbm */,
 				552FF124113F23F3005742C8 /* PAT_39.pbm */,
 				552FF125113F23F3005742C8 /* PAT_40.pbm */,
+				55039F23136B52C70082E32E /* brush01.png */,
+				55039F24136B52C70082E32E /* brush02.png */,
+				55039F25136B52C70082E32E /* brush03.png */,
+				55039F26136B52C70082E32E /* brush04.png */,
+				55039F27136B52C70082E32E /* brush05.png */,
+				55039F28136B52C70082E32E /* brush06.png */,
+				55039F29136B52C70082E32E /* brush07.png */,
+				55039F2A136B52C70082E32E /* brush08.png */,
+				55039F2B136B52C70082E32E /* brush09.png */,
+				55039F2C136B52C70082E32E /* brush10.png */,
+				55039F2D136B52C70082E32E /* brush11.png */,
+				55039F2E136B52C70082E32E /* brush12.png */,
+				55039F2F136B52C70082E32E /* brush13.png */,
+				55039F30136B52C70082E32E /* brush14.png */,
+				55039F31136B52C70082E32E /* brush15.png */,
+				55039F32136B52C70082E32E /* brush16.png */,
+				55039F33136B52C70082E32E /* brush17.png */,
+				55039F34136B52C70082E32E /* brush18.png */,
+				55039F35136B52C70082E32E /* brush19.png */,
+				55039F36136B52C70082E32E /* brush20.png */,
+				55039F37136B52C70082E32E /* brush21.png */,
+				55039F38136B52C70082E32E /* brush22.png */,
+				55039F39136B52C70082E32E /* brush23.png */,
+				55039F3A136B52C70082E32E /* brush24.png */,
+				55039F3B136B52C70082E32E /* brush25.png */,
+				55039F3C136B52C70082E32E /* brush26.png */,
+				55039F3D136B52C70082E32E /* brush27.png */,
+				55039F3E136B52C70082E32E /* brush28.png */,
+				55039F3F136B52C80082E32E /* brush29.png */,
+				55039F40136B52C80082E32E /* brush30.png */,
+				55039F41136B52C80082E32E /* brush31.png */,
+				55039F42136B52C80082E32E /* brush32.png */,
 				552FF126113F23F3005742C8 /* PICT_128.pict */,
 				552FF131113F23F3005742C8 /* resources.xml */,
 				552FF132113F23F3005742C8 /* snd_128.aiff */,
@@ -1795,55 +1900,60 @@
 		55E806681368B2E0006F1287 /* UKPaintView */ = {
 			isa = PBXGroup;
 			children = (
-				55E806691368B307006F1287 /* NSCursor+Box.h */,
-				55E8066A1368B307006F1287 /* NSCursor+CrossHair.h */,
-				55E8066B1368B307006F1287 /* UKColorListView.h */,
-				55E8066C1368B307006F1287 /* UKLineSizeView.h */,
-				55E8066D1368B307006F1287 /* UKPaintbrushTool.h */,
-				55E8066E1368B307006F1287 /* UKPaintEraseRectTool.h */,
-				55E8066F1368B307006F1287 /* UKPaintEraserTool.h */,
-				55E806701368B307006F1287 /* UKPaintLassoTool.h */,
-				55E806711368B307006F1287 /* UKPaintLineTool.h */,
-				55E806721368B307006F1287 /* UKPaintOvalTool.h */,
-				55E806731368B307006F1287 /* UKPaintPathTool.h */,
-				55E806741368B307006F1287 /* UKPaintRectTool.h */,
-				55E806751368B307006F1287 /* UKPaintRoundrectTool.h */,
-				55E806761368B307006F1287 /* UKPaintSelectTool.h */,
-				55E806771368B307006F1287 /* UKPaintTempArrowTool.h */,
-				55E806781368B307006F1287 /* UKPaintTempLineTool.h */,
-				55E806791368B307006F1287 /* UKPaintTempOvalTool.h */,
-				55E8067A1368B307006F1287 /* UKPaintTempRectTool.h */,
-				55E8067B1368B307006F1287 /* UKPaintTempRoundrectTool.h */,
-				55E8067C1368B307006F1287 /* UKPaintTextTool.h */,
-				55E8067D1368B307006F1287 /* UKPaintTool.h */,
-				55E8067E1368B307006F1287 /* UKPaintView_Prefix.h */,
-				55E8067F1368B307006F1287 /* UKPaintView.h */,
 				55E806801368B307006F1287 /* UlisBresenham.h */,
 				55E806811368B307006F1287 /* UlisBresenham.c */,
+				55E806691368B307006F1287 /* NSCursor+Box.h */,
 				55E8063C1368B2CA006F1287 /* NSCursor+Box.m */,
+				55E8066A1368B307006F1287 /* NSCursor+CrossHair.h */,
 				55E8063D1368B2CA006F1287 /* NSCursor+CrossHair.m */,
+				55E8066B1368B307006F1287 /* UKColorListView.h */,
 				55E8063E1368B2CA006F1287 /* UKColorListView.m */,
+				55E8066C1368B307006F1287 /* UKLineSizeView.h */,
 				55E8063F1368B2CB006F1287 /* UKLineSizeView.m */,
+				55E8066D1368B307006F1287 /* UKPaintbrushTool.h */,
 				55E806401368B2CB006F1287 /* UKPaintbrushTool.m */,
+				55E8066E1368B307006F1287 /* UKPaintEraseRectTool.h */,
 				55E806411368B2CB006F1287 /* UKPaintEraseRectTool.m */,
+				55E8066F1368B307006F1287 /* UKPaintEraserTool.h */,
 				55E806421368B2CB006F1287 /* UKPaintEraserTool.m */,
+				55E806701368B307006F1287 /* UKPaintLassoTool.h */,
 				55E806431368B2CB006F1287 /* UKPaintLassoTool.m */,
+				55E806711368B307006F1287 /* UKPaintLineTool.h */,
 				55E806441368B2CB006F1287 /* UKPaintLineTool.m */,
+				55E806721368B307006F1287 /* UKPaintOvalTool.h */,
 				55E806451368B2CC006F1287 /* UKPaintOvalTool.m */,
+				55E806731368B307006F1287 /* UKPaintPathTool.h */,
 				55E806461368B2CC006F1287 /* UKPaintPathTool.m */,
+				55E806741368B307006F1287 /* UKPaintRectTool.h */,
 				55E806471368B2CC006F1287 /* UKPaintRectTool.m */,
+				55039F63136C585E0082E32E /* UKPaintShapeTool.h */,
+				55039F64136C585F0082E32E /* UKPaintShapeTool.m */,
+				55E806751368B307006F1287 /* UKPaintRoundrectTool.h */,
 				55E806481368B2CC006F1287 /* UKPaintRoundrectTool.m */,
+				55E806761368B307006F1287 /* UKPaintSelectTool.h */,
 				55E806491368B2CC006F1287 /* UKPaintSelectTool.m */,
+				55E806771368B307006F1287 /* UKPaintTempArrowTool.h */,
 				55E8064A1368B2CC006F1287 /* UKPaintTempArrowTool.m */,
+				55E806781368B307006F1287 /* UKPaintTempLineTool.h */,
 				55E8064B1368B2CD006F1287 /* UKPaintTempLineTool.m */,
+				55E806791368B307006F1287 /* UKPaintTempOvalTool.h */,
 				55E8064C1368B2CD006F1287 /* UKPaintTempOvalTool.m */,
+				55E8067A1368B307006F1287 /* UKPaintTempRectTool.h */,
 				55E8064D1368B2CD006F1287 /* UKPaintTempRectTool.m */,
+				55E8067B1368B307006F1287 /* UKPaintTempRoundrectTool.h */,
 				55E8064E1368B2CD006F1287 /* UKPaintTempRoundrectTool.m */,
 				55E8064F1368B2CD006F1287 /* UKPaintTextTool.m */,
+				55E8067C1368B307006F1287 /* UKPaintTextTool.h */,
+				55E8067D1368B307006F1287 /* UKPaintTool.h */,
 				55E806501368B2CD006F1287 /* UKPaintTool.m */,
+				55E8067F1368B307006F1287 /* UKPaintView.h */,
 				55E806511368B2CD006F1287 /* UKPaintView.m */,
 				55E806831368B56D006F1287 /* NSBezierPath+RoundRect.h */,
 				55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */,
+				55039F66136C66E80082E32E /* NSBezierPath+ULIRegularPolygon.h */,
+				55039F67136C66EA0082E32E /* NSBezierPath+ULIRegularPolygon.m */,
+				55039F20136B3FA20082E32E /* UKPixelPaintbrushTool.h */,
+				55039F21136B3FA20082E32E /* UKPixelPaintbrushTool.m */,
 			);
 			name = UKPaintView;
 			sourceTree = "<group>";
@@ -2225,6 +2335,38 @@
 				55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */,
 				553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */,
 				55F0E9DE135F6E1600170377 /* StacksmithLicense.icns in Resources */,
+				55039F43136B52C80082E32E /* brush01.png in Resources */,
+				55039F44136B52C80082E32E /* brush02.png in Resources */,
+				55039F45136B52C80082E32E /* brush03.png in Resources */,
+				55039F46136B52C80082E32E /* brush04.png in Resources */,
+				55039F47136B52C80082E32E /* brush05.png in Resources */,
+				55039F48136B52C80082E32E /* brush06.png in Resources */,
+				55039F49136B52C80082E32E /* brush07.png in Resources */,
+				55039F4A136B52C80082E32E /* brush08.png in Resources */,
+				55039F4B136B52C80082E32E /* brush09.png in Resources */,
+				55039F4C136B52C80082E32E /* brush10.png in Resources */,
+				55039F4D136B52C80082E32E /* brush11.png in Resources */,
+				55039F4E136B52C80082E32E /* brush12.png in Resources */,
+				55039F4F136B52C80082E32E /* brush13.png in Resources */,
+				55039F50136B52C80082E32E /* brush14.png in Resources */,
+				55039F51136B52C80082E32E /* brush15.png in Resources */,
+				55039F52136B52C80082E32E /* brush16.png in Resources */,
+				55039F53136B52C80082E32E /* brush17.png in Resources */,
+				55039F54136B52C80082E32E /* brush18.png in Resources */,
+				55039F55136B52C80082E32E /* brush19.png in Resources */,
+				55039F56136B52C80082E32E /* brush20.png in Resources */,
+				55039F57136B52C80082E32E /* brush21.png in Resources */,
+				55039F58136B52C80082E32E /* brush22.png in Resources */,
+				55039F59136B52C80082E32E /* brush23.png in Resources */,
+				55039F5A136B52C80082E32E /* brush24.png in Resources */,
+				55039F5B136B52C80082E32E /* brush25.png in Resources */,
+				55039F5C136B52C80082E32E /* brush26.png in Resources */,
+				55039F5D136B52C80082E32E /* brush27.png in Resources */,
+				55039F5E136B52C80082E32E /* brush28.png in Resources */,
+				55039F5F136B52C80082E32E /* brush29.png in Resources */,
+				55039F60136B52C80082E32E /* brush30.png in Resources */,
+				55039F61136B52C80082E32E /* brush31.png in Resources */,
+				55039F62136B52C80082E32E /* brush32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2388,6 +2530,9 @@
 				55E806671368B2CD006F1287 /* UKPaintView.m in Sources */,
 				55E806821368B307006F1287 /* UlisBresenham.c in Sources */,
 				55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */,
+				55039F22136B3FA20082E32E /* UKPixelPaintbrushTool.m in Sources */,
+				55039F65136C58610082E32E /* UKPaintShapeTool.m in Sources */,
+				55039F68136C66ED0082E32E /* NSBezierPath+ULIRegularPolygon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
