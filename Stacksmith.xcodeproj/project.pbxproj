@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DDD582C0DA1D0D100B32029 /* WILDCardWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
+		550346F3136F494700AE7681 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F96F136E1F120096FC4D /* Sparkle.framework */; };
 		55039F43136B52C80082E32E /* brush01.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F23136B52C70082E32E /* brush01.png */; };
 		55039F44136B52C80082E32E /* brush02.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F24136B52C70082E32E /* brush02.png */; };
 		55039F45136B52C80082E32E /* brush03.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F25136B52C70082E32E /* brush03.png */; };
@@ -434,6 +435,7 @@
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
 		55C88B011332CDA300ACB615 /* WILDCardInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */; };
 		55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */; };
+		55C9F970136E1F120096FC4D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F96F136E1F120096FC4D /* Sparkle.framework */; };
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
@@ -489,6 +491,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		550346D9136F435800AE7681 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D06E8D00FD68C7C005AE3F6;
+			remoteInfo = BinaryDelta;
+		};
 		55A0BDC9113B67CC0095CAA6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */;
@@ -502,6 +511,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8DD76F620486A84900D96B5E;
 			remoteInfo = stackimport;
+		};
+		55C9F964136E1E950096FC4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = Sparkle;
+		};
+		55C9F966136E1E950096FC4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 61B5F90209C4CEE200B25A18;
+			remoteInfo = "Sparkle Test App";
+		};
+		55C9F968136E1E950096FC4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 612279D90DB5470200AB99EA;
+			remoteInfo = "Sparkle Unit Tests";
+		};
+		55C9F96A136E1E950096FC4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55F9B5E410C68F890099848A;
+			remoteInfo = finish_installation;
+		};
+		55C9F96C136E1ED30096FC4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = Sparkle;
 		};
 		55E23BFF133FAC0200E6B444 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -524,6 +568,17 @@
 				55E805FA1366161D006F1287 /* The Forge Programming Language.txt in Copy Included Stacks */,
 			);
 			name = "Copy Included Stacks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55C9F96E136E1EE50096FC4D /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				55C9F970136E1F120096FC4D /* Sparkle.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -1087,6 +1142,8 @@
 		55C88AFF1332CDA300ACB615 /* WILDCardInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardInfoWindowController.h; sourceTree = "<group>"; };
 		55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardInfoWindowController.m; sourceTree = "<group>"; };
 		55C88B031332D05B00ACB615 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDCardInfoWindowController.xib; sourceTree = "<group>"; };
+		55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = ../Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
+		55C9F96F136E1F120096FC4D /* Sparkle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Sparkle.framework; path = /Users/uli/Programming/everything/Sparkle/build/Debug/Sparkle.framework; sourceTree = "<absolute>"; };
 		55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardWindowController.h; path = Document/WILDCardWindowController.h; sourceTree = "<group>"; };
 		55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardWindowController.m; path = Document/WILDCardWindowController.m; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -1171,6 +1228,7 @@
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
+				550346F3136F494700AE7681 /* Sparkle.framework in Frameworks */,
 				553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1186,6 +1244,7 @@
 				55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */,
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
+				55C9F96F136E1F120096FC4D /* Sparkle.framework */,
 				553EB403131C83C6008BFBCE /* libcrypto.dylib */,
 			);
 			name = "Linked Frameworks";
@@ -1219,6 +1278,7 @@
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
+				55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */,
 				55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */,
 			);
 			name = Propaganda;
@@ -1923,6 +1983,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		55C9F959136E1E940096FC4D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55C9F965136E1E950096FC4D /* Sparkle.framework */,
+				55C9F967136E1E950096FC4D /* Sparkle Test App.app */,
+				55C9F969136E1E950096FC4D /* Sparkle Unit Tests.octest */,
+				550346DA136F435800AE7681 /* BinaryDelta */,
+				55C9F96B136E1E950096FC4D /* finish_installation.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		55E806681368B2E0006F1287 /* UKPaintView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2006,6 +2078,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Stacksmith" */;
 			buildPhases = (
+				55C9F96E136E1EE50096FC4D /* Copy Frameworks */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
@@ -2014,6 +2087,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55C9F96D136E1ED30096FC4D /* PBXTargetDependency */,
 				55E23C00133FAC0200E6B444 /* PBXTargetDependency */,
 				55A0BDCD113B68250095CAA6 /* PBXTargetDependency */,
 			);
@@ -2043,6 +2117,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 55C9F959136E1E940096FC4D /* Products */;
+					ProjectRef = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+				},
+				{
 					ProductGroup = 55A0BDC6113B67CC0095CAA6 /* Products */;
 					ProjectRef = 55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */;
 				},
@@ -2056,11 +2134,46 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		550346DA136F435800AE7681 /* BinaryDelta */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = BinaryDelta;
+			remoteRef = 550346D9136F435800AE7681 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		55A0BDCA113B67CC0095CAA6 /* stackimport */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			path = stackimport;
 			remoteRef = 55A0BDC9113B67CC0095CAA6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55C9F965136E1E950096FC4D /* Sparkle.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Sparkle.framework;
+			remoteRef = 55C9F964136E1E950096FC4D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55C9F967136E1E950096FC4D /* Sparkle Test App.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Sparkle Test App.app";
+			remoteRef = 55C9F966136E1E950096FC4D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55C9F969136E1E950096FC4D /* Sparkle Unit Tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Sparkle Unit Tests.octest";
+			remoteRef = 55C9F968136E1E950096FC4D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55C9F96B136E1E950096FC4D /* finish_installation.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = finish_installation.app;
+			remoteRef = 55C9F96A136E1E950096FC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2579,6 +2692,11 @@
 			name = stackimport;
 			targetProxy = 55A0BDCC113B68250095CAA6 /* PBXContainerItemProxy */;
 		};
+		55C9F96D136E1ED30096FC4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Sparkle;
+			targetProxy = 55C9F96C136E1ED30096FC4D /* PBXContainerItemProxy */;
+		};
 		55E23C00133FAC0200E6B444 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */;
@@ -2738,6 +2856,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Sparkle/build/Debug\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -2772,6 +2894,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = "Stacksmith-Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREFIX_HEADER = svn_version.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -2784,6 +2907,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Sparkle/build/Debug\"",
+				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Stacksmith_Prefix.pch;
@@ -2815,6 +2942,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = "Stacksmith-Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREFIX_HEADER = svn_version.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";

@@ -123,5 +123,7 @@
 	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array/>
+	<key>SUFeedURL</key>
+	<string>http://blog.stacksmith.com/feed/</string>
 </dict>
 </plist>
