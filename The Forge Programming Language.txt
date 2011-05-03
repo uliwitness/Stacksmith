@@ -85,6 +85,10 @@ Opens the specified stack, or navigates to the specified card in the current sta
 
 Currently does nothing.
 
+	answer <message> [with <buttonName> [or <buttonName>] [or <buttonName>]]
+
+displays a dialog containing a message and up to three replies as buttons.
+
 3) EXPRESSIONS:
 
 An expression consists of either a single term, or two or more terms ("operands")
