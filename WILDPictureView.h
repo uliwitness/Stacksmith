@@ -7,10 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "UKPaintView.h"
+#import "ULIPaintView.h"
 
 
-@interface WILDPictureView : UKPaintView
+@interface WILDPictureView : ULIPaintView
 {
 	
 }

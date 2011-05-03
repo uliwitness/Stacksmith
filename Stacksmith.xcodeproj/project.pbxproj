@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1DDD582C0DA1D0D100B32029 /* WILDCardWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
-		55039F22136B3FA20082E32E /* UKPixelPaintbrushTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039F21136B3FA20082E32E /* UKPixelPaintbrushTool.m */; };
 		55039F43136B52C80082E32E /* brush01.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F23136B52C70082E32E /* brush01.png */; };
 		55039F44136B52C80082E32E /* brush02.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F24136B52C70082E32E /* brush02.png */; };
 		55039F45136B52C80082E32E /* brush03.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F25136B52C70082E32E /* brush03.png */; };
@@ -42,8 +41,29 @@
 		55039F60136B52C80082E32E /* brush30.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F40136B52C80082E32E /* brush30.png */; };
 		55039F61136B52C80082E32E /* brush31.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F41136B52C80082E32E /* brush31.png */; };
 		55039F62136B52C80082E32E /* brush32.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F42136B52C80082E32E /* brush32.png */; };
-		55039F65136C58610082E32E /* UKPaintShapeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039F64136C585F0082E32E /* UKPaintShapeTool.m */; };
 		55039F68136C66ED0082E32E /* NSBezierPath+ULIRegularPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039F67136C66EA0082E32E /* NSBezierPath+ULIRegularPolygon.m */; };
+		55039FC4136D5CCF0082E32E /* UlisBresenham.c in Sources */ = {isa = PBXBuildFile; fileRef = 55039FAE136D5CCF0082E32E /* UlisBresenham.c */; };
+		55039FC5136D5CCF0082E32E /* ULILineSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FAF136D5CCF0082E32E /* ULILineSizeView.m */; };
+		55039FC6136D5CCF0082E32E /* ULIPaintBrushTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB0136D5CCF0082E32E /* ULIPaintBrushTool.m */; };
+		55039FC7136D5CCF0082E32E /* ULIPaintEraseRectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB1136D5CCF0082E32E /* ULIPaintEraseRectTool.m */; };
+		55039FC8136D5CCF0082E32E /* ULIPaintEraserTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB2136D5CCF0082E32E /* ULIPaintEraserTool.m */; };
+		55039FC9136D5CCF0082E32E /* ULIPaintFreehandTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB3136D5CCF0082E32E /* ULIPaintFreehandTool.m */; };
+		55039FCA136D5CCF0082E32E /* ULIPaintLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB4136D5CCF0082E32E /* ULIPaintLineTool.m */; };
+		55039FCB136D5CCF0082E32E /* ULIPaintOvalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB5136D5CCF0082E32E /* ULIPaintOvalTool.m */; };
+		55039FCC136D5CCF0082E32E /* ULIPaintPathTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB6136D5CCF0082E32E /* ULIPaintPathTool.m */; };
+		55039FCD136D5CCF0082E32E /* ULIPaintRectangleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB7136D5CCF0082E32E /* ULIPaintRectangleTool.m */; };
+		55039FCE136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB8136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.m */; };
+		55039FCF136D5CCF0082E32E /* ULIPaintSelectionLassoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FB9136D5CCF0082E32E /* ULIPaintSelectionLassoTool.m */; };
+		55039FD0136D5CCF0082E32E /* ULIPaintSelectionRectangleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FBA136D5CCF0082E32E /* ULIPaintSelectionRectangleTool.m */; };
+		55039FD1136D5CCF0082E32E /* ULIPaintShapeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FBB136D5CCF0082E32E /* ULIPaintShapeTool.m */; };
+		55039FD2136D5CCF0082E32E /* ULIPaintTempArrowTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FBC136D5CCF0082E32E /* ULIPaintTempArrowTool.m */; };
+		55039FD3136D5CCF0082E32E /* ULIPaintTempLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FBD136D5CCF0082E32E /* ULIPaintTempLineTool.m */; };
+		55039FD4136D5CCF0082E32E /* ULIPaintTempOvalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FBE136D5CCF0082E32E /* ULIPaintTempOvalTool.m */; };
+		55039FD5136D5CCF0082E32E /* ULIPaintTempRectangleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FBF136D5CCF0082E32E /* ULIPaintTempRectangleTool.m */; };
+		55039FD6136D5CCF0082E32E /* ULIPaintTempRoundrectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC0136D5CCF0082E32E /* ULIPaintTempRoundrectTool.m */; };
+		55039FD7136D5CCF0082E32E /* ULIPaintTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */; };
+		55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC2136D5CCF0082E32E /* ULIPaintTool.m */; };
+		55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC3136D5CCF0082E32E /* ULIPaintView.m */; };
 		550B30781152D9DE0049C593 /* AGIconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = 550B30771152D9DE0049C593 /* AGIconFamily.m */; };
 		550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09091195E61100351067 /* WILDPresentationConstants.m */; };
 		550C095B1195EC4700351067 /* ICON_128.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 550C09591195EC4700351067 /* ICON_128.pbm */; };
@@ -434,26 +454,6 @@
 		55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063C1368B2CA006F1287 /* NSCursor+Box.m */; };
 		55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063D1368B2CA006F1287 /* NSCursor+CrossHair.m */; };
 		55E806541368B2CD006F1287 /* UKColorListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063E1368B2CA006F1287 /* UKColorListView.m */; };
-		55E806551368B2CD006F1287 /* UKLineSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063F1368B2CB006F1287 /* UKLineSizeView.m */; };
-		55E806561368B2CD006F1287 /* UKPaintbrushTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806401368B2CB006F1287 /* UKPaintbrushTool.m */; };
-		55E806571368B2CD006F1287 /* UKPaintEraseRectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806411368B2CB006F1287 /* UKPaintEraseRectTool.m */; };
-		55E806581368B2CD006F1287 /* UKPaintEraserTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806421368B2CB006F1287 /* UKPaintEraserTool.m */; };
-		55E806591368B2CD006F1287 /* UKPaintLassoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806431368B2CB006F1287 /* UKPaintLassoTool.m */; };
-		55E8065A1368B2CD006F1287 /* UKPaintLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806441368B2CB006F1287 /* UKPaintLineTool.m */; };
-		55E8065B1368B2CD006F1287 /* UKPaintOvalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806451368B2CC006F1287 /* UKPaintOvalTool.m */; };
-		55E8065C1368B2CD006F1287 /* UKPaintPathTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806461368B2CC006F1287 /* UKPaintPathTool.m */; };
-		55E8065D1368B2CD006F1287 /* UKPaintRectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806471368B2CC006F1287 /* UKPaintRectTool.m */; };
-		55E8065E1368B2CD006F1287 /* UKPaintRoundrectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806481368B2CC006F1287 /* UKPaintRoundrectTool.m */; };
-		55E8065F1368B2CD006F1287 /* UKPaintSelectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806491368B2CC006F1287 /* UKPaintSelectTool.m */; };
-		55E806601368B2CD006F1287 /* UKPaintTempArrowTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8064A1368B2CC006F1287 /* UKPaintTempArrowTool.m */; };
-		55E806611368B2CD006F1287 /* UKPaintTempLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8064B1368B2CD006F1287 /* UKPaintTempLineTool.m */; };
-		55E806621368B2CD006F1287 /* UKPaintTempOvalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8064C1368B2CD006F1287 /* UKPaintTempOvalTool.m */; };
-		55E806631368B2CD006F1287 /* UKPaintTempRectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8064D1368B2CD006F1287 /* UKPaintTempRectTool.m */; };
-		55E806641368B2CD006F1287 /* UKPaintTempRoundrectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8064E1368B2CD006F1287 /* UKPaintTempRoundrectTool.m */; };
-		55E806651368B2CD006F1287 /* UKPaintTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8064F1368B2CD006F1287 /* UKPaintTextTool.m */; };
-		55E806661368B2CD006F1287 /* UKPaintTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806501368B2CD006F1287 /* UKPaintTool.m */; };
-		55E806671368B2CD006F1287 /* UKPaintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806511368B2CD006F1287 /* UKPaintView.m */; };
-		55E806821368B307006F1287 /* UlisBresenham.c in Sources */ = {isa = PBXBuildFile; fileRef = 55E806811368B307006F1287 /* UlisBresenham.c */; };
 		55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */; };
 		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
 		55EA63801347532C0039FE0D /* WILDLayerInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA637F1347532C0039FE0D /* WILDLayerInfoWindowController.m */; };
@@ -541,8 +541,6 @@
 		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		55039F20136B3FA20082E32E /* UKPixelPaintbrushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPixelPaintbrushTool.h; path = ../UKPaintView/UKPixelPaintbrushTool.h; sourceTree = "<group>"; };
-		55039F21136B3FA20082E32E /* UKPixelPaintbrushTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPixelPaintbrushTool.m; path = ../UKPaintView/UKPixelPaintbrushTool.m; sourceTree = "<group>"; };
 		55039F23136B52C70082E32E /* brush01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush01.png; path = Resources/brush01.png; sourceTree = "<group>"; };
 		55039F24136B52C70082E32E /* brush02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush02.png; path = Resources/brush02.png; sourceTree = "<group>"; };
 		55039F25136B52C70082E32E /* brush03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush03.png; path = Resources/brush03.png; sourceTree = "<group>"; };
@@ -575,10 +573,52 @@
 		55039F40136B52C80082E32E /* brush30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush30.png; path = Resources/brush30.png; sourceTree = "<group>"; };
 		55039F41136B52C80082E32E /* brush31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush31.png; path = Resources/brush31.png; sourceTree = "<group>"; };
 		55039F42136B52C80082E32E /* brush32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush32.png; path = Resources/brush32.png; sourceTree = "<group>"; };
-		55039F63136C585E0082E32E /* UKPaintShapeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintShapeTool.h; path = ../UKPaintView/UKPaintShapeTool.h; sourceTree = "<group>"; };
-		55039F64136C585F0082E32E /* UKPaintShapeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintShapeTool.m; path = ../UKPaintView/UKPaintShapeTool.m; sourceTree = "<group>"; };
-		55039F66136C66E80082E32E /* NSBezierPath+ULIRegularPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; name = "NSBezierPath+ULIRegularPolygon.h"; path = "../UliKit/NSBezierPath+ULIRegularPolygon.h"; sourceTree = "<group>"; };
+		55039F66136C66E80082E32E /* NSBezierPath+ULIRegularPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBezierPath+ULIRegularPolygon.h"; path = "../UliKit/NSBezierPath+ULIRegularPolygon.h"; sourceTree = "<group>"; };
 		55039F67136C66EA0082E32E /* NSBezierPath+ULIRegularPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+ULIRegularPolygon.m"; path = "../UliKit/NSBezierPath+ULIRegularPolygon.m"; sourceTree = "<group>"; };
+		55039F98136D5CCF0082E32E /* ULILineSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULILineSizeView.h; path = ../UKPaintView/ULILineSizeView.h; sourceTree = "<group>"; };
+		55039F99136D5CCF0082E32E /* ULIPaintBrushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintBrushTool.h; path = ../UKPaintView/ULIPaintBrushTool.h; sourceTree = "<group>"; };
+		55039F9A136D5CCF0082E32E /* ULIPaintEraseRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintEraseRectTool.h; path = ../UKPaintView/ULIPaintEraseRectTool.h; sourceTree = "<group>"; };
+		55039F9B136D5CCF0082E32E /* ULIPaintEraserTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintEraserTool.h; path = ../UKPaintView/ULIPaintEraserTool.h; sourceTree = "<group>"; };
+		55039F9C136D5CCF0082E32E /* ULIPaintFreehandTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintFreehandTool.h; path = ../UKPaintView/ULIPaintFreehandTool.h; sourceTree = "<group>"; };
+		55039F9D136D5CCF0082E32E /* ULIPaintLineTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintLineTool.h; path = ../UKPaintView/ULIPaintLineTool.h; sourceTree = "<group>"; };
+		55039F9E136D5CCF0082E32E /* ULIPaintOvalTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintOvalTool.h; path = ../UKPaintView/ULIPaintOvalTool.h; sourceTree = "<group>"; };
+		55039F9F136D5CCF0082E32E /* ULIPaintPathTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintPathTool.h; path = ../UKPaintView/ULIPaintPathTool.h; sourceTree = "<group>"; };
+		55039FA0136D5CCF0082E32E /* ULIPaintRectangleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintRectangleTool.h; path = ../UKPaintView/ULIPaintRectangleTool.h; sourceTree = "<group>"; };
+		55039FA1136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintRoundedRectangleTool.h; path = ../UKPaintView/ULIPaintRoundedRectangleTool.h; sourceTree = "<group>"; };
+		55039FA2136D5CCF0082E32E /* ULIPaintSelectionLassoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintSelectionLassoTool.h; path = ../UKPaintView/ULIPaintSelectionLassoTool.h; sourceTree = "<group>"; };
+		55039FA3136D5CCF0082E32E /* ULIPaintSelectionRectangleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintSelectionRectangleTool.h; path = ../UKPaintView/ULIPaintSelectionRectangleTool.h; sourceTree = "<group>"; };
+		55039FA4136D5CCF0082E32E /* ULIPaintShapeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintShapeTool.h; path = ../UKPaintView/ULIPaintShapeTool.h; sourceTree = "<group>"; };
+		55039FA5136D5CCF0082E32E /* ULIPaintTempArrowTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintTempArrowTool.h; path = ../UKPaintView/ULIPaintTempArrowTool.h; sourceTree = "<group>"; };
+		55039FA6136D5CCF0082E32E /* ULIPaintTempLineTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintTempLineTool.h; path = ../UKPaintView/ULIPaintTempLineTool.h; sourceTree = "<group>"; };
+		55039FA7136D5CCF0082E32E /* ULIPaintTempOvalTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintTempOvalTool.h; path = ../UKPaintView/ULIPaintTempOvalTool.h; sourceTree = "<group>"; };
+		55039FA8136D5CCF0082E32E /* ULIPaintTempRectangleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintTempRectangleTool.h; path = ../UKPaintView/ULIPaintTempRectangleTool.h; sourceTree = "<group>"; };
+		55039FA9136D5CCF0082E32E /* ULIPaintTempRoundrectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintTempRoundrectTool.h; path = ../UKPaintView/ULIPaintTempRoundrectTool.h; sourceTree = "<group>"; };
+		55039FAA136D5CCF0082E32E /* ULIPaintTextTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintTextTool.h; path = ../UKPaintView/ULIPaintTextTool.h; sourceTree = "<group>"; };
+		55039FAB136D5CCF0082E32E /* ULIPaintTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintTool.h; path = ../UKPaintView/ULIPaintTool.h; sourceTree = "<group>"; };
+		55039FAC136D5CCF0082E32E /* ULIPaintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIPaintView.h; path = ../UKPaintView/ULIPaintView.h; sourceTree = "<group>"; };
+		55039FAD136D5CCF0082E32E /* UlisBresenham.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UlisBresenham.h; path = ../UKPaintView/UlisBresenham.h; sourceTree = "<group>"; };
+		55039FAE136D5CCF0082E32E /* UlisBresenham.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UlisBresenham.c; path = ../UKPaintView/UlisBresenham.c; sourceTree = "<group>"; };
+		55039FAF136D5CCF0082E32E /* ULILineSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULILineSizeView.m; path = ../UKPaintView/ULILineSizeView.m; sourceTree = "<group>"; };
+		55039FB0136D5CCF0082E32E /* ULIPaintBrushTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintBrushTool.m; path = ../UKPaintView/ULIPaintBrushTool.m; sourceTree = "<group>"; };
+		55039FB1136D5CCF0082E32E /* ULIPaintEraseRectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintEraseRectTool.m; path = ../UKPaintView/ULIPaintEraseRectTool.m; sourceTree = "<group>"; };
+		55039FB2136D5CCF0082E32E /* ULIPaintEraserTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintEraserTool.m; path = ../UKPaintView/ULIPaintEraserTool.m; sourceTree = "<group>"; };
+		55039FB3136D5CCF0082E32E /* ULIPaintFreehandTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintFreehandTool.m; path = ../UKPaintView/ULIPaintFreehandTool.m; sourceTree = "<group>"; };
+		55039FB4136D5CCF0082E32E /* ULIPaintLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintLineTool.m; path = ../UKPaintView/ULIPaintLineTool.m; sourceTree = "<group>"; };
+		55039FB5136D5CCF0082E32E /* ULIPaintOvalTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintOvalTool.m; path = ../UKPaintView/ULIPaintOvalTool.m; sourceTree = "<group>"; };
+		55039FB6136D5CCF0082E32E /* ULIPaintPathTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintPathTool.m; path = ../UKPaintView/ULIPaintPathTool.m; sourceTree = "<group>"; };
+		55039FB7136D5CCF0082E32E /* ULIPaintRectangleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintRectangleTool.m; path = ../UKPaintView/ULIPaintRectangleTool.m; sourceTree = "<group>"; };
+		55039FB8136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintRoundedRectangleTool.m; path = ../UKPaintView/ULIPaintRoundedRectangleTool.m; sourceTree = "<group>"; };
+		55039FB9136D5CCF0082E32E /* ULIPaintSelectionLassoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintSelectionLassoTool.m; path = ../UKPaintView/ULIPaintSelectionLassoTool.m; sourceTree = "<group>"; };
+		55039FBA136D5CCF0082E32E /* ULIPaintSelectionRectangleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintSelectionRectangleTool.m; path = ../UKPaintView/ULIPaintSelectionRectangleTool.m; sourceTree = "<group>"; };
+		55039FBB136D5CCF0082E32E /* ULIPaintShapeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintShapeTool.m; path = ../UKPaintView/ULIPaintShapeTool.m; sourceTree = "<group>"; };
+		55039FBC136D5CCF0082E32E /* ULIPaintTempArrowTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTempArrowTool.m; path = ../UKPaintView/ULIPaintTempArrowTool.m; sourceTree = "<group>"; };
+		55039FBD136D5CCF0082E32E /* ULIPaintTempLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTempLineTool.m; path = ../UKPaintView/ULIPaintTempLineTool.m; sourceTree = "<group>"; };
+		55039FBE136D5CCF0082E32E /* ULIPaintTempOvalTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTempOvalTool.m; path = ../UKPaintView/ULIPaintTempOvalTool.m; sourceTree = "<group>"; };
+		55039FBF136D5CCF0082E32E /* ULIPaintTempRectangleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTempRectangleTool.m; path = ../UKPaintView/ULIPaintTempRectangleTool.m; sourceTree = "<group>"; };
+		55039FC0136D5CCF0082E32E /* ULIPaintTempRoundrectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTempRoundrectTool.m; path = ../UKPaintView/ULIPaintTempRoundrectTool.m; sourceTree = "<group>"; };
+		55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTextTool.m; path = ../UKPaintView/ULIPaintTextTool.m; sourceTree = "<group>"; };
+		55039FC2136D5CCF0082E32E /* ULIPaintTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTool.m; path = ../UKPaintView/ULIPaintTool.m; sourceTree = "<group>"; };
+		55039FC3136D5CCF0082E32E /* ULIPaintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintView.m; path = ../UKPaintView/ULIPaintView.m; sourceTree = "<group>"; };
 		550B30761152D9DE0049C593 /* AGIconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGIconFamily.h; path = ../AGIconFamily/AGIconFamily.h; sourceTree = "<group>"; };
 		550B30771152D9DE0049C593 /* AGIconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGIconFamily.m; path = ../AGIconFamily/AGIconFamily.m; sourceTree = "<group>"; };
 		550C09081195E61100351067 /* WILDPresentationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPresentationConstants.h; sourceTree = "<group>"; };
@@ -1080,49 +1120,9 @@
 		55E8063C1368B2CA006F1287 /* NSCursor+Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCursor+Box.m"; path = "../UKPaintView/NSCursor+Box.m"; sourceTree = "<group>"; };
 		55E8063D1368B2CA006F1287 /* NSCursor+CrossHair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCursor+CrossHair.m"; path = "../UKPaintView/NSCursor+CrossHair.m"; sourceTree = "<group>"; };
 		55E8063E1368B2CA006F1287 /* UKColorListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKColorListView.m; path = ../UKPaintView/UKColorListView.m; sourceTree = "<group>"; };
-		55E8063F1368B2CB006F1287 /* UKLineSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKLineSizeView.m; path = ../UKPaintView/UKLineSizeView.m; sourceTree = "<group>"; };
-		55E806401368B2CB006F1287 /* UKPaintbrushTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintbrushTool.m; path = ../UKPaintView/UKPaintbrushTool.m; sourceTree = "<group>"; };
-		55E806411368B2CB006F1287 /* UKPaintEraseRectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintEraseRectTool.m; path = ../UKPaintView/UKPaintEraseRectTool.m; sourceTree = "<group>"; };
-		55E806421368B2CB006F1287 /* UKPaintEraserTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintEraserTool.m; path = ../UKPaintView/UKPaintEraserTool.m; sourceTree = "<group>"; };
-		55E806431368B2CB006F1287 /* UKPaintLassoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintLassoTool.m; path = ../UKPaintView/UKPaintLassoTool.m; sourceTree = "<group>"; };
-		55E806441368B2CB006F1287 /* UKPaintLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintLineTool.m; path = ../UKPaintView/UKPaintLineTool.m; sourceTree = "<group>"; };
-		55E806451368B2CC006F1287 /* UKPaintOvalTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintOvalTool.m; path = ../UKPaintView/UKPaintOvalTool.m; sourceTree = "<group>"; };
-		55E806461368B2CC006F1287 /* UKPaintPathTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintPathTool.m; path = ../UKPaintView/UKPaintPathTool.m; sourceTree = "<group>"; };
-		55E806471368B2CC006F1287 /* UKPaintRectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintRectTool.m; path = ../UKPaintView/UKPaintRectTool.m; sourceTree = "<group>"; };
-		55E806481368B2CC006F1287 /* UKPaintRoundrectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintRoundrectTool.m; path = ../UKPaintView/UKPaintRoundrectTool.m; sourceTree = "<group>"; };
-		55E806491368B2CC006F1287 /* UKPaintSelectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintSelectTool.m; path = ../UKPaintView/UKPaintSelectTool.m; sourceTree = "<group>"; };
-		55E8064A1368B2CC006F1287 /* UKPaintTempArrowTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintTempArrowTool.m; path = ../UKPaintView/UKPaintTempArrowTool.m; sourceTree = "<group>"; };
-		55E8064B1368B2CD006F1287 /* UKPaintTempLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintTempLineTool.m; path = ../UKPaintView/UKPaintTempLineTool.m; sourceTree = "<group>"; };
-		55E8064C1368B2CD006F1287 /* UKPaintTempOvalTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintTempOvalTool.m; path = ../UKPaintView/UKPaintTempOvalTool.m; sourceTree = "<group>"; };
-		55E8064D1368B2CD006F1287 /* UKPaintTempRectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintTempRectTool.m; path = ../UKPaintView/UKPaintTempRectTool.m; sourceTree = "<group>"; };
-		55E8064E1368B2CD006F1287 /* UKPaintTempRoundrectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintTempRoundrectTool.m; path = ../UKPaintView/UKPaintTempRoundrectTool.m; sourceTree = "<group>"; };
-		55E8064F1368B2CD006F1287 /* UKPaintTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintTextTool.m; path = ../UKPaintView/UKPaintTextTool.m; sourceTree = "<group>"; };
-		55E806501368B2CD006F1287 /* UKPaintTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintTool.m; path = ../UKPaintView/UKPaintTool.m; sourceTree = "<group>"; };
-		55E806511368B2CD006F1287 /* UKPaintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPaintView.m; path = ../UKPaintView/UKPaintView.m; sourceTree = "<group>"; };
 		55E806691368B307006F1287 /* NSCursor+Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCursor+Box.h"; path = "../UKPaintView/NSCursor+Box.h"; sourceTree = "<group>"; };
 		55E8066A1368B307006F1287 /* NSCursor+CrossHair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCursor+CrossHair.h"; path = "../UKPaintView/NSCursor+CrossHair.h"; sourceTree = "<group>"; };
 		55E8066B1368B307006F1287 /* UKColorListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKColorListView.h; path = ../UKPaintView/UKColorListView.h; sourceTree = "<group>"; };
-		55E8066C1368B307006F1287 /* UKLineSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKLineSizeView.h; path = ../UKPaintView/UKLineSizeView.h; sourceTree = "<group>"; };
-		55E8066D1368B307006F1287 /* UKPaintbrushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintbrushTool.h; path = ../UKPaintView/UKPaintbrushTool.h; sourceTree = "<group>"; };
-		55E8066E1368B307006F1287 /* UKPaintEraseRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintEraseRectTool.h; path = ../UKPaintView/UKPaintEraseRectTool.h; sourceTree = "<group>"; };
-		55E8066F1368B307006F1287 /* UKPaintEraserTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintEraserTool.h; path = ../UKPaintView/UKPaintEraserTool.h; sourceTree = "<group>"; };
-		55E806701368B307006F1287 /* UKPaintLassoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintLassoTool.h; path = ../UKPaintView/UKPaintLassoTool.h; sourceTree = "<group>"; };
-		55E806711368B307006F1287 /* UKPaintLineTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintLineTool.h; path = ../UKPaintView/UKPaintLineTool.h; sourceTree = "<group>"; };
-		55E806721368B307006F1287 /* UKPaintOvalTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintOvalTool.h; path = ../UKPaintView/UKPaintOvalTool.h; sourceTree = "<group>"; };
-		55E806731368B307006F1287 /* UKPaintPathTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintPathTool.h; path = ../UKPaintView/UKPaintPathTool.h; sourceTree = "<group>"; };
-		55E806741368B307006F1287 /* UKPaintRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintRectTool.h; path = ../UKPaintView/UKPaintRectTool.h; sourceTree = "<group>"; };
-		55E806751368B307006F1287 /* UKPaintRoundrectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintRoundrectTool.h; path = ../UKPaintView/UKPaintRoundrectTool.h; sourceTree = "<group>"; };
-		55E806761368B307006F1287 /* UKPaintSelectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintSelectTool.h; path = ../UKPaintView/UKPaintSelectTool.h; sourceTree = "<group>"; };
-		55E806771368B307006F1287 /* UKPaintTempArrowTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintTempArrowTool.h; path = ../UKPaintView/UKPaintTempArrowTool.h; sourceTree = "<group>"; };
-		55E806781368B307006F1287 /* UKPaintTempLineTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintTempLineTool.h; path = ../UKPaintView/UKPaintTempLineTool.h; sourceTree = "<group>"; };
-		55E806791368B307006F1287 /* UKPaintTempOvalTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintTempOvalTool.h; path = ../UKPaintView/UKPaintTempOvalTool.h; sourceTree = "<group>"; };
-		55E8067A1368B307006F1287 /* UKPaintTempRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintTempRectTool.h; path = ../UKPaintView/UKPaintTempRectTool.h; sourceTree = "<group>"; };
-		55E8067B1368B307006F1287 /* UKPaintTempRoundrectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintTempRoundrectTool.h; path = ../UKPaintView/UKPaintTempRoundrectTool.h; sourceTree = "<group>"; };
-		55E8067C1368B307006F1287 /* UKPaintTextTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintTextTool.h; path = ../UKPaintView/UKPaintTextTool.h; sourceTree = "<group>"; };
-		55E8067D1368B307006F1287 /* UKPaintTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintTool.h; path = ../UKPaintView/UKPaintTool.h; sourceTree = "<group>"; };
-		55E8067F1368B307006F1287 /* UKPaintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPaintView.h; path = ../UKPaintView/UKPaintView.h; sourceTree = "<group>"; };
-		55E806801368B307006F1287 /* UlisBresenham.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UlisBresenham.h; path = ../UKPaintView/UlisBresenham.h; sourceTree = "<group>"; };
-		55E806811368B307006F1287 /* UlisBresenham.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UlisBresenham.c; path = ../UKPaintView/UlisBresenham.c; sourceTree = "<group>"; };
 		55E806831368B56D006F1287 /* NSBezierPath+RoundRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBezierPath+RoundRect.h"; path = "../UliKit/NSBezierPath+RoundRect.h"; sourceTree = "<group>"; };
 		55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+RoundRect.m"; path = "../UliKit/NSBezierPath+RoundRect.m"; sourceTree = "<group>"; };
 		55E8535C1166341100745C86 /* NSString+FetchNextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FetchNextLine.h"; path = "../UliKit/NSString+FetchNextLine.h"; sourceTree = SOURCE_ROOT; };
@@ -1926,60 +1926,60 @@
 		55E806681368B2E0006F1287 /* UKPaintView */ = {
 			isa = PBXGroup;
 			children = (
-				55E806801368B307006F1287 /* UlisBresenham.h */,
-				55E806811368B307006F1287 /* UlisBresenham.c */,
+				55039F98136D5CCF0082E32E /* ULILineSizeView.h */,
+				55039F99136D5CCF0082E32E /* ULIPaintBrushTool.h */,
+				55039F9A136D5CCF0082E32E /* ULIPaintEraseRectTool.h */,
+				55039F9B136D5CCF0082E32E /* ULIPaintEraserTool.h */,
+				55039F9C136D5CCF0082E32E /* ULIPaintFreehandTool.h */,
+				55039F9D136D5CCF0082E32E /* ULIPaintLineTool.h */,
+				55039F9E136D5CCF0082E32E /* ULIPaintOvalTool.h */,
+				55039F9F136D5CCF0082E32E /* ULIPaintPathTool.h */,
+				55039FA0136D5CCF0082E32E /* ULIPaintRectangleTool.h */,
+				55039FA1136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.h */,
+				55039FA2136D5CCF0082E32E /* ULIPaintSelectionLassoTool.h */,
+				55039FA3136D5CCF0082E32E /* ULIPaintSelectionRectangleTool.h */,
+				55039FA4136D5CCF0082E32E /* ULIPaintShapeTool.h */,
+				55039FA5136D5CCF0082E32E /* ULIPaintTempArrowTool.h */,
+				55039FA6136D5CCF0082E32E /* ULIPaintTempLineTool.h */,
+				55039FA7136D5CCF0082E32E /* ULIPaintTempOvalTool.h */,
+				55039FA8136D5CCF0082E32E /* ULIPaintTempRectangleTool.h */,
+				55039FA9136D5CCF0082E32E /* ULIPaintTempRoundrectTool.h */,
+				55039FAA136D5CCF0082E32E /* ULIPaintTextTool.h */,
+				55039FAB136D5CCF0082E32E /* ULIPaintTool.h */,
+				55039FAC136D5CCF0082E32E /* ULIPaintView.h */,
+				55039FAD136D5CCF0082E32E /* UlisBresenham.h */,
+				55039FAE136D5CCF0082E32E /* UlisBresenham.c */,
+				55039FAF136D5CCF0082E32E /* ULILineSizeView.m */,
+				55039FB0136D5CCF0082E32E /* ULIPaintBrushTool.m */,
+				55039FB1136D5CCF0082E32E /* ULIPaintEraseRectTool.m */,
+				55039FB2136D5CCF0082E32E /* ULIPaintEraserTool.m */,
+				55039FB3136D5CCF0082E32E /* ULIPaintFreehandTool.m */,
+				55039FB4136D5CCF0082E32E /* ULIPaintLineTool.m */,
+				55039FB5136D5CCF0082E32E /* ULIPaintOvalTool.m */,
+				55039FB6136D5CCF0082E32E /* ULIPaintPathTool.m */,
+				55039FB7136D5CCF0082E32E /* ULIPaintRectangleTool.m */,
+				55039FB8136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.m */,
+				55039FB9136D5CCF0082E32E /* ULIPaintSelectionLassoTool.m */,
+				55039FBA136D5CCF0082E32E /* ULIPaintSelectionRectangleTool.m */,
+				55039FBB136D5CCF0082E32E /* ULIPaintShapeTool.m */,
+				55039FBC136D5CCF0082E32E /* ULIPaintTempArrowTool.m */,
+				55039FBD136D5CCF0082E32E /* ULIPaintTempLineTool.m */,
+				55039FBE136D5CCF0082E32E /* ULIPaintTempOvalTool.m */,
+				55039FBF136D5CCF0082E32E /* ULIPaintTempRectangleTool.m */,
+				55039FC0136D5CCF0082E32E /* ULIPaintTempRoundrectTool.m */,
+				55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */,
+				55039FC2136D5CCF0082E32E /* ULIPaintTool.m */,
+				55039FC3136D5CCF0082E32E /* ULIPaintView.m */,
 				55E806691368B307006F1287 /* NSCursor+Box.h */,
 				55E8063C1368B2CA006F1287 /* NSCursor+Box.m */,
 				55E8066A1368B307006F1287 /* NSCursor+CrossHair.h */,
 				55E8063D1368B2CA006F1287 /* NSCursor+CrossHair.m */,
 				55E8066B1368B307006F1287 /* UKColorListView.h */,
 				55E8063E1368B2CA006F1287 /* UKColorListView.m */,
-				55E8066C1368B307006F1287 /* UKLineSizeView.h */,
-				55E8063F1368B2CB006F1287 /* UKLineSizeView.m */,
-				55E8066D1368B307006F1287 /* UKPaintbrushTool.h */,
-				55E806401368B2CB006F1287 /* UKPaintbrushTool.m */,
-				55E8066E1368B307006F1287 /* UKPaintEraseRectTool.h */,
-				55E806411368B2CB006F1287 /* UKPaintEraseRectTool.m */,
-				55E8066F1368B307006F1287 /* UKPaintEraserTool.h */,
-				55E806421368B2CB006F1287 /* UKPaintEraserTool.m */,
-				55E806701368B307006F1287 /* UKPaintLassoTool.h */,
-				55E806431368B2CB006F1287 /* UKPaintLassoTool.m */,
-				55E806711368B307006F1287 /* UKPaintLineTool.h */,
-				55E806441368B2CB006F1287 /* UKPaintLineTool.m */,
-				55E806721368B307006F1287 /* UKPaintOvalTool.h */,
-				55E806451368B2CC006F1287 /* UKPaintOvalTool.m */,
-				55E806731368B307006F1287 /* UKPaintPathTool.h */,
-				55E806461368B2CC006F1287 /* UKPaintPathTool.m */,
-				55E806741368B307006F1287 /* UKPaintRectTool.h */,
-				55E806471368B2CC006F1287 /* UKPaintRectTool.m */,
-				55039F63136C585E0082E32E /* UKPaintShapeTool.h */,
-				55039F64136C585F0082E32E /* UKPaintShapeTool.m */,
-				55E806751368B307006F1287 /* UKPaintRoundrectTool.h */,
-				55E806481368B2CC006F1287 /* UKPaintRoundrectTool.m */,
-				55E806761368B307006F1287 /* UKPaintSelectTool.h */,
-				55E806491368B2CC006F1287 /* UKPaintSelectTool.m */,
-				55E806771368B307006F1287 /* UKPaintTempArrowTool.h */,
-				55E8064A1368B2CC006F1287 /* UKPaintTempArrowTool.m */,
-				55E806781368B307006F1287 /* UKPaintTempLineTool.h */,
-				55E8064B1368B2CD006F1287 /* UKPaintTempLineTool.m */,
-				55E806791368B307006F1287 /* UKPaintTempOvalTool.h */,
-				55E8064C1368B2CD006F1287 /* UKPaintTempOvalTool.m */,
-				55E8067A1368B307006F1287 /* UKPaintTempRectTool.h */,
-				55E8064D1368B2CD006F1287 /* UKPaintTempRectTool.m */,
-				55E8067B1368B307006F1287 /* UKPaintTempRoundrectTool.h */,
-				55E8064E1368B2CD006F1287 /* UKPaintTempRoundrectTool.m */,
-				55E8064F1368B2CD006F1287 /* UKPaintTextTool.m */,
-				55E8067C1368B307006F1287 /* UKPaintTextTool.h */,
-				55E8067D1368B307006F1287 /* UKPaintTool.h */,
-				55E806501368B2CD006F1287 /* UKPaintTool.m */,
-				55E8067F1368B307006F1287 /* UKPaintView.h */,
-				55E806511368B2CD006F1287 /* UKPaintView.m */,
 				55E806831368B56D006F1287 /* NSBezierPath+RoundRect.h */,
 				55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */,
 				55039F66136C66E80082E32E /* NSBezierPath+ULIRegularPolygon.h */,
 				55039F67136C66EA0082E32E /* NSBezierPath+ULIRegularPolygon.m */,
-				55039F20136B3FA20082E32E /* UKPixelPaintbrushTool.h */,
-				55039F21136B3FA20082E32E /* UKPixelPaintbrushTool.m */,
 			);
 			name = UKPaintView;
 			sourceTree = "<group>";
@@ -2544,30 +2544,30 @@
 				55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */,
 				55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */,
 				55E806541368B2CD006F1287 /* UKColorListView.m in Sources */,
-				55E806551368B2CD006F1287 /* UKLineSizeView.m in Sources */,
-				55E806561368B2CD006F1287 /* UKPaintbrushTool.m in Sources */,
-				55E806571368B2CD006F1287 /* UKPaintEraseRectTool.m in Sources */,
-				55E806581368B2CD006F1287 /* UKPaintEraserTool.m in Sources */,
-				55E806591368B2CD006F1287 /* UKPaintLassoTool.m in Sources */,
-				55E8065A1368B2CD006F1287 /* UKPaintLineTool.m in Sources */,
-				55E8065B1368B2CD006F1287 /* UKPaintOvalTool.m in Sources */,
-				55E8065C1368B2CD006F1287 /* UKPaintPathTool.m in Sources */,
-				55E8065D1368B2CD006F1287 /* UKPaintRectTool.m in Sources */,
-				55E8065E1368B2CD006F1287 /* UKPaintRoundrectTool.m in Sources */,
-				55E8065F1368B2CD006F1287 /* UKPaintSelectTool.m in Sources */,
-				55E806601368B2CD006F1287 /* UKPaintTempArrowTool.m in Sources */,
-				55E806611368B2CD006F1287 /* UKPaintTempLineTool.m in Sources */,
-				55E806621368B2CD006F1287 /* UKPaintTempOvalTool.m in Sources */,
-				55E806631368B2CD006F1287 /* UKPaintTempRectTool.m in Sources */,
-				55E806641368B2CD006F1287 /* UKPaintTempRoundrectTool.m in Sources */,
-				55E806651368B2CD006F1287 /* UKPaintTextTool.m in Sources */,
-				55E806661368B2CD006F1287 /* UKPaintTool.m in Sources */,
-				55E806671368B2CD006F1287 /* UKPaintView.m in Sources */,
-				55E806821368B307006F1287 /* UlisBresenham.c in Sources */,
 				55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */,
-				55039F22136B3FA20082E32E /* UKPixelPaintbrushTool.m in Sources */,
-				55039F65136C58610082E32E /* UKPaintShapeTool.m in Sources */,
 				55039F68136C66ED0082E32E /* NSBezierPath+ULIRegularPolygon.m in Sources */,
+				55039FC4136D5CCF0082E32E /* UlisBresenham.c in Sources */,
+				55039FC5136D5CCF0082E32E /* ULILineSizeView.m in Sources */,
+				55039FC6136D5CCF0082E32E /* ULIPaintBrushTool.m in Sources */,
+				55039FC7136D5CCF0082E32E /* ULIPaintEraseRectTool.m in Sources */,
+				55039FC8136D5CCF0082E32E /* ULIPaintEraserTool.m in Sources */,
+				55039FC9136D5CCF0082E32E /* ULIPaintFreehandTool.m in Sources */,
+				55039FCA136D5CCF0082E32E /* ULIPaintLineTool.m in Sources */,
+				55039FCB136D5CCF0082E32E /* ULIPaintOvalTool.m in Sources */,
+				55039FCC136D5CCF0082E32E /* ULIPaintPathTool.m in Sources */,
+				55039FCD136D5CCF0082E32E /* ULIPaintRectangleTool.m in Sources */,
+				55039FCE136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.m in Sources */,
+				55039FCF136D5CCF0082E32E /* ULIPaintSelectionLassoTool.m in Sources */,
+				55039FD0136D5CCF0082E32E /* ULIPaintSelectionRectangleTool.m in Sources */,
+				55039FD1136D5CCF0082E32E /* ULIPaintShapeTool.m in Sources */,
+				55039FD2136D5CCF0082E32E /* ULIPaintTempArrowTool.m in Sources */,
+				55039FD3136D5CCF0082E32E /* ULIPaintTempLineTool.m in Sources */,
+				55039FD4136D5CCF0082E32E /* ULIPaintTempOvalTool.m in Sources */,
+				55039FD5136D5CCF0082E32E /* ULIPaintTempRectangleTool.m in Sources */,
+				55039FD6136D5CCF0082E32E /* ULIPaintTempRoundrectTool.m in Sources */,
+				55039FD7136D5CCF0082E32E /* ULIPaintTextTool.m in Sources */,
+				55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */,
+				55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

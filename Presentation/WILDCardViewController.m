@@ -30,21 +30,17 @@
 #import "WILDRecentCardPickerWindowController.h"
 #import "WILDStackInfoWindowController.h"
 
-#import "UKPaintSelectTool.h"
-#import "UKPaintLassoTool.h"
-#import "UKPaintbrushTool.h"
-#import "UKPixelPaintbrushTool.h"
-#import "UKPaintEraserTool.h"
-#import "UKPaintLineTool.h"
-#import "UKPaintRectTool.h"
-#import "UKPaintRoundrectTool.h"
-#import "UKPaintSelectTool.h"
-#import "UKPaintOvalTool.h"
-#import "UKPaintPathTool.h"
-#import "UKPaintTextTool.h"
-#import "UKPaintRectTool.h"
-#import "UKPaintPathTool.h"
-#import "UKPaintShapeTool.h"
+#import "ULIPaintSelectionRectangleTool.h"
+#import "ULIPaintSelectionLassoTool.h"
+#import "ULIPaintBrushTool.h"
+#import "ULIPaintFreehandTool.h"
+#import "ULIPaintEraserTool.h"
+#import "ULIPaintLineTool.h"
+#import "ULIPaintRectangleTool.h"
+#import "ULIPaintRoundedRectangleTool.h"
+#import "ULIPaintOvalTool.h"
+#import "ULIPaintTextTool.h"
+#import "ULIPaintShapeTool.h"
 
 
 @implementation WILDCardViewController
@@ -818,14 +814,14 @@
 		NSInteger		idx = desiredTool -WILDFirstPaintTool;
 		static NSArray*	sTools = nil;
 		if( !sTools )
-			sTools = [[NSArray alloc] initWithObjects: [UKPaintSelectTool class], [UKPaintLassoTool class],
-												[UKPaintbrushTool class], [UKPixelPaintbrushTool class],
-												[UKPaintEraserTool class], [UKPaintLineTool class],
-												[UKPaintbrushTool class], [UKPaintRectTool class],
-												[UKPaintRoundrectTool class],
-												[UKPaintSelectTool class], [UKPaintOvalTool class],
-												[UKPaintPathTool class], [UKPaintTextTool class],
-												[UKPaintShapeTool class], [UKPaintPathTool class],
+			sTools = [[NSArray alloc] initWithObjects: [ULIPaintSelectionRectangleTool class], [ULIPaintSelectionLassoTool class],
+												[ULIPaintFreehandTool class] /*pencil*/, [ULIPaintBrushTool class],
+												[ULIPaintEraserTool class], [ULIPaintLineTool class],
+												[ULIPaintBrushTool class] /*spray*/, [ULIPaintRectangleTool class],
+												[ULIPaintRoundedRectangleTool class],
+												[ULIPaintBrushTool class] /*bucket*/, [ULIPaintOvalTool class],
+												[ULIPaintFreehandTool class], [ULIPaintTextTool class],
+												[ULIPaintShapeTool class], [ULIPaintFreehandTool class] /*polygon*/,
 												nil];
 		
 		Class	theTool = [sTools objectAtIndex: idx];
