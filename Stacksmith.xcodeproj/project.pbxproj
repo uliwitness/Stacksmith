@@ -105,6 +105,8 @@
 		55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A8C114C179C00279B03 /* NSArray+Color.m */; };
 		55255ABC114C19AB00279B03 /* WILDScriptEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255ABB114C19AB00279B03 /* WILDScriptEditorWindowController.m */; };
 		55255AC1114C19CF00279B03 /* WILDScriptEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */; };
+		552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997CE1370BAD300F870DF /* WILDInputPanelController.m */; };
+		552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */; };
 		552FF146113F23F3005742C8 /* CURS_129.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF049113F23F3005742C8 /* CURS_129.pbm */; };
 		552FF147113F23F3005742C8 /* CURS_130.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04A113F23F3005742C8 /* CURS_130.pbm */; };
 		552FF148113F23F3005742C8 /* CURS_131.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04B113F23F3005742C8 /* CURS_131.pbm */; };
@@ -732,6 +734,10 @@
 		55255ABA114C19AB00279B03 /* WILDScriptEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScriptEditorWindowController.h; sourceTree = "<group>"; };
 		55255ABB114C19AB00279B03 /* WILDScriptEditorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScriptEditorWindowController.m; sourceTree = "<group>"; };
 		55255AC0114C19CF00279B03 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDScriptEditorWindowController.xib; sourceTree = "<group>"; };
+		552997CD1370BAD300F870DF /* WILDInputPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDInputPanelController.h; path = Windows/WILDInputPanelController.h; sourceTree = "<group>"; };
+		552997CE1370BAD300F870DF /* WILDInputPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDInputPanelController.m; path = Windows/WILDInputPanelController.m; sourceTree = "<group>"; };
+		552997D01370C5D800F870DF /* NSStringDrawing+SizeWithRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSStringDrawing+SizeWithRect.h"; path = "../UliKit/NSStringDrawing+SizeWithRect.h"; sourceTree = "<group>"; };
+		552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSStringDrawing+SizeWithRect.m"; path = "../UliKit/NSStringDrawing+SizeWithRect.m"; sourceTree = "<group>"; };
 		552FF049113F23F3005742C8 /* CURS_129.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_129.pbm; path = Resources/CURS_129.pbm; sourceTree = "<group>"; };
 		552FF04A113F23F3005742C8 /* CURS_130.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_130.pbm; path = Resources/CURS_130.pbm; sourceTree = "<group>"; };
 		552FF04B113F23F3005742C8 /* CURS_131.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_131.pbm; path = Resources/CURS_131.pbm; sourceTree = "<group>"; };
@@ -1305,6 +1311,8 @@
 				55686668135ADC3000C364D6 /* WILDSearchPaths.m */,
 				558DCD1F115571FE002C9195 /* WILDNotifications.h */,
 				558DCD20115571FE002C9195 /* WILDNotifications.m */,
+				552997CD1370BAD300F870DF /* WILDInputPanelController.h */,
+				552997CE1370BAD300F870DF /* WILDInputPanelController.m */,
 				5542CE3B113ADFBC00555C64 /* Document */,
 				5542CE3A113ADFAC00555C64 /* Presentation */,
 				55255AB7114C196B00279B03 /* Editor */,
@@ -1637,6 +1645,8 @@
 				550B30771152D9DE0049C593 /* AGIconFamily.m */,
 				55E8535C1166341100745C86 /* NSString+FetchNextLine.h */,
 				55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */,
+				552997D01370C5D800F870DF /* NSStringDrawing+SizeWithRect.h */,
+				552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */,
 				551FBEEC1170A11D00F32FBF /* UKGraphics.h */,
 				551FBEEA1170A11000F32FBF /* UKGraphics.m */,
 				55E3B6D911845E01000062C1 /* UKRandomInteger.h */,
@@ -2683,6 +2693,8 @@
 				55039FD7136D5CCF0082E32E /* ULIPaintTextTool.m in Sources */,
 				55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */,
 				55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */,
+				552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */,
+				552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
