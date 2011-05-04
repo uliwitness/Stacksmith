@@ -9,6 +9,8 @@
 #include "ForgeHostCommandsStacksmith.h"
 #include "ForgeWILDObjectValue.h"
 #include "WILDDocument.h"
+#include "WILDInputPanelController.h"
+#include "LEOScript.h"
 
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
@@ -76,18 +78,49 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 }
 
 
+void	WILDAskInstruction( LEOContext* inContext )
+{
+	char msgBuf[1024] = { 0 };
+	const char*	msgStr = LEOGetValueAsString( inContext->stackEndPtr -2, msgBuf, sizeof(msgBuf), inContext );
+	char answerBuf[1024] = { 0 };
+	const char*	answerStr = LEOGetValueAsString( inContext->stackEndPtr -1, answerBuf, sizeof(answerBuf), inContext );
+	
+	WILDInputPanelController	*	inputPanel = [WILDInputPanelController inputPanelWithPrompt: [NSString stringWithUTF8String: msgStr] answer: [NSString stringWithUTF8String: answerStr]];
+	NSInteger						returnValue = [inputPanel runModal];
+	
+	LEOHandler	*	theHandler = LEOContextPeekCurrentHandler( inContext );
+	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "the result" );
+	if( bpRelativeOffset >= 0 )
+	{
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, ((returnValue == NSAlertDefaultReturn) ? "OK" : "Cancel"), inContext );
+	}
+
+	bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "it" );
+	if( bpRelativeOffset >= 0 )
+	{
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, [[inputPanel answerString] UTF8String], inContext );
+	}
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOInstructionFuncPtr		gStacksmithHostCommandInstructions[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS] =
 {
 	WILDGoInstruction,
 	WILDVisualEffectInstruction,
-	WILDAnswerInstruction
+	WILDAnswerInstruction,
+	WILDAskInstruction
 };
 
 const char*					gStacksmithHostCommandInstructionNames[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS] =
 {
 	"WILDGoInstruction",
 	"WILDVisualEffectInstruction",
-	"WILDAnswerInstruction"
+	"WILDAnswerInstruction",
+	"WILDAskInstruction"
 };
 
 struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS +1] =
@@ -123,10 +156,24 @@ struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INS
 	{
 		EAnswerIdentifier, WILD_ANSWER_INSTR, 0, 0,
 		{
-			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2, 0, 0 },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
 			{ EHostParamLabeledValue, EWithIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParamLabeledValue, EOrIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParamLabeledValue, EOrIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 }
+		}
+	},
+	{
+		EAskIdentifier, WILD_ASK_INSTR, 0, 0,
+		{
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
+			{ EHostParamLabeledValue, EWithIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
