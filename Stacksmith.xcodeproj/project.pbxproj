@@ -596,6 +596,7 @@
 		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		5503472F1370A18800AE7681 /* StacksmithVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksmithVersion.h; sourceTree = "<group>"; };
 		55039F23136B52C70082E32E /* brush01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush01.png; path = Resources/brush01.png; sourceTree = "<group>"; };
 		55039F24136B52C70082E32E /* brush02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush02.png; path = Resources/brush02.png; sourceTree = "<group>"; };
 		55039F25136B52C70082E32E /* brush03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush03.png; path = Resources/brush03.png; sourceTree = "<group>"; };
@@ -1287,6 +1288,7 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5503472F1370A18800AE7681 /* StacksmithVersion.h */,
 				558DCDA911557E28002C9195 /* WILDApplication.h */,
 				558DCDAA11557E28002C9195 /* WILDApplication.m */,
 				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
@@ -2895,7 +2897,7 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = "Stacksmith-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = svn_version.h;
+				INFOPLIST_PREFIX_HEADER = StacksmithVersion.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -2943,7 +2945,7 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = "Stacksmith-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = svn_version.h;
+				INFOPLIST_PREFIX_HEADER = StacksmithVersion.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;

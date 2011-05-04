@@ -9,6 +9,7 @@
 #import "WILDAboutPanelController.h"
 #import "UKLicense.h"
 #import "NSWindow+ULIZoomEffect.h"
+#import "StacksmithVersion.h"
 
 
 @implementation WILDAboutPanelController
@@ -82,7 +83,7 @@
 		[mLicenseeField setStringValue: person];
 		[mCompanyField setStringValue: company];
 	}
-	NSString*	version = [NSString stringWithFormat: @"%@ (%@)", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"], [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleVersion"]];
+	NSString*	version = [NSString stringWithFormat: @"%@ (%@)", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"], @SVN_VERSION ];
 	[mVersionField setStringValue: version];
 }
 

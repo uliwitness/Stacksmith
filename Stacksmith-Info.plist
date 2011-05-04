@@ -66,13 +66,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0a3</string>
+	<string>STACKSMITH_VERSION</string>
 	<key>CFBundleSignature</key>
 	<string>WILD</string>
 	<key>CFBundleURLTypes</key>
 	<array/>
 	<key>CFBundleVersion</key>
-	<string>SVN_VERSION_NUM</string>
+	<string>STACKSMITH_VERSION</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.education</string>
 	<key>LSMinimumSystemVersion</key>
@@ -83,6 +83,8 @@
 	<string>WILDApplication</string>
 	<key>NSServices</key>
 	<array/>
+	<key>SUFeedURL</key>
+	<string>http://blog.stacksmith.com/feed/</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -123,7 +125,5 @@
 	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array/>
-	<key>SUFeedURL</key>
-	<string>http://blog.stacksmith.com/feed/</string>
 </dict>
 </plist>
