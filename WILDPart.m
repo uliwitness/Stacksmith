@@ -13,6 +13,7 @@
 #import "WILDPartContents.h"
 #import "WILDNotifications.h"
 #import "Forge.h"
+#import "LEORemoteDebugger.h"
 
 
 static NSInteger UKMinimum( NSInteger a, NSInteger b )
@@ -661,6 +662,15 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 			}
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts );
 			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
+			
+			#if REMOTE_DEBUGGER
+			LEORemoteDebuggerAddFile( [[self displayName] UTF8String], scriptStr, mScriptObject );
+			
+			// Set a breakpoint on the mouseUp handler:
+			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [[mStack document] contextGroup], "mouseup" );
+			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
+			LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
+			#endif
 		}
 		if( LEOParserGetLastErrorMessage() )
 		{
@@ -691,6 +701,9 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		return nil;
 	
 	LEOInitContext( &ctx, [[mStack document] contextGroup] );
+	#if REMOTE_DEBUGGER
+	ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
+	#endif
 	
 	LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
 		

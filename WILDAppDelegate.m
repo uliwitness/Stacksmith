@@ -20,6 +20,7 @@
 #import "LEOGlobalProperties.h"
 #import "ForgeHostCommandsStacksmith.h"
 #import "ForgeHostFunctionsStacksmith.h"
+#import "LEORemoteDebugger.h"
 #import <openssl/err.h>
 #import "WILDInputPanelController.h"
 
@@ -48,6 +49,10 @@
 	// Functions specific to this host application:
 	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, gStacksmithHostFunctionInstructionNames, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
 	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
+	
+	#if REMOTE_DEBUGGER
+	LEOInitRemoteDebugger( "127.0.0.1" );
+	#endif
 }
 
 -(void)	applicationWillFinishLaunching:(NSNotification *)notification
