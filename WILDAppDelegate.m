@@ -287,12 +287,6 @@
 		else
 			break;
 	}
-
-	WILDInputPanelController	*	inputPanel = [WILDInputPanelController inputPanelWithPrompt: [NSString stringWithUTF8String: "foo"] answer: [NSString stringWithUTF8String: "bar"]];
-	NSInteger						returnValue = [inputPanel runModal];
-	
-	if( returnValue == NSAlertDefaultReturn )
-		;
 }
 
 -(BOOL)	applicationShouldHandleReopen: (NSApplication *)sender hasVisibleWindows: (BOOL)hasVisibleWindows
