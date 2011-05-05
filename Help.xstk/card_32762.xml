@@ -1,52 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>32762</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties73264 77648 59877 100450 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>umber (property) (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>63</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 2 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he number of a card is its position within a stack. The number of a background is the order in which the background was created. To changethe number of a card or background, you must use the sort command orcut cards and paste them into different positions within the stack.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>192</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>198</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<name></name>
-	<script></script>
-</card>

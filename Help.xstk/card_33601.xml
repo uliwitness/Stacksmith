@@ -1,157 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>33601</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>onvert (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>7</offset>
-			<id>68</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 3 of 4</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text> monthName = January, Jan,   February, Feb, March, Mar, April,   Apr, May, June, Jun, July, Jul,   August, Aug, September, Sep,   October, Oct, November, Nov,   December, or Dec• time,  which has the following     format:  hour:minute[:second] [timeOfDay]   where timeOfDay = am or pm</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>176</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>179</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>183</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>187</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>191</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>232</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>245</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>246</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>253</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>256</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>265</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>276</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>292</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>294</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>ou can precede the  format names date and time with an optional adjective,  producing the following formats:abbrev date  Fri, Jun 15, 1990long date    Friday, June 15, 1990short date   6/15/90abbrev time  3:30 PMlong time        3:30:00 PMshort time       3:30 PM</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>39</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>48</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>65</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>111</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>176</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>177</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>219</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>220</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands27092 11187 24266 55207 66404 </text>
-	</content>
-	<name>convert 3</name>
-	<script></script>
-</card>

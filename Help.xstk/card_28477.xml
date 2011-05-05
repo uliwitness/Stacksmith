@@ -1,259 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>28477</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>repeat with</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>epeat with variableName = ¬   integer1 to integer2   statementsend repeatrepeat with variableName = ¬   integer1 down to integer2   statementsend repeatThe statements in a repeat with structure repeat until a variable withan initial value of integer1 is greater than (or, in the case of down to, less than) the number integer2.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>32</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>39</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>40</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>44</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>51</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>52</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>56</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>91</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>103</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>111</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>118</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>119</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>128</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>135</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>136</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>140</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>150</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>163</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>182</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>195</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>253</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>254</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>261</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>262</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>263</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>299</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>306</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>329</offset>
-			<id>315</id>
-		</stylerun>
-		<stylerun>
-			<offset>330</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>337</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>338</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he value of the variable increases(or decreases) by 1 during each iteration of the repeat loop. If HyperCard executes an exit repeatstatement in the loop, it continues running the handler starting from the first statement after end repeat. If HyperCard executes a next repeat statement, it returns immediately to the beginning of the repeat loop  and increases (or decreases) the value of the variable.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>84</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>92</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>124</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>137</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>153</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>154</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>232</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>243</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>268</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>281</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>338</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>346</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  show bkgnd field "demo field"  put return &amp; spaces(25) &amp; "Counting down to 0:  10" ¬  into bkgnd field "demo field"  repeat with theCount = 10 down to 0    put theCount into last word of bkgnd field "demo field"    wait 15 ticks  end repeat  flash  wait 20  hide bkgnd field "demo field"  put empty into bkgnd field "demo field"end mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>133</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>144</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>249</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>259</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Keywords89783 25835 90049 27427 27895 28073 28298 6157 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>control	down	keyword	next	repeat	structures	to	with</text>
-	</content>
-	<name>repeat with</name>
-	<script></script>
-</card>

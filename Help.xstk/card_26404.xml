@@ -1,291 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>26404</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>f (multiple-statement)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>f trueOrFalse then    statements [else if trueOrFalse then    statements ][else   statements ]end ifThe multiple-statement if structure tests the specified condition and executes one or more statements if the condition is true. You use the optional else if or else form to run alternative blocks of code in case the  condition following if is false.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>36</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>45</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>56</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>61</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>63</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>80</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>88</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>101</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>109</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>131</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>135</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>188</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>199</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>257</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>266</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>268</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>274</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>345</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>349</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>Because each part of a complex if structure may contain more than one statement, you must have an end if statement at the end of the structure.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>106</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  put random(19) into theNumber  put 0 into botNum  put 20 into topNum  put 0 into numberOfTrys  put "I am thinking of a number between 0 and 20." &amp; return &amp; ¬  "Try to guess the number:" into sayIt  repeat    add 1 to numberOfTrys    ask sayIt    if the result is "Cancel" OR it is empty then exit repeat    put it into theGuess    if theGuess = theNumber then      answer "You got it! The number is" &amp;&amp; theGuess &amp; "." &amp; return &amp;¬      "You guessed in" &amp;&amp; numberOfTrys &amp;&amp; "attempts."      exit repeat    else if theGuess is not a number then     put theGuess &amp;&amp; "is not a number." into sayIt    else if theGuess &gt; topNum then      put theGuess &amp;&amp; "is greater than" &amp;&amp; topNum &amp; "." into sayIt    else if theGuess &lt; botNum then      put theGuess &amp;&amp; "is less than" &amp;&amp; botNum &amp; "." into sayIt    else if theGuess &lt; theNumber then      put "The number is greater than" &amp;&amp; theGuess &amp; "." into sayIt      put theGuess into botNum    else if theGuess &gt; theNumber then      put "The number is less than" &amp;&amp; theGuess &amp; "." into sayIt      put theGuess into topNum    end if    put return &amp; "Please enter a number between" &amp;&amp; botNum &amp;&amp;¬    "and" &amp;&amp; topNum &amp; ":" after sayIt  end repeatend mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>268</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>270</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>355</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>357</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>531</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>538</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>624</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>628</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>629</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>631</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>726</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>730</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>731</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>733</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>825</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>829</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>830</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>832</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>962</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>966</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>967</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>969</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>1096</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>1099</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>1100</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>1103</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Keywords89783 90049 6157 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>control	else	end	if	keyword	structures	test	then	trueOrFalse</text>
-	</content>
-	<name>if (multiple-statement)</name>
-	<script></script>
-</card>

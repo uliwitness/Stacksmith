@@ -1,78 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>65714</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>tan</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he tan of numberValue returned: a number equal tothe trigonometric tangent of number expressed in radiansNote: There are 2 * pi radians in 360 degrees.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>81</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>82</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>88</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>89</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>he tan of 0  -- returns 0the tan of pi -- returns 0the tan of pi / 3  -- returns 0the tan of (pi / 3) -- returns 1.732051</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 52019 54961 78162 64752 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	math	number	tangent	trigonometric</text>
-	</content>
-	<name>tan</name>
-	<script></script>
-</card>

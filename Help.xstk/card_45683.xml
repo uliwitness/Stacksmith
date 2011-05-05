@@ -1,247 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>45683</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>read</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ead from file fileName [at [-] ¬integer] {for posInteger |until char}The read command reads data froma file. (You must have already opened the file with the open file command.)  Read places the data into the local variable it.Reading of a newly opened file starts from the beginning of the  file, or optionally  at character integer. If you use the form at -integer, reading starts at integer characters from the end of</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>23</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>48</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>72</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>82</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>161</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>172</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>182</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>188</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>227</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>230</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>319</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>322</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>332</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>339</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>341</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>361</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>365</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>372</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>392</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>399</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>400</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he file. Subsequent reads continue from the last point read.Read continues until it has read the specified number of characters or it reaches the named ASCII character (which can be specified as a constant:  colon, comma, end, eof, formfeed, quote, return, space, or tab).All characters count as data, including return characters at the end of lines, spaces, and tab characters.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>61</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>210</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>211</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>228</offset>
-			<id>315</id>
-		</stylerun>
-		<stylerun>
-			<offset>229</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>233</offset>
-			<id>315</id>
-		</stylerun>
-		<stylerun>
-			<offset>234</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>243</offset>
-			<id>315</id>
-		</stylerun>
-		<stylerun>
-			<offset>244</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>250</offset>
-			<id>315</id>
-		</stylerun>
-		<stylerun>
-			<offset>251</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>258</offset>
-			<id>315</id>
-		</stylerun>
-		<stylerun>
-			<offset>259</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>265</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>266</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>267</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>269</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>270</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>273</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>read from file "Data" until Z -- read until first Z  read from file "Data" until tab  read from file "Data" until return -- read one lineread from file "Data" until end -- read until the end of the fileread from file "Data" for 100 -- read 100 bytesread from file "Data" at 200 for 100 -- read 100 bytes ¬                starting at the 200th character in the fileread from file "Data" at -200 for 100 -- read 100 bytes ¬                starting at the 200th character from the end of the file read from file "My Data"-- This function asks for the name of a text file and reads it.-- You might use it as follows: -- put readFile() into myInfo-- Note that variables can hold unlimited amounts of information-- while fields can only hold 30k.function readFile  answer file "Read what text file?" of type text  if (it is empty) or (it is "Cancel") then return empty  put it into theFileName  open file theFileName  repeat forever    read from file theFileName for 16384    if it is empty then exit repeat    put it after theData  end repeat  close file theFileName  return theDataend readFile</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands32483 41778 41996 44420 51002 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>char	characters	command	file	filename	for	input	integer	it	read	until</text>
-	</content>
-	<name>read</name>
-	<script></script>
-</card>

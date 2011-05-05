@@ -1,129 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>15459</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>ort (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>68</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 3 of 3</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ote that neither case nor diacritical marks matter with the sort style text:"apple" = "APPLE" = "äpplé"Sort style numeric correctly sorts numbers.  With sort style text, "1" &lt; "100" &lt; "17" &lt; "2"The sort style numeric correctly sorts these values as:"1" &lt; "2" &lt; "17" &lt; "100"</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>71</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>108</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>118</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>127</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>168</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>174</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>177</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>202</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>217</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>226</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>260</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he sort style dateTime orders the sort elements by their date or time format. (See the convert command for valid date and time formats.)The sort style international correctly sorts non-English text containing diacritical marks and special characters based on the international resource installed in the the current stack, the Home stack, HyperCard itself, or the System file.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>87</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>96</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>153</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>168</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands41060 </text>
-	</content>
-	<name>sort 3</name>
-	<script></script>
-</card>

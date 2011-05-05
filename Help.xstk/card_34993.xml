@@ -1,152 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>34993</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>disable</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>isable menudisable menuItem of menudisable button The disable command dims menu items, entire menus, and buttons. It’s a shortcut for setting the enabled property of a menu item,  menu, or button to false.  Users cannot choose dimmedmenu items.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>8</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>13</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>29</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>46</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>52</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>67</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>150</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>159</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>204</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>209</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n disableTalkMenu  if there is a menu "Reference" then    disable menuItem "HyperTalk Reference" of menu "Reference"  end ifend disableTalkMenu</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>61</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>disable menu "File"disable menu 2disable second menudisable menuItem "New" of menu "File"disable menuItem 2 of menu 2disable second menuItem of second menudisable button 1disable background button id 1234</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands34927 69523 70039 34045 35579 61996 71193 76221 58014 76567 45460 45965 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>command	item	menu	menu items	new features</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>isabled buttons don't receive mouseDown, mouseStillDown, mouseUp, or mouseDoubleClick messages when you click them.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>30</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>65</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>87</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<name>disable</name>
-	<script>on showCardStuffglobal gHMnuif there is a menu gHMnuthen enable menuItem "HyperTalk Reference" of menu gHMnu -- ∆pass showCardStuffend showCardStuff</script>
-</card>

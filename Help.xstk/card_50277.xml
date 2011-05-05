@@ -1,159 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>50277</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>unmark</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>nmark all cardsunmark cardunmark cards where trueOrFalseunmark cards by finding      ¬   [chars|word|whole|string] ¬   [international]           ¬   text [in field ]  [of marked cards]</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>28</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>49</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>60</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>157</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>161</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>162</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>163</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>166</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>171</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>176</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>191</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>unmark cardunmark this cardunmark first cardunmark first marked cardunmark marked card 12unmark all cardsunmark cards where field "title" contains "select"unmark cards where (word 2 of field "Pages" = 1)unmark cards where isCommand() -- function returns true or falseunmark cards by finding "Mary Lou"unmark cards by finding "Mary Lou" in field 1-- unmark only some of the marked cards:unmark cards by finding "Mary Lou" in field 1 of marked cards-- This handler only unmarks the marked cards:on unMarkCards   repeat with i = 1 to the number of cards     set cursor to busy     if (the marked of card i) then unmark card i   end repeatend unMarkCards</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he unmark command sets the marked property of the specified cards to false.  Use it to deselect sets of cards that you have marked.Unmark cards where visits each card in the stack and evaluates the expression. If its value is true, HyperCard unmarks the card. Unmark cards by finding unmarks cards using the same mechanism as the find command.It unmarks cards very quickly.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>27</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>75</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>133</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>153</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>228</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>233</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>262</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>287</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>332</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>338</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands21415 37172 41060 76367 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>all	by	card	characters	chars	command	finding	mark	marked	new features	trueOrFalse	where</text>
-	</content>
-	<name>unmark</name>
-	<script></script>
-</card>

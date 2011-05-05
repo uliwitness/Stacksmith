@@ -1,148 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>63809</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>selectedLine</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he selectedLine the selectedLine of listFieldthe selectedLine of popupButtonValues returned: • for the selectedLine, a line    expression that indicates the line of a    field or the Message box in which a    range of characters is currently    highlighted</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>81</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>105</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>122</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>on selectedLineDemo   --show the selectedLine:   select char 24 to 30 of field "Demo Script"   wait 15   answer "The selected line is:" &amp; return &amp; the selectedLine end selectedLineDemo</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>get the selectedLineput the selectedLine into theLineset the textFont of theLine to "Geneva"get the selectedLine of button "My Popup Button"get the selectedLine of field "My List Field"</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions24266 32809 12857 53252 56528 47006 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text> for the selectedLine of listField,    a line expression that indicates the    lines of a list field  in which the    characters are currently highlighted• for the selectedLine of popupButton,    a line expression that evaluates to     the line number in a popup button’s    contents indicating the current    selection If nothing is selected, the selectedLine returns empty.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>93</offset>
-			<id>294</id>
-		</stylerun>
-		<stylerun>
-			<offset>103</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>165</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>185</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>186</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>197</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>356</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>372</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>381</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>386</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	line	select	selection</text>
-	</content>
-	<name>selectedLine</name>
-	<script></script>
-</card>

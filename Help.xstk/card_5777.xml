@@ -1,274 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>5777</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<part>
-		<id>1</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>289</left>
-			<top>50</top>
-			<right>413</right>
-			<bottom>72</bottom>
-		</rect>
-		<style>roundrect</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Example Button</name>
-		<script>on mouseEnterhiliteButton (the params)end mouseEnteron mouseWithinhiliteButton (the params)end mouseWithinon mouseLeavehiliteButton (the params)end mouseLeaveon mouseDownhiliteButton (the params)end mouseDownon mouseStillDownhiliteButton (the params)end mouseStillDownon mouseUphiliteButton (the params)end mouseUpon hiliteButton theName-- In case the user advances to the next card using-- command-3, check the card id first:if the short id of this card = 5777 thenset hilite of button theName to truewait 25set hilite of button theName to falseend ifend hiliteButton</script>
-	</part>
-	<part>
-		<id>2</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>292</left>
-			<top>111</top>
-			<right>401</right>
-			<bottom>130</bottom>
-		</rect>
-		<style>radiobutton</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>mouseEnter</name>
-		<script></script>
-	</part>
-	<part>
-		<id>3</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>292</left>
-			<top>128</top>
-			<right>401</right>
-			<bottom>147</bottom>
-		</rect>
-		<style>radiobutton</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>mouseWithin</name>
-		<script></script>
-	</part>
-	<part>
-		<id>4</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>292</left>
-			<top>145</top>
-			<right>401</right>
-			<bottom>164</bottom>
-		</rect>
-		<style>radiobutton</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>mouseLeave</name>
-		<script></script>
-	</part>
-	<part>
-		<id>5</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>292</left>
-			<top>162</top>
-			<right>401</right>
-			<bottom>181</bottom>
-		</rect>
-		<style>radiobutton</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>mouseDown</name>
-		<script></script>
-	</part>
-	<part>
-		<id>6</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>292</left>
-			<top>198</top>
-			<right>401</right>
-			<bottom>217</bottom>
-		</rect>
-		<style>radiobutton</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>mouseUp</name>
-		<script></script>
-	</part>
-	<part>
-		<id>7</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>292</left>
-			<top>179</top>
-			<right>426</right>
-			<bottom>198</bottom>
-		</rect>
-		<style>radiobutton</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>mouseStillDown</name>
-		<script></script>
-	</part>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 2 of 3</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>hat are messages? (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>63</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>HyperTalk translations:</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>What’s the content of a message?The message itself is just HyperCard’s name for the event that occurred. HyperCard acts as a translator: it “watches” the stack and translates events into message names.To see HyperCard translate events into message names, move the pointer over the Example Button and click.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>1</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>HyperTalk basics6658 26982 10397 9950 </text>
-	</content>
-	<name>What are messages? 2</name>
-	<script></script>
-</card>

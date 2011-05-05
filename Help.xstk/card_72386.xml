@@ -1,115 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>72386</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>grid</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>set [the] grid to trueOrFalseThe grid property returns or sets whether HyperCard constrains the movement of many Paint tools to eight-pixel intervals. It correspondsto the Grid command in the Options menu (which appears when you selecta Paint tool).The default value is false.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>6</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>30</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>32</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>276</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>282</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>set the grid to true</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n gridDemo  setUpPaint  show bkgnd field "demo field"  displayMessage "Click the mouse to continue..." &amp; return &amp;¬  "Grid set to false" &amp; spaces(30) &amp; "Grid set to true"  set grid to false  set dragspeed to 200  drag from "20,110" to "165,250"  wait 2 seconds  set grid to true  drag from "265,110" to "410,250"  set the cursor to arrow  wait until the mouseClick  domenu "revert"  hide bkgnd field "demo field"  choose browse toolend gridDemoon setUpPaint  choose rectangle tool  set lineSize to 1  set multiple to true  set polysides to 4  show card picture  set centered to false  set filled to falseend setUpPaint</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>181</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>185</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>275</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>279</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties45965 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>grid	paint	property	trueOrFalse</text>
-	</content>
-	<name>grid</name>
-	<script></script>
-</card>

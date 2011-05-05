@@ -1,196 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>81344</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>scroll</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>et [the] scroll of field to integerset the scroll of [the] card window ¬    to pointFor scrolling fields, the scroll property returns or sets which lines of text currently appear (as indicated by the scroll bar). The integer represents the number of pixels that have scrolled above the top of the field’s rectangle. For example, the number of lines scrolledin card field 1 equals the scroll of card field 1 div the textHeight of card field 1.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>8</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>29</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>36</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>56</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>59</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>60</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>82</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>87</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>114</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>122</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>221</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>222</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>229</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>230</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>385</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>447</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>or fields, HyperCard pins the scroll to a number between 0 and the maximum value for the field.For the card window, the scroll property returns or sets a point that specifies the current horizontal and vertical offsets of the portion of the card currently visible in the card window.It affects the card image only when the size of the window is smaller than the size of the card.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>30</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>106</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>117</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>122</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>130</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>f the textHeight of field "index" is 18 thenset scroll of field "index" to 36scrolls down by two lines.put the scroll of field 1 div textHeight of field 1 into linesScrolledset the scroll of field "Index" to 0set the scroll of the card window to 0,0set the scroll of card window to (bottomRight of this card)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>109</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n madScroller  put the rect of card window into theRect  set the rect of card window to left of cd window,top of cd window,¬  left of cd window + 172, top of cd window + 64  repeat 10 times    set the scroll of card window to ¬    random(width of this card),random(height of this card)    wait 30  end repeat  set the rect of card window to theRectend madScroller</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>207</offset>
-			<id>54</id>
-		</stylerun>
-		<stylerun>
-			<offset>213</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties24266 85301 91818 86710 74022 74795 79936 86116 62877 83265 86868 87153 89143 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>card window	field	horizontal	new features	offset	property	scrolling	vertical	windows</text>
-	</content>
-	<name>scroll</name>
-	<script></script>
-</card>

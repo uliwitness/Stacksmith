@@ -1,71 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>56991</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>heapSpace</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he heapSpaceValue returned: a number equalto the amount of working memory HyperCard has left (the number of bytes remaining in HyperCard’s application heap)The memory that HyperCard can use is divided into two parts—the heap and the stack. StackSpace  returns the amount of memory that’s available in the stack portion. HeapSpace returns the amount available in the heap portion. </text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>246</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>256</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>326</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>335</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>get the heapSpace()if it &lt; 100 then ...</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 11662 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	heap	memory	spaces</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>The available memory determines whether the user can use the Paint tools, whether HyperCard can open a stack in a new window, and other performance-related factors.</text>
-	</content>
-	<name>heapSpace</name>
-	<script></script>
-</card>

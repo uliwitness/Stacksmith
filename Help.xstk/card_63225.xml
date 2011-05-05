@@ -1,70 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>63225</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>seconds</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he secondsthe secsValue returned: an integer equal tothe number of seconds between midnight, January 1, 1904, and the current time set in your computer</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n secondsDemo  -- Check the speed of an operation  put 0 into total  put the seconds into startTime  repeat with number = 1 to 1000    set cursor to busy    add number to total  end repeat  put the seconds - startTime into totalTime  answer "The sum of numbers 1 to 1000 is" &amp;&amp; total  &amp;&amp;¬  "and it took" &amp;&amp; totalTime &amp;&amp; "seconds to figure this out."end secondsDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>77</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>88</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>203</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>214</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 33535 66203 66404 50819 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	seconds	time</text>
-	</content>
-	<name>seconds</name>
-	<script></script>
-</card>

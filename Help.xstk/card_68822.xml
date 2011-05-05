@@ -1,152 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>68822</id>
-	<filler1>0</filler1>
-	<cantDelete> <true /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>cantDelete</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>set [the] cantDelete of card ¬    to trueOrFalseset [the] cantDelete of bkgnd ¬    to trueOrFalseset [the] cantDelete of stack ¬    to trueOrFalseThe cantDelete property returns or sets whether a user can delete a specified card, background, or stack. It corresponds to the Can’t Delete check box in the Card Info, Background Info, and Protect Stack dialog boxes.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>29</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>39</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>75</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>80</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>90</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>101</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>126</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>131</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>141</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>152</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>154</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>158</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>168</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>The default value is false (meaningthat a card, background, or stack canbe deleted).Note: Setting the cantDelete of a stack to true doesn't prevent the user from deleting the stack by dragging it to the Trash.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>28</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>106</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>118</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>131</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>137</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n cantDeleteDemo  set cantDelete of this card to true  domenu "Delete Card" end cantDeleteDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>et the cantDelete of this card to trueset the cantDelete of first card of bkgnd 2 to falseset the cantDelete of this background to trueset the cantDelete of this stack to trueset the cantDelete of stack "Home" to true</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties69105 18315 18888 19234 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>background	cant	card	delete	property	stacks	cantModify</text>
-	</content>
-	<name>cantDelete</name>
-	<script></script>
-</card>

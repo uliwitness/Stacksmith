@@ -1,84 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>30827</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>rrowKey (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>8</offset>
-			<id>63</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 2 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>To handle the arrowKey message, use the following form:on arrowKey whichKey   statementsend arrowKeyIn the above form, the parameter variable whichKey is set to a direction.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>82</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>92</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>107</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>148</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>158</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>170</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>179</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands3428 84197 6031 </text>
-	</content>
-	<name>arrowKey 2</name>
-	<script></script>
-</card>

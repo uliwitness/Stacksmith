@@ -1,87 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>102760</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>sum</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>um(numberList)Value returned:  the sum of a comma- delimited list of itemsnumberList evaluates to  a comma-delimited list of items, including any container holding such a list.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>80</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>90</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>91</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>put sum(field 5) into totalif sum(firstList) &gt; sum(secondList) then answer "Imbalance Found"</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	total	add</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  answer "1 + 2 + 3 + 4 + 5 + 6 + 7 =" &amp;&amp; sum(1,2,3,four,5,6,7)end mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>53</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>56</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<name>sum</name>
-	<script></script>
-</card>

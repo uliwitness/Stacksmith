@@ -1,159 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>40449</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>keyDown</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n keyDownDemo  -- The keyDown messages are handled in the script of this card  show bkgnd field "demo field"  put "Type any key..." into bkgnd field "demo field"  put "Press the Return key to continue..." into ¬  line 6 of bkgnd field "demo field"end keyDownDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>eyDown charThe keyDown command simulates a key press from within a handler. It acts exactly as if the user pressed a character from the keyboard.HyperCard sends the keyDown command to a field (if the insertion point is set) or to the current card when the user presses a key. The value passed to the parameter variable char corresponds to the key pressed.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>8</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>129</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>130</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>169</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>178</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>305</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>323</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>324</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>328</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>329</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>ou can handle the keyDown message as follows:on keyDown theKey   statementsend keyDownNote: keyDown is not sent for characters typed using the type command.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>27</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>48</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>69</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>93</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>107</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>149</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>155</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands8287 3428 33000 60915 64480 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>card messages	char	characters	command	down	field messages	key	keyDown	message	new features</text>
-	</content>
-	<name>keyDown</name>
-	<script>on keyDown whichKeyif the visible of bkgnd field "demo field" is true thenput charToNum(whichKey) into keyNumberif keyNumber is in specialKeyNums()then put whichSpecialKey(keyNumber) into whichKeyput "The key you pressed was:" &amp;&amp; whichKey &amp; return &amp;¬"The charToNum of that key is:" &amp;&amp; keyNumber ¬into line 3 to 4 of bkgnd field "demo field" -- ∆if keyNumber = 13 thenset cursor to watchwait 2 secondsput empty into bkgnd field "Demo Field"hide bkgnd field "Demo Field"end ifelse pass keyDownend keyDownfunction specialKeyNumsreturn "1,3,4,5,8,9,11,12,13,16,27,28,29,30,31,32,127,202"end specialKeyNumsfunction specialKeys-- ∆ Localize all special key names:return "Home,Enter,End,Help,Delete,Tab,Page Up,Page Down,Return," &amp; ¬"a function key,ESC or clear,Left Arrow,Right Arrow,Up Arrow," &amp; ¬"Down Arrow,Space Bar,forward Delete,option - Space"end specialKeysfunction whichSpecialKey keyNumberput the number of items in char 1 to offSet(keyNumber,specialKeyNums()) of specialKeyNums() into itemNumreturn item itemNum of specialKeys()end whichSpecialKey</script>
-</card>

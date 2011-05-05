@@ -1,103 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>21952</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>newButton</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ewButtonHandler:on newButton   statementsend newButtonHyperCard sends the newButton message to a button just after HyperCard creates it.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>63</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>82</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>93</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>-This handler sets the autoHilite for each new button:on newButton  -- the target is the name of the new button  set autoHilite of the target to true  pass newButtonend newButton</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>lthough the new button will not have a script with which to respond to the message, any other object along the message-passing path can handle it.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>40</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>46</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>95</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>101</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>System messages18636 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>button	button messages	message	new	system</text>
-	</content>
-	<name>newButton</name>
-	<script></script>
-</card>

@@ -1,156 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>66404</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>time</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he [adjective ] timetime()Value returned: A text string representing the current time set in your Macintosh, in one of the following time formats:the time           -- 9:14 AMtime()             -- 9:14 AMthe abbrev time    -- 9:14 AMthe short time     -- 9:14 AMthe long time      -- 9:14:42 AMthe English time   -- 9:14:42 AM</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>29</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>151</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n clock  show bkgnd field "Demo Field"   put the ticks into startTicks  put the seconds into startSeconds  repeat until the mouseClick    displayMessage "The time is" &amp;&amp; the time &amp; return &amp; ¬    "The long time is" &amp;&amp; the long time &amp; return &amp; return &amp;¬    the seconds - startseconds &amp;&amp; "seconds have elapsed." &amp; return &amp; ¬    the ticks - startTicks &amp;&amp; "ticks have elapsed." &amp; return &amp; return &amp;¬    spaces(20) &amp; "Click the mouse to continue . . ."  end repeat  hide bkgnd field "Demo Field"end clock</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>180</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>184</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>228</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>232</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>233</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>237</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>he short timethe abbreviated timethe abbrev timethe abbr timethe timethe long timetime()</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions27092 33535 55207 63225 66203 50819 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>When HyperCard is running under System 7.1, the long, abbrev, and short forms agree with the formats set in the Date &amp; Time Control Panel.The form the English time returns the time in the form hh :mm :ss:  AM|PM no matter what language the system is localized for and no matter what the settings are on the Date &amp; Time Control Panel.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>149</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>167</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>195</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>196</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>199</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>200</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>203</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>204</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>206</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>215</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>abbreviated	function	hour	long	minutes	seconds	short	time</text>
-	</content>
-	<name>time</name>
-	<script></script>
-</card>

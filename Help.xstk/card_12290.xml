@@ -1,109 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>12290</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<part>
-		<id>1</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>394</left>
-			<top>273</top>
-			<right>417</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>opaque</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20002</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Prev</name>
-		<script></script>
-	</part>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>Add comments to a script</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>In HyperTalk scripts, two hyphens (--) indicate a comment. HyperTalk ignores all commented lines when executinga script.For example:on mouseUp   -- Displays a dialog box   answer "What?" with "No" or "Yes"   put it -- the user's replyend mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>36</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>138</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>• To comment several lines at once,        drag to select the lines you want to     comment, and then choose Comment     from the Script menu (or press ⌘-–).• To “uncomment” several lines at     once, drag to select the lines you want     to uncomment, and then choose     Uncomment from the Script menu     (or press ⌘-=).</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>156</offset>
-			<id>45</id>
-		</stylerun>
-		<stylerun>
-			<offset>157</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>328</offset>
-			<id>45</id>
-		</stylerun>
-		<stylerun>
-			<offset>329</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Editing scripts5960 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>add	comments	edit	editor	scripts	to</text>
-	</content>
-	<name>Add comments to a script</name>
-	<script></script>
-</card>

@@ -1,98 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>31649</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>beep</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>eepbeep posIntegerThe beep command soundsthe Macintosh system beep.  If you specify a posInteger, your Macintosh beeps that many times.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>12</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>92</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>93</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>103</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>104</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  beep 2  answer "Beep! Beep!"end mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>13</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands43407 64990 50819 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>command	sound</text>
-	</content>
-	<name>beep</name>
-	<script></script>
-</card>

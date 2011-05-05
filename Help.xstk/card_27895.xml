@@ -1,171 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>27895</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>repeat for</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>epeat [for] posInteger [times]   statementsend repeatThe statements in a repeat for structure repeat for a specified number of times.If HyperCard executes an exit repeatstatement in the loop, it continues running the handler starting from the first statement after end repeat.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>7</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>8</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>13</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>23</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>30</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>32</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>45</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>57</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>77</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>89</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>164</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>177</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>193</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>194</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>272</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>283</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>f HyperCard executes a next repeat statement, it returns immediately to the beginning of the repeat loop.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>36</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>93</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>101</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  show bkgnd field "demo field"  put return &amp; "    The count will stop at 10:" ¬  into bkgnd field "demo field"  put 0 into theCount  put space &amp; space &amp; theCount after bkgnd field "demo field"  repeat for 10 times    add 1 to theCount    put theCount into last word of bkgnd field "demo field"  end repeat  wait 30  hide bkgnd field "demo field"  put empty into bkgnd field "demo field"end mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>211</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>221</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>315</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>325</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Keywords89783 25835 90049 27427 28073 28298 28477 6157 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>control	for	keyword	next	repeat	structures	times</text>
-	</content>
-	<name>repeat for</name>
-	<script></script>
-</card>

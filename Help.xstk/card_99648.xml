@@ -1,131 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>99648</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>family</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties103123 81699 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>et [the] family of button to integerwhere integer resolves to a value between 0 and 15, and 0 means “no family.”This property sets or retrieves the button family for a given button. Setting the hilite of  any button in a family to true sets the hilite of all other same-family buttons to false.The default family value for a new button is 0.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>30</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>39</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>44</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>45</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>52</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>53</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>237</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>243</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>294</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>300</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>314</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>322</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text> Card and button families are distinct; so there can be a family n  for card buttons and another family n  for background buttons.  You can also assign a button to a family by using the Family pop-up menu in the button's Get Info dialog box.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>297</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>105</offset>
-			<id>297</id>
-		</stylerun>
-		<stylerun>
-			<offset>107</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>set family of background button "moo" to 3if the family of button 3 is targetFamily then go stack farmAnimal</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>property	button	sharedHilite</text>
-	</content>
-	<name>family</name>
-	<script></script>
-</card>

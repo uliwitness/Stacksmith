@@ -1,82 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>25005</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>suspend</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>uspendHandler:on suspend    statementsend suspendHyperCard sends the suspend message to the current card when a user (or handler) launches an application from HyperCard with the open command, just before the application is launched.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>7</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>44</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>77</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>86</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>186</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>192</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>System messages4312 24298 83697 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>Note: HyperCard does not send this message when it’s running under MultiFinder.</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>card messages	message	suspend	system</text>
-	</content>
-	<name>suspend</name>
-	<script></script>
-</card>

@@ -1,70 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>61645</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>params</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he paramsValue returned: a text string equal to the entire parameter list, including the message name, passed to the currently executing handler</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>62</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>71</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>140</offset>
-			<id>47</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n paramsDemo   showParams 1, "a", "this is fun", the number of cardsend paramsDemoon showParams    answer "The parameters are:" &amp; return &amp; return &amp; the paramsend showParams</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>102</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 25888 26982 61134 61390 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	message	parameters</text>
-	</content>
-	<name>params</name>
-	<script></script>
-</card>

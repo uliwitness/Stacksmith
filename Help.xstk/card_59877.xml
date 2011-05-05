@@ -1,220 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>59877</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>number</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he number of [card] {buttons|parts}the number of bkgnd {buttons|parts}the number of card fieldsthe number of [bkgnd] fieldsthe number of marked cardsthe number of cards [in bkgnd ] ¬        [of this stack]the number of bkgnds [of this stack]the number of windowsthe number of menusthe number of menuItems of menuthe number of chunks in expression</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>113</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>114</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>119</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>120</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>176</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>177</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>180</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>185</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>199</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>212</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>214</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>234</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>236</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>249</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>251</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>321</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>325</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>340</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>346</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>350</offset>
-			<id>289</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>- Count the menu items in a menu:the number of menuItems of menu 2the number of menuItems of second menuthe number of menuItems of menu "File"-- Count the number of objects:the number of card fieldsthe number of background buttonsthe number of cardsthe number of cards of this backgroundthe number of backgroundsthe number of partsthe number of background parts -- Count the number of chunks in text (including containers):the number of chars in card field 2the number of lines in the stacksInUse-- Do something based on the number of cards:repeat with i = 1 to the number of cards of this background   statementsend repeatrepeat with i = 1 to the number of marked cards   statementsend repeat</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>624</offset>
-			<id>89</id>
-		</stylerun>
-		<stylerun>
-			<offset>634</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>698</offset>
-			<id>89</id>
-		</stylerun>
-		<stylerun>
-			<offset>708</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>alues returned: A non-negative integer equal to one of the following:• total number of buttons or fields     on the current card or background• total number of parts (buttons and     fields combined) on the current card     or background• total number of marked cards,     cards in a specific background,     cards in an entire stack, or     backgrounds in a stack</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>89</id>
-		</stylerun>
-		<stylerun>
-			<offset>100</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>181</offset>
-			<id>89</id>
-		</stylerun>
-		<stylerun>
-			<offset>184</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n numberOfChunks  get bkgnd field "Demo Script"  answer "There are" &amp;&amp; the number of lines in it &amp;&amp; ¬  "lines and" &amp;&amp; the number of words in it &amp;&amp; "words and" &amp;&amp; ¬  the number of characters in it &amp;&amp; "characters in this handler."end numberOfChunks</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>78</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>84</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>126</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>132</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>174</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>180</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions24266 32809 73264 77648 77883 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>background	button	card	characters	chars	chunks	field	function	mark	marked	menu	menu items	new features	number	objects	text</text>
-	</content>
-	<name>number</name>
-	<script></script>
-</card>

@@ -1,188 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>34045</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>create</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>reate menu menuNamecreate stack fileName [with bkgnd ] ¬              [in a new window]The create menu command makes a new menu and adds it to the menu bar.  HyperCard displays an error messageif you try to create a menu that already exists.Use the put command to add menu items to the new menu. (Click Related Topics for more information about put.)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>43</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>44</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>45</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>75</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>90</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>96</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>109</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>258</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>263</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>354</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>358</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he create stack command creates a new stack from within a handler without presenting the New Stack dialog box. The cards in the new stack are the same size as the cards in the current stack.HyperCard sets the function the result to "Couldn't create stack." if it can’t create the stack; otherwise, it sets the result to empty, goes to the new stack, and sends  a newStack message to the only card in that stack (that is, the current card).</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>220</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>232</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>234</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>260</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>308</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>320</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>322</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>328</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>365</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>375</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>reate stack "Junk"create stack "Junk" with background "Content"ask file "Create a stack called:"if it is not empty then create stack itcreate menu "Brass"put "Trumpet,French Horn,Trombone,Tuba" into menu "Brass"</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>on createMenu  if there is a menu "Sort" then delete menu "Sort"  create menu "Sort"  put "By name,By number,By International,-,Ascending,Descending" ¬  into menu "Sort"  set the checkMark of menuItem 1 of menu "Sort" to true  set the checkMark of menuItem 5 of menu "Sort" to trueend createMenu</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands34927 69523 70039 34993 35579 61996 71193 76221 76567 58014 45460 45965 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>command	menu	new features	stacks</text>
-	</content>
-	<name>create</name>
-	<script>on showCardStuff-- ∆ Localize the name of the menu-- ∆ change the demo script to match menu nameif there is a menu "Sort" then delete menu "Sort"pass showCardStuffend showCardStuff</script>
-</card>

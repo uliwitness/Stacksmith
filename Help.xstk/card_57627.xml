@@ -1,58 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>57627</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>max</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ax(numberList)Value returned:  the highest-valued number from the comma-separated list of numbers</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>max(1,2,3,4,5,6,7,8,9,10)max(the screenRect)max(myNumbers)</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions89523 52417 58185 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	list	math	maximum	number</text>
-	</content>
-	<name>max</name>
-	<script></script>
-</card>

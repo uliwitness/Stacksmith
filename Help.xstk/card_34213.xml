@@ -1,90 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>34213</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>debug</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ebug checkPointThe debug checkPoint command setsa permanent checkpoint in a HyperTalk handler. When HyperCard runs a handler, the debug checkpoint command causes HyperCard to enter the debugger; it pauses execution of the handler and opens a script editor window with a box around the line with the checkpoint.This command works only when the userlevel property is set to 5.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>39</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>64</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>90</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>97</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>134</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>150</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>349</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>359</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands53830 13231 92176 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>Click Related Topics for information about debugging scripts.</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>break	bug	command	debug	edit	hideIdle	hideUnused	new features	nextLine	scripts	step	trace	watch</text>
-	</content>
-	<name>debug</name>
-	<script></script>
-</card>

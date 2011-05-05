@@ -1,127 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>9950</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>Writing message handlers</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>hen you write a handler for a message, you specify a sequence of statements for HyperCard to run. Each message handler has the following form, with the italicized words as placeholders:on messageName   statementsend messageNameWhen it runs the message handler, HyperCard sends each line of the handler as a message itself (so handlers can call other handlers).</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>188</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>191</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>202</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>206</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>216</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>221</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>232</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>233</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>mportant: The message name does not have to be one of HyperCard’s built-in system messages or commands.For example, if you wanted a new command called doubleBeep that would beep twice, you would writea handler for it as follows:on doubleBeep  beep  beepend doubleBeep</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>297</id>
-		</stylerun>
-		<stylerun>
-			<offset>36</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>153</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>165</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>234</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>on mouseUp  doubleBeepend mouseUpon doubleBeep  beep  beepend doubleBeep</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>HyperTalk basics20813 6658 26982 8578 10721 5306 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>end	handlers	message	new</text>
-	</content>
-	<name>Writing message handlers</name>
-	<script>on doubleBeepbeepbeepend doubleBeep</script>
-</card>

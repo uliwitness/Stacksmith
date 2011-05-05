@@ -1,73 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>13387</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>ebug a script (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>68</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 2 of 3</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>hen HyperCard hits the checkpoint, it opens the script and puts a box around the current statement. HyperCard also displays the Debugger menu.HyperCard does not enter the script editor itself: All of HyperCard’s normal menus remain in the menu bar. (Because the script is still running, HyperCard must preserve the current context.) But only the Debugger menu is active.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>336</offset>
-			<id>297</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>. Choose Set Checkpoint from the     Script menu (or press ⌘D) to set    a temporary checkpoint.    A checkpoint tells HyperTalk where     you want to start watching the script     as it runs.4. Press Enter to save the script and     close the script editor window.5. Now, perform the action in     HyperCard that will run the script     (for example, click a button).</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>61</offset>
-			<id>45</id>
-		</stylerun>
-		<stylerun>
-			<offset>62</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>88</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Editing scripts18600 53830 5882 5960 34213 92176 94238 </text>
-	</content>
-	<name>Debug a script 2</name>
-	<script></script>
-</card>

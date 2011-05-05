@@ -1,199 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>40922</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>lock</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ock {messages|recent|screen}lock error dialogsLock messages has the same effect as set lockMessages to true: it prevents HyperCard from sending open, close, suspend, and resume system messages along the message-passing path.Lock recent has the same effect as set lockRecent to true: it prevents HyperCard from keeping  a visual record of cards visited by the user (or a handler) in the Recent Card dialog box.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>64</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>86</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>111</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>147</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>148</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>152</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>153</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>154</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>159</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>161</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>168</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>170</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>173</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>174</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>180</offset>
-			<id>296</id>
-		</stylerun>
-		<stylerun>
-			<offset>181</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>230</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>242</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>264</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>287</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  -- with the screen not locked:  hide bkgnd button "Run the Script"  wait 20  hide bkgnd button "Close"  wait 20  hide bkgnd button id 57  wait 20  hide bkgnd field "Demo Script"  wait 20  hide bkgnd button "Panel"  wait 30  --with the screen locked:  lock screen  show bkgnd button "Panel"  show bkgnd field "Demo Script"  show bkgnd button id 57  show bkgnd button "Close"  show bkgnd button "Run the Script"  unlock screen with checkerboardend mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>276</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>287</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>ock screen has the same effect as setting the property lockScreen to true: it prevents HyperCard from updating the screen.Lock error dialogs prevents error dialog boxes from appearing; instead, the message errorDialog errorMessage is sent to the current card. Locking is automatically unlocked at idle time.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>67</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>125</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>144</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>208</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>221</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>233</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>234</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>263</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>265</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands38981 75037 75404 75546 50046 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>command	lock	lockScreen	screen</text>
-	</content>
-	<name>lock</name>
-	<script></script>
-</card>

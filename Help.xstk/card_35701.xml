@@ -1,289 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>35701</id>
-	<filler1>0</filler1>
-	<bitmap>BMAP_10957.pbm</bitmap>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <false /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>drag</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>rag from point to pointdrag from point to point with key1drag from point to point ¬   with key1, key2drag from point to point ¬   with key1, key2, key3The drag command simulates the user dragging the mouse manually (except that you must use the with shiftKey option in order to select text in a field).</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>40</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>44</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>49</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>59</offset>
-			<id>11</id>
-		</stylerun>
-		<stylerun>
-			<offset>60</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>75</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>84</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>95</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>99</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>101</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>104</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>105</offset>
-			<id>11</id>
-		</stylerun>
-		<stylerun>
-			<offset>106</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>116</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>121</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>125</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>130</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>141</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>144</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>145</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>147</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>150</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>151</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>153</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>156</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>157</offset>
-			<id>12</id>
-		</stylerun>
-		<stylerun>
-			<offset>158</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>162</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>168</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>252</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>267</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he with key options specify combinations of the commandKey, the optionKey, and the shiftKey, simulating the user holding down the key or keys while dragging.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>13</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>48</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>60</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>64</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>75</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>83</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>93</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>rag from 0,0 to 100,100drag from 0,0 to 100,100 with shiftKeydrag from 0,0 to 100,100 with shiftKey,cmdKey,optionKeydrag from the mouseLoc to the bottomRight of this card</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  set the cantModify of this stack to true  show bkgnd field "Demo Field"  show card picture  dragChart "13,184,98,268",70 -- Pile One  dragChart "100,184,185,268",133 -- Pile Two  dragChart "185,184,270,268",93 -- Pile Three  dragChart "270,184,355,268",140 -- Pile Four  dragChart "355,184,440,268",175 -- Pile Five  choose browse tool  wait 50  hide card picture  hide bkgnd field "Demo Field"  set cantModify of this stack to falseend mouseUpon dragChart theRect, theHeight  put item 1 of theRect into theLeft  put item 2 of theRect into theTop  put item 3 of theRect into theRight  put item 4 of theRect into theBottom  choose select tool  set the dragSpeed to 0  drag from theLeft,theTop to theRight,theBottom with optionKey  put round((theRight - theLeft)/2 + theLeft) into locH  put round((theBottom - theTop)/2 + theTop) into locV  doMenu "opaque"  set the dragSpeed to 200  drag from locH,locV to locH,(locV - theHeight) ¬  with optionKey,commandKeyend dragChart</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>702</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>706</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>922</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>926</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands32047 70900 59412 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>command	drag	key	mouse	option	point	shift</text>
-	</content>
-	<name>drag</name>
-	<script>on showCardStuffhide card pictureend showCardStuff</script>
-</card>

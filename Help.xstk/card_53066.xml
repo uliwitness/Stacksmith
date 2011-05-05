@@ -1,91 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>53066</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>clickH and clickV</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he clickHthe clickVValues returned: clickH returns an integer equal to the number of horizontal pixels from the left side of the card to the place the mouse was last clicked.  clickV returns an integer equal to the number of vertical pixels from the top of the card to the place the mouse was last clicked.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>49</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>183</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>191</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>click at 256,171put the clickH  -- same as item 1 of the clickLocput the clickV  -- same as item 2 of the clickLoc -- Use clickV to place the top of some buttons into alignment -- based on the user’s click:get the clickVset the top of bkgnd button 1 to itset the top of bkgnd button 2 to itset the top of bkgnd button 3 to it</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n clickDemo  show bkgnd field "demo field"  displayMessage "Click the mouse to continue..."  wait until the mouseClick  answer "The horizontal point of the click was:" &amp;&amp; the clickH &amp;&amp; ¬  return &amp;"The vertical point of the click was:" &amp;&amp; the clickV  hide bkgnd field "demo field"end clickDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>180</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>186</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>248</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>254</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 59060 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>and	click	coordinates	function	horizontal	location	mouse	point	vertical</text>
-	</content>
-	<name>clickH and clickV</name>
-	<script></script>
-</card>

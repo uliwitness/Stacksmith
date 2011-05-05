@@ -1,208 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>25835</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>exit</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>xit repeatexit functionNameexit messageNameexit to HyperCardThe exit keyword interrupts the current flow of control.Exit repeat sends control to the endof a repeat structure, ending execution of the loop regardless of the state of the controlling conditions.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>29</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>46</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>65</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>69</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>75</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>124</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>136</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>165</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>173</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he exit functionName and exit messageName forms stop the current message or function handler. Control  returns to any pending statements from another handler, if any.Exit to HyperCard terminates all running or pending handlers and cancels all pending messages. Using exit to leave a function handler sets the value of the function to empty.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>43</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>86</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>93</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>169</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>187</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>271</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>277</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n exitDemo  answer "Would you like to see a demo?" with "No" or "Yes"  if it is "No" then exit exitDemo  put "Click the mouse to exit this handler…"  put 1 into lineNum  put the number of lines in me into totalLines  set the autoSelect of me to true -- to get a nice solid hilite  repeat    if lineNum &gt; totalLines then put 1 into lineNum    select line lineNum of me    if the mouseClick then exit repeat    add 1 to lineNum  end repeat  wait 20  select line 0 of me  set the autoSelect of me to falseend exitDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>405</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>409</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>410</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>416</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>f N = 0 then exit repeatif it is empty then exit mySaveif there is no card field "Index" then exit indexFunction-- In the following example, the openCard message will not occur as the -- user goes from card to card:on closeCard  flash  exit to HyperCardend closeCardon openCard  beepend openCard-- The newButton message will occur because HyperCard sends it before-- the exit to HyperCard:on anExample  doMenu "New Button" -- creates a new button, sends newButton message  exit to HyperCardend anExampleon newButton  beepend newButton</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>27</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>59</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>60</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>191</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>195</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Keywords25888 26982 27427 27895 28073 28298 28477 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>control	exit	HyperCard	keyword	message	repeat	structures</text>
-	</content>
-	<name>exit</name>
-	<script></script>
-</card>

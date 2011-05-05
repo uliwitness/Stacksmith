@@ -1,74 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>104294</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>run</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands29297 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>unsend "run" to objectThe run command executes an OSA script.Used in any other way, run does nothing.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>29</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>89</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>94</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>send "run" to button "Automatic"  -- invoke attached QuicKeys scriptsend "run" to button "Quill"  -- invoke implicit AppleScript run handler on mouseUp  run  -- invoke AppleScript in card scriptend mouseUp</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>AppleScript</text>
-	</content>
-	<name>run</name>
-	<script></script>
-</card>

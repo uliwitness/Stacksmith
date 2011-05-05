@@ -1,135 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>80353</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>script</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>set [the] script of object to textThe script property returns or setsa text string equal to the script of the specified object in the current stackor in the stack script of another stack.When you set the script propertywith the set command, you replacethe existing script entirely.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>6</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>27</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>40</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>48</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>100</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>106</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>210</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>218</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>235</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>240</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>et the script of card 1if "mouseUp" is not in it then addMouseUpHandler itset the script of bkgnd field "Index" to ¬the script of bkgnd button "Index"set the script of stack "My Stack" to empty</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n scriptDemo  answer "The script of this field is:" &amp; ¬  return &amp; return &amp; the script of me with "OK"end scriptDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>82</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>88</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties36226 80403 80859 81132 14879 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>background	button	card	field	property	scripts	stacks	text</text>
-	</content>
-	<name>script</name>
-	<script></script>
-</card>

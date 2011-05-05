@@ -1,200 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>54407</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>compound</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ompound(number1, number2)where number1 represents theinterest rate (expressed as a decimal)and number2 represents the numberof periods over which the interestis compounded.Value returned: value of one unit of principal invested at the interest rate and compounded over the specified number of periods, or a number equalto (1 + rate) ^ periods</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>40</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>57</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>99</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>100</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>106</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>107</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>108</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>133</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>140</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>331</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>se compound to compute a future value as follows:futureValue = principal * compound(rate,periods)Example 1: $100 invested for 20 years at 10% interest compounded yearly.futureValue = 100 * compound(.10,20) = 672.75The net gain over the original investment is 672.75 - 100 = 572.75. Note that $100 invested for 20 years at 10% simple interest (which applies only to the principal) yields $300, for a net gain of only $200.Example 2: $100 invested for 20 years at 10% interest compounded monthly.futureValue = 100 * compound(.10/12,20*12) = 732.81</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>102</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>176</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>223</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>268</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>291</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>507</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>n interest rate involves a certain percentage (expressed as a decimal) per some unit of time—usually per year. You must use the same unit of time to measure the number of periods.For example, if you have a yearly interest rate that is compounded monthly, you must convert the yearly rate to the interest per month (rate / 12) and be sure to express the number of periods as months (2 years = 24 months).</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>319</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>328</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n compoundDemo  set numberFormat to "0.00"  answer "$100 invested for 5 years at 5.75% interest" &amp;&amp;¬  "compounded quarterly yields $" &amp; (100 * compound(.0575/4,5*4))end compoundDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions51607 89523 78162 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>business	function	math	number	period	rate</text>
-	</content>
-	<name>compound</name>
-	<script></script>
-</card>

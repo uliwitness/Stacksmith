@@ -1,128 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>58695</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>mouseClick</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he mouseClickValue returned: the constant trueif the mouse has been clicked sometime during the running of the current handler, or false if it hasn't.If the mouse button is down,the mouseClick waits until the mouse button is up before returning true.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>44</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>134</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>141</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>184</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>200</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>251</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>256</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n theMouseClick  show bkgnd field "demo field"  displayMessage "Click the mouse to continue . . ."  wait until the mouseClick  hide bkgnd field "demo field"end theMouseClick</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>119</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>129</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>f the mouseClick then ...if (the mouseClick) or (the commandKey is down) then ...repeat until the mouseClick ...end repeat</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 32047 58372 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>click	down	function	mouse	up</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>Note: Use the mouse to return the current state of the mouse button and the mouseClick to return whether the mouse has been clicked in the current handler.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>91</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<name>mouseClick</name>
-	<script></script>
-</card>

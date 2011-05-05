@@ -1,168 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>41778</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>open</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>pen applicationopen fileName with applicationThe open command launches another application program or opens a document with another application from within HyperCard. You must provide the full path names for the files if they’re not at the same directory level as HyperCard.Under the Finder in System 6, HyperCard sends the suspend system message to the current card before turning over control to the application.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>30</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>36</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>48</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>52</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>329</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>338</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>f HyperCard can’t find the document or application, it displays a directory dialog box and asks the user to find it. HyperCard also sets the result to Cancel if the user clicks Cancel in the dialog box. Otherwise, it sets the result to empty.If HyperCard has problems opening the specified application (for example, there’s not enough memory), it sets the result to "Couldn't open that application."</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>137</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>149</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>151</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>159</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>222</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>234</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>236</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>242</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>354</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>366</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>368</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>open "TeachText"open "Read Me" with "Teach Text"open "the document you want" with "the application" -- invoke dialog boxanswer file "Start what application?" of type applicationif it is not empty then open it</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands11943 41996 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>command	document	file	launch	open	start	with</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  -- this demo only works with System 7   if not systemSeven() then exit mouseUp  -- asks the user for an application  put askForApplication() into appName  if appName is empty then exit mouseUp  open appName -- open the selected application  wait 5  open the long name of HyperCard -- bring HyperCard to front  wait 30  close appName -- close the just opened applicationend mouseUpfunction askForApplication  answer file "Select an application to open:" of type "APPL"  if it is empty then return empty  if it is the long name of HyperCard then    -- the user selected the current running HyperCard    answer "Try selecting an application other than HyperCard."    return askForApplication() -- recursion  else return itend askForApplicationfunction systemSeven  return the systemVersion ≥ 7.0end systemSeven</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>212</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>216</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>269</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>273</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<name>open</name>
-	<script></script>
-</card>

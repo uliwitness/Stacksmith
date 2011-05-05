@@ -1,66 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>59060</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>mouseH and mouseV</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he mouseHthe mouseVValues returned: mouseH returns an integer equal to the number of pixels from the left of the card to the current location of the mouse pointer.mouseV returns an integer equal to the number of pixels from the top of the card to the current location of the mouse pointer.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>49</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>170</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>178</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>if the mouseH &lt; the left of card window then ...if the mouseV &gt; the top of card field 1 then ...</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 53066 53693 35701 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>and	function	horizontal	location	mouse	vertical</text>
-	</content>
-	<name>mouseH and mouseV</name>
-	<script></script>
-</card>

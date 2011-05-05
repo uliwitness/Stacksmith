@@ -1,276 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>45460</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>put</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ut expressionput expression preposition ¬    [chunk of] containerput menuItemList preposition ¬    [menuItem of] menu ¬    [with menuMessages messageList ]The put command evaluates an expression and places the value it extracts into, after, or before the contents of a container.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>29</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>30</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>48</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>49</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>57</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>59</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>15</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>86</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>87</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>105</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>106</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>114</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>117</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>118</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>119</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>123</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>130</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>131</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>149</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>160</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>167</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>172</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>236</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>241</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>242</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>248</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>252</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>260</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he container can be a button, a field, a variable, the Message box, the selection, a chunk expression, or a menu. If you don’t specify a container, HyperCard puts the value into the Message box, showing it if it’s hidden.Use put with into to replace the contents of a container or menu, with before to place the value at the beginning of its contents, and with after to append the value to the endof its contents.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>86</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>91</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>227</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>232</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>236</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>242</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>294</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>302</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>363</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>370</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>-- These are equivalent:put 42.5 * 675put 42.5 * 675 into msgput 42.5 * 675 into the Message box put empty into It  put "Hello" into field 1  put "Go: " before field "WhereTo"  put "." after last character of last word of field 3  put the date into varNameput the clickLine into theLineClickedput the value of the clickLine into theTextClickedput "*" after the selection-- Add items to a menu:create menu "Example"put "1,2,3,-,4,5,6" into menu "Example"put "7" after menu "Example" with menuMessage "beep"put "a,b,c,-" before menu "example" ¬    with menuMessages "beep,beep 2,beep 3,empty"-- add items to a buttonput "Boston" &amp; return &amp; "New York" &amp; return &amp; "Salem" into button "Maps"</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n putDemo  get bkgndFields()  if the number of chars of it &lt; 255 then answer itend putDemofunction bkgndFields  -- Returns a return-delimited list of the bg fields  repeat with i = 1 to the number of bkgnd fields    put the short name of bg field i &amp; return after theFields  end repeat  return theFieldsend bkgndFields</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>225</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>228</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>267</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>272</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands24266 27092 34927 34045 34478 38686 47503 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>after	before	chunks	command	container	expression	into	item	menu	menu items	message	new features</text>
-	</content>
-	<name>put</name>
-	<script></script>
-</card>

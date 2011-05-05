@@ -1,102 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>18888</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>eleteCardHandler:on deleteCard   statementsend deleteCardHyperCard sends the deleteCard message to a card that is being deleted just before the card disappears.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>39</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>49</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>85</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>97</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>deleteCard</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>ote:  You cannot stop a card from being deleted by trapping the deleteCard message. Instead, you must handle the doMenu message or set the cantDelete property for the card.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>65</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>113</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>121</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>139</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>151</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>System messages68822 17192 35579 4312 22221 23197 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>card	card messages	delete	message	system</text>
-	</content>
-	<name>deleteCard</name>
-	<script></script>
-</card>

@@ -1,191 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>25888</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>function</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>unction functionName [parameterList ]    statementsend functionNameThe function keyword defines a new function handler of the specified name. You call a function by placing parentheses after its name, enclosing any parameters within the parentheses:get deleteSpaces(" hello ")The optional parameterList lets a function handler receive values sent along with the function call.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>23</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>36</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>43</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>53</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>71</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>75</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>85</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>116</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>123</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>257</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>284</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>298</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>299</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>312</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>313</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>hen a function is called, HyperCard evaluates each item within the parenthetical list following the function's name.  When the handler begins to execute, HyperCard assigns each value to a parameter variable  in the parameterList.Use the return keyword withinthe function definition to have the function return a value to the handler that called it. If you don't use return, the function evaluates to empty.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>189</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>207</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>215</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>216</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>229</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>239</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>247</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>369</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>376</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>403</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>409</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  ask "What is your name?"  if it is empty then exit mouseUp  answer "Your name spelled backwards is" &amp;&amp; reverseString(it) &amp; "."end mouseUpfunction reverseString theString  repeat with i = the number of chars in theString down to 1    put char i of theString after theReversedString  end repeat  return theReversedStringend reverseString</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>155</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>163</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Keywords25835 61134 61390 61645 28715 8578 10721 10397 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>control	end	function	keyword	new	parameters	structures</text>
-	</content>
-	<name>function</name>
-	<script></script>
-</card>

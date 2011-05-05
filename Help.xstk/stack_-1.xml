@@ -1,378 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE stack PUBLIC "-//Apple, Inc.//DTD stack V 2.0//EN" "" >
-<stack>
-	<id>-1</id>
-	<cardCount>360</cardCount>
-	<cardID>7309</cardID>
-	<listID>17070</listID>
-	<cantModify> <false /> </cantModify>
-	<cantDelete> <false /> </cantDelete>
-	<cantAbort> <false /> </cantAbort>
-	<cardSize>
-		<width>480</width>
-		<height>294</height>
-	</cardSize>
-	<script>∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞HyperTalk Reference StackVersion 2.4©Copyright 1987-1997 by Apple Computer,Inc.All Rights Reserved.Created by Instructional Products at Apple Computer, Inc.Vers. 2.0 by Pat Chaney, Eli Cochran, Jeff Herman, Jim Palmerand Eric QuakenbushVers. 2.2 by Pat Chaney, Eli Cochran, Scot Kamins, and Sarah McGranaghanNote: This stack requires the HyperCard Help stack to run."--∆" indicates strings which will need localization∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞on openStackif wrongStack() then pass openStackuseHyperCardHelppass openStackend openStackon resumeStackif wrongStack() then pass resumeStackuseHyperCardHelppass resumeStackend resumeStackon useHyperCardHelp--∆ Localize: name of the help stack and warning messageif ":HyperCard Help"&amp;return is not in the StacksInUse &amp;return thenstart using stack "HyperCard Help"if the result is not empty thenanswer "This stack requires the HyperCard Help stack to run."if the number of lines in the stacks &gt; 1 then close card windowelse go backexit to HyperCardend ifend ifend useHyperCardHelpfunction wrongStack-- Make sure that system messages are handled only if-- this stack is the active stack (line 1 of the stacks)get the value of word 2 of the long name of mereturn (it is not line 1 of the stacks)end wrongStackon setCheckMark TRUEorFALSEglobal gHMnuset the checkMark of menuItem 4 of menu gHMnu to TRUEorFALSEend setCheckMark</script>
-	<background id="4421" file="background_4421.xml" />
-	<background id="7507" file="background_7507.xml" />
-	<card id="7309" file="card_7309.xml" marked="false"/>
-	<card id="2179" file="card_2179.xml" marked="false"/>
-	<card id="14008" file="card_14008.xml" marked="false"/>
-	<card id="5306" file="card_5306.xml" marked="false"/>
-	<card id="5777" file="card_5777.xml" marked="false"/>
-	<card id="28985" file="card_28985.xml" marked="false"/>
-	<card id="6658" file="card_6658.xml" marked="false"/>
-	<card id="8578" file="card_8578.xml" marked="false"/>
-	<card id="15784" file="card_15784.xml" marked="false"/>
-	<card id="9950" file="card_9950.xml" marked="false"/>
-	<card id="10005" file="card_10005.xml" marked="false"/>
-	<card id="10721" file="card_10721.xml" marked="false"/>
-	<card id="10397" file="card_10397.xml" marked="false"/>
-	<card id="11056" file="card_11056.xml" marked="false"/>
-	<card id="11326" file="card_11326.xml" marked="false"/>
-	<card id="12290" file="card_12290.xml" marked="false"/>
-	<card id="12744" file="card_12744.xml" marked="false"/>
-	<card id="13231" file="card_13231.xml" marked="false"/>
-	<card id="13387" file="card_13387.xml" marked="false"/>
-	<card id="13582" file="card_13582.xml" marked="false"/>
-	<card id="14356" file="card_14356.xml" marked="false"/>
-	<card id="11969" file="card_11969.xml" marked="false"/>
-	<card id="14667" file="card_14667.xml" marked="false"/>
-	<card id="14879" file="card_14879.xml" marked="false"/>
-	<card id="3428" file="card_3428.xml" marked="false"/>
-	<card id="4312" file="card_4312.xml" marked="false"/>
-	<card id="6031" file="card_6031.xml" marked="false"/>
-	<card id="73723" file="card_73723.xml" marked="false"/>
-	<card id="97539" file="card_97539.xml" marked="false"/>
-	<card id="105361" file="card_105361.xml" marked="false"/>
-	<card id="17192" file="card_17192.xml" marked="false"/>
-	<card id="17449" file="card_17449.xml" marked="false"/>
-	<card id="17907" file="card_17907.xml" marked="false"/>
-	<card id="18315" file="card_18315.xml" marked="false"/>
-	<card id="18636" file="card_18636.xml" marked="false"/>
-	<card id="18888" file="card_18888.xml" marked="false"/>
-	<card id="19146" file="card_19146.xml" marked="false"/>
-	<card id="19234" file="card_19234.xml" marked="false"/>
-	<card id="97279" file="card_97279.xml" marked="false"/>
-	<card id="19615" file="card_19615.xml" marked="false"/>
-	<card id="19769" file="card_19769.xml" marked="false"/>
-	<card id="96465" file="card_96465.xml" marked="false"/>
-	<card id="96777" file="card_96777.xml" marked="false"/>
-	<card id="20071" file="card_20071.xml" marked="false"/>
-	<card id="20340" file="card_20340.xml" marked="false"/>
-	<card id="20661" file="card_20661.xml" marked="false"/>
-	<card id="20820" file="card_20820.xml" marked="false"/>
-	<card id="21197" file="card_21197.xml" marked="false"/>
-	<card id="21286" file="card_21286.xml" marked="false"/>
-	<card id="35844" file="card_35844.xml" marked="false"/>
-	<card id="21577" file="card_21577.xml" marked="false"/>
-	<card id="21952" file="card_21952.xml" marked="false"/>
-	<card id="22221" file="card_22221.xml" marked="false"/>
-	<card id="22421" file="card_22421.xml" marked="false"/>
-	<card id="22569" file="card_22569.xml" marked="false"/>
-	<card id="22993" file="card_22993.xml" marked="false"/>
-	<card id="23197" file="card_23197.xml" marked="false"/>
-	<card id="23457" file="card_23457.xml" marked="false"/>
-	<card id="23747" file="card_23747.xml" marked="false"/>
-	<card id="23995" file="card_23995.xml" marked="false"/>
-	<card id="24298" file="card_24298.xml" marked="false"/>
-	<card id="24386" file="card_24386.xml" marked="false"/>
-	<card id="16789" file="card_16789.xml" marked="false"/>
-	<card id="24600" file="card_24600.xml" marked="false"/>
-	<card id="25005" file="card_25005.xml" marked="false"/>
-	<card id="25274" file="card_25274.xml" marked="false"/>
-	<card id="25485" file="card_25485.xml" marked="false"/>
-	<card id="25835" file="card_25835.xml" marked="false"/>
-	<card id="25888" file="card_25888.xml" marked="false"/>
-	<card id="26361" file="card_26361.xml" marked="false"/>
-	<card id="26404" file="card_26404.xml" marked="false"/>
-	<card id="26805" file="card_26805.xml" marked="false"/>
-	<card id="26982" file="card_26982.xml" marked="false"/>
-	<card id="27256" file="card_27256.xml" marked="false"/>
-	<card id="27427" file="card_27427.xml" marked="false"/>
-	<card id="27895" file="card_27895.xml" marked="false"/>
-	<card id="28073" file="card_28073.xml" marked="false"/>
-	<card id="28298" file="card_28298.xml" marked="false"/>
-	<card id="28477" file="card_28477.xml" marked="false"/>
-	<card id="28715" file="card_28715.xml" marked="false"/>
-	<card id="29297" file="card_29297.xml" marked="false"/>
-	<card id="9288" file="card_9288.xml" marked="false"/>
-	<card id="104533" file="card_104533.xml" marked="false"/>
-	<card id="105047" file="card_105047.xml" marked="false"/>
-	<card id="29791" file="card_29791.xml" marked="false"/>
-	<card id="30026" file="card_30026.xml" marked="false"/>
-	<card id="30220" file="card_30220.xml" marked="false"/>
-	<card id="95829" file="card_95829.xml" marked="false"/>
-	<card id="30663" file="card_30663.xml" marked="false"/>
-	<card id="30827" file="card_30827.xml" marked="false"/>
-	<card id="31208" file="card_31208.xml" marked="false"/>
-	<card id="31425" file="card_31425.xml" marked="false"/>
-	<card id="31649" file="card_31649.xml" marked="false"/>
-	<card id="31855" file="card_31855.xml" marked="false"/>
-	<card id="32047" file="card_32047.xml" marked="false"/>
-	<card id="32483" file="card_32483.xml" marked="false"/>
-	<card id="9517" file="card_9517.xml" marked="false"/>
-	<card id="43014" file="card_43014.xml" marked="false"/>
-	<card id="8287" file="card_8287.xml" marked="false"/>
-	<card id="33000" file="card_33000.xml" marked="false"/>
-	<card id="33535" file="card_33535.xml" marked="false"/>
-	<card id="59235" file="card_59235.xml" marked="false"/>
-	<card id="33601" file="card_33601.xml" marked="false"/>
-	<card id="12123" file="card_12123.xml" marked="false"/>
-	<card id="95696" file="card_95696.xml" marked="false"/>
-	<card id="34045" file="card_34045.xml" marked="false"/>
-	<card id="34213" file="card_34213.xml" marked="false"/>
-	<card id="34478" file="card_34478.xml" marked="false"/>
-	<card id="34624" file="card_34624.xml" marked="false"/>
-	<card id="34993" file="card_34993.xml" marked="false"/>
-	<card id="35162" file="card_35162.xml" marked="false"/>
-	<card id="35579" file="card_35579.xml" marked="false"/>
-	<card id="51780" file="card_51780.xml" marked="false"/>
-	<card id="35701" file="card_35701.xml" marked="false"/>
-	<card id="36226" file="card_36226.xml" marked="false"/>
-	<card id="61996" file="card_61996.xml" marked="false"/>
-	<card id="36487" file="card_36487.xml" marked="false"/>
-	<card id="36714" file="card_36714.xml" marked="false"/>
-	<card id="36906" file="card_36906.xml" marked="false"/>
-	<card id="37172" file="card_37172.xml" marked="false"/>
-	<card id="37671" file="card_37671.xml" marked="false"/>
-	<card id="38304" file="card_38304.xml" marked="false"/>
-	<card id="38567" file="card_38567.xml" marked="false"/>
-	<card id="38686" file="card_38686.xml" marked="false"/>
-	<card id="38981" file="card_38981.xml" marked="false"/>
-	<card id="39267" file="card_39267.xml" marked="false"/>
-	<card id="39675" file="card_39675.xml" marked="false"/>
-	<card id="39797" file="card_39797.xml" marked="false"/>
-	<card id="29617" file="card_29617.xml" marked="false"/>
-	<card id="40224" file="card_40224.xml" marked="false"/>
-	<card id="40449" file="card_40449.xml" marked="false"/>
-	<card id="40922" file="card_40922.xml" marked="false"/>
-	<card id="41060" file="card_41060.xml" marked="false"/>
-	<card id="41612" file="card_41612.xml" marked="false"/>
-	<card id="41778" file="card_41778.xml" marked="false"/>
-	<card id="41996" file="card_41996.xml" marked="false"/>
-	<card id="42410" file="card_42410.xml" marked="false"/>
-	<card id="42512" file="card_42512.xml" marked="false"/>
-	<card id="43407" file="card_43407.xml" marked="false"/>
-	<card id="43539" file="card_43539.xml" marked="false"/>
-	<card id="43851" file="card_43851.xml" marked="false"/>
-	<card id="44101" file="card_44101.xml" marked="false"/>
-	<card id="44420" file="card_44420.xml" marked="false"/>
-	<card id="44710" file="card_44710.xml" marked="false"/>
-	<card id="44919" file="card_44919.xml" marked="false"/>
-	<card id="45173" file="card_45173.xml" marked="false"/>
-	<card id="45460" file="card_45460.xml" marked="false"/>
-	<card id="9168" file="card_9168.xml" marked="false"/>
-	<card id="45683" file="card_45683.xml" marked="false"/>
-	<card id="97817" file="card_97817.xml" marked="false"/>
-	<card id="98399" file="card_98399.xml" marked="false"/>
-	<card id="98925" file="card_98925.xml" marked="false"/>
-	<card id="100188" file="card_100188.xml" marked="false"/>
-	<card id="100942" file="card_100942.xml" marked="false"/>
-	<card id="45965" file="card_45965.xml" marked="false"/>
-	<card id="46143" file="card_46143.xml" marked="false"/>
-	<card id="46524" file="card_46524.xml" marked="false"/>
-	<card id="104294" file="card_104294.xml" marked="false"/>
-	<card id="46772" file="card_46772.xml" marked="false"/>
-	<card id="47006" file="card_47006.xml" marked="false"/>
-	<card id="47315" file="card_47315.xml" marked="false"/>
-	<card id="47503" file="card_47503.xml" marked="false"/>
-	<card id="47827" file="card_47827.xml" marked="false"/>
-	<card id="47979" file="card_47979.xml" marked="false"/>
-	<card id="48321" file="card_48321.xml" marked="false"/>
-	<card id="48574" file="card_48574.xml" marked="false"/>
-	<card id="15459" file="card_15459.xml" marked="false"/>
-	<card id="48812" file="card_48812.xml" marked="false"/>
-	<card id="48929" file="card_48929.xml" marked="false"/>
-	<card id="49191" file="card_49191.xml" marked="false"/>
-	<card id="49516" file="card_49516.xml" marked="false"/>
-	<card id="49918" file="card_49918.xml" marked="false"/>
-	<card id="50046" file="card_50046.xml" marked="false"/>
-	<card id="50277" file="card_50277.xml" marked="false"/>
-	<card id="50441" file="card_50441.xml" marked="false"/>
-	<card id="50819" file="card_50819.xml" marked="false"/>
-	<card id="51002" file="card_51002.xml" marked="false"/>
-	<card id="51285" file="card_51285.xml" marked="false"/>
-	<card id="51607" file="card_51607.xml" marked="false"/>
-	<card id="52019" file="card_52019.xml" marked="false"/>
-	<card id="52417" file="card_52417.xml" marked="false"/>
-	<card id="52559" file="card_52559.xml" marked="false"/>
-	<card id="52836" file="card_52836.xml" marked="false"/>
-	<card id="53066" file="card_53066.xml" marked="false"/>
-	<card id="53252" file="card_53252.xml" marked="false"/>
-	<card id="53693" file="card_53693.xml" marked="false"/>
-	<card id="53775" file="card_53775.xml" marked="false"/>
-	<card id="54096" file="card_54096.xml" marked="false"/>
-	<card id="54407" file="card_54407.xml" marked="false"/>
-	<card id="54961" file="card_54961.xml" marked="false"/>
-	<card id="55207" file="card_55207.xml" marked="false"/>
-	<card id="103363" file="card_103363.xml" marked="false"/>
-	<card id="55302" file="card_55302.xml" marked="false"/>
-	<card id="55719" file="card_55719.xml" marked="false"/>
-	<card id="56033" file="card_56033.xml" marked="false"/>
-	<card id="56310" file="card_56310.xml" marked="false"/>
-	<card id="56528" file="card_56528.xml" marked="false"/>
-	<card id="56722" file="card_56722.xml" marked="false"/>
-	<card id="56991" file="card_56991.xml" marked="false"/>
-	<card id="57200" file="card_57200.xml" marked="false"/>
-	<card id="57488" file="card_57488.xml" marked="false"/>
-	<card id="57627" file="card_57627.xml" marked="false"/>
-	<card id="58014" file="card_58014.xml" marked="false"/>
-	<card id="58185" file="card_58185.xml" marked="false"/>
-	<card id="58372" file="card_58372.xml" marked="false"/>
-	<card id="58695" file="card_58695.xml" marked="false"/>
-	<card id="59060" file="card_59060.xml" marked="false"/>
-	<card id="59412" file="card_59412.xml" marked="false"/>
-	<card id="59877" file="card_59877.xml" marked="false"/>
-	<card id="60104" file="card_60104.xml" marked="false"/>
-	<card id="60292" file="card_60292.xml" marked="false"/>
-	<card id="60426" file="card_60426.xml" marked="false"/>
-	<card id="60915" file="card_60915.xml" marked="false"/>
-	<card id="61134" file="card_61134.xml" marked="false"/>
-	<card id="61390" file="card_61390.xml" marked="false"/>
-	<card id="61645" file="card_61645.xml" marked="false"/>
-	<card id="103709" file="card_103709.xml" marked="false"/>
-	<card id="61729" file="card_61729.xml" marked="false"/>
-	<card id="62431" file="card_62431.xml" marked="false"/>
-	<card id="62709" file="card_62709.xml" marked="false"/>
-	<card id="62877" file="card_62877.xml" marked="false"/>
-	<card id="63225" file="card_63225.xml" marked="false"/>
-	<card id="103123" file="card_103123.xml" marked="false"/>
-	<card id="63264" file="card_63264.xml" marked="false"/>
-	<card id="63565" file="card_63565.xml" marked="false"/>
-	<card id="63809" file="card_63809.xml" marked="false"/>
-	<card id="94908" file="card_94908.xml" marked="false"/>
-	<card id="2765" file="card_2765.xml" marked="false"/>
-	<card id="64031" file="card_64031.xml" marked="false"/>
-	<card id="64480" file="card_64480.xml" marked="false"/>
-	<card id="64752" file="card_64752.xml" marked="false"/>
-	<card id="64990" file="card_64990.xml" marked="false"/>
-	<card id="65137" file="card_65137.xml" marked="false"/>
-	<card id="7047" file="card_7047.xml" marked="false"/>
-	<card id="11662" file="card_11662.xml" marked="false"/>
-	<card id="102760" file="card_102760.xml" marked="false"/>
-	<card id="102613" file="card_102613.xml" marked="false"/>
-	<card id="65714" file="card_65714.xml" marked="false"/>
-	<card id="65969" file="card_65969.xml" marked="false"/>
-	<card id="66203" file="card_66203.xml" marked="false"/>
-	<card id="66404" file="card_66404.xml" marked="false"/>
-	<card id="66705" file="card_66705.xml" marked="false"/>
-	<card id="66892" file="card_66892.xml" marked="false"/>
-	<card id="67163" file="card_67163.xml" marked="false"/>
-	<card id="95475" file="card_95475.xml" marked="false"/>
-	<card id="102341" file="card_102341.xml" marked="false"/>
-	<card id="67503" file="card_67503.xml" marked="false"/>
-	<card id="12857" file="card_12857.xml" marked="false"/>
-	<card id="37576" file="card_37576.xml" marked="false"/>
-	<card id="76921" file="card_76921.xml" marked="false"/>
-	<card id="67829" file="card_67829.xml" marked="false"/>
-	<card id="85301" file="card_85301.xml" marked="false"/>
-	<card id="91818" file="card_91818.xml" marked="false"/>
-	<card id="67958" file="card_67958.xml" marked="false"/>
-	<card id="68357" file="card_68357.xml" marked="false"/>
-	<card id="68822" file="card_68822.xml" marked="false"/>
-	<card id="69105" file="card_69105.xml" marked="false"/>
-	<card id="69328" file="card_69328.xml" marked="false"/>
-	<card id="69837" file="card_69837.xml" marked="false"/>
-	<card id="69523" file="card_69523.xml" marked="false"/>
-	<card id="70039" file="card_70039.xml" marked="false"/>
-	<card id="70204" file="card_70204.xml" marked="false"/>
-	<card id="92176" file="card_92176.xml" marked="false"/>
-	<card id="98571" file="card_98571.xml" marked="false"/>
-	<card id="99166" file="card_99166.xml" marked="false"/>
-	<card id="70576" file="card_70576.xml" marked="false"/>
-	<card id="84490" file="card_84490.xml" marked="false"/>
-	<card id="70900" file="card_70900.xml" marked="false"/>
-	<card id="71150" file="card_71150.xml" marked="false"/>
-	<card id="71193" file="card_71193.xml" marked="false"/>
-	<card id="99402" file="card_99402.xml" marked="false"/>
-	<card id="99648" file="card_99648.xml" marked="false"/>
-	<card id="71536" file="card_71536.xml" marked="false"/>
-	<card id="71811" file="card_71811.xml" marked="false"/>
-	<card id="72105" file="card_72105.xml" marked="false"/>
-	<card id="72386" file="card_72386.xml" marked="false"/>
-	<card id="86710" file="card_86710.xml" marked="false"/>
-	<card id="72540" file="card_72540.xml" marked="false"/>
-	<card id="72855" file="card_72855.xml" marked="false"/>
-	<card id="73264" file="card_73264.xml" marked="false"/>
-	<card id="101716" file="card_101716.xml" marked="false"/>
-	<card id="73795" file="card_73795.xml" marked="false"/>
-	<card id="74022" file="card_74022.xml" marked="false"/>
-	<card id="74454" file="card_74454.xml" marked="false"/>
-	<card id="74795" file="card_74795.xml" marked="false"/>
-	<card id="97387" file="card_97387.xml" marked="false"/>
-	<card id="75037" file="card_75037.xml" marked="false"/>
-	<card id="75404" file="card_75404.xml" marked="false"/>
-	<card id="75546" file="card_75546.xml" marked="false"/>
-	<card id="75848" file="card_75848.xml" marked="false"/>
-	<card id="74508" file="card_74508.xml" marked="false"/>
-	<card id="76221" file="card_76221.xml" marked="false"/>
-	<card id="76367" file="card_76367.xml" marked="false"/>
-	<card id="76567" file="card_76567.xml" marked="false"/>
-	<card id="79684" file="card_79684.xml" marked="false"/>
-	<card id="77229" file="card_77229.xml" marked="false"/>
-	<card id="100041" file="card_100041.xml" marked="false"/>
-	<card id="77376" file="card_77376.xml" marked="false"/>
-	<card id="77648" file="card_77648.xml" marked="false"/>
-	<card id="65428" file="card_65428.xml" marked="false"/>
-	<card id="77883" file="card_77883.xml" marked="false"/>
-	<card id="32762" file="card_32762.xml" marked="false"/>
-	<card id="78162" file="card_78162.xml" marked="false"/>
-	<card id="102019" file="card_102019.xml" marked="false"/>
-	<card id="100450" file="card_100450.xml" marked="false"/>
-	<card id="78411" file="card_78411.xml" marked="false"/>
-	<card id="78788" file="card_78788.xml" marked="false"/>
-	<card id="78944" file="card_78944.xml" marked="false"/>
-	<card id="79600" file="card_79600.xml" marked="false"/>
-	<card id="90631" file="card_90631.xml" marked="false"/>
-	<card id="90961" file="card_90961.xml" marked="false"/>
-	<card id="91426" file="card_91426.xml" marked="false"/>
-	<card id="91932" file="card_91932.xml" marked="false"/>
-	<card id="92736" file="card_92736.xml" marked="false"/>
-	<card id="79936" file="card_79936.xml" marked="false"/>
-	<card id="41254" file="card_41254.xml" marked="false"/>
-	<card id="86116" file="card_86116.xml" marked="false"/>
-	<card id="80353" file="card_80353.xml" marked="false"/>
-	<card id="80403" file="card_80403.xml" marked="false"/>
-	<card id="100648" file="card_100648.xml" marked="false"/>
-	<card id="80859" file="card_80859.xml" marked="false"/>
-	<card id="81132" file="card_81132.xml" marked="false"/>
-	<card id="81344" file="card_81344.xml" marked="false"/>
-	<card id="81699" file="card_81699.xml" marked="false"/>
-	<card id="82124" file="card_82124.xml" marked="false"/>
-	<card id="82338" file="card_82338.xml" marked="false"/>
-	<card id="82576" file="card_82576.xml" marked="false"/>
-	<card id="82724" file="card_82724.xml" marked="false"/>
-	<card id="83131" file="card_83131.xml" marked="false"/>
-	<card id="85008" file="card_85008.xml" marked="false"/>
-	<card id="83265" file="card_83265.xml" marked="false"/>
-	<card id="83697" file="card_83697.xml" marked="false"/>
-	<card id="83738" file="card_83738.xml" marked="false"/>
-	<card id="84197" file="card_84197.xml" marked="false"/>
-	<card id="84911" file="card_84911.xml" marked="false"/>
-	<card id="85522" file="card_85522.xml" marked="false"/>
-	<card id="85825" file="card_85825.xml" marked="false"/>
-	<card id="86415" file="card_86415.xml" marked="false"/>
-	<card id="101319" file="card_101319.xml" marked="false"/>
-	<card id="86868" file="card_86868.xml" marked="false"/>
-	<card id="87153" file="card_87153.xml" marked="false"/>
-	<card id="94238" file="card_94238.xml" marked="false"/>
-	<card id="87536" file="card_87536.xml" marked="false"/>
-	<card id="87651" file="card_87651.xml" marked="false"/>
-	<card id="87839" file="card_87839.xml" marked="false"/>
-	<card id="88369" file="card_88369.xml" marked="false"/>
-	<card id="18085" file="card_18085.xml" marked="false"/>
-	<card id="88724" file="card_88724.xml" marked="false"/>
-	<card id="88854" file="card_88854.xml" marked="false"/>
-	<card id="89143" file="card_89143.xml" marked="false"/>
-	<card id="79244" file="card_79244.xml" marked="false"/>
-	<card id="89523" file="card_89523.xml" marked="false"/>
-	<card id="89783" file="card_89783.xml" marked="false"/>
-	<card id="90049" file="card_90049.xml" marked="false"/>
-	<card id="90270" file="card_90270.xml" marked="false"/>
-	<card id="6157" file="card_6157.xml" marked="false"/>
-	<card id="91279" file="card_91279.xml" marked="false"/>
-	<card id="92658" file="card_92658.xml" marked="false"/>
-	<card id="93145" file="card_93145.xml" marked="false"/>
-	<card id="93246" file="card_93246.xml" marked="false"/>
-</stack>

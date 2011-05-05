@@ -1,85 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>100188</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands30026 73723 97817 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>equest (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>7</offset>
-			<id>63</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 2 of 3</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he request command sends an “evaluate expression” Apple event from HyperCard to another application. You can use this command to send an expression to any program that understands the standard eval Apple event. The expression you use must be understandable to the target program. For example, if the target program is another HyperCard, the expression can be any valid HyperTalk expression.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>195</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>201</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>hen the target program executes the statement, the result of the request (the value of the expression) goes into the local variable it.If the target program reports an error, HyperCard sets the result with an error message.You use the request appleEvent forms to examine the data and attributes of an incoming Apple event.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>132</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>135</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>239</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>259</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<name></name>
-	<script></script>
-</card>

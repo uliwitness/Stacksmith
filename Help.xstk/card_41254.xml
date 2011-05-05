@@ -1,66 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>41254</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>reportTemplates</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>the reportTemplates of stackThe reportTemplates property returns a return-separated list of the names of all report templates in the specified stack.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>29</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>51</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions42512</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>get the reportTemplates of this stackget the reportTemplates of stack "Addresses"</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>new features	printing	property	reports	stacks	template</text>
-	</content>
-	<name>reportTemplates</name>
-	<script></script>
-</card>

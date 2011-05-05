@@ -1,239 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>30663</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>arrowKey</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>rrowKey directionIf the global property textArrows is false, the arrowKey command navigates through cards:arrowKey left  = go to previous cardarrowKey right = go to next cardarrowKey up    = go forward through                  recent cardsarrowKey down  = go backward through                  recent cards</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>57</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>62</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>67</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>77</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>110</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>128</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>147</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>165</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>180</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>198</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>217</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>235</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>247</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>265</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>285</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>303</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>f the global property textArrows is true, the arrowKey command navigates through cards unless the insertion point is in a field. Then arrowKey moves the insertion point within the field.HyperCard sends the arrowKey command to the current card whenan arrow key is pressed. The value passed to the  parameter variable direction is left, right, up,or down, depending on which arrowkey is pressed.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>134</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>144</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>208</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>218</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>319</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>320</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>329</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>330</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>333</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>337</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>338</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>344</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>345</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>348</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>352</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>357</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>358</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>359</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>- Option + left and right arrow keys go to prev and next marked cardon arrowKey whichKey  if the optionKey is down then    if whichKey is "left" then      go previous marked card    else if whichKey is "right" then      go next marked card    end if  else pass arrowKey -- let the other arrowKey messages passend arrowKey</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands3428 84197 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>arrow	arrowKey	card messages	command	direction	down	key	left	message	right	up</text>
-	</content>
-	<name>arrowKey</name>
-	<script></script>
-</card>

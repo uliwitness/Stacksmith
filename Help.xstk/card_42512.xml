@@ -1,163 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>42512</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>open report printing</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>pen report printingopen report printing with dialogopen report printing ¬     with template textwhere text is the name of a report template in the current stack.The open report printing command begins the process of printing a stack(or part of a stack) as a report. It uses the current settings from the Print Report dialog box. You must use the close printing command to end a job begun with open report printing.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>96</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>100</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>102</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>108</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>112</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>113</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>168</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>169</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>172</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>194</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>355</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>369</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>401</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>422</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>f you specify the with dialog option, HyperCard displays the Print Report dialog box and the user can choose new settings. If you specify the with template option, HyperCard prints the stack with the named report template.HyperCard sets the function the result to Cancel if the user clicks Cancel in the dialog box, to no such report template if you specify a template that doesn’t exist, or to empty in all other cases.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>142</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>157</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>252</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>264</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>266</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>274</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>321</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>346</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>397</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>404</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>- An example script for printing mailing labels, assuming a-- report template Mailing Labels already exists:on printLabels  open report printing with template "Mailing Labels" -- choose template  print all cards -- specify what cards to print  close printing -- generate the report and print itend printLabels</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands32483 42410 44420 79600 90631 90961 91426 91932 92736 41254 45965 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>command	dialog box	new features	open	printing	reports	template	with</text>
-	</content>
-	<name>open report printing</name>
-	<script></script>
-</card>

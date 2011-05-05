@@ -1,116 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>49516</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>tabKey</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>abKeyThe tabKey command opens thefirst unlocked field on the current card or background (placing the insertion point in the field) and selects its entire contents.If a field is already open for editing, tabKey closes it and opens the next editable field, selecting its contents.(A field is editable only if it is unlocked and visible.)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>6</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>208</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>216</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he tabKey command opens fieldsin the following order: from the lowest to the highest numbered background field, then from the lowest to the highest numbered card field.HyperCard sends the tabKey command to a field or the current card when the user presses the Tab key. You can handle the tabKey message as follows:on tabKey   statementsend tabKey</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>191</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>199</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>291</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>299</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>320</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>333</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>343</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>on mouseUp  -- Selects the text of the first unlocked field  put the lockText of bkgnd field "Demo Script" into textLock  set the lockText of bkgnd field "Demo Script" to false  tabKey  wait 1 second  set the lockText of bkgnd field "Demo Script" to textLockend mouseUp</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>-- Set the insertion point in the first editable field on openCardon openCard     tabKey  end openCard</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands3428 36714 46524 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>card messages	command	field messages	key	message	tab	tabKey</text>
-	</content>
-	<name>tabKey</name>
-	<script></script>
-</card>

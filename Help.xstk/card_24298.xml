@@ -1,74 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>24298</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>resume</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>esumeHandler:on resume   statementsend resumeHyperCard sends the resume messageto the current card when HyperCard resumes running after the user quitsan application launched from HyperCard.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>7</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>81</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>System messages4312 25005 83697 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>Note: HyperCard does not send this message when it’s running under MultiFinder.</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>card messages	message	resume	system</text>
-	</content>
-	<name>resume</name>
-	<script></script>
-</card>

@@ -1,920 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE background PUBLIC "-//Apple, Inc.//DTD background V 2.0//EN" "" >
-<background>
-	<id>4421</id>
-	<filler1>0</filler1>
-	<bitmap>BMAP_4749.pbm</bitmap>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<part>
-		<id>35</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>324</left>
-			<top>247</top>
-			<right>472</right>
-			<bottom>265</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>12</textSize>
-		<textStyle>italic</textStyle>
-		<name>Related Topics</name>
-		<script></script>
-	</part>
-	<part>
-		<id>105</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>325</left>
-			<top>247</top>
-			<right>347</right>
-			<bottom>265</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20008</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Related Topics Icon</name>
-		<script></script>
-	</part>
-	<part>
-		<id>106</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>325</left>
-			<top>248</top>
-			<right>471</right>
-			<bottom>264</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>12</textSize>
-		<textStyle>italic</textStyle>
-		<name>Go Related Topics</name>
-		<script>on mouseUpgoRelatedTopicsif the mouse is down then exit mouseUp -- trap double clickend mouseUp</script>
-	</part>
-	<part>
-		<id>1</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>7</left>
-			<top>4</top>
-			<right>399</right>
-			<bottom>25</bottom>
-		</rect>
-		<style>transparent</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>14</textSize>
-		<textStyle>bold</textStyle>
-		<textHeight>18</textHeight>
-		<name>Title</name>
-		<script></script>
-	</part>
-	<part>
-		<id>9</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>7</left>
-			<top>32</top>
-			<right>240</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>transparent</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>Help Text A</name>
-		<script>on mouseUpcheckActiveTextend mouseUp</script>
-	</part>
-	<part>
-		<id>10</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>242</left>
-			<top>32</top>
-			<right>474</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>Help Text B</name>
-		<script>on mouseUpcheckActiveTextend mouseUp</script>
-	</part>
-	<part>
-		<id>2</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>385</left>
-			<top>8</top>
-			<right>471</right>
-			<bottom>26</bottom>
-		</rect>
-		<style>transparent</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font></font>
-		<textSize>10</textSize>
-		<textStyle>bold</textStyle>
-		<textHeight>13</textHeight>
-		<name>Pages</name>
-		<script></script>
-	</part>
-	<part>
-		<id>32</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>7</left>
-			<top>247</top>
-			<right>107</right>
-			<bottom>265</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>12</textSize>
-		<textStyle>italic</textStyle>
-		<name>Examples</name>
-		<script>on mouseUplock screenpopUp the short name of me,trueunlock screen with zoom outend mouseUp</script>
-	</part>
-	<part>
-		<id>33</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>113</left>
-			<top>247</top>
-			<right>213</right>
-			<bottom>265</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>12</textSize>
-		<textStyle>italic</textStyle>
-		<name>Demo Script</name>
-		<script>on mouseUplock screenshow bg btn "Run the Script" -- ∆popUp the short name of me,trueshowCardStuff falseunlock screen with zoom outend mouseUp</script>
-	</part>
-	<part>
-		<id>34</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>219</left>
-			<top>247</top>
-			<right>319</right>
-			<bottom>265</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>12</textSize>
-		<textStyle>italic</textStyle>
-		<name>Tips</name>
-		<script>on mouseUpgoTipsend mouseUp</script>
-	</part>
-	<part>
-		<id>87</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>7</left>
-			<top>31</top>
-			<right>472</right>
-			<bottom>265</bottom>
-		</rect>
-		<style>shadow</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Panel</name>
-		<script></script>
-	</part>
-	<part>
-		<id>57</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>9</left>
-			<top>33</top>
-			<right>469</right>
-			<bottom>52</bottom>
-		</rect>
-		<style>opaque</style>
-		<showName> <true /> </showName>
-		<highlight> <true /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>bold</textStyle>
-		<name>Examples</name>
-		<script></script>
-	</part>
-	<part>
-		<id>58</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>15</left>
-			<top>36</top>
-			<right>31</right>
-			<bottom>50</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>3071</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Close</name>
-		<script>on mouseUpset the icon of me to "Close Box"lock screenpopUp the short name of bkgnd button id 57,falsehide bkgnd button "Run the Script" -- ∆hide bkgnd field "demo field"showCardStuff trueunlock screen with zoom close fastput empty into bkgnd field "Demo Field"set lockText of field "Demo Script" to trueset the cantAbort of this stack to falseend mouseUpon mouseDownset cursor to arrowset the icon of me to "Clicked Close Box"end mouseDownon mouseLeaveset the icon of me to "Close Box"end mouseLeave</script>
-	</part>
-	<part>
-		<id>108</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>248</left>
-			<top>228</top>
-			<right>469</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>-----  End of Topic  -----</name>
-		<script>on mouseUp-- ∆ Localize based on button nameif word 2 of the short name of me = "More" then goNextend mouseUp</script>
-	</part>
-	<part>
-		<id>59</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>7</left>
-			<top>53</top>
-			<right>471</right>
-			<bottom>264</bottom>
-		</rect>
-		<style>scrolling</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Monaco</font>
-		<textSize>9</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>12</textHeight>
-		<name>Examples</name>
-		<script></script>
-	</part>
-	<part>
-		<id>60</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <true /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>7</left>
-			<top>53</top>
-			<right>471</right>
-			<bottom>264</bottom>
-		</rect>
-		<style>scrolling</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Monaco</font>
-		<textSize>9</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>12</textHeight>
-		<name>Demo Script</name>
-		<script></script>
-	</part>
-	<part>
-		<id>61</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>326</left>
-			<top>235</top>
-			<right>449</right>
-			<bottom>259</bottom>
-		</rect>
-		<style>standard</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Run the Script</name>
-		<script>on mouseUpset the cursor to watchput the cantModify of this stack into savedCantModifyput the userLevel into savedUserLevelput currentPaintProps() into savedPaintPropsput currentPaletteInfo() into savedPaletteInfoset the cantAbort of this stack to trueset the dontSearch of field "Demo Script" to falseset the userLevel to 5get bkgnd field "Demo Script"set the script of bkgnd field "Demo Script" to itsend (word 2 of it) to bkgnd field "Demo Script"set the script of bkgnd field "Demo Script" to emptyset the dontSearch of field "Demo Script" to trueset the cantAbort of this stack to falseset the userLevel to savedUserLevelset the cantModify of this stack to savedCantModifyrestorePaintProps savedPaintPropsrestorePaletteInfo savedPaletteInfoend mouseUpfunction currentPaintPropsput thePaintProps() into thePropertiesrepeat with itemNum = 1 to the number of items in thePropertiesput the value of ("the" &amp;&amp; item itemNum of theProperties) into ¬item itemNum of savedPaintPropsend repeatreturn savedPaintPropsend currentPaintPropson restorePaintProps savedPaintPropsput thePaintProps() into thePropertiesrepeat with itemNum = 1 to the number of items in thePropertiesdo "set the" &amp;&amp; item itemNum of theProperties &amp;&amp;¬"to item" &amp;&amp; itemNum &amp;&amp; "of savedPaintProps"end repeatend restorePaintPropsfunction thePaintPropsreturn "brush,centered,filled,grid,lineSize,multiple,multiSpace,pattern,polySides,textFont,textAlign,textStyle,textSize"end thePaintPropsfunction currentPaletteInfoput thePalettes() into thePalettesrepeat with paletteNumber = 1 to the number of items in thePalettesget item paletteNumber of thePalettesput the visible of it into line paletteNumber of theInfoput " " &amp; the loc of it after line paletteNumber of theInfoend repeatreturn theInfoend currentPaletteInfoon restorePaletteInfo theInfoput thePalettes() into thePalettesrepeat with paletteNumber = 1 to the number of items in thePalettesget item paletteNumber of thePalettesset the visible of it to word 1 of line paletteNumber of theInfoset the loc of it to word 2 of line paletteNumber of theInfoend repeatend restorePaletteInfofunction thePalettesreturn "tool window,pattern window,message window"end thePalettes</script>
-	</part>
-	<part>
-		<id>84</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <true /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>8</left>
-			<top>54</top>
-			<right>454</right>
-			<bottom>264</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>18</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>24</textHeight>
-		<name>demo field</name>
-		<script>on mouseUphide meend mouseUp</script>
-	</part>
-	<part>
-		<id>89</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>451</left>
-			<top>272</top>
-			<right>476</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20003</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Next</name>
-		<script>on mouseUpgoNextend mouseUp</script>
-	</part>
-	<part>
-		<id>90</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>393</left>
-			<top>272</top>
-			<right>418</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20001</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Prev</name>
-		<script>on mouseUpgoPrevend mouseUp</script>
-	</part>
-	<part>
-		<id>92</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>269</left>
-			<top>273</top>
-			<right>300</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20000</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Main Topics Icon</name>
-		<script></script>
-	</part>
-	<part>
-		<id>94</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>291</left>
-			<top>272</top>
-			<right>390</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Main Topics</name>
-		<script></script>
-	</part>
-	<part>
-		<id>95</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>269</left>
-			<top>273</top>
-			<right>388</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Main Topics</name>
-		<script>on mouseUpreturnToMainTopicsend mouseUp</script>
-	</part>
-	<part>
-		<id>97</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>173</left>
-			<top>272</top>
-			<right>191</right>
-			<bottom>292</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20005</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Find Topic Icon</name>
-		<script></script>
-	</part>
-	<part>
-		<id>98</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>187</left>
-			<top>272</top>
-			<right>263</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Find Topic</name>
-		<script></script>
-	</part>
-	<part>
-		<id>99</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>172</left>
-			<top>273</top>
-			<right>263</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Find Topic</name>
-		<script>on mouseUpgoFindTopicend mouseUp</script>
-	</part>
-	<part>
-		<id>103</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>7</left>
-			<top>140</top>
-			<right>238</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>scrolling</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Geneva</font>
-		<textSize>10</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>13</textHeight>
-		<name>Info</name>
-		<script></script>
-	</part>
-	<part>
-		<id>111</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>422</left>
-			<top>272</top>
-			<right>447</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20010</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Home</name>
-		<script>on mouseUpgo Homeend mouseUp</script>
-	</part>
-	<part>
-		<id>114</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>242</left>
-			<top>161</top>
-			<right>473</right>
-			<bottom>246</bottom>
-		</rect>
-		<style>scrolling</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <true /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Geneva</font>
-		<textSize>9</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>12</textHeight>
-		<name>keywords</name>
-		<script></script>
-	</part>
-	<name>Content</name>
-	<script>on openCardset visible of bg btn "Examples" to (fld "Examples" is not empty) -- ∆set visible of bg btn "Demo Script" to (fld "Demo Script" is not empty) -- ∆set visible of bkgnd button "Tips" to (tips() is not empty) -- ∆get (XRefs() is not empty)set visible of bkgnd button "Related Topics" to it -- ∆set visible of bkgnd button "Go Related Topics" to it -- ∆set the icon of bkgnd button "Related Topics Icon" ¬to "Related Topics" &amp;&amp; it -- true or falseset name of bkgnd button id 108 to endOrMore()pass opencardend openCardon closeCard--Hide the Demo Script or Examples field if still open:if (the visible of bg btn "Close")then send "mouseUp" to bg btn "Close"end closeCardon popUp theField,boolean-- Stuff for the examples and demo script fields:set cursor to watchshowCardStuff not booleanset the visible of bg btn "Panel" to booleanset the visible of bg btn "Close" to booleanset the visible of bg btn id 57 to booleanset the visible of bg fld theField to booleanset the name of bg btn id 57 to theFieldset the scroll of fld theField to 0end popUpon showCardStuff trueORfalse-- Hide all card elements that would be on top of the bkgnd fields-- demo script and examples. If the card does not override this-- message, hide all card stuff and show it again when the fields-- go away.set the showPict of this card to trueORfalserepeat with btnNum = 1 to the number of card buttonsif (the short name of card button btnNum ≠ "Previous") and¬(the short name of card button btnNum ≠ "Next")then set the visible of card button btnNum to trueORfalseend repeatrepeat with fldNum = 1 to the number of card fieldsset the visible of card field fldNum to trueORfalseend repeatend showCardStuffon describeLineglobal lastField-- For those cards that have a left-hand menu and pop up fields.put the selectedText of the target into newFieldif newField is empty thenhideDescriptionselselock screenget currentInfoField()if it is not empty then hide card field itshow card field newFieldstoreCurrentField newFieldunlock screenend ifend describeLineon hideDescriptionsget currentInfoField() -- retrieve name of current pop upif it is not empty then hide card field itstoreCurrentField emptyselect line empty of card field "The List"end hideDescriptionson displayMessage theText-- For use by demo scriptsput theText into bkgnd field "Demo Field"end displayMessagefunction spaces totalSpaces-- For use by demo scriptsrepeat with N = 1 to totalSpacesput space after theSpacesend repeatreturn theSpacesend spacesfunction currentInfoFieldget line 1 of the script of card field 1return char 3 to length(it) of itend currentInfoFieldon storeCurrentField fieldNameif fieldName is empty then set the script of card field 1 to emptyelse set the script of card field 1 to "--" &amp; fieldNameend storeCurrentField</script>
-</background>

@@ -1,191 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>32483</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>lose</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>lose printingclose file fileNameclose [document { in | with } ] ¬           applicationclose { externalWindow | card window}The close printing command endsa print job previously begun with an open printing command.  The close file command closes a disk file previously opened with the open file command. Usually, you open files to import or export text. Always use close file when you’re finished.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>80</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>91</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>92</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>100</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>114</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>129</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>130</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>131</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>134</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>150</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>199</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>214</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>229</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>241</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>294</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>305</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>374</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>386</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 3</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>close printingclose "MicroSoft Works"close "Alarm Clock"close file "My Data File"close file "Simonides:Help Text"close file theOpenFileclose window "Script of stack My HD:Home" -- external windowclose window "Navigator" -- external windowclose card windowclose window "Home"</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>f you try to close an unopened file, the result gets File not open. HyperCard automatically closes all open files when• it runs an exit to HyperCard    statement, • the user presses ⌘-. (⌘-period), or• the user quits HyperCard.You must provide the full path nameof the file if it’s not at the same directory level as HyperCard.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>49</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>53</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>135</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>154</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>189</offset>
-			<id>45</id>
-		</stylerun>
-		<stylerun>
-			<offset>190</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>194</offset>
-			<id>45</id>
-		</stylerun>
-		<stylerun>
-			<offset>195</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands3428 39797 35844 41996 42410 42512 44420 45683 45965 16789 6031 51002 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>card messages	card window	Close	command	external	external window	filename	new features	output	printing	windows	Apple event	appleEvent</text>
-	</content>
-	<name>close</name>
-	<script></script>
-</card>

@@ -1,668 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>15784</id>
-	<filler1>0</filler1>
-	<bitmap>BMAP_16595.pbm</bitmap>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<part>
-		<id>18</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>257</left>
-			<top>157</top>
-			<right>303</right>
-			<bottom>207</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>29589</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Bkgnd 2</name>
-		<script></script>
-	</part>
-	<part>
-		<id>1</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>144</left>
-			<top>47</top>
-			<right>190</right>
-			<bottom>97</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>17214</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Button 1</name>
-		<script></script>
-	</part>
-	<part>
-		<id>2</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>144</left>
-			<top>100</top>
-			<right>190</right>
-			<bottom>150</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>21711</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Field 1</name>
-		<script></script>
-	</part>
-	<part>
-		<id>3</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>204</left>
-			<top>157</top>
-			<right>250</right>
-			<bottom>207</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>17481</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Card 2</name>
-		<script></script>
-	</part>
-	<part>
-		<id>4</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>204</left>
-			<top>77</top>
-			<right>250</right>
-			<bottom>127</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>17481</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Card 1</name>
-		<script></script>
-	</part>
-	<part>
-		<id>5</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>257</left>
-			<top>77</top>
-			<right>303</right>
-			<bottom>127</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>29589</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Bkgnd 1</name>
-		<script></script>
-	</part>
-	<part>
-		<id>6</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>304</left>
-			<top>121</top>
-			<right>365</right>
-			<bottom>171</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>1000</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>the stack</name>
-		<script></script>
-	</part>
-	<part>
-		<id>7</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>364</left>
-			<top>121</top>
-			<right>410</right>
-			<bottom>171</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>27328</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Home</name>
-		<script></script>
-	</part>
-	<part>
-		<id>8</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>410</left>
-			<top>121</top>
-			<right>466</right>
-			<bottom>171</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>1001</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>HyperCard</name>
-		<script></script>
-	</part>
-	<part>
-		<id>9</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>310</left>
-			<top>35</top>
-			<right>466</right>
-			<bottom>121</bottom>
-		</rect>
-		<style>rectangle</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Geneva</font>
-		<textSize>10</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>13</textHeight>
-		<name>Comments</name>
-		<script></script>
-	</part>
-	<part>
-		<id>10</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>19</left>
-			<top>161</top>
-			<right>125</right>
-			<bottom>183</bottom>
-		</rect>
-		<style>roundrect</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Button 1</name>
-		<script>on mouseUpanswer "In this example, the user clicks card button 1 on card 1." &amp;&amp;¬"The button’s script contains one handler:" &amp; return &amp; return &amp;¬"on mouseUp" &amp; return &amp; "  beep" &amp; return &amp; "end mouseUp" -- ∆set cursor to arrowshow card field "Comments"display "HyperCard sends the mouseUp message to the card button.",¬"Button 1" -- ∆display "HyperCard looks for “on mouseUp” in the script of" &amp;&amp; ¬"the button.", "Button 1" -- ∆display "HyperCard finds a mouseUp handler, so it sends each of" &amp;&amp;¬"its statements as a message.", "Button 1" -- ∆cantFindIt "beep","Button 1,Card 1,Bkgnd 1,the stack,Home" -- ∆display "Because beep is a built-in command, HyperCard performs it.",¬"HyperCard" -- ∆beephide card field "Comments"put empty into card field "Comments"end mouseUp</script>
-	</part>
-	<part>
-		<id>11</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>19</left>
-			<top>130</top>
-			<right>125</right>
-			<bottom>152</bottom>
-		</rect>
-		<style>roundrect</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Field 1</name>
-		<script>on mouseUpanswer "In this example, the user clicks card field 1 on card 1." &amp;&amp;¬"The field is locked and its script is empty." -- ∆set cursor to arrowshow card field "Comments"display "HyperCard sends the mouseUp message to the card field.",¬"Field 1" -- ∆cantFindIt "mouseUp","Field 1,Card 1,Bkgnd 1,the stack,Home" -- ∆display "The mouseUp system message has no built-in effect." &amp;&amp;¬"Nothing happens.", "HyperCard" -- ∆hide card field "Comments"put empty into card field "Comments"end mouseUp</script>
-	</part>
-	<part>
-		<id>12</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>19</left>
-			<top>99</top>
-			<right>125</right>
-			<bottom>121</bottom>
-		</rect>
-		<style>roundrect</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Message Box</name>
-		<script>on mouseUpput empty into the message boxanswer "In this example, the user is on card 2 and sends" &amp;¬return &amp; return &amp; "put the long date" &amp; return &amp; return &amp;¬"from the Message box. Messages sent from" &amp;&amp;¬"the Message box go to the current card." -- ∆set cursor to arrowshow card field "Comments"cantFindIt "put","card 2,Bkgnd 2,the stack,Home" -- ∆display "Because put is a built-in command, HyperCard evaluates its" &amp;&amp;¬"parameters and performs the command.", "HyperCard" -- ∆put the long datehide card field "Comments"put empty into card field "Comments"end mouseUp</script>
-	</part>
-	<part>
-		<id>13</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>143</left>
-			<top>32</top>
-			<right>471</right>
-			<bottom>226</bottom>
-		</rect>
-		<style>shadow</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>15</textHeight>
-		<name>Dynamic Path</name>
-		<script></script>
-	</part>
-	<part>
-		<id>14</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>19</left>
-			<top>192</top>
-			<right>125</right>
-			<bottom>214</bottom>
-		</rect>
-		<style>roundrect</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Dynamic Path</name>
-		<script>on mouseUplock screenshow card field "Static Path"show card button "Continue" -- ∆show card button "Cancel" -- ∆unlock screenget getClick()if it is "Cancel" then cleanUpAndExitlock screenhide card field "Static Path"show card field "Dynamic Path"unlock screenget getClick()if it is "Cancel" then cleanUpAndExitcleanUpshowExampleend mouseUpon showExampleanswer "In this example, the user clicks button 1 on card 1." &amp;&amp;¬"Its script is:" &amp; return &amp; return &amp; "on mouseUp" &amp; return &amp;¬"  go card 2" &amp; return &amp; "  doubleBeep" &amp; return &amp; "end mouseUp" &amp;¬return &amp; return &amp; "In this case, however, the doubleBeep handler" &amp;&amp;¬"is in the script of Bkgnd 2!" -- ∆set cursor to arrowshow card field "Comments"display "HyperCard sends the mouseUp message to the card button.",¬"Button 1" -- ∆display "HyperCard looks for “on mouseUp” in the script of" &amp;&amp; ¬"the button.", "Button 1"  -- ∆display "HyperCard finds a mouseUp handler, so it sends each of" &amp;&amp;¬"its statements as a message.", "Button 1" -- ∆display "HyperCard sends the go message to the button","Button 1"cantFindIt "go","Button 1,Card 1,Bkgnd 1,the stack,Home" -- ∆display "At this point, HyperCard performs the go command and goes" &amp;&amp;¬"to card 2.", "HyperCard" -- ∆display "HyperCard runs the second line of the mouseUp handler.",¬"Button 1" -- ∆cantFindIt "doubleBeep","Button 1,Card 1,Bkgnd 1,the stack,Home"  -- ∆display "HyperCard doesn’t recognize double beep as a command" &amp;&amp; ¬"or system message.", "HyperCard" -- ∆display "HyperCard sends the message on the dynamic path.", ¬"HyperCard" -- ∆cantFindIt "doubleBeep","Card 2" -- ∆display "Since Bkgnd 2 has a doubleBeep handler, HyperCard runs it.",¬"Bkgnd 2" -- ∆beepbeephide card field "Comments"put empty into card field "Comments"cleanUpend showExampleon cleanUplock screenhide card field "Static Path"hide card field "Dynamic Path"hide card button "Continue"  -- ∆hide card button "Cancel" -- ∆unlock screenend cleanUpon cleanUpAndExitcleanUpexit to HyperCardend cleanUpAndExitfunction getClickput "Cancel" into cancelBtn -- ∆put "Continue" into continueBtn -- ∆repeat foreverif the mouse is down thenif the mouseLoc is within the rect of card button cancelBtn thenclick at the loc of card button cancelBtn --hilite itreturn "Cancel"else if the mouseLoc is within the rect of card button continueBtn thenclick at the loc of card button continueBtn --hilite itreturn "OK"else beepend ifend repeatend getClick</script>
-	</part>
-	<part>
-		<id>17</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>143</left>
-			<top>32</top>
-			<right>471</right>
-			<bottom>226</bottom>
-		</rect>
-		<style>shadow</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>15</textHeight>
-		<name>Static Path</name>
-		<script></script>
-	</part>
-	<part>
-		<id>15</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>379</left>
-			<top>197</top>
-			<right>462</right>
-			<bottom>219</bottom>
-		</rect>
-		<style>roundrect</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Continue</name>
-		<script></script>
-	</part>
-	<part>
-		<id>16</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>290</left>
-			<top>197</top>
-			<right>373</right>
-			<bottom>219</bottom>
-		</rect>
-		<style>roundrect</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Cancel</name>
-		<script></script>
-	</part>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>he message-passing order (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>70</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 2 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>To see the message-passing order inaction, click each ofthe following buttons:</text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>13</id>
-		<text>hen HyperCard doesn’t recognize the message as one of its system messages or commands, it gives you one more chance before complaining (with a dialog box) that it “can’t understand” the message. If a handler goes to another card (using the go command), HyperCard will send the message to the current card—whatever card the handler is visiting at that point. HyperCard also passes the message along the message-passing path starting from the new card. This new path is called the dynamic path.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>209</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>229</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>240</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>244</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>480</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>492</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>17</id>
-		<text>he first three examples show that when a message makes it all the way through the message-passing order to HyperCard, HyperCard either does nothing (if the message is a system message) or performs an action (if it’s a built-in command).This path through the message-passing order—from buttons and fields through HyperCard itself—is called the static path. But that’s not the end of the story . . .</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>1</id>
-		</stylerun>
-		<stylerun>
-			<offset>170</offset>
-			<id>2</id>
-		</stylerun>
-		<stylerun>
-			<offset>184</offset>
-			<id>1</id>
-		</stylerun>
-		<stylerun>
-			<offset>228</offset>
-			<id>2</id>
-		</stylerun>
-		<stylerun>
-			<offset>235</offset>
-			<id>1</id>
-		</stylerun>
-		<stylerun>
-			<offset>346</offset>
-			<id>2</id>
-		</stylerun>
-		<stylerun>
-			<offset>357</offset>
-			<id>1</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>HyperTalk basics2465 20813 4312 27256 29297 48812 6031 </text>
-	</content>
-	<name>The message-passing order 2</name>
-	<script>on display someText,theObject-- Put text into the field for user to see, hilite object:set the hilite of card button theObject to trueplay "harpsichord" "c"put someText &amp;&amp; "(Click the mouse to continue.)" ¬ -- ∆into card field "Comments"wait until the mouseClickset the hilite of card button theObject to falseend displayon cantFindIt theHandlerName, theObjects-- Repeat the can't find handler text for each object:put "“on" &amp;&amp; theHandlerName &amp; "”" into theHandlerNamerepeat with theItem = 1 to the number of items of theObjectsput item theItem of theObjects into theObjectdisplay "HyperCard looks for" &amp;&amp; theHandlerName &amp;&amp; ¬ -- ∆"in the script of" &amp;&amp; theObject &amp; ", but doesn’t find it.",theObject -- ∆end repeatend cantFindIt</script>
-</card>

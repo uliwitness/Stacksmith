@@ -1,194 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>104533</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Keywords26982 27256 104294 65969 8578 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>end (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>63</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 3 of 4</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he third form sends a do script Apple event from HyperCard to another running application:send expression  to { program ¬   program | program id programID | ¬   this program }  [without reply]where program is the path name to the target program in the formzone:computer:program , and programID is the signature of a program on thesame computer. this program denotes HyperCard.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>93</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>108</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>122</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>123</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>124</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>136</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>149</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>159</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>197</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>204</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>205</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>212</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>213</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>263</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>264</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>286</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>287</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>288</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>291</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>292</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>302</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>353</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>367</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>xpression  is any valid expression or any sequence of commands in thescripting language supported by the target program. If the target program isHyperCard, the scripting language is HyperTalk.By default, HyperCard waits for a reply from the target program beforecontinuing; but you can specify  without reply  if  you don't want to wait for one.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>299</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>315</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>he following handler directs a copy of HyperCard 2.2 on a computer named "MyMac," in the same zone as the sending computer, to go to the last card of its currently active stack. It then checks the result to make sure that the command executed: on changeRemoteCard  send "go last card" to program "MyMac:HyperCard 2.2"  if the result is not empty -- problems?  then answer "Error during send!"end changeRemoteCard The next handler sends a message to a copy of HyperCard running on a Macintosh computer named "Oahu" on a network zone named "Hawaii." The "DoThisNow" message is already defined in the remote stack: on doRemoteHandler  send "doThisNow" to program "Oahu:Hawaii:HyperCard 2.2"end doRemoteHandler</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>247</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>420</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>623</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<name></name>
-	<script></script>
-</card>

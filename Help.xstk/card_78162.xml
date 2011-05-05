@@ -1,159 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>78162</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>numberFormat</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>et [the] numberFormat to textwhere text is a valid number format.The numberFormat property returns or sets the precision with which the results of mathematical operations are displayed in fields and the Message box.  The following symbols specify the number format:0  Use one zero for each digit you want    to appear..   Use a period to indicate the position     of the decimal point, if any.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>8</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>30</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>32</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>43</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>69</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>87</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text> Use to indicate where you want     trailing digits to appear if     they have a value other than zero.  HyperCard sets the default number format to "0.######" on idle.  Important: numberFormat takes effect only when you perform a mathemat-ical operation on a number.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>153</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>165</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>175</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>186</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>187</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>201</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>-For the number 2.2:set the numberFormat to "00.00" -- displays 02.20set the numberFormat to "0" -- displays 2set the numberFormat to "0.######" -- displays 2.2In the following set of statements, the Message box would display 3.14159265358979323846 because HyperCard converts the string to a number only when you perform a mathematical operation on it:put pi into myVarset numberFormat to "0.00"put myVar into message boxIn the next set of statements, the Message box would display 3.14 because HyperCard converts the string to a number when you add 0 to it:put pi into myVaradd 0 to myVarset numberFormat to "0.00"put myVar into message box</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>166</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>359</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>433</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>571</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties51607 89523 54407 54961 35162 41612 64752 65137 65714 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>format	global	number	numberFormat	property</text>
-	</content>
-	<name>numberFormat</name>
-	<script></script>
-</card>

@@ -1,145 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>29791</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<part>
-		<id>1</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>393</left>
-			<top>272</top>
-			<right>418</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20002</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Prev</name>
-		<script></script>
-	</part>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>add</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>dd number to [chunk of] containerNote: The container or chunk referred to must contain a number.The add command adds the value of number to the number in a containeror chunk and replaces the contents of the container or chunk with the result.(You can use the is a operator to seeif the container is a number.)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>23</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>104</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>109</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>134</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>135</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>141</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>142</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>266</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>272</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>add 3 to It  add field "Amount" to field "Total"get last line of card field "credits"if it is a number then add it to item 1 of theTotalif the Message box is a number then add 15 to Message box</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands89523 49191 6157 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>add	chunks	command	container	math	number	plus</text>
-	</content>
-	<name>add</name>
-	<script></script>
-</card>

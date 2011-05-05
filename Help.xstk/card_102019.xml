@@ -1,147 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>102019</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>owner</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>get [the] [long|short] owner of cardget [the] owner of window This read-only property tells you the  name of the background to which a specified card belongs, or it tells you the creator of a window.Long owner of card returns the full path name of the background.Short owner of card returns the short name of the background.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>57</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>63</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>65</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>205</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>219</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>223</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>224</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>270</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>271</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>286</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>290</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>291</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>Owner of card returns “bkgnd” plus the leaf name of the background.The window  form returns HyperCard if it's a stack or built-in window,  or the name of an XCMD  if it's an external window.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>1</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>80</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>94</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>105</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>palette navigatoranswer the owner of window "navigator" -- if it's showinganswer the owner of window "tools"answer the short owner of card 1answer "This card is in Background" &amp;&amp; the short owner of this card</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>property	background	window	creator	path name	leaf name</text>
-	</content>
-	<name>owner</name>
-	<script></script>
-</card>

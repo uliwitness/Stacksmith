@@ -1,90 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>62709</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>round</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he round of numberValue returned: the integer nearest to numberOdd integers plus exactly 0.5 round up; even integers (or 0) plus exactly 0.5 round down. If number is negative, HyperCard internally removes the negative sign, rounds its absolute value, then putsthe negative sign back on.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>13</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>59</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>60</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>162</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>163</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>169</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>170</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>he round of 5.5the round of 5.5 + 3 -- returns 9the round of (5.5 + 3) -- returns 8get round(the top of card window / 2)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 89523 66892 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	integer	math	nearest	number	round</text>
-	</content>
-	<name>round</name>
-	<script></script>
-</card>

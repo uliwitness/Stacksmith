@@ -1,94 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>64031</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>selectedText</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he selectedText the selectedText of listFieldthe selectedText of popupButtonValue returned: a string equal tothe range of characters currently selected.  If nothing is highlighted, it returns empty.If a field isn't currently a list field but it was in the past, and a selection had been made when it was a list field, the selectedText returns the most recent selection.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>81</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>197</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>203</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>326</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>342</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n whatIsTheSelection  select line 2 of me  answer "The selectText is “" &amp; the selectedText &amp; "”"end whatIsTheSelection</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions24266 32809 12857 53775 56722 47006 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	select	selection	text</text>
-	</content>
-	<name>selectedText</name>
-	<script></script>
-</card>

@@ -1,70 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>66203</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>ticks</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he ticks  Value returned: an integer equal to the number of ticks since the Macintosh was turned on or restarted. (One tick equals one-sixtieth of a second.)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>13</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n ticksDemo  put 0 into total  put the ticks into startTicks  repeat with number = 1 to 100    set cursor to busy    add number to total  end repeat  put the ticks - startTicks into totalTime  answer "The sum of numbers 1 to 100 is" &amp;&amp; total &amp; return &amp;¬  "It took" &amp;&amp; totalTime &amp;&amp; "ticks to figure out."end ticksDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>162</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>171</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 63225 66404 50819 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>function	ticks	time</text>
-	</content>
-	<name>ticks</name>
-	<script></script>
-</card>

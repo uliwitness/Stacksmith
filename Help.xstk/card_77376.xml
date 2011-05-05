@@ -1,172 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>77376</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>multiSpace</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>set [the] multiSpace to posIntegerwhere posInteger is a number from1 to 100.The multiSpace property returns orsets the minimum amount of space,in pixels, between the edges of multiple shapes drawn when the multiple property is true.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>6</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>35</offset>
-			<id>11</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>43</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>53</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>80</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>82</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>85</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>97</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>154</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>159</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>213</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>223</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>The multiSpace property affects the Line, Rectangle, Rounded Rectangle, Oval, and Regular Polygon tools. Its default value is 1.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>set the multiSpace to 10</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n multipleDemo  show bkgnd field "Demo Field"  setUpPaint  displayMessage "      MultiSpace 2" &amp; spaces(8) &amp; "MultiSpace 5" &amp; ¬  spaces(9) &amp; "MultiSpace 9"  set the multiSpace to 2  drawShape "100,160","160,220"  set the multiSpace to 5  drawShape "240,160","300,220"  set the multiSpace to 9  drawShape "380,160","440,220"  wait 2 seconds  domenu "revert"  choose browse tool  hide bkgnd field "Demo Field"end multipleDemoon drawShape  startTopLeft, endBotRight  drag from startTopLeft to endBotRight with shiftKeyend drawShapeon setUpPaint  choose oval tool  set multiple to true  set centered to true  set dragspeed to 150  set lineSize to 1  set filled to false  set grid to falseend setUpPaint</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>171</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>181</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>229</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>239</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>287</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>297</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties69837 71536 77229 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>multiple	multiSpace	paint	property	spaces	trueOrFalse</text>
-	</content>
-	<name>multiSpace</name>
-	<script>on showCardStuffshow card pictureend showCardStuff</script>
-</card>

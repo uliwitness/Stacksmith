@@ -1,722 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>11326</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<part>
-		<id>1</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>9</left>
-			<top>32</top>
-			<right>183</right>
-			<bottom>55</bottom>
-		</rect>
-		<style>shadow</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>bold</textStyle>
-		<textHeight>18</textHeight>
-		<name></name>
-		<script></script>
-	</part>
-	<part>
-		<id>2</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <true /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>9</left>
-			<top>52</top>
-			<right>183</right>
-			<bottom>239</bottom>
-		</rect>
-		<style>shadow</style>
-		<autoSelect> <true /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Monaco</font>
-		<textSize>9</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>The List</name>
-		<script>on mouseUpdescribeLineend mouseUp</script>
-	</part>
-	<part>
-		<id>4</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>37</top>
-			<right>471</right>
-			<bottom>228</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name></name>
-		<script>on mouseUpcheckActiveTextend mouseUp</script>
-	</part>
-	<part>
-		<id>5</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>31</top>
-			<right>471</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>Name</name>
-		<script></script>
-	</part>
-	<part>
-		<id>7</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>31</top>
-			<right>471</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>Number</name>
-		<script></script>
-	</part>
-	<part>
-		<id>11</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>31</top>
-			<right>471</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>ID</name>
-		<script></script>
-	</part>
-	<part>
-		<id>15</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>31</top>
-			<right>471</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>Part</name>
-		<script>on mouseUpcheckActiveTextend mouseUp</script>
-	</part>
-	<part>
-		<id>9</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>31</top>
-			<right>471</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>ordinal</name>
-		<script></script>
-	</part>
-	<part>
-		<id>10</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>31</top>
-			<right>471</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>position</name>
-		<script></script>
-	</part>
-	<part>
-		<id>12</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>31</top>
-			<right>471</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>Me</name>
-		<script></script>
-	</part>
-	<part>
-		<id>13</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>193</left>
-			<top>31</top>
-			<right>471</right>
-			<bottom>245</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>target</name>
-		<script></script>
-	</part>
-	<part>
-		<id>14</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <false /> </enabled>
-		<rect>
-			<left>451</left>
-			<top>272</top>
-			<right>476</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20003</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Next</name>
-		<script>on mouseUpput the rect of meend mouseUp</script>
-	</part>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>Referring to objects</text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>1</id>
-		<text>Refer by</text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>2</id>
-		<text>namenumberidpartordinalpositionmetarget</text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>4</id>
-		<text>ou can refer to HyperCard objects and other elements from a script in any of several ways.Click a term in the “Refer by” list for more information about that term.Click Tips for a list of synonyms thatyou can use for referring to objects.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>27</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>61</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>67</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>5</id>
-		<text>n object’s name is the value found in its Info dialog box. For example:background button "Home"It’s a good idea to use quotation marks around an object’s name so that HyperCard recognizes it literally and doesn’t look for a variable by that name.Note: HyperCard interprets card "1812" as a card named 1812; it interprets card 1812 as card number 1812.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>279</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>292</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>308</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>312</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>327</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>338</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>353</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>357</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>7</id>
-		<text>n object’s number represents its position among like objects within the object that contains it.  Buttons and fields are ordered within a card or background.  Cards and backgrounds are ordered within a stack.  go to card 2Changing the order of a button, field, card, or background changes its number.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>215</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>227</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>11</id>
-		<text>n object or menu's ID is a unique number assigned by HyperCard. Object ID numbers never change. The Info dialog box for each object displays its ID. (Stacks don't have ID's.)go to card id 5734A program's ID is its application signature: put the id of HyperCard -- -&gt; WILD</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>177</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>197</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>242</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>9</id>
-		<text>ou can refer to an object using any of the following ordinals: first through tenthmiddle, last, anyFor example:go to first card of last background</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>62</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>72</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>103</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>119</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>10</id>
-		<text>ou can refer to some objects using any of the following positions: next, prev, previous, thisFor example:go to first card of this backgroundgo next card</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>57</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>98</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>112</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>12</id>
-		<text>e is one way to refer to an object dynamically.  It refers to the object that contains the currently executing handler. With buttons and fields, me refers to the object itself or to its contents, depending on the context. For example:--In the script of a button:set the hilite of me to true -- the buttonget me -- the contents--In the script of a field:select text of me -- selects the field textselect me -- selects the field itselfput empty into me -- replaces the contents</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>2</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>145</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>149</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>237</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>332</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>333</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>13</id>
-		<text>he target is another way to refer to an object dynamically. It refers to the object that first received the message currently being handled.With buttons and  fields, use the target to refer to the field itself and target to refer to its contents.For example:set the hilite of the target to trueselect the target --the btn or fld itselfput target --the contents of the btn or fldput the target --the name of the btn or fld</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>171</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>183</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>215</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>223</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>264</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>HyperTalk basics27092 </text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>15</id>
-		<text>art refers to a specific button or field in its ordinal position among all the buttons and fields in that domain:select part 2if word 2 of name of part 1 is "button"...get the name of part 1set the partNumber of last part to 1put the number of parts into totalCardPartsput the id of bg part 3 into field idListIf you don't specify a domain, the default domain is card.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>116</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>172</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>173</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>318</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>ID	me	name	number	objects	ordinal	position	synonyms	target	to</text>
-	</content>
-	<name>Referring to objects</name>
-	<script>on closeCardmouseUppass closeCardend closeCardon mouseUphideDescriptionsend mouseUp</script>
-</card>

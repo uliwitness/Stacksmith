@@ -1,84 +1,132 @@
-The following syntax is currently supported by Stacksmith's programming language "Forge":
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<card>
+	<id>3001</id>
+	<name></name>
+	<showPict><true /></showPict>
+	<cantDelete><false /></cantDelete>
+	<dontSearch><false /></dontSearch>
+	<script></script>
+	<part>
+		<id>1</id>
+		<type>field</type>
+		<layer>card</layer>
+		<visible><true /></visible>
+		<enabled><true /></enabled>
+		<rect>
+			<left>-1</left>
+			<top>-1</top>
+			<right>513</right>
+			<bottom>343</bottom>
+		</rect>
+		<style>scrolling</style>
+		<showName><false /></showName>
+		<highlight><false /></highlight>
+		<autoHighlight><true /></autoHighlight>
+		<sharedHighlight><false /></sharedHighlight>
+		<family>0</family>
+		<titleWidth>0</titleWidth>
+		<icon>0</icon>
+		<dontWrap><false /></dontWrap>
+		<dontSearch><false /></dontSearch>
+		<sharedText><false /></sharedText>
+		<fixedLineHeight><false /></fixedLineHeight>
+		<autoTab><false /></autoTab>
+		<lockText><false /></lockText>
+		<autoSelect><false /></autoSelect>
+		<multipleLines><false /></multipleLines>
+		<showLines><false /></showLines>
+		<wideMargins><false /></wideMargins>
+		<textAlign>left</textAlign>
+		<font>Geneva</font>
+		<textSize>12</textSize>
+		<name>Help Text</name>
+		<script></script>
+	</part>
+	<content>
+		<layer>card</layer>
+		<id>1</id>
+		<text>The following syntax is currently supported by Stacksmith's programming language "Forge":
 
 1) TOP-LEVEL CONSTRUCTS:
 
-	on handlerName [<paramName1>[,<paramName2>[, ...]]
+	on handlerName [&lt;paramName1&gt;[,&lt;paramName2&gt;[, ...]]
 		commands
 	end handlerName
 
 This defines a command handler with the specified number of parameters that are automatically assigned to the local variables of that name.
 
-	function handlerName [<paramName1>[,<paramName2>[, ...]]
+	function handlerName [&lt;paramName1&gt;[,&lt;paramName2&gt;[, ...]]
 		commands
 	end handlerName
 
 2) COMMANDS:
 
-	handlerName [<param1>[,<param2>[,...]]]
+	handlerName [&lt;param1&gt;[,&lt;param2&gt;[,...]]]
 
 This is the command that calls a command handler. The parameter values passed in may be any valid expression.
 
-	put <expression> into <container>
-	set <container> to <expression>
+	put &lt;expression&gt; into &lt;container&gt;
+	set &lt;container&gt; to &lt;expression&gt;
 
 This stores the value of the specified expression in the variable or property with the specified name. If there is no variable of that name yet, it is created.
 There are also put X after Y for appending Y to X, and put X before Y for prefixing Y with X.
 
-	put <expression>
+	put &lt;expression&gt;
 
 Writes the specified expression as a string to the message box.
 
-	return <expression>
+	return &lt;expression&gt;
 
 This sets the return value of the current handler to the value of the specified expression and exits the current handler.
 
-	repeat while <conditionExpression>
+	repeat while &lt;conditionExpression&gt;
 		commands
 	end repeat
 
-This executes the commands repeatedly while the value of <conditionExpression> is "true". If conditionExpression starts out false, this executes no commands apart from evaluating the expression.
+This executes the commands repeatedly while the value of &lt;conditionExpression&gt; is "true". If conditionExpression starts out false, this executes no commands apart from evaluating the expression.
 
-	repeat until <conditionExpression>
+	repeat until &lt;conditionExpression&gt;
 		commands
 	end repeat
 
 This basically loops while the conditionExpression is false.
 
-	repeat [for] <count> [times]
+	repeat [for] &lt;count&gt; [times]
 		commands
 	end repeat
 
-This repeats the specified commands <count> times.
+This repeats the specified commands &lt;count&gt; times.
 
-	repeat with <variableName> from <startNum> [down] to <endNum>
+	repeat with &lt;variableName&gt; from &lt;startNum&gt; [down] to &lt;endNum&gt;
 		commands
 	end repeat
 
 puts each number from startNum to endNum into the variable and executes the commands for each one of them.
 
-	repeat for each <chunkType> <variableName> in <expression>
+	repeat for each &lt;chunkType&gt; &lt;variableName&gt; in &lt;expression&gt;
 		commands
 	end repeat
 
 Put each byte, character, word, line or item in the given expression into the specified variable and execute the given commands for it.
 
-	global <variableName>
+	global &lt;variableName&gt;
 
 Create a global variable with the given name (if it doesn't already exist) and make it possible to manipulate it in the current handler.
 
-	go [to] <objectDescriptor>
+	go [to] &lt;objectDescriptor&gt;
 
 Opens the specified stack, or navigates to the specified card in the current stack.
 
-	visual effect <effectName>
+	visual effect &lt;effectName&gt;
 
 Currently does nothing.
 
-	answer <message> [with <buttonName> [or <buttonName>] [or <buttonName>]]
+	answer &lt;message&gt; [with &lt;buttonName&gt; [or &lt;buttonName&gt;] [or &lt;buttonName&gt;]]
 
 displays a dialog containing a message and up to three replies as buttons.
 
-	ask <question> [with <defaultAnswer>]
+	ask &lt;question&gt; [with &lt;defaultAnswer&gt;]
 
 Display a dialog containing the given message and an edit field for entering an answer, plus OK anc Cancel buttons.
 
@@ -93,18 +141,18 @@ Supported operators at this time are:
 	*  - Multiply the two operands.
 	/  - Divide the first operand by the second one.
 	=  - compare the two operands. This tries to do int/int, float/float or bool/bool comparisons before it falls back on case-insensitive string comparison.
-	<> - compare the two operands, returning FALSE if they are equal and TRUE if they are not equal.
+	&lt;&gt; - compare the two operands, returning FALSE if they are equal and TRUE if they are not equal.
 	is - alternate spelling for =.
-	is not - alternate spelling for <>
-	<  - compare the two operands and return TRUE if the first one is less than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa < Ab.
-	>  - compare the two operands and return TRUE if the first one is more than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab > Aa.
-	<= - compare the two operands and return TRUE if the first one is less than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa <= Ab, Aa <= Aa.
-	>= - compare the two operands and return TRUE if the first one is more than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab >= Aa, Aa >= Aa.
+	is not - alternate spelling for &lt;&gt;
+	&lt;  - compare the two operands and return TRUE if the first one is less than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt; Ab.
+	&gt;  - compare the two operands and return TRUE if the first one is more than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt; Aa.
+	&lt;= - compare the two operands and return TRUE if the first one is less than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt;= Ab, Aa &lt;= Aa.
+	&gt;= - compare the two operands and return TRUE if the first one is more than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt;= Aa, Aa &gt;= Aa.
 	mod[ulo] - Return the remainder that occurs when dividing the first operand by the second.
 	^  - Raise the first exponent to the power of the second. i.e. 2 ^ 3 = 8
 	
-	& - Convert the operands to strings and append the second one to the first one.
-	&& - Like &, but inserts a space between the two strings.
+	&amp; - Convert the operands to strings and append the second one to the first one.
+	&amp;&amp; - Like &amp;, but inserts a space between the two strings.
 
 4) TERMS:
 
@@ -134,24 +182,24 @@ This is an integer. An integer may only consist of the digits 1 through 9 and 0.
 
 This is a fractional number. A fractional number may consist of the digits 1 through 9, 0, and of a single decimal point.
 
-	myFunction( [<param1>[, <param2>[, ...]]] )
+	myFunction( [&lt;param1&gt;[, &lt;param2&gt;[, ...]]] )
 
 A function call works the same as a handler call. It may take parameters. The return value of the function will be used as the value of this term when it is used in an expression.
 
-	byte[s] <startOffsetExpr> [to <endOffsetExpr>] of <term>
-	char[acter][s] <startOffsetExpr> [to <endOffsetExpr>] of <term>
-	line[s] <startOffsetExpr> [to <endOffsetExpr>] of <term>
-	item[s] <startOffsetExpr> [to <endOffsetExpr>] of <term>
-	word[s] <startOffsetExpr> [to <endOffsetExpr>] of <term>
+	byte[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
+	char[acter][s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
+	line[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
+	item[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
+	word[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
 
 Extracts a chunk (aka substring) from the specified term. Items are comma-delimited, lines are return-delimited. Words are delimited by one or more characters of whitespace.
 You can also change the value of a chunk.
 
-	number of bytes of <expression>
-	number of char[acter]s of <expression>
-	number of lines of <expression>
-	number of items of <expression>
-	number of words of <expression>
+	number of bytes of &lt;expression&gt;
+	number of char[acter]s of &lt;expression&gt;
+	number of lines of &lt;expression&gt;
+	number of items of &lt;expression&gt;
+	number of words of &lt;expression&gt;
 
 Counts the number of entities of the specified chunk type that can be extracted from the specified expression. 
 
@@ -205,30 +253,30 @@ There are several constants whose name consists of one or more identifiers:
 
 A term may also consist of an object descriptor:
 
-	stack <stackNameOrPath>
+	stack &lt;stackNameOrPath&gt;
 	
 A stack, referenced by name or slash-delimited POSIX-style search path. If you only specify the file name, and a stack of that name is not already open, Stacksmith currently makes a best-effort attempt at finding the file, searching for stacks next to the Stacksmith application or in its own "Resources" folder.
 
-	background <backgroundNameOrNumber>
+	background &lt;backgroundNameOrNumber&gt;
 
 A background, referenced by name, or number. The number being its position in the list of backgrounds. The first background has the number 1 (not zero).
 
-	card <cardNameOrNumber>
+	card &lt;cardNameOrNumber&gt;
 
 A card, referenced by name, or number. The number being its position in the list of all cards. The first background has the number 1 (not zero).
 
-	card button <buttonNameOrNumber>
-	background button <buttonNameOrNumber>
+	card button &lt;buttonNameOrNumber&gt;
+	background button &lt;buttonNameOrNumber&gt;
 
 A button on the current card or on its background, referenced by name, or number. The number being its position in the list of all buttons on the card/background. The first and backmost button has the number 1 (not zero).
 
-	card field <fieldNameOrNumber>
-	background field <fieldNameOrNumber>
+	card field &lt;fieldNameOrNumber&gt;
+	background field &lt;fieldNameOrNumber&gt;
 
 A text field on the current card or on its background, referenced by name, or number. The number being its position in the list of all fields on the card/background. The first and backmost field has the number 1 (not zero).
 
-	card part <partNameOrNumber>
-	background part <partNameOrNumber>
+	card part &lt;partNameOrNumber&gt;
+	background part &lt;partNameOrNumber&gt;
 
 A button or text field on the current card or on its background, referenced by name, or number. The number being its position in the combined list of all buttons and fields on the card/background. The first and backmost part has the number 1 (not zero).
 
@@ -260,7 +308,7 @@ Ths object that the script belongs to in which this object descriptor occurs.
 
 A term may also be a property expression:
 
-	[the] [long|short|abbr[ev[iated]]] <propertyName> [of <objectDescriptor>]
+	[the] [long|short|abbr[ev[iated]]] &lt;propertyName&gt; [of &lt;objectDescriptor&gt;]
 
 Depending on the object descriptor, there may be different properties. If there is no object descriptor, it is assumed to be a property of Stacksmith itself, which is global to the entire application.
 
@@ -301,3 +349,9 @@ A container is an object descriptor for a part (button or field), or a variable,
 	mouseUp				-	The mouse has been released again after being pressed on an object, and it was released inside the object.
 	mouseRelease		-	The mouse has been released again after being pressed on an object, and it was released outside the object (name subject to change)
 	
+</text>
+		<highlight><false /></highlight>
+	</content>
+	<owner>3000</owner>
+	<marked><false /></marked>
+</card>

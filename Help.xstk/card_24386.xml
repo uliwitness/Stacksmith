@@ -1,110 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>24386</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>resumeStack</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>esumeStackHandler:on resumeStack   statementsend resumeStackHyperCard sends the resumeStack message to the current card when the stack’s window becomes active after being inactive (for example, when the user clicks in a window).</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>23</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>41</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>51</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>69</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>88</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>101</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>yperCard sends resumeStackonly when it is displaying morethan one stack.Important: HyperCard does not send resumeStack when the user switches to HyperCard from another layer under MultiFinder. (Click Related Topics for more information about the property the suspended.)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>28</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>77</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>86</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>111</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>124</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>259</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>273</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>System messages17907 19234 22569 23747 24600 25274 83697 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>activate	active	card messages	card window	message	new features	stacks	system	windows</text>
-	</content>
-	<name>resumeStack</name>
-	<script></script>
-</card>

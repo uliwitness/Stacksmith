@@ -1,103 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>13231</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <false /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>Debug a script</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 3</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>HyperCard provides some useful tools for troubleshooting your scripts. These debugging tools let you step through a handler line by line as it runs, inspect the values of variables, and trace the flow of messages.To debug a handler, follow these steps:1. Open the script that contains the     message or function handler you     want to debug.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>63</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>69</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>117</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>124</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>172</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>180</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>205</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>212</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>2. Click to place the insertion point     on the line with the on or function     statement that defines the handler.    Or, depending on where you want    to start, place the insertion point    on any statement of the handler    that is not a comment.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>64</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>81</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>on watchFibonacci  show message watcher at "269,73"  get fibonacci(5)  set nextLine of message watcher to "Fibonacci(5) = " &amp;&amp; it &amp; return  wait 4 seconds  hide message watcherend watchFibonaccifunction fibonacci N  wait 30  set nextLine of message watcher to "N = " &amp;&amp; N &amp; return  if N = 0 or N = 1 then return 1  else return fibonacci(N - 1) + fibonacci(N - 2)end fibonacci</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Editing scripts18600 53830 5882 5960 34213 92176 94238 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>abort	break	breakpoint	check	checkpoint	clear checkpoint	debug	delay	go	hBarLoc	hideIdle	hideUnused	message watcher	new features	nextLine	scripts	set checkpoint	step	step into	trace	trace delay	trace into	variable watcher	vBarLoc	watcher</text>
-	</content>
-	<name>Debug a script</name>
-	<script></script>
-</card>

@@ -1,300 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>77648</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>name</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he [adjective ] name of objectthe [long] name of HyperCardset [the] name of object to textset [the] name of [menuItem of] menu ¬    to textget [the] [English] name of ¬        [menuItem of] menu The name property returns or sets the name of an object, menu item, or menu.  If the element doesn't have a name, the name returns the ID of the object instead.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>32</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>60</offset>
-			<id>11</id>
-		</stylerun>
-		<stylerun>
-			<offset>61</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>67</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>71</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>80</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>86</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>90</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>94</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>99</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>100</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>103</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>104</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>113</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>114</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>122</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>125</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>126</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>127</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>131</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>141</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>146</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>150</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>151</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>154</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>155</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>175</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>185</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>193</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>196</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>197</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>198</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>202</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>204</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>208</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>214</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>318</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>328</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n nameDemo   answer "The short name of card id 86868 is:" &amp; return &amp; ¬   (the short name of card id 86868) &amp; return &amp; return &amp;¬   "The abbreviated name is:" &amp; return &amp;¬   (the abbr name of card id 86868) &amp; return &amp; return &amp;¬   "The name is:" &amp; return &amp;¬   (the name of card id 86868) &amp; return &amp; return &amp;¬   "The long name is:" &amp; return &amp;¬   (the long name of card id 86868)end nameDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>81</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>91</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>181</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>190</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>268</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>272</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>355</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>364</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>the short name of button 1the abbreviated name of bkgnd button 4the abbrev name of bkgnd button 4the abbr name of bkgnd button 4the name of card field 1 of last cardthe long name of methe name of menuItem 1 of menu 2the name of first menuItem of menu "File"set the name of button 1 to "Hide field"set the name of this card to line 1 of field "Title"set the name of menuItem 1 of menu "File" to "Trouble"if the English name of menuItem 5 of menu "Edit" is not "Paste"...</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he long name of HyperCard returns the full path to HyperCard:myDisk:Desktop Folder:HyperCard Folder:HyperCardYou can use the adjective English to determine the names of menus and menu items if you're using a localized version of HyperCard:if the English name of menuItem 5  ¬         of menu "Edit" is "Paste"...</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>27</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>64</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>113</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>139</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>148</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>246</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties73264 74508 77883 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>background	button	card	field	item	menu	menu items	name	objects	property	stacks	text</text>
-	</content>
-	<name>name</name>
-	<script></script>
-</card>

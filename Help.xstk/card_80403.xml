@@ -1,119 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>80403</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>scriptEditor</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>set [the] scriptEditor ¬     to resourceNameThe scriptEditor property returnsor sets the name of the current script editor.The default value of this propertyis ScriptEditor, the name of HyperCard’s built-in editor and debugger.  (The built-in editor and debugger are integrated.)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>6</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>46</offset>
-			<id>11</id>
-		</stylerun>
-		<stylerun>
-			<offset>48</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>51</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>65</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>167</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>180</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>Because HyperCard’s script editor is actually an external command (XCMD), you can replace it with your own or third-party script editors. If HyperCard can’t find a script editor with the specified name, it uses its built-in script editor.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>et the scriptEditor to "Mr. Ed" -- if it's installedif the scriptEditor is "ScriptEditor" then  -- using HyperCard’s script editorelse  -- using another script editorend if</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>86</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties92176 36226 79684 80353 80859 81132 14879 87839 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>editor	external	external command	global	new features	property	scripts</text>
-	</content>
-	<name>scriptEditor</name>
-	<script></script>
-</card>

@@ -1,142 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>57488</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>ln, ln1, log2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he ln of numberthe ln1 of numberthe log2 of numberValues returned: ln returns a number equal to the base-e or natural logarithm of number. ln1 returns a number equal to the natural logarithm of 1 + number.  ln2 returns a number equal to the base-2 logarithm of number.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>28</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>53</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>77</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>113</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>114</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>137</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>138</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>144</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>147</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>152</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>206</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>207</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>213</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>217</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>222</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>271</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>272</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>278</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>the ln of 2.718282 --returns 1ln(2.718282)ln1 of 1.718282 --returns 1ln1(1.718282)log2 of 1024 -- returns 10log2 of 1024 - 512 -- returns -502log2 of (1024 - 512)  -- returns 9</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 55719 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>base	function	logarithm	math	transcendental</text>
-	</content>
-	<name>ln, ln1, log2</name>
-	<script></script>
-</card>

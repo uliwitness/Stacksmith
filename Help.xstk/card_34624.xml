@@ -1,140 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>34624</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>dial</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ial posInteger dial posInteger with modem ¬           [modemCommands ]The dial command generates touch-tone sounds for the digits in  posInteger through the Macintosh speaker. To dial the phone from HyperCard, you must either hold the handset up to the speaker of your Macintosh or use a device that feeds Macintosh audio output to the telephone.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>32</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>43</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>71</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>83</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>139</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>149</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>f you use the with modem option, HyperCard sets up calls using the modem connected to the modem port.  For more information about using modems with HyperCard, see the Phone Dialer stack.  See your modem manual for valid modemCommands.Note: If you include a hyphen in the number, place the entire expression in quotation marks. Otherwise, HyperCard performs a subtraction before dialing the number.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>26</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>221</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>234</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  dial "(123) 456-7890"end mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>13</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>ask "Enter a phone number:"if it is not empty then dial itdial myHomeComputer -- if myHomeComputer contains a numberdial "415-555-1212"  dial "999-973-6000" with modem  dial "999-996-1010" with modem "ATS0=0S7=1DT"  -- depends on your modem</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands98571 99166 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>audio	command	modem	output	phone	sound	speaker</text>
-	</content>
-	<name>dial</name>
-	<script></script>
-</card>

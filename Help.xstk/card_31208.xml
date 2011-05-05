@@ -1,344 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>31208</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>ask</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>sk text1 [with text2 ]ask password [clear] text1 [with text2 ]ask file text1 [with fileName ] The ask command displays a question (text1 ) in a dialog box along with a text box where the user can type a reply. The ask dialog automatically provides the OK and Cancel buttons.You can supply a default reply usingthe with text2 option. The default text appears highlighted in the text box.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>8</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>20</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>23</offset>
-			<id>12</id>
-		</stylerun>
-		<stylerun>
-			<offset>25</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>39</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>44</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>45</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>46</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>51</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>52</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>53</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>62</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>63</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>75</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>80</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>81</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>82</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>87</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>95</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>103</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>108</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>127</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>135</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>137</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>141</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>142</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>219</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>224</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>299</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>312</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>322</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>328</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>332</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>333</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>334</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>sk returns the text entered by theuser, if any, in the local variable it.If the user clicks Cancel, ask places empty in it.Ask also sets the HyperTalk function the result to empty if the user clicks OK or to Cancel if the user clicks Cancel.  (So you can use the value of the result to determine whether the user provides an empty string or clicks Cancel.)  You must check the result in the statement immediately after the ask command.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>71</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>102</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>107</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>113</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>120</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>122</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>125</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>127</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>132</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>164</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>176</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>178</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>185</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>212</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>220</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>276</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>288</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>377</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>389</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>427</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>432</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp  -- convert some arbitrary seconds to the date    -- to get the date format as set for the system.  put "1838246400" into someSeconds  convert someSeconds to short date    ask "Enter your birthday:" with someSeconds  if the result is "Cancel" then answer "You clicked Cancel."  else    put convertBirthDayToDays(it) into numberOfDays    if numberOfDays is not empty    then answer "You are" &amp;&amp; numberOfDays &amp;&amp; "days old."  end ifend mouseUpfunction convertBirthDayToDays birthDay  convert birthDay to seconds  if the result is "invalid date" then beep  else    convert the date to seconds    put it - birthDay into secondsOld    return secondsOld / 86400 -- 86400 is the number of seconds in a day  end ifend convertBirthDayToDays</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>189</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>192</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>-- userName is a global variable set up by the Home stack:ask "Enter your name:" with userName ask "What time of day?" with "Noon"if the result is "Cancel" then   -- the user clicked the Cancel buttonelse if it is empty then   -- the user clicked OK with no answerelse   -- the user clicked OK and provided an answerend ifask password "Enter your password:"if it is in card field "passwords" then allowAccesselse go Homeask file "Save the file as:" with "Untitled"</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands30026 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>command	dialog box	input	it	new features	password	text</text>
-	</content>
-	<name>ask</name>
-	<script></script>
-</card>

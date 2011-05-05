@@ -1,119 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>70900</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>dragSpeed</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>set [the] dragSpeed to posIntegerThe dragSpeed property returns or sets how many pixels per second the pointer will move when manipulated by all subsequent drag commands.  Use 0to drag as fast as possible.The dragSpeed affects all of the paint tools except the Bucket and Text tools.  On idle, HyperCard resets the dragSpeed to 0.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>6</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>9</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>24</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>34</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>39</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>158</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>164</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>214</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>225</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>322</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>333</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n dragSpeedDemo  setUpPaint  displayMessage "Drag speeds" &amp; return &amp; spaces(4) &amp; "50" &amp; ¬  spaces(11) &amp; "75" &amp; spaces(11) &amp; "150" &amp; spaces(9) &amp; "225" &amp; ¬  spaces(10) &amp; "450" &amp; spaces(10) &amp; "800" &amp; spaces(6) &amp; "1600" &amp; ¬  spaces(8) &amp; "2200" &amp; spaces(9) &amp; "0"  set the textSize of line 2 of bkgnd field "Demo Field" to 14  show bkgnd field "Demo Field"  choose rect tool  drawShape "16,230","59,105","50"  drawShape "64,105","107,230","75"  drawShape "113,230","156,105","150"  drawShape "162,105","205,230","225"  drawShape "211,230","254,105","450"  drawShape "259,105","302,230","800"  drawShape "308,230","351,105","1600"  drawShape "357,105","400,230","2200"  drawShape "405,230","448,105","0"  wait 65  domenu "revert"  hide bkgnd field "Demo Field"  choose browse toolend dragSpeedDemoon drawShape  startTopLeft, endBotRight, theDragSpeed  set dragSpeed to theDragSpeed  drag from startTopLeft to endBotRightend drawShapeon setUpPaint  show card picture  set centered to FALSE  set lineSize to 2  set filled to FALSE  set grid to FALSE  set multiple to FALSEend setUpPaint</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>875</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>884</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>set the dragSpeed to 0set the dragSpeed to 100</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties35701 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>drag	global	integer	mouse	property	speed</text>
-	</content>
-	<name>dragSpeed</name>
-	<script></script>
-</card>

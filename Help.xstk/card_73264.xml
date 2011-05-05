@@ -1,248 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>73264</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>D </text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he ID of buttonthe ID of fieldthe [adjective] ID of cardthe ID of bkgndthe ID of menuthe ID [of HyperCard]the ID of windowThe ID property returns the permanent ID number of any button, field, card, background, window, or menu in the current stack. The ID of HyperCard is WILD.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>11</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>27</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>32</offset>
-			<id>11</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>38</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>59</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>70</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>86</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>91</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>123</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>129</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>131</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>134</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>138</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>263</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>267</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>282</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>287</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n IDDemo  put "The short ID of this card is:" &amp; return &amp; ¬  the short ID of this card &amp; return &amp; return &amp; ¬  "The ID is:" &amp; return &amp; ¬  the ID of this card &amp; return &amp; return &amp; ¬  "The long ID is:" &amp; return &amp; ¬  the long ID of this card &amp; return into theAnswer  answer theAnswerend IDDemo</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>68</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>76</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>146</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>148</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>223</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>227</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>228</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>230</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>if the id of button 1 is "8934" then...get the id of bkgnd field 2put the id of this card after theListget the id of this backgroundget the id of HyperCard -- returns WILDget the id of the last menu</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>he ID of a standalone application is its creator code.All objects except stacks have IDs. You can’t change the ID number of an object, window, or menu. If an object doesn’t have a name, HyperCard returns the ID instead.The adjectives abbreviated, long,and short return various forms ofa card’s ID.  (Click Demo Script.)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>3</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>7</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>97</offset>
-			<id>89</id>
-		</stylerun>
-		<stylerun>
-			<offset>102</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>212</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>216</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>240</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>252</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>253</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>258</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>263</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>270</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties77648 77883 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>background	button	card	field	ID	objects	property</text>
-	</content>
-	<name>ID </name>
-	<script></script>
-</card>

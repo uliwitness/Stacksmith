@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE background PUBLIC "-//Apple, Inc.//DTD background V 2.0//EN" "" >
+<background>
+	<id>3000</id>
+	<name></name>
+	<showPict><true /></showPict>
+	<cantDelete><false /></cantDelete>
+	<dontSearch><false /></dontSearch>
+	<script></script>
+	<content>
+		<layer>card</layer>
+		<id>1</id>
+		<text></text>
+		<highlight><false /></highlight>
+	</content>
+</background>

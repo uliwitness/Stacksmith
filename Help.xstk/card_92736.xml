@@ -1,99 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>92736</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>printTextStyle</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>et the printTextStyle ¬    to textStyleListThe printTextStyle property returnsor sets the value of the default text style used by the print command when you print an expression. The default value is plain.When you print a report, HyperCard determines the default text style for a report item as follows:</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>32</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>45</offset>
-			<id>12</id>
-		</stylerun>
-		<stylerun>
-			<offset>47</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>50</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>66</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>138</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>145</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>203</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>209</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text> If the report item is the text of a card    or  background field, HyperCard uses    the text style of the field.• If the report item is generated from    any other HyperTalk expression,    HyperCard uses the value of the    printTextStyle.In either case, the user can overridethe default style by selecting astyle in the Item Info dialog box of the report item.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>232</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>247</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>set the printTextStyle to "bold"set the printTextStyle to "bold,italic"</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Properties44420 79600 90631 90961 91426 91932 45965 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>global	new features	printing	property	style	text	textStyleList</text>
-	</content>
-	<name>printTextStyle</name>
-	<script></script>
-</card>

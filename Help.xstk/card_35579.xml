@@ -1,204 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>35579</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>doMenu</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>oMenu itemName [without dialog] ¬        [with keys ]doMenu itemName, menuName ¬       [without dialog] [with keys ]The doMenu command performs the action specified by the item name and menu name just as if the user chose the item directly from the menu.without dialog  bypasses the dialog box that would normally appear after the commands Delete Stack and Convert Stack, and, when a background field is selected, after Cut Field and Clear Field.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>7</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>15</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>16</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>31</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>33</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>42</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>44</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>49</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>55</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>63</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>71</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>81</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>91</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>92</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>106</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>109</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>114</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>119</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>125</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>133</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>262</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>277</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>ith keys chooses the named menu command with the shift, option, and/or ⌘ keys pressed.    To determine from a script which  keys were specified, look at param(6) of the original command.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>10</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>72</offset>
-			<id>45</id>
-		</stylerun>
-		<stylerun>
-			<offset>73</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>156</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>166</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n mouseUp   set cursor to watch   doMenu "Background","Edit" -- view the background layer   wait 45   doMenu "Background","Edit" -- return to the card layer end mouseUp</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>37</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>43</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>107</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>113</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>doMenu "Next"-- Add another Open Stack command:put "Open Stack..." after menu "Go" with menuMsg "beep"doMenu "Open Stack...", "Go" -- just beepsdoMenu "Open Stack...", "File" -- does an open stackdoMenu "Calculator" -- desk accessory from the Apple menu  doMenu "Cut Field" without dialog -- with a bkgnd field selecteddoMenu "Open Stack..." with shiftKey -- checks "New Window" checkboxdoMenu "Print Card" with shiftKey -- shows print dialogon doMenu theItem,theMenu  if theItem is "Quit HyperCard" then answer "Bye!" with "Later"  pass doMenu -- all doMenu messages, including the quit, are passedend doMenu</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands34927 69523 70039 3428 34045 34993 61996 71193 76221 58014 76567 45460 45965 6031 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>card messages	command	do	doMenu	item	menu	menu items	message	name	new features</text>
-	</content>
-	<name>doMenu</name>
-	<script></script>
-</card>

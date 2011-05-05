@@ -1,109 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>43539</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>lay (cont’d)</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>62</id>
-		</stylerun>
-		<stylerun>
-			<offset>4</offset>
-			<id>63</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 2 of 3</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>Name                one of these letters:             a, b, c, d, e, f, g, r            (where r = rest)Accidental  one of these characters:            #, bOctave      a positive integer             (4 is middle C)Duration    one of the letters:             w, h, q, e, s, t, x            where            w = whole note             h = half note            q = quarter note</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>1</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>5</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>161</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>162</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>221</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>222</offset>
-			<id>44</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>10</id>
-		<text>            e = eighth note            s = 16th note            t = 32nd note              x = 64th note  You don't have to specify the accidental, octave, or duration of a note. Initially, the accidental defaults to none. The octave and duration default tothe same values as the previous note,or to 4 (octave) and q (duration) for the first note.</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>112</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>268</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>300</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>307</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>310</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>322</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>325</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Commands31649 64990 50819 </text>
-	</content>
-	<name>play 2</name>
-	<script></script>
-</card>

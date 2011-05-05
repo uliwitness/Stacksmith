@@ -1,187 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>60426</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>offset</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>ffset(text1, text2)Value returned: the number 0 if text1 does not appear in text2; otherwise,a positive integer equal to the number of characters from the first characterof text2 to the first character of text1 within text2</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>7</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>11</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>12</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>14</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>18</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>19</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>22</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>53</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>54</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>58</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>59</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>60</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>78</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>79</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>83</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>84</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>177</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>178</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>182</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>183</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>184</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>209</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>210</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>214</offset>
-			<id>291</id>
-		</stylerun>
-		<stylerun>
-			<offset>215</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>216</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>222</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>223</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>227</offset>
-			<id>291</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>get offset("world", "Hello world")put offset(searchString,card field "Index") into theOffsetput offset(line 1 of card field 1, collectedHits) into Nif N is 0 then ...else ...</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n answerDiskName  answer "This stack resides on the disk named" &amp;&amp; diskName() &amp; "."end answerDiskNamefunction diskName thelongName  if thelongName is empty  then put the long name of this stack into theLongName  -- remove “stack "” from the beginning of theLongName  delete char 1 to offset(quote,theLongName) of theLongName  -- return word before the first “:”  return char 1 to offset(":",theLongName) - 1 of theLongNameend diskName</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>293</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>299</offset>
-			<id>10</id>
-		</stylerun>
-		<stylerun>
-			<offset>391</offset>
-			<id>23</id>
-		</stylerun>
-		<stylerun>
-			<offset>397</offset>
-			<id>10</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 52559 57200 60292 90270 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>char	characters	function	offset	part	string	substring	text</text>
-	</content>
-	<name>offset</name>
-	<script></script>
-</card>

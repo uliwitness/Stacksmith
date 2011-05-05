@@ -1,547 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>7309</id>
-	<filler1>0</filler1>
-	<bitmap>BMAP_4016.pbm</bitmap>
-	<cantDelete> <true /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <true /> </dontSearch>
-	<owner>7507</owner>
-	<part>
-		<id>124</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <false /> </enabled>
-		<rect>
-			<left>3</left>
-			<top>272</top>
-			<right>167</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Go To Rectangle</name>
-		<script>on mouseUp-- trappedend mouseUp</script>
-	</part>
-	<part>
-		<id>122</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>21</left>
-			<top>272</top>
-			<right>166</right>
-			<bottom>291</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Go New Features</name>
-		<script>on mouseUp-- trappedend mouseUp</script>
-	</part>
-	<part>
-		<id>16</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <true /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>8</left>
-			<top>58</top>
-			<right>234</right>
-			<bottom>259</bottom>
-		</rect>
-		<style>shadow</style>
-		<autoSelect> <true /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>16</textHeight>
-		<name>Sections</name>
-		<script>on mouseDownlock screenend mouseDownon mouseUpset cursor to watchget the selectedText of meif it is not empty then showSection it,word 2 of selectedLine of meelse resetMainTopicsCardend mouseUpon mouseLeaveif there is a card field "Current Section" thenif word 2 of the selectedLine of me is not card field "Current Section"then select line (card field "Current Section") of meend ifend mouseLeave</script>
-	</part>
-	<part>
-		<id>15</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>238</left>
-			<top>58</top>
-			<right>472</right>
-			<bottom>259</bottom>
-		</rect>
-		<style>shadow</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>Right Shadow</name>
-		<script></script>
-	</part>
-	<part>
-		<id>21</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>457</left>
-			<top>273</top>
-			<right>480</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>transparent</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Geneva</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>16</textHeight>
-		<name>Current Section</name>
-		<script></script>
-	</part>
-	<part>
-		<id>93</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>213</left>
-			<top>112</top>
-			<right>225</right>
-			<bottom>127</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <true /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20007</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Pointer</name>
-		<script>on mouseUpsend "mouseUp" to card field "Sections"end mouseUp</script>
-	</part>
-	<part>
-		<id>94</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>232</left>
-			<top>33</top>
-			<right>464</right>
-			<bottom>58</bottom>
-		</rect>
-		<style>opaque</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>14</textHeight>
-		<name>Instructions 2</name>
-		<script></script>
-	</part>
-	<part>
-		<id>106</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>7</left>
-			<top>36</top>
-			<right>234</right>
-			<bottom>55</bottom>
-		</rect>
-		<style>transparent</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>16</textHeight>
-		<name>Instructions</name>
-		<script></script>
-	</part>
-	<part>
-		<id>107</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>302</left>
-			<top>272</top>
-			<right>411</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Overview of Help</name>
-		<script></script>
-	</part>
-	<part>
-		<id>118</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>271</left>
-			<top>274</top>
-			<right>301</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>opaque</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name></name>
-		<script></script>
-	</part>
-	<part>
-		<id>108</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>270</left>
-			<top>270</top>
-			<right>295</right>
-			<bottom>293</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>20006</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name></name>
-		<script></script>
-	</part>
-	<part>
-		<id>109</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>269</left>
-			<top>273</top>
-			<right>417</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Overview of Help</name>
-		<script>on mouseUpgoOverviewend mouseUp</script>
-	</part>
-	<part>
-		<id>119</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <true /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>238</left>
-			<top>58</top>
-			<right>470</right>
-			<bottom>257</bottom>
-		</rect>
-		<style>scrolling</style>
-		<autoSelect> <true /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<selectedLines>
-			<integer>6</integer>
-		</selectedLines>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>16</textHeight>
-		<name>Topics List</name>
-		<script>on mouseUpgoTopicend mouseUp</script>
-	</part>
-	<part>
-		<id>120</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <true /> </dontWrap>
-		<dontSearch> <true /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <false /> </lockText>
-		<rect>
-			<left>8</left>
-			<top>58</top>
-			<right>471</right>
-			<bottom>259</bottom>
-		</rect>
-		<style>scrolling</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <true /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Geneva</font>
-		<textSize>9</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>12</textHeight>
-		<name>access</name>
-		<script>-- •• The rules for this field:-- section Name is delimited by:&lt;return&gt;&lt;sectionName&gt;&lt;tab&gt;-- beginning of topics for section begins at the next line-- end of topics delimited by: &lt;return&gt;&lt;tab&gt;</script>
-	</part>
-	<part>
-		<id>121</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>4</left>
-			<top>273</top>
-			<right>26</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>28022</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Go To Icon</name>
-		<script>on mouseUp-- trappedend mouseUp</script>
-	</part>
-	<part>
-		<id>123</id>
-		<type>button</type>
-		<visible> <false /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>4</left>
-			<top>273</top>
-			<right>166</right>
-			<bottom>290</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Go To</name>
-		<script>on mouseUpleaveHelpend mouseUp</script>
-	</part>
-	<content>
-		<layer>card</layer>
-		<id>16</id>
-		<text>HyperTalk basicsEditing scriptsSystem messagesKeywordsCommandsFunctionsPropertiesOperators and constants</text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>94</id>
-		<text>2. Click a topic to go to it:</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>26</id>
-		<text>Main Topics for HyperTalk Reference</text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>106</id>
-		<text>1. Click an item to get a list of topics:</text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>120</id>
-		<text>HyperTalk basics	Set the user level to scriptingHyperTalk and scriptsWhat are messages?Handling messagesThe message-passing orderWriting message handlersUsing parameter variablesWriting function handlersThe building blocksReferring to objects	Editing scripts	Add comments to a scriptClose a script windowDebug a scriptMove between open scriptsOpen a script windowSave a scriptSet the font and size of a script	System messages	Commands sent automaticallyMessage sending ordersWhere messages are sent initiallyappleEventcloseBackgroundcloseCardcloseFieldcloseStackdeleteBackgrounddeleteButtondeleteCarddeleteFielddeleteStackerrorDialogexitFieldidlemouseDoubleClickmouseDownmouseEntermouseLeavemouseStillDownmouseUpmouseWithinmoveWindownewBackgroundnewButtonnewCardnewFieldnewStackopenBackgroundopenCardopenFieldopenStackquitresumeresumeStacksizeWindowstartUpsuspendsuspendStack	Keywords	doexitfunctionglobalif (multiple-statement)if (single-statement)onpassrepeatrepeat forrepeat untilrepeat whilerepeat withreturnsend	Commands	addanswerarrowKeyaskbeepchooseclick atclosecommandKeyDowncontrolKeyconvertcopy templatecreatedebugdeletedialdisabledividedoMenudragedit scriptenableenterInFieldenterKeyexport paintfindfunctionKeygetgohelphideimport paintkeyDownlockmarkmultiplyopenopen fileopen printingopen report printingplaypopprintpushputreadreplyrequestresetreturnInFieldreturnKeyrunsaveselectsetshowsortstart usingstop usingsubtracttabKeytypeunlockunmarkvisualwaitwrite	Functions	absannuityatanaveragecharToNumclickChunkclickH and clickVclickLineclickLocclickTextcommandKeycompoundcosdatedestinationdiskSpaceexp, exp1, exp2foundChunkfoundFieldfoundLinefoundTextheapSpacelengthln, ln1, log2maxmenusminmousemouseClickmouseH and mouseVmouseLocnumbernumToCharoffsetoptionKeyparamparamCountparamsprogramsrandomresultroundscreenRectsecondsselectedButtonselectedChunkselectedFieldselectedLineselectedLocselectedTextshiftKeysinsoundsqrtstacksstackSpacesumsystemVersiontantargettickstimetooltruncvaluewindows	Properties	addressautoHiliteautoSelectautoTabblindTypingbottombottomRightbrushcantAbortcantDeletecantModifycantPeekcenteredcheckMarkcommandCharcursordebuggerdialingTimedialingVolumedontSearchdontWrapdragSpeededitBkgndenabledenvironmentfamilyfilledfixedLineHeightfreeSizegridheighthiliteiconID itemDelimiterlanguageleftlineSizelocationlockErrorDialogslockMessageslockRecentlockScreenlockTextlongWindowTitlesmarkCharmarkedmenuMessagemessageWatchermultiplemultipleLinesmultiSpacenamenumber (property)numberFormatownerpartNumberpatternpolySidespowerKeysprintMarginsprintTextAlignprintTextFontprintTextHeightprintTextSizeprintTextStylerectanglereportTemplatesrightscriptscriptEditorscriptingLanguagescriptTextFontscriptTextSizescrollsharedHilitesharedTextshowLinesshowNameshowPictsizestacksInUsestylesuspendedtextAligntextArrowstextFonttextHeighttextSizetextStyletitleWidthtoptopLefttraceDelayuserLeveluserModifyvariableWatcherversionvisiblewideMarginswidthzoomed	Operators and constants	Arithmetic operatorsComparison operatorsLogical operatorsString operatorsType and existence operatorsConstants	</text>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>119</id>
-		<text>Commands sent automaticallyMessage sending ordersWhere messages are sent initiallyappleEventcloseBackgroundcloseCardcloseFieldcloseStackdeleteBackgrounddeleteButtondeleteCarddeleteFielddeleteStackerrorDialogexitFieldidlemouseDoubleClickmouseDownmouseEntermouseLeavemouseStillDownmouseUpmouseWithinmoveWindownewBackgroundnewButtonnewCardnewFieldnewStackopenBackgroundopenCardopenFieldopenStackquitresumeresumeStacksizeWindowstartUpsuspendsuspendStack</text>
-	</content>
-	<name>Main Topics for HyperTalk Reference</name>
-	<script>on mouseUpresetMainTopicsCardend mouseUp</script>
-</card>

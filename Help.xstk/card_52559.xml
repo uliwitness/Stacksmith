@@ -1,95 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>52559</id>
-	<filler1>0</filler1>
-	<cantDelete> <false /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>4421</owner>
-	<content>
-		<layer>background</layer>
-		<id>1</id>
-		<text>charToNum</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>9</id>
-		<text>he charToNum of charValue returned: positive integer equal to the ASCII value of the char</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>17</offset>
-			<id>289</id>
-		</stylerun>
-		<stylerun>
-			<offset>21</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>23</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>69</offset>
-			<id>47</id>
-		</stylerun>
-		<stylerun>
-			<offset>74</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>87</offset>
-			<id>44</id>
-		</stylerun>
-		<stylerun>
-			<offset>88</offset>
-			<id>289</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>2</id>
-		<text>Card 1 of 1</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>60</id>
-		<text>n nameUpperCase  ask "Please enter your name:"  if (it is empty) or (the result is "Cancel") then exit nameUpperCase  answer uppercase(it)end nameUpperCasefunction upperCase whatStr  repeat with charNum = 1 to the number of chars in whatStr    put charToNum(char charNum of whatStr) into thisChar    if thisChar ≥ 97 AND thisChar ≤ 122    then put numToChar(thisChar - 32) into char charNum of whatStr  end repeat  return whatStrend upperCase</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-		<stylerun>
-			<offset>257</offset>
-			<id>48</id>
-		</stylerun>
-		<stylerun>
-			<offset>266</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>59</id>
-		<text>he charToNum of "A"charToNum("A")put numToChar(charToNum("A")) = "A"</text>
-		<stylerun>
-			<offset>0</offset>
-			<id>43</id>
-		</stylerun>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>103</id>
-		<text>Functions32809 57200 60292 60426 90270 </text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>114</id>
-		<text>ascii	char	characters	function	integer	number	text</text>
-	</content>
-	<name>charToNum</name>
-	<script></script>
-</card>
