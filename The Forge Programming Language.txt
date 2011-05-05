@@ -89,6 +89,11 @@ Currently does nothing.
 
 displays a dialog containing a message and up to three replies as buttons.
 
+	ask <question> [with <defaultAnswer>]
+
+Display a dialog containing the given message and an edit field for entering an
+answer, plus OK anc Cancel buttons.
+
 3) EXPRESSIONS:
 
 An expression consists of either a single term, or two or more terms ("operands")
