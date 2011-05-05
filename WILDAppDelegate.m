@@ -346,6 +346,22 @@
 
 -(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
 {
+	NSString *	stackPath = nil;
+	NSArray	*	cmdLineParams = [[NSProcessInfo processInfo] arguments];
+	NSUInteger	x = 0;
+	for( NSString* theParam in cmdLineParams )
+	{
+		if( [theParam isEqualToString: @"--stack"] )
+		{
+			if( [cmdLineParams count] > (x +1) )
+			{
+				stackPath = [cmdLineParams objectAtIndex: x+1];
+				return [self application: NSApp openFile: stackPath];
+			}
+		}
+		x++;
+	}
+	
 	return [self openStandardStackNamed: @"Home"];
 }
 
