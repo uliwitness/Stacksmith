@@ -69,8 +69,26 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 	
 	NSInteger	returnValue = NSRunAlertPanel( [NSString stringWithCString: msgStr encoding:NSUTF8StringEncoding], @"%@", [NSString stringWithCString: btn1Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn2Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn3Str encoding:NSUTF8StringEncoding], @"" );
 	
+	const char	*hitButtonName = btn1Str;
 	if( returnValue == NSAlertDefaultReturn )
-		;
+		hitButtonName = btn1Str;
+	else if( returnValue == NSAlertAlternateReturn )
+		hitButtonName = btn2Str;
+	else if( returnValue == NSAlertOtherReturn )
+		hitButtonName = btn3Str;
+	
+	LEOHandler	*	theHandler = LEOContextPeekCurrentHandler( inContext );
+	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "result" );
+	if( bpRelativeOffset >= 0 )
+	{
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, hitButtonName, inContext );
+	}
+
+	bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "it" );
+	if( bpRelativeOffset >= 0 )
+	{
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, hitButtonName, inContext );
+	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -4 );
 	
@@ -89,7 +107,7 @@ void	WILDAskInstruction( LEOContext* inContext )
 	NSInteger						returnValue = [inputPanel runModal];
 	
 	LEOHandler	*	theHandler = LEOContextPeekCurrentHandler( inContext );
-	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "the result" );
+	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "result" );
 	if( bpRelativeOffset >= 0 )
 	{
 		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, ((returnValue == NSAlertDefaultReturn) ? "OK" : "Cancel"), inContext );
@@ -156,7 +174,7 @@ struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INS
 	{
 		EAnswerIdentifier, WILD_ANSWER_INSTR, 0, 0,
 		{
-			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
+			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
 			{ EHostParamLabeledValue, EWithIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParamLabeledValue, EOrIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParamLabeledValue, EOrIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
@@ -170,7 +188,7 @@ struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INS
 	{
 		EAskIdentifier, WILD_ASK_INSTR, 0, 0,
 		{
-			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
+			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
 			{ EHostParamLabeledValue, EWithIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
