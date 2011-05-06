@@ -124,11 +124,11 @@ Currently does nothing.
 
 	answer &lt;message&gt; [with &lt;buttonName&gt; [or &lt;buttonName&gt;] [or &lt;buttonName&gt;]]
 
-displays a dialog containing a message and up to three replies as buttons.
+displays a dialog containing a message and up to three replies as buttons. The variable "the result" will contain the name of the button the user clicked (and "it" will, as well - for historical reasons).
 
 	ask &lt;question&gt; [with &lt;defaultAnswer&gt;]
 
-Display a dialog containing the given message and an edit field for entering an answer, plus OK anc Cancel buttons.
+Display a dialog containing the given message and an edit field for entering an answer, plus OK and Cancel buttons. The variable "the result" will contain the button the user clicked (either "OK" or "Cancel") and the variable "it" will contain the answer that was in the text field when the user clicked the button.
 
 3) EXPRESSIONS:
 
