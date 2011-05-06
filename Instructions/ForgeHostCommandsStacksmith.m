@@ -69,9 +69,14 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 	
 	NSInteger	returnValue = NSRunAlertPanel( [NSString stringWithCString: msgStr encoding:NSUTF8StringEncoding], @"%@", [NSString stringWithCString: btn1Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn2Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn3Str encoding:NSUTF8StringEncoding], @"" );
 	
-	const char	*hitButtonName = btn1Str;
+	const char	*hitButtonName = "OK";
 	if( returnValue == NSAlertDefaultReturn )
-		hitButtonName = btn1Str;
+	{
+		if( strlen(btn1Str) > 0 )
+			hitButtonName = btn1Str;
+		else
+			hitButtonName = "OK";
+	}
 	else if( returnValue == NSAlertAlternateReturn )
 		hitButtonName = btn2Str;
 	else if( returnValue == NSAlertOtherReturn )
