@@ -1166,6 +1166,15 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	{
 		return [self name];
 	}
+	else if( [inPropertyName isEqualToString: @"rectangle"] )
+	{
+		return [NSDictionary dictionaryWithObjectsAndKeys:
+								[NSNumber numberWithDouble: mRectangle.origin.x], @"left",
+								[NSNumber numberWithDouble: mRectangle.origin.y], @"top",
+								[NSNumber numberWithDouble: NSMaxX(mRectangle)], @"right",
+								[NSNumber numberWithDouble: NSMaxY(mRectangle)], @"bottom",
+								nil];
+	}
 	else
 		return nil;
 }
@@ -1180,6 +1189,15 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 															forKey: WILDAffectedPropertyKey]];
 	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
 		[self setName: inValue];
+	else if( [inPropertyName isEqualToString: @"rectangle"] )
+	{
+		NSRect		newRect = NSZeroRect;
+		newRect.origin.x = [[inValue objectForKey: @"left"] doubleValue];
+		newRect.origin.y = [[inValue objectForKey: @"top"] doubleValue];
+		newRect.size.width = [[inValue objectForKey: @"right"] doubleValue] -newRect.origin.x;
+		newRect.size.height = [[inValue objectForKey: @"bottom"] doubleValue] -newRect.origin.y;
+		[self setFlippedRectangle: newRect];
+	}
 	else
 		propExists = NO;
 

@@ -22,28 +22,80 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 	LEOValuePtr		objectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeWILDObject, inContext );
 	if( objectValue )
 	{
-		NSString*	str = [(id<WILDObject>)objectValue->object.object valueForWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]];
-		if( !str )
+		id propValueObj = [(id<WILDObject>)objectValue->object.object valueForWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]];
+		if( !propValueObj )
 		{
 			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Object does not have property \"%s\".", propNameStr );
 			inContext->keepRunning = false;
 			return;
 		}
 		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
-		const char*	valueStr = [str UTF8String];
-		LEOInitStringValue( thePropertyName, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
+		if( [propValueObj isKindOfClass: [NSString class]] )
+		{
+			const char*	valueStr = [propValueObj UTF8String];
+			LEOInitStringValue( thePropertyName, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
+		}
+		else if( [propValueObj isKindOfClass: [NSDictionary class]] )
+		{
+			NSDictionary	*		theDict = propValueObj;
+			struct LEOArrayEntry*	theArray = NULL;
+			
+			for( NSString* dictKey in theDict )
+			{
+				id				dictValue = [theDict objectForKey: dictKey];
+				union LEOValue	dictValueCopy;
+				if( [dictValue isKindOfClass: [NSString class]] )
+				{
+					const char*	valueStr = [dictValue UTF8String];
+					LEOInitStringValue( &dictValueCopy, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
+				}
+				else if( [dictValue isKindOfClass: [NSNumber class]] )
+				{
+					LEOInitNumberValue( &dictValueCopy, [dictValue doubleValue], kLEOInvalidateReferences, inContext );
+				}
+				LEOAddArrayEntryToRoot( &theArray, [dictKey UTF8String], &dictValueCopy, inContext );
+				
+				LEOCleanUpValue( &dictValueCopy, kLEOInvalidateReferences, inContext );
+			}
+			LEOInitArrayValue( thePropertyName, theArray, kLEOInvalidateReferences, inContext );
+		}
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't get property \"%s\" of this.", propNameStr );
-		inContext->keepRunning = false;
-		return;
+		LEOValuePtr	theValue = LEOGetValueForKey( theObject, propNameStr, inContext );
+		if( theValue )
+		{
+			LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
+			LEOInitCopy( theValue, thePropertyName, kLEOInvalidateReferences, inContext );
+		}
+		else
+		{
+			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't get property \"%s\" of this.", propNameStr );
+			inContext->keepRunning = false;
+			return;
+		}
 	}
-		
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
 	inContext->currentInstruction++;
+}
+
+
+void	AppendLEOArrayToDictionary( struct LEOArrayEntry * inEntry, NSMutableDictionary* dict, LEOContext *inContext )
+{
+	if( inEntry )
+	{
+		NSString	*	theKey = [NSString stringWithUTF8String: inEntry->key];
+		char			strBuf[1024] = { 0 };
+		NSString	*	theValue = [NSString stringWithUTF8String: LEOGetValueAsString( &inEntry->value, strBuf, sizeof(strBuf), inContext )];
+		[dict setObject: theValue forKey: theKey];	// TODO: Don't always convert to string.
+		
+		if( inEntry->smallerItem )
+			AppendLEOArrayToDictionary( inEntry->smallerItem, dict, inContext );
+		if( inEntry->largerItem )
+			AppendLEOArrayToDictionary( inEntry->largerItem, dict, inContext );
+	}
 }
 
 
@@ -56,18 +108,44 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 	char		propNameStr[1024] = { 0 };
 	LEOGetValueAsString( thePropertyName, propNameStr, sizeof(propNameStr), inContext );
 	
-	char		theValueStrBuf[1024] = { 0 };
-	char*		theValueStr = LEOGetValueAsString( theValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
-	id			theObjCValue = [NSString stringWithUTF8String: theValueStr];
+	LEOValuePtr	theObjectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeWILDObject, inContext );
 	
-	if( theObject->base.isa == &kLeoValueTypeWILDObject )
+	if( theObjectValue )
 	{
-		if( ![(id<WILDObject>)theObject->object.object setValue: theObjCValue forWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]] )
+		id			theObjCValue = nil;
+		LEOValuePtr	theArrayValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeArray, inContext );
+		if( !theArrayValue )
+			theArrayValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeArrayVariant, inContext );
+		if( theArrayValue )
 		{
-			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Object does not have property \"%s\".", propNameStr );
+			theObjCValue = [NSMutableDictionary dictionary];
+			AppendLEOArrayToDictionary( theArrayValue->array.array, theObjCValue, inContext );
+		}
+		else
+		{
+			char		theValueStrBuf[1024] = { 0 };
+			char*		theValueStr = LEOGetValueAsString( theValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
+			theObjCValue = [NSString stringWithUTF8String: theValueStr];
+		}
+		
+		@try {
+			if( ![(id<WILDObject>)theObjectValue->object.object setValue: theObjCValue forWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]] )
+			{
+				snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Object does not have property \"%s\".", propNameStr );
+				inContext->keepRunning = false;
+				return;
+			}
+		}
+		@catch( NSException* exc )
+		{
+			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Error retrieving property \"%s\": %s", propNameStr, [[exc reason] UTF8String] );
 			inContext->keepRunning = false;
 			return;
 		}
+	}
+	else
+	{
+		LEOSetValueForKey( theObject, propNameStr, theValue, inContext );
 	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -3 );
