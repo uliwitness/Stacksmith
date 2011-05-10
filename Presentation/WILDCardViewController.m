@@ -834,6 +834,11 @@
 		[mCardPictureView setCurrentTool: [theTool paintToolWithPaintView: mCardPictureView]];
 		[mBackgroundPictureView setCurrentTool: [theTool paintToolWithPaintView: mBackgroundPictureView]];
 	}
+	else
+	{
+		[mCardPictureView setCurrentTool: nil];
+		[mBackgroundPictureView setCurrentTool: nil];
+	}
 }
 
 
