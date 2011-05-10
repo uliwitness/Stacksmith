@@ -263,14 +263,17 @@
 		{
 			CIFilter	*	theFilter = [CIFilter filterWithName: mTransitionType];
 			[theFilter setDefaults];
-			if( [mTransitionSubtype isEqualToString: @"fromRight"] )
-            	[theFilter setValue:[NSNumber numberWithFloat:-M_PI] forKey:@"inputAngle"];
-			else if( [mTransitionSubtype isEqualToString: @"fromTop"] )
-				[theFilter setValue:[NSNumber numberWithFloat:-M_PI_2] forKey:@"inputAngle"];
-			else if( [mTransitionSubtype isEqualToString: @"fromBottom"] )
-				[theFilter setValue:[NSNumber numberWithFloat: M_PI_2] forKey:@"inputAngle"];
-			else if( [mTransitionSubtype isEqualToString: @"fromLeft"] )
-				[theFilter setValue:[NSNumber numberWithFloat: 0] forKey:@"inputAngle"];
+			NSDictionary*	sTransitionSubtypes = nil;
+			if( !sTransitionSubtypes )
+			{
+				sTransitionSubtypes = [[NSDictionary alloc] initWithObjectsAndKeys:
+										[NSNumber numberWithInt: -M_PI_4], @"fromLeft",
+										[NSNumber numberWithInt: -M_PI_2 -M_PI_4], @"fromTop",
+										[NSNumber numberWithInt: M_PI], @"fromRight",
+										[NSNumber numberWithInt: M_PI_2 +M_PI_4], @"fromBottom",
+										nil];
+			}
+			[theFilter setValue: [sTransitionSubtypes objectForKey: mTransitionSubtype] forKey: kCIInputAngleKey];
 			[ani setFilter: theFilter];
 		}
 		else

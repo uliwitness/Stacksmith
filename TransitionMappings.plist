@@ -2,68 +2,96 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>push left</key>
+	<key>dissolve</key>
 	<dict>
-		<key>CATransitionType</key>
-		<string>push</string>
 		<key>CATransitionSubtype</key>
-		<string>fromRight</string>
-	</dict>
-	<key>push right</key>
-	<dict>
+		<string></string>
 		<key>CATransitionType</key>
-		<string>push</string>
-		<key>CATransitionSubtype</key>
-		<string>fromLeft</string>
-	</dict>
-	<key>push up</key>
-	<dict>
-		<key>CATransitionType</key>
-		<string>push</string>
-		<key>CATransitionSubtype</key>
-		<string>fromBottom</string>
+		<string>fade</string>
 	</dict>
 	<key>push down</key>
 	<dict>
-		<key>CATransitionType</key>
-		<string>push</string>
 		<key>CATransitionSubtype</key>
 		<string>fromTop</string>
-	</dict>
-	<key>dissolve</key>
-	<dict>
 		<key>CATransitionType</key>
-		<string>fade</string>
-		<key>CATransitionSubtype</key>
-		<string></string>
+		<string>push</string>
 	</dict>
-	<key>scroll left</key>
+	<key>push left</key>
 	<dict>
-		<key>CATransitionType</key>
-		<string>reveal</string>
 		<key>CATransitionSubtype</key>
 		<string>fromRight</string>
-	</dict>
-	<key>scroll right</key>
-	<dict>
 		<key>CATransitionType</key>
-		<string>reveal</string>
+		<string>push</string>
+	</dict>
+	<key>push right</key>
+	<dict>
 		<key>CATransitionSubtype</key>
 		<string>fromLeft</string>
-	</dict>
-	<key>scroll up</key>
-	<dict>
 		<key>CATransitionType</key>
-		<string>reveal</string>
+		<string>push</string>
+	</dict>
+	<key>push up</key>
+	<dict>
 		<key>CATransitionSubtype</key>
 		<string>fromBottom</string>
+		<key>CATransitionType</key>
+		<string>push</string>
 	</dict>
 	<key>scroll down</key>
 	<dict>
-		<key>CATransitionType</key>
-		<string>reveal</string>
 		<key>CATransitionSubtype</key>
 		<string>fromTop</string>
+		<key>CATransitionType</key>
+		<string>reveal</string>
+	</dict>
+	<key>scroll left</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>fromRight</string>
+		<key>CATransitionType</key>
+		<string>reveal</string>
+	</dict>
+	<key>scroll right</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>fromLeft</string>
+		<key>CATransitionType</key>
+		<string>reveal</string>
+	</dict>
+	<key>scroll up</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>fromBottom</string>
+		<key>CATransitionType</key>
+		<string>reveal</string>
+	</dict>
+	<key>wipe down</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>fromTop</string>
+		<key>CATransitionType</key>
+		<string>CISwipeTransition</string>
+	</dict>
+	<key>wipe left</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>fromRight</string>
+		<key>CATransitionType</key>
+		<string>CISwipeTransition</string>
+	</dict>
+	<key>wipe right</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>fromLeft</string>
+		<key>CATransitionType</key>
+		<string>CISwipeTransition</string>
+	</dict>
+	<key>wipe up</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>fromBottom</string>
+		<key>CATransitionType</key>
+		<string>CISwipeTransition</string>
 	</dict>
 	<key>wipe left</key>
 	<dict>
