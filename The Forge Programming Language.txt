@@ -178,7 +178,7 @@ There are several constants whose name consists of one or more identifiers:
 	barn door open
 	barn door close
 	checkerboard
-	dissolve
+	dissolve			-- transition effect you can pass to the 'visual effect' command.
 	venetian blinds
 	stretch from top
 	stretch from center
@@ -186,22 +186,22 @@ There are several constants whose name consists of one or more identifiers:
 	shrink to top
 	shrink to center
 	shrink to bottom
-	wipe left
-	wipe right
-	wipe up
-	wipe down
-	push left
-	push right
-	push up
-	push down
+	wipe left			-- transition effect you can pass to the 'visual effect' command.
+	wipe right			-- transition effect you can pass to the 'visual effect' command.
+	wipe up				-- transition effect you can pass to the 'visual effect' command.
+	wipe down			-- transition effect you can pass to the 'visual effect' command.
+	push left			-- transition effect you can pass to the 'visual effect' command.
+	push right			-- transition effect you can pass to the 'visual effect' command.
+	push up				-- transition effect you can pass to the 'visual effect' command.
+	push down			-- transition effect you can pass to the 'visual effect' command.
 	zoom open
 	zoom close
 	zoom in
 	zoom out
-	scroll left
-	scroll right
-	scroll up
-	scroll down
+	scroll left			-- transition effect you can pass to the 'visual effect' command.
+	scroll right		-- transition effect you can pass to the 'visual effect' command.
+	scroll up			-- transition effect you can pass to the 'visual effect' command.
+	scroll down			-- transition effect you can pass to the 'visual effect' command.
 
 A term may also consist of an object descriptor:
 
