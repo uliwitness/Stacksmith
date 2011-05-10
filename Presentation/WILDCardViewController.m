@@ -436,10 +436,10 @@
 		
 		DESTROY(mBackgroundPictureView);
 		mBackgroundPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
-		[mBackgroundPictureView setDelegate: self];
 		NSImage*		bgPicture = [theBg picture];
 		if( bgPicture )
 			[mBackgroundPictureView setImage: bgPicture];
+		[mBackgroundPictureView setDelegate: self];	// After setImage: so we don't mark ourselves as modified.
 		[mBackgroundPictureView setHidden: ![theBg showPicture]];
 		[mBackgroundPictureView setWantsLayer: YES];
 		[[self view] addSubview: mBackgroundPictureView];
@@ -458,10 +458,10 @@
 		{
 			DESTROY(mCardPictureView);
 			mCardPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
-			[mCardPictureView setDelegate: self];
 			NSImage*		cdPicture = [theCard picture];
 			if( cdPicture )
 				[mCardPictureView setImage: cdPicture];
+			[mCardPictureView setDelegate: self];	// After setImage: so we don't mark ourselves as modified.
 			[mCardPictureView setHidden: ![theCard showPicture]];
 			[mCardPictureView setWantsLayer: YES];
 			[[self view] addSubview: mCardPictureView];
