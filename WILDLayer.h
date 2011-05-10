@@ -53,6 +53,7 @@
 -(WILDObjectID)					backgroundID;
 
 -(NSImage*)						picture;
+-(void)							setPicture: (NSImage*)inImage;
 -(BOOL)							showPicture;
 
 -(NSArray*)						parts;

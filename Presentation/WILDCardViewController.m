@@ -43,6 +43,10 @@
 #import "ULIPaintShapeTool.h"
 
 
+@interface WILDCardViewController () <ULIPaintViewDelegate>
+
+@end
+
 @implementation WILDCardViewController
 
 -(id)	init
@@ -432,6 +436,7 @@
 		
 		DESTROY(mBackgroundPictureView);
 		mBackgroundPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
+		[mBackgroundPictureView setDelegate: self];
 		NSImage*		bgPicture = [theBg picture];
 		if( bgPicture )
 			[mBackgroundPictureView setImage: bgPicture];
@@ -449,17 +454,18 @@
 		}
 		
 		// Load the actual card parts:
-		DESTROY(mCardPictureView);
-		mCardPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
-		NSImage*		cdPicture = [theCard picture];
-		if( cdPicture )
-			[mCardPictureView setImage: cdPicture];
-		[mCardPictureView setHidden: ![theCard showPicture]];
-		[mCardPictureView setWantsLayer: YES];
-		[[self view] addSubview: mCardPictureView];
-
 		if( !mBackgroundEditMode )
 		{
+			DESTROY(mCardPictureView);
+			mCardPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
+			[mCardPictureView setDelegate: self];
+			NSImage*		cdPicture = [theCard picture];
+			if( cdPicture )
+				[mCardPictureView setImage: cdPicture];
+			[mCardPictureView setHidden: ![theCard showPicture]];
+			[mCardPictureView setWantsLayer: YES];
+			[[self view] addSubview: mCardPictureView];
+
 			for( WILDPart* currPart in [theCard parts] )
 			{
 				WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
@@ -888,6 +894,19 @@
 	}
 	
 	return nil;
+}
+
+
+-(void)	paintViewImageDidChange: (ULIPaintView*)sender
+{
+	if( mBackgroundEditMode && sender == mBackgroundPictureView )
+	{
+		[[mCurrentCard owningBackground] setPicture: [sender image]];
+	}
+	else if( !mBackgroundEditMode && sender == mCardPictureView )
+	{
+		[mCurrentCard setPicture: [sender image]];
+	}
 }
 
 @end

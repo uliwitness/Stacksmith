@@ -136,16 +136,23 @@
 
 -(NSImage*)		picture
 {
-	if( !mPictureName )
-		return nil;
-	
 	if( mPicture )
 		return mPicture;
+	
+	if( !mPictureName )
+		return nil;
 	
 	NSImage*	img = [[mStack document] imageNamed: mPictureName];
 	ASSIGN(mPicture,img);
 	
 	return img;
+}
+
+
+-(void)	setPicture: (NSImage *)inImage
+{
+	ASSIGN(mPicture,inImage);
+	[self updateChangeCount: NSChangeDone];
 }
 
 
