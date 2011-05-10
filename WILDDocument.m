@@ -826,7 +826,7 @@
 }
 
 
--(struct LEOContextGroup*)	contextGroup;
+-(struct LEOContextGroup*)	contextGroup
 {
 	if( !mContextGroup )
 		mContextGroup = LEOContextGroupCreate();
