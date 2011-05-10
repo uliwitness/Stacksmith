@@ -120,7 +120,7 @@ Opens the specified stack, or navigates to the specified card in the current sta
 
 	visual effect &lt;effectName&gt;
 
-Currently does nothing.
+Specifies a transition effect to be used by the next "go" command.
 
 	answer &lt;message&gt; [with &lt;buttonName&gt; [or &lt;buttonName&gt;] [or &lt;buttonName&gt;]]
 
@@ -310,7 +310,7 @@ A term may also be a property expression:
 
 	[the] [long|short|abbr[ev[iated]]] &lt;propertyName&gt; [of &lt;objectDescriptor&gt;]
 
-Depending on the object descriptor, there may be different properties. If there is no object descriptor, it is assumed to be a property of Stacksmith itself, which is global to the entire application.
+Depending on the object descriptor, there may be different properties. If there is no object descriptor, it is assumed to be a property of Stacksmith itself, which is global to the entire application. If you provide a variable instead of an object descriptor, the variable will be treated as an associative array, and the property name will be used as the key into the array.
 
 5) CONTAINERS
 
@@ -320,7 +320,7 @@ A container is an object descriptor for a part (button or field), or a variable,
 
 6.1) STACK PROPERTIES
 
-	[short] name		-	The name of the stack, without the ".xstk" file type 		suffix.
+	[short] name		-	The name of the stack, without the ".xstk" file type suffix.
 
 6.2) BACKGROUND PROPERTIES
 
@@ -333,10 +333,12 @@ A container is an object descriptor for a part (button or field), or a variable,
 6.4) FIELD PROPERTIES
 
 	[short] name		-	The name of the field, as displayed in "Field Info".
+	rectangle			-	The coordinates indicating the size and position of the field, as an associative array containing entries for the keys "top", "left", "bottom" and "right" as numbers, relative to a coordinate system that has the origin in its upper left.
 
 6.5) BUTTON PROPERTIES
 
 	[short] name		-	The name of the button, as displayed on the button when the showName property is true.
+	rectangle			-	The coordinates indicating the size and position of the button, as an associative array containing entries for the keys "top", "left", "bottom" and "right" as numbers, relative to a coordinate system that has the origin in its upper left.
 
 6.6) STACKSMITH PROPERTIES
 
