@@ -259,10 +259,25 @@
 	if( [key isEqualToString: @"subviews"] && mTransitionType && mTransitionSubtype )
 	{
 		ani = [CATransition animation];
-		[ani setType: mTransitionType];
-		[ani setSubtype: mTransitionSubtype];
-		//DESTROY(mTransitionType);
-		//DESTROY(mTransitionSubtype);
+		if( [mTransitionType hasPrefix: @"CI"] )
+		{
+			CIFilter	*	theFilter = [CIFilter filterWithName: mTransitionType];
+			[theFilter setDefaults];
+			if( [mTransitionSubtype isEqualToString: @"fromRight"] )
+            	[theFilter setValue:[NSNumber numberWithFloat:-M_PI] forKey:@"inputAngle"];
+			else if( [mTransitionSubtype isEqualToString: @"fromTop"] )
+				[theFilter setValue:[NSNumber numberWithFloat:-M_PI_2] forKey:@"inputAngle"];
+			else if( [mTransitionSubtype isEqualToString: @"fromBottom"] )
+				[theFilter setValue:[NSNumber numberWithFloat: M_PI_2] forKey:@"inputAngle"];
+			else if( [mTransitionSubtype isEqualToString: @"fromLeft"] )
+				[theFilter setValue:[NSNumber numberWithFloat: 0] forKey:@"inputAngle"];
+			[ani setFilter: theFilter];
+		}
+		else
+		{
+			[ani setType: mTransitionType];
+			[ani setSubtype: mTransitionSubtype];
+		}
 	}
 	
 	return ani;
