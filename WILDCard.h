@@ -30,4 +30,6 @@
 
 -(NSInteger)				cardNumber;
 
+-(void)						setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype;
+
 @end

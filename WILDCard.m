@@ -230,6 +230,17 @@
 	return NO;
 }
 
+
+-(void)	setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype
+{
+	WILDDocument	*	theDoc = [[self stack] document];
+	if( [[theDoc windowControllers] count] == 0 )
+		[theDoc makeWindowControllers];
+	WILDCardWindowController*	theWC = [[theDoc windowControllers] objectAtIndex: 0];
+	[theWC setTransitionType: inType subtype: inSubtype];
+}
+
+
 -(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
 	WILDDocument	*	theDoc = [[self stack] document];

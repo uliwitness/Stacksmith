@@ -16,11 +16,16 @@
 
 @interface WILDCardView : NSView
 {
-	WILDCard*				mCard;
+	WILDCard				*mCard;
 	BOOL					mPeeking;
 	BOOL					mBackgroundEditMode;
 	WILDCardViewController	*mOwner;	// Not retained.
+	NSString				*mTransitionType;		// CATransition type to use for card changes.
+	NSString				*mTransitionSubtype;	// CATransition subtype to use for card changes.
 }
+
+@property (copy)	NSString *	transitionType;
+@property (copy)	NSString *	transitionSubtype;
 
 -(void)						setCard: (WILDCard*)inCard;
 -(WILDCard*)				card;

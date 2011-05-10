@@ -28,4 +28,6 @@
 
 -(WILDCard*)	currentCard;
 
+-(void)			setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype;
+
 @end

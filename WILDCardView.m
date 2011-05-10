@@ -17,9 +17,13 @@
 #import "WILDPart.h"
 #import "WILDCardViewController.h"
 #import "NSImage+NiceScaling.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation WILDCardView
+
+@synthesize transitionType = mTransitionType;
+@synthesize transitionSubtype = mTransitionSubtype;
 
 -(id)	initWithFrame: (NSRect)frameRect
 {
@@ -72,6 +76,10 @@
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: WILDBackgroundEditModeChangedNotification
 											object: nil];
+	
+	DESTROY_DEALLOC(mTransitionType);
+	DESTROY_DEALLOC(mTransitionSubtype);
+	
 	[super dealloc];
 }
 
@@ -82,7 +90,7 @@
 }
 
 
--(WILDCard*)	card;
+-(WILDCard*)	card
 {
 	return mCard;
 }
@@ -241,6 +249,23 @@
 {
 	NSImage*	img = [self snapshotImage];
 	return [img scaledImageToFitSize: NSMakeSize(128,96)];	// 4:3 aspect ratio.
+}
+
+
+-(id)	animationForKey:(NSString *)key
+{
+	NSAnimation	*	ani = nil;
+	
+	if( [key isEqualToString: @"subviews"] && mTransitionType && mTransitionSubtype )
+	{
+		ani = [CATransition animation];
+		[ani setType: mTransitionType];
+		[ani setSubtype: mTransitionSubtype];
+		//DESTROY(mTransitionType);
+		//DESTROY(mTransitionSubtype);
+	}
+	
+	return ani;
 }
 
 @end

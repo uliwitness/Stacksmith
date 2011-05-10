@@ -39,6 +39,10 @@ void	WILDGoInstruction( LEOContext* inContext )
 		inContext->keepRunning = false;
 	}
 	
+	WILDStack			*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDCard			*	currentCard = [frontStack currentCard];
+	[currentCard setTransitionType: nil subtype: nil];
+
 	inContext->currentInstruction++;
 }
 
@@ -50,7 +54,18 @@ void	WILDVisualEffectInstruction( LEOContext* inContext )
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
-	// TODO: Actually store the effect somewhere.
+	WILDStack			*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDCard			*	currentCard = [frontStack currentCard];
+	static NSDictionary *	sTransitions = nil;
+	
+	if( !sTransitions )
+	{
+		sTransitions = [[NSDictionary alloc] initWithContentsOfFile: [[NSBundle mainBundle] pathForResource: @"TransitionMappings" ofType: @"plist"]];
+	}
+	
+	NSDictionary * currTransition = [sTransitions objectForKey: [NSString stringWithUTF8String: str]];
+	
+	[currentCard setTransitionType: [currTransition objectForKey: @"CATransitionType"] subtype: [currTransition objectForKey: @"CATransitionSubtype"]];
 	
 	inContext->currentInstruction++;
 }

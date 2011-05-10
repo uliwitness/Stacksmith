@@ -98,4 +98,10 @@
 	return [mCardViewController currentCard];
 }
 
+
+-(void)	setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype
+{
+	[mCardViewController setTransitionType: inType subtype: inSubtype];
+}
+
 @end

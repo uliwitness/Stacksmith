@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>push left</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>push</string>
+		<key>CATransitionSubtype</key>
+		<string>fromRight</string>
+	</dict>
+	<key>push right</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>push</string>
+		<key>CATransitionSubtype</key>
+		<string>fromLeft</string>
+	</dict>
+	<key>push up</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>push</string>
+		<key>CATransitionSubtype</key>
+		<string>fromBottom</string>
+	</dict>
+	<key>push down</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>push</string>
+		<key>CATransitionSubtype</key>
+		<string>fromTop</string>
+	</dict>
+	<key>dissolve</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>fade</string>
+		<key>CATransitionSubtype</key>
+		<string></string>
+	</dict>
+	<key>scroll left</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>reveal</string>
+		<key>CATransitionSubtype</key>
+		<string>fromRight</string>
+	</dict>
+	<key>scroll right</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>reveal</string>
+		<key>CATransitionSubtype</key>
+		<string>fromLeft</string>
+	</dict>
+	<key>scroll up</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>reveal</string>
+		<key>CATransitionSubtype</key>
+		<string>fromBottom</string>
+	</dict>
+	<key>scroll down</key>
+	<dict>
+		<key>CATransitionType</key>
+		<string>reveal</string>
+		<key>CATransitionSubtype</key>
+		<string>fromTop</string>
+	</dict>
+</dict>
+</plist>

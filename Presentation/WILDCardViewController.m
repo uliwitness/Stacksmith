@@ -871,6 +871,13 @@
 }
 
 
+-(void)	setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype
+{
+	[(WILDCardView*)[self view] setTransitionType: inType];
+	[(WILDCardView*)[self view] setTransitionSubtype: inSubtype];
+}
+
+
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind
 {
 	NSArray	*	views = [[self view] subviews];

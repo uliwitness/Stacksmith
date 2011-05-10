@@ -74,4 +74,6 @@
 
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 
+-(void)	setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype;
+
 @end
