@@ -25,7 +25,7 @@
     self = [super init];
     if (self)
 	{
-		window = [[NSPanel alloc] initWithContentRect: NSMakeRect(0,0, 500,600) styleMask: NSTitledWindowMask backing: NSBackingStoreBuffered defer: NO];
+		window = [[NSPanel alloc] initWithContentRect: NSMakeRect(0,0, 422,4000) styleMask: NSTitledWindowMask backing: NSBackingStoreBuffered defer: NO];
 		[window setReleasedWhenClosed: NO];
 		
         NSView		*	contentView = [window contentView];
@@ -49,7 +49,7 @@
 		NSButton	*	cancelButton = [[[NSButton alloc] initWithFrame: availableBox] autorelease];
 		[cancelButton setBezelStyle: NSRoundedBezelStyle];
 		[cancelButton setTitle: @"Cancel"];
-		[cancelButton setKeyEquivalent: @"."];
+		[cancelButton setKeyEquivalent: @"\033"];
 		[cancelButton setFont: [NSFont systemFontOfSize: [NSFont systemFontSizeForControlSize: NSRegularControlSize]]];
 		[cancelButton setTag: NSAlertAlternateReturn];
 		[cancelButton setTarget: self];
