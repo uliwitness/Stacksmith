@@ -351,20 +351,27 @@
 
 -(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
 {
-	NSString *	stackPath = nil;
-	NSArray	*	cmdLineParams = [[NSProcessInfo processInfo] arguments];
-	NSUInteger	x = 0;
-	for( NSString* theParam in cmdLineParams )
+	static BOOL	sDidTryToOpenOverrideStack = NO;
+	
+	if( !sDidTryToOpenOverrideStack )
 	{
-		if( [theParam isEqualToString: @"--stack"] )
+		sDidTryToOpenOverrideStack = YES;
+		
+		NSString *	stackPath = nil;
+		NSArray	*	cmdLineParams = [[NSProcessInfo processInfo] arguments];
+		NSUInteger	x = 0;
+		for( NSString* theParam in cmdLineParams )
 		{
-			if( [cmdLineParams count] > (x +1) )
+			if( [theParam isEqualToString: @"--stack"] )
 			{
-				stackPath = [cmdLineParams objectAtIndex: x+1];
-				return [self application: NSApp openFile: stackPath];
+				if( [cmdLineParams count] > (x +1) )
+				{
+					stackPath = [cmdLineParams objectAtIndex: x+1];
+					return [self application: NSApp openFile: stackPath];
+				}
 			}
+			x++;
 		}
-		x++;
 	}
 	
 	return [self openStandardStackNamed: @"Home"];
