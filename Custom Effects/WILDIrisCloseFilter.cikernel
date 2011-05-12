@@ -1,0 +1,12 @@
+kernel vec4 irisCloseEffect(sampler image, sampler targetImage, float percentage)
+{
+	vec2 pos = samplerCoord(image);
+	vec4	thePixel = unpremultiply( sample(image, pos) );
+	vec4	targetPixel = unpremultiply( sample(targetImage, pos) );
+	float biggerEdge = (samplerSize(image).x > samplerSize(image).y) ? samplerSize(image).x : samplerSize(image).y;
+	float radius = (biggerEdge * 0.6) * (1.0 -percentage);
+	
+	thePixel = (((pos.x - (samplerSize(image).x * 0.5)) * (pos.x - (samplerSize(image).x * 0.5))) + ((pos.y - (samplerSize(image).y * 0.5)) * (pos.y - (samplerSize(image).y * 0.5))) < (radius * radius)) ? thePixel : targetPixel;
+	
+	return premultiply(thePixel);
+}

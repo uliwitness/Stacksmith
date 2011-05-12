@@ -1,4 +1,4 @@
-kernel vec4 irisEffect(sampler image, sampler targetImage, float percentage)
+kernel vec4 irisOpenEffect(sampler image, sampler targetImage, float percentage)
 {
 	vec2 pos = samplerCoord(image);
 	vec4	thePixel = unpremultiply( sample(image, pos) );

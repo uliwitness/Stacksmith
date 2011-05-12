@@ -1,25 +1,25 @@
 //
-//  WILDIrisFilter.m
+//  WILDBarnDoorOpenFilter.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 12.05.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#import "WILDIrisFilter.h"
+#import "WILDBarnDoorOpenFilter.h"
 #import "UKHelperMacros.h"
 
 
-@implementation WILDIrisFilter
+@implementation WILDBarnDoorOpenFilter
 
 static CIKernel *sIrisFilterKernel = nil;
 
 +(void)	initialize
 {
-    [CIFilter registerFilterName: @"WILDIrisFilter"
+    [CIFilter registerFilterName: @"WILDBarnDoorOpenFilter"
         constructor: self
         classAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-             @"Iris Effect", kCIAttributeFilterDisplayName,
+             @"Barn Door Open Effect", kCIAttributeFilterDisplayName,
              [NSArray arrayWithObjects:
                 kCICategoryTransition, nil], kCIAttributeFilterCategories,
             nil]
@@ -40,7 +40,7 @@ static CIKernel *sIrisFilterKernel = nil;
     {
         NSBundle    *bundle = [NSBundle bundleForClass: [self class]];
         NSString    *code = [NSString stringWithContentsOfFile: [bundle
-                                pathForResource: @"WILDIrisFilter"
+                                pathForResource: @"WILDBarnDoorOpenFilter"
                                 ofType: @"cikernel"]];
         NSArray     *kernels = [CIKernel kernelsWithString: code];
  
@@ -62,14 +62,6 @@ static CIKernel *sIrisFilterKernel = nil;
 	DESTROY(inputTime);
 	
     [super dealloc];
-}
-
-
--(void)	setValue:(id)value forKey:(NSString *)key
-{
-	NSLog( @"WILDIrisFilter %@ = %@", key, value );
-	
-	[super setValue: value forKey: key];
 }
 
 

@@ -98,7 +98,28 @@
 		<key>CATransitionSubtype</key>
 		<string>open</string>
 		<key>CATransitionType</key>
-		<string>WILDIrisFilter</string>
+		<string>WILDIrisOpenFilter</string>
+	</dict>
+	<key>iris close</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>close</string>
+		<key>CATransitionType</key>
+		<string>WILDIrisCloseFilter</string>
+	</dict>
+	<key>barn door close</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>close</string>
+		<key>CATransitionType</key>
+		<string>WILDBarnDoorCloseFilter</string>
+	</dict>
+	<key>barn door open</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>open</string>
+		<key>CATransitionType</key>
+		<string>WILDBarnDoorOpenFilter</string>
 	</dict>
 </dict>
 </plist>

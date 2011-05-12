@@ -1,5 +1,5 @@
 //
-//  WILDIrisFilter.h
+//  WILDIrisCloseFilter.h
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 12.05.11.
@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface WILDIrisFilter : CIFilter
+@interface WILDIrisCloseFilter : CIFilter
 {
     CIImage   *inputImage;
     CIImage   *inputTargetImage;

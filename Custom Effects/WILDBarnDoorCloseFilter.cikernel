@@ -1,0 +1,20 @@
+kernel vec4 barnDoorCloseEffect(sampler image, sampler targetImage, float percentage)
+{
+	vec2 pos = samplerCoord(image);
+	vec4	thePixel = unpremultiply( sample(image, pos) );
+	vec4	targetPixel = unpremultiply( sample(targetImage, pos) );
+	float biggerEdge = (samplerSize(image).x > samplerSize(image).y) ? samplerSize(image).x : samplerSize(image).y;
+	float radius = (biggerEdge * 0.6) * (1.0 -percentage);
+	
+	float	rightCoord = ((samplerSize(image).x * 0.5) +radius);
+	float	leftCoord = ((samplerSize(image).x * 0.5) -radius);
+	
+	bool		rightIsOn = rightCoord < pos.x;
+	bool		leftIsOn = leftCoord > pos.x;
+	
+	bool		bothAreOn = (!leftIsOn) ? rightIsOn : leftIsOn;
+	
+	thePixel = bothAreOn ? targetPixel : thePixel;
+	
+	return premultiply(thePixel);
+}
