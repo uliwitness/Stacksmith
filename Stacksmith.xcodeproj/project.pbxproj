@@ -422,6 +422,8 @@
 		558DCDAB11557E28002C9195 /* WILDApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCDAA11557E28002C9195 /* WILDApplication.m */; };
 		558DCFBF1155B9B1002C9195 /* WILDPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFBE1155B9B1002C9195 /* WILDPictureView.m */; };
 		558DCFE51156209A002C9195 /* WILDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFE41156209A002C9195 /* WILDCardView.m */; };
+		559700EC137BB38B000264B8 /* WILDIrisFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700EB137BB38A000264B8 /* WILDIrisFilter.m */; };
+		559700EF137BBB3C000264B8 /* WILDIrisFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700EE137BBB3C000264B8 /* WILDIrisFilter.cikernel */; };
 		559808C5137B38A000D4A753 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 558CDB6B1379E31D004AC603 /* Sparkle.framework */; };
 		55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */; };
 		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
@@ -1129,6 +1131,9 @@
 		558DCFBE1155B9B1002C9195 /* WILDPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPictureView.m; sourceTree = "<group>"; };
 		558DCFE31156209A002C9195 /* WILDCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardView.h; sourceTree = "<group>"; };
 		558DCFE41156209A002C9195 /* WILDCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardView.m; sourceTree = "<group>"; };
+		559700EA137BB38A000264B8 /* WILDIrisFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIrisFilter.h; path = "Custom Effects/WILDIrisFilter.h"; sourceTree = "<group>"; };
+		559700EB137BB38A000264B8 /* WILDIrisFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisFilter.m; path = "Custom Effects/WILDIrisFilter.m"; sourceTree = "<group>"; };
+		559700EE137BBB3C000264B8 /* WILDIrisFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDIrisFilter.cikernel; path = "Custom Effects/WILDIrisFilter.cikernel"; sourceTree = "<group>"; };
 		55993B6713476DE3001624A2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDStackInfoWindowController.xib; sourceTree = "<group>"; };
 		55993B6913476E1D001624A2 /* WILDStackInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStackInfoWindowController.h; sourceTree = "<group>"; };
 		55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoWindowController.m; sourceTree = "<group>"; };
@@ -1328,7 +1333,9 @@
 				5542CE3A113ADFAC00555C64 /* Presentation */,
 				55255AB7114C196B00279B03 /* Editor */,
 				5542CE3C113ADFCE00555C64 /* Utilities */,
+				55E806681368B2E0006F1287 /* UKPaintView */,
 				55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */,
+				559700ED137BBB0C000264B8 /* Custom CIFilters */,
 				553C469D13577334000219FA /* Interpreter */,
 			);
 			name = Classes;
@@ -1384,6 +1391,7 @@
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
 				55AE22E11346C99E000B5BBE /* Help.xstk */,
+				559700EE137BBB3C000264B8 /* WILDIrisFilter.cikernel */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1676,7 +1684,6 @@
 				55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */,
 				55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */,
 				55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */,
-				55E806681368B2E0006F1287 /* UKPaintView */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1691,6 +1698,15 @@
 				5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */,
 			);
 			name = CInterface;
+			sourceTree = "<group>";
+		};
+		559700ED137BBB0C000264B8 /* Custom CIFilters */ = {
+			isa = PBXGroup;
+			children = (
+				559700EA137BB38A000264B8 /* WILDIrisFilter.h */,
+				559700EB137BB38A000264B8 /* WILDIrisFilter.m */,
+			);
+			name = "Custom CIFilters";
 			sourceTree = "<group>";
 		};
 		55A0BAFE113B4DF20095CAA6 /* Standard Resources */ = {
@@ -2216,6 +2232,7 @@
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
 				55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */,
 				557B182F113C5CD600F85327 /* OldStack.icns in Resources */,
+				559700EF137BBB3C000264B8 /* WILDIrisFilter.cikernel in Resources */,
 				552FF146113F23F3005742C8 /* CURS_129.pbm in Resources */,
 				552FF147113F23F3005742C8 /* CURS_130.pbm in Resources */,
 				552FF148113F23F3005742C8 /* CURS_131.pbm in Resources */,
@@ -2713,6 +2730,7 @@
 				552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */,
 				552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */,
 				558CDB9B137B1816004AC603 /* WILDToolsPalette.m in Sources */,
+				559700EC137BB38B000264B8 /* WILDIrisFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

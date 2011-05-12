@@ -93,33 +93,12 @@
 		<key>CATransitionType</key>
 		<string>CISwipeTransition</string>
 	</dict>
-	<key>wipe left</key>
+	<key>iris open</key>
 	<dict>
-		<key>CATransitionType</key>
-		<string>CISwipeTransition</string>
 		<key>CATransitionSubtype</key>
-		<string>fromRight</string>
-	</dict>
-	<key>wipe right</key>
-	<dict>
+		<string>open</string>
 		<key>CATransitionType</key>
-		<string>CISwipeTransition</string>
-		<key>CATransitionSubtype</key>
-		<string>fromLeft</string>
-	</dict>
-	<key>wipe up</key>
-	<dict>
-		<key>CATransitionType</key>
-		<string>CISwipeTransition</string>
-		<key>CATransitionSubtype</key>
-		<string>fromBottom</string>
-	</dict>
-	<key>wipe down</key>
-	<dict>
-		<key>CATransitionType</key>
-		<string>CISwipeTransition</string>
-		<key>CATransitionSubtype</key>
-		<string>fromTop</string>
+		<string>WILDIrisFilter</string>
 	</dict>
 </dict>
 </plist>

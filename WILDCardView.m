@@ -79,6 +79,9 @@
 	
 	DESTROY_DEALLOC(mTransitionType);
 	DESTROY_DEALLOC(mTransitionSubtype);
+	if( mCursorTrackingArea )
+		[self removeTrackingArea: mCursorTrackingArea];
+	DESTROY_DEALLOC(mCursorTrackingArea);
 	
 	[super dealloc];
 }
@@ -106,6 +109,27 @@
 		currCursor = [[[mCard stack] document] cursorWithID: 128];
 	[self addCursorRect: [self visibleRect] cursor: currCursor];
 }
+
+
+//- (void)updateTrackingAreas
+//{
+//	[super updateTrackingAreas];
+//	
+//	if( mCursorTrackingArea )
+//	{
+//		[self removeTrackingArea: mCursorTrackingArea];
+//		DESTROY(mCursorTrackingArea);
+//	}
+//	
+//	WILDTool			currTool = [[WILDTools sharedTools] currentTool];
+//	NSCursor*			currCursor = [WILDTools cursorForTool: currTool];
+//	if( mPeeking )
+//		currCursor = [NSCursor arrowCursor];
+//	if( !currCursor )
+//		currCursor = [[[mCard stack] document] cursorWithID: 128];
+//	mCursorTrackingArea = [[NSTrackingArea alloc] initWithRect: [self visibleRect] options: NSTrackingMouseEnteredAndExited | NSTrackingCursorUpdate | NSTrackingActiveInActiveApp owner: currCursor userInfo: nil];
+//	[self addTrackingArea: mCursorTrackingArea];
+//}
 
 
 -(void)	mouseDown: (NSEvent*)event
@@ -259,7 +283,7 @@
 	if( [key isEqualToString: @"subviews"] && mTransitionType && mTransitionSubtype )
 	{
 		ani = [CATransition animation];
-		if( [mTransitionType hasPrefix: @"CI"] )
+		if( [mTransitionType hasPrefix: @"CI"] || [mTransitionType hasPrefix: @"WILD"] )
 		{
 			CIFilter	*	theFilter = [CIFilter filterWithName: mTransitionType];
 			[theFilter setDefaults];
@@ -267,13 +291,21 @@
 			if( !sTransitionSubtypes )
 			{
 				sTransitionSubtypes = [[NSDictionary alloc] initWithObjectsAndKeys:
-										[NSNumber numberWithInt: -M_PI_4], @"fromLeft",
-										[NSNumber numberWithInt: -M_PI_2 -M_PI_4], @"fromTop",
-										[NSNumber numberWithInt: M_PI], @"fromRight",
-										[NSNumber numberWithInt: M_PI_2 +M_PI_4], @"fromBottom",
+										[NSNumber numberWithDouble: -M_PI_4], @"fromLeft",
+										[NSNumber numberWithDouble: -M_PI_2 -M_PI_4], @"fromTop",
+										[NSNumber numberWithDouble: M_PI], @"fromRight",
+										[NSNumber numberWithDouble: M_PI_2 +M_PI_4], @"fromBottom",
+										[NSNumber numberWithInt: 1000], @"open",
+										[NSNumber numberWithInt: 1001], @"close",
 										nil];
 			}
-			[theFilter setValue: [sTransitionSubtypes objectForKey: mTransitionSubtype] forKey: kCIInputAngleKey];
+			NSNumber*	theNumber = [sTransitionSubtypes objectForKey: mTransitionSubtype];
+			if( [theNumber intValue] >= 1000 )
+			{
+				[theFilter setValue: [NSNumber numberWithDouble: 1.0] forKey: @"percentage"];
+			}
+			else
+				[theFilter setValue: theNumber forKey: kCIInputAngleKey];
 			[ani setFilter: theFilter];
 		}
 		else

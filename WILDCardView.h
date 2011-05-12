@@ -22,6 +22,7 @@
 	WILDCardViewController	*mOwner;	// Not retained.
 	NSString				*mTransitionType;		// CATransition type to use for card changes.
 	NSString				*mTransitionSubtype;	// CATransition subtype to use for card changes.
+	NSTrackingArea			*mCursorTrackingArea;
 }
 
 @property (copy)	NSString *	transitionType;
