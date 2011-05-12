@@ -22,7 +22,7 @@
 #import "ForgeHostFunctionsStacksmith.h"
 #import "LEORemoteDebugger.h"
 #import <openssl/err.h>
-#import "WILDInputPanelController.h"
+#import "WILDToolsPalette.h"
 
 
 @implementation WILDAppDelegate
@@ -481,6 +481,12 @@
 -(IBAction)	orderFrontMessageBox: (id)sender
 {
 	[[WILDMessageBox sharedMessageBox] orderFrontMessageBox: self];
+}
+
+
+-(IBAction)	orderFrontToolsPalette: (id)sender
+{
+	[[WILDToolsPalette sharedToolsPalette] orderFrontToolsPalette: self];
 }
 
 @end

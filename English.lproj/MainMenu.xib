@@ -1656,6 +1656,25 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
+								<object class="NSMenuItem" id="470793331">
+									<reference key="NSMenu" ref="835318025"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="737628">
+									<reference key="NSMenu" ref="835318025"/>
+									<string key="NSTitle">Tools</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
 								<object class="NSMenuItem" id="299356726">
 									<reference key="NSMenu" ref="835318025"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1723,7 +1742,7 @@
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
 				<object class="NSView" key="NSWindowView" id="407472854">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1733,6 +1752,7 @@
 							<object class="NSPSMatrix" key="NSDrawMatrix"/>
 							<string key="NSFrame">{{18, 16}, {345, 20}}</string>
 							<reference key="NSSuperview" ref="407472854"/>
+							<reference key="NSWindow"/>
 							<int key="NSpiFlags">16394</int>
 							<double key="NSMaxValue">100</double>
 						</object>
@@ -1741,6 +1761,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 44}, {347, 34}}</string>
 							<reference key="NSSuperview" ref="407472854"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="1033723403">
 								<int key="NSCellFlags">69336577</int>
@@ -1773,7 +1794,9 @@
 							</object>
 						</object>
 					</object>
-					<string key="NSFrameSize">{381, 98}</string>
+					<string key="NSFrame">{{7, 11}, {381, 98}}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1366, 746}}</string>
 				<string key="NSMaxSize">{1e+13, 1e+13}</string>
@@ -2741,6 +2764,14 @@
 					</object>
 					<int key="connectionID">723</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">orderFrontToolsPalette:</string>
+						<reference key="source" ref="493422503"/>
+						<reference key="destination" ref="737628"/>
+					</object>
+					<int key="connectionID">726</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -3170,6 +3201,8 @@
 							<reference ref="625202149"/>
 							<reference ref="575023229"/>
 							<reference ref="1011231497"/>
+							<reference ref="470793331"/>
+							<reference ref="737628"/>
 						</object>
 						<reference key="parent" ref="713487014"/>
 					</object>
@@ -4105,6 +4138,16 @@
 						<reference key="object" ref="424783156"/>
 						<reference key="parent" ref="110575045"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">724</int>
+						<reference key="object" ref="470793331"/>
+						<reference key="parent" ref="835318025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">725</int>
+						<reference key="object" ref="737628"/>
+						<reference key="parent" ref="835318025"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -4406,6 +4449,9 @@
 					<string>72.ImportedFromIB2</string>
 					<string>721.IBPluginDependency</string>
 					<string>722.IBPluginDependency</string>
+					<string>724.IBPluginDependency</string>
+					<string>724.ImportedFromIB2</string>
+					<string>725.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>73.ImportedFromIB2</string>
 					<string>74.IBPluginDependency</string>
@@ -4731,6 +4777,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<integer value="1"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -4766,7 +4815,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">723</int>
+			<int key="maxID">726</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4918,11 +4967,13 @@
 							<string>goHelp:</string>
 							<string>orderFrontMessageBox:</string>
 							<string>orderFrontStandardAboutPanel:</string>
+							<string>orderFrontToolsPalette:</string>
 							<string>toggleBackgroundEditMode:</string>
 							<string>toolsMenuRowDummyAction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4937,6 +4988,7 @@
 							<string>goHelp:</string>
 							<string>orderFrontMessageBox:</string>
 							<string>orderFrontStandardAboutPanel:</string>
+							<string>orderFrontToolsPalette:</string>
 							<string>toggleBackgroundEditMode:</string>
 							<string>toolsMenuRowDummyAction:</string>
 						</object>
@@ -4952,6 +5004,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">orderFrontStandardAboutPanel:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">orderFrontToolsPalette:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

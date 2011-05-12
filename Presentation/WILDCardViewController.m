@@ -41,6 +41,7 @@
 #import "ULIPaintOvalTool.h"
 #import "ULIPaintTextTool.h"
 #import "ULIPaintShapeTool.h"
+#import "WILDToolsPalette.h"
 
 
 @interface WILDCardViewController () <ULIPaintViewDelegate>
@@ -901,6 +902,14 @@
 	return nil;
 }
 
+
+-(void)	paintViewWillBecomeCurrent: (ULIPaintView*)sender
+{
+	[mBackgroundPictureView setLineColor: [[WILDToolsPalette sharedToolsPalette] lineColor]];
+	[mBackgroundPictureView setFillColor: [[WILDToolsPalette sharedToolsPalette] fillColor]];
+	[mCardPictureView setLineColor: [[WILDToolsPalette sharedToolsPalette] lineColor]];
+	[mCardPictureView setFillColor: [[WILDToolsPalette sharedToolsPalette] fillColor]];
+}
 
 -(void)	paintViewImageDidChange: (ULIPaintView*)sender
 {
