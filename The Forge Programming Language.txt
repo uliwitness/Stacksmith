@@ -173,10 +173,10 @@ There are several constants whose name consists of one or more identifiers:
 	tab			-- the tabulator character, numToChar(9)
 	pi			-- the number "pi". Roughly 3.14
 	
-	iris open
-	iris close
-	barn door open
-	barn door close
+	iris open			-- transition effect you can pass to the 'visual effect' command.
+	iris close			-- transition effect you can pass to the 'visual effect' command.
+	barn door open		-- transition effect you can pass to the 'visual effect' command.
+	barn door close		-- transition effect you can pass to the 'visual effect' command.
 	checkerboard
 	dissolve			-- transition effect you can pass to the 'visual effect' command.
 	venetian blinds
