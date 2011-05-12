@@ -302,7 +302,7 @@
 			NSNumber*	theNumber = [sTransitionSubtypes objectForKey: mTransitionSubtype];
 			if( [theNumber intValue] >= 1000 )
 			{
-				[theFilter setValue: [NSNumber numberWithDouble: 1.0] forKey: @"percentage"];
+				//[theFilter setValue: [NSNumber numberWithDouble: 1.0] forKey: @"percentage"];
 			}
 			else
 				[theFilter setValue: theNumber forKey: kCIInputAngleKey];

@@ -49,7 +49,7 @@ static CIKernel *sIrisFilterKernel = nil;
  
     self = [super init];
 	if( self )
-		percentage = [[NSNumber numberWithDouble: 0.5] retain];
+		inputTime = [[NSNumber numberWithDouble: 0.5] retain];
 		
 	return self;
 }
@@ -59,7 +59,7 @@ static CIKernel *sIrisFilterKernel = nil;
 {
 	DESTROY(inputImage);
 	DESTROY(inputTargetImage);
-	DESTROY(percentage);
+	DESTROY(inputTime);
 	
     [super dealloc];
 }
@@ -84,7 +84,7 @@ static CIKernel *sIrisFilterKernel = nil;
             [NSNumber numberWithDouble:  0.5], kCIAttributeDefault,
             [NSNumber numberWithDouble:  0.0], kCIAttributeIdentity,
             kCIAttributeTypeScalar,            kCIAttributeType,
-            nil],                              @"percentage", 
+            nil],                              kCIInputTimeKey, 
         nil];
 }
 
@@ -94,7 +94,7 @@ static CIKernel *sIrisFilterKernel = nil;
     CISampler *src = [CISampler samplerWithImage: inputImage];
 	CISampler *target = [CISampler samplerWithImage: inputTargetImage];
 
-    return [self apply: sIrisFilterKernel, src, target, percentage, kCIApplyOptionDefinition, [src definition], nil];
+    return [self apply: sIrisFilterKernel, src, target, inputTime, kCIApplyOptionDefinition, [src definition], nil];
 }
 
 @end

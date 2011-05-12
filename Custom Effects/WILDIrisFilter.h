@@ -14,11 +14,11 @@
 {
     CIImage   *inputImage;
     CIImage   *inputTargetImage;
-    NSNumber  *percentage;
+    NSNumber  *inputTime;
 }
 
 @property (retain) CIImage*		inputImage;
 @property (retain) CIImage*		inputTargetImage;
-@property (retain) NSNumber*	percentage;
+@property (retain) NSNumber*	inputTime;
 
 @end
