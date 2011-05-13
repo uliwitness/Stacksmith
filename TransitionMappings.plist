@@ -2,12 +2,40 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>barn door close</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>close</string>
+		<key>CATransitionType</key>
+		<string>WILDBarnDoorCloseFilter</string>
+	</dict>
+	<key>barn door open</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>open</string>
+		<key>CATransitionType</key>
+		<string>WILDBarnDoorOpenFilter</string>
+	</dict>
 	<key>dissolve</key>
 	<dict>
 		<key>CATransitionSubtype</key>
 		<string></string>
 		<key>CATransitionType</key>
 		<string>fade</string>
+	</dict>
+	<key>iris close</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>close</string>
+		<key>CATransitionType</key>
+		<string>WILDIrisCloseFilter</string>
+	</dict>
+	<key>iris open</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>open</string>
+		<key>CATransitionType</key>
+		<string>WILDIrisOpenFilter</string>
 	</dict>
 	<key>push down</key>
 	<dict>
@@ -93,33 +121,12 @@
 		<key>CATransitionType</key>
 		<string>CISwipeTransition</string>
 	</dict>
-	<key>iris open</key>
+	<key>shrink to top</key>
 	<dict>
 		<key>CATransitionSubtype</key>
-		<string>open</string>
+		<string>toTop</string>
 		<key>CATransitionType</key>
-		<string>WILDIrisOpenFilter</string>
-	</dict>
-	<key>iris close</key>
-	<dict>
-		<key>CATransitionSubtype</key>
-		<string>close</string>
-		<key>CATransitionType</key>
-		<string>WILDIrisCloseFilter</string>
-	</dict>
-	<key>barn door close</key>
-	<dict>
-		<key>CATransitionSubtype</key>
-		<string>close</string>
-		<key>CATransitionType</key>
-		<string>WILDBarnDoorCloseFilter</string>
-	</dict>
-	<key>barn door open</key>
-	<dict>
-		<key>CATransitionSubtype</key>
-		<string>open</string>
-		<key>CATransitionType</key>
-		<string>WILDBarnDoorOpenFilter</string>
+		<string>WILDShrinkToTopFilter</string>
 	</dict>
 </dict>
 </plist>

@@ -1,0 +1,12 @@
+kernel vec4 shrinkToTopEffect(sampler image, sampler targetImage, float percentage)
+{
+	vec2 pos = samplerCoord(image);
+	vec4	targetPixel = unpremultiply( sample(targetImage, pos) );
+	
+	pos.y = pos.y * (1.0 / (1.0 -percentage));
+	
+	vec4	thePixel = unpremultiply( sample(image, pos) );
+	thePixel = ((samplerSize(image).y * (1.0 -percentage)) > pos.y) ? thePixel : targetPixel;
+	
+	return premultiply(thePixel);
+}
