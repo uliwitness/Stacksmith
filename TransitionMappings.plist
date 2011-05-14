@@ -5,14 +5,14 @@
 	<key>barn door close</key>
 	<dict>
 		<key>CATransitionSubtype</key>
-		<string>close</string>
+		<string>cifilter</string>
 		<key>CATransitionType</key>
 		<string>WILDBarnDoorCloseFilter</string>
 	</dict>
 	<key>barn door open</key>
 	<dict>
 		<key>CATransitionSubtype</key>
-		<string>open</string>
+		<string>cifilter</string>
 		<key>CATransitionType</key>
 		<string>WILDBarnDoorOpenFilter</string>
 	</dict>
@@ -26,14 +26,14 @@
 	<key>iris close</key>
 	<dict>
 		<key>CATransitionSubtype</key>
-		<string>close</string>
+		<string>cifilter</string>
 		<key>CATransitionType</key>
 		<string>WILDIrisCloseFilter</string>
 	</dict>
 	<key>iris open</key>
 	<dict>
 		<key>CATransitionSubtype</key>
-		<string>open</string>
+		<string>cifilter</string>
 		<key>CATransitionType</key>
 		<string>WILDIrisOpenFilter</string>
 	</dict>
@@ -124,16 +124,23 @@
 	<key>shrink to top</key>
 	<dict>
 		<key>CATransitionSubtype</key>
-		<string>toTop</string>
+		<string>cifilter</string>
 		<key>CATransitionType</key>
 		<string>WILDShrinkToTopFilter</string>
 	</dict>
 	<key>shrink to bottom</key>
 	<dict>
 		<key>CATransitionSubtype</key>
-		<string>toBottom</string>
+		<string>cifilter</string>
 		<key>CATransitionType</key>
 		<string>WILDShrinkToBottomFilter</string>
+	</dict>
+	<key>stretch from bottom</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>cifilter</string>
+		<key>CATransitionType</key>
+		<string>WILDStretchFromBottomFilter</string>
 	</dict>
 </dict>
 </plist>

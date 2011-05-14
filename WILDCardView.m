@@ -295,10 +295,7 @@
 										[NSNumber numberWithDouble: -M_PI_2 -M_PI_4], @"fromTop",
 										[NSNumber numberWithDouble: M_PI], @"fromRight",
 										[NSNumber numberWithDouble: M_PI_2 +M_PI_4], @"fromBottom",
-										[NSNumber numberWithInt: 1000], @"open",
-										[NSNumber numberWithInt: 1001], @"close",
-										[NSNumber numberWithInt: 1002], @"toTop",
-										[NSNumber numberWithInt: 1003], @"toBottom",
+										[NSNumber numberWithInt: 1000], @"cifilter",
 										nil];
 			}
 			NSNumber*	theNumber = [sTransitionSubtypes objectForKey: mTransitionSubtype];
