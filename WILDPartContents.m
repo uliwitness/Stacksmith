@@ -94,36 +94,47 @@
 		mLayer = [WILDStringFromSubElementInElement( @"layer", theElem ) retain];
 		mHighlighted = WILDBoolFromSubElementInElement( @"highlight", theElem, NO );
 		
+		// Oddly, this code crashes on first mouse movement after open:
+//		if( [mText hasPrefix: @"{\\rtf1"] )
+//		{
+//			NSData	*	rtfData = [mText dataUsingEncoding: NSUTF8StringEncoding];
+//			mStyledText = [[NSMutableAttributedString alloc] initWithRTF: rtfData documentAttributes: [NSDictionary dictionary]];
+//			ASSIGN(mText,[mStyledText string]);
+//		}
+		
 		// Style runs contain their start offsets, so we apply them from the end,
 		//	to be able to start with the length as the end offset, and then just
 		//	use each start offset as the end of the next run:
-		NSArray*		styleRuns = [theElem elementsForName: @"stylerun"];
-		if( styleRuns && [styleRuns count] > 0 )
+		if( !mStyledText )
 		{
-			NSInteger	startOffset = 0, endOffset = [mText length];
-			for( NSXMLElement * currentRun in [styleRuns reverseObjectEnumerator] )
+			NSArray*		styleRuns = [theElem elementsForName: @"stylerun"];
+			if( styleRuns && [styleRuns count] > 0 )
 			{
-				NSString*	offsetStr = [[[currentRun elementsForName: @"offset"] objectAtIndex: 0] stringValue];
-				NSString*	styleIDStr = [[[currentRun elementsForName: @"id"] objectAtIndex: 0] stringValue];
-				startOffset = [offsetStr integerValue];
-				NSInteger	styleID = [styleIDStr integerValue];
-				NSString*	fontName = nil;
-				NSInteger	fontSize = -1;
-				NSArray*	styles = nil;
-				
-				[[theStack document] provideStyleFormatWithID: styleID font: &fontName size: &fontSize styles: &styles];
-				
-				WILDStyleRun*	currStyleRun = [[WILDStyleRun alloc] init];
-				NSRange					txRange = { startOffset, endOffset -startOffset };
-				currStyleRun.styleID = styleID;
-				currStyleRun.fontName = fontName;
-				currStyleRun.fontSize = fontSize;
-				currStyleRun.styles = styles;
-				currStyleRun.styleRange = txRange;
-				[mStyles addObject: currStyleRun];
-				[currStyleRun release];
-				
-				endOffset = startOffset;
+				NSInteger	startOffset = 0, endOffset = [mText length];
+				for( NSXMLElement * currentRun in [styleRuns reverseObjectEnumerator] )
+				{
+					NSString*	offsetStr = [[[currentRun elementsForName: @"offset"] objectAtIndex: 0] stringValue];
+					NSString*	styleIDStr = [[[currentRun elementsForName: @"id"] objectAtIndex: 0] stringValue];
+					startOffset = [offsetStr integerValue];
+					NSInteger	styleID = [styleIDStr integerValue];
+					NSString*	fontName = nil;
+					NSInteger	fontSize = -1;
+					NSArray*	styles = nil;
+					
+					[[theStack document] provideStyleFormatWithID: styleID font: &fontName size: &fontSize styles: &styles];
+					
+					WILDStyleRun*	currStyleRun = [[WILDStyleRun alloc] init];
+					NSRange					txRange = { startOffset, endOffset -startOffset };
+					currStyleRun.styleID = styleID;
+					currStyleRun.fontName = fontName;
+					currStyleRun.fontSize = fontSize;
+					currStyleRun.styles = styles;
+					currStyleRun.styleRange = txRange;
+					[mStyles addObject: currStyleRun];
+					[currStyleRun release];
+					
+					endOffset = startOffset;
+				}
 			}
 		}
 	}
@@ -309,6 +320,15 @@
 }
 
 
+-(NSString*)	RTFText
+{
+	if( !mStyledText )
+		return mText;
+	else
+		return [[[NSString alloc] initWithData: [mStyledText RTFFromRange: NSMakeRange(0,[mStyledText length]) documentAttributes: [NSDictionary dictionary]] encoding: NSUTF8StringEncoding] autorelease];
+}
+
+
 -(NSString*)	xmlString
 {
 	NSMutableString*	outString = [[[NSMutableString alloc] init] autorelease];
@@ -318,15 +338,14 @@
 	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
 	[outString appendFormat: @"\t\t<id>%ld</id>\n", mID];
 
-	[outString appendFormat: @"\t\t<text>%@</text>\n", WILDStringEscapedForXML(mText)];
+	[outString appendFormat: @"\t\t<text>%@</text>\n", WILDStringEscapedForXML([self RTFText])];
 
 	[outString appendFormat: @"\t\t<highlight>%@</highlight>\n", mHighlighted ? @"<true />" : @"<false />"];
 	
-	// TODO: Rebuild mStyles based on NSAttributedString in mStyledText.
-	for( WILDStyleRun* theStyle in mStyles )
-	{
-		[outString appendString: [theStyle xmlString]];
-	}
+//	for( WILDStyleRun* theStyle in mStyles )
+//	{
+//		[outString appendString: [theStyle xmlString]];
+//	}
 	
 	[outString appendString: @"\t</content>\n"];
 	

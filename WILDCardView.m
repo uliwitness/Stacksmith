@@ -79,9 +79,9 @@
 	
 	DESTROY_DEALLOC(mTransitionType);
 	DESTROY_DEALLOC(mTransitionSubtype);
-	if( mCursorTrackingArea )
-		[self removeTrackingArea: mCursorTrackingArea];
-	DESTROY_DEALLOC(mCursorTrackingArea);
+//	if( mCursorTrackingArea )
+//		[self removeTrackingArea: mCursorTrackingArea];
+//	DESTROY_DEALLOC(mCursorTrackingArea);
 	
 	[super dealloc];
 }
