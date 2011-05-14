@@ -128,5 +128,12 @@
 		<key>CATransitionType</key>
 		<string>WILDShrinkToTopFilter</string>
 	</dict>
+	<key>shrink to bottom</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>toBottom</string>
+		<key>CATransitionType</key>
+		<string>WILDShrinkToBottomFilter</string>
+	</dict>
 </dict>
 </plist>

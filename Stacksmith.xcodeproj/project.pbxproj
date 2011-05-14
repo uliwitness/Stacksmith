@@ -447,6 +447,8 @@
 		55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC02E1116B2ADE00BB094E /* NoIcon.png */; };
 		55BFEE15137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */; };
 		55BFEE18137CB1F7008FC8BB /* WILDShrinkToTopFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BFEE17137CB1F7008FC8BB /* WILDShrinkToTopFilter.m */; };
+		55BFEE1A137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel in Sources */ = {isa = PBXBuildFile; fileRef = 55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */; };
+		55BFEE1D137DBB14008FC8BB /* WILDShrinkToBottomFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BFEE1C137DBB14008FC8BB /* WILDShrinkToBottomFilter.m */; };
 		55C2B5CA115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */; };
 		55C2B647115E5780008B094D /* WILDSearchContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* WILDSearchContext.m */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
@@ -1174,6 +1176,9 @@
 		55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDShrinkToTopFilter.cikernel; path = "Custom Effects/WILDShrinkToTopFilter.cikernel"; sourceTree = "<group>"; };
 		55BFEE16137CB1F7008FC8BB /* WILDShrinkToTopFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDShrinkToTopFilter.h; path = "Custom Effects/WILDShrinkToTopFilter.h"; sourceTree = "<group>"; };
 		55BFEE17137CB1F7008FC8BB /* WILDShrinkToTopFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDShrinkToTopFilter.m; path = "Custom Effects/WILDShrinkToTopFilter.m"; sourceTree = "<group>"; };
+		55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDShrinkToBottomFilter.cikernel; path = "Custom Effects/WILDShrinkToBottomFilter.cikernel"; sourceTree = "<group>"; };
+		55BFEE1B137DBB14008FC8BB /* WILDShrinkToBottomFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDShrinkToBottomFilter.h; path = "Custom Effects/WILDShrinkToBottomFilter.h"; sourceTree = "<group>"; };
+		55BFEE1C137DBB14008FC8BB /* WILDShrinkToBottomFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDShrinkToBottomFilter.m; path = "Custom Effects/WILDShrinkToBottomFilter.m"; sourceTree = "<group>"; };
 		55C2B5C8115E2FD8008B094D /* WILDClickablePopUpButtonLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDClickablePopUpButtonLabel.h; sourceTree = "<group>"; };
 		55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDClickablePopUpButtonLabel.m; sourceTree = "<group>"; };
 		55C2B645115E5780008B094D /* WILDSearchContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDSearchContext.h; path = Model/WILDSearchContext.h; sourceTree = "<group>"; };
@@ -1416,6 +1421,7 @@
 				559700F1137C9ACC000264B8 /* WILDBarnDoorOpenFilter.cikernel */,
 				559700F2137C9ACC000264B8 /* WILDIrisCloseFilter.cikernel */,
 				55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */,
+				55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1737,6 +1743,8 @@
 				559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */,
 				55BFEE16137CB1F7008FC8BB /* WILDShrinkToTopFilter.h */,
 				55BFEE17137CB1F7008FC8BB /* WILDShrinkToTopFilter.m */,
+				55BFEE1B137DBB14008FC8BB /* WILDShrinkToBottomFilter.h */,
+				55BFEE1C137DBB14008FC8BB /* WILDShrinkToBottomFilter.m */,
 			);
 			name = "Custom CIFilters";
 			sourceTree = "<group>";
@@ -2771,6 +2779,8 @@
 				559700FD137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m in Sources */,
 				559700FE137C9B6B000264B8 /* WILDIrisCloseFilter.m in Sources */,
 				55BFEE18137CB1F7008FC8BB /* WILDShrinkToTopFilter.m in Sources */,
+				55BFEE1A137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel in Sources */,
+				55BFEE1D137DBB14008FC8BB /* WILDShrinkToBottomFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
