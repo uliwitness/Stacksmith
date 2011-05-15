@@ -46,312 +46,586 @@
 	<content>
 		<layer>card</layer>
 		<id>1</id>
-		<text>The following syntax is currently supported by Stacksmith's programming language "Forge":
+		<text>{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+{\fonttbl\f0\fswiss\fcharset0 Optima-Regular;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
 
-1) TOP-LEVEL CONSTRUCTS:
+\f0\b\fs48 \cf0 The Forge Programming Language
+\b0\fs28 \
+\
+The following syntax is currently supported by Stacksmith's programming language "Forge":\
+\
 
-	on handlerName [&lt;paramName1&gt;[,&lt;paramName2&gt;[, ...]]
-		commands
-	end handlerName
+\b 1. Top-Level Constructs
+\b0 \
+\
 
-This defines a command handler with the specified number of parameters that are automatically assigned to the local variables of that name.
+\f1\fs20 	on handlerName [&lt;paramName1&gt;[,&lt;paramName2&gt;[, ...]]\
+		commands\
+	end handlerName\
 
-	function handlerName [&lt;paramName1&gt;[,&lt;paramName2&gt;[, ...]]
-		commands
-	end handlerName
+\f0\fs28 \
+This defines a command handler with the specified number of parameters that are automatically assigned to the local variables of that name.\
+\
 
-2) COMMANDS:
+\f1\fs20 	function handlerName [&lt;paramName1&gt;[,&lt;paramName2&gt;[, ...]]\
+		commands\
+	end handlerName\
 
-	handlerName [&lt;param1&gt;[,&lt;param2&gt;[,...]]]
+\f0\fs28 \
 
-This is the command that calls a command handler. The parameter values passed in may be any valid expression.
+\b 2. Commands
+\b0 \
+\
 
-	put &lt;expression&gt; into &lt;container&gt;
-	set &lt;container&gt; to &lt;expression&gt;
+\f1\fs20 	handlerName [&lt;param1&gt;[,&lt;param2&gt;[,...]]]\
 
-This stores the value of the specified expression in the variable or property with the specified name. If there is no variable of that name yet, it is created.
-There are also put X after Y for appending Y to X, and put X before Y for prefixing Y with X.
+\f0\fs28 \
+This is the command that calls a command handler. The parameter values passed in may be any valid expression.\
+\
 
-	put &lt;expression&gt;
+\f1\fs20 	put &lt;expression&gt; into &lt;container&gt;\
+	set &lt;container&gt; to &lt;expression&gt;\
 
-Writes the specified expression as a string to the message box.
+\f0\fs28 \
+This stores the value of the specified expression in the variable or property with the specified name. If there is no variable of that name yet, it is created.\
+There are also put X after Y for appending Y to X, and put X before Y for prefixing Y with X.\
+\
 
-	return &lt;expression&gt;
+\f1\fs20 	put &lt;expression&gt;\
 
-This sets the return value of the current handler to the value of the specified expression and exits the current handler.
+\f0\fs28 \
+Writes the specified expression as a string to the message box.\
+\
 
-	repeat while &lt;conditionExpression&gt;
-		commands
-	end repeat
+\f1\fs20 	return &lt;expression&gt;\
 
-This executes the commands repeatedly while the value of &lt;conditionExpression&gt; is "true". If conditionExpression starts out false, this executes no commands apart from evaluating the expression.
+\f0\fs28 \
+This sets the return value of the current handler to the value of the specified expression and exits the current handler.\
+\
 
-	repeat until &lt;conditionExpression&gt;
-		commands
-	end repeat
+\f1\fs20 	repeat while &lt;conditionExpression&gt;\
+		commands\
+	end repeat\
 
-This basically loops while the conditionExpression is false.
+\f0\fs28 \
+This executes the commands repeatedly while the value of &lt;conditionExpression&gt; is "true". If conditionExpression starts out false, this executes no commands apart from evaluating the expression.\
+\
 
-	repeat [for] &lt;count&gt; [times]
-		commands
-	end repeat
+\f1\fs20 	repeat until &lt;conditionExpression&gt;\
+		commands\
+	end repeat\
 
-This repeats the specified commands &lt;count&gt; times.
+\f0\fs28 \
+This basically loops while the conditionExpression is false.\
+\
 
-	repeat with &lt;variableName&gt; from &lt;startNum&gt; [down] to &lt;endNum&gt;
-		commands
-	end repeat
+\f1\fs20 	repeat [for] &lt;count&gt; [times]\
+		commands\
+	end repeat\
 
-puts each number from startNum to endNum into the variable and executes the commands for each one of them.
+\f0\fs28 \
+This repeats the specified commands &lt;count&gt; times.\
+\
 
-	repeat for each &lt;chunkType&gt; &lt;variableName&gt; in &lt;expression&gt;
-		commands
-	end repeat
+\f1\fs20 	repeat with &lt;variableName&gt; from &lt;startNum&gt; [down] to &lt;endNum&gt;\
+		commands\
+	end repeat\
 
-Put each byte, character, word, line or item in the given expression into the specified variable and execute the given commands for it.
+\f0\fs28 \
+puts each number from startNum to endNum into the variable and executes the commands for each one of them.\
+\
 
-	global &lt;variableName&gt;
+\f1\fs20 	repeat for each &lt;chunkType&gt; &lt;variableName&gt; in &lt;expression&gt;\
+		commands\
+	end repeat\
 
-Create a global variable with the given name (if it doesn't already exist) and make it possible to manipulate it in the current handler.
+\f0\fs28 \
+Put each byte, character, word, line or item in the given expression into the specified variable and execute the given commands for it.\
+\
 
-	go [to] &lt;objectDescriptor&gt;
+\f1\fs20 	global &lt;variableName&gt;\
 
-Opens the specified stack, or navigates to the specified card in the current stack.
+\f0\fs28 \
+Create a global variable with the given name (if it doesn't already exist) and make it possible to manipulate it in the current handler.\
+\
 
-	visual effect &lt;effectName&gt;
+\f1\fs20 	go [to] &lt;objectDescriptor&gt;\
 
-Specifies a transition effect to be used by the next "go" command.
+\f0\fs28 \
+Opens the specified stack, or navigates to the specified card in the current stack.\
+\
 
-	answer &lt;message&gt; [with &lt;buttonName&gt; [or &lt;buttonName&gt;] [or &lt;buttonName&gt;]]
+\f1\fs20 	visual effect &lt;effectName&gt;\
 
-displays a dialog containing a message and up to three replies as buttons. The variable "the result" will contain the name of the button the user clicked (and "it" will, as well - for historical reasons).
+\f0\fs28 \
+Specifies a transition effect to be used by the next "go" command.\
+\
 
-	ask &lt;question&gt; [with &lt;defaultAnswer&gt;]
+\f1\fs20 	answer &lt;message&gt; [with &lt;buttonName&gt; [or &lt;buttonName&gt;] [or &lt;buttonName&gt;]]\
 
-Display a dialog containing the given message and an edit field for entering an answer, plus OK and Cancel buttons. The variable "the result" will contain the button the user clicked (either "OK" or "Cancel") and the variable "it" will contain the answer that was in the text field when the user clicked the button.
+\f0\fs28 \
+displays a dialog containing a message and up to three replies as buttons. The variable "the result" will contain the name of the button the user clicked (and "it" will, as well - for historical reasons).\
+\
 
-3) EXPRESSIONS:
+\f1\fs20 	ask &lt;question&gt; [with &lt;defaultAnswer&gt;]\
 
-An expression consists of either a single term, or two or more terms ("operands") chained together using operators.
+\f0\fs28 \
+Display a dialog containing the given message and an edit field for entering an answer, plus OK and Cancel buttons. The variable "the result" will contain the button the user clicked (either "OK" or "Cancel") and the variable "it" will contain the answer that was in the text field when the user clicked the button.\
+\
 
-Supported operators at this time are:
+\b 3. Expressions
+\b0 \
+\
+An expression consists of either a single term, or two or more terms ("operands") chained together using operators.\
+\
+Supported operators at this time are:\
+\
+	+  - Add the two operands.\
+	-  - Subtract the second operand from the first one.\
+	*  - Multiply the two operands.\
+	/  - Divide the first operand by the second one.\
+	=  - compare the two operands. This tries to do int/int, float/float or bool/bool comparisons before it falls back on case-insensitive string comparison.\
+	&lt;&gt; - compare the two operands, returning FALSE if they are equal and TRUE if they are not equal.\
+	is - alternate spelling for =.\
+	is not - alternate spelling for &lt;&gt;\
+	&lt;  - compare the two operands and return TRUE if the first one is less than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt; Ab.\
+	&gt;  - compare the two operands and return TRUE if the first one is more than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt; Aa.\
+	&lt;= - compare the two operands and return TRUE if the first one is less than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt;= Ab, Aa &lt;= Aa.\
+	&gt;= - compare the two operands and return TRUE if the first one is more than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt;= Aa, Aa &gt;= Aa.\
+	mod[ulo] - Return the remainder that occurs when dividing the first operand by the second.\
+	^  - Raise the first exponent to the power of the second. i.e. 2 ^ 3 = 8\
+	\
+	&amp; - Convert the operands to strings and append the second one to the first one.\
+	&amp;&amp; - Like &amp;, but inserts a space between the two strings.\
+\
 
-	+  - Add the two operands.
-	-  - Subtract the second operand from the first one.
-	*  - Multiply the two operands.
-	/  - Divide the first operand by the second one.
-	=  - compare the two operands. This tries to do int/int, float/float or bool/bool comparisons before it falls back on case-insensitive string comparison.
-	&lt;&gt; - compare the two operands, returning FALSE if they are equal and TRUE if they are not equal.
-	is - alternate spelling for =.
-	is not - alternate spelling for &lt;&gt;
-	&lt;  - compare the two operands and return TRUE if the first one is less than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt; Ab.
-	&gt;  - compare the two operands and return TRUE if the first one is more than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt; Aa.
-	&lt;= - compare the two operands and return TRUE if the first one is less than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt;= Ab, Aa &lt;= Aa.
-	&gt;= - compare the two operands and return TRUE if the first one is more than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt;= Aa, Aa &gt;= Aa.
-	mod[ulo] - Return the remainder that occurs when dividing the first operand by the second.
-	^  - Raise the first exponent to the power of the second. i.e. 2 ^ 3 = 8
+\b 4. Terms
+\b0 \
+\
+A term can be either a quoted string literal, an unquoted string literal, a variable name, an integer, or a function call.\
+\
 	
-	&amp; - Convert the operands to strings and append the second one to the first one.
-	&amp;&amp; - Like &amp;, but inserts a space between the two strings.
-
-4) TERMS:
-
-A term can be either a quoted string literal, an unquoted string literal, a variable name, an integer, or a function call.
-
-	"This is a String"
-
-This is a string. It may contain spaces and other odd characters, but it may not contain any quote characters.
-
-	foobar
-
-This is an unquoted string literal. An unquoted string literal must adhere to the same rules as any valid identifier (i.e. handler name or so). In particular, it may not contain spaces or other punctuation. Note that if an unquoted string literal's name collides with a variable name, it will be reinterpreted as a variable name as soon as something has been put into the variable of that name (i.e. as soon as the variable has been created). In fact, all unquoted string literals are simply variables that are initialised with their name as their value.
-
-	myVariable
-
-A variable name must also be a valid identifier. If you use a variable name before something has been put into it, it is treated as an unquoted string literal.
-
-	the result
+\f1\fs20 "This is a String"
+\f0\fs28 \
+\
+This is a string. It may contain spaces and other odd characters, but it may not contain any quote characters.\
+\
 	
-The Result is a special variable that holds the return value from the last handler that's been called in the current function.
-
-	123
-
-This is an integer. An integer may only consist of the digits 1 through 9 and 0.
-
-	123.456
-
-This is a fractional number. A fractional number may consist of the digits 1 through 9, 0, and of a single decimal point.
-
-	myFunction( [&lt;param1&gt;[, &lt;param2&gt;[, ...]]] )
-
-A function call works the same as a handler call. It may take parameters. The return value of the function will be used as the value of this term when it is used in an expression.
-
-	byte[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
-	char[acter][s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
-	line[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
-	item[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
-	word[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;
-
-Extracts a chunk (aka substring) from the specified term. Items are comma-delimited, lines are return-delimited. Words are delimited by one or more characters of whitespace.
-You can also change the value of a chunk.
-
-	number of bytes of &lt;expression&gt;
-	number of char[acter]s of &lt;expression&gt;
-	number of lines of &lt;expression&gt;
-	number of items of &lt;expression&gt;
-	number of words of &lt;expression&gt;
-
-Counts the number of entities of the specified chunk type that can be extracted from the specified expression. 
-
-	constant
+\f1\fs20 foobar
+\f0\fs28 \
+\
+This is an unquoted string literal. An unquoted string literal must adhere to the same rules as any valid identifier (i.e. handler name or so). In particular, it may not contain spaces or other punctuation. Note that if an unquoted string literal's name collides with a variable name, it will be reinterpreted as a variable name as soon as something has been put into the variable of that name (i.e. as soon as the variable has been created). In fact, all unquoted string literals are simply variables that are initialised with their name as their value.\
+\
 	
-There are several constants whose name consists of one or more identifiers:
-
-	true
-	false
-	return		-- the return character, numToChar(13), also available under the
-					shorter "cr" name.
-	lineFeed	-- the Unix newline character, numToChar(10), also available
-					under the name "newline".
-	empty		-- an empty string. Equivalent to "".
-	quote		-- the quote character (")
-	comma		-- the comma character (,)
-	colon		-- the colon character (:)
-	space		-- the space character (" "), numToChar(32)
-	tab			-- the tabulator character, numToChar(9)
-	pi			-- the number "pi". Roughly 3.14
+\f1\fs20 myVariable
+\f0\fs28 \
+\
+A variable name must also be a valid identifier. If you use a variable name before something has been put into it, it is treated as an unquoted string literal.\
+\
 	
-	iris open			-- transition effect you can pass to the 'visual effect' command.
-	iris close			-- transition effect you can pass to the 'visual effect' command.
-	barn door open		-- transition effect you can pass to the 'visual effect' command.
-	barn door close		-- transition effect you can pass to the 'visual effect' command.
-	checkerboard
-	dissolve			-- transition effect you can pass to the 'visual effect' command.
-	venetian blinds
-	stretch from top
-	stretch from center
-	stretch from bottom
-	shrink to top
-	shrink to center
-	shrink to bottom
-	wipe left			-- transition effect you can pass to the 'visual effect' command.
-	wipe right			-- transition effect you can pass to the 'visual effect' command.
-	wipe up				-- transition effect you can pass to the 'visual effect' command.
-	wipe down			-- transition effect you can pass to the 'visual effect' command.
-	push left			-- transition effect you can pass to the 'visual effect' command.
-	push right			-- transition effect you can pass to the 'visual effect' command.
-	push up				-- transition effect you can pass to the 'visual effect' command.
-	push down			-- transition effect you can pass to the 'visual effect' command.
-	zoom open
-	zoom close
-	zoom in
-	zoom out
-	scroll left			-- transition effect you can pass to the 'visual effect' command.
-	scroll right		-- transition effect you can pass to the 'visual effect' command.
-	scroll up			-- transition effect you can pass to the 'visual effect' command.
-	scroll down			-- transition effect you can pass to the 'visual effect' command.
-
-A term may also consist of an object descriptor:
-
-	stack &lt;stackNameOrPath&gt;
+\f1\fs20 the result
+\f0\fs28 \
+	\
+The Result is a special variable that holds the return value from the last handler that's been called in the current function.\
+\
 	
-A stack, referenced by name or slash-delimited POSIX-style search path. If you only specify the file name, and a stack of that name is not already open, Stacksmith currently makes a best-effort attempt at finding the file, searching for stacks next to the Stacksmith application or in its own "Resources" folder.
-
-	background &lt;backgroundNameOrNumber&gt;
-
-A background, referenced by name, or number. The number being its position in the list of backgrounds. The first background has the number 1 (not zero).
-
-	card &lt;cardNameOrNumber&gt;
-
-A card, referenced by name, or number. The number being its position in the list of all cards. The first background has the number 1 (not zero).
-
-	card button &lt;buttonNameOrNumber&gt;
-	background button &lt;buttonNameOrNumber&gt;
-
-A button on the current card or on its background, referenced by name, or number. The number being its position in the list of all buttons on the card/background. The first and backmost button has the number 1 (not zero).
-
-	card field &lt;fieldNameOrNumber&gt;
-	background field &lt;fieldNameOrNumber&gt;
-
-A text field on the current card or on its background, referenced by name, or number. The number being its position in the list of all fields on the card/background. The first and backmost field has the number 1 (not zero).
-
-	card part &lt;partNameOrNumber&gt;
-	background part &lt;partNameOrNumber&gt;
-
-A button or text field on the current card or on its background, referenced by name, or number. The number being its position in the combined list of all buttons and fields on the card/background. The first and backmost part has the number 1 (not zero).
-
-	this stack
-
-The stack whose window is currently frontmost. This is the "current" stack.
-
-	this card
-
-The card currently being shown in the frontmost stack's window.
-
-	this background
+\f1\fs20 123
+\f0\fs28 \
+\
+This is an integer. An integer may only consist of the digits 1 through 9 and 0.\
+\
 	
-The background that the card specified by "this card" belongs to.
-
-	first card
-	last card
-
-The respective cards in the current stack (i.e. "this stack").
-
-	next card
-	previous card
-
-The card following/preceding "this card". The previous card of the first card is the last card, and the next card of the last card is the first card, making the list of cards a closed ring as far as "next card" and "current card" are concerned.
-
-	me
-
-Ths object that the script belongs to in which this object descriptor occurs.
-
-A term may also be a property expression:
-
-	[the] [long|short|abbr[ev[iated]]] &lt;propertyName&gt; [of &lt;objectDescriptor&gt;]
-
-Depending on the object descriptor, there may be different properties. If there is no object descriptor, it is assumed to be a property of Stacksmith itself, which is global to the entire application. If you provide a variable instead of an object descriptor, the variable will be treated as an associative array, and the property name will be used as the key into the array.
-
-5) CONTAINERS
-
-A container is an object descriptor for a part (button or field), or a variable, or a property expression. Containers can be changed using the "put" or "set" commands.
-
-6) PROPERTIES
-
-6.1) STACK PROPERTIES
-
-	[short] name		-	The name of the stack, without the ".xstk" file type suffix.
-
-6.2) BACKGROUND PROPERTIES
-
-	[short] name		-	The name of the background, as displayed in "Background Info".
-
-6.3) CARD PROPERTIES
-
-	[short] name		-	The name of the card, as displayed in "Card Info".
-
-6.4) FIELD PROPERTIES
-
-	[short] name		-	The name of the field, as displayed in "Field Info".
-	rectangle			-	The coordinates indicating the size and position of the field, as an associative array containing entries for the keys "top", "left", "bottom" and "right" as numbers, relative to a coordinate system that has the origin in its upper left.
-
-6.5) BUTTON PROPERTIES
-
-	[short] name		-	The name of the button, as displayed on the button when the showName property is true.
-	rectangle			-	The coordinates indicating the size and position of the button, as an associative array containing entries for the keys "top", "left", "bottom" and "right" as numbers, relative to a coordinate system that has the origin in its upper left.
-
-6.6) STACKSMITH PROPERTIES
-
-	itemDel[im[iter]]	-	The character to use as the separator for items. This is "," by default, and is reset to "," at idle time.
-
-7) SYSTEM MESSAGES:
-
-	mouseDown			-	The mouse has been pressed on an object.
-	mouseStillDown		-	Sent periodically after a mouseDown if the mouse is being held for a longer duration.
-	mouseUp				-	The mouse has been released again after being pressed on an object, and it was released inside the object.
-	mouseRelease		-	The mouse has been released again after being pressed on an object, and it was released outside the object (name subject to change)
+\f1\fs20 123.456
+\f0\fs28 \
+\
+This is a fractional number. A fractional number may consist of the digits 1 through 9, 0, and of a single decimal point.\
+\
 	
-</text>
+\f1\fs20 myFunction( [&lt;param1&gt;[, &lt;param2&gt;[, ...]]] )
+\f0\fs28 \
+\
+A function call works the same as a handler call. It may take parameters. The return value of the function will be used as the value of this term when it is used in an expression.\
+\
+
+\f1\fs20 	byte[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;\
+	char[acter][s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;\
+	line[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;\
+	item[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;\
+	word[s] &lt;startOffsetExpr&gt; [to &lt;endOffsetExpr&gt;] of &lt;term&gt;\
+
+\f0\fs28 \
+Extracts a chunk (aka substring) from the specified term. Items are comma-delimited, lines are return-delimited. Words are delimited by one or more characters of whitespace.\
+You can also change the value of a chunk.\
+\
+
+\f1\fs20 	number of bytes of &lt;expression&gt;\
+	number of char[acter]s of &lt;expression&gt;\
+	number of lines of &lt;expression&gt;\
+	number of items of &lt;expression&gt;\
+	number of words of &lt;expression&gt;\
+
+\f0\fs28 \
+Counts the number of entities of the specified chunk type that can be extracted from the specified expression. \
+\
+	
+\f1\fs20 constant
+\f0\fs28 \
+	\
+There are several constants whose name consists of one or more identifiers:\
+\
+	
+\f1\fs20 true
+\f0\fs28 \
+	
+\f1\fs20 false
+\f0\fs28 \
+	
+\f1\fs20 return
+\f0\fs28 		-- the return character, 
+\f1\fs20 numToChar(13)
+\f0\fs28 , also available under the\
+					shorter "
+\f1\fs20 cr
+\f0\fs28 " name.\
+	
+\f1\fs20 lineFeed
+\f0\fs28 	-- the Unix newline character, 
+\f1\fs20 numToChar(10)
+\f0\fs28 , also available\
+					under the name "
+\f1\fs20 newline
+\f0\fs28 ".\
+	
+\f1\fs20 empty
+\f0\fs28 		-- an empty string. Equivalent to 
+\f1\fs20 ""
+\f0\fs28 .\
+	
+\f1\fs20 quote
+\f0\fs28 		-- the quote character (
+\f1\fs20 "
+\f0\fs28 )\
+	
+\f1\fs20 comma
+\f0\fs28 		-- the comma character (
+\f1\fs20 ,
+\f0\fs28 )\
+	
+\f1\fs20 colon
+\f0\fs28 		-- the colon character (
+\f1\fs20 :
+\f0\fs28 )\
+	
+\f1\fs20 space
+\f0\fs28 		-- the space character ("
+\f1\fs20  
+\f0\fs28 "), 
+\f1\fs20 numToChar(32)
+\f0\fs28 \
+	
+\f1\fs20 tab
+\f0\fs28 			-- the tabulator character, 
+\f1\fs20 numToChar(9)
+\f0\fs28 \
+	
+\f1\fs20 pi
+\f0\fs28 			-- the number "pi". Roughly 
+\f1\fs20 3.14
+\f0\fs28 \
+	\
+	
+\f1\fs20 iris open
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 iris close
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 barn door open
+\f0\fs28 		-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 barn door close
+\f0\fs28 		-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 checkerboard
+\f0\fs28 \
+	
+\f1\fs20 dissolve
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 venetian blinds
+\f0\fs28 \
+	
+\f1\fs20 stretch from top
+\f0\fs28 \
+	
+\f1\fs20 stretch from center
+\f0\fs28 \
+	
+\f1\fs20 stretch from bottom
+\f0\fs28 \
+	
+\f1\fs20 shrink to top
+\f0\fs28 \
+	
+\f1\fs20 shrink to center
+\f0\fs28 \
+	
+\f1\fs20 shrink to bottom
+\f0\fs28 \
+	
+\f1\fs20 wipe left
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 wipe right
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 wipe up
+\f0\fs28 				-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 wipe down
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 push left
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 push right
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 push up
+\f0\fs28 				-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 push down
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 zoom open
+\f0\fs28 \
+	
+\f1\fs20 zoom close
+\f0\fs28 \
+	
+\f1\fs20 zoom in
+\f0\fs28 \
+	
+\f1\fs20 zoom out
+\f0\fs28 \
+	
+\f1\fs20 scroll left
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 scroll right
+\f0\fs28 		-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 scroll up
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+	
+\f1\fs20 scroll down
+\f0\fs28 			-- transition effect you can pass to the 'visual effect' command.\
+\
+A term may also consist of an object descriptor:\
+\
+
+\f1\fs20 	stack &lt;stackNameOrPath&gt;\
+
+\f0\fs28 	\
+A stack, referenced by name or slash-delimited POSIX-style search path. If you only specify the file name, and a stack of that name is not already open, Stacksmith currently makes a best-effort attempt at finding the file, searching for stacks next to the Stacksmith application or in its own "Resources" folder.\
+\
+
+\f1\fs20 	background &lt;backgroundNameOrNumber&gt;\
+
+\f0\fs28 \
+A background, referenced by name, or number. The number being its position in the list of backgrounds. The first background has the number 1 (not zero).\
+\
+
+\f1\fs20 	card &lt;cardNameOrNumber&gt;\
+
+\f0\fs28 \
+A card, referenced by name, or number. The number being its position in the list of all cards. The first background has the number 1 (not zero).\
+\
+
+\f1\fs20 	card button &lt;buttonNameOrNumber&gt;\
+	background button &lt;buttonNameOrNumber&gt;\
+
+\f0\fs28 \
+A button on the current card or on its background, referenced by name, or number. The number being its position in the list of all buttons on the card/background. The first and backmost button has the number 1 (not zero).\
+\
+
+\f1\fs20 	card field &lt;fieldNameOrNumber&gt;\
+	background field &lt;fieldNameOrNumber&gt;\
+
+\f0\fs28 \
+A text field on the current card or on its background, referenced by name, or number. The number being its position in the list of all fields on the card/background. The first and backmost field has the number 1 (not zero).\
+\
+
+\f1\fs20 	card part &lt;partNameOrNumber&gt;\
+	background part &lt;partNameOrNumber&gt;\
+
+\f0\fs28 \
+A button or text field on the current card or on its background, referenced by name, or number. The number being its position in the combined list of all buttons and fields on the card/background. The first and backmost part has the number 1 (not zero).\
+\
+
+\f1\fs20 	this stack\
+
+\f0\fs28 \
+The stack whose window is currently frontmost. This is the "current" stack.\
+\
+
+\f1\fs20 	this card\
+
+\f0\fs28 \
+The card currently being shown in the frontmost stack's window.\
+\
+
+\f1\fs20 	this background\
+
+\f0\fs28 	\
+The background that the card specified by "
+\f1\fs20 this card
+\f0\fs28 " belongs to.\
+\
+
+\f1\fs20 	first card\
+	last card\
+
+\f0\fs28 \
+The respective cards in the current stack (i.e. "
+\f1\fs20 this stack
+\f0\fs28 ").\
+\
+
+\f1\fs20 	next card\
+	previous card\
+
+\f0\fs28 \
+The card following/preceding "
+\f1\fs20 this card
+\f0\fs28 ". The previous card of the first card is the last card, and the next card of the last card is the first card, making the list of cards a closed ring as far as "
+\f1\fs20 next card
+\f0\fs28 " and "
+\f1\fs20 current card
+\f0\fs28 " are concerned.\
+\
+
+\f1\fs20 	me\
+
+\f0\fs28 \
+Ths object that the script belongs to in which this object descriptor occurs.\
+\
+A term may also be a property expression:\
+\
+
+\f1\fs20 	[the] [long|short|abbr[ev[iated]]] &lt;propertyName&gt; [of &lt;objectDescriptor&gt;]\
+
+\f0\fs28 \
+Depending on the object descriptor, there may be different properties. If there is no object descriptor, it is assumed to be a property of Stacksmith itself, which is global to the entire application. If you provide a variable instead of an object descriptor, the variable will be treated as an associative array, and the property name will be used as the key into the array.\
+\
+
+\b 5. Containers
+\b0 \
+\
+A container is an object descriptor for a part (button or field), or a variable, or a property expression. Containers can be changed using the "
+\f1\fs20 put
+\f0\fs28 " or "
+\f1\fs20 set
+\f0\fs28 " commands.\
+\
+
+\b 6. Properties
+\b0 \
+\
+
+\b 6.1. Stack Properties
+\b0 \
+\
+	
+\f1\fs20 [short] name
+\f0\fs28 		-	The name of the stack, without the ".xstk" file type suffix.\
+\
+
+\b 6.2. Background Properties
+\b0 \
+\
+	
+\f1\fs20 [short] name	
+\f0\fs28 	-	The name of the background, as displayed in "Background Info".\
+\
+
+\b 6.3. Card Properties
+\b0 \
+\
+	
+\f1\fs20 [short] name
+\f0\fs28 		-	The name of the card, as displayed in "Card Info".\
+\
+
+\b 6.4. FIeld Properties
+\b0 \
+\
+	
+\f1\fs20 [short] name
+\f0\fs28 		-	The name of the field, as displayed in "Field Info".\
+	
+\f1\fs20 rectangle
+\f0\fs28 			-	The coordinates indicating the size and position of the field, as an associative array containing entries for the keys "
+\f1\fs20 top
+\f0\fs28 ", "
+\f1\fs20 left
+\f0\fs28 ", "
+\f1\fs20 bottom
+\f0\fs28 " and "
+\f1\fs20 right
+\f0\fs28 " as numbers, relative to a coordinate system that has the origin in its upper left.\
+\
+
+\b 6.5. Button Properties
+\b0 \
+\
+	
+\f1\fs20 [short] name
+\f0\fs28 		-	The name of the button, as displayed on the button when the showName property is true.\
+	
+\f1\fs20 rectangle
+\f0\fs28 			-	The coordinates indicating the size and position of the button, as an associative array containing entries for the keys "
+\f1\fs20 top
+\f0\fs28 ", "
+\f1\fs20 left
+\f0\fs28 ", "
+\f1\fs20 bottom
+\f0\fs28 " and "
+\f1\fs20 right
+\f0\fs28 " as numbers, relative to a coordinate system that has the origin in its upper left.\
+\
+
+\b 6.6. Stacksmith Properties
+\b0 \
+\
+	
+\f1\fs20 itemDel[im[iter]]
+\f0\fs28 	-	The character to use as the separator for items. This is "
+\f1\fs20 ,
+\f0\fs28 " by default, and is reset to "
+\f1\fs20 ,
+\f0\fs28 " at idle time.\
+\
+
+\b 7. System Messages
+\b0 \
+\
+	
+\f1\fs20 mouseDown
+\f0\fs28 			-	The mouse has been pressed on an object.\
+	
+\f1\fs20 mouseStillDown
+\f0\fs28 		-	Sent periodically after a mouseDown if the mouse is being held for a longer duration.\
+	
+\f1\fs20 mouseUp
+\f0\fs28 				-	The mouse has been released again after being pressed on an object, and it was released inside the object.\
+	
+\f1\fs20 mouseRelease
+\f0\fs28 		-	The mouse has been released again after being pressed on an object, and it was released outside the object (name subject to change)\
+	\
+}</text>
 		<highlight><false /></highlight>
 	</content>
 	<owner>3000</owner>
