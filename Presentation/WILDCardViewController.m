@@ -389,6 +389,15 @@
 -(void)	loadCard: (WILDCard*)theCard
 {
 	WILDCard			*	prevCard = mCurrentCard;
+	
+	if( prevCard != theCard )
+	{
+		if( prevCard != nil )
+			WILDScriptContainerResultFromSendingMessage( prevCard, @"closeCard" );
+		if( theCard == nil )
+			WILDScriptContainerResultFromSendingMessage( prevCard, @"closeStack" );
+	}
+	
 	NSMutableDictionary	*	uiDict = nil;
 	if( theCard != prevCard )
 	{
@@ -527,6 +536,13 @@
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDCurrentCardDidChangeNotification
 							object: self userInfo: uiDict];
+	}
+
+	if( prevCard != theCard && theCard != nil )
+	{
+		if( prevCard == nil )
+			WILDScriptContainerResultFromSendingMessage( theCard, @"openStack" );
+		WILDScriptContainerResultFromSendingMessage( theCard, @"openCard" );
 	}
 }
 

@@ -349,6 +349,12 @@
 }
 
 
+-(struct LEOContextGroup*)	scriptContextGroupObject
+{
+	return [[self document] contextGroup];
+}
+
+
 -(NSString*)	displayName
 {
 	return [NSString stringWithFormat: @"Stack “%@”", [self name]];

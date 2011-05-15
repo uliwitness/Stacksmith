@@ -8,6 +8,7 @@
 
 #import "WILDButtonView.h"
 #import "WILDPartView.h"
+#import "WILDScriptContainer.h"
 
 
 @implementation WILDButtonView
@@ -35,7 +36,7 @@
 	if( autoHighlight && isInside )
 		[[self cell] setHighlighted: YES];
 	
-	[[pv part] resultFromSendingMessageWithFormat: @"mouseDown"];
+	WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseDown" );
 	
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	
@@ -55,7 +56,7 @@
 				case NSLeftMouseDragged:
 				case NSRightMouseDragged:
 				case NSOtherMouseDragged:
-					[[pv part] resultFromSendingMessageWithFormat: @"mouseStillDown"];
+					WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseStillDown" );
 					newIsInside = [[self cell] hitTestForEvent: evt inRect: [self bounds] ofView: self] != NSCellHitNone;
 					if( isInside != newIsInside )
 					{
@@ -76,11 +77,11 @@
 	{
 		if( autoHighlight )
 			[[self cell] setHighlighted: NO];
-		[[pv part] resultFromSendingMessageWithFormat: @"mouseUp"];
+		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUp" );
 		[[self target] performSelector: [self action]];
 	}
 	else
-		[[pv part] resultFromSendingMessageWithFormat: @"mouseRelease"];
+		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUpOutside" );
 	
 	[pool release];
 }

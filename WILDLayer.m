@@ -577,6 +577,12 @@
 }
 
 
+-(struct LEOContextGroup*)	scriptContextGroupObject
+{
+	return [[mStack document] contextGroup];
+}
+
+
 -(NSString*)	displayName
 {
 	if( mName && [mName length] > 0 )

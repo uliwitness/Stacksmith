@@ -7,6 +7,10 @@
 //
 
 #import "WILDScriptContainer.h"
+#import "LEOScript.h"
+#import "LEOInterpreter.h"
+#import "LEOContextGroup.h"
+#import "LEORemoteDebugger.h"
 
 
 @implementation WILDSymbol
@@ -214,3 +218,156 @@ NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 	
 	return outString;
 }
+
+
+NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> container, NSString* fmt, ... )
+{
+	LEOScript*	theScript = [container scriptObjectShowingErrorMessage: YES];
+	NSString*	resultString = nil;
+	LEOContext	ctx;
+	NSArray*	parts = [fmt componentsSeparatedByString: @" "];
+	NSString*	msg = [parts objectAtIndex: 0];
+	size_t		bytesNeeded = 0;
+	
+	if( !theScript )
+		return nil;
+	
+	LEOInitContext( &ctx, [container scriptContextGroupObject] );
+	#if REMOTE_DEBUGGER
+	ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
+	#endif
+	
+	LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
+		
+	if( [parts count] > 1 )
+	{
+		// Calculate how much space we need for params temporarily:
+		NSArray	*	paramFormats = [[parts objectAtIndex: 1] componentsSeparatedByString: @","];
+		for( NSString* currPart in paramFormats )
+		{
+			currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+			if( [currPart isEqualToString: @"%@"] )
+				bytesNeeded += sizeof(NSString*);
+			else if( [currPart isEqualToString: @"%s"] )
+				bytesNeeded += sizeof(const char*);
+			else if( [currPart isEqualToString: @"%ld"] )
+				bytesNeeded += sizeof(long);
+			else if( [currPart isEqualToString: @"%d"] )
+				bytesNeeded += sizeof(int);
+			else if( [currPart isEqualToString: @"%f"] )
+				bytesNeeded += sizeof(double);
+			else if( [currPart isEqualToString: @"%B"] )
+				bytesNeeded += sizeof(BOOL);
+		}
+		
+		// Grab the params in correct order into our temp buffer:
+		char	*	theBytes = calloc( bytesNeeded, 1 );
+		char	*	currPos = theBytes;
+		va_list		ap;
+		va_start( ap, fmt );
+			for( NSString* currPart in paramFormats )
+			{
+				currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+				if( [currPart isEqualToString: @"%@"] )
+				{
+					* (NSString**)currPos = va_arg( ap, NSString* );
+					currPos += sizeof(NSString*);
+				}
+				else if( [currPart isEqualToString: @"%s"] )
+				{
+					* (const char**)currPos = va_arg( ap, const char* );
+					currPos += sizeof(NSString*);
+				}
+				else if( [currPart isEqualToString: @"%ld"] )
+				{
+					* (long*)currPos = va_arg( ap, long );
+					currPos += sizeof(long);
+				}
+				else if( [currPart isEqualToString: @"%d"] )
+				{
+					* (int*)currPos = va_arg( ap, int );
+					currPos += sizeof(int);
+				}
+				else if( [currPart isEqualToString: @"%f"] )
+				{
+					* (double*)currPos = va_arg( ap, double );
+					currPos += sizeof(double);
+				}
+				else if( [currPart isEqualToString: @"%B"] )
+				{
+					* (BOOL*)currPos = va_arg( ap, BOOL );
+					currPos += sizeof(BOOL);
+				}
+			}
+		va_end(ap);
+
+		// Push the params in reverse order:
+		currPos = theBytes +bytesNeeded;
+		for( NSString* currPart in [paramFormats reverseObjectEnumerator] )
+		{
+			currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+			if( [currPart isEqualToString: @"%@"] )
+			{
+				currPos -= sizeof(NSString*);
+				const char*		str = [(NSString*)*currPos UTF8String];
+				LEOPushStringValueOnStack( &ctx, str, strlen(str) );
+			}
+			else if( [currPart isEqualToString: @"%s"] )
+			{
+				currPos -= sizeof(const char*);
+				LEOPushStringValueOnStack( &ctx, *currPos, strlen(*currPos) );
+			}
+			else if( [currPart isEqualToString: @"%ld"] )
+			{
+				currPos -= sizeof(long);
+				LEOPushIntegerOnStack( &ctx, *(long*)currPos );
+			}
+			else if( [currPart isEqualToString: @"%d"] )
+			{
+				currPos -= sizeof(int);
+				LEOPushIntegerOnStack( &ctx, *(int*)currPos );
+			}
+			else if( [currPart isEqualToString: @"%f"] )
+			{
+				currPos -= sizeof(double);
+				LEOPushNumberOnStack( &ctx, *(double*)currPos );
+			}
+			else if( [currPart isEqualToString: @"%B"] )
+			{
+				currPos -= sizeof(BOOL);
+				LEOPushBooleanOnStack( &ctx, (*(BOOL*)currPos) == YES );
+			}
+			
+			LEOPushIntegerOnStack( &ctx, [paramFormats count] );
+		}
+	}
+	else
+		LEOPushIntegerOnStack( &ctx, 0 );
+	
+	// Send message:
+	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [container scriptContextGroupObject], [msg UTF8String] );
+	LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
+	if( theHandler )
+	{
+		LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
+		LEORunInContext( theHandler->instructions, &ctx );
+		if( ctx.errMsg[0] != 0 )
+			NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: ctx.errMsg encoding: NSUTF8StringEncoding] );
+	}
+	else
+	{
+		// TODO: Pass handler call to mLayer.
+	}
+	
+	if( ctx.stackEndPtr != ctx.stack )
+	{
+		char	returnValue[1024] = { 0 };
+		LEOGetValueAsString( ctx.stack, returnValue, sizeof(returnValue), &ctx );
+		resultString = [[[NSString alloc] initWithBytes: returnValue length: strlen(returnValue) encoding: NSUTF8StringEncoding] autorelease];
+	}
+	
+	LEOCleanUpContext( &ctx );
+	
+	return resultString;
+}
+

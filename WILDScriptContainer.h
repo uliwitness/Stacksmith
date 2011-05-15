@@ -21,7 +21,8 @@ struct LEOScript;
 -(NSString*)			displayName;	// Name of this item to display in window titles etc.
 -(NSImage*)				displayIcon;	// Small icon to display for this item in popups etc.
 
--(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError;
+-(struct LEOScript*)		scriptObjectShowingErrorMessage: (BOOL)showError;
+-(struct LEOContextGroup*)	scriptContextGroupObject;
 
 @optional
 -(NSString*)			defaultScriptReturningSelectionRange: (NSRange*)outSelection;
@@ -54,3 +55,4 @@ typedef NSInteger	WILDSymbolType;
 
 
 NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols );
+NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> container, NSString* fmt, ... );

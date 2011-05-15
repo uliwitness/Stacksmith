@@ -99,6 +99,14 @@
 }
 
 
+-(void)	close
+{
+	[mCardViewController loadCard: nil];
+	
+	[super close];
+}
+
+
 -(void)	setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype
 {
 	[mCardViewController setTransitionType: inType subtype: inSubtype];
