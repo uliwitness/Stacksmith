@@ -287,7 +287,7 @@
 		{
 			CIFilter	*	theFilter = [CIFilter filterWithName: mTransitionType];
 			[theFilter setDefaults];
-			NSDictionary*	sTransitionSubtypes = nil;
+			static NSDictionary*	sTransitionSubtypes = nil;
 			if( !sTransitionSubtypes )
 			{
 				sTransitionSubtypes = [[NSDictionary alloc] initWithObjectsAndKeys:
