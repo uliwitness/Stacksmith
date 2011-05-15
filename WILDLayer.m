@@ -410,7 +410,7 @@
 -(void)	addNewPartFromXMLTemplate: (NSURL*)xmlFile
 {
 	NSError			*	outError = nil;
-	NSXMLDocument	*	templateDocument = [[NSXMLDocument alloc] initWithContentsOfURL: xmlFile options: 0 error: &outError];
+	NSXMLDocument	*	templateDocument = [[[NSXMLDocument alloc] initWithContentsOfURL: xmlFile options: 0 error: &outError] autorelease];
 	if( !templateDocument && outError )
 	{
 		UKLog(@"Couldn't load XML template for part: %@",outError);
