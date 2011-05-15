@@ -95,12 +95,12 @@
 		mHighlighted = WILDBoolFromSubElementInElement( @"highlight", theElem, NO );
 		
 		// Oddly, this code crashes on first mouse movement after open:
-//		if( [mText hasPrefix: @"{\\rtf1"] )
-//		{
-//			NSData	*	rtfData = [mText dataUsingEncoding: NSUTF8StringEncoding];
-//			mStyledText = [[NSMutableAttributedString alloc] initWithRTF: rtfData documentAttributes: [NSDictionary dictionary]];
-//			ASSIGN(mText,[mStyledText string]);
-//		}
+		if( [mText hasPrefix: @"{\\rtf1"] )
+		{
+			NSData	*	rtfData = [mText dataUsingEncoding: NSUTF8StringEncoding];
+			mStyledText = [[NSMutableAttributedString alloc] initWithRTF: rtfData documentAttributes: nil];
+			ASSIGN(mText,[mStyledText string]);
+		}
 		
 		// Style runs contain their start offsets, so we apply them from the end,
 		//	to be able to start with the length as the end offset, and then just
