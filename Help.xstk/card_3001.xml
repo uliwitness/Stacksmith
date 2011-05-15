@@ -617,13 +617,25 @@ A container is an object descriptor for a part (button or field), or a variable,
 \f0\fs28 			-	The mouse has been pressed on an object.\
 	
 \f1\fs20 mouseStillDown
-\f0\fs28 		-	Sent periodically after a mouseDown if the mouse is being held for a longer duration.\
+\f0\fs28 	-	Sent periodically after a mouseDown if the mouse is being held for a longer duration.\
 	
 \f1\fs20 mouseUp
-\f0\fs28 				-	The mouse has been released again after being pressed on an object, and it was released inside the object.\
+\f0\fs28 			-	The mouse has been released again after being pressed on an object, and it was released inside the object.\
 	
-\f1\fs20 mouseRelease
-\f0\fs28 		-	The mouse has been released again after being pressed on an object, and it was released outside the object (name subject to change)\
+\f1\fs20 mouseUpOutside
+\f0\fs28 	-	The mouse has been released again after being pressed on an object, and it was released outside the object\
+	
+\f1\fs20 openStack
+\f0\fs28 			-	Sent to the first card of a stack when it is opened.\
+	
+\f1\fs20 closeStack
+\f0\fs28 		-	Sent to the current card when a stack's window is closed.\
+	
+\f1\fs20 openCard
+\f0\fs28 			-	Sent to a card right after it has been made the current card.\
+	
+\f1\fs20 closeCard
+\f0\fs28 			-	Sent to a card right before it is being unloaded because the current card is being changed.\
 	\
 }</text>
 		<highlight><false /></highlight>
