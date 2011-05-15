@@ -99,11 +99,9 @@
 }
 
 
--(void)	close
+-(void)	windowWillClose: (NSNotification*)notif
 {
 	[mCardViewController loadCard: nil];
-	
-	[super close];
 }
 
 
