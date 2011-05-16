@@ -94,7 +94,6 @@
 		mLayer = [WILDStringFromSubElementInElement( @"layer", theElem ) retain];
 		mHighlighted = WILDBoolFromSubElementInElement( @"highlight", theElem, NO );
 		
-		// Oddly, this code crashes on first mouse movement after open:
 		if( [mText hasPrefix: @"{\\rtf1"] )
 		{
 			NSData	*	rtfData = [mText dataUsingEncoding: NSUTF8StringEncoding];
