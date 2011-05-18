@@ -351,6 +351,13 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 	{
 		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
 
+		if( theHandler )
+		{
+			LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
+			LEORunInContext( theHandler->instructions, &ctx );
+			if( ctx.errMsg[0] != 0 )
+				break;
+		}
 		if( !theHandler )
 		{
 			if( theScript->GetParentScript )
@@ -359,15 +366,9 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 				break;
 		}
 	}
-	if( theHandler )
-	{
-		LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
-		LEORunInContext( theHandler->instructions, &ctx );
-		if( ctx.errMsg[0] != 0 )
-			NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: ctx.errMsg encoding: NSUTF8StringEncoding] );
-	}
-	
-	if( ctx.stackEndPtr != ctx.stack )
+	if( ctx.errMsg[0] != 0 )
+		NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: ctx.errMsg encoding: NSUTF8StringEncoding] );
+	else if( ctx.stackEndPtr != ctx.stack )
 	{
 		char	returnValue[1024] = { 0 };
 		LEOGetValueAsString( ctx.stack, returnValue, sizeof(returnValue), &ctx );
