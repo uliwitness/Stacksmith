@@ -732,21 +732,60 @@
 	[stackInfo showWindow: self];
 }
 
-//-(IBAction)	bringObjectCloser: (id)sender
-//{
-//	
-//}
-//
-//-(IBAction)	sendObjectFarther: (id)sender
-//{
-//	
-//}
+-(void)	selectParts: (NSArray*)theParts
+{
+	NSArray	*	views = [[self view] subviews];
+	for( WILDPartView	*	currPartView in views )
+	{
+		BOOL	supportsPartMethod = [currPartView respondsToSelector: @selector(part)];
+		if( supportsPartMethod )
+		{
+			WILDPart	*	thePart = [currPartView part];
+			if( [theParts containsObject: thePart] )
+				[currPartView setSelected: YES];
+		}
+	}
+}
+
+-(IBAction)	bringObjectCloser: (id)sender
+{
+	NSSet			*	theSet = [[WILDTools sharedTools] clients];
+	NSMutableArray	*	allParts = [NSMutableArray array];
+	
+	for( WILDPartView	*	currPartView in theSet )
+	{
+		WILDPart	*	thePart = [currPartView part];
+		[[thePart partOwner] bringPartCloser: thePart];
+		[allParts addObject: thePart];
+	}
+	
+	[self loadCard: mCurrentCard];
+	[self selectParts: allParts];
+}
+
+-(IBAction)	sendObjectFarther: (id)sender
+{
+	NSSet	*	theSet = [[WILDTools sharedTools] clients];
+	NSMutableArray	*	allParts = [NSMutableArray array];
+	
+	for( WILDPartView	*	currPartView in theSet )
+	{
+		WILDPart	*	thePart = [currPartView part];
+		[[thePart partOwner] sendPartFarther: thePart];
+		[allParts addObject: thePart];
+	}
+	
+	[self loadCard: mCurrentCard];
+	[self selectParts: allParts];
+}
 
 -(IBAction)	createNewButton: (id)sender
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewButton: sender];
 	[[WILDTools sharedTools] setCurrentTool: WILDButtonTool];
+	
+	[self reloadCard];
 }
 
 

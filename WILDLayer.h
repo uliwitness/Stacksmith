@@ -78,6 +78,9 @@
 -(void)							createNewField: (id)sender;
 -(void)							addNewPartFromXMLTemplate: (NSURL*)xmlFile;
 
+-(void)							bringPartCloser: (WILDPart*)inPart;
+-(void)							sendPartFarther: (WILDPart*)inPart;
+
 -(WILDStack*)					stack;
 -(void)							updateChangeCount: (NSDocumentChangeType)inChange;
 

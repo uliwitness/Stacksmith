@@ -537,6 +537,34 @@
 }
 
 
+-(void)	bringPartCloser: (WILDPart*)inPart
+{
+	NSUInteger	theIndex = [mParts indexOfObject: inPart];
+	if( theIndex < ([mParts count] -1) )
+	{
+		[[inPart retain] autorelease];
+		[mParts removeObjectAtIndex: theIndex];
+		[mParts insertObject: inPart atIndex: theIndex +1];
+	}
+	
+	[self updateChangeCount: NSChangeDone];
+}
+
+
+-(void)	sendPartFarther: (WILDPart*)inPart
+{
+	NSUInteger	theIndex = [mParts indexOfObject: inPart];
+	if( theIndex > 0 )
+	{
+		[[inPart retain] autorelease];
+		[mParts removeObjectAtIndex: theIndex];
+		[mParts insertObject: inPart atIndex: theIndex -1];
+	}
+	
+	[self updateChangeCount: NSChangeDone];
+}
+
+
 -(NSString*)	script
 {
 	return mScript;
