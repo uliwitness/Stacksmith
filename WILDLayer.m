@@ -44,6 +44,8 @@
 		mContents = [[NSMutableDictionary alloc] init];
 		
 		mPartIDSeed = 1;
+		
+		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
 	return self;
@@ -95,6 +97,8 @@
 		[self loadAddColorObjects: elem];
 		
 		mPartIDSeed = 1;
+		
+		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
 	return self;
@@ -558,8 +562,24 @@
 		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), [[self displayName] UTF8String] );
 		if( LEOParserGetLastErrorMessage() == NULL )
 		{
-			mScriptObject = LEOScriptCreateForOwner( 0, 0 );	// TODO: Store owner reference and use here!
+			if( mIDForScripts == kLEOObjectIDINVALID )
+			{
+				LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
+				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [[mStack document] contextGroup], &mValueForScripts );
+				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[mStack document] contextGroup], mIDForScripts );
+			}
+			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
+			
+			#if REMOTE_DEBUGGER
+			LEORemoteDebuggerAddFile( [[self displayName] UTF8String], scriptStr, mScriptObject );
+			
+			// Set a breakpoint on the mouseUp handler:
+			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [[mStack document] contextGroup], "mouseup" );
+			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
+			if( theHandler )
+				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
+			#endif
 		}
 		if( LEOParserGetLastErrorMessage() )
 		{

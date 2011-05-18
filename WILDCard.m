@@ -241,6 +241,12 @@
 }
 
 
+-(id<WILDObject>)	parentObject
+{
+	return mOwner;
+}
+
+
 -(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
 	WILDDocument	*	theDoc = [[self stack] document];

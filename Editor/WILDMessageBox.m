@@ -74,7 +74,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	LEOParseTree*	parseTree = LEOParseTreeCreateForCommandOrExpressionFromUTF8Characters( scriptStr, strlen(scriptStr), [[self window] title] );
 	if( LEOParserGetLastErrorMessage() == NULL )
 	{
-		theScript = LEOScriptCreateForOwner( 0, 0 );	// TODO: Store owner reference and use here!
+		theScript = LEOScriptCreateForOwner( 0, 0, NULL );	// TODO: Store owner reference and use here!
 		LEOScriptCompileAndAddParseTree( theScript, [frontDoc contextGroup], parseTree );
 	}
 	

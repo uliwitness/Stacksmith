@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "WILDScriptContainer.h"
 #import "WILDObjectID.h"
+#import "LEOValue.h"
 
 
 @class ULIMultiMap;
@@ -38,6 +39,9 @@
 	
 	WILDObjectID				mPartIDSeed;
 	
+	LEOObjectID					mIDForScripts;			// The ID Leonie uses to refer to this object.
+	LEOObjectSeed				mSeedForScripts;		// The seed value to go with mIDForScripts.
+	struct LEOValueObject		mValueForScripts;		// A LEOValue so scripts can reference us (see mIDForScripts).
 }
 
 @property (copy) NSString*	name;

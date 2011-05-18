@@ -9,6 +9,7 @@
 #include "ForgeWILDObjectValue.h"
 #include "LEOInterpreter.h"
 #include "LEOContextGroup.h"
+#include "LEOScript.h"
 
 
 LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
@@ -424,5 +425,21 @@ size_t	LEOGetWILDObjectKeyCount( LEOValuePtr self, struct LEOContext* inContext 
 {
 	return 0;
 }
+
+
+struct LEOScript*	LEOForgeScriptGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext )
+{
+	struct LEOScript*	theScript = NULL;
+	LEOValuePtr			theObjectVal = LEOContextGroupGetPointerForObjectIDAndSeed( inContext->group, inScript->ownerObject, inScript->ownerObjectSeed );
+	id<WILDObject>	theObject = (id<WILDObject>) theObjectVal->object.object;
+	
+	if( theObject != nil )
+		theScript = [[theObject parentObject] scriptObjectShowingErrorMessage: YES];
+	
+	return theScript;
+}
+
+
+
 
 

@@ -346,17 +346,25 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 	
 	// Send message:
 	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [container scriptContextGroupObject], [msg UTF8String] );
-	LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
+	LEOHandler*		theHandler = NULL;
+	while( !theHandler )
+	{
+		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
+
+		if( !theHandler )
+		{
+			if( theScript->GetParentScript )
+				theScript = theScript->GetParentScript( theScript, &ctx );
+			if( !theScript )
+				break;
+		}
+	}
 	if( theHandler )
 	{
 		LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
 		LEORunInContext( theHandler->instructions, &ctx );
 		if( ctx.errMsg[0] != 0 )
 			NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: ctx.errMsg encoding: NSUTF8StringEncoding] );
-	}
-	else
-	{
-		// TODO: Pass handler call to mLayer.
 	}
 	
 	if( ctx.stackEndPtr != ctx.stack )

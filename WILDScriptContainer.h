@@ -10,6 +10,7 @@
 
 
 struct LEOScript;
+@protocol WILDObject;
 
 
 @protocol WILDScriptContainer
@@ -22,6 +23,7 @@ struct LEOScript;
 -(NSImage*)				displayIcon;	// Small icon to display for this item in popups etc.
 
 -(struct LEOScript*)		scriptObjectShowingErrorMessage: (BOOL)showError;
+-(id<WILDObject>)			parentObject;
 -(struct LEOContextGroup*)	scriptContextGroupObject;
 
 @optional

@@ -39,6 +39,10 @@
 	WILDObjectID			mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
 	struct LEOScript*		mScriptObject;		// Compiled script, lazily created/recreated on changes.
 	NSString	*			mName;				// Name of this stack, for finding it inside the stack file.
+	
+	LEOObjectID					mIDForScripts;			// The ID Leonie uses to refer to this object.
+	LEOObjectSeed				mSeedForScripts;		// The seed value to go with mIDForScripts.
+	struct LEOValueObject		mValueForScripts;		// A LEOValue so scripts can reference us (see mIDForScripts).
 }
 
 -(id)				initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;

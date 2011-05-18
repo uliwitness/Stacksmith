@@ -660,7 +660,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [[mStack document] contextGroup], &mValueForScripts );
 				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[mStack document] contextGroup], mIDForScripts );
 			}
-			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts );
+			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
 			
 			#if REMOTE_DEBUGGER
@@ -669,7 +669,8 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 			// Set a breakpoint on the mouseUp handler:
 			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [[mStack document] contextGroup], "mouseup" );
 			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
-			LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
+			if( theHandler )
+				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
 			#endif
 		}
 		if( LEOParserGetLastErrorMessage() )
@@ -685,6 +686,12 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	}
 	
 	return mScriptObject;
+}
+
+
+-(id<WILDObject>)	parentObject
+{
+	return mOwner;
 }
 
 

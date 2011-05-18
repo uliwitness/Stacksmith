@@ -80,6 +80,13 @@
 	return NO;
 }
 
+
+-(id<WILDObject>)	parentObject
+{
+	return mStack;
+}
+
+
 -(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
 	return NO;
