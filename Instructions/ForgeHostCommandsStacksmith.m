@@ -82,7 +82,15 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 	char btn3Buf[1024] = { 0 };
 	const char*	btn3Str = LEOGetValueAsString( inContext->stackEndPtr -1, btn3Buf, sizeof(btn3Buf), inContext );
 	
-	NSInteger	returnValue = NSRunAlertPanel( [NSString stringWithCString: msgStr encoding:NSUTF8StringEncoding], @"%@", [NSString stringWithCString: btn1Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn2Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn3Str encoding:NSUTF8StringEncoding], @"" );
+	NSInteger	returnValue = 0;
+	@try
+	{
+		returnValue = NSRunAlertPanel( [NSString stringWithCString: msgStr encoding:NSUTF8StringEncoding], @"%@", [NSString stringWithCString: btn1Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn2Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn3Str encoding:NSUTF8StringEncoding], @"" );
+	}
+	@catch( NSException * err )
+	{
+		
+	}
 	
 	const char	*hitButtonName = "OK";
 	if( returnValue == NSAlertDefaultReturn )
