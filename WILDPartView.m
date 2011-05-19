@@ -689,7 +689,7 @@
 	
 	BOOL			canHaveIcon = YES;
 	NSButton	*	bt = [[WILDButtonView alloc] initWithFrame: partRect];
-	[bt setWantsLayer: YES];
+	//[bt setWantsLayer: YES];
 	
 	if( [[currPart style] isEqualToString: @"transparent"]
 		|| [[currPart style] isEqualToString: @"oval"] )
@@ -724,9 +724,7 @@
 	}
 	else if( [[currPart style] isEqualToString: @"rectangle"]
 			|| [[currPart style] isEqualToString: @"shadow"]
-			|| [[currPart style] isEqualToString: @"roundrect"]
-			|| [[currPart style] isEqualToString: @"standard"]
-			|| [[currPart style] isEqualToString: @"default"] )
+			|| [[currPart style] isEqualToString: @"roundrect"] )
 	{
 		WILDButtonCell*	ourCell = [[[WILDButtonCell alloc] initTextCell: @""] autorelease];
 		[bt setCell: ourCell];
@@ -760,6 +758,17 @@
 			[bt setKeyEquivalent: @"\r"];
 			[ourCell setDrawAsDefault: YES];
 		}
+		[bt setAlignment: [currPart textAlignment]];	
+		[bt setButtonType: NSMomentaryPushInButton];
+	}
+	else if( [[currPart style] isEqualToString: @"standard"]
+			|| [[currPart style] isEqualToString: @"default"] )
+	{
+		[bt setBordered: YES];
+		[bt setBezelStyle: NSRoundedBezelStyle];
+		
+		if( [[currPart style] isEqualToString: @"default"] )
+			[bt setKeyEquivalent: @"\r"];
 		[bt setAlignment: [currPart textAlignment]];	
 		[bt setButtonType: NSMomentaryPushInButton];
 	}
