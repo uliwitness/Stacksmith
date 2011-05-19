@@ -279,6 +279,7 @@
 	[pool drain];
 	
 	[mPart setRectangle: NSInsetRect( self.frame, 2, 2)];
+	[mPart updateChangeCount: NSChangeDone];
 }
 
 
