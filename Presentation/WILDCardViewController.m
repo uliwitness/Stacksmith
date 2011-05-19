@@ -611,13 +611,69 @@
 
 -(void)	moveRight: (id)sender
 {
-	[self goNextCard: sender];
+	if( [[WILDTools sharedTools] numberOfSelectedClients] > 0 )
+	{
+		NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
+		for( WILDPartView* currView in allSels )
+		{
+			WILDPart*	thePart = [currView part];
+			[thePart setFlippedRectangle: NSOffsetRect( [thePart flippedRectangle], 1, 0)];
+			[currView setFrame: NSOffsetRect([currView frame], 1, 0)];
+		}
+	}
+	else
+		[self goNextCard: sender];
 }
 
 
 -(void)	moveLeft: (id)sender
 {
-	[self goPrevCard: sender];
+	if( [[WILDTools sharedTools] numberOfSelectedClients] > 0 )
+	{
+		NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
+		for( WILDPartView* currView in allSels )
+		{
+			WILDPart*	thePart = [currView part];
+			[thePart setFlippedRectangle: NSOffsetRect( [thePart flippedRectangle], -1, 0)];
+			[currView setFrame: NSOffsetRect([currView frame], -1, 0)];
+		}
+	}
+	else
+		[self goPrevCard: sender];
+}
+
+
+-(void)	moveUp: (id)sender
+{
+	if( [[WILDTools sharedTools] numberOfSelectedClients] > 0 )
+	{
+		NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
+		for( WILDPartView* currView in allSels )
+		{
+			WILDPart*	thePart = [currView part];
+			[thePart setFlippedRectangle: NSOffsetRect( [thePart flippedRectangle], 0, -1)];
+			[currView setFrame: NSOffsetRect([currView frame], 0, 1)];
+		}
+	}
+	else
+		[self goFirstCard: sender];
+}
+
+
+-(void)	moveDown: (id)sender
+{
+	if( [[WILDTools sharedTools] numberOfSelectedClients] > 0 )
+	{
+		NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
+		for( WILDPartView* currView in allSels )
+		{
+			WILDPart*	thePart = [currView part];
+			[thePart setFlippedRectangle: NSOffsetRect( [thePart flippedRectangle], 0, 1)];
+			[currView setFrame: NSOffsetRect([currView frame], 0, -1)];
+		}
+	}
+	else
+		[self goLastCard: sender];
 }
 
 
