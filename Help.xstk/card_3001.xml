@@ -47,7 +47,8 @@
 		<layer>card</layer>
 		<id>1</id>
 		<text>{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
-{\fonttbl\f0\fswiss\fcharset0 Optima-Regular;\f1\fnil\fcharset0 Monaco;}
+{\fonttbl\f0\fswiss\fcharset0 Optima-Regular;\f1\fnil\fcharset0 Monaco;\f2\fnil\fcharset0 LucidaGrande;
+}
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
 
@@ -82,7 +83,17 @@ This defines a command handler with the specified number of parameters that are 
 \f1\fs20 	handlerName [&lt;param1&gt;[,&lt;param2&gt;[,...]]]\
 
 \f0\fs28 \
-This is the command that calls a command handler. The parameter values passed in may be any valid expression.\
+This is the command that calls a command handler. The parameter values passed in may be any valid expression. If the current script does not contain a command handler with the given name, this will look up the message path for another object to handle the message. The message path is:\
+\
+	part (button or field) 
+\f2 \uc0\u8594 
+\f0  card 
+\f2 \uc0\u8594 
+\f0  background 
+\f2 \uc0\u8594 
+\f0  stack\
+\
+If nobody handles the given handler, the current script will be aborted and an error message shown.\
 \
 
 \f1\fs20 	put &lt;expression&gt; into &lt;container&gt;\
@@ -175,6 +186,19 @@ displays a dialog containing a message and up to three replies as buttons. The v
 Display a dialog containing the given message and an edit field for entering an answer, plus OK and Cancel buttons. The variable "the result" will contain the button the user clicked (either "OK" or "Cancel") and the variable "it" will contain the answer that was in the text field when the user clicked the button.\
 \
 
+\f1\fs20 	pass handlerName [&lt;param1&gt; [, &lt;param2&gt; [, ...]]]\
+	pass handlerName( [&lt;param1&gt; [, &lt;param2&gt; [, ...]]] )\
+
+\f0\fs28 \
+If you are handling a message in a command or function handler, you can use these commands to pass on the respective messages. I.e. if your button handles the 
+\f1\fs20 mouseUp
+\f0\fs28  message, but you also want the 
+\f1\fs20 mouseUp
+\f0\fs28  code in the current card called, write 
+\f1\fs20 pass mouseUp
+\f0\fs28  to hand the message off to the card. This call will exit the current handler with the return value from the handler one level up.\
+\
+
 \b 3. Expressions
 \b0 \
 \
@@ -182,23 +206,57 @@ An expression consists of either a single term, or two or more terms ("operands"
 \
 Supported operators at this time are:\
 \
-	+  - Add the two operands.\
-	-  - Subtract the second operand from the first one.\
-	*  - Multiply the two operands.\
-	/  - Divide the first operand by the second one.\
-	=  - compare the two operands. This tries to do int/int, float/float or bool/bool comparisons before it falls back on case-insensitive string comparison.\
-	&lt;&gt; - compare the two operands, returning FALSE if they are equal and TRUE if they are not equal.\
-	is - alternate spelling for =.\
-	is not - alternate spelling for &lt;&gt;\
-	&lt;  - compare the two operands and return TRUE if the first one is less than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt; Ab.\
-	&gt;  - compare the two operands and return TRUE if the first one is more than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt; Aa.\
-	&lt;= - compare the two operands and return TRUE if the first one is less than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt;= Ab, Aa &lt;= Aa.\
-	&gt;= - compare the two operands and return TRUE if the first one is more than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt;= Aa, Aa &gt;= Aa.\
-	mod[ulo] - Return the remainder that occurs when dividing the first operand by the second.\
-	^  - Raise the first exponent to the power of the second. i.e. 2 ^ 3 = 8\
+	
+\f1\fs20 +
+\f0\fs28   - Add the two operands.\
+	
+\f1\fs20 -
+\f0\fs28   - Subtract the second operand from the first one.\
+	
+\f1\fs20 *
+\f0\fs28   - Multiply the two operands.\
+	
+\f1\fs20 /
+\f0\fs28   - Divide the first operand by the second one.\
+	
+\f1\fs20 =
+\f0\fs28   - compare the two operands. This tries to do int/int, float/float or bool/bool comparisons before it falls back on case-insensitive string comparison.\
+	
+\f1\fs20 &lt;&gt;
+\f0\fs28  - compare the two operands, returning FALSE if they are equal and TRUE if they are not equal.\
+	
+\f1\fs20 is
+\f0\fs28  - alternate spelling for =.\
+	
+\f1\fs20 is not
+\f0\fs28  - alternate spelling for &lt;&gt;\
+	
+\f1\fs20 &lt;
+\f0\fs28   - compare the two operands and return TRUE if the first one is less than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt; Ab.\
+	
+\f1\fs20 &gt;
+\f0\fs28   - compare the two operands and return TRUE if the first one is more than the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt; Aa.\
+	
+\f1\fs20 &lt;=
+\f0\fs28  - compare the two operands and return TRUE if the first one is less than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Aa &lt;= Ab, Aa &lt;= Aa.\
+	
+\f1\fs20 &gt;=
+\f0\fs28  - compare the two operands and return TRUE if the first one is more than or equal to the second one, FALSE otherwise. For numbers, this compares their numeric value, for strings their sort order. I.e. Ab &gt;= Aa, Aa &gt;= Aa.\
+	
+\f1\fs20 mod[ulo]
+\f0\fs28  - Return the remainder that occurs when dividing the first operand by the second.\
+	
+\f1\fs20 ^
+\f0\fs28   - Raise the first exponent to the power of the second. i.e. 2 ^ 3 = 8\
 	\
-	&amp; - Convert the operands to strings and append the second one to the first one.\
-	&amp;&amp; - Like &amp;, but inserts a space between the two strings.\
+	
+\f1\fs20 &amp;
+\f0\fs28  - Convert the operands to strings and append the second one to the first one.\
+	
+\f1\fs20 &amp;&amp;
+\f0\fs28  - Like 
+\f1\fs20 &amp;
+\f0\fs28 , but inserts a space between the two strings.\
 \
 
 \b 4. Terms
