@@ -79,6 +79,8 @@ struct LEOValueType	kLeoValueTypeWILDObject =
 	LEOCanGetWILDObjectValueAsNumber,
 	
 	LEOGetWILDObjectValueForKey,
+	LEOCantSetValueForKey,
+	LEOSetStringLikeValueAsArray,
 	LEOGetWILDObjectKeyCount
 };
 
