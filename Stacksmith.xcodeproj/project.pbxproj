@@ -72,24 +72,6 @@
 		550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C0A5D1196C52000351067 /* WILDScrollView.m */; };
 		551B3E83131D957700BFCD45 /* WILDLicensePanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
-		551FC0031170CF3500F32FBF /* BrowseTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF21170CF3500F32FBF /* BrowseTool.png */; };
-		551FC0041170CF3500F32FBF /* BrushTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF31170CF3500F32FBF /* BrushTool.png */; };
-		551FC0051170CF3500F32FBF /* BucketTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF41170CF3500F32FBF /* BucketTool.png */; };
-		551FC0061170CF3500F32FBF /* ButtonTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF51170CF3500F32FBF /* ButtonTool.png */; };
-		551FC0071170CF3500F32FBF /* CurveTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF61170CF3500F32FBF /* CurveTool.png */; };
-		551FC0081170CF3500F32FBF /* EraserTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF71170CF3500F32FBF /* EraserTool.png */; };
-		551FC0091170CF3500F32FBF /* FieldTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF81170CF3500F32FBF /* FieldTool.png */; };
-		551FC00A1170CF3500F32FBF /* LineTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFF91170CF3500F32FBF /* LineTool.png */; };
-		551FC00B1170CF3500F32FBF /* OvalTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFFA1170CF3500F32FBF /* OvalTool.png */; };
-		551FC00C1170CF3500F32FBF /* PencilTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFFB1170CF3500F32FBF /* PencilTool.png */; };
-		551FC00D1170CF3500F32FBF /* PolygonTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFFC1170CF3500F32FBF /* PolygonTool.png */; };
-		551FC00E1170CF3500F32FBF /* RectTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFFD1170CF3500F32FBF /* RectTool.png */; };
-		551FC00F1170CF3500F32FBF /* RegPolygonTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFFE1170CF3500F32FBF /* RegPolygonTool.png */; };
-		551FC0101170CF3500F32FBF /* RoundRectTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FBFFF1170CF3500F32FBF /* RoundRectTool.png */; };
-		551FC0111170CF3500F32FBF /* SelectTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FC0001170CF3500F32FBF /* SelectTool.png */; };
-		551FC0121170CF3500F32FBF /* SprayTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FC0011170CF3500F32FBF /* SprayTool.png */; };
-		551FC0131170CF3500F32FBF /* TextTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FC0021170CF3500F32FBF /* TextTool.png */; };
-		551FC01A1170CF8300F32FBF /* LassoTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 551FC0191170CF8300F32FBF /* LassoTool.png */; };
 		552365381344B0BA000145A0 /* WILDRecentCardsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 552365371344B0B9000145A0 /* WILDRecentCardsList.m */; };
 		5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */; };
 		5523653E1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */; };
@@ -401,6 +383,17 @@
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
+		555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */; };
+		555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */; };
+		555F103B13881DB700E26037 /* UKPaintLassoTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102F13881DB700E26037 /* UKPaintLassoTool.tiff */; };
+		555F103C13881DB700E26037 /* UKPaintLineTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103013881DB700E26037 /* UKPaintLineTool.tiff */; };
+		555F103D13881DB700E26037 /* UKPaintOvalTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103113881DB700E26037 /* UKPaintOvalTool.tiff */; };
+		555F103E13881DB700E26037 /* UKPaintPathTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103213881DB700E26037 /* UKPaintPathTool.tiff */; };
+		555F103F13881DB700E26037 /* UKPaintRectTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103313881DB700E26037 /* UKPaintRectTool.tiff */; };
+		555F104013881DB700E26037 /* UKPaintRoundrectTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103413881DB700E26037 /* UKPaintRoundrectTool.tiff */; };
+		555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103513881DB700E26037 /* UKPaintSelectTool.tiff */; };
+		555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103613881DB700E26037 /* UKPaintShapeTool.tiff */; };
+		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
 		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
 		5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = 5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */; };
 		556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */; };
@@ -706,24 +699,6 @@
 		551B3E82131D957700BFCD45 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDLicensePanelController.xib; sourceTree = "<group>"; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
-		551FBFF21170CF3500F32FBF /* BrowseTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrowseTool.png; path = Resources/BrowseTool.png; sourceTree = "<group>"; };
-		551FBFF31170CF3500F32FBF /* BrushTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrushTool.png; path = Resources/BrushTool.png; sourceTree = "<group>"; };
-		551FBFF41170CF3500F32FBF /* BucketTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BucketTool.png; path = Resources/BucketTool.png; sourceTree = "<group>"; };
-		551FBFF51170CF3500F32FBF /* ButtonTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonTool.png; path = Resources/ButtonTool.png; sourceTree = "<group>"; };
-		551FBFF61170CF3500F32FBF /* CurveTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CurveTool.png; path = Resources/CurveTool.png; sourceTree = "<group>"; };
-		551FBFF71170CF3500F32FBF /* EraserTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EraserTool.png; path = Resources/EraserTool.png; sourceTree = "<group>"; };
-		551FBFF81170CF3500F32FBF /* FieldTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldTool.png; path = Resources/FieldTool.png; sourceTree = "<group>"; };
-		551FBFF91170CF3500F32FBF /* LineTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LineTool.png; path = Resources/LineTool.png; sourceTree = "<group>"; };
-		551FBFFA1170CF3500F32FBF /* OvalTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OvalTool.png; path = Resources/OvalTool.png; sourceTree = "<group>"; };
-		551FBFFB1170CF3500F32FBF /* PencilTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PencilTool.png; path = Resources/PencilTool.png; sourceTree = "<group>"; };
-		551FBFFC1170CF3500F32FBF /* PolygonTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PolygonTool.png; path = Resources/PolygonTool.png; sourceTree = "<group>"; };
-		551FBFFD1170CF3500F32FBF /* RectTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RectTool.png; path = Resources/RectTool.png; sourceTree = "<group>"; };
-		551FBFFE1170CF3500F32FBF /* RegPolygonTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RegPolygonTool.png; path = Resources/RegPolygonTool.png; sourceTree = "<group>"; };
-		551FBFFF1170CF3500F32FBF /* RoundRectTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RoundRectTool.png; path = Resources/RoundRectTool.png; sourceTree = "<group>"; };
-		551FC0001170CF3500F32FBF /* SelectTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SelectTool.png; path = Resources/SelectTool.png; sourceTree = "<group>"; };
-		551FC0011170CF3500F32FBF /* SprayTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SprayTool.png; path = Resources/SprayTool.png; sourceTree = "<group>"; };
-		551FC0021170CF3500F32FBF /* TextTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TextTool.png; path = Resources/TextTool.png; sourceTree = "<group>"; };
-		551FC0191170CF8300F32FBF /* LassoTool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LassoTool.png; path = Resources/LassoTool.png; sourceTree = "<group>"; };
 		552365361344B0B9000145A0 /* WILDRecentCardsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDRecentCardsList.h; path = Model/WILDRecentCardsList.h; sourceTree = "<group>"; };
 		552365371344B0B9000145A0 /* WILDRecentCardsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDRecentCardsList.m; path = Model/WILDRecentCardsList.m; sourceTree = "<group>"; };
 		552365391344C24C000145A0 /* NSImage+NiceScaling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+NiceScaling.h"; path = "../UliKit/NSImage+NiceScaling.h"; sourceTree = "<group>"; };
@@ -1104,6 +1079,17 @@
 		555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileHandle+UKReadLinewise.m"; path = "../UliKit/NSFileHandle+UKReadLinewise.m"; sourceTree = SOURCE_ROOT; };
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
+		555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintbrushTool.tiff; path = ../UKPaintView/UKPaintbrushTool.tiff; sourceTree = "<group>"; };
+		555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintEraserTool.tiff; path = ../UKPaintView/UKPaintEraserTool.tiff; sourceTree = "<group>"; };
+		555F102F13881DB700E26037 /* UKPaintLassoTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintLassoTool.tiff; path = ../UKPaintView/UKPaintLassoTool.tiff; sourceTree = "<group>"; };
+		555F103013881DB700E26037 /* UKPaintLineTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintLineTool.tiff; path = ../UKPaintView/UKPaintLineTool.tiff; sourceTree = "<group>"; };
+		555F103113881DB700E26037 /* UKPaintOvalTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintOvalTool.tiff; path = ../UKPaintView/UKPaintOvalTool.tiff; sourceTree = "<group>"; };
+		555F103213881DB700E26037 /* UKPaintPathTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintPathTool.tiff; path = ../UKPaintView/UKPaintPathTool.tiff; sourceTree = "<group>"; };
+		555F103313881DB700E26037 /* UKPaintRectTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintRectTool.tiff; path = ../UKPaintView/UKPaintRectTool.tiff; sourceTree = "<group>"; };
+		555F103413881DB700E26037 /* UKPaintRoundrectTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintRoundrectTool.tiff; path = ../UKPaintView/UKPaintRoundrectTool.tiff; sourceTree = "<group>"; };
+		555F103513881DB700E26037 /* UKPaintSelectTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintSelectTool.tiff; path = ../UKPaintView/UKPaintSelectTool.tiff; sourceTree = "<group>"; };
+		555F103613881DB700E26037 /* UKPaintShapeTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintShapeTool.tiff; path = ../UKPaintView/UKPaintShapeTool.tiff; sourceTree = "<group>"; };
+		555F103713881DB700E26037 /* UKPaintTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintTextTool.tiff; path = ../UKPaintView/UKPaintTextTool.tiff; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeGlobalPropertiesStacksmith.m; path = Instructions/ForgeGlobalPropertiesStacksmith.m; sourceTree = SOURCE_ROOT; };
 		556866591359C5BF00C364D6 /* LEOGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOGlobalProperties.h; path = ../../../Leonie/generic/LEOGlobalProperties.h; sourceTree = "<group>"; };
 		5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOGlobalProperties.c; path = ../../../Leonie/generic/LEOGlobalProperties.c; sourceTree = "<group>"; };
@@ -1756,24 +1742,6 @@
 		55A0BAFE113B4DF20095CAA6 /* Standard Resources */ = {
 			isa = PBXGroup;
 			children = (
-				551FBFF21170CF3500F32FBF /* BrowseTool.png */,
-				551FBFF31170CF3500F32FBF /* BrushTool.png */,
-				551FBFF41170CF3500F32FBF /* BucketTool.png */,
-				551FBFF51170CF3500F32FBF /* ButtonTool.png */,
-				551FBFF61170CF3500F32FBF /* CurveTool.png */,
-				551FBFF71170CF3500F32FBF /* EraserTool.png */,
-				551FBFF81170CF3500F32FBF /* FieldTool.png */,
-				551FBFF91170CF3500F32FBF /* LineTool.png */,
-				551FBFFA1170CF3500F32FBF /* OvalTool.png */,
-				551FBFFB1170CF3500F32FBF /* PencilTool.png */,
-				551FBFFC1170CF3500F32FBF /* PolygonTool.png */,
-				551FBFFD1170CF3500F32FBF /* RectTool.png */,
-				551FBFFE1170CF3500F32FBF /* RegPolygonTool.png */,
-				551FBFFF1170CF3500F32FBF /* RoundRectTool.png */,
-				551FC0001170CF3500F32FBF /* SelectTool.png */,
-				551FC0011170CF3500F32FBF /* SprayTool.png */,
-				551FC0021170CF3500F32FBF /* TextTool.png */,
-				551FC0191170CF8300F32FBF /* LassoTool.png */,
 				55E3A69D11503456008411BB /* CURS_128.png */,
 				552FF049113F23F3005742C8 /* CURS_129.pbm */,
 				552FF04A113F23F3005742C8 /* CURS_130.pbm */,
@@ -2058,6 +2026,17 @@
 				552FF142113F23F3005742C8 /* snd_144.aiff */,
 				552FF143113F23F3005742C8 /* snd_145.aiff */,
 				552FF144113F23F3005742C8 /* snd_146.aiff */,
+				555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */,
+				555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */,
+				555F102F13881DB700E26037 /* UKPaintLassoTool.tiff */,
+				555F103013881DB700E26037 /* UKPaintLineTool.tiff */,
+				555F103113881DB700E26037 /* UKPaintOvalTool.tiff */,
+				555F103213881DB700E26037 /* UKPaintPathTool.tiff */,
+				555F103313881DB700E26037 /* UKPaintRectTool.tiff */,
+				555F103413881DB700E26037 /* UKPaintRoundrectTool.tiff */,
+				555F103513881DB700E26037 /* UKPaintSelectTool.tiff */,
+				555F103613881DB700E26037 /* UKPaintShapeTool.tiff */,
+				555F103713881DB700E26037 /* UKPaintTextTool.tiff */,
 			);
 			name = "Standard Resources";
 			sourceTree = "<group>";
@@ -2537,24 +2516,6 @@
 				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
 				55B9223D1167532A0073EC6C /* WILDButtonInfoWindowController.xib in Resources */,
 				55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */,
-				551FC0031170CF3500F32FBF /* BrowseTool.png in Resources */,
-				551FC0041170CF3500F32FBF /* BrushTool.png in Resources */,
-				551FC0051170CF3500F32FBF /* BucketTool.png in Resources */,
-				551FC0061170CF3500F32FBF /* ButtonTool.png in Resources */,
-				551FC0071170CF3500F32FBF /* CurveTool.png in Resources */,
-				551FC0081170CF3500F32FBF /* EraserTool.png in Resources */,
-				551FC0091170CF3500F32FBF /* FieldTool.png in Resources */,
-				551FC00A1170CF3500F32FBF /* LineTool.png in Resources */,
-				551FC00B1170CF3500F32FBF /* OvalTool.png in Resources */,
-				551FC00C1170CF3500F32FBF /* PencilTool.png in Resources */,
-				551FC00D1170CF3500F32FBF /* PolygonTool.png in Resources */,
-				551FC00E1170CF3500F32FBF /* RectTool.png in Resources */,
-				551FC00F1170CF3500F32FBF /* RegPolygonTool.png in Resources */,
-				551FC0101170CF3500F32FBF /* RoundRectTool.png in Resources */,
-				551FC0111170CF3500F32FBF /* SelectTool.png in Resources */,
-				551FC0121170CF3500F32FBF /* SprayTool.png in Resources */,
-				551FC0131170CF3500F32FBF /* TextTool.png in Resources */,
-				551FC01A1170CF8300F32FBF /* LassoTool.png in Resources */,
 				55382F6B117238350006B381 /* WILDFieldInfoWindowController.xib in Resources */,
 				550C095B1195EC4700351067 /* ICON_128.pbm in Resources */,
 				550C095C1195EC4700351067 /* ICON_129.pbm in Resources */,
@@ -2611,6 +2572,17 @@
 				55039F62136B52C80082E32E /* brush32.png in Resources */,
 				5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */,
 				558CDB9E137B1A3D004AC603 /* WILDToolsPalette.xib in Resources */,
+				555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */,
+				555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */,
+				555F103B13881DB700E26037 /* UKPaintLassoTool.tiff in Resources */,
+				555F103C13881DB700E26037 /* UKPaintLineTool.tiff in Resources */,
+				555F103D13881DB700E26037 /* UKPaintOvalTool.tiff in Resources */,
+				555F103E13881DB700E26037 /* UKPaintPathTool.tiff in Resources */,
+				555F103F13881DB700E26037 /* UKPaintRectTool.tiff in Resources */,
+				555F104013881DB700E26037 /* UKPaintRoundrectTool.tiff in Resources */,
+				555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */,
+				555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */,
+				555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

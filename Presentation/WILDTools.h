@@ -28,17 +28,17 @@ enum
 	WILDButtonTool,
 	WILDFieldTool,
 	WILDSelectTool,
-	WILDLassoTool,
+	WILDLassoTool,			//	5
 	WILDPencilTool,
 	WILDBrushTool,
 	WILDEraserTool,
 	WILDLineTool,
-	WILDSprayTool,
+	WILDSprayTool,			// 10
 	WILDRectangleTool,
 	WILDRoundRectTool,
 	WILDBucketTool,
 	WILDOvalTool,
-	WILDCurveTool,
+	WILDCurveTool,			// 15
 	WILDTextTool,
 	WILDRegularPolygonTool,
 	WILDPolygonTool
