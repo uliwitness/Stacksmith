@@ -13,31 +13,33 @@
 
 @implementation WILDToolsPalette
 
+static WILDToolsPalette*	sSharedToolsPalette = nil;
+
 @synthesize lineColorWell = mLineColorWell;
 @synthesize fillColorWell = mFillColorWell;
 
 +(WILDToolsPalette*)	sharedToolsPalette
 {
-	static WILDToolsPalette*	sSharedToolsPalette = nil;
 	if( !sSharedToolsPalette )
 	{
-		sSharedToolsPalette = [[WILDToolsPalette alloc] initWithWindowNibName: NSStringFromClass(self)];
+		sSharedToolsPalette = [[WILDToolsPalette alloc] init];
 		[sSharedToolsPalette window];
 	}
 	
 	return sSharedToolsPalette;
 }
 
-- (id)initWithWindow:(NSWindow *)window
+- (id)init
 {
-    self = [super initWithWindow:window];
+    self = [super initWithWindowNibName: NSStringFromClass([self class])];
     if (self)
 	{
-        // Initialization code here.
+        sSharedToolsPalette = self;
     }
     
     return self;
 }
+
 
 -(void)	dealloc
 {
