@@ -288,6 +288,11 @@
 	{
 		return ( [[WILDTools sharedTools] numberOfSelectedClients] > 0 );
 	}
+	else if( [menuItem action] == @selector(deleteCard:)
+		|| [menuItem action] == @selector(cutCard:) )
+	{
+		return ( [[[mCurrentCard stack] cards] count] > 1 );
+	}
 	else
 		return( [self respondsToSelector: [menuItem action]] );
 }
