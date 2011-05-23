@@ -268,22 +268,22 @@
 	//	(Aqua standard distance to window edge)
 	if( ((left -6) < NSMinX(inBox)) && ((left +6) > NSMinX(inBox)) )
 	{
-		[guidelineView addGuidelineAt: left horizontal: NO color: [NSColor redColor]];
+		[guidelineView addGuidelineAt: left horizontal: NO color: [NSColor blueColor]];
 		inBigBox->origin.x -= NSMinX(inBox) -left;
 	}
 	if( ((right -6) < NSMaxX(inBox)) && ((right +6) > NSMaxX(inBox)) )
 	{
-		[guidelineView addGuidelineAt: right horizontal: NO color: [NSColor redColor]];
+		[guidelineView addGuidelineAt: right horizontal: NO color: [NSColor blueColor]];
 		inBigBox->origin.x -= NSMaxX(inBox) -right;
 	}
 	if( ((top -6) < NSMaxY(inBox)) && ((top +6) > NSMaxY(inBox)) )
 	{
-		[guidelineView addGuidelineAt: top horizontal: YES color: [NSColor redColor]];
+		[guidelineView addGuidelineAt: top horizontal: YES color: [NSColor blueColor]];
 		inBigBox->origin.y -= NSMaxY(inBox) -top;
 	}
 	if( ((bottom -6) < NSMinY(inBox)) && ((bottom +6) > NSMinY(inBox)) )
 	{
-		[guidelineView addGuidelineAt: bottom horizontal: YES color: [NSColor redColor]];
+		[guidelineView addGuidelineAt: bottom horizontal: YES color: [NSColor blueColor]];
 		inBigBox->origin.y -= NSMinY(inBox) -bottom;
 	}
 	
@@ -292,12 +292,12 @@
 	CGFloat	vCenter = NSMidY([guidelineView bounds]);
 	if( ((hCenter -6) < NSMidX(inBox)) && ((hCenter +6) > NSMidX(inBox)) )
 	{
-		[guidelineView addGuidelineAt: hCenter horizontal: NO color: [NSColor redColor]];
+		[guidelineView addGuidelineAt: hCenter horizontal: NO color: [NSColor blueColor]];
 		inBigBox->origin.x -= NSMidX(inBox) -hCenter;
 	}
 	if( ((vCenter -6) < NSMidY(inBox)) && ((vCenter +6) > NSMidY(inBox)) )
 	{
-		[guidelineView addGuidelineAt: vCenter horizontal: YES color: [NSColor redColor]];
+		[guidelineView addGuidelineAt: vCenter horizontal: YES color: [NSColor blueColor]];
 		inBigBox->origin.y -= NSMidY(inBox) -vCenter;
 	}
 	
