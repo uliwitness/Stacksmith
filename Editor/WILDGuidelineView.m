@@ -41,14 +41,20 @@
 -(void)	drawInView: (NSView*)inView
 {
 	[mColor set];
+	NSBezierPath	*	theLine = [NSBezierPath bezierPath];
 	if( mHorizontal )
 	{
-		[NSBezierPath strokeLineFromPoint: NSMakePoint(0.5,mPosition +0.5) toPoint: NSMakePoint([inView bounds].size.width +0.5,mPosition +0.5)];
+		[theLine moveToPoint: NSMakePoint(0.5,mPosition +0.5)];
+		[theLine lineToPoint: NSMakePoint([inView bounds].size.width +0.5,mPosition +0.5)];
 	}
 	else
 	{
-		[NSBezierPath strokeLineFromPoint: NSMakePoint(mPosition +0.5,0.5) toPoint: NSMakePoint(mPosition +0.5,[inView bounds].size.height +0.5)];
+		[theLine moveToPoint: NSMakePoint(mPosition +0.5,0.5)];
+		[theLine lineToPoint: NSMakePoint(mPosition +0.5,[inView bounds].size.height +0.5)];
 	}
+	CGFloat		theDashes[2] = { 4.0, 1.0 };
+	[theLine setLineDash: theDashes count: 2 phase: 0.0];
+	[theLine stroke];
 }
 
 @end
