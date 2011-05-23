@@ -394,6 +394,7 @@
 		555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103513881DB700E26037 /* UKPaintSelectTool.tiff */; };
 		555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103613881DB700E26037 /* UKPaintShapeTool.tiff */; };
 		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
+		555F104613893CDC00E26037 /* BrowseTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 555F104413893CDC00E26037 /* BrowseTool.png */; };
 		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
 		5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = 5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */; };
 		556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */; };
@@ -1090,6 +1091,7 @@
 		555F103513881DB700E26037 /* UKPaintSelectTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintSelectTool.tiff; path = ../UKPaintView/UKPaintSelectTool.tiff; sourceTree = "<group>"; };
 		555F103613881DB700E26037 /* UKPaintShapeTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintShapeTool.tiff; path = ../UKPaintView/UKPaintShapeTool.tiff; sourceTree = "<group>"; };
 		555F103713881DB700E26037 /* UKPaintTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintTextTool.tiff; path = ../UKPaintView/UKPaintTextTool.tiff; sourceTree = "<group>"; };
+		555F104513893CDC00E26037 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/BrowseTool.png; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeGlobalPropertiesStacksmith.m; path = Instructions/ForgeGlobalPropertiesStacksmith.m; sourceTree = SOURCE_ROOT; };
 		556866591359C5BF00C364D6 /* LEOGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOGlobalProperties.h; path = ../../../Leonie/generic/LEOGlobalProperties.h; sourceTree = "<group>"; };
 		5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOGlobalProperties.c; path = ../../../Leonie/generic/LEOGlobalProperties.c; sourceTree = "<group>"; };
@@ -2026,6 +2028,7 @@
 				552FF142113F23F3005742C8 /* snd_144.aiff */,
 				552FF143113F23F3005742C8 /* snd_145.aiff */,
 				552FF144113F23F3005742C8 /* snd_146.aiff */,
+				555F104413893CDC00E26037 /* BrowseTool.png */,
 				555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */,
 				555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */,
 				555F102F13881DB700E26037 /* UKPaintLassoTool.tiff */,
@@ -2583,6 +2586,7 @@
 				555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */,
 				555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */,
 				555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */,
+				555F104613893CDC00E26037 /* BrowseTool.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2845,6 +2849,14 @@
 				553C471913577A2E000219FA /* English */,
 			);
 			name = WILDMessageBox.xib;
+			sourceTree = "<group>";
+		};
+		555F104413893CDC00E26037 /* BrowseTool.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				555F104513893CDC00E26037 /* English */,
+			);
+			name = BrowseTool.png;
 			sourceTree = "<group>";
 		};
 		558CDB9C137B1A3D004AC603 /* WILDToolsPalette.xib */ = {
