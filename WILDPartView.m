@@ -230,7 +230,25 @@
 
 -(NSRect)	layoutRectForRect: (NSRect)newBox
 {
-	return NSInsetRect( newBox, 2, 2 );
+	NSRect	layoutBox = NSInsetRect( newBox, 2, 2 );
+	
+	NSString*	theStyle = [mPart style];
+	if( [theStyle isEqualToString: @"default"] || [theStyle isEqualToString: @"standard"] )
+	{
+		layoutBox.origin.x += 6;
+		layoutBox.origin.y += 5;
+		layoutBox.size.width -= 12;
+		layoutBox.size.height -= 7;
+	}
+	else if( [theStyle isEqualToString: @"popup"] )
+	{
+		layoutBox.origin.x += 3;
+		layoutBox.origin.y += 3;
+		layoutBox.size.width -= 6;
+		layoutBox.size.height -= 6;
+	}
+	
+	return layoutBox;
 }
 
 
@@ -241,11 +259,13 @@
 	
 	[guidelineView removeAllGuidelines];
 	
-	CGFloat					left = [guidelineView bounds].origin.x +12,
-							bottom = [guidelineView bounds].origin.y +12;
-	CGFloat					top = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -12,
-							right = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -12; 
-		
+	CGFloat					left = [guidelineView bounds].origin.x +20,
+							bottom = [guidelineView bounds].origin.y +20;
+	CGFloat					top = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -20,
+							right = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -20; 
+	
+	// Show guidelines at 12px distance from edges & snap to them:
+	//	(Aqua standard distance to window edge)
 	if( ((left -6) < NSMinX(inBox)) && ((left +6) > NSMinX(inBox)) )
 	{
 		[guidelineView addGuidelineAt: left horizontal: NO color: [NSColor redColor]];
@@ -266,6 +286,31 @@
 		[guidelineView addGuidelineAt: bottom horizontal: YES color: [NSColor redColor]];
 		inBigBox->origin.y -= NSMinY(inBox) -bottom;
 	}
+	
+	// Guidelines at card center (horz & vert):
+	CGFloat	hCenter = NSMidX([guidelineView bounds]);
+	CGFloat	vCenter = NSMidY([guidelineView bounds]);
+	if( ((hCenter -6) < NSMidX(inBox)) && ((hCenter +6) > NSMidX(inBox)) )
+	{
+		[guidelineView addGuidelineAt: hCenter horizontal: NO color: [NSColor redColor]];
+		inBigBox->origin.x -= NSMidX(inBox) -hCenter;
+	}
+	if( ((vCenter -6) < NSMidY(inBox)) && ((vCenter +6) > NSMidY(inBox)) )
+	{
+		[guidelineView addGuidelineAt: vCenter horizontal: YES color: [NSColor redColor]];
+		inBigBox->origin.y -= NSMidY(inBox) -vCenter;
+	}
+	
+	// Snap to card edges:
+	if( ([guidelineView bounds].origin.x +6) > NSMinX(inBox) && ([guidelineView bounds].origin.x -6) < NSMinX(inBox) )
+		inBigBox->origin.x -= NSMinX(inBox) -[guidelineView bounds].origin.x;
+	if( ([guidelineView bounds].origin.y +6) > NSMinY(inBox) && ([guidelineView bounds].origin.y -6) < NSMinY(inBox) )
+		inBigBox->origin.y -= NSMinY(inBox) -[guidelineView bounds].origin.y;
+	if( (NSMaxX([guidelineView bounds]) -6) < NSMaxX(inBox) && (NSMaxX([guidelineView bounds]) +6) > NSMaxX(inBox) )
+		inBigBox->origin.x -= NSMaxX(inBox) -NSMaxX([guidelineView bounds]);
+	if( (NSMaxY([guidelineView bounds]) -6) < NSMaxY(inBox) && (NSMaxY([guidelineView bounds]) +6) > NSMaxY(inBox) )
+		inBigBox->origin.y -= NSMaxY(inBox) -NSMaxY([guidelineView bounds]);
+	
 	[guidelineView setNeedsDisplay: YES];
 }
 
