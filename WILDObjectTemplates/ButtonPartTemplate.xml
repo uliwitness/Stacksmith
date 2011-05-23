@@ -12,10 +12,10 @@
 	   <right>200</right>
 	   <bottom>124</bottom>
     </rect>
-	<style>roundrect</style>
+	<style>standard</style>
 	<showName><true /></showName>
 	<highlight><false /></highlight>
-	<autoHighlight><false /></autoHighlight>
+	<autoHighlight><true /></autoHighlight>
 	<sharedHighlight><false /></sharedHighlight>
 	<family>0</family>
 	<titleWidth>0</titleWidth>
