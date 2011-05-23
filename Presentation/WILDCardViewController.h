@@ -13,6 +13,7 @@
 
 @class WILDCard;
 @class WILDPictureView;
+@class WILDGuidelineView;
 
 
 @interface WILDCardViewController : NSViewController
@@ -27,6 +28,7 @@
 	IBOutlet NSTextField		*	mSearchField;
 	WILDPictureView				*	mCardPictureView;
 	WILDPictureView				*	mBackgroundPictureView;
+	WILDGuidelineView			*	mGuidelineView;
 }
 
 -(WILDCard*)	currentCard;
@@ -75,5 +77,7 @@
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 
 -(void)	setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype;
+
+-(WILDGuidelineView*)	guidelineView;
 
 @end

@@ -416,6 +416,7 @@
 		558DCDAB11557E28002C9195 /* WILDApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCDAA11557E28002C9195 /* WILDApplication.m */; };
 		558DCFBF1155B9B1002C9195 /* WILDPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFBE1155B9B1002C9195 /* WILDPictureView.m */; };
 		558DCFE51156209A002C9195 /* WILDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFE41156209A002C9195 /* WILDCardView.m */; };
+		558F89E7138B06F900E26275 /* WILDGuidelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F89E6138B06F900E26275 /* WILDGuidelineView.m */; };
 		559700EC137BB38B000264B8 /* WILDIrisOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */; };
 		559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */; };
 		559700F3137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */; };
@@ -1129,6 +1130,8 @@
 		558DCFBE1155B9B1002C9195 /* WILDPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPictureView.m; sourceTree = "<group>"; };
 		558DCFE31156209A002C9195 /* WILDCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardView.h; sourceTree = "<group>"; };
 		558DCFE41156209A002C9195 /* WILDCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardView.m; sourceTree = "<group>"; };
+		558F89E5138B06F900E26275 /* WILDGuidelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGuidelineView.h; path = Editor/WILDGuidelineView.h; sourceTree = "<group>"; };
+		558F89E6138B06F900E26275 /* WILDGuidelineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGuidelineView.m; path = Editor/WILDGuidelineView.m; sourceTree = "<group>"; };
 		559700EA137BB38A000264B8 /* WILDIrisOpenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIrisOpenFilter.h; path = "Custom Effects/WILDIrisOpenFilter.h"; sourceTree = "<group>"; };
 		559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisOpenFilter.m; path = "Custom Effects/WILDIrisOpenFilter.m"; sourceTree = "<group>"; };
 		559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDIrisOpenFilter.cikernel; path = "Custom Effects/WILDIrisOpenFilter.cikernel"; sourceTree = "<group>"; };
@@ -1629,6 +1632,8 @@
 				55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */,
 				550C09081195E61100351067 /* WILDPresentationConstants.h */,
 				550C09091195E61100351067 /* WILDPresentationConstants.m */,
+				558F89E5138B06F900E26275 /* WILDGuidelineView.h */,
+				558F89E6138B06F900E26275 /* WILDGuidelineView.m */,
 			);
 			name = Presentation;
 			sourceTree = "<group>";
@@ -2763,6 +2768,7 @@
 				55BFEE18137CB1F7008FC8BB /* WILDShrinkToTopFilter.m in Sources */,
 				55BFEE1D137DBB14008FC8BB /* WILDShrinkToBottomFilter.m in Sources */,
 				55BFEE22137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m in Sources */,
+				558F89E7138B06F900E26275 /* WILDGuidelineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

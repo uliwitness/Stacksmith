@@ -89,6 +89,7 @@
 											object: nil];
 	
 	DESTROY_DEALLOC(mPartViews);
+	DESTROY_DEALLOC(mGuidelineView);
 	DESTROY_DEALLOC(mAddColorOverlay);
 	DESTROY_DEALLOC(mSearchContext);
 	DESTROY_DEALLOC(mCurrentSearchString);
@@ -432,8 +433,8 @@
 	for( NSView* currSubview in subviews )
 		[currSubview removeFromSuperview];
 	
-	[mPartViews release];
-	mPartViews = nil;
+	DESTROY(mPartViews);
+	DESTROY(mGuidelineView);
 	
 	mCurrentCard = theCard;
 	
@@ -527,6 +528,10 @@
 		[mAddColorOverlay setCompositingFilter: theFilter];
 		[[[self view] layer] addSublayer: mAddColorOverlay];
 		CFRelease( theImage );
+		
+		// Add a view to draw guidelines on top of everything:
+		mGuidelineView = [[WILDGuidelineView alloc] initWithFrame: [[self view] bounds]];
+		[[self view] addSubview: mGuidelineView];
 		
 		if( prevCard != theCard )
 		{
@@ -1037,6 +1042,12 @@
 	{
 		[mCurrentCard setPicture: [sender image]];
 	}
+}
+
+
+-(WILDGuidelineView*)	guidelineView
+{
+	return mGuidelineView;
 }
 
 @end

@@ -12,6 +12,7 @@
 
 @class WILDCard;
 @class WILDCardViewController;
+@class WILDGuidelineView;
 
 
 @interface WILDCardView : NSView
@@ -37,5 +38,7 @@
 
 -(NSImage*)					snapshotImage;	// Full-size image of the entire card.
 -(NSImage*)					thumbnailImage;	// Smaller size for use as a preview in lists etc.
+
+-(WILDGuidelineView*)		guidelineView;
 
 @end

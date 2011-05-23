@@ -17,6 +17,7 @@
 #import "WILDPart.h"
 #import "WILDCardViewController.h"
 #import "NSImage+NiceScaling.h"
+#import "WILDGuidelineView.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -315,6 +316,12 @@
 	}
 	
 	return ani;
+}
+
+
+-(WILDGuidelineView*)	guidelineView
+{
+	return [mOwner guidelineView];
 }
 
 @end

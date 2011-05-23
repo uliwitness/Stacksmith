@@ -228,6 +228,97 @@
 }
 
 
+-(NSRect)	layoutRectForRect: (NSRect)newBox
+{
+	return NSInsetRect( newBox, 2, 2 );
+}
+
+
+-(void) setUpGuidelinesForMovingAndSnapRect: (NSRect*)inBigBox
+{
+	NSRect						inBox = [self layoutRectForRect: *inBigBox];
+	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
+	
+	[guidelineView removeAllGuidelines];
+	
+	CGFloat					left = [guidelineView bounds].origin.x +12,
+							bottom = [guidelineView bounds].origin.y +12;
+	CGFloat					top = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -12,
+							right = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -12; 
+		
+	if( ((left -6) < NSMinX(inBox)) && ((left +6) > NSMinX(inBox)) )
+	{
+		[guidelineView addGuidelineAt: left horizontal: NO color: [NSColor redColor]];
+		inBigBox->origin.x -= NSMinX(inBox) -left;
+	}
+	if( ((right -6) < NSMaxX(inBox)) && ((right +6) > NSMaxX(inBox)) )
+	{
+		[guidelineView addGuidelineAt: right horizontal: NO color: [NSColor redColor]];
+		inBigBox->origin.x -= NSMaxX(inBox) -right;
+	}
+	if( ((top -6) < NSMaxY(inBox)) && ((top +6) > NSMaxY(inBox)) )
+	{
+		[guidelineView addGuidelineAt: top horizontal: YES color: [NSColor redColor]];
+		inBigBox->origin.y -= NSMaxY(inBox) -top;
+	}
+	if( ((bottom -6) < NSMinY(inBox)) && ((bottom +6) > NSMinY(inBox)) )
+	{
+		[guidelineView addGuidelineAt: bottom horizontal: YES color: [NSColor redColor]];
+		inBigBox->origin.y -= NSMinY(inBox) -bottom;
+	}
+	[guidelineView setNeedsDisplay: YES];
+}
+
+
+-(void)	moveView
+{
+	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
+	BOOL					keepDragging = YES;
+	NSRect					newBox = [self frame];
+	
+	while( keepDragging )
+	{
+		NSEvent		*	theEvent = [NSApp nextEventMatchingMask: NSLeftMouseDraggedMask | NSLeftMouseUpMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
+		if( theEvent )
+		{
+			switch( [theEvent type] )
+			{
+				case NSLeftMouseUp:
+					keepDragging = NO;
+					break;
+				
+				case NSLeftMouseDragged:
+				{
+					CGFloat	deltaX = [theEvent deltaX];
+					CGFloat	deltaY = -[theEvent deltaY];
+					
+					newBox.origin.x += deltaX;
+					newBox.origin.y += deltaY;
+					
+					NSRect	correctedBox = newBox;
+					[self setUpGuidelinesForMovingAndSnapRect: &correctedBox];
+					
+					[self setFrame: correctedBox];
+					break;
+				}
+			}
+		}
+		
+		[pool drain];
+		pool = [[NSAutoreleasePool alloc] init];
+	}
+
+	[pool drain];
+	
+	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
+	[guidelineView removeAllGuidelines];
+	[guidelineView setNeedsDisplay: YES];
+
+	[mPart setRectangle: NSInsetRect( self.frame, 2, 2)];
+	[mPart updateChangeCount: NSChangeDone];
+}
+
+
 -(void)	resizeViewUsingHandle: (WILDPartGrabHandle)inHandle
 {
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
@@ -321,6 +412,7 @@
 			{
 				if( hitHandle == 0 )
 				{
+				#if 0
 					NSPasteboard*   		pb = [NSPasteboard pasteboardWithName: NSDragPboard];
 					[pb clearContents];
 					NSPoint					dragStartImagePos = NSZeroPoint;
@@ -352,6 +444,9 @@
 					// Actually commence the drag:
 					[self dragImage: theDragImg at: dragStartImagePos offset: NSMakeSize(0,0)
 								event: event pasteboard: pb source: [self enclosingCardView] slideBack: YES];
+					#else
+					[self moveView];
+					#endif
 				}
 				else
 				{
