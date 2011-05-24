@@ -790,6 +790,18 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
+-(BOOL)		canHaveTitleWidth
+{
+	return [mType isEqualToString: @"button"] && [mStyle isEqualToString: @"popup"];
+}
+
+
+-(void)	setTitleWidth: (NSInteger)inWidth
+{
+	mTitleWidth = inWidth;
+}
+
+
 -(BOOL)			fixedLineHeight
 {
 	return mFixedLineHeight;

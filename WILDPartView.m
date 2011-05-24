@@ -222,6 +222,10 @@
 			clickedHandle |= WILDPartGrabHandleBottom;
 		if( NSMaxY(myRect) >= localPoint.y && (NSMaxY(myRect) -handleSize.height) <= localPoint.y )
 			clickedHandle |= WILDPartGrabHandleTop;
+		// If we're not in one of the corners, user may be trying to drag separator, even when at the left edge:
+		if( ((clickedHandle & WILDPartGrabHandleLeft) == 0 || ((clickedHandle & WILDPartGrabHandleTop) == 0 && (clickedHandle & WILDPartGrabHandleBottom) == 0))
+			&& (NSMinX(myRect) +[mPart titleWidth]) <= localPoint.x && (NSMinX(myRect) +[mPart titleWidth] +handleSize.width) >= localPoint.x )
+			clickedHandle |= WILDPartGrabHandleSeparator;
 	}
 	
 	return clickedHandle;
@@ -242,9 +246,9 @@
 	}
 	else if( [theStyle isEqualToString: @"popup"] )
 	{
-		layoutBox.origin.x += 3;
+		layoutBox.origin.x += 3 +[mPart titleWidth];
 		layoutBox.origin.y += 3;
-		layoutBox.size.width -= 6;
+		layoutBox.size.width -= 6 +[mPart titleWidth];
 		layoutBox.size.height -= 6;
 	}
 	
@@ -386,7 +390,13 @@
 					CGFloat	deltaX = [theEvent deltaX];
 					CGFloat	deltaY = -[theEvent deltaY];
 					
-					if( inHandle & WILDPartGrabHandleLeft )
+					if( inHandle & WILDPartGrabHandleSeparator && [mPart canHaveTitleWidth] )	// May overlap with left.
+					{
+						[mPart setTitleWidth: [mPart titleWidth] +deltaX];
+						[self unloadPart];
+						[self loadPart: mPart forBackgroundEditing: NO];
+					}
+					else if( inHandle & WILDPartGrabHandleLeft )
 					{
 						newBox.origin.x += deltaX;
 						newBox.size.width -= deltaX;
@@ -766,6 +776,7 @@
 		[label setDrawsBackground: NO];
 		[label setBezeled: NO];
 		[label setBordered: NO];
+		[label setAlignment: NSRightTextAlignment];
 		[[label cell] setWraps: NO];
 		if( [currPart showName] )
 			[label setStringValue: [currPart name]];

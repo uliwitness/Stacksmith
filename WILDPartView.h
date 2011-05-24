@@ -19,11 +19,12 @@
 //	The bit flags here can be combined to indicate corners or the center.
 typedef enum
 {
-  WILDPartGrabHandleNone = 0,	// Center, none of the "handle" areas clicked.
-  WILDPartGrabHandleTop		= (1 << 0),
-  WILDPartGrabHandleLeft	= (1 << 1),
-  WILDPartGrabHandleRight	= (1 << 2),
-  WILDPartGrabHandleBottom	= (1 << 3)
+  WILDPartGrabHandleNone		= 0,	// None of the "handle" areas clicked.
+  WILDPartGrabHandleTop			= (1 << 0),
+  WILDPartGrabHandleLeft		= (1 << 1),
+  WILDPartGrabHandleRight		= (1 << 2),
+  WILDPartGrabHandleBottom		= (1 << 3),
+  WILDPartGrabHandleSeparator	= (1 << 4)	// Split view separator or popup title/body separator.
 } WILDPartGrabHandle;
 
 

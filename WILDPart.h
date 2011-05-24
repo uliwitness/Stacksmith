@@ -147,6 +147,8 @@
 -(void)			setSelectedListItemIndexes: (NSIndexSet*)newSelection;
 
 -(NSInteger)	titleWidth;
+-(void)			setTitleWidth: (NSInteger)inWidth;
+-(BOOL)			canHaveTitleWidth;
 
 -(BOOL)			fixedLineHeight;
 -(NSInteger)	textHeight;
