@@ -30,7 +30,11 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 			return;
 		}
 		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
-		if( [propValueObj isKindOfClass: [NSString class]] )
+		if( propValueObj == kCFBooleanTrue || propValueObj == kCFBooleanFalse )
+		{
+			LEOInitBooleanValue( thePropertyName, (propValueObj == kCFBooleanTrue), kLEOInvalidateReferences, inContext );
+		}
+		else if( [propValueObj isKindOfClass: [NSString class]] )
 		{
 			const char*	valueStr = [propValueObj UTF8String];
 			LEOInitStringValue( thePropertyName, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
