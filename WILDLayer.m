@@ -321,6 +321,12 @@
 }
 
 
+-(void)	createNewMoviePlayer: (id)sender
+{
+	[self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"MoviePlayerPartTemplate"]];
+}
+
+
 -(void)	deletePart: (WILDPart*)inPart
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillRemovePartNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: inPart, WILDAffectedPartKey, nil]];

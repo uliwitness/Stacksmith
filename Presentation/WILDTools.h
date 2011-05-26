@@ -25,23 +25,25 @@
 enum
 {
 	WILDBrowseTool = 1,
+	WILDPointerTool,
 	WILDButtonTool,
 	WILDFieldTool,
+	WILDMoviePlayerTool,	//	5
 	WILDSelectTool,
-	WILDLassoTool,			//	5
+	WILDLassoTool,
 	WILDPencilTool,
 	WILDBrushTool,
-	WILDEraserTool,
+	WILDEraserTool,			// 10
 	WILDLineTool,
-	WILDSprayTool,			// 10
+	WILDSprayTool,
 	WILDRectangleTool,
 	WILDRoundRectTool,
-	WILDBucketTool,
+	WILDBucketTool,			// 15
 	WILDOvalTool,
-	WILDCurveTool,			// 15
+	WILDCurveTool,
 	WILDTextTool,
 	WILDRegularPolygonTool,
-	WILDPolygonTool
+	WILDPolygonTool			// 20
 };
 typedef NSInteger	WILDTool;
 
@@ -76,7 +78,7 @@ typedef NSInteger	WILDTool;
 
 -(NSColor*)				peekPattern;
 
--(WILDTool)		currentTool;
+-(WILDTool)				currentTool;
 -(void)					setCurrentTool: (WILDTool)theTool;
 
 -(NSInteger)			numberOfSelectedClients;

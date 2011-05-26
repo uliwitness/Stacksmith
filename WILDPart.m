@@ -38,6 +38,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 @synthesize fixedLineHeight = mFixedLineHeight;
 @synthesize showLines = mShowLines;
 @synthesize sharedText = mSharedText;
+@synthesize mediaPath = mMediaPath;
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
 {
@@ -47,6 +48,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mID = WILDIntegerFromSubElementInElement( @"id", elem );
 		mRectangle = WILDRectFromSubElementInElement( @"rect", elem );
 		mName = [WILDStringFromSubElementInElement( @"name", elem ) retain];
+		mMediaPath = [WILDStringFromSubElementInElement( @"mediaPath", elem ) retain];
 		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
 		mStyle = [WILDStringFromSubElementInElement( @"style", elem ) retain];
 		mType = [WILDStringFromSubElementInElement( @"type", elem ) retain];
@@ -97,22 +99,15 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 
 -(void)	dealloc
 {
-	[mName release];
-	mName = nil;
-	[mScript release];
-	mScript = nil;
-	[mStyle release];
-	mStyle = nil;
-	[mType release];
-	mType = nil;
-	[mLayer release];
-	mLayer = nil;
-	[mTextFontName release];
-	mTextFontName = nil;
-	[mTextStyles release];
-	mTextStyles = nil;
-	[mFillColor release];
-	mFillColor = nil;
+	DESTROY_DEALLOC(mName);
+	DESTROY_DEALLOC(mScript);
+	DESTROY_DEALLOC(mStyle);
+	DESTROY_DEALLOC(mType);
+	DESTROY_DEALLOC(mLayer);
+	DESTROY_DEALLOC(mTextFontName);
+	DESTROY_DEALLOC(mTextStyles);
+	DESTROY_DEALLOC(mFillColor);
+	DESTROY_DEALLOC(mMediaPath);
 	
 	mStack = UKInvalidPointer;
 	
@@ -985,6 +980,10 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	
 	NSMutableString*	nameStr = WILDStringEscapedForXML(mName);
 	[outString appendFormat: @"\t\t<name>%@</name>\n", nameStr];
+	
+	NSMutableString*	mediaPathStr = WILDStringEscapedForXML(mMediaPath);
+	if( [mediaPathStr length] > 0 )
+		[outString appendFormat: @"\t\t<mediaPath>%@</mediaPath>\n", mediaPathStr];
 	
 	NSMutableString*	scriptStr = WILDStringEscapedForXML(mScript);
 	[outString appendFormat: @"\t\t<script>%@</script>\n", scriptStr];

@@ -863,6 +863,14 @@
 }
 
 
+-(IBAction)	createNewMoviePlayer: (id)sender
+{
+	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
+	[layer createNewMoviePlayer: sender];	
+	[[WILDTools sharedTools] setCurrentTool: WILDMoviePlayerTool];
+}
+
+
 -(IBAction)	createNewCard: (id)sender
 {
 	WILDStack		*	theStack = [mCurrentCard stack];

@@ -22,6 +22,7 @@
 #import "WILDButtonView.h"
 #import "WILDScrollView.h"
 #import <QuartzCore/QuartzCore.h>
+#import <QTKit/QTKit.h>
 
 
 @class WILDCardView;
@@ -110,7 +111,9 @@
 -(BOOL)	myToolIsCurrent
 {
 	BOOL	isMyTool = ([[WILDTools sharedTools] currentTool] == WILDButtonTool && [[mPart partType] isEqualToString: @"button"])
-						|| ([[WILDTools sharedTools] currentTool] == WILDFieldTool && [[mPart partType] isEqualToString: @"field"]);
+						|| ([[WILDTools sharedTools] currentTool] == WILDFieldTool && [[mPart partType] isEqualToString: @"field"])
+						|| ([[WILDTools sharedTools] currentTool] == WILDMoviePlayerTool && [[mPart partType] isEqualToString: @"moviePlayer"])
+						|| ([[WILDTools sharedTools] currentTool] == WILDPointerTool);
 	return isMyTool;
 }
 
@@ -237,7 +240,9 @@
 	NSRect	layoutBox = NSInsetRect( newBox, 2, 2 );
 	
 	NSString*	theStyle = [mPart style];
-	if( [theStyle isEqualToString: @"default"] || [theStyle isEqualToString: @"standard"] )
+	if( [[mPart partType] isEqualToString: @"moviePlayer"] )
+		;	// No special behaviours for movie players.
+	else if( [theStyle isEqualToString: @"default"] || [theStyle isEqualToString: @"standard"] )
 	{
 		layoutBox.origin.x += 6;
 		layoutBox.origin.y += 5;
@@ -1190,6 +1195,30 @@
 }
 
 
+-(void)	loadMoviePlayer: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
+			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
+{
+	NSRect						partRect = [currPart rectangle];
+	[self setHidden: ![currPart visible]];
+	[self setWantsLayer: YES];
+	[self setPart: currPart];
+	partRect.origin = NSMakePoint( 2, 2 );
+	
+	QTMovieView		* mpv = [[[QTMovieView alloc] initWithFrame: partRect] autorelease];
+	NSError			* outError = nil;
+	NSString		* movPath = [[NSBundle mainBundle] pathForResource: [currPart mediaPath] ofType: @""];
+	if( !movPath )
+		movPath = [currPart mediaPath];
+	QTMovie			* mov = [QTMovie movieWithFile: movPath error: &outError];
+	[mpv setMovie: mov];
+	[mpv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+	[self addSubview: mpv];
+	
+	[self setHelperView: nil];
+	[self setMainView: mpv];
+}
+
+
 -(void)	loadPart: (WILDPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode
 {
 	WILDPartContents*	contents = nil;
@@ -1202,8 +1231,10 @@
 	
 	if( [[currPart partType] isEqualToString: @"button"] )
 		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
-	else
+	else if( [[currPart partType] isEqualToString: @"field"] )
 		[self loadField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
+	else if( [[currPart partType] isEqualToString: @"moviePlayer"] )
+		[self loadMoviePlayer: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 }
 
 

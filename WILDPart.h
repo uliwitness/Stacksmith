@@ -25,6 +25,7 @@
 	WILDObjectID		mID;
 	NSRect				mRectangle;
 	NSString*			mName;
+	NSString*			mMediaPath;
 	NSString*			mScript;
 	struct LEOScript*	mScriptObject;
 	NSString*			mStyle;
@@ -74,6 +75,7 @@
 @property (assign) BOOL		fixedLineHeight;
 @property (assign) BOOL		showLines;
 @property (assign) BOOL		sharedText;
+@property (copy) NSString*	mediaPath;
 
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
