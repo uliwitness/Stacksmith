@@ -1047,8 +1047,79 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 								[NSNumber numberWithDouble: NSMaxY(mRectangle)], @"bottom",
 								nil];
 	}
+	else if( [inPropertyName isEqualToString: @"visible"] )
+		return mVisible ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"dontWrap"] )
+		return mDontWrap ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"dontSearch"] )
+		return mDontSearch ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"sharedText"] )
+		return mSharedText ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"fixedLineHeight"] )
+		return mFixedLineHeight ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"autoTab"] )
+		return mAutoTab ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"lockText"] )
+		return mLockText ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"autoSelect"] )
+		return mAutoSelect ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"showLines"] )
+		return mShowLines ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"autoHighlight"] )
+		return mAutoHighlight ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"highlight"] )
+		return mHighlight ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"sharedHighlight"] )
+		return mSharedHighlight ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"wideMargins"] )
+		return mWideMargins ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"multipleLines"] )
+		return mMultipleLines ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"showName"] )
+		return mShowName ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"enabled"] )
+		return mEnabled ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"highlightedForTracking"] )
+		return mHighlightedForTracking ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"script"] )
+		return mScript;
+	else if( [inPropertyName isEqualToString: @"style"] )
+		return mStyle;
+	else if( [inPropertyName isEqualToString: @"type"] )
+		return mType;
+	else if( [inPropertyName isEqualToString: @"moviePath"] )
+		return mMediaPath;
+	else if( [inPropertyName isEqualToString: @"short id"] || [inPropertyName isEqualToString: @"id"] )
+		return [NSNumber numberWithLongLong: mID];
 	else
 		return nil;
+}
+
+
+-(NSString*)	validatedStyle: (NSString*)userStyle
+{
+	if( ![userStyle isKindOfClass: [NSString class]] )
+		return mStyle;
+	static NSDictionary*	sValidStyles = nil;
+	if( !sValidStyles )
+		sValidStyles = [[NSDictionary alloc] initWithObjectsAndKeys:
+										@"transparent", @"transparent",
+										@"opaque", @"opaque",
+										@"rectangle", @"rectangle",
+										@"roundrect", @"roundrect",
+										@"shadow", @"shadow",
+										@"scrolling", @"scrolling",
+										@"checkbox", @"checkbox",
+										@"radiobutton", @"radiobutton",
+										@"standard", @"standard",
+										@"default", @"default",
+										@"oval", @"oval",
+										@"popup", @"popup",
+										nil];
+	userStyle = [sValidStyles objectForKey: [userStyle lowercaseString]];
+	if( !userStyle )
+		return mStyle;
+	return userStyle;
 }
 
 
@@ -1070,6 +1141,46 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		newRect.size.height = [[inValue objectForKey: @"bottom"] doubleValue] -newRect.origin.y;
 		[self setFlippedRectangle: newRect];
 	}
+	else if( [inPropertyName isEqualToString: @"visible"] )
+		mVisible = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"dontWrap"] )
+		mDontWrap = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"dontSearch"] )
+		mDontSearch = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"sharedText"] )
+		mSharedText = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"fixedLineHeight"] )
+		mFixedLineHeight = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"autoTab"] )
+		mAutoTab = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"lockText"] )
+		mLockText = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"autoSelect"] )
+		mAutoSelect = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"showLines"] )
+		mShowLines = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"autoHighlight"] )
+		mAutoHighlight = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"highlight"] )
+		mHighlight = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"sharedHighlight"] )
+		mSharedHighlight = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"wideMargins"] )
+		mWideMargins = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"multipleLines"] )
+		mMultipleLines = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"showName"] )
+		mShowName = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"enabled"] )
+		mEnabled = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"highlightedForTracking"] )
+		mHighlightedForTracking = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"script"] )
+		[self setScript: inValue];
+	else if( [inPropertyName isEqualToString: @"style"] )
+		[self setStyle: [self validatedStyle: mStyle]];
+	else if( [inPropertyName isEqualToString: @"moviePath"] )
+		[self setMediaPath: inValue];
 	else
 		propExists = NO;
 
