@@ -324,6 +324,67 @@
 }
 
 
+-(void) setUpGuidelinesForResizingWithHandle: (WILDPartGrabHandle)inHandle andSnapRect: (NSRect*)inBigBox
+{
+	NSRect						inBox = [self layoutRectForRect: *inBigBox];
+	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
+	
+	[guidelineView removeAllGuidelines];
+	
+	CGFloat					left = [guidelineView bounds].origin.x +20,
+							bottom = [guidelineView bounds].origin.y +20;
+	CGFloat					top = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -20,
+							right = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -20; 
+	
+	// Show guidelines at 12px distance from edges & snap to them:
+	//	(Aqua standard distance to window edge)
+	if( (inHandle & WILDPartGrabHandleLeft) && ((left -6) < NSMinX(inBox)) && ((left +6) > NSMinX(inBox)) )
+	{
+		[guidelineView addGuidelineAt: left horizontal: NO color: [NSColor blueColor]];
+		inBigBox->origin.x -= NSMinX(inBox) -left;
+	}
+	if( (inHandle & WILDPartGrabHandleRight) && ((right -6) < NSMaxX(inBox)) && ((right +6) > NSMaxX(inBox)) )
+	{
+		[guidelineView addGuidelineAt: right horizontal: NO color: [NSColor blueColor]];
+		inBigBox->size.width += NSMaxX(inBox) -right;
+	}
+	if( (inHandle & WILDPartGrabHandleTop) && ((top -6) < NSMaxY(inBox)) && ((top +6) > NSMaxY(inBox)) )
+	{
+		[guidelineView addGuidelineAt: top horizontal: YES color: [NSColor blueColor]];
+		inBigBox->origin.y -= NSMaxY(inBox) -top;
+	}
+	if( (inHandle & WILDPartGrabHandleBottom) && ((bottom -6) < NSMinY(inBox)) && ((bottom +6) > NSMinY(inBox)) )
+	{
+		[guidelineView addGuidelineAt: bottom horizontal: YES color: [NSColor blueColor]];
+		inBigBox->size.height += NSMinY(inBox) -bottom;
+	}
+	
+	// Guidelines at card center (horz & vert):
+	CGFloat	hCenter = NSMidX([guidelineView bounds]);
+	CGFloat	vCenter = NSMidY([guidelineView bounds]);
+	if( ((hCenter -6) < NSMidX(inBox)) && ((hCenter +6) > NSMidX(inBox)) )
+	{
+		[guidelineView addGuidelineAt: hCenter horizontal: NO color: [NSColor blueColor]];
+	}
+	if( vCenter == NSMidY(inBox) )
+	{
+		[guidelineView addGuidelineAt: vCenter horizontal: YES color: [NSColor blueColor]];
+	}
+	
+	// Snap to card edges:
+	if( (inHandle & WILDPartGrabHandleLeft) && ([guidelineView bounds].origin.x +6) > NSMinX(inBox) && ([guidelineView bounds].origin.x -6) < NSMinX(inBox) )
+		inBigBox->origin.x -= NSMinX(inBox) -[guidelineView bounds].origin.x;
+	if( (inHandle & WILDPartGrabHandleRight) && ([guidelineView bounds].origin.y +6) > NSMinY(inBox) && ([guidelineView bounds].origin.y -6) < NSMinY(inBox) )
+		inBigBox->origin.y -= NSMinY(inBox) -[guidelineView bounds].origin.y;
+	if( (inHandle & WILDPartGrabHandleTop) && (NSMaxX([guidelineView bounds]) -6) < NSMaxX(inBox) && (NSMaxX([guidelineView bounds]) +6) > NSMaxX(inBox) )
+		inBigBox->origin.x -= NSMaxX(inBox) -NSMaxX([guidelineView bounds]);
+	if( (inHandle & WILDPartGrabHandleBottom) && (NSMaxY([guidelineView bounds]) -6) < NSMaxY(inBox) && (NSMaxY([guidelineView bounds]) +6) > NSMaxY(inBox) )
+		inBigBox->origin.y -= NSMaxY(inBox) -NSMaxY([guidelineView bounds]);
+	
+	[guidelineView setNeedsDisplay: YES];
+}
+
+
 -(void)	moveView
 {
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
@@ -377,6 +438,7 @@
 {
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	BOOL					keepDragging = YES;
+	NSRect					frame = [self frame];
 	
 	while( keepDragging )
 	{
@@ -391,7 +453,6 @@
 				
 				case NSLeftMouseDragged:
 				{
-					NSRect	newBox = [self frame];
 					CGFloat	deltaX = [theEvent deltaX];
 					CGFloat	deltaY = -[theEvent deltaY];
 					
@@ -403,20 +464,22 @@
 					}
 					else if( inHandle & WILDPartGrabHandleLeft )
 					{
-						newBox.origin.x += deltaX;
-						newBox.size.width -= deltaX;
+						frame.origin.x += deltaX;
+						frame.size.width -= deltaX;
 					}
 					else if( inHandle & WILDPartGrabHandleRight )
-						newBox.size.width += deltaX;
+						frame.size.width += deltaX;
 
 					if( inHandle & WILDPartGrabHandleTop )
-						newBox.size.height += deltaY;
+						frame.size.height += deltaY;
 					else if( inHandle & WILDPartGrabHandleBottom )
 					{
-						newBox.origin.y += deltaY;
-						newBox.size.height -= deltaY;
+						frame.origin.y += deltaY;
+						frame.size.height -= deltaY;
 					}
 					
+					NSRect	newBox = frame;
+					[self setUpGuidelinesForResizingWithHandle: inHandle andSnapRect: &newBox ];
 					[self setFrame: newBox];
 					break;
 				}
@@ -431,6 +494,10 @@
 	
 	[mPart setRectangle: NSInsetRect( self.frame, 2, 2)];
 	[mPart updateChangeCount: NSChangeDone];
+	
+	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
+	[guidelineView removeAllGuidelines];
+	[guidelineView setNeedsDisplay: YES];
 }
 
 
@@ -1212,6 +1279,8 @@
 	QTMovie			* mov = [QTMovie movieWithFile: movPath error: &outError];
 	[mpv setMovie: mov];
 	[mpv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+	[mpv setPreservesAspectRatio: YES];
+	[mpv setControllerVisible: [currPart controllerVisible]];
 	[self addSubview: mpv];
 	
 	[self setHelperView: nil];

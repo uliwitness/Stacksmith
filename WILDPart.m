@@ -38,6 +38,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 @synthesize fixedLineHeight = mFixedLineHeight;
 @synthesize showLines = mShowLines;
 @synthesize sharedText = mSharedText;
+@synthesize controllerVisible = mControllerVisible;
 @synthesize mediaPath = mMediaPath;
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
@@ -89,6 +90,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mTextHeight = WILDIntegerFromSubElementInElement( @"textHeight", elem );
 		mTextStyles = [WILDStringsFromSubElementInElement( @"textStyle", elem ) retain];
 		mIconID = WILDIntegerFromSubElementInElement( @"icon", elem );
+		mControllerVisible = WILDBoolFromSubElementInElement( @"controllerVisible", elem, NO );
 		
 		mIDForScripts = kLEOObjectIDINVALID;
 	}
@@ -954,6 +956,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[outString appendFormat: @"\t\t<multipleLines>%@</multipleLines>\n", (mMultipleLines ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<showLines>%@</showLines>\n", (mShowLines ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<wideMargins>%@</wideMargins>\n", (mWideMargins ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<controllerVisible>%@</controllerVisible>\n", (mControllerVisible ? @"<true />" : @"<false />")];
 	
 	if( [mSelectedLines count] > 0 )
 	{
@@ -1049,37 +1052,37 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	}
 	else if( [inPropertyName isEqualToString: @"visible"] )
 		return mVisible ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"dontWrap"] )
+	else if( [inPropertyName isEqualToString: @"dontwrap"] )
 		return mDontWrap ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"dontSearch"] )
+	else if( [inPropertyName isEqualToString: @"dontsearch"] )
 		return mDontSearch ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"sharedText"] )
+	else if( [inPropertyName isEqualToString: @"sharedtext"] )
 		return mSharedText ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"fixedLineHeight"] )
+	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
 		return mFixedLineHeight ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"autoTab"] )
+	else if( [inPropertyName isEqualToString: @"autotab"] )
 		return mAutoTab ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"lockText"] )
+	else if( [inPropertyName isEqualToString: @"locktext"] )
 		return mLockText ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"autoSelect"] )
+	else if( [inPropertyName isEqualToString: @"autoselect"] )
 		return mAutoSelect ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"showLines"] )
+	else if( [inPropertyName isEqualToString: @"showlines"] )
 		return mShowLines ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"autoHighlight"] )
+	else if( [inPropertyName isEqualToString: @"autohighlight"] )
 		return mAutoHighlight ? kCFBooleanTrue : kCFBooleanFalse;
 	else if( [inPropertyName isEqualToString: @"highlight"] )
 		return mHighlight ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"sharedHighlight"] )
+	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
 		return mSharedHighlight ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"wideMargins"] )
+	else if( [inPropertyName isEqualToString: @"widemargins"] )
 		return mWideMargins ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"multipleLines"] )
+	else if( [inPropertyName isEqualToString: @"multiplelines"] )
 		return mMultipleLines ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"showName"] )
+	else if( [inPropertyName isEqualToString: @"showname"] )
 		return mShowName ? kCFBooleanTrue : kCFBooleanFalse;
 	else if( [inPropertyName isEqualToString: @"enabled"] )
 		return mEnabled ? kCFBooleanTrue : kCFBooleanFalse;
-	else if( [inPropertyName isEqualToString: @"highlightedForTracking"] )
+	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
 		return mHighlightedForTracking ? kCFBooleanTrue : kCFBooleanFalse;
 	else if( [inPropertyName isEqualToString: @"script"] )
 		return mScript;
@@ -1091,6 +1094,8 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		return mMediaPath;
 	else if( [inPropertyName isEqualToString: @"short id"] || [inPropertyName isEqualToString: @"id"] )
 		return [NSNumber numberWithLongLong: mID];
+	else if( [inPropertyName isEqualToString: @"controllervisible"] )
+		return mControllerVisible ? kCFBooleanTrue : kCFBooleanFalse;
 	else
 		return nil;
 }
@@ -1143,44 +1148,46 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	}
 	else if( [inPropertyName isEqualToString: @"visible"] )
 		mVisible = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"dontWrap"] )
+	else if( [inPropertyName isEqualToString: @"dontwrap"] )
 		mDontWrap = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"dontSearch"] )
+	else if( [inPropertyName isEqualToString: @"dontsearch"] )
 		mDontSearch = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"sharedText"] )
+	else if( [inPropertyName isEqualToString: @"sharedtext"] )
 		mSharedText = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"fixedLineHeight"] )
+	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
 		mFixedLineHeight = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"autoTab"] )
+	else if( [inPropertyName isEqualToString: @"autotab"] )
 		mAutoTab = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"lockText"] )
+	else if( [inPropertyName isEqualToString: @"locktext"] )
 		mLockText = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"autoSelect"] )
+	else if( [inPropertyName isEqualToString: @"autoselect"] )
 		mAutoSelect = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"showLines"] )
+	else if( [inPropertyName isEqualToString: @"showlines"] )
 		mShowLines = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"autoHighlight"] )
+	else if( [inPropertyName isEqualToString: @"autohighlight"] )
 		mAutoHighlight = (inValue != kCFBooleanFalse);
 	else if( [inPropertyName isEqualToString: @"highlight"] )
 		mHighlight = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"sharedHighlight"] )
+	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
 		mSharedHighlight = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"wideMargins"] )
+	else if( [inPropertyName isEqualToString: @"widemargins"] )
 		mWideMargins = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"multipleLines"] )
+	else if( [inPropertyName isEqualToString: @"multiplelines"] )
 		mMultipleLines = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"showName"] )
+	else if( [inPropertyName isEqualToString: @"showname"] )
 		mShowName = (inValue != kCFBooleanFalse);
 	else if( [inPropertyName isEqualToString: @"enabled"] )
 		mEnabled = (inValue != kCFBooleanFalse);
-	else if( [inPropertyName isEqualToString: @"highlightedForTracking"] )
+	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
 		mHighlightedForTracking = (inValue != kCFBooleanFalse);
 	else if( [inPropertyName isEqualToString: @"script"] )
 		[self setScript: inValue];
 	else if( [inPropertyName isEqualToString: @"style"] )
 		[self setStyle: [self validatedStyle: mStyle]];
-	else if( [inPropertyName isEqualToString: @"moviePath"] )
+	else if( [inPropertyName isEqualToString: @"moviepath"] )
 		[self setMediaPath: inValue];
+	else if( [inPropertyName isEqualToString: @"controllervisible"] )
+		mControllerVisible = (inValue != kCFBooleanFalse);
 	else
 		propExists = NO;
 

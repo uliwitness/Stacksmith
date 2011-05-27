@@ -48,6 +48,7 @@
 	BOOL				mShowName;
 	BOOL				mEnabled;
 	BOOL				mHighlightedForTracking;	// For most buttons same as highlight.
+	BOOL				mControllerVisible;
 	NSMutableIndexSet*	mSelectedLines;				// The indexes into the contents' list items array of the selected items.
 	NSTextAlignment		mTextAlignment;
 	NSString*			mTextFontName;
@@ -75,6 +76,7 @@
 @property (assign) BOOL		fixedLineHeight;
 @property (assign) BOOL		showLines;
 @property (assign) BOOL		sharedText;
+@property (assign) BOOL		controllerVisible;
 @property (copy) NSString*	mediaPath;
 
 
