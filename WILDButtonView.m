@@ -13,15 +13,6 @@
 
 @implementation WILDButtonView
 
--(void)	drawRect: (NSRect)dirtyRect
-{
-	[super drawRect: dirtyRect];
-	
-	WILDPartView*	pv = [self superview];
-	[pv drawSubView: self dirtyRect: dirtyRect];
-}
-
-
 -(void)	mouseDown: (NSEvent*)event
 {
 	WILDPartView*			pv = [self superview];

@@ -102,9 +102,8 @@
 
 -(void)	animate: (id)sender
 {
-	[self setNeedsDisplay: YES];
-	[mMainView setNeedsDisplay: YES];
-	[mHelperView setNeedsDisplay: YES];
+	WILDGuidelineView*	guidelineView = [[self enclosingCardView] guidelineView];
+	[guidelineView setNeedsDisplay: YES];
 }
 
 
@@ -123,11 +122,18 @@
 	if( mSelected != inState )
 	{
 		mSelected = inState;
+		WILDGuidelineView*	guidelineView = [[self enclosingCardView] guidelineView];
 		
 		if( mSelected )
+		{
 			[[WILDTools sharedTools] addClient: self];
+			[guidelineView addSelectedPartView: self];
+		}
 		else
+		{
 			[[WILDTools sharedTools] removeClient: self];
+			[guidelineView removeSelectedPartView: self];
+		}
 	}
 }
 
@@ -138,15 +144,18 @@
 }
 
 
--(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect
+-(void)	drawSelectionHighlightInView: (NSView*)overlayView
 {
-	NSRect	subviewBounds = [subview bounds];
 	BOOL	isMyTool = [self myToolIsCurrent];
+	NSView*	mainSubView = mMainView;
+	if( [[mPart partType] isEqualToString: @"field"] )
+		mainSubView = mHelperView;
+	NSRect	subviewFrame = [self convertRect: [mainSubView frame] toView: [self superview]];
 	
 	if( mSelected )
 	{
 		[[NSColor keyboardFocusIndicatorColor] set];
-		NSRect	clampedBounds = subviewBounds;
+		NSRect	clampedBounds = subviewFrame;
 		clampedBounds.origin.x = truncf(clampedBounds.origin.x) + 0.5;
 		clampedBounds.origin.y = truncf(clampedBounds.origin.y) + 0.5;
 		clampedBounds.size.width -= 1;
@@ -165,7 +174,7 @@
 			[[[WILDTools sharedTools] peekPattern] set];
 		else
 			[[NSColor grayColor] set];
-		NSRect	peekBox = NSInsetRect( subviewBounds, 0.5, 0.5 );
+		NSRect	peekBox = NSInsetRect( subviewFrame, 0.5, 0.5 );
 		[NSBezierPath setDefaultLineWidth: 1];
 		[NSBezierPath strokeRect: peekBox];
 		[[NSColor blackColor] set];
@@ -173,7 +182,7 @@
 	
     if( mPeeking )
 	{
-		NSRect	peekBox = NSInsetRect( subviewBounds, 1, 1 );
+		NSRect	peekBox = NSInsetRect( subviewFrame, 1, 1 );
 		[NSBezierPath setDefaultLineWidth: 2];
 		[[NSColor lightGrayColor] set];
 		[[NSColor blueColor] set];
@@ -272,28 +281,49 @@
 							bottom = [guidelineView bounds].origin.y +20;
 	CGFloat					top = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -20,
 							right = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -20; 
+	// Find parallels to other parts:
+	CGFloat					xMovement = CGFLOAT_MAX,
+							yMovement = CGFLOAT_MAX;
+	CGFloat					horzGuidelinePos = -1,	// -1 is a nonsense position for a guideline (wouldn't be visible), so we use that to indicate "ignore".
+							vertGuidelinePos = -1;
 	
 	// Show guidelines at 12px distance from edges & snap to them:
 	//	(Aqua standard distance to window edge)
 	if( ((left -6) < NSMinX(inBox)) && ((left +6) > NSMinX(inBox)) )
 	{
-		[guidelineView addGuidelineAt: left horizontal: NO color: [NSColor blueColor]];
-		inBigBox->origin.x -= NSMinX(inBox) -left;
+		CGFloat		horzDiff = NSMinX(inBox) -left;
+		if( fabs(horzDiff) < fabs(xMovement) )
+		{
+			xMovement = horzDiff;
+			horzGuidelinePos = left;
+		}
 	}
 	if( ((right -6) < NSMaxX(inBox)) && ((right +6) > NSMaxX(inBox)) )
 	{
-		[guidelineView addGuidelineAt: right horizontal: NO color: [NSColor blueColor]];
-		inBigBox->origin.x -= NSMaxX(inBox) -right;
+		CGFloat		horzDiff = NSMaxX(inBox) -right;
+		if( fabs(horzDiff) < fabs(xMovement) )
+		{
+			xMovement = horzDiff;
+			horzGuidelinePos = right;
+		}
 	}
 	if( ((top -6) < NSMaxY(inBox)) && ((top +6) > NSMaxY(inBox)) )
 	{
-		[guidelineView addGuidelineAt: top horizontal: YES color: [NSColor blueColor]];
-		inBigBox->origin.y -= NSMaxY(inBox) -top;
+		CGFloat		vertDiff = NSMaxY(inBox) -top;
+		if( fabs(vertDiff) < fabs(yMovement) )
+		{
+			yMovement = vertDiff;
+			vertGuidelinePos = top;
+		}
 	}
 	if( ((bottom -6) < NSMinY(inBox)) && ((bottom +6) > NSMinY(inBox)) )
 	{
-		[guidelineView addGuidelineAt: bottom horizontal: YES color: [NSColor blueColor]];
-		inBigBox->origin.y -= NSMinY(inBox) -bottom;
+		CGFloat		vertDiff = NSMinY(inBox) -bottom;
+		if( fabs(vertDiff) < fabs(yMovement) )
+		{
+			yMovement = vertDiff;
+			vertGuidelinePos = bottom;
+		}
 	}
 	
 	// Guidelines at card center (horz & vert):
@@ -301,24 +331,120 @@
 	CGFloat	vCenter = NSMidY([guidelineView bounds]);
 	if( ((hCenter -6) < NSMidX(inBox)) && ((hCenter +6) > NSMidX(inBox)) )
 	{
-		[guidelineView addGuidelineAt: hCenter horizontal: NO color: [NSColor blueColor]];
-		inBigBox->origin.x -= NSMidX(inBox) -hCenter;
+		CGFloat		horzDiff = NSMidX(inBox) -hCenter;
+		if( fabs(horzDiff) < fabs(xMovement) )
+		{
+			xMovement = horzDiff;
+			horzGuidelinePos = hCenter;
+		}
 	}
 	if( ((vCenter -6) < NSMidY(inBox)) && ((vCenter +6) > NSMidY(inBox)) )
 	{
-		[guidelineView addGuidelineAt: vCenter horizontal: YES color: [NSColor blueColor]];
-		inBigBox->origin.y -= NSMidY(inBox) -vCenter;
+		CGFloat		vertDiff = NSMidY(inBox) -vCenter;
+		if( fabs(vertDiff) < fabs(yMovement) )
+		{
+			yMovement = vertDiff;
+			vertGuidelinePos = vCenter;
+		}
 	}
 	
 	// Snap to card edges:
 	if( ([guidelineView bounds].origin.x +6) > NSMinX(inBox) && ([guidelineView bounds].origin.x -6) < NSMinX(inBox) )
-		inBigBox->origin.x -= NSMinX(inBox) -[guidelineView bounds].origin.x;
+	{
+		CGFloat		horzDiff = NSMinX(inBox) -[guidelineView bounds].origin.x;
+		if( fabs(horzDiff) < fabs(xMovement) )
+		{
+			xMovement = horzDiff;
+			horzGuidelinePos = 0;
+		}
+	}
 	if( ([guidelineView bounds].origin.y +6) > NSMinY(inBox) && ([guidelineView bounds].origin.y -6) < NSMinY(inBox) )
-		inBigBox->origin.y -= NSMinY(inBox) -[guidelineView bounds].origin.y;
+	{
+		CGFloat		horzDiff = NSMinY(inBox) -[guidelineView bounds].origin.y;
+		if( fabs(horzDiff) < fabs(xMovement) )
+		{
+			xMovement = horzDiff;
+			horzGuidelinePos = 0;
+		}
+	}
 	if( (NSMaxX([guidelineView bounds]) -6) < NSMaxX(inBox) && (NSMaxX([guidelineView bounds]) +6) > NSMaxX(inBox) )
-		inBigBox->origin.x -= NSMaxX(inBox) -NSMaxX([guidelineView bounds]);
+	{
+		CGFloat		vertDiff = NSMaxX(inBox) -NSMaxX([guidelineView bounds]);
+		if( fabs(vertDiff) < fabs(yMovement) )
+		{
+			yMovement = vertDiff;
+			vertGuidelinePos = 0;
+		}
+	}
 	if( (NSMaxY([guidelineView bounds]) -6) < NSMaxY(inBox) && (NSMaxY([guidelineView bounds]) +6) > NSMaxY(inBox) )
-		inBigBox->origin.y -= NSMaxY(inBox) -NSMaxY([guidelineView bounds]);
+	{
+		CGFloat		vertDiff = NSMaxY(inBox) -NSMaxY([guidelineView bounds]);
+		if( fabs(vertDiff) < fabs(yMovement) )
+		{
+			yMovement = vertDiff;
+			vertGuidelinePos = 0;
+		}
+	}
+	
+	// Find other parts that align with this one:
+	for( WILDPartView* currPartView in [[self superview] subviews] )
+	{
+		if( currPartView != self && [currPartView isKindOfClass: [WILDPartView class]] )
+		{
+			NSRect	currBox = [self layoutRectForRect: [currPartView frame]];
+			if( ((NSMinX(currBox) -6) < NSMinX(inBox)) && ((NSMinX(currBox) +6) > NSMinX(inBox)) )
+			{
+				CGFloat		horzDiff = NSMinX(inBox) -NSMinX(currBox);
+				if( fabs(horzDiff) < fabs(xMovement) )
+				{
+					xMovement = horzDiff;
+					horzGuidelinePos = NSMinX(currBox);
+				}
+			}
+			if( ((NSMaxX(currBox) -6) < NSMaxX(inBox)) && ((NSMaxX(currBox) +6) > NSMaxX(inBox)) )
+			{
+				CGFloat		horzDiff = NSMaxX(inBox) -NSMaxX(currBox);
+				if( fabs(horzDiff) < fabs(xMovement) )
+				{
+					xMovement = horzDiff;
+					horzGuidelinePos = NSMaxX(currBox);
+				}
+			}
+			if( ((NSMaxY(currBox) -6) < NSMaxY(inBox)) && ((NSMaxY(currBox) +6) > NSMaxY(inBox)) )
+			{
+				CGFloat		vertDiff = NSMaxY(inBox) -NSMaxY(currBox);
+				if( fabs(vertDiff) < fabs(yMovement) )
+				{
+					yMovement = vertDiff;
+					vertGuidelinePos = NSMaxY(currBox);
+				}
+			}
+			if( ((NSMinY(currBox) -6) < NSMinY(inBox)) && ((NSMinY(currBox) +6) > NSMinY(inBox)) )
+			{
+				CGFloat		vertDiff = NSMinY(inBox) -NSMinY(currBox);
+				if( fabs(vertDiff) < fabs(yMovement) )
+				{
+					yMovement = vertDiff;
+					vertGuidelinePos = NSMinY(currBox);
+				}
+				break;
+			}
+		}
+	}
+	
+	// Now that we've found the closest two guidelines, show them:
+	if( horzGuidelinePos != -1 )
+	{
+		if( horzGuidelinePos > 0 )
+			[guidelineView addGuidelineAt: horzGuidelinePos horizontal: NO color: [NSColor blueColor]];
+		inBigBox->origin.x -= xMovement;
+	}
+	if( vertGuidelinePos != -1 )
+	{
+		if( vertGuidelinePos > 0 )
+			[guidelineView addGuidelineAt: vertGuidelinePos horizontal: YES color: [NSColor blueColor]];
+		inBigBox->origin.y -= yMovement;
+	}
 	
 	[guidelineView setNeedsDisplay: YES];
 }
@@ -602,6 +728,8 @@
 	else
 	{
 		[[WILDTools sharedTools] deselectAllClients];
+		WILDGuidelineView*	guidelineView = [[self enclosingCardView] guidelineView];
+		[guidelineView removeAllSelectedPartViews];
 		[self setSelected: YES];
 	}
 	[self setNeedsDisplay: YES];

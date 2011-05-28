@@ -12,12 +12,4 @@
 
 @implementation WILDScrollView
 
--(void)	drawRect: (NSRect)dirtyRect
-{
-	[super drawRect: dirtyRect];
-	
-	WILDPartView*	pv = [self superview];
-	[pv drawSubView: self dirtyRect: dirtyRect];
-}
-
 @end

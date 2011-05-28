@@ -149,9 +149,12 @@
 		[sewc showWindow: nil];
 	}
 	else if( [[WILDTools sharedTools] currentTool] == WILDButtonTool
-				|| [[WILDTools sharedTools] currentTool] == WILDFieldTool )
+				|| [[WILDTools sharedTools] currentTool] == WILDFieldTool
+				|| [[WILDTools sharedTools] currentTool] == WILDMoviePlayerTool
+				|| [[WILDTools sharedTools] currentTool] == WILDPointerTool )
 	{
 		[[WILDTools sharedTools] deselectAllClients];
+		[[self guidelineView] removeAllSelectedPartViews];
 	}
 	else
 	{

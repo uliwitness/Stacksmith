@@ -7,6 +7,7 @@
 //
 
 #import "WILDGuidelineView.h"
+#import "WILDPartView.h"
 
 
 @interface WILDGuideline : NSObject
@@ -68,6 +69,7 @@
     if (self)
 	{
 		mGuidelines = [[NSMutableArray alloc] init];
+		mSelectedPartViews = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -76,6 +78,7 @@
 
 - (void)dealloc
 {
+	DESTROY_DEALLOC(mSelectedPartViews);
 	DESTROY_DEALLOC(mGuidelines);
 
     [super dealloc];
@@ -86,6 +89,9 @@
 {
 	for( WILDGuideline* currGuideline in mGuidelines )
 		[currGuideline drawInView: self];
+	
+	for( WILDPartView* currPartView in mSelectedPartViews )
+		[currPartView drawSelectionHighlightInView: self];
 }
 
 
@@ -96,18 +102,41 @@
 	[theGuideline setHorizontal: inIsHorizontal];
 	[theGuideline setColor: inColor];
 	[mGuidelines addObject: theGuideline];
+	[self setNeedsDisplay: YES];
 }
 
 
 -(void)	removeAllGuidelines
 {
 	[mGuidelines removeAllObjects];
+	[self setNeedsDisplay: YES];
 }
 
 
 -(NSView *)	hitTest: (NSPoint)aPoint
 {
 	return nil;	// Make all clicks pass through us.
+}
+
+
+-(void)	addSelectedPartView: (WILDPartView*)inPartView
+{
+	[mSelectedPartViews addObject: inPartView];
+	[self setNeedsDisplay: YES];
+}
+
+
+-(void)	removeSelectedPartView: (WILDPartView*)inPartView
+{
+	[mSelectedPartViews removeObject: inPartView];
+	[self setNeedsDisplay: YES];
+}
+
+
+-(void)	removeAllSelectedPartViews
+{
+	[mSelectedPartViews removeAllObjects];
+	[self setNeedsDisplay: YES];
 }
 
 @end

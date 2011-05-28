@@ -9,12 +9,20 @@
 #import <Cocoa/Cocoa.h>
 
 
+@class WILDPartView;
+
+
 @interface WILDGuidelineView : NSView
 {
 	NSMutableArray			*mGuidelines;
+	NSMutableArray			*mSelectedPartViews;
 }
 
 -(void)	addGuidelineAt: (CGFloat)pos horizontal: (BOOL)inIsHorizontal color: (NSColor*)inColor;
 -(void)	removeAllGuidelines;
+
+-(void)	addSelectedPartView: (WILDPartView*)inPartView;
+-(void)	removeSelectedPartView: (WILDPartView*)inPartView;
+-(void)	removeAllSelectedPartViews;
 
 @end

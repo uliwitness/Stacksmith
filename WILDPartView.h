@@ -60,7 +60,7 @@ typedef enum
 +(NSImage*)	imageForPeers: (NSArray*)views ofView: (NSView*)inView dragStartImagePos: (NSPoint*)dragStartImagePos;
 +(NSRect)	rectForPeers: (NSArray*)parts dragStartImagePos: (NSPoint*)dragStartImagePos;
 
--(void)	drawSubView: (NSView*)subview dirtyRect: (NSRect)dirtyRect;
+-(void)	drawSelectionHighlightInView: (NSView*)overlayView;
 
 -(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents create: (BOOL)inDoCreate;
 
