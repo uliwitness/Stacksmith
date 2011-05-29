@@ -68,6 +68,7 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
+		mPartViews = [[NSMutableArray alloc] init];
 		mGuidelines = [[NSMutableArray alloc] init];
 		mSelectedPartViews = [[NSMutableArray alloc] init];
     }
@@ -78,6 +79,7 @@
 
 - (void)dealloc
 {
+	DESTROY_DEALLOC(mPartViews);
 	DESTROY_DEALLOC(mSelectedPartViews);
 	DESTROY_DEALLOC(mGuidelines);
 
@@ -92,6 +94,9 @@
 	
 	for( WILDPartView* currPartView in mSelectedPartViews )
 		[currPartView drawSelectionHighlightInView: self];
+	
+	for( WILDPartView* currPartView in mPartViews )
+		[currPartView drawPartFrameInView: self];
 }
 
 
@@ -136,6 +141,27 @@
 -(void)	removeAllSelectedPartViews
 {
 	[mSelectedPartViews removeAllObjects];
+	[self setNeedsDisplay: YES];
+}
+
+
+-(void)	addPartView: (WILDPartView*)inPartView
+{
+	[mPartViews addObject: inPartView];
+	[self setNeedsDisplay: YES];
+}
+
+
+-(void)	removePartView: (WILDPartView*)inPartView
+{
+	[mPartViews removeObject: inPartView];
+	[self setNeedsDisplay: YES];
+}
+
+
+-(void)	removeAllPartViews
+{
+	[mPartViews removeAllObjects];
 	[self setNeedsDisplay: YES];
 }
 

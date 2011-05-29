@@ -15,6 +15,7 @@
 @interface WILDGuidelineView : NSView
 {
 	NSMutableArray			*mGuidelines;
+	NSMutableArray			*mPartViews;
 	NSMutableArray			*mSelectedPartViews;
 }
 
@@ -24,5 +25,9 @@
 -(void)	addSelectedPartView: (WILDPartView*)inPartView;
 -(void)	removeSelectedPartView: (WILDPartView*)inPartView;
 -(void)	removeAllSelectedPartViews;
+
+-(void)	addPartView: (WILDPartView*)inPartView;
+-(void)	removePartView: (WILDPartView*)inPartView;
+-(void)	removeAllPartViews;
 
 @end

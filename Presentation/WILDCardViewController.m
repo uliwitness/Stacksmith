@@ -386,9 +386,13 @@
 
 -(void)	reloadCard
 {
+	[[self guidelineView] removeAllPartViews];
 	NSArray*	subviews = [mPartViews allObjects];
 	for( NSView* currSubview in subviews )
+	{
 		[currSubview partDidChange: nil];
+		[[self guidelineView] addPartView: currSubview];
+	}
 }
 
 
@@ -465,6 +469,8 @@
 			WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
 			[selView setWantsLayer: YES];
 			[[self view] addSubview: selView];
+			if( mBackgroundEditMode )
+				[[self guidelineView] addPartView: selView];
 			[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
 			[selView loadPart: currPart forBackgroundEditing: mBackgroundEditMode];
 		}
@@ -532,6 +538,8 @@
 		// Add a view to draw guidelines on top of everything:
 		mGuidelineView = [[WILDGuidelineView alloc] initWithFrame: [[self view] bounds]];
 		[[self view] addSubview: mGuidelineView];
+		for( WILDPartView* currPartView in [mPartViews allObjects] )
+			[[self guidelineView] addPartView: currPartView];
 		
 		if( prevCard != theCard )
 		{
@@ -708,6 +716,7 @@
 -(void)	peekingStateChanged: (NSNotification*)notification
 {
 	mPeeking = [[[notification userInfo] objectForKey: WILDPeekingStateKey] boolValue];
+	[[self guidelineView] setNeedsDisplay: YES];
 }
 
 
@@ -969,6 +978,8 @@
 		[mCardPictureView setCurrentTool: nil];
 		[mBackgroundPictureView setCurrentTool: nil];
 	}
+	
+	[[self guidelineView] setNeedsDisplay: YES];
 }
 
 
@@ -1006,6 +1017,7 @@
 	
 	for( WILDPartView	*	currPartView in theSet )
 	{
+		[[self guidelineView] removePartView: currPartView];
 		WILDPart	*	thePart = [currPartView part];
 		[[thePart partOwner] deletePart: thePart];
 	}

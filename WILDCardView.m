@@ -168,6 +168,7 @@
 {
 	[[self window] invalidateCursorRectsForView: self];
 	mPeeking = [[[notification userInfo] objectForKey: WILDPeekingStateKey] boolValue];
+	[[self guidelineView] setNeedsDisplay: YES];
 }
 
 
@@ -181,6 +182,7 @@
 {
 	[[self window] invalidateCursorRectsForView: self];
 	[[self window] makeFirstResponder: self];
+	[[self guidelineView] setNeedsDisplay: YES];
 }
 
 

@@ -66,6 +66,8 @@ typedef enum
 
 -(NSRect)	frameInScreenCoordinates;
 
+-(NSRect)	selectionRect;
+
 @end
 
 

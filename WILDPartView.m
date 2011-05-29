@@ -146,29 +146,33 @@
 
 -(void)	drawSelectionHighlightInView: (NSView*)overlayView
 {
-	BOOL	isMyTool = [self myToolIsCurrent];
 	NSView*	mainSubView = mMainView;
 	if( [[mPart partType] isEqualToString: @"field"] )
 		mainSubView = mHelperView;
 	NSRect	subviewFrame = [self convertRect: [mainSubView frame] toView: [self superview]];
 	
-	if( mSelected )
-	{
-		[[NSColor keyboardFocusIndicatorColor] set];
-		NSRect	clampedBounds = subviewFrame;
-		clampedBounds.origin.x = truncf(clampedBounds.origin.x) + 0.5;
-		clampedBounds.origin.y = truncf(clampedBounds.origin.y) + 0.5;
-		clampedBounds.size.width -= 1;
-		clampedBounds.size.height -= 1;
-		NSBezierPath*	selPath = [NSBezierPath bezierPathWithRect: clampedBounds];
-		CGFloat			pattern[2] = { 4, 4 };
-		[[NSColor whiteColor] set];
-		[selPath stroke];
-		[selPath setLineDash: pattern count: 2 phase: [[WILDTools sharedTools] animationPhase]];
-		[[NSColor keyboardFocusIndicatorColor] set];
-		[selPath stroke];
-	}
-	else if( isMyTool )
+	[[NSColor keyboardFocusIndicatorColor] set];
+	NSRect	clampedBounds = subviewFrame;
+	clampedBounds.origin.x = truncf(clampedBounds.origin.x) + 0.5;
+	clampedBounds.origin.y = truncf(clampedBounds.origin.y) + 0.5;
+	clampedBounds.size.width -= 1;
+	clampedBounds.size.height -= 1;
+	NSBezierPath*	selPath = [NSBezierPath bezierPathWithRect: clampedBounds];
+	CGFloat			pattern[2] = { 4, 4 };
+	[[NSColor whiteColor] set];
+	[selPath stroke];
+	[selPath setLineDash: pattern count: 2 phase: [[WILDTools sharedTools] animationPhase]];
+	[[NSColor keyboardFocusIndicatorColor] set];
+	[selPath stroke];
+}
+
+
+-(void)	drawPartFrameInView: (NSView*)overlayView
+{
+	NSRect	subviewFrame = [self selectionRect];
+	BOOL	isMyTool = [self myToolIsCurrent];
+	
+	if( isMyTool && ![self isSelected] )
 	{
 		if( [[mPart style] isEqualToString: @"opaque"] )
 			[[[WILDTools sharedTools] peekPattern] set];
@@ -179,8 +183,8 @@
 		[NSBezierPath strokeRect: peekBox];
 		[[NSColor blackColor] set];
 	}
-	
-    if( mPeeking )
+    if( mPeeking && ([self myToolIsCurrent]
+		|| ([[WILDTools sharedTools] currentTool] == WILDBrowseTool && [[mPart partType] isEqualToString: @"button"])) )
 	{
 		NSRect	peekBox = NSInsetRect( subviewFrame, 1, 1 );
 		[NSBezierPath setDefaultLineWidth: 2];
@@ -210,7 +214,6 @@
 	
 	return hitView;
 }
-
 
 
 -(WILDPartGrabHandle)	grabHandleAtPoint: (NSPoint)localPoint
@@ -267,6 +270,27 @@
 	}
 	
 	return layoutBox;
+}
+
+
+-(NSRect)	selectionRect
+{
+	NSRect	mainFrame = [self convertRect: [mMainView frame] toView: [self superview]];
+	NSRect	helperFrame = NSZeroRect;
+	
+	if( mHelperView )
+		helperFrame = [self convertRect: [mHelperView frame] toView: [self superview]];
+	
+	if( [[mPart partType] isEqualToString: @"field"] )
+		return helperFrame;	// For fields, this is the scroll view around them.
+	else if( mHelperView )
+	{
+		helperFrame = [self convertRect: [mHelperView frame] toView: [self superview]];
+	
+		return NSUnionRect( mainFrame, helperFrame );
+	}
+	else
+		return mainFrame;
 }
 
 
@@ -391,7 +415,7 @@
 	{
 		if( currPartView != self && [currPartView isKindOfClass: [WILDPartView class]] )
 		{
-			NSRect	currBox = [self layoutRectForRect: [currPartView frame]];
+			NSRect	currBox = [currPartView layoutRectForRect: [currPartView frame]];
 			if( ((NSMinX(currBox) -6) < NSMinX(inBox)) && ((NSMinX(currBox) +6) > NSMinX(inBox)) )
 			{
 				CGFloat		horzDiff = NSMinX(inBox) -NSMinX(currBox);
@@ -426,6 +450,46 @@
 				{
 					yMovement = vertDiff;
 					vertGuidelinePos = NSMinY(currBox);
+				}
+				break;
+			}
+			
+			// Also try to find out if we're at a standard distance next to another part:
+			NSRect	currMarginsBox = NSInsetRect( currBox, -6, -6 );
+			if( ((NSMinX(currMarginsBox) -6) < NSMaxX(inBox)) && ((NSMinX(currMarginsBox) +6) > NSMaxX(inBox)) )
+			{
+				CGFloat		horzDiff = NSMaxX(inBox) -NSMinX(currMarginsBox);
+				if( fabs(horzDiff) < fabs(xMovement) )
+				{
+					xMovement = horzDiff;
+					horzGuidelinePos = NSMinX(currMarginsBox);
+				}
+			}
+			if( ((NSMaxX(currMarginsBox) -6) < NSMinX(inBox)) && ((NSMaxX(currMarginsBox) +6) > NSMinX(inBox)) )
+			{
+				CGFloat		horzDiff = NSMinX(inBox) -NSMaxX(currMarginsBox);
+				if( fabs(horzDiff) < fabs(xMovement) )
+				{
+					xMovement = horzDiff;
+					horzGuidelinePos = NSMaxX(currMarginsBox);
+				}
+			}
+			if( ((NSMaxY(currMarginsBox) -6) < NSMinY(inBox)) && ((NSMaxY(currMarginsBox) +6) > NSMinY(inBox)) )
+			{
+				CGFloat		vertDiff = NSMinY(inBox) -NSMaxY(currMarginsBox);
+				if( fabs(vertDiff) < fabs(yMovement) )
+				{
+					yMovement = vertDiff;
+					vertGuidelinePos = NSMaxY(currMarginsBox);
+				}
+			}
+			if( ((NSMinY(currMarginsBox) -6) < NSMaxY(inBox)) && ((NSMinY(currMarginsBox) +6) > NSMaxY(inBox)) )
+			{
+				CGFloat		vertDiff = NSMaxY(inBox) -NSMinY(currMarginsBox);
+				if( fabs(vertDiff) < fabs(yMovement) )
+				{
+					yMovement = vertDiff;
+					vertGuidelinePos = NSMinY(currMarginsBox);
 				}
 				break;
 			}
@@ -824,9 +888,6 @@
 -(void)	peekingStateChanged: (NSNotification*)notification
 {
 	mPeeking = [[[notification userInfo] objectForKey: WILDPeekingStateKey] boolValue];
-	[self setNeedsDisplay: YES];
-	[mMainView setNeedsDisplay: YES];
-	[mHelperView setNeedsDisplay: YES];
 }
 
 
