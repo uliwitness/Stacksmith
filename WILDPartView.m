@@ -147,9 +147,7 @@
 -(void)	drawSelectionHighlightInView: (NSView*)overlayView
 {
 	NSView*	mainSubView = mMainView;
-	if( [[mPart partType] isEqualToString: @"field"] )
-		mainSubView = mHelperView;
-	NSRect	subviewFrame = [self convertRect: [mainSubView frame] toView: [self superview]];
+	NSRect	subviewFrame = [self selectionRect];
 	
 	[[NSColor keyboardFocusIndicatorColor] set];
 	NSRect	clampedBounds = subviewFrame;
@@ -275,7 +273,7 @@
 
 -(NSRect)	selectionRect
 {
-	NSRect	mainFrame = [self convertRect: [mMainView frame] toView: [self superview]];
+	NSRect	mainFrame = [mMainView convertRect: [mMainView bounds] toView: [self superview]];
 	NSRect	helperFrame = NSZeroRect;
 	
 	if( mHelperView )
@@ -285,7 +283,7 @@
 		return helperFrame;	// For fields, this is the scroll view around them.
 	else if( mHelperView )
 	{
-		helperFrame = [self convertRect: [mHelperView frame] toView: [self superview]];
+		helperFrame = [mHelperView convertRect: [mHelperView bounds] toView: [self superview]];
 	
 		return NSUnionRect( mainFrame, helperFrame );
 	}
@@ -629,6 +627,7 @@
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	BOOL					keepDragging = YES;
 	NSRect					frame = [self frame];
+	CGFloat					titleWidth = [mPart titleWidth];
 	
 	while( keepDragging )
 	{
@@ -648,7 +647,8 @@
 					
 					if( inHandle & WILDPartGrabHandleSeparator && [mPart canHaveTitleWidth] )	// May overlap with left.
 					{
-						[mPart setTitleWidth: [mPart titleWidth] +deltaX];
+						titleWidth += deltaX;
+						[mPart setTitleWidth: (titleWidth < 0) ? 0 : titleWidth];
 						[self unloadPart];
 						[self loadPart: mPart forBackgroundEditing: NO];
 					}
