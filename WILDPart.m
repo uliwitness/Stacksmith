@@ -433,12 +433,6 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(NSInteger)	popupTitleWidth
-{
-	return mTitleWidth;
-}
-
-
 -(void)	setIconID: (NSInteger)theID
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
@@ -781,8 +775,10 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(NSInteger)	titleWidth
+-(CGFloat)	titleWidth
 {
+	if( mTitleWidth < 0 )
+		return 0;
 	return mTitleWidth;
 }
 
@@ -793,7 +789,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 }
 
 
--(void)	setTitleWidth: (NSInteger)inWidth
+-(void)	setTitleWidth: (CGFloat)inWidth
 {
 	mTitleWidth = inWidth;
 }

@@ -115,7 +115,6 @@
 -(BOOL)			visible;
 -(void)			setVisible: (BOOL)theState;
 -(BOOL)			wideMargins;
--(NSInteger)	popupTitleWidth;
 -(WILDObjectID)	iconID;
 -(void)			setIconID: (WILDObjectID)theID;
 -(NSImage*)		iconImage;
@@ -150,8 +149,8 @@
 -(NSIndexSet*)	selectedListItemIndexes;
 -(void)			setSelectedListItemIndexes: (NSIndexSet*)newSelection;
 
--(NSInteger)	titleWidth;
--(void)			setTitleWidth: (NSInteger)inWidth;
+-(CGFloat)		titleWidth;
+-(void)			setTitleWidth: (CGFloat)inWidth;
 -(BOOL)			canHaveTitleWidth;
 
 -(BOOL)			fixedLineHeight;
