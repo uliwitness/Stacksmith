@@ -77,4 +77,11 @@
 	[pool release];
 }
 
+
+-(void)	resetCursorRects
+{
+	NSCursor	*	currentCursor = [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]];
+	[self addCursorRect: [self bounds] cursor: currentCursor];
+}
+
 @end
