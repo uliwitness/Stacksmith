@@ -1035,7 +1035,7 @@
 		[label setWantsLayer: YES];
 		[label setEditable: NO];
 		[label setSelectable: NO];
-		[label setDrawsBackground: NO];
+		[label setDrawsBackground: YES];
 		[label setBezeled: NO];
 		[label setBordered: NO];
 		[label setAlignment: NSRightTextAlignment];
@@ -1043,8 +1043,11 @@
 		if( [currPart showName] )
 			[label setStringValue: [currPart name]];
 		[label setFont: [currPart textFont]];
+		[label setFrame: titleBox];
 		[label sizeToFit];
-		titleBox.origin.y -= truncf((titleBox.size.height -[label bounds].size.height) /2);
+		titleBox = [label frame];
+		titleBox.size.width = [currPart titleWidth];
+		titleBox.origin.y = truncf((titleBox.size.height -popupBox.size.height) /2);
 		[label setFrame: titleBox];
 		
 		[self addSubview: label];
