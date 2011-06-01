@@ -21,6 +21,7 @@
 #import "WILDPresentationConstants.h"
 #import "WILDButtonView.h"
 #import "WILDScrollView.h"
+#import "WILDMovieView.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 
@@ -1460,7 +1461,7 @@
 	[self setPart: currPart];
 	partRect.origin = NSMakePoint( 2, 2 );
 	
-	QTMovieView		* mpv = [[[QTMovieView alloc] initWithFrame: partRect] autorelease];
+	QTMovieView		* mpv = [[[WILDMovieView alloc] initWithFrame: partRect] autorelease];
 	NSError			* outError = nil;
 	NSString		* movPath = [[NSBundle mainBundle] pathForResource: [currPart mediaPath] ofType: @""];
 	if( !movPath )
