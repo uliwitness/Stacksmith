@@ -88,6 +88,7 @@
 		55255AC1114C19CF00279B03 /* WILDScriptEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */; };
 		552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997CE1370BAD300F870DF /* WILDInputPanelController.m */; };
 		552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */; };
+		552A4DB913928677007C4527 /* WILDMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 552A4DB813928677007C4527 /* WILDMovieView.m */; };
 		552FF146113F23F3005742C8 /* CURS_129.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF049113F23F3005742C8 /* CURS_129.pbm */; };
 		552FF147113F23F3005742C8 /* CURS_130.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04A113F23F3005742C8 /* CURS_130.pbm */; };
 		552FF148113F23F3005742C8 /* CURS_131.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF04B113F23F3005742C8 /* CURS_131.pbm */; };
@@ -732,6 +733,8 @@
 		552997CE1370BAD300F870DF /* WILDInputPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDInputPanelController.m; path = Windows/WILDInputPanelController.m; sourceTree = "<group>"; };
 		552997D01370C5D800F870DF /* NSStringDrawing+SizeWithRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSStringDrawing+SizeWithRect.h"; path = "../UliKit/NSStringDrawing+SizeWithRect.h"; sourceTree = "<group>"; };
 		552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSStringDrawing+SizeWithRect.m"; path = "../UliKit/NSStringDrawing+SizeWithRect.m"; sourceTree = "<group>"; };
+		552A4DB713928676007C4527 /* WILDMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMovieView.h; path = Presentation/WILDMovieView.h; sourceTree = "<group>"; };
+		552A4DB813928677007C4527 /* WILDMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMovieView.m; path = Presentation/WILDMovieView.m; sourceTree = "<group>"; };
 		552FF049113F23F3005742C8 /* CURS_129.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_129.pbm; path = Resources/CURS_129.pbm; sourceTree = "<group>"; };
 		552FF04A113F23F3005742C8 /* CURS_130.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_130.pbm; path = Resources/CURS_130.pbm; sourceTree = "<group>"; };
 		552FF04B113F23F3005742C8 /* CURS_131.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = CURS_131.pbm; path = Resources/CURS_131.pbm; sourceTree = "<group>"; };
@@ -1619,6 +1622,8 @@
 				558DCFE41156209A002C9195 /* WILDCardView.m */,
 				558DCD7C11557B6D002C9195 /* WILDPartView.h */,
 				558DCD7D11557B6D002C9195 /* WILDPartView.m */,
+				552A4DB713928676007C4527 /* WILDMovieView.h */,
+				552A4DB813928677007C4527 /* WILDMovieView.m */,
 				550C09E41196B9F200351067 /* WILDButtonView.h */,
 				550C09E51196B9F200351067 /* WILDButtonView.m */,
 				558DCB5311553EAC002C9195 /* WILDButtonCell.h */,
@@ -2773,6 +2778,7 @@
 				55BFEE1D137DBB14008FC8BB /* WILDShrinkToBottomFilter.m in Sources */,
 				55BFEE22137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m in Sources */,
 				558F89E7138B06F900E26275 /* WILDGuidelineView.m in Sources */,
+				552A4DB913928677007C4527 /* WILDMovieView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
