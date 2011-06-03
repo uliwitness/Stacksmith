@@ -215,16 +215,25 @@
 }
 
 
--(WILDPartGrabHandle)	grabHandleAtPoint: (NSPoint)localPoint
+-(NSSize)	grabHandleSize
 {
-	WILDPartGrabHandle		clickedHandle = 0;
 	NSRect					myRect = self.bounds;
 	CGSize					handleSize = { 8, 8 };
 	
 	if( (myRect.size.width /3) < handleSize.width )
-		handleSize.width = truncf(myRect.size.width /3);
+		handleSize.width = handleSize.height = truncf(myRect.size.width /3);
 	if( (myRect.size.height /3) < handleSize.height )
-		handleSize.height = truncf(myRect.size.height /3);
+		handleSize.width = handleSize.height = truncf(myRect.size.height /3);
+	
+	return handleSize;
+}
+
+
+-(WILDPartGrabHandle)	grabHandleAtPoint: (NSPoint)localPoint
+{
+	WILDPartGrabHandle		clickedHandle = 0;
+	NSRect					myRect = self.bounds;
+	CGSize					handleSize = [self grabHandleSize];
 	
 	if( NSPointInRect(localPoint, myRect ) )
 	{
@@ -243,6 +252,51 @@
 	}
 	
 	return clickedHandle;
+}
+
+
+-(NSRect)	rectForGrabHandle: (WILDPartGrabHandle)inHandle
+{
+	NSRect	handleRect = [self bounds];
+	CGSize	handleSize = [self grabHandleSize];
+	
+	if( inHandle == 0 )	// Rect for everything *but* the handles, as much as possible. (The separator is usually ignored because it may cause a non-rectangular area)
+		handleRect = NSInsetRect( handleRect, handleSize.width, handleSize.height );
+	else if( inHandle & WILDPartGrabHandleSeparator )
+	{
+		handleRect.size.width = handleSize.width;
+		handleRect.origin.x = [mPart titleWidth];
+	}
+	else
+	{
+		if( inHandle & WILDPartGrabHandleLeft )
+			handleRect.size.width = handleSize.width;
+		else if( inHandle & WILDPartGrabHandleRight )
+		{
+			handleRect.origin.x = NSMaxX(handleRect) -handleSize.width;
+			handleRect.size.width = handleSize.width;
+		}
+		else	// Don't overlap the resize corners.
+		{
+			handleRect.origin.x += handleSize.width;
+			handleRect.size.width -= handleSize.width * 2.0;
+		}
+		
+		if( inHandle & WILDPartGrabHandleBottom )
+			handleRect.size.height = handleSize.height;
+		else if( inHandle & WILDPartGrabHandleTop )
+		{
+			handleRect.origin.y = NSMaxY(handleRect) -handleSize.height;
+			handleRect.size.height = handleSize.height;
+		}
+		else	// Don't overlap the resize corners.
+		{
+			handleRect.origin.y += handleSize.height;
+			handleRect.size.height -= handleSize.height * 2.0;
+		}
+	}
+		
+	return handleRect;
 }
 
 
@@ -1549,6 +1603,50 @@
 	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO];
 	
 	return [[contents listItems] objectAtIndex: row];
+}
+
+
+-(void)	resetCursorRects
+{
+	[super resetCursorRects];
+	
+	[self addCursorRect: [self visibleRect] cursor: [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]]];
+	if( [self myToolIsCurrent] )
+	{
+		[self addCursorRect: [self rectForGrabHandle: 0] cursor: [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]]];
+		if( [[mPart partType] isEqualToString: @"button"]
+			&& [[mPart style] isEqualToString: @"popup"] )
+		{
+			NSRect	splitterRect = [self rectForGrabHandle: WILDPartGrabHandleSeparator];
+			NSCursor* bestCursor = [NSCursor resizeLeftRightCursor];
+			if( [mPart titleWidth] <= 0 )	// Already at minimum.
+				bestCursor = [NSCursor resizeRightCursor];
+			else if( [mPart titleWidth] >= [self bounds].size.width )	// Already at maximum.
+				bestCursor = [NSCursor resizeLeftCursor];
+			[self addCursorRect: splitterRect cursor: bestCursor];
+		}
+		
+		NSRect	leftEdgeRect = [self rectForGrabHandle: WILDPartGrabHandleLeft];
+		[self addCursorRect: leftEdgeRect cursor: [NSCursor resizeLeftRightCursor]];
+		NSRect	rightEdgeRect = [self rectForGrabHandle: WILDPartGrabHandleRight];
+		[self addCursorRect: rightEdgeRect cursor: [NSCursor resizeLeftRightCursor]];
+
+		NSRect	topEdgeRect = [self rectForGrabHandle: WILDPartGrabHandleTop];
+		[self addCursorRect: topEdgeRect cursor: [NSCursor resizeUpDownCursor]];
+		NSRect	bottomEdgeRect = [self rectForGrabHandle: WILDPartGrabHandleBottom];
+		[self addCursorRect: bottomEdgeRect cursor: [NSCursor resizeUpDownCursor]];
+		
+		NSRect	topLeftRect = [self rectForGrabHandle: WILDPartGrabHandleLeft | WILDPartGrabHandleTop];
+		[self addCursorRect: topLeftRect cursor: [NSCursor crosshairCursor]];
+		NSRect	bottomLeftRect = [self rectForGrabHandle: WILDPartGrabHandleLeft | WILDPartGrabHandleBottom];
+		[self addCursorRect: bottomLeftRect cursor: [NSCursor crosshairCursor]];
+		NSRect	topRightRect = [self rectForGrabHandle: WILDPartGrabHandleRight | WILDPartGrabHandleTop];
+		[self addCursorRect: topRightRect cursor: [NSCursor crosshairCursor]];
+		NSRect	bottomRightRect = [self rectForGrabHandle: WILDPartGrabHandleRight | WILDPartGrabHandleBottom];
+		[self addCursorRect: bottomRightRect cursor: [NSCursor crosshairCursor]];
+	}
+	else
+		[self addCursorRect: [self visibleRect] cursor: [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]]];
 }
 
 @end
