@@ -408,7 +408,6 @@
 		55818A8F1332108300480D30 /* WILDBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 55818A8E1332108100480D30 /* WILDBackground.m */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5589DD771378B16400B0F6CF /* TransitionMappings.plist */; };
-		558CDB6C1379E31D004AC603 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558CDB6B1379E31D004AC603 /* Sparkle.framework */; };
 		558CDB9B137B1816004AC603 /* WILDToolsPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 558CDB9A137B1816004AC603 /* WILDToolsPalette.m */; };
 		558CDB9E137B1A3D004AC603 /* WILDToolsPalette.xib in Resources */ = {isa = PBXBuildFile; fileRef = 558CDB9C137B1A3D004AC603 /* WILDToolsPalette.xib */; };
 		558DC883115507EA002C9195 /* WILDCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DC882115507EA002C9195 /* WILDCardViewController.m */; };
@@ -427,7 +426,6 @@
 		559700FC137C9B6B000264B8 /* WILDBarnDoorCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F7137C9B6B000264B8 /* WILDBarnDoorCloseFilter.m */; };
 		559700FD137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */; };
 		559700FE137C9B6B000264B8 /* WILDIrisCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */; };
-		559808C5137B38A000D4A753 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 558CDB6B1379E31D004AC603 /* Sparkle.framework */; };
 		55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */; };
 		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
@@ -499,6 +497,8 @@
 		55F34D3B136A50D600E8588D /* ICON_26425.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D34136A50D600E8588D /* ICON_26425.pdf */; };
 		55F34D3D136A554500E8588D /* ICON_31885.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D3C136A554500E8588D /* ICON_31885.pdf */; };
 		55F34D3F136A555300E8588D /* ICON_1000.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D3E136A555300E8588D /* ICON_1000.pdf */; };
+		55F633841397E7110047BD3C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F633831397E7110047BD3C /* Sparkle.framework */; };
+		55F633C81397E7720047BD3C /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55F633831397E7110047BD3C /* Sparkle.framework */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* WILDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* WILDDocument.m */; settings = {ATTRIBUTES = (); }; };
@@ -591,7 +591,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				559808C5137B38A000D4A753 /* Sparkle.framework in Copy Frameworks */,
+				55F633C81397E7720047BD3C /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,7 +1117,6 @@
 		558970E5118C853600F92788 /* UKIsDragStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKIsDragStart.h; path = ../UliKit/UKIsDragStart.h; sourceTree = SOURCE_ROOT; };
 		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		5589DD771378B16400B0F6CF /* TransitionMappings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TransitionMappings.plist; sourceTree = "<group>"; };
-		558CDB6B1379E31D004AC603 /* Sparkle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		558CDB99137B1815004AC603 /* WILDToolsPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDToolsPalette.h; path = Editor/WILDToolsPalette.h; sourceTree = "<group>"; };
 		558CDB9A137B1816004AC603 /* WILDToolsPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDToolsPalette.m; path = Editor/WILDToolsPalette.m; sourceTree = "<group>"; };
 		558CDB9D137B1A3D004AC603 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDToolsPalette.xib; sourceTree = "<group>"; };
@@ -1258,6 +1257,7 @@
 		55F34D34136A50D600E8588D /* ICON_26425.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = ICON_26425.pdf; path = Resources/ICON_26425.pdf; sourceTree = "<group>"; };
 		55F34D3C136A554500E8588D /* ICON_31885.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = ICON_31885.pdf; path = Resources/ICON_31885.pdf; sourceTree = "<group>"; };
 		55F34D3E136A555300E8588D /* ICON_1000.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = ICON_1000.pdf; path = Resources/ICON_1000.pdf; sourceTree = "<group>"; };
+		55F633831397E7110047BD3C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = ../Sparkle/build/Debug/Sparkle.framework; sourceTree = SOURCE_ROOT; };
 		8D15AC360486D014006FF6A4 /* Stacksmith-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Stacksmith-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Stacksmith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stacksmith.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1267,7 +1267,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				558CDB6C1379E31D004AC603 /* Sparkle.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				552FF245113F247A005742C8 /* QTKit.framework in Frameworks */,
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
@@ -1275,6 +1274,7 @@
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
 				553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */,
 				55AA46891378A68000D916E6 /* QuartzCore.framework in Frameworks */,
+				55F633841397E7110047BD3C /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1290,7 +1290,7 @@
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
 				55AA46881378A68000D916E6 /* QuartzCore.framework */,
-				558CDB6B1379E31D004AC603 /* Sparkle.framework */,
+				55F633831397E7110047BD3C /* Sparkle.framework */,
 				553EB403131C83C6008BFBCE /* libcrypto.dylib */,
 			);
 			name = "Linked Frameworks";
