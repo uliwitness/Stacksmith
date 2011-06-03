@@ -186,6 +186,43 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 }
 
 
+void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
+{
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	char			partName[1024] = { 0 };
+	WILDCard	*	theCard = [frontStack currentCard];
+	
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		thePart = [theCard partAtIndex: theNumber -1 ofType: @"moviePlayer"];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"moviePlayer"];
+	}
+	
+	if( thePart )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find movie player \"%s\".", partName );
+		inContext->keepRunning = false;
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
 void	WILDCardPartInstruction( LEOContext* inContext )
 {
 	WILDPart	*	thePart = nil;
@@ -290,6 +327,43 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 	else
 	{
 		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find button \"%s\".", partName );
+		inContext->keepRunning = false;
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
+{
+	WILDPart		*	thePart = nil;
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	char				partName[1024] = { 0 };
+	WILDBackground	*	theCard = [[frontStack currentCard] owningBackground];
+	
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		thePart = [theCard partAtIndex: theNumber -1 ofType: @"moviePlayer"];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"moviePlayer"];
+	}
+	
+	if( thePart )
+	{
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		LEOInitWILDObjectValue( inContext->stackEndPtr -1, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find movie player \"%s\".", partName );
 		inContext->keepRunning = false;
 	}
 	
@@ -472,9 +546,11 @@ LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_F
 	WILDCardInstruction,
 	WILDCardFieldInstruction,
 	WILDCardButtonInstruction,
+	WILDCardMoviePlayerInstruction,
 	WILDCardPartInstruction,
 	WILDBackgroundFieldInstruction,
 	WILDBackgroundButtonInstruction,
+	WILDBackgroundMoviePlayerInstruction,
 	WILDBackgroundPartInstruction,
 	WILDNextCardInstruction,
 	WILDPreviousCardInstruction,
@@ -493,9 +569,11 @@ const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNC
 	"WILDCardInstruction",
 	"WILDCardFieldInstruction",
 	"WILDCardButtonInstruction",
+	"WILDCardMoviePlayerInstruction",
 	"WILDCardPartInstruction",
 	"WILDBackgroundFieldInstruction",
 	"WILDBackgroundButtonInstruction",
+	"WILDBackgroundMoviePlayerInstruction",
 	"WILDBackgroundPartInstruction",
 	"WILDNextCardInstruction",
 	"WILDPreviousCardInstruction",
@@ -529,9 +607,9 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_BACKGROUND_BUTTON_INSTRUCTION, 0, 0 },
 			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_BACKGROUND_FIELD_INSTRUCTION, 0, 0 },
 			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_BACKGROUND_PART_INSTRUCTION, 0, 0 },
+			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_BACKGROUND_MOVIEPLAYER_INSTRUCTION, 0, 0 },
+			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_BACKGROUND_MOVIEPLAYER_INSTRUCTION, 0, 0 },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
@@ -543,9 +621,9 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_CARD_BUTTON_INSTRUCTION, 0, 0 },
 			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_CARD_FIELD_INSTRUCTION, 0, 0 },
 			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_CARD_PART_INSTRUCTION, 0, 0 },
+			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0 },
+			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0 },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
@@ -570,6 +648,20 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 }
+		}
+	},
+	{
+		EMovieIdentifier, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0,
+		{
+			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0 },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
