@@ -32,6 +32,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 													@"rectangle",
 													@"roundrect",
 													@"shadow",
+													@"standard",
 													@"scrolling",
 													nil];
 	

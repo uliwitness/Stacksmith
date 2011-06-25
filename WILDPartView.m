@@ -1351,6 +1351,18 @@
 		[sv setHasVerticalScroller: NO];
 		[sv setBackgroundColor: [NSColor whiteColor]];
 	}
+	else if( [[currPart style] isEqualToString: @"standard"] )
+	{
+		[sv setBorderType: NSBezelBorder];
+		[sv setHasVerticalScroller: NO];
+		[sv setBackgroundColor: [NSColor whiteColor]];
+	}
+	else if( [[currPart style] isEqualToString: @"roundrect"] )
+	{
+		[sv setBorderType: NSBezelBorder];
+		[sv setHasVerticalScroller: NO];
+		[sv setBackgroundColor: [NSColor whiteColor]];
+	}
 	else if( [[currPart style] isEqualToString: @"scrolling"] )
 	{
 		txBox.size.width -= 15;
@@ -1498,7 +1510,8 @@
 	}
 	else if( [[currPart style] isEqualToString: @"transparent"] || [[currPart style] isEqualToString: @"opaque"]
 		 || [[currPart style] isEqualToString: @"rectangle"] || [[currPart style] isEqualToString: @"shadow"]
-		|| [[currPart style] isEqualToString: @"scrolling"] )
+		|| [[currPart style] isEqualToString: @"scrolling"] || [[currPart style] isEqualToString: @"standard"]
+		|| [[currPart style] isEqualToString: @"roundrect"] )
 	{
 		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
@@ -1610,10 +1623,15 @@
 {
 	[super resetCursorRects];
 	
-	[self addCursorRect: [self visibleRect] cursor: [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]]];
+	NSCursor	*	currentCursor = [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]];
+	if( !currentCursor )
+	{
+		currentCursor = [[[mPart stack] document] cursorWithID: 128];
+	}
+	[self addCursorRect: [self visibleRect] cursor: currentCursor];
 	if( [self myToolIsCurrent] )
 	{
-		[self addCursorRect: [self rectForGrabHandle: 0] cursor: [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]]];
+		[self addCursorRect: [self rectForGrabHandle: 0] cursor: currentCursor];
 		if( [[mPart partType] isEqualToString: @"button"]
 			&& [[mPart style] isEqualToString: @"popup"] )
 		{
@@ -1646,7 +1664,7 @@
 		[self addCursorRect: bottomRightRect cursor: [NSCursor crosshairCursor]];
 	}
 	else
-		[self addCursorRect: [self visibleRect] cursor: [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]]];
+		[self addCursorRect: [self visibleRect] cursor: currentCursor];
 }
 
 @end
