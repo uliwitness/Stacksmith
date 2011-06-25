@@ -75,7 +75,7 @@ static WILDToolsPalette*	sSharedToolsPalette = nil;
 		[mFillColorWell setColor: [NSColor clearColor]];
 	}
 	
-	[[self window] makeKeyAndOrderFront: sender];
+	[[self window] orderFront: sender];
 }
 
 -(NSColor*)	lineColor
