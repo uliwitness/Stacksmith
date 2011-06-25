@@ -29,6 +29,7 @@
 #import "WILDRecentCardsList.h"
 #import "WILDRecentCardPickerWindowController.h"
 #import "WILDStackInfoWindowController.h"
+#import "WILDScriptEditorWindowController.h"
 
 #import "ULIPaintSelectionRectangleTool.h"
 #import "ULIPaintSelectionLassoTool.h"
@@ -806,6 +807,49 @@
 	[[[[[self view] window] windowController] document] addWindowController: stackInfo];
 	[stackInfo showWindow: self];
 }
+
+
+-(IBAction)	editBackgroundScript: (id)sender
+{
+	WILDScriptEditorWindowController*	sewc = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: [mCurrentCard owningBackground]] autorelease];
+	NSRect	wFrame = [[[self view] window] contentRectForFrameRect: [[[self view] window] frame]];
+	NSRect	theBox = { {0,0}, {32,32} };
+	
+	theBox.origin.x += wFrame.origin.x -16;
+	theBox.origin.y += wFrame.origin.y -16;
+	[sewc setGlobalStartRect: theBox];
+	[[[[[self view] window] windowController] document] addWindowController: sewc];
+	[sewc showWindow: nil];
+}
+
+
+-(IBAction)	editCardScript: (id)sender
+{
+	WILDScriptEditorWindowController*	sewc = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: mCurrentCard] autorelease];
+	NSRect	wFrame = [[[self view] window] contentRectForFrameRect: [[[self view] window] frame]];
+	NSRect	theBox = { {0,0}, {32,32} };
+	
+	theBox.origin.x += wFrame.origin.x -16;
+	theBox.origin.y += wFrame.origin.y -16;
+	[sewc setGlobalStartRect: theBox];
+	[[[[[self view] window] windowController] document] addWindowController: sewc];
+	[sewc showWindow: nil];
+}
+
+
+-(IBAction)	editStackScript: (id)sender
+{
+	WILDScriptEditorWindowController*	sewc = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: [mCurrentCard stack]] autorelease];
+	NSRect	wFrame = [[[self view] window] contentRectForFrameRect: [[[self view] window] frame]];
+	NSRect	theBox = { {0,0}, {32,32} };
+	
+	theBox.origin.x += wFrame.origin.x -16;
+	theBox.origin.y += wFrame.origin.y -16;
+	[sewc setGlobalStartRect: theBox];
+	[[[[[self view] window] windowController] document] addWindowController: sewc];
+	[sewc showWindow: nil];
+}
+
 
 -(void)	selectParts: (NSArray*)theParts
 {

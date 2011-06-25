@@ -61,6 +61,10 @@
 -(IBAction)	showBackgroundInfoPanel: (id)sender;
 -(IBAction)	showStackInfoPanel: (id)sender;
 
+-(IBAction)	editBackgroundScript: (id)sender;
+-(IBAction)	editCardScript: (id)sender;
+-(IBAction)	editStackScript: (id)sender;
+
 -(IBAction)	bringObjectCloser: (id)sender;
 -(IBAction)	sendObjectFarther: (id)sender;
 
