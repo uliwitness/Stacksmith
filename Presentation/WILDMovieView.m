@@ -8,6 +8,7 @@
 
 #import "WILDMovieView.h"
 #import "WILDTools.h"
+#import "WILDPartView.h"
 
 
 @implementation WILDMovieView
@@ -34,6 +35,11 @@
 	//[super resetCursorRects];
 	
 	NSCursor	*	currentCursor = [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]];
+	if( !currentCursor )
+	{
+		WILDPartView*		pv = [self superview];
+		currentCursor = [[[[pv part] stack] document] cursorWithID: 128];
+	}
 	[self addCursorRect: [self bounds] cursor: currentCursor];
 }
 

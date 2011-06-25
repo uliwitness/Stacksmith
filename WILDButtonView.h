@@ -11,7 +11,7 @@
 
 @interface WILDButtonView : NSButton
 {
-	
+	NSTrackingArea	*	mCursorTrackingArea;
 }
 
 @end

@@ -13,6 +13,15 @@
 
 @implementation WILDButtonView
 
+-(void)	dealloc
+{
+	[self removeTrackingArea: mCursorTrackingArea];
+	DESTROY_DEALLOC(mCursorTrackingArea);
+
+	[super dealloc];
+}
+
+
 -(void)	mouseDown: (NSEvent*)event
 {
 	WILDPartView*			pv = [self superview];
@@ -78,10 +87,54 @@
 }
 
 
+#if USE_CURSOR_RECTS
+
 -(void)	resetCursorRects
 {
 	NSCursor	*	currentCursor = [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]];
+	if( !currentCursor )
+	{
+		WILDPartView*		pv = [self superview];
+		currentCursor = [[[[pv part] stack] document] cursorWithID: 128];
+	}
 	[self addCursorRect: [self bounds] cursor: currentCursor];
 }
+
+#else // !USE_CURSOR_RECTS
+
+-(void)	mouseEntered:(NSEvent *)theEvent
+{
+	WILDTool			currTool = [[WILDTools sharedTools] currentTool];
+	NSCursor*			currCursor = [WILDTools cursorForTool: currTool];
+	if( !currCursor )
+	{
+		WILDPartView*		pv = [self superview];
+		currCursor = [[[[pv part] stack] document] cursorWithID: 128];
+	}
+	[currCursor set];
+}
+
+
+-(void)	mouseExited:(NSEvent *)theEvent
+{
+	
+}
+
+
+- (void)updateTrackingAreas
+{
+	[super updateTrackingAreas];
+	
+	if( mCursorTrackingArea )
+	{
+		[self removeTrackingArea: mCursorTrackingArea];
+		DESTROY(mCursorTrackingArea);
+	}
+	
+	mCursorTrackingArea = [[NSTrackingArea alloc] initWithRect: [self visibleRect] options: NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp owner: self userInfo: nil];
+	[self addTrackingArea: mCursorTrackingArea];
+}
+
+#endif
 
 @end

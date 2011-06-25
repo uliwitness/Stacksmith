@@ -100,6 +100,8 @@
 }
 
 
+#if USE_CURSOR_RECTS
+
 -(void)	resetCursorRects
 {
 	WILDTool			currTool = [[WILDTools sharedTools] currentTool];
@@ -111,27 +113,41 @@
 	[self addCursorRect: [self visibleRect] cursor: currCursor];
 }
 
+#else // !USE_CURSOR_RECTS
 
-//- (void)updateTrackingAreas
-//{
-//	[super updateTrackingAreas];
-//	
-//	if( mCursorTrackingArea )
-//	{
-//		[self removeTrackingArea: mCursorTrackingArea];
-//		DESTROY(mCursorTrackingArea);
-//	}
-//	
-//	WILDTool			currTool = [[WILDTools sharedTools] currentTool];
-//	NSCursor*			currCursor = [WILDTools cursorForTool: currTool];
-//	if( mPeeking )
-//		currCursor = [NSCursor arrowCursor];
-//	if( !currCursor )
-//		currCursor = [[[mCard stack] document] cursorWithID: 128];
-//	mCursorTrackingArea = [[NSTrackingArea alloc] initWithRect: [self visibleRect] options: NSTrackingMouseEnteredAndExited | NSTrackingCursorUpdate | NSTrackingActiveInActiveApp owner: currCursor userInfo: nil];
-//	[self addTrackingArea: mCursorTrackingArea];
-//}
+-(void)	mouseEntered:(NSEvent *)theEvent
+{
+	WILDTool			currTool = [[WILDTools sharedTools] currentTool];
+	NSCursor*			currCursor = [WILDTools cursorForTool: currTool];
+	if( mPeeking )
+		currCursor = [NSCursor arrowCursor];
+	if( !currCursor )
+		currCursor = [[[mCard stack] document] cursorWithID: 128];
+	[currCursor set];
+}
 
+
+-(void)	mouseExited:(NSEvent *)theEvent
+{
+	
+}
+
+
+- (void)updateTrackingAreas
+{
+	[super updateTrackingAreas];
+	
+	if( mCursorTrackingArea )
+	{
+		[self removeTrackingArea: mCursorTrackingArea];
+		DESTROY(mCursorTrackingArea);
+	}
+	
+	mCursorTrackingArea = [[NSTrackingArea alloc] initWithRect: [self visibleRect] options: NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp owner: self userInfo: nil];
+	[self addTrackingArea: mCursorTrackingArea];
+}
+
+#endif // USE_CURSOR_RECTS
 
 -(void)	mouseDown: (NSEvent*)event
 {
