@@ -147,7 +147,6 @@
 
 -(void)	drawSelectionHighlightInView: (NSView*)overlayView
 {
-	NSView*	mainSubView = mMainView;
 	NSRect	subviewFrame = [self selectionRect];
 	
 	[[NSColor keyboardFocusIndicatorColor] set];
