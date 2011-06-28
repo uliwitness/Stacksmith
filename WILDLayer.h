@@ -91,4 +91,6 @@
 -(void)							appendInnerAddColorObjectXmlToString: (NSMutableString*)theString;
 -(void)							appendInnerXmlToString: (NSMutableString*)theString;	// Hook-in point for subclasses like WILDCard.
 
+-(void)							getID: (LEOObjectID*)outID seedForScripts: (LEOObjectSeed*)outSeed;
+
 @end

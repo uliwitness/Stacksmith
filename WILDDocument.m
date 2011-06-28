@@ -844,11 +844,17 @@
 }
 
 
+-(NSString*)	description
+{
+	return [NSString stringWithFormat: @"%@<%p> { file = %@ }", [self class], [self class], [self fileURL]];
+}
+
+
 +(WILDStack*)	frontStackNamed: (NSString*)stackName
 {
 	WILDStack	*	theStack = nil;
 	WILDDocument*	frontDoc = nil;
-	NSArray*		docs = [[NSDocumentController sharedDocumentController] documents];
+	NSArray*		docs = [NSApp orderedDocuments];
 	for( WILDDocument* currDoc in docs )
 	{
 		if( [currDoc isKindOfClass: [WILDDocument class]] )

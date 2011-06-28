@@ -9,6 +9,7 @@
 #import "WILDMessageBox.h"
 #import "WILDDocument.h"
 #import "Forge.h"
+#import "ForgeWILDObjectValue.h"
 
 
 static WILDMessageBox*	sSharedMessageBox = nil;
@@ -57,8 +58,14 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 
 -(IBAction)	runMessage: (id)sender
 {
+	/*
+		This is the main script execution bottleneck for the message box.
+		The text you enter in the field gets executed in the context of the
+		current card.
+	*/
+	
 	WILDDocument*	frontDoc = nil;
-	NSArray*		docs = [[NSDocumentController sharedDocumentController] documents];
+	NSArray*		docs = [NSApp orderedDocuments];
 	for( WILDDocument* currDoc in docs )
 	{
 		if( [currDoc isKindOfClass: [WILDDocument class]] )
@@ -71,10 +78,15 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	NSString	*	currCmd = [messageField stringValue];
 	const char	*	scriptStr = [currCmd UTF8String];
 	LEOScript	*	theScript = NULL;
-	LEOParseTree*	parseTree = LEOParseTreeCreateForCommandOrExpressionFromUTF8Characters( scriptStr, strlen(scriptStr), [[self window] title] );
+	LEOParseTree*	parseTree = LEOParseTreeCreateForCommandOrExpressionFromUTF8Characters( scriptStr, strlen(scriptStr), [[[self window] title] UTF8String] );
 	if( LEOParserGetLastErrorMessage() == NULL )
 	{
-		theScript = LEOScriptCreateForOwner( 0, 0, NULL );	// TODO: Store owner reference and use here!
+		WILDCard	*	targetCard = [frontDoc currentCard];
+		LEOObjectID		objectIDForScripts = kLEOObjectIDINVALID;
+		LEOObjectSeed	seedForScripts = 0;
+		[targetCard getID: &objectIDForScripts seedForScripts: &seedForScripts];
+		
+		theScript = LEOScriptCreateForOwner( objectIDForScripts, seedForScripts, LEOForgeScriptGetParentScript );
 		LEOScriptCompileAndAddParseTree( theScript, [frontDoc contextGroup], parseTree );
 	}
 	

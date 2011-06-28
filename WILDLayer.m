@@ -588,6 +588,23 @@
 }
 
 
+-(void)	getID: (LEOObjectID*)outID seedForScripts: (LEOObjectSeed*)outSeed
+{
+	if( mIDForScripts == kLEOObjectIDINVALID )
+	{
+		LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
+		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [[mStack document] contextGroup], &mValueForScripts );
+		mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[mStack document] contextGroup], mIDForScripts );
+	}
+	
+	if( mIDForScripts && mSeedForScripts )
+	{
+		*outID = mIDForScripts;
+		*outSeed = mSeedForScripts;
+	}
+}
+
+
 -(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError
 {
 	if( !mScriptObject )
@@ -596,12 +613,7 @@
 		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), [[self displayName] UTF8String] );
 		if( LEOParserGetLastErrorMessage() == NULL )
 		{
-			if( mIDForScripts == kLEOObjectIDINVALID )
-			{
-				LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
-				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [[mStack document] contextGroup], &mValueForScripts );
-				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[mStack document] contextGroup], mIDForScripts );
-			}
+			[self getID: NULL seedForScripts: NULL];	// Make sure ivars mIDForScripts and mSeedForScripts are initialized.
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
 			
