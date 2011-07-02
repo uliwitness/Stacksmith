@@ -1080,9 +1080,9 @@
 	if( [currPart titleWidth] > 0 )
 	{
 		NSRect	titleBox = popupBox;
-		titleBox.size.width = [currPart titleWidth];
-		popupBox.origin.x += titleBox.size.width;
-		popupBox.size.width -= titleBox.size.width;
+		titleBox.size.width = FLT_MAX;
+		popupBox.origin.x += [currPart titleWidth];
+		popupBox.size.width -= [currPart titleWidth];
 		
 		label = [[WILDClickablePopUpButtonLabel alloc] initWithFrame: titleBox];
 		[label setWantsLayer: YES];
@@ -1100,7 +1100,8 @@
 		[label sizeToFit];
 		titleBox = [label frame];
 		titleBox.size.width = [currPart titleWidth];
-		titleBox.origin.y = truncf((titleBox.size.height -popupBox.size.height) /2);
+		titleBox.origin.y = truncf((partRect.size.height -titleBox.size.height) /2) +2;	// account for shadow
+		titleBox.origin.x = partRect.origin.x;
 		[label setFrame: titleBox];
 		
 		[self addSubview: label];
