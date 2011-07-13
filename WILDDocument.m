@@ -313,6 +313,7 @@
 	}
 	
 	// Create a stack root object:
+	BOOL				success = NO;
 	NSArray			*	stacks = [stackfileElement elementsForName: @"stack"];
 	[mStacks removeAllObjects];
 	
@@ -320,18 +321,23 @@
 	{
 		NSXMLNode	*	theFileAttr = [currStackElem attributeForName: @"file"];
 		NSString	*	theFileName = [theFileAttr stringValue];
-		NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
-		NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0
-									error: outError];
-		
-		WILDStack*	currStack = [[WILDStack alloc] initWithXMLDocument: theDoc
-											document: self];
-		[mStacks addObject: currStack];
-		[theDoc release];
-		[currStack release];
+		if( theFileName )
+		{
+			NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
+			NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0
+										error: outError];
+			
+			WILDStack*	currStack = [[WILDStack alloc] initWithXMLDocument: theDoc
+												document: self];
+			[mStacks addObject: currStack];
+			[theDoc release];
+			[currStack release];
+			
+			success = YES;
+		}
 	}
 	
-	return YES;
+	return success;
 }
 
 
@@ -919,6 +925,12 @@
 	}
 	
 	return theStack;
+}
+
+
++(BOOL)	autosavesInPlace
+{
+	return YES;
 }
 
 @end
