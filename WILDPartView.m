@@ -1080,7 +1080,7 @@
 	if( [currPart titleWidth] > 0 )
 	{
 		NSRect	titleBox = popupBox;
-		titleBox.size.width = FLT_MAX;
+		titleBox.size.width = 10000;
 		popupBox.origin.x += [currPart titleWidth];
 		popupBox.size.width -= [currPart titleWidth];
 		
