@@ -52,6 +52,8 @@ static WILDToolsPalette*	sSharedToolsPalette = nil;
 -(void)	windowDidLoad
 {
     [super windowDidLoad];
+	
+	[[self window] setLevel: NSFloatingWindowLevel];
     
 	ULIPaintView	* cpv = [ULIPaintView currentPaintView];
 	if( cpv )
