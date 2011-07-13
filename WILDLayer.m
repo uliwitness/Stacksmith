@@ -629,7 +629,7 @@
 		}
 		if( LEOParserGetLastErrorMessage() )
 		{
-			if( showError )
+			if( showError && [NSApp isRunning] )
 				NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] );
 			if( mScriptObject )
 			{
