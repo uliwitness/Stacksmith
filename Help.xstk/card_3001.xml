@@ -37,6 +37,7 @@
 		<multipleLines><false /></multipleLines>
 		<showLines><false /></showLines>
 		<wideMargins><false /></wideMargins>
+		<controllerVisible><false /></controllerVisible>
 		<textAlign>left</textAlign>
 		<font>Geneva</font>
 		<textSize>12</textSize>
@@ -46,11 +47,11 @@
 	<content>
 		<layer>card</layer>
 		<id>1</id>
-		<text>{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+		<text>{\rtf1\ansi\ansicpg1252\cocoartf1138
 {\fonttbl\f0\fswiss\fcharset0 Optima-Regular;\f1\fnil\fcharset0 Monaco;\f2\fnil\fcharset0 LucidaGrande;
 }
 {\colortbl;\red255\green255\blue255;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
 \f0\b\fs48 \cf0 The Forge Programming Language
 \b0\fs28 \
@@ -85,7 +86,7 @@ This defines a command handler with the specified number of parameters that are 
 \f0\fs28 \
 This is the command that calls a command handler. The parameter values passed in may be any valid expression. If the current script does not contain a command handler with the given name, this will look up the message path for another object to handle the message. The message path is:\
 \
-	part (button or field) 
+	part (button, movie player or field) 
 \f2 \uc0\u8594 
 \f0  card 
 \f2 \uc0\u8594 
@@ -516,6 +517,13 @@ A button on the current card or on its background, referenced by name, or number
 A text field on the current card or on its background, referenced by name, or number. The number being its position in the list of all fields on the card/background. The first and backmost field has the number 1 (not zero).\
 \
 
+\f1\fs20 	card movie player &lt;playerNameOrNumber&gt;\
+	background movie player &lt;playerNameOrNumber&gt;\
+
+\f0\fs28 \
+A movie player control on the current card or on its background, referenced by name, or number. The number being its position in the list of all movie players on the card/background. The first and backmost movie player has the number 1 (not zero).\
+\
+
 \f1\fs20 	card part &lt;partNameOrNumber&gt;\
 	background part &lt;partNameOrNumber&gt;\
 
@@ -576,8 +584,18 @@ A term may also be a property expression:\
 \f1\fs20 	[the] [long|short|abbr[ev[iated]]] &lt;propertyName&gt; [of &lt;objectDescriptor&gt;]\
 
 \f0\fs28 \
-Depending on the object descriptor, there may be different properties. If there is no object descriptor, it is assumed to be a property of Stacksmith itself, which is global to the entire application. If you provide a variable instead of an object descriptor, the variable will be treated as an associative array, and the property name will be used as the key into the array.\
+Depending on the object descriptor, there may be different properties. If there is no object descriptor, it is assumed to be a property of Stacksmith itself, which is global to the entire application. If you provide a variable instead of an object descriptor, the variable will be treated as an associative array, and the property name will be used as the key into the array. There is also the variant\
 \
+
+\f1\fs20 	my [long|short|abbr[ev[iated]]] &lt;propertyName&gt;\
+
+\f0\fs28 \
+which is equivalent to\
+\
+
+\f1\fs20 	[the] [long|short|abbr[ev[iated]]] &lt;propertyName&gt; of me\
+
+\f0\fs28 \
 
 \b 5. Containers
 \b0 \
@@ -634,6 +652,44 @@ A container is an object descriptor for a part (button or field), or a variable,
 \f0\fs28 " and "
 \f1\fs20 right
 \f0\fs28 " as numbers, relative to a coordinate system that has the origin in its upper left.\
+	
+\f1\fs20 visible
+\f0\fs28 			-	(true/false) Whether the field can be clicked and will be displayed on screen or not.\
+	
+\f1\fs20 enabled
+\f0\fs28 			-	(true/false) Whether the field is supposed to be clickable or not. Parts of the field will be drawn in a "dimmed", inactive appearance.\
+	
+\f1\fs20 script
+\f0\fs28 			-	The script of this field (i.e. the text you entered in its script editor to provide behaviours)\
+	
+\f1\fs20 style
+\f0\fs28 			-	The field's style, controlling its border and behaviour.\
+	
+\f1\fs20 type
+\f0\fs28 				-	Always "field".\
+	
+\f1\fs20 [short] id
+\f0\fs28 		-	the unique identification number of the field.\
+	
+\f1\fs20 dontWrap
+\f0\fs28 			-	(true/false) Whether text will be wrapped at the edge of the field or only return characters cause line breaks.\
+	
+\f1\fs20 dontSearch
+\f0\fs28 		-	(true/false) Make this field invisible to the "find" menu item.\
+	
+\f1\fs20 sharedText
+\f0\fs28 		-	(true/false) If this field is a background field, this will control whether the field's text will be the same on all cards, or whether its contents will be remembered independently for each card (useful for use as a form field).\
+	
+\f1\fs20 lockText
+\f0\fs28 			-	(true/false) Whether the field's text is editable or not.	
+\f1\fs20 autoSelect
+\f0\fs28 		-	(true/false) whether this field is supposed to behave as a plain text field, or as a list where individual lines can be selected only.\
+	
+\f1\fs20 multipleLines
+\f0\fs28 		-	(true/false) When autoSelect is true, this controls whether only one line can be selected, or several at once.\
+	
+\f1\fs20 wideMargins
+\f0\fs28 		-	(true/false) Whether text is supposed to be drawn up to the edge to the field, or at an inset.\
 \
 
 \b 6.5. Button Properties
@@ -653,9 +709,76 @@ A container is an object descriptor for a part (button or field), or a variable,
 \f0\fs28 " and "
 \f1\fs20 right
 \f0\fs28 " as numbers, relative to a coordinate system that has the origin in its upper left.\
+	
+\f1\fs20 visible
+\f0\fs28 			-	(true/false) Whether the button can be clicked and will be displayed on screen or not.\
+	
+\f1\fs20 enabled
+\f0\fs28 			-	(true/false) Whether the button is supposed to be clickable or not. Parts of the button will be drawn in a "dimmed", inactive appearance.\
+	
+\f1\fs20 script
+\f0\fs28 			-	The script of this button (i.e. the text you entered in its script editor to provide behaviours)\
+	
+\f1\fs20 style
+\f0\fs28 			-	The button's style, controlling its border and behaviour.\
+	
+\f1\fs20 type
+\f0\fs28 				-	Always "button".\
+	
+\f1\fs20 [short] id
+\f0\fs28 		-	the unique identification number of the button.\
+	
+\f1\fs20 autoHighlight
+\f0\fs28 		-	(true/false) Whether the button is supposed to provide visual feedback when clicked by automatically adjusting its highlightedForTracking property.\
+	
+\f1\fs20 highlight
+\f0\fs28 			-	(true/false) Whether the button should be drawn highlighted or not. For checkboxes and radio buttons this controls whether their check mark is visible, for other button types this usually causes a "pressed" appearance.\
+	
+\f1\fs20 highlightedForTracking
+\f0\fs28  - (true/false) Whether the button is supposed to draw in its "pressed" appearance or not.\
+	
+\f1\fs20 sharedHighlight
+\f0\fs28 	-	(true/false) For background buttons, this controls whether the button's highlight will be the same on all cards, or whether it will be remembered separately for each card.\
+	
+\f1\fs20 showName
+\f0\fs28 			-	(true/false) Whether the button will display its name as its title.\
 \
 
-\b 6.6. Stacksmith Properties
+\b 6.6. Movie Player Properties
+\b0 \
+\
+	
+\f1\fs20 [short] name
+\f0\fs28 		-	The name of the movie player.\
+	
+\f1\fs20 rectangle
+\f0\fs28 			-	The coordinates indicating the size and position of the movie player, as an associative array containing entries for the keys "
+\f1\fs20 top
+\f0\fs28 ", "
+\f1\fs20 left
+\f0\fs28 ", "
+\f1\fs20 bottom
+\f0\fs28 " and "
+\f1\fs20 right
+\f0\fs28 " as numbers, relative to a coordinate system that has the origin in its upper left.\
+	
+\f1\fs20 visible
+\f0\fs28 			-	(true/false) Whether the movie player can be clicked and will be displayed on screen or not.\
+	
+\f1\fs20 enabled
+\f0\fs28 			-	(true/false) Whether the movie player is supposed to be clickable or not. Parts of the movie player will be drawn in a "dimmed", inactive appearance.\
+	
+\f1\fs20 script
+\f0\fs28 			-	The script of this movie player (i.e. the text you entered in its script editor to provide behaviours)\
+	
+\f1\fs20 type
+\f0\fs28 				-	Always "moviePlayer".\
+	
+\f1\fs20 [short] id
+\f0\fs28 		-	the unique identification number of the movie player.\
+\
+
+\b 6.7. Stacksmith Properties
 \b0 \
 \
 	
@@ -665,6 +788,9 @@ A container is an object descriptor for a part (button or field), or a variable,
 \f0\fs28 " by default, and is reset to "
 \f1\fs20 ,
 \f0\fs28 " at idle time.\
+	
+\f1\fs20 version
+\f0\fs28 			-	The version number of Stacksmith.\
 \
 
 \b 7. System Messages
