@@ -467,19 +467,6 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 }
 
 
-void	WILDMeInstruction( LEOContext* inContext )
-{
-	LEOScript	*	myScript = LEOContextPeekCurrentScript( inContext );
-	
-	inContext->stackEndPtr++;
-	
-	LEOInitReferenceValueWithIDs( inContext->stackEndPtr -1, myScript->ownerObject, myScript->ownerObjectSeed,
-									  kLEOInvalidateReferences, inContext );
-	
-	inContext->currentInstruction++;
-}
-
-
 void	WILDThisStackInstruction( LEOContext* inContext )
 {
 	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
@@ -556,7 +543,6 @@ LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_F
 	WILDPreviousCardInstruction,
 	WILDFirstCardInstruction,
 	WILDLastCardInstruction,
-	WILDMeInstruction,
 	WILDThisStackInstruction,
 	WILDThisBackgroundInstruction,
 	WILDThisCardInstruction
@@ -579,7 +565,6 @@ const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNC
 	"WILDPreviousCardInstruction",
 	"WILDFirstCardInstruction",
 	"WILDLastCardInstruction",
-	"WILDMeInstruction"
 	"WILDThisStackInstruction",
 	"WILDThisBackgroundInstruction",
 	"WILDThisCardInstruction"
@@ -731,20 +716,6 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 		ELastIdentifier, INVALID_INSTR2, 0, 0,
 		{
 			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_LAST_CARD_INSTRUCTION, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 }
-		}
-	},
-	{
-		EMeIdentifier, WILD_ME_INSTRUCTION, 0, 0,
-		{
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },

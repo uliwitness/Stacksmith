@@ -158,15 +158,30 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 }
 
 
+void	LEOPushMeInstruction( LEOContext* inContext )
+{
+	LEOScript	*	myScript = LEOContextPeekCurrentScript( inContext );
+	
+	inContext->stackEndPtr++;
+	
+	LEOInitReferenceValueWithIDs( inContext->stackEndPtr -1, myScript->ownerObject, myScript->ownerObjectSeed,
+									  kLEOInvalidateReferences, inContext );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOInstructionFuncPtr	gPropertyInstructions[LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS] =
 {
 	LEOPushPropertyOfObjectInstruction,
-	LEOSetPropertyOfObjectInstruction
+	LEOSetPropertyOfObjectInstruction,
+	LEOPushMeInstruction
 };
 
 
 const char*		gPropertyInstructionNames[LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS] =
 {
 	"PushPropertyOfObject",
-	"SetPropertyOfObject"
+	"SetPropertyOfObject",
+	"PushMe"
 };
