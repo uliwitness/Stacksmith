@@ -54,7 +54,8 @@
 	[self.window centerHorizontallyAndVertically];
 	
 	[mCardViewController setView: mView];
-	[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];
+	if( [[mStack cards] count] > 0 )
+		[mCardViewController loadCard: [[mStack cards] objectAtIndex: 0]];
 		
 //	if( [self fileURL] )
 //	{

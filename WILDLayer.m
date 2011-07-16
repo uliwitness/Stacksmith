@@ -599,8 +599,10 @@
 	
 	if( mIDForScripts && mSeedForScripts )
 	{
-		*outID = mIDForScripts;
-		*outSeed = mSeedForScripts;
+		if( outID )
+			*outID = mIDForScripts;
+		if( outSeed )
+			*outSeed = mSeedForScripts;
 	}
 }
 

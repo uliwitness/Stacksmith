@@ -432,8 +432,10 @@ size_t	LEOGetWILDObjectKeyCount( LEOValuePtr self, struct LEOContext* inContext 
 struct LEOScript*	LEOForgeScriptGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext )
 {
 	struct LEOScript*	theScript = NULL;
+	id<WILDObject>		theObject = nil;
 	LEOValuePtr			theObjectVal = LEOContextGroupGetPointerForObjectIDAndSeed( inContext->group, inScript->ownerObject, inScript->ownerObjectSeed );
-	id<WILDObject>	theObject = (id<WILDObject>) theObjectVal->object.object;
+	if( theObjectVal )
+		theObject = (id<WILDObject>) theObjectVal->object.object;
 	
 	if( theObject != nil )
 		theScript = [[theObject parentObject] scriptObjectShowingErrorMessage: YES];

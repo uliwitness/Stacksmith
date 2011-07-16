@@ -80,6 +80,8 @@
 		mCantPeek = WILDBoolFromSubElementInElement( @"cantPeek", elem, NO );
 		
 		mCardSize = WILDSizeFromSubElementInElement( @"cardSize", elem );
+		if( mCardSize.width < 1 || mCardSize.height < 1 )
+			mCardSize = NSMakeSize(512,342);
 		
 		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
 		
@@ -96,14 +98,17 @@
 			NSXMLNode*				theFileAttrNode = [theBgElem attributeForName: @"file"];
 			NSString*				theFileAttr = [theFileAttrNode stringValue];
 			NSURL*					theFileAttrURL = [[mDocument fileURL] URLByAppendingPathComponent: theFileAttr];
-			NSXMLDocument*			bgDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
-																error: nil];
-			WILDBackground*	theBg = [[WILDBackground alloc] initWithXMLDocument: bgDoc forStack: self];
-			
-			[self addBackground: theBg];
-			
-			[bgDoc release];
-			[theBg release];
+			if( theFileAttrURL != nil )
+			{
+				NSXMLDocument*			bgDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
+																	error: nil];
+				WILDBackground*	theBg = [[WILDBackground alloc] initWithXMLDocument: bgDoc forStack: self];
+				
+				[self addBackground: theBg];
+				
+				[bgDoc release];
+				[theBg release];
+			}
 		}
 
 		// Load cards:
@@ -115,14 +120,17 @@
 			BOOL					isMarked = [[theMarkedAttrNode stringValue] isEqualToString: @"true"];
 			NSString*				theFileAttr = [theFileAttrNode stringValue];
 			NSURL*					theFileAttrURL = [[mDocument fileURL] URLByAppendingPathComponent: theFileAttr];
-			NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
-																error: nil];
-			WILDLayer*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
-			[self addCard: theCd];
-			[self setMarked: isMarked forCard: theCd];
-			
-			[cdDoc release];
-			[theCd release];
+			if( theFileAttrURL )
+			{
+				NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
+																	error: nil];
+				WILDLayer*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
+				[self addCard: theCd];
+				[self setMarked: isMarked forCard: theCd];
+				
+				[cdDoc release];
+				[theCd release];
+			}
 		}
 		
 		mCardIDSeed = 3000;
