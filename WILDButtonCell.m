@@ -19,6 +19,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	NSImage*	hImg = [[[NSImage alloc] initWithSize: iBox.size] autorelease];
 	[hImg lockFocus];
 		CGContextRef    theCtx = [[NSGraphicsContext currentContext] graphicsPort];
+		CGContextSaveGState( theCtx );
 		[img drawAtPoint: NSZeroPoint fromRect: NSZeroRect operation: NSCompositeCopy fraction: 1.0];
 
 		// Make sure we only touch opaque pixels:
@@ -29,6 +30,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		CGContextSetRGBFillColor( theCtx, 1, 1, 1, 1.0 );
 		CGContextFillRect( theCtx, NSRectToCGRect( iBox ) );
 		CGContextSetBlendMode( theCtx, kCGBlendModeNormal );
+		CGContextRestoreGState( theCtx );
 	[hImg unlockFocus];
 	return hImg;
 }
