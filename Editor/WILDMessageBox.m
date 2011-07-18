@@ -100,6 +100,9 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		LEOContext	ctx;
 		
 		LEOInitContext( &ctx, [frontDoc contextGroup] );
+		#if REMOTE_DEBUGGER
+		ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
+		#endif
 		
 		LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
 		LEOPushIntegerOnStack( &ctx, 0 );
@@ -107,6 +110,11 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		// Send message:
 		LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [frontDoc contextGroup], ":run" );
 		LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
+
+		#if REMOTE_DEBUGGER
+		LEORemoteDebuggerAddFile( "message box", scriptStr, theScript );
+		LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
+		#endif
 		
 		LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
 		LEORunInContext( theHandler->instructions, &ctx );
