@@ -75,12 +75,20 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 {
 	char msgBuf[1024] = { 0 };
 	const char*	msgStr = LEOGetValueAsString( inContext->stackEndPtr -4, msgBuf, sizeof(msgBuf), inContext );
+	if( !inContext->keepRunning )
+		return;
 	char btn1Buf[1024] = { 0 };
 	const char*	btn1Str = LEOGetValueAsString( inContext->stackEndPtr -3, btn1Buf, sizeof(btn1Buf), inContext );
+	if( !inContext->keepRunning )
+		return;
 	char btn2Buf[1024] = { 0 };
 	const char*	btn2Str = LEOGetValueAsString( inContext->stackEndPtr -2, btn2Buf, sizeof(btn2Buf), inContext );
+	if( !inContext->keepRunning )
+		return;
 	char btn3Buf[1024] = { 0 };
 	const char*	btn3Str = LEOGetValueAsString( inContext->stackEndPtr -1, btn3Buf, sizeof(btn3Buf), inContext );
+	if( !inContext->keepRunning )
+		return;
 	
 	NSInteger	returnValue = 0;
 	@try
