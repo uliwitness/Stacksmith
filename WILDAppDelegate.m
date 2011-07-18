@@ -50,6 +50,8 @@
 	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, gStacksmithHostFunctionInstructionNames, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
 	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
 	
+	[WILDToolsPalette showToolsPaletteIfNeeded];
+	
 	#if REMOTE_DEBUGGER
 	LEOInitRemoteDebugger( "127.0.0.1" );
 	#endif

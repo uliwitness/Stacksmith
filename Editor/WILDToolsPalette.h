@@ -20,6 +20,8 @@
 @property (retain) IBOutlet NSColorWell		*		lineColorWell;
 @property (retain) IBOutlet NSColorWell		*		fillColorWell;
 
++(void)					showToolsPaletteIfNeeded;	// Call at startup to re-show as needed.
+
 +(WILDToolsPalette*)	sharedToolsPalette;
 
 -(void)	orderFrontToolsPalette: (id)sender;

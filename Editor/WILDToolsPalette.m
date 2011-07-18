@@ -11,12 +11,27 @@
 #import "UKHelperMacros.h"
 
 
+NSString*		WILDToolsPaletteVisibleKey = @"WILDToolsPaletteVisible";
+
+
 @implementation WILDToolsPalette
 
 static WILDToolsPalette*	sSharedToolsPalette = nil;
 
 @synthesize lineColorWell = mLineColorWell;
 @synthesize fillColorWell = mFillColorWell;
+
++(void)	showToolsPaletteIfNeeded
+{
+	BOOL			shouldBeVisible = YES;
+	NSNumber	*	shouldBeVisibleObj = [[NSUserDefaults standardUserDefaults] objectForKey:WILDToolsPaletteVisibleKey];
+	if( shouldBeVisibleObj )
+		shouldBeVisible = [shouldBeVisibleObj boolValue];
+	
+	if( shouldBeVisible )
+		[[self sharedToolsPalette] orderFrontToolsPalette: self];
+}
+
 
 +(WILDToolsPalette*)	sharedToolsPalette
 {
@@ -28,6 +43,7 @@ static WILDToolsPalette*	sSharedToolsPalette = nil;
 	
 	return sSharedToolsPalette;
 }
+
 
 - (id)init
 {
@@ -77,6 +93,7 @@ static WILDToolsPalette*	sSharedToolsPalette = nil;
 		[mFillColorWell setColor: [NSColor clearColor]];
 	}
 	
+	[[NSUserDefaults standardUserDefaults] setBool: YES forKey: WILDToolsPaletteVisibleKey];
 	[[self window] orderFront: sender];
 }
 
@@ -101,6 +118,12 @@ static WILDToolsPalette*	sSharedToolsPalette = nil;
 -(IBAction)	takeFillColorFrom: (NSColorWell*)sender
 {
 	[[ULIPaintView currentPaintView] takeFillColorFrom: sender];
+}
+
+
+-(void)	windowWillClose: (NSNotification*)notif
+{
+	[[NSUserDefaults standardUserDefaults] setBool: NO forKey: WILDToolsPaletteVisibleKey];
 }
 
 @end
