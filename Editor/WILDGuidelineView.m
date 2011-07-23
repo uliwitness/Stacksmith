@@ -89,14 +89,14 @@
 
 -(void)	drawRect:(NSRect)dirtyRect
 {
+	for( WILDPartView* currPartView in mPartViews )
+		[currPartView drawPartFrameInView: self];
+	
 	for( WILDGuideline* currGuideline in mGuidelines )
 		[currGuideline drawInView: self];
 	
 	for( WILDPartView* currPartView in mSelectedPartViews )
 		[currPartView drawSelectionHighlightInView: self];
-	
-	for( WILDPartView* currPartView in mPartViews )
-		[currPartView drawPartFrameInView: self];
 }
 
 
