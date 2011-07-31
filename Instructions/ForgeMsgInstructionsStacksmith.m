@@ -34,6 +34,12 @@ void	LEOPrintInstruction( LEOContext* inContext )
 	
 	bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
+	if( theValue == NULL || theValue->base.isa == NULL )
+	{
+		inContext->keepRunning = false;
+		snprintf( inContext->errMsg, sizeof(inContext->errMsg) -1, "Internal error: Invalid value." );
+		return;
+	}
 	LEOGetValueAsString( theValue, buf, sizeof(buf), inContext );
 	
 	NSString	*	objcString = [NSString stringWithCString: buf encoding: NSUTF8StringEncoding];
