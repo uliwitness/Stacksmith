@@ -39,6 +39,21 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 			const char*	valueStr = [propValueObj UTF8String];
 			LEOInitStringValue( thePropertyName, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
 		}
+		else if( [propValueObj isKindOfClass: [NSNumber class]] )
+		{
+			if( strcmp([propValueObj objCType], @encode(long long)) == 0
+				|| strcmp([propValueObj objCType], @encode(NSInteger)) == 0
+				|| strcmp([propValueObj objCType], @encode(int)) == 0
+				|| strcmp([propValueObj objCType], @encode(short)) == 0
+				|| strcmp([propValueObj objCType], @encode(char)) == 0 )
+			{
+				LEOInitIntegerValue( thePropertyName, [propValueObj longLongValue], kLEOInvalidateReferences, inContext );
+			}
+			else
+			{
+				LEOInitNumberValue( thePropertyName, [propValueObj doubleValue], kLEOInvalidateReferences, inContext );
+			}
+		}
 		else if( [propValueObj isKindOfClass: [NSDictionary class]] )
 		{
 			NSDictionary	*		theDict = propValueObj;
