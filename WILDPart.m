@@ -817,8 +817,10 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 {
 	if( [mStyle isEqualToString: @"popup"] )
 		[self setSelectedListItemIndexes: [NSIndexSet indexSetWithIndex: [(NSPopUpButton*)sender indexOfSelectedItem]]];
-	else
-		[[self partOwner] updatePartOnClick: self withCard: inCard background: inBackground];
+	
+	[[self partOwner] updatePartOnClick: self withCard: inCard background: inBackground];
+
+	WILDScriptContainerResultFromSendingMessage( self, @"mouseUp" );
 }
 
 
@@ -1086,10 +1088,34 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		return mStyle;
 	else if( [inPropertyName isEqualToString: @"type"] )
 		return mType;
-	else if( [inPropertyName isEqualToString: @"moviePath"] )
+	else if( [inPropertyName isEqualToString: @"moviepath"] )
 		return mMediaPath;
 	else if( [inPropertyName isEqualToString: @"short id"] || [inPropertyName isEqualToString: @"id"] )
 		return [NSNumber numberWithLongLong: mID];
+	else if( [inPropertyName isEqualToString: @"selectedline"] )
+	{
+		NSUInteger	selectedIndex = [[self selectedListItemIndexes] firstIndex];
+		if( selectedIndex == NSNotFound )
+			selectedIndex = 0;
+		else
+			selectedIndex += 1;
+		return [NSNumber numberWithLongLong: selectedIndex];
+	}
+	else if( [inPropertyName isEqualToString: @"selectedlines"] )
+	{
+		NSMutableDictionary	* selectedLines = [NSMutableDictionary dictionaryWithCapacity: [[self selectedListItemIndexes] count]];
+		
+		NSUInteger	x = 0;
+		NSUInteger	currIdx = [[self selectedListItemIndexes] firstIndex];
+		while( currIdx != NSNotFound )
+		{
+			[selectedLines setObject: [NSNumber numberWithInteger: currIdx +1] forKey: [NSString stringWithFormat: @"%llu",(unsigned long long)++x]];
+			
+			currIdx = [[self selectedListItemIndexes] indexGreaterThanIndex: currIdx];
+		}
+		
+		return selectedLines;
+	}
 	else if( [inPropertyName isEqualToString: @"controllervisible"] )
 		return mControllerVisible ? kCFBooleanTrue : kCFBooleanFalse;
 	else
