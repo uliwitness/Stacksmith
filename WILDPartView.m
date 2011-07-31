@@ -1054,8 +1054,17 @@
 }
 
 
+-(void)	savePart
+{
+	if( [[mPart partType] isEqualToString: @"moviePlayer"] )
+		[mPart setCurrentTime: [[mMainView movie] currentTime]];
+}
+
+
 -(void)	unloadPart
 {
+	[self savePart];
+	
 	NSArray*	subviews = [[[self subviews] copy] autorelease];
 	for( NSView* currView in subviews )
 		[currView removeFromSuperview];
@@ -1548,6 +1557,7 @@
 	if( !movPath )
 		movPath = [currPart mediaPath];
 	QTMovie			* mov = [QTMovie movieWithFile: movPath error: &outError];
+	[mov setCurrentTime: [currPart currentTime]];
 	[mpv setMovie: mov];
 	[mpv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 	[mpv setPreservesAspectRatio: YES];

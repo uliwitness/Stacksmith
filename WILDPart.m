@@ -40,6 +40,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 @synthesize sharedText = mSharedText;
 @synthesize controllerVisible = mControllerVisible;
 @synthesize mediaPath = mMediaPath;
+@synthesize currentTime = mCurrentTime;
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
 {
@@ -72,6 +73,9 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mSharedHighlight = WILDBoolFromSubElementInElement( @"sharedHighlight", elem, YES );
 		mEnabled = WILDBoolFromSubElementInElement( @"enabled", elem, YES );
 		mFamily = WILDIntegerFromSubElementInElement( @"family", elem );
+		NSString	* timeString = WILDStringFromSubElementInElement( @"currentTime", elem );
+		if( timeString )
+			mCurrentTime = QTTimeFromString( timeString );
 		
 		NSString*		alignStr = WILDStringFromSubElementInElement( @"textAlign", elem );
 		if( [alignStr isEqualToString: @"forceLeft"] )
@@ -954,6 +958,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	[outString appendFormat: @"\t\t<multipleLines>%@</multipleLines>\n", (mMultipleLines ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<showLines>%@</showLines>\n", (mShowLines ? @"<true />" : @"<false />")];
 	[outString appendFormat: @"\t\t<wideMargins>%@</wideMargins>\n", (mWideMargins ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<currentTime>%@</currentTime>\n", QTStringFromTime(mCurrentTime)];
 	[outString appendFormat: @"\t\t<controllerVisible>%@</controllerVisible>\n", (mControllerVisible ? @"<true />" : @"<false />")];
 	
 	if( [mSelectedLines count] > 0 )

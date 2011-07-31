@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <QTKit/QTKit.h>
 #import "WILDScriptContainer.h"
 #import "WILDSearchContext.h"
 #import "WILDObjectID.h"
@@ -49,6 +50,7 @@
 	BOOL				mEnabled;
 	BOOL				mHighlightedForTracking;	// For most buttons same as highlight.
 	BOOL				mControllerVisible;
+	QTTime				mCurrentTime;
 	NSMutableIndexSet*	mSelectedLines;				// The indexes into the contents' list items array of the selected items.
 	NSTextAlignment		mTextAlignment;
 	NSString*			mTextFontName;
@@ -68,16 +70,17 @@
 	struct LEOValueObject	mValueForScripts;		// A LEOValue so scripts can reference us (see mIDForScripts).
 }
 
-@property (assign) BOOL		dontWrap;
-@property (assign) BOOL		autoTab;
-@property (assign) BOOL		dontSearch;
-@property (assign) BOOL		lockText;
-@property (assign) BOOL		wideMargins;
-@property (assign) BOOL		fixedLineHeight;
-@property (assign) BOOL		showLines;
-@property (assign) BOOL		sharedText;
-@property (assign) BOOL		controllerVisible;
-@property (copy) NSString*	mediaPath;
+@property (assign) BOOL			dontWrap;
+@property (assign) BOOL			autoTab;
+@property (assign) BOOL			dontSearch;
+@property (assign) BOOL			lockText;
+@property (assign) BOOL			wideMargins;
+@property (assign) BOOL			fixedLineHeight;
+@property (assign) BOOL			showLines;
+@property (assign) BOOL			sharedText;
+@property (assign) BOOL			controllerVisible;
+@property (copy) NSString*		mediaPath;
+@property (assign) QTTime		currentTime;
 
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;

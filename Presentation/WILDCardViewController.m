@@ -392,6 +392,7 @@
 	for( NSView* currSubview in subviews )
 	{
 		[currSubview partDidChange: nil];
+		[currSubview savePart];
 		[[self guidelineView] addPartView: currSubview];
 	}
 }
@@ -433,7 +434,9 @@
 		}
 	}
 	
-	// Get rid of previous card's views:
+	// Save & get rid of previous card's views:
+	for( WILDPartView * currPartView in [mPartViews allValues] )
+		[currPartView savePart];
 	NSArray*	subviews = [[[[self view] subviews] copy] autorelease];
 	for( NSView* currSubview in subviews )
 		[currSubview removeFromSuperview];

@@ -26,7 +26,6 @@
 	NSTextField		*		partNumberField;
 	NSTextField		*		partNumberLabel;
 	NSTextView		*		contentsTextField;
-
 }
 
 @property(retain)	IBOutlet NSButton			*		scriptEditorButton;
