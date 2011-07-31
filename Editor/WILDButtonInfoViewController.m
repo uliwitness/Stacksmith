@@ -41,7 +41,9 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	
 	if( !sStylesInMenuOrder )
 		sStylesInMenuOrder = [[NSArray alloc] initWithObjects:
-													@"plain",
+													@"rectangle",
+													@"roundrect",
+													@"oval",
 													@"standard",
 													@"default",
 													@"checkbox",

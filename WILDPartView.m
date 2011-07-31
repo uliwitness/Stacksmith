@@ -1107,13 +1107,14 @@
 		[label setWantsLayer: YES];
 		[label setEditable: NO];
 		[label setSelectable: NO];
-		[label setDrawsBackground: YES];
+		[label setDrawsBackground: NO];
 		[label setBezeled: NO];
 		[label setBordered: NO];
 		[label setAlignment: NSRightTextAlignment];
 		[[label cell] setWraps: NO];
 		if( [currPart showName] )
 			[label setStringValue: [currPart name]];
+		[label setEnabled: [currPart isEnabled]];
 		[label setFont: [currPart textFont]];
 		[label setFrame: titleBox];
 		[label sizeToFit];
@@ -1134,6 +1135,7 @@
 	[bt setFont: [currPart textFont]];
 	[bt setTarget: self];
 	[bt setAction: @selector(updateOnClick:)];
+	[bt setEnabled: [currPart isEnabled]];
 	
 	NSArray*	popupItems = ([contents text] != nil) ? [contents listItems] : [bgContents listItems];
 	for( NSString* itemName in popupItems )
@@ -1180,16 +1182,13 @@
 	
 	BOOL			canHaveIcon = YES;
 	NSButton	*	bt = [[WILDButtonView alloc] initWithFrame: partRect];
-	//[bt setWantsLayer: YES];
+	[bt setEnabled: [currPart isEnabled]];
 	
-	if( [[currPart style] isEqualToString: @"transparent"]
-		|| [[currPart style] isEqualToString: @"oval"] )
+	if( [[currPart style] isEqualToString: @"transparent"] )
 	{
 		[bt setCell: [[[WILDButtonCell alloc] initTextCell: @""] autorelease]];
 		[bt setBordered: NO];
 
-		if( [[currPart style] isEqualToString: @"oval"] )
-			[bt setBezelStyle: NSCircularBezelStyle];
 		[bt setAlignment: [currPart textAlignment]];	
 		[bt setButtonType: NSMomentaryPushInButton];
 		
@@ -1215,7 +1214,8 @@
 	}
 	else if( [[currPart style] isEqualToString: @"rectangle"]
 			|| [[currPart style] isEqualToString: @"shadow"]
-			|| [[currPart style] isEqualToString: @"roundrect"] )
+			|| [[currPart style] isEqualToString: @"roundrect"]
+			|| [[currPart style] isEqualToString: @"oval"] )
 	{
 		WILDButtonCell*	ourCell = [[[WILDButtonCell alloc] initTextCell: @""] autorelease];
 		[bt setCell: ourCell];
@@ -1243,7 +1243,9 @@
 			|| [[currPart style] isEqualToString: @"standard"]
 			|| [[currPart style] isEqualToString: @"default"] )
 			[bt setBezelStyle: NSRoundedBezelStyle];
-		
+		else if( [[currPart style] isEqualToString: @"oval"] )
+			[bt setBezelStyle: NSCircularBezelStyle];
+
 		if( [[currPart style] isEqualToString: @"default"] )
 		{
 			[bt setKeyEquivalent: @"\r"];
@@ -1351,6 +1353,8 @@
 	//	It is a bg field, its lockText is FALSE its sharedText is TRUE and we're editing the background.
 	//	It is a bg field, its lockText is FALSE and its sharedText is FALSE.
 	BOOL		shouldBeEditable = ![currPart lockText] && (![currPart sharedText] || backgroundEditMode);
+	if( ![currPart isEnabled] )
+		shouldBeEditable = NO;
 	[tv setEditable: shouldBeEditable];
 	[tv setSelectable: shouldBeEditable];
 	
