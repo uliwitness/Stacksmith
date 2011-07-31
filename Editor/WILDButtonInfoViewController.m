@@ -56,6 +56,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mShowNameSwitch setState: [part showName]];
 	[mAutoHighlightSwitch setState: [part autoHighlight]];
 	[mHighlightedSwitch setState: [part highlighted]];
+	[mSharedHighlightSwitch setState: [part sharedHighlight]];
 }
 
 
@@ -64,6 +65,17 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
 
 	[part setShowName: [mShowNameSwitch state] == NSOnState];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doSharedHighlightSwitchToggled: (id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+
+	[part setSharedHighlight: [mSharedHighlightSwitch state] == NSOnState];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
 	[part updateChangeCount: NSChangeDone];
