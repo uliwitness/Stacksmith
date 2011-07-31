@@ -39,9 +39,9 @@
 					<object class="NSButton" id="446123845">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{326, 12}, {89, 32}}</string>
+						<string key="NSFrame">{{326, 29}, {89, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:161</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="878197417">
@@ -68,6 +68,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{17, 84}, {60, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="220155060"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="1036836938">
@@ -101,6 +102,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{82, 82}, {327, 22}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="792676011"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="867498831">
@@ -132,6 +134,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{80, 18}, {227, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="446123845"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="615042552">
@@ -160,6 +163,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{80, 38}, {227, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="503299958"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="821110681">
@@ -183,6 +187,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{139, 62}, {51, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="215037167"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="355440778">
@@ -204,6 +209,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{257, 62}, {119, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="86532988"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="1068969989">
@@ -221,6 +227,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{192, 62}, {66, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="319054521"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="961257778">
@@ -242,6 +249,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{376, 62}, {36, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="794306290"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="51802482">
@@ -259,6 +267,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{79, 62}, {58, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="23455764"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="168855573">
@@ -276,6 +285,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{17, 62}, {60, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="550878963"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="442697949">
@@ -291,6 +301,7 @@
 				</array>
 				<string key="NSFrameSize">{429, 124}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1053516344"/>
 				<string key="NSClassName">NSView</string>
 			</object>
@@ -625,7 +636,86 @@
 			<nil key="sourceID"/>
 			<int key="maxID">38</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">WILDPartInfoViewController</string>
+					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="doEnabledSwitchToggled:">id</string>
+						<string key="doScriptEditorButton:">id</string>
+						<string key="doVisibleSwitchToggled:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="doEnabledSwitchToggled:">
+							<string key="name">doEnabledSwitchToggled:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="doScriptEditorButton:">
+							<string key="name">doScriptEditorButton:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="doVisibleSwitchToggled:">
+							<string key="name">doVisibleSwitchToggled:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="contentsTextField">NSTextView</string>
+						<string key="enabledSwitch">NSButton</string>
+						<string key="idField">NSTextField</string>
+						<string key="nameField">NSTextField</string>
+						<string key="numberField">NSTextField</string>
+						<string key="partNumberField">NSTextField</string>
+						<string key="partNumberLabel">NSTextField</string>
+						<string key="scriptEditorButton">NSButton</string>
+						<string key="visibleSwitch">NSButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="contentsTextField">
+							<string key="name">contentsTextField</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="enabledSwitch">
+							<string key="name">enabledSwitch</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="idField">
+							<string key="name">idField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="nameField">
+							<string key="name">nameField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="numberField">
+							<string key="name">numberField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="partNumberField">
+							<string key="name">partNumberField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="partNumberLabel">
+							<string key="name">partNumberLabel</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scriptEditorButton">
+							<string key="name">scriptEditorButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="visibleSwitch">
+							<string key="name">visibleSwitch</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/WILDPartInfoViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

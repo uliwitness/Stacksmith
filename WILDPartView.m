@@ -12,6 +12,7 @@
 #import "WILDPart.h"
 #import "WILDPartContents.h"
 #import "WILDPartInfoViewController.h"
+#import "WILDButtonInfoViewController.h"
 #import "WILDCardView.h"
 #import "WILDClickablePopUpButtonLabel.h"
 #import "WILDButtonCell.h"
@@ -768,7 +769,7 @@
 			
 			NSViewController*	infoController = nil;
 			if( [[mPart partType] isEqualToString: @"button"] )
-				infoController = [[WILDPartInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+				infoController = [[WILDButtonInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 			else
 				infoController = [[WILDPartInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 			[infoController autorelease];
