@@ -11,8 +11,7 @@
 #import "WILDScriptEditorWindowController.h"
 #import "WILDPart.h"
 #import "WILDPartContents.h"
-#import "WILDButtonInfoWindowController.h"
-#import "WILDFieldInfoWindowController.h"
+#import "WILDPartInfoViewController.h"
 #import "WILDCardView.h"
 #import "WILDClickablePopUpButtonLabel.h"
 #import "WILDButtonCell.h"
@@ -46,6 +45,9 @@
 
 -(void)	dealloc
 {
+	[mCurrentPopover close];
+	DESTROY(mCurrentPopover);
+	
 	[[WILDTools sharedTools] removeClient: self];
 	[self unsubscribeNotifications];
 	
@@ -761,14 +763,21 @@
 		
 		if( [event clickCount] == 2 && mSelected )
 		{
-			NSWindowController*	infoController = nil;
+			[mCurrentPopover close];
+			DESTROY(mCurrentPopover);
+			
+			NSViewController*	infoController = nil;
 			if( [[mPart partType] isEqualToString: @"button"] )
-				infoController = [[WILDButtonInfoWindowController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+				infoController = [[WILDPartInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 			else
-				infoController = [[WILDFieldInfoWindowController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+				infoController = [[WILDPartInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+			[infoController autorelease];
 
-			[[[[self window] windowController] document] addWindowController: infoController];
-			[infoController showWindow: self];
+			mCurrentPopover = [[NSPopover alloc] init];
+			[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+			[mCurrentPopover setDelegate: self];
+			[mCurrentPopover setContentViewController: infoController];
+			[mCurrentPopover showRelativeToRect: self.bounds ofView: self preferredEdge: NSMinYEdge];
 		}
 		else
 		{
@@ -1139,7 +1148,9 @@
 	[self setMainView: bt];
 	
 	if( label )
+	{
 		[[bt cell] accessibilitySetOverrideValue: [label cell] forAttribute: NSAccessibilityTitleUIElementAttribute];
+	}
 	
 	[bt release];
 }

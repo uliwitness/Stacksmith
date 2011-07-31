@@ -36,6 +36,7 @@ typedef enum
 	NSView*				mMainView;		// The main control in this view representing us.
 	NSView*				mHelperView;	// An additional view, e.g. a label text field or so.
 	BOOL				mIsBackgroundEditing;
+	NSPopover*			mCurrentPopover;
 }
 
 @property (assign) NSView*			mainView;
