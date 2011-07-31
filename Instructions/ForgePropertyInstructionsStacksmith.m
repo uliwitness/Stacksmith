@@ -78,6 +78,12 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 			}
 			LEOInitArrayValue( thePropertyName, theArray, kLEOInvalidateReferences, inContext );
 		}
+		else
+		{
+			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Internal Error: property '%s' returned unknown value.", propNameStr );
+			inContext->keepRunning = false;
+			return;
+		}
 	}
 	else
 	{
