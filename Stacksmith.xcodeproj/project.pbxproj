@@ -477,6 +477,8 @@
 		55E9FD8F13E5FBCC0089B81F /* WILDButtonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9FD8E13E5FBCC0089B81F /* WILDButtonInfoViewController.m */; };
 		55E9FD9213E6050F0089B81F /* WILDPartInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */; };
 		55E9FD9513E605270089B81F /* WILDButtonInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */; };
+		55E9FD9913E747B20089B81F /* WILDIconPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */; };
+		55E9FD9A13E747B20089B81F /* WILDIconPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */; };
 		55EA63801347532C0039FE0D /* WILDLayerInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA637F1347532C0039FE0D /* WILDLayerInfoWindowController.m */; };
 		55EA6383134756D00039FE0D /* WILDBackgroundInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA6382134756CF0039FE0D /* WILDBackgroundInfoWindowController.m */; };
 		55EA6386134758B40039FE0D /* WILDBackgroundInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EA6384134758B40039FE0D /* WILDBackgroundInfoWindowController.xib */; };
@@ -1240,6 +1242,9 @@
 		55E9FD8E13E5FBCC0089B81F /* WILDButtonInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDButtonInfoViewController.m; path = Editor/WILDButtonInfoViewController.m; sourceTree = "<group>"; };
 		55E9FD9113E6050F0089B81F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDPartInfoViewController.xib; sourceTree = "<group>"; };
 		55E9FD9413E605270089B81F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDButtonInfoViewController.xib; sourceTree = "<group>"; };
+		55E9FD9613E747B00089B81F /* WILDIconPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIconPickerViewController.h; path = Editor/WILDIconPickerViewController.h; sourceTree = "<group>"; };
+		55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIconPickerViewController.m; path = Editor/WILDIconPickerViewController.m; sourceTree = "<group>"; };
+		55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDIconPickerViewController.xib; path = Editor/WILDIconPickerViewController.xib; sourceTree = "<group>"; };
 		55EA637E1347532C0039FE0D /* WILDLayerInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDLayerInfoWindowController.h; sourceTree = "<group>"; };
 		55EA637F1347532C0039FE0D /* WILDLayerInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDLayerInfoWindowController.m; sourceTree = "<group>"; };
 		55EA6381134756C20039FE0D /* WILDBackgroundInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundInfoWindowController.h; sourceTree = "<group>"; };
@@ -1399,6 +1404,7 @@
 				55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */,
 				55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */,
 				55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */,
+				55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */,
 				55B9223C1167532A0073EC6C /* WILDButtonInfoWindowController.xib */,
 				55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */,
 				55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */,
@@ -1481,6 +1487,8 @@
 				55B9224211675A260073EC6C /* WILDButtonInfoWindowController.m */,
 				55382F72117238D90006B381 /* WILDFieldInfoWindowController.h */,
 				55382F6C117238B10006B381 /* WILDFieldInfoWindowController.m */,
+				55E9FD9613E747B00089B81F /* WILDIconPickerViewController.h */,
+				55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */,
 				55B924481169DB150073EC6C /* WILDIconListDataSource.h */,
 				55B924491169DB150073EC6C /* WILDIconListDataSource.m */,
 				55EA637E1347532C0039FE0D /* WILDLayerInfoWindowController.h */,
@@ -2625,6 +2633,7 @@
 				555BA0DC138DC9CB00B3B1D8 /* PlaceholderMovie.mov in Resources */,
 				55E9FD9213E6050F0089B81F /* WILDPartInfoViewController.xib in Resources */,
 				55E9FD9513E605270089B81F /* WILDButtonInfoViewController.xib in Resources */,
+				55E9FD9A13E747B20089B81F /* WILDIconPickerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2806,6 +2815,7 @@
 				55B79A8813D0319A00BC0A19 /* ULIHighlightingButton.m in Sources */,
 				55E9FD8B13E56D3A0089B81F /* WILDPartInfoViewController.m in Sources */,
 				55E9FD8F13E5FBCC0089B81F /* WILDButtonInfoViewController.m in Sources */,
+				55E9FD9913E747B20089B81F /* WILDIconPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

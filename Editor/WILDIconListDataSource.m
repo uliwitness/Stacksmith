@@ -84,6 +84,7 @@
 @synthesize document = mDocument;
 @synthesize iconListView = mIconListView;
 @synthesize imagePathField = mImagePathField;
+@synthesize delegate = mDelegate;
 
 -(id)	initWithDocument: (WILDDocument*)inDocument
 {
@@ -216,6 +217,9 @@
 			statusMsg = [NSString stringWithFormat: @"ID = %lld, from %@", [theItem pictureID], theName];
 		[mImagePathField setStringValue: statusMsg];
 	}
+	
+	if( [mDelegate respondsToSelector: @selector(iconListDataSourceSelectionDidChange:)] )
+		[mDelegate iconListDataSourceSelectionDidChange: self];
 }
 
 

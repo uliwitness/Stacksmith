@@ -8,6 +8,7 @@
 
 #import "WILDButtonInfoViewController.h"
 #import "WILDNotifications.h"
+#import "WILDIconPickerViewController.h"
 
 
 static 	NSArray*	sStylesInMenuOrder = nil;
@@ -15,6 +16,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 @implementation WILDButtonInfoViewController
 
+@synthesize iconButton = mIconButton;
 @synthesize stylePopUp = mStylePopUp;
 @synthesize familyPopUp = mFamilyPopUp;
 @synthesize showNameSwitch = mShowNameSwitch;
@@ -24,12 +26,15 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(void)	dealloc
 {
+	[mIconPopover close];
+	DESTROY(mIconPopover);
 	DESTROY(mStylePopUp);
 	DESTROY(mFamilyPopUp);
 	DESTROY(mShowNameSwitch);
 	DESTROY(mAutoHighlightSwitch);
 	DESTROY(mHighlightedSwitch);
 	DESTROY(mSharedHighlightSwitch);
+	DESTROY(mIconButton);
 	
 	[super dealloc];
 }
@@ -125,6 +130,27 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
 	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doShowIconPicker: (id)sender
+{
+	[mIconPopover close];
+	DESTROY(mIconPopover);
+	
+	WILDIconPickerViewController	*	iconPickerViewController = [[[WILDIconPickerViewController alloc] initWithPart: part] autorelease];
+	
+	mIconPopover = [[NSPopover alloc] init];
+	[mIconPopover setDelegate: self];
+	[mIconPopover setBehavior: NSPopoverBehaviorTransient];
+	[mIconPopover setContentViewController: iconPickerViewController];
+	[mIconPopover showRelativeToRect: [mIconButton bounds] ofView: mIconButton preferredEdge: NSMaxXEdge];
+}
+
+
+-(void)	popoverDidClose: (NSNotification *)notification
+{
+	DESTROY(mIconPopover);
 }
 
 @end

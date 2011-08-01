@@ -16,8 +16,11 @@
 	NSButton*			mAutoHighlightSwitch;
 	NSButton*			mHighlightedSwitch;
 	NSButton*			mSharedHighlightSwitch;
+	NSButton*			mIconButton;
+	NSPopover*			mIconPopover;
 }
 
+@property (retain) IBOutlet NSButton*			iconButton;
 @property (retain) IBOutlet NSPopUpButton*		stylePopUp;
 @property (retain) IBOutlet NSPopUpButton*		familyPopUp;
 @property (retain) IBOutlet NSButton*			showNameSwitch;
@@ -31,5 +34,6 @@
 -(IBAction)	doSharedHighlightSwitchToggled:(id)sender;
 -(IBAction) doFamilyPopUpChanged:(id)sender;
 -(IBAction) doStylePopUpChanged:(id)sender;
+-(IBAction)	doShowIconPicker:(id)sender;
 
 @end

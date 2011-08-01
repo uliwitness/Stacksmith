@@ -1693,4 +1693,10 @@
 		[self addCursorRect: [self visibleRect] cursor: currentCursor];
 }
 
+
+-(void)	popoverDidClose: (NSNotification *)notification
+{
+	DESTROY(mCurrentPopover);
+}
+
 @end
