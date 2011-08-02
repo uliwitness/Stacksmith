@@ -50,6 +50,8 @@
 	BOOL				mEnabled;
 	BOOL				mHighlightedForTracking;	// For most buttons same as highlight.
 	BOOL				mControllerVisible;
+	BOOL				mHasHorizontalScroller;
+	BOOL				mHasVerticalScroller;
 	QTTime				mCurrentTime;
 	NSMutableIndexSet*	mSelectedLines;				// The indexes into the contents' list items array of the selected items.
 	NSTextAlignment		mTextAlignment;
@@ -79,6 +81,8 @@
 @property (assign) BOOL			showLines;
 @property (assign) BOOL			sharedText;
 @property (assign) BOOL			controllerVisible;
+@property (assign) BOOL			hasHorizontalScroller;
+@property (assign) BOOL			hasVerticalScroller;
 @property (copy) NSString*		mediaPath;
 @property (assign) QTTime		currentTime;
 

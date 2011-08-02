@@ -55,7 +55,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	clampedCellFrame.size.width -= 1;
 	clampedCellFrame.size.height -= 1;
 	
-	BOOL	isActive = [[controlView window] isKeyWindow];
+	BOOL	isActive = [[controlView window] isKeyWindow] && [self isEnabled];
 	if( drawAsDefault )
 	{
 		[NSBezierPath setDefaultLineWidth: 3];
@@ -96,8 +96,10 @@ NSImage*	WILDInvertedImage( NSImage* img )
 			[[NSColor whiteColor] set];
 		else
 		#endif
-		if( isHighlighted )
+		if( isHighlighted && isActive )
 			[[NSColor blackColor] set];
+		else if( isHighlighted && !isActive )
+			[[NSColor grayColor] set];
 		else
 			[[self backgroundColor] set];
 		
@@ -106,7 +108,10 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	
 	if( [self isBordered] )
 	{
-		[[NSColor blackColor] set];
+		if( isActive )
+			[[NSColor blackColor] set];
+		else
+			[[NSColor grayColor] set];
 		[buttonStrokeShape stroke];
 	}
 	
@@ -153,8 +158,10 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		txBox.origin.y += truncf([self image].size.height /2);
 		imgBox.origin.y -= truncf(textExtents.height /2);
 		
-		if( isHighlighted )
+		if( isHighlighted && isActive )
 			[[NSColor blackColor] set];
+		else if( isHighlighted && !isActive )
+			[[NSColor grayColor] set];
 		else
 			[[NSColor whiteColor] set];
 		[NSBezierPath fillRect: txBox];

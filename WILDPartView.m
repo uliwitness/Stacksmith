@@ -13,6 +13,8 @@
 #import "WILDPartContents.h"
 #import "WILDPartInfoViewController.h"
 #import "WILDButtonInfoViewController.h"
+#import "WILDFieldInfoViewController.h"
+#import "WILDMoviePlayerInfoViewController.h"
 #import "WILDCardView.h"
 #import "WILDClickablePopUpButtonLabel.h"
 #import "WILDButtonCell.h"
@@ -770,6 +772,10 @@
 			NSViewController*	infoController = nil;
 			if( [[mPart partType] isEqualToString: @"button"] )
 				infoController = [[WILDButtonInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+			else if( [[mPart partType] isEqualToString: @"field"] )
+				infoController = [[WILDFieldInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+			else if( [[mPart partType] isEqualToString: @"moviePlayer"] )
+				infoController = [[WILDMoviePlayerInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 			else
 				infoController = [[WILDPartInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 			[infoController autorelease];
@@ -1417,7 +1423,8 @@
 		}
 		[sv setBorderType: NSLineBorder];
 		[sv setBackgroundColor: [NSColor whiteColor]];
-		[sv setHasVerticalScroller: NO];
+		[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
+		[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
 	}
 	[sv setHasHorizontalScroller: NO];
 	[tv setFrame: txBox];
