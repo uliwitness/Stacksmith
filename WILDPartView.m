@@ -1484,13 +1484,11 @@
 		[sv setBorderType: NSNoBorder];
 		[sv setDrawsBackground: NO];
 		[tv setBackgroundColor: [NSColor clearColor]];
-		[sv setHasVerticalScroller: NO];
 	}
 	else if( [[currPart style] isEqualToString: @"opaque"] )
 	{
 		[sv setBorderType: NSNoBorder];
 		[tv setBackgroundColor: [NSColor whiteColor]];
-		[sv setHasVerticalScroller: NO];
 	}
 	else if( [[currPart style] isEqualToString: @"scrolling"] )
 	{
@@ -1514,7 +1512,8 @@
 		[sv setBackgroundColor: [NSColor whiteColor]];
 		[sv setHasVerticalScroller: NO];
 	}
-	[sv setHasHorizontalScroller: NO];
+	[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
+	[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
 	[tv setFrame: txBox];
 	[tc setWidth: txBox.size.width];
 	[tc setMaxWidth: 1000000.0];

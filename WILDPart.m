@@ -74,8 +74,8 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mHighlight = WILDBoolFromSubElementInElement( @"highlight", elem, NO );
 		mSharedHighlight = WILDBoolFromSubElementInElement( @"sharedHighlight", elem, YES );
 		mEnabled = WILDBoolFromSubElementInElement( @"enabled", elem, YES );
-		mHasHorizontalScroller = WILDBoolFromSubElementInElement( @"hasHorizontalScroller", elem, YES );
-		mHasVerticalScroller = WILDBoolFromSubElementInElement( @"hasVerticalScroller", elem, YES );
+		mHasHorizontalScroller = WILDBoolFromSubElementInElement( @"hasHorizontalScroller", elem, NO );
+		mHasVerticalScroller = WILDBoolFromSubElementInElement( @"hasVerticalScroller", elem, NO );
 		mFamily = WILDIntegerFromSubElementInElement( @"family", elem );
 		NSString	* timeString = WILDStringFromSubElementInElement( @"currentTime", elem );
 		if( timeString )
@@ -988,7 +988,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	for( NSString* styleName in mTextStyles )
 		[outString appendFormat: @"\t\t<textStyle>%@</textStyle>\n", styleName];
 	[outString appendFormat: @"\t\t<hasHorizontalScroller>%@</hasHorizontalScroller>\n", (mHasHorizontalScroller ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<hasVerticalScroller>%@</hasHVerticalScroller>\n", (mHasVerticalScroller ? @"<true />" : @"<false />")];
+	[outString appendFormat: @"\t\t<hasVerticalScroller>%@</hasVerticalScroller>\n", (mHasVerticalScroller ? @"<true />" : @"<false />")];
 	
 	NSMutableString*	nameStr = WILDStringEscapedForXML(mName);
 	[outString appendFormat: @"\t\t<name>%@</name>\n", nameStr];

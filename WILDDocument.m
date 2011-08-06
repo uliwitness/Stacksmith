@@ -166,7 +166,6 @@
 	
 	DESTROY(mLastEditedVersion);
 	mLastEditedVersion = [[NSString stringWithFormat: @"Stacksmith %@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"]] retain];
-;
 	
 	// Write TOC:
 	[tocXmlString appendFormat: @"\t<createdByVersion>%@</createdByVersion>\n", mCreatedByVersion];

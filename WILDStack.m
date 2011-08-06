@@ -100,8 +100,11 @@
 			NSURL*					theFileAttrURL = [[mDocument fileURL] URLByAppendingPathComponent: theFileAttr];
 			if( theFileAttrURL != nil )
 			{
+				NSError*				theError = nil;
 				NSXMLDocument*			bgDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
-																	error: nil];
+																	error: &theError];
+				if( !bgDoc && theError )
+					NSLog(@"Could not load background: %@", theError);
 				WILDBackground*	theBg = [[WILDBackground alloc] initWithXMLDocument: bgDoc forStack: self];
 				
 				[self addBackground: theBg];
@@ -122,8 +125,11 @@
 			NSURL*					theFileAttrURL = [[mDocument fileURL] URLByAppendingPathComponent: theFileAttr];
 			if( theFileAttrURL )
 			{
+				NSError*				theError = nil;
 				NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
 																	error: nil];
+				if( !cdDoc && theError )
+					NSLog(@"Could not load background: %@", theError);
 				WILDLayer*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
 				[self addCard: theCd];
 				[self setMarked: isMarked forCard: theCd];

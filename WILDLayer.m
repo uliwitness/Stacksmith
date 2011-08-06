@@ -611,6 +611,8 @@
 {
 	if( !mScriptObject )
 	{
+		if( !mScript )
+			return NULL;
 		const char*		scriptStr = [mScript UTF8String];
 		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), [[self displayName] UTF8String] );
 		if( LEOParserGetLastErrorMessage() == NULL )
