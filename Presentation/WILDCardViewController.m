@@ -94,7 +94,9 @@
 	DESTROY_DEALLOC(mAddColorOverlay);
 	DESTROY_DEALLOC(mSearchContext);
 	DESTROY_DEALLOC(mCurrentSearchString);
+	[mBackgroundPictureView setDelegate: nil];
 	DESTROY_DEALLOC(mBackgroundPictureView);
+	[mCardPictureView setDelegate: nil];
 	DESTROY_DEALLOC(mCardPictureView);
 	
 	[super dealloc];
@@ -458,6 +460,7 @@
 		WILDStack*		theStack = [theCard stack];
 		WILDBackground*	theBg = [theCard owningBackground];
 		
+		[mBackgroundPictureView setDelegate: nil];
 		DESTROY(mBackgroundPictureView);
 		mBackgroundPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
 		NSImage*		bgPicture = [theBg picture];
@@ -482,6 +485,7 @@
 		// Load the actual card parts:
 		if( !mBackgroundEditMode )
 		{
+			[mCardPictureView setDelegate: nil];
 			DESTROY(mCardPictureView);
 			mCardPictureView = [[WILDPictureView alloc] initWithFrame: [[self view] bounds]];
 			NSImage*		cdPicture = [theCard picture];
