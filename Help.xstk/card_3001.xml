@@ -19,7 +19,7 @@
 			<right>513</right>
 			<bottom>343</bottom>
 		</rect>
-		<style>scrolling</style>
+		<style>rectangle</style>
 		<showName><false /></showName>
 		<highlight><false /></highlight>
 		<autoHighlight><true /></autoHighlight>
@@ -37,10 +37,36 @@
 		<multipleLines><false /></multipleLines>
 		<showLines><false /></showLines>
 		<wideMargins><false /></wideMargins>
+		<currentTime>(null)</currentTime>
 		<controllerVisible><false /></controllerVisible>
+		<fillColor>
+			<red>65535</red>
+			<green>65535</green>
+			<blue>65535</blue>
+			<alpha>65535</alpha>
+		</fillColor>
+		<lineColor>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+			<alpha>65535</alpha>
+		</lineColor>
+		<shadowColor>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+			<alpha>0</alpha>
+		</shadowColor>
+		<shadowOffset>
+			<width>0</width>
+			<height>0</height>
+		</shadowOffset>
+		<shadowBlurRadius>0</shadowBlurRadius>
 		<textAlign>left</textAlign>
 		<font>Geneva</font>
 		<textSize>12</textSize>
+		<hasHorizontalScroller><false /></hasHorizontalScroller>
+		<hasVerticalScroller><true /></hasVerticalScroller>
 		<name>Help Text</name>
 		<script></script>
 	</part>

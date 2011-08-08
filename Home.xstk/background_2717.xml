@@ -1,367 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE background PUBLIC "-//Apple, Inc.//DTD background V 2.0//EN" "" >
-<background>
-	<id>2717</id>
-	<filler1>0</filler1>
-	<bitmap>BMAP_19890.pbm</bitmap>
-	<cantDelete> <true /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<part>
-		<id>68</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>35</left>
-			<top>307</top>
-			<right>118</right>
-			<bottom>328</bottom>
-		</rect>
-		<style>opaque</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <false /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>10</textSize>
-		<textStyle>plain</textStyle>
-		<name>Welcome to...</name>
-		<script>on mouseUpgo card (the short name of me)end mouseUp</script>
-	</part>
-	<part>
-		<id>3</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>125</left>
-			<top>307</top>
-			<right>208</right>
-			<bottom>328</bottom>
-		</rect>
-		<style>opaque</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <false /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>10</textSize>
-		<textStyle>plain</textStyle>
-		<name>Stack Kit</name>
-		<script>on mouseUpgo card (the short name of me)end mouseUp</script>
-	</part>
-	<part>
-		<id>2</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>215</left>
-			<top>307</top>
-			<right>298</right>
-			<bottom>328</bottom>
-		</rect>
-		<style>opaque</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <false /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>10</textSize>
-		<textStyle>plain</textStyle>
-		<name>Card 3</name>
-		<script>on mouseUpgo card (the short name of me)end mouseUp</script>
-	</part>
-	<part>
-		<id>7</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>16</left>
-			<top>37</top>
-			<right>397</right>
-			<bottom>69</bottom>
-		</rect>
-		<style>transparent</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <true /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>18</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>24</textHeight>
-		<name>card title</name>
-		<script></script>
-	</part>
-	<part>
-		<id>107</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>305</left>
-			<top>307</top>
-			<right>388</right>
-			<bottom>328</bottom>
-		</rect>
-		<style>opaque</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <false /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>10</textSize>
-		<textStyle>plain</textStyle>
-		<name>Card 4</name>
-		<script>on mouseUpgo card (the short name of me)end mouseUp</script>
-	</part>
-	<part>
-		<id>149</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>395</left>
-			<top>307</top>
-			<right>478</right>
-			<bottom>328</bottom>
-		</rect>
-		<style>opaque</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <false /> </autoHighlight>
-		<sharedHighlight> <false /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>10</textSize>
-		<textStyle>plain</textStyle>
-		<name>Card 5</name>
-		<script>on mouseUpgo card (the short name of me)end mouseUp</script>
-	</part>
-	<part>
-		<id>168</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <true /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <true /> </lockText>
-		<rect>
-			<left>397</left>
-			<top>35</top>
-			<right>494</right>
-			<bottom>67</bottom>
-		</rect>
-		<style>transparent</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Palatino</font>
-		<textSize>24</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>32</textHeight>
-		<name>Home</name>
-		<script></script>
-	</part>
-	<part>
-		<id>169</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>11</left>
-			<top>304</top>
-			<right>31</right>
-			<bottom>334</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>28810</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>left arrow</name>
-		<script>on mouseUpvisual effect wipe rightgo previous cardend mouseUp</script>
-	</part>
-	<part>
-		<id>170</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>480</left>
-			<top>304</top>
-			<right>501</right>
-			<bottom>334</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <false /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>28811</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>right arrow</name>
-		<script>on mouseUpvisual effect wipe leftgo next cardend mouseUp</script>
-	</part>
-	<part>
-		<id>177</id>
-		<type>field</type>
-		<visible> <true /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <true /> </sharedText>
-		<fixedLineHeight> <true /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <false /> </lockText>
-		<rect>
-			<left>307</left>
-			<top>71</top>
-			<right>503</right>
-			<bottom>98</bottom>
-		</rect>
-		<style>transparent</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>center</textAlign>
-		<font>Geneva</font>
-		<textSize>9</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>12</textHeight>
-		<name>Copyright</name>
-		<script></script>
-	</part>
-	<part>
-		<id>178</id>
-		<type>field</type>
-		<visible> <false /> </visible>
-		<dontWrap> <false /> </dontWrap>
-		<dontSearch> <false /> </dontSearch>
-		<sharedText> <false /> </sharedText>
-		<fixedLineHeight> <false /> </fixedLineHeight>
-		<autoTab> <false /> </autoTab>
-		<lockText> <false /> </lockText>
-		<rect>
-			<left>476</left>
-			<top>282</top>
-			<right>503</right>
-			<bottom>299</bottom>
-		</rect>
-		<style>rectangle</style>
-		<autoSelect> <false /> </autoSelect>
-		<showLines> <false /> </showLines>
-		<wideMargins> <false /> </wideMargins>
-		<multipleLines> <false /> </multipleLines>
-		<reservedFamily> 0 </reservedFamily>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<textAlign>left</textAlign>
-		<font>Geneva</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<textHeight>16</textHeight>
-		<name>Card Position</name>
-		<script></script>
-	</part>
-	<content>
-		<layer>background</layer>
-		<id>168</id>
-		<text>Home</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>177</id>
-		<text>©1987-1998 Apple Computer, Inc.All Rights Reserved.</text>
-	</content>
-	<name>Home Cards</name>
-	<script>∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞Script from background: Home CardsTHE MESSAGE HANDLERS IN THIS SCRIPT:openStack,closeStack,openBackground,closeBackground,suspendStack,resumeStack,menuReset,newCard,deleteCard,renameCard,setCardNamerenumberCards,reorderCards,adjustNavHilites,newLink,makeNewHCButtondragHCButton,updateHCPaths,activateHomeMenuTHE FUNCTION HANDLERS IN THIS SCRIPT:chopStr,selectHCFile,getHCPathName,memErrorScript,writeHCScriptstringIsInContainer∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞-----  Open/Resume Scripts  ----------------------------------------on openStackglobal WhichHomeCardshow menubar -- needed for the "Home" menuif WhichHomeCard is not empty then go cd WhichHomeCard-- remove any similar menusif there is a menu "Home" then delete menu "Home" -- ∆pass openStack -- so others can use itend openStackon closeStack-- Requires handler:checkForHomeMenucheckForHomeMenupass closeStack -- so others can use itend closeStackon openBackground-- Requires handler: activateHomeMenuactivateHomeMenupass openBackground -- so others can use itend openBackgroundon closeBackground-- Requires handler: updateHomeMenuglobal WhichHomeCardput short name of this cd into WhichHomeCard-- update home menu for this bgmenuStatus false,falsepass closeBackground -- so others can use itend closeBackgroundon suspendStack-- Requires handler:checkForHomeMenucheckForHomeMenupass suspendStack -- so others can use itend SuspendStackon resumeStack-- Requires handler: activateHomeMenuactivateHomeMenupass resumeStack -- so others can use itend ResumeStackon activateHomeMenumenuStatus true,trueend activateHomeMenu-----  Card Manipulation Scripts  ----------------------------------on newCard-- Requires handlers: adjustNavHilites,setUserLevelFive,restoreUserLevel-- Requires handlers: setCardName,disallowInterruption,allowInterruption-- Requires handler: renumberCards-- remember the card before the new one-- clear 'push recent card' in case the user doesn't cancelpush recent cdsetUserLevelFivedisallowInterruptionpop cd into currentLocation-- name the new card and update the navigation btnsask "Please give the new Home card a name:" -- ∆if the result is "Cancel" thenset cantDelete of this cd to falsedoMenu "Delete Card"go currentLocation -- returns to card last viewedexit to HyperCardend ifif it is empty then put "Untitled Card" into cardName -- ∆else put it into cardNamesetCardName cardNameput number of this cd into curCardNumput number of cds in this bg into numBgCardsput (numBgCards - curCardNum) into fixNumlock screenrenumberCards curCardNum,false,fixNum,1go card curCardNumunlock screenpush cd -- remember where we are before adjustadjustNavHilites -- adjust the btn hilightingpop cd -- return to where we wererestoreUserLevelallowInterruptionpass newCardend newCardon deleteCard-- Requires handler: renumberCards,adjustNavHilites-- remember cd number to return to same position after deleteset cursor to watchput the number of this cd into currentPositionlock screenput number of cds in this bg into numBkgndCardsrenumberCards currentPosition,false,numBkgndCards-currentPosition,-1adjustNavHilites currentPositiongo cd currentPosition -- return to where we wereunlock screenpass deleteCardend deleteCardon renameCard-- Requires handler: setCardName-- rename any of the "home" cardsask "New name for this card?" with bg field "Card Title" -- ∆if it is empty or it is bg fld "Card Title" or the result is "Cancel"then exit renameCardsetCardName itend renameCardon setCardName theName-- Requires handlers: disallowInterruption,allowInterruption-- Requires function handler: chopStrlock screendisallowInterruptionset name of this cd to chopStr(theName,13)put theName into bg fld "Card Title"put number of this cd into curCardif curCard ≤ 5 thenset name of bg btn curCard to chopStr(theName,13)set hilite of bg btn curCard to true -- make sureend ifallowInterruptionend setCardNameon renumberCards newPosition,adjustDown,fixNum,adjustput newPosition into bg fld "Card Position"if adjustDown then go cd newPosition of this bgelse go next cd of this bgrepeat fixNumadd adjust to bg fld "Card Position"go next cd of this bgend repeatend renumberCardson reorderCards-- Requires handlers: disallowInterruption,allowInterruption-- Requires handlers: renumberCards,adjustNavHilities-- reorder the cards of the first bgput bg fld "Card Position" into currentPosition-- get new position for this card from the userask "“" &amp; the short name of this cd &amp; "”" &amp;&amp; ¬"is currently card" &amp;&amp; currentPosition &amp; "." &amp; return &amp; ¬"Please enter a new position for this card:" with the number of this cd -- ∆if (it is empty) or (it is not an integer) or (the result is "Cancel") thenbeepexit to hyperCardend ifif it &gt; number of cds in this bgthen put number of cds of this bg into newPositionelse if it &lt; 1 then put 1 into newPositionelse put it into newPositionset cursor to watchdisallowInterruption -- adjustNavHilites cancels this-- Note: bg fld "Card Position" is a hidden fldlock screen -- insure correct order before sortingpush cd -- remember where we areif newPosition &lt;= currentPosition thenput 1 into adjustput true into adjustDownelseput -1 into adjustput false into adjustDownend ifrenumberCards newPosition,adjustDown,abs(currentPosition - newPosition),adjustpop cd -- return to where we were-- now sort them to their new positionssort cds of this bg by bg fld "Card Position"adjustNavHilites -- reset navigation btns to match new card ordergo cd newPositionend reorderCardson adjustNavHilites cardDeleted -- param added for delete card handler-- Requires handlers: disallowInterruption,allowInterruption-- resets bottom navigation btns to match card orderlock ScreendisallowInterruptionrepeat with curCard = 1 to number of cds of first bgset cursor to busyif curCard = cardDeleted then next repeatgo cd curCard of first bg-- unhilite navigation btnsrepeat with curBtn = 1 to 5set hilite of bg btn curBtn to falseend repeatif ((curCard &gt; cardDeleted) and (cardDeleted ≠ empty)) then put 1 into adjustelse put 0 into adjustif curCard ≤ (5+adjust) then-- rename the btnsset name of bg btn (curCard-adjust) of cd curCard to short name of cd curCard-- hilite the one for this cardset hilite of bg btn (curCard-adjust) of cd curCard to trueend ifend repeatunlock screenallowInterruptionend adjustNavHilites-----  Misc Scripts  -----------------------------------------------function chopStr theStr,maxSize-- adjust any string of characters to be maxSize or fewer characters-- truncating to the nearest spaceif length(theStr) &gt; maxSize then -- we need to chop itput char 1 to maxSize of theStr into theStr -- quick trimput length(theStr) into strSize -- so don't have to calc each timeif strSize ≥ (maxSize-3) then -- leave room for "..."if space is in theStr then -- want to break on word boundaryrepeat with count = strSize down to 1 -- search for last spaceif char count of theStr is space and count ≤ (maxSize-2) thenput char 1 to (count-1) of theStr into theStrexit repeat -- we found the space so exitend ifend repeatelse put char 1 to (maxSize-3) of theStr into theStr -- need room for "..."put "..." after theStr -- to indicate the string is longerend ifend ifreturn theStrend chopStr-----  NewLink Scripts  --------------------------------------------on newLink fileType-- Requires handlers: disallowInterruption,allowInterruption-- Requires handlers: makeNewHCButton,dragHCButton,updateHCPaths-- Requires function handlers: selectHCFile,lastHCItem,getHCPathName,writeHCScript-- Allows you to select a stack, application or document from an-- answer dialog, and create a btn to open that file.-- This is the main newLink handler and can be called from any stackput visible of msg box into saveVisMsgBox -- to restore it later-- if no file type is given, determine what type of file to link toif (fileType is not in "stack document application file") thenanswer "Create button linked to a stack or file?" ¬with "Cancel" or "File" or "Stack" -- ∆if it is empty or it is "Cancel" then exit newLink -- ∆if it is "File" -- ∆then put "File" into fileTypeelse put "Stack" into fileTypeend if-- if it's a file determine what kind of file it isif fileType is "File" then -- ∆answer "Create button linked to a document or an application?" with ¬"Cancel" or "Document" or "Application" -- ∆if it is empty or it is "Cancel" then  exit newLink -- ∆if it is "Document" then -- ∆put "Document" into fileTypeelse put "Application" into fileTypeend ifdisallowInterruption-- selects the stack, application, or document to link toif fileType is "Stack" thenput "stack" into linkTo -- ∆else if fileType is "Application" thenput "application" into linkTo -- ∆else put "document" into linkTo -- ∆put "Select the" &amp;&amp; linkTo &amp;&amp; "to open:" into prompt -- ∆if fileType is "Stack" then put "STAK" into filterelse if filetype is "Application" then put "APPL" into filterelse put empty into filter -- no way to show only documentsput selectHCFile(prompt,filter) into longFileName -- full pathput lastHCItem(":",longFileName) into shortFileNameset cursor to watch-- if document is chosen, get application to open it.put empty into longAppNameif fileType is "document" thenput "Select the application to open" &amp; return ¬&amp; "“" &amp; shortFileName &amp; "”" &amp; ":" into prompt -- ∆put selectHCFile(prompt,"APPL") into longAppName -- full pathput lastHCItem(":",longAppName) into shortAppNameend if--  extract the file path from the full path nameput getHCPathName(longFileName) into thePath--  make a new btn for the linked filemakeNewHCButton shortFileName,fileType--  write the script for the new btnset script of last cd btn to ¬writeHCScript(fileType,shortFileName,shortAppName)--  allow the user to set the position of the new btnput "cd btn id" &amp;&amp; id of last cd btn into btnIDdragHCButton btnID -- user can now move it-- update the "Paths" fld on the proper "Path" cdupdateHCPaths fileType,thePathif longAppName is not empty then  --  for a document's appput getHCPathName(longAppName) into appPathupdateHCPaths "application",appPathend ifput empty into msg -- clean up and exitset visible of msg box to saveVisMsgBox -- restore itallowInterruptionend newLinkfunction selectHCFile prompt,filter-- displays dialog for selection of a particular fileTypeif filter is not empty then answer file prompt of type filterelse answer file promptif (it is empty) or (the result = "Cancel")then exit to HyperCardreturn it -- otherwise return the selected file pathend selectHCFilefunction getHCPathName longName-- Requires handler: lastHCItem-- return the path to the fileput lastHCItem(":",longName) into fileNamereturn char 1 to (length(longName) - length(fileName)) of longNameend getHCPathNameon makeNewHCButton shortName,iconType-- Requires handlers: setUserLevelFive,restoreUserLevel-- create a new btn and set it's name and iconlock screensetUserLevelFive-- need user level five so menu item will be theredoMenu "New Button"-- set attributes of new btnset style of last cd btn to transparentset showName of last cd btn to trueset autoHilite of last cd btn to trueset name of last cd btn to shortNameset height of last cd btn to 52set icon of last cd btn to iconType-- don't let the btn be too slimif length(shortName) * 6 &gt; 36 thenset width of last cd btn to length(shortName) * 6else set width of last cd btn to 36choose browse toolrestoreUserLevelunlock screenend makeNewHCButtonfunction memErrorScript appName-- returns a script used in many placesreturn "if (the result is not empty) and (the result is not" &amp;&amp; ¬quote &amp; "Cancel" &amp; quote &amp; ")" &amp; return &amp;¬"then answer the result"end memErrorScriptfunction writeHCScript fileType,fileName,applName-- Requires handler: memErrorScript-- creates and writes the script for the new btn -- see makeNewHCButtonput "on mouseUp" &amp; return &amp; "set cursor to watch" &amp; return into theScriptif fileType is "stack"  thenput "-- stack will open in new window if there's enough memory" &amp; return ¬&amp; "go to stack" &amp;&amp; quote &amp; fileName &amp; quote &amp;&amp; "in a new window" &amp; return ¬&amp; "if the result is" &amp;&amp; quote &amp; "Cancel" &amp; quote &amp;&amp; "then exit mouseUp" &amp; return ¬&amp; "else if the result &lt;&gt; empty then go to stack" &amp;&amp; quote &amp; fileName &amp; quote &amp; return after theScriptelse if fileType is "application" thenput "open" &amp;&amp; quote &amp; fileName &amp; quote &amp; return after theScriptput memErrorScript(fileName) &amp; return after theScriptelse if fileType is "document" thenput "open" &amp;&amp; quote &amp; fileName &amp; quote ¬&amp;&amp; "with" &amp;&amp; quote &amp; applName &amp; quote &amp; return after theScriptput memErrorScript(applName) &amp; return after theScriptend ifput "end mouseUp" after theScriptreturn theScriptend writeHCScripton dragHCButton theButton-- ∆ let user drag the btn within the card windowput "Drag the button to the desired location." -- ∆-- flash btn until user clicks down on itset cursor to arrowrepeat until the mouse is downset hilite of theButton to not hilite of theButtonwait 8 -- 8/60 of a secondend repeatset hilite of theButton to true-- drag the btn but constrain to card windowput width of theButton div 2 into halfBtnWidthput width of cd window - halfBtnWidth into maxWidthput height of theButton div 2 into halfBtnHeightput height of cd window - halfBtnHeight into maxHeightrepeat while the mouse is down-- the horzput max(the mouseH,halfBtnWidth) into btnHput min(btnH,maxWidth) into btnH-- the vertput max(the mouseV,halfBtnHeight) into btnVput min(btnV,maxHeight) into btnVset loc of theButton to btnH,btnVend repeatset hilite of theButton to falseend dragHCButtonon updateHCPaths fileType,thePath-- Requires function handler: stringIsInContainer-- update the appropriate path card for the newly created btnglobal Stacks,Applications,Documentsput "s" after fileType -- so it will match cd &amp; global namedo "get" &amp;&amp; fileType -- put the appropriate global into "it"-- exit this handler if the global already contains the pathif stringIsInContainer(thePath,it) then exit updateHCPathslock screenset cursor to watchset lockmessages to true -- avoid open messagesset lockrecent to true -- don't make any card miniaturespush card -- remember where we are-- go to the correct path card in the home stackgo cd fileType of bkgnd "Paths" of stack "Home" -- ∆-- update the "Paths" fld with the new pathget bg fld "Paths" of cd fileTypeif (it ≠ empty) and (the last char of it ≠ return)then put return before thePathput thePath after bg fld "Paths" of cd fileType-- cause the appropriate global variable to be updateddo "put bg field Paths into" &amp;&amp; fileTypepop cd -- return to where we wereend updateHCPathsfunction stringIsInContainer theString,theContainer--  check to see if theString is a full line of theContainerif (theString = first line of theContainer) or ¬(theString = last line of theContainer) then return trueelse if theContainer contains return &amp; theString &amp; return ¬then return true-- not found, so return falsereturn falseend stringIsInContainer</script>
-</background>

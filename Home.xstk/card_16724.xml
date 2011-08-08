@@ -1,368 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
-<card>
-	<id>16724</id>
-	<filler1>0</filler1>
-	<cantDelete> <true /> </cantDelete>
-	<showPict> <true /> </showPict>
-	<dontSearch> <false /> </dontSearch>
-	<owner>2717</owner>
-	<part>
-		<id>13</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>17</left>
-			<top>99</top>
-			<right>121</right>
-			<bottom>153</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>17214</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Readymade Buttons</name>
-		<script>on mouseUpset cursor to watchgo to stack "ReadyMade Buttons" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>19</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>138</left>
-			<top>99</top>
-			<right>231</right>
-			<bottom>153</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>21711</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Readymade Fields</name>
-		<script>on mouseUpset cursor to watchgo to stack "ReadyMade Fields" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>20</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>29</left>
-			<top>169</top>
-			<right>106</right>
-			<bottom>223</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>16735</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Power Tools</name>
-		<script>on mouseUpset cursor to watchgo to stack "Power Tools" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>39</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>136</left>
-			<top>169</top>
-			<right>226</right>
-			<bottom>223</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>29589</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Background Art</name>
-		<script>on mouseUpset cursor to watchgo to stack "Background Art" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>70</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>252</left>
-			<top>99</top>
-			<right>349</right>
-			<bottom>153</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>24753</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Stack Templates</name>
-		<script>on mouseUpset cursor to watchgo to stack "Stack Templates" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>73</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>246</left>
-			<top>169</top>
-			<right>357</right>
-			<bottom>223</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>31885</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>HyperTalk Reference</name>
-		<script>on mouseUp-- Requires handler: hypertalkset cursor to watch -- for the slower machineshyperTalkend mouseUp</script>
-	</part>
-	<part>
-		<id>80</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>31</left>
-			<top>234</top>
-			<right>191</right>
-			<bottom>288</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>28867</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>HyperCard AppleScript Reference</name>
-		<script>on mouseUp-- Requires handler: hypertalkset cursor to watch -- for the slower machinesgo to stack "HyperCard AppleScript Reference" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>84</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>194</left>
-			<top>234</top>
-			<right>294</right>
-			<bottom>288</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>30504</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Apple Event Primer</name>
-		<script>on mouseUpset cursor to watch -- for the slower machinesgo to stack "Apple Event Primer" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>86</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>383</left>
-			<top>169</top>
-			<right>466</right>
-			<bottom>223</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>11316</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Color Tools</name>
-		<script>on mouseUpset cursor to watch -- for the slower machinesgo to stack "Color Tools" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>87</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>326</left>
-			<top>235</top>
-			<right>426</right>
-			<bottom>289</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>28023</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>AppleScript Library</name>
-		<script>on mouseUpset cursor to watch -- for the slower machinesgo to stack "AppleScript Library" -- ∆end mouseUp</script>
-	</part>
-	<part>
-		<id>88</id>
-		<type>button</type>
-		<visible> <true /> </visible>
-		<reserved5> 0 </reserved5>
-		<reserved4> 0 </reserved4>
-		<reserved3> 0 </reserved3>
-		<reserved2> 0 </reserved2>
-		<reserved1> 0 </reserved1>
-		<enabled> <true /> </enabled>
-		<rect>
-			<left>379</left>
-			<top>99</top>
-			<right>469</right>
-			<bottom>153</bottom>
-		</rect>
-		<style>transparent</style>
-		<showName> <true /> </showName>
-		<highlight> <false /> </highlight>
-		<autoHighlight> <true /> </autoHighlight>
-		<sharedHighlight> <true /> </sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>28226</icon>
-		<textAlign>center</textAlign>
-		<font>Chicago</font>
-		<textSize>12</textSize>
-		<textStyle>plain</textStyle>
-		<name>Audio Help</name>
-		<script>on mouseUpset cursor to watchgo to stack "Audio Help" -- ∆end mouseUp</script>
-	</part>
-	<content>
-		<layer>background</layer>
-		<id>7</id>
-		<text>Stack Kit</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>178</id>
-		<text>2</text>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>3</id>
-		<highlight> <true /> </highlight>
-	</content>
-	<name>Stack Kit</name>
-	<script></script>
-</card>

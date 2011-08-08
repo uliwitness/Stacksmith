@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE stack PUBLIC "-//Apple, Inc.//DTD stack V 2.0//EN" "" >
+<stack>
+	<id>623168672883076813</id>
+	<name>Untitled</name>
+	<userLevel>5</userLevel>
+	<cantModify><false /></cantModify>
+	<cantDelete><false /></cantDelete>
+	<privateAccess><false /></privateAccess>
+	<cantAbort><false /></cantAbort>
+	<cantPeek><false /></cantPeek>
+	<cardSize>
+		<width>640</width>
+		<height>342</height>
+	</cardSize>
+	<script></script>
+	<background id="1112344475840500876" file="background_1112344475840500876.xml" />
+	<card id="8218833940570895554" file="card_8218833940570895554.xml" marked="false" />
+</stack>
