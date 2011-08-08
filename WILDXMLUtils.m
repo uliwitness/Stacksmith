@@ -65,7 +65,10 @@ NSMutableArray*	WILDIntegersFromSubElementInElement( NSString* elemName, NSXMLEl
 
 NSSize	WILDSizeFromSubElementInElement( NSString* elemName, NSXMLElement* elem )
 {
-	NSXMLElement	*	subElem = [[elem elementsForName: elemName] objectAtIndex: 0];
+	NSArray			*	subElemList = [elem elementsForName: elemName];
+	if( [subElemList count] < 1 )
+		return NSZeroSize;
+	NSXMLElement	*	subElem = [subElemList objectAtIndex: 0];
 	NSXMLElement	*	widthElem = [[subElem elementsForName: @"width"] objectAtIndex: 0];
 	NSXMLElement	*	heightElem = [[subElem elementsForName: @"height"] objectAtIndex: 0];
 	
@@ -130,15 +133,18 @@ NSColor*	WILDColorFromSubElementInElement( NSString* elemName, NSXMLElement* ele
 	NSXMLElement	*	redElem = [[subElem elementsForName: @"red"] objectAtIndex: 0];
 	NSXMLElement	*	greenElem = [[subElem elementsForName: @"green"] objectAtIndex: 0];
 	NSXMLElement	*	blueElem = [[subElem elementsForName: @"blue"] objectAtIndex: 0];
+	NSArray			*	alphaElems = [subElem elementsForName: @"alpha"];
+	NSXMLElement	*	alphaElem = ([alphaElems count] > 0) ? [alphaElems objectAtIndex: 0] : nil;
 	
-	float				redValue, greenValue, blueValue;
+	float				redValue, greenValue, blueValue, alphaValue;
 	
 	redValue = [[redElem stringValue] intValue];
 	greenValue = [[greenElem stringValue] intValue];
 	blueValue = [[blueElem stringValue] intValue];
+	alphaValue = alphaElem ? [[alphaElem stringValue] intValue] : 65535.0;
 	
 	return [NSColor colorWithCalibratedRed: (redValue / 65535.0) green: (greenValue / 65535.0)
-						blue: (blueValue / 65535.0) alpha: 1.0];
+						blue: (blueValue / 65535.0) alpha: (alphaValue / 65535.0)];
 }
 
 
@@ -185,5 +191,78 @@ NSString*	WILDStringEscapedForXML( NSString* inString )
 	[escapedString replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [escapedString length])];
 	return escapedString;
 }
+
+
+static char	sIndentChars[20 +1] = { '\t', '\t', '\t', '\t', '\t',
+									'\t', '\t', '\t', '\t', '\t',
+									'\t', '\t', '\t', '\t', '\t',
+									'\t', '\t', '\t', '\t', '\t', 0 };
+
+
+void	WILDAppendLongLongXML( NSMutableString* inStringToAppendTo, int nestingLevel, long long inNum, NSString* inTagName )
+{
+	if( nestingLevel > (sizeof(sIndentChars) -1) )
+		nestingLevel = sizeof(sIndentChars) -1;
+	[inStringToAppendTo appendFormat: @"%3$s<%1$@>%2$lld</%1$@>\n", inTagName, inNum, (sIndentChars +sizeof(sIndentChars) -1 -nestingLevel)];
+}
+
+
+void	WILDAppendLongXML( NSMutableString* inStringToAppendTo, int nestingLevel, long inNum, NSString* inTagName )
+{
+	if( nestingLevel > (sizeof(sIndentChars) -1) )
+		nestingLevel = sizeof(sIndentChars) -1;
+	[inStringToAppendTo appendFormat: @"%3$s<%1$@>%2$ld</%1$@>\n", inTagName, inNum, (sIndentChars +sizeof(sIndentChars) -1 -nestingLevel)];
+}
+
+
+void	WILDAppendStringXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSString* inString, NSString* inTagName )
+{
+	if( nestingLevel > (sizeof(sIndentChars) -1) )
+		nestingLevel = sizeof(sIndentChars) -1;
+	[inStringToAppendTo appendFormat: @"%3$s<%1$@>%2$@</%1$@>\n", inTagName, WILDStringEscapedForXML(inString), (sIndentChars +sizeof(sIndentChars) -1 -nestingLevel)];
+}
+
+
+void	WILDAppendBoolXML( NSMutableString* inStringToAppendTo, int nestingLevel, BOOL inBool, NSString* inTagName )
+{
+	if( nestingLevel > (sizeof(sIndentChars) -1) )
+		nestingLevel = sizeof(sIndentChars) -1;
+	[inStringToAppendTo appendFormat: @"%3$s<%1$@>%2$@</%1$@>\n", inTagName, (inBool ? @"<true />" : @"<false />"), (sIndentChars +sizeof(sIndentChars) -1 -nestingLevel)];
+}
+
+
+void	WILDAppendRectXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSRect inBox, NSString* inTagName )
+{
+	if( nestingLevel > (sizeof(sIndentChars) -1) )
+		nestingLevel = sizeof(sIndentChars) -1;
+	[inStringToAppendTo appendFormat: @"%6$s<%1$@>\n%6$s\t<left>%2$d</left>\n%6$s\t<top>%3$d</top>\n%6$s\t<right>%4$d</right>\n%6$s\t<bottom>%5$d</bottom>\n%6$s</%1$@>\n",
+											inTagName, (int)NSMinX(inBox), (int)NSMinY(inBox), (int)NSMaxX(inBox), (int)NSMaxY(inBox), (sIndentChars +sizeof(sIndentChars) -1 -nestingLevel)];
+}
+
+
+void	WILDAppendColorXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSColor* inColor, NSString* inTagName )
+{
+	if( nestingLevel > (sizeof(sIndentChars) -1) )
+		nestingLevel = sizeof(sIndentChars) -1;
+	
+	inColor = [inColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	int		redColor = [inColor redComponent] * 65535.0;
+	int		greenColor = [inColor greenComponent] * 65535.0;
+	int		blueColor = [inColor blueComponent] * 65535.0;
+	int		alphaColor = [inColor alphaComponent] * 65535.0;
+	
+	[inStringToAppendTo appendFormat: @"%2$s<%1$@>\n%2$s\t<red>%3$d</red>\n%2$s\t<green>%4$d</green>\n%2$s\t<blue>%5$d</blue>\n%2$s\t<alpha>%6$d</alpha>\n%2$s</%1$@>\n", inTagName, (sIndentChars +sizeof(sIndentChars) -1 -nestingLevel), redColor, greenColor, blueColor, alphaColor];
+}
+
+
+void	WILDAppendSizeXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSSize inSize, NSString* inTagName )
+{
+	if( nestingLevel > (sizeof(sIndentChars) -1) )
+		nestingLevel = sizeof(sIndentChars) -1;
+	
+	[inStringToAppendTo appendFormat: @"%2$s<%1$@>\n%2$s\t<width>%3$d</width>\n%2$s\t<height>%4$d</height>\n%2$s</%1$@>\n", inTagName, (sIndentChars +sizeof(sIndentChars) -1 -nestingLevel), (int)inSize.width, (int)inSize.height];
+}
+
+
 
 

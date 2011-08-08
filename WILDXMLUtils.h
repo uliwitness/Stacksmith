@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
+// Calls for reading:
 NSString*			WILDStringFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSMutableArray*		WILDStringsFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSMutableArray*		WILDIntegersFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
@@ -19,4 +20,14 @@ NSRect				WILDRectFromSubElementInElement( NSString* elemName, NSXMLElement* ele
 NSPoint				WILDPointFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSColor*			WILDColorFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSMutableIndexSet*	WILDIndexSetFromSubElementInElement( NSString* elemName, NSXMLElement* elem, NSInteger offsetIndexes );
-NSString*			WILDStringEscapedForXML( NSString* inString );
+
+// Calls for writing:
+void		WILDAppendLongLongXML( NSMutableString* inStringToAppendTo, int nestingLevel, long long inNum, NSString* inTagName );
+void		WILDAppendLongXML( NSMutableString* inStringToAppendTo, int nestingLevel, long inNum, NSString* inTagName );
+void		WILDAppendStringXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSString* inString, NSString* inTagName );	// Calls WILDStringEscapedForXML on inString.
+void		WILDAppendBoolXML( NSMutableString* inStringToAppendTo, int nestingLevel, BOOL inBool, NSString* inTagName );
+void		WILDAppendRectXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSRect inBox, NSString* inTagName );
+void	WILDAppendColorXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSColor* inColor, NSString* inTagName );
+void	WILDAppendSizeXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSSize inSize, NSString* inTagName );
+NSString*	WILDStringEscapedForXML( NSString* inString );
+
