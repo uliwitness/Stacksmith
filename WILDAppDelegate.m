@@ -27,7 +27,6 @@
 
 @implementation WILDAppDelegate
 
-
 -(void)	initializeParser
 {
 	LEOInitInstructionArray();
@@ -57,9 +56,40 @@
 	#endif
 }
 
+
+-(NSEvent*)	handleFlagsChangedEvent: (NSEvent*)inEvent
+{
+	if( !mPeeking && ([inEvent modifierFlags] & NSAlternateKeyMask)
+		&& ([inEvent modifierFlags] & NSCommandKeyMask) )
+	{
+		mPeeking = YES;
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPeekingStateChangedNotification
+												object: nil userInfo:
+													[NSDictionary dictionaryWithObjectsAndKeys:
+														[NSNumber numberWithBool: mPeeking], WILDPeekingStateKey,
+													nil]];
+	}
+	else if( mPeeking )
+	{
+		mPeeking = NO;
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPeekingStateChangedNotification
+												object: nil userInfo:
+													[NSDictionary dictionaryWithObjectsAndKeys:
+														[NSNumber numberWithBool: mPeeking], WILDPeekingStateKey,
+													nil]];
+	}
+
+	return inEvent;
+}
+
+
 -(void)	applicationWillFinishLaunching:(NSNotification *)notification
 {
 	[self initializeParser];
+	
+	mFlagsChangedEventMonitor = [[NSEvent addLocalMonitorForEventsMatchingMask: NSFlagsChangedMask handler: ^(NSEvent* inEvent){ return [self handleFlagsChangedEvent: inEvent]; }] retain];
+	
+	[[NSColorPanel sharedColorPanel] setShowsAlpha: YES];
 }
 
 -(void)	applicationDidFinishLaunching:(NSNotification *)notification	// This gets called *after* application:openFile:

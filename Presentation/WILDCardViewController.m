@@ -244,15 +244,9 @@
 		[menuItem setState: ([menuItem tag] == [[WILDTools sharedTools] currentTool]) ? NSOnState : NSOffState];
 		return YES;
 	}
-	else if( [menuItem action] == @selector(showButtonInfoPanel:) )
+	else if( [menuItem action] == @selector(showInfoPanel:) )
 	{
-		return( [[WILDTools sharedTools] numberOfSelectedClients] > 0
-			&& [[WILDTools sharedTools] currentTool] == WILDButtonTool );
-	}
-	else if( [menuItem action] == @selector(showFieldInfoPanel:) )
-	{
-		return( [[WILDTools sharedTools] numberOfSelectedClients] > 0
-			&& [[WILDTools sharedTools] currentTool] == WILDFieldTool );
+		return( [[WILDTools sharedTools] numberOfSelectedClients] > 0 );
 	}
 	else if( [menuItem action] == @selector(bringObjectCloser:)
 				|| [menuItem action] == @selector(sendObjectFarther:)
@@ -769,30 +763,12 @@
 }
 
 
--(IBAction)	showButtonInfoPanel: (id)sender
+-(IBAction)	showInfoPanel: (id)sender
 {
-	NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
-	for( WILDPartView* currView in allSels )
-	{
-		WILDPart*	thePart = [currView part];
-		WILDButtonInfoWindowController*	buttonInfo = [[[WILDButtonInfoWindowController alloc] initWithPart: thePart ofCardView: (WILDCardView*) [self view]] autorelease];
-		[[[[[self view] window] windowController] document] addWindowController: buttonInfo];
-		[buttonInfo showWindow: self];
-	}
+	WILDPartView*		currView = [[[WILDTools sharedTools] clients] anyObject];
+	[currView showInfoPanel: sender];
 }
 
-
--(IBAction)	showFieldInfoPanel: (id)sender
-{
-	NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
-	for( WILDPartView* currView in allSels )
-	{
-		WILDPart*	thePart = [currView part];
-		WILDFieldInfoWindowController*	fieldInfo = [[[WILDFieldInfoWindowController alloc] initWithPart: thePart ofCardView: (WILDCardView*) [self view]] autorelease];
-		[[[[[self view] window] windowController] document] addWindowController: fieldInfo];
-		[fieldInfo showWindow: self];
-	}
-}
 
 -(IBAction)	showCardInfoPanel: (id)sender
 {

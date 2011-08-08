@@ -13,6 +13,7 @@
 {
 	BOOL				mPeeking;
 	BOOL				mBackgroundEditMode;
+	id					mFlagsChangedEventMonitor;
 }
 
 

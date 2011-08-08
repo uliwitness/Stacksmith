@@ -63,6 +63,10 @@
 	WILDObjectID		mIconID;
 	NSInteger			mFamily;
 	NSColor*			mFillColor;
+	NSColor*			mLineColor;
+	NSColor*			mShadowColor;
+	NSSize				mShadowOffset;
+	CGFloat				mShadowBlurRadius;
 	NSInteger			mBevel;
 	WILDLayer*			mOwner;					// Layer that this part belongs to.
 	WILDStack*			mStack;					// Stack this part belongs to.
@@ -85,6 +89,11 @@
 @property (assign) BOOL			hasVerticalScroller;
 @property (copy) NSString*		mediaPath;
 @property (assign) QTTime		currentTime;
+@property (retain) NSColor*		lineColor;
+@property (retain) NSColor*		fillColor;
+@property (retain) NSColor*		shadowColor;
+@property (assign) NSSize		shadowOffset;
+@property (assign) CGFloat		shadowBlurRadius;
 
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;

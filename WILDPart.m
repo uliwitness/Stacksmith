@@ -43,6 +43,11 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 @synthesize currentTime = mCurrentTime;
 @synthesize hasHorizontalScroller = mHasHorizontalScroller;
 @synthesize hasVerticalScroller = mHasVerticalScroller;
+@synthesize lineColor = mLineColor;
+@synthesize fillColor = mFillColor;
+@synthesize shadowColor = mShadowColor;
+@synthesize shadowOffset = mShadowOffset;
+@synthesize shadowBlurRadius = mShadowBlurRadius;
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
 {
@@ -100,6 +105,20 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		mIconID = WILDIntegerFromSubElementInElement( @"icon", elem );
 		mControllerVisible = WILDBoolFromSubElementInElement( @"controllerVisible", elem, NO );
 		
+		mFillColor = [WILDColorFromSubElementInElement( @"fillColor", elem ) retain];
+		if( !mFillColor )
+			mFillColor = [[NSColor whiteColor] retain];
+		mLineColor = [WILDColorFromSubElementInElement( @"lineColor", elem ) retain];
+		if( !mLineColor )
+			mLineColor = [[NSColor blackColor] retain];
+		mShadowColor = [WILDColorFromSubElementInElement( @"shadowColor", elem ) retain];
+		if( !mShadowColor )
+			mShadowColor = [[NSColor clearColor] retain];
+		mShadowOffset = WILDSizeFromSubElementInElement( @"shadowOffset", elem );
+		mShadowBlurRadius = WILDIntegerFromSubElementInElement( @"shadowBlurRadius", elem );
+		if( mShadowBlurRadius < 0 )
+			mShadowBlurRadius = 0;
+
 		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
@@ -117,6 +136,8 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	DESTROY_DEALLOC(mTextFontName);
 	DESTROY_DEALLOC(mTextStyles);
 	DESTROY_DEALLOC(mFillColor);
+	DESTROY_DEALLOC(mLineColor);
+	DESTROY_DEALLOC(mShadowColor);
 	DESTROY_DEALLOC(mMediaPath);
 	
 	mStack = UKInvalidPointer;
@@ -936,34 +957,39 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	
 	[outString appendString: @"\t<part>\n"];
 	
-	[outString appendFormat: @"\t\t<id>%ld</id>\n", mID];
-	[outString appendFormat: @"\t\t<type>%@</type>\n", [self partType]];
-	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
-	[outString appendFormat: @"\t\t<visible>%@</visible>\n", (mVisible ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<enabled>%@</enabled>\n", (mEnabled ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<rect>\n\t\t\t<left>%d</left>\n\t\t\t<top>%d</top>\n\t\t\t<right>%d</right>\n\t\t\t<bottom>%d</bottom>\n\t\t</rect>\n",
-								(int)NSMinX(mRectangle), (int)NSMinY(mRectangle), (int)NSMaxX(mRectangle), (int)NSMaxY(mRectangle)];
-	[outString appendFormat: @"\t\t<style>%@</style>\n", [self style]];
-	[outString appendFormat: @"\t\t<showName>%@</showName>\n", (mShowName ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<highlight>%@</highlight>\n", (mHighlight ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<autoHighlight>%@</autoHighlight>\n", (mAutoHighlight ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<sharedHighlight>%@</sharedHighlight>\n", (mSharedHighlight ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<family>%d</family>\n", mFamily];
-	[outString appendFormat: @"\t\t<titleWidth>%d</titleWidth>\n", mTitleWidth];
-	[outString appendFormat: @"\t\t<icon>%ld</icon>\n", mIconID];
+	WILDAppendLongLongXML( outString, 2, mID, @"id" );
+	WILDAppendStringXML( outString, 2, [self partType], @"type" );
+	WILDAppendStringXML( outString, 2, mLayer, @"layer" );
+	WILDAppendBoolXML( outString, 2, mVisible, @"visible" );
+	WILDAppendBoolXML( outString, 2, mEnabled, @"enabled" );
+	WILDAppendRectXML( outString, 2, mRectangle, @"rect" );
+	WILDAppendStringXML( outString, 2, [self style], @"style" );
+	WILDAppendBoolXML( outString, 2, mShowName, @"showName" );
+	WILDAppendBoolXML( outString, 2, mHighlight, @"highlight" );
+	WILDAppendBoolXML( outString, 2, mAutoHighlight, @"autoHighlight" );
+	WILDAppendBoolXML( outString, 2, mSharedHighlight, @"sharedHighlight" );
+	WILDAppendLongXML( outString, 2, mFamily, @"family" );
+	WILDAppendLongXML( outString, 2, mTitleWidth, @"titleWidth" );
+	WILDAppendLongLongXML( outString, 2, mIconID, @"icon" );
 
-	[outString appendFormat: @"\t\t<dontWrap>%@</dontWrap>\n", (mDontWrap ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<dontSearch>%@</dontSearch>\n", (mDontSearch ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<sharedText>%@</sharedText>\n", (mSharedText ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<fixedLineHeight>%@</fixedLineHeight>\n", (mFixedLineHeight ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<autoTab>%@</autoTab>\n", (mAutoTab ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<lockText>%@</lockText>\n", (mLockText ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<autoSelect>%@</autoSelect>\n", (mAutoSelect ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<multipleLines>%@</multipleLines>\n", (mMultipleLines ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<showLines>%@</showLines>\n", (mShowLines ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<wideMargins>%@</wideMargins>\n", (mWideMargins ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<currentTime>%@</currentTime>\n", QTStringFromTime(mCurrentTime)];
-	[outString appendFormat: @"\t\t<controllerVisible>%@</controllerVisible>\n", (mControllerVisible ? @"<true />" : @"<false />")];
+	WILDAppendBoolXML( outString, 2, mDontWrap, @"dontWrap" );
+	WILDAppendBoolXML( outString, 2, mDontSearch, @"dontSearch" );
+	WILDAppendBoolXML( outString, 2, mSharedText, @"sharedText" );
+	WILDAppendBoolXML( outString, 2, mFixedLineHeight, @"fixedLineHeight" );
+	WILDAppendBoolXML( outString, 2, mAutoTab, @"autoTab" );
+	WILDAppendBoolXML( outString, 2, mLockText, @"lockText" );
+	WILDAppendBoolXML( outString, 2, mAutoSelect, @"autoSelect" );
+	WILDAppendBoolXML( outString, 2, mMultipleLines, @"multipleLines" );
+	WILDAppendBoolXML( outString, 2, mShowLines, @"showLines" );
+	WILDAppendBoolXML( outString, 2, mWideMargins, @"wideMargins" );
+	WILDAppendStringXML( outString, 2, QTStringFromTime(mCurrentTime), @"currentTime" );
+	WILDAppendBoolXML( outString, 2, mControllerVisible, @"controllerVisible" );
+	
+	WILDAppendColorXML( outString, 2, mFillColor, @"fillColor" );
+	WILDAppendColorXML( outString, 2, mLineColor, @"lineColor" );
+	WILDAppendColorXML( outString, 2, mShadowColor, @"shadowColor" );
+	WILDAppendSizeXML( outString, 2, mShadowOffset, @"shadowOffset" );
+	WILDAppendLongXML( outString, 2, mShadowBlurRadius, @"shadowBlurRadius" );
 	
 	if( [mSelectedLines count] > 0 )
 	{
@@ -971,7 +997,7 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		NSInteger	lineIdx = [mSelectedLines firstIndex];
 		do
 		{
-			[outString appendFormat: @"\t\t\t<integer>%ld</integer>\n", lineIdx +1];
+			WILDAppendLongXML( outString, 3, lineIdx +1, @"integer" );
 		}
 		while( (lineIdx = [mSelectedLines indexGreaterThanIndex: lineIdx]) != NSNotFound );
 		[outString appendString: @"\t\t</selectedLines>\n"];
@@ -982,24 +1008,20 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		textAlignment = @"center";
 	if( mTextAlignment == NSRightTextAlignment )
 		textAlignment = @"right";
-	[outString appendFormat: @"\t\t<textAlign>%@</textAlign>\n", textAlignment];
-	[outString appendFormat: @"\t\t<font>%@</font>\n", mTextFontName];
-	[outString appendFormat: @"\t\t<textSize>%d</textSize>\n", mTextFontSize];
+	WILDAppendStringXML( outString, 2, textAlignment, @"textAlign" );
+	WILDAppendStringXML( outString, 2, mTextFontName, @"font" );
+	WILDAppendLongXML( outString, 2, mTextFontSize, @"textSize" );
 	for( NSString* styleName in mTextStyles )
-		[outString appendFormat: @"\t\t<textStyle>%@</textStyle>\n", styleName];
-	[outString appendFormat: @"\t\t<hasHorizontalScroller>%@</hasHorizontalScroller>\n", (mHasHorizontalScroller ? @"<true />" : @"<false />")];
-	[outString appendFormat: @"\t\t<hasVerticalScroller>%@</hasVerticalScroller>\n", (mHasVerticalScroller ? @"<true />" : @"<false />")];
+		WILDAppendStringXML( outString, 2, styleName, @"textStyle" );
+	WILDAppendBoolXML( outString, 2, mHasHorizontalScroller, @"hasHorizontalScroller" );
+	WILDAppendBoolXML( outString, 2, mHasVerticalScroller, @"hasVerticalScroller" );
 	
-	NSMutableString*	nameStr = WILDStringEscapedForXML(mName);
-	[outString appendFormat: @"\t\t<name>%@</name>\n", nameStr];
-	
-	NSMutableString*	mediaPathStr = WILDStringEscapedForXML(mMediaPath);
-	if( [mediaPathStr length] > 0 )
-		[outString appendFormat: @"\t\t<mediaPath>%@</mediaPath>\n", mediaPathStr];
-	
-	NSMutableString*	scriptStr = WILDStringEscapedForXML(mScript);
-	[outString appendFormat: @"\t\t<script>%@</script>\n", scriptStr];
-	
+	WILDAppendStringXML( outString, 2, mName, @"name" );
+	if( [mMediaPath length] > 0 )
+		WILDAppendStringXML( outString, 2, mMediaPath, @"mediaPath" );
+
+	WILDAppendStringXML( outString, 2, mScript, @"script" );
+		
 	[outString appendString: @"\t</part>\n"];
 	
 	return outString;

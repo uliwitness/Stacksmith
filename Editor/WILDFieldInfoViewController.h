@@ -18,7 +18,7 @@
 	NSButton*			mDontWrapSwitch;
 	NSButton*			mDontSearchSwitch;
 	NSButton*			mHorizontalScrollerSwitch;
-	NSButton*			mVerticalalScrollerSwitch;
+	NSButton*			mVerticalScrollerSwitch;
 }
 
 @property (retain) IBOutlet NSPopUpButton*		stylePopUp;

@@ -80,7 +80,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
-	<string>WILDApplication</string>
+	<string>NSApplication</string>
 	<key>NSServices</key>
 	<array/>
 	<key>SUFeedURL</key>

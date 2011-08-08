@@ -22,6 +22,12 @@
 @synthesize idField;
 @synthesize partNumberField;
 @synthesize partNumberLabel;
+@synthesize fillColorWell;
+@synthesize lineColorWell;
+@synthesize shadowColorWell;
+@synthesize shadowBlurRadiusSlider;
+@synthesize shadowOffsetSlider;
+
 
 -(id)	initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView
 {
@@ -49,6 +55,9 @@
 	DESTROY(partNumberField);
 	DESTROY(partNumberLabel);
 	DESTROY(contentsTextField);
+	DESTROY(fillColorWell);
+	DESTROY(lineColorWell);
+	DESTROY(shadowColorWell);
 	
 	[super dealloc];
 }
@@ -69,6 +78,12 @@
 	
 	[enabledSwitch setState: [part isEnabled]];
 	[visibleSwitch setState: [part visible]];
+	
+	[fillColorWell setColor: [part fillColor]];
+	[lineColorWell setColor: [part lineColor]];
+	[shadowColorWell setColor: [part shadowColor]];
+	[shadowBlurRadiusSlider setDoubleValue: [part shadowBlurRadius]];
+	[shadowOffsetSlider setDoubleValue: [part shadowOffset].width];
 	
 	if( contentsTextField )
 	{
@@ -111,6 +126,60 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
 
 	[part setEnabled: [enabledSwitch state] == NSOnState];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doFillColorChanged:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+
+	[part setFillColor: [fillColorWell color]];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[part updateChangeCount: NSChangeDone];
+}
+
+-(IBAction)	doLineColorChanged:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+
+	[part setLineColor: [lineColorWell color]];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doShadowColorChanged:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+
+	[part setShadowColor: [shadowColorWell color]];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doShadowOffsetChanged:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+
+	[part setShadowOffset: NSMakeSize([shadowOffsetSlider doubleValue],-[shadowOffsetSlider doubleValue])];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doShadowBlurRadiusChanged:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+
+	[part setShadowBlurRadius: [shadowBlurRadiusSlider doubleValue]];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
 	[part updateChangeCount: NSChangeDone];

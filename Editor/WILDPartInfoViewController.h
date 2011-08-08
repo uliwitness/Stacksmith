@@ -26,6 +26,11 @@
 	NSTextField		*		partNumberField;
 	NSTextField		*		partNumberLabel;
 	NSTextView		*		contentsTextField;
+	NSColorWell		*		fillColorWell;
+	NSColorWell		*		lineColorWell;
+	NSColorWell		*		shadowColorWell;
+	NSSlider		*		shadowBlurRadiusSlider;
+	NSSlider		*		shadowOffsetSlider;
 }
 
 @property(retain)	IBOutlet NSButton			*		scriptEditorButton;
@@ -37,11 +42,22 @@
 @property(retain)	IBOutlet NSTextField		*		partNumberField;
 @property(retain)	IBOutlet NSTextField		*		partNumberLabel;
 @property(retain)	IBOutlet NSTextView			*		contentsTextField;
+@property(retain)	IBOutlet NSColorWell		*		fillColorWell;
+@property(retain)	IBOutlet NSColorWell		*		lineColorWell;
+@property(retain)	IBOutlet NSColorWell		*		shadowColorWell;
+@property(retain)	IBOutlet NSSlider			*		shadowBlurRadiusSlider;
+@property(retain)	IBOutlet NSSlider			*		shadowOffsetSlider;
 
 -(id)		initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView;
 
 -(IBAction)	doScriptEditorButton: (id)sender;
 -(IBAction) doEnabledSwitchToggled:(id)sender;
 -(IBAction) doVisibleSwitchToggled:(id)sender;
+
+-(IBAction)	doShadowBlurRadiusChanged:(id)sender;
+-(IBAction)	doShadowOffsetChanged:(id)sender;
+-(IBAction)	doShadowColorChanged:(id)sender;
+-(IBAction)	doLineColorChanged:(id)sender;
+-(IBAction)	doFillColorChanged:(id)sender;
 
 @end

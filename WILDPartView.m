@@ -24,6 +24,7 @@
 #import "WILDButtonView.h"
 #import "WILDScrollView.h"
 #import "WILDMovieView.h"
+#import "NSColor+ULICGColor.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 
@@ -311,19 +312,40 @@
 	NSString*	theStyle = [mPart style];
 	if( [[mPart partType] isEqualToString: @"moviePlayer"] )
 		;	// No special behaviours for movie players.
-	else if( [theStyle isEqualToString: @"default"] || [theStyle isEqualToString: @"standard"] )
+	else if( [[mPart partType] isEqualToString: @"field"] )
+		;	// No special behaviours for movie players.
+	else if( [[mPart partType] isEqualToString: @"button"] )
 	{
-		layoutBox.origin.x += 6;
-		layoutBox.origin.y += 5;
-		layoutBox.size.width -= 12;
-		layoutBox.size.height -= 7;
-	}
-	else if( [theStyle isEqualToString: @"popup"] )
-	{
-		layoutBox.origin.x += 3 +[mPart titleWidth];
-		layoutBox.origin.y += 3;
-		layoutBox.size.width -= 6 +[mPart titleWidth];
-		layoutBox.size.height -= 6;
+		if( [theStyle isEqualToString: @"default"] || [theStyle isEqualToString: @"standard"] )
+		{
+			#if 0
+			layoutBox.origin.x += 6;
+			layoutBox.origin.y += 5;
+			layoutBox.size.width -= 12;
+			layoutBox.size.height -= 7;
+			#else
+			NSEdgeInsets	insets = [mMainView alignmentRectInsets];
+			layoutBox.origin.x += insets.left;
+			layoutBox.origin.y += 3;
+			layoutBox.size.height -= 3;
+			layoutBox.size.width -= insets.left +insets.right;
+			#endif
+		}
+		else if( [theStyle isEqualToString: @"popup"] )
+		{
+			#if 0
+			layoutBox.origin.x += 3 +[mPart titleWidth];
+			layoutBox.origin.y += 3;
+			layoutBox.size.width -= 6 +[mPart titleWidth];
+			layoutBox.size.height -= 6;
+			#else
+			NSEdgeInsets	insets = [mMainView alignmentRectInsets];
+			layoutBox.origin.x += [mPart titleWidth] +insets.left;
+			layoutBox.origin.y += 3;
+			layoutBox.size.height -= 3;
+			layoutBox.size.width -= insets.left +insets.right +[mPart titleWidth];
+			#endif
+		}
 	}
 	
 	return layoutBox;
@@ -750,6 +772,30 @@
 }
 
 
+-(IBAction)	showInfoPanel: (id)sender
+{
+	[mCurrentPopover close];
+	DESTROY(mCurrentPopover);
+	
+	NSViewController*	infoController = nil;
+	if( [[mPart partType] isEqualToString: @"button"] )
+		infoController = [[WILDButtonInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+	else if( [[mPart partType] isEqualToString: @"field"] )
+		infoController = [[WILDFieldInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+	else if( [[mPart partType] isEqualToString: @"moviePlayer"] )
+		infoController = [[WILDMoviePlayerInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+	else
+		infoController = [[WILDPartInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+	[infoController autorelease];
+
+	mCurrentPopover = [[NSPopover alloc] init];
+	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+	[mCurrentPopover setDelegate: self];
+	[mCurrentPopover setContentViewController: infoController];
+	[mCurrentPopover showRelativeToRect: self.bounds ofView: self preferredEdge: NSMinYEdge];
+}
+
+
 -(void)	mouseDown: (NSEvent*)event
 {
 	BOOL	isMyTool = [self myToolIsCurrent];
@@ -766,25 +812,7 @@
 		
 		if( [event clickCount] == 2 && mSelected )
 		{
-			[mCurrentPopover close];
-			DESTROY(mCurrentPopover);
-			
-			NSViewController*	infoController = nil;
-			if( [[mPart partType] isEqualToString: @"button"] )
-				infoController = [[WILDButtonInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
-			else if( [[mPart partType] isEqualToString: @"field"] )
-				infoController = [[WILDFieldInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
-			else if( [[mPart partType] isEqualToString: @"moviePlayer"] )
-				infoController = [[WILDMoviePlayerInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
-			else
-				infoController = [[WILDPartInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
-			[infoController autorelease];
-
-			mCurrentPopover = [[NSPopover alloc] init];
-			[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
-			[mCurrentPopover setDelegate: self];
-			[mCurrentPopover setContentViewController: infoController];
-			[mCurrentPopover showRelativeToRect: self.bounds ofView: self preferredEdge: NSMinYEdge];
+			[self showInfoPanel: self];
 		}
 		else
 		{
@@ -1064,7 +1092,7 @@
 -(void)	savePart
 {
 	if( [[mPart partType] isEqualToString: @"moviePlayer"] )
-		[mPart setCurrentTime: [[mMainView movie] currentTime]];
+		[mPart setCurrentTime: [(QTMovie*)[mMainView movie] currentTime]];
 }
 
 
@@ -1143,6 +1171,18 @@
 	[bt setAction: @selector(updateOnClick:)];
 	[bt setEnabled: [currPart isEnabled]];
 	
+	NSColor	*	shadowColor = [currPart shadowColor];
+	if( [shadowColor alphaComponent] > 0.0 )
+	{
+		CGColorRef theColor = [shadowColor CGColor];
+		[[self layer] setShadowColor: theColor];
+		[[self layer] setShadowOpacity: 1.0];
+		[[self layer] setShadowOffset: [currPart shadowOffset]];
+		[[self layer] setShadowRadius: [currPart shadowBlurRadius]];
+	}
+	else
+		[[self layer] setShadowOpacity: 0.0];
+	
 	NSArray*	popupItems = ([contents text] != nil) ? [contents listItems] : [bgContents listItems];
 	for( NSString* itemName in popupItems )
 	{
@@ -1219,32 +1259,14 @@
 		[bt setButtonType: NSMomentaryPushInButton];
 	}
 	else if( [[currPart style] isEqualToString: @"rectangle"]
-			|| [[currPart style] isEqualToString: @"shadow"]
 			|| [[currPart style] isEqualToString: @"roundrect"]
 			|| [[currPart style] isEqualToString: @"oval"] )
 	{
 		WILDButtonCell*	ourCell = [[[WILDButtonCell alloc] initTextCell: @""] autorelease];
 		[bt setCell: ourCell];
-		[[bt cell] setBackgroundColor: [NSColor whiteColor]];
+		[[bt cell] setBackgroundColor: [currPart fillColor]];
 		[bt setBordered: YES];
-		
-		if( [[currPart style] isEqualToString: @"shadow"]
-			|| [[currPart style] isEqualToString: @"roundrect"] )
-		{
-			CGColorRef theColor = CGColorCreateGenericRGB( 0.4, 0.4, 0.4, 1.0 );
-			[[bt layer] setShadowColor: theColor];
-			[[bt layer] setShadowOpacity: 0.8];
-			[[bt layer] setShadowOffset: CGSizeMake( 1, -1 )];
-			[[bt layer] setShadowRadius: 0.0];
-			CFRelease( theColor );
-			
-			// Compensate for shadow
-			partRect.size.width -= 1;
-			partRect.size.height -= 1;
-			partRect.origin.y += 1;
-			[bt setFrame: partRect];
-		}
-		
+				
 		if( [[currPart style] isEqualToString: @"roundrect"]
 			|| [[currPart style] isEqualToString: @"standard"]
 			|| [[currPart style] isEqualToString: @"default"] )
@@ -1282,6 +1304,18 @@
 		canHaveIcon = NO;
 	}
 
+	NSColor	*	shadowColor = [currPart shadowColor];
+	if( [shadowColor alphaComponent] > 0.0 )
+	{
+		CGColorRef theColor = [shadowColor CGColor];
+		[[self layer] setShadowColor: theColor];
+		[[self layer] setShadowOpacity: 1.0];
+		[[self layer] setShadowOffset: [currPart shadowOffset]];
+		[[self layer] setShadowRadius: [currPart shadowBlurRadius]];
+	}
+	else
+		[[self layer] setShadowOpacity: 0.0];
+	
 	[bt setFont: [currPart textFont]];
 	if( [currPart showName] )
 		[bt setTitle: [currPart name]];
@@ -1374,24 +1408,20 @@
 		[sv setBorderType: NSNoBorder];
 		[sv setDrawsBackground: NO];
 		[tv setDrawsBackground: NO];
-		[sv setHasVerticalScroller: NO];
 	}
 	else if( [[currPart style] isEqualToString: @"opaque"] )
 	{
 		[sv setBorderType: NSNoBorder];
-		[sv setHasVerticalScroller: NO];
 		[sv setBackgroundColor: [NSColor whiteColor]];
 	}
 	else if( [[currPart style] isEqualToString: @"standard"] )
 	{
 		[sv setBorderType: NSBezelBorder];
-		[sv setHasVerticalScroller: NO];
 		[sv setBackgroundColor: [NSColor whiteColor]];
 	}
 	else if( [[currPart style] isEqualToString: @"roundrect"] )
 	{
 		[sv setBorderType: NSBezelBorder];
-		[sv setHasVerticalScroller: NO];
 		[sv setBackgroundColor: [NSColor whiteColor]];
 	}
 	else if( [[currPart style] isEqualToString: @"scrolling"] )
@@ -1399,34 +1429,29 @@
 		txBox.size.width -= 15;
 		[sv setBorderType: NSLineBorder];
 		[sv setBackgroundColor: [NSColor whiteColor]];
-		[sv setHasVerticalScroller: YES];
 	}
 	else
 	{
-		if( [[currPart style] isEqualToString: @"shadow"] )
-		{
-			CGColorRef theColor = CGColorCreateGenericRGB( 0.4, 0.4, 0.4, 1.0 );
-			[[sv layer] setShadowColor: theColor];
-			[[sv layer] setShadowOpacity: 0.8];
-			[[sv layer] setShadowOffset: CGSizeMake( 2, -2 )];
-			[[sv layer] setShadowRadius: 0.0];
-			CFRelease( theColor );
-			
-			txBox.size.width -= 2;
-			txBox.size.height -= 2;
-			txBox.origin.y += 2;
-			
-			partRect.size.width -= 2;
-			partRect.size.height -= 2;
-			partRect.origin.y += 2;
-			[sv setFrame: partRect];
-		}
 		[sv setBorderType: NSLineBorder];
 		[sv setBackgroundColor: [NSColor whiteColor]];
-		[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
-		[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
 	}
-	[sv setHasHorizontalScroller: NO];
+	[sv setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+	[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
+	[sv setHorizontalScrollElasticity: [currPart hasHorizontalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+	[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
+
+	NSColor	*	shadowColor = [currPart shadowColor];
+	if( [shadowColor alphaComponent] > 0.0 )
+	{
+		CGColorRef theColor = [shadowColor CGColor];
+		[[sv layer] setShadowColor: theColor];
+		[[sv layer] setShadowOpacity: 1.0];
+		[[sv layer] setShadowOffset: [currPart shadowOffset]];
+		[[sv layer] setShadowRadius: [currPart shadowBlurRadius]];
+	}
+	else
+		[[sv layer] setShadowOpacity: 0.0];
+
 	[tv setFrame: txBox];
 	[sv setDocumentView: tv];
 	[sv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
@@ -1490,30 +1515,33 @@
 		[sv setBorderType: NSNoBorder];
 		[tv setBackgroundColor: [NSColor whiteColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"scrolling"] )
+	else if( [[currPart style] isEqualToString: @"standard"] )
 	{
-		txBox.size.width -= 15;
-		[sv setBorderType: NSLineBorder];
+		[sv setBorderType: NSBezelBorder];
 		[tv setBackgroundColor: [NSColor whiteColor]];
-		[sv setHasVerticalScroller: YES];
 	}
 	else
 	{
-		if( [[currPart style] isEqualToString: @"shadow"] )
-		{
-			CGColorRef theColor = CGColorCreateGenericRGB( 0.4, 0.4, 0.4, 1.0 );
-			[[sv layer] setShadowColor: theColor];
-			[[sv layer] setShadowOpacity: 0.8];
-			[[sv layer] setShadowOffset: CGSizeMake( 2, -2 )];
-			[[sv layer] setShadowRadius: 0.0];
-			CFRelease( theColor );
-		}
 		[sv setBorderType: NSLineBorder];
 		[sv setBackgroundColor: [NSColor whiteColor]];
-		[sv setHasVerticalScroller: NO];
 	}
-	[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
+	[sv setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
 	[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
+	[sv setHorizontalScrollElasticity: [currPart hasHorizontalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+	[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
+
+	NSColor	*	shadowColor = [currPart shadowColor];
+	if( [shadowColor alphaComponent] > 0.0 )
+	{
+		CGColorRef theColor = [shadowColor CGColor];
+		[[sv layer] setShadowColor: theColor];
+		[[sv layer] setShadowOpacity: 1.0];
+		[[sv layer] setShadowOffset: [currPart shadowOffset]];
+		[[sv layer] setShadowRadius: [currPart shadowBlurRadius]];
+	}
+	else
+		[[sv layer] setShadowOpacity: 0.0];
+
 	[tv setFrame: txBox];
 	[tc setWidth: txBox.size.width];
 	[tc setMaxWidth: 1000000.0];
@@ -1540,8 +1568,8 @@
 		[self loadListField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
 	else if( [[currPart style] isEqualToString: @"transparent"] || [[currPart style] isEqualToString: @"opaque"]
-		 || [[currPart style] isEqualToString: @"rectangle"] || [[currPart style] isEqualToString: @"shadow"]
-		|| [[currPart style] isEqualToString: @"scrolling"] || [[currPart style] isEqualToString: @"standard"]
+		|| [[currPart style] isEqualToString: @"rectangle"]
+		|| [[currPart style] isEqualToString: @"standard"]
 		|| [[currPart style] isEqualToString: @"roundrect"] )
 	{
 		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
@@ -1570,6 +1598,19 @@
 	QTMovie			* mov = [QTMovie movieWithFile: movPath error: &outError];
 	[mov setCurrentTime: [currPart currentTime]];
 	[mpv setMovie: mov];
+
+	NSColor	*	shadowColor = [currPart shadowColor];
+	if( [shadowColor alphaComponent] > 0.0 )
+	{
+		CGColorRef theColor = [shadowColor CGColor];
+		[[self layer] setShadowColor: theColor];
+		[[self layer] setShadowOpacity: 1.0];
+		[[self layer] setShadowOffset: [currPart shadowOffset]];
+		[[self layer] setShadowRadius: [currPart shadowBlurRadius]];
+	}
+	else
+		[[self layer] setShadowOpacity: 0.0];
+
 	[mpv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 	[mpv setPreservesAspectRatio: YES];
 	[mpv setControllerVisible: [currPart controllerVisible]];
