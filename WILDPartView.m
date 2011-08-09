@@ -1263,8 +1263,9 @@
 			|| [[currPart style] isEqualToString: @"oval"] )
 	{
 		WILDButtonCell*	ourCell = [[[WILDButtonCell alloc] initTextCell: @""] autorelease];
+		[ourCell setBackgroundColor: [currPart fillColor]];
+		[ourCell setLineColor: [currPart lineColor]];
 		[bt setCell: ourCell];
-		[[bt cell] setBackgroundColor: [currPart fillColor]];
 		[bt setBordered: YES];
 				
 		if( [[currPart style] isEqualToString: @"roundrect"]

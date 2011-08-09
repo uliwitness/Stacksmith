@@ -12,8 +12,10 @@
 @interface WILDButtonCell : NSButtonCell
 {
 	BOOL	drawAsDefault;	// Are we a default button? Can't check the shortcut, as HC doesn't auto-handle return key presses, so we'd interfere with stack code. Also, Cocoa only sets this shortcut on current default button, so buttons would revert to standard in the background.
+	NSColor	*lineColor;
 }
 
-@property (assign) BOOL drawAsDefault;
+@property (assign) BOOL 	drawAsDefault;
+@property (retain) NSColor*	lineColor;
 
 @end

@@ -39,11 +39,18 @@ NSImage*	WILDInvertedImage( NSImage* img )
 @implementation WILDButtonCell
 
 @synthesize drawAsDefault;
+@synthesize lineColor;
+
+-(void)	dealloc
+{
+	DESTROY(lineColor);
+	
+	[super dealloc];
+}
+
 
 -(void)	drawWithFrame: (NSRect)origCellFrame inView: (NSView *)controlView
 {
-	[[NSColor blackColor] set];
-	
 	//NSLog( @"state = %s", ([self state] == NSOnState) ? "on" : "off" );
 	BOOL			isHighlighted = [self isHighlighted] || [self state] == NSOnState;
 	NSRect			cellFrame = origCellFrame;
@@ -55,18 +62,23 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	clampedCellFrame.size.width -= 1;
 	clampedCellFrame.size.height -= 1;
 	
+	if( !lineColor )
+		lineColor = [[NSColor blackColor] retain];
+	
+	[lineColor set];
+	
 	BOOL	isActive = [[controlView window] isKeyWindow] && [self isEnabled];
 	if( drawAsDefault )
 	{
 		[NSBezierPath setDefaultLineWidth: 3];
 		if( isActive )
-			[[NSColor blackColor] set];
+			[lineColor set];
 		else
 			[[NSColor grayColor] set];
 		[[NSBezierPath bezierPathWithRoundedRect: NSInsetRect(clampedCellFrame, 1, 1) xRadius: 8 yRadius: 8] stroke];
 		[NSBezierPath setDefaultLineWidth: 1];
 		if( !isActive )
-			[[NSColor blackColor] set];
+			[lineColor set];
 		cellFrame = NSInsetRect( cellFrame, 4, 4 );
 		clampedCellFrame = NSInsetRect( clampedCellFrame, 4, 4 );
 	}
@@ -97,7 +109,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		else
 		#endif
 		if( isHighlighted && isActive )
-			[[NSColor blackColor] set];
+			[lineColor set];
 		else if( isHighlighted && !isActive )
 			[[NSColor grayColor] set];
 		else
@@ -109,7 +121,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	if( [self isBordered] )
 	{
 		if( isActive )
-			[[NSColor blackColor] set];
+			[lineColor set];
 		else
 			[[NSColor grayColor] set];
 		[buttonStrokeShape stroke];
@@ -139,7 +151,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		txBox.size.width += 4;
 		txBox.origin.x -= 2;
 		
-		[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [NSColor whiteColor]
+		[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [self backgroundColor]
 						range: NSMakeRange(0,[muAttrTitle length])];
 		attrTitle = muAttrTitle;
 	}
@@ -147,7 +159,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	{
 		NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
 		
-		[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [NSColor whiteColor]
+		[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [self backgroundColor]
 						range: NSMakeRange(0,[muAttrTitle length])];
 		attrTitle = muAttrTitle;
 	}
@@ -159,11 +171,11 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		imgBox.origin.y -= truncf(textExtents.height /2);
 		
 		if( isHighlighted && isActive )
-			[[NSColor blackColor] set];
+			[lineColor set];
 		else if( isHighlighted && !isActive )
 			[[NSColor grayColor] set];
 		else
-			[[NSColor whiteColor] set];
+			[[self backgroundColor] set];
 		[NSBezierPath fillRect: txBox];
 		
 		NSImage*		img = isHighlighted ? WILDInvertedImage([self image]) : [self image];
