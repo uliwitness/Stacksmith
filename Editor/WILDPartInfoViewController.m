@@ -8,6 +8,7 @@
 
 #import "WILDPartInfoViewController.h"
 #import "WILDScriptEditorWindowController.h"
+#import "WILDContentsEditorWindowController.h"
 #import "WILDPart.h"
 #import "WILDNotifications.h"
 
@@ -27,6 +28,7 @@
 @synthesize shadowColorWell;
 @synthesize shadowBlurRadiusSlider;
 @synthesize shadowOffsetSlider;
+@synthesize contentsEditorButton;
 
 
 -(id)	initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView
@@ -58,6 +60,7 @@
 	DESTROY(fillColorWell);
 	DESTROY(lineColorWell);
 	DESTROY(shadowColorWell);
+	DESTROY(contentsEditorButton);
 	
 	[super dealloc];
 }
@@ -84,17 +87,6 @@
 	[shadowColorWell setColor: [part shadowColor]];
 	[shadowBlurRadiusSlider setDoubleValue: [part shadowBlurRadius]];
 	[shadowOffsetSlider setDoubleValue: [part shadowOffset].width];
-	
-	if( contentsTextField )
-	{
-		WILDPartContents*	theContents = nil;
-		if( [part sharedText] )
-			theContents = [[[cardView card] owningBackground] contentsForPart: part];
-		else
-			theContents = [[cardView card] contentsForPart: part];
-		NSString*					contentsStr = [theContents text];
-		[contentsTextField setString: contentsStr ? contentsStr : @""];
-	}
 }
 
 
@@ -105,6 +97,19 @@
 	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
 	WILDScriptEditorWindowController*	se = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: part] autorelease];
 	[se setGlobalStartRect: box];
+	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];
+	[se showWindow: self];
+}
+
+
+-(IBAction)	doContentsEditorButton: (id)sender
+{
+	NSRect		box = [contentsEditorButton convertRect: [contentsEditorButton bounds] toView: nil];
+	NSRect		wFrame = [[[self view] window] frame];
+	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
+	WILDContentsEditorWindowController*	se = [[[WILDContentsEditorWindowController alloc] initWithPart: part] autorelease];
+	[se setGlobalStartRect: box];
+	[se setCardView: cardView];
 	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];
 	[se showWindow: self];
 }

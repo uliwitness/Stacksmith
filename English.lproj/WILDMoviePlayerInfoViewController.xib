@@ -39,6 +39,34 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="NSButton" id="172314113">
+						<reference key="NSNextResponder" ref="1005"/>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{305, 107}, {110, 32}}</string>
+						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
+						<int key="NSViewLayerContentsRedrawPolicy">2</int>
+						<string key="NSReuseIdentifierKey">_NS:161</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSButtonCell" key="NSCell" id="756047615">
+							<int key="NSCellFlags">67239424</int>
+							<int key="NSCellFlags2">134217728</int>
+							<string key="NSContents">Contents…</string>
+							<object class="NSFont" key="NSSupport" id="71225832">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">13</double>
+								<int key="NSfFlags">1044</int>
+							</object>
+							<string key="NSCellIdentifier">_NS:161</string>
+							<reference key="NSControlView" ref="172314113"/>
+							<int key="NSButtonFlags">-2038284033</int>
+							<int key="NSButtonFlags2">129</int>
+							<string key="NSAlternateContents"/>
+							<string key="NSKeyEquivalent"/>
+							<int key="NSPeriodicDelay">200</int>
+							<int key="NSPeriodicInterval">25</int>
+						</object>
+					</object>
 					<object class="NSSlider" id="783440584">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
@@ -77,11 +105,7 @@
 							<int key="NSCellFlags">68288064</int>
 							<int key="NSCellFlags2">71304192</int>
 							<string key="NSContents">Blur:</string>
-							<object class="NSFont" key="NSSupport" id="71225832">
-								<string key="NSName">LucidaGrande</string>
-								<double key="NSSize">13</double>
-								<int key="NSfFlags">1044</int>
-							</object>
+							<reference key="NSSupport" ref="71225832"/>
 							<reference key="NSControlView" ref="253160630"/>
 							<object class="NSColor" key="NSBackgroundColor" id="292804846">
 								<int key="NSColorSpace">6</int>
@@ -265,7 +289,7 @@
 					<object class="NSButton" id="644767397">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{315, 137}, {100, 32}}</string>
+						<string key="NSFrame">{{305, 137}, {110, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="794306290"/>
@@ -289,7 +313,7 @@
 					<object class="NSButton" id="446123845">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{315, 167}, {100, 32}}</string>
+						<string key="NSFrame">{{305, 169}, {110, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="233782041"/>
@@ -349,7 +373,7 @@
 					<object class="NSTextField" id="337728831">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{82, 143}, {231, 22}}</string>
+						<string key="NSFrame">{{82, 143}, {221, 22}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="644767397"/>
@@ -403,7 +427,6 @@
 						<string key="NSFrame">{{80, 92}, {150, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="615042552">
 							<int key="NSCellFlags">-2080244224</int>
@@ -784,6 +807,22 @@
 					</object>
 					<int key="connectionID">144</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">doContentsEditorButton:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="172314113"/>
+					</object>
+					<int key="connectionID">147</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">contentsEditorButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="172314113"/>
+					</object>
+					<int key="connectionID">148</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -825,7 +864,6 @@
 							<reference ref="1053516344"/>
 							<reference ref="794306290"/>
 							<reference ref="503299958"/>
-							<reference ref="446123845"/>
 							<reference ref="644767397"/>
 							<reference ref="233782041"/>
 							<reference ref="337728831"/>
@@ -839,6 +877,8 @@
 							<reference ref="806446348"/>
 							<reference ref="253160630"/>
 							<reference ref="783440584"/>
+							<reference ref="172314113"/>
+							<reference ref="446123845"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1130,6 +1170,19 @@
 						<reference key="object" ref="1032212158"/>
 						<reference key="parent" ref="571900684"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">145</int>
+						<reference key="object" ref="172314113"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="756047615"/>
+						</array>
+						<reference key="parent" ref="1005"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">146</int>
+						<reference key="object" ref="756047615"/>
+						<reference key="parent" ref="172314113"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1165,6 +1218,8 @@
 				<string key="133.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="134.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="145.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="146.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1187,7 +1242,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">144</int>
+			<int key="maxID">148</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1225,6 +1280,7 @@
 					<string key="className">WILDPartInfoViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="doContentsEditorButton:">id</string>
 						<string key="doEnabledSwitchToggled:">id</string>
 						<string key="doFillColorChanged:">id</string>
 						<string key="doLineColorChanged:">id</string>
@@ -1235,6 +1291,10 @@
 						<string key="doVisibleSwitchToggled:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="doContentsEditorButton:">
+							<string key="name">doContentsEditorButton:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="doEnabledSwitchToggled:">
 							<string key="name">doEnabledSwitchToggled:</string>
 							<string key="candidateClassName">id</string>
@@ -1269,6 +1329,7 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="contentsEditorButton">NSButton</string>
 						<string key="contentsTextField">NSTextView</string>
 						<string key="enabledSwitch">NSButton</string>
 						<string key="fillColorWell">NSColorWell</string>
@@ -1285,6 +1346,10 @@
 						<string key="visibleSwitch">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="contentsEditorButton">
+							<string key="name">contentsEditorButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="contentsTextField">
 							<string key="name">contentsTextField</string>
 							<string key="candidateClassName">NSTextView</string>

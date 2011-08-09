@@ -31,6 +31,7 @@
 	NSColorWell		*		shadowColorWell;
 	NSSlider		*		shadowBlurRadiusSlider;
 	NSSlider		*		shadowOffsetSlider;
+	NSButton		*		contentsEditorButton;
 }
 
 @property(retain)	IBOutlet NSButton			*		scriptEditorButton;
@@ -47,12 +48,14 @@
 @property(retain)	IBOutlet NSColorWell		*		shadowColorWell;
 @property(retain)	IBOutlet NSSlider			*		shadowBlurRadiusSlider;
 @property(retain)	IBOutlet NSSlider			*		shadowOffsetSlider;
+@property(retain)	IBOutlet NSButton			*		contentsEditorButton;
 
 -(id)		initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView;
 
 -(IBAction)	doScriptEditorButton: (id)sender;
 -(IBAction) doEnabledSwitchToggled:(id)sender;
 -(IBAction) doVisibleSwitchToggled:(id)sender;
+-(IBAction)	doContentsEditorButton: (id)sender;
 
 -(IBAction)	doShadowBlurRadiusChanged:(id)sender;
 -(IBAction)	doShadowOffsetChanged:(id)sender;

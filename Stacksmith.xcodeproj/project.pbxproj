@@ -330,6 +330,8 @@
 		552FF240113F23F3005742C8 /* snd_145.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552FF143113F23F3005742C8 /* snd_145.aiff */; };
 		552FF241113F23F3005742C8 /* snd_146.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552FF144113F23F3005742C8 /* snd_146.aiff */; };
 		552FF245113F247A005742C8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FF244113F247A005742C8 /* QTKit.framework */; };
+		5532EE3413F1E2B6001A0B28 /* WILDContentsEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EE3313F1E2B6001A0B28 /* WILDContentsEditorWindowController.m */; };
+		5532EE3713F1E66D001A0B28 /* WILDContentsEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5532EE3513F1E66D001A0B28 /* WILDContentsEditorWindowController.xib */; };
 		55382F6B117238350006B381 /* WILDFieldInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */; };
 		55382F6D117238B10006B381 /* WILDFieldInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55382F6C117238B10006B381 /* WILDFieldInfoWindowController.m */; };
 		553C46EE13577334000219FA /* Forge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C469F13577334000219FA /* Forge.cpp */; };
@@ -988,6 +990,9 @@
 		552FF143113F23F3005742C8 /* snd_145.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = snd_145.aiff; path = Resources/snd_145.aiff; sourceTree = "<group>"; };
 		552FF144113F23F3005742C8 /* snd_146.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = snd_146.aiff; path = Resources/snd_146.aiff; sourceTree = "<group>"; };
 		552FF244113F247A005742C8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		5532EE3213F1E2B6001A0B28 /* WILDContentsEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDContentsEditorWindowController.h; sourceTree = "<group>"; };
+		5532EE3313F1E2B6001A0B28 /* WILDContentsEditorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDContentsEditorWindowController.m; sourceTree = "<group>"; };
+		5532EE3613F1E66D001A0B28 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDContentsEditorWindowController.xib; sourceTree = "<group>"; };
 		55382EE21171FFFA0006B381 /* UKHelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKHelperMacros.h; path = ../UliKit/UKHelperMacros.h; sourceTree = SOURCE_ROOT; };
 		55382EEA117201E40006B381 /* UKTypecastMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKTypecastMacros.h; path = ../UliKit/UKTypecastMacros.h; sourceTree = SOURCE_ROOT; };
 		55382F6A117238350006B381 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDFieldInfoWindowController.xib; sourceTree = "<group>"; };
@@ -1413,6 +1418,7 @@
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */,
 				55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */,
+				5532EE3513F1E66D001A0B28 /* WILDContentsEditorWindowController.xib */,
 				55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */,
 				55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */,
 				55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */,
@@ -1492,6 +1498,8 @@
 			children = (
 				55255ABA114C19AB00279B03 /* WILDScriptEditorWindowController.h */,
 				55255ABB114C19AB00279B03 /* WILDScriptEditorWindowController.m */,
+				5532EE3213F1E2B6001A0B28 /* WILDContentsEditorWindowController.h */,
+				5532EE3313F1E2B6001A0B28 /* WILDContentsEditorWindowController.m */,
 				55E9FD8813E56D390089B81F /* WILDPartInfoViewController.h */,
 				55E9FD8913E56D390089B81F /* WILDPartInfoViewController.m */,
 				55E9FD8D13E5FBCB0089B81F /* WILDButtonInfoViewController.h */,
@@ -2657,6 +2665,7 @@
 				55E9FD9A13E747B20089B81F /* WILDIconPickerViewController.xib in Resources */,
 				5585034813E886AC00FD244C /* WILDFieldInfoViewController.xib in Resources */,
 				5585034913E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib in Resources */,
+				5532EE3713F1E66D001A0B28 /* WILDContentsEditorWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2842,6 +2851,7 @@
 				5585034313E8867200FD244C /* WILDMoviePlayerInfoViewController.m in Sources */,
 				55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */,
 				55C8D05213EF604000B502C5 /* NSColor+ULICGColor.m in Sources */,
+				5532EE3413F1E2B6001A0B28 /* WILDContentsEditorWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2912,6 +2922,14 @@
 				55255AC0114C19CF00279B03 /* English */,
 			);
 			name = WILDScriptEditorWindowController.xib;
+			sourceTree = "<group>";
+		};
+		5532EE3513F1E66D001A0B28 /* WILDContentsEditorWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5532EE3613F1E66D001A0B28 /* English */,
+			);
+			name = WILDContentsEditorWindowController.xib;
 			sourceTree = "<group>";
 		};
 		55382F69117238350006B381 /* WILDFieldInfoWindowController.xib */ = {
