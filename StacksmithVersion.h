@@ -1,3 +1,3 @@
 #include "svn_version.h"
 
-#define STACKSMITH_VERSION		1.0a5
+#define STACKSMITH_VERSION		1.0a6
