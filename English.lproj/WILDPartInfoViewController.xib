@@ -42,9 +42,10 @@
 					<object class="NSSlider" id="601826845">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{321, 21}, {90, 21}}</string>
+						<string key="NSFrame">{{321, 16}, {90, 26}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:51</string>
 						<bool key="NSEnabled">YES</bool>
@@ -55,11 +56,11 @@
 							<string key="NSCellIdentifier">_NS:51</string>
 							<reference key="NSControlView" ref="601826845"/>
 							<double key="NSMaxValue">10</double>
-							<double key="NSMinValue">0.0</double>
-							<double key="NSValue">3</double>
+							<double key="NSMinValue">-10</double>
+							<double key="NSValue">0.0</double>
 							<double key="NSAltIncValue">0.0</double>
-							<int key="NSNumberOfTickMarks">0</int>
-							<int key="NSTickMarkPosition">1</int>
+							<int key="NSNumberOfTickMarks">7</int>
+							<int key="NSTickMarkPosition">0</int>
 							<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
 							<bool key="NSVertical">NO</bool>
 						</object>
@@ -106,7 +107,7 @@
 					<object class="NSSlider" id="460312474">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{187, 20}, {90, 21}}</string>
+						<string key="NSFrame">{{187, 15}, {90, 26}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="864552116"/>
@@ -120,11 +121,11 @@
 							<string key="NSCellIdentifier">_NS:51</string>
 							<reference key="NSControlView" ref="460312474"/>
 							<double key="NSMaxValue">10</double>
-							<double key="NSMinValue">0.0</double>
-							<double key="NSValue">3</double>
+							<double key="NSMinValue">-10</double>
+							<double key="NSValue">0.0</double>
 							<double key="NSAltIncValue">0.0</double>
-							<int key="NSNumberOfTickMarks">0</int>
-							<int key="NSTickMarkPosition">1</int>
+							<int key="NSNumberOfTickMarks">7</int>
+							<int key="NSTickMarkPosition">0</int>
 							<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
 							<bool key="NSVertical">NO</bool>
 						</object>
@@ -268,7 +269,7 @@
 						<string key="NSFrame">{{326, 104}, {89, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="232498421"/>
 						<string key="NSReuseIdentifierKey">_NS:161</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="878197417">
@@ -1062,6 +1063,7 @@
 					<string key="className">WILDPartInfoViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="doContentsEditorButton:">id</string>
 						<string key="doEnabledSwitchToggled:">id</string>
 						<string key="doFillColorChanged:">id</string>
 						<string key="doLineColorChanged:">id</string>
@@ -1072,6 +1074,10 @@
 						<string key="doVisibleSwitchToggled:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="doContentsEditorButton:">
+							<string key="name">doContentsEditorButton:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="doEnabledSwitchToggled:">
 							<string key="name">doEnabledSwitchToggled:</string>
 							<string key="candidateClassName">id</string>
@@ -1106,6 +1112,7 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="contentsEditorButton">NSButton</string>
 						<string key="contentsTextField">NSTextView</string>
 						<string key="enabledSwitch">NSButton</string>
 						<string key="fillColorWell">NSColorWell</string>
@@ -1122,6 +1129,10 @@
 						<string key="visibleSwitch">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="contentsEditorButton">
+							<string key="name">contentsEditorButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="contentsTextField">
 							<string key="name">contentsTextField</string>
 							<string key="candidateClassName">NSTextView</string>

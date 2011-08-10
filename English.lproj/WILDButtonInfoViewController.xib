@@ -46,9 +46,10 @@
 					<object class="NSSlider" id="977670843">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{321, 21}, {90, 21}}</string>
+						<string key="NSFrame">{{321, 17}, {90, 25}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:51</string>
 						<bool key="NSEnabled">YES</bool>
@@ -59,11 +60,11 @@
 							<string key="NSCellIdentifier">_NS:51</string>
 							<reference key="NSControlView" ref="977670843"/>
 							<double key="NSMaxValue">10</double>
-							<double key="NSMinValue">0.0</double>
-							<double key="NSValue">3</double>
+							<double key="NSMinValue">-10</double>
+							<double key="NSValue">0.0</double>
 							<double key="NSAltIncValue">0.0</double>
-							<int key="NSNumberOfTickMarks">0</int>
-							<int key="NSTickMarkPosition">1</int>
+							<int key="NSNumberOfTickMarks">7</int>
+							<int key="NSTickMarkPosition">0</int>
 							<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
 							<bool key="NSVertical">NO</bool>
 						</object>
@@ -110,7 +111,7 @@
 					<object class="NSSlider" id="852414096">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{187, 20}, {90, 21}}</string>
+						<string key="NSFrame">{{187, 16}, {90, 25}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="17338492"/>
@@ -124,11 +125,11 @@
 							<string key="NSCellIdentifier">_NS:51</string>
 							<reference key="NSControlView" ref="852414096"/>
 							<double key="NSMaxValue">10</double>
-							<double key="NSMinValue">0.0</double>
-							<double key="NSValue">3</double>
+							<double key="NSMinValue">-10</double>
+							<double key="NSValue">0.0</double>
 							<double key="NSAltIncValue">0.0</double>
-							<int key="NSNumberOfTickMarks">0</int>
-							<int key="NSTickMarkPosition">1</int>
+							<int key="NSNumberOfTickMarks">7</int>
+							<int key="NSTickMarkPosition">0</int>
 							<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
 							<bool key="NSVertical">NO</bool>
 						</object>
