@@ -12,6 +12,31 @@
 
 @implementation WILDScrollView
 
+@synthesize lineColor;
+
+-(void)	dealloc
+{
+	DESTROY(lineColor);
+	
+	[super dealloc];
+}
+
+-(void)	drawRect: (NSRect)dirtyRect
+{
+	if( [self borderType] == NSLineBorder )
+	{
+		[[self backgroundColor] set];
+		NSRectFill( dirtyRect );
+		
+		if( !lineColor )
+			lineColor = [[NSColor blackColor] retain];
+		[lineColor set];
+		[NSBezierPath strokeRect: [self bounds]];
+	}
+	else
+		[super drawRect: dirtyRect];
+}
+
 -(void)	resetCursorRects
 {
 	NSCursor	*	currentCursor = [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]];

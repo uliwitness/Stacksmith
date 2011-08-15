@@ -11,7 +11,9 @@
 
 @interface WILDScrollView : NSScrollView
 {
-
+	NSColor	*	lineColor;
 }
+
+@property (retain) NSColor*	lineColor;
 
 @end

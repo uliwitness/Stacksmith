@@ -1372,6 +1372,7 @@
 	WILDTextView	*	tv = [[WILDTextView alloc] initWithFrame: partRect];
 	[tv setFont: [currPart textFont]];
 	[tv setWantsLayer: YES];
+	[tv setDrawsBackground: NO];
 	[tv setUsesFindPanel: NO];
 	[tv setDelegate: self];
 	[tv setAlignment: [currPart textAlignment]];
@@ -1399,7 +1400,7 @@
 	[tv setEditable: shouldBeEditable];
 	[tv setSelectable: shouldBeEditable];
 	
-	NSScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
+	WILDScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
 	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = partRect;
@@ -1434,7 +1435,8 @@
 	else
 	{
 		[sv setBorderType: NSLineBorder];
-		[sv setBackgroundColor: [NSColor whiteColor]];
+		[sv setBackgroundColor: [currPart fillColor]];
+		[sv setLineColor: [currPart lineColor]];
 	}
 	[sv setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
 	[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
