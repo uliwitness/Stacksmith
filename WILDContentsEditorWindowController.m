@@ -69,7 +69,10 @@
 
 -(void)	windowWillClose: (NSNotification*)notification
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: mContainer];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"contents", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: mContainer userInfo: infoDict];
 
 	WILDPartContents*	theContents = nil;
 	if( [mContainer sharedText] )
@@ -78,7 +81,7 @@
 		theContents = [[mCardView card] contentsForPart: mContainer create: YES];
 	[theContents setStyledText: [mTextView textStorage]];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: mContainer];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: mContainer userInfo: infoDict];
 	
 	[mContainer updateChangeCount: NSChangeDone];
 }

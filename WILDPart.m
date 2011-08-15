@@ -465,11 +465,11 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 -(void)	setIconID: (NSInteger)theID
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: @"iconID"
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"icon"
 															forKey: WILDAffectedPropertyKey]];
 	mIconID = theID;
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: @"iconID"
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"icon"
 															forKey: WILDAffectedPropertyKey]];
 	[self updateChangeCount: NSChangeDone];
 }

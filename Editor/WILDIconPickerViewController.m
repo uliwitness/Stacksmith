@@ -40,11 +40,14 @@
 
 -(void)	iconListDataSourceSelectionDidChange:(WILDIconListDataSource *)inSender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"icon", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setIconID: [iconListDataSource selectedIconID]];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 

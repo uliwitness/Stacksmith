@@ -69,7 +69,10 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction)	doAutoSelectSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"autoSelect", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setAutoSelect: [mAutoSelectSwitch state] == NSOnState];
 	
@@ -80,88 +83,112 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction)	doMultipleLinesSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"multipleLines", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setCanSelectMultipleLines: [mMultipleLinesSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doSharedTextSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"sharedText", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setSharedText: [mSharedTextSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doLockTextSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"lockText", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setLockText: [mLockTextSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doDontWrapSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"dontWrap", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setDontWrap: [mDontWrapSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction) doDontSearchSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"dontSearch", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setDontSearch: [mDontSearchSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doHorizontalScrollerSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"horizontalScroller", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setHasHorizontalScroller: [mHorizontalScrollerSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doVerticalScrollerSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"verticalScroller", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setHasVerticalScroller: [mVerticalScrollerSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction) doStylePopUpChanged:(id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"style", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 	[part setStyle: [sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]]];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
 }
 

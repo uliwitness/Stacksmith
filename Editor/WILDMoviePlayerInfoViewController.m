@@ -41,12 +41,15 @@
 		[[self retain] autorelease];	// Make sure we're not released if the movie player property change recreates its view.
 
 		NSString	*	thePath = [thePanel filename];
+		NSDictionary*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"moviePath", WILDAffectedPropertyKey,
+										nil];
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
 		[part setMediaPath: thePath];
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 		[part updateChangeCount: NSChangeDone];
 	}
 }
