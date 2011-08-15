@@ -21,8 +21,6 @@
 #import "WILDCardView.h"
 #import "WILDTextView.h"
 #import "WILDClickablePopUpButtonLabel.h"
-#import "WILDButtonInfoWindowController.h"
-#import "WILDFieldInfoWindowController.h"
 #import "WILDPresentationConstants.h"
 #import "WILDCardInfoWindowController.h"
 #import "WILDBackgroundInfoWindowController.h"
