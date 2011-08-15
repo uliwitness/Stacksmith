@@ -25,6 +25,9 @@
 #import "WILDScrollView.h"
 #import "WILDMovieView.h"
 #import "NSColor+ULICGColor.h"
+#import "LEOHandlerID.h"
+#import "LEOContextGroup.h"
+#import "LEOScript.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 
@@ -51,6 +54,11 @@
 {
 	[mCurrentPopover close];
 	DESTROY(mCurrentPopover);
+	if( mMouseEventTrackingArea )
+	{
+		[self removeTrackingArea: mMouseEventTrackingArea];
+		DESTROY(mMouseEventTrackingArea);
+	}
 	
 	[[WILDTools sharedTools] removeClient: self];
 	[self unsubscribeNotifications];
@@ -1080,6 +1088,12 @@
 }
 
 
+-(void)	scriptPropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	[self updateTrackingAreas];
+}
+
+
 -(void)	currentToolDidChange: (NSNotification*)notification
 {
 	[self setSelected: NO];
@@ -1695,6 +1709,40 @@
 }
 
 
+-(void)	updateTrackingAreas
+{
+	[super updateTrackingAreas];
+	
+	if( mMouseEventTrackingArea )
+	{
+		[self removeTrackingArea: mMouseEventTrackingArea];
+		DESTROY(mMouseEventTrackingArea);
+	}
+	
+	bool				haveMoveHandlers = false;
+	bool				haveEnterExitHandlers = false;
+	LEOHandlerID		theEnterHandler = LEOContextGroupHandlerIDForHandlerName( [mPart scriptContextGroupObject], "mouseEnter" );
+	LEOHandlerID		theLeaveHandler = LEOContextGroupHandlerIDForHandlerName( [mPart scriptContextGroupObject], "mouseLeave" );
+	LEOHandlerID		theMoveHandler = LEOContextGroupHandlerIDForHandlerName( [mPart scriptContextGroupObject], "mouseMove" );
+	struct LEOScript* 	theScript = [mPart scriptObjectShowingErrorMessage: NO];
+	if( LEOScriptFindCommandHandlerWithID( theScript, theEnterHandler ) != NULL )
+		haveEnterExitHandlers |= true;
+	if( LEOScriptFindCommandHandlerWithID( theScript, theLeaveHandler ) != NULL )
+		haveEnterExitHandlers |= true;
+	if( LEOScriptFindCommandHandlerWithID( theScript, theMoveHandler ) != NULL )
+		haveMoveHandlers |= true;
+	
+	if( haveMoveHandlers || haveEnterExitHandlers )
+	{
+		NSTrackingAreaOptions	theOptions = NSTrackingActiveInActiveApp | NSTrackingInVisibleRect | NSTrackingMouseEnteredAndExited;
+		if( haveMoveHandlers )
+			theOptions |= NSTrackingMouseMoved;
+		mMouseEventTrackingArea = [[NSTrackingArea alloc] initWithRect: NSZeroRect options: theOptions owner: self userInfo: nil];
+		[self addTrackingArea: mMouseEventTrackingArea];
+	}
+}
+
+
 -(void)	resetCursorRects
 {
 	[super resetCursorRects];
@@ -1741,6 +1789,27 @@
 	}
 	else
 		[self addCursorRect: [self visibleRect] cursor: currentCursor];
+}
+
+
+-(void)	mouseEntered:(NSEvent *)theEvent
+{
+	if( [[WILDTools sharedTools] currentTool] == WILDBrowseTool && !mPeeking )
+		WILDScriptContainerResultFromSendingMessage( mPart, @"mouseEnter" );
+}
+
+
+-(void)	mouseExited:(NSEvent *)theEvent
+{
+	if( [[WILDTools sharedTools] currentTool] == WILDBrowseTool && !mPeeking )
+		WILDScriptContainerResultFromSendingMessage( mPart, @"mouseLeave" );
+}
+
+
+-(void)	mouseMoved:(NSEvent *)theEvent
+{
+	if( [[WILDTools sharedTools] currentTool] == WILDBrowseTool && !mPeeking )
+		WILDScriptContainerResultFromSendingMessage( mPart, @"mouseMove" );
 }
 
 

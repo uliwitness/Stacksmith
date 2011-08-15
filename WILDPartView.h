@@ -37,6 +37,7 @@ typedef enum
 	NSView*				mHelperView;	// An additional view, e.g. a label text field or so.
 	BOOL				mIsBackgroundEditing;
 	NSPopover*			mCurrentPopover;
+	NSTrackingArea*		mMouseEventTrackingArea;
 }
 
 @property (assign) NSView*			mainView;
