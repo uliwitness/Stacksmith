@@ -1725,20 +1725,23 @@
 	LEOHandlerID		theLeaveHandler = LEOContextGroupHandlerIDForHandlerName( [mPart scriptContextGroupObject], "mouseLeave" );
 	LEOHandlerID		theMoveHandler = LEOContextGroupHandlerIDForHandlerName( [mPart scriptContextGroupObject], "mouseMove" );
 	struct LEOScript* 	theScript = [mPart scriptObjectShowingErrorMessage: NO];
-	if( LEOScriptFindCommandHandlerWithID( theScript, theEnterHandler ) != NULL )
-		haveEnterExitHandlers |= true;
-	if( LEOScriptFindCommandHandlerWithID( theScript, theLeaveHandler ) != NULL )
-		haveEnterExitHandlers |= true;
-	if( LEOScriptFindCommandHandlerWithID( theScript, theMoveHandler ) != NULL )
-		haveMoveHandlers |= true;
-	
-	if( haveMoveHandlers || haveEnterExitHandlers )
+	if( theScript )
 	{
-		NSTrackingAreaOptions	theOptions = NSTrackingActiveInActiveApp | NSTrackingInVisibleRect | NSTrackingMouseEnteredAndExited;
-		if( haveMoveHandlers )
-			theOptions |= NSTrackingMouseMoved;
-		mMouseEventTrackingArea = [[NSTrackingArea alloc] initWithRect: NSZeroRect options: theOptions owner: self userInfo: nil];
-		[self addTrackingArea: mMouseEventTrackingArea];
+		if( LEOScriptFindCommandHandlerWithID( theScript, theEnterHandler ) != NULL )
+			haveEnterExitHandlers |= true;
+		if( LEOScriptFindCommandHandlerWithID( theScript, theLeaveHandler ) != NULL )
+			haveEnterExitHandlers |= true;
+		if( LEOScriptFindCommandHandlerWithID( theScript, theMoveHandler ) != NULL )
+			haveMoveHandlers |= true;
+		
+		if( haveMoveHandlers || haveEnterExitHandlers )
+		{
+			NSTrackingAreaOptions	theOptions = NSTrackingActiveInActiveApp | NSTrackingInVisibleRect | NSTrackingMouseEnteredAndExited;
+			if( haveMoveHandlers )
+				theOptions |= NSTrackingMouseMoved;
+			mMouseEventTrackingArea = [[NSTrackingArea alloc] initWithRect: NSZeroRect options: theOptions owner: self userInfo: nil];
+			[self addTrackingArea: mMouseEventTrackingArea];
+		}
 	}
 }
 
