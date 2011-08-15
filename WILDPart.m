@@ -1082,6 +1082,48 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 								[NSNumber numberWithDouble: NSMaxY(mRectangle)], @"bottom",
 								nil];
 	}
+	else if( [inPropertyName isEqualToString: @"fillcolor"] )
+	{
+		NSColor	*	rgbColor = [[self fillColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+		return [NSDictionary dictionaryWithObjectsAndKeys:
+								[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
+								[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
+								[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
+								[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
+								nil];
+	}
+	else if( [inPropertyName isEqualToString: @"linecolor"] )
+	{
+		NSColor	*	rgbColor = [[self lineColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+		return [NSDictionary dictionaryWithObjectsAndKeys:
+								[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
+								[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
+								[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
+								[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
+								nil];
+	}
+	else if( [inPropertyName isEqualToString: @"shadowcolor"] )
+	{
+		NSColor	*	rgbColor = [[self shadowColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+		return [NSDictionary dictionaryWithObjectsAndKeys:
+								[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
+								[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
+								[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
+								[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
+								nil];
+	}
+	else if( [inPropertyName isEqualToString: @"shadowoffset"] )
+	{
+		NSSize	shadowOffset = [self shadowOffset];
+		return [NSDictionary dictionaryWithObjectsAndKeys:
+								[NSNumber numberWithDouble: shadowOffset.width], @"horizontal",
+								[NSNumber numberWithDouble: -shadowOffset.height], @"vertical",
+								nil];
+	}
+	else if( [inPropertyName isEqualToString: @"shadowblurradius"] )
+	{
+		return [NSNumber numberWithDouble: [self shadowBlurRadius]];
+	}
 	else if( [inPropertyName isEqualToString: @"visible"] )
 		return mVisible ? kCFBooleanTrue : kCFBooleanFalse;
 	else if( [inPropertyName isEqualToString: @"dontwrap"] )
@@ -1202,6 +1244,41 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 		newRect.size.height = [[inValue objectForKey: @"bottom"] doubleValue] -newRect.origin.y;
 		[self setFlippedRectangle: newRect];
 	}
+	else if( [inPropertyName isEqualToString: @"fillcolor"] )
+	{
+		CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
+		CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
+		CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
+		NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
+		CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
+		[self setFillColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
+	}
+	else if( [inPropertyName isEqualToString: @"linecolor"] )
+	{
+		CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
+		CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
+		CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
+		NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
+		CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
+		[self setLineColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
+	}
+	else if( [inPropertyName isEqualToString: @"shadowcolor"] )
+	{
+		CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
+		CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
+		CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
+		NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
+		CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
+		[self setShadowColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
+	}
+	else if( [inPropertyName isEqualToString: @"shadowoffset"] )
+	{
+		CGFloat		hOffset = [[inValue objectForKey: @"horizontal"] doubleValue];
+		CGFloat		vOffset = -[[inValue objectForKey: @"vertical"] doubleValue];
+		[self setShadowOffset: NSMakeSize(hOffset,vOffset)];
+	}
+	else if( [inPropertyName isEqualToString: @"shhadowblurradius"] )
+		[self setShadowBlurRadius: [inValue doubleValue]];
 	else if( [inPropertyName isEqualToString: @"visible"] )
 		mVisible = (inValue != kCFBooleanFalse);
 	else if( [inPropertyName isEqualToString: @"dontwrap"] )
