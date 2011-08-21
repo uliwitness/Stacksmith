@@ -13,6 +13,7 @@
 @class WILDPart;
 @class WILDCardView;
 @class WILDPartContents;
+@class WILDPartPresenter;
 
 
 // Constants for describing which part was clicked during editing (for resizing etc.)
@@ -38,6 +39,7 @@ typedef enum
 	BOOL				mIsBackgroundEditing;
 	NSPopover*			mCurrentPopover;
 	NSTrackingArea*		mMouseEventTrackingArea;
+	WILDPartPresenter*	mPartPresenter;
 }
 
 @property (assign) NSView*			mainView;
