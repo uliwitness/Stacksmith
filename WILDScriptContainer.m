@@ -235,6 +235,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 	LEOInitContext( &ctx, [container scriptContextGroupObject] );
 	#if REMOTE_DEBUGGER
 	ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
+	ctx.promptProc = LEORemoteDebuggerPrompt;
 	#endif
 	
 	LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.

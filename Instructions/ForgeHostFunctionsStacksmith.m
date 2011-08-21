@@ -32,8 +32,7 @@ void	WILDStackInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find stack \"%s\".", stackName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find stack \"%s\".", stackName );
 	}
 	
 	inContext->currentInstruction++;
@@ -68,8 +67,7 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find background \"%s\".", backgroundName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find background \"%s\".", backgroundName );
 	}
 	
 	inContext->currentInstruction++;
@@ -104,8 +102,7 @@ void	WILDCardInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find card \"%s\".", cardName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find card \"%s\".", cardName );
 	}
 	
 	inContext->currentInstruction++;
@@ -141,8 +138,7 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find field \"%s\".", partName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find field \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -178,8 +174,7 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find button \"%s\".", partName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find button \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -215,8 +210,7 @@ void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find movie player \"%s\".", partName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find movie player \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -252,8 +246,7 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find part \"%s\".", partName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find part \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -289,8 +282,7 @@ void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find field \"%s\".", partName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find field \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -326,8 +318,7 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find button \"%s\".", partName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find button \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -363,8 +354,7 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find movie player \"%s\".", partName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find movie player \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -400,8 +390,7 @@ void	WILDBackgroundPartInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't find part \"%s\".", partName );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't find part \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -478,8 +467,7 @@ void	WILDThisStackInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		strncpy( inContext->errMsg, "No stack open at the moment.", sizeof(inContext->errMsg) );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -498,8 +486,7 @@ void	WILDThisBackgroundInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		strncpy( inContext->errMsg, "No stack open at the moment.", sizeof(inContext->errMsg) );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -518,8 +505,7 @@ void	WILDThisCardInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		strncpy( inContext->errMsg, "No stack open at the moment.", sizeof(inContext->errMsg) );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;

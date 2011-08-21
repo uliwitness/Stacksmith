@@ -35,8 +35,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 	
 	if( !canGoThere )
 	{
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't go there." );
-		inContext->keepRunning = false;
+		LEOContextStopWithError( inContext, "Can't go there." );
 	}
 	
 	WILDStack			*	frontStack = [WILDDocument frontStackNamed: nil];

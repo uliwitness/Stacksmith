@@ -25,8 +25,7 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 		id propValueObj = [(id<WILDObject>)objectValue->object.object valueForWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]];
 		if( !propValueObj )
 		{
-			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Object does not have property \"%s\".", propNameStr );
-			inContext->keepRunning = false;
+			LEOContextStopWithError( inContext,"Object does not have property \"%s\".", propNameStr );
 			return;
 		}
 		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
@@ -80,8 +79,7 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 		}
 		else
 		{
-			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Internal Error: property '%s' returned unknown value.", propNameStr );
-			inContext->keepRunning = false;
+			LEOContextStopWithError( inContext, "Internal Error: property '%s' returned unknown value.", propNameStr );
 			return;
 		}
 	}
@@ -95,8 +93,7 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 		}
 		else
 		{
-			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Can't get property \"%s\" of this.", propNameStr );
-			inContext->keepRunning = false;
+			LEOContextStopWithError( inContext, "Can't get property \"%s\" of this.", propNameStr );
 			return;
 		}
 	}
@@ -156,15 +153,13 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 		@try {
 			if( ![(id<WILDObject>)theObjectValue->object.object setValue: theObjCValue forWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]] )
 			{
-				snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Object does not have property \"%s\".", propNameStr );
-				inContext->keepRunning = false;
+				LEOContextStopWithError( inContext, "Object does not have property \"%s\".", propNameStr );
 				return;
 			}
 		}
 		@catch( NSException* exc )
 		{
-			snprintf( inContext->errMsg, sizeof(inContext->errMsg), "Error retrieving property \"%s\": %s", propNameStr, [[exc reason] UTF8String] );
-			inContext->keepRunning = false;
+			LEOContextStopWithError( inContext, "Error retrieving property \"%s\": %s", propNameStr, [[exc reason] UTF8String] );
 			return;
 		}
 	}

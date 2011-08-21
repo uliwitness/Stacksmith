@@ -36,8 +36,7 @@ void	LEOPrintInstruction( LEOContext* inContext )
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
 	if( theValue == NULL || theValue->base.isa == NULL )
 	{
-		inContext->keepRunning = false;
-		snprintf( inContext->errMsg, sizeof(inContext->errMsg) -1, "Internal error: Invalid value." );
+		LEOContextStopWithError( inContext, "Internal error: Invalid value." );
 		return;
 	}
 	LEOGetValueAsString( theValue, buf, sizeof(buf), inContext );

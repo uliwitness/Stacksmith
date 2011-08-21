@@ -102,6 +102,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		LEOInitContext( &ctx, [frontDoc contextGroup] );
 		#if REMOTE_DEBUGGER
 		ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
+		ctx.promptProc = LEORemoteDebuggerPrompt;
 		#endif
 		
 		LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
