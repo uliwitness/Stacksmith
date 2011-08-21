@@ -36,7 +36,7 @@
 	if( autoHighlight && isInside )
 		[[self cell] setHighlighted: YES];
 	
-	WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseDown" );
+	WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseDown %ld", [event buttonNumber] +1 );
 	
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	
@@ -56,7 +56,7 @@
 				case NSLeftMouseDragged:
 				case NSRightMouseDragged:
 				case NSOtherMouseDragged:
-					WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseStillDown" );
+					WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseDragged %ld", [evt buttonNumber] +1 );
 					newIsInside = [[self cell] hitTestForEvent: evt inRect: [self bounds] ofView: self] != NSCellHitNone;
 					if( isInside != newIsInside )
 					{
@@ -77,11 +77,11 @@
 	{
 		if( autoHighlight )
 			[[self cell] setHighlighted: NO];
-		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUp" );
+		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUp %ld", [event buttonNumber] +1 );
 		[[self target] performSelector: [self action]];
 	}
 	else
-		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUpOutside" );
+		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUpOutside %ld", [event buttonNumber] +1 );
 	
 	[pool release];
 }
