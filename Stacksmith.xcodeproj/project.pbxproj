@@ -258,6 +258,8 @@
 		55C8D05213EF604000B502C5 /* NSColor+ULICGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8D05113EF604000B502C5 /* NSColor+ULICGColor.m */; };
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
+		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
+		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
 		55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */; };
@@ -812,6 +814,8 @@
 		55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardWindowController.h; path = Document/WILDCardWindowController.h; sourceTree = "<group>"; };
 		55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardWindowController.m; path = Document/WILDCardWindowController.m; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
+		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D6B257115C16E700D17619 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDTextView.h; sourceTree = "<group>"; };
 		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
@@ -1053,6 +1057,8 @@
 				55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */,
 				55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */,
 				555BA0DA138DC9CB00B3B1D8 /* PlaceholderMovie.mov */,
+				55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */,
+				55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1862,6 +1868,8 @@
 				5585034813E886AC00FD244C /* WILDFieldInfoViewController.xib in Resources */,
 				5585034913E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib in Resources */,
 				5532EE3713F1E66D001A0B28 /* WILDContentsEditorWindowController.xib in Resources */,
+				55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */,
+				55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2198,6 +2206,22 @@
 				55C88B031332D05B00ACB615 /* English */,
 			);
 			name = WILDCardInfoWindowController.xib;
+			sourceTree = "<group>";
+		};
+		55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55D5865C140D9C9D0095129C /* English */,
+			);
+			name = NE_SW_ResizeCursor.tiff;
+			sourceTree = "<group>";
+		};
+		55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55D5865E140D9C9D0095129C /* English */,
+			);
+			name = NW_SE_ResizeCursor.tiff;
 			sourceTree = "<group>";
 		};
 		55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */ = {

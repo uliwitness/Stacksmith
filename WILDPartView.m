@@ -1803,14 +1803,20 @@
 		NSRect	bottomEdgeRect = [self rectForGrabHandle: WILDPartGrabHandleBottom];
 		[self addCursorRect: bottomEdgeRect cursor: [NSCursor resizeUpDownCursor]];
 		
+		NSImage		*	nwSeImage = [NSImage imageNamed: @"NW_SE_ResizeCursor"];
+		[nwSeImage setSize: NSMakeSize(16, 16)];
+		NSImage		*	neSwImage = [NSImage imageNamed: @"NE_SW_ResizeCursor"];
+		[neSwImage setSize: NSMakeSize(16, 16)];
+		NSCursor	*	nwSeResizeCursor = [[[NSCursor alloc] initWithImage: nwSeImage hotSpot:NSMakePoint(8, 8)] autorelease];
+		NSCursor	*	neSwResizeCursor = [[[NSCursor alloc] initWithImage: neSwImage hotSpot:NSMakePoint(8, 8)] autorelease];
 		NSRect	topLeftRect = [self rectForGrabHandle: WILDPartGrabHandleLeft | WILDPartGrabHandleTop];
-		[self addCursorRect: topLeftRect cursor: [NSCursor crosshairCursor]];
+		[self addCursorRect: topLeftRect cursor: nwSeResizeCursor];
 		NSRect	bottomLeftRect = [self rectForGrabHandle: WILDPartGrabHandleLeft | WILDPartGrabHandleBottom];
-		[self addCursorRect: bottomLeftRect cursor: [NSCursor crosshairCursor]];
+		[self addCursorRect: bottomLeftRect cursor: neSwResizeCursor];
 		NSRect	topRightRect = [self rectForGrabHandle: WILDPartGrabHandleRight | WILDPartGrabHandleTop];
-		[self addCursorRect: topRightRect cursor: [NSCursor crosshairCursor]];
+		[self addCursorRect: topRightRect cursor: neSwResizeCursor];
 		NSRect	bottomRightRect = [self rectForGrabHandle: WILDPartGrabHandleRight | WILDPartGrabHandleBottom];
-		[self addCursorRect: bottomRightRect cursor: [NSCursor crosshairCursor]];
+		[self addCursorRect: bottomRightRect cursor: nwSeResizeCursor];
 	}
 	else
 		[self addCursorRect: [self visibleRect] cursor: currentCursor];
