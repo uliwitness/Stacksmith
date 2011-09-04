@@ -40,6 +40,7 @@
 
 @synthesize mainView = mMainView;
 @synthesize helperView = mHelperView;
+@synthesize isBackgroundEditing = mIsBackgroundEditing;
 
 -(id)	initWithFrame: (NSRect)frameRect
 {
@@ -47,6 +48,7 @@
 	{
 		
 	}
+	
 	return self;
 }
 

@@ -68,6 +68,24 @@
 }
 
 
+-(void)	namePropertyWillChangeOfPart: (WILDPart*)inPart
+{
+	[self refreshProperties];
+}
+
+
+-(void)	textAlignmentPropertyWillChangeOfPart: (WILDPart*)inPart
+{
+	[self refreshProperties];
+}
+
+
+-(void)	showNamePropertyWillChangeOfPart: (WILDPart*)inPart
+{
+	[self refreshProperties];
+}
+
+
 -(void)	removeSubviews
 {
 	[mMainView removeFromSuperview];

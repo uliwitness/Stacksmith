@@ -44,6 +44,7 @@ typedef enum
 
 @property (assign) NSView*			mainView;
 @property (assign) NSView*			helperView;
+@property (assign) BOOL				isBackgroundEditing;
 
 -(void)			setPart: (WILDPart*)inPart;
 -(WILDPart*)	part;

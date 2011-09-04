@@ -198,6 +198,8 @@
 		555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103613881DB700E26037 /* UKPaintShapeTool.tiff */; };
 		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
 		555F104613893CDC00E26037 /* BrowseTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 555F104413893CDC00E26037 /* BrowseTool.png */; };
+		555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */; };
+		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
 		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
 		5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = 5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */; };
 		556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */; };
@@ -714,6 +716,10 @@
 		555F103613881DB700E26037 /* UKPaintShapeTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintShapeTool.tiff; path = ../UKPaintView/UKPaintShapeTool.tiff; sourceTree = "<group>"; };
 		555F103713881DB700E26037 /* UKPaintTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintTextTool.tiff; path = ../UKPaintView/UKPaintTextTool.tiff; sourceTree = "<group>"; };
 		555F104513893CDC00E26037 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/BrowseTool.png; sourceTree = "<group>"; };
+		555FDFCB1412AA4D00A035E7 /* WILDTextFieldPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTextFieldPresenter.h; path = Presentation/WILDTextFieldPresenter.h; sourceTree = "<group>"; };
+		555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTextFieldPresenter.m; path = Presentation/WILDTextFieldPresenter.m; sourceTree = "<group>"; };
+		555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UTF8UTF32Utilities.c; path = ../../../Leonie/generic/UTF8UTF32Utilities.c; sourceTree = "<group>"; };
+		555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF8UTF32Utilities.h; path = ../../../Leonie/generic/UTF8UTF32Utilities.h; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeGlobalPropertiesStacksmith.m; path = Instructions/ForgeGlobalPropertiesStacksmith.m; sourceTree = SOURCE_ROOT; };
 		556866591359C5BF00C364D6 /* LEOGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOGlobalProperties.h; path = ../../../Leonie/generic/LEOGlobalProperties.h; sourceTree = "<group>"; };
 		5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOGlobalProperties.c; path = ../../../Leonie/generic/LEOGlobalProperties.c; sourceTree = "<group>"; };
@@ -1079,6 +1085,8 @@
 				552028D7140165D4000EEA4F /* WILDPartPresenter.m */,
 				552028DA14016880000EEA4F /* WILDPushbuttonPresenter.h */,
 				552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */,
+				555FDFCB1412AA4D00A035E7 /* WILDTextFieldPresenter.h */,
+				555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */,
 			);
 			name = "Part Presenters";
 			sourceTree = "<group>";
@@ -1148,6 +1156,8 @@
 				553C46A213577334000219FA /* CVariableEntry.h */,
 				553C46A313577334000219FA /* CVariableEntry.cpp */,
 				553C46A413577334000219FA /* UTF32CaseTables.h */,
+				555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */,
+				555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */,
 				553C46A513577334000219FA /* CToken.h */,
 				553C46A613577334000219FA /* CToken.cpp */,
 				553C46A713577334000219FA /* CParser.h */,
@@ -2056,6 +2066,8 @@
 				5532EE3413F1E2B6001A0B28 /* WILDContentsEditorWindowController.m in Sources */,
 				552028D8140165D5000EEA4F /* WILDPartPresenter.m in Sources */,
 				552028DC14016880000EEA4F /* WILDPushbuttonPresenter.m in Sources */,
+				555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */,
+				555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
