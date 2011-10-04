@@ -60,6 +60,8 @@
 	SEL				theAction = NSSelectorFromString( [propName stringByAppendingString: @"PropertyDidChangeOfPart:"] );
 	if( [self respondsToSelector: theAction] )
 		[self performSelector: theAction withObject: thePart];
+	else
+		[self refreshProperties];
 }
 
 @end

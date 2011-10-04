@@ -19,16 +19,9 @@
 {
 	if( !mScrollView )
 	{
-		WILDPart		*	currPart = [mPartView part];
-		WILDPartContents*	contents = nil;
-		WILDPartContents*	bgContents = nil;
-		
-		contents = [mPartView currentPartContentsAndBackgroundContents: &bgContents create: NO];
-
+		WILDPart	*	currPart = [mPartView part];
 		NSRect			partRect = [currPart rectangle];
-		[mPartView setHidden: ![currPart visible]];
 		[mPartView setWantsLayer: YES];
-		[mPartView setPart: currPart];
 		partRect.origin = NSMakePoint( 2, 2 );
 		
 		mTextView = [[WILDTextView alloc] initWithFrame: partRect];
@@ -37,116 +30,127 @@
 		[mTextView setDrawsBackground: NO];
 		[mTextView setUsesFindPanel: NO];
 		[mTextView setDelegate: self];
-		[mTextView setAlignment: [currPart textAlignment]];
-		if( [currPart wideMargins] )
-			[mTextView setTextContainerInset: NSMakeSize( 5, 2 )];
 		[mTextView setRepresentedPart: currPart];
-		
-		NSAttributedString*	attrStr = [contents styledTextForPart: currPart];
-		if( attrStr )
-			[[mTextView textStorage] setAttributedString: attrStr];
-		else
-		{
-			NSString*	theText = [contents text];
-			if( theText )
-				[mTextView setString: [contents text]];
-		}
-		
-		// A field can be edited if:
-		//	It is a card field and its lockText is FALSE.
-		//	It is a bg field, its lockText is FALSE its sharedText is TRUE and we're editing the background.
-		//	It is a bg field, its lockText is FALSE and its sharedText is FALSE.
-		BOOL		shouldBeEditable = ![currPart lockText] && (![currPart sharedText] || [mPartView isBackgroundEditing]);
-		if( ![currPart isEnabled] )
-			shouldBeEditable = NO;
-		[mTextView setEditable: shouldBeEditable];
-		[mTextView setSelectable: shouldBeEditable];
-		
+				
 		mScrollView = [[WILDScrollView alloc] initWithFrame: partRect];
 		[mScrollView setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
 		[mScrollView setWantsLayer: YES];
 		NSRect			txBox = partRect;
 		txBox.origin = NSZeroPoint;
-		if( [[currPart style] isEqualToString: @"transparent"] )
-		{
-			[mScrollView setBorderType: NSNoBorder];
-			[mScrollView setDrawsBackground: NO];
-			[mTextView setDrawsBackground: NO];
-		}
-		else if( [[currPart style] isEqualToString: @"opaque"] )
-		{
-			[mScrollView setBorderType: NSNoBorder];
-			[mScrollView setBackgroundColor: [NSColor whiteColor]];
-		}
-		else if( [[currPart style] isEqualToString: @"standard"] )
-		{
-			[mScrollView setBorderType: NSBezelBorder];
-			[mScrollView setBackgroundColor: [NSColor whiteColor]];
-		}
-		else if( [[currPart style] isEqualToString: @"roundrect"] )
-		{
-			[mScrollView setBorderType: NSBezelBorder];
-			[mScrollView setBackgroundColor: [NSColor whiteColor]];
-		}
-		else if( [[currPart style] isEqualToString: @"scrolling"] )
-		{
-			txBox.size.width -= 15;
-			[mScrollView setBorderType: NSLineBorder];
-			[mScrollView setBackgroundColor: [NSColor whiteColor]];
-		}
-		else
-		{
-			[mScrollView setBorderType: NSLineBorder];
-			[mScrollView setBackgroundColor: [currPart fillColor]];
-			[mScrollView setLineColor: [currPart lineColor]];
-		}
-		[mScrollView setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
-		[mScrollView setHasVerticalScroller: [currPart hasVerticalScroller]];
-		[mScrollView setHorizontalScrollElasticity: [currPart hasHorizontalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
-		[mScrollView setHasHorizontalScroller: [currPart hasHorizontalScroller]];
-
-		NSColor	*	shadowColor = [currPart shadowColor];
-		if( [shadowColor alphaComponent] > 0.0 )
-		{
-			CGColorRef theColor = [shadowColor CGColor];
-			[[mScrollView layer] setShadowColor: theColor];
-			[[mScrollView layer] setShadowOpacity: 1.0];
-			[[mScrollView layer] setShadowOffset: [currPart shadowOffset]];
-			[[mScrollView layer] setShadowRadius: [currPart shadowBlurRadius]];
-		}
-		else
-			[[mScrollView layer] setShadowOpacity: 0.0];
 
 		[mTextView setFrame: txBox];
 		[mScrollView setDocumentView: mTextView];
 		[mScrollView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 		[mPartView addSubview: mScrollView];
-		[mPartView setHelperView: mScrollView];
-		[mPartView setMainView: mTextView];
 	}
+	
+	[self refreshProperties];
 }
 
 
 -(void)	refreshProperties
 {
-	WILDPart	*	currPart = [mPartView part];
+	WILDPart		*	currPart = [mPartView part];
+	WILDPartContents*	contents = nil;
+	WILDPartContents*	bgContents = nil;
 	
+	contents = [mPartView currentPartContentsAndBackgroundContents: &bgContents create: NO];
+
+	[mPartView setHidden: ![currPart visible]];
+	[mTextView setAlignment: [currPart textAlignment]];
+	if( [currPart wideMargins] )
+		[mTextView setTextContainerInset: NSMakeSize( 5, 2 )];
+	
+	// A field can be edited if:
+	//	It is a card field and its lockText is FALSE.
+	//	It is a bg field, its lockText is FALSE its sharedText is TRUE and we're editing the background.
+	//	It is a bg field, its lockText is FALSE and its sharedText is FALSE.
+	BOOL		shouldBeEditable = ![currPart lockText] && (![currPart sharedText] || [mPartView isBackgroundEditing]);
+	if( ![currPart isEnabled] )
+		shouldBeEditable = NO;
+	[mTextView setEditable: shouldBeEditable];
+	[mTextView setSelectable: shouldBeEditable];
+	
+	if( [[currPart style] isEqualToString: @"transparent"] )
+	{
+		[mScrollView setBorderType: NSNoBorder];
+		[mScrollView setDrawsBackground: NO];
+		[mTextView setDrawsBackground: NO];
+	}
+	else if( [[currPart style] isEqualToString: @"opaque"] )
+	{
+		[mScrollView setBorderType: NSNoBorder];
+		[mScrollView setBackgroundColor: [NSColor whiteColor]];
+	}
+	else if( [[currPart style] isEqualToString: @"standard"] )
+	{
+		[mScrollView setBorderType: NSBezelBorder];
+		[mScrollView setBackgroundColor: [NSColor whiteColor]];
+	}
+	else if( [[currPart style] isEqualToString: @"roundrect"] )
+	{
+		[mScrollView setBorderType: NSBezelBorder];
+		[mScrollView setBackgroundColor: [NSColor whiteColor]];
+	}
+	else if( [[currPart style] isEqualToString: @"scrolling"] )
+	{
+		[mScrollView setBorderType: NSLineBorder];
+		[mScrollView setBackgroundColor: [NSColor whiteColor]];
+	}
+	else
+	{
+		[mScrollView setBorderType: NSLineBorder];
+		[mScrollView setBackgroundColor: [currPart fillColor]];
+		[mScrollView setLineColor: [currPart lineColor]];
+	}
+	[mScrollView setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+	[mScrollView setHasVerticalScroller: [currPart hasVerticalScroller]];
+	[mScrollView setHorizontalScrollElasticity: [currPart hasHorizontalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+	[mScrollView setHasHorizontalScroller: [currPart hasHorizontalScroller]];
+
+	NSColor	*	shadowColor = [currPart shadowColor];
+	if( [shadowColor alphaComponent] > 0.0 )
+	{
+		CGColorRef theColor = [shadowColor CGColor];
+		[[mScrollView layer] setShadowColor: theColor];
+		[[mScrollView layer] setShadowOpacity: 1.0];
+		[[mScrollView layer] setShadowOffset: [currPart shadowOffset]];
+		[[mScrollView layer] setShadowRadius: [currPart shadowBlurRadius]];
+	}
+	else
+		[[mScrollView layer] setShadowOpacity: 0.0];
+	
+	NSAttributedString*	attrStr = [contents styledTextForPart: currPart];
+	if( attrStr )
+		[[mTextView textStorage] setAttributedString: attrStr];
+	else
+	{
+		NSString*	theText = [contents text];
+		if( theText )
+			[mTextView setString: [contents text]];
+	}
 }
 
 
--(void)	namePropertyWillChangeOfPart: (WILDPart*)inPart
+-(void)	namePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }
 
 
--(void)	textAlignmentPropertyWillChangeOfPart: (WILDPart*)inPart
+-(void)	textAlignmentPropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }
 
 
--(void)	showNamePropertyWillChangeOfPart: (WILDPart*)inPart
+-(void)	showNamePropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	[self refreshProperties];
+}
+
+
+-(void)	textPropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }

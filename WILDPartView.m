@@ -29,6 +29,7 @@
 #import "LEOContextGroup.h"
 #import "LEOScript.h"
 #import "WILDPushbuttonPresenter.h"
+#import "WILDTextFieldPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 
@@ -1016,7 +1017,11 @@
 {
 	[mPartPresenter removeSubviews];
 	DESTROY(mPartPresenter);
-	mPartPresenter = [[WILDPushbuttonPresenter alloc] initWithPartView: self];
+	if( [[mPart partType] isEqualToString: @"button"] )
+		mPartPresenter = [[WILDPushbuttonPresenter alloc] initWithPartView: self];
+	else if( [[mPart partType] isEqualToString: @"field"] )
+		mPartPresenter = [[WILDTextFieldPresenter alloc] initWithPartView: self];
+	[mPartPresenter createSubviews];
 }
 
 
@@ -1055,6 +1060,7 @@
 	SEL				theAction = NSSelectorFromString( [propName stringByAppendingString: @"PropertyWillChangeOfPart:"] );
 	if( [self respondsToSelector: theAction] )
 		[self performSelector: theAction withObject: thePart];
+	[mPartPresenter partWillChange: notif];
 }
 
 
@@ -1065,18 +1071,14 @@
 	SEL				theAction = NSSelectorFromString( [propName stringByAppendingString: @"PropertyDidChangeOfPart:"] );
 	if( [self respondsToSelector: theAction] )
 		[self performSelector: theAction withObject: thePart];
+	if( mPartPresenter )
+		[mPartPresenter partDidChange: notif];
 	else	// Unknown property. Reload the whole thing.
 	{
 		[self setFrame: NSInsetRect([mPart rectangle], -2, -2)];
 		[self unloadPart];
 		[self loadPart: mPart forBackgroundEditing: NO];
 	}
-}
-
-
--(void)	textPropertyDidChangeOfPart: (WILDPart*)inPart
-{
-	
 }
 
 
@@ -1672,12 +1674,14 @@
 	
 	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO];
 	
-	if( [[currPart partType] isEqualToString: @"button"] )
+	/*if( [[currPart partType] isEqualToString: @"button"] )
 		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	else if( [[currPart partType] isEqualToString: @"field"] )
 		[self loadField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
-	else if( [[currPart partType] isEqualToString: @"moviePlayer"] )
+	else*/ if( [[currPart partType] isEqualToString: @"moviePlayer"] )
 		[self loadMoviePlayer: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
+	else
+		[self setPart: mPart];
 }
 
 

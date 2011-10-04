@@ -27,6 +27,8 @@
 	}
 	
 	[mPartView addSubview: mMainView];
+	
+	[self refreshProperties];
 }
 
 
@@ -68,19 +70,19 @@
 }
 
 
--(void)	namePropertyWillChangeOfPart: (WILDPart*)inPart
+-(void)	namePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }
 
 
--(void)	textAlignmentPropertyWillChangeOfPart: (WILDPart*)inPart
+-(void)	textAlignmentPropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }
 
 
--(void)	showNamePropertyWillChangeOfPart: (WILDPart*)inPart
+-(void)	showNamePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }
