@@ -78,7 +78,7 @@
 		if( autoHighlight )
 			[[self cell] setHighlighted: NO];
 		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUp %ld", [event buttonNumber] +1 );
-		[[self target] performSelector: [self action]];
+		[[self target] performSelector: [self action] withObject: self];
 	}
 	else
 		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUpOutside %ld", [event buttonNumber] +1 );
