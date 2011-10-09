@@ -29,6 +29,7 @@
 #import "LEOContextGroup.h"
 #import "LEOScript.h"
 #import "WILDPushbuttonPresenter.h"
+#import "WILDPopUpButtonPresenter.h"
 #import "WILDTextFieldPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
@@ -1018,7 +1019,12 @@
 	[mPartPresenter removeSubviews];
 	DESTROY(mPartPresenter);
 	if( [[mPart partType] isEqualToString: @"button"] )
-		mPartPresenter = [[WILDPushbuttonPresenter alloc] initWithPartView: self];
+	{
+		if( [[mPart style] isEqualToString: @"popup"] )
+			mPartPresenter = [[WILDPopUpButtonPresenter alloc] initWithPartView: self];
+		else
+			mPartPresenter = [[WILDPushbuttonPresenter alloc] initWithPartView: self];
+	}
 	else if( [[mPart partType] isEqualToString: @"field"] )
 		mPartPresenter = [[WILDTextFieldPresenter alloc] initWithPartView: self];
 	[mPartPresenter createSubviews];

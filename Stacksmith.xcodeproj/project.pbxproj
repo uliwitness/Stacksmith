@@ -264,6 +264,7 @@
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
+		55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */; };
 		55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */; };
 		55E3A69E11503456008411BB /* CURS_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.png */; };
 		55E3A6FB11519B45008411BB /* HCSV.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6F911519B45008411BB /* HCSV.icns */; };
@@ -826,6 +827,8 @@
 		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
 		55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+centerHorizontallyAndVertically.m"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.m"; sourceTree = "<group>"; };
+		55D97B261441B5110060F774 /* WILDPopUpButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPopUpButtonPresenter.h; path = Presentation/WILDPopUpButtonPresenter.h; sourceTree = "<group>"; };
+		55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPopUpButtonPresenter.m; path = Presentation/WILDPopUpButtonPresenter.m; sourceTree = "<group>"; };
 		55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BuildVersionHeader; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E397E61322481500C3739D /* WILDObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectID.h; path = Model/WILDObjectID.h; sourceTree = "<group>"; };
 		55E397E71322520700C3739D /* NSFileManager+NameForTempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+NameForTempFile.h"; path = "../UliKit/NSFileManager+NameForTempFile.h"; sourceTree = "<group>"; };
@@ -1085,6 +1088,8 @@
 				552028D7140165D4000EEA4F /* WILDPartPresenter.m */,
 				552028DA14016880000EEA4F /* WILDPushbuttonPresenter.h */,
 				552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */,
+				55D97B261441B5110060F774 /* WILDPopUpButtonPresenter.h */,
+				55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */,
 				555FDFCB1412AA4D00A035E7 /* WILDTextFieldPresenter.h */,
 				555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */,
 			);
@@ -2068,6 +2073,7 @@
 				552028DC14016880000EEA4F /* WILDPushbuttonPresenter.m in Sources */,
 				555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */,
 				555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */,
+				55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
