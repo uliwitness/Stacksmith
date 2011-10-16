@@ -14,18 +14,7 @@
 #import "WILDNotifications.h"
 #import "Forge.h"
 #import "LEORemoteDebugger.h"
-
-
-static NSInteger UKMinimum( NSInteger a, NSInteger b )
-{
-	return ((a < b) ? a : b);
-}
-
-
-static NSInteger UKMaximum( NSInteger a, NSInteger b )
-{
-	return ((a > b) ? a : b);
-}
+#import "ULINSIntegerMath.h"
 
 
 @implementation WILDPart
@@ -892,12 +881,12 @@ static NSInteger UKMaximum( NSInteger a, NSInteger b )
 	if( inFlags & WILDSearchBackwards )
 	{
 		searchRange.location = 0;
-		searchRange.length = inContext.currentResultRange.location +UKMaximum(0,inContext.currentResultRange.length -1);
+		searchRange.length = inContext.currentResultRange.location +ULINSIntegerMaximum(0,inContext.currentResultRange.length -1);
 	}
 	else
 	{
 		// We advance by 1 only, so searches for "aaa" in "aaaa" give two results:
-		searchRange.location = inContext.currentResultRange.location +UKMinimum(1,inContext.currentResultRange.length);
+		searchRange.location = inContext.currentResultRange.location +ULINSIntegerMinimum(1,inContext.currentResultRange.length);
 		searchRange.length = [myText length] -searchRange.location;
 	}
 	

@@ -514,6 +514,7 @@
 		550C09E51196B9F200351067 /* WILDButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDButtonView.m; sourceTree = "<group>"; };
 		550C0A5C1196C52000351067 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScrollView.h; sourceTree = "<group>"; };
 		550C0A5D1196C52000351067 /* WILDScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScrollView.m; sourceTree = "<group>"; };
+		550ED181144B38DD00E528AA /* ULINSIntegerMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULINSIntegerMath.h; path = ../UliKit/ULINSIntegerMath.h; sourceTree = "<group>"; };
 		551B3E82131D957700BFCD45 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDLicensePanelController.xib; sourceTree = "<group>"; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
@@ -1354,6 +1355,7 @@
 		5542CE3C113ADFCE00555C64 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				550ED181144B38DD00E528AA /* ULINSIntegerMath.h */,
 				5542C94B1139DD5C00555C64 /* WILDXMLUtils.h */,
 				5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */,
 				5542CABF113A2CB300555C64 /* UKPBMImageRep.h */,
