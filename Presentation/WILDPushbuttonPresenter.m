@@ -94,4 +94,10 @@
 	DESTROY(mMainView);
 }
 
+
+-(NSRect)	selectionFrame
+{
+	return [[mPartView superview] convertRect: [mMainView bounds] fromView: mMainView];
+}
+
 @end

@@ -21,7 +21,7 @@
 @property (assign,getter=isHorizontal) BOOL		horizontal;
 @property (copy) NSColor*						color;
 
--(id)	wildGuideline;
++(id)	wildGuideline;
 
 -(void)	drawInView: (NSView*)inView;
 

@@ -64,4 +64,10 @@
 		[self refreshProperties];
 }
 
+
+-(NSRect)	selectionFrame
+{
+	return [mPartView frame];	// Sensible fallback.
+}
+
 @end

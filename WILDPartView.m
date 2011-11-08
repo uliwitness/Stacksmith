@@ -369,22 +369,27 @@
 
 -(NSRect)	selectionRect
 {
-	NSRect	mainFrame = [mMainView convertRect: [mMainView bounds] toView: [self superview]];
-	NSRect	helperFrame = NSZeroRect;
-	
-	if( mHelperView )
-		helperFrame = [self convertRect: [mHelperView frame] toView: [self superview]];
-	
-	if( [[mPart partType] isEqualToString: @"field"] )
-		return helperFrame;	// For fields, this is the scroll view around them.
-	else if( mHelperView )
-	{
-		helperFrame = [mHelperView convertRect: [mHelperView bounds] toView: [self superview]];
-	
-		return NSUnionRect( mainFrame, helperFrame );
-	}
+	if( mPartPresenter )
+		return [mPartPresenter selectionFrame];
 	else
-		return mainFrame;
+	{
+		NSRect	mainFrame = [mMainView convertRect: [mMainView bounds] toView: [self superview]];
+		NSRect	helperFrame = NSZeroRect;
+		
+		if( mHelperView )
+			helperFrame = [self convertRect: [mHelperView frame] toView: [self superview]];
+		
+		if( [[mPart partType] isEqualToString: @"field"] )
+			return helperFrame;	// For fields, this is the scroll view around them.
+		else if( mHelperView )
+		{
+			helperFrame = [mHelperView convertRect: [mHelperView bounds] toView: [self superview]];
+		
+			return NSUnionRect( mainFrame, helperFrame );
+		}
+		else
+			return mainFrame;
+	}
 }
 
 

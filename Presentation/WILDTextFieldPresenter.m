@@ -163,4 +163,10 @@
 	DESTROY(mScrollView);
 }
 
+
+-(NSRect)	selectionFrame
+{
+	return [[mPartView superview] convertRect: [mScrollView bounds] fromView: mScrollView];
+}
+
 @end

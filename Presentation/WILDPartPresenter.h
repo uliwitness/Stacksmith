@@ -18,14 +18,16 @@
 	WILDPartView	*	mPartView;
 }
 
--(id)	initWithPartView: (WILDPartView*)inPartView;
+-(id)		initWithPartView: (WILDPartView*)inPartView;
 
--(void)	createSubviews;
--(void)	refreshProperties;
--(void)	removeSubviews;
+-(void)		createSubviews;
+-(void)		refreshProperties;
+-(void)		removeSubviews;
 
--(void)	partWillChange: (NSNotification*)inPart;
--(void)	partDidChange: (NSNotification*)inPart;
+-(void)		partWillChange: (NSNotification*)inPart;
+-(void)		partDidChange: (NSNotification*)inPart;
+
+-(NSRect)	selectionFrame;	// Frame coord. system of the part view. I.e. local to part view's superview.
 
 @end
 
