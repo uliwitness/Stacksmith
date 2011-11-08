@@ -236,7 +236,11 @@
 		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
-		55AA46891378A68000D916E6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55AA46881378A68000D916E6 /* QuartzCore.framework */; };
+		55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */; };
+		55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */; };
+		55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4914668D6E00AB0F34 /* boing.aiff */; };
+		55A7BA4D14668D6E00AB0F34 /* flute.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4A14668D6E00AB0F34 /* flute.aiff */; };
+		55A7BA73146690AF00AB0F34 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */; };
 		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
 		55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */; };
 		55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55AE22E11346C99E000B5BBE /* Help.xstk */; };
@@ -416,7 +420,7 @@
 
 /* Begin PBXFileReference section */
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		13E42FBA07B3F13500E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		1DDD58290DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDCardWindowController.xib; sourceTree = "<group>"; };
 		1DDD582B0DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -781,7 +785,12 @@
 		55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoWindowController.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		55AA46881378A68000D916E6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = ../../../../../System/Library/Frameworks/QuartzCore.framework; sourceTree = "<group>"; };
+		55A7BA4514668D5900AB0F34 /* ULIMelodyQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIMelodyQueue.h; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.h; sourceTree = "<group>"; };
+		55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIMelodyQueue.m; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.m; sourceTree = "<group>"; };
+		55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = harpsichord.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/harpsichord.aiff; sourceTree = "<group>"; };
+		55A7BA4914668D6E00AB0F34 /* boing.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = boing.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/boing.aiff; sourceTree = "<group>"; };
+		55A7BA4A14668D6E00AB0F34 /* flute.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = flute.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/flute.aiff; sourceTree = "<group>"; };
+		55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
@@ -917,8 +926,8 @@
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
 				553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */,
-				55AA46891378A68000D916E6 /* QuartzCore.framework in Frameworks */,
 				55F633841397E7110047BD3C /* Sparkle.framework in Frameworks */,
+				55A7BA73146690AF00AB0F34 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -933,8 +942,8 @@
 				55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */,
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
-				55AA46881378A68000D916E6 /* QuartzCore.framework */,
 				55F633831397E7110047BD3C /* Sparkle.framework */,
+				55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */,
 				553EB403131C83C6008BFBCE /* libcrypto.dylib */,
 			);
 			name = "Linked Frameworks";
@@ -1067,6 +1076,9 @@
 				55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */,
 				55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */,
 				555BA0DA138DC9CB00B3B1D8 /* PlaceholderMovie.mov */,
+				55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */,
+				55A7BA4914668D6E00AB0F34 /* boing.aiff */,
+				55A7BA4A14668D6E00AB0F34 /* flute.aiff */,
 				55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */,
 				55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */,
 			);
@@ -1398,6 +1410,8 @@
 				55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */,
 				55C8D05013EF604000B502C5 /* NSColor+ULICGColor.h */,
 				55C8D05113EF604000B502C5 /* NSColor+ULICGColor.m */,
+				55A7BA4514668D5900AB0F34 /* ULIMelodyQueue.h */,
+				55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1887,6 +1901,9 @@
 				5532EE3713F1E66D001A0B28 /* WILDContentsEditorWindowController.xib in Resources */,
 				55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */,
 				55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */,
+				55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */,
+				55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */,
+				55A7BA4D14668D6E00AB0F34 /* flute.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2076,6 +2093,7 @@
 				555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */,
 				555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */,
 				55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */,
+				55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
