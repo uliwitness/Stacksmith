@@ -9,6 +9,7 @@
 #import "WILDMoviePlayerInfoViewController.h"
 #import "WILDNotifications.h"
 #import <QTKit/QTKit.h>
+#import "UKHelperMacros.h"
 
 
 @implementation WILDMoviePlayerInfoViewController

@@ -42,6 +42,8 @@
 #import "ULIPaintShapeTool.h"
 #import "WILDToolsPalette.h"
 
+#import "UKHelperMacros.h"
+
 
 @interface WILDCardViewController () <ULIPaintViewDelegate>
 

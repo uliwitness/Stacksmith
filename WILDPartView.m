@@ -34,6 +34,7 @@
 #import "WILDCheckboxRadioPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
+#import "UKHelperMacros.h"
 
 
 @class WILDCardView;
@@ -59,17 +60,17 @@
 -(void)	dealloc
 {
 	[mCurrentPopover close];
-	DESTROY(mCurrentPopover);
+	DESTROY_DEALLOC(mCurrentPopover);
 	if( mMouseEventTrackingArea )
 	{
 		[self removeTrackingArea: mMouseEventTrackingArea];
-		DESTROY(mMouseEventTrackingArea);
+		DESTROY_DEALLOC(mMouseEventTrackingArea);
 	}
 	
 	[[WILDTools sharedTools] removeClient: self];
 	[self unsubscribeNotifications];
 	[mPartPresenter removeSubviews];
-	DESTROY(mPartPresenter);
+	DESTROY_DEALLOC(mPartPresenter);
 	
 	[super dealloc];
 }

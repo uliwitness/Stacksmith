@@ -9,6 +9,7 @@
 #import "WILDCheckboxRadioPresenter.h"
 #import "WILDPart.h"
 #import "WILDPartView.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDCheckboxRadioPresenter

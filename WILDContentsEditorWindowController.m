@@ -11,6 +11,7 @@
 #import "WILDCardView.h"
 #import "WILDNotifications.h"
 #import "NSWindow+ULIZoomEffect.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDContentsEditorWindowController

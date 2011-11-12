@@ -9,6 +9,7 @@
 #import "WILDLayerInfoWindowController.h"
 #import "WILDScriptEditorWindowController.h"
 #import "WILDCardView.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDLayerInfoWindowController

@@ -10,6 +10,7 @@
 #import "WILDDocument.h"
 #import "Forge.h"
 #import "ForgeWILDObjectValue.h"
+#import "UKHelperMacros.h"
 
 
 static WILDMessageBox*	sSharedMessageBox = nil;

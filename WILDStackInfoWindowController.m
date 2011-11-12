@@ -10,6 +10,7 @@
 #import "WILDScriptEditorWindowController.h"
 #import "WILDCardView.h"
 #import "WILDStack.h"
+#import "UKHelperMacros.h"
 
 
 static NSSize		sPopUpMenuSizes[] =

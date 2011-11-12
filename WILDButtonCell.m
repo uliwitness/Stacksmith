@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Carbon/Carbon.h>
 #import "UKGraphics.h"
+#import "UKHelperMacros.h"
 
 
 NSImage*	WILDInvertedImage( NSImage* img )
@@ -43,7 +44,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 
 -(void)	dealloc
 {
-	DESTROY(lineColor);
+	DESTROY_DEALLOC(lineColor);
 	
 	[super dealloc];
 }

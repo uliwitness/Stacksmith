@@ -9,7 +9,7 @@
 
 #import "Forge.h"
 #import "ForgeWILDObjectValue.h"
-
+#import <Foundation/Foundation.h>
 
 void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 {

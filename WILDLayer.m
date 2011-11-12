@@ -15,6 +15,7 @@
 #import "WILDNotifications.h"
 #import "UKRandomInteger.h"
 #import "Forge.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDLayer

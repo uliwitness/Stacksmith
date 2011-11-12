@@ -7,6 +7,8 @@
 //
 
 #include "LEOValue.h"
+#import <Foundation/Foundation.h>
+#import "UKHelperMacros.h"
 
 
 extern struct LEOValueType	kLeoValueTypeWILDObject;

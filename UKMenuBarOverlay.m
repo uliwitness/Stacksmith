@@ -7,6 +7,7 @@
 //
 
 #import "UKMenuBarOverlay.h"
+#import "UKHelperMacros.h"
 
 
 @interface UKMenuBarOverlayView : NSView
@@ -24,8 +25,7 @@
 -(void)	dealloc
 {
 	[mAnimationTimer invalidate];
-	[mAnimationTimer release];
-	mAnimationTimer = nil;
+	DESTROY_DEALLOC(mAnimationTimer);
 	
 	[super dealloc];
 }
@@ -47,8 +47,7 @@
 -(void)	viewWillMoveToSuperview: (NSView*)theView
 {
 	[mAnimationTimer invalidate];
-	[mAnimationTimer release];
-	mAnimationTimer = nil;
+	DESTROY(mAnimationTimer);
 	
 	if( theView )
 		mAnimationTimer = [[NSTimer scheduledTimerWithTimeInterval: 0.05 target: self selector: @selector(doAnimation:) userInfo: nil repeats: YES] retain];

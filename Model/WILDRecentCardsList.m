@@ -7,6 +7,7 @@
 //
 
 #import "WILDRecentCardsList.h"
+#import "UKHelperMacros.h"
 
 
 static WILDRecentCardsList	*	sSharedRecentCardsList = nil;

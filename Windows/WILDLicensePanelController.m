@@ -8,6 +8,7 @@
 
 #import "WILDLicensePanelController.h"
 #import "UKLicense.h"
+#import "UKHelperMacros.h"
 
 
 static WILDLicensePanelController	*	sCurrentLicensePanel = nil;

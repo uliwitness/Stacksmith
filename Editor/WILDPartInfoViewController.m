@@ -11,6 +11,7 @@
 #import "WILDContentsEditorWindowController.h"
 #import "WILDPart.h"
 #import "WILDNotifications.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDPartInfoViewController

@@ -9,6 +9,7 @@
 #import "WILDFieldInfoViewController.h"
 #import "WILDNotifications.h"
 #import "WILDIconPickerViewController.h"
+#import "UKHelperMacros.h"
 
 
 static 	NSArray*	sStylesInMenuOrder = nil;

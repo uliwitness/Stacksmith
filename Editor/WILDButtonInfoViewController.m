@@ -9,6 +9,7 @@
 #import "WILDButtonInfoViewController.h"
 #import "WILDNotifications.h"
 #import "WILDIconPickerViewController.h"
+#import "UKHelperMacros.h"
 
 
 static 	NSArray*	sStylesInMenuOrder = nil;
@@ -27,14 +28,14 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 -(void)	dealloc
 {
 	[mIconPopover close];
-	DESTROY(mIconPopover);
-	DESTROY(mStylePopUp);
-	DESTROY(mFamilyPopUp);
-	DESTROY(mShowNameSwitch);
-	DESTROY(mAutoHighlightSwitch);
-	DESTROY(mHighlightedSwitch);
-	DESTROY(mSharedHighlightSwitch);
-	DESTROY(mIconButton);
+	DESTROY_DEALLOC(mIconPopover);
+	DESTROY_DEALLOC(mStylePopUp);
+	DESTROY_DEALLOC(mFamilyPopUp);
+	DESTROY_DEALLOC(mShowNameSwitch);
+	DESTROY_DEALLOC(mAutoHighlightSwitch);
+	DESTROY_DEALLOC(mHighlightedSwitch);
+	DESTROY_DEALLOC(mSharedHighlightSwitch);
+	DESTROY_DEALLOC(mIconButton);
 	
 	[super dealloc];
 }

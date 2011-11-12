@@ -8,6 +8,7 @@
 
 #import "WILDScrollView.h"
 #import "WILDPartView.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDScrollView

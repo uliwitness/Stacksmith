@@ -10,6 +10,7 @@
 #import "UKLicense.h"
 #import "NSWindow+ULIZoomEffect.h"
 #import "StacksmithVersion.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDAboutPanelController

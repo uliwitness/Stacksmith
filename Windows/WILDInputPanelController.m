@@ -8,6 +8,7 @@
 
 #import "WILDInputPanelController.h"
 #import "NSStringDrawing+SizeWithRect.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDInputPanelController

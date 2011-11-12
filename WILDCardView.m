@@ -19,6 +19,7 @@
 #import "NSImage+NiceScaling.h"
 #import "WILDGuidelineView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UKHelperMacros.h"
 
 
 @implementation WILDCardView

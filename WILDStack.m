@@ -16,6 +16,7 @@
 #import "WILDNotifications.h"
 #import "Forge.h"
 #import <QTKit/QTKit.h>
+#import "UKHelperMacros.h"
 
 
 @implementation WILDStack

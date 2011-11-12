@@ -25,6 +25,7 @@
 #import "NSFileManager+NameForTempFile.h"
 #import "Forge.h"
 #import "WILDSearchPaths.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDDocument

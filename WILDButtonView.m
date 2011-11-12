@@ -9,6 +9,7 @@
 #import "WILDButtonView.h"
 #import "WILDPartView.h"
 #import "WILDScriptContainer.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDButtonView

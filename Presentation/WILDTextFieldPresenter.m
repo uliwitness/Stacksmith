@@ -11,6 +11,7 @@
 #import "WILDPartView.h"
 #import "WILDTextView.h"
 #import "WILDScrollView.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDTextFieldPresenter

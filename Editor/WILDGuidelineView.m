@@ -8,6 +8,7 @@
 
 #import "WILDGuidelineView.h"
 #import "WILDPartView.h"
+#import "UKHelperMacros.h"
 
 
 @interface WILDGuideline : NSObject

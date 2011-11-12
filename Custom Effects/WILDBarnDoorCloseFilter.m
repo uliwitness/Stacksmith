@@ -57,9 +57,9 @@ static CIKernel *sIrisFilterKernel = nil;
 
 -(void)	dealloc
 {
-	DESTROY(inputImage);
-	DESTROY(inputTargetImage);
-	DESTROY(inputTime);
+	DESTROY_DEALLOC(inputImage);
+	DESTROY_DEALLOC(inputTargetImage);
+	DESTROY_DEALLOC(inputTime);
 	
     [super dealloc];
 }

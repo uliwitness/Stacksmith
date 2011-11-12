@@ -7,6 +7,7 @@
 //
 
 #import "WILDSearchPaths.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDSearchPaths

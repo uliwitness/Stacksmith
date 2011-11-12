@@ -10,6 +10,7 @@
 #import "WILDXMLUtils.h"
 #import "WILDStack.h"
 #import "WILDPart.h"
+#import "UKHelperMacros.h"
 
 
 @interface WILDStyleRun : NSObject
