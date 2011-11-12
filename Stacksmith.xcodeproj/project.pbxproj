@@ -244,6 +244,7 @@
 		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
 		55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */; };
 		55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55AE22E11346C99E000B5BBE /* Help.xstk */; };
+		55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */; };
 		55B79A8813D0319A00BC0A19 /* ULIHighlightingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B79A8713D0319A00BC0A19 /* ULIHighlightingButton.m */; };
 		55B9220A11674E880073EC6C /* WILDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9220911674E880073EC6C /* WILDTools.m */; };
 		55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B9225C11675D270073EC6C /* Quartz.framework */; };
@@ -796,6 +797,8 @@
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
 		55ACBBBE1322EA890088609D /* WILDVisibleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDVisibleObject.h; path = Presentation/WILDVisibleObject.h; sourceTree = "<group>"; };
 		55AE22E11346C99E000B5BBE /* Help.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Help.xstk; sourceTree = "<group>"; };
+		55B296BD146DE5D6009E60CB /* WILDCheckboxRadioPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCheckboxRadioPresenter.h; path = Presentation/WILDCheckboxRadioPresenter.h; sourceTree = "<group>"; };
+		55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCheckboxRadioPresenter.m; path = Presentation/WILDCheckboxRadioPresenter.m; sourceTree = "<group>"; };
 		55B79A8613D0319900BC0A19 /* ULIHighlightingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIHighlightingButton.h; path = ../UliKit/ULIHighlightingButton.h; sourceTree = "<group>"; };
 		55B79A8713D0319A00BC0A19 /* ULIHighlightingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIHighlightingButton.m; path = ../UliKit/ULIHighlightingButton.m; sourceTree = "<group>"; };
 		55B9220811674E880073EC6C /* WILDTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTools.h; path = Presentation/WILDTools.h; sourceTree = "<group>"; };
@@ -1101,6 +1104,8 @@
 				552028D7140165D4000EEA4F /* WILDPartPresenter.m */,
 				552028DA14016880000EEA4F /* WILDPushbuttonPresenter.h */,
 				552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */,
+				55B296BD146DE5D6009E60CB /* WILDCheckboxRadioPresenter.h */,
+				55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */,
 				55D97B261441B5110060F774 /* WILDPopUpButtonPresenter.h */,
 				55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */,
 				555FDFCB1412AA4D00A035E7 /* WILDTextFieldPresenter.h */,
@@ -2094,6 +2099,7 @@
 				555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */,
 				55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */,
 				55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */,
+				55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

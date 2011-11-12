@@ -31,6 +31,7 @@
 #import "WILDPushbuttonPresenter.h"
 #import "WILDPopUpButtonPresenter.h"
 #import "WILDTextFieldPresenter.h"
+#import "WILDCheckboxRadioPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 
@@ -169,8 +170,6 @@
 -(void)	drawSelectionHighlightInView: (NSView*)overlayView
 {
 	NSRect	subviewFrame = [self selectionRect];
-	
-	[[NSColor keyboardFocusIndicatorColor] set];
 	NSRect	clampedBounds = subviewFrame;
 	clampedBounds.origin.x = truncf(clampedBounds.origin.x) + 0.5;
 	clampedBounds.origin.y = truncf(clampedBounds.origin.y) + 0.5;
@@ -193,13 +192,18 @@
 	
 	if( isMyTool && ![self isSelected] )
 	{
-		if( [[mPart style] isEqualToString: @"opaque"] )
+		BOOL	isOpaque = [[mPart style] isEqualToString: @"opaque"];
+		NSRect	outlineBox = NSInsetRect( subviewFrame, 0.5, 0.5 );
+		NSRect	lightOutlineBox = NSInsetRect( outlineBox, 1, 1 );
+		[NSBezierPath setDefaultLineWidth: 1];
+		[[NSColor colorWithCalibratedWhite: 1.0 alpha: 0.5] set];
+		[NSBezierPath strokeRect: lightOutlineBox];
+		
+		if( isOpaque )
 			[[[WILDTools sharedTools] peekPattern] set];
 		else
-			[[NSColor grayColor] set];
-		NSRect	peekBox = NSInsetRect( subviewFrame, 0.5, 0.5 );
-		[NSBezierPath setDefaultLineWidth: 1];
-		[NSBezierPath strokeRect: peekBox];
+			[[NSColor colorWithCalibratedWhite: 0.0 alpha: 0.5] set];
+		[NSBezierPath strokeRect: outlineBox];
 		[[NSColor blackColor] set];
 	}
     if( mPeeking && ([self myToolIsCurrent]
@@ -1027,6 +1031,8 @@
 	{
 		if( [[mPart style] isEqualToString: @"popup"] )
 			mPartPresenter = [[WILDPopUpButtonPresenter alloc] initWithPartView: self];
+		else if( [[mPart style] isEqualToString: @"radiobutton"] || [[mPart style] isEqualToString: @"checkbox"] )
+			mPartPresenter = [[WILDCheckboxRadioPresenter alloc] initWithPartView: self];
 		else
 			mPartPresenter = [[WILDPushbuttonPresenter alloc] initWithPartView: self];
 	}

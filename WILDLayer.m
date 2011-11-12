@@ -228,15 +228,19 @@
 	
 	for( WILDPart* currPart in peers )
 	{
-		BOOL	newState = (currPart == thePart);
+		WILDPartContents	*	contents = [currPart currentPartContentsAndBackgroundContents: nil create: YES onCard: inCard forBackgroundEditing: NO];
+		BOOL					newState = (currPart == thePart);
+		BOOL					isHighlighted = [currPart highlighted];
+		if( ![currPart sharedHighlight] && [[currPart partLayer] isEqualToString: @"background"] )
+			isHighlighted = [contents highlighted];
 		if( [currPart highlighted] != newState
 			|| currPart == thePart )	// Whack the clicked part over the head, in case NSButton turned something off we don't wanna, or if it's a non-toggling type of button we need to toggle manually.
 		{
-			[currPart setHighlighted: newState];
 			if( [currPart.partLayer isEqualToString: @"background"] && ![currPart sharedHighlight] )
 			{
-				[[inCard contentsForPart: currPart create: YES] setHighlighted: newState];
+				[contents setHighlighted: newState];
 			}
+			[currPart setHighlighted: newState];	// Must be after contents, as this triggers change notifications!
 			//NSLog( @"Family: Setting highlight of %@ to %s", [currPart displayName], newState?"true":"false" );
 		}
 	}
