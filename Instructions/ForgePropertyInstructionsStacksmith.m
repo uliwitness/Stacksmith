@@ -150,7 +150,8 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 			theObjCValue = [NSString stringWithUTF8String: theValueStr];
 		}
 		
-		@try {
+		@try
+		{
 			if( ![(id<WILDObject>)theObjectValue->object.object setValue: theObjCValue forWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr]] )
 			{
 				LEOContextStopWithError( inContext, "Object does not have property \"%s\".", propNameStr );
