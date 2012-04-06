@@ -7,7 +7,9 @@
 //
 
 #import "WILDAboutPanelController.h"
+#if REQUIRE_SERIAL_NUMBER
 #import "UKLicense.h"
+#endif // REQUIRE_SERIAL_NUMBER
 #import "NSWindow+ULIZoomEffect.h"
 #import "StacksmithVersion.h"
 #import "UKHelperMacros.h"
@@ -60,6 +62,7 @@
 {
     [super windowDidLoad];
     
+	#if REQUIRE_SERIAL_NUMBER
 	// Check serial number:
 	struct UKLicenseInfo	theInfo;
 	NSString			*	textString = [[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"];
@@ -84,6 +87,8 @@
 		[mLicenseeField setStringValue: person];
 		[mCompanyField setStringValue: company];
 	}
+	#endif // REQUIRE_SERIAL_NUMBER
+	
 	NSString*	version = [NSString stringWithFormat: @"%@ (%@)", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"], @SVN_VERSION ];
 	[mVersionField setStringValue: version];
 }

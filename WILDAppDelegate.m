@@ -12,7 +12,9 @@
 #import "WILDNotifications.h"
 #import "UKMenuBarOverlay.h"
 #import "WILDTools.h"
+#if REQUIRE_SERIAL_NUMBER
 #import "UKLicense.h"
+#endif
 #import "WILDLicensePanelController.h"
 #import "WILDAboutPanelController.h"
 #import "WILDMessageBox.h"
@@ -94,6 +96,7 @@
 
 -(void)	applicationDidFinishLaunching:(NSNotification *)notification	// This gets called *after* application:openFile:
 {
+	#if REQUIRE_SERIAL_NUMBER
 	// If we have no license key, check if there's one right next to the app:
 	//	Less hassle for distributing betas.
 	if( ![[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"] )
@@ -132,10 +135,12 @@
 		else
 			break;
 	}
+	#endif // REQUIRE_SERIAL_NUMBER
 }
 
 -(BOOL)	applicationShouldHandleReopen: (NSApplication *)sender hasVisibleWindows: (BOOL)hasVisibleWindows
 {
+#if REQUIRE_SERIAL_NUMBER
 	// Check serial number:
 	struct UKLicenseInfo	theInfo;
 	NSString			*	textString = [[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"];
@@ -156,6 +161,7 @@
 		if( [[person stringByTrimmingCharactersInSet: ws] length] == 0 )
 			exit(0);
 	}
+	#endif // REQUIRE_SERIAL_NUMBER
 
 	return !hasVisibleWindows;
 }
