@@ -2380,7 +2380,7 @@
 				INFOPLIST_PREFIX_HEADER = StacksmithVersion.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Stacksmith;
 				SDKROOT = macosx;
 			};
@@ -2429,7 +2429,7 @@
 				INFOPLIST_PREFIX_HEADER = StacksmithVersion.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Stacksmith;
 				SDKROOT = macosx;
 			};
