@@ -28,9 +28,19 @@
 #import "UKHelperMacros.h"
 
 
+/*!
+	@class WILDDocument
+*/
+
 @implementation WILDDocument
 
-- (id)init
+/*!
+	@method		init
+	@abstract	Default constructor, used both for loading stacks from disk and for creating a completely new stack on creation.
+	@seealso	-readFromURL:ofType:error:
+*/
+
+- (id)init;
 {
     self = [super init];
     if( self )
@@ -79,7 +89,12 @@
 }
 
 
--(void)	makeWindowControllers
+/*!
+	@method		makeWindowControllers
+	@abstract	Add a window controller for each stack's window.
+*/
+
+-(void)	makeWindowControllers;
 {
 	for( WILDStack* currStack in mStacks )
 	{
@@ -110,7 +125,12 @@
 //}
 
 
--(void)	fileHandle: (NSFileHandle*)fh ofImporterDidReadLine: (NSString*)currLine
+/*!
+	@method		fileHandle:ofImporterDidReadLine:
+	@abstract	Called to parse each line output by stackimport when importing a HyperCard stack. Fills our errors/warnings list and updates progress display.
+*/
+
+-(void)	fileHandle: (NSFileHandle*)fh ofImporterDidReadLine: (NSString*)currLine;
 {
 	if( !currLine )
 	{
@@ -139,7 +159,13 @@
 }
 
 
-- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error:(NSError **)outError
+/*!
+	@method		writeToURL:ofType:forSaveOperation:originalContentsURL:error:
+	@abstract	Write any changes to this document back out to disk.
+	@seealso	-readFromURL:ofType:error:
+*/
+
+- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
 {
 	if( ![[NSFileManager defaultManager] fileExistsAtPath: [absoluteURL path]] )
 	{
@@ -194,9 +220,14 @@
 }
 
 
--(void)	loadStandardResourceTableReturningError: (NSError**)outError
+/*!
+	@method		loadStandardResourceTableReturningError:
+	@abstract	Load built-in standard media table so others can access it: (ICONs, PICTs, CURSs and SNDs)
+	@param		outError		If en error occurs, this will return an error object.
+*/
+
+-(void)	loadStandardResourceTableReturningError: (NSError**)outError;
 {
-	// Load built-in standard picture table so others can access it: (ICONs, PICTs, CURSs and SNDs)
 	NSXMLDocument	*	stdDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"]]
 														options: 0 error: outError] autorelease];
 	NSXMLElement	*	stdStackfileElement = [stdDoc rootElement];
@@ -214,7 +245,14 @@
 }
 
 
-- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
+/*!
+	@method		readFromURL:ofType:error:
+	@abstract	Load data from a stack XML file into this stack object.
+	@seealso	-init
+	@seealso	-writeToURL:ofType:forSaveOperation:originalContentsURL:error:
+*/
+
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError;
 {
 	NSURL*		tocURL = absoluteURL;
 	BOOL		isDir = NO;
