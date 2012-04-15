@@ -12,10 +12,6 @@
 #import "WILDNotifications.h"
 #import "UKMenuBarOverlay.h"
 #import "WILDTools.h"
-#if REQUIRE_SERIAL_NUMBER
-#import "UKLicense.h"
-#endif
-#import "WILDLicensePanelController.h"
 #import "WILDAboutPanelController.h"
 #import "WILDMessageBox.h"
 #import "Forge.h"
@@ -94,78 +90,6 @@
 	[[NSColorPanel sharedColorPanel] setShowsAlpha: YES];
 }
 
--(void)	applicationDidFinishLaunching:(NSNotification *)notification	// This gets called *after* application:openFile:
-{
-	#if REQUIRE_SERIAL_NUMBER
-	// If we have no license key, check if there's one right next to the app:
-	//	Less hassle for distributing betas.
-	if( ![[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"] )
-	{
-		NSString*					appFolderPath = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
-		NSDirectoryEnumerator	*	fileEnny = [[NSFileManager defaultManager] enumeratorAtPath: appFolderPath];
-		for( NSString* subpath in fileEnny )
-		{
-			[fileEnny skipDescendants];
-			if( [[subpath pathExtension] isEqualToString: @"StacksmithLicense"] )
-			{
-				[self application: NSApp openFile: [appFolderPath stringByAppendingPathComponent: subpath]];
-				break;
-			}
-		}
-	}
-	
-	// Check serial number:
-	while( true )
-	{
-		struct UKLicenseInfo	theInfo;
-		NSString			*	textString = [[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"];
-		NSData				*	textData = [textString dataUsingEncoding: NSASCIIStringEncoding];
-		int						numBinaryBytes = UKBinaryLengthForReadableBytesOfLength( [textData length] );
-		NSMutableData		*	binaryBytes = [NSMutableData dataWithLength: numBinaryBytes];
-		UKBinaryDataForReadableBytesOfLength( [textData bytes], [textData length], [binaryBytes mutableBytes] );
-		UKGetLicenseData( [binaryBytes mutableBytes], [binaryBytes length], &theInfo );
-		
-		if( (theInfo.ukli_licenseFlags & UKLicenseFlagValid) == 0
-			|| (theInfo.ukli_licenseExpiration > 0 && CFAbsoluteTimeGetCurrent() > theInfo.ukli_licenseExpiration) )
-		{
-			WILDLicensePanelController	*	licenseSheet = [[WILDLicensePanelController alloc] init];
-			[licenseSheet runModal];
-			[licenseSheet release];
-		}
-		else
-			break;
-	}
-	#endif // REQUIRE_SERIAL_NUMBER
-}
-
--(BOOL)	applicationShouldHandleReopen: (NSApplication *)sender hasVisibleWindows: (BOOL)hasVisibleWindows
-{
-#if REQUIRE_SERIAL_NUMBER
-	// Check serial number:
-	struct UKLicenseInfo	theInfo;
-	NSString			*	textString = [[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"];
-	NSData				*	textData = [textString dataUsingEncoding: NSASCIIStringEncoding];
-	int						numBinaryBytes = UKBinaryLengthForReadableBytesOfLength( [textData length] );
-	NSMutableData		*	binaryBytes = [NSMutableData dataWithLength: numBinaryBytes];
-	UKBinaryDataForReadableBytesOfLength( [textData bytes], [textData length], [binaryBytes mutableBytes] );
-	UKGetLicenseData( [binaryBytes mutableBytes], [binaryBytes length], &theInfo );
-	
-	if( (theInfo.ukli_licenseFlags & UKLicenseFlagValid) == 0 )
-		exit(0);
-	else if( theInfo.ukli_licenseExpiration > 0 && CFAbsoluteTimeGetCurrent() > theInfo.ukli_licenseExpiration )
-		exit(0);
-	else
-	{
-		NSString	*	person = [[[NSString alloc] initWithBytes: theInfo.ukli_licenseeName length: 40 encoding: NSUTF8StringEncoding] autorelease];
-		NSCharacterSet*	ws = [NSCharacterSet whitespaceCharacterSet];
-		if( [[person stringByTrimmingCharactersInSet: ws] length] == 0 )
-			exit(0);
-	}
-	#endif // REQUIRE_SERIAL_NUMBER
-
-	return !hasVisibleWindows;
-}
-
 
 -(BOOL)	openStandardStackNamed: (NSString*)inStackName
 {
@@ -228,29 +152,8 @@
 {
 	NSError		*		theError = nil;
 	
-	if( [[filename pathExtension] isEqualToString: @"StacksmithLicense"] )
-	{
-		WILDLicensePanelController	*	licensePanel = [WILDLicensePanelController currentLicensePanelController];
-		NSString		*	licenseKeyString = [NSString stringWithContentsOfURL: [NSURL fileURLWithPath: filename] encoding: NSASCIIStringEncoding error: &theError];
-		if( licenseKeyString )
-		{
-			[NSApp activateIgnoringOtherApps: YES];
-			if( licensePanel == nil )
-				[[NSUserDefaults standardUserDefaults] setValue: licenseKeyString forKey: @"WILDLicenseKey"];
-			else
-				[licensePanel setLicenseKeyString: licenseKeyString];
-			
-			if( [[[NSDocumentController sharedDocumentController] documents] count] == 0 )	// No other documents open? We were started up with a license file.
-				[self applicationOpenUntitledFile: NSApp];
-		}
-		else
-			[[NSApplication sharedApplication] presentError: theError];
-	}
-	else
-	{
-		if( [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: filename] display: YES error: &theError] == nil )
-			[[NSApplication sharedApplication] presentError: theError];
-	}
+	if( [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: filename] display: YES error: &theError] == nil )
+		[[NSApplication sharedApplication] presentError: theError];
 	
 	return YES;	// We show our own errors.
 }

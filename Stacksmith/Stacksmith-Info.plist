@@ -40,18 +40,6 @@
 			<key>NSDocumentClass</key>
 			<string>WILDDocument</string>
 		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>StacksmithLicense</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>StacksmithLicense</string>
-			<key>CFBundleTypeName</key>
-			<string>Stacksmith License Key</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
@@ -111,7 +99,7 @@
 				<string>com.apple.package</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Propaganda Stack</string>
+			<string>Stacksmith Stack</string>
 			<key>UTTypeIconFile</key>
 			<string>OldStack</string>
 			<key>UTTypeIdentifier</key>

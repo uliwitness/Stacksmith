@@ -15,7 +15,6 @@
 #import "NSFileHandle+UKReadLinewise.h"
 #import "UKProgressPanelController.h"
 #import "NSView+SizeWindowForViewSize.h"
-#import "AGIconFamily.h"
 #import "WILDStyleEntry.h"
 #import "WILDMediaEntry.h"
 #import "UKRandomInteger.h"
@@ -378,63 +377,6 @@
 	return success;
 }
 
-
-//-(void)	generatePreview
-//{
-//	@try
-//	{
-//		NSImage*		cardSnapshot = nil;
-//		NSRect			theBox = [mView bounds];
-//		
-//		cardSnapshot = [[[NSImage alloc] initWithSize: theBox.size] autorelease];
-//		[cardSnapshot lockFocus];
-//			[[mView layer] renderInContext: [[NSGraphicsContext currentContext] graphicsPort]];
-//		[cardSnapshot unlockFocus];
-//		
-//		NSImage*			stackIcon = [NSImage imageNamed: @"Stack"];
-//		CGDataProviderRef	fileProvider = CGDataProviderCreateWithURL( (CFURLRef) [[NSBundle mainBundle] URLForResource: @"Stack-Mask" withExtension: @"png"] );
-//		[(id)fileProvider autorelease];
-//		CGImageRef			maskImage = CGImageCreateWithPNGDataProvider( fileProvider, NULL, false, kCGRenderingIntentDefault );
-//		[(id)maskImage autorelease];
-//		NSRect				iconBox = NSZeroRect;
-//		iconBox.size = [stackIcon size];
-//		NSImage*			thumbImg = [[[NSImage alloc] initWithSize: iconBox.size] autorelease];
-//		[thumbImg lockFocus];
-//			[stackIcon drawInRect: iconBox fromRect: NSZeroRect operation: NSCompositeCopy fraction: 1.0];
-//
-//			// Fit the snapshot into rect of first card of icon:
-//			NSRect				possibleThumbBox = NSMakeRect( 36, 60, iconBox.size.width -72, iconBox.size.height -34 -160 );
-//			NSRect				thumbBox = theBox;
-//			thumbBox.size.width = possibleThumbBox.size.width;
-//			thumbBox.size.height = thumbBox.size.height / (theBox.size.width / possibleThumbBox.size.width);
-//			if( thumbBox.size.height > possibleThumbBox.size.height )
-//			{
-//				thumbBox.size.height = possibleThumbBox.size.height;
-//				thumbBox.size.width = thumbBox.size.width / (theBox.size.height / possibleThumbBox.size.height);
-//			}
-//			
-//			// Center in possible thumb box
-//			thumbBox.origin.x = possibleThumbBox.origin.x +truncf((possibleThumbBox.size.width -thumbBox.size.width) /2);
-//			thumbBox.origin.y = possibleThumbBox.origin.y +truncf((possibleThumbBox.size.height -thumbBox.size.height) /2);
-//			
-//			CGContextRef	theCtx = [[NSGraphicsContext currentContext] graphicsPort];
-//			CGContextSetBlendMode( theCtx, kCGBlendModeDarken );
-//			CGContextSetAlpha( theCtx, 0.8 );
-//			CGContextDrawImage( theCtx, NSRectToCGRect( thumbBox ), [cardSnapshot CGImageForProposedRect: NULL context: nil hints: nil] );
-//		[thumbImg unlockFocus];
-//		
-//		[[cardSnapshot TIFFRepresentation] writeToURL: [[self fileURL] URLByAppendingPathComponent: @"preview.tiff"] atomically: YES];
-//		
-//		AGIconFamily*	theIcon = [AGIconFamily iconFamilyWithThumbnailsOfImage: thumbImg
-//									imageInterpolation: NSImageInterpolationMedium];
-//		[theIcon setAsCustomIconForURL: [self fileURL]];
-//		[[thumbImg TIFFRepresentation] writeToURL: [[self fileURL] URLByAppendingPathComponent: @"thumbnail.tiff"] atomically: YES];
-//	}
-//	@catch( NSException * e )
-//	{
-//		NSLog( @"%@", e );
-//	}
-//}
 
 -(void)		addFont: (NSString*)fontName withID: (WILDObjectID)fontID
 {

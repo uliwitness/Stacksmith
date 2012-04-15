@@ -64,11 +64,9 @@
 		55039FD7136D5CCF0082E32E /* ULIPaintTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */; };
 		55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC2136D5CCF0082E32E /* ULIPaintTool.m */; };
 		55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC3136D5CCF0082E32E /* ULIPaintView.m */; };
-		550B30781152D9DE0049C593 /* AGIconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = 550B30771152D9DE0049C593 /* AGIconFamily.m */; };
 		550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09091195E61100351067 /* WILDPresentationConstants.m */; };
 		550C09E61196B9F200351067 /* WILDButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09E51196B9F200351067 /* WILDButtonView.m */; };
 		550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C0A5D1196C52000351067 /* WILDScrollView.m */; };
-		551B3E83131D957700BFCD45 /* WILDLicensePanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
 		552028D8140165D5000EEA4F /* WILDPartPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552028D7140165D4000EEA4F /* WILDPartPresenter.m */; };
 		552028DC14016880000EEA4F /* WILDPushbuttonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */; };
@@ -173,7 +171,6 @@
 		553C47141357779C000219FA /* ForgeMsgInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */; };
 		553C471713577989000219FA /* WILDMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C471613577989000219FA /* WILDMessageBox.m */; };
 		553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C471813577A2E000219FA /* WILDMessageBox.xib */; };
-		553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 553EB403131C83C6008BFBCE /* libcrypto.dylib */; };
 		5542C9471139D7A000555C64 /* WILDStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9461139D7A000555C64 /* WILDStack.m */; };
 		5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */; };
 		5542C9B71139F43C00555C64 /* WILDCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9B61139F43C00555C64 /* WILDCard.m */; };
@@ -235,6 +232,8 @@
 		55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */; };
 		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
+		55A2C514153AF7BF001A6607 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
+		55A2C516153AF8E1001A6607 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A2C515153AF8E1001A6607 /* Sparkle.framework */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
 		55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */; };
 		55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */; };
@@ -305,8 +304,6 @@
 		55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */; };
 		55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC644114CFAE000BAA09D /* CardIconSmall.png */; };
 		55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC645114CFAE000BAA09D /* FieldIconSmall.png */; };
-		55ED9471131D930500DB60D6 /* WILDLicensePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ED9470131D930500DB60D6 /* WILDLicensePanelController.m */; };
-		55F0E9DE135F6E1600170377 /* StacksmithLicense.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55F0E9DD135F6E1600170377 /* StacksmithLicense.icns */; };
 		55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */; };
 		55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */; };
 		55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D2E136A50D600E8588D /* ICON_128.pdf */; };
@@ -318,8 +315,6 @@
 		55F34D3B136A50D600E8588D /* ICON_26425.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D34136A50D600E8588D /* ICON_26425.pdf */; };
 		55F34D3D136A554500E8588D /* ICON_31885.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D3C136A554500E8588D /* ICON_31885.pdf */; };
 		55F34D3F136A555300E8588D /* ICON_1000.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D3E136A555300E8588D /* ICON_1000.pdf */; };
-		55F633841397E7110047BD3C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F633831397E7110047BD3C /* Sparkle.framework */; };
-		55F633C81397E7720047BD3C /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55F633831397E7110047BD3C /* Sparkle.framework */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* WILDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* WILDDocument.m */; settings = {ATTRIBUTES = (); }; };
@@ -412,7 +407,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				55F633C81397E7720047BD3C /* Sparkle.framework in Copy Frameworks */,
+				55A2C514153AF7BF001A6607 /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,8 +506,6 @@
 		55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTextTool.m; path = ../UKPaintView/ULIPaintTextTool.m; sourceTree = "<group>"; };
 		55039FC2136D5CCF0082E32E /* ULIPaintTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTool.m; path = ../UKPaintView/ULIPaintTool.m; sourceTree = "<group>"; };
 		55039FC3136D5CCF0082E32E /* ULIPaintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintView.m; path = ../UKPaintView/ULIPaintView.m; sourceTree = "<group>"; };
-		550B30761152D9DE0049C593 /* AGIconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGIconFamily.h; path = ../AGIconFamily/AGIconFamily.h; sourceTree = "<group>"; };
-		550B30771152D9DE0049C593 /* AGIconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGIconFamily.m; path = ../AGIconFamily/AGIconFamily.m; sourceTree = "<group>"; };
 		550C09081195E61100351067 /* WILDPresentationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPresentationConstants.h; sourceTree = "<group>"; };
 		550C09091195E61100351067 /* WILDPresentationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPresentationConstants.m; sourceTree = "<group>"; };
 		550C09E41196B9F200351067 /* WILDButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDButtonView.h; sourceTree = "<group>"; };
@@ -520,7 +513,6 @@
 		550C0A5C1196C52000351067 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScrollView.h; sourceTree = "<group>"; };
 		550C0A5D1196C52000351067 /* WILDScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScrollView.m; sourceTree = "<group>"; };
 		550ED181144B38DD00E528AA /* ULINSIntegerMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULINSIntegerMath.h; path = ../UliKit/ULINSIntegerMath.h; sourceTree = "<group>"; };
-		551B3E82131D957700BFCD45 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDLicensePanelController.xib; sourceTree = "<group>"; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
 		552028D6140165D4000EEA4F /* WILDPartPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPartPresenter.h; path = Presentation/WILDPartPresenter.h; sourceTree = "<group>"; };
@@ -686,9 +678,6 @@
 		553C471513577989000219FA /* WILDMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMessageBox.h; path = Editor/WILDMessageBox.h; sourceTree = "<group>"; };
 		553C471613577989000219FA /* WILDMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMessageBox.m; path = Editor/WILDMessageBox.m; sourceTree = "<group>"; };
 		553C471913577A2E000219FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDMessageBox.xib; sourceTree = "<group>"; };
-		553EB3F7131C7CF1008BFBCE /* UKLicense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKLicense.h; path = ../UKLicenseMaker/UKLicense.h; sourceTree = "<group>"; };
-		553EB3FA131C8360008BFBCE /* UKLicenseKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKLicenseKey.h; sourceTree = "<group>"; };
-		553EB403131C83C6008BFBCE /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = ../../../../../usr/lib/libcrypto.dylib; sourceTree = "<group>"; };
 		5542C9451139D7A000555C64 /* WILDStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStack.h; sourceTree = "<group>"; };
 		5542C9461139D7A000555C64 /* WILDStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStack.m; sourceTree = "<group>"; };
 		5542C94B1139DD5C00555C64 /* WILDXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDXMLUtils.h; sourceTree = "<group>"; };
@@ -785,6 +774,7 @@
 		55993B6913476E1D001624A2 /* WILDStackInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStackInfoWindowController.h; sourceTree = "<group>"; };
 		55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoWindowController.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
+		55A2C515153AF8E1001A6607 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "../../../Library/Developer/Xcode/DerivedData/Stacksmith-biubthauzfvazkfuqtthynyeokov/Build/Products/Debug/Sparkle.framework"; sourceTree = "<group>"; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		55A7BA4514668D5900AB0F34 /* ULIMelodyQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIMelodyQueue.h; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.h; sourceTree = "<group>"; };
 		55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIMelodyQueue.m; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.m; sourceTree = "<group>"; };
@@ -898,9 +888,6 @@
 		55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonIconSmall.png; sourceTree = "<group>"; };
 		55EBC644114CFAE000BAA09D /* CardIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CardIconSmall.png; sourceTree = "<group>"; };
 		55EBC645114CFAE000BAA09D /* FieldIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FieldIconSmall.png; sourceTree = "<group>"; };
-		55ED946F131D930500DB60D6 /* WILDLicensePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDLicensePanelController.h; path = Windows/WILDLicensePanelController.h; sourceTree = "<group>"; };
-		55ED9470131D930500DB60D6 /* WILDLicensePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDLicensePanelController.m; path = Windows/WILDLicensePanelController.m; sourceTree = "<group>"; };
-		55F0E9DD135F6E1600170377 /* StacksmithLicense.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = StacksmithLicense.icns; sourceTree = "<group>"; };
 		55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDAboutPanelController.h; path = Windows/WILDAboutPanelController.h; sourceTree = "<group>"; };
 		55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDAboutPanelController.m; path = Windows/WILDAboutPanelController.m; sourceTree = "<group>"; };
 		55F2EAF1131DA26700913200 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDAboutPanelController.xib; sourceTree = "<group>"; };
@@ -913,7 +900,6 @@
 		55F34D34136A50D600E8588D /* ICON_26425.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = ICON_26425.pdf; path = Resources/ICON_26425.pdf; sourceTree = "<group>"; };
 		55F34D3C136A554500E8588D /* ICON_31885.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = ICON_31885.pdf; path = Resources/ICON_31885.pdf; sourceTree = "<group>"; };
 		55F34D3E136A555300E8588D /* ICON_1000.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = ICON_1000.pdf; path = Resources/ICON_1000.pdf; sourceTree = "<group>"; };
-		55F633831397E7110047BD3C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = ../Sparkle/build/Debug/Sparkle.framework; sourceTree = SOURCE_ROOT; };
 		8D15AC360486D014006FF6A4 /* Stacksmith-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Stacksmith-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Stacksmith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stacksmith.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -928,9 +914,8 @@
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
-				553EB404131C83C6008BFBCE /* libcrypto.dylib in Frameworks */,
-				55F633841397E7110047BD3C /* Sparkle.framework in Frameworks */,
 				55A7BA73146690AF00AB0F34 /* AudioToolbox.framework in Frameworks */,
+				55A2C516153AF8E1001A6607 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,9 +930,8 @@
 				55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */,
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
-				55F633831397E7110047BD3C /* Sparkle.framework */,
 				55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */,
-				553EB403131C83C6008BFBCE /* libcrypto.dylib */,
+				55A2C515153AF8E1001A6607 /* Sparkle.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -991,8 +975,6 @@
 				5503472F1370A18800AE7681 /* StacksmithVersion.h */,
 				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
 				552558FD114BDE7C00279B03 /* WILDAppDelegate.m */,
-				55ED946F131D930500DB60D6 /* WILDLicensePanelController.h */,
-				55ED9470131D930500DB60D6 /* WILDLicensePanelController.m */,
 				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
 				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
 				2A37F4AEFDCFA73011CA2CEA /* WILDDocument.h */,
@@ -1020,8 +1002,6 @@
 		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				553EB3F7131C7CF1008BFBCE /* UKLicense.h */,
-				553EB3FA131C8360008BFBCE /* UKLicenseKey.h */,
 				2564AD2C0F5327BB00F57823 /* Stacksmith_Prefix.pch */,
 				55C68C9D116413E300D8B44C /* svn_version.h */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
@@ -1048,7 +1028,6 @@
 				55EA6384134758B40039FE0D /* WILDBackgroundInfoWindowController.xib */,
 				55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */,
 				5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */,
-				551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
 				553C471813577A2E000219FA /* WILDMessageBox.xib */,
 				558CDB9C137B1A3D004AC603 /* WILDToolsPalette.xib */,
@@ -1066,7 +1045,6 @@
 				55E3A6F911519B45008411BB /* HCSV.icns */,
 				55E3A6FA11519B45008411BB /* Stack.icns */,
 				557B182E113C5CD600F85327 /* OldStack.icns */,
-				55F0E9DD135F6E1600170377 /* StacksmithLicense.icns */,
 				55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
@@ -1391,8 +1369,6 @@
 				55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */,
 				552365391344C24C000145A0 /* NSImage+NiceScaling.h */,
 				5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */,
-				550B30761152D9DE0049C593 /* AGIconFamily.h */,
-				550B30771152D9DE0049C593 /* AGIconFamily.m */,
 				55E8535C1166341100745C86 /* NSString+FetchNextLine.h */,
 				55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */,
 				552997D01370C5D800F870DF /* NSStringDrawing+SizeWithRect.h */,
@@ -1833,7 +1809,6 @@
 				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
 				55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */,
 				555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */,
-				551B3E83131D957700BFCD45 /* WILDLicensePanelController.xib in Resources */,
 				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
 				55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */,
 				55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */,
@@ -1841,7 +1816,6 @@
 				55EA6386134758B40039FE0D /* WILDBackgroundInfoWindowController.xib in Resources */,
 				55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */,
 				553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */,
-				55F0E9DE135F6E1600170377 /* StacksmithLicense.icns in Resources */,
 				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
 				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
 				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
@@ -1957,7 +1931,6 @@
 				55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */,
 				55255ABC114C19AB00279B03 /* WILDScriptEditorWindowController.m in Sources */,
 				55EBC42B114C2CCE00BAA09D /* WILDScriptContainer.m in Sources */,
-				550B30781152D9DE0049C593 /* AGIconFamily.m in Sources */,
 				558DC883115507EA002C9195 /* WILDCardViewController.m in Sources */,
 				558DCB5511553EAC002C9195 /* WILDButtonCell.m in Sources */,
 				558DCD21115571FE002C9195 /* WILDNotifications.m in Sources */,
@@ -1983,7 +1956,6 @@
 				550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */,
 				550C09E61196B9F200351067 /* WILDButtonView.m in Sources */,
 				550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */,
-				55ED9471131D930500DB60D6 /* WILDLicensePanelController.m in Sources */,
 				55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */,
 				55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */,
 				55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */,
@@ -2154,14 +2126,6 @@
 				2A37F4BAFDCFA73011CA2CEA /* English */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		551B3E81131D957700BFCD45 /* WILDLicensePanelController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				551B3E82131D957700BFCD45 /* English */,
-			);
-			name = WILDLicensePanelController.xib;
 			sourceTree = "<group>";
 		};
 		55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */ = {
@@ -2341,7 +2305,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../Sparkle/build/Debug\"",
+					"\"$(CONFIGURATION_BUILD_DIR)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -2392,7 +2356,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../Sparkle/build/Debug\"",
+					"\"$(CONFIGURATION_BUILD_DIR)\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

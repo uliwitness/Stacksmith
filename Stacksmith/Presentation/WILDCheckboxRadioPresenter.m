@@ -50,7 +50,7 @@
 	BOOL					isHighlighted = [currPart highlighted];
 	if( ![currPart sharedHighlight] && [[currPart partLayer] isEqualToString: @"background"] )
 		isHighlighted = [contents highlighted];
-	UKLog( @"%@ highlight: %s", currPart, (isHighlighted ? "YES" : "NO") );
+	//UKLog( @"%@ highlight: %s", currPart, (isHighlighted ? "YES" : "NO") );
 	[mMainView setState: isHighlighted ? NSOnState : NSOffState];
 
 	if( [currPart iconID] != 0 )

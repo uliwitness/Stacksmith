@@ -250,7 +250,7 @@
 		diff.y -= box.origin.y +box.size.height;
 		diff.x = truncf(diff.x);
 		diff.y = truncf(diff.y);
-		NSLog( @"diff = %@ (src = %@ dst = %@)", NSStringFromPoint(diff), NSStringFromPoint(box.origin), NSStringFromPoint(pos) );
+		//NSLog( @"diff = %@ (src = %@ dst = %@)", NSStringFromPoint(diff), NSStringFromPoint(box.origin), NSStringFromPoint(pos) );
 		
 		for( WILDPart* currPart in draggedParts )
 		{
@@ -263,7 +263,7 @@
 		[mOwner reloadCard];
 	}
 	else
-		NSLog( @"external" );
+		;//NSLog( @"external" );
 	
 	return YES;
 }

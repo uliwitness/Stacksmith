@@ -7,9 +7,6 @@
 //
 
 #import "WILDAboutPanelController.h"
-#if REQUIRE_SERIAL_NUMBER
-#import "UKLicense.h"
-#endif // REQUIRE_SERIAL_NUMBER
 #import "NSWindow+ULIZoomEffect.h"
 #import "StacksmithVersion.h"
 #import "UKHelperMacros.h"
@@ -61,34 +58,7 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-	#if REQUIRE_SERIAL_NUMBER
-	// Check serial number:
-	struct UKLicenseInfo	theInfo;
-	NSString			*	textString = [[NSUserDefaults standardUserDefaults] stringForKey: @"WILDLicenseKey"];
-	NSData				*	textData = [textString dataUsingEncoding: NSASCIIStringEncoding];
-	int						numBinaryBytes = UKBinaryLengthForReadableBytesOfLength( [textData length] );
-	NSMutableData		*	binaryBytes = [NSMutableData dataWithLength: numBinaryBytes];
-	UKBinaryDataForReadableBytesOfLength( [textData bytes], [textData length], [binaryBytes mutableBytes] );
-	UKGetLicenseData( [binaryBytes mutableBytes], [binaryBytes length], &theInfo );
-
-	NSString	*	person = [[[NSString alloc] initWithBytes: theInfo.ukli_licenseeName length: 40 encoding: NSUTF8StringEncoding] autorelease];
-	NSString	*	company = [[[NSString alloc] initWithBytes: theInfo.ukli_licenseeCompany length: 40 encoding: NSUTF8StringEncoding] autorelease];
-	NSCharacterSet*	ws = [NSCharacterSet whitespaceCharacterSet];
-	person = [person stringByTrimmingCharactersInSet: ws];
-	company = [company stringByTrimmingCharactersInSet: ws];
-	if( [company length] == 0 )
-	{
-		[mLicenseeField setStringValue: @""];
-		[mCompanyField setStringValue: person];
-	}
-	else
-	{
-		[mLicenseeField setStringValue: person];
-		[mCompanyField setStringValue: company];
-	}
-	#endif // REQUIRE_SERIAL_NUMBER
-	
+    	
 	NSString*	version = [NSString stringWithFormat: @"%@ (%@)", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"], @SVN_VERSION ];
 	[mVersionField setStringValue: version];
 }
