@@ -8,17 +8,29 @@ How to build
 ------------
 
 I'm still working on making this build more easily. Right now, you need to check out
+
 	UliKit
+	
 	Leonie
+	
 	Forge
+	
 	ForgeDebugger
+	
 	Stacksmith
+	
 	stackimport
+	
 	UKSyntaxColoredTextDocument
+	
 	UKPaintView
+	
 	Sparkle
+	
 	ULIMelodyQueue
+	
 	ULINetSocket
+	
 into one folder, next to each other, so the Stacksmith project file will find them.
 
 
