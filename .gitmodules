@@ -1,30 +1,30 @@
 [submodule "Leonie"]
 	path = Leonie
-	url = git@github.com:uliwitness/Leonie.git
+	url = git://github.com:uliwitness/Leonie.git
 [submodule "UliKit"]
 	path = UliKit
-	url = git@github.com:uliwitness/UliKit.git
+	url = git://github.com:uliwitness/UliKit.git
 [submodule "Forge"]
 	path = Forge
-	url = git@github.com:uliwitness/Forge.git
+	url = git://github.com:uliwitness/Forge.git
 [submodule "ForgeDebugger"]
 	path = ForgeDebugger
-	url = git@github.com:uliwitness/ForgeDebugger.git
+	url = git://github.com:uliwitness/ForgeDebugger.git
 [submodule "stackimport"]
 	path = stackimport
-	url = git@github.com:uliwitness/stackimport.git
+	url = git://github.com:uliwitness/stackimport.git
 [submodule "UKSyntaxColoredTextDocument"]
 	path = UKSyntaxColoredTextDocument
-	url = git@github.com:uliwitness/UKSyntaxColoredTextDocument.git
+	url = git://github.com:uliwitness/UKSyntaxColoredTextDocument.git
 [submodule "UKPaintView"]
 	path = UKPaintView
-	url = git@github.com:uliwitness/UKPaintView.git
+	url = git://github.com:uliwitness/UKPaintView.git
 [submodule "Sparkle"]
 	path = Sparkle
-	url = git@github.com:uliwitness/Sparkle.git
+	url = git://github.com:uliwitness/Sparkle.git
 [submodule "ULIMelodyQueue"]
 	path = ULIMelodyQueue
-	url = git@github.com:uliwitness/ULIMelodyQueue.git
+	url = git://github.com:uliwitness/ULIMelodyQueue.git
 [submodule "ULINetSocket"]
 	path = ULINetSocket
-	url = git@github.com:uliwitness/ULINetSocket.git
+	url = git://github.com:uliwitness/ULINetSocket.git
