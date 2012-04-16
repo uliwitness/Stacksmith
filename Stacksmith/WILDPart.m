@@ -839,7 +839,8 @@
 	
 	[[self partOwner] updatePartOnClick: self withCard: inCard background: inBackground];
 
-	WILDScriptContainerResultFromSendingMessage( self, @"mouseUp" );
+	if( [mStyle isEqualToString: @"popup"] )
+		WILDScriptContainerResultFromSendingMessage( self, @"mouseUp" );
 }
 
 
