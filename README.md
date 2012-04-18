@@ -7,7 +7,7 @@ In short, Stacksmith is a HyperCard clone that runs on the current version of Ma
 How to build
 ------------
 
-Make sure you've inited all the submodules, and then just build the Stacksmith Xcode project.
+Make sure you've inited all the submodules, and then just build the Stacksmith Xcode project. If you want to contribute, note that you'll probably have to change the subprojects to point to your own clones of the subprojects. These instructions might be helpful: http://365git.tumblr.com/post/12581972612/set-up-a-submodule-where-only-you-have-write-access
 
 
 License
