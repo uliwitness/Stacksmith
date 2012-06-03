@@ -268,6 +268,8 @@
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
+		55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */; };
+		55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */; };
 		55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */; };
 		55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */; };
 		55E3A69E11503456008411BB /* CURS_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.png */; };
@@ -830,6 +832,10 @@
 		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
 		55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+centerHorizontallyAndVertically.m"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.m"; sourceTree = "<group>"; };
+		55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNodeTransformation.cpp; path = ../../CNodeTransformation.cpp; sourceTree = "<group>"; };
+		55D7AA4815715D2500F33E78 /* CNodeTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CNodeTransformation.h; path = ../../CNodeTransformation.h; sourceTree = "<group>"; };
+		55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CChunkPropertyNodeTransformation.cpp; path = ../../CChunkPropertyNodeTransformation.cpp; sourceTree = "<group>"; };
+		55D7AA4C1573816B00F33E78 /* CChunkPropertyNodeTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CChunkPropertyNodeTransformation.h; path = ../../CChunkPropertyNodeTransformation.h; sourceTree = "<group>"; };
 		55D97B261441B5110060F774 /* WILDPopUpButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPopUpButtonPresenter.h; path = Presentation/WILDPopUpButtonPresenter.h; sourceTree = "<group>"; };
 		55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPopUpButtonPresenter.m; path = Presentation/WILDPopUpButtonPresenter.m; sourceTree = "<group>"; };
 		55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BuildVersionHeader; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1190,6 +1196,7 @@
 				553C46B013577334000219FA /* CValueNode.cpp */,
 				553C46B113577334000219FA /* Commands */,
 				553C46B213577334000219FA /* Code Blocks */,
+				55D7AA49157163C500F33E78 /* Transformations */,
 			);
 			name = "Parse Tree";
 			sourceTree = "<group>";
@@ -1550,6 +1557,17 @@
 				556785E11379C8F5005CC245 /* finish_installation.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		55D7AA49157163C500F33E78 /* Transformations */ = {
+			isa = PBXGroup;
+			children = (
+				55D7AA4815715D2500F33E78 /* CNodeTransformation.h */,
+				55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */,
+				55D7AA4C1573816B00F33E78 /* CChunkPropertyNodeTransformation.h */,
+				55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */,
+			);
+			name = Transformations;
 			sourceTree = "<group>";
 		};
 		55E806681368B2E0006F1287 /* UKPaintView */ = {
@@ -2072,6 +2090,8 @@
 				55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */,
 				55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */,
 				55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */,
+				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,
+				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
