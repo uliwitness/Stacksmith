@@ -171,6 +171,9 @@
 		553C47141357779C000219FA /* ForgeMsgInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */; };
 		553C471713577989000219FA /* WILDMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C471613577989000219FA /* WILDMessageBox.m */; };
 		553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C471813577A2E000219FA /* WILDMessageBox.xib */; };
+		553F6809157D138B009E0517 /* ForgeObjCConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F6808157D138B009E0517 /* ForgeObjCConversion.m */; };
+		553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */; };
+		553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */; };
 		5542C9471139D7A000555C64 /* WILDStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9461139D7A000555C64 /* WILDStack.m */; };
 		5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */; };
 		5542C9B71139F43C00555C64 /* WILDCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9B61139F43C00555C64 /* WILDCard.m */; };
@@ -680,6 +683,12 @@
 		553C471513577989000219FA /* WILDMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMessageBox.h; path = Editor/WILDMessageBox.h; sourceTree = "<group>"; };
 		553C471613577989000219FA /* WILDMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMessageBox.m; path = Editor/WILDMessageBox.m; sourceTree = "<group>"; };
 		553C471913577A2E000219FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDMessageBox.xib; sourceTree = "<group>"; };
+		553F6807157D138B009E0517 /* ForgeObjCConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeObjCConversion.h; path = Instructions/ForgeObjCConversion.h; sourceTree = SOURCE_ROOT; };
+		553F6808157D138B009E0517 /* ForgeObjCConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeObjCConversion.m; path = Instructions/ForgeObjCConversion.m; sourceTree = SOURCE_ROOT; };
+		553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSetChunkPropertyNode.cpp; path = ../../CSetChunkPropertyNode.cpp; sourceTree = "<group>"; };
+		553F680B157D3291009E0517 /* CSetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSetChunkPropertyNode.h; path = ../../CSetChunkPropertyNode.h; sourceTree = "<group>"; };
+		553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGetChunkPropertyNode.cpp; path = ../../CGetChunkPropertyNode.cpp; sourceTree = "<group>"; };
+		553F680E157D3547009E0517 /* CGetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGetChunkPropertyNode.h; path = ../../CGetChunkPropertyNode.h; sourceTree = "<group>"; };
 		5542C9451139D7A000555C64 /* WILDStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStack.h; sourceTree = "<group>"; };
 		5542C9461139D7A000555C64 /* WILDStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStack.m; sourceTree = "<group>"; };
 		5542C94B1139DD5C00555C64 /* WILDXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDXMLUtils.h; sourceTree = "<group>"; };
@@ -1180,6 +1189,8 @@
 				55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */,
 				55686665135A383700C364D6 /* ForgeWILDObjectValue.h */,
 				55686664135A383300C364D6 /* ForgeWILDObjectValue.m */,
+				553F6807157D138B009E0517 /* ForgeObjCConversion.h */,
+				553F6808157D138B009E0517 /* ForgeObjCConversion.m */,
 			);
 			name = Interpreter;
 			path = ../Forge/ForgeFramework/ForgeFramework;
@@ -1264,6 +1275,10 @@
 				553C46D013577334000219FA /* CMakeChunkRefNode.cpp */,
 				553C46D113577334000219FA /* CMakeChunkConstNode.h */,
 				553C46D213577334000219FA /* CMakeChunkConstNode.cpp */,
+				553F680B157D3291009E0517 /* CSetChunkPropertyNode.h */,
+				553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */,
+				553F680E157D3547009E0517 /* CGetChunkPropertyNode.h */,
+				553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */,
 				55E805C01360A7B3006F1287 /* CObjectPropertyNode.h */,
 				55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */,
 				55E805F81366091F006F1287 /* CGlobalPropertyNode.h */,
@@ -2092,6 +2107,9 @@
 				55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */,
 				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
+				553F6809157D138B009E0517 /* ForgeObjCConversion.m in Sources */,
+				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
+				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
