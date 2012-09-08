@@ -15,9 +15,9 @@ License
 
 Note: Some submodules may be subject to different licenses.
 
-  Copyright 2003-2012 by Uli Kusterer.
-
-  This software is provided 'as-is', without any express or implied
+	Copyright 2003-2012 by Uli Kusterer.
+	
+	This software is provided 'as-is', without any express or implied
 	warranty. In no event will the authors be held liable for any damages
 	arising from the use of this software.
 	
