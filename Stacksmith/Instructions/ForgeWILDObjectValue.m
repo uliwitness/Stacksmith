@@ -103,7 +103,7 @@ LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* in
 	if( !str )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
-		return;
+		return -1;
 	}
 	LEONumber	num = strtod( str, &endPtr );
 	if( endPtr != (str +strlen(str)) )
@@ -119,7 +119,7 @@ LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* 
 	if( !str )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
-		return;
+		return -1;
 	}
 	LEOInteger	num = strtoll( str, &endPtr, 10 );
 	if( endPtr != (str +strlen(str)) )
@@ -134,7 +134,7 @@ char*	LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufS
 	if( !str )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
-		return;
+		return NULL;
 	}
 	if( outBuf )
 	{
@@ -152,7 +152,7 @@ bool	LEOGetWILDObjectValueAsBoolean( LEOValuePtr self, struct LEOContext* inCont
 	if( !str )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
-		return;
+		return false;
 	}
 	if( strcasecmp( str, "true" ) == 0 )
 		return true;
@@ -393,7 +393,7 @@ bool	LEOCanGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inCo
 	if( !str )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
-		return;
+		return false;
 	}
 	
 	for( size_t x = 0; str[x] != 0; x++ )
