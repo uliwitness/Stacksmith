@@ -93,7 +93,7 @@
 }
 
 
--(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName
+-(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
 {
 	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
 	{
@@ -104,7 +104,7 @@
 }
 
 
--(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName
+-(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange
 {
 	BOOL	propExists = YES;
 	

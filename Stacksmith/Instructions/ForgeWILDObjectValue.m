@@ -10,6 +10,7 @@
 #include "LEOInterpreter.h"
 #include "LEOContextGroup.h"
 #include "LEOScript.h"
+#import "ForgeObjCConversion.h"
 
 
 LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
@@ -41,6 +42,9 @@ void	LEODetermineChunkRangeOfSubstringOfWILDObjectValue( LEOValuePtr self, size_
 													size_t *ioBytesDelStart, size_t *ioBytesDelEnd,
 													LEOChunkType inType, size_t inRangeStart, size_t inRangeEnd,
 													struct LEOContext* inContext );
+void		LEOGetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, size_t startOffset, size_t endOffset, LEOValuePtr outValue, struct LEOContext* inContext );
+void		LEOSetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext );
+
 void	LEOCleanUpWILDObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
 
 
@@ -81,7 +85,10 @@ struct LEOValueType	kLeoValueTypeWILDObject =
 	LEOGetWILDObjectValueForKey,
 	LEOCantSetValueForKey,
 	LEOSetStringLikeValueAsArray,
-	LEOGetWILDObjectKeyCount
+	LEOGetWILDObjectKeyCount,
+	
+	LEOGetWILDObjectValueForKeyOfRange,
+	LEOSetWILDObjectValueForKeyOfRange,
 };
 
 
@@ -415,6 +422,29 @@ LEOValuePtr	LEOGetWILDObjectValueForKey( LEOValuePtr self, const char* keyName, 
 size_t	LEOGetWILDObjectKeyCount( LEOValuePtr self, struct LEOContext* inContext )
 {
 	return 0;
+}
+
+
+void		LEOGetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, size_t startOffset, size_t endOffset, LEOValuePtr outValue, struct LEOContext* inContext )
+{
+	id<WILDObject>		theObject = (id<WILDObject>) self->object.object;
+	
+	id	returnValue = [theObject valueForWILDPropertyNamed: [NSString stringWithUTF8String: keyName] ofRange: NSMakeRange(startOffset, endOffset)];	// TODO: Need to convert the range into character index, is a UTF8 byte index ATM.
+	
+	if( returnValue == NULL )
+		LEOContextStopWithError( inContext, "No property \"%s\".", keyName );
+	else
+		WILDObjCObjectToLEOValue( returnValue, outValue, inContext );
+}
+
+
+void		LEOSetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext )
+{
+	id<WILDObject>		theObject = (id<WILDObject>) self->object.object;
+	id					sourceValue = WILDObjCObjectFromLEOValue( inValue, inContext );
+	
+	if( ![theObject setValue: sourceValue forWILDPropertyNamed: [NSString stringWithUTF8String: keyName] inRange: NSMakeRange(startOffset, endOffset)] )	// TODO: Need to convert the range into character index, is a UTF8 byte index ATM.	
+		LEOContextStopWithError( inContext, "No property \"%s\".", keyName );;
 }
 
 

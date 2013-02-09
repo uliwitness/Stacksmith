@@ -25,8 +25,8 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 -(BOOL)			goThereInNewWindow: (BOOL)inNewWindow;
 
--(id)			valueForWILDPropertyNamed: (NSString*)inPropertyName;
--(BOOL)			setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName;
+-(id)			valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange;
+-(BOOL)			setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange;
 
 -(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError;
 -(id<WILDObject>)		parentObject;
