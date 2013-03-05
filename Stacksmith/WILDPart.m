@@ -1185,6 +1185,8 @@
 	}
 	else if( [inPropertyName isEqualToString: @"controllervisible"] )
 		return mControllerVisible ? kCFBooleanTrue : kCFBooleanFalse;
+	else if( [inPropertyName isEqualToString: @"icon"] )
+		return [NSNumber numberWithLongLong: mIconID];
 	else
 		return nil;
 }
@@ -1312,6 +1314,8 @@
 		[self setMediaPath: inValue];
 	else if( [inPropertyName isEqualToString: @"controllervisible"] )
 		mControllerVisible = (inValue != kCFBooleanFalse);
+	else if( [inPropertyName isEqualToString: @"icon"] )
+		mIconID = [inValue longLongValue];
 	else
 		propExists = NO;
 
