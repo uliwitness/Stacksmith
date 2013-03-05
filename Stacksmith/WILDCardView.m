@@ -346,4 +346,33 @@
 	return [mOwner guidelineView];
 }
 
+
+-(void)	keyDown: (NSEvent *)theEvent
+{
+	WILDScriptContainerResultFromSendingMessage( mCard, @"keyDown %@", [theEvent charactersIgnoringModifiers] );
+
+	if( theEvent.charactersIgnoringModifiers.length > 0 )
+	{
+		unichar theKey = [theEvent.charactersIgnoringModifiers characterAtIndex: 0];
+		switch( theKey )
+		{
+			case NSLeftArrowFunctionKey:
+				WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@", @"left" );
+				break;
+			case NSRightArrowFunctionKey:
+				WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@", @"right" );
+				break;
+			case NSUpArrowFunctionKey:
+				WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@", @"up" );
+				break;
+			case NSDownArrowFunctionKey:
+				WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@", @"down" );
+				break;
+			case NSF1FunctionKey ... NSF35FunctionKey:
+				WILDScriptContainerResultFromSendingMessage( mCard, @"functionKey %d", theKey -NSF1FunctionKey +1 );
+				break;
+		}
+	}
+}
+
 @end

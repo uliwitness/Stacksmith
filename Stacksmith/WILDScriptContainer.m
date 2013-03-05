@@ -271,32 +271,33 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 				currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
 				if( [currPart isEqualToString: @"%@"] )
 				{
-					* (NSString**)currPos = va_arg( ap, NSString* );
+					NSString	*	currStr = va_arg( ap, NSString* );
+					* ((NSString**)currPos) = currStr;
 					currPos += sizeof(NSString*);
 				}
 				else if( [currPart isEqualToString: @"%s"] )
 				{
-					* (const char**)currPos = va_arg( ap, const char* );
+					* ((const char**)currPos) = va_arg( ap, const char* );
 					currPos += sizeof(NSString*);
 				}
 				else if( [currPart isEqualToString: @"%ld"] )
 				{
-					* (long*)currPos = va_arg( ap, long );
+					* ((long*)currPos) = va_arg( ap, long );
 					currPos += sizeof(long);
 				}
 				else if( [currPart isEqualToString: @"%d"] )
 				{
-					* (int*)currPos = va_arg( ap, int );
+					* ((int*)currPos) = va_arg( ap, int );
 					currPos += sizeof(int);
 				}
 				else if( [currPart isEqualToString: @"%f"] )
 				{
-					* (double*)currPos = va_arg( ap, double );
+					* ((double*)currPos) = va_arg( ap, double );
 					currPos += sizeof(double);
 				}
 				else if( [currPart isEqualToString: @"%B"] )
 				{
-					* (BOOL*)currPos = va_arg( ap, BOOL );
+					* ((BOOL*)currPos) = va_arg( ap, BOOL );
 					currPos += sizeof(BOOL);
 				}
 			}
@@ -310,33 +311,34 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 			if( [currPart isEqualToString: @"%@"] )
 			{
 				currPos -= sizeof(NSString*);
-				const char*		str = [(NSString*)*currPos UTF8String];
+				NSString	*	currStr = *(NSString**)currPos;
+				const char	*	str = [currStr UTF8String];
 				LEOPushStringValueOnStack( &ctx, str, strlen(str) );
 			}
 			else if( [currPart isEqualToString: @"%s"] )
 			{
 				currPos -= sizeof(const char*);
-				LEOPushStringValueOnStack( &ctx, *currPos, strlen(*currPos) );
+				LEOPushStringValueOnStack( &ctx, *((const char**)currPos), strlen(*((const char**)currPos)) );
 			}
 			else if( [currPart isEqualToString: @"%ld"] )
 			{
 				currPos -= sizeof(long);
-				LEOPushIntegerOnStack( &ctx, *(long*)currPos );
+				LEOPushIntegerOnStack( &ctx, *((long*)currPos) );
 			}
 			else if( [currPart isEqualToString: @"%d"] )
 			{
 				currPos -= sizeof(int);
-				LEOPushIntegerOnStack( &ctx, *(int*)currPos );
+				LEOPushIntegerOnStack( &ctx, *((int*)currPos) );
 			}
 			else if( [currPart isEqualToString: @"%f"] )
 			{
 				currPos -= sizeof(double);
-				LEOPushNumberOnStack( &ctx, *(double*)currPos );
+				LEOPushNumberOnStack( &ctx, *((double*)currPos) );
 			}
 			else if( [currPart isEqualToString: @"%B"] )
 			{
 				currPos -= sizeof(BOOL);
-				LEOPushBooleanOnStack( &ctx, (*(BOOL*)currPos) == YES );
+				LEOPushBooleanOnStack( &ctx, (*((BOOL*)currPos)) == YES );
 			}
 			
 			LEOPushIntegerOnStack( &ctx, [paramFormats count] );
