@@ -15,6 +15,6 @@
 	WILDButtonView	*	mMainView;
 }
 
-
+-(void)	createButton;
 
 @end

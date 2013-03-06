@@ -32,6 +32,7 @@
 #import "WILDPopUpButtonPresenter.h"
 #import "WILDTextFieldPresenter.h"
 #import "WILDCheckboxRadioPresenter.h"
+#import "WILDLegacyButtonPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
@@ -1034,6 +1035,9 @@
 			mPartPresenter = [[WILDPopUpButtonPresenter alloc] initWithPartView: self];
 		else if( [[mPart style] isEqualToString: @"radiobutton"] || [[mPart style] isEqualToString: @"checkbox"] )
 			mPartPresenter = [[WILDCheckboxRadioPresenter alloc] initWithPartView: self];
+		else if( [[mPart style] isEqualToString: @"transparent"] || [[mPart style] isEqualToString: @"rectangle"]
+				 || [[mPart style] isEqualToString: @"opaque"] || [[mPart style] isEqualToString: @"oval"] )
+			mPartPresenter = [[WILDLegacyButtonPresenter alloc] initWithPartView: self];
 		else
 			mPartPresenter = [[WILDPushbuttonPresenter alloc] initWithPartView: self];
 	}
@@ -1876,6 +1880,8 @@
 
 -(void)	removeFromSuperview
 {
+	[super removeFromSuperview];
+	
 	[mPartPresenter removeSubviews];
 }
 

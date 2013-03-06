@@ -8,6 +8,7 @@
 
 #import "WILDPartPresenter.h"
 #import "WILDNotifications.h"
+#import "UKHelperMacros.h"
 
 
 @implementation WILDPartPresenter
@@ -25,6 +26,14 @@
 }
 
 
+-(void)	dealloc
+{
+	mPartView = UKInvalidPointer;
+	
+	[super dealloc];
+}
+
+
 -(void)	createSubviewsForPartView: (WILDPartView*)inPartView
 {
 	
@@ -37,9 +46,9 @@
 }
 
 
--(void)	removeSubviewsFromPartView: (WILDPartView*)inPartView
+-(void)	removeSubviews
 {
-	
+	mPartView = UKInvalidPointer;
 }
 
 

@@ -14,18 +14,22 @@
 
 @implementation WILDPushbuttonPresenter
 
+-(void)	createButton
+{
+	NSRect		box = NSInsetRect([mPartView bounds], 2, 2);
+	
+	mMainView = [[WILDButtonView alloc] initWithFrame: box];
+	[mMainView setBordered: YES];
+	[mMainView setBezelStyle: NSRoundedBezelStyle];
+	
+	[mMainView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+	
+}
+
 -(void)	createSubviews
 {
 	if( !mMainView )
-	{
-		NSRect		box = NSInsetRect([mPartView bounds], 2, 2);
-		
-		mMainView = [[WILDButtonView alloc] initWithFrame: box];
-		[mMainView setBordered: YES];
-		[mMainView setBezelStyle: NSRoundedBezelStyle];
-		
-		[mMainView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-	}
+		[self createButton];
 	
 	[mPartView addSubview: mMainView];
 	
@@ -57,7 +61,8 @@
 
 	if( [currPart iconID] != 0 )
 	{
-		[mMainView setImage: [currPart iconImage]];
+		NSImage	*	theIcon = [currPart iconImage];
+		[mMainView setImage: theIcon];
 		
 		if( [currPart iconID] == -1 || [[currPart name] length] == 0
 			|| ![currPart showName] )
@@ -84,6 +89,12 @@
 
 
 -(void)	showNamePropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	[self refreshProperties];
+}
+
+
+-(void)	sstylePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }
