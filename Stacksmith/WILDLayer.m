@@ -602,7 +602,7 @@
 		mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[mStack document] contextGroup], mIDForScripts );
 	}
 	
-	if( mIDForScripts && mSeedForScripts )
+	if( mIDForScripts )
 	{
 		if( outID )
 			*outID = mIDForScripts;

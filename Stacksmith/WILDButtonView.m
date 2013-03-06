@@ -138,10 +138,4 @@
 
 #endif
 
--(void)	setImagePosition:(NSCellImagePosition)aPosition
-{
-	[super setImagePosition: aPosition];
-	UKLog( @"%@ %@ %ld", self, self.cell, self.imagePosition );
-}
-
 @end

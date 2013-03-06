@@ -166,7 +166,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	}
 	
 	CGContextRef	theContext = [[NSGraphicsContext currentContext] graphicsPort];
-	UKLog( @"%@ %ld", self, [self imagePosition] );
+	//UKLog( @"%@ %ld", self, [self imagePosition] );
 	if( [self image] != nil && [self imagePosition] == NSImageAbove )
 	{
 		txBox.origin.y += truncf([self image].size.height /2);
@@ -203,7 +203,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 -(void)	setImagePosition:(NSCellImagePosition)aPosition
 {
 	[super setImagePosition: aPosition];
-	UKLog( @"%@ %ld %ld", self, aPosition, self.imagePosition );
+	//UKLog( @"%@ %ld %ld", self, aPosition, self.imagePosition );
 }
 
 

@@ -15,9 +15,22 @@
 
 static WILDMessageBox*	sSharedMessageBox = nil;
 
+@interface WILDMessageBox ()
+{
+	LEOObjectID				mIDForScripts;
+	LEOObjectSeed			mSeedForScripts;
+	struct LEOValueObject	mValueForScripts;		// A LEOValue so scripts can reference us (see mIDForScripts).
+}
+
+@property (retain) id<WILDObject>					parentObject;
+
+@end
+
+
 @implementation WILDMessageBox
 
 @synthesize messageField;
+@synthesize parentObject;
 
 +(WILDMessageBox*)	sharedMessageBox
 {
@@ -29,6 +42,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 
 -(void)	dealloc
 {
+	DESTROY_DEALLOC(parentObject);
 	DESTROY_DEALLOC(messageField);
 	
     [super dealloc];
@@ -57,14 +71,8 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 }
 
 
--(IBAction)	runMessage: (id)sender
+-(WILDDocument*)	frontDoc
 {
-	/*
-		This is the main script execution bottleneck for the message box.
-		The text you enter in the field gets executed in the context of the
-		current card.
-	*/
-	
 	WILDDocument*	frontDoc = nil;
 	NSArray*		docs = [NSApp orderedDocuments];
 	for( WILDDocument* currDoc in docs )
@@ -76,6 +84,19 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		}
 	}
 	
+	return frontDoc;
+}
+
+
+-(IBAction)	runMessage: (id)sender
+{
+	/*
+		This is the main script execution bottleneck for the message box.
+		The text you enter in the field gets executed in the context of the
+		current card.
+	*/
+	
+	WILDDocument*	frontDoc = [self frontDoc];
 	NSString	*	currCmd = [messageField stringValue];
 	const char	*	scriptStr = [currCmd UTF8String];
 	LEOScript	*	theScript = NULL;
@@ -83,9 +104,10 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	if( LEOParserGetLastErrorMessage() == NULL )
 	{
 		WILDCard	*	targetCard = [frontDoc currentCard];
+		self.parentObject = targetCard;
 		LEOObjectID		objectIDForScripts = kLEOObjectIDINVALID;
 		LEOObjectSeed	seedForScripts = 0;
-		[targetCard getID: &objectIDForScripts seedForScripts: &seedForScripts];
+		[self getID: &objectIDForScripts seedForScripts: &seedForScripts];
 		
 		theScript = LEOScriptCreateForOwner( objectIDForScripts, seedForScripts, LEOForgeScriptGetParentScript );
 		LEOScriptCompileAndAddParseTree( theScript, [frontDoc contextGroup], parseTree );
@@ -131,6 +153,12 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 			resultString = [[[NSString alloc] initWithBytes: returnValue length: strlen(returnValue) encoding: NSUTF8StringEncoding] autorelease];
 		}
 		
+		if( mIDForScripts )
+		{
+			mIDForScripts = kLEOObjectIDINVALID;
+			LEOCleanUpValue( &mValueForScripts, kLEOInvalidateReferences, &ctx );
+		}
+		
 		LEOCleanUpContext( &ctx );
 	}
 	
@@ -138,6 +166,25 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	{
 		LEOScriptRelease( theScript );
 		theScript = NULL;
+	}
+}
+	
+-(void)	getID: (LEOObjectID*)outID seedForScripts: (LEOObjectSeed*)outSeed
+{
+	if( mIDForScripts == kLEOObjectIDINVALID )
+	{
+		WILDDocument	*	frontDoc = [self frontDoc];
+		LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
+		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [frontDoc contextGroup], &mValueForScripts );
+		mSeedForScripts = LEOContextGroupGetSeedForObjectID( [frontDoc contextGroup], mIDForScripts );
+	}
+	
+	if( mIDForScripts )
+	{
+		if( outID )
+			*outID = mIDForScripts;
+		if( outSeed )
+			*outSeed = mSeedForScripts;
 	}
 }
 
