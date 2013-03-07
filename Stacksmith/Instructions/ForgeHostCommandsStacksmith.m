@@ -160,12 +160,40 @@ void	WILDAskInstruction( LEOContext* inContext )
 }
 
 
+void	WILDCreateInstruction( LEOContext* inContext )
+{
+	char typeNameBuf[1024] = { 0 };
+	const char*	typeNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, typeNameBuf, sizeof(typeNameBuf), inContext );
+	char nameBuf[1024] = { 0 };
+	const char* nameStr = LEOGetValueAsString( inContext->stackEndPtr -1, nameBuf, sizeof(nameBuf), inContext );
+	
+	SEL				newObjectAction = Nil;
+	NSString	*	newTitle = [NSString stringWithUTF8String: nameStr];
+	if( strcasecmp(typeNameStr, "button") == 0 )
+		newObjectAction = @selector(createNewButtonNamed:);
+	else
+		LEOContextStopWithError( inContext, "Don't know how to create a \"%s\".", typeNameStr );
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	if( newObjectAction != Nil )
+	{
+		WILDStack			*	frontStack = [WILDDocument frontStackNamed: nil];
+		WILDCard			*	currentCard = [frontStack currentCard];
+		[currentCard performSelector: newObjectAction withObject: newTitle];
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOInstructionFuncPtr		gStacksmithHostCommandInstructions[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS] =
 {
 	WILDGoInstruction,
 	WILDVisualEffectInstruction,
 	WILDAnswerInstruction,
-	WILDAskInstruction
+	WILDAskInstruction,
+	WILDCreateInstruction
 };
 
 const char*					gStacksmithHostCommandInstructionNames[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS] =
@@ -173,7 +201,8 @@ const char*					gStacksmithHostCommandInstructionNames[WILD_NUMBER_OF_HOST_COMMA
 	"WILDGoInstruction",
 	"WILDVisualEffectInstruction",
 	"WILDAnswerInstruction",
-	"WILDAskInstruction"
+	"WILDAskInstruction",
+	"WILDCreateInstruction"
 };
 
 struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS +1] =
@@ -226,6 +255,20 @@ struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INS
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
 			{ EHostParamLabeledValue, EWithIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 }
+		}
+	},
+	{
+		ECreateIdentifier, WILD_CREATE_INSTR, 0, 0,
+		{
+			{ EHostParamIdentifier, ENewIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
+			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0 },
+			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0 },

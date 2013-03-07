@@ -76,7 +76,7 @@
 
 -(void)							createNewButton: (id)sender;
 -(void)							createNewField: (id)sender;
--(void)							addNewPartFromXMLTemplate: (NSURL*)xmlFile;
+-(WILDPart*)					addNewPartFromXMLTemplate: (NSURL*)xmlFile;
 
 -(void)							bringPartCloser: (WILDPart*)inPart;
 -(void)							sendPartFarther: (WILDPart*)inPart;

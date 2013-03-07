@@ -314,6 +314,13 @@
 }
 
 
+-(void)	createNewButtonNamed: (NSString*)inName
+{
+	WILDPart*	newPart = [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"ButtonPartTemplate"]];
+	[newPart setName: inName];
+}
+
+
 -(void)	createNewButton: (id)sender
 {
 	[self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"ButtonPartTemplate"]];
@@ -422,14 +429,14 @@
 }
 
 
--(void)	addNewPartFromXMLTemplate: (NSURL*)xmlFile
+-(WILDPart*)	addNewPartFromXMLTemplate: (NSURL*)xmlFile
 {
 	NSError			*	outError = nil;
 	NSXMLDocument	*	templateDocument = [[[NSXMLDocument alloc] initWithContentsOfURL: xmlFile options: 0 error: &outError] autorelease];
 	if( !templateDocument && outError )
 	{
 		UKLog(@"Couldn't load XML template for part: %@",outError);
-		return;
+		return nil;
 	}
 	
 	NSXMLElement	*	theElement = [templateDocument rootElement];
@@ -445,6 +452,8 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidAddPartNotification
 						object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: newPart, WILDAffectedPartKey,
 							nil]];
+	
+	return newPart;
 }
 
 
