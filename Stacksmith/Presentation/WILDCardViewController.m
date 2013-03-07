@@ -256,7 +256,9 @@
 	{
 		return( [[WILDTools sharedTools] numberOfSelectedClients] > 0
 			&& ([[WILDTools sharedTools] currentTool] == WILDButtonTool
-				|| [[WILDTools sharedTools] currentTool] == WILDFieldTool) );
+				|| [[WILDTools sharedTools] currentTool] == WILDFieldTool
+				|| [[WILDTools sharedTools] currentTool] == WILDPointerTool
+				|| [[WILDTools sharedTools] currentTool] == WILDMoviePlayerTool) );
 	}
 	else if( [menuItem action] == @selector(goRecentCard:)
 				|| [menuItem action] == @selector(goBack:) )
