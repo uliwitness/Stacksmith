@@ -292,4 +292,10 @@
 	return propExists;
 }
 
+
+-(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName;
+{
+	return &kLeoValueTypeString;
+}
+
 @end

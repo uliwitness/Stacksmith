@@ -1272,101 +1272,23 @@
 }
 
 
+-(void)	rectanglePropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	if( mPartPresenter )
+		[self setFrame: NSInsetRect([mPart rectangle], -2, -2)];	// Presenter can register to pick up our changes and react.
+}
+
+
 -(void)	loadPushButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
 			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
-	NSRect						partRect = [currPart rectangle];
 	[self setHidden: ![currPart visible]];
 	[self setWantsLayer: YES];
 	[self setPart: currPart];
-	partRect.origin = NSMakePoint( 2, 2 );
 	
 	[mPartPresenter createSubviews];
 	[mPartPresenter refreshProperties];
 	
-//	BOOL		isHighlighted = [currPart highlighted];
-//	if( ![currPart sharedHighlight] && [[currPart partLayer] isEqualToString: @"background"] )
-//		isHighlighted = [contents highlighted];
-//	
-//	BOOL			canHaveIcon = YES;
-//	NSButton	*	bt = [[WILDButtonView alloc] initWithFrame: partRect];
-//	[bt setEnabled: [currPart isEnabled]];
-//	
-//	if( [[currPart style] isEqualToString: @"transparent"] )
-//	{
-//		[bt setCell: [[[WILDButtonCell alloc] initTextCell: @""] autorelease]];
-//		[bt setBordered: NO];
-//
-//		[bt setAlignment: [currPart textAlignment]];	
-//		[bt setButtonType: NSMomentaryPushInButton];
-//		
-//#if TRANSPARENT_BUTTONS_INVERT
-//		if( isHighlighted )
-//		{
-//			CALayer*	theLayer = [self layer];
-//			[theLayer setOpaque: NO];
-//			CIFilter*	theFilter = [CIFilter filterWithName: @"CIDifferenceBlendMode"];
-//			[theFilter setDefaults];
-//			//[theLayer setSize: [self bounds].size];
-//			[theLayer setCompositingFilter: theFilter];
-//		}
-//#endif
-//	}
-//	else if( [[currPart style] isEqualToString: @"opaque"] )
-//	{
-//		[bt setCell: [[[WILDButtonCell alloc] initTextCell: @""] autorelease]];
-//		[bt setBordered: NO];
-//		[[bt cell] setBackgroundColor: [NSColor whiteColor]];
-//		[bt setAlignment: [currPart textAlignment]];	
-//		[bt setButtonType: NSMomentaryPushInButton];
-//	}
-//	else if( [[currPart style] isEqualToString: @"rectangle"]
-//			|| [[currPart style] isEqualToString: @"roundrect"]
-//			|| [[currPart style] isEqualToString: @"oval"] )
-//	{
-//		WILDButtonCell*	ourCell = [[[WILDButtonCell alloc] initTextCell: @""] autorelease];
-//		[ourCell setBackgroundColor: [currPart fillColor]];
-//		[ourCell setLineColor: [currPart lineColor]];
-//		[bt setCell: ourCell];
-//		[bt setBordered: YES];
-//				
-//		if( [[currPart style] isEqualToString: @"roundrect"]
-//			|| [[currPart style] isEqualToString: @"standard"]
-//			|| [[currPart style] isEqualToString: @"default"] )
-//			[bt setBezelStyle: NSRoundedBezelStyle];
-//		else if( [[currPart style] isEqualToString: @"oval"] )
-//			[bt setBezelStyle: NSCircularBezelStyle];
-//
-//		if( [[currPart style] isEqualToString: @"default"] )
-//		{
-//			[bt setKeyEquivalent: @"\r"];
-//			[ourCell setDrawAsDefault: YES];
-//		}
-//		[bt setAlignment: [currPart textAlignment]];	
-//		[bt setButtonType: NSMomentaryPushInButton];
-//	}
-//	else if( [[currPart style] isEqualToString: @"standard"]
-//			|| [[currPart style] isEqualToString: @"default"] )
-//	{
-//		[bt setBordered: YES];
-//		[bt setBezelStyle: NSRoundedBezelStyle];
-//		
-//		if( [[currPart style] isEqualToString: @"default"] )
-//			[bt setKeyEquivalent: @"\r"];
-//		[bt setAlignment: [currPart textAlignment]];	
-//		[bt setButtonType: NSMomentaryPushInButton];
-//	}
-//	else if( [[currPart style] isEqualToString: @"checkbox"] )
-//	{
-//		[bt setButtonType: NSSwitchButton];
-//		canHaveIcon = NO;
-//	}
-//	else if( [[currPart style] isEqualToString: @"radiobutton"] )
-//	{
-//		[bt setButtonType: NSRadioButton];
-//		canHaveIcon = NO;
-//	}
-
 	NSColor	*	shadowColor = [currPart shadowColor];
 	if( [shadowColor alphaComponent] > 0.0 )
 	{
@@ -1378,33 +1300,6 @@
 	}
 	else
 		[[self layer] setShadowOpacity: 0.0];
-	
-//	[bt setFont: [currPart textFont]];
-//	if( [currPart showName] )
-//		[bt setTitle: [currPart name]];
-//	[bt setTarget: self];
-//	[bt setAction: @selector(updateOnClick:)];
-//	[bt setState: isHighlighted ? NSOnState : NSOffState];
-//	
-//	if( canHaveIcon && [currPart iconID] != 0 )
-//	{
-//		[bt setImage: [currPart iconImage]];
-//		
-//		if( [currPart iconID] == -1 || [[currPart name] length] == 0
-//			|| ![currPart showName] )
-//			[bt setImagePosition: NSImageOnly];
-//		else
-//			[bt setImagePosition: NSImageAbove];
-//		if( [currPart iconID] != -1 && [currPart iconID] != 0 )
-//			[bt setFont: [NSFont fontWithName: @"Geneva" size: 9.0]];
-//		[[bt cell] setImageScaling: NSImageScaleNone];
-//	}
-//	
-//	[self addSubview: bt];
-//	[bt setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-//	[self setMainView: bt];
-//	
-//	[bt release];
 }
 
 

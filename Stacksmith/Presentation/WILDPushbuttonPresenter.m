@@ -94,7 +94,7 @@
 }
 
 
--(void)	sstylePropertyDidChangeOfPart: (WILDPart*)inPart
+-(void)	stylePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }

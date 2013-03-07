@@ -26,16 +26,41 @@ void	AppendLEOArrayToDictionary( struct LEOArrayEntry * inEntry, NSMutableDictio
 }
 
 
-id	WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext )
+id	WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext, LEOValueTypePtr inDesiredType )
 {
 	id			theObjCValue = nil;
-	LEOValuePtr	theArrayValue = LEOFollowReferencesAndReturnValueOfType( inValue, &kLeoValueTypeArray, inContext );
+	LEOValuePtr	theArrayValue = LEOFollowReferencesAndReturnValueOfType( inValue, inDesiredType, inContext );
 	if( !theArrayValue )
-		theArrayValue = LEOFollowReferencesAndReturnValueOfType( inValue, &kLeoValueTypeArrayVariant, inContext );
-	if( theArrayValue )
+		theArrayValue = LEOFollowReferencesAndReturnValueOfType( inValue, inDesiredType, inContext );
+	if( (inDesiredType == &kLeoValueTypeArray || inDesiredType == &kLeoValueTypeArrayVariant) )
 	{
+		struct LEOArrayEntry	*	theArray = NULL;
 		theObjCValue = [NSMutableDictionary dictionary];
-		AppendLEOArrayToDictionary( theArrayValue->array.array, theObjCValue, inContext );
+		if( theArrayValue )
+			theArray = theArrayValue->array.array;
+		else
+		{
+			char		theValueStrBuf[1024] = { 0 };
+			char*		theValueStr = LEOGetValueAsString( inValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
+			theArray = LEOCreateArrayFromString( theValueStr, inContext );
+		}
+		
+		AppendLEOArrayToDictionary( theArray, theObjCValue, inContext );
+		
+		if( !theArrayValue )
+			LEOCleanUpArray( theArray, inContext );
+	}
+	else if( theArrayValue && (inDesiredType == &kLeoValueTypeNumber || inDesiredType == &kLeoValueTypeNumberVariant) )
+	{
+		theObjCValue = [NSNumber numberWithDouble: theArrayValue->number.number];
+	}
+	else if( theArrayValue && (inDesiredType == &kLeoValueTypeInteger || inDesiredType == &kLeoValueTypeIntegerVariant) )
+	{
+		theObjCValue = [NSNumber numberWithLongLong: theArrayValue->integer.integer];
+	}
+	else if( theArrayValue && (inDesiredType == &kLeoValueTypeBoolean || inDesiredType == &kLeoValueTypeBooleanVariant) )
+	{
+		theObjCValue = [NSNumber numberWithBool: theArrayValue->boolean.boolean];
 	}
 	else
 	{

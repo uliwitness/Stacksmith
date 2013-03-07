@@ -71,11 +71,13 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 	
 	if( theObjectValue )
 	{
-		id			theObjCValue = WILDObjCObjectFromLEOValue( theValue, inContext );
+		id<WILDObject>	theObjCObject = (id<WILDObject>)theObjectValue->object.object;
+		NSString	*	propNameObjCStr = [NSString stringWithUTF8String: propNameStr];
+		id				theObjCValue = WILDObjCObjectFromLEOValue( theValue, inContext, [theObjCObject typeForWILDPropertyNamed: propNameObjCStr] );
 		
 		@try
 		{
-			if( ![(id<WILDObject>)theObjectValue->object.object setValue: theObjCValue forWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr] inRange: NSMakeRange(0,0)] )
+			if( ![theObjCObject setValue: theObjCValue forWILDPropertyNamed: propNameObjCStr inRange: NSMakeRange(0,0)] )
 			{
 				LEOContextStopWithError( inContext, "Object does not have property \"%s\".", propNameStr );
 				return;

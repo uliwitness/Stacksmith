@@ -157,7 +157,14 @@
 
 -(void)	setFlippedRectangle: (NSRect)theBox
 {
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+								object: self userInfo: [NSDictionary dictionaryWithObject: @"rectangle"
+																forKey: WILDAffectedPropertyKey]];
 	mRectangle = theBox;
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+								object: self userInfo: [NSDictionary dictionaryWithObject: @"rectangle"
+																forKey: WILDAffectedPropertyKey]];
 }
 
 
@@ -1326,6 +1333,81 @@
 		[self updateChangeCount: NSChangeDone];
 	
 	return propExists;
+}
+
+
+-(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName
+{
+	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
+		return &kLeoValueTypeString;
+	else if( [inPropertyName isEqualToString: @"rectangle"] )
+	{
+		return &kLeoValueTypeArray;
+	}
+	else if( [inPropertyName isEqualToString: @"fillcolor"] )
+	{
+		return &kLeoValueTypeArray;
+	}
+	else if( [inPropertyName isEqualToString: @"linecolor"] )
+	{
+		return &kLeoValueTypeArray;
+	}
+	else if( [inPropertyName isEqualToString: @"shadowcolor"] )
+	{
+		return &kLeoValueTypeArray;
+	}
+	else if( [inPropertyName isEqualToString: @"shadowoffset"] )
+	{
+		return &kLeoValueTypeArray;
+	}
+	else if( [inPropertyName isEqualToString: @"shhadowblurradius"] )
+		return &kLeoValueTypeNumber;
+	else if( [inPropertyName isEqualToString: @"visible"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"dontwrap"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"dontsearch"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"sharedtext"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"autotab"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"locktext"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"autoselect"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"showlines"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"autohighlight"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"highlight"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"widemargins"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"multiplelines"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"showname"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"enabled"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"script"] )
+		return &kLeoValueTypeString;
+	else if( [inPropertyName isEqualToString: @"style"] )
+		return &kLeoValueTypeString;
+	else if( [inPropertyName isEqualToString: @"moviepath"] )
+		return &kLeoValueTypeString;
+	else if( [inPropertyName isEqualToString: @"controllervisible"] )
+		return &kLeoValueTypeBoolean;
+	else if( [inPropertyName isEqualToString: @"icon"] )
+		return &kLeoValueTypeInteger;
+	else
+		return &kLeoValueTypeString;
 }
 
 

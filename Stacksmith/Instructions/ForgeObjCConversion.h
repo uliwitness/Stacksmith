@@ -11,5 +11,5 @@
 #include "LEOInterpreter.h"
 
 
-id		WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext );
+id		WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext, LEOValueTypePtr inDesiredType );
 BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inContext );

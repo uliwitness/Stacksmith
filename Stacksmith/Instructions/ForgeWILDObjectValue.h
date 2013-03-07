@@ -25,8 +25,9 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 -(BOOL)			goThereInNewWindow: (BOOL)inNewWindow;
 
--(id)			valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange;
--(BOOL)			setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange;
+-(id)				valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange;
+-(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName;
+-(BOOL)				setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange;
 
 -(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError;
 -(id<WILDObject>)		parentObject;
@@ -36,4 +37,3 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 void		LEOInitWILDObjectValue( LEOValuePtr inStorage, id<WILDObject> wildObject, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
 struct LEOScript*	LEOForgeScriptGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext );
-
