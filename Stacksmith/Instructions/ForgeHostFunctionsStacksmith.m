@@ -478,7 +478,7 @@ void	WILDLastPartInstruction( LEOContext* inContext )
 	NSString		*	partType = nil;
 	bool				hadError = false;
 		
-	if( (inContext->currentInstruction->param1 & 16) == 0 )
+	if( (inContext->currentInstruction->param1 & 16) != 0 )
 		theLayer = theBackground;
 
 	if( inContext->currentInstruction->param1 == 1 )
