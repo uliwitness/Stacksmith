@@ -8,6 +8,7 @@
 
 #import "WILDBackground.h"
 #import "WILDNotifications.h"
+#import "WILDStack.h"
 
 
 @implementation WILDBackground
@@ -89,7 +90,7 @@
 
 -(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
-	return NO;
+	return [mCards[0] goThereInNewWindow: inNewWindow];
 }
 
 
