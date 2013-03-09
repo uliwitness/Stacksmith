@@ -11,6 +11,7 @@
 #import "WILDDocument.h"
 #import "WILDStack.h"
 #import "WILDLayer.h"
+#import "WILDCard.h"
 #import "LEOScript.h"
 
 
@@ -433,13 +434,54 @@ void	WILDPreviousCardInstruction( LEOContext* inContext )
 }
 
 
+void	WILDNextBackgroundInstruction( LEOContext* inContext )
+{
+	WILDStack		*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDBackground	*	theBackground = [[theStack document] currentCard].owningBackground;
+	NSUInteger			bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
+	bkgdIndex++;
+	if( bkgdIndex >= [[theStack backgrounds] count] )
+		bkgdIndex = 0;
+	theBackground = [[theStack backgrounds] objectAtIndex: bkgdIndex];
+	
+	LEOInitWILDObjectValue( inContext->stackEndPtr, theBackground, kLEOInvalidateReferences, inContext );
+	inContext->stackEndPtr ++;
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDPreviousBackgroundInstruction( LEOContext* inContext )
+{
+	WILDStack		*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDBackground	*	theBackground = [[theStack document] currentCard].owningBackground;
+	NSUInteger			bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
+	if( bkgdIndex == 0 )
+		bkgdIndex = [[theStack backgrounds] count] -1;
+	else
+		bkgdIndex--;
+	theBackground = [[theStack backgrounds] objectAtIndex: bkgdIndex];
+	
+	LEOInitWILDObjectValue( inContext->stackEndPtr, theBackground, kLEOInvalidateReferences, inContext );
+	inContext->stackEndPtr ++;
+	
+	inContext->currentInstruction++;
+}
+
+
 void	WILDFirstCardInstruction( LEOContext* inContext )
 {
 	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
 	WILDCard	*	theCard = [[theStack cards] objectAtIndex: 0];
 	
-	LEOInitWILDObjectValue( inContext->stackEndPtr, theCard, kLEOInvalidateReferences, inContext );
-	inContext->stackEndPtr ++;
+	if( theStack.cards.count == 0 )
+		LEOContextStopWithError( inContext, "No such card." );
+	
+	if( inContext->keepRunning )	// No error?
+	{
+		LEOInitWILDObjectValue( inContext->stackEndPtr, theCard, kLEOInvalidateReferences, inContext );
+		inContext->stackEndPtr ++;
+	}
 	
 	inContext->currentInstruction++;
 }
@@ -450,55 +492,77 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
 	WILDCard	*	theCard = [[theStack cards] lastObject];
 	
-	LEOInitWILDObjectValue( inContext->stackEndPtr, theCard, kLEOInvalidateReferences, inContext );
-	inContext->stackEndPtr ++;
+	if( theStack.cards.count == 0 )
+		LEOContextStopWithError( inContext, "No such card." );
+	
+	if( inContext->keepRunning )	// No error?
+	{
+		LEOInitWILDObjectValue( inContext->stackEndPtr, theCard, kLEOInvalidateReferences, inContext );
+		inContext->stackEndPtr ++;
+	}
 	
 	inContext->currentInstruction++;
 }
 
 
-void	WILDLastBackgroundInstruction( LEOContext* inContext )
+void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 {
 	WILDStack		*	theStack = [WILDDocument frontStackNamed: nil];
-	WILDBackground	*	theBackground = [[theStack backgrounds] lastObject];
 	
-	LEOInitWILDObjectValue( inContext->stackEndPtr, theBackground, kLEOInvalidateReferences, inContext );
-	inContext->stackEndPtr ++;
+	if( theStack.backgrounds.count == 0 )
+		LEOContextStopWithError( inContext, "No such background." );
+	
+	if( inContext->keepRunning )
+	{
+		WILDBackground	*	theBackground = (inContext->currentInstruction->param1 & 32) ? [[theStack backgrounds] lastObject] : [[theStack backgrounds] objectAtIndex: 0];
+		
+		LEOInitWILDObjectValue( inContext->stackEndPtr, theBackground, kLEOInvalidateReferences, inContext );
+		inContext->stackEndPtr ++;
+	}
 	
 	inContext->currentInstruction++;
 }
 
 
-void	WILDLastPartInstruction( LEOContext* inContext )
+void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 {
 	WILDStack		*	theStack = [WILDDocument frontStackNamed: nil];
 	WILDCard		*	theCard = [theStack.document currentCard];
 	WILDBackground	*	theBackground = [theCard owningBackground];
 	WILDLayer		*	theLayer = theCard;
 	NSString		*	partType = nil;
-	bool				hadError = false;
 		
 	if( (inContext->currentInstruction->param1 & 16) != 0 )
 		theLayer = theBackground;
-
-	if( inContext->currentInstruction->param1 == 1 )
-		partType = @"button";
-	else if( inContext->currentInstruction->param1 == 2 )
-		partType = @"field";
-	else if( inContext->currentInstruction->param1 == 3 )
-		partType = @"moviePlayer";
-	else if( inContext->currentInstruction->param1 != 0 )
-	{
-		LEOContextStopWithError( inContext, "Can only list parts, buttons, fields and movie players on cards and backgrounds." );
-		hadError = true;
-	}
 	
-	if( !hadError )
+	uint16_t	partTypeNum = inContext->currentInstruction->param1 & ~(16 | 32);
+	
+	if( partTypeNum == 1 )
+		partType = @"button";
+	else if( partTypeNum == 2 )
+		partType = @"field";
+	else if( partTypeNum == 3 )
+		partType = @"moviePlayer";
+	else if( partTypeNum != 0 )
+		LEOContextStopWithError( inContext, "Can only list parts, buttons, fields and movie players on cards and backgrounds." );
+	
+	if( inContext->keepRunning )	// No error?
 	{
-		WILDPart	*	thePart = [theLayer partAtIndex: [theLayer numberOfPartsOfType: partType] -1 ofType: partType];
+		NSInteger		numParts = [theLayer numberOfPartsOfType: partType];
+		if( numParts == 0 )
+			LEOContextStopWithError( inContext, "No such %s.", [partType UTF8String] );
 		
-		LEOInitWILDObjectValue( inContext->stackEndPtr, thePart, kLEOInvalidateReferences, inContext );
-		inContext->stackEndPtr ++;
+		NSInteger	desiredIndex = 0;
+		if( inContext->currentInstruction->param1 & 32 )
+			desiredIndex = numParts -1;
+		
+		if( inContext->keepRunning )	// Still no error? I.e. we have parts of this type?
+		{
+			WILDPart	*	thePart = [theLayer partAtIndex: desiredIndex ofType: partType];
+			
+			LEOInitWILDObjectValue( inContext->stackEndPtr, thePart, kLEOInvalidateReferences, inContext );
+			inContext->stackEndPtr ++;
+		}
 	}
 	
 	inContext->currentInstruction++;
@@ -578,8 +642,10 @@ LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_F
 	WILDPreviousCardInstruction,
 	WILDFirstCardInstruction,
 	WILDLastCardInstruction,
-	WILDLastBackgroundInstruction,
-	WILDLastPartInstruction,
+	WILDNextBackgroundInstruction,
+	WILDPreviousBackgroundInstruction,
+	WILDPushOrdinalBackgroundInstruction,
+	WILDPushOrdinalPartInstruction,
 	WILDThisStackInstruction,
 	WILDThisBackgroundInstruction,
 	WILDThisCardInstruction
@@ -602,8 +668,10 @@ const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNC
 	"WILDPreviousCardInstruction",
 	"WILDFirstCardInstruction",
 	"WILDLastCardInstruction",
-	"WILDLastBackgroundInstruction",
-	"WILDLastPartInstruction",
+	"WILDNextBackgroundInstruction",
+	"WILDPreviousBackgroundInstruction",
+	"WILDPushOrdinalBackgroundInstruction",
+	"WILDPushOrdinalPartInstruction",
 	"WILDThisStackInstruction",
 	"WILDThisBackgroundInstruction",
 	"WILDThisCardInstruction"
@@ -762,7 +830,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 		ENextIdentifier, INVALID_INSTR2, 0, 0,
 		{
 			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_NEXT_CARD_INSTRUCTION, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_NEXT_BACKGROUND_INSTRUCTION, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -783,7 +851,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 		EPreviousIdentifier, INVALID_INSTR2, 0, 0,
 		{
 			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_PREVIOUS_CARD_INSTRUCTION, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_PREVIOUS_BACKGROUND_INSTRUCTION, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -803,18 +871,18 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 	{
 		EFirstIdentifier, INVALID_INSTR2, 0, 0,
 		{
-			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_FIRST_CARD_INSTRUCTION, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_FIRST_CARD_INSTRUCTION, 0, 0, '\0', 'C' },
+			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_BACKGROUND_INSTRUCTION, 32, 0, '\0', 'B' },
+			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 1, 0, 'C', 'x' },
+			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 2, 0, 'C', 'x' },
+			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 3, 0, 'C', 'y' },
+			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 3, 0, 'y', 'x' },
+			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 0, 0, 'C', 'x' },
+			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 16+1, 0, 'B', 'x' },
+			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 16+2, 0, 'B', 'x' },
+			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 16+3, 0, 'B', 'z' },
+			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 16+3, 0, 'z', 'x' },
+			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 16+0, 0, 'B', 'x' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -825,17 +893,17 @@ struct THostCommandEntry	gStacksmithHostFunctions[WILD_NUMBER_OF_HOST_FUNCTION_I
 		ELastIdentifier, INVALID_INSTR2, 0, 0,
 		{
 			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_LAST_CARD_INSTRUCTION, 0, 0, '\0', 'C' },
-			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_LAST_BACKGROUND_INSTRUCTION, 0, 0, '\0', 'B' },
-			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_LAST_PART_INSTRUCTION, 1, 0, 'C', 'x' },
-			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_LAST_PART_INSTRUCTION, 2, 0, 'C', 'x' },
-			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_LAST_PART_INSTRUCTION, 3, 0, 'C', 'y' },
-			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_LAST_PART_INSTRUCTION, 3, 0, 'y', 'x' },
-			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_LAST_PART_INSTRUCTION, 0, 0, 'C', 'x' },
-			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_LAST_PART_INSTRUCTION, 16+1, 0, 'B', 'x' },
-			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_LAST_PART_INSTRUCTION, 16+2, 0, 'B', 'x' },
-			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_LAST_PART_INSTRUCTION, 16+3, 0, 'B', 'z' },
-			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_LAST_PART_INSTRUCTION, 16+3, 0, 'z', 'x' },
-			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_LAST_PART_INSTRUCTION, 16+0, 0, 'B', 'x' },
+			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_BACKGROUND_INSTRUCTION, 0, 0, '\0', 'B' },
+			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+1, 0, 'C', 'x' },
+			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+2, 0, 'C', 'x' },
+			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+3, 0, 'C', 'y' },
+			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+3, 0, 'y', 'x' },
+			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+0, 0, 'C', 'x' },
+			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+16+1, 0, 'B', 'x' },
+			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+16+2, 0, 'B', 'x' },
+			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+16+3, 0, 'B', 'z' },
+			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+16+3, 0, 'z', 'x' },
+			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_PART_INSTRUCTION, 32+16+0, 0, 'B', 'x' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
