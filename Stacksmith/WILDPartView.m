@@ -1780,4 +1780,15 @@
 	[mPartPresenter removeSubviews];
 }
 
+
+-(BOOL)	acceptsFirstMouse: (NSEvent *)theEvent
+{
+	if( [[WILDTools sharedTools] currentTool] == WILDBrowseTool && !mPeeking )
+	{
+		return mPart.clickableInInactiveWindow;
+	}
+	else
+		return YES;
+}
+
 @end

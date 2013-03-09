@@ -38,6 +38,7 @@
 @synthesize shadowColor = mShadowColor;
 @synthesize shadowOffset = mShadowOffset;
 @synthesize shadowBlurRadius = mShadowBlurRadius;
+@synthesize clickableInInactiveWindow = mClickableInInactiveWindow;
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
 {
@@ -75,6 +76,7 @@
 		NSString	* timeString = WILDStringFromSubElementInElement( @"currentTime", elem );
 		if( timeString )
 			mCurrentTime = QTTimeFromString( timeString );
+		mClickableInInactiveWindow = WILDBoolFromSubElementInElement( @"clickableInInactiveWindow", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
 		
 		NSString*		alignStr = WILDStringFromSubElementInElement( @"textAlign", elem );
 		if( [alignStr isEqualToString: @"forceLeft"] )

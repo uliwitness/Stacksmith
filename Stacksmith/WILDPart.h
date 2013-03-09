@@ -87,6 +87,7 @@
 @property (assign) BOOL			controllerVisible;
 @property (assign) BOOL			hasHorizontalScroller;
 @property (assign) BOOL			hasVerticalScroller;
+@property (assign) BOOL			clickableInInactiveWindow;
 @property (copy) NSString*		mediaPath;
 @property (assign) QTTime		currentTime;
 @property (retain) NSColor*		lineColor;
