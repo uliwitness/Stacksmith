@@ -39,17 +39,15 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		LEOValuePtr	theValue = LEOGetValueForKey( theObject, propNameStr, inContext );
-		if( theValue )
-		{
-			LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
-			LEOInitCopy( theValue, thePropertyName, kLEOInvalidateReferences, inContext );
-		}
-		else
+		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
+		LEOValuePtr	theValue = LEOGetValueForKey( theObject, propNameStr, thePropertyName, kLEOInvalidateReferences, inContext );
+		if( !theValue )
 		{
 			LEOContextStopWithError( inContext, "Can't get property \"%s\" of this.", propNameStr );
 			return;
 		}
+		else if( theValue != thePropertyName )
+			LEOInitCopy( theValue, thePropertyName, kLEOInvalidateReferences, inContext );
 	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
