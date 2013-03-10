@@ -347,7 +347,7 @@
 }
 
 
-static void FillFirstFreeOne( NSString* theAppendee, NSString ** a, NSString ** b, NSString ** d, NSString ** c )
+static void FillFirstFreeOne( NSString ** a, NSString ** b, NSString ** d, NSString ** c, NSString* theAppendee )
 {
 	if( *a == nil )
 		*a = theAppendee;
@@ -366,20 +366,28 @@ static void FillFirstFreeOne( NSString* theAppendee, NSString ** a, NSString ** 
 	
 	if( [WILDTools sharedTools].currentTool == WILDBrowseTool )
 	{
-		NSString	*	firstModifier = @"";
-		NSString	*	secondModifier = @"";
-		NSString	*	thirdModifier = @"";
-		NSString	*	fourthModifier = @"";
+		NSString	*	firstModifier = nil;
+		NSString	*	secondModifier = nil;
+		NSString	*	thirdModifier = nil;
+		NSString	*	fourthModifier = nil;
 		
-		if( theEvent.modifierFlags & NSShiftKeyMask );
+		if( theEvent.modifierFlags & NSShiftKeyMask )
 			FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, @"shift" );
-		if( theEvent.modifierFlags & NSAlternateKeyMask );
+		else if( theEvent.modifierFlags & NSAlphaShiftKeyMask )
+			FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, @"shiftlock" );
+		if( theEvent.modifierFlags & NSAlternateKeyMask )
 			FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, @"alternate" );
-		if( theEvent.modifierFlags & NSControlKeyMask );
+		if( theEvent.modifierFlags & NSControlKeyMask )
 			FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, @"control" );
-		if( theEvent.modifierFlags & NSCommandKeyMask );
+		if( theEvent.modifierFlags & NSCommandKeyMask )
 			FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, @"command" );
-		WILDScriptContainerResultFromSendingMessage( mCard, @"keyDown %@,%@,%@,%@", [theEvent charactersIgnoringModifiers], firstModifier, secondModifier, thirdModifier, fourthModifier );
+		
+		if( !firstModifier ) firstModifier = @"";
+		if( !secondModifier ) secondModifier = @"";
+		if( !thirdModifier ) thirdModifier = @"";
+		if( !fourthModifier ) fourthModifier = @"";
+		
+		WILDScriptContainerResultFromSendingMessage( mCard, @"keyDown %@,%@,%@,%@", [theEvent characters], firstModifier, secondModifier, thirdModifier, fourthModifier );
 
 		if( theEvent.charactersIgnoringModifiers.length > 0 )
 		{
