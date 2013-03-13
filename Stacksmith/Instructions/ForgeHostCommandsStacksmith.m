@@ -174,7 +174,7 @@ void	WILDCreateInstruction( LEOContext* inContext )
 	else
 		LEOContextStopWithError( inContext, "Don't know how to create a \"%s\".", typeNameStr );
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 	
 	if( newObjectAction != Nil )
 	{
