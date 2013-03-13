@@ -1093,7 +1093,7 @@
 	SEL				theAction = NSSelectorFromString( [propName stringByAppendingString: @"PropertyDidChangeOfPart:"] );
 	if( [self respondsToSelector: theAction] )
 		[self performSelector: theAction withObject: thePart];
-	if( mPartPresenter )
+	if( mPartPresenter && ![propName isEqualToString: @"style"] )
 		[mPartPresenter partDidChange: notif];
 	else	// Unknown property. Reload the whole thing.
 	{

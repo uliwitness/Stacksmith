@@ -1318,7 +1318,7 @@
 	else if( [inPropertyName isEqualToString: @"script"] )
 		[self setScript: inValue];
 	else if( [inPropertyName isEqualToString: @"style"] )
-		[self setStyle: [self validatedStyle: mStyle]];
+		[self setStyle: [self validatedStyle: inValue]];
 	else if( [inPropertyName isEqualToString: @"moviepath"] )
 		[self setMediaPath: inValue];
 	else if( [inPropertyName isEqualToString: @"controllervisible"] )
