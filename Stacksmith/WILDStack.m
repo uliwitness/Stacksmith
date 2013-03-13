@@ -362,10 +362,10 @@
 			LEORemoteDebuggerAddFile( [[self displayName] UTF8String], scriptStr, mScriptObject );
 			
 			// Set a breakpoint on the mouseUp handler:
-			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [[self document] contextGroup], "mouseup" );
-			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
-			if( theHandler )
-				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
+//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [[self document] contextGroup], "mouseup" );
+//			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
+//			if( theHandler )
+//				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
 			#endif
 		}
 		if( LEOParserGetLastErrorMessage() )
