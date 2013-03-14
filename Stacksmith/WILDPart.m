@@ -670,7 +670,8 @@
 	if( !mScriptObject )
 	{
 		const char*		scriptStr = [mScript UTF8String];
-		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), [[self displayName] UTF8String] );
+		uint16_t		fileID = LEOFileIDForFileName( [[self displayName] UTF8String] );
+		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
 		if( LEOParserGetLastErrorMessage() == NULL )
 		{
 			if( mIDForScripts == kLEOObjectIDINVALID )
@@ -680,10 +681,10 @@
 				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[mStack document] contextGroup], mIDForScripts );
 			}
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
-			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree );
+			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree, fileID );
 			
 			#if REMOTE_DEBUGGER
-			LEORemoteDebuggerAddFile( [[self displayName] UTF8String], scriptStr, mScriptObject );
+			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );
 			
 			// Set a breakpoint on the mouseUp handler:
 //			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [[mStack document] contextGroup], "mouseup" );

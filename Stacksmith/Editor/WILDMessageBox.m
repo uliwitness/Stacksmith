@@ -100,7 +100,8 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	NSString	*	currCmd = [messageField stringValue];
 	const char	*	scriptStr = [currCmd UTF8String];
 	LEOScript	*	theScript = NULL;
-	LEOParseTree*	parseTree = LEOParseTreeCreateForCommandOrExpressionFromUTF8Characters( scriptStr, strlen(scriptStr), [[[self window] title] UTF8String] );
+	uint16_t		fileID = LEOFileIDForFileName( [[[self window] title] UTF8String] );
+	LEOParseTree*	parseTree = LEOParseTreeCreateForCommandOrExpressionFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
 	if( LEOParserGetLastErrorMessage() == NULL )
 	{
 		WILDCard	*	targetCard = [frontDoc currentCard];
@@ -110,7 +111,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		[self getID: &objectIDForScripts seedForScripts: &seedForScripts];
 		
 		theScript = LEOScriptCreateForOwner( objectIDForScripts, seedForScripts, LEOForgeScriptGetParentScript );
-		LEOScriptCompileAndAddParseTree( theScript, [frontDoc contextGroup], parseTree );
+		LEOScriptCompileAndAddParseTree( theScript, [frontDoc contextGroup], parseTree, fileID );
 	}
 	
 	if( LEOParserGetLastErrorMessage() )
@@ -136,7 +137,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
 
 		#if REMOTE_DEBUGGER
-		LEORemoteDebuggerAddFile( "message box", scriptStr, theScript );
+		LEORemoteDebuggerAddFile( scriptStr, fileID, theScript );
 		LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
 		#endif
 		
