@@ -52,6 +52,7 @@
 	BOOL				mControllerVisible;
 	BOOL				mHasHorizontalScroller;
 	BOOL				mHasVerticalScroller;
+	BOOL				mClickableInInactiveWindow;
 	QTTime				mCurrentTime;
 	NSMutableIndexSet*	mSelectedLines;				// The indexes into the contents' list items array of the selected items.
 	NSTextAlignment		mTextAlignment;
