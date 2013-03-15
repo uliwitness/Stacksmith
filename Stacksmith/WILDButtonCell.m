@@ -65,6 +65,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	
 	if( !lineColor )
 		lineColor = [[NSColor blackColor] retain];
+	NSColor	*	disabledColor = [lineColor blendedColorWithFraction: 0.5 ofColor: [NSColor colorWithCalibratedWhite: 0.0 alpha: lineColor.alphaComponent]];
 	
 	[lineColor set];
 	
@@ -75,7 +76,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		if( isActive )
 			[lineColor set];
 		else
-			[[NSColor grayColor] set];
+			[disabledColor set];
 		[[NSBezierPath bezierPathWithRoundedRect: NSInsetRect(clampedCellFrame, 1, 1) xRadius: 8 yRadius: 8] stroke];
 		[NSBezierPath setDefaultLineWidth: 1];
 		if( !isActive )
@@ -112,7 +113,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		if( isHighlighted && isActive )
 			[lineColor set];
 		else if( isHighlighted && !isActive )
-			[[NSColor grayColor] set];
+			[disabledColor set];
 		else
 			[[self backgroundColor] set];
 		
@@ -124,7 +125,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		if( isActive )
 			[lineColor set];
 		else
-			[[NSColor grayColor] set];
+			[disabledColor set];
 		[buttonStrokeShape stroke];
 	}
 	
@@ -175,7 +176,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		if( isHighlighted && isActive )
 			[lineColor set];
 		else if( isHighlighted && !isActive )
-			[[NSColor grayColor] set];
+			[disabledColor set];
 		else
 			[[self backgroundColor] set];
 		[NSBezierPath fillRect: txBox];
