@@ -739,13 +739,16 @@
 
 -(void)	layerDidAddPart: (NSNotification*)notif
 {
-	[self loadCard: mCurrentCard];
+	[self loadCard: mCurrentCard];	// +++ Abysmally slow
 }
 
 
 -(void)	layerWillRemovePart: (NSNotification*)notif
 {
-	[self performSelector: @selector(loadCard:) withObject: mCurrentCard afterDelay: 0.0];
+	WILDPart	*	thePart = [notif.userInfo objectForKey: WILDAffectedPartKey];
+	WILDPartView*	theView = [self visibleObjectForWILDObject: thePart];
+	[theView unloadPart];
+	[theView removeFromSuperview];
 }
 
 
@@ -863,7 +866,7 @@
 		[allParts addObject: thePart];
 	}
 	
-	[self loadCard: mCurrentCard];
+	[self loadCard: mCurrentCard];	// +++ slow
 	[self selectParts: allParts];
 }
 
@@ -879,7 +882,7 @@
 		[allParts addObject: thePart];
 	}
 	
-	[self loadCard: mCurrentCard];
+	[self loadCard: mCurrentCard];	// +++ slow
 	[self selectParts: allParts];
 }
 
