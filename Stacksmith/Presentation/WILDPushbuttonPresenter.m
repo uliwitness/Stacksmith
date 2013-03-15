@@ -50,6 +50,8 @@
 	[mMainView setFont: [currPart textFont]];
 	if( [currPart showName] )
 		[mMainView setTitle: [currPart name]];
+	else
+		[mMainView setTitle: @""];
 	[mMainView setTarget: mPartView];
 	[mMainView setAction: @selector(updateOnClick:)];
 	
