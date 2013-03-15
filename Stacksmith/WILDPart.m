@@ -18,6 +18,14 @@
 #import "UKHelperMacros.h"
 
 
+@interface WILDPart ()
+{
+	NSFont	*	mFont;
+}
+
+@end
+
+
 @implementation WILDPart
 
 @synthesize dontWrap = mDontWrap;
@@ -131,6 +139,7 @@
 	DESTROY_DEALLOC(mLineColor);
 	DESTROY_DEALLOC(mShadowColor);
 	DESTROY_DEALLOC(mMediaPath);
+	DESTROY_DEALLOC(mFont);
 	
 	mStack = UKInvalidPointer;
 	
@@ -315,43 +324,47 @@
 
 -(NSFont*)	textFont
 {
-	NSFont*		theFont = [NSFont fontWithName: mTextFontName size: mTextFontSize];
-	if( !theFont && ([mTextFontName isEqualToString: @"Chicago"] || [mTextFontName isEqualToString: @"Charcoal"]) )
-		theFont = [NSFont boldSystemFontOfSize: mTextFontSize];
-	if( !theFont )
-		theFont = [NSFont fontWithName: @"Geneva" size: mTextFontSize];
-	if( !theFont )
-		theFont = [NSFont userFontOfSize: mTextFontSize];
-
-	if( [mTextStyles containsObject: @"bold"] )
+	if( !mFont )
 	{
-		NSFont*	boldFont = [[NSFontManager sharedFontManager] convertWeight: YES ofFont: theFont];
-		if( boldFont )
-			theFont = boldFont;
-	}
+		NSFont*		theFont = [NSFont fontWithName: mTextFontName size: mTextFontSize];
+		if( !theFont && ([mTextFontName isEqualToString: @"Chicago"] || [mTextFontName isEqualToString: @"Charcoal"]) )
+			theFont = [NSFont boldSystemFontOfSize: mTextFontSize];
+		if( !theFont )
+			theFont = [NSFont fontWithName: @"Geneva" size: mTextFontSize];
+		if( !theFont )
+			theFont = [NSFont userFontOfSize: mTextFontSize];
 
-	if( [mTextStyles containsObject: @"italic"] )
-	{
-		NSFont*	italicFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSItalicFontMask];
-		if( italicFont )
-			theFont = italicFont;
-	}
+		if( [mTextStyles containsObject: @"bold"] )
+		{
+			NSFont*	boldFont = [[NSFontManager sharedFontManager] convertWeight: YES ofFont: theFont];
+			if( boldFont )
+				theFont = boldFont;
+		}
 
-	if( [mTextStyles containsObject: @"condense"] )
-	{
-		NSFont*	condensedFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSCondensedFontMask];
-		if( condensedFont )
-			theFont = condensedFont;
-	}
+		if( [mTextStyles containsObject: @"italic"] )
+		{
+			NSFont*	italicFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSItalicFontMask];
+			if( italicFont )
+				theFont = italicFont;
+		}
 
-	if( [mTextStyles containsObject: @"extend"] )
-	{
-		NSFont*	expandedFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSExpandedFontMask];
-		if( expandedFont )
-			theFont = expandedFont;
+		if( [mTextStyles containsObject: @"condense"] )
+		{
+			NSFont*	condensedFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSCondensedFontMask];
+			if( condensedFont )
+				theFont = condensedFont;
+		}
+
+		if( [mTextStyles containsObject: @"extend"] )
+		{
+			NSFont*	expandedFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSExpandedFontMask];
+			if( expandedFont )
+				theFont = expandedFont;
+		}
+		ASSIGN(mFont,theFont);
 	}
 	
-	return theFont;
+	return mFont;
 }
 
 
