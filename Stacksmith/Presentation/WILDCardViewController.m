@@ -396,6 +396,19 @@
 }
 
 
+-(void)	createPartViewForPart: (WILDPart*)currPart
+{
+	WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
+	[selView setWantsLayer: YES];
+	[[self view] addSubview: selView];
+	BOOL	isCardButton = [currPart.partLayer isEqualToString: @"card"];
+	if( mBackgroundEditMode || isCardButton )
+		[[self guidelineView] addPartView: selView];
+	[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
+	[selView loadPart: currPart forBackgroundEditing: mBackgroundEditMode && !isCardButton];
+}
+
+
 -(void)	loadCard: (WILDCard*)theCard
 {
 	WILDCard			*	prevCard = mCurrentCard;
@@ -469,13 +482,7 @@
 		
 		for( WILDPart* currPart in [theBg parts] )
 		{
-			WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
-			[selView setWantsLayer: YES];
-			[[self view] addSubview: selView];
-			if( mBackgroundEditMode )
-				[[self guidelineView] addPartView: selView];
-			[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
-			[selView loadPart: currPart forBackgroundEditing: mBackgroundEditMode];
+			[self createPartViewForPart: currPart];
 		}
 		
 		// Load the actual card parts:
@@ -494,11 +501,7 @@
 
 			for( WILDPart* currPart in [theCard parts] )
 			{
-				WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
-				[selView setWantsLayer: YES];
-				[[self view] addSubview: selView];
-				[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
-				[selView loadPart: currPart forBackgroundEditing: NO];
+				[self createPartViewForPart: currPart];
 			}
 		}
 		
@@ -739,7 +742,8 @@
 
 -(void)	layerDidAddPart: (NSNotification*)notif
 {
-	[self loadCard: mCurrentCard];	// +++ Abysmally slow
+	WILDPart	*	thePart = [notif.userInfo objectForKey: WILDAffectedPartKey];
+	[self createPartViewForPart: thePart];
 }
 
 
