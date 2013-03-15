@@ -197,6 +197,8 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	
 	if( ![[self window] isVisible] )
 		[self showWindow: self];
+	[messageField displayIfNeeded];
+	[messageField.window displayIfNeeded];
 }
 
 
