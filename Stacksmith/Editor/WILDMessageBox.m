@@ -195,7 +195,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	NSWindow	*	theWindow = [self window];	// Load the window.
 	[messageField setStringValue: messageString];
 	
-	if( ![[self window] isVisible] )
+	if( ![theWindow isVisible] )
 		[self showWindow: self];
 	[messageField displayIfNeeded];
 	[messageField.window displayIfNeeded];
