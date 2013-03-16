@@ -262,86 +262,100 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 		}
 		
 		// Grab the params in correct order into our temp buffer:
-		char	*	theBytes = calloc( bytesNeeded, 1 );
-		char	*	currPos = theBytes;
-		va_list		ap;
-		va_start( ap, fmt );
-			for( NSString* currPart in paramFormats )
+		if( bytesNeeded > 0 )
+		{
+			char	*	theBytes = calloc( bytesNeeded, 1 );
+			char	*	currPos = theBytes;
+			va_list		ap;
+			va_start( ap, fmt );
+				for( NSString* currPart in paramFormats )
+				{
+					currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+					if( [currPart isEqualToString: @"%@"] )
+					{
+						NSString	*	currStr = va_arg( ap, NSString* );
+						* ((NSString**)currPos) = currStr;
+						currPos += sizeof(NSString*);
+					}
+					else if( [currPart isEqualToString: @"%s"] )
+					{
+						* ((const char**)currPos) = va_arg( ap, const char* );
+						currPos += sizeof(NSString*);
+					}
+					else if( [currPart isEqualToString: @"%ld"] )
+					{
+						* ((long*)currPos) = va_arg( ap, long );
+						currPos += sizeof(long);
+					}
+					else if( [currPart isEqualToString: @"%d"] )
+					{
+						* ((int*)currPos) = va_arg( ap, int );
+						currPos += sizeof(int);
+					}
+					else if( [currPart isEqualToString: @"%f"] )
+					{
+						* ((double*)currPos) = va_arg( ap, double );
+						currPos += sizeof(double);
+					}
+					else if( [currPart isEqualToString: @"%B"] )
+					{
+						* ((BOOL*)currPos) = va_arg( ap, BOOL );
+						currPos += sizeof(BOOL);
+					}
+				}
+			va_end(ap);
+
+			// Push the params in reverse order:
+			currPos = theBytes +bytesNeeded;
+			for( NSString* currPart in [paramFormats reverseObjectEnumerator] )
 			{
 				currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
 				if( [currPart isEqualToString: @"%@"] )
 				{
-					NSString	*	currStr = va_arg( ap, NSString* );
-					* ((NSString**)currPos) = currStr;
-					currPos += sizeof(NSString*);
+					currPos -= sizeof(NSString*);
+					NSString	*	currStr = *(NSString**)currPos;
+					const char	*	str = [currStr UTF8String];
+					LEOPushStringValueOnStack( &ctx, str, str? strlen(str) : 0 );
 				}
 				else if( [currPart isEqualToString: @"%s"] )
 				{
-					* ((const char**)currPos) = va_arg( ap, const char* );
-					currPos += sizeof(NSString*);
+					currPos -= sizeof(const char*);
+					const char* str = *((const char**)currPos);
+					LEOPushStringValueOnStack( &ctx, str, str? strlen(str) : 0 );
 				}
 				else if( [currPart isEqualToString: @"%ld"] )
 				{
-					* ((long*)currPos) = va_arg( ap, long );
-					currPos += sizeof(long);
+					currPos -= sizeof(long);
+					LEOPushIntegerOnStack( &ctx, *((long*)currPos) );
 				}
 				else if( [currPart isEqualToString: @"%d"] )
 				{
-					* ((int*)currPos) = va_arg( ap, int );
-					currPos += sizeof(int);
+					currPos -= sizeof(int);
+					LEOPushIntegerOnStack( &ctx, *((int*)currPos) );
 				}
 				else if( [currPart isEqualToString: @"%f"] )
 				{
-					* ((double*)currPos) = va_arg( ap, double );
-					currPos += sizeof(double);
+					currPos -= sizeof(double);
+					LEOPushNumberOnStack( &ctx, *((double*)currPos) );
 				}
 				else if( [currPart isEqualToString: @"%B"] )
 				{
-					* ((BOOL*)currPos) = va_arg( ap, BOOL );
-					currPos += sizeof(BOOL);
+					currPos -= sizeof(BOOL);
+					LEOPushBooleanOnStack( &ctx, (*((BOOL*)currPos)) == YES );
 				}
-			}
-		va_end(ap);
-
-		// Push the params in reverse order:
-		currPos = theBytes +bytesNeeded;
-		for( NSString* currPart in [paramFormats reverseObjectEnumerator] )
-		{
-			currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
-			if( [currPart isEqualToString: @"%@"] )
-			{
-				currPos -= sizeof(NSString*);
-				NSString	*	currStr = *(NSString**)currPos;
-				const char	*	str = [currStr UTF8String];
-				LEOPushStringValueOnStack( &ctx, str, strlen(str) );
-			}
-			else if( [currPart isEqualToString: @"%s"] )
-			{
-				currPos -= sizeof(const char*);
-				LEOPushStringValueOnStack( &ctx, *((const char**)currPos), strlen(*((const char**)currPos)) );
-			}
-			else if( [currPart isEqualToString: @"%ld"] )
-			{
-				currPos -= sizeof(long);
-				LEOPushIntegerOnStack( &ctx, *((long*)currPos) );
-			}
-			else if( [currPart isEqualToString: @"%d"] )
-			{
-				currPos -= sizeof(int);
-				LEOPushIntegerOnStack( &ctx, *((int*)currPos) );
-			}
-			else if( [currPart isEqualToString: @"%f"] )
-			{
-				currPos -= sizeof(double);
-				LEOPushNumberOnStack( &ctx, *((double*)currPos) );
-			}
-			else if( [currPart isEqualToString: @"%B"] )
-			{
-				currPos -= sizeof(BOOL);
-				LEOPushBooleanOnStack( &ctx, (*((BOOL*)currPos)) == YES );
+				
+				LEOPushIntegerOnStack( &ctx, [paramFormats count] );
 			}
 			
-			LEOPushIntegerOnStack( &ctx, [paramFormats count] );
+			if( theBytes )
+				free(theBytes);
+			theBytes = NULL;
+			currPos = NULL;
+		}
+		else
+		{
+			NSLog(@"Internal error: Invalid format string in message send.");
+			LEOPushIntegerOnStack( &ctx, 0 );
 		}
 	}
 	else
