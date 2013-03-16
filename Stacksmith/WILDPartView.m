@@ -1195,7 +1195,7 @@
 		popupBox.origin.x += [currPart titleWidth];
 		popupBox.size.width -= [currPart titleWidth];
 		
-		label = [[WILDClickablePopUpButtonLabel alloc] initWithFrame: titleBox];
+		label = [[[WILDClickablePopUpButtonLabel alloc] initWithFrame: titleBox] autorelease];
 		[label setWantsLayer: YES];
 		[label setEditable: NO];
 		[label setSelectable: NO];
@@ -1357,7 +1357,7 @@
 	[tv setEditable: shouldBeEditable];
 	[tv setSelectable: shouldBeEditable];
 	
-	WILDScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
+	WILDScrollView*	sv = [[[WILDScrollView alloc] initWithFrame: partRect] autorelease];
 	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = partRect;
@@ -1459,7 +1459,7 @@
 	[tv setDelegate: self];
 	
 	// Build surrounding scroll view:
-	NSScrollView*	sv = [[WILDScrollView alloc] initWithFrame: partRect];
+	NSScrollView*	sv = [[[WILDScrollView alloc] initWithFrame: partRect] autorelease];
 	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
 	[sv setWantsLayer: YES];
 	NSRect			txBox = [currPart rectangle];
