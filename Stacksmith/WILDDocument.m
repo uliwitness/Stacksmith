@@ -225,10 +225,12 @@
 	@param		outError		If en error occurs, this will return an error object.
 */
 
--(void)	loadStandardResourceTableReturningError: (NSError**)outError;
+-(BOOL)	loadStandardResourceTableReturningError: (NSError**)outError
 {
 	NSXMLDocument	*	stdDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"]]
 														options: 0 error: outError] autorelease];
+	if( !stdDoc )
+		return NO;
 	NSXMLElement	*	stdStackfileElement = [stdDoc rootElement];
 	NSArray			*	pictures = [stdStackfileElement elementsForName: @"media"];
 	for( NSXMLElement* thePic in pictures )
@@ -241,6 +243,8 @@
 		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
 			imageOrCursor: nil isBuiltIn: YES];
 	}
+	
+	return YES;
 }
 
 
