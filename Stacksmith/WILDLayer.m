@@ -512,6 +512,8 @@
 		{
 			success = [[NSFileManager defaultManager] copyItemAtPath: [oldPictureURL path] toPath: [pictureURL path] error: &theError];
 		}
+		if( !success )
+			return nil;
 	}
 	else if( mPicture )
 	{
@@ -519,7 +521,8 @@
 			mPictureName = [[NSString stringWithFormat: @"bitmap_%lld",mID] retain];
 		ASSIGN(mPictureName,[[mPictureName stringByDeletingPathExtension] stringByAppendingPathExtension: @"tiff"]);
 		NSURL*	pictureURL = [packageURL URLByAppendingPathComponent: mPictureName];
-		[[mPicture TIFFRepresentation] writeToURL: pictureURL atomically: YES];
+		if( ![[mPicture TIFFRepresentation] writeToURL: pictureURL atomically: YES] )
+			return nil;
 	}
 
 	NSMutableString	*	theString = [NSMutableString stringWithFormat: @"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
