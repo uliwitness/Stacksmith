@@ -246,6 +246,9 @@
 		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
 		55AA873115602C42004BA790 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A2C515153AF8E1001A6607 /* Sparkle.framework */; };
 		55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */; };
+		55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13316F4B5E20056CB4D /* COperatorNodeTransformation.cpp */; };
+		55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13A16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.cpp */; };
+		55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13D16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp */; };
 		55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55AE22E11346C99E000B5BBE /* Help.xstk */; };
 		55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */; };
 		55B79A8813D0319A00BC0A19 /* ULIHighlightingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B79A8713D0319A00BC0A19 /* ULIHighlightingButton.m */; };
@@ -800,6 +803,12 @@
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
 		55ACBBBE1322EA890088609D /* WILDVisibleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDVisibleObject.h; path = Presentation/WILDVisibleObject.h; sourceTree = "<group>"; };
+		55ADB13316F4B5E20056CB4D /* COperatorNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COperatorNodeTransformation.cpp; path = ../../COperatorNodeTransformation.cpp; sourceTree = "<group>"; };
+		55ADB13416F4B5E20056CB4D /* COperatorNodeTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COperatorNodeTransformation.h; path = ../../COperatorNodeTransformation.h; sourceTree = "<group>"; };
+		55ADB13A16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConcatOperatorNodeTransformation.cpp; path = ../../CConcatOperatorNodeTransformation.cpp; sourceTree = "<group>"; };
+		55ADB13B16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConcatOperatorNodeTransformation.h; path = ../../CConcatOperatorNodeTransformation.h; sourceTree = "<group>"; };
+		55ADB13D16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConcatSpaceOperatorNodeTransformation.cpp; path = ../../CConcatSpaceOperatorNodeTransformation.cpp; sourceTree = "<group>"; };
+		55ADB13E16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConcatSpaceOperatorNodeTransformation.h; path = ../../CConcatSpaceOperatorNodeTransformation.h; sourceTree = "<group>"; };
 		55AE22E11346C99E000B5BBE /* Help.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Help.xstk; sourceTree = "<group>"; };
 		55B296BD146DE5D6009E60CB /* WILDCheckboxRadioPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCheckboxRadioPresenter.h; path = Presentation/WILDCheckboxRadioPresenter.h; sourceTree = "<group>"; };
 		55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCheckboxRadioPresenter.m; path = Presentation/WILDCheckboxRadioPresenter.m; sourceTree = "<group>"; };
@@ -1586,6 +1595,12 @@
 				55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */,
 				55D7AA4C1573816B00F33E78 /* CChunkPropertyNodeTransformation.h */,
 				55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */,
+				55ADB13416F4B5E20056CB4D /* COperatorNodeTransformation.h */,
+				55ADB13316F4B5E20056CB4D /* COperatorNodeTransformation.cpp */,
+				55ADB13B16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.h */,
+				55ADB13A16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.cpp */,
+				55ADB13E16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.h */,
+				55ADB13D16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp */,
 			);
 			name = Transformations;
 			sourceTree = "<group>";
@@ -2116,6 +2131,9 @@
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
 				55A3FB2C16E749D400735729 /* WILDLegacyButtonPresenter.m in Sources */,
+				55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */,
+				55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */,
+				55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
