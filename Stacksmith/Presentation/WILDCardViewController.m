@@ -1043,6 +1043,7 @@
 	{
 		NSImage*		anImg = [imgs objectAtIndex: 0];
 		
+		// +++
 	}
 }
 
