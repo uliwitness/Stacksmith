@@ -387,7 +387,7 @@ static void FillFirstFreeOne( NSString ** a, NSString ** b, NSString ** d, NSStr
 		if( !thirdModifier ) thirdModifier = @"";
 		if( !fourthModifier ) fourthModifier = @"";
 		
-		WILDScriptContainerResultFromSendingMessage( mCard, @"keyDown %@,%@,%@,%@", [theEvent characters], firstModifier, secondModifier, thirdModifier, fourthModifier );
+		WILDScriptContainerResultFromSendingMessage( mCard, @"keyDown %@,%@,%@,%@,%@", [theEvent characters], firstModifier, secondModifier, thirdModifier, fourthModifier );
 
 		if( theEvent.charactersIgnoringModifiers.length > 0 )
 		{
@@ -395,19 +395,19 @@ static void FillFirstFreeOne( NSString ** a, NSString ** b, NSString ** d, NSStr
 			switch( theKey )
 			{
 				case NSLeftArrowFunctionKey:
-					WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@,%@,%@,%@", @"left", firstModifier, secondModifier, thirdModifier, fourthModifier );
+					WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@,%@,%@,%@,%@", @"left", firstModifier, secondModifier, thirdModifier, fourthModifier );
 					break;
 				case NSRightArrowFunctionKey:
-					WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@,%@,%@,%@", @"right", firstModifier, secondModifier, thirdModifier, fourthModifier );
+					WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@,%@,%@,%@,%@", @"right", firstModifier, secondModifier, thirdModifier, fourthModifier );
 					break;
 				case NSUpArrowFunctionKey:
-					WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@,%@,%@,%@", @"up", firstModifier, secondModifier, thirdModifier, fourthModifier );
+					WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@,%@,%@,%@,%@", @"up", firstModifier, secondModifier, thirdModifier, fourthModifier );
 					break;
 				case NSDownArrowFunctionKey:
-					WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@,%@,%@,%@", @"down", firstModifier, secondModifier, thirdModifier, fourthModifier );
+					WILDScriptContainerResultFromSendingMessage( mCard, @"arrowKey %@,%@,%@,%@,%@", @"down", firstModifier, secondModifier, thirdModifier, fourthModifier );
 					break;
 				case NSF1FunctionKey ... NSF35FunctionKey:
-					WILDScriptContainerResultFromSendingMessage( mCard, @"functionKey %d,%@,%@,%@", theKey -NSF1FunctionKey +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+					WILDScriptContainerResultFromSendingMessage( mCard, @"functionKey %d,%@,%@,%@,%@", theKey -NSF1FunctionKey +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 					break;
 			}
 		}

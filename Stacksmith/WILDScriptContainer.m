@@ -222,6 +222,12 @@ NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 
 NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> container, NSString* fmt, ... )
 {
+#if 0
+	#define DBGLOGPAR(args...)	NSLog(args)
+#else
+	#define DBGLOGPAR(args...)	
+#endif
+
 	LEOScript*	theScript = [container scriptObjectShowingErrorMessage: YES];
 	NSString*	resultString = nil;
 	LEOContext	ctx;
@@ -244,6 +250,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 	{
 		// Calculate how much space we need for params temporarily:
 		NSArray	*	paramFormats = [[parts objectAtIndex: 1] componentsSeparatedByString: @","];
+		DBGLOGPAR( @"%@ %@", msg, paramFormats );
 		for( NSString* currPart in paramFormats )
 		{
 			currPart = [currPart stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
@@ -259,6 +266,8 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 				bytesNeeded += sizeof(double);
 			else if( [currPart isEqualToString: @"%B"] )
 				bytesNeeded += sizeof(BOOL);
+			else
+				[NSException raise: @"WILDMessageSendFormatException" format: @"Internal error: Unknown format qualifier '%@' in message send.", currPart];
 		}
 		
 		// Grab the params in correct order into our temp buffer:
@@ -274,34 +283,47 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 					if( [currPart isEqualToString: @"%@"] )
 					{
 						NSString	*	currStr = va_arg( ap, NSString* );
+						DBGLOGPAR(@"\"%@\"", currStr);
 						* ((NSString**)currPos) = currStr;
 						currPos += sizeof(NSString*);
 					}
 					else if( [currPart isEqualToString: @"%s"] )
 					{
-						* ((const char**)currPos) = va_arg( ap, const char* );
+						const char*		currCStr = va_arg( ap, const char* );
+						DBGLOGPAR(@"\"%s\"", currCStr);
+						* ((const char**)currPos) = currCStr;
 						currPos += sizeof(NSString*);
 					}
 					else if( [currPart isEqualToString: @"%ld"] )
 					{
-						* ((long*)currPos) = va_arg( ap, long );
+						long	currLong  = va_arg( ap, long );
+						DBGLOGPAR(@"%ld", currLong);
+						* ((long*)currPos) = currLong;
 						currPos += sizeof(long);
 					}
 					else if( [currPart isEqualToString: @"%d"] )
 					{
-						* ((int*)currPos) = va_arg( ap, int );
+						int		currInt = va_arg( ap, int );
+						DBGLOGPAR(@"%d", currInt);
+						* ((int*)currPos) = currInt;
 						currPos += sizeof(int);
 					}
 					else if( [currPart isEqualToString: @"%f"] )
 					{
-						* ((double*)currPos) = va_arg( ap, double );
+						double	currDouble = va_arg( ap, double );
+						DBGLOGPAR(@"%f", currDouble);
+						* ((double*)currPos) = currDouble;
 						currPos += sizeof(double);
 					}
 					else if( [currPart isEqualToString: @"%B"] )
 					{
-						* ((BOOL*)currPos) = va_arg( ap, BOOL );
+						BOOL	currBool = va_arg( ap, BOOL );
+						DBGLOGPAR(@"%s", currBool ? "YES" : "NO");
+						* ((BOOL*)currPos) = currBool;
 						currPos += sizeof(BOOL);
 					}
+					else
+						DBGLOGPAR( @"Internal error: Unknown format '%@' in message send.", currPart );
 				}
 			va_end(ap);
 
@@ -314,6 +336,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 				{
 					currPos -= sizeof(NSString*);
 					NSString	*	currStr = *(NSString**)currPos;
+					DBGLOGPAR(@"pushed \"%@\"", currStr);
 					const char	*	str = [currStr UTF8String];
 					LEOPushStringValueOnStack( &ctx, str, str? strlen(str) : 0 );
 				}
@@ -321,31 +344,44 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 				{
 					currPos -= sizeof(const char*);
 					const char* str = *((const char**)currPos);
+					DBGLOGPAR(@"pushed \"%s\"", str ? str : "(null)");
 					LEOPushStringValueOnStack( &ctx, str, str? strlen(str) : 0 );
 				}
 				else if( [currPart isEqualToString: @"%ld"] )
 				{
 					currPos -= sizeof(long);
-					LEOPushIntegerOnStack( &ctx, *((long*)currPos) );
+					long	currLong = *((long*)currPos);
+					DBGLOGPAR( @"pushed %ld", currLong );
+					LEOPushIntegerOnStack( &ctx, currLong );
 				}
 				else if( [currPart isEqualToString: @"%d"] )
 				{
 					currPos -= sizeof(int);
-					LEOPushIntegerOnStack( &ctx, *((int*)currPos) );
+					int	currInt = *((int*)currPos);
+					DBGLOGPAR( @"pushed %d", currInt );
+					LEOPushIntegerOnStack( &ctx, currInt );
 				}
 				else if( [currPart isEqualToString: @"%f"] )
 				{
 					currPos -= sizeof(double);
-					LEOPushNumberOnStack( &ctx, *((double*)currPos) );
+					double	currDouble = *((double*)currPos);
+					DBGLOGPAR( @"pushed %f", currDouble );
+					LEOPushNumberOnStack( &ctx, currDouble );
 				}
 				else if( [currPart isEqualToString: @"%B"] )
 				{
 					currPos -= sizeof(BOOL);
-					LEOPushBooleanOnStack( &ctx, (*((BOOL*)currPos)) == YES );
+					BOOL	currBool = (*((BOOL*)currPos)) == YES;
+					DBGLOGPAR( @"pushed %s", currBool ? "YES" : "NO" );
+					LEOPushBooleanOnStack( &ctx, currBool );
 				}
-				
-				LEOPushIntegerOnStack( &ctx, [paramFormats count] );
+				else
+					NSLog( @"Internal error: push failed for message send. Invalid format." );
 			}
+			
+			NSInteger	numParams = [paramFormats count];
+			DBGLOGPAR( @"pushed PC %ld", numParams );
+			LEOPushIntegerOnStack( &ctx, numParams );
 			
 			if( theBytes )
 				free(theBytes);
@@ -354,7 +390,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 		}
 		else
 		{
-			NSLog(@"Internal error: Invalid format string in message send.");
+			DBGLOGPAR(@"Internal error: Invalid format string in message send.");
 			LEOPushIntegerOnStack( &ctx, 0 );
 		}
 	}
@@ -384,7 +420,9 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 		}
 	}
 	if( ctx.errMsg[0] != 0 )
+	{
 		NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: ctx.errMsg encoding: NSUTF8StringEncoding] );
+	}
 	else if( ctx.stackEndPtr != ctx.stack )
 	{
 		char	returnValue[1024] = { 0 };
