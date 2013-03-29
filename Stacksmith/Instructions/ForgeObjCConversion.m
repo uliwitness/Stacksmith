@@ -42,7 +42,7 @@ id	WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext, LEOVa
 		{
 			char		theValueStrBuf[1024] = { 0 };
 			char*		theValueStr = LEOGetValueAsString( inValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
-			theArray = LEOCreateArrayFromString( theValueStr, inContext );
+			theArray = LEOCreateArrayFromString( theValueStr, strlen(theValueStr), inContext );	// Make NUL-safe.
 		}
 		
 		AppendLEOArrayToDictionary( theArray, theObjCValue, inContext );

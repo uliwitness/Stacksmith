@@ -340,7 +340,7 @@ void	LEOPutWILDObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct 
 		return;
 	}
 
-	LEOSetValueAsString( dest, str, inContext );
+	LEOSetValueAsString( dest, str, [str lengthOfBytesUsingEncoding: NSUTF8StringEncoding], inContext );
 }
 
 

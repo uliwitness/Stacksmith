@@ -117,13 +117,13 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "result" );
 	if( bpRelativeOffset >= 0 )
 	{
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, hitButtonName, inContext );
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, hitButtonName, strlen(hitButtonName), inContext );	// TODO: Make NUL-safe.
 	}
 
 	bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "it" );
 	if( bpRelativeOffset >= 0 )
 	{
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, hitButtonName, inContext );
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, hitButtonName, strlen(hitButtonName), inContext );	// TODO: Make NUL-safe.
 	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -4 );
@@ -146,13 +146,15 @@ void	WILDAskInstruction( LEOContext* inContext )
 	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "result" );
 	if( bpRelativeOffset >= 0 )
 	{
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, ((returnValue == NSAlertDefaultReturn) ? "OK" : "Cancel"), inContext );
+		const char*		theBtn = ((returnValue == NSAlertDefaultReturn) ? "OK" : "Cancel");
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, theBtn, strlen(theBtn), inContext );
 	}
 
 	bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "it" );
 	if( bpRelativeOffset >= 0 )
 	{
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, [[inputPanel answerString] UTF8String], inContext );
+		NSString	*	answerString = [inputPanel answerString];
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, [answerString UTF8String], [answerString lengthOfBytesUsingEncoding: NSUTF8StringEncoding], inContext );
 	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
