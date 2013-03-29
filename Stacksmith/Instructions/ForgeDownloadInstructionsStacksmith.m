@@ -21,14 +21,15 @@
 
 @interface WILDURLConnectionDelegate : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
 {
-	union LEOValue		mDestination;
-	LEOScript	*		mOwningScript;
-	NSString	*		mProgressMessage;
-	NSString	*		mCompletionMessage;
-	LEOContext			mContext;
-	LEOValueArray		mDownloadArrayValue;	// Value for "the download" parameter, which is an array whose properties users can query.
-	NSInteger			mMaxBytes;
-	NSMutableData*		mDownloadedData;
+	union LEOValue			mDestination;
+	LEOScript			*	mOwningScript;
+	NSString			*	mProgressMessage;
+	NSString			*	mCompletionMessage;
+	LEOContext				mContext;
+	LEOValueArray			mDownloadArrayValue;	// Value for "the download" parameter, which is an array whose properties users can query.
+	LEOValuePtr				mHeadersArrayValue;		// Sub-value of mDownloadArrayValue.
+	NSInteger				mMaxBytes;
+	NSMutableData		*	mDownloadedData;
 }
 
 @end
@@ -42,15 +43,20 @@
 {
 	if(( self = [super init] ))
 	{
+		mMaxBytes = -1;
 		LEOInitContext( &mContext, inGroup );
 		mOwningScript = LEOScriptRetain( inScript );
 		mProgressMessage = [inProgressMsg retain];
 		mCompletionMessage = [inCompletionMsg retain];
 		LEOInitArrayValue( &mDownloadArrayValue, NULL, kLEOInvalidateReferences, &mContext );
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", 0, &mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", -1, &mContext );
 		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", 0, &mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", 0, &mContext );
+		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", "", &mContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "url", [inURLString UTF8String], &mContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "address", [inURLString UTF8String], &mContext );
+		mHeadersArrayValue = LEOAddArrayEntryToRoot( &mDownloadArrayValue.array, "headers", NULL, &mContext );
+		LEOInitArrayValue( mHeadersArrayValue, NULL, kLEOInvalidateReferences, &mContext );
 	}
 	
 	return self;
@@ -65,6 +71,7 @@
 	DESTROY_DEALLOC(mCompletionMessage);
 	LEOCleanUpContext( &mContext );
 	LEOCleanUpValue( &mDownloadArrayValue, kLEOInvalidateReferences, &mContext );
+	mHeadersArrayValue = NULL;	// Was just disposed cuz it points into mDownloadArrayValue.
 	
 	[super dealloc];
 }
@@ -105,6 +112,34 @@
 
 -(void)	connection: (NSURLConnection *)connection didReceiveResponse: (NSURLResponse *)response
 {
+	mMaxBytes = [response expectedContentLength];
+	if( [response respondsToSelector: @selector(allHeaderFields)] )
+	{
+		NSDictionary	*	headers = [response allHeaderFields];
+		
+		if( mMaxBytes < 0 )
+		{
+			NSString		*	theLengthString = [headers objectForKey: @"Content-Length"];
+			if( theLengthString )
+				mMaxBytes = [theLengthString integerValue];
+		}
+		
+		for( NSString* currKey in headers )
+		{
+			const char*		currKeyCStr = [currKey UTF8String];
+			id				valueObj = [headers objectForKey: currKey];
+			const char*		valueCStr = [valueObj UTF8String];
+			LEOAddCStringArrayEntryToRoot( &mHeadersArrayValue->array.array, currKeyCStr, valueCStr, &mContext );
+		}
+	}
+	if( [response respondsToSelector: @selector(statusCode)] )
+	{
+		NSInteger	statusCode = [(id)response statusCode];
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", statusCode, &mContext );
+		const char*	errMsg = [[NSHTTPURLResponse localizedStringForStatusCode: statusCode] UTF8String];
+		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", errMsg, &mContext );
+	}
+	
 	[self sendDownloadMessage: mProgressMessage forConnection: connection];
 }
 
