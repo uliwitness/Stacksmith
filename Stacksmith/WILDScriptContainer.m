@@ -166,6 +166,68 @@ NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 				}
 			}
 		}
+		else if( [scanny scanString: @"download" intoString: nil] )
+		{
+			[scanny scanCharactersFromSet: wsCS intoString: nil];
+			while( YES )
+			{
+				[scanny scanCharactersFromSet: wsCS intoString: nil];
+				if( [scanny scanString: @"--" intoString: nil] )	// Comment! Ignore rest of line!
+				{
+					[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+					UKScanLineEnding( scanny, outString, &currentLine );
+				}
+				else if( [scanny scanString: @"for" intoString: nil] )
+				{
+					if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "for", like "fort", right?
+					{
+						[scanny scanCharactersFromSet: wsCS intoString: nil];
+						if( [scanny scanString: @"each" intoString: nil] )
+						[scanny scanCharactersFromSet: wsCS intoString: nil];
+						if( [scanny scanString: @"chunk" intoString: nil] )
+						[scanny scanCharactersFromSet: wsCS intoString: nil];
+						if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
+						{
+							[openBlockNames addObject: @"download"];
+							addToIndentationAfterThisLine++;
+						}
+						else	// One-line for each chunk, it seems:
+						{
+							// TODO: Need to remember lastDownloadLine here so we can have else after one-line-if:
+							[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+						}
+						break;
+					}
+				}
+				else if( [scanny scanString: @"when" intoString: nil] )
+				{
+					if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "for", like "fort", right?
+					{
+						[scanny scanCharactersFromSet: wsCS intoString: nil];
+						if( [scanny scanString: @"done" intoString: nil] )
+						[scanny scanCharactersFromSet: wsCS intoString: nil];
+						if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
+						{
+							[openBlockNames addObject: @"download"];
+							addToIndentationAfterThisLine++;
+						}
+						else	// One-line for each chunk, it seems:
+						{
+							// TODO: Need to remember lastDownloadLine here so we can have else after one-line-if:
+							[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+						}
+						break;
+					}
+				}
+				else
+				{
+					if( [nwsCS characterIsMember: [scriptString characterAtIndex: [scanny scanLocation]]] )
+						[scanny setScanLocation: [scanny scanLocation] +1];	// Skip one character, so we can get partial matches of comments.
+					// This causes us to parse fort as a "for", so our "for" parsing above takes this into account.
+					[scanny scanUpToCharactersFromSet: nwsCS intoString: nil];
+				}
+			}
+		}
 		else if( [scanny scanString: @"repeat" intoString: nil] )
 		{
 			[scanny scanCharactersFromSet: wsCS intoString: nil];
@@ -190,6 +252,15 @@ NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 		else if( [scanny scanString: @"else" intoString: nil] )
 		{
 			if( [[openBlockNames lastObject] caseInsensitiveCompare: @"if"] == NSOrderedSame )
+			{
+				indentationLevel--;
+				addToIndentationAfterThisLine++;
+			}
+			[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+		}
+		else if( [scanny scanString: @"when" intoString: nil] )
+		{
+			if( [[openBlockNames lastObject] caseInsensitiveCompare: @"download"] == NSOrderedSame )
 			{
 				indentationLevel--;
 				addToIndentationAfterThisLine++;
