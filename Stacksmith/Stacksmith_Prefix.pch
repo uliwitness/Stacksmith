@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'Propaganda' target in the 'Propaganda' project
+// Prefix header for all source files of the 'Stacksmith' target in the 'Stacksmith' project
 //
 
 #define NS_BUILD_32_LIKE_64						1

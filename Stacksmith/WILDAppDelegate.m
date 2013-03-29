@@ -29,21 +29,28 @@
 {
 	LEOInitInstructionArray();
 	
-	// Message box related instructions:
+	// Add various instruction functions to the base set of instructions the
+	//	interpreter knows. First add those that the compiler knows to parse,
+	//	but which have a platform/host-specific implementation:
+		// Message box related instructions:
 	LEOAddInstructionsToInstructionArray( gMsgInstructions, gMsgInstructionNames, LEO_NUMBER_OF_MSG_INSTRUCTIONS, &kFirstMsgInstruction );
 	
-	// Object properties:
+		// Object properties:
 	LEOAddInstructionsToInstructionArray( gPropertyInstructions, gPropertyInstructionNames, LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS, &kFirstPropertyInstruction );
 	
-	// Global properties:
+		// Global properties:
 	LEOAddInstructionsToInstructionArray( gGlobalPropertyInstructions, gGlobalPropertyInstructionNames, LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS, &kFirstGlobalPropertyInstruction );
 	LEOAddGlobalPropertiesAndOffsetInstructions( gHostGlobalProperties, kFirstGlobalPropertyInstruction );
+
+		// Internet protocol stuff:
+	LEOAddInstructionsToInstructionArray( gDownloadInstructions, gDownloadInstructionNames, LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS, &kFirstDownloadInstruction );
 	
-	// Commands specific to this host application:
+	// Now add the instructions for the syntax that Stacksmith adds itself:
+		// Commands specific to this host application:
 	LEOAddInstructionsToInstructionArray( gStacksmithHostCommandInstructions, gStacksmithHostCommandInstructionNames, WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS, &kFirstStacksmithHostCommandInstruction );
 	LEOAddHostCommandsAndOffsetInstructions( gStacksmithHostCommands, kFirstStacksmithHostCommandInstruction );
 	
-	// Functions specific to this host application:
+		// Functions specific to this host application:
 	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, gStacksmithHostFunctionInstructionNames, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
 	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
 	

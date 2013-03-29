@@ -67,6 +67,9 @@
 		550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09091195E61100351067 /* WILDPresentationConstants.m */; };
 		550C09E61196B9F200351067 /* WILDButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09E51196B9F200351067 /* WILDButtonView.m */; };
 		550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C0A5D1196C52000351067 /* WILDScrollView.m */; };
+		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
+		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
+		551D93921705A7AF003766DA /* ForgeDownloadInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* ForgeDownloadInstructionsStacksmith.m */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
 		552028D8140165D5000EEA4F /* WILDPartPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552028D7140165D4000EEA4F /* WILDPartPresenter.m */; };
 		552028DC14016880000EEA4F /* WILDPushbuttonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */; };
@@ -522,6 +525,11 @@
 		550C0A5C1196C52000351067 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScrollView.h; sourceTree = "<group>"; };
 		550C0A5D1196C52000351067 /* WILDScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScrollView.m; sourceTree = "<group>"; };
 		550ED181144B38DD00E528AA /* ULINSIntegerMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULINSIntegerMath.h; path = ../UliKit/ULINSIntegerMath.h; sourceTree = "<group>"; };
+		551D938717058397003766DA /* CDownloadCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDownloadCommandNode.cpp; path = ../../CDownloadCommandNode.cpp; sourceTree = "<group>"; };
+		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
+		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
+		551D938F1705A69A003766DA /* LEODownloadInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEODownloadInstructions.h; path = ../../../Leonie/generic/LEODownloadInstructions.h; sourceTree = "<group>"; };
+		551D93911705A7AD003766DA /* ForgeDownloadInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeDownloadInstructionsStacksmith.m; path = Instructions/ForgeDownloadInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
 		552028D6140165D4000EEA4F /* WILDPartPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPartPresenter.h; path = Presentation/WILDPartPresenter.h; sourceTree = "<group>"; };
@@ -1193,6 +1201,7 @@
 				553C46A913577334000219FA /* Parse Tree */,
 				553C46AA13577334000219FA /* Leonie */,
 				553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */,
+				551D93911705A7AD003766DA /* ForgeDownloadInstructionsStacksmith.m */,
 				556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */,
 				55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */,
 				5568665F1359EBD000C364D6 /* ForgeHostCommandsStacksmith.h */,
@@ -1246,6 +1255,8 @@
 				553C46EB13577334000219FA /* LEOHandlerID.h */,
 				553C46EC13577334000219FA /* LEOMsgInstructions.h */,
 				553C46ED13577334000219FA /* LEOMsgInstructions.c */,
+				551D938F1705A69A003766DA /* LEODownloadInstructions.h */,
+				551D938E1705A699003766DA /* LEODownloadInstructions.c */,
 				55E805C31360AA25006F1287 /* LEOPropertyInstructions.h */,
 				55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */,
 			);
@@ -1295,6 +1306,8 @@
 				55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */,
 				55E805F81366091F006F1287 /* CGlobalPropertyNode.h */,
 				55E805F71366091F006F1287 /* CGlobalPropertyNode.cpp */,
+				551D938817058397003766DA /* CDownloadCommandNode.h */,
+				551D938717058397003766DA /* CDownloadCommandNode.cpp */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -2132,6 +2145,9 @@
 				55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */,
 				55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */,
 				55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */,
+				551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */,
+				551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */,
+				551D93921705A7AF003766DA /* ForgeDownloadInstructionsStacksmith.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2465,7 +2481,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -2479,7 +2495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
