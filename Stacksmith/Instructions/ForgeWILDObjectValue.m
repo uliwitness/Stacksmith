@@ -441,9 +441,13 @@ void		LEOGetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName,
 void		LEOSetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext )
 {
 	id<WILDObject>		theObject = (id<WILDObject>) self->object.object;
-	id					sourceValue = WILDObjCObjectFromLEOValue( inValue, inContext, &kLeoValueTypeArray );
+	NSString		*	theKeyName = [NSString stringWithUTF8String: keyName];
+	LEOValueTypePtr		desiredType = [theObject typeForWILDPropertyNamed: theKeyName];
+	id					sourceValue = desiredType ? WILDObjCObjectFromLEOValue( inValue, inContext, desiredType ) : nil;
+	if( !sourceValue )
+		LEOContextStopWithError( inContext, "Expected %s found %s.", desiredType->displayTypeName, inValue->base.isa->displayTypeName );
 	
-	if( ![theObject setValue: sourceValue forWILDPropertyNamed: [NSString stringWithUTF8String: keyName] inRange: NSMakeRange(startOffset, endOffset)] )	// TODO: Need to convert the range into character index, is a UTF8 byte index ATM.	
+	if( ![theObject setValue: sourceValue forWILDPropertyNamed: theKeyName inRange: NSMakeRange(startOffset, endOffset)] )	// TODO: Need to convert the range into character index, is a UTF8 byte index ATM.
 		LEOContextStopWithError( inContext, "No property \"%s\".", keyName );
 }
 
