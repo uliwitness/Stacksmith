@@ -1339,6 +1339,35 @@
 		mControllerVisible = (inValue != kCFBooleanFalse);
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		mIconID = [inValue longLongValue];
+	else if( [inPropertyName isEqualToString: @"textstyle"] )
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+								object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
+																forKey: WILDAffectedPropertyKey]];
+		
+		WILDCard*			theCard = [[self stack] currentCard];
+		WILDPartContents*	bgContents = nil;
+		WILDPartContents*	contents = nil;
+		
+		contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO onCard: theCard forBackgroundEditing: NO];
+		NSMutableAttributedString	*	styledText = [[[contents styledTextForPart: self] mutableCopy] autorelease];
+		if( !styledText )
+			styledText = [[[NSMutableAttributedString alloc] initWithString: contents.text] autorelease];
+		if( [inValue isEqualToString: @"italic"] )
+			[styledText setAttributes: @{ NSObliquenessAttributeName: @0.5 } range: byteRange];
+		else
+			[styledText removeAttribute: NSObliquenessAttributeName range: byteRange];
+		if( [inValue isEqualToString: @"underline"] )
+			[styledText setAttributes: @{ NSUnderlineStyleAttributeName: @(NSUnderlineStyleThick) } range: byteRange];
+		else
+			[styledText removeAttribute: NSUnderlineStyleAttributeName range: byteRange];
+		[contents setStyledText: styledText];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+								object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
+																forKey: WILDAffectedPropertyKey]];
+		[self updateChangeCount: NSChangeDone];
+	}
 	else
 		propExists = NO;
 
