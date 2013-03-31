@@ -12,12 +12,16 @@
 
 @implementation WILDStretchFromBottomFilter
 
+@synthesize inputTime;
+@synthesize inputImage;
+@synthesize inputTargetImage;
+
 static CIKernel *sIrisFilterKernel = nil;
 
 +(void)	initialize
 {
     [CIFilter registerFilterName: @"WILDStretchFromBottomFilter"
-        constructor: self
+        constructor: (id<CIFilterConstructor>)self
         classAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
              @"Stretch From Bottom Effect", kCIAttributeFilterDisplayName,
              [NSArray arrayWithObjects:
@@ -29,6 +33,7 @@ static CIKernel *sIrisFilterKernel = nil;
 
 +(CIFilter *)	filterWithName: (NSString *)name
 {
+#pragma unused(name)
     CIFilter  *filter = [[self alloc] init];
     return [filter autorelease];
 }
@@ -39,9 +44,17 @@ static CIKernel *sIrisFilterKernel = nil;
     if(sIrisFilterKernel == nil)
     {
         NSBundle    *bundle = [NSBundle bundleForClass: [self class]];
+		NSError		*theError = nil;
+		NSString	*kernelName = @"WILDStretchFromBottomFilter";
         NSString    *code = [NSString stringWithContentsOfFile: [bundle
-                                pathForResource: @"WILDStretchFromBottomFilter"
-                                ofType: @"cikernel"]];
+                                pathForResource: kernelName ofType: @"cikernel"] encoding: NSUTF8StringEncoding error: &theError];
+		if( !code )
+		{
+			NSLog( @"Couldn't load file '%@.cikernel': %@", kernelName, theError );
+			[self autorelease];
+			return nil;
+		}
+		
         NSArray     *kernels = [CIKernel kernelsWithString: code];
  
         sIrisFilterKernel = [[kernels objectAtIndex: 0] retain];
