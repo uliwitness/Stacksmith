@@ -34,7 +34,7 @@
 }
 
 
--(void)	createSubviewsForPartView: (WILDPartView*)inPartView
+-(void)	createSubviews
 {
 	
 }

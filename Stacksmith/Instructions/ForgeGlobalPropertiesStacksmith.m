@@ -8,10 +8,18 @@
 
 #include "LEOGlobalProperties.h"
 #include "StacksmithVersion.h"
+#include <string.h>
 
 
 #define TOSTRING2(x)	#x
 #define TOSTRING(x)		TOSTRING2(x)
+
+
+void	LEOSetCursorInstruction( LEOContext* inContext );
+void	LEOPushCursorInstruction( LEOContext* inContext );
+void	LEOSetVersionInstruction( LEOContext* inContext );
+void	LEOPushVersionInstruction( LEOContext* inContext );
+
 
 
 void	LEOSetCursorInstruction( LEOContext* inContext )

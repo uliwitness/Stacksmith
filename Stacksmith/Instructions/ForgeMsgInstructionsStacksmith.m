@@ -18,6 +18,9 @@
 #import "WILDMessageBox.h"
 
 
+void	LEOPrintInstruction( LEOContext* inContext );
+
+
 /*!
 	Pop a value off the back of the stack (or just read it from the given
 	BasePointer-relative address) and present it to the user in string form.

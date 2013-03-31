@@ -179,18 +179,18 @@
 		[menuItem setState: mBackgroundEditMode ? NSOnState : NSOffState];
 		return YES;
 	}
-	else if( [menuItem action] == @selector(toolsMenuRowDummyAction:) )
-	{
-		NSView*	menuView = [menuItem view];
-		for( int x = 0; x < 3; x++ )
-		{
-			NSButton*	theBtn = [[menuView subviews] objectAtIndex: x];
-			BOOL	isCurrent = [theBtn tag] == [[WILDTools sharedTools] currentTool];
-			[theBtn setState: isCurrent ? NSOnState : NSOffState];
-		}
-		
-		return YES;
-	}
+//	else if( [menuItem action] == @selector(toolsMenuRowDummyAction:) )
+//	{
+//		NSView*	menuView = [menuItem view];
+//		for( int x = 0; x < 3; x++ )
+//		{
+//			NSButton*	theBtn = [[menuView subviews] objectAtIndex: x];
+//			BOOL	isCurrent = [theBtn tag] == [[WILDTools sharedTools] currentTool];
+//			[theBtn setState: isCurrent ? NSOnState : NSOffState];
+//		}
+//		
+//		return YES;
+//	}
 	else
 		return [self respondsToSelector: [menuItem action]];
 }

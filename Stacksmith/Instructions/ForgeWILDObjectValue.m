@@ -17,7 +17,7 @@ LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* in
 
 LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inContext );
 
-char*		LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext );
+const char*	LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext );
 
 bool		LEOGetWILDObjectValueAsBoolean( LEOValuePtr self, struct LEOContext* inContext );
 
@@ -135,7 +135,7 @@ LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* 
 }
 
 
-char*	LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext )
+const char*	LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext )
 {
 	const char*		str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
 	if( !str )

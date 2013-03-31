@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "WILDVisibleObject.h"
 
 
 @class WILDCardViewController;
@@ -15,12 +16,14 @@
 @class WILDCard;
 
 
-@interface WILDCardWindowController : NSWindowController
+@interface WILDCardWindowController : NSWindowController <WILDVisibleObject>
 {
 	WILDStack						*	mStack;
 	IBOutlet WILDWindowBodyView		*	mView;
 	IBOutlet WILDCardViewController	*	mCardViewController;
 }
+
+-(id)			initWithStack: (WILDStack*)inStack;
 
 -(WILDStack*)	stack;
 

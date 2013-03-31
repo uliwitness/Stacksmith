@@ -16,6 +16,6 @@
 
 +(WILDSearchPaths*)	sharedSearchPaths;
 
--(NSString*)		paths;
+-(NSArray*)		paths;
 
 @end

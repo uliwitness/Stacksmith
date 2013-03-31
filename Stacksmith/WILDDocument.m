@@ -182,12 +182,12 @@
 	{
 		NSString	*	stackFileName = nil;
 		NSURL		*	stackURL = nil;
-		stackFileName = [NSString stringWithFormat: @"stack_%ld.xml", [currStack stackID]];
+		stackFileName = [NSString stringWithFormat: @"stack_%lld.xml", [currStack stackID]];
 		stackURL = [absoluteURL URLByAppendingPathComponent: stackFileName];
 		
 		if( ![[currStack xmlStringForWritingToURL: absoluteURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: stackURL atomically: YES encoding: NSUTF8StringEncoding error:outError] )
 			return NO;
-		[tocXmlString appendFormat: @"\t<stack id=\"%1$ld\" file=\"stack_%1$ld.xml\" />\n", [currStack stackID]];
+		[tocXmlString appendFormat: @"\t<stack id=\"%1$ld\" file=\"stack_%1$lld.xml\" />\n", [currStack stackID]];
 	}
 	
 	DESTROY(mLastEditedVersion);
@@ -466,9 +466,9 @@
 {
 	if( [inName rangeOfString: @"/"].location != NSNotFound )
 	{
-		if( [inName caseInsensitiveCompare: [self fileName]] != NSOrderedSame )
+		if( [inName caseInsensitiveCompare: [self fileURL].path] != NSOrderedSame )
 			return [mStacks objectAtIndex: 0];
-		if( [[inName stringByDeletingLastPathComponent] caseInsensitiveCompare: [self fileName]] != NSOrderedSame )
+		if( [[inName stringByDeletingLastPathComponent] caseInsensitiveCompare: [self fileURL].path] != NSOrderedSame )
 			return nil;
 		else
 			inName = [inName lastPathComponent];
@@ -481,8 +481,8 @@
 			return currStack;
 	}
 	
-	if( [inName caseInsensitiveCompare: [[self fileName] lastPathComponent]] == NSOrderedSame
-		|| [inName caseInsensitiveCompare: [[[self fileName] lastPathComponent] stringByDeletingPathExtension]] == NSOrderedSame )
+	if( [inName caseInsensitiveCompare: [[self fileURL] lastPathComponent]] == NSOrderedSame
+		|| [inName caseInsensitiveCompare: [[[self fileURL] lastPathComponent] stringByDeletingPathExtension]] == NSOrderedSame )
 		return [mStacks objectAtIndex: 0];
 	
 	return nil;
@@ -507,7 +507,7 @@
 }
 
 
--(NSString*)	URLForImageNamed: (NSString*)theName
+-(NSURL*)	URLForImageNamed: (NSString*)theName
 {
 	NSURL*	theURL = [[self fileURL] URLByAppendingPathComponent: theName];
 	if( ![theURL checkResourceIsReachableAndReturnError: nil] )

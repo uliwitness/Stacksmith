@@ -10,6 +10,7 @@
 #import "WILDScriptContainer.h"
 #import "WILDObjectID.h"
 #import "LEOValue.h"
+#import "ForgeWILDObjectValue.h"
 
 
 @class ULIMultiMap;
@@ -20,7 +21,7 @@
 @class WILDBackground;
 
 
-@interface WILDLayer : NSObject <WILDScriptContainer>
+@interface WILDLayer : NSObject <WILDScriptContainer,WILDObject>
 {
 	WILDObjectID				mID;				// Unique ID number of this background/card.
 	NSString*					mName;				// Name of this background/card.

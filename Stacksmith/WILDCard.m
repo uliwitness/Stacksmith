@@ -142,16 +142,18 @@
 		}
 		
 		// Nothing found in this part? Try next part:
-		NSInteger	currPartIdx = [mParts indexOfObject: partToSearch];
+		NSUInteger	currPartIdx = [mParts indexOfObject: partToSearch];
 		if( currPartIdx != NSNotFound )	// Current part is a card part?
 		{
 			if( inFlags & WILDSearchBackwards )
 			{
-				currPartIdx -= 1;
-				if( currPartIdx < 0 )	// This was first card part?
+				if( currPartIdx == 0 )	// This is first card part?
 					partToSearch = [[mOwner parts] lastObject];	// Proceed going backwards through bg parts now.
 				else
+				{
+					currPartIdx -= 1;
 					partToSearch = [mParts objectAtIndex: currPartIdx];
+				}
 			}
 			else
 			{
@@ -176,14 +178,16 @@
 			
 			if( inFlags & WILDSearchBackwards )
 			{
-				currPartIdx -= 1;
-				if( currPartIdx < 0 )	// This was first bg part? We're done with cd parts & bg parts, return failure.
+				if( currPartIdx == 0 )	// This was first bg part? We're done with cd parts & bg parts, return failure.
 				{
 					//NSLog( @"Done with bg parts." );
 					break;
 				}
 				else
+				{
+					currPartIdx -= 1;
 					partToSearch = [[mOwner parts] objectAtIndex: currPartIdx];
+				}
 			}
 			else
 			{
@@ -214,7 +218,7 @@
 {
 	[super appendInnerXmlToString: theString];
 	
-	[theString appendFormat: @"\t<owner>%ld</owner>\n", [mOwner backgroundID]];
+	[theString appendFormat: @"\t<owner>%lld</owner>\n", [mOwner backgroundID]];
 	[theString appendFormat: @"\t<marked>%@</marked>\n", (mMarked ? @"<true />" : @"<false />")];	// Only used for copy/paste. The canonical value for the "marked" property is kept in the stack's card list.
 }
 

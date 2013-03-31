@@ -65,7 +65,7 @@
 
 -(NSImage*)		imageNamed: (NSString*)theName;
 -(NSURL*)		URLForImageNamed: (NSString*)theName;
--(NSImage*)		imageForPatternAtIndex: (NSInteger)idx;
+//-(NSImage*)		imageForPatternAtIndex: (NSInteger)idx;
 
 -(BOOL)			loadStandardResourceTableReturningError: (NSError**)outError;
 -(void)			addMediaFile: (NSString*)fileName withType: (NSString*)type

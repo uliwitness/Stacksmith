@@ -30,6 +30,7 @@
 @synthesize shadowBlurRadiusSlider;
 @synthesize shadowOffsetSlider;
 @synthesize contentsEditorButton;
+@synthesize contentsTextField;
 
 
 -(id)	initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView
