@@ -333,14 +333,14 @@ void	LEOInitWILDObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKe
 
 void	LEOPutWILDObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext )
 {
-	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	const char*	str = [(id<WILDObject>)self->object.object textContents];
 	if( !str )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
 		return;
 	}
 
-	LEOSetValueAsString( dest, str, [str lengthOfBytesUsingEncoding: NSUTF8StringEncoding], inContext );
+	LEOSetValueAsString( dest, [str UTF8String], [str lengthOfBytesUsingEncoding: NSUTF8StringEncoding], inContext );
 }
 
 
