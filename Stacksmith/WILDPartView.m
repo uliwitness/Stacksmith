@@ -24,7 +24,6 @@
 #import "WILDButtonView.h"
 #import "WILDScrollView.h"
 #import "WILDMovieView.h"
-#import "NSColor+ULICGColor.h"
 #import "LEOHandlerID.h"
 #import "LEOContextGroup.h"
 #import "LEOScript.h"
@@ -194,7 +193,7 @@
 	
 	if( isMyTool && ![self isSelected] )
 	{
-		BOOL	isOpaque = [[mPart style] isEqualToString: @"opaque"];
+		BOOL	isOpaque = [[mPart partStyle] isEqualToString: @"opaque"];
 		NSRect	outlineBox = NSInsetRect( subviewFrame, 0.5, 0.5 );
 		NSRect	lightOutlineBox = NSInsetRect( outlineBox, 1, 1 );
 		[NSBezierPath setDefaultLineWidth: 1];
@@ -330,7 +329,7 @@
 {
 	NSRect	layoutBox = NSInsetRect( newBox, 2, 2 );
 	
-	NSString*	theStyle = [mPart style];
+	NSString*	theStyle = [mPart partStyle];
 	if( [[mPart partType] isEqualToString: @"moviePlayer"] )
 		;	// No special behaviours for movie players.
 	else if( [[mPart partType] isEqualToString: @"field"] )
@@ -1031,12 +1030,12 @@
 	DESTROY(mPartPresenter);
 	if( [[mPart partType] isEqualToString: @"button"] )
 	{
-		if( [[mPart style] isEqualToString: @"popup"] )
+		if( [[mPart partStyle] isEqualToString: @"popup"] )
 			mPartPresenter = [[WILDPopUpButtonPresenter alloc] initWithPartView: self];
-		else if( [[mPart style] isEqualToString: @"radiobutton"] || [[mPart style] isEqualToString: @"checkbox"] )
+		else if( [[mPart partStyle] isEqualToString: @"radiobutton"] || [[mPart partStyle] isEqualToString: @"checkbox"] )
 			mPartPresenter = [[WILDCheckboxRadioPresenter alloc] initWithPartView: self];
-		else if( [[mPart style] isEqualToString: @"transparent"] || [[mPart style] isEqualToString: @"rectangle"]
-				 || [[mPart style] isEqualToString: @"opaque"] || [[mPart style] isEqualToString: @"oval"] )
+		else if( [[mPart partStyle] isEqualToString: @"transparent"] || [[mPart partStyle] isEqualToString: @"rectangle"]
+				 || [[mPart partStyle] isEqualToString: @"opaque"] || [[mPart partStyle] isEqualToString: @"oval"] )
 			mPartPresenter = [[WILDLegacyButtonPresenter alloc] initWithPartView: self];
 		else
 			mPartPresenter = [[WILDPushbuttonPresenter alloc] initWithPartView: self];
@@ -1093,7 +1092,7 @@
 	SEL				theAction = NSSelectorFromString( [propName stringByAppendingString: @"PropertyDidChangeOfPart:"] );
 	if( [self respondsToSelector: theAction] )
 		[self performSelector: theAction withObject: thePart];
-	if( mPartPresenter && ![propName isEqualToString: @"style"] )
+	if( mPartPresenter && ![propName isEqualToString: PROPERTY(partStyle)] )
 		[mPartPresenter partDidChange: notif];
 	else	// Unknown property. Reload the whole thing.
 	{
@@ -1306,7 +1305,7 @@
 -(void)	loadButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
 			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
-	if( [[currPart style] isEqualToString: @"popup"] )
+	if( [[currPart partStyle] isEqualToString: @"popup"] )
 	{
 		[self loadPopupButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
@@ -1362,28 +1361,28 @@
 	[sv setWantsLayer: YES];
 	NSRect			txBox = partRect;
 	txBox.origin = NSZeroPoint;
-	if( [[currPart style] isEqualToString: @"transparent"] )
+	if( [[currPart partStyle] isEqualToString: @"transparent"] )
 	{
 		[sv setBorderType: NSNoBorder];
 		[sv setDrawsBackground: NO];
 		[tv setDrawsBackground: NO];
 	}
-	else if( [[currPart style] isEqualToString: @"opaque"] )
+	else if( [[currPart partStyle] isEqualToString: @"opaque"] )
 	{
 		[sv setBorderType: NSNoBorder];
 		[sv setBackgroundColor: [NSColor whiteColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"standard"] )
+	else if( [[currPart partStyle] isEqualToString: @"standard"] )
 	{
 		[sv setBorderType: NSBezelBorder];
 		[sv setBackgroundColor: [NSColor whiteColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"roundrect"] )
+	else if( [[currPart partStyle] isEqualToString: @"roundrect"] )
 	{
 		[sv setBorderType: NSBezelBorder];
 		[sv setBackgroundColor: [NSColor whiteColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"scrolling"] )
+	else if( [[currPart partStyle] isEqualToString: @"scrolling"] )
 	{
 		txBox.size.width -= 15;
 		[sv setBorderType: NSLineBorder];
@@ -1464,18 +1463,18 @@
 	[sv setWantsLayer: YES];
 	NSRect			txBox = [currPart rectangle];
 	txBox.origin = NSZeroPoint;
-	if( [[currPart style] isEqualToString: @"transparent"] )
+	if( [[currPart partStyle] isEqualToString: @"transparent"] )
 	{
 		[sv setBorderType: NSNoBorder];
 		[sv setDrawsBackground: NO];
 		[tv setBackgroundColor: [NSColor clearColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"opaque"] )
+	else if( [[currPart partStyle] isEqualToString: @"opaque"] )
 	{
 		[sv setBorderType: NSNoBorder];
 		[tv setBackgroundColor: [NSColor whiteColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"standard"] )
+	else if( [[currPart partStyle] isEqualToString: @"standard"] )
 	{
 		[sv setBorderType: NSBezelBorder];
 		[tv setBackgroundColor: [NSColor whiteColor]];
@@ -1527,10 +1526,10 @@
 	{
 		[self loadListField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
-	else if( [[currPart style] isEqualToString: @"transparent"] || [[currPart style] isEqualToString: @"opaque"]
-		|| [[currPart style] isEqualToString: @"rectangle"]
-		|| [[currPart style] isEqualToString: @"standard"]
-		|| [[currPart style] isEqualToString: @"roundrect"] )
+	else if( [[currPart partStyle] isEqualToString: @"transparent"] || [[currPart partStyle] isEqualToString: @"opaque"]
+		|| [[currPart partStyle] isEqualToString: @"rectangle"]
+		|| [[currPart partStyle] isEqualToString: @"standard"]
+		|| [[currPart partStyle] isEqualToString: @"roundrect"] )
 	{
 		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	}
@@ -1705,7 +1704,7 @@
 	{
 		[self addCursorRect: [self rectForGrabHandle: 0] cursor: currentCursor];
 		if( [[mPart partType] isEqualToString: @"button"]
-			&& [[mPart style] isEqualToString: @"popup"] )
+			&& [[mPart partStyle] isEqualToString: @"popup"] )
 		{
 			NSRect	splitterRect = [self rectForGrabHandle: WILDPartGrabHandleSeparator];
 			NSCursor* bestCursor = [NSCursor resizeLeftRightCursor];

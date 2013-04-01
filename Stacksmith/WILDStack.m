@@ -17,6 +17,7 @@
 #import "Forge.h"
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
+#import "WILDDocument.h"
 
 
 @implementation WILDStack

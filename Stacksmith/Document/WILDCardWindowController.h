@@ -33,4 +33,6 @@
 
 -(void)			setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype;
 
+-(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
+
 @end

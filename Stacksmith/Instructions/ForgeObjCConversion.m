@@ -9,6 +9,10 @@
 #import "ForgeObjCConversion.h"
 
 
+void	AppendLEOArrayToDictionary( struct LEOArrayEntry * inEntry, NSMutableDictionary* dict, LEOContext *inContext );
+
+
+
 void	AppendLEOArrayToDictionary( struct LEOArrayEntry * inEntry, NSMutableDictionary* dict, LEOContext *inContext )
 {
 	if( inEntry )
@@ -75,9 +79,9 @@ id	WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext, LEOVa
 
 BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inContext )
 {
-	if( inValue == kCFBooleanTrue || inValue == kCFBooleanFalse )
+	if( inValue == @YES || inValue == @NO )
 	{
-		LEOInitBooleanValue( outValue, (inValue == kCFBooleanTrue), kLEOInvalidateReferences, inContext );
+		LEOInitBooleanValue( outValue, [inValue isEqual: @YES], kLEOInvalidateReferences, inContext );
 	}
 	else if( [inValue isKindOfClass: [NSString class]] )
 	{

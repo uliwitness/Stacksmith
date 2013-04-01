@@ -72,6 +72,7 @@ typedef enum
 -(NSRect)	frameInScreenCoordinates;
 
 -(NSRect)	selectionRect;
+-(void)		drawPartFrameInView: (NSView*)overlayView;
 
 @end
 

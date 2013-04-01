@@ -333,7 +333,7 @@ void	LEOInitWILDObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKe
 
 void	LEOPutWILDObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext )
 {
-	const char*	str = [(id<WILDObject>)self->object.object textContents];
+	NSString*	str = [(id<WILDObject>)self->object.object textContents];
 	if( !str )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
@@ -384,7 +384,7 @@ void	LEOCleanUpWILDObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepRefe
 {
 	self->base.isa = NULL;
 	if( self->object.object )
-		[self->object.object release];
+		[(id<NSObject>)self->object.object release];
 	self->object.object = nil;
 	if( keepReferences == kLEOInvalidateReferences && self->base.refObjectID != kLEOObjectIDINVALID )
 	{
@@ -396,7 +396,7 @@ void	LEOCleanUpWILDObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepRefe
 
 bool	LEOCanGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
 {
-	char*		str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
+	const char*		str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
 	if( !str )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );

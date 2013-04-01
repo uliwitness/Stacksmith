@@ -219,7 +219,7 @@
 {
 	if( [thePart family] == 0 )
 	{
-		if( [thePart autoHighlight] && ([[thePart style] isEqualToString: @"radiobutton"] || [[thePart style] isEqualToString: @"checkbox"]) )
+		if( [thePart autoHighlight] && ([[thePart partStyle] isEqualToString: @"radiobutton"] || [[thePart partStyle] isEqualToString: @"checkbox"]) )
 			[thePart setHighlighted: ![thePart highlighted]];
 		return;
 	}
@@ -290,7 +290,7 @@
 			[thePart setFillColor: objectColor];
 			[thePart setBevel: objectBevel];
 			[thePart setPartType: @"rectangle"];
-			[thePart setStyle: @"opaque"];
+			[thePart setPartStyle: @"opaque"];
 			[thePart setVisible: objectVisible];
 			[mAddColorParts addObject: thePart];
 		}
@@ -300,7 +300,7 @@
 			[thePart setFlippedRectangle: objectRect];
 			[thePart setName: objectName];
 			[thePart setPartType: @"picture"];
-			[thePart setStyle: objectTransparent ? @"transparent" : @"opaque"];
+			[thePart setPartStyle: objectTransparent ? @"transparent" : @"opaque"];
 			[thePart setVisible: objectVisible];
 			[mAddColorParts addObject: thePart];
 		}

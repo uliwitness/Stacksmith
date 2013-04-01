@@ -13,6 +13,9 @@
 #import "LEORemoteDebugger.h"
 
 
+BOOL	UKScanLineEnding( NSScanner* scanny, NSMutableString* outString, NSInteger* currentLine );
+
+
 @implementation WILDSymbol
 
 @synthesize lineIndex;
@@ -388,7 +391,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 					}
 					else if( [currPart isEqualToString: @"%B"] )
 					{
-						BOOL	currBool = va_arg( ap, BOOL );
+						BOOL	currBool = va_arg( ap, int );	// BOOL gets promoted to int.
 						DBGLOGPAR(@"%s", currBool ? "YES" : "NO");
 						* ((BOOL*)currPos) = currBool;
 						currPos += sizeof(BOOL);

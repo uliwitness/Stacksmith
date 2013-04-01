@@ -21,4 +21,6 @@
 
 @property (assign) IBOutlet WILDIconListDataSource *iconListDataSource;
 
+-(id)	initWithPart: (WILDPart*)inPart;
+
 @end

@@ -35,7 +35,7 @@
 -(void)	refreshProperties
 {
 	WILDPart	*	currPart = [mPartView part];
-	if( [[currPart style] isEqualToString: @"radiobutton"] )
+	if( [[currPart partStyle] isEqualToString: @"radiobutton"] )
 		[mMainView setButtonType: NSRadioButton];
 	else
 		[mMainView setButtonType: NSSwitchButton];

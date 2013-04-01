@@ -12,6 +12,11 @@
 #import "ForgeObjCConversion.h"
 
 
+void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext );
+void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext );
+void	LEOPushMeInstruction( LEOContext* inContext );
+
+
 void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 {
 	LEOValuePtr		thePropertyName = inContext->stackEndPtr -2;

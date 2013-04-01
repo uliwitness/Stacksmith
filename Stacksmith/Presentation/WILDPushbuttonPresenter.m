@@ -40,7 +40,7 @@
 -(void)	refreshProperties
 {
 	WILDPart	*	currPart = [mPartView part];
-	if( [[currPart style] isEqualToString: @"default"] )
+	if( [[currPart partStyle] isEqualToString: @"default"] )
 		[mMainView setKeyEquivalent: @"\r"];
 	else
 		[mMainView setKeyEquivalent: @""];
@@ -96,7 +96,7 @@
 }
 
 
--(void)	stylePropertyDidChangeOfPart: (WILDPart*)inPart
+-(void)	partStylePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }

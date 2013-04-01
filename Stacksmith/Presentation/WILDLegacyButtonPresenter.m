@@ -11,6 +11,8 @@
 #import "WILDButtonCell.h"
 #import "UKHelperMacros.h"
 #import "WILDPartContents.h"
+#import "WILDPart.h"
+#import "WILDPartView.h"
 
 
 @implementation WILDLegacyButtonPresenter
@@ -28,7 +30,7 @@
 	[super refreshProperties];
 	
 	WILDPart*	currPart = [mPartView part];
-	if( [[currPart style] isEqualToString: @"transparent"] )
+	if( [[currPart partStyle] isEqualToString: @"transparent"] )
 	{
 		[mMainView setBordered: NO];
 
@@ -51,16 +53,16 @@
 		}
 #endif
 	}
-	else if( [[currPart style] isEqualToString: @"opaque"] )
+	else if( [[currPart partStyle] isEqualToString: @"opaque"] )
 	{
 		[mMainView setBordered: NO];
 		[[mMainView cell] setBackgroundColor: [NSColor whiteColor]];
 		[mMainView setAlignment: [currPart textAlignment]];
 		[mMainView setButtonType: NSMomentaryPushInButton];
 	}
-	else if( [[currPart style] isEqualToString: @"rectangle"]
-			|| [[currPart style] isEqualToString: @"roundrect"]
-			|| [[currPart style] isEqualToString: @"oval"] )
+	else if( [[currPart partStyle] isEqualToString: @"rectangle"]
+			|| [[currPart partStyle] isEqualToString: @"roundrect"]
+			|| [[currPart partStyle] isEqualToString: @"oval"] )
 	{
 		WILDButtonCell*	ourCell = [mMainView cell];
 		[ourCell setBackgroundColor: [currPart fillColor]];
@@ -68,14 +70,14 @@
 		[mMainView setCell: ourCell];
 		[mMainView setBordered: YES];
 				
-		if( [[currPart style] isEqualToString: @"roundrect"]
-			|| [[currPart style] isEqualToString: @"standard"]
-			|| [[currPart style] isEqualToString: @"default"] )
+		if( [[currPart partStyle] isEqualToString: @"roundrect"]
+			|| [[currPart partStyle] isEqualToString: @"standard"]
+			|| [[currPart partStyle] isEqualToString: @"default"] )
 			[mMainView setBezelStyle: NSRoundedBezelStyle];
-		else if( [[currPart style] isEqualToString: @"oval"] )
+		else if( [[currPart partStyle] isEqualToString: @"oval"] )
 			[mMainView setBezelStyle: NSCircularBezelStyle];
 
-		if( [[currPart style] isEqualToString: @"default"] )
+		if( [[currPart partStyle] isEqualToString: @"default"] )
 		{
 			[mMainView setKeyEquivalent: @"\r"];
 			[ourCell setDrawAsDefault: YES];
@@ -83,22 +85,22 @@
 		[mMainView setAlignment: [currPart textAlignment]];
 		[mMainView setButtonType: NSMomentaryPushInButton];
 	}
-	else if( [[currPart style] isEqualToString: @"standard"]
-			|| [[currPart style] isEqualToString: @"default"] )
+	else if( [[currPart partStyle] isEqualToString: @"standard"]
+			|| [[currPart partStyle] isEqualToString: @"default"] )
 	{
 		[mMainView setBordered: YES];
 		[mMainView setBezelStyle: NSRoundedBezelStyle];
 		
-		if( [[currPart style] isEqualToString: @"default"] )
+		if( [[currPart partStyle] isEqualToString: @"default"] )
 			[mMainView setKeyEquivalent: @"\r"];
 		[mMainView setAlignment: [currPart textAlignment]];
 		[mMainView setButtonType: NSMomentaryPushInButton];
 	}
-	else if( [[currPart style] isEqualToString: @"checkbox"] )
+	else if( [[currPart partStyle] isEqualToString: @"checkbox"] )
 	{
 		[mMainView setButtonType: NSSwitchButton];
 	}
-	else if( [[currPart style] isEqualToString: @"radiobutton"] )
+	else if( [[currPart partStyle] isEqualToString: @"radiobutton"] )
 	{
 		[mMainView setButtonType: NSRadioButton];
 	}

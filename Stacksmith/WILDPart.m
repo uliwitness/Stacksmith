@@ -16,6 +16,7 @@
 #import "LEORemoteDebugger.h"
 #import "ULINSIntegerMath.h"
 #import "UKHelperMacros.h"
+#import "WILDDocument.h"
 
 
 @interface WILDPart ()
@@ -193,7 +194,7 @@
 }
 
 
--(NSRect)	setRectangle: (NSRect)theBox
+-(void)	setRectangle: (NSRect)theBox
 {
 	theBox.origin.y = [mStack cardSize].height -NSMaxY( theBox );
 	mRectangle = theBox;
@@ -223,23 +224,23 @@
 }
 
 
--(NSString*)	style
+-(NSString*)	partStyle
 {
 	return mStyle;
 }
 
 
--(void)	setStyle: (NSString*)theStyle
+-(void)	setPartStyle: (NSString*)theStyle
 {
 	if( mStyle != theStyle )
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
-								object: self userInfo: [NSDictionary dictionaryWithObject: @"style"
+								object: self userInfo: [NSDictionary dictionaryWithObject: PROPERTY(partStyle)
 																forKey: WILDAffectedPropertyKey]];
 		[mStyle release];
 		mStyle = [theStyle retain];
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
-								object: self userInfo: [NSDictionary dictionaryWithObject: @"style"
+								object: self userInfo: [NSDictionary dictionaryWithObject: PROPERTY(partStyle)
 																forKey: WILDAffectedPropertyKey]];
 		[self updateChangeCount: NSChangeDone];
 	}
@@ -977,7 +978,7 @@
 	WILDAppendBoolXML( outString, 2, mVisible, @"visible" );
 	WILDAppendBoolXML( outString, 2, mEnabled, @"enabled" );
 	WILDAppendRectXML( outString, 2, mRectangle, @"rect" );
-	WILDAppendStringXML( outString, 2, [self style], @"style" );
+	WILDAppendStringXML( outString, 2, [self partStyle], @"style" );
 	WILDAppendBoolXML( outString, 2, mShowName, @"showName" );
 	WILDAppendBoolXML( outString, 2, mHighlight, @"highlight" );
 	WILDAppendBoolXML( outString, 2, mAutoHighlight, @"autoHighlight" );
@@ -1139,39 +1140,39 @@
 		return [NSNumber numberWithDouble: [self shadowBlurRadius]];
 	}
 	else if( [inPropertyName isEqualToString: @"visible"] )
-		return mVisible ? kCFBooleanTrue : kCFBooleanFalse;
+		return mVisible ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"dontwrap"] )
-		return mDontWrap ? kCFBooleanTrue : kCFBooleanFalse;
+		return mDontWrap ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"dontsearch"] )
-		return mDontSearch ? kCFBooleanTrue : kCFBooleanFalse;
+		return mDontSearch ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"sharedtext"] )
-		return mSharedText ? kCFBooleanTrue : kCFBooleanFalse;
+		return mSharedText ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
-		return mFixedLineHeight ? kCFBooleanTrue : kCFBooleanFalse;
+		return mFixedLineHeight ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"autotab"] )
-		return mAutoTab ? kCFBooleanTrue : kCFBooleanFalse;
+		return mAutoTab ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"locktext"] )
-		return mLockText ? kCFBooleanTrue : kCFBooleanFalse;
+		return mLockText ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"autoselect"] )
-		return mAutoSelect ? kCFBooleanTrue : kCFBooleanFalse;
+		return mAutoSelect ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"showlines"] )
-		return mShowLines ? kCFBooleanTrue : kCFBooleanFalse;
+		return mShowLines ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"autohighlight"] )
-		return mAutoHighlight ? kCFBooleanTrue : kCFBooleanFalse;
+		return mAutoHighlight ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"highlight"] )
-		return mHighlight ? kCFBooleanTrue : kCFBooleanFalse;
+		return mHighlight ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
-		return mSharedHighlight ? kCFBooleanTrue : kCFBooleanFalse;
+		return mSharedHighlight ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"widemargins"] )
-		return mWideMargins ? kCFBooleanTrue : kCFBooleanFalse;
+		return mWideMargins ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"multiplelines"] )
-		return mMultipleLines ? kCFBooleanTrue : kCFBooleanFalse;
+		return mMultipleLines ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"showname"] )
-		return mShowName ? kCFBooleanTrue : kCFBooleanFalse;
+		return mShowName ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"enabled"] )
-		return mEnabled ? kCFBooleanTrue : kCFBooleanFalse;
+		return mEnabled ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
-		return mHighlightedForTracking ? kCFBooleanTrue : kCFBooleanFalse;
+		return mHighlightedForTracking ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"script"] )
 		return mScript;
 	else if( [inPropertyName isEqualToString: @"style"] )
@@ -1207,7 +1208,7 @@
 		return selectedLines;
 	}
 	else if( [inPropertyName isEqualToString: @"controllervisible"] )
-		return mControllerVisible ? kCFBooleanTrue : kCFBooleanFalse;
+		return mControllerVisible ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		return [NSNumber numberWithLongLong: mIconID];
 	else
@@ -1296,47 +1297,47 @@
 	else if( [inPropertyName isEqualToString: @"shhadowblurradius"] )
 		[self setShadowBlurRadius: [inValue doubleValue]];
 	else if( [inPropertyName isEqualToString: @"visible"] )
-		mVisible = (inValue != kCFBooleanFalse);
+		mVisible = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"dontwrap"] )
-		mDontWrap = (inValue != kCFBooleanFalse);
+		mDontWrap = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"dontsearch"] )
-		mDontSearch = (inValue != kCFBooleanFalse);
+		mDontSearch = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"sharedtext"] )
-		mSharedText = (inValue != kCFBooleanFalse);
+		mSharedText = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
-		mFixedLineHeight = (inValue != kCFBooleanFalse);
+		mFixedLineHeight = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"autotab"] )
-		mAutoTab = (inValue != kCFBooleanFalse);
+		mAutoTab = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"locktext"] )
-		mLockText = (inValue != kCFBooleanFalse);
+		mLockText = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"autoselect"] )
-		mAutoSelect = (inValue != kCFBooleanFalse);
+		mAutoSelect = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"showlines"] )
-		mShowLines = (inValue != kCFBooleanFalse);
+		mShowLines = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"autohighlight"] )
-		mAutoHighlight = (inValue != kCFBooleanFalse);
+		mAutoHighlight = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"highlight"] )
-		mHighlight = (inValue != kCFBooleanFalse);
+		mHighlight = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
-		mSharedHighlight = (inValue != kCFBooleanFalse);
+		mSharedHighlight = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"widemargins"] )
-		mWideMargins = (inValue != kCFBooleanFalse);
+		mWideMargins = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"multiplelines"] )
-		mMultipleLines = (inValue != kCFBooleanFalse);
+		mMultipleLines = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"showname"] )
-		mShowName = (inValue != kCFBooleanFalse);
+		mShowName = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"enabled"] )
-		mEnabled = (inValue != kCFBooleanFalse);
+		mEnabled = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
-		mHighlightedForTracking = (inValue != kCFBooleanFalse);
+		mHighlightedForTracking = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"script"] )
 		[self setScript: inValue];
 	else if( [inPropertyName isEqualToString: @"style"] )
-		[self setStyle: [self validatedStyle: inValue]];
+		[self setPartStyle: [self validatedStyle: inValue]];
 	else if( [inPropertyName isEqualToString: @"moviepath"] )
 		[self setMediaPath: inValue];
 	else if( [inPropertyName isEqualToString: @"controllervisible"] )
-		mControllerVisible = (inValue != kCFBooleanFalse);
+		mControllerVisible = (inValue != @NO);
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		mIconID = [inValue longLongValue];
 	else if( [inPropertyName isEqualToString: @"textstyle"] )

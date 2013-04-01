@@ -12,12 +12,16 @@
 
 @implementation WILDBarnDoorCloseFilter
 
+@synthesize inputTime;
+@synthesize inputImage;
+@synthesize inputTargetImage;
+
 static CIKernel *sIrisFilterKernel = nil;
 
 +(void)	initialize
 {
     [CIFilter registerFilterName: @"WILDBarnDoorCloseFilter"
-        constructor: self
+        constructor: (id<CIFilterConstructor>)self
         classAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
              @"Barn Door Close Effect", kCIAttributeFilterDisplayName,
              [NSArray arrayWithObjects:
@@ -39,9 +43,16 @@ static CIKernel *sIrisFilterKernel = nil;
     if(sIrisFilterKernel == nil)
     {
         NSBundle    *bundle = [NSBundle bundleForClass: [self class]];
+		NSError		*theError = nil;
+		NSString	*kernelName = @"WILDBarnDoorCloseFilter";
         NSString    *code = [NSString stringWithContentsOfFile: [bundle
-                                pathForResource: @"WILDBarnDoorCloseFilter"
-                                ofType: @"cikernel"]];
+                                pathForResource: kernelName ofType: @"cikernel"] encoding: NSUTF8StringEncoding error: &theError];
+		if( !code )
+		{
+			NSLog( @"Couldn't load file '%@.cikernel': %@", kernelName, theError );
+			[self autorelease];
+			return nil;
+		}
         NSArray     *kernels = [CIKernel kernelsWithString: code];
  
         sIrisFilterKernel = [[kernels objectAtIndex: 0] retain];

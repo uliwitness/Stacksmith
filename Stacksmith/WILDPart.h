@@ -108,8 +108,8 @@
 -(void)			setName: (NSString*)theStr;
 -(NSString*)	name;
 
--(NSString*)	style;
--(void)			setStyle: (NSString*)theStyle;
+-(NSString*)	partStyle;
+-(void)			setPartStyle: (NSString*)theStyle;
 -(NSString*)	partType;
 -(void)			setPartType: (NSString*)partType;
 -(WILDObjectID)	partID;

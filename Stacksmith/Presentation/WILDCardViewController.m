@@ -365,11 +365,11 @@
 		{
 			NSBezierPath*	partPath = nil;
 			
-			if( [[currPart style] isEqualToString: @"oval"] )
+			if( [[currPart partStyle] isEqualToString: @"oval"] )
 				partPath = [NSBezierPath bezierPathWithOvalInRect: [currPart rectangle]];
-			else if( [[currPart style] isEqualToString: @"roundrect"]
-						|| [[currPart style] isEqualToString: @"standard"]
-						|| [[currPart style] isEqualToString: @"default"] )
+			else if( [[currPart partStyle] isEqualToString: @"roundrect"]
+						|| [[currPart partStyle] isEqualToString: @"standard"]
+						|| [[currPart partStyle] isEqualToString: @"default"] )
 				partPath = [NSBezierPath bezierPathWithRoundedRect: [currPart rectangle] xRadius: 8 yRadius: 8];
 			else
 				partPath = [NSBezierPath bezierPathWithRect: [currPart rectangle]];

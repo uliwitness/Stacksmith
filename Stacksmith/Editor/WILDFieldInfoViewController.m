@@ -10,6 +10,7 @@
 #import "WILDNotifications.h"
 #import "WILDIconPickerViewController.h"
 #import "UKHelperMacros.h"
+#import "WILDPart.h"
 
 
 static 	NSArray*	sStylesInMenuOrder = nil;
@@ -55,7 +56,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 													nil];
 	
 	
-	[mStylePopUp selectItemAtIndex: [sStylesInMenuOrder indexOfObject: [part style]]];
+	[mStylePopUp selectItemAtIndex: [sStylesInMenuOrder indexOfObject: [part partStyle]]];
 
 	[mLockTextSwitch setState: [part lockText]];
 	[mAutoSelectSwitch setState: [part autoSelect]];
@@ -183,11 +184,11 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 -(IBAction) doStylePopUpChanged:(id)sender
 {
 	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"style", WILDAffectedPropertyKey,
+										PROPERTY(partStyle), WILDAffectedPropertyKey,
 										nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
-	[part setStyle: [sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]]];
+	[part setPartStyle: [sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]]];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];

@@ -12,6 +12,7 @@
 #import "WILDTextView.h"
 #import "WILDScrollView.h"
 #import "UKHelperMacros.h"
+#import "WILDPartContents.h"
 
 
 @implementation WILDTextFieldPresenter
@@ -72,28 +73,28 @@
 	[mTextView setEditable: shouldBeEditable];
 	[mTextView setSelectable: shouldBeEditable];
 	
-	if( [[currPart style] isEqualToString: @"transparent"] )
+	if( [[currPart partStyle] isEqualToString: @"transparent"] )
 	{
 		[mScrollView setBorderType: NSNoBorder];
 		[mScrollView setDrawsBackground: NO];
 		[mTextView setDrawsBackground: NO];
 	}
-	else if( [[currPart style] isEqualToString: @"opaque"] )
+	else if( [[currPart partStyle] isEqualToString: @"opaque"] )
 	{
 		[mScrollView setBorderType: NSNoBorder];
 		[mScrollView setBackgroundColor: [NSColor whiteColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"standard"] )
+	else if( [[currPart partStyle] isEqualToString: @"standard"] )
 	{
 		[mScrollView setBorderType: NSBezelBorder];
 		[mScrollView setBackgroundColor: [NSColor whiteColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"roundrect"] )
+	else if( [[currPart partStyle] isEqualToString: @"roundrect"] )
 	{
 		[mScrollView setBorderType: NSBezelBorder];
 		[mScrollView setBackgroundColor: [NSColor whiteColor]];
 	}
-	else if( [[currPart style] isEqualToString: @"scrolling"] )
+	else if( [[currPart partStyle] isEqualToString: @"scrolling"] )
 	{
 		[mScrollView setBorderType: NSLineBorder];
 		[mScrollView setBackgroundColor: [NSColor whiteColor]];
