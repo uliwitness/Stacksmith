@@ -116,17 +116,9 @@ void	LEOPushMeInstruction( LEOContext* inContext )
 }
 
 
-LEOInstructionFuncPtr	gPropertyInstructions[LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS] =
-{
-	LEOPushPropertyOfObjectInstruction,
-	LEOSetPropertyOfObjectInstruction,
-	LEOPushMeInstruction
-};
+LEOINSTR_START(Property,LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS)
+LEOINSTR(LEOPushPropertyOfObjectInstruction)
+LEOINSTR(LEOSetPropertyOfObjectInstruction)
+LEOINSTR_LAST(LEOPushMeInstruction)
 
 
-const char*		gPropertyInstructionNames[LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS] =
-{
-	"PushPropertyOfObject",
-	"SetPropertyOfObject",
-	"PushMe"
-};

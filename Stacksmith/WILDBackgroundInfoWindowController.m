@@ -9,6 +9,7 @@
 #import "WILDBackgroundInfoWindowController.h"
 #import "WILDScriptEditorWindowController.h"
 #import "WILDCardView.h"
+#import "WILDBackground.h"
 
 
 @implementation WILDBackgroundInfoWindowController

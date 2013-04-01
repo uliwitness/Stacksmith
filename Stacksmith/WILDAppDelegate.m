@@ -33,25 +33,25 @@
 	//	interpreter knows. First add those that the compiler knows to parse,
 	//	but which have a platform/host-specific implementation:
 		// Message box related instructions:
-	LEOAddInstructionsToInstructionArray( gMsgInstructions, gMsgInstructionNames, LEO_NUMBER_OF_MSG_INSTRUCTIONS, &kFirstMsgInstruction );
+	LEOAddInstructionsToInstructionArray( gMsgInstructions, LEO_NUMBER_OF_MSG_INSTRUCTIONS, &kFirstMsgInstruction );
 	
 		// Object properties:
-	LEOAddInstructionsToInstructionArray( gPropertyInstructions, gPropertyInstructionNames, LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS, &kFirstPropertyInstruction );
+	LEOAddInstructionsToInstructionArray( gPropertyInstructions, LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS, &kFirstPropertyInstruction );
 	
 		// Global properties:
-	LEOAddInstructionsToInstructionArray( gGlobalPropertyInstructions, gGlobalPropertyInstructionNames, LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS, &kFirstGlobalPropertyInstruction );
+	LEOAddInstructionsToInstructionArray( gGlobalPropertyInstructions, LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS, &kFirstGlobalPropertyInstruction );
 	LEOAddGlobalPropertiesAndOffsetInstructions( gHostGlobalProperties, kFirstGlobalPropertyInstruction );
 
 		// Internet protocol stuff:
-	LEOAddInstructionsToInstructionArray( gDownloadInstructions, gDownloadInstructionNames, LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS, &kFirstDownloadInstruction );
+	LEOAddInstructionsToInstructionArray( gDownloadInstructions, LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS, &kFirstDownloadInstruction );
 	
 	// Now add the instructions for the syntax that Stacksmith adds itself:
 		// Commands specific to this host application:
-	LEOAddInstructionsToInstructionArray( gStacksmithHostCommandInstructions, gStacksmithHostCommandInstructionNames, WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS, &kFirstStacksmithHostCommandInstruction );
+	LEOAddInstructionsToInstructionArray( gStacksmithHostCommandInstructions, WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS, &kFirstStacksmithHostCommandInstruction );
 	LEOAddHostCommandsAndOffsetInstructions( gStacksmithHostCommands, kFirstStacksmithHostCommandInstruction );
 	
 		// Functions specific to this host application:
-	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, gStacksmithHostFunctionInstructionNames, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
+	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
 	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
 	
 	[WILDToolsPalette showToolsPaletteIfNeeded];

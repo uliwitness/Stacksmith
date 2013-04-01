@@ -10,6 +10,7 @@
 #import "WILDScriptEditorWindowController.h"
 #import "WILDCardView.h"
 #import "UKHelperMacros.h"
+#import "WILDCard.h"
 
 
 @implementation WILDCardInfoWindowController

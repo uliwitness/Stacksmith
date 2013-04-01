@@ -43,7 +43,7 @@
 	NSCursor	*	currentCursor = [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]];
 	if( !currentCursor )
 	{
-		WILDPartView*		pv = [self superview];
+		WILDPartView*		pv = (WILDPartView*) [self superview];
 		currentCursor = [[[[pv part] stack] document] cursorWithID: 128];
 	}
 	[self addCursorRect: [self bounds] cursor: currentCursor];

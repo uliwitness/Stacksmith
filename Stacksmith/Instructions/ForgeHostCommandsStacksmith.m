@@ -13,6 +13,13 @@
 #include "LEOScript.h"
 #include "LEORemoteDebugger.h"
 
+void	WILDGoInstruction( LEOContext* inContext );
+void	WILDVisualEffectInstruction( LEOContext* inContext );
+void	WILDAnswerInstruction( LEOContext* inContext );
+void	WILDAskInstruction( LEOContext* inContext );
+void	WILDCreateInstruction( LEOContext* inContext );
+void	WILDDebugCheckpointInstruction( LEOContext* inContext );
+
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
 
@@ -202,25 +209,14 @@ void	WILDDebugCheckpointInstruction( LEOContext* inContext )
 }
 
 
-LEOInstructionFuncPtr		gStacksmithHostCommandInstructions[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS] =
-{
-	WILDGoInstruction,
-	WILDVisualEffectInstruction,
-	WILDAnswerInstruction,
-	WILDAskInstruction,
-	WILDCreateInstruction,
-	WILDDebugCheckpointInstruction
-};
+LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
+LEOINSTR(WILDGoInstruction)
+LEOINSTR(WILDVisualEffectInstruction)
+LEOINSTR(WILDAnswerInstruction)
+LEOINSTR(WILDAskInstruction)
+LEOINSTR(WILDCreateInstruction)
+LEOINSTR_LAST(WILDDebugCheckpointInstruction)
 
-const char*					gStacksmithHostCommandInstructionNames[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS] =
-{
-	"WILDGoInstruction",
-	"WILDVisualEffectInstruction",
-	"WILDAnswerInstruction",
-	"WILDAskInstruction",
-	"WILDCreateInstruction",
-	"WILDDebugCheckpointInstruction"
-};
 
 struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS +1] =
 {

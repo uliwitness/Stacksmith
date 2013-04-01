@@ -13,6 +13,9 @@
 #import "UKHelperMacros.h"
 
 
+NSImage*	WILDInvertedImage( NSImage* img );
+
+
 NSImage*	WILDInvertedImage( NSImage* img )
 {
 	NSRect		iBox = NSZeroRect;
@@ -188,7 +191,6 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	}
 	else if( [self image] != nil && [self imagePosition] == NSImageOnly )
 	{
-		CGContextRef	theContext = [[NSGraphicsContext currentContext] graphicsPort];
 		NSImage*		img = isHighlighted ? WILDInvertedImage([self image]) : [self image];
 		CGImageRef		theCGImage = [img CGImageForProposedRect: nil
 											context: [NSGraphicsContext currentContext] hints: nil];

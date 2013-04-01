@@ -11,6 +11,7 @@
 #import "Forge.h"
 #import "ForgeWILDObjectValue.h"
 #import "UKHelperMacros.h"
+#import "WILDCard.h"
 
 
 static WILDMessageBox*	sSharedMessageBox = nil;
@@ -111,7 +112,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		[self getID: &objectIDForScripts seedForScripts: &seedForScripts];
 		
 		theScript = LEOScriptCreateForOwner( objectIDForScripts, seedForScripts, LEOForgeScriptGetParentScript );
-		LEOScriptCompileAndAddParseTree( theScript, [frontDoc contextGroup], parseTree, fileID );
+		LEOScriptCompileAndAddParseTree( theScript, [frontDoc scriptContextGroupObject], parseTree, fileID );
 	}
 	
 	if( LEOParserGetLastErrorMessage() )
@@ -123,7 +124,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		NSString*	resultString = nil;
 		LEOContext	ctx;
 		
-		LEOInitContext( &ctx, [frontDoc contextGroup] );
+		LEOInitContext( &ctx, [frontDoc scriptContextGroupObject] );
 		#if REMOTE_DEBUGGER
 		ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
 		ctx.promptProc = LEORemoteDebuggerPrompt;
@@ -133,7 +134,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		LEOPushIntegerOnStack( &ctx, 0 );
 		
 		// Send message:
-		LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [frontDoc contextGroup], ":run" );
+		LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [frontDoc scriptContextGroupObject], ":run" );
 		LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
 
 		#if REMOTE_DEBUGGER
@@ -176,8 +177,8 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	{
 		WILDDocument	*	frontDoc = [self frontDoc];
 		LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
-		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [frontDoc contextGroup], &mValueForScripts );
-		mSeedForScripts = LEOContextGroupGetSeedForObjectID( [frontDoc contextGroup], mIDForScripts );
+		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [frontDoc scriptContextGroupObject], &mValueForScripts );
+		mSeedForScripts = LEOContextGroupGetSeedForObjectID( [frontDoc scriptContextGroupObject], mIDForScripts );
 	}
 	
 	if( mIDForScripts )

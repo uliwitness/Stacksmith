@@ -178,8 +178,9 @@
 
 -(void)	setStyledText: (NSAttributedString*)inString
 {
-	ASSIGN(mStyledText,inString);
-	ASSIGN(mText,[inString string]);
+	DESTROY(mStyledText);
+	mStyledText = [inString mutableCopy];
+	ASSIGN(mText,[mStyledText string]);
 	DESTROY(mListItems);
 	DESTROY(mStyles);
 }

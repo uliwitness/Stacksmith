@@ -45,7 +45,7 @@ id	WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext, LEOVa
 		else
 		{
 			char		theValueStrBuf[1024] = { 0 };
-			char*		theValueStr = LEOGetValueAsString( inValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
+			const char*	theValueStr = LEOGetValueAsString( inValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
 			theArray = LEOCreateArrayFromString( theValueStr, strlen(theValueStr), inContext );	// Make NUL-safe.
 		}
 		
@@ -69,7 +69,7 @@ id	WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext, LEOVa
 	else
 	{
 		char		theValueStrBuf[1024] = { 0 };
-		char*		theValueStr = LEOGetValueAsString( inValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
+		const char*	theValueStr = LEOGetValueAsString( inValue, theValueStrBuf, sizeof(theValueStrBuf), inContext );
 		theObjCValue = [NSString stringWithUTF8String: theValueStr];
 	}
 	
@@ -125,7 +125,7 @@ BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inC
 			
 			LEOCleanUpValue( &dictValueCopy, kLEOInvalidateReferences, inContext );
 		}
-		LEOInitArrayValue( outValue, theArray, kLEOInvalidateReferences, inContext );
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
 	}
 	else
 		return NO;

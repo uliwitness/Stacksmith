@@ -131,8 +131,8 @@
 				NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
 																	error: nil];
 				if( !cdDoc && theError )
-					NSLog(@"Could not load background: %@", theError);
-				WILDLayer*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
+					NSLog(@"Could not load card: %@", theError);
+				WILDCard*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
 				[self addCard: theCd];
 				[self setMarked: isMarked forCard: theCd];
 				
@@ -354,17 +354,17 @@
 			if( mIDForScripts == kLEOObjectIDINVALID )
 			{
 				LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
-				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [[self document] contextGroup], &mValueForScripts );
-				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[self document] contextGroup], mIDForScripts );
+				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [self scriptContextGroupObject], &mValueForScripts );
+				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [self scriptContextGroupObject], mIDForScripts );
 			}
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
-			LEOScriptCompileAndAddParseTree( mScriptObject, [[self document] contextGroup], parseTree, fileID );
+			LEOScriptCompileAndAddParseTree( mScriptObject, [self scriptContextGroupObject], parseTree, fileID );
 			
 			#if REMOTE_DEBUGGER
 			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );
 			
 			// Set a breakpoint on the mouseUp handler:
-//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [[self document] contextGroup], "mouseup" );
+//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [self scriptContextGroupObject], "mouseup" );
 //			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
 //			if( theHandler )
 //				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
@@ -394,7 +394,7 @@
 
 -(struct LEOContextGroup*)	scriptContextGroupObject
 {
-	return [[self document] contextGroup];
+	return [[self document] scriptContextGroupObject];
 }
 
 

@@ -64,25 +64,14 @@ void	LEOPushVersionInstruction( LEOContext* inContext )
 }
 
 
-LEOInstructionFuncPtr	gGlobalPropertyInstructions[LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS] =
-{
-	LEOSetCursorInstruction,
-	LEOPushCursorInstruction,
-	LEOSetVersionInstruction,
-	LEOPushVersionInstruction
-};
+LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
+LEOINSTR(LEOSetCursorInstruction)
+LEOINSTR(LEOPushCursorInstruction)
+LEOINSTR(LEOSetVersionInstruction)
+LEOINSTR_LAST(LEOPushVersionInstruction)
 
 
-const char*		gGlobalPropertyInstructionNames[LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS] =
-{
-	"SetCursor",
-	"PushCursor",
-	"SetVersion",
-	"PushVersion"
-};
-
-
-extern struct TGlobalPropertyEntry	gHostGlobalProperties[(LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS / 2) +1] =
+struct TGlobalPropertyEntry	gHostGlobalProperties[(LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS / 2) +1] =
 {
 	{ ECursorIdentifier, SET_CURSOR_INSTR, PUSH_CURSOR_INSTR },
 	{ EVersionIdentifier, SET_VERSION_INSTR, PUSH_VERSION_INSTR },

@@ -816,7 +816,7 @@
 }
 
 
--(struct LEOContextGroup*)	contextGroup
+-(struct LEOContextGroup*)	scriptContextGroupObject
 {
 	if( !mContextGroup )
 		mContextGroup = LEOContextGroupCreate();

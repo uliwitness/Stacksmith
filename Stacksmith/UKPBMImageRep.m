@@ -47,7 +47,7 @@
     
 	NSMutableString*	widthStr = [NSMutableString string];
 	NSMutableString*	heightStr = [NSMutableString string];
-	int					x = 3;
+	NSUInteger			x = 3;
 	for( x = 3; x < [theData length] && bytes[x] != ' '; x++ )
 		[widthStr appendFormat: @"%c", bytes[x]];
 	
@@ -56,7 +56,7 @@
 		[heightStr appendFormat: @"%c", bytes[x]];
 	
 	size = actualSize = NSMakeSize( [widthStr intValue], [heightStr intValue] );
-	int leftOverData = [theData length] -x -1;
+	NSUInteger leftOverData = [theData length] -x -1;
 	if( leftOverData <= 0 )
 	{
 		[self autorelease];
@@ -87,9 +87,9 @@
 			maskOffset = x -imgOffset +1;
 	}
 	
-	pixelData = [[NSData alloc] initWithBytes: bytes +imgOffset length: [theData length] -imgOffset];
+	pixelData = [[NSMutableData alloc] initWithBytes: bytes +imgOffset length: [theData length] -imgOffset];
 	NSUInteger	theLen = [pixelData length];
-	char*		theBytes = [pixelData bytes];
+	char*	theBytes = [pixelData mutableBytes];
 	for( NSUInteger x = 0; x < maskOffset && x < theLen; x++ )
 		theBytes[x] ^= 0xff;	// Invert pixels so we can use NSCalibratedWhiteColorSpace instead of the deprecated NSCalibratedBlackColorSpace.
 	

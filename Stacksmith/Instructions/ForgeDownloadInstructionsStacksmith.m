@@ -56,7 +56,7 @@
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "url", [inURLString UTF8String], &mContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "address", [inURLString UTF8String], &mContext );
 		mHeadersArrayValue = LEOAddArrayEntryToRoot( &mDownloadArrayValue.array, "headers", NULL, &mContext );
-		LEOInitArrayValue( mHeadersArrayValue, NULL, kLEOInvalidateReferences, &mContext );
+		LEOInitArrayValue( &mHeadersArrayValue->array, NULL, kLEOInvalidateReferences, &mContext );
 	}
 	
 	return self;
@@ -88,7 +88,7 @@
 	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", mDownloadedData.length, &mContext );
 
 	LEOPushEmptyValueOnStack( &mContext );	// Reserve space for return value.
-	LEOPushValueOnStack( &mContext, &mDownloadArrayValue );
+	LEOPushValueOnStack( &mContext, (LEOValuePtr) &mDownloadArrayValue );
 	LEOPushIntegerOnStack( &mContext, 1 );
 	
 	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( mContext.group, [msgName UTF8String] );
@@ -242,13 +242,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 
 
 
-LEOInstructionFuncPtr	gDownloadInstructions[LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS] =
-{
-	LEODownloadInstruction
-};
+LEOINSTR_START(Download,LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS)
+LEOINSTR_LAST(LEODownloadInstruction)
 
 
-const char*		gDownloadInstructionNames[LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS] =
-{
-	"Download"
-};

@@ -691,17 +691,17 @@
 			if( mIDForScripts == kLEOObjectIDINVALID )
 			{
 				LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
-				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [[mStack document] contextGroup], &mValueForScripts );
-				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [[mStack document] contextGroup], mIDForScripts );
+				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [mStack scriptContextGroupObject], &mValueForScripts );
+				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [mStack scriptContextGroupObject], mIDForScripts );
 			}
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
-			LEOScriptCompileAndAddParseTree( mScriptObject, [[mStack document] contextGroup], parseTree, fileID );
+			LEOScriptCompileAndAddParseTree( mScriptObject, [mStack scriptContextGroupObject], parseTree, fileID );
 			
 			#if REMOTE_DEBUGGER
 			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );
 			
 			// Set a breakpoint on the mouseUp handler:
-//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [[mStack document] contextGroup], "mouseup" );
+//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [mStack scriptContextGroupObject], "mouseup" );
 //			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
 //			if( theHandler )
 //				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
@@ -731,7 +731,7 @@
 
 -(struct LEOContextGroup*)	scriptContextGroupObject
 {
-	return [[mStack document] contextGroup];
+	return [[mStack document] scriptContextGroupObject];
 }
 
 

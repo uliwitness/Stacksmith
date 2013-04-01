@@ -39,8 +39,7 @@ enum
 };
 
 
-extern LEOInstructionFuncPtr		gStacksmithHostFunctionInstructions[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS];
-extern const char*					gStacksmithHostFunctionInstructionNames[WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS];
+LEOINSTR_DECL(StacksmithHostFunction,WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS)
 
 extern size_t						kFirstStacksmithHostFunctionInstruction;
 

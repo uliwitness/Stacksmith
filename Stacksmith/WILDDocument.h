@@ -86,7 +86,7 @@
 
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 
--(struct LEOContextGroup*)	contextGroup;
+-(struct LEOContextGroup*)	scriptContextGroupObject;
 
 -(WILDCard*)	currentCard;
 

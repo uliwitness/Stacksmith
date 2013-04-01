@@ -28,6 +28,7 @@
 #import "WILDRecentCardPickerWindowController.h"
 #import "WILDStackInfoWindowController.h"
 #import "WILDScriptEditorWindowController.h"
+#import "WILDGuidelineView.h"
 
 #import "ULIPaintSelectionRectangleTool.h"
 #import "ULIPaintSelectionLassoTool.h"
@@ -386,8 +387,8 @@
 -(void)	reloadCard
 {
 	[[self guidelineView] removeAllPartViews];
-	NSArray*	subviews = [mPartViews allObjects];
-	for( NSView* currSubview in subviews )
+	NSArray*	subviews = [mPartViews allValues];
+	for( WILDPartView* currSubview in subviews )
 	{
 		[currSubview partDidChange: nil];
 		[currSubview savePart];
@@ -425,7 +426,7 @@
 	if( theCard != prevCard )
 	{
 		if( mCurrentCard )
-			[[WILDRecentCardsList sharedRecentCardsList] addCard: mCurrentCard inCardView: self.view];
+			[[WILDRecentCardsList sharedRecentCardsList] addCard: mCurrentCard inCardView: (WILDCardView*)self.view];
 		
 		uiDict = [NSMutableDictionary dictionary];
 		if( prevCard )

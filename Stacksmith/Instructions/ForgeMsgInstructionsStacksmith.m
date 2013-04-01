@@ -54,13 +54,6 @@ void	LEOPrintInstruction( LEOContext* inContext )
 }
 
 
-LEOInstructionFuncPtr	gMsgInstructions[LEO_NUMBER_OF_MSG_INSTRUCTIONS] =
-{
-	LEOPrintInstruction
-};
+LEOINSTR_START(Msg,LEO_NUMBER_OF_MSG_INSTRUCTIONS)
+LEOINSTR_LAST(LEOPrintInstruction)
 
-
-const char*		gMsgInstructionNames[LEO_NUMBER_OF_MSG_INSTRUCTIONS] =
-{
-	"Print"
-};

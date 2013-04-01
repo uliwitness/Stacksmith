@@ -20,7 +20,7 @@
 
 @property (assign) BOOL	marked;	// Don't set directly, ask the stack to do so.
 
--(id)						initWithXMLDocument: (NSXMLElement*)elem forStack: (WILDStack*)theStack;
+-(id)						initWithXMLDocument: (NSXMLDocument*)elem forStack: (WILDStack*)theStack;
 
 -(WILDObjectID)				backgroundID;	// ID of *owning* background.
 -(WILDBackground*)			owningBackground;

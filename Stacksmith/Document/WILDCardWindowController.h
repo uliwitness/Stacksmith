@@ -11,7 +11,6 @@
 
 
 @class WILDCardViewController;
-@class WILDWindowBodyView;
 @class WILDStack;
 @class WILDCard;
 
@@ -19,7 +18,7 @@
 @interface WILDCardWindowController : NSWindowController <WILDVisibleObject>
 {
 	WILDStack						*	mStack;
-	IBOutlet WILDWindowBodyView		*	mView;
+	IBOutlet NSView					*	mView;
 	IBOutlet WILDCardViewController	*	mCardViewController;
 }
 

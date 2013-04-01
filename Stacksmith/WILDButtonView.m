@@ -10,6 +10,7 @@
 #import "WILDPartView.h"
 #import "WILDScriptContainer.h"
 #import "UKHelperMacros.h"
+#import "WILDPart.h"
 
 
 @implementation WILDButtonView
@@ -25,7 +26,7 @@
 
 -(void)	mouseDown: (NSEvent*)event
 {
-	WILDPartView*			pv = [self superview];
+	WILDPartView*			pv = (WILDPartView*)[self superview];
 	BOOL					keepLooping = YES;
 	BOOL					autoHighlight = [[pv part] autoHighlight];
 	BOOL					isInside = [[self cell] hitTestForEvent: event inRect: [self bounds] ofView: self] != NSCellHitNone;
@@ -95,7 +96,7 @@
 	NSCursor	*	currentCursor = [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]];
 	if( !currentCursor )
 	{
-		WILDPartView*		pv = [self superview];
+		WILDPartView*		pv = (WILDPartView*) [self superview];
 		currentCursor = [[[[pv part] stack] document] cursorWithID: 128];
 	}
 	[self addCursorRect: [self bounds] cursor: currentCursor];

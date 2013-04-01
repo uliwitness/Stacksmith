@@ -16,6 +16,7 @@
 #import "NSFileHandle+UKReadLinewise.h"
 #import "UKProgressPanelController.h"
 #import "NSView+SizeWindowForViewSize.h"
+#import "NSWindow+centerHorizontallyAndVertically.h"
 #import <Quartz/Quartz.h>
 
 
