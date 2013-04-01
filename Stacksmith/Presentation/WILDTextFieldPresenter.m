@@ -11,6 +11,7 @@
 #import "WILDPartView.h"
 #import "WILDTextView.h"
 #import "WILDScrollView.h"
+#import "WILDDocument.h"
 #import "UKHelperMacros.h"
 #import "WILDPartContents.h"
 
@@ -35,7 +36,7 @@
 		[mTextView setRepresentedPart: currPart];
 				
 		mScrollView = [[WILDScrollView alloc] initWithFrame: partRect];
-		[mScrollView setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
+		[mScrollView setDocumentCursor: [(WILDDocument*)[[currPart stack] document] cursorWithID: 128]];
 		[mScrollView setWantsLayer: YES];
 		NSRect			txBox = partRect;
 		txBox.origin = NSZeroPoint;

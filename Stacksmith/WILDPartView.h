@@ -1,5 +1,5 @@
 //
-//  WILDSelectionView.h
+//  WILDPartView.h
 //  Propaganda
 //
 //  Created by Uli Kusterer on 20.03.10.
@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "WILDTools.h"
+#import "WILDVisibleObject.h"
 
 
 @class WILDPart;
@@ -29,7 +30,7 @@ typedef enum
 } WILDPartGrabHandle;
 
 
-@interface WILDPartView : NSView <WILDSelectableView>
+@interface WILDPartView : NSView <WILDSelectableView,WILDVisibleObject,NSPopoverDelegate,NSTextViewDelegate,NSTableViewDelegate,NSTableViewDataSource>
 {
 	BOOL				mPeeking;		// Are we currently peeking, and should thus draw our bounding box?
 	WILDPart*			mPart;			// The part this view represents.
@@ -73,6 +74,12 @@ typedef enum
 
 -(NSRect)	selectionRect;
 -(void)		drawPartFrameInView: (NSView*)overlayView;
+
+-(void)	partWillChange: (NSNotification*)notif;
+-(void)	partDidChange: (NSNotification*)notif;
+-(void)	savePart;
+
+-(IBAction)	showInfoPanel: (id)sender;
 
 @end
 

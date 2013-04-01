@@ -9,6 +9,7 @@
 #import "WILDPopUpButtonPresenter.h"
 #import "WILDPart.h"
 #import "WILDPartView.h"
+#import "WILDPartContents.h"
 #import "UKHelperMacros.h"
 
 

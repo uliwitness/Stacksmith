@@ -10,6 +10,7 @@
 #import "WILDPart.h"
 #import "WILDStack.h"
 #import "WILDPartView.h"
+#import "WILDDocument.h"
 
 
 @interface WILDLayoutManager : NSLayoutManager

@@ -9,7 +9,9 @@
 #import "WILDLayerInfoWindowController.h"
 #import "WILDScriptEditorWindowController.h"
 #import "WILDCardView.h"
+#import "WILDLayer.h"
 #import "UKHelperMacros.h"
+#import "NSWindow+ULIZoomEffect.h"
 
 
 @implementation WILDLayerInfoWindowController

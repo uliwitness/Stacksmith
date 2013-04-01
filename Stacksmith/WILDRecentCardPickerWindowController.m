@@ -10,6 +10,7 @@
 #import "WILDCardViewController.h"
 #import "UKHelperMacros.h"
 #import "WILDRecentCardsList.h"
+#import "NSWindow+ULIZoomEffect.h"
 
 
 @interface WILDRecentCardListItem : NSObject

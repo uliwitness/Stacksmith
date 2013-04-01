@@ -13,7 +13,7 @@ struct LEOScript;
 @protocol WILDObject;
 
 
-@protocol WILDScriptContainer
+@protocol WILDScriptContainer <NSObject>
 
 @required
 -(NSString*)			script;								// Script to be used by script editors etc.

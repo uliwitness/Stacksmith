@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "WILDObjectID.h"
 
 
 @class IKImageBrowserView;
@@ -31,15 +32,15 @@
 	id<WILDIconListDataSourceDelegate>	mDelegate;
 }
 
-@property (assign) WILDDocument*						document;
-@property (retain) IBOutlet IKImageBrowserView*			iconListView;
-@property (retain) IBOutlet NSTextField*				imagePathField;
-@property (assign) id<WILDIconListDataSourceDelegate>	delegate;
+@property (assign,nonatomic) WILDDocument*						document;
+@property (retain,nonatomic) IBOutlet IKImageBrowserView*		iconListView;
+@property (retain,nonatomic) IBOutlet NSTextField*				imagePathField;
+@property (assign,nonatomic) id<WILDIconListDataSourceDelegate>	delegate;
 
 -(id)			initWithDocument: (WILDDocument*)inDocument;
 
--(void)			setSelectedIconID: (NSInteger)theID;
--(NSInteger)	selectedIconID;
+-(void)			setSelectedIconID: (WILDObjectID)theID;
+-(WILDObjectID)	selectedIconID;
 
 -(void)			ensureIconListExists;
 

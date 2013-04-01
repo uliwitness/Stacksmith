@@ -546,7 +546,7 @@
 		// Add a view to draw guidelines on top of everything:
 		mGuidelineView = [[WILDGuidelineView alloc] initWithFrame: [[self view] bounds]];
 		[[self view] addSubview: mGuidelineView];
-		for( WILDPartView* currPartView in [mPartViews allObjects] )
+		for( WILDPartView* currPartView in [mPartViews allValues] )
 			[[self guidelineView] addPartView: currPartView];
 		
 		if( prevCard != theCard )
@@ -618,8 +618,8 @@
 
 -(IBAction)	goNextCard: (id)sender
 {
-	WILDStack*	theStack = [mCurrentCard stack];
-	NSInteger			currCdIdx = [[theStack cards] indexOfObject: mCurrentCard];
+	WILDStack*			theStack = [mCurrentCard stack];
+	NSUInteger			currCdIdx = [[theStack cards] indexOfObject: mCurrentCard];
 	if( ++currCdIdx >= [[theStack cards] count] )
 		currCdIdx = 0;
 	WILDCard*	nextCard = [[theStack cards] objectAtIndex: currCdIdx];
@@ -751,7 +751,7 @@
 -(void)	layerWillRemovePart: (NSNotification*)notif
 {
 	WILDPart	*	thePart = [notif.userInfo objectForKey: WILDAffectedPartKey];
-	WILDPartView*	theView = [self visibleObjectForWILDObject: thePart];
+	WILDPartView*	theView = (WILDPartView*) [self visibleObjectForWILDObject: thePart];
 	[theView unloadPart];
 	[theView removeFromSuperview];
 }

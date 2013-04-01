@@ -48,7 +48,9 @@ enum
 typedef NSInteger	WILDTool;
 
 
+#ifndef WILDFirstPaintTool
 #define	WILDFirstPaintTool		WILDSelectTool
+#endif
 
 
 // Helper class that has a timer and tells all currently selected views to
@@ -61,7 +63,7 @@ typedef NSInteger	WILDTool;
 	NSInteger			animationPhase;
 	NSTimer*			animationTimer;
 	NSColor*			peekPattern;
-	WILDTool	tool;
+	WILDTool			tool;
 }
 
 +(WILDTools*)			sharedTools;
@@ -81,7 +83,7 @@ typedef NSInteger	WILDTool;
 -(WILDTool)				currentTool;
 -(void)					setCurrentTool: (WILDTool)theTool;
 
--(NSInteger)			numberOfSelectedClients;
+-(NSUInteger)			numberOfSelectedClients;
 -(NSSet*)				clients;
 
 @end

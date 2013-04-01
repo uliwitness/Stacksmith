@@ -14,7 +14,7 @@
 @class WILDScrollView;
 
 
-@interface WILDTextFieldPresenter : WILDPartPresenter
+@interface WILDTextFieldPresenter : WILDPartPresenter <NSTextViewDelegate>
 {
 	WILDTextView	*	mTextView;
 	WILDScrollView	*	mScrollView;

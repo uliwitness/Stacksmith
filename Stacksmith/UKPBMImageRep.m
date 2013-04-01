@@ -89,8 +89,8 @@
 	
 	pixelData = [[NSMutableData alloc] initWithBytes: bytes +imgOffset length: [theData length] -imgOffset];
 	NSUInteger	theLen = [pixelData length];
-	char*	theBytes = [pixelData mutableBytes];
-	for( NSUInteger x = 0; x < maskOffset && x < theLen; x++ )
+	char*		theBytes = [pixelData mutableBytes];
+	for( x = 0; x < maskOffset && x < theLen; x++ )
 		theBytes[x] ^= 0xff;	// Invert pixels so we can use NSCalibratedWhiteColorSpace instead of the deprecated NSCalibratedBlackColorSpace.
 	
 	return self;
@@ -116,7 +116,7 @@
 	const unsigned char*		data[5] = { 0 };
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
-		data[1] = (char*)[pixelData bytes] +maskOffset;
+		data[1] = (const unsigned char*)[pixelData bytes] +maskOffset;
 	
 	BOOL		haveMask = maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
@@ -138,7 +138,7 @@
 	const unsigned char*		data[5] = { 0 };
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
-		data[1] = (char*)[pixelData bytes] +maskOffset;
+		data[1] = (const unsigned char*)[pixelData bytes] +maskOffset;
 	BOOL		haveMask = maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	
@@ -157,7 +157,7 @@
 	const unsigned char*		data[5] = { 0 };
 	data[0] = [pixelData bytes];
 	if( maskOffset != 0 )
-		data[1] = (char*)[pixelData bytes] +maskOffset;
+		data[1] = (const unsigned char*)[pixelData bytes] +maskOffset;
 	BOOL		haveMask = maskOffset != 0;
 	NSInteger	samplesPerPixel = haveMask ? 2 : 1;
 	

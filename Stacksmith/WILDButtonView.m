@@ -11,6 +11,7 @@
 #import "WILDScriptContainer.h"
 #import "UKHelperMacros.h"
 #import "WILDPart.h"
+#import "WILDDocument.h"
 
 
 @implementation WILDButtonView

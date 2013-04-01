@@ -55,8 +55,6 @@
 -(BOOL)		searchForPattern: (NSString *)inPattern flags: (WILDSearchFlags)inFlags;
 -(BOOL)		searchAgainForPattern: (NSString *)inPattern flags: (WILDSearchFlags)inFlags;
 
--(IBAction)	showButtonInfoPanel: (id)sender;
--(IBAction)	showFieldInfoPanel: (id)sender;
 -(IBAction)	showCardInfoPanel: (id)sender;
 -(IBAction)	showBackgroundInfoPanel: (id)sender;
 -(IBAction)	showStackInfoPanel: (id)sender;

@@ -64,6 +64,7 @@
 -(NSArray*)						parts;
 -(NSArray*)						addColorParts;
 -(WILDPartContents*)			contentsForPart: (WILDPart*)thePart;
+-(WILDPartContents*)			contentsForPart: (WILDPart*)thePart create: (BOOL)createIfNeeded;
 -(WILDPart*)					partWithID: (WILDObjectID)theID;
 -(WILDObjectID)					uniqueIDForPart;
 
@@ -75,9 +76,18 @@
 
 -(NSString*)					partLayer;
 
+-(void)							createNewButtonNamed: (NSString*)inName;
+-(void)							createNewButton: (id)sender;
+
+-(void)							createNewField: (id)sender;
+
+-(void)							createNewMoviePlayer: (id)sender;
+
 -(void)							createNewButton: (id)sender;
 -(void)							createNewField: (id)sender;
+
 -(WILDPart*)					addNewPartFromXMLTemplate: (NSURL*)xmlFile;
+-(void)							deletePart: (WILDPart*)inPart;
 
 -(void)							bringPartCloser: (WILDPart*)inPart;
 -(void)							sendPartFarther: (WILDPart*)inPart;

@@ -39,6 +39,15 @@ NSInteger	WILDIntegerFromSubElementInElement( NSString* elemName, NSXMLElement* 
 }
 
 
+int		WILDIntFromSubElementInElement( NSString* elemName, NSXMLElement* elem )
+{
+	NSArray*	items = [elem elementsForName: elemName];
+	if( [items count] < 1 )
+		return -1;
+	return [[[items objectAtIndex: 0] stringValue] intValue];
+}
+
+
 NSMutableArray*	WILDStringsFromSubElementInElement( NSString* elemName, NSXMLElement* elem )
 {
 	NSArray			*	items = [elem elementsForName: elemName];

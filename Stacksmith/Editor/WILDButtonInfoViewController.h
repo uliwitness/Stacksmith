@@ -8,7 +8,7 @@
 
 #import "WILDPartInfoViewController.h"
 
-@interface WILDButtonInfoViewController : WILDPartInfoViewController
+@interface WILDButtonInfoViewController : WILDPartInfoViewController <NSPopoverDelegate>
 {
 	NSPopUpButton*		mStylePopUp;
 	NSPopUpButton*		mFamilyPopUp;

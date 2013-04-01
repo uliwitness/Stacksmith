@@ -8,6 +8,7 @@
 
 #import "WILDIconListDataSource.h"
 #import "WILDStack.h"
+#import "WILDDocument.h"
 #import <Quartz/Quartz.h>
 
 

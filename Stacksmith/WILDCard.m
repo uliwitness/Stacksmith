@@ -266,40 +266,21 @@
 
 -(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
 {
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
+	if( [inPropertyName isEqualToString: @"owner"] )
 	{
-		return [self name];
+		return [self owningBackground];
 	}
 	else
-		return nil;
+		return [super valueForWILDPropertyNamed: inPropertyName ofRange:byteRange];
 }
 
 
--(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange
+-(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName
 {
-	BOOL	propExists = YES;
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-															forKey: WILDAffectedPropertyKey]];
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
-		[self setName: inValue];
+	if( [inPropertyName isEqualToString: @"owner"] )
+		return &kLeoValueTypeWILDObject;
 	else
-		propExists = NO;
-
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-															forKey: WILDAffectedPropertyKey]];
-	if( propExists )
-		[self updateChangeCount: NSChangeDone];
-	
-	return propExists;
-}
-
-
--(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName;
-{
-	return &kLeoValueTypeString;
+		return [super typeForWILDPropertyNamed: inPropertyName];
 }
 
 @end

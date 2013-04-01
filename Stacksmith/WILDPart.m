@@ -9,6 +9,7 @@
 #import "WILDPart.h"
 #import "WILDXMLUtils.h"
 #import "WILDLayer.h"
+#import "WILDCard.h"
 #import "WILDStack.h"
 #import "WILDPartContents.h"
 #import "WILDNotifications.h"
@@ -475,7 +476,7 @@
 }
 
 
--(void)	setIconID: (NSInteger)theID
+-(void)	setIconID: (WILDObjectID)theID
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"icon"
@@ -488,7 +489,7 @@
 }
 
 
--(NSInteger)	iconID
+-(WILDObjectID)	iconID
 {
 	return mIconID;
 }

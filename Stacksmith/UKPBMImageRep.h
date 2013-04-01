@@ -30,10 +30,10 @@
 
 @interface UKPBMImageRep : NSImageRep
 {
-	NSData*		pixelData;
-	NSSize		size;
-	NSSize		actualSize;
-	NSInteger	maskOffset;
+	NSMutableData*	pixelData;
+	NSSize			size;
+	NSSize			actualSize;
+	NSUInteger		maskOffset;
 }
 
 @end

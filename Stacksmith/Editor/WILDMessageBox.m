@@ -16,7 +16,7 @@
 
 static WILDMessageBox*	sSharedMessageBox = nil;
 
-@interface WILDMessageBox ()
+@interface WILDMessageBox () <WILDObject>
 {
 	LEOObjectID				mIDForScripts;
 	LEOObjectSeed			mSeedForScripts;
@@ -32,6 +32,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 
 @synthesize messageField;
 @synthesize parentObject;
+@synthesize runButton;
 
 +(WILDMessageBox*)	sharedMessageBox
 {

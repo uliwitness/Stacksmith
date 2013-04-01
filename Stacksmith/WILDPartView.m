@@ -1,5 +1,5 @@
 //
-//  WILDSelectionView.m
+//  WILDPartView.m
 //  Propaganda
 //
 //  Created by Uli Kusterer on 20.03.10.
@@ -16,6 +16,7 @@
 #import "WILDFieldInfoViewController.h"
 #import "WILDMoviePlayerInfoViewController.h"
 #import "WILDCardView.h"
+#import "WILDCard.h"
 #import "WILDClickablePopUpButtonLabel.h"
 #import "WILDButtonCell.h"
 #import "WILDTextView.h"
@@ -35,6 +36,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
+#import "WILDGuidelineView.h"
+#import "WILDDocument.h"
 
 
 @class WILDCardView;
@@ -1149,7 +1152,7 @@
 -(void)	savePart
 {
 	if( [[mPart partType] isEqualToString: @"moviePlayer"] )
-		[mPart setCurrentTime: [(QTMovie*)[mMainView movie] currentTime]];
+		[mPart setCurrentTime: [(QTMovie*)[(QTMovieView*)mMainView movie] currentTime]];
 }
 
 

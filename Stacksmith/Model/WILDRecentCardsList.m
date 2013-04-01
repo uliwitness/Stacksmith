@@ -7,6 +7,7 @@
 //
 
 #import "WILDRecentCardsList.h"
+#import "WILDCard.h"
 #import "UKHelperMacros.h"
 
 

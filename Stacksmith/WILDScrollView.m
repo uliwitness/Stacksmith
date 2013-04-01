@@ -9,6 +9,9 @@
 #import "WILDScrollView.h"
 #import "WILDPartView.h"
 #import "UKHelperMacros.h"
+#import "WILDStack.h"
+#import "WILDPart.h"
+#import "WILDDocument.h"
 
 
 @implementation WILDScrollView

@@ -38,7 +38,7 @@
 {
 	[super windowDidLoad];
 	
-	[mIDField setIntegerValue: [mLayer cardID]];
+	[mIDField setIntegerValue: [(WILDCard*)mLayer cardID]];
 
 	[mMarkedSwitch setState: [(WILDCard*)mLayer marked] ? NSOnState : NSOffState];
 	[mIDField setIntegerValue: [(WILDCard*)mLayer cardID]];

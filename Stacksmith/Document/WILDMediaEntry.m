@@ -9,6 +9,7 @@
 #import "WILDMediaEntry.h"
 #import "WILDXMLUtils.h"
 #import "UKHelperMacros.h"
+#import "NSFileManager+NameForTempFile.h"
 
 
 @implementation WILDMediaEntry

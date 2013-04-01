@@ -12,6 +12,7 @@
 #import "WILDSearchContext.h"
 #import "WILDObjectID.h"
 #import "LEOValue.h"
+#import "ForgeWILDObjectValue.h"
 
 
 @class WILDStack;
@@ -21,7 +22,7 @@
 @class WILDPartContents;
 
 
-@interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable>
+@interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable,WILDObject>
 {
 	WILDObjectID		mID;
 	NSRect				mRectangle;
@@ -77,32 +78,32 @@
 	struct LEOValueObject	mValueForScripts;		// A LEOValue so scripts can reference us (see mIDForScripts).
 }
 
-@property (assign) BOOL			dontWrap;
-@property (assign) BOOL			autoTab;
-@property (assign) BOOL			dontSearch;
-@property (assign) BOOL			lockText;
-@property (assign) BOOL			wideMargins;
-@property (assign) BOOL			fixedLineHeight;
-@property (assign) BOOL			showLines;
-@property (assign) BOOL			sharedText;
-@property (assign) BOOL			controllerVisible;
-@property (assign) BOOL			hasHorizontalScroller;
-@property (assign) BOOL			hasVerticalScroller;
-@property (assign) BOOL			clickableInInactiveWindow;
-@property (copy) NSString*		mediaPath;
-@property (assign) QTTime		currentTime;
-@property (retain) NSColor*		lineColor;
-@property (retain) NSColor*		fillColor;
-@property (retain) NSColor*		shadowColor;
-@property (assign) NSSize		shadowOffset;
-@property (assign) CGFloat		shadowBlurRadius;
+@property (assign,nonatomic) BOOL			dontWrap;
+@property (assign,nonatomic) BOOL			autoTab;
+@property (assign,nonatomic) BOOL			dontSearch;
+@property (assign,nonatomic) BOOL			lockText;
+@property (assign,nonatomic) BOOL			wideMargins;
+@property (assign,nonatomic) BOOL			fixedLineHeight;
+@property (assign,nonatomic) BOOL			showLines;
+@property (assign,nonatomic) BOOL			sharedText;
+@property (assign,nonatomic) BOOL			controllerVisible;
+@property (assign,nonatomic) BOOL			hasHorizontalScroller;
+@property (assign,nonatomic) BOOL			hasVerticalScroller;
+@property (assign,nonatomic) BOOL			clickableInInactiveWindow;
+@property (copy,nonatomic) NSString*		mediaPath;
+@property (assign,nonatomic) QTTime			currentTime;
+@property (retain,nonatomic) NSColor*		lineColor;
+@property (retain,nonatomic) NSColor*		fillColor;
+@property (retain,nonatomic) NSColor*		shadowColor;
+@property (assign,nonatomic) NSSize			shadowOffset;
+@property (assign,nonatomic) CGFloat		shadowBlurRadius;
 
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
 
 -(void)			setFlippedRectangle: (NSRect)theBox;
 -(NSRect)		flippedRectangle;
--(NSRect)		setRectangle: (NSRect)theBox;
+-(void)			setRectangle: (NSRect)theBox;
 -(NSRect)		rectangle;
 
 -(void)			setName: (NSString*)theStr;

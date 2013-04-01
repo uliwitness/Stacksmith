@@ -11,6 +11,7 @@
 #import "WILDCardView.h"
 #import "WILDStack.h"
 #import "UKHelperMacros.h"
+#import "NSWindow+ULIZoomEffect.h"
 
 
 static NSSize		sPopUpMenuSizes[] =
@@ -79,7 +80,7 @@ static NSSize		sPopUpMenuSizes[] =
 	[super windowDidLoad];
 	
 	[mNameField setStringValue: [mStack name]];
-	if( [[mStack document] fileName] == nil )
+	if( [[mStack document] fileURL] == nil )
 		[mNameField setEnabled: NO];
 	
 	unsigned long	numCards = [[mStack cards] count];
@@ -99,7 +100,7 @@ static NSSize		sPopUpMenuSizes[] =
 		cardSize = NSMakeSize(512, 342);
 	
 	BOOL		foundSomething = NO;
-	for( int x = 0; x < NUM_POPUP_MENU_SIZES; x++ )
+	for( NSUInteger x = 0; x < NUM_POPUP_MENU_SIZES; x++ )
 	{
 		if( sPopUpMenuSizes[x].width == cardSize.width
 			|| sPopUpMenuSizes[x].height == cardSize.height )
@@ -133,7 +134,7 @@ static NSSize		sPopUpMenuSizes[] =
 
 -(IBAction)	doOKButton: (id)sender
 {
-	if( [[mStack document] fileName] == nil )
+	if( [[mStack document] fileURL] == nil )
 		[mStack setName: [mNameField stringValue]];
 	
 	NSSize	newSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
@@ -169,7 +170,7 @@ static NSSize		sPopUpMenuSizes[] =
 
 -(IBAction)	sizePopUpSelectionChanged: (id)sender
 {
-	NSUInteger	selectedItem = [mSizePopUpButton indexOfSelectedItem];
+	NSInteger	selectedItem = [mSizePopUpButton indexOfSelectedItem];
 	BOOL		shouldEnableFields = (selectedItem == ([mSizePopUpButton numberOfItems] -1));
 	
 	[mWidthField setEnabled: shouldEnableFields];

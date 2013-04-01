@@ -12,6 +12,7 @@
 #import "WILDXMLUtils.h"
 #import "ULIMultiMap.h"
 #import "WILDStack.h"
+#import "WILDDocument.h"
 #import "WILDNotifications.h"
 #import "UKRandomInteger.h"
 #import "Forge.h"
@@ -91,7 +92,7 @@
 		for( NSXMLElement* currContent in contents )
 		{
 			WILDPartContents*	newCont = [[[WILDPartContents alloc] initWithXMLElement: currContent forStack: theStack] autorelease];
-			NSString*					theKey = [NSString stringWithFormat: @"%@:%ld", [newCont partLayer], [newCont partID]];
+			NSString*					theKey = [NSString stringWithFormat: @"%@:%lld", [newCont partLayer], [newCont partID]];
 			[mContents setObject: newCont forKey: theKey];
 		}
 		
@@ -147,7 +148,7 @@
 	if( !mPictureName )
 		return nil;
 	
-	NSImage*	img = [[mStack document] imageNamed: mPictureName];
+	NSImage*	img = [(WILDDocument*)[mStack document] imageNamed: mPictureName];
 	ASSIGN(mPicture,img);
 	
 	return img;
@@ -180,7 +181,7 @@
 
 -(WILDPartContents*)	contentsForPart: (WILDPart*)thePart create: (BOOL)createIfNeeded
 {
-	NSString*	theKey = [NSString stringWithFormat: @"%@:%ld", [thePart partLayer], [thePart partID]];
+	NSString*	theKey = [NSString stringWithFormat: @"%@:%lld", [thePart partLayer], [thePart partID]];
 	WILDPartContents*	contents = [mContents objectForKey: theKey];
 	if( !contents && createIfNeeded )
 	{
@@ -389,7 +390,7 @@
 
 -(WILDPart*)	partAtIndex: (NSUInteger)inPartIndex ofType: (NSString*)inPartType
 {
-	NSInteger	partCount = 0;
+	NSUInteger	partCount = 0;
 	WILDPart*	foundPart = nil;
 	
 	for( WILDPart* currPart in mParts )
@@ -485,7 +486,7 @@
 		[theString appendString: [currPart xmlString]];
 	}
 	
-	for( WILDPartContents* currContents in [mContents allObjects] )
+	for( WILDPartContents* currContents in [mContents allValues] )
 	{
 		[theString appendString: [currContents xmlString]];
 	}
@@ -670,6 +671,66 @@
 	return [[mStack document] scriptContextGroupObject];
 }
 
+
+-(NSString*)	textContents
+{
+	return nil;
+}
+
+
+-(BOOL)			setTextContents: (NSString*)inString
+{
+	return NO;
+}
+
+-(BOOL)			goThereInNewWindow: (BOOL)inNewWindow
+{
+	return NO;
+}
+
+-(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
+{
+	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
+	{
+		return [self name];
+	}
+	else
+		return nil;
+}
+
+
+-(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange
+{
+	BOOL	propExists = YES;
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
+															forKey: WILDAffectedPropertyKey]];
+	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
+		[self setName: inValue];
+	else
+		propExists = NO;
+
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
+															forKey: WILDAffectedPropertyKey]];
+	if( propExists )
+		[self updateChangeCount: NSChangeDone];
+	
+	return propExists;
+}
+
+
+-(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName;
+{
+	return &kLeoValueTypeString;
+}
+
+
+-(id<WILDObject>)	parentObject
+{
+	return nil;
+}
 
 -(NSString*)	displayName
 {

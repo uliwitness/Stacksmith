@@ -1,5 +1,5 @@
 /*
- *  ForgeDownloadInstructionsStacksmith.c
+ *  ForgeDownloadInstructionsStacksmith.m
  *  Leonie
  *
  *  Created by Uli Kusterer on 09.10.10.
@@ -17,6 +17,9 @@
 #import <Foundation/Foundation.h>
 #import "Forge.h"
 #import "UKHelperMacros.h"
+
+
+void	LEODownloadInstruction( LEOContext* inContext );
 
 
 @interface WILDURLConnectionDelegate : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
@@ -115,7 +118,7 @@
 	mMaxBytes = [response expectedContentLength];
 	if( [response respondsToSelector: @selector(allHeaderFields)] )
 	{
-		NSDictionary	*	headers = [response allHeaderFields];
+		NSDictionary	*	headers = [(NSHTTPURLResponse*)response allHeaderFields];
 		
 		if( mMaxBytes < 0 )
 		{

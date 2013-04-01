@@ -44,7 +44,7 @@
 			isHighlighted = [contents highlighted];
 		if( isHighlighted )
 		{
-			CALayer*	theLayer = [self layer];
+			CALayer*	theLayer = [mPartView layer];
 			[theLayer setOpaque: NO];
 			CIFilter*	theFilter = [CIFilter filterWithName: @"CIDifferenceBlendMode"];
 			[theFilter setDefaults];

@@ -10,6 +10,7 @@
 #import "WILDXMLUtils.h"
 #import "WILDStack.h"
 #import "WILDPart.h"
+#import "WILDDocument.h"
 #import "UKHelperMacros.h"
 
 
@@ -58,8 +59,8 @@
 	
 	[outStr appendString: @"\t\t<stylerun>\n"];
 	
-	[outStr appendFormat: @"\t\t\t<offset>%d</offset>", styleRange.location];
-	[outStr appendFormat: @"\t\t\t<id>%d</id>", styleID];
+	[outStr appendFormat: @"\t\t\t<offset>%ld</offset>", styleRange.location];
+	[outStr appendFormat: @"\t\t\t<id>%ld</id>", styleID];
 	
 	[outStr appendString: @"\t\t</stylerun>\n"];
 	
@@ -121,7 +122,7 @@
 					NSInteger	fontSize = -1;
 					NSArray*	styles = nil;
 					
-					[[theStack document] provideStyleFormatWithID: styleID font: &fontName size: &fontSize styles: &styles];
+					[(WILDDocument*)[theStack document] provideStyleFormatWithID: styleID font: &fontName size: &fontSize styles: &styles];
 					
 					WILDStyleRun*	currStyleRun = [[WILDStyleRun alloc] init];
 					NSRange					txRange = { startOffset, endOffset -startOffset };
@@ -337,7 +338,7 @@
 	[outString appendString: @"\t<content>\n"];
 	
 	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
-	[outString appendFormat: @"\t\t<id>%ld</id>\n", mID];
+	[outString appendFormat: @"\t\t<id>%lld</id>\n", mID];
 
 	[outString appendFormat: @"\t\t<text>%@</text>\n", WILDStringEscapedForXML([self RTFText])];
 

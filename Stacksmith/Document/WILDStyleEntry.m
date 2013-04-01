@@ -59,7 +59,7 @@
 
 -(NSString*)	description
 {
-	return [NSString stringWithFormat: @"%@ { font = %@, size = %d, style = %@ }",
+	return [NSString stringWithFormat: @"%@ { font = %@, size = %ld, style = %@ }",
 						[self class], mFontName, mFontSize, [mFontStyles componentsJoinedByString: @", "]];
 }
 

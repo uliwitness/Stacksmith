@@ -106,7 +106,7 @@ static WILDTools*		sAnimator = nil;
 	}
 }
 
--(NSInteger)	numberOfSelectedClients
+-(NSUInteger)	numberOfSelectedClients
 {
 	return [nonRetainingClients count];
 }

@@ -32,7 +32,7 @@
 	BOOL					mPrivateAccess;		// Do we require a password before opening this stack?
 	BOOL					mCantDelete;		// Are scripts allowed to delete this stack?
 	BOOL					mCantModify;		// Is this stack write-protected?
-	NSInteger				mUserLevel;			// Maximum user level for this stack.
+	int						mUserLevel;			// Maximum user level for this stack.
 	WILDDocument*			mDocument;			// Our owner, NOT RETAINED!
 	WILDObjectID			mID;				// Unique ID number of this stack in the document.
 	
@@ -57,11 +57,11 @@
 -(WILDObjectID)		stackID;
 
 -(WILDObjectID)		uniqueIDForCardOrBackground;
--(WILDObjectID)		uniqueIDForMedia;
 
 -(NSArray*)			cards;
 -(WILDCard*)		cardWithID: (WILDObjectID)theID;
 -(WILDCard*)		cardNamed: (NSString*)cardName;
+-(WILDCard*)		currentCard;
 
 -(NSArray*)			backgrounds;
 -(WILDBackground*)	backgroundWithID: (WILDObjectID)theID;

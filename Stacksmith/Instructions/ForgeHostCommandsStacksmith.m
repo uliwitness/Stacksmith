@@ -9,6 +9,8 @@
 #include "ForgeHostCommandsStacksmith.h"
 #include "ForgeWILDObjectValue.h"
 #include "WILDDocument.h"
+#include "WILDStack.h"
+#include "WILDCard.h"
 #include "WILDInputPanelController.h"
 #include "LEOScript.h"
 #include "LEORemoteDebugger.h"
@@ -35,7 +37,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 		char str[1024] = { 0 };
 		LEOGetValueAsString( theValue, str, sizeof(str), inContext );
 		NSString	*	stackName = [NSString stringWithUTF8String: str];
-		id<WILDObject>	theStack = [WILDDocument openStackNamed: stackName];
+		WILDStack*	theStack = [WILDDocument openStackNamed: stackName];
 		canGoThere = [theStack goThereInNewWindow: NO];
 	}
 	

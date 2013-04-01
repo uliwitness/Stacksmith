@@ -12,6 +12,7 @@
 #import "WILDStack.h"
 #import "WILDLayer.h"
 #import "WILDCard.h"
+#import "WILDPart.h"
 #import "LEOScript.h"
 
 

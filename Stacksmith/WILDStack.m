@@ -73,7 +73,7 @@
 		if( !mName )
 			mName = [@"Untitled" retain];
 		
-		mUserLevel = WILDIntegerFromSubElementInElement( @"userLevel", elem );
+		mUserLevel = WILDIntFromSubElementInElement( @"userLevel", elem );
 		
 		mCantModify = WILDBoolFromSubElementInElement( @"cantModify", elem, NO );
 		mCantDelete = WILDBoolFromSubElementInElement( @"cantDelete", elem, NO );
@@ -430,12 +430,13 @@
 		}
 		
 		// Nothing found on this card? Try next card:
-		NSInteger	currCardIdx = [mCards indexOfObject: cardToSearch];
+		NSUInteger	currCardIdx = [mCards indexOfObject: cardToSearch];
 		if( inFlags & WILDSearchBackwards )
 		{
-			currCardIdx -= 1;
-			if( currCardIdx < 0 )
+			if( currCardIdx == 0 )
 				currCardIdx = [mCards count] -1;
+			else
+				currCardIdx -= 1;
 		}
 		else
 		{
@@ -475,8 +476,8 @@
 												"<!DOCTYPE stack PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\" >\n"
 												"<stack>\n"];
 	
-	[theString appendFormat: @"\t<id>%ld</id>\n", mID];
-	[theString appendFormat: @"\t<name>%l@</name>\n", WILDStringEscapedForXML(mName)];
+	[theString appendFormat: @"\t<id>%lld</id>\n", mID];
+	[theString appendFormat: @"\t<name>%@</name>\n", WILDStringEscapedForXML(mName)];
 	
 	[theString appendFormat: @"\t<userLevel>%d</userLevel>\n", mUserLevel];
 	[theString appendFormat: @"\t<cantModify>%@</cantModify>\n", mCantModify ? @"<true />" : @"<false />"];
@@ -491,21 +492,21 @@
 	// Write out backgrounds and add entries for them:
 	for( WILDBackground * currBg in mBackgrounds )
 	{
-		NSString*	bgFileName = [NSString stringWithFormat: @"background_%ld.xml", [currBg backgroundID]];
+		NSString*	bgFileName = [NSString stringWithFormat: @"background_%lld.xml", [currBg backgroundID]];
 		NSURL	*	bgURL = [packageURL URLByAppendingPathComponent: bgFileName];
 		if( ![[currBg xmlStringForWritingToURL: packageURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: bgURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
-		[theString appendFormat: @"\t<background id=\"%ld\" file=\"%@\" />\n", [currBg backgroundID], WILDStringEscapedForXML(bgFileName)];
+		[theString appendFormat: @"\t<background id=\"%lld\" file=\"%@\" />\n", [currBg backgroundID], WILDStringEscapedForXML(bgFileName)];
 	}
 	
 	// Write out cards and add entries for them:
 	for( WILDCard * currCd in mCards )
 	{
-		NSString*	cdFileName = [NSString stringWithFormat: @"card_%ld.xml", [currCd cardID]];
+		NSString*	cdFileName = [NSString stringWithFormat: @"card_%lld.xml", [currCd cardID]];
 		NSURL	*	cdURL = [packageURL URLByAppendingPathComponent: cdFileName];
 		if( ![[currCd xmlStringForWritingToURL: packageURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: cdURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
-		[theString appendFormat: @"\t<card id=\"%ld\" file=\"%@\" marked=\"%@\" />\n",
+		[theString appendFormat: @"\t<card id=\"%lld\" file=\"%@\" marked=\"%@\" />\n",
 							[currCd cardID], WILDStringEscapedForXML(cdFileName),
 		 					([mMarkedCards containsObject: currCd] ? @"true" : @"false")];
 	}
@@ -524,7 +525,7 @@
 
 -(NSString*)	name
 {
-	NSString	*stackName = [[[mDocument fileName] lastPathComponent] stringByDeletingPathExtension];
+	NSString	*stackName = [[[mDocument fileURL] lastPathComponent] stringByDeletingPathExtension];
 	if( stackName == nil )
 		stackName = mName;
 	return stackName;
@@ -535,13 +536,13 @@
 {
 	if( ![inName hasSuffix: @".xstk"] )	// TODO: Get suffix from Info.plist for standalones.
 		inName = [inName stringByAppendingPathExtension: @"xstk"];
-	if( [mDocument fileName] == nil )
+	if( [mDocument fileURL] == nil )
 	{
 		ASSIGN(mName,[inName lastPathComponent]);
 	}
 	else
 	{
-		[mDocument setFileName: [[[mDocument fileName] stringByDeletingLastPathComponent] stringByAppendingPathComponent: inName]];
+		[mDocument setFileURL: [[[mDocument fileURL] URLByDeletingLastPathComponent] URLByAppendingPathComponent: inName]];
 	}
 }
 
@@ -598,6 +599,11 @@
 	return propExists;
 }
 
+
+-(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName
+{
+	return &kLeoValueTypeString;
+}
 
 -(WILDCard*)	currentCard
 {

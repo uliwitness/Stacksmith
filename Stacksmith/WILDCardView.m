@@ -16,6 +16,7 @@
 #import "WILDXMLUtils.h"
 #import "WILDPart.h"
 #import "WILDCardViewController.h"
+#import "WILDDocument.h"
 #import "NSImage+NiceScaling.h"
 #import "WILDGuidelineView.h"
 #import <QuartzCore/QuartzCore.h>
@@ -301,7 +302,7 @@
 
 -(id)	animationForKey:(NSString *)key
 {
-	NSAnimation	*	ani = nil;
+	CATransition	*	ani = nil;
 	
 	if( [key isEqualToString: @"subviews"] && mTransitionType && mTransitionSubtype )
 	{
