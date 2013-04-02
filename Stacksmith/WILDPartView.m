@@ -1021,7 +1021,7 @@
 {
 	WILDPartContents	*	contents = [self currentPartContentsAndBackgroundContents: nil create: YES];
 	
-	[contents setStyledText: [mMainView textStorage]];
+	[contents setStyledText: [notification.object textStorage]];
 	
 	[mPart updateChangeCount: NSChangeDone];
 }
