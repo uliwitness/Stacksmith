@@ -19,6 +19,9 @@
 #import "UKHelperMacros.h"
 
 
+static NSMutableArray	*	sRunningConnections = nil;
+
+
 void	LEODownloadInstruction( LEOContext* inContext );
 
 
@@ -103,13 +106,17 @@ void	LEODownloadInstruction( LEOContext* inContext );
 		LEORunInContext( theHandler->instructions, &mContext );
 	}
 	if( mContext.errMsg[0] != 0 )
+	{
 		[inConnection cancel];
+		[sRunningConnections removeObject: inConnection];
+	}
 }
 
 
 -(void)	connection: (NSURLConnection *)connection didFailWithError: (NSError *)error
 {
 	[self sendDownloadMessage: mCompletionMessage forConnection: connection];
+	[sRunningConnections removeObject: connection];
 }
 
 
@@ -162,6 +169,7 @@ void	LEODownloadInstruction( LEOContext* inContext );
 -(void)	connectionDidFinishLoading: (NSURLConnection *)connection
 {
 	[self sendDownloadMessage: mCompletionMessage forConnection: connection];
+	[sRunningConnections removeObject: connection];
 }
 
 /*!
@@ -234,6 +242,9 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	// Start the download and finish this instruction:
 	NSURLRequest		*	theRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: urlObjcString]];
 	NSURLConnection		*	conn = [NSURLConnection connectionWithRequest: theRequest delegate: theDelegate];
+	if( !sRunningConnections )
+		sRunningConnections = [[NSMutableArray alloc] init];
+	[sRunningConnections addObject: conn];
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -4 );
 	
