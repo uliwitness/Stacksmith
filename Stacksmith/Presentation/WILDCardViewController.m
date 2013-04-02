@@ -9,6 +9,7 @@
 #import "WILDCardViewController.h"
 #import "WILDStack.h"
 #import "WILDBackground.h"
+#import "WILDDocument.h"
 #import "WILDCard.h"
 #import "WILDPart.h"
 #import "WILDPartContents.h"
@@ -1040,11 +1041,20 @@
 {
 	NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 	NSArray*		imgs = [pb readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options: [NSDictionary dictionary]];
-	if( [imgs count] > 0 )
+	WILDDocument*	theDoc = self.currentCard.stack.document;
+	WILDLayer*		currLayer = mBackgroundEditMode ? self.currentCard.owningBackground : self.currentCard;
+	for( NSImage * img in imgs )
 	{
-		NSImage*		anImg = [imgs objectAtIndex: 0];
+		NSString*		pictureName = @"";
+		WILDObjectID	pictureID = [theDoc uniqueIDForMedia];
+		[theDoc addMediaFile: nil withType: @"icon" name: pictureName
+			andID: pictureID
+			hotSpot: NSZeroPoint 
+			imageOrCursor: img
+			isBuiltIn: NO];
 		
-		// +++
+		WILDPart*	thePart = [currLayer createNewButtonNamed: pictureName];
+		[thePart setIconID: pictureID];
 	}
 }
 
