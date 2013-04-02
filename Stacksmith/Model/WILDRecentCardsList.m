@@ -8,6 +8,7 @@
 
 #import "WILDRecentCardsList.h"
 #import "WILDCard.h"
+#import "WILDCardView.h"
 #import "UKHelperMacros.h"
 
 
