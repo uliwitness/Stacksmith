@@ -218,7 +218,7 @@
 
 -(BOOL)	performDragOperation: (id <NSDraggingInfo>)sender
 {
-	NSDragOperation	op = [sender draggingSourceOperationMask];
+	//NSDragOperation	op = [sender draggingSourceOperationMask];
 	NSPoint			pos = [self convertPoint: [sender draggedImageLocation] fromView: nil];
 	NSPasteboard*	pb = [sender draggingPasteboard];
 	NSString*		xmlStr = [pb stringForType: WILDPartPboardType];
