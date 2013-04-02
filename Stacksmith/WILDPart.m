@@ -1298,39 +1298,39 @@
 	else if( [inPropertyName isEqualToString: @"shhadowblurradius"] )
 		[self setShadowBlurRadius: [inValue doubleValue]];
 	else if( [inPropertyName isEqualToString: @"visible"] )
-		mVisible = (inValue != @NO);
+		mVisible = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"dontwrap"] )
-		mDontWrap = (inValue != @NO);
+		mDontWrap = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"dontsearch"] )
-		mDontSearch = (inValue != @NO);
+		mDontSearch = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"sharedtext"] )
-		mSharedText = (inValue != @NO);
+		mSharedText = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
-		mFixedLineHeight = (inValue != @NO);
+		mFixedLineHeight = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"autotab"] )
-		mAutoTab = (inValue != @NO);
+		mAutoTab = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"locktext"] )
-		mLockText = (inValue != @NO);
+		mLockText = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"autoselect"] )
-		mAutoSelect = (inValue != @NO);
+		mAutoSelect = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"showlines"] )
-		mShowLines = (inValue != @NO);
+		mShowLines = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"autohighlight"] )
-		mAutoHighlight = (inValue != @NO);
+		mAutoHighlight = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"highlight"] )
-		mHighlight = (inValue != @NO);
+		mHighlight = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
-		mSharedHighlight = (inValue != @NO);
+		mSharedHighlight = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"widemargins"] )
-		mWideMargins = (inValue != @NO);
+		mWideMargins = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"multiplelines"] )
-		mMultipleLines = (inValue != @NO);
+		mMultipleLines = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"showname"] )
-		mShowName = (inValue != @NO);
+		mShowName = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"enabled"] )
-		mEnabled = (inValue != @NO);
+		mEnabled = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
-		mHighlightedForTracking = (inValue != @NO);
+		mHighlightedForTracking = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"script"] )
 		[self setScript: inValue];
 	else if( [inPropertyName isEqualToString: @"style"] )
@@ -1338,7 +1338,7 @@
 	else if( [inPropertyName isEqualToString: @"moviepath"] )
 		[self setMediaPath: inValue];
 	else if( [inPropertyName isEqualToString: @"controllervisible"] )
-		mControllerVisible = (inValue != @NO);
+		mControllerVisible = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		mIconID = [inValue longLongValue];
 	else if( [inPropertyName isEqualToString: @"textstyle"] )
