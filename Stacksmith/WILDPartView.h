@@ -81,6 +81,8 @@ typedef enum
 
 -(IBAction)	showInfoPanel: (id)sender;
 
+-(void)	updateOnClick: (NSButton*)sender;
+
 @end
 
 
