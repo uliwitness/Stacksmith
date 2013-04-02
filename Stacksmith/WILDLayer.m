@@ -315,28 +315,29 @@
 }
 
 
--(void)	createNewButtonNamed: (NSString*)inName
+-(WILDPart*)	createNewButtonNamed: (NSString*)inName
 {
 	WILDPart*	newPart = [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"ButtonPartTemplate"]];
 	[newPart setName: inName];
+	return newPart;
 }
 
 
--(void)	createNewButton: (id)sender
+-(WILDPart*)	createNewButton: (id)sender
 {
-	[self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"ButtonPartTemplate"]];
+	return [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"ButtonPartTemplate"]];
 }
 
 
--(void)	createNewField: (id)sender
+-(WILDPart*)	createNewField: (id)sender
 {
-	[self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"FieldPartTemplate"]];
+	return [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"FieldPartTemplate"]];
 }
 
 
--(void)	createNewMoviePlayer: (id)sender
+-(WILDPart*)	createNewMoviePlayer: (id)sender
 {
-	[self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"MoviePlayerPartTemplate"]];
+	return [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"MoviePlayerPartTemplate"]];
 }
 
 

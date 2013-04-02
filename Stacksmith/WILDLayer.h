@@ -76,15 +76,15 @@
 
 -(NSString*)					partLayer;
 
--(void)							createNewButtonNamed: (NSString*)inName;
--(void)							createNewButton: (id)sender;
+-(WILDPart*)					createNewButtonNamed: (NSString*)inName;
+-(WILDPart*)					createNewButton: (id)sender;
 
--(void)							createNewField: (id)sender;
+-(WILDPart*)					createNewField: (id)sender;
 
--(void)							createNewMoviePlayer: (id)sender;
+-(WILDPart*)					createNewMoviePlayer: (id)sender;
 
--(void)							createNewButton: (id)sender;
--(void)							createNewField: (id)sender;
+-(WILDPart*)					createNewButton: (id)sender;
+-(WILDPart*)					createNewField: (id)sender;
 
 -(WILDPart*)					addNewPartFromXMLTemplate: (NSURL*)xmlFile;
 -(void)							deletePart: (WILDPart*)inPart;
