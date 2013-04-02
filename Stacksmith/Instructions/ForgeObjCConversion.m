@@ -79,7 +79,7 @@ id	WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext, LEOVa
 
 BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inContext )
 {
-	if( inValue == @YES || inValue == @NO )
+	if( inValue == (id)kCFBooleanTrue || inValue == (id)kCFBooleanFalse )
 	{
 		LEOInitBooleanValue( outValue, [inValue isEqual: @YES], kLEOInvalidateReferences, inContext );
 	}
