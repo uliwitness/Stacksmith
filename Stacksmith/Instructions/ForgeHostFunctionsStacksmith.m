@@ -74,11 +74,11 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		NSUInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
 		if( theNumber > 0 && theNumber <= [[frontStack backgrounds] count] )
 			theBackground = [[frontStack cards] objectAtIndex: theNumber -1];
 		else
-			snprintf( backgroundName, sizeof(backgroundName), "%lld", theNumber );
+			snprintf( backgroundName, sizeof(backgroundName), "%lu", theNumber );
 	}
 	else
 	{
@@ -109,11 +109,11 @@ void	WILDCardInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		NSUInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
 		if( theNumber > 0 && theNumber <= [[frontStack cards] count] )
 			theCard = [[frontStack cards] objectAtIndex: theNumber -1];
 		else
-			snprintf( cardName, sizeof(cardName), "%lld", theNumber );
+			snprintf( cardName, sizeof(cardName), "%lu", theNumber );
 	}
 	else
 	{
