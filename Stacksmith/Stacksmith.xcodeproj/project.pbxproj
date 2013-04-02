@@ -241,6 +241,9 @@
 		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A3FB2C16E749D400735729 /* WILDLegacyButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FB2B16E749D400735729 /* WILDLegacyButtonPresenter.m */; };
+		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
+		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
+		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
 		55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */; };
 		55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */; };
@@ -798,6 +801,12 @@
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A3FB2A16E749D400735729 /* WILDLegacyButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDLegacyButtonPresenter.h; path = Presentation/WILDLegacyButtonPresenter.h; sourceTree = "<group>"; };
 		55A3FB2B16E749D400735729 /* WILDLegacyButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDLegacyButtonPresenter.m; path = Presentation/WILDLegacyButtonPresenter.m; sourceTree = "<group>"; };
+		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
+		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
+		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
+		55A46A5A170A5CBA00750972 /* CDivideCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDivideCommandNode.h; path = ../../CDivideCommandNode.h; sourceTree = "<group>"; };
+		55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMultiplyCommandNode.cpp; path = ../../CMultiplyCommandNode.cpp; sourceTree = "<group>"; };
+		55A46A5C170A5CBA00750972 /* CMultiplyCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMultiplyCommandNode.h; path = ../../CMultiplyCommandNode.h; sourceTree = "<group>"; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		55A7BA4514668D5900AB0F34 /* ULIMelodyQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIMelodyQueue.h; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.h; sourceTree = "<group>"; };
 		55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIMelodyQueue.m; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.m; sourceTree = "<group>"; };
@@ -1283,6 +1292,12 @@
 				553C46C413577334000219FA /* COperatorNode.cpp */,
 				553C46C513577334000219FA /* CAddCommandNode.h */,
 				553C46C613577334000219FA /* CAddCommandNode.cpp */,
+				55A46A53170A5C1800750972 /* CSubtractCommandNode.h */,
+				55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */,
+				55A46A5A170A5CBA00750972 /* CDivideCommandNode.h */,
+				55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */,
+				55A46A5C170A5CBA00750972 /* CMultiplyCommandNode.h */,
+				55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */,
 				553C46C713577334000219FA /* CLineMarkerNode.h */,
 				553C46C813577334000219FA /* CLineMarkerNode.cpp */,
 				553C46C913577334000219FA /* CAssignChunkArrayNode.h */,
@@ -2142,6 +2157,9 @@
 				551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */,
 				551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */,
 				551D93921705A7AF003766DA /* ForgeDownloadInstructionsStacksmith.m in Sources */,
+				55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */,
+				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
+				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
