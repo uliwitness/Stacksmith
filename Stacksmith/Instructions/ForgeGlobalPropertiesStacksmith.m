@@ -44,11 +44,8 @@ void	LEOPushCursorInstruction( LEOContext* inContext )
 
 void	LEOSetVersionInstruction( LEOContext* inContext )
 {
-//	char		propValueStr[1024] = { 0 };
-//	LEOGetValueAsString( inContext->stackEndPtr -1, propValueStr, sizeof(propValueStr), inContext );
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	// Should we print an error here? Setting the version is kinda pointless.
+	LEOContextStopWithError( inContext, "You can't change the version number." );
 	
 	inContext->currentInstruction++;
 }

@@ -44,6 +44,7 @@
 
 		// Internet protocol stuff:
 	LEOAddInstructionsToInstructionArray( gDownloadInstructions, LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS, &kFirstDownloadInstruction );
+	LEOAddGlobalPropertiesAndOffsetInstructions( gDownloadGlobalProperties, kFirstDownloadInstruction );
 	
 	// Now add the instructions for the syntax that Stacksmith adds itself:
 		// Commands specific to this host application:

@@ -23,6 +23,8 @@ static NSMutableArray	*	sRunningConnections = nil;
 
 
 void	LEODownloadInstruction( LEOContext* inContext );
+void	LEOPushDownloadsInstruction( LEOContext* inContext );
+void	LEOSetDownloadsInstruction( LEOContext* inContext );
 
 
 @interface WILDURLConnectionDelegate : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
@@ -198,6 +200,9 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		return;
 	}
 	urlString = LEOGetValueAsString( urlValue, urlBuf, sizeof(urlBuf), inContext );
+	if( !inContext->keepRunning )
+		return;
+		
 	NSString			*	urlObjcString = [NSString stringWithCString: urlString encoding: NSUTF8StringEncoding];
 	
 	// 3: Progress message name
@@ -211,6 +216,8 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		return;
 	}
 	progressMsgString = LEOGetValueAsString( progressMsgValue, progressBuf, sizeof(progressBuf), inContext );
+	if( !inContext->keepRunning )
+		return;
 	NSString			*	progressMsgObjcString = [NSString stringWithCString: progressMsgString encoding: NSUTF8StringEncoding];
 
 	// 4: Completion message name:
@@ -224,6 +231,8 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		return;
 	}
 	completionMsgString = LEOGetValueAsString( completionMsgValue, completionBuf, sizeof(completionBuf), inContext );
+	if( !inContext->keepRunning )
+		return;
 	NSString			*	completionMsgObjcString = [NSString stringWithCString: completionMsgString encoding: NSUTF8StringEncoding];
 	
 	// Create URL request object & delegate:
@@ -251,12 +260,48 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	inContext->currentInstruction++;
 }
 
-
 @end
 
 
+void	LEOSetDownloadsInstruction( LEOContext* inContext )
+{
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+
+	LEOContextStopWithError( inContext, "Use the 'download' command to change the 'downloads' property." );
+	
+	inContext->currentInstruction++;
+}
+
+
+void	LEOPushDownloadsInstruction( LEOContext* inContext )
+{
+	struct LEOArrayEntry *downloadsArray = NULL;
+	
+	int	currIdx = 0;
+	for( NSURLConnection* conn in sRunningConnections )
+	{
+		char	currIdxStr[40] = {};
+		snprintf( currIdxStr, sizeof(currIdxStr)-1, "%d", ++currIdx );
+		LEOAddCStringArrayEntryToRoot( &downloadsArray, currIdxStr, conn.originalRequest.URL.absoluteString.UTF8String, inContext );
+	}
+	
+	LEOInitArrayValue( &inContext->stackEndPtr->array, downloadsArray, kLEOInvalidateReferences, inContext );
+	inContext->stackEndPtr++;
+	
+	inContext->currentInstruction++;
+}
+
 
 LEOINSTR_START(Download,LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS)
-LEOINSTR_LAST(LEODownloadInstruction)
+LEOINSTR(LEODownloadInstruction)
+LEOINSTR(LEOSetDownloadsInstruction)
+LEOINSTR_LAST(LEOPushDownloadsInstruction)
+
+
+struct TGlobalPropertyEntry	gDownloadGlobalProperties[NUM_DOWNLOAD_PROPERTIES +1] =
+{
+	{ EDownloadsIdentifier, SET_DOWNLOADS_INSTR, PUSH_DOWNLOADS_INSTR },
+	{ ELastIdentifier_Sentinel, INVALID_INSTR, INVALID_INSTR }
+};
 
 
