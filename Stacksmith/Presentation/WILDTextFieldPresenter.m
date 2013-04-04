@@ -159,6 +159,16 @@
 }
 
 
+-(void)	textDidChange: (NSNotification *)notification
+{
+	WILDPartContents	*	contents = [mPartView currentPartContentsAndBackgroundContents: nil create: YES];
+	
+	[contents setStyledText: [notification.object textStorage]];
+	
+	[[mPartView part] updateChangeCount: NSChangeDone];
+}
+
+
 -(void)	removeSubviews
 {
 	DESTROY(mTextView);

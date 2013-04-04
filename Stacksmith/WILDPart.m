@@ -1051,6 +1051,8 @@
 	WILDPartContents*	contents = nil;
 	
 	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO onCard: theCard forBackgroundEditing: NO];
+	if( !contents || !contents.text )
+		return @"";
 	return [contents text];
 }
 
@@ -1065,7 +1067,7 @@
 	WILDPartContents*	bgContents = nil;
 	WILDPartContents*	contents = nil;
 	
-	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO onCard: theCard forBackgroundEditing: NO];
+	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: YES onCard: theCard forBackgroundEditing: NO];
 	[contents setText: inString];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
