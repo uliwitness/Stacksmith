@@ -1214,6 +1214,33 @@
 		return mControllerVisible ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		return [NSNumber numberWithLongLong: mIconID];
+	else if( [inPropertyName isEqualToString: @"textstyle"] )
+	{
+		WILDCard*			theCard = [[self stack] currentCard];
+		WILDPartContents*	bgContents = nil;
+		WILDPartContents*	contents = nil;
+		
+		contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO onCard: theCard forBackgroundEditing: NO];
+		NSMutableAttributedString	*	styledText = [[[contents styledTextForPart: self] mutableCopy] autorelease];
+		if( !styledText )
+			styledText = [[[NSMutableAttributedString alloc] initWithString: contents.text] autorelease];
+		NSRange		realRange = { 0, 0 };
+		NSDictionary *attrs = [styledText attributesAtIndex: byteRange.location longestEffectiveRange: &realRange inRange: byteRange];
+		if( (realRange.length +realRange.location) < (byteRange.length +byteRange.location)
+			|| realRange.location > byteRange.location )
+		{
+			return @"mixed";
+		}
+		else
+		{
+			if( attrs[NSObliquenessAttributeName] )
+				return @"italic";
+			else if( attrs[NSUnderlineStyleAttributeName] )
+				return @"underline";
+			else
+				return @"plain";
+		}
+	}
 	else
 		return nil;
 }
