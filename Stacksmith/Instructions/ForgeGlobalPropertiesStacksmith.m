@@ -9,6 +9,7 @@
 #include "LEOGlobalProperties.h"
 #include "StacksmithVersion.h"
 #include <string.h>
+#import <Foundation/Foundation.h>
 
 
 #define TOSTRING2(x)	#x
@@ -21,6 +22,8 @@ void	LEOSetVersionInstruction( LEOContext* inContext );
 void	LEOPushVersionInstruction( LEOContext* inContext );
 void	LEOPushShortVersionInstruction( LEOContext* inContext );
 void	LEOPushLongVersionInstruction( LEOContext* inContext );
+void	LEOPushPlatformInstruction( LEOContext* inContext );
+void	LEOPushSystemVersionInstruction( LEOContext* inContext );
 
 
 
@@ -83,12 +86,38 @@ void	LEOPushLongVersionInstruction( LEOContext* inContext )
 }
 
 
+void	LEOPushPlatformInstruction( LEOContext* inContext )
+{
+	const char*		theOSStr = "MacOS";
+	LEOPushStringValueOnStack( inContext, theOSStr, strlen(theOSStr) );
+	
+	inContext->currentInstruction++;
+}
+
+
+void	LEOPushSystemVersionInstruction( LEOContext* inContext )
+{
+	// sensible default
+	static NSString*	sSysVersionCocoaStr = nil;
+	if( !sSysVersionCocoaStr )
+	{
+		sSysVersionCocoaStr = [[[NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"] objectForKey:@"ProductVersion"] retain];
+	}
+	const char*	theSysVersion = [sSysVersionCocoaStr UTF8String];
+	LEOPushStringValueOnStack( inContext, theSysVersion, strlen(theSysVersion) );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOSetCursorInstruction)
 LEOINSTR(LEOPushCursorInstruction)
 LEOINSTR(LEOPushVersionInstruction)
 LEOINSTR(LEOPushShortVersionInstruction)
-LEOINSTR_LAST(LEOPushLongVersionInstruction)
+LEOINSTR(LEOPushLongVersionInstruction)
+LEOINSTR(LEOPushPlatformInstruction)
+LEOINSTR_LAST(LEOPushSystemVersionInstruction)
 
 
 struct TGlobalPropertyEntry	gHostGlobalProperties[] =
@@ -97,5 +126,7 @@ struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 	{ EVersionIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_VERSION_INSTR },
 	{ EVersionIdentifier, EShortIdentifier, INVALID_INSTR2, PUSH_SHORT_VERSION_INSTR },
 	{ EVersionIdentifier, ELongIdentifier, INVALID_INSTR2, PUSH_LONG_VERSION_INSTR },
+	{ EPlatformIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_PLATFORM_INSTR },
+	{ ESystemVersionIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SYSTEMVERSION_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };
