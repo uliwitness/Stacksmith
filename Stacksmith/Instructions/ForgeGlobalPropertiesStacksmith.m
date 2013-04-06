@@ -19,6 +19,8 @@ void	LEOSetCursorInstruction( LEOContext* inContext );
 void	LEOPushCursorInstruction( LEOContext* inContext );
 void	LEOSetVersionInstruction( LEOContext* inContext );
 void	LEOPushVersionInstruction( LEOContext* inContext );
+void	LEOPushShortVersionInstruction( LEOContext* inContext );
+void	LEOPushLongVersionInstruction( LEOContext* inContext );
 
 
 
@@ -61,16 +63,39 @@ void	LEOPushVersionInstruction( LEOContext* inContext )
 }
 
 
+void	LEOPushShortVersionInstruction( LEOContext* inContext )
+{
+	const char*		theVersion = TOSTRING(STACKSMITH_SHORT_VERSION);
+	
+	LEOPushStringValueOnStack( inContext, theVersion, strlen(theVersion) );
+	
+	inContext->currentInstruction++;
+}
+
+
+void	LEOPushLongVersionInstruction( LEOContext* inContext )
+{
+	const char*		theVersion = "Stacksmith " TOSTRING(STACKSMITH_VERSION);
+	
+	LEOPushStringValueOnStack( inContext, theVersion, strlen(theVersion) );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOSetCursorInstruction)
 LEOINSTR(LEOPushCursorInstruction)
-LEOINSTR(LEOSetVersionInstruction)
-LEOINSTR_LAST(LEOPushVersionInstruction)
+LEOINSTR(LEOPushVersionInstruction)
+LEOINSTR(LEOPushShortVersionInstruction)
+LEOINSTR_LAST(LEOPushLongVersionInstruction)
 
 
-struct TGlobalPropertyEntry	gHostGlobalProperties[(LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS / 2) +1] =
+struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 {
-	{ ECursorIdentifier, SET_CURSOR_INSTR, PUSH_CURSOR_INSTR },
-	{ EVersionIdentifier, SET_VERSION_INSTR, PUSH_VERSION_INSTR },
-	{ ELastIdentifier_Sentinel, INVALID_INSTR, INVALID_INSTR }
+	{ ECursorIdentifier, ELastIdentifier_Sentinel, SET_CURSOR_INSTR, PUSH_CURSOR_INSTR },
+	{ EVersionIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_VERSION_INSTR },
+	{ EVersionIdentifier, EShortIdentifier, INVALID_INSTR2, PUSH_SHORT_VERSION_INSTR },
+	{ EVersionIdentifier, ELongIdentifier, INVALID_INSTR2, PUSH_LONG_VERSION_INSTR },
+	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };

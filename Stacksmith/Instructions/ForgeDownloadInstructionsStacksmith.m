@@ -298,10 +298,10 @@ LEOINSTR(LEOSetDownloadsInstruction)
 LEOINSTR_LAST(LEOPushDownloadsInstruction)
 
 
-struct TGlobalPropertyEntry	gDownloadGlobalProperties[NUM_DOWNLOAD_PROPERTIES +1] =
+struct TGlobalPropertyEntry	gDownloadGlobalProperties[] =
 {
-	{ EDownloadsIdentifier, SET_DOWNLOADS_INSTR, PUSH_DOWNLOADS_INSTR },
-	{ ELastIdentifier_Sentinel, INVALID_INSTR, INVALID_INSTR }
+	{ EDownloadsIdentifier, ELastIdentifier_Sentinel, SET_DOWNLOADS_INSTR, PUSH_DOWNLOADS_INSTR },
+	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR, INVALID_INSTR }
 };
 
 
