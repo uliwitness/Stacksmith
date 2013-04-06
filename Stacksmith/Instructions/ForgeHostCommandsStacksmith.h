@@ -18,6 +18,7 @@ enum
 	WILD_ASK_INSTR,
 	WILD_CREATE_INSTR,
 	WILD_DEBUG_CHECKPOINT_INSTR,
+	WILD_PRINT_INSTR,
 	
 	WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS
 };
@@ -28,4 +29,4 @@ LEOINSTR_DECL(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 extern size_t						kFirstStacksmithHostCommandInstruction;
 
 
-extern struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS +1];
+extern struct THostCommandEntry	gStacksmithHostCommands[];

@@ -147,7 +147,6 @@
 		553C46F813577334000219FA /* CAssignCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B813577334000219FA /* CAssignCommandNode.cpp */; };
 		553C46F913577334000219FA /* CPutCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46BA13577334000219FA /* CPutCommandNode.cpp */; };
 		553C46FA13577334000219FA /* CGetParamCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46BC13577334000219FA /* CGetParamCommandNode.cpp */; };
-		553C46FB13577334000219FA /* CPrintCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46BE13577334000219FA /* CPrintCommandNode.cpp */; };
 		553C46FC13577334000219FA /* CReturnCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C013577334000219FA /* CReturnCommandNode.cpp */; };
 		553C46FD13577334000219FA /* CFunctionCallNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C213577334000219FA /* CFunctionCallNode.cpp */; };
 		553C46FE13577334000219FA /* COperatorNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C413577334000219FA /* COperatorNode.cpp */; };
@@ -170,8 +169,6 @@
 		553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E613577334000219FA /* LEORemoteDebugger.c */; };
 		553C471013577334000219FA /* LEOChunks.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E813577334000219FA /* LEOChunks.c */; };
 		553C471113577334000219FA /* LEOContextGroup.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46EA13577334000219FA /* LEOContextGroup.c */; };
-		553C471213577334000219FA /* LEOMsgInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46ED13577334000219FA /* LEOMsgInstructions.c */; };
-		553C47141357779C000219FA /* ForgeMsgInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */; };
 		553C471713577989000219FA /* WILDMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C471613577989000219FA /* WILDMessageBox.m */; };
 		553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C471813577A2E000219FA /* WILDMessageBox.xib */; };
 		553E3C9416F6696000258F72 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
@@ -622,7 +619,7 @@
 		553C46A113577334000219FA /* CCodeBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCodeBlock.cpp; path = ../../CCodeBlock.cpp; sourceTree = "<group>"; };
 		553C46A213577334000219FA /* CVariableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVariableEntry.h; path = ../../CVariableEntry.h; sourceTree = "<group>"; };
 		553C46A313577334000219FA /* CVariableEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVariableEntry.cpp; path = ../../CVariableEntry.cpp; sourceTree = "<group>"; };
-		553C46A413577334000219FA /* UTF32CaseTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF32CaseTables.h; path = ../../UTF32CaseTables.h; sourceTree = "<group>"; };
+		553C46A413577334000219FA /* UTF32CaseTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF32CaseTables.h; path = ../../../Leonie/generic/UTF32CaseTables.h; sourceTree = "<group>"; };
 		553C46A513577334000219FA /* CToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CToken.h; path = ../../CToken.h; sourceTree = "<group>"; };
 		553C46A613577334000219FA /* CToken.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CToken.cpp; path = ../../CToken.cpp; sourceTree = "<group>"; };
 		553C46A713577334000219FA /* CParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CParser.h; path = ../../CParser.h; sourceTree = "<group>"; };
@@ -643,8 +640,6 @@
 		553C46BA13577334000219FA /* CPutCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPutCommandNode.cpp; path = ../../CPutCommandNode.cpp; sourceTree = "<group>"; };
 		553C46BB13577334000219FA /* CGetParamCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGetParamCommandNode.h; path = ../../CGetParamCommandNode.h; sourceTree = "<group>"; };
 		553C46BC13577334000219FA /* CGetParamCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGetParamCommandNode.cpp; path = ../../CGetParamCommandNode.cpp; sourceTree = "<group>"; };
-		553C46BD13577334000219FA /* CPrintCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPrintCommandNode.h; path = ../../CPrintCommandNode.h; sourceTree = "<group>"; };
-		553C46BE13577334000219FA /* CPrintCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPrintCommandNode.cpp; path = ../../CPrintCommandNode.cpp; sourceTree = "<group>"; };
 		553C46BF13577334000219FA /* CReturnCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CReturnCommandNode.h; path = ../../CReturnCommandNode.h; sourceTree = "<group>"; };
 		553C46C013577334000219FA /* CReturnCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CReturnCommandNode.cpp; path = ../../CReturnCommandNode.cpp; sourceTree = "<group>"; };
 		553C46C113577334000219FA /* CFunctionCallNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFunctionCallNode.h; path = ../../CFunctionCallNode.h; sourceTree = "<group>"; };
@@ -690,9 +685,6 @@
 		553C46E913577334000219FA /* LEOContextGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOContextGroup.h; path = ../../../Leonie/common/LEOContextGroup.h; sourceTree = "<group>"; };
 		553C46EA13577334000219FA /* LEOContextGroup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOContextGroup.c; path = ../../../Leonie/common/LEOContextGroup.c; sourceTree = "<group>"; };
 		553C46EB13577334000219FA /* LEOHandlerID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOHandlerID.h; path = ../../../Leonie/common/LEOHandlerID.h; sourceTree = "<group>"; };
-		553C46EC13577334000219FA /* LEOMsgInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOMsgInstructions.h; path = ../../../Leonie/generic/LEOMsgInstructions.h; sourceTree = "<group>"; };
-		553C46ED13577334000219FA /* LEOMsgInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOMsgInstructions.c; path = ../../../Leonie/generic/LEOMsgInstructions.c; sourceTree = "<group>"; };
-		553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeMsgInstructionsStacksmith.m; path = Instructions/ForgeMsgInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
 		553C471513577989000219FA /* WILDMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMessageBox.h; path = Editor/WILDMessageBox.h; sourceTree = "<group>"; };
 		553C471613577989000219FA /* WILDMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMessageBox.m; path = Editor/WILDMessageBox.m; sourceTree = "<group>"; };
 		553C471913577A2E000219FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDMessageBox.xib; sourceTree = "<group>"; };
@@ -1204,7 +1196,6 @@
 				553C46A813577334000219FA /* CParser.cpp */,
 				553C46A913577334000219FA /* Parse Tree */,
 				553C46AA13577334000219FA /* Leonie */,
-				553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */,
 				551D93911705A7AD003766DA /* ForgeDownloadInstructionsStacksmith.m */,
 				55AAC04417109571008441AF /* ForgeGlobalPropertiesStacksmith.h */,
 				556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */,
@@ -1258,8 +1249,6 @@
 				553C46E913577334000219FA /* LEOContextGroup.h */,
 				553C46EA13577334000219FA /* LEOContextGroup.c */,
 				553C46EB13577334000219FA /* LEOHandlerID.h */,
-				553C46EC13577334000219FA /* LEOMsgInstructions.h */,
-				553C46ED13577334000219FA /* LEOMsgInstructions.c */,
 				551D938F1705A69A003766DA /* LEODownloadInstructions.h */,
 				551D938E1705A699003766DA /* LEODownloadInstructions.c */,
 				55E805C31360AA25006F1287 /* LEOPropertyInstructions.h */,
@@ -1281,8 +1270,6 @@
 				553C46BA13577334000219FA /* CPutCommandNode.cpp */,
 				553C46BB13577334000219FA /* CGetParamCommandNode.h */,
 				553C46BC13577334000219FA /* CGetParamCommandNode.cpp */,
-				553C46BD13577334000219FA /* CPrintCommandNode.h */,
-				553C46BE13577334000219FA /* CPrintCommandNode.cpp */,
 				553C46BF13577334000219FA /* CReturnCommandNode.h */,
 				553C46C013577334000219FA /* CReturnCommandNode.cpp */,
 				553C46C113577334000219FA /* CFunctionCallNode.h */,
@@ -2052,7 +2039,6 @@
 				553C46F813577334000219FA /* CAssignCommandNode.cpp in Sources */,
 				553C46F913577334000219FA /* CPutCommandNode.cpp in Sources */,
 				553C46FA13577334000219FA /* CGetParamCommandNode.cpp in Sources */,
-				553C46FB13577334000219FA /* CPrintCommandNode.cpp in Sources */,
 				553C46FC13577334000219FA /* CReturnCommandNode.cpp in Sources */,
 				553C46FD13577334000219FA /* CFunctionCallNode.cpp in Sources */,
 				553C46FE13577334000219FA /* COperatorNode.cpp in Sources */,
@@ -2075,8 +2061,6 @@
 				553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */,
 				553C471013577334000219FA /* LEOChunks.c in Sources */,
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
-				553C471213577334000219FA /* LEOMsgInstructions.c in Sources */,
-				553C47141357779C000219FA /* ForgeMsgInstructionsStacksmith.m in Sources */,
 				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
 				556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */,
 				556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */,

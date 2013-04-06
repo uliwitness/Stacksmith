@@ -14,6 +14,8 @@
 #include "WILDInputPanelController.h"
 #include "LEOScript.h"
 #include "LEORemoteDebugger.h"
+#import "WILDMessageBox.h"
+
 
 void	WILDGoInstruction( LEOContext* inContext );
 void	WILDVisualEffectInstruction( LEOContext* inContext );
@@ -21,6 +23,7 @@ void	WILDAnswerInstruction( LEOContext* inContext );
 void	WILDAskInstruction( LEOContext* inContext );
 void	WILDCreateInstruction( LEOContext* inContext );
 void	WILDDebugCheckpointInstruction( LEOContext* inContext );
+void	WILDPrintInstruction( LEOContext* inContext );
 
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
@@ -211,16 +214,50 @@ void	WILDDebugCheckpointInstruction( LEOContext* inContext )
 }
 
 
+/*!
+	Pop a value off the back of the stack (or just read it from the given
+	BasePointer-relative address) and present it to the user in string form.
+	(WILD_PRINT_INSTR)
+	
+	param1	-	If this is BACK_OF_STACK, we're supposed to pop the last item
+				off the stack. Otherwise, this is a basePtr-relative address
+				where a value will just be read.
+*/
+
+void	WILDPrintInstruction( LEOContext* inContext )
+{
+	char			buf[1024] = { 0 };
+	
+	bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
+	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
+	if( theValue == NULL || theValue->base.isa == NULL )
+	{
+		LEOContextStopWithError( inContext, "Internal error: Invalid value." );
+		return;
+	}
+	LEOGetValueAsString( theValue, buf, sizeof(buf), inContext );
+	
+	NSString	*	objcString = [NSString stringWithCString: buf encoding: NSUTF8StringEncoding];
+	[[WILDMessageBox sharedMessageBox] setStringValue: objcString];
+	
+	if( popOffStack )
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
 LEOINSTR(WILDVisualEffectInstruction)
 LEOINSTR(WILDAnswerInstruction)
 LEOINSTR(WILDAskInstruction)
 LEOINSTR(WILDCreateInstruction)
-LEOINSTR_LAST(WILDDebugCheckpointInstruction)
+LEOINSTR(WILDDebugCheckpointInstruction)
+LEOINSTR_LAST(WILDPrintInstruction)
 
 
-struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS +1] =
+struct THostCommandEntry	gStacksmithHostCommands[] =
 {
 	{
 		EGoIdentifier, WILD_GO_INSTRUCTION, 0, 0,
@@ -296,6 +333,20 @@ struct THostCommandEntry	gStacksmithHostCommands[WILD_NUMBER_OF_HOST_COMMAND_INS
 		EDebugIdentifier, WILD_DEBUG_CHECKPOINT_INSTR, 0, 0,
 		{
 			{ EHostParamIdentifier, ECheckpointIdentifier, EHostParameterRequired, WILD_DEBUG_CHECKPOINT_INSTR, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EPutIdentifier, WILD_PRINT_INSTR, 0, 0,
+		{
+			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

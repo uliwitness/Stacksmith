@@ -32,9 +32,6 @@
 	// Add various instruction functions to the base set of instructions the
 	//	interpreter knows. First add those that the compiler knows to parse,
 	//	but which have a platform/host-specific implementation:
-		// Message box related instructions:
-	LEOAddInstructionsToInstructionArray( gMsgInstructions, LEO_NUMBER_OF_MSG_INSTRUCTIONS, &kFirstMsgInstruction );
-	
 		// Object properties:
 	LEOAddInstructionsToInstructionArray( gPropertyInstructions, LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS, &kFirstPropertyInstruction );
 	
