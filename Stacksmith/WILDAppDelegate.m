@@ -15,7 +15,7 @@
 #import "WILDAboutPanelController.h"
 #import "WILDMessageBox.h"
 #import "Forge.h"
-#import "LEOGlobalProperties.h"
+#import "ForgeGlobalPropertiesStacksmith.h"
 #import "ForgeHostCommandsStacksmith.h"
 #import "ForgeHostFunctionsStacksmith.h"
 #import "LEORemoteDebugger.h"

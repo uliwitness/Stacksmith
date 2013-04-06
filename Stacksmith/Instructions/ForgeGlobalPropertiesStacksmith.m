@@ -6,7 +6,7 @@
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#include "LEOGlobalProperties.h"
+#include "ForgeGlobalPropertiesStacksmith.h"
 #include "StacksmithVersion.h"
 #include <string.h>
 #import <Foundation/Foundation.h>
@@ -14,6 +14,9 @@
 
 #define TOSTRING2(x)	#x
 #define TOSTRING(x)		TOSTRING2(x)
+
+
+size_t	kFirstGlobalPropertyInstruction = 0;
 
 
 void	LEOSetCursorInstruction( LEOContext* inContext );

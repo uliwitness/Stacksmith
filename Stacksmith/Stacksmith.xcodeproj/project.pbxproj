@@ -206,7 +206,6 @@
 		555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */; };
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
 		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
-		5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = 5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */; };
 		556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */; };
 		55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */; };
 		55686666135A383A00C364D6 /* ForgeWILDObjectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686664135A383300C364D6 /* ForgeWILDObjectValue.m */; };
@@ -742,8 +741,6 @@
 		555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UTF8UTF32Utilities.c; path = ../../../Leonie/generic/UTF8UTF32Utilities.c; sourceTree = "<group>"; };
 		555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF8UTF32Utilities.h; path = ../../../Leonie/generic/UTF8UTF32Utilities.h; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeGlobalPropertiesStacksmith.m; path = Instructions/ForgeGlobalPropertiesStacksmith.m; sourceTree = SOURCE_ROOT; };
-		556866591359C5BF00C364D6 /* LEOGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOGlobalProperties.h; path = ../../../Leonie/generic/LEOGlobalProperties.h; sourceTree = "<group>"; };
-		5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOGlobalProperties.c; path = ../../../Leonie/generic/LEOGlobalProperties.c; sourceTree = "<group>"; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
 		5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeHostCommandsStacksmith.m; path = Instructions/ForgeHostCommandsStacksmith.m; sourceTree = SOURCE_ROOT; };
 		5568665F1359EBD000C364D6 /* ForgeHostCommandsStacksmith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeHostCommandsStacksmith.h; path = Instructions/ForgeHostCommandsStacksmith.h; sourceTree = SOURCE_ROOT; };
@@ -815,6 +812,7 @@
 		55A7BA4A14668D6E00AB0F34 /* flute.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = flute.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/flute.aiff; sourceTree = "<group>"; };
 		55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
+		55AAC04417109571008441AF /* ForgeGlobalPropertiesStacksmith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeGlobalPropertiesStacksmith.h; path = Instructions/ForgeGlobalPropertiesStacksmith.h; sourceTree = SOURCE_ROOT; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
 		55ACBBBE1322EA890088609D /* WILDVisibleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDVisibleObject.h; path = Presentation/WILDVisibleObject.h; sourceTree = "<group>"; };
@@ -1208,6 +1206,7 @@
 				553C46AA13577334000219FA /* Leonie */,
 				553C47131357779C000219FA /* ForgeMsgInstructionsStacksmith.m */,
 				551D93911705A7AD003766DA /* ForgeDownloadInstructionsStacksmith.m */,
+				55AAC04417109571008441AF /* ForgeGlobalPropertiesStacksmith.h */,
 				556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */,
 				55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */,
 				5568665F1359EBD000C364D6 /* ForgeHostCommandsStacksmith.h */,
@@ -1460,8 +1459,6 @@
 				553C469E13577334000219FA /* Forge.h */,
 				553C469F13577334000219FA /* Forge.cpp */,
 				5568665C1359C82200C364D6 /* ForgeTypes.h */,
-				556866591359C5BF00C364D6 /* LEOGlobalProperties.h */,
-				5568665A1359C5EC00C364D6 /* LEOGlobalProperties.c */,
 			);
 			name = CInterface;
 			sourceTree = "<group>";
@@ -2082,7 +2079,6 @@
 				553C47141357779C000219FA /* ForgeMsgInstructionsStacksmith.m in Sources */,
 				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
 				556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */,
-				5568665B1359C5ED00C364D6 /* LEOGlobalProperties.c in Sources */,
 				556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */,
 				55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */,
 				55686666135A383A00C364D6 /* ForgeWILDObjectValue.m in Sources */,
