@@ -68,7 +68,10 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	
 	if( !lineColor )
 		lineColor = [[NSColor blackColor] retain];
-	NSColor	*	disabledColor = [lineColor blendedColorWithFraction: 0.5 ofColor: [NSColor colorWithCalibratedWhite: 0.0 alpha: lineColor.alphaComponent]];
+	NSColor		*	highlightColor = lineColor;
+	if( [highlightColor isEqualTo: self.backgroundColor] )
+		highlightColor = [self.backgroundColor blendedColorWithFraction: 0.3 ofColor: [NSColor blackColor]];
+	NSColor	*	disabledColor = [lineColor blendedColorWithFraction: 0.5 ofColor: [NSColor colorWithCalibratedWhite: 1.0 alpha: lineColor.alphaComponent]];
 	
 	[lineColor set];
 	
@@ -114,7 +117,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		else
 		#endif
 		if( isHighlighted && isActive )
-			[lineColor set];
+			[highlightColor set];
 		else if( isHighlighted && !isActive )
 			[disabledColor set];
 		else
@@ -162,9 +165,20 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	}
 	else if( isHighlighted )
 	{
+		if( highlightColor == self.lineColor )	// We didn't have to generate highlight cuz line & bg are same?
+		{
+			NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
+			
+			[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [self backgroundColor]
+							range: NSMakeRange(0,[muAttrTitle length])];
+			attrTitle = muAttrTitle;
+		}
+	}
+	else if( !isActive )
+	{
 		NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
 		
-		[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [self backgroundColor]
+		[muAttrTitle addAttribute: NSForegroundColorAttributeName value: disabledColor
 						range: NSMakeRange(0,[muAttrTitle length])];
 		attrTitle = muAttrTitle;
 	}

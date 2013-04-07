@@ -1037,7 +1037,7 @@
 			mPartPresenter = [[WILDPopUpButtonPresenter alloc] initWithPartView: self];
 		else if( [[mPart partStyle] isEqualToString: @"radiobutton"] || [[mPart partStyle] isEqualToString: @"checkbox"] )
 			mPartPresenter = [[WILDCheckboxRadioPresenter alloc] initWithPartView: self];
-		else if( [[mPart partStyle] isEqualToString: @"transparent"] || [[mPart partStyle] isEqualToString: @"rectangle"]
+		else if( [[mPart partStyle] isEqualToString: @"transparent"] || [[mPart partStyle] isEqualToString: @"rectangle"] || [[mPart partStyle] isEqualToString: @"roundrect"]
 				 || [[mPart partStyle] isEqualToString: @"opaque"] || [[mPart partStyle] isEqualToString: @"oval"] )
 			mPartPresenter = [[WILDLegacyButtonPresenter alloc] initWithPartView: self];
 		else

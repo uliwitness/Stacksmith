@@ -33,7 +33,7 @@
 	BOOL					isInside = [[self cell] hitTestForEvent: event inRect: [self bounds] ofView: self] != NSCellHitNone;
 	BOOL					newIsInside = isInside;
 	
-	if( !isInside )
+	if( !isInside || !self.isEnabled )
 		return;
 	
 	if( autoHighlight && isInside )

@@ -54,6 +54,7 @@
 		[mMainView setTitle: @""];
 	[mMainView setTarget: mPartView];
 	[mMainView setAction: @selector(updateOnClick:)];
+	[mMainView setEnabled: currPart.isEnabled];
 	
 	WILDPartContents	*	contents = [mPartView currentPartContentsAndBackgroundContents: nil create: NO];
 	BOOL					isHighlighted = [currPart highlighted];
@@ -75,6 +76,18 @@
 			[mMainView setFont: [NSFont fontWithName: @"Geneva" size: 9.0]];
 		[[mMainView cell] setImageScaling: NSImageScaleNone];
 	}
+	
+	NSColor	*	shadowColor = [currPart shadowColor];
+	if( [shadowColor alphaComponent] > 0.0 )
+	{
+		CGColorRef theColor = [shadowColor CGColor];
+		[[mMainView layer] setShadowColor: theColor];
+		[[mMainView layer] setShadowOpacity: 1.0];
+		[[mMainView layer] setShadowOffset: [currPart shadowOffset]];
+		[[mMainView layer] setShadowRadius: [currPart shadowBlurRadius]];
+	}
+	else
+		[[mMainView layer] setShadowOpacity: 0.0];
 }
 
 

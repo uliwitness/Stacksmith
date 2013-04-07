@@ -119,76 +119,104 @@
 
 -(IBAction)	doVisibleSwitchToggled:(id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(visible), WILDAffectedPropertyKey,
+										nil]];
 
 	[part setVisible: [visibleSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(visible), WILDAffectedPropertyKey,
+										nil]];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doEnabledSwitchToggled:(id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(isEnabled), WILDAffectedPropertyKey,
+										nil]];
 
 	[part setEnabled: [enabledSwitch state] == NSOnState];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(isEnabled), WILDAffectedPropertyKey,
+										nil]];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doFillColorChanged:(id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(fillColor), WILDAffectedPropertyKey,
+										nil]];
 
 	[part setFillColor: [fillColorWell color]];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(fillColor), WILDAffectedPropertyKey,
+										nil]];
 	[part updateChangeCount: NSChangeDone];
 }
 
 -(IBAction)	doLineColorChanged:(id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(lineColor), WILDAffectedPropertyKey,
+										nil]];
 
 	[part setLineColor: [lineColorWell color]];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(lineColor), WILDAffectedPropertyKey,
+										nil]];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doShadowColorChanged:(id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(shadowColor), WILDAffectedPropertyKey,
+										nil]];
 
 	[part setShadowColor: [shadowColorWell color]];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(shadowColor), WILDAffectedPropertyKey,
+										nil]];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doShadowOffsetChanged:(id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(shadowOffset), WILDAffectedPropertyKey,
+										nil]];
 
-	[part setShadowOffset: NSMakeSize([shadowOffsetSlider doubleValue],-[shadowOffsetSlider doubleValue])];
+	[part setShadowOffset: NSMakeSize([shadowOffsetSlider doubleValue],[shadowOffsetSlider doubleValue])];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(shadowOffset), WILDAffectedPropertyKey,
+										nil]];
 	[part updateChangeCount: NSChangeDone];
 }
 
 
 -(IBAction)	doShadowBlurRadiusChanged:(id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(shadowBlurRadius), WILDAffectedPropertyKey,
+										nil]];
 
 	[part setShadowBlurRadius: [shadowBlurRadiusSlider doubleValue]];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(shadowBlurRadius), WILDAffectedPropertyKey,
+										nil]];
 	[part updateChangeCount: NSChangeDone];
 }
 
@@ -197,11 +225,15 @@
 {
 	if( [notif object] == nameField )
 	{
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part];
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(name), WILDAffectedPropertyKey,
+										nil]];
 
 		[part setName: [nameField stringValue]];
 			
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(name), WILDAffectedPropertyKey,
+										nil]];
 		[part updateChangeCount: NSChangeDone];
 	}
 }
