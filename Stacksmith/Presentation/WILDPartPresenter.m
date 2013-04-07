@@ -79,4 +79,16 @@
 	return [mPartView frame];	// Sensible fallback.
 }
 
+
+-(NSRect)	layoutRectForRect: (NSRect)inRect
+{
+	return NSInsetRect( inRect, 2, 2 );
+}
+
+
+-(NSRect)	rectForLayoutRect: (NSRect)inLayoutRect
+{
+	return NSInsetRect(inLayoutRect, -2, -2 );
+}
+
 @end

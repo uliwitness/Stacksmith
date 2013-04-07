@@ -74,6 +74,9 @@ typedef enum
 
 -(NSRect)	selectionRect;
 -(void)		drawPartFrameInView: (NSView*)overlayView;
+-(NSRect)	layoutRectForRect: (NSRect)newBox;
+-(NSRect)	rectForLayoutRect: (NSRect)newBox;
+
 
 -(void)	partWillChange: (NSNotification*)notif;
 -(void)	partDidChange: (NSNotification*)notif;
