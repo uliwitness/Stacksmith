@@ -28,6 +28,8 @@
 -(void)		partDidChange: (NSNotification*)inPart;
 
 -(NSRect)	selectionFrame;	// Frame coord. system of the part view. I.e. local to part view's superview.
+-(NSRect)	layoutRectForRect: (NSRect)inRect;
+-(NSRect)	rectForLayoutRect: (NSRect)inRect;
 
 @end
 

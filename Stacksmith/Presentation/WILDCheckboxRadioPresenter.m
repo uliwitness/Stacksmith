@@ -105,4 +105,16 @@
 	return [[mPartView superview] convertRect: [mMainView bounds] fromView: mMainView];
 }
 
+
+-(NSRect)	layoutRectForRect:(NSRect)inRect
+{
+	return [mMainView alignmentRectForFrame: inRect];
+}
+
+
+-(NSRect)	rectForLayoutRect:(NSRect)inLayoutRect
+{
+	return [mMainView frameForAlignmentRect: inLayoutRect];
+}
+
 @end

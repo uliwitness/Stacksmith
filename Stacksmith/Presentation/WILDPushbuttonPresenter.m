@@ -16,9 +16,10 @@
 
 -(void)	createButton
 {
-	NSRect		box = NSInsetRect([mPartView bounds], 2, 2);
 	
-	mMainView = [[WILDButtonView alloc] initWithFrame: box];
+	mMainView = [[WILDButtonView alloc] initWithFrame: NSMakeRect(0, 0, 100, 23)];
+	NSRect		box = [mMainView frameForAlignmentRect: [mPartView bounds]];
+	[mMainView setFrame: box];
 	[mMainView setBordered: YES];
 	[mMainView setBezelStyle: NSRoundedBezelStyle];
 	
@@ -111,7 +112,19 @@
 
 -(NSRect)	selectionFrame
 {
-	return [[mPartView superview] convertRect: [mMainView bounds] fromView: mMainView];
+	return [[mPartView superview] convertRect: [mMainView alignmentRectForFrame: [mMainView frame]] fromView: mPartView];
+}
+
+
+-(NSRect)	layoutRectForRect:(NSRect)inRect
+{
+	return [mMainView alignmentRectForFrame: inRect];
+}
+
+
+-(NSRect)	rectForLayoutRect:(NSRect)inLayoutRect
+{
+	return [mMainView frameForAlignmentRect: inLayoutRect];
 }
 
 @end
