@@ -140,4 +140,14 @@
 
 #endif
 
+-(NSRect)	frameForAlignmentRect:(NSRect)alignmentRect
+{
+	return alignmentRect;
+}
+
+-(NSRect)	alignmentRectForFrame:(NSRect)frame
+{
+	return frame;
+}
+
 @end
