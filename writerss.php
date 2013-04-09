@@ -17,7 +17,8 @@
 	
 	$actualversion = $theversion;
 	$feedstr = "<?xml version=\"1.0\"?>
-<rss version=\"2.0\">
+<rss version=\"2.0\" 
+	xmlns:sparkle=\"http://sparkle.andymatuschak.org/rss/1.0/modules/sparkle/\">
   <channel>
     <title>Stacksmith ".$argv[2]." Appcast</title>
     <link>http://stacksmith.org/</link>
@@ -26,7 +27,8 @@
        <title>Stacksmith $actualversion</title>
        <link>http://stacksmith.org/nightlies/".basename($argv[3])."</link>
        <description>other things happened today</description>
-       <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize(dirname($argv[0]).'/'.$argv[3])."\" type=\"application/octet-stream\" sparkle:version=\"$actualversion\" />
+       <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize(dirname($argv[0]).'/'.$argv[3])."\" type=\"application/octet-stream\" />
+       <sparkle:version>$actualversion</sparkle:version>
      </item>
   </channel>
 </rss>";
