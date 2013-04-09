@@ -1,5 +1,5 @@
 //
-//  WILDLegacyButtonPresenter.h
+//  WILDShapeButtonPresenter.h
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 21.08.11.
@@ -9,7 +9,7 @@
 #import "WILDPushbuttonPresenter.h"
 
 
-@interface WILDLegacyButtonPresenter : WILDPushbuttonPresenter
+@interface WILDShapeButtonPresenter : WILDPushbuttonPresenter
 {
 	
 }

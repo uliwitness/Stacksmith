@@ -32,7 +32,7 @@
 #import "WILDPopUpButtonPresenter.h"
 #import "WILDTextFieldPresenter.h"
 #import "WILDCheckboxRadioPresenter.h"
-#import "WILDLegacyButtonPresenter.h"
+#import "WILDShapeButtonPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
@@ -1008,7 +1008,7 @@
 			mPartPresenter = [[WILDCheckboxRadioPresenter alloc] initWithPartView: self];
 		else if( [[mPart partStyle] isEqualToString: @"transparent"] || [[mPart partStyle] isEqualToString: @"rectangle"] || [[mPart partStyle] isEqualToString: @"roundrect"]
 				 || [[mPart partStyle] isEqualToString: @"opaque"] || [[mPart partStyle] isEqualToString: @"oval"] )
-			mPartPresenter = [[WILDLegacyButtonPresenter alloc] initWithPartView: self];
+			mPartPresenter = [[WILDShapeButtonPresenter alloc] initWithPartView: self];
 		else
 			mPartPresenter = [[WILDPushbuttonPresenter alloc] initWithPartView: self];
 	}

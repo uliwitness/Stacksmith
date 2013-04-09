@@ -236,7 +236,7 @@
 		55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */; };
 		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
-		55A3FB2C16E749D400735729 /* WILDLegacyButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FB2B16E749D400735729 /* WILDLegacyButtonPresenter.m */; };
+		55A3FB2C16E749D400735729 /* WILDShapeButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
@@ -788,8 +788,8 @@
 		55993B6913476E1D001624A2 /* WILDStackInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStackInfoWindowController.h; sourceTree = "<group>"; };
 		55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoWindowController.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
-		55A3FB2A16E749D400735729 /* WILDLegacyButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDLegacyButtonPresenter.h; path = Presentation/WILDLegacyButtonPresenter.h; sourceTree = "<group>"; };
-		55A3FB2B16E749D400735729 /* WILDLegacyButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDLegacyButtonPresenter.m; path = Presentation/WILDLegacyButtonPresenter.m; sourceTree = "<group>"; };
+		55A3FB2A16E749D400735729 /* WILDShapeButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDShapeButtonPresenter.h; path = Presentation/WILDShapeButtonPresenter.h; sourceTree = "<group>"; };
+		55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDShapeButtonPresenter.m; path = Presentation/WILDShapeButtonPresenter.m; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
 		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
@@ -1111,8 +1111,8 @@
 				552028D7140165D4000EEA4F /* WILDPartPresenter.m */,
 				552028DA14016880000EEA4F /* WILDPushbuttonPresenter.h */,
 				552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */,
-				55A3FB2A16E749D400735729 /* WILDLegacyButtonPresenter.h */,
-				55A3FB2B16E749D400735729 /* WILDLegacyButtonPresenter.m */,
+				55A3FB2A16E749D400735729 /* WILDShapeButtonPresenter.h */,
+				55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */,
 				55B296BD146DE5D6009E60CB /* WILDCheckboxRadioPresenter.h */,
 				55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */,
 				55D97B261441B5110060F774 /* WILDPopUpButtonPresenter.h */,
@@ -2130,7 +2130,7 @@
 				553F6809157D138B009E0517 /* ForgeObjCConversion.m in Sources */,
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
-				55A3FB2C16E749D400735729 /* WILDLegacyButtonPresenter.m in Sources */,
+				55A3FB2C16E749D400735729 /* WILDShapeButtonPresenter.m in Sources */,
 				55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */,
 				55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */,
 				55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */,

@@ -1,12 +1,12 @@
 //
-//  WILDLegacyButtonPresenter.m
+//  WILDShapeButtonPresenter.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 21.08.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#import "WILDLegacyButtonPresenter.h"
+#import "WILDShapeButtonPresenter.h"
 #import "WILDButtonView.h"
 #import "WILDButtonCell.h"
 #import "UKHelperMacros.h"
@@ -15,7 +15,7 @@
 #import "WILDPartView.h"
 
 
-@implementation WILDLegacyButtonPresenter
+@implementation WILDShapeButtonPresenter
 
 -(void)	createButton
 {
