@@ -31,6 +31,7 @@
 @synthesize shadowOffsetSlider;
 @synthesize contentsEditorButton;
 @synthesize contentsTextField;
+@synthesize lineWidthSlider;
 
 
 -(id)	initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView
@@ -89,6 +90,7 @@
 	[shadowColorWell setColor: [part shadowColor]];
 	[shadowBlurRadiusSlider setDoubleValue: [part shadowBlurRadius]];
 	[shadowOffsetSlider setDoubleValue: [part shadowOffset].width];
+	[lineWidthSlider setDoubleValue: [part lineWidth]];
 }
 
 
@@ -216,6 +218,21 @@
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
 										PROPERTY(shadowBlurRadius), WILDAffectedPropertyKey,
+										nil]];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doLineWidthChanged:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(lineWidth), WILDAffectedPropertyKey,
+										nil]];
+
+	[part setLineWidth: [lineWidthSlider doubleValue]];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(lineWidth), WILDAffectedPropertyKey,
 										nil]];
 	[part updateChangeCount: NSChangeDone];
 }

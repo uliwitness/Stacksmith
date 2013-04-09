@@ -32,6 +32,7 @@
 	NSSlider		*		shadowBlurRadiusSlider;
 	NSSlider		*		shadowOffsetSlider;
 	NSButton		*		contentsEditorButton;
+	NSSlider		*		lineWidthSlider;
 }
 
 @property(retain)	IBOutlet NSButton			*		scriptEditorButton;
@@ -49,6 +50,7 @@
 @property(retain)	IBOutlet NSSlider			*		shadowBlurRadiusSlider;
 @property(retain)	IBOutlet NSSlider			*		shadowOffsetSlider;
 @property(retain)	IBOutlet NSButton			*		contentsEditorButton;
+@property(retain)	IBOutlet NSSlider			*		lineWidthSlider;
 
 -(id)		initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView;
 
@@ -62,5 +64,6 @@
 -(IBAction)	doShadowColorChanged:(id)sender;
 -(IBAction)	doLineColorChanged:(id)sender;
 -(IBAction)	doFillColorChanged:(id)sender;
+-(IBAction)	doLineWidthChanged:(id)sender;
 
 @end

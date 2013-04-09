@@ -150,4 +150,38 @@
 	return frame;
 }
 
+
+-(void)	windowDidChangeKeyOrMain: (NSNotification*)inNotif
+{
+	[self setNeedsDisplay: YES];
+}
+
+
+-(void)	viewDidMoveToWindow
+{
+	[super viewDidMoveToWindow];
+	
+	if( self.window )
+	{
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidChangeKeyOrMain:) name: NSWindowDidBecomeKeyNotification object: self.window];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidChangeKeyOrMain:) name: NSWindowDidResignKeyNotification object: self.window];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidChangeKeyOrMain:) name: NSWindowDidBecomeMainNotification object: self.window];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidChangeKeyOrMain:) name: NSWindowDidResignMainNotification object: self.window];
+	}
+}
+
+
+-(void)	viewWillMoveToWindow: (NSWindow *)newWindow
+{
+	if( self.window )
+	{
+		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidBecomeKeyNotification object: self.window];
+		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidResignKeyNotification object: self.window];
+		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidBecomeMainNotification object: self.window];
+		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidResignMainNotification object: self.window];
+	}
+	
+	[super viewWillMoveToWindow: newWindow];
+}
+
 @end

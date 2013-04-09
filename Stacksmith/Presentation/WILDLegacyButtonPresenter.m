@@ -67,6 +67,7 @@
 		WILDButtonCell*	ourCell = [mMainView cell];
 		[ourCell setBackgroundColor: [currPart fillColor]];
 		[ourCell setLineColor: [currPart lineColor]];
+		[ourCell setLineWidth: currPart.lineWidth];
 		[mMainView setCell: ourCell];
 		[mMainView setBordered: YES];
 				

@@ -44,6 +44,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 
 @synthesize drawAsDefault;
 @synthesize lineColor;
+@synthesize lineWidth;
 
 -(void)	dealloc
 {
@@ -71,7 +72,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	NSColor		*	highlightColor = lineColor;
 	if( [highlightColor isEqualTo: self.backgroundColor] )
 		highlightColor = [self.backgroundColor blendedColorWithFraction: 0.3 ofColor: [NSColor blackColor]];
-	NSColor	*	disabledColor = [lineColor blendedColorWithFraction: 0.5 ofColor: [NSColor colorWithCalibratedWhite: 1.0 alpha: lineColor.alphaComponent]];
+	NSColor	*	disabledColor = [lineColor blendedColorWithFraction: 0.5 ofColor: [NSColor colorWithCalibratedWhite: 0.0 alpha: lineColor.alphaComponent]];
 	
 	[lineColor set];
 	
@@ -90,6 +91,9 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		cellFrame = NSInsetRect( cellFrame, 4, 4 );
 		clampedCellFrame = NSInsetRect( clampedCellFrame, 4, 4 );
 	}
+	
+	cellFrame = NSInsetRect( cellFrame, ceilf(lineWidth /2), ceilf(lineWidth /2) );
+	clampedCellFrame = NSInsetRect( clampedCellFrame, ceilf(lineWidth /2), ceilf(lineWidth /2) );
 	
 	if( [self bezelStyle] == NSRoundedBezelStyle )
 	{
@@ -126,12 +130,13 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		[buttonShape fill];
 	}
 	
-	if( [self isBordered] )
+	if( [self isBordered] && lineWidth > 0 )
 	{
 		if( isActive )
 			[lineColor set];
 		else
 			[disabledColor set];
+		[buttonStrokeShape setLineWidth: lineWidth];
 		[buttonStrokeShape stroke];
 	}
 	

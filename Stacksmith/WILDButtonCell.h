@@ -17,5 +17,6 @@
 
 @property (assign) BOOL 	drawAsDefault;
 @property (retain) NSColor*	lineColor;
+@property (assign) CGFloat	lineWidth;
 
 @end

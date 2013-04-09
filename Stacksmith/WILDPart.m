@@ -49,6 +49,7 @@
 @synthesize shadowOffset = mShadowOffset;
 @synthesize shadowBlurRadius = mShadowBlurRadius;
 @synthesize clickableInInactiveWindow = mClickableInInactiveWindow;
+@synthesize lineWidth = mLineWidth;
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
 {
@@ -120,6 +121,9 @@
 		mShadowBlurRadius = WILDIntegerFromSubElementInElement( @"shadowBlurRadius", elem );
 		if( mShadowBlurRadius < 0 )
 			mShadowBlurRadius = 0;
+		mLineWidth = WILDIntegerFromSubElementInElement( @"lineWidth", elem );
+		if( mLineWidth < 0 )
+			mLineWidth = 0;
 
 		mIDForScripts = kLEOObjectIDINVALID;
 	}
@@ -1006,6 +1010,7 @@
 	WILDAppendColorXML( outString, 2, mShadowColor, @"shadowColor" );
 	WILDAppendSizeXML( outString, 2, mShadowOffset, @"shadowOffset" );
 	WILDAppendLongXML( outString, 2, mShadowBlurRadius, @"shadowBlurRadius" );
+	WILDAppendLongXML( outString, 2, mLineWidth, @"lieWidth" );
 	
 	if( [mSelectedLines count] > 0 )
 	{

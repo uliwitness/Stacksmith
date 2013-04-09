@@ -69,6 +69,7 @@
 	NSColor*			mShadowColor;
 	NSSize				mShadowOffset;
 	CGFloat				mShadowBlurRadius;
+	CGFloat				mLineWidth;
 	NSInteger			mBevel;
 	WILDLayer*			mOwner;					// Layer that this part belongs to.
 	WILDStack*			mStack;					// Stack this part belongs to.
@@ -97,6 +98,7 @@
 @property (retain,nonatomic) NSColor*		shadowColor;
 @property (assign,nonatomic) NSSize			shadowOffset;
 @property (assign,nonatomic) CGFloat		shadowBlurRadius;
+@property (assign,nonatomic) CGFloat		lineWidth;
 
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
