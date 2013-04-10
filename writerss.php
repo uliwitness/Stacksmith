@@ -8,8 +8,7 @@
 			./writerss.php build/Stacksmith.app/Contents/Info.plist nightly build/Stacksmith.tgz jeff s3kr1t 21
 	*/
 	
-	print_r($_ENV);
-	$fullurl = "http://".urlencode($argv[4]).':'.urlencode($argv[5])."@witness.is-a-geek.org:8080/job/StacksmithNightly/".$argv[6]."/api/xml?wrapper=changes&xpath=//changeSet//comment";
+	$fullurl = str_replace("http://","http://".urlencode($argv[4]).':'.urlencode($argv[5])."@",$_ENV['BUILD_URL'])."/api/xml?wrapper=changes&xpath=//changeSet//comment";
 	
 	$commitmessages = file_get_contents($fullurl);
 	$commitmessages = str_replace("<changes>","&lt;ul&gt;",$commitmessages);
