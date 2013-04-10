@@ -823,7 +823,7 @@ LEOINSTR_LAST(WILDNumberOfBackgroundPartsInstruction)
 struct THostCommandEntry	gStacksmithHostFunctions[] =
 {
 	{
-		EStackIdentifier, WILD_STACK_INSTRUCTION, 0, 0,
+		EStackIdentifier, WILD_STACK_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -844,7 +844,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EBackgroundIdentifier, WILD_BACKGROUND_INSTRUCTION, 0, 0,
+		EBackgroundIdentifier, WILD_BACKGROUND_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_BACKGROUND_BUTTON_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_BACKGROUND_FIELD_INSTRUCTION, 0, 0, '\0', 'A' },
@@ -865,7 +865,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ECardIdentifier, WILD_CARD_INSTRUCTION, 0, 0,
+		ECardIdentifier, WILD_CARD_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_CARD_FIELD_INSTRUCTION, 0, 0, '\0', 'A' },
@@ -886,7 +886,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EButtonIdentifier, WILD_CARD_FIELD_INSTRUCTION, 0, 0,
+		EButtonIdentifier, WILD_CARD_FIELD_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -907,7 +907,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EButtonIdentifier, WILD_CARD_BUTTON_INSTRUCTION, 0, 0,
+		EButtonIdentifier, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -928,7 +928,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EMovieIdentifier, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0,
+		EMovieIdentifier, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -949,7 +949,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EPartIdentifier, WILD_CARD_PART_INSTRUCTION, 0, 0,
+		EPartIdentifier, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -970,7 +970,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ENumberIdentifier, INVALID_INSTR2, 0, 0,
+		ENumberIdentifier, INVALID_INSTR2, 0, 0, 'X',
 		{
 			{ EHostParamInvisibleIdentifier, EOfIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'A' },
 			{ EHostParamInvisibleIdentifier, EBackgroundIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'B' },
@@ -991,7 +991,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ENextIdentifier, INVALID_INSTR2, 0, 0,
+		ENextIdentifier, INVALID_INSTR2, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_NEXT_CARD_INSTRUCTION, 0, 0, '\0', '\0' },
 			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_NEXT_BACKGROUND_INSTRUCTION, 0, 0, '\0', '\0' },
@@ -1012,7 +1012,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EPreviousIdentifier, INVALID_INSTR2, 0, 0,
+		EPreviousIdentifier, INVALID_INSTR2, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_PREVIOUS_CARD_INSTRUCTION, 0, 0, '\0', '\0' },
 			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_PREVIOUS_BACKGROUND_INSTRUCTION, 0, 0, '\0', '\0' },
@@ -1033,7 +1033,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EFirstIdentifier, INVALID_INSTR2, 0, 0,
+		EFirstIdentifier, INVALID_INSTR2, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_FIRST_CARD_INSTRUCTION, 0, 0, '\0', 'C' },
 			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_BACKGROUND_INSTRUCTION, 32, 0, '\0', 'B' },
@@ -1054,7 +1054,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ELastIdentifier, INVALID_INSTR2, 0, 0,
+		ELastIdentifier, INVALID_INSTR2, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, ECardIdentifier, EHostParameterOptional, WILD_LAST_CARD_INSTRUCTION, 0, 0, '\0', 'C' },
 			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_PUSH_ORDINAL_BACKGROUND_INSTRUCTION, 0, 0, '\0', 'B' },
@@ -1075,7 +1075,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EThisIdentifier, INVALID_INSTR2, 0, 0,
+		EThisIdentifier, INVALID_INSTR2, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, EStackIdentifier, EHostParameterOptional, WILD_THIS_STACK_INSTRUCTION, 0, 0, '\0', '\0' },
 			{ EHostParamIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_THIS_BACKGROUND_INSTRUCTION, 0, 0, '\0', '\0' },
@@ -1096,7 +1096,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0,
+		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0, '\0',
 		{
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
