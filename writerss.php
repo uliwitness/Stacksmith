@@ -2,12 +2,21 @@
 <?
 	/*
 		Call as:
-			./writerss.php <versionfile> <build means> <downloadfile>
+			./writerss.php <versionfile> <build means> <downloadfile> <username> <password> <buildNum>
 			
 		Ex.:
-			./writerss.php build/Stacksmith.app/Contents/Info.plist nightly build/Stacksmith.tgz
+			./writerss.php build/Stacksmith.app/Contents/Info.plist nightly build/Stacksmith.tgz jeff s3kr1t 21
 	*/
-
+	
+	print_r($_ENV);
+	$fullurl = "http://".urlencode($argv[4]).':'.urlencode($argv[5])."@witness.is-a-geek.org:8080/job/StacksmithNightly/".$argv[6]."/api/xml?wrapper=changes&xpath=//changeSet//comment";
+	
+	$commitmessages = file_get_contents($fullurl);
+	$commitmessages = str_replace("<changes>","&lt;ul&gt;",$commitmessages);
+	$commitmessages = str_replace("</changes>","&lt;/ul&gt;",$commitmessages);
+	$commitmessages = str_replace("<comment>","&lt;li&gt;",$commitmessages);
+	$commitmessages = str_replace("</comment>","&lt;/li&gt;",$commitmessages);
+	
 	$infoplist = file_get_contents(dirname($argv[0]).'/'.$argv[1]);
 	$matches = array();
 	preg_match( '/<key>CFBundleVersion<\\/key>[\r\n]*/', $infoplist, $matches, PREG_OFFSET_CAPTURE );
@@ -26,7 +35,7 @@
     <item>
        <title>Stacksmith $actualversion</title>
        <link>http://stacksmith.org/nightlies/".basename($argv[3])."</link>
-       <description>Build means: ".$argv[2]."</description>
+       <description>".$commitmessages."</description>
        <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize(dirname($argv[0]).'/'.$argv[3])."\" type=\"application/octet-stream\" />
        <sparkle:version>$actualversion</sparkle:version>
      </item>
