@@ -26,7 +26,7 @@
     <item>
        <title>Stacksmith $actualversion</title>
        <link>http://stacksmith.org/nightlies/".basename($argv[3])."</link>
-       <description>Build means: ".argv[2]."</description>
+       <description>Build means: ".$argv[2]."</description>
        <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize(dirname($argv[0]).'/'.$argv[3])."\" type=\"application/octet-stream\" />
        <sparkle:version>$actualversion</sparkle:version>
      </item>
