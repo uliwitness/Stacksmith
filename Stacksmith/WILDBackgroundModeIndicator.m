@@ -1,16 +1,16 @@
 //
-//  UKMenuBarOverlay.m
+//  WILDBackgroundModeIndicator.m
 //  Propaganda
 //
 //  Created by Uli Kusterer on 28.02.10.
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import "UKMenuBarOverlay.h"
+#import "WILDBackgroundModeIndicator.h"
 #import "UKHelperMacros.h"
 
 
-@interface UKMenuBarOverlayView : NSView
+@interface WILDBackgroundModeIndicatorView : NSView
 {
 	NSTimer*	mAnimationTimer;
 	CGFloat		mLineWidth;
@@ -20,7 +20,7 @@
 @end
 
 
-@implementation UKMenuBarOverlayView
+@implementation WILDBackgroundModeIndicatorView
 
 -(void)	dealloc
 {
@@ -82,15 +82,17 @@
 static NSPanel*	sMenuBarOverlayWindow = nil;
 
 
-@implementation UKMenuBarOverlay
+@implementation WILDBackgroundModeIndicator
 
-+(void)	show
++(void)	showOnWindow: (NSWindow*)inWindow
 {
 	if( !sMenuBarOverlayWindow )
 	{
 		NSRect		mbarBox = [[[NSScreen screens] objectAtIndex: 0] frame];
 		mbarBox.origin.y = NSMaxY(mbarBox) -[[NSApp mainMenu] menuBarHeight];
 		mbarBox.size.height = [[NSApp mainMenu] menuBarHeight];
+		if( inWindow )
+			mbarBox = [inWindow contentRectForFrameRect: inWindow.frame];
 		sMenuBarOverlayWindow = [[NSPanel alloc] initWithContentRect: mbarBox
 									styleMask: NSBorderlessWindowMask
 									backing: NSBackingStoreBuffered defer: YES];
@@ -101,16 +103,27 @@ static NSPanel*	sMenuBarOverlayWindow = nil;
 		[sMenuBarOverlayWindow setHidesOnDeactivate: YES];
 		[sMenuBarOverlayWindow setIgnoresMouseEvents: YES];
 		
-		UKMenuBarOverlayView*	vw = [[[UKMenuBarOverlayView alloc] initWithFrame: [[sMenuBarOverlayWindow contentView] bounds]] autorelease];
+		WILDBackgroundModeIndicatorView*	vw = [[[WILDBackgroundModeIndicatorView alloc] initWithFrame: [[sMenuBarOverlayWindow contentView] bounds]] autorelease];
 		[[sMenuBarOverlayWindow contentView] addSubview: vw];
+		[inWindow addChildWindow: sMenuBarOverlayWindow ordered: NSWindowAbove];
 	}
-	
-	[sMenuBarOverlayWindow orderFront: nil];
+	else
+	{
+		NSRect		mbarBox = [[[NSScreen screens] objectAtIndex: 0] frame];
+		mbarBox.origin.y = NSMaxY(mbarBox) -[[NSApp mainMenu] menuBarHeight];
+		mbarBox.size.height = [[NSApp mainMenu] menuBarHeight];
+		[sMenuBarOverlayWindow.parentWindow removeChildWindow: sMenuBarOverlayWindow];
+		if( inWindow )
+			mbarBox = [inWindow contentRectForFrameRect: inWindow.frame];
+		[sMenuBarOverlayWindow setFrame: mbarBox display: YES];
+		[inWindow addChildWindow: sMenuBarOverlayWindow ordered: NSWindowAbove];
+	}
 }
 
 
 +(void)	hide
 {
+	[sMenuBarOverlayWindow.parentWindow removeChildWindow: sMenuBarOverlayWindow];
 	[sMenuBarOverlayWindow close];
 	[sMenuBarOverlayWindow release];
 	sMenuBarOverlayWindow = nil;

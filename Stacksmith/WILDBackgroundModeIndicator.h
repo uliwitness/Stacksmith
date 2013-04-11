@@ -1,5 +1,5 @@
 //
-//  UKMenuBarOverlay.h
+//  WILDBackgroundModeIndicator.h
 //  Propaganda
 //
 //  Created by Uli Kusterer on 28.02.10.
@@ -9,12 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface UKMenuBarOverlay : NSObject
+@interface WILDBackgroundModeIndicator : NSObject
 {
 	
 }
 
-+(void)	show;
++(void)	showOnWindow: (NSWindow*)inWindow;	// If inWindow is NIL, highlights the menu bar.
 +(void)	hide;
 
 @end

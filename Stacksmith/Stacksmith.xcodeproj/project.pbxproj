@@ -183,7 +183,7 @@
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CD7D113ABB8B00555C64 /* WILDPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CD7C113ABB8B00555C64 /* WILDPart.m */; };
 		5542CE48113AE27500555C64 /* WILDPartContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CE47113AE27500555C64 /* WILDPartContents.m */; };
-		5542CFAB113B033800555C64 /* UKMenuBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* UKMenuBarOverlay.m */; };
+		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		555BA0DC138DC9CB00B3B1D8 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555BA0DA138DC9CB00B3B1D8 /* PlaceholderMovie.mov */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
@@ -708,8 +708,8 @@
 		5542CD7C113ABB8B00555C64 /* WILDPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPart.m; sourceTree = "<group>"; };
 		5542CE46113AE27500555C64 /* WILDPartContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPartContents.h; sourceTree = "<group>"; };
 		5542CE47113AE27500555C64 /* WILDPartContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPartContents.m; sourceTree = "<group>"; };
-		5542CFA9113B033800555C64 /* UKMenuBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMenuBarOverlay.h; sourceTree = "<group>"; };
-		5542CFAA113B033800555C64 /* UKMenuBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMenuBarOverlay.m; sourceTree = "<group>"; };
+		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
+		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
 		555BA0DB138DC9CB00B3B1D8 /* English */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = English; path = English.lproj/PlaceholderMovie.mov; sourceTree = "<group>"; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
 		555E5764115BFC5700AAF9CA /* NSFileHandle+UKReadLinewise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileHandle+UKReadLinewise.h"; path = "../UliKit/NSFileHandle+UKReadLinewise.h"; sourceTree = SOURCE_ROOT; };
@@ -1400,8 +1400,8 @@
 				5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */,
 				5542CABF113A2CB300555C64 /* UKPBMImageRep.h */,
 				5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */,
-				5542CFA9113B033800555C64 /* UKMenuBarOverlay.h */,
-				5542CFAA113B033800555C64 /* UKMenuBarOverlay.m */,
+				5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */,
+				5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */,
 				5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */,
 				5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */,
 				55E509E51156B06D001D0762 /* ULIMultiMap.h */,
@@ -1978,7 +1978,7 @@
 				5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */,
 				5542CD7D113ABB8B00555C64 /* WILDPart.m in Sources */,
 				5542CE48113AE27500555C64 /* WILDPartContents.m in Sources */,
-				5542CFAB113B033800555C64 /* UKMenuBarOverlay.m in Sources */,
+				5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */,
 				5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */,
 				552558FE114BDE7C00279B03 /* WILDAppDelegate.m in Sources */,
 				55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */,

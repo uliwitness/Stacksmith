@@ -10,7 +10,7 @@
 #import "WILDStack.h"
 #import "WILDCard.h"
 #import "WILDNotifications.h"
-#import "UKMenuBarOverlay.h"
+#import "WILDBackgroundModeIndicator.h"
 #import "WILDTools.h"
 #import "WILDAboutPanelController.h"
 #import "WILDMessageBox.h"
@@ -219,9 +219,9 @@
 													[NSNumber numberWithBool: mBackgroundEditMode], WILDBackgroundEditModeKey,
 												nil]];
 	if( mBackgroundEditMode )
-		[UKMenuBarOverlay show];
+		[WILDBackgroundModeIndicator showOnWindow: NSApplication.sharedApplication.mainWindow];
 	else
-		[UKMenuBarOverlay hide];
+		[WILDBackgroundModeIndicator hide];
 }
 
 
