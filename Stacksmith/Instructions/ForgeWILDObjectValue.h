@@ -32,6 +32,9 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 -(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError;
 -(id<WILDObject>)		parentObject;
 
+@optional
+-(BOOL)				deleteWILDObject;
+
 @end
 
 

@@ -22,6 +22,7 @@ void	WILDVisualEffectInstruction( LEOContext* inContext );
 void	WILDAnswerInstruction( LEOContext* inContext );
 void	WILDAskInstruction( LEOContext* inContext );
 void	WILDCreateInstruction( LEOContext* inContext );
+void	WILDDeleteInstruction( LEOContext* inContext );
 void	WILDDebugCheckpointInstruction( LEOContext* inContext );
 void	WILDPrintInstruction( LEOContext* inContext );
 
@@ -247,12 +248,52 @@ void	WILDPrintInstruction( LEOContext* inContext )
 }
 
 
+/*!
+ Pop a value off the back of the stack (or just read it from the given
+ BasePointer-relative address) and delete it. If it's an object, we remove it
+ from its owner, if it is a chunk, we empty it and any delimiters.
+ (WILD_DELETE_INSTR)
+ 
+ param1	-	If this is BACK_OF_STACK, we're supposed to pop the last item
+ off the stack. Otherwise, this is a basePtr-relative address
+ where a value will just be read.
+ */
+
+void	WILDDeleteInstruction( LEOContext* inContext )
+{
+	bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
+	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
+	if( theValue == NULL || theValue->base.isa == NULL )
+	{
+		LEOContextStopWithError( inContext, "Internal error: Invalid value." );
+		return;
+	}
+	
+	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	{
+		BOOL	couldDelete = false;
+		if( [(id<WILDObject>)theValue->object.object respondsToSelector: @selector(deleteWILDObject)] )
+			couldDelete = [(id<WILDObject>)theValue->object.object deleteWILDObject];
+		if( !couldDelete )
+			LEOContextStopWithError( inContext, "Unable to delete this object." );
+	}
+	else
+		LEOSetValueAsString( theValue, NULL, 0, inContext );
+	
+	if( popOffStack )
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
 LEOINSTR(WILDVisualEffectInstruction)
 LEOINSTR(WILDAnswerInstruction)
 LEOINSTR(WILDAskInstruction)
 LEOINSTR(WILDCreateInstruction)
+LEOINSTR(WILDDeleteInstruction)
 LEOINSTR(WILDDebugCheckpointInstruction)
 LEOINSTR_LAST(WILDPrintInstruction)
 
@@ -320,6 +361,20 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		{
 			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EDeleteIdentifier, WILD_DELETE_INSTR, BACK_OF_STACK, 0, '\0',
+		{
+			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
