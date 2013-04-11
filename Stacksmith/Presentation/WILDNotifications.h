@@ -38,6 +38,11 @@ extern NSString*	WILDDestinationCardKey;	// May be missing (e.g. when closing a 
 
 
 // -----------------------------------------------------------------------------
+// Notifications when card is about to be deleted:
+extern NSString*	WILDCardWillGoAwayNotification;
+
+
+// -----------------------------------------------------------------------------
 // Notifications when parts are created/destroyed (by the user, not just due to
 //	the document being closed or the app being quit):
 // Objects get created/destroyed:

@@ -77,6 +77,7 @@
 	if( mCurrentCard )
 	{
 		[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: mCurrentCard];
+		[[NSNotificationCenter defaultCenter] removeObserver: self name: WILDCardWillGoAwayNotification object: mCurrentCard];
 		[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: mCurrentCard];
 		[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: [mCurrentCard owningBackground]];
 		[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: [mCurrentCard owningBackground]];
@@ -439,6 +440,7 @@
 		
 		if( prevCard )
 		{
+			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDCardWillGoAwayNotification object: prevCard];
 			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: prevCard];
 			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerWillRemovePartNotification object: prevCard];
 			[[NSNotificationCenter defaultCenter] removeObserver: self name:WILDLayerDidAddPartNotification object: [prevCard owningBackground]];
@@ -557,6 +559,7 @@
 			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerDidAddPart:) name: WILDLayerDidAddPartNotification object: [theCard owningBackground]];
 			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(layerWillRemovePart:) name: WILDLayerWillRemovePartNotification object: [theCard owningBackground]];
 			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(stackDidChange:) name: WILDStackDidChangeNotification object: [theCard stack]];
+			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(cardWillGoAway:) name: WILDCardWillGoAwayNotification object: theCard ];
 		}
 	}
 	if( uiDict )
@@ -758,6 +761,13 @@
 }
 
 
+-(void)	cardWillGoAway: (NSNotification*)notif
+{
+	if( mCurrentCard == notif.object )
+		[self goNextCard: self];
+}
+
+
 -(void)	stackDidChange: (NSNotification*)notif
 {
 	if( [[[notif userInfo] objectForKey: WILDAffectedPropertyKey] isEqualToString: @"cardSize"] )
@@ -956,19 +966,24 @@
 	WILDBackground	*	owningBackground = [cardToDelete owningBackground];
 	WILDStack		*	theStack = [mCurrentCard stack];
 	
-	if( [[theStack cards] count] > 1 )
-	{
-		[self goNextCard: self];
-		[[WILDRecentCardsList sharedRecentCardsList] removeCard: cardToDelete];
-		[cardToDelete setOwningBackground: nil];
-		[owningBackground removeCard: cardToDelete];
-		[theStack removeCard: cardToDelete];
-		
-		if( ![owningBackground hasCards] )
-			[theStack removeBackground: owningBackground];
-	}
-	else
-		; // TODO: Show err msg. if last card.
+	if( cardToDelete.cantDelete )
+		return; // TODO: Show err msg.
+	
+	if( owningBackground.cards.count == 1 && owningBackground.cantDelete )
+		return;
+	
+	if( [[theStack cards] count] <= 1 )
+		return;
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDCardWillGoAwayNotification object: cardToDelete];
+
+	[[WILDRecentCardsList sharedRecentCardsList] removeCard: cardToDelete];
+	[cardToDelete setOwningBackground: nil];
+	[owningBackground removeCard: cardToDelete];
+	[theStack removeCard: cardToDelete];
+	
+	if( ![owningBackground hasCards] )
+		[theStack removeBackground: owningBackground];
 }
 
 

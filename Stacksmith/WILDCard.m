@@ -11,6 +11,7 @@
 #import "WILDStack.h"
 #import "WILDCardWindowController.h"
 #import "WILDNotifications.h"
+#import "WILDRecentCardsList.h"
 
 
 @implementation WILDCard
@@ -289,8 +290,34 @@
 	if( self.cantDelete )
 		return NO;
 	
-	[mOwner removeCard: self];
-	[self.stack removeCard: self];
+	WILDCard		*	theCard = [self retain];
+	WILDBackground	*	theOwner = [mOwner retain];
+	NSUInteger			numCds = theOwner.cards.count;
+	if( numCds == 1 && theOwner.cantDelete )	// Last card in bg, and bkgnd is delete-protected?
+	{
+		[theOwner release];
+		[theCard release];
+		return NO;	// Can't delete last cd of protected bg.
+	}
+	else if( numCds == 1 && theOwner.stack.backgrounds.count == 1 )	// Last card in stack?
+	{
+		[theOwner release];
+		[theCard release];
+		return NO;	// Can't delete last cd in stack.
+	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDCardWillGoAwayNotification object: theCard];
+	
+	[[WILDRecentCardsList sharedRecentCardsList] removeCard: theCard];
+	[theCard setOwningBackground: nil];
+	[theOwner removeCard: theCard];
+	[theOwner.stack removeCard: theCard];
+	
+	if( numCds == 1 )	// Was last cd in bg?
+		[theOwner.stack removeBackground: theOwner];	// Delete bg as well.
+	
+	[theOwner release];
+	[theCard release];
 	
 	return YES;
 }
