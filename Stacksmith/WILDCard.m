@@ -283,4 +283,16 @@
 		return [super typeForWILDPropertyNamed: inPropertyName];
 }
 
+
+-(BOOL)	deleteWILDObject
+{
+	if( self.cantDelete )
+		return NO;
+	
+	[mOwner removeCard: self];
+	[self.stack removeCard: self];
+	
+	return YES;
+}
+
 @end

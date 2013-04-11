@@ -113,4 +113,14 @@
 		return [super typeForWILDPropertyNamed: inPropertyName];
 }
 
+-(BOOL)	deleteWILDObject
+{
+	if( self.cantDelete )
+		return NO;
+	
+	[[self stack] removeBackground: self];
+	
+	return YES;
+}
+
 @end

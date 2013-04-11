@@ -1492,6 +1492,14 @@
 }
 
 
+-(BOOL)	deleteWILDObject
+{
+	[mOwner deletePart: self];
+	
+	return YES;
+}
+
+
 -(NSString*)	description
 {
 	return [NSString stringWithFormat: @"%@ { layer = %@, type = %@, style = %@, name = %@, id = %lld, path = %@ }", NSStringFromClass([self class]), mLayer, mType, mStyle, mName, mID, mMediaPath];	
