@@ -181,6 +181,14 @@
 }
 
 
+-(void)	insertCard: (WILDCard*)theCard atIndex: (NSUInteger)desiredIndex
+{
+	[mCards insertObject: theCard atIndex: desiredIndex];
+	if( [theCard marked] )
+		[self setMarked: YES forCard: theCard];
+}
+
+
 -(void)	removeCard: (WILDCard*)theCard
 {
 	[mCards removeObject: theCard];

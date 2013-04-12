@@ -49,6 +49,7 @@
 -(id)				initWithDocument: (WILDDocument*)owner;
 
 -(void)				addCard: (WILDCard*)theCard;
+-(void)				insertCard: (WILDCard*)theCard atIndex: (NSUInteger)desiredIndex;
 -(void)				removeCard: (WILDCard*)theCard;
 -(void)				setMarked: (BOOL)isMarked forCard: (WILDCard*)inCard;
 -(void)				addBackground: (WILDBackground*)theBg;

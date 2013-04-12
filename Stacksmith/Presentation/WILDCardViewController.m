@@ -291,11 +291,11 @@
 	{
 		return ( [[WILDTools sharedTools] numberOfSelectedClients] > 0 );
 	}
-	else if( [menuItem action] == @selector(deleteCard:)
-		|| [menuItem action] == @selector(cutCard:) )
-	{
-		return ( [[[mCurrentCard stack] cards] count] > 1 );
-	}
+//	else if( [menuItem action] == @selector(deleteCard:)
+//		|| [menuItem action] == @selector(cutCard:) )
+//	{
+//		return ( [[[mCurrentCard stack] cards] count] > 1 );
+//	}
 	else
 		return( [self respondsToSelector: [menuItem action]] );
 }
@@ -934,10 +934,17 @@
 	WILDBackground	*	owningBackground = [mCurrentCard owningBackground];
 	WILDCard		*	theNewCard = [[[WILDCard alloc] initForStack: theStack] autorelease];
 	[theNewCard setOwningBackground: owningBackground];
-	[theStack addCard: theNewCard];
+	if( mCurrentCard )
+		[theStack insertCard: theNewCard atIndex: [theStack.cards indexOfObject: mCurrentCard] +1];
+	else
+		[theStack addCard: theNewCard];
 	[owningBackground addCard: theNewCard];
 	
 	[self loadCard: theNewCard];
+	
+	[theStack updateChangeCount: NSChangeDone];
+	[theNewCard updateChangeCount: NSChangeDone];
+	[owningBackground updateChangeCount: NSChangeDone];
 }
 
 
@@ -967,13 +974,22 @@
 	WILDStack		*	theStack = [mCurrentCard stack];
 	
 	if( cardToDelete.cantDelete )
-		return; // TODO: Show err msg.
+	{
+		NSRunAlertPanel( @"Can't delete card", @"%@ has the cantDelete property set to true and can't be deleted.", @"OK", nil, nil, [mCurrentCard displayName] );
+		return;
+	}
 	
 	if( owningBackground.cards.count == 1 && owningBackground.cantDelete )
+	{
+		NSRunAlertPanel( @"Can't delete last card in background", @"%2$@ is the last card in %1$@, which has the cantDelete property set to true and can't be deleted.", @"OK", nil, nil, [owningBackground displayName], [mCurrentCard displayName] );
 		return;
+	}
 	
 	if( [[theStack cards] count] <= 1 )
+	{
+		NSRunAlertPanel( @"Can't delete last card in stack", @"%@ is the last card in %@ and can't be deleted.", @"OK", nil, nil, [mCurrentCard displayName], theStack.displayName );
 		return;
+	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDCardWillGoAwayNotification object: cardToDelete];
 
@@ -984,6 +1000,10 @@
 	
 	if( ![owningBackground hasCards] )
 		[theStack removeBackground: owningBackground];
+	else
+		[owningBackground updateChangeCount: NSChangeDone];
+
+	[theStack updateChangeCount: NSChangeDone];
 }
 
 
@@ -995,9 +1015,13 @@
 	WILDCard		*	theNewCard = [[[WILDCard alloc] initForStack: theStack] autorelease];
 	[theNewCard setOwningBackground: theNewBackground];
 	[theNewBackground addCard: theNewCard];
-	[theStack addCard: theNewCard];
+	[theStack insertCard: theNewCard atIndex: [theStack.cards indexOfObject: mCurrentCard] +1];
 	
 	[self loadCard: theNewCard];
+
+	[theStack updateChangeCount: NSChangeDone];
+	[theNewCard updateChangeCount: NSChangeDone];
+	[theNewBackground updateChangeCount: NSChangeDone];
 }
 
 
