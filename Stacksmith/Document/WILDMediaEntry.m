@@ -79,8 +79,10 @@
 	NSString	*	fileExtension = @"tiff";
 	if( mFilename == nil )	// New, never been saved?
 	{
+		if( !mName || mName.length == 0 )
+			mName = [@"Untitled Image" retain];
 		NSData		*	fileData = [mImage TIFFRepresentation];	// TODO: Handle movies, sounds etc.
-		NSString	*	sanitizedName = [[mName stringByReplacingOccurrencesOfString: @"/" withString: @"-"] stringByAppendingPathExtension:fileExtension];
+		NSString	*	sanitizedName = [[mName stringByReplacingOccurrencesOfString: @"/" withString: @"-"] stringByAppendingPathExtension: fileExtension];
 		NSString	*	filePath = [[absoluteURL path] stringByAppendingPathComponent: sanitizedName];
 		filePath = [[NSFileManager defaultManager] uniqueFileName: filePath];
 		ASSIGN(mFilename, sanitizedName);
