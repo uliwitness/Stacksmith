@@ -25,6 +25,8 @@
 	BOOL						mHighlighted;	// Buttons can have sharedHighlight == FALSE, in which case their highlight is stored here.
 }
 
+@property (assign,nonatomic) WILDObjectID	partID;
+
 -(id)	initWithWILDObjectID: (WILDObjectID)inID layer: (NSString*)inLayer;
 -(id)	initWithXMLElement: (NSXMLElement*)theElem forStack: (WILDStack*)theStack;
 
@@ -34,7 +36,6 @@
 -(void)	setStyledText: (NSAttributedString*)inString;
 
 -(NSString*)			partLayer;
--(WILDObjectID)			partID;
 -(BOOL)					highlighted;
 -(void)					setHighlighted: (BOOL)inState;
 

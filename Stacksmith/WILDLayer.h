@@ -65,6 +65,7 @@
 -(NSArray*)						addColorParts;
 -(WILDPartContents*)			contentsForPart: (WILDPart*)thePart;
 -(WILDPartContents*)			contentsForPart: (WILDPart*)thePart create: (BOOL)createIfNeeded;
+-(void)							addContents: (WILDPartContents*)inContents;
 -(WILDPart*)					partWithID: (WILDObjectID)theID;
 -(WILDObjectID)					uniqueIDForPart;
 

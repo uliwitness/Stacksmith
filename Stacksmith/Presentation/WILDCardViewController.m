@@ -1082,11 +1082,62 @@
 	WILDDocument*	theDoc = self.currentCard.stack.document;
 	WILDLayer*		currLayer = mBackgroundEditMode ? self.currentCard.owningBackground : self.currentCard;
 	
-	NSArray*		parts = [pb readObjectsForClasses: @[[WILDPart class]] options: @{}];
-	for( WILDPart * thePart in parts )
-		[currLayer addPart: thePart];
-	
-	if( parts.count == 0 )
+	NSString	*	partsXML = [pb stringForType: WILDPartPboardType];
+	if( partsXML )
+	{
+		NSError			*	err = nil;
+		NSXMLDocument	*	xmlDoc = [[NSXMLDocument alloc] initWithXMLString: partsXML options: 0 error: &err];
+		if( !xmlDoc )
+		{
+			UKLog( @"Couldn't read part from pasteboard: %@", err );
+			return;
+		}
+		
+		NSArray			*	elems = [[xmlDoc rootElement] children];
+		if( !elems )
+		{
+			UKLog( @"Empty part list on pasteboard." );
+			return;
+		}
+		
+		WILDPart		*	newPart = nil;
+		BOOL				wasBgPart = NO;
+		
+		for( NSXMLElement* elem in elems )
+		{
+			if( [elem.name isEqualToString: @"part"] )
+			{
+				newPart = [[WILDPart alloc] initWithXMLElement: elem forStack: mCurrentCard.stack];
+				wasBgPart = [newPart.partLayer isEqualToString: @"background"];
+				
+				[currLayer addPart: newPart];
+				[newPart release];
+			}
+			else if( newPart && [elem.name isEqualToString: @"contents"] )
+			{
+				WILDPartContents	*	newContents = [[WILDPartContents alloc] initWithXMLElement: elem forStack: mCurrentCard.stack];
+				[newContents setPartID: newPart.partID];	// ID may have changed to avoid collisions.
+				if( [newContents.partLayer isEqualToString: @"card"] )
+				{
+					if( !wasBgPart && currLayer == mCurrentCard )	// Copy from card to card
+						[currLayer addContents: newContents];
+					else if( !wasBgPart && currLayer != mCurrentCard )	// Move from cd to bg.
+					{
+						[currLayer addContents: newContents];
+						[newPart setSharedText: YES];
+					}
+					else if( wasBgPart && currLayer != mCurrentCard )	// Copy from bg to bg.
+						[mCurrentCard addContents: newContents];
+				}
+				else if( [newContents.partLayer isEqualToString: @"background"] )
+				{
+					[currLayer addContents: newContents];
+				}
+				[newContents release];
+			}
+		}
+	}
+	else
 	{
 		NSArray*		imgs = [pb readObjectsForClasses: @[[NSImage class]] options: @{}];
 		for( NSImage * img in imgs )
@@ -1121,17 +1172,25 @@
 
 -(IBAction)	copy: (id)sender
 {
+	WILDBackground*	currBg = [mCurrentCard owningBackground];
 	NSSet			*	theSet = [[WILDTools sharedTools] clients];
-	NSMutableArray	*	selParts = [NSMutableArray arrayWithCapacity: theSet.count];
-	
+	NSMutableString	*	xmlString = [NSMutableString stringWithString: @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE parts PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\" >\n<parts>\n"];
+
 	for( WILDPartView	*	currPartView in theSet )
 	{
 		WILDPart	*	thePart = [currPartView part];
-		[selParts addObject: thePart];
+		[xmlString appendString: [thePart xmlString]];
+		NSString*	cdXmlStr = [[mCurrentCard contentsForPart: thePart] xmlString];
+		if( cdXmlStr )
+			[xmlString appendString: cdXmlStr];
+		NSString*	bgXmlStr = [[currBg contentsForPart: thePart] xmlString];
+		if( bgXmlStr )
+			[xmlString appendString: bgXmlStr];
 	}
-	
+	[xmlString appendString: @"</parts>"];
+
 	[[NSPasteboard generalPasteboard] clearContents];
-	[[NSPasteboard generalPasteboard] writeObjects: selParts];
+	[[NSPasteboard generalPasteboard] setString: xmlString forType: WILDPartPboardType];
 }
 
 

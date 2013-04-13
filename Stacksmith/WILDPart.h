@@ -22,7 +22,7 @@
 @class WILDPartContents;
 
 
-@interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable,WILDObject,NSPasteboardReading,NSPasteboardWriting>
+@interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable,WILDObject>
 {
 	WILDObjectID		mID;
 	NSRect				mRectangle;

@@ -92,8 +92,7 @@
 		for( NSXMLElement* currContent in contents )
 		{
 			WILDPartContents*	newCont = [[[WILDPartContents alloc] initWithXMLElement: currContent forStack: theStack] autorelease];
-			NSString*					theKey = [NSString stringWithFormat: @"%@:%lld", [newCont partLayer], [newCont partID]];
-			[mContents setObject: newCont forKey: theKey];
+			[self addContents: newCont];
 		}
 		
 		[self loadAddColorObjects: elem];
@@ -516,6 +515,13 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidAddPartNotification
 						object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: newPart, WILDAffectedPartKey,
 							nil]];
+}
+
+
+-(void)	addContents: (WILDPartContents*)inContents
+{
+	NSString*	theKey = [NSString stringWithFormat: @"%@:%lld", [inContents partLayer], [inContents partID]];
+	[mContents setObject: inContents forKey: theKey];
 }
 
 

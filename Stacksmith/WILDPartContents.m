@@ -74,6 +74,8 @@
 
 @implementation WILDPartContents
 
+@synthesize partID = mID;
+
 -(id)	initWithWILDObjectID: (WILDObjectID)inID layer: (NSString*)inLayer
 {
 	if(( self = [super init] ))
@@ -289,12 +291,6 @@
 -(NSString*)	partLayer
 {
 	return mLayer;
-}
-
-
--(WILDObjectID)	partID
-{
-	return mID;
 }
 
 
