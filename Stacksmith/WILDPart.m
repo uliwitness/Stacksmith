@@ -18,6 +18,7 @@
 #import "ULINSIntegerMath.h"
 #import "UKHelperMacros.h"
 #import "WILDDocument.h"
+#import "WILDPresentationConstants.h"
 
 
 @interface WILDPart ()
@@ -50,85 +51,142 @@
 @synthesize shadowBlurRadius = mShadowBlurRadius;
 @synthesize clickableInInactiveWindow = mClickableInInactiveWindow;
 @synthesize lineWidth = mLineWidth;
+@synthesize stack = mStack;
+
+
++(NSArray *)	readableTypesForPasteboard: (NSPasteboard *)pasteboard
+{
+	return @[WILDPartPboardType];
+}
+
+
++ (NSPasteboardReadingOptions)readingOptionsForType:(NSString *)type pasteboard:(NSPasteboard *)pasteboard
+{
+	if( [type isEqualToString: WILDPartPboardType] )
+		return NSPasteboardReadingAsString;
+	else
+		return NSPasteboardReadingAsData;
+}
+
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
 {
 	if(( self = [super init] ))
 	{
 		mStack = inStack;
-		mID = WILDIntegerFromSubElementInElement( @"id", elem );
-		mRectangle = WILDRectFromSubElementInElement( @"rect", elem );
-		mName = [WILDStringFromSubElementInElement( @"name", elem ) retain];
-		mMediaPath = [WILDStringFromSubElementInElement( @"mediaPath", elem ) retain];
-		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
-		mStyle = [WILDStringFromSubElementInElement( @"style", elem ) retain];
-		mType = [WILDStringFromSubElementInElement( @"type", elem ) retain];
-		mVisible = (!elem) ? YES : WILDBoolFromSubElementInElement( @"visible", elem, YES );
-		mDontWrap = WILDBoolFromSubElementInElement( @"dontWrap", elem, NO );
-		mDontSearch = WILDBoolFromSubElementInElement( @"dontSearch", elem, NO );
-		mSharedText = WILDBoolFromSubElementInElement( @"sharedText", elem, NO );
-		mFixedLineHeight = WILDBoolFromSubElementInElement( @"fixedLineHeight", elem, NO );
-		mAutoTab = WILDBoolFromSubElementInElement( @"autoTab", elem, NO );
-		mLockText = WILDBoolFromSubElementInElement( @"lockText", elem, NO );
-		mAutoSelect = WILDBoolFromSubElementInElement( @"autoSelect", elem, NO );
-		mShowLines = WILDBoolFromSubElementInElement( @"showLines", elem, NO );
-		mAutoHighlight = WILDBoolFromSubElementInElement( @"autoHighlight", elem, NO );
-		mWideMargins = WILDBoolFromSubElementInElement( @"wideMargins", elem, NO );
-		mMultipleLines = WILDBoolFromSubElementInElement( @"multipleLines", elem, NO );
-		mShowName = WILDBoolFromSubElementInElement( @"showName", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
-		mSelectedLines = [WILDIndexSetFromSubElementInElement( @"selectedLines", elem, -1 ) mutableCopy];
-		mTitleWidth = WILDIntegerFromSubElementInElement( @"titleWidth", elem );
-		mHighlight = WILDBoolFromSubElementInElement( @"highlight", elem, NO );
-		mSharedHighlight = WILDBoolFromSubElementInElement( @"sharedHighlight", elem, YES );
-		mEnabled = WILDBoolFromSubElementInElement( @"enabled", elem, YES );
-		mHasHorizontalScroller = WILDBoolFromSubElementInElement( @"hasHorizontalScroller", elem, NO );
-		mHasVerticalScroller = WILDBoolFromSubElementInElement( @"hasVerticalScroller", elem, NO );
-		mFamily = WILDIntegerFromSubElementInElement( @"family", elem );
-		NSString	* timeString = WILDStringFromSubElementInElement( @"currentTime", elem );
-		if( timeString )
-			mCurrentTime = QTTimeFromString( timeString );
-		mClickableInInactiveWindow = WILDBoolFromSubElementInElement( @"clickableInInactiveWindow", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
-		
-		NSString*		alignStr = WILDStringFromSubElementInElement( @"textAlign", elem );
-		if( [alignStr isEqualToString: @"forceLeft"] )
-			mTextAlignment = NSLeftTextAlignment;
-		else if( [alignStr isEqualToString: @"center"] )
-			mTextAlignment = NSCenterTextAlignment;
-		else if( [alignStr isEqualToString: @"right"] )
-			mTextAlignment = NSRightTextAlignment;
-		else if( [alignStr isEqualToString: @"justified"] )	// Not available in HC.
-			mTextAlignment = NSJustifiedTextAlignment;
-		else //if( [alignStr isEqualToString: @"left"] )
-			mTextAlignment = NSNaturalTextAlignment;
-		
-		mTextFontName = [WILDStringFromSubElementInElement( @"font", elem ) retain];
-		mTextFontSize = WILDIntegerFromSubElementInElement( @"textSize", elem );
-		mTextHeight = WILDIntegerFromSubElementInElement( @"textHeight", elem );
-		mTextStyles = [WILDStringsFromSubElementInElement( @"textStyle", elem ) retain];
-		mIconID = WILDIntegerFromSubElementInElement( @"icon", elem );
-		mControllerVisible = WILDBoolFromSubElementInElement( @"controllerVisible", elem, NO );
-		
-		mFillColor = [WILDColorFromSubElementInElement( @"fillColor", elem ) retain];
-		if( !mFillColor )
-			mFillColor = [[NSColor whiteColor] retain];
-		mLineColor = [WILDColorFromSubElementInElement( @"lineColor", elem ) retain];
-		if( !mLineColor )
-			mLineColor = [[NSColor blackColor] retain];
-		mShadowColor = [WILDColorFromSubElementInElement( @"shadowColor", elem ) retain];
-		if( !mShadowColor )
-			mShadowColor = [[NSColor clearColor] retain];
-		mShadowOffset = WILDSizeFromSubElementInElement( @"shadowOffset", elem );
-		mShadowBlurRadius = WILDIntegerFromSubElementInElement( @"shadowBlurRadius", elem );
-		if( mShadowBlurRadius < 0 )
-			mShadowBlurRadius = 0;
-		mLineWidth = WILDIntegerFromSubElementInElement( @"lineWidth", elem );
-		if( mLineWidth < 0 )
-			mLineWidth = 0;
-
-		mIDForScripts = kLEOObjectIDINVALID;
+		[self setUpWithXMLElement: elem];
 	}
 	
 	return self;
+}
+
+
+-(id)	initWithPasteboardPropertyList: (id)propertyList ofType: (NSString *)type
+{
+	if(( self = [super init] ))
+	{
+		NSError			*	err = nil;
+		NSXMLDocument	*	xmlDoc = [[NSXMLDocument alloc] initWithXMLString:propertyList options: 0 error: &err];
+		if( !xmlDoc )
+		{
+			UKLog( @"Couldn't read part from pasteboard: %@", err );
+			[self release];
+			return nil;
+		}
+		
+		NSArray			*	elems = [xmlDoc nodesForXPath: @"/parts/part" error: &err];
+		if( !elems )
+		{
+			UKLog( @"Couldn't read part from pasteboard: %@", err );
+			[self release];
+			return nil;
+		}
+		NSXMLElement	*	elem = (elems.count > 0) ? [elems objectAtIndex: 0] : nil;
+		if( !elem )
+		{
+			UKLog( @"No parts on pasteboard: %@", err );
+			[self release];
+			return nil;
+		}
+		[self setUpWithXMLElement: elem];
+	}
+	
+	return self;
+}
+
+
+-(void)	setUpWithXMLElement: (NSXMLElement*)elem
+{
+	mID = WILDIntegerFromSubElementInElement( @"id", elem );
+	mRectangle = WILDRectFromSubElementInElement( @"rect", elem );
+	mName = [WILDStringFromSubElementInElement( @"name", elem ) retain];
+	mMediaPath = [WILDStringFromSubElementInElement( @"mediaPath", elem ) retain];
+	mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
+	mStyle = [WILDStringFromSubElementInElement( @"style", elem ) retain];
+	mType = [WILDStringFromSubElementInElement( @"type", elem ) retain];
+	mVisible = (!elem) ? YES : WILDBoolFromSubElementInElement( @"visible", elem, YES );
+	mDontWrap = WILDBoolFromSubElementInElement( @"dontWrap", elem, NO );
+	mDontSearch = WILDBoolFromSubElementInElement( @"dontSearch", elem, NO );
+	mSharedText = WILDBoolFromSubElementInElement( @"sharedText", elem, NO );
+	mFixedLineHeight = WILDBoolFromSubElementInElement( @"fixedLineHeight", elem, NO );
+	mAutoTab = WILDBoolFromSubElementInElement( @"autoTab", elem, NO );
+	mLockText = WILDBoolFromSubElementInElement( @"lockText", elem, NO );
+	mAutoSelect = WILDBoolFromSubElementInElement( @"autoSelect", elem, NO );
+	mShowLines = WILDBoolFromSubElementInElement( @"showLines", elem, NO );
+	mAutoHighlight = WILDBoolFromSubElementInElement( @"autoHighlight", elem, NO );
+	mWideMargins = WILDBoolFromSubElementInElement( @"wideMargins", elem, NO );
+	mMultipleLines = WILDBoolFromSubElementInElement( @"multipleLines", elem, NO );
+	mShowName = WILDBoolFromSubElementInElement( @"showName", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
+	mSelectedLines = [WILDIndexSetFromSubElementInElement( @"selectedLines", elem, -1 ) mutableCopy];
+	mTitleWidth = WILDIntegerFromSubElementInElement( @"titleWidth", elem );
+	mHighlight = WILDBoolFromSubElementInElement( @"highlight", elem, NO );
+	mSharedHighlight = WILDBoolFromSubElementInElement( @"sharedHighlight", elem, YES );
+	mEnabled = WILDBoolFromSubElementInElement( @"enabled", elem, YES );
+	mHasHorizontalScroller = WILDBoolFromSubElementInElement( @"hasHorizontalScroller", elem, NO );
+	mHasVerticalScroller = WILDBoolFromSubElementInElement( @"hasVerticalScroller", elem, NO );
+	mFamily = WILDIntegerFromSubElementInElement( @"family", elem );
+	NSString	* timeString = WILDStringFromSubElementInElement( @"currentTime", elem );
+	if( timeString )
+		mCurrentTime = QTTimeFromString( timeString );
+	mClickableInInactiveWindow = WILDBoolFromSubElementInElement( @"clickableInInactiveWindow", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
+	
+	NSString*		alignStr = WILDStringFromSubElementInElement( @"textAlign", elem );
+	if( [alignStr isEqualToString: @"forceLeft"] )
+		mTextAlignment = NSLeftTextAlignment;
+	else if( [alignStr isEqualToString: @"center"] )
+		mTextAlignment = NSCenterTextAlignment;
+	else if( [alignStr isEqualToString: @"right"] )
+		mTextAlignment = NSRightTextAlignment;
+	else if( [alignStr isEqualToString: @"justified"] )	// Not available in HC.
+		mTextAlignment = NSJustifiedTextAlignment;
+	else //if( [alignStr isEqualToString: @"left"] )
+		mTextAlignment = NSNaturalTextAlignment;
+	
+	mTextFontName = [WILDStringFromSubElementInElement( @"font", elem ) retain];
+	mTextFontSize = WILDIntegerFromSubElementInElement( @"textSize", elem );
+	mTextHeight = WILDIntegerFromSubElementInElement( @"textHeight", elem );
+	mTextStyles = [WILDStringsFromSubElementInElement( @"textStyle", elem ) retain];
+	mIconID = WILDIntegerFromSubElementInElement( @"icon", elem );
+	mControllerVisible = WILDBoolFromSubElementInElement( @"controllerVisible", elem, NO );
+	
+	mFillColor = [WILDColorFromSubElementInElement( @"fillColor", elem ) retain];
+	if( !mFillColor )
+		mFillColor = [[NSColor whiteColor] retain];
+	mLineColor = [WILDColorFromSubElementInElement( @"lineColor", elem ) retain];
+	if( !mLineColor )
+		mLineColor = [[NSColor blackColor] retain];
+	mShadowColor = [WILDColorFromSubElementInElement( @"shadowColor", elem ) retain];
+	if( !mShadowColor )
+		mShadowColor = [[NSColor clearColor] retain];
+	mShadowOffset = WILDSizeFromSubElementInElement( @"shadowOffset", elem );
+	mShadowBlurRadius = WILDIntegerFromSubElementInElement( @"shadowBlurRadius", elem );
+	if( mShadowBlurRadius < 0 )
+		mShadowBlurRadius = 0;
+	mLineWidth = WILDIntegerFromSubElementInElement( @"lineWidth", elem );
+	if( mLineWidth < 0 )
+		mLineWidth = 0;
+
+	mIDForScripts = kLEOObjectIDINVALID;
 }
 
 
@@ -162,6 +220,37 @@
 	}
 	
 	[super dealloc];
+}
+
+
+-(NSArray *)	writableTypesForPasteboard:	(NSPasteboard *)pasteboard
+{
+	return @[WILDPartPboardType];
+}
+
+
+-(id)	pasteboardPropertyListForType: (NSString *)type
+{
+	WILDCard		*		currCard = nil;
+	WILDLayer		*		currBg = nil;
+	NSMutableString	*		xmlString = [[@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE parts PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\" >\n<parts>\n" mutableCopy] autorelease];
+	[xmlString appendString: [self xmlString]];
+	if( [self.partLayer isEqualToString: @"card"] )
+	{
+		currCard = (WILDCard*)self.partOwner;
+		currBg = currCard.owningBackground;
+	}
+	else
+		currBg = self.partOwner;
+	NSString*	cdXmlStr = [[currCard contentsForPart: self] xmlString];
+	if( cdXmlStr )
+		[xmlString appendString: cdXmlStr];
+	NSString*	bgXmlStr = [[currBg contentsForPart: self] xmlString];
+	if( bgXmlStr )
+		[xmlString appendString: bgXmlStr];
+	[xmlString appendString: @"</parts>"];
+	
+	return xmlString;
 }
 
 
@@ -282,22 +371,7 @@
 
 -(NSInteger)	partNumber
 {
-	return [[mOwner parts] indexOfObject: self];
-}
-
-
--(NSInteger)	partNumberAmongPartsOfType: (NSString*)partType
-{
-	NSInteger		pbn = -1;
-	for( WILDPart* currPart in [mOwner parts] )
-	{
-		if( [[currPart partType] isEqualToString: partType] )
-			pbn++;
-		if( currPart == self )
-			break;
-	}
-	
-	return pbn;
+	return [mOwner indexOfPart: self asType: nil];
 }
 
 
@@ -1219,6 +1293,10 @@
 		return mControllerVisible ? @YES : @NO;
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		return [NSNumber numberWithLongLong: mIconID];
+	else if( [inPropertyName isEqualToString: @"number"] )
+		return [NSNumber numberWithInteger: [mOwner indexOfPart: self asType: self.partType] +1];
+	else if( [inPropertyName isEqualToString: @"partnumber"] )
+		return [NSNumber numberWithInteger: [mOwner indexOfPart: self asType: nil] +1];
 	else if( [inPropertyName isEqualToString: @"textstyle"] )
 	{
 		WILDCard*			theCard = [[self stack] currentCard];
@@ -1375,6 +1453,18 @@
 		mControllerVisible = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		mIconID = [inValue longLongValue];
+	else if( [inPropertyName isEqualToString: @"partNumber"] )
+	{
+		long long	desiredIndex = [inValue longLongValue];
+		if( desiredIndex > 0 )
+			[mOwner movePart: self toIndex: desiredIndex -1 asType: nil];
+	}
+	else if( [inPropertyName isEqualToString: @"number"] )
+	{
+		long long	desiredIndex = [inValue longLongValue];
+		if( desiredIndex > 0 )
+			[mOwner movePart: self toIndex: desiredIndex -1 asType: self.partType];
+	}
 	else if( [inPropertyName isEqualToString: @"textstyle"] )
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
@@ -1486,6 +1576,10 @@
 	else if( [inPropertyName isEqualToString: @"controllervisible"] )
 		return &kLeoValueTypeBoolean;
 	else if( [inPropertyName isEqualToString: @"icon"] )
+		return &kLeoValueTypeInteger;
+	else if( [inPropertyName isEqualToString: @"number"] )
+		return &kLeoValueTypeInteger;
+	else if( [inPropertyName isEqualToString: @"partnumber"] )
 		return &kLeoValueTypeInteger;
 	else
 		return &kLeoValueTypeString;

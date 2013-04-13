@@ -375,9 +375,9 @@
 }
 
 
--(NSInteger)	numberOfPartsOfType: (NSString*)inPartType
+-(NSUInteger)	numberOfPartsOfType: (NSString*)inPartType
 {
-	NSInteger	partCount = 0;
+	NSUInteger	partCount = 0;
 	
 	for( WILDPart* currPart in mParts )
 	{
@@ -410,6 +410,55 @@
 	return foundPart;
 }
 
+
+-(NSUInteger)	indexOfPart: (WILDPart*)inPart asType: (NSString*)inPartType
+{
+	if( inPartType == nil )
+		return [mParts indexOfObject: inPart];
+	else
+	{
+		NSUInteger		partIdx = 0;
+		for( WILDPart* currPart in mParts )
+		{
+			if( [[currPart partType] isEqualToString: inPartType] )
+			{
+				if( currPart == inPart )
+					return partIdx;
+				++partIdx;
+			}
+		}
+	}
+	
+	return NSNotFound;
+}
+
+
+-(void)		movePart: (WILDPart*)inPart toIndex: (NSUInteger)inNewIndex asType: (NSString*)inPartType
+{
+	[inPart retain];
+	if( inPartType == nil )
+	{
+		if( inNewIndex < (mParts.count -1) )
+		{
+			[mParts removeObject: inPart];
+			[mParts insertObject: inPart atIndex: inNewIndex];
+		}
+	}
+	else
+	{
+		[mParts removeObject: inPart];
+		if( inNewIndex == mParts.count )
+			[mParts insertObject: inPart atIndex: inNewIndex];
+		else if( inNewIndex < mParts.count )
+		{
+			WILDPart	*	precedingPartOfSameType = [self partAtIndex: ((inNewIndex > 0) ? inNewIndex -1 : 0) ofType: inPartType];
+			NSUInteger		precedingIndex = [mParts indexOfObject: precedingPartOfSameType];
+			[mParts insertObject: inPart atIndex: ((inNewIndex > 0) ? precedingIndex : 0)];
+		}
+	}
+	[self updateChangeCount: NSChangeDone];
+	[inPart release];
+}
 
 -(WILDPart*)	partNamed: (NSString*)inPartName ofType: (NSString*)inPartType
 {
@@ -444,9 +493,22 @@
 	NSXMLElement	*	theElement = [templateDocument rootElement];
 	WILDPart		*	newPart = [[[WILDPart alloc] initWithXMLElement: theElement forStack: mStack] autorelease];
 	
-	[newPart setPartID: [self uniqueIDForPart]];
+	[self addPart: newPart];
+	return newPart;
+}
+
+
+-(void)	addPart: (WILDPart*)newPart
+{
+	WILDObjectID	theID = newPart.partID;
+	if( [self partWithID: theID] != nil )	// Ensure we don't get duplicate IDs.
+	{
+		theID = [self uniqueIDForPart];
+		[newPart setPartID: theID];
+	}
 	[newPart setPartLayer: [self partLayer]];
 	[newPart setPartOwner: self];
+	[newPart setStack: mStack];
 	[mParts addObject: newPart];
 	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(partDidChange:) name:WILDPartDidChangeNotification object: newPart];
 	
@@ -454,8 +516,6 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidAddPartNotification
 						object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: newPart, WILDAffectedPartKey,
 							nil]];
-	
-	return newPart;
 }
 
 

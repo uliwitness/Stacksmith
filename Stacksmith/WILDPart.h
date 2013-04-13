@@ -22,7 +22,7 @@
 @class WILDPartContents;
 
 
-@interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable,WILDObject>
+@interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable,WILDObject,NSPasteboardReading,NSPasteboardWriting>
 {
 	WILDObjectID		mID;
 	NSRect				mRectangle;
@@ -99,6 +99,7 @@
 @property (assign,nonatomic) NSSize			shadowOffset;
 @property (assign,nonatomic) CGFloat		shadowBlurRadius;
 @property (assign,nonatomic) CGFloat		lineWidth;
+@property (assign,nonatomic) WILDStack*		stack;	// Stack owns us, don't retain back pointer.
 
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
@@ -118,7 +119,6 @@
 -(WILDObjectID)	partID;
 -(void)			setPartID: (WILDObjectID)inID;	// If you set this, make sure it is a unique ID not used by another part in the same background/card!
 -(NSInteger)	partNumber;
--(NSInteger)	partNumberAmongPartsOfType: (NSString*)partType;
 
 -(void)			setPartLayer: (NSString*)theLayer;
 -(NSString*)	partLayer;

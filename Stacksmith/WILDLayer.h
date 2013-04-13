@@ -68,9 +68,11 @@
 -(WILDPart*)					partWithID: (WILDObjectID)theID;
 -(WILDObjectID)					uniqueIDForPart;
 
--(NSInteger)					numberOfPartsOfType: (NSString*)inPartType;
+-(NSUInteger)					numberOfPartsOfType: (NSString*)inPartType;
 -(WILDPart*)					partAtIndex: (NSUInteger)inPartIndex ofType: (NSString*)inPartType;
+-(NSUInteger)					indexOfPart: (WILDPart*)inPart asType: (NSString*)inPartType;
 -(WILDPart*)					partNamed: (NSString*)inPartName ofType: (NSString*)inPartType;
+-(void)							movePart: (WILDPart*)inPart toIndex: (NSUInteger)inNewIndex asType: (NSString*)inPartType;
 
 -(void)							updatePartOnClick: (WILDPart*)thePart withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground;
 
@@ -87,6 +89,7 @@
 -(WILDPart*)					createNewField: (id)sender;
 
 -(WILDPart*)					addNewPartFromXMLTemplate: (NSURL*)xmlFile;
+-(void)							addPart: (WILDPart*)newPart;
 -(void)							deletePart: (WILDPart*)inPart;
 
 -(void)							bringPartCloser: (WILDPart*)inPart;

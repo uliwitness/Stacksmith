@@ -10,6 +10,7 @@
 #import "WILDScriptEditorWindowController.h"
 #import "WILDContentsEditorWindowController.h"
 #import "WILDPart.h"
+#import "WILDLayer.h"
 #import "WILDNotifications.h"
 #import "UKHelperMacros.h"
 
@@ -77,7 +78,7 @@
 	[nameField setStringValue: [part name]];
 	
 	NSString*	layerName = [[part partLayer] capitalizedString];
-	[numberField setIntegerValue: [part partNumberAmongPartsOfType: [part partType]] +1];
+	[numberField setIntegerValue: [[part partOwner] indexOfPart: part asType: [part partType]] +1];
 	[partNumberLabel setStringValue: [NSString stringWithFormat: @"%@ Part Number:", layerName]];
 	[partNumberField setIntegerValue: [part partNumber] +1];
 	[idField setIntegerValue: [part partID]];
