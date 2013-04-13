@@ -11,9 +11,12 @@
 #import "LEOInterpreter.h"
 #import "LEOContextGroup.h"
 #import "LEORemoteDebugger.h"
+#import "LEOInstructions.h"
+#import "WILDCardViewController.h"
 
 
 BOOL	UKScanLineEnding( NSScanner* scanny, NSMutableString* outString, NSInteger* currentLine );
+void	WILDCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler );
 
 
 @implementation WILDSymbol
@@ -293,6 +296,72 @@ NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 	return outString;
 }
 
+void	WILDCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler )
+{
+	BOOL			handled = NO;
+	LEOHandlerID	arrowKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "arrowkey" );
+	LEOHandlerID	keyDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "keydown" );
+	LEOHandlerID	functionKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "functionkey" );
+	LEOHandlerID	openCardHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "opencard" );
+	LEOHandlerID	closeCardHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closecard" );
+	LEOHandlerID	openStackHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openstack" );
+	LEOHandlerID	closeStackHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closestack" );
+	LEOHandlerID	mouseEnterHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseenter" );
+	LEOHandlerID	mouseDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedown" );
+	LEOHandlerID	mouseUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseup" );
+	LEOHandlerID	mouseUpOutsideHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseupoutside" );
+	LEOHandlerID	mouseLeaveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseleave" );
+	LEOHandlerID	mouseMoveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousemove" );
+	LEOHandlerID	mouseDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedrag" );
+	if( inHandler == arrowKeyHandlerID )
+	{
+		LEOValuePtr	directionParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 0 );
+		char		buf[40] = {};
+		const char*	directionStr = LEOGetValueAsString( directionParam, buf, sizeof(buf), inContext );
+		if( strcasecmp( directionStr, "left") )
+		{
+			[[NSApplication sharedApplication] sendAction: @selector(goPrevCard:) to: nil from: [NSApplication sharedApplication]];
+			handled = YES;
+		}
+		else if( strcasecmp( directionStr, "right") )
+		{
+			[[NSApplication sharedApplication] sendAction: @selector(goNextCard:) to: nil from: [NSApplication sharedApplication]];
+			handled = YES;
+		}
+		else if( strcasecmp( directionStr, "up") )
+		{
+			[[NSApplication sharedApplication] sendAction: @selector(goFirstCard:) to: nil from: [NSApplication sharedApplication]];
+			handled = YES;
+		}
+		else if( strcasecmp( directionStr, "down") )
+		{
+			[[NSApplication sharedApplication] sendAction: @selector(goLastCard:) to: nil from: [NSApplication sharedApplication]];
+			handled = YES;
+		}
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
+	else if( inHandler == openCardHandlerID
+			|| inHandler == closeCardHandlerID
+			|| inHandler == openStackHandlerID
+			|| inHandler == closeStackHandlerID
+			|| inHandler == mouseEnterHandlerID
+			|| inHandler == mouseDownHandlerID
+			|| inHandler == mouseUpHandlerID
+			|| inHandler == mouseUpOutsideHandlerID
+			|| inHandler == mouseLeaveHandlerID
+			|| inHandler == mouseMoveHandlerID
+			|| inHandler == mouseDragHandlerID
+			|| inHandler == functionKeyHandlerID
+			|| inHandler == keyDownHandlerID )
+	{
+		handled = YES;
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
+	
+	if( !handled )
+		LEOContextStopWithError( inContext, "Couldn't find handler for %s.", LEOContextGroupHandlerNameForHandlerID( inContext->group, inHandler ) );
+}
+
 
 NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> container, NSString* fmt, ... )
 {
@@ -317,6 +386,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 	ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
 	ctx.promptProc = LEORemoteDebuggerPrompt;
 	#endif
+	ctx.callNonexistentHandler = WILDCallNonexistentHandler;
 	
 	LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
 		
@@ -490,7 +560,11 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 			if( theScript->GetParentScript )
 				theScript = theScript->GetParentScript( theScript, &ctx );
 			if( !theScript )
+			{
+				if( ctx.callNonexistentHandler )
+					ctx.callNonexistentHandler( &ctx, handlerID );
 				break;
+			}
 		}
 	}
 	if( ctx.errMsg[0] != 0 )

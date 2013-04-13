@@ -130,6 +130,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
 		ctx.promptProc = LEORemoteDebuggerPrompt;
 		#endif
+		ctx.callNonexistentHandler = WILDCallNonexistentHandler;
 		
 		LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
 		LEOPushIntegerOnStack( &ctx, 0 );

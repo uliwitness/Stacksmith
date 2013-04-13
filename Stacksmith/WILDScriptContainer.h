@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "LEOHandlerID.h"
 
 
 struct LEOScript;
@@ -58,3 +59,6 @@ typedef NSInteger	WILDSymbolType;
 
 NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols );
 NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> container, NSString* fmt, ... );
+
+struct LEOContext;
+void		WILDCallNonexistentHandler( struct LEOContext* inContext, LEOHandlerID inHandler );
