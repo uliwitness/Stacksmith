@@ -25,3 +25,6 @@
 [submodule "ULINetSocket"]
 	path = ULINetSocket
 	url = git://github.com/uliwitness/ULINetSocket.git
+[submodule "Stacks"]
+	path = Stacks
+	url = git@github.com:uliwitness/Stacks.git
