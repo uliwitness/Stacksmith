@@ -1136,6 +1136,8 @@
 				[newContents release];
 			}
 		}
+		
+		[currLayer updateChangeCount: NSChangeDone];
 	}
 	else
 	{
