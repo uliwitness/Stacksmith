@@ -445,15 +445,14 @@
 	}
 	else
 	{
+		NSUInteger		currIdx = [mParts indexOfObject: inPart];
 		[mParts removeObject: inPart];
-		if( inNewIndex == mParts.count )
-			[mParts insertObject: inPart atIndex: inNewIndex];
-		else if( inNewIndex < mParts.count )
-		{
-			WILDPart	*	precedingPartOfSameType = [self partAtIndex: ((inNewIndex > 0) ? inNewIndex -1 : 0) ofType: inPartType];
-			NSUInteger		precedingIndex = [mParts indexOfObject: precedingPartOfSameType];
-			[mParts insertObject: inPart atIndex: ((inNewIndex > 0) ? precedingIndex : 0)];
-		}
+		WILDPart	*	precedingPartOfSameType = [self partAtIndex: ((inNewIndex > 0) ? inNewIndex -1 : 0) ofType: inPartType];
+		NSUInteger		precedingIndex = precedingPartOfSameType ? [mParts indexOfObject: precedingPartOfSameType] : NSNotFound;
+		NSUInteger		newIndex = currIdx;
+		if( precedingIndex != NSNotFound )
+			newIndex = precedingIndex +1;
+		[mParts insertObject: inPart atIndex: newIndex];
 	}
 	[self updateChangeCount: NSChangeDone];
 	[inPart release];
