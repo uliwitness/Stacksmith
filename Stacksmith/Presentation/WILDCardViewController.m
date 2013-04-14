@@ -1102,20 +1102,29 @@
 }
 
 
--(void)	keyDown: (NSEvent *)event
+-(BOOL)	isPopoverShowing
 {
-	if( [[event characters] length] == 0 )
-		return;
-	unichar		firstChar = [[event characters] characterAtIndex: 0];
-	
-	// if the user pressed delete and the delegate supports deleteKeyPressed
-	if( firstChar == NSDeleteFunctionKey
-		|| firstChar == NSDeleteCharFunctionKey
-		|| firstChar == NSDeleteCharacter )
-	{
-		[self delete: self];
-	}
+	return mCurrentPopover != nil;
 }
+
+
+//-(void)	keyDown: (NSEvent *)event
+//{
+//	if( [[event characters] length] == 0 )
+//	{
+//		[self.view.window keyDown: event];
+//		return;
+//	}
+//	unichar		firstChar = [[event characters] characterAtIndex: 0];
+//	
+//	// if the user pressed delete and the delegate supports deleteKeyPressed
+//	if( firstChar == NSDeleteFunctionKey
+//		|| firstChar == NSDeleteCharFunctionKey
+//		|| firstChar == NSDeleteCharacter )
+//	{
+//		[self delete: self];
+//	}
+//}
 
 
 -(IBAction)	paste: (id)sender

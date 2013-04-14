@@ -23,4 +23,6 @@
 
 -(id)		initWithCard: (WILDCard*)inCard ofCardView: (WILDCardView*)owningView;
 
+-(IBAction)	doMarkedSwitchChanged: (id)sender;
+
 @end

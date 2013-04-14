@@ -23,6 +23,7 @@
 	NSTextField		*	mBackgroundCountField;
 	NSTextField		*	mCardCountField;
 	NSButton		*	mEditScriptButton;
+	NSButton		*	mApplySizeButton;
 	NSTextField		*	mWidthField;
 	NSTextField		*	mHeightField;
 	
@@ -33,6 +34,7 @@
 @property (retain) WILDStack				*	stack;
 
 @property (retain) IBOutlet	NSButton		*	editScriptButton;
+@property (retain) IBOutlet	NSButton		*	applySizeButton;
 @property (retain) IBOutlet	NSTextField		*	nameField;
 @property (retain) IBOutlet	NSTextField		*	IDField;
 @property (retain) IBOutlet	NSTextField		*	cardCountField;
@@ -47,5 +49,6 @@
 -(IBAction)	doEditScriptButton: (id)sender;
 
 -(IBAction)	sizePopUpSelectionChanged: (id)sender;
+-(IBAction)	doApplySizeButton: (id)sender;
 
 @end

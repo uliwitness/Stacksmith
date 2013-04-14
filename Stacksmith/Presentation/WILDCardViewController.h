@@ -82,4 +82,6 @@
 
 -(WILDGuidelineView*)	guidelineView;
 
+-(BOOL)	isPopoverShowing;
+
 @end

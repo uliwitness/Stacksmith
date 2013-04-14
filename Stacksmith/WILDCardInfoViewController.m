@@ -50,11 +50,9 @@
 }
 
 
-//-(IBAction)	doOKButton: (id)sender
-//{
-//	[(WILDCard*)mLayer setMarked: [mMarkedSwitch state] == NSOnState];
-//	
-//	[super doOKButton: sender];
-//}
+-(IBAction)	doMarkedSwitchChanged: (id)sender
+{
+	[(WILDCard*)mLayer setMarked: [mMarkedSwitch state] == NSOnState];
+}
 
 @end

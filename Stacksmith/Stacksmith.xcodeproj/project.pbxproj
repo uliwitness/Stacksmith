@@ -329,6 +329,7 @@
 		55FDD873171B263B0045A2B9 /* ToolbarBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FDD871171B26390045A2B9 /* ToolbarBg@2x.png */; };
 		55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FDD875171B27020045A2B9 /* UKTiledImageView.m */; };
 		55FDD878171B29DE0045A2B9 /* CURS_0.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55FDD877171B29DC0045A2B9 /* CURS_0.pdf */; };
+		55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FDD880171B456E0045A2B9 /* UKBorderlessWindow.m */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* WILDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* WILDDocument.m */; settings = {ATTRIBUTES = (); }; };
@@ -939,6 +940,8 @@
 		55FDD874171B27020045A2B9 /* UKTiledImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKTiledImageView.h; path = ../UliKit/UKTiledImageView.h; sourceTree = "<group>"; };
 		55FDD875171B27020045A2B9 /* UKTiledImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKTiledImageView.m; path = ../UliKit/UKTiledImageView.m; sourceTree = "<group>"; };
 		55FDD877171B29DC0045A2B9 /* CURS_0.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = CURS_0.pdf; path = Resources/CURS_0.pdf; sourceTree = "<group>"; };
+		55FDD87F171B456E0045A2B9 /* UKBorderlessWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKBorderlessWindow.h; path = ../UliKit/UKBorderlessWindow.h; sourceTree = "<group>"; };
+		55FDD880171B456E0045A2B9 /* UKBorderlessWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKBorderlessWindow.m; path = ../UliKit/UKBorderlessWindow.m; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Stacksmith-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Stacksmith-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Stacksmith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stacksmith.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1449,6 +1452,8 @@
 				55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */,
 				55FDD874171B27020045A2B9 /* UKTiledImageView.h */,
 				55FDD875171B27020045A2B9 /* UKTiledImageView.m */,
+				55FDD87F171B456E0045A2B9 /* UKBorderlessWindow.h */,
+				55FDD880171B456E0045A2B9 /* UKBorderlessWindow.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -2158,6 +2163,7 @@
 				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
 				55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */,
+				55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

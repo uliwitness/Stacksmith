@@ -44,4 +44,7 @@
 
 -(IBAction)	doEditScriptButton: (id)sender;
 
+-(IBAction)	doCantDeleteSwitchChanged: (id)sender;
+-(IBAction)	doDontSearchSwitchChanged: (id)sender;
+
 @end

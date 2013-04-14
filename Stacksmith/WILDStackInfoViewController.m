@@ -12,6 +12,7 @@
 #import "WILDStack.h"
 #import "UKHelperMacros.h"
 #import "NSWindow+ULIZoomEffect.h"
+#import "WILDNotifications.h"
 
 
 static NSSize		sPopUpMenuSizes[] =
@@ -38,6 +39,7 @@ static NSSize		sPopUpMenuSizes[] =
 @synthesize cardCountField = mCardCountField;
 @synthesize backgroundCountField = mBackgroundCountField;
 @synthesize editScriptButton = mEditScriptButton;
+@synthesize applySizeButton = mApplySizeButton;
 @synthesize widthField = mWidthField;
 @synthesize heightField = mHeightField;
 
@@ -110,11 +112,17 @@ static NSSize		sPopUpMenuSizes[] =
 	}
 	
 	if( !foundSomething )
+	{
 		[mSizePopUpButton selectItemAtIndex: [mSizePopUpButton numberOfItems] -1];
+		[mWidthField setEnabled: YES];
+		[mHeightField setEnabled: YES];
+		[mApplySizeButton setEnabled: YES];
+	}
 	else
 	{
 		[mWidthField setEnabled: NO];
 		[mHeightField setEnabled: NO];
+		[mApplySizeButton setEnabled: NO];
 	}
 	
 	[mWidthField setIntValue: cardSize.width];
@@ -173,21 +181,49 @@ static NSSize		sPopUpMenuSizes[] =
 		currentSize = [[mCardView window] contentRectForFrameRect: [[mCardView window] frame]].size;
 		[mWidthField setIntValue: currentSize.width];
 		[mHeightField setIntValue: currentSize.height];
+		[mStack setCardSize: currentSize];
 	}
 	else if( currentSize.width == -2 )
 	{
 		currentSize = [[[mCardView window] screen] frame].size;
 		[mWidthField setIntValue: currentSize.width];
 		[mHeightField setIntValue: currentSize.height];
+		[mStack setCardSize: currentSize];
 	}
 	else if( currentSize.width == 0 )
 	{
 		currentSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
+		[mStack setCardSize: currentSize];
 	}
 	else
 	{
 		[mWidthField setIntValue: currentSize.width];
 		[mHeightField setIntValue: currentSize.height];
+	}
+}
+
+
+-(IBAction)	doApplySizeButton: (id)sender
+{
+	NSSize	currentSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
+	[mStack setCardSize: currentSize];
+}
+
+
+-(void)	controlTextDidChange: (NSNotification *)notif
+{
+	if( [notif object] == mNameField )
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: mStack userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(name), WILDAffectedPropertyKey,
+										nil]];
+
+		[mStack setName: [mNameField stringValue]];
+			
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: mStack userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(name), WILDAffectedPropertyKey,
+										nil]];
+		[mStack updateChangeCount: NSChangeDone];
 	}
 }
 

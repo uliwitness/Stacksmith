@@ -11,7 +11,12 @@
 #import "WILDCardView.h"
 #import "WILDLayer.h"
 #import "UKHelperMacros.h"
-#import "NSWindow+ULIZoomEffect.h"
+#import "WILDNotifications.h"
+
+
+@interface WILDLayerInfoViewController () <NSTextFieldDelegate>
+
+@end
 
 
 @implementation WILDLayerInfoViewController
@@ -102,6 +107,54 @@
 	[se setGlobalStartRect: box];
 	[[mLayer.stack document] addWindowController: se];
 	[se showWindow: self];
+}
+
+
+-(IBAction)	doCantDeleteSwitchChanged: (id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification object: mLayer userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+									PROPERTY(cantDelete), WILDAffectedPropertyKey,
+									nil]];
+
+	[mLayer setCantDelete: [mDontSearchSwitch state] == NSOnState];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification object: mLayer userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+									PROPERTY(cantDelete), WILDAffectedPropertyKey,
+									nil]];
+	[mLayer updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doDontSearchSwitchChanged: (id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification object: mLayer userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+									PROPERTY(dontSearch), WILDAffectedPropertyKey,
+									nil]];
+
+	[mLayer setDontSearch: [mDontSearchSwitch state] == NSOnState];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification object: mLayer userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+									PROPERTY(dontSearch), WILDAffectedPropertyKey,
+									nil]];
+	[mLayer updateChangeCount: NSChangeDone];
+}
+
+
+-(void)	controlTextDidChange: (NSNotification *)notif
+{
+	if( [notif object] == mNameField )
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification object: mLayer userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(name), WILDAffectedPropertyKey,
+										nil]];
+
+		[mLayer setName: [mNameField stringValue]];
+			
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification object: mLayer userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(name), WILDAffectedPropertyKey,
+										nil]];
+		[mLayer updateChangeCount: NSChangeDone];
+	}
 }
 
 @end
