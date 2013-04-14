@@ -69,7 +69,7 @@ static WILDToolsPalette*	sSharedToolsPalette = nil;
 {
     [super windowDidLoad];
 	
-	[[self window] setLevel: NSFloatingWindowLevel];
+	[[self window] setLevel: NSNormalWindowLevel];
     
 	ULIPaintView	* cpv = [ULIPaintView currentPaintView];
 	if( cpv )
@@ -94,6 +94,11 @@ static WILDToolsPalette*	sSharedToolsPalette = nil;
 	}
 	
 	[[NSUserDefaults standardUserDefaults] setBool: YES forKey: WILDToolsPaletteVisibleKey];
+	CGFloat	toolsHeight = [self.window frame].size.height;
+	NSRect	toolsFrame = [[NSScreen.screens objectAtIndex: 0] visibleFrame];
+	toolsFrame.origin.y += toolsFrame.size.height -toolsHeight;
+	toolsFrame.size.height = toolsHeight;
+	[self.window setFrame: toolsFrame display: YES];
 	[[self window] orderFront: sender];
 }
 

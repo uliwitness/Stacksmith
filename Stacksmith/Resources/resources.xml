@@ -71,4 +71,14 @@
 			<top>0</top>
 		</hotspot>
 	</media>
+	<media>
+		<id>0</id>
+		<type>cursor</type>
+		<name>Arrow</name>
+		<file>CURS_0.pdf</file>
+		<hotspot>
+			<left>4</left>
+			<top>4</top>
+		</hotspot>
+	</media>
 </stackfile>
