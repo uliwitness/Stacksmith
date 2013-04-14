@@ -162,6 +162,7 @@
 	DESTROY_DEALLOC(mMarkedCards);
 	DESTROY_DEALLOC(mScript);
 	DESTROY_DEALLOC(mName);
+	DESTROY_DEALLOC(mUserProperties);
 	
 	if( mScriptObject )
 	{
@@ -497,6 +498,14 @@
 	[theString appendFormat: @"\t<cardSize>\n\t\t<width>%d</width>\n\t\t<height>%d</height>\n\t</cardSize>\n", (int)mCardSize.width, (int)mCardSize.height];
 	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
 	
+	[theString appendString: @"\t<userProperties>\n"];
+	for( NSString *userPropName in [[mUserProperties allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)] )
+	{
+		WILDAppendStringXML( theString, 2, userPropName, @"name" );
+		WILDAppendStringXML( theString, 2, mUserProperties[userPropName], @"value" );
+	}
+	[theString appendString: @"\t</userProperties>\n"];
+	
 	// Write out backgrounds and add entries for them:
 	for( WILDBackground * currBg in mBackgrounds )
 	{
@@ -582,7 +591,7 @@
 		return [self name];
 	}
 	else
-		return nil;
+		return [mUserProperties objectForKey: inPropertyName];
 }
 
 
@@ -596,7 +605,13 @@
 	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
 		[self setName: inValue];
 	else
-		propExists = NO;
+	{
+		id		theValue = [mUserProperties objectForKey: inPropertyName];
+		if( theValue )
+			[mUserProperties setObject: inValue forKey: inPropertyName];
+		else
+			propExists = NO;
+	}
 
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
@@ -612,6 +627,22 @@
 {
 	return &kLeoValueTypeString;
 }
+
+
+-(void)	addUserPropertyNamed: (NSString*)userPropName
+{
+	if( !mUserProperties )
+		mUserProperties = [[NSMutableDictionary alloc] init];
+	if( ![mUserProperties objectForKey: userPropName] )
+		[mUserProperties setObject: @"" forKey: userPropName];
+}
+
+
+-(void)	deleteUserPropertyNamed: (NSString*)userPropName
+{
+	[mUserProperties removeObjectForKey: userPropName];
+}
+
 
 -(WILDCard*)	currentCard
 {

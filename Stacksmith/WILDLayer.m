@@ -71,6 +71,32 @@
 		mPictureName = [WILDStringFromSubElementInElement( @"bitmap", elem ) retain];
 		
 		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
+
+		NSError *	err = nil;
+		NSArray	*	userPropsNodes = [elem nodesForXPath: @"userProperties" error: &err];
+		if( userPropsNodes.count > 0 )
+		{
+			NSString		*	lastKey = nil;
+			NSString		*	lastValue = nil;
+			NSXMLElement	*	userPropsNode = [userPropsNodes objectAtIndex: 0];
+			for( NSXMLElement* currChild in userPropsNode.children )
+			{
+				if( [currChild.name isEqualToString: @"name"] )
+					lastKey = currChild.stringValue;
+				if( !lastValue && [currChild.name isEqualToString: @"value"] )
+					lastValue = currChild.stringValue;
+				if( lastKey && lastValue )
+				{
+					if( !mUserProperties )
+						mUserProperties = [[NSMutableDictionary alloc] init];
+					[mUserProperties setObject: lastValue forKey: lastKey];
+					lastValue = lastKey = nil;
+				}
+				if( lastValue && !lastKey )
+					lastValue = nil;
+			}
+		}
+
 		mButtonFamilies = [[ULIMultiMap alloc] init];
 		
 		NSArray*		parts = [elem elementsForName: @"part"];
@@ -120,6 +146,7 @@
 	DESTROY_DEALLOC(mPictureName);
 	DESTROY_DEALLOC(mParts);
 	DESTROY_DEALLOC(mAddColorParts);
+	DESTROY_DEALLOC(mUserProperties);
 	
 	if( mScriptObject )
 	{
@@ -563,6 +590,14 @@
 		[theString appendFormat: @"\t<bitmap>%@</bitmap>\n", mPictureName];
 	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
 	
+	[theString appendString: @"\t<userProperties>\n"];
+	for( NSString *userPropName in [[mUserProperties allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)] )
+	{
+		WILDAppendStringXML( theString, 2, userPropName, @"name" );
+		WILDAppendStringXML( theString, 2, mUserProperties[userPropName], @"value" );
+	}
+	[theString appendString: @"\t</userProperties>\n"];
+	
 	for( WILDPart* currPart in mParts )
 	{
 		[theString appendString: [currPart xmlString]];
@@ -777,7 +812,7 @@
 		return [self name];
 	}
 	else
-		return nil;
+		return [mUserProperties objectForKey: inPropertyName];
 }
 
 
@@ -791,7 +826,13 @@
 	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
 		[self setName: inValue];
 	else
-		propExists = NO;
+	{
+		id		theValue = [mUserProperties objectForKey: inPropertyName];
+		if( theValue )
+			[mUserProperties setObject: inValue forKey: inPropertyName];
+		else
+			propExists = NO;
+	}
 
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
@@ -806,6 +847,21 @@
 -(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName;
 {
 	return &kLeoValueTypeString;
+}
+
+
+-(void)	addUserPropertyNamed: (NSString*)userPropName
+{
+	if( !mUserProperties )
+		mUserProperties = [[NSMutableDictionary alloc] init];
+	if( ![mUserProperties objectForKey: userPropName] )
+		[mUserProperties setObject: @"" forKey: userPropName];
+}
+
+
+-(void)	deleteUserPropertyNamed: (NSString*)userPropName
+{
+	[mUserProperties removeObjectForKey: userPropName];
 }
 
 

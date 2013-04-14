@@ -37,6 +37,7 @@
 	NSMutableDictionary*		mContents;			// Dictionary of part ID -> contents mappings
 	ULIMultiMap*				mButtonFamilies;	// Family ID as key, and arrays of button parts belonging to these families.
 	WILDStack*					mStack;
+	NSMutableDictionary		*	mUserProperties;
 	
 	WILDObjectID				mPartIDSeed;
 	

@@ -174,6 +174,7 @@
 	DESTROY_DEALLOC(mShadowColor);
 	DESTROY_DEALLOC(mMediaPath);
 	DESTROY_DEALLOC(mFont);
+	DESTROY_DEALLOC(mUserProperties);
 	
 	mStack = UKInvalidPointer;
 	
@@ -1061,7 +1062,6 @@
 		WILDAppendStringXML( outString, 2, mMediaPath, @"mediaPath" );
 
 	WILDAppendStringXML( outString, 2, mScript, @"script" );
-	
 	
 	[outString appendString: @"\t\t<userProperties>\n"];
 	for( NSString *userPropName in [[mUserProperties allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)] )
