@@ -86,6 +86,31 @@
 			mCardSize = NSMakeSize(512,342);
 		
 		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
+
+		NSError *	err = nil;
+		NSArray	*	userPropsNodes = [elem nodesForXPath: @"userProperties" error: &err];
+		if( userPropsNodes.count > 0 )
+		{
+			NSString		*	lastKey = nil;
+			NSString		*	lastValue = nil;
+			NSXMLElement	*	userPropsNode = [userPropsNodes objectAtIndex: 0];
+			for( NSXMLElement* currChild in userPropsNode.children )
+			{
+				if( [currChild.name isEqualToString: @"name"] )
+					lastKey = currChild.stringValue;
+				if( !lastValue && [currChild.name isEqualToString: @"value"] )
+					lastValue = currChild.stringValue;
+				if( lastKey && lastValue )
+				{
+					if( !mUserProperties )
+						mUserProperties = [[NSMutableDictionary alloc] init];
+					[mUserProperties setObject: lastValue forKey: lastKey];
+					lastValue = lastKey = nil;
+				}
+				if( lastValue && !lastKey )
+					lastValue = nil;
+			}
+		}
 		
 		mDocument = theDocument;
 		
@@ -634,13 +659,20 @@
 	if( !mUserProperties )
 		mUserProperties = [[NSMutableDictionary alloc] init];
 	if( ![mUserProperties objectForKey: userPropName] )
+	{
 		[mUserProperties setObject: @"" forKey: userPropName];
+		[self updateChangeCount: NSChangeDone];
+	}
 }
 
 
 -(void)	deleteUserPropertyNamed: (NSString*)userPropName
 {
-	[mUserProperties removeObjectForKey: userPropName];
+	if( mUserProperties[userPropName] )
+	{
+		[mUserProperties removeObjectForKey: userPropName];
+		[self updateChangeCount: NSChangeDone];
+	}
 }
 
 
