@@ -24,6 +24,7 @@ void	WILDAskInstruction( LEOContext* inContext );
 void	WILDCreateInstruction( LEOContext* inContext );
 void	WILDDeleteInstruction( LEOContext* inContext );
 void	WILDDebugCheckpointInstruction( LEOContext* inContext );
+void	WILDCreateUserPropertyInstruction( LEOContext* inContext );
 void	WILDPrintInstruction( LEOContext* inContext );
 
 
@@ -178,6 +179,8 @@ void	WILDAskInstruction( LEOContext* inContext )
 
 void	WILDCreateInstruction( LEOContext* inContext )
 {
+	//LEODebugPrintContext( inContext );
+	
 	char typeNameBuf[1024] = { 0 };
 	const char*	typeNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, typeNameBuf, sizeof(typeNameBuf), inContext );
 	char nameBuf[1024] = { 0 };
@@ -210,6 +213,25 @@ void	WILDDebugCheckpointInstruction( LEOContext* inContext )
 	LEORemoteDebuggerAddBreakpoint( instr );			// Ensure debugger knows to stop here.
 	LEORemoteDebuggerPreInstructionProc( inContext );	// Trigger debugger.
 	LEORemoteDebuggerRemoveBreakpoint( instr );			// Clean up after debugger.
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDCreateUserPropertyInstruction( LEOContext* inContext )
+{
+	//LEODebugPrintContext( inContext );
+
+	char propNameBuf[1024] = { 0 };
+	const char*	propNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, propNameBuf, sizeof(propNameBuf), inContext );
+	LEOValuePtr objValue = inContext->stackEndPtr -1;
+	if( objValue->base.isa == &kLeoValueTypeWILDObject )
+	{
+		id<WILDObject>	theObject = (id<WILDObject>) objValue->object.object;
+		if( [theObject respondsToSelector: @selector(addUserPropertyNamed:)] )
+			[theObject addUserPropertyNamed: [[NSString stringWithUTF8String: propNameStr] lowercaseString]];
+	}
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 	
 	inContext->currentInstruction++;
 }
@@ -295,6 +317,7 @@ LEOINSTR(WILDAskInstruction)
 LEOINSTR(WILDCreateInstruction)
 LEOINSTR(WILDDeleteInstruction)
 LEOINSTR(WILDDebugCheckpointInstruction)
+LEOINSTR(WILDCreateUserPropertyInstruction)
 LEOINSTR_LAST(WILDPrintInstruction)
 
 
@@ -357,17 +380,31 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		ECreateIdentifier, WILD_CREATE_INSTR, 0, 0, '\0',
+		ECreateIdentifier, WILD_CREATE_USER_PROPERTY_INSTR, 0, 0, 'X',
 		{
-			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, EPropertyIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'P' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'P', 'p' },
+			{ EHostParamLabeledContainer, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'p', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		ECreateIdentifier, WILD_CREATE_INSTR, 0, 0, 'X',
+		{
+			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'O' },
+			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'O', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},
 	{

@@ -73,6 +73,7 @@
 	NSInteger			mBevel;
 	WILDLayer*			mOwner;					// Layer that this part belongs to.
 	WILDStack*			mStack;					// Stack this part belongs to.
+	NSMutableDictionary*mUserProperties;
 	
 	LEOObjectID				mIDForScripts;			// The ID Leonie uses to refer to this object.
 	LEOObjectSeed			mSeedForScripts;		// The seed value to go with mIDForScripts.

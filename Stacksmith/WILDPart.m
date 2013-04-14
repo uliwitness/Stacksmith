@@ -127,7 +127,32 @@
 		mLineWidth = WILDIntegerFromSubElementInElement( @"lineWidth", elem );
 		if( mLineWidth < 0 )
 			mLineWidth = 0;
-
+		
+		NSError *	err = nil;
+		NSArray	*	userPropsNodes = [elem nodesForXPath: @"userProperties" error: &err];
+		if( userPropsNodes.count > 0 )
+		{
+			NSString		*	lastKey = nil;
+			NSString		*	lastValue = nil;
+			NSXMLElement	*	userPropsNode = [userPropsNodes objectAtIndex: 0];
+			for( NSXMLElement* currChild in userPropsNode.children )
+			{
+				if( [currChild.name isEqualToString: @"name"] )
+					lastKey = currChild.stringValue;
+				if( !lastValue && [currChild.name isEqualToString: @"value"] )
+					lastValue = currChild.stringValue;
+				if( lastKey && lastValue )
+				{
+					if( !mUserProperties )
+						mUserProperties = [[NSMutableDictionary alloc] init];
+					[mUserProperties setObject: lastValue forKey: lastKey];
+					lastValue = lastKey = nil;
+				}
+				if( lastValue && !lastKey )
+					lastValue = nil;
+			}
+		}
+		
 		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
@@ -1036,7 +1061,16 @@
 		WILDAppendStringXML( outString, 2, mMediaPath, @"mediaPath" );
 
 	WILDAppendStringXML( outString, 2, mScript, @"script" );
-		
+	
+	
+	[outString appendString: @"\t\t<userProperties>\n"];
+	for( NSString *userPropName in [[mUserProperties allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)] )
+	{
+		WILDAppendStringXML( outString, 3, userPropName, @"name" );
+		WILDAppendStringXML( outString, 3, mUserProperties[userPropName], @"value" );
+	}
+	[outString appendString: @"\t\t</userProperties>\n"];
+	
 	[outString appendString: @"\t</part>\n"];
 	
 	return outString;
@@ -1245,7 +1279,7 @@
 		}
 	}
 	else
-		return nil;
+		return [mUserProperties objectForKey: inPropertyName];
 }
 
 
@@ -1415,7 +1449,13 @@
 		[self updateChangeCount: NSChangeDone];
 	}
 	else
-		propExists = NO;
+	{
+		id		theValue = [mUserProperties objectForKey: inPropertyName];
+		if( theValue )
+			[mUserProperties setObject: inValue forKey: inPropertyName];
+		else
+			propExists = NO;
+	}
 
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
 							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
@@ -1511,6 +1551,21 @@
 	[mOwner deletePart: self];
 	
 	return YES;
+}
+
+
+-(void)	addUserPropertyNamed: (NSString*)userPropName
+{
+	if( !mUserProperties )
+		mUserProperties = [[NSMutableDictionary alloc] init];
+	if( ![mUserProperties objectForKey: userPropName] )
+		[mUserProperties setObject: @"" forKey: userPropName];
+}
+
+
+-(void)	deleteUserPropertyNamed: (NSString*)userPropName
+{
+	[mUserProperties removeObjectForKey: userPropName];
 }
 
 

@@ -35,6 +35,9 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 @optional
 -(BOOL)				deleteWILDObject;
 
+-(void)				addUserPropertyNamed: (NSString*)userPropName;
+-(void)				deleteUserPropertyNamed: (NSString*)userPropName;
+
 @end
 
 
