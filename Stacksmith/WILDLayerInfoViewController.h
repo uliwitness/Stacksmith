@@ -1,5 +1,5 @@
 //
-//  WILDLayerInfoWindowController.h
+//  WILDLayerInfoViewController
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.03.11.
@@ -13,7 +13,7 @@
 @class WILDLayer;
 
 
-@interface WILDLayerInfoWindowController : NSWindowController
+@interface WILDLayerInfoViewController : NSViewController
 {
     WILDCardView	*	mCardView;
 	WILDLayer		*	mLayer;
@@ -42,8 +42,6 @@
 
 -(id)		initWithLayer: (WILDLayer*)inCard ofCardView: (WILDCardView*)owningView;
 
--(IBAction)	doOKButton: (id)sender;
--(IBAction)	doCancelButton: (id)sender;
 -(IBAction)	doEditScriptButton: (id)sender;
 
 @end

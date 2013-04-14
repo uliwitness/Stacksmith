@@ -233,8 +233,8 @@
 		559700FC137C9B6B000264B8 /* WILDBarnDoorCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F7137C9B6B000264B8 /* WILDBarnDoorCloseFilter.m */; };
 		559700FD137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */; };
 		559700FE137C9B6B000264B8 /* WILDIrisCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */; };
-		55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */; };
-		55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */; };
+		55993B6813476DE3001624A2 /* WILDStackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */; };
+		55993B6B13476E1D001624A2 /* WILDStackInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */; };
 		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A3FB2C16E749D400735729 /* WILDShapeButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
@@ -267,8 +267,8 @@
 		55C2B5CA115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */; };
 		55C2B647115E5780008B094D /* WILDSearchContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* WILDSearchContext.m */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
-		55C88B011332CDA300ACB615 /* WILDCardInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */; };
-		55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */; };
+		55C88B011332CDA300ACB615 /* WILDCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C88B001332CDA300ACB615 /* WILDCardInfoViewController.m */; };
+		55C88B041332D05B00ACB615 /* WILDCardInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */; };
 		55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */; };
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
@@ -302,9 +302,9 @@
 		55E9FD9513E605270089B81F /* WILDButtonInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */; };
 		55E9FD9913E747B20089B81F /* WILDIconPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */; };
 		55E9FD9A13E747B20089B81F /* WILDIconPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */; };
-		55EA63801347532C0039FE0D /* WILDLayerInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA637F1347532C0039FE0D /* WILDLayerInfoWindowController.m */; };
-		55EA6383134756D00039FE0D /* WILDBackgroundInfoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA6382134756CF0039FE0D /* WILDBackgroundInfoWindowController.m */; };
-		55EA6386134758B40039FE0D /* WILDBackgroundInfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EA6384134758B40039FE0D /* WILDBackgroundInfoWindowController.xib */; };
+		55EA63801347532C0039FE0D /* WILDLayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA637F1347532C0039FE0D /* WILDLayerInfoViewController.m */; };
+		55EA6383134756D00039FE0D /* WILDBackgroundInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA6382134756CF0039FE0D /* WILDBackgroundInfoViewController.m */; };
+		55EA6386134758B40039FE0D /* WILDBackgroundInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */; };
 		55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC406114C273400BAA09D /* SyntaxDefinition.plist */; };
 		55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */; };
 		55EBC42B114C2CCE00BAA09D /* WILDScriptContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EBC42A114C2CCE00BAA09D /* WILDScriptContainer.m */; };
@@ -788,9 +788,9 @@
 		559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDBarnDoorOpenFilter.m; path = "Custom Effects/WILDBarnDoorOpenFilter.m"; sourceTree = "<group>"; };
 		559700FA137C9B6B000264B8 /* WILDIrisCloseFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIrisCloseFilter.h; path = "Custom Effects/WILDIrisCloseFilter.h"; sourceTree = "<group>"; };
 		559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisCloseFilter.m; path = "Custom Effects/WILDIrisCloseFilter.m"; sourceTree = "<group>"; };
-		55993B6713476DE3001624A2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDStackInfoWindowController.xib; sourceTree = "<group>"; };
-		55993B6913476E1D001624A2 /* WILDStackInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStackInfoWindowController.h; sourceTree = "<group>"; };
-		55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoWindowController.m; sourceTree = "<group>"; };
+		55993B6713476DE3001624A2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDStackInfoViewController.xib; sourceTree = "<group>"; };
+		55993B6913476E1D001624A2 /* WILDStackInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStackInfoViewController.h; sourceTree = "<group>"; };
+		55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoViewController.m; sourceTree = "<group>"; };
 		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A3FB2A16E749D400735729 /* WILDShapeButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDShapeButtonPresenter.h; path = Presentation/WILDShapeButtonPresenter.h; sourceTree = "<group>"; };
 		55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDShapeButtonPresenter.m; path = Presentation/WILDShapeButtonPresenter.m; sourceTree = "<group>"; };
@@ -845,9 +845,9 @@
 		55C2B69B115EA2CD008B094D /* NSView+SizeWindowForViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSView+SizeWindowForViewSize.h"; path = "../UliKit/NSView+SizeWindowForViewSize.h"; sourceTree = SOURCE_ROOT; };
 		55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSView+SizeWindowForViewSize.m"; path = "../UliKit/NSView+SizeWindowForViewSize.m"; sourceTree = SOURCE_ROOT; };
 		55C68C9D116413E300D8B44C /* svn_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svn_version.h; sourceTree = "<group>"; };
-		55C88AFF1332CDA300ACB615 /* WILDCardInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardInfoWindowController.h; sourceTree = "<group>"; };
-		55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardInfoWindowController.m; sourceTree = "<group>"; };
-		55C88B031332D05B00ACB615 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDCardInfoWindowController.xib; sourceTree = "<group>"; };
+		55C88AFF1332CDA300ACB615 /* WILDCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardInfoViewController.h; sourceTree = "<group>"; };
+		55C88B001332CDA300ACB615 /* WILDCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardInfoViewController.m; sourceTree = "<group>"; };
+		55C88B031332D05B00ACB615 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDCardInfoViewController.xib; sourceTree = "<group>"; };
 		55C8D04D13EF0DD700B502C5 /* UKWindowBodyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKWindowBodyView.h; path = ../UliKit/UKWindowBodyView.h; sourceTree = "<group>"; };
 		55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKWindowBodyView.m; path = ../UliKit/UKWindowBodyView.m; sourceTree = "<group>"; };
 		55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = ../Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
@@ -907,11 +907,11 @@
 		55E9FD9613E747B00089B81F /* WILDIconPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIconPickerViewController.h; path = Editor/WILDIconPickerViewController.h; sourceTree = "<group>"; };
 		55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIconPickerViewController.m; path = Editor/WILDIconPickerViewController.m; sourceTree = "<group>"; };
 		55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDIconPickerViewController.xib; path = English.lproj/WILDIconPickerViewController.xib; sourceTree = "<group>"; };
-		55EA637E1347532C0039FE0D /* WILDLayerInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDLayerInfoWindowController.h; sourceTree = "<group>"; };
-		55EA637F1347532C0039FE0D /* WILDLayerInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDLayerInfoWindowController.m; sourceTree = "<group>"; };
-		55EA6381134756C20039FE0D /* WILDBackgroundInfoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundInfoWindowController.h; sourceTree = "<group>"; };
-		55EA6382134756CF0039FE0D /* WILDBackgroundInfoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundInfoWindowController.m; sourceTree = "<group>"; };
-		55EA6385134758B40039FE0D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDBackgroundInfoWindowController.xib; sourceTree = "<group>"; };
+		55EA637E1347532C0039FE0D /* WILDLayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDLayerInfoViewController.h; sourceTree = "<group>"; };
+		55EA637F1347532C0039FE0D /* WILDLayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDLayerInfoViewController.m; sourceTree = "<group>"; };
+		55EA6381134756C20039FE0D /* WILDBackgroundInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundInfoViewController.h; sourceTree = "<group>"; };
+		55EA6382134756CF0039FE0D /* WILDBackgroundInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundInfoViewController.m; sourceTree = "<group>"; };
+		55EA6385134758B40039FE0D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDBackgroundInfoViewController.xib; sourceTree = "<group>"; };
 		55EBC406114C273400BAA09D /* SyntaxDefinition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinition.plist; sourceTree = "<group>"; };
 		55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxColorDefaults.plist; path = ../UKSyntaxColoredTextDocument/SyntaxColorDefaults.plist; sourceTree = SOURCE_ROOT; };
 		55EBC429114C2CCE00BAA09D /* WILDScriptContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScriptContainer.h; sourceTree = "<group>"; };
@@ -1062,9 +1062,9 @@
 				55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */,
 				5585034413E886AC00FD244C /* WILDFieldInfoViewController.xib */,
 				5585034613E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib */,
-				55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */,
-				55EA6384134758B40039FE0D /* WILDBackgroundInfoWindowController.xib */,
-				55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */,
+				55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */,
+				55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */,
+				55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */,
 				5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
 				553C471813577A2E000219FA /* WILDMessageBox.xib */,
@@ -1172,14 +1172,14 @@
 				55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */,
 				55B924481169DB150073EC6C /* WILDIconListDataSource.h */,
 				55B924491169DB150073EC6C /* WILDIconListDataSource.m */,
-				55EA637E1347532C0039FE0D /* WILDLayerInfoWindowController.h */,
-				55EA637F1347532C0039FE0D /* WILDLayerInfoWindowController.m */,
-				55C88AFF1332CDA300ACB615 /* WILDCardInfoWindowController.h */,
-				55C88B001332CDA300ACB615 /* WILDCardInfoWindowController.m */,
-				55EA6381134756C20039FE0D /* WILDBackgroundInfoWindowController.h */,
-				55EA6382134756CF0039FE0D /* WILDBackgroundInfoWindowController.m */,
-				55993B6913476E1D001624A2 /* WILDStackInfoWindowController.h */,
-				55993B6A13476E1D001624A2 /* WILDStackInfoWindowController.m */,
+				55EA637E1347532C0039FE0D /* WILDLayerInfoViewController.h */,
+				55EA637F1347532C0039FE0D /* WILDLayerInfoViewController.m */,
+				55C88AFF1332CDA300ACB615 /* WILDCardInfoViewController.h */,
+				55C88B001332CDA300ACB615 /* WILDCardInfoViewController.m */,
+				55EA6381134756C20039FE0D /* WILDBackgroundInfoViewController.h */,
+				55EA6382134756CF0039FE0D /* WILDBackgroundInfoViewController.m */,
+				55993B6913476E1D001624A2 /* WILDStackInfoViewController.h */,
+				55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */,
 				5523653C1344C9ED000145A0 /* WILDRecentCardPickerWindowController.h */,
 				5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */,
 				553C471513577989000219FA /* WILDMessageBox.h */,
@@ -1883,10 +1883,10 @@
 				555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */,
 				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
 				55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */,
-				55C88B041332D05B00ACB615 /* WILDCardInfoWindowController.xib in Resources */,
+				55C88B041332D05B00ACB615 /* WILDCardInfoViewController.xib in Resources */,
 				552365401344CA1D000145A0 /* WILDRecentCardPickerWindowController.xib in Resources */,
-				55EA6386134758B40039FE0D /* WILDBackgroundInfoWindowController.xib in Resources */,
-				55993B6813476DE3001624A2 /* WILDStackInfoWindowController.xib in Resources */,
+				55EA6386134758B40039FE0D /* WILDBackgroundInfoViewController.xib in Resources */,
+				55993B6813476DE3001624A2 /* WILDStackInfoViewController.xib in Resources */,
 				553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */,
 				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
 				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
@@ -2035,13 +2035,13 @@
 				55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */,
 				55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */,
 				55818A8F1332108300480D30 /* WILDBackground.m in Sources */,
-				55C88B011332CDA300ACB615 /* WILDCardInfoWindowController.m in Sources */,
+				55C88B011332CDA300ACB615 /* WILDCardInfoViewController.m in Sources */,
 				552365381344B0BA000145A0 /* WILDRecentCardsList.m in Sources */,
 				5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */,
 				5523653E1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m in Sources */,
-				55EA63801347532C0039FE0D /* WILDLayerInfoWindowController.m in Sources */,
-				55EA6383134756D00039FE0D /* WILDBackgroundInfoWindowController.m in Sources */,
-				55993B6B13476E1D001624A2 /* WILDStackInfoWindowController.m in Sources */,
+				55EA63801347532C0039FE0D /* WILDLayerInfoViewController.m in Sources */,
+				55EA6383134756D00039FE0D /* WILDBackgroundInfoViewController.m in Sources */,
+				55993B6B13476E1D001624A2 /* WILDStackInfoViewController.m in Sources */,
 				55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */,
 				553C46EE13577334000219FA /* Forge.cpp in Sources */,
 				553C46EF13577334000219FA /* CCodeBlock.cpp in Sources */,
@@ -2278,12 +2278,12 @@
 			name = WILDToolsPalette.xib;
 			sourceTree = "<group>";
 		};
-		55993B6613476DE3001624A2 /* WILDStackInfoWindowController.xib */ = {
+		55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				55993B6713476DE3001624A2 /* English */,
 			);
-			name = WILDStackInfoWindowController.xib;
+			name = WILDStackInfoViewController.xib;
 			sourceTree = "<group>";
 		};
 		55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */ = {
@@ -2294,12 +2294,12 @@
 			name = StacksmithSplashScreen.jpg;
 			sourceTree = "<group>";
 		};
-		55C88B021332D05B00ACB615 /* WILDCardInfoWindowController.xib */ = {
+		55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				55C88B031332D05B00ACB615 /* English */,
 			);
-			name = WILDCardInfoWindowController.xib;
+			name = WILDCardInfoViewController.xib;
 			sourceTree = "<group>";
 		};
 		55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */ = {
@@ -2334,12 +2334,12 @@
 			name = WILDButtonInfoViewController.xib;
 			sourceTree = "<group>";
 		};
-		55EA6384134758B40039FE0D /* WILDBackgroundInfoWindowController.xib */ = {
+		55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				55EA6385134758B40039FE0D /* English */,
 			);
-			name = WILDBackgroundInfoWindowController.xib;
+			name = WILDBackgroundInfoViewController.xib;
 			sourceTree = "<group>";
 		};
 		55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */ = {

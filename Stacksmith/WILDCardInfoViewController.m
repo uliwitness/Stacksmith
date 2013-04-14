@@ -1,19 +1,19 @@
 //
-//  WILDCardInfoWindowController.m
+//  WILDCardInfoViewController.h.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.03.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#import "WILDCardInfoWindowController.h"
+#import "WILDCardInfoViewController.h"
 #import "WILDScriptEditorWindowController.h"
 #import "WILDCardView.h"
 #import "UKHelperMacros.h"
 #import "WILDCard.h"
 
 
-@implementation WILDCardInfoWindowController
+@implementation WILDCardInfoViewController
 
 @synthesize markedSwitch = mMarkedSwitch;
 
@@ -34,9 +34,9 @@
 }
 
 
--(void)	windowDidLoad
+-(void)	awakeFromNib
 {
-	[super windowDidLoad];
+	[super awakeFromNib];
 	
 	[mIDField setIntegerValue: [(WILDCard*)mLayer cardID]];
 
@@ -50,11 +50,11 @@
 }
 
 
--(IBAction)	doOKButton: (id)sender
-{
-	[(WILDCard*)mLayer setMarked: [mMarkedSwitch state] == NSOnState];
-	
-	[super doOKButton: sender];
-}
+//-(IBAction)	doOKButton: (id)sender
+//{
+//	[(WILDCard*)mLayer setMarked: [mMarkedSwitch state] == NSOnState];
+//	
+//	[super doOKButton: sender];
+//}
 
 @end

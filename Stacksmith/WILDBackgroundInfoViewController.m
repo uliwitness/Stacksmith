@@ -1,18 +1,18 @@
 //
-//  WILDBackgroundInfoWindowController.m
+//  WILDBackgroundInfoViewController.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.03.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#import "WILDBackgroundInfoWindowController.h"
+#import "WILDBackgroundInfoViewController.h"
 #import "WILDScriptEditorWindowController.h"
 #import "WILDCardView.h"
 #import "WILDBackground.h"
 
 
-@implementation WILDBackgroundInfoWindowController
+@implementation WILDBackgroundInfoViewController
 
 -(id)	initWithBackground: (WILDBackground*)inBackground ofCardView: (WILDCardView*)owningView
 {
@@ -31,9 +31,9 @@
 }
 
 
--(void)	windowDidLoad
+-(void)	awakeFromNib
 {
-	[super windowDidLoad];
+	[super awakeFromNib];
 	
 	[mIDField setIntegerValue: [mLayer backgroundID]];
 	

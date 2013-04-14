@@ -1,5 +1,5 @@
 //
-//  WILDStackInfoWindowController.h
+//  WILDStackInfoViewController.h
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.03.11.
@@ -13,7 +13,7 @@
 @class WILDStack;
 
 
-@interface WILDStackInfoWindowController : NSWindowController
+@interface WILDStackInfoViewController : NSViewController
 {
     WILDCardView	*	mCardView;
 	WILDStack		*	mStack;
@@ -44,8 +44,6 @@
 
 -(id)		initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView;
 
--(IBAction)	doOKButton: (id)sender;
--(IBAction)	doCancelButton: (id)sender;
 -(IBAction)	doEditScriptButton: (id)sender;
 
 -(IBAction)	sizePopUpSelectionChanged: (id)sender;

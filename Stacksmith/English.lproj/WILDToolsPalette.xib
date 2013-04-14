@@ -40,7 +40,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSWindowTemplate" id="39070965">
-				<int key="NSWindowStyleMask">146</int>
+				<int key="NSWindowStyleMask">2</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{0, 639}, {456, 65}}</string>
 				<int key="NSWTFlags">-1002961920</int>
@@ -138,7 +138,7 @@
 								<string key="NSContents">Pointer</string>
 								<reference key="NSSupport" ref="38760095"/>
 								<reference key="NSControlView" ref="457714533"/>
-								<int key="NSButtonFlags">-2039201792</int>
+								<int key="NSButtonFlags">141836288</int>
 								<int key="NSButtonFlags2">70</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -163,10 +163,10 @@
 							<object class="NSButtonCell" key="NSCell" id="316922051">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">Pointer</string>
+								<string key="NSContents"/>
 								<reference key="NSSupport" ref="38760095"/>
 								<reference key="NSControlView" ref="301624421"/>
-								<int key="NSButtonFlags">-2039201792</int>
+								<int key="NSButtonFlags">142360576</int>
 								<int key="NSButtonFlags2">70</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -182,10 +182,10 @@
 						<object class="NSButton" id="929749762">
 							<reference key="NSNextResponder" ref="668203730"/>
 							<int key="NSvFlags">265</int>
-							<string key="NSFrame">{{352, 9}, {48, 48}}</string>
+							<string key="NSFrame">{{298, 9}, {48, 48}}</string>
 							<reference key="NSSuperview" ref="668203730"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="301624421"/>
+							<reference key="NSNextKeyView" ref="258222572"/>
 							<int key="NSTag">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="314624917">
@@ -194,7 +194,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="38760095"/>
 								<reference key="NSControlView" ref="929749762"/>
-								<int key="NSButtonFlags">-2039201792</int>
+								<int key="NSButtonFlags">141836288</int>
 								<int key="NSButtonFlags2">70</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -209,7 +209,7 @@
 						</object>
 						<object class="NSButton" id="73182481">
 							<reference key="NSNextResponder" ref="668203730"/>
-							<int key="NSvFlags">269</int>
+							<int key="NSvFlags">265</int>
 							<string key="NSFrame">{{204, 9}, {48, 48}}</string>
 							<reference key="NSSuperview" ref="668203730"/>
 							<reference key="NSWindow"/>
@@ -222,7 +222,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="38760095"/>
 								<reference key="NSControlView" ref="73182481"/>
-								<int key="NSButtonFlags">-2039201792</int>
+								<int key="NSButtonFlags">141836288</int>
 								<int key="NSButtonFlags2">70</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -237,11 +237,11 @@
 						</object>
 						<object class="NSButton" id="1004853576">
 							<reference key="NSNextResponder" ref="668203730"/>
-							<int key="NSvFlags">269</int>
+							<int key="NSvFlags">265</int>
 							<string key="NSFrame">{{251, 9}, {48, 48}}</string>
 							<reference key="NSSuperview" ref="668203730"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="258222572"/>
+							<reference key="NSNextKeyView" ref="929749762"/>
 							<int key="NSTag">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="252726209">
@@ -250,7 +250,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="38760095"/>
 								<reference key="NSControlView" ref="1004853576"/>
-								<int key="NSButtonFlags">-2039201792</int>
+								<int key="NSButtonFlags">141836288</int>
 								<int key="NSButtonFlags2">70</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -266,19 +266,19 @@
 						<object class="NSButton" id="258222572">
 							<reference key="NSNextResponder" ref="668203730"/>
 							<int key="NSvFlags">265</int>
-							<string key="NSFrame">{{305, 9}, {48, 48}}</string>
+							<string key="NSFrame">{{352, 9}, {48, 48}}</string>
 							<reference key="NSSuperview" ref="668203730"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="929749762"/>
+							<reference key="NSNextKeyView" ref="301624421"/>
 							<int key="NSTag">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="111065358">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">Pointer</string>
+								<string key="NSContents"/>
 								<reference key="NSSupport" ref="38760095"/>
 								<reference key="NSControlView" ref="258222572"/>
-								<int key="NSButtonFlags">-2039201792</int>
+								<int key="NSButtonFlags">142360576</int>
 								<int key="NSButtonFlags2">70</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -416,11 +416,11 @@
 							<reference ref="384711678"/>
 							<reference ref="457714533"/>
 							<reference ref="301624421"/>
-							<reference ref="929749762"/>
-							<reference ref="258222572"/>
 							<reference ref="73182481"/>
 							<reference ref="320511346"/>
 							<reference ref="1004853576"/>
+							<reference ref="929749762"/>
+							<reference ref="258222572"/>
 						</object>
 						<reference key="parent" ref="39070965"/>
 					</object>
@@ -548,6 +548,7 @@
 					<string>18.CustomClassName</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
+					<string>20.CustomClassName</string>
 					<string>20.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
 					<string>68.IBNSWindowAutoPositionCentersHorizontal</string>
@@ -556,17 +557,22 @@
 					<string>68.IBWindowTemplateEditedContentRect</string>
 					<string>68.NSWindowTemplate.visibleAtLaunch</string>
 					<string>69.IBPluginDependency</string>
+					<string>71.CustomClassName</string>
 					<string>71.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
+					<string>74.CustomClassName</string>
 					<string>74.IBPluginDependency</string>
 					<string>75.IBPluginDependency</string>
+					<string>77.CustomClassName</string>
 					<string>77.IBPluginDependency</string>
 					<string>78.IBPluginDependency</string>
+					<string>80.CustomClassName</string>
 					<string>80.IBPluginDependency</string>
 					<string>81.IBPluginDependency</string>
 					<string>83.CustomClassName</string>
 					<string>83.IBPluginDependency</string>
 					<string>84.IBPluginDependency</string>
+					<string>88.CustomClassName</string>
 					<string>88.IBPluginDependency</string>
 					<string>89.IBPluginDependency</string>
 				</object>
@@ -578,6 +584,7 @@
 					<string>ULIHighlightingButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>ULIHighlightingButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="NO"/>
@@ -586,17 +593,22 @@
 					<string>{{309, 181}, {276, 221}}</string>
 					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>ULIHighlightingButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>ULIHighlightingButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>ULIHighlightingButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>ULIHighlightingButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>UKTiledImageView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>ULIHighlightingButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>

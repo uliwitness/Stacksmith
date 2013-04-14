@@ -1,12 +1,12 @@
 //
-//  WILDCardInfoWindowController.h
+//  WILDCardInfoViewController.h
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.03.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#import "WILDLayerInfoWindowController.h"
+#import "WILDLayerInfoViewController.h"
 #import <Cocoa/Cocoa.h>
 
 
@@ -14,7 +14,7 @@
 @class WILDCard;
 
 
-@interface WILDCardInfoWindowController : WILDLayerInfoWindowController
+@interface WILDCardInfoViewController : WILDLayerInfoViewController
 {
 	NSButton		*	mMarkedSwitch;
 }
