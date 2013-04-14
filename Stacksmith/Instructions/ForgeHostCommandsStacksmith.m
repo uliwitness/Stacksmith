@@ -190,6 +190,10 @@ void	WILDCreateInstruction( LEOContext* inContext )
 	NSString	*	newTitle = [NSString stringWithUTF8String: nameStr];
 	if( strcasecmp(typeNameStr, "button") == 0 )
 		newObjectAction = @selector(createNewButtonNamed:);
+	else if( strcasecmp(typeNameStr, "field") == 0 )
+		newObjectAction = @selector(createNewFieldNamed:);
+	else if( strcasecmp(typeNameStr, "player") == 0 )
+		newObjectAction = @selector(createNewMoviePlayerNamed:);
 	else
 		LEOContextStopWithError( inContext, "Don't know how to create a \"%s\".", typeNameStr );
 	

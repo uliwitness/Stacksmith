@@ -82,12 +82,11 @@
 -(WILDPart*)					createNewButtonNamed: (NSString*)inName;
 -(WILDPart*)					createNewButton: (id)sender;
 
+-(WILDPart*)					createNewFieldNamed: (NSString*)inName;
 -(WILDPart*)					createNewField: (id)sender;
 
+-(WILDPart*)					createNewMoviePlayerNamed: (NSString*)inName;
 -(WILDPart*)					createNewMoviePlayer: (id)sender;
-
--(WILDPart*)					createNewButton: (id)sender;
--(WILDPart*)					createNewField: (id)sender;
 
 -(WILDPart*)					addNewPartFromXMLTemplate: (NSURL*)xmlFile;
 -(void)							addPart: (WILDPart*)newPart;

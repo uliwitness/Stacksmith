@@ -322,6 +322,22 @@
 }
 
 
+-(WILDPart*)	createNewFieldNamed: (NSString*)inName
+{
+	WILDPart*	newPart = [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"FieldPartTemplate"]];
+	[newPart setName: inName];
+	return newPart;
+}
+
+
+-(WILDPart*)	createNewMoviePlayerNamed: (NSString*)inName
+{
+	WILDPart*	newPart = [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"MoviePlayerPartTemplate"]];
+	[newPart setName: inName];
+	return newPart;
+}
+
+
 -(WILDPart*)	createNewButton: (id)sender
 {
 	return [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"ButtonPartTemplate"]];
