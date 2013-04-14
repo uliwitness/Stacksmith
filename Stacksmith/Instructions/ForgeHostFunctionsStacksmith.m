@@ -886,7 +886,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EButtonIdentifier, WILD_CARD_FIELD_INSTRUCTION, 0, 0, '\0',
+		EFieldIdentifier, WILD_CARD_FIELD_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
