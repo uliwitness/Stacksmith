@@ -855,13 +855,20 @@
 	if( !mUserProperties )
 		mUserProperties = [[NSMutableDictionary alloc] init];
 	if( ![mUserProperties objectForKey: userPropName] )
+	{
 		[mUserProperties setObject: @"" forKey: userPropName];
+		[self updateChangeCount: NSChangeDone];
+	}
 }
 
 
 -(void)	deleteUserPropertyNamed: (NSString*)userPropName
 {
-	[mUserProperties removeObjectForKey: userPropName];
+	if( [mUserProperties objectForKey: userPropName] )
+	{
+		[mUserProperties removeObjectForKey: userPropName];
+		[self updateChangeCount: NSChangeDone];
+	}
 }
 
 
