@@ -1361,7 +1361,7 @@
 		CGFloat		vOffset = -[[inValue objectForKey: @"vertical"] doubleValue];
 		[self setShadowOffset: NSMakeSize(hOffset,vOffset)];
 	}
-	else if( [inPropertyName isEqualToString: @"shhadowblurradius"] )
+	else if( [inPropertyName isEqualToString: @"shadowblurradius"] )
 		[self setShadowBlurRadius: [inValue doubleValue]];
 	else if( [inPropertyName isEqualToString: @"visible"] )
 		mVisible = [inValue boolValue];
@@ -1491,7 +1491,7 @@
 	{
 		return &kLeoValueTypeArray;
 	}
-	else if( [inPropertyName isEqualToString: @"shhadowblurradius"] )
+	else if( [inPropertyName isEqualToString: @"shadowblurradius"] )
 		return &kLeoValueTypeNumber;
 	else if( [inPropertyName isEqualToString: @"visible"] )
 		return &kLeoValueTypeBoolean;
