@@ -343,7 +343,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 	},
 	{
 		EVisualIdentifier, WILD_VISUAL_EFFECT_INSTR, 0, 0, '\0',
-{
+		{
 			{ EHostParamIdentifier, EEffectIdentifier, EHostParameterOptional, WILD_VISUAL_EFFECT_INSTR, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
