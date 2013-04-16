@@ -37,9 +37,15 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 -(void)				addUserPropertyNamed: (NSString*)userPropName;
 -(void)				deleteUserPropertyNamed: (NSString*)userPropName;
+-(NSMutableArray*)	allUserProperties;	// Each item is a dictionary with property name and value. For use by userProp editor GUI. This is a mutable copy of internal storage, changing it won't change the object.
+-(void)				setValue: (NSString*)inValue forUserPropertyNamed: (NSString*)inName oldName: (NSString*)inOldName;	// inOldName == nil if you're not renaming. For use by userProp editor GUI.
 
 @end
 
 
 void				LEOInitWILDObjectValue( struct LEOValueObject* inStorage, id<WILDObject> wildObject, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
 struct LEOScript*	LEOForgeScriptGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext );
+
+
+extern NSString*	WILDUserPropertyNameKey;
+extern NSString*	WILDUserPropertyValueKey;

@@ -26,6 +26,7 @@
 	NSButton		*	mEditScriptButton;
 	NSButton		*	mDontSearchSwitch;
 	NSButton		*	mCantDeleteSwitch;
+	NSButton		*	mUserPropertyEditButton;
 }
 
 @property (retain) WILDCardView				*	cardView;
@@ -39,10 +40,12 @@
 @property (retain) IBOutlet	NSTextField		*	IDField;
 @property (retain) IBOutlet	NSTextField		*	fieldCountField;
 @property (retain) IBOutlet	NSTextField		*	buttonCountField;
+@property (retain) IBOutlet	NSButton		*	userPropertyEditButton;
 
 -(id)		initWithLayer: (WILDLayer*)inCard ofCardView: (WILDCardView*)owningView;
 
 -(IBAction)	doEditScriptButton: (id)sender;
+-(IBAction)	doUserPropertyEditButton: (id)sender;
 
 -(IBAction)	doCantDeleteSwitchChanged: (id)sender;
 -(IBAction)	doDontSearchSwitchChanged: (id)sender;
