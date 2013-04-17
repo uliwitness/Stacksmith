@@ -225,6 +225,8 @@
 		558DCFBF1155B9B1002C9195 /* WILDPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFBE1155B9B1002C9195 /* WILDPictureView.m */; };
 		558DCFE51156209A002C9195 /* WILDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFE41156209A002C9195 /* WILDCardView.m */; };
 		558F89E7138B06F900E26275 /* WILDGuidelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F89E6138B06F900E26275 /* WILDGuidelineView.m */; };
+		55943B14171F5D050051166C /* WILDWebBrowserPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55943B13171F5D050051166C /* WILDWebBrowserPresenter.m */; };
+		55943B1C171F675E0051166C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55943B1B171F675E0051166C /* WebKit.framework */; };
 		559700EC137BB38B000264B8 /* WILDIrisOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */; };
 		559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */; };
 		559700F3137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */; };
@@ -777,6 +779,9 @@
 		558DCFE41156209A002C9195 /* WILDCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardView.m; sourceTree = "<group>"; };
 		558F89E5138B06F900E26275 /* WILDGuidelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGuidelineView.h; path = Editor/WILDGuidelineView.h; sourceTree = "<group>"; };
 		558F89E6138B06F900E26275 /* WILDGuidelineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGuidelineView.m; path = Editor/WILDGuidelineView.m; sourceTree = "<group>"; };
+		55943B12171F5D050051166C /* WILDWebBrowserPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDWebBrowserPresenter.h; path = Presentation/WILDWebBrowserPresenter.h; sourceTree = "<group>"; };
+		55943B13171F5D050051166C /* WILDWebBrowserPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDWebBrowserPresenter.m; path = Presentation/WILDWebBrowserPresenter.m; sourceTree = "<group>"; };
+		55943B1B171F675E0051166C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = ../../../../../System/Library/Frameworks/WebKit.framework; sourceTree = "<group>"; };
 		559700EA137BB38A000264B8 /* WILDIrisOpenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIrisOpenFilter.h; path = "Custom Effects/WILDIrisOpenFilter.h"; sourceTree = "<group>"; };
 		559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisOpenFilter.m; path = "Custom Effects/WILDIrisOpenFilter.m"; sourceTree = "<group>"; };
 		559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDIrisOpenFilter.cikernel; path = "Custom Effects/WILDIrisOpenFilter.cikernel"; sourceTree = "<group>"; };
@@ -958,6 +963,7 @@
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
 				55A7BA73146690AF00AB0F34 /* AudioToolbox.framework in Frameworks */,
 				553E3C9416F6696000258F72 /* Sparkle.framework in Frameworks */,
+				55943B1C171F675E0051166C /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +973,7 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55943B1B171F675E0051166C /* WebKit.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				552FF244113F247A005742C8 /* QTKit.framework */,
 				55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */,
@@ -1133,6 +1140,8 @@
 				55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */,
 				555FDFCB1412AA4D00A035E7 /* WILDTextFieldPresenter.h */,
 				555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */,
+				55943B12171F5D050051166C /* WILDWebBrowserPresenter.h */,
+				55943B13171F5D050051166C /* WILDWebBrowserPresenter.m */,
 			);
 			name = "Part Presenters";
 			sourceTree = "<group>";
@@ -2164,6 +2173,7 @@
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
 				55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */,
 				55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */,
+				55943B14171F5D050051166C /* WILDWebBrowserPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

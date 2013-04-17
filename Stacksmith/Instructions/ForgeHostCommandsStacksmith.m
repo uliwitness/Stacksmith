@@ -194,6 +194,8 @@ void	WILDCreateInstruction( LEOContext* inContext )
 		newObjectAction = @selector(createNewFieldNamed:);
 	else if( strcasecmp(typeNameStr, "player") == 0 )
 		newObjectAction = @selector(createNewMoviePlayerNamed:);
+	else if( strcasecmp(typeNameStr, "browser") == 0 )
+		newObjectAction = @selector(createNewBrowserNamed:);
 	else
 		LEOContextStopWithError( inContext, "Don't know how to create a \"%s\".", typeNameStr );
 	

@@ -89,6 +89,9 @@
 -(WILDPart*)					createNewMoviePlayerNamed: (NSString*)inName;
 -(WILDPart*)					createNewMoviePlayer: (id)sender;
 
+-(WILDPart*)					createNewBrowserNamed: (NSString*)inName;
+-(WILDPart*)					createNewBrowser: (id)sender;
+
 -(WILDPart*)					addNewPartFromXMLTemplate: (NSURL*)xmlFile;
 -(void)							addPart: (WILDPart*)newPart;
 -(void)							deletePart: (WILDPart*)inPart;

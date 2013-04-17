@@ -365,6 +365,14 @@
 }
 
 
+-(WILDPart*)	createNewBrowserNamed: (NSString*)inName
+{
+	WILDPart*	newPart = [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"BrowserPartTemplate"]];
+	[newPart setName: inName];
+	return newPart;
+}
+
+
 -(WILDPart*)	createNewButton: (id)sender
 {
 	return [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"ButtonPartTemplate"]];
@@ -380,6 +388,12 @@
 -(WILDPart*)	createNewMoviePlayer: (id)sender
 {
 	return [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"MoviePlayerPartTemplate"]];
+}
+
+
+-(WILDPart*)	createNewBrowser: (id)sender
+{
+	return [self addNewPartFromXMLTemplate: [self URLForPartTemplate:@"BrowserPartTemplate"]];
 }
 
 

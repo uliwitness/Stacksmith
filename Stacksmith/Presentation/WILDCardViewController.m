@@ -958,7 +958,7 @@
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewField: sender];	
-	[[WILDTools sharedTools] setCurrentTool: WILDFieldTool];
+	[[WILDTools sharedTools] setCurrentTool: WILDPointerTool];
 }
 
 
@@ -966,7 +966,15 @@
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewMoviePlayer: sender];	
-	[[WILDTools sharedTools] setCurrentTool: WILDMoviePlayerTool];
+	[[WILDTools sharedTools] setCurrentTool: WILDPointerTool];
+}
+
+
+-(IBAction)	createNewBrowser: (id)sender
+{
+	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
+	[layer createNewBrowser: sender];
+	[[WILDTools sharedTools] setCurrentTool: WILDPointerTool];
 }
 
 

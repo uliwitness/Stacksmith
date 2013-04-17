@@ -68,6 +68,8 @@
 
 -(IBAction)	createNewButton: (id)sender;
 -(IBAction)	createNewField: (id)sender;
+-(IBAction)	createNewBrowser: (id)sender;
+-(IBAction)	createNewMoviePlayer: (id)sender;
 -(IBAction)	createNewCard: (id)sender;
 -(IBAction)	cutCard: (id)sender;
 -(IBAction)	copyCard: (id)sender;

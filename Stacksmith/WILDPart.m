@@ -52,6 +52,7 @@
 @synthesize clickableInInactiveWindow = mClickableInInactiveWindow;
 @synthesize lineWidth = mLineWidth;
 @synthesize stack = mStack;
+@synthesize currentURL = mCurrentURL;
 
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
@@ -110,6 +111,9 @@
 		mTextStyles = [WILDStringsFromSubElementInElement( @"textStyle", elem ) retain];
 		mIconID = WILDIntegerFromSubElementInElement( @"icon", elem );
 		mControllerVisible = WILDBoolFromSubElementInElement( @"controllerVisible", elem, NO );
+		NSString	*	theURLString = WILDStringFromSubElementInElement( @"currentURL", elem );
+		if( theURLString && theURLString.length > 0 )
+			mCurrentURL = [[NSURL alloc] initWithString: theURLString];
 		
 		mFillColor = [WILDColorFromSubElementInElement( @"fillColor", elem ) retain];
 		if( !mFillColor )
@@ -177,6 +181,7 @@
 	DESTROY_DEALLOC(mUserProperties);
 	
 	mStack = UKInvalidPointer;
+	DESTROY_DEALLOC(mCurrentURL);
 	
 	if( mScriptObject )
 	{
@@ -624,6 +629,17 @@
 }
 
 
+-(void)	setCurrentURL: (NSURL *)currentURL
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"currentURL" forKey: WILDAffectedPropertyKey]];
+	ASSIGN(mCurrentURL, currentURL);
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"currentURL" forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
+}
+
+
 -(void)	setFillColor: (NSColor*)theColor
 {
 	if( mFillColor != theColor )
@@ -765,11 +781,21 @@
 	NSString*	theFmt = @"part ID %1$d";
 	BOOL		haveName = mName && [mName length] > 0;
 	BOOL		isField = [mType isEqualToString: @"field"];
+	BOOL		isPlayer = [mType isEqualToString: @"moviePlayer"];
+	BOOL		isBrowser = [mType isEqualToString: @"browser"];
 	
 	if( isField && haveName )
 		theFmt = @"field “%2$@” (ID %1$d)";
 	else if( isField && !haveName )
 		theFmt = @"field ID %1$d";
+	else if( isPlayer && haveName )
+		theFmt = @"movie player “%2$@” (ID %1$d)";
+	else if( isField && !haveName )
+		theFmt = @"movie player ID %1$d";
+	else if( isBrowser && haveName )
+		theFmt = @"browser “%2$@” (ID %1$d)";
+	else if( isBrowser && !haveName )
+		theFmt = @"browser ID %1$d";
 	else if( !isField && haveName )
 		theFmt = @"button “%2$@” (ID %1$d)";
 	else if( !isField && !haveName )
@@ -1024,6 +1050,7 @@
 	WILDAppendBoolXML( outString, 2, mWideMargins, @"wideMargins" );
 	WILDAppendStringXML( outString, 2, QTStringFromTime(mCurrentTime), @"currentTime" );
 	WILDAppendBoolXML( outString, 2, mControllerVisible, @"controllerVisible" );
+	WILDAppendStringXML( outString, 2, mCurrentURL ? mCurrentURL.absoluteString	: @"", @"currentURL" );
 	
 	WILDAppendColorXML( outString, 2, mFillColor, @"fillColor" );
 	WILDAppendColorXML( outString, 2, mLineColor, @"lineColor" );
@@ -1278,6 +1305,8 @@
 				return @"plain";
 		}
 	}
+	else if( [inPropertyName isEqualToString: @"currenturl"] )
+		return mCurrentURL.absoluteString;
 	else
 		return [mUserProperties objectForKey: inPropertyName];
 }
@@ -1447,6 +1476,11 @@
 								object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
 																forKey: WILDAffectedPropertyKey]];
 		[self updateChangeCount: NSChangeDone];
+	}
+	else if( [inPropertyName isEqualToString: @"currenturl"] )
+	{
+		if( [inValue length] > 0 )
+			[self setCurrentURL: [NSURL URLWithString: inValue]];
 	}
 	else
 	{

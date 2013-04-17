@@ -33,6 +33,7 @@
 #import "WILDTextFieldPresenter.h"
 #import "WILDCheckboxRadioPresenter.h"
 #import "WILDShapeButtonPresenter.h"
+#import "WILDWebBrowserPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
@@ -1014,6 +1015,8 @@
 	}
 	else if( [[mPart partType] isEqualToString: @"field"] )
 		mPartPresenter = [[WILDTextFieldPresenter alloc] initWithPartView: self];
+	else if( [[mPart partType] isEqualToString: @"browser"] )
+		mPartPresenter = [[WILDWebBrowserPresenter alloc] initWithPartView: self];
 	[mPartPresenter createSubviews];
 }
 
@@ -1562,11 +1565,7 @@
 	
 	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO];
 	
-	/*if( [[currPart partType] isEqualToString: @"button"] )
-		[self loadButton: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
-	else if( [[currPart partType] isEqualToString: @"field"] )
-		[self loadField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
-	else*/ if( [[currPart partType] isEqualToString: @"moviePlayer"] )
+	if( [[currPart partType] isEqualToString: @"moviePlayer"] )
 		[self loadMoviePlayer: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
 	else
 		[self setPart: mPart];
