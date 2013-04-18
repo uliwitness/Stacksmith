@@ -26,6 +26,13 @@
 
 @implementation WILDWebBrowserPresenter
 
+-(void)	dealloc
+{
+	[self removeSubviews];
+
+	[super dealloc];
+}
+
 -(void)	createSubviews
 {
 	if( !mWebView )
@@ -104,6 +111,7 @@
 -(void)	removeSubviews
 {
 	[mWebView removeFromSuperview];
+	[mWebView setFrameLoadDelegate: nil];
 	DESTROY(mWebView);
 }
 
