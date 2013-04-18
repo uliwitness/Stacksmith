@@ -41,7 +41,6 @@
 		[mWebView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 		[mPartView addSubview: mWebView];
 		[mWebView setFrameLoadDelegate: self];
-//		[mWebView setUIDelegate: self];
 	}
 	
 	[self refreshProperties];
@@ -85,16 +84,20 @@
 }
 
 
--(void)	textPropertyDidChangeOfPart: (WILDPart*)inPart
-{
-	[self refreshProperties];
-}
-
-
 -(void)	currentURLPropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	if( !mCurrentURLAlreadyLoaded )
 		[self refreshProperties];
+}
+
+
+-(void)	textPropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	if( !mCurrentURLAlreadyLoaded )
+	{
+		[mPartView.part setCurrentURL: nil];
+		[self refreshProperties];
+	}
 }
 
 
@@ -111,13 +114,24 @@
 }
 
 
-- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+-(void)	webView: (WebView *)sender didFinishLoadForFrame: (WebFrame *)frame
 {
-	WILDScriptContainerResultFromSendingMessage( [mPartView part], @"loadPage" );
-	BOOL	cual = mCurrentURLAlreadyLoaded;
-	mCurrentURLAlreadyLoaded = YES;
-	[mPartView.part setCurrentURL: [NSURL URLWithString: [sender mainFrameURL]]];
-	mCurrentURLAlreadyLoaded = cual;
+	if( ! mCurrentURLAlreadyLoaded )
+	{
+		BOOL	cual = mCurrentURLAlreadyLoaded;
+		mCurrentURLAlreadyLoaded = YES;
+		[mPartView.part setCurrentURL: [NSURL URLWithString: [sender mainFrameURL]]];
+		
+		// Now make sure the part's contents match the web page HTML:
+		WebFrame *webFrame = [sender mainFrame];
+		WebDataSource *source = [webFrame dataSource];
+		NSData *data = [source data];
+		NSString *str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+		[[mPartView part] setTextContents: str];
+		mCurrentURLAlreadyLoaded = cual;
+		
+		WILDScriptContainerResultFromSendingMessage( [mPartView part], @"loadPage" );
+	}
 }
 
 

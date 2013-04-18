@@ -1320,7 +1320,7 @@
 		}
 	}
 	else if( [inPropertyName isEqualToString: @"currenturl"] )
-		return mCurrentURL.absoluteString;
+		return mCurrentURL ? mCurrentURL.absoluteString : @"";
 	else if( [inPropertyName isEqualToString: @"statusmessage"] )
 		return mStatusMessage;
 	else
