@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE part PUBLIC "-//Apple, Inc.//DTD part V 2.0//EN" "" >
 <part>
-	<id>-1</id>
+	<id>1</id>
 	<type>button</type>
 	<layer>card</layer>
 	<visible><true /></visible>
