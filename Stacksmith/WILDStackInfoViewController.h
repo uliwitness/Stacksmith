@@ -26,7 +26,7 @@
 	NSButton		*	mApplySizeButton;
 	NSTextField		*	mWidthField;
 	NSTextField		*	mHeightField;
-	
+	NSButton		*	mUserPropertyEditButton;
 	NSPopUpButton	*	mSizePopUpButton;
 }
 
@@ -41,7 +41,7 @@
 @property (retain) IBOutlet	NSTextField		*	backgroundCountField;
 @property (retain) IBOutlet	NSTextField		*	widthField;
 @property (retain) IBOutlet	NSTextField		*	heightField;
-
+@property (retain) IBOutlet	NSButton		*	userPropertyEditButton;
 @property (retain) IBOutlet	NSPopUpButton	*	sizePopUpButton;
 
 -(id)		initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView;

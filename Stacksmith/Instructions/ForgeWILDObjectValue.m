@@ -13,6 +13,10 @@
 #import "ForgeObjCConversion.h"
 
 
+NSString*	WILDUserPropertyNameKey = @"WILDUserPropertyNameKey";
+NSString*	WILDUserPropertyValueKey = @"WILDUserPropertyValueKey";
+
+
 LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
 
 LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inContext );

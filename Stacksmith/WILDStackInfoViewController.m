@@ -13,6 +13,7 @@
 #import "UKHelperMacros.h"
 #import "NSWindow+ULIZoomEffect.h"
 #import "WILDNotifications.h"
+#import "WILDUserPropertyEditorWindowController.h"
 
 
 static NSSize		sPopUpMenuSizes[] =
@@ -42,7 +43,7 @@ static NSSize		sPopUpMenuSizes[] =
 @synthesize applySizeButton = mApplySizeButton;
 @synthesize widthField = mWidthField;
 @synthesize heightField = mHeightField;
-
+@synthesize userPropertyEditButton = mUserPropertyEditButton;
 @synthesize sizePopUpButton = mSizePopUpButton;
 
 -(id)	initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView
@@ -160,6 +161,18 @@ static NSSize		sPopUpMenuSizes[] =
 	NSRect		wFrame = [[self.view window] frame];
 	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
 	WILDScriptEditorWindowController*	se = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: mStack] autorelease];
+	[se setGlobalStartRect: box];
+	[[mStack document] addWindowController: se];
+	[se showWindow: self];
+}
+
+
+-(IBAction)	doUserPropertyEditButton: (id)sender
+{
+	NSRect		box = [mUserPropertyEditButton convertRect: [mUserPropertyEditButton bounds] toView: nil];
+	NSRect		wFrame = [[self.view window] frame];
+	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
+	WILDUserPropertyEditorWindowController*	se = [[[WILDUserPropertyEditorWindowController alloc] initWithPropertyContainer: mStack] autorelease];
 	[se setGlobalStartRect: box];
 	[[mStack document] addWindowController: se];
 	[se showWindow: self];

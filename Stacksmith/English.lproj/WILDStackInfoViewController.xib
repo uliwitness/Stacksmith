@@ -80,7 +80,6 @@
 						<string key="NSFrame">{{322, 15}, {76, 28}}</string>
 						<reference key="NSSuperview" ref="150268213"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="246071361">
 							<int key="NSCellFlags">67108864</int>
@@ -158,7 +157,7 @@
 					<object class="NSTextField" id="386837452">
 						<reference key="NSNextResponder" ref="150268213"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{133, 104}, {301, 17}}</string>
+						<string key="NSFrame">{{133, 104}, {156, 17}}</string>
 						<reference key="NSSuperview" ref="150268213"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="57684582"/>
@@ -190,6 +189,30 @@
 							<reference key="NSControlView" ref="493788565"/>
 							<reference key="NSBackgroundColor" ref="362645662"/>
 							<reference key="NSTextColor" ref="92755565"/>
+						</object>
+						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+					</object>
+					<object class="NSButton" id="71469786">
+						<reference key="NSNextResponder" ref="150268213"/>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{288, 94}, {149, 32}}</string>
+						<reference key="NSSuperview" ref="150268213"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:161</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSButtonCell" key="NSCell" id="378152204">
+							<int key="NSCellFlags">67108864</int>
+							<int key="NSCellFlags2">134217728</int>
+							<string key="NSContents">User Properties…</string>
+							<reference key="NSSupport" ref="157395493"/>
+							<string key="NSCellIdentifier">_NS:161</string>
+							<reference key="NSControlView" ref="71469786"/>
+							<int key="NSButtonFlags">-2038284288</int>
+							<int key="NSButtonFlags2">129</int>
+							<string key="NSAlternateContents"/>
+							<string key="NSKeyEquivalent"/>
+							<int key="NSPeriodicDelay">200</int>
+							<int key="NSPeriodicInterval">25</int>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
@@ -587,6 +610,22 @@
 					<int key="connectionID">135</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">doUserPropertyEditButton:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="71469786"/>
+					</object>
+					<int key="connectionID">138</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">userPropertyEditButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="71469786"/>
+					</object>
+					<int key="connectionID">139</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="650313560"/>
@@ -659,6 +698,7 @@
 							<reference ref="811159708"/>
 							<reference ref="57684582"/>
 							<reference ref="256148647"/>
+							<reference ref="71469786"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -918,6 +958,20 @@
 						<reference key="object" ref="246071361"/>
 						<reference key="parent" ref="256148647"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">136</int>
+						<reference key="object" ref="71469786"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="378152204"/>
+						</object>
+						<reference key="parent" ref="150268213"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">137</int>
+						<reference key="object" ref="378152204"/>
+						<reference key="parent" ref="71469786"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -940,6 +994,8 @@
 					<string>111.IBPluginDependency</string>
 					<string>131.IBPluginDependency</string>
 					<string>132.IBPluginDependency</string>
+					<string>136.IBPluginDependency</string>
+					<string>137.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
@@ -1009,6 +1065,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -1023,7 +1081,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">135</int>
+			<int key="maxID">139</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1082,6 +1140,7 @@
 							<string>heightField</string>
 							<string>nameField</string>
 							<string>sizePopUpButton</string>
+							<string>userPropertyEditButton</string>
 							<string>widthField</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -1094,6 +1153,7 @@
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSPopUpButton</string>
+							<string>NSButton</string>
 							<string>NSTextField</string>
 						</object>
 					</object>
@@ -1109,6 +1169,7 @@
 							<string>heightField</string>
 							<string>nameField</string>
 							<string>sizePopUpButton</string>
+							<string>userPropertyEditButton</string>
 							<string>widthField</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -1144,6 +1205,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">sizePopUpButton</string>
 								<string key="candidateClassName">NSPopUpButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">userPropertyEditButton</string>
+								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">widthField</string>

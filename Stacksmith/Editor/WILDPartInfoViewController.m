@@ -9,6 +9,7 @@
 #import "WILDPartInfoViewController.h"
 #import "WILDScriptEditorWindowController.h"
 #import "WILDContentsEditorWindowController.h"
+#import "WILDUserPropertyEditorWindowController.h"
 #import "WILDPart.h"
 #import "WILDLayer.h"
 #import "WILDNotifications.h"
@@ -31,8 +32,8 @@
 @synthesize shadowBlurRadiusSlider;
 @synthesize shadowOffsetSlider;
 @synthesize contentsEditorButton;
-@synthesize contentsTextField;
 @synthesize lineWidthSlider;
+@synthesize userPropertyEditorButton;
 
 
 -(id)	initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView
@@ -60,7 +61,6 @@
 	DESTROY(idField);
 	DESTROY(partNumberField);
 	DESTROY(partNumberLabel);
-	DESTROY(contentsTextField);
 	DESTROY(fillColorWell);
 	DESTROY(lineColorWell);
 	DESTROY(shadowColorWell);
@@ -113,6 +113,19 @@
 	NSRect		wFrame = [[[self view] window] frame];
 	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
 	WILDContentsEditorWindowController*	se = [[[WILDContentsEditorWindowController alloc] initWithPart: part] autorelease];
+	[se setGlobalStartRect: box];
+	[se setCardView: cardView];
+	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];
+	[se showWindow: self];
+}
+
+
+-(IBAction)	doUserPropertyEditorButton: (id)sender
+{
+	NSRect		box = [userPropertyEditorButton convertRect: [userPropertyEditorButton bounds] toView: nil];
+	NSRect		wFrame = [[[self view] window] frame];
+	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
+	WILDUserPropertyEditorWindowController*	se = [[[WILDUserPropertyEditorWindowController alloc] initWithPropertyContainer: part] autorelease];
 	[se setGlobalStartRect: box];
 	[se setCardView: cardView];
 	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];

@@ -12,6 +12,7 @@
 #import "WILDLayer.h"
 #import "UKHelperMacros.h"
 #import "WILDNotifications.h"
+#import "WILDUserPropertyEditorWindowController.h"
 
 
 @interface WILDLayerInfoViewController () <NSTextFieldDelegate>
@@ -32,6 +33,8 @@
 @synthesize editScriptButton = mEditScriptButton;
 @synthesize dontSearchSwitch = mDontSearchSwitch;
 @synthesize cantDeleteSwitch = mCantDeleteSwitch;
+@synthesize userPropertyEditButton = mUserPropertyEditButton;
+
 
 -(id)	initWithLayer: (WILDLayer*)inCard ofCardView: (WILDCardView*)owningView
 {
@@ -78,32 +81,24 @@
 }
 
 
-//-(IBAction)	doOKButton: (id)sender
-//{
-//	[mLayer setName: [mNameField stringValue]];
-//	[mLayer setCantDelete: [mCantDeleteSwitch state] == NSOnState];
-//	[mLayer setDontSearch: [mDontSearchSwitch state] == NSOnState];
-//	
-//	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mLayer] frameInScreenCoordinates];
-//	[[self window] orderOutWithZoomEffectToRect: destRect];
-//	[self close];
-//}
-//
-//
-//-(IBAction)	doCancelButton: (id)sender
-//{
-//	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mLayer] frameInScreenCoordinates];
-//	[[self window] orderOutWithZoomEffectToRect: destRect];
-//	[self close];
-//}
-
-
 -(IBAction)	doEditScriptButton: (id)sender
 {
 	NSRect		box = [mEditScriptButton convertRect: [mEditScriptButton bounds] toView: nil];
 	NSRect		wFrame = [[self.view window] frame];
 	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
 	WILDScriptEditorWindowController*	se = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: mLayer] autorelease];
+	[se setGlobalStartRect: box];
+	[[mLayer.stack document] addWindowController: se];
+	[se showWindow: self];
+}
+
+
+-(IBAction)	doUserPropertyEditButton: (id)sender
+{
+	NSRect		box = [mUserPropertyEditButton convertRect: [mUserPropertyEditButton bounds] toView: nil];
+	NSRect		wFrame = [[self.view window] frame];
+	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
+	WILDUserPropertyEditorWindowController*	se = [[[WILDUserPropertyEditorWindowController alloc] initWithPropertyContainer: mLayer] autorelease];
 	[se setGlobalStartRect: box];
 	[[mLayer.stack document] addWindowController: se];
 	[se showWindow: self];

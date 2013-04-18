@@ -1610,6 +1610,28 @@
 }
 
 
+-(NSMutableArray*)	allUserProperties
+{
+	NSMutableArray	*	allProps = [NSMutableArray arrayWithCapacity: mUserProperties.count];
+	for( NSString * theKey in mUserProperties )
+	{
+		[allProps addObject: [NSMutableDictionary dictionaryWithObjectsAndKeys: theKey, WILDUserPropertyNameKey, mUserProperties[theKey], WILDUserPropertyValueKey, nil]];
+	}
+	return allProps;
+}
+
+
+-(void)	setValue: (NSString*)inValue forUserPropertyNamed: (NSString*)inName oldName: (NSString*)inOldName
+{
+	if( inOldName )
+		[mUserProperties removeObjectForKey: inOldName];
+	if( !mUserProperties )
+		mUserProperties = [[NSMutableDictionary alloc] init];
+	[mUserProperties setObject: inValue forKey: inName];
+	[self updateChangeCount: NSChangeDone];
+}
+
+
 -(NSString*)	description
 {
 	return [NSString stringWithFormat: @"%@ { layer = %@, type = %@, style = %@, name = %@, id = %lld, path = %@ }", NSStringFromClass([self class]), mLayer, mType, mStyle, mName, mID, mMediaPath];	

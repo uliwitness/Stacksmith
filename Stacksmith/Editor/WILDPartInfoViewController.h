@@ -25,7 +25,6 @@
 	NSTextField		*		idField;
 	NSTextField		*		partNumberField;
 	NSTextField		*		partNumberLabel;
-	NSTextView		*		contentsTextField;
 	NSColorWell		*		fillColorWell;
 	NSColorWell		*		lineColorWell;
 	NSColorWell		*		shadowColorWell;
@@ -33,6 +32,7 @@
 	NSSlider		*		shadowOffsetSlider;
 	NSButton		*		contentsEditorButton;
 	NSSlider		*		lineWidthSlider;
+	NSButton		*		userPropertyEditorButton;
 }
 
 @property(retain)	IBOutlet NSButton			*		scriptEditorButton;
@@ -43,7 +43,6 @@
 @property(retain)	IBOutlet NSTextField		*		idField;
 @property(retain)	IBOutlet NSTextField		*		partNumberField;
 @property(retain)	IBOutlet NSTextField		*		partNumberLabel;
-@property(retain)	IBOutlet NSTextView			*		contentsTextField;
 @property(retain)	IBOutlet NSColorWell		*		fillColorWell;
 @property(retain)	IBOutlet NSColorWell		*		lineColorWell;
 @property(retain)	IBOutlet NSColorWell		*		shadowColorWell;
@@ -51,6 +50,7 @@
 @property(retain)	IBOutlet NSSlider			*		shadowOffsetSlider;
 @property(retain)	IBOutlet NSButton			*		contentsEditorButton;
 @property(retain)	IBOutlet NSSlider			*		lineWidthSlider;
+@property(retain)	IBOutlet NSButton			*		userPropertyEditorButton;
 
 -(id)		initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView;
 
@@ -58,6 +58,7 @@
 -(IBAction) doEnabledSwitchToggled:(id)sender;
 -(IBAction) doVisibleSwitchToggled:(id)sender;
 -(IBAction)	doContentsEditorButton: (id)sender;
+-(IBAction)	doUserPropertyEditorButton: (id)sender;
 
 -(IBAction)	doShadowBlurRadiusChanged:(id)sender;
 -(IBAction)	doShadowOffsetChanged:(id)sender;
