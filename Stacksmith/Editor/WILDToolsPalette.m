@@ -8,6 +8,7 @@
 
 #import "WILDToolsPalette.h"
 #import "WILDTools.h"
+#import "UKBorderlessWindow.h"
 #import "UKHelperMacros.h"
 
 
@@ -99,6 +100,10 @@ static WILDToolsPalette*	sSharedToolsPalette = nil;
 	toolsFrame.origin.y += toolsFrame.size.height -toolsHeight;
 	toolsFrame.size.height = toolsHeight;
 	[self.window setFrame: toolsFrame display: YES];
+	//[self.window setLevel: NSFloatingWindowLevel];
+	[(UKBorderlessWindow*)self.window setCanBecomeKeyWindow: YES];
+	[(UKBorderlessWindow*)self.window setCanBecomeMainWindow: NO];
+	//[self.window setHidesOnDeactivate: NO];
 	[[self window] orderFront: sender];
 }
 
