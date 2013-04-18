@@ -142,7 +142,7 @@
 			return;
 		
 		oldName = (currName.length > 0) ? currName : nil;
-		currName = object;
+		currName = [object lowercaseString];
 		[currRow setObject: object forKey: WILDUserPropertyNameKey];
 	}
 	else
