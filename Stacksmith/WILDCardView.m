@@ -365,7 +365,7 @@ static void FillFirstFreeOne( NSString ** a, NSString ** b, NSString ** d, NSStr
 {
 	BOOL	passOn = YES;
 	
-	if( [WILDTools sharedTools].currentTool == WILDBrowseTool )
+	if( [WILDTools sharedTools].currentTool == WILDBrowseTool && [NSApplication sharedApplication].keyWindow == self.window )
 	{
 		NSString	*	firstModifier = nil;
 		NSString	*	secondModifier = nil;
