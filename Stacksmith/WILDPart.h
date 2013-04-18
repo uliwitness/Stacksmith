@@ -101,6 +101,7 @@
 @property (assign,nonatomic) CGFloat		shadowBlurRadius;
 @property (assign,nonatomic) CGFloat		lineWidth;
 @property (retain,nonatomic) NSURL*			currentURL;
+@property (retain,nonatomic) NSString*		statusMessage;
 @property (assign,nonatomic) WILDStack*		stack;	// Stack owns us, don't retain back pointer.
 
 

@@ -19,6 +19,7 @@
 #import "UKHelperMacros.h"
 #import "WILDDocument.h"
 #import "WILDPresentationConstants.h"
+#import "UKHelperMacros.h"
 
 
 @interface WILDPart ()
@@ -53,6 +54,7 @@
 @synthesize lineWidth = mLineWidth;
 @synthesize stack = mStack;
 @synthesize currentURL = mCurrentURL;
+@synthesize statusMessage = mStatusMessage;
 
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
@@ -464,6 +466,18 @@
 							object: self userInfo: [NSDictionary dictionaryWithObject: @"showName"
 															forKey: WILDAffectedPropertyKey]];
 	[self updateChangeCount: NSChangeDone];
+}
+
+
+-(void)		setStatusMessage:(NSString *)statusMessage
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"statusMessage"
+															forKey: WILDAffectedPropertyKey]];
+	ASSIGNCOPY(mStatusMessage,statusMessage);
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"statusMessage"
+															forKey: WILDAffectedPropertyKey]];
 }
 
 
@@ -1307,6 +1321,8 @@
 	}
 	else if( [inPropertyName isEqualToString: @"currenturl"] )
 		return mCurrentURL.absoluteString;
+	else if( [inPropertyName isEqualToString: @"statusmessage"] )
+		return mStatusMessage;
 	else
 		return [mUserProperties objectForKey: inPropertyName];
 }
@@ -1480,7 +1496,11 @@
 	else if( [inPropertyName isEqualToString: @"currenturl"] )
 	{
 		if( [inValue length] > 0 )
-			[self setCurrentURL: [NSURL URLWithString: inValue]];
+			[self setCurrentURL: ([inValue length] > 0) ? [NSURL URLWithString: inValue] : nil];
+	}
+	else if( [inPropertyName isEqualToString: @"statusmessage"] )
+	{
+		[self setStatusMessage: inValue];
 	}
 	else
 	{

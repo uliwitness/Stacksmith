@@ -16,6 +16,14 @@
 #import "WILDPartContents.h"
 
 
+@interface WILDWebBrowserPresenter ()
+{
+	BOOL		mCurrentURLAlreadyLoaded;
+}
+
+@end
+
+
 @implementation WILDWebBrowserPresenter
 
 -(void)	createSubviews
@@ -32,6 +40,8 @@
 				
 		[mWebView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 		[mPartView addSubview: mWebView];
+		[mWebView setFrameLoadDelegate: self];
+//		[mWebView setUIDelegate: self];
 	}
 	
 	[self refreshProperties];
@@ -83,7 +93,8 @@
 
 -(void)	currentURLPropertyDidChangeOfPart: (WILDPart*)inPart
 {
-	[self refreshProperties];
+	if( !mCurrentURLAlreadyLoaded )
+		[self refreshProperties];
 }
 
 
@@ -98,5 +109,32 @@
 {
 	return [[mPartView superview] convertRect: [mWebView bounds] fromView: mWebView];
 }
+
+
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+{
+	WILDScriptContainerResultFromSendingMessage( [mPartView part], @"loadPage" );
+	BOOL	cual = mCurrentURLAlreadyLoaded;
+	mCurrentURLAlreadyLoaded = YES;
+	[mPartView.part setCurrentURL: [NSURL URLWithString: [sender mainFrameURL]]];
+	mCurrentURLAlreadyLoaded = cual;
+}
+
+
+- (void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
+{
+	WILDScriptContainerResultFromSendingMessage( [mPartView part], @"loadPage %@", error.localizedDescription );
+}
+
+//- (void)webView:(WebView *)sender setStatusText:(NSString *)text
+//{
+//	[[mPartView part] setStatusMessage: text];
+//}
+//
+//
+//- (NSString *)webViewStatusText:(WebView *)sender
+//{
+//	return [[mPartView part] statusMessage];
+//}
 
 @end
