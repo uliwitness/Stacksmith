@@ -1670,7 +1670,7 @@
 	{
 		currentCursor = [[[mPart stack] document] cursorWithID: 128];
 	}
-	[self addCursorRect: [self visibleRect] cursor: currentCursor];
+//	[self addCursorRect: [self visibleRect] cursor: currentCursor];
 	if( [self myToolIsCurrent] )
 	{
 		[self addCursorRect: [self rectForGrabHandle: 0] cursor: currentCursor];
@@ -1712,7 +1712,17 @@
 		[self addCursorRect: bottomRightRect cursor: nwSeResizeCursor];
 	}
 	else
-		[self addCursorRect: [self visibleRect] cursor: currentCursor];
+	{
+		if( mPartPresenter )
+		{
+			[mPartPresenter setupCursorRectInPartViewWithDefaultCursor: currentCursor];
+		}
+		else
+		{
+			[self addCursorRect: [self visibleRect] cursor: currentCursor];
+			UKLog( @"fallback cursor for part %@", self.part );
+		}
+	}
 }
 
 

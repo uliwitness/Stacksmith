@@ -76,7 +76,7 @@
 	else
 		[[mWebView layer] setShadowOpacity: 0.0];
 	
-	if( currPart.currentURL )
+	if( currPart.currentURL && ![currPart.currentURL.absoluteString	 isEqualToString: @"about:blank"] )
 	{
 		NSURLRequest	*	theRequest = [NSURLRequest requestWithURL: currPart.currentURL];
 		[mWebView.mainFrame loadRequest: theRequest];
@@ -86,7 +86,7 @@
 		NSString	*	theText = [contents text];
 		if( !theText )
 			theText = @"";
-		[mWebView.mainFrame loadHTMLString: theText baseURL: currPart.stack.document.fileURL];
+		[mWebView.mainFrame loadHTMLString: theText baseURL: nil /*currPart.stack.document.fileURL*/];
 	}
 }
 
@@ -115,6 +115,12 @@
 	DESTROY(mWebView);
 }
 
+
+-(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor;
+{
+	// Let the WebView set the cursor.
+	UKLog(@"no cursor rects for part %@.", mPartView.part);
+}
 
 -(NSRect)	selectionFrame
 {

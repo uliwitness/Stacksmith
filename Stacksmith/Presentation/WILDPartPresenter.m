@@ -8,6 +8,7 @@
 
 #import "WILDPartPresenter.h"
 #import "WILDNotifications.h"
+#import "WILDPartView.h"
 #import "UKHelperMacros.h"
 
 
@@ -31,6 +32,13 @@
 	mPartView = UKInvalidPointer;
 	
 	[super dealloc];
+}
+
+
+-(void)	setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor
+{
+	[mPartView addCursorRect: [mPartView visibleRect] cursor: currentCursor];
+	UKLog(@"cursor rect for part %@", mPartView.part);
 }
 
 

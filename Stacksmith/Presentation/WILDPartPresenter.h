@@ -27,6 +27,7 @@
 -(void)		partWillChange: (NSNotification*)inPart;
 -(void)		partDidChange: (NSNotification*)inPart;
 
+-(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor;
 -(NSRect)	selectionFrame;	// Frame coord. system of the part view. I.e. local to part view's superview.
 -(NSRect)	layoutRectForRect: (NSRect)inRect;
 -(NSRect)	rectForLayoutRect: (NSRect)inRect;
