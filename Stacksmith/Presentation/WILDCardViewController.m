@@ -800,52 +800,40 @@
 -(IBAction)	showCardInfoPanel: (id)sender
 {
 	if( mCurrentPopover )
-	{
 		[mCurrentPopover close];
-	}
-	else
-	{
-		WILDCardInfoViewController*	cardInfo = [[[WILDCardInfoViewController alloc] initWithCard: mCurrentCard ofCardView: (WILDCardView*) [self view]] autorelease];
-		mCurrentPopover = [[NSPopover alloc] init];
-		[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
-		[mCurrentPopover setDelegate: self];
-		[mCurrentPopover setContentViewController: cardInfo];
-		[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
-	}
+	
+	WILDCardInfoViewController*	cardInfo = [[[WILDCardInfoViewController alloc] initWithCard: mCurrentCard ofCardView: (WILDCardView*) [self view]] autorelease];
+	mCurrentPopover = [[NSPopover alloc] init];
+	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+	[mCurrentPopover setDelegate: self];
+	[mCurrentPopover setContentViewController: cardInfo];
+	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
 }
 
 -(IBAction)	showBackgroundInfoPanel: (id)sender
 {
 	if( mCurrentPopover )
-	{
 		[mCurrentPopover close];
-	}
-	else
-	{
-		WILDBackgroundInfoViewController*	backgroundInfo = [[[WILDBackgroundInfoViewController alloc] initWithBackground: [mCurrentCard owningBackground] ofCardView: (WILDCardView*) [self view]] autorelease];
-		mCurrentPopover = [[NSPopover alloc] init];
-		[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
-		[mCurrentPopover setDelegate: self];
-		[mCurrentPopover setContentViewController: backgroundInfo];
-		[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
-	}
+	
+	WILDBackgroundInfoViewController*	backgroundInfo = [[[WILDBackgroundInfoViewController alloc] initWithBackground: [mCurrentCard owningBackground] ofCardView: (WILDCardView*) [self view]] autorelease];
+	mCurrentPopover = [[NSPopover alloc] init];
+	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+	[mCurrentPopover setDelegate: self];
+	[mCurrentPopover setContentViewController: backgroundInfo];
+	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
 }
 
 -(IBAction)	showStackInfoPanel: (id)sender
 {
 	if( mCurrentPopover )
-	{
 		[mCurrentPopover close];
-	}
-	else
-	{
-		WILDStackInfoViewController*	stackInfo = [[[WILDStackInfoViewController alloc] initWithStack: [mCurrentCard stack] ofCardView: (WILDCardView*) [self view]] autorelease];
-		mCurrentPopover = [[NSPopover alloc] init];
-		[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
-		[mCurrentPopover setDelegate: self];
-		[mCurrentPopover setContentViewController: stackInfo];
-		[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
-	}
+	
+	WILDStackInfoViewController*	stackInfo = [[[WILDStackInfoViewController alloc] initWithStack: [mCurrentCard stack] ofCardView: (WILDCardView*) [self view]] autorelease];
+	mCurrentPopover = [[NSPopover alloc] init];
+	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+	[mCurrentPopover setDelegate: self];
+	[mCurrentPopover setContentViewController: stackInfo];
+	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
 }
 
 
