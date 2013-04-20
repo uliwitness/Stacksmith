@@ -199,7 +199,6 @@
 		555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103513881DB700E26037 /* UKPaintSelectTool.tiff */; };
 		555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103613881DB700E26037 /* UKPaintShapeTool.tiff */; };
 		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
-		555F104613893CDC00E26037 /* BrowseTool.png in Resources */ = {isa = PBXBuildFile; fileRef = 555F104413893CDC00E26037 /* BrowseTool.png */; };
 		555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */; };
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
 		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
@@ -284,7 +283,7 @@
 		55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */; };
 		55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */; };
 		55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */; };
-		55E3A69E11503456008411BB /* CURS_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.png */; };
+		55E3A69E11503456008411BB /* CURS_128.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.pdf */; };
 		55E3A6FB11519B45008411BB /* HCSV.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6F911519B45008411BB /* HCSV.icns */; };
 		55E3A6FC11519B45008411BB /* Stack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6FA11519B45008411BB /* Stack.icns */; };
 		55E3B6AD1184417A000062C1 /* WILDMediaEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6AC1184417A000062C1 /* WILDMediaEntry.m */; };
@@ -736,7 +735,6 @@
 		555F103513881DB700E26037 /* UKPaintSelectTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintSelectTool.tiff; path = ../UKPaintView/UKPaintSelectTool.tiff; sourceTree = "<group>"; };
 		555F103613881DB700E26037 /* UKPaintShapeTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintShapeTool.tiff; path = ../UKPaintView/UKPaintShapeTool.tiff; sourceTree = "<group>"; };
 		555F103713881DB700E26037 /* UKPaintTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintTextTool.tiff; path = ../UKPaintView/UKPaintTextTool.tiff; sourceTree = "<group>"; };
-		555F104513893CDC00E26037 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/BrowseTool.png; sourceTree = "<group>"; };
 		555FDFCB1412AA4D00A035E7 /* WILDTextFieldPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTextFieldPresenter.h; path = Presentation/WILDTextFieldPresenter.h; sourceTree = "<group>"; };
 		555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTextFieldPresenter.m; path = Presentation/WILDTextFieldPresenter.m; sourceTree = "<group>"; };
 		555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UTF8UTF32Utilities.c; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.c; sourceTree = "<group>"; };
@@ -881,7 +879,7 @@
 		55E397E61322481500C3739D /* WILDObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectID.h; path = Model/WILDObjectID.h; sourceTree = "<group>"; };
 		55E397E71322520700C3739D /* NSFileManager+NameForTempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+NameForTempFile.h"; path = "../UliKit/NSFileManager+NameForTempFile.h"; sourceTree = "<group>"; };
 		55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+NameForTempFile.m"; path = "../UliKit/NSFileManager+NameForTempFile.m"; sourceTree = "<group>"; };
-		55E3A69D11503456008411BB /* CURS_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CURS_128.png; path = Resources/CURS_128.png; sourceTree = "<group>"; };
+		55E3A69D11503456008411BB /* CURS_128.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = CURS_128.pdf; path = Resources/CURS_128.pdf; sourceTree = "<group>"; };
 		55E3A6F911519B45008411BB /* HCSV.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = HCSV.icns; sourceTree = "<group>"; };
 		55E3A6FA11519B45008411BB /* Stack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stack.icns; sourceTree = "<group>"; };
 		55E3B6AB1184417A000062C1 /* WILDMediaEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMediaEntry.h; path = Document/WILDMediaEntry.h; sourceTree = "<group>"; };
@@ -1510,7 +1508,7 @@
 			isa = PBXGroup;
 			children = (
 				55FDD877171B29DC0045A2B9 /* CURS_0.pdf */,
-				55E3A69D11503456008411BB /* CURS_128.png */,
+				55E3A69D11503456008411BB /* CURS_128.pdf */,
 				55F34D2E136A50D600E8588D /* ICON_128.pdf */,
 				55F34D2F136A50D600E8588D /* ICON_129.pdf */,
 				55F34D30136A50D600E8588D /* ICON_766.pdf */,
@@ -1593,7 +1591,6 @@
 				55039F41136B52C80082E32E /* brush31.png */,
 				55039F42136B52C80082E32E /* brush32.png */,
 				552FF131113F23F3005742C8 /* resources.xml */,
-				555F104413893CDC00E26037 /* BrowseTool.png */,
 				555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */,
 				555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */,
 				555F102F13881DB700E26037 /* UKPaintLassoTool.tiff */,
@@ -1898,7 +1895,7 @@
 				55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */,
 				55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */,
 				55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */,
-				55E3A69E11503456008411BB /* CURS_128.png in Resources */,
+				55E3A69E11503456008411BB /* CURS_128.pdf in Resources */,
 				55E3A6FB11519B45008411BB /* HCSV.icns in Resources */,
 				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
 				55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */,
@@ -1964,7 +1961,6 @@
 				555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */,
 				555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */,
 				555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */,
-				555F104613893CDC00E26037 /* BrowseTool.png in Resources */,
 				555BA0DC138DC9CB00B3B1D8 /* PlaceholderMovie.mov in Resources */,
 				55E9FD9213E6050F0089B81F /* WILDPartInfoViewController.xib in Resources */,
 				55E9FD9513E605270089B81F /* WILDButtonInfoViewController.xib in Resources */,
@@ -2270,14 +2266,6 @@
 				555BA0DB138DC9CB00B3B1D8 /* English */,
 			);
 			name = PlaceholderMovie.mov;
-			sourceTree = "<group>";
-		};
-		555F104413893CDC00E26037 /* BrowseTool.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				555F104513893CDC00E26037 /* English */,
-			);
-			name = BrowseTool.png;
 			sourceTree = "<group>";
 		};
 		557BC7D6171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib */ = {

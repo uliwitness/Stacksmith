@@ -110,11 +110,11 @@
 								</object>
 								<reference key="NSControlView" ref="384711678"/>
 								<int key="NSTag">1</int>
-								<int key="NSButtonFlags">138690560</int>
+								<int key="NSButtonFlags">141836288</int>
 								<int key="NSButtonFlags2">70</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">BrowseTool</string>
+									<string key="NSResourceName">CURS_128</string>
 								</object>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -157,7 +157,6 @@
 							<string key="NSFrame">{{407, 6}, {48, 48}}</string>
 							<reference key="NSSuperview" ref="668203730"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<int key="NSTag">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="316922051">
@@ -1005,8 +1004,8 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>BrowseTool</string>
 				<string>CURS_0</string>
+				<string>CURS_128</string>
 				<string>ICON_1000</string>
 				<string>ICON_128</string>
 				<string>ICON_26425</string>
@@ -1016,8 +1015,8 @@
 			</object>
 			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{70, 78}</string>
 				<string>{20, 24}</string>
+				<string>{32, 32}</string>
 				<string>{41, 36}</string>
 				<string>{39, 38}</string>
 				<string>{26, 26}</string>
