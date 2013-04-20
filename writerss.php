@@ -8,13 +8,20 @@
 			./writerss.php build/Stacksmith.app/Contents/Info.plist nightly build/Stacksmith.tgz jeff s3kr1t 21
 	*/
 	
-	$fullurl = str_replace("http://","http://".urlencode($argv[4]).':'.urlencode($argv[5])."@",$_ENV['BUILD_URL'])."/api/xml?wrapper=changes&xpath=//changeSet//comment";
-	
-	$commitmessages = file_get_contents($fullurl);
-	$commitmessages = str_replace("<changes>","&lt;ul&gt;",$commitmessages);
-	$commitmessages = str_replace("</changes>","&lt;/ul&gt;",$commitmessages);
-	$commitmessages = str_replace("<comment>","&lt;li&gt;",$commitmessages);
-	$commitmessages = str_replace("</comment>","&lt;/li&gt;",$commitmessages);
+	//for( $x = 0; $x > -4; $x-- )
+	//{
+		$fullurl = str_replace("http://","http://".urlencode($argv[4]).':'.urlencode($argv[5])."@",$_ENV['BUILD_URL'])."/api/xml?wrapper=changes&xpath=//changeSet//comment";
+		echo $fullurl;
+		$matches = array();
+		preg_match( "/\\/([0-9])+\\//", $fullurl, $matches );
+		print_r($matches);
+		
+		$commitmessages = file_get_contents($fullurl);
+		$commitmessages = str_replace("<changes>","&lt;ul&gt;",$commitmessages);
+		$commitmessages = str_replace("</changes>","&lt;/ul&gt;",$commitmessages);
+		$commitmessages = str_replace("<comment>","&lt;li&gt;",$commitmessages);
+		$commitmessages = str_replace("</comment>","&lt;/li&gt;",$commitmessages);
+	//}
 	
 	$infoplist = file_get_contents(dirname($argv[0]).'/'.$argv[1]);
 	$matches = array();
