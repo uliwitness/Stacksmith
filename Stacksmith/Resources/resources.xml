@@ -50,12 +50,6 @@
 		<file>ICON_766.pdf</file>
 	</media>
 	<media>
-		<id>5472</id>
-		<type>icon</type>
-		<name>Lge First Card Arrow</name>
-		<file>ICON_5472.pbm</file>
-	</media>
-	<media>
 		<id>1000</id>
 		<type>icon</type>
 		<name>Stack</name>
@@ -65,7 +59,7 @@
 		<id>128</id>
 		<type>cursor</type>
 		<name>Hand</name>
-		<file>CURS_128.png</file>
+		<file>CURS_128.pdf</file>
 		<hotspot>
 			<left>7</left>
 			<top>0</top>
