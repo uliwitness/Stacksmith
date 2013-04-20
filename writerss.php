@@ -8,6 +8,7 @@
 			./writerss.php build/Stacksmith.app/Contents/Info.plist nightly build/Stacksmith.tgz jeff s3kr1t 21
 	*/
 	
+	date_default_timezone_set('Europe/Berlin');
 	$updatemessage = '';
 	$buildsinlist = 0;
 	$desirednumbuilds = date("N");
