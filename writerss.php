@@ -10,8 +10,9 @@
 	
 	$updatemessage = '';
 	$buildsinlist = 0;
+	$desirednumbuilds = date("N");
 	
-	for( $x = 0; $buildsinlist < 7; $x++ )
+	for( $x = 0; $buildsinlist < $desirednumbuilds; $x++ )
 	{
 		$fullurl = str_replace("http://","http://".urlencode($argv[4]).':'.urlencode($argv[5])."@",$_ENV['BUILD_URL'])."/api/xml?wrapper=changes&xpath=//changeSet//comment";
 		$matches = array();
