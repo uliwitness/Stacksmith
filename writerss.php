@@ -8,20 +8,32 @@
 			./writerss.php build/Stacksmith.app/Contents/Info.plist nightly build/Stacksmith.tgz jeff s3kr1t 21
 	*/
 	
-	//for( $x = 0; $x > -4; $x-- )
-	//{
+	$updatemessage = '';
+	$buildsinlist = 0;
+	
+	for( $x = 0; $buildsinlist < 7; $x++ )
+	{
 		$fullurl = str_replace("http://","http://".urlencode($argv[4]).':'.urlencode($argv[5])."@",$_ENV['BUILD_URL'])."/api/xml?wrapper=changes&xpath=//changeSet//comment";
-		echo $fullurl;
 		$matches = array();
-		preg_match( "/\\/([0-9])+\\//", $fullurl, $matches );
-		print_r($matches);
+		preg_match( "/\\/([0-9]+)\\//", $fullurl, $matches, PREG_OFFSET_CAPTURE );
+		$newbuildno = ($matches[1][0] -$x);
+		$endoffs = $matches[1][1] +strlen($matches[1][0]);
+		$fullurl = substr( $fullurl, 0, $matches[1][1] ).$newbuildno.substr( $fullurl, $endoffs, strlen($fullurl) -$endoffs );
 		
 		$commitmessages = file_get_contents($fullurl);
-		$commitmessages = str_replace("<changes>","&lt;ul&gt;",$commitmessages);
-		$commitmessages = str_replace("</changes>","&lt;/ul&gt;",$commitmessages);
-		$commitmessages = str_replace("<comment>","&lt;li&gt;",$commitmessages);
-		$commitmessages = str_replace("</comment>","&lt;/li&gt;",$commitmessages);
-	//}
+		if( strlen($commitmessages) > 0 && strcmp($commitmessages, "<changes/>") != 0 )
+		{
+			$commitmessages = str_replace("<changes>","&lt;ul&gt;",$commitmessages);
+			$commitmessages = str_replace("</changes>","&lt;/ul&gt;",$commitmessages);
+			$commitmessages = str_replace("<comment>","&lt;li&gt;",$commitmessages);
+			$commitmessages = str_replace("</comment>","&lt;/li&gt;",$commitmessages);
+			
+			$updatemessage .= "<h3>Build $newbuildno</h3>\n".$commitmessages;
+			$buildsinlist++;
+		}
+		if( $newbuildno == 1 )
+			break;
+	}
 	
 	$infoplist = file_get_contents(dirname($argv[0]).'/'.$argv[1]);
 	$matches = array();
@@ -41,7 +53,7 @@
     <item>
        <title>Stacksmith $actualversion</title>
        <link>http://stacksmith.org/nightlies/".basename($argv[3])."</link>
-       <description>".$commitmessages."</description>
+       <description>".$updatemessage."</description>
        <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize(dirname($argv[0]).'/'.$argv[3])."\" type=\"application/octet-stream\" />
        <sparkle:version>$actualversion</sparkle:version>
      </item>
