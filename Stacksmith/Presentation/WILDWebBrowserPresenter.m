@@ -48,6 +48,7 @@
 		[mWebView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 		[mPartView addSubview: mWebView];
 		[mWebView setFrameLoadDelegate: self];
+//		[mWebView setUIDelegate: self];
 	}
 	
 	[self refreshProperties];
@@ -119,7 +120,7 @@
 -(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor;
 {
 	// Let the WebView set the cursor.
-	UKLog(@"no cursor rects for part %@.", mPartView.part);
+	//UKLog(@"no cursor rects for part %@.", mPartView.part);
 }
 
 -(NSRect)	selectionFrame
@@ -134,7 +135,12 @@
 	{
 		BOOL	cual = mCurrentURLAlreadyLoaded;
 		mCurrentURLAlreadyLoaded = YES;
-		[mPartView.part setCurrentURL: [NSURL URLWithString: [sender mainFrameURL]]];
+		NSString	*	mainFrameURLString = [sender mainFrameURL];
+		NSURL		*	currURL = nil;
+		if( mainFrameURLString.length > 0 && ![mainFrameURLString isEqualToString: @"about:blank"] )
+			currURL = [NSURL URLWithString: [sender mainFrameURL]];
+			
+		[mPartView.part setCurrentURL: currURL];
 		
 		// Now make sure the part's contents match the web page HTML:
 		WebFrame *webFrame = [sender mainFrame];
@@ -153,6 +159,7 @@
 {
 	WILDScriptContainerResultFromSendingMessage( [mPartView part], @"loadPage %@", error.localizedDescription );
 }
+
 
 //- (void)webView:(WebView *)sender setStatusText:(NSString *)text
 //{
