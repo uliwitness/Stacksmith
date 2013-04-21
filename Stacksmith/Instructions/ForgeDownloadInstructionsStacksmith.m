@@ -17,6 +17,7 @@
 #import <Foundation/Foundation.h>
 #import "Forge.h"
 #import "UKHelperMacros.h"
+#import "WILDScriptContainer.h"
 
 
 static NSMutableArray	*	sRunningConnections = nil;
@@ -88,7 +89,7 @@ void	LEOSetDownloadsInstruction( LEOContext* inContext );
 -(void)	sendDownloadMessage: (NSString*)msgName forConnection: (NSURLConnection*)inConnection
 {
 	#if REMOTE_DEBUGGER
-	mContext.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
+	mContext.preInstructionProc = WILDPreInstructionProc;
 	mContext.promptProc = LEORemoteDebuggerPrompt;
 	#endif
 	

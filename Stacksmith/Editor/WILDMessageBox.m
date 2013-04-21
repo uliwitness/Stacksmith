@@ -127,10 +127,10 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		
 		LEOInitContext( &ctx, [frontDoc scriptContextGroupObject] );
 		#if REMOTE_DEBUGGER
-		ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
+		ctx.preInstructionProc = WILDPreInstructionProc;
 		ctx.promptProc = LEORemoteDebuggerPrompt;
 		#endif
-		ctx.callNonexistentHandler = WILDCallNonexistentHandler;
+		ctx.callNonexistentHandlerProc = WILDCallNonexistentHandler;
 		
 		LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
 		LEOPushIntegerOnStack( &ctx, 0 );

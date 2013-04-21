@@ -62,3 +62,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 
 struct LEOContext;
 void		WILDCallNonexistentHandler( struct LEOContext* inContext, LEOHandlerID inHandler );
+void		WILDPreInstructionProc( struct LEOContext * inContext );
+
+
+extern NSString*	WILDScriptExecutionEventLoopMode;

@@ -15,6 +15,9 @@
 #import "WILDCardViewController.h"
 
 
+NSString*	WILDScriptExecutionEventLoopMode = @"WILDScriptExecutionEventLoopMode";
+
+
 BOOL	UKScanLineEnding( NSScanner* scanny, NSMutableString* outString, NSInteger* currentLine );
 void	WILDCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler );
 
@@ -296,6 +299,24 @@ NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 	return outString;
 }
 
+
+void	WILDPreInstructionProc( LEOContext * inContext )
+{
+	NSEvent	*	evt = [[NSApplication sharedApplication] nextEventMatchingMask: NSKeyDownMask untilDate: [NSDate date] inMode: WILDScriptExecutionEventLoopMode dequeue: YES];
+	if( evt )
+	{
+		NSString		*	theKeys = [evt charactersIgnoringModifiers];
+		if( theKeys.length > 0 && [theKeys characterAtIndex: 0] == '.' )
+		{
+			inContext->keepRunning = false;
+			return;
+		}
+	}
+	
+	LEORemoteDebuggerPreInstructionProc( inContext );
+}
+
+
 void	WILDCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler )
 {
 	BOOL			handled = NO;
@@ -385,10 +406,10 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 	
 	LEOInitContext( &ctx, [container scriptContextGroupObject] );
 	#if REMOTE_DEBUGGER
-	ctx.preInstructionProc = LEORemoteDebuggerPreInstructionProc;
+	ctx.preInstructionProc = WILDPreInstructionProc;
 	ctx.promptProc = LEORemoteDebuggerPrompt;
 	#endif
-	ctx.callNonexistentHandler = WILDCallNonexistentHandler;
+	ctx.callNonexistentHandlerProc = WILDCallNonexistentHandler;
 	
 	LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
 		
@@ -563,8 +584,8 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 				theScript = theScript->GetParentScript( theScript, &ctx );
 			if( !theScript )
 			{
-				if( ctx.callNonexistentHandler )
-					ctx.callNonexistentHandler( &ctx, handlerID );
+				if( ctx.callNonexistentHandlerProc )
+					ctx.callNonexistentHandlerProc( &ctx, handlerID );
 				break;
 			}
 		}
