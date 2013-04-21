@@ -1338,60 +1338,65 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	
 	if( [itemIdentifier isEqualToString: WILDCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"Stack"]];
 		[theButton setAction: @selector(showCardInfoPanel:)];
-		[theButton setImagePosition: NSImageAbove];
-		[theButton setTitle: @"Card Info"];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Card Info"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDBackgroundToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_128"]];
 		[theButton setAction: @selector(showBackgroundInfoPanel:)];
-		[theButton setImagePosition: NSImageAbove];
-		[theButton setTitle: @"Background Info"];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Background Info"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDStackToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_1000"]];
 		[theButton setAction: @selector(showStackInfoPanel:)];
-		[theButton setImagePosition: NSImageAbove];
-		[theButton setTitle: @"Stack Info"];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Stack Info"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDPrevCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_902"]];
 		[theButton setAction: @selector(goPrevCard:)];
-		[theButton setImagePosition: NSImageAbove];
-		[theButton setTitle: @"Previous"];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Previous Card"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDNextCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_26425"]];
 		[theButton setAction: @selector(goNextCard:)];
-		[theButton setImagePosition: NSImageAbove];
-		[theButton setTitle: @"Next"];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Next Card"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
 		[theItem setView: theButton];
