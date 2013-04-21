@@ -13,6 +13,7 @@
 #import "LEORemoteDebugger.h"
 #import "LEOInstructions.h"
 #import "WILDCardViewController.h"
+#import <Carbon/Carbon.h>
 
 
 NSString*	WILDScriptExecutionEventLoopMode = @"WILDScriptExecutionEventLoopMode";
@@ -302,16 +303,30 @@ NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 
 void	WILDPreInstructionProc( LEOContext * inContext )
 {
+#if 0
 	NSEvent	*	evt = [[NSApplication sharedApplication] nextEventMatchingMask: NSKeyDownMask untilDate: [NSDate date] inMode: WILDScriptExecutionEventLoopMode dequeue: YES];
 	if( evt )
 	{
 		NSString		*	theKeys = [evt charactersIgnoringModifiers];
-		if( theKeys.length > 0 && [theKeys characterAtIndex: 0] == '.' )
+		if( (evt.modifierFlags & NSCommandKeyMask) && theKeys.length > 0 && [theKeys characterAtIndex: 0] == '.' )
 		{
 			inContext->keepRunning = false;
 			return;
 		}
 	}
+#else
+	KeyMap		keyStates;
+	KeyMap		desiredKeyStates = { {0x00000000}, {0x00808000}, {0x00000000}, {0x00000000} };
+	GetKeys( keyStates );
+	if( keyStates[0].bigEndianValue == desiredKeyStates[0].bigEndianValue
+		&& keyStates[1].bigEndianValue == desiredKeyStates[1].bigEndianValue
+		&& keyStates[2].bigEndianValue == desiredKeyStates[2].bigEndianValue
+		&& keyStates[3].bigEndianValue == desiredKeyStates[3].bigEndianValue )
+	{
+		inContext->keepRunning = false;
+		return;
+	}
+#endif
 	
 	LEORemoteDebuggerPreInstructionProc( inContext );
 }
