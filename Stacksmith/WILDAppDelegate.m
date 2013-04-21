@@ -20,7 +20,6 @@
 #import "ForgeHostFunctionsStacksmith.h"
 #import "LEORemoteDebugger.h"
 #import <openssl/err.h>
-#import "WILDToolsPalette.h"
 
 
 @implementation WILDAppDelegate
@@ -51,8 +50,6 @@
 		// Functions specific to this host application:
 	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
 	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
-	
-	[WILDToolsPalette showToolsPaletteIfNeeded];
 	
 	#if REMOTE_DEBUGGER
 	LEOInitRemoteDebugger( "127.0.0.1" );
@@ -228,12 +225,6 @@
 -(IBAction)	orderFrontMessageBox: (id)sender
 {
 	[[WILDMessageBox sharedMessageBox] orderFrontMessageBox: self];
-}
-
-
--(IBAction)	orderFrontToolsPalette: (id)sender
-{
-	[[WILDToolsPalette sharedToolsPalette] orderFrontToolsPalette: self];
 }
 
 @end

@@ -42,12 +42,19 @@
 #import "ULIPaintOvalTool.h"
 #import "ULIPaintTextTool.h"
 #import "ULIPaintShapeTool.h"
-#import "WILDToolsPalette.h"
 
 #import "UKHelperMacros.h"
 
 
-@interface WILDCardViewController () <ULIPaintViewDelegate,NSPopoverDelegate>
+NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
+NSString*	WILDCardToolbarItemIdentifier = @"WILDCardToolbarItemIdentifier";
+NSString*	WILDBackgroundToolbarItemIdentifier = @"WILDBackgroundToolbarItemIdentifier";
+
+NSString*	WILDPrevCardToolbarItemIdentifier = @"WILDPrevCardToolbarItemIdentifier";
+NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifier";
+
+
+@interface WILDCardViewController () <ULIPaintViewDelegate,NSPopoverDelegate,NSToolbarDelegate>
 {
 	NSPopover	*	mCurrentPopover;
 }
@@ -1063,6 +1070,35 @@
 }
 
 
+-(IBAction)	toggleEditBrowseTool: (id)sender
+{
+	if( [[WILDTools sharedTools] currentTool] == WILDBrowseTool )
+		[[WILDTools sharedTools] setCurrentTool: WILDPointerTool];
+	else
+		[[WILDTools sharedTools] setCurrentTool: WILDBrowseTool];
+	
+	[mCardPictureView setCurrentTool: nil];
+	[mBackgroundPictureView setCurrentTool: nil];
+	
+	[[self guidelineView] setNeedsDisplay: YES];
+	
+	if( [[WILDTools sharedTools] currentTool] != WILDBrowseTool )
+	{
+		NSToolbar	*editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDEditToolbar"] autorelease];
+		[editToolbar setDelegate: self];
+		[editToolbar setAllowsUserCustomization: NO];
+		[editToolbar setVisible: NO];
+		[self.view.window setToolbar: editToolbar];
+		[self.view.window toggleToolbarShown: self];
+	}
+	else
+	{
+		[self.view.window toggleToolbarShown: self];
+		[self.view.window setToolbar: nil];
+	}
+}
+
+
 -(IBAction)	chooseToolWithTag: (id)sender
 {
 	WILDTool		desiredTool = [sender tag];
@@ -1272,10 +1308,7 @@
 
 -(void)	paintViewWillBecomeCurrent: (ULIPaintView*)sender
 {
-	[mBackgroundPictureView setLineColor: [[WILDToolsPalette sharedToolsPalette] lineColor]];
-	[mBackgroundPictureView setFillColor: [[WILDToolsPalette sharedToolsPalette] fillColor]];
-	[mCardPictureView setLineColor: [[WILDToolsPalette sharedToolsPalette] lineColor]];
-	[mCardPictureView setFillColor: [[WILDToolsPalette sharedToolsPalette] fillColor]];
+	
 }
 
 -(void)	paintViewImageDidChange: (ULIPaintView*)sender
@@ -1294,6 +1327,89 @@
 -(WILDGuidelineView*)	guidelineView
 {
 	return mGuidelineView;
+}
+
+
+- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+{
+	NSToolbarItem	*	theItem = [[[NSToolbarItem alloc] initWithItemIdentifier: itemIdentifier] autorelease];
+	
+	// +++ Add final icons
+	
+	if( [itemIdentifier isEqualToString: WILDCardToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"Stack"]];
+		[theButton setAction: @selector(showCardInfoPanel:)];
+		[theButton setImagePosition: NSImageAbove];
+		[theButton setTitle: @"Card Info"];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDBackgroundToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"ICON_128"]];
+		[theButton setAction: @selector(showBackgroundInfoPanel:)];
+		[theButton setImagePosition: NSImageAbove];
+		[theButton setTitle: @"Background Info"];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDStackToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"ICON_1000"]];
+		[theButton setAction: @selector(showStackInfoPanel:)];
+		[theButton setImagePosition: NSImageAbove];
+		[theButton setTitle: @"Stack Info"];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDPrevCardToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"ICON_902"]];
+		[theButton setAction: @selector(goPrevCard:)];
+		[theButton setImagePosition: NSImageAbove];
+		[theButton setTitle: @"Previous"];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDNextCardToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,56)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"ICON_26425"]];
+		[theButton setAction: @selector(goNextCard:)];
+		[theButton setImagePosition: NSImageAbove];
+		[theButton setTitle: @"Next"];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theItem setView: theButton];
+	}
+	
+	return theItem;
+}
+    
+/* Returns the ordered list of items to be shown in the toolbar by default.   If during initialization, no overriding values are found in the user defaults, or if the user chooses to revert to the default items this set will be used. */
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+	return @[ WILDStackToolbarItemIdentifier, WILDBackgroundToolbarItemIdentifier, WILDCardToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDPrevCardToolbarItemIdentifier, WILDNextCardToolbarItemIdentifier ];
+}
+
+/* Returns the list of all allowed items by identifier.  By default, the toolbar does not assume any items are allowed, even the separator.  So, every allowed item must be explicitly listed.  The set of allowed items is used to construct the customization palette.  The order of items does not necessarily guarantee the order of appearance in the palette.  At minimum, you should return the default item list.*/
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+	return @[ WILDStackToolbarItemIdentifier, WILDBackgroundToolbarItemIdentifier, WILDCardToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDPrevCardToolbarItemIdentifier, WILDNextCardToolbarItemIdentifier ];
 }
 
 @end

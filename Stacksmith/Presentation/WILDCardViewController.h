@@ -77,6 +77,7 @@
 -(IBAction)	createNewBackground: (id)sender;
 
 -(IBAction)	chooseToolWithTag: (id)sender;
+-(IBAction)	toggleEditBrowseTool: (id)sender;
 
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 

@@ -1567,15 +1567,6 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
-								<object class="NSMenuItem" id="737628">
-									<reference key="NSMenu" ref="835318025"/>
-									<string key="NSTitle">Tools</string>
-									<string key="NSKeyEquiv">T</string>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="1033313550"/>
-									<reference key="NSMixedImage" ref="310636482"/>
-								</object>
 								<object class="NSMenuItem" id="486582978">
 									<reference key="NSMenu" ref="835318025"/>
 									<string key="NSTitle">Message</string>
@@ -2630,14 +2621,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">orderFrontToolsPalette:</string>
-						<reference key="source" ref="493422503"/>
-						<reference key="destination" ref="737628"/>
-					</object>
-					<int key="connectionID">726</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">orderFrontMessageBox:</string>
 						<reference key="source" ref="493422503"/>
 						<reference key="destination" ref="486582978"/>
@@ -3101,7 +3084,6 @@
 							<reference ref="575023229"/>
 							<reference ref="1011231497"/>
 							<reference ref="470793331"/>
-							<reference ref="737628"/>
 							<reference ref="486582978"/>
 						</object>
 						<reference key="parent" ref="713487014"/>
@@ -3867,11 +3849,6 @@
 						<reference key="parent" ref="835318025"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">725</int>
-						<reference key="object" ref="737628"/>
-						<reference key="parent" ref="835318025"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">730</int>
 						<reference key="object" ref="486582978"/>
 						<reference key="parent" ref="835318025"/>
@@ -4187,7 +4164,6 @@
 					<string>721.IBPluginDependency</string>
 					<string>722.IBPluginDependency</string>
 					<string>724.IBPluginDependency</string>
-					<string>725.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>730.IBPluginDependency</string>
 					<string>732.IBPluginDependency</string>
@@ -4426,7 +4402,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -4462,73 +4437,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSDocument</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>printDocument:</string>
-							<string>revertDocumentToSaved:</string>
-							<string>runPageLayout:</string>
-							<string>saveDocument:</string>
-							<string>saveDocumentAs:</string>
-							<string>saveDocumentTo:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>printDocument:</string>
-							<string>revertDocumentToSaved:</string>
-							<string>runPageLayout:</string>
-							<string>saveDocument:</string>
-							<string>saveDocumentAs:</string>
-							<string>saveDocumentTo:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">printDocument:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">revertDocumentToSaved:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">runPageLayout:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">saveDocument:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">saveDocumentAs:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">saveDocumentTo:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSDocument.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -4611,12 +4519,10 @@
 							<string>goHelp:</string>
 							<string>orderFrontMessageBox:</string>
 							<string>orderFrontStandardAboutPanel:</string>
-							<string>orderFrontToolsPalette:</string>
 							<string>toggleBackgroundEditMode:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4630,7 +4536,6 @@
 							<string>goHelp:</string>
 							<string>orderFrontMessageBox:</string>
 							<string>orderFrontStandardAboutPanel:</string>
-							<string>orderFrontToolsPalette:</string>
 							<string>toggleBackgroundEditMode:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -4645,10 +4550,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">orderFrontStandardAboutPanel:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">orderFrontToolsPalette:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -4673,9 +4574,11 @@
 							<string>chooseToolWithTag:</string>
 							<string>copyCard:</string>
 							<string>createNewBackground:</string>
+							<string>createNewBrowser:</string>
 							<string>createNewButton:</string>
 							<string>createNewCard:</string>
 							<string>createNewField:</string>
+							<string>createNewMoviePlayer:</string>
 							<string>cutCard:</string>
 							<string>deleteCard:</string>
 							<string>editBackgroundScript:</string>
@@ -4698,9 +4601,13 @@
 							<string>showCardInfoPanel:</string>
 							<string>showFindPanel:</string>
 							<string>showStackInfoPanel:</string>
+							<string>toggleEditBrowseTool:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4740,9 +4647,11 @@
 							<string>chooseToolWithTag:</string>
 							<string>copyCard:</string>
 							<string>createNewBackground:</string>
+							<string>createNewBrowser:</string>
 							<string>createNewButton:</string>
 							<string>createNewCard:</string>
 							<string>createNewField:</string>
+							<string>createNewMoviePlayer:</string>
 							<string>cutCard:</string>
 							<string>deleteCard:</string>
 							<string>editBackgroundScript:</string>
@@ -4765,6 +4674,7 @@
 							<string>showCardInfoPanel:</string>
 							<string>showFindPanel:</string>
 							<string>showStackInfoPanel:</string>
+							<string>toggleEditBrowseTool:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -4785,6 +4695,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">createNewBrowser:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">createNewButton:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -4794,6 +4708,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">createNewField:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">createNewMoviePlayer:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -4882,6 +4800,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">showStackInfoPanel:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleEditBrowseTool:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

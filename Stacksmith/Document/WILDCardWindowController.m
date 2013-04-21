@@ -63,6 +63,31 @@
 //		if( ![[NSFileManager defaultManager] fileExistsAtPath: iconPath] )
 //			[self performSelector: @selector(generatePreview) withObject: nil afterDelay: 0.0];
 //	}
+	
+	NSButton	*	fsButton = [self.window standardWindowButton: NSWindowFullScreenButton];
+	NSRect			theBox;
+	NSView		*	windowWidgetSuperview = [fsButton superview];
+	if( !fsButton )
+		windowWidgetSuperview = [[self.window standardWindowButton: NSWindowCloseButton] superview];
+	theBox = [windowWidgetSuperview bounds];
+	theBox.origin.y = NSMaxY(theBox) -22;
+	theBox.size.height = 22;
+	if( fsButton )
+		theBox.size.width = fsButton.frame.origin.x -4;
+	NSButton	*	editButton = [[NSButton alloc] initWithFrame: theBox];
+	[editButton setAutoresizingMask: NSViewMaxXMargin | NSViewMinYMargin];
+	[[editButton cell] setControlSize: NSMiniControlSize];
+	[editButton setTitle: @"Edit"];
+	[editButton setBezelStyle: NSRoundedBezelStyle];
+	[editButton setImagePosition: NSNoImage];
+	[editButton sizeToFit];
+	[editButton setKeyEquivalentModifierMask: NSCommandKeyMask | NSControlKeyMask];
+	[editButton setKeyEquivalent: @"\t"];
+	[editButton setAction: @selector(toggleEditBrowseTool:)];
+	theBox.origin.x = NSMaxX(theBox) - editButton.frame.size.width;
+	theBox.size.width = editButton.frame.size.width;
+	[editButton setFrame: theBox];
+	[windowWidgetSuperview addSubview: editButton];
 }
 
 
