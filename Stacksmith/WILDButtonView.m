@@ -79,7 +79,11 @@
 	if( isInside )
 	{
 		if( autoHighlight )
+		{
 			[[self cell] setHighlighted: NO];
+			[self setNeedsDisplay: YES];
+			[self.window display];
+		}
 		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUp %ld", [event buttonNumber] +1 );
 		[[self target] performSelector: [self action] withObject: self];
 	}
