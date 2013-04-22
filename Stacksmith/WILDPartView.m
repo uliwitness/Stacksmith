@@ -578,13 +578,13 @@
 	{
 		if( horzGuidelinePos > 0 )
 			[guidelineView addGuidelineAt: horzGuidelinePos horizontal: NO color: [NSColor blueColor]];
-//		inBigBox->origin.x -= xMovement;
+		inBigBox->origin.x -= xMovement;
 	}
 	if( vertGuidelinePos != -1 )
 	{
 		if( vertGuidelinePos > 0 )
 			[guidelineView addGuidelineAt: vertGuidelinePos horizontal: YES color: [NSColor blueColor]];
-//		inBigBox->origin.y -= yMovement;
+		inBigBox->origin.y -= yMovement;
 	}
 	
 	[guidelineView setNeedsDisplay: YES];
@@ -608,22 +608,22 @@
 	if( (inHandle & WILDPartGrabHandleLeft) && ((left -6) < NSMinX(inBox)) && ((left +6) > NSMinX(inBox)) )
 	{
 		[guidelineView addGuidelineAt: left horizontal: NO color: [NSColor blueColor]];
-//		inBigBox->origin.x -= NSMinX(inBox) -left;
+		inBigBox->origin.x -= NSMinX(inBox) -left;
 	}
 	if( (inHandle & WILDPartGrabHandleRight) && ((right -6) < NSMaxX(inBox)) && ((right +6) > NSMaxX(inBox)) )
 	{
 		[guidelineView addGuidelineAt: right horizontal: NO color: [NSColor blueColor]];
-//		inBigBox->size.width += NSMaxX(inBox) -right;
+		inBigBox->size.width += NSMaxX(inBox) -right;
 	}
 	if( (inHandle & WILDPartGrabHandleTop) && ((top -6) < NSMaxY(inBox)) && ((top +6) > NSMaxY(inBox)) )
 	{
 		[guidelineView addGuidelineAt: top horizontal: YES color: [NSColor blueColor]];
-//		inBigBox->origin.y -= NSMaxY(inBox) -top;
+		inBigBox->origin.y -= NSMaxY(inBox) -top;
 	}
 	if( (inHandle & WILDPartGrabHandleBottom) && ((bottom -6) < NSMinY(inBox)) && ((bottom +6) > NSMinY(inBox)) )
 	{
 		[guidelineView addGuidelineAt: bottom horizontal: YES color: [NSColor blueColor]];
-//		inBigBox->size.height += NSMinY(inBox) -bottom;
+		inBigBox->size.height += NSMinY(inBox) -bottom;
 	}
 	
 	// Guidelines at card center (horz & vert):
@@ -639,14 +639,14 @@
 	}
 	
 	// Snap to card edges:
-//	if( (inHandle & WILDPartGrabHandleLeft) && ([guidelineView bounds].origin.x +6) > NSMinX(inBox) && ([guidelineView bounds].origin.x -6) < NSMinX(inBox) )
-//		inBigBox->origin.x -= NSMinX(inBox) -[guidelineView bounds].origin.x;
-//	if( (inHandle & WILDPartGrabHandleRight) && ([guidelineView bounds].origin.y +6) > NSMinY(inBox) && ([guidelineView bounds].origin.y -6) < NSMinY(inBox) )
-//		inBigBox->origin.y -= NSMinY(inBox) -[guidelineView bounds].origin.y;
-//	if( (inHandle & WILDPartGrabHandleTop) && (NSMaxX([guidelineView bounds]) -6) < NSMaxX(inBox) && (NSMaxX([guidelineView bounds]) +6) > NSMaxX(inBox) )
-//		inBigBox->origin.x -= NSMaxX(inBox) -NSMaxX([guidelineView bounds]);
-//	if( (inHandle & WILDPartGrabHandleBottom) && (NSMaxY([guidelineView bounds]) -6) < NSMaxY(inBox) && (NSMaxY([guidelineView bounds]) +6) > NSMaxY(inBox) )
-//		inBigBox->origin.y -= NSMaxY(inBox) -NSMaxY([guidelineView bounds]);
+	if( (inHandle & WILDPartGrabHandleLeft) && ([guidelineView bounds].origin.x +6) > NSMinX(inBox) && ([guidelineView bounds].origin.x -6) < NSMinX(inBox) )
+		inBigBox->origin.x -= NSMinX(inBox) -[guidelineView bounds].origin.x;
+	if( (inHandle & WILDPartGrabHandleRight) && ([guidelineView bounds].origin.y +6) > NSMinY(inBox) && ([guidelineView bounds].origin.y -6) < NSMinY(inBox) )
+		inBigBox->origin.y -= NSMinY(inBox) -[guidelineView bounds].origin.y;
+	if( (inHandle & WILDPartGrabHandleTop) && (NSMaxX([guidelineView bounds]) -6) < NSMaxX(inBox) && (NSMaxX([guidelineView bounds]) +6) > NSMaxX(inBox) )
+		inBigBox->origin.x -= NSMaxX(inBox) -NSMaxX([guidelineView bounds]);
+	if( (inHandle & WILDPartGrabHandleBottom) && (NSMaxY([guidelineView bounds]) -6) < NSMaxY(inBox) && (NSMaxY([guidelineView bounds]) +6) > NSMaxY(inBox) )
+		inBigBox->origin.y -= NSMaxY(inBox) -NSMaxY([guidelineView bounds]);
 	
 	[guidelineView setNeedsDisplay: YES];
 }
