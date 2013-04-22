@@ -11,11 +11,11 @@
 
 @interface WILDMessageBox : NSWindowController
 {
-    NSTextField		*		messageField;
+    NSTextView		*		messageField;
 	NSButton		*		runButton;
 }
 
-@property (retain) IBOutlet NSTextField		*		messageField;
+@property (retain) IBOutlet NSTextView		*		messageField;
 @property (retain) IBOutlet NSButton		*		runButton;
 
 +(WILDMessageBox*)	sharedMessageBox;

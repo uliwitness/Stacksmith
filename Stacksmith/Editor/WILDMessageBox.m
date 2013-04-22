@@ -64,6 +64,9 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	NSSize	maxSize = [[self window] minSize];
 	maxSize.width = FLT_MAX;
 	[[self window] setMaxSize: maxSize];
+	
+	[messageField setTextContainerInset: NSMakeSize(16,16)];
+	[messageField setFont: [NSFont userFixedPitchFontOfSize: 12]];
 }
 
 
@@ -99,7 +102,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	*/
 	
 	WILDDocument*	frontDoc = [self frontDoc];
-	NSString	*	currCmd = [messageField stringValue];
+	NSString	*	currCmd = [messageField string];
 	const char	*	scriptStr = [currCmd UTF8String];
 	LEOScript	*	theScript = NULL;
 	uint16_t		fileID = LEOFileIDForFileName( [[[self window] title] UTF8String] );
@@ -196,7 +199,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 -(void)		setStringValue: (NSString*)messageString
 {
 	NSWindow	*	theWindow = [self window];	// Load the window.
-	[messageField setStringValue: messageString];
+	[messageField setString: messageString];
 	
 	if( ![theWindow isVisible] )
 		[self showWindow: self];
@@ -211,6 +214,18 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		[[self window] orderOut: sender];
 	else
 		[self showWindow: self];
+}
+
+
+-(BOOL) textView: (NSTextView *)textView doCommandBySelector: (SEL)commandSelector
+{
+	if( commandSelector == @selector(insertNewline:) )
+	{
+		[self runMessageWithHighlight: textView];
+		return YES;
+	}
+	else
+		return NO;
 }
 
 @end
