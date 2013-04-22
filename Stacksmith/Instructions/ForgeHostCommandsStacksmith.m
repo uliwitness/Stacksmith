@@ -442,7 +442,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EPutIdentifier, WILD_PRINT_INSTR, 0, 0, '\0',
+		EPutIdentifier, WILD_PRINT_INSTR, BACK_OF_STACK, 0, '\0',
 		{
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
