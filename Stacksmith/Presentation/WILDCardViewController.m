@@ -1338,7 +1338,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	
 	if( [itemIdentifier isEqualToString: WILDCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"Stack"]];
 		[theButton setAction: @selector(showCardInfoPanel:)];
@@ -1351,7 +1351,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	}
 	else if( [itemIdentifier isEqualToString: WILDBackgroundToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_128"]];
 		[theButton setAction: @selector(showBackgroundInfoPanel:)];
@@ -1364,7 +1364,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	}
 	else if( [itemIdentifier isEqualToString: WILDStackToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_1000"]];
 		[theButton setAction: @selector(showStackInfoPanel:)];
@@ -1377,7 +1377,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	}
 	else if( [itemIdentifier isEqualToString: WILDPrevCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_902"]];
 		[theButton setAction: @selector(goPrevCard:)];
@@ -1390,7 +1390,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	}
 	else if( [itemIdentifier isEqualToString: WILDNextCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,48,48)] autorelease];
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_26425"]];
 		[theButton setAction: @selector(goNextCard:)];
