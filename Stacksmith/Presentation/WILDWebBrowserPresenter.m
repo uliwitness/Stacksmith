@@ -14,6 +14,11 @@
 #import "WILDStack.h"
 #import "UKHelperMacros.h"
 #import "WILDPartContents.h"
+#import "StacksmithVersion.h"
+
+
+#define TOSTRING2(x)	#x
+#define TOSTRING(x)		TOSTRING2(x)
 
 
 @interface WILDWebBrowserPresenter ()
@@ -48,6 +53,7 @@
 		[mWebView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 		[mPartView addSubview: mWebView];
 		[mWebView setFrameLoadDelegate: self];
+		[mWebView setApplicationNameForUserAgent: @"Stacksmith/" TOSTRING(STACKSMITH_SHORT_VERSION) "." TOSTRING(SVN_VERSION_NUM)];
 //		[mWebView setUIDelegate: self];
 	}
 	
@@ -159,17 +165,5 @@
 {
 	WILDScriptContainerResultFromSendingMessage( [mPartView part], @"loadPage %@", error.localizedDescription );
 }
-
-
-//- (void)webView:(WebView *)sender setStatusText:(NSString *)text
-//{
-//	[[mPartView part] setStatusMessage: text];
-//}
-//
-//
-//- (NSString *)webViewStatusText:(WebView *)sender
-//{
-//	return [[mPartView part] statusMessage];
-//}
 
 @end
