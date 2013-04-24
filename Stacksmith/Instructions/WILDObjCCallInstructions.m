@@ -106,6 +106,31 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 			long long		cNum = LEOGetValueAsInteger( currParam, inContext );
 			[inv setArgument: &cNum atIndex: x];
 		}
+		else if( [currType isEqualToString: @"double"] )
+		{
+			double			cNum = LEOGetValueAsNumber( currParam, inContext );
+			[inv setArgument: &cNum atIndex: x];
+		}
+		else if( [currType isEqualToString: @"float"] )
+		{
+			float			cNum = LEOGetValueAsNumber( currParam, inContext );
+			[inv setArgument: &cNum atIndex: x];
+		}
+		else if( [currType isEqualToString: @"bool"] )
+		{
+			bool			cFlag = LEOGetValueAsBoolean( currParam, inContext );
+			[inv setArgument: &cFlag atIndex: x];
+		}
+		else if( [currType isEqualToString: @"BOOL"] )
+		{
+			BOOL			cFlag = LEOGetValueAsBoolean( currParam, inContext );
+			[inv setArgument: &cFlag atIndex: x];
+		}
+		else if( [currType isEqualToString: @"Boolean"] )
+		{
+			Boolean			cFlag = LEOGetValueAsBoolean( currParam, inContext );
+			[inv setArgument: &cFlag atIndex: x];
+		}
 		else if( [currType hasSuffix: @"*"] )
 		{
 			if( receiver->base.isa != &kLeoValueTypeNativeObject )
@@ -153,6 +178,36 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 		long long	retVal = 0;
 		[inv getReturnValue: &retVal];
 		LEOPushIntegerOnStack( inContext, retVal );
+	}
+	else if( [returnType isEqualToString: @"double"] )
+	{
+		double	retVal = 0;
+		[inv getReturnValue: &retVal];
+		LEOPushNumberOnStack( inContext, retVal );
+	}
+	else if( [returnType isEqualToString: @"float"] )
+	{
+		float	retVal = 0;
+		[inv getReturnValue: &retVal];
+		LEOPushNumberOnStack( inContext, retVal );
+	}
+	else if( [returnType isEqualToString: @"bool"] )
+	{
+		bool	retVal = 0;
+		[inv getReturnValue: &retVal];
+		LEOPushBooleanOnStack( inContext, retVal );
+	}
+	else if( [returnType isEqualToString: @"BOOL"] )
+	{
+		BOOL	retVal = 0;
+		[inv getReturnValue: &retVal];
+		LEOPushBooleanOnStack( inContext, retVal );
+	}
+	else if( [returnType isEqualToString: @"Boolean"] )
+	{
+		Boolean	retVal = 0;
+		[inv getReturnValue: &retVal];
+		LEOPushBooleanOnStack( inContext, retVal );
 	}
 	else if( [returnType hasSuffix: @"*"] )
 	{
