@@ -84,6 +84,8 @@
 -(QTMovie*)		movieOfType: (NSString*)typ name: (NSString*)theName;	// Movies & sounds.
 -(QTMovie*)		movieOfType: (NSString*)typ id: (WILDObjectID)theID;	// Movies & sounds.
 
+-(NSURL*)		URLForMediaOfType: (NSString*)typ name: (NSString*)theName;
+
 -(id<WILDVisibleObject>)	visibleObjectForWILDObject: (id)inObjectToFind;
 
 -(struct LEOContextGroup*)	scriptContextGroupObject;

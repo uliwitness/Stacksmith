@@ -15,6 +15,7 @@
 #include "LEOScript.h"
 #include "LEORemoteDebugger.h"
 #import "WILDMessageBox.h"
+#import "ULIMelodyQueue.h"
 
 
 void	WILDGoInstruction( LEOContext* inContext );
@@ -26,6 +27,7 @@ void	WILDDeleteInstruction( LEOContext* inContext );
 void	WILDDebugCheckpointInstruction( LEOContext* inContext );
 void	WILDCreateUserPropertyInstruction( LEOContext* inContext );
 void	WILDPrintInstruction( LEOContext* inContext );
+void	WILDPlayMelodyInstruction( LEOContext* inContext );
 
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
@@ -315,6 +317,62 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 }
 
 
+/*!
+ Pop a value off the back of the stack (or just read it from the given
+ BasePointer-relative address) and delete it. If it's an object, we remove it
+ from its owner, if it is a chunk, we empty it and any delimiters.
+ (WILD_PLAY_MELODY_INSTR)
+ */
+
+void	WILDPlayMelodyInstruction( LEOContext* inContext )
+{
+	LEODebugPrintContext( inContext );
+	
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+
+	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
+	LEOValuePtr	theMelody = inContext->stackEndPtr -1;
+	
+	char		instrNameStrBuf[256] = {};
+	const char*	instrNameStr = LEOGetValueAsString( theInstrument, instrNameStrBuf, sizeof(instrNameStrBuf), inContext );
+	if( !inContext->keepRunning )
+		return;
+	char		melodyStrBuf[256] = {};
+	const char*	melodyStr = LEOGetValueAsString( theMelody, melodyStrBuf, sizeof(melodyStrBuf), inContext );
+	if( !inContext->keepRunning )
+		return;
+	
+	NSString		*	resourceName = [NSString stringWithUTF8String: instrNameStr];
+	NSURL			*	theURL = [frontStack.document URLForMediaOfType: @"sound" name: resourceName];
+	if( !theURL )
+	{
+		NSString	*	thePath = [[NSBundle mainBundle] pathForSoundResource: resourceName];
+		if( thePath )
+			theURL = [NSURL fileURLWithPath: thePath];
+	}
+	if( !theURL )
+	{
+		theURL = [NSURL fileURLWithPath: [NSString stringWithFormat: @"/System/Library/Sounds/%@.aiff", resourceName]];
+		if( ![theURL checkResourceIsReachableAndReturnError: NULL] )
+			theURL = nil;
+	}
+	
+	if( !theURL )
+	{
+		LEOContextStopWithError( inContext, "Can't find sound '%s'.", instrNameStr );
+		return;
+	}
+	
+	ULIMelodyQueue	*	melodyQueue = [[[ULIMelodyQueue alloc] initWithInstrument: theURL] autorelease];
+	[melodyQueue addMelody: [NSString stringWithUTF8String: melodyStr]];
+	[melodyQueue play];
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
 LEOINSTR(WILDVisualEffectInstruction)
@@ -324,7 +382,8 @@ LEOINSTR(WILDCreateInstruction)
 LEOINSTR(WILDDeleteInstruction)
 LEOINSTR(WILDDebugCheckpointInstruction)
 LEOINSTR(WILDCreateUserPropertyInstruction)
-LEOINSTR_LAST(WILDPrintInstruction)
+LEOINSTR(WILDPrintInstruction)
+LEOINSTR_LAST(WILDPlayMelodyInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostCommands[] =
@@ -446,6 +505,20 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		{
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EPlayIdentifier, WILD_PLAY_MELODY_INSTR, 0, 0, '\0',
+		{
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

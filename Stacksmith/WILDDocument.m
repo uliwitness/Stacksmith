@@ -562,6 +562,23 @@
 }
 
 
+-(NSURL*)		URLForMediaOfType: (NSString*)typ name: (NSString*)theName
+{
+	theName = [theName lowercaseString];
+	for( WILDMediaEntry* currPic in mMediaList )
+	{
+		if( [[currPic pictureType] isEqualToString: typ]
+			&& [[currPic name] isEqualToString: theName] )
+		{
+			return [[self fileURL] URLByAppendingPathComponent: [currPic filename]];
+			break;
+		}
+	}
+	
+	return nil;
+}
+
+
 -(QTMovie*)		movieOfType: (NSString*)typ name: (NSString*)theName
 {
 	theName = [theName lowercaseString];
