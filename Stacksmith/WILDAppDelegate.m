@@ -19,7 +19,8 @@
 #import "ForgeHostCommandsStacksmith.h"
 #import "ForgeHostFunctionsStacksmith.h"
 #import "LEORemoteDebugger.h"
-#import <openssl/err.h>
+//#import <openssl/err.h>
+#import "UKCrashReporter.h"
 
 
 @implementation WILDAppDelegate
@@ -94,6 +95,12 @@
 	mFlagsChangedEventMonitor = [[NSEvent addLocalMonitorForEventsMatchingMask: NSFlagsChangedMask handler: ^(NSEvent* inEvent){ return [self handleFlagsChangedEvent: inEvent]; }] retain];
 	
 	[[NSColorPanel sharedColorPanel] setShowsAlpha: YES];
+}
+
+
+-(void)	applicationDidFinishLaunching:(NSNotification *)notification
+{
+	UKCrashReporterCheckForCrash();
 }
 
 

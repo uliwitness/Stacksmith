@@ -257,6 +257,12 @@
 		55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13D16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp */; };
 		55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55AE22E11346C99E000B5BBE /* Help.xstk */; };
 		55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */; };
+		55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29C9617276C4700B38E75 /* UKCrashReporter.m */; };
+		55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */; };
+		55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */; };
+		55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29CA317276E8E00B38E75 /* UKNibOwner.m */; };
+		55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29CA517276E8E00B38E75 /* UKSystemInfo.m */; };
+		55B29CA91727731800B38E75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B29CA81727731800B38E75 /* AddressBook.framework */; };
 		55B79A8813D0319A00BC0A19 /* ULIHighlightingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B79A8713D0319A00BC0A19 /* ULIHighlightingButton.m */; };
 		55B9220A11674E880073EC6C /* WILDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9220911674E880073EC6C /* WILDTools.m */; };
 		55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B9225C11675D270073EC6C /* Quartz.framework */; };
@@ -832,6 +838,15 @@
 		55AE22E11346C99E000B5BBE /* Help.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Help.xstk; sourceTree = "<group>"; };
 		55B296BD146DE5D6009E60CB /* WILDCheckboxRadioPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCheckboxRadioPresenter.h; path = Presentation/WILDCheckboxRadioPresenter.h; sourceTree = "<group>"; };
 		55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCheckboxRadioPresenter.m; path = Presentation/WILDCheckboxRadioPresenter.m; sourceTree = "<group>"; };
+		55B29C9517276C4700B38E75 /* UKCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCrashReporter.h; path = ../UliKit/UKCrashReporter.h; sourceTree = "<group>"; };
+		55B29C9617276C4700B38E75 /* UKCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKCrashReporter.m; path = ../UliKit/UKCrashReporter.m; sourceTree = "<group>"; };
+		55B29C9D17276D4100B38E75 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = ../UliKit/English.lproj/UKCrashReporter.strings; sourceTree = "<group>"; };
+		55B29C9F17276D4100B38E75 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = ../UliKit/English.lproj/UKCrashReporter.xib; sourceTree = "<group>"; };
+		55B29CA217276E8E00B38E75 /* UKNibOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKNibOwner.h; path = ../UliKit/UKNibOwner.h; sourceTree = "<group>"; };
+		55B29CA317276E8E00B38E75 /* UKNibOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKNibOwner.m; path = ../UliKit/UKNibOwner.m; sourceTree = "<group>"; };
+		55B29CA417276E8E00B38E75 /* UKSystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKSystemInfo.h; path = ../UliKit/UKSystemInfo.h; sourceTree = "<group>"; };
+		55B29CA517276E8E00B38E75 /* UKSystemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKSystemInfo.m; path = ../UliKit/UKSystemInfo.m; sourceTree = "<group>"; };
+		55B29CA81727731800B38E75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = ../../../../../System/Library/Frameworks/AddressBook.framework; sourceTree = "<group>"; };
 		55B79A8613D0319900BC0A19 /* ULIHighlightingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIHighlightingButton.h; path = ../UliKit/ULIHighlightingButton.h; sourceTree = "<group>"; };
 		55B79A8713D0319A00BC0A19 /* ULIHighlightingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIHighlightingButton.m; path = ../UliKit/ULIHighlightingButton.m; sourceTree = "<group>"; };
 		55B9220811674E880073EC6C /* WILDTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTools.h; path = Presentation/WILDTools.h; sourceTree = "<group>"; };
@@ -969,6 +984,7 @@
 				55A7BA73146690AF00AB0F34 /* AudioToolbox.framework in Frameworks */,
 				553E3C9416F6696000258F72 /* Sparkle.framework in Frameworks */,
 				55943B1C171F675E0051166C /* WebKit.framework in Frameworks */,
+				55B29CA91727731800B38E75 /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,6 +994,7 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55B29CA81727731800B38E75 /* AddressBook.framework */,
 				55943B1B171F675E0051166C /* WebKit.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				552FF244113F247A005742C8 /* QTKit.framework */,
@@ -1118,6 +1135,8 @@
 				55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */,
 				55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */,
 				5538245F17272EC2007785D8 /* frameworkheaders.hhc */,
+				55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */,
+				55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1472,6 +1491,12 @@
 				55FDD875171B27020045A2B9 /* UKTiledImageView.m */,
 				55FDD87F171B456E0045A2B9 /* UKBorderlessWindow.h */,
 				55FDD880171B456E0045A2B9 /* UKBorderlessWindow.m */,
+				55B29C9517276C4700B38E75 /* UKCrashReporter.h */,
+				55B29C9617276C4700B38E75 /* UKCrashReporter.m */,
+				55B29CA217276E8E00B38E75 /* UKNibOwner.h */,
+				55B29CA317276E8E00B38E75 /* UKNibOwner.m */,
+				55B29CA417276E8E00B38E75 /* UKSystemInfo.h */,
+				55B29CA517276E8E00B38E75 /* UKSystemInfo.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1980,6 +2005,8 @@
 				55FDD878171B29DE0045A2B9 /* CURS_0.pdf in Resources */,
 				557BC7D8171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib in Resources */,
 				5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */,
+				55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */,
+				55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2184,6 +2211,9 @@
 				55943B14171F5D050051166C /* WILDWebBrowserPresenter.m in Sources */,
 				5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */,
 				55382463172730B4007785D8 /* WILDObjCCallInstructions.m in Sources */,
+				55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */,
+				55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */,
+				55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2310,6 +2340,22 @@
 				55AA4B75131DA9CC00511656 /* English */,
 			);
 			name = StacksmithSplashScreen.jpg;
+			sourceTree = "<group>";
+		};
+		55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55B29C9D17276D4100B38E75 /* English */,
+			);
+			name = UKCrashReporter.strings;
+			sourceTree = "<group>";
+		};
+		55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55B29C9F17276D4100B38E75 /* English */,
+			);
+			name = UKCrashReporter.xib;
 			sourceTree = "<group>";
 		};
 		55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */ = {
