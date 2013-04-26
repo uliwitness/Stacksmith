@@ -7,7 +7,9 @@ fi
 HEADERDOC2HTML="$XCODE/usr/bin/headerdoc2html"
 GATHERHEADERDOC="$XCODE/usr/bin/gatherheaderdoc"
 
-cd `dirname "$0"`/Stacksmith/
-rm -rf ../docs/*
-$HEADERDOC2HTML -o ../docs .
-$GATHERHEADERDOC ../docs
+cd `dirname "$0"`
+rm -rf `dirname "$0"`/docs/*
+$HEADERDOC2HTML -o `dirname "$0"`/docs `dirname "$0"`/Stacksmith/
+$HEADERDOC2HTML -o `dirname "$0"`/docs `dirname "$0"`/Forge/
+$HEADERDOC2HTML -o `dirname "$0"`/docs `dirname "$0"`/Leonie/
+$GATHERHEADERDOC `dirname "$0"`/docs
