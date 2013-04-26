@@ -318,15 +318,17 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 
 
 /*!
- Pop a value off the back of the stack (or just read it from the given
- BasePointer-relative address) and delete it. If it's an object, we remove it
- from its owner, if it is a chunk, we empty it and any delimiters.
+ Take the name of an instrument off the back of the stack and look up the
+ corresponding sound file up the hierarchy and finally in the system. Also take
+ a melody string off the back of the stack and hand both of them off to
+ ULIMelodyQueue to play that melody using that instrument. Implements the 'play'
+ command.
  (WILD_PLAY_MELODY_INSTR)
  */
 
 void	WILDPlayMelodyInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
+	//LEODebugPrintContext( inContext );
 	
 	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
 
