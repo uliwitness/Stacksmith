@@ -6,6 +6,11 @@
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
+/*!
+	@header WILDDocument
+	Stacksmith's main document class.
+*/
+
 #import "WILDDocument.h"
 #import "WILDStack.h"
 #import "WILDCard.h"
@@ -26,13 +31,9 @@
 #import "WILDSearchPaths.h"
 #import "UKHelperMacros.h"
 
-
 /*!
 	@class WILDDocument
-	The document class representing an .xstk file package. In theory, the
-	Stacksmith file format allows for a package to contain several stacks.
-	Hence, the root of the hierarchy is a general document class, and not the
-	stack.
+	A document referencing the Stacksmith file on disk, containing one or more stacks, plus any information global to the file.
 */
 
 @implementation WILDDocument
@@ -40,10 +41,10 @@
 /*!
 	@method		init
 	@abstract	Default constructor, used both for loading stacks from disk and for creating a completely new stack on creation.
-	@seealso	-readFromURL:ofType:error:
+	@seealso	//leo_ref/occ/instm/WILDDocument/readFromURL:ofType:error: -readFromURL:ofType:error:
 */
 
-- (id)init;
+-(id)	init;
 {
     self = [super init];
     if( self )
@@ -165,7 +166,7 @@
 /*!
 	@method		writeToURL:ofType:forSaveOperation:originalContentsURL:error:
 	@abstract	Write any changes to this document back out to disk.
-	@seealso	-readFromURL:ofType:error:
+	@seealso	//leo_ref/occ/instm/WILDDocument/readFromURL:ofType:error:	-readFromURL:ofType:error:
 */
 
 - (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
@@ -229,7 +230,7 @@
 	@param		outError		If en error occurs, this will return an error object.
 */
 
--(BOOL)	loadStandardResourceTableReturningError: (NSError**)outError
+-(BOOL)	loadStandardResourceTableReturningError: (NSError**)outError;
 {
 	NSXMLDocument	*	stdDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"]]
 														options: 0 error: outError] autorelease];
@@ -255,11 +256,11 @@
 /*!
 	@method		readFromURL:ofType:error:
 	@abstract	Load data from a stack XML file into this stack object.
-	@seealso	-init
-	@seealso	-writeToURL:ofType:forSaveOperation:originalContentsURL:error:
+	@seealso	//leo_ref/occ/instm/WILDDocument/init	-init
+	@seealso	//leo_ref/occ/instm/WILDDocument/writeToURL:ofType:forSaveOperation:originalContentsURL:error: -writeToURL:ofType:forSaveOperation:originalContentsURL:error:
 */
 
-- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError;
 {
 	NSURL*		tocURL = absoluteURL;
 	BOOL		isDir = NO;

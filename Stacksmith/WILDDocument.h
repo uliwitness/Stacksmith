@@ -7,6 +7,12 @@
 //
 
 
+/*!
+	@header WILDDocument
+	Stacksmith's main document class.
+*/
+
+
 #import <Cocoa/Cocoa.h>
 #import <QTKit/QTKit.h>
 #import "WILDObjectID.h"
@@ -17,36 +23,26 @@
 
 
 /*!
-	@class WILDDocument A document referencing the Stacksmith file on disk, containing one or more stacks, plus any information global to the file. A document may have a "main" stack that gets opened at startup.
-	@var mErrorsAndWarnings		Errors and warnings when opening old documents, or stacks imported from HyperCard.
-	@var mFontIDTable			Font ID --> name mappings. Needed to read imported HyperCard stacks.
-	@var mTextStyles			STBL-extracted text/style info. Needed to read imported HyperCard stacks. Array of WILDStyleEntry objects
-	@var mMediaList				Pictures, movies, sounds etc. contained in this stack. Array of WILDMediaEntry objects.
-	@var mStacks				Array of WILDStack objects.
-	@var mCreatedByVersion	Version string of the version of Stacksmith (or HyperCard) that created this stack, includes the host app's name.
-	@var mLastCompactedVersion	Version string of the last version of Stacksmith (or HyperCard) that compacted this stack, includes the host app's name. (currently only initialized and set, but Stacksmith doesn't compact stacks)
-	@var mFirstEditedVersion	Version string of the first version of Stacksmith (or HyperCard) that edited this stack, includes the host app's name. (Initialized by Stacksmith for new files, maintained for imported stacks, but otherwise unused)
-	@var mLastEditedVersion		Version string of the most recent version of Stacksmith (or HyperCard) that edited this stack, includes the host app's name.
-	@var mContextGroup			The context group needed for the Leonie interpreter to compile and run scripts. This holds global variables etc.
-	@var mMediaIDSeed			ID number for next new icon etc. (unless already taken, then we'll add to it until we hit a free one)
-	@var mStackIDSeed			ID number for next new stack in document (unless already taken, then we'll add to it until we hit a free one).
+	@class WILDDocument
+	A document referencing the Stacksmith file on disk, containing one or more stacks, plus any information global to the file.
 */
+
 
 @interface WILDDocument : NSDocument
 {
-	NSMutableArray		*	mErrorsAndWarnings;
-	NSMutableDictionary	*	mFontIDTable;
-	NSMutableDictionary	*	mTextStyles;
-	NSMutableArray		*	mMediaList;
-	NSMutableArray		*	mStacks;
-	NSString			*	mCreatedByVersion;
-	NSString			*	mLastCompactedVersion;
-	NSString			*	mFirstEditedVersion;
-	NSString			*	mLastEditedVersion;
-	struct LEOContextGroup*	mContextGroup;
+	NSMutableArray		*	mErrorsAndWarnings;	//! Errors and warnings when opening old documents, or stacks imported from HyperCard.
+	NSMutableDictionary	*	mFontIDTable;		//! Font ID --> name mappings. Needed to read imported HyperCard stacks.
+	NSMutableDictionary	*	mTextStyles;		//! STBL-extracted text/style info. Needed to read imported HyperCard stacks. Array of WILDStyleEntry objects
+	NSMutableArray		*	mMediaList;			//! Pictures, movies, sounds etc. contained in this stack. Array of WILDMediaEntry objects.
+	NSMutableArray		*	mStacks;				//! Array of WILDStack objects loaded from this document.
+	NSString			*	mCreatedByVersion;		//! Version string of the version of Stacksmith (or HyperCard) that created this stack, includes the host app's name.
+	NSString			*	mLastCompactedVersion;	//! Version string of the last version of Stacksmith (or HyperCard) that compacted this stack, includes the host app's name. (currently only initialized and set, but Stacksmith doesn't compact stacks)
+	NSString			*	mFirstEditedVersion;	//! Version string of the first version of Stacksmith (or HyperCard) that edited this stack, includes the host app's name. (Initialized by Stacksmith for new files, maintained for imported stacks, but otherwise unused)
+	NSString			*	mLastEditedVersion;		//! Version string of the most recent version of Stacksmith (or HyperCard) that edited this stack, includes the host app's name.
+	struct LEOContextGroup*	mContextGroup;			//! The context group needed for the Leonie interpreter to compile and run scripts. This holds global variables etc.
 	
-	WILDObjectID			mMediaIDSeed;
-	WILDObjectID			mStackIDSeed;
+	WILDObjectID			mMediaIDSeed;			//! ID number for next new icon etc. (unless already taken, then we'll add to it until we hit a free one)
+	WILDObjectID			mStackIDSeed;			//! ID number for next new stack in document (unless already taken, then we'll add to it until we hit a free one).
 }
 
 -(void)			addFont: (NSString*)fontName withID: (WILDObjectID)fontID;
