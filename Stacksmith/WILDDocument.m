@@ -255,7 +255,7 @@
 	@seealso	-writeToURL:ofType:forSaveOperation:originalContentsURL:error:
 */
 
-- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError;
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
 	NSURL*		tocURL = absoluteURL;
 	BOOL		isDir = NO;
