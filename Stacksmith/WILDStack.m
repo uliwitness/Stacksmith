@@ -154,7 +154,7 @@
 			{
 				NSError*				theError = nil;
 				NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
-																	error: nil];
+																	error: &theError];
 				if( !cdDoc && theError )
 					NSLog(@"Could not load card: %@", theError);
 				WILDCard*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
