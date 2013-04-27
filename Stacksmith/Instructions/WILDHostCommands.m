@@ -33,6 +33,18 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext );
 size_t	kFirstStacksmithHostCommandInstruction = 0;
 
 
+/*!
+	Implements the 'go' command. The first (and only) parameter must be a
+	WILDObjectValue (i.e. isa = kLeoValueTypeWILDObject) that will be sent
+	a goThereInNewWindow: NO message. If the parameter is a string instead,
+	we will assume it is a stack that's not yet open and attempt to open that.
+	It will remove its parameters from the stack once it is done.
+	
+	It will use the current visual effect to perform the transition and will
+	clear the current visual effect once done.
+	
+	(WILD_GO_INSTR)
+*/
 void	WILDGoInstruction( LEOContext* inContext )
 {
 	LEOValuePtr			theValue = inContext->stackEndPtr -1;
@@ -63,6 +75,17 @@ void	WILDGoInstruction( LEOContext* inContext )
 }
 
 
+/*!
+	Implement the 'visual effect' command. This sets the current card view's
+	transition effect to the specified visual effect so the next 'go' command can
+	use it.
+	
+	The only parameter on the stack is a string, the name of the transition to
+	use. It will be removed from the stack once this instruction has completed.
+	
+	(WILD_VISUAL_EFFECT_INSTR)
+*/
+
 void	WILDVisualEffectInstruction( LEOContext* inContext )
 {
 	char str[1024] = { 0 };
@@ -86,6 +109,31 @@ void	WILDVisualEffectInstruction( LEOContext* inContext )
 	inContext->currentInstruction++;
 }
 
+
+/*!
+	Implement the 'answer' command. Displays an alert panel with a message and
+	up to 3 buttons. Parameters are removed from the stack on completion. The
+	name of the button the user clicked will be written into the local variables
+	'the result' and 'it'.
+	
+	msg		-	The message to display. The alert will resize vertically to fit
+				this message.
+	button1 -	The name for the first, leftmost button, or an empty string to
+				indicate the button should be named "OK".
+	button2 -	The name for the second button, to the right of button 1. Or an
+				empty string to indicate only 1 button is desired.
+	button3 -	The name for the 3rd button, to the right of button 2, or an
+				empty string to indicate no 3rd button is desired.
+	
+	The rightmost button will be made the 'OK' button and will react to the
+	return key.
+	
+	This command is deprecated. It is here as a concession to Stacksmith's HyperCard
+	heritage, but it is recommended you create buttons and text fields on the card
+	and let the user perform any actions you desire there.
+	
+	(WILD_ANSWER_INSTR)
+*/
 
 void	WILDAnswerInstruction( LEOContext* inContext )
 {
@@ -148,6 +196,24 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 }
 
 
+/*!
+	Implement the 'ask' command. Displays an alert panel with a message and
+	an input field, plus OK and Cancel buttons. Parameters are removed from the
+	stack on completion. The name of the button the user clicked will be written
+	into the local variable 'the result'. The text the user entered into the
+	edit field will be written into the local variable 'it'.
+	
+	msg		-	The message to display. The alert will resize vertically to fit
+				this message.
+	answer -	A default answer to write into the edit field to pre-fill it.
+	
+	This command is deprecated. It is here as a concession to Stacksmith's HyperCard
+	heritage, but it is recommended you create buttons and text fields on the card
+	and let the user perform any actions you desire there.
+	
+	(WILD_ASK_INSTR)
+*/
+
 void	WILDAskInstruction( LEOContext* inContext )
 {
 	char msgBuf[1024] = { 0 };
@@ -178,6 +244,19 @@ void	WILDAskInstruction( LEOContext* inContext )
 	inContext->currentInstruction++;
 }
 
+
+/*!
+	Implements the 'create' command (for objects). Use this to create new card
+	parts on the current card or current background (if in editBackground mode).
+	2 parameters must be pushed on the stack before this is called and will be
+	removed on completion:
+	
+	typeName	-	The type of part to create, i.e. button, field, player or
+					browser, as a string.
+	objectName	-	The name to give the new object.
+	
+	(WILD_CREATE_INSTR)
+*/
 
 void	WILDCreateInstruction( LEOContext* inContext )
 {
@@ -214,6 +293,13 @@ void	WILDCreateInstruction( LEOContext* inContext )
 }
 
 
+/*!
+	Enter the debugger at this line. Does nothing if the debugger is not running
+	or otherwise has been deactivated.
+	
+	(WILD_DEBUG_CHECKPOINT_INSTR)
+*/
+
 void	WILDDebugCheckpointInstruction( LEOContext* inContext )
 {
 	LEOInstruction	*	instr = inContext->currentInstruction;
@@ -225,6 +311,19 @@ void	WILDDebugCheckpointInstruction( LEOContext* inContext )
 	inContext->currentInstruction++;
 }
 
+
+/*!
+	Implements the 'create property' command. Adds a user property of the specified
+	name to the specified object. From then on this property will be usable just
+	like any built-in property of that object. Takes 2 parameters and removes them
+	from the stack on completion:
+	
+	propertyName	-	The name the new property should have, as a string.
+	object			-	The object to add the property to, as a WILDObjectValue
+						(i.e. isa = kLeoValueTypeWILDObject)
+	
+	(WILD_CREATE_USER_PROPERTY_INSTR)
+*/
 
 void	WILDCreateUserPropertyInstruction( LEOContext* inContext )
 {
@@ -248,6 +347,7 @@ void	WILDCreateUserPropertyInstruction( LEOContext* inContext )
 /*!
 	Pop a value off the back of the stack (or just read it from the given
 	BasePointer-relative address) and present it to the user in string form.
+	In Stacksmith, this means showing it in the message box.
 	(WILD_PRINT_INSTR)
 	
 	param1	-	If this is BACK_OF_STACK, we're supposed to pop the last item
@@ -281,7 +381,7 @@ void	WILDPrintInstruction( LEOContext* inContext )
 /*!
  Pop a value off the back of the stack (or just read it from the given
  BasePointer-relative address) and delete it. If it's an object, we remove it
- from its owner, if it is a chunk, we empty it and any delimiters.
+ from its owner, if it is a chunk, we empty it and remove any excess delimiters.
  (WILD_DELETE_INSTR)
  
  param1	-	If this is BACK_OF_STACK, we're supposed to pop the last item
@@ -391,9 +491,9 @@ LEOINSTR_LAST(WILDPlayMelodyInstruction)
 struct THostCommandEntry	gStacksmithHostCommands[] =
 {
 	{
-		EGoIdentifier, WILD_GO_INSTRUCTION, 0, 0, '\0',
+		EGoIdentifier, WILD_GO_INSTR, 0, 0, '\0',
 		{
-			{ EHostParamIdentifier, EToIdentifier, EHostParameterOptional, WILD_GO_INSTRUCTION, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, EToIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -407,8 +507,8 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 	{
 		EVisualIdentifier, WILD_VISUAL_EFFECT_INSTR, 0, 0, '\0',
 		{
-			{ EHostParamIdentifier, EEffectIdentifier, EHostParameterOptional, WILD_VISUAL_EFFECT_INSTR, 0, 0, '\0', '\0' },
-			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, EEffectIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamExpressionOrIdentifiersTillLineEnd, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

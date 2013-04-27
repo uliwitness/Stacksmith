@@ -1,10 +1,28 @@
 //
-//  ForgeWILDObjectValue.h
+//  WILDObjectValue.h
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 16.04.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
+
+/*!
+	@header WILDObjectValue
+	This file contains everything that is needed to interface Stacksmith's
+	Objective-C object hierarchy (buttons, fields, cards) with the Leonie bytecode
+	interpreter. A protocol that the Objective-C objects conform to, to allow
+	performing common operations on them (like retrieve property values, change
+	their value, call handlers in their scripts, add user properties etc.
+	
+	So that the Leonie bytecode interpreter can deal with objects of this type,
+	it also defines kLeoValueTypeWILDObject, which is like a native object, but
+	guarantees that the object conforms to the WILDObject protocol and is an
+	Objective-C object (the same could be done with C++ objects in other hosts
+	or on other platforms).
+	
+	You can create such a value using the <tt>LEOInitWILDObjectValue</tt> function,
+	just like any other values.
+*/
 
 #include "LEOValue.h"
 #import <Foundation/Foundation.h>

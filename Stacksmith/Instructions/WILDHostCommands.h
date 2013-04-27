@@ -6,13 +6,33 @@
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
+/*!
+	@header WILDHostCommands
+	Instructions and syntax parsing tables for all theStacksmith-specific commands.
+	These are all the one-off commands that Stacksmith offers that don't warrant
+	a file of their own, and that aren't cross-platform or that don't make sense
+	to build into the Forge core. E.g. anything UI-related or object model-related.
+	
+	Register them using:
+	<pre>
+	LEOAddInstructionsToInstructionArray( gStacksmithHostCommandInstructions, WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS, &kFirstStacksmithHostCommandInstruction );
+	LEOAddHostCommandsAndOffsetInstructions( gStacksmithHostCommands, kFirstStacksmithHostCommandInstruction );
+	</pre>
+*/
+
 #include "LEOInstructions.h"
 #include "ForgeTypes.h"
 
 
+/*!
+	The instruction ID constants Forge will need to add bytecode instructions
+	to a script to implement these Stacksmith-specific commands.
+	Add kFirstStacksmithHostCommandInstruction to these instruction ID constants
+	when generating code.
+*/
 enum
 {
-	WILD_GO_INSTRUCTION = 0,
+	WILD_GO_INSTR = 0,
 	WILD_VISUAL_EFFECT_INSTR,
 	WILD_ANSWER_INSTR,
 	WILD_ASK_INSTR,

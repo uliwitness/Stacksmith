@@ -6,6 +6,18 @@
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
+/*!
+	@header WILDHostFunctions
+	All the custom-syntax functions (including object descriptors) specific to
+	Stacksmith are implemented here, along with the syntax to parse them. To
+	register them, call:
+	
+	<pre>
+	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
+	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
+	</pre>
+*/
+
 #include "LEOInstructions.h"
 #include "ForgeTypes.h"
 

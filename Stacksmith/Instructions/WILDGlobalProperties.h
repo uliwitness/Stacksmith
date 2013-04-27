@@ -1,15 +1,34 @@
 //
-//  LEOGlobalProperties.h
-//  Leonie
+//  WILDGlobalProperties.h
+//  Stacksmith
 //
 //  Created by Uli Kusterer on 16.04.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
+/*!
+	@header WILDGlobalProperties
+	Define the instructions and the property name identifier -> instruction
+	mappings for the Stacksmith-specific global properties exposed to scripts.
+	
+	To make these available to the Forge parser and Leonie bytecode interpreter,
+	you need to register them using
+	<pre>
+	LEOAddInstructionsToInstructionArray( gGlobalPropertyInstructions, LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS, &kFirstGlobalPropertyInstruction );
+	LEOAddGlobalPropertiesAndOffsetInstructions( gHostGlobalProperties, kFirstGlobalPropertyInstruction );
+	</pre>
+*/
+
 #include "LEOInstructions.h"
 #include "ForgeTypes.h"
 
 
+/*!
+	The instruction ID constants Forge will need to add bytecode instructions
+	to a script for retrieving or changing our global properties.
+	Add kFirstGlobalPropertyInstruction to these instruction ID constants when
+	generating code.
+*/
 enum
 {
 	SET_CURSOR_INSTR = 0,
