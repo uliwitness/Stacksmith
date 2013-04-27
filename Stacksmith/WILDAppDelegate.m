@@ -15,9 +15,9 @@
 #import "WILDAboutPanelController.h"
 #import "WILDMessageBox.h"
 #import "Forge.h"
-#import "ForgeGlobalPropertiesStacksmith.h"
-#import "ForgeHostCommandsStacksmith.h"
-#import "ForgeHostFunctionsStacksmith.h"
+#import "WILDGlobalProperties.h"
+#import "WILDHostCommands.h"
+#import "WILDHostFunctions.h"
 #import "LEORemoteDebugger.h"
 //#import <openssl/err.h>
 #import "UKCrashReporter.h"

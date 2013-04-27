@@ -69,7 +69,7 @@
 		550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C0A5D1196C52000351067 /* WILDScrollView.m */; };
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
-		551D93921705A7AF003766DA /* ForgeDownloadInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* ForgeDownloadInstructionsStacksmith.m */; };
+		551D93921705A7AF003766DA /* WILDDownloadInstructions.m in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.m */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
 		552028D8140165D5000EEA4F /* WILDPartPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552028D7140165D4000EEA4F /* WILDPartPresenter.m */; };
 		552028DC14016880000EEA4F /* WILDPushbuttonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */; };
@@ -176,7 +176,7 @@
 		553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C471813577A2E000219FA /* WILDMessageBox.xib */; };
 		553E3C9416F6696000258F72 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
 		553E3C9616F6698300258F72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
-		553F6809157D138B009E0517 /* ForgeObjCConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F6808157D138B009E0517 /* ForgeObjCConversion.m */; };
+		553F6809157D138B009E0517 /* WILDObjCConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F6808157D138B009E0517 /* WILDObjCConversion.m */; };
 		553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */; };
 		553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */; };
 		5542C9471139D7A000555C64 /* WILDStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9461139D7A000555C64 /* WILDStack.m */; };
@@ -204,10 +204,10 @@
 		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
 		555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */; };
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
-		556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */; };
-		556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */; };
-		55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */; };
-		55686666135A383A00C364D6 /* ForgeWILDObjectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686664135A383300C364D6 /* ForgeWILDObjectValue.m */; };
+		556866581359C47300C364D6 /* WILDGlobalProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.m */; };
+		556866601359EBD200C364D6 /* WILDHostCommands.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.m */; };
+		55686663135A161400C364D6 /* WILDHostFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.m */; };
+		55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686664135A383300C364D6 /* WILDObjectValue.m */; };
 		55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686668135ADC3000C364D6 /* WILDSearchPaths.m */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
 		557BC7D8171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557BC7D6171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib */; };
@@ -299,7 +299,7 @@
 		55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E509E61156B06D001D0762 /* ULIMultiMap.m */; };
 		55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */; };
 		55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */; };
-		55E805C61360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */; };
+		55E805C61360ACD3006F1287 /* WILDPropertyInstructions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C51360ACD3006F1287 /* WILDPropertyInstructions.m */; };
 		55E805F91366091F006F1287 /* CGlobalPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805F71366091F006F1287 /* CGlobalPropertyNode.cpp */; };
 		55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063C1368B2CA006F1287 /* NSCursor+Box.m */; };
 		55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063D1368B2CA006F1287 /* NSCursor+CrossHair.m */; };
@@ -542,7 +542,7 @@
 		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
 		551D938F1705A69A003766DA /* LEODownloadInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEODownloadInstructions.h; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.h; sourceTree = "<group>"; };
-		551D93911705A7AD003766DA /* ForgeDownloadInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeDownloadInstructionsStacksmith.m; path = Instructions/ForgeDownloadInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
+		551D93911705A7AD003766DA /* WILDDownloadInstructions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDDownloadInstructions.m; path = Instructions/WILDDownloadInstructions.m; sourceTree = SOURCE_ROOT; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
 		552028D6140165D4000EEA4F /* WILDPartPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPartPresenter.h; path = Presentation/WILDPartPresenter.h; sourceTree = "<group>"; };
@@ -707,8 +707,8 @@
 		553C471513577989000219FA /* WILDMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMessageBox.h; path = Editor/WILDMessageBox.h; sourceTree = "<group>"; };
 		553C471613577989000219FA /* WILDMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMessageBox.m; path = Editor/WILDMessageBox.m; sourceTree = "<group>"; };
 		553C471913577A2E000219FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDMessageBox.xib; sourceTree = "<group>"; };
-		553F6807157D138B009E0517 /* ForgeObjCConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeObjCConversion.h; path = Instructions/ForgeObjCConversion.h; sourceTree = SOURCE_ROOT; };
-		553F6808157D138B009E0517 /* ForgeObjCConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeObjCConversion.m; path = Instructions/ForgeObjCConversion.m; sourceTree = SOURCE_ROOT; };
+		553F6807157D138B009E0517 /* WILDObjCConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjCConversion.h; path = Instructions/WILDObjCConversion.h; sourceTree = SOURCE_ROOT; };
+		553F6808157D138B009E0517 /* WILDObjCConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjCConversion.m; path = Instructions/WILDObjCConversion.m; sourceTree = SOURCE_ROOT; };
 		553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSetChunkPropertyNode.cpp; path = ../../CSetChunkPropertyNode.cpp; sourceTree = "<group>"; };
 		553F680B157D3291009E0517 /* CSetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSetChunkPropertyNode.h; path = ../../CSetChunkPropertyNode.h; sourceTree = "<group>"; };
 		553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGetChunkPropertyNode.cpp; path = ../../CGetChunkPropertyNode.cpp; sourceTree = "<group>"; };
@@ -750,14 +750,14 @@
 		555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTextFieldPresenter.m; path = Presentation/WILDTextFieldPresenter.m; sourceTree = "<group>"; };
 		555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UTF8UTF32Utilities.c; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.c; sourceTree = "<group>"; };
 		555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF8UTF32Utilities.h; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.h; sourceTree = "<group>"; };
-		556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeGlobalPropertiesStacksmith.m; path = Instructions/ForgeGlobalPropertiesStacksmith.m; sourceTree = SOURCE_ROOT; };
+		556866561359C47100C364D6 /* WILDGlobalProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGlobalProperties.m; path = Instructions/WILDGlobalProperties.m; sourceTree = SOURCE_ROOT; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
-		5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeHostCommandsStacksmith.m; path = Instructions/ForgeHostCommandsStacksmith.m; sourceTree = SOURCE_ROOT; };
-		5568665F1359EBD000C364D6 /* ForgeHostCommandsStacksmith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeHostCommandsStacksmith.h; path = Instructions/ForgeHostCommandsStacksmith.h; sourceTree = SOURCE_ROOT; };
-		55686661135A161000C364D6 /* ForgeHostFunctionsStacksmith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeHostFunctionsStacksmith.h; path = Instructions/ForgeHostFunctionsStacksmith.h; sourceTree = SOURCE_ROOT; };
-		55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeHostFunctionsStacksmith.m; path = Instructions/ForgeHostFunctionsStacksmith.m; sourceTree = SOURCE_ROOT; };
-		55686664135A383300C364D6 /* ForgeWILDObjectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgeWILDObjectValue.m; path = Instructions/ForgeWILDObjectValue.m; sourceTree = SOURCE_ROOT; };
-		55686665135A383700C364D6 /* ForgeWILDObjectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeWILDObjectValue.h; path = Instructions/ForgeWILDObjectValue.h; sourceTree = SOURCE_ROOT; };
+		5568665E1359EBCD00C364D6 /* WILDHostCommands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDHostCommands.m; path = Instructions/WILDHostCommands.m; sourceTree = SOURCE_ROOT; };
+		5568665F1359EBD000C364D6 /* WILDHostCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostCommands.h; path = Instructions/WILDHostCommands.h; sourceTree = SOURCE_ROOT; };
+		55686661135A161000C364D6 /* WILDHostFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostFunctions.h; path = Instructions/WILDHostFunctions.h; sourceTree = SOURCE_ROOT; };
+		55686662135A161100C364D6 /* WILDHostFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDHostFunctions.m; path = Instructions/WILDHostFunctions.m; sourceTree = SOURCE_ROOT; };
+		55686664135A383300C364D6 /* WILDObjectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjectValue.m; path = Instructions/WILDObjectValue.m; sourceTree = SOURCE_ROOT; };
+		55686665135A383700C364D6 /* WILDObjectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectValue.h; path = Instructions/WILDObjectValue.h; sourceTree = SOURCE_ROOT; };
 		55686667135ADC2B00C364D6 /* WILDSearchPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDSearchPaths.h; sourceTree = "<group>"; };
 		55686668135ADC3000C364D6 /* WILDSearchPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDSearchPaths.m; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
@@ -825,7 +825,7 @@
 		55A7BA4A14668D6E00AB0F34 /* flute.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = flute.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/flute.aiff; sourceTree = "<group>"; };
 		55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
-		55AAC04417109571008441AF /* ForgeGlobalPropertiesStacksmith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeGlobalPropertiesStacksmith.h; path = Instructions/ForgeGlobalPropertiesStacksmith.h; sourceTree = SOURCE_ROOT; };
+		55AAC04417109571008441AF /* WILDGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGlobalProperties.h; path = Instructions/WILDGlobalProperties.h; sourceTree = SOURCE_ROOT; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
 		55ACBBBE1322EA890088609D /* WILDVisibleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDVisibleObject.h; path = Presentation/WILDVisibleObject.h; sourceTree = "<group>"; };
@@ -911,7 +911,7 @@
 		55E805C01360A7B3006F1287 /* CObjectPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CObjectPropertyNode.h; path = ../../CObjectPropertyNode.h; sourceTree = "<group>"; };
 		55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOPropertyInstructions.c; path = ../../../Forge/Leonie/generic/LEOPropertyInstructions.c; sourceTree = "<group>"; };
 		55E805C31360AA25006F1287 /* LEOPropertyInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOPropertyInstructions.h; path = ../../../Forge/Leonie/generic/LEOPropertyInstructions.h; sourceTree = "<group>"; };
-		55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgePropertyInstructionsStacksmith.m; path = Instructions/ForgePropertyInstructionsStacksmith.m; sourceTree = SOURCE_ROOT; };
+		55E805C51360ACD3006F1287 /* WILDPropertyInstructions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPropertyInstructions.m; path = Instructions/WILDPropertyInstructions.m; sourceTree = SOURCE_ROOT; };
 		55E805F71366091F006F1287 /* CGlobalPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGlobalPropertyNode.cpp; path = ../../CGlobalPropertyNode.cpp; sourceTree = "<group>"; };
 		55E805F81366091F006F1287 /* CGlobalPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGlobalPropertyNode.h; path = ../../CGlobalPropertyNode.h; sourceTree = "<group>"; };
 		55E8063C1368B2CA006F1287 /* NSCursor+Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCursor+Box.m"; path = "../UKPaintView/NSCursor+Box.m"; sourceTree = "<group>"; };
@@ -1244,19 +1244,19 @@
 				553C46A813577334000219FA /* CParser.cpp */,
 				553C46A913577334000219FA /* Parse Tree */,
 				553C46AA13577334000219FA /* Leonie */,
-				551D93911705A7AD003766DA /* ForgeDownloadInstructionsStacksmith.m */,
-				55AAC04417109571008441AF /* ForgeGlobalPropertiesStacksmith.h */,
-				556866561359C47100C364D6 /* ForgeGlobalPropertiesStacksmith.m */,
-				55E805C51360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m */,
-				5568665F1359EBD000C364D6 /* ForgeHostCommandsStacksmith.h */,
-				5568665E1359EBCD00C364D6 /* ForgeHostCommandsStacksmith.m */,
-				55686661135A161000C364D6 /* ForgeHostFunctionsStacksmith.h */,
-				55686662135A161100C364D6 /* ForgeHostFunctionsStacksmith.m */,
+				551D93911705A7AD003766DA /* WILDDownloadInstructions.m */,
+				55AAC04417109571008441AF /* WILDGlobalProperties.h */,
+				556866561359C47100C364D6 /* WILDGlobalProperties.m */,
+				55E805C51360ACD3006F1287 /* WILDPropertyInstructions.m */,
+				5568665F1359EBD000C364D6 /* WILDHostCommands.h */,
+				5568665E1359EBCD00C364D6 /* WILDHostCommands.m */,
+				55686661135A161000C364D6 /* WILDHostFunctions.h */,
+				55686662135A161100C364D6 /* WILDHostFunctions.m */,
 				55382462172730B4007785D8 /* WILDObjCCallInstructions.m */,
-				55686665135A383700C364D6 /* ForgeWILDObjectValue.h */,
-				55686664135A383300C364D6 /* ForgeWILDObjectValue.m */,
-				553F6807157D138B009E0517 /* ForgeObjCConversion.h */,
-				553F6808157D138B009E0517 /* ForgeObjCConversion.m */,
+				55686665135A383700C364D6 /* WILDObjectValue.h */,
+				55686664135A383300C364D6 /* WILDObjectValue.m */,
+				553F6807157D138B009E0517 /* WILDObjCConversion.h */,
+				553F6808157D138B009E0517 /* WILDObjCConversion.m */,
 			);
 			name = Interpreter;
 			path = ../Forge/ForgeFramework/ForgeFramework;
@@ -2128,14 +2128,14 @@
 				553C471013577334000219FA /* LEOChunks.c in Sources */,
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
 				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
-				556866581359C47300C364D6 /* ForgeGlobalPropertiesStacksmith.m in Sources */,
-				556866601359EBD200C364D6 /* ForgeHostCommandsStacksmith.m in Sources */,
-				55686663135A161400C364D6 /* ForgeHostFunctionsStacksmith.m in Sources */,
-				55686666135A383A00C364D6 /* ForgeWILDObjectValue.m in Sources */,
+				556866581359C47300C364D6 /* WILDGlobalProperties.m in Sources */,
+				556866601359EBD200C364D6 /* WILDHostCommands.m in Sources */,
+				55686663135A161400C364D6 /* WILDHostFunctions.m in Sources */,
+				55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */,
 				55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */,
 				55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */,
 				55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */,
-				55E805C61360ACD3006F1287 /* ForgePropertyInstructionsStacksmith.m in Sources */,
+				55E805C61360ACD3006F1287 /* WILDPropertyInstructions.m in Sources */,
 				55E805F91366091F006F1287 /* CGlobalPropertyNode.cpp in Sources */,
 				55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */,
 				55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */,
@@ -2192,7 +2192,7 @@
 				55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */,
 				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
-				553F6809157D138B009E0517 /* ForgeObjCConversion.m in Sources */,
+				553F6809157D138B009E0517 /* WILDObjCConversion.m in Sources */,
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
 				55A3FB2C16E749D400735729 /* WILDShapeButtonPresenter.m in Sources */,
@@ -2201,7 +2201,7 @@
 				55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */,
 				551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */,
 				551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */,
-				551D93921705A7AF003766DA /* ForgeDownloadInstructionsStacksmith.m in Sources */,
+				551D93921705A7AF003766DA /* WILDDownloadInstructions.m in Sources */,
 				55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */,
 				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ForgeHostFunctionsStacksmith.m
+//  WILDObjCCallInstructions.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 16.04.11.
@@ -7,7 +7,7 @@
 //
 
 #include "LEOObjCCallInstructions.h"
-#include "ForgeWILDObjectValue.h"
+#include "WILDObjectValue.h"
 #import "WILDDocument.h"
 #import "WILDStack.h"
 #import "WILDLayer.h"

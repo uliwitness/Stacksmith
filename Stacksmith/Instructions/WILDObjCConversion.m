@@ -1,12 +1,12 @@
 //
-//  ForgeObjCConversion.m
+//  WILDObjCConversion.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 04.06.12.
 //  Copyright (c) 2012 Uli Kusterer. All rights reserved.
 //
 
-#import "ForgeObjCConversion.h"
+#import "WILDObjCConversion.h"
 
 
 void	AppendLEOArrayToDictionary( struct LEOArrayEntry * inEntry, NSMutableDictionary* dict, LEOContext *inContext );

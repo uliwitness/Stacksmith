@@ -38,7 +38,7 @@
 -(void)	setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor
 {
 	[mPartView addCursorRect: [mPartView visibleRect] cursor: currentCursor];
-	UKLog(@"cursor rect for part %@", mPartView.part);
+	//UKLog(@"cursor rect for part %@", mPartView.part);
 }
 
 

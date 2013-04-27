@@ -10,7 +10,7 @@
 #import "WILDScriptContainer.h"
 #import "WILDSearchContext.h"
 #import "WILDObjectID.h"
-#import "ForgeWILDObjectValue.h"
+#import "WILDObjectValue.h"
 
 
 @class WILDBackground;

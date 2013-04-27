@@ -1,12 +1,12 @@
 //
-//  ForgeGlobalPropertiesStacksmith.m
+//  WILDGlobalProperties.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 16.04.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#include "ForgeGlobalPropertiesStacksmith.h"
+#include "WILDGlobalProperties.h"
 #include "StacksmithVersion.h"
 #include <string.h>
 #import <Foundation/Foundation.h>

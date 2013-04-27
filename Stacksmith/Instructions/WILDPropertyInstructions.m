@@ -8,8 +8,8 @@
  */
 
 #import "Forge.h"
-#import "ForgeWILDObjectValue.h"
-#import "ForgeObjCConversion.h"
+#import "WILDObjectValue.h"
+#import "WILDObjCConversion.h"
 
 
 void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext );

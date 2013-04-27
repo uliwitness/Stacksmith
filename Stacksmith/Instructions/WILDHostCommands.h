@@ -1,5 +1,5 @@
 //
-//  ForgeHostCommandsStacksmith.h
+//  WILDHostCommands.h
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 16.04.11.

@@ -1,16 +1,16 @@
 //
-//  ForgeWILDObjectValue.m
+//  WILDObjectValue.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 16.04.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#include "ForgeWILDObjectValue.h"
+#include "WILDObjectValue.h"
 #include "LEOInterpreter.h"
 #include "LEOContextGroup.h"
 #include "LEOScript.h"
-#import "ForgeObjCConversion.h"
+#import "WILDObjCConversion.h"
 
 
 NSString*	WILDUserPropertyNameKey = @"WILDUserPropertyNameKey";

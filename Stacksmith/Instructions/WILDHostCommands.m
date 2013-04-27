@@ -1,13 +1,13 @@
 //
-//  ForgeHostCommandsStacksmith.m
+//  WILDHostCommands.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 16.04.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#include "ForgeHostCommandsStacksmith.h"
-#include "ForgeWILDObjectValue.h"
+#include "WILDHostCommands.h"
+#include "WILDObjectValue.h"
 #include "WILDDocument.h"
 #include "WILDStack.h"
 #include "WILDCard.h"

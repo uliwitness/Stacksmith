@@ -12,7 +12,7 @@
 #import "WILDSearchContext.h"
 #import "WILDObjectID.h"
 #import "LEOValue.h"
-#import "ForgeWILDObjectValue.h"
+#import "WILDObjectValue.h"
 
 
 @class WILDStack;

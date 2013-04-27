@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "ForgeWILDObjectValue.h"
+#import "WILDObjectValue.h"
 #import "WILDScriptContainer.h"
 
 

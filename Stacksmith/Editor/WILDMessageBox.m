@@ -9,7 +9,7 @@
 #import "WILDMessageBox.h"
 #import "WILDDocument.h"
 #import "Forge.h"
-#import "ForgeWILDObjectValue.h"
+#import "WILDObjectValue.h"
 #import "UKHelperMacros.h"
 #import "WILDCard.h"
 
