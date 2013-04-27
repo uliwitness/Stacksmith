@@ -11,5 +11,5 @@ cd `dirname "$0"`
 rm -rf `dirname "$0"`/docs/*
 $HEADERDOC2HTML -o `dirname "$0"`/docs `dirname "$0"`/Stacksmith/
 $HEADERDOC2HTML -o `dirname "$0"`/docs `dirname "$0"`/Forge/
-$HEADERDOC2HTML -o `dirname "$0"`/docs `dirname "$0"`/Leonie/
+$HEADERDOC2HTML -o `dirname "$0"`/docs `dirname "$0"`/Forge/Leonie/
 $GATHERHEADERDOC `dirname "$0"`/docs

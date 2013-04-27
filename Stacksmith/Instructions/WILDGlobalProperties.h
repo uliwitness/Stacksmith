@@ -24,6 +24,7 @@
 
 
 /*!
+	@enum WILDGlobalPropertyInstructions
 	The instruction ID constants Forge will need to add bytecode instructions
 	to a script for retrieving or changing our global properties.
 	Add kFirstGlobalPropertyInstruction to these instruction ID constants when

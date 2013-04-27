@@ -29,6 +29,10 @@
 
 /*!
 	@class WILDDocument
+	The document class representing an .xstk file package. In theory, the
+	Stacksmith file format allows for a package to contain several stacks.
+	Hence, the root of the hierarchy is a general document class, and not the
+	stack.
 */
 
 @implementation WILDDocument

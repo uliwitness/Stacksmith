@@ -25,6 +25,7 @@
 
 
 /*!
+	@enum WILDHostCommandInstructions
 	The instruction ID constants Forge will need to add bytecode instructions
 	to a script to implement these Stacksmith-specific commands.
 	Add kFirstStacksmithHostCommandInstruction to these instruction ID constants
