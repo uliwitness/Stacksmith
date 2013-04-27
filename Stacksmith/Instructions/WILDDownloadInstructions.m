@@ -1,6 +1,6 @@
 /*
- *  ForgeDownloadInstructionsStacksmith.m
- *  Leonie
+ *  WILDDownloadInstructions.m
+ *  Stacksmith
  *
  *  Created by Uli Kusterer on 09.10.10.
  *  Copyright 2010 Uli Kusterer. All rights reserved.
@@ -8,10 +8,20 @@
  */
 
 /*!
-	@header ForgeDownloadInstructionsStacksmith
-	These functions implement the actual instructions the Leonie bytecode
-	interpreter actually understands. Or at least those that are not portable
-	between platforms.
+	@header WILDDownloadInstructions
+	The 'download' command is built into Forge at the moment (as it requires
+	support for parsing nested callback handlers). However, the act of downloading
+	itself is most easily implemented with platform-specific commands (the only
+	other option would be using raw socket calls).
+	
+	This header implements the platform-specific instructions that the 'download'
+	command generates, both for the actual command, and for the 'the downloads'
+	global property that indicates which downloads are in progress at the moment.
+	
+	To make the Forge parser use these instructions and properties, register
+	them using
+	<pre>LEOAddInstructionsToInstructionArray( gDownloadInstructions, LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS, &kFirstDownloadInstruction );
+	LEOAddGlobalPropertiesAndOffsetInstructions( gDownloadGlobalProperties, kFirstDownloadInstruction );</pre>
 */
 
 #import <Foundation/Foundation.h>
@@ -20,14 +30,18 @@
 #import "WILDScriptContainer.h"
 
 
+// Array in which we keep track of all running connections, so we can return
+//	this information in 'the downloads'.
 static NSMutableArray	*	sRunningConnections = nil;
 
 
 void	LEODownloadInstruction( LEOContext* inContext );
 void	LEOPushDownloadsInstruction( LEOContext* inContext );
-void	LEOSetDownloadsInstruction( LEOContext* inContext );
 
 
+// Delegate class that remembers the context/context group, destination value,
+//	callback handler names and actual downloaded data so we can notify the script
+//	of download progress and actually make the downloaded data available to it.
 @interface WILDURLConnectionDelegate : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
 {
 	union LEOValue			mDestination;
@@ -176,16 +190,22 @@ void	LEOSetDownloadsInstruction( LEOContext* inContext );
 }
 
 /*!
-	Download a file from the web into a container, optionally executing code.
+	Instruction function used by the Leonie bytecode interpreter to download a
+	file from the web into a container, optionally executing code.
 	We push 4 parameters on the stack before we call this instruction:
 	
 	url			- A string with the URL to download from.
+	
 	destination	- A container to download to. Must be something in global scope
 				  e.g. a global field or the like.
+				  
 	progress	- The message to send while downloading so progress can be
 				  indicated. If this is "" no message is sent.
+				  
 	completion	- The message to send once the download has completed or errored
 				  out. If this is "" no message is sent.
+	
+	(DOWNLOAD_INSTR)
 */
 
 void	LEODownloadInstruction( LEOContext* inContext )
@@ -250,7 +270,14 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	LEOInitCopy( containerValue, &theDelegate->mDestination, kLEOInvalidateReferences, &theDelegate->mContext );
 	
 	// Start the download and finish this instruction:
-	NSURLRequest		*	theRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: urlObjcString]];
+	NSURL				*	theURL = [NSURL URLWithString: urlObjcString];
+	if( !theURL )
+	{
+		LEOContextStopWithError( inContext, "Invalid URL '%s' passed to 'download' command.", urlString );
+		return;
+	}
+	
+	NSURLRequest		*	theRequest = [NSURLRequest requestWithURL: theURL];
 	NSURLConnection		*	conn = [NSURLConnection connectionWithRequest: theRequest delegate: theDelegate];
 	if( !sRunningConnections )
 		sRunningConnections = [[NSMutableArray alloc] init];
@@ -262,16 +289,6 @@ void	LEODownloadInstruction( LEOContext* inContext )
 }
 
 @end
-
-
-void	LEOSetDownloadsInstruction( LEOContext* inContext )
-{
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-
-	LEOContextStopWithError( inContext, "Use the 'download' command to change the 'downloads' property." );
-	
-	inContext->currentInstruction++;
-}
 
 
 void	LEOPushDownloadsInstruction( LEOContext* inContext )
@@ -295,13 +312,12 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext )
 
 LEOINSTR_START(Download,LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS)
 LEOINSTR(LEODownloadInstruction)
-LEOINSTR(LEOSetDownloadsInstruction)
 LEOINSTR_LAST(LEOPushDownloadsInstruction)
 
 
 struct TGlobalPropertyEntry	gDownloadGlobalProperties[] =
 {
-	{ EDownloadsIdentifier, ELastIdentifier_Sentinel, SET_DOWNLOADS_INSTR, PUSH_DOWNLOADS_INSTR },
+	{ EDownloadsIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_DOWNLOADS_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR, INVALID_INSTR }
 };
 
