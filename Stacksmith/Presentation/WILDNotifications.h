@@ -19,15 +19,6 @@ extern NSString*	WILDPeekingStateKey;
 
 
 // -----------------------------------------------------------------------------
-// Notification sent when user chooses the "Background" menu item to edit the
-//	background alone:
-extern NSString*	WILDBackgroundEditModeChangedNotification;
-
-// Info dictionary keys:
-extern NSString*	WILDBackgroundEditModeKey;
-
-
-// -----------------------------------------------------------------------------
 // Notifications when we change between cards:
 extern NSString*	WILDCurrentCardWillChangeNotification;	// We're on the source card.
 extern NSString*	WILDCurrentCardDidChangeNotification;	// We're on the destination card.

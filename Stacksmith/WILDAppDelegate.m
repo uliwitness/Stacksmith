@@ -178,30 +178,6 @@
 }
 
 
--(BOOL)	validateMenuItem: (NSMenuItem *)menuItem
-{
-	if( [menuItem action] == @selector(toggleBackgroundEditMode:) )
-	{
-		[menuItem setState: mBackgroundEditMode ? NSOnState : NSOffState];
-		return YES;
-	}
-//	else if( [menuItem action] == @selector(toolsMenuRowDummyAction:) )
-//	{
-//		NSView*	menuView = [menuItem view];
-//		for( int x = 0; x < 3; x++ )
-//		{
-//			NSButton*	theBtn = [[menuView subviews] objectAtIndex: x];
-//			BOOL	isCurrent = [theBtn tag] == [[WILDTools sharedTools] currentTool];
-//			[theBtn setState: isCurrent ? NSOnState : NSOffState];
-//		}
-//		
-//		return YES;
-//	}
-	else
-		return [self respondsToSelector: [menuItem action]];
-}
-
-
 -(IBAction)	orderFrontStandardAboutPanel: (id)sender
 {
 	[WILDAboutPanelController showAboutPanel];
@@ -215,21 +191,6 @@
 		if( ![self openStandardStackNamed: @"HyperCard Help"] )
 			[self openStandardStackNamed: @"HyperCard Help/HyperCard Help"];
 	}
-}
-
-
--(IBAction)	toggleBackgroundEditMode: (id)sender
-{
-	mBackgroundEditMode = !mBackgroundEditMode;
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDBackgroundEditModeChangedNotification
-											object: nil userInfo:
-												[NSDictionary dictionaryWithObjectsAndKeys:
-													[NSNumber numberWithBool: mBackgroundEditMode], WILDBackgroundEditModeKey,
-												nil]];
-	if( mBackgroundEditMode )
-		[WILDBackgroundModeIndicator showOnWindow: NSApplication.sharedApplication.mainWindow];
-	else
-		[WILDBackgroundModeIndicator hide];
 }
 
 

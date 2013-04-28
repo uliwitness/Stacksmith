@@ -28,6 +28,7 @@
 
 @property (copy)	NSString *	transitionType;
 @property (copy)	NSString *	transitionSubtype;
+@property (assign)	BOOL		backgroundEditMode;
 
 -(void)						setCard: (WILDCard*)inCard;
 -(WILDCard*)				card;

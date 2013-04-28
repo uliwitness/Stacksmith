@@ -25,6 +25,7 @@
 
 @implementation WILDCardView
 
+@synthesize backgroundEditMode = mBackgroundEditMode;
 @synthesize transitionType = mTransitionType;
 @synthesize transitionSubtype = mTransitionSubtype;
 
@@ -37,9 +38,6 @@
 												object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
 												name: WILDCurrentToolDidChangeNotification
-												object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(backgroundEditModeChanged:)
-												name: WILDBackgroundEditModeChangedNotification
 												object: nil];
 		[self registerForDraggedTypes: [NSArray arrayWithObject: WILDPartPboardType]];
 	}
@@ -58,9 +56,6 @@
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
 												name: WILDCurrentToolDidChangeNotification
 												object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(backgroundEditModeChanged:)
-												name: WILDBackgroundEditModeChangedNotification
-												object: nil];
 		[self registerForDraggedTypes: [NSArray arrayWithObject: WILDPartPboardType]];
 	}
 	
@@ -75,9 +70,6 @@
 											object: nil];
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: WILDCurrentToolDidChangeNotification
-											object: nil];
-	[[NSNotificationCenter defaultCenter] removeObserver: self
-											name: WILDBackgroundEditModeChangedNotification
 											object: nil];
 	
 	DESTROY_DEALLOC(mTransitionType);
@@ -187,12 +179,6 @@
 	[[self window] invalidateCursorRectsForView: self];
 	mPeeking = [[[notification userInfo] objectForKey: WILDPeekingStateKey] boolValue];
 	[[self guidelineView] setNeedsDisplay: YES];
-}
-
-
--(void)	backgroundEditModeChanged: (NSNotification*)notification
-{
-	mBackgroundEditMode = [[[notification userInfo] objectForKey: WILDBackgroundEditModeKey] boolValue];
 }
 
 

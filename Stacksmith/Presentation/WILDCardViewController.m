@@ -42,6 +42,7 @@
 #import "ULIPaintOvalTool.h"
 #import "ULIPaintTextTool.h"
 #import "ULIPaintShapeTool.h"
+#import "WILDBackgroundModeIndicator.h"
 
 #import "UKHelperMacros.h"
 
@@ -49,6 +50,7 @@
 NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
 NSString*	WILDCardToolbarItemIdentifier = @"WILDCardToolbarItemIdentifier";
 NSString*	WILDBackgroundToolbarItemIdentifier = @"WILDBackgroundToolbarItemIdentifier";
+NSString*	WILDEditBackgroundToolbarItemIdentifier = @"WILDEditBackgroundToolbarItemIdentifier";
 
 NSString*	WILDPrevCardToolbarItemIdentifier = @"WILDPrevCardToolbarItemIdentifier";
 NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifier";
@@ -69,9 +71,6 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	{
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(peekingStateChanged:)
 												name: WILDPeekingStateChangedNotification
-												object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(backgroundEditModeChanged:)
-												name: WILDBackgroundEditModeChangedNotification
 												object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
 												name: WILDCurrentToolDidChangeNotification
@@ -97,9 +96,6 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	}
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: WILDPeekingStateChangedNotification
-											object: nil];
-	[[NSNotificationCenter defaultCenter] removeObserver: self
-											name: WILDBackgroundEditModeChangedNotification
 											object: nil];
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: WILDCurrentToolDidChangeNotification
@@ -745,10 +741,16 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 }
 
 
--(void)	backgroundEditModeChanged: (NSNotification*)notification
+-(IBAction)	toggleBackgroundEditMode: (id)sender
 {
-	mBackgroundEditMode = [[[notification userInfo] objectForKey: WILDBackgroundEditModeKey] boolValue];
+	mBackgroundEditMode = !mBackgroundEditMode;
+	[(WILDCardView*)self.view setBackgroundEditMode: mBackgroundEditMode];
 	[self loadCard: mCurrentCard];
+	
+	if( mBackgroundEditMode )
+		[WILDBackgroundModeIndicator showOnWindow: self.view.window];
+	else
+		[WILDBackgroundModeIndicator hide];
 }
 
 
@@ -1095,6 +1097,8 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	{
 		[self.view.window toggleToolbarShown: self];
 		[self.view.window setToolbar: nil];
+		if( mBackgroundEditMode )
+			[self toggleBackgroundEditMode: sender];	// Switch back to foreground.
 	}
 }
 
@@ -1362,6 +1366,19 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
 		[theItem setView: theButton];
 	}
+	else if( [itemIdentifier isEqualToString: WILDEditBackgroundToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"ICON_129"]];
+		[theButton setAction: @selector(toggleBackgroundEditMode:)];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Edit Background"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theItem setView: theButton];
+	}
 	else if( [itemIdentifier isEqualToString: WILDStackToolbarItemIdentifier] )
 	{
 		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
@@ -1408,7 +1425,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 /* Returns the ordered list of items to be shown in the toolbar by default.   If during initialization, no overriding values are found in the user defaults, or if the user chooses to revert to the default items this set will be used. */
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
-	return @[ WILDStackToolbarItemIdentifier, WILDBackgroundToolbarItemIdentifier, WILDCardToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDPrevCardToolbarItemIdentifier, WILDNextCardToolbarItemIdentifier ];
+	return @[ WILDStackToolbarItemIdentifier, WILDBackgroundToolbarItemIdentifier, WILDCardToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDEditBackgroundToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDPrevCardToolbarItemIdentifier, WILDNextCardToolbarItemIdentifier ];
 }
 
 /* Returns the list of all allowed items by identifier.  By default, the toolbar does not assume any items are allowed, even the separator.  So, every allowed item must be explicitly listed.  The set of allowed items is used to construct the customization palette.  The order of items does not necessarily guarantee the order of appearance in the palette.  At minimum, you should return the default item list.*/
