@@ -7,6 +7,7 @@
 //
 
 #import "WILDXMLUtils.h"
+#import "ULIBase64.h"
 
 
 NSString*	WILDStringFromSubElementInElement( NSString* elemName, NSXMLElement* elem )
@@ -14,7 +15,12 @@ NSString*	WILDStringFromSubElementInElement( NSString* elemName, NSXMLElement* e
 	NSArray*	items = [elem elementsForName: elemName];
 	if( [items count] < 1 )
 		return nil;
-	return [[items objectAtIndex: 0] stringValue];
+	NSXMLElement*theElem = [items objectAtIndex: 0];
+	NSString	*theString = [theElem stringValue];
+	if( [[theElem attributeForName: @"binaryEncoding"].stringValue isEqualToString: @"base64"] )
+		theString = ULIBase64DecodeString( theString );
+	
+	return theString;
 }
 
 
@@ -54,7 +60,11 @@ NSMutableArray*	WILDStringsFromSubElementInElement( NSString* elemName, NSXMLEle
 	NSMutableArray	*	subitems = [NSMutableArray arrayWithCapacity: [items count]];
 	for( NSXMLElement* subElem in items )
 	{
-		[subitems addObject: [subElem stringValue]];
+		NSString	*	theString = [subElem stringValue];
+		if( [[subElem attributeForName: @"binary"].stringValue isEqualToString: @"base64"] )
+			theString = ULIBase64DecodeString( theString );
+
+		[subitems addObject: theString];
 	}
 	return subitems;
 }
@@ -192,13 +202,52 @@ NSPoint	WILDPointFromSubElementInElement( NSString* elemName, NSXMLElement* elem
 //}
 
 
-NSString*	WILDStringEscapedForXML( NSString* inString )
+NSString*	WILDStringEscapedForXMLAttribute( NSString* inString )
 {
-	NSMutableString*	escapedString = [[inString mutableCopy] autorelease];
-	[escapedString replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0, [escapedString length])];
-	[escapedString replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0, [escapedString length])];
-	[escapedString replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0, [escapedString length])];
+	NSMutableString	*	escapedString = [[inString mutableCopy] autorelease];
+	
+	[escapedString replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0,escapedString.length)];
+	[escapedString replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0,escapedString.length)];
+	[escapedString replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0,escapedString.length)];
+	[escapedString replaceOccurrencesOfString: @"\"" withString: @"&quot;" options: 0 range: NSMakeRange(0,escapedString.length)];
+	
 	return escapedString;
+}
+
+NSString*	WILDStringEscapedForXML( NSString* inString, NSString** outBinaryAttribute )
+{
+	static NSMutableCharacterSet	*	sReallyDangerousChars = nil;
+	if( !sReallyDangerousChars )
+	{
+		sReallyDangerousChars = [[NSMutableCharacterSet characterSetWithRange: NSMakeRange(0,' '-1)] retain];
+		[sReallyDangerousChars removeCharactersInString: @"\t\r\n"];
+	}
+	static NSMutableCharacterSet	*	sDangerousChars = nil;
+	if( !sDangerousChars )
+	{
+		sDangerousChars = [sReallyDangerousChars mutableCopy];
+		[sDangerousChars addCharactersInString: @"<>&"];
+	}
+	
+	// We *must* encode control characters as base64 (even CDATA needs to be made up of valid UTF8 sequences in NSXMLDocument), but we can just use entities for strings that are just not safe to use among HTML tags.
+	
+	if( inString.length == 0 || [inString rangeOfCharacterFromSet: sDangerousChars].location == NSNotFound )	// Not at all dangerous? Pass it through.
+		return inString;
+	else if( [inString rangeOfCharacterFromSet: sReallyDangerousChars].location == NSNotFound )	// Only non-control characters? Escape those few dangerous chars.
+	{
+		NSMutableString	*	escapedString = [[inString mutableCopy] autorelease];
+		
+		[escapedString replaceOccurrencesOfString: @"&" withString: @"&amp;" options: 0 range: NSMakeRange(0,escapedString.length)];
+		[escapedString replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0,escapedString.length)];
+		[escapedString replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0,escapedString.length)];
+		
+		return escapedString;
+	}
+	else
+	{
+		*outBinaryAttribute = @" binaryEncoding=\"base64\"";
+		return ULIBase64EncodeString( inString, 64 );
+	}
 }
 
 
@@ -231,7 +280,9 @@ void	WILDAppendStringXML( NSMutableString* inStringToAppendTo, int nestingLevel,
 {
 	if( nestingLevel > MAX_INDENT_LEVEL )
 		nestingLevel = MAX_INDENT_LEVEL;
-	[inStringToAppendTo appendFormat: @"%3$s<%1$@>%2$@</%1$@>\n", inTagName, WILDStringEscapedForXML(inString), (sIndentChars +MAX_INDENT_LEVEL -nestingLevel)];
+	NSString*	binaryAttribute = @"";
+	inString = WILDStringEscapedForXML( inString, &binaryAttribute );
+	[inStringToAppendTo appendFormat: @"%3$s<%1$@%4$@>%2$@</%1$@>\n", inTagName, inString, (sIndentChars +MAX_INDENT_LEVEL -nestingLevel), binaryAttribute];
 }
 
 

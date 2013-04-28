@@ -204,6 +204,7 @@
 		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
 		555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */; };
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
+		55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 55615C53172D86CE00EFEAEF /* ULIBase64.m */; };
 		556866581359C47300C364D6 /* WILDGlobalProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.m */; };
 		556866601359EBD200C364D6 /* WILDHostCommands.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.m */; };
 		55686663135A161400C364D6 /* WILDHostFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.m */; };
@@ -750,6 +751,8 @@
 		555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTextFieldPresenter.m; path = Presentation/WILDTextFieldPresenter.m; sourceTree = "<group>"; };
 		555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UTF8UTF32Utilities.c; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.c; sourceTree = "<group>"; };
 		555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF8UTF32Utilities.h; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.h; sourceTree = "<group>"; };
+		55615C4E172D86C600EFEAEF /* ULIBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIBase64.h; path = ../UliKit/ULIBase64.h; sourceTree = "<group>"; };
+		55615C53172D86CE00EFEAEF /* ULIBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIBase64.m; path = ../UliKit/ULIBase64.m; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* WILDGlobalProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGlobalProperties.m; path = Instructions/WILDGlobalProperties.m; sourceTree = SOURCE_ROOT; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
 		5568665E1359EBCD00C364D6 /* WILDHostCommands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDHostCommands.m; path = Instructions/WILDHostCommands.m; sourceTree = SOURCE_ROOT; };
@@ -1449,6 +1452,8 @@
 				550ED181144B38DD00E528AA /* ULINSIntegerMath.h */,
 				5542C94B1139DD5C00555C64 /* WILDXMLUtils.h */,
 				5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */,
+				55615C4E172D86C600EFEAEF /* ULIBase64.h */,
+				55615C53172D86CE00EFEAEF /* ULIBase64.m */,
 				5542CABF113A2CB300555C64 /* UKPBMImageRep.h */,
 				5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */,
 				5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */,
@@ -2214,6 +2219,7 @@
 				55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */,
 				55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */,
 				55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */,
+				55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

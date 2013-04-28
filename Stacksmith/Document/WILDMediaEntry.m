@@ -117,7 +117,11 @@
 	{
 		hotSpotXml = [NSString stringWithFormat: @"\n\t\t<hotspot>\n\t\t\t<left>%d</left>\n\t\t\t<top>%d<\top>\n\t\t</hotspot>", (int)mHotSpot.x, (int)mHotSpot.y];
 	}
-	return [NSString stringWithFormat: @"\t<media>\n\t\t<id>%lld</id>\n\t\t<type>%@</type>\n\t\t<name>%@</name>\n\t\t<file>%@</file>%@\n\t</media>\n", mID, mType, WILDStringEscapedForXML(mName), WILDStringEscapedForXML([mFilename lastPathComponent]),hotSpotXml];
+	NSString	*binaryAttribute = @"";
+	NSString	*escapedName = WILDStringEscapedForXML( mName, &binaryAttribute );
+	NSString	*binaryAttributeFile = @"";
+	NSString	*escapedFilename = WILDStringEscapedForXML( [mFilename lastPathComponent], &binaryAttribute );
+	return [NSString stringWithFormat: @"\t<media>\n\t\t<id>%lld</id>\n\t\t<type>%@</type>\n\t\t<name%@>%@</name>\n\t\t<file%@>%@</file>%@\n\t</media>\n", mID, mType, binaryAttribute, escapedName, binaryAttributeFile, escapedFilename,hotSpotXml];
 }
 
 

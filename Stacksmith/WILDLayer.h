@@ -52,7 +52,7 @@
 
 -(id)							initForStack: (WILDStack*)theStack;
 -(id)							initWithXMLDocument: (NSXMLDocument*)elem
-										forStack: (WILDStack*)theStack;
+										forStack: (WILDStack*)theStack error: (NSError**)outError;
 
 -(void)							loadAddColorObjects: (NSXMLElement*)theElem;
 

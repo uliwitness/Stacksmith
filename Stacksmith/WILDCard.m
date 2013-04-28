@@ -29,9 +29,9 @@
 }
 
 
--(id)	initWithXMLDocument: (NSXMLDocument*)theDoc forStack: (WILDStack*)theStack
+-(id)	initWithXMLDocument: (NSXMLDocument*)theDoc forStack: (WILDStack*)theStack error: (NSError**)outError
 {
-	if(( self = [super initWithXMLDocument: theDoc forStack: theStack] ))
+	if(( self = [super initWithXMLDocument: theDoc forStack: theStack error: outError] ))
 	{
 		NSXMLElement*	elem = [theDoc rootElement];
 		

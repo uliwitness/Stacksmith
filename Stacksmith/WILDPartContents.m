@@ -336,7 +336,9 @@
 	[outString appendFormat: @"\t\t<layer>%@</layer>\n", mLayer];
 	[outString appendFormat: @"\t\t<id>%lld</id>\n", mID];
 
-	[outString appendFormat: @"\t\t<text>%@</text>\n", WILDStringEscapedForXML([self RTFText])];
+	NSString	*binaryAttribute = @"";
+	NSString	*escapedText = WILDStringEscapedForXML( [self RTFText], &binaryAttribute );
+	[outString appendFormat: @"\t\t<text%@>%@</text>\n", binaryAttribute, escapedText];
 
 	[outString appendFormat: @"\t\t<highlight>%@</highlight>\n", mHighlighted ? @"<true />" : @"<false />"];
 	

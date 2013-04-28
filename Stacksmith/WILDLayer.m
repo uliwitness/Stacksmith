@@ -54,7 +54,7 @@
 }
 
 
--(id)	initWithXMLDocument: (NSXMLDocument*)theDoc forStack: (WILDStack*)theStack
+-(id)	initWithXMLDocument: (NSXMLDocument*)theDoc forStack: (WILDStack*)theStack error: (NSError**)outError
 {
 	if(( self = [super init] ))
 	{
@@ -596,13 +596,17 @@
 -(void)	appendInnerXmlToString: (NSMutableString*)theString
 {
 	[theString appendFormat: @"\t<id>%lld</id>\n", mID];
-	[theString appendFormat: @"\t<name>%@</name>\n", WILDStringEscapedForXML(mName)];
+	NSString	*binaryAttribute = @"";
+	NSString	*escapedName = WILDStringEscapedForXML( mName, &binaryAttribute );
+	[theString appendFormat: @"\t<name%@>%@</name>\n", binaryAttribute, escapedName];
 	[theString appendFormat: @"\t<showPict>%@</showPict>\n", mShowPict ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<cantDelete>%@</cantDelete>\n", mCantDelete ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<dontSearch>%@</dontSearch>\n", mDontSearch ? @"<true />" : @"<false />"];
 	if( mPictureName )
 		[theString appendFormat: @"\t<bitmap>%@</bitmap>\n", mPictureName];
-	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
+	binaryAttribute = @"";
+	NSString	*escapedScript = WILDStringEscapedForXML( mScript, &binaryAttribute );
+	[theString appendFormat: @"\t<script%@>%@</script>\n", binaryAttribute, escapedScript];
 	
 	[theString appendString: @"\t<userProperties>\n"];
 	for( NSString *userPropName in [[mUserProperties allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)] )

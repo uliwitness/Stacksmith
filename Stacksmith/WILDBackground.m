@@ -26,9 +26,9 @@
 
 
 -(id)	initWithXMLDocument: (NSXMLDocument*)elem
-					forStack: (WILDStack*)theStack
+					forStack: (WILDStack*)theStack error: (NSError**)outError
 {
-    self = [super initWithXMLDocument: elem forStack: theStack];
+    self = [super initWithXMLDocument: elem forStack: theStack error: outError];
     if( self )
 	{
         mCards = [[NSMutableArray alloc] init];

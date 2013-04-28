@@ -374,7 +374,10 @@
 										error: outError];
 			
 			WILDStack*	currStack = [[WILDStack alloc] initWithXMLDocument: theDoc
-												document: self];
+												document: self error: outError];
+			if( !currStack )
+				return NO;
+			
 			[mStacks addObject: currStack];
 			[theDoc release];
 			[currStack release];

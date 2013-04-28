@@ -20,6 +20,10 @@
 #import "WILDDocument.h"
 
 
+NSString		*		WILDErrorDomain = @"WILDErrorDomain";
+
+
+
 @implementation WILDStack
 
 -(id)	initWithDocument: (WILDDocument*)theDocument
@@ -62,7 +66,7 @@
 }
 
 
--(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)theDocument
+-(id)	initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)theDocument error: (NSError**)outError
 {
 	if(( self = [super init] ))
 	{
@@ -131,8 +135,15 @@
 				NSXMLDocument*			bgDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
 																	error: &theError];
 				if( !bgDoc && theError )
-					NSLog(@"Could not load background: %@", theError);
-				WILDBackground*	theBg = [[WILDBackground alloc] initWithXMLDocument: bgDoc forStack: self];
+				{
+					if( outError )
+					{
+						*outError = [NSError errorWithDomain: WILDErrorDomain code: WILDErrorInvalidXMLOnBackground userInfo: @{ NSLocalizedDescriptionKey: [NSString stringWithFormat: @"Could not load background: %@", theError], NSUnderlyingErrorKey: theError }];
+					}
+					[self autorelease];
+					return nil;
+				}
+				WILDBackground*	theBg = [[WILDBackground alloc] initWithXMLDocument: bgDoc forStack: self error: outError];
 				
 				[self addBackground: theBg];
 				
@@ -156,8 +167,15 @@
 				NSXMLDocument*			cdDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileAttrURL options: 0
 																	error: &theError];
 				if( !cdDoc && theError )
-					NSLog(@"Could not load card: %@", theError);
-				WILDCard*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self];
+				{
+					if( outError )
+					{
+						*outError = [NSError errorWithDomain: WILDErrorDomain code: WILDErrorInvalidXMLOnCard userInfo: @{ NSLocalizedDescriptionKey: [NSString stringWithFormat: @"Could not load card: %@", theError], NSUnderlyingErrorKey: theError }];
+					}
+					[self autorelease];
+					return nil;
+				}
+				WILDCard*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self error: outError];
 				[self addCard: theCd];
 				[self setMarked: isMarked forCard: theCd];
 				
@@ -511,7 +529,9 @@
 												"<stack>\n"];
 	
 	[theString appendFormat: @"\t<id>%lld</id>\n", mID];
-	[theString appendFormat: @"\t<name>%@</name>\n", WILDStringEscapedForXML(mName)];
+	NSString	*binaryAttribute = @"";
+	NSString	*escapedName = WILDStringEscapedForXML( mName, &binaryAttribute );
+	[theString appendFormat: @"\t<name%@>%@</name>\n", binaryAttribute, escapedName];
 	
 	[theString appendFormat: @"\t<userLevel>%d</userLevel>\n", mUserLevel];
 	[theString appendFormat: @"\t<cantModify>%@</cantModify>\n", mCantModify ? @"<true />" : @"<false />"];
@@ -521,7 +541,9 @@
 	[theString appendFormat: @"\t<cantPeek>%@</cantPeek>\n", mCantPeek ? @"<true />" : @"<false />"];
 
 	[theString appendFormat: @"\t<cardSize>\n\t\t<width>%d</width>\n\t\t<height>%d</height>\n\t</cardSize>\n", (int)mCardSize.width, (int)mCardSize.height];
-	[theString appendFormat: @"\t<script>%@</script>\n", WILDStringEscapedForXML(mScript)];
+	binaryAttribute = @"";
+	NSString	*escapedScript = WILDStringEscapedForXML( mScript, &binaryAttribute );
+	[theString appendFormat: @"\t<script%@>%@</script>\n", binaryAttribute, escapedScript];
 	
 	[theString appendString: @"\t<userProperties>\n"];
 	for( NSString *userPropName in [[mUserProperties allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)] )
@@ -538,7 +560,7 @@
 		NSURL	*	bgURL = [packageURL URLByAppendingPathComponent: bgFileName];
 		if( ![[currBg xmlStringForWritingToURL: packageURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: bgURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
-		[theString appendFormat: @"\t<background id=\"%lld\" file=\"%@\" />\n", [currBg backgroundID], WILDStringEscapedForXML(bgFileName)];
+		[theString appendFormat: @"\t<background id=\"%lld\" file=\"%@\" />\n", [currBg backgroundID], WILDStringEscapedForXMLAttribute(bgFileName)];
 	}
 	
 	// Write out cards and add entries for them:
@@ -549,7 +571,7 @@
 		if( ![[currCd xmlStringForWritingToURL: packageURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: cdURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
 		[theString appendFormat: @"\t<card id=\"%lld\" file=\"%@\" marked=\"%@\" />\n",
-							[currCd cardID], WILDStringEscapedForXML(cdFileName),
+							[currCd cardID], WILDStringEscapedForXMLAttribute(cdFileName),
 		 					([mMarkedCards containsObject: currCd] ? @"true" : @"false")];
 	}
 	

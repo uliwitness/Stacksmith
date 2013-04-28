@@ -30,5 +30,6 @@ void		WILDAppendBoolXML( NSMutableString* inStringToAppendTo, int nestingLevel, 
 void		WILDAppendRectXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSRect inBox, NSString* inTagName );
 void	WILDAppendColorXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSColor* inColor, NSString* inTagName );
 void	WILDAppendSizeXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSSize inSize, NSString* inTagName );
-NSString*	WILDStringEscapedForXML( NSString* inString );
+NSString*	WILDStringEscapedForXML( NSString* inString, NSString** outBinaryAttribute );
+NSString*	WILDStringEscapedForXMLAttribute( NSString* inString );
 

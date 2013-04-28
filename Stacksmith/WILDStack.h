@@ -47,7 +47,7 @@
 	struct LEOValueObject		mValueForScripts;		// A LEOValue so scripts can reference us (see mIDForScripts).
 }
 
--(id)				initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner;
+-(id)				initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner error: (NSError**)outError;
 -(id)				initWithDocument: (WILDDocument*)owner;
 
 -(void)				addCard: (WILDCard*)theCard;
@@ -84,3 +84,11 @@
 -(void)				setName: (NSString*)inName;
 
 @end
+
+
+extern NSString		*		WILDErrorDomain;
+enum
+{
+	WILDErrorInvalidXMLOnCard = 9000,
+	WILDErrorInvalidXMLOnBackground
+};
