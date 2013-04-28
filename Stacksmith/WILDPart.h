@@ -25,7 +25,7 @@
 @interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable,WILDObject>
 {
 	WILDObjectID		mID;
-	NSRect				mRectangle;
+	NSRect				mHammerRectangle;
 	NSString*			mName;
 	NSString*			mMediaPath;
 	NSString*			mScript;
@@ -107,10 +107,10 @@
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
 
--(void)			setFlippedRectangle: (NSRect)theBox;
--(NSRect)		flippedRectangle;
--(void)			setRectangle: (NSRect)theBox;
--(NSRect)		rectangle;
+-(void)			setHammerRectangle: (NSRect)theBox;
+-(NSRect)		hammerRectangle;
+-(void)			setQuartzRectangle: (NSRect)theBox;
+-(NSRect)		quartzRectangle;
 
 -(void)			setName: (NSString*)theStr;
 -(NSString*)	name;

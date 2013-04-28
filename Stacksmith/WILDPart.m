@@ -63,7 +63,7 @@
 	{
 		mStack = inStack;
 		mID = WILDIntegerFromSubElementInElement( @"id", elem );
-		mRectangle = WILDRectFromSubElementInElement( @"rect", elem );
+		mHammerRectangle = WILDRectFromSubElementInElement( @"rect", elem );
 		mName = [WILDStringFromSubElementInElement( @"name", elem ) retain];
 		mMediaPath = [WILDStringFromSubElementInElement( @"mediaPath", elem ) retain];
 		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
@@ -214,37 +214,43 @@
 }
 
 
--(void)	setFlippedRectangle: (NSRect)theBox
+-(void)	setHammerRectangle: (NSRect)theBox
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
-								object: self userInfo: [NSDictionary dictionaryWithObject: @"rectangle"
+								object: self userInfo: [NSDictionary dictionaryWithObject: @"hammerRectangle"
 																forKey: WILDAffectedPropertyKey]];
-	mRectangle = theBox;
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+								object: self userInfo: [NSDictionary dictionaryWithObject: @"quartzRectangle"
+																forKey: WILDAffectedPropertyKey]];
+	mHammerRectangle = theBox;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
-								object: self userInfo: [NSDictionary dictionaryWithObject: @"rectangle"
+								object: self userInfo: [NSDictionary dictionaryWithObject: @"quartzRectangle"
+																forKey: WILDAffectedPropertyKey]];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+								object: self userInfo: [NSDictionary dictionaryWithObject: @"hammerRectangle"
 																forKey: WILDAffectedPropertyKey]];
 }
 
 
--(NSRect)	flippedRectangle
+-(NSRect)	hammerRectangle
 {
-	return mRectangle;
+	return mHammerRectangle;
 }
 
 
--(NSRect)	rectangle
+-(NSRect)	quartzRectangle
 {
-	NSRect		resultRect = mRectangle;
-	resultRect.origin.y = [mStack cardSize].height -NSMaxY( mRectangle );
+	NSRect		resultRect = mHammerRectangle;
+	resultRect.origin.y = [mStack cardSize].height -NSMaxY( mHammerRectangle );
 	return resultRect;
 }
 
 
--(void)	setRectangle: (NSRect)theBox
+-(void)	setQuartzRectangle: (NSRect)theBox
 {
 	theBox.origin.y = [mStack cardSize].height -NSMaxY( theBox );
-	mRectangle = theBox;
+	[self setHammerRectangle: theBox];
 }
 
 
@@ -1042,7 +1048,7 @@
 	WILDAppendStringXML( outString, 2, mLayer, @"layer" );
 	WILDAppendBoolXML( outString, 2, mVisible, @"visible" );
 	WILDAppendBoolXML( outString, 2, mEnabled, @"enabled" );
-	WILDAppendRectXML( outString, 2, mRectangle, @"rect" );
+	WILDAppendRectXML( outString, 2, mHammerRectangle, @"rect" );
 	WILDAppendStringXML( outString, 2, [self partStyle], @"style" );
 	WILDAppendBoolXML( outString, 2, mShowName, @"showName" );
 	WILDAppendBoolXML( outString, 2, mHighlight, @"highlight" );
@@ -1168,10 +1174,10 @@
 	else if( [inPropertyName isEqualToString: @"rectangle"] )
 	{
 		return [NSDictionary dictionaryWithObjectsAndKeys:
-								[NSNumber numberWithDouble: mRectangle.origin.x], @"left",
-								[NSNumber numberWithDouble: mRectangle.origin.y], @"top",
-								[NSNumber numberWithDouble: NSMaxX(mRectangle)], @"right",
-								[NSNumber numberWithDouble: NSMaxY(mRectangle)], @"bottom",
+								[NSNumber numberWithDouble: mHammerRectangle.origin.x], @"left",
+								[NSNumber numberWithDouble: mHammerRectangle.origin.y], @"top",
+								[NSNumber numberWithDouble: NSMaxX(mHammerRectangle)], @"right",
+								[NSNumber numberWithDouble: NSMaxY(mHammerRectangle)], @"bottom",
 								nil];
 	}
 	else if( [inPropertyName isEqualToString: @"fillcolor"] )
@@ -1371,7 +1377,7 @@
 		newRect.origin.y = [[inValue objectForKey: @"top"] doubleValue];
 		newRect.size.width = [[inValue objectForKey: @"right"] doubleValue] -newRect.origin.x;
 		newRect.size.height = [[inValue objectForKey: @"bottom"] doubleValue] -newRect.origin.y;
-		[self setFlippedRectangle: newRect];
+		[self setHammerRectangle: newRect];
 	}
 	else if( [inPropertyName isEqualToString: @"fillcolor"] )
 	{

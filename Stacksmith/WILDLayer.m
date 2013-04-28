@@ -313,7 +313,7 @@
 		else if( [objectType isEqualToString: @"rectangle"] )
 		{
 			WILDPart*	thePart = [[[WILDPart alloc] initWithXMLElement: nil forStack: mStack] autorelease];
-			[thePart setFlippedRectangle: objectRect];
+			[thePart setHammerRectangle: objectRect];
 			[thePart setFillColor: objectColor];
 			[thePart setBevel: objectBevel];
 			[thePart setPartType: @"rectangle"];
@@ -324,7 +324,7 @@
 		else if( [objectType isEqualToString: @"picture"] )
 		{
 			WILDPart*	thePart = [[[WILDPart alloc] initWithXMLElement: nil forStack: mStack] autorelease];
-			[thePart setFlippedRectangle: objectRect];
+			[thePart setHammerRectangle: objectRect];
 			[thePart setName: objectName];
 			[thePart setPartType: @"picture"];
 			[thePart setPartStyle: objectTransparent ? @"transparent" : @"opaque"];

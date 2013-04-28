@@ -256,9 +256,9 @@
 		for( WILDPart* currPart in draggedParts )
 		{
 			NSRect		currPartBox;
-			currPartBox = [currPart flippedRectangle];
+			currPartBox = [currPart hammerRectangle];
 			currPartBox = NSOffsetRect( currPartBox, diff.x, diff.y );
-			[currPart setFlippedRectangle: currPartBox];
+			[currPart setHammerRectangle: currPartBox];
 		}
 		
 		[mOwner reloadCard];

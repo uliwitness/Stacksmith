@@ -23,7 +23,7 @@
 	if( !mScrollView )
 	{
 		WILDPart	*	currPart = [mPartView part];
-		NSRect			partRect = [currPart rectangle];
+		NSRect			partRect = [currPart quartzRectangle];
 		[mPartView setWantsLayer: YES];
 		partRect.origin = NSMakePoint( 2, 2 );
 		

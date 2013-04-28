@@ -696,7 +696,7 @@
 	[guidelineView removeAllGuidelines];
 	[guidelineView setNeedsDisplay: YES];
 
-	[mPart setRectangle: [self layoutRectForRect: self.frame]];
+	[mPart setQuartzRectangle: [self layoutRectForRect: self.frame]];
 	[mPart updateChangeCount: NSChangeDone];
 }
 
@@ -761,7 +761,7 @@
 
 	[pool drain];
 	
-	[mPart setRectangle: [self layoutRectForRect: self.frame]];
+	[mPart setQuartzRectangle: [self layoutRectForRect: self.frame]];
 	[mPart updateChangeCount: NSChangeDone];
 	
 	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
@@ -963,7 +963,7 @@
 	
 	for( WILDPart* thePart in parts )
 	{
-		NSRect		box = [thePart flippedRectangle];
+		NSRect		box = [thePart hammerRectangle];
 		if( minX > NSMinX(box) )
 			minX = NSMinX(box);
 		if( maxX < NSMaxX(box) )
@@ -1071,7 +1071,7 @@
 		[mPartPresenter partDidChange: notif];
 	else	// Unknown property. Reload the whole thing.
 	{
-		[self setFrame: [self rectForLayoutRect: mPart.rectangle]];
+		[self setFrame: [self rectForLayoutRect: mPart.quartzRectangle]];
 		[self unloadPart];
 		[self loadPart: mPart forBackgroundEditing: NO];
 	}
@@ -1154,7 +1154,7 @@
 -(void)	loadPopupButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
 			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
-	NSRect			partRect = [currPart rectangle];
+	NSRect			partRect = [currPart quartzRectangle];
 	NSTextField*	label = nil;
 	[self setHidden: ![currPart visible]];
 	[self setWantsLayer: YES];
@@ -1246,10 +1246,10 @@
 }
 
 
--(void)	rectanglePropertyDidChangeOfPart: (WILDPart*)inPart
+-(void)	quartzRectanglePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	if( mPartPresenter )
-		[self setFrame: [self rectForLayoutRect: self.frame]];	// Presenter can register to pick up our changes and react.
+		[self setFrame: [self rectForLayoutRect: inPart.quartzRectangle]];	// Presenter can register to pick up our changes and react.
 }
 
 
@@ -1294,7 +1294,7 @@
 -(void)	loadEditField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
 			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
-	NSRect						partRect = [currPart rectangle];
+	NSRect						partRect = [currPart quartzRectangle];
 	[self setHidden: ![currPart visible]];
 	[self setWantsLayer: YES];
 	[self setPart: currPart];
@@ -1400,7 +1400,7 @@
 -(void)	loadListField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
 			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
-	NSRect						partRect = [currPart rectangle];
+	NSRect						partRect = [currPart quartzRectangle];
 	[self setHidden: ![currPart visible]];
 	[self setWantsLayer: YES];
 	[self setPart: currPart];
@@ -1436,7 +1436,7 @@
 	NSScrollView*	sv = [[[WILDScrollView alloc] initWithFrame: partRect] autorelease];
 	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
 	[sv setWantsLayer: YES];
-	NSRect			txBox = [currPart rectangle];
+	NSRect			txBox = [currPart quartzRectangle];
 	txBox.origin = NSZeroPoint;
 	if( [[currPart partStyle] isEqualToString: @"transparent"] )
 	{
@@ -1518,7 +1518,7 @@
 -(void)	loadMoviePlayer: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
 			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
 {
-	NSRect						partRect = [currPart rectangle];
+	NSRect						partRect = [currPart quartzRectangle];
 	[self setHidden: ![currPart visible]];
 	[self setWantsLayer: YES];
 	[self setPart: currPart];
@@ -1583,7 +1583,7 @@
 
 -(NSRect)	frameInScreenCoordinates
 {
-	NSRect				buttonRect = [mPart rectangle];
+	NSRect				buttonRect = [mPart quartzRectangle];
 	WILDCardView	*	cardView = [self enclosingCardView];
 	buttonRect = [cardView convertRectToBase: buttonRect];
 	buttonRect.origin = [[cardView window] convertBaseToScreen: buttonRect.origin];

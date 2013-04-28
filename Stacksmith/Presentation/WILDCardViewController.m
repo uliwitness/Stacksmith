@@ -367,12 +367,12 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		
 		if( [[currPart partType] isEqualToString: @"picture"] )
 		{
-			[[currPart iconImage] drawInRect: [currPart rectangle] fromRect: NSZeroRect
+			[[currPart iconImage] drawInRect: [currPart quartzRectangle] fromRect: NSZeroRect
 						operation: NSCompositeCopy fraction: 1.0];
 		}
 		else if( [[currPart partType] isEqualToString: @"rectangle"] )
 		{
-			WILDDrawAddColorBezel( [NSBezierPath bezierPathWithRect: [currPart rectangle]],
+			WILDDrawAddColorBezel( [NSBezierPath bezierPathWithRect: [currPart quartzRectangle]],
 												[currPart fillColor],
 												[currPart bevel],
 												nil, nil );
@@ -382,13 +382,13 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 			NSBezierPath*	partPath = nil;
 			
 			if( [[currPart partStyle] isEqualToString: @"oval"] )
-				partPath = [NSBezierPath bezierPathWithOvalInRect: [currPart rectangle]];
+				partPath = [NSBezierPath bezierPathWithOvalInRect: [currPart quartzRectangle]];
 			else if( [[currPart partStyle] isEqualToString: @"roundrect"]
 						|| [[currPart partStyle] isEqualToString: @"standard"]
 						|| [[currPart partStyle] isEqualToString: @"default"] )
-				partPath = [NSBezierPath bezierPathWithRoundedRect: [currPart rectangle] xRadius: 8 yRadius: 8];
+				partPath = [NSBezierPath bezierPathWithRoundedRect: [currPart quartzRectangle] xRadius: 8 yRadius: 8];
 			else
-				partPath = [NSBezierPath bezierPathWithRect: [currPart rectangle]];
+				partPath = [NSBezierPath bezierPathWithRect: [currPart quartzRectangle]];
 			
 			WILDDrawAddColorBezel( partPath,
 												[currPart fillColor],
@@ -414,7 +414,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 
 -(void)	createPartViewForPart: (WILDPart*)currPart
 {
-	WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart rectangle], -2, -2)] autorelease];
+	WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart quartzRectangle], -2, -2)] autorelease];
 	[selView setWantsLayer: YES];
 	[[self view] addSubview: selView];
 	BOOL	isCardButton = [currPart.partLayer isEqualToString: @"card"];
@@ -660,7 +660,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		for( WILDPartView* currView in allSels )
 		{
 			WILDPart*	thePart = [currView part];
-			[thePart setFlippedRectangle: NSOffsetRect( [thePart flippedRectangle], 1, 0)];
+			[thePart setHammerRectangle: NSOffsetRect( [thePart hammerRectangle], 1, 0)];
 			[currView setFrame: NSOffsetRect([currView frame], 1, 0)];
 		}
 	}
@@ -677,7 +677,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		for( WILDPartView* currView in allSels )
 		{
 			WILDPart*	thePart = [currView part];
-			[thePart setFlippedRectangle: NSOffsetRect( [thePart flippedRectangle], -1, 0)];
+			[thePart setHammerRectangle: NSOffsetRect( [thePart hammerRectangle], -1, 0)];
 			[currView setFrame: NSOffsetRect([currView frame], -1, 0)];
 		}
 	}
@@ -694,7 +694,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		for( WILDPartView* currView in allSels )
 		{
 			WILDPart*	thePart = [currView part];
-			[thePart setFlippedRectangle: NSOffsetRect( [thePart flippedRectangle], 0, -1)];
+			[thePart setHammerRectangle: NSOffsetRect( [thePart hammerRectangle], 0, -1)];
 			[currView setFrame: NSOffsetRect([currView frame], 0, 1)];
 		}
 	}
@@ -711,7 +711,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		for( WILDPartView* currView in allSels )
 		{
 			WILDPart*	thePart = [currView part];
-			[thePart setFlippedRectangle: NSOffsetRect( [thePart flippedRectangle], 0, 1)];
+			[thePart setHammerRectangle: NSOffsetRect( [thePart hammerRectangle], 0, 1)];
 			[currView setFrame: NSOffsetRect([currView frame], 0, -1)];
 		}
 	}
