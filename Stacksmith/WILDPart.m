@@ -1077,7 +1077,7 @@
 	WILDAppendColorXML( outString, 2, mShadowColor, @"shadowColor" );
 	WILDAppendSizeXML( outString, 2, mShadowOffset, @"shadowOffset" );
 	WILDAppendLongXML( outString, 2, mShadowBlurRadius, @"shadowBlurRadius" );
-	WILDAppendLongXML( outString, 2, mLineWidth, @"lieWidth" );
+	WILDAppendLongXML( outString, 2, mLineWidth, @"lineWidth" );
 	
 	if( [mSelectedLines count] > 0 )
 	{
