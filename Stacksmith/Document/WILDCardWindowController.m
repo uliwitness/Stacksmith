@@ -78,14 +78,16 @@
 	[editButton setAutoresizingMask: NSViewMaxXMargin | NSViewMinYMargin];
 	[[editButton cell] setControlSize: NSMiniControlSize];
 	[editButton setTitle: @"Edit"];
-	[editButton setBezelStyle: NSRoundedBezelStyle];
+	[editButton setBezelStyle: NSRoundRectBezelStyle];
+	[editButton setButtonType: NSPushOnPushOffButton];
 	[editButton setImagePosition: NSNoImage];
 	[editButton sizeToFit];
 	[editButton setKeyEquivalentModifierMask: NSCommandKeyMask | NSControlKeyMask];
 	[editButton setKeyEquivalent: @"\t"];
 	[editButton setAction: @selector(toggleEditBrowseTool:)];
-	theBox.origin.x = NSMaxX(theBox) - editButton.frame.size.width;
-	theBox.size.width = editButton.frame.size.width;
+	theBox.origin.x = NSMaxX(theBox) - editButton.frame.size.width -6;
+	theBox.size.width = editButton.frame.size.width +8;
+	theBox.origin.x -= 8;
 	[editButton setFrame: theBox];
 	[windowWidgetSuperview addSubview: editButton];
 }
