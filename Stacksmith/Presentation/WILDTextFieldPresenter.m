@@ -20,6 +20,8 @@
 
 -(void)	createSubviews
 {
+	[super createSubviews];
+	
 	if( !mScrollView )
 	{
 		WILDPart	*	currPart = [mPartView part];
@@ -46,6 +48,9 @@
 		[mScrollView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 		[mPartView addSubview: mScrollView];
 	}
+	
+	NSRect	theBox = [self rectForLayoutRect: mPartView.part.quartzRectangle];
+	[mPartView setFrame: theBox];
 	
 	[self refreshProperties];
 }

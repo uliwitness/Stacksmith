@@ -15,12 +15,6 @@ NSString*	WILDPeekingStateChangedNotification = @"WILDPeekingStateChanged";
 NSString*	WILDPeekingStateKey = @"WILDPeekingState";
 
 
-// Edit the background layer:
-NSString*	WILDBackgroundEditModeChangedNotification = @"WILDBackgroundEditModeChanged";
-
-NSString*	WILDBackgroundEditModeKey = @"WILDBackgroundEditMode";
-
-
 // Change between cards:
 NSString*	WILDCurrentCardWillChangeNotification = @"WILDCurrentCardWillChange";
 NSString*	WILDCurrentCardDidChangeNotification = @"WILDCurrentCardDidChange";

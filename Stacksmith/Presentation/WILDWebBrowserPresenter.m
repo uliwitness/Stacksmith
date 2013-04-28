@@ -40,6 +40,8 @@
 
 -(void)	createSubviews
 {
+	[super createSubviews];
+	
 	if( !mWebView )
 	{
 		WILDPart	*	currPart = [mPartView part];
@@ -56,6 +58,9 @@
 		[mWebView setApplicationNameForUserAgent: @"Stacksmith/" TOSTRING(STACKSMITH_SHORT_VERSION) "." TOSTRING(SVN_VERSION_NUM)];
 //		[mWebView setUIDelegate: self];
 	}
+	
+	NSRect	theBox = [self rectForLayoutRect: mPartView.part.quartzRectangle];
+	[mPartView setFrame: theBox];
 	
 	[self refreshProperties];
 }

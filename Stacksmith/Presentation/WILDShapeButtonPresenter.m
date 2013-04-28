@@ -107,4 +107,15 @@
 	}
 }
 
+-(NSRect)	layoutRectForRect:(NSRect)inRect
+{
+	return inRect;
+}
+
+
+-(NSRect)	rectForLayoutRect:(NSRect)inLayoutRect
+{
+	return inLayoutRect;
+}
+
 @end
