@@ -17,6 +17,8 @@
 
 -(void)	createSubviews
 {
+	[super createSubviews];
+	
 	if( !mMainView )
 	{
 		mMainView = [[NSPopUpButton alloc] initWithFrame: NSMakeRect(0,0, 100, 23)];
@@ -29,6 +31,9 @@
 	}
 	
 	[mPartView addSubview: mMainView];
+	
+	NSRect	theBox = [self rectForLayoutRect: mPartView.part.quartzRectangle];
+	[mPartView setFrame: theBox];
 	
 	[self refreshProperties];
 }

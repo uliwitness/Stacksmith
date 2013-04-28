@@ -705,7 +705,7 @@
 {
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	BOOL					keepDragging = YES;
-	NSRect					frame = [self frame];
+	NSRect					frame = [self rectForLayoutRect: mPart.quartzRectangle];
 	CGFloat					titleWidth = [mPart titleWidth];
 	
 	while( keepDragging )

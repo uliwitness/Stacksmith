@@ -9,6 +9,7 @@
 #import "WILDPartPresenter.h"
 #import "WILDNotifications.h"
 #import "WILDPartView.h"
+#import "WILDPart.h"
 #import "UKHelperMacros.h"
 
 
@@ -84,7 +85,7 @@
 
 -(NSRect)	selectionFrame
 {
-	return [mPartView frame];	// Sensible fallback.
+	return [self layoutRectForRect: [mPartView frame]];	// Sensible fallback.
 }
 
 

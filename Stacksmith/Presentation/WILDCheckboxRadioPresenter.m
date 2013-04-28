@@ -16,6 +16,7 @@
 
 -(void)	createSubviews
 {
+	
 	if( !mMainView )
 	{
 		NSRect		box = NSInsetRect([mPartView bounds], 2, 2);
@@ -27,6 +28,9 @@
 	}
 	
 	[mPartView addSubview: mMainView];
+	
+	NSRect	theBox = [self rectForLayoutRect: mPartView.part.quartzRectangle];
+	[mPartView setFrame: theBox];
 	
 	[self refreshProperties];
 }

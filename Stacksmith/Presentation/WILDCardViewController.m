@@ -410,7 +410,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 
 -(void)	createPartViewForPart: (WILDPart*)currPart
 {
-	WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSInsetRect([currPart quartzRectangle], -2, -2)] autorelease];
+	WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSMakeRect(0,0,100,100)] autorelease];
 	[selView setWantsLayer: YES];
 	[[self view] addSubview: selView];
 	BOOL	isCardButton = [currPart.partLayer isEqualToString: @"card"];
