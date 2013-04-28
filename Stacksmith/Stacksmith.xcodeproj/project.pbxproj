@@ -256,7 +256,6 @@
 		55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13316F4B5E20056CB4D /* COperatorNodeTransformation.cpp */; };
 		55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13A16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.cpp */; };
 		55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13D16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp */; };
-		55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55AE22E11346C99E000B5BBE /* Help.xstk */; };
 		55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */; };
 		55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29C9617276C4700B38E75 /* UKCrashReporter.m */; };
 		55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */; };
@@ -422,7 +421,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */,
-				55AE22E31346C9D9000B5BBE /* Help.xstk in Copy Included Stacks */,
 			);
 			name = "Copy Included Stacks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -838,7 +836,6 @@
 		55ADB13B16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConcatOperatorNodeTransformation.h; path = ../../CConcatOperatorNodeTransformation.h; sourceTree = "<group>"; };
 		55ADB13D16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConcatSpaceOperatorNodeTransformation.cpp; path = ../../CConcatSpaceOperatorNodeTransformation.cpp; sourceTree = "<group>"; };
 		55ADB13E16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConcatSpaceOperatorNodeTransformation.h; path = ../../CConcatSpaceOperatorNodeTransformation.h; sourceTree = "<group>"; };
-		55AE22E11346C99E000B5BBE /* Help.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Help.xstk; sourceTree = "<group>"; };
 		55B296BD146DE5D6009E60CB /* WILDCheckboxRadioPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCheckboxRadioPresenter.h; path = Presentation/WILDCheckboxRadioPresenter.h; sourceTree = "<group>"; };
 		55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCheckboxRadioPresenter.m; path = Presentation/WILDCheckboxRadioPresenter.m; sourceTree = "<group>"; };
 		55B29C9517276C4700B38E75 /* UKCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCrashReporter.h; path = ../UliKit/UKCrashReporter.h; sourceTree = "<group>"; };
@@ -1123,7 +1120,6 @@
 				55FDD871171B26390045A2B9 /* ToolbarBg@2x.png */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
-				55AE22E11346C99E000B5BBE /* Help.xstk */,
 				559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */,
 				559700F2137C9ACC000264B8 /* WILDIrisCloseFilter.cikernel */,
 				559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */,

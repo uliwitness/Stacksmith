@@ -777,14 +777,6 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
-								<object class="NSMenuItem" id="636795243">
-									<reference key="NSMenu" ref="128094225"/>
-									<string key="NSTitle">Help</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="1033313550"/>
-									<reference key="NSMixedImage" ref="310636482"/>
-								</object>
 								<object class="NSMenuItem" id="236896286">
 									<reference key="NSMenu" ref="128094225"/>
 									<string key="NSTitle">Recent</string>
@@ -2647,14 +2639,6 @@
 					<int key="connectionID">731</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">goHelp:</string>
-						<reference key="source" ref="493422503"/>
-						<reference key="destination" ref="636795243"/>
-					</object>
-					<int key="connectionID">761</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">progress</string>
 						<reference key="source" ref="929993342"/>
@@ -3930,7 +3914,6 @@
 						<reference key="object" ref="128094225"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="636795243"/>
 							<reference ref="771830873"/>
 							<reference ref="236896286"/>
 							<reference ref="122654133"/>
@@ -3941,11 +3924,6 @@
 							<reference ref="194304608"/>
 						</object>
 						<reference key="parent" ref="183012325"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">745</int>
-						<reference key="object" ref="636795243"/>
-						<reference key="parent" ref="128094225"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">746</int>
@@ -4227,7 +4205,6 @@
 					<string>739.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
 					<string>744.IBPluginDependency</string>
-					<string>745.IBPluginDependency</string>
 					<string>746.IBPluginDependency</string>
 					<string>747.IBPluginDependency</string>
 					<string>748.IBPluginDependency</string>
@@ -4398,7 +4375,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{384, 746}, {381, 98}}</string>
 					<boolean value="NO"/>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

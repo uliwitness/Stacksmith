@@ -210,11 +210,7 @@
 
 -(IBAction)	goHelp: (id)sender;
 {
-	if( ![self openStandardStackNamed: @"Help"] )
-	{
-		if( ![self openStandardStackNamed: @"HyperCard Help"] )
-			[self openStandardStackNamed: @"HyperCard Help/HyperCard Help"];
-	}
+	[[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://hammer-language.org"]];
 }
 
 
