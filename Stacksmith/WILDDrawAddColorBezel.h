@@ -11,5 +11,6 @@
 
 void	WILDDrawAddColorBezel( NSBezierPath* inShape, NSColor* inBodyColor,
 										NSInteger bezelSize,
+										CGFloat inAngle,
 										NSColor* inHighlightColor,	// May be NIL.
 										NSColor* inShadeColor );	// May be NIL.

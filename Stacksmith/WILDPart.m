@@ -55,6 +55,8 @@
 @synthesize stack = mStack;
 @synthesize currentURL = mCurrentURL;
 @synthesize statusMessage = mStatusMessage;
+@synthesize bevel = mBevel;
+@synthesize bevelAngle = mBevelAngle;
 
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
@@ -133,6 +135,12 @@
 		mLineWidth = WILDIntegerFromSubElementInElement( @"lineWidth", elem );
 		if( mLineWidth < 0 )
 			mLineWidth = 0;
+		mBevel = WILDIntegerFromSubElementInElement( @"bevelWidth", elem );
+		if( mBevel < 0 )
+			mBevel = 0;
+		mBevelAngle = WILDIntegerFromSubElementInElement( @"bevelAngle", elem );
+		if( mBevelAngle < 0 )
+			mBevelAngle = 0;
 		
 		NSError *	err = nil;
 		NSArray	*	userPropsNodes = [elem nodesForXPath: @"userProperties" error: &err];
@@ -704,6 +712,25 @@
 }
 
 
+-(void)		setBevelAngle: (NSInteger)theBevel
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"bevelAngle"
+															forKey: WILDAffectedPropertyKey]];
+	mBevelAngle = theBevel;
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"bevelAngle"
+															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
+}
+
+
+-(NSInteger)	bevelAngle
+{
+	return mBevelAngle;
+}
+
+
 -(NSString*)	script
 {
 	return mScript;
@@ -1078,6 +1105,8 @@
 	WILDAppendSizeXML( outString, 2, mShadowOffset, @"shadowOffset" );
 	WILDAppendLongXML( outString, 2, mShadowBlurRadius, @"shadowBlurRadius" );
 	WILDAppendLongXML( outString, 2, mLineWidth, @"lineWidth" );
+	WILDAppendLongXML( outString, 2, mBevel, @"bevelWidth" );
+	WILDAppendLongXML( outString, 2, mBevelAngle, @"bevelAngle" );
 	
 	if( [mSelectedLines count] > 0 )
 	{
@@ -1298,6 +1327,12 @@
 		return [NSNumber numberWithInteger: [mOwner indexOfPart: self asType: self.partType] +1];
 	else if( [inPropertyName isEqualToString: @"partnumber"] )
 		return [NSNumber numberWithInteger: [mOwner indexOfPart: self asType: nil] +1];
+	else if( [inPropertyName isEqualToString: @"linewidth"] )
+		return [NSNumber numberWithLongLong: mLineWidth];
+	else if( [inPropertyName isEqualToString: @"bevelwidth"] )
+		return [NSNumber numberWithLongLong: mBevel];
+	else if( [inPropertyName isEqualToString: @"bevelangle"] )
+		return [NSNumber numberWithLongLong: mBevelAngle];
 	else if( [inPropertyName isEqualToString: @"textstyle"] )
 	{
 		WILDCard*			theCard = [[self stack] currentCard];
@@ -1458,6 +1493,12 @@
 		mControllerVisible = [inValue boolValue];
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		mIconID = [inValue longLongValue];
+	else if( [inPropertyName isEqualToString: @"linewidth"] )
+		mLineWidth = [inValue longLongValue];
+	else if( [inPropertyName isEqualToString: @"bevelwidth"] )
+		mBevel = [inValue longLongValue];
+	else if( [inPropertyName isEqualToString: @"bevelangle"] )
+		mBevelAngle = [inValue longLongValue];
 	else if( [inPropertyName isEqualToString: @"partNumber"] )
 	{
 		long long	desiredIndex = [inValue longLongValue];
@@ -1597,6 +1638,12 @@
 		return &kLeoValueTypeBoolean;
 	else if( [inPropertyName isEqualToString: @"icon"] )
 		return &kLeoValueTypeInteger;
+	else if( [inPropertyName isEqualToString: @"linewidth"] )
+		return &kLeoValueTypeNumber;
+	else if( [inPropertyName isEqualToString: @"bevelwidth"] )
+		return &kLeoValueTypeNumber;
+	else if( [inPropertyName isEqualToString: @"bevelangle"] )
+		return &kLeoValueTypeNumber;
 	else if( [inPropertyName isEqualToString: @"number"] )
 		return &kLeoValueTypeInteger;
 	else if( [inPropertyName isEqualToString: @"partnumber"] )

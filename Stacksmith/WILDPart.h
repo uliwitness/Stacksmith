@@ -103,6 +103,8 @@
 @property (retain,nonatomic) NSURL*			currentURL;
 @property (retain,nonatomic) NSString*		statusMessage;
 @property (assign,nonatomic) WILDStack*		stack;	// Stack owns us, don't retain back pointer.
+@property (assign,nonatomic) NSInteger		bevelAngle;
+@property (assign,nonatomic) NSInteger		bevel;
 
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;

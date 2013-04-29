@@ -371,6 +371,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 			WILDDrawAddColorBezel( [NSBezierPath bezierPathWithRect: [currPart quartzRectangle]],
 												[currPart fillColor],
 												[currPart bevel],
+								  				-45.0,
 												nil, nil );
 		}
 		else
@@ -387,9 +388,10 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 				partPath = [NSBezierPath bezierPathWithRect: [currPart quartzRectangle]];
 			
 			WILDDrawAddColorBezel( partPath,
-												[currPart fillColor],
-												[currPart bevel],
-												nil, nil );
+									[currPart fillColor],
+									[currPart bevel],
+									-45.0,
+									nil, nil );
 		}
 	}
 }

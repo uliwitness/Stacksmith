@@ -18,5 +18,7 @@
 @property (assign) BOOL 	drawAsDefault;
 @property (retain) NSColor*	lineColor;
 @property (assign) CGFloat	lineWidth;
+@property (assign) CGFloat	bevelWidth;
+@property (assign) CGFloat	bevelAngle;
 
 @end

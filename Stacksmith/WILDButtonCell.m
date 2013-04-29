@@ -11,6 +11,7 @@
 #import <Carbon/Carbon.h>
 #import "UKGraphics.h"
 #import "UKHelperMacros.h"
+#import "WILDDrawAddColorBezel.h"
 
 
 NSImage*	WILDInvertedImage( NSImage* img );
@@ -45,6 +46,8 @@ NSImage*	WILDInvertedImage( NSImage* img )
 @synthesize drawAsDefault;
 @synthesize lineColor;
 @synthesize lineWidth;
+@synthesize bevelWidth;
+@synthesize bevelAngle;
 
 -(void)	dealloc
 {
@@ -115,19 +118,26 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	if( [self backgroundColor]
 		|| (isHighlighted && [self image] == nil) )
 	{
+		NSColor	*	bgColor = self.backgroundColor;
 		#if TRANSPARENT_BUTTONS_INVERT
 		if( isHighlighted && ![self backgroundColor] && [self image] == nil )
-			[[NSColor whiteColor] set];
+			bgColor = [NSColor whiteColor];
 		else
 		#endif
 		if( isHighlighted && isActive )
-			[highlightColor set];
+			bgColor = highlightColor;
 		else if( isHighlighted && !isActive )
-			[disabledColor set];
+			bgColor = disabledColor;
 		else
-			[[self backgroundColor] set];
+			bgColor = self.backgroundColor;
 		
-		[buttonShape fill];
+		if( self.bevelWidth == 0 )
+		{
+			[bgColor set];
+			[buttonShape fill];
+		}
+		else
+			WILDDrawAddColorBezel( buttonShape, bgColor, self.bevelWidth, self.bevelAngle, nil, nil );
 	}
 	
 	if( [self isBordered] && lineWidth > 0 )

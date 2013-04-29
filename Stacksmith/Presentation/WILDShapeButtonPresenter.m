@@ -105,6 +105,8 @@
 	{
 		[mMainView setButtonType: NSRadioButton];
 	}
+	[(WILDButtonCell*)[mMainView cell] setBevelWidth: currPart.bevel];
+	[(WILDButtonCell*)[mMainView cell] setBevelAngle: currPart.bevelAngle];
 }
 
 -(NSRect)	layoutRectForRect:(NSRect)inRect
