@@ -29,7 +29,7 @@ void	WILDDrawAddColorBezel( NSBezierPath* inShape, NSColor* inBodyColor,
 			highlightColor = [inBodyColor blendedColorWithFraction: 0.4 ofColor: [NSColor whiteColor]];
 
 		NSSize				shapeSize = inShape.bounds.size;
-		NSSize				scaleFactor = { 1.0 / bezelSize, 1.0 / bezelSize };
+		NSSize				scaleFactor = { (shapeSize.width -bezelSize) / shapeSize.width, (shapeSize.height -bezelSize) / shapeSize.height };
 		NSGradient*			theGradient = [[[NSGradient alloc] initWithStartingColor: highlightColor endingColor: shadeColor] autorelease];
 		NSBezierPath*		shiftedPath = [[inShape copy] autorelease];
 		NSAffineTransform*	trans = [NSAffineTransform transform];
