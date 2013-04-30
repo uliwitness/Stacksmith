@@ -34,6 +34,7 @@
 #import "WILDCheckboxRadioPresenter.h"
 #import "WILDShapeButtonPresenter.h"
 #import "WILDWebBrowserPresenter.h"
+#import "WILDMoviePlayerPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
@@ -1017,6 +1018,8 @@
 		mPartPresenter = [[WILDTextFieldPresenter alloc] initWithPartView: self];
 	else if( [[mPart partType] isEqualToString: @"browser"] )
 		mPartPresenter = [[WILDWebBrowserPresenter alloc] initWithPartView: self];
+	else if( [[mPart partType] isEqualToString: @"moviePlayer"] )
+		mPartPresenter = [[WILDMoviePlayerPresenter alloc] initWithPartView: self];
 	[mPartPresenter createSubviews];
 }
 
@@ -1515,46 +1518,6 @@
 }
 
 
--(void)	loadMoviePlayer: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
-{
-	NSRect						partRect = [currPart quartzRectangle];
-	[self setHidden: ![currPart visible]];
-	[self setWantsLayer: YES];
-	[self setPart: currPart];
-	partRect.origin = NSMakePoint( 2, 2 );
-	
-	QTMovieView		* mpv = [[[WILDMovieView alloc] initWithFrame: partRect] autorelease];
-	NSError			* outError = nil;
-	NSString		* movPath = [[NSBundle mainBundle] pathForResource: [currPart mediaPath] ofType: @""];
-	if( !movPath )
-		movPath = [currPart mediaPath];
-	QTMovie			* mov = [QTMovie movieWithFile: movPath error: &outError];
-	[mov setCurrentTime: [currPart currentTime]];
-	[mpv setMovie: mov];
-
-	NSColor	*	shadowColor = [currPart shadowColor];
-	if( [shadowColor alphaComponent] > 0.0 )
-	{
-		CGColorRef theColor = [shadowColor CGColor];
-		[[self layer] setShadowColor: theColor];
-		[[self layer] setShadowOpacity: 1.0];
-		[[self layer] setShadowOffset: [currPart shadowOffset]];
-		[[self layer] setShadowRadius: [currPart shadowBlurRadius]];
-	}
-	else
-		[[self layer] setShadowOpacity: 0.0];
-
-	[mpv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-	[mpv setPreservesAspectRatio: YES];
-	[mpv setControllerVisible: [currPart controllerVisible]];
-	[self addSubview: mpv];
-	
-	[self setHelperView: nil];
-	[self setMainView: mpv];
-}
-
-
 -(void)	loadPart: (WILDPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode
 {
 	WILDPartContents*	contents = nil;
@@ -1565,10 +1528,7 @@
 	
 	contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO];
 	
-	if( [[currPart partType] isEqualToString: @"moviePlayer"] )
-		[self loadMoviePlayer: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
-	else
-		[self setPart: mPart];
+	[self setPart: mPart];
 }
 
 

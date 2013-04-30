@@ -205,6 +205,7 @@
 		555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */; };
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
 		55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 55615C53172D86CE00EFEAEF /* ULIBase64.m */; };
+		55615C57172E10E800EFEAEF /* WILDMoviePlayerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */; };
 		556866581359C47300C364D6 /* WILDGlobalProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.m */; };
 		556866601359EBD200C364D6 /* WILDHostCommands.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.m */; };
 		55686663135A161400C364D6 /* WILDHostFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.m */; };
@@ -751,6 +752,8 @@
 		555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF8UTF32Utilities.h; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.h; sourceTree = "<group>"; };
 		55615C4E172D86C600EFEAEF /* ULIBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIBase64.h; path = ../UliKit/ULIBase64.h; sourceTree = "<group>"; };
 		55615C53172D86CE00EFEAEF /* ULIBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIBase64.m; path = ../UliKit/ULIBase64.m; sourceTree = "<group>"; };
+		55615C55172E10E700EFEAEF /* WILDMoviePlayerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMoviePlayerPresenter.h; path = Presentation/WILDMoviePlayerPresenter.h; sourceTree = "<group>"; };
+		55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMoviePlayerPresenter.m; path = Presentation/WILDMoviePlayerPresenter.m; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* WILDGlobalProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGlobalProperties.m; path = Instructions/WILDGlobalProperties.m; sourceTree = SOURCE_ROOT; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
 		5568665E1359EBCD00C364D6 /* WILDHostCommands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDHostCommands.m; path = Instructions/WILDHostCommands.m; sourceTree = SOURCE_ROOT; };
@@ -1166,6 +1169,8 @@
 				555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */,
 				55943B12171F5D050051166C /* WILDWebBrowserPresenter.h */,
 				55943B13171F5D050051166C /* WILDWebBrowserPresenter.m */,
+				55615C55172E10E700EFEAEF /* WILDMoviePlayerPresenter.h */,
+				55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */,
 			);
 			name = "Part Presenters";
 			sourceTree = "<group>";
@@ -2216,6 +2221,7 @@
 				55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */,
 				55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */,
 				55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */,
+				55615C57172E10E800EFEAEF /* WILDMoviePlayerPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
