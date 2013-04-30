@@ -36,7 +36,7 @@
 		[mPartView setWantsLayer: YES];
 		partRect.origin = NSMakePoint( 2, 2 );
 		
-		mMovieView = [[[WILDMovieView alloc] initWithFrame: partRect] autorelease];
+		mMovieView = [[WILDMovieView alloc] initWithFrame: partRect];
 
 		NSColor	*	shadowColor = [currPart shadowColor];
 		if( [shadowColor alphaComponent] > 0.0 )
