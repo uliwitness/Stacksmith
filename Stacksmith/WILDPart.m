@@ -1196,106 +1196,11 @@
 
 -(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
 {
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
-	{
-		return [self name];
-	}
-	else if( [inPropertyName isEqualToString: @"rectangle"] )
-	{
-		return [NSDictionary dictionaryWithObjectsAndKeys:
-								[NSNumber numberWithDouble: mHammerRectangle.origin.x], @"left",
-								[NSNumber numberWithDouble: mHammerRectangle.origin.y], @"top",
-								[NSNumber numberWithDouble: NSMaxX(mHammerRectangle)], @"right",
-								[NSNumber numberWithDouble: NSMaxY(mHammerRectangle)], @"bottom",
-								nil];
-	}
-	else if( [inPropertyName isEqualToString: @"fillcolor"] )
-	{
-		NSColor	*	rgbColor = [[self fillColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-		return [NSDictionary dictionaryWithObjectsAndKeys:
-								[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
-								[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
-								[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
-								[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
-								nil];
-	}
-	else if( [inPropertyName isEqualToString: @"linecolor"] )
-	{
-		NSColor	*	rgbColor = [[self lineColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-		return [NSDictionary dictionaryWithObjectsAndKeys:
-								[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
-								[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
-								[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
-								[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
-								nil];
-	}
-	else if( [inPropertyName isEqualToString: @"shadowcolor"] )
-	{
-		NSColor	*	rgbColor = [[self shadowColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-		return [NSDictionary dictionaryWithObjectsAndKeys:
-								[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
-								[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
-								[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
-								[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
-								nil];
-	}
-	else if( [inPropertyName isEqualToString: @"shadowoffset"] )
-	{
-		NSSize	shadowOffset = [self shadowOffset];
-		return [NSDictionary dictionaryWithObjectsAndKeys:
-								[NSNumber numberWithDouble: shadowOffset.width], @"horizontal",
-								[NSNumber numberWithDouble: -shadowOffset.height], @"vertical",
-								nil];
-	}
-	else if( [inPropertyName isEqualToString: @"shadowblurradius"] )
-	{
-		return [NSNumber numberWithDouble: [self shadowBlurRadius]];
-	}
-	else if( [inPropertyName isEqualToString: @"visible"] )
-		return mVisible ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"dontwrap"] )
-		return mDontWrap ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"dontsearch"] )
-		return mDontSearch ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"sharedtext"] )
-		return mSharedText ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
-		return mFixedLineHeight ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"autotab"] )
-		return mAutoTab ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"locktext"] )
-		return mLockText ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"autoselect"] )
-		return mAutoSelect ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"showlines"] )
-		return mShowLines ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"autohighlight"] )
-		return mAutoHighlight ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"highlight"] )
-		return mHighlight ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
-		return mSharedHighlight ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"widemargins"] )
-		return mWideMargins ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"multiplelines"] )
-		return mMultipleLines ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"showname"] )
-		return mShowName ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"enabled"] )
-		return mEnabled ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
-		return mHighlightedForTracking ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"script"] )
-		return mScript;
-	else if( [inPropertyName isEqualToString: @"style"] )
-		return mStyle;
-	else if( [inPropertyName isEqualToString: @"type"] )
-		return mType;
-	else if( [inPropertyName isEqualToString: @"moviepath"] )
-		return mMediaPath;
-	else if( [inPropertyName isEqualToString: @"short id"] || [inPropertyName isEqualToString: @"id"] )
-		return [NSNumber numberWithLongLong: mID];
-	else if( [inPropertyName isEqualToString: @"selectedline"] )
+	id	theValue = [super valueForWILDPropertyNamed: inPropertyName ofRange: byteRange];
+	if( theValue )
+		return theValue;
+	
+	if( [inPropertyName isEqualToString: @"selectedline"] )
 	{
 		NSUInteger	selectedIndex = [[self selectedListItemIndexes] firstIndex];
 		if( selectedIndex == NSNotFound )
@@ -1319,20 +1224,6 @@
 		
 		return selectedLines;
 	}
-	else if( [inPropertyName isEqualToString: @"controllervisible"] )
-		return mControllerVisible ? @YES : @NO;
-	else if( [inPropertyName isEqualToString: @"icon"] )
-		return [NSNumber numberWithLongLong: mIconID];
-	else if( [inPropertyName isEqualToString: @"number"] )
-		return [NSNumber numberWithInteger: [mOwner indexOfPart: self asType: self.partType] +1];
-	else if( [inPropertyName isEqualToString: @"partnumber"] )
-		return [NSNumber numberWithInteger: [mOwner indexOfPart: self asType: nil] +1];
-	else if( [inPropertyName isEqualToString: @"linewidth"] )
-		return [NSNumber numberWithLongLong: mLineWidth];
-	else if( [inPropertyName isEqualToString: @"bevelwidth"] )
-		return [NSNumber numberWithLongLong: mBevel];
-	else if( [inPropertyName isEqualToString: @"bevelangle"] )
-		return [NSNumber numberWithLongLong: mBevelAngle];
 	else if( [inPropertyName isEqualToString: @"textstyle"] )
 	{
 		WILDCard*			theCard = [[self stack] currentCard];
@@ -1360,12 +1251,8 @@
 				return @"plain";
 		}
 	}
-	else if( [inPropertyName isEqualToString: @"currenturl"] )
-		return mCurrentURL ? mCurrentURL.absoluteString : @"";
-	else if( [inPropertyName isEqualToString: @"statusmessage"] )
-		return mStatusMessage;
-	else
-		return [mUserProperties objectForKey: inPropertyName];
+	
+	return nil;
 }
 
 
@@ -1398,259 +1285,269 @@
 
 -(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange
 {
-	BOOL	propExists = YES;
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-															forKey: WILDAffectedPropertyKey]];
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
-		[self setName: inValue];
-	else if( [inPropertyName isEqualToString: @"rectangle"] )
+	if( ![super setValue: inValue forWILDPropertyNamed: inPropertyName inRange: byteRange] )
 	{
-		NSRect		newRect = NSZeroRect;
-		newRect.origin.x = [[inValue objectForKey: @"left"] doubleValue];
-		newRect.origin.y = [[inValue objectForKey: @"top"] doubleValue];
-		newRect.size.width = [[inValue objectForKey: @"right"] doubleValue] -newRect.origin.x;
-		newRect.size.height = [[inValue objectForKey: @"bottom"] doubleValue] -newRect.origin.y;
-		[self setHammerRectangle: newRect];
-	}
-	else if( [inPropertyName isEqualToString: @"fillcolor"] )
-	{
-		CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
-		CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
-		CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
-		NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
-		CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
-		[self setFillColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
-	}
-	else if( [inPropertyName isEqualToString: @"linecolor"] )
-	{
-		CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
-		CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
-		CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
-		NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
-		CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
-		[self setLineColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
-	}
-	else if( [inPropertyName isEqualToString: @"shadowcolor"] )
-	{
-		CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
-		CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
-		CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
-		NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
-		CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
-		[self setShadowColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
-	}
-	else if( [inPropertyName isEqualToString: @"shadowoffset"] )
-	{
-		CGFloat		hOffset = [[inValue objectForKey: @"horizontal"] doubleValue];
-		CGFloat		vOffset = -[[inValue objectForKey: @"vertical"] doubleValue];
-		[self setShadowOffset: NSMakeSize(hOffset,vOffset)];
-	}
-	else if( [inPropertyName isEqualToString: @"shadowblurradius"] )
-		[self setShadowBlurRadius: [inValue doubleValue]];
-	else if( [inPropertyName isEqualToString: @"visible"] )
-		mVisible = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"dontwrap"] )
-		mDontWrap = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"dontsearch"] )
-		mDontSearch = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"sharedtext"] )
-		mSharedText = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
-		mFixedLineHeight = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"autotab"] )
-		mAutoTab = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"locktext"] )
-		mLockText = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"autoselect"] )
-		mAutoSelect = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"showlines"] )
-		mShowLines = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"autohighlight"] )
-		mAutoHighlight = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"highlight"] )
-		mHighlight = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
-		mSharedHighlight = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"widemargins"] )
-		mWideMargins = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"multiplelines"] )
-		mMultipleLines = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"showname"] )
-		mShowName = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"enabled"] )
-		mEnabled = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
-		mHighlightedForTracking = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"script"] )
-		[self setScript: inValue];
-	else if( [inPropertyName isEqualToString: @"style"] )
-		[self setPartStyle: [self validatedStyle: inValue]];
-	else if( [inPropertyName isEqualToString: @"moviepath"] )
-		[self setMediaPath: inValue];
-	else if( [inPropertyName isEqualToString: @"controllervisible"] )
-		mControllerVisible = [inValue boolValue];
-	else if( [inPropertyName isEqualToString: @"icon"] )
-		mIconID = [inValue longLongValue];
-	else if( [inPropertyName isEqualToString: @"linewidth"] )
-		mLineWidth = [inValue longLongValue];
-	else if( [inPropertyName isEqualToString: @"bevelwidth"] )
-		mBevel = [inValue longLongValue];
-	else if( [inPropertyName isEqualToString: @"bevelangle"] )
-		mBevelAngle = [inValue longLongValue];
-	else if( [inPropertyName isEqualToString: @"partNumber"] )
-	{
-		long long	desiredIndex = [inValue longLongValue];
-		if( desiredIndex > 0 )
-			[mOwner movePart: self toIndex: desiredIndex -1 asType: nil];
-	}
-	else if( [inPropertyName isEqualToString: @"number"] )
-	{
-		long long	desiredIndex = [inValue longLongValue];
-		if( desiredIndex > 0 )
-			[mOwner movePart: self toIndex: desiredIndex -1 asType: self.partType];
-	}
-	else if( [inPropertyName isEqualToString: @"textstyle"] )
-	{
+		BOOL	propExists = YES;
+		
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
-								object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
+								object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
 																forKey: WILDAffectedPropertyKey]];
-		
-		WILDCard*			theCard = [[self stack] currentCard];
-		WILDPartContents*	bgContents = nil;
-		WILDPartContents*	contents = nil;
-		
-		contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO onCard: theCard forBackgroundEditing: NO];
-		NSMutableAttributedString	*	styledText = [[[contents styledTextForPart: self] mutableCopy] autorelease];
-		if( !styledText )
-			styledText = [[[NSMutableAttributedString alloc] initWithString: contents.text] autorelease];
-		if( [inValue isEqualToString: @"italic"] )
-			[styledText setAttributes: @{ NSObliquenessAttributeName: @0.5 } range: byteRange];
-		else
-			[styledText removeAttribute: NSObliquenessAttributeName range: byteRange];
-		if( [inValue isEqualToString: @"underline"] )
-			[styledText setAttributes: @{ NSUnderlineStyleAttributeName: @(NSUnderlineStyleThick) } range: byteRange];
-		else
-			[styledText removeAttribute: NSUnderlineStyleAttributeName range: byteRange];
-		[contents setStyledText: styledText];
-		
+		if( [inPropertyName isEqualToString: @"textstyle"] )
+		{
+			[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+									object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
+																	forKey: WILDAffectedPropertyKey]];
+			
+			WILDCard*			theCard = [[self stack] currentCard];
+			WILDPartContents*	bgContents = nil;
+			WILDPartContents*	contents = nil;
+			
+			contents = [self currentPartContentsAndBackgroundContents: &bgContents create: NO onCard: theCard forBackgroundEditing: NO];
+			NSMutableAttributedString	*	styledText = [[[contents styledTextForPart: self] mutableCopy] autorelease];
+			if( !styledText )
+				styledText = [[[NSMutableAttributedString alloc] initWithString: contents.text] autorelease];
+			if( [inValue isEqualToString: @"italic"] )
+				[styledText setAttributes: @{ NSObliquenessAttributeName: @0.5 } range: byteRange];
+			else
+				[styledText removeAttribute: NSObliquenessAttributeName range: byteRange];
+			if( [inValue isEqualToString: @"underline"] )
+				[styledText setAttributes: @{ NSUnderlineStyleAttributeName: @(NSUnderlineStyleThick) } range: byteRange];
+			else
+				[styledText removeAttribute: NSUnderlineStyleAttributeName range: byteRange];
+			[contents setStyledText: styledText];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+									object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
+																	forKey: WILDAffectedPropertyKey]];
+			[self updateChangeCount: NSChangeDone];
+		}
+
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
-								object: self userInfo: [NSDictionary dictionaryWithObject: @"text"
+								object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
 																forKey: WILDAffectedPropertyKey]];
-		[self updateChangeCount: NSChangeDone];
+		if( propExists )
+			[self updateChangeCount: NSChangeDone];
+		
+		return propExists;
 	}
-	else if( [inPropertyName isEqualToString: @"currenturl"] )
-	{
-		if( [inValue length] > 0 )
-			[self setCurrentURL: ([inValue length] > 0) ? [NSURL URLWithString: inValue] : nil];
-	}
-	else if( [inPropertyName isEqualToString: @"statusmessage"] )
-	{
-		[self setStatusMessage: inValue];
-	}
-	else
-	{
-		id		theValue = [mUserProperties objectForKey: inPropertyName];
-		if( theValue )
-			[mUserProperties setObject: inValue forKey: inPropertyName];
-		else
-			propExists = NO;
-	}
-
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-															forKey: WILDAffectedPropertyKey]];
-	if( propExists )
-		[self updateChangeCount: NSChangeDone];
-	
-	return propExists;
+	return YES;
 }
 
 
--(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName
+-(NSString*)	propertyWillChangeNotificationName
 {
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
-		return &kLeoValueTypeString;
-	else if( [inPropertyName isEqualToString: @"rectangle"] )
-	{
-		return &kLeoValueTypeArray;
-	}
-	else if( [inPropertyName isEqualToString: @"fillcolor"] )
-	{
-		return &kLeoValueTypeArray;
-	}
-	else if( [inPropertyName isEqualToString: @"linecolor"] )
-	{
-		return &kLeoValueTypeArray;
-	}
-	else if( [inPropertyName isEqualToString: @"shadowcolor"] )
-	{
-		return &kLeoValueTypeArray;
-	}
-	else if( [inPropertyName isEqualToString: @"shadowoffset"] )
-	{
-		return &kLeoValueTypeArray;
-	}
-	else if( [inPropertyName isEqualToString: @"shadowblurradius"] )
-		return &kLeoValueTypeNumber;
-	else if( [inPropertyName isEqualToString: @"visible"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"dontwrap"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"dontsearch"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"sharedtext"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"fixedlineheight"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"autotab"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"locktext"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"autoselect"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"showlines"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"autohighlight"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"highlight"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"sharedhighlight"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"widemargins"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"multiplelines"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"showname"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"enabled"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"highlightedfortracking"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"script"] )
-		return &kLeoValueTypeString;
-	else if( [inPropertyName isEqualToString: @"style"] )
-		return &kLeoValueTypeString;
-	else if( [inPropertyName isEqualToString: @"moviepath"] )
-		return &kLeoValueTypeString;
-	else if( [inPropertyName isEqualToString: @"controllervisible"] )
-		return &kLeoValueTypeBoolean;
-	else if( [inPropertyName isEqualToString: @"icon"] )
-		return &kLeoValueTypeInteger;
-	else if( [inPropertyName isEqualToString: @"linewidth"] )
-		return &kLeoValueTypeNumber;
-	else if( [inPropertyName isEqualToString: @"bevelwidth"] )
-		return &kLeoValueTypeNumber;
-	else if( [inPropertyName isEqualToString: @"bevelangle"] )
-		return &kLeoValueTypeNumber;
-	else if( [inPropertyName isEqualToString: @"number"] )
-		return &kLeoValueTypeInteger;
-	else if( [inPropertyName isEqualToString: @"partnumber"] )
-		return &kLeoValueTypeInteger;
-	else
-		return &kLeoValueTypeString;
+	return WILDPartWillChangeNotification;
 }
+
+
+-(NSString*)	propertyDidChangeNotificationName
+{
+	return WILDPartDidChangeNotification;
+}
+
+
+-(void)	setStyleString: (NSString*)inValue
+{
+	[self setPartStyle: [self validatedStyle: inValue]];
+}
+
+
+-(NSString*)	styleString
+{
+	return mStyle;
+}
+
+
+-(NSString*)	currentURLString
+{
+	return mCurrentURL ? mCurrentURL.absoluteString : @"";
+}
+
+
+-(void)	setCurrentURLString: (NSString*)inString
+{
+	self.currentURL = (inString.length > 0) ? [NSURL URLWithString: inString] : nil;
+}
+
+
+-(void)	setRectangleDictionary: (NSDictionary*)inDict
+{
+	NSRect		newRect = NSZeroRect;
+	newRect.origin.x = [[inDict objectForKey: @"left"] doubleValue];
+	newRect.origin.y = [[inDict objectForKey: @"top"] doubleValue];
+	newRect.size.width = [[inDict objectForKey: @"right"] doubleValue] -newRect.origin.x;
+	newRect.size.height = [[inDict objectForKey: @"bottom"] doubleValue] -newRect.origin.y;
+	[self setHammerRectangle: newRect];
+}
+
+
+-(NSDictionary*)	rectangleDictionary
+{
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithDouble: mHammerRectangle.origin.x], @"left",
+			[NSNumber numberWithDouble: mHammerRectangle.origin.y], @"top",
+			[NSNumber numberWithDouble: NSMaxX(mHammerRectangle)], @"right",
+			[NSNumber numberWithDouble: NSMaxY(mHammerRectangle)], @"bottom",
+			nil];
+}
+
+
+-(void)	setFillColorDictionary: (NSDictionary*)inValue
+{
+	CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
+	CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
+	CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
+	NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
+	CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
+	[self setFillColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
+}
+
+
+-(NSDictionary*)	fillColorDictionary
+{
+	NSColor	*	rgbColor = [[self fillColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
+			[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
+			[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
+			[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
+			nil];
+}
+
+
+-(void)	setLineColorDictionary: (NSDictionary*)inValue
+{
+	CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
+	CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
+	CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
+	NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
+	CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
+	[self setLineColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
+}
+
+
+-(NSDictionary*)	lineColorDictionary
+{
+	NSColor	*	rgbColor = [[self lineColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
+			[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
+			[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
+			[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
+			nil];
+}
+
+
+-(void)	setShadowColorDictionary: (NSDictionary*)inValue
+{
+	CGFloat		redComponent = [[inValue objectForKey: @"red"] doubleValue];
+	CGFloat		greenComponent = [[inValue objectForKey: @"green"] doubleValue];
+	CGFloat		blueComponent = [[inValue objectForKey: @"blue"] doubleValue];
+	NSNumber*	alphaComponentObj = [inValue objectForKey: @"alpha"];
+	CGFloat		alphaComponent = alphaComponentObj ? [alphaComponentObj doubleValue] : 1.0;
+	[self setShadowColor: [NSColor colorWithCalibratedRed: redComponent green: greenComponent blue: blueComponent alpha: alphaComponent]];
+}
+
+
+-(NSDictionary*)	shadowColorDictionary
+{
+	NSColor	*	rgbColor = [[self shadowColor] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithDouble: [rgbColor redComponent]], @"red",
+			[NSNumber numberWithDouble: [rgbColor greenComponent]], @"green",
+			[NSNumber numberWithDouble: [rgbColor blueComponent]], @"blue",
+			[NSNumber numberWithDouble: [rgbColor alphaComponent]], @"alpha",
+			nil];
+}
+
+
+-(void)	setShadowOffsetDictionary: (NSDictionary*)inValue
+{
+	CGFloat		h = [[inValue objectForKey: @"horizontal"] doubleValue];
+	CGFloat		v = [[inValue objectForKey: @"vertical"] doubleValue];
+	mShadowOffset = NSMakeSize(h,v);
+}
+
+
+-(NSDictionary*)	shadowOffsetDictionary
+{
+	NSSize	shadowOffset = self.shadowOffset;
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithDouble: shadowOffset.width], @"horizontal",
+			[NSNumber numberWithDouble: shadowOffset.height], @"vertical",
+			nil];
+}
+
+
+-(void)	setPartNumberForScripts: (NSInteger)desiredIndex
+{
+	if( desiredIndex > 0 )
+		[mOwner movePart: self toIndex: desiredIndex -1 asType: nil];
+}
+
+
+-(NSInteger)	partNumberForScripts
+{
+	return [mOwner indexOfPart: self asType: nil];
+}
+
+
+-(void)	setNumberForScripts: (NSInteger)desiredIndex
+{
+	if( desiredIndex > 0 )
+		[mOwner movePart: self toIndex: desiredIndex -1 asType: self.partType];
+}
+
+
+-(NSInteger)	numberForScripts
+{
+	return [mOwner indexOfPart: self asType: self.partType];
+}
+
+
+
+PROPERTY_MAP_START
+PROPERTY_MAPPING(name,"name",kLeoValueTypeString)
+PROPERTY_MAPPING(name,"short name",kLeoValueTypeString)
+PROPERTY_MAPPING(parentObject,"owner",kLeoValueTypeWILDObject)
+PROPERTY_MAPPING(rectangleDictionary,"rectangle",kLeoValueTypeArray)
+PROPERTY_MAPPING(partID,"id",kLeoValueTypeInteger)
+PROPERTY_MAPPING(partNumber,"number",kLeoValueTypeInteger)
+PROPERTY_MAPPING(fillColorDictionary,"fillcolor",kLeoValueTypeArray)
+PROPERTY_MAPPING(lineColorDictionary,"linecolor",kLeoValueTypeArray)
+PROPERTY_MAPPING(shadowColorDictionary,"shadowcolor",kLeoValueTypeArray)
+PROPERTY_MAPPING(shadowOffsetDictionary,"shadowoffset",kLeoValueTypeArray)
+PROPERTY_MAPPING(shadowBlurRadius,"shadowblurradius",kLeoValueTypeNumber)
+PROPERTY_MAPPING(visible,"visible",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(dontWrap,"dontwrap",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(dontSearch,"dontsearch",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(sharedText,"sharedtext",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(fixedLineHeight,"fixedlineheight",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(autoTab,"autotab",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(lockText,"locktext",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(autoSelect,"autoselect",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(showLines,"showlines",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(autoHighlight,"autohighlight",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(highlighted,"highlight",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(sharedHighlight,"sharedhighlight",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(wideMargins,"widemargins",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(canSelectMultipleLines,"multiplelines",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(showName,"showname",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(enabled,"enabled",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(highlightedForTracking,"highlightedfortracking",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(script,"script",kLeoValueTypeString)
+PROPERTY_MAPPING(styleString,"style",kLeoValueTypeString)
+PROPERTY_MAPPING(mediaPath,"moviepath",kLeoValueTypeString)
+PROPERTY_MAPPING(controllerVisible,"controllervisible",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(icon,"icon",kLeoValueTypeInteger)
+PROPERTY_MAPPING(lineWidth,"linewidth",kLeoValueTypeInteger)
+PROPERTY_MAPPING(bevel,"bevelwidth",kLeoValueTypeInteger)
+PROPERTY_MAPPING(bevelAngle,"bevelangle",kLeoValueTypeInteger)
+PROPERTY_MAPPING(numberForScripts,"number",kLeoValueTypeInteger)
+PROPERTY_MAPPING(partNumberForScripts,"partnumber",kLeoValueTypeInteger)
+PROPERTY_MAPPING(currentURLString,"currenturl",kLeoValueTypeString)
+PROPERTY_MAPPING(statusMessage,"statusmessage",kLeoValueTypeString)
+PROPERTY_MAP_END
 
 
 -(BOOL)	deleteWILDObject

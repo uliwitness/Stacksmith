@@ -206,12 +206,17 @@ PROPERTY_MAP_END
 {
 	BOOL	propExists = YES;
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: self.propertyWillChangeNotificationName
-														object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-																										   forKey: WILDAffectedPropertyKey]];
 	NSString*	propName = [mPropertyNames objectForKey: inPropertyName];
 	if( propName )
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName: self.propertyWillChangeNotificationName
+															object: self userInfo: [NSDictionary dictionaryWithObject: propName
+																											   forKey: WILDAffectedPropertyKey]];
 		[self setValue: inValue forKey: propName];
+		[[NSNotificationCenter defaultCenter] postNotificationName: self.propertyDidChangeNotificationName
+															object: self userInfo: [NSDictionary dictionaryWithObject: propName
+																											   forKey: WILDAffectedPropertyKey]];
+	}
 	else
 	{
 		id		theValue = [mUserProperties objectForKey: inPropertyName];
@@ -221,9 +226,6 @@ PROPERTY_MAP_END
 			propExists = NO;
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: self.propertyDidChangeNotificationName
-														object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-																										   forKey: WILDAffectedPropertyKey]];
 	if( propExists )
 		[self updateChangeCount: NSChangeDone];
 	

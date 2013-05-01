@@ -13,6 +13,7 @@
 #import "WILDObjectID.h"
 #import "LEOValue.h"
 #import "WILDObjectValue.h"
+#import "WILDConcreteObject.h"
 
 
 @class WILDStack;
@@ -22,14 +23,11 @@
 @class WILDPartContents;
 
 
-@interface WILDPart : NSObject <WILDScriptContainer,WILDSearchable,WILDObject>
+@interface WILDPart : WILDConcreteObject <WILDSearchable>
 {
 	WILDObjectID		mID;
 	NSRect				mHammerRectangle;
-	NSString*			mName;
 	NSString*			mMediaPath;
-	NSString*			mScript;
-	struct LEOScript*	mScriptObject;
 	NSString*			mStyle;
 	NSString*			mType;
 	NSString*			mLayer;
@@ -73,11 +71,6 @@
 	NSInteger			mBevel;
 	WILDLayer*			mOwner;					// Layer that this part belongs to.
 	WILDStack*			mStack;					// Stack this part belongs to.
-	NSMutableDictionary*mUserProperties;
-	
-	LEOObjectID				mIDForScripts;			// The ID Leonie uses to refer to this object.
-	LEOObjectSeed			mSeedForScripts;		// The seed value to go with mIDForScripts.
-	struct LEOValueObject	mValueForScripts;		// A LEOValue so scripts can reference us (see mIDForScripts).
 }
 
 @property (assign,nonatomic) BOOL			dontWrap;
