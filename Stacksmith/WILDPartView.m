@@ -330,19 +330,19 @@
 }
 
 
--(NSRect)	layoutRectForRect: (NSRect)newBox
+-(NSRect)	partRectForPartViewFrame: (NSRect)newBox
 {
 	if(mPartPresenter == nil)
 		return NSInsetRect( newBox, 2, 2 );
-	return [mPartPresenter layoutRectForRect: newBox];
+	return [mPartPresenter partRectForPartViewFrame: newBox];
 }
 
 
--(NSRect)	rectForLayoutRect: (NSRect)newBox
+-(NSRect)	partViewFrameForPartRect: (NSRect)newBox
 {
 	if(mPartPresenter == nil)
 		return NSInsetRect( newBox, -2, -2 );
-	return [mPartPresenter rectForLayoutRect: newBox];
+	return [mPartPresenter partViewFrameForPartRect: newBox];
 }
 
 
@@ -374,7 +374,7 @@
 
 -(void) setUpGuidelinesForMovingAndSnapRect: (NSRect*)inBigBox
 {
-	NSRect						inBox = [self layoutRectForRect: *inBigBox];
+	NSRect						inBox = [self partRectForPartViewFrame: *inBigBox];
 	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
 	
 	[guidelineView removeAllGuidelines];
@@ -493,7 +493,7 @@
 	{
 		if( currPartView != self && [currPartView isKindOfClass: [WILDPartView class]] )
 		{
-			NSRect	currBox = [currPartView layoutRectForRect: [currPartView frame]];
+			NSRect	currBox = [currPartView partRectForPartViewFrame: [currPartView frame]];
 			if( ((NSMinX(currBox) -6) < NSMinX(inBox)) && ((NSMinX(currBox) +6) > NSMinX(inBox)) )
 			{
 				CGFloat		horzDiff = NSMinX(inBox) -NSMinX(currBox);
@@ -594,7 +594,7 @@
 
 -(void) setUpGuidelinesForResizingWithHandle: (WILDPartGrabHandle)inHandle andSnapRect: (NSRect*)inBigBox
 {
-	NSRect						inBox = [self layoutRectForRect: *inBigBox];
+	NSRect						inBox = [self partRectForPartViewFrame: *inBigBox];
 	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
 	
 	[guidelineView removeAllGuidelines];
@@ -697,7 +697,7 @@
 	[guidelineView removeAllGuidelines];
 	[guidelineView setNeedsDisplay: YES];
 
-	[mPart setQuartzRectangle: [self layoutRectForRect: self.frame]];
+	[mPart setQuartzRectangle: [self partRectForPartViewFrame: self.frame]];
 	[mPart updateChangeCount: NSChangeDone];
 }
 
@@ -706,7 +706,7 @@
 {
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	BOOL					keepDragging = YES;
-	NSRect					frame = [self rectForLayoutRect: mPart.quartzRectangle];
+	NSRect					frame = [self partViewFrameForPartRect: mPart.quartzRectangle];
 	CGFloat					titleWidth = [mPart titleWidth];
 	
 	while( keepDragging )
@@ -762,7 +762,7 @@
 
 	[pool drain];
 	
-	[mPart setQuartzRectangle: [self layoutRectForRect: self.frame]];
+	[mPart setQuartzRectangle: [self partRectForPartViewFrame: self.frame]];
 	[mPart updateChangeCount: NSChangeDone];
 	
 	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
@@ -1074,7 +1074,7 @@
 		[mPartPresenter partDidChange: notif];
 	else	// Unknown property. Reload the whole thing.
 	{
-		[self setFrame: [self rectForLayoutRect: mPart.quartzRectangle]];
+		[self setFrame: [self partViewFrameForPartRect: mPart.quartzRectangle]];
 		[self unloadPart];
 		[self loadPart: mPart forBackgroundEditing: NO];
 	}
@@ -1252,7 +1252,7 @@
 -(void)	quartzRectanglePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	if( mPartPresenter )
-		[self setFrame: [self rectForLayoutRect: inPart.quartzRectangle]];	// Presenter can register to pick up our changes and react.
+		[self setFrame: [self partViewFrameForPartRect: inPart.quartzRectangle]];	// Presenter can register to pick up our changes and react.
 }
 
 

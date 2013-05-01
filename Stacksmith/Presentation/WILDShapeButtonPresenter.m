@@ -109,13 +109,13 @@
 	[(WILDButtonCell*)[mMainView cell] setBevelAngle: currPart.bevelAngle];
 }
 
--(NSRect)	layoutRectForRect:(NSRect)inRect
+-(NSRect)	partRectForPartViewFrame:(NSRect)inRect
 {
 	return inRect;
 }
 
 
--(NSRect)	rectForLayoutRect:(NSRect)inLayoutRect
+-(NSRect)	partViewFrameForPartRect:(NSRect)inLayoutRect
 {
 	return inLayoutRect;
 }

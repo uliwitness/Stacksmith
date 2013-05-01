@@ -44,10 +44,8 @@
 	
 	if( !mWebView )
 	{
-		WILDPart	*	currPart = [mPartView part];
-		NSRect			partRect = [currPart quartzRectangle];
+		NSRect			partRect = [mPartView bounds];
 		[mPartView setWantsLayer: YES];
-		partRect.origin = NSMakePoint( 2, 2 );
 		
 		mWebView = [[WebView alloc] initWithFrame: partRect];
 		[mWebView setWantsLayer: YES];
@@ -56,11 +54,7 @@
 		[mPartView addSubview: mWebView];
 		[mWebView setFrameLoadDelegate: self];
 		[mWebView setApplicationNameForUserAgent: @"Stacksmith/" TOSTRING(STACKSMITH_SHORT_VERSION) "." TOSTRING(SVN_VERSION_NUM)];
-//		[mWebView setUIDelegate: self];
 	}
-	
-	NSRect	theBox = [self rectForLayoutRect: mPartView.part.quartzRectangle];
-	[mPartView setFrame: theBox];
 	
 	[self refreshProperties];
 }
@@ -100,6 +94,9 @@
 			theText = @"";
 		[mWebView.mainFrame loadHTMLString: theText baseURL: nil /*currPart.stack.document.fileURL*/];
 	}
+	
+	NSRect	theBox = [self partViewFrameForPartRect: currPart.quartzRectangle];
+	[mPartView setFrame: theBox];
 }
 
 
@@ -128,7 +125,7 @@
 }
 
 
--(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor;
+-(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor
 {
 	// Let the WebView set the cursor.
 	//UKLog(@"no cursor rects for part %@.", mPartView.part);

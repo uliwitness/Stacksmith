@@ -25,32 +25,25 @@
 	if( !mScrollView )
 	{
 		WILDPart	*	currPart = [mPartView part];
-		NSRect			partRect = [currPart quartzRectangle];
+		NSRect			partRect = mPartView.bounds;
 		[mPartView setWantsLayer: YES];
-		partRect.origin = NSMakePoint( 2, 2 );
 		
 		mTextView = [[WILDTextView alloc] initWithFrame: partRect];
 		[mTextView setFont: [currPart textFont]];
-		[mTextView setWantsLayer: YES];
+		//[mTextView setWantsLayer: YES];
 		[mTextView setDrawsBackground: NO];
 		[mTextView setUsesFindPanel: NO];
 		[mTextView setDelegate: self];
 		[mTextView setRepresentedPart: currPart];
+		[mTextView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 				
 		mScrollView = [[WILDScrollView alloc] initWithFrame: partRect];
 		[mScrollView setDocumentCursor: [(WILDDocument*)[[currPart stack] document] cursorWithID: 128]];
-		[mScrollView setWantsLayer: YES];
-		NSRect			txBox = partRect;
-		txBox.origin = NSZeroPoint;
-
-		[mTextView setFrame: txBox];
+		//[mScrollView setWantsLayer: YES];
 		[mScrollView setDocumentView: mTextView];
 		[mScrollView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 		[mPartView addSubview: mScrollView];
 	}
-	
-	NSRect	theBox = [self rectForLayoutRect: mPartView.part.quartzRectangle];
-	[mPartView setFrame: theBox];
 	
 	[self refreshProperties];
 }
@@ -77,7 +70,7 @@
 	if( ![currPart isEnabled] )
 		shouldBeEditable = NO;
 	[mTextView setEditable: shouldBeEditable];
-	[mTextView setSelectable: shouldBeEditable];
+	[mTextView setSelectable: ![currPart lockText]];
 	
 	if( [[currPart partStyle] isEqualToString: @"transparent"] )
 	{
@@ -137,6 +130,8 @@
 		if( theText )
 			[mTextView setString: [contents text]];
 	}
+	
+	[mPartView setFrame: [self partViewFrameForPartRect: currPart.quartzRectangle]];
 }
 
 

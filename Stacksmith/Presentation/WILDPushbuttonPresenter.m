@@ -18,7 +18,7 @@
 {
 	
 	mMainView = [[WILDButtonView alloc] initWithFrame: NSMakeRect(0, 0, 100, 23)];
-	NSRect		box = [self rectForLayoutRect: [mPartView bounds]];
+	NSRect		box = [self partViewFrameForPartRect: [mPartView bounds]];
 	[mMainView setFrame: box];
 	[mMainView setBordered: YES];
 	[mMainView setBezelStyle: NSRoundedBezelStyle];
@@ -36,7 +36,7 @@
 	
 	[mPartView addSubview: mMainView];
 	
-	NSRect	theBox = [self rectForLayoutRect: mPartView.part.quartzRectangle];
+	NSRect	theBox = [self partViewFrameForPartRect: mPartView.part.quartzRectangle];
 	[mPartView setFrame: theBox];
 	
 	[self refreshProperties];
@@ -134,13 +134,13 @@
 }
 
 
--(NSRect)	layoutRectForRect:(NSRect)inRect
+-(NSRect)	partRectForPartViewFrame:(NSRect)inRect
 {
 	return [mMainView alignmentRectForFrame: inRect];
 }
 
 
--(NSRect)	rectForLayoutRect:(NSRect)inLayoutRect
+-(NSRect)	partViewFrameForPartRect:(NSRect)inLayoutRect
 {
 	return [mMainView frameForAlignmentRect: inLayoutRect];
 }

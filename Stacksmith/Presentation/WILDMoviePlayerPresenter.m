@@ -88,7 +88,7 @@
 
 	[mMovieView setControllerVisible: [currPart controllerVisible]];
 	
-	NSRect	theBox = [self rectForLayoutRect: mPartView.part.quartzRectangle];
+	NSRect	theBox = [self partViewFrameForPartRect: mPartView.part.quartzRectangle];
 	[mPartView setFrame: theBox];
 }
 

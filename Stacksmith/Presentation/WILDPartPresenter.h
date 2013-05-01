@@ -29,8 +29,8 @@
 
 -(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor;
 -(NSRect)	selectionFrame;	// Frame coord. system of the part view. I.e. local to part view's superview.
--(NSRect)	layoutRectForRect: (NSRect)inRect;
--(NSRect)	rectForLayoutRect: (NSRect)inRect;
+-(NSRect)	partRectForPartViewFrame: (NSRect)inRect;
+-(NSRect)	partViewFrameForPartRect: (NSRect)inRect;
 
 @end
 

@@ -85,17 +85,17 @@
 
 -(NSRect)	selectionFrame
 {
-	return [self layoutRectForRect: [mPartView frame]];	// Sensible fallback.
+	return [self partRectForPartViewFrame: [mPartView frame]];	// Sensible fallback.
 }
 
 
--(NSRect)	layoutRectForRect: (NSRect)inRect
+-(NSRect)	partRectForPartViewFrame: (NSRect)inRect
 {
 	return NSInsetRect( inRect, 2, 2 );
 }
 
 
--(NSRect)	rectForLayoutRect: (NSRect)inLayoutRect
+-(NSRect)	partViewFrameForPartRect: (NSRect)inLayoutRect
 {
 	return NSInsetRect(inLayoutRect, -2, -2 );
 }
