@@ -6,10 +6,11 @@
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#include "WILDGlobalProperties.h"
-#include "StacksmithVersion.h"
-#include <string.h>
+#import "WILDGlobalProperties.h"
+#import "StacksmithVersion.h"
+#import <string.h>
 #import <Foundation/Foundation.h>
+#import "UKSystemInfo.h"
 
 
 #define TOSTRING2(x)	#x
@@ -26,6 +27,8 @@ void	LEOPushVersionInstruction( LEOContext* inContext );
 void	LEOPushShortVersionInstruction( LEOContext* inContext );
 void	LEOPushLongVersionInstruction( LEOContext* inContext );
 void	LEOPushPlatformInstruction( LEOContext* inContext );
+void	LEOPushPhysicalMemoryInstruction( LEOContext* inContext );
+void	LEOPushMachineInstruction( LEOContext* inContext );
 void	LEOPushSystemVersionInstruction( LEOContext* inContext );
 
 
@@ -100,14 +103,29 @@ void	LEOPushPlatformInstruction( LEOContext* inContext )
 
 void	LEOPushSystemVersionInstruction( LEOContext* inContext )
 {
-	// sensible default
-	static NSString*	sSysVersionCocoaStr = nil;
-	if( !sSysVersionCocoaStr )
-	{
-		sSysVersionCocoaStr = [[[NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"] objectForKey:@"ProductVersion"] retain];
-	}
-	const char*	theSysVersion = [sSysVersionCocoaStr UTF8String];
+	const char*	theSysVersion = [UKSystemVersionString() UTF8String];
 	LEOPushStringValueOnStack( inContext, theSysVersion, strlen(theSysVersion) );
+	
+	inContext->currentInstruction++;
+}
+
+
+void	LEOPushPhysicalMemoryInstruction( LEOContext* inContext )
+{
+	unsigned 	physMemory = UKPhysicalRAMSize() / 1024U;
+	NSString	*physMemoryObjCStr = [NSString stringWithFormat: @"%u GB", physMemory];
+	const char*	physMemoryStr = [physMemoryObjCStr UTF8String];
+	LEOPushStringValueOnStack( inContext, physMemoryStr, strlen(physMemoryStr) );
+	
+	inContext->currentInstruction++;
+}
+
+
+void	LEOPushMachineInstruction( LEOContext* inContext )
+{
+	NSString	*	machineStr = UKMachineName();
+	const char	*	machineCStr = [machineStr UTF8String];
+	LEOPushStringValueOnStack( inContext, machineCStr, strlen(machineCStr) );
 	
 	inContext->currentInstruction++;
 }
@@ -120,6 +138,8 @@ LEOINSTR(LEOPushVersionInstruction)
 LEOINSTR(LEOPushShortVersionInstruction)
 LEOINSTR(LEOPushLongVersionInstruction)
 LEOINSTR(LEOPushPlatformInstruction)
+LEOINSTR(LEOPushPhysicalMemoryInstruction)
+LEOINSTR(LEOPushMachineInstruction)
 LEOINSTR_LAST(LEOPushSystemVersionInstruction)
 
 
@@ -131,5 +151,7 @@ struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 	{ EVersionIdentifier, ELongIdentifier, INVALID_INSTR2, PUSH_LONG_VERSION_INSTR },
 	{ EPlatformIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_PLATFORM_INSTR },
 	{ ESystemVersionIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SYSTEMVERSION_INSTR },
+	{ EPhysicalMemoryIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_PHYSICALMEMORY_INSTR },
+	{ EMachineIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_MACHINE_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };
