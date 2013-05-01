@@ -307,6 +307,7 @@
 		55E806541368B2CD006F1287 /* UKColorListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063E1368B2CA006F1287 /* UKColorListView.m */; };
 		55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */; };
 		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
+		55E85E57173180860086F876 /* WILDConcreteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E85E56173180860086F876 /* WILDConcreteObject.m */; };
 		55E9FD8B13E56D3A0089B81F /* WILDPartInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9FD8913E56D390089B81F /* WILDPartInfoViewController.m */; };
 		55E9FD8F13E5FBCC0089B81F /* WILDButtonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9FD8E13E5FBCC0089B81F /* WILDButtonInfoViewController.m */; };
 		55E9FD9213E6050F0089B81F /* WILDPartInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */; };
@@ -927,6 +928,8 @@
 		55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+RoundRect.m"; path = "../UliKit/NSBezierPath+RoundRect.m"; sourceTree = "<group>"; };
 		55E8535C1166341100745C86 /* NSString+FetchNextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FetchNextLine.h"; path = "../UliKit/NSString+FetchNextLine.h"; sourceTree = SOURCE_ROOT; };
 		55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FetchNextLine.m"; path = "../UliKit/NSString+FetchNextLine.m"; sourceTree = SOURCE_ROOT; };
+		55E85E55173180860086F876 /* WILDConcreteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDConcreteObject.h; path = Model/WILDConcreteObject.h; sourceTree = "<group>"; };
+		55E85E56173180860086F876 /* WILDConcreteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDConcreteObject.m; path = Model/WILDConcreteObject.m; sourceTree = "<group>"; };
 		55E9FD8813E56D390089B81F /* WILDPartInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPartInfoViewController.h; path = Editor/WILDPartInfoViewController.h; sourceTree = "<group>"; };
 		55E9FD8913E56D390089B81F /* WILDPartInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPartInfoViewController.m; path = Editor/WILDPartInfoViewController.m; sourceTree = "<group>"; };
 		55E9FD8D13E5FBCB0089B81F /* WILDButtonInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDButtonInfoViewController.h; path = Editor/WILDButtonInfoViewController.h; sourceTree = "<group>"; };
@@ -1426,6 +1429,8 @@
 				55E3B6AC1184417A000062C1 /* WILDMediaEntry.m */,
 				55E3B6C71184420E000062C1 /* WILDStyleEntry.h */,
 				55E3B6C81184420E000062C1 /* WILDStyleEntry.m */,
+				55E85E55173180860086F876 /* WILDConcreteObject.h */,
+				55E85E56173180860086F876 /* WILDConcreteObject.m */,
 				5542C9451139D7A000555C64 /* WILDStack.h */,
 				5542C9461139D7A000555C64 /* WILDStack.m */,
 				5542C9DC1139FD9F00555C64 /* WILDLayer.h */,
@@ -2222,6 +2227,7 @@
 				55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */,
 				55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */,
 				55615C57172E10E800EFEAEF /* WILDMoviePlayerPresenter.m in Sources */,
+				55E85E57173180860086F876 /* WILDConcreteObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

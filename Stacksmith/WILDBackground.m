@@ -94,23 +94,18 @@
 }
 
 
--(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
+-(NSInteger)	backgroundNumber
 {
-	if( [inPropertyName isEqualToString: @"owner"] )
-	{
-		return [self stack];
-	}
-	else
-		return [super valueForWILDPropertyNamed: inPropertyName ofRange:byteRange];
+	return [[mStack backgrounds] indexOfObject: self] +1;
 }
 
 
--(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName
-{
-	if( [inPropertyName isEqualToString: @"owner"] )
-		return &kLeoValueTypeWILDObject;
-	else
-		return [super typeForWILDPropertyNamed: inPropertyName];
-}
+PROPERTY_MAP_START
+PROPERTY_MAPPING(name,"name",kLeoValueTypeString)
+PROPERTY_MAPPING(name,"short name",kLeoValueTypeString)
+PROPERTY_MAPPING(parentObject,"owner",kLeoValueTypeWILDObject)
+PROPERTY_MAPPING(backgroundID,"id",kLeoValueTypeInteger)
+PROPERTY_MAPPING(backgroundNumber,"number",kLeoValueTypeInteger)
+PROPERTY_MAP_END
 
 @end

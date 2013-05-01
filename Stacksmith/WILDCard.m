@@ -47,6 +47,16 @@
 }
 
 
+PROPERTY_MAP_START
+	PROPERTY_MAPPING(name,"name",kLeoValueTypeString)
+	PROPERTY_MAPPING(name,"short name",kLeoValueTypeString)
+	PROPERTY_MAPPING(owningBackground,"owner",kLeoValueTypeWILDObject)
+	PROPERTY_MAPPING(marked,"marked",kLeoValueTypeBoolean)
+	PROPERTY_MAPPING(cardID,"id",kLeoValueTypeInteger)
+	PROPERTY_MAPPING(cardNumber,"number",kLeoValueTypeInteger)
+PROPERTY_MAP_END
+
+
 -(WILDObjectID)	backgroundID
 {
 	return [mOwner backgroundID];
@@ -224,18 +234,6 @@
 }
 
 
--(NSString*)	textContents
-{
-	return nil;
-}
-
-
--(BOOL)	setTextContents: (NSString*)inString
-{
-	return NO;
-}
-
-
 -(void)	setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype
 {
 	WILDDocument	*	theDoc = [[self stack] document];
@@ -243,6 +241,19 @@
 		[theDoc makeWindowControllers];
 	WILDCardWindowController*	theWC = [[theDoc windowControllers] objectAtIndex: 0];
 	[theWC setTransitionType: inType subtype: inSubtype];
+}
+
+
+-(void)	setMarked: (BOOL)marked
+{
+	mMarked = marked;
+	[mStack setMarked: mMarked forCard: self];
+}
+
+
+-(BOOL)	marked
+{
+	return mMarked;
 }
 
 
@@ -262,26 +273,6 @@
 	[theWC showWindow: self];	// TODO: Look up the right window for this stack.
 	
 	return YES;
-}
-
-
--(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
-{
-	if( [inPropertyName isEqualToString: @"owner"] )
-	{
-		return [self owningBackground];
-	}
-	else
-		return [super valueForWILDPropertyNamed: inPropertyName ofRange:byteRange];
-}
-
-
--(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName
-{
-	if( [inPropertyName isEqualToString: @"owner"] )
-		return &kLeoValueTypeWILDObject;
-	else
-		return [super typeForWILDPropertyNamed: inPropertyName];
 }
 
 

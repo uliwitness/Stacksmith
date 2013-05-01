@@ -21,7 +21,6 @@
 
 @implementation WILDLayer
 
-@synthesize name = mName;
 @synthesize dontSearch = mDontSearch;
 @synthesize cantDelete = mCantDelete;
 
@@ -32,13 +31,13 @@
 		mStack = theStack;
 		
 		mID = [mStack uniqueIDForCardOrBackground];
-		mName = [@"" retain];
+		ASSIGN(mName, @"");
 
 		mShowPict = YES;
 		mCantDelete = NO;
 		mDontSearch = NO;
 		
-		mScript = [@"" retain];
+		ASSIGN(mScript, @"");
 		mButtonFamilies = [[ULIMultiMap alloc] init];
 
 		mParts = [[NSMutableArray alloc] init];
@@ -46,8 +45,6 @@
 		mContents = [[NSMutableDictionary alloc] init];
 		
 		mPartIDSeed = 1;
-		
-		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
 	return self;
@@ -61,7 +58,7 @@
 		NSXMLElement*	elem = [theDoc rootElement];
 		
 		mID = WILDIntegerFromSubElementInElement( @"id", elem );
-		mName = [WILDStringFromSubElementInElement( @"name", elem ) retain];
+		ASSIGN(mName, WILDStringFromSubElementInElement( @"name", elem ));
 		
 		mShowPict = WILDBoolFromSubElementInElement( @"showPict", elem, YES );
 		mCantDelete = WILDBoolFromSubElementInElement( @"cantDelete", elem, NO );
@@ -70,7 +67,7 @@
 		mStack = theStack;
 		mPictureName = [WILDStringFromSubElementInElement( @"bitmap", elem ) retain];
 		
-		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
+		ASSIGN(mScript, WILDStringFromSubElementInElement( @"script", elem ));
 
 		NSError *	err = nil;
 		NSArray	*	userPropsNodes = [elem nodesForXPath: @"userProperties" error: &err];
@@ -124,8 +121,6 @@
 		[self loadAddColorObjects: elem];
 		
 		mPartIDSeed = 1;
-		
-		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
 	return self;
@@ -140,19 +135,10 @@
 	}
 	
 	DESTROY_DEALLOC(mButtonFamilies);
-	DESTROY_DEALLOC(mName);
-	DESTROY_DEALLOC(mScript);
 	DESTROY_DEALLOC(mPicture);
 	DESTROY_DEALLOC(mPictureName);
 	DESTROY_DEALLOC(mParts);
 	DESTROY_DEALLOC(mAddColorParts);
-	DESTROY_DEALLOC(mUserProperties);
-	
-	if( mScriptObject )
-	{
-		LEOScriptRelease( mScriptObject );
-		mScriptObject = NULL;
-	}
 	
 	mStack = UKInvalidPointer;
 	
@@ -198,6 +184,7 @@
 {
 	return mAddColorParts;
 }
+
 
 -(WILDPartContents*)	contentsForPart: (WILDPart*)thePart
 {
@@ -515,6 +502,7 @@
 	[inPart release];
 }
 
+
 -(WILDPart*)	partNamed: (NSString*)inPartName ofType: (NSString*)inPartType
 {
 	WILDPart*	foundPart = nil;
@@ -673,9 +661,9 @@
 }
 
 
--(void)	updateChangeCount: (NSDocumentChangeType)inChange
+-(WILDDocument*)	document
 {
-	[[mStack document] updateChangeCount: inChange];
+	return mStack.document;
 }
 
 
@@ -724,198 +712,17 @@
 }
 
 
--(NSString*)	script
+-(NSString*)	propertyWillChangeNotificationName
 {
-	return mScript;
+	return WILDLayerWillChangeNotification;
 }
 
 
--(void)	setScript: (NSString*)theScript
+-(NSString*)	propertyDidChangeNotificationName
 {
-	ASSIGN(mScript,theScript);
-	if( mScriptObject )
-	{
-		LEOScriptRelease( mScriptObject );
-		mScriptObject = NULL;
-	}
+	return WILDLayerDidChangeNotification;
 }
 
-
--(void)	getID: (LEOObjectID*)outID seedForScripts: (LEOObjectSeed*)outSeed
-{
-	if( mIDForScripts == kLEOObjectIDINVALID )
-	{
-		LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
-		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [mStack scriptContextGroupObject], &mValueForScripts );
-		mSeedForScripts = LEOContextGroupGetSeedForObjectID( [mStack scriptContextGroupObject], mIDForScripts );
-	}
-	
-	if( mIDForScripts )
-	{
-		if( outID )
-			*outID = mIDForScripts;
-		if( outSeed )
-			*outSeed = mSeedForScripts;
-	}
-}
-
-
--(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError
-{
-	if( !mScriptObject )
-	{
-		if( !mScript )
-			return NULL;
-		const char*		scriptStr = [mScript UTF8String];
-		uint16_t		fileID = LEOFileIDForFileName( [[self displayName] UTF8String] );
-		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
-		if( LEOParserGetLastErrorMessage() == NULL )
-		{
-			[self getID: NULL seedForScripts: NULL];	// Make sure ivars mIDForScripts and mSeedForScripts are initialized.
-			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
-			LEOScriptCompileAndAddParseTree( mScriptObject, [mStack scriptContextGroupObject], parseTree, fileID );
-			
-			#if REMOTE_DEBUGGER
-			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );
-			
-			// Set a breakpoint on the mouseUp handler:
-//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [mStack scriptContextGroupObject], "mouseup" );
-//			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
-//			if( theHandler )
-//				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
-			#endif
-		}
-		if( LEOParserGetLastErrorMessage() )
-		{
-			if( showError && [NSApp isRunning] )
-				NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] );
-			if( mScriptObject )
-			{
-				LEOScriptRelease( mScriptObject );
-				mScriptObject = NULL;
-			}
-		}
-	}
-	
-	return mScriptObject;
-}
-
-
--(struct LEOContextGroup*)	scriptContextGroupObject
-{
-	return [[mStack document] scriptContextGroupObject];
-}
-
-
--(NSString*)	textContents
-{
-	return nil;
-}
-
-
--(BOOL)			setTextContents: (NSString*)inString
-{
-	return NO;
-}
-
--(BOOL)			goThereInNewWindow: (BOOL)inNewWindow
-{
-	return NO;
-}
-
--(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
-{
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
-	{
-		return [self name];
-	}
-	else
-		return [mUserProperties objectForKey: inPropertyName];
-}
-
-
--(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange
-{
-	BOOL	propExists = YES;
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerWillChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-															forKey: WILDAffectedPropertyKey]];
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
-		[self setName: inValue];
-	else
-	{
-		id		theValue = [mUserProperties objectForKey: inPropertyName];
-		if( theValue )
-			[mUserProperties setObject: inValue forKey: inPropertyName];
-		else
-			propExists = NO;
-	}
-
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-															forKey: WILDAffectedPropertyKey]];
-	if( propExists )
-		[self updateChangeCount: NSChangeDone];
-	
-	return propExists;
-}
-
-
--(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName;
-{
-	return &kLeoValueTypeString;
-}
-
-
--(void)	addUserPropertyNamed: (NSString*)userPropName
-{
-	if( !mUserProperties )
-		mUserProperties = [[NSMutableDictionary alloc] init];
-	if( ![mUserProperties objectForKey: userPropName] )
-	{
-		[mUserProperties setObject: @"" forKey: userPropName];
-		[self updateChangeCount: NSChangeDone];
-	}
-}
-
-
--(void)	deleteUserPropertyNamed: (NSString*)userPropName
-{
-	if( [mUserProperties objectForKey: userPropName] )
-	{
-		[mUserProperties removeObjectForKey: userPropName];
-		[self updateChangeCount: NSChangeDone];
-	}
-}
-
-
--(NSMutableArray*)	allUserProperties
-{
-	NSMutableArray	*	allProps = [NSMutableArray arrayWithCapacity: mUserProperties.count];
-	for( NSString * theKey in mUserProperties )
-	{
-		[allProps addObject: [NSMutableDictionary dictionaryWithObjectsAndKeys: theKey, WILDUserPropertyNameKey, mUserProperties[theKey], WILDUserPropertyValueKey, nil]];
-	}
-	return allProps;
-}
-
-
--(void)	setValue: (NSString*)inValue forUserPropertyNamed: (NSString*)inName oldName: (NSString*)inOldName
-{
-	if( inOldName )
-		[mUserProperties removeObjectForKey: inOldName];
-	if( !mUserProperties )
-		mUserProperties = [[NSMutableDictionary alloc] init];
-	[mUserProperties setObject: inValue forKey: inName];
-	[self updateChangeCount: NSChangeDone];
-}
-
-
--(id<WILDObject>)	parentObject
-{
-	return nil;
-}
 
 -(NSString*)	displayName
 {

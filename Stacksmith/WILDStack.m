@@ -26,6 +26,8 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 
 @implementation WILDStack
 
+@synthesize resizable;
+
 -(id)	initWithDocument: (WILDDocument*)theDocument
 {
 	if(( self = [super init] ))
@@ -44,7 +46,7 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 		
 		mCardSize = NSMakeSize( 512, 342 );
 		
-		mScript = [@"" retain];
+		ASSIGN(mScript,@"");
 		
 		mCardIDSeed = 3000;
 		
@@ -58,8 +60,6 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 		mMarkedCards = [[NSMutableSet alloc] init];
 		
 		mName = [@"Untitled" retain];
-		
-		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
 	return self;
@@ -89,7 +89,7 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 		if( mCardSize.width < 1 || mCardSize.height < 1 )
 			mCardSize = NSMakeSize(512,342);
 		
-		mScript = [WILDStringFromSubElementInElement( @"script", elem ) retain];
+		ASSIGN(mScript, WILDStringFromSubElementInElement( @"script", elem ));
 
 		NSError *	err = nil;
 		NSArray	*	userPropsNodes = [elem nodesForXPath: @"userProperties" error: &err];
@@ -177,7 +177,7 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 				}
 				WILDCard*	theCd = [[WILDCard alloc] initWithXMLDocument: cdDoc forStack: self error: outError];
 				[self addCard: theCd];
-				[self setMarked: isMarked forCard: theCd];
+				[theCd setMarked: isMarked];	// Eventually calls setMarked:forCard: on us.
 				
 				[cdDoc release];
 				[theCd release];
@@ -185,8 +185,6 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 		}
 		
 		mCardIDSeed = 3000;
-		
-		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
 	return self;
@@ -203,18 +201,18 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 	DESTROY_DEALLOC(mBackgrounds);
 	DESTROY_DEALLOC(mCards);
 	DESTROY_DEALLOC(mMarkedCards);
-	DESTROY_DEALLOC(mScript);
-	DESTROY_DEALLOC(mName);
-	DESTROY_DEALLOC(mUserProperties);
-	
-	if( mScriptObject )
-	{
-		LEOScriptRelease( mScriptObject );
-		mScriptObject = NULL;
-	}
 	
 	[super dealloc];
 }
+
+
+PROPERTY_MAP_START
+PROPERTY_MAPPING(name,"name",kLeoValueTypeString)
+PROPERTY_MAPPING(name,"short name",kLeoValueTypeString)
+PROPERTY_MAPPING(script,"script",kLeoValueTypeString)
+PROPERTY_MAPPING(stackID,"id",kLeoValueTypeInteger)
+PROPERTY_MAPPING(sizeDictionary,"size",kLeoValueTypeArray)
+PROPERTY_MAP_END
 
 
 -(void)	addCard: (WILDCard*)theCard
@@ -242,7 +240,6 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 
 -(void)	setMarked: (BOOL)isMarked forCard: (WILDCard*)inCard
 {
-	[inCard setMarked: isMarked];
 	if( isMarked )
 		[mMarkedCards addObject: inCard];
 	else
@@ -357,6 +354,19 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 }
 
 
+-(NSDictionary*)	sizeDictionary
+{
+	return @{ @"width": @(mCardSize.width), @"height": @(mCardSize.height) };
+}
+
+
+-(void)	setSizeDictionary: (NSDictionary*)inDict
+{
+	mCardSize.width = [inDict[@"width"] integerValue];
+	mCardSize.height = [inDict[@"height"] integerValue];
+}
+
+
 -(NSSize)	cardSize
 {
 	return mCardSize;
@@ -374,79 +384,6 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 -(NSString*)	description
 {
 	return [NSString stringWithFormat: @"%@ {\ncardSize = %@\nbackgrounds = %@\ncards = %@\nscript = %@\n}", [self class], NSStringFromSize(mCardSize), mBackgrounds, mCards, mScript];
-}
-
-
--(NSString*)	script
-{
-	return mScript;
-}
-
-
--(void)	setScript: (NSString*)theScript
-{
-	ASSIGN(mScript,theScript);
-	if( mScriptObject )
-	{
-		LEOScriptRelease( mScriptObject );
-		mScriptObject = NULL;
-	}
-}
-
-
--(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError
-{
-	if( !mScriptObject )
-	{
-		const char*		scriptStr = [mScript UTF8String];
-		uint16_t		fileID = LEOFileIDForFileName( [[self displayName] UTF8String] );
-		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
-		if( LEOParserGetLastErrorMessage() == NULL )
-		{
-			if( mIDForScripts == kLEOObjectIDINVALID )
-			{
-				LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
-				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [self scriptContextGroupObject], &mValueForScripts );
-				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [self scriptContextGroupObject], mIDForScripts );
-			}
-			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
-			LEOScriptCompileAndAddParseTree( mScriptObject, [self scriptContextGroupObject], parseTree, fileID );
-			
-			#if REMOTE_DEBUGGER
-			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );
-			
-			// Set a breakpoint on the mouseUp handler:
-//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [self scriptContextGroupObject], "mouseup" );
-//			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
-//			if( theHandler )
-//				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
-			#endif
-		}
-		if( LEOParserGetLastErrorMessage() )
-		{
-			if( showError )
-				NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] );
-			if( mScriptObject )
-			{
-				LEOScriptRelease( mScriptObject );
-				mScriptObject = NULL;
-			}
-		}
-	}
-	
-	return mScriptObject;
-}
-
-
--(id<WILDObject>)	parentObject
-{
-	return nil;
-}
-
-
--(struct LEOContextGroup*)	scriptContextGroupObject
-{
-	return [[self document] scriptContextGroupObject];
 }
 
 
@@ -581,12 +518,6 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 }
 
 
--(void)	updateChangeCount: (NSDocumentChangeType)inChange
-{
-	[mDocument updateChangeCount: inChange];
-}
-
-
 -(NSString*)	name
 {
 	NSString	*stackName = [[[mDocument fileURL] lastPathComponent] stringByDeletingPathExtension];
@@ -611,17 +542,6 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 }
 
 
--(NSString*)	textContents
-{
-	return nil;
-}
-
-
--(BOOL)	setTextContents: (NSString*)inString
-{
-	return NO;
-}
-
 -(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
 	if( [[mDocument windowControllers] count] == 0 )
@@ -631,92 +551,15 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 }
 
 
--(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
+-(NSString*)	propertyWillChangeNotificationName
 {
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
-	{
-		return [self name];
-	}
-	else
-		return [mUserProperties objectForKey: inPropertyName];
+	return WILDStackWillChangeNotification;
 }
 
 
--(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange
+-(NSString*)	propertyDidChangeNotificationName
 {
-	BOOL	propExists = YES;
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-															forKey: WILDAffectedPropertyKey]];
-	if( [inPropertyName isEqualToString: @"short name"] || [inPropertyName isEqualToString: @"name"] )
-		[self setName: inValue];
-	else
-	{
-		id		theValue = [mUserProperties objectForKey: inPropertyName];
-		if( theValue )
-			[mUserProperties setObject: inValue forKey: inPropertyName];
-		else
-			propExists = NO;
-	}
-
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification
-							object: self userInfo: [NSDictionary dictionaryWithObject: inPropertyName
-															forKey: WILDAffectedPropertyKey]];
-	if( propExists )
-		[self updateChangeCount: NSChangeDone];
-	
-	return propExists;
-}
-
-
--(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName
-{
-	return &kLeoValueTypeString;
-}
-
-
--(void)	addUserPropertyNamed: (NSString*)userPropName
-{
-	if( !mUserProperties )
-		mUserProperties = [[NSMutableDictionary alloc] init];
-	if( ![mUserProperties objectForKey: userPropName] )
-	{
-		[mUserProperties setObject: @"" forKey: userPropName];
-		[self updateChangeCount: NSChangeDone];
-	}
-}
-
-
--(void)	deleteUserPropertyNamed: (NSString*)userPropName
-{
-	if( mUserProperties[userPropName] )
-	{
-		[mUserProperties removeObjectForKey: userPropName];
-		[self updateChangeCount: NSChangeDone];
-	}
-}
-
-
--(NSMutableArray*)	allUserProperties
-{
-	NSMutableArray	*	allProps = [NSMutableArray arrayWithCapacity: mUserProperties.count];
-	for( NSString * theKey in mUserProperties )
-	{
-		[allProps addObject: [NSMutableDictionary dictionaryWithObjectsAndKeys: theKey, WILDUserPropertyNameKey, mUserProperties[theKey], WILDUserPropertyValueKey, nil]];
-	}
-	return allProps;
-}
-
-
--(void)	setValue: (NSString*)inValue forUserPropertyNamed: (NSString*)inName oldName: (NSString*)inOldName
-{
-	if( inOldName )
-		[mUserProperties removeObjectForKey: inOldName];
-	if( !mUserProperties )
-		mUserProperties = [[NSMutableDictionary alloc] init];
-	[mUserProperties setObject: inValue forKey: inName];
-	[self updateChangeCount: NSChangeDone];
+	return WILDStackDidChangeNotification;
 }
 
 

@@ -111,19 +111,39 @@ BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inC
 		for( NSString* dictKey in theDict )
 		{
 			id				dictValue = [theDict objectForKey: dictKey];
-			union LEOValue	dictValueCopy;
+			LEOValuePtr		destValue = LEOAddArrayEntryToRoot( &theArray, [dictKey UTF8String], NULL, inContext );
 			if( [dictValue isKindOfClass: [NSString class]] )
 			{
 				const char*	valueStr = [dictValue UTF8String];
-				LEOInitStringValue( &dictValueCopy, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
+				LEOInitStringValue( destValue, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
 			}
 			else if( [dictValue isKindOfClass: [NSNumber class]] )
+				LEOInitNumberValue( destValue, [dictValue doubleValue], kLEOInvalidateReferences, inContext );
+			else
+				LEOInitStringConstantValue( destValue, "", kLEOInvalidateReferences, inContext );
+		}
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+	}
+	else if( [inValue isKindOfClass: [NSArray class]] )
+	{
+		NSArray	*				theDict = inValue;
+		struct LEOArrayEntry*	theArray = NULL;
+		long					x = 0;
+		
+		for( id dictValue in theDict )
+		{
+			char		indexKey[80] = {};
+			snprintf( indexKey, sizeof(indexKey)-1, "%ld", ++x );
+			LEOValuePtr	destValue = LEOAddArrayEntryToRoot( &theArray, indexKey, NULL, inContext );
+			if( [dictValue isKindOfClass: [NSString class]] )
 			{
-				LEOInitNumberValue( &dictValueCopy, [dictValue doubleValue], kLEOInvalidateReferences, inContext );
+				const char*	valueStr = [dictValue UTF8String];
+				LEOInitStringValue( destValue, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
 			}
-			LEOAddArrayEntryToRoot( &theArray, [dictKey UTF8String], &dictValueCopy, inContext );
-			
-			LEOCleanUpValue( &dictValueCopy, kLEOInvalidateReferences, inContext );
+			else if( [dictValue isKindOfClass: [NSNumber class]] )
+				LEOInitNumberValue( destValue, [dictValue doubleValue], kLEOInvalidateReferences, inContext );
+			else
+				LEOInitStringConstantValue( destValue, "", kLEOInvalidateReferences, inContext );
 		}
 		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
 	}

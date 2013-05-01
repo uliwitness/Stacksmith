@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "WILDConcreteObject.h"
 #import "WILDScriptContainer.h"
 #import "WILDSearchContext.h"
 #import "WILDObjectID.h"
@@ -20,12 +21,11 @@
 @class QTMovie;
 
 
-@interface WILDStack : NSObject <WILDScriptContainer,WILDSearchable,WILDObject>
+@interface WILDStack : WILDConcreteObject <WILDSearchable>
 {
 	NSMutableArray*			mBackgrounds;		// List of all backgrounds in this stack.
 	NSMutableArray*			mCards;				// List of all cards in this stack.
 	NSMutableSet*			mMarkedCards;		// List of all cards whose "marked" property has been set.
-	NSString*				mScript;			// Script of this stack.
 	NSSize					mCardSize;			// Size of cards in this stack.
 	BOOL					mCantPeek;			// Do we prevent "peeking" of button rects using Cmd-Option?
 	BOOL					mCantAbort;			// Do we prohibit Cmd-. from canceling scripts?
@@ -37,15 +37,9 @@
 	WILDObjectID			mID;				// Unique ID number of this stack in the document.
 	
 	WILDObjectID			mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
-	struct LEOScript*		mScriptObject;		// Compiled script, lazily created/recreated on changes.
-	NSString	*			mName;				// Name of this stack, for finding it inside the stack file.
-
-	NSMutableDictionary		*	mUserProperties;
-	
-	LEOObjectID					mIDForScripts;			// The ID Leonie uses to refer to this object.
-	LEOObjectSeed				mSeedForScripts;		// The seed value to go with mIDForScripts.
-	struct LEOValueObject		mValueForScripts;		// A LEOValue so scripts can reference us (see mIDForScripts).
 }
+
+@property (assign,nonatomic) BOOL		resizable;
 
 -(id)				initWithXMLDocument: (NSXMLDocument*)theDoc document: (WILDDocument*)owner error: (NSError**)outError;
 -(id)				initWithDocument: (WILDDocument*)owner;
@@ -76,7 +70,6 @@
 +(NSColor*)			peekOutlineColor;
 
 -(WILDDocument*)	document;
--(void)				updateChangeCount: (NSDocumentChangeType)inChange;
 
 -(NSString*)		xmlStringForWritingToURL: (NSURL*)packageURL forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error: (NSError**)outError;
 
