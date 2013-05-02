@@ -25,6 +25,7 @@
 @interface WILDPart ()
 {
 	NSFont	*	mFont;
+	NSTimer	*	mTimer;
 }
 
 @end
@@ -57,6 +58,8 @@
 @synthesize statusMessage = mStatusMessage;
 @synthesize bevel = mBevel;
 @synthesize bevelAngle = mBevelAngle;
+@synthesize timerMessage = mTimerMessage;
+@synthesize timerInterval = mTimerInterval;
 
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
@@ -141,6 +144,8 @@
 		mBevelAngle = WILDIntegerFromSubElementInElement( @"bevelAngle", elem );
 		if( mBevelAngle < 0 )
 			mBevelAngle = 0;
+		mTimerMessage = [WILDStringFromSubElementInElement( @"message", elem ) retain];
+		mTimerInterval = WILDIntegerFromSubElementInElement( @"interval", elem );
 		
 		NSError *	err = nil;
 		NSArray	*	userPropsNodes = [elem nodesForXPath: @"userProperties" error: &err];
@@ -189,6 +194,7 @@
 	DESTROY_DEALLOC(mMediaPath);
 	DESTROY_DEALLOC(mFont);
 	DESTROY_DEALLOC(mUserProperties);
+	DESTROY_DEALLOC(mTimerMessage);
 	
 	mStack = UKInvalidPointer;
 	DESTROY_DEALLOC(mCurrentURL);
@@ -1107,6 +1113,8 @@
 	WILDAppendLongXML( outString, 2, mLineWidth, @"lineWidth" );
 	WILDAppendLongXML( outString, 2, mBevel, @"bevelWidth" );
 	WILDAppendLongXML( outString, 2, mBevelAngle, @"bevelAngle" );
+	WILDAppendLongXML( outString, 2, mTimerInterval, @"interval" );
+	WILDAppendStringXML( outString, 2, mTimerMessage, @"message" );
 	
 	if( [mSelectedLines count] > 0 )
 	{
@@ -1505,6 +1513,34 @@
 }
 
 
+-(void)	sendTimerMessage: (NSTimer*)sender
+{
+	if( mTimerMessage.length > 0 )
+		WILDScriptContainerResultFromSendingMessage( self, mTimerMessage );
+	else
+	{
+		[mTimer invalidate];
+		DESTROY(mTimer);
+	}
+}
+
+
+-(void)	setTimerInterval: (NSInteger)tickInterval
+{
+	mTimerInterval = tickInterval;
+	NSTimeInterval	interval = tickInterval / 60.0;
+	if( interval > 0 )
+	{
+		mTimer = [[NSTimer scheduledTimerWithTimeInterval: interval target: self selector:@selector(sendTimerMessage:) userInfo: @{} repeats: YES] retain];
+	}
+	else
+	{
+		[mTimer invalidate];
+		DESTROY(mTimer);
+	}
+}
+
+
 
 PROPERTY_MAP_START
 PROPERTY_MAPPING(name,"name",kLeoValueTypeString)
@@ -1547,6 +1583,8 @@ PROPERTY_MAPPING(numberForScripts,"number",kLeoValueTypeInteger)
 PROPERTY_MAPPING(partNumberForScripts,"partnumber",kLeoValueTypeInteger)
 PROPERTY_MAPPING(currentURLString,"currenturl",kLeoValueTypeString)
 PROPERTY_MAPPING(statusMessage,"statusmessage",kLeoValueTypeString)
+PROPERTY_MAPPING(timerMessage,"message",kLeoValueTypeString)
+PROPERTY_MAPPING(timerInterval,"interval",kLeoValueTypeNumber)
 PROPERTY_MAP_END
 
 

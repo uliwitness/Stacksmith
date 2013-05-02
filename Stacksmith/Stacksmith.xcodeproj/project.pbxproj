@@ -211,6 +211,8 @@
 		55686663135A161400C364D6 /* WILDHostFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.m */; };
 		55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686664135A383300C364D6 /* WILDObjectValue.m */; };
 		55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686668135ADC3000C364D6 /* WILDSearchPaths.m */; };
+		556C49691731EF8800C40D97 /* WILDTimerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556C49681731EF8800C40D97 /* WILDTimerPresenter.m */; };
+		556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 556C496E1731F48000C40D97 /* TimerIcon.pdf */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
 		557BC7D8171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557BC7D6171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib */; };
 		557BC7DF171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557BC7DE171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m */; };
@@ -765,6 +767,9 @@
 		55686665135A383700C364D6 /* WILDObjectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectValue.h; path = Instructions/WILDObjectValue.h; sourceTree = SOURCE_ROOT; };
 		55686667135ADC2B00C364D6 /* WILDSearchPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDSearchPaths.h; sourceTree = "<group>"; };
 		55686668135ADC3000C364D6 /* WILDSearchPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDSearchPaths.m; sourceTree = "<group>"; };
+		556C49671731EF8800C40D97 /* WILDTimerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTimerPresenter.h; path = Presentation/WILDTimerPresenter.h; sourceTree = "<group>"; };
+		556C49681731EF8800C40D97 /* WILDTimerPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTimerPresenter.m; path = Presentation/WILDTimerPresenter.m; sourceTree = "<group>"; };
+		556C496E1731F48000C40D97 /* TimerIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = TimerIcon.pdf; path = Resources/TimerIcon.pdf; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
 		557BC7D7171DD5D8008A3BB9 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDUserPropertyEditorWindowController.xib; sourceTree = "<group>"; };
 		557BC7DD171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDUserPropertyEditorWindowController.h; sourceTree = "<group>"; };
@@ -1124,6 +1129,7 @@
 				55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */,
 				55FDD870171B26380045A2B9 /* ToolbarBg.png */,
 				55FDD871171B26390045A2B9 /* ToolbarBg@2x.png */,
+				556C496E1731F48000C40D97 /* TimerIcon.pdf */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
 				559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */,
@@ -1174,6 +1180,8 @@
 				55943B13171F5D050051166C /* WILDWebBrowserPresenter.m */,
 				55615C55172E10E700EFEAEF /* WILDMoviePlayerPresenter.h */,
 				55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */,
+				556C49671731EF8800C40D97 /* WILDTimerPresenter.h */,
+				556C49681731EF8800C40D97 /* WILDTimerPresenter.m */,
 			);
 			name = "Part Presenters";
 			sourceTree = "<group>";
@@ -2018,6 +2026,7 @@
 				5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */,
 				55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */,
 				55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */,
+				556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2228,6 +2237,7 @@
 				55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */,
 				55615C57172E10E800EFEAEF /* WILDMoviePlayerPresenter.m in Sources */,
 				55E85E57173180860086F876 /* WILDConcreteObject.m in Sources */,
+				556C49691731EF8800C40D97 /* WILDTimerPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

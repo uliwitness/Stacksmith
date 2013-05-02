@@ -98,7 +98,8 @@
 @property (assign,nonatomic) WILDStack*		stack;	// Stack owns us, don't retain back pointer.
 @property (assign,nonatomic) NSInteger		bevelAngle;
 @property (assign,nonatomic) NSInteger		bevel;
-
+@property (assign,nonatomic) NSInteger		timerInterval;
+@property (retain,nonatomic) NSString*		timerMessage;
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
 
