@@ -12,6 +12,7 @@
 @interface WILDTimerPresenter : WILDPartPresenter
 {
 	NSImageView	*	mIcon;
+	NSTimer		*	mTimer;
 }
 
 @end

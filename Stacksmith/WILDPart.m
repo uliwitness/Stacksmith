@@ -1513,35 +1513,6 @@
 }
 
 
--(void)	sendTimerMessage: (NSTimer*)sender
-{
-	if( mTimerMessage.length > 0 )
-		WILDScriptContainerResultFromSendingMessage( self, mTimerMessage );
-	else
-	{
-		[mTimer invalidate];
-		DESTROY(mTimer);
-	}
-}
-
-
--(void)	setTimerInterval: (NSInteger)tickInterval
-{
-	mTimerInterval = tickInterval;
-	NSTimeInterval	interval = tickInterval / 60.0;
-	if( interval > 0 )
-	{
-		mTimer = [[NSTimer scheduledTimerWithTimeInterval: interval target: self selector:@selector(sendTimerMessage:) userInfo: @{} repeats: YES] retain];
-	}
-	else
-	{
-		[mTimer invalidate];
-		DESTROY(mTimer);
-	}
-}
-
-
-
 PROPERTY_MAP_START
 PROPERTY_MAPPING(name,"name",kLeoValueTypeString)
 PROPERTY_MAPPING(name,"short name",kLeoValueTypeString)

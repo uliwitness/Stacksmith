@@ -48,6 +48,16 @@
 }
 
 
+-(void)	sendTimerMessage: (NSTimer*)sender
+{
+	if( ![mPartView myToolIsCurrent] )	// DOn't run timer while editing.
+	{
+		WILDPart		*	currPart = [mPartView part];
+		WILDScriptContainerResultFromSendingMessage( currPart, currPart.timerMessage );
+	}
+}
+
+
 -(void)	refreshProperties
 {
 	WILDPart		*	currPart = [mPartView part];
@@ -68,10 +78,27 @@
 	
 	NSRect	theBox = [self partViewFrameForPartRect: mPartView.part.quartzRectangle];
 	[mPartView setFrame: theBox];
+	
+	if( mTimer && (currPart.timerInterval <= 0 || currPart.timerMessage.length == 0) )
+	{
+		[mTimer invalidate];
+		DESTROY(mTimer);
+	}
+	else if( !mTimer && currPart.timerInterval > 0 && currPart.timerMessage.length > 0 )
+	{
+		NSTimeInterval	interval = currPart.timerInterval / 60.0;
+		mTimer = [[NSTimer scheduledTimerWithTimeInterval: interval target: self selector:@selector(sendTimerMessage:) userInfo: @{} repeats: YES] retain];
+	}
 }
 
 
--(void)	mediaPathPropertyDidChangeOfPart: (WILDPart*)inPart
+-(void)	timerIntervalPropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	[self refreshProperties];
+}
+
+
+-(void)	timerMessagePropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }
@@ -79,6 +106,9 @@
 
 -(void)	removeSubviews
 {
+	[mTimer invalidate];
+	DESTROY(mTimer);
+	
 	[mIcon removeFromSuperview];
 	DESTROY(mIcon);
 }
