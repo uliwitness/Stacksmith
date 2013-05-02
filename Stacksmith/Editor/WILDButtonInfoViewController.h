@@ -27,6 +27,8 @@
 @property (retain) IBOutlet NSButton*			autoHighlightSwitch;
 @property (retain) IBOutlet NSButton*			highlightedSwitch;
 @property (retain) IBOutlet NSButton*			sharedHighlightSwitch;
+@property (assign) IBOutlet NSSlider*			bevelSlider;
+@property (assign) IBOutlet NSSlider*			bevelAngleSlider;
 
 -(IBAction)	doAutoHighlightSwitchToggled:(id)sender;
 -(IBAction)	doHighlightedSwitchToggled:(id)sender;
@@ -35,5 +37,7 @@
 -(IBAction) doFamilyPopUpChanged:(id)sender;
 -(IBAction) doStylePopUpChanged:(id)sender;
 -(IBAction)	doShowIconPicker:(id)sender;
+-(IBAction)	doBevelSliderChanged:(id)sender;
+-(IBAction)	doBevelAngleSliderChanged:(id)sender;
 
 @end

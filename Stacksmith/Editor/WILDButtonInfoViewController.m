@@ -66,6 +66,8 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mAutoHighlightSwitch setState: [part autoHighlight]];
 	[mHighlightedSwitch setState: [part highlighted]];
 	[mSharedHighlightSwitch setState: [part sharedHighlight]];
+	[self.bevelSlider setDoubleValue: [part bevel]];
+	[self.bevelAngleSlider setDoubleValue: [part bevelAngle]];
 }
 
 
@@ -165,6 +167,32 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mIconPopover setBehavior: NSPopoverBehaviorTransient];
 	[mIconPopover setContentViewController: iconPickerViewController];
 	[mIconPopover showRelativeToRect: [mIconButton bounds] ofView: mIconButton preferredEdge: NSMaxXEdge];
+}
+
+-(IBAction)	doBevelSliderChanged: (id)sender
+{
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(bevelWidth), WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
+
+	[part setBevel: self.bevelSlider.doubleValue];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
+	[part updateChangeCount: NSChangeDone];
+}
+
+-(IBAction)	doBevelAngleSliderChanged: (id)sender
+{
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(bevelAngle), WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
+
+	[part setBevelAngle: self.bevelAngleSlider.doubleValue];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
+	[part updateChangeCount: NSChangeDone];
 }
 
 
