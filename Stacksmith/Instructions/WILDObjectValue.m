@@ -470,6 +470,14 @@ struct LEOScript*	LEOForgeScriptGetParentScript( struct LEOScript* inScript, str
 	return theScript;
 }
 
+id<WILDObject>		WILDGetOwnerObjectFromContext( struct LEOContext * inContext )
+{
+	LEOScript	*	script = LEOContextPeekCurrentScript( inContext );
+	LEOValuePtr		owner = LEOContextGroupGetPointerForObjectIDAndSeed( inContext->group, script->ownerObject, script->ownerObjectSeed );
+	if( !owner )
+		return nil;
+	return (id<WILDObject>) owner->object.object;
+}
 
 
 

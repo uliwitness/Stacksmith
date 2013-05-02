@@ -67,7 +67,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	if(( self = [super init] ))
 	{
 		mMaxBytes = -1;
-		LEOInitContext( &mContext, inGroup );
+		LEOInitContext( &mContext, inGroup, [[WILDScriptContextUserData alloc] init], WILDScriptContainerUserDataCleanUp );
 		mOwningScript = LEOScriptRetain( inScript );
 		mProgressMessage = [inProgressMsg retain];
 		mCompletionMessage = [inCompletionMsg retain];

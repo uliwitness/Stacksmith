@@ -16,6 +16,7 @@
 #include "LEORemoteDebugger.h"
 #import "WILDMessageBox.h"
 #import "ULIMelodyQueue.h"
+#import "LEOContextGroup.h"
 
 
 void	WILDGoInstruction( LEOContext* inContext );
@@ -67,8 +68,8 @@ void	WILDGoInstruction( LEOContext* inContext )
 		LEOContextStopWithError( inContext, "Can't go there." );
 	}
 	
-	WILDStack			*	frontStack = [WILDDocument frontStackNamed: nil];
-	WILDCard			*	currentCard = [frontStack currentCard];
+	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDCard		*	currentCard = [frontStack currentCard];
 	[currentCard setTransitionType: nil subtype: nil];
 
 	inContext->currentInstruction++;
@@ -284,8 +285,8 @@ void	WILDCreateInstruction( LEOContext* inContext )
 	
 	if( newObjectAction != Nil )
 	{
-		WILDStack			*	frontStack = [WILDDocument frontStackNamed: nil];
-		WILDCard			*	currentCard = [frontStack currentCard];
+		WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
+		WILDCard		*	currentCard = [frontStack currentCard];
 		[currentCard performSelector: newObjectAction withObject: newTitle];
 	}
 	
@@ -430,7 +431,7 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 {
 	//LEODebugPrintContext( inContext );
 	
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 
 	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
 	LEOValuePtr	theMelody = inContext->stackEndPtr -1;

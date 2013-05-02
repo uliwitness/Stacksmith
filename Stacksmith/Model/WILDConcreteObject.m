@@ -185,6 +185,12 @@ PROPERTY_MAP_END
 }
 
 
+-(WILDStack*)	stack
+{
+	return [self.parentObject stack];
+}
+
+
 -(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
 {
 	if( [inPropertyName isEqualToString: @"properties"] )

@@ -563,6 +563,12 @@ PROPERTY_MAP_END
 }
 
 
+-(WILDStack*)	stack
+{
+	return self;
+}
+
+
 -(WILDCard*)	currentCard
 {
 	WILDDocument	*	theDoc = [self document];

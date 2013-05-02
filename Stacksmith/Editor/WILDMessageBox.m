@@ -128,7 +128,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		NSString*	resultString = nil;
 		LEOContext	ctx;
 		
-		LEOInitContext( &ctx, [frontDoc scriptContextGroupObject] );
+		LEOInitContext( &ctx, [frontDoc scriptContextGroupObject], [[WILDScriptContextUserData alloc] init], WILDScriptContainerUserDataCleanUp );
 		#if REMOTE_DEBUGGER
 		ctx.preInstructionProc = WILDPreInstructionProc;
 		ctx.promptProc = LEORemoteDebuggerPrompt;

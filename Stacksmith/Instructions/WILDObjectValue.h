@@ -32,6 +32,9 @@
 extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 
+@class WILDStack;
+
+
 @protocol WILDObject <NSObject>
 
 // The BOOL returns on these methods indicate whether the given object can do
@@ -49,6 +52,7 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 -(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError;
 -(id<WILDObject>)		parentObject;
+-(WILDStack*)			stack;
 
 @optional
 -(BOOL)				deleteWILDObject;
@@ -64,6 +68,7 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 void				LEOInitWILDObjectValue( struct LEOValueObject* inStorage, id<WILDObject> wildObject, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
 struct LEOScript*	LEOForgeScriptGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext );
 
+id<WILDObject>		WILDGetOwnerObjectFromContext( struct LEOContext * inContext );
 
 extern NSString*	WILDUserPropertyNameKey;
 extern NSString*	WILDUserPropertyValueKey;

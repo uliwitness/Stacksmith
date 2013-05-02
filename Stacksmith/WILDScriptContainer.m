@@ -23,6 +23,16 @@ BOOL	UKScanLineEnding( NSScanner* scanny, NSMutableString* outString, NSInteger*
 void	WILDCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler );
 
 
+void	WILDScriptContainerUserDataCleanUp( void* inUserData )
+{
+	[(NSObject*)inUserData release];
+}
+
+
+@implementation WILDScriptContextUserData
+
+@end
+
 @implementation WILDSymbol
 
 @synthesize lineIndex;
@@ -419,7 +429,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 	if( !theScript )
 		return nil;
 	
-	LEOInitContext( &ctx, [container scriptContextGroupObject] );
+	LEOInitContext( &ctx, [container scriptContextGroupObject], [[WILDScriptContextUserData alloc] init], WILDScriptContainerUserDataCleanUp );
 	#if REMOTE_DEBUGGER
 	ctx.preInstructionProc = WILDPreInstructionProc;
 	ctx.promptProc = LEORemoteDebuggerPrompt;

@@ -14,6 +14,7 @@
 #import "WILDCard.h"
 #import "WILDPart.h"
 #import "LEOScript.h"
+#import "LEOContextGroup.h"
 
 
 void	WILDStackInstruction( LEOContext* inContext );
@@ -77,7 +78,7 @@ void	WILDStackInstruction( LEOContext* inContext )
 void	WILDBackgroundInstruction( LEOContext* inContext )
 {
 	WILDBackground	*	theBackground = nil;
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	char				backgroundName[1024] = { 0 };
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
@@ -112,7 +113,7 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 void	WILDCardInstruction( LEOContext* inContext )
 {
 	WILDCard	*	theCard = nil;
-	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	char			cardName[1024] = { 0 };
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
@@ -147,7 +148,7 @@ void	WILDCardInstruction( LEOContext* inContext )
 void	WILDCardFieldInstruction( LEOContext* inContext )
 {
 	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	char			partName[1024] = { 0 };
 	WILDCard	*	theCard = [frontStack currentCard];
 	
@@ -183,7 +184,7 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 void	WILDCardButtonInstruction( LEOContext* inContext )
 {
 	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	char			partName[1024] = { 0 };
 	WILDCard	*	theCard = [frontStack currentCard];
 	
@@ -219,7 +220,7 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 {
 	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	char			partName[1024] = { 0 };
 	WILDCard	*	theCard = [frontStack currentCard];
 	
@@ -255,7 +256,7 @@ void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 void	WILDCardPartInstruction( LEOContext* inContext )
 {
 	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	char			partName[1024] = { 0 };
 	WILDCard	*	theCard = [frontStack currentCard];
 	
@@ -290,10 +291,10 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 
 void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 {
-	WILDPart		*	thePart = nil;
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
-	char				partName[1024] = { 0 };
-	WILDBackground	*	theCard = [[frontStack currentCard] owningBackground];
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
+	char			partName[1024] = { 0 };
+	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
@@ -326,10 +327,10 @@ void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 
 void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 {
-	WILDPart		*	thePart = nil;
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
-	char				partName[1024] = { 0 };
-	WILDBackground	*	theCard = [[frontStack currentCard] owningBackground];
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
+	char			partName[1024] = { 0 };
+	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
@@ -362,10 +363,10 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 
 void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 {
-	WILDPart		*	thePart = nil;
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
-	char				partName[1024] = { 0 };
-	WILDBackground	*	theCard = [[frontStack currentCard] owningBackground];
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
+	char			partName[1024] = { 0 };
+	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
@@ -398,10 +399,10 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 
 void	WILDBackgroundPartInstruction( LEOContext* inContext )
 {
-	WILDPart		*	thePart = nil;
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
-	char				partName[1024] = { 0 };
-	WILDBackground	*	theCard = [[frontStack currentCard] owningBackground];
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
+	char			partName[1024] = { 0 };
+	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
@@ -469,9 +470,9 @@ void	WILDPreviousCardInstruction( LEOContext* inContext )
 
 void	WILDNextBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack		*	theStack = [WILDDocument frontStackNamed: nil];
-	WILDBackground	*	theBackground = [[theStack document] currentCard].owningBackground;
-	NSUInteger			bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
+	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDBackground*	theBackground = [[theStack document] currentCard].owningBackground;
+	NSUInteger		bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
 	bkgdIndex++;
 	if( bkgdIndex >= [[theStack backgrounds] count] )
 		bkgdIndex = 0;
@@ -486,9 +487,9 @@ void	WILDNextBackgroundInstruction( LEOContext* inContext )
 
 void	WILDPreviousBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack		*	theStack = [WILDDocument frontStackNamed: nil];
-	WILDBackground	*	theBackground = [[theStack document] currentCard].owningBackground;
-	NSUInteger			bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
+	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDBackground*	theBackground = [[theStack document] currentCard].owningBackground;
+	NSUInteger		bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
 	if( bkgdIndex == 0 )
 		bkgdIndex = [[theStack backgrounds] count] -1;
 	else
@@ -540,7 +541,7 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 
 void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack		*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
 	
 	if( theStack.backgrounds.count == 0 )
 		LEOContextStopWithError( inContext, "No such background." );
@@ -660,7 +661,7 @@ void	WILDThisCardInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardButtonsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
@@ -676,7 +677,7 @@ void	WILDNumberOfCardButtonsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardFieldsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
@@ -691,7 +692,7 @@ void	WILDNumberOfCardFieldsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardMoviePlayersInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
@@ -708,7 +709,7 @@ void	WILDNumberOfCardMoviePlayersInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardPartsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
@@ -724,7 +725,7 @@ void	WILDNumberOfCardPartsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundButtonsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
@@ -740,7 +741,7 @@ void	WILDNumberOfBackgroundButtonsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundFieldsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
@@ -756,7 +757,7 @@ void	WILDNumberOfBackgroundFieldsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundMoviePlayersInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
@@ -772,7 +773,7 @@ void	WILDNumberOfBackgroundMoviePlayersInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundPartsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
