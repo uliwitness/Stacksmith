@@ -172,7 +172,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 -(IBAction)	doBevelSliderChanged: (id)sender
 {
 	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(bevelWidth), WILDAffectedPropertyKey,
+										PROPERTY(bevel), WILDAffectedPropertyKey,
 										nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
 
