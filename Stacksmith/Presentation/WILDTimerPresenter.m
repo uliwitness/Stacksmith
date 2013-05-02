@@ -94,6 +94,8 @@
 
 -(void)	timerIntervalPropertyDidChangeOfPart: (WILDPart*)inPart
 {
+	[mTimer invalidate];
+	DESTROY(mTimer);	// Make sure we recreate it with new fire time & interval.
 	[self refreshProperties];
 }
 

@@ -249,6 +249,8 @@
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
+		55A5D9C4173202FB005B2309 /* WILDTimerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A5D9C3173202FB005B2309 /* WILDTimerInfoViewController.m */; };
+		55A5D9CB173203C3005B2309 /* WILDTimerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A5D9C9173203C3005B2309 /* WILDTimerInfoViewController.xib */; };
 		55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */; };
 		55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */; };
 		55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4914668D6E00AB0F34 /* boing.aiff */; };
@@ -828,6 +830,9 @@
 		55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMultiplyCommandNode.cpp; path = ../../CMultiplyCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A5C170A5CBA00750972 /* CMultiplyCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMultiplyCommandNode.h; path = ../../CMultiplyCommandNode.h; sourceTree = "<group>"; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		55A5D9C2173202FB005B2309 /* WILDTimerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTimerInfoViewController.h; path = Editor/WILDTimerInfoViewController.h; sourceTree = "<group>"; };
+		55A5D9C3173202FB005B2309 /* WILDTimerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTimerInfoViewController.m; path = Editor/WILDTimerInfoViewController.m; sourceTree = "<group>"; };
+		55A5D9CA173203C3005B2309 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDTimerInfoViewController.xib; sourceTree = "<group>"; };
 		55A7BA4514668D5900AB0F34 /* ULIMelodyQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIMelodyQueue.h; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.h; sourceTree = "<group>"; };
 		55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIMelodyQueue.m; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.m; sourceTree = "<group>"; };
 		55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = harpsichord.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/harpsichord.aiff; sourceTree = "<group>"; };
@@ -1106,6 +1111,7 @@
 				55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */,
 				5585034413E886AC00FD244C /* WILDFieldInfoViewController.xib */,
 				5585034613E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib */,
+				55A5D9C9173203C3005B2309 /* WILDTimerInfoViewController.xib */,
 				55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */,
 				55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */,
 				55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */,
@@ -1222,6 +1228,8 @@
 				5585033F13E8866300FD244C /* WILDFieldInfoViewController.m */,
 				5585034113E8867200FD244C /* WILDMoviePlayerInfoViewController.h */,
 				5585034213E8867200FD244C /* WILDMoviePlayerInfoViewController.m */,
+				55A5D9C2173202FB005B2309 /* WILDTimerInfoViewController.h */,
+				55A5D9C3173202FB005B2309 /* WILDTimerInfoViewController.m */,
 				55E9FD9613E747B00089B81F /* WILDIconPickerViewController.h */,
 				55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */,
 				55B924481169DB150073EC6C /* WILDIconListDataSource.h */,
@@ -2027,6 +2035,7 @@
 				55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */,
 				55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */,
 				556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */,
+				55A5D9CB173203C3005B2309 /* WILDTimerInfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2238,6 +2247,7 @@
 				55615C57172E10E800EFEAEF /* WILDMoviePlayerPresenter.m in Sources */,
 				55E85E57173180860086F876 /* WILDConcreteObject.m in Sources */,
 				556C49691731EF8800C40D97 /* WILDTimerPresenter.m in Sources */,
+				55A5D9C4173202FB005B2309 /* WILDTimerInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2356,6 +2366,14 @@
 				55993B6713476DE3001624A2 /* English */,
 			);
 			name = WILDStackInfoViewController.xib;
+			sourceTree = "<group>";
+		};
+		55A5D9C9173203C3005B2309 /* WILDTimerInfoViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55A5D9CA173203C3005B2309 /* English */,
+			);
+			name = WILDTimerInfoViewController.xib;
 			sourceTree = "<group>";
 		};
 		55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */ = {
