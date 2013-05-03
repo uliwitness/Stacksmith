@@ -59,7 +59,7 @@ typedef NSInteger	WILDSymbolType;
 
 
 NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols );
-NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> container, NSString* fmt, ... );
+NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer,WILDObject> container, NSString* fmt, ... );
 
 struct LEOContext;
 void		WILDCallNonexistentHandler( struct LEOContext* inContext, LEOHandlerID inHandler );
@@ -76,8 +76,8 @@ extern NSString*	WILDScriptExecutionEventLoopMode;
 	the new card becomes the current window: */
 @interface WILDScriptContextUserData : NSObject
 
-@property (retain) WILDStack			*	currentStack;	// The current stack for this message.
-@property (retain) id<WILDScriptContainer>	target;			// Target of current system message.
+@property (retain) WILDStack	*	currentStack;	// The current stack for this message.
+@property (retain) id<WILDObject>	target;			// Target of current system message.
 
 @end
 

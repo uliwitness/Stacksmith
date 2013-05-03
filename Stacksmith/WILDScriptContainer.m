@@ -413,7 +413,7 @@ void	WILDCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler )
 }
 
 
-NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> container, NSString* fmt, ... )
+NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer,WILDObject> container, NSString* fmt, ... )
 {
 #if 0
 	#define DBGLOGPAR(args...)	NSLog(args)

@@ -11,6 +11,8 @@
 #import <string.h>
 #import <Foundation/Foundation.h>
 #import "UKSystemInfo.h"
+#import "WILDObjectValue.h"
+#import "WILDScriptContainer.h"
 
 
 #define TOSTRING2(x)	#x
@@ -30,6 +32,7 @@ void	LEOPushPlatformInstruction( LEOContext* inContext );
 void	LEOPushPhysicalMemoryInstruction( LEOContext* inContext );
 void	LEOPushMachineInstruction( LEOContext* inContext );
 void	LEOPushSystemVersionInstruction( LEOContext* inContext );
+void	LEOPushTargetInstruction( LEOContext* inContext );
 
 
 
@@ -131,6 +134,15 @@ void	LEOPushMachineInstruction( LEOContext* inContext )
 }
 
 
+void	LEOPushTargetInstruction( LEOContext* inContext )
+{
+	LEOValuePtr	newVal = LEOPushValueOnStack( inContext, NULL );
+	LEOInitWILDObjectValue( &newVal->object, ((WILDScriptContextUserData*) inContext->userData).target, kLEOInvalidateReferences, inContext );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOSetCursorInstruction)
 LEOINSTR(LEOPushCursorInstruction)
@@ -140,7 +152,8 @@ LEOINSTR(LEOPushLongVersionInstruction)
 LEOINSTR(LEOPushPlatformInstruction)
 LEOINSTR(LEOPushPhysicalMemoryInstruction)
 LEOINSTR(LEOPushMachineInstruction)
-LEOINSTR_LAST(LEOPushSystemVersionInstruction)
+LEOINSTR(LEOPushSystemVersionInstruction)
+LEOINSTR_LAST(LEOPushTargetInstruction)
 
 
 struct TGlobalPropertyEntry	gHostGlobalProperties[] =
@@ -153,5 +166,6 @@ struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 	{ ESystemVersionIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SYSTEMVERSION_INSTR },
 	{ EPhysicalMemoryIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_PHYSICALMEMORY_INSTR },
 	{ EMachineIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_MACHINE_INSTR },
+	{ ETargetIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_TARGET_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };
