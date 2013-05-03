@@ -155,7 +155,21 @@
 
 -(void)	textPropertyDidChangeOfPart: (WILDPart*)inPart
 {
-	[self refreshProperties];
+	WILDPart		*	currPart = [mPartView part];
+	WILDPartContents*	contents = nil;
+	WILDPartContents*	bgContents = nil;
+	
+	contents = [mPartView currentPartContentsAndBackgroundContents: &bgContents create: NO];
+	
+	NSAttributedString*	attrStr = [contents styledTextForPart: currPart];
+	if( attrStr )
+		[[mTextView textStorage] setAttributedString: attrStr];
+	else
+	{
+		NSString*	theText = [contents text];
+		if( theText )
+			[mTextView setString: [contents text]];
+	}
 }
 
 
