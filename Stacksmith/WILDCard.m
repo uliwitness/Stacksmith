@@ -271,6 +271,7 @@ PROPERTY_MAP_END
 	WILDCardWindowController*	theWC = [[theDoc windowControllers] objectAtIndex: 0];
 	[theWC goToCard: self];
 	[theWC showWindow: self];	// TODO: Look up the right window for this stack.
+	[theWC.window displayIfNeeded];
 	
 	return YES;
 }

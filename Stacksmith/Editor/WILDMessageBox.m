@@ -12,6 +12,7 @@
 #import "WILDObjectValue.h"
 #import "UKHelperMacros.h"
 #import "WILDCard.h"
+#import "WILDStack.h"
 
 
 static WILDMessageBox*	sSharedMessageBox = nil;
@@ -102,6 +103,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	*/
 	
 	WILDDocument*	frontDoc = [self frontDoc];
+	WILDCard	*	targetCard = nil;
 	NSString	*	currCmd = [messageField string];
 	const char	*	scriptStr = [currCmd UTF8String];
 	LEOScript	*	theScript = NULL;
@@ -109,7 +111,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	LEOParseTree*	parseTree = LEOParseTreeCreateForCommandOrExpressionFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
 	if( LEOParserGetLastErrorMessage() == NULL )
 	{
-		WILDCard	*	targetCard = [frontDoc currentCard];
+		targetCard = [frontDoc currentCard];
 		self.parentObject = targetCard;
 		LEOObjectID		objectIDForScripts = kLEOObjectIDINVALID;
 		LEOObjectSeed	seedForScripts = 0;
@@ -128,7 +130,10 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		NSString*	resultString = nil;
 		LEOContext	ctx;
 		
-		LEOInitContext( &ctx, [frontDoc scriptContextGroupObject], [[WILDScriptContextUserData alloc] init], WILDScriptContainerUserDataCleanUp );
+		WILDScriptContextUserData	*	ud = [[WILDScriptContextUserData alloc] init];
+		LEOInitContext( &ctx, [frontDoc scriptContextGroupObject], ud, WILDScriptContainerUserDataCleanUp );
+		ud.currentStack = self.parentObject.stack;
+		ud.target = targetCard;
 		#if REMOTE_DEBUGGER
 		ctx.preInstructionProc = WILDPreInstructionProc;
 		ctx.promptProc = LEORemoteDebuggerPrompt;

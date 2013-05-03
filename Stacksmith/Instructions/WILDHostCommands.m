@@ -59,6 +59,8 @@ void	WILDGoInstruction( LEOContext* inContext )
 		NSString	*	stackName = [NSString stringWithUTF8String: str];
 		WILDStack*	theStack = [WILDDocument openStackNamed: stackName];
 		canGoThere = [theStack goThereInNewWindow: NO];
+		if( canGoThere )
+			((WILDScriptContextUserData*)inContext->userData).currentStack = theStack;
 	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
@@ -285,7 +287,7 @@ void	WILDCreateInstruction( LEOContext* inContext )
 	
 	if( newObjectAction != Nil )
 	{
-		WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
+		WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 		WILDCard		*	currentCard = [frontStack currentCard];
 		[currentCard performSelector: newObjectAction withObject: newTitle];
 	}
@@ -431,7 +433,7 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 {
 	//LEODebugPrintContext( inContext );
 	
-	WILDStack		*	frontStack = [WILDGetOwnerObjectFromContext(inContext) stack];
+	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 
 	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
 	LEOValuePtr	theMelody = inContext->stackEndPtr -1;

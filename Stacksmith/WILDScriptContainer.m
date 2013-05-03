@@ -13,6 +13,8 @@
 #import "LEORemoteDebugger.h"
 #import "LEOInstructions.h"
 #import "WILDCardViewController.h"
+#import "WILDObjectValue.h"
+#import "WILDStack.h"
 #import <Carbon/Carbon.h>
 
 
@@ -429,7 +431,10 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer> c
 	if( !theScript )
 		return nil;
 	
-	LEOInitContext( &ctx, [container scriptContextGroupObject], [[WILDScriptContextUserData alloc] init], WILDScriptContainerUserDataCleanUp );
+	WILDScriptContextUserData	*	ud = [[WILDScriptContextUserData alloc] init];
+	LEOInitContext( &ctx, [container scriptContextGroupObject], ud, WILDScriptContainerUserDataCleanUp );
+	ud.currentStack = container.parentObject.stack;
+	ud.target = container;
 	#if REMOTE_DEBUGGER
 	ctx.preInstructionProc = WILDPreInstructionProc;
 	ctx.promptProc = LEORemoteDebuggerPrompt;

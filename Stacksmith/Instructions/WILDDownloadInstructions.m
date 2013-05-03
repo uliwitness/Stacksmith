@@ -62,12 +62,15 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 
 -(id)	initWithScript: (LEOScript*)inScript contextGroup: (LEOContextGroup*)inGroup
 			progressMessage: (NSString*)inProgressMsg completionMessage: (NSString*)inCompletionMsg
-			urlString: (NSString*)inURLString
+			urlString: (NSString*)inURLString scriptUserData: (WILDScriptContextUserData*)inUserData
 {
 	if(( self = [super init] ))
 	{
 		mMaxBytes = -1;
-		LEOInitContext( &mContext, inGroup, [[WILDScriptContextUserData alloc] init], WILDScriptContainerUserDataCleanUp );
+		WILDScriptContextUserData	*	ud = [[WILDScriptContextUserData alloc] init];
+		LEOInitContext( &mContext, inGroup, ud, WILDScriptContainerUserDataCleanUp );
+		ud.target = inUserData.target;
+		ud.currentStack = inUserData.currentStack;
 		mOwningScript = LEOScriptRetain( inScript );
 		mProgressMessage = [inProgressMsg retain];
 		mCompletionMessage = [inCompletionMsg retain];
@@ -258,7 +261,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	
 	// Create URL request object & delegate:
 	LEOScript			*	theScript = LEOContextPeekCurrentScript( inContext );
-	WILDURLConnectionDelegate*	theDelegate = [[[WILDURLConnectionDelegate alloc] initWithScript: theScript contextGroup: inContext->group progressMessage: progressMsgObjcString completionMessage: completionMsgObjcString urlString: urlObjcString] autorelease];
+	WILDURLConnectionDelegate*	theDelegate = [[[WILDURLConnectionDelegate alloc] initWithScript: theScript contextGroup: inContext->group progressMessage: progressMsgObjcString completionMessage: completionMsgObjcString urlString: urlObjcString scriptUserData: inContext->userData] autorelease];
 	
 	// Now copy param 2, destination container value, to the delegate:
 	union LEOValue*	containerValue = inContext->stackEndPtr -3;

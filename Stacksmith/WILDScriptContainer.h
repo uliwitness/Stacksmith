@@ -12,6 +12,7 @@
 
 struct LEOScript;
 @protocol WILDObject;
+@class WILDStack;
 
 
 @protocol WILDScriptContainer <NSObject>
@@ -74,6 +75,10 @@ extern NSString*	WILDScriptExecutionEventLoopMode;
 	window, its current window is its owner, but if it then issues a "go" command,
 	the new card becomes the current window: */
 @interface WILDScriptContextUserData : NSObject
+
+@property (retain) WILDStack			*	currentStack;	// The current stack for this message.
+@property (retain) id<WILDScriptContainer>	target;			// Target of current system message.
+
 @end
 
 void	WILDScriptContainerUserDataCleanUp( void* inUserData );	//! Callback the LEOContext calls when it is cleaned up that releases our user data object.
