@@ -435,7 +435,7 @@ void	WILDBackgroundPartInstruction( LEOContext* inContext )
 
 void	WILDNextCardInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard	*	theCard = [[theStack document] currentCard];
 	NSUInteger		cardIdx = [[theStack cards] indexOfObject: theCard];
 	cardIdx++;
@@ -452,7 +452,7 @@ void	WILDNextCardInstruction( LEOContext* inContext )
 
 void	WILDPreviousCardInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard	*	theCard = [[theStack document] currentCard];
 	NSUInteger		cardIdx = [[theStack cards] indexOfObject: theCard];
 	if( cardIdx == 0 )
@@ -470,7 +470,7 @@ void	WILDPreviousCardInstruction( LEOContext* inContext )
 
 void	WILDNextBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDBackground*	theBackground = [[theStack document] currentCard].owningBackground;
 	NSUInteger		bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
 	bkgdIndex++;
@@ -487,7 +487,7 @@ void	WILDNextBackgroundInstruction( LEOContext* inContext )
 
 void	WILDPreviousBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDBackground*	theBackground = [[theStack document] currentCard].owningBackground;
 	NSUInteger		bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
 	if( bkgdIndex == 0 )
@@ -505,7 +505,7 @@ void	WILDPreviousBackgroundInstruction( LEOContext* inContext )
 
 void	WILDFirstCardInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard	*	theCard = [[theStack cards] objectAtIndex: 0];
 	
 	if( theStack.cards.count == 0 )
@@ -523,7 +523,7 @@ void	WILDFirstCardInstruction( LEOContext* inContext )
 
 void	WILDLastCardInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard	*	theCard = [[theStack cards] lastObject];
 	
 	if( theStack.cards.count == 0 )
@@ -541,7 +541,7 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 
 void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	
 	if( theStack.backgrounds.count == 0 )
 		LEOContextStopWithError( inContext, "No such background." );
@@ -560,7 +560,7 @@ void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 
 void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 {
-	WILDStack		*	theStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard		*	theCard = [theStack.document currentCard];
 	WILDBackground	*	theBackground = [theCard owningBackground];
 	WILDLayer		*	theLayer = theCard;
@@ -605,7 +605,7 @@ void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 
 void	WILDThisStackInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 		
 	if( frontStack )
 	{
@@ -623,7 +623,7 @@ void	WILDThisStackInstruction( LEOContext* inContext )
 
 void	WILDThisBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
@@ -642,7 +642,7 @@ void	WILDThisBackgroundInstruction( LEOContext* inContext )
 
 void	WILDThisCardInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )

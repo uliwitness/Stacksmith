@@ -70,7 +70,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 		LEOContextStopWithError( inContext, "Can't go there." );
 	}
 	
-	WILDStack		*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard		*	currentCard = [frontStack currentCard];
 	[currentCard setTransitionType: nil subtype: nil];
 
@@ -96,7 +96,7 @@ void	WILDVisualEffectInstruction( LEOContext* inContext )
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
-	WILDStack			*	frontStack = [WILDDocument frontStackNamed: nil];
+	WILDStack			*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard			*	currentCard = [frontStack currentCard];
 	static NSDictionary *	sTransitions = nil;
 	
@@ -458,6 +458,12 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 	if( !theURL )
 	{
 		theURL = [NSURL fileURLWithPath: [NSString stringWithFormat: @"/System/Library/Sounds/%@.aiff", resourceName]];
+		if( ![theURL checkResourceIsReachableAndReturnError: NULL] )
+			theURL = nil;
+	}
+	if( !theURL )
+	{
+		theURL = [NSURL fileURLWithPath: resourceName];
 		if( ![theURL checkResourceIsReachableAndReturnError: NULL] )
 			theURL = nil;
 	}
