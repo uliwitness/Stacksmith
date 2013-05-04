@@ -1175,7 +1175,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	if( partsXML )
 	{
 		NSError			*	err = nil;
-		NSXMLDocument	*	xmlDoc = [[NSXMLDocument alloc] initWithXMLString: partsXML options: 0 error: &err];
+		NSXMLDocument	*	xmlDoc = [[[NSXMLDocument alloc] initWithXMLString: partsXML options: 0 error: &err] autorelease];
 		if( !xmlDoc )
 		{
 			UKLog( @"Couldn't read part from pasteboard: %@", err );
