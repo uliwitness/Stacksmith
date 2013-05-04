@@ -947,7 +947,8 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewButton: sender];
-	[[WILDTools sharedTools] setCurrentTool: WILDButtonTool];
+	if( [[WILDTools sharedTools] currentTool] != WILDPointerTool )
+		[self toggleEditBrowseTool: self];
 	
 	[self reloadCard];
 }
@@ -957,15 +958,17 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewField: sender];	
-	[[WILDTools sharedTools] setCurrentTool: WILDPointerTool];
+	if( [[WILDTools sharedTools] currentTool] != WILDPointerTool )
+		[self toggleEditBrowseTool: self];
 }
 
 
 -(IBAction)	createNewMoviePlayer: (id)sender
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
-	[layer createNewMoviePlayer: sender];	
-	[[WILDTools sharedTools] setCurrentTool: WILDPointerTool];
+	[layer createNewMoviePlayer: sender];
+	if( [[WILDTools sharedTools] currentTool] != WILDPointerTool )
+		[self toggleEditBrowseTool: self];
 }
 
 
@@ -973,7 +976,8 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
 	[layer createNewBrowser: sender];
-	[[WILDTools sharedTools] setCurrentTool: WILDPointerTool];
+	if( [[WILDTools sharedTools] currentTool] != WILDPointerTool )
+		[self toggleEditBrowseTool: self];
 }
 
 
