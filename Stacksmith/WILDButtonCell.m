@@ -118,7 +118,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	if( [self backgroundColor]
 		|| (isHighlighted && [self image] == nil) )
 	{
-		NSColor	*	bgColor = self.backgroundColor;
+		NSColor	*	bgColor = nil;
 		#if TRANSPARENT_BUTTONS_INVERT
 		if( isHighlighted && ![self backgroundColor] && [self image] == nil )
 			bgColor = [NSColor whiteColor];
