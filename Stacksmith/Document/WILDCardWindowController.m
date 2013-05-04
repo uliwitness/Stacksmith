@@ -127,12 +127,10 @@
 }
 
 
--(void)	close
+-(void)	windowWillClose: (NSNotification*)notification
 {
-	[[self window] orderOut: self];
+	//[[self window] orderOut: self];
 	[mCardViewController loadCard: nil];
-	
-	[super close];
 }
 
 

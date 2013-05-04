@@ -50,7 +50,7 @@
 
 -(void)	sendTimerMessage: (NSTimer*)sender
 {
-	if( ![mPartView myToolIsCurrent] )	// DOn't run timer while editing.
+	if( ![mPartView myToolIsCurrent] )	// Don't run timer while editing.
 	{
 		WILDPart		*	currPart = [mPartView part];
 		WILDScriptContainerResultFromSendingMessage( currPart, currPart.timerMessage );
@@ -81,21 +81,18 @@
 	
 	if( mTimer && (currPart.timerInterval <= 0 || currPart.timerMessage.length == 0) )
 	{
-		[mTimer invalidate];
-		DESTROY(mTimer);
+		[self setTimerActive: NO];
 	}
-	else if( !mTimer && currPart.timerInterval > 0 && currPart.timerMessage.length > 0 )
+	else
 	{
-		NSTimeInterval	interval = currPart.timerInterval / 60.0;
-		mTimer = [[NSTimer scheduledTimerWithTimeInterval: interval target: self selector:@selector(sendTimerMessage:) userInfo: @{} repeats: YES] retain];
+		[self setTimerActive: YES];
 	}
 }
 
 
 -(void)	timerIntervalPropertyDidChangeOfPart: (WILDPart*)inPart
 {
-	[mTimer invalidate];
-	DESTROY(mTimer);	// Make sure we recreate it with new fire time & interval.
+	[self setTimerActive: NO];	// Make sure we recreate it with new fire time & interval.
 	[self refreshProperties];
 }
 
@@ -106,10 +103,30 @@
 }
 
 
+-(void)	setTimerActive: (BOOL)inWantTimer
+{
+	if( inWantTimer )
+	{
+		WILDPart		*	currPart = [mPartView part];
+		if( mIcon && !mTimer && currPart.timerInterval > 0 && currPart.timerMessage.length > 0 )
+		{
+			NSTimeInterval	interval = currPart.timerInterval / 60.0;
+			mTimer = [[NSTimer scheduledTimerWithTimeInterval: interval target: self selector:@selector(sendTimerMessage:) userInfo: @{} repeats: YES] retain];
+			UKLog( @"Installed timer on %@", self );
+		}
+	}
+	else if( mTimer )
+	{
+		[mTimer invalidate];
+		DESTROY(mTimer);
+		UKLog( @"Removed timer from %@", self );
+	}
+}
+
+
 -(void)	removeSubviews
 {
-	[mTimer invalidate];
-	DESTROY(mTimer);
+	[self setTimerActive: NO];
 	
 	[mIcon removeFromSuperview];
 	DESTROY(mIcon);
