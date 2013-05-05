@@ -104,9 +104,7 @@
 			[newPart setPartLayer: [self partLayer]];
 			[newPart setPartOwner: self];
 			[mParts addObject: newPart];
-			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(partDidChange:) name:WILDPartDidChangeNotification object: newPart];
-			if( [newPart family] > 0 )
-				[mButtonFamilies addObject: newPart forKey: [NSNumber numberWithInteger: [newPart family]]];
+			[self registerPart: newPart];
 		}
 		
 		mAddColorParts = [[NSMutableArray alloc] init];
@@ -143,6 +141,21 @@
 	mStack = UKInvalidPointer;
 	
 	[super dealloc];
+}
+
+
+-(void)	registerPart: (WILDPart*)newPart
+{
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(partDidChange:) name:WILDPartDidChangeNotification object: newPart];
+	if( [newPart family] > 0 )
+		[mButtonFamilies addObject: newPart forKey: [NSNumber numberWithInteger: [newPart family]]];
+}
+
+
+-(void)	unregisterPart: (WILDPart*)currPart
+{
+	[[NSNotificationCenter defaultCenter] removeObserver: self name: WILDPartDidChangeNotification object: currPart];
+	[mButtonFamilies removeObjectsForKey: [NSNumber numberWithInteger: [currPart family]]];
 }
 
 

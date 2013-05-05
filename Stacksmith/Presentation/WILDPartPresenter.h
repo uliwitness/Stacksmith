@@ -32,5 +32,8 @@
 -(NSRect)	partRectForPartViewFrame: (NSRect)inRect;
 -(NSRect)	partViewFrameForPartRect: (NSRect)inRect;
 
+-(void)		removeSubPartView: (WILDPartView*)inView;
+-(void)		addSubPartView: (WILDPartView*)inView;
+
 @end
 

@@ -585,6 +585,8 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 			WILDScriptContainerResultFromSendingMessage( theCard, @"openStack" );
 		WILDScriptContainerResultFromSendingMessage( theCard, @"openCard" );
 	}
+	
+	UKLog( @"%@", [self.view _subtreeDescription] );
 }
 
 

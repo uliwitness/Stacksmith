@@ -1008,6 +1008,8 @@
 
 -(void)	refreshPartPresenter
 {
+	for( WILDPartView* currView in mSubPartViews )
+		[mPartPresenter removeSubPartView: currView];
 	[mPartPresenter removeSubviews];
 	DESTROY(mPartPresenter);
 	if( [[mPart partType] isEqualToString: @"button"] )
@@ -1033,6 +1035,30 @@
 	else if( [[mPart partType] isEqualToString: @"group"] )
 		mPartPresenter = [[WILDGroupPresenter alloc] initWithPartView: self];
 	[mPartPresenter createSubviews];
+	if( mSubPartViews.count != mPart.subParts.count )
+	{
+		if( mPart.subParts.count > 0 )
+			mSubPartViews = [[NSMutableArray alloc] initWithCapacity: mPart.subParts.count];
+		for( WILDPart* currSubPart in mPart.subParts )
+		{
+			WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSMakeRect(0,0,100,100)] autorelease];
+			selView.part = currSubPart;
+			[selView setWantsLayer: YES];
+			BOOL	isCardButton = [currSubPart.partLayer isEqualToString: @"card"];
+//			if( mBackgroundEditMode || isCardButton )
+//				[[self guidelineView] addPartView: selView];
+			[mSubPartViews addObject: selView];
+			//[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
+			[selView loadPart: currSubPart forBackgroundEditing: /*mBackgroundEditMode &&*/ !isCardButton];
+			[selView refreshPartPresenter];
+			UKLog( @"Created part view %@", selView );
+		}
+	}
+	for( WILDPartView* currView in mSubPartViews )
+	{
+		[mPartPresenter addSubPartView: currView];
+		UKLog( @"Adding sub part view %@", currView );
+	}
 }
 
 

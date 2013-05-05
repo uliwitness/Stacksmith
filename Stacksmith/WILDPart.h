@@ -71,6 +71,7 @@
 	NSInteger			mBevel;
 	WILDLayer*			mOwner;					// Layer that this part belongs to.
 	WILDStack*			mStack;					// Stack this part belongs to.
+	NSMutableArray*		mSubParts;
 }
 
 @property (assign,nonatomic) BOOL			dontWrap;
@@ -180,6 +181,8 @@
 
 -(WILDStack*)	stack;
 -(void)			updateChangeCount: (NSDocumentChangeType)inChange;
+
+-(NSArray*)		subParts;
 
 -(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents create: (BOOL)inDoCreate onCard: (WILDCard*)inCard forBackgroundEditing: (BOOL)isBgEditing;
 

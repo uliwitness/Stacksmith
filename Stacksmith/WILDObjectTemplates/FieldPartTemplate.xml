@@ -19,6 +19,7 @@
 	<sharedHighlight><false /></sharedHighlight>
 	<family>0</family>
 	<titleWidth>0</titleWidth>
+	<lineWidth>1</lineWidth>
 	<icon>0</icon>
 	<textAlign>left</textAlign>
 	<font>Lucida Grande</font>

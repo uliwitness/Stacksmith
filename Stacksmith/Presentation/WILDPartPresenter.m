@@ -100,4 +100,15 @@
 	return NSInsetRect(inLayoutRect, -2, -2 );
 }
 
+-(void)		removeSubPartView: (WILDPartView*)inView
+{
+	[inView removeFromSuperview];
+}
+
+
+-(void)		addSubPartView: (WILDPartView*)inView
+{
+	[mPartView addSubview: inView];
+}
+
 @end

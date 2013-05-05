@@ -41,6 +41,7 @@ typedef enum
 	NSPopover*			mCurrentPopover;
 	NSTrackingArea*		mMouseEventTrackingArea;
 	WILDPartPresenter*	mPartPresenter;
+	NSMutableArray*		mSubPartViews;
 }
 
 @property (assign) NSView*			mainView;

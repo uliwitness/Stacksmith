@@ -172,6 +172,18 @@
 			}
 		}
 		
+		NSArray*		parts = [elem elementsForName: @"part"];
+		if( parts.count > 0 )
+			mSubParts = [[NSMutableArray alloc] initWithCapacity: [parts count]];
+		for( NSXMLElement* currPart in parts )
+		{
+			WILDPart*	newPart = [[[WILDPart alloc] initWithXMLElement: currPart forStack: mStack] autorelease];
+			[newPart setPartLayer: [self partLayer]];
+			[newPart setPartOwner: mOwner];
+			[mSubParts addObject: newPart];
+			[mOwner registerPart: newPart];
+		}
+		
 		mIDForScripts = kLEOObjectIDINVALID;
 	}
 	
@@ -181,6 +193,9 @@
 
 -(void)	dealloc
 {
+	for( WILDPart* currPart in mSubParts )
+		[mOwner unregisterPart: currPart];
+
 	DESTROY_DEALLOC(mName);
 	DESTROY_DEALLOC(mScript);
 	DESTROY_DEALLOC(mStyle);
@@ -212,6 +227,12 @@
 	}
 	
 	[super dealloc];
+}
+
+
+-(NSArray*)		subParts
+{
+	return mSubParts;
 }
 
 
@@ -365,7 +386,15 @@
 
 -(void)	setPartOwner: (WILDLayer*)cardOrBg
 {
+	WILDLayer	*	oldOwner = mOwner;
+	
 	mOwner = cardOrBg;
+	for( WILDPart* currPart in mSubParts )
+	{
+		[oldOwner unregisterPart: currPart];
+		[currPart setPartOwner: mOwner];
+		[mOwner registerPart: currPart];
+	}
 }
 
 
@@ -1154,6 +1183,11 @@
 		WILDAppendStringXML( outString, 3, mUserProperties[userPropName], @"value" );
 	}
 	[outString appendString: @"\t\t</userProperties>\n"];
+	
+	for( WILDPart* currPart in mSubParts )
+	{
+		[outString appendString: [currPart xmlString]];
+	}
 	
 	[outString appendString: @"\t</part>\n"];
 	

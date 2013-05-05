@@ -105,4 +105,10 @@
 	return [[mPartView superview] convertRect: [mGroupView bounds] fromView: mGroupView];
 }
 
+
+-(void)	addSubPartView: (WILDPartView *)inView
+{
+	[mGroupView.contentView addSubview: inView];
+}
+
 @end

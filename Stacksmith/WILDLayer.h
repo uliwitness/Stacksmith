@@ -67,6 +67,9 @@
 -(WILDPart*)					partNamed: (NSString*)inPartName ofType: (NSString*)inPartType;
 -(void)							movePart: (WILDPart*)inPart toIndex: (NSUInteger)inNewIndex asType: (NSString*)inPartType;
 
+-(void)							registerPart: (WILDPart*)inPart;
+-(void)							unregisterPart: (WILDPart*)inPart;
+
 -(void)							updatePartOnClick: (WILDPart*)thePart withCard: (WILDCard*)inCard background: (WILDBackground*)inBackground;
 
 -(NSString*)					partLayer;
