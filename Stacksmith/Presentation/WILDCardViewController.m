@@ -943,6 +943,18 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	[self selectParts: allParts];
 }
 
+
+-(void)	createNewPartFromTemplateAtPathInRepresentedObject: (NSMenuItem*)templateItem
+{
+	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;
+	[layer addNewPartFromXMLTemplate: [NSURL fileURLWithPath: templateItem.representedObject]];
+	if( [[WILDTools sharedTools] currentTool] != WILDPointerTool )
+		[self toggleEditBrowseTool: self];
+	
+	[self reloadCard];
+}
+
+
 -(IBAction)	createNewButton: (id)sender
 {
 	WILDLayer	*	layer = mBackgroundEditMode ? [mCurrentCard owningBackground] : mCurrentCard;

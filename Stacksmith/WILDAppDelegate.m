@@ -19,8 +19,14 @@
 #import "WILDHostCommands.h"
 #import "WILDHostFunctions.h"
 #import "LEORemoteDebugger.h"
-//#import <openssl/err.h>
 #import "UKCrashReporter.h"
+
+
+@protocol WILDCreateObjectMethodMenuItemAction
+
+-(void)	createNewPartFromTemplateAtPathInRepresentedObject: (NSMenuItem*)templateItem;
+
+@end
 
 
 @implementation WILDAppDelegate
@@ -101,6 +107,24 @@
 -(void)	applicationDidFinishLaunching:(NSNotification *)notification
 {
 	UKCrashReporterCheckForCrash();
+	
+	NSString	*	templatePath = [NSBundle.mainBundle pathForResource: @"WILDObjectTemplates" ofType: @""];
+	NSArray		*	partTemplates = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: templatePath error: NULL];
+	NSMenu		*	theMenu = mNewObjectSeparator.menu;
+	NSInteger		theIndex = [theMenu indexOfItem: mNewObjectSeparator] +1;
+	for( NSString * currPath in partTemplates )
+	{
+		NSString	*	theName = [currPath lastPathComponent];
+		NSRange			theEnd = [theName rangeOfString: @"PartTemplate.xml"];
+		if( theEnd.location == NSNotFound )
+			continue;
+		theName = [theName substringToIndex: theEnd.location];
+		NSString	*	theTitle = [NSString stringWithFormat: @"New %@", theName];
+		NSMenuItem	*	theItem = [[[NSMenuItem alloc] initWithTitle: theTitle action: @selector(createNewPartFromTemplateAtPathInRepresentedObject:) keyEquivalent: @""] autorelease];
+		theItem.representedObject = [templatePath stringByAppendingPathComponent: currPath];
+		[theMenu insertItem: theItem atIndex: theIndex];
+		theIndex ++;
+	}
 }
 
 

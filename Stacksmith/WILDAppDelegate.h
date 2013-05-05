@@ -14,6 +14,7 @@
 	BOOL				mPeeking;
 	BOOL				mBackgroundEditMode;
 	id					mFlagsChangedEventMonitor;
+	IBOutlet NSMenuItem	*mNewObjectSeparator;
 }
 
 

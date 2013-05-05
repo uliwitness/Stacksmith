@@ -66,6 +66,8 @@
 -(IBAction)	bringObjectCloser: (id)sender;
 -(IBAction)	sendObjectFarther: (id)sender;
 
+
+-(IBAction)	createNewPartFromTemplateAtPathInRepresentedObject: (NSMenuItem*)templateItem;
 -(IBAction)	createNewButton: (id)sender;
 -(IBAction)	createNewField: (id)sender;
 -(IBAction)	createNewBrowser: (id)sender;

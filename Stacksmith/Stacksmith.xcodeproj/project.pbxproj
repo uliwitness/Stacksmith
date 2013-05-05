@@ -187,6 +187,7 @@
 		5542CD7D113ABB8B00555C64 /* WILDPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CD7C113ABB8B00555C64 /* WILDPart.m */; };
 		5542CE48113AE27500555C64 /* WILDPartContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CE47113AE27500555C64 /* WILDPartContents.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
+		554DE25C1736DB4500940933 /* WILDGroupPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 554DE25B1736DB4500940933 /* WILDGroupPresenter.m */; };
 		555BA0DC138DC9CB00B3B1D8 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555BA0DA138DC9CB00B3B1D8 /* PlaceholderMovie.mov */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
@@ -734,6 +735,8 @@
 		5542CE47113AE27500555C64 /* WILDPartContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPartContents.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
+		554DE25A1736DB4500940933 /* WILDGroupPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGroupPresenter.h; path = Presentation/WILDGroupPresenter.h; sourceTree = "<group>"; };
+		554DE25B1736DB4500940933 /* WILDGroupPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGroupPresenter.m; path = Presentation/WILDGroupPresenter.m; sourceTree = "<group>"; };
 		555BA0DB138DC9CB00B3B1D8 /* English */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = English; path = English.lproj/PlaceholderMovie.mov; sourceTree = "<group>"; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
 		555E5764115BFC5700AAF9CA /* NSFileHandle+UKReadLinewise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileHandle+UKReadLinewise.h"; path = "../UliKit/NSFileHandle+UKReadLinewise.h"; sourceTree = SOURCE_ROOT; };
@@ -1061,8 +1064,10 @@
 				5503472F1370A18800AE7681 /* StacksmithVersion.h */,
 				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
 				552558FD114BDE7C00279B03 /* WILDAppDelegate.m */,
+				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
 				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
+				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
 				2A37F4AEFDCFA73011CA2CEA /* WILDDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* WILDDocument.m */,
 				552365361344B0B9000145A0 /* WILDRecentCardsList.h */,
@@ -1101,23 +1106,6 @@
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				8D15AC360486D014006FF6A4 /* Stacksmith-Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
-				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
-				1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */,
-				55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */,
-				5532EE3513F1E66D001A0B28 /* WILDContentsEditorWindowController.xib */,
-				557BC7D6171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib */,
-				55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */,
-				55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */,
-				55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */,
-				5585034413E886AC00FD244C /* WILDFieldInfoViewController.xib */,
-				5585034613E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib */,
-				55A5D9C9173203C3005B2309 /* WILDTimerInfoViewController.xib */,
-				55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */,
-				55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */,
-				55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */,
-				5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */,
-				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
-				553C471813577A2E000219FA /* WILDMessageBox.xib */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
@@ -1188,6 +1176,8 @@
 				55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */,
 				556C49671731EF8800C40D97 /* WILDTimerPresenter.h */,
 				556C49681731EF8800C40D97 /* WILDTimerPresenter.m */,
+				554DE25A1736DB4500940933 /* WILDGroupPresenter.h */,
+				554DE25B1736DB4500940933 /* WILDGroupPresenter.m */,
 			);
 			name = "Part Presenters";
 			sourceTree = "<group>";
@@ -1216,36 +1206,50 @@
 			children = (
 				55255ABA114C19AB00279B03 /* WILDScriptEditorWindowController.h */,
 				55255ABB114C19AB00279B03 /* WILDScriptEditorWindowController.m */,
+				55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */,
 				5532EE3213F1E2B6001A0B28 /* WILDContentsEditorWindowController.h */,
 				5532EE3313F1E2B6001A0B28 /* WILDContentsEditorWindowController.m */,
+				5532EE3513F1E66D001A0B28 /* WILDContentsEditorWindowController.xib */,
 				557BC7DD171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.h */,
 				557BC7DE171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m */,
+				557BC7D6171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib */,
 				55E9FD8813E56D390089B81F /* WILDPartInfoViewController.h */,
 				55E9FD8913E56D390089B81F /* WILDPartInfoViewController.m */,
+				55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */,
 				55E9FD8D13E5FBCB0089B81F /* WILDButtonInfoViewController.h */,
 				55E9FD8E13E5FBCC0089B81F /* WILDButtonInfoViewController.m */,
+				55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */,
 				5585033E13E8866300FD244C /* WILDFieldInfoViewController.h */,
 				5585033F13E8866300FD244C /* WILDFieldInfoViewController.m */,
+				5585034413E886AC00FD244C /* WILDFieldInfoViewController.xib */,
 				5585034113E8867200FD244C /* WILDMoviePlayerInfoViewController.h */,
 				5585034213E8867200FD244C /* WILDMoviePlayerInfoViewController.m */,
+				5585034613E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib */,
 				55A5D9C2173202FB005B2309 /* WILDTimerInfoViewController.h */,
 				55A5D9C3173202FB005B2309 /* WILDTimerInfoViewController.m */,
+				55A5D9C9173203C3005B2309 /* WILDTimerInfoViewController.xib */,
 				55E9FD9613E747B00089B81F /* WILDIconPickerViewController.h */,
 				55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */,
+				55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */,
 				55B924481169DB150073EC6C /* WILDIconListDataSource.h */,
 				55B924491169DB150073EC6C /* WILDIconListDataSource.m */,
 				55EA637E1347532C0039FE0D /* WILDLayerInfoViewController.h */,
 				55EA637F1347532C0039FE0D /* WILDLayerInfoViewController.m */,
 				55C88AFF1332CDA300ACB615 /* WILDCardInfoViewController.h */,
 				55C88B001332CDA300ACB615 /* WILDCardInfoViewController.m */,
+				55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */,
 				55EA6381134756C20039FE0D /* WILDBackgroundInfoViewController.h */,
 				55EA6382134756CF0039FE0D /* WILDBackgroundInfoViewController.m */,
+				55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */,
 				55993B6913476E1D001624A2 /* WILDStackInfoViewController.h */,
 				55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */,
+				55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */,
 				5523653C1344C9ED000145A0 /* WILDRecentCardPickerWindowController.h */,
 				5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */,
+				5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */,
 				553C471513577989000219FA /* WILDMessageBox.h */,
 				553C471613577989000219FA /* WILDMessageBox.m */,
+				553C471813577A2E000219FA /* WILDMessageBox.xib */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -1441,6 +1445,7 @@
 			children = (
 				55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */,
 				55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */,
+				1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */,
 				55E3B6AB1184417A000062C1 /* WILDMediaEntry.h */,
 				55E3B6AC1184417A000062C1 /* WILDMediaEntry.m */,
 				55E3B6C71184420E000062C1 /* WILDStyleEntry.h */,
@@ -2248,6 +2253,7 @@
 				55E85E57173180860086F876 /* WILDConcreteObject.m in Sources */,
 				556C49691731EF8800C40D97 /* WILDTimerPresenter.m in Sources */,
 				55A5D9C4173202FB005B2309 /* WILDTimerInfoViewController.m in Sources */,
+				554DE25C1736DB4500940933 /* WILDGroupPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

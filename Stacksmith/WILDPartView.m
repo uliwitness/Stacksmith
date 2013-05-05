@@ -37,6 +37,7 @@
 #import "WILDWebBrowserPresenter.h"
 #import "WILDMoviePlayerPresenter.h"
 #import "WILDTimerPresenter.h"
+#import "WILDGroupPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
@@ -1026,6 +1027,8 @@
 		mPartPresenter = [[WILDMoviePlayerPresenter alloc] initWithPartView: self];
 	else if( [[mPart partType] isEqualToString: @"timer"] )
 		mPartPresenter = [[WILDTimerPresenter alloc] initWithPartView: self];
+	else if( [[mPart partType] isEqualToString: @"group"] )
+		mPartPresenter = [[WILDGroupPresenter alloc] initWithPartView: self];
 	[mPartPresenter createSubviews];
 }
 
