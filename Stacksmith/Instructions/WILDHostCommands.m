@@ -50,8 +50,12 @@ void	WILDGoInstruction( LEOContext* inContext )
 {
 	LEOValuePtr			theValue = inContext->stackEndPtr -1;
 	BOOL				canGoThere = NO;
+	id<WILDObject>		destinationObject = nil;
 	if( theValue->base.isa == &kLeoValueTypeWILDObject )
-		canGoThere = [(id<WILDObject>)theValue->object.object goThereInNewWindow: NO];
+	{
+		destinationObject = (id<WILDObject>)theValue->object.object;
+		canGoThere = [destinationObject goThereInNewWindow: NO];
+	}
 	else
 	{
 		char str[1024] = { 0 };
@@ -59,20 +63,19 @@ void	WILDGoInstruction( LEOContext* inContext )
 		NSString	*	stackName = [NSString stringWithUTF8String: str];
 		WILDStack*	theStack = [WILDDocument openStackNamed: stackName];
 		canGoThere = [theStack goThereInNewWindow: NO];
-		if( canGoThere )
-			((WILDScriptContextUserData*)inContext->userData).currentStack = theStack;
+		destinationObject = theStack;
 	}
+	if( canGoThere )
+		((WILDScriptContextUserData*)inContext->userData).currentStack = destinationObject.stack;
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-	if( !canGoThere )
-	{
-		LEOContextStopWithError( inContext, "Can't go there." );
-	}
 	
 	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	WILDCard		*	currentCard = [frontStack currentCard];
 	[currentCard setTransitionType: nil subtype: nil];
+	
+	if( !canGoThere )
+		LEOContextStopWithError( inContext, "Can't go there." );
 
 	inContext->currentInstruction++;
 }
