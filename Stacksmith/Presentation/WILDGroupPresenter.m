@@ -51,6 +51,23 @@
 	[mPartView setHidden: !currPart.visible];
 	[mGroupView setTitle: currPart.name];
 	
+	NSRect	theBox = [self partViewFrameForPartRect: mPartView.part.quartzRectangle];
+	[mPartView setFrame: theBox];
+	
+	if( [currPart.partStyle isEqualToString: @"standard"] )
+	{
+		if( theBox.size.width < 8 || theBox.size.height < 8 )
+			[mGroupView setBoxType: NSBoxSeparator];
+		else
+			[mGroupView setBoxType: NSBoxPrimary];
+	}
+	else if( [currPart.partStyle isEqualToString: @"rectangle"] )
+		[mGroupView setBoxType: NSBoxCustom];
+	
+	[mGroupView setFillColor: currPart.fillColor];
+	[mGroupView setBorderColor: currPart.lineColor];
+	[mGroupView setBorderWidth: currPart.lineWidth];
+	
 	NSColor	*	shadowColor = [currPart shadowColor];
 	if( [shadowColor alphaComponent] > 0.0 )
 	{
@@ -62,9 +79,6 @@
 	}
 	else
 		[[mGroupView layer] setShadowOpacity: 0.0];
-	
-	NSRect	theBox = [self partViewFrameForPartRect: mPartView.part.quartzRectangle];
-	[mPartView setFrame: theBox];
 }
 
 

@@ -16,6 +16,7 @@
 #import "WILDFieldInfoViewController.h"
 #import "WILDMoviePlayerInfoViewController.h"
 #import "WILDTimerInfoViewController.h"
+#import "WILDGroupInfoViewController.h"
 #import "WILDCardView.h"
 #import "WILDCard.h"
 #import "WILDClickablePopUpButtonLabel.h"
@@ -788,6 +789,8 @@
 		infoController = [[WILDMoviePlayerInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 	else if( [[mPart partType] isEqualToString: @"timer"] )
 		infoController = [[WILDTimerInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
+	else if( [[mPart partType] isEqualToString: @"group"] )
+		infoController = [[WILDGroupInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 	else
 		infoController = [[WILDPartInfoViewController alloc] initWithPart: mPart ofCardView: [self enclosingCardView]];
 	[infoController autorelease];
