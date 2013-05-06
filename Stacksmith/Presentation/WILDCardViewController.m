@@ -399,13 +399,14 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 
 -(void)	reloadCard
 {
-	[[self guidelineView] removeAllPartViews];
+	WILDGuidelineView	*	guidelineView = self.guidelineView;
+	[guidelineView removeAllPartViews];
 	NSArray*	subviews = [mPartViews allValues];
 	for( WILDPartView* currSubview in subviews )
 	{
 		[currSubview partDidChange: nil];
 		[currSubview savePart];
-		[[self guidelineView] addPartView: currSubview];
+		[currSubview addToGuidelineView: mGuidelineView];
 	}
 }
 
@@ -417,7 +418,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	[[self view] addSubview: selView];
 	BOOL	isCardButton = [currPart.partLayer isEqualToString: @"card"];
 	if( mBackgroundEditMode || isCardButton )
-		[[self guidelineView] addPartView: selView];
+		[selView addToGuidelineView: mGuidelineView];
 	[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
 	[selView loadPart: currPart forBackgroundEditing: mBackgroundEditMode && !isCardButton];
 }
@@ -561,7 +562,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		mGuidelineView = [[WILDGuidelineView alloc] initWithFrame: [[self view] bounds]];
 		[[self view] addSubview: mGuidelineView];
 		for( WILDPartView* currPartView in [mPartViews allValues] )
-			[[self guidelineView] addPartView: currPartView];
+			[currPartView addToGuidelineView: mGuidelineView];
 		
 		if( prevCard != theCard )
 		{

@@ -141,7 +141,7 @@
 -(NSRect)	selectionFrame
 {
 	[mPartView setHidden: !mPartView.myToolIsCurrent || ![mPartView.part visible]];
-	return [[mPartView superview] convertRect: [mIcon bounds] fromView: mIcon];
+	return [[mPartView enclosingCardView] convertRect: [mIcon bounds] fromView: mIcon];
 }
 
 @end

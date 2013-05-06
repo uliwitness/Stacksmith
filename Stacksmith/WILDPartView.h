@@ -15,6 +15,7 @@
 @class WILDCardView;
 @class WILDPartContents;
 @class WILDPartPresenter;
+@class WILDGuidelineView;
 
 
 // Constants for describing which part was clicked during editing (for resizing etc.)
@@ -63,6 +64,7 @@ typedef enum
 
 -(void)	loadPart: (WILDPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode;
 -(void)	unloadPart;
+-(void)	addToGuidelineView: (WILDGuidelineView*)guidelineView;
 
 +(NSImage*)	imageForPeers: (NSArray*)views ofView: (NSView*)inView dragStartImagePos: (NSPoint*)dragStartImagePos;
 +(NSRect)	rectForPeers: (NSArray*)parts dragStartImagePos: (NSPoint*)dragStartImagePos;

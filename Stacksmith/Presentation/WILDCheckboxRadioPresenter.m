@@ -119,7 +119,7 @@
 
 -(NSRect)	selectionFrame
 {
-	return [[mPartView superview] convertRect: [mMainView bounds] fromView: mMainView];
+	return [[mPartView enclosingCardView] convertRect: [mMainView bounds] fromView: mMainView];
 }
 
 

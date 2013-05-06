@@ -133,7 +133,7 @@
 
 -(NSRect)	selectionFrame
 {
-	return [[mPartView superview] convertRect: [mWebView bounds] fromView: mWebView];
+	return [[mPartView enclosingCardView] convertRect: [mWebView bounds] fromView: mWebView];
 }
 
 

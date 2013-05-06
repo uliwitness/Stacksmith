@@ -102,7 +102,7 @@
 
 -(NSRect)	selectionFrame
 {
-	return [[mPartView superview] convertRect: [mGroupView bounds] fromView: mGroupView];
+	return [[mPartView enclosingCardView] convertRect: [mGroupView bounds] fromView: mGroupView];
 }
 
 

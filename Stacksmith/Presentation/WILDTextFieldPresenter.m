@@ -193,7 +193,7 @@
 
 -(NSRect)	selectionFrame
 {
-	return [[mPartView superview] convertRect: [mScrollView bounds] fromView: mScrollView];
+	return [[mPartView enclosingCardView] convertRect: [mScrollView bounds] fromView: mScrollView];
 }
 
 @end

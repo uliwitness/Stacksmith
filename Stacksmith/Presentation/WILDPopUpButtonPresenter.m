@@ -125,7 +125,7 @@
 
 -(NSRect)	selectionFrame
 {
-	return [[mPartView superview] convertRect: [mMainView alignmentRectForFrame: [mMainView frame]] fromView: mPartView];
+	return [[mPartView enclosingCardView] convertRect: [mMainView alignmentRectForFrame: [mMainView frame]] fromView: mPartView];
 }
 
 

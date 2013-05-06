@@ -208,6 +208,7 @@
 		[NSBezierPath setDefaultLineWidth: 1];
 		[[NSColor colorWithCalibratedWhite: 1.0 alpha: 0.5] set];
 		[NSBezierPath strokeRect: lightOutlineBox];
+		UKLog( @"subviewFrame = %@ (%@)", NSStringFromRect(subviewFrame), self );
 		
 		if( isOpaque )
 			[[[WILDTools sharedTools] peekPattern] set];
@@ -1008,8 +1009,13 @@
 
 -(void)	refreshPartPresenter
 {
+	WILDGuidelineView	*	guidelineView = [[self enclosingCardView] guidelineView];
+	
 	for( WILDPartView* currView in mSubPartViews )
+	{
+		[guidelineView removePartView: currView];
 		[mPartPresenter removeSubPartView: currView];
+	}
 	[mPartPresenter removeSubviews];
 	DESTROY(mPartPresenter);
 	if( [[mPart partType] isEqualToString: @"button"] )
@@ -1052,13 +1058,14 @@
 			//[mPartViews setObject: selView forKey: [NSString stringWithFormat: @"%p", currPart]];
 			[selView loadPart: currSubPart forBackgroundEditing: /*mBackgroundEditMode &&*/ !isCardButton];
 			[selView refreshPartPresenter];
-			UKLog( @"Created part view %@", selView );
+			//UKLog( @"Created part view %@", selView );
 		}
 	}
 	for( WILDPartView* currView in mSubPartViews )
 	{
 		[mPartPresenter addSubPartView: currView];
-		UKLog( @"Adding sub part view %@", currView );
+		[guidelineView addPartView: currView];
+		//UKLog( @"Adding sub part view %@", currView );
 	}
 }
 
@@ -1085,10 +1092,10 @@
 -(WILDCardView*)	enclosingCardView
 {
 	WILDCardView*		mySuper = (WILDCardView*) [self superview];
-	if( mySuper && [mySuper isKindOfClass: [WILDCardView class]] )
-		return mySuper;
-	else
-		return nil;
+	while( mySuper && ![mySuper isKindOfClass: [WILDCardView class]] )
+		mySuper = (WILDCardView*)mySuper.superview;
+	
+	return mySuper;
 }
 
 -(void)	partWillChange: (NSNotification*)notif
@@ -1757,6 +1764,14 @@
 	[super removeFromSuperview];
 	
 	[mPartPresenter removeSubviews];
+}
+
+
+-(void)	addToGuidelineView: (WILDGuidelineView*)guidelineView
+{
+	[guidelineView addPartView: self];
+	for( WILDPartView* currPartView in mSubPartViews )
+		[currPartView addToGuidelineView: guidelineView];
 }
 
 
