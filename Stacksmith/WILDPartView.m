@@ -237,9 +237,9 @@
 	NSView*	hitView = [super hitTest: aPoint];
 	if( hitView != nil )	// Was in our view or a sub view, not outside us?
 	{
-		if( mPeeking || isMyTool )
+		if( (mPeeking || isMyTool) && ![hitView isKindOfClass: [WILDPartView class]] )
 			hitView = self;		// Redirect to us.
-		else if( [[WILDTools sharedTools] currentTool] != WILDBrowseTool )	// Another tool than the ones we support?
+		else if( [[WILDTools sharedTools] currentTool] != WILDBrowseTool && ![hitView isKindOfClass: [WILDPartView class]] )	// Another tool than the ones we support?
 			hitView = nil;	// Pretend we (or our subviews) weren't hit at all.
 		else if( [[WILDTools sharedTools] currentTool] == WILDBrowseTool && hitView == self )	// Browse tool but not in our subviews?
 			hitView = nil;	// Pretend we weren't hit at all. Maybe a view under us does better.
@@ -1042,6 +1042,7 @@
 		for( WILDPart* currSubPart in mPart.subParts )
 		{
 			WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSMakeRect(0,0,100,100)] autorelease];
+			selView.autoresizingMask = NSViewMinXMargin | NSViewMaxYMargin;
 			selView.part = currSubPart;
 			[selView setWantsLayer: YES];
 			BOOL	isCardButton = [currSubPart.partLayer isEqualToString: @"card"];
@@ -1767,6 +1768,12 @@
 	}
 	else
 		return YES;
+}
+
+
+-(NSString*)	description
+{
+	return [NSString stringWithFormat: @"<%@: %p>{ frame = %@, visible = %s, part = %@ }", NSStringFromClass([self class]), self, NSStringFromRect(self.frame), self.isHidden ? "NO" : "YES", mPart];
 }
 
 @end

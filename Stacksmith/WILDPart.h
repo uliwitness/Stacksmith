@@ -101,6 +101,7 @@
 @property (assign,nonatomic) NSInteger		bevel;
 @property (assign,nonatomic) NSInteger		timerInterval;
 @property (retain,nonatomic) NSString*		timerMessage;
+@property (assign,nonatomic) WILDPart*		owningPart;
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
 

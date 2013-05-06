@@ -180,6 +180,7 @@
 			WILDPart*	newPart = [[[WILDPart alloc] initWithXMLElement: currPart forStack: mStack] autorelease];
 			[newPart setPartLayer: [self partLayer]];
 			[newPart setPartOwner: mOwner];
+			[newPart setOwningPart: self];
 			[mSubParts addObject: newPart];
 			[mOwner registerPart: newPart];
 		}
@@ -277,14 +278,24 @@
 -(NSRect)	quartzRectangle
 {
 	NSRect		resultRect = mHammerRectangle;
-	resultRect.origin.y = [mStack cardSize].height -NSMaxY( mHammerRectangle );
+	CGFloat		ownerHeight = 0;
+	if( self.owningPart )
+		ownerHeight = [self.owningPart hammerRectangle].size.height;
+	else
+		ownerHeight = [mStack cardSize].height;
+	resultRect.origin.y = ownerHeight -NSMaxY( mHammerRectangle );
 	return resultRect;
 }
 
 
 -(void)	setQuartzRectangle: (NSRect)theBox
 {
-	theBox.origin.y = [mStack cardSize].height -NSMaxY( theBox );
+	CGFloat		ownerHeight = 0;
+	if( self.owningPart )
+		ownerHeight = [self.owningPart hammerRectangle].size.height;
+	else
+		ownerHeight = [mStack cardSize].height;
+	theBox.origin.y = ownerHeight -NSMaxY( theBox );
 	[self setHammerRectangle: theBox];
 }
 
@@ -393,6 +404,7 @@
 	{
 		[oldOwner unregisterPart: currPart];
 		[currPart setPartOwner: mOwner];
+		[currPart setOwningPart: self];
 		[mOwner registerPart: currPart];
 	}
 }
