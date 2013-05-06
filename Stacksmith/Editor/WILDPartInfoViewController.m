@@ -78,7 +78,12 @@
 	[nameField setStringValue: [part name]];
 	
 	NSString*	layerName = [[part partLayer] capitalizedString];
-	[numberField setIntegerValue: [[part partOwner] indexOfPart: part asType: [part partType]] +1];
+	id			theOwner = [part owningPart];
+	if( !theOwner )
+		theOwner = [part partOwner];
+	else
+		layerName = @"Sub";
+	[numberField setIntegerValue: [theOwner indexOfPart: part asType: [part partType]] +1];
 	[partNumberLabel setStringValue: [NSString stringWithFormat: @"%@ Part Number:", layerName]];
 	[partNumberField setIntegerValue: [part partNumber] +1];
 	[idField setIntegerValue: [part partID]];

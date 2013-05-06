@@ -376,7 +376,10 @@
 
 -(NSInteger)	partNumber
 {
-	return [mOwner indexOfPart: self asType: nil];
+	if( self.owningPart )
+		return [self.owningPart indexOfPart: self asType: nil];
+	else
+		return [mOwner indexOfPart: self asType: nil];
 }
 
 
@@ -413,6 +416,28 @@
 -(WILDLayer*)	partOwner
 {
 	return mOwner;
+}
+
+
+-(NSUInteger)	indexOfPart: (WILDPart*)inPart asType: (NSString*)inPartType
+{
+	if( inPartType == nil )
+		return [mSubParts indexOfObject: inPart];
+	else
+	{
+		NSUInteger		partIdx = 0;
+		for( WILDPart* currPart in mSubParts )
+		{
+			if( [[currPart partType] isEqualToString: inPartType] )
+			{
+				if( currPart == inPart )
+					return partIdx;
+				++partIdx;
+			}
+		}
+	}
+	
+	return NSNotFound;
 }
 
 

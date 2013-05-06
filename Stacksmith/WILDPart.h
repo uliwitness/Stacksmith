@@ -126,6 +126,8 @@
 -(void)			setPartOwner: (WILDLayer*)cardOrBg;
 -(WILDLayer*)	partOwner;
 
+-(NSUInteger)	indexOfPart: (WILDPart*)inPart asType: (NSString*)inPartType;
+
 -(NSFont*)				textFont;
 -(NSMutableDictionary*)	textAttributes;
 -(NSTextAlignment)		textAlignment;

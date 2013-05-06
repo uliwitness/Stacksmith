@@ -208,7 +208,6 @@
 		[NSBezierPath setDefaultLineWidth: 1];
 		[[NSColor colorWithCalibratedWhite: 1.0 alpha: 0.5] set];
 		[NSBezierPath strokeRect: lightOutlineBox];
-		UKLog( @"subviewFrame = %@ (%@)", NSStringFromRect(subviewFrame), self );
 		
 		if( isOpaque )
 			[[[WILDTools sharedTools] peekPattern] set];
