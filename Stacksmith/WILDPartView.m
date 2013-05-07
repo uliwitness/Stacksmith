@@ -1063,9 +1063,11 @@
 	for( WILDPartView* currView in mSubPartViews )
 	{
 		[mPartPresenter addSubPartView: currView];
+		[currView refreshPartPresenter];
 		[guidelineView addPartView: currView];
 		//UKLog( @"Adding sub part view %@", currView );
 	}
+	//UKLog( @"%@", [self _subtreeDescription] );
 }
 
 
