@@ -383,6 +383,39 @@
 }
 
 
+-(void)	ensureIDIsUniqueInLayer: (WILDLayer*)inLayer
+{
+	if( [inLayer partWithID: mID] != nil )
+		mID = [inLayer uniqueIDForPart];
+}
+
+
+-(void)		ensureSubPartIDsAreUniqueInLayer: (WILDLayer*)inLayer;
+{
+	for( WILDPart* subPart in mSubParts )
+	{
+		[subPart ensureIDIsUniqueInLayer: inLayer];
+		[subPart ensureSubPartIDsAreUniqueInLayer: inLayer];
+	}
+}
+
+
+-(WILDPart*)	subPartWithID: (WILDObjectID)theID
+{
+	for( WILDPart* thePart in mSubParts )
+	{
+		if( [thePart partID] == theID )
+			return thePart;
+		WILDPart	*	subPart = [thePart subPartWithID: theID];
+		if( subPart )
+			return subPart;
+	}
+	
+	return nil;
+}
+
+
+
 -(void)		setPartLayer: (NSString*)theLayer
 {
 	if( theLayer != mLayer )

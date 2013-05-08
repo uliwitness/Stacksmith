@@ -224,6 +224,9 @@
 	{
 		if( [thePart partID] == theID )
 			return thePart;
+		WILDPart	*	subPart = [thePart subPartWithID: theID];
+		if( subPart )
+			return subPart;
 	}
 	
 	return nil;
@@ -416,14 +419,11 @@
 	{
 		notUnique = NO;
 		
-		for( WILDPart* currPart in mParts )
+		if( [self partWithID: mPartIDSeed] != nil )
 		{
-			if( [currPart partID] == mPartIDSeed )
-			{
-				notUnique = YES;
-				mPartIDSeed++;
-				break;
-			}
+			notUnique = YES;
+			mPartIDSeed++;
+			break;
 		}
 	}
 	
@@ -556,16 +556,12 @@
 
 -(void)	addPart: (WILDPart*)newPart
 {
-	WILDObjectID	theID = newPart.partID;
-	if( [self partWithID: theID] != nil )	// Ensure we don't get duplicate IDs.
-	{
-		theID = [self uniqueIDForPart];
-		[newPart setPartID: theID];
-	}
+	[newPart ensureIDIsUniqueInLayer: self];
 	[newPart setPartLayer: [self partLayer]];
 	[newPart setPartOwner: self];
 	[newPart setStack: mStack];
 	[mParts addObject: newPart];
+	[newPart ensureSubPartIDsAreUniqueInLayer: self];
 	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(partDidChange:) name:WILDPartDidChangeNotification object: newPart];
 	
 	[self updateChangeCount: NSChangeDone];

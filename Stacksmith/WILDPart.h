@@ -125,6 +125,9 @@
 -(NSString*)	partLayer;
 -(void)			setPartOwner: (WILDLayer*)cardOrBg;
 -(WILDLayer*)	partOwner;
+-(void)			ensureIDIsUniqueInLayer: (WILDLayer*)inLayer;
+-(void)			ensureSubPartIDsAreUniqueInLayer: (WILDLayer*)inLayer;
+-(WILDPart*)	subPartWithID: (WILDObjectID)theID;
 
 -(NSUInteger)	indexOfPart: (WILDPart*)inPart asType: (NSString*)inPartType;
 

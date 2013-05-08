@@ -7,10 +7,10 @@
 	<visible><true /></visible>
 	<enabled><true /></enabled>
 	<rect>
-	   <left>100</left>
-	   <top>100</top>
-	   <right>300</right>
-	   <bottom>300</bottom>
+	   <left>10</left>
+	   <top>10</top>
+	   <right>210</right>
+	   <bottom>210</bottom>
     </rect>
 	<style>standard</style>
 	<showName><true /></showName>
@@ -34,9 +34,9 @@
 		<enabled><true /></enabled>
 		<rect>
 			<left>10</left>
-			<top>10</top>
+			<top>24</top>
 			<right>110</right>
-			<bottom>33</bottom>
+			<bottom>47</bottom>
 		</rect>
 		<style>standard</style>
 		<showName><true /></showName>
