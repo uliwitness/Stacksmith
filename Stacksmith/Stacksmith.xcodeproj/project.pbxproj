@@ -914,7 +914,7 @@
 		55D7AA4C1573816B00F33E78 /* CChunkPropertyNodeTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CChunkPropertyNodeTransformation.h; path = ../../CChunkPropertyNodeTransformation.h; sourceTree = "<group>"; };
 		55D97B261441B5110060F774 /* WILDPopUpButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPopUpButtonPresenter.h; path = Presentation/WILDPopUpButtonPresenter.h; sourceTree = "<group>"; };
 		55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPopUpButtonPresenter.m; path = Presentation/WILDPopUpButtonPresenter.m; sourceTree = "<group>"; };
-		55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BuildVersionHeader; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E23BF5133FAB9E00E6B444 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E397E61322481500C3739D /* WILDObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectID.h; path = Model/WILDObjectID.h; sourceTree = "<group>"; };
 		55E397E71322520700C3739D /* NSFileManager+NameForTempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+NameForTempFile.h"; path = "../UliKit/NSFileManager+NameForTempFile.h"; sourceTree = "<group>"; };
 		55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+NameForTempFile.m"; path = "../UliKit/NSFileManager+NameForTempFile.m"; sourceTree = "<group>"; };
@@ -1044,7 +1044,7 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Stacksmith.app */,
-				55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */,
+				55E23BF5133FAB9E00E6B444 /* Dummy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1787,7 +1787,7 @@
 			);
 			name = BuildVersionHeader;
 			productName = BuildVersionHeader;
-			productReference = 55E23BF5133FAB9E00E6B444 /* BuildVersionHeader */;
+			productReference = 55E23BF5133FAB9E00E6B444 /* Dummy */;
 			productType = "com.apple.product-type.tool";
 		};
 		8D15AC270486D014006FF6A4 /* Stacksmith */ = {
@@ -1844,8 +1844,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				8D15AC270486D014006FF6A4 /* Stacksmith */,
 				55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */,
+				8D15AC270486D014006FF6A4 /* Stacksmith */,
 			);
 		};
 /* End PBXProject section */
@@ -2069,7 +2069,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ../UliKit/make_git_version_header.sh;
+			shellScript = "../UliKit/make_git_version_header.sh\ntouch ${CODESIGNING_FOLDER_PATH} #dummy file to shut up codesign";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2487,6 +2487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Uli Kusterer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2494,7 +2495,8 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Dummy;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2503,13 +2505,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Uli Kusterer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Dummy;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
