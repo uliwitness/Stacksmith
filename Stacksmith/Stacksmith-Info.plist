@@ -72,7 +72,7 @@
 	<key>NSServices</key>
 	<array/>
 	<key>SUFeedURL</key>
-	<string>http://stacksmith.org/nightlies/nightly_feed.rss</string>
+	<string>http://stacksmith.org/nightlies/stacksmith_nightlies.rss</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
