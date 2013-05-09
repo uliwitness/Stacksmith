@@ -80,6 +80,7 @@ typedef enum
 -(NSRect)	partRectForPartViewFrame: (NSRect)newBox;
 -(NSRect)	partViewFrameForPartRect: (NSRect)newBox;
 
+-(WILDPartView*)	enclosingPartView;
 
 -(void)	partWillChange: (NSNotification*)notif;
 -(void)	partDidChange: (NSNotification*)notif;

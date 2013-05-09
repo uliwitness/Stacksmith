@@ -383,10 +383,20 @@
 	
 	[guidelineView removeAllGuidelines];
 	
-	CGFloat					left = [guidelineView bounds].origin.x +20,
-							bottom = [guidelineView bounds].origin.y +20;
-	CGFloat					top = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -20,
-							right = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -20; 
+	CGFloat					containerLeft = [guidelineView bounds].origin.x +20,
+							containerBottom = [guidelineView bounds].origin.y +20;
+	CGFloat					containerTop = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -20,
+							containerRight = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -20;
+				
+	if( self.part.owningPart )	// Not top-level in window?
+	{
+		NSRect	ownerRect = [self.enclosingPartView selectionRect];
+		containerLeft = NSMinX(ownerRect) +20;
+		containerBottom = NSMinY(ownerRect) +20;
+		containerRight = NSMaxX(ownerRect) -20;
+		containerBottom = NSMaxY(ownerRect) -20;
+	}
+	
 	// Find parallels to other parts:
 	CGFloat					xMovement = CGFLOAT_MAX,
 							yMovement = CGFLOAT_MAX;
@@ -395,40 +405,40 @@
 	
 	// Show guidelines at 12px distance from edges & snap to them:
 	//	(Aqua standard distance to window edge)
-	if( ((left -6) < NSMinX(inBox)) && ((left +6) > NSMinX(inBox)) )
+	if( ((containerLeft -6) < NSMinX(inBox)) && ((containerLeft +6) > NSMinX(inBox)) )
 	{
-		CGFloat		horzDiff = NSMinX(inBox) -left;
+		CGFloat		horzDiff = NSMinX(inBox) -containerLeft;
 		if( fabs(horzDiff) < fabs(xMovement) )
 		{
 			xMovement = horzDiff;
-			horzGuidelinePos = left;
+			horzGuidelinePos = containerLeft;
 		}
 	}
-	if( ((right -6) < NSMaxX(inBox)) && ((right +6) > NSMaxX(inBox)) )
+	if( ((containerRight -6) < NSMaxX(inBox)) && ((containerRight +6) > NSMaxX(inBox)) )
 	{
-		CGFloat		horzDiff = NSMaxX(inBox) -right;
+		CGFloat		horzDiff = NSMaxX(inBox) -containerRight;
 		if( fabs(horzDiff) < fabs(xMovement) )
 		{
 			xMovement = horzDiff;
-			horzGuidelinePos = right;
+			horzGuidelinePos = containerRight;
 		}
 	}
-	if( ((top -6) < NSMaxY(inBox)) && ((top +6) > NSMaxY(inBox)) )
+	if( ((containerTop -6) < NSMaxY(inBox)) && ((containerTop +6) > NSMaxY(inBox)) )
 	{
-		CGFloat		vertDiff = NSMaxY(inBox) -top;
+		CGFloat		vertDiff = NSMaxY(inBox) -containerTop;
 		if( fabs(vertDiff) < fabs(yMovement) )
 		{
 			yMovement = vertDiff;
-			vertGuidelinePos = top;
+			vertGuidelinePos = containerTop;
 		}
 	}
-	if( ((bottom -6) < NSMinY(inBox)) && ((bottom +6) > NSMinY(inBox)) )
+	if( ((containerBottom -6) < NSMinY(inBox)) && ((containerBottom +6) > NSMinY(inBox)) )
 	{
-		CGFloat		vertDiff = NSMinY(inBox) -bottom;
+		CGFloat		vertDiff = NSMinY(inBox) -containerBottom;
 		if( fabs(vertDiff) < fabs(yMovement) )
 		{
 			yMovement = vertDiff;
-			vertGuidelinePos = bottom;
+			vertGuidelinePos = containerBottom;
 		}
 	}
 	
@@ -886,6 +896,16 @@
 		[[self window] makeFirstResponder: [self superview]];
 		[super mouseDown: event];
 	}
+}
+
+
+-(WILDPartView*)	enclosingPartView
+{
+	WILDPartView	*	currView = (WILDPartView*)self.superview;
+	while( currView && ![currView isKindOfClass: WILDPartView.class] )
+		currView = (WILDPartView*)currView.superview;
+	
+	return currView;
 }
 
 
