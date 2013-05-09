@@ -1844,8 +1844,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */,
 				8D15AC270486D014006FF6A4 /* Stacksmith */,
+				55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */,
 			);
 		};
 /* End PBXProject section */
