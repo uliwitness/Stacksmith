@@ -20,7 +20,7 @@
 	Objective-C object (the same could be done with C++ objects in other hosts
 	or on other platforms).
 	
-	You can create such a value using the <tt>LEOInitWILDObjectValue</tt> function,
+	You can create such a value using the <tt>WILDInitObjectValue</tt> function,
 	just like any other values.
 */
 
@@ -65,8 +65,8 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 @end
 
 
-void				LEOInitWILDObjectValue( struct LEOValueObject* inStorage, id<WILDObject> wildObject, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
-struct LEOScript*	LEOForgeScriptGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext );
+void				WILDInitObjectValue( struct LEOValueObject* inStorage, id<WILDObject> wildObject, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
+struct LEOScript*	WILDGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext );
 
 id<WILDObject>		WILDGetOwnerObjectFromContext( struct LEOContext * inContext );
 

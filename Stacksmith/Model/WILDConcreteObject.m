@@ -80,11 +80,11 @@ PROPERTY_MAP_END
 		{
 			if( mIDForScripts == kLEOObjectIDINVALID )
 			{
-				LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
+				WILDInitObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
 				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [self scriptContextGroupObject], &mValueForScripts );
 				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [self scriptContextGroupObject], mIDForScripts );
 			}
-			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
+			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, WILDGetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, [self scriptContextGroupObject], parseTree, fileID );
 			
 #if REMOTE_DEBUGGER
@@ -117,7 +117,7 @@ PROPERTY_MAP_END
 {
 	if( mIDForScripts == kLEOObjectIDINVALID )
 	{
-		LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
+		WILDInitObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
 		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [self scriptContextGroupObject], &mValueForScripts );
 		mSeedForScripts = LEOContextGroupGetSeedForObjectID( [self scriptContextGroupObject], mIDForScripts );
 	}

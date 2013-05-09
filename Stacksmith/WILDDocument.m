@@ -27,9 +27,9 @@
 #import <Quartz/Quartz.h>
 #import "WILDXMLUtils.h"
 #import "NSFileManager+NameForTempFile.h"
-#import "Forge.h"
 #import "WILDSearchPaths.h"
 #import "UKHelperMacros.h"
+#import "LEOContextGroup.h"
 
 /*!
 	@class WILDDocument

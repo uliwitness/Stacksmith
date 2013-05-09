@@ -117,7 +117,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		LEOObjectSeed	seedForScripts = 0;
 		[self getID: &objectIDForScripts seedForScripts: &seedForScripts];
 		
-		theScript = LEOScriptCreateForOwner( objectIDForScripts, seedForScripts, LEOForgeScriptGetParentScript );
+		theScript = LEOScriptCreateForOwner( objectIDForScripts, seedForScripts, WILDGetParentScript );
 		LEOScriptCompileAndAddParseTree( theScript, [frontDoc scriptContextGroupObject], parseTree, fileID );
 	}
 	
@@ -186,7 +186,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	if( mIDForScripts == kLEOObjectIDINVALID )
 	{
 		WILDDocument	*	frontDoc = [self frontDoc];
-		LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
+		WILDInitObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
 		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [frontDoc scriptContextGroupObject], &mValueForScripts );
 		mSeedForScripts = LEOContextGroupGetSeedForObjectID( [frontDoc scriptContextGroupObject], mIDForScripts );
 	}

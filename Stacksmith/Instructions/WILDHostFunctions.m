@@ -64,7 +64,7 @@ void	WILDStackInstruction( LEOContext* inContext )
 	{
 		LEOValuePtr	valueToReplace = inContext->stackEndPtr -1;
 		LEOCleanUpValue( valueToReplace, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &valueToReplace->object, theStack, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &valueToReplace->object, theStack, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -99,7 +99,7 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 	if( theBackground )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -134,7 +134,7 @@ void	WILDCardInstruction( LEOContext* inContext )
 	if( theCard )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -170,7 +170,7 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 	if( thePart )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -206,7 +206,7 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 	if( thePart )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -242,7 +242,7 @@ void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 	if( thePart )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -278,7 +278,7 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 	if( thePart )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -314,7 +314,7 @@ void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 	if( thePart )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -350,7 +350,7 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 	if( thePart )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -386,7 +386,7 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 	if( thePart )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -422,7 +422,7 @@ void	WILDBackgroundPartInstruction( LEOContext* inContext )
 	if( thePart )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -443,7 +443,7 @@ void	WILDNextCardInstruction( LEOContext* inContext )
 		cardIdx = 0;
 	theCard = [[theStack cards] objectAtIndex: cardIdx];
 	
-	LEOInitWILDObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+	WILDInitObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -461,7 +461,7 @@ void	WILDPreviousCardInstruction( LEOContext* inContext )
 		cardIdx--;
 	theCard = [[theStack cards] objectAtIndex: cardIdx];
 	
-	LEOInitWILDObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+	WILDInitObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -478,7 +478,7 @@ void	WILDNextBackgroundInstruction( LEOContext* inContext )
 		bkgdIndex = 0;
 	theBackground = [[theStack backgrounds] objectAtIndex: bkgdIndex];
 	
-	LEOInitWILDObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
+	WILDInitObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -496,7 +496,7 @@ void	WILDPreviousBackgroundInstruction( LEOContext* inContext )
 		bkgdIndex--;
 	theBackground = [[theStack backgrounds] objectAtIndex: bkgdIndex];
 	
-	LEOInitWILDObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
+	WILDInitObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -513,7 +513,7 @@ void	WILDFirstCardInstruction( LEOContext* inContext )
 	
 	if( inContext->keepRunning )	// No error?
 	{
-		LEOInitWILDObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 		inContext->stackEndPtr ++;
 	}
 	
@@ -531,7 +531,7 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 	
 	if( inContext->keepRunning )	// No error?
 	{
-		LEOInitWILDObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 		inContext->stackEndPtr ++;
 	}
 	
@@ -550,7 +550,7 @@ void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 	{
 		WILDBackground	*	theBackground = (inContext->currentInstruction->param1 & 32) ? [[theStack backgrounds] lastObject] : [[theStack backgrounds] objectAtIndex: 0];
 		
-		LEOInitWILDObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
 		inContext->stackEndPtr ++;
 	}
 	
@@ -594,7 +594,7 @@ void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 		{
 			WILDPart	*	thePart = [theLayer partAtIndex: desiredIndex ofType: partType];
 			
-			LEOInitWILDObjectValue( &inContext->stackEndPtr->object, thePart, kLEOInvalidateReferences, inContext );
+			WILDInitObjectValue( &inContext->stackEndPtr->object, thePart, kLEOInvalidateReferences, inContext );
 			inContext->stackEndPtr ++;
 		}
 	}
@@ -610,7 +610,7 @@ void	WILDThisStackInstruction( LEOContext* inContext )
 	if( frontStack )
 	{
 		inContext->stackEndPtr++;
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, frontStack, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, frontStack, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -629,7 +629,7 @@ void	WILDThisBackgroundInstruction( LEOContext* inContext )
 	if( theBackground )
 	{
 		inContext->stackEndPtr++;
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -648,7 +648,7 @@ void	WILDThisCardInstruction( LEOContext* inContext )
 	if( theCard )
 	{
 		inContext->stackEndPtr++;
-		LEOInitWILDObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{

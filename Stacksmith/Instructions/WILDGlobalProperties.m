@@ -137,7 +137,7 @@ void	LEOPushMachineInstruction( LEOContext* inContext )
 void	LEOPushTargetInstruction( LEOContext* inContext )
 {
 	LEOValuePtr	newVal = LEOPushValueOnStack( inContext, NULL );
-	LEOInitWILDObjectValue( &newVal->object, ((WILDScriptContextUserData*) inContext->userData).target, kLEOInvalidateReferences, inContext );
+	WILDInitObjectValue( &newVal->object, ((WILDScriptContextUserData*) inContext->userData).target, kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }

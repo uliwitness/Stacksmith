@@ -17,44 +17,44 @@ NSString*	WILDUserPropertyNameKey = @"WILDUserPropertyNameKey";
 NSString*	WILDUserPropertyValueKey = @"WILDUserPropertyValueKey";
 
 
-LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
+LEONumber	WILDGetObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
 
-LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inContext );
+LEOInteger	WILDGetObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inContext );
 
-const char*	LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext );
+const char*	WILDGetObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext );
 
-bool		LEOGetWILDObjectValueAsBoolean( LEOValuePtr self, struct LEOContext* inContext );
+bool		WILDGetObjectValueAsBoolean( LEOValuePtr self, struct LEOContext* inContext );
 
-void		LEOGetWILDObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType,
+void		WILDGetObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType,
 										size_t inRangeStart, size_t inRangeEnd,
 										char* outBuf, size_t bufSize, struct LEOContext* inContext );
 
-void	LEOSetWILDObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, struct LEOContext* inContext );
-void	LEOSetWILDObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, struct LEOContext* inContext );
-void	LEOSetWILDObjectValueAsString( LEOValuePtr self, const char* inBuf, size_t inBufLen, struct LEOContext* inContext );
-void	LEOSetWILDObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LEOContext* inContext );
-void	LEOSetWILDObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
+void	WILDSetObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, struct LEOContext* inContext );
+void	WILDSetObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, struct LEOContext* inContext );
+void	WILDSetObjectValueAsString( LEOValuePtr self, const char* inBuf, size_t inBufLen, struct LEOContext* inContext );
+void	WILDSetObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LEOContext* inContext );
+void	WILDSetObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
 								size_t inRangeStart, size_t inRangeEnd,
 								const char* inBuf, struct LEOContext* inContext );
-void	LEOSetWILDObjectValuePredeterminedRangeAsString( LEOValuePtr self,
+void	WILDSetObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 								size_t inRangeStart, size_t inRangeEnd,
 								const char* inBuf, struct LEOContext* inContext );
-void	LEOInitWILDObjectValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );	// dest is an uninitialized value.
-void	LEOInitWILDObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );	// dest is an uninitialized value.
-void	LEOPutWILDObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext );	// dest must be a VALID, initialized value!
-void	LEODetermineChunkRangeOfSubstringOfWILDObjectValue( LEOValuePtr self, size_t *ioBytesStart, size_t *ioBytesEnd,
+void	WILDInitObjectValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );	// dest is an uninitialized value.
+void	WILDInitObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );	// dest is an uninitialized value.
+void	WILDPutObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext );	// dest must be a VALID, initialized value!
+void	WILDDetermineChunkRangeOfSubstringOfObjectValue( LEOValuePtr self, size_t *ioBytesStart, size_t *ioBytesEnd,
 													size_t *ioBytesDelStart, size_t *ioBytesDelEnd,
 													LEOChunkType inType, size_t inRangeStart, size_t inRangeEnd,
 													struct LEOContext* inContext );
-void		LEOGetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, size_t startOffset, size_t endOffset, LEOValuePtr outValue, struct LEOContext* inContext );
-void		LEOSetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext );
+void		WILDGetObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, size_t startOffset, size_t endOffset, LEOValuePtr outValue, struct LEOContext* inContext );
+void		WILDSetObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext );
 
-void	LEOCleanUpWILDObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
+void		WILDCleanUpObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
 
 
-bool	LEOCanGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
-LEOValuePtr	LEOGetWILDObjectValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
-size_t	LEOGetWILDObjectKeyCount( LEOValuePtr self, struct LEOContext* inContext );
+bool	WILDCanGetObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
+LEOValuePtr	WILDGetObjectValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
+size_t	WILDGetObjectKeyCount( LEOValuePtr self, struct LEOContext* inContext );
 
 
 
@@ -63,42 +63,42 @@ struct LEOValueType	kLeoValueTypeWILDObject =
 	"object",
 	sizeof(struct LEOValueObject),
 	
-	LEOGetWILDObjectValueAsNumber,
-	LEOGetWILDObjectValueAsInteger,
-	LEOGetWILDObjectValueAsString,
-	LEOGetWILDObjectValueAsBoolean,
-	LEOGetWILDObjectValueAsRangeOfString,
+	WILDGetObjectValueAsNumber,
+	WILDGetObjectValueAsInteger,
+	WILDGetObjectValueAsString,
+	WILDGetObjectValueAsBoolean,
+	WILDGetObjectValueAsRangeOfString,
 	
-	LEOSetWILDObjectValueAsNumber,
-	LEOSetWILDObjectValueAsInteger,
-	LEOSetWILDObjectValueAsString,
-	LEOSetWILDObjectValueAsBoolean,
-	LEOSetWILDObjectValueRangeAsString,
-	LEOSetWILDObjectValuePredeterminedRangeAsString,
+	WILDSetObjectValueAsNumber,
+	WILDSetObjectValueAsInteger,
+	WILDSetObjectValueAsString,
+	WILDSetObjectValueAsBoolean,
+	WILDSetObjectValueRangeAsString,
+	WILDSetObjectValuePredeterminedRangeAsString,
 	
-	LEOInitWILDObjectValueCopy,
-	LEOInitWILDObjectValueSimpleCopy,
-	LEOPutWILDObjectValueIntoValue,
+	WILDInitObjectValueCopy,
+	WILDInitObjectValueSimpleCopy,
+	WILDPutObjectValueIntoValue,
 	LEOCantFollowReferencesAndReturnValueOfType,
-	LEODetermineChunkRangeOfSubstringOfWILDObjectValue,
+	WILDDetermineChunkRangeOfSubstringOfObjectValue,
 	
-	LEOCleanUpWILDObjectValue,
+	WILDCleanUpObjectValue,
 	
-	LEOCanGetWILDObjectValueAsNumber,
+	WILDCanGetObjectValueAsNumber,
 	
-	LEOGetWILDObjectValueForKey,
+	WILDGetObjectValueForKey,
 	LEOCantSetValueForKey,
 	LEOSetStringLikeValueAsArray,
-	LEOGetWILDObjectKeyCount,
+	WILDGetObjectKeyCount,
 	
-	LEOGetWILDObjectValueForKeyOfRange,
-	LEOSetWILDObjectValueForKeyOfRange,
+	WILDGetObjectValueForKeyOfRange,
+	WILDSetObjectValueForKeyOfRange,
 };
 
 
 
 
-void	LEOInitWILDObjectValue( struct LEOValueObject* inStorage, id<WILDObject> wildObject, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
+void	WILDInitObjectValue( struct LEOValueObject* inStorage, id<WILDObject> wildObject, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
 {
 	inStorage->base.isa = &kLeoValueTypeWILDObject;
 	if( keepReferences == kLEOInvalidateReferences )
@@ -107,7 +107,7 @@ void	LEOInitWILDObjectValue( struct LEOValueObject* inStorage, id<WILDObject> wi
 }
 
 
-LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
+LEONumber	WILDGetObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
 {
 	char*		endPtr = NULL;
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
@@ -123,7 +123,7 @@ LEONumber	LEOGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* in
 }
 
 
-LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inContext )
+LEOInteger	WILDGetObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inContext )
 {
 	char*		endPtr = NULL;
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
@@ -139,7 +139,7 @@ LEOInteger	LEOGetWILDObjectValueAsInteger( LEOValuePtr self, struct LEOContext* 
 }
 
 
-const char*	LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext )
+const char*	WILDGetObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext )
 {
 	const char*		str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
 	if( !str )
@@ -157,7 +157,7 @@ const char*	LEOGetWILDObjectValueAsString( LEOValuePtr self, char* outBuf, size_
 }
 
 
-bool	LEOGetWILDObjectValueAsBoolean( LEOValuePtr self, struct LEOContext* inContext )
+bool	WILDGetObjectValueAsBoolean( LEOValuePtr self, struct LEOContext* inContext )
 {
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
 	if( !str )
@@ -175,7 +175,7 @@ bool	LEOGetWILDObjectValueAsBoolean( LEOValuePtr self, struct LEOContext* inCont
 }
 
 
-void	LEOGetWILDObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType,
+void	WILDGetObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType,
 										size_t inRangeStart, size_t inRangeEnd,
 										char* outBuf, size_t bufSize, struct LEOContext* inContext )
 {
@@ -201,7 +201,7 @@ void	LEOGetWILDObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType
 }
 
 
-void	LEOSetWILDObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, struct LEOContext* inContext )
+void	WILDSetObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, struct LEOContext* inContext )
 {
 	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithFormat: @"%g", inNumber]] )
 	{
@@ -210,7 +210,7 @@ void	LEOSetWILDObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, struct
 }
 
 
-void	LEOSetWILDObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, struct LEOContext* inContext )
+void	WILDSetObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, struct LEOContext* inContext )
 {
 	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithFormat: @"%lld", inNumber]] )
 	{
@@ -219,7 +219,7 @@ void	LEOSetWILDObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, stru
 }
 
 
-void	LEOSetWILDObjectValueAsString( LEOValuePtr self, const char* inBuf, size_t inBufLen, struct LEOContext* inContext )
+void	WILDSetObjectValueAsString( LEOValuePtr self, const char* inBuf, size_t inBufLen, struct LEOContext* inContext )
 {
 	if( ![(id<WILDObject>)self->object.object setTextContents: [[[NSString alloc] initWithBytes: inBuf length:inBufLen encoding: NSUTF8StringEncoding] autorelease]] )
 	{
@@ -228,7 +228,7 @@ void	LEOSetWILDObjectValueAsString( LEOValuePtr self, const char* inBuf, size_t 
 }
 
 
-void	LEOSetWILDObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LEOContext* inContext )
+void	WILDSetObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LEOContext* inContext )
 {
 	if( ![(id<WILDObject>)self->object.object setTextContents: inBoolean ? @"true" : @"false"] )
 	{
@@ -237,7 +237,7 @@ void	LEOSetWILDObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LE
 }
 
 
-void	LEOSetWILDObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
+void	WILDSetObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
 								size_t inRangeStart, size_t inRangeEnd,
 								const char* inBuf, struct LEOContext* inContext )
 {
@@ -282,7 +282,7 @@ void	LEOSetWILDObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
 }
 
 
-void	LEOSetWILDObjectValuePredeterminedRangeAsString( LEOValuePtr self,
+void	WILDSetObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 								size_t inRangeStart, size_t inRangeEnd,
 								const char* inBuf, struct LEOContext* inContext )
 {
@@ -314,7 +314,7 @@ void	LEOSetWILDObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 }
 
 
-void	LEOInitWILDObjectValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
+void	WILDInitObjectValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
 {
 	dest->base.isa = &kLeoValueTypeWILDObject;
 	if( keepReferences == kLEOInvalidateReferences )
@@ -323,7 +323,7 @@ void	LEOInitWILDObjectValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepRefe
 }
 
 
-void	LEOInitWILDObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
+void	WILDInitObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
 {
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
 	if( !str )
@@ -335,7 +335,7 @@ void	LEOInitWILDObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKe
 }
 
 
-void	LEOPutWILDObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext )
+void	WILDPutObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext )
 {
 	NSString*	str = [(id<WILDObject>)self->object.object textContents];
 	if( !str )
@@ -348,7 +348,7 @@ void	LEOPutWILDObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct 
 }
 
 
-void	LEODetermineChunkRangeOfSubstringOfWILDObjectValue( LEOValuePtr self, size_t *ioBytesStart, size_t *ioBytesEnd,
+void	WILDDetermineChunkRangeOfSubstringOfObjectValue( LEOValuePtr self, size_t *ioBytesStart, size_t *ioBytesEnd,
 													size_t *ioBytesDelStart, size_t *ioBytesDelEnd,
 													LEOChunkType inType, size_t inRangeStart, size_t inRangeEnd,
 													struct LEOContext* inContext )
@@ -384,7 +384,7 @@ void	LEODetermineChunkRangeOfSubstringOfWILDObjectValue( LEOValuePtr self, size_
 }
 
 
-void	LEOCleanUpWILDObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
+void	WILDCleanUpObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
 {
 	self->base.isa = NULL;
 	if( self->object.object )
@@ -398,7 +398,7 @@ void	LEOCleanUpWILDObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepRefe
 }
 
 
-bool	LEOCanGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
+bool	WILDCanGetObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
 {
 	const char*		str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
 	if( !str )
@@ -417,19 +417,19 @@ bool	LEOCanGetWILDObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inCo
 }
 
 
-LEOValuePtr	LEOGetWILDObjectValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
+LEOValuePtr	WILDGetObjectValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
 {
 	return NULL;
 }
 
 
-size_t	LEOGetWILDObjectKeyCount( LEOValuePtr self, struct LEOContext* inContext )
+size_t	WILDGetObjectKeyCount( LEOValuePtr self, struct LEOContext* inContext )
 {
 	return 0;
 }
 
 
-void		LEOGetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, size_t startOffset, size_t endOffset, LEOValuePtr outValue, struct LEOContext* inContext )
+void		WILDGetObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, size_t startOffset, size_t endOffset, LEOValuePtr outValue, struct LEOContext* inContext )
 {
 	id<WILDObject>		theObject = (id<WILDObject>) self->object.object;
 	
@@ -442,7 +442,7 @@ void		LEOGetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName,
 }
 
 
-void		LEOSetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext )
+void		WILDSetObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext )
 {
 	id<WILDObject>		theObject = (id<WILDObject>) self->object.object;
 	NSString		*	theKeyName = [NSString stringWithUTF8String: keyName];
@@ -458,7 +458,7 @@ void		LEOSetWILDObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName,
 }
 
 
-struct LEOScript*	LEOForgeScriptGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext )
+struct LEOScript*	WILDGetParentScript( struct LEOScript* inScript, struct LEOContext* inContext )
 {
 	struct LEOScript*	theScript = NULL;
 	id<WILDObject>		theObject = nil;

@@ -14,7 +14,6 @@
 #import "UKRandomInteger.h"
 #import "WILDRecentCardsList.h"
 #import "WILDNotifications.h"
-#import "Forge.h"
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
 #import "WILDDocument.h"

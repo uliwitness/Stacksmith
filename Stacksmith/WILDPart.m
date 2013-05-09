@@ -883,11 +883,11 @@
 		{
 			if( mIDForScripts == kLEOObjectIDINVALID )
 			{
-				LEOInitWILDObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
+				WILDInitObjectValue( &mValueForScripts, self, kLEOInvalidateReferences, NULL );
 				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( [mStack scriptContextGroupObject], &mValueForScripts );
 				mSeedForScripts = LEOContextGroupGetSeedForObjectID( [mStack scriptContextGroupObject], mIDForScripts );
 			}
-			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, LEOForgeScriptGetParentScript );
+			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, WILDGetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, [mStack scriptContextGroupObject], parseTree, fileID );
 			
 			#if REMOTE_DEBUGGER
