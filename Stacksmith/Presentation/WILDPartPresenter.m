@@ -11,6 +11,7 @@
 #import "WILDPartView.h"
 #import "WILDPart.h"
 #import "UKHelperMacros.h"
+#import "WILDCardView.h"
 
 
 @implementation WILDPartPresenter
@@ -85,20 +86,39 @@
 
 -(NSRect)	selectionFrame
 {
-	return [self partRectForPartViewFrame: [mPartView frame]];	// Sensible fallback.
+	WILDGuidelineView	*	gv = [mPartView enclosingCardView].guidelineView;
+	NSRect	theBox = [gv convertRect: [mPartView bounds] fromView: mPartView];
+	return [self partRectForPartViewFrame: theBox];
+}
+
+
+-(NSEdgeInsets)	partToViewInsets
+{
+	return NSEdgeInsetsMake(0, 0, 0, 0);
 }
 
 
 -(NSRect)	partRectForPartViewFrame: (NSRect)inRect
 {
-	return NSInsetRect( inRect, 2, 2 );
+	NSEdgeInsets	partToViewInsets = [self partToViewInsets];
+	inRect.origin.x += partToViewInsets.left;
+	inRect.origin.y += partToViewInsets.bottom;
+	inRect.size.width -= partToViewInsets.left +partToViewInsets.right;
+	inRect.size.height -= partToViewInsets.top +partToViewInsets.bottom;
+	return inRect;
 }
 
 
 -(NSRect)	partViewFrameForPartRect: (NSRect)inLayoutRect
 {
-	return NSInsetRect(inLayoutRect, -2, -2 );
+	NSEdgeInsets	partToViewInsets = [self partToViewInsets];
+	inLayoutRect.origin.x -= partToViewInsets.left;
+	inLayoutRect.origin.y -= partToViewInsets.bottom;
+	inLayoutRect.size.width += partToViewInsets.left +partToViewInsets.right;
+	inLayoutRect.size.height += partToViewInsets.top +partToViewInsets.bottom;
+	return inLayoutRect;
 }
+
 
 -(void)		removeSubPartView: (WILDPartView*)inView
 {

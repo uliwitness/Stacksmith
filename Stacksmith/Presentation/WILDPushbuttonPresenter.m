@@ -18,7 +18,7 @@
 {
 	
 	mMainView = [[WILDButtonView alloc] initWithFrame: NSMakeRect(0, 0, 100, 23)];
-	NSRect		box = [self partViewFrameForPartRect: [mPartView bounds]];
+	NSRect		box = [mPartView bounds];
 	[mMainView setFrame: box];
 	[mMainView setBordered: YES];
 	[mMainView setBezelStyle: NSRoundedBezelStyle];
@@ -36,7 +36,7 @@
 	
 	[mPartView addSubview: mMainView];
 	
-	NSRect	theBox = [self partViewFrameForPartRect: mPartView.part.quartzRectangle];
+	NSRect	theBox = mPartView.part.quartzRectangle;
 	[mPartView setFrame: theBox];
 	
 	[self refreshProperties];
@@ -128,21 +128,9 @@
 }
 
 
--(NSRect)	selectionFrame
+-(NSEdgeInsets)	partToViewInsets
 {
-	return [[mPartView enclosingCardView] convertRect: [mMainView alignmentRectForFrame: [mMainView frame]] fromView: mPartView];
-}
-
-
--(NSRect)	partRectForPartViewFrame:(NSRect)inRect
-{
-	return [mMainView alignmentRectForFrame: inRect];
-}
-
-
--(NSRect)	partViewFrameForPartRect:(NSRect)inLayoutRect
-{
-	return [mMainView frameForAlignmentRect: inLayoutRect];
+	return NSEdgeInsetsMake(3, 6, 5, 6);
 }
 
 @end
