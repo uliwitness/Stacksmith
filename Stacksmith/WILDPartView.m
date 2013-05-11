@@ -443,8 +443,8 @@
 	}
 	
 	// Guidelines at card center (horz & vert):
-	CGFloat	hCenter = NSMidX([guidelineView bounds]);
-	CGFloat	vCenter = NSMidY([guidelineView bounds]);
+	CGFloat	hCenter = containerLeft +truncf((containerRight -containerLeft) /2);
+	CGFloat	vCenter = containerBottom +truncf((containerTop -containerBottom) /2);
 	if( ((hCenter -6) < NSMidX(inBox)) && ((hCenter +6) > NSMidX(inBox)) )
 	{
 		CGFloat		horzDiff = NSMidX(inBox) -hCenter;
@@ -613,37 +613,46 @@
 	
 	[guidelineView removeAllGuidelines];
 	
-	CGFloat					left = [guidelineView bounds].origin.x +20,
-							bottom = [guidelineView bounds].origin.y +20;
-	CGFloat					top = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -20,
-							right = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -20; 
+	CGFloat					containerLeft = [guidelineView bounds].origin.x +20,
+							containerBottom = [guidelineView bounds].origin.y +20;
+	CGFloat					containerTop = [guidelineView bounds].origin.y +[guidelineView bounds].size.height -20,
+							containerRight = [guidelineView bounds].origin.x +[guidelineView bounds].size.width -20;
+	
+	if( self.part.owningPart )	// Not top-level in window?
+	{
+		NSRect	ownerRect = [self.enclosingPartView selectionRect];
+		containerLeft = NSMinX(ownerRect) +20;
+		containerBottom = NSMinY(ownerRect) +20;
+		containerRight = NSMaxX(ownerRect) -20;
+		containerBottom = NSMaxY(ownerRect) -20;
+	}
 	
 	// Show guidelines at 12px distance from edges & snap to them:
 	//	(Aqua standard distance to window edge)
-	if( (inHandle & WILDPartGrabHandleLeft) && ((left -6) < NSMinX(inBox)) && ((left +6) > NSMinX(inBox)) )
+	if( (inHandle & WILDPartGrabHandleLeft) && ((containerLeft -6) < NSMinX(inBox)) && ((containerLeft +6) > NSMinX(inBox)) )
 	{
-		[guidelineView addGuidelineAt: left horizontal: NO color: [NSColor blueColor]];
-		inBigBox->origin.x -= NSMinX(inBox) -left;
+		[guidelineView addGuidelineAt: containerLeft horizontal: NO color: [NSColor blueColor]];
+		inBigBox->origin.x -= NSMinX(inBox) -containerLeft;
 	}
-	if( (inHandle & WILDPartGrabHandleRight) && ((right -6) < NSMaxX(inBox)) && ((right +6) > NSMaxX(inBox)) )
+	if( (inHandle & WILDPartGrabHandleRight) && ((containerRight -6) < NSMaxX(inBox)) && ((containerRight +6) > NSMaxX(inBox)) )
 	{
-		[guidelineView addGuidelineAt: right horizontal: NO color: [NSColor blueColor]];
-		inBigBox->size.width += NSMaxX(inBox) -right;
+		[guidelineView addGuidelineAt: containerRight horizontal: NO color: [NSColor blueColor]];
+		inBigBox->size.width += NSMaxX(inBox) -containerRight;
 	}
-	if( (inHandle & WILDPartGrabHandleTop) && ((top -6) < NSMaxY(inBox)) && ((top +6) > NSMaxY(inBox)) )
+	if( (inHandle & WILDPartGrabHandleTop) && ((containerTop -6) < NSMaxY(inBox)) && ((containerTop +6) > NSMaxY(inBox)) )
 	{
-		[guidelineView addGuidelineAt: top horizontal: YES color: [NSColor blueColor]];
-		inBigBox->origin.y -= NSMaxY(inBox) -top;
+		[guidelineView addGuidelineAt: containerTop horizontal: YES color: [NSColor blueColor]];
+		inBigBox->origin.y -= NSMaxY(inBox) -containerTop;
 	}
-	if( (inHandle & WILDPartGrabHandleBottom) && ((bottom -6) < NSMinY(inBox)) && ((bottom +6) > NSMinY(inBox)) )
+	if( (inHandle & WILDPartGrabHandleBottom) && ((containerBottom -6) < NSMinY(inBox)) && ((containerBottom +6) > NSMinY(inBox)) )
 	{
-		[guidelineView addGuidelineAt: bottom horizontal: YES color: [NSColor blueColor]];
-		inBigBox->size.height += NSMinY(inBox) -bottom;
+		[guidelineView addGuidelineAt: containerBottom horizontal: YES color: [NSColor blueColor]];
+		inBigBox->size.height += NSMinY(inBox) -containerBottom;
 	}
 	
 	// Guidelines at card center (horz & vert):
-	CGFloat	hCenter = NSMidX([guidelineView bounds]);
-	CGFloat	vCenter = NSMidY([guidelineView bounds]);
+	CGFloat	hCenter = containerLeft +truncf((containerRight -containerLeft) /2);
+	CGFloat	vCenter = containerBottom +truncf((containerTop -containerBottom) /2);
 	if( ((hCenter -6) < NSMidX(inBox)) && ((hCenter +6) > NSMidX(inBox)) )
 	{
 		[guidelineView addGuidelineAt: hCenter horizontal: NO color: [NSColor blueColor]];
@@ -671,7 +680,7 @@
 {
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	BOOL					keepDragging = YES;
-	NSRect					newBox = [self frame];
+	NSRect					newBox = [self partRectForPartViewFrame: [self frame]];
 	
 	while( keepDragging )
 	{
@@ -695,7 +704,7 @@
 					NSRect	correctedBox = newBox;
 					[self setUpGuidelinesForMovingAndSnapRect: &correctedBox];
 					
-					[self setFrame: correctedBox];
+					[self setFrame: [self partViewFrameForPartRect: correctedBox]];
 					break;
 				}
 			}
@@ -720,7 +729,7 @@
 {
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	BOOL					keepDragging = YES;
-	NSRect					frame = [self partViewFrameForPartRect: mPart.quartzRectangle];
+	NSRect					frame = [self partRectForPartViewFrame: self.frame];
 	CGFloat					titleWidth = [mPart titleWidth];
 	
 	while( keepDragging )
@@ -764,7 +773,7 @@
 					
 					NSRect	newBox = frame;
 					[self setUpGuidelinesForResizingWithHandle: inHandle andSnapRect: &newBox ];
-					[self setFrame: newBox];
+					[self setFrame: [self partViewFrameForPartRect: newBox]];
 					break;
 				}
 			}
@@ -1221,99 +1230,99 @@
 }
 
 
--(void)	loadPopupButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
-{
-	NSRect			partRect = [currPart quartzRectangle];
-	NSTextField*	label = nil;
-	[self setHidden: ![currPart visible]];
-	[self setWantsLayer: YES];
-	[self setPart: currPart];
-	partRect.origin = NSMakePoint( 2, 2 );
-	
-	NSRect		popupBox = partRect;
-	if( [currPart titleWidth] > 0 )
-	{
-		NSRect	titleBox = popupBox;
-		titleBox.size.width = 10000;
-		popupBox.origin.x += [currPart titleWidth];
-		popupBox.size.width -= [currPart titleWidth];
-		
-		label = [[[WILDClickablePopUpButtonLabel alloc] initWithFrame: titleBox] autorelease];
-		[label setWantsLayer: YES];
-		[label setEditable: NO];
-		[label setSelectable: NO];
-		[label setDrawsBackground: NO];
-		[label setBezeled: NO];
-		[label setBordered: NO];
-		[label setAlignment: NSRightTextAlignment];
-		[[label cell] setWraps: NO];
-		if( [currPart showName] )
-			[label setStringValue: [currPart name]];
-		[label setEnabled: [currPart isEnabled]];
-		[label setFont: [currPart textFont]];
-		[label setFrame: titleBox];
-		[label sizeToFit];
-		titleBox = [label frame];
-		titleBox.size.width = [currPart titleWidth];
-		titleBox.origin.y = truncf((partRect.size.height -titleBox.size.height) /2) +2;	// account for shadow
-		titleBox.origin.x = partRect.origin.x;
-		[label setFrame: titleBox];
-		
-		[self addSubview: label];
-		[label setAutoresizingMask: NSViewMinYMargin | NSViewMaxYMargin];
-		
-		[self setHelperView: label];
-	}
-	
-	NSPopUpButton	*	bt = [[NSPopUpButton alloc] initWithFrame: popupBox];
-	[bt setWantsLayer: YES];
-	[bt setFont: [currPart textFont]];
-	[bt setTarget: self];
-	[bt setAction: @selector(updateOnClick:)];
-	[bt setEnabled: [currPart isEnabled]];
-	
-	NSColor	*	shadowColor = [currPart shadowColor];
-	if( [shadowColor alphaComponent] > 0.0 )
-	{
-		CGColorRef theColor = [shadowColor CGColor];
-		[[self layer] setShadowColor: theColor];
-		[[self layer] setShadowOpacity: 1.0];
-		[[self layer] setShadowOffset: [currPart shadowOffset]];
-		[[self layer] setShadowRadius: [currPart shadowBlurRadius]];
-	}
-	else
-		[[self layer] setShadowOpacity: 0.0];
-	
-	NSArray*	popupItems = ([contents text] != nil) ? [contents listItems] : [bgContents listItems];
-	for( NSString* itemName in popupItems )
-	{
-		if( [itemName hasPrefix: @"-"] )
-			[[bt menu] addItem: [NSMenuItem separatorItem]];
-		else
-			[bt addItemWithTitle: itemName];
-	}
-	NSUInteger selIndex = [[currPart selectedListItemIndexes] firstIndex];
-	if( selIndex == NSNotFound )
-		selIndex = 0;
-	[bt selectItemAtIndex: selIndex];
-	[bt setState: [currPart highlighted] ? NSOnState : NSOffState];
-	
-	if( [self helperView] )
-		[(WILDClickablePopUpButtonLabel*)[self helperView] setPopUpButton: bt];
-	
-	[self addSubview: bt];
-	[bt setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-	
-	[self setMainView: bt];
-	
-	if( label )
-	{
-		[[bt cell] accessibilitySetOverrideValue: [label cell] forAttribute: NSAccessibilityTitleUIElementAttribute];
-	}
-	
-	[bt release];
-}
+//-(void)	loadPopupButton: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
+//			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
+//{
+//	NSRect			partRect = [currPart quartzRectangle];
+//	NSTextField*	label = nil;
+//	[self setHidden: ![currPart visible]];
+//	[self setWantsLayer: YES];
+//	[self setPart: currPart];
+//	partRect.origin = NSMakePoint( 2, 2 );
+//	
+//	NSRect		popupBox = partRect;
+//	if( [currPart titleWidth] > 0 )
+//	{
+//		NSRect	titleBox = popupBox;
+//		titleBox.size.width = 10000;
+//		popupBox.origin.x += [currPart titleWidth];
+//		popupBox.size.width -= [currPart titleWidth];
+//		
+//		label = [[[WILDClickablePopUpButtonLabel alloc] initWithFrame: titleBox] autorelease];
+//		[label setWantsLayer: YES];
+//		[label setEditable: NO];
+//		[label setSelectable: NO];
+//		[label setDrawsBackground: NO];
+//		[label setBezeled: NO];
+//		[label setBordered: NO];
+//		[label setAlignment: NSRightTextAlignment];
+//		[[label cell] setWraps: NO];
+//		if( [currPart showName] )
+//			[label setStringValue: [currPart name]];
+//		[label setEnabled: [currPart isEnabled]];
+//		[label setFont: [currPart textFont]];
+//		[label setFrame: titleBox];
+//		[label sizeToFit];
+//		titleBox = [label frame];
+//		titleBox.size.width = [currPart titleWidth];
+//		titleBox.origin.y = truncf((partRect.size.height -titleBox.size.height) /2) +2;	// account for shadow
+//		titleBox.origin.x = partRect.origin.x;
+//		[label setFrame: titleBox];
+//		
+//		[self addSubview: label];
+//		[label setAutoresizingMask: NSViewMinYMargin | NSViewMaxYMargin];
+//		
+//		[self setHelperView: label];
+//	}
+//	
+//	NSPopUpButton	*	bt = [[NSPopUpButton alloc] initWithFrame: popupBox];
+//	[bt setWantsLayer: YES];
+//	[bt setFont: [currPart textFont]];
+//	[bt setTarget: self];
+//	[bt setAction: @selector(updateOnClick:)];
+//	[bt setEnabled: [currPart isEnabled]];
+//	
+//	NSColor	*	shadowColor = [currPart shadowColor];
+//	if( [shadowColor alphaComponent] > 0.0 )
+//	{
+//		CGColorRef theColor = [shadowColor CGColor];
+//		[[self layer] setShadowColor: theColor];
+//		[[self layer] setShadowOpacity: 1.0];
+//		[[self layer] setShadowOffset: [currPart shadowOffset]];
+//		[[self layer] setShadowRadius: [currPart shadowBlurRadius]];
+//	}
+//	else
+//		[[self layer] setShadowOpacity: 0.0];
+//	
+//	NSArray*	popupItems = ([contents text] != nil) ? [contents listItems] : [bgContents listItems];
+//	for( NSString* itemName in popupItems )
+//	{
+//		if( [itemName hasPrefix: @"-"] )
+//			[[bt menu] addItem: [NSMenuItem separatorItem]];
+//		else
+//			[bt addItemWithTitle: itemName];
+//	}
+//	NSUInteger selIndex = [[currPart selectedListItemIndexes] firstIndex];
+//	if( selIndex == NSNotFound )
+//		selIndex = 0;
+//	[bt selectItemAtIndex: selIndex];
+//	[bt setState: [currPart highlighted] ? NSOnState : NSOffState];
+//	
+//	if( [self helperView] )
+//		[(WILDClickablePopUpButtonLabel*)[self helperView] setPopUpButton: bt];
+//	
+//	[self addSubview: bt];
+//	[bt setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+//	
+//	[self setMainView: bt];
+//	
+//	if( label )
+//	{
+//		[[bt cell] accessibilitySetOverrideValue: [label cell] forAttribute: NSAccessibilityTitleUIElementAttribute];
+//	}
+//	
+//	[bt release];
+//}
 
 
 -(void)	quartzRectanglePropertyDidChangeOfPart: (WILDPart*)inPart
@@ -1361,228 +1370,228 @@
 }
 
 
--(void)	loadEditField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
-{
-	NSRect						partRect = [currPart quartzRectangle];
-	[self setHidden: ![currPart visible]];
-	[self setWantsLayer: YES];
-	[self setPart: currPart];
-	partRect.origin = NSMakePoint( 2, 2 );
-	
-	WILDTextView	*	tv = [[WILDTextView alloc] initWithFrame: partRect];
-	[tv setFont: [currPart textFont]];
-	[tv setWantsLayer: YES];
-	[tv setDrawsBackground: NO];
-	[tv setUsesFindPanel: NO];
-	[tv setDelegate: self];
-	[tv setAlignment: [currPart textAlignment]];
-	if( [currPart wideMargins] )
-		[tv setTextContainerInset: NSMakeSize( 5, 2 )];
-	[tv setRepresentedPart: currPart];
-	
-	NSAttributedString*	attrStr = [contents styledTextForPart: currPart];
-	if( attrStr )
-		[[tv textStorage] setAttributedString: attrStr];
-	else
-	{
-		NSString*	theText = [contents text];
-		if( theText )
-			[tv setString: [contents text]];
-	}
-	
-	// A field can be edited if:
-	//	It is a card field and its lockText is FALSE.
-	//	It is a bg field, its lockText is FALSE its sharedText is TRUE and we're editing the background.
-	//	It is a bg field, its lockText is FALSE and its sharedText is FALSE.
-	BOOL		shouldBeEditable = ![currPart lockText] && (![currPart sharedText] || backgroundEditMode);
-	if( ![currPart isEnabled] )
-		shouldBeEditable = NO;
-	[tv setEditable: shouldBeEditable];
-	[tv setSelectable: shouldBeEditable];
-	
-	WILDScrollView*	sv = [[[WILDScrollView alloc] initWithFrame: partRect] autorelease];
-	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
-	[sv setWantsLayer: YES];
-	NSRect			txBox = partRect;
-	txBox.origin = NSZeroPoint;
-	if( [[currPart partStyle] isEqualToString: @"transparent"] )
-	{
-		[sv setBorderType: NSNoBorder];
-		[sv setDrawsBackground: NO];
-		[tv setDrawsBackground: NO];
-	}
-	else if( [[currPart partStyle] isEqualToString: @"opaque"] )
-	{
-		[sv setBorderType: NSNoBorder];
-		[sv setBackgroundColor: [NSColor whiteColor]];
-	}
-	else if( [[currPart partStyle] isEqualToString: @"standard"] )
-	{
-		[sv setBorderType: NSBezelBorder];
-		[sv setBackgroundColor: [NSColor whiteColor]];
-	}
-	else if( [[currPart partStyle] isEqualToString: @"roundrect"] )
-	{
-		[sv setBorderType: NSBezelBorder];
-		[sv setBackgroundColor: [NSColor whiteColor]];
-	}
-	else if( [[currPart partStyle] isEqualToString: @"scrolling"] )
-	{
-		txBox.size.width -= 15;
-		[sv setBorderType: NSLineBorder];
-		[sv setBackgroundColor: [NSColor whiteColor]];
-	}
-	else
-	{
-		[sv setBorderType: NSLineBorder];
-		[sv setBackgroundColor: [currPart fillColor]];
-		[sv setLineColor: [currPart lineColor]];
-	}
-	[sv setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
-	[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
-	[sv setHorizontalScrollElasticity: [currPart hasHorizontalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
-	[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
-
-	NSColor	*	shadowColor = [currPart shadowColor];
-	if( [shadowColor alphaComponent] > 0.0 )
-	{
-		CGColorRef theColor = [shadowColor CGColor];
-		[[sv layer] setShadowColor: theColor];
-		[[sv layer] setShadowOpacity: 1.0];
-		[[sv layer] setShadowOffset: [currPart shadowOffset]];
-		[[sv layer] setShadowRadius: [currPart shadowBlurRadius]];
-	}
-	else
-		[[sv layer] setShadowOpacity: 0.0];
-
-	[tv setFrame: txBox];
-	[sv setDocumentView: tv];
-	[sv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-	[self addSubview: sv];
-	[self setHelperView: sv];
-	[self setMainView: tv];
-	
-	[tv release];
-}
-
-
--(void)	loadListField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
-{
-	NSRect						partRect = [currPart quartzRectangle];
-	[self setHidden: ![currPart visible]];
-	[self setWantsLayer: YES];
-	[self setPart: currPart];
-	partRect.origin = NSMakePoint( 2, 2 );
-	
-	// Build the table view:
-	NSTableView	*	tv = [[NSTableView alloc] initWithFrame: partRect];
-	[tv setWantsLayer: YES];
-	[tv setFont: [currPart textFont]];
-	[tv setAlignment: [currPart textAlignment]];
-	[tv setColumnAutoresizingStyle: NSTableViewUniformColumnAutoresizingStyle];
-	if( [currPart showLines] )
-	{
-		[tv setGridStyleMask: NSTableViewSolidHorizontalGridLineMask];
-		[tv setGridColor: [NSColor lightGrayColor]];
-	}
-	else
-		[tv setGridStyleMask: NSTableViewGridNone];
-	[tv setAllowsColumnSelection: NO];
-	[tv setAllowsMultipleSelection: [currPart canSelectMultipleLines]];
-	[tv setHeaderView: nil];
-	
-	NSTableColumn*		tc = [[NSTableColumn alloc] initWithIdentifier: @"mainColumn"];
-	NSTextFieldCell*	dc = [[NSTextFieldCell alloc] initTextCell: @"Are you my mummy?"];
-	[tc setDataCell: dc];
-	[dc release];
-	[tv addTableColumn: tc];
-	[tc release];
-	[tv setDataSource: self];
-	[tv setDelegate: self];
-	
-	// Build surrounding scroll view:
-	NSScrollView*	sv = [[[WILDScrollView alloc] initWithFrame: partRect] autorelease];
-	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
-	[sv setWantsLayer: YES];
-	NSRect			txBox = [currPart quartzRectangle];
-	txBox.origin = NSZeroPoint;
-	if( [[currPart partStyle] isEqualToString: @"transparent"] )
-	{
-		[sv setBorderType: NSNoBorder];
-		[sv setDrawsBackground: NO];
-		[tv setBackgroundColor: [NSColor clearColor]];
-	}
-	else if( [[currPart partStyle] isEqualToString: @"opaque"] )
-	{
-		[sv setBorderType: NSNoBorder];
-		[tv setBackgroundColor: [NSColor whiteColor]];
-	}
-	else if( [[currPart partStyle] isEqualToString: @"standard"] )
-	{
-		[sv setBorderType: NSBezelBorder];
-		[tv setBackgroundColor: [NSColor whiteColor]];
-	}
-	else
-	{
-		[sv setBorderType: NSLineBorder];
-		[sv setBackgroundColor: [NSColor whiteColor]];
-	}
-	[sv setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
-	[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
-	[sv setHorizontalScrollElasticity: [currPart hasHorizontalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
-	[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
-
-	NSColor	*	shadowColor = [currPart shadowColor];
-	if( [shadowColor alphaComponent] > 0.0 )
-	{
-		CGColorRef theColor = [shadowColor CGColor];
-		[[sv layer] setShadowColor: theColor];
-		[[sv layer] setShadowOpacity: 1.0];
-		[[sv layer] setShadowOffset: [currPart shadowOffset]];
-		[[sv layer] setShadowRadius: [currPart shadowBlurRadius]];
-	}
-	else
-		[[sv layer] setShadowOpacity: 0.0];
-
-	[tv setFrame: txBox];
-	[tc setWidth: txBox.size.width];
-	[tc setMaxWidth: 1000000.0];
-	[tc setMinWidth: 10.0];
-	[sv setDocumentView: tv];
-	[sv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-	[self addSubview: sv];
-	[self setHelperView: sv];
-	[self setMainView: tv];
-
-	NSIndexSet*	idxes = [currPart selectedListItemIndexes];
-	if( idxes )
-		[tv selectRowIndexes: idxes byExtendingSelection: NO];
-	
-	[tv release];
-}
-
-
--(void)	loadField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
-			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
-{
-	if( [currPart autoSelect] && [currPart lockText] )
-	{
-		[self loadListField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
-	}
-	else if( [[currPart partStyle] isEqualToString: @"transparent"] || [[currPart partStyle] isEqualToString: @"opaque"]
-		|| [[currPart partStyle] isEqualToString: @"rectangle"]
-		|| [[currPart partStyle] isEqualToString: @"standard"]
-		|| [[currPart partStyle] isEqualToString: @"roundrect"] )
-	{
-		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
-	}
-	else
-	{
-		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
-	}
-}
+//-(void)	loadEditField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
+//			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
+//{
+//	NSRect						partRect = [currPart quartzRectangle];
+//	[self setHidden: ![currPart visible]];
+//	[self setWantsLayer: YES];
+//	[self setPart: currPart];
+//	partRect.origin = NSMakePoint( 2, 2 );
+//	
+//	WILDTextView	*	tv = [[WILDTextView alloc] initWithFrame: partRect];
+//	[tv setFont: [currPart textFont]];
+//	[tv setWantsLayer: YES];
+//	[tv setDrawsBackground: NO];
+//	[tv setUsesFindPanel: NO];
+//	[tv setDelegate: self];
+//	[tv setAlignment: [currPart textAlignment]];
+//	if( [currPart wideMargins] )
+//		[tv setTextContainerInset: NSMakeSize( 5, 2 )];
+//	[tv setRepresentedPart: currPart];
+//	
+//	NSAttributedString*	attrStr = [contents styledTextForPart: currPart];
+//	if( attrStr )
+//		[[tv textStorage] setAttributedString: attrStr];
+//	else
+//	{
+//		NSString*	theText = [contents text];
+//		if( theText )
+//			[tv setString: [contents text]];
+//	}
+//	
+//	// A field can be edited if:
+//	//	It is a card field and its lockText is FALSE.
+//	//	It is a bg field, its lockText is FALSE its sharedText is TRUE and we're editing the background.
+//	//	It is a bg field, its lockText is FALSE and its sharedText is FALSE.
+//	BOOL		shouldBeEditable = ![currPart lockText] && (![currPart sharedText] || backgroundEditMode);
+//	if( ![currPart isEnabled] )
+//		shouldBeEditable = NO;
+//	[tv setEditable: shouldBeEditable];
+//	[tv setSelectable: shouldBeEditable];
+//	
+//	WILDScrollView*	sv = [[[WILDScrollView alloc] initWithFrame: partRect] autorelease];
+//	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
+//	[sv setWantsLayer: YES];
+//	NSRect			txBox = partRect;
+//	txBox.origin = NSZeroPoint;
+//	if( [[currPart partStyle] isEqualToString: @"transparent"] )
+//	{
+//		[sv setBorderType: NSNoBorder];
+//		[sv setDrawsBackground: NO];
+//		[tv setDrawsBackground: NO];
+//	}
+//	else if( [[currPart partStyle] isEqualToString: @"opaque"] )
+//	{
+//		[sv setBorderType: NSNoBorder];
+//		[sv setBackgroundColor: [NSColor whiteColor]];
+//	}
+//	else if( [[currPart partStyle] isEqualToString: @"standard"] )
+//	{
+//		[sv setBorderType: NSBezelBorder];
+//		[sv setBackgroundColor: [NSColor whiteColor]];
+//	}
+//	else if( [[currPart partStyle] isEqualToString: @"roundrect"] )
+//	{
+//		[sv setBorderType: NSBezelBorder];
+//		[sv setBackgroundColor: [NSColor whiteColor]];
+//	}
+//	else if( [[currPart partStyle] isEqualToString: @"scrolling"] )
+//	{
+//		txBox.size.width -= 15;
+//		[sv setBorderType: NSLineBorder];
+//		[sv setBackgroundColor: [NSColor whiteColor]];
+//	}
+//	else
+//	{
+//		[sv setBorderType: NSLineBorder];
+//		[sv setBackgroundColor: [currPart fillColor]];
+//		[sv setLineColor: [currPart lineColor]];
+//	}
+//	[sv setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+//	[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
+//	[sv setHorizontalScrollElasticity: [currPart hasHorizontalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+//	[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
+//
+//	NSColor	*	shadowColor = [currPart shadowColor];
+//	if( [shadowColor alphaComponent] > 0.0 )
+//	{
+//		CGColorRef theColor = [shadowColor CGColor];
+//		[[sv layer] setShadowColor: theColor];
+//		[[sv layer] setShadowOpacity: 1.0];
+//		[[sv layer] setShadowOffset: [currPart shadowOffset]];
+//		[[sv layer] setShadowRadius: [currPart shadowBlurRadius]];
+//	}
+//	else
+//		[[sv layer] setShadowOpacity: 0.0];
+//
+//	[tv setFrame: txBox];
+//	[sv setDocumentView: tv];
+//	[sv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+//	[self addSubview: sv];
+//	[self setHelperView: sv];
+//	[self setMainView: tv];
+//	
+//	[tv release];
+//}
+//
+//
+//-(void)	loadListField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
+//			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
+//{
+//	NSRect						partRect = [currPart quartzRectangle];
+//	[self setHidden: ![currPart visible]];
+//	[self setWantsLayer: YES];
+//	[self setPart: currPart];
+//	partRect.origin = NSMakePoint( 2, 2 );
+//	
+//	// Build the table view:
+//	NSTableView	*	tv = [[NSTableView alloc] initWithFrame: partRect];
+//	[tv setWantsLayer: YES];
+//	[tv setFont: [currPart textFont]];
+//	[tv setAlignment: [currPart textAlignment]];
+//	[tv setColumnAutoresizingStyle: NSTableViewUniformColumnAutoresizingStyle];
+//	if( [currPart showLines] )
+//	{
+//		[tv setGridStyleMask: NSTableViewSolidHorizontalGridLineMask];
+//		[tv setGridColor: [NSColor lightGrayColor]];
+//	}
+//	else
+//		[tv setGridStyleMask: NSTableViewGridNone];
+//	[tv setAllowsColumnSelection: NO];
+//	[tv setAllowsMultipleSelection: [currPart canSelectMultipleLines]];
+//	[tv setHeaderView: nil];
+//	
+//	NSTableColumn*		tc = [[NSTableColumn alloc] initWithIdentifier: @"mainColumn"];
+//	NSTextFieldCell*	dc = [[NSTextFieldCell alloc] initTextCell: @"Are you my mummy?"];
+//	[tc setDataCell: dc];
+//	[dc release];
+//	[tv addTableColumn: tc];
+//	[tc release];
+//	[tv setDataSource: self];
+//	[tv setDelegate: self];
+//	
+//	// Build surrounding scroll view:
+//	NSScrollView*	sv = [[[WILDScrollView alloc] initWithFrame: partRect] autorelease];
+//	[sv setDocumentCursor: [[[currPart stack] document] cursorWithID: 128]];
+//	[sv setWantsLayer: YES];
+//	NSRect			txBox = [currPart quartzRectangle];
+//	txBox.origin = NSZeroPoint;
+//	if( [[currPart partStyle] isEqualToString: @"transparent"] )
+//	{
+//		[sv setBorderType: NSNoBorder];
+//		[sv setDrawsBackground: NO];
+//		[tv setBackgroundColor: [NSColor clearColor]];
+//	}
+//	else if( [[currPart partStyle] isEqualToString: @"opaque"] )
+//	{
+//		[sv setBorderType: NSNoBorder];
+//		[tv setBackgroundColor: [NSColor whiteColor]];
+//	}
+//	else if( [[currPart partStyle] isEqualToString: @"standard"] )
+//	{
+//		[sv setBorderType: NSBezelBorder];
+//		[tv setBackgroundColor: [NSColor whiteColor]];
+//	}
+//	else
+//	{
+//		[sv setBorderType: NSLineBorder];
+//		[sv setBackgroundColor: [NSColor whiteColor]];
+//	}
+//	[sv setVerticalScrollElasticity: [currPart hasVerticalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+//	[sv setHasVerticalScroller: [currPart hasVerticalScroller]];
+//	[sv setHorizontalScrollElasticity: [currPart hasHorizontalScroller] ? NSScrollElasticityAutomatic : NSScrollElasticityNone];
+//	[sv setHasHorizontalScroller: [currPart hasHorizontalScroller]];
+//
+//	NSColor	*	shadowColor = [currPart shadowColor];
+//	if( [shadowColor alphaComponent] > 0.0 )
+//	{
+//		CGColorRef theColor = [shadowColor CGColor];
+//		[[sv layer] setShadowColor: theColor];
+//		[[sv layer] setShadowOpacity: 1.0];
+//		[[sv layer] setShadowOffset: [currPart shadowOffset]];
+//		[[sv layer] setShadowRadius: [currPart shadowBlurRadius]];
+//	}
+//	else
+//		[[sv layer] setShadowOpacity: 0.0];
+//
+//	[tv setFrame: txBox];
+//	[tc setWidth: txBox.size.width];
+//	[tc setMaxWidth: 1000000.0];
+//	[tc setMinWidth: 10.0];
+//	[sv setDocumentView: tv];
+//	[sv setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+//	[self addSubview: sv];
+//	[self setHelperView: sv];
+//	[self setMainView: tv];
+//
+//	NSIndexSet*	idxes = [currPart selectedListItemIndexes];
+//	if( idxes )
+//		[tv selectRowIndexes: idxes byExtendingSelection: NO];
+//	
+//	[tv release];
+//}
+//
+//
+//-(void)	loadField: (WILDPart*)currPart withCardContents: (WILDPartContents*)contents
+//			 withBgContents: (WILDPartContents*)bgContents forBackgroundEditing: (BOOL)backgroundEditMode
+//{
+//	if( [currPart autoSelect] && [currPart lockText] )
+//	{
+//		[self loadListField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
+//	}
+//	else if( [[currPart partStyle] isEqualToString: @"transparent"] || [[currPart partStyle] isEqualToString: @"opaque"]
+//		|| [[currPart partStyle] isEqualToString: @"rectangle"]
+//		|| [[currPart partStyle] isEqualToString: @"standard"]
+//		|| [[currPart partStyle] isEqualToString: @"roundrect"] )
+//	{
+//		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
+//	}
+//	else
+//	{
+//		[self loadEditField: currPart withCardContents: contents withBgContents: bgContents forBackgroundEditing: backgroundEditMode];
+//	}
+//}
 
 
 -(void)	loadPart: (WILDPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode

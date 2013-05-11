@@ -37,7 +37,7 @@
 	[mPartView addSubview: mMainView];
 	
 	NSRect	theBox = mPartView.part.quartzRectangle;
-	[mPartView setFrame: theBox];
+	[mPartView setFrame: [self partViewFrameForPartRect: theBox]];
 	
 	[self refreshProperties];
 }
