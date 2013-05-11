@@ -101,10 +101,10 @@
 -(NSRect)	partRectForPartViewFrame: (NSRect)inRect
 {
 	NSEdgeInsets	partToViewInsets = [self partToViewInsets];
-	inRect.origin.x += partToViewInsets.left;
-	inRect.origin.y += partToViewInsets.bottom;
-	inRect.size.width -= partToViewInsets.left +partToViewInsets.right;
-	inRect.size.height -= partToViewInsets.top +partToViewInsets.bottom;
+	inRect.origin.x -= partToViewInsets.left;
+	inRect.origin.y -= partToViewInsets.bottom;
+	inRect.size.width += partToViewInsets.left +partToViewInsets.right;
+	inRect.size.height += partToViewInsets.top +partToViewInsets.bottom;
 	return inRect;
 }
 
@@ -112,10 +112,10 @@
 -(NSRect)	partViewFrameForPartRect: (NSRect)inLayoutRect
 {
 	NSEdgeInsets	partToViewInsets = [self partToViewInsets];
-	inLayoutRect.origin.x -= partToViewInsets.left;
-	inLayoutRect.origin.y -= partToViewInsets.bottom;
-	inLayoutRect.size.width += partToViewInsets.left +partToViewInsets.right;
-	inLayoutRect.size.height += partToViewInsets.top +partToViewInsets.bottom;
+	inLayoutRect.origin.x += partToViewInsets.left;
+	inLayoutRect.origin.y += partToViewInsets.bottom;
+	inLayoutRect.size.width -= partToViewInsets.left +partToViewInsets.right;
+	inLayoutRect.size.height -= partToViewInsets.top +partToViewInsets.bottom;
 	return inLayoutRect;
 }
 

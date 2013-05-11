@@ -130,7 +130,7 @@
 
 -(NSEdgeInsets)	partToViewInsets
 {
-	return NSEdgeInsetsMake(3, 6, 5, 6);
+	return NSEdgeInsetsMake(-3, -6, -5, -6);
 }
 
 @end
