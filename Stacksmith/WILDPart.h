@@ -102,6 +102,7 @@
 @property (assign,nonatomic) NSInteger		timerInterval;
 @property (retain,nonatomic) NSString*		timerMessage;
 @property (assign,nonatomic) WILDPart*		owningPart;
+@property (assign,nonatomic) NSSize			contentSize;
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
 

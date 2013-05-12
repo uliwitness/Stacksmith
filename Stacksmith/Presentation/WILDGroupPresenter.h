@@ -12,6 +12,7 @@
 @interface WILDGroupPresenter : WILDPartPresenter
 {
 	NSBox		*		mGroupView;
+	NSScrollView*		mScrollView;
 }
 
 @end

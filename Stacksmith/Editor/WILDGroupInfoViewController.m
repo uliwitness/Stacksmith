@@ -20,11 +20,19 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 @synthesize stylePopUp = mStylePopUp;
 @synthesize showNameSwitch = mShowNameSwitch;
+@synthesize horizontalScrollerSwitch = mHorizontalScrollerSwitch;
+@synthesize verticalScrollerSwitch = mVerticalScrollerSwitch;
+@synthesize contentWidthField = mContentWidthField;
+@synthesize contentHeightField = mContentHeightField;
 
 -(void)	dealloc
 {
 	DESTROY_DEALLOC(mStylePopUp);
 	DESTROY_DEALLOC(mShowNameSwitch);
+	DESTROY_DEALLOC(mHorizontalScrollerSwitch);
+	DESTROY_DEALLOC(mVerticalScrollerSwitch);
+	DESTROY_DEALLOC(mContentWidthField);
+	DESTROY_DEALLOC(mContentHeightField);
 	
 	[super dealloc];
 }
@@ -44,6 +52,11 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mStylePopUp selectItemAtIndex: [sStylesInMenuOrder indexOfObject: [part partStyle]]];
 
 	[mShowNameSwitch setState: [part showName]];
+	[mHorizontalScrollerSwitch setState: [part hasHorizontalScroller]];
+	[mVerticalScrollerSwitch setState: [part hasVerticalScroller]];
+	NSSize	contentSize = part.contentSize;
+	[mContentWidthField setIntegerValue: contentSize.width];
+	[mContentHeightField setIntegerValue: contentSize.height];
 }
 
 
@@ -61,6 +74,34 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 }
 
 
+-(IBAction)	doHorizontalScrollerSwitchToggled: (id)sender
+{
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"horizontalScroller", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
+
+	[part setHasHorizontalScroller: [mHorizontalScrollerSwitch state] == NSOnState];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doVerticalScrollerSwitchToggled: (id)sender
+{
+	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										@"verticalScroller", WILDAffectedPropertyKey,
+										nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
+
+	[part setHasVerticalScroller: [mVerticalScrollerSwitch state] == NSOnState];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
 -(IBAction) doStylePopUpChanged:(id)sender
 {
 	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -72,6 +113,26 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(void)	controlTextDidChange: (NSNotification *)notif
+{
+	if( notif.object == mContentWidthField || notif.object == mContentHeightField )
+	{
+		NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+											PROPERTY(contentSize), WILDAffectedPropertyKey,
+											nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
+
+		NSSize		contentSize = {};
+		contentSize.width = [mContentWidthField integerValue];
+		contentSize.height = [mContentHeightField integerValue];
+		part.contentSize = contentSize;
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
+		[part updateChangeCount: NSChangeDone];
+	}
 }
 
 @end

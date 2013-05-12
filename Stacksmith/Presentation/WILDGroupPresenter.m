@@ -36,9 +36,18 @@
 		
 		mGroupView = [[NSBox alloc] initWithFrame: partRect];
 		[mPartView addSubview: mGroupView];
+		
+		if( mPartView.part.hasHorizontalScroller || mPartView.part.hasVerticalScroller )
+		{
+			mScrollView = [[NSScrollView alloc] initWithFrame: partRect];
+			NSView	*	docView = [[[NSView alloc] initWithFrame: partRect] autorelease];
+			[mScrollView setDocumentView: docView];
+			[mGroupView addSubview: mScrollView];
+		}
 	}
 	
 	[mGroupView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+	[mScrollView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 	
 	[self refreshProperties];
 }
@@ -63,6 +72,35 @@
 	}
 	else if( [currPart.partStyle isEqualToString: @"rectangle"] )
 		[mGroupView setBoxType: NSBoxCustom];
+
+	if( !mScrollView && (mPartView.part.hasHorizontalScroller || mPartView.part.hasVerticalScroller) )
+	{
+		mScrollView = [[NSScrollView alloc] initWithFrame: mGroupView.bounds];
+		[mScrollView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+		NSView	*	docView = [[[NSView alloc] initWithFrame: mGroupView.bounds] autorelease];
+		[mScrollView setDocumentView: docView];
+		
+		for( NSView* subber in [mGroupView.contentView subviews] )
+		{
+			[mScrollView.documentView addSubview: subber];
+		}
+		
+		[mGroupView addSubview: mScrollView];
+	}
+	else if( mScrollView && !mPartView.part.hasHorizontalScroller && !mPartView.part.hasVerticalScroller )
+	{
+		[mScrollView removeFromSuperview];
+		for( NSView* subber in mScrollView.subviews )
+		{
+			[mGroupView.contentView addSubview: subber];
+		}
+		
+		DESTROY(mScrollView);
+	}
+	
+	[mScrollView setHasHorizontalScroller: currPart.hasHorizontalScroller];
+	[mScrollView setHasVerticalScroller: currPart.hasVerticalScroller];
+	[mScrollView.documentView setFrameSize: currPart.contentSize];
 	
 	[mGroupView setFillColor: currPart.fillColor];
 	[mGroupView setBorderColor: currPart.lineColor];
@@ -88,10 +126,18 @@
 }
 
 
+-(void)	contentSizePropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	[self refreshProperties];
+}
+
+
 -(void)	removeSubviews
 {
 	[mGroupView removeFromSuperview];
 	DESTROY(mGroupView);
+	[mScrollView removeFromSuperview];
+	DESTROY(mScrollView);
 }
 
 
@@ -108,7 +154,7 @@
 
 -(void)	addSubPartView: (WILDPartView *)inView
 {
-	[mGroupView.contentView addSubview: inView];
+	[(mScrollView ? mScrollView.documentView : mGroupView.contentView) addSubview: inView];
 }
 
 @end

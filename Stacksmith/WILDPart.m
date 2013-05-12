@@ -60,6 +60,7 @@
 @synthesize bevelAngle = mBevelAngle;
 @synthesize timerMessage = mTimerMessage;
 @synthesize timerInterval = mTimerInterval;
+@synthesize contentSize = mContentSize;
 
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
@@ -146,6 +147,7 @@
 			mBevelAngle = 0;
 		mTimerMessage = [WILDStringFromSubElementInElement( @"message", elem ) retain];
 		mTimerInterval = WILDIntegerFromSubElementInElement( @"interval", elem );
+		mContentSize = WILDSizeFromSubElementInElement( @"contentSize", elem );
 		
 		NSError *	err = nil;
 		NSArray	*	userPropsNodes = [elem nodesForXPath: @"userProperties" error: &err];
@@ -1239,6 +1241,7 @@
 		WILDAppendStringXML( outString, 2, styleName, @"textStyle" );
 	WILDAppendBoolXML( outString, 2, mHasHorizontalScroller, @"hasHorizontalScroller" );
 	WILDAppendBoolXML( outString, 2, mHasVerticalScroller, @"hasVerticalScroller" );
+	WILDAppendSizeXML( outString, 2, mContentSize, @"contentSize" );
 	
 	WILDAppendStringXML( outString, 2, mName, @"name" );
 	if( [mMediaPath length] > 0 )
@@ -1591,6 +1594,23 @@
 }
 
 
+-(void)	setContentSizeDictionary: (NSDictionary*)inValue
+{
+	CGFloat		h = [[inValue objectForKey: @"width"] doubleValue];
+	CGFloat		v = [[inValue objectForKey: @"height"] doubleValue];
+	mContentSize = NSMakeSize(h,v);
+}
+
+
+-(NSDictionary*)	contentSizeDictionary
+{
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithDouble: mContentSize.width], @"width",
+			[NSNumber numberWithDouble: mContentSize.height], @"height",
+			nil];
+}
+
+
 -(void)	setPartNumberForScripts: (NSInteger)desiredIndex
 {
 	if( desiredIndex > 0 )
@@ -1660,6 +1680,7 @@ PROPERTY_MAPPING(currentURLString,"currenturl",kLeoValueTypeString)
 PROPERTY_MAPPING(statusMessage,"statusmessage",kLeoValueTypeString)
 PROPERTY_MAPPING(timerMessage,"message",kLeoValueTypeString)
 PROPERTY_MAPPING(timerInterval,"interval",kLeoValueTypeNumber)
+PROPERTY_MAPPING(contentSizeDictionary,"contentSize",kLeoValueTypeArray)
 PROPERTY_MAP_END
 
 
