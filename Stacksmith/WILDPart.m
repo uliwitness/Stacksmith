@@ -282,7 +282,11 @@
 	NSRect		resultRect = mHammerRectangle;
 	CGFloat		ownerHeight = 0;
 	if( self.owningPart )
-		ownerHeight = [self.owningPart hammerRectangle].size.height;
+	{
+		ownerHeight = [self.owningPart contentSize].height;
+		if( ownerHeight == 0 )
+			ownerHeight = [self.owningPart hammerRectangle].size.height;
+	}
 	else
 		ownerHeight = [mStack cardSize].height;
 	resultRect.origin.y = ownerHeight -NSMaxY( mHammerRectangle );

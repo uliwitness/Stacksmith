@@ -39,9 +39,11 @@
 		
 		if( mPartView.part.hasHorizontalScroller || mPartView.part.hasVerticalScroller )
 		{
-			mScrollView = [[NSScrollView alloc] initWithFrame: partRect];
-			NSView	*	docView = [[[NSView alloc] initWithFrame: partRect] autorelease];
+			NSRect	contentBounds = [mGroupView.contentView bounds];
+			mScrollView = [[NSScrollView alloc] initWithFrame: contentBounds];
+			NSView	*	docView = [[[NSView alloc] initWithFrame: contentBounds] autorelease];
 			[mScrollView setDocumentView: docView];
+			[mScrollView setDrawsBackground: NO];
 			[mGroupView addSubview: mScrollView];
 		}
 	}
@@ -75,10 +77,11 @@
 
 	if( !mScrollView && (mPartView.part.hasHorizontalScroller || mPartView.part.hasVerticalScroller) )
 	{
-		mScrollView = [[NSScrollView alloc] initWithFrame: mGroupView.bounds];
+		mScrollView = [[NSScrollView alloc] initWithFrame: [mGroupView.contentView bounds]];
 		[mScrollView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
-		NSView	*	docView = [[[NSView alloc] initWithFrame: mGroupView.bounds] autorelease];
+		NSView	*	docView = [[[NSView alloc] initWithFrame: [mGroupView.contentView bounds]] autorelease];
 		[mScrollView setDocumentView: docView];
+		[mScrollView setDrawsBackground: NO];
 		
 		for( NSView* subber in [mGroupView.contentView subviews] )
 		{
@@ -100,7 +103,14 @@
 	
 	[mScrollView setHasHorizontalScroller: currPart.hasHorizontalScroller];
 	[mScrollView setHasVerticalScroller: currPart.hasVerticalScroller];
-	[mScrollView.documentView setFrameSize: currPart.contentSize];
+	NSSize	contentSize = currPart.contentSize;
+	if( contentSize.width == 0 )
+		contentSize.width = [mGroupView.contentView bounds].size.width;
+	if( contentSize.height == 0 )
+		contentSize.height = [mGroupView.contentView bounds].size.height;
+	[mScrollView.documentView setFrameSize: contentSize];
+	[mScrollView.contentView scrollToPoint: NSMakePoint(0, contentSize.height -mScrollView.documentVisibleRect.size.height)];
+	[mScrollView reflectScrolledClipView: mScrollView.contentView];
 	
 	[mGroupView setFillColor: currPart.fillColor];
 	[mGroupView setBorderColor: currPart.lineColor];
