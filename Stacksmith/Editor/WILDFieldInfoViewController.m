@@ -30,15 +30,15 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(void)	dealloc
 {
-	DESTROY(mStylePopUp);
-	DESTROY(mLockTextSwitch);
-	DESTROY(mAutoSelectSwitch);
-	DESTROY(mMultipleLinesSwitch);
-	DESTROY(mSharedTextSwitch);
-	DESTROY(mDontWrapSwitch);
-	DESTROY(mDontSearchSwitch);
-	DESTROY(mHorizontalScrollerSwitch);
-	DESTROY(mVerticalScrollerSwitch);
+	DESTROY_DEALLOC(mStylePopUp);
+	DESTROY_DEALLOC(mLockTextSwitch);
+	DESTROY_DEALLOC(mAutoSelectSwitch);
+	DESTROY_DEALLOC(mMultipleLinesSwitch);
+	DESTROY_DEALLOC(mSharedTextSwitch);
+	DESTROY_DEALLOC(mDontWrapSwitch);
+	DESTROY_DEALLOC(mDontSearchSwitch);
+	DESTROY_DEALLOC(mHorizontalScrollerSwitch);
+	DESTROY_DEALLOC(mVerticalScrollerSwitch);
 	
 	[super dealloc];
 }
