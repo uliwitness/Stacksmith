@@ -28,6 +28,13 @@
 
 @end
 
+void	WILDFirstNativeCall( void );
+
+void	WILDFirstNativeCall( void )
+{
+	LEOLoadNativeHeadersFromFile( [[NSBundle mainBundle] pathForResource: @"frameworkheaders" ofType: @"hhc"].fileSystemRepresentation );
+}
+
 
 @implementation WILDAppDelegate
 
@@ -60,7 +67,8 @@
 	
 		// Native function calls:
 	LEOAddInstructionsToInstructionArray( gObjCCallInstructions, LEO_NUMBER_OF_OBJCCALL_INSTRUCTIONS, &kFirstObjCCallInstruction );
-	LEOLoadNativeHeadersFromFile( [[NSBundle mainBundle] pathForResource: @"frameworkheaders" ofType: @"hhc"].fileSystemRepresentation );
+	
+	LEOSetFirstNativeCallCallback( WILDFirstNativeCall );	// This calls us to lazily load the (several MB) of native headers when needed.
 	
 	#if REMOTE_DEBUGGER
 	LEOInitRemoteDebugger( "127.0.0.1" );
