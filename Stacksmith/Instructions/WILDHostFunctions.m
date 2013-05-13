@@ -152,15 +152,22 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 	char			partName[1024] = { 0 };
 	WILDCard	*	theCard = [frontStack currentCard];
 	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
-		thePart = [theCard partAtIndex: theNumber -1 ofType: @"field"];
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: @"field"];
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
 	}
-	else
+	else if( !lookUpByID )
 	{
 		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
 		
@@ -169,6 +176,7 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 	
 	if( thePart )
 	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
@@ -188,15 +196,22 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 	char			partName[1024] = { 0 };
 	WILDCard	*	theCard = [frontStack currentCard];
 	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
-		thePart = [theCard partAtIndex: theNumber -1 ofType: @"button"];
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: @"button"];
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
 	}
-	else
+	else if( !lookUpByID )
 	{
 		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
 		
@@ -205,6 +220,7 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 	
 	if( thePart )
 	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
@@ -219,15 +235,24 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 
 void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 {
+	LEODebugPrintContext( inContext );
+	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
 	WILDCard	*	theCard = [frontStack currentCard];
 	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
-		thePart = [theCard partAtIndex: theNumber -1 ofType: @"moviePlayer"];
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: @"moviePlayer"];
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
@@ -241,6 +266,7 @@ void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 	
 	if( thePart )
 	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
@@ -260,10 +286,17 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 	char			partName[1024] = { 0 };
 	WILDCard	*	theCard = [frontStack currentCard];
 	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
-		thePart = [theCard partAtIndex: theNumber -1 ofType: nil];
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: nil];
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
@@ -277,6 +310,7 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 	
 	if( thePart )
 	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
@@ -291,15 +325,24 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 
 void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 {
+	LEODebugPrintContext( inContext );
+	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
 	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
 	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
-		thePart = [theCard partAtIndex: theNumber -1 ofType: @"field"];
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: @"field"];
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
@@ -313,6 +356,7 @@ void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 	
 	if( thePart )
 	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
@@ -327,15 +371,24 @@ void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 
 void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 {
+	LEODebugPrintContext( inContext );
+	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
 	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
 	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
-		thePart = [theCard partAtIndex: theNumber -1 ofType: @"button"];
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: @"button"];
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
@@ -349,6 +402,7 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 	
 	if( thePart )
 	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
@@ -363,15 +417,24 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 
 void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 {
+	LEODebugPrintContext( inContext );
+	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
 	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
 	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
-		thePart = [theCard partAtIndex: theNumber -1 ofType: @"moviePlayer"];
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: @"moviePlayer"];
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
@@ -385,6 +448,7 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 	
 	if( thePart )
 	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
@@ -399,15 +463,24 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 
 void	WILDBackgroundPartInstruction( LEOContext* inContext )
 {
+	LEODebugPrintContext( inContext );
+	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
 	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
 	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
-		thePart = [theCard partAtIndex: theNumber -1 ofType: nil];
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: nil];
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
@@ -421,6 +494,7 @@ void	WILDBackgroundPartInstruction( LEOContext* inContext )
 	
 	if( thePart )
 	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
@@ -852,8 +926,8 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_BACKGROUND_PART_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_BACKGROUND_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', 'B' },
 			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_BACKGROUND_MOVIEPLAYER_INSTRUCTION, 0, 0, 'B', 'A' },
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -873,8 +947,8 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', 'B' },
 			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, 'B', 'A' },
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -889,8 +963,8 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 	{
 		EFieldIdentifier, WILD_CARD_FIELD_INSTRUCTION, 0, 0, '\0',
 		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -910,8 +984,8 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 	{
 		EButtonIdentifier, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, '\0',
 		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -932,8 +1006,8 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		EMovieIdentifier, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterRequired, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', '\0' },
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -952,8 +1026,8 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 	{
 		EPartIdentifier, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0',
 		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
