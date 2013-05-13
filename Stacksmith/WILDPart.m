@@ -1685,6 +1685,8 @@ PROPERTY_MAPPING(statusMessage,"statusmessage",kLeoValueTypeString)
 PROPERTY_MAPPING(timerMessage,"message",kLeoValueTypeString)
 PROPERTY_MAPPING(timerInterval,"interval",kLeoValueTypeNumber)
 PROPERTY_MAPPING(contentSizeDictionary,"contentSize",kLeoValueTypeArray)
+PROPERTY_MAPPING(hasVerticalScroller,"hasverticalscrollbar",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(hasHorizontalScroller,"hashorizontalscrollbar",kLeoValueTypeBoolean)
 PROPERTY_MAP_END
 
 
