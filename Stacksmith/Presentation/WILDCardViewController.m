@@ -43,6 +43,7 @@
 #import "ULIPaintTextTool.h"
 #import "ULIPaintShapeTool.h"
 #import "WILDBackgroundModeIndicator.h"
+#import "ULIHighlightingButton.h"
 
 #import "UKHelperMacros.h"
 
@@ -1361,59 +1362,63 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 	
 	if( [itemIdentifier isEqualToString: WILDCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
-		[theButton setImage: [NSImage imageNamed: @"Stack"]];
+		[theButton setImage: [NSImage imageNamed: @"CardIcon"]];
 		[theButton setAction: @selector(showCardInfoPanel:)];
 		[theButton setImagePosition: NSImageOnly];
 		[theItem setLabel: @"Card Info"];
 		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDBackgroundToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
-		[theButton setImage: [NSImage imageNamed: @"ICON_128"]];
+		[theButton setImage: [NSImage imageNamed: @"BackgroundIcon"]];
 		[theButton setAction: @selector(showBackgroundInfoPanel:)];
 		[theButton setImagePosition: NSImageOnly];
 		[theItem setLabel: @"Background Info"];
 		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDEditBackgroundToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
-		[theButton setImage: [NSImage imageNamed: @"ICON_129"]];
+		[theButton setImage: [NSImage imageNamed: @"BackgroundEditIcon"]];
 		[theButton setAction: @selector(toggleBackgroundEditMode:)];
 		[theButton setImagePosition: NSImageOnly];
 		[theItem setLabel: @"Edit Background"];
 		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDStackToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
-		[theButton setImage: [NSImage imageNamed: @"ICON_1000"]];
+		[theButton setImage: [NSImage imageNamed: @"StackIcon"]];
 		[theButton setAction: @selector(showStackInfoPanel:)];
 		[theButton setImagePosition: NSImageOnly];
 		[theItem setLabel: @"Stack Info"];
 		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDPrevCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_902"]];
 		[theButton setAction: @selector(goPrevCard:)];
@@ -1422,11 +1427,12 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
 		[theItem setView: theButton];
 	}
 	else if( [itemIdentifier isEqualToString: WILDNextCardToolbarItemIdentifier] )
 	{
-		NSButton	*	theButton = [[[NSButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
 		[theButton setBordered: NO];
 		[theButton setImage: [NSImage imageNamed: @"ICON_26425"]];
 		[theButton setAction: @selector(goNextCard:)];
@@ -1435,6 +1441,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		[theButton.cell setControlSize: NSSmallControlSize];
 		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
 		[theItem setView: theButton];
 	}
 	
