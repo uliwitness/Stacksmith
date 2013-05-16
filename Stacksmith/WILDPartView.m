@@ -249,6 +249,17 @@
 }
 
 
+-(void)	scrollWheel: (NSEvent *)theEvent
+{
+	NSPoint		pos = [self.superview convertPoint: theEvent.locationInWindow fromView: nil];
+	NSView*	hitView = [super hitTest: pos];
+	if( [hitView respondsToSelector: @selector(scrollWheel:)] )
+		[hitView scrollWheel: theEvent];
+	else if( hitView.enclosingScrollView && [hitView.enclosingScrollView respondsToSelector: @selector(scrollWheel:)] )
+		[hitView.enclosingScrollView scrollWheel: theEvent];
+}
+
+
 -(NSSize)	grabHandleSize
 {
 	NSRect					myRect = self.bounds;
