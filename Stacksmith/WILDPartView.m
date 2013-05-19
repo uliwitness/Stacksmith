@@ -194,9 +194,10 @@
 	clampedBounds.size.width -= 1;
 	clampedBounds.size.height -= 1;
 	NSBezierPath*	selPath = [NSBezierPath bezierPathWithRect: clampedBounds];
-	CGFloat			pattern[2] = { 4, 4 };
+	CGFloat			pattern[2] = { 8, 8 };
 	[[NSColor whiteColor] set];
 	[selPath stroke];
+	[selPath setLineWidth: 1];
 	[selPath setLineDash: pattern count: 2 phase: [[WILDTools sharedTools] animationPhase]];
 	[[NSColor keyboardFocusIndicatorColor] set];
 	[selPath stroke];
@@ -1317,11 +1318,43 @@
 }
 
 
-//-(void)	drawRect:(NSRect)dirtyRect
-//{
-//	[[NSColor blueColor] set];
-//	[NSBezierPath strokeRect: [self bounds]];
-//}
+-(void)	drawRect:(NSRect)dirtyRect
+{
+	if( !mPartPresenter )
+		return;
+	
+	NSRect	subviewFrame = [mPartPresenter partRectForPartViewFrame: self.bounds];
+	BOOL	isMyTool = [self myToolIsCurrent];
+	
+	if( isMyTool )
+	{
+		BOOL	isOpaque = [[mPart partStyle] isEqualToString: @"opaque"];
+		NSRect	outlineBox = NSInsetRect( subviewFrame, 0.5, 0.5 );
+		NSRect	lightOutlineBox = NSInsetRect( outlineBox, 1, 1 );
+		[NSBezierPath setDefaultLineWidth: 1];
+		[[NSColor colorWithCalibratedWhite: 1.0 alpha: 0.5] set];
+		[NSBezierPath strokeRect: lightOutlineBox];
+		
+		if( isOpaque )
+			[[[WILDTools sharedTools] peekPattern] set];
+		else
+			[[NSColor colorWithCalibratedWhite: 0.0 alpha: 0.5] set];
+		[NSBezierPath strokeRect: outlineBox];
+		[[NSColor blackColor] set];
+	}
+    if( mPeeking && ([self myToolIsCurrent]
+		|| ([[WILDTools sharedTools] currentTool] == WILDBrowseTool && [[mPart partType] isEqualToString: @"button"])) )
+	{
+		NSRect	peekBox = NSInsetRect( subviewFrame, 1, 1 );
+		[NSBezierPath setDefaultLineWidth: 2];
+		[[NSColor lightGrayColor] set];
+		[[NSColor blueColor] set];
+		[NSBezierPath strokeRect: peekBox];
+		[[[WILDTools sharedTools] peekPattern] set];
+		[NSBezierPath strokeRect: peekBox];
+		[NSBezierPath setDefaultLineWidth: 1];
+	}
+}
 
 
 -(void)	tableViewSelectionDidChange:(NSNotification *)notification

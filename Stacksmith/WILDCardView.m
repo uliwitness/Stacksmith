@@ -21,6 +21,7 @@
 #import "WILDGuidelineView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UKHelperMacros.h"
+#import "UKCoordinateUtils.h"
 
 
 @implementation WILDCardView
@@ -407,10 +408,65 @@ static void FillFirstFreeOne( NSString ** a, NSString ** b, NSString ** d, NSStr
 
 -(void)	drawRect: (NSRect)dirtyRect
 {
-	[NSColor.blueColor set];
-	[NSBezierPath fillRect: self.bounds];
+	if( [[WILDTools sharedTools] currentTool] == WILDBrowseTool )
+		return;
+
+	NSColor	*	blueprintBlue = [NSColor colorWithCalibratedHue:0.675 saturation:0.066 brightness:0.924 alpha:1.000];
+	NSRect		box = self.bounds;
+	box.size = mCard.stack.cardSize;
+	NSRect		innerBox = NSInsetRect(box, 16, 16);
+	[blueprintBlue set];
+	[NSBezierPath fillRect: box];
+	
+	static NSColor	*	sGraphPaperPattern = nil;
+	if( !sGraphPaperPattern )
+	{
+		NSImage	*	img = [NSImage imageWithSize: NSMakeSize(64,64) flipped:NO drawingHandler:
+			^( NSRect dstRect )
+			{
+				[blueprintBlue set];
+				[NSBezierPath fillRect: dstRect];
+				
+				[NSColor.whiteColor set];
+				CGFloat		lineWidth = 2;
+				[NSBezierPath setDefaultLineWidth: lineWidth];
+				NSPoint	bl = UKBottomLeftOfRect(dstRect); bl.x += lineWidth /2; bl.y -= lineWidth /2;
+				NSPoint	tl = UKTopLeftOfRect(dstRect); tl.x += lineWidth /2; tl.y -= lineWidth /2;
+				NSPoint	tr = UKTopRightOfRect(dstRect); tr.x += lineWidth /2; tr.y -= lineWidth /2;
+				[NSBezierPath strokeLineFromPoint: bl toPoint: tl];
+				tl.x -= lineWidth /2;
+				[NSBezierPath strokeLineFromPoint: tl toPoint: tr];
+				
+				lineWidth = 1;
+				[NSBezierPath setDefaultLineWidth: lineWidth /2];
+				CGFloat		x = NSMinX(dstRect) + 8 +(lineWidth /2);
+				for( ; x < NSMaxX(dstRect); x += 8 )
+				{
+					[NSBezierPath strokeLineFromPoint: NSMakePoint(x,NSMinY(dstRect) -(lineWidth /2)) toPoint: NSMakePoint(x,NSMaxY(dstRect) -(lineWidth /2))];
+				}
+				CGFloat		y = NSMinY(dstRect) + 8 -(lineWidth /2);
+				for( ; y < NSMaxY(dstRect); y += 8 )
+				{
+					[NSBezierPath strokeLineFromPoint: NSMakePoint(NSMinX(dstRect) +(lineWidth /2),y) toPoint: NSMakePoint(NSMaxX(dstRect) +(lineWidth /2),y)];
+				}
+				
+				return YES;
+			}];
+		sGraphPaperPattern = [[NSColor colorWithPatternImage: img] retain];
+	}
+	
+	[sGraphPaperPattern set];
+	[NSGraphicsContext.currentContext setPatternPhase: NSMakePoint(16,NSMaxY(innerBox))];
+	CGFloat		lineWidth = 2;
+	[NSBezierPath fillRect: innerBox];
+	[NSBezierPath setDefaultLineWidth: lineWidth];
 	[NSColor.whiteColor set];
-	[NSBezierPath fillRect: NSInsetRect(self.bounds,2,2)];
+	NSPoint		bl = UKBottomLeftOfRect(innerBox); bl.y -= lineWidth / 2;
+	NSPoint		br = UKBottomRightOfRect(innerBox); br.y -= lineWidth / 2;
+	[NSBezierPath strokeLineFromPoint: bl toPoint: br];
+	NSPoint		tr = UKTopRightOfRect(innerBox); tr.x -= lineWidth / 2;
+	br.x -= lineWidth / 2;
+	[NSBezierPath strokeLineFromPoint: br toPoint: tr];
 }
 
 @end

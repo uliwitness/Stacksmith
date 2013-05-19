@@ -53,8 +53,8 @@ static WILDTools*		sAnimator = nil;
 
 -(void)	animate: (NSTimer*)sender
 {
-	animationPhase += 2;
-	animationPhase %= 8;
+	animationPhase += 4;
+	animationPhase %= 16;
 	
 	for( id<WILDSelectableView> currView in nonRetainingClients )
 	{

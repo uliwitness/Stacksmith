@@ -137,6 +137,7 @@
 		5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 5538245817272767007785D8 /* LEOObjCCallInstructions.c */; };
 		5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */ = {isa = PBXBuildFile; fileRef = 5538245F17272EC2007785D8 /* frameworkheaders.hhc */; };
 		55382463172730B4007785D8 /* WILDObjCCallInstructions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55382462172730B4007785D8 /* WILDObjCCallInstructions.m */; };
+		553AF61E17491AEF00AF3BBA /* UKCoordinateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 553AF61D17491AEE00AF3BBA /* UKCoordinateUtils.m */; };
 		553C46EE13577334000219FA /* Forge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C469F13577334000219FA /* Forge.cpp */; };
 		553C46EF13577334000219FA /* CCodeBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A113577334000219FA /* CCodeBlock.cpp */; };
 		553C46F013577334000219FA /* CVariableEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A313577334000219FA /* CVariableEntry.cpp */; };
@@ -642,6 +643,8 @@
 		55382462172730B4007785D8 /* WILDObjCCallInstructions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjCCallInstructions.m; path = Instructions/WILDObjCCallInstructions.m; sourceTree = SOURCE_ROOT; };
 		55382EE21171FFFA0006B381 /* UKHelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKHelperMacros.h; path = ../UliKit/UKHelperMacros.h; sourceTree = SOURCE_ROOT; };
 		55382EEA117201E40006B381 /* UKTypecastMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKTypecastMacros.h; path = ../UliKit/UKTypecastMacros.h; sourceTree = SOURCE_ROOT; };
+		553AF61C17491AEE00AF3BBA /* UKCoordinateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCoordinateUtils.h; path = ../UliKit/UKCoordinateUtils.h; sourceTree = "<group>"; };
+		553AF61D17491AEE00AF3BBA /* UKCoordinateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKCoordinateUtils.m; path = ../UliKit/UKCoordinateUtils.m; sourceTree = "<group>"; };
 		553C469E13577334000219FA /* Forge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forge.h; sourceTree = "<group>"; };
 		553C469F13577334000219FA /* Forge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Forge.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		553C46A013577334000219FA /* CCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CCodeBlock.h; path = ../../CCodeBlock.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1543,6 +1546,8 @@
 				55B29CA317276E8E00B38E75 /* UKNibOwner.m */,
 				55B29CA417276E8E00B38E75 /* UKSystemInfo.h */,
 				55B29CA517276E8E00B38E75 /* UKSystemInfo.m */,
+				553AF61C17491AEE00AF3BBA /* UKCoordinateUtils.h */,
+				553AF61D17491AEE00AF3BBA /* UKCoordinateUtils.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -2272,6 +2277,7 @@
 				55A5D9C4173202FB005B2309 /* WILDTimerInfoViewController.m in Sources */,
 				554DE25C1736DB4500940933 /* WILDGroupPresenter.m in Sources */,
 				554DE2661736FA1F00940933 /* WILDGroupInfoViewController.m in Sources */,
+				553AF61E17491AEF00AF3BBA /* UKCoordinateUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

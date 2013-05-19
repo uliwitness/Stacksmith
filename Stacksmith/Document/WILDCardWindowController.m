@@ -75,7 +75,6 @@
 	if( fsButton )
 		theBox.size.width = fsButton.frame.origin.x -4;
 	NSButton	*	editButton = [[NSButton alloc] initWithFrame: theBox];
-	[editButton setAutoresizingMask: NSViewMaxXMargin | NSViewMinYMargin];
 	[[editButton cell] setControlSize: NSMiniControlSize];
 	[editButton setTitle: @"Edit"];
 	[editButton setBezelStyle: NSRoundRectBezelStyle];
@@ -90,6 +89,8 @@
 	theBox.origin.x -= 8;
 	[editButton setFrame: theBox];
 	[windowWidgetSuperview addSubview: editButton];
+	[editButton setAutoresizingMask: NSViewMinYMargin | NSViewMaxXMargin];
+	[windowWidgetSuperview setNeedsLayout: YES];
 }
 
 
@@ -135,7 +136,8 @@
 
 -(void)	windowDidResize: (NSNotification*)notification
 {
-	[mStack setCardSize: self.window.frame.size];
+	NSWindow	*	wd = self.window;
+	[mStack setCardSize: [wd contentRectForFrameRect: wd.frame].size];
 }
 
 
