@@ -28,6 +28,7 @@
 	NSTextField		*	mHeightField;
 	NSButton		*	mUserPropertyEditButton;
 	NSPopUpButton	*	mSizePopUpButton;
+	NSButton		*	mResizableSwitch;
 }
 
 @property (retain) WILDCardView				*	cardView;
@@ -43,6 +44,7 @@
 @property (retain) IBOutlet	NSTextField		*	heightField;
 @property (retain) IBOutlet	NSButton		*	userPropertyEditButton;
 @property (retain) IBOutlet	NSPopUpButton	*	sizePopUpButton;
+@property (retain) IBOutlet	NSButton		*	resizableSwitch;
 
 -(id)		initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView;
 
@@ -50,5 +52,6 @@
 
 -(IBAction)	sizePopUpSelectionChanged: (id)sender;
 -(IBAction)	doApplySizeButton: (id)sender;
+-(IBAction)	doResizableSwitchChanged: (id)sender;
 
 @end

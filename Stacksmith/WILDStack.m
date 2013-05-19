@@ -25,7 +25,7 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 
 @implementation WILDStack
 
-@synthesize resizable;
+@synthesize resizable = mResizable;
 
 -(id)	initWithDocument: (WILDDocument*)theDocument
 {
@@ -83,6 +83,7 @@ NSString		*		WILDErrorDomain = @"WILDErrorDomain";
 		mPrivateAccess = WILDBoolFromSubElementInElement( @"privateAccess", elem, NO );
 		mCantAbort = WILDBoolFromSubElementInElement( @"cantAbort", elem, NO );
 		mCantPeek = WILDBoolFromSubElementInElement( @"cantPeek", elem, NO );
+		mResizable = WILDBoolFromSubElementInElement( @"resizable", elem, NO );
 		
 		mCardSize = WILDSizeFromSubElementInElement( @"cardSize", elem );
 		if( mCardSize.width < 1 || mCardSize.height < 1 )
@@ -211,6 +212,7 @@ PROPERTY_MAPPING(name,"short name",kLeoValueTypeString)
 PROPERTY_MAPPING(script,"script",kLeoValueTypeString)
 PROPERTY_MAPPING(stackID,"id",kLeoValueTypeInteger)
 PROPERTY_MAPPING(sizeDictionary,"size",kLeoValueTypeArray)
+PROPERTY_MAPPING(resizable,"resizable",kLeoValueTypeBoolean)
 PROPERTY_MAP_END
 
 
@@ -374,9 +376,7 @@ PROPERTY_MAP_END
 
 -(void)	setCardSize: (NSSize)inSize
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"cardSize", WILDAffectedPropertyKey, nil]];
 	mCardSize = inSize;
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"cardSize", WILDAffectedPropertyKey, nil]];
 }
 
 
@@ -475,6 +475,7 @@ PROPERTY_MAP_END
 	[theString appendFormat: @"\t<privateAccess>%@</privateAccess>\n", mPrivateAccess ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<cantAbort>%@</cantAbort>\n", mCantAbort ? @"<true />" : @"<false />"];
 	[theString appendFormat: @"\t<cantPeek>%@</cantPeek>\n", mCantPeek ? @"<true />" : @"<false />"];
+	[theString appendFormat: @"\t<resizable>%@</resizable>\n", mResizable ? @"<true />" : @"<false />"];
 
 	[theString appendFormat: @"\t<cardSize>\n\t\t<width>%d</width>\n\t\t<height>%d</height>\n\t</cardSize>\n", (int)mCardSize.width, (int)mCardSize.height];
 	binaryAttribute = @"";

@@ -404,4 +404,13 @@ static void FillFirstFreeOne( NSString ** a, NSString ** b, NSString ** d, NSStr
 		[mOwner keyDown: theEvent];
 }
 
+
+-(void)	drawRect: (NSRect)dirtyRect
+{
+	[NSColor.blueColor set];
+	[NSBezierPath fillRect: self.bounds];
+	[NSColor.whiteColor set];
+	[NSBezierPath fillRect: NSInsetRect(self.bounds,2,2)];
+}
+
 @end

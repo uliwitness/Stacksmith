@@ -45,6 +45,7 @@ static NSSize		sPopUpMenuSizes[] =
 @synthesize heightField = mHeightField;
 @synthesize userPropertyEditButton = mUserPropertyEditButton;
 @synthesize sizePopUpButton = mSizePopUpButton;
+@synthesize resizableSwitch = mResizableSwitch;
 
 -(id)	initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView
 {
@@ -91,6 +92,8 @@ static NSSize		sPopUpMenuSizes[] =
 	[mBackgroundCountField setStringValue: [NSString stringWithFormat: @"Contains %ld backgrounds.", numBackgrounds]];
 	
 	[self updateCardSizePopUpAndFields];
+	
+	[mResizableSwitch setState: mStack.resizable ? NSOnState : NSOffState];
 }
 
 
@@ -129,30 +132,6 @@ static NSSize		sPopUpMenuSizes[] =
 	[mWidthField setIntValue: cardSize.width];
 	[mHeightField setIntValue: cardSize.height];
 }
-
-
-//-(IBAction)	doOKButton: (id)sender
-//{
-//	if( [[mStack document] fileURL] == nil )
-//		[mStack setName: [mNameField stringValue]];
-//	
-//	NSSize	newSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
-//	[mStack setCardSize: newSize];
-//	
-//	[mStack updateChangeCount: NSChangeDone];
-//
-//	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mStack] frameInScreenCoordinates];
-//	[[self window] orderOutWithZoomEffectToRect: destRect];
-//	[self close];
-//}
-//
-//
-//-(IBAction)	doCancelButton: (id)sender
-//{
-//	NSRect	destRect = [[mCardView visibleObjectForWILDObject: mStack] frameInScreenCoordinates];
-//	[[self window] orderOutWithZoomEffectToRect: destRect];
-//	[self close];
-//}
 
 
 -(IBAction)	doEditScriptButton: (id)sender
@@ -219,7 +198,17 @@ static NSSize		sPopUpMenuSizes[] =
 -(IBAction)	doApplySizeButton: (id)sender
 {
 	NSSize	currentSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"cardSize", WILDAffectedPropertyKey, nil]];
 	[mStack setCardSize: currentSize];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"cardSize", WILDAffectedPropertyKey, nil]];
+}
+
+
+-(IBAction)	doResizableSwitchChanged: (id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"resizable", WILDAffectedPropertyKey, nil]];
+	[mStack setResizable: mResizableSwitch.state == NSOnState];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"resizable", WILDAffectedPropertyKey, nil]];
 }
 
 

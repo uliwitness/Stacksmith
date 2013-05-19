@@ -49,6 +49,14 @@
 @class WILDCardView;
 
 
+@interface WILDPartView ()
+{
+	BOOL	mPreventRecursion;
+}
+
+@end
+
+
 @implementation WILDPartView
 
 @synthesize mainView = mMainView;
@@ -251,12 +259,40 @@
 
 -(void)	scrollWheel: (NSEvent *)theEvent
 {
-	NSPoint		pos = [self.superview convertPoint: theEvent.locationInWindow fromView: nil];
-	NSView*	hitView = [super hitTest: pos];
-	if( [hitView respondsToSelector: @selector(scrollWheel:)] )
-		[hitView scrollWheel: theEvent];
-	else if( hitView.enclosingScrollView && [hitView.enclosingScrollView respondsToSelector: @selector(scrollWheel:)] )
-		[hitView.enclosingScrollView scrollWheel: theEvent];
+	NSPoint			pos = [self.superview convertPoint: theEvent.locationInWindow fromView: nil];
+	NSView	*		hitView = [super hitTest: pos];
+	NSScrollView*	enclosingScrollView = hitView.enclosingScrollView;
+	
+	/* When an NSScrollView hits one of its ends (i.e. you
+		can't scroll any farther), it forwards the scroll
+		wheel event to the subview under the mouse. Sub
+		views that don't scroll, forward it back to their
+		superview, which can cause an endless recursion when
+		we hit the end of our scroll wheel and a button is
+		under the mouse. Protect against that: */
+	if( !mPreventRecursion )
+	{
+		if( hitView == self )
+			return;
+		if( [self isDescendantOf: hitView] )
+			return;
+		
+		mPreventRecursion = YES;
+		
+		if( [hitView respondsToSelector: @selector(scrollWheel:)] )
+			[hitView scrollWheel: theEvent];
+		else if( enclosingScrollView && [enclosingScrollView respondsToSelector: @selector(scrollWheel:)] )
+		{
+			if( !enclosingScrollView || [self isDescendantOf: enclosingScrollView] )
+			{
+				mPreventRecursion = NO;
+				return;
+			}
+			[enclosingScrollView scrollWheel: theEvent];
+		}
+		[self.enclosingCardView.guidelineView setNeedsDisplay: YES];
+		mPreventRecursion = NO;
+	}
 }
 
 

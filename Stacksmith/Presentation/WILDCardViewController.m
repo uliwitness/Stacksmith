@@ -416,6 +416,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 {
 	WILDPartView*	selView = [[[WILDPartView alloc] initWithFrame: NSMakeRect(0,0,100,100)] autorelease];
 	[selView setWantsLayer: YES];
+	[selView setAutoresizingMask: NSViewMaxXMargin | NSViewMinYMargin];
 	[[self view] addSubview: selView];
 	BOOL	isCardButton = [currPart.partLayer isEqualToString: @"card"];
 	if( mBackgroundEditMode || isCardButton )
@@ -561,6 +562,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		
 		// Add a view to draw guidelines on top of everything:
 		mGuidelineView = [[WILDGuidelineView alloc] initWithFrame: [[self view] bounds]];
+		[mGuidelineView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
 		[[self view] addSubview: mGuidelineView];
 		for( WILDPartView* currPartView in [mPartViews allValues] )
 			[currPartView addToGuidelineView: mGuidelineView];
@@ -586,6 +588,17 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		if( prevCard == nil )
 			WILDScriptContainerResultFromSendingMessage( theCard, @"openStack" );
 		WILDScriptContainerResultFromSendingMessage( theCard, @"openCard" );
+	}
+	
+	if( theCard.stack.resizable )
+	{
+		[self.view setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+		[self.view.window setStyleMask: self.view.window.styleMask | NSResizableWindowMask];
+	}
+	else
+	{
+		[self.view setAutoresizingMask: NSViewMinXMargin | NSViewMaxYMargin];
+		[self.view.window setStyleMask: self.view.window.styleMask & ~NSResizableWindowMask];
 	}
 }
 

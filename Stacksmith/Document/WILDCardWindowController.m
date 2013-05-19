@@ -129,8 +129,13 @@
 
 -(void)	windowWillClose: (NSNotification*)notification
 {
-	//[[self window] orderOut: self];
 	[mCardViewController loadCard: nil];
+}
+
+
+-(void)	windowDidResize: (NSNotification*)notification
+{
+	[mStack setCardSize: self.window.frame.size];
 }
 
 
