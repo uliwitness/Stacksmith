@@ -188,6 +188,15 @@
 	[[self window] invalidateCursorRectsForView: self];
 	[[self window] makeFirstResponder: self];
 	[[self guidelineView] setNeedsDisplay: YES];
+//	[CATransaction begin];
+//	[CATransaction setAnimationDuration: 1.0];
+//	[self setTransitionType: @"WILDStretchFromBottomFilter"];
+//	[self setTransitionSubtype: @"cifilter"];
+//	[self setNeedsDisplay: YES];
+//	[self display];
+//	[self setTransitionType: nil];
+//	[self setTransitionSubtype: nil];
+//	[CATransaction commit];
 }
 
 
@@ -267,6 +276,7 @@
 {
 	return [mOwner visibleObjectForWILDObject: inObjectToFind];
 }
+
 
 -(NSImage*)	snapshotImage
 {
