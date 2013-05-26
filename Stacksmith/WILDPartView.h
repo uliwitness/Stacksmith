@@ -49,46 +49,50 @@ typedef enum
 @property (assign) NSView*			helperView;
 @property (assign) BOOL				isBackgroundEditing;
 
--(void)			setPart: (WILDPart*)inPart;
--(WILDPart*)	part;
+-(void)					setPart: (WILDPart*)inPart;
+-(WILDPart*)			part;
 
--(void)	setSelected: (BOOL)inState;
--(BOOL)	myToolIsCurrent;
+-(void)					setSelected: (BOOL)inState;
+-(BOOL)					myToolIsCurrent;
 
--(void)	subscribeNotifications;
--(void)	unsubscribeNotifications;
+-(void)					subscribeNotifications;
+-(void)					unsubscribeNotifications;
 
--(void)	highlightSearchResultInRange: (NSRange)theRange;
+-(void)					highlightSearchResultInRange: (NSRange)theRange;
 
--(WILDCardView*)	enclosingCardView;
+-(WILDCardView*)		enclosingCardView;
 
--(void)	loadPart: (WILDPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode;
--(void)	unloadPart;
--(void)	addToGuidelineView: (WILDGuidelineView*)guidelineView;
+-(void)					loadPart: (WILDPart*)currPart forBackgroundEditing: (BOOL)backgroundEditMode;
+-(void)					unloadPart;
+-(void)					addToGuidelineView: (WILDGuidelineView*)guidelineView;
+-(WILDPartView*)		partViewAtPoint: (NSPoint)pos;
 
-+(NSImage*)	imageForPeers: (NSArray*)views ofView: (NSView*)inView dragStartImagePos: (NSPoint*)dragStartImagePos;
-+(NSRect)	rectForPeers: (NSArray*)parts dragStartImagePos: (NSPoint*)dragStartImagePos;
++(NSImage*)				imageForPeers: (NSArray*)views ofView: (NSView*)inView dragStartImagePos: (NSPoint*)dragStartImagePos;
++(NSRect)				rectForPeers: (NSArray*)parts dragStartImagePos: (NSPoint*)dragStartImagePos;
 
--(void)	drawSelectionHighlightInView: (NSView*)overlayView;
+-(void)					drawSelectionHighlightInView: (NSView*)overlayView;
 
 -(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents create: (BOOL)inDoCreate;
 
--(NSRect)	frameInScreenCoordinates;
+-(NSRect)				frameInScreenCoordinates;
 
--(NSRect)	selectionRect;
--(void)		drawPartFrameInView: (NSView*)overlayView;
--(NSRect)	partRectForPartViewFrame: (NSRect)newBox;
--(NSRect)	partViewFrameForPartRect: (NSRect)newBox;
+-(NSRect)				selectionRect;
+-(void)					drawPartFrameInView: (NSView*)overlayView;
+-(NSRect)				partRectForPartViewFrame: (NSRect)newBox;
+-(NSRect)				partViewFrameForPartRect: (NSRect)newBox;
 
--(WILDPartView*)	enclosingPartView;
+-(WILDPartView*)		enclosingPartView;
 
--(void)	partWillChange: (NSNotification*)notif;
--(void)	partDidChange: (NSNotification*)notif;
--(void)	savePart;
+-(void)					partWillChange: (NSNotification*)notif;
+-(void)					partDidChange: (NSNotification*)notif;
+-(void)					savePart;
 
--(IBAction)	showInfoPanel: (id)sender;
+-(IBAction)				showInfoPanel: (id)sender;
 
--(void)	updateOnClick: (NSButton*)sender;
+-(void)					updateOnClick: (NSButton*)sender;
+
+-(NSView*)				contentView;
+-(void)					addSubPartView: (WILDPartView*)subPartView;
 
 @end
 

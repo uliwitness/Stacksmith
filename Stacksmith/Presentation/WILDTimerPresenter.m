@@ -138,10 +138,17 @@
 	[mPartView addCursorRect: mPartView.visibleRect cursor: currentCursor];
 }
 
+
 -(NSRect)	selectionFrame
 {
 	[mPartView setHidden: !mPartView.myToolIsCurrent || ![mPartView.part visible]];
 	return [[mPartView enclosingCardView] convertRect: [mIcon bounds] fromView: mIcon];
+}
+
+
+-(BOOL)	needsViewContainer
+{
+	return NO;	// Timers can be attached to pushbuttons etc.
 }
 
 @end

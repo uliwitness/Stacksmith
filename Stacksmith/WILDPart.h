@@ -190,6 +190,7 @@
 -(void)			updateChangeCount: (NSDocumentChangeType)inChange;
 
 -(NSArray*)		subParts;
+-(void)			addSubPart: (WILDPart*)inPart;
 
 -(WILDPartContents*)	currentPartContentsAndBackgroundContents: (WILDPartContents**)outBgContents create: (BOOL)inDoCreate onCard: (WILDCard*)inCard forBackgroundEditing: (BOOL)isBgEditing;
 

@@ -236,6 +236,8 @@ PROPERTY_MAP_END
 
 -(void)	setTransitionType: (NSString*)inType subtype: (NSString*)inSubtype
 {
+	//UKLog( @"Effect set to %@ %@", inType, inSubtype );
+	
 	WILDDocument	*	theDoc = [[self stack] document];
 	if( [[theDoc windowControllers] count] == 0 )
 		[theDoc makeWindowControllers];

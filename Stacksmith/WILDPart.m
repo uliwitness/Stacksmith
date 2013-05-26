@@ -239,6 +239,24 @@
 }
 
 
+-(void)	addSubPart: (WILDPart*)inPart
+{
+	[inPart retain];
+	if( inPart.owningPart )
+		[inPart.owningPart removeSubPart: inPart];
+	else
+		[inPart.partOwner removePart: inPart];
+	[mSubParts addObject: inPart];
+	[inPart release];
+}
+
+
+-(void)	removeSubPart: (WILDPart*)inPart
+{
+	[mSubParts removeObject: inPart];
+}
+
+
 -(NSArray *)	writableTypesForPasteboard:	(NSPasteboard *)pasteboard
 {
 	return @[WILDPartPboardType];

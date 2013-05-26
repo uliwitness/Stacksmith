@@ -1230,7 +1230,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 				newPart = [[WILDPart alloc] initWithXMLElement: elem forStack: mCurrentCard.stack];
 				wasBgPart = [newPart.partLayer isEqualToString: @"background"];
 				
-				[currLayer addPart: newPart];
+				[currLayer addNewPart: newPart];
 				[newPart release];
 			}
 			else if( newPart && [elem.name isEqualToString: @"contents"] )

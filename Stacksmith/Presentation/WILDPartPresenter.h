@@ -35,5 +35,9 @@
 -(void)		removeSubPartView: (WILDPartView*)inView;
 -(void)		addSubPartView: (WILDPartView*)inView;
 
+-(NSView*)	contentView;
+-(BOOL)		isViewContainer;		// This container can contain other parts whose needsViewContainer is YES, not just attached objects like timers.
+-(BOOL)		needsViewContainer;		// This item needs to be embedded in a card or group, can't be attached to a button.
+
 @end
 

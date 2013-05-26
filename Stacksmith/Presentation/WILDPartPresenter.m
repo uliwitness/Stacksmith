@@ -128,7 +128,25 @@
 
 -(void)		addSubPartView: (WILDPartView*)inView
 {
-	[mPartView addSubview: inView];
+	[self.contentView addSubview: inView];
+}
+
+
+-(BOOL)	isViewContainer
+{
+	return NO;
+}
+
+
+-(BOOL)	needsViewContainer
+{
+	return YES;
+}
+
+
+-(NSView*)	contentView
+{
+	return mPartView;
 }
 
 @end

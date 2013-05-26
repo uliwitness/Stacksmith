@@ -87,7 +87,9 @@
 -(WILDPart*)					createNewBrowser: (id)sender;
 
 -(WILDPart*)					addNewPartFromXMLTemplate: (NSURL*)xmlFile;
--(void)							addPart: (WILDPart*)newPart;
+-(void)							addNewPart: (WILDPart*)newPart;
+-(void)							addPart: (WILDPart*)inPart;
+-(void)							removePart: (WILDPart*)inPart;
 -(void)							deletePart: (WILDPart*)inPart;
 
 -(void)							bringPartCloser: (WILDPart*)inPart;

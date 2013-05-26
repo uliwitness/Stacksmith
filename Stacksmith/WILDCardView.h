@@ -13,6 +13,7 @@
 @class WILDCard;
 @class WILDCardViewController;
 @class WILDGuidelineView;
+@class WILDPartView;
 
 
 @interface WILDCardView : NSView
@@ -24,6 +25,7 @@
 	NSString				*mTransitionType;		// CATransition type to use for card changes.
 	NSString				*mTransitionSubtype;	// CATransition subtype to use for card changes.
 	NSTrackingArea			*mCursorTrackingArea;
+	NSImageView				*mToolChangeEffectView;
 }
 
 @property (copy)	NSString *	transitionType;
@@ -41,5 +43,8 @@
 -(NSImage*)					thumbnailImage;	// Smaller size for use as a preview in lists etc.
 
 -(WILDGuidelineView*)		guidelineView;
+
+-(WILDPartView*)			partViewAtPoint: (NSPoint)pos;
+-(void)						addPartView: (WILDPartView*)inPartView;
 
 @end

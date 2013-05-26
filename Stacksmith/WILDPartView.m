@@ -729,6 +729,9 @@
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	BOOL					keepDragging = YES;
 	NSRect					newBox = [self partRectForPartViewFrame: [self frame]];
+	WILDCardView		*	cardView = self.enclosingCardView;
+	WILDPartView		*	currentParent = self.enclosingPartView;
+	WILDPartView		*	oldParent = currentParent;
 	
 	while( keepDragging )
 	{
@@ -753,6 +756,13 @@
 					[self setUpGuidelinesForMovingAndSnapRect: &correctedBox];
 					
 					[self setFrame: [self partViewFrameForPartRect: correctedBox]];
+					
+					NSPoint			currMouse = [cardView convertPoint: theEvent.locationInWindow fromView: nil];
+					WILDPartView	*viewUnderMouse = [cardView partViewAtPoint: currMouse];
+					if( viewUnderMouse != currentParent && ![viewUnderMouse isDescendantOf:self] && viewUnderMouse != self )	// Parent view possible changing?
+					{
+						currentParent = viewUnderMouse;
+					}
 					break;
 				}
 			}
@@ -767,9 +777,38 @@
 	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
 	[guidelineView removeAllGuidelines];
 	[guidelineView setNeedsDisplay: YES];
-
-	[mPart setQuartzRectangle: [self partRectForPartViewFrame: self.frame]];
+	
+	NSRect						newFrame = self.frame;
+	if( oldParent != currentParent && currentParent )	// User moved the view into another parent?
+	{
+		newFrame = [currentParent.contentView convertRect: newFrame fromView: self.superview];
+		[currentParent addSubPartView: self];
+	}
+	else if( oldParent != currentParent )
+	{
+		newFrame = [cardView convertRect: newFrame fromView: self.superview];
+		[cardView addPartView: self];
+	}
+	
+	[mPart setQuartzRectangle: [self partRectForPartViewFrame: newFrame]];
 	[mPart updateChangeCount: NSChangeDone];
+}
+
+
+-(NSView*)	contentView
+{
+	return mPartPresenter.contentView;
+}
+
+
+-(void)		addSubPartView: (WILDPartView*)subPartView
+{
+	[self retain];
+	
+	[self.part addSubPart: subPartView.part];
+	[mPartPresenter addSubPartView: subPartView];
+	
+	[self release];
 }
 
 
@@ -1536,6 +1575,31 @@
 	}
 	else
 		return YES;
+}
+
+
+-(BOOL)	needsViewContainer
+{
+	return mPartPresenter.needsViewContainer;
+}
+
+
+-(BOOL)	isViewContainer
+{
+	return mPartPresenter.isViewContainer;
+}
+
+
+-(WILDPartView*)	partViewAtPoint: (NSPoint)pos
+{
+	for( WILDPartView* subView in mSubPartViews )
+	{
+		NSPoint newPos = [subView convertPoint: pos fromView: self];
+		if( NSPointInRect( newPos, subView.bounds) )
+			return [subView partViewAtPoint: newPos];
+	}
+	
+	return self;
 }
 
 

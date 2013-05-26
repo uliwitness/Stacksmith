@@ -162,9 +162,15 @@
 }
 
 
--(void)	addSubPartView: (WILDPartView *)inView
+-(NSView*)	contentView
 {
-	[(mScrollView ? mScrollView.documentView : mGroupView.contentView) addSubview: inView];
+	return (mScrollView ? mScrollView.documentView : mGroupView.contentView);
+}
+
+
+-(BOOL)	isViewContainer
+{
+	return YES;
 }
 
 @end

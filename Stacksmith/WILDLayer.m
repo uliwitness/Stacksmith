@@ -548,27 +548,39 @@
 	NSXMLElement	*	theElement = [templateDocument rootElement];
 	WILDPart		*	newPart = [[[WILDPart alloc] initWithXMLElement: theElement forStack: mStack] autorelease];
 	
-	[self addPart: newPart];
+	[self addNewPart: newPart];
 	return newPart;
 }
 
 
--(void)	addPart: (WILDPart*)newPart
+-(void)	addNewPart: (WILDPart*)newPart
 {
 	[newPart ensureIDIsUniqueInLayer: self];
 	[newPart setPartLayer: [self partLayer]];
-	[newPart setPartOwner: self];
-	[newPart setStack: mStack];
-	[mParts addObject: newPart];
+	[self addPart: newPart];
 	[newPart ensureSubPartIDsAreUniqueInLayer: self];
 	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(partDidChange:) name:WILDPartDidChangeNotification object: newPart];
+}
+
+
+-(void)	addPart: (WILDPart*)inPart
+{
+	[inPart setPartOwner: self];
+	[inPart setStack: mStack];
+	[mParts addObject: inPart];
+	
 	
 	[self updateChangeCount: NSChangeDone];
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDLayerDidAddPartNotification
-						object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: newPart, WILDAffectedPartKey,
+						object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: inPart, WILDAffectedPartKey,
 							nil]];
 }
 
+
+-(void)	removePart: (WILDPart*)inPart
+{
+	[mParts removeObject: inPart];
+}
 
 -(void)	addContents: (WILDPartContents*)inContents
 {

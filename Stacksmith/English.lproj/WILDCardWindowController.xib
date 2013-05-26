@@ -256,6 +256,27 @@
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView"/>
 									<bool key="NSViewIsLayerTreeHost">YES</bool>
+									<object class="NSDictionary" key="NSViewAnimations">
+										<string key="NS.key.0">subviews</string>
+										<object class="CATransition" key="NS.object.0">
+											<object class="CIPageCurlTransition" key="filter">
+												<object class="CIVector" key="CI_inputExtent">
+													<int key="CICount">4</int>
+													<string key="CIVector">{{0, 0}, {300, 300}}</string>
+												</object>
+												<real value="0.0" key="CI_inputTime"/>
+												<real value="0.0" key="CI_inputAngle"/>
+												<real value="100" key="CI_inputRadius"/>
+												<bool key="CIEnabled">YES</bool>
+											</object>
+											<string key="type">fade</string>
+											<object class="NSArray" key="__CACodingContents">
+												<bool key="EncodedWithXMLCoder">YES</bool>
+												<string>filter</string>
+												<string>type</string>
+											</object>
+										</object>
+									</object>
 									<string key="NSClassName">WILDCardView</string>
 								</object>
 							</object>

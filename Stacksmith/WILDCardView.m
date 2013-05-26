@@ -40,6 +40,9 @@
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
 												name: WILDCurrentToolDidChangeNotification
 												object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolWillChange:)
+												name: WILDCurrentToolWillChangeNotification
+												object: nil];
 		[self registerForDraggedTypes: [NSArray arrayWithObject: WILDPartPboardType]];
 	}
 	
@@ -57,6 +60,9 @@
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolDidChange:)
 												name: WILDCurrentToolDidChangeNotification
 												object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(currentToolWillChange:)
+												name: WILDCurrentToolWillChangeNotification
+												object: nil];
 		[self registerForDraggedTypes: [NSArray arrayWithObject: WILDPartPboardType]];
 	}
 	
@@ -71,6 +77,9 @@
 											object: nil];
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 											name: WILDCurrentToolDidChangeNotification
+											object: nil];
+	[[NSNotificationCenter defaultCenter] removeObserver: self
+											name: WILDCurrentToolWillChangeNotification
 											object: nil];
 	
 	DESTROY_DEALLOC(mTransitionType);
@@ -183,19 +192,38 @@
 }
 
 
+-(void)	currentToolWillChange: (NSNotification*)notification
+{
+//	[mToolChangeEffectView removeFromSuperview];
+//	DESTROY(mToolChangeEffectView);
+//	
+//	NSBitmapImageRep*	srcImgRep = [self bitmapImageRepForCachingDisplayInRect: self.bounds];
+//	[self cacheDisplayInRect: self.bounds toBitmapImageRep: srcImgRep];
+//	NSImage*			srcImg = [[[NSImage alloc] initWithSize: NSMakeSize(srcImgRep.pixelsWide, srcImgRep.pixelsHigh)] autorelease];
+//	NSImage*			srcImg = [NSImage imageNamed: @"NSApplicationIcon"];
+//	
+//	mToolChangeEffectView = [[NSImageView alloc] initWithFrame: self.frame];
+//	mToolChangeEffectView.image = srcImg;
+//	[mToolChangeEffectView setWantsLayer: YES];
+//	[mToolChangeEffectView setAlphaValue: 1.0];
+//	[self.superview addSubview: mToolChangeEffectView];
+}
+
+
 -(void)	currentToolDidChange: (NSNotification*)notification
 {
 	[[self window] invalidateCursorRectsForView: self];
 	[[self window] makeFirstResponder: self];
 	[[self guidelineView] setNeedsDisplay: YES];
+	[self setNeedsDisplay: YES];
+	
 //	[CATransaction begin];
-//	[CATransaction setAnimationDuration: 1.0];
-//	[self setTransitionType: @"WILDStretchFromBottomFilter"];
-//	[self setTransitionSubtype: @"cifilter"];
-//	[self setNeedsDisplay: YES];
-//	[self display];
-//	[self setTransitionType: nil];
-//	[self setTransitionSubtype: nil];
+//		[CATransaction setAnimationDuration: 1.0];
+//		[mToolChangeEffectView removeFromSuperview];
+//		[CATransaction setCompletionBlock:^
+//		{
+//			DESTROY(mToolChangeEffectView);
+//		}];
 //	[CATransaction commit];
 }
 
@@ -303,6 +331,8 @@
 	
 	if( [key isEqualToString: @"subviews"] && mTransitionType && mTransitionSubtype )
 	{
+		UKLog( @"Giving animation for %@ %@", mTransitionType, mTransitionSubtype );
+		
 		ani = [CATransition animation];
 		if( [mTransitionType hasPrefix: @"CI"] || [mTransitionType hasPrefix: @"WILD"] )
 		{
@@ -477,6 +507,27 @@ static void FillFirstFreeOne( NSString ** a, NSString ** b, NSString ** d, NSStr
 	NSPoint		tr = UKTopRightOfRect(innerBox); tr.x -= lineWidth / 2;
 	br.x -= lineWidth / 2;
 	[NSBezierPath strokeLineFromPoint: br toPoint: tr];
+}
+
+
+-(WILDPartView*)	partViewAtPoint: (NSPoint)pos
+{
+	for( NSView * subView in self.subviews.reverseObjectEnumerator )
+	{
+		if( NSPointInRect( pos, subView.frame) && [subView isKindOfClass: [WILDPartView class]] )
+		{
+			NSPoint newPos = [subView convertPoint: pos fromView: self];
+			return [(WILDPartView*)subView partViewAtPoint: newPos];
+		}
+	}
+	
+	return nil;
+}
+
+
+-(void)	addPartView: (WILDPartView*)inPartView;
+{
+	[self addSubview: inPartView];
 }
 
 @end
