@@ -183,6 +183,14 @@
 }
 
 
+-(BOOL)	textView: (NSTextView *)textView clickedOnLink: (id)link atIndex: (NSUInteger)charIndex
+{
+	WILDScriptContainerResultFromSendingMessage( mPartView.part, @"linkClicked %@", [link absoluteString] );
+	
+	return YES;
+}
+
+
 -(void)	removeSubviews
 {
 	DESTROY(mTextView);

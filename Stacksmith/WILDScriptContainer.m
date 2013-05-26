@@ -362,6 +362,7 @@ void	WILDCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler )
 	LEOHandlerID	mouseMoveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousemove" );
 	LEOHandlerID	mouseDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedrag" );
 	LEOHandlerID	loadPageHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "loadpage" );
+	LEOHandlerID	linkClickedHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "linkclicked" );
 	if( inHandler == arrowKeyHandlerID )
 	{
 		LEOValuePtr	directionParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 0 );
@@ -402,7 +403,8 @@ void	WILDCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler )
 			|| inHandler == mouseDragHandlerID
 			|| inHandler == functionKeyHandlerID
 			|| inHandler == keyDownHandlerID
-			|| inHandler == loadPageHandlerID )
+			|| inHandler == loadPageHandlerID
+			|| inHandler == linkClickedHandlerID )
 	{
 		handled = YES;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
