@@ -95,221 +95,234 @@ BOOL	UKScanLineEnding( NSScanner* scanny, NSMutableString* outString, NSInteger*
 
 NSString*	WILDFormatScript( NSString* scriptString, NSArray* *outSymbols )
 {
-	NSMutableString	*		outString = [[[NSMutableString alloc] init] autorelease];
-	NSMutableArray	*		symbols = [NSMutableArray array],
-					*		openBlockNames = [NSMutableArray array];
-	NSInteger				indentationLevel = 0,
-							currentLine = 0;
-	NSScanner*				scanny = [NSScanner scannerWithString: scriptString];
-	NSCharacterSet	*		wsCS = [NSCharacterSet whitespaceCharacterSet],
-					*		nlCS = [NSCharacterSet newlineCharacterSet],
-					*		idCS = [NSCharacterSet characterSetWithCharactersInString: @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"],
-					*		nwsCS = [NSCharacterSet characterSetWithCharactersInString: @"-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"];
-	
-	[scanny setCharactersToBeSkipped: nil];
-	[scanny setCaseSensitive: NO];
-	
-	while( YES )
+	@try
 	{
-		if( [scanny isAtEnd] )
-			break;
+		NSMutableString	*		outString = [[[NSMutableString alloc] init] autorelease];
+		NSMutableArray	*		symbols = [NSMutableArray array],
+						*		openBlockNames = [NSMutableArray array];
+		NSInteger				indentationLevel = 0,
+								currentLine = 0;
+		NSScanner*				scanny = [NSScanner scannerWithString: scriptString];
+		NSCharacterSet	*		wsCS = [NSCharacterSet whitespaceCharacterSet],
+						*		nlCS = [NSCharacterSet newlineCharacterSet],
+						*		idCS = [NSCharacterSet characterSetWithCharactersInString: @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"],
+						*		nwsCS = [NSCharacterSet characterSetWithCharactersInString: @"-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"];
 		
-		[scanny scanCharactersFromSet: wsCS intoString: nil];
-		NSInteger	lineStart = [scanny scanLocation];
-		NSInteger	addToIndentationAfterThisLine = 0;
+		[scanny setCharactersToBeSkipped: nil];
+		[scanny setCaseSensitive: NO];
 		
-		if( [scanny scanString: @"on" intoString: nil] )
+		while( YES )
 		{
-			NSString*	theName = nil;
+			if( [scanny isAtEnd] )
+				break;
+			
 			[scanny scanCharactersFromSet: wsCS intoString: nil];
-			if( [scanny scanCharactersFromSet: idCS intoString: &theName] )
+			NSInteger	lineStart = [scanny scanLocation];
+			NSInteger	addToIndentationAfterThisLine = 0;
+			
+			if( [scanny scanString: @"on" intoString: nil] )
 			{
-				WILDSymbol*	sym = [[WILDSymbol alloc] initWithLine: currentLine
-												symbolName: theName
-												symbolType: WILDSymbolTypeHandler];
-				[symbols addObject: sym];
-				[sym release];
-				[openBlockNames addObject: theName];
-				addToIndentationAfterThisLine++;
+				NSString*	theName = nil;
+				[scanny scanCharactersFromSet: wsCS intoString: nil];
+				if( [scanny scanCharactersFromSet: idCS intoString: &theName] )
+				{
+					WILDSymbol*	sym = [[WILDSymbol alloc] initWithLine: currentLine
+													symbolName: theName
+													symbolType: WILDSymbolTypeHandler];
+					[symbols addObject: sym];
+					[sym release];
+					[openBlockNames addObject: theName];
+					addToIndentationAfterThisLine++;
+				}
+				[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
 			}
-			[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-		}
-		else if( [scanny scanString: @"function" intoString: nil] )
-		{
-			NSString*	theName = nil;
-			[scanny scanCharactersFromSet: wsCS intoString: nil];
-			if( [scanny scanCharactersFromSet: idCS intoString: &theName] )
+			else if( [scanny scanString: @"function" intoString: nil] )
 			{
-				WILDSymbol*	sym = [[WILDSymbol alloc] initWithLine: currentLine
-												symbolName: theName
-												symbolType: WILDSymbolTypeFunction];
-				[symbols addObject: sym];
-				[sym release];
-				[openBlockNames addObject: theName];
-				addToIndentationAfterThisLine++;
+				NSString*	theName = nil;
+				[scanny scanCharactersFromSet: wsCS intoString: nil];
+				if( [scanny scanCharactersFromSet: idCS intoString: &theName] )
+				{
+					WILDSymbol*	sym = [[WILDSymbol alloc] initWithLine: currentLine
+													symbolName: theName
+													symbolType: WILDSymbolTypeFunction];
+					[symbols addObject: sym];
+					[sym release];
+					[openBlockNames addObject: theName];
+					addToIndentationAfterThisLine++;
+				}
+				[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
 			}
-			[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-		}
-		else if( [scanny scanString: @"if" intoString: nil] )
-		{
-			[scanny scanCharactersFromSet: wsCS intoString: nil];
-			while( YES )
+			else if( [scanny scanString: @"if" intoString: nil] )
 			{
 				[scanny scanCharactersFromSet: wsCS intoString: nil];
-				if( [scanny scanString: @"--" intoString: nil] )	// Comment! Ignore rest of line!
+				while( YES )
 				{
-					[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-					UKScanLineEnding( scanny, outString, &currentLine );
-				}
-				else if( [scanny scanString: @"then" intoString: nil] )
-				{
-					if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "then", like "athena", right?
+					[scanny scanCharactersFromSet: wsCS intoString: nil];
+					if( [scanny scanString: @"--" intoString: nil] )	// Comment! Ignore rest of line!
 					{
-						[scanny scanCharactersFromSet: wsCS intoString: nil];
-						if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
+						[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+						UKScanLineEnding( scanny, outString, &currentLine );
+					}
+					else if( [scanny scanString: @"then" intoString: nil] )
+					{
+						if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "then", like "athena", right?
 						{
-							[openBlockNames addObject: @"if"];
-							addToIndentationAfterThisLine++;
+							[scanny scanCharactersFromSet: wsCS intoString: nil];
+							if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
+							{
+								[openBlockNames addObject: @"if"];
+								addToIndentationAfterThisLine++;
+							}
+							else	// One-line if, it seems:
+							{
+								// TODO: Need to remember lastIfLine here so we can have else after one-line-if:
+								[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+							}
+							break;
 						}
-						else	// One-line if, it seems:
-						{
-							// TODO: Need to remember lastIfLine here so we can have else after one-line-if:
-							[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-						}
-						break;
+					}
+					else
+					{
+						if( [nwsCS characterIsMember: [scriptString characterAtIndex: [scanny scanLocation]]] )
+							[scanny setScanLocation: [scanny scanLocation] +1];	// Skip one character, so we can get partial matches of comments.
+						// This causes us to parse athena as a "then", so our "then" parsing above takes this into account.
+						[scanny scanUpToCharactersFromSet: nwsCS intoString: nil];
 					}
 				}
-				else
-				{
-					if( [nwsCS characterIsMember: [scriptString characterAtIndex: [scanny scanLocation]]] )
-						[scanny setScanLocation: [scanny scanLocation] +1];	// Skip one character, so we can get partial matches of comments.
-					// This causes us to parse athena as a "then", so our "then" parsing above takes this into account.
-					[scanny scanUpToCharactersFromSet: nwsCS intoString: nil];
-				}
 			}
-		}
-		else if( [scanny scanString: @"download" intoString: nil] )
-		{
-			[scanny scanCharactersFromSet: wsCS intoString: nil];
-			while( YES )
+			else if( [scanny scanString: @"download" intoString: nil] )
 			{
 				[scanny scanCharactersFromSet: wsCS intoString: nil];
-				if( [scanny scanString: @"--" intoString: nil] )	// Comment! Ignore rest of line!
+				while( YES )
 				{
-					[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-					UKScanLineEnding( scanny, outString, &currentLine );
-				}
-				else if( [scanny scanString: @"for" intoString: nil] )
-				{
-					if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "for", like "fort", right?
+					[scanny scanCharactersFromSet: wsCS intoString: nil];
+					if( [scanny scanString: @"--" intoString: nil] )	// Comment! Ignore rest of line!
 					{
-						[scanny scanCharactersFromSet: wsCS intoString: nil];
-						if( [scanny scanString: @"each" intoString: nil] )
-						[scanny scanCharactersFromSet: wsCS intoString: nil];
-						if( [scanny scanString: @"chunk" intoString: nil] )
-						[scanny scanCharactersFromSet: wsCS intoString: nil];
-						if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
-						{
-							[openBlockNames addObject: @"download"];
-							addToIndentationAfterThisLine++;
-						}
-						else	// One-line for each chunk, it seems:
-						{
-							// TODO: Need to remember lastDownloadLine here so we can have else after one-line-if:
-							[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-						}
-						break;
+						[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+						UKScanLineEnding( scanny, outString, &currentLine );
 					}
-				}
-				else if( [scanny scanString: @"when" intoString: nil] )
-				{
-					if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "for", like "fort", right?
+					else if( [scanny scanString: @"for" intoString: nil] )
 					{
-						[scanny scanCharactersFromSet: wsCS intoString: nil];
-						if( [scanny scanString: @"done" intoString: nil] )
-						[scanny scanCharactersFromSet: wsCS intoString: nil];
-						if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
+						if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "for", like "fort", right?
 						{
-							[openBlockNames addObject: @"download"];
-							addToIndentationAfterThisLine++;
+							[scanny scanCharactersFromSet: wsCS intoString: nil];
+							if( [scanny scanString: @"each" intoString: nil] )
+							[scanny scanCharactersFromSet: wsCS intoString: nil];
+							if( [scanny scanString: @"chunk" intoString: nil] )
+							[scanny scanCharactersFromSet: wsCS intoString: nil];
+							if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
+							{
+								[openBlockNames addObject: @"download"];
+								addToIndentationAfterThisLine++;
+							}
+							else	// One-line for each chunk, it seems:
+							{
+								// TODO: Need to remember lastDownloadLine here so we can have else after one-line-if:
+								[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+							}
+							break;
 						}
-						else	// One-line for each chunk, it seems:
-						{
-							// TODO: Need to remember lastDownloadLine here so we can have else after one-line-if:
-							[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-						}
-						break;
 					}
-				}
-				else
-				{
-					if( [nwsCS characterIsMember: [scriptString characterAtIndex: [scanny scanLocation]]] )
-						[scanny setScanLocation: [scanny scanLocation] +1];	// Skip one character, so we can get partial matches of comments.
-					// This causes us to parse fort as a "for", so our "for" parsing above takes this into account.
-					[scanny scanUpToCharactersFromSet: nwsCS intoString: nil];
+					else if( [scanny scanString: @"when" intoString: nil] )
+					{
+						if( ![scanny scanCharactersFromSet: idCS intoString: nil] )	// This is not just a string that contains "for", like "fort", right?
+						{
+							[scanny scanCharactersFromSet: wsCS intoString: nil];
+							if( [scanny scanString: @"done" intoString: nil] )
+							[scanny scanCharactersFromSet: wsCS intoString: nil];
+							if( UKScanLineEnding( scanny, nil, &currentLine ) )	// NIL because otherwise it'll prefix the line breaks to this line, which is WRONG.
+							{
+								[openBlockNames addObject: @"download"];
+								addToIndentationAfterThisLine++;
+							}
+							else	// One-line for each chunk, it seems:
+							{
+								// TODO: Need to remember lastDownloadLine here so we can have else after one-line-if:
+								[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+							}
+							break;
+						}
+					}
+					else
+					{
+						if( [nwsCS characterIsMember: [scriptString characterAtIndex: [scanny scanLocation]]] )
+							[scanny setScanLocation: [scanny scanLocation] +1];	// Skip one character, so we can get partial matches of comments.
+						// This causes us to parse fort as a "for", so our "for" parsing above takes this into account.
+						[scanny scanUpToCharactersFromSet: nwsCS intoString: nil];
+					}
 				}
 			}
-		}
-		else if( [scanny scanString: @"repeat" intoString: nil] )
-		{
-			[scanny scanCharactersFromSet: wsCS intoString: nil];
-			[openBlockNames addObject: @"repeat"];
-			[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-			addToIndentationAfterThisLine++;
-		}
-		else if( [scanny scanString: @"end" intoString: nil] )
-		{
-			NSString*	theName = nil;
-			[scanny scanCharactersFromSet: wsCS intoString: nil];
-			if( [scanny scanCharactersFromSet: idCS intoString: &theName] )
+			else if( [scanny scanString: @"repeat" intoString: nil] )
 			{
-				if( [[openBlockNames lastObject] caseInsensitiveCompare: theName] == NSOrderedSame )
+				[scanny scanCharactersFromSet: wsCS intoString: nil];
+				[openBlockNames addObject: @"repeat"];
+				[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+				addToIndentationAfterThisLine++;
+			}
+			else if( [scanny scanString: @"end" intoString: nil] )
+			{
+				NSString*	theName = nil;
+				[scanny scanCharactersFromSet: wsCS intoString: nil];
+				if( [scanny scanCharactersFromSet: idCS intoString: &theName] )
 				{
-					[openBlockNames removeLastObject];
+					if( [[openBlockNames lastObject] caseInsensitiveCompare: theName] == NSOrderedSame )
+					{
+						[openBlockNames removeLastObject];
+						indentationLevel--;
+					}
+				}
+				[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+			}
+			else if( [scanny scanString: @"else" intoString: nil] )
+			{
+				if( [[openBlockNames lastObject] caseInsensitiveCompare: @"if"] == NSOrderedSame )
+				{
 					indentationLevel--;
+					addToIndentationAfterThisLine++;
 				}
+				[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
 			}
-			[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-		}
-		else if( [scanny scanString: @"else" intoString: nil] )
-		{
-			if( [[openBlockNames lastObject] caseInsensitiveCompare: @"if"] == NSOrderedSame )
+			else if( [scanny scanString: @"when" intoString: nil] )
 			{
-				indentationLevel--;
-				addToIndentationAfterThisLine++;
+				if( [[openBlockNames lastObject] caseInsensitiveCompare: @"download"] == NSOrderedSame )
+				{
+					indentationLevel--;
+					addToIndentationAfterThisLine++;
+				}
+				[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
 			}
-			[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+			else
+				[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
+			
+			NSInteger	currPos = [scanny scanLocation];
+			NSString*	thisLine = [scriptString substringWithRange: NSMakeRange( lineStart, currPos -lineStart )];
+			for( NSInteger x = 0; x < indentationLevel; x++ )
+				[outString appendString: @"\t"];
+			[outString appendString: thisLine];
+			
+			indentationLevel += addToIndentationAfterThisLine;
+			
+			if( [scanny isAtEnd] )
+				break;
+			
+			UKScanLineEnding( scanny, outString, &currentLine );
 		}
-		else if( [scanny scanString: @"when" intoString: nil] )
-		{
-			if( [[openBlockNames lastObject] caseInsensitiveCompare: @"download"] == NSOrderedSame )
-			{
-				indentationLevel--;
-				addToIndentationAfterThisLine++;
-			}
-			[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
-		}
-		else
-			[scanny scanUpToCharactersFromSet: nlCS intoString: nil];
 		
-		NSInteger	currPos = [scanny scanLocation];
-		NSString*	thisLine = [scriptString substringWithRange: NSMakeRange( lineStart, currPos -lineStart )];
-		for( NSInteger x = 0; x < indentationLevel; x++ )
-			[outString appendString: @"\t"];
-		[outString appendString: thisLine];
+		if( outSymbols )
+			*outSymbols = symbols;
 		
-		indentationLevel += addToIndentationAfterThisLine;
-		
-		if( [scanny isAtEnd] )
-			break;
-		
-		UKScanLineEnding( scanny, outString, &currentLine );
+		return outString;
+	}
+	@catch( NSException *except )
+	{
+    	NSLog( @"Error formatting script: %@", except.reason );
+	}
+	@catch( ... )
+	{
+    	NSLog( @"Unknown error formatting script." );
 	}
 	
-	if( outSymbols )
-		*outSymbols = symbols;
-	
-	return outString;
+	return scriptString;
 }
 
 
