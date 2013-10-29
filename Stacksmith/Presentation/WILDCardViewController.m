@@ -48,6 +48,9 @@
 #import "UKHelperMacros.h"
 
 
+#define DISPLAY_ADDCOLOR_LAYER		1
+
+
 NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
 NSString*	WILDCardToolbarItemIdentifier = @"WILDCardToolbarItemIdentifier";
 NSString*	WILDBackgroundToolbarItemIdentifier = @"WILDBackgroundToolbarItemIdentifier";
@@ -55,6 +58,13 @@ NSString*	WILDEditBackgroundToolbarItemIdentifier = @"WILDEditBackgroundToolbarI
 
 NSString*	WILDPrevCardToolbarItemIdentifier = @"WILDPrevCardToolbarItemIdentifier";
 NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifier";
+
+
+@interface NSView (WILDTenNineCompatibility)
+
+-(void)	setLayerUsesCoreImageFilters: (BOOL)inState;	// New in 10.9, so if we wanna build on 10.8 or before, we need to declare this and check for presence at runtime.
+
+@end
 
 
 @interface WILDCardViewController () <ULIPaintViewDelegate,NSPopoverDelegate,NSToolbarDelegate>
@@ -524,6 +534,7 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		}
 		
 		// Load AddColor stuff:
+#if DISPLAY_ADDCOLOR_LAYER
 		NSSize          cardSize = [theStack cardSize];
 		CGColorSpaceRef	colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 		CGContextRef	theContext = CGBitmapContextCreate( NULL, cardSize.width, cardSize.height, 8,
@@ -556,9 +567,12 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 		[mAddColorOverlay setFrame: CGRectMake( 0, 0, cardSize.width, cardSize.height )];
 		CIFilter*	theFilter = [CIFilter filterWithName: @"CIDarkenBlendMode"];
 		[theFilter setDefaults];
+		if( [self.view respondsToSelector: @selector(setLayerUsesCoreImageFilters:)] )
+			[[self view] setLayerUsesCoreImageFilters: YES];
 		[mAddColorOverlay setCompositingFilter: theFilter];
 		[[[self view] layer] addSublayer: mAddColorOverlay];
 		CFRelease( theImage );
+#endif // DISPLAY_ADDCOLOR_LAYER
 		
 		// Add a view to draw guidelines on top of everything:
 		mGuidelineView = [[WILDGuidelineView alloc] initWithFrame: [[self view] bounds]];
