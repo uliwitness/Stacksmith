@@ -93,6 +93,8 @@ typedef enum
 
 -(NSView*)				contentView;
 -(void)					addSubPartView: (WILDPartView*)subPartView;
+-(BOOL)					needsViewContainer;
+-(BOOL)					isViewContainer;
 
 @end
 

@@ -761,6 +761,7 @@
 					WILDPartView	*viewUnderMouse = [cardView partViewAtPoint: currMouse];
 					if( viewUnderMouse != currentParent && ![viewUnderMouse isDescendantOf:self] && viewUnderMouse != self )	// Parent view possible changing?
 					{
+						if( !self.needsViewContainer || viewUnderMouse.isViewContainer )
 						currentParent = viewUnderMouse;
 					}
 					break;
@@ -783,12 +784,16 @@
 	{
 		newFrame = [currentParent.contentView convertRect: newFrame fromView: self.superview];
 		[currentParent addSubPartView: self];
+		UKLog( @"Moving to parent %@", currentParent );
 	}
 	else if( oldParent != currentParent )
 	{
 		newFrame = [cardView convertRect: newFrame fromView: self.superview];
 		[cardView addPartView: self];
+		UKLog( @"Moving from parent back onto card." );
 	}
+	else
+		UKLog( @"Not moving" );
 	
 	[mPart setQuartzRectangle: [self partRectForPartViewFrame: newFrame]];
 	[mPart updateChangeCount: NSChangeDone];
@@ -872,7 +877,9 @@
 
 	[pool drain];
 	
-	[mPart setQuartzRectangle: [self partRectForPartViewFrame: self.frame]];
+	NSRect		newBox = [self partRectForPartViewFrame: self.frame];
+	[mPart setQuartzRectangle: newBox];
+	UKLog( @"moving to: %@ %@", NSStringFromRect(self.frame), NSStringFromRect(newBox) );
 	[mPart updateChangeCount: NSChangeDone];
 	
 	WILDGuidelineView*			guidelineView = [[self enclosingCardView] guidelineView];
