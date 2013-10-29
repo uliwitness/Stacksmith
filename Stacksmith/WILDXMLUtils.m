@@ -127,7 +127,7 @@ NSMutableIndexSet*	WILDIndexSetFromSubElementInElement( NSString* elemName, NSXM
 {
 	NSArray			*	colorElems = [elem elementsForName: elemName];
 	if( [colorElems count] == 0 )
-		return [NSIndexSet indexSet];
+		return [NSMutableIndexSet indexSet];
 	
 	NSXMLElement	*	subElem = [colorElems objectAtIndex: 0];
 	NSMutableIndexSet*	indexes = [NSMutableIndexSet indexSet];
