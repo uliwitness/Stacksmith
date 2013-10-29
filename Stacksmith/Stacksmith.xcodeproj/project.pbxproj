@@ -247,7 +247,6 @@
 		559700FE137C9B6B000264B8 /* WILDIrisCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */; };
 		55993B6813476DE3001624A2 /* WILDStackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */; };
 		55993B6B13476E1D001624A2 /* WILDStackInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */; };
-		55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55A0BDCA113B67CC0095CAA6 /* stackimport */; };
 		55A3FB2C16E749D400735729 /* WILDShapeButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
@@ -373,20 +372,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 55C14BB7136EEF1500649790;
 			remoteInfo = finish_installation;
-		};
-		55A0BDC9113B67CC0095CAA6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DD76F6C0486A84900D96B5E;
-			remoteInfo = stackimport;
-		};
-		55A0BDCC113B68250095CAA6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DD76F620486A84900D96B5E;
-			remoteInfo = stackimport;
 		};
 		55C9F964136E1E950096FC4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -833,7 +818,6 @@
 		55993B6713476DE3001624A2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDStackInfoViewController.xib; sourceTree = "<group>"; };
 		55993B6913476E1D001624A2 /* WILDStackInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStackInfoViewController.h; sourceTree = "<group>"; };
 		55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoViewController.m; sourceTree = "<group>"; };
-		55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55A3FB2A16E749D400735729 /* WILDShapeButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDShapeButtonPresenter.h; path = Presentation/WILDShapeButtonPresenter.h; sourceTree = "<group>"; };
 		55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDShapeButtonPresenter.m; path = Presentation/WILDShapeButtonPresenter.m; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
@@ -1065,7 +1049,6 @@
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */,
-				55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */,
 			);
 			name = Propaganda;
 			sourceTree = "<group>";
@@ -1685,14 +1668,6 @@
 			name = "Standard Resources";
 			sourceTree = "<group>";
 		};
-		55A0BDC6113B67CC0095CAA6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				55A0BDCA113B67CC0095CAA6 /* stackimport */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		55C9F959136E1E940096FC4D /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1816,7 +1791,6 @@
 			dependencies = (
 				55C9F96D136E1ED30096FC4D /* PBXTargetDependency */,
 				55E23C00133FAC0200E6B444 /* PBXTargetDependency */,
-				55A0BDCD113B68250095CAA6 /* PBXTargetDependency */,
 			);
 			name = Stacksmith;
 			productInstallPath = "$(HOME)/Applications";
@@ -1848,10 +1822,6 @@
 					ProductGroup = 55C9F959136E1E940096FC4D /* Products */;
 					ProjectRef = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
 				},
-				{
-					ProductGroup = 55A0BDC6113B67CC0095CAA6 /* Products */;
-					ProjectRef = 55A0BDC5113B67CC0095CAA6 /* stackimport.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1874,13 +1844,6 @@
 			fileType = wrapper.application;
 			path = finish_installation.app;
 			remoteRef = 556785E01379C8F5005CC245 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		55A0BDCA113B67CC0095CAA6 /* stackimport */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = stackimport;
-			remoteRef = 55A0BDC9113B67CC0095CAA6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		55C9F965136E1E950096FC4D /* Sparkle.framework */ = {
@@ -1915,7 +1878,6 @@
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				1DDD582C0DA1D0D100B32029 /* WILDCardWindowController.xib in Resources */,
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
-				55A0BDCB113B67DD0095CAA6 /* stackimport in Resources */,
 				557B182F113C5CD600F85327 /* OldStack.icns in Resources */,
 				559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */,
 				559700F3137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel in Resources */,
@@ -2284,11 +2246,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		55A0BDCD113B68250095CAA6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = stackimport;
-			targetProxy = 55A0BDCC113B68250095CAA6 /* PBXContainerItemProxy */;
-		};
 		55C9F96D136E1ED30096FC4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Sparkle;
