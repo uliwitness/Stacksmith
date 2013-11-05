@@ -544,6 +544,19 @@
 }
 
 
+-(void)	setTextFont: (NSFont*)inFont
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"textFont"
+															forKey: WILDAffectedPropertyKey]];
+	ASSIGN( mFont, inFont );
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification
+							object: self userInfo: [NSDictionary dictionaryWithObject: @"textFont"
+															forKey: WILDAffectedPropertyKey]];
+	[self updateChangeCount: NSChangeDone];
+}
+
+
 -(NSMutableDictionary*)	textAttributes
 {
 	NSMutableDictionary*	attrs = [NSMutableDictionary dictionary];

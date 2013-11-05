@@ -713,6 +713,19 @@ NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifie
 }
 
 
+-(void)	changeFont: (id)sender
+{
+	if( [[WILDTools sharedTools] numberOfSelectedClients] > 0 )
+	{
+		NSArray*			allSels = [[[WILDTools sharedTools] clients] allObjects];
+		for( WILDPartView* currView in allSels )
+		{
+			[currView changeFont: sender];
+		}
+	}
+}
+
+
 -(void)	moveUp: (id)sender
 {
 	if( [[WILDTools sharedTools] numberOfSelectedClients] > 0 )

@@ -103,6 +103,7 @@
 @property (retain,nonatomic) NSString*		timerMessage;
 @property (assign,nonatomic) WILDPart*		owningPart;
 @property (assign,nonatomic) NSSize			contentSize;
+@property (retain,nonatomic) NSFont*		textFont;
 
 -(id)			initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack;
 
@@ -132,7 +133,6 @@
 
 -(NSUInteger)	indexOfPart: (WILDPart*)inPart asType: (NSString*)inPartType;
 
--(NSFont*)				textFont;
 -(NSMutableDictionary*)	textAttributes;
 -(NSTextAlignment)		textAlignment;
 

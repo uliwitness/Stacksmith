@@ -1610,6 +1610,14 @@
 }
 
 
+-(void)	changeFont: (id)sender
+{
+	NSFont *oldFont = [mPart textFont];
+	NSFont *newFont = [sender convertFont:oldFont];
+	[mPart setTextFont: newFont];
+}
+
+
 -(NSString*)	description
 {
 	return [NSString stringWithFormat: @"<%@: %p>{ frame = %@, visible = %s, part = %@ }", NSStringFromClass([self class]), self, NSStringFromRect(self.frame), self.isHidden ? "NO" : "YES", mPart];
