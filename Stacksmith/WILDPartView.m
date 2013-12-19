@@ -1291,6 +1291,8 @@
 	[self setNeedsDisplay: YES];
 	[mMainView setNeedsDisplay: YES];
 	[mHelperView setNeedsDisplay: YES];
+	
+	[mPartPresenter currentToolDidChange: notification];
 }
 
 
