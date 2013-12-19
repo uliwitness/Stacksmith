@@ -84,6 +84,12 @@
 }
 
 
+-(void)		currentToolDidChange: (NSNotification*)inPart
+{
+	
+}
+
+
 -(NSRect)	selectionFrame
 {
 	WILDGuidelineView	*	gv = [mPartView enclosingCardView].guidelineView;

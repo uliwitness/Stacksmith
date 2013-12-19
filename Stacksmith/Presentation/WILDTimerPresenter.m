@@ -48,6 +48,12 @@
 }
 
 
+-(void)		currentToolDidChange: (NSNotification*)inPart
+{
+	[mPartView setHidden: !mPartView.myToolIsCurrent || ![[mPartView part] visible]];
+}
+
+
 -(void)	sendTimerMessage: (NSTimer*)sender
 {
 	if( ![mPartView myToolIsCurrent] )	// Don't run timer while editing.

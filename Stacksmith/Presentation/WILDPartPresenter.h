@@ -26,6 +26,7 @@
 
 -(void)		partWillChange: (NSNotification*)inPart;
 -(void)		partDidChange: (NSNotification*)inPart;
+-(void)		currentToolDidChange: (NSNotification*)inPart;	// Override point for subclassers. Call super.
 
 -(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor;
 -(NSRect)	selectionFrame;	// Frame coord. system of the part view. I.e. local to part view's superview.
