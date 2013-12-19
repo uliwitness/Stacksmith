@@ -20,6 +20,7 @@
 #import "WILDDocument.h"
 #import "WILDPresentationConstants.h"
 #import "UKHelperMacros.h"
+#import "WILDScriptEditorWindowController.h"
 
 
 @interface WILDPart ()
@@ -940,7 +941,17 @@
 		if( LEOParserGetLastErrorMessage() )
 		{
 			if( showError )
-				NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] );
+			{
+				size_t	lineNum = LEOParserGetLastErrorLineNum();
+				size_t	errorOffset = LEOParserGetLastErrorOffset();
+				if( NSRunAlertPanel( @"Script Error", @"%@", @"OK", ((lineNum != SIZE_T_MAX || errorOffset != SIZE_T_MAX) ? @"Edit Script" : @""), @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] ) == NSAlertAlternateReturn )
+				{
+					if( errorOffset != SIZE_T_MAX )
+						[self openScriptEditorAndShowOffset: errorOffset];
+					else
+						[self openScriptEditorAndShowLine: lineNum];
+				}
+			}
 			if( mScriptObject )
 			{
 				LEOScriptRelease( mScriptObject );
@@ -1341,6 +1352,26 @@
 -(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
 {
 	return NO;
+}
+
+
+-(void)	openScriptEditorAndShowOffset: (NSInteger)byteOffset
+{
+	WILDScriptEditorWindowController*	sewc = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: self] autorelease];
+	[sewc setGlobalStartRect: NSZeroRect];	// TODO: Determine our rect.
+	[[self document] addWindowController: sewc];
+	[sewc showWindow: nil];
+	[sewc goToCharacter: byteOffset];
+}
+
+
+-(void)	openScriptEditorAndShowLine: (NSInteger)lineIndex
+{
+	WILDScriptEditorWindowController*	sewc = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: self] autorelease];
+	[sewc setGlobalStartRect: NSZeroRect];	// TODO: Determine our rect.
+	[[self document] addWindowController: sewc];
+	[sewc showWindow: nil];
+	[sewc goToLine: lineIndex];
 }
 
 
@@ -1776,6 +1807,12 @@ PROPERTY_MAP_END
 -(NSString*)	description
 {
 	return [NSString stringWithFormat: @"%@ { layer = %@, type = %@, style = %@, name = %@, id = %lld, path = %@ }", NSStringFromClass([self class]), mLayer, mType, mStyle, mName, mID, mMediaPath];	
+}
+
+
+-(WILDDocument*)	document
+{
+	return [mOwner document];
 }
 
 @end

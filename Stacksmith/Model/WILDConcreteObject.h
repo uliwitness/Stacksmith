@@ -42,6 +42,10 @@
 
 -(void)				getID: (LEOObjectID*)outID seedForScripts: (LEOObjectSeed*)outSeed;
 -(void)				getPropertyTypes: (CFMutableDictionaryRef*)outPropertyTypes names: (NSMutableDictionary**)outPropertyNames;
+
+-(void)				openScriptEditorAndShowOffset: (NSInteger)byteOffset;
+-(void)				openScriptEditorAndShowLine: (NSInteger)lineIndex;
+
 @end
 
 

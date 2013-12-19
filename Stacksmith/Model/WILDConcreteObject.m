@@ -100,7 +100,17 @@ PROPERTY_MAP_END
 		if( LEOParserGetLastErrorMessage() )
 		{
 			if( showError )
-				NSRunAlertPanel( @"Script Error", @"%@", @"OK", @"", @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] );
+			{
+				size_t	lineNum = LEOParserGetLastErrorLineNum();
+				size_t	errorOffset = LEOParserGetLastErrorOffset();
+				if( NSRunAlertPanel( @"Script Error", @"%@", @"OK", ((lineNum != SIZE_T_MAX || errorOffset != SIZE_T_MAX) ? @"Edit Script" : @""), @"", [NSString stringWithCString: LEOParserGetLastErrorMessage() encoding: NSUTF8StringEncoding] ) == NSAlertAlternateReturn )
+				{
+					if( errorOffset != SIZE_T_MAX )
+						[self openScriptEditorAndShowOffset: errorOffset];
+					else
+						[self openScriptEditorAndShowLine: lineNum];
+				}
+			}
 			if( mScriptObject )
 			{
 				LEOScriptRelease( mScriptObject );
@@ -110,6 +120,18 @@ PROPERTY_MAP_END
 	}
 	
 	return mScriptObject;
+}
+
+
+-(void)	openScriptEditorAndShowOffset: (NSInteger)byteOffset
+{
+	
+}
+
+
+-(void)	openScriptEditorAndShowLine: (NSInteger)lineIndex
+{
+	
 }
 
 

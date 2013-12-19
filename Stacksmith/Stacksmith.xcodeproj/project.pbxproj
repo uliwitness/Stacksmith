@@ -188,6 +188,7 @@
 		5542CD7D113ABB8B00555C64 /* WILDPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CD7C113ABB8B00555C64 /* WILDPart.m */; };
 		5542CE48113AE27500555C64 /* WILDPartContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CE47113AE27500555C64 /* WILDPartContents.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
+		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
 		554DE25C1736DB4500940933 /* WILDGroupPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 554DE25B1736DB4500940933 /* WILDGroupPresenter.m */; };
 		554DE2631736F9F400940933 /* WILDGroupInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554DE2611736F9F400940933 /* WILDGroupInfoViewController.xib */; };
 		554DE2661736FA1F00940933 /* WILDGroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554DE2651736FA1F00940933 /* WILDGroupInfoViewController.m */; };
@@ -631,7 +632,7 @@
 		553AF61C17491AEE00AF3BBA /* UKCoordinateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCoordinateUtils.h; path = ../UliKit/UKCoordinateUtils.h; sourceTree = "<group>"; };
 		553AF61D17491AEE00AF3BBA /* UKCoordinateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKCoordinateUtils.m; path = ../UliKit/UKCoordinateUtils.m; sourceTree = "<group>"; };
 		553C469E13577334000219FA /* Forge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forge.h; sourceTree = "<group>"; };
-		553C469F13577334000219FA /* Forge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Forge.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		553C469F13577334000219FA /* Forge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Forge.cpp; sourceTree = "<group>"; };
 		553C46A013577334000219FA /* CCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CCodeBlock.h; path = ../../CCodeBlock.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		553C46A113577334000219FA /* CCodeBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CCodeBlock.cpp; path = ../../CCodeBlock.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		553C46A213577334000219FA /* CVariableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVariableEntry.h; path = ../../CVariableEntry.h; sourceTree = "<group>"; };
@@ -674,7 +675,7 @@
 		553C46CD13577334000219FA /* CGetArrayItemNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGetArrayItemNode.h; path = ../../CGetArrayItemNode.h; sourceTree = "<group>"; };
 		553C46CE13577334000219FA /* CGetArrayItemNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGetArrayItemNode.cpp; path = ../../CGetArrayItemNode.cpp; sourceTree = "<group>"; };
 		553C46CF13577334000219FA /* CMakeChunkRefNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CMakeChunkRefNode.h; path = ../../CMakeChunkRefNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		553C46D013577334000219FA /* CMakeChunkRefNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CMakeChunkRefNode.cpp; path = ../../CMakeChunkRefNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		553C46D013577334000219FA /* CMakeChunkRefNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CMakeChunkRefNode.cpp; path = ../../CMakeChunkRefNode.cpp; sourceTree = "<group>"; };
 		553C46D113577334000219FA /* CMakeChunkConstNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CMakeChunkConstNode.h; path = ../../CMakeChunkConstNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		553C46D213577334000219FA /* CMakeChunkConstNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CMakeChunkConstNode.cpp; path = ../../CMakeChunkConstNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		553C46D313577334000219FA /* CCodeBlockNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCodeBlockNode.h; path = ../../CCodeBlockNode.h; sourceTree = "<group>"; };
@@ -727,6 +728,8 @@
 		5542CE47113AE27500555C64 /* WILDPartContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPartContents.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
+		554DC3181863B6A000B514E3 /* CForgeExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgeExceptions.h; path = ../../CForgeExceptions.h; sourceTree = "<group>"; };
+		554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CForgeExceptions.cpp; path = ../../CForgeExceptions.cpp; sourceTree = "<group>"; };
 		554DE25A1736DB4500940933 /* WILDGroupPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGroupPresenter.h; path = Presentation/WILDGroupPresenter.h; sourceTree = "<group>"; };
 		554DE25B1736DB4500940933 /* WILDGroupPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGroupPresenter.m; path = Presentation/WILDGroupPresenter.m; sourceTree = "<group>"; };
 		554DE2621736F9F400940933 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDGroupInfoViewController.xib; sourceTree = "<group>"; };
@@ -1269,6 +1272,8 @@
 				553C46A613577334000219FA /* CToken.cpp */,
 				553C46A713577334000219FA /* CParser.h */,
 				553C46A813577334000219FA /* CParser.cpp */,
+				554DC3181863B6A000B514E3 /* CForgeExceptions.h */,
+				554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */,
 				553C46A913577334000219FA /* Parse Tree */,
 				553C46AA13577334000219FA /* Leonie */,
 				551D93911705A7AD003766DA /* WILDDownloadInstructions.m */,
@@ -2194,6 +2199,7 @@
 				558F89E7138B06F900E26275 /* WILDGuidelineView.m in Sources */,
 				552A4DB913928677007C4527 /* WILDMovieView.m in Sources */,
 				55B79A8813D0319A00BC0A19 /* ULIHighlightingButton.m in Sources */,
+				554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */,
 				55E9FD8B13E56D3A0089B81F /* WILDPartInfoViewController.m in Sources */,
 				55E9FD8F13E5FBCC0089B81F /* WILDButtonInfoViewController.m in Sources */,
 				55E9FD9913E747B20089B81F /* WILDIconPickerViewController.m in Sources */,

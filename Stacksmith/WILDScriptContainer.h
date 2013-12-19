@@ -28,6 +28,9 @@ struct LEOScript;
 -(id<WILDObject>)			parentObject;
 -(struct LEOContextGroup*)	scriptContextGroupObject;
 
+-(void)						openScriptEditorAndShowOffset: (NSInteger)byteOffset;
+-(void)						openScriptEditorAndShowLine: (NSInteger)lineIndex;
+
 @optional
 -(NSString*)			defaultScriptReturningSelectionRange: (NSRange*)outSelection;
 

@@ -136,4 +136,16 @@
 	mGlobalStartRect = theBox;
 }
 
+
+-(void)		goToLine: (NSUInteger)lineNum
+{
+	[mSyntaxController goToLine: lineNum];
+}
+
+
+-(void)		goToCharacter: (NSUInteger)charNum
+{
+	[mSyntaxController goToCharacter: charNum];
+}
+
 @end

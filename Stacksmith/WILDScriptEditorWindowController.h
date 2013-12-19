@@ -29,4 +29,7 @@
 
 -(void)		setGlobalStartRect: (NSRect)theBox;
 
+-(void)		goToLine: (NSUInteger)lineNum;
+-(void)		goToCharacter: (NSUInteger)charNum;
+
 @end

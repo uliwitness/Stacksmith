@@ -57,6 +57,9 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 @optional
 -(BOOL)				deleteWILDObject;
 
+-(void)				openScriptEditorAndShowOffset: (NSInteger)byteOffset;
+-(void)				openScriptEditorAndShowLine: (NSInteger)lineIndex;
+
 -(void)				addUserPropertyNamed: (NSString*)userPropName;
 -(void)				deleteUserPropertyNamed: (NSString*)userPropName;
 -(NSMutableArray*)	allUserProperties;	// Each item is a dictionary with property name and value. For use by userProp editor GUI. This is a mutable copy of internal storage, changing it won't change the object.
