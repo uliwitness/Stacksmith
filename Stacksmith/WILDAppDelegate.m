@@ -20,6 +20,7 @@
 #import "WILDHostFunctions.h"
 #import "LEORemoteDebugger.h"
 #import "UKCrashReporter.h"
+#import "WILDSearchPaths.h"
 
 
 @protocol WILDCreateObjectMethodMenuItemAction
@@ -138,26 +139,13 @@ void	WILDFirstNativeCall( void )
 
 -(BOOL)	openStandardStackNamed: (NSString*)inStackName
 {
-	NSString	*	homeStackPath = nil;
-	NSString	*	standaloneStackPath = [[NSBundle mainBundle] pathForResource: inStackName ofType: @"xstk"];
-	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
-		homeStackPath = standaloneStackPath;
-	else
-		standaloneStackPath = [[NSBundle mainBundle] pathForResource: inStackName ofType: @""];
-	
-	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
-		homeStackPath = standaloneStackPath;
-	else
-        standaloneStackPath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: [inStackName stringByAppendingString: @".xstk"]];
-	
-	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
-		homeStackPath = standaloneStackPath;
-	else
-        homeStackPath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: inStackName];
+	NSURL		*	standardStackURL = [[WILDSearchPaths sharedSearchPaths] stackURLForName: inStackName];
+	if( !standardStackURL )
+		return NO;
 	
 	NSError		*	theError = nil;
-	NSDocument	*	theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: [NSURL fileURLWithPath: homeStackPath]
-                                                                                                 display: YES error: &theError];
+	NSDocument	*	theDoc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: standardStackURL
+						display: YES error: &theError];
 	[theDoc showWindows];
 	
 	return theDoc != nil;

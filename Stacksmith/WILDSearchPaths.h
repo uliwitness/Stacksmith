@@ -18,4 +18,6 @@
 
 -(NSArray*)		paths;
 
+-(NSURL*)		stackURLForName: (NSString*)inStackName;
+
 @end

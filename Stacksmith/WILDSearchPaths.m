@@ -47,4 +47,30 @@
 	return mPaths;
 }
 
+
+-(NSURL*)		stackURLForName: (NSString*)inStackName;
+{
+	NSString	*	homeStackPath = nil;
+	NSString	*	standaloneStackPath = [[NSBundle mainBundle] pathForResource: inStackName ofType: @"xstk"];
+	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
+		homeStackPath = standaloneStackPath;
+	else
+		standaloneStackPath = [[NSBundle mainBundle] pathForResource: inStackName ofType: @""];
+	
+	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
+		homeStackPath = standaloneStackPath;
+	else
+        standaloneStackPath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: [inStackName stringByAppendingString: @".xstk"]];
+	
+	if( standaloneStackPath && [[NSFileManager defaultManager] fileExistsAtPath: standaloneStackPath] )
+		homeStackPath = standaloneStackPath;
+	else
+        homeStackPath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: inStackName];
+	
+	NSURL	*	stackURL = homeStackPath ? [NSURL fileURLWithPath: homeStackPath] : nil;
+	
+	return stackURL;
+}
+
+
 @end
