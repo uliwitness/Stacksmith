@@ -64,7 +64,7 @@ id	WILDObjCObjectFromLEOValue( LEOValuePtr inValue, LEOContext* inContext, LEOVa
 	}
 	else if( theArrayValue && (inDesiredType == &kLeoValueTypeBoolean || inDesiredType == &kLeoValueTypeBooleanVariant) )
 	{
-		theObjCValue = [NSNumber numberWithBool: theArrayValue->boolean.boolean];
+		theObjCValue = (NSNumber*) (theArrayValue->boolean.boolean ? kCFBooleanTrue : kCFBooleanFalse);
 	}
 	else
 	{

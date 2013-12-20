@@ -223,7 +223,17 @@ PROPERTY_MAP_END
 	{
 		NSString*	propName = [mPropertyNames objectForKey: inPropertyName];
 		if( propName )
-			return [self valueForKey: propName];
+		{
+			id	theValue = [self valueForKey: propName];
+			if( [self typeForWILDPropertyNamed: inPropertyName] == &kLeoValueTypeBoolean )
+			{
+				if( [theValue boolValue] )
+					theValue = (id) kCFBooleanTrue;
+				else
+					theValue = (id) kCFBooleanFalse;
+			}
+			return theValue;
+		}
 		else
 			return [mUserProperties objectForKey: inPropertyName];
 	}
