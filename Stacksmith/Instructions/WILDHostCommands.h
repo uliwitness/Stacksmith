@@ -8,7 +8,7 @@
 
 /*!
 	@header WILDHostCommands
-	Instructions and syntax parsing tables for all theStacksmith-specific commands.
+	Instructions and syntax parsing tables for all the Stacksmith-specific commands.
 	These are all the one-off commands that Stacksmith offers that don't warrant
 	a file of their own, and that aren't cross-platform or that don't make sense
 	to build into the Forge core. E.g. anything UI-related or object model-related.
