@@ -21,6 +21,7 @@
 	IBOutlet NSPopUpButton*						mPopUpButton;		// Handlers popup.
 	IBOutlet UKSyntaxColoredTextViewController*	mSyntaxController;	// Provides some extra functionality like syntax coloring.
 	NSRect										mGlobalStartRect;	// For opening animation.
+	IBOutlet NSView	*							mTopNavAreaView;	// The top area above the text (becomes fullscreen accessory view).
 }
 
 -(id)		initWithScriptContainer: (id<WILDScriptContainer>)inContainer;

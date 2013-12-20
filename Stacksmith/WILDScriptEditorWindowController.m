@@ -12,6 +12,14 @@
 #import "NSWindow+ULIZoomEffect.h"
 
 
+static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEditorTopAreaToolbarItemIdentifier";
+
+
+@interface WILDScriptEditorWindowController () <NSToolbarDelegate>
+
+@end
+
+
 @implementation WILDScriptEditorWindowController
 
 -(id)	initWithScriptContainer: (id<WILDScriptContainer>)inContainer
@@ -66,6 +74,15 @@
 		[mPopUpButton addItemWithTitle: @"None"];
 		[mPopUpButton setEnabled: NO];
 	}
+	
+	NSToolbar	*	editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDScriptEditorToolbar"] autorelease];
+	[editToolbar setDelegate: self];
+	[editToolbar setAllowsUserCustomization: NO];
+	[editToolbar setVisible: NO];
+	[editToolbar setDisplayMode: NSToolbarDisplayModeIconOnly];
+	[editToolbar setSizeMode: NSToolbarSizeModeSmall];
+	[self.window setToolbar: editToolbar];
+	[self.window toggleToolbarShown: self];
 }
 
 
@@ -146,6 +163,34 @@
 -(void)		goToCharacter: (NSUInteger)charNum
 {
 	[mSyntaxController goToCharacter: charNum];
+}
+
+
+- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+{
+	NSToolbarItem	*	theItem = [[[NSToolbarItem alloc] initWithItemIdentifier: itemIdentifier] autorelease];
+	
+	// +++ Add final icons
+	
+	if( [itemIdentifier isEqualToString: WILDScriptEditorTopAreaToolbarItemIdentifier] )
+	{
+		[theItem setLabel: @"Top Area"];
+		[theItem setView: mTopNavAreaView];
+	}
+	
+	return theItem;
+}
+
+/* Returns the ordered list of items to be shown in the toolbar by default.   If during initialization, no overriding values are found in the user defaults, or if the user chooses to revert to the default items this set will be used. */
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+	return @[ WILDScriptEditorTopAreaToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier ];
+}
+
+/* Returns the list of all allowed items by identifier.  By default, the toolbar does not assume any items are allowed, even the separator.  So, every allowed item must be explicitly listed.  The set of allowed items is used to construct the customization palette.  The order of items does not necessarily guarantee the order of appearance in the palette.  At minimum, you should return the default item list.*/
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+	return @[ WILDScriptEditorTopAreaToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier ];
 }
 
 @end

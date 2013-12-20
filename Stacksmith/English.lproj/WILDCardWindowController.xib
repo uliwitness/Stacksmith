@@ -1,920 +1,117 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
-	<data>
-		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
-		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">3084</string>
-		</object>
-		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>NSBox</string>
-			<string>NSButton</string>
-			<string>NSButtonCell</string>
-			<string>NSCustomObject</string>
-			<string>NSCustomView</string>
-			<string>NSSearchField</string>
-			<string>NSSearchFieldCell</string>
-			<string>NSSegmentedCell</string>
-			<string>NSSegmentedControl</string>
-			<string>NSView</string>
-			<string>NSWindowTemplate</string>
-		</object>
-		<object class="NSArray" key="IBDocument.PluginDependencies">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
-			<integer value="1" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableArray" key="IBDocument.RootObjects" id="580458321">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSCustomObject" id="512844837">
-				<string key="NSClassName">WILDCardWindowController</string>
-			</object>
-			<object class="NSCustomObject" id="613418571">
-				<string key="NSClassName">FirstResponder</string>
-			</object>
-			<object class="NSWindowTemplate" id="275939982">
-				<int key="NSWindowStyleMask">7</int>
-				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{544, 362}, {448, 331}}</string>
-				<int key="NSWTFlags">1886913536</int>
-				<string key="NSWindowTitle">Window</string>
-				<string key="NSWindowClass">NSWindow</string>
-				<string key="NSViewClass">View</string>
-				<nil key="NSUserInterfaceItemIdentifier"/>
-				<string key="NSWindowContentMinSize">{94, 86}</string>
-				<object class="NSView" key="NSWindowView" id="568628114">
-					<reference key="NSNextResponder"/>
-					<int key="NSvFlags">256</int>
-					<object class="NSMutableArray" key="NSSubviews">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSCustomView" id="249622783">
-							<reference key="NSNextResponder" ref="568628114"/>
-							<int key="NSvFlags">274</int>
-							<object class="NSMutableArray" key="NSSubviews">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSBox" id="176347303">
-									<reference key="NSNextResponder" ref="249622783"/>
-									<int key="NSvFlags">10</int>
-									<object class="NSMutableArray" key="NSSubviews">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-									</object>
-									<string key="NSFrame">{{0, 329}, {464, 5}}</string>
-									<reference key="NSSuperview" ref="249622783"/>
-									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
-									<bool key="NSViewIsLayerTreeHost">YES</bool>
-									<string key="NSOffsets">{0, 0}</string>
-									<object class="NSTextFieldCell" key="NSTitleCell">
-										<int key="NSCellFlags">67108864</int>
-										<int key="NSCellFlags2">0</int>
-										<string key="NSContents">Box</string>
-										<object class="NSFont" key="NSSupport">
-											<string key="NSName">LucidaGrande</string>
-											<double key="NSSize">13</double>
-											<int key="NSfFlags">1044</int>
-										</object>
-										<object class="NSColor" key="NSBackgroundColor" id="386409731">
-											<int key="NSColorSpace">6</int>
-											<string key="NSCatalogName">System</string>
-											<string key="NSColorName">textBackgroundColor</string>
-											<object class="NSColor" key="NSColor">
-												<int key="NSColorSpace">3</int>
-												<bytes key="NSWhite">MQA</bytes>
-											</object>
-										</object>
-										<object class="NSColor" key="NSTextColor">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
-										</object>
-									</object>
-									<int key="NSBorderType">3</int>
-									<int key="NSBoxType">2</int>
-									<int key="NSTitlePosition">0</int>
-									<bool key="NSTransparent">NO</bool>
-								</object>
-								<object class="NSSegmentedControl" id="692936866">
-									<reference key="NSNextResponder" ref="249622783"/>
-									<int key="NSvFlags">268</int>
-									<string key="NSFrame">{{7, 335}, {48, 18}}</string>
-									<reference key="NSSuperview" ref="249622783"/>
-									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="679136925"/>
-									<bool key="NSViewIsLayerTreeHost">YES</bool>
-									<bool key="NSEnabled">YES</bool>
-									<object class="NSSegmentedCell" key="NSCell" id="701080520">
-										<int key="NSCellFlags">67108864</int>
-										<int key="NSCellFlags2">131072</int>
-										<object class="NSFont" key="NSSupport" id="26">
-											<string key="NSName">LucidaGrande</string>
-											<double key="NSSize">11</double>
-											<int key="NSfFlags">3100</int>
-										</object>
-										<reference key="NSControlView" ref="692936866"/>
-										<object class="NSMutableArray" key="NSSegmentImages">
-											<bool key="EncodedWithXMLCoder">YES</bool>
-											<object class="NSSegmentItem">
-												<double key="NSSegmentItemWidth">21</double>
-												<object class="NSCustomResource" key="NSSegmentItemImage">
-													<string key="NSClassName">NSImage</string>
-													<string key="NSResourceName">NSLeftFacingTriangleTemplate</string>
-												</object>
-												<string key="NSSegmentItemLabel"/>
-												<int key="NSSegmentItemTag">3</int>
-												<int key="NSSegmentItemImageScaling">0</int>
-											</object>
-											<object class="NSSegmentItem">
-												<double key="NSSegmentItemWidth">20</double>
-												<object class="NSCustomResource" key="NSSegmentItemImage">
-													<string key="NSClassName">NSImage</string>
-													<string key="NSResourceName">NSRightFacingTriangleTemplate</string>
-												</object>
-												<string key="NSSegmentItemLabel"/>
-												<int key="NSSegmentItemTag">2</int>
-												<int key="NSSegmentItemImageScaling">0</int>
-											</object>
-										</object>
-										<int key="NSTrackingMode">2</int>
-										<int key="NSSegmentStyle">3</int>
-									</object>
-									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-								</object>
-								<object class="NSSearchField" id="679136925">
-									<reference key="NSNextResponder" ref="249622783"/>
-									<int key="NSvFlags">266</int>
-									<string key="NSFrame">{{62, 335}, {320, 19}}</string>
-									<reference key="NSSuperview" ref="249622783"/>
-									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="961412843"/>
-									<bool key="NSViewIsLayerTreeHost">YES</bool>
-									<bool key="NSEnabled">YES</bool>
-									<object class="NSSearchFieldCell" key="NSCell" id="463915068">
-										<int key="NSCellFlags">879755328</int>
-										<int key="NSCellFlags2">268600384</int>
-										<string key="NSContents"/>
-										<reference key="NSSupport" ref="26"/>
-										<string key="NSPlaceholderString">Search Fields</string>
-										<reference key="NSControlView" ref="679136925"/>
-										<bool key="NSDrawsBackground">YES</bool>
-										<int key="NSTextBezelStyle">1</int>
-										<reference key="NSBackgroundColor" ref="386409731"/>
-										<object class="NSColor" key="NSTextColor">
-											<int key="NSColorSpace">6</int>
-											<string key="NSCatalogName">System</string>
-											<string key="NSColorName">controlTextColor</string>
-											<object class="NSColor" key="NSColor">
-												<int key="NSColorSpace">3</int>
-												<bytes key="NSWhite">MAA</bytes>
-											</object>
-										</object>
-										<object class="NSButtonCell" key="NSSearchButtonCell">
-											<int key="NSCellFlags">536870912</int>
-											<int key="NSCellFlags2">0</int>
-											<string key="NSContents">search</string>
-											<reference key="NSControlView" ref="679136925"/>
-											<string key="NSAction">_searchFieldSearch:</string>
-											<reference key="NSTarget" ref="463915068"/>
-											<int key="NSButtonFlags">138690560</int>
-											<int key="NSButtonFlags2">0</int>
-											<string key="NSKeyEquivalent"/>
-											<int key="NSPeriodicDelay">400</int>
-											<int key="NSPeriodicInterval">75</int>
-										</object>
-										<object class="NSButtonCell" key="NSCancelButtonCell">
-											<int key="NSCellFlags">536870912</int>
-											<int key="NSCellFlags2">0</int>
-											<string key="NSContents">clear</string>
-											<object class="NSMutableArray" key="NSAccessibilityOverriddenAttributes">
-												<bool key="EncodedWithXMLCoder">YES</bool>
-												<object class="NSMutableDictionary">
-													<bool key="EncodedWithXMLCoder">YES</bool>
-													<object class="NSArray" key="dict.sortedKeys">
-														<bool key="EncodedWithXMLCoder">YES</bool>
-														<string>AXDescription</string>
-														<string>NSAccessibilityEncodedAttributesValueType</string>
-													</object>
-													<object class="NSArray" key="dict.values">
-														<bool key="EncodedWithXMLCoder">YES</bool>
-														<string>cancel</string>
-														<integer value="1"/>
-													</object>
-												</object>
-											</object>
-											<reference key="NSControlView" ref="679136925"/>
-											<string key="NSAction">_searchFieldCancel:</string>
-											<reference key="NSTarget" ref="463915068"/>
-											<int key="NSButtonFlags">138690560</int>
-											<int key="NSButtonFlags2">0</int>
-											<string key="NSKeyEquivalent"/>
-											<int key="NSPeriodicDelay">400</int>
-											<int key="NSPeriodicInterval">75</int>
-										</object>
-										<int key="NSMaximumRecents">255</int>
-										<bool key="NSSendsWholeSearchString">YES</bool>
-									</object>
-									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-								</object>
-								<object class="NSButton" id="961412843">
-									<reference key="NSNextResponder" ref="249622783"/>
-									<int key="NSvFlags">265</int>
-									<object class="NSMutableArray" key="NSSubviews">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-									</object>
-									<string key="NSFrame">{{390, 335}, {51, 17}}</string>
-									<reference key="NSSuperview" ref="249622783"/>
-									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
-									<bool key="NSViewIsLayerTreeHost">YES</bool>
-									<bool key="NSEnabled">YES</bool>
-									<object class="NSButtonCell" key="NSCell" id="856451672">
-										<int key="NSCellFlags">-2080374784</int>
-										<int key="NSCellFlags2">134348800</int>
-										<string key="NSContents">Done</string>
-										<reference key="NSSupport" ref="26"/>
-										<reference key="NSControlView" ref="961412843"/>
-										<int key="NSButtonFlags">-2038153216</int>
-										<int key="NSButtonFlags2">164</int>
-										<string key="NSAlternateContents"/>
-										<string key="NSKeyEquivalent"/>
-										<int key="NSPeriodicDelay">400</int>
-										<int key="NSPeriodicInterval">75</int>
-									</object>
-									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-								</object>
-								<object class="NSCustomView" id="340516917">
-									<reference key="NSNextResponder" ref="249622783"/>
-									<int key="NSvFlags">274</int>
-									<string key="NSFrameSize">{448, 331}</string>
-									<reference key="NSSuperview" ref="249622783"/>
-									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
-									<bool key="NSViewIsLayerTreeHost">YES</bool>
-									<object class="NSDictionary" key="NSViewAnimations">
-										<string key="NS.key.0">subviews</string>
-										<object class="CATransition" key="NS.object.0">
-											<object class="CIPageCurlTransition" key="filter">
-												<object class="CIVector" key="CI_inputExtent">
-													<int key="CICount">4</int>
-													<string key="CIVector">{{0, 0}, {300, 300}}</string>
-												</object>
-												<real value="0.0" key="CI_inputTime"/>
-												<real value="0.0" key="CI_inputAngle"/>
-												<real value="100" key="CI_inputRadius"/>
-												<bool key="CIEnabled">YES</bool>
-											</object>
-											<string key="type">fade</string>
-											<object class="NSArray" key="__CACodingContents">
-												<bool key="EncodedWithXMLCoder">YES</bool>
-												<string>filter</string>
-												<string>type</string>
-											</object>
-										</object>
-									</object>
-									<string key="NSClassName">WILDCardView</string>
-								</object>
-							</object>
-							<string key="NSFrameSize">{448, 357}</string>
-							<reference key="NSSuperview" ref="568628114"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="692936866"/>
-							<bool key="NSViewIsLayerTreeHost">YES</bool>
-							<string key="NSClassName">NSView</string>
-						</object>
-					</object>
-					<string key="NSFrameSize">{448, 331}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView" ref="249622783"/>
-					<bool key="NSViewIsLayerTreeHost">YES</bool>
-				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
-				<string key="NSMinSize">{94, 108}</string>
-				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
-				<string key="NSFrameAutosaveName">WILDCardWindowControllerPosition</string>
-				<bool key="NSWindowIsRestorable">YES</bool>
-			</object>
-			<object class="NSCustomObject" id="796877042">
-				<string key="NSClassName">NSApplication</string>
-			</object>
-			<object class="NSCustomObject" id="680174958">
-				<string key="NSClassName">WILDCardViewController</string>
-			</object>
-		</object>
-		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<object class="NSMutableArray" key="connectionRecords">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">mCardViewController</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="680174958"/>
-					</object>
-					<int key="connectionID">100062</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">window</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="275939982"/>
-					</object>
-					<int key="connectionID">100065</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">mView</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="340516917"/>
-					</object>
-					<int key="connectionID">100066</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">findStringOfObject:</string>
-						<reference key="source" ref="613418571"/>
-						<reference key="destination" ref="679136925"/>
-					</object>
-					<int key="connectionID">100053</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">findNext:</string>
-						<reference key="source" ref="613418571"/>
-						<reference key="destination" ref="701080520"/>
-					</object>
-					<int key="connectionID">100055</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">hideFindPanel:</string>
-						<reference key="source" ref="613418571"/>
-						<reference key="destination" ref="961412843"/>
-					</object>
-					<int key="connectionID">100056</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="275939982"/>
-						<reference key="destination" ref="512844837"/>
-					</object>
-					<int key="connectionID">17</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">mSearchField</string>
-						<reference key="source" ref="680174958"/>
-						<reference key="destination" ref="679136925"/>
-					</object>
-					<int key="connectionID">100060</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">view</string>
-						<reference key="source" ref="680174958"/>
-						<reference key="destination" ref="340516917"/>
-					</object>
-					<int key="connectionID">100064</int>
-				</object>
-			</object>
-			<object class="IBMutableOrderedSet" key="objectRecords">
-				<object class="NSArray" key="orderedObjects">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBObjectRecord">
-						<int key="objectID">0</int>
-						<object class="NSArray" key="object" id="0">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
-						<reference key="children" ref="580458321"/>
-						<nil key="parent"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">-2</int>
-						<reference key="object" ref="512844837"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">File's Owner</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">-1</int>
-						<reference key="object" ref="613418571"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">First Responder</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="275939982"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="568628114"/>
-						</object>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Window</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">6</int>
-						<reference key="object" ref="568628114"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="249622783"/>
-						</object>
-						<reference key="parent" ref="275939982"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">-3</int>
-						<reference key="object" ref="796877042"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Application</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100054</int>
-						<reference key="object" ref="249622783"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="340516917"/>
-							<reference ref="961412843"/>
-							<reference ref="679136925"/>
-							<reference ref="692936866"/>
-							<reference ref="176347303"/>
-						</object>
-						<reference key="parent" ref="568628114"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100042</int>
-						<reference key="object" ref="340516917"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
-						<reference key="parent" ref="249622783"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100046</int>
-						<reference key="object" ref="961412843"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="856451672"/>
-						</object>
-						<reference key="parent" ref="249622783"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100047</int>
-						<reference key="object" ref="856451672"/>
-						<reference key="parent" ref="961412843"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100044</int>
-						<reference key="object" ref="679136925"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="463915068"/>
-						</object>
-						<reference key="parent" ref="249622783"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100045</int>
-						<reference key="object" ref="463915068"/>
-						<reference key="parent" ref="679136925"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100048</int>
-						<reference key="object" ref="692936866"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="701080520"/>
-						</object>
-						<reference key="parent" ref="249622783"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100049</int>
-						<reference key="object" ref="701080520"/>
-						<reference key="parent" ref="692936866"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100057</int>
-						<reference key="object" ref="176347303"/>
-						<reference key="parent" ref="249622783"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100059</int>
-						<reference key="object" ref="680174958"/>
-						<reference key="parent" ref="0"/>
-					</object>
-				</object>
-			</object>
-			<object class="NSMutableDictionary" key="flattenedProperties">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="NSArray" key="dict.sortedKeys">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>-1.IBPluginDependency</string>
-					<string>-2.IBPluginDependency</string>
-					<string>-3.IBPluginDependency</string>
-					<string>100042.IBPluginDependency</string>
-					<string>100044.IBPluginDependency</string>
-					<string>100045.IBPluginDependency</string>
-					<string>100046.IBPluginDependency</string>
-					<string>100047.IBPluginDependency</string>
-					<string>100048.IBPluginDependency</string>
-					<string>100049.IBPluginDependency</string>
-					<string>100049.IBSegmentedControlInspectorSelectedSegmentMetadataKey</string>
-					<string>100054.IBPluginDependency</string>
-					<string>100057.IBPluginDependency</string>
-					<string>100059.IBPluginDependency</string>
-					<string>5.IBNSWindowAutoPositionCentersHorizontal</string>
-					<string>5.IBNSWindowAutoPositionCentersVertical</string>
-					<string>5.IBPluginDependency</string>
-					<string>5.IBWindowTemplateEditedContentRect</string>
-					<string>6.IBPluginDependency</string>
-				</object>
-				<object class="NSArray" key="dict.values">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<integer value="0"/>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<boolean value="NO"/>
-					<boolean value="NO"/>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{351, 314}, {448, 331}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-				</object>
-			</object>
-			<object class="NSMutableDictionary" key="unlocalizedProperties">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<reference key="dict.sortedKeys" ref="0"/>
-				<reference key="dict.values" ref="0"/>
-			</object>
-			<nil key="activeLocalization"/>
-			<object class="NSMutableDictionary" key="localizations">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<reference key="dict.sortedKeys" ref="0"/>
-				<reference key="dict.values" ref="0"/>
-			</object>
-			<nil key="sourceID"/>
-			<int key="maxID">100067</int>
-		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">WILDCardView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/WILDCardView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">WILDCardViewController</string>
-					<string key="superclassName">NSViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bringObjectCloser:</string>
-							<string>chooseToolWithTag:</string>
-							<string>copyCard:</string>
-							<string>createNewBackground:</string>
-							<string>createNewBrowser:</string>
-							<string>createNewButton:</string>
-							<string>createNewCard:</string>
-							<string>createNewField:</string>
-							<string>createNewMoviePlayer:</string>
-							<string>createNewPartFromTemplateAtPathInRepresentedObject:</string>
-							<string>cutCard:</string>
-							<string>deleteCard:</string>
-							<string>editBackgroundScript:</string>
-							<string>editCardScript:</string>
-							<string>editStackScript:</string>
-							<string>findNext:</string>
-							<string>findPrevious:</string>
-							<string>findStringOfObject:</string>
-							<string>goBack:</string>
-							<string>goFirstCard:</string>
-							<string>goHome:</string>
-							<string>goLastCard:</string>
-							<string>goNextCard:</string>
-							<string>goPrevCard:</string>
-							<string>goRecentCard:</string>
-							<string>hideFindPanel:</string>
-							<string>performFindPanelAction:</string>
-							<string>sendObjectFarther:</string>
-							<string>showBackgroundInfoPanel:</string>
-							<string>showCardInfoPanel:</string>
-							<string>showFindPanel:</string>
-							<string>showStackInfoPanel:</string>
-							<string>toggleBackgroundEditMode:</string>
-							<string>toggleEditBrowseTool:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>NSMenuItem</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bringObjectCloser:</string>
-							<string>chooseToolWithTag:</string>
-							<string>copyCard:</string>
-							<string>createNewBackground:</string>
-							<string>createNewBrowser:</string>
-							<string>createNewButton:</string>
-							<string>createNewCard:</string>
-							<string>createNewField:</string>
-							<string>createNewMoviePlayer:</string>
-							<string>createNewPartFromTemplateAtPathInRepresentedObject:</string>
-							<string>cutCard:</string>
-							<string>deleteCard:</string>
-							<string>editBackgroundScript:</string>
-							<string>editCardScript:</string>
-							<string>editStackScript:</string>
-							<string>findNext:</string>
-							<string>findPrevious:</string>
-							<string>findStringOfObject:</string>
-							<string>goBack:</string>
-							<string>goFirstCard:</string>
-							<string>goHome:</string>
-							<string>goLastCard:</string>
-							<string>goNextCard:</string>
-							<string>goPrevCard:</string>
-							<string>goRecentCard:</string>
-							<string>hideFindPanel:</string>
-							<string>performFindPanelAction:</string>
-							<string>sendObjectFarther:</string>
-							<string>showBackgroundInfoPanel:</string>
-							<string>showCardInfoPanel:</string>
-							<string>showFindPanel:</string>
-							<string>showStackInfoPanel:</string>
-							<string>toggleBackgroundEditMode:</string>
-							<string>toggleEditBrowseTool:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">bringObjectCloser:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">chooseToolWithTag:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">copyCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">createNewBackground:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">createNewBrowser:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">createNewButton:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">createNewCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">createNewField:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">createNewMoviePlayer:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">createNewPartFromTemplateAtPathInRepresentedObject:</string>
-								<string key="candidateClassName">NSMenuItem</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">cutCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">deleteCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">editBackgroundScript:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">editCardScript:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">editStackScript:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">findNext:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">findPrevious:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">findStringOfObject:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">goBack:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">goFirstCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">goHome:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">goLastCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">goNextCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">goPrevCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">goRecentCard:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">hideFindPanel:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">performFindPanelAction:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">sendObjectFarther:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showBackgroundInfoPanel:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showCardInfoPanel:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showFindPanel:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showStackInfoPanel:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">toggleBackgroundEditMode:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">toggleEditBrowseTool:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">mSearchField</string>
-						<string key="NS.object.0">NSTextField</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">mSearchField</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">mSearchField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/WILDCardViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">WILDCardWindowController</string>
-					<string key="superclassName">NSWindowController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>mCardViewController</string>
-							<string>mView</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>WILDCardViewController</string>
-							<string>NSView</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>mCardViewController</string>
-							<string>mView</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">mCardViewController</string>
-								<string key="candidateClassName">WILDCardViewController</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">mView</string>
-								<string key="candidateClassName">NSView</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/WILDCardWindowController.h</string>
-					</object>
-				</object>
-			</object>
-		</object>
-		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
-			<integer value="3000" key="NS.object.0"/>
-		</object>
-		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>NSLeftFacingTriangleTemplate</string>
-				<string>NSRightFacingTriangleTemplate</string>
-			</object>
-			<object class="NSArray" key="dict.values">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{9, 9}</string>
-				<string>{9, 9}</string>
-			</object>
-		</object>
-	</data>
-</archive>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="WILDCardWindowController">
+            <connections>
+                <outlet property="mCardViewController" destination="100059" id="100062"/>
+                <outlet property="mView" destination="100042" id="100066"/>
+                <outlet property="window" destination="5" id="100065"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" wantsToBeColor="NO" visibleAtLaunch="NO" frameAutosaveName="WILDCardWindowControllerPosition" animationBehavior="default" id="5" userLabel="Window">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="544" y="362" width="448" height="331"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <value key="minSize" type="size" width="94" height="86"/>
+            <view key="contentView" wantsLayer="YES" id="6">
+                <rect key="frame" x="0.0" y="0.0" width="448" height="331"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView wantsLayer="YES" id="100054">
+                        <rect key="frame" x="0.0" y="0.0" width="448" height="357"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <customView wantsLayer="YES" id="100042" customClass="WILDCardView">
+                                <rect key="frame" x="0.0" y="0.0" width="448" height="331"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations>
+                                    <caTransition key="subviews">
+                                        <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGQkNYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QEAcI
+ER0jJCorLC0yMzkLOj1VJG51bGzUCQoLDA0ODxBWJGNsYXNzVmZpbHRlclR0eXBlXxASX19DQUNvZGlu
+Z0NvbnRlbnRzgA+AAoAKgAvWCRITFBUWFxgZGhscXkNJX2lucHV0RXh0ZW50XENJX2lucHV0VGltZV5D
+SV9pbnB1dFJhZGl1c1lDSUVuYWJsZWRdQ0lfaW5wdXRBbmdsZYAJgAOABoAICYAH0x4fCSAhIldDSUNv
+dW50WENJVmVjdG9yEASABIAFXxAUe3swLCAwfSwgezMwMCwgMzAwfX3SJSYnKFokY2xhc3NuYW1lWCRj
+bGFzc2VzWENJVmVjdG9yoicpWE5TT2JqZWN0IwAAAAAAAAAAIwAAAAAAAAAAI0BZAAAAAAAA0iUmLi9f
+EBRDSVBhZ2VDdXJsVHJhbnNpdGlvbqMwMSlfEBRDSVBhZ2VDdXJsVHJhbnNpdGlvblhDSUZpbHRlclRm
+YWRl0jQJNThaTlMub2JqZWN0c6I2N4AMgA2ADlZmaWx0ZXLSJSY7PFdOU0FycmF5ojsp0iUmPj9cQ0FU
+cmFuc2l0aW9uo0BBKVxDQVRyYW5zaXRpb25bQ0FBbmltYXRpb25fEA9OU0tleWVkQXJjaGl2ZXLRREVU
+cm9vdIABAAgAEQAaACMALQAyADcASgBQAFkAYABnAGwAgQCDAIUAhwCJAJYApQCyAMEAywDZANsA3QDf
+AOEA4gDkAOsA8wD8AP4BAAECARkBHgEpATIBOwE+AUcBUAFZAWIBZwF+AYIBmQGiAacBrAG3AboBvAG+
+AcABxwHMAdQB1wHcAekB7QH6AgYCGAIbAiAAAAAAAAACAQAAAAAAAABGAAAAAAAAAAAAAAAAAAACIg
+</mutableData>
+                                    </caTransition>
+                                </animations>
+                            </customView>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" id="100046">
+                                <rect key="frame" x="390" y="335" width="51" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="roundRect" title="Done" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100047">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="hideFindPanel:" target="-1" id="100056"/>
+                                </connections>
+                            </button>
+                            <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" id="100044">
+                                <rect key="frame" x="62" y="335" width="320" height="19"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" borderStyle="bezel" focusRingType="none" placeholderString="Search Fields" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="100045">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                                <connections>
+                                    <action selector="findStringOfObject:" target="-1" id="100053"/>
+                                </connections>
+                            </searchField>
+                            <segmentedControl wantsLayer="YES" verticalHuggingPriority="750" id="100048">
+                                <rect key="frame" x="7" y="335" width="48" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <segmentedCell key="cell" controlSize="small" alignment="left" style="roundRect" trackingMode="momentary" id="100049">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <segments>
+                                        <segment image="NSLeftFacingTriangleTemplate" width="21" tag="3"/>
+                                        <segment image="NSRightFacingTriangleTemplate" width="20" tag="2"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="findNext:" target="-1" id="100055"/>
+                                    </connections>
+                                </segmentedCell>
+                            </segmentedControl>
+                            <box autoresizesSubviews="NO" wantsLayer="YES" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="100057">
+                                <rect key="frame" x="0.0" y="329" width="464" height="5"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <font key="titleFont" metaFont="system"/>
+                            </box>
+                        </subviews>
+                    </customView>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="17"/>
+            </connections>
+        </window>
+        <customObject id="-3" userLabel="Application"/>
+        <customObject id="100059" customClass="WILDCardViewController">
+            <connections>
+                <outlet property="mSearchField" destination="100044" id="100060"/>
+                <outlet property="view" destination="100042" id="100064"/>
+            </connections>
+        </customObject>
+    </objects>
+    <resources>
+        <image name="NSLeftFacingTriangleTemplate" width="9" height="9"/>
+        <image name="NSRightFacingTriangleTemplate" width="9" height="9"/>
+    </resources>
+</document>
