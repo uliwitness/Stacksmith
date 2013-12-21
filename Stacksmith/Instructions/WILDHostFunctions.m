@@ -47,6 +47,10 @@ void	WILDNumberOfBackgroundButtonsInstruction( LEOContext* inContext );
 void	WILDNumberOfBackgroundFieldsInstruction( LEOContext* inContext );
 void	WILDNumberOfBackgroundMoviePlayersInstruction( LEOContext* inContext );
 void	WILDNumberOfBackgroundPartsInstruction( LEOContext* inContext );
+void	WILDCardTimerInstruction( LEOContext* inContext );
+void	WILDBackgroundTimerInstruction( LEOContext* inContext );
+void	WILDNumberOfCardTimersInstruction( LEOContext* inContext );
+void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext );
 
 
 size_t	kFirstStacksmithHostFunctionInstruction = 0;
@@ -279,6 +283,52 @@ void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 }
 
 
+void	WILDCardTimerInstruction( LEOContext* inContext )
+{
+	LEODebugPrintContext( inContext );
+	
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	char			partName[1024] = { 0 };
+	WILDCard	*	theCard = [frontStack currentCard];
+	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: @"timer"];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"timer"];
+	}
+	
+	if( thePart )
+	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		LEOContextStopWithError( inContext, "Can't find timer \"%s\".", partName );
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
 void	WILDCardPartInstruction( LEOContext* inContext )
 {
 	WILDPart	*	thePart = nil;
@@ -455,6 +505,52 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 	else
 	{
 		LEOContextStopWithError( inContext, "Can't find movie player \"%s\".", partName );
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDBackgroundTimerInstruction( LEOContext* inContext )
+{
+	LEODebugPrintContext( inContext );
+	
+	WILDPart	*	thePart = nil;
+	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	char			partName[1024] = { 0 };
+	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
+	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		if( lookUpByID )
+			thePart = [theCard partWithID: theNumber];
+		else
+			thePart = [theCard partAtIndex: theNumber -1 ofType: @"timer"];
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"timer"];
+	}
+	
+	if( thePart )
+	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		LEOContextStopWithError( inContext, "Can't find timer \"%s\".", partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -764,6 +860,7 @@ void	WILDNumberOfCardFieldsInstruction( LEOContext* inContext )
 	inContext->currentInstruction++;
 }
 
+
 void	WILDNumberOfCardMoviePlayersInstruction( LEOContext* inContext )
 {
 	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
@@ -779,6 +876,21 @@ void	WILDNumberOfCardMoviePlayersInstruction( LEOContext* inContext )
 	inContext->currentInstruction++;
 }
 
+
+void	WILDNumberOfCardTimersInstruction( LEOContext* inContext )
+{
+	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	WILDCard		*	theCard = [frontStack currentCard];
+	
+	if( theCard )
+		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"timer"] );
+	else
+	{
+		LEOContextStopWithError( inContext, "No stack open at the moment." );
+	}
+	
+	inContext->currentInstruction++;
+}
 
 
 void	WILDNumberOfCardPartsInstruction( LEOContext* inContext )
@@ -845,6 +957,22 @@ void	WILDNumberOfBackgroundMoviePlayersInstruction( LEOContext* inContext )
 }
 
 
+void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext )
+{
+	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
+	
+	if( theBackground )
+		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"timer"] );
+	else
+	{
+		LEOContextStopWithError( inContext, "No stack open at the moment." );
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
 void	WILDNumberOfBackgroundPartsInstruction( LEOContext* inContext )
 {
 	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
@@ -892,7 +1020,11 @@ LEOINSTR(WILDNumberOfCardPartsInstruction)
 LEOINSTR(WILDNumberOfBackgroundButtonsInstruction)
 LEOINSTR(WILDNumberOfBackgroundFieldsInstruction)
 LEOINSTR(WILDNumberOfBackgroundMoviePlayersInstruction)
-LEOINSTR_LAST(WILDNumberOfBackgroundPartsInstruction)
+LEOINSTR(WILDNumberOfBackgroundPartsInstruction)
+LEOINSTR(WILDCardTimerInstruction)
+LEOINSTR(WILDBackgroundTimerInstruction)
+LEOINSTR(WILDNumberOfCardTimersInstruction)
+LEOINSTR_LAST(WILDNumberOfBackgroundTimersInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostFunctions[] =
@@ -926,9 +1058,9 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_BACKGROUND_PART_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_BACKGROUND_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', 'B' },
 			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_BACKGROUND_MOVIEPLAYER_INSTRUCTION, 0, 0, 'B', 'A' },
+			{ EHostParamIdentifier, ETimerIdentifier, EHostParameterOptional, WILD_BACKGROUND_TIMER_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -947,9 +1079,9 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', 'B' },
 			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, 'B', 'A' },
+			{ EHostParamIdentifier, ETimerIdentifier, EHostParameterOptional, WILD_CARD_TIMER_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1060,8 +1192,8 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamInvisibleIdentifier, EMovieIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'C', 'm' },
 			{ EHostParamInvisibleIdentifier, EPlayersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_MOVIEPLAYERS_INSTRUCTION, 0, 0, 'm', 'X' },
 			{ EHostParamInvisibleIdentifier, EPartsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_PARTS_INSTRUCTION, 0, 0, 'C', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, ETimersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_TIMERS_INSTRUCTION, 0, 0, 'C', 'X' },
+			{ EHostParamInvisibleIdentifier, ETimersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_BACKGROUND_TIMERS_INSTRUCTION, 0, 0, 'B', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},
@@ -1155,6 +1287,27 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamInvisibleIdentifier, EStackIdentifier, EHostParameterOptional, WILD_THIS_STACK_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParamInvisibleIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_THIS_BACKGROUND_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParamInvisibleIdentifier, ECardIdentifier, EHostParameterOptional, WILD_THIS_CARD_INSTRUCTION, 0, 0, '\0', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		ETimerIdentifier, WILD_CARD_TIMER_INSTRUCTION, 0, 0, '\0',
+		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
