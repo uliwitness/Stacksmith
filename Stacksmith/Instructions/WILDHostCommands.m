@@ -29,6 +29,8 @@ void	WILDDebugCheckpointInstruction( LEOContext* inContext );
 void	WILDCreateUserPropertyInstruction( LEOContext* inContext );
 void	WILDPrintInstruction( LEOContext* inContext );
 void	WILDPlayMelodyInstruction( LEOContext* inContext );
+void	WILDStartMovieInstruction( LEOContext* inContext );
+void	WILDStopMovieInstruction( LEOContext* inContext );
 
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
@@ -485,6 +487,78 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 	
 	inContext->currentInstruction++;
 }
+/*!
+ Pop a value off the back of the stack (or just read it from the given
+ BasePointer-relative address) and delete it. If it's an object, we remove it
+ from its owner, if it is a chunk, we empty it and remove any excess delimiters.
+ (WILD_START_MOVIE_INSTR)
+ 
+ param1	-	If this is BACK_OF_STACK, we're supposed to pop the last item
+ off the stack. Otherwise, this is a basePtr-relative address
+ where a value will just be read.
+ */
+
+void	WILDStartMovieInstruction( LEOContext* inContext )
+{
+	bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
+	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
+	if( theValue == NULL || theValue->base.isa == NULL )
+	{
+		LEOContextStopWithError( inContext, "Internal error: Invalid value." );
+		return;
+	}
+	
+	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	{
+		BOOL	couldStart = [(id<WILDObject>)theValue->object.object setValue: (id)kCFBooleanTrue forWILDPropertyNamed: @"started" inRange: NSMakeRange(0,0)];
+		if( !couldStart )
+			LEOContextStopWithError( inContext, "Unable to start this object." );
+	}
+	else
+		LEOContextStopWithError( inContext, "Unable to start this object." );
+	
+	if( popOffStack )
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
+
+/*!
+ Pop a value off the back of the stack (or just read it from the given
+ BasePointer-relative address) and delete it. If it's an object, we remove it
+ from its owner, if it is a chunk, we empty it and remove any excess delimiters.
+ (WILD_STOP_MOVIE_INSTR)
+ 
+ param1	-	If this is BACK_OF_STACK, we're supposed to pop the last item
+ off the stack. Otherwise, this is a basePtr-relative address
+ where a value will just be read.
+ */
+
+void	WILDStopMovieInstruction( LEOContext* inContext )
+{
+	bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
+	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
+	if( theValue == NULL || theValue->base.isa == NULL )
+	{
+		LEOContextStopWithError( inContext, "Internal error: Invalid value." );
+		return;
+	}
+	
+	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	{
+		BOOL	couldStop = [(id<WILDObject>)theValue->object.object setValue: (id)kCFBooleanFalse forWILDPropertyNamed: @"started" inRange: NSMakeRange(0,0)];
+		if( !couldStop )
+			LEOContextStopWithError( inContext, "Unable to stop this object." );
+	}
+	else
+		LEOContextStopWithError( inContext, "Unable to stop this object." );
+	
+	if( popOffStack )
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
 
 
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
@@ -497,7 +571,9 @@ LEOINSTR(WILDDeleteInstruction)
 LEOINSTR(WILDDebugCheckpointInstruction)
 LEOINSTR(WILDCreateUserPropertyInstruction)
 LEOINSTR(WILDPrintInstruction)
-LEOINSTR_LAST(WILDPlayMelodyInstruction)
+LEOINSTR(WILDPlayMelodyInstruction)
+LEOINSTR(WILDStartMovieInstruction)
+LEOINSTR_LAST(WILDStopMovieInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostCommands[] =
@@ -633,6 +709,34 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamExpressionOrIdentifiersTillLineEnd, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EStartIdentifier, WILD_START_MOVIE_INSTR, 0, 0, '\0',
+		{
+			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EStopIdentifier, WILD_STOP_MOVIE_INSTR, 0, 0, '\0',
+		{
+			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

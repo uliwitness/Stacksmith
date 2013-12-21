@@ -99,6 +99,19 @@
 }
 
 
+-(void)	startedPropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	if( inPart.started )
+	{
+		[mMovieView play: self];
+	}
+	else
+	{
+		[mMovieView pause: self];
+	}
+}
+
+
 -(void)	removeSubviews
 {
 	[mMovieView removeFromSuperview];

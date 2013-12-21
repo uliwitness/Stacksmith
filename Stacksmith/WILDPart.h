@@ -52,6 +52,7 @@
 	BOOL				mHasHorizontalScroller;
 	BOOL				mHasVerticalScroller;
 	BOOL				mClickableInInactiveWindow;
+	BOOL				mStarted;
 	QTTime				mCurrentTime;
 	NSMutableIndexSet*	mSelectedLines;				// The indexes into the contents' list items array of the selected items.
 	NSTextAlignment		mTextAlignment;
@@ -86,6 +87,7 @@
 @property (assign,nonatomic) BOOL			hasHorizontalScroller;
 @property (assign,nonatomic) BOOL			hasVerticalScroller;
 @property (assign,nonatomic) BOOL			clickableInInactiveWindow;
+@property (assign,nonatomic) BOOL			started;
 @property (copy,nonatomic) NSString*		mediaPath;
 @property (assign,nonatomic) QTTime			currentTime;
 @property (retain,nonatomic) NSColor*		lineColor;

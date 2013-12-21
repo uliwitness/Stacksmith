@@ -62,6 +62,7 @@
 @synthesize timerMessage = mTimerMessage;
 @synthesize timerInterval = mTimerInterval;
 @synthesize contentSize = mContentSize;
+@synthesize started = mStarted;
 
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
@@ -1749,6 +1750,7 @@ PROPERTY_MAPPING(timerInterval,"interval",kLeoValueTypeNumber)
 PROPERTY_MAPPING(contentSizeDictionary,"contentSize",kLeoValueTypeArray)
 PROPERTY_MAPPING(hasVerticalScroller,"hasverticalscrollbar",kLeoValueTypeBoolean)
 PROPERTY_MAPPING(hasHorizontalScroller,"hashorizontalscrollbar",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(started,"started",kLeoValueTypeBoolean)
 PROPERTY_MAP_END
 
 

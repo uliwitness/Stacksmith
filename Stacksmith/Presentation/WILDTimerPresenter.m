@@ -85,7 +85,7 @@
 	NSRect	theBox = [self partViewFrameForPartRect: mPartView.part.quartzRectangle];
 	[mPartView setFrame: theBox];
 	
-	if( mTimer && (currPart.timerInterval <= 0 || currPart.timerMessage.length == 0) )
+	if( mTimer && (currPart.timerInterval <= 0 || currPart.timerMessage.length == 0 || !currPart.started) )
 	{
 		[self setTimerActive: NO];
 	}
@@ -104,6 +104,12 @@
 
 
 -(void)	timerMessagePropertyDidChangeOfPart: (WILDPart*)inPart
+{
+	[self refreshProperties];
+}
+
+
+-(void)	startedPropertyDidChangeOfPart: (WILDPart*)inPart
 {
 	[self refreshProperties];
 }
