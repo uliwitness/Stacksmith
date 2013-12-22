@@ -90,6 +90,7 @@
 		mWideMargins = WILDBoolFromSubElementInElement( @"wideMargins", elem, NO );
 		mMultipleLines = WILDBoolFromSubElementInElement( @"multipleLines", elem, NO );
 		mShowName = WILDBoolFromSubElementInElement( @"showName", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
+		mStarted = WILDBoolFromSubElementInElement( @"started", elem, ([mType isEqualToString: @"timer"] ? YES : NO) );
 		mSelectedLines = [WILDIndexSetFromSubElementInElement( @"selectedLines", elem, -1 ) mutableCopy];
 		mTitleWidth = WILDIntegerFromSubElementInElement( @"titleWidth", elem );
 		mHighlight = WILDBoolFromSubElementInElement( @"highlight", elem, NO );
@@ -1232,6 +1233,7 @@
 	WILDAppendRectXML( outString, 2, mHammerRectangle, @"rect" );
 	WILDAppendStringXML( outString, 2, [self partStyle], @"style" );
 	WILDAppendBoolXML( outString, 2, mShowName, @"showName" );
+	WILDAppendBoolXML( outString, 2, mStarted, @"started" );
 	WILDAppendBoolXML( outString, 2, mHighlight, @"highlight" );
 	WILDAppendBoolXML( outString, 2, mAutoHighlight, @"autoHighlight" );
 	WILDAppendBoolXML( outString, 2, mSharedHighlight, @"sharedHighlight" );
