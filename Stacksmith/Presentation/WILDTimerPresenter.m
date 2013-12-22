@@ -89,7 +89,7 @@
 	{
 		[self setTimerActive: NO];
 	}
-	else
+	else if( currPart.started )
 	{
 		[self setTimerActive: YES];
 	}
