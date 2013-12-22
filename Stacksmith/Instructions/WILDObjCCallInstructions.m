@@ -68,8 +68,6 @@ void	WILDObjCCallInstruction( LEOContext* inContext );
 
 void	WILDObjCCallInstruction( LEOContext* inContext )
 {
-	//LEODebugPrintContext(inContext);
-	
 	@try
 	{
 		int				paramCount = inContext->currentInstruction->param1;
@@ -308,8 +306,6 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 		LEOContextStopWithError( inContext, "Exception raised during method call: \"%s\".", [[err description] UTF8String] );
 		return;
 	}
-	
-	//LEODebugPrintContext(inContext);
 	
 	inContext->currentInstruction++;
 }

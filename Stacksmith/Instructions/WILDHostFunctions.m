@@ -239,8 +239,6 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 
 void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
-	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
@@ -285,8 +283,6 @@ void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 
 void	WILDCardTimerInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
-	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
@@ -375,8 +371,6 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 
 void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
-	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
@@ -421,8 +415,6 @@ void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 
 void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
-	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
@@ -467,8 +459,6 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 
 void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
-	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
@@ -513,8 +503,6 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 
 void	WILDBackgroundTimerInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
-	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };
@@ -559,8 +547,6 @@ void	WILDBackgroundTimerInstruction( LEOContext* inContext )
 
 void	WILDBackgroundPartInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
-	
 	WILDPart	*	thePart = nil;
 	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 	char			partName[1024] = { 0 };

@@ -16,6 +16,13 @@
 #import "WILDPartContents.h"
 
 
+#if 0
+#define	TIMER_LOG(...)	UKLog( __VA_ARGS__ )
+#else
+#define	TIMER_LOG(...)	
+#endif
+
+
 @implementation WILDTimerPresenter
 
 -(void)	dealloc
@@ -124,14 +131,14 @@
 		{
 			NSTimeInterval	interval = currPart.timerInterval / 60.0;
 			mTimer = [[NSTimer scheduledTimerWithTimeInterval: interval target: self selector:@selector(sendTimerMessage:) userInfo: @{} repeats: YES] retain];
-			UKLog( @"Installed timer on %@", self );
+			TIMER_LOG( @"Installed timer on %@", self );
 		}
 	}
 	else if( mTimer )
 	{
 		[mTimer invalidate];
 		DESTROY(mTimer);
-		UKLog( @"Removed timer from %@", self );
+		TIMER_LOG( @"Removed timer from %@", self );
 	}
 }
 

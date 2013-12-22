@@ -268,8 +268,6 @@ void	WILDAskInstruction( LEOContext* inContext )
 
 void	WILDCreateInstruction( LEOContext* inContext )
 {
-	//LEODebugPrintContext( inContext );
-	
 	char typeNameBuf[1024] = { 0 };
 	const char*	typeNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, typeNameBuf, sizeof(typeNameBuf), inContext );
 	char nameBuf[1024] = { 0 };
@@ -335,8 +333,6 @@ void	WILDDebugCheckpointInstruction( LEOContext* inContext )
 
 void	WILDCreateUserPropertyInstruction( LEOContext* inContext )
 {
-	//LEODebugPrintContext( inContext );
-
 	char propNameBuf[1024] = { 0 };
 	const char*	propNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, propNameBuf, sizeof(propNameBuf), inContext );
 	LEOValuePtr objValue = inContext->stackEndPtr -1;
@@ -436,8 +432,6 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 
 void	WILDPlayMelodyInstruction( LEOContext* inContext )
 {
-	//LEODebugPrintContext( inContext );
-	
 	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
 
 	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
