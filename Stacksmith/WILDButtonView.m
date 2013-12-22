@@ -59,7 +59,6 @@
 				case NSLeftMouseDragged:
 				case NSRightMouseDragged:
 				case NSOtherMouseDragged:
-					WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseDrag %ld", [evt buttonNumber] +1 );
 					newIsInside = [[self cell] hitTestForEvent: evt inRect: [self bounds] ofView: self] != NSCellHitNone;
 					if( isInside != newIsInside )
 					{
@@ -68,6 +67,7 @@
 						if( autoHighlight )
 							[[self cell] setHighlighted: isInside];
 					}
+					WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseDrag %ld", [evt buttonNumber] +1 );
 					break;
 			}
 		}
