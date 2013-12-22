@@ -82,7 +82,7 @@
 	NSString		* movPath = [[NSBundle mainBundle] pathForResource: [currPart mediaPath] ofType: @""];
 	if( !movPath )
 		movPath = [currPart mediaPath];
-	QTMovie			* mov = [QTMovie movieWithFile: movPath error: &outError];
+	QTMovie			* mov = [QTMovie movieWithAttributes: @{ QTMovieFileNameAttribute: movPath, QTMovieOpenForPlaybackAttribute: @(YES)} error: &outError];
 	[mov setCurrentTime: [currPart currentTime]];
 	[mMovieView setMovie: mov];
 
@@ -119,7 +119,7 @@
 }
 
 
--(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor;
+-(void)		setupCursorRectInPartViewWithDefaultCursor: (NSCursor*)currentCursor
 {
 	// Let the WebView set the cursor.
 	//UKLog(@"no cursor rects for part %@.", mPartView.part);
