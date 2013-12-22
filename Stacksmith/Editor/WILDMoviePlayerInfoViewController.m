@@ -30,6 +30,8 @@
 	[super loadView];
 	
 	[mMoviePathField setStringValue: [part mediaPath]];
+	[self.controllerVisibleSwitch setState: part.controllerVisible ? NSOnState : NSOffState];
+	[self.playingSwitch setState: part.started ? NSOnState : NSOffState];
 }
 
 
@@ -54,6 +56,34 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
 		[part updateChangeCount: NSChangeDone];
 	}
+}
+
+-(IBAction)	doToggleControllerVisibleSwitch: (id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(controllerVisible), WILDAffectedPropertyKey,
+										nil]];
+
+	[part setControllerVisible: [self.controllerVisibleSwitch state] == NSOnState];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(controllerVisible), WILDAffectedPropertyKey,
+										nil]];
+	[part updateChangeCount: NSChangeDone];
+}
+
+-(IBAction)	doTogglePlayingSwitch: (id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(started), WILDAffectedPropertyKey,
+										nil]];
+
+	[part setStarted: [self.playingSwitch state] == NSOnState];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+										PROPERTY(started), WILDAffectedPropertyKey,
+										nil]];
+	[part updateChangeCount: NSChangeDone];
 }
 
 @end
