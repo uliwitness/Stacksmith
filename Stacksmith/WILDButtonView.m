@@ -84,8 +84,8 @@
 			[self setNeedsDisplay: YES];
 			[self.window display];
 		}
-		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUp %ld", [event buttonNumber] +1 );
 		[[self target] performSelector: [self action] withObject: self];
+		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUp %ld", [event buttonNumber] +1 );
 	}
 	else
 		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUpOutside %ld", [event buttonNumber] +1 );
