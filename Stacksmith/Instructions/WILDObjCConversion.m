@@ -7,6 +7,7 @@
 //
 
 #import "WILDObjCConversion.h"
+#import "WILDObjectValue.h"
 
 
 void	AppendLEOArrayToDictionary( struct LEOArrayEntry * inEntry, NSMutableDictionary* dict, LEOContext *inContext );
@@ -146,6 +147,10 @@ BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inC
 				LEOInitStringConstantValue( destValue, "", kLEOInvalidateReferences, inContext );
 		}
 		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+	}
+	else if( [inValue conformsToProtocol: @protocol(WILDObject)] )
+	{
+		WILDInitObjectValue( &outValue->object, inValue, kLEOInvalidateReferences, inContext );
 	}
 	else
 		return NO;
