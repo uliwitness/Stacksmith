@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "WILDObjectValue.h"
 
 
-@interface WILDMessageBox : NSWindowController
+@interface WILDMessageBox : NSWindowController <WILDObject>
 {
     NSTextView		*		messageField;
 	NSButton		*		runButton;

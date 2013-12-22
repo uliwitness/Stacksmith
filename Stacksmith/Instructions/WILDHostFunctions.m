@@ -15,6 +15,7 @@
 #import "WILDPart.h"
 #import "LEOScript.h"
 #import "LEOContextGroup.h"
+#import "WILDMessageBox.h"
 
 
 void	WILDStackInstruction( LEOContext* inContext );
@@ -51,6 +52,7 @@ void	WILDCardTimerInstruction( LEOContext* inContext );
 void	WILDBackgroundTimerInstruction( LEOContext* inContext );
 void	WILDNumberOfCardTimersInstruction( LEOContext* inContext );
 void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext );
+void	WILDMessageBoxInstruction( LEOContext* inContext );
 
 
 size_t	kFirstStacksmithHostFunctionInstruction = 0;
@@ -975,6 +977,16 @@ void	WILDNumberOfBackgroundPartsInstruction( LEOContext* inContext )
 }
 
 
+void	WILDMessageBoxInstruction( LEOContext* inContext )
+{
+	WILDMessageBox*	msg = [WILDMessageBox sharedMessageBox];
+		
+	inContext->stackEndPtr++;
+	WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, msg, kLEOInvalidateReferences, inContext );
+	
+	inContext->currentInstruction++;
+}
+
 
 LEOINSTR_START(StacksmithHostFunction,WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS)
 LEOINSTR(WILDStackInstruction)
@@ -1010,7 +1022,8 @@ LEOINSTR(WILDNumberOfBackgroundPartsInstruction)
 LEOINSTR(WILDCardTimerInstruction)
 LEOINSTR(WILDBackgroundTimerInstruction)
 LEOINSTR(WILDNumberOfCardTimersInstruction)
-LEOINSTR_LAST(WILDNumberOfBackgroundTimersInstruction)
+LEOINSTR(WILDNumberOfBackgroundTimersInstruction)
+LEOINSTR_LAST(WILDMessageBoxInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostFunctions[] =
@@ -1293,6 +1306,27 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		{
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		EMessageIdentifier, INVALID_INSTR2, 0, 0, '\0',
+		{
+			{ EHostParamInvisibleIdentifier, EBoxIdentifier, EHostParameterRequired, WILD_MESSAGE_BOX_INSTRUCTION, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

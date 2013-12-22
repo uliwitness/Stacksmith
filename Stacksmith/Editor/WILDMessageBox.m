@@ -17,7 +17,7 @@
 
 static WILDMessageBox*	sSharedMessageBox = nil;
 
-@interface WILDMessageBox () <WILDObject>
+@interface WILDMessageBox ()
 {
 	LEOObjectID				mIDForScripts;
 	LEOObjectSeed			mSeedForScripts;
@@ -231,6 +231,63 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 	}
 	else
 		return NO;
+}
+
+
+-(BOOL)	setTextContents: (NSString *)inString
+{
+	[self setStringValue: inString];
+	return YES;
+}
+
+
+-(NSString*)	textContents
+{
+	self.window;
+	return messageField.string;
+}
+
+
+-(BOOL)	goThereInNewWindow: (BOOL)inNewWindow
+{
+	return NO;
+}
+
+
+-(LEOValueTypePtr)	typeForWILDPropertyNamed: (NSString*)inPropertyName
+{
+	if( [inPropertyName isEqualToString: @"properties"] )
+		return &kLeoValueTypeArray;
+	else if( [inPropertyName isEqualToString: @"visible"] )
+		return &kLeoValueTypeBoolean;
+	else
+		return &kLeoValueTypeString;
+}
+
+
+-(id)	valueForWILDPropertyNamed: (NSString*)inPropertyName ofRange: (NSRange)byteRange
+{
+	if( [inPropertyName isEqualToString: @"properties"] )
+		return @[ @"visible" ];
+	else if( [inPropertyName isEqualToString: @"visible"] )
+		return ([self.window windowNumber] >= 1) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse;
+	else
+		return nil;
+}
+
+
+-(BOOL)		setValue: (id)inValue forWILDPropertyNamed: (NSString*)inPropertyName inRange: (NSRange)byteRange
+{
+	if( [inPropertyName isEqualToString: @"visible"] )
+	{
+		if( [inValue boolValue] )
+			[self.window makeKeyAndOrderFront: self];
+		else
+			[self.window orderOut: self];
+		return YES;
+	}
+	
+	return NO;
 }
 
 @end
