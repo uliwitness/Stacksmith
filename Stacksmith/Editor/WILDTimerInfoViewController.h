@@ -16,5 +16,8 @@
 
 @property (assign) IBOutlet NSTextField*		messageField;
 @property (assign) IBOutlet NSTextField*		intervalField;
+@property (assign) IBOutlet NSButton *			startedSwitch;
+
+-(IBAction)	doStartedSwitchToggled: (id)sender;
 
 @end

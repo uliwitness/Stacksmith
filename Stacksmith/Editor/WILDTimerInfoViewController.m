@@ -23,6 +23,7 @@
 	
 	[mMessageField setStringValue: [part timerMessage]];
 	[mIntervalField setIntegerValue: [part timerInterval]];
+	[self.startedSwitch setState: (part.started ? NSOnState : NSOffState)];
 }
 
 
@@ -54,6 +55,21 @@
 										nil]];
 		[part updateChangeCount: NSChangeDone];
 	}
+}
+
+
+-(IBAction)	doStartedSwitchToggled: (id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+									PROPERTY(started), WILDAffectedPropertyKey,
+									nil]];
+
+	[part setStarted: [sender state] == NSOnState];
+			
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+									PROPERTY(started), WILDAffectedPropertyKey,
+									nil]];
+	[part updateChangeCount: NSChangeDone];
 }
 
 @end
