@@ -154,27 +154,27 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 			}
 			else if( [currType isEqualToString: @"int"] )
 			{
-				int				cNum = (int) LEOGetValueAsInteger( currParam, inContext );
+				int				cNum = (int) LEOGetValueAsInteger( currParam, kLEOUnitNone, inContext );
 				[inv setArgument: &cNum atIndex: x];
 			}
 			else if( [currType isEqualToString: @"long"] )
 			{
-				long			cNum = LEOGetValueAsInteger( currParam, inContext );
+				long			cNum = LEOGetValueAsInteger( currParam, kLEOUnitNone, inContext );
 				[inv setArgument: &cNum atIndex: x];
 			}
 			else if( [currType isEqualToString: @"long long"] )
 			{
-				long long		cNum = LEOGetValueAsInteger( currParam, inContext );
+				long long		cNum = LEOGetValueAsInteger( currParam, kLEOUnitNone, inContext );
 				[inv setArgument: &cNum atIndex: x];
 			}
 			else if( [currType isEqualToString: @"double"] )
 			{
-				double			cNum = LEOGetValueAsNumber( currParam, inContext );
+				double			cNum = LEOGetValueAsNumber( currParam, kLEOUnitNone, inContext );
 				[inv setArgument: &cNum atIndex: x];
 			}
 			else if( [currType isEqualToString: @"float"] )
 			{
-				float			cNum = LEOGetValueAsNumber( currParam, inContext );
+				float			cNum = LEOGetValueAsNumber( currParam, kLEOUnitNone, inContext );
 				[inv setArgument: &cNum atIndex: x];
 			}
 			else if( [currType isEqualToString: @"bool"] )
@@ -239,31 +239,31 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 		{
 			int	retVal = 0;
 			[inv getReturnValue: &retVal];
-			LEOPushIntegerOnStack( inContext, retVal );
+			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
 		}
 		else if( [returnType isEqualToString: @"long"] )
 		{
 			long	retVal = 0;
 			[inv getReturnValue: &retVal];
-			LEOPushIntegerOnStack( inContext, retVal );
+			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
 		}
 		else if( [returnType isEqualToString: @"long long"] )
 		{
 			long long	retVal = 0;
 			[inv getReturnValue: &retVal];
-			LEOPushIntegerOnStack( inContext, retVal );
+			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
 		}
 		else if( [returnType isEqualToString: @"double"] )
 		{
 			double	retVal = 0;
 			[inv getReturnValue: &retVal];
-			LEOPushNumberOnStack( inContext, retVal );
+			LEOPushNumberOnStack( inContext, retVal, kLEOUnitNone );
 		}
 		else if( [returnType isEqualToString: @"float"] )
 		{
 			float	retVal = 0;
 			[inv getReturnValue: &retVal];
-			LEOPushNumberOnStack( inContext, retVal );
+			LEOPushNumberOnStack( inContext, retVal, kLEOUnitNone );
 		}
 		else if( [returnType isEqualToString: @"bool"] )
 		{

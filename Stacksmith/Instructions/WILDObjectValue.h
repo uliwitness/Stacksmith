@@ -52,9 +52,9 @@ extern struct LEOValueType	kLeoValueTypeWILDObject;
 
 -(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError;
 -(id<WILDObject>)		parentObject;
--(WILDStack*)			stack;
 
 @optional
+-(WILDStack*)		stack;
 -(BOOL)				deleteWILDObject;
 
 -(void)				openScriptEditorAndShowOffset: (NSInteger)byteOffset;

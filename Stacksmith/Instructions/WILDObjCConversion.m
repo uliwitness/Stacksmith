@@ -97,11 +97,11 @@ BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inC
 			|| strcmp([inValue objCType], @encode(short)) == 0
 			|| strcmp([inValue objCType], @encode(char)) == 0 )
 		{
-			LEOInitIntegerValue( outValue, [inValue longLongValue], kLEOInvalidateReferences, inContext );
+			LEOInitIntegerValue( outValue, [inValue longLongValue], kLEOUnitNone, kLEOInvalidateReferences, inContext );
 		}
 		else
 		{
-			LEOInitNumberValue( outValue, [inValue doubleValue], kLEOInvalidateReferences, inContext );
+			LEOInitNumberValue( outValue, [inValue doubleValue], kLEOUnitNone, kLEOInvalidateReferences, inContext );
 		}
 	}
 	else if( [inValue isKindOfClass: [NSDictionary class]] )
@@ -119,7 +119,7 @@ BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inC
 				LEOInitStringValue( destValue, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
 			}
 			else if( [dictValue isKindOfClass: [NSNumber class]] )
-				LEOInitNumberValue( destValue, [dictValue doubleValue], kLEOInvalidateReferences, inContext );
+				LEOInitNumberValue( destValue, [dictValue doubleValue], kLEOUnitNone, kLEOInvalidateReferences, inContext );
 			else
 				LEOInitStringConstantValue( destValue, "", kLEOInvalidateReferences, inContext );
 		}
@@ -142,7 +142,7 @@ BOOL	WILDObjCObjectToLEOValue( id inValue, LEOValuePtr outValue, LEOContext* inC
 				LEOInitStringValue( destValue, valueStr, strlen(valueStr), kLEOInvalidateReferences, inContext );
 			}
 			else if( [dictValue isKindOfClass: [NSNumber class]] )
-				LEOInitNumberValue( destValue, [dictValue doubleValue], kLEOInvalidateReferences, inContext );
+				LEOInitNumberValue( destValue, [dictValue doubleValue], kLEOUnitNone, kLEOInvalidateReferences, inContext );
 			else
 				LEOInitStringConstantValue( destValue, "", kLEOInvalidateReferences, inContext );
 		}

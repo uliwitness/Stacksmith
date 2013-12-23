@@ -141,7 +141,7 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 		ctx.callNonexistentHandlerProc = WILDCallNonexistentHandler;
 		
 		LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
-		LEOPushIntegerOnStack( &ctx, 0 );
+		LEOPushIntegerOnStack( &ctx, 0, kLEOUnitNone );
 		
 		// Send message:
 		LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [frontDoc scriptContextGroupObject], ":run" );
@@ -201,6 +201,12 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 }
 
 
+-(struct LEOScript*)	scriptObjectShowingErrorMessage: (BOOL)showError
+{
+	return NULL;
+}
+
+
 -(void)		setStringValue: (NSString*)messageString
 {
 	NSWindow	*	theWindow = [self window];	// Load the window.
@@ -243,7 +249,8 @@ static WILDMessageBox*	sSharedMessageBox = nil;
 
 -(NSString*)	textContents
 {
-	self.window;
+	NSWindow* theWindow = self.window;	// You're not supposed to call loadWindow, so this is the only effective way of loading the NIB but not showing it.
+#pragma unused(theWindow)	// Shut up a holier-than-thou warning about getters with side effects.
 	return messageField.string;
 }
 

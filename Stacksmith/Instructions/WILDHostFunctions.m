@@ -89,7 +89,7 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		NSUInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		NSUInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( theNumber > 0 && theNumber <= [[frontStack backgrounds] count] )
 			theBackground = [[frontStack cards] objectAtIndex: theNumber -1];
 		else
@@ -124,7 +124,7 @@ void	WILDCardInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		NSUInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		NSUInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( theNumber > 0 && theNumber <= [[frontStack cards] count] )
 			theCard = [[frontStack cards] objectAtIndex: theNumber -1];
 		else
@@ -164,7 +164,7 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -208,7 +208,7 @@ void	WILDCardButtonInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -252,7 +252,7 @@ void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -296,7 +296,7 @@ void	WILDCardTimerInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -340,7 +340,7 @@ void	WILDCardPartInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -384,7 +384,7 @@ void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -428,7 +428,7 @@ void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -472,7 +472,7 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -516,7 +516,7 @@ void	WILDBackgroundTimerInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -560,7 +560,7 @@ void	WILDBackgroundPartInstruction( LEOContext* inContext )
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
 			thePart = [theCard partWithID: theNumber];
 		else
@@ -823,7 +823,7 @@ void	WILDNumberOfCardButtonsInstruction( LEOContext* inContext )
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"button"] );
+		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"button"], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -839,7 +839,7 @@ void	WILDNumberOfCardFieldsInstruction( LEOContext* inContext )
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"field"] );
+		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"field"], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -855,7 +855,7 @@ void	WILDNumberOfCardMoviePlayersInstruction( LEOContext* inContext )
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"moviePlayer"] );
+		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"moviePlayer"], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -871,7 +871,7 @@ void	WILDNumberOfCardTimersInstruction( LEOContext* inContext )
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"timer"] );
+		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"timer"], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -887,7 +887,7 @@ void	WILDNumberOfCardPartsInstruction( LEOContext* inContext )
 	WILDCard		*	theCard = [frontStack currentCard];
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: nil] );
+		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: nil], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -903,7 +903,7 @@ void	WILDNumberOfBackgroundButtonsInstruction( LEOContext* inContext )
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"button"] );
+		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"button"], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -919,7 +919,7 @@ void	WILDNumberOfBackgroundFieldsInstruction( LEOContext* inContext )
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"field"] );
+		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"field"], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -935,7 +935,7 @@ void	WILDNumberOfBackgroundMoviePlayersInstruction( LEOContext* inContext )
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"moviePlayer"] );
+		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"moviePlayer"], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -951,7 +951,7 @@ void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext )
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"timer"] );
+		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"timer"], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -967,7 +967,7 @@ void	WILDNumberOfBackgroundPartsInstruction( LEOContext* inContext )
 	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: nil] );
+		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: nil], kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );

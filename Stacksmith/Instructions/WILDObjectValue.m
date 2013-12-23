@@ -17,9 +17,9 @@ NSString*	WILDUserPropertyNameKey = @"WILDUserPropertyNameKey";
 NSString*	WILDUserPropertyValueKey = @"WILDUserPropertyValueKey";
 
 
-LEONumber	WILDGetObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
+LEONumber	WILDGetObjectValueAsNumber( LEOValuePtr self, LEOUnit* inUnit, struct LEOContext* inContext );
 
-LEOInteger	WILDGetObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inContext );
+LEOInteger	WILDGetObjectValueAsInteger( LEOValuePtr self, LEOUnit* inUnit, struct LEOContext* inContext );
 
 const char*	WILDGetObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext );
 
@@ -29,8 +29,8 @@ void		WILDGetObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType,
 										size_t inRangeStart, size_t inRangeEnd,
 										char* outBuf, size_t bufSize, struct LEOContext* inContext );
 
-void	WILDSetObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, struct LEOContext* inContext );
-void	WILDSetObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, struct LEOContext* inContext );
+void	WILDSetObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, LEOUnit inUnit, struct LEOContext* inContext );
+void	WILDSetObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, LEOUnit inUnit, struct LEOContext* inContext );
 void	WILDSetObjectValueAsString( LEOValuePtr self, const char* inBuf, size_t inBufLen, struct LEOContext* inContext );
 void	WILDSetObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LEOContext* inContext );
 void	WILDSetObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
@@ -107,7 +107,7 @@ void	WILDInitObjectValue( struct LEOValueObject* inStorage, id<WILDObject> wildO
 }
 
 
-LEONumber	WILDGetObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
+LEONumber	WILDGetObjectValueAsNumber( LEOValuePtr self, LEOUnit *outUnit, struct LEOContext* inContext )
 {
 	char*		endPtr = NULL;
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
@@ -116,14 +116,37 @@ LEONumber	WILDGetObjectValueAsNumber( LEOValuePtr self, struct LEOContext* inCon
 		LEOContextStopWithError( inContext, "This object can have no contents." );
 		return -1;
 	}
+	
+	// Determine if there's a unit on this number, remove it but remember it:
+	size_t		strLen = strlen(str);
+	LEOUnit		theUnit = kLEOUnitNone;
+	
+	for( int x = 1; x < kLEOUnit_Last; x++ )	// Skip first one, which is empty string for 'no unit' and would match anything.
+	{
+		size_t	unitLen = strlen(gUnitLabels[x]);
+		if( unitLen < strLen )
+		{
+			if( strcasecmp( str +(strLen -unitLen), gUnitLabels[x] ) == 0 )
+			{
+				strLen -= unitLen;
+				theUnit = x;
+				break;
+			}
+		}
+	}
+
 	LEONumber	num = strtod( str, &endPtr );
-	if( endPtr != (str +strlen(str)) )
-		LEOCantGetValueAsNumber( self, inContext );
+	if( endPtr != (str +strLen) )
+		LEOCantGetValueAsNumber( self, outUnit, inContext );
+	
+	if( outUnit )
+		*outUnit = theUnit;
+	
 	return num;
 }
 
 
-LEOInteger	WILDGetObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inContext )
+LEOInteger	WILDGetObjectValueAsInteger( LEOValuePtr self, LEOUnit *outUnit, struct LEOContext* inContext )
 {
 	char*		endPtr = NULL;
 	const char*	str = [[(id<WILDObject>)self->object.object textContents] UTF8String];
@@ -132,9 +155,32 @@ LEOInteger	WILDGetObjectValueAsInteger( LEOValuePtr self, struct LEOContext* inC
 		LEOContextStopWithError( inContext, "This object can have no contents." );
 		return -1;
 	}
+
+	// Determine if there's a unit on this number, remove it but remember it:
+	size_t		strLen = strlen(str);
+	LEOUnit		theUnit = kLEOUnitNone;
+	
+	for( int x = 1; x < kLEOUnit_Last; x++ )	// Skip first one, which is empty string for 'no unit' and would match anything.
+	{
+		size_t	unitLen = strlen(gUnitLabels[x]);
+		if( unitLen < strLen )
+		{
+			if( strcasecmp( str +(strLen -unitLen), gUnitLabels[x] ) == 0 )
+			{
+				strLen -= unitLen;
+				theUnit = x;
+				break;
+			}
+		}
+	}
+
 	LEOInteger	num = strtoll( str, &endPtr, 10 );
-	if( endPtr != (str +strlen(str)) )
-		LEOCantGetValueAsInteger( self, inContext );
+	if( endPtr != (str +strLen) )
+		LEOCantGetValueAsInteger( self, outUnit, inContext );
+
+	if( outUnit )
+		*outUnit = theUnit;
+	
 	return num;
 }
 
@@ -201,18 +247,18 @@ void	WILDGetObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType,
 }
 
 
-void	WILDSetObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, struct LEOContext* inContext )
+void	WILDSetObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, LEOUnit inUnit, struct LEOContext* inContext )
 {
-	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithFormat: @"%g", inNumber]] )
+	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithFormat: @"%g%s", inNumber, gUnitLabels[inUnit]]] )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
 	}
 }
 
 
-void	WILDSetObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, struct LEOContext* inContext )
+void	WILDSetObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, LEOUnit inUnit, struct LEOContext* inContext )
 {
-	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithFormat: @"%lld", inNumber]] )
+	if( ![(id<WILDObject>)self->object.object setTextContents: [NSString stringWithFormat: @"%lld%s", inNumber, gUnitLabels[inUnit]]] )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
 	}

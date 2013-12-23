@@ -564,21 +564,21 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer,WI
 					currPos -= sizeof(long);
 					long	currLong = *((long*)currPos);
 					DBGLOGPAR( @"pushed %ld", currLong );
-					LEOPushIntegerOnStack( &ctx, currLong );
+					LEOPushIntegerOnStack( &ctx, currLong, kLEOUnitNone );
 				}
 				else if( [currPart isEqualToString: @"%d"] )
 				{
 					currPos -= sizeof(int);
 					int	currInt = *((int*)currPos);
 					DBGLOGPAR( @"pushed %d", currInt );
-					LEOPushIntegerOnStack( &ctx, currInt );
+					LEOPushIntegerOnStack( &ctx, currInt, kLEOUnitNone );
 				}
 				else if( [currPart isEqualToString: @"%f"] )
 				{
 					currPos -= sizeof(double);
 					double	currDouble = *((double*)currPos);
 					DBGLOGPAR( @"pushed %f", currDouble );
-					LEOPushNumberOnStack( &ctx, currDouble );
+					LEOPushNumberOnStack( &ctx, currDouble, kLEOUnitNone );
 				}
 				else if( [currPart isEqualToString: @"%B"] )
 				{
@@ -593,7 +593,7 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer,WI
 			
 			NSInteger	numParams = [paramFormats count];
 			DBGLOGPAR( @"pushed PC %ld", numParams );
-			LEOPushIntegerOnStack( &ctx, numParams );
+			LEOPushIntegerOnStack( &ctx, numParams, kLEOUnitNone );
 			
 			if( theBytes )
 				free(theBytes);
@@ -603,11 +603,11 @@ NSString*	WILDScriptContainerResultFromSendingMessage( id<WILDScriptContainer,WI
 		else
 		{
 			DBGLOGPAR(@"Internal error: Invalid format string in message send.");
-			LEOPushIntegerOnStack( &ctx, 0 );
+			LEOPushIntegerOnStack( &ctx, 0, kLEOUnitNone );
 		}
 	}
 	else
-		LEOPushIntegerOnStack( &ctx, 0 );
+		LEOPushIntegerOnStack( &ctx, 0, kLEOUnitNone );
 	
 	// Send message:
 	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( [container scriptContextGroupObject], [msg UTF8String] );

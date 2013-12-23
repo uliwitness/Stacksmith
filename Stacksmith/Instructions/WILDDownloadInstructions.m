@@ -75,9 +75,9 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 		mProgressMessage = [inProgressMsg retain];
 		mCompletionMessage = [inCompletionMsg retain];
 		LEOInitArrayValue( &mDownloadArrayValue, NULL, kLEOInvalidateReferences, &mContext );
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", -1, &mContext );
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", 0, &mContext );
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", 0, &mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", -1, kLEOUnitBytes, &mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", 0, kLEOUnitBytes, &mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", 0, kLEOUnitNone, &mContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", "", &mContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "url", [inURLString UTF8String], &mContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "address", [inURLString UTF8String], &mContext );
@@ -110,12 +110,12 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	mContext.promptProc = LEORemoteDebuggerPrompt;
 	#endif
 	
-	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", mMaxBytes, &mContext );
-	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", mDownloadedData.length, &mContext );
+	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", mMaxBytes, kLEOUnitBytes, &mContext );
+	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", mDownloadedData.length, kLEOUnitBytes, &mContext );
 
 	LEOPushEmptyValueOnStack( &mContext );	// Reserve space for return value.
 	LEOPushValueOnStack( &mContext, (LEOValuePtr) &mDownloadArrayValue );
-	LEOPushIntegerOnStack( &mContext, 1 );
+	LEOPushIntegerOnStack( &mContext, 1, kLEOUnitNone );
 	
 	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( mContext.group, [msgName UTF8String] );
 	LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( mOwningScript, handlerID );
@@ -165,7 +165,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	if( [response respondsToSelector: @selector(statusCode)] )
 	{
 		NSInteger	statusCode = [(id)response statusCode];
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", statusCode, &mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", statusCode, kLEOUnitNone, &mContext );
 		const char*	errMsg = [[NSHTTPURLResponse localizedStringForStatusCode: statusCode] UTF8String];
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", errMsg, &mContext );
 	}

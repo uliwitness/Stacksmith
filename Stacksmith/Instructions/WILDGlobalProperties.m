@@ -50,7 +50,7 @@ void	LEOSetCursorInstruction( LEOContext* inContext )
 
 void	LEOPushCursorInstruction( LEOContext* inContext )
 {
-	LEOPushIntegerOnStack( inContext, 128 );	// TODO: Actually retrieve actual cursor ID here.
+	LEOPushIntegerOnStack( inContext, 128, kLEOUnitNone );	// TODO: Actually retrieve actual cursor ID here.
 	
 	inContext->currentInstruction++;
 }
@@ -115,10 +115,8 @@ void	LEOPushSystemVersionInstruction( LEOContext* inContext )
 
 void	LEOPushPhysicalMemoryInstruction( LEOContext* inContext )
 {
-	unsigned 	physMemory = UKPhysicalRAMSize() / 1024U;
-	NSString	*physMemoryObjCStr = [NSString stringWithFormat: @"%u GB", physMemory];
-	const char*	physMemoryStr = [physMemoryObjCStr UTF8String];
-	LEOPushStringValueOnStack( inContext, physMemoryStr, strlen(physMemoryStr) );
+	long long 	physMemory = UKPhysicalRAMSize() / 1024U;
+	LEOPushIntegerOnStack( inContext, physMemory, kLEOUnitGigabytes );
 	
 	inContext->currentInstruction++;
 }
