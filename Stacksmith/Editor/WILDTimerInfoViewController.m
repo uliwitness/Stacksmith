@@ -24,6 +24,7 @@
 	[mMessageField setStringValue: [part timerMessage]];
 	[mIntervalField setIntegerValue: [part timerInterval]];
 	[self.startedSwitch setState: (part.started ? NSOnState : NSOffState)];
+	[self.autoStopSwitch setState: (part.autoStop ? NSOnState : NSOffState)];
 }
 
 
@@ -68,6 +69,21 @@
 			
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
 									PROPERTY(started), WILDAffectedPropertyKey,
+									nil]];
+	[part updateChangeCount: NSChangeDone];
+}
+
+
+-(IBAction)	doAutoStopSwitchToggled: (id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+									PROPERTY(autoStop), WILDAffectedPropertyKey,
+									nil]];
+
+	[part setAutoStop: [sender state] == NSOnState];
+			
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+									PROPERTY(autoStop), WILDAffectedPropertyKey,
 									nil]];
 	[part updateChangeCount: NSChangeDone];
 }

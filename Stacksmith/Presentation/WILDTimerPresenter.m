@@ -14,6 +14,7 @@
 #import "WILDMovieView.h"
 #import "UKHelperMacros.h"
 #import "WILDPartContents.h"
+#import "WILDNotifications.h"
 
 
 #if 0
@@ -67,6 +68,15 @@
 	{
 		WILDPart		*	currPart = [mPartView part];
 		WILDScriptContainerResultFromSendingMessage( currPart, currPart.timerMessage );
+		
+		if( currPart.autoStop )
+		{
+			[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: self userInfo: @{ WILDAffectedPropertyKey: @"started" }];
+			[currPart setStarted: NO];
+			[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: self userInfo: @{ WILDAffectedPropertyKey: @"started" }];
+			if( mTimer )
+				[self setTimerActive: NO];
+		}
 	}
 }
 

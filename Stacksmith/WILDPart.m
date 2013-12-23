@@ -63,6 +63,7 @@
 @synthesize timerInterval = mTimerInterval;
 @synthesize contentSize = mContentSize;
 @synthesize started = mStarted;
+@synthesize autoStop = mAutoStop;
 
 
 -(id)	initWithXMLElement: (NSXMLElement*)elem forStack: (WILDStack*)inStack
@@ -91,6 +92,7 @@
 		mMultipleLines = WILDBoolFromSubElementInElement( @"multipleLines", elem, NO );
 		mShowName = WILDBoolFromSubElementInElement( @"showName", elem, ([mType isEqualToString: @"button"] ? YES : NO) );
 		mStarted = WILDBoolFromSubElementInElement( @"started", elem, ([mType isEqualToString: @"timer"] ? YES : NO) );
+		mAutoStop = WILDBoolFromSubElementInElement( @"autoStop", elem, NO );
 		mSelectedLines = [WILDIndexSetFromSubElementInElement( @"selectedLines", elem, -1 ) mutableCopy];
 		mTitleWidth = WILDIntegerFromSubElementInElement( @"titleWidth", elem );
 		mHighlight = WILDBoolFromSubElementInElement( @"highlight", elem, NO );
@@ -1234,6 +1236,7 @@
 	WILDAppendStringXML( outString, 2, [self partStyle], @"style" );
 	WILDAppendBoolXML( outString, 2, mShowName, @"showName" );
 	WILDAppendBoolXML( outString, 2, mStarted, @"started" );
+	WILDAppendBoolXML( outString, 2, mAutoStop, @"autoStop" );
 	WILDAppendBoolXML( outString, 2, mHighlight, @"highlight" );
 	WILDAppendBoolXML( outString, 2, mAutoHighlight, @"autoHighlight" );
 	WILDAppendBoolXML( outString, 2, mSharedHighlight, @"sharedHighlight" );
@@ -1753,6 +1756,7 @@ PROPERTY_MAPPING(contentSizeDictionary,"contentSize",kLeoValueTypeArray)
 PROPERTY_MAPPING(hasVerticalScroller,"hasverticalscrollbar",kLeoValueTypeBoolean)
 PROPERTY_MAPPING(hasHorizontalScroller,"hashorizontalscrollbar",kLeoValueTypeBoolean)
 PROPERTY_MAPPING(started,"started",kLeoValueTypeBoolean)
+PROPERTY_MAPPING(autoStop,"autostop",kLeoValueTypeBoolean)
 PROPERTY_MAP_END
 
 
