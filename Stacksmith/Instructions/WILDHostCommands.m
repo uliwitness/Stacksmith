@@ -672,11 +672,7 @@ void	WILDWaitInstruction( LEOContext* inContext )
 	[WILDMessageBox.sharedMessageBox.window display];
 
 	// Actually wait:
-	NSTimeInterval	startTime = [NSDate timeIntervalSinceReferenceDate];
-	while( ([NSDate timeIntervalSinceReferenceDate] -startTime) < theDelay )
-	{
-		usleep(8);
-	}
+	usleep(theDelay * 1000000.0);
 
 	if( popOffStack )
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
