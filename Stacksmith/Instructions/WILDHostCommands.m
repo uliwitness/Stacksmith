@@ -33,6 +33,7 @@ void	WILDStartInstruction( LEOContext* inContext );
 void	WILDStopInstruction( LEOContext* inContext );
 void	WILDShowInstruction( LEOContext* inContext );
 void	WILDHideInstruction( LEOContext* inContext );
+void	WILDWaitInstruction( LEOContext* inContext );
 
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
@@ -629,6 +630,61 @@ void	WILDHideInstruction( LEOContext* inContext )
 }
 
 
+/*!
+ Pop a value off the back of the stack (or just read it from the given
+ BasePointer-relative address) and take it as a duration to delay the script.
+ (WILD_WAIT_INSTR)
+ 
+ param1	-	If this is BACK_OF_STACK, we're supposed to pop the last item
+ off the stack. Otherwise, this is a basePtr-relative address
+ where a value will just be read.
+ */
+
+void	WILDWaitInstruction( LEOContext* inContext )
+{
+	bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
+	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
+	if( theValue == NULL || theValue->base.isa == NULL )
+	{
+		LEOContextStopWithError( inContext, "Internal error: Invalid value." );
+		return;
+	}
+	
+	LEOUnit		theUnit = kLEOUnitNone;
+	LEONumber	theDelay = LEOGetValueAsNumber( theValue, &theUnit, inContext );
+	if( theUnit != kLEOUnitTicks && theUnit != kLEOUnitNone )	// Convert to ticks (base unit), then later to fractional settings.
+	{
+		if( gUnitGroupsForLabels[theUnit] != gUnitGroupsForLabels[kLEOUnitTicks] )	// Comparing apples and oranges, fail!
+		{
+			LEOContextStopWithError( inContext, "Expected%s here, found%s.", gUnitLabels[kLEOUnitTicks], gUnitLabels[theUnit] );
+			return;
+		}
+		
+		theDelay = LEONumberWithUnitAsUnit(theDelay, theUnit, kLEOUnitTicks );
+	}
+	
+	theDelay /= 60.0;
+	
+	// Update all relevant windows once, in case the wait is so the user sees a UI change:
+	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	for( NSWindowController* inWC in frontStack.document.windowControllers )
+		[inWC.window display];
+	[WILDMessageBox.sharedMessageBox.window display];
+
+	// Actually wait:
+	NSTimeInterval	startTime = [NSDate timeIntervalSinceReferenceDate];
+	while( ([NSDate timeIntervalSinceReferenceDate] -startTime) < theDelay )
+	{
+		usleep(8);
+	}
+
+	if( popOffStack )
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
 LEOINSTR(WILDVisualEffectInstruction)
@@ -643,7 +699,8 @@ LEOINSTR(WILDPlayMelodyInstruction)
 LEOINSTR(WILDStartInstruction)
 LEOINSTR(WILDStopInstruction)
 LEOINSTR(WILDShowInstruction)
-LEOINSTR_LAST(WILDHideInstruction)
+LEOINSTR(WILDHideInstruction)
+LEOINSTR_LAST(WILDWaitInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostCommands[] =
@@ -834,6 +891,20 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		EHideIdentifier, WILD_HIDE_INSTR, BACK_OF_STACK, 0, '\0',
 		{
 			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EWaitIdentifier, WILD_WAIT_INSTR, BACK_OF_STACK, 0, '\0',
+		{
+			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

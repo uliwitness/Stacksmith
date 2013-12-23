@@ -73,7 +73,7 @@ extern NSString*	WILDScriptExecutionEventLoopMode;
 
 
 /*! We store this in the LEOContext's userData to keep host-specific info like the
-	current window for this script, which isn't necessary the front window nor
+	current window for this script, which isn't necessarily the front window nor
 	the window containing the current object (e.g. when a timer runs in an inactive
 	window, its current window is its owner, but if it then issues a "go" command,
 	the new card becomes the current window: */
