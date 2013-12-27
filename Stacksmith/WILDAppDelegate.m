@@ -21,6 +21,7 @@
 #import "LEORemoteDebugger.h"
 #import "UKCrashReporter.h"
 #import "WILDSearchPaths.h"
+#import <Sparkle/Sparkle.h>
 
 
 @protocol WILDCreateObjectMethodMenuItemAction
@@ -213,6 +214,12 @@ void	WILDFirstNativeCall( void )
 -(IBAction)	orderFrontMessageBox: (id)sender
 {
 	[[WILDMessageBox sharedMessageBox] orderFrontMessageBox: self];
+}
+
+
+-(NSString*)	feedURLStringForUpdater: (SUUpdater*)inUpdater
+{
+	return @"http://stacksmith.org/nightlies/stacksmith_nightlies.rss";
 }
 
 @end
