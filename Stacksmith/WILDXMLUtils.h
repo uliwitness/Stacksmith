@@ -9,6 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 
+#if __cplusplus
+extern "C" {
+#endif
+
+
 // Calls for reading:
 NSString*			WILDStringFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
 NSMutableArray*		WILDStringsFromSubElementInElement( NSString* elemName, NSXMLElement* elem );
@@ -32,4 +37,9 @@ void	WILDAppendColorXML( NSMutableString* inStringToAppendTo, int nestingLevel, 
 void	WILDAppendSizeXML( NSMutableString* inStringToAppendTo, int nestingLevel, NSSize inSize, NSString* inTagName );
 NSString*	WILDStringEscapedForXML( NSString* inString, NSString** outBinaryAttribute );
 NSString*	WILDStringEscapedForXMLAttribute( NSString* inString );
+
+
+#if __cplusplus
+}
+#endif
 

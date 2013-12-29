@@ -25,11 +25,12 @@
 #import "UKRandomInteger.h"
 #import "WILDCardWindowController.h"
 #import <Quartz/Quartz.h>
-#import "WILDXMLUtils.h"
 #import "NSFileManager+NameForTempFile.h"
 #import "WILDSearchPaths.h"
 #import "UKHelperMacros.h"
+#import "WILDXMLUtils.h"
 #import "LEOContextGroup.h"
+#include "CStack.h"
 
 /*!
 	@class WILDDocument
@@ -370,6 +371,10 @@
 		if( theFileName )
 		{
 			NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
+			#if DEBUG_PORTABLE_DOCUMENT
+			CStack		*	theCppStack = new CStack;
+			theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String] );
+			#endif
 			NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0
 										error: outError];
 			
