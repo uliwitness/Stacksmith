@@ -48,6 +48,9 @@ protected:
 
 protected:
 	WILDObjectID				mStackID;
+	std::string					mName;
+	int							mUserLevel;
+	bool						mCantModify;
 	std::vector<CCard*>			mCards;
 	std::vector<CBackground*>	mBackgrounds;
 	CStackDelegate*				mDelegate;

@@ -11,6 +11,7 @@
 #include "CBackground.h"
 #include "CURLConnection.h"
 #include "tinyxml2.h"
+#include "CTinyXMLUtils.h"
 
 
 void	CStack::LoadFromURL( const std::string inURL )
@@ -25,6 +26,12 @@ void	CStack::LoadFromURL( const std::string inURL )
 		if( tinyxml2::XML_SUCCESS == document.Parse( inData, inDataLength ) )
 		{
 			document.Print();
+			
+			mStackID = CTinyXMLUtils::GetLongLongNamed( document, "id" );
+			mName = "Untitled";
+			CTinyXMLUtils::GetStringNamed( document, "name", mName );
+			mUserLevel = CTinyXMLUtils::GetIntNamed( document, "userLevel", 5 );
+			mCantModify = CTinyXMLUtils::GetIntNamed( document, "cantModify", false );
 		}
 		
 		Release();

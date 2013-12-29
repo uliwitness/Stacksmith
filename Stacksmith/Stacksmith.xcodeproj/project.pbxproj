@@ -271,6 +271,7 @@
 		55A7BA4D14668D6E00AB0F34 /* flute.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4A14668D6E00AB0F34 /* flute.aiff */; };
 		55A7BA73146690AF00AB0F34 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */; };
 		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
+		55AC961B1870D50400488B51 /* CTinyXMLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */; };
 		55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */; };
 		55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13316F4B5E20056CB4D /* COperatorNodeTransformation.cpp */; };
 		55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13A16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.cpp */; };
@@ -871,6 +872,8 @@
 		55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
 		55AAC04417109571008441AF /* WILDGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGlobalProperties.h; path = Instructions/WILDGlobalProperties.h; sourceTree = SOURCE_ROOT; };
+		55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTinyXMLUtils.cpp; path = "Portable Document/CTinyXMLUtils.cpp"; sourceTree = "<group>"; };
+		55AC961A1870D50400488B51 /* CTinyXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTinyXMLUtils.h; path = "Portable Document/CTinyXMLUtils.h"; sourceTree = "<group>"; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
 		55ACBBBE1322EA890088609D /* WILDVisibleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDVisibleObject.h; path = Presentation/WILDVisibleObject.h; sourceTree = "<group>"; };
@@ -1598,6 +1601,8 @@
 				556DB7BA1870A402002F7CB2 /* CCard.cpp */,
 				556DB7A418709A15002F7CB2 /* tinyxml2.h */,
 				556DB7A318709A15002F7CB2 /* tinyxml2.cpp */,
+				55AC961A1870D50400488B51 /* CTinyXMLUtils.h */,
+				55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */,
 				556DB7BE1870A6EB002F7CB2 /* CURLRequest.h */,
 				556DB7BD1870A6EB002F7CB2 /* CURLRequest.mm */,
 				556DB7C41870ADE9002F7CB2 /* CURLResponse.h */,
@@ -2132,6 +2137,7 @@
 				55255A7F114C177400279B03 /* UKTextDocGoToBox.m in Sources */,
 				55255A84114C178100279B03 /* UKSCTDColorWellPrefsController.m in Sources */,
 				55255A85114C178100279B03 /* UKSCTDUserIdentifiersPrefsController.m in Sources */,
+				55AC961B1870D50400488B51 /* CTinyXMLUtils.cpp in Sources */,
 				55255A8D114C179C00279B03 /* NSScanner+SkipUpToCharset.m in Sources */,
 				55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */,
 				55255ABC114C19AB00279B03 /* WILDScriptEditorWindowController.m in Sources */,
