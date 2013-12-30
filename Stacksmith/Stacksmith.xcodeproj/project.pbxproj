@@ -272,6 +272,8 @@
 		55A7BA73146690AF00AB0F34 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */; };
 		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
 		55AC961B1870D50400488B51 /* CTinyXMLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */; };
+		55AC961E1870FF2200488B51 /* CPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55AC961C1870FF2200488B51 /* CPart.cpp */; };
+		55AC96211870FFC200488B51 /* CPartContents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55AC961F1870FFC200488B51 /* CPartContents.cpp */; };
 		55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */; };
 		55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13316F4B5E20056CB4D /* COperatorNodeTransformation.cpp */; };
 		55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13A16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.cpp */; };
@@ -874,6 +876,10 @@
 		55AAC04417109571008441AF /* WILDGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGlobalProperties.h; path = Instructions/WILDGlobalProperties.h; sourceTree = SOURCE_ROOT; };
 		55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTinyXMLUtils.cpp; path = "Portable Document/CTinyXMLUtils.cpp"; sourceTree = "<group>"; };
 		55AC961A1870D50400488B51 /* CTinyXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTinyXMLUtils.h; path = "Portable Document/CTinyXMLUtils.h"; sourceTree = "<group>"; };
+		55AC961C1870FF2200488B51 /* CPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPart.cpp; path = "Portable Document/CPart.cpp"; sourceTree = "<group>"; };
+		55AC961D1870FF2200488B51 /* CPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPart.h; path = "Portable Document/CPart.h"; sourceTree = "<group>"; };
+		55AC961F1870FFC200488B51 /* CPartContents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CPartContents.cpp; sourceTree = "<group>"; };
+		55AC96201870FFC200488B51 /* CPartContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPartContents.h; sourceTree = "<group>"; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
 		55ACBBBE1322EA890088609D /* WILDVisibleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDVisibleObject.h; path = Presentation/WILDVisibleObject.h; sourceTree = "<group>"; };
@@ -1599,6 +1605,10 @@
 				556DB7B71870A3C2002F7CB2 /* CBackground.cpp */,
 				556DB7BB1870A402002F7CB2 /* CCard.h */,
 				556DB7BA1870A402002F7CB2 /* CCard.cpp */,
+				55AC961D1870FF2200488B51 /* CPart.h */,
+				55AC961C1870FF2200488B51 /* CPart.cpp */,
+				55AC96201870FFC200488B51 /* CPartContents.h */,
+				55AC961F1870FFC200488B51 /* CPartContents.cpp */,
 				556DB7A418709A15002F7CB2 /* tinyxml2.h */,
 				556DB7A318709A15002F7CB2 /* tinyxml2.cpp */,
 				55AC961A1870D50400488B51 /* CTinyXMLUtils.h */,
@@ -2245,6 +2255,7 @@
 				55039FCA136D5CCF0082E32E /* ULIPaintLineTool.m in Sources */,
 				55039FCB136D5CCF0082E32E /* ULIPaintOvalTool.m in Sources */,
 				55039FCC136D5CCF0082E32E /* ULIPaintPathTool.m in Sources */,
+				55AC961E1870FF2200488B51 /* CPart.cpp in Sources */,
 				55039FCD136D5CCF0082E32E /* ULIPaintRectangleTool.m in Sources */,
 				55039FCE136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.m in Sources */,
 				55039FCF136D5CCF0082E32E /* ULIPaintSelectionLassoTool.m in Sources */,
@@ -2304,6 +2315,7 @@
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
 				55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */,
 				55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */,
+				55AC96211870FFC200488B51 /* CPartContents.cpp in Sources */,
 				557BC7DF171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m in Sources */,
 				55943B14171F5D050051166C /* WILDWebBrowserPresenter.m in Sources */,
 				5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */,

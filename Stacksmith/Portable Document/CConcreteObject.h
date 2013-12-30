@@ -10,11 +10,20 @@
 #define __Stacksmith__CConcreteObject__
 
 #include "CRefCountedObject.h"
+#include <string>
+#include <map>
+#include "tinyxml2.h"
+
 
 class CConcreteObject : public CRefCountedObject
 {
 public:
+	void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );
 	
+protected:
+	std::string							mName;		// Name of this object for referring to it from scripts (not including type like 'stack').
+	std::string							mScript;	// Uncompiled text of this object's script.
+	std::map<std::string,std::string>	mUserProperties;
 };
 
 typedef CRefCountedObjectRef<CConcreteObject>	CConcreteObjectRef;

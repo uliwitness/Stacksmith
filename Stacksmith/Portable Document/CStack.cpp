@@ -14,12 +14,25 @@
 #include "CTinyXMLUtils.h"
 
 
+CStack::~CStack()
+{
+	for( std::vector<CCard*>::iterator itty = mCards.begin(); itty != mCards.end(); itty++ )
+	{
+		(**itty).Release();
+	}
+	for( std::vector<CBackground*>::iterator itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+	{
+		(**itty).Release();
+	}
+}
+
+
 void	CStack::LoadFromURL( const std::string inURL )
 {
 	Retain();
 	
 	CURLRequest		request( inURL );
-	CURLConnection::SendRequestWithCompletionHandler( request, [this] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
+	CURLConnection::SendRequestWithCompletionHandler( request, [this,inURL] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
 	{
 		tinyxml2::XMLDocument		document;
 		
@@ -27,11 +40,58 @@ void	CStack::LoadFromURL( const std::string inURL )
 		{
 			document.Print();
 			
-			mStackID = CTinyXMLUtils::GetLongLongNamed( document, "id" );
+			tinyxml2::XMLElement	*	root = document.RootElement();
+			
+			mStackID = CTinyXMLUtils::GetLongLongNamed( root, "id" );
 			mName = "Untitled";
-			CTinyXMLUtils::GetStringNamed( document, "name", mName );
-			mUserLevel = CTinyXMLUtils::GetIntNamed( document, "userLevel", 5 );
-			mCantModify = CTinyXMLUtils::GetIntNamed( document, "cantModify", false );
+			CTinyXMLUtils::GetStringNamed( root, "name", mName );
+			mUserLevel = CTinyXMLUtils::GetIntNamed( root, "userLevel", 5 );
+			mCantModify = CTinyXMLUtils::GetBoolNamed( root, "cantModify", false );
+			mCantDelete = CTinyXMLUtils::GetBoolNamed( root, "cantDelete", false );
+			mPrivateAccess = CTinyXMLUtils::GetBoolNamed( root, "privateAccess", false );
+			mCantAbort = CTinyXMLUtils::GetBoolNamed( root, "cantAbort", false );
+			mCantPeek = CTinyXMLUtils::GetBoolNamed( root, "cantPeek", false );
+			mResizable = CTinyXMLUtils::GetBoolNamed( root, "resizable", false );
+			tinyxml2::XMLElement	*	sizeElem = root->FirstChildElement( "cardSize" );
+			mCardWidth = CTinyXMLUtils::GetIntNamed( sizeElem, "width", 512 );
+			mCardHeight = CTinyXMLUtils::GetIntNamed( sizeElem, "height", 342 );
+			
+			mScript.erase();
+			CTinyXMLUtils::GetStringNamed( root, "script", mScript );
+			
+			LoadUserPropertiesFromElement( root );
+			
+			// Load backgrounds:
+			tinyxml2::XMLElement	*	currBgElem = root->FirstChildElement( "background" );
+			while( currBgElem )
+			{
+				size_t			slashOffset = inURL.rfind( '/' );
+				std::string		backgroundURL = inURL.substr(0,slashOffset);
+				backgroundURL.append( currBgElem->Attribute("file") );
+				
+				CBackground	*	theBackground = new CBackground( backgroundURL );
+				mBackgrounds.push_back( theBackground );
+				
+				currBgElem = currBgElem->NextSiblingElement( "background" );
+			}
+
+			// Load cards:
+			tinyxml2::XMLElement	*	currCdElem = root->FirstChildElement( "card" );
+			while( currCdElem )
+			{
+				size_t			slashOffset = inURL.rfind( '/' );
+				std::string		cardURL = inURL.substr(0,slashOffset);
+				cardURL.append( currCdElem->Attribute("file") );
+				const char*	markedAttrStr = currCdElem->Attribute("marked");
+				bool	marked = markedAttrStr ? (strcmp("true", markedAttrStr) == 0) : false;
+				
+				CCard	*	theCard = new CCard( cardURL, marked );
+				mCards.push_back( theCard );
+				if( marked )
+					mMarkedCards.insert( theCard );
+				
+				currCdElem = currCdElem->NextSiblingElement( "card" );
+			}
 		}
 		
 		Release();
@@ -42,10 +102,16 @@ void	CStack::AddCard( CCard* inCard )
 {
 	inCard->Retain();
 	mCards.push_back( inCard );
+	
+	if( inCard->IsMarked() )
+		mMarkedCards.insert( inCard );
 }
 
 void	CStack::RemoveCard( CCard* inCard )
 {
+	if( inCard->IsMarked() )
+		mMarkedCards.erase( inCard );
+	
 	mCards.push_back( inCard );
 	inCard->Release();
 }

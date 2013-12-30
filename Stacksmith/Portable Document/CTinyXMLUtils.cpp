@@ -9,10 +9,10 @@
 #include "CTinyXmlUtils.h"
 
 
-long long		CTinyXMLUtils::GetLongLongNamed( tinyxml2::XMLDocument& doc, const char* inName, long long defaultValue )
+long long		CTinyXMLUtils::GetLongLongNamed( tinyxml2::XMLElement* root, const char* inName, long long defaultValue )
 {
 	char	*	endPtr = NULL;
-	const char*	str = doc.RootElement()->FirstChildElement( inName )->GetText();
+	const char*	str = root->FirstChildElement( inName )->GetText();
 	if( !str )
 		return defaultValue;
 	long long	num = strtoll( str, &endPtr, 10 );
@@ -22,10 +22,10 @@ long long		CTinyXMLUtils::GetLongLongNamed( tinyxml2::XMLDocument& doc, const ch
 }
 
 
-int		CTinyXMLUtils::GetIntNamed( tinyxml2::XMLDocument& doc, const char* inName, int defaultValue )
+int		CTinyXMLUtils::GetIntNamed( tinyxml2::XMLElement* root, const char* inName, int defaultValue )
 {
 	char	*	endPtr = NULL;
-	const char*	str = doc.RootElement()->FirstChildElement( inName )->GetText();
+	const char*	str = root->FirstChildElement( inName )->GetText();
 	if( !str )
 		return defaultValue;
 	int	num = strtod( str, &endPtr );
@@ -35,10 +35,10 @@ int		CTinyXMLUtils::GetIntNamed( tinyxml2::XMLDocument& doc, const char* inName,
 }
 
 
-long		CTinyXMLUtils::GetLongNamed( tinyxml2::XMLDocument& doc, const char* inName, long defaultValue )
+long		CTinyXMLUtils::GetLongNamed( tinyxml2::XMLElement* root, const char* inName, long defaultValue )
 {
 	char	*	endPtr = NULL;
-	const char*	str = doc.RootElement()->FirstChildElement( inName )->GetText();
+	const char*	str = root->FirstChildElement( inName )->GetText();
 	if( !str )
 		return defaultValue;
 	long	num = strtol( str, &endPtr, 10 );
@@ -48,17 +48,17 @@ long		CTinyXMLUtils::GetLongNamed( tinyxml2::XMLDocument& doc, const char* inNam
 }
 
 
-void		CTinyXMLUtils::GetStringNamed( tinyxml2::XMLDocument& doc, const char* inName, std::string &outName )
+void		CTinyXMLUtils::GetStringNamed( tinyxml2::XMLElement* root, const char* inName, std::string &outName )
 {
-	const char*	str = doc.RootElement()->FirstChildElement( inName )->GetText();
+	const char*	str = root->FirstChildElement( inName )->GetText();
 	if( str )
 		outName = str;
 }
 
 
-bool		CTinyXMLUtils::GetBoolNamed( tinyxml2::XMLDocument& doc, const char* inName, bool defaultValue )
+bool		CTinyXMLUtils::GetBoolNamed( tinyxml2::XMLElement* root, const char* inName, bool defaultValue )
 {
-	tinyxml2::XMLElement*	elem = doc.RootElement()->FirstChildElement( inName )->FirstChildElement();
+	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName )->FirstChildElement();
 	if( elem )
 	{
 		if( strcmp( elem->Name(), "true" ) == 0 )
@@ -69,3 +69,10 @@ bool		CTinyXMLUtils::GetBoolNamed( tinyxml2::XMLDocument& doc, const char* inNam
 	return defaultValue;
 }
 
+
+std::string	CTinyXMLUtils::EnsureNonNULLString( const char* inStr )
+{
+	if( !inStr )
+		return std::string();
+	return std::string( inStr );
+}

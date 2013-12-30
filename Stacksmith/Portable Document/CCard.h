@@ -14,7 +14,13 @@
 class CCard : public CLayer
 {
 public:
+	CCard( std::string inURL, bool inMarked ) : CLayer(inURL), mMarked(inMarked)	{};
 	
+	bool		IsMarked()					{ return mMarked; };
+	void		SetMarked( bool inMarked )	{ mMarked = inMarked; };
+	
+protected:
+	bool			mMarked;
 };
 
 typedef CRefCountedObjectRef<CCard>	CCarddRef;

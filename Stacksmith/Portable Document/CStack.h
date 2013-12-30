@@ -10,6 +10,7 @@
 #define __Stacksmith__CStack__
 
 #include <vector>
+#include <set>
 #include <string>
 #include "CConcreteObject.h"
 #include "WILDObjectID.h"
@@ -44,15 +45,23 @@ public:
 	CStackDelegate	*	GetDelegate()								{ return mDelegate; };
 	
 protected:
-	~CStack()	{};
+	~CStack();
 
 protected:
-	WILDObjectID				mStackID;
-	std::string					mName;
-	int							mUserLevel;
-	bool						mCantModify;
-	std::vector<CCard*>			mCards;
-	std::vector<CBackground*>	mBackgrounds;
+	WILDObjectID				mStackID;			// Unique ID number of this stack in the document.
+	int							mUserLevel;			// Maximum user level for this stack.
+	int							mCardWidth;			// Size of cards in this stack.
+	int							mCardHeight;		// Size of cards in this stack.
+	bool						mCantPeek;			// Do we prevent "peeking" of button rects using Cmd-Option?
+	bool						mCantAbort;			// Do we prohibit Cmd-. from canceling scripts?
+	bool						mPrivateAccess;		// Do we require a password before opening this stack?
+	bool						mCantDelete;		// Are scripts allowed to delete this stack?
+	bool						mCantModify;		// Is this stack write-protected?
+	bool						mResizable;			// Can the stack's window be resized by the user?
+	WILDObjectID				mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
+	std::vector<CCard*>			mCards;				// List of all cards in this stack.
+	std::vector<CBackground*>	mBackgrounds;		// List of all backgrounds in this stack.
+	std::set<CCard*>			mMarkedCards;		// List of all cards in this stack.
 	CStackDelegate*				mDelegate;
 };
 

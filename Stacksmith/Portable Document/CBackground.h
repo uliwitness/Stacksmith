@@ -14,7 +14,7 @@
 class CBackground : public CLayer
 {
 public:
-	
+	CBackground( std::string inURL ) : CLayer(inURL)	{};
 };
 
 typedef CRefCountedObjectRef<CBackground>	CBackgroundRef;

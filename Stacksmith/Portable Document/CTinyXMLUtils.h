@@ -16,11 +16,12 @@
 class CTinyXMLUtils
 {
 public:
-	static long long	GetLongLongNamed( tinyxml2::XMLDocument& doc, const char* inName, long long defaultValue = 0LL );
-	static void			GetStringNamed( tinyxml2::XMLDocument& doc, const char* inName, std::string &outName );
-	static bool			GetBoolNamed( tinyxml2::XMLDocument& doc, const char* inName, bool defaultValue = false );
-	static int			GetIntNamed( tinyxml2::XMLDocument& doc, const char* inName, int defaultValue = 0 );
-	static long			GetLongNamed( tinyxml2::XMLDocument& doc, const char* inName, long defaultValue = 0L );
+	static long long	GetLongLongNamed( tinyxml2::XMLElement* root, const char* inName, long long defaultValue = 0LL );
+	static void			GetStringNamed( tinyxml2::XMLElement* root, const char* inName, std::string &outName );
+	static bool			GetBoolNamed( tinyxml2::XMLElement* root, const char* inName, bool defaultValue = false );
+	static int			GetIntNamed( tinyxml2::XMLElement* root, const char* inName, int defaultValue = 0 );
+	static long			GetLongNamed( tinyxml2::XMLElement* root, const char* inName, long defaultValue = 0L );
+	static std::string	EnsureNonNULLString( const char* inStr );
 };
 
 #endif /* defined(__Stacksmith__CTinyXmlUtils__) */
