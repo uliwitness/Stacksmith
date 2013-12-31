@@ -19,4 +19,7 @@ public:
 	CPartContents( tinyxml2::XMLElement * inElement ) {};
 };
 
+
+typedef CRefCountedObjectRef<CPartContents>		CPartContentsRef;
+
 #endif /* defined(__Stacksmith__CPartContents__) */

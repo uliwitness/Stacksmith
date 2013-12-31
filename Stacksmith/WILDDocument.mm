@@ -372,8 +372,12 @@
 		{
 			NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
 			#if DEBUG_PORTABLE_DOCUMENT
-			CStack		*	theCppStack = new CStack;
-			theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String] );
+			{
+				CAutoreleasePool	pool;
+				CStack		*		theCppStack = new CStack;
+				theCppStack->Autorelease();
+				theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String], [](CStack* inStack){ inStack->Dump(); } );
+			}
 			#endif
 			NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0
 										error: outError];

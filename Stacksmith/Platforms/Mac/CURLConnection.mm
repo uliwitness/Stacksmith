@@ -8,6 +8,7 @@
 
 #include "CURLConnection.h"
 #include <Foundation/Foundation.h>
+#include "CRefCountedObject.h"
 
 
 /*static*/ void	CURLConnection::SendRequestWithCompletionHandler( CURLRequest& inRequest, std::function<void (CURLResponse inResponse, const char* inData, size_t inDataLength)> completionBlock )
@@ -16,7 +17,8 @@
                           queue: [NSOperationQueue mainQueue]
               completionHandler: ^(NSURLResponse* response, NSData* data, NSError* connectionError)
 								{
-									CURLResponse	responseObject(response);
+									CAutoreleasePool	pool;
+									CURLResponse		responseObject(response);
 									completionBlock( responseObject, (const char*)[data bytes], [data length] );
 								}];
 }

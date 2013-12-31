@@ -16,29 +16,22 @@
 
 CStack::~CStack()
 {
-	for( std::vector<CCard*>::iterator itty = mCards.begin(); itty != mCards.end(); itty++ )
-	{
-		(**itty).Release();
-	}
-	for( std::vector<CBackground*>::iterator itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
-	{
-		(**itty).Release();
-	}
+	
 }
 
 
-void	CStack::LoadFromURL( const std::string inURL )
+void	CStack::LoadFromURL( const std::string inURL, std::function<void(CStack*)> inCompletionBlock )
 {
 	Retain();
 	
 	CURLRequest		request( inURL );
-	CURLConnection::SendRequestWithCompletionHandler( request, [this,inURL] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
+	CURLConnection::SendRequestWithCompletionHandler( request, [this,inURL,inCompletionBlock] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
 	{
 		tinyxml2::XMLDocument		document;
 		
 		if( tinyxml2::XML_SUCCESS == document.Parse( inData, inDataLength ) )
 		{
-			document.Print();
+			//document.Print();
 			
 			tinyxml2::XMLElement	*	root = document.RootElement();
 			
@@ -70,6 +63,7 @@ void	CStack::LoadFromURL( const std::string inURL )
 				backgroundURL.append( currBgElem->Attribute("file") );
 				
 				CBackground	*	theBackground = new CBackground( backgroundURL );
+				theBackground->Autorelease();
 				mBackgrounds.push_back( theBackground );
 				
 				currBgElem = currBgElem->NextSiblingElement( "background" );
@@ -86,6 +80,7 @@ void	CStack::LoadFromURL( const std::string inURL )
 				bool	marked = markedAttrStr ? (strcmp("true", markedAttrStr) == 0) : false;
 				
 				CCard	*	theCard = new CCard( cardURL, marked );
+				theCard->Autorelease();
 				mCards.push_back( theCard );
 				if( marked )
 					mMarkedCards.insert( theCard );
@@ -94,6 +89,7 @@ void	CStack::LoadFromURL( const std::string inURL )
 			}
 		}
 		
+		inCompletionBlock( this );
 		Release();
 	} );
 }
@@ -114,4 +110,20 @@ void	CStack::RemoveCard( CCard* inCard )
 	
 	mCards.push_back( inCard );
 	inCard->Release();
+}
+
+
+void	CStack::Dump( size_t inIndent )
+{
+	const char * indentStr = IndentString( inIndent );
+	printf( "%sStack ID %lld \"%s\"\n%s{\n", indentStr, mStackID, mName.c_str(), indentStr );
+	printf( "%s\twidth = %d\n", indentStr, mCardWidth );
+	printf( "%s\theight = %d\n", indentStr, mCardHeight );
+	printf( "%s\t{\n", indentStr );
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+		(*itty)->Dump( inIndent +2 );
+	printf( "%s\t}\n%s\t{\n", indentStr, indentStr );
+	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+		(*itty)->Dump( inIndent +2 );
+	printf( "%s\t}\n%s}\n", indentStr, indentStr );
 }

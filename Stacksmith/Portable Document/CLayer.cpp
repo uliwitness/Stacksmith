@@ -15,22 +15,7 @@
 
 CLayer::~CLayer()
 {
-	for( auto itty = mParts.begin(); itty != mParts.end(); itty++ )
-	{
-		(**itty).Release();
-	}
-	for( auto itty = mAddColorParts.begin(); itty != mAddColorParts.end(); itty++ )
-	{
-		(**itty).Release();
-	}
-	for( auto itty = mContents.begin(); itty != mContents.end(); itty++ )
-	{
-		(**itty).Release();
-	}
-	for( auto itty = mButtonFamilies.begin(); itty != mButtonFamilies.end(); itty++ )
-	{
-		(*itty).second->Release();
-	}
+	
 }
 
 
@@ -79,6 +64,7 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 				while( currPartElem )
 				{
 					CPart	*	thePart = new CPart( currPartElem );
+					thePart->Autorelease();
 					mParts.push_back( thePart );
 					thePart->Retain();	// Retain for the button families array.
 					mButtonFamilies.insert( std::make_pair(thePart->GetFamily(), thePart) );
@@ -91,6 +77,7 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 				while( currPartContentsElem )
 				{
 					CPartContents	*	theContents = new CPartContents( currPartContentsElem );
+					theContents->Autorelease();
 					mContents.push_back( theContents );
 					
 					currPartContentsElem = currPartContentsElem->NextSiblingElement( "content" );
@@ -108,3 +95,17 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 		} );
 	}
 }
+
+
+void	CLayer::Dump( size_t inIndent )
+{
+	const char	*	indentStr = IndentString(inIndent);
+	printf( "%sLayer ID %lld \"%s\"\n%s{\n%s\tloaded = %s\n%s\t{\n", indentStr, mID, mName.c_str(), indentStr, indentStr, mLoaded ? "true" : "false", indentStr );
+	for( auto itty = mParts.begin(); itty != mParts.end(); itty++ )
+		(*itty)->Dump( inIndent +2 );
+	printf( "%s\t}\n%s\t{\n", indentStr, indentStr );
+	for( auto itty = mContents.begin(); itty != mContents.end(); itty++ )
+		(*itty)->Dump( inIndent +2 );
+	printf( "%s\t}\n%s}\n", indentStr, indentStr );
+}
+

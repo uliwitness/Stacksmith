@@ -24,4 +24,7 @@ protected:
 	int			mFamily;
 };
 
+
+typedef CRefCountedObjectRef<CPart>		CPartRef;
+
 #endif /* defined(__Stacksmith__CPart__) */

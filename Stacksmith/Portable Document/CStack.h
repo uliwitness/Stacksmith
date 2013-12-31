@@ -14,35 +14,24 @@
 #include <string>
 #include "CConcreteObject.h"
 #include "WILDObjectID.h"
+#include "CCard.h"
+#include "CBackground.h"
 
 
-class CCard;
-class CBackground;
 class CStack;
-
-
-// Mix-in class that gets notified of stuff happening in our stack:
-class CStackDelegate
-{
-public:
-	virtual ~CStackDelegate() {};
-	
-	virtual void	StackDidFinishLoading( CStack* inSender )	{};
-};
 
 
 class CStack : public CConcreteObject
 {
 public:
-	CStack() : mDelegate(NULL), mStackID(0)	{};
+	CStack() : mStackID(0)	{};
 	
-	void		LoadFromURL( const std::string inURL );
+	void		LoadFromURL( const std::string inURL, std::function<void(CStack*)> inCompletionBlock );
 	
 	void		AddCard( CCard* inCard );
 	void		RemoveCard( CCard* inCard );
 	
-	void				SetDelegate( CStackDelegate* inDelegate )	{ mDelegate = inDelegate; };
-	CStackDelegate	*	GetDelegate()								{ return mDelegate; };
+	void		Dump( size_t inIndent = 0 );
 	
 protected:
 	~CStack();
@@ -59,10 +48,9 @@ protected:
 	bool						mCantModify;		// Is this stack write-protected?
 	bool						mResizable;			// Can the stack's window be resized by the user?
 	WILDObjectID				mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
-	std::vector<CCard*>			mCards;				// List of all cards in this stack.
-	std::vector<CBackground*>	mBackgrounds;		// List of all backgrounds in this stack.
-	std::set<CCard*>			mMarkedCards;		// List of all cards in this stack.
-	CStackDelegate*				mDelegate;
+	std::vector<CCardRef>		mCards;				// List of all cards in this stack.
+	std::vector<CBackgroundRef>	mBackgrounds;		// List of all backgrounds in this stack.
+	std::set<CCardRef>			mMarkedCards;		// List of all cards in this stack.
 };
 
 typedef CRefCountedObjectRef<CStack>	CStackRef;

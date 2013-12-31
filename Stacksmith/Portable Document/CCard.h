@@ -23,6 +23,6 @@ protected:
 	bool			mMarked;
 };
 
-typedef CRefCountedObjectRef<CCard>	CCarddRef;
+typedef CRefCountedObjectRef<CCard>	CCardRef;
 
 #endif /* defined(__Stacksmith__CCard__) */
