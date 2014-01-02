@@ -133,7 +133,7 @@
 -(void)	tableView: (NSTableView *)tableView setObjectValue: (id)object forTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
 	NSMutableDictionary	*	currRow = [mUserProperties objectAtIndex: row];
-	NSString			*	currName = currRow[WILDUserPropertyNameKey];
+	NSString			*	currName = [currRow[WILDUserPropertyNameKey] lowercaseString];
 	NSString			*	currValue = currRow[WILDUserPropertyValueKey];
 	NSString			*	oldName = nil;
 	if( [tableColumn.identifier isEqualToString: WILDUserPropertyNameKey] )
