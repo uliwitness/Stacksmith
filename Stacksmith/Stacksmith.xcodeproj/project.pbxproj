@@ -308,6 +308,11 @@
 		55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */; };
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */; };
+		55CD60BC187510F0002450E2 /* CButtonPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60B4187510EF002450E2 /* CButtonPart.cpp */; };
+		55CD60BD187510F0002450E2 /* CFieldPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60B6187510EF002450E2 /* CFieldPart.cpp */; };
+		55CD60BE187510F0002450E2 /* CMoviePlayerPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60B8187510F0002450E2 /* CMoviePlayerPart.cpp */; };
+		55CD60BF187510F0002450E2 /* CWebBrowserPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60BA187510F0002450E2 /* CWebBrowserPart.cpp */; };
+		55CD60C2187511A3002450E2 /* CPartRegistration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C0187511A3002450E2 /* CPartRegistration.cpp */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
@@ -939,6 +944,16 @@
 		55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardWindowController.m; path = Document/WILDCardWindowController.m; sourceTree = "<group>"; };
 		55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTimerPart.cpp; path = "Portable Document/CTimerPart.cpp"; sourceTree = "<group>"; };
 		55CD60AE1874FE7D002450E2 /* CTimerPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimerPart.h; path = "Portable Document/CTimerPart.h"; sourceTree = "<group>"; };
+		55CD60B4187510EF002450E2 /* CButtonPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CButtonPart.cpp; path = "Portable Document/CButtonPart.cpp"; sourceTree = "<group>"; };
+		55CD60B5187510EF002450E2 /* CButtonPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CButtonPart.h; path = "Portable Document/CButtonPart.h"; sourceTree = "<group>"; };
+		55CD60B6187510EF002450E2 /* CFieldPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFieldPart.cpp; path = "Portable Document/CFieldPart.cpp"; sourceTree = "<group>"; };
+		55CD60B7187510F0002450E2 /* CFieldPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFieldPart.h; path = "Portable Document/CFieldPart.h"; sourceTree = "<group>"; };
+		55CD60B8187510F0002450E2 /* CMoviePlayerPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMoviePlayerPart.cpp; path = "Portable Document/CMoviePlayerPart.cpp"; sourceTree = "<group>"; };
+		55CD60B9187510F0002450E2 /* CMoviePlayerPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoviePlayerPart.h; path = "Portable Document/CMoviePlayerPart.h"; sourceTree = "<group>"; };
+		55CD60BA187510F0002450E2 /* CWebBrowserPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CWebBrowserPart.cpp; path = "Portable Document/CWebBrowserPart.cpp"; sourceTree = "<group>"; };
+		55CD60BB187510F0002450E2 /* CWebBrowserPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWebBrowserPart.h; path = "Portable Document/CWebBrowserPart.h"; sourceTree = "<group>"; };
+		55CD60C0187511A3002450E2 /* CPartRegistration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPartRegistration.cpp; path = "Portable Document/CPartRegistration.cpp"; sourceTree = "<group>"; };
+		55CD60C1187511A3002450E2 /* CPartRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPartRegistration.h; path = "Portable Document/CPartRegistration.h"; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
@@ -1612,8 +1627,18 @@
 				55AC961C1870FF2200488B51 /* CPart.cpp */,
 				55CD60AE1874FE7D002450E2 /* CTimerPart.h */,
 				55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */,
+				55CD60B5187510EF002450E2 /* CButtonPart.h */,
+				55CD60B4187510EF002450E2 /* CButtonPart.cpp */,
+				55CD60B7187510F0002450E2 /* CFieldPart.h */,
+				55CD60B6187510EF002450E2 /* CFieldPart.cpp */,
+				55CD60B9187510F0002450E2 /* CMoviePlayerPart.h */,
+				55CD60B8187510F0002450E2 /* CMoviePlayerPart.cpp */,
+				55CD60BB187510F0002450E2 /* CWebBrowserPart.h */,
+				55CD60BA187510F0002450E2 /* CWebBrowserPart.cpp */,
 				55AC96201870FFC200488B51 /* CPartContents.h */,
 				55AC961F1870FFC200488B51 /* CPartContents.cpp */,
+				55CD60C1187511A3002450E2 /* CPartRegistration.h */,
+				55CD60C0187511A3002450E2 /* CPartRegistration.cpp */,
 				556DB7A418709A15002F7CB2 /* tinyxml2.h */,
 				556DB7A318709A15002F7CB2 /* tinyxml2.cpp */,
 				55AC961A1870D50400488B51 /* CTinyXMLUtils.h */,
@@ -2157,6 +2182,7 @@
 				55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */,
 				55255ABC114C19AB00279B03 /* WILDScriptEditorWindowController.m in Sources */,
 				55EBC42B114C2CCE00BAA09D /* WILDScriptContainer.m in Sources */,
+				55CD60BD187510F0002450E2 /* CFieldPart.cpp in Sources */,
 				558DC883115507EA002C9195 /* WILDCardViewController.m in Sources */,
 				558DCB5511553EAC002C9195 /* WILDButtonCell.m in Sources */,
 				558DCD21115571FE002C9195 /* WILDNotifications.m in Sources */,
@@ -2208,12 +2234,14 @@
 				553C46F613577334000219FA /* CCommandNode.cpp in Sources */,
 				553C46F713577334000219FA /* CPushValueCommandNode.cpp in Sources */,
 				553C46F813577334000219FA /* CAssignCommandNode.cpp in Sources */,
+				55CD60C2187511A3002450E2 /* CPartRegistration.cpp in Sources */,
 				553C46F913577334000219FA /* CPutCommandNode.cpp in Sources */,
 				553C46FA13577334000219FA /* CGetParamCommandNode.cpp in Sources */,
 				553C46FC13577334000219FA /* CReturnCommandNode.cpp in Sources */,
 				553C46FD13577334000219FA /* CFunctionCallNode.cpp in Sources */,
 				553C46FE13577334000219FA /* COperatorNode.cpp in Sources */,
 				553C46FF13577334000219FA /* CAddCommandNode.cpp in Sources */,
+				55CD60BE187510F0002450E2 /* CMoviePlayerPart.cpp in Sources */,
 				553C470013577334000219FA /* CLineMarkerNode.cpp in Sources */,
 				553C470113577334000219FA /* CAssignChunkArrayNode.cpp in Sources */,
 				556DB7B61870A352002F7CB2 /* CLayer.cpp in Sources */,
@@ -2308,11 +2336,13 @@
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
 				553F6809157D138B009E0517 /* WILDObjCConversion.m in Sources */,
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
+				55CD60BF187510F0002450E2 /* CWebBrowserPart.cpp in Sources */,
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
 				55A3FB2C16E749D400735729 /* WILDShapeButtonPresenter.m in Sources */,
 				55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */,
 				55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */,
 				55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */,
+				55CD60BC187510F0002450E2 /* CButtonPart.cpp in Sources */,
 				551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */,
 				551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */,
 				551D93921705A7AF003766DA /* WILDDownloadInstructions.m in Sources */,

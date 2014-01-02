@@ -31,7 +31,7 @@
 #import "WILDXMLUtils.h"
 #import "LEOContextGroup.h"
 #include "CStack.h"
-#include "CTimerPart.h"
+#include "CPartRegistration.h"
 
 /*!
 	@class WILDDocument
@@ -375,7 +375,7 @@
 			#if DEBUG_PORTABLE_DOCUMENT
 			{
 				Calhoun::CAutoreleasePool	pool;
-				Calhoun::CPart::RegisterPartCreator( "timer", new Calhoun::CPartCreator<Calhoun::CTimerPart>() );
+				CPartRegistrationRegisterAllPartTypes();
 				Calhoun::CStack		*		theCppStack = new Calhoun::CStack;
 				theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String], [](Calhoun::CStack* inStack)
 				{
