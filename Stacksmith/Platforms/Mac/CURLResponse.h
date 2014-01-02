@@ -22,6 +22,8 @@ typedef struct NSURLResponse*	NSURLResponsePtr;
 #endif
 
 
+namespace Calhoun {
+
 // Object that encapsulates a reply to an HTTP request. You get one of
 //	these back from CURLConnection. You never create one yourself.
 class CURLResponse
@@ -40,5 +42,7 @@ public:
 protected:
 	NSURLResponsePtr	mMacURLResponse;
 };
+
+}
 
 #endif /* defined(__Stacksmith__CURLResponse__) */

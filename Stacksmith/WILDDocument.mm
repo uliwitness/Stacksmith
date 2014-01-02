@@ -372,14 +372,14 @@
 		if( theFileName )
 		{
 			NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
-			#if 1 || DEBUG_PORTABLE_DOCUMENT
+			#if DEBUG_PORTABLE_DOCUMENT
 			{
-				CAutoreleasePool	pool;
-				CPart::RegisterPartCreator( "timer", new CPartCreator<CTimerPart>() );
-				CStack		*		theCppStack = new CStack;
-				theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String], [](CStack* inStack)
+				Calhoun::CAutoreleasePool	pool;
+				Calhoun::CPart::RegisterPartCreator( "timer", new Calhoun::CPartCreator<Calhoun::CTimerPart>() );
+				Calhoun::CStack		*		theCppStack = new Calhoun::CStack;
+				theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String], [](Calhoun::CStack* inStack)
 				{
-					inStack->GetCard(0)->Load( [inStack](CLayer*inCard)
+					inStack->GetCard(0)->Load( [inStack](Calhoun::CLayer*inCard)
 					{
 						inStack->Dump();
 						inStack->Release();

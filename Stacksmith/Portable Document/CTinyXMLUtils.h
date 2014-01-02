@@ -13,6 +13,8 @@
 #include "tinyxml2.h"
 
 
+namespace Calhoun {
+
 class CTinyXMLUtils
 {
 public:
@@ -23,5 +25,7 @@ public:
 	static long			GetLongNamed( tinyxml2::XMLElement* root, const char* inName, long defaultValue = 0L );
 	static std::string	EnsureNonNULLString( const char* inStr );
 };
+
+}
 
 #endif /* defined(__Stacksmith__CTinyXmlUtils__) */

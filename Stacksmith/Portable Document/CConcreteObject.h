@@ -14,6 +14,7 @@
 #include <map>
 #include "tinyxml2.h"
 
+namespace Calhoun {
 
 class CConcreteObject : public CRefCountedObject
 {
@@ -29,5 +30,7 @@ protected:
 };
 
 typedef CRefCountedObjectRef<CConcreteObject>	CConcreteObjectRef;
+
+}
 
 #endif /* defined(__Stacksmith__CConcreteObject__) */

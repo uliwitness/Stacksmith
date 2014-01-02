@@ -14,6 +14,8 @@
 #include "WILDObjectID.h"
 
 
+namespace Calhoun {
+
 class CLayer;
 class CPart;
 
@@ -66,5 +68,7 @@ protected:
 
 
 typedef CRefCountedObjectRef<CPart>		CPartRef;
+
+}
 
 #endif /* defined(__Stacksmith__CPart__) */

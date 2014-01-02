@@ -11,6 +11,8 @@
 
 #include "CPart.h"
 
+namespace Calhoun {
+
 class CTimerPart : public CPart
 {
 public:
@@ -20,5 +22,7 @@ protected:
 	virtual const char*		GetIdentityForDump()	{ return "Timer"; };
 	virtual void			DumpProperties( size_t inIndent );
 };
+
+}
 
 #endif /* defined(__Stacksmith__CTimerPart__) */

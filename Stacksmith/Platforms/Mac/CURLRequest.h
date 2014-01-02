@@ -21,6 +21,8 @@ typedef struct NSURLRequest*	NSURLRequestPtr;
 #endif
 
 
+namespace Calhoun {
+
 // Wrapper around headers, URL etc. we may want to set on a HTTP request:
 //	Intended to be a portable C++ API wrapping Cocoa's NSURLRequest,
 //	though I only add the methods I actually need to make things easier for now.
@@ -38,5 +40,7 @@ public:
 protected:
 	NSURLRequestPtr		mMacRequestObject;
 };
+
+}
 
 #endif /* defined(__Stacksmith__CURLRequest__) */

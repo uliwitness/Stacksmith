@@ -18,6 +18,8 @@
 #include "CBackground.h"
 
 
+namespace Calhoun {
+
 class CStack;
 
 
@@ -58,5 +60,7 @@ protected:
 };
 
 typedef CRefCountedObjectRef<CStack>	CStackRef;
+
+}
 
 #endif /* defined(__Stacksmith__CStack__) */

@@ -10,6 +10,9 @@
 #include "CTinyXMLUtils.h"
 
 
+using namespace Calhoun;
+
+
 
 CPartContents::CPartContents( tinyxml2::XMLElement * inElement )
 {

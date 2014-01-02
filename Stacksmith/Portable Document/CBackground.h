@@ -11,6 +11,8 @@
 
 #include "CLayer.h"
 
+namespace Calhoun {
+
 class CBackground : public CLayer
 {
 public:
@@ -22,5 +24,7 @@ protected:
 };
 
 typedef CRefCountedObjectRef<CBackground>	CBackgroundRef;
+
+}
 
 #endif /* defined(__Stacksmith__CBackground__) */

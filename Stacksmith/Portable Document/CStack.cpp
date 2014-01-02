@@ -14,6 +14,9 @@
 #include "CTinyXMLUtils.h"
 
 
+using namespace Calhoun;
+
+
 CStack::~CStack()
 {
 	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )

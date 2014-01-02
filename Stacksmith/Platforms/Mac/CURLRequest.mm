@@ -10,6 +10,9 @@
 #import <Cocoa/Cocoa.h>
 
 
+using namespace Calhoun;
+
+
 CURLRequest::CURLRequest( const CURLRequest& inRequest )
 {
 	mMacRequestObject = [inRequest.mMacRequestObject retain];

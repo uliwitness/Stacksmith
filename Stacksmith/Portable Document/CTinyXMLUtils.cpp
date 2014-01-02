@@ -9,6 +9,9 @@
 #include "CTinyXmlUtils.h"
 
 
+using namespace Calhoun;
+
+
 long long		CTinyXMLUtils::GetLongLongNamed( tinyxml2::XMLElement* root, const char* inName, long long defaultValue )
 {
 	char	*	endPtr = NULL;

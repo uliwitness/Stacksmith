@@ -10,6 +10,9 @@
 #include "CTinyXMLUtils.h"
 
 
+using namespace Calhoun;
+
+
 void	CConcreteObject::LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem )
 {
 	tinyxml2::XMLElement	*	userPropsElem = elem->FirstChildElement( "userProperties" );

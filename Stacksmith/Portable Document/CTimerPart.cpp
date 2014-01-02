@@ -9,6 +9,9 @@
 #include "CTimerPart.h"
 
 
+using namespace Calhoun;
+
+
 void	CTimerPart::DumpProperties( size_t inIndent )
 {
 	CPart::DumpProperties( inIndent );

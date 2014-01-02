@@ -13,6 +13,8 @@
 #include <vector>
 
 
+namespace Calhoun {
+
 class CRefCountedObject
 {
 public:
@@ -71,5 +73,7 @@ protected:
 	std::vector<CRefCountedObject*>		mObjects;
 	CAutoreleasePool*					mPreviousPool;
 };
+
+}
 
 #endif /* defined(__Stacksmith__CRefCountedObject__) */

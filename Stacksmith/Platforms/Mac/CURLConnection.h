@@ -14,11 +14,15 @@
 #include "CURLResponse.h"
 
 
+namespace Calhoun {
+
 // A class for sending HTTP requests and getting headers and body data back:
 class CURLConnection
 {
 public:
 	static void	SendRequestWithCompletionHandler( CURLRequest& inRequest, std::function<void (CURLResponse inResponse, const char* inData, size_t inDataLength)> completionBlock );
 };
+
+}
 
 #endif /* defined(__Stacksmith__CURLConnection__) */

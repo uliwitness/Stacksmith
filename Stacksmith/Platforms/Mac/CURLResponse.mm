@@ -10,6 +10,10 @@
 #import <Foundation/Foundation.h>
 
 
+using namespace Calhoun;
+
+
+
 CURLResponse::CURLResponse( const CURLResponse& inResponse )
 {
 	mMacURLResponse = [inResponse.mMacURLResponse retain];

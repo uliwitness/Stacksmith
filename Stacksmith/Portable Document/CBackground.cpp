@@ -7,3 +7,6 @@
 //
 
 #include "CBackground.h"
+
+
+using namespace Calhoun;

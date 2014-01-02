@@ -10,6 +10,9 @@
 #include "CTinyXMLUtils.h"
 
 
+using namespace Calhoun;
+
+
 static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 
 

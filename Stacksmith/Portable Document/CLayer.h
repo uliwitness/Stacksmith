@@ -18,6 +18,8 @@
 #include <map>
 
 
+namespace Calhoun {
+
 class CStack;
 
 
@@ -59,5 +61,7 @@ protected:
 };
 
 typedef CRefCountedObjectRef<CLayer>	CLayerRef;
+
+}
 
 #endif /* defined(__Stacksmith__CLayer__) */

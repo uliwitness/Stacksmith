@@ -13,6 +13,9 @@
 #include "CPartContents.h"
 
 
+using namespace Calhoun;
+
+
 CLayer::~CLayer()
 {
 	

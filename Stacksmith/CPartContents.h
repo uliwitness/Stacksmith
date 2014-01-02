@@ -14,6 +14,7 @@
 #include "WILDObjectID.h"
 #include <string>
 
+namespace Calhoun {
 
 class CPartContents : public CRefCountedObject
 {
@@ -31,5 +32,7 @@ protected:
 
 
 typedef CRefCountedObjectRef<CPartContents>		CPartContentsRef;
+
+}
 
 #endif /* defined(__Stacksmith__CPartContents__) */

@@ -9,6 +9,9 @@
 #include "CRefCountedObject.h"
 
 
+using namespace Calhoun;
+
+
 static CAutoreleasePool		*sCurrentPool = NULL;
 
 
