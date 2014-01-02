@@ -23,6 +23,17 @@ protected:
 	
 	virtual const char*		GetIdentityForDump()	{ return "Button"; };
 	virtual void			DumpProperties( size_t inIndent );
+
+protected:
+	bool			mShowName;
+	bool			mHighlight;
+	bool			mAutoHighlight;
+	bool			mSharedHighlight;
+	int				mTitleWidth;
+	WILDObjectID	mIconID;
+	int				mTextAlign;
+	std::string		mFont;
+	int				mTextSize;
 };
 
 }

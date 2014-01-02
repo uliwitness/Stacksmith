@@ -7,6 +7,7 @@
 //
 
 #include "CButtonPart.h"
+#include "CTinyXMLUtils.h"
 
 
 using namespace Calhoun;
@@ -16,20 +17,43 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
 	CVisiblePart::LoadPropertiesFromElement( inElement );
 	
-//	mFont.erase();
-//	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
-//	mInterval = CTinyXMLUtils::GetBoolNamed( inElement, "visible", true );
-//	mRepeat = CTinyXMLUtils::GetBoolNamed( inElement, "repeat", true );
+	mShowName = CTinyXMLUtils::GetBoolNamed( inElement, "showName", true );
+	mHighlight = CTinyXMLUtils::GetBoolNamed( inElement, "highlight", false );
+	mAutoHighlight = CTinyXMLUtils::GetBoolNamed( inElement, "autoHighlight", true );
+	mSharedHighlight = CTinyXMLUtils::GetBoolNamed( inElement, "sharedHighlight", true );
+	mTitleWidth = CTinyXMLUtils::GetIntNamed( inElement, "titleWidth", 0 );
+	mIconID = CTinyXMLUtils::GetLongLongNamed( inElement, "icon", 0 );
+	std::string	textAlignStr;
+	CTinyXMLUtils::GetStringNamed( inElement, "textAlign", textAlignStr );
+	if( textAlignStr.compare("left") )
+		mTextAlign = CPartTextAlignLeft;
+	else if( textAlignStr.compare("center") )
+		mTextAlign = CPartTextAlignCenter;
+	else if( textAlignStr.compare("right") )
+		mTextAlign = CPartTextAlignRight;
+	else if( textAlignStr.compare("justified") )
+		mTextAlign = CPartTextAlignJustified;
+	else
+		mTextAlign = CPartTextAlignDefault;
+	mFont.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
+	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );
 }
 
 
 void	CButtonPart::DumpProperties( size_t inIndentLevel )
 {
-//	const char*	indentStr = IndentString(inIndentLevel);
+	const char*	indentStr = IndentString(inIndentLevel);
 	
 	CVisiblePart::DumpProperties( inIndentLevel );
 	
-//	printf( "%smessage = %s\n", indentStr, mMessage.c_str() );
-//	printf( "%sinterval = %lld\n", indentStr, mInterval );
-//	printf( "%srepeat = %s\n", indentStr, (mRepeat ? "true" : "false") );
+	printf( "%sshowName = %s\n", indentStr, (mShowName ? "true" : "false") );
+	printf( "%shighlight = %s\n", indentStr, (mHighlight ? "true" : "false") );
+	printf( "%sautoHighlight = %s\n", indentStr, (mAutoHighlight ? "true" : "false") );
+	printf( "%ssharedHighlight = %s\n", indentStr, (mSharedHighlight ? "true" : "false") );
+	printf( "%stitleWidth = %d\n", indentStr, mTitleWidth );
+	printf( "%sicon = %lld\n", indentStr, mIconID );
+	printf( "%stextAlign = %d\n", indentStr, mTextAlign );
+	printf( "%sfont = %s\n", indentStr, mFont.c_str() );
+	printf( "%stextSize = %d\n", indentStr, mTextSize );
 }
