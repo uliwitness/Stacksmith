@@ -22,6 +22,22 @@ void	CTimerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mInterval = CTinyXMLUtils::GetLongLongNamed( inElement, "interval", 0 );
 	mStarted = CTinyXMLUtils::GetBoolNamed( inElement, "started", true );
 	mRepeat = CTinyXMLUtils::GetBoolNamed( inElement, "repeat", true );
+	mActualTimer.SetHandler( [this](CTimer *inSender) { Trigger(); });
+	mActualTimer.SetInterval( mInterval );
+	if( mStarted )
+		mActualTimer.Start();
+}
+
+
+void	CTimerPart::Trigger()
+{
+	
+	
+	if( !mRepeat )
+	{
+		mActualTimer.Stop();
+		mStarted = false;
+	}
 }
 
 

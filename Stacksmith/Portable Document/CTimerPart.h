@@ -11,6 +11,7 @@
 
 #include "CPart.h"
 #include <string>
+#include "CTimer.h"
 
 
 namespace Calhoun {
@@ -20,17 +21,26 @@ class CTimerPart : public CPart
 public:
 	explicit CTimerPart( CLayer *inOwner ) : CPart( inOwner ) {};
 	
+	virtual void			SetStarted( bool inStarted )	{ mStarted = inStarted; if( inStarted ) mActualTimer.Start(); else mActualTimer.Stop(); };
+	virtual bool			GetStarted()					{ return mStarted; };
+	
+	virtual void			SetInterval( long long inInterval )	{ mInterval = inInterval; mActualTimer.SetInterval( inInterval ); };
+	virtual long long		GetInterval()						{ return mInterval; };
+	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	
 	virtual const char*		GetIdentityForDump()	{ return "Timer"; };
 	virtual void			DumpProperties( size_t inIndent );
 	
+	virtual void			Trigger();
+	
 protected:
 	std::string		mMessage;
 	long long		mInterval;
 	bool			mStarted;
 	bool			mRepeat;
+	CTimer			mActualTimer;
 };
 
 }
