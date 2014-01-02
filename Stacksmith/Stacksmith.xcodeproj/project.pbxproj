@@ -315,6 +315,7 @@
 		55CD60C2187511A3002450E2 /* CPartRegistration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C0187511A3002450E2 /* CPartRegistration.cpp */; };
 		55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C318751DF6002450E2 /* CVisiblePart.cpp */; };
 		55CD60C818752ECA002450E2 /* CTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C618752ECA002450E2 /* CTimer.mm */; };
+		55CD60D818754007002450E2 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55CD60D418753CA2002450E2 /* stackimport */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
@@ -422,6 +423,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = Sparkle;
+		};
+		55CD60D318753CA2002450E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DD76F6C0486A84900D96B5E;
+			remoteInfo = stackimport;
+		};
+		55CD60D518753CE6002450E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD76F620486A84900D96B5E;
+			remoteInfo = stackimport;
 		};
 		55E23BFF133FAC0200E6B444 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -960,6 +975,7 @@
 		55CD60C418751DF6002450E2 /* CVisiblePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVisiblePart.h; path = "Portable Document/CVisiblePart.h"; sourceTree = "<group>"; };
 		55CD60C618752ECA002450E2 /* CTimer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CTimer.mm; path = Platforms/Mac/CTimer.mm; sourceTree = "<group>"; };
 		55CD60C718752ECA002450E2 /* CTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimer.h; path = Platforms/Mac/CTimer.h; sourceTree = "<group>"; };
+		55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
@@ -1114,6 +1130,7 @@
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
+				55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */,
 				55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */,
 			);
 			name = Propaganda;
@@ -1798,6 +1815,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		55CD60D018753CA1002450E2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55CD60D418753CA2002450E2 /* stackimport */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		55D7AA49157163C500F33E78 /* Transformations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1907,6 +1932,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55CD60D618753CE6002450E2 /* PBXTargetDependency */,
 				55C9F96D136E1ED30096FC4D /* PBXTargetDependency */,
 				55E23C00133FAC0200E6B444 /* PBXTargetDependency */,
 			);
@@ -1939,6 +1965,10 @@
 				{
 					ProductGroup = 55C9F959136E1E940096FC4D /* Products */;
 					ProjectRef = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+				},
+				{
+					ProductGroup = 55CD60D018753CA1002450E2 /* Products */;
+					ProjectRef = 55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1985,6 +2015,13 @@
 			remoteRef = 55C9F968136E1E950096FC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		55CD60D418753CA2002450E2 /* stackimport */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = stackimport;
+			remoteRef = 55CD60D318753CA2002450E2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1992,6 +2029,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55CD60D818754007002450E2 /* stackimport in Resources */,
 				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				1DDD582C0DA1D0D100B32029 /* WILDCardWindowController.xib in Resources */,
@@ -2162,7 +2200,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../UliKit/make_git_version_header.sh\ntouch ${CODESIGNING_FOLDER_PATH} #dummy file to shut up codesign";
+			shellScript = "../UliKit/make_git_version_header.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2390,6 +2428,11 @@
 			isa = PBXTargetDependency;
 			name = Sparkle;
 			targetProxy = 55C9F96C136E1ED30096FC4D /* PBXContainerItemProxy */;
+		};
+		55CD60D618753CE6002450E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = stackimport;
+			targetProxy = 55CD60D518753CE6002450E2 /* PBXContainerItemProxy */;
 		};
 		55E23C00133FAC0200E6B444 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
