@@ -39,7 +39,7 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 
 
 CPart::CPart( CLayer *inOwner )
-	: mOwner(inOwner)
+	: mFamily(0), mOwner(inOwner)
 {
 	
 }
@@ -64,8 +64,6 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mTop = CTinyXMLUtils::GetIntNamed( rectElement, "top", 10 );
 	mRight = CTinyXMLUtils::GetIntNamed( rectElement, "right", mLeft + 100 );
 	mBottom = CTinyXMLUtils::GetIntNamed( rectElement, "bottom", mLeft + 100 );
-	mVisible = CTinyXMLUtils::GetBoolNamed( inElement, "visible", true );
-	mEnabled = CTinyXMLUtils::GetBoolNamed( inElement, "enabled", true );
 }
 
 

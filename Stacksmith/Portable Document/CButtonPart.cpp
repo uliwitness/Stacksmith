@@ -38,6 +38,7 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mFont.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
 	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );
+	mFamily = CTinyXMLUtils::GetIntNamed( inElement, "family", 0 );
 }
 
 
@@ -56,4 +57,5 @@ void	CButtonPart::DumpProperties( size_t inIndentLevel )
 	printf( "%stextAlign = %d\n", indentStr, mTextAlign );
 	printf( "%sfont = %s\n", indentStr, mFont.c_str() );
 	printf( "%stextSize = %d\n", indentStr, mTextSize );
+	printf( "%sfamily = %d\n", indentStr, mFamily );
 }

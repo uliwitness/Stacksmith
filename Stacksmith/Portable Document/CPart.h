@@ -61,8 +61,6 @@ protected:
 	int				mTop;
 	int				mRight;
 	int				mBottom;
-	bool			mVisible;
-	bool			mEnabled;
 	CLayer	*		mOwner;		// Card/background we are on.
 };
 
