@@ -10,6 +10,8 @@
 #define __Stacksmith__CTimerPart__
 
 #include "CPart.h"
+#include <string>
+
 
 namespace Calhoun {
 
@@ -19,8 +21,15 @@ public:
 	explicit CTimerPart( CLayer *inOwner ) : CPart( inOwner ) {};
 	
 protected:
+	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	
 	virtual const char*		GetIdentityForDump()	{ return "Timer"; };
 	virtual void			DumpProperties( size_t inIndent );
+	
+protected:
+	std::string		mMessage;
+	long long		mInterval;
+	bool			mRepeat;
 };
 
 }
