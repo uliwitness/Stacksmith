@@ -16,7 +16,10 @@
 
 CStack::~CStack()
 {
-	
+	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+		(*itty)->SetStack( NULL );
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+		(*itty)->SetStack( NULL );
 }
 
 
@@ -25,6 +28,7 @@ void	CStack::LoadFromURL( const std::string inURL, std::function<void(CStack*)> 
 	Retain();
 	
 	CURLRequest		request( inURL );
+	printf("Loading %s\n",inURL.c_str());
 	CURLConnection::SendRequestWithCompletionHandler( request, [this,inURL,inCompletionBlock] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
 	{
 		tinyxml2::XMLDocument		document;
@@ -60,9 +64,13 @@ void	CStack::LoadFromURL( const std::string inURL, std::function<void(CStack*)> 
 			{
 				size_t			slashOffset = inURL.rfind( '/' );
 				std::string		backgroundURL = inURL.substr(0,slashOffset);
+				backgroundURL.append( 1, '/' );
 				backgroundURL.append( currBgElem->Attribute("file") );
+				char*			endPtr = NULL;
+				WILDObjectID	bgID = strtoll( currBgElem->Attribute("id"), &endPtr, 10 );
+				const char*		theName = currBgElem->Attribute("name");
 				
-				CBackground	*	theBackground = new CBackground( backgroundURL );
+				CBackground	*	theBackground = new CBackground( backgroundURL, bgID, (theName ? theName : ""), this );
 				theBackground->Autorelease();
 				mBackgrounds.push_back( theBackground );
 				
@@ -75,11 +83,15 @@ void	CStack::LoadFromURL( const std::string inURL, std::function<void(CStack*)> 
 			{
 				size_t			slashOffset = inURL.rfind( '/' );
 				std::string		cardURL = inURL.substr(0,slashOffset);
+				cardURL.append( 1, '/' );
 				cardURL.append( currCdElem->Attribute("file") );
+				char*			endPtr = NULL;
+				WILDObjectID	cdID = strtoll( currCdElem->Attribute("id"), &endPtr, 10 );
+				const char*		theName = currCdElem->Attribute("name");
 				const char*	markedAttrStr = currCdElem->Attribute("marked");
 				bool	marked = markedAttrStr ? (strcmp("true", markedAttrStr) == 0) : false;
 				
-				CCard	*	theCard = new CCard( cardURL, marked );
+				CCard	*	theCard = new CCard( cardURL, cdID, (theName ? theName : ""), this, marked );
 				theCard->Autorelease();
 				mCards.push_back( theCard );
 				if( marked )
@@ -113,17 +125,54 @@ void	CStack::RemoveCard( CCard* inCard )
 }
 
 
+CCard*	CStack::GetCardByID( WILDObjectID inID )
+{
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+	{
+		if( (*itty)->GetID() == inID )
+			return *itty;
+	}
+	
+	return NULL;
+}
+
+
+CBackground*	CStack::GetBackgroundByID( WILDObjectID inID )
+{
+	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+	{
+		if( (*itty)->GetID() == inID )
+			return *itty;
+	}
+	
+	return NULL;
+}
+
+
 void	CStack::Dump( size_t inIndent )
 {
 	const char * indentStr = IndentString( inIndent );
 	printf( "%sStack ID %lld \"%s\"\n%s{\n", indentStr, mStackID, mName.c_str(), indentStr );
+	printf( "%s\tuserLevel = %d\n", indentStr, mUserLevel );
 	printf( "%s\twidth = %d\n", indentStr, mCardWidth );
 	printf( "%s\theight = %d\n", indentStr, mCardHeight );
-	printf( "%s\t{\n", indentStr );
+	printf( "%s\tcantPeek = %s\n", indentStr, (mCantPeek? "true" : "false") );
+	printf( "%s\tcantAbort = %s\n", indentStr, (mCantAbort? "true" : "false") );
+	printf( "%s\tprivateAccess = %s\n", indentStr, (mPrivateAccess? "true" : "false") );
+	printf( "%s\tcantDelete = %s\n", indentStr, (mCantDelete? "true" : "false") );
+	printf( "%s\tcantModify = %s\n", indentStr, (mCantModify? "true" : "false") );
+	printf( "%s\tresizable = %s\n", indentStr, (mResizable? "true" : "false") );
+	printf( "%s\tcards\n%s\t{\n", indentStr, indentStr );
 	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
 		(*itty)->Dump( inIndent +2 );
-	printf( "%s\t}\n%s\t{\n", indentStr, indentStr );
+	printf( "%s\t}\n%s\tbackgrounds\n%s\t{\n", indentStr, indentStr, indentStr );
 	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
 		(*itty)->Dump( inIndent +2 );
+	printf( "%s\t}\n%s\tmarkedCards\n%s\t{\n", indentStr, indentStr, indentStr );
+	for( auto itty = mMarkedCards.begin(); itty != mMarkedCards.end(); itty++ )
+	{
+		CCardRef	theCard = (*itty);
+		theCard->Dump( inIndent +2 );
+	}
 	printf( "%s\t}\n%s}\n", indentStr, indentStr );
 }

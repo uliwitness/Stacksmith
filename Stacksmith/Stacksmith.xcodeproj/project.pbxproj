@@ -307,6 +307,7 @@
 		55C88B041332D05B00ACB615 /* WILDCardInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */; };
 		55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */; };
 		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
+		55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
@@ -936,6 +937,8 @@
 		55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = ../Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
 		55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardWindowController.h; path = Document/WILDCardWindowController.h; sourceTree = "<group>"; };
 		55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardWindowController.m; path = Document/WILDCardWindowController.m; sourceTree = "<group>"; };
+		55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTimerPart.cpp; path = "Portable Document/CTimerPart.cpp"; sourceTree = "<group>"; };
+		55CD60AE1874FE7D002450E2 /* CTimerPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimerPart.h; path = "Portable Document/CTimerPart.h"; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
@@ -1607,6 +1610,8 @@
 				556DB7BA1870A402002F7CB2 /* CCard.cpp */,
 				55AC961D1870FF2200488B51 /* CPart.h */,
 				55AC961C1870FF2200488B51 /* CPart.cpp */,
+				55CD60AE1874FE7D002450E2 /* CTimerPart.h */,
+				55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */,
 				55AC96201870FFC200488B51 /* CPartContents.h */,
 				55AC961F1870FFC200488B51 /* CPartContents.cpp */,
 				556DB7A418709A15002F7CB2 /* tinyxml2.h */,
@@ -2197,6 +2202,7 @@
 				553C46F113577334000219FA /* CToken.cpp in Sources */,
 				553C46F213577334000219FA /* CParser.cpp in Sources */,
 				553C46F313577334000219FA /* CParseTree.cpp in Sources */,
+				55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */,
 				553C46F413577334000219FA /* CNode.cpp in Sources */,
 				553C46F513577334000219FA /* CValueNode.cpp in Sources */,
 				553C46F613577334000219FA /* CCommandNode.cpp in Sources */,

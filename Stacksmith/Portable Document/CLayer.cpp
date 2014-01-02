@@ -19,6 +19,11 @@ CLayer::~CLayer()
 }
 
 
+void	CLayer::SetStack( CStack* inStack )
+{
+	mStack = inStack;
+}
+
 void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 {
 	if( mLoaded )
@@ -44,26 +49,16 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 				document.Print();
 
 				tinyxml2::XMLElement	*	root = document.RootElement();
-
-				mID = CTinyXMLUtils::GetLongLongNamed( root, "id" );
-				mName = "Untitled";
-				CTinyXMLUtils::GetStringNamed( root, "name", mName );
-				mShowPict = CTinyXMLUtils::GetBoolNamed( root, "showPict", true );
-				mCantDelete = CTinyXMLUtils::GetBoolNamed( root, "cantDelete", false );
-				mDontSearch = CTinyXMLUtils::GetBoolNamed( root, "dontSearch", false );
-				mPictureName = "";
-				CTinyXMLUtils::GetStringNamed( root, "bitmap", mPictureName );
-
-				mScript.erase();
-				CTinyXMLUtils::GetStringNamed( root, "script", mScript );
-
+				
+				LoadPropertiesFromElement( root );
+				
 				LoadUserPropertiesFromElement( root );
 
 				// Load parts:
 				tinyxml2::XMLElement	*	currPartElem = root->FirstChildElement( "part" );
 				while( currPartElem )
 				{
-					CPart	*	thePart = new CPart( currPartElem );
+					CPart	*	thePart = CPart::NewPartWithElement( currPartElem, this );
 					thePart->Autorelease();
 					mParts.push_back( thePart );
 					thePart->Retain();	// Retain for the button families array.
@@ -84,23 +79,58 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 				}
 			}
 			
-			mLoaded = true;
-			mLoading = false;
-			
-			// Call all completion blocks:
-			for( auto itty = mLoadCompletionBlocks.begin(); itty != mLoadCompletionBlocks.end(); itty++ )
-				(*itty)(this);
-			
-			Release();
+			CallAllCompletionBlocks();
 		} );
 	}
+}
+
+
+void	CLayer::CallAllCompletionBlocks()	// Can override this in cards to also load the background if needed and only *then* call completion blocks.
+{
+	mLoaded = true;
+	mLoading = false;
+	
+	// Call all completion blocks:
+	for( auto itty = mLoadCompletionBlocks.begin(); itty != mLoadCompletionBlocks.end(); itty++ )
+		(*itty)(this);
+			
+	Release();
+}
+
+
+void	CLayer::LoadPropertiesFromElement( tinyxml2::XMLElement* root )
+{
+	// We get id and name from the TOC.xml via the constructor
+	mShowPict = CTinyXMLUtils::GetBoolNamed( root, "showPict", true );
+	mCantDelete = CTinyXMLUtils::GetBoolNamed( root, "cantDelete", false );
+	mDontSearch = CTinyXMLUtils::GetBoolNamed( root, "dontSearch", false );
+	mPictureName = "";
+	CTinyXMLUtils::GetStringNamed( root, "bitmap", mPictureName );
+
+	mScript.erase();
+	CTinyXMLUtils::GetStringNamed( root, "script", mScript );
+}
+
+
+const char*	CLayer::GetIdentityForDump()
+{
+	return "Layer";
+}
+
+
+void	CLayer::DumpProperties( size_t inIndent )
+{
+	const char	*	indentStr = IndentString(inIndent);
+	printf( "%sloaded = %s\n", indentStr, mLoaded ? "true" : "false" );
 }
 
 
 void	CLayer::Dump( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);
-	printf( "%sLayer ID %lld \"%s\"\n%s{\n%s\tloaded = %s\n%s\t{\n", indentStr, mID, mName.c_str(), indentStr, indentStr, mLoaded ? "true" : "false", indentStr );
+	printf( "%s%s ID %lld \"%s\"\n%s{\n", indentStr, GetIdentityForDump(), mID, mName.c_str(), indentStr );
+	DumpProperties( inIndent +1 );
+	printf("%s\t{\n",indentStr);
 	for( auto itty = mParts.begin(); itty != mParts.end(); itty++ )
 		(*itty)->Dump( inIndent +2 );
 	printf( "%s\t}\n%s\t{\n", indentStr, indentStr );

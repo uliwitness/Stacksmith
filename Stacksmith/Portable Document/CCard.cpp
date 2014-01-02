@@ -7,3 +7,28 @@
 //
 
 #include "CCard.h"
+#include "CStack.h"
+#include "CTinyXMLUtils.h"
+
+
+void	CCard::LoadPropertiesFromElement( tinyxml2::XMLElement* root )
+{
+	CLayer::LoadPropertiesFromElement( root );
+	
+	WILDObjectID owningBackgroundID = CTinyXMLUtils::GetLongLongNamed( root, "owner", 0 );
+	mOwningBackground = mStack->GetBackgroundByID( owningBackgroundID );
+}
+
+
+void	CCard::CallAllCompletionBlocks()
+{
+	if( !mOwningBackground->IsLoaded() )
+	{
+		mOwningBackground->Load( [this](CLayer *inBackground)
+		{
+			CLayer::CallAllCompletionBlocks();
+		});
+	}
+	else
+		CLayer::CallAllCompletionBlocks();
+}

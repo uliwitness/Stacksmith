@@ -11,17 +11,54 @@
 
 #include "CConcreteObject.h"
 #include "tinyxml2.h"
+#include "WILDObjectID.h"
+
+
+class CLayer;
+class CPart;
+
+
+class CPartCreatorBase
+{
+public:
+	virtual ~CPartCreatorBase() {};
+	
+	virtual CPart	*	NewPartWithElement( tinyxml2::XMLElement * inElement, CLayer *inOwner )	{ return NULL; };
+};
+
+template<class T>
+class CPartCreator : public CPartCreatorBase
+{
+	virtual CPart	*	NewPartWithElement( tinyxml2::XMLElement * inElement, CLayer *inOwner )	{ return new T( inElement, inOwner ); };
+};
+
 
 
 class CPart : public CConcreteObject
 {
 public:
-	CPart( tinyxml2::XMLElement * inElement ) {};
+	static CPart*	NewPartWithElement( tinyxml2::XMLElement * inElement, CLayer *inOwner );
+	static void		RegisterPartCreator( const std::string inTypeString, CPartCreatorBase* inCreator );
 	
-	int		GetFamily()		{ return mFamily; };
+	CPart( tinyxml2::XMLElement * inElement, CLayer *inOwner );
+	
+	int						GetFamily()		{ return mFamily; };
+	
+	virtual void			Dump( size_t inIndent = 0 );
 	
 protected:
-	int			mFamily;
+	virtual const char*		GetIdentityForDump()	{ return "Part"; };
+	virtual void			DumpProperties( size_t inIndent );
+
+	int				mFamily;
+	WILDObjectID	mID;
+	int				mLeft;
+	int				mTop;
+	int				mRight;
+	int				mBottom;
+	bool			mVisible;
+	bool			mEnabled;
+	CLayer	*		mOwner;		// Card/background we are on.
 };
 
 

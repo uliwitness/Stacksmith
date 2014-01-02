@@ -11,16 +11,27 @@
 
 #include "CLayer.h"
 
+
+class CBackground;
+
+
 class CCard : public CLayer
 {
 public:
-	CCard( std::string inURL, bool inMarked ) : CLayer(inURL), mMarked(inMarked)	{};
+	CCard( std::string inURL, WILDObjectID inID, const std::string inName, CStack* inStack, bool inMarked ) : CLayer(inURL,inID,inName,inStack), mMarked(inMarked), mOwningBackground(NULL)	{};
 	
 	bool		IsMarked()					{ return mMarked; };
 	void		SetMarked( bool inMarked )	{ mMarked = inMarked; };
 	
 protected:
+	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
+	virtual void	CallAllCompletionBlocks();
+
+	virtual const char*	GetIdentityForDump()		{ return "Card"; };
+
+protected:
 	bool			mMarked;
+	CBackground	*	mOwningBackground;
 };
 
 typedef CRefCountedObjectRef<CCard>	CCardRef;

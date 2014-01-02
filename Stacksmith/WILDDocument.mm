@@ -31,6 +31,7 @@
 #import "WILDXMLUtils.h"
 #import "LEOContextGroup.h"
 #include "CStack.h"
+#include "CTimerPart.h"
 
 /*!
 	@class WILDDocument
@@ -374,9 +375,16 @@
 			#if DEBUG_PORTABLE_DOCUMENT
 			{
 				CAutoreleasePool	pool;
+				CPart::RegisterPartCreator( "timer", new CPartCreator<CTimerPart>() );
 				CStack		*		theCppStack = new CStack;
-				theCppStack->Autorelease();
-				theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String], [](CStack* inStack){ inStack->Dump(); } );
+				theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String], [](CStack* inStack)
+				{
+					inStack->GetCard(0)->Load( [inStack](CLayer*inCard)
+					{
+						inStack->Dump();
+						inStack->Release();
+					} );
+				} );
 			}
 			#endif
 			NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0

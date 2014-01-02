@@ -14,7 +14,11 @@
 class CBackground : public CLayer
 {
 public:
-	CBackground( std::string inURL ) : CLayer(inURL)	{};
+	CBackground( std::string inURL, WILDObjectID inID, const std::string inName, CStack* inStack ) : CLayer(inURL,inID,inName,inStack)	{};
+	~CBackground()	{ printf("Released Background %p\n",this); };
+
+protected:
+	virtual const char*	GetIdentityForDump()		{ return "Background"; };
 };
 
 typedef CRefCountedObjectRef<CBackground>	CBackgroundRef;

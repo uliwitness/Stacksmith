@@ -18,18 +18,30 @@
 #include <map>
 
 
+class CStack;
+
+
 class CLayer : public CConcreteObject
 {
 public:
-	CLayer( std::string inURL ) : mURL(inURL), mLoaded(false) {};
+	CLayer( std::string inURL, WILDObjectID inID, const std::string inName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID) { mName = inName; };
 	~CLayer();
+	
+	WILDObjectID	GetID()	const	{ return mID; };
 	
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
 	bool			IsLoaded()	{ return mLoaded; };
+	virtual void	SetStack( CStack* inStack );
 	
-	virtual void	Dump( size_t inIndent );
+	virtual void	Dump( size_t inIndent = 0 );
 	
 protected:
+	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
+	virtual void	DumpProperties( size_t inIndent );
+	virtual void	CallAllCompletionBlocks();
+	
+	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
+
 	WILDObjectID					mID;
 	std::string						mURL;
 	bool							mLoaded;
@@ -43,6 +55,7 @@ protected:
 	std::vector<CPartRef>			mAddColorParts;		// Array of parts for which we have AddColor color information. May contain parts that are already in mParts.
 	std::vector<CPartContentsRef>	mContents;			// Dictionary of part ID -> contents mappings
 	std::multimap<int,CPartRef>		mButtonFamilies;	// Family ID as key, and arrays of button parts belonging to these families.
+	CStack	*						mStack;
 };
 
 typedef CRefCountedObjectRef<CLayer>	CLayerRef;

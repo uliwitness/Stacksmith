@@ -26,12 +26,16 @@ class CStack : public CConcreteObject
 public:
 	CStack() : mStackID(0)	{};
 	
-	void		LoadFromURL( const std::string inURL, std::function<void(CStack*)> inCompletionBlock );
+	void			LoadFromURL( const std::string inURL, std::function<void(CStack*)> inCompletionBlock );
 	
-	void		AddCard( CCard* inCard );
-	void		RemoveCard( CCard* inCard );
+	void			AddCard( CCard* inCard );
+	void			RemoveCard( CCard* inCard );
+	CCard*			GetCard( size_t inIndex )			{ if( inIndex >= mCards.size() ) return NULL; return mCards[inIndex]; };
+	CCard*			GetCardByID( WILDObjectID inID );
+	CBackground*	GetBackground( size_t inIndex )		{ if( inIndex >= mBackgrounds.size() ) return NULL; return mBackgrounds[inIndex]; };
+	CBackground*	GetBackgroundByID( WILDObjectID inID );
 	
-	void		Dump( size_t inIndent = 0 );
+	void			Dump( size_t inIndent = 0 );
 	
 protected:
 	~CStack();
