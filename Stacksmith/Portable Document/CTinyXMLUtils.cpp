@@ -61,7 +61,9 @@ void		CTinyXMLUtils::GetStringNamed( tinyxml2::XMLElement* root, const char* inN
 
 bool		CTinyXMLUtils::GetBoolNamed( tinyxml2::XMLElement* root, const char* inName, bool defaultValue )
 {
-	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName )->FirstChildElement();
+	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	if( elem )
+		elem = elem->FirstChildElement();
 	if( elem )
 	{
 		if( strcmp( elem->Name(), "true" ) == 0 )
