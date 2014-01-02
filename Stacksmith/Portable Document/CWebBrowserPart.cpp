@@ -7,12 +7,26 @@
 //
 
 #include "CWebBrowserPart.h"
+#include "CTinyXMLUtils.h"
 
 
 using namespace Calhoun;
 
 
-void	CWebBrowserPart::DumpProperties( size_t inIndent )
+void	CWebBrowserPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
-	CPart::DumpProperties( inIndent );
+	CVisiblePart::LoadPropertiesFromElement( inElement );
+	
+	mCurrentURL.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "currentURL", mCurrentURL );
+}
+
+
+void	CWebBrowserPart::DumpProperties( size_t inIndentLevel )
+{
+	const char*	indentStr = IndentString(inIndentLevel);
+	
+	CVisiblePart::DumpProperties( inIndentLevel );
+	
+	printf( "%scurrentURL = %s\n", indentStr, mCurrentURL.c_str() );
 }

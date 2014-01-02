@@ -7,12 +7,30 @@
 //
 
 #include "CMoviePlayerPart.h"
+#include "CTinyXMLUtils.h"
 
 
 using namespace Calhoun;
 
 
-void	CMoviePlayerPart::DumpProperties( size_t inIndent )
+void	CMoviePlayerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
-	CPart::DumpProperties( inIndent );
+	CVisiblePart::LoadPropertiesFromElement( inElement );
+	
+	mMediaPath.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "mediaPath", mMediaPath );
+	mCurrentTime = CTinyXMLUtils::GetLongLongNamed( inElement, "currentTime", 0 );
+	mControllerVisible = CTinyXMLUtils::GetBoolNamed( inElement, "controllerVisible", true );
+}
+
+
+void	CMoviePlayerPart::DumpProperties( size_t inIndentLevel )
+{
+	const char*	indentStr = IndentString(inIndentLevel);
+	
+	CVisiblePart::DumpProperties( inIndentLevel );
+	
+	printf( "%smediaPath = %s\n", indentStr, mMediaPath.c_str() );
+	printf( "%scurrentTime = %lld\n", indentStr, mCurrentTime );
+	printf( "%scontrollerVisible = %s\n", indentStr, (mControllerVisible ? "true" : "false") );
 }

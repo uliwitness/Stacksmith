@@ -15,11 +15,15 @@ using namespace Calhoun;
 
 void	CTimerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
+	CPart::LoadPropertiesFromElement( inElement );
+	
 	mMessage.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "message", mMessage );
 	mInterval = CTinyXMLUtils::GetLongLongNamed( inElement, "interval", 0 );
+	mStarted = CTinyXMLUtils::GetBoolNamed( inElement, "started", true );
 	mRepeat = CTinyXMLUtils::GetBoolNamed( inElement, "repeat", true );
 }
+
 
 void	CTimerPart::DumpProperties( size_t inIndentLevel )
 {
@@ -29,5 +33,6 @@ void	CTimerPart::DumpProperties( size_t inIndentLevel )
 	
 	printf( "%smessage = %s\n", indentStr, mMessage.c_str() );
 	printf( "%sinterval = %lld\n", indentStr, mInterval );
+	printf( "%sstarted = %s\n", indentStr, (mStarted ? "true" : "false") );
 	printf( "%srepeat = %s\n", indentStr, (mRepeat ? "true" : "false") );
 }

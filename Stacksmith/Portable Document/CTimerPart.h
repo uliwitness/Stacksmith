@@ -29,6 +29,7 @@ protected:
 protected:
 	std::string		mMessage;
 	long long		mInterval;
+	bool			mStarted;
 	bool			mRepeat;
 };
 

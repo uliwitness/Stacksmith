@@ -9,16 +9,18 @@
 #ifndef __Stacksmith__CButtonPart__
 #define __Stacksmith__CButtonPart__
 
-#include "CPart.h"
+#include "CVisiblePart.h"
 
 namespace Calhoun {
 
-class CButtonPart : public CPart
+class CButtonPart : public CVisiblePart
 {
 public:
-	explicit CButtonPart( CLayer *inOwner ) : CPart( inOwner ) {};
+	explicit CButtonPart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
 	
 protected:
+	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	
 	virtual const char*		GetIdentityForDump()	{ return "Button"; };
 	virtual void			DumpProperties( size_t inIndent );
 };

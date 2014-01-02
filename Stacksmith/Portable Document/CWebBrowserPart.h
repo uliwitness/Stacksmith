@@ -9,18 +9,23 @@
 #ifndef __Stacksmith__CWebBrowserPart__
 #define __Stacksmith__CWebBrowserPart__
 
-#include "CPart.h"
+#include "CVisiblePart.h"
 
 namespace Calhoun {
 
-class CWebBrowserPart : public CPart
+class CWebBrowserPart : public CVisiblePart
 {
 public:
-	explicit CWebBrowserPart( CLayer *inOwner ) : CPart( inOwner ) {};
+	explicit CWebBrowserPart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
 	
 protected:
+	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	
 	virtual const char*		GetIdentityForDump()	{ return "Web Browser"; };
 	virtual void			DumpProperties( size_t inIndent );
+
+protected:
+	std::string		mCurrentURL;
 };
 
 }

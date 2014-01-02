@@ -9,18 +9,37 @@
 #ifndef __Stacksmith__CFieldPart__
 #define __Stacksmith__CFieldPart__
 
-#include "CPart.h"
+#include "CVisiblePart.h"
 
 namespace Calhoun {
 
-class CFieldPart : public CPart
+class CFieldPart : public CVisiblePart
 {
 public:
-	explicit CFieldPart( CLayer *inOwner ) : CPart( inOwner ) {};
+	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
 	
 protected:
+	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	
 	virtual const char*		GetIdentityForDump()	{ return "Field"; };
 	virtual void			DumpProperties( size_t inIndent );
+	
+protected:
+	bool			mDontWrap;
+	bool			mDontSearch;
+	bool			mSharedText;
+	bool			mFixedLineHeight;
+	bool			mAutoTab;
+	bool			mLockText;
+	bool			mAutoSelect;
+	bool			mMultipleLines;
+	bool			mShowLines;
+	bool			mWideMargins;
+	int				mTextAlign;
+	std::string		mFont;
+	int				mTextSize;
+	bool			mHasHorizontalScroller;
+	bool			mHasVerticalScroller;
 };
 
 }

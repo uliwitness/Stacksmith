@@ -12,7 +12,24 @@
 using namespace Calhoun;
 
 
-void	CButtonPart::DumpProperties( size_t inIndent )
+void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
-	CPart::DumpProperties( inIndent );
+	CVisiblePart::LoadPropertiesFromElement( inElement );
+	
+//	mFont.erase();
+//	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
+//	mInterval = CTinyXMLUtils::GetBoolNamed( inElement, "visible", true );
+//	mRepeat = CTinyXMLUtils::GetBoolNamed( inElement, "repeat", true );
+}
+
+
+void	CButtonPart::DumpProperties( size_t inIndentLevel )
+{
+//	const char*	indentStr = IndentString(inIndentLevel);
+	
+	CVisiblePart::DumpProperties( inIndentLevel );
+	
+//	printf( "%smessage = %s\n", indentStr, mMessage.c_str() );
+//	printf( "%sinterval = %lld\n", indentStr, mInterval );
+//	printf( "%srepeat = %s\n", indentStr, (mRepeat ? "true" : "false") );
 }
