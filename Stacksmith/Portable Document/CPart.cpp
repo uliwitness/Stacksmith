@@ -26,7 +26,10 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 	if( foundItem != sPartCreators.end() )
 		thePart = foundItem->second->NewPartInOwner( inOwner );
 	else
+	{
 		thePart = new CPart( inOwner );
+		fprintf( stderr, "error: Unknown part type %s, falling back on plain part.\n", partType.c_str() );
+	}
 	thePart->LoadFromElement( inElement );
 	return thePart;
 }

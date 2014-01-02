@@ -74,9 +74,6 @@
 		mLastCompactedVersion = [appVersion retain];
 		mFirstEditedVersion = [appVersion retain];
 		mLastEditedVersion = [appVersion retain];
-
-		NSError	*	outError = nil;
-		[self loadStandardResourceTableReturningError: &outError];
 	}
     return self;
 }
@@ -236,43 +233,16 @@
 
 
 /*!
-	@method		loadStandardResourceTableReturningError:
-	@abstract	Load built-in standard media table so others can access it: (ICONs, PICTs, CURSs and SNDs)
-	@param		outError		If en error occurs, this will return an error object.
-*/
-
--(BOOL)	loadStandardResourceTableReturningError: (NSError**)outError;
-{
-	NSXMLDocument	*	stdDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"]]
-														options: 0 error: outError] autorelease];
-	if( !stdDoc )
-		return NO;
-	NSXMLElement	*	stdStackfileElement = [stdDoc rootElement];
-	NSArray			*	pictures = [stdStackfileElement elementsForName: @"media"];
-	for( NSXMLElement* thePic in pictures )
-	{
-		NSString	*	iconID = [[[thePic elementsForName: @"id"] objectAtIndex: 0] stringValue];
-		NSString	*	iconName = [[[thePic elementsForName: @"name"] objectAtIndex: 0] stringValue];
-		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
-		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
-		NSPoint			pos = WILDPointFromSubElementInElement( @"hotspot", thePic );
-		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
-			imageOrCursor: nil isBuiltIn: YES];
-	}
-	
-	return YES;
-}
-
-
-/*!
 	@method		readFromURL:ofType:error:
 	@abstract	Load data from a stack XML file into this stack object.
 	@seealso	//leo_ref/occ/instm/WILDDocument/init	-init
 	@seealso	//leo_ref/occ/instm/WILDDocument/writeToURL:ofType:forSaveOperation:originalContentsURL:error: -writeToURL:ofType:forSaveOperation:originalContentsURL:error:
 */
 
-- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError;
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
+	CPartRegistrationRegisterAllPartTypes();
+	
 	NSURL*		tocURL = absoluteURL;
 	BOOL		isDir = NO;
 	if( [[NSFileManager defaultManager] fileExistsAtPath: [absoluteURL path] isDirectory: &isDir] && !isDir )
@@ -307,8 +277,7 @@
 	
 	tocURL = [absoluteURL URLByAppendingPathComponent: @"toc.xml"];
 	
-	#if TEST_PORTABLE_DOCUMENT
-	[self retain];
+	[self retain];	// We release ourselves once the async loading has finished:
 	
 	Calhoun::CDocument::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 	
@@ -326,143 +295,12 @@
 	});
 	
 	return YES;
-	#else
-	
-	NSXMLDocument*	xmlDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: tocURL
-														options: 0 error: outError] autorelease];
-	if( !xmlDoc && *outError )
-	{
-		NSLog( @"%@", *outError );
-		return NO;
-	}
-	
-	NSXMLElement	*	stackfileElement = [xmlDoc rootElement];
-	
-	// Load read/written version numbers so we can conditionally react to them:
-	mCreatedByVersion = [WILDStringFromSubElementInElement( @"createdByVersion", stackfileElement ) retain];
-	mLastCompactedVersion = [WILDStringFromSubElementInElement( @"lastCompactedVersion", stackfileElement ) retain];
-	mFirstEditedVersion = [WILDStringFromSubElementInElement( @"firstEditedVersion", stackfileElement ) retain];
-	mLastEditedVersion = [WILDStringFromSubElementInElement( @"lastEditedVersion", stackfileElement ) retain];
-		
-	
-	// Load font table so others can access it:
-	NSArray			*	fonts = [stackfileElement elementsForName: @"font"];
-	for( NSXMLElement* theFontElem in fonts )
-	{
-		NSString	*	fontID = [[[theFontElem elementsForName: @"id"] objectAtIndex: 0] stringValue];
-		NSString	*	fontName = [[[theFontElem elementsForName: @"name"] objectAtIndex: 0] stringValue];
-		[self addFont: fontName withID: [fontID integerValue]];
-	}
-	
-	// Load style table so others can access it:
-	NSArray			*	pictures = [stackfileElement elementsForName: @"styleentry"];
-	int					x = 0;
-	for( NSXMLElement* thePic in pictures )
-	{
-		NSArray		*	fontElems = [thePic elementsForName: @"font"];
-		NSString	*	fontName = ([fontElems count] > 0) ? [[fontElems objectAtIndex: 0] stringValue] : nil;
-		NSArray		*	idElems = [thePic elementsForName: @"id"];
-		NSString	*	styleID = ([idElems count] > 0) ? [[idElems objectAtIndex: 0] stringValue] : nil;
-		NSArray		*	textStyles = WILDStringsFromSubElementInElement( @"textStyle",thePic);
-		NSArray		*	sizeElems = [thePic elementsForName: @"size"];
-		NSString	*	fontSize = ([sizeElems count] > 0) ? [[sizeElems objectAtIndex: 0] stringValue] : nil;
-		[self addStyleFormatWithID: styleID ? [styleID intValue] : x
-								forFontName: fontName
-								     size: fontSize ? [fontSize intValue] : -1
-								   styles: textStyles];
-		x++;
-	}
-	
-	[mMediaList removeAllObjects];
-	
-	[self loadStandardResourceTableReturningError: outError];
-	
-	// Load media table of this document so others can access it: (ICONs, PICTs, CURSs and SNDs)
-	pictures = [stackfileElement elementsForName: @"media"];
-	for( NSXMLElement* thePic in pictures )
-	{
-		NSString	*	iconID = [[[thePic elementsForName: @"id"] objectAtIndex: 0] stringValue];
-		NSString	*	iconName = [[[thePic elementsForName: @"name"] objectAtIndex: 0] stringValue];
-		NSString	*	fileName = [[[thePic elementsForName: @"file"] objectAtIndex: 0] stringValue];
-		NSString	*	type = [[[thePic elementsForName: @"type"] objectAtIndex: 0] stringValue];
-		NSPoint			pos = WILDPointFromSubElementInElement( @"hotspot", thePic );
-		[self addMediaFile: fileName withType: type name: iconName andID: [iconID integerValue] hotSpot: pos
-			imageOrCursor: nil isBuiltIn: NO];
-	}
-	
-	// Create a stack root object:
-	BOOL				success = NO;
-	NSArray			*	stacks = [stackfileElement elementsForName: @"stack"];
-	[mStacks removeAllObjects];
-	
-	for( NSXMLElement* currStackElem in stacks )
-	{
-		NSXMLNode	*	theFileAttr = [currStackElem attributeForName: @"file"];
-		NSString	*	theFileName = [theFileAttr stringValue];
-		if( theFileName )
-		{
-			NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
-			NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0
-										error: outError];
-			
-			WILDStack*	currStack = [[WILDStack alloc] initWithXMLDocument: theDoc
-												document: self error: outError];
-			if( !currStack )
-			{
-				[theDoc release];
-				return NO;
-			}
-			
-			[mStacks addObject: currStack];
-			[theDoc release];
-			[currStack release];
-			
-			success = YES;
-		}
-	}
-	
-	return success;
-	#endif
 }
 
 
 -(void)	loadUIForCard: (Calhoun::CCard*)inCard
 {
 	inCard->GetDocument()->Dump();
-}
-
-
--(void)		addFont: (NSString*)fontName withID: (WILDObjectID)fontID
-{
-	[mFontIDTable setObject: fontName forKey: [NSNumber numberWithLongLong: fontID]];
-}
-
-
--(NSString*)	fontNameForID: (WILDObjectID)fontID
-{
-	return [mFontIDTable objectForKey: [NSNumber numberWithLongLong: fontID]];
-}
-
-
--(void)		addStyleFormatWithID: (WILDObjectID)styleID forFontName: (NSString*)fontName size: (NSInteger)fontSize styles: (NSArray*)fontStyles
-{
-	WILDStyleEntry*	pse = [[[WILDStyleEntry alloc] initWithFontName: fontName fontSize: fontSize
-			styles: fontStyles] autorelease];
-	
-	[mTextStyles setObject: pse forKey: [NSNumber numberWithInteger: styleID]];
-}
-
-
--(void)	provideStyleFormatWithID: (NSInteger)oneBasedIdx font: (NSString**)outFontName
-			size: (NSInteger*)outFontSize styles: (NSArray**)outFontStyles
-{
-	WILDStyleEntry*	pse = [mTextStyles objectForKey: [NSNumber numberWithInteger: oneBasedIdx]];
-	if( pse )
-	{
-		*outFontName = [pse fontName];
-		*outFontSize = [pse fontSize];
-		*outFontStyles = [pse styles];
-	}
 }
 
 

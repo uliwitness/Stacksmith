@@ -28,6 +28,8 @@ public:
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	
+	WILDObjectID	GetID()		{ return mStackID; };
+	
 	void			AddCard( CCard* inCard );
 	void			RemoveCard( CCard* inCard );
 	CCard*			GetCard( size_t inIndex )			{ if( inIndex >= mCards.size() ) return NULL; return mCards[inIndex]; };

@@ -30,13 +30,15 @@ typedef enum EMediaType CMediaType;
 class CMediaEntry
 {
 public:
-	CMediaEntry() : mIconID(0), mMediaType(CMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false) {};
-	CMediaEntry( int iconID, const std::string iconName, const std::string fileName, CMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn) {};
+	CMediaEntry() : mIconID(0LL), mMediaType(CMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false) {};
+	CMediaEntry( WILDObjectID iconID, const std::string iconName, const std::string fileName, CMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn) {};
 	
-	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %d, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false")); };
+	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %lld, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false")); };
+	
+	WILDObjectID	GetID()		{ return mIconID; };
 	
 protected:
-	int				mIconID;
+	WILDObjectID	mIconID;
 	std::string		mIconName;
 	std::string		mFileName;
 	CMediaType		mMediaType;
@@ -72,6 +74,8 @@ public:
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
 	
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
+	WILDObjectID		GetUniqueIDForStack();
+	WILDObjectID		GetUniqueIDForMedia();
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 	
@@ -91,6 +95,9 @@ protected:
 	std::vector<CMediaEntry>						mMediaList;
 	std::vector<CStackRef>							mStacks;
 	std::vector<std::function<void(CDocument*)>>	mLoadCompletionBlocks;
+	
+	WILDObjectID									mStackIDSeed;
+	WILDObjectID									mMediaIDSeed;
 	
 	LEOContextGroup*								mContextGroup;
 };

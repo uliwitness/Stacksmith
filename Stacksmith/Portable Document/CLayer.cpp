@@ -138,10 +138,10 @@ void	CLayer::Dump( size_t inIndent )
 	printf( "%s%s ID %lld \"%s\"\n%s{\n", indentStr, GetIdentityForDump(), mID, mName.c_str(), indentStr );
 	DumpProperties( inIndent +1 );
 	DumpUserProperties( inIndent +1 );
-	printf("%s\t{\n",indentStr);
+	printf("%s\tparts\n%s\t{\n",indentStr,indentStr);
 	for( auto itty = mParts.begin(); itty != mParts.end(); itty++ )
 		(*itty)->Dump( inIndent +2 );
-	printf( "%s\t}\n%s\t{\n", indentStr, indentStr );
+	printf( "%s\t}\n%s\tcontents\n%s\t{\n", indentStr, indentStr, indentStr );
 	for( auto itty = mContents.begin(); itty != mContents.end(); itty++ )
 		(*itty)->Dump( inIndent +2 );
 	printf( "%s\t}\n%s}\n", indentStr, indentStr );

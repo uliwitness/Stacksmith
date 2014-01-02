@@ -40,7 +40,7 @@ void	CDocument::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root,
 	tinyxml2::XMLElement	*	currMediaElem = root->FirstChildElement( "media" );
 	while( currMediaElem )
 	{
-		int			iconID = CTinyXMLUtils::GetIntNamed( currMediaElem, "id", 0 );
+		WILDObjectID	iconID = CTinyXMLUtils::GetLongLongNamed( currMediaElem, "id", 0 );
 		std::string	iconName;
 		CTinyXMLUtils::GetStringNamed( currMediaElem, "name", iconName );
 		std::string	fileName;
@@ -192,6 +192,53 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			(*itty)( this );
 		mLoadCompletionBlocks.clear();
 	} );
+}
+
+
+WILDObjectID	CDocument::GetUniqueIDForStack()
+{
+	bool	notUnique = true;
+	
+	while( notUnique )
+	{
+		notUnique = false;
+		
+		for( auto currStack = mStacks.begin(); currStack != mStacks.end(); currStack ++ )
+		{
+			if( (*currStack)->GetID() == mStackIDSeed )
+			{
+				notUnique = true;
+				mStackIDSeed++;
+				break;
+			}
+		}
+	}
+	
+	return mStackIDSeed;
+}
+
+
+
+WILDObjectID	CDocument::GetUniqueIDForMedia()
+{
+	bool	notUnique = true;
+	
+	while( notUnique )
+	{
+		notUnique = false;
+		
+		for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia ++ )
+		{
+			if( (*currMedia).GetID() == mMediaIDSeed )
+			{
+				notUnique = true;
+				mMediaIDSeed++;
+				break;
+			}
+		}
+	}
+	
+	return mMediaIDSeed;
 }
 
 
