@@ -14,8 +14,12 @@ using namespace Calhoun;
 
 long long		CTinyXMLUtils::GetLongLongNamed( tinyxml2::XMLElement* root, const char* inName, long long defaultValue )
 {
+	if( !root )
+		return defaultValue;
+	
 	char	*	endPtr = NULL;
-	const char*	str = root->FirstChildElement( inName )->GetText();
+	tinyxml2::XMLElement*	child = root->FirstChildElement( inName );
+	const char*	str = child ? child->GetText() : NULL;
 	if( !str )
 		return defaultValue;
 	long long	num = strtoll( str, &endPtr, 10 );
@@ -27,8 +31,12 @@ long long		CTinyXMLUtils::GetLongLongNamed( tinyxml2::XMLElement* root, const ch
 
 int		CTinyXMLUtils::GetIntNamed( tinyxml2::XMLElement* root, const char* inName, int defaultValue )
 {
+	if( !root )
+		return defaultValue;
+	
 	char	*	endPtr = NULL;
-	const char*	str = root->FirstChildElement( inName )->GetText();
+	tinyxml2::XMLElement*	child = root->FirstChildElement( inName );
+	const char*	str = child ? child->GetText() : NULL;
 	if( !str )
 		return defaultValue;
 	int	num = strtod( str, &endPtr );
@@ -40,8 +48,12 @@ int		CTinyXMLUtils::GetIntNamed( tinyxml2::XMLElement* root, const char* inName,
 
 long		CTinyXMLUtils::GetLongNamed( tinyxml2::XMLElement* root, const char* inName, long defaultValue )
 {
+	if( !root )
+		return defaultValue;
+	
 	char	*	endPtr = NULL;
-	const char*	str = root->FirstChildElement( inName )->GetText();
+	tinyxml2::XMLElement*	child = root->FirstChildElement( inName );
+	const char*	str = child ? child->GetText() : NULL;
 	if( !str )
 		return defaultValue;
 	long	num = strtol( str, &endPtr, 10 );
@@ -53,6 +65,9 @@ long		CTinyXMLUtils::GetLongNamed( tinyxml2::XMLElement* root, const char* inNam
 
 void		CTinyXMLUtils::GetStringNamed( tinyxml2::XMLElement* root, const char* inName, std::string &outName )
 {
+	if( !root )
+		return;
+	
 	const char*	str = root->FirstChildElement( inName )->GetText();
 	if( str )
 		outName = str;
@@ -61,6 +76,9 @@ void		CTinyXMLUtils::GetStringNamed( tinyxml2::XMLElement* root, const char* inN
 
 bool		CTinyXMLUtils::GetBoolNamed( tinyxml2::XMLElement* root, const char* inName, bool defaultValue )
 {
+	if( !root )
+		return defaultValue;
+	
 	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
 	if( elem )
 		elem = elem->FirstChildElement();
