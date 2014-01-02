@@ -33,6 +33,8 @@ public:
 	CMediaEntry() : mIconID(0), mMediaType(CMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false) {};
 	CMediaEntry( int iconID, const std::string iconName, const std::string fileName, CMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn) {};
 	
+	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %d, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false")); };
+	
 protected:
 	int				mIconID;
 	std::string		mIconName;
@@ -49,6 +51,8 @@ class CTextStyleEntry
 public:
 	CTextStyleEntry() : mFontSize(12), mTextStyle(CPartTextStylePlain) {};
 	CTextStyleEntry( std::string inFontName, int inFontSize, CPartTextStyle inTextStyle ) : mFontName(inFontName), mFontSize(inFontSize), mTextStyle(inTextStyle) {};
+
+	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ font = %s, size = %d, style = %u }\n", indentStr, mFontName.c_str(), mFontSize, mTextStyle); };
 
 protected:
 	std::string		mFontName;
@@ -70,6 +74,8 @@ public:
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
+	
+	virtual void		Dump();
 
 protected:
 	void				LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root, bool isBuiltIn );

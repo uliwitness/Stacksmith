@@ -313,11 +313,11 @@
 	mDocument.LoadFromURL( [[tocURL absoluteString] UTF8String], [](Calhoun::CDocument * inDocument)
 	{
 		Calhoun::CStack		*		theCppStack = inDocument->GetStack( 0 );
-		theCppStack->Load( [](Calhoun::CStack* inStack)
+		theCppStack->Load( [inDocument](Calhoun::CStack* inStack)
 		{
-			inStack->GetCard(0)->Load( [inStack](Calhoun::CLayer*inCard)
+			inStack->GetCard(0)->Load( [inDocument,inStack](Calhoun::CLayer*inCard)
 			{
-				inStack->Dump();
+				inDocument->Dump();
 			} );
 		} );
 	});

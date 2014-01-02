@@ -75,11 +75,10 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 		return;
 	}
 	
-	if( mLoading )
-	{
-		mLoadCompletionBlocks.push_back( inCompletionBlock );	// We'll call you, too, once we have finished loading.
+	mLoadCompletionBlocks.push_back( inCompletionBlock );
+	
+	if( mLoading )	// We'll call you, too, once we have finished loading.
 		return;
-	}
 	
 	mLoading = true;
 	
@@ -202,4 +201,30 @@ LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 		mContextGroup = LEOContextGroupCreate();
 	
 	return mContextGroup;
+}
+
+
+void	CDocument::Dump()
+{
+	printf( "Document\n{\n\tloaded = %s\n\tloading= %s\n\tcreatedByVersion = %s\n\tlastCompactedVersion = %s\n\tfirstEditedVersion = %s\n\tlastEditedVersion = %s\n",
+			(mLoaded ? "true" : "false"), (mLoading ? "true" : "false"), mCreatedByVersion.c_str(),
+			mLastCompactedVersion.c_str(), mFirstEditedVersion.c_str(), mLastEditedVersion.c_str() );
+	printf( "\tfonts\n\t{\n" );
+	for( auto itty = mFontIDTable.begin(); itty != mFontIDTable.end(); itty++ )
+		printf( "\t\t%s -> %d\n", itty->second.c_str(), itty->first );
+	printf( "\t}\n\tstyles\n\t{\n" );
+	for( auto itty = mTextStyles.begin(); itty != mTextStyles.end(); itty++ )
+	{
+		printf( "\t\t%d: ", itty->first );
+		itty->second.Dump();
+	}
+	
+	printf( "\t}\n\tmedia\n\t{\n" );
+	for( auto itty = mMediaList.begin(); itty != mMediaList.end(); itty++ )
+		itty->Dump( 2 );
+
+	printf( "\t}\n\tstacks\n\t{\n" );
+	for( auto itty = mStacks.begin(); itty != mStacks.end(); itty++ )
+		(*itty)->Dump(2);
+	printf( "\t}\n}\n" );
 }
