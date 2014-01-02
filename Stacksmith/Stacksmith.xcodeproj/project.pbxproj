@@ -316,6 +316,7 @@
 		55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C318751DF6002450E2 /* CVisiblePart.cpp */; };
 		55CD60C818752ECA002450E2 /* CTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C618752ECA002450E2 /* CTimer.mm */; };
 		55CD60D818754007002450E2 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55CD60D418753CA2002450E2 /* stackimport */; };
+		55CD60DB187587CB002450E2 /* CDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60D9187587CB002450E2 /* CDocument.cpp */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
@@ -976,6 +977,8 @@
 		55CD60C618752ECA002450E2 /* CTimer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CTimer.mm; path = Platforms/Mac/CTimer.mm; sourceTree = "<group>"; };
 		55CD60C718752ECA002450E2 /* CTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimer.h; path = Platforms/Mac/CTimer.h; sourceTree = "<group>"; };
 		55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = "<group>"; };
+		55CD60D9187587CB002450E2 /* CDocument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDocument.cpp; path = "Portable Document/CDocument.cpp"; sourceTree = "<group>"; };
+		55CD60DA187587CB002450E2 /* CDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDocument.h; path = "Portable Document/CDocument.h"; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
@@ -1638,6 +1641,8 @@
 				556DB7B118709CAF002F7CB2 /* CRefCountedObject.cpp */,
 				556DB7AF18709C73002F7CB2 /* CConcreteObject.h */,
 				556DB7AE18709C73002F7CB2 /* CConcreteObject.cpp */,
+				55CD60DA187587CB002450E2 /* CDocument.h */,
+				55CD60D9187587CB002450E2 /* CDocument.cpp */,
 				556DB7AC18709ADB002F7CB2 /* CStack.h */,
 				556DB7AB18709ADB002F7CB2 /* CStack.cpp */,
 				556DB7B51870A352002F7CB2 /* CLayer.h */,
@@ -2237,6 +2242,7 @@
 				558DCD21115571FE002C9195 /* WILDNotifications.m in Sources */,
 				558DCD7E11557B6D002C9195 /* WILDPartView.m in Sources */,
 				558DCFBF1155B9B1002C9195 /* WILDPictureView.m in Sources */,
+				55CD60DB187587CB002450E2 /* CDocument.cpp in Sources */,
 				558DCFE51156209A002C9195 /* WILDCardView.m in Sources */,
 				55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */,
 				555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */,

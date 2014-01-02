@@ -30,8 +30,17 @@
 #import "UKHelperMacros.h"
 #import "WILDXMLUtils.h"
 #import "LEOContextGroup.h"
-#include "CStack.h"
+#include "CDocument.h"
 #include "CPartRegistration.h"
+
+
+@interface WILDDocument ()
+{
+	Calhoun::CDocument		mDocument;
+}
+
+@end
+
 
 /*!
 	@class WILDDocument
@@ -298,6 +307,24 @@
 	
 	tocURL = [absoluteURL URLByAppendingPathComponent: @"toc.xml"];
 	
+	#if TEST_PORTABLE_DOCUMENT
+	Calhoun::CDocument::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
+	
+	mDocument.LoadFromURL( [[tocURL absoluteString] UTF8String], [](Calhoun::CDocument * inDocument)
+	{
+		Calhoun::CStack		*		theCppStack = inDocument->GetStack( 0 );
+		theCppStack->Load( [](Calhoun::CStack* inStack)
+		{
+			inStack->GetCard(0)->Load( [inStack](Calhoun::CLayer*inCard)
+			{
+				inStack->Dump();
+			} );
+		} );
+	});
+	
+	return YES;
+	#endif
+	
 	NSXMLDocument*	xmlDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: tocURL
 														options: 0 error: outError] autorelease];
 	if( !xmlDoc && *outError )
@@ -372,21 +399,6 @@
 		if( theFileName )
 		{
 			NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
-			#if DEBUG_PORTABLE_DOCUMENT
-			{
-				Calhoun::CAutoreleasePool	pool;
-				CPartRegistrationRegisterAllPartTypes();
-				Calhoun::CStack		*		theCppStack = new Calhoun::CStack;
-				theCppStack->LoadFromURL( [[theFileURL absoluteString] UTF8String], [](Calhoun::CStack* inStack)
-				{
-					inStack->GetCard(0)->Load( [inStack](Calhoun::CLayer*inCard)
-					{
-						inStack->Dump();
-						inStack->Release();
-					} );
-				} );
-			}
-			#endif
 			NSXMLDocument*	theDoc = [[NSXMLDocument alloc] initWithContentsOfURL: theFileURL options: 0
 										error: outError];
 			

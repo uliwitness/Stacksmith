@@ -26,13 +26,13 @@ CStack::~CStack()
 }
 
 
-void	CStack::LoadFromURL( const std::string inURL, std::function<void(CStack*)> inCompletionBlock )
+void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 {
 	Retain();
 	
-	CURLRequest		request( inURL );
-	printf("Loading %s\n",inURL.c_str());
-	CURLConnection::SendRequestWithCompletionHandler( request, [this,inURL,inCompletionBlock] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
+	CURLRequest		request( mURL );
+	printf("Loading %s\n",mURL.c_str());
+	CURLConnection::SendRequestWithCompletionHandler( request, [this,inCompletionBlock] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
 	{
 		tinyxml2::XMLDocument		document;
 		
@@ -63,10 +63,13 @@ void	CStack::LoadFromURL( const std::string inURL, std::function<void(CStack*)> 
 			
 			// Load backgrounds:
 			tinyxml2::XMLElement	*	currBgElem = root->FirstChildElement( "background" );
+			size_t			slashOffset = mURL.rfind( '/' );
+			if( slashOffset == std::string::npos )
+				slashOffset = 0;
+			
 			while( currBgElem )
 			{
-				size_t			slashOffset = inURL.rfind( '/' );
-				std::string		backgroundURL = inURL.substr(0,slashOffset);
+				std::string		backgroundURL = mURL.substr(0,slashOffset);
 				backgroundURL.append( 1, '/' );
 				backgroundURL.append( currBgElem->Attribute("file") );
 				char*			endPtr = NULL;
@@ -84,8 +87,7 @@ void	CStack::LoadFromURL( const std::string inURL, std::function<void(CStack*)> 
 			tinyxml2::XMLElement	*	currCdElem = root->FirstChildElement( "card" );
 			while( currCdElem )
 			{
-				size_t			slashOffset = inURL.rfind( '/' );
-				std::string		cardURL = inURL.substr(0,slashOffset);
+				std::string		cardURL = mURL.substr(0,slashOffset);
 				cardURL.append( 1, '/' );
 				cardURL.append( currCdElem->Attribute("file") );
 				char*			endPtr = NULL;

@@ -96,6 +96,7 @@ void	CLayer::CallAllCompletionBlocks()	// Can override this in cards to also loa
 	// Call all completion blocks:
 	for( auto itty = mLoadCompletionBlocks.begin(); itty != mLoadCompletionBlocks.end(); itty++ )
 		(*itty)(this);
+	mLoadCompletionBlocks.clear();
 			
 	Release();
 }

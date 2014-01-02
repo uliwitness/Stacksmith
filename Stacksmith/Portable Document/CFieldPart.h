@@ -35,7 +35,7 @@ protected:
 	bool			mMultipleLines;
 	bool			mShowLines;
 	bool			mWideMargins;
-	int				mTextAlign;
+	CPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
 	bool			mHasHorizontalScroller;

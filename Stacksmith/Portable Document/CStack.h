@@ -20,15 +20,13 @@
 
 namespace Calhoun {
 
-class CStack;
-
 
 class CStack : public CConcreteObject
 {
 public:
-	CStack() : mStackID(0)	{};
+	CStack( std::string inURL, WILDObjectID inID, std::string inName, CDocument * inDocument ) : mStackID(inID), mURL(inURL) { mName = inName; mDocument = inDocument; };
 	
-	void			LoadFromURL( const std::string inURL, std::function<void(CStack*)> inCompletionBlock );
+	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	
 	void			AddCard( CCard* inCard );
 	void			RemoveCard( CCard* inCard );
@@ -43,6 +41,9 @@ protected:
 	~CStack();
 
 protected:
+	bool						mLoading;
+	bool						mLoaded;
+	std::string					mURL;				// URL of the file backing this stack on disk.
 	WILDObjectID				mStackID;			// Unique ID number of this stack in the document.
 	int							mUserLevel;			// Maximum user level for this stack.
 	int							mCardWidth;			// Size of cards in this stack.

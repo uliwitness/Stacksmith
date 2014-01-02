@@ -21,7 +21,7 @@
 
 namespace Calhoun {
 
-enum CPartTextAlign
+enum EPartTextAlign
 {
 	CPartTextAlignDefault = 0,	// "natural" text alignment. Whatever the user expects from the OS.
 	CPartTextAlignLeft,
@@ -29,6 +29,22 @@ enum CPartTextAlign
 	CPartTextAlignRight,
 	CPartTextAlignJustified
 };
+typedef unsigned	CPartTextAlign;
+
+
+enum EPartTextStyle
+{
+	CPartTextStylePlain		= 0,
+	CPartTextStyleBold		= (1 << 0),
+	CPartTextStyleItalic	= (1 << 1),
+	CPartTextStyleUnderline	= (1 << 2),
+	CPartTextStyleOutline	= (1 << 3),
+	CPartTextStyleShadow	= (1 << 4),
+	CPartTextStyleCondensed	= (1 << 5),
+	CPartTextStyleExtended	= (1 << 6)
+};
+typedef unsigned	CPartTextStyle;
+
 
 class CVisiblePart : public CPart
 {

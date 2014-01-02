@@ -31,7 +31,7 @@ protected:
 	bool			mSharedHighlight;
 	int				mTitleWidth;
 	WILDObjectID	mIconID;
-	int				mTextAlign;
+	CPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
 };
