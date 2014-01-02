@@ -52,6 +52,10 @@ public:
 	virtual	bool						operator >( const CRefCountedObjectRef<T>& inObject ) const	{ return mObject > inObject.mObject; };
 	virtual	bool						operator ==( const CRefCountedObjectRef<T>& inObject ) const { return mObject == inObject.mObject; };
 	virtual	bool						operator !=( const CRefCountedObjectRef<T>& inObject ) const { return mObject != inObject.mObject; };
+	virtual	bool						operator <( T* inObject ) const	{ return mObject < inObject; };
+	virtual	bool						operator >( T* inObject ) const	{ return mObject > inObject; };
+	virtual	bool						operator ==( T* inObject ) const { return mObject == inObject; };
+	virtual	bool						operator !=( T* inObject ) const { return mObject != inObject; };
 	virtual	bool						operator !() const	{ return mObject == NULL; };
 	virtual	CRefCountedObjectRef<T>&	operator =( T* inObject )	{ if( mObject != inObject ) { if( mObject ) mObject->Release(); if( inObject ) inObject->Retain(); mObject = inObject; } return *this; };
 	virtual	CRefCountedObjectRef<T>&	operator =( const CRefCountedObjectRef<T>& inObject )	{ if( mObject != inObject.mObject ) { if( mObject ) mObject->Release(); if( inObject.mObject ) inObject.mObject->Retain(); mObject = inObject.mObject; } return *this; };

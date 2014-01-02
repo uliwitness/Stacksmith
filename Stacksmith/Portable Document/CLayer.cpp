@@ -11,6 +11,7 @@
 #include "CTinyXMLUtils.h"
 #include "CPart.h"
 #include "CPartContents.h"
+#include "CStack.h"
 
 
 using namespace Calhoun;
@@ -25,6 +26,8 @@ CLayer::~CLayer()
 void	CLayer::SetStack( CStack* inStack )
 {
 	mStack = inStack;
+	if( mStack )
+		mDocument = inStack->GetDocument();
 }
 
 void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
@@ -49,7 +52,7 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 
 			if( tinyxml2::XML_SUCCESS == document.Parse( inData, inDataLength ) )
 			{
-				document.Print();
+				//document.Print();
 
 				tinyxml2::XMLElement	*	root = document.RootElement();
 				

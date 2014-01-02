@@ -35,6 +35,7 @@ public:
 	std::string			GetScript()							{ return mScript; };
 	
 	struct LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CConcreteObject*)> errorHandler );	// Calls errorHandler with NULL message on success, calls error handler with error message and returns NULL on failure.
+	CDocument*			GetDocument()		{ return mDocument; };
 
 protected:
 	void				LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );

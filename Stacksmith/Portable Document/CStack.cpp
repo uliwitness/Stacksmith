@@ -78,6 +78,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 				
 				CBackground	*	theBackground = new CBackground( backgroundURL, bgID, (theName ? theName : ""), this );
 				theBackground->Autorelease();
+				theBackground->SetStack( this );
 				mBackgrounds.push_back( theBackground );
 				
 				currBgElem = currBgElem->NextSiblingElement( "background" );
@@ -99,6 +100,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 				CCard	*	theCard = new CCard( cardURL, cdID, (theName ? theName : ""), this, marked );
 				theCard->Autorelease();
 				mCards.push_back( theCard );
+				theCard->SetStack( this );
 				if( marked )
 					mMarkedCards.insert( theCard );
 				
@@ -114,6 +116,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 void	CStack::AddCard( CCard* inCard )
 {
 	inCard->Retain();
+	inCard->SetStack( this );
 	mCards.push_back( inCard );
 	
 	if( inCard->IsMarked() )
@@ -125,7 +128,15 @@ void	CStack::RemoveCard( CCard* inCard )
 	if( inCard->IsMarked() )
 		mMarkedCards.erase( inCard );
 	
-	mCards.push_back( inCard );
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+	{
+		if( (*itty) == inCard )
+		{
+			mCards.erase( itty );
+			break;
+		}
+	}
+	inCard->SetStack( NULL );
 	inCard->Release();
 }
 
