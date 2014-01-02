@@ -11,12 +11,22 @@
 
 #include "CRefCountedObject.h"
 #include "tinyxml2.h"
+#include "WILDObjectID.h"
+#include <string>
 
 
 class CPartContents : public CRefCountedObject
 {
 public:
-	CPartContents( tinyxml2::XMLElement * inElement ) {};
+	CPartContents( tinyxml2::XMLElement * inElement );
+	
+	virtual void		Dump( size_t inIndent );
+
+protected:
+	WILDObjectID		mID;				// ID of the object whose contents we contain.
+	bool				mIsOnBackground;	// Is the object with ID mID on the background or on the card layer?
+	bool				mHighlight;			// The highlight property for a background button with sharedHighlight == FALSE.
+	std::string			mText;				// The actual text contents.
 };
 
 
