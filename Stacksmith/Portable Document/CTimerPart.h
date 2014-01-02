@@ -14,7 +14,7 @@
 class CTimerPart : public CPart
 {
 public:
-	CTimerPart( tinyxml2::XMLElement * inElement, CLayer *inOwner ) : CPart( inElement, inOwner ) {};
+	explicit CTimerPart( CLayer *inOwner ) : CPart( inOwner ) {};
 	
 protected:
 	virtual const char*		GetIdentityForDump()	{ return "Timer"; };

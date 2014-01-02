@@ -130,6 +130,7 @@ void	CLayer::Dump( size_t inIndent )
 	const char	*	indentStr = IndentString(inIndent);
 	printf( "%s%s ID %lld \"%s\"\n%s{\n", indentStr, GetIdentityForDump(), mID, mName.c_str(), indentStr );
 	DumpProperties( inIndent +1 );
+	DumpUserProperties( inIndent +1 );
 	printf("%s\t{\n",indentStr);
 	for( auto itty = mParts.begin(); itty != mParts.end(); itty++ )
 		(*itty)->Dump( inIndent +2 );

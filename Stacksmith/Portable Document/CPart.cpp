@@ -17,12 +17,15 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 {
 	std::string		partType;
 	CTinyXMLUtils::GetStringNamed( inElement, "type", partType );
+	CPart	*		thePart = NULL;
 
 	auto	foundItem = sPartCreators.find( partType );
 	if( foundItem != sPartCreators.end() )
-		return foundItem->second->NewPartWithElement( inElement, inOwner );
+		thePart = foundItem->second->NewPartInOwner( inOwner );
 	else
-		return new CPart( inElement, inOwner );
+		thePart = new CPart( inOwner );
+	thePart->LoadFromElement( inElement );
+	return thePart;
 }
 
 
@@ -32,8 +35,21 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 }
 
 
-CPart::CPart( tinyxml2::XMLElement * inElement, CLayer *inOwner )
+CPart::CPart( CLayer *inOwner )
 	: mOwner(inOwner)
+{
+	
+}
+
+
+void	CPart::LoadFromElement( tinyxml2::XMLElement * inElement )
+{
+	LoadPropertiesFromElement( inElement );
+	LoadUserPropertiesFromElement( inElement );
+}
+
+
+void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
 	mName.erase();
@@ -62,5 +78,7 @@ void	CPart::Dump( size_t inIndent )
 	const char	*	indentStr = IndentString(inIndent);
 	printf( "%s%s ID %lld \"%s\"\n%s{\n", indentStr, GetIdentityForDump(), mID, mName.c_str(), indentStr );
 	DumpProperties( inIndent +1 );
+	DumpUserProperties( inIndent +1 );
+	printf( "%s\tscript = %s\n", indentStr, mScript.c_str() );
 	printf( "%s}\n", indentStr );
 }

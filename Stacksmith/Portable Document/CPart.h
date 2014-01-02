@@ -23,13 +23,13 @@ class CPartCreatorBase
 public:
 	virtual ~CPartCreatorBase() {};
 	
-	virtual CPart	*	NewPartWithElement( tinyxml2::XMLElement * inElement, CLayer *inOwner )	{ return NULL; };
+	virtual CPart	*	NewPartInOwner( CLayer *inOwner )	{ return NULL; };
 };
 
 template<class T>
 class CPartCreator : public CPartCreatorBase
 {
-	virtual CPart	*	NewPartWithElement( tinyxml2::XMLElement * inElement, CLayer *inOwner )	{ return new T( inElement, inOwner ); };
+	virtual CPart	*	NewPartInOwner( CLayer *inOwner )	{ return new T( inOwner ); };
 };
 
 
@@ -40,13 +40,16 @@ public:
 	static CPart*	NewPartWithElement( tinyxml2::XMLElement * inElement, CLayer *inOwner );
 	static void		RegisterPartCreator( const std::string inTypeString, CPartCreatorBase* inCreator );
 	
-	CPart( tinyxml2::XMLElement * inElement, CLayer *inOwner );
+	explicit CPart( CLayer *inOwner );
+	
+	virtual void			LoadFromElement( tinyxml2::XMLElement * inElement );
 	
 	int						GetFamily()		{ return mFamily; };
 	
 	virtual void			Dump( size_t inIndent = 0 );
 	
 protected:
+	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual const char*		GetIdentityForDump()	{ return "Part"; };
 	virtual void			DumpProperties( size_t inIndent );
 

@@ -18,9 +18,11 @@
 class CConcreteObject : public CRefCountedObject
 {
 public:
+protected:
 	void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );
 	
-protected:
+	void		DumpUserProperties( size_t inIndent );
+	
 	std::string							mName;		// Name of this object for referring to it from scripts (not including type like 'stack').
 	std::string							mScript;	// Uncompiled text of this object's script.
 	std::map<std::string,std::string>	mUserProperties;

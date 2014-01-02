@@ -372,7 +372,7 @@
 		if( theFileName )
 		{
 			NSURL		*	theFileURL = [absoluteURL URLByAppendingPathComponent: theFileName];
-			#if DEBUG_PORTABLE_DOCUMENT
+			#if 1 || DEBUG_PORTABLE_DOCUMENT
 			{
 				CAutoreleasePool	pool;
 				CPart::RegisterPartCreator( "timer", new CPartCreator<CTimerPart>() );

@@ -24,3 +24,13 @@ void	CConcreteObject::LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem
 		mUserProperties[propName] = propValue;
 	}
 }
+
+
+void	CConcreteObject::DumpUserProperties( size_t inIndentLevel )
+{
+	const char*	indentStr = IndentString(inIndentLevel);
+	for( auto itty = mUserProperties.begin(); itty != mUserProperties.end(); itty++ )
+	{
+		printf( "%s[%s] = %s\n", indentStr, itty->first.c_str(), itty->second.c_str() );
+	}
+}
