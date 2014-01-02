@@ -193,7 +193,7 @@
 		
 		if( ![[currStack xmlStringForWritingToURL: absoluteURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: stackURL atomically: YES encoding: NSUTF8StringEncoding error:outError] )
 			return NO;
-		[tocXmlString appendFormat: @"\t<stack id=\"%1$lld\" file=\"stack_%1$lld.xml\" />\n", [currStack stackID]];
+		[tocXmlString appendFormat: @"\t<stack id=\"%1$lld\" file=\"stack_%1$lld.xml\" name=\"%2$@\" />\n", [currStack stackID], WILDStringEscapedForXMLAttribute(currStack.name)];
 	}
 	
 	DESTROY(mLastEditedVersion);

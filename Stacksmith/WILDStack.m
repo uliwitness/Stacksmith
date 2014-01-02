@@ -497,7 +497,7 @@ PROPERTY_MAP_END
 		NSURL	*	bgURL = [packageURL URLByAppendingPathComponent: bgFileName];
 		if( ![[currBg xmlStringForWritingToURL: packageURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: bgURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
-		[theString appendFormat: @"\t<background id=\"%lld\" file=\"%@\" />\n", [currBg backgroundID], WILDStringEscapedForXMLAttribute(bgFileName)];
+		[theString appendFormat: @"\t<background id=\"%lld\" file=\"%@\" name=\"%@\" />\n", [currBg backgroundID], WILDStringEscapedForXMLAttribute(bgFileName), WILDStringEscapedForXMLAttribute(currBg.name)];
 	}
 	
 	// Write out cards and add entries for them:
@@ -507,8 +507,8 @@ PROPERTY_MAP_END
 		NSURL	*	cdURL = [packageURL URLByAppendingPathComponent: cdFileName];
 		if( ![[currCd xmlStringForWritingToURL: packageURL forSaveOperation: saveOperation originalContentsURL: absoluteOriginalContentsURL error: outError] writeToURL: cdURL atomically: YES encoding: NSUTF8StringEncoding error: outError] )
 			return nil;
-		[theString appendFormat: @"\t<card id=\"%lld\" file=\"%@\" marked=\"%@\" />\n",
-							[currCd cardID], WILDStringEscapedForXMLAttribute(cdFileName),
+		[theString appendFormat: @"\t<card id=\"%lld\" file=\"%@\" name=\"%@\" marked=\"%@\" />\n",
+							[currCd cardID], WILDStringEscapedForXMLAttribute(cdFileName), WILDStringEscapedForXMLAttribute(currCd.name),
 		 					([mMarkedCards containsObject: currCd] ? @"true" : @"false")];
 	}
 	
