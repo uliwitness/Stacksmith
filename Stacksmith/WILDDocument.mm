@@ -308,22 +308,25 @@
 	tocURL = [absoluteURL URLByAppendingPathComponent: @"toc.xml"];
 	
 	#if TEST_PORTABLE_DOCUMENT
+	[self retain];
+	
 	Calhoun::CDocument::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 	
-	mDocument.LoadFromURL( [[tocURL absoluteString] UTF8String], [](Calhoun::CDocument * inDocument)
+	mDocument.LoadFromURL( [[tocURL absoluteString] UTF8String], [self](Calhoun::CDocument * inDocument)
 	{
 		Calhoun::CStack		*		theCppStack = inDocument->GetStack( 0 );
-		theCppStack->Load( [inDocument](Calhoun::CStack* inStack)
+		theCppStack->Load( [inDocument,self](Calhoun::CStack* inStack)
 		{
-			inStack->GetCard(0)->Load( [inDocument,inStack](Calhoun::CLayer*inCard)
+			inStack->GetCard(0)->Load( [inDocument,self](Calhoun::CLayer*inCard)
 			{
-				inDocument->Dump();
+				[self loadUIForCard: (Calhoun::CCard*)inCard];
+				[self release];
 			} );
 		} );
 	});
 	
 	return YES;
-	#endif
+	#else
 	
 	NSXMLDocument*	xmlDoc = [[[NSXMLDocument alloc] initWithContentsOfURL: tocURL
 														options: 0 error: outError] autorelease];
@@ -419,6 +422,13 @@
 	}
 	
 	return success;
+	#endif
+}
+
+
+-(void)	loadUIForCard: (Calhoun::CCard*)inCard
+{
+	inCard->GetDocument()->Dump();
 }
 
 
