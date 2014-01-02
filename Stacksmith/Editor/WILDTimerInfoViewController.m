@@ -24,7 +24,7 @@
 	[mMessageField setStringValue: [part timerMessage]];
 	[mIntervalField setIntegerValue: [part timerInterval]];
 	[self.startedSwitch setState: (part.started ? NSOnState : NSOffState)];
-	[self.autoStopSwitch setState: (part.autoStop ? NSOnState : NSOffState)];
+	[self.repeatSwitch setState: (part.repeat ? NSOnState : NSOffState)];
 }
 
 
@@ -74,16 +74,16 @@
 }
 
 
--(IBAction)	doAutoStopSwitchToggled: (id)sender
+-(IBAction)	doRepeatSwitchToggled: (id)sender
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-									PROPERTY(autoStop), WILDAffectedPropertyKey,
+									PROPERTY(repeat), WILDAffectedPropertyKey,
 									nil]];
 
-	[part setAutoStop: [sender state] == NSOnState];
+	[part setRepeat: [sender state] == NSOnState];
 			
 	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-									PROPERTY(autoStop), WILDAffectedPropertyKey,
+									PROPERTY(repeat), WILDAffectedPropertyKey,
 									nil]];
 	[part updateChangeCount: NSChangeDone];
 }

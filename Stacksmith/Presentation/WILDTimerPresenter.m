@@ -69,7 +69,7 @@
 		WILDPart		*	currPart = [mPartView part];
 		WILDScriptContainerResultFromSendingMessage( currPart, currPart.timerMessage );
 		
-		if( currPart.autoStop )
+		if( !currPart.repeat )
 		{
 			[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: self userInfo: @{ WILDAffectedPropertyKey: @"started" }];
 			[currPart setStarted: NO];

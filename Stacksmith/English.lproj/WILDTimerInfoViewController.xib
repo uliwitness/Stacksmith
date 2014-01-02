@@ -16,6 +16,7 @@
                 <outlet property="numberField" destination="4" id="28"/>
                 <outlet property="partNumberField" destination="5" id="30"/>
                 <outlet property="partNumberLabel" destination="7" id="31"/>
+                <outlet property="repeatSwitch" destination="HoJ-IM-HmX" id="jgN-wF-1ug"/>
                 <outlet property="scriptEditorButton" destination="25" id="34"/>
                 <outlet property="startedSwitch" destination="GNI-Yt-N46" id="6tc-2Z-ZZu"/>
                 <outlet property="userPropertyEditorButton" destination="156" id="159"/>
@@ -190,12 +191,12 @@
                 <button id="HoJ-IM-HmX">
                     <rect key="frame" x="80" y="12" width="186" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Stop Automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VkC-77-zXM">
+                    <buttonCell key="cell" type="check" title="Repeat" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VkC-77-zXM">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="doAutoStopSwitchToggled:" target="-2" id="wLU-ZM-Z28"/>
+                        <action selector="doRepeatSwitchToggled:" target="-2" id="IEI-er-zAD"/>
                     </connections>
                 </button>
             </subviews>
