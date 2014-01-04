@@ -9,13 +9,14 @@
 #include "CConcreteObject.h"
 #include "CTinyXMLUtils.h"
 #include "CDocument.h"
+#include "LEOScript.h"
 
 
 using namespace Calhoun;
 
 
 CConcreteObject::CConcreteObject()
-	: CRefCountedObject(), mIDForScripts(kLEOObjectIDINVALID)
+	: CScriptableObject(), mIDForScripts(kLEOObjectIDINVALID), mScriptObject(NULL), mDocument(NULL)
 {
 	
 }
@@ -50,50 +51,50 @@ LEOContextGroup*	CConcreteObject::GetScriptContextGroupObject()
 
 struct LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size_t,size_t,CConcreteObject*)> errorHandler )
 {
-//	if( !mScriptObject )
-//	{
-//		const char*		scriptStr = mScript.c_str();
-//		uint16_t		fileID = LEOFileIDForFileName( mName.c_str() );	// +++ TODO: Use long name!
-//		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
-//		if( LEOParserGetLastErrorMessage() == NULL )
-//		{
-//			if( mIDForScripts == kLEOObjectIDINVALID )
-//			{
-//				WILDInitObjectValue( &mValueForScripts, this, kLEOInvalidateReferences, NULL );
-//				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( GetScriptContextGroupObject(), &mValueForScripts );
-//				mSeedForScripts = LEOContextGroupGetSeedForObjectID( GetScriptContextGroupObject(), mIDForScripts );
-//			}
-//			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, WILDGetParentScript );
-//			LEOScriptCompileAndAddParseTree( mScriptObject, GetScriptContextGroupObject(), parseTree, fileID );
-//			
-//#if REMOTE_DEBUGGER
-//			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );
-//			
-//			// Set a breakpoint on the mouseUp handler:
-//			//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [self scriptContextGroupObject], "mouseup" );
-//			//			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
-//			//			if( theHandler )
-//			//				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
-//#endif
-//		}
-//		if( LEOParserGetLastErrorMessage() )
-//		{
-//			size_t	lineNum = LEOParserGetLastErrorLineNum();
-//			size_t	errorOffset = LEOParserGetLastErrorOffset();
-//			const char*	errorMessage = LEOParserGetLastErrorMessage();
-//			
-//			if( errorHandler )
-//				errorHandler( errorMessage, lineNum, errorOffset, this );
-//			
-//			if( mScriptObject )
-//			{
-//				LEOScriptRelease( mScriptObject );
-//				mScriptObject = NULL;
-//			}
-//		}
-//		else
-//			errorHandler( NULL, SIZE_T_MAX, SIZE_T_MAX, this );
-//	}
+	if( !mScriptObject )
+	{
+		const char*		scriptStr = mScript.c_str();
+		uint16_t		fileID = LEOFileIDForFileName( mName.c_str() );	// +++ TODO: Use long name!
+		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
+		if( LEOParserGetLastErrorMessage() == NULL )
+		{
+			if( mIDForScripts == kLEOObjectIDINVALID )
+			{
+				InitScriptableObjectValue( &mValueForScripts, this, kLEOInvalidateReferences, NULL );
+				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( GetScriptContextGroupObject(), &mValueForScripts );
+				mSeedForScripts = LEOContextGroupGetSeedForObjectID( GetScriptContextGroupObject(), mIDForScripts );
+			}
+			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, GetParentScript );
+			LEOScriptCompileAndAddParseTree( mScriptObject, GetScriptContextGroupObject(), parseTree, fileID );
+			
+#if REMOTE_DEBUGGER
+			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );
+			
+			// Set a breakpoint on the mouseUp handler:
+			//			LEOHandlerID handlerName = LEOContextGroupHandlerIDForHandlerName( [self scriptContextGroupObject], "mouseup" );
+			//			LEOHandler* theHandler = LEOScriptFindCommandHandlerWithID( mScriptObject, handlerName );
+			//			if( theHandler )
+			//				LEORemoteDebuggerAddBreakpoint( theHandler->instructions );
+#endif
+		}
+		if( LEOParserGetLastErrorMessage() )
+		{
+			size_t	lineNum = LEOParserGetLastErrorLineNum();
+			size_t	errorOffset = LEOParserGetLastErrorOffset();
+			const char*	errorMessage = LEOParserGetLastErrorMessage();
+			
+			if( errorHandler )
+				errorHandler( errorMessage, lineNum, errorOffset, this );
+			
+			if( mScriptObject )
+			{
+				LEOScriptRelease( mScriptObject );
+				mScriptObject = NULL;
+			}
+		}
+		else
+			errorHandler( NULL, SIZE_T_MAX, SIZE_T_MAX, this );
+	}
 	
 	return mScriptObject;
 }

@@ -10,6 +10,7 @@
 #define __Stacksmith__CConcreteObject__
 
 #include "CRefCountedObject.h"
+#include "CScriptableObjectValue.h"
 #include <string>
 #include <map>
 #include "tinyxml2.h"
@@ -25,7 +26,7 @@ namespace Calhoun {
 
 class CDocument;
 
-class CConcreteObject : public CRefCountedObject
+class CConcreteObject : public CScriptableObject
 {
 public:
 	CConcreteObject();
