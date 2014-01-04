@@ -21,36 +21,58 @@
 
 namespace Calhoun {
 
-enum EPartTextAlign
+enum
 {
-	CPartTextAlignDefault = 0,	// "natural" text alignment. Whatever the user expects from the OS.
-	CPartTextAlignLeft,
-	CPartTextAlignCenter,
-	CPartTextAlignRight,
-	CPartTextAlignJustified
+	EPartTextAlignDefault = 0,	// "natural" text alignment. Whatever the user expects from the OS.
+	EPartTextAlignLeft,
+	EPartTextAlignCenter,
+	EPartTextAlignRight,
+	EPartTextAlignJustified,
+	EPartTextAlign_Last			// Must be last, so we can use it as a loop limit.
 };
-typedef unsigned	CPartTextAlign;
+typedef unsigned	TPartTextAlign;
 
 
-enum EPartTextStyle
+enum
 {
-	CPartTextStylePlain		= 0,
-	CPartTextStyleBold		= (1 << 0),
-	CPartTextStyleItalic	= (1 << 1),
-	CPartTextStyleUnderline	= (1 << 2),
-	CPartTextStyleOutline	= (1 << 3),
-	CPartTextStyleShadow	= (1 << 4),
-	CPartTextStyleCondensed	= (1 << 5),
-	CPartTextStyleExtended	= (1 << 6)
+	EPartTextStyleBoldBit		= 0,
+	EPartTextStyleItalicBit,
+	EPartTextStyleUnderlineBit,
+	EPartTextStyleOutlineBit,
+	EPartTextStyleShadowBit,
+	EPartTextStyleCondensedBit,
+	EPartTextStyleExtendedBit,
+	EPartTextStyleBit_Last	// The next bit after the last one used, used as a loop limit.
 };
-typedef unsigned	CPartTextStyle;
+
+
+enum
+{
+	EPartTextStylePlain		= 0,
+	EPartTextStyleBold		= (1 << EPartTextStyleBoldBit),
+	EPartTextStyleItalic	= (1 << EPartTextStyleItalicBit),
+	EPartTextStyleUnderline	= (1 << EPartTextStyleUnderlineBit),
+	EPartTextStyleOutline	= (1 << EPartTextStyleOutlineBit),
+	EPartTextStyleShadow	= (1 << EPartTextStyleShadowBit),
+	EPartTextStyleCondensed	= (1 << EPartTextStyleCondensedBit),
+	EPartTextStyleExtended	= (1 << EPartTextStyleExtendedBit),
+	EPartTextStyle_Last		= (1 << EPartTextStyleBit_Last)	// The next bit after the last one used, used as a loop limit.
+};
+typedef unsigned	TPartTextStyle;	// Bit field of above constants.
 
 
 class CVisiblePart : public CPart
 {
 public:
 	CVisiblePart( CLayer * inOwner ) : CPart(inOwner) {};
-
+	
+	static TPartTextAlign	GetTextAlignFromString( const char* inString );
+	static TPartTextStyle	GetStyleFromString( const char* inString );
+	
+	virtual void			SetFillColor( int red, int green, int blue, int alpha )	{ mFillColorRed = red; mFillColorGreen = green; mFillColorBlue = blue; mFillColorAlpha = alpha; };
+	virtual void			SetBevelWidth( int bevel )		{ mBevelWidth = bevel; };
+	virtual void			SetVisible( bool visible )		{ mVisible = visible; };
+	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	

@@ -29,16 +29,7 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mWideMargins = CTinyXMLUtils::GetBoolNamed( inElement, "wideMargins", false );
 	std::string	textAlignStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "textAlign", textAlignStr );
-	if( textAlignStr.compare("left") )
-		mTextAlign = CPartTextAlignLeft;
-	else if( textAlignStr.compare("center") )
-		mTextAlign = CPartTextAlignCenter;
-	else if( textAlignStr.compare("right") )
-		mTextAlign = CPartTextAlignRight;
-	else if( textAlignStr.compare("justified") )
-		mTextAlign = CPartTextAlignJustified;
-	else
-		mTextAlign = CPartTextAlignDefault;
+	mTextAlign = CVisiblePart::GetTextAlignFromString( textAlignStr.c_str() );
 	mFont.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
 	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );

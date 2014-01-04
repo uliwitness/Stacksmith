@@ -124,23 +124,10 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 				std::string	fontName;
 				CTinyXMLUtils::GetStringNamed( currStyleElem, "font", fontName );
 				int			fontSize = CTinyXMLUtils::GetIntNamed( currStyleElem, "size", 0 );
-				CPartTextStyle	styleMask = CPartTextStylePlain;
+				TPartTextStyle	styleMask = EPartTextStylePlain;
 				for( tinyxml2::XMLElement * currTextStyleElem = currStyleElem->FirstChildElement("textStyle"); currTextStyleElem; currTextStyleElem = currStyleElem->NextSiblingElement("textStyle") )
 				{
-					if( strcmp( currTextStyleElem->GetText(), "bold" ) == 0 )
-						styleMask |= CPartTextStyleBold;
-					if( strcmp( currTextStyleElem->GetText(), "italic" ) == 0 )
-						styleMask |= CPartTextStyleItalic;
-					if( strcmp( currTextStyleElem->GetText(), "underline" ) == 0 )
-						styleMask |= CPartTextStyleUnderline;
-					if( strcmp( currTextStyleElem->GetText(), "outline" ) == 0 )
-						styleMask |= CPartTextStyleOutline;
-					if( strcmp( currTextStyleElem->GetText(), "shadow" ) == 0 )
-						styleMask |= CPartTextStyleShadow;
-					if( strcmp( currTextStyleElem->GetText(), "condensed" ) == 0 )
-						styleMask |= CPartTextStyleCondensed;
-					if( strcmp( currTextStyleElem->GetText(), "extended" ) == 0 )
-						styleMask |= CPartTextStyleExtended;
+					styleMask |= CVisiblePart::GetStyleFromString( currTextStyleElem->GetText() );
 				}
 				mTextStyles[styleID] = CTextStyleEntry( fontName, fontSize, styleMask );
 				

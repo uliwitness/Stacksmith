@@ -26,15 +26,15 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	std::string	textAlignStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "textAlign", textAlignStr );
 	if( textAlignStr.compare("left") )
-		mTextAlign = CPartTextAlignLeft;
+		mTextAlign = EPartTextAlignLeft;
 	else if( textAlignStr.compare("center") )
-		mTextAlign = CPartTextAlignCenter;
+		mTextAlign = EPartTextAlignCenter;
 	else if( textAlignStr.compare("right") )
-		mTextAlign = CPartTextAlignRight;
+		mTextAlign = EPartTextAlignRight;
 	else if( textAlignStr.compare("justified") )
-		mTextAlign = CPartTextAlignJustified;
+		mTextAlign = EPartTextAlignJustified;
 	else
-		mTextAlign = CPartTextAlignDefault;
+		mTextAlign = EPartTextAlignDefault;
 	mFont.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
 	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );

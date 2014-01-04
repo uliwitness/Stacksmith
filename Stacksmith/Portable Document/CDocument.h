@@ -51,15 +51,15 @@ protected:
 class CTextStyleEntry
 {
 public:
-	CTextStyleEntry() : mFontSize(12), mTextStyle(CPartTextStylePlain) {};
-	CTextStyleEntry( std::string inFontName, int inFontSize, CPartTextStyle inTextStyle ) : mFontName(inFontName), mFontSize(inFontSize), mTextStyle(inTextStyle) {};
+	CTextStyleEntry() : mFontSize(12), mTextStyle(EPartTextStylePlain) {};
+	CTextStyleEntry( std::string inFontName, int inFontSize, TPartTextStyle inTextStyle ) : mFontName(inFontName), mFontSize(inFontSize), mTextStyle(inTextStyle) {};
 
 	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ font = %s, size = %d, style = %u }\n", indentStr, mFontName.c_str(), mFontSize, mTextStyle); };
 
 protected:
 	std::string		mFontName;
 	int				mFontSize;
-	CPartTextStyle	mTextStyle;
+	TPartTextStyle	mTextStyle;
 };
 
 

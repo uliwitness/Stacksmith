@@ -12,6 +12,10 @@
 #include "CPart.h"
 #include "CPartContents.h"
 #include "CStack.h"
+#include "CButtonPart.h"
+#include "CFieldPart.h"
+#include "CRectanglePart.h"
+#include "CPicturePart.h"
 
 
 using namespace Calhoun;
@@ -83,6 +87,9 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 					
 					currPartContentsElem = currPartContentsElem->NextSiblingElement( "content" );
 				}
+				
+				// Load AddColor info:
+				LoadAddColorPartsFromElement( root );
 			}
 			
 			CallAllCompletionBlocks();
@@ -116,6 +123,80 @@ void	CLayer::LoadPropertiesFromElement( tinyxml2::XMLElement* root )
 
 	mScript.erase();
 	CTinyXMLUtils::GetStringNamed( root, "script", mScript );
+}
+
+
+CPart*	CLayer::GetPartWithID( WILDObjectID inID )
+{
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->GetID() == inID )
+			return *currPart;
+	}
+	
+	return NULL;
+}
+
+
+void	CLayer::LoadAddColorPartsFromElement( tinyxml2::XMLElement* root )
+{
+	tinyxml2::XMLElement	* theObject = root->FirstChildElement( "addcolorobject" );
+	
+	for( ; theObject != NULL; theObject = theObject->NextSiblingElement("addcolorobject") )
+	{
+		WILDObjectID	objectID = CTinyXMLUtils::GetLongLongNamed( theObject, "id" );
+		int				objectBevel = CTinyXMLUtils::GetLongLongNamed( theObject, "bevel" );
+		std::string		objectType;
+		CTinyXMLUtils::GetStringNamed( theObject, "type", objectType );
+		std::string		objectName;
+		CTinyXMLUtils::GetStringNamed( theObject, "name", objectName );
+		bool			objectTransparent = CTinyXMLUtils::GetBoolNamed( theObject, "transparent", false);
+		bool			objectVisible = CTinyXMLUtils::GetBoolNamed( theObject, "visible", false);
+		
+		int				left = 0, top = 0, right = 100, bottom = 100;
+		CTinyXMLUtils::GetRectNamed( theObject, "rect", &left, &top, &right, &bottom );
+		int				red = 0, green = 0, blue = 0, alpha = 0;
+		CTinyXMLUtils::GetColorNamed( theObject, "color", &red, &green, &blue, &alpha );
+		
+		if( objectType.compare("button") == 0 )
+		{
+			CButtonPart*	thePart = dynamic_cast<CButtonPart*>(GetPartWithID( objectID ));
+			if( thePart )
+			{
+				thePart->SetFillColor( red, green, blue, alpha );
+				thePart->SetBevelWidth( objectBevel );
+				mAddColorParts.push_back( thePart );
+			}
+		}
+		else if( objectType.compare("field") == 0 )
+		{
+			CFieldPart*	thePart = dynamic_cast<CFieldPart*>( GetPartWithID( objectID ) );
+			if( thePart )
+			{
+				thePart->SetFillColor( red, green, blue, alpha );
+				thePart->SetBevelWidth( objectBevel );
+				mAddColorParts.push_back( thePart );
+			}
+		}
+		else if( objectType.compare("rectangle") == 0 )
+		{
+			CRectanglePart*	thePart = new CRectanglePart( this );
+			thePart->SetRect( left, top, right, bottom );
+			thePart->SetFillColor( red, green, blue, alpha );
+			thePart->SetBevelWidth( objectBevel );
+			thePart->SetVisible( objectVisible );
+			mAddColorParts.push_back( thePart );
+		}
+		else if( objectType.compare("picture") == 0 )
+		{
+			CPicturePart*	thePart = new CPicturePart( this );
+			thePart->SetRect( left, top, right, bottom );
+			thePart->SetMediaPath( objectName );
+			thePart->SetTransparent( objectTransparent );
+			thePart->SetVisible( objectVisible );
+			mAddColorParts.push_back( thePart );
+		}
+	}
 }
 
 

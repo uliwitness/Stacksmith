@@ -93,6 +93,50 @@ bool		CTinyXMLUtils::GetBoolNamed( tinyxml2::XMLElement* root, const char* inNam
 }
 
 
+void	CTinyXMLUtils::GetRectNamed( tinyxml2::XMLElement* root, const char* inName, int *outLeft, int *outTop, int *outRight, int *outBottom )
+{
+	if( !root )
+		return;
+	
+	tinyxml2::XMLElement*	subElem = NULL;
+	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	subElem = elem ? elem->FirstChildElement("left") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outLeft );
+	subElem = elem ? elem->FirstChildElement("top") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outTop );
+	subElem = elem ? elem->FirstChildElement("right") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outRight );
+	subElem = elem ? elem->FirstChildElement("bottom") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outBottom );
+}
+
+
+void	CTinyXMLUtils::GetColorNamed( tinyxml2::XMLElement* root, const char* inName, int *outRed, int *outGreen, int *outBlue, int *outAlpha )
+{
+	if( !root )
+		return;
+	
+	tinyxml2::XMLElement*	subElem = NULL;
+	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	subElem = elem ? elem->FirstChildElement("red") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outRed );
+	subElem = elem ? elem->FirstChildElement("green") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outGreen );
+	subElem = elem ? elem->FirstChildElement("blue") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outBlue );
+	subElem = elem ? elem->FirstChildElement("alpha") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outAlpha );
+}
+
+
 std::string	CTinyXMLUtils::EnsureNonNULLString( const char* inStr )
 {
 	if( !inStr )

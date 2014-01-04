@@ -34,11 +34,13 @@ public:
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
 	bool			IsLoaded()	{ return mLoaded; };
 	virtual void	SetStack( CStack* inStack );
+	virtual CPart*	GetPartWithID( WILDObjectID inID );
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
+	void			LoadAddColorPartsFromElement( tinyxml2::XMLElement* root );
 	virtual void	DumpProperties( size_t inIndent );
 	virtual void	CallAllCompletionBlocks();
 	

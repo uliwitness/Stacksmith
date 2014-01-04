@@ -13,6 +13,28 @@
 using namespace Calhoun;
 
 
+static const char*		sTextStyleNames[EPartTextStyleBit_Last] =
+{
+	"bold",
+	"italic",
+	"underline",
+	"outline",
+	"shadow",
+	"condensed",
+	"extended"
+};
+
+
+static const char*		sTextAlignNames[EPartTextAlign_Last] =
+{
+	"default",
+	"left",
+	"center",
+	"right",
+	"justified"
+};
+
+
 void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
 	CPart::LoadPropertiesFromElement( inElement );
@@ -62,4 +84,27 @@ void	CVisiblePart::DumpProperties( size_t inIndentLevel )
 	printf( "%sbevelAngle = %d\n", indentStr, mBevelAngle );
 }
 
+
+/*static*/ TPartTextAlign	CVisiblePart::GetTextAlignFromString( const char* inString )
+{
+	for( TPartTextAlign x = 0; x < EPartTextAlign_Last; x++ )
+	{
+		if( strcasecmp(inString,sTextAlignNames[x]) == 0 )
+			return x;
+	}
+	
+	return EPartTextAlignDefault;
+}
+
+
+/*static*/ TPartTextStyle	CVisiblePart::GetStyleFromString( const char* inString )
+{
+	TPartTextStyle	outStyle = EPartTextStylePlain;
+	for( size_t x = 0; x < EPartTextStyleBit_Last; x++ )
+	{
+		if( strcasecmp(inString,sTextStyleNames[x]) == 0 )
+			outStyle |= (1 << x);
+	}
+	return outStyle;
+}
 

@@ -46,7 +46,9 @@ public:
 	
 	virtual void			LoadFromElement( tinyxml2::XMLElement * inElement );
 	
+	WILDObjectID			GetID()			{ return mID; };
 	int						GetFamily()		{ return mFamily; };
+	virtual void			SetRect( int left, int top, int right, int bottom )	{ mLeft = left; mTop = top; mRight = right; mBottom = bottom; };
 	
 	virtual void			Dump( size_t inIndent = 0 );
 	
