@@ -145,7 +145,7 @@ void	CLayer::LoadAddColorPartsFromElement( tinyxml2::XMLElement* root )
 	for( ; theObject != NULL; theObject = theObject->NextSiblingElement("addcolorobject") )
 	{
 		WILDObjectID	objectID = CTinyXMLUtils::GetLongLongNamed( theObject, "id" );
-		int				objectBevel = CTinyXMLUtils::GetLongLongNamed( theObject, "bevel" );
+		int				objectBevel = CTinyXMLUtils::GetIntNamed( theObject, "bevel" );
 		std::string		objectType;
 		CTinyXMLUtils::GetStringNamed( theObject, "type", objectType );
 		std::string		objectName;
@@ -224,6 +224,9 @@ void	CLayer::Dump( size_t inIndent )
 		(*itty)->Dump( inIndent +2 );
 	printf( "%s\t}\n%s\tcontents\n%s\t{\n", indentStr, indentStr, indentStr );
 	for( auto itty = mContents.begin(); itty != mContents.end(); itty++ )
+		(*itty)->Dump( inIndent +2 );
+	printf( "%s\t}\n%s\taddcolor parts\n%s\t{\n", indentStr, indentStr, indentStr );
+	for( auto itty = mAddColorParts.begin(); itty != mAddColorParts.end(); itty++ )
 		(*itty)->Dump( inIndent +2 );
 	printf( "%s\t}\n%s}\n", indentStr, indentStr );
 }
