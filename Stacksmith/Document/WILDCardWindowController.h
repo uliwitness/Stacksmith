@@ -20,6 +20,7 @@
 	WILDStack						*	mStack;
 	IBOutlet NSView					*	mView;
 	IBOutlet WILDCardViewController	*	mCardViewController;
+	IBOutlet NSProgressIndicator	*	mLoadProgressIndicator;
 }
 
 -(id)			initWithStack: (WILDStack*)inStack;

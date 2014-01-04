@@ -46,6 +46,8 @@
 
 -(void)	awakeFromNib
 {
+	[mLoadProgressIndicator startAnimation: self];
+	
 	// Make sure window fits the cards:
 	NSSize		cardSize = [mStack cardSize];
 	if( cardSize.width == 0 || cardSize.height == 0 )
