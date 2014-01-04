@@ -317,6 +317,7 @@
 		55CD60C818752ECA002450E2 /* CTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C618752ECA002450E2 /* CTimer.mm */; };
 		55CD60D818754007002450E2 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55CD60D418753CA2002450E2 /* stackimport */; };
 		55CD60DB187587CB002450E2 /* CDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60D9187587CB002450E2 /* CDocument.cpp */; };
+		55CD60F018779641002450E2 /* CParseErrorCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60EE18779641002450E2 /* CParseErrorCommandNode.cpp */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
@@ -979,6 +980,8 @@
 		55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = stackimport.xcodeproj; path = ../stackimport/stackimport.xcodeproj; sourceTree = "<group>"; };
 		55CD60D9187587CB002450E2 /* CDocument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDocument.cpp; path = "Portable Document/CDocument.cpp"; sourceTree = "<group>"; };
 		55CD60DA187587CB002450E2 /* CDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDocument.h; path = "Portable Document/CDocument.h"; sourceTree = "<group>"; };
+		55CD60EE18779641002450E2 /* CParseErrorCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParseErrorCommandNode.cpp; path = ../../CParseErrorCommandNode.cpp; sourceTree = "<group>"; };
+		55CD60EF18779641002450E2 /* CParseErrorCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CParseErrorCommandNode.h; path = ../../CParseErrorCommandNode.h; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
@@ -1473,6 +1476,8 @@
 				55E805F71366091F006F1287 /* CGlobalPropertyNode.cpp */,
 				551D938817058397003766DA /* CDownloadCommandNode.h */,
 				551D938717058397003766DA /* CDownloadCommandNode.cpp */,
+				55CD60EF18779641002450E2 /* CParseErrorCommandNode.h */,
+				55CD60EE18779641002450E2 /* CParseErrorCommandNode.cpp */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -2216,6 +2221,7 @@
 			files = (
 				8D15AC310486D014006FF6A4 /* WILDDocument.mm in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
+				55CD60F018779641002450E2 /* CParseErrorCommandNode.cpp in Sources */,
 				5542C9471139D7A000555C64 /* WILDStack.m in Sources */,
 				5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */,
 				5542C9B71139F43C00555C64 /* WILDCard.m in Sources */,
