@@ -201,6 +201,42 @@
 			<key>Type</key>
 			<string>String</string>
 		</dict>
+		<dict>
+			<key>Color</key>
+			<array>
+				<integer>1</integer>
+				<integer>1</integer>
+				<integer>1</integer>
+			</array>
+			<key>End</key>
+			<string>”</string>
+			<key>EscapeChar</key>
+			<string></string>
+			<key>Name</key>
+			<string>Strings</string>
+			<key>Start</key>
+			<string>“</string>
+			<key>Type</key>
+			<string>String</string>
+		</dict>
+		<dict>
+			<key>Color</key>
+			<array>
+				<integer>1</integer>
+				<integer>1</integer>
+				<integer>1</integer>
+			</array>
+			<key>End</key>
+			<string>»</string>
+			<key>EscapeChar</key>
+			<string></string>
+			<key>Name</key>
+			<string>Strings</string>
+			<key>Start</key>
+			<string>«</string>
+			<key>Type</key>
+			<string>String</string>
+		</dict>
 	</array>
 	<key>OneLineCommentPrefix</key>
 	<string>-- </string>
