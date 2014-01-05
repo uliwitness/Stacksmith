@@ -35,7 +35,7 @@ CConcreteObject::~CConcreteObject()
 void	CConcreteObject::SetScript( std::string inScript )
 {
 	mScript = inScript;
-	if( mScriptObject )
+	if( mScriptObject )	// Nuke old script so we recreate it next someone asks for it.
 	{
 		LEOScriptRelease( mScriptObject );
 		mScriptObject = NULL;

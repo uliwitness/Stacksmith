@@ -10,6 +10,8 @@
 #include "LEOInterpreter.h"
 #include "LEOContextGroup.h"
 #include "LEOScript.h"
+#include "CCancelPolling.h"
+#include "CStack.h"
 #include <sstream>
 
 
@@ -54,6 +56,11 @@ void		CleanUpScriptableObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keep
 bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContext );
 LEOValuePtr	GetScriptableObjectValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 size_t	GetScriptableObjectKeyCount( LEOValuePtr self, LEOContext* inContext );
+
+void	CScriptContextUserDataCleanUp( void* inData );
+void	ScriptObjectPreInstructionProc( LEOContext* inContext );
+
+void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler );
 
 
 
@@ -503,6 +510,82 @@ void		SetScriptableObjectValueForKeyOfRange( LEOValuePtr self, const char* keyNa
 }
 
 
+void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler )
+{
+	bool			handled = false;
+	LEOHandlerID	arrowKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "arrowkey" );
+	LEOHandlerID	keyDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "keydown" );
+	LEOHandlerID	functionKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "functionkey" );
+	LEOHandlerID	openCardHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "opencard" );
+	LEOHandlerID	closeCardHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closecard" );
+	LEOHandlerID	openStackHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openstack" );
+	LEOHandlerID	closeStackHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closestack" );
+	LEOHandlerID	mouseEnterHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseenter" );
+	LEOHandlerID	mouseDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedown" );
+	LEOHandlerID	mouseUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseup" );
+	LEOHandlerID	mouseUpOutsideHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseupoutside" );
+	LEOHandlerID	mouseLeaveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseleave" );
+	LEOHandlerID	mouseMoveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousemove" );
+	LEOHandlerID	mouseDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedrag" );
+	LEOHandlerID	loadPageHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "loadpage" );
+	LEOHandlerID	linkClickedHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "linkclicked" );
+	if( inHandler == arrowKeyHandlerID )
+	{
+		LEOValuePtr	directionParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 0 );
+		char		buf[40] = {};
+		if( directionParam )
+		{
+			const char*	directionStr = LEOGetValueAsString( directionParam, buf, sizeof(buf), inContext );
+			if( strcasecmp( directionStr, "left") )
+			{
+	//			[[NSApplication sharedApplication] sendAction: @selector(goPrevCard:) to: nil from: [NSApplication sharedApplication]];
+				handled = true;
+			}
+			else if( strcasecmp( directionStr, "right") )
+			{
+	//			[[NSApplication sharedApplication] sendAction: @selector(goNextCard:) to: nil from: [NSApplication sharedApplication]];
+				handled = true;
+			}
+			else if( strcasecmp( directionStr, "up") )
+			{
+	//			[[NSApplication sharedApplication] sendAction: @selector(goFirstCard:) to: nil from: [NSApplication sharedApplication]];
+				handled = true;
+			}
+			else if( strcasecmp( directionStr, "down") )
+			{
+	//			[[NSApplication sharedApplication] sendAction: @selector(goLastCard:) to: nil from: [NSApplication sharedApplication]];
+				handled = true;
+			}
+		}
+		else
+			handled = false;
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
+	else if( inHandler == openCardHandlerID
+			|| inHandler == closeCardHandlerID
+			|| inHandler == openStackHandlerID
+			|| inHandler == closeStackHandlerID
+			|| inHandler == mouseEnterHandlerID
+			|| inHandler == mouseDownHandlerID
+			|| inHandler == mouseUpHandlerID
+			|| inHandler == mouseUpOutsideHandlerID
+			|| inHandler == mouseLeaveHandlerID
+			|| inHandler == mouseMoveHandlerID
+			|| inHandler == mouseDragHandlerID
+			|| inHandler == functionKeyHandlerID
+			|| inHandler == keyDownHandlerID
+			|| inHandler == loadPageHandlerID
+			|| inHandler == linkClickedHandlerID )
+	{
+		handled = true;
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
+	
+	if( !handled )
+		LEOContextStopWithError( inContext, "Couldn't find handler for %s.", LEOContextGroupHandlerNameForHandlerID( inContext->group, inHandler ) );
+}
+
+
 LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* inContext )
 {
 	struct LEOScript*	theScript = NULL;
@@ -532,5 +615,317 @@ CScriptableObject*		CScriptableObject::GetOwnerScriptableObjectFromContext( LEOC
 }
 
 
+void	CScriptContextUserDataCleanUp( void* inData )
+{
+	delete (CScriptContextUserData*)inData;
+}
 
+
+void	ScriptObjectPreInstructionProc( LEOContext* inContext )
+{
+	if( CCancelPolling::GetUserWantsToCancel() )
+		inContext->keepRunning = false;
+	else
+		LEORemoteDebuggerPreInstructionProc( inContext );
+}
+
+
+void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... )
+{
+#if 0
+	#define DBGLOGPAR(args...)	printf(args)
+#else
+	#define DBGLOGPAR(args...)	
+#endif
+
+	LEOScript*	theScript = GetScriptObject(errorHandler);
+	if( !theScript )
+		return;
+	LEOContext	ctx;
+	const char*	paramStart = strchr( fmt, ' ' );
+	char		msg[512] = {0};
+	memmove( msg, fmt, paramStart -fmt );
+	msg[paramStart -fmt] = '\0';
+	size_t		bytesNeeded = 0;
+		
+	CScriptContextUserData	*	ud = new CScriptContextUserData( GetParentObject()->GetStack(), this );
+	LEOInitContext( &ctx, GetScriptContextGroupObject(), ud, CScriptContextUserDataCleanUp );
+	#if REMOTE_DEBUGGER
+	ctx.preInstructionProc = ScriptObjectPreInstructionProc;
+	ctx.promptProc = LEORemoteDebuggerPrompt;
+	#endif
+	ctx.callNonexistentHandlerProc = ScriptableObjectCallNonexistentHandler;
+	
+	LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
+	
+	if( paramStart[0] != '\0' )	// We have params?
+	{
+		size_t	numParams = 0;
+		// Calculate how much space we need for params temporarily:
+		for( int x = 0; paramStart[x] != '\0'; x++ )
+		{
+			if( paramStart[x] != '%' )
+				continue;
+			x++;
+			switch( paramStart[x] )
+			{
+				case 's':
+					numParams ++;
+					bytesNeeded += sizeof(const char*);
+					break;
+
+				case 'l':
+					x++;
+					if( paramStart[x] != 'd' )
+						throw std::logic_error("Only %ld is currently supported in SendMessage format strings, no other %l...s.");
+					numParams ++;
+					bytesNeeded += sizeof(long);
+					break;
+
+				case 'd':
+					numParams ++;
+					bytesNeeded += sizeof(int);
+					break;
+
+				case 'f':
+					numParams ++;
+					bytesNeeded += sizeof(double);
+					break;
+
+				case 'B':
+					numParams ++;
+					bytesNeeded += sizeof(bool);
+					break;
+
+				default:
+					throw std::logic_error("Unknown format in SendMessage format string.");
+					break;
+			}
+		}
+		
+		// Grab the params in correct order into our temp buffer:
+		if( bytesNeeded > 0 )
+		{
+			char	*	theBytes = (char*) calloc( bytesNeeded, 1 );
+			char	*	currPos = theBytes;
+			va_list		ap;
+			va_start( ap, fmt );
+				for( int x = 0; paramStart[x] != '\0'; x++ )
+				{
+					if( paramStart[x] != '%' )
+						continue;
+					x++;
+					switch( paramStart[x] )
+					{
+						case 's':
+						{
+							const char*		currCStr = va_arg( ap, const char* );
+							DBGLOGPAR( "\"%s\"", currCStr);
+							* ((const char**)currPos) = currCStr;
+							currPos += sizeof(const char*);
+							break;
+						}
+
+						case 'l':
+						{
+							x++;
+							if( paramStart[x] != 'd' )
+								throw std::logic_error("Only %ld is currently supported in SendMessage format strings, no other %l...s.");
+							long	currLong  = va_arg( ap, long );
+							DBGLOGPAR( "%ld", currLong);
+							* ((long*)currPos) = currLong;
+							currPos += sizeof(long);
+							break;
+						}
+
+						case 'd':
+						{
+							int		currInt = va_arg( ap, int );
+							DBGLOGPAR( "%d", currInt);
+							* ((int*)currPos) = currInt;
+							currPos += sizeof(int);
+							break;
+						}
+
+						case 'f':
+						{
+							double	currDouble = va_arg( ap, double );
+							DBGLOGPAR( "%f", currDouble);
+							* ((double*)currPos) = currDouble;
+							currPos += sizeof(double);
+							break;
+						}
+
+						case 'B':
+						{
+							bool	currBool = va_arg( ap, int );	// bool gets promoted to int.
+							DBGLOGPAR( "%s", currBool ? "true" : "false");
+							* ((bool*)currPos) = currBool;
+							currPos += sizeof(bool);
+							break;
+						}
+
+						default:
+							throw std::logic_error("Unknown format in SendMessage format string.");
+							break;
+					}
+				}
+			va_end(ap);
+
+			// Push the params in reverse order:
+			currPos = theBytes +bytesNeeded;
+			for( int x = 0; paramStart[x] != '\0'; x++ )
+			{
+				if( paramStart[x] != '%' )
+					continue;
+				x++;
+				switch( paramStart[x] )
+				{
+					case 's':
+					{
+						currPos -= sizeof(const char*);
+						const char* str = *((const char**)currPos);
+						DBGLOGPAR( "pushed \"%s\"", str ? str : "(null)");
+						LEOPushStringValueOnStack( &ctx, str, str? strlen(str) : 0 );
+						break;
+					}
+
+					case 'l':
+					{
+						x++;
+						if( paramStart[x] != 'd' )
+							throw std::logic_error("Only %ld is currently supported in SendMessage format strings, no other %l...s.");
+						currPos -= sizeof(long);
+						long	currLong = *((long*)currPos);
+						DBGLOGPAR( "pushed %ld", currLong );
+						LEOPushIntegerOnStack( &ctx, currLong, kLEOUnitNone );
+						break;
+					}
+
+					case 'd':
+					{
+						currPos -= sizeof(int);
+						int	currInt = *((int*)currPos);
+						DBGLOGPAR( "pushed %d", currInt );
+						LEOPushIntegerOnStack( &ctx, currInt, kLEOUnitNone );
+						break;
+					}
+
+					case 'f':
+					{
+						currPos -= sizeof(double);
+						double	currDouble = *((double*)currPos);
+						DBGLOGPAR( "pushed %f", currDouble );
+						LEOPushNumberOnStack( &ctx, currDouble, kLEOUnitNone );
+						break;
+					}
+
+					case 'B':
+					{
+						currPos -= sizeof(bool);
+						bool	currBool = (*((bool*)currPos)) == true;
+						DBGLOGPAR( "pushed %s", currBool ? "true" : "false" );
+						LEOPushBooleanOnStack( &ctx, currBool );
+						break;
+					}
+
+					default:
+						throw std::logic_error("Unknown format in SendMessage format string.");
+						break;
+				}
+			}
+
+			DBGLOGPAR( @"pushed PC %zu", numParams );
+			LEOPushIntegerOnStack( &ctx, numParams, kLEOUnitNone );
+			
+			if( theBytes )
+				free(theBytes);
+			theBytes = NULL;
+			currPos = NULL;
+		}
+		else
+		{
+			DBGLOGPAR(@"Internal error: Invalid format string in message send.");
+			LEOPushIntegerOnStack( &ctx, 0, kLEOUnitNone );
+		}
+	}
+	else
+		LEOPushIntegerOnStack( &ctx, 0, kLEOUnitNone );
+	
+	// Send message:
+	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( GetScriptContextGroupObject(), msg );
+	LEOHandler*		theHandler = NULL;
+	while( !theHandler )
+	{
+		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
+
+		if( theHandler )
+		{
+			LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
+			LEORunInContext( theHandler->instructions, &ctx );
+			if( ctx.errMsg[0] != 0 )
+				break;
+		}
+		if( !theHandler )
+		{
+			if( theScript->GetParentScript )
+				theScript = theScript->GetParentScript( theScript, &ctx );
+			if( !theScript )
+			{
+				if( ctx.callNonexistentHandlerProc )
+					ctx.callNonexistentHandlerProc( &ctx, handlerID );
+				break;
+			}
+		}
+	}
+	if( ctx.errMsg[0] != 0 )
+	{
+		errorHandler( ctx.errMsg, SIZE_T_MAX, SIZE_T_MAX, this );
+	}
+	else if( ctx.stackEndPtr != ctx.stack )
+	{
+		LEOInitCopy( ctx.stack, outValue, kLEOInvalidateReferences, &ctx );
+	}
+	
+	LEOCleanUpContext( &ctx );
+}
+
+
+CScriptContextUserData::CScriptContextUserData( CStack* currStack, CScriptableObject* target )
+	: mCurrentStack(currStack), mTarget(target)
+{
+	if( mCurrentStack )
+		mCurrentStack->Retain();
+	if( mTarget )
+		mTarget->Retain();
+}
+
+
+CScriptContextUserData::~CScriptContextUserData()
+{
+	if( mCurrentStack )
+		mCurrentStack->Release();
+	if( mTarget )
+		mTarget->Release();
+}
+
+
+void	CScriptContextUserData::SetStack( CStack* currStack )
+{
+	if( currStack )
+		currStack->Retain();
+	if( mCurrentStack )
+		mCurrentStack->Release();
+	mCurrentStack = currStack;
+}
+
+
+void	CScriptContextUserData::SetTarget( CScriptableObject* target )
+{
+	if( target )
+		target->Retain();
+	if( mTarget )
+		mTarget->Release();
+	mTarget = target;
+}
 

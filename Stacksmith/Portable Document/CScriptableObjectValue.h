@@ -76,12 +76,33 @@ public:
 	bool				SetUserPropertyNameAtIndex( const char* inNewName, size_t inIndex )	{ return false; };
 	bool				GetUserPropertyValueForName( const char* inPropName, LEOValuePtr outValue )	{ return false; };
 	bool				SetUserPropertyValueForName( LEOValuePtr inValue, const char* inPropName )	{ return false; };
+	
+	void				SendMessage( LEOValuePtr outValue, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
+	
+	virtual LEOContextGroup*	GetScriptContextGroupObject()				{ return NULL; };
+	
 	static void			InitScriptableObjectValue( LEOValueObject* inStorage, CScriptableObject* wildObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	static LEOScript*	GetParentScript( LEOScript* inScript, LEOContext* inContext );
 
 	static CScriptableObject*	GetOwnerScriptableObjectFromContext( LEOContext * inContext );
 };
 
+
+class CScriptContextUserData
+{
+public:
+	CScriptContextUserData( CStack* currStack, CScriptableObject* target );
+	~CScriptContextUserData();
+	
+	void				SetStack( CStack* currStack );
+	CStack*				GetStack()						{ return mCurrentStack; };
+	void				SetTarget( CScriptableObject* target );
+	CScriptableObject*	GetTarget()						{ return mTarget; };
+	
+protected:
+	CStack				*	mCurrentStack;
+	CScriptableObject	*	mTarget;
+};
 
 
 }

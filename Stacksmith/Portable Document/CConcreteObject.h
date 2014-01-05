@@ -43,7 +43,7 @@ protected:
 	
 	void				DumpUserProperties( size_t inIndent );
 		
-	LEOContextGroup*	GetScriptContextGroupObject();
+	virtual LEOContextGroup*	GetScriptContextGroupObject();
 
 // ivars:
 	std::string							mName;			// Name of this object for referring to it from scripts.

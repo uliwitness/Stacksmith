@@ -31,7 +31,7 @@ void	CTimerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 
 void	CTimerPart::Trigger()
 {
-	
+	SendMessage( NULL, [](const char *, size_t, size_t, CScriptableObject *){}, mMessage.c_str() );
 	
 	if( !mRepeat )
 	{
