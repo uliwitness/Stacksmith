@@ -14,7 +14,7 @@
 #include "WILDObjectID.h"
 
 
-namespace Calhoun {
+namespace Carlson {
 
 class CLayer;
 class CPart;

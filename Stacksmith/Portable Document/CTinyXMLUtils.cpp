@@ -9,7 +9,7 @@
 #include "CTinyXmlUtils.h"
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 long long		CTinyXMLUtils::GetLongLongNamed( tinyxml2::XMLElement* root, const char* inName, long long defaultValue )

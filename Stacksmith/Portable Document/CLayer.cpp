@@ -18,7 +18,7 @@
 #include "CPicturePart.h"
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 CLayer::~CLayer()

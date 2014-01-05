@@ -14,7 +14,7 @@
 #include "CTinyXMLUtils.h"
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 CStack::~CStack()

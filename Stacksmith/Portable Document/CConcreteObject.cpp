@@ -12,7 +12,7 @@
 #include "LEOScript.h"
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 CConcreteObject::CConcreteObject()

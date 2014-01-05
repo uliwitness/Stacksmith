@@ -13,7 +13,7 @@
 #include "tinyxml2.h"
 
 
-namespace Calhoun {
+namespace Carlson {
 
 class CTinyXMLUtils
 {

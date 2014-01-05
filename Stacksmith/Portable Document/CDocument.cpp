@@ -13,7 +13,7 @@
 #include "CVisiblePart.h"
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 static std::string		sStandardResourcesPath;

@@ -20,11 +20,11 @@ extern "C" void	CPartRegistrationRegisterAllPartTypes( void )
 	
 	if( !sAlreadyDidThisOne )
 	{
-		Calhoun::CPart::RegisterPartCreator( "button", new Calhoun::CPartCreator<Calhoun::CButtonPart>() );
-		Calhoun::CPart::RegisterPartCreator( "field", new Calhoun::CPartCreator<Calhoun::CFieldPart>() );
-		Calhoun::CPart::RegisterPartCreator( "timer", new Calhoun::CPartCreator<Calhoun::CTimerPart>() );
-		Calhoun::CPart::RegisterPartCreator( "moviePlayer", new Calhoun::CPartCreator<Calhoun::CMoviePlayerPart>() );
-		Calhoun::CPart::RegisterPartCreator( "browser", new Calhoun::CPartCreator<Calhoun::CWebBrowserPart>() );
+		Carlson::CPart::RegisterPartCreator( "button", new Carlson::CPartCreator<Carlson::CButtonPart>() );
+		Carlson::CPart::RegisterPartCreator( "field", new Carlson::CPartCreator<Carlson::CFieldPart>() );
+		Carlson::CPart::RegisterPartCreator( "timer", new Carlson::CPartCreator<Carlson::CTimerPart>() );
+		Carlson::CPart::RegisterPartCreator( "moviePlayer", new Carlson::CPartCreator<Carlson::CMoviePlayerPart>() );
+		Carlson::CPart::RegisterPartCreator( "browser", new Carlson::CPartCreator<Carlson::CWebBrowserPart>() );
 		
 		sAlreadyDidThisOne = true;
 	}

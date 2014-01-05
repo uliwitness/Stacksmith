@@ -29,7 +29,7 @@ typedef struct CTimerMacBridge*	CTimerMacBridgePtr;
 #endif
 
 
-namespace Calhoun {
+namespace Carlson {
 
 class CTimer
 {

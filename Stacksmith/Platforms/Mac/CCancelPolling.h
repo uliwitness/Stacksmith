@@ -19,7 +19,7 @@
 #ifndef __Stacksmith__CCancelPolling__
 #define __Stacksmith__CCancelPolling__
 
-namespace Calhoun
+namespace Carlson
 {
 
 class CCancelPolling

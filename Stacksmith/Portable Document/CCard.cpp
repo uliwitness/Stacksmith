@@ -11,7 +11,7 @@
 #include "CTinyXMLUtils.h"
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 void	CCard::LoadPropertiesFromElement( tinyxml2::XMLElement* root )

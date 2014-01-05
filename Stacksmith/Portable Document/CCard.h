@@ -12,7 +12,7 @@
 #include "CLayer.h"
 
 
-namespace Calhoun {
+namespace Carlson {
 
 class CBackground;
 

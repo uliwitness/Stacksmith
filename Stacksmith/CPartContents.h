@@ -14,7 +14,7 @@
 #include "WILDObjectID.h"
 #include <string>
 
-namespace Calhoun {
+namespace Carlson {
 
 class CPartContents : public CRefCountedObject
 {

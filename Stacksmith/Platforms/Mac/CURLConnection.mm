@@ -10,7 +10,7 @@
 #include <Foundation/Foundation.h>
 #include "CRefCountedObject.h"
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 /*static*/ void	CURLConnection::SendRequestWithCompletionHandler( CURLRequest& inRequest, std::function<void (CURLResponse inResponse, const char* inData, size_t inDataLength)> completionBlock )

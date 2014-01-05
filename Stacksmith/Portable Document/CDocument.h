@@ -14,7 +14,7 @@
 #include "CVisiblePart.h"
 
 
-namespace Calhoun {
+namespace Carlson {
 
 enum EMediaType
 {

@@ -14,7 +14,7 @@
 #include "CURLResponse.h"
 
 
-namespace Calhoun {
+namespace Carlson {
 
 // A class for sending HTTP requests and getting headers and body data back:
 class CURLConnection

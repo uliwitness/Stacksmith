@@ -19,7 +19,7 @@
 #include "CPart.h"
 
 
-namespace Calhoun {
+namespace Carlson {
 
 enum
 {

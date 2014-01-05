@@ -18,7 +18,7 @@
 #include "CBackground.h"
 
 
-namespace Calhoun {
+namespace Carlson {
 
 
 class CStack : public CConcreteObject

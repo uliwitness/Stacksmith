@@ -36,7 +36,7 @@
 
 @interface WILDDocument ()
 {
-	Calhoun::CDocument		mDocument;
+	Carlson::CDocument		mDocument;
 }
 
 @end

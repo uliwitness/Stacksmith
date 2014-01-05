@@ -11,7 +11,7 @@
 
 #include "CVisiblePart.h"
 
-namespace Calhoun {
+namespace Carlson {
 
 class CFieldPart : public CVisiblePart
 {

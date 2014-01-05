@@ -10,7 +10,7 @@
 #include "CTinyXMLUtils.h"
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 void	CPicturePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )

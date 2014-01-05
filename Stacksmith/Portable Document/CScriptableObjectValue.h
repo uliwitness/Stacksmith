@@ -37,7 +37,7 @@
 extern struct LEOValueType	kLeoValueTypeScriptableObject;
 
 
-namespace Calhoun
+namespace Carlson
 {
 
 class CStack;

@@ -22,7 +22,7 @@ extern "C" {
 }
 
 
-namespace Calhoun {
+namespace Carlson {
 
 class CDocument;
 

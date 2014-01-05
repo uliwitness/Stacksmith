@@ -9,7 +9,7 @@
 #include "CTimer.h"
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 @interface CTimerMacBridge : NSObject

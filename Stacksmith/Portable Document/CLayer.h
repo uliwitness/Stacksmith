@@ -18,7 +18,7 @@
 #include <map>
 
 
-namespace Calhoun {
+namespace Carlson {
 
 class CStack;
 

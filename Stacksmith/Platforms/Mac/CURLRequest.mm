@@ -10,7 +10,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 CURLRequest::CURLRequest( const CURLRequest& inRequest )

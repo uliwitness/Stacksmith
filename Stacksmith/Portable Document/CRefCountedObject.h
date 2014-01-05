@@ -13,7 +13,7 @@
 #include <vector>
 
 
-namespace Calhoun {
+namespace Carlson {
 
 class CRefCountedObject
 {

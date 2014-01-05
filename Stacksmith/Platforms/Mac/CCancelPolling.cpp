@@ -10,7 +10,7 @@
 #import <Carbon/Carbon.h>
 
 
-using namespace Calhoun;
+using namespace Carlson;
 
 
 bool	CCancelPolling::GetUserWantsToCancel()

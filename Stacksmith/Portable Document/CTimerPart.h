@@ -14,7 +14,7 @@
 #include "CTimer.h"
 
 
-namespace Calhoun {
+namespace Carlson {
 
 class CTimerPart : public CPart
 {
