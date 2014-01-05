@@ -27,6 +27,9 @@ public:
 	virtual void			SetInterval( long long inInterval )	{ mInterval = inInterval; mActualTimer.SetInterval( inInterval ); };
 	virtual long long		GetInterval()						{ return mInterval; };
 	
+	virtual void			WakeUp();
+	virtual void			GoToSleep();
+	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	

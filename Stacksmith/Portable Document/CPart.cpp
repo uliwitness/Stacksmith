@@ -8,6 +8,7 @@
 
 #include "CPart.h"
 #include "CTinyXMLUtils.h"
+#include "CLayer.h"
 
 
 using namespace Carlson;
@@ -44,7 +45,7 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 CPart::CPart( CLayer *inOwner )
 	: mFamily(0), mOwner(inOwner)
 {
-	
+	mDocument = inOwner->GetDocument();
 }
 
 
@@ -70,6 +71,12 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
+CScriptableObject*	CPart::GetParentObject()
+{
+	return mOwner;
+}
+
+
 void	CPart::DumpProperties( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);
@@ -83,6 +90,6 @@ void	CPart::Dump( size_t inIndent )
 	printf( "%s%s ID %lld \"%s\"\n%s{\n", indentStr, GetIdentityForDump(), mID, mName.c_str(), indentStr );
 	DumpProperties( inIndent +1 );
 	DumpUserProperties( inIndent +1 );
-	printf( "%s\tscript = %s\n", indentStr, mScript.c_str() );
+	printf( "%s\tscript = <<%s>>\n", indentStr, mScript.c_str() );
 	printf( "%s}\n", indentStr );
 }

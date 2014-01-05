@@ -37,6 +37,9 @@ public:
 	CBackground*	GetBackground( size_t inIndex )		{ if( inIndex >= mBackgrounds.size() ) return NULL; return mBackgrounds[inIndex]; };
 	CBackground*	GetBackgroundByID( WILDObjectID inID );
 	
+	virtual void	WakeUp()	{};	// The current card has started its timers etc.
+	virtual void	GoToSleep()	{};	// The current card has stopped its timers etc.
+	
 	void			Dump( size_t inIndent = 0 );
 	
 protected:

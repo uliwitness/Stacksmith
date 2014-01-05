@@ -19,6 +19,11 @@ public:
 	CBackground( std::string inURL, WILDObjectID inID, const std::string inName, CStack* inStack ) : CLayer(inURL,inID,inName,inStack)	{};
 	~CBackground()	{ printf("Released Background %p\n",this); };
 
+	virtual void	WakeUp();		// The current card has started its timers etc.
+	virtual void	GoToSleep();	// The current card has stopped its timers etc.
+	
+	virtual CScriptableObject*	GetParentObject();
+	
 protected:
 	virtual const char*	GetIdentityForDump()		{ return "Background"; };
 };

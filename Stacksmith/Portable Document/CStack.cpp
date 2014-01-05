@@ -178,6 +178,7 @@ void	CStack::Dump( size_t inIndent )
 	printf( "%s\tcantDelete = %s\n", indentStr, (mCantDelete? "true" : "false") );
 	printf( "%s\tcantModify = %s\n", indentStr, (mCantModify? "true" : "false") );
 	printf( "%s\tresizable = %s\n", indentStr, (mResizable? "true" : "false") );
+	printf( "%s\tscript = <<%s>>\n", indentStr, mScript.c_str() );
 	DumpUserProperties( inIndent +1 );
 	printf( "%s\tcards\n%s\t{\n", indentStr, indentStr );
 	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )

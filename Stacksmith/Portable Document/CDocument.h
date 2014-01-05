@@ -68,7 +68,7 @@ class CDocument
 public:
 	static void		SetStandardResourcesPath( const std::string& inStdResPath );
 
-	CDocument() : mLoaded(false), mLoading(false) {};
+	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1) {};
 	virtual ~CDocument();
 	
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );

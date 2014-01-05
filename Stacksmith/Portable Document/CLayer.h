@@ -36,6 +36,9 @@ public:
 	virtual void	SetStack( CStack* inStack );
 	virtual CPart*	GetPartWithID( WILDObjectID inID );
 	
+	virtual void	WakeUp();
+	virtual void	GoToSleep();
+	
 	virtual void	Dump( size_t inIndent = 0 );
 	
 protected:

@@ -49,7 +49,7 @@ LEOContextGroup*	CConcreteObject::GetScriptContextGroupObject()
 }
 
 
-struct LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size_t,size_t,CConcreteObject*)> errorHandler )
+LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )
 {
 	if( !mScriptObject )
 	{

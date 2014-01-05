@@ -32,16 +32,16 @@ public:
 	CConcreteObject();
 	~CConcreteObject();
 	
-	void				SetScript( std::string inScript );
-	std::string			GetScript()							{ return mScript; };
+	virtual void		SetScript( std::string inScript );
+	virtual std::string	GetScript()							{ return mScript; };
 	
-	struct LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CConcreteObject*)> errorHandler );	// Calls errorHandler with NULL message on success, calls error handler with error message and returns NULL on failure.
-	CDocument*			GetDocument()		{ return mDocument; };
+	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );	// Calls errorHandler with NULL message on success, calls error handler with error message and returns NULL on failure.
+	virtual CDocument*	GetDocument()		{ return mDocument; };
 
 protected:
-	void				LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );
+	virtual void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );
 	
-	void				DumpUserProperties( size_t inIndent );
+	virtual void		DumpUserProperties( size_t inIndent );
 		
 	virtual LEOContextGroup*	GetScriptContextGroupObject();
 

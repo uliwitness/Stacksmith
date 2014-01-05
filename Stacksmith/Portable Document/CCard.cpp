@@ -35,3 +35,26 @@ void	CCard::CallAllCompletionBlocks()
 	else
 		CLayer::CallAllCompletionBlocks();
 }
+
+
+void	CCard::WakeUp()
+{
+	CLayer::WakeUp();
+	
+	mOwningBackground->WakeUp();
+}
+
+
+void	CCard::GoToSleep()
+{
+	CLayer::GoToSleep();
+	
+	mOwningBackground->GoToSleep();
+}
+
+
+CScriptableObject*	CCard::GetParentObject()
+{
+	return mOwningBackground;
+}
+

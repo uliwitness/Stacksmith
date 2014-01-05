@@ -644,11 +644,14 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	LEOContext	ctx;
 	const char*	paramStart = strchr( fmt, ' ' );
 	char		msg[512] = {0};
+	if( paramStart == NULL )
+		paramStart = fmt +strlen(fmt);
 	memmove( msg, fmt, paramStart -fmt );
 	msg[paramStart -fmt] = '\0';
 	size_t		bytesNeeded = 0;
-		
-	CScriptContextUserData	*	ud = new CScriptContextUserData( GetParentObject()->GetStack(), this );
+	
+	CScriptableObject*	parent = GetParentObject();
+	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this );
 	LEOInitContext( &ctx, GetScriptContextGroupObject(), ud, CScriptContextUserDataCleanUp );
 	#if REMOTE_DEBUGGER
 	ctx.preInstructionProc = ScriptObjectPreInstructionProc;

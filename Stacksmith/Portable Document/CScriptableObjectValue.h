@@ -52,32 +52,32 @@ public:
 //	what was asked (as in, ever). So if a property doesn't exist, they'd return
 //	NO. If an object has no contents, the same.
 
-	bool				GetTextContents( std::string& outString )		{ return false; };
-	bool				SetTextContents( std::string inString)			{ return false; };
+	virtual bool				GetTextContents( std::string& outString )		{ return false; };
+	virtual bool				SetTextContents( std::string inString)			{ return false; };
 
-	bool				GoThereInNewWindow( bool inNewWindow )			{ return false; };
+	virtual bool				GoThereInNewWindow( bool inNewWindow )			{ return false; };
 
-	bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOValuePtr outValue )						{ return false; };
-	bool				SetValueForPropertyNamed( LEOValuePtr inValue, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )	{ return false; };
+	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOValuePtr outValue )						{ return false; };
+	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )	{ return false; };
 
-	LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )								{ return NULL; };
-	CScriptableObject*	GetParentObject()								{ return NULL; };
+	virtual LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )								{ return NULL; };
+	virtual CScriptableObject*	GetParentObject()								{ return NULL; };
 
-	CStack*				GetStack()			{ return NULL; };
-	bool				DeleteObject()		{ return false; };
+	virtual CStack*				GetStack()			{ return NULL; };
+	virtual bool				DeleteObject()		{ return false; };
 
-	void				OpenScriptEditorAndShowOffset( size_t byteOffset )	{};
-	void				OpenScriptEditorAndShowLine( size_t lineIndex )		{};
+	virtual void				OpenScriptEditorAndShowOffset( size_t byteOffset )	{};
+	virtual void				OpenScriptEditorAndShowLine( size_t lineIndex )		{};
 
-	bool				AddUserPropertyNamed( const char* userPropName )	{ return false; };
-	bool				DeleteUserPropertyNamed( const char* userPropName )	{ return false; };
-	size_t				GetNumUserProperties()								{ return 0; };
-	std::string			GetUserPropertyNameAtIndex( size_t inIndex )		{ return std::string(); };
-	bool				SetUserPropertyNameAtIndex( const char* inNewName, size_t inIndex )	{ return false; };
-	bool				GetUserPropertyValueForName( const char* inPropName, LEOValuePtr outValue )	{ return false; };
-	bool				SetUserPropertyValueForName( LEOValuePtr inValue, const char* inPropName )	{ return false; };
+	virtual bool				AddUserPropertyNamed( const char* userPropName )	{ return false; };
+	virtual bool				DeleteUserPropertyNamed( const char* userPropName )	{ return false; };
+	virtual size_t				GetNumUserProperties()								{ return 0; };
+	virtual std::string			GetUserPropertyNameAtIndex( size_t inIndex )		{ return std::string(); };
+	virtual bool				SetUserPropertyNameAtIndex( const char* inNewName, size_t inIndex )	{ return false; };
+	virtual bool				GetUserPropertyValueForName( const char* inPropName, LEOValuePtr outValue )	{ return false; };
+	virtual bool				SetUserPropertyValueForName( LEOValuePtr inValue, const char* inPropName )	{ return false; };
 	
-	void				SendMessage( LEOValuePtr outValue, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
+	virtual void				SendMessage( LEOValuePtr outValue, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
 	
 	virtual LEOContextGroup*	GetScriptContextGroupObject()				{ return NULL; };
 	

@@ -7,6 +7,7 @@
 //
 
 #include "CTimer.h"
+#import <AppKit/AppKit.h>
 
 
 using namespace Carlson;
@@ -64,6 +65,7 @@ void	CTimer::Start()
 	{
 		mMacTarget = [[CTimerMacBridge alloc] initWithOwningCppTimer: this];
 		mMacTimer = [[NSTimer alloc] initWithFireDate: [NSDate date] interval: ((NSTimeInterval)mTimeIntervalInTicks) / 60.0 target: mMacTarget selector: @selector(timerAction:) userInfo: nil repeats: YES];
+		[[NSRunLoop mainRunLoop] addTimer: mMacTimer forMode: NSDefaultRunLoopMode];
 	}
 }
 

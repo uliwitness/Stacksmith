@@ -25,6 +25,11 @@ public:
 	bool		IsMarked()					{ return mMarked; };
 	void		SetMarked( bool inMarked )	{ mMarked = inMarked; };
 	
+	virtual void	WakeUp();
+	virtual void	GoToSleep();
+	
+	virtual CScriptableObject*	GetParentObject();
+	
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
 	virtual void	CallAllCompletionBlocks();

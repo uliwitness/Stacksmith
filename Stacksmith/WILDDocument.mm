@@ -298,8 +298,9 @@
 }
 
 
--(void)	loadUIForCard: (Calhoun::CCard*)inCard
+-(void)	loadUIForCard: (Carlson::CCard*)inCard
 {
+	inCard->WakeUp();
 	inCard->GetDocument()->Dump();
 }
 

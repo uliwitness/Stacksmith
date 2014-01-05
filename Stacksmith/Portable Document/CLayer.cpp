@@ -200,6 +200,24 @@ void	CLayer::LoadAddColorPartsFromElement( tinyxml2::XMLElement* root )
 }
 
 
+void	CLayer::WakeUp()
+{
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		(*currPart)->WakeUp();
+	}
+}
+
+
+void	CLayer::GoToSleep()
+{
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		(*currPart)->GoToSleep();
+	}
+}
+
+
 const char*	CLayer::GetIdentityForDump()
 {
 	return "Layer";
@@ -219,6 +237,7 @@ void	CLayer::Dump( size_t inIndent )
 	printf( "%s%s ID %lld \"%s\"\n%s{\n", indentStr, GetIdentityForDump(), mID, mName.c_str(), indentStr );
 	DumpProperties( inIndent +1 );
 	DumpUserProperties( inIndent +1 );
+	printf( "%s\tscript = <<%s>>\n", indentStr, mScript.c_str() );
 	printf("%s\tparts\n%s\t{\n",indentStr,indentStr);
 	for( auto itty = mParts.begin(); itty != mParts.end(); itty++ )
 		(*itty)->Dump( inIndent +2 );
