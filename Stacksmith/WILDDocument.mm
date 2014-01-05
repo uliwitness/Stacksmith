@@ -279,16 +279,16 @@
 	
 	[self retain];	// We release ourselves once the async loading has finished:
 	
-	Calhoun::CDocument::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
+	Carlson::CDocument::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 	
-	mDocument.LoadFromURL( [[tocURL absoluteString] UTF8String], [self](Calhoun::CDocument * inDocument)
+	mDocument.LoadFromURL( [[tocURL absoluteString] UTF8String], [self](Carlson::CDocument * inDocument)
 	{
-		Calhoun::CStack		*		theCppStack = inDocument->GetStack( 0 );
-		theCppStack->Load( [inDocument,self](Calhoun::CStack* inStack)
+		Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
+		theCppStack->Load( [inDocument,self](Carlson::CStack* inStack)
 		{
-			inStack->GetCard(0)->Load( [inDocument,self](Calhoun::CLayer*inCard)
+			inStack->GetCard(0)->Load( [inDocument,self](Carlson::CLayer*inCard)
 			{
-				[self loadUIForCard: (Calhoun::CCard*)inCard];
+				[self loadUIForCard: (Carlson::CCard*)inCard];
 				[self release];
 			} );
 		} );
