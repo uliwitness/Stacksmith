@@ -40,6 +40,8 @@ public:
 	virtual CPart*	GetPartWithID( WILDObjectID inID );
 	virtual void    AddPart( CPart* inPart );
 
+	virtual CStack*	GetStack()			{ return mStack; };
+
 	virtual void	WakeUp();
 	virtual void	GoToSleep();
 	

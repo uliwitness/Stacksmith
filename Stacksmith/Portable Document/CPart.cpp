@@ -91,6 +91,12 @@ CScriptableObject*	CPart::GetParentObject()
 }
 
 
+CStack*		CPart::GetStack()
+{
+	return mOwner->GetStack();
+}
+
+
 void	CPart::DumpProperties( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);

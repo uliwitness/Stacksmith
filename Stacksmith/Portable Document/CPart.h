@@ -64,6 +64,7 @@ public:
 	virtual void				WakeUp()		{};
 	virtual void				GoToSleep()		{};
 	virtual CScriptableObject*	GetParentObject();
+	virtual CStack*				GetStack();
 	
 	virtual void				Dump( size_t inIndent = 0 );
 	

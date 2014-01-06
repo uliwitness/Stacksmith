@@ -50,6 +50,7 @@ public:
 	
 	virtual void	SetCurrentCard( CCard* inCard )	{ mCurrentCard = inCard; };
 	virtual CCard*	GetCurrentCard()				{ return mCurrentCard; };
+	virtual CStack*	GetStack()						{ return this; };
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	

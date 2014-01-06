@@ -286,8 +286,9 @@
 		Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
 		theCppStack->Load( [inDocument,self](Carlson::CStack* inStack)
 		{
-			inStack->GetCard(0)->Load( [inDocument,self](Carlson::CLayer*inCard)
+			inStack->GetCard(0)->Load( [inDocument,inStack,self](Carlson::CLayer*inCard)
 			{
+				inStack->SetCurrentCard((Carlson::CCard*)inCard);
 				[self loadUIForCard: (Carlson::CCard*)inCard];
 				[self release];
 			} );
