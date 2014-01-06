@@ -41,54 +41,51 @@ public:
 	virtual ~CMacPartBase() {};
 };
 
-template<class T>
-class CMacPart : public CMacPartBase
+
+class CButtonPartMac : public CButtonPart, public CMacPartBase
 {
 public:
-	CMacPart( T* inThis ) { mPart = inThis; };
-	
-	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mPart->mLeft, mPart->mTop, mPart->mRight -mPart->mLeft, mPart->mBottom -mPart->mTop)]; [(NSBox*)mView setBoxType: NSBoxCustom]; [(NSBox*)mView setTitlePosition: NSNoTitle]; [inSuperView addSubview: mView]; };
+	CButtonPartMac( CLayer *inOwner ) : CButtonPart( inOwner ), mView(nil) {};
+
+	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSButton alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [mView setTitle: [NSString stringWithUTF8String: mName.c_str()]]; [inSuperView addSubview: mView]; };
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
-
-protected:
-	virtual ~CMacPart() {};
+	virtual void	SetName( const std::string& inStr )	{ CButtonPart::SetName(inStr); [mView setTitle: [NSString stringWithUTF8String: mName.c_str()]]; };
 	
-	NSView*		mView;
-	T*			mPart;
+	NSButton	*	mView;
 };
 
 
-class CButtonPartMac : public CButtonPart, public CMacPart<CButtonPartMac>
+class CFieldPartMac : public CFieldPart, public CMacPartBase
 {
 public:
-	CButtonPartMac( CLayer *inOwner ) : CButtonPart( inOwner ), CMacPart(this) {};
+	CFieldPartMac( CLayer *inOwner ) : CFieldPart( inOwner ), mView(nil) {};
+
+	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSTextView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [mView setString: @"boo!"]; [inSuperView addSubview: mView]; };
+	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 	
-	friend class CMacPart<CButtonPartMac>;
+	NSTextView	*	mView;
 };
 
-
-class CFieldPartMac : public CFieldPart, public CMacPart<CFieldPartMac>
+class CMoviePlayerPartMac : public CMoviePlayerPart, public CMacPartBase
 {
 public:
-	CFieldPartMac( CLayer *inOwner ) : CFieldPart( inOwner ), CMacPart(this) {};
-	
-	friend class CMacPart<CFieldPartMac>;
-};
+	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil) {};
 
-class CMoviePlayerPartMac : public CMoviePlayerPart, public CMacPart<CMoviePlayerPartMac>
-{
-public:
-	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), CMacPart(this) {};
+	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [(NSBox*)mView setBoxType: NSBoxCustom]; [(NSBox*)mView setTitlePosition: NSNoTitle]; [inSuperView addSubview: mView]; };
+	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 		
-	friend class CMacPart<CMoviePlayerPartMac>;
+	NSView	*	mView;
 };
 
-class CWebBrowserPartMac : public CWebBrowserPart, public CMacPart<CWebBrowserPartMac>
+class CWebBrowserPartMac : public CWebBrowserPart, public CMacPartBase
 {
 public:
-	CWebBrowserPartMac( CLayer *inOwner ) : CWebBrowserPart( inOwner ), CMacPart(this) {};
+	CWebBrowserPartMac( CLayer *inOwner ) : CWebBrowserPart( inOwner ), mView(nil) {};
+
+	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [(NSBox*)mView setBoxType: NSBoxCustom]; [(NSBox*)mView setTitlePosition: NSNoTitle]; [inSuperView addSubview: mView]; };
+	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 		
-	friend class CMacPart<CWebBrowserPartMac>;
+	NSView	*	mView;
 };
 
 
