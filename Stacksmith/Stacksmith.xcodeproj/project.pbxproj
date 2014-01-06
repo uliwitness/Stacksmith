@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1DDD582C0DA1D0D100B32029 /* WILDCardWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		55039F43136B52C80082E32E /* brush01.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F23136B52C70082E32E /* brush01.png */; };
 		55039F44136B52C80082E32E /* brush02.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F24136B52C70082E32E /* brush02.png */; };
@@ -64,32 +63,21 @@
 		55039FD7136D5CCF0082E32E /* ULIPaintTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */; };
 		55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC2136D5CCF0082E32E /* ULIPaintTool.m */; };
 		55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC3136D5CCF0082E32E /* ULIPaintView.m */; };
-		550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09091195E61100351067 /* WILDPresentationConstants.m */; };
-		550C09E61196B9F200351067 /* WILDButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C09E51196B9F200351067 /* WILDButtonView.m */; };
-		550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C0A5D1196C52000351067 /* WILDScrollView.m */; };
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
-		551D93921705A7AF003766DA /* WILDDownloadInstructions.m in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.m */; };
+		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
-		552028D8140165D5000EEA4F /* WILDPartPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552028D7140165D4000EEA4F /* WILDPartPresenter.m */; };
-		552028DC14016880000EEA4F /* WILDPushbuttonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */; };
-		552365381344B0BA000145A0 /* WILDRecentCardsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 552365371344B0B9000145A0 /* WILDRecentCardsList.m */; };
 		5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */; };
-		5523653E1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */; };
-		552365401344CA1D000145A0 /* WILDRecentCardPickerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */; };
 		5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */; };
-		552558FE114BDE7C00279B03 /* WILDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* WILDAppDelegate.m */; };
+		552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */; };
 		55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */; };
 		55255A7F114C177400279B03 /* UKTextDocGoToBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7E114C177400279B03 /* UKTextDocGoToBox.m */; };
 		55255A84114C178100279B03 /* UKSCTDColorWellPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A81114C178100279B03 /* UKSCTDColorWellPrefsController.m */; };
 		55255A85114C178100279B03 /* UKSCTDUserIdentifiersPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A83114C178100279B03 /* UKSCTDUserIdentifiersPrefsController.m */; };
 		55255A8D114C179C00279B03 /* NSScanner+SkipUpToCharset.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A8A114C179C00279B03 /* NSScanner+SkipUpToCharset.m */; };
 		55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A8C114C179C00279B03 /* NSArray+Color.m */; };
-		55255ABC114C19AB00279B03 /* WILDScriptEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255ABB114C19AB00279B03 /* WILDScriptEditorWindowController.m */; };
-		55255AC1114C19CF00279B03 /* WILDScriptEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */; };
 		552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997CE1370BAD300F870DF /* WILDInputPanelController.m */; };
 		552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */; };
-		552A4DB913928677007C4527 /* WILDMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 552A4DB813928677007C4527 /* WILDMovieView.m */; };
 		552FF1FB113F23F3005742C8 /* PAT_1.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF0FE113F23F3005742C8 /* PAT_1.pbm */; };
 		552FF1FC113F23F3005742C8 /* PAT_2.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF0FF113F23F3005742C8 /* PAT_2.pbm */; };
 		552FF1FD113F23F3005742C8 /* PAT_3.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF100113F23F3005742C8 /* PAT_3.pbm */; };
@@ -132,11 +120,9 @@
 		552FF222113F23F3005742C8 /* PAT_40.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF125113F23F3005742C8 /* PAT_40.pbm */; };
 		552FF22E113F23F3005742C8 /* resources.xml in Resources */ = {isa = PBXBuildFile; fileRef = 552FF131113F23F3005742C8 /* resources.xml */; };
 		552FF245113F247A005742C8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FF244113F247A005742C8 /* QTKit.framework */; };
-		5532EE3413F1E2B6001A0B28 /* WILDContentsEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EE3313F1E2B6001A0B28 /* WILDContentsEditorWindowController.m */; };
-		5532EE3713F1E66D001A0B28 /* WILDContentsEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5532EE3513F1E66D001A0B28 /* WILDContentsEditorWindowController.xib */; };
 		5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 5538245817272767007785D8 /* LEOObjCCallInstructions.c */; };
 		5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */ = {isa = PBXBuildFile; fileRef = 5538245F17272EC2007785D8 /* frameworkheaders.hhc */; };
-		55382463172730B4007785D8 /* WILDObjCCallInstructions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55382462172730B4007785D8 /* WILDObjCCallInstructions.m */; };
+		55382463172730B4007785D8 /* WILDObjCCallInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55382462172730B4007785D8 /* WILDObjCCallInstructions.mm */; };
 		553AF61E17491AEF00AF3BBA /* UKCoordinateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 553AF61D17491AEE00AF3BBA /* UKCoordinateUtils.m */; };
 		553C46EE13577334000219FA /* Forge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C469F13577334000219FA /* Forge.cpp */; };
 		553C46EF13577334000219FA /* CCodeBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A113577334000219FA /* CCodeBlock.cpp */; };
@@ -173,25 +159,15 @@
 		553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E613577334000219FA /* LEORemoteDebugger.c */; };
 		553C471013577334000219FA /* LEOChunks.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E813577334000219FA /* LEOChunks.c */; };
 		553C471113577334000219FA /* LEOContextGroup.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46EA13577334000219FA /* LEOContextGroup.c */; };
-		553C471713577989000219FA /* WILDMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C471613577989000219FA /* WILDMessageBox.m */; };
-		553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C471813577A2E000219FA /* WILDMessageBox.xib */; };
 		553E3C9416F6696000258F72 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
 		553E3C9616F6698300258F72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
 		553F6809157D138B009E0517 /* WILDObjCConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F6808157D138B009E0517 /* WILDObjCConversion.m */; };
 		553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */; };
 		553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */; };
-		5542C9471139D7A000555C64 /* WILDStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9461139D7A000555C64 /* WILDStack.m */; };
 		5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */; };
-		5542C9B71139F43C00555C64 /* WILDCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9B61139F43C00555C64 /* WILDCard.m */; };
-		5542C9DE1139FD9F00555C64 /* WILDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C9DD1139FD9F00555C64 /* WILDLayer.m */; };
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
-		5542CD7D113ABB8B00555C64 /* WILDPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CD7C113ABB8B00555C64 /* WILDPart.m */; };
-		5542CE48113AE27500555C64 /* WILDPartContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CE47113AE27500555C64 /* WILDPartContents.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
-		554DE25C1736DB4500940933 /* WILDGroupPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 554DE25B1736DB4500940933 /* WILDGroupPresenter.m */; };
-		554DE2631736F9F400940933 /* WILDGroupInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554DE2611736F9F400940933 /* WILDGroupInfoViewController.xib */; };
-		554DE2661736FA1F00940933 /* WILDGroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554DE2651736FA1F00940933 /* WILDGroupInfoViewController.m */; };
 		555BA0DC138DC9CB00B3B1D8 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555BA0DA138DC9CB00B3B1D8 /* PlaceholderMovie.mov */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
@@ -207,16 +183,12 @@
 		555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103513881DB700E26037 /* UKPaintSelectTool.tiff */; };
 		555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103613881DB700E26037 /* UKPaintShapeTool.tiff */; };
 		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
-		555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */; };
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
 		55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 55615C53172D86CE00EFEAEF /* ULIBase64.m */; };
-		55615C57172E10E800EFEAEF /* WILDMoviePlayerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */; };
 		556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.mm */; };
 		556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */; };
 		55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.cpp */; };
 		55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686664135A383300C364D6 /* WILDObjectValue.m */; };
-		55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686668135ADC3000C364D6 /* WILDSearchPaths.m */; };
-		556C49691731EF8800C40D97 /* WILDTimerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556C49681731EF8800C40D97 /* WILDTimerPresenter.m */; };
 		556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 556C496E1731F48000C40D97 /* TimerIcon.pdf */; };
 		556DB7A518709A15002F7CB2 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7A318709A15002F7CB2 /* tinyxml2.cpp */; };
 		556DB7AD18709ADB002F7CB2 /* CStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7AB18709ADB002F7CB2 /* CStack.cpp */; };
@@ -229,24 +201,9 @@
 		556DB7C21870A971002F7CB2 /* CURLConnection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7C01870A971002F7CB2 /* CURLConnection.mm */; };
 		556DB7C51870ADE9002F7CB2 /* CURLResponse.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7C31870ADE9002F7CB2 /* CURLResponse.mm */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
-		557BC7D8171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557BC7D6171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib */; };
-		557BC7DF171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557BC7DE171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m */; };
 		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
-		55818A8F1332108300480D30 /* WILDBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 55818A8E1332108100480D30 /* WILDBackground.m */; };
-		5585034013E8866300FD244C /* WILDFieldInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5585033F13E8866300FD244C /* WILDFieldInfoViewController.m */; };
-		5585034313E8867200FD244C /* WILDMoviePlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5585034213E8867200FD244C /* WILDMoviePlayerInfoViewController.m */; };
-		5585034813E886AC00FD244C /* WILDFieldInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5585034413E886AC00FD244C /* WILDFieldInfoViewController.xib */; };
-		5585034913E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5585034613E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5589DD771378B16400B0F6CF /* TransitionMappings.plist */; };
-		558DC883115507EA002C9195 /* WILDCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DC882115507EA002C9195 /* WILDCardViewController.m */; };
-		558DCB5511553EAC002C9195 /* WILDButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCB5411553EAC002C9195 /* WILDButtonCell.m */; };
-		558DCD21115571FE002C9195 /* WILDNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCD20115571FE002C9195 /* WILDNotifications.m */; };
-		558DCD7E11557B6D002C9195 /* WILDPartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCD7D11557B6D002C9195 /* WILDPartView.m */; };
-		558DCFBF1155B9B1002C9195 /* WILDPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFBE1155B9B1002C9195 /* WILDPictureView.m */; };
-		558DCFE51156209A002C9195 /* WILDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558DCFE41156209A002C9195 /* WILDCardView.m */; };
-		558F89E7138B06F900E26275 /* WILDGuidelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F89E6138B06F900E26275 /* WILDGuidelineView.m */; };
-		55943B14171F5D050051166C /* WILDWebBrowserPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55943B13171F5D050051166C /* WILDWebBrowserPresenter.m */; };
 		55943B1C171F675E0051166C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55943B1B171F675E0051166C /* WebKit.framework */; };
 		559700EC137BB38B000264B8 /* WILDIrisOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */; };
 		559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */; };
@@ -256,15 +213,10 @@
 		559700FC137C9B6B000264B8 /* WILDBarnDoorCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F7137C9B6B000264B8 /* WILDBarnDoorCloseFilter.m */; };
 		559700FD137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */; };
 		559700FE137C9B6B000264B8 /* WILDIrisCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */; };
-		55993B6813476DE3001624A2 /* WILDStackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */; };
-		55993B6B13476E1D001624A2 /* WILDStackInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */; };
-		55A3FB2C16E749D400735729 /* WILDShapeButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
 		55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */; };
-		55A5D9C4173202FB005B2309 /* WILDTimerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A5D9C3173202FB005B2309 /* WILDTimerInfoViewController.m */; };
-		55A5D9CB173203C3005B2309 /* WILDTimerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A5D9C9173203C3005B2309 /* WILDTimerInfoViewController.xib */; };
 		55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */; };
 		55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */; };
 		55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4914668D6E00AB0F34 /* boing.aiff */; };
@@ -282,17 +234,13 @@
 		55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC5071744525F0084AAA9 /* CardIcon.icns */; };
 		55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC5081744525F0084AAA9 /* StackIcon.icns */; };
 		55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */; };
-		55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */; };
 		55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29C9617276C4700B38E75 /* UKCrashReporter.m */; };
 		55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */; };
 		55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */; };
 		55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29CA317276E8E00B38E75 /* UKNibOwner.m */; };
 		55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29CA517276E8E00B38E75 /* UKSystemInfo.m */; };
 		55B29CA91727731800B38E75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B29CA81727731800B38E75 /* AddressBook.framework */; };
-		55B79A8813D0319A00BC0A19 /* ULIHighlightingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B79A8713D0319A00BC0A19 /* ULIHighlightingButton.m */; };
-		55B9220A11674E880073EC6C /* WILDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9220911674E880073EC6C /* WILDTools.m */; };
 		55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B9225C11675D270073EC6C /* Quartz.framework */; };
-		55B9244A1169DB150073EC6C /* WILDIconListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B924491169DB150073EC6C /* WILDIconListDataSource.m */; };
 		55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC02E1116B2ADE00BB094E /* NoIcon.png */; };
 		55BFEE15137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */; };
 		55BFEE18137CB1F7008FC8BB /* WILDShrinkToTopFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BFEE17137CB1F7008FC8BB /* WILDShrinkToTopFilter.m */; };
@@ -300,13 +248,9 @@
 		55BFEE1D137DBB14008FC8BB /* WILDShrinkToBottomFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BFEE1C137DBB14008FC8BB /* WILDShrinkToBottomFilter.m */; };
 		55BFEE1F137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */; };
 		55BFEE22137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BFEE21137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m */; };
-		55C2B5CA115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */; };
-		55C2B647115E5780008B094D /* WILDSearchContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* WILDSearchContext.m */; };
+		55C2B647115E5780008B094D /* CSearchContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* CSearchContext.cpp */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
-		55C88B011332CDA300ACB615 /* WILDCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C88B001332CDA300ACB615 /* WILDCardInfoViewController.m */; };
-		55C88B041332D05B00ACB615 /* WILDCardInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */; };
 		55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */; };
-		55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */; };
 		55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */; };
 		55CD60BC187510F0002450E2 /* CButtonPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60B4187510EF002450E2 /* CButtonPart.cpp */; };
 		55CD60BD187510F0002450E2 /* CFieldPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60B6187510EF002450E2 /* CFieldPart.cpp */; };
@@ -326,20 +270,18 @@
 		55CD61181879F464002450E2 /* CMessageBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD61161879F464002450E2 /* CMessageBox.cpp */; };
 		55CD611B187A154A002450E2 /* CSound.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD6119187A154A002450E2 /* CSound.mm */; };
 		55CD611E187A60CD002450E2 /* CRecentCardsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */; };
+		55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD611F187B14E6002450E2 /* CStackMac.mm */; };
+		55CD6124187B188E002450E2 /* CDocumentMac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD6122187B188E002450E2 /* CDocumentMac.cpp */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
-		55D6B259115C16E700D17619 /* WILDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6B258115C16E700D17619 /* WILDTextView.m */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
 		55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */; };
 		55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */; };
-		55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */; };
 		55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */; };
 		55E3A69E11503456008411BB /* CURS_128.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.pdf */; };
 		55E3A6FB11519B45008411BB /* HCSV.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6F911519B45008411BB /* HCSV.icns */; };
 		55E3A6FC11519B45008411BB /* Stack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6FA11519B45008411BB /* Stack.icns */; };
-		55E3B6AD1184417A000062C1 /* WILDMediaEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6AC1184417A000062C1 /* WILDMediaEntry.m */; };
-		55E3B6C91184420E000062C1 /* WILDStyleEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6C81184420E000062C1 /* WILDStyleEntry.m */; };
 		55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6DA11845E01000062C1 /* UKRandomInteger.m */; };
 		55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E509E61156B06D001D0762 /* ULIMultiMap.m */; };
 		55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */; };
@@ -351,19 +293,8 @@
 		55E806541368B2CD006F1287 /* UKColorListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063E1368B2CA006F1287 /* UKColorListView.m */; };
 		55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */; };
 		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
-		55E85E57173180860086F876 /* WILDConcreteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E85E56173180860086F876 /* WILDConcreteObject.m */; };
-		55E9FD8B13E56D3A0089B81F /* WILDPartInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9FD8913E56D390089B81F /* WILDPartInfoViewController.m */; };
-		55E9FD8F13E5FBCC0089B81F /* WILDButtonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9FD8E13E5FBCC0089B81F /* WILDButtonInfoViewController.m */; };
-		55E9FD9213E6050F0089B81F /* WILDPartInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */; };
-		55E9FD9513E605270089B81F /* WILDButtonInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */; };
-		55E9FD9913E747B20089B81F /* WILDIconPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */; };
-		55E9FD9A13E747B20089B81F /* WILDIconPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */; };
-		55EA63801347532C0039FE0D /* WILDLayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA637F1347532C0039FE0D /* WILDLayerInfoViewController.m */; };
-		55EA6383134756D00039FE0D /* WILDBackgroundInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EA6382134756CF0039FE0D /* WILDBackgroundInfoViewController.m */; };
-		55EA6386134758B40039FE0D /* WILDBackgroundInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */; };
 		55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC406114C273400BAA09D /* SyntaxDefinition.plist */; };
 		55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */; };
-		55EBC42B114C2CCE00BAA09D /* WILDScriptContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EBC42A114C2CCE00BAA09D /* WILDScriptContainer.m */; };
 		55EBC523114C539300BAA09D /* HandlerPopupMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC521114C539300BAA09D /* HandlerPopupMessage.png */; };
 		55EBC524114C539300BAA09D /* HandlerPopupFunction.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC522114C539300BAA09D /* HandlerPopupFunction.png */; };
 		55EBC646114CFAE000BAA09D /* BackgroundIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */; };
@@ -386,7 +317,6 @@
 		55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FDD880171B456E0045A2B9 /* UKBorderlessWindow.m */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
-		8D15AC310486D014006FF6A4 /* WILDDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* WILDDocument.mm */; settings = {ATTRIBUTES = (); }; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -486,11 +416,8 @@
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		13E42FBA07B3F13500E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		1DDD58290DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDCardWindowController.xib; sourceTree = "<group>"; };
 		1DDD582B0DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2564AD2C0F5327BB00F57823 /* Stacksmith_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stacksmith_Prefix.pch; sourceTree = "<group>"; };
-		2A37F4ACFDCFA73011CA2CEA /* WILDDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WILDDocument.mm; sourceTree = "<group>"; };
-		2A37F4AEFDCFA73011CA2CEA /* WILDDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDDocument.h; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -574,35 +501,20 @@
 		55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTextTool.m; path = ../UKPaintView/ULIPaintTextTool.m; sourceTree = "<group>"; };
 		55039FC2136D5CCF0082E32E /* ULIPaintTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTool.m; path = ../UKPaintView/ULIPaintTool.m; sourceTree = "<group>"; };
 		55039FC3136D5CCF0082E32E /* ULIPaintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintView.m; path = ../UKPaintView/ULIPaintView.m; sourceTree = "<group>"; };
-		550C09081195E61100351067 /* WILDPresentationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPresentationConstants.h; sourceTree = "<group>"; };
-		550C09091195E61100351067 /* WILDPresentationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPresentationConstants.m; sourceTree = "<group>"; };
-		550C09E41196B9F200351067 /* WILDButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDButtonView.h; sourceTree = "<group>"; };
-		550C09E51196B9F200351067 /* WILDButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDButtonView.m; sourceTree = "<group>"; };
-		550C0A5C1196C52000351067 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScrollView.h; sourceTree = "<group>"; };
-		550C0A5D1196C52000351067 /* WILDScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScrollView.m; sourceTree = "<group>"; };
 		550ED181144B38DD00E528AA /* ULINSIntegerMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULINSIntegerMath.h; path = ../UliKit/ULINSIntegerMath.h; sourceTree = "<group>"; };
 		551D938717058397003766DA /* CDownloadCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDownloadCommandNode.cpp; path = ../../CDownloadCommandNode.cpp; sourceTree = "<group>"; };
 		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
 		551D938F1705A69A003766DA /* LEODownloadInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEODownloadInstructions.h; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.h; sourceTree = "<group>"; };
-		551D93911705A7AD003766DA /* WILDDownloadInstructions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDDownloadInstructions.m; path = Instructions/WILDDownloadInstructions.m; sourceTree = SOURCE_ROOT; };
+		551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDDownloadInstructions.mm; path = Instructions/WILDDownloadInstructions.mm; sourceTree = SOURCE_ROOT; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
-		552028D6140165D4000EEA4F /* WILDPartPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPartPresenter.h; path = Presentation/WILDPartPresenter.h; sourceTree = "<group>"; };
-		552028D7140165D4000EEA4F /* WILDPartPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPartPresenter.m; path = Presentation/WILDPartPresenter.m; sourceTree = "<group>"; };
-		552028DA14016880000EEA4F /* WILDPushbuttonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPushbuttonPresenter.h; path = Presentation/WILDPushbuttonPresenter.h; sourceTree = "<group>"; };
-		552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPushbuttonPresenter.m; path = Presentation/WILDPushbuttonPresenter.m; sourceTree = "<group>"; };
-		552365361344B0B9000145A0 /* WILDRecentCardsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDRecentCardsList.h; path = Model/WILDRecentCardsList.h; sourceTree = "<group>"; };
-		552365371344B0B9000145A0 /* WILDRecentCardsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDRecentCardsList.m; path = Model/WILDRecentCardsList.m; sourceTree = "<group>"; };
 		552365391344C24C000145A0 /* NSImage+NiceScaling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+NiceScaling.h"; path = "../UliKit/NSImage+NiceScaling.h"; sourceTree = "<group>"; };
 		5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImage+NiceScaling.m"; path = "../UliKit/NSImage+NiceScaling.m"; sourceTree = "<group>"; };
-		5523653C1344C9ED000145A0 /* WILDRecentCardPickerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDRecentCardPickerWindowController.h; sourceTree = "<group>"; };
-		5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDRecentCardPickerWindowController.m; sourceTree = "<group>"; };
-		5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WILDRecentCardPickerWindowController.xib; sourceTree = "<group>"; };
 		5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDDrawAddColorBezel.h; sourceTree = "<group>"; };
 		5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDDrawAddColorBezel.m; sourceTree = "<group>"; };
 		552558FC114BDE7C00279B03 /* WILDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDAppDelegate.h; sourceTree = "<group>"; };
-		552558FD114BDE7C00279B03 /* WILDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDAppDelegate.m; sourceTree = "<group>"; };
+		552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WILDAppDelegate.mm; sourceTree = "<group>"; };
 		55255A79114C174300279B03 /* UKSyntaxColoredTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKSyntaxColoredTextViewController.h; path = ../UKSyntaxColoredTextDocument/UKSyntaxColoredTextViewController.h; sourceTree = SOURCE_ROOT; };
 		55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKSyntaxColoredTextViewController.m; path = ../UKSyntaxColoredTextDocument/UKSyntaxColoredTextViewController.m; sourceTree = SOURCE_ROOT; };
 		55255A7D114C177400279B03 /* UKTextDocGoToBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKTextDocGoToBox.h; path = ../UKSyntaxColoredTextDocument/UKTextDocGoToBox.h; sourceTree = SOURCE_ROOT; };
@@ -615,15 +527,10 @@
 		55255A8A114C179C00279B03 /* NSScanner+SkipUpToCharset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSScanner+SkipUpToCharset.m"; path = "../UKSyntaxColoredTextDocument/NSScanner+SkipUpToCharset.m"; sourceTree = SOURCE_ROOT; };
 		55255A8B114C179C00279B03 /* NSArray+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Color.h"; path = "../UKSyntaxColoredTextDocument/NSArray+Color.h"; sourceTree = SOURCE_ROOT; };
 		55255A8C114C179C00279B03 /* NSArray+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Color.m"; path = "../UKSyntaxColoredTextDocument/NSArray+Color.m"; sourceTree = SOURCE_ROOT; };
-		55255ABA114C19AB00279B03 /* WILDScriptEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScriptEditorWindowController.h; sourceTree = "<group>"; };
-		55255ABB114C19AB00279B03 /* WILDScriptEditorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScriptEditorWindowController.m; sourceTree = "<group>"; };
-		55255AC0114C19CF00279B03 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDScriptEditorWindowController.xib; sourceTree = "<group>"; };
 		552997CD1370BAD300F870DF /* WILDInputPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDInputPanelController.h; path = Windows/WILDInputPanelController.h; sourceTree = "<group>"; };
 		552997CE1370BAD300F870DF /* WILDInputPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDInputPanelController.m; path = Windows/WILDInputPanelController.m; sourceTree = "<group>"; };
 		552997D01370C5D800F870DF /* NSStringDrawing+SizeWithRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSStringDrawing+SizeWithRect.h"; path = "../UliKit/NSStringDrawing+SizeWithRect.h"; sourceTree = "<group>"; };
 		552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSStringDrawing+SizeWithRect.m"; path = "../UliKit/NSStringDrawing+SizeWithRect.m"; sourceTree = "<group>"; };
-		552A4DB713928676007C4527 /* WILDMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMovieView.h; path = Presentation/WILDMovieView.h; sourceTree = "<group>"; };
-		552A4DB813928677007C4527 /* WILDMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMovieView.m; path = Presentation/WILDMovieView.m; sourceTree = "<group>"; };
 		552FF0FE113F23F3005742C8 /* PAT_1.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = PAT_1.pbm; path = Resources/PAT_1.pbm; sourceTree = "<group>"; };
 		552FF0FF113F23F3005742C8 /* PAT_2.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = PAT_2.pbm; path = Resources/PAT_2.pbm; sourceTree = "<group>"; };
 		552FF100113F23F3005742C8 /* PAT_3.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = PAT_3.pbm; path = Resources/PAT_3.pbm; sourceTree = "<group>"; };
@@ -666,13 +573,10 @@
 		552FF125113F23F3005742C8 /* PAT_40.pbm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PAT_40.pbm; path = Resources/PAT_40.pbm; sourceTree = "<group>"; };
 		552FF131113F23F3005742C8 /* resources.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = resources.xml; path = Resources/resources.xml; sourceTree = "<group>"; };
 		552FF244113F247A005742C8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
-		5532EE3213F1E2B6001A0B28 /* WILDContentsEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDContentsEditorWindowController.h; sourceTree = "<group>"; };
-		5532EE3313F1E2B6001A0B28 /* WILDContentsEditorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDContentsEditorWindowController.m; sourceTree = "<group>"; };
-		5532EE3613F1E66D001A0B28 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDContentsEditorWindowController.xib; sourceTree = "<group>"; };
 		5538245817272767007785D8 /* LEOObjCCallInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOObjCCallInstructions.c; path = ../../Leonie/generic/LEOObjCCallInstructions.c; sourceTree = "<group>"; };
 		5538245E17272775007785D8 /* LEOObjCCallInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOObjCCallInstructions.h; path = ../../Leonie/generic/LEOObjCCallInstructions.h; sourceTree = "<group>"; };
 		5538245F17272EC2007785D8 /* frameworkheaders.hhc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frameworkheaders.hhc; path = Resources/frameworkheaders.hhc; sourceTree = "<group>"; };
-		55382462172730B4007785D8 /* WILDObjCCallInstructions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjCCallInstructions.m; path = Instructions/WILDObjCCallInstructions.m; sourceTree = SOURCE_ROOT; };
+		55382462172730B4007785D8 /* WILDObjCCallInstructions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDObjCCallInstructions.mm; path = Instructions/WILDObjCCallInstructions.mm; sourceTree = SOURCE_ROOT; };
 		55382EE21171FFFA0006B381 /* UKHelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKHelperMacros.h; path = ../UliKit/UKHelperMacros.h; sourceTree = SOURCE_ROOT; };
 		55382EEA117201E40006B381 /* UKTypecastMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKTypecastMacros.h; path = ../UliKit/UKTypecastMacros.h; sourceTree = SOURCE_ROOT; };
 		553AF61C17491AEE00AF3BBA /* UKCoordinateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCoordinateUtils.h; path = ../UliKit/UKCoordinateUtils.h; sourceTree = "<group>"; };
@@ -749,38 +653,20 @@
 		553C46E913577334000219FA /* LEOContextGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOContextGroup.h; path = ../../../Forge/Leonie/common/LEOContextGroup.h; sourceTree = "<group>"; };
 		553C46EA13577334000219FA /* LEOContextGroup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOContextGroup.c; path = ../../../Forge/Leonie/common/LEOContextGroup.c; sourceTree = "<group>"; };
 		553C46EB13577334000219FA /* LEOHandlerID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOHandlerID.h; path = ../../../Forge/Leonie/common/LEOHandlerID.h; sourceTree = "<group>"; };
-		553C471513577989000219FA /* WILDMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMessageBox.h; path = Editor/WILDMessageBox.h; sourceTree = "<group>"; };
-		553C471613577989000219FA /* WILDMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMessageBox.m; path = Editor/WILDMessageBox.m; sourceTree = "<group>"; };
-		553C471913577A2E000219FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDMessageBox.xib; sourceTree = "<group>"; };
 		553F6807157D138B009E0517 /* WILDObjCConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjCConversion.h; path = Instructions/WILDObjCConversion.h; sourceTree = SOURCE_ROOT; };
 		553F6808157D138B009E0517 /* WILDObjCConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjCConversion.m; path = Instructions/WILDObjCConversion.m; sourceTree = SOURCE_ROOT; };
 		553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CSetChunkPropertyNode.cpp; path = ../../CSetChunkPropertyNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		553F680B157D3291009E0517 /* CSetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CSetChunkPropertyNode.h; path = ../../CSetChunkPropertyNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CGetChunkPropertyNode.cpp; path = ../../CGetChunkPropertyNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		553F680E157D3547009E0517 /* CGetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CGetChunkPropertyNode.h; path = ../../CGetChunkPropertyNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		5542C9451139D7A000555C64 /* WILDStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStack.h; sourceTree = "<group>"; };
-		5542C9461139D7A000555C64 /* WILDStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStack.m; sourceTree = "<group>"; };
 		5542C94B1139DD5C00555C64 /* WILDXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDXMLUtils.h; sourceTree = "<group>"; };
 		5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDXMLUtils.m; sourceTree = "<group>"; };
-		5542C9B51139F43C00555C64 /* WILDCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCard.h; sourceTree = "<group>"; };
-		5542C9B61139F43C00555C64 /* WILDCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCard.m; sourceTree = "<group>"; };
-		5542C9DC1139FD9F00555C64 /* WILDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDLayer.h; sourceTree = "<group>"; };
-		5542C9DD1139FD9F00555C64 /* WILDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDLayer.m; sourceTree = "<group>"; };
 		5542CABF113A2CB300555C64 /* UKPBMImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPBMImageRep.h; sourceTree = "<group>"; };
 		5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPBMImageRep.m; sourceTree = "<group>"; };
-		5542CD7B113ABB8B00555C64 /* WILDPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPart.h; sourceTree = "<group>"; };
-		5542CD7C113ABB8B00555C64 /* WILDPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPart.m; sourceTree = "<group>"; };
-		5542CE46113AE27500555C64 /* WILDPartContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPartContents.h; sourceTree = "<group>"; };
-		5542CE47113AE27500555C64 /* WILDPartContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPartContents.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
 		554DC3181863B6A000B514E3 /* CForgeExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgeExceptions.h; path = ../../CForgeExceptions.h; sourceTree = "<group>"; };
 		554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CForgeExceptions.cpp; path = ../../CForgeExceptions.cpp; sourceTree = "<group>"; };
-		554DE25A1736DB4500940933 /* WILDGroupPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGroupPresenter.h; path = Presentation/WILDGroupPresenter.h; sourceTree = "<group>"; };
-		554DE25B1736DB4500940933 /* WILDGroupPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGroupPresenter.m; path = Presentation/WILDGroupPresenter.m; sourceTree = "<group>"; };
-		554DE2621736F9F400940933 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDGroupInfoViewController.xib; sourceTree = "<group>"; };
-		554DE2641736FA1F00940933 /* WILDGroupInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGroupInfoViewController.h; path = Editor/WILDGroupInfoViewController.h; sourceTree = "<group>"; };
-		554DE2651736FA1F00940933 /* WILDGroupInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGroupInfoViewController.m; path = Editor/WILDGroupInfoViewController.m; sourceTree = "<group>"; };
 		555BA0DB138DC9CB00B3B1D8 /* English */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = English; path = English.lproj/PlaceholderMovie.mov; sourceTree = "<group>"; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
 		555E5764115BFC5700AAF9CA /* NSFileHandle+UKReadLinewise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileHandle+UKReadLinewise.h"; path = "../UliKit/NSFileHandle+UKReadLinewise.h"; sourceTree = SOURCE_ROOT; };
@@ -798,14 +684,10 @@
 		555F103513881DB700E26037 /* UKPaintSelectTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintSelectTool.tiff; path = ../UKPaintView/UKPaintSelectTool.tiff; sourceTree = "<group>"; };
 		555F103613881DB700E26037 /* UKPaintShapeTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintShapeTool.tiff; path = ../UKPaintView/UKPaintShapeTool.tiff; sourceTree = "<group>"; };
 		555F103713881DB700E26037 /* UKPaintTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintTextTool.tiff; path = ../UKPaintView/UKPaintTextTool.tiff; sourceTree = "<group>"; };
-		555FDFCB1412AA4D00A035E7 /* WILDTextFieldPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTextFieldPresenter.h; path = Presentation/WILDTextFieldPresenter.h; sourceTree = "<group>"; };
-		555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTextFieldPresenter.m; path = Presentation/WILDTextFieldPresenter.m; sourceTree = "<group>"; };
 		555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UTF8UTF32Utilities.c; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.c; sourceTree = "<group>"; };
 		555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF8UTF32Utilities.h; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.h; sourceTree = "<group>"; };
 		55615C4E172D86C600EFEAEF /* ULIBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIBase64.h; path = ../UliKit/ULIBase64.h; sourceTree = "<group>"; };
 		55615C53172D86CE00EFEAEF /* ULIBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIBase64.m; path = ../UliKit/ULIBase64.m; sourceTree = "<group>"; };
-		55615C55172E10E700EFEAEF /* WILDMoviePlayerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMoviePlayerPresenter.h; path = Presentation/WILDMoviePlayerPresenter.h; sourceTree = "<group>"; };
-		55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMoviePlayerPresenter.m; path = Presentation/WILDMoviePlayerPresenter.m; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* WILDGlobalProperties.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDGlobalProperties.mm; path = Instructions/WILDGlobalProperties.mm; sourceTree = SOURCE_ROOT; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
 		5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostCommands.cpp; path = Instructions/WILDHostCommands.cpp; sourceTree = SOURCE_ROOT; };
@@ -814,10 +696,6 @@
 		55686662135A161100C364D6 /* WILDHostFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostFunctions.cpp; path = Instructions/WILDHostFunctions.cpp; sourceTree = SOURCE_ROOT; };
 		55686664135A383300C364D6 /* WILDObjectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjectValue.m; path = Instructions/WILDObjectValue.m; sourceTree = SOURCE_ROOT; };
 		55686665135A383700C364D6 /* WILDObjectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectValue.h; path = Instructions/WILDObjectValue.h; sourceTree = SOURCE_ROOT; };
-		55686667135ADC2B00C364D6 /* WILDSearchPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDSearchPaths.h; sourceTree = "<group>"; };
-		55686668135ADC3000C364D6 /* WILDSearchPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDSearchPaths.m; sourceTree = "<group>"; };
-		556C49671731EF8800C40D97 /* WILDTimerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTimerPresenter.h; path = Presentation/WILDTimerPresenter.h; sourceTree = "<group>"; };
-		556C49681731EF8800C40D97 /* WILDTimerPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTimerPresenter.m; path = Presentation/WILDTimerPresenter.m; sourceTree = "<group>"; };
 		556C496E1731F48000C40D97 /* TimerIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = TimerIcon.pdf; path = Resources/TimerIcon.pdf; sourceTree = "<group>"; };
 		556DB7A318709A15002F7CB2 /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml2.cpp; path = ../tinyxml2/tinyxml2.cpp; sourceTree = "<group>"; };
 		556DB7A418709A15002F7CB2 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyxml2.h; path = ../tinyxml2/tinyxml2.h; sourceTree = "<group>"; };
@@ -840,37 +718,10 @@
 		556DB7C31870ADE9002F7CB2 /* CURLResponse.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CURLResponse.mm; path = Platforms/Mac/CURLResponse.mm; sourceTree = "<group>"; };
 		556DB7C41870ADE9002F7CB2 /* CURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CURLResponse.h; path = Platforms/Mac/CURLResponse.h; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
-		557BC7D7171DD5D8008A3BB9 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDUserPropertyEditorWindowController.xib; sourceTree = "<group>"; };
-		557BC7DD171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDUserPropertyEditorWindowController.h; sourceTree = "<group>"; };
-		557BC7DE171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDUserPropertyEditorWindowController.m; sourceTree = "<group>"; };
 		55818A77133199AC00480D30 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home.xstk; sourceTree = "<group>"; };
-		55818A8D1332108100480D30 /* WILDBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackground.h; sourceTree = "<group>"; };
-		55818A8E1332108100480D30 /* WILDBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackground.m; sourceTree = "<group>"; };
-		5585033E13E8866300FD244C /* WILDFieldInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDFieldInfoViewController.h; path = Editor/WILDFieldInfoViewController.h; sourceTree = "<group>"; };
-		5585033F13E8866300FD244C /* WILDFieldInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDFieldInfoViewController.m; path = Editor/WILDFieldInfoViewController.m; sourceTree = "<group>"; };
-		5585034113E8867200FD244C /* WILDMoviePlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMoviePlayerInfoViewController.h; path = Editor/WILDMoviePlayerInfoViewController.h; sourceTree = "<group>"; };
-		5585034213E8867200FD244C /* WILDMoviePlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMoviePlayerInfoViewController.m; path = Editor/WILDMoviePlayerInfoViewController.m; sourceTree = "<group>"; };
-		5585034513E886AC00FD244C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDFieldInfoViewController.xib; sourceTree = "<group>"; };
-		5585034713E886AC00FD244C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDMoviePlayerInfoViewController.xib; sourceTree = "<group>"; };
 		558970E5118C853600F92788 /* UKIsDragStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKIsDragStart.h; path = ../UliKit/UKIsDragStart.h; sourceTree = SOURCE_ROOT; };
 		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		5589DD771378B16400B0F6CF /* TransitionMappings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TransitionMappings.plist; sourceTree = "<group>"; };
-		558DC881115507EA002C9195 /* WILDCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardViewController.h; path = Presentation/WILDCardViewController.h; sourceTree = "<group>"; };
-		558DC882115507EA002C9195 /* WILDCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardViewController.m; path = Presentation/WILDCardViewController.m; sourceTree = "<group>"; };
-		558DCB5311553EAC002C9195 /* WILDButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDButtonCell.h; sourceTree = "<group>"; };
-		558DCB5411553EAC002C9195 /* WILDButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDButtonCell.m; sourceTree = "<group>"; };
-		558DCD1F115571FE002C9195 /* WILDNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDNotifications.h; path = Presentation/WILDNotifications.h; sourceTree = "<group>"; };
-		558DCD20115571FE002C9195 /* WILDNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDNotifications.m; path = Presentation/WILDNotifications.m; sourceTree = "<group>"; };
-		558DCD7C11557B6D002C9195 /* WILDPartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPartView.h; sourceTree = "<group>"; };
-		558DCD7D11557B6D002C9195 /* WILDPartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPartView.m; sourceTree = "<group>"; };
-		558DCFBD1155B9B1002C9195 /* WILDPictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDPictureView.h; sourceTree = "<group>"; };
-		558DCFBE1155B9B1002C9195 /* WILDPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDPictureView.m; sourceTree = "<group>"; };
-		558DCFE31156209A002C9195 /* WILDCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardView.h; sourceTree = "<group>"; };
-		558DCFE41156209A002C9195 /* WILDCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardView.m; sourceTree = "<group>"; };
-		558F89E5138B06F900E26275 /* WILDGuidelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGuidelineView.h; path = Editor/WILDGuidelineView.h; sourceTree = "<group>"; };
-		558F89E6138B06F900E26275 /* WILDGuidelineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGuidelineView.m; path = Editor/WILDGuidelineView.m; sourceTree = "<group>"; };
-		55943B12171F5D050051166C /* WILDWebBrowserPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDWebBrowserPresenter.h; path = Presentation/WILDWebBrowserPresenter.h; sourceTree = "<group>"; };
-		55943B13171F5D050051166C /* WILDWebBrowserPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDWebBrowserPresenter.m; path = Presentation/WILDWebBrowserPresenter.m; sourceTree = "<group>"; };
 		55943B1B171F675E0051166C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = ../../../../../System/Library/Frameworks/WebKit.framework; sourceTree = "<group>"; };
 		559700EA137BB38A000264B8 /* WILDIrisOpenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIrisOpenFilter.h; path = "Custom Effects/WILDIrisOpenFilter.h"; sourceTree = "<group>"; };
 		559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisOpenFilter.m; path = "Custom Effects/WILDIrisOpenFilter.m"; sourceTree = "<group>"; };
@@ -884,11 +735,6 @@
 		559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDBarnDoorOpenFilter.m; path = "Custom Effects/WILDBarnDoorOpenFilter.m"; sourceTree = "<group>"; };
 		559700FA137C9B6B000264B8 /* WILDIrisCloseFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIrisCloseFilter.h; path = "Custom Effects/WILDIrisCloseFilter.h"; sourceTree = "<group>"; };
 		559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisCloseFilter.m; path = "Custom Effects/WILDIrisCloseFilter.m"; sourceTree = "<group>"; };
-		55993B6713476DE3001624A2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDStackInfoViewController.xib; sourceTree = "<group>"; };
-		55993B6913476E1D001624A2 /* WILDStackInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDStackInfoViewController.h; sourceTree = "<group>"; };
-		55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDStackInfoViewController.m; sourceTree = "<group>"; };
-		55A3FB2A16E749D400735729 /* WILDShapeButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDShapeButtonPresenter.h; path = Presentation/WILDShapeButtonPresenter.h; sourceTree = "<group>"; };
-		55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDShapeButtonPresenter.m; path = Presentation/WILDShapeButtonPresenter.m; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
 		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
@@ -896,9 +742,6 @@
 		55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMultiplyCommandNode.cpp; path = ../../CMultiplyCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A5C170A5CBA00750972 /* CMultiplyCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMultiplyCommandNode.h; path = ../../CMultiplyCommandNode.h; sourceTree = "<group>"; };
 		55A5A6411142D4DD00F5EF0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		55A5D9C2173202FB005B2309 /* WILDTimerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTimerInfoViewController.h; path = Editor/WILDTimerInfoViewController.h; sourceTree = "<group>"; };
-		55A5D9C3173202FB005B2309 /* WILDTimerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTimerInfoViewController.m; path = Editor/WILDTimerInfoViewController.m; sourceTree = "<group>"; };
-		55A5D9CA173203C3005B2309 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDTimerInfoViewController.xib; sourceTree = "<group>"; };
 		55A7BA4514668D5900AB0F34 /* ULIMelodyQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIMelodyQueue.h; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.h; sourceTree = "<group>"; };
 		55A7BA4614668D5900AB0F34 /* ULIMelodyQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIMelodyQueue.m; path = ../ULIMelodyQueue/ULIMelodyQueue/ULIMelodyQueue.m; sourceTree = "<group>"; };
 		55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = harpsichord.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/harpsichord.aiff; sourceTree = "<group>"; };
@@ -915,7 +758,6 @@
 		55AC96201870FFC200488B51 /* CPartContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPartContents.h; sourceTree = "<group>"; };
 		55ACBB9F132291AD0088609D /* NSWindow+ULIZoomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+ULIZoomEffect.h"; path = "../UliKit/NSWindow+ULIZoomEffect.h"; sourceTree = "<group>"; };
 		55ACBBA0132291AD0088609D /* NSWindow+ULIZoomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+ULIZoomEffect.m"; path = "../UliKit/NSWindow+ULIZoomEffect.m"; sourceTree = "<group>"; };
-		55ACBBBE1322EA890088609D /* WILDVisibleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDVisibleObject.h; path = Presentation/WILDVisibleObject.h; sourceTree = "<group>"; };
 		55ADB13316F4B5E20056CB4D /* COperatorNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COperatorNodeTransformation.cpp; path = ../../COperatorNodeTransformation.cpp; sourceTree = "<group>"; };
 		55ADB13416F4B5E20056CB4D /* COperatorNodeTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COperatorNodeTransformation.h; path = ../../COperatorNodeTransformation.h; sourceTree = "<group>"; };
 		55ADB13A16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CConcatOperatorNodeTransformation.cpp; path = ../../CConcatOperatorNodeTransformation.cpp; sourceTree = "<group>"; };
@@ -926,8 +768,6 @@
 		55ADC5071744525F0084AAA9 /* CardIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CardIcon.icns; path = Resources/CardIcon.icns; sourceTree = "<group>"; };
 		55ADC5081744525F0084AAA9 /* StackIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = StackIcon.icns; path = Resources/StackIcon.icns; sourceTree = "<group>"; };
 		55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = BackgroundEditIcon.icns; path = Resources/BackgroundEditIcon.icns; sourceTree = "<group>"; };
-		55B296BD146DE5D6009E60CB /* WILDCheckboxRadioPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCheckboxRadioPresenter.h; path = Presentation/WILDCheckboxRadioPresenter.h; sourceTree = "<group>"; };
-		55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCheckboxRadioPresenter.m; path = Presentation/WILDCheckboxRadioPresenter.m; sourceTree = "<group>"; };
 		55B29C9517276C4700B38E75 /* UKCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCrashReporter.h; path = ../UliKit/UKCrashReporter.h; sourceTree = "<group>"; };
 		55B29C9617276C4700B38E75 /* UKCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKCrashReporter.m; path = ../UliKit/UKCrashReporter.m; sourceTree = "<group>"; };
 		55B29C9D17276D4100B38E75 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = ../UliKit/English.lproj/UKCrashReporter.strings; sourceTree = "<group>"; };
@@ -937,13 +777,7 @@
 		55B29CA417276E8E00B38E75 /* UKSystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKSystemInfo.h; path = ../UliKit/UKSystemInfo.h; sourceTree = "<group>"; };
 		55B29CA517276E8E00B38E75 /* UKSystemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKSystemInfo.m; path = ../UliKit/UKSystemInfo.m; sourceTree = "<group>"; };
 		55B29CA81727731800B38E75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = ../../../../../System/Library/Frameworks/AddressBook.framework; sourceTree = "<group>"; };
-		55B79A8613D0319900BC0A19 /* ULIHighlightingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIHighlightingButton.h; path = ../UliKit/ULIHighlightingButton.h; sourceTree = "<group>"; };
-		55B79A8713D0319A00BC0A19 /* ULIHighlightingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIHighlightingButton.m; path = ../UliKit/ULIHighlightingButton.m; sourceTree = "<group>"; };
-		55B9220811674E880073EC6C /* WILDTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTools.h; path = Presentation/WILDTools.h; sourceTree = "<group>"; };
-		55B9220911674E880073EC6C /* WILDTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTools.m; path = Presentation/WILDTools.m; sourceTree = "<group>"; };
 		55B9225C11675D270073EC6C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
-		55B924481169DB150073EC6C /* WILDIconListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIconListDataSource.h; path = Editor/WILDIconListDataSource.h; sourceTree = "<group>"; };
-		55B924491169DB150073EC6C /* WILDIconListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIconListDataSource.m; path = Editor/WILDIconListDataSource.m; sourceTree = "<group>"; };
 		55BC02E1116B2ADE00BB094E /* NoIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoIcon.png; path = Resources/NoIcon.png; sourceTree = "<group>"; };
 		55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDShrinkToTopFilter.cikernel; path = "Custom Effects/WILDShrinkToTopFilter.cikernel"; sourceTree = "<group>"; };
 		55BFEE16137CB1F7008FC8BB /* WILDShrinkToTopFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDShrinkToTopFilter.h; path = "Custom Effects/WILDShrinkToTopFilter.h"; sourceTree = "<group>"; };
@@ -954,21 +788,14 @@
 		55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDStretchFromBottomFilter.cikernel; path = "Custom Effects/WILDStretchFromBottomFilter.cikernel"; sourceTree = "<group>"; };
 		55BFEE20137E7C4A008FC8BB /* WILDStretchFromBottomFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStretchFromBottomFilter.h; path = "Custom Effects/WILDStretchFromBottomFilter.h"; sourceTree = "<group>"; };
 		55BFEE21137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDStretchFromBottomFilter.m; path = "Custom Effects/WILDStretchFromBottomFilter.m"; sourceTree = "<group>"; };
-		55C2B5C8115E2FD8008B094D /* WILDClickablePopUpButtonLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDClickablePopUpButtonLabel.h; sourceTree = "<group>"; };
-		55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDClickablePopUpButtonLabel.m; sourceTree = "<group>"; };
-		55C2B645115E5780008B094D /* WILDSearchContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDSearchContext.h; path = Model/WILDSearchContext.h; sourceTree = "<group>"; };
-		55C2B646115E5780008B094D /* WILDSearchContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDSearchContext.m; path = Model/WILDSearchContext.m; sourceTree = "<group>"; };
+		55C2B645115E5780008B094D /* CSearchContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSearchContext.h; path = Model/CSearchContext.h; sourceTree = "<group>"; };
+		55C2B646115E5780008B094D /* CSearchContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSearchContext.cpp; path = Model/CSearchContext.cpp; sourceTree = "<group>"; };
 		55C2B69B115EA2CD008B094D /* NSView+SizeWindowForViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSView+SizeWindowForViewSize.h"; path = "../UliKit/NSView+SizeWindowForViewSize.h"; sourceTree = SOURCE_ROOT; };
 		55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSView+SizeWindowForViewSize.m"; path = "../UliKit/NSView+SizeWindowForViewSize.m"; sourceTree = SOURCE_ROOT; };
 		55C68C9D116413E300D8B44C /* svn_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svn_version.h; sourceTree = "<group>"; };
-		55C88AFF1332CDA300ACB615 /* WILDCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDCardInfoViewController.h; sourceTree = "<group>"; };
-		55C88B001332CDA300ACB615 /* WILDCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDCardInfoViewController.m; sourceTree = "<group>"; };
-		55C88B031332D05B00ACB615 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDCardInfoViewController.xib; sourceTree = "<group>"; };
 		55C8D04D13EF0DD700B502C5 /* UKWindowBodyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKWindowBodyView.h; path = ../UliKit/UKWindowBodyView.h; sourceTree = "<group>"; };
 		55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKWindowBodyView.m; path = ../UliKit/UKWindowBodyView.m; sourceTree = "<group>"; };
 		55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = ../Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
-		55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardWindowController.h; path = Document/WILDCardWindowController.h; sourceTree = "<group>"; };
-		55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardWindowController.m; path = Document/WILDCardWindowController.m; sourceTree = "<group>"; };
 		55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTimerPart.cpp; path = "Portable Document/CTimerPart.cpp"; sourceTree = "<group>"; };
 		55CD60AE1874FE7D002450E2 /* CTimerPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimerPart.h; path = "Portable Document/CTimerPart.h"; sourceTree = "<group>"; };
 		55CD60B4187510EF002450E2 /* CButtonPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CButtonPart.cpp; path = "Portable Document/CButtonPart.cpp"; sourceTree = "<group>"; };
@@ -1006,19 +833,19 @@
 		55CD611A187A154A002450E2 /* CSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSound.h; path = Platforms/Mac/CSound.h; sourceTree = "<group>"; };
 		55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRecentCardsList.cpp; path = "Portable Document/CRecentCardsList.cpp"; sourceTree = "<group>"; };
 		55CD611D187A60CD002450E2 /* CRecentCardsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRecentCardsList.h; path = "Portable Document/CRecentCardsList.h"; sourceTree = "<group>"; };
+		55CD611F187B14E6002450E2 /* CStackMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CStackMac.mm; path = Platforms/Mac/CStackMac.mm; sourceTree = "<group>"; };
+		55CD6120187B14E6002450E2 /* CStackMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CStackMac.h; path = Platforms/Mac/CStackMac.h; sourceTree = "<group>"; };
+		55CD6122187B188E002450E2 /* CDocumentMac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDocumentMac.cpp; path = Platforms/Mac/CDocumentMac.cpp; sourceTree = "<group>"; };
+		55CD6123187B188E002450E2 /* CDocumentMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDocumentMac.h; path = Platforms/Mac/CDocumentMac.h; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
-		55D6B257115C16E700D17619 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDTextView.h; sourceTree = "<group>"; };
-		55D6B258115C16E700D17619 /* WILDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDTextView.m; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
 		55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+centerHorizontallyAndVertically.m"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.m"; sourceTree = "<group>"; };
 		55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNodeTransformation.cpp; path = ../../CNodeTransformation.cpp; sourceTree = "<group>"; };
 		55D7AA4815715D2500F33E78 /* CNodeTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CNodeTransformation.h; path = ../../CNodeTransformation.h; sourceTree = "<group>"; };
 		55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CChunkPropertyNodeTransformation.cpp; path = ../../CChunkPropertyNodeTransformation.cpp; sourceTree = "<group>"; };
 		55D7AA4C1573816B00F33E78 /* CChunkPropertyNodeTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CChunkPropertyNodeTransformation.h; path = ../../CChunkPropertyNodeTransformation.h; sourceTree = "<group>"; };
-		55D97B261441B5110060F774 /* WILDPopUpButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPopUpButtonPresenter.h; path = Presentation/WILDPopUpButtonPresenter.h; sourceTree = "<group>"; };
-		55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPopUpButtonPresenter.m; path = Presentation/WILDPopUpButtonPresenter.m; sourceTree = "<group>"; };
 		55E23BF5133FAB9E00E6B444 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E397E61322481500C3739D /* WILDObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectID.h; path = Model/WILDObjectID.h; sourceTree = "<group>"; };
 		55E397E71322520700C3739D /* NSFileManager+NameForTempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+NameForTempFile.h"; path = "../UliKit/NSFileManager+NameForTempFile.h"; sourceTree = "<group>"; };
@@ -1026,10 +853,6 @@
 		55E3A69D11503456008411BB /* CURS_128.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = CURS_128.pdf; path = Resources/CURS_128.pdf; sourceTree = "<group>"; };
 		55E3A6F911519B45008411BB /* HCSV.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = HCSV.icns; sourceTree = "<group>"; };
 		55E3A6FA11519B45008411BB /* Stack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stack.icns; sourceTree = "<group>"; };
-		55E3B6AB1184417A000062C1 /* WILDMediaEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMediaEntry.h; path = Document/WILDMediaEntry.h; sourceTree = "<group>"; };
-		55E3B6AC1184417A000062C1 /* WILDMediaEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMediaEntry.m; path = Document/WILDMediaEntry.m; sourceTree = "<group>"; };
-		55E3B6C71184420E000062C1 /* WILDStyleEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStyleEntry.h; path = Document/WILDStyleEntry.h; sourceTree = "<group>"; };
-		55E3B6C81184420E000062C1 /* WILDStyleEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDStyleEntry.m; path = Document/WILDStyleEntry.m; sourceTree = "<group>"; };
 		55E3B6D911845E01000062C1 /* UKRandomInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKRandomInteger.h; path = ../UliKit/UKRandomInteger.h; sourceTree = SOURCE_ROOT; };
 		55E3B6DA11845E01000062C1 /* UKRandomInteger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKRandomInteger.m; path = ../UliKit/UKRandomInteger.m; sourceTree = SOURCE_ROOT; };
 		55E509E51156B06D001D0762 /* ULIMultiMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIMultiMap.h; path = ../UliKit/ULIMultiMap.h; sourceTree = "<group>"; };
@@ -1051,26 +874,8 @@
 		55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+RoundRect.m"; path = "../UliKit/NSBezierPath+RoundRect.m"; sourceTree = "<group>"; };
 		55E8535C1166341100745C86 /* NSString+FetchNextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FetchNextLine.h"; path = "../UliKit/NSString+FetchNextLine.h"; sourceTree = SOURCE_ROOT; };
 		55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FetchNextLine.m"; path = "../UliKit/NSString+FetchNextLine.m"; sourceTree = SOURCE_ROOT; };
-		55E85E55173180860086F876 /* WILDConcreteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDConcreteObject.h; path = Model/WILDConcreteObject.h; sourceTree = "<group>"; };
-		55E85E56173180860086F876 /* WILDConcreteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDConcreteObject.m; path = Model/WILDConcreteObject.m; sourceTree = "<group>"; };
-		55E9FD8813E56D390089B81F /* WILDPartInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPartInfoViewController.h; path = Editor/WILDPartInfoViewController.h; sourceTree = "<group>"; };
-		55E9FD8913E56D390089B81F /* WILDPartInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPartInfoViewController.m; path = Editor/WILDPartInfoViewController.m; sourceTree = "<group>"; };
-		55E9FD8D13E5FBCB0089B81F /* WILDButtonInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDButtonInfoViewController.h; path = Editor/WILDButtonInfoViewController.h; sourceTree = "<group>"; };
-		55E9FD8E13E5FBCC0089B81F /* WILDButtonInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDButtonInfoViewController.m; path = Editor/WILDButtonInfoViewController.m; sourceTree = "<group>"; };
-		55E9FD9113E6050F0089B81F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDPartInfoViewController.xib; sourceTree = "<group>"; };
-		55E9FD9413E605270089B81F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDButtonInfoViewController.xib; sourceTree = "<group>"; };
-		55E9FD9613E747B00089B81F /* WILDIconPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIconPickerViewController.h; path = Editor/WILDIconPickerViewController.h; sourceTree = "<group>"; };
-		55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIconPickerViewController.m; path = Editor/WILDIconPickerViewController.m; sourceTree = "<group>"; };
-		55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDIconPickerViewController.xib; path = English.lproj/WILDIconPickerViewController.xib; sourceTree = "<group>"; };
-		55EA637E1347532C0039FE0D /* WILDLayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDLayerInfoViewController.h; sourceTree = "<group>"; };
-		55EA637F1347532C0039FE0D /* WILDLayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDLayerInfoViewController.m; sourceTree = "<group>"; };
-		55EA6381134756C20039FE0D /* WILDBackgroundInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundInfoViewController.h; sourceTree = "<group>"; };
-		55EA6382134756CF0039FE0D /* WILDBackgroundInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundInfoViewController.m; sourceTree = "<group>"; };
-		55EA6385134758B40039FE0D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDBackgroundInfoViewController.xib; sourceTree = "<group>"; };
 		55EBC406114C273400BAA09D /* SyntaxDefinition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinition.plist; sourceTree = "<group>"; };
 		55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxColorDefaults.plist; path = ../UKSyntaxColoredTextDocument/SyntaxColorDefaults.plist; sourceTree = SOURCE_ROOT; };
-		55EBC429114C2CCE00BAA09D /* WILDScriptContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScriptContainer.h; sourceTree = "<group>"; };
-		55EBC42A114C2CCE00BAA09D /* WILDScriptContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDScriptContainer.m; sourceTree = "<group>"; };
 		55EBC521114C539300BAA09D /* HandlerPopupMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HandlerPopupMessage.png; sourceTree = "<group>"; };
 		55EBC522114C539300BAA09D /* HandlerPopupFunction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HandlerPopupFunction.png; sourceTree = "<group>"; };
 		55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundIconSmall.png; sourceTree = "<group>"; };
@@ -1171,27 +976,23 @@
 			children = (
 				5503472F1370A18800AE7681 /* StacksmithVersion.h */,
 				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
-				552558FD114BDE7C00279B03 /* WILDAppDelegate.m */,
+				552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */,
+				55CD6123187B188E002450E2 /* CDocumentMac.h */,
+				55CD6122187B188E002450E2 /* CDocumentMac.cpp */,
+				55CD6120187B14E6002450E2 /* CStackMac.h */,
+				55CD611F187B14E6002450E2 /* CStackMac.mm */,
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
 				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
-				2A37F4AEFDCFA73011CA2CEA /* WILDDocument.h */,
-				2A37F4ACFDCFA73011CA2CEA /* WILDDocument.mm */,
-				552365361344B0B9000145A0 /* WILDRecentCardsList.h */,
-				552365371344B0B9000145A0 /* WILDRecentCardsList.m */,
 				55CD611D187A60CD002450E2 /* CRecentCardsList.h */,
 				55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */,
-				55686667135ADC2B00C364D6 /* WILDSearchPaths.h */,
-				55686668135ADC3000C364D6 /* WILDSearchPaths.m */,
-				558DCD1F115571FE002C9195 /* WILDNotifications.h */,
-				558DCD20115571FE002C9195 /* WILDNotifications.m */,
 				552997CD1370BAD300F870DF /* WILDInputPanelController.h */,
 				552997CE1370BAD300F870DF /* WILDInputPanelController.m */,
+				55C2B645115E5780008B094D /* CSearchContext.h */,
+				55C2B646115E5780008B094D /* CSearchContext.cpp */,
+				55E397E61322481500C3739D /* WILDObjectID.h */,
 				556DB7AA18709A45002F7CB2 /* Portable Document */,
-				5542CE3B113ADFBC00555C64 /* Document */,
-				5542CE3A113ADFAC00555C64 /* Presentation */,
-				55255AB7114C196B00279B03 /* Editor */,
 				5542CE3C113ADFCE00555C64 /* Utilities */,
 				55E806681368B2E0006F1287 /* UKPaintView */,
 				55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */,
@@ -1268,33 +1069,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		552028D9140167B6000EEA4F /* Part Presenters */ = {
-			isa = PBXGroup;
-			children = (
-				552028D6140165D4000EEA4F /* WILDPartPresenter.h */,
-				552028D7140165D4000EEA4F /* WILDPartPresenter.m */,
-				552028DA14016880000EEA4F /* WILDPushbuttonPresenter.h */,
-				552028DB14016880000EEA4F /* WILDPushbuttonPresenter.m */,
-				55A3FB2A16E749D400735729 /* WILDShapeButtonPresenter.h */,
-				55A3FB2B16E749D400735729 /* WILDShapeButtonPresenter.m */,
-				55B296BD146DE5D6009E60CB /* WILDCheckboxRadioPresenter.h */,
-				55B296BE146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m */,
-				55D97B261441B5110060F774 /* WILDPopUpButtonPresenter.h */,
-				55D97B271441B5110060F774 /* WILDPopUpButtonPresenter.m */,
-				555FDFCB1412AA4D00A035E7 /* WILDTextFieldPresenter.h */,
-				555FDFCC1412AA4D00A035E7 /* WILDTextFieldPresenter.m */,
-				55943B12171F5D050051166C /* WILDWebBrowserPresenter.h */,
-				55943B13171F5D050051166C /* WILDWebBrowserPresenter.m */,
-				55615C55172E10E700EFEAEF /* WILDMoviePlayerPresenter.h */,
-				55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */,
-				556C49671731EF8800C40D97 /* WILDTimerPresenter.h */,
-				556C49681731EF8800C40D97 /* WILDTimerPresenter.m */,
-				554DE25A1736DB4500940933 /* WILDGroupPresenter.h */,
-				554DE25B1736DB4500940933 /* WILDGroupPresenter.m */,
-			);
-			name = "Part Presenters";
-			sourceTree = "<group>";
-		};
 		55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1312,62 +1086,6 @@
 				55255A8C114C179C00279B03 /* NSArray+Color.m */,
 			);
 			name = UKSyntaxColoredTextViewController;
-			sourceTree = "<group>";
-		};
-		55255AB7114C196B00279B03 /* Editor */ = {
-			isa = PBXGroup;
-			children = (
-				55255ABA114C19AB00279B03 /* WILDScriptEditorWindowController.h */,
-				55255ABB114C19AB00279B03 /* WILDScriptEditorWindowController.m */,
-				55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */,
-				5532EE3213F1E2B6001A0B28 /* WILDContentsEditorWindowController.h */,
-				5532EE3313F1E2B6001A0B28 /* WILDContentsEditorWindowController.m */,
-				5532EE3513F1E66D001A0B28 /* WILDContentsEditorWindowController.xib */,
-				557BC7DD171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.h */,
-				557BC7DE171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m */,
-				557BC7D6171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib */,
-				55E9FD8813E56D390089B81F /* WILDPartInfoViewController.h */,
-				55E9FD8913E56D390089B81F /* WILDPartInfoViewController.m */,
-				55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */,
-				55E9FD8D13E5FBCB0089B81F /* WILDButtonInfoViewController.h */,
-				55E9FD8E13E5FBCC0089B81F /* WILDButtonInfoViewController.m */,
-				55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */,
-				5585033E13E8866300FD244C /* WILDFieldInfoViewController.h */,
-				5585033F13E8866300FD244C /* WILDFieldInfoViewController.m */,
-				5585034413E886AC00FD244C /* WILDFieldInfoViewController.xib */,
-				5585034113E8867200FD244C /* WILDMoviePlayerInfoViewController.h */,
-				5585034213E8867200FD244C /* WILDMoviePlayerInfoViewController.m */,
-				5585034613E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib */,
-				55A5D9C2173202FB005B2309 /* WILDTimerInfoViewController.h */,
-				55A5D9C3173202FB005B2309 /* WILDTimerInfoViewController.m */,
-				55A5D9C9173203C3005B2309 /* WILDTimerInfoViewController.xib */,
-				554DE2641736FA1F00940933 /* WILDGroupInfoViewController.h */,
-				554DE2651736FA1F00940933 /* WILDGroupInfoViewController.m */,
-				554DE2611736F9F400940933 /* WILDGroupInfoViewController.xib */,
-				55E9FD9613E747B00089B81F /* WILDIconPickerViewController.h */,
-				55E9FD9713E747B00089B81F /* WILDIconPickerViewController.m */,
-				55E9FD9813E747B10089B81F /* WILDIconPickerViewController.xib */,
-				55B924481169DB150073EC6C /* WILDIconListDataSource.h */,
-				55B924491169DB150073EC6C /* WILDIconListDataSource.m */,
-				55EA637E1347532C0039FE0D /* WILDLayerInfoViewController.h */,
-				55EA637F1347532C0039FE0D /* WILDLayerInfoViewController.m */,
-				55C88AFF1332CDA300ACB615 /* WILDCardInfoViewController.h */,
-				55C88B001332CDA300ACB615 /* WILDCardInfoViewController.m */,
-				55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */,
-				55EA6381134756C20039FE0D /* WILDBackgroundInfoViewController.h */,
-				55EA6382134756CF0039FE0D /* WILDBackgroundInfoViewController.m */,
-				55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */,
-				55993B6913476E1D001624A2 /* WILDStackInfoViewController.h */,
-				55993B6A13476E1D001624A2 /* WILDStackInfoViewController.m */,
-				55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */,
-				5523653C1344C9ED000145A0 /* WILDRecentCardPickerWindowController.h */,
-				5523653D1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m */,
-				5523653F1344CA1C000145A0 /* WILDRecentCardPickerWindowController.xib */,
-				553C471513577989000219FA /* WILDMessageBox.h */,
-				553C471613577989000219FA /* WILDMessageBox.m */,
-				553C471813577A2E000219FA /* WILDMessageBox.xib */,
-			);
-			name = Editor;
 			sourceTree = "<group>";
 		};
 		553C469D13577334000219FA /* Interpreter */ = {
@@ -1389,7 +1107,7 @@
 				554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */,
 				553C46A913577334000219FA /* Parse Tree */,
 				553C46AA13577334000219FA /* Leonie */,
-				551D93911705A7AD003766DA /* WILDDownloadInstructions.m */,
+				551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */,
 				55AAC04417109571008441AF /* WILDGlobalProperties.h */,
 				556866561359C47100C364D6 /* WILDGlobalProperties.mm */,
 				55E805C51360ACD3006F1287 /* WILDPropertyInstructions.cpp */,
@@ -1397,7 +1115,7 @@
 				5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */,
 				55686661135A161000C364D6 /* WILDHostFunctions.h */,
 				55686662135A161100C364D6 /* WILDHostFunctions.cpp */,
-				55382462172730B4007785D8 /* WILDObjCCallInstructions.m */,
+				55382462172730B4007785D8 /* WILDObjCCallInstructions.mm */,
 				55686665135A383700C364D6 /* WILDObjectValue.h */,
 				55686664135A383300C364D6 /* WILDObjectValue.m */,
 				553F6807157D138B009E0517 /* WILDObjCConversion.h */,
@@ -1521,76 +1239,6 @@
 				553C46DA13577334000219FA /* CIfNode.cpp */,
 			);
 			name = "Code Blocks";
-			sourceTree = "<group>";
-		};
-		5542CE3A113ADFAC00555C64 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				55ACBBBE1322EA890088609D /* WILDVisibleObject.h */,
-				558DC881115507EA002C9195 /* WILDCardViewController.h */,
-				558DC882115507EA002C9195 /* WILDCardViewController.m */,
-				558DCFE31156209A002C9195 /* WILDCardView.h */,
-				558DCFE41156209A002C9195 /* WILDCardView.m */,
-				558DCD7C11557B6D002C9195 /* WILDPartView.h */,
-				558DCD7D11557B6D002C9195 /* WILDPartView.m */,
-				552028D9140167B6000EEA4F /* Part Presenters */,
-				552A4DB713928676007C4527 /* WILDMovieView.h */,
-				552A4DB813928677007C4527 /* WILDMovieView.m */,
-				550C09E41196B9F200351067 /* WILDButtonView.h */,
-				550C09E51196B9F200351067 /* WILDButtonView.m */,
-				558DCB5311553EAC002C9195 /* WILDButtonCell.h */,
-				558DCB5411553EAC002C9195 /* WILDButtonCell.m */,
-				55B79A8613D0319900BC0A19 /* ULIHighlightingButton.h */,
-				55B79A8713D0319A00BC0A19 /* ULIHighlightingButton.m */,
-				55B9220811674E880073EC6C /* WILDTools.h */,
-				55B9220911674E880073EC6C /* WILDTools.m */,
-				558DCFBD1155B9B1002C9195 /* WILDPictureView.h */,
-				558DCFBE1155B9B1002C9195 /* WILDPictureView.m */,
-				550C0A5C1196C52000351067 /* WILDScrollView.h */,
-				550C0A5D1196C52000351067 /* WILDScrollView.m */,
-				55D6B257115C16E700D17619 /* WILDTextView.h */,
-				55D6B258115C16E700D17619 /* WILDTextView.m */,
-				55C2B5C8115E2FD8008B094D /* WILDClickablePopUpButtonLabel.h */,
-				55C2B5C9115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m */,
-				550C09081195E61100351067 /* WILDPresentationConstants.h */,
-				550C09091195E61100351067 /* WILDPresentationConstants.m */,
-				558F89E5138B06F900E26275 /* WILDGuidelineView.h */,
-				558F89E6138B06F900E26275 /* WILDGuidelineView.m */,
-			);
-			name = Presentation;
-			sourceTree = "<group>";
-		};
-		5542CE3B113ADFBC00555C64 /* Document */ = {
-			isa = PBXGroup;
-			children = (
-				55CBB794117BA3A400A0CACF /* WILDCardWindowController.h */,
-				55CBB795117BA3A400A0CACF /* WILDCardWindowController.m */,
-				1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */,
-				55E3B6AB1184417A000062C1 /* WILDMediaEntry.h */,
-				55E3B6AC1184417A000062C1 /* WILDMediaEntry.m */,
-				55E3B6C71184420E000062C1 /* WILDStyleEntry.h */,
-				55E3B6C81184420E000062C1 /* WILDStyleEntry.m */,
-				55E85E55173180860086F876 /* WILDConcreteObject.h */,
-				55E85E56173180860086F876 /* WILDConcreteObject.m */,
-				5542C9451139D7A000555C64 /* WILDStack.h */,
-				5542C9461139D7A000555C64 /* WILDStack.m */,
-				5542C9DC1139FD9F00555C64 /* WILDLayer.h */,
-				5542C9DD1139FD9F00555C64 /* WILDLayer.m */,
-				55818A8D1332108100480D30 /* WILDBackground.h */,
-				55818A8E1332108100480D30 /* WILDBackground.m */,
-				5542C9B51139F43C00555C64 /* WILDCard.h */,
-				5542C9B61139F43C00555C64 /* WILDCard.m */,
-				5542CD7B113ABB8B00555C64 /* WILDPart.h */,
-				5542CD7C113ABB8B00555C64 /* WILDPart.m */,
-				5542CE46113AE27500555C64 /* WILDPartContents.h */,
-				5542CE47113AE27500555C64 /* WILDPartContents.m */,
-				55EBC429114C2CCE00BAA09D /* WILDScriptContainer.h */,
-				55EBC42A114C2CCE00BAA09D /* WILDScriptContainer.m */,
-				55C2B645115E5780008B094D /* WILDSearchContext.h */,
-				55C2B646115E5780008B094D /* WILDSearchContext.m */,
-				55E397E61322481500C3739D /* WILDObjectID.h */,
-			);
-			name = Document;
 			sourceTree = "<group>";
 		};
 		5542CE3C113ADFCE00555C64 /* Utilities */ = {
@@ -2082,7 +1730,6 @@
 				55CD60D818754007002450E2 /* stackimport in Resources */,
 				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
-				1DDD582C0DA1D0D100B32029 /* WILDCardWindowController.xib in Resources */,
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
 				557B182F113C5CD600F85327 /* OldStack.icns in Resources */,
 				559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */,
@@ -2133,7 +1780,6 @@
 				552FF221113F23F3005742C8 /* PAT_39.pbm in Resources */,
 				552FF222113F23F3005742C8 /* PAT_40.pbm in Resources */,
 				552FF22E113F23F3005742C8 /* resources.xml in Resources */,
-				55255AC1114C19CF00279B03 /* WILDScriptEditorWindowController.xib in Resources */,
 				55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */,
 				55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */,
 				55EBC523114C539300BAA09D /* HandlerPopupMessage.png in Resources */,
@@ -2149,11 +1795,6 @@
 				555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */,
 				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
 				55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */,
-				55C88B041332D05B00ACB615 /* WILDCardInfoViewController.xib in Resources */,
-				552365401344CA1D000145A0 /* WILDRecentCardPickerWindowController.xib in Resources */,
-				55EA6386134758B40039FE0D /* WILDBackgroundInfoViewController.xib in Resources */,
-				55993B6813476DE3001624A2 /* WILDStackInfoViewController.xib in Resources */,
-				553C471A13577A2E000219FA /* WILDMessageBox.xib in Resources */,
 				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
 				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
 				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
@@ -2208,25 +1849,16 @@
 				555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */,
 				555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */,
 				555BA0DC138DC9CB00B3B1D8 /* PlaceholderMovie.mov in Resources */,
-				55E9FD9213E6050F0089B81F /* WILDPartInfoViewController.xib in Resources */,
-				55E9FD9513E605270089B81F /* WILDButtonInfoViewController.xib in Resources */,
-				55E9FD9A13E747B20089B81F /* WILDIconPickerViewController.xib in Resources */,
-				5585034813E886AC00FD244C /* WILDFieldInfoViewController.xib in Resources */,
-				5585034913E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib in Resources */,
-				5532EE3713F1E66D001A0B28 /* WILDContentsEditorWindowController.xib in Resources */,
 				55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */,
 				55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */,
 				55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */,
 				55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */,
 				55A7BA4D14668D6E00AB0F34 /* flute.aiff in Resources */,
 				55FDD878171B29DE0045A2B9 /* CURS_0.pdf in Resources */,
-				557BC7D8171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib in Resources */,
 				5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */,
 				55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */,
 				55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */,
 				556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */,
-				55A5D9CB173203C3005B2309 /* WILDTimerInfoViewController.xib in Resources */,
-				554DE2631736F9F400940933 /* WILDGroupInfoViewController.xib in Resources */,
 				55ADC5091744525F0084AAA9 /* BackgroundIcon.icns in Resources */,
 				55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */,
 				55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */,
@@ -2259,22 +1891,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D15AC310486D014006FF6A4 /* WILDDocument.mm in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				55CD60F018779641002450E2 /* CParseErrorCommandNode.cpp in Sources */,
-				5542C9471139D7A000555C64 /* WILDStack.m in Sources */,
 				5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */,
-				5542C9B71139F43C00555C64 /* WILDCard.m in Sources */,
-				5542C9DE1139FD9F00555C64 /* WILDLayer.m in Sources */,
 				5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */,
-				5542CD7D113ABB8B00555C64 /* WILDPart.m in Sources */,
-				5542CE48113AE27500555C64 /* WILDPartContents.m in Sources */,
 				55CD61121878EBF9002450E2 /* CCancelPolling.cpp in Sources */,
 				55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */,
 				55CD61151879EDA3002450E2 /* CAlert.mm in Sources */,
 				5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */,
 				5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */,
-				552558FE114BDE7C00279B03 /* WILDAppDelegate.m in Sources */,
+				552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */,
 				55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */,
 				55255A7F114C177400279B03 /* UKTextDocGoToBox.m in Sources */,
 				55255A84114C178100279B03 /* UKSCTDColorWellPrefsController.m in Sources */,
@@ -2282,49 +1908,24 @@
 				55AC961B1870D50400488B51 /* CTinyXMLUtils.cpp in Sources */,
 				55255A8D114C179C00279B03 /* NSScanner+SkipUpToCharset.m in Sources */,
 				55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */,
-				55255ABC114C19AB00279B03 /* WILDScriptEditorWindowController.m in Sources */,
-				55EBC42B114C2CCE00BAA09D /* WILDScriptContainer.m in Sources */,
 				55CD60BD187510F0002450E2 /* CFieldPart.cpp in Sources */,
-				558DC883115507EA002C9195 /* WILDCardViewController.m in Sources */,
-				558DCB5511553EAC002C9195 /* WILDButtonCell.m in Sources */,
-				558DCD21115571FE002C9195 /* WILDNotifications.m in Sources */,
-				558DCD7E11557B6D002C9195 /* WILDPartView.m in Sources */,
-				558DCFBF1155B9B1002C9195 /* WILDPictureView.m in Sources */,
 				55CD60DB187587CB002450E2 /* CDocument.cpp in Sources */,
-				558DCFE51156209A002C9195 /* WILDCardView.m in Sources */,
 				55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */,
 				555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */,
 				555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */,
-				55D6B259115C16E700D17619 /* WILDTextView.m in Sources */,
-				55C2B5CA115E2FD8008B094D /* WILDClickablePopUpButtonLabel.m in Sources */,
 				55CD610F18788CEB002450E2 /* CScriptableObjectValue.cpp in Sources */,
 				556DB7C21870A971002F7CB2 /* CURLConnection.mm in Sources */,
-				55C2B647115E5780008B094D /* WILDSearchContext.m in Sources */,
+				55C2B647115E5780008B094D /* CSearchContext.cpp in Sources */,
 				55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */,
 				55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */,
-				55B9220A11674E880073EC6C /* WILDTools.m in Sources */,
-				55B9244A1169DB150073EC6C /* WILDIconListDataSource.m in Sources */,
 				551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */,
-				55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */,
 				55CD611B187A154A002450E2 /* CSound.mm in Sources */,
-				55E3B6AD1184417A000062C1 /* WILDMediaEntry.m in Sources */,
-				55E3B6C91184420E000062C1 /* WILDStyleEntry.m in Sources */,
 				55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */,
 				558970E7118C853600F92788 /* UKIsDragStart.m in Sources */,
-				550C090A1195E61100351067 /* WILDPresentationConstants.m in Sources */,
-				550C09E61196B9F200351067 /* WILDButtonView.m in Sources */,
-				550C0A5E1196C52000351067 /* WILDScrollView.m in Sources */,
 				55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */,
 				55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */,
 				55ACBBA1132291AD0088609D /* NSWindow+ULIZoomEffect.m in Sources */,
-				55818A8F1332108300480D30 /* WILDBackground.m in Sources */,
-				55C88B011332CDA300ACB615 /* WILDCardInfoViewController.m in Sources */,
-				552365381344B0BA000145A0 /* WILDRecentCardsList.m in Sources */,
 				5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */,
-				5523653E1344C9ED000145A0 /* WILDRecentCardPickerWindowController.m in Sources */,
-				55EA63801347532C0039FE0D /* WILDLayerInfoViewController.m in Sources */,
-				55EA6383134756D00039FE0D /* WILDBackgroundInfoViewController.m in Sources */,
-				55993B6B13476E1D001624A2 /* WILDStackInfoViewController.m in Sources */,
 				55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */,
 				556DB7BC1870A402002F7CB2 /* CCard.cpp in Sources */,
 				553C46EE13577334000219FA /* Forge.cpp in Sources */,
@@ -2363,6 +1964,7 @@
 				553C470913577334000219FA /* CIfNode.cpp in Sources */,
 				553C470A13577334000219FA /* LEOValue.c in Sources */,
 				553C470B13577334000219FA /* LEOInterpreter.c in Sources */,
+				55CD6124187B188E002450E2 /* CDocumentMac.cpp in Sources */,
 				553C470C13577334000219FA /* LEOInstructions.c in Sources */,
 				553C470D13577334000219FA /* LEOScript.c in Sources */,
 				553C470E13577334000219FA /* LEODebugger.c in Sources */,
@@ -2370,12 +1972,10 @@
 				553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */,
 				553C471013577334000219FA /* LEOChunks.c in Sources */,
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
-				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
 				556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */,
 				556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */,
 				55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */,
 				55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */,
-				55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */,
 				556DB7BF1870A6EB002F7CB2 /* CURLRequest.mm in Sources */,
 				55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */,
 				55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */,
@@ -2421,26 +2021,12 @@
 				55BFEE1D137DBB14008FC8BB /* WILDShrinkToBottomFilter.m in Sources */,
 				55BFEE22137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m in Sources */,
 				55CD610818786BAC002450E2 /* CRectanglePart.cpp in Sources */,
-				558F89E7138B06F900E26275 /* WILDGuidelineView.m in Sources */,
-				552A4DB913928677007C4527 /* WILDMovieView.m in Sources */,
-				55B79A8813D0319A00BC0A19 /* ULIHighlightingButton.m in Sources */,
 				554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */,
-				55E9FD8B13E56D3A0089B81F /* WILDPartInfoViewController.m in Sources */,
-				55E9FD8F13E5FBCC0089B81F /* WILDButtonInfoViewController.m in Sources */,
-				55E9FD9913E747B20089B81F /* WILDIconPickerViewController.m in Sources */,
-				5585034013E8866300FD244C /* WILDFieldInfoViewController.m in Sources */,
-				5585034313E8867200FD244C /* WILDMoviePlayerInfoViewController.m in Sources */,
 				55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */,
-				5532EE3413F1E2B6001A0B28 /* WILDContentsEditorWindowController.m in Sources */,
-				552028D8140165D5000EEA4F /* WILDPartPresenter.m in Sources */,
-				552028DC14016880000EEA4F /* WILDPushbuttonPresenter.m in Sources */,
-				555FDFCD1412AA4D00A035E7 /* WILDTextFieldPresenter.m in Sources */,
 				555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */,
 				556DB7A518709A15002F7CB2 /* tinyxml2.cpp in Sources */,
-				55D97B281441B5110060F774 /* WILDPopUpButtonPresenter.m in Sources */,
 				55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */,
 				55CD60C818752ECA002450E2 /* CTimer.mm in Sources */,
-				55B296BF146DE5D6009E60CB /* WILDCheckboxRadioPresenter.m in Sources */,
 				556DB7C51870ADE9002F7CB2 /* CURLResponse.mm in Sources */,
 				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
@@ -2448,35 +2034,27 @@
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
 				55CD60BF187510F0002450E2 /* CWebBrowserPart.cpp in Sources */,
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
-				55A3FB2C16E749D400735729 /* WILDShapeButtonPresenter.m in Sources */,
 				55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */,
 				55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */,
 				55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */,
 				55CD60BC187510F0002450E2 /* CButtonPart.cpp in Sources */,
 				551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */,
 				551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */,
-				551D93921705A7AF003766DA /* WILDDownloadInstructions.m in Sources */,
+				551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */,
 				55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */,
 				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
 				55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */,
 				55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */,
 				55AC96211870FFC200488B51 /* CPartContents.cpp in Sources */,
-				557BC7DF171DD5F2008A3BB9 /* WILDUserPropertyEditorWindowController.m in Sources */,
-				55943B14171F5D050051166C /* WILDWebBrowserPresenter.m in Sources */,
 				5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */,
-				55382463172730B4007785D8 /* WILDObjCCallInstructions.m in Sources */,
+				55382463172730B4007785D8 /* WILDObjCCallInstructions.mm in Sources */,
 				55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */,
+				55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */,
 				55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */,
 				55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */,
 				55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */,
-				55615C57172E10E800EFEAEF /* WILDMoviePlayerPresenter.m in Sources */,
-				55E85E57173180860086F876 /* WILDConcreteObject.m in Sources */,
-				556C49691731EF8800C40D97 /* WILDTimerPresenter.m in Sources */,
-				55A5D9C4173202FB005B2309 /* WILDTimerInfoViewController.m in Sources */,
 				556DB7AD18709ADB002F7CB2 /* CStack.cpp in Sources */,
-				554DE25C1736DB4500940933 /* WILDGroupPresenter.m in Sources */,
-				554DE2661736FA1F00940933 /* WILDGroupInfoViewController.m in Sources */,
 				553AF61E17491AEF00AF3BBA /* UKCoordinateUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2510,14 +2088,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		1DDD58280DA1D0D100B32029 /* WILDCardWindowController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1DDD58290DA1D0D100B32029 /* English */,
-			);
-			name = WILDCardWindowController.xib;
-			sourceTree = "<group>";
-		};
 		1DDD582A0DA1D0D100B32029 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2534,84 +2104,12 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		55255ABF114C19CF00279B03 /* WILDScriptEditorWindowController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55255AC0114C19CF00279B03 /* English */,
-			);
-			name = WILDScriptEditorWindowController.xib;
-			sourceTree = "<group>";
-		};
-		5532EE3513F1E66D001A0B28 /* WILDContentsEditorWindowController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5532EE3613F1E66D001A0B28 /* English */,
-			);
-			name = WILDContentsEditorWindowController.xib;
-			sourceTree = "<group>";
-		};
-		553C471813577A2E000219FA /* WILDMessageBox.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				553C471913577A2E000219FA /* English */,
-			);
-			name = WILDMessageBox.xib;
-			sourceTree = "<group>";
-		};
-		554DE2611736F9F400940933 /* WILDGroupInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				554DE2621736F9F400940933 /* English */,
-			);
-			name = WILDGroupInfoViewController.xib;
-			sourceTree = "<group>";
-		};
 		555BA0DA138DC9CB00B3B1D8 /* PlaceholderMovie.mov */ = {
 			isa = PBXVariantGroup;
 			children = (
 				555BA0DB138DC9CB00B3B1D8 /* English */,
 			);
 			name = PlaceholderMovie.mov;
-			sourceTree = "<group>";
-		};
-		557BC7D6171DD5D8008A3BB9 /* WILDUserPropertyEditorWindowController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557BC7D7171DD5D8008A3BB9 /* English */,
-			);
-			name = WILDUserPropertyEditorWindowController.xib;
-			sourceTree = "<group>";
-		};
-		5585034413E886AC00FD244C /* WILDFieldInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5585034513E886AC00FD244C /* English */,
-			);
-			name = WILDFieldInfoViewController.xib;
-			sourceTree = "<group>";
-		};
-		5585034613E886AC00FD244C /* WILDMoviePlayerInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5585034713E886AC00FD244C /* English */,
-			);
-			name = WILDMoviePlayerInfoViewController.xib;
-			sourceTree = "<group>";
-		};
-		55993B6613476DE3001624A2 /* WILDStackInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55993B6713476DE3001624A2 /* English */,
-			);
-			name = WILDStackInfoViewController.xib;
-			sourceTree = "<group>";
-		};
-		55A5D9C9173203C3005B2309 /* WILDTimerInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55A5D9CA173203C3005B2309 /* English */,
-			);
-			name = WILDTimerInfoViewController.xib;
 			sourceTree = "<group>";
 		};
 		55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */ = {
@@ -2638,14 +2136,6 @@
 			name = UKCrashReporter.xib;
 			sourceTree = "<group>";
 		};
-		55C88B021332D05B00ACB615 /* WILDCardInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55C88B031332D05B00ACB615 /* English */,
-			);
-			name = WILDCardInfoViewController.xib;
-			sourceTree = "<group>";
-		};
 		55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2660,30 +2150,6 @@
 				55D5865E140D9C9D0095129C /* English */,
 			);
 			name = NW_SE_ResizeCursor.tiff;
-			sourceTree = "<group>";
-		};
-		55E9FD9013E6050F0089B81F /* WILDPartInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55E9FD9113E6050F0089B81F /* English */,
-			);
-			name = WILDPartInfoViewController.xib;
-			sourceTree = "<group>";
-		};
-		55E9FD9313E605270089B81F /* WILDButtonInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55E9FD9413E605270089B81F /* English */,
-			);
-			name = WILDButtonInfoViewController.xib;
-			sourceTree = "<group>";
-		};
-		55EA6384134758B40039FE0D /* WILDBackgroundInfoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55EA6385134758B40039FE0D /* English */,
-			);
-			name = WILDBackgroundInfoViewController.xib;
 			sourceTree = "<group>";
 		};
 		55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */ = {

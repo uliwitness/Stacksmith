@@ -70,13 +70,14 @@ class CDocument
 public:
 	static void		SetStandardResourcesPath( const std::string& inStdResPath );
 
-	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1) {};
+	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mContextGroup(NULL) {};
 	virtual ~CDocument();
 	
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument );
 	
+	std::string			GetURL()					{ return mURL; };
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
 	CStack*				GetStackByName( const char* inName );
 	WILDObjectID		GetUniqueIDForStack();

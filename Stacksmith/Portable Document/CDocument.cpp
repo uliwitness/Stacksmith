@@ -59,6 +59,18 @@ void	CDocument::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root,
 		tinyxml2::XMLElement	*	hotspotElem = currMediaElem->FirstChildElement( "hotspot" );
 		int		hotspotLeft = CTinyXMLUtils::GetIntNamed( hotspotElem, "left", 0 );
 		int		hotspotTop = CTinyXMLUtils::GetIntNamed( hotspotElem, "top", 0 );
+		
+		if( isBuiltIn )
+		{
+			size_t	slashPos = sStandardResourcesPath.rfind('/');
+			std::string	builtInResPath = sStandardResourcesPath.substr(0,slashPos);
+			fileName = std::string("file://") + builtInResPath + "/" + fileName;
+		}
+		else
+		{
+			fileName = mURL + "/" + fileName;
+		}
+		
 		mMediaList.push_back( CMediaEntry( iconID, iconName, fileName, mediaType, hotspotLeft, hotspotTop, isBuiltIn ) );
 		
 		currMediaElem = currMediaElem->NextSiblingElement( "media" );

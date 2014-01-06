@@ -19,8 +19,6 @@
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
 			<true/>
-			<key>NSDocumentClass</key>
-			<string>WILDDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>

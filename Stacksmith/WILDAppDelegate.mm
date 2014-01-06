@@ -1,0 +1,207 @@
+//
+//  WILDAppDelegate.m
+//  Propaganda
+//
+//  Created by Uli Kusterer on 13.03.10.
+//  Copyright 2010 The Void Software. All rights reserved.
+//
+
+#import "WILDAppDelegate.h"
+#import "WILDBackgroundModeIndicator.h"
+#import "WILDAboutPanelController.h"
+#import "Forge.h"
+#import "WILDGlobalProperties.h"
+#import "WILDHostCommands.h"
+#import "WILDHostFunctions.h"
+#import "LEORemoteDebugger.h"
+#import "UKCrashReporter.h"
+#include "CDocumentMac.h"
+#include "CPartRegistration.h"
+#include "CMessageBox.h"
+#include "LEOObjCCallInstructions.h"
+#import <Sparkle/Sparkle.h>
+
+
+using namespace Carlson;
+
+
+static std::vector<CDocumentMac>		sOpenDocuments;
+
+
+void	WILDFirstNativeCall( void );
+
+void	WILDFirstNativeCall( void )
+{
+	LEOLoadNativeHeadersFromFile( [[NSBundle mainBundle] pathForResource: @"frameworkheaders" ofType: @"hhc"].fileSystemRepresentation );
+}
+
+
+@implementation WILDAppDelegate
+
+-(void)	initializeParser
+{
+	LEOInitInstructionArray();
+	
+	// Add various instruction functions to the base set of instructions the
+	//	interpreter knows. First add those that the compiler knows to parse,
+	//	but which have a platform/host-specific implementation:
+		// Object properties:
+	LEOAddInstructionsToInstructionArray( gPropertyInstructions, LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS, &kFirstPropertyInstruction );
+	
+		// Global properties:
+	LEOAddInstructionsToInstructionArray( gGlobalPropertyInstructions, LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS, &kFirstGlobalPropertyInstruction );
+	LEOAddGlobalPropertiesAndOffsetInstructions( gHostGlobalProperties, kFirstGlobalPropertyInstruction );
+
+		// Internet protocol stuff:
+	LEOAddInstructionsToInstructionArray( gDownloadInstructions, LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS, &kFirstDownloadInstruction );
+	LEOAddGlobalPropertiesAndOffsetInstructions( gDownloadGlobalProperties, kFirstDownloadInstruction );
+	
+	// Now add the instructions for the syntax that Stacksmith adds itself:
+		// Commands specific to this host application:
+	LEOAddInstructionsToInstructionArray( gStacksmithHostCommandInstructions, WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS, &kFirstStacksmithHostCommandInstruction );
+	LEOAddHostCommandsAndOffsetInstructions( gStacksmithHostCommands, kFirstStacksmithHostCommandInstruction );
+	
+		// Functions specific to this host application:
+	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
+	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
+	
+		// Native function calls:
+	LEOAddInstructionsToInstructionArray( gObjCCallInstructions, LEO_NUMBER_OF_OBJCCALL_INSTRUCTIONS, &kFirstObjCCallInstruction );
+	
+	LEOSetFirstNativeCallCallback( WILDFirstNativeCall );	// This calls us to lazily load the (several MB) of native headers when needed.
+	
+	#if REMOTE_DEBUGGER
+	LEOInitRemoteDebugger( "127.0.0.1" );
+	#endif
+	
+	CPartRegistrationRegisterAllPartTypes();
+}
+
+
+-(NSEvent*)	handleFlagsChangedEvent: (NSEvent*)inEvent
+{
+	if( !mPeeking && ([inEvent modifierFlags] & NSAlternateKeyMask)
+		&& ([inEvent modifierFlags] & NSCommandKeyMask) )
+	{
+		mPeeking = YES;
+		// +++
+	}
+	else if( mPeeking )
+	{
+		mPeeking = NO;
+		// +++
+	}
+
+	return inEvent;
+}
+
+
+-(void)	applicationWillFinishLaunching:(NSNotification *)notification
+{
+	[self initializeParser];
+	
+	mFlagsChangedEventMonitor = [[NSEvent addLocalMonitorForEventsMatchingMask: NSFlagsChangedMask handler: ^(NSEvent* inEvent){ return [self handleFlagsChangedEvent: inEvent]; }] retain];
+	
+	[[NSColorPanel sharedColorPanel] setShowsAlpha: YES];
+}
+
+
+-(void)	applicationDidFinishLaunching:(NSNotification *)notification
+{
+	UKCrashReporterCheckForCrash();
+}
+
+
+-(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
+{
+	static BOOL	sDidTryToOpenOverrideStack = NO;
+	
+	if( !sDidTryToOpenOverrideStack )
+	{
+		sDidTryToOpenOverrideStack = YES;
+		
+		NSString *	stackPath = nil;
+		NSArray	*	cmdLineParams = [[NSProcessInfo processInfo] arguments];
+		NSUInteger	x = 0;
+		for( NSString* theParam in cmdLineParams )
+		{
+			if( [theParam isEqualToString: @"--stack"] )
+			{
+				if( [cmdLineParams count] > (x +1) )
+				{
+					stackPath = [cmdLineParams objectAtIndex: x+1];
+					return [self application: NSApp openFile: stackPath];
+				}
+			}
+			x++;
+		}
+	}
+
+	return [self application: NSApp openFile: [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"Home.xstk"]];
+}
+
+
+-(BOOL)	application:(NSApplication *)sender openFile:(NSString *)filename
+{
+	Carlson::CDocumentMac::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
+	
+	std::string		fileURL( "file://" );
+	fileURL.append(filename.UTF8String);
+	fileURL.append("/toc.xml");
+	
+	sOpenDocuments.push_back( CDocumentMac() );
+	CDocumentMac	&	currDoc = sOpenDocuments.back();
+	
+	currDoc.LoadFromURL( fileURL, [self](Carlson::CDocument * inDocument)
+	{
+		Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
+		if( !theCppStack )
+		{
+			printf( "Can't find stack at %s\n", inDocument->GetURL().c_str() );
+			return;
+		}
+		theCppStack->Load( [inDocument,self](Carlson::CStack* inStack)
+		{
+			inStack->GetCard(0)->Load( [inDocument,inStack,self](Carlson::CLayer*inCard)
+			{
+				inStack->SetCurrentCard((Carlson::CCard*)inCard);
+				inCard->WakeUp();
+				inStack->GoThereInNewWindow( true );
+			} );
+		} );
+	});
+	
+	return YES;	// We show our own errors asynchronously.
+}
+
+
+-(BOOL)	applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender
+{
+	return NO;
+}
+
+
+-(IBAction)	orderFrontStandardAboutPanel: (id)sender
+{
+	[WILDAboutPanelController showAboutPanel];
+}
+
+
+-(IBAction)	goHelp: (id)sender;
+{
+	[[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://hammer-language.org"]];
+}
+
+
+-(IBAction)	orderFrontMessageBox: (id)sender
+{
+	// +++ TODO: Do something with CMessageBox here!
+}
+
+
+-(NSString*)	feedURLStringForUpdater: (SUUpdater*)inUpdater
+{
+	return @"http://stacksmith.org/nightlies/stacksmith_nightlies.rss";
+}
+
+@end

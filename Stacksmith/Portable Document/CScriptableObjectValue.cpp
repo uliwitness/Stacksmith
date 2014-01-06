@@ -57,9 +57,6 @@ bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContex
 LEOValuePtr	GetScriptableObjectValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 size_t	GetScriptableObjectKeyCount( LEOValuePtr self, LEOContext* inContext );
 
-void	CScriptContextUserDataCleanUp( void* inData );
-void	ScriptObjectPreInstructionProc( LEOContext* inContext );
-
 void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler );
 
 
@@ -615,13 +612,13 @@ CScriptableObject*		CScriptableObject::GetOwnerScriptableObjectFromContext( LEOC
 }
 
 
-void	CScriptContextUserDataCleanUp( void* inData )
+void	CScriptContextUserData::CleanUp( void* inData )
 {
 	delete (CScriptContextUserData*)inData;
 }
 
 
-void	ScriptObjectPreInstructionProc( LEOContext* inContext )
+void	CScriptableObject::PreInstructionProc( LEOContext* inContext )
 {
 	if( CCancelPolling::GetUserWantsToCancel() )
 		inContext->keepRunning = false;
@@ -652,9 +649,9 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	
 	CScriptableObject*	parent = GetParentObject();
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this );
-	LEOInitContext( &ctx, GetScriptContextGroupObject(), ud, CScriptContextUserDataCleanUp );
+	LEOInitContext( &ctx, GetScriptContextGroupObject(), ud, CScriptContextUserData::CleanUp );
 	#if REMOTE_DEBUGGER
-	ctx.preInstructionProc = ScriptObjectPreInstructionProc;
+	ctx.preInstructionProc = CScriptableObject::PreInstructionProc;
 	ctx.promptProc = LEORemoteDebuggerPrompt;
 	#endif
 	ctx.callNonexistentHandlerProc = ScriptableObjectCallNonexistentHandler;

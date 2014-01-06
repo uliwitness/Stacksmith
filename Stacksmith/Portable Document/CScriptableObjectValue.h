@@ -86,6 +86,7 @@ public:
 	static LEOScript*	GetParentScript( LEOScript* inScript, LEOContext* inContext );
 
 	static CScriptableObject*	GetOwnerScriptableObjectFromContext( LEOContext * inContext );
+	static void					PreInstructionProc( LEOContext* inContext );
 };
 
 
@@ -100,12 +101,13 @@ public:
 	void				SetTarget( CScriptableObject* target );
 	CScriptableObject*	GetTarget()						{ return mTarget; };
 	CDocument*			GetDocument();
+
+	static void			CleanUp( void* inData );
 	
 protected:
 	CStack				*	mCurrentStack;
 	CScriptableObject	*	mTarget;
 };
-
 
 }
 
