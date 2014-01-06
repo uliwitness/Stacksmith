@@ -75,6 +75,8 @@ public:
 	
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
 	
+	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument );
+	
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
 	CStack*				GetStackByName( const char* inName );
 	WILDObjectID		GetUniqueIDForStack();

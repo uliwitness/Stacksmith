@@ -166,7 +166,7 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 				WILDObjectID	stackID = strtoll( currStackElem->Attribute("id"), &endPtr, 10 );
 				const char*		theName = currStackElem->Attribute("name");
 				
-				CStack	*	theStack = new CStack( stackURL, stackID, (theName ? theName : ""), this );
+				CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, (theName ? theName : ""), this );
 				theStack->Autorelease();
 				mStacks.push_back( theStack );
 				
@@ -267,6 +267,12 @@ LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 		mContextGroup = LEOContextGroupCreate();
 	
 	return mContextGroup;
+}
+
+
+CStack*		CDocument::NewStackWithURLIDNameForDocument( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument )
+{
+	return new CStack( inURL, inID, inName, inDocument );
 }
 
 

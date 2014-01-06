@@ -24,11 +24,12 @@ namespace Carlson {
 class CStack : public CConcreteObject
 {
 public:
-	CStack( std::string inURL, WILDObjectID inID, std::string inName, CDocument * inDocument ) : mStackID(inID), mURL(inURL) { mName = inName; mDocument = inDocument; };
+	CStack( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument ) : mStackID(inID), mURL(inURL) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	
 	WILDObjectID	GetID()		{ return mStackID; };
+	std::string		GetURL()	{ return mURL; };
 	
 	void			AddCard( CCard* inCard );
 	void			RemoveCard( CCard* inCard );
