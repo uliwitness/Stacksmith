@@ -503,7 +503,7 @@ void		GetScriptableObjectValueForKeyOfRange( LEOValuePtr self, const char* keyNa
 void		SetScriptableObjectValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, LEOContext* inContext )
 {
 	CScriptableObject*	theObject = (CScriptableObject*)self->object.object;
-	theObject->SetValueForPropertyNamed( inValue, keyName, startOffset, endOffset );
+	theObject->SetValueForPropertyNamed( inValue, inContext, keyName, startOffset, endOffset );
 }
 
 

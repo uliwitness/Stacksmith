@@ -21,6 +21,9 @@ public:
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	
+	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOValuePtr outValue );
+	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	
 	virtual const char*		GetIdentityForDump()	{ return "Button"; };
 	virtual void			DumpProperties( size_t inIndent );
 

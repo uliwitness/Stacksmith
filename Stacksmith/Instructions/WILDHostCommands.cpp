@@ -468,7 +468,7 @@ void	WILDStartInstruction( LEOContext* inContext )
 	{
 		LEOValue	trueValue;
 		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
-		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, "started", 0, 0 );
+		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
 		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
 			LEOContextStopWithError( inContext, "Unable to start this object." );
@@ -507,7 +507,7 @@ void	WILDStopInstruction( LEOContext* inContext )
 	{
 		LEOValue	falseValue;
 		LEOInitBooleanValue( &falseValue, false, kLEOInvalidateReferences, inContext );
-		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, "started", 0, 0 );
+		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "started", 0, 0 );
 		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
 			LEOContextStopWithError( inContext, "Unable to stop this object." );
@@ -546,7 +546,7 @@ void	WILDShowInstruction( LEOContext* inContext )
 	{
 		LEOValue	trueValue;
 		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
-		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, "visible", 0, 0 );
+		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "visible", 0, 0 );
 		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
 			LEOContextStopWithError( inContext, "Unable to show this object." );
@@ -585,7 +585,7 @@ void	WILDHideInstruction( LEOContext* inContext )
 	{
 		LEOValue	falseValue;
 		LEOInitBooleanValue( &falseValue, false, kLEOInvalidateReferences, inContext );
-		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, "visible", 0, 0 );
+		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "visible", 0, 0 );
 		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
 			LEOContextStopWithError( inContext, "Unable to hide this object." );

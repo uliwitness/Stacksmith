@@ -113,7 +113,7 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 	if( theObjectValue )
 	{
 		CScriptableObject*	theScriptObject = (CScriptableObject*)theObjectValue->object.object;
-		if( !theScriptObject->SetValueForPropertyNamed( theValue, propNameStr, 0, 0 ) )
+		if( !theScriptObject->SetValueForPropertyNamed( theValue, inContext, propNameStr, 0, 0 ) )
 		{
 			LEOContextStopWithError( inContext, "Object does not have property \"%s\".", propNameStr );
 			return;

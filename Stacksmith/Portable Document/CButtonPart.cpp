@@ -42,6 +42,29 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
+bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOValuePtr outValue )
+{
+	if( strcasecmp("name", inPropertyName) == 0 || strcasecmp("short name", inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mName.c_str(), mName.size(), kLEOInvalidateReferences, NULL );
+	}
+	return false;
+}
+
+
+bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp("name", inPropertyName) == 0 || strcasecmp("short name", inPropertyName) == 0 )
+	{
+		char		nameBuf[1024];
+		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
+		SetName( nameStr );
+	}
+	return false;
+}
+
+
+
 void	CButtonPart::DumpProperties( size_t inIndentLevel )
 {
 	const char*	indentStr = IndentString(inIndentLevel);
