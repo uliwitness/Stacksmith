@@ -14,6 +14,7 @@
 #include "LEOContextGroup.h"
 #include "CStack.h"
 #include "CDocument.h"
+#include "CRecentCardsList.h"
 #include "CAlert.h"
 #include "CMessageBox.h"
 #include "CSound.h"
@@ -61,6 +62,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 	bool					canGoThere = false;
 	CScriptableObject*		destinationObject = NULL;
 	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+	CRecentCardsList::GetSharedInstance()->AddCard( userData->GetStack()->GetCurrentCard() );
 	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
 		destinationObject = (CScriptableObject*)theValue->object.object;

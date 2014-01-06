@@ -325,6 +325,7 @@
 		55CD61151879EDA3002450E2 /* CAlert.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD61131879EDA3002450E2 /* CAlert.mm */; };
 		55CD61181879F464002450E2 /* CMessageBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD61161879F464002450E2 /* CMessageBox.cpp */; };
 		55CD611B187A154A002450E2 /* CSound.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD6119187A154A002450E2 /* CSound.mm */; };
+		55CD611E187A60CD002450E2 /* CRecentCardsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
@@ -1003,6 +1004,8 @@
 		55CD61171879F464002450E2 /* CMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessageBox.h; path = "Portable Document/CMessageBox.h"; sourceTree = "<group>"; };
 		55CD6119187A154A002450E2 /* CSound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CSound.mm; path = Platforms/Mac/CSound.mm; sourceTree = "<group>"; };
 		55CD611A187A154A002450E2 /* CSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSound.h; path = Platforms/Mac/CSound.h; sourceTree = "<group>"; };
+		55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRecentCardsList.cpp; path = "Portable Document/CRecentCardsList.cpp"; sourceTree = "<group>"; };
+		55CD611D187A60CD002450E2 /* CRecentCardsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRecentCardsList.h; path = "Portable Document/CRecentCardsList.h"; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
@@ -1177,6 +1180,8 @@
 				2A37F4ACFDCFA73011CA2CEA /* WILDDocument.mm */,
 				552365361344B0B9000145A0 /* WILDRecentCardsList.h */,
 				552365371344B0B9000145A0 /* WILDRecentCardsList.m */,
+				55CD611D187A60CD002450E2 /* CRecentCardsList.h */,
+				55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */,
 				55686667135ADC2B00C364D6 /* WILDSearchPaths.h */,
 				55686668135ADC3000C364D6 /* WILDSearchPaths.m */,
 				558DCD1F115571FE002C9195 /* WILDNotifications.h */,
@@ -2330,6 +2335,7 @@
 				553C46F313577334000219FA /* CParseTree.cpp in Sources */,
 				55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */,
 				553C46F413577334000219FA /* CNode.cpp in Sources */,
+				55CD611E187A60CD002450E2 /* CRecentCardsList.cpp in Sources */,
 				553C46F513577334000219FA /* CValueNode.cpp in Sources */,
 				553C46F613577334000219FA /* CCommandNode.cpp in Sources */,
 				553C46F713577334000219FA /* CPushValueCommandNode.cpp in Sources */,
