@@ -34,6 +34,8 @@ public:
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
 	bool			IsLoaded()	{ return mLoaded; };
 	virtual void	SetStack( CStack* inStack );
+	size_t			GetNumParts()				{ return GetPartCountOfType( NULL ); };
+	CPart*			GetPart( size_t inIndex )	{ return GetPartOfType(inIndex,NULL); };
 	virtual size_t	GetPartCountOfType( CPartCreatorBase* inType );
 	virtual CPart*	GetPartOfType( size_t inIndex, CPartCreatorBase* inType );
 	virtual CPart*	GetPartWithNameOfType( const std::string& inName, CPartCreatorBase* inType );

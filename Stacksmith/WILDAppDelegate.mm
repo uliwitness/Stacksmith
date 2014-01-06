@@ -16,7 +16,7 @@
 #import "LEORemoteDebugger.h"
 #import "UKCrashReporter.h"
 #include "CDocumentMac.h"
-#include "CPartRegistration.h"
+#include "CStackMac.h"
 #include "CMessageBox.h"
 #include "LEOObjCCallInstructions.h"
 #import <Sparkle/Sparkle.h>
@@ -74,7 +74,8 @@ void	WILDFirstNativeCall( void )
 	LEOInitRemoteDebugger( "127.0.0.1" );
 	#endif
 	
-	CPartRegistrationRegisterAllPartTypes();
+	// Register Mac-specific variants of our card/background part classes:
+	CStackMac::RegisterPartCreators();
 }
 
 

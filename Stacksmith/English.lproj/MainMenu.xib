@@ -353,107 +353,6 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Go" id="542">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Go" id="744">
-                        <items>
-                            <menuItem title="Back" keyEquivalent="`" id="753">
-                                <connections>
-                                    <action selector="goBack:" target="-1" id="756"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Home" keyEquivalent="H" id="746">
-                                <connections>
-                                    <action selector="goHome:" target="-1" id="757"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Recent" keyEquivalent="R" id="747">
-                                <connections>
-                                    <action selector="goRecentCard:" target="-1" id="759"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="748"/>
-                            <menuItem title="First Card" keyEquivalent="1" id="749">
-                                <connections>
-                                    <action selector="goFirstCard:" target="-1" id="760"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Previous Card" keyEquivalent="2" id="752">
-                                <connections>
-                                    <action selector="goPrevCard:" target="-1" id="755"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Next Card" keyEquivalent="3" id="751">
-                                <connections>
-                                    <action selector="goNextCard:" target="-1" id="758"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Last Card" keyEquivalent="4" id="750">
-                                <connections>
-                                    <action selector="goLastCard:" target="-1" id="754"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
-                <menuItem title="Objects" id="580">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Objects" id="581">
-                        <items>
-                            <menuItem title="Get Info" keyEquivalent="i" id="585">
-                                <connections>
-                                    <action selector="showInfoPanel:" target="-1" id="798"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="592"/>
-                            <menuItem title="Bring Closer" keyEquivalent="+" id="593">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="bringObjectCloser:" target="-1" id="609"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Send Farther" keyEquivalent="-" id="595">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="sendObjectFarther:" target="-1" id="610"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="597"/>
-                            <menuItem title="New Background" keyEquivalent="N" id="602">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="createNewBackground:" target="-1" id="613"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="735">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="New Card" keyEquivalent="n" id="736">
-                                <connections>
-                                    <action selector="createNewCard:" target="-1" id="741"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Cut Card" id="737">
-                                <connections>
-                                    <action selector="cutCard:" target="-1" id="742"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Copy Card" id="738">
-                                <connections>
-                                    <action selector="copyCard:" target="-1" id="743"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Delete Card" id="739">
-                                <string key="keyEquivalent" base64-UTF8="YES">
-CA
-</string>
-                                <connections>
-                                    <action selector="deleteCard:" target="-1" id="740"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
                 <menuItem title="Format" id="374">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Format" id="375">
@@ -732,14 +631,6 @@ CA
                             <menuItem isSeparatorItem="YES" id="724">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Message" keyEquivalent="M" id="730">
-                                <connections>
-                                    <action selector="orderFrontMessageBox:" target="556" id="731"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="92">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
                             <menuItem title="Bring All to Front" id="5">
                                 <connections>
                                     <action selector="arrangeInFront:" target="-1" id="39"/>
@@ -794,11 +685,7 @@ CA
             </items>
         </menu>
         <customObject id="419" customClass="NSFontManager"/>
-        <customObject id="556" customClass="WILDAppDelegate">
-            <connections>
-                <outlet property="mNewObjectSeparator" destination="597" id="818"/>
-            </connections>
-        </customObject>
+        <customObject id="556" customClass="WILDAppDelegate"/>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="UKPropagandaProgressSheetPosition" animationBehavior="default" id="566" userLabel="ProgressSheet" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>

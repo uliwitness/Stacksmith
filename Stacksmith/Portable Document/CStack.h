@@ -51,6 +51,8 @@ public:
 	virtual void	SetCurrentCard( CCard* inCard )	{ mCurrentCard = inCard; };
 	virtual CCard*	GetCurrentCard()				{ return mCurrentCard; };
 	virtual CStack*	GetStack()						{ return this; };
+	size_t			GetCardWidth()					{ return mCardWidth; };
+	size_t			GetCardHeight()					{ return mCardHeight; };
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	

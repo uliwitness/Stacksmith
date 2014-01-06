@@ -25,9 +25,13 @@ namespace Carlson {
 class CStackMac : public CStack
 {
 public:
-	CStackMac( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument ) : CStack( inURL, inID, inName, inDocument ) {};
+	CStackMac( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument );
 
 	virtual bool				GoThereInNewWindow( bool inNewWindow );
+
+	virtual void				SetCurrentCard( CCard* inCard );
+	
+	static void					RegisterPartCreators();
 
 protected:
 	WILDStackWindowControllerPtr	mMacWindowController;

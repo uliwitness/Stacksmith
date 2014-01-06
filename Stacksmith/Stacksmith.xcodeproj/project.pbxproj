@@ -256,7 +256,6 @@
 		55CD60BD187510F0002450E2 /* CFieldPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60B6187510EF002450E2 /* CFieldPart.cpp */; };
 		55CD60BE187510F0002450E2 /* CMoviePlayerPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60B8187510F0002450E2 /* CMoviePlayerPart.cpp */; };
 		55CD60BF187510F0002450E2 /* CWebBrowserPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60BA187510F0002450E2 /* CWebBrowserPart.cpp */; };
-		55CD60C2187511A3002450E2 /* CPartRegistration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C0187511A3002450E2 /* CPartRegistration.cpp */; };
 		55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C318751DF6002450E2 /* CVisiblePart.cpp */; };
 		55CD60C818752ECA002450E2 /* CTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60C618752ECA002450E2 /* CTimer.mm */; };
 		55CD60D818754007002450E2 /* stackimport in Resources */ = {isa = PBXBuildFile; fileRef = 55CD60D418753CA2002450E2 /* stackimport */; };
@@ -806,8 +805,6 @@
 		55CD60B9187510F0002450E2 /* CMoviePlayerPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMoviePlayerPart.h; path = "Portable Document/CMoviePlayerPart.h"; sourceTree = "<group>"; };
 		55CD60BA187510F0002450E2 /* CWebBrowserPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CWebBrowserPart.cpp; path = "Portable Document/CWebBrowserPart.cpp"; sourceTree = "<group>"; };
 		55CD60BB187510F0002450E2 /* CWebBrowserPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWebBrowserPart.h; path = "Portable Document/CWebBrowserPart.h"; sourceTree = "<group>"; };
-		55CD60C0187511A3002450E2 /* CPartRegistration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPartRegistration.cpp; path = "Portable Document/CPartRegistration.cpp"; sourceTree = "<group>"; };
-		55CD60C1187511A3002450E2 /* CPartRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPartRegistration.h; path = "Portable Document/CPartRegistration.h"; sourceTree = "<group>"; };
 		55CD60C318751DF6002450E2 /* CVisiblePart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVisiblePart.cpp; path = "Portable Document/CVisiblePart.cpp"; sourceTree = "<group>"; };
 		55CD60C418751DF6002450E2 /* CVisiblePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVisiblePart.h; path = "Portable Document/CVisiblePart.h"; sourceTree = "<group>"; };
 		55CD60C618752ECA002450E2 /* CTimer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CTimer.mm; path = Platforms/Mac/CTimer.mm; sourceTree = "<group>"; };
@@ -1352,8 +1349,6 @@
 				55CD610518786BAC002450E2 /* CRectanglePart.cpp */,
 				55AC96201870FFC200488B51 /* CPartContents.h */,
 				55AC961F1870FFC200488B51 /* CPartContents.cpp */,
-				55CD60C1187511A3002450E2 /* CPartRegistration.h */,
-				55CD60C0187511A3002450E2 /* CPartRegistration.cpp */,
 				55CD61171879F464002450E2 /* CMessageBox.h */,
 				55CD61161879F464002450E2 /* CMessageBox.cpp */,
 				556DB7A418709A15002F7CB2 /* tinyxml2.h */,
@@ -1941,7 +1936,6 @@
 				553C46F613577334000219FA /* CCommandNode.cpp in Sources */,
 				553C46F713577334000219FA /* CPushValueCommandNode.cpp in Sources */,
 				553C46F813577334000219FA /* CAssignCommandNode.cpp in Sources */,
-				55CD60C2187511A3002450E2 /* CPartRegistration.cpp in Sources */,
 				553C46F913577334000219FA /* CPutCommandNode.cpp in Sources */,
 				553C46FA13577334000219FA /* CGetParamCommandNode.cpp in Sources */,
 				553C46FC13577334000219FA /* CReturnCommandNode.cpp in Sources */,
