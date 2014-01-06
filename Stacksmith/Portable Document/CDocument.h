@@ -16,32 +16,34 @@
 
 namespace Carlson {
 
-enum EMediaType
+typedef enum
 {
-	CMediaTypeUnknown = 0,
-	CMediaTypeIcon,
-	CMediaTypePicture,
-	CMediaTypeCursor,
-	CMediaTypeSound
-};
-typedef enum EMediaType CMediaType;
+	EMediaTypeUnknown = 0,
+	EMediaTypeIcon,
+	EMediaTypePicture,
+	EMediaTypeCursor,
+	EMediaTypeSound
+} TMediaType;
 
 
 class CMediaEntry
 {
 public:
-	CMediaEntry() : mIconID(0LL), mMediaType(CMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false) {};
-	CMediaEntry( WILDObjectID iconID, const std::string iconName, const std::string fileName, CMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn) {};
+	CMediaEntry() : mIconID(0LL), mMediaType(EMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false) {};
+	CMediaEntry( WILDObjectID iconID, const std::string iconName, const std::string fileName, TMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn) {};
 	
 	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %lld, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false")); };
 	
-	WILDObjectID	GetID()		{ return mIconID; };
+	WILDObjectID		GetID()	const		{ return mIconID; };
+	const std::string	GetName() const		{ return mIconName; };
+	TMediaType			GetMediaType() const{ return mMediaType; };
+	const std::string	GetFileName() const { return mFileName; };
 	
 protected:
 	WILDObjectID	mIconID;
 	std::string		mIconName;
 	std::string		mFileName;
-	CMediaType		mMediaType;
+	TMediaType		mMediaType;
 	int				mHotspotLeft;
 	int				mHotspotTop;
 	bool			mIsBuiltIn;
@@ -74,8 +76,11 @@ public:
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
 	
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
+	CStack*				GetStackByName( const char* inName );
 	WILDObjectID		GetUniqueIDForStack();
 	WILDObjectID		GetUniqueIDForMedia();
+	
+	std::string			GetMediaURLByNameOfType( const std::string& inName, TMediaType inType );
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 	
@@ -90,6 +95,7 @@ protected:
 	std::string										mLastCompactedVersion;
 	std::string										mFirstEditedVersion;
 	std::string										mLastEditedVersion;
+	std::string										mURL;
 	std::map<int,std::string>						mFontIDTable;
 	std::map<int,CTextStyleEntry>					mTextStyles;
 	std::vector<CMediaEntry>						mMediaList;

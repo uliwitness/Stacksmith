@@ -6,17 +6,18 @@
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
+#include <strings.h>
 #include "WILDHostCommands.h"
-#include "WILDObjectValue.h"
-#include "WILDDocument.h"
-#include "WILDStack.h"
-#include "WILDCard.h"
-#include "WILDInputPanelController.h"
+#include "CScriptableObjectValue.h"
 #include "LEOScript.h"
 #include "LEORemoteDebugger.h"
-#import "WILDMessageBox.h"
-#import "ULIMelodyQueue.h"
-#import "LEOContextGroup.h"
+#include "LEOContextGroup.h"
+#include "CStack.h"
+#include "CDocument.h"
+#include "CAlert.h"
+#include "CMessageBox.h"
+#include "CSound.h"
+#include <unistd.h>
 
 
 void	WILDGoInstruction( LEOContext* inContext );
@@ -36,12 +37,15 @@ void	WILDHideInstruction( LEOContext* inContext );
 void	WILDWaitInstruction( LEOContext* inContext );
 
 
+using namespace Carlson;
+
+
 size_t	kFirstStacksmithHostCommandInstruction = 0;
 
 
 /*!
 	Implements the 'go' command. The first (and only) parameter must be a
-	WILDObjectValue (i.e. isa = kLeoValueTypeWILDObject) that will be sent
+	WILDObjectValue (i.e. isa = kLeoValueTypeScriptableObject) that will be sent
 	a goThereInNewWindow: NO message. If the parameter is a string instead,
 	we will assume it is a stack that's not yet open and attempt to open that.
 	It will remove its parameters from the stack once it is done.
@@ -53,31 +57,32 @@ size_t	kFirstStacksmithHostCommandInstruction = 0;
 */
 void	WILDGoInstruction( LEOContext* inContext )
 {
-	LEOValuePtr			theValue = inContext->stackEndPtr -1;
-	BOOL				canGoThere = NO;
-	id<WILDObject>		destinationObject = nil;
-	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	LEOValuePtr				theValue = inContext->stackEndPtr -1;
+	bool					canGoThere = false;
+	CScriptableObject*		destinationObject = NULL;
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		destinationObject = (id<WILDObject>)theValue->object.object;
-		canGoThere = [destinationObject goThereInNewWindow: NO];
+		destinationObject = (CScriptableObject*)theValue->object.object;
+		canGoThere = destinationObject->GoThereInNewWindow(false);
 	}
 	else
 	{
-		char str[1024] = { 0 };
-		LEOGetValueAsString( theValue, str, sizeof(str), inContext );
-		NSString	*	stackName = [NSString stringWithUTF8String: str];
-		WILDStack*	theStack = [WILDDocument openStackNamed: stackName];
-		canGoThere = [theStack goThereInNewWindow: NO];
+		char stackName[1024] = { 0 };
+		LEOGetValueAsString( theValue, stackName, sizeof(stackName), inContext );
+		CStack*	theStack = userData->GetStack()->GetDocument()->GetStackByName( stackName );
+		if( theStack )
+			canGoThere = theStack->GoThereInNewWindow(false);
 		destinationObject = theStack;
 	}
 	if( canGoThere )
-		((WILDScriptContextUserData*)inContext->userData).currentStack = destinationObject.stack;
+		userData->SetStack( destinationObject->GetStack() );
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard		*	currentCard = [frontStack currentCard];
-	[currentCard setTransitionType: nil subtype: nil];
+	CStack		*	frontStack = userData->GetStack();
+	CCard		*	currentCard = frontStack->GetCurrentCard();
+	currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
 	
 	if( !canGoThere )
 		LEOContextStopWithError( inContext, "Can't go there." );
@@ -104,19 +109,12 @@ void	WILDVisualEffectInstruction( LEOContext* inContext )
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
-	WILDStack			*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard			*	currentCard = [frontStack currentCard];
-	static NSDictionary *	sTransitions = nil;
-	
-	if( !sTransitions )
-	{
-		sTransitions = [[NSDictionary alloc] initWithContentsOfFile: [[NSBundle mainBundle] pathForResource: @"TransitionMappings" ofType: @"plist"]];
-	}
-	
-	NSDictionary * currTransition = [sTransitions objectForKey: [NSString stringWithUTF8String: str]];
-	
-	[currentCard setTransitionType: [currTransition objectForKey: @"CATransitionType"] subtype: [currTransition objectForKey: @"CATransitionSubtype"]];
-	
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+	CStack				*	frontStack = userData->GetStack();
+	CCard				*	currentCard = frontStack->GetCurrentCard();
+    
+    currentCard->SetTransitionTypeAndSpeed( str, EVisualEffectSpeedNormal );
+
 	inContext->currentInstruction++;
 }
 
@@ -165,27 +163,19 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 	if( !inContext->keepRunning )
 		return;
 	
-	NSInteger	returnValue = 0;
-	@try
-	{
-		returnValue = NSRunAlertPanel( [NSString stringWithCString: msgStr encoding:NSUTF8StringEncoding], @"%@", [NSString stringWithCString: btn1Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn2Str encoding:NSUTF8StringEncoding], [NSString stringWithCString: btn3Str encoding:NSUTF8StringEncoding], @"" );
-	}
-	@catch( NSException * err )
-	{
-		
-	}
+	size_t	returnValue = CAlert::RunMessageAlert( msgStr, btn1Str, btn2Str, btn3Str );
 	
 	const char	*hitButtonName = "OK";
-	if( returnValue == NSAlertDefaultReturn )
+	if( returnValue == 1 )
 	{
 		if( strlen(btn1Str) > 0 )
 			hitButtonName = btn1Str;
 		else
 			hitButtonName = "OK";
 	}
-	else if( returnValue == NSAlertAlternateReturn )
+	else if( returnValue == 2 )
 		hitButtonName = btn2Str;
-	else if( returnValue == NSAlertOtherReturn )
+	else if( returnValue == 3 )
 		hitButtonName = btn3Str;
 	
 	LEOHandler	*	theHandler = LEOContextPeekCurrentHandler( inContext );
@@ -231,23 +221,22 @@ void	WILDAskInstruction( LEOContext* inContext )
 	const char*	msgStr = LEOGetValueAsString( inContext->stackEndPtr -2, msgBuf, sizeof(msgBuf), inContext );
 	char answerBuf[1024] = { 0 };
 	const char*	answerStr = LEOGetValueAsString( inContext->stackEndPtr -1, answerBuf, sizeof(answerBuf), inContext );
+	std::string	theAnswer(answerStr);
 	
-	WILDInputPanelController	*	inputPanel = [WILDInputPanelController inputPanelWithPrompt: [NSString stringWithUTF8String: msgStr] answer: [NSString stringWithUTF8String: answerStr]];
-	NSInteger						returnValue = [inputPanel runModal];
+	bool	wasOK = CAlert::RunInputAlert( msgStr, theAnswer );
 	
 	LEOHandler	*	theHandler = LEOContextPeekCurrentHandler( inContext );
 	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "result" );
 	if( bpRelativeOffset >= 0 )
 	{
-		const char*		theBtn = ((returnValue == NSAlertDefaultReturn) ? "OK" : "Cancel");
+		const char*		theBtn = (wasOK ? "OK" : "Cancel");
 		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, theBtn, strlen(theBtn), inContext );
 	}
 
 	bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "it" );
 	if( bpRelativeOffset >= 0 )
 	{
-		NSString	*	answerString = [inputPanel answerString];
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, [answerString UTF8String], [answerString lengthOfBytesUsingEncoding: NSUTF8StringEncoding], inContext );
+		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, theAnswer.c_str(), theAnswer.size(), inContext );
 	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
@@ -272,32 +261,24 @@ void	WILDAskInstruction( LEOContext* inContext )
 void	WILDCreateInstruction( LEOContext* inContext )
 {
 	char typeNameBuf[1024] = { 0 };
-	const char*	typeNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, typeNameBuf, sizeof(typeNameBuf), inContext );
+	LEOGetValueAsString( inContext->stackEndPtr -2, typeNameBuf, sizeof(typeNameBuf), inContext );
 	char nameBuf[1024] = { 0 };
-	const char* nameStr = LEOGetValueAsString( inContext->stackEndPtr -1, nameBuf, sizeof(nameBuf), inContext );
-	
-	SEL				newObjectAction = Nil;
-	NSString	*	newTitle = [NSString stringWithUTF8String: nameStr];
-	if( strcasecmp(typeNameStr, "button") == 0 )
-		newObjectAction = @selector(createNewButtonNamed:);
-	else if( strcasecmp(typeNameStr, "field") == 0 )
-		newObjectAction = @selector(createNewFieldNamed:);
-	else if( strcasecmp(typeNameStr, "player") == 0 )
-		newObjectAction = @selector(createNewMoviePlayerNamed:);
-	else if( strcasecmp(typeNameStr, "browser") == 0 )
-		newObjectAction = @selector(createNewBrowserNamed:);
-	else
-		LEOContextStopWithError( inContext, "Don't know how to create a \"%s\".", typeNameStr );
-	
+	LEOGetValueAsString( inContext->stackEndPtr -1, nameBuf, sizeof(nameBuf), inContext );
+
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
-	
-	if( newObjectAction != Nil )
-	{
-		WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-		WILDCard		*	currentCard = [frontStack currentCard];
-		[currentCard performSelector: newObjectAction withObject: newTitle];
-	}
-	
+
+    CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+    CStack		*	frontStack = userData->GetStack();
+    CCard		*	currentCard = frontStack->GetCurrentCard();
+    tinyxml2::XMLDocument   document;
+    std::string             xml( "<part><type>" );
+    xml.append( typeNameBuf );
+    xml.append( "</type></part>" );
+    document.Parse( xml.c_str() );
+    CPart * thePart = CPart::NewPartWithElement( document.RootElement(), currentCard );
+    thePart->SetName( nameBuf );
+    currentCard->AddPart( thePart );
+
 	inContext->currentInstruction++;
 }
 
@@ -329,7 +310,7 @@ void	WILDDebugCheckpointInstruction( LEOContext* inContext )
 	
 	propertyName	-	The name the new property should have, as a string.
 	object			-	The object to add the property to, as a WILDObjectValue
-						(i.e. isa = kLeoValueTypeWILDObject)
+						(i.e. isa = kLeoValueTypeScriptableObject)
 	
 	(WILD_CREATE_USER_PROPERTY_INSTR)
 */
@@ -339,11 +320,10 @@ void	WILDCreateUserPropertyInstruction( LEOContext* inContext )
 	char propNameBuf[1024] = { 0 };
 	const char*	propNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, propNameBuf, sizeof(propNameBuf), inContext );
 	LEOValuePtr objValue = inContext->stackEndPtr -1;
-	if( objValue->base.isa == &kLeoValueTypeWILDObject )
+	if( objValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		id<WILDObject>	theObject = (id<WILDObject>) objValue->object.object;
-		if( [theObject respondsToSelector: @selector(addUserPropertyNamed:)] )
-			[theObject addUserPropertyNamed: [[NSString stringWithUTF8String: propNameStr] lowercaseString]];
+        CScriptableObject*	theObject = (CScriptableObject*) objValue->object.object;
+		theObject->AddUserPropertyNamed( propNameStr );
 	}
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 	
@@ -373,10 +353,9 @@ void	WILDPrintInstruction( LEOContext* inContext )
 		LEOContextStopWithError( inContext, "Internal error: Invalid value." );
 		return;
 	}
-	LEOGetValueAsString( theValue, buf, sizeof(buf), inContext );
+	const char* newStr = LEOGetValueAsString( theValue, buf, sizeof(buf), inContext );
 	
-	NSString	*	objcString = [NSString stringWithCString: buf encoding: NSUTF8StringEncoding];
-	[[WILDMessageBox sharedMessageBox] setStringValue: objcString];
+	CMessageBox::GetSharedInstance()->SetTextContents( newStr );
 	
 	if( popOffStack )
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
@@ -406,11 +385,9 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		BOOL	couldDelete = false;
-		if( [(id<WILDObject>)theValue->object.object respondsToSelector: @selector(deleteWILDObject)] )
-			couldDelete = [(id<WILDObject>)theValue->object.object deleteWILDObject];
+		bool	couldDelete = ((CScriptableObject*)theValue->object.object)->DeleteObject();
 		if( !couldDelete )
 			LEOContextStopWithError( inContext, "Unable to delete this object." );
 	}
@@ -435,7 +412,7 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 
 void	WILDPlayMelodyInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 
 	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
 	LEOValuePtr	theMelody = inContext->stackEndPtr -1;
@@ -449,36 +426,15 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 	if( !inContext->keepRunning )
 		return;
 	
-	NSString		*	resourceName = [NSString stringWithUTF8String: instrNameStr];
-	NSURL			*	theURL = [frontStack.document URLForMediaOfType: @"sound" name: resourceName];
-	if( !theURL )
-	{
-		NSString	*	thePath = [[NSBundle mainBundle] pathForSoundResource: resourceName];
-		if( thePath )
-			theURL = [NSURL fileURLWithPath: thePath];
-	}
-	if( !theURL )
-	{
-		theURL = [NSURL fileURLWithPath: [NSString stringWithFormat: @"/System/Library/Sounds/%@.aiff", resourceName]];
-		if( ![theURL checkResourceIsReachableAndReturnError: NULL] )
-			theURL = nil;
-	}
-	if( !theURL )
-	{
-		theURL = [NSURL fileURLWithPath: resourceName];
-		if( ![theURL checkResourceIsReachableAndReturnError: NULL] )
-			theURL = nil;
-	}
-	
-	if( !theURL )
+	std::string			mediaURL = frontStack->GetDocument()->GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
+		
+	if( mediaURL.length() == 0 )
 	{
 		LEOContextStopWithError( inContext, "Can't find sound '%s'.", instrNameStr );
 		return;
 	}
 	
-	ULIMelodyQueue	*	melodyQueue = [[[ULIMelodyQueue alloc] initWithInstrument: theURL] autorelease];
-	[melodyQueue addMelody: [NSString stringWithUTF8String: melodyStr]];
-	[melodyQueue play];
+	CSound::PlaySoundWithURLAndMelody( mediaURL, melodyStr );
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 	
@@ -506,9 +462,12 @@ void	WILDStartInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		BOOL	couldStart = [(id<WILDObject>)theValue->object.object setValue: (id)kCFBooleanTrue forWILDPropertyNamed: @"started" inRange: NSMakeRange(0,0)];
+		LEOValue	trueValue;
+		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
+		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, "started", 0, 0 );
+		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
 			LEOContextStopWithError( inContext, "Unable to start this object." );
 	}
@@ -542,9 +501,12 @@ void	WILDStopInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		BOOL	couldStop = [(id<WILDObject>)theValue->object.object setValue: (id)kCFBooleanFalse forWILDPropertyNamed: @"started" inRange: NSMakeRange(0,0)];
+		LEOValue	falseValue;
+		LEOInitBooleanValue( &falseValue, false, kLEOInvalidateReferences, inContext );
+		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, "started", 0, 0 );
+		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
 			LEOContextStopWithError( inContext, "Unable to stop this object." );
 	}
@@ -578,9 +540,12 @@ void	WILDShowInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		BOOL	couldStart = [(id<WILDObject>)theValue->object.object setValue: (id)kCFBooleanTrue forWILDPropertyNamed: @"visible" inRange: NSMakeRange(0,0)];
+		LEOValue	trueValue;
+		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
+		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, "visible", 0, 0 );
+		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
 			LEOContextStopWithError( inContext, "Unable to show this object." );
 	}
@@ -614,9 +579,12 @@ void	WILDHideInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeWILDObject )
+	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		BOOL	couldStop = [(id<WILDObject>)theValue->object.object setValue: (id)kCFBooleanFalse forWILDPropertyNamed: @"visible" inRange: NSMakeRange(0,0)];
+		LEOValue	falseValue;
+		LEOInitBooleanValue( &falseValue, false, kLEOInvalidateReferences, inContext );
+		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, "visible", 0, 0 );
+		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
 			LEOContextStopWithError( inContext, "Unable to hide this object." );
 	}
@@ -665,12 +633,6 @@ void	WILDWaitInstruction( LEOContext* inContext )
 	
 	theDelay /= 60.0;
 	
-	// Update all relevant windows once, in case the wait is so the user sees a UI change:
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	for( NSWindowController* inWC in frontStack.document.windowControllers )
-		[inWC.window display];
-	[WILDMessageBox.sharedMessageBox.window display];
-
 	// Actually wait:
 	usleep(theDelay * 1000000.0);
 

@@ -7,15 +7,15 @@
 //
 
 #include "WILDHostFunctions.h"
-#include "WILDObjectValue.h"
-#import "WILDDocument.h"
-#import "WILDStack.h"
-#import "WILDLayer.h"
-#import "WILDCard.h"
-#import "WILDPart.h"
-#import "LEOScript.h"
-#import "LEOContextGroup.h"
-#import "WILDMessageBox.h"
+#include "CScriptableObjectValue.h"
+#include "CDocument.h"
+#include "CStack.h"
+#include "CLayer.h"
+#include "CCard.h"
+#include "CPart.h"
+#include "LEOScript.h"
+#include "LEOContextGroup.h"
+#include "CMessageBox.h"
 
 
 void	WILDStackInstruction( LEOContext* inContext );
@@ -53,6 +53,11 @@ void	WILDBackgroundTimerInstruction( LEOContext* inContext );
 void	WILDNumberOfCardTimersInstruction( LEOContext* inContext );
 void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext );
 void	WILDMessageBoxInstruction( LEOContext* inContext );
+void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType );
+void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* inType );
+
+
+using namespace Carlson;
 
 
 size_t	kFirstStacksmithHostFunctionInstruction = 0;
@@ -60,17 +65,17 @@ size_t	kFirstStacksmithHostFunctionInstruction = 0;
 
 void	WILDStackInstruction( LEOContext* inContext )
 {
-	char	stackName[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, stackName, sizeof(stackName), inContext );
+	char		stackNameBuf[1024] = { 0 };
+	const char*	stackName = LEOGetValueAsString( inContext->stackEndPtr -1, stackNameBuf, sizeof(stackNameBuf), inContext );
 	
-	NSString	*	stackNameObj = [NSString stringWithUTF8String: stackName];
-	WILDStack	*	theStack = [WILDDocument openStackNamed: stackNameObj];
+	CScriptContextUserData	*	userData = (CScriptContextUserData*)inContext->userData;
+	CStack	*					theStack = userData->GetDocument()->GetStackByName( stackName );
 		
 	if( theStack )
 	{
 		LEOValuePtr	valueToReplace = inContext->stackEndPtr -1;
 		LEOCleanUpValue( valueToReplace, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &valueToReplace->object, theStack, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &valueToReplace->object, theStack, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -83,29 +88,29 @@ void	WILDStackInstruction( LEOContext* inContext )
 
 void	WILDBackgroundInstruction( LEOContext* inContext )
 {
-	WILDBackground	*	theBackground = nil;
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char				backgroundName[1024] = { 0 };
+	CBackground	*	theBackground = NULL;
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	char			backgroundName[1024] = { 0 };
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		NSUInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( theNumber > 0 && theNumber <= [[frontStack backgrounds] count] )
-			theBackground = [[frontStack cards] objectAtIndex: theNumber -1];
+		size_t	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
+		if( theNumber <= frontStack->GetNumBackgrounds() )
+			theBackground = frontStack->GetBackground( theNumber -1 );
 		else
-			snprintf( backgroundName, sizeof(backgroundName), "%lu", theNumber );
+			snprintf( backgroundName, sizeof(backgroundName), "%zu", theNumber );
 	}
 	else
 	{
 		LEOGetValueAsString( inContext->stackEndPtr -1, backgroundName, sizeof(backgroundName), inContext );
 		
-		theBackground = [frontStack backgroundNamed: [NSString stringWithUTF8String: backgroundName]];
+		theBackground = frontStack->GetBackgroundByName( backgroundName );
 	}
 	
 	if( theBackground )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -118,29 +123,29 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 
 void	WILDCardInstruction( LEOContext* inContext )
 {
-	WILDCard	*	theCard = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	CCard		*	theCard = NULL;
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	char			cardName[1024] = { 0 };
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
 	{
-		NSUInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( theNumber > 0 && theNumber <= [[frontStack cards] count] )
-			theCard = [[frontStack cards] objectAtIndex: theNumber -1];
+		size_t	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
+		if( theNumber <= frontStack->GetNumBackgrounds() )
+			theCard = frontStack->GetCard( theNumber -1 );
 		else
-			snprintf( cardName, sizeof(cardName), "%lu", theNumber );
+			snprintf( cardName, sizeof(cardName), "%zu", theNumber );
 	}
 	else
 	{
 		LEOGetValueAsString( inContext->stackEndPtr -1, cardName, sizeof(cardName), inContext );
 		
-		theCard = [frontStack cardNamed: [NSString stringWithUTF8String: cardName]];
+		theCard = frontStack->GetCardByName( cardName );
 	}
 	
 	if( theCard )
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -151,12 +156,12 @@ void	WILDCardInstruction( LEOContext* inContext )
 }
 
 
-void	WILDCardFieldInstruction( LEOContext* inContext )
+void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDCard	*	theCard = [frontStack currentCard];
+	CPart	*	thePart = NULL;
+	CStack	*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	char		partName[1024] = { 0 };
+	CCard	*	theCard = frontStack->GetCurrentCard();
 	
 	char			idStrBuf[256] = {};
 	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
@@ -166,9 +171,9 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
 		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
+			thePart = theCard->GetPartWithID( theNumber );
 		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: @"field"];
+			thePart = theCard->GetPartOfType( theNumber -1, CPart::GetPartCreatorForType(inType) );
 		
 		if( !thePart )
 			snprintf( partName, sizeof(partName), "%lld", theNumber );
@@ -177,431 +182,139 @@ void	WILDCardFieldInstruction( LEOContext* inContext )
 	{
 		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
 		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"field"];
+		thePart = theCard->GetPartWithNameOfType( partName, CPart::GetPartCreatorForType(inType) );
 	}
 	
 	if( thePart )
 	{
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, "Can't find field \"%s\".", partName );
+		LEOContextStopWithError( inContext, "Can't find card %s \"%s\".", (inType ? inType : "part"), partName );
 	}
 	
 	inContext->currentInstruction++;
+}
+
+
+void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* inType )
+{
+	CPart	*		thePart = NULL;
+	CStack	*		frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	char			partName[1024] = { 0 };
+	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
+	
+	char			idStrBuf[256] = {};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
+		if( lookUpByID )
+			thePart = theBackground->GetPartWithID( theNumber );
+		else
+			thePart = theBackground->GetPartOfType( theNumber -1, CPart::GetPartCreatorForType(inType) );
+		
+		if( !thePart )
+			snprintf( partName, sizeof(partName), "%lld", theNumber );
+	}
+	else if( !lookUpByID )
+	{
+		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		
+		thePart = theBackground->GetPartWithNameOfType( partName, CPart::GetPartCreatorForType(inType) );
+	}
+	
+	if( thePart )
+	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+	}
+	else
+	{
+		LEOContextStopWithError( inContext, "Can't find %s \"%s\".", (inType ? inType : "part"), partName );
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
+void	WILDCardFieldInstruction( LEOContext* inContext )
+{
+	WILDCardPartInstructionInternal( inContext, "field" );
 }
 
 
 void	WILDCardButtonInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDCard	*	theCard = [frontStack currentCard];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: @"button"];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else if( !lookUpByID )
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"button"];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find button \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDCardPartInstructionInternal( inContext, "button" );
 }
 
 
 void	WILDCardMoviePlayerInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDCard	*	theCard = [frontStack currentCard];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: @"moviePlayer"];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"moviePlayer"];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find movie player \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDCardPartInstructionInternal( inContext, "moviePlayer" );
 }
 
 
 void	WILDCardTimerInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDCard	*	theCard = [frontStack currentCard];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: @"timer"];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"timer"];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find timer \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDCardPartInstructionInternal( inContext, "timer" );
 }
 
 
 void	WILDCardPartInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDCard	*	theCard = [frontStack currentCard];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: nil];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: nil];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find part \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDCardPartInstructionInternal( inContext, NULL );
 }
 
 
 void	WILDBackgroundFieldInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: @"field"];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"field"];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find field \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDBackgroundPartInstructionInternal( inContext, "field" );
 }
 
 
 void	WILDBackgroundButtonInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: @"button"];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"button"];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find button \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDBackgroundPartInstructionInternal( inContext, "button" );
 }
 
 
 void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: @"moviePlayer"];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"moviePlayer"];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find movie player \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDBackgroundPartInstructionInternal( inContext, "moviePlayer" );
 }
 
 
 void	WILDBackgroundTimerInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: @"timer"];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: @"timer"];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find timer \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDBackgroundPartInstructionInternal( inContext, "timer" );
 }
 
 
 void	WILDBackgroundPartInstruction( LEOContext* inContext )
 {
-	WILDPart	*	thePart = nil;
-	WILDStack	*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	char			partName[1024] = { 0 };
-	WILDBackground*	theCard = [[frontStack currentCard] owningBackground];
-	
-	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
-	bool			lookUpByID = idStr[0] != 0;
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
-	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
-		if( lookUpByID )
-			thePart = [theCard partWithID: theNumber];
-		else
-			thePart = [theCard partAtIndex: theNumber -1 ofType: nil];
-		
-		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
-	}
-	else
-	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
-		
-		thePart = [theCard partNamed: [NSString stringWithUTF8String: partName] ofType: nil];
-	}
-	
-	if( thePart )
-	{
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
-	}
-	else
-	{
-		LEOContextStopWithError( inContext, "Can't find part \"%s\".", partName );
-	}
-	
-	inContext->currentInstruction++;
+	WILDBackgroundPartInstructionInternal( inContext, NULL );
 }
 
 
 void	WILDNextCardInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard	*	theCard = [[theStack document] currentCard];
-	NSUInteger		cardIdx = [[theStack cards] indexOfObject: theCard];
+	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard		*	theCard = theStack->GetCurrentCard();
+	size_t			cardIdx = theStack->GetIndexOfCard(theCard);
 	cardIdx++;
-	if( cardIdx >= [[theStack cards] count] )
+	if( cardIdx >= theStack->GetNumCards() )
 		cardIdx = 0;
-	theCard = [[theStack cards] objectAtIndex: cardIdx];
+	theCard = theStack->GetCard( cardIdx );
 	
-	WILDInitObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -610,16 +323,16 @@ void	WILDNextCardInstruction( LEOContext* inContext )
 
 void	WILDPreviousCardInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard	*	theCard = [[theStack document] currentCard];
-	NSUInteger		cardIdx = [[theStack cards] indexOfObject: theCard];
+	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard		*	theCard = theStack->GetCurrentCard();
+	size_t			cardIdx = theStack->GetIndexOfCard(theCard);
 	if( cardIdx == 0 )
-		cardIdx = [[theStack cards] count] -1;
+		cardIdx = theStack->GetNumCards() -1;
 	else
 		cardIdx--;
-	theCard = [[theStack cards] objectAtIndex: cardIdx];
+	theCard = theStack->GetCard( cardIdx );
 	
-	WILDInitObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -628,15 +341,15 @@ void	WILDPreviousCardInstruction( LEOContext* inContext )
 
 void	WILDNextBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDBackground*	theBackground = [[theStack document] currentCard].owningBackground;
-	NSUInteger		bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
+	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CBackground	*	theBackground = theStack->GetCurrentCard()->GetBackground();
+	size_t			bkgdIndex = theStack->GetIndexOfBackground(theBackground);
 	bkgdIndex++;
-	if( bkgdIndex >= [[theStack backgrounds] count] )
+	if( bkgdIndex >= theStack->GetNumBackgrounds() )
 		bkgdIndex = 0;
-	theBackground = [[theStack backgrounds] objectAtIndex: bkgdIndex];
+	theBackground = theStack->GetBackground( bkgdIndex );
 	
-	WILDInitObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
+	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -645,16 +358,16 @@ void	WILDNextBackgroundInstruction( LEOContext* inContext )
 
 void	WILDPreviousBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDBackground*	theBackground = [[theStack document] currentCard].owningBackground;
-	NSUInteger		bkgdIndex = [[theStack backgrounds] indexOfObject: theBackground];
+	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CBackground	*	theBackground = theStack->GetCurrentCard()->GetBackground();
+	size_t			bkgdIndex = theStack->GetIndexOfBackground(theBackground);
 	if( bkgdIndex == 0 )
-		bkgdIndex = [[theStack backgrounds] count] -1;
+		bkgdIndex = theStack->GetNumBackgrounds() -1;
 	else
 		bkgdIndex--;
-	theBackground = [[theStack backgrounds] objectAtIndex: bkgdIndex];
+	theBackground = theStack->GetBackground( bkgdIndex );
 	
-	WILDInitObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
+	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -663,15 +376,16 @@ void	WILDPreviousBackgroundInstruction( LEOContext* inContext )
 
 void	WILDFirstCardInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard	*	theCard = [[theStack cards] objectAtIndex: 0];
+	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	
-	if( theStack.cards.count == 0 )
+	if( theStack->GetNumCards() == 0 )
 		LEOContextStopWithError( inContext, "No such card." );
 	
+	CCard	*	theCard = theStack->GetCard( 0 );
+		
 	if( inContext->keepRunning )	// No error?
 	{
-		WILDInitObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 		inContext->stackEndPtr ++;
 	}
 	
@@ -681,15 +395,16 @@ void	WILDFirstCardInstruction( LEOContext* inContext )
 
 void	WILDLastCardInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard	*	theCard = [[theStack cards] lastObject];
+	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	
-	if( theStack.cards.count == 0 )
+	if( theStack->GetNumCards() == 0 )
 		LEOContextStopWithError( inContext, "No such card." );
+	
+	CCard	*	theCard = theStack->GetCard( theStack->GetNumCards() -1 );
 	
 	if( inContext->keepRunning )	// No error?
 	{
-		WILDInitObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 		inContext->stackEndPtr ++;
 	}
 	
@@ -699,16 +414,17 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 
 void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack	*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	
-	if( theStack.backgrounds.count == 0 )
+	size_t		numBackgrounds = theStack->GetNumBackgrounds();
+	if( numBackgrounds == 0 )
 		LEOContextStopWithError( inContext, "No such background." );
 	
 	if( inContext->keepRunning )
 	{
-		WILDBackground	*	theBackground = (inContext->currentInstruction->param1 & 32) ? [[theStack backgrounds] lastObject] : [[theStack backgrounds] objectAtIndex: 0];
+		CBackground	*	theBackground = (inContext->currentInstruction->param1 & 32) ? theStack->GetBackground( numBackgrounds -1 ) : theStack->GetBackground(0);
 		
-		WILDInitObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
 		inContext->stackEndPtr ++;
 	}
 	
@@ -718,11 +434,11 @@ void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 
 void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 {
-	WILDStack		*	theStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard		*	theCard = [theStack.document currentCard];
-	WILDBackground	*	theBackground = [theCard owningBackground];
-	WILDLayer		*	theLayer = theCard;
-	NSString		*	partType = nil;
+	CStack			*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard			*	theCard = frontStack->GetCurrentCard();
+	CBackground		*	theBackground = theCard->GetBackground();
+	CLayer			*	theLayer = theCard;
+	CPartCreatorBase*	partType = NULL;
 		
 	if( (inContext->currentInstruction->param1 & 16) != 0 )
 		theLayer = theBackground;
@@ -730,29 +446,32 @@ void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 	uint16_t	partTypeNum = inContext->currentInstruction->param1 & ~(16 | 32);
 	
 	if( partTypeNum == 1 )
-		partType = @"button";
+		partType = CPart::GetPartCreatorForType("button");
 	else if( partTypeNum == 2 )
-		partType = @"field";
+		partType = CPart::GetPartCreatorForType("field");
 	else if( partTypeNum == 3 )
-		partType = @"moviePlayer";
+		partType = CPart::GetPartCreatorForType("moviePlayer");
+	else if( partTypeNum == 4 )
+		partType = CPart::GetPartCreatorForType("browser");
 	else if( partTypeNum != 0 )
-		LEOContextStopWithError( inContext, "Can only list parts, buttons, fields and movie players on cards and backgrounds." );
+		LEOContextStopWithError( inContext, "Can only list parts, buttons, fields, browsers and movie players on cards and backgrounds." );
 	
 	if( inContext->keepRunning )	// No error?
 	{
-		NSInteger		numParts = [theLayer numberOfPartsOfType: partType];
+		size_t		numParts = theLayer->GetPartCountOfType(partType);
 		if( numParts == 0 )
-			LEOContextStopWithError( inContext, "No such %s.", [partType UTF8String] );
-		
-		NSInteger	desiredIndex = 0;
+		{
+			LEOContextStopWithError( inContext, "No such %s %s.", ((theCard == theLayer)? "card" : "background"), partType->GetPartTypeName().c_str() );
+		}
+		size_t	desiredIndex = 0;
 		if( inContext->currentInstruction->param1 & 32 )
 			desiredIndex = numParts -1;
 		
 		if( inContext->keepRunning )	// Still no error? I.e. we have parts of this type?
 		{
-			WILDPart	*	thePart = [theLayer partAtIndex: desiredIndex ofType: partType];
+			CPart	*	thePart = theLayer->GetPartOfType(desiredIndex, partType);
 			
-			WILDInitObjectValue( &inContext->stackEndPtr->object, thePart, kLEOInvalidateReferences, inContext );
+			CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, thePart, kLEOInvalidateReferences, inContext );
 			inContext->stackEndPtr ++;
 		}
 	}
@@ -763,12 +482,12 @@ void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 
 void	WILDThisStackInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 		
 	if( frontStack )
 	{
 		inContext->stackEndPtr++;
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, frontStack, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, frontStack, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -781,13 +500,13 @@ void	WILDThisStackInstruction( LEOContext* inContext )
 
 void	WILDThisBackgroundInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
 	
 	if( theBackground )
 	{
 		inContext->stackEndPtr++;
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -800,13 +519,13 @@ void	WILDThisBackgroundInstruction( LEOContext* inContext )
 
 void	WILDThisCardInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard		*	theCard = [frontStack currentCard];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard		*	theCard = frontStack->GetCurrentCard();
 	
 	if( theCard )
 	{
 		inContext->stackEndPtr++;
-		WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -819,11 +538,13 @@ void	WILDThisCardInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardButtonsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard		*	theCard = [frontStack currentCard];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard		*	theCard = frontStack->GetCurrentCard();
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"button"], kLEOUnitNone );
+	{
+		LEOPushIntegerOnStack( inContext, theCard->GetPartCountOfType(CPart::GetPartCreatorForType("button")), kLEOUnitNone );
+	}
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -835,11 +556,13 @@ void	WILDNumberOfCardButtonsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardFieldsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard		*	theCard = [frontStack currentCard];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard		*	theCard = frontStack->GetCurrentCard();
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"field"], kLEOUnitNone );
+	{
+		LEOPushIntegerOnStack( inContext, theCard->GetPartCountOfType(CPart::GetPartCreatorForType("field")), kLEOUnitNone );
+	}
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -851,11 +574,11 @@ void	WILDNumberOfCardFieldsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardMoviePlayersInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard		*	theCard = [frontStack currentCard];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard		*	theCard = frontStack->GetCurrentCard();
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"moviePlayer"], kLEOUnitNone );
+		LEOPushIntegerOnStack( inContext, theCard->GetPartCountOfType(CPart::GetPartCreatorForType("moviePlayer")), kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -867,11 +590,13 @@ void	WILDNumberOfCardMoviePlayersInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardTimersInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard		*	theCard = [frontStack currentCard];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard		*	theCard = frontStack->GetCurrentCard();
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: @"timer"], kLEOUnitNone );
+	{
+		LEOPushIntegerOnStack( inContext, theCard->GetPartCountOfType(CPart::GetPartCreatorForType("timer")), kLEOUnitNone );
+	}
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -883,11 +608,11 @@ void	WILDNumberOfCardTimersInstruction( LEOContext* inContext )
 
 void	WILDNumberOfCardPartsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDCard		*	theCard = [frontStack currentCard];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CCard		*	theCard = frontStack->GetCurrentCard();
 	
 	if( theCard )
-		LEOPushIntegerOnStack( inContext, [theCard numberOfPartsOfType: nil], kLEOUnitNone );
+		LEOPushIntegerOnStack( inContext, theCard->GetPartCountOfType(NULL), kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -899,11 +624,11 @@ void	WILDNumberOfCardPartsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundButtonsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"button"], kLEOUnitNone );
+		LEOPushIntegerOnStack( inContext, theBackground->GetPartCountOfType(CPart::GetPartCreatorForType("button")), kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -915,11 +640,11 @@ void	WILDNumberOfBackgroundButtonsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundFieldsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"field"], kLEOUnitNone );
+		LEOPushIntegerOnStack( inContext, theBackground->GetPartCountOfType(CPart::GetPartCreatorForType("field")), kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -931,11 +656,11 @@ void	WILDNumberOfBackgroundFieldsInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundMoviePlayersInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"moviePlayer"], kLEOUnitNone );
+		LEOPushIntegerOnStack( inContext, theBackground->GetPartCountOfType(CPart::GetPartCreatorForType("moviePlayer")), kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -947,11 +672,11 @@ void	WILDNumberOfBackgroundMoviePlayersInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: @"timer"], kLEOUnitNone );
+		LEOPushIntegerOnStack( inContext, theBackground->GetPartCountOfType(CPart::GetPartCreatorForType("timer")), kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -963,11 +688,11 @@ void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext )
 
 void	WILDNumberOfBackgroundPartsInstruction( LEOContext* inContext )
 {
-	WILDStack		*	frontStack = [((WILDScriptContextUserData*)inContext->userData) currentStack];
-	WILDBackground	*	theBackground = [[frontStack currentCard] owningBackground];
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
 	
 	if( theBackground )
-		LEOPushIntegerOnStack( inContext, [theBackground numberOfPartsOfType: nil], kLEOUnitNone );
+		LEOPushIntegerOnStack( inContext, theBackground->GetPartCountOfType(NULL), kLEOUnitNone );
 	else
 	{
 		LEOContextStopWithError( inContext, "No stack open at the moment." );
@@ -979,10 +704,10 @@ void	WILDNumberOfBackgroundPartsInstruction( LEOContext* inContext )
 
 void	WILDMessageBoxInstruction( LEOContext* inContext )
 {
-	WILDMessageBox*	msg = [WILDMessageBox sharedMessageBox];
+	CMessageBox*	msg = CMessageBox::GetSharedInstance();
 		
 	inContext->stackEndPtr++;
-	WILDInitObjectValue( &(inContext->stackEndPtr -1)->object, msg, kLEOInvalidateReferences, inContext );
+	CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, msg, kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }

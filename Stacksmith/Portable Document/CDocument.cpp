@@ -46,16 +46,16 @@ void	CDocument::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root,
 		std::string	fileName;
 		CTinyXMLUtils::GetStringNamed( currMediaElem, "file", fileName );
 		std::string	typeName;
-		CMediaType	mediaType = CMediaTypeUnknown;
+		TMediaType	mediaType = EMediaTypeUnknown;
 		CTinyXMLUtils::GetStringNamed( currMediaElem, "type", typeName );
 		if( typeName.compare( "icon" ) == 0 )
-			mediaType = CMediaTypeIcon;
+			mediaType = EMediaTypeIcon;
 		else if( typeName.compare( "picture" ) == 0 )
-			mediaType = CMediaTypePicture;
+			mediaType = EMediaTypePicture;
 		else if( typeName.compare( "cursor" ) == 0 )
-			mediaType = CMediaTypeCursor;
+			mediaType = EMediaTypeCursor;
 		else if( typeName.compare( "sound" ) == 0 )
-			mediaType = CMediaTypeSound;
+			mediaType = EMediaTypeSound;
 		tinyxml2::XMLElement	*	hotspotElem = currMediaElem->FirstChildElement( "hotspot" );
 		int		hotspotLeft = CTinyXMLUtils::GetIntNamed( hotspotElem, "left", 0 );
 		int		hotspotTop = CTinyXMLUtils::GetIntNamed( hotspotElem, "top", 0 );
@@ -81,6 +81,11 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 		return;
 	
 	mLoading = true;
+	
+	size_t			slashOffset = inURL.rfind( '/' );
+	if( slashOffset == std::string::npos )
+		slashOffset = 0;
+	mURL = inURL.substr(0,slashOffset);
 	
 	CURLRequest		request( inURL );
 	CURLConnection::SendRequestWithCompletionHandler( request, [inURL,this](CURLResponse inResponse, const char* inData, size_t inDataLength)
@@ -151,13 +156,10 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			
 			// Load stacks:
 			tinyxml2::XMLElement	*	currStackElem = root->FirstChildElement( "stack" );
-			size_t			slashOffset = inURL.rfind( '/' );
-			if( slashOffset == std::string::npos )
-				slashOffset = 0;
 			
 			while( currStackElem )
 			{
-				std::string		stackURL = inURL.substr(0,slashOffset);
+				std::string		stackURL = mURL;
 				stackURL.append( 1, '/' );
 				stackURL.append( currStackElem->Attribute("file") );
 				char*			endPtr = NULL;
@@ -179,6 +181,36 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			(*itty)( this );
 		mLoadCompletionBlocks.clear();
 	} );
+}
+
+
+CStack*	CDocument::GetStackByName( const char *inName )
+{
+	for( auto itty = mStacks.begin(); itty != mStacks.end(); itty++ )
+	{
+		if( strcasecmp( (*itty)->GetName().c_str(), inName ) == 0 )
+			return *itty;
+	}
+	
+	return NULL;
+}
+
+
+std::string	CDocument::GetMediaURLByNameOfType( const std::string& inName, TMediaType inType )
+{
+	const char*	str = inName.c_str();
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( strcasecmp( str, currMedia->GetName().c_str() ) == 0 )
+		{
+			std::string	fullURL = mURL;
+			fullURL.append( 1, '/' );
+			fullURL.append( currMedia->GetName() );
+			return fullURL;
+		}
+	}
+	
+	return std::string();
 }
 
 

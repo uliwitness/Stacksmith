@@ -41,6 +41,7 @@ namespace Carlson
 {
 
 class CStack;
+class CDocument;
 
 
 class CScriptableObject : public CRefCountedObject
@@ -98,6 +99,7 @@ public:
 	CStack*				GetStack()						{ return mCurrentStack; };
 	void				SetTarget( CScriptableObject* target );
 	CScriptableObject*	GetTarget()						{ return mTarget; };
+	CDocument*			GetDocument();
 	
 protected:
 	CStack				*	mCurrentStack;

@@ -211,9 +211,9 @@
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
 		55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 55615C53172D86CE00EFEAEF /* ULIBase64.m */; };
 		55615C57172E10E800EFEAEF /* WILDMoviePlayerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */; };
-		556866581359C47300C364D6 /* WILDGlobalProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.m */; };
-		556866601359EBD200C364D6 /* WILDHostCommands.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.m */; };
-		55686663135A161400C364D6 /* WILDHostFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.m */; };
+		556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.mm */; };
+		556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */; };
+		55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.cpp */; };
 		55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686664135A383300C364D6 /* WILDObjectValue.m */; };
 		55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686668135ADC3000C364D6 /* WILDSearchPaths.m */; };
 		556C49691731EF8800C40D97 /* WILDTimerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556C49681731EF8800C40D97 /* WILDTimerPresenter.m */; };
@@ -322,6 +322,9 @@
 		55CD610818786BAC002450E2 /* CRectanglePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD610518786BAC002450E2 /* CRectanglePart.cpp */; };
 		55CD610F18788CEB002450E2 /* CScriptableObjectValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD610D18788CEB002450E2 /* CScriptableObjectValue.cpp */; };
 		55CD61121878EBF9002450E2 /* CCancelPolling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD61101878EBF9002450E2 /* CCancelPolling.cpp */; };
+		55CD61151879EDA3002450E2 /* CAlert.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD61131879EDA3002450E2 /* CAlert.mm */; };
+		55CD61181879F464002450E2 /* CMessageBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD61161879F464002450E2 /* CMessageBox.cpp */; };
+		55CD611B187A154A002450E2 /* CSound.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD6119187A154A002450E2 /* CSound.mm */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
@@ -340,7 +343,7 @@
 		55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E509E61156B06D001D0762 /* ULIMultiMap.m */; };
 		55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */; };
 		55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */; };
-		55E805C61360ACD3006F1287 /* WILDPropertyInstructions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C51360ACD3006F1287 /* WILDPropertyInstructions.m */; };
+		55E805C61360ACD3006F1287 /* WILDPropertyInstructions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C51360ACD3006F1287 /* WILDPropertyInstructions.cpp */; };
 		55E805F91366091F006F1287 /* CGlobalPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805F71366091F006F1287 /* CGlobalPropertyNode.cpp */; };
 		55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063C1368B2CA006F1287 /* NSCursor+Box.m */; };
 		55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063D1368B2CA006F1287 /* NSCursor+CrossHair.m */; };
@@ -802,12 +805,12 @@
 		55615C53172D86CE00EFEAEF /* ULIBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIBase64.m; path = ../UliKit/ULIBase64.m; sourceTree = "<group>"; };
 		55615C55172E10E700EFEAEF /* WILDMoviePlayerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMoviePlayerPresenter.h; path = Presentation/WILDMoviePlayerPresenter.h; sourceTree = "<group>"; };
 		55615C56172E10E700EFEAEF /* WILDMoviePlayerPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDMoviePlayerPresenter.m; path = Presentation/WILDMoviePlayerPresenter.m; sourceTree = "<group>"; };
-		556866561359C47100C364D6 /* WILDGlobalProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDGlobalProperties.m; path = Instructions/WILDGlobalProperties.m; sourceTree = SOURCE_ROOT; };
+		556866561359C47100C364D6 /* WILDGlobalProperties.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDGlobalProperties.mm; path = Instructions/WILDGlobalProperties.mm; sourceTree = SOURCE_ROOT; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
-		5568665E1359EBCD00C364D6 /* WILDHostCommands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDHostCommands.m; path = Instructions/WILDHostCommands.m; sourceTree = SOURCE_ROOT; };
+		5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostCommands.cpp; path = Instructions/WILDHostCommands.cpp; sourceTree = SOURCE_ROOT; };
 		5568665F1359EBD000C364D6 /* WILDHostCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostCommands.h; path = Instructions/WILDHostCommands.h; sourceTree = SOURCE_ROOT; };
 		55686661135A161000C364D6 /* WILDHostFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostFunctions.h; path = Instructions/WILDHostFunctions.h; sourceTree = SOURCE_ROOT; };
-		55686662135A161100C364D6 /* WILDHostFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDHostFunctions.m; path = Instructions/WILDHostFunctions.m; sourceTree = SOURCE_ROOT; };
+		55686662135A161100C364D6 /* WILDHostFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostFunctions.cpp; path = Instructions/WILDHostFunctions.cpp; sourceTree = SOURCE_ROOT; };
 		55686664135A383300C364D6 /* WILDObjectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjectValue.m; path = Instructions/WILDObjectValue.m; sourceTree = SOURCE_ROOT; };
 		55686665135A383700C364D6 /* WILDObjectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectValue.h; path = Instructions/WILDObjectValue.h; sourceTree = SOURCE_ROOT; };
 		55686667135ADC2B00C364D6 /* WILDSearchPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDSearchPaths.h; sourceTree = "<group>"; };
@@ -994,6 +997,12 @@
 		55CD610E18788CEB002450E2 /* CScriptableObjectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CScriptableObjectValue.h; path = "Portable Document/CScriptableObjectValue.h"; sourceTree = "<group>"; };
 		55CD61101878EBF9002450E2 /* CCancelPolling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCancelPolling.cpp; path = Platforms/Mac/CCancelPolling.cpp; sourceTree = "<group>"; };
 		55CD61111878EBF9002450E2 /* CCancelPolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCancelPolling.h; path = Platforms/Mac/CCancelPolling.h; sourceTree = "<group>"; };
+		55CD61131879EDA3002450E2 /* CAlert.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CAlert.mm; path = Platforms/Mac/CAlert.mm; sourceTree = "<group>"; };
+		55CD61141879EDA3002450E2 /* CAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAlert.h; path = Platforms/Mac/CAlert.h; sourceTree = "<group>"; };
+		55CD61161879F464002450E2 /* CMessageBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessageBox.cpp; path = "Portable Document/CMessageBox.cpp"; sourceTree = "<group>"; };
+		55CD61171879F464002450E2 /* CMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessageBox.h; path = "Portable Document/CMessageBox.h"; sourceTree = "<group>"; };
+		55CD6119187A154A002450E2 /* CSound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CSound.mm; path = Platforms/Mac/CSound.mm; sourceTree = "<group>"; };
+		55CD611A187A154A002450E2 /* CSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSound.h; path = Platforms/Mac/CSound.h; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
@@ -1026,7 +1035,7 @@
 		55E805C01360A7B3006F1287 /* CObjectPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CObjectPropertyNode.h; path = ../../CObjectPropertyNode.h; sourceTree = "<group>"; };
 		55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = LEOPropertyInstructions.c; path = ../../../Forge/Leonie/generic/LEOPropertyInstructions.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		55E805C31360AA25006F1287 /* LEOPropertyInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = LEOPropertyInstructions.h; path = ../../../Forge/Leonie/generic/LEOPropertyInstructions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		55E805C51360ACD3006F1287 /* WILDPropertyInstructions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDPropertyInstructions.m; path = Instructions/WILDPropertyInstructions.m; sourceTree = SOURCE_ROOT; };
+		55E805C51360ACD3006F1287 /* WILDPropertyInstructions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDPropertyInstructions.cpp; path = Instructions/WILDPropertyInstructions.cpp; sourceTree = SOURCE_ROOT; };
 		55E805F71366091F006F1287 /* CGlobalPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGlobalPropertyNode.cpp; path = ../../CGlobalPropertyNode.cpp; sourceTree = "<group>"; };
 		55E805F81366091F006F1287 /* CGlobalPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGlobalPropertyNode.h; path = ../../CGlobalPropertyNode.h; sourceTree = "<group>"; };
 		55E8063C1368B2CA006F1287 /* NSCursor+Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCursor+Box.m"; path = "../UKPaintView/NSCursor+Box.m"; sourceTree = "<group>"; };
@@ -1377,12 +1386,12 @@
 				553C46AA13577334000219FA /* Leonie */,
 				551D93911705A7AD003766DA /* WILDDownloadInstructions.m */,
 				55AAC04417109571008441AF /* WILDGlobalProperties.h */,
-				556866561359C47100C364D6 /* WILDGlobalProperties.m */,
-				55E805C51360ACD3006F1287 /* WILDPropertyInstructions.m */,
+				556866561359C47100C364D6 /* WILDGlobalProperties.mm */,
+				55E805C51360ACD3006F1287 /* WILDPropertyInstructions.cpp */,
 				5568665F1359EBD000C364D6 /* WILDHostCommands.h */,
-				5568665E1359EBCD00C364D6 /* WILDHostCommands.m */,
+				5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */,
 				55686661135A161000C364D6 /* WILDHostFunctions.h */,
-				55686662135A161100C364D6 /* WILDHostFunctions.m */,
+				55686662135A161100C364D6 /* WILDHostFunctions.cpp */,
 				55382462172730B4007785D8 /* WILDObjCCallInstructions.m */,
 				55686665135A383700C364D6 /* WILDObjectValue.h */,
 				55686664135A383300C364D6 /* WILDObjectValue.m */,
@@ -1692,6 +1701,8 @@
 				55AC961F1870FFC200488B51 /* CPartContents.cpp */,
 				55CD60C1187511A3002450E2 /* CPartRegistration.h */,
 				55CD60C0187511A3002450E2 /* CPartRegistration.cpp */,
+				55CD61171879F464002450E2 /* CMessageBox.h */,
+				55CD61161879F464002450E2 /* CMessageBox.cpp */,
 				556DB7A418709A15002F7CB2 /* tinyxml2.h */,
 				556DB7A318709A15002F7CB2 /* tinyxml2.cpp */,
 				55AC961A1870D50400488B51 /* CTinyXMLUtils.h */,
@@ -1704,8 +1715,12 @@
 				556DB7C01870A971002F7CB2 /* CURLConnection.mm */,
 				55CD60C718752ECA002450E2 /* CTimer.h */,
 				55CD60C618752ECA002450E2 /* CTimer.mm */,
-				55CD61101878EBF9002450E2 /* CCancelPolling.cpp */,
 				55CD61111878EBF9002450E2 /* CCancelPolling.h */,
+				55CD61101878EBF9002450E2 /* CCancelPolling.cpp */,
+				55CD61141879EDA3002450E2 /* CAlert.h */,
+				55CD61131879EDA3002450E2 /* CAlert.mm */,
+				55CD611A187A154A002450E2 /* CSound.h */,
+				55CD6119187A154A002450E2 /* CSound.mm */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -2251,6 +2266,7 @@
 				5542CE48113AE27500555C64 /* WILDPartContents.m in Sources */,
 				55CD61121878EBF9002450E2 /* CCancelPolling.cpp in Sources */,
 				55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */,
+				55CD61151879EDA3002450E2 /* CAlert.mm in Sources */,
 				5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */,
 				5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */,
 				552558FE114BDE7C00279B03 /* WILDAppDelegate.m in Sources */,
@@ -2285,6 +2301,7 @@
 				55B9244A1169DB150073EC6C /* WILDIconListDataSource.m in Sources */,
 				551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */,
 				55CBB796117BA3A400A0CACF /* WILDCardWindowController.m in Sources */,
+				55CD611B187A154A002450E2 /* CSound.mm in Sources */,
 				55E3B6AD1184417A000062C1 /* WILDMediaEntry.m in Sources */,
 				55E3B6C91184420E000062C1 /* WILDStyleEntry.m in Sources */,
 				55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */,
@@ -2348,15 +2365,15 @@
 				553C471013577334000219FA /* LEOChunks.c in Sources */,
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
 				553C471713577989000219FA /* WILDMessageBox.m in Sources */,
-				556866581359C47300C364D6 /* WILDGlobalProperties.m in Sources */,
-				556866601359EBD200C364D6 /* WILDHostCommands.m in Sources */,
-				55686663135A161400C364D6 /* WILDHostFunctions.m in Sources */,
+				556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */,
+				556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */,
+				55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */,
 				55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */,
 				55686669135ADC3600C364D6 /* WILDSearchPaths.m in Sources */,
 				556DB7BF1870A6EB002F7CB2 /* CURLRequest.mm in Sources */,
 				55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */,
 				55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */,
-				55E805C61360ACD3006F1287 /* WILDPropertyInstructions.m in Sources */,
+				55E805C61360ACD3006F1287 /* WILDPropertyInstructions.cpp in Sources */,
 				55E805F91366091F006F1287 /* CGlobalPropertyNode.cpp in Sources */,
 				55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */,
 				55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */,
@@ -2375,6 +2392,7 @@
 				55039FCC136D5CCF0082E32E /* ULIPaintPathTool.m in Sources */,
 				55AC961E1870FF2200488B51 /* CPart.cpp in Sources */,
 				55039FCD136D5CCF0082E32E /* ULIPaintRectangleTool.m in Sources */,
+				55CD61181879F464002450E2 /* CMessageBox.cpp in Sources */,
 				55039FCE136D5CCF0082E32E /* ULIPaintRoundedRectangleTool.m in Sources */,
 				55039FCF136D5CCF0082E32E /* ULIPaintSelectionLassoTool.m in Sources */,
 				55039FD0136D5CCF0082E32E /* ULIPaintSelectionRectangleTool.m in Sources */,

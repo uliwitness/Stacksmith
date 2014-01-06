@@ -23,14 +23,22 @@ class CPart;
 class CPartCreatorBase
 {
 public:
+	CPartCreatorBase( const std::string inTypeString = std::string() ) : mPartTypeName(inTypeString) {};
 	virtual ~CPartCreatorBase() {};
 	
 	virtual CPart	*	NewPartInOwner( CLayer *inOwner )	{ return NULL; };
+	
+	std::string			GetPartTypeName()	{ return mPartTypeName; };
+	
+protected:
+	std::string		mPartTypeName;
 };
 
 template<class T>
 class CPartCreator : public CPartCreatorBase
 {
+public:
+	CPartCreator( const std::string inTypeString = std::string() ) : CPartCreatorBase(inTypeString) {};
 	virtual CPart	*	NewPartInOwner( CLayer *inOwner )	{ return new T( inOwner ); };
 };
 
@@ -39,35 +47,39 @@ class CPartCreator : public CPartCreatorBase
 class CPart : public CConcreteObject
 {
 public:
-	static CPart*	NewPartWithElement( tinyxml2::XMLElement * inElement, CLayer *inOwner );
-	static void		RegisterPartCreator( const std::string inTypeString, CPartCreatorBase* inCreator );
+	static CPart*				NewPartWithElement( tinyxml2::XMLElement * inElement, CLayer *inOwner );
+	static void					RegisterPartCreator( CPartCreatorBase* inCreator );
+	static CPartCreatorBase*	GetPartCreatorForType( const char* inType );
 	
 	explicit CPart( CLayer *inOwner );
 	
-	virtual void			LoadFromElement( tinyxml2::XMLElement * inElement );
+	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
 	
-	WILDObjectID			GetID()			{ return mID; };
-	int						GetFamily()		{ return mFamily; };
-	virtual void			SetRect( int left, int top, int right, int bottom )	{ mLeft = left; mTop = top; mRight = right; mBottom = bottom; };
+	WILDObjectID				GetID()			{ return mID; };
+	int							GetFamily()		{ return mFamily; };
+	virtual void				SetRect( int left, int top, int right, int bottom )	{ mLeft = left; mTop = top; mRight = right; mBottom = bottom; };
+	virtual void				SetPartType( CPartCreatorBase* inType )	{ mPartType = inType; };
+	virtual CPartCreatorBase*	GetPartType()							{ return mPartType; };
 
-	virtual void			WakeUp()		{};
-	virtual void			GoToSleep()		{};
+	virtual void				WakeUp()		{};
+	virtual void				GoToSleep()		{};
 	virtual CScriptableObject*	GetParentObject();
 	
-	virtual void			Dump( size_t inIndent = 0 );
+	virtual void				Dump( size_t inIndent = 0 );
 	
 protected:
-	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual const char*		GetIdentityForDump()	{ return "Part"; };
-	virtual void			DumpProperties( size_t inIndent );
+	virtual void				LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	virtual const char*			GetIdentityForDump()					{ return "Part"; };
+	virtual void				DumpProperties( size_t inIndent );
 
-	int				mFamily;
-	WILDObjectID	mID;
-	int				mLeft;
-	int				mTop;
-	int				mRight;
-	int				mBottom;
-	CLayer	*		mOwner;		// Card/background we are on.
+	int					mFamily;
+	WILDObjectID		mID;
+	int					mLeft;
+	int					mTop;
+	int					mRight;
+	int					mBottom;
+	CLayer	*			mOwner;		// Card/background we are on.
+	CPartCreatorBase*	mPartType;	// Only used for comparing if two parts are same type.
 };
 
 

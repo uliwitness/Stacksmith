@@ -34,8 +34,12 @@ public:
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
 	bool			IsLoaded()	{ return mLoaded; };
 	virtual void	SetStack( CStack* inStack );
+	virtual size_t	GetPartCountOfType( CPartCreatorBase* inType );
+	virtual CPart*	GetPartOfType( size_t inIndex, CPartCreatorBase* inType );
+	virtual CPart*	GetPartWithNameOfType( const std::string& inName, CPartCreatorBase* inType );
 	virtual CPart*	GetPartWithID( WILDObjectID inID );
-	
+	virtual void    AddPart( CPart* inPart );
+
 	virtual void	WakeUp();
 	virtual void	GoToSleep();
 	

@@ -11,8 +11,10 @@
 #import <string.h>
 #import <Foundation/Foundation.h>
 #import "UKSystemInfo.h"
-#import "WILDObjectValue.h"
-#import "WILDScriptContainer.h"
+#import "CScriptableObjectValue.h"
+
+
+using namespace Carlson;
 
 
 #define TOSTRING2(x)	#x
@@ -135,7 +137,7 @@ void	LEOPushMachineInstruction( LEOContext* inContext )
 void	LEOPushTargetInstruction( LEOContext* inContext )
 {
 	LEOValuePtr	newVal = LEOPushValueOnStack( inContext, NULL );
-	WILDInitObjectValue( &newVal->object, ((WILDScriptContextUserData*) inContext->userData).target, kLEOInvalidateReferences, inContext );
+	CScriptableObject::InitScriptableObjectValue( &newVal->object, ((CScriptContextUserData*) inContext->userData)->GetTarget(), kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }

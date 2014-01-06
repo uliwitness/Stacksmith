@@ -32,15 +32,25 @@ public:
 	
 	void			AddCard( CCard* inCard );
 	void			RemoveCard( CCard* inCard );
+	size_t			GetNumCards()						{ return mCards.size(); };
 	CCard*			GetCard( size_t inIndex )			{ if( inIndex >= mCards.size() ) return NULL; return mCards[inIndex]; };
 	CCard*			GetCardByID( WILDObjectID inID );
+	CCard*			GetCardByName( const char* inName );
+	size_t			GetIndexOfCard( CCard* inBackground );
+	
+	size_t			GetNumBackgrounds()					{ return mBackgrounds.size(); };
 	CBackground*	GetBackground( size_t inIndex )		{ if( inIndex >= mBackgrounds.size() ) return NULL; return mBackgrounds[inIndex]; };
 	CBackground*	GetBackgroundByID( WILDObjectID inID );
+	CBackground*	GetBackgroundByName( const char* inName );
+	size_t			GetIndexOfBackground( CBackground* inBackground );
 	
 	virtual void	WakeUp()	{};	// The current card has started its timers etc.
 	virtual void	GoToSleep()	{};	// The current card has stopped its timers etc.
 	
-	void			Dump( size_t inIndent = 0 );
+	virtual void	SetCurrentCard( CCard* inCard )	{ mCurrentCard = inCard; };
+	virtual CCard*	GetCurrentCard()				{ return mCurrentCard; };
+	
+	virtual void	Dump( size_t inIndent = 0 );
 	
 protected:
 	~CStack();
@@ -63,6 +73,7 @@ protected:
 	std::vector<CCardRef>		mCards;				// List of all cards in this stack.
 	std::vector<CBackgroundRef>	mBackgrounds;		// List of all backgrounds in this stack.
 	std::set<CCardRef>			mMarkedCards;		// List of all cards in this stack.
+	CCardRef					mCurrentCard;		// The card that is currently being shown in this stack's window.
 };
 
 typedef CRefCountedObjectRef<CStack>	CStackRef;

@@ -22,13 +22,15 @@
 */
 
 #import "Forge.h"
-#import "WILDObjectValue.h"
-#import "WILDObjCConversion.h"
+#import "CScriptableObjectValue.h"
 
 
 void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext );
 void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext );
 void	LEOPushMeInstruction( LEOContext* inContext );
+
+
+using namespace Carlson;
 
 
 /*!
@@ -53,20 +55,13 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 	char			propNameStr[1024] = { 0 };
 	LEOGetValueAsString( thePropertyName, propNameStr, sizeof(propNameStr), inContext );
 	
-	LEOValuePtr		objectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeWILDObject, inContext );
+	LEOValuePtr		objectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeScriptableObject, inContext );
 	if( objectValue )
 	{
-		id propValueObj = [(id<WILDObject>)objectValue->object.object valueForWILDPropertyNamed: [NSString stringWithUTF8String: propNameStr] ofRange: NSMakeRange(0,0)];
-		if( !propValueObj )
+		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
+		if( !((CScriptableObject*)objectValue->object.object)->GetPropertyNamed( propNameStr, 0, 0, thePropertyName ) )
 		{
 			LEOContextStopWithError( inContext,"Object does not have property \"%s\".", propNameStr );
-			return;
-		}
-		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
-		
-		if( !WILDObjCObjectToLEOValue( propValueObj, thePropertyName, inContext ) )
-		{
-			LEOContextStopWithError( inContext, "Internal Error: property '%s' returned unknown value.", propNameStr );
 			return;
 		}
 	}
@@ -113,25 +108,14 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 	char		propNameStr[1024] = { 0 };
 	LEOGetValueAsString( thePropertyName, propNameStr, sizeof(propNameStr), inContext );
 	
-	LEOValuePtr	theObjectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeWILDObject, inContext );
+	LEOValuePtr	theObjectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeScriptableObject, inContext );
 	
 	if( theObjectValue )
 	{
-		id<WILDObject>	theObjCObject = (id<WILDObject>)theObjectValue->object.object;
-		NSString	*	propNameObjCStr = [NSString stringWithUTF8String: propNameStr];
-		id				theObjCValue = WILDObjCObjectFromLEOValue( theValue, inContext, [theObjCObject typeForWILDPropertyNamed: propNameObjCStr] );
-		
-		@try
+		CScriptableObject*	theScriptObject = (CScriptableObject*)theObjectValue->object.object;
+		if( !theScriptObject->SetValueForPropertyNamed( theValue, propNameStr, 0, 0 ) )
 		{
-			if( ![theObjCObject setValue: theObjCValue forWILDPropertyNamed: propNameObjCStr inRange: NSMakeRange(0,0)] )
-			{
-				LEOContextStopWithError( inContext, "Object does not have property \"%s\".", propNameStr );
-				return;
-			}
-		}
-		@catch( NSException* exc )
-		{
-			LEOContextStopWithError( inContext, "Error retrieving property \"%s\": %s", propNameStr, [[exc reason] UTF8String] );
+			LEOContextStopWithError( inContext, "Object does not have property \"%s\".", propNameStr );
 			return;
 		}
 	}

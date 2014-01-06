@@ -165,6 +165,57 @@ CBackground*	CStack::GetBackgroundByID( WILDObjectID inID )
 }
 
 
+CCard*	CStack::GetCardByName( const char* inName )
+{
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+	{
+		if( strcasecmp( (*itty)->GetName().c_str(), inName ) == 0 )
+			return *itty;
+	}
+	
+	return NULL;
+}
+
+
+CBackground*	CStack::GetBackgroundByName( const char* inName )
+{
+	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+	{
+		if( strcasecmp( (*itty)->GetName().c_str(), inName ) == 0 )
+			return *itty;
+	}
+	
+	return NULL;
+}
+
+
+size_t	CStack::GetIndexOfCard( CCard* inCard )
+{
+	size_t		currIdx = 0;
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+	{
+		if( (*itty) == inCard )
+			return currIdx;
+		currIdx++;
+	}
+	return SIZE_T_MAX;
+}
+
+
+size_t	CStack::GetIndexOfBackground( CBackground* inBackground )
+{
+	size_t		currIdx = 0;
+	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+	{
+		if( (*itty) == inBackground )
+			return currIdx;
+		currIdx++;
+	}
+	return SIZE_T_MAX;
+}
+
+
+
 void	CStack::Dump( size_t inIndent )
 {
 	const char * indentStr = IndentString( inIndent );

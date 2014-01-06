@@ -37,6 +37,9 @@ public:
 	
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );	// Calls errorHandler with NULL message on success, calls error handler with error message and returns NULL on failure.
 	virtual CDocument*	GetDocument()		{ return mDocument; };
+	
+	virtual std::string	GetName()			{ return mName; };
+    virtual void        SetName( const std::string& inStr ) { mName = inStr; };
 
 protected:
 	virtual void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );

@@ -932,3 +932,12 @@ void	CScriptContextUserData::SetTarget( CScriptableObject* target )
 	mTarget = target;
 }
 
+
+CDocument*	CScriptContextUserData::GetDocument()
+{
+	if( !mCurrentStack )
+		return NULL;
+	return mCurrentStack->GetDocument();
+}
+
+

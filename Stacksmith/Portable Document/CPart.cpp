@@ -25,7 +25,10 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 
 	auto	foundItem = sPartCreators.find( partType );
 	if( foundItem != sPartCreators.end() )
+	{
 		thePart = foundItem->second->NewPartInOwner( inOwner );
+		thePart->SetPartType( (*foundItem).second );	// Remember who created this part so we can compare its type.
+	}
 	else
 	{
 		thePart = new CPart( inOwner );
@@ -36,9 +39,20 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 }
 
 
-/*static*/ void		CPart::RegisterPartCreator( const std::string inTypeString, CPartCreatorBase* inCreator )
+/*static*/ void		CPart::RegisterPartCreator( CPartCreatorBase* inCreator )
 {
-	sPartCreators[inTypeString] = inCreator;
+	sPartCreators[inCreator->GetPartTypeName()] = inCreator;
+}
+
+
+CPartCreatorBase*	CPart::GetPartCreatorForType( const char* inType )
+{
+	if( !inType )
+		return NULL;
+	auto	foundPartCreator = sPartCreators.find(inType);
+	if( foundPartCreator == sPartCreators.end() )
+		return NULL;
+	return (*foundPartCreator).second;
 }
 
 

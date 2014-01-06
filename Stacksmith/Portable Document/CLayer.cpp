@@ -138,6 +138,63 @@ CPart*	CLayer::GetPartWithID( WILDObjectID inID )
 }
 
 
+size_t	CLayer::GetPartCountOfType( CPartCreatorBase* inType )
+{
+	if( inType == NULL )
+		return mParts.size();
+	
+	size_t	numParts = 0;
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->GetPartType() == inType )
+			numParts++;
+	}
+	
+	return numParts;
+}
+
+
+CPart*	CLayer::GetPartOfType( size_t inIndex, CPartCreatorBase* inType )
+{
+	if( inType == NULL )
+	{
+		if( inIndex >= mParts.size() )
+			return NULL;
+		return mParts[inIndex];
+	}
+	
+	size_t	currIndex = 0;
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->GetPartType() == inType )
+		{
+			if( currIndex == inIndex )
+				return *currPart;
+			currIndex++;
+		}
+	}
+	
+	return NULL;
+}
+
+
+CPart*	CLayer::GetPartWithNameOfType( const std::string& inName, CPartCreatorBase* inType )
+{
+	size_t	currIndex = 0;
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( inType == NULL || (*currPart)->GetPartType() == inType )
+		{
+			if( strcasecmp(inName.c_str(), (*currPart)->GetName().c_str()) == 0 )
+				return *currPart;
+			currIndex++;
+		}
+	}
+	
+	return NULL;
+}
+
+
 void	CLayer::LoadAddColorPartsFromElement( tinyxml2::XMLElement* root )
 {
 	tinyxml2::XMLElement	* theObject = root->FirstChildElement( "addcolorobject" );
@@ -215,6 +272,12 @@ void	CLayer::GoToSleep()
 	{
 		(*currPart)->GoToSleep();
 	}
+}
+
+
+void    CLayer::AddPart( CPart* inPart )
+{
+    mParts.push_back( inPart );
 }
 
 
