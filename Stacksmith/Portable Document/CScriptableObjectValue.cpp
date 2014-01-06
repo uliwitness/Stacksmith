@@ -653,6 +653,9 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	#if REMOTE_DEBUGGER
 	ctx.preInstructionProc = CScriptableObject::PreInstructionProc;
 	ctx.promptProc = LEORemoteDebuggerPrompt;
+	#elif COMMAND_LINE_DEBUGGER
+	ctx.preInstructionProc =  LEODebuggerPreInstructionProc;
+	ctx.promptProc = LEODebuggerPrompt;
 	#endif
 	ctx.callNonexistentHandlerProc = ScriptableObjectCallNonexistentHandler;
 	
@@ -862,6 +865,8 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 		if( theHandler )
 		{
 			LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
+			LEODebugPrintScript( GetScriptContextGroupObject(), theScript );
+			LEODebuggerAddBreakpoint(theHandler->instructions);
 			LEORunInContext( theHandler->instructions, &ctx );
 			if( ctx.errMsg[0] != 0 )
 				break;

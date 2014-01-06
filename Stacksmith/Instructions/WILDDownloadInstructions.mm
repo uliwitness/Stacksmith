@@ -109,6 +109,9 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	#if REMOTE_DEBUGGER
 	mContext.preInstructionProc = CScriptableObject::PreInstructionProc;
 	mContext.promptProc = LEORemoteDebuggerPrompt;
+	#elif COMMAND_LINE_DEBUGGER
+	mContext.preInstructionProc =  LEODebuggerPreInstructionProc;
+	mContext.promptProc = LEODebuggerPrompt;
 	#endif
 	
 	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", mMaxBytes, kLEOUnitBytes, &mContext );
