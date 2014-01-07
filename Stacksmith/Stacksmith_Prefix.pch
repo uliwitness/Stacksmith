@@ -6,7 +6,7 @@
 
 #define TRANSPARENT_BUTTONS_INVERT				1
 #define REMOTE_DEBUGGER							0
-#define COMMAND_LINE_DEBUGGER					1
+#define COMMAND_LINE_DEBUGGER					0
 #define USE_CURSOR_RECTS						1
 
 

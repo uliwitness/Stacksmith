@@ -168,6 +168,7 @@ void	WILDFirstNativeCall( void )
 				inStack->SetCurrentCard((Carlson::CCard*)inCard);
 				inCard->WakeUp();
 				inStack->GoThereInNewWindow( true );
+				inDocument->Dump();
 			} );
 		} );
 	});
