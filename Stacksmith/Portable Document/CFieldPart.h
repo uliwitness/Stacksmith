@@ -13,6 +13,20 @@
 
 namespace Carlson {
 
+
+typedef enum
+{
+	EFieldStyleTransparent,
+	EFieldStyleOpaque,
+	EFieldStyleRectangle,
+	EFieldStyleShadow,
+	EFieldStyleScrolling,
+	EFieldStyleStandard,
+	EFieldStylePopUp,
+	EFieldStyle_Last
+} TFieldStyle;
+
+
 class CFieldPart : public CVisiblePart
 {
 public:
@@ -23,6 +37,10 @@ protected:
 	
 	virtual const char*		GetIdentityForDump()	{ return "Field"; };
 	virtual void			DumpProperties( size_t inIndent );
+	
+	virtual bool			GetSharedText()			{ return mSharedText; };
+
+	static TFieldStyle		GetFieldStyleFromString( const char* inStyleStr );
 	
 protected:
 	bool			mDontWrap;
@@ -40,6 +58,7 @@ protected:
 	int				mTextSize;
 	bool			mHasHorizontalScroller;
 	bool			mHasVerticalScroller;
+	TFieldStyle		mFieldStyle;
 };
 
 }

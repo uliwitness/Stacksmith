@@ -13,6 +13,34 @@
 using namespace Carlson;
 
 
+static const char*	sButtonStyleStrings[EButtonStyle_Last +1] =
+{
+	"transparent",
+	"opaque",
+	"rectangle",
+	"shadow",
+	"roundrect",
+	"checkbox",
+	"radiobutton",
+	"standard",
+	"default",
+	"popup",
+	"oval",
+	"*UNKNOWN*"
+};
+
+
+TButtonStyle	CButtonPart::GetButtonStyleFromString( const char* inStyleStr )
+{
+	for( size_t x = 0; x < EButtonStyle_Last; x++ )
+	{
+		if( strcmp(sButtonStyleStrings[x],inStyleStr) == 0 )
+			return (TButtonStyle)x;
+	}
+	return EButtonStyle_Last;
+}
+
+
 void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
 	CVisiblePart::LoadPropertiesFromElement( inElement );
@@ -25,20 +53,14 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mIconID = CTinyXMLUtils::GetLongLongNamed( inElement, "icon", 0 );
 	std::string	textAlignStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "textAlign", textAlignStr );
-	if( textAlignStr.compare("left") )
-		mTextAlign = EPartTextAlignLeft;
-	else if( textAlignStr.compare("center") )
-		mTextAlign = EPartTextAlignCenter;
-	else if( textAlignStr.compare("right") )
-		mTextAlign = EPartTextAlignRight;
-	else if( textAlignStr.compare("justified") )
-		mTextAlign = EPartTextAlignJustified;
-	else
-		mTextAlign = EPartTextAlignDefault;
+	mTextAlign = GetTextAlignFromString( textAlignStr.c_str() );
 	mFont.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
 	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );
 	mFamily = CTinyXMLUtils::GetIntNamed( inElement, "family", 0 );
+	std::string	styleStr;
+	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );
+	mButtonStyle = GetButtonStyleFromString( styleStr.c_str() );
 }
 
 
@@ -71,6 +93,7 @@ void	CButtonPart::DumpProperties( size_t inIndentLevel )
 	
 	CVisiblePart::DumpProperties( inIndentLevel );
 	
+	printf( "%sstyle = %s\n", indentStr, sButtonStyleStrings[mButtonStyle] );
 	printf( "%sshowName = %s\n", indentStr, (mShowName ? "true" : "false") );
 	printf( "%shighlight = %s\n", indentStr, (mHighlight ? "true" : "false") );
 	printf( "%sautoHighlight = %s\n", indentStr, (mAutoHighlight ? "true" : "false") );

@@ -13,6 +13,30 @@
 using namespace Carlson;
 
 
+static const char*	sFieldStyleStrings[EFieldStyle_Last +1] =
+{
+	"transparent",
+	"opaque",
+	"rectangle",
+	"shadow",
+	"scrolling",
+	"standard",
+	"popup",
+	"*UNKNOWN*"
+};
+
+
+TFieldStyle	CFieldPart::GetFieldStyleFromString( const char* inStyleStr )
+{
+	for( size_t x = 0; x < EFieldStyle_Last; x++ )
+	{
+		if( strcmp(sFieldStyleStrings[x],inStyleStr) == 0 )
+			return (TFieldStyle)x;
+	}
+	return EFieldStyle_Last;
+}
+
+
 void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
 	CVisiblePart::LoadPropertiesFromElement( inElement );
@@ -35,6 +59,9 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );
 	mHasHorizontalScroller = CTinyXMLUtils::GetBoolNamed( inElement, "hasHorizontalScroller", false );
 	mHasVerticalScroller = CTinyXMLUtils::GetBoolNamed( inElement, "hasVerticalScroller", false );
+	std::string	styleStr;
+	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );
+	mFieldStyle = GetFieldStyleFromString( styleStr.c_str() );
 }
 
 
@@ -44,6 +71,7 @@ void	CFieldPart::DumpProperties( size_t inIndentLevel )
 	
 	CVisiblePart::DumpProperties( inIndentLevel );
 	
+	printf( "%sstyle = %s\n", indentStr, sFieldStyleStrings[mFieldStyle] );
 	printf( "%sdontWrap = %s\n", indentStr, (mDontWrap ? "true" : "false") );
 	printf( "%sdontSearch = %s\n", indentStr, (mDontSearch ? "true" : "false") );
 	printf( "%ssharedText = %s\n", indentStr, (mSharedText ? "true" : "false") );

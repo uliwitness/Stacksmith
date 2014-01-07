@@ -13,6 +13,23 @@
 
 namespace Carlson {
 
+typedef enum
+{
+	EButtonStyleTransparent,
+	EButtonStyleOpaque,
+	EButtonStyleRectangle,
+	EButtonStyleShadow,
+	EButtonStyleRoundrect,
+	EButtonStyleCheckBox,
+	EButtonStyleRadioButton,
+	EButtonStyleStandard,
+	EButtonStyleDefault,
+	EButtonStylePopUp,
+	EButtonStyleOval,
+	EButtonStyle_Last
+} TButtonStyle;
+
+
 class CButtonPart : public CVisiblePart
 {
 public:
@@ -23,9 +40,12 @@ protected:
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	virtual bool			GetSharedText()			{ return mSharedHighlight; };
 	
 	virtual const char*		GetIdentityForDump()	{ return "Button"; };
 	virtual void			DumpProperties( size_t inIndent );
+
+	static TButtonStyle		GetButtonStyleFromString( const char* inStyleStr );
 
 protected:
 	bool			mShowName;
@@ -37,6 +57,7 @@ protected:
 	TPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
+	TButtonStyle	mButtonStyle;
 };
 
 }
