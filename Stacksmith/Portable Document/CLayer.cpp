@@ -98,6 +98,18 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 }
 
 
+CPartContents*	CLayer::GetPartContentsByID( WILDObjectID inID, bool isForBackgroundPart )
+{
+	for( auto itty = mContents.begin(); itty != mContents.end(); itty++ )
+	{
+		if( (**itty).GetID() == inID && (**itty).GetIsOnBackground() == isForBackgroundPart )
+			return *itty;
+	}
+	
+	return NULL;
+}
+
+
 void	CLayer::CallAllCompletionBlocks()	// Can override this in cards to also load the background if needed and only *then* call completion blocks.
 {
 	mLoaded = true;

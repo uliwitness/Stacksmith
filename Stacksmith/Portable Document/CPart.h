@@ -18,6 +18,7 @@ namespace Carlson {
 
 class CLayer;
 class CPart;
+class CPartContents;
 
 
 class CPartCreatorBase
@@ -65,6 +66,9 @@ public:
 	virtual void				GoToSleep()		{};
 	virtual CScriptableObject*	GetParentObject();
 	virtual CStack*				GetStack();
+	virtual CPartContents*		GetContentsOnCurrentCard();
+	
+	virtual bool				GetSharedText()				{ return true; };	// By default, background part contents are the same on all cards of that background.
 	
 	virtual void				Dump( size_t inIndent = 0 );
 	

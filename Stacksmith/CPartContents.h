@@ -22,6 +22,11 @@ public:
 	CPartContents( tinyxml2::XMLElement * inElement );
 	
 	virtual void		Dump( size_t inIndent );
+	
+	WILDObjectID		GetID()					{ return mID; };
+	bool				GetHighlight()			{ return mHighlight; };
+	std::string			GetText()				{ return mText; };
+	bool				GetIsOnBackground()		{ return mIsOnBackground; };
 
 protected:
 	WILDObjectID		mID;				// ID of the object whose contents we contain.

@@ -41,6 +41,8 @@ public:
 	virtual CPart*	GetPartWithNameOfType( const std::string& inName, CPartCreatorBase* inType );
 	virtual CPart*	GetPartWithID( WILDObjectID inID );
 	virtual void    AddPart( CPart* inPart );
+	
+	CPartContents*	GetPartContentsByID( WILDObjectID inID, bool isForBackgroundPart );
 
 	virtual CStack*	GetStack()			{ return mStack; };
 

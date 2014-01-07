@@ -9,6 +9,7 @@
 #include "CPart.h"
 #include "CTinyXMLUtils.h"
 #include "CLayer.h"
+#include "CStack.h"
 
 
 using namespace Carlson;
@@ -101,6 +102,7 @@ void	CPart::DumpProperties( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);
 	printf( "%srect = %d,%d,%d,%d\n", indentStr, mLeft, mTop, mRight, mBottom );
+	
 }
 
 
@@ -110,6 +112,19 @@ void	CPart::Dump( size_t inIndent )
 	printf( "%s%s ID %lld \"%s\"\n%s{\n", indentStr, GetIdentityForDump(), mID, mName.c_str(), indentStr );
 	DumpProperties( inIndent +1 );
 	DumpUserProperties( inIndent +1 );
+	CPartContents*	theContents = GetContentsOnCurrentCard();
+	std::string		contents = theContents? theContents->GetText() : std::string();
+	printf( "%s\tcontents = <<%s>>\n", indentStr, contents.c_str() );
 	printf( "%s\tscript = <<%s>>\n", indentStr, mScript.c_str() );
 	printf( "%s}\n", indentStr );
+}
+
+
+CPartContents*	CPart::GetContentsOnCurrentCard()
+{
+	CCard	*	currCard = GetStack()->GetCurrentCard();
+	if( mOwner != currCard && !GetSharedText() )	// We're on the background layer, not on the card?
+		return currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
+	else
+		return mOwner->GetPartContentsByID( GetID(), (mOwner != currCard) );
 }

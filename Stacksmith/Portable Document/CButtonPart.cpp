@@ -8,6 +8,7 @@
 
 #include "CButtonPart.h"
 #include "CTinyXMLUtils.h"
+#include "CPartContents.h"
 
 
 using namespace Carlson;
@@ -95,7 +96,8 @@ void	CButtonPart::DumpProperties( size_t inIndentLevel )
 	
 	printf( "%sstyle = %s\n", indentStr, sButtonStyleStrings[mButtonStyle] );
 	printf( "%sshowName = %s\n", indentStr, (mShowName ? "true" : "false") );
-	printf( "%shighlight = %s\n", indentStr, (mHighlight ? "true" : "false") );
+	CPartContents*	theContents = GetContentsOnCurrentCard();
+	printf( "%shighlight = %s\n", indentStr, ((theContents ? theContents->GetHighlight() : mHighlight) ? "true" : "false") );
 	printf( "%sautoHighlight = %s\n", indentStr, (mAutoHighlight ? "true" : "false") );
 	printf( "%ssharedHighlight = %s\n", indentStr, (mSharedHighlight ? "true" : "false") );
 	printf( "%stitleWidth = %d\n", indentStr, mTitleWidth );
