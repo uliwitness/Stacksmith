@@ -69,12 +69,44 @@ public:
 	CButtonPartMac( CLayer *inOwner ) : CButtonPart( inOwner ), mView(nil) {};
 	~CButtonPartMac()	{ [mView release]; mView = nil; };
 
-	virtual void	CreateViewIn( NSView* inSuperView )	{ if( !sButtonOwner ) sButtonOwner = [[WILDButtonOwner alloc] initWithNibName: @"WILDButtonOwner" bundle: nil]; [sButtonOwner view]; mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner button]]] retain]; [mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [mView.layer setShadowColor: [NSColor.redColor CGColor]]; [mView.layer setShadowOffset: CGSizeMake(4, 4)]; [mView.layer setShadowRadius: 8]; [mView.layer setShadowOpacity: 1.0]; [mView setBezelStyle: NSRoundRectBezelStyle]; [mView setTitle: [NSString stringWithUTF8String: mName.c_str()]]; [inSuperView addSubview: mView]; };
+	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; mView = nil; };
 	virtual void	SetName( const std::string& inStr )	{ CButtonPart::SetName(inStr); [mView setTitle: [NSString stringWithUTF8String: mName.c_str()]]; };
 	
 	NSButton		*	mView;
 	WILDButtonOwner	*	mButtonOwner;
+};
+
+
+void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
+{
+	if( !sButtonOwner )
+		sButtonOwner = [[WILDButtonOwner alloc] initWithNibName: @"WILDButtonOwner" bundle: nil];
+	[sButtonOwner view];
+	mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner button]]] retain];
+	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
+	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
+	[mView.layer setShadowRadius: mShadowBlurRadius];
+	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
+	if( mButtonStyle == EButtonStyleCheckBox )
+	{
+		[mView setBezelStyle: NSRegularSquareBezelStyle];
+		[mView setButtonType: NSSwitchButton];
+	}
+	else if( mButtonStyle == EButtonStyleRadioButton )
+	{
+		[mView setBezelStyle: NSRegularSquareBezelStyle];
+		[mView setButtonType: NSRadioButton];
+	}
+	else if( mButtonStyle == EButtonStyleRectangle )
+	{
+		[mView setBezelStyle: NSRegularSquareBezelStyle];
+	}
+	else
+		[mView setBezelStyle: NSRoundedBezelStyle];
+	[mView setTitle: [NSString stringWithUTF8String: mName.c_str()]];
+	[inSuperView addSubview: mView];
 };
 
 
@@ -100,10 +132,10 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	std::string		cppstr = contents? contents->GetText() : std::string();
 	[mView setStringValue: [NSString stringWithUTF8String: cppstr.c_str()]];
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
-	[mView.layer setShadowColor: [NSColor.redColor CGColor]];
-	[mView.layer setShadowOffset: CGSizeMake(4, 4)];
-	[mView.layer setShadowRadius: 8];
-	[mView.layer setShadowOpacity: 1.0];
+	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
+	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
+	[mView.layer setShadowRadius: mShadowBlurRadius];
+	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[inSuperView addSubview: mView];
 }
 
@@ -208,7 +240,17 @@ public:
 	if( !theCard )
 		return;
 	
-	size_t	numParts = theCard->GetNumParts();
+	CBackground	*	theBackground = theCard->GetBackground();
+	size_t	numParts = theBackground->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+	{
+		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theBackground->GetPart(x));
+		if( !currPart )
+			continue;
+		currPart->CreateViewIn( self.window.contentView );
+	}
+
+	numParts = theCard->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 	{
 		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
