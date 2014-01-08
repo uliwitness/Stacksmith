@@ -237,7 +237,7 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, "Can't find %s \"%s\".", (inType ? inType : "part"), partName );
+		LEOContextStopWithError( inContext, "Can't find background %s \"%s\".", (inType ? inType : "part"), partName );
 	}
 	
 	inContext->currentInstruction++;
