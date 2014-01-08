@@ -161,7 +161,6 @@
 		553C471113577334000219FA /* LEOContextGroup.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46EA13577334000219FA /* LEOContextGroup.c */; };
 		553E3C9416F6696000258F72 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
 		553E3C9616F6698300258F72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
-		553F6809157D138B009E0517 /* WILDObjCConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 553F6808157D138B009E0517 /* WILDObjCConversion.m */; };
 		553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */; };
 		553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */; };
 		5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */; };
@@ -188,7 +187,6 @@
 		556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.mm */; };
 		556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */; };
 		55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.cpp */; };
-		55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55686664135A383300C364D6 /* WILDObjectValue.m */; };
 		556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 556C496E1731F48000C40D97 /* TimerIcon.pdf */; };
 		556DB7A518709A15002F7CB2 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7A318709A15002F7CB2 /* tinyxml2.cpp */; };
 		556DB7AD18709ADB002F7CB2 /* CStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7AB18709ADB002F7CB2 /* CStack.cpp */; };
@@ -652,8 +650,6 @@
 		553C46E913577334000219FA /* LEOContextGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOContextGroup.h; path = ../../../Forge/Leonie/common/LEOContextGroup.h; sourceTree = "<group>"; };
 		553C46EA13577334000219FA /* LEOContextGroup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOContextGroup.c; path = ../../../Forge/Leonie/common/LEOContextGroup.c; sourceTree = "<group>"; };
 		553C46EB13577334000219FA /* LEOHandlerID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOHandlerID.h; path = ../../../Forge/Leonie/common/LEOHandlerID.h; sourceTree = "<group>"; };
-		553F6807157D138B009E0517 /* WILDObjCConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjCConversion.h; path = Instructions/WILDObjCConversion.h; sourceTree = SOURCE_ROOT; };
-		553F6808157D138B009E0517 /* WILDObjCConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjCConversion.m; path = Instructions/WILDObjCConversion.m; sourceTree = SOURCE_ROOT; };
 		553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CSetChunkPropertyNode.cpp; path = ../../CSetChunkPropertyNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		553F680B157D3291009E0517 /* CSetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CSetChunkPropertyNode.h; path = ../../CSetChunkPropertyNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CGetChunkPropertyNode.cpp; path = ../../CGetChunkPropertyNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -693,8 +689,6 @@
 		5568665F1359EBD000C364D6 /* WILDHostCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostCommands.h; path = Instructions/WILDHostCommands.h; sourceTree = SOURCE_ROOT; };
 		55686661135A161000C364D6 /* WILDHostFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostFunctions.h; path = Instructions/WILDHostFunctions.h; sourceTree = SOURCE_ROOT; };
 		55686662135A161100C364D6 /* WILDHostFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostFunctions.cpp; path = Instructions/WILDHostFunctions.cpp; sourceTree = SOURCE_ROOT; };
-		55686664135A383300C364D6 /* WILDObjectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDObjectValue.m; path = Instructions/WILDObjectValue.m; sourceTree = SOURCE_ROOT; };
-		55686665135A383700C364D6 /* WILDObjectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectValue.h; path = Instructions/WILDObjectValue.h; sourceTree = SOURCE_ROOT; };
 		556C496E1731F48000C40D97 /* TimerIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = TimerIcon.pdf; path = Resources/TimerIcon.pdf; sourceTree = "<group>"; };
 		556DB7A318709A15002F7CB2 /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml2.cpp; path = ../tinyxml2/tinyxml2.cpp; sourceTree = "<group>"; };
 		556DB7A418709A15002F7CB2 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyxml2.h; path = ../tinyxml2/tinyxml2.h; sourceTree = "<group>"; };
@@ -1113,10 +1107,6 @@
 				55686661135A161000C364D6 /* WILDHostFunctions.h */,
 				55686662135A161100C364D6 /* WILDHostFunctions.cpp */,
 				55382462172730B4007785D8 /* WILDObjCCallInstructions.mm */,
-				55686665135A383700C364D6 /* WILDObjectValue.h */,
-				55686664135A383300C364D6 /* WILDObjectValue.m */,
-				553F6807157D138B009E0517 /* WILDObjCConversion.h */,
-				553F6808157D138B009E0517 /* WILDObjCConversion.m */,
 			);
 			name = Interpreter;
 			path = ../Forge/ForgeFramework/ForgeFramework;
@@ -1969,7 +1959,6 @@
 				556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */,
 				556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */,
 				55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */,
-				55686666135A383A00C364D6 /* WILDObjectValue.m in Sources */,
 				556DB7BF1870A6EB002F7CB2 /* CURLRequest.mm in Sources */,
 				55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */,
 				55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */,
@@ -2024,7 +2013,6 @@
 				556DB7C51870ADE9002F7CB2 /* CURLResponse.mm in Sources */,
 				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
-				553F6809157D138B009E0517 /* WILDObjCConversion.m in Sources */,
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
 				55CD60BF187510F0002450E2 /* CWebBrowserPart.cpp in Sources */,
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
