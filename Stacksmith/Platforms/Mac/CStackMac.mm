@@ -32,6 +32,24 @@ using namespace Carlson;
 
 
 
+@interface WILDButtonOwner : NSViewController
+
+@property (assign,nonatomic) IBOutlet NSButton* button;
+@property (assign,nonatomic) IBOutlet NSTextField* textField;
+
+@end
+
+
+@implementation WILDButtonOwner
+
+-(IBAction)	buttonClicked: (id)sender
+{
+	NSLog(@"Button %@ clicked.", [sender title]);
+}
+
+@end
+
+
 class CMacPartBase
 {
 public:
@@ -42,16 +60,21 @@ public:
 };
 
 
+static WILDButtonOwner*		sButtonOwner = nil;
+
+
 class CButtonPartMac : public CButtonPart, public CMacPartBase
 {
 public:
 	CButtonPartMac( CLayer *inOwner ) : CButtonPart( inOwner ), mView(nil) {};
+	~CButtonPartMac()	{ [mView release]; mView = nil; };
 
-	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSButton alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [mView setTitle: [NSString stringWithUTF8String: mName.c_str()]]; [inSuperView addSubview: mView]; };
-	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
+	virtual void	CreateViewIn( NSView* inSuperView )	{ if( !sButtonOwner ) sButtonOwner = [[WILDButtonOwner alloc] initWithNibName: @"WILDButtonOwner" bundle: nil]; [sButtonOwner view]; mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner button]]] retain]; [mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [mView.layer setShadowColor: [NSColor.redColor CGColor]]; [mView.layer setShadowOffset: CGSizeMake(4, 4)]; [mView.layer setShadowRadius: 8]; [mView.layer setShadowOpacity: 1.0]; [mView setBezelStyle: NSRoundRectBezelStyle]; [mView setTitle: [NSString stringWithUTF8String: mName.c_str()]]; [inSuperView addSubview: mView]; };
+	virtual void	DestroyView()						{ [mView removeFromSuperview]; mView = nil; };
 	virtual void	SetName( const std::string& inStr )	{ CButtonPart::SetName(inStr); [mView setTitle: [NSString stringWithUTF8String: mName.c_str()]]; };
 	
-	NSButton	*	mView;
+	NSButton		*	mView;
+	WILDButtonOwner	*	mButtonOwner;
 };
 
 
@@ -60,21 +83,49 @@ class CFieldPartMac : public CFieldPart, public CMacPartBase
 public:
 	CFieldPartMac( CLayer *inOwner ) : CFieldPart( inOwner ), mView(nil) {};
 
-	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSTextView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [mView setString: @"boo!"]; [inSuperView addSubview: mView]; };
+	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 	
-	NSTextView	*	mView;
+	NSTextField	*	mView;
 };
+
+
+void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
+{
+	if( !sButtonOwner )
+		sButtonOwner = [[WILDButtonOwner alloc] initWithNibName: @"WILDButtonOwner" bundle: nil];
+	[sButtonOwner view];
+	mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner textField]]] retain];
+	CPartContents*	contents = GetContentsOnCurrentCard();
+	std::string		cppstr = contents? contents->GetText() : std::string();
+	[mView setStringValue: [NSString stringWithUTF8String: cppstr.c_str()]];
+	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[mView.layer setShadowColor: [NSColor.redColor CGColor]];
+	[mView.layer setShadowOffset: CGSizeMake(4, 4)];
+	[mView.layer setShadowRadius: 8];
+	[mView.layer setShadowOpacity: 1.0];
+	[inSuperView addSubview: mView];
+}
+
 
 class CMoviePlayerPartMac : public CMoviePlayerPart, public CMacPartBase
 {
 public:
 	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil) {};
 
-	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [(NSBox*)mView setBoxType: NSBoxCustom]; [(NSBox*)mView setTitlePosition: NSNoTitle]; [inSuperView addSubview: mView]; };
+	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [mView setBoxType: NSBoxCustom]; [mView setTitlePosition: NSNoTitle];
+	[mView setFillColor: [NSColor whiteColor]];
+	[mView setLayerUsesCoreImageFilters: YES];
+	[mView setWantsLayer: YES];
+	mView.layer.masksToBounds = NO;
+	[mView.layer setShadowColor: [NSColor.redColor CGColor]];
+	[mView.layer setShadowOffset: CGSizeMake(4, -4)];
+	[mView.layer setShadowRadius: 8];
+	[mView.layer setShadowOpacity: 1.0];
+[inSuperView addSubview: mView]; };
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 		
-	NSView	*	mView;
+	NSBox	*	mView;
 };
 
 class CWebBrowserPartMac : public CWebBrowserPart, public CMacPartBase
@@ -82,7 +133,15 @@ class CWebBrowserPartMac : public CWebBrowserPart, public CMacPartBase
 public:
 	CWebBrowserPartMac( CLayer *inOwner ) : CWebBrowserPart( inOwner ), mView(nil) {};
 
-	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [(NSBox*)mView setBoxType: NSBoxCustom]; [(NSBox*)mView setTitlePosition: NSNoTitle]; [inSuperView addSubview: mView]; };
+	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [(NSBox*)mView setBoxType: NSBoxCustom]; [(NSBox*)mView setTitlePosition: NSNoTitle];
+	[mView setLayerUsesCoreImageFilters: YES];
+	[mView setWantsLayer: YES];
+	mView.layer.masksToBounds = NO;
+	[mView.layer setShadowColor: [NSColor.redColor CGColor]];
+	[mView.layer setShadowOffset: CGSizeMake(4, -4)];
+	[mView.layer setShadowRadius: 8];
+	[mView.layer setShadowOpacity: 1.0];
+[inSuperView addSubview: mView]; };
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 		
 	NSView	*	mView;
@@ -109,6 +168,8 @@ public:
 	NSRect			wdBox = NSMakeRect(0,0,inStack->GetCardWidth(),inStack->GetCardHeight());
 	NSWindow	*	theWindow = [[[NSWindow alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
 	NSView*	cv = [[[WILDFlippedContentView alloc] initWithFrame: wdBox] autorelease];
+	cv.wantsLayer = YES;
+	[cv setLayerUsesCoreImageFilters: YES];
 	theWindow.contentView = cv;
 	[theWindow setCollectionBehavior: NSWindowCollectionBehaviorFullScreenPrimary];
 	[theWindow setTitle: [NSString stringWithUTF8String: inStack->GetName().c_str()]];

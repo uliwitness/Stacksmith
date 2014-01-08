@@ -232,6 +232,7 @@
 		55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC5071744525F0084AAA9 /* CardIcon.icns */; };
 		55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC5081744525F0084AAA9 /* StackIcon.icns */; };
 		55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */; };
+		55ADC797187D3AE700FC1909 /* WILDButtonOwner.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC796187D3AE700FC1909 /* WILDButtonOwner.xib */; };
 		55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29C9617276C4700B38E75 /* UKCrashReporter.m */; };
 		55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */; };
 		55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */; };
@@ -761,6 +762,7 @@
 		55ADC5071744525F0084AAA9 /* CardIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CardIcon.icns; path = Resources/CardIcon.icns; sourceTree = "<group>"; };
 		55ADC5081744525F0084AAA9 /* StackIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = StackIcon.icns; path = Resources/StackIcon.icns; sourceTree = "<group>"; };
 		55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = BackgroundEditIcon.icns; path = Resources/BackgroundEditIcon.icns; sourceTree = "<group>"; };
+		55ADC796187D3AE700FC1909 /* WILDButtonOwner.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDButtonOwner.xib; path = Windows/WILDButtonOwner.xib; sourceTree = "<group>"; };
 		55B29C9517276C4700B38E75 /* UKCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCrashReporter.h; path = ../UliKit/UKCrashReporter.h; sourceTree = "<group>"; };
 		55B29C9617276C4700B38E75 /* UKCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKCrashReporter.m; path = ../UliKit/UKCrashReporter.m; sourceTree = "<group>"; };
 		55B29C9D17276D4100B38E75 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = ../UliKit/English.lproj/UKCrashReporter.strings; sourceTree = "<group>"; };
@@ -972,6 +974,7 @@
 				55CD6122187B188E002450E2 /* CDocumentMac.cpp */,
 				55CD6120187B14E6002450E2 /* CStackMac.h */,
 				55CD611F187B14E6002450E2 /* CStackMac.mm */,
+				55ADC796187D3AE700FC1909 /* WILDButtonOwner.xib */,
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
 				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
@@ -1805,6 +1808,7 @@
 				55039F50136B52C80082E32E /* brush14.png in Resources */,
 				55039F51136B52C80082E32E /* brush15.png in Resources */,
 				55039F52136B52C80082E32E /* brush16.png in Resources */,
+				55ADC797187D3AE700FC1909 /* WILDButtonOwner.xib in Resources */,
 				55039F53136B52C80082E32E /* brush17.png in Resources */,
 				55039F54136B52C80082E32E /* brush18.png in Resources */,
 				55039F55136B52C80082E32E /* brush19.png in Resources */,
