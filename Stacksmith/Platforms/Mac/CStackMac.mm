@@ -8,6 +8,7 @@
 
 #include "CStackMac.h"
 #import <AppKit/AppKit.h>
+#import <WebKit/WebKit.h>
 #include "CButtonPart.h"
 #include "CFieldPart.h"
 #include "CMoviePlayerPart.h"
@@ -15,6 +16,8 @@
 #include "CTimerPart.h"
 #include "CRectanglePart.h"
 #include "CPicturePart.h"
+#import "ULIInvisiblePlayerView.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 using namespace Carlson;
@@ -145,19 +148,23 @@ class CMoviePlayerPartMac : public CMoviePlayerPart, public CMacPartBase
 public:
 	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil) {};
 
-	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [mView setBoxType: NSBoxCustom]; [mView setTitlePosition: NSNoTitle];
-	[mView setFillColor: [NSColor whiteColor]];
-	[mView setLayerUsesCoreImageFilters: YES];
-	[mView setWantsLayer: YES];
-	mView.layer.masksToBounds = NO;
-	[mView.layer setShadowColor: [NSColor.redColor CGColor]];
-	[mView.layer setShadowOffset: CGSizeMake(4, -4)];
-	[mView.layer setShadowRadius: 8];
-	[mView.layer setShadowOpacity: 1.0];
-[inSuperView addSubview: mView]; };
+	virtual void	CreateViewIn( NSView* inSuperView )
+	{
+		if( mView )
+			[mView release];
+		mView = [[ULIInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		[mView setWantsLayer: YES];
+		mView.layer.masksToBounds = NO;
+		[mView.layer setShadowColor: [NSColor.redColor CGColor]];
+		[mView.layer setShadowOffset: CGSizeMake(4, -4)];
+		[mView.layer setShadowRadius: 8];
+		[mView.layer setShadowOpacity: 1.0];
+		mView.player = [AVPlayer playerWithURL: [[NSBundle mainBundle] URLForResource: @"PlaceholderMovie" withExtension: @"mov"]];
+		[inSuperView addSubview: mView];
+	};
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 		
-	NSBox	*	mView;
+	ULIInvisiblePlayerView	*	mView;
 };
 
 class CWebBrowserPartMac : public CWebBrowserPart, public CMacPartBase
@@ -165,18 +172,24 @@ class CWebBrowserPartMac : public CWebBrowserPart, public CMacPartBase
 public:
 	CWebBrowserPartMac( CLayer *inOwner ) : CWebBrowserPart( inOwner ), mView(nil) {};
 
-	virtual void	CreateViewIn( NSView* inSuperView )	{ if( mView ) [mView release]; mView = [[NSBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)]; [(NSBox*)mView setBoxType: NSBoxCustom]; [(NSBox*)mView setTitlePosition: NSNoTitle];
-	[mView setLayerUsesCoreImageFilters: YES];
-	[mView setWantsLayer: YES];
-	mView.layer.masksToBounds = NO;
-	[mView.layer setShadowColor: [NSColor.redColor CGColor]];
-	[mView.layer setShadowOffset: CGSizeMake(4, -4)];
-	[mView.layer setShadowRadius: 8];
-	[mView.layer setShadowOpacity: 1.0];
-[inSuperView addSubview: mView]; };
-	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
+	virtual void	CreateViewIn( NSView* inSuperView )
+	{
+		if( mView )
+			[mView release];
+		mView = [[WebView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		NSURLRequest*	theRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: @"http://hammer-language.com"]];
+		[mView.mainFrame loadRequest: theRequest];
+		[mView setWantsLayer: YES];
+		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
+		[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
+		[mView.layer setShadowRadius: mShadowBlurRadius];
+		[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
+		[inSuperView addSubview: mView];
+	};
+	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil;
+	};
 		
-	NSView	*	mView;
+	WebView	*	mView;
 };
 
 

@@ -68,6 +68,8 @@
 		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
 		5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */; };
+		5523869E187E265000D7FAB3 /* ULIInvisiblePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523869D187E265000D7FAB3 /* ULIInvisiblePlayerView.m */; };
+		552386A4187E274C00D7FAB3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552386A3187E274C00D7FAB3 /* AVFoundation.framework */; };
 		5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */; };
 		552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */; };
 		55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */; };
@@ -509,6 +511,9 @@
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
 		552365391344C24C000145A0 /* NSImage+NiceScaling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+NiceScaling.h"; path = "../UliKit/NSImage+NiceScaling.h"; sourceTree = "<group>"; };
 		5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImage+NiceScaling.m"; path = "../UliKit/NSImage+NiceScaling.m"; sourceTree = "<group>"; };
+		5523869C187E265000D7FAB3 /* ULIInvisiblePlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIInvisiblePlayerView.h; path = ../UliKit/ULIInvisiblePlayerView.h; sourceTree = "<group>"; };
+		5523869D187E265000D7FAB3 /* ULIInvisiblePlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIInvisiblePlayerView.m; path = ../UliKit/ULIInvisiblePlayerView.m; sourceTree = "<group>"; };
+		552386A3187E274C00D7FAB3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = ../../../../../System/Library/Frameworks/AVFoundation.framework; sourceTree = "<group>"; };
 		5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDDrawAddColorBezel.h; sourceTree = "<group>"; };
 		5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDDrawAddColorBezel.m; sourceTree = "<group>"; };
 		552558FC114BDE7C00279B03 /* WILDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDAppDelegate.h; sourceTree = "<group>"; };
@@ -903,6 +908,7 @@
 			files = (
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				552FF245113F247A005742C8 /* QTKit.framework in Frameworks */,
+				552386A4187E274C00D7FAB3 /* AVFoundation.framework in Frameworks */,
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
 				55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */,
 				55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */,
@@ -919,6 +925,7 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				552386A3187E274C00D7FAB3 /* AVFoundation.framework */,
 				55B29CA81727731800B38E75 /* AddressBook.framework */,
 				55943B1B171F675E0051166C /* WebKit.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
@@ -1289,6 +1296,8 @@
 				55B29CA517276E8E00B38E75 /* UKSystemInfo.m */,
 				553AF61C17491AEE00AF3BBA /* UKCoordinateUtils.h */,
 				553AF61D17491AEE00AF3BBA /* UKCoordinateUtils.m */,
+				5523869C187E265000D7FAB3 /* ULIInvisiblePlayerView.h */,
+				5523869D187E265000D7FAB3 /* ULIInvisiblePlayerView.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1905,6 +1914,7 @@
 				55CD610F18788CEB002450E2 /* CScriptableObjectValue.cpp in Sources */,
 				556DB7C21870A971002F7CB2 /* CURLConnection.mm in Sources */,
 				55C2B647115E5780008B094D /* CSearchContext.cpp in Sources */,
+				5523869E187E265000D7FAB3 /* ULIInvisiblePlayerView.m in Sources */,
 				55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */,
 				55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */,
 				551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */,
