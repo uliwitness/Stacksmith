@@ -20,7 +20,10 @@
 #include "CMessageBox.h"
 #include "LEOObjCCallInstructions.h"
 #import "ULIURLHandlingApplication.h"
+#include "CAlert.h"
 #import <Sparkle/Sparkle.h>
+#include <ios>
+#include <sstream>
 
 
 using namespace Carlson;
@@ -168,8 +171,6 @@ void	WILDFirstNativeCall( void )
     if( foundPos == 0 )
 		fileURL.replace(foundPos, 10, "http://");
 	
-	printf( "Opening file: %s\n", fileURL.c_str() );
-	
 	sOpenDocuments.push_back( new CDocumentMac() );
 	CDocumentRef	currDoc = sOpenDocuments.back();
 	
@@ -178,7 +179,9 @@ void	WILDFirstNativeCall( void )
 		Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
 		if( !theCppStack )
 		{
-			printf( "Can't find stack at %s\n", inDocument->GetURL().c_str() );
+			std::stringstream	errMsg;
+			errMsg << "Can't find stack at " << inDocument->GetURL() << ".";
+			CAlert::RunMessageAlert( errMsg.str() );
 			return;
 		}
 		theCppStack->Load( [inDocument,self](Carlson::CStack* inStack)

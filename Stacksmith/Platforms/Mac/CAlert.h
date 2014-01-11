@@ -18,7 +18,7 @@ namespace Carlson {
 class CAlert
 {
 public:
-	static size_t		RunMessageAlert( const std::string& inMessage, const std::string& button1, const std::string& button2, const std::string& button3 );
+	static size_t		RunMessageAlert( const std::string& inMessage, const std::string& button1 = std::string(), const std::string& button2 = std::string(), const std::string& button3 = std::string() );
 	static bool			RunInputAlert( const std::string& inMessage, std::string& ioInputText );
 };
 
