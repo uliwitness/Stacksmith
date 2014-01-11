@@ -81,16 +81,25 @@ void	WILDFirstNativeCall( void )
 
 -(NSEvent*)	handleFlagsChangedEvent: (NSEvent*)inEvent
 {
+	BOOL		peekingStateDidChange = NO;
 	if( !mPeeking && ([inEvent modifierFlags] & NSAlternateKeyMask)
 		&& ([inEvent modifierFlags] & NSCommandKeyMask) )
 	{
 		mPeeking = YES;
-		// +++
+		peekingStateDidChange = YES;
 	}
 	else if( mPeeking )
 	{
 		mPeeking = NO;
-		// +++
+		peekingStateDidChange = YES;
+	}
+	
+	if( peekingStateDidChange )
+	{
+		for( CDocumentMac& currDoc : sOpenDocuments )
+		{
+			currDoc.SetPeeking( mPeeking == YES );
+		}
 	}
 
 	return inEvent;

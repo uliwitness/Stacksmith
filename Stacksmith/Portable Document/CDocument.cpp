@@ -288,6 +288,14 @@ CStack*		CDocument::NewStackWithURLIDNameForDocument( const std::string& inURL, 
 }
 
 
+void	CDocument::SetPeeking( bool inState )
+{
+	mPeeking = inState;
+	for( auto currStack : mStacks )
+		currStack->SetPeeking( inState );
+}
+
+
 void	CDocument::Dump()
 {
 	printf( "Document\n{\n\tloaded = %s\n\tloading= %s\n\tcreatedByVersion = %s\n\tlastCompactedVersion = %s\n\tfirstEditedVersion = %s\n\tlastEditedVersion = %s\n",

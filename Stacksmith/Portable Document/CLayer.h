@@ -46,6 +46,8 @@ public:
 
 	virtual CStack*	GetStack()			{ return mStack; };
 
+	virtual void	SetPeeking( bool inState );
+
 	virtual void	WakeUp();
 	virtual void	GoToSleep();
 	

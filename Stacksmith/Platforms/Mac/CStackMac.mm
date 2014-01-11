@@ -16,6 +16,7 @@
 #include "CTimerPart.h"
 #include "CRectanglePart.h"
 #include "CPicturePart.h"
+#include "CDocument.h"
 #import "ULIInvisiblePlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -56,9 +57,17 @@ using namespace Carlson;
 class CMacPartBase
 {
 public:
+	CMacPartBase() {};
+	
 	virtual void	CreateViewIn( NSView* inSuperView ) = 0;
 	virtual void	DestroyView() = 0;
+	virtual void	ApplyPeekingStateToView( bool inState, NSView* inView )
+	{
+		//inView.layer.borderWidth = inState? 1 : 0;
+		//inView.layer.borderColor = inState? [NSColor grayColor].CGColor : NULL;
+	}
 
+protected:
 	virtual ~CMacPartBase() {};
 };
 
@@ -70,11 +79,14 @@ class CButtonPartMac : public CButtonPart, public CMacPartBase
 {
 public:
 	CButtonPartMac( CLayer *inOwner ) : CButtonPart( inOwner ), mView(nil) {};
-	~CButtonPartMac()	{ [mView release]; mView = nil; };
 
 	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; mView = nil; };
 	virtual void	SetName( const std::string& inStr )	{ CButtonPart::SetName(inStr); [mView setTitle: [NSString stringWithUTF8String: mName.c_str()]]; };
+	virtual void	SetPeeking( bool inState )	{ ApplyPeekingStateToView(inState, mView); };
+	
+protected:
+	~CButtonPartMac()	{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 	
 	NSButton		*	mView;
 	WILDButtonOwner	*	mButtonOwner;
@@ -120,6 +132,10 @@ public:
 
 	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
+	virtual void	SetPeeking( bool inState )	{ ApplyPeekingStateToView(inState, mView); };
+	
+protected:
+	~CFieldPartMac()	{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 	
 	NSTextField	*	mView;
 };
@@ -163,7 +179,11 @@ public:
 		[inSuperView addSubview: mView];
 	};
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
-		
+	virtual void	SetPeeking( bool inState )	{ ApplyPeekingStateToView(inState, mView); };
+
+protected:
+	~CMoviePlayerPartMac()	{ [mView removeFromSuperview]; [mView release]; mView = nil; };
+	
 	ULIInvisiblePlayerView	*	mView;
 };
 
@@ -188,7 +208,11 @@ public:
 	};
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil;
 	};
-		
+	virtual void	SetPeeking( bool inState )	{ ApplyPeekingStateToView(inState, mView); };
+
+protected:
+	~CWebBrowserPartMac()	{ [mView removeFromSuperview]; [mView release]; mView = nil; };
+	
 	WebView	*	mView;
 };
 
@@ -197,6 +221,7 @@ public:
 @interface WILDStackWindowController : NSWindowController <NSWindowDelegate>
 {
 	CStackMac	*	mStack;
+	CALayer		*	mSelectionOverlay;	// Draw "peek" outline and selection rectangles in this layer.
 }
 
 -(id)	initWithCppStack: (CStackMac*)inStack;
@@ -231,6 +256,16 @@ public:
 	return self;
 }
 
+
+-(void)	dealloc
+{
+	[mSelectionOverlay release];
+	mSelectionOverlay = nil;
+	
+	[super dealloc];
+}
+
+
 -(void)	removeAllViews
 {
 	CCard	*	theCard = mStack->GetCurrentCard();
@@ -245,6 +280,10 @@ public:
 			continue;
 		currPart->DestroyView();
 	}
+	
+	[mSelectionOverlay removeFromSuperlayer];
+	[mSelectionOverlay release];
+	mSelectionOverlay = nil;
 }
 
 -(void)	createAllViews
@@ -271,6 +310,60 @@ public:
 			continue;
 		currPart->CreateViewIn( self.window.contentView );
 	}
+	
+	[self drawBoundingBoxes];
+}
+
+
+-(void)	drawBoundingBoxes
+{
+	[mSelectionOverlay removeFromSuperlayer];
+	[mSelectionOverlay release];
+	mSelectionOverlay = nil;
+	
+	CCard	*	theCard = mStack->GetCurrentCard();
+	if( !theCard )
+		return;
+	
+	if( mStack->GetDocument()->GetPeeking() )
+	{
+		CGColorSpaceRef	colorSpace = CGColorSpaceCreateWithName( kCGColorSpaceGenericRGB );
+		CGContextRef	bmContext = CGBitmapContextCreate( NULL, mStack->GetCardWidth(), mStack->GetCardHeight(), 8, mStack->GetCardWidth() * 8 * 4, colorSpace, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little );
+		CGColorSpaceRelease(colorSpace);
+		NSGraphicsContext	*	cocoaContext = [NSGraphicsContext graphicsContextWithGraphicsPort: bmContext flipped: NO];
+		[NSGraphicsContext saveGraphicsState];
+		[NSGraphicsContext setCurrentContext: cocoaContext];
+		
+		[[NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22"]] set];
+		[NSBezierPath setDefaultLineWidth: 1];
+		
+		size_t		cardHeight = mStack->GetCardHeight();
+		
+		CBackground	*	theBackground = theCard->GetBackground();
+		size_t	numParts = theBackground->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CPart*	currPart = theBackground->GetPart(x);
+			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
+		}
+
+		numParts = theCard->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CPart*	currPart = theCard->GetPart(x);
+			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
+		}
+
+		mSelectionOverlay = [[CALayer alloc] init];
+		[[self.window.contentView layer] addSublayer: mSelectionOverlay];
+		[mSelectionOverlay setFrame: [self.window.contentView layer].frame];
+		
+		[NSGraphicsContext restoreGraphicsState];
+		CGImageRef	bmImage = CGBitmapContextCreateImage( bmContext );
+		mSelectionOverlay.contents = [(id)bmImage autorelease];
+		
+		CFRelease(bmContext);
+	}
 }
 
 @end
@@ -290,6 +383,13 @@ bool	CStackMac::GoThereInNewWindow( bool inNewWindow )
 	[mMacWindowController showWindow: nil];
 	
 	return true;
+}
+
+
+void	CStackMac::SetPeeking( bool inState )
+{
+	CStack::SetPeeking( inState );
+	[mMacWindowController drawBoundingBoxes];
 }
 
 

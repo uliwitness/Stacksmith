@@ -54,6 +54,8 @@ public:
 	size_t			GetCardWidth()					{ return mCardWidth; };
 	size_t			GetCardHeight()					{ return mCardHeight; };
 	
+	virtual void	SetPeeking( bool inState );
+	
 	virtual void	Dump( size_t inIndent = 0 );
 	
 protected:

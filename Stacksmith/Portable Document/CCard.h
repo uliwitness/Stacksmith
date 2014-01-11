@@ -40,6 +40,8 @@ public:
 	
 	virtual void	SetTransitionTypeAndSpeed( const std::string& inType, TVisualEffectSpeed inSpeed ) {  mTransitionType = inType; mSpeed = inSpeed; };
 	
+	virtual void	SetPeeking( bool inState );
+	
 	virtual CScriptableObject*	GetParentObject();
 	virtual CBackground*		GetBackground()		{ return mOwningBackground; };
 	

@@ -53,6 +53,13 @@ void	CCard::GoToSleep()
 }
 
 
+void	CCard::SetPeeking( bool inState )
+{
+	mOwningBackground->SetPeeking(inState);
+	CLayer::SetPeeking(inState);
+}
+
+
 CScriptableObject*	CCard::GetParentObject()
 {
 	return mOwningBackground;

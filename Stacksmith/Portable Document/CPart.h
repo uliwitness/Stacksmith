@@ -59,11 +59,16 @@ public:
 	WILDObjectID				GetID()			{ return mID; };
 	int							GetFamily()		{ return mFamily; };
 	virtual void				SetRect( int left, int top, int right, int bottom )	{ mLeft = left; mTop = top; mRight = right; mBottom = bottom; };
+	int							GetLeft()		{ return mLeft; };
+	int							GetTop()		{ return mTop; };
+	int							GetRight()		{ return mRight; };
+	int							GetBottom()		{ return mBottom; };
 	virtual void				SetPartType( CPartCreatorBase* inType )	{ mPartType = inType; };
 	virtual CPartCreatorBase*	GetPartType()							{ return mPartType; };
 
 	virtual void				WakeUp()		{};
 	virtual void				GoToSleep()		{};
+	virtual void				SetPeeking( bool inState )				{};
 	virtual CScriptableObject*	GetParentObject();
 	virtual CStack*				GetStack();
 	virtual CPartContents*		GetContentsOnCurrentCard();

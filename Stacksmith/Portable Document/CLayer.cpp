@@ -293,6 +293,15 @@ void    CLayer::AddPart( CPart* inPart )
 }
 
 
+void	CLayer::SetPeeking( bool inState )
+{
+	for( auto currPart : mParts )
+	{
+		currPart->SetPeeking( inState );
+	}
+}
+
+
 const char*	CLayer::GetIdentityForDump()
 {
 	return "Layer";

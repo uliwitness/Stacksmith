@@ -28,6 +28,7 @@ public:
 	CStackMac( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument );
 
 	virtual bool				GoThereInNewWindow( bool inNewWindow );
+	virtual void				SetPeeking( bool inState );
 
 	virtual void				SetCurrentCard( CCard* inCard );
 	

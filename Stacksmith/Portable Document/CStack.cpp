@@ -215,6 +215,13 @@ size_t	CStack::GetIndexOfBackground( CBackground* inBackground )
 }
 
 
+void	CStack::SetPeeking( bool inState )
+{
+	CCard	*	theCard = GetCurrentCard();
+	if( theCard )
+		theCard->SetPeeking( inState );
+}
+
 
 void	CStack::Dump( size_t inIndent )
 {

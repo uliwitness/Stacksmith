@@ -83,6 +83,9 @@ public:
 	WILDObjectID		GetUniqueIDForStack();
 	WILDObjectID		GetUniqueIDForMedia();
 	
+	virtual void		SetPeeking( bool inState );
+	virtual bool		GetPeeking()				{ return mPeeking; };
+	
 	std::string			GetMediaURLByNameOfType( const std::string& inName, TMediaType inType );
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
@@ -104,6 +107,7 @@ protected:
 	std::vector<CMediaEntry>						mMediaList;
 	std::vector<CStackRef>							mStacks;
 	std::vector<std::function<void(CDocument*)>>	mLoadCompletionBlocks;
+	bool											mPeeking;
 	
 	WILDObjectID									mStackIDSeed;
 	WILDObjectID									mMediaIDSeed;
