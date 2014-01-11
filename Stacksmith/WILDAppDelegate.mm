@@ -19,6 +19,7 @@
 #include "CStackMac.h"
 #include "CMessageBox.h"
 #include "LEOObjCCallInstructions.h"
+#import "ULIURLHandlingApplication.h"
 #import <Sparkle/Sparkle.h>
 
 
@@ -153,11 +154,21 @@ void	WILDFirstNativeCall( void )
 
 -(BOOL)	application:(NSApplication *)sender openFile:(NSString *)filename
 {
+	return [self application: (ULIURLHandlingApplication*)sender openURL: [NSURL fileURLWithPath: filename]];
+}
+
+-(BOOL)	application: (ULIURLHandlingApplication*)sender openURL: (NSURL*)theFile
+{
 	Carlson::CDocumentMac::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 	
-	std::string		fileURL( "file://" );
-	fileURL.append(filename.UTF8String);
+	
+	std::string		fileURL( theFile.absoluteString.UTF8String );
 	fileURL.append("/toc.xml");
+	size_t	foundPos = fileURL.find("x-stack://");
+    if( foundPos == 0 )
+		fileURL.replace(foundPos, 10, "http://");
+	
+	printf( "Opening file: %s\n", fileURL.c_str() );
 	
 	sOpenDocuments.push_back( CDocumentMac() );
 	CDocumentMac	&	currDoc = sOpenDocuments.back();
@@ -177,7 +188,7 @@ void	WILDFirstNativeCall( void )
 				inStack->SetCurrentCard((Carlson::CCard*)inCard);
 				inCard->WakeUp();
 				inStack->GoThereInNewWindow( true );
-				inDocument->Dump();
+				//inDocument->Dump();
 			} );
 		} );
 	});

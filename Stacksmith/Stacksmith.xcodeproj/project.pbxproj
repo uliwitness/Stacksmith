@@ -70,6 +70,7 @@
 		5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */; };
 		5523869E187E265000D7FAB3 /* ULIInvisiblePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523869D187E265000D7FAB3 /* ULIInvisiblePlayerView.m */; };
 		552386A4187E274C00D7FAB3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552386A3187E274C00D7FAB3 /* AVFoundation.framework */; };
+		552386A71880D72E00D7FAB3 /* ULIURLHandlingApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */; };
 		5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */; };
 		552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */; };
 		55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */; };
@@ -514,6 +515,8 @@
 		5523869C187E265000D7FAB3 /* ULIInvisiblePlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIInvisiblePlayerView.h; path = ../UliKit/ULIInvisiblePlayerView.h; sourceTree = "<group>"; };
 		5523869D187E265000D7FAB3 /* ULIInvisiblePlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIInvisiblePlayerView.m; path = ../UliKit/ULIInvisiblePlayerView.m; sourceTree = "<group>"; };
 		552386A3187E274C00D7FAB3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = ../../../../../System/Library/Frameworks/AVFoundation.framework; sourceTree = "<group>"; };
+		552386A51880D72E00D7FAB3 /* ULIURLHandlingApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIURLHandlingApplication.h; path = ../UliKit/ULIURLHandlingApplication.h; sourceTree = "<group>"; };
+		552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIURLHandlingApplication.m; path = ../UliKit/ULIURLHandlingApplication.m; sourceTree = "<group>"; };
 		5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDDrawAddColorBezel.h; sourceTree = "<group>"; };
 		5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDDrawAddColorBezel.m; sourceTree = "<group>"; };
 		552558FC114BDE7C00279B03 /* WILDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDAppDelegate.h; sourceTree = "<group>"; };
@@ -975,6 +978,8 @@
 			isa = PBXGroup;
 			children = (
 				5503472F1370A18800AE7681 /* StacksmithVersion.h */,
+				552386A51880D72E00D7FAB3 /* ULIURLHandlingApplication.h */,
+				552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */,
 				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
 				552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */,
 				55CD6123187B188E002450E2 /* CDocumentMac.h */,
@@ -1933,6 +1938,7 @@
 				553C46F113577334000219FA /* CToken.cpp in Sources */,
 				553C46F213577334000219FA /* CParser.cpp in Sources */,
 				553C46F313577334000219FA /* CParseTree.cpp in Sources */,
+				552386A71880D72E00D7FAB3 /* ULIURLHandlingApplication.m in Sources */,
 				55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */,
 				553C46F413577334000219FA /* CNode.cpp in Sources */,
 				55CD611E187A60CD002450E2 /* CRecentCardsList.cpp in Sources */,

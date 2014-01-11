@@ -56,7 +56,16 @@
 	<key>CFBundleSignature</key>
 	<string>WILD</string>
 	<key>CFBundleURLTypes</key>
-	<array/>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>x-stack</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.stacksmith.stack</string>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>STACKSMITH_VERSION</string>
 	<key>LSApplicationCategoryType</key>
@@ -66,7 +75,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>ULIURLHandlingApplication</string>
 	<key>NSServices</key>
 	<array/>
 	<key>UTExportedTypeDeclarations</key>
