@@ -65,13 +65,12 @@ protected:
 };
 
 
-class CDocument
+class CDocument : public CRefCountedObject
 {
 public:
 	static void		SetStandardResourcesPath( const std::string& inStdResPath );
 
 	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mContextGroup(NULL) {};
-	virtual ~CDocument();
 	
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
 	
@@ -90,9 +89,11 @@ public:
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 	
-	virtual void		Dump();
+	virtual void		Dump( size_t inNestingLevel = 0 );
 
 protected:
+	virtual ~CDocument();
+
 	void				LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root, bool isBuiltIn );
 
 	bool											mLoaded;
@@ -114,6 +115,8 @@ protected:
 	
 	LEOContextGroup*								mContextGroup;
 };
+
+typedef CRefCountedObjectRef<CDocument>		CDocumentRef;
 
 }
 

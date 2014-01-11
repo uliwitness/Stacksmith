@@ -26,7 +26,7 @@
 using namespace Carlson;
 
 
-static std::vector<CDocumentMac>		sOpenDocuments;
+static std::vector<CDocumentRef>		sOpenDocuments;
 
 
 void	WILDFirstNativeCall( void );
@@ -97,9 +97,9 @@ void	WILDFirstNativeCall( void )
 	
 	if( peekingStateDidChange )
 	{
-		for( CDocumentMac& currDoc : sOpenDocuments )
+		for( auto currDoc : sOpenDocuments )
 		{
-			currDoc.SetPeeking( mPeeking == YES );
+			currDoc->SetPeeking( mPeeking == YES );
 		}
 	}
 
@@ -170,10 +170,10 @@ void	WILDFirstNativeCall( void )
 	
 	printf( "Opening file: %s\n", fileURL.c_str() );
 	
-	sOpenDocuments.push_back( CDocumentMac() );
-	CDocumentMac	&	currDoc = sOpenDocuments.back();
+	sOpenDocuments.push_back( new CDocumentMac() );
+	CDocumentRef	currDoc = sOpenDocuments.back();
 	
-	currDoc.LoadFromURL( fileURL, [self](Carlson::CDocument * inDocument)
+	currDoc->LoadFromURL( fileURL, [self](Carlson::CDocument * inDocument)
 	{
 		Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
 		if( !theCppStack )

@@ -296,7 +296,7 @@ void	CDocument::SetPeeking( bool inState )
 }
 
 
-void	CDocument::Dump()
+void	CDocument::Dump( size_t inNestingLevel )
 {
 	printf( "Document\n{\n\tloaded = %s\n\tloading= %s\n\tcreatedByVersion = %s\n\tlastCompactedVersion = %s\n\tfirstEditedVersion = %s\n\tlastEditedVersion = %s\n",
 			(mLoaded ? "true" : "false"), (mLoading ? "true" : "false"), mCreatedByVersion.c_str(),
