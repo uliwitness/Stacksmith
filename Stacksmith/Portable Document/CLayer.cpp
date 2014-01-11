@@ -16,6 +16,7 @@
 #include "CFieldPart.h"
 #include "CRectanglePart.h"
 #include "CPicturePart.h"
+#include "CDocument.h"
 
 
 using namespace Carlson;
@@ -299,6 +300,18 @@ void	CLayer::SetPeeking( bool inState )
 	{
 		currPart->SetPeeking( inState );
 	}
+}
+
+
+std::string	CLayer::GetPictureURL()
+{
+	if( GetPictureName().length() == 0 )
+		return std::string();
+	
+	std::string	stackURL( GetDocument()->GetURL() );
+	stackURL.append( 1, '/' );
+	stackURL.append( GetPictureName() );
+	return stackURL;
 }
 
 

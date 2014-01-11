@@ -41,6 +41,9 @@ public:
 	virtual CPart*	GetPartWithNameOfType( const std::string& inName, CPartCreatorBase* inType );
 	virtual CPart*	GetPartWithID( WILDObjectID inID );
 	virtual void    AddPart( CPart* inPart );
+	std::string		GetPictureURL();
+	std::string		GetPictureName()		{ return mPictureName; };
+	bool			GetShowPicture()		{ return mShowPict; };
 	
 	CPartContents*	GetPartContentsByID( WILDObjectID inID, bool isForBackgroundPart );
 

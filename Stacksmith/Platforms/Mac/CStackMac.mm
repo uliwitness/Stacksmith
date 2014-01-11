@@ -222,6 +222,8 @@ protected:
 {
 	CStackMac	*	mStack;
 	CALayer		*	mSelectionOverlay;	// Draw "peek" outline and selection rectangles in this layer.
+	NSImageView	*	mBackgroundImageView;
+	NSImageView	*	mCardImageView;
 }
 
 -(id)	initWithCppStack: (CStackMac*)inStack;
@@ -288,11 +290,27 @@ protected:
 
 -(void)	createAllViews
 {
+	[mBackgroundImageView removeFromSuperview];
+	[mBackgroundImageView release];
+	mBackgroundImageView = nil;
+	[mCardImageView removeFromSuperview];
+	[mCardImageView release];
+	mCardImageView = nil;
+	
 	CCard	*	theCard = mStack->GetCurrentCard();
 	if( !theCard )
 		return;
 	
 	CBackground	*	theBackground = theCard->GetBackground();
+	std::string		bgPictureURL( theBackground->GetPictureURL() );
+	if( theBackground->GetShowPicture() && bgPictureURL.length() > 0 )
+	{
+		mBackgroundImageView = [[NSImageView alloc] initWithFrame: NSMakeRect(0,0,mStack->GetCardWidth(), mStack->GetCardHeight())];
+		[mBackgroundImageView setWantsLayer: YES];
+		mBackgroundImageView.image = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: bgPictureURL.c_str()]]] autorelease];
+		[self.window.contentView addSubview: mBackgroundImageView];
+	}
+	
 	size_t	numParts = theBackground->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 	{
@@ -303,6 +321,14 @@ protected:
 	}
 
 	numParts = theCard->GetNumParts();
+	std::string		cdPictureURL( theCard->GetPictureURL() );
+	if( theCard->GetShowPicture() && cdPictureURL.length() > 0 )
+	{
+		mCardImageView = [[NSImageView alloc] initWithFrame: NSMakeRect(0,0,mStack->GetCardWidth(), mStack->GetCardHeight())];
+		[mCardImageView setWantsLayer: YES];
+		mCardImageView.image = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cdPictureURL.c_str()]]] autorelease];
+		[self.window.contentView addSubview: mCardImageView];
+	}
 	for( size_t x = 0; x < numParts; x++ )
 	{
 		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
