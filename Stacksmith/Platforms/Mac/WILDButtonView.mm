@@ -1,5 +1,5 @@
 //
-//  WILDButtonView.m
+//  WILDButtonView.mm
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 09.05.10.
@@ -7,29 +7,46 @@
 //
 
 #import "WILDButtonView.h"
-#import "WILDPartView.h"
-#import "WILDScriptContainer.h"
 #import "UKHelperMacros.h"
-#import "WILDPart.h"
-#import "WILDDocument.h"
+#include "CDocument.h"
+
+
+using namespace Carlson;
 
 
 @implementation WILDButtonView
+
+@synthesize owningPart = owningPart;
 
 -(void)	dealloc
 {
 	[self removeTrackingArea: mCursorTrackingArea];
 	DESTROY_DEALLOC(mCursorTrackingArea);
+	if( self->owningPart )
+		self->owningPart->Release();
 
 	[super dealloc];
 }
 
 
+-(void)	setOwningPart: (CButtonPart*)inPart
+{
+	if( self->owningPart != inPart )
+	{
+		if( self->owningPart )
+			self->owningPart->Release();
+		if( inPart )
+			self->owningPart = (CButtonPart*) inPart->Retain();
+		else
+			self->owningPart = NULL;
+	}
+}
+
+
 -(void)	mouseDown: (NSEvent*)event
 {
-	WILDPartView*			pv = (WILDPartView*)[self superview];
 	BOOL					keepLooping = YES;
-	BOOL					autoHighlight = [[pv part] autoHighlight];
+	BOOL					autoHighlight = self->owningPart->GetAutoHighlight();
 	BOOL					isInside = [[self cell] hitTestForEvent: event inRect: [self bounds] ofView: self] != NSCellHitNone;
 	BOOL					newIsInside = isInside;
 	
@@ -39,7 +56,7 @@
 	if( autoHighlight && isInside )
 		[[self cell] setHighlighted: YES];
 	
-	WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseDown %ld", [event buttonNumber] +1 );
+	self->owningPart->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*) {}, "mouseDown %ld", [event buttonNumber] +1 );
 	
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	
@@ -67,7 +84,7 @@
 						if( autoHighlight )
 							[[self cell] setHighlighted: isInside];
 					}
-					WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseDrag %ld", [evt buttonNumber] +1 );
+					self->owningPart->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*) {}, "mouseDrag %ld", [event buttonNumber] +1 );
 					break;
 			}
 		}
@@ -85,73 +102,31 @@
 			[self.window display];
 		}
 		[[self target] performSelector: [self action] withObject: self];
-		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUp %ld", [event buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*) {}, "mouseUp %ld", [event buttonNumber] +1 );
 	}
 	else
-		WILDScriptContainerResultFromSendingMessage( [pv part], @"mouseUpOutside %ld", [event buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*) {}, "mouseUpOutside %ld", [event buttonNumber] +1 );
 	
 	[pool release];
 }
 
 
-#if USE_CURSOR_RECTS
-
 -(void)	resetCursorRects
 {
-	NSCursor	*	currentCursor = [WILDTools cursorForTool: [[WILDTools sharedTools] currentTool]];
+	NSCursor	*	currentCursor = nil;
 	if( !currentCursor )
 	{
-		WILDPartView*		pv = (WILDPartView*) [self superview];
-		currentCursor = [[[[pv part] stack] document] cursorWithID: 128];
+		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaURLByIDOfType( 128, EMediaTypeCursor );
+		if( cursorURL.length() > 0 )
+		{
+			NSImage	*			cursorImage = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cursorURL.c_str()]]] autorelease];
+			NSCursor *			cursorInstance = [[NSCursor alloc] initWithImage: cursorImage hotSpot: NSMakePoint(8,8)];
+			currentCursor = cursorInstance;
+		}
 	}
+	if( !currentCursor )
+		currentCursor = [NSCursor arrowCursor];
 	[self addCursorRect: [self bounds] cursor: currentCursor];
-}
-
-#else // !USE_CURSOR_RECTS
-
--(void)	mouseEntered:(NSEvent *)theEvent
-{
-	WILDTool			currTool = [[WILDTools sharedTools] currentTool];
-	NSCursor*			currCursor = [WILDTools cursorForTool: currTool];
-	if( !currCursor )
-	{
-		WILDPartView*		pv = [self superview];
-		currCursor = [[[[pv part] stack] document] cursorWithID: 128];
-	}
-	[currCursor set];
-}
-
-
--(void)	mouseExited:(NSEvent *)theEvent
-{
-	
-}
-
-
-- (void)updateTrackingAreas
-{
-	[super updateTrackingAreas];
-	
-	if( mCursorTrackingArea )
-	{
-		[self removeTrackingArea: mCursorTrackingArea];
-		DESTROY(mCursorTrackingArea);
-	}
-	
-	mCursorTrackingArea = [[NSTrackingArea alloc] initWithRect: [self visibleRect] options: NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp owner: self userInfo: nil];
-	[self addTrackingArea: mCursorTrackingArea];
-}
-
-#endif
-
--(NSRect)	frameForAlignmentRect:(NSRect)alignmentRect
-{
-	return alignmentRect;
-}
-
--(NSRect)	alignmentRectForFrame:(NSRect)frame
-{
-	return frame;
 }
 
 

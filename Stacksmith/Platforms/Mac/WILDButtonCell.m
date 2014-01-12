@@ -169,24 +169,32 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	BOOL		iconHighlight = isHighlighted && [self image];
 	if( iconHighlight )
 	{
-		NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
-		
-		txBox.size.width += 4;
-		txBox.origin.x -= 2;
-		
-		[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [self backgroundColor]
-						range: NSMakeRange(0,[muAttrTitle length])];
-		attrTitle = muAttrTitle;
+		NSColor		*	bgColor = [self backgroundColor];
+		if( bgColor )
+		{
+			NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
+			
+			txBox.size.width += 4;
+			txBox.origin.x -= 2;
+			
+			[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [self backgroundColor]
+							range: NSMakeRange(0,[muAttrTitle length])];
+			attrTitle = muAttrTitle;
+		}
 	}
 	else if( isHighlighted )
 	{
 		if( highlightColor == self.lineColor )	// We didn't have to generate highlight cuz line & bg are same?
 		{
-			NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
-			
-			[muAttrTitle addAttribute: NSForegroundColorAttributeName value: [self backgroundColor]
-							range: NSMakeRange(0,[muAttrTitle length])];
-			attrTitle = muAttrTitle;
+			NSColor		*	bgColor = [self backgroundColor];
+			if( bgColor )
+			{
+				NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
+				
+				[muAttrTitle addAttribute: NSForegroundColorAttributeName value: bgColor
+								range: NSMakeRange(0,[muAttrTitle length])];
+				attrTitle = muAttrTitle;
+			}
 		}
 	}
 	else if( !isActive )

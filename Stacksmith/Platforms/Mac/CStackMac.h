@@ -25,7 +25,7 @@ namespace Carlson {
 class CStackMac : public CStack
 {
 public:
-	CStackMac( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument );
+	CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument );
 
 	virtual bool				GoThereInNewWindow( bool inNewWindow );
 	virtual void				SetPeeking( bool inState );

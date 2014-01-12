@@ -7,7 +7,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDButtonOwner">
             <connections>
-                <outlet property="button" destination="4e3-X0-Mhw" id="SHh-Q8-UYu"/>
+                <outlet property="shapeButton" destination="4e3-X0-Mhw" id="GBI-hH-FTu"/>
+                <outlet property="systemButton" destination="lym-Xb-7iL" id="9px-Tt-eev"/>
                 <outlet property="textField" destination="5Wh-1D-lnZ" id="EXy-ap-Bzd"/>
                 <outlet property="view" destination="1" id="XZT-UI-Mwh"/>
             </connections>
@@ -18,19 +19,34 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4e3-X0-Mhw">
+                <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4e3-X0-Mhw" customClass="WILDButtonView">
                     <rect key="frame" x="14" y="224" width="82" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <shadow key="shadow" blurRadius="8">
                         <size key="offset" width="4" height="4"/>
                         <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </shadow>
-                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gM3-Qb-d4r">
+                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gM3-Qb-d4r" customClass="WILDButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="buttonClicked:" target="-2" id="FKg-Sl-icC"/>
+                    </connections>
+                </button>
+                <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lym-Xb-7iL" customClass="WILDButtonView">
+                    <rect key="frame" x="14" y="181" width="82" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <shadow key="shadow" blurRadius="8">
+                        <size key="offset" width="4" height="4"/>
+                        <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </shadow>
+                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pUO-2G-HXx">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="buttonClicked:" target="-2" id="boM-Va-WGd"/>
                     </connections>
                 </button>
                 <textField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Wh-1D-lnZ">

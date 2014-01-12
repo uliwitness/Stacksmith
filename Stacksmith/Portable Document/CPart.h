@@ -11,7 +11,7 @@
 
 #include "CConcreteObject.h"
 #include "tinyxml2.h"
-#include "WILDObjectID.h"
+#include "CObjectID.h"
 
 
 namespace Carlson {
@@ -56,7 +56,7 @@ public:
 	
 	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
 	
-	WILDObjectID				GetID()			{ return mID; };
+	ObjectID				GetID()			{ return mID; };
 	int							GetFamily()		{ return mFamily; };
 	virtual void				SetRect( int left, int top, int right, int bottom )	{ mLeft = left; mTop = top; mRight = right; mBottom = bottom; };
 	int							GetLeft()		{ return mLeft; };
@@ -83,7 +83,7 @@ protected:
 	virtual void				DumpProperties( size_t inIndent );
 
 	int					mFamily;
-	WILDObjectID		mID;
+	ObjectID		mID;
 	int					mLeft;
 	int					mTop;
 	int					mRight;

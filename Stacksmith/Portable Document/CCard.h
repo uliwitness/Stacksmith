@@ -30,7 +30,7 @@ typedef enum
 class CCard : public CLayer
 {
 public:
-	CCard( std::string inURL, WILDObjectID inID, const std::string inName, CStack* inStack, bool inMarked ) : CLayer(inURL,inID,inName,inStack), mMarked(inMarked), mOwningBackground(NULL)	{};
+	CCard( std::string inURL, ObjectID inID, const std::string inName, CStack* inStack, bool inMarked ) : CLayer(inURL,inID,inName,inStack), mMarked(inMarked), mOwningBackground(NULL)	{};
 	
 	bool			IsMarked()					{ return mMarked; };
 	void			SetMarked( bool inMarked )	{ mMarked = inMarked; };

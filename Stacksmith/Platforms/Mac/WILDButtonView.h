@@ -7,11 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CButtonPart.h"
 
 
 @interface WILDButtonView : NSButton
 {
 	NSTrackingArea	*	mCursorTrackingArea;
 }
+
+@property (assign,nonatomic) Carlson::CButtonPart*	owningPart;
 
 @end

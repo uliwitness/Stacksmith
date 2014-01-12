@@ -19,6 +19,8 @@
 #include "CDocument.h"
 #import "ULIInvisiblePlayerView.h"
 #import <AVFoundation/AVFoundation.h>
+#import "WILDButtonView.h"
+#import "WILDButtonCell.h"
 
 
 using namespace Carlson;
@@ -38,7 +40,8 @@ using namespace Carlson;
 
 @interface WILDButtonOwner : NSViewController
 
-@property (assign,nonatomic) IBOutlet NSButton* button;
+@property (assign,nonatomic) IBOutlet NSButton* systemButton;
+@property (assign,nonatomic) IBOutlet WILDButtonView* shapeButton;
 @property (assign,nonatomic) IBOutlet NSTextField* textField;
 
 @end
@@ -88,7 +91,7 @@ public:
 protected:
 	~CButtonPartMac()	{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 	
-	NSButton		*	mView;
+	WILDButtonView	*	mView;
 	WILDButtonOwner	*	mButtonOwner;
 };
 
@@ -98,50 +101,72 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	if( !sButtonOwner )
 		sButtonOwner = [[WILDButtonOwner alloc] initWithNibName: @"WILDButtonOwner" bundle: nil];
 	[sButtonOwner view];
-	mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner button]]] retain];
-	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
-	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
-	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
-	[mView.layer setShadowRadius: mShadowBlurRadius];
-	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	if( mButtonStyle == EButtonStyleCheckBox )
 	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner systemButton]]] retain];
 		[mView setBezelStyle: NSRegularSquareBezelStyle];
 		[mView setButtonType: NSSwitchButton];
 	}
 	else if( mButtonStyle == EButtonStyleRadioButton )
 	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner systemButton]]] retain];
 		[mView setBezelStyle: NSRegularSquareBezelStyle];
 		[mView setButtonType: NSRadioButton];
 	}
 	else if( mButtonStyle == EButtonStyleRectangle )
 	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner shapeButton]]] retain];
 		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
 	}
 	else if( mButtonStyle == EButtonStyleOpaque )
 	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner shapeButton]]] retain];
 		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
 		[mView setBordered: NO];
 	}
 	else if( mButtonStyle == EButtonStyleRoundrect )
 	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner shapeButton]]] retain];
 		[mView setBezelStyle: NSTexturedRoundedBezelStyle];
 		[mView setBordered: NO];
 	}
 	else if( mButtonStyle == EButtonStyleStandard )
 	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner systemButton]]] retain];
 		[mView setBezelStyle: NSRoundRectBezelStyle];
 		[mView setBordered: NO];
 	}
 	else if( mButtonStyle == EButtonStyleDefault )
 	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner systemButton]]] retain];
 		[mView setBezelStyle: NSRoundRectBezelStyle];
 		[mView setKeyEquivalent: @"\n"];
 		[mView setBordered: NO];
 	}
+	else if( mButtonStyle == EButtonStyleOval )
+	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner shapeButton]]] retain];
+		[mView setBezelStyle: NSCircularBezelStyle];
+	}
 	else
+	{
+		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner shapeButton]]] retain];
 		[mView setBezelStyle: NSRoundedBezelStyle];
+	}
+	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
+	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
+	[mView.layer setShadowRadius: mShadowBlurRadius];
+	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[mView setTitle: [NSString stringWithUTF8String: mName.c_str()]];
+	[mView setOwningPart: this];
+	if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
+	{
+		[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
+		[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
+		[((WILDButtonCell*)mView.cell) setLineWidth: mLineWidth];
+	}
+	[mView setEnabled: mEnabled];
 	[inSuperView addSubview: mView];
 };
 
@@ -416,7 +441,7 @@ protected:
 @end
 
 
-CStackMac::CStackMac( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument )
+CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument )
 	: CStack( inURL, inID, inName, inDocument )
 {
 	mMacWindowController = nil;

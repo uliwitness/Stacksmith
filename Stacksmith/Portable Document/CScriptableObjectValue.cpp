@@ -593,10 +593,17 @@ LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* 
 	
 	if( theObject != NULL )
 	{
-		theScript = theObject->GetParentObject()->GetScriptObject([](const char * errMsg, size_t errLine, size_t errOffs, CScriptableObject * owner)
+		//printf( "Going up to parent %s\n", typeid(*theObject).name() );
+		
+		CScriptableObject*	scriptableParent = theObject->GetParentObject();
+		if( scriptableParent )
 		{
-			printf("%s\n",errMsg);
-		});
+			theScript = scriptableParent->GetScriptObject([](const char * errMsg, size_t errLine, size_t errOffs, CScriptableObject * owner)
+			{
+				if( errMsg )
+					printf("%s\n",errMsg);
+			});
+		}
 	}
 	
 	return theScript;

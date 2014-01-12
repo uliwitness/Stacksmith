@@ -22,7 +22,7 @@
 #include <vector>
 #include <cstddef>
 #include <string>
-#include "WILDObjectID.h"
+#include "CObjectID.h"
 #include "CCard.h"
 #include "CStack.h"
 
@@ -34,15 +34,15 @@ class CRecentCardInfo
 {
 public:
 	CRecentCardInfo() {};
-	CRecentCardInfo( const std::string& inURL, WILDObjectID inID, CCard* inCard ) {};
+	CRecentCardInfo( const std::string& inURL, ObjectID inID, CCard* inCard ) {};
 	
 	std::string		GetDocumentURL()	{ return mDocumentURL; };
-	WILDObjectID	GetCardID()			{ return mCardID; };
+	ObjectID	GetCardID()			{ return mCardID; };
 	CCard*			GetCard()			{ return mCard; };
 
 protected:
 	std::string		mDocumentURL;	// To get back to a closed stack.
-	WILDObjectID	mCardID;		// To get back to a closed stack's card.
+	ObjectID	mCardID;		// To get back to a closed stack's card.
 	CCardRef		mCard;			// If still loaded, this is the card for quick access.
 };
 

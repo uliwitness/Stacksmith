@@ -73,7 +73,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 				backgroundURL.append( 1, '/' );
 				backgroundURL.append( currBgElem->Attribute("file") );
 				char*			endPtr = NULL;
-				WILDObjectID	bgID = strtoll( currBgElem->Attribute("id"), &endPtr, 10 );
+				ObjectID	bgID = strtoll( currBgElem->Attribute("id"), &endPtr, 10 );
 				const char*		theName = currBgElem->Attribute("name");
 				
 				CBackground	*	theBackground = new CBackground( backgroundURL, bgID, (theName ? theName : ""), this );
@@ -92,7 +92,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 				cardURL.append( 1, '/' );
 				cardURL.append( currCdElem->Attribute("file") );
 				char*			endPtr = NULL;
-				WILDObjectID	cdID = strtoll( currCdElem->Attribute("id"), &endPtr, 10 );
+				ObjectID	cdID = strtoll( currCdElem->Attribute("id"), &endPtr, 10 );
 				const char*		theName = currCdElem->Attribute("name");
 				const char*	markedAttrStr = currCdElem->Attribute("marked");
 				bool	marked = markedAttrStr ? (strcmp("true", markedAttrStr) == 0) : false;
@@ -141,7 +141,7 @@ void	CStack::RemoveCard( CCard* inCard )
 }
 
 
-CCard*	CStack::GetCardByID( WILDObjectID inID )
+CCard*	CStack::GetCardByID( ObjectID inID )
 {
 	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
 	{
@@ -153,7 +153,7 @@ CCard*	CStack::GetCardByID( WILDObjectID inID )
 }
 
 
-CBackground*	CStack::GetBackgroundByID( WILDObjectID inID )
+CBackground*	CStack::GetBackgroundByID( ObjectID inID )
 {
 	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
 	{

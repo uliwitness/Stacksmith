@@ -11,7 +11,7 @@
 
 #include "CRefCountedObject.h"
 #include "tinyxml2.h"
-#include "WILDObjectID.h"
+#include "CObjectID.h"
 #include <string>
 
 namespace Carlson {
@@ -23,13 +23,13 @@ public:
 	
 	virtual void		Dump( size_t inIndent );
 	
-	WILDObjectID		GetID()					{ return mID; };
+	ObjectID		GetID()					{ return mID; };
 	bool				GetHighlight()			{ return mHighlight; };
 	std::string			GetText()				{ return mText; };
 	bool				GetIsOnBackground()		{ return mIsOnBackground; };
 
 protected:
-	WILDObjectID		mID;				// ID of the object whose contents we contain.
+	ObjectID		mID;				// ID of the object whose contents we contain.
 	bool				mIsOnBackground;	// Is the object with ID mID on the background or on the card layer?
 	bool				mHighlight;			// The highlight property for a background button with sharedHighlight == FALSE.
 	std::string			mText;				// The actual text contents.

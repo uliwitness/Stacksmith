@@ -17,7 +17,7 @@ namespace Carlson
 class CDocumentMac : public CDocument
 {
 public:
-	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument );
+	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument );
 
 };
 

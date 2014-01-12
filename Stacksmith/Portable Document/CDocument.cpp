@@ -40,7 +40,7 @@ void	CDocument::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root,
 	tinyxml2::XMLElement	*	currMediaElem = root->FirstChildElement( "media" );
 	while( currMediaElem )
 	{
-		WILDObjectID	iconID = CTinyXMLUtils::GetLongLongNamed( currMediaElem, "id", 0 );
+		ObjectID	iconID = CTinyXMLUtils::GetLongLongNamed( currMediaElem, "id", 0 );
 		std::string	iconName;
 		CTinyXMLUtils::GetStringNamed( currMediaElem, "name", iconName );
 		std::string	fileName;
@@ -175,7 +175,7 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 				stackURL.append( 1, '/' );
 				stackURL.append( currStackElem->Attribute("file") );
 				char*			endPtr = NULL;
-				WILDObjectID	stackID = strtoll( currStackElem->Attribute("id"), &endPtr, 10 );
+				ObjectID	stackID = strtoll( currStackElem->Attribute("id"), &endPtr, 10 );
 				const char*		theName = currStackElem->Attribute("name");
 				
 				CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, (theName ? theName : ""), this );
@@ -213,11 +213,11 @@ std::string	CDocument::GetMediaURLByNameOfType( const std::string& inName, TMedi
 	const char*	str = inName.c_str();
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
 	{
-		if( strcasecmp( str, currMedia->GetName().c_str() ) == 0 )
+		if( inType == currMedia->GetMediaType() && (strcasecmp( str, currMedia->GetName().c_str() ) == 0) )
 		{
 			std::string	fullURL = mURL;
 			fullURL.append( 1, '/' );
-			fullURL.append( currMedia->GetName() );
+			fullURL.append( currMedia->GetFileName() );
 			return fullURL;
 		}
 	}
@@ -226,7 +226,24 @@ std::string	CDocument::GetMediaURLByNameOfType( const std::string& inName, TMedi
 }
 
 
-WILDObjectID	CDocument::GetUniqueIDForStack()
+std::string	CDocument::GetMediaURLByIDOfType( ObjectID inID, TMediaType inType )
+{
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+		{
+			std::string	fullURL = mURL;
+			fullURL.append( 1, '/' );
+			fullURL.append( currMedia->GetFileName() );
+			return fullURL;
+		}
+	}
+	
+	return std::string();
+}
+
+
+ObjectID	CDocument::GetUniqueIDForStack()
 {
 	bool	notUnique = true;
 	
@@ -250,7 +267,7 @@ WILDObjectID	CDocument::GetUniqueIDForStack()
 
 
 
-WILDObjectID	CDocument::GetUniqueIDForMedia()
+ObjectID	CDocument::GetUniqueIDForMedia()
 {
 	bool	notUnique = true;
 	
@@ -282,7 +299,7 @@ LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 }
 
 
-CStack*		CDocument::NewStackWithURLIDNameForDocument( const std::string& inURL, WILDObjectID inID, const std::string& inName, CDocument * inDocument )
+CStack*		CDocument::NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument )
 {
 	return new CStack( inURL, inID, inName, inDocument );
 }

@@ -10,7 +10,7 @@
 #define __Stacksmith__CLayer__
 
 #include "CConcreteObject.h"
-#include "WILDObjectID.h"
+#include "CObjectID.h"
 #include "CPart.h"
 #include "CPartContents.h"
 #include <string>
@@ -26,10 +26,10 @@ class CStack;
 class CLayer : public CConcreteObject
 {
 public:
-	CLayer( std::string inURL, WILDObjectID inID, const std::string inName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID) { mName = inName; };
+	CLayer( std::string inURL, ObjectID inID, const std::string inName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID) { mName = inName; };
 	~CLayer();
 	
-	WILDObjectID	GetID()	const	{ return mID; };
+	ObjectID	GetID()	const	{ return mID; };
 	
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
 	bool			IsLoaded()	{ return mLoaded; };
@@ -39,13 +39,13 @@ public:
 	virtual size_t	GetPartCountOfType( CPartCreatorBase* inType );
 	virtual CPart*	GetPartOfType( size_t inIndex, CPartCreatorBase* inType );
 	virtual CPart*	GetPartWithNameOfType( const std::string& inName, CPartCreatorBase* inType );
-	virtual CPart*	GetPartWithID( WILDObjectID inID );
+	virtual CPart*	GetPartWithID( ObjectID inID );
 	virtual void    AddPart( CPart* inPart );
 	std::string		GetPictureURL();
 	std::string		GetPictureName()		{ return mPictureName; };
 	bool			GetShowPicture()		{ return mShowPict; };
 	
-	CPartContents*	GetPartContentsByID( WILDObjectID inID, bool isForBackgroundPart );
+	CPartContents*	GetPartContentsByID( ObjectID inID, bool isForBackgroundPart );
 
 	virtual CStack*	GetStack()			{ return mStack; };
 
@@ -64,7 +64,7 @@ protected:
 	
 	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
 
-	WILDObjectID					mID;
+	ObjectID					mID;
 	std::string						mURL;
 	bool							mLoaded;
 	bool							mLoading;

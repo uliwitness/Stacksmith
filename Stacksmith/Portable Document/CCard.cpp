@@ -18,7 +18,7 @@ void	CCard::LoadPropertiesFromElement( tinyxml2::XMLElement* root )
 {
 	CLayer::LoadPropertiesFromElement( root );
 	
-	WILDObjectID owningBackgroundID = CTinyXMLUtils::GetLongLongNamed( root, "owner", 0 );
+	ObjectID owningBackgroundID = CTinyXMLUtils::GetLongLongNamed( root, "owner", 0 );
 	mOwningBackground = mStack->GetBackgroundByID( owningBackgroundID );
 }
 

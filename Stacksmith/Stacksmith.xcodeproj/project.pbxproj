@@ -71,6 +71,8 @@
 		5523869E187E265000D7FAB3 /* ULIInvisiblePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523869D187E265000D7FAB3 /* ULIInvisiblePlayerView.m */; };
 		552386A4187E274C00D7FAB3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552386A3187E274C00D7FAB3 /* AVFoundation.framework */; };
 		552386A71880D72E00D7FAB3 /* ULIURLHandlingApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */; };
+		552386B5188335A000D7FAB3 /* WILDButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 552386B2188335A000D7FAB3 /* WILDButtonCell.m */; };
+		552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386B4188335A000D7FAB3 /* WILDButtonView.mm */; };
 		5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */; };
 		552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */; };
 		55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */; };
@@ -511,6 +513,10 @@
 		552386A3187E274C00D7FAB3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = ../../../../../System/Library/Frameworks/AVFoundation.framework; sourceTree = "<group>"; };
 		552386A51880D72E00D7FAB3 /* ULIURLHandlingApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIURLHandlingApplication.h; path = ../UliKit/ULIURLHandlingApplication.h; sourceTree = "<group>"; };
 		552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIURLHandlingApplication.m; path = ../UliKit/ULIURLHandlingApplication.m; sourceTree = "<group>"; };
+		552386B1188335A000D7FAB3 /* WILDButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDButtonCell.h; path = Platforms/Mac/WILDButtonCell.h; sourceTree = "<group>"; };
+		552386B2188335A000D7FAB3 /* WILDButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDButtonCell.m; path = Platforms/Mac/WILDButtonCell.m; sourceTree = "<group>"; };
+		552386B3188335A000D7FAB3 /* WILDButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDButtonView.h; path = Platforms/Mac/WILDButtonView.h; sourceTree = "<group>"; };
+		552386B4188335A000D7FAB3 /* WILDButtonView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDButtonView.mm; path = Platforms/Mac/WILDButtonView.mm; sourceTree = "<group>"; };
 		5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDDrawAddColorBezel.h; sourceTree = "<group>"; };
 		5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDDrawAddColorBezel.m; sourceTree = "<group>"; };
 		552558FC114BDE7C00279B03 /* WILDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDAppDelegate.h; sourceTree = "<group>"; };
@@ -836,7 +842,7 @@
 		55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CChunkPropertyNodeTransformation.cpp; path = ../../CChunkPropertyNodeTransformation.cpp; sourceTree = "<group>"; };
 		55D7AA4C1573816B00F33E78 /* CChunkPropertyNodeTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CChunkPropertyNodeTransformation.h; path = ../../CChunkPropertyNodeTransformation.h; sourceTree = "<group>"; };
 		55E23BF5133FAB9E00E6B444 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E397E61322481500C3739D /* WILDObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDObjectID.h; path = Model/WILDObjectID.h; sourceTree = "<group>"; };
+		55E397E61322481500C3739D /* CObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CObjectID.h; path = Model/CObjectID.h; sourceTree = "<group>"; };
 		55E397E71322520700C3739D /* NSFileManager+NameForTempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+NameForTempFile.h"; path = "../UliKit/NSFileManager+NameForTempFile.h"; sourceTree = "<group>"; };
 		55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+NameForTempFile.m"; path = "../UliKit/NSFileManager+NameForTempFile.m"; sourceTree = "<group>"; };
 		55E3A69D11503456008411BB /* CURS_128.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = CURS_128.pdf; path = Resources/CURS_128.pdf; sourceTree = "<group>"; };
@@ -962,31 +968,8 @@
 			isa = PBXGroup;
 			children = (
 				5503472F1370A18800AE7681 /* StacksmithVersion.h */,
-				552386A51880D72E00D7FAB3 /* ULIURLHandlingApplication.h */,
-				552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */,
-				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
-				552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */,
-				55CD6123187B188E002450E2 /* CDocumentMac.h */,
-				55CD6122187B188E002450E2 /* CDocumentMac.cpp */,
-				55CD6120187B14E6002450E2 /* CStackMac.h */,
-				55CD611F187B14E6002450E2 /* CStackMac.mm */,
-				55ADC796187D3AE700FC1909 /* WILDButtonOwner.xib */,
-				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
-				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
-				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
-				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
-				55CD611D187A60CD002450E2 /* CRecentCardsList.h */,
-				55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */,
-				552997CD1370BAD300F870DF /* WILDInputPanelController.h */,
-				552997CE1370BAD300F870DF /* WILDInputPanelController.m */,
-				55C2B645115E5780008B094D /* CSearchContext.h */,
-				55C2B646115E5780008B094D /* CSearchContext.cpp */,
-				55E397E61322481500C3739D /* WILDObjectID.h */,
 				556DB7AA18709A45002F7CB2 /* Portable Document */,
-				5542CE3C113ADFCE00555C64 /* Utilities */,
-				55E806681368B2E0006F1287 /* UKPaintView */,
-				55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */,
-				559700ED137BBB0C000264B8 /* Custom CIFilters */,
+				552386AC1883358B00D7FAB3 /* Platform/Mac */,
 				553C469D13577334000219FA /* Interpreter */,
 			);
 			name = Classes;
@@ -995,9 +978,6 @@
 		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2564AD2C0F5327BB00F57823 /* Stacksmith_Prefix.pch */,
-				55C68C9D116413E300D8B44C /* svn_version.h */,
-				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -1057,6 +1037,75 @@
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		552386AC1883358B00D7FAB3 /* Platform/Mac */ = {
+			isa = PBXGroup;
+			children = (
+				552386B9188336FE00D7FAB3 /* Application */,
+				552386B7188336B600D7FAB3 /* Document */,
+				552386B8188336DD00D7FAB3 /* OS abstraction */,
+				5542CE3C113ADFCE00555C64 /* Utilities */,
+				55E806681368B2E0006F1287 /* UKPaintView */,
+				55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */,
+				559700ED137BBB0C000264B8 /* Custom CIFilters */,
+			);
+			name = Platform/Mac;
+			sourceTree = "<group>";
+		};
+		552386B7188336B600D7FAB3 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				55CD6123187B188E002450E2 /* CDocumentMac.h */,
+				55CD6122187B188E002450E2 /* CDocumentMac.cpp */,
+				55CD6120187B14E6002450E2 /* CStackMac.h */,
+				55CD611F187B14E6002450E2 /* CStackMac.mm */,
+				55ADC796187D3AE700FC1909 /* WILDButtonOwner.xib */,
+				552386B1188335A000D7FAB3 /* WILDButtonCell.h */,
+				552386B2188335A000D7FAB3 /* WILDButtonCell.m */,
+				552386B3188335A000D7FAB3 /* WILDButtonView.h */,
+				552386B4188335A000D7FAB3 /* WILDButtonView.mm */,
+			);
+			name = Document;
+			sourceTree = "<group>";
+		};
+		552386B8188336DD00D7FAB3 /* OS abstraction */ = {
+			isa = PBXGroup;
+			children = (
+				556DB7BE1870A6EB002F7CB2 /* CURLRequest.h */,
+				556DB7BD1870A6EB002F7CB2 /* CURLRequest.mm */,
+				556DB7C41870ADE9002F7CB2 /* CURLResponse.h */,
+				556DB7C31870ADE9002F7CB2 /* CURLResponse.mm */,
+				556DB7C11870A971002F7CB2 /* CURLConnection.h */,
+				556DB7C01870A971002F7CB2 /* CURLConnection.mm */,
+				55CD60C718752ECA002450E2 /* CTimer.h */,
+				55CD60C618752ECA002450E2 /* CTimer.mm */,
+				55CD61111878EBF9002450E2 /* CCancelPolling.h */,
+				55CD61101878EBF9002450E2 /* CCancelPolling.cpp */,
+				55CD61141879EDA3002450E2 /* CAlert.h */,
+				55CD61131879EDA3002450E2 /* CAlert.mm */,
+				552997CD1370BAD300F870DF /* WILDInputPanelController.h */,
+				552997CE1370BAD300F870DF /* WILDInputPanelController.m */,
+				55CD611A187A154A002450E2 /* CSound.h */,
+				55CD6119187A154A002450E2 /* CSound.mm */,
+			);
+			name = "OS abstraction";
+			sourceTree = "<group>";
+		};
+		552386B9188336FE00D7FAB3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				2564AD2C0F5327BB00F57823 /* Stacksmith_Prefix.pch */,
+				55C68C9D116413E300D8B44C /* svn_version.h */,
+				2A37F4B0FDCFA73011CA2CEA /* main.m */,
+				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
+				552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */,
+				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
+				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
+				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
+				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
+			);
+			name = Application;
 			sourceTree = "<group>";
 		};
 		55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */ = {
@@ -1230,6 +1279,8 @@
 		5542CE3C113ADFCE00555C64 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				552386A51880D72E00D7FAB3 /* ULIURLHandlingApplication.h */,
+				552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */,
 				5542CABF113A2CB300555C64 /* UKPBMImageRep.h */,
 				5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */,
 				5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */,
@@ -1293,6 +1344,7 @@
 		556DB7AA18709A45002F7CB2 /* Portable Document */ = {
 			isa = PBXGroup;
 			children = (
+				55E397E61322481500C3739D /* CObjectID.h */,
 				556DB7B218709CAF002F7CB2 /* CRefCountedObject.h */,
 				556DB7B118709CAF002F7CB2 /* CRefCountedObject.cpp */,
 				55CD610E18788CEB002450E2 /* CScriptableObjectValue.h */,
@@ -1329,26 +1381,16 @@
 				55CD610518786BAC002450E2 /* CRectanglePart.cpp */,
 				55AC96201870FFC200488B51 /* CPartContents.h */,
 				55AC961F1870FFC200488B51 /* CPartContents.cpp */,
+				55C2B645115E5780008B094D /* CSearchContext.h */,
+				55C2B646115E5780008B094D /* CSearchContext.cpp */,
 				55CD61171879F464002450E2 /* CMessageBox.h */,
 				55CD61161879F464002450E2 /* CMessageBox.cpp */,
+				55CD611D187A60CD002450E2 /* CRecentCardsList.h */,
+				55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */,
 				556DB7A418709A15002F7CB2 /* tinyxml2.h */,
 				556DB7A318709A15002F7CB2 /* tinyxml2.cpp */,
 				55AC961A1870D50400488B51 /* CTinyXMLUtils.h */,
 				55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */,
-				556DB7BE1870A6EB002F7CB2 /* CURLRequest.h */,
-				556DB7BD1870A6EB002F7CB2 /* CURLRequest.mm */,
-				556DB7C41870ADE9002F7CB2 /* CURLResponse.h */,
-				556DB7C31870ADE9002F7CB2 /* CURLResponse.mm */,
-				556DB7C11870A971002F7CB2 /* CURLConnection.h */,
-				556DB7C01870A971002F7CB2 /* CURLConnection.mm */,
-				55CD60C718752ECA002450E2 /* CTimer.h */,
-				55CD60C618752ECA002450E2 /* CTimer.mm */,
-				55CD61111878EBF9002450E2 /* CCancelPolling.h */,
-				55CD61101878EBF9002450E2 /* CCancelPolling.cpp */,
-				55CD61141879EDA3002450E2 /* CAlert.h */,
-				55CD61131879EDA3002450E2 /* CAlert.mm */,
-				55CD611A187A154A002450E2 /* CSound.h */,
-				55CD6119187A154A002450E2 /* CSound.mm */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -1874,6 +1916,7 @@
 				55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */,
 				55CD61151879EDA3002450E2 /* CAlert.mm in Sources */,
 				5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */,
+				552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */,
 				5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */,
 				552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */,
 				55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */,
@@ -2018,6 +2061,7 @@
 				55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */,
 				55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */,
 				55AC96211870FFC200488B51 /* CPartContents.cpp in Sources */,
+				552386B5188335A000D7FAB3 /* WILDButtonCell.m in Sources */,
 				5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */,
 				55382463172730B4007785D8 /* WILDObjCCallInstructions.mm in Sources */,
 				55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */,

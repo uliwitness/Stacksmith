@@ -99,7 +99,7 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 }
 
 
-CPartContents*	CLayer::GetPartContentsByID( WILDObjectID inID, bool isForBackgroundPart )
+CPartContents*	CLayer::GetPartContentsByID( ObjectID inID, bool isForBackgroundPart )
 {
 	for( auto itty = mContents.begin(); itty != mContents.end(); itty++ )
 	{
@@ -139,7 +139,7 @@ void	CLayer::LoadPropertiesFromElement( tinyxml2::XMLElement* root )
 }
 
 
-CPart*	CLayer::GetPartWithID( WILDObjectID inID )
+CPart*	CLayer::GetPartWithID( ObjectID inID )
 {
 	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
 	{
@@ -214,7 +214,7 @@ void	CLayer::LoadAddColorPartsFromElement( tinyxml2::XMLElement* root )
 	
 	for( ; theObject != NULL; theObject = theObject->NextSiblingElement("addcolorobject") )
 	{
-		WILDObjectID	objectID = CTinyXMLUtils::GetLongLongNamed( theObject, "id" );
+		ObjectID	objectID = CTinyXMLUtils::GetLongLongNamed( theObject, "id" );
 		int				objectBevel = CTinyXMLUtils::GetIntNamed( theObject, "bevel" );
 		std::string		objectType;
 		CTinyXMLUtils::GetStringNamed( theObject, "type", objectType );

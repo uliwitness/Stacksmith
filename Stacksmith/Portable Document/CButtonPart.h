@@ -35,12 +35,13 @@ class CButtonPart : public CVisiblePart
 public:
 	explicit CButtonPart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
 	
-protected:
-	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	virtual bool			GetSharedText()			{ return mSharedHighlight; };
+	virtual bool			GetAutoHighlight()		{ return mAutoHighlight; };
+	
+protected:
+	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	
 	virtual const char*		GetIdentityForDump()	{ return "Button"; };
 	virtual void			DumpProperties( size_t inIndent );
@@ -53,7 +54,7 @@ protected:
 	bool			mAutoHighlight;
 	bool			mSharedHighlight;
 	int				mTitleWidth;
-	WILDObjectID	mIconID;
+	ObjectID	mIconID;
 	TPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
