@@ -638,7 +638,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	LEOScript*	theScript = GetScriptObject(errorHandler);
 	if( !theScript )
 		return;
-	LEOContext	ctx;
+	LEOContext	ctx = {0};
 	const char*	paramStart = strchr( fmt, ' ' );
 	char		msg[512] = {0};
 	if( paramStart == NULL )
@@ -867,9 +867,11 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 			LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
 //			LEODebugPrintScript( GetScriptContextGroupObject(), theScript );
 //			LEODebuggerAddBreakpoint(theHandler->instructions);
+//			LEODebugPrintContext(&ctx);
 			LEORunInContext( theHandler->instructions, &ctx );
 			if( ctx.errMsg[0] != 0 )
 				break;
+//			LEODebugPrintContext(&ctx);
 		}
 		if( !theHandler )
 		{
@@ -887,9 +889,14 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	{
 		errorHandler( ctx.errMsg, SIZE_T_MAX, SIZE_T_MAX, this );
 	}
-	else if( ctx.stackEndPtr != ctx.stack )
+	else if( ctx.stackEndPtr != ctx.stack && outValue )	// We still have an object at the end of the stack and someone asked for a result?
 	{
-		LEOInitCopy( ctx.stack, outValue, kLEOInvalidateReferences, &ctx );
+		LEOInitCopy( ctx.stack, outValue, kLEOInvalidateReferences, &ctx );	// Push that object, which should be return value from last handler.
+	}
+	else if( outValue )	// No object at the end of the stack? That's bad. But give a result, if requested, so caller doesn't blow up just because we got confused.
+	{
+		printf( "Internal error: Someone deleted the storage for the return value. Synthesizing empty return value.\n" );
+		LEOInitStringConstantValue( outValue, "", kLEOInvalidateReferences, &ctx );
 	}
 	
 	LEOCleanUpContext( &ctx );
