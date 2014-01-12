@@ -71,7 +71,9 @@ bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRange
 	{
 		LEOInitStringValue( outValue, mName.c_str(), mName.size(), kLEOInvalidateReferences, NULL );
 	}
-	return false;
+	else
+		return false;
+	return true;
 }
 
 
@@ -83,7 +85,9 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
 		SetName( nameStr );
 	}
-	return false;
+	else
+		return false;
+	return true;
 }
 
 
