@@ -116,7 +116,28 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else if( mButtonStyle == EButtonStyleRectangle )
 	{
-		[mView setBezelStyle: NSRegularSquareBezelStyle];
+		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
+	}
+	else if( mButtonStyle == EButtonStyleOpaque )
+	{
+		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
+		[mView setBordered: NO];
+	}
+	else if( mButtonStyle == EButtonStyleRoundrect )
+	{
+		[mView setBezelStyle: NSTexturedRoundedBezelStyle];
+		[mView setBordered: NO];
+	}
+	else if( mButtonStyle == EButtonStyleStandard )
+	{
+		[mView setBezelStyle: NSRoundRectBezelStyle];
+		[mView setBordered: NO];
+	}
+	else if( mButtonStyle == EButtonStyleDefault )
+	{
+		[mView setBezelStyle: NSRoundRectBezelStyle];
+		[mView setKeyEquivalent: @"\n"];
+		[mView setBordered: NO];
 	}
 	else
 		[mView setBezelStyle: NSRoundedBezelStyle];
