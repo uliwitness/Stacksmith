@@ -166,13 +166,11 @@
 		553E3C9616F6698300258F72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
 		553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */; };
 		553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */; };
-		5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */; };
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
 		555BA0DC138DC9CB00B3B1D8 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555BA0DA138DC9CB00B3B1D8 /* PlaceholderMovie.mov */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
-		555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */; };
 		555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */; };
@@ -186,7 +184,6 @@
 		555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103613881DB700E26037 /* UKPaintShapeTool.tiff */; };
 		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
-		55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 55615C53172D86CE00EFEAEF /* ULIBase64.m */; };
 		556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.mm */; };
 		556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */; };
 		55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.cpp */; };
@@ -283,8 +280,6 @@
 		55E3A69E11503456008411BB /* CURS_128.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.pdf */; };
 		55E3A6FB11519B45008411BB /* HCSV.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6F911519B45008411BB /* HCSV.icns */; };
 		55E3A6FC11519B45008411BB /* Stack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6FA11519B45008411BB /* Stack.icns */; };
-		55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B6DA11845E01000062C1 /* UKRandomInteger.m */; };
-		55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E509E61156B06D001D0762 /* ULIMultiMap.m */; };
 		55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */; };
 		55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */; };
 		55E805C61360ACD3006F1287 /* WILDPropertyInstructions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C51360ACD3006F1287 /* WILDPropertyInstructions.cpp */; };
@@ -502,7 +497,6 @@
 		55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTextTool.m; path = ../UKPaintView/ULIPaintTextTool.m; sourceTree = "<group>"; };
 		55039FC2136D5CCF0082E32E /* ULIPaintTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTool.m; path = ../UKPaintView/ULIPaintTool.m; sourceTree = "<group>"; };
 		55039FC3136D5CCF0082E32E /* ULIPaintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintView.m; path = ../UKPaintView/ULIPaintView.m; sourceTree = "<group>"; };
-		550ED181144B38DD00E528AA /* ULINSIntegerMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULINSIntegerMath.h; path = ../UliKit/ULINSIntegerMath.h; sourceTree = "<group>"; };
 		551D938717058397003766DA /* CDownloadCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDownloadCommandNode.cpp; path = ../../CDownloadCommandNode.cpp; sourceTree = "<group>"; };
 		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
@@ -663,8 +657,6 @@
 		553F680B157D3291009E0517 /* CSetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CSetChunkPropertyNode.h; path = ../../CSetChunkPropertyNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CGetChunkPropertyNode.cpp; path = ../../CGetChunkPropertyNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		553F680E157D3547009E0517 /* CGetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CGetChunkPropertyNode.h; path = ../../CGetChunkPropertyNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		5542C94B1139DD5C00555C64 /* WILDXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDXMLUtils.h; sourceTree = "<group>"; };
-		5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDXMLUtils.m; sourceTree = "<group>"; };
 		5542CABF113A2CB300555C64 /* UKPBMImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPBMImageRep.h; sourceTree = "<group>"; };
 		5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPBMImageRep.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
@@ -673,8 +665,6 @@
 		554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CForgeExceptions.cpp; path = ../../CForgeExceptions.cpp; sourceTree = "<group>"; };
 		555BA0DB138DC9CB00B3B1D8 /* English */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = English; path = English.lproj/PlaceholderMovie.mov; sourceTree = "<group>"; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
-		555E5764115BFC5700AAF9CA /* NSFileHandle+UKReadLinewise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileHandle+UKReadLinewise.h"; path = "../UliKit/NSFileHandle+UKReadLinewise.h"; sourceTree = SOURCE_ROOT; };
-		555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileHandle+UKReadLinewise.m"; path = "../UliKit/NSFileHandle+UKReadLinewise.m"; sourceTree = SOURCE_ROOT; };
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintbrushTool.tiff; path = ../UKPaintView/UKPaintbrushTool.tiff; sourceTree = "<group>"; };
@@ -690,8 +680,6 @@
 		555F103713881DB700E26037 /* UKPaintTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintTextTool.tiff; path = ../UKPaintView/UKPaintTextTool.tiff; sourceTree = "<group>"; };
 		555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UTF8UTF32Utilities.c; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.c; sourceTree = "<group>"; };
 		555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF8UTF32Utilities.h; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.h; sourceTree = "<group>"; };
-		55615C4E172D86C600EFEAEF /* ULIBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIBase64.h; path = ../UliKit/ULIBase64.h; sourceTree = "<group>"; };
-		55615C53172D86CE00EFEAEF /* ULIBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIBase64.m; path = ../UliKit/ULIBase64.m; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* WILDGlobalProperties.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDGlobalProperties.mm; path = Instructions/WILDGlobalProperties.mm; sourceTree = SOURCE_ROOT; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
 		5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostCommands.cpp; path = Instructions/WILDHostCommands.cpp; sourceTree = SOURCE_ROOT; };
@@ -854,10 +842,6 @@
 		55E3A69D11503456008411BB /* CURS_128.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = CURS_128.pdf; path = Resources/CURS_128.pdf; sourceTree = "<group>"; };
 		55E3A6F911519B45008411BB /* HCSV.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = HCSV.icns; sourceTree = "<group>"; };
 		55E3A6FA11519B45008411BB /* Stack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stack.icns; sourceTree = "<group>"; };
-		55E3B6D911845E01000062C1 /* UKRandomInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKRandomInteger.h; path = ../UliKit/UKRandomInteger.h; sourceTree = SOURCE_ROOT; };
-		55E3B6DA11845E01000062C1 /* UKRandomInteger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKRandomInteger.m; path = ../UliKit/UKRandomInteger.m; sourceTree = SOURCE_ROOT; };
-		55E509E51156B06D001D0762 /* ULIMultiMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIMultiMap.h; path = ../UliKit/ULIMultiMap.h; sourceTree = "<group>"; };
-		55E509E61156B06D001D0762 /* ULIMultiMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIMultiMap.m; path = ../UliKit/ULIMultiMap.m; sourceTree = "<group>"; };
 		55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CObjectPropertyNode.cpp; path = ../../CObjectPropertyNode.cpp; sourceTree = "<group>"; };
 		55E805C01360A7B3006F1287 /* CObjectPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CObjectPropertyNode.h; path = ../../CObjectPropertyNode.h; sourceTree = "<group>"; };
 		55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = LEOPropertyInstructions.c; path = ../../../Forge/Leonie/generic/LEOPropertyInstructions.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
@@ -1246,21 +1230,12 @@
 		5542CE3C113ADFCE00555C64 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				550ED181144B38DD00E528AA /* ULINSIntegerMath.h */,
-				5542C94B1139DD5C00555C64 /* WILDXMLUtils.h */,
-				5542C94C1139DD5C00555C64 /* WILDXMLUtils.m */,
-				55615C4E172D86C600EFEAEF /* ULIBase64.h */,
-				55615C53172D86CE00EFEAEF /* ULIBase64.m */,
 				5542CABF113A2CB300555C64 /* UKPBMImageRep.h */,
 				5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */,
 				5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */,
 				5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */,
 				5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */,
 				5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */,
-				55E509E51156B06D001D0762 /* ULIMultiMap.h */,
-				55E509E61156B06D001D0762 /* ULIMultiMap.m */,
-				555E5764115BFC5700AAF9CA /* NSFileHandle+UKReadLinewise.h */,
-				555E5765115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m */,
 				555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */,
 				555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */,
 				55C2B69B115EA2CD008B094D /* NSView+SizeWindowForViewSize.h */,
@@ -1273,8 +1248,6 @@
 				552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */,
 				551FBEEC1170A11D00F32FBF /* UKGraphics.h */,
 				551FBEEA1170A11000F32FBF /* UKGraphics.m */,
-				55E3B6D911845E01000062C1 /* UKRandomInteger.h */,
-				55E3B6DA11845E01000062C1 /* UKRandomInteger.m */,
 				558970E5118C853600F92788 /* UKIsDragStart.h */,
 				558970E6118C853600F92788 /* UKIsDragStart.m */,
 				55382EE21171FFFA0006B381 /* UKHelperMacros.h */,
@@ -1896,7 +1869,6 @@
 			files = (
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				55CD60F018779641002450E2 /* CParseErrorCommandNode.cpp in Sources */,
-				5542C94D1139DD5C00555C64 /* WILDXMLUtils.m in Sources */,
 				5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */,
 				55CD61121878EBF9002450E2 /* CCancelPolling.cpp in Sources */,
 				55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */,
@@ -1913,8 +1885,6 @@
 				55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */,
 				55CD60BD187510F0002450E2 /* CFieldPart.cpp in Sources */,
 				55CD60DB187587CB002450E2 /* CDocument.cpp in Sources */,
-				55E509E71156B06D001D0762 /* ULIMultiMap.m in Sources */,
-				555E5766115BFC5F00AAF9CA /* NSFileHandle+UKReadLinewise.m in Sources */,
 				555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */,
 				55CD610F18788CEB002450E2 /* CScriptableObjectValue.cpp in Sources */,
 				556DB7C21870A971002F7CB2 /* CURLConnection.mm in Sources */,
@@ -1924,7 +1894,6 @@
 				55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */,
 				551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */,
 				55CD611B187A154A002450E2 /* CSound.mm in Sources */,
-				55E3B6DB11845E01000062C1 /* UKRandomInteger.m in Sources */,
 				558970E7118C853600F92788 /* UKIsDragStart.m in Sources */,
 				55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */,
 				55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */,
@@ -2055,7 +2024,6 @@
 				55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */,
 				55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */,
 				55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */,
-				55615C54172D86CE00EFEAEF /* ULIBase64.m in Sources */,
 				556DB7AD18709ADB002F7CB2 /* CStack.cpp in Sources */,
 				553AF61E17491AEF00AF3BBA /* UKCoordinateUtils.m in Sources */,
 			);
