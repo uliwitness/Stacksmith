@@ -154,6 +154,15 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 		mView = [[NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: [sButtonOwner shapeButton]]] retain];
 		[mView setBezelStyle: NSRoundedBezelStyle];
 	}
+	CCard	*	currCard = GetStack()->GetCurrentCard();
+	bool		theHighlight = mHighlight;
+	if( !GetSharedHighlight() && mOwner != currCard )	// Background button w/o shared highlight? Look up card-specific highlight:
+	{
+		CPartContents*	theContents = GetContentsOnCurrentCard();
+		if( theContents )
+			theHighlight = theContents->GetHighlight();
+	}
+	[mView setState: theHighlight ? NSOnState : NSOffState];
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
