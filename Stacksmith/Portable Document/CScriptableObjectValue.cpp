@@ -12,6 +12,7 @@
 #include "LEOScript.h"
 #include "CCancelPolling.h"
 #include "CStack.h"
+#include "CString.h"
 #include <sstream>
 
 
@@ -192,20 +193,21 @@ LEOInteger	GetScriptableObjectValueAsInteger( LEOValuePtr self, LEOUnit *outUnit
 
 const char*	GetScriptableObjectValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, LEOContext* inContext )
 {
-	std::string	txt;
-	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
+	CString*	txt = new CString;	// So we can return a pointer to our c_str() which stays valid beyond this function's lifetime.
+	txt->Autorelease();
+	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt->GetString() ) )
 	{
 		LEOContextStopWithError( inContext, "This object can have no contents." );
 		return NULL;
 	}
-	const char*	str = txt.c_str();
-	if( outBuf )
+	const char*	str = txt->GetString().c_str();
+	if( outBuf && str )
 	{
 		strncpy( outBuf, str, bufSize );
-		return outBuf;
+		return str;
 	}
 	else
-		return NULL;
+		return str;
 }
 
 

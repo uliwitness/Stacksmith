@@ -73,6 +73,7 @@
 		552386A71880D72E00D7FAB3 /* ULIURLHandlingApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */; };
 		552386B5188335A000D7FAB3 /* WILDButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 552386B2188335A000D7FAB3 /* WILDButtonCell.m */; };
 		552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386B4188335A000D7FAB3 /* WILDButtonView.mm */; };
+		552386BC1883858300D7FAB3 /* CString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552386BA1883858300D7FAB3 /* CString.cpp */; };
 		5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */; };
 		552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */; };
 		55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */; };
@@ -517,6 +518,8 @@
 		552386B2188335A000D7FAB3 /* WILDButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDButtonCell.m; path = Platforms/Mac/WILDButtonCell.m; sourceTree = "<group>"; };
 		552386B3188335A000D7FAB3 /* WILDButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDButtonView.h; path = Platforms/Mac/WILDButtonView.h; sourceTree = "<group>"; };
 		552386B4188335A000D7FAB3 /* WILDButtonView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDButtonView.mm; path = Platforms/Mac/WILDButtonView.mm; sourceTree = "<group>"; };
+		552386BA1883858300D7FAB3 /* CString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CString.cpp; path = "Portable Document/CString.cpp"; sourceTree = "<group>"; };
+		552386BB1883858300D7FAB3 /* CString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CString.h; path = "Portable Document/CString.h"; sourceTree = "<group>"; };
 		5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDDrawAddColorBezel.h; sourceTree = "<group>"; };
 		5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDDrawAddColorBezel.m; sourceTree = "<group>"; };
 		552558FC114BDE7C00279B03 /* WILDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDAppDelegate.h; sourceTree = "<group>"; };
@@ -1387,6 +1390,8 @@
 				55CD61161879F464002450E2 /* CMessageBox.cpp */,
 				55CD611D187A60CD002450E2 /* CRecentCardsList.h */,
 				55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */,
+				552386BA1883858300D7FAB3 /* CString.cpp */,
+				552386BB1883858300D7FAB3 /* CString.h */,
 				556DB7A418709A15002F7CB2 /* tinyxml2.h */,
 				556DB7A318709A15002F7CB2 /* tinyxml2.cpp */,
 				55AC961A1870D50400488B51 /* CTinyXMLUtils.h */,
@@ -2043,6 +2048,7 @@
 				55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */,
 				55CD60C818752ECA002450E2 /* CTimer.mm in Sources */,
 				556DB7C51870ADE9002F7CB2 /* CURLResponse.mm in Sources */,
+				552386BC1883858300D7FAB3 /* CString.cpp in Sources */,
 				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
