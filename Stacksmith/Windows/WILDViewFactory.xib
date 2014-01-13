@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="WILDButtonOwner">
+        <customObject id="-2" userLabel="File's Owner" customClass="WILDViewFactory">
             <connections>
                 <outlet property="shapeButton" destination="4e3-X0-Mhw" id="GBI-hH-FTu"/>
                 <outlet property="systemButton" destination="lym-Xb-7iL" id="9px-Tt-eev"/>
@@ -20,37 +20,31 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4e3-X0-Mhw" customClass="WILDButtonView">
-                    <rect key="frame" x="14" y="224" width="82" height="32"/>
+                    <rect key="frame" x="20" y="231" width="118" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <shadow key="shadow" blurRadius="8">
                         <size key="offset" width="4" height="4"/>
                         <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </shadow>
-                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gM3-Qb-d4r" customClass="WILDButtonCell">
+                    <buttonCell key="cell" type="square" title="Shape Button" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gM3-Qb-d4r" customClass="WILDButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
-                    <connections>
-                        <action selector="buttonClicked:" target="-2" id="FKg-Sl-icC"/>
-                    </connections>
                 </button>
                 <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lym-Xb-7iL" customClass="WILDButtonView">
-                    <rect key="frame" x="14" y="181" width="82" height="32"/>
+                    <rect key="frame" x="14" y="181" width="130" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <shadow key="shadow" blurRadius="8">
                         <size key="offset" width="4" height="4"/>
                         <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </shadow>
-                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pUO-2G-HXx">
+                    <buttonCell key="cell" type="push" title="System Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pUO-2G-HXx">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
-                    <connections>
-                        <action selector="buttonClicked:" target="-2" id="boM-Va-WGd"/>
-                    </connections>
                 </button>
                 <textField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Wh-1D-lnZ">
-                    <rect key="frame" x="148" y="231" width="96" height="22"/>
+                    <rect key="frame" x="192" y="231" width="96" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <shadow key="shadow" blurRadius="8">
                         <size key="offset" width="4" height="4"/>
