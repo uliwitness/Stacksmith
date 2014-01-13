@@ -9,6 +9,7 @@
 #include "CButtonPart.h"
 #include "CTinyXMLUtils.h"
 #include "CPartContents.h"
+#include "CStack.h"
 
 
 using namespace Carlson;
@@ -65,31 +66,97 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOValuePtr outValue )
+bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
-	if( strcasecmp("name", inPropertyName) == 0 || strcasecmp("short name", inPropertyName) == 0 )
+	if( strcasecmp("family", inPropertyName) == 0 )
 	{
-		LEOInitStringValue( outValue, mName.c_str(), mName.size(), kLEOInvalidateReferences, NULL );
+		LEOInitIntegerValue( outValue, GetFamily(), kLEOUnitNone, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("highlight", inPropertyName) == 0 )
+	{
+		CPartContents*	theContents = NULL;
+		CCard	*		currCard = GetStack()->GetCurrentCard();
+		if( mOwner != currCard && !GetSharedHighlight() )	// We're on the background layer, not on the card?
+			theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
+		LEOInitBooleanValue( outValue, (theContents ? theContents->GetHighlight() : GetHighlight()), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("sharedHighlight", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetSharedHighlight(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("autoHighlight", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetSharedHighlight(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("showName", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetShowName(), kLEOInvalidateReferences, inContext );
 	}
 	else
-		return false;
+		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 	return true;
 }
 
 
 bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
 {
-	if( strcasecmp("name", inPropertyName) == 0 || strcasecmp("short name", inPropertyName) == 0 )
+	if( strcasecmp("family", inPropertyName) == 0 )
 	{
-		char		nameBuf[1024];
-		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
-		SetName( nameStr );
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEOInteger	familyNum = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetFamily( familyNum );
+	}
+	else if( strcasecmp("highlight", inPropertyName) == 0 )
+	{
+		CPartContents*	theContents = NULL;
+		bool			theHighlight = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		CCard	*		currCard = GetStack()->GetCurrentCard();
+		if( mOwner != currCard && !GetSharedHighlight() )	// We're on the background layer, not on the card?
+		{
+			theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
+			if( !theContents )
+			{
+				theContents = new CPartContents;
+				theContents->SetID( GetID() );
+				theContents->SetIsOnBackground( mOwner != currCard );
+				theContents->SetHighlight( theHighlight );
+				currCard->AddPartContents( theContents );
+			}
+			else
+				theContents->SetHighlight( theHighlight );
+		}
+		else
+			SetHighlight( theHighlight );
+	}
+	else if( strcasecmp("autoHighlight", inPropertyName) == 0 )
+	{
+		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetAutoHighlight( theHighlight );
+	}
+	else if( strcasecmp("sharedHighlight", inPropertyName) == 0 )
+	{
+		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetSharedHighlight( theHighlight );
+	}
+	else if( strcasecmp("showName", inPropertyName) == 0 )
+	{
+		bool	theShowName = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetShowName( theShowName );
 	}
 	else
-		return false;
+		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 	return true;
 }
-
 
 
 void	CButtonPart::DumpProperties( size_t inIndentLevel )
@@ -109,5 +176,5 @@ void	CButtonPart::DumpProperties( size_t inIndentLevel )
 	printf( "%stextAlign = %d\n", indentStr, mTextAlign );
 	printf( "%sfont = %s\n", indentStr, mFont.c_str() );
 	printf( "%stextSize = %d\n", indentStr, mTextSize );
-	printf( "%sfamily = %d\n", indentStr, mFamily );
+	printf( "%sfamily = %lld\n", indentStr, mFamily );
 }

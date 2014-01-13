@@ -164,7 +164,6 @@ void	WILDFirstNativeCall( void )
 {
 	Carlson::CDocumentMac::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 	
-	
 	std::string		fileURL( theFile.absoluteString.UTF8String );
 	fileURL.append("/toc.xml");
 	size_t	foundPos = fileURL.find("x-stack://");

@@ -72,6 +72,10 @@ public:
 	virtual void			SetFillColor( int red, int green, int blue, int alpha )	{ mFillColorRed = red; mFillColorGreen = green; mFillColorBlue = blue; mFillColorAlpha = alpha; };
 	virtual void			SetBevelWidth( int bevel )		{ mBevelWidth = bevel; };
 	virtual void			SetVisible( bool visible )		{ mVisible = visible; };
+	bool					GetVisible()					{ return mVisible; };
+	
+	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
+	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );

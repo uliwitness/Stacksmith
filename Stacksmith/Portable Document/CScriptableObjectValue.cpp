@@ -202,10 +202,10 @@ const char*	GetScriptableObjectValueAsString( LEOValuePtr self, char* outBuf, si
 	if( outBuf )
 	{
 		strncpy( outBuf, str, bufSize );
-		return str;
+		return outBuf;
 	}
 	else
-		return str;
+		return NULL;
 }
 
 
@@ -495,7 +495,7 @@ void		GetScriptableObjectValueForKeyOfRange( LEOValuePtr self, const char* keyNa
 {
 	CScriptableObject*		theObject = (CScriptableObject*)self->object.object;
 	
-	if( !theObject->GetPropertyNamed( keyName, startOffset, endOffset, outValue ) )
+	if( !theObject->GetPropertyNamed( keyName, startOffset, endOffset, inContext, outValue ) )
 		LEOContextStopWithError( inContext, "No property \"%s\".", keyName );
 }
 

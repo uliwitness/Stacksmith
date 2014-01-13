@@ -17,6 +17,7 @@
 #include "CRectanglePart.h"
 #include "CPicturePart.h"
 #include "CDocument.h"
+#include "CAlert.h"
 #import "ULIInvisiblePlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "WILDButtonView.h"
@@ -453,6 +454,8 @@ bool	CStackMac::GoThereInNewWindow( bool inNewWindow )
 	if( !mMacWindowController )
 		mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
 	[mMacWindowController showWindow: nil];
+	GetCurrentCard()->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "openStack" );
+	GetCurrentCard()->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "openCard" );
 	
 	return true;
 }

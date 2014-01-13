@@ -19,17 +19,21 @@ namespace Carlson {
 class CPartContents : public CRefCountedObject
 {
 public:
-	CPartContents( tinyxml2::XMLElement * inElement );
+	explicit CPartContents( tinyxml2::XMLElement * inElement = NULL );
 	
 	virtual void		Dump( size_t inIndent );
 	
-	ObjectID		GetID()					{ return mID; };
-	bool				GetHighlight()			{ return mHighlight; };
-	std::string			GetText()				{ return mText; };
-	bool				GetIsOnBackground()		{ return mIsOnBackground; };
+	ObjectID			GetID()							{ return mID; };
+	void				SetID( ObjectID inID )			{ mID = inID; };
+	bool				GetHighlight()					{ return mHighlight; };
+	void				SetHighlight( bool inHighlight ){ mHighlight = inHighlight; };
+	std::string			GetText()						{ return mText; };
+	void				SetText( std::string inText )	{ mText = inText; };
+	bool				GetIsOnBackground()				{ return mIsOnBackground; };
+	void				SetIsOnBackground( bool inBg )	{ mIsOnBackground = inBg; };
 
 protected:
-	ObjectID		mID;				// ID of the object whose contents we contain.
+	ObjectID			mID;				// ID of the object whose contents we contain.
 	bool				mIsOnBackground;	// Is the object with ID mID on the background or on the card layer?
 	bool				mHighlight;			// The highlight property for a background button with sharedHighlight == FALSE.
 	std::string			mText;				// The actual text contents.

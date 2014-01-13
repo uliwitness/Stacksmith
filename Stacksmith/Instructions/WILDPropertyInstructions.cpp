@@ -59,7 +59,7 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 	if( objectValue )
 	{
 		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
-		if( !((CScriptableObject*)objectValue->object.object)->GetPropertyNamed( propNameStr, 0, 0, thePropertyName ) )
+		if( !((CScriptableObject*)objectValue->object.object)->GetPropertyNamed( propNameStr, 0, 0, inContext, thePropertyName ) )
 		{
 			LEOContextStopWithError( inContext,"Object does not have property \"%s\".", propNameStr );
 			return;

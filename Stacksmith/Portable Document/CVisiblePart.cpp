@@ -85,6 +85,33 @@ void	CVisiblePart::DumpProperties( size_t inIndentLevel )
 }
 
 
+bool	CVisiblePart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp("visible", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetVisible(), kLEOInvalidateReferences, inContext );
+	}
+	else
+		return CPart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+	return true;
+}
+
+
+bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp("visible", inPropertyName) == 0 )
+	{
+		bool	visState = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetVisible( visState );
+	}
+	else
+		return CPart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+	return true;
+}
+
+
 /*static*/ TPartTextAlign	CVisiblePart::GetTextAlignFromString( const char* inString )
 {
 	for( TPartTextAlign x = 0; x < EPartTextAlign_Last; x++ )
@@ -107,4 +134,5 @@ void	CVisiblePart::DumpProperties( size_t inIndentLevel )
 	}
 	return outStyle;
 }
+
 

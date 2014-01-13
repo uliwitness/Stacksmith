@@ -111,6 +111,12 @@ CPartContents*	CLayer::GetPartContentsByID( ObjectID inID, bool isForBackgroundP
 }
 
 
+void	CLayer::AddPartContents( CPartContents* inContents )
+{
+	mContents.push_back( inContents );
+}
+
+
 void	CLayer::CallAllCompletionBlocks()	// Can override this in cards to also load the background if needed and only *then* call completion blocks.
 {
 	mLoaded = true;

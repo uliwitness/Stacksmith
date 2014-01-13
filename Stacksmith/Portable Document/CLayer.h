@@ -46,6 +46,7 @@ public:
 	bool			GetShowPicture()		{ return mShowPict; };
 	
 	CPartContents*	GetPartContentsByID( ObjectID inID, bool isForBackgroundPart );
+	void			AddPartContents( CPartContents* inContents );
 
 	virtual CStack*	GetStack()			{ return mStack; };
 

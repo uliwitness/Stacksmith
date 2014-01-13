@@ -26,6 +26,12 @@ public:
 	
 	virtual void			SetInterval( long long inInterval )	{ mInterval = inInterval; mActualTimer.SetInterval( inInterval ); };
 	virtual long long		GetInterval()						{ return mInterval; };
+
+	virtual std::string		GetMessage()						{ return mMessage; };
+	virtual void			SetMessage( const std::string& inMessage )	{ mMessage = inMessage; };
+
+	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
+	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
 	virtual void			WakeUp();
 	virtual void			GoToSleep();

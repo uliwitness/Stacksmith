@@ -53,6 +53,67 @@ void	CTimerPart::GoToSleep()
 }
 
 
+bool	CTimerPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp("started", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetStarted(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("interval", inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetInterval(), kLEOUnitTicks, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("message", inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, GetMessage().c_str(), GetMessage().size(), kLEOInvalidateReferences, inContext );
+	}
+	else
+		return CPart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+	return true;
+}
+
+
+bool	CTimerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp("started", inPropertyName) == 0 )
+	{
+		bool	startState = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetStarted( startState );
+	}
+	else if( strcasecmp("interval", inPropertyName) == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEOInteger	theInterval = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		if( theUnit != kLEOUnitNone )	// We take "none" to be ticks as well.
+		{
+			if( gUnitGroupsForLabels[theUnit] != gUnitGroupsForLabels[kLEOUnitTicks] )
+			{
+				LEOContextStopWithError( inContext, "Expected a time interval, found%s.", gUnitLabels[theUnit] );
+				return true;
+			}
+			theInterval = LEONumberWithUnitAsUnit( theInterval, theUnit, kLEOUnitTicks );
+		}
+		
+		SetInterval( theInterval );
+	}
+	else if( strcasecmp("message", inPropertyName) == 0 )
+	{
+		char		msgBuf[1024] = {0};
+		const char* msgStr = LEOGetValueAsString( inValue, msgBuf, sizeof(msgBuf), inContext );
+		if( !msgStr || !inContext->keepRunning )
+			return true;
+		SetMessage( msgStr );
+	}
+	else
+		return CPart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+	return true;
+}
+
+
 void	CTimerPart::DumpProperties( size_t inIndentLevel )
 {
 	const char*	indentStr = IndentString(inIndentLevel);

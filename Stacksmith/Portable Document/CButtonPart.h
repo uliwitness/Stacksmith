@@ -35,10 +35,18 @@ class CButtonPart : public CVisiblePart
 public:
 	explicit CButtonPart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
 	
-	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOValuePtr outValue );
+	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
-	virtual bool			GetSharedText()			{ return mSharedHighlight; };
-	virtual bool			GetAutoHighlight()		{ return mAutoHighlight; };
+	
+	virtual bool			GetSharedText()			{ return true; };
+	virtual bool			GetSharedHighlight()	{ return mSharedHighlight; };
+	virtual void			SetSharedHighlight( bool inHighlight )	{ mSharedHighlight = inHighlight; };
+	virtual bool			GetAutoHighlight()						{ return mAutoHighlight; };
+	virtual void			SetAutoHighlight( bool inHighlight )	{ mAutoHighlight = inHighlight; };
+	virtual bool			GetHighlight()							{ return mHighlight; };
+	virtual void			SetHighlight( bool inHighlight )		{ mHighlight = inHighlight; };
+	virtual bool			GetShowName()							{ return mShowName; };
+	virtual void			SetShowName( bool inShowName )			{ mShowName = inShowName; };
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
@@ -54,7 +62,7 @@ protected:
 	bool			mAutoHighlight;
 	bool			mSharedHighlight;
 	int				mTitleWidth;
-	ObjectID	mIconID;
+	ObjectID		mIconID;
 	TPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
