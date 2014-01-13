@@ -57,7 +57,10 @@ using namespace Carlson;
 	if( autoHighlight && isInside )
 		[[self cell] setHighlighted: YES];
 	
-	self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDown %ld", [event buttonNumber] +1 );
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDown %ld", [event buttonNumber] +1 );
+	}
 	
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
 	
@@ -77,6 +80,7 @@ using namespace Carlson;
 				case NSLeftMouseDragged:
 				case NSRightMouseDragged:
 				case NSOtherMouseDragged:
+				{
 					newIsInside = [[self cell] hitTestForEvent: evt inRect: [self bounds] ofView: self] != NSCellHitNone;
 					if( isInside != newIsInside )
 					{
@@ -85,8 +89,10 @@ using namespace Carlson;
 						if( autoHighlight )
 							[[self cell] setHighlighted: isInside];
 					}
+					CAutoreleasePool	cppPool;
 					self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDrag %ld", [event buttonNumber] +1 );
 					break;
+				}
 			}
 		}
 		
@@ -103,10 +109,14 @@ using namespace Carlson;
 			[self.window display];
 		}
 		[[self target] performSelector: [self action] withObject: self];
+		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUp %ld", [event buttonNumber] +1 );
 	}
 	else
+	{
+		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUpOutside %ld", [event buttonNumber] +1 );
+	}
 	
 	[pool release];
 }
