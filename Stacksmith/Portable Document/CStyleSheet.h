@@ -18,7 +18,19 @@ class CStyleSheet
 public:
 	void	LoadFromStream( const std::string& inCSS );
 	
-	void	Dump();
+	std::map<std::string,std::string>	GetStyleForClass( const char* inClassName ) const
+	{
+		std::string	fullClassName(".");
+		fullClassName.append(inClassName);
+		
+		auto	foundClass = mStyles.find(fullClassName);
+		if( foundClass != mStyles.end() )
+			return foundClass->second;
+		else
+			return std::map<std::string,std::string>();
+	};
+	
+	void	Dump() const;
 	
 protected:
 	std::map<std::string,std::map<std::string,std::string>>	mStyles;

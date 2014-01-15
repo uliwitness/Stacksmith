@@ -120,7 +120,7 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 			theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
 			if( !theContents )
 			{
-				theContents = new CPartContents;
+				theContents = new CPartContents( GetDocument() );
 				theContents->SetID( GetID() );
 				theContents->SetIsOnBackground( mOwner != currCard );
 				theContents->SetHighlight( theHighlight );

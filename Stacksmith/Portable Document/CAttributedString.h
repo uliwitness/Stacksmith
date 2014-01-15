@@ -9,25 +9,33 @@
 #ifndef __Stacksmith__CAttributedString__
 #define __Stacksmith__CAttributedString__
 
+#include "CStyleSheet.h"
+#include "tinyxml2.h"
 #include <string>
 #include <vector>
 
 
 struct CAttributeRange
 {
-	std::string	mAttribute;
-	std::string	mValue;
-	size_t		mStart;
-	size_t		mEnd;
+	std::map<std::string,std::string>	mAttributes;
+	size_t								mStart;
+	size_t								mEnd;
 };
 
 
 class CAttributedString
 {
 public:
-	void	AddAttributeValueForRange( const std::string& inAttribute, const std::string& inValue, size_t inStart, size_t inEnd )	{ mAttributes.push_back( (CAttributeRange){ inAttribute, inValue, inStart, inEnd } ); };
+	void	LoadFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
+	
+	std::string		GetString()								{ return mString; };
+	void			SetString( const std::string& inStr )	{ mString = inStr; mAttributes.clear(); };
+	
+	void			Dump();
 	
 protected:
+	void	AppendFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
+
 	std::vector<CAttributeRange>	mAttributes;
 	std::string						mString;
 };

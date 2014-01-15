@@ -76,6 +76,8 @@ public:
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 	
+	const CStyleSheet&	GetStyles()		{ return mStyles; };
+	
 	virtual void		Dump( size_t inNestingLevel = 0 );
 
 protected:

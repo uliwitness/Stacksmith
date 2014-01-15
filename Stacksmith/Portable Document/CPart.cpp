@@ -146,7 +146,7 @@ bool	CPart::SetTextContents( std::string inString )
 		contents->SetText( inString );
 	else
 	{
-		contents = new CPartContents;
+		contents = new CPartContents( GetDocument() );
 		contents->SetID( mID );
 		contents->SetText( inString );
 		CCard	*	currCard = GetStack()->GetCurrentCard();

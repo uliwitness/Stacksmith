@@ -7,7 +7,9 @@
 //
 
 #include "CStyleSheet.h"
-#include <cctype>
+
+
+bool	iswhitespaceornewline( char ch );
 
 
 bool	iswhitespaceornewline( char ch )
@@ -120,7 +122,7 @@ void	CStyleSheet::LoadFromStream( const std::string& inCSS )
 }
 
 
-void	CStyleSheet::Dump()
+void	CStyleSheet::Dump() const
 {
 	for( auto styleParts : mStyles )
 	{

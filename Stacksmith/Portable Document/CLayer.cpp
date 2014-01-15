@@ -82,7 +82,7 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 				tinyxml2::XMLElement	*	currPartContentsElem = root->FirstChildElement( "content" );
 				while( currPartContentsElem )
 				{
-					CPartContents	*	theContents = new CPartContents( currPartContentsElem );
+					CPartContents	*	theContents = new CPartContents( GetDocument(), currPartContentsElem );
 					theContents->Autorelease();
 					mContents.push_back( theContents );
 					

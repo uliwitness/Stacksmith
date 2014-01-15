@@ -8,17 +8,22 @@
 
 #include "CPartContents.h"
 #include "CTinyXMLUtils.h"
+#include "CDocument.h"
 
 
 using namespace Carlson;
 
 
 
-CPartContents::CPartContents( tinyxml2::XMLElement * inElement )
+CPartContents::CPartContents( CDocument* owningDoc, tinyxml2::XMLElement * inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
 	mHighlight = CTinyXMLUtils::GetBoolNamed( inElement, "highlight", false );
-	CTinyXMLUtils::GetStringNamed( inElement, "text", mText );
+	tinyxml2::XMLElement * textElement = inElement->FirstChildElement( "text" );
+	if( textElement )
+	{
+		mAttributedString.LoadFromElementWithStyles( textElement, owningDoc->GetStyles() );
+	}
 	std::string	theLayerStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "layer", theLayerStr );
 	mIsOnBackground = (theLayerStr.compare("background") == 0);
@@ -30,6 +35,6 @@ void	CPartContents::Dump( size_t inIndent )
 	const char	*	indentStr = IndentString(inIndent);
 	printf( "%sContents for %s part ID %lld\n%s{\n", indentStr, (mIsOnBackground?"bg":"cd"), mID, indentStr );
 	printf( "%s\thighlight = %s\n", indentStr, (mHighlight?"true":"false") );
-	printf( "%s\ttext = %s\n", indentStr, mText.c_str() );
+	printf( "%s\ttext = %s\n", indentStr, mAttributedString.GetString().c_str() );
 	printf( "%s}\n", indentStr );
 }

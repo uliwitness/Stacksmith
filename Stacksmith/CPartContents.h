@@ -12,14 +12,18 @@
 #include "CRefCountedObject.h"
 #include "tinyxml2.h"
 #include "CObjectID.h"
+#include "CAttributedString.h"
 #include <string>
 
 namespace Carlson {
 
+class CDocument;
+
+
 class CPartContents : public CRefCountedObject
 {
 public:
-	explicit CPartContents( tinyxml2::XMLElement * inElement = NULL );
+	explicit CPartContents( CDocument* owningDoc, tinyxml2::XMLElement * inElement = NULL );
 	
 	virtual void		Dump( size_t inIndent );
 	
@@ -27,8 +31,8 @@ public:
 	void				SetID( ObjectID inID )			{ mID = inID; };
 	bool				GetHighlight()					{ return mHighlight; };
 	void				SetHighlight( bool inHighlight ){ mHighlight = inHighlight; };
-	std::string			GetText()						{ return mText; };
-	void				SetText( std::string inText )	{ mText = inText; };
+	std::string			GetText()						{ return mAttributedString.GetString(); };
+	void				SetText( std::string inText )	{ mAttributedString.SetString( inText ); };
 	bool				GetIsOnBackground()				{ return mIsOnBackground; };
 	void				SetIsOnBackground( bool inBg )	{ mIsOnBackground = inBg; };
 
@@ -36,7 +40,7 @@ protected:
 	ObjectID			mID;				// ID of the object whose contents we contain.
 	bool				mIsOnBackground;	// Is the object with ID mID on the background or on the card layer?
 	bool				mHighlight;			// The highlight property for a background button with sharedHighlight == FALSE.
-	std::string			mText;				// The actual text contents.
+	CAttributedString	mAttributedString;	// Actual text & styles of these contents.
 };
 
 
