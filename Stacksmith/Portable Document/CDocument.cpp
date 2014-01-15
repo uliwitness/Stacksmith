@@ -269,7 +269,11 @@ ObjectID	CDocument::GetUniqueIDForMedia()
 LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 {
 	if( !mContextGroup )
+	{
 		mContextGroup = LEOContextGroupCreate();
+		if( mURL.find_first_of( "file://" ) != 0 )
+			mContextGroup->flags |= kLEOContextGroupFlagFromNetwork;
+	}
 	
 	return mContextGroup;
 }

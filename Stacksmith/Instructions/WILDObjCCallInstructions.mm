@@ -70,6 +70,12 @@ void	WILDObjCCallInstruction( LEOContext* inContext );
 
 void	WILDObjCCallInstruction( LEOContext* inContext )
 {
+	if( (inContext->group->flags & kLEOContextGroupFlagFromNetwork) != 0 )
+	{
+		LEOContextStopWithError( inContext, "This stack is not permitted to make native calls." );
+		return;
+	}
+	
 	@try
 	{
 		int				paramCount = inContext->currentInstruction->param1;
