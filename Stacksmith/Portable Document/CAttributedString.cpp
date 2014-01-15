@@ -48,6 +48,13 @@ void	CAttributedString::AppendFromElementWithStyles( tinyxml2::XMLElement * inEl
 				attr.mAttributes = styles;
 				mAttributes.push_back( attr );
 			}
+			else if( strcmp(elem->Value(),"a") == 0 )
+			{
+				const char*	urlStr = elem->Attribute( "href" );
+				if( urlStr )
+					attr.mAttributes["$link"] = urlStr;
+				mAttributes.push_back( attr );
+			}
 		}
 		else
 			mString.append( currChild->Value() );
