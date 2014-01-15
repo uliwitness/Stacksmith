@@ -35,6 +35,7 @@ public:
 	
 protected:
 	void	AppendFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
+	void	NormalizeStyleRuns();
 
 	std::vector<CAttributeRange>	mAttributes;
 	std::string						mString;
