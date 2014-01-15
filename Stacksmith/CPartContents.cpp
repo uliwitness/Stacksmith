@@ -15,14 +15,14 @@ using namespace Carlson;
 
 
 
-CPartContents::CPartContents( CDocument* owningDoc, tinyxml2::XMLElement * inElement )
+CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
 	mHighlight = CTinyXMLUtils::GetBoolNamed( inElement, "highlight", false );
 	tinyxml2::XMLElement * textElement = inElement->FirstChildElement( "text" );
 	if( textElement )
 	{
-		mAttributedString.LoadFromElementWithStyles( textElement, owningDoc->GetStyles() );
+		mAttributedString.LoadFromElementWithStyles( textElement, owningLayer->GetStyles() );
 	}
 	std::string	theLayerStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "layer", theLayerStr );

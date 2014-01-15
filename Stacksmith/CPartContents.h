@@ -17,13 +17,13 @@
 
 namespace Carlson {
 
-class CDocument;
+class CLayer;
 
 
 class CPartContents : public CRefCountedObject
 {
 public:
-	explicit CPartContents( CDocument* owningDoc, tinyxml2::XMLElement * inElement = NULL );
+	explicit CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElement = NULL );
 	
 	virtual void		Dump( size_t inIndent );
 	

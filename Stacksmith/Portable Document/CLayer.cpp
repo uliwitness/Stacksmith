@@ -53,17 +53,37 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 		CURLRequest		request( mURL );
 		CURLConnection::SendRequestWithCompletionHandler( request, [this] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
 		{
-			tinyxml2::XMLDocument		document;
+			const char*					styleSheetFilename = NULL;
+			tinyxml2::XMLDocument	*	document = new tinyxml2::XMLDocument();
 
-			if( tinyxml2::XML_SUCCESS == document.Parse( inData, inDataLength ) )
+			if( tinyxml2::XML_SUCCESS == document->Parse( inData, inDataLength ) )
 			{
-				//document.Print();
+				//document->Print();
 
-				tinyxml2::XMLElement	*	root = document.RootElement();
+				tinyxml2::XMLElement	*	root = document->RootElement();
 				
 				LoadPropertiesFromElement( root );
 				
 				LoadUserPropertiesFromElement( root );
+
+				// Load CSS built from font/style tables:
+				tinyxml2::XMLElement	*	link = root->FirstChildElement( "link" );
+				while( link )
+				{
+					const char*	relAttr = link->Attribute("rel");
+					if( relAttr && strcmp(relAttr,"stylesheet") == 0 )
+					{
+						const char*	typeAttr = link->Attribute("type");
+						if( typeAttr && strcmp(typeAttr,"text/css") == 0 )
+						{
+							styleSheetFilename = link->Attribute("href");
+							if( styleSheetFilename )
+								break;
+						}
+					}
+					
+					link = link->NextSiblingElement( "link" );
+				}
 
 				// Load parts:
 				tinyxml2::XMLElement	*	currPartElem = root->FirstChildElement( "part" );
@@ -77,23 +97,58 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 
 					currPartElem = currPartElem->NextSiblingElement( "part" );
 				}
-
-				// Load part contents:
-				tinyxml2::XMLElement	*	currPartContentsElem = root->FirstChildElement( "content" );
-				while( currPartContentsElem )
-				{
-					CPartContents	*	theContents = new CPartContents( GetDocument(), currPartContentsElem );
-					theContents->Autorelease();
-					mContents.push_back( theContents );
-					
-					currPartContentsElem = currPartContentsElem->NextSiblingElement( "content" );
-				}
 				
 				// Load AddColor info:
 				LoadAddColorPartsFromElement( root );
-			}
 			
-			CallAllCompletionBlocks();
+				if( styleSheetFilename )
+				{
+					std::string		styleSheetURL( mURL );
+					styleSheetURL.append(1,'/');
+					styleSheetURL.append(styleSheetFilename);
+					CURLRequest		styleSheetRequest( styleSheetURL );
+					CURLConnection::SendRequestWithCompletionHandler( styleSheetRequest, [this,root,document](CURLResponse inStyleSheetResponse, const char* inStyleSheetData, size_t inStyleSheetDataLength)
+					{
+						mStyles.LoadFromStream( std::string( inStyleSheetData, inStyleSheetDataLength ) );
+						mStyles.Dump();
+						
+						// Load part contents:
+						tinyxml2::XMLElement	*	currPartContentsElem = root->FirstChildElement( "content" );
+						while( currPartContentsElem )
+						{
+							CPartContents	*	theContents = new CPartContents( this, currPartContentsElem );
+							theContents->Autorelease();
+							mContents.push_back( theContents );
+							
+							currPartContentsElem = currPartContentsElem->NextSiblingElement( "content" );
+						}
+						delete document;
+						
+						CallAllCompletionBlocks();
+					} );
+				}
+				else
+				{
+					// Load part contents:
+					tinyxml2::XMLElement	*	currPartContentsElem = root->FirstChildElement( "content" );
+					while( currPartContentsElem )
+					{
+						CPartContents	*	theContents = new CPartContents( this, currPartContentsElem );
+						theContents->Autorelease();
+						mContents.push_back( theContents );
+						
+						currPartContentsElem = currPartContentsElem->NextSiblingElement( "content" );
+					}
+					delete document;
+					
+					CallAllCompletionBlocks();
+				}
+			}
+			else
+			{
+				delete document;
+				CallAllCompletionBlocks();
+			}
 		} );
 	}
 }

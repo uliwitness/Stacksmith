@@ -12,7 +12,6 @@
 #include "LEOContextGroup.h"
 #include "CStack.h"
 #include "CVisiblePart.h"
-#include "CStyleSheet.h"
 
 
 namespace Carlson {
@@ -76,8 +75,6 @@ public:
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 	
-	const CStyleSheet&	GetStyles()		{ return mStyles; };
-	
 	virtual void		Dump( size_t inNestingLevel = 0 );
 
 protected:
@@ -96,7 +93,6 @@ protected:
 	std::string										mURL;
 	std::vector<CMediaEntry>						mMediaList;
 	std::vector<CStackRef>							mStacks;
-	CStyleSheet										mStyles;
 	std::vector<std::function<void(CDocument*)>>	mLoadCompletionBlocks;
 	bool											mPeeking;
 	

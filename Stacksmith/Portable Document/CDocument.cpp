@@ -103,7 +103,6 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 	CURLConnection::SendRequestWithCompletionHandler( request, [inURL,this](CURLResponse inResponse, const char* inData, size_t inDataLength)
 	{
 		CAutoreleasePool			pool;
-		const char*					styleSheetFilename = NULL;
 		tinyxml2::XMLDocument		document;
 		
 		if( tinyxml2::XML_SUCCESS == document.Parse( inData, inDataLength ) )
@@ -122,25 +121,6 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			mLastEditedVersion.clear();
 			CTinyXMLUtils::GetStringNamed( root, "lastEditedVersion", mLastEditedVersion );
 			
-			// Load CSS built from font/style tables:
-			tinyxml2::XMLElement	*	link = root->FirstChildElement( "link" );
-			while( link )
-			{
-				const char*	relAttr = link->Attribute("rel");
-				if( relAttr && strcmp(relAttr,"stylesheet") == 0 )
-				{
-					const char*	typeAttr = link->Attribute("type");
-					if( typeAttr && strcmp(typeAttr,"text/css") == 0 )
-					{
-						styleSheetFilename = link->Attribute("href");
-						if( styleSheetFilename )
-							break;
-					}
-				}
-				
-				link = link->NextSiblingElement( "link" );
-			}
-
 			if( sStandardResourcesPath.length() > 0 )
 			{
 				tinyxml2::XMLDocument		standardResDocument;
@@ -176,21 +156,7 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			}
 		}
 		
-		if( styleSheetFilename )
-		{
-			std::string		styleSheetURL( mURL );
-			styleSheetURL.append(1,'/');
-			styleSheetURL.append(styleSheetFilename);
-			CURLRequest		styleSheetRequest( styleSheetURL );
-			CURLConnection::SendRequestWithCompletionHandler( styleSheetRequest, [this](CURLResponse inStyleSheetResponse, const char* inStyleSheetData, size_t inStyleSheetDataLength)
-			{
-				mStyles.LoadFromStream( std::string( inStyleSheetData, inStyleSheetDataLength ) );
-				mStyles.Dump();
-				CallAllCompletionBlocks();
-			} );
-		}
-		else
-			CallAllCompletionBlocks();
+		CallAllCompletionBlocks();
 	} );
 }
 
@@ -328,9 +294,7 @@ void	CDocument::Dump( size_t inNestingLevel )
 	printf( "Document\n{\n\tloaded = %s\n\tloading= %s\n\tcreatedByVersion = %s\n\tlastCompactedVersion = %s\n\tfirstEditedVersion = %s\n\tlastEditedVersion = %s\n",
 			(mLoaded ? "true" : "false"), (mLoading ? "true" : "false"), mCreatedByVersion.c_str(),
 			mLastCompactedVersion.c_str(), mFirstEditedVersion.c_str(), mLastEditedVersion.c_str() );
-	printf( "\tstyles\n\t{\n" );
-	mStyles.Dump();
-	printf( "\t}\n\tmedia\n\t{\n" );
+	printf( "\tmedia\n\t{\n" );
 	for( auto itty = mMediaList.begin(); itty != mMediaList.end(); itty++ )
 		itty->Dump( 2 );
 

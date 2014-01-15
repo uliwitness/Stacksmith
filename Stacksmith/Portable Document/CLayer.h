@@ -49,6 +49,7 @@ public:
 	void			AddPartContents( CPartContents* inContents );
 
 	virtual CStack*	GetStack()			{ return mStack; };
+	const CStyleSheet&	GetStyles()		{ return mStyles; };
 
 	virtual void	SetPeeking( bool inState );
 
@@ -78,6 +79,7 @@ protected:
 	std::vector<CPartRef>			mAddColorParts;		// Array of parts for which we have AddColor color information. May contain parts that are already in mParts.
 	std::vector<CPartContentsRef>	mContents;			// Dictionary of part ID -> contents mappings
 	std::multimap<int,CPartRef>		mButtonFamilies;	// Family ID as key, and arrays of button parts belonging to these families.
+	CStyleSheet						mStyles;
 	CStack	*						mStack;
 };
 

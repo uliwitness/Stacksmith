@@ -146,12 +146,13 @@ bool	CPart::SetTextContents( std::string inString )
 		contents->SetText( inString );
 	else
 	{
-		contents = new CPartContents( GetDocument() );
+		CCard	*	currCard = GetStack()->GetCurrentCard();
+		bool bgPartWithNonSharedText = (mOwner != currCard && !GetSharedText());
+		contents = new CPartContents( bgPartWithNonSharedText ? currCard : mOwner );
 		contents->SetID( mID );
 		contents->SetText( inString );
-		CCard	*	currCard = GetStack()->GetCurrentCard();
 		contents->SetIsOnBackground( (mOwner != currCard) );
-		if( mOwner != currCard && !GetSharedText() )	// We're on the background layer, not on the card? But we don't have shared text? Add the contents to the current *card*!
+		if( bgPartWithNonSharedText )	// We're on the background layer, not on the card? But we don't have shared text? Add the contents to the current *card*!
 			currCard->AddPartContents( contents );
 		else	// Otherwise, we're on the card, or on the background with shared text, add the contents to that.
 			mOwner->AddPartContents( contents );
