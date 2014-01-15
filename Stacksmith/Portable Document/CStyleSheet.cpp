@@ -100,7 +100,15 @@ void	CStyleSheet::LoadFromStream( const std::string& inCSS )
 				if( currCh == ';' )
 				{
 					state = kStateInsideStyle;
+					if( selectorValue.length() > 0 && iswhitespaceornewline(selectorValue[selectorValue.length() -1]) )	// Ends in whitespace?
+						selectorValue = selectorValue.substr(0,selectorValue.length() -1);
 					mStyles[styleClassName][selectorName] = selectorValue;
+				}
+				else if( iswhitespaceornewline(currCh) )
+				{
+					if( selectorValue.length() == 0
+						|| selectorValue[selectorValue.length() -1] != ' ' )
+						selectorValue.append( 1, ' ' );	// At most a single space, no newlines etc.
 				}
 				else
 				{
