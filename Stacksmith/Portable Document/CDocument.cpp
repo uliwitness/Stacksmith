@@ -103,6 +103,7 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 	CURLConnection::SendRequestWithCompletionHandler( request, [inURL,this](CURLResponse inResponse, const char* inData, size_t inDataLength)
 	{
 		CAutoreleasePool			pool;
+		const char*					styleSheetFilename = NULL;
 		tinyxml2::XMLDocument		document;
 		
 		if( tinyxml2::XML_SUCCESS == document.Parse( inData, inDataLength ) )
@@ -120,35 +121,24 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			CTinyXMLUtils::GetStringNamed( root, "firstEditedVersion", mFirstEditedVersion );
 			mLastEditedVersion.clear();
 			CTinyXMLUtils::GetStringNamed( root, "lastEditedVersion", mLastEditedVersion );
-
-			// Load font table so others can access it:
-			tinyxml2::XMLElement	*	currFontElem = root->FirstChildElement( "font" );
-			while( currFontElem )
-			{
-				int			fontID = CTinyXMLUtils::GetIntNamed( currFontElem, "id", 0 );
-				std::string	fontName;
-				CTinyXMLUtils::GetStringNamed( currFontElem, "name", fontName );
-				mFontIDTable[fontID] = fontName;
-				
-				currFontElem = currFontElem->NextSiblingElement( "font" );
-			}
 			
-			// Load style table so others can access it:
-			tinyxml2::XMLElement	*	currStyleElem = root->FirstChildElement( "styleentry" );
-			while( currStyleElem )
+			// Load CSS built from font/style tables:
+			tinyxml2::XMLElement	*	link = root->FirstChildElement( "link" );
+			while( link )
 			{
-				int			styleID = CTinyXMLUtils::GetIntNamed( currStyleElem, "id", 0 );
-				std::string	fontName;
-				CTinyXMLUtils::GetStringNamed( currStyleElem, "font", fontName );
-				int			fontSize = CTinyXMLUtils::GetIntNamed( currStyleElem, "size", 0 );
-				TPartTextStyle	styleMask = EPartTextStylePlain;
-				for( tinyxml2::XMLElement * currTextStyleElem = currStyleElem->FirstChildElement("textStyle"); currTextStyleElem; currTextStyleElem = currStyleElem->NextSiblingElement("textStyle") )
+				const char*	relAttr = link->Attribute("rel");
+				if( relAttr && strcmp(relAttr,"stylesheet") == 0 )
 				{
-					styleMask |= CVisiblePart::GetStyleFromString( currTextStyleElem->GetText() );
+					const char*	typeAttr = link->Attribute("type");
+					if( typeAttr && strcmp(typeAttr,"text/css") == 0 )
+					{
+						styleSheetFilename = link->Attribute("href");
+						if( styleSheetFilename )
+							break;
+					}
 				}
-				mTextStyles[styleID] = CTextStyleEntry( fontName, fontSize, styleMask );
 				
-				currStyleElem = currStyleElem->NextSiblingElement( "styleentry" );
+				link = link->NextSiblingElement( "link" );
 			}
 
 			if( sStandardResourcesPath.length() > 0 )
@@ -186,13 +176,33 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			}
 		}
 		
-		mLoaded = true;
-		mLoading = false;
-		
-		for( auto itty = mLoadCompletionBlocks.begin(); itty != mLoadCompletionBlocks.end(); itty++ )
-			(*itty)( this );
-		mLoadCompletionBlocks.clear();
+		if( styleSheetFilename )
+		{
+			std::string		styleSheetURL( mURL );
+			styleSheetURL.append(1,'/');
+			styleSheetURL.append(styleSheetFilename);
+			CURLRequest		styleSheetRequest( styleSheetURL );
+			CURLConnection::SendRequestWithCompletionHandler( styleSheetRequest, [this](CURLResponse inStyleSheetResponse, const char* inStyleSheetData, size_t inStyleSheetDataLength)
+			{
+				mStyles.LoadFromStream( std::string( inStyleSheetData, inStyleSheetDataLength ) );
+				mStyles.Dump();
+				CallAllCompletionBlocks();
+			} );
+		}
+		else
+			CallAllCompletionBlocks();
 	} );
+}
+
+
+void	CDocument::CallAllCompletionBlocks()
+{
+	mLoaded = true;
+	mLoading = false;
+	
+	for( auto itty = mLoadCompletionBlocks.begin(); itty != mLoadCompletionBlocks.end(); itty++ )
+		(*itty)( this );
+	mLoadCompletionBlocks.clear();
 }
 
 
@@ -318,16 +328,8 @@ void	CDocument::Dump( size_t inNestingLevel )
 	printf( "Document\n{\n\tloaded = %s\n\tloading= %s\n\tcreatedByVersion = %s\n\tlastCompactedVersion = %s\n\tfirstEditedVersion = %s\n\tlastEditedVersion = %s\n",
 			(mLoaded ? "true" : "false"), (mLoading ? "true" : "false"), mCreatedByVersion.c_str(),
 			mLastCompactedVersion.c_str(), mFirstEditedVersion.c_str(), mLastEditedVersion.c_str() );
-	printf( "\tfonts\n\t{\n" );
-	for( auto itty = mFontIDTable.begin(); itty != mFontIDTable.end(); itty++ )
-		printf( "\t\t%s -> %d\n", itty->second.c_str(), itty->first );
-	printf( "\t}\n\tstyles\n\t{\n" );
-	for( auto itty = mTextStyles.begin(); itty != mTextStyles.end(); itty++ )
-	{
-		printf( "\t\t%d: ", itty->first );
-		itty->second.Dump();
-	}
-	
+	printf( "\tstyles\n\t{\n" );
+	mStyles.Dump();
 	printf( "\t}\n\tmedia\n\t{\n" );
 	for( auto itty = mMediaList.begin(); itty != mMediaList.end(); itty++ )
 		itty->Dump( 2 );

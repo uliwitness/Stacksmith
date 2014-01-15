@@ -124,10 +124,11 @@ void	CStyleSheet::Dump()
 {
 	for( auto styleParts : mStyles )
 	{
-		printf( "\"%s\":\n", styleParts.first.c_str() );
+		printf( "\t\t%s\n\t\t{\n", styleParts.first.c_str() );
 		for( auto currStyle : styleParts.second )
 		{
-			printf( "\t\"%s\": \"%s\"\n", currStyle.first.c_str(), currStyle.second.c_str() );
+			printf( "\t\t\t%s: %s;\n", currStyle.first.c_str(), currStyle.second.c_str() );
 		}
+		printf( "\t\t}\n" );
 	}
 }

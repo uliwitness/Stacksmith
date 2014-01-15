@@ -12,6 +12,7 @@
 #include "LEOContextGroup.h"
 #include "CStack.h"
 #include "CVisiblePart.h"
+#include "CStyleSheet.h"
 
 
 namespace Carlson {
@@ -34,7 +35,7 @@ public:
 	
 	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %lld, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false")); };
 	
-	ObjectID		GetID()	const		{ return mIconID; };
+	ObjectID			GetID()	const		{ return mIconID; };
 	const std::string	GetName() const		{ return mIconName; };
 	TMediaType			GetMediaType() const{ return mMediaType; };
 	const std::string	GetFileName() const { return mFileName; };
@@ -47,21 +48,6 @@ protected:
 	int				mHotspotLeft;
 	int				mHotspotTop;
 	bool			mIsBuiltIn;
-};
-
-
-class CTextStyleEntry
-{
-public:
-	CTextStyleEntry() : mFontSize(12), mTextStyle(EPartTextStylePlain) {};
-	CTextStyleEntry( std::string inFontName, int inFontSize, TPartTextStyle inTextStyle ) : mFontName(inFontName), mFontSize(inFontSize), mTextStyle(inTextStyle) {};
-
-	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ font = %s, size = %d, style = %u }\n", indentStr, mFontName.c_str(), mFontSize, mTextStyle); };
-
-protected:
-	std::string		mFontName;
-	int				mFontSize;
-	TPartTextStyle	mTextStyle;
 };
 
 
@@ -79,8 +65,8 @@ public:
 	std::string			GetURL()					{ return mURL; };
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
 	CStack*				GetStackByName( const char* inName );
-	ObjectID		GetUniqueIDForStack();
-	ObjectID		GetUniqueIDForMedia();
+	ObjectID			GetUniqueIDForStack();
+	ObjectID			GetUniqueIDForMedia();
 	
 	virtual void		SetPeeking( bool inState );
 	virtual bool		GetPeeking()				{ return mPeeking; };
@@ -95,6 +81,8 @@ public:
 protected:
 	virtual ~CDocument();
 
+	void				CallAllCompletionBlocks();
+
 	void				LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root, bool isBuiltIn );
 
 	bool											mLoaded;
@@ -104,15 +92,14 @@ protected:
 	std::string										mFirstEditedVersion;
 	std::string										mLastEditedVersion;
 	std::string										mURL;
-	std::map<int,std::string>						mFontIDTable;
-	std::map<int,CTextStyleEntry>					mTextStyles;
 	std::vector<CMediaEntry>						mMediaList;
 	std::vector<CStackRef>							mStacks;
+	CStyleSheet										mStyles;
 	std::vector<std::function<void(CDocument*)>>	mLoadCompletionBlocks;
 	bool											mPeeking;
 	
-	ObjectID									mStackIDSeed;
-	ObjectID									mMediaIDSeed;
+	ObjectID										mStackIDSeed;
+	ObjectID										mMediaIDSeed;
 	
 	LEOContextGroup*								mContextGroup;
 };
