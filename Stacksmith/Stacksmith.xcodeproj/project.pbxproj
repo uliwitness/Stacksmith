@@ -81,6 +81,7 @@
 		552386CE1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386CC1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm */; };
 		552386D11883EAA300D7FAB3 /* CWebBrowserPartMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386CF1883EAA300D7FAB3 /* CWebBrowserPartMac.mm */; };
 		552386D41883EF1E00D7FAB3 /* WILDStackWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386D21883EF1E00D7FAB3 /* WILDStackWindowController.mm */; };
+		552386D91884D49300D7FAB3 /* CAttributedString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552386D71884D49300D7FAB3 /* CAttributedString.cpp */; };
 		5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */; };
 		552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */; };
 		55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */; };
@@ -243,6 +244,7 @@
 		55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC5081744525F0084AAA9 /* StackIcon.icns */; };
 		55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */; };
 		55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */; };
+		55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B07407188612EB0023BA3E /* CStyleSheet.cpp */; };
 		55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29C9617276C4700B38E75 /* UKCrashReporter.m */; };
 		55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */; };
 		55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */; };
@@ -541,6 +543,8 @@
 		552386D01883EAA300D7FAB3 /* CWebBrowserPartMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWebBrowserPartMac.h; path = Platforms/Mac/CWebBrowserPartMac.h; sourceTree = "<group>"; };
 		552386D21883EF1E00D7FAB3 /* WILDStackWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDStackWindowController.mm; path = Platforms/Mac/WILDStackWindowController.mm; sourceTree = "<group>"; };
 		552386D31883EF1E00D7FAB3 /* WILDStackWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStackWindowController.h; path = Platforms/Mac/WILDStackWindowController.h; sourceTree = "<group>"; };
+		552386D71884D49300D7FAB3 /* CAttributedString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAttributedString.cpp; path = "Portable Document/CAttributedString.cpp"; sourceTree = "<group>"; };
+		552386D81884D49300D7FAB3 /* CAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAttributedString.h; path = "Portable Document/CAttributedString.h"; sourceTree = "<group>"; };
 		5525575C114BBF2B00279B03 /* WILDDrawAddColorBezel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDDrawAddColorBezel.h; sourceTree = "<group>"; };
 		5525575D114BBF2B00279B03 /* WILDDrawAddColorBezel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDDrawAddColorBezel.m; sourceTree = "<group>"; };
 		552558FC114BDE7C00279B03 /* WILDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDAppDelegate.h; sourceTree = "<group>"; };
@@ -789,6 +793,8 @@
 		55ADC5081744525F0084AAA9 /* StackIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = StackIcon.icns; path = Resources/StackIcon.icns; sourceTree = "<group>"; };
 		55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = BackgroundEditIcon.icns; path = Resources/BackgroundEditIcon.icns; sourceTree = "<group>"; };
 		55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactory.xib; path = Windows/WILDViewFactory.xib; sourceTree = "<group>"; };
+		55B07407188612EB0023BA3E /* CStyleSheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CStyleSheet.cpp; path = "Portable Document/CStyleSheet.cpp"; sourceTree = "<group>"; };
+		55B07408188612EB0023BA3E /* CStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CStyleSheet.h; path = "Portable Document/CStyleSheet.h"; sourceTree = "<group>"; };
 		55B29C9517276C4700B38E75 /* UKCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCrashReporter.h; path = ../UliKit/UKCrashReporter.h; sourceTree = "<group>"; };
 		55B29C9617276C4700B38E75 /* UKCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKCrashReporter.m; path = ../UliKit/UKCrashReporter.m; sourceTree = "<group>"; };
 		55B29C9D17276D4100B38E75 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = ../UliKit/English.lproj/UKCrashReporter.strings; sourceTree = "<group>"; };
@@ -1419,6 +1425,10 @@
 				55CD610518786BAC002450E2 /* CRectanglePart.cpp */,
 				55AC96201870FFC200488B51 /* CPartContents.h */,
 				55AC961F1870FFC200488B51 /* CPartContents.cpp */,
+				552386D81884D49300D7FAB3 /* CAttributedString.h */,
+				552386D71884D49300D7FAB3 /* CAttributedString.cpp */,
+				55B07408188612EB0023BA3E /* CStyleSheet.h */,
+				55B07407188612EB0023BA3E /* CStyleSheet.cpp */,
 				55C2B645115E5780008B094D /* CSearchContext.h */,
 				55C2B646115E5780008B094D /* CSearchContext.cpp */,
 				55CD61171879F464002450E2 /* CMessageBox.h */,
@@ -1969,6 +1979,7 @@
 				55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */,
 				55CD60BD187510F0002450E2 /* CFieldPart.cpp in Sources */,
 				55CD60DB187587CB002450E2 /* CDocument.cpp in Sources */,
+				552386D91884D49300D7FAB3 /* CAttributedString.cpp in Sources */,
 				555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */,
 				55CD610F18788CEB002450E2 /* CScriptableObjectValue.cpp in Sources */,
 				556DB7C21870A971002F7CB2 /* CURLConnection.mm in Sources */,
@@ -2036,6 +2047,7 @@
 				55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */,
 				55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */,
 				55E805C61360ACD3006F1287 /* WILDPropertyInstructions.cpp in Sources */,
+				55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */,
 				55E805F91366091F006F1287 /* CGlobalPropertyNode.cpp in Sources */,
 				55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */,
 				55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */,
