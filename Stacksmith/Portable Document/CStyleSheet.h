@@ -30,6 +30,14 @@ public:
 			return std::map<std::string,std::string>();
 	};
 	
+	void	SetStyleForClass( const char* inClassName, std::map<std::string,std::string>& inStyle )
+	{
+		std::string	fullClassName(".");
+		fullClassName.append(inClassName);
+		
+		mStyles[fullClassName] = inStyle;
+	};
+	
 	void	Dump() const;
 	
 protected:

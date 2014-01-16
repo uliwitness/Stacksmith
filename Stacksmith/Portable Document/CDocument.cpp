@@ -45,33 +45,36 @@ void	CDocument::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root,
 		CTinyXMLUtils::GetStringNamed( currMediaElem, "name", iconName );
 		std::string	fileName;
 		CTinyXMLUtils::GetStringNamed( currMediaElem, "file", fileName );
-		std::string	typeName;
-		TMediaType	mediaType = EMediaTypeUnknown;
-		CTinyXMLUtils::GetStringNamed( currMediaElem, "type", typeName );
-		if( typeName.compare( "icon" ) == 0 )
-			mediaType = EMediaTypeIcon;
-		else if( typeName.compare( "picture" ) == 0 )
-			mediaType = EMediaTypePicture;
-		else if( typeName.compare( "cursor" ) == 0 )
-			mediaType = EMediaTypeCursor;
-		else if( typeName.compare( "sound" ) == 0 )
-			mediaType = EMediaTypeSound;
-		tinyxml2::XMLElement	*	hotspotElem = currMediaElem->FirstChildElement( "hotspot" );
-		int		hotspotLeft = CTinyXMLUtils::GetIntNamed( hotspotElem, "left", 0 );
-		int		hotspotTop = CTinyXMLUtils::GetIntNamed( hotspotElem, "top", 0 );
-		
-		if( isBuiltIn )
+		if( fileName.find( "../" ) != 0 && fileName.find( "/../" ) == std::string::npos )	// Don't let paths escape the file package.
 		{
-			size_t	slashPos = sStandardResourcesPath.rfind('/');
-			std::string	builtInResPath = sStandardResourcesPath.substr(0,slashPos);
-			fileName = std::string("file://") + builtInResPath + "/" + fileName;
+			std::string	typeName;
+			TMediaType	mediaType = EMediaTypeUnknown;
+			CTinyXMLUtils::GetStringNamed( currMediaElem, "type", typeName );
+			if( typeName.compare( "icon" ) == 0 )
+				mediaType = EMediaTypeIcon;
+			else if( typeName.compare( "picture" ) == 0 )
+				mediaType = EMediaTypePicture;
+			else if( typeName.compare( "cursor" ) == 0 )
+				mediaType = EMediaTypeCursor;
+			else if( typeName.compare( "sound" ) == 0 )
+				mediaType = EMediaTypeSound;
+			tinyxml2::XMLElement	*	hotspotElem = currMediaElem->FirstChildElement( "hotspot" );
+			int		hotspotLeft = CTinyXMLUtils::GetIntNamed( hotspotElem, "left", 0 );
+			int		hotspotTop = CTinyXMLUtils::GetIntNamed( hotspotElem, "top", 0 );
+			
+			if( isBuiltIn )
+			{
+				size_t	slashPos = sStandardResourcesPath.rfind('/');
+				std::string	builtInResPath = sStandardResourcesPath.substr(0,slashPos);
+				fileName = std::string("file://") + builtInResPath + "/" + fileName;
+			}
+			else
+			{
+				fileName = mURL + "/" + fileName;
+			}
+			
+			mMediaList.push_back( CMediaEntry( iconID, iconName, fileName, mediaType, hotspotLeft, hotspotTop, isBuiltIn ) );
 		}
-		else
-		{
-			fileName = mURL + "/" + fileName;
-		}
-		
-		mMediaList.push_back( CMediaEntry( iconID, iconName, fileName, mediaType, hotspotLeft, hotspotTop, isBuiltIn ) );
 		
 		currMediaElem = currMediaElem->NextSiblingElement( "media" );
 	}

@@ -26,10 +26,10 @@ struct CAttributeRange
 class CAttributedString
 {
 public:
-	void	LoadFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
-	
+	void			LoadFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
+	void			SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLElement* inElement, CStyleSheet *styleSheet );
 	std::string		GetString()								{ return mString; };
-	void			SetString( const std::string& inStr )	{ mString = inStr; mAttributes.clear(); };
+	void			SetString( const std::string& inStr )	{ mString = inStr; mRanges.clear(); };
 	
 	void			Dump();
 	
@@ -37,7 +37,7 @@ protected:
 	void	AppendFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
 	void	NormalizeStyleRuns();
 
-	std::vector<CAttributeRange>	mAttributes;
+	std::vector<CAttributeRange>	mRanges;
 	std::string						mString;
 };
 

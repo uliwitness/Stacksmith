@@ -46,29 +46,29 @@ void	CAttributedString::AppendFromElementWithStyles( tinyxml2::XMLElement * inEl
 			{
 				auto	styles = inStyles.GetStyleForClass( className );
 				attr.mAttributes = styles;
-				mAttributes.push_back( attr );
+				mRanges.push_back( attr );
 			}
 			else if( strcmp(elem->Value(),"a") == 0 )
 			{
 				const char*	urlStr = elem->Attribute( "href" );
 				if( urlStr )
 					attr.mAttributes["$link"] = urlStr;
-				mAttributes.push_back( attr );
+				mRanges.push_back( attr );
 			}
 			else if( strcmp(elem->Value(),"b") == 0 )
 			{
 				attr.mAttributes["font-weight"] = "bold";
-				mAttributes.push_back( attr );
+				mRanges.push_back( attr );
 			}
 			else if( strcmp(elem->Value(),"i") == 0 )
 			{
 				attr.mAttributes["font-style"] = "italic";
-				mAttributes.push_back( attr );
+				mRanges.push_back( attr );
 			}
 			else if( strcmp(elem->Value(),"u") == 0 )
 			{
 				attr.mAttributes["text-decoration"] = "underline";
-				mAttributes.push_back( attr );
+				mRanges.push_back( attr );
 			}
 		}
 		else
@@ -83,17 +83,110 @@ void	CAttributedString::AppendFromElementWithStyles( tinyxml2::XMLElement * inEl
 void	CAttributedString::NormalizeStyleRuns()
 {
 	// Sort runs by start.
+	sort( mRanges.begin(), mRanges.end(),
+            [](const CAttributeRange& a, const CAttributeRange& b)
+            {
+                return a.mStart > b.mStart;
+            });
+	
 	// Split overlapping runs.
+	if( mRanges.size() < 2 )
+	{
+		for( size_t x = 0; x < (mRanges.size() -1); x++ )
+		{
+			CAttributeRange& a = mRanges[x];
+			CAttributeRange& b = mRanges[x +1];
+			
+			if( b.mStart < a.mEnd )	// Overlap!
+			{
+				CAttributeRange		ab = a;
+				ab.mStart = b.mStart;
+				ab.mEnd = a.mEnd;
+				a.mEnd = b.mStart;
+				b.mStart = a.mEnd;
+				ab.mAttributes.insert( b.mAttributes.begin(), b.mAttributes.end() );
+				mRanges.insert( mRanges.begin() +x +1, ab);
+			}
+		}
+	}
+	
 	// Merge runs covering the same range.
+	if( mRanges.size() < 2 )
+	{
+		for( size_t x = 0; x < (mRanges.size() -1); x++ )
+		{
+			CAttributeRange& a = mRanges[x];
+			CAttributeRange& b = mRanges[x +1];
+			
+			if( b.mStart < a.mEnd )	// Overlap!
+			{
+				CAttributeRange		ab = a;
+				ab.mStart = b.mStart;
+				ab.mEnd = a.mEnd;
+				a.mEnd = b.mStart;
+				b.mStart = a.mEnd;
+				ab.mAttributes.insert( b.mAttributes.begin(), b.mAttributes.end() );
+				mRanges.insert( mRanges.begin() +x +1, ab);
+			}
+		}
+	}
+	
 	// Merge adjacent runs with same attributes.
+	if( mRanges.size() < 2 )
+	{
+		for( size_t x = 0; x < (mRanges.size() -1); x++ )
+		{
+			CAttributeRange& a = mRanges[x];
+			CAttributeRange& b = mRanges[x +1];
+			
+			if( b.mAttributes == a.mAttributes )	// Same attributes!
+			{
+				a.mEnd = b.mEnd;
+				b.mStart = b.mEnd;
+			}
+		}
+	}
+
 	// Remove zero-length runs.
+	std::vector<CAttributeRange>	newRanges = mRanges;
+	for( auto currAttr : mRanges )
+	{
+		if( currAttr.mStart != currAttr.mEnd )
+			newRanges.push_back(currAttr);
+	}
+	
+	mRanges = newRanges;
+}
+
+
+void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLElement* inElement, CStyleSheet *styleSheet )
+{
+	int		styleNum = 0;
+	size_t	currOffs = 0;
+	for( CAttributeRange currRun : mRanges )
+	{
+		if( currOffs < currRun.mStart )
+			inElement->InsertEndChild( inDoc->NewText( mString.substr( currOffs, currRun.mStart -currOffs ).c_str() ) );
+		char	styleName[1024] = {0};
+		snprintf( styleName, sizeof(styleName) -1, "style%d", ++styleNum );
+		tinyxml2::XMLElement* spanElement = inDoc->NewElement( "span" );
+		spanElement->SetAttribute( "class", styleName );
+		spanElement->InsertEndChild( inDoc->NewText( mString.substr( currRun.mStart, currRun.mEnd -currRun.mStart ).c_str() ) );
+		inElement->InsertEndChild( spanElement );
+		
+		styleSheet->SetStyleForClass( styleName, currRun.mAttributes );
+		
+		currOffs = currRun.mEnd;
+	}
+	if( currOffs < mString.length() )
+		inElement->InsertEndChild( inDoc->NewText( mString.substr( currOffs, mString.length() -currOffs ).c_str() ) );
 }
 
 
 void	CAttributedString::Dump()
 {
 	size_t	currOffs = 0;
-	for( CAttributeRange currRun : mAttributes )
+	for( CAttributeRange currRun : mRanges )
 	{
 		if( currOffs < currRun.mStart )
 			printf( "%s", mString.substr( currOffs, currRun.mStart -currOffs ).c_str() );
