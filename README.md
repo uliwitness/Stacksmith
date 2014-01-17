@@ -34,7 +34,7 @@ License
 
 Note: Some submodules may be subject to different licenses.
 
-	Copyright 2003-2013 by Uli Kusterer.
+	Copyright 2003-2014 by Uli Kusterer.
 	
 	This software is provided 'as-is', without any express or implied
 	warranty. In no event will the authors be held liable for any damages
