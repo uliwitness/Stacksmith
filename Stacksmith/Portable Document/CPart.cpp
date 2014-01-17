@@ -176,14 +176,17 @@ bool	CPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart,
 	{
 		LEOInitIntegerValue( outValue, GetID(), kLEOUnitNone, kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("number", inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetIndex(GetPartType()) +1, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("partNumber", inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetIndex() +1, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+	}
 	else if( strcasecmp("rectangle", inPropertyName) == 0 || strcasecmp("rect", inPropertyName) == 0 )
 	{
-		LEOArrayEntry	*	theArray = NULL;
-		LEOAddIntegerArrayEntryToRoot( &theArray, "left", mLeft, kLEOUnitNone, inContext );
-		LEOAddIntegerArrayEntryToRoot( &theArray, "top", mTop, kLEOUnitNone, inContext );
-		LEOAddIntegerArrayEntryToRoot( &theArray, "right", mRight, kLEOUnitNone, inContext );
-		LEOAddIntegerArrayEntryToRoot( &theArray, "bottom", mBottom, kLEOUnitNone, inContext );
-		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+		LEOInitRectValue( outValue, mLeft, mTop, mRight, mBottom, kLEOInvalidateReferences, inContext );
 	}
 	else
 		return CConcreteObject::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
@@ -205,40 +208,40 @@ bool	CPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 		const char*	scriptStr = LEOGetValueAsString( inValue, scriptBuf, sizeof(scriptBuf), inContext );
 		SetScript( scriptStr );
 	}
-	else if( strcasecmp("script", inPropertyName) == 0 )
+	else if( strcasecmp("number", inPropertyName) == 0 )
 	{
-		char		scriptBuf[1024];
-		const char*	scriptStr = LEOGetValueAsString( inValue, scriptBuf, sizeof(scriptBuf), inContext );
-		SetScript( scriptStr );
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEOInteger	theNum = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		SetIndex( theNum -1, GetPartType() );
+	}
+	else if( strcasecmp("partNumber", inPropertyName) == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEOInteger	theNum = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		SetIndex( theNum -1 );
 	}
 	else if( strcasecmp("rectangle", inPropertyName) == 0 || strcasecmp("rect", inPropertyName) == 0 )
 	{
-		LEOValue		tempStorage = {};
-		LEOUnit			theUnit = kLEOUnitNone;
 		LEOInteger		l = 0, t = 0, r = 0, b = 0;
-		LEOValuePtr		leftValue = LEOGetValueForKey( inValue, "left", &tempStorage, kLEOInvalidateReferences, inContext );
-		if( leftValue )
-			l = LEOGetValueAsInteger( leftValue, &theUnit, inContext );
-		if( leftValue == &tempStorage )
-			LEOCleanUpValue( &tempStorage, kLEOInvalidateReferences, inContext );
-		LEOValuePtr		rightValue = LEOGetValueForKey( inValue, "right", &tempStorage, kLEOInvalidateReferences, inContext );
-		if( rightValue )
-			r = LEOGetValueAsInteger( rightValue, &theUnit, inContext );
-		if( rightValue == &tempStorage )
-			LEOCleanUpValue( &tempStorage, kLEOInvalidateReferences, inContext );
-		LEOValuePtr		topValue = LEOGetValueForKey( inValue, "top", &tempStorage, kLEOInvalidateReferences, inContext );
-		if( topValue )
-			t = LEOGetValueAsInteger( topValue, &theUnit, inContext );
-		if( topValue == &tempStorage )
-			LEOCleanUpValue( &tempStorage, kLEOInvalidateReferences, inContext );
-		LEOValuePtr		bottomValue = LEOGetValueForKey( inValue, "bottom", &tempStorage, kLEOInvalidateReferences, inContext );
-		if( bottomValue )
-			b = LEOGetValueAsInteger( bottomValue, &theUnit, inContext );
-		if( bottomValue == &tempStorage )
-			LEOCleanUpValue( &tempStorage, kLEOInvalidateReferences, inContext );
+		LEOGetValueAsRect( inValue, &l, &t, &r, &b, inContext);
 		SetRect( l, t, r, b );
 	}
 	else
 		return CConcreteObject::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 	return true;
 }
+
+
+LEOInteger	CPart::GetIndex( CPartCreatorBase* inType )
+{
+	return mOwner->GetIndexOfPart( this, inType );
+}
+
+
+void		CPart::SetIndex( LEOInteger inIndex, CPartCreatorBase* inType )
+{
+	mOwner->SetIndexOfPart( this, inIndex, inType );
+}
+
+
+

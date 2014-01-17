@@ -41,6 +41,8 @@ public:
 	virtual CPart*	GetPartWithNameOfType( const std::string& inName, CPartCreatorBase* inType );
 	virtual CPart*	GetPartWithID( ObjectID inID );
 	virtual void    AddPart( CPart* inPart );
+	virtual LEOInteger	GetIndexOfPart( CPart* inPart, CPartCreatorBase* inType );
+	virtual void	SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase* inType );
 	std::string		GetPictureURL();
 	std::string		GetPictureName()		{ return mPictureName; };
 	bool			GetShowPicture()		{ return mShowPict; };

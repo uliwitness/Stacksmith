@@ -355,6 +355,48 @@ void    CLayer::AddPart( CPart* inPart )
 }
 
 
+LEOInteger	CLayer::GetIndexOfPart( CPart* inPart, CPartCreatorBase* inType )
+{
+	LEOInteger	numParts = 0;
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->GetPartType() == inType || inType == NULL )
+		{
+			if( (*currPart) == inPart )
+				return numParts;
+			numParts++;
+		}
+	}
+	
+	return -1;
+}
+
+
+void	CLayer::SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase* inType )
+{
+	CPartRef	keepPart = inPart;	// Make sure it doesn't get released while we're removing/re-adding it.
+	LEOInteger	oldIndex = -1;
+	LEOInteger	numParts = 0;
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->GetPartType() == inType || inType == NULL )
+		{
+			if( (*currPart) == inPart )
+			{
+				if( inIndex > numParts )
+					inIndex --;
+				oldIndex = numParts;
+				break;
+			}
+			numParts++;
+		}
+	}
+	
+	mParts.erase( mParts.begin() +oldIndex );
+	mParts.insert( mParts.begin() +inIndex, inPart );
+}
+
+
 void	CLayer::SetPeeking( bool inState )
 {
 	for( auto currPart : mParts )

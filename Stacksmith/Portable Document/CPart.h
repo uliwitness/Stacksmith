@@ -66,6 +66,8 @@ public:
 	LEOInteger					GetBottom()		{ return mBottom; };
 	virtual void				SetPartType( CPartCreatorBase* inType )	{ mPartType = inType; };	// Remembers the type, can't possibly change the type of this class.
 	virtual CPartCreatorBase*	GetPartType()							{ return mPartType; };
+	virtual LEOInteger			GetIndex( CPartCreatorBase* inType = NULL );
+	virtual void				SetIndex( LEOInteger inIndex, CPartCreatorBase* inType = NULL );
 	
 	virtual bool				GetTextContents( std::string& outString );
 	virtual bool				SetTextContents( std::string inString);
