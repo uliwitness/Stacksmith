@@ -20,6 +20,8 @@ struct CAttributeRange
 	std::map<std::string,std::string>	mAttributes;
 	size_t								mStart;
 	size_t								mEnd;
+	
+	std::map<std::string,std::string>	GetAttributesWithoutInternal();
 };
 
 

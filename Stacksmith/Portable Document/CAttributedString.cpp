@@ -9,6 +9,18 @@
 #include "CAttributedString.h"
 
 
+std::map<std::string,std::string>	CAttributeRange::GetAttributesWithoutInternal()
+{
+	std::map<std::string,std::string>	filteredAttrs;
+	for( auto currElem : mAttributes )
+	{
+		if( currElem.first[0] != '$' )
+			filteredAttrs.insert( currElem );
+	}
+	return filteredAttrs;
+}
+
+
 void	CAttributedString::LoadFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles )
 {
 	AppendFromElementWithStyles( inElement, inStyles );
@@ -90,7 +102,7 @@ void	CAttributedString::NormalizeStyleRuns()
             });
 	
 	// Split overlapping runs.
-	if( mRanges.size() < 2 )
+	if( mRanges.size() > 1 )
 	{
 		for( size_t x = 0; x < (mRanges.size() -1); x++ )
 		{
@@ -111,7 +123,7 @@ void	CAttributedString::NormalizeStyleRuns()
 	}
 	
 	// Merge runs covering the same range.
-	if( mRanges.size() < 2 )
+	if( mRanges.size() > 1 )
 	{
 		for( size_t x = 0; x < (mRanges.size() -1); x++ )
 		{
@@ -132,7 +144,7 @@ void	CAttributedString::NormalizeStyleRuns()
 	}
 	
 	// Merge adjacent runs with same attributes.
-	if( mRanges.size() < 2 )
+	if( mRanges.size() > 1 )
 	{
 		for( size_t x = 0; x < (mRanges.size() -1); x++ )
 		{
@@ -172,9 +184,19 @@ void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocumen
 		tinyxml2::XMLElement* spanElement = inDoc->NewElement( "span" );
 		spanElement->SetAttribute( "class", styleName );
 		spanElement->InsertEndChild( inDoc->NewText( mString.substr( currRun.mStart, currRun.mEnd -currRun.mStart ).c_str() ) );
-		inElement->InsertEndChild( spanElement );
+		auto	currLink = currRun.mAttributes.find("$link");
+		if( currLink != currRun.mAttributes.end() )
+		{
+			tinyxml2::XMLElement* linkElement = inDoc->NewElement( "a" );
+			linkElement->SetAttribute( "href", currLink->second.c_str() );
+			linkElement->InsertEndChild( spanElement );
+			
+			inElement->InsertEndChild( linkElement );
+		}
+		else
+			inElement->InsertEndChild( spanElement );
 		
-		styleSheet->SetStyleForClass( styleName, currRun.mAttributes );
+		styleSheet->SetStyleForClass( styleName, currRun.GetAttributesWithoutInternal() );
 		
 		currOffs = currRun.mEnd;
 	}
