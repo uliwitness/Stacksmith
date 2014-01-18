@@ -9,6 +9,9 @@
 #include "CAttributedString.h"
 
 
+using namespace Carlson;
+
+
 std::map<std::string,std::string>	CAttributeRange::GetAttributesWithoutInternal()
 {
 	std::map<std::string,std::string>	filteredAttrs;
@@ -25,8 +28,8 @@ void	CAttributedString::LoadFromElementWithStyles( tinyxml2::XMLElement * inElem
 {
 	AppendFromElementWithStyles( inElement, inStyles );
 	
-	Dump();
-	printf( "\n" );
+//	Dump();
+//	printf( "\n" );
 }
 
 
@@ -205,44 +208,58 @@ void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocumen
 }
 
 
-void	CAttributedString::Dump()
+void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback )
 {
 	size_t	currOffs = 0;
 	for( CAttributeRange currRun : mRanges )
 	{
 		if( currOffs < currRun.mStart )
-			printf( "%s", mString.substr( currOffs, currRun.mStart -currOffs ).c_str() );
+			inCallback( NULL, mString.substr( currOffs, currRun.mStart -currOffs ) );
+		inCallback( &currRun, mString.substr( currRun.mStart, currRun.mEnd -currRun.mStart ) );
+		currOffs = currRun.mEnd;
+	}
+	if( currOffs < mString.length() )
+		inCallback( NULL, mString.substr( currOffs, mString.length() -currOffs ) );
+}
+
+
+void	CAttributedString::Dump()
+{
+	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
+	{
 		std::string	text("<span style=\"");
 		std::string	currLink;
-		for( auto currStyle : currRun.mAttributes )
+		if( currRun )
 		{
-			if( currStyle.first.compare("$link") == 0 )
-				currLink = currStyle.second;
-			else
+			for( auto currStyle : currRun->mAttributes )
 			{
-				text.append( currStyle.first );
-				text.append(1,':');
-				text.append( currStyle.second );
-				text.append(1,';');
+				if( currStyle.first.compare("$link") == 0 )
+					currLink = currStyle.second;
+				else
+				{
+					text.append( currStyle.first );
+					text.append(1,':');
+					text.append( currStyle.second );
+					text.append(1,';');
+				}
+			}
+			text.append("\">");
+			if( currLink.length() > 0 )
+			{
+				if( currRun->mAttributes.size() > 1 )
+					text = std::string("<a href=\"") + currLink + "\">" + text;
+				else
+					text = std::string("<a href=\"") + currLink + "\">";
 			}
 		}
-		text.append("\">");
-		if( currLink.length() > 0 )
-		{
-			if( currRun.mAttributes.size() > 1 )
-				text = std::string("<a href=\"") + currLink + "\">" + text;
-			else
-				text = std::string("<a href=\"") + currLink + "\">";
-		}
-		text.append(mString.substr( currRun.mStart, currRun.mEnd -currRun.mStart ));
-		if( currLink.length() == 0 || currRun.mAttributes.size() > 1 )
+		if( !currRun )
+			text = "";
+		text.append( inText );
+		if( currLink.length() == 0 || (currRun && currRun->mAttributes.size() > 1) )
 			text.append("</span>");
 		if( currLink.length() > 0 )
 			text.append("</a>");
 		printf( "%s", text.c_str() );
-		currOffs = currRun.mEnd;
-	}
-	if( currOffs < mString.length() )
-		printf( "%s", mString.substr( currOffs, mString.length() -currOffs ).c_str() );
+	} );
 }
 

@@ -15,6 +15,9 @@
 #include <vector>
 
 
+namespace Carlson
+{
+
 struct CAttributeRange
 {
 	std::map<std::string,std::string>	mAttributes;
@@ -33,6 +36,8 @@ public:
 	std::string		GetString()								{ return mString; };
 	void			SetString( const std::string& inStr )	{ mString = inStr; mRanges.clear(); };
 	
+	void			ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback );
+	
 	void			Dump();
 	
 protected:
@@ -42,5 +47,7 @@ protected:
 	std::vector<CAttributeRange>	mRanges;
 	std::string						mString;
 };
+
+}
 
 #endif /* defined(__Stacksmith__CAttributedString__) */

@@ -126,13 +126,12 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 
 /*static*/ TPartTextStyle	CVisiblePart::GetStyleFromString( const char* inString )
 {
-	TPartTextStyle	outStyle = EPartTextStylePlain;
 	for( size_t x = 0; x < EPartTextStyleBit_Last; x++ )
 	{
 		if( strcasecmp(inString,sTextStyleNames[x]) == 0 )
-			outStyle |= (1 << x);
+			return (1 << x);
 	}
-	return outStyle;
+	return EPartTextStylePlain;
 }
 
 

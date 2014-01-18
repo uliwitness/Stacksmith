@@ -66,6 +66,7 @@ protected:
 	TPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
+	TPartTextStyle	mTextStyle;
 	TButtonStyle	mButtonStyle;
 };
 

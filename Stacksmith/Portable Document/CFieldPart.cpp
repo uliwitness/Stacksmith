@@ -57,6 +57,13 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mFont.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
 	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );
+	tinyxml2::XMLElement * currStyle = inElement->FirstChildElement("textStyle");
+	mTextStyle = EPartTextStylePlain;
+	while( currStyle )
+	{
+		mTextStyle |= GetStyleFromString( currStyle->GetText() );
+		currStyle = currStyle->NextSiblingElement( "textStyle" );
+	}
 	mHasHorizontalScroller = CTinyXMLUtils::GetBoolNamed( inElement, "hasHorizontalScroller", false );
 	mHasVerticalScroller = CTinyXMLUtils::GetBoolNamed( inElement, "hasVerticalScroller", false );
 	std::string	styleStr;

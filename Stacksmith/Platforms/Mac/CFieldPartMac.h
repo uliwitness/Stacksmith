@@ -17,6 +17,8 @@
 namespace Carlson {
 
 
+class CAttributedString;
+
 class CFieldPartMac : public CFieldPart, public CMacPartBase
 {
 public:
@@ -24,7 +26,10 @@ public:
 
 	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
-	virtual void	SetPeeking( bool inState )	{ ApplyPeekingStateToView(inState, mView); };
+	virtual void	SetPeeking( bool inState )			{ ApplyPeekingStateToView(inState, mView); };
+	virtual NSDictionary*			GetCocoaAttributesForPart();
+
+	static NSAttributedString	*	GetCocoaAttributedString( CAttributedString * attrStr, NSDictionary * defaultAttrs );
 	
 protected:
 	~CFieldPartMac()	{ DestroyView(); };

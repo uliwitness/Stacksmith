@@ -59,6 +59,13 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mFont.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
 	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );
+	tinyxml2::XMLElement * currStyle = inElement->FirstChildElement("textStyle");
+	mTextStyle = EPartTextStylePlain;
+	while( currStyle )
+	{
+		mTextStyle |= GetStyleFromString( currStyle->GetText() );
+		currStyle = currStyle->NextSiblingElement( "textStyle" );
+	}
 	mFamily = CTinyXMLUtils::GetIntNamed( inElement, "family", 0 );
 	std::string	styleStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );

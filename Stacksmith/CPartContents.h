@@ -24,6 +24,7 @@ class CPartContents : public CRefCountedObject
 {
 public:
 	explicit CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElement = NULL );
+	virtual ~CPartContents()	{};
 	
 	virtual void		Dump( size_t inIndent );
 	
@@ -33,6 +34,8 @@ public:
 	void				SetHighlight( bool inHighlight ){ mHighlight = inHighlight; };
 	std::string			GetText()						{ return mAttributedString.GetString(); };
 	void				SetText( std::string inText )	{ mAttributedString.SetString( inText ); };
+	CAttributedString&	GetAttributedText()				{ return mAttributedString; };
+	void				SetAttributedText( const CAttributedString& inAttrStr )		{ mAttributedString = inAttrStr; };
 	bool				GetIsOnBackground()				{ return mIsOnBackground; };
 	void				SetIsOnBackground( bool inBg )	{ mIsOnBackground = inBg; };
 

@@ -53,6 +53,7 @@ protected:
 	bool			mMultipleLines;
 	bool			mShowLines;
 	bool			mWideMargins;
+	TPartTextStyle	mTextStyle;
 	TPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
