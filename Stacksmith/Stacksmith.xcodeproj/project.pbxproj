@@ -245,6 +245,8 @@
 		55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */; };
 		55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */; };
 		55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B07407188612EB0023BA3E /* CStyleSheet.cpp */; };
+		55B0740E1889C6E90023BA3E /* CMessageBoxMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */; };
+		55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */; };
 		55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29C9617276C4700B38E75 /* UKCrashReporter.m */; };
 		55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */; };
 		55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */; };
@@ -795,6 +797,9 @@
 		55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactory.xib; path = Windows/WILDViewFactory.xib; sourceTree = "<group>"; };
 		55B07407188612EB0023BA3E /* CStyleSheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CStyleSheet.cpp; path = "Portable Document/CStyleSheet.cpp"; sourceTree = "<group>"; };
 		55B07408188612EB0023BA3E /* CStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CStyleSheet.h; path = "Portable Document/CStyleSheet.h"; sourceTree = "<group>"; };
+		55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMessageBoxMac.mm; path = Platforms/Mac/CMessageBoxMac.mm; sourceTree = "<group>"; };
+		55B0740D1889C6E90023BA3E /* CMessageBoxMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessageBoxMac.h; path = Platforms/Mac/CMessageBoxMac.h; sourceTree = "<group>"; };
+		55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDMessageBoxWindowController.xib; path = Platforms/Mac/WILDMessageBoxWindowController.xib; sourceTree = "<group>"; };
 		55B29C9517276C4700B38E75 /* UKCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCrashReporter.h; path = ../UliKit/UKCrashReporter.h; sourceTree = "<group>"; };
 		55B29C9617276C4700B38E75 /* UKCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKCrashReporter.m; path = ../UliKit/UKCrashReporter.m; sourceTree = "<group>"; };
 		55B29C9D17276D4100B38E75 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = ../UliKit/English.lproj/UKCrashReporter.strings; sourceTree = "<group>"; };
@@ -1109,6 +1114,9 @@
 				552386CC1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm */,
 				552386D01883EAA300D7FAB3 /* CWebBrowserPartMac.h */,
 				552386CF1883EAA300D7FAB3 /* CWebBrowserPartMac.mm */,
+				55B0740D1889C6E90023BA3E /* CMessageBoxMac.h */,
+				55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */,
+				55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */,
 			);
 			name = Document;
 			sourceTree = "<group>";
@@ -1909,6 +1917,7 @@
 				555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */,
 				555F103B13881DB700E26037 /* UKPaintLassoTool.tiff in Resources */,
 				555F103C13881DB700E26037 /* UKPaintLineTool.tiff in Resources */,
+				55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */,
 				555F103D13881DB700E26037 /* UKPaintOvalTool.tiff in Resources */,
 				555F103E13881DB700E26037 /* UKPaintPathTool.tiff in Resources */,
 				555F103F13881DB700E26037 /* UKPaintRectTool.tiff in Resources */,
@@ -2050,6 +2059,7 @@
 				55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */,
 				55E805F91366091F006F1287 /* CGlobalPropertyNode.cpp in Sources */,
 				55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */,
+				55B0740E1889C6E90023BA3E /* CMessageBoxMac.mm in Sources */,
 				55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */,
 				55E806541368B2CD006F1287 /* UKColorListView.m in Sources */,
 				55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */,

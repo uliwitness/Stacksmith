@@ -17,7 +17,7 @@
 #import "UKCrashReporter.h"
 #include "CDocumentMac.h"
 #include "CStackMac.h"
-#include "CMessageBox.h"
+#include "CMessageBoxMac.h"
 #include "LEOObjCCallInstructions.h"
 #import "ULIURLHandlingApplication.h"
 #include "CAlert.h"
@@ -80,6 +80,8 @@ void	WILDFirstNativeCall( void )
 	
 	// Register Mac-specific variants of our card/background part classes:
 	CStackMac::RegisterPartCreators();
+	
+	CMessageBoxMac::SetSharedInstance( new CMessageBoxMac );
 }
 
 

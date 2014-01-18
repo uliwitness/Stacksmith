@@ -183,4 +183,16 @@ using namespace Carlson;
 	}
 }
 
+
+-(void)	windowDidBecomeKey: (NSNotification *)notification
+{
+	CStack::SetFrontStack( mStack );
+}
+
+
+-(void)	windowDidBecomeMain: (NSNotification *)notification
+{
+	CStack::SetFrontStack( mStack );
+}
+
 @end

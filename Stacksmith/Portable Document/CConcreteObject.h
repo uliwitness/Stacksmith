@@ -40,13 +40,13 @@ public:
 	
 	virtual std::string	GetName()			{ return mName; };
     virtual void        SetName( const std::string& inStr ) { mName = inStr; };
+		
+	virtual LEOContextGroup*	GetScriptContextGroupObject();
 
 protected:
 	virtual void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );
 	
 	virtual void		DumpUserProperties( size_t inIndent );
-		
-	virtual LEOContextGroup*	GetScriptContextGroupObject();
 
 // ivars:
 	std::string							mName;			// Name of this object for referring to it from scripts.

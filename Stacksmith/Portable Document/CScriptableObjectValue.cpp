@@ -874,7 +874,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 		if( theHandler )
 		{
 			LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
-//			LEODebugPrintScript( GetScriptContextGroupObject(), theScript );
+			LEODebugPrintScript( GetScriptContextGroupObject(), theScript );
 //			LEODebuggerAddBreakpoint(theHandler->instructions);
 //			LEODebugPrintContext(&ctx);
 			LEORunInContext( theHandler->instructions, &ctx );

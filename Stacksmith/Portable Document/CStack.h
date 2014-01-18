@@ -24,11 +24,14 @@ namespace Carlson {
 class CStack : public CConcreteObject
 {
 public:
+	static CStack*	GetFrontStack()						{ return sFrontStack; };
+	static void		SetFrontStack( CStack* inStack )	{ sFrontStack = inStack; };
+
 	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument ) : mStackID(inID), mURL(inURL) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	
-	ObjectID	GetID()		{ return mStackID; };
+	ObjectID		GetID()		{ return mStackID; };
 	std::string		GetURL()	{ return mURL; };
 	
 	void			AddCard( CCard* inCard );
@@ -80,6 +83,8 @@ protected:
 	std::vector<CBackgroundRef>	mBackgrounds;		// List of all backgrounds in this stack.
 	std::set<CCardRef>			mMarkedCards;		// List of all cards in this stack.
 	CCardRef					mCurrentCard;		// The card that is currently being shown in this stack's window.
+	
+	static CStack*				sFrontStack;
 };
 
 typedef CRefCountedObjectRef<CStack>	CStackRef;

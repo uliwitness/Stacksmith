@@ -17,8 +17,13 @@
 using namespace Carlson;
 
 
+CStack*		CStack::sFrontStack = NULL;
+
+
 CStack::~CStack()
 {
+	if( sFrontStack == this )
+		sFrontStack = NULL;
 	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
 		(*itty)->SetStack( NULL );
 	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
