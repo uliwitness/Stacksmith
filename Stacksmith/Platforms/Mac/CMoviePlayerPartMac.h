@@ -29,8 +29,15 @@ public:
 	virtual void	DestroyView();
 	virtual void	SetPeeking( bool inState );
 
+	virtual void		SetStarted( bool inStart );
+	virtual void		SetMediaPath( const std::string& inPath );
+	virtual void		SetCurrentTime( LEOInteger inTicks );
+	virtual LEOInteger	GetCurrentTime();
+
 protected:
 	~CMoviePlayerPartMac()	{ DestroyView(); };
+	
+	void			SetUpMoviePlayer();
 	
 	ULIInvisiblePlayerView	*	mView;
 };

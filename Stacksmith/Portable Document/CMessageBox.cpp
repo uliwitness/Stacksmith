@@ -9,6 +9,7 @@
 #include "CMessageBox.h"
 #include "Forge.h"
 #include "CDocument.h"
+#include "CAlert.h"
 
 
 using namespace Carlson;
@@ -53,9 +54,10 @@ bool	CMessageBox::SetTextContents( std::string inString )
 
 void	CMessageBox::Run()
 {
+	CAutoreleasePool	pool;
 	LEOValue		returnValue = {{0}};
 	char			returnValBuf[1024] = {0};
-	SendMessage( &returnValue, [](const char *, size_t, size_t, CScriptableObject *){}, ":run" );
+	SendMessage( &returnValue, [](const char * errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, ":run" );
 	if( returnValue.base.isa != NULL )
 	{
 		const char*	resultString = LEOGetValueAsString( &returnValue, returnValBuf, sizeof(returnValBuf), NULL );

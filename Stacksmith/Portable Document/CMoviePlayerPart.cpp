@@ -8,6 +8,7 @@
 
 #include "CMoviePlayerPart.h"
 #include "CTinyXMLUtils.h"
+#include <CoreMedia/CoreMedia.h>
 
 
 using namespace Carlson;
@@ -19,8 +20,79 @@ void	CMoviePlayerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inEleme
 	
 	mMediaPath.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "mediaPath", mMediaPath );
-	mCurrentTime = CTinyXMLUtils::GetLongLongNamed( inElement, "currentTime", 0 );
+	SetCurrentTime( CTinyXMLUtils::GetLongLongNamed( inElement, "currentTime", 0 ) );
 	mControllerVisible = CTinyXMLUtils::GetBoolNamed( inElement, "controllerVisible", true );
+}
+
+
+bool	CMoviePlayerPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp("currentTime", inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetCurrentTime(), kLEOUnitTicks, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("controllerVisible", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetControllerVisible(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("started", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetStarted(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("mediaPath", inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, GetMediaPath().c_str(), GetMediaPath().size(), kLEOInvalidateReferences, inContext );
+	}
+	else
+		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+	return true;
+}
+
+
+bool	CMoviePlayerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp("currentTime", inPropertyName) == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEOInteger	theInterval = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		if( theUnit != kLEOUnitNone )	// We take "none" to be ticks as well.
+		{
+			if( gUnitGroupsForLabels[theUnit] != gUnitGroupsForLabels[kLEOUnitTicks] )
+			{
+				LEOContextStopWithError( inContext, "Expected a time interval, found%s.", gUnitLabels[theUnit] );
+				return true;
+			}
+			theInterval = LEONumberWithUnitAsUnit( theInterval, theUnit, kLEOUnitTicks );
+		}
+		SetCurrentTime( theInterval );
+	}
+	else if( strcasecmp("started", inPropertyName) == 0 )
+	{
+		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetStarted( theHighlight );
+	}
+	else if( strcasecmp("controllerVisible", inPropertyName) == 0 )
+	{
+		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetControllerVisible( theHighlight );
+	}
+	else if( strcasecmp("mediaPath", inPropertyName) == 0 )
+	{
+		char		msgBuf[1024] = {0};
+		const char* msgStr = LEOGetValueAsString( inValue, msgBuf, sizeof(msgBuf), inContext );
+		if( !msgStr || !inContext->keepRunning )
+			return true;
+		SetMediaPath( msgStr );
+	}
+	else
+		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+	return true;
 }
 
 
@@ -31,6 +103,6 @@ void	CMoviePlayerPart::DumpProperties( size_t inIndentLevel )
 	CVisiblePart::DumpProperties( inIndentLevel );
 	
 	printf( "%smediaPath = %s\n", indentStr, mMediaPath.c_str() );
-	printf( "%scurrentTime = %lld\n", indentStr, mCurrentTime );
+	printf( "%scurrentTime = %lld\n", indentStr, GetCurrentTime() );
 	printf( "%scontrollerVisible = %s\n", indentStr, (mControllerVisible ? "true" : "false") );
 }

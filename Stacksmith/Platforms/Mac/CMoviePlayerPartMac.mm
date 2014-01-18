@@ -26,6 +26,7 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	mView.player = [AVPlayer playerWithURL: [[NSBundle mainBundle] URLForResource: @"PlaceholderMovie" withExtension: @"mov"]];
+	SetUpMoviePlayer();
 	[inSuperView addSubview: mView];
 }
 
@@ -36,6 +37,42 @@ void	CMoviePlayerPartMac::DestroyView()
 	[mView release];
 	mView = nil;
 }
+
+
+void	CMoviePlayerPartMac::SetUpMoviePlayer()
+{
+	mView.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+}
+
+
+void	CMoviePlayerPartMac::SetStarted( bool inStart )
+{
+	if( inStart )
+		[mView.player play];
+	else
+		[mView.player pause];
+	CMoviePlayerPart::SetStarted( inStart );
+}
+
+
+void	CMoviePlayerPartMac::SetMediaPath( const std::string& inPath )
+{
+	mView.player = [AVPlayer playerWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inPath.c_str()]]];
+	CMoviePlayerPart::SetMediaPath( inPath );
+}
+
+
+void	CMoviePlayerPartMac::SetCurrentTime( LEOInteger inTicks )
+{
+	[mView.player seekToTime: CMTimeMakeWithSeconds( inTicks / 60.0, 1 )];
+}
+
+
+LEOInteger	CMoviePlayerPartMac::GetCurrentTime()
+{
+	return CMTimeGetSeconds([mView.player currentTime]) * 60.0;
+}
+
 
 void	CMoviePlayerPartMac::SetPeeking( bool inState )
 {

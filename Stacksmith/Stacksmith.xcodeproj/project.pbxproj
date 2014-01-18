@@ -247,6 +247,7 @@
 		55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B07407188612EB0023BA3E /* CStyleSheet.cpp */; };
 		55B0740E1889C6E90023BA3E /* CMessageBoxMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */; };
 		55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */; };
+		55B07416188A1DA10023BA3E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B07415188A1DA10023BA3E /* CoreMedia.framework */; };
 		55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29C9617276C4700B38E75 /* UKCrashReporter.m */; };
 		55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */; };
 		55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */; };
@@ -800,6 +801,7 @@
 		55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMessageBoxMac.mm; path = Platforms/Mac/CMessageBoxMac.mm; sourceTree = "<group>"; };
 		55B0740D1889C6E90023BA3E /* CMessageBoxMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessageBoxMac.h; path = Platforms/Mac/CMessageBoxMac.h; sourceTree = "<group>"; };
 		55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDMessageBoxWindowController.xib; path = Platforms/Mac/WILDMessageBoxWindowController.xib; sourceTree = "<group>"; };
+		55B07415188A1DA10023BA3E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = ../../../../../System/Library/Frameworks/CoreMedia.framework; sourceTree = "<group>"; };
 		55B29C9517276C4700B38E75 /* UKCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKCrashReporter.h; path = ../UliKit/UKCrashReporter.h; sourceTree = "<group>"; };
 		55B29C9617276C4700B38E75 /* UKCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKCrashReporter.m; path = ../UliKit/UKCrashReporter.m; sourceTree = "<group>"; };
 		55B29C9D17276D4100B38E75 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = ../UliKit/English.lproj/UKCrashReporter.strings; sourceTree = "<group>"; };
@@ -935,6 +937,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
+				55B07416188A1DA10023BA3E /* CoreMedia.framework in Frameworks */,
 				552FF245113F247A005742C8 /* QTKit.framework in Frameworks */,
 				552386A4187E274C00D7FAB3 /* AVFoundation.framework in Frameworks */,
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
@@ -962,6 +965,7 @@
 				55D30F7E115832AB001C9DEC /* Carbon.framework */,
 				55B9225C11675D270073EC6C /* Quartz.framework */,
 				55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */,
+				55B07415188A1DA10023BA3E /* CoreMedia.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
