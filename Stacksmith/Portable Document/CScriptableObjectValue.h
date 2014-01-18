@@ -34,11 +34,11 @@
 
 
 
-extern struct LEOValueType	kLeoValueTypeScriptableObject;
-
-
 namespace Carlson
 {
+
+extern struct LEOValueType	kLeoValueTypeScriptableObject;
+
 
 class CStack;
 class CDocument;

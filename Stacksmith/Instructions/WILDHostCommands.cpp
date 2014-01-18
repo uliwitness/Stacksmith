@@ -409,6 +409,8 @@ void	WILDDeleteInstruction( LEOContext* inContext )
  a melody string off the back of the stack and hand both of them off to
  ULIMelodyQueue to play that melody using that instrument. Implements the 'play'
  command.
+ If the parameter is an object instead of an instrument, see if the object can
+ be started. If yes, start it instead.
  (WILD_PLAY_MELODY_INSTR)
  */
 
@@ -416,27 +418,40 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 {
 	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 
+	bool		couldStart = false;
 	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
 	LEOValuePtr	theMelody = inContext->stackEndPtr -1;
 	
-	char		instrNameStrBuf[256] = {};
-	const char*	instrNameStr = LEOGetValueAsString( theInstrument, instrNameStrBuf, sizeof(instrNameStrBuf), inContext );
-	if( !inContext->keepRunning )
-		return;
-	char		melodyStrBuf[256] = {};
-	const char*	melodyStr = LEOGetValueAsString( theMelody, melodyStrBuf, sizeof(melodyStrBuf), inContext );
-	if( !inContext->keepRunning )
-		return;
-	
-	std::string			mediaURL = frontStack->GetDocument()->GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
-		
-	if( mediaURL.length() == 0 )
+	if( theInstrument->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		LEOContextStopWithError( inContext, "Can't find sound '%s'.", instrNameStr );
-		return;
+		CScriptableObject*	thePart = (CScriptableObject*)theInstrument->object.object;
+		LEOValue	trueValue;
+		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
+		couldStart = thePart->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
+		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 	}
 	
-	CSound::PlaySoundWithURLAndMelody( mediaURL, melodyStr );
+	if( !couldStart )
+	{
+		char		instrNameStrBuf[256] = {};
+		const char*	instrNameStr = LEOGetValueAsString( theInstrument, instrNameStrBuf, sizeof(instrNameStrBuf), inContext );
+		if( !inContext->keepRunning )
+			return;
+		char		melodyStrBuf[256] = {};
+		const char*	melodyStr = LEOGetValueAsString( theMelody, melodyStrBuf, sizeof(melodyStrBuf), inContext );
+		if( !inContext->keepRunning )
+			return;
+		
+		std::string			mediaURL = frontStack->GetDocument()->GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
+			
+		if( mediaURL.length() == 0 )
+		{
+			LEOContextStopWithError( inContext, "Can't find sound '%s'.", instrNameStr );
+			return;
+		}
+		
+		CSound::PlaySoundWithURLAndMelody( mediaURL, melodyStr );
+	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 	
