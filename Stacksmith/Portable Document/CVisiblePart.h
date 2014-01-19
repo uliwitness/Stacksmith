@@ -42,6 +42,7 @@ enum
 	EPartTextStyleShadowBit,
 	EPartTextStyleCondensedBit,
 	EPartTextStyleExtendedBit,
+	EPartTextStyleGroupBit,
 	EPartTextStyleBit_Last	// The next bit after the last one used, used as a loop limit.
 };
 
@@ -56,6 +57,7 @@ enum
 	EPartTextStyleShadow	= (1 << EPartTextStyleShadowBit),
 	EPartTextStyleCondensed	= (1 << EPartTextStyleCondensedBit),
 	EPartTextStyleExtended	= (1 << EPartTextStyleExtendedBit),
+	EPartTextStyleGroup		= (1 << EPartTextStyleGroupBit),
 	EPartTextStyle_Last		= (1 << EPartTextStyleBit_Last)	// The next bit after the last one used, used as a loop limit.
 };
 typedef unsigned	TPartTextStyle;	// Bit field of above constants.

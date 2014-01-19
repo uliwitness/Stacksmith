@@ -27,9 +27,11 @@ public:
 	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
 	virtual void	SetPeeking( bool inState )			{ ApplyPeekingStateToView(inState, mView); };
+	virtual void	TextStylesChanged();
 	virtual NSDictionary*			GetCocoaAttributesForPart();
 
 	static NSAttributedString	*	GetCocoaAttributedString( CAttributedString * attrStr, NSDictionary * defaultAttrs );
+	static void						SetAttributedStringWithCocoa( CAttributedString& stringToSet, NSAttributedString* cocoaAttrStr );
 	
 protected:
 	~CFieldPartMac()	{ DestroyView(); };

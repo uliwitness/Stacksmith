@@ -8,6 +8,9 @@
 
 #include "CFieldPart.h"
 #include "CTinyXMLUtils.h"
+#include "CCard.h"
+#include "CBackground.h"
+#include "CStack.h"
 
 
 using namespace Carlson;
@@ -69,6 +72,176 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	std::string	styleStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );
 	mFieldStyle = GetFieldStyleFromString( styleStr.c_str() );
+}
+
+
+bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp("textStyle", inPropertyName) == 0 )
+	{
+		CPartContents*	theContents = NULL;
+		CCard	*		currCard = GetStack()->GetCurrentCard();
+		if( mOwner != currCard && !GetSharedText() )	// We're on the background layer, not on the card?
+			theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
+		else
+			theContents = mOwner->GetPartContentsByID( GetID(), (mOwner != currCard) );
+		std::map<std::string,std::string>	styles;
+		bool								mixed = false;
+		theContents->GetAttributedText().GetAttributesInRange( byteRangeStart, byteRangeEnd, styles, &mixed );
+		if( mixed )
+			LEOInitStringConstantValue( outValue, "mixed", kLEOInvalidateReferences, inContext );
+		else if( styles.size() == 0 )
+			LEOInitStringConstantValue( outValue, "plain", kLEOInvalidateReferences, inContext );
+		else
+		{
+			LEOArrayEntry	*	theArray = NULL;
+			char				tmpKey[512] = {0};
+			size_t				x = 0;
+			for( auto currStyle : styles )
+			{
+				if( currStyle.first.compare( "font-weight" ) == 0 && currStyle.second.compare( "bold" ) == 0 )
+				{
+					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
+					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "bold", inContext );
+				}
+				else if( currStyle.first.compare( "text-style" ) == 0 && currStyle.second.compare( "italic" ) == 0 )
+				{
+					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
+					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "italic", inContext );
+				}
+				else if( currStyle.first.compare( "text-decoration" ) == 0 && currStyle.second.compare( "underline" ) == 0 )
+				{
+					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
+					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "underline", inContext );
+				}
+				else if( currStyle.first.compare( "$link" ) == 0 )
+				{
+					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
+					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "group", inContext );
+				}
+				// +++ Add outline/shadow/condense/extend
+			}
+			
+			LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+		}
+	}
+	else if( strcasecmp("sharedText", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetSharedText(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("lockText", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mLockText, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("autoSelect", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mAutoSelect, kLEOInvalidateReferences, inContext );
+	}
+	else
+		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+	return true;
+}
+
+
+/*static*/ void	CFieldPart::ApplyStyleStringToRangeOfAttributedString( const char* currStyleName, size_t byteRangeStart, size_t byteRangeEnd, CAttributedString& attrStr )
+{
+	if( strcasecmp(currStyleName, "plain") == 0 )
+	{
+		attrStr.ClearAttributeForRange( "text-decoration", byteRangeStart, byteRangeEnd );
+		attrStr.ClearAttributeForRange( "font-weight", byteRangeStart, byteRangeEnd );
+		attrStr.ClearAttributeForRange( "text-style", byteRangeStart, byteRangeEnd );
+		attrStr.ClearAttributeForRange( "$link", byteRangeStart, byteRangeEnd );
+	}
+	else if( strcasecmp(currStyleName, "bold") == 0 )
+		attrStr.AddAttributeValueForRange( "font-weight", "bold", byteRangeStart, byteRangeEnd );
+	else if( strcasecmp(currStyleName, "italic") == 0 )
+		attrStr.AddAttributeValueForRange( "text-style", "italic", byteRangeStart, byteRangeEnd );
+	else if( strcasecmp(currStyleName, "underline") == 0 )
+		attrStr.AddAttributeValueForRange( "text-decoration", "underline", byteRangeStart, byteRangeEnd );
+	else if( strcasecmp(currStyleName, "group") == 0 )
+		attrStr.AddAttributeValueForRange( "$link", "#", byteRangeStart, byteRangeEnd );
+	else
+		;	// +++ Add outline/shadow/condense/extend
+}
+
+
+bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp("family", inPropertyName) == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEOInteger	familyNum = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetFamily( familyNum );
+	}
+	else if( strcasecmp("textStyle", inPropertyName) == 0 )
+	{
+		CPartContents*	theContents = NULL;
+		size_t	numStyles = LEOGetKeyCount( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		CCard	*		currCard = GetStack()->GetCurrentCard();
+		CLayer	*		contentsOwner = (mOwner != currCard && !GetSharedText()) ? currCard : mOwner;
+		theContents = contentsOwner->GetPartContentsByID( GetID(), (mOwner != currCard) );
+		if( !theContents )
+		{
+			theContents = new CPartContents( currCard );
+			theContents->SetID( GetID() );
+			theContents->SetIsOnBackground( mOwner != currCard );
+			contentsOwner->AddPartContents( theContents );
+		}
+
+		CAttributedString&	attrStr = theContents->GetAttributedText();
+		ApplyStyleStringToRangeOfAttributedString( "plain", byteRangeStart, byteRangeEnd, attrStr );	// Clear other styles.
+		LEOValue	tmpStorage = {{0}};
+		char		tmpKey[512] = {0};
+		for( size_t x = 1; x <= numStyles; x++ )
+		{
+			snprintf(tmpKey, sizeof(tmpKey)-1, "%zu", x );
+			LEOValuePtr theValue = LEOGetValueForKey( inValue, tmpKey, &tmpStorage, kLEOInvalidateReferences, inContext );
+			const char*	currStyleName = LEOGetValueAsString( theValue, tmpKey, sizeof(tmpKey), inContext );
+			if( !inContext->keepRunning )
+				return true;
+			ApplyStyleStringToRangeOfAttributedString( currStyleName, byteRangeStart, byteRangeEnd, attrStr );
+			if( theValue == &tmpStorage )
+				LEOCleanUpValue( theValue, kLEOInvalidateReferences, inContext );
+		}
+		
+		if( numStyles == 0 )	// Not a valid array? Also permit just specifying a single style string.
+		{
+			const char*	currStyleName = LEOGetValueAsString( inValue, tmpKey, sizeof(tmpKey), inContext );
+			if( !inContext->keepRunning )
+				return true;
+			ApplyStyleStringToRangeOfAttributedString( currStyleName, byteRangeStart, byteRangeEnd, attrStr );
+		}
+		
+		TextStylesChanged();
+	}
+	else if( strcasecmp("autoSelect", inPropertyName) == 0 )
+	{
+		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetAutoSelect( theHighlight );
+	}
+	else if( strcasecmp("sharedText", inPropertyName) == 0 )
+	{
+		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetSharedText( theHighlight );
+	}
+	else if( strcasecmp("lockText", inPropertyName) == 0 )
+	{
+		bool	theShowName = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetLockText( theShowName );
+	}
+	else
+		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+	return true;
 }
 
 

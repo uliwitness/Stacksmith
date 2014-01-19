@@ -14,6 +14,8 @@
 namespace Carlson {
 
 
+class CAttributedString;
+
 typedef enum
 {
 	EFieldStyleTransparent,
@@ -32,14 +34,29 @@ class CFieldPart : public CVisiblePart
 public:
 	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
 	
+	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
+	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+
 protected:
+	~CFieldPart()	{};
+	
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	
+	virtual bool			GetSharedText()					{ return mSharedText; };
+	virtual void			SetSharedText( bool inST )		{ mSharedText = inST; };
+	
+	virtual bool			GetLockText()					{ return mLockText; };
+	virtual void			SetLockText( bool inST )		{ mLockText = inST; };
+	
+	virtual bool			GetAutoSelect()					{ return mAutoSelect; };
+	virtual void			SetAutoSelect( bool inST )		{ mAutoSelect = inST; };
+	
+	virtual void			TextStylesChanged()				{};
 	
 	virtual const char*		GetIdentityForDump()	{ return "Field"; };
 	virtual void			DumpProperties( size_t inIndent );
-	
-	virtual bool			GetSharedText()			{ return mSharedText; };
 
+	static void				ApplyStyleStringToRangeOfAttributedString( const char* currStyleName, size_t byteRangeStart, size_t byteRangeEnd, CAttributedString& attrStr );
 	static TFieldStyle		GetFieldStyleFromString( const char* inStyleStr );
 	
 protected:
