@@ -25,7 +25,7 @@ using namespace Carlson;
 -(BOOL)	control: (NSControl *)control textShouldBeginEditing: (NSText *)fieldEditor
 {
 	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(textStorageDidProcessEditing:) name: NSTextStorageDidProcessEditingNotification object: ((NSTextView*) fieldEditor).textStorage];
-	NSLog( @"Editing started." );
+//	NSLog( @"Editing started." );
 	return YES;
 }
 
@@ -33,7 +33,7 @@ using namespace Carlson;
 -(BOOL)	control: (NSControl *)control textShouldEndEditing: (NSText *)fieldEditor
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self name: NSTextStorageDidProcessEditingNotification object: ((NSTextView*) fieldEditor).textStorage];
-	NSLog( @"Editing stopped." );
+//	NSLog( @"Editing stopped." );
 	
 	return YES;
 }
@@ -42,14 +42,14 @@ using namespace Carlson;
 -(void)	controlTextDidChange: (NSNotification *)obj
 {
 	self.owningField->SetViewTextNeedsSync( true );
-	NSLog( @"Edited text." );
+//	NSLog( @"Edited text." );
 }
 
 
 -(void)	textStorageDidProcessEditing: (NSNotification *)obj
 {
 	self.owningField->SetViewTextNeedsSync( true );
-	NSLog( @"Edited styles or so." );
+//	NSLog( @"Edited styles or so." );
 }
 
 @end;
@@ -192,7 +192,7 @@ NSDictionary*	CFieldPartMac::GetCocoaAttributesForPart()
 
 NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( CAttributedString * attrStr, NSDictionary * defaultAttrs )
 {
-	attrStr->Dump();
+//	attrStr->Dump();
 	NSMutableAttributedString	*	newAttrStr = [[[NSMutableAttributedString alloc] initWithString: [NSString stringWithUTF8String: attrStr->GetString().c_str()] attributes: defaultAttrs] autorelease];
 	attrStr->ForEachRangeDo([newAttrStr,defaultAttrs](CAttributeRange *currRange, const std::string &txt)
 	{
@@ -255,6 +255,8 @@ NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( CAttributedString 
 
 void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet, NSAttributedString* cocoaAttrStr )
 {
+//	stringToSet.Dump();
+	
 	stringToSet.SetString( cocoaAttrStr.string.UTF8String );
 	
 	[cocoaAttrStr enumerateAttributesInRange: NSMakeRange(0,cocoaAttrStr.length) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop)
@@ -280,20 +282,25 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 				{
 					stringToSet.AddAttributeValueForRange( "text-style", "italic", range.location, range.location +range.length );
 				}
+			//	stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSObliquenessAttributeName] && [attrValue integerValue] != 0 )
 			{
 				stringToSet.AddAttributeValueForRange( "text-style", "italic", range.location, range.location +range.length );
+			//	stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSUnderlineStyleAttributeName] && [attrValue integerValue] == NSUnderlineStyleSingle )
 			{
 				stringToSet.AddAttributeValueForRange( "text-decoration", "underline", range.location, range.location +range.length );
+			//	stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSLinkAttributeName] )
 			{
 				stringToSet.AddAttributeValueForRange( "$link", [[attrValue absoluteString] UTF8String], range.location, range.location +range.length );
+			//	stringToSet.Dump();
 			}
 		}
 	}];
 
+//	stringToSet.Dump();
 }

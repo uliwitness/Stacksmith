@@ -219,17 +219,8 @@ void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocumen
 void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribute, const std::string& inValue, size_t inStart, size_t inEnd )
 {
 //	Dump();
-
-	if( mRanges.size() == 0 )
-	{
-		CAttributeRange	theRange;
-		theRange.mStart = inStart;
-		theRange.mEnd = inEnd;
-		theRange.mAttributes[inAttribute] = inValue;
-		assert( theRange.mEnd >= theRange.mStart );
-		mRanges.push_back(theRange);
-		return;
-	}
+	
+	size_t	lastStyleEnd = 0;
 	
 	for( auto currRun = mRanges.begin(); currRun != mRanges.end(); currRun++ )
 	{
@@ -242,12 +233,17 @@ void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribut
 			theRange.mAttributes[inAttribute] = inValue;
 			assert( theRange.mEnd >= theRange.mStart );
 			currRun = mRanges.insert(currRun,theRange) +1;
+			lastStyleEnd = inEnd;
 		}
 		else if( inStart >= currRun->mEnd )
+		{
+			lastStyleEnd = currRun->mEnd;
 			continue;
+		}
 		else if( inStart <= currRun->mStart && inEnd >= currRun->mEnd )	// This range is completely in our new range, so we just add our attribute.
 		{
 			currRun->mAttributes[inAttribute] = inValue;
+			lastStyleEnd = currRun->mEnd;
 		}
 		else if( inEnd > currRun->mStart && inEnd < currRun->mEnd )	// Our new style needs to be applied to the start of this range.
 		{
@@ -258,6 +254,7 @@ void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribut
 			assert( theRange.mEnd >= theRange.mStart );
 			assert( currRun->mEnd >= currRun->mStart );
 			currRun = mRanges.insert(currRun,theRange) +1;
+			lastStyleEnd = currRun->mEnd;
 		}
 		else if( inStart > currRun->mStart && inEnd >= currRun->mEnd )	// Our new style needs to be applied to the end of this range.
 		{
@@ -269,6 +266,7 @@ void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribut
 			assert( theRange.mEnd >= theRange.mStart );
 			assert( currRun->mEnd >= currRun->mStart );
 			currRun = mRanges.insert(currRun,theRange) +1;
+			lastStyleEnd = currRun->mEnd;
 		}
 		else if( inStart > currRun->mStart && inEnd < currRun->mEnd )	// Our new style is smack-dab in the middle of this range
 		{
@@ -284,7 +282,19 @@ void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribut
 			assert( currRun->mEnd >= currRun->mStart );
 			currRun = mRanges.insert(currRun,beforeRange) +1;
 			currRun = mRanges.insert(currRun+1,afterRange) +1;
+			lastStyleEnd = afterRange.mEnd;
 		}
+	}
+	
+	if( inEnd > lastStyleEnd )
+	{
+		CAttributeRange	theRange;
+		theRange.mStart = (lastStyleEnd > inStart)? lastStyleEnd : inStart;
+		theRange.mEnd = inEnd;
+		theRange.mAttributes[inAttribute] = inValue;
+		assert( theRange.mEnd >= theRange.mStart );
+		mRanges.push_back(theRange);
+		return;
 	}
 
 //	Dump();
@@ -359,7 +369,7 @@ void	CAttributedString::ClearAttributeForRange( const std::string& inAttribute, 
 
 void	CAttributedString::ClearAllAttributesForRange( size_t inStart, size_t inEnd )
 {
-	Dump();
+//	Dump();
 	
 	for( auto currRun = mRanges.begin(); currRun != mRanges.end(); currRun++ )
 	{
@@ -395,7 +405,7 @@ void	CAttributedString::ClearAllAttributesForRange( size_t inStart, size_t inEnd
 		}
 	}
 	
-	Dump();
+//	Dump();
 }
 
 
@@ -437,6 +447,7 @@ void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,cons
 
 void	CAttributedString::Dump()
 {
+#if 0
 	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
 	{
 		std::string	text("<span style=\"");
@@ -473,5 +484,22 @@ void	CAttributedString::Dump()
 			text.append("</a>");
 		printf( "%s", text.c_str() );
 	} );
+#else
+	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
+	{
+		printf("[");
+		if( currRun )
+		{
+			printf("{%zu,%zu",currRun->mStart,currRun->mEnd);
+			for( auto currStyle : currRun->mAttributes )
+			{
+				printf(",%s:%s", currStyle.first.c_str(), currStyle.second.c_str() );
+			}
+			printf("}");
+		}
+		printf("%s]",inText.c_str());
+	} );
+	printf("\n\n");
+#endif
 }
 
