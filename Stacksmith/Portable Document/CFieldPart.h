@@ -32,10 +32,11 @@ typedef enum
 class CFieldPart : public CVisiblePart
 {
 public:
-	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
+	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mViewTextNeedsSync(false) {};
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	virtual void			SetViewTextNeedsSync( bool inNeeded )	{ mViewTextNeedsSync = inNeeded; };
 
 protected:
 	~CFieldPart()	{};
@@ -51,7 +52,8 @@ protected:
 	virtual bool			GetAutoSelect()					{ return mAutoSelect; };
 	virtual void			SetAutoSelect( bool inST )		{ mAutoSelect = inST; };
 	
-	virtual void			TextStylesChanged()				{};
+	virtual void			LoadChangedTextStylesIntoView()			{ mViewTextNeedsSync = false; };
+	virtual void			LoadChangedTextFromView()				{};
 	
 	virtual const char*		GetIdentityForDump()	{ return "Field"; };
 	virtual void			DumpProperties( size_t inIndent );
@@ -76,6 +78,7 @@ protected:
 	int				mTextSize;
 	bool			mHasHorizontalScroller;
 	bool			mHasVerticalScroller;
+	bool			mViewTextNeedsSync;		// Did the text in the view change and we haven't updated the part contents yet?
 	TFieldStyle		mFieldStyle;
 };
 

@@ -79,6 +79,9 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 {
 	if( strcasecmp("textStyle", inPropertyName) == 0 )
 	{
+		if( mViewTextNeedsSync )
+			LoadChangedTextFromView();
+		
 		CPartContents*	theContents = NULL;
 		CCard	*		currCard = GetStack()->GetCurrentCard();
 		if( mOwner != currCard && !GetSharedText() )	// We're on the background layer, not on the card?
@@ -177,6 +180,9 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	}
 	else if( strcasecmp("textStyle", inPropertyName) == 0 )
 	{
+		if( mViewTextNeedsSync )
+			LoadChangedTextFromView();
+		
 		CPartContents*	theContents = NULL;
 		size_t	numStyles = LEOGetKeyCount( inValue, inContext );
 		if( !inContext->keepRunning )
@@ -216,7 +222,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			ApplyStyleStringToRangeOfAttributedString( currStyleName, byteRangeStart, byteRangeEnd, attrStr );
 		}
 		
-		TextStylesChanged();
+		LoadChangedTextStylesIntoView();
 	}
 	else if( strcasecmp("autoSelect", inPropertyName) == 0 )
 	{

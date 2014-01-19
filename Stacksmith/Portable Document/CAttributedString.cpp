@@ -119,6 +119,9 @@ void	CAttributedString::NormalizeStyleRuns()
 				ab.mEnd = a.mEnd;
 				a.mEnd = b.mStart;
 				b.mStart = a.mEnd;
+				assert( ab.mEnd >= ab.mStart );
+				assert( a.mEnd >= a.mStart );
+				assert( b.mEnd >= b.mStart );
 				ab.mAttributes.insert( b.mAttributes.begin(), b.mAttributes.end() );
 				mRanges.insert( mRanges.begin() +x +1, ab);
 			}
@@ -140,6 +143,9 @@ void	CAttributedString::NormalizeStyleRuns()
 				ab.mEnd = a.mEnd;
 				a.mEnd = b.mStart;
 				b.mStart = a.mEnd;
+				assert( ab.mEnd >= ab.mStart );
+				assert( a.mEnd >= a.mStart );
+				assert( b.mEnd >= b.mStart );
 				ab.mAttributes.insert( b.mAttributes.begin(), b.mAttributes.end() );
 				mRanges.insert( mRanges.begin() +x +1, ab);
 			}
@@ -158,6 +164,8 @@ void	CAttributedString::NormalizeStyleRuns()
 			{
 				a.mEnd = b.mEnd;
 				b.mStart = b.mEnd;
+				assert( a.mEnd >= a.mStart );
+				assert( b.mEnd >= b.mStart );
 			}
 		}
 	}
@@ -210,7 +218,7 @@ void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocumen
 
 void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribute, const std::string& inValue, size_t inStart, size_t inEnd )
 {
-	Dump();
+//	Dump();
 
 	if( mRanges.size() == 0 )
 	{
@@ -218,20 +226,25 @@ void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribut
 		theRange.mStart = inStart;
 		theRange.mEnd = inEnd;
 		theRange.mAttributes[inAttribute] = inValue;
+		assert( theRange.mEnd >= theRange.mStart );
 		mRanges.push_back(theRange);
 		return;
 	}
 	
 	for( auto currRun = mRanges.begin(); currRun != mRanges.end(); currRun++ )
 	{
+		assert( currRun->mEnd >= currRun->mStart );
 		if( inEnd < currRun->mStart )	// Our new style is before this range.
 		{
 			CAttributeRange	theRange;
 			theRange.mStart = inStart;
 			theRange.mEnd = inEnd;
 			theRange.mAttributes[inAttribute] = inValue;
+			assert( theRange.mEnd >= theRange.mStart );
 			currRun = mRanges.insert(currRun,theRange) +1;
 		}
+		else if( inStart >= currRun->mEnd )
+			continue;
 		else if( inStart <= currRun->mStart && inEnd >= currRun->mEnd )	// This range is completely in our new range, so we just add our attribute.
 		{
 			currRun->mAttributes[inAttribute] = inValue;
@@ -242,14 +255,19 @@ void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribut
 			theRange.mEnd = inEnd;
 			currRun->mStart = inEnd;
 			theRange.mAttributes[inAttribute] = inValue;
+			assert( theRange.mEnd >= theRange.mStart );
+			assert( currRun->mEnd >= currRun->mStart );
 			currRun = mRanges.insert(currRun,theRange) +1;
 		}
 		else if( inStart > currRun->mStart && inEnd >= currRun->mEnd )	// Our new style needs to be applied to the end of this range.
 		{
+			assert( currRun->mEnd >= inStart );
 			CAttributeRange	theRange = *currRun;
 			theRange.mEnd = inStart;
 			currRun->mStart = inStart;
 			currRun->mAttributes[inAttribute] = inValue;
+			assert( theRange.mEnd >= theRange.mStart );
+			assert( currRun->mEnd >= currRun->mStart );
 			currRun = mRanges.insert(currRun,theRange) +1;
 		}
 		else if( inStart > currRun->mStart && inEnd < currRun->mEnd )	// Our new style is smack-dab in the middle of this range
@@ -261,18 +279,21 @@ void	CAttributedString::AddAttributeValueForRange( const std::string& inAttribut
 			currRun->mStart = inStart;
 			currRun->mEnd = inEnd;
 			currRun->mAttributes[inAttribute] = inValue;
+			assert( beforeRange.mEnd >= beforeRange.mStart );
+			assert( afterRange.mEnd >= afterRange.mStart );
+			assert( currRun->mEnd >= currRun->mStart );
 			currRun = mRanges.insert(currRun,beforeRange) +1;
 			currRun = mRanges.insert(currRun+1,afterRange) +1;
 		}
 	}
 
-	Dump();
+//	Dump();
 }
 
 
 void	CAttributedString::ClearAttributeForRange( const std::string& inAttribute, size_t inStart, size_t inEnd )
 {
-	Dump();
+//	Dump();
 
 	for( auto currRun = mRanges.begin(); currRun != mRanges.end(); currRun++ )
 	{
@@ -281,6 +302,8 @@ void	CAttributedString::ClearAttributeForRange( const std::string& inAttribute, 
 			// Nothing to do anymore.
 			break;
 		}
+		else if( inStart >= currRun->mEnd )
+			continue;
 		else if( inStart <= currRun->mStart && inEnd >= currRun->mEnd )	// This range is completely in our new range, so we just remove our attribute.
 		{
 			auto	foundAttr = currRun->mAttributes.find(inAttribute);
@@ -292,6 +315,8 @@ void	CAttributedString::ClearAttributeForRange( const std::string& inAttribute, 
 			CAttributeRange	theRange = *currRun;
 			theRange.mEnd = inEnd;
 			currRun->mStart = inEnd;
+			assert( theRange.mEnd >= theRange.mStart );
+			assert( currRun->mEnd >= currRun->mStart );
 			auto	foundAttr = theRange.mAttributes.find(inAttribute);
 			if( foundAttr != theRange.mAttributes.end() )
 				theRange.mAttributes.erase(foundAttr);
@@ -302,14 +327,33 @@ void	CAttributedString::ClearAttributeForRange( const std::string& inAttribute, 
 			CAttributeRange	theRange = *currRun;
 			theRange.mStart = inStart;
 			currRun->mEnd = inStart;
+			assert( theRange.mEnd >= theRange.mStart );
+			assert( currRun->mEnd >= currRun->mStart );
 			auto	foundAttr = theRange.mAttributes.find(inAttribute);
 			if( foundAttr != theRange.mAttributes.end() )
 				theRange.mAttributes.erase(foundAttr);
 			currRun = mRanges.insert(currRun,theRange) +1;
 		}
+		else if( inStart > currRun->mStart && inEnd < currRun->mEnd )	// Our new style is smack-dab in the middle of this range
+		{
+			CAttributeRange	beforeRange = *currRun;
+			CAttributeRange	afterRange = *currRun;
+			beforeRange.mEnd = inStart;
+			afterRange.mStart = inEnd;
+			currRun->mStart = inStart;
+			currRun->mEnd = inEnd;
+			auto	foundAttr = currRun->mAttributes.find(inAttribute);
+			if( foundAttr != currRun->mAttributes.end() )
+				currRun->mAttributes.erase(foundAttr);
+			assert( beforeRange.mEnd >= beforeRange.mStart );
+			assert( afterRange.mEnd >= afterRange.mStart );
+			assert( currRun->mEnd >= currRun->mStart );
+			currRun = mRanges.insert(currRun,beforeRange) +1;
+			currRun = mRanges.insert(currRun+1,afterRange) +1;
+		}
 	}
 
-	Dump();
+//	Dump();
 }
 
 
@@ -324,6 +368,8 @@ void	CAttributedString::ClearAllAttributesForRange( size_t inStart, size_t inEnd
 			// Nothing to do anymore.
 			break;
 		}
+		else if( inStart >= currRun->mEnd )
+			continue;
 		else if( inStart <= currRun->mStart && inEnd >= currRun->mEnd )	// This range is completely in our new range, so we just remove our attribute.
 		{
 			currRun = mRanges.erase(currRun);
@@ -331,10 +377,21 @@ void	CAttributedString::ClearAllAttributesForRange( size_t inStart, size_t inEnd
 		else if( inEnd > currRun->mStart && inEnd < currRun->mEnd )	// Our new style needs to be applied to the start of this range.
 		{
 			currRun->mStart = inEnd;
+			assert( currRun->mEnd >= currRun->mStart );
 		}
 		else if( inStart > currRun->mStart && inEnd > currRun->mEnd )	// Our new style needs to be applied to the end of this range.
 		{
 			currRun->mEnd = inStart;
+			assert( currRun->mEnd >= currRun->mStart );
+		}
+		else if( inStart > currRun->mStart && inEnd < currRun->mEnd )	// Our new style is smack-dab in the middle of this range
+		{
+			CAttributeRange	beforeRange = *currRun;
+			beforeRange.mEnd = inStart;
+			currRun->mStart = inEnd;
+			assert( beforeRange.mEnd >= beforeRange.mStart );
+			assert( currRun->mEnd >= currRun->mStart );
+			currRun = mRanges.insert(currRun,beforeRange) +1;
 		}
 	}
 	
@@ -369,6 +426,7 @@ void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,cons
 	{
 		if( currOffs < currRun.mStart )
 			inCallback( NULL, mString.substr( currOffs, currRun.mStart -currOffs ) );
+		assert( currRun.mEnd >= currRun.mStart );
 		inCallback( &currRun, mString.substr( currRun.mStart, currRun.mEnd -currRun.mStart ) );
 		currOffs = currRun.mEnd;
 	}
@@ -409,7 +467,7 @@ void	CAttributedString::Dump()
 		if( !currRun )
 			text = "";
 		text.append( inText );
-		if( currLink.length() == 0 || (currRun && currRun->mAttributes.size() > 1) )
+		if( (currRun && currLink.length() == 0) || (currRun && currRun->mAttributes.size() > 1) )
 			text.append("</span>");
 		if( currLink.length() > 0 )
 			text.append("</a>");

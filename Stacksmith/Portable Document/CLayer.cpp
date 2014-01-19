@@ -110,7 +110,7 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 					CURLConnection::SendRequestWithCompletionHandler( styleSheetRequest, [this,root,document](CURLResponse inStyleSheetResponse, const char* inStyleSheetData, size_t inStyleSheetDataLength)
 					{
 						mStyles.LoadFromStream( std::string( inStyleSheetData, inStyleSheetDataLength ) );
-						mStyles.Dump();
+						//mStyles.Dump();
 						
 						// Load part contents:
 						tinyxml2::XMLElement	*	currPartContentsElem = root->FirstChildElement( "content" );

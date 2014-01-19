@@ -13,21 +13,23 @@
 #include "CFieldPart.h"
 #include "CMacPartBase.h"
 
+@class WILDFieldDelegate;
 
 namespace Carlson {
 
-
 class CAttributedString;
+
 
 class CFieldPartMac : public CFieldPart, public CMacPartBase
 {
 public:
-	CFieldPartMac( CLayer *inOwner ) : CFieldPart( inOwner ), mView(nil) {};
+	CFieldPartMac( CLayer *inOwner );
 
 	virtual void	CreateViewIn( NSView* inSuperView );
-	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; };
+	virtual void	DestroyView();
 	virtual void	SetPeeking( bool inState )			{ ApplyPeekingStateToView(inState, mView); };
-	virtual void	TextStylesChanged();
+	virtual void	LoadChangedTextStylesIntoView();
+	virtual void	LoadChangedTextFromView();
 	virtual NSDictionary*			GetCocoaAttributesForPart();
 
 	static NSAttributedString	*	GetCocoaAttributedString( CAttributedString * attrStr, NSDictionary * defaultAttrs );
@@ -35,8 +37,9 @@ public:
 	
 protected:
 	~CFieldPartMac()	{ DestroyView(); };
-	
-	NSTextField	*	mView;
+
+	NSTextField	*		mView;
+	WILDFieldDelegate*	mMacDelegate;
 };
 
 
