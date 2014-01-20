@@ -58,7 +58,7 @@ CPartCreatorBase*	CPart::GetPartCreatorForType( const char* inType )
 
 
 CPart::CPart( CLayer *inOwner )
-	: mFamily(0), mOwner(inOwner)
+	: mFamily(0), mOwner(inOwner), mSelected(false)
 {
 	mDocument = inOwner->GetDocument();
 }

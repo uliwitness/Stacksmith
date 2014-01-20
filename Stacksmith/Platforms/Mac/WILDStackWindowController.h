@@ -34,10 +34,16 @@ class CStackMac;
 
 -(void)	drawBoundingBoxes;
 
+-(Carlson::CStackMac*)	cppStack;
+
 @end
 
 
 @interface WILDFlippedContentView : NSView
+{
+	NSView	*	lastHitView;
+}
+
 
 @end
 

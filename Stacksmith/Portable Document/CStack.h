@@ -27,7 +27,7 @@ public:
 	static CStack*	GetFrontStack()						{ return sFrontStack; };
 	static void		SetFrontStack( CStack* inStack )	{ sFrontStack = inStack; };
 
-	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName) { mName = inName; mDocument = inDocument; };
+	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	void			Save();
@@ -60,6 +60,7 @@ public:
 	size_t			GetCardHeight()					{ return mCardHeight; };
 	
 	virtual void	SetPeeking( bool inState );
+	virtual bool	GetPeeking()					{ return mPeeking; };
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	
@@ -69,6 +70,7 @@ protected:
 protected:
 	bool						mLoading;			// Currently loading, not yet ready for use.
 	bool						mLoaded;			// Finished loading, ready for use.
+	bool						mPeeking;			// Are we currently showing the "peek" outline.
 	std::string					mURL;				// URL of the file backing this stack on disk.
 	std::string					mFileName;			// Partial path relative to containing .xstk package to our file (i.e. the one at mURL).
 	ObjectID					mStackID;			// Unique ID number of this stack in the document.

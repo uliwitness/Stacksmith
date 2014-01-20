@@ -247,6 +247,7 @@ size_t	CStack::GetIndexOfBackground( CBackground* inBackground )
 
 void	CStack::SetPeeking( bool inState )
 {
+	mPeeking = inState;
 	CCard	*	theCard = GetCurrentCard();
 	if( theCard )
 		theCard->SetPeeking( inState );

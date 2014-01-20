@@ -82,7 +82,9 @@ public:
 	virtual CStack*				GetStack();
 	virtual CPartContents*		GetContentsOnCurrentCard();
 	
-	virtual bool				GetSharedText()				{ return true; };	// By default, background part contents are the same on all cards of that background.
+	virtual bool				GetSharedText()					{ return true; };	// By default, background part contents are the same on all cards of that background.
+	virtual void				SetSelected( bool inSelected )	{ mSelected = inSelected; };
+	virtual bool				IsSelected()					{ return mSelected; };
 	
 	virtual void				Dump( size_t inIndent = 0 );
 	
@@ -99,6 +101,7 @@ protected:
 	LEOInteger			mBottom;
 	CLayer	*			mOwner;		// Card/background we are on.
 	CPartCreatorBase*	mPartType;	// Only used for comparing if two parts are same type.
+	bool				mSelected;
 };
 
 
