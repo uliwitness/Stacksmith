@@ -36,10 +36,16 @@ using namespace Carlson;
 	self.messageBox->Run();
 }
 
+-(void)	windowWillClose: (NSNotification *)notification
+{
+	self.messageBox->SetVisible(false);
+}
+
 @end
 
 
 CMessageBoxMac::CMessageBoxMac()
+: mVisible(false)
 {
 	mMacWindowController = [[WILDMessageBoxWindowController alloc] initWithWindowNibName: @"WILDMessageBoxWindowController"];
 	mMacWindowController.messageBox = this;
@@ -79,6 +85,7 @@ bool	CMessageBoxMac::SetTextContents( std::string inString )
 	NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString: str attributes:@{ NSForegroundColorAttributeName: NSColor.whiteColor, NSFontAttributeName: [NSFont userFixedPitchFontOfSize: 12.0] }] autorelease];
 	[mMacWindowController.messageField.textStorage setAttributedString: attrStr];
 	[mMacWindowController.window makeKeyAndOrderFront: nil];
+	mVisible = true;
 	[mMacWindowController.messageField setSelectedRange: NSMakeRange( mMacWindowController.messageField.string.length, 0)];
 	[mMacWindowController.window display];
 	
@@ -106,7 +113,7 @@ bool	CMessageBoxMac::GetPropertyNamed( const char* inPropertyName, size_t byteRa
 	}
 	else if( strcasecmp("visible", inPropertyName) == 0 )
 	{
-		LEOInitBooleanValue( outValue, [mMacWindowController.window windowNumber] != 0, kLEOInvalidateReferences, inContext );
+		LEOInitBooleanValue( outValue, mVisible, kLEOInvalidateReferences, inContext );
 	}
 	else
 		return CMessageBox::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
@@ -145,6 +152,7 @@ bool	CMessageBoxMac::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* 
 			[mMacWindowController.window makeKeyAndOrderFront: nil];
 		else
 			[mMacWindowController.window orderOut: nil];
+		mVisible = isVisible;
 	}
 	else
 		return CMessageBox::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

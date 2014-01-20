@@ -36,8 +36,11 @@ public:
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	
+	void			SetVisible( bool inVis )	{ mVisible = inVis; };
+	
 protected:
 	WILDMessageBoxWindowControllerPtr	mMacWindowController;
+	bool								mVisible;
 };
 
 

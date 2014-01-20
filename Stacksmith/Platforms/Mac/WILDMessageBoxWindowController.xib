@@ -70,6 +70,9 @@ DQ
                     </button>
                 </subviews>
             </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="4cB-Nu-gcM"/>
+            </connections>
         </window>
     </objects>
 </document>

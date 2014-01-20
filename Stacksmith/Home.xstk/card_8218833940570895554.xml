@@ -331,9 +331,9 @@ end mouseUp</script>
 		<textSize>13</textSize>
 		<hasHorizontalScroller><true /></hasHorizontalScroller>
 		<hasVerticalScroller><true /></hasVerticalScroller>
-		<name>Hotspot</name>
+		<name>Message Box!</name>
 		<script>on mouseUp
-	
+	set the visible of message box to not the visible of message box
 end mouseUp</script>
 	</part>
 	<part>
