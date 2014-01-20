@@ -13,7 +13,7 @@
 using namespace Carlson;
 
 
-CStack*		CDocumentMac::NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument )
+CStack*		CDocumentMac::NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument )
 {
-	return new CStackMac( inURL, inID, inName, inDocument );
+	return new CStackMac( inURL, inID, inName, inFileName, inDocument );
 }

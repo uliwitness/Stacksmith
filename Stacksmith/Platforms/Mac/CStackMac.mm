@@ -23,8 +23,8 @@ using namespace Carlson;
 
 
 
-CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument )
-	: CStack( inURL, inID, inName, inDocument )
+CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument )
+	: CStack( inURL, inID, inName, inFileName, inDocument )
 {
 	mMacWindowController = nil;
 }

@@ -158,7 +158,7 @@ CPartContents*	CLayer::GetPartContentsByID( ObjectID inID, bool isForBackgroundP
 {
 	for( auto itty = mContents.begin(); itty != mContents.end(); itty++ )
 	{
-		if( (**itty).GetID() == inID && (**itty).GetIsOnBackground() == isForBackgroundPart )
+		if( (**itty).GetID() == inID && (**itty).IsOnBackground() == isForBackgroundPart )
 			return *itty;
 	}
 	

@@ -118,6 +118,31 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 	} );
 }
 
+
+void	CStack::Save()
+{
+	tinyxml2::XMLDocument		document;
+	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
+	declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
+	document.InsertEndChild( declaration );
+	
+	tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE stack PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\"");
+	document.InsertEndChild( dtd );
+	
+	tinyxml2::XMLElement*		root = document.NewElement("stack");
+	document.InsertEndChild( root );
+	
+//	tinyxml2::XMLElement*		createdByElement = document.NewElement("createdByVersion");
+//	root->InsertEndChild( createdByElement );
+//	tinyxml2::XMLText*			createdByText = document.NewText(mCreatedByVersion.c_str());
+//	createdByElement->InsertEndChild(createdByText);
+
+	std::string	stackFilePath("/Users/uli/Saved.xstk/");
+	stackFilePath.append(mFileName);
+	document.SaveFile( stackFilePath.c_str() );
+}
+
+
 void	CStack::AddCard( CCard* inCard )
 {
 	inCard->Retain();

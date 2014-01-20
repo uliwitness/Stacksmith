@@ -11,6 +11,8 @@
 #include "CStack.h"
 #include "CTinyXMLUtils.h"
 #include "CVisiblePart.h"
+#include <sys/stat.h>
+#include "StacksmithVersion.h"
 
 
 using namespace Carlson;
@@ -58,6 +60,8 @@ void	CDocument::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root,
 				mediaType = EMediaTypeCursor;
 			else if( typeName.compare( "sound" ) == 0 )
 				mediaType = EMediaTypeSound;
+			else if( typeName.compare( "pattern" ) == 0 )
+				mediaType = EMediaTypePattern;
 			tinyxml2::XMLElement	*	hotspotElem = currMediaElem->FirstChildElement( "hotspot" );
 			int		hotspotLeft = CTinyXMLUtils::GetIntNamed( hotspotElem, "left", 0 );
 			int		hotspotTop = CTinyXMLUtils::GetIntNamed( hotspotElem, "top", 0 );
@@ -124,6 +128,10 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			mLastEditedVersion.clear();
 			CTinyXMLUtils::GetStringNamed( root, "lastEditedVersion", mLastEditedVersion );
 			
+			mUserLevel = CTinyXMLUtils::GetIntNamed( root, "userLevel", 5 );
+			mPrivateAccess = CTinyXMLUtils::GetBoolNamed( root, "privateAccess", false );
+			mCantPeek = CTinyXMLUtils::GetBoolNamed( root, "cantPeek", false );
+
 			if( sStandardResourcesPath.length() > 0 )
 			{
 				tinyxml2::XMLDocument		standardResDocument;
@@ -144,14 +152,15 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			
 			while( currStackElem )
 			{
+				std::string		fileName( currStackElem->Attribute("file") );
 				std::string		stackURL = mURL;
 				stackURL.append( 1, '/' );
-				stackURL.append( currStackElem->Attribute("file") );
+				stackURL.append( fileName );
 				char*			endPtr = NULL;
 				ObjectID	stackID = strtoll( currStackElem->Attribute("id"), &endPtr, 10 );
 				const char*		theName = currStackElem->Attribute("name");
 				
-				CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, (theName ? theName : ""), this );
+				CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, (theName ? theName : ""), fileName, this );
 				theStack->Autorelease();
 				mStacks.push_back( theStack );
 				
@@ -159,8 +168,146 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			}
 		}
 		
+		Save();	// +++
+		
 		CallAllCompletionBlocks();
 	} );
+}
+
+
+void	CDocument::Save()
+{
+	tinyxml2::XMLDocument		document;
+	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
+	declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
+	document.InsertEndChild( declaration );
+	
+	tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE project PUBLIC \"-//Apple, Inc.//DTD project V 2.0//EN\" \"\"");
+	document.InsertEndChild( dtd );
+	
+	tinyxml2::XMLElement*		stackfile = document.NewElement("project");
+	document.InsertEndChild( stackfile );
+	
+	char	numStr[512] = {0};
+	for( auto currStack : mStacks )
+	{
+		tinyxml2::XMLElement*	stackElement = document.NewElement("stack");
+		snprintf( numStr, sizeof(numStr) -1, "%lld", currStack->GetID() );
+		stackElement->SetAttribute( "id", numStr );
+		stackElement->SetAttribute( "file", currStack->GetFileName().c_str() );
+		stackElement->SetAttribute( "name", currStack->GetName().c_str() );
+		stackfile->InsertEndChild( stackElement );
+		
+		currStack->Save();
+	}
+	
+	tinyxml2::XMLElement*		userLevelElement = document.NewElement("userLevel");
+	snprintf( numStr, sizeof(numStr) -1, "%d", mUserLevel );
+	stackfile->InsertEndChild( userLevelElement );
+	tinyxml2::XMLText*			userLevelText = document.NewText(numStr);
+	userLevelElement->InsertEndChild(userLevelText);
+
+	tinyxml2::XMLElement*		privateAccessElement = document.NewElement("privateAccess");
+	stackfile->InsertEndChild( privateAccessElement );
+	tinyxml2::XMLElement*		privateAccessBool = document.NewElement(mPrivateAccess?"true":"false");
+	privateAccessElement->InsertEndChild(privateAccessBool);
+
+	tinyxml2::XMLElement*		cantPeekElement = document.NewElement("cantPeek");
+	stackfile->InsertEndChild( cantPeekElement );
+	tinyxml2::XMLElement*		cantPeekBool = document.NewElement(mCantPeek?"true":"false");
+	cantPeekElement->InsertEndChild(cantPeekBool);
+	
+	tinyxml2::XMLElement*		createdByElement = document.NewElement("createdByVersion");
+	stackfile->InsertEndChild( createdByElement );
+	tinyxml2::XMLText*			createdByText = document.NewText(mCreatedByVersion.c_str());
+	createdByElement->InsertEndChild(createdByText);
+
+	createdByElement = document.NewElement("lastCompactedVersion");
+	stackfile->InsertEndChild( createdByElement );
+	createdByText = document.NewText(mLastCompactedVersion.c_str());
+	createdByElement->InsertEndChild(createdByText);
+
+	createdByElement = document.NewElement("firstEditedVersion");
+	stackfile->InsertEndChild( createdByElement );
+	createdByText = document.NewText(mFirstEditedVersion.c_str());
+	createdByElement->InsertEndChild(createdByText);
+
+	createdByElement = document.NewElement("lastEditedVersion");
+	stackfile->InsertEndChild( createdByElement );
+	createdByText = document.NewText("Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION));
+	createdByElement->InsertEndChild(createdByText);
+	
+	for( auto currEntry : mMediaList )
+	{
+		if( currEntry.IsBuiltIn() )
+			continue;
+		
+		tinyxml2::XMLElement*	mediaElement = document.NewElement("media");
+		const char*				mediaTypeStr = NULL;
+		switch( currEntry.GetMediaType() )
+		{
+			case EMediaTypeCursor:
+				mediaTypeStr = "cursor";
+				break;
+			case EMediaTypeIcon:
+				mediaTypeStr = "icon";
+				break;
+			case EMediaTypeSound:
+				mediaTypeStr = "sound";
+				break;
+			case EMediaTypePicture:
+				mediaTypeStr = "picture";
+				break;
+			case EMediaTypePattern:
+				mediaTypeStr = "pattern";
+				break;
+			case EMediaTypeUnknown:
+				break;
+		}
+
+		snprintf(numStr, sizeof(numStr)-1, "%lld", currEntry.GetID());
+		
+		tinyxml2::XMLElement*	idElem = document.NewElement("id");
+		tinyxml2::XMLText*		idText = document.NewText(numStr);
+		idElem->InsertEndChild( idText );
+		mediaElement->InsertEndChild( idElem );
+		
+		tinyxml2::XMLElement*	nameElem = document.NewElement("name");
+		tinyxml2::XMLText*		nameText = document.NewText(currEntry.GetName().c_str());
+		nameElem->InsertEndChild( nameText );
+		mediaElement->InsertEndChild( nameElem );
+
+		tinyxml2::XMLElement*	fileElem = document.NewElement("file");
+		tinyxml2::XMLText*		fileText = document.NewText(currEntry.GetFileName().c_str());
+		fileElem->InsertEndChild( fileText );
+		mediaElement->InsertEndChild( fileElem );
+
+		tinyxml2::XMLElement*	typeElem = document.NewElement("type");
+		tinyxml2::XMLText*		typeText = document.NewText(mediaTypeStr);
+		typeElem->InsertEndChild( typeText );
+		mediaElement->InsertEndChild( typeElem );
+		
+		if( currEntry.GetMediaType() == EMediaTypeCursor )
+		{
+			tinyxml2::XMLElement*	hotspotElem = document.NewElement("hotspot");
+			tinyxml2::XMLElement*	leftElem = document.NewElement("left");
+			tinyxml2::XMLElement*	topElem = document.NewElement("top");
+			snprintf(numStr, sizeof(numStr)-1, "%d", currEntry.GetHotspotLeft());
+			tinyxml2::XMLText*		hotspotText = document.NewText(numStr);
+			leftElem->InsertEndChild( hotspotText );
+			snprintf(numStr, sizeof(numStr)-1, "%d", currEntry.GetHotspotTop());
+			hotspotText = document.NewText(numStr);
+			topElem->InsertEndChild( hotspotText );
+			hotspotElem->InsertEndChild( leftElem );
+			hotspotElem->InsertEndChild( topElem );
+			mediaElement->InsertEndChild( hotspotElem );
+		}
+		
+		stackfile->InsertEndChild( mediaElement );
+	}
+
+	mkdir( "/Users/uli/Saved.xstk", 0777 );
+	document.SaveFile( "/Users/uli/Saved.xstk/toc.xml" );
 }
 
 
@@ -282,9 +429,9 @@ LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 }
 
 
-CStack*		CDocument::NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument )
+CStack*		CDocument::NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument )
 {
-	return new CStack( inURL, inID, inName, inDocument );
+	return new CStack( inURL, inID, inName, inFileName, inDocument );
 }
 
 

@@ -19,10 +19,11 @@ namespace Carlson {
 typedef enum
 {
 	EMediaTypeUnknown = 0,
-	EMediaTypeIcon,
-	EMediaTypePicture,
-	EMediaTypeCursor,
-	EMediaTypeSound
+	EMediaTypeIcon,			// Preferred image type to use for images in new stacks.
+	EMediaTypePicture,		// Compatibility image type used for PICT resources.
+	EMediaTypeCursor,		// Compatibility image type used for CURS resources.
+	EMediaTypeSound,		// Preferred media type for sounds in new stacks.
+	EMediaTypePattern		// Compatibility image type used for the 40 patterns in a HyperCard stack.
 } TMediaType;
 
 
@@ -38,9 +39,12 @@ public:
 	const std::string	GetName() const		{ return mIconName; };
 	TMediaType			GetMediaType() const{ return mMediaType; };
 	const std::string	GetFileName() const { return mFileName; };
+	int					GetHotspotLeft() const	{ return mHotspotLeft; };
+	int					GetHotspotTop() const	{ return mHotspotTop; };
+	bool				IsBuiltIn() const		{ return mIsBuiltIn; };
 	
 protected:
-	ObjectID	mIconID;
+	ObjectID		mIconID;
 	std::string		mIconName;
 	std::string		mFileName;
 	TMediaType		mMediaType;
@@ -55,11 +59,12 @@ class CDocument : public CRefCountedObject
 public:
 	static void		SetStandardResourcesPath( const std::string& inStdResPath );
 
-	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mContextGroup(NULL) {};
+	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false) {};
 	
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
+	void				Save();
 	
-	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, CDocument * inDocument );
+	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	
 	std::string			GetURL()					{ return mURL; };
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
@@ -90,6 +95,9 @@ protected:
 	std::string										mLastCompactedVersion;
 	std::string										mFirstEditedVersion;
 	std::string										mLastEditedVersion;
+	int												mUserLevel;
+	bool											mPrivateAccess;
+	bool											mCantPeek;
 	std::string										mURL;
 	std::vector<CMediaEntry>						mMediaList;
 	std::vector<CStackRef>							mStacks;

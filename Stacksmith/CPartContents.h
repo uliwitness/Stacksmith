@@ -36,7 +36,7 @@ public:
 	void				SetText( std::string inText )	{ mAttributedString.SetString( inText ); };
 	CAttributedString&	GetAttributedText()				{ return mAttributedString; };
 	void				SetAttributedText( const CAttributedString& inAttrStr )		{ mAttributedString = inAttrStr; };
-	bool				GetIsOnBackground()				{ return mIsOnBackground; };
+	bool				IsOnBackground()				{ return mIsOnBackground; };
 	void				SetIsOnBackground( bool inBg )	{ mIsOnBackground = inBg; };
 
 protected:
