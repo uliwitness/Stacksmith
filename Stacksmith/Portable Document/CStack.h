@@ -65,6 +65,8 @@ public:
 	virtual void	Dump( size_t inIndent = 0 );
 	
 protected:
+	void			CallAllCompletionBlocks();
+	
 	~CStack();
 
 protected:
@@ -88,6 +90,7 @@ protected:
 	std::vector<CBackgroundRef>	mBackgrounds;		// List of all backgrounds in this stack.
 	std::set<CCardRef>			mMarkedCards;		// List of all cards in this stack.
 	CCardRef					mCurrentCard;		// The card that is currently being shown in this stack's window.
+	std::vector<std::function<void(CStack*)>>	mLoadCompletionBlocks;
 	
 	static CStack*				sFrontStack;		// The stack whose window is currently frontmost and will e.g. receive messages from the message box.
 };

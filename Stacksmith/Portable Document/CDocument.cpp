@@ -168,8 +168,6 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			}
 		}
 		
-		Save();	// +++
-		
 		CallAllCompletionBlocks();
 	} );
 }

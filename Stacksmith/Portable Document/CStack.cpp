@@ -33,6 +33,19 @@ CStack::~CStack()
 
 void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 {
+	if( mLoaded )
+	{
+		inCompletionBlock( this );
+		return;
+	}
+	
+	mLoadCompletionBlocks.push_back( inCompletionBlock );
+	
+	if( mLoading )	// We'll call you, too, once we have finished loading.
+		return;
+	
+	mLoading = true;
+	
 	Retain();
 	
 	CURLRequest		request( mURL );
@@ -113,14 +126,29 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 			}
 		}
 		
-		inCompletionBlock( this );
+		CallAllCompletionBlocks();
 		Release();
 	} );
 }
 
 
+void	CStack::CallAllCompletionBlocks()
+{
+	mLoaded = true;
+	mLoading = false;
+	
+	for( auto itty = mLoadCompletionBlocks.begin(); itty != mLoadCompletionBlocks.end(); itty++ )
+		(*itty)( this );
+	mLoadCompletionBlocks.clear();
+}
+
+
+
 void	CStack::Save()
 {
+	if( !mLoaded )
+		return;
+	
 	tinyxml2::XMLDocument		document;
 	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
 	declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
@@ -307,7 +335,8 @@ void	CStack::SetPeeking( bool inState )
 void	CStack::Dump( size_t inIndent )
 {
 	const char * indentStr = IndentString( inIndent );
-	printf( "%sStack ID %lld \"%s\"\n%s{\n", indentStr, mStackID, mName.c_str(), indentStr );
+	printf( "%sStack ID %lld \"%s\" <%p>\n%s{\n", indentStr, mStackID, mName.c_str(), this, indentStr );
+	printf( "%s\tloaded = %s\n", indentStr, (mLoaded? "true" : "false") );
 	printf( "%s\tuserLevel = %d\n", indentStr, mUserLevel );
 	printf( "%s\twidth = %d\n", indentStr, mCardWidth );
 	printf( "%s\theight = %d\n", indentStr, mCardHeight );
