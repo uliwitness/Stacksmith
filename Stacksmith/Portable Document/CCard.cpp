@@ -37,6 +37,15 @@ void	CCard::CallAllCompletionBlocks()
 }
 
 
+void	CCard::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document )
+{
+	CLayer::SavePropertiesToElementOfDocument( stackfile, document );
+	
+	tinyxml2::XMLElement*	elem = document->NewElement("owner");
+	elem->SetText( mOwningBackground->GetID() );
+	stackfile->InsertEndChild(elem);
+}
+
 void	CCard::WakeUp()
 {
 	CLayer::WakeUp();
