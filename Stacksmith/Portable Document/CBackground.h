@@ -16,7 +16,7 @@ namespace Carlson {
 class CBackground : public CLayer
 {
 public:
-	CBackground( std::string inURL, ObjectID inID, const std::string inName, CStack* inStack ) : CLayer(inURL,inID,inName,inStack)	{};
+	CBackground( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack ) : CLayer(inURL,inID,inName,inFileName,inStack)	{};
 	~CBackground()	{ printf("Released Background %p\n",this); };
 
 	virtual void	WakeUp();		// The current card has started its timers etc.

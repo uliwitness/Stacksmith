@@ -26,12 +26,15 @@ class CStack;
 class CLayer : public CConcreteObject
 {
 public:
-	CLayer( std::string inURL, ObjectID inID, const std::string inName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID) { mName = inName; };
+	CLayer( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID), mFileName(inFileName) { mName = inName; };
 	~CLayer();
 	
-	ObjectID	GetID()	const	{ return mID; };
+	ObjectID		GetID()	const			{ return mID; };
+	std::string		GetFileName() const		{ return mFileName; };
 	
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
+	virtual void	Save();
+	
 	bool			IsLoaded()	{ return mLoaded; };
 	virtual void	SetStack( CStack* inStack );
 	size_t			GetNumParts()				{ return GetPartCountOfType( NULL ); };
@@ -68,8 +71,9 @@ protected:
 	
 	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
 
-	ObjectID					mID;
+	ObjectID						mID;
 	std::string						mURL;
+	std::string						mFileName;
 	bool							mLoaded;
 	bool							mLoading;
 	std::vector<std::function<void(CLayer*)>>	mLoadCompletionBlocks;

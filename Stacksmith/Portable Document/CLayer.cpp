@@ -154,6 +154,12 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 }
 
 
+void	CLayer::Save()
+{
+	// +++
+}
+
+
 CPartContents*	CLayer::GetPartContentsByID( ObjectID inID, bool isForBackgroundPart )
 {
 	for( auto itty = mContents.begin(); itty != mContents.end(); itty++ )
