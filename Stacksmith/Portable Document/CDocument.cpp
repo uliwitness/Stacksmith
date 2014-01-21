@@ -202,40 +202,32 @@ void	CDocument::Save()
 	}
 	
 	tinyxml2::XMLElement*		userLevelElement = document.NewElement("userLevel");
-	snprintf( numStr, sizeof(numStr) -1, "%d", mUserLevel );
+	userLevelElement->SetText(mUserLevel);
 	stackfile->InsertEndChild( userLevelElement );
-	tinyxml2::XMLText*			userLevelText = document.NewText(numStr);
-	userLevelElement->InsertEndChild(userLevelText);
 
 	tinyxml2::XMLElement*		privateAccessElement = document.NewElement("privateAccess");
 	stackfile->InsertEndChild( privateAccessElement );
-	tinyxml2::XMLElement*		privateAccessBool = document.NewElement(mPrivateAccess?"true":"false");
-	privateAccessElement->InsertEndChild(privateAccessBool);
+	privateAccessElement->SetBoolFirstChild(mPrivateAccess);
 
 	tinyxml2::XMLElement*		cantPeekElement = document.NewElement("cantPeek");
 	stackfile->InsertEndChild( cantPeekElement );
-	tinyxml2::XMLElement*		cantPeekBool = document.NewElement(mCantPeek?"true":"false");
-	cantPeekElement->InsertEndChild(cantPeekBool);
+	cantPeekElement->SetBoolFirstChild(mCantPeek);
 	
 	tinyxml2::XMLElement*		createdByElement = document.NewElement("createdByVersion");
 	stackfile->InsertEndChild( createdByElement );
-	tinyxml2::XMLText*			createdByText = document.NewText(mCreatedByVersion.c_str());
-	createdByElement->InsertEndChild(createdByText);
+	createdByElement->SetText(mCreatedByVersion.c_str());
 
 	createdByElement = document.NewElement("lastCompactedVersion");
 	stackfile->InsertEndChild( createdByElement );
-	createdByText = document.NewText(mLastCompactedVersion.c_str());
-	createdByElement->InsertEndChild(createdByText);
+	createdByElement->SetText(mLastCompactedVersion.c_str());
 
 	createdByElement = document.NewElement("firstEditedVersion");
 	stackfile->InsertEndChild( createdByElement );
-	createdByText = document.NewText(mFirstEditedVersion.c_str());
-	createdByElement->InsertEndChild(createdByText);
+	createdByElement->SetText(mFirstEditedVersion.c_str());
 
 	createdByElement = document.NewElement("lastEditedVersion");
 	stackfile->InsertEndChild( createdByElement );
-	createdByText = document.NewText("Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION));
-	createdByElement->InsertEndChild(createdByText);
+	createdByElement->SetText("Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION));
 	
 	for( auto currEntry : mMediaList )
 	{
@@ -273,18 +265,15 @@ void	CDocument::Save()
 		mediaElement->InsertEndChild( idElem );
 		
 		tinyxml2::XMLElement*	nameElem = document.NewElement("name");
-		tinyxml2::XMLText*		nameText = document.NewText(currEntry.GetName().c_str());
-		nameElem->InsertEndChild( nameText );
+		nameElem->SetText(currEntry.GetName().c_str());
 		mediaElement->InsertEndChild( nameElem );
 
 		tinyxml2::XMLElement*	fileElem = document.NewElement("file");
-		tinyxml2::XMLText*		fileText = document.NewText(currEntry.GetFileName().c_str());
-		fileElem->InsertEndChild( fileText );
+		fileElem->SetText(currEntry.GetFileName().c_str());
 		mediaElement->InsertEndChild( fileElem );
 
 		tinyxml2::XMLElement*	typeElem = document.NewElement("type");
-		tinyxml2::XMLText*		typeText = document.NewText(mediaTypeStr);
-		typeElem->InsertEndChild( typeText );
+		typeElem->SetText(mediaTypeStr);
 		mediaElement->InsertEndChild( typeElem );
 		
 		if( currEntry.GetMediaType() == EMediaTypeCursor )
@@ -292,12 +281,8 @@ void	CDocument::Save()
 			tinyxml2::XMLElement*	hotspotElem = document.NewElement("hotspot");
 			tinyxml2::XMLElement*	leftElem = document.NewElement("left");
 			tinyxml2::XMLElement*	topElem = document.NewElement("top");
-			snprintf(numStr, sizeof(numStr)-1, "%d", currEntry.GetHotspotLeft());
-			tinyxml2::XMLText*		hotspotText = document.NewText(numStr);
-			leftElem->InsertEndChild( hotspotText );
-			snprintf(numStr, sizeof(numStr)-1, "%d", currEntry.GetHotspotTop());
-			hotspotText = document.NewText(numStr);
-			topElem->InsertEndChild( hotspotText );
+			leftElem->SetText(currEntry.GetHotspotLeft());
+			topElem->SetText(currEntry.GetHotspotTop());
 			hotspotElem->InsertEndChild( leftElem );
 			hotspotElem->InsertEndChild( topElem );
 			mediaElement->InsertEndChild( hotspotElem );
