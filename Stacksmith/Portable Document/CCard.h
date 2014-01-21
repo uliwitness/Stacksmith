@@ -48,6 +48,7 @@ public:
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
 	virtual void	CallAllCompletionBlocks();
+	virtual const char*	GetLayerXMLType()			{ return "card"; };
 
 	virtual const char*	GetIdentityForDump()		{ return "Card"; };
 

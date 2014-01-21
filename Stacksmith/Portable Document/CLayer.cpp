@@ -17,6 +17,7 @@
 #include "CRectanglePart.h"
 #include "CPicturePart.h"
 #include "CDocument.h"
+#include <sys/stat.h>
 
 
 using namespace Carlson;
@@ -100,6 +101,10 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 				
 				// Load AddColor info:
 				LoadAddColorPartsFromElement( root );
+				
+				// Load script:
+				mScript.erase();
+				CTinyXMLUtils::GetStringNamed( root, "script", mScript );
 			
 				if( styleSheetFilename )
 				{
@@ -154,9 +159,71 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 }
 
 
+const char*	CLayer::GetLayerXMLType()
+{
+	return "layer";
+}
+
+
+void	CLayer::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document )
+{
+	tinyxml2::XMLElement*	elem = document->NewElement("bitmap");
+	elem->SetText( mPictureName.c_str() );
+	stackfile->InsertEndChild(elem);
+
+	elem = document->NewElement("cantDelete");
+	elem->SetBoolFirstChild( mCantDelete );
+	stackfile->InsertEndChild(elem);
+
+	elem = document->NewElement("showPict");
+	elem->SetBoolFirstChild( mShowPict );
+	stackfile->InsertEndChild(elem);
+
+	elem = document->NewElement("dontSearch");
+	elem->SetBoolFirstChild( mDontSearch );
+	stackfile->InsertEndChild(elem);
+}
+
+
 void	CLayer::Save()
 {
-	// +++
+	if( !mLoaded )
+		return;
+	
+	tinyxml2::XMLDocument		document;
+	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
+	declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
+	document.InsertEndChild( declaration );
+	
+	std::string		dtdContents("DOCTYPE ");
+	dtdContents.append(GetLayerXMLType());
+	dtdContents.append(" PUBLIC \"-//Apple, Inc.//DTD ");
+	dtdContents.append(GetLayerXMLType());
+	dtdContents.append(" V 2.0//EN\" \"\"");
+	tinyxml2::XMLUnknown*	dtd = document.NewUnknown(dtdContents.c_str());
+	document.InsertEndChild( dtd );
+	
+	tinyxml2::XMLElement*		stackfile = document.NewElement(GetLayerXMLType());
+	document.InsertEndChild( stackfile );
+
+	tinyxml2::XMLElement	*	elem = document.NewElement("id");
+	elem->SetText(mID);
+	stackfile->InsertEndChild(elem);
+	
+	SavePropertiesToElementOfDocument( stackfile, &document );
+
+	elem = document.NewElement("name");
+	elem->SetText( mName.c_str() );
+	stackfile->InsertEndChild(elem);
+
+	elem = document.NewElement("script");
+	elem->SetText( mScript.c_str() );
+	stackfile->InsertEndChild(elem);
+
+	mkdir( "/Users/uli/Saved.xstk", 0777 );
+	std::string	destPath("/Users/uli/Saved.xstk/");
+	destPath.append( mFileName );
+	document.SaveFile( destPath.c_str() );
 }
 
 
@@ -200,9 +267,6 @@ void	CLayer::LoadPropertiesFromElement( tinyxml2::XMLElement* root )
 	mDontSearch = CTinyXMLUtils::GetBoolNamed( root, "dontSearch", false );
 	mPictureName = "";
 	CTinyXMLUtils::GetStringNamed( root, "bitmap", mPictureName );
-
-	mScript.erase();
-	CTinyXMLUtils::GetStringNamed( root, "script", mScript );
 }
 
 
