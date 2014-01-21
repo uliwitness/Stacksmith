@@ -29,3 +29,6 @@
 	path = Stacks
 	url = git@github.com:uliwitness/Stacks.git
 
+[submodule "tinyxml2"]
+	path = tinyxml2
+	url = https://github.com/uliwitness/tinyxml2.git
