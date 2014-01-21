@@ -38,6 +38,8 @@ public:
 		mStyles[fullClassName] = inStyle;
 	};
 	
+	std::string	GetCSS() const;
+	
 	void	Dump() const;
 	
 protected:

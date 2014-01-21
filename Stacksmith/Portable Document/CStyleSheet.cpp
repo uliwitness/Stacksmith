@@ -7,6 +7,7 @@
 //
 
 #include "CStyleSheet.h"
+#include <sstream>
 
 
 bool	iswhitespaceornewline( char ch );
@@ -133,4 +134,22 @@ void	CStyleSheet::Dump() const
 		}
 		printf( "\t\t}\n" );
 	}
+}
+
+
+std::string	CStyleSheet::GetCSS() const
+{
+	std::stringstream	sstream;
+	
+	for( auto styleParts : mStyles )
+	{
+		sstream << "\t\t" << styleParts.first << "\n\t\t{\n";
+		for( auto currStyle : styleParts.second )
+		{
+			sstream << "\t\t\t" << currStyle.first << ": " << currStyle.second << ";\n";
+		}
+		sstream << "\t\t}\n";
+	}
+	
+	return sstream.str();
 }
