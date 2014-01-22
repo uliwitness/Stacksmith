@@ -27,6 +27,28 @@ void	CTimerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
+void	CTimerPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+{
+	CPart::SavePropertiesToElementOfDocument( inElement, document );
+	
+	tinyxml2::XMLElement	*	elem = document->NewElement("message");
+	elem->SetText(mMessage.c_str());
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("interval");
+	elem->SetText(mInterval);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("started");
+	elem->SetBoolFirstChild(mStarted);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("repeat");
+	elem->SetBoolFirstChild(mRepeat);
+	inElement->InsertEndChild(elem);
+}
+
+
 void	CTimerPart::Trigger()
 {
 	SendMessage( NULL, [](const char *, size_t, size_t, CScriptableObject *){}, mMessage.c_str() );

@@ -39,7 +39,24 @@ int		CTinyXMLUtils::GetIntNamed( tinyxml2::XMLElement* root, const char* inName,
 	const char*	str = child ? child->GetText() : NULL;
 	if( !str )
 		return defaultValue;
-	int	num = strtod( str, &endPtr );
+	int	num = (int)strtol( str, &endPtr, 10 );
+	if( endPtr != (str+ strlen(str)) )
+		return defaultValue;
+	return num;
+}
+
+
+double		CTinyXMLUtils::GetDoubleNamed( tinyxml2::XMLElement* root, const char* inName, double defaultValue )
+{
+	if( !root )
+		return defaultValue;
+	
+	char	*	endPtr = NULL;
+	tinyxml2::XMLElement*	child = root->FirstChildElement( inName );
+	const char*	str = child ? child->GetText() : NULL;
+	if( !str )
+		return defaultValue;
+	double	num = strtod( str, &endPtr );
 	if( endPtr != (str+ strlen(str)) )
 		return defaultValue;
 	return num;

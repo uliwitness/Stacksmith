@@ -42,6 +42,7 @@ protected:
 	~CFieldPart()	{};
 	
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
 	
 	virtual bool			GetSharedText()					{ return mSharedText; };
 	virtual void			SetSharedText( bool inST )		{ mSharedText = inST; };
@@ -76,6 +77,7 @@ protected:
 	TPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
+	int				mTextHeight;
 	bool			mHasHorizontalScroller;
 	bool			mHasVerticalScroller;
 	bool			mViewTextNeedsSync;		// Did the text in the view change and we haven't updated the part contents yet?

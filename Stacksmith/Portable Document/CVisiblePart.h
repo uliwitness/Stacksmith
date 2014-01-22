@@ -69,7 +69,9 @@ public:
 	CVisiblePart( CLayer * inOwner ) : CPart(inOwner) {};
 	
 	static TPartTextAlign	GetTextAlignFromString( const char* inString );
+	static const char*		GetStringFromTextAlign( TPartTextAlign inAlign );
 	static TPartTextStyle	GetStyleFromString( const char* inString );
+	static std::vector<const char*>		GetStringsForStyle( TPartTextStyle inStyle );
 	
 	virtual void			SetFillColor( int red, int green, int blue, int alpha )	{ mFillColorRed = red; mFillColorGreen = green; mFillColorBlue = blue; mFillColorAlpha = alpha; };
 	virtual void			SetBevelWidth( int bevel )		{ mBevelWidth = bevel; };
@@ -81,6 +83,7 @@ public:
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
 	
 	virtual void			DumpProperties( size_t inIndent );
 

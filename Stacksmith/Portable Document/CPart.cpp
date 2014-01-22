@@ -91,6 +91,41 @@ void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2:
 	tinyxml2::XMLElement	*	elem = document->NewElement("id");
 	elem->SetText(mID);
 	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("type");
+	elem->SetText( GetPartType()->GetPartTypeName().c_str() );
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("rect");
+	tinyxml2::XMLElement	*	subElem = document->NewElement("left");
+	subElem->SetText( mLeft );
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("top");
+	subElem->SetText( mTop );
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("right");
+	subElem->SetText( mRight );
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("bottom");
+	subElem->SetText( mBottom );
+	elem->InsertEndChild(subElem);
+	inElement->InsertEndChild(elem);
+	
+	SavePropertiesToElementOfDocument( inElement, document );
+	
+	elem = document->NewElement("name");
+	elem->SetText( mName.c_str() );
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("script");
+	elem->SetText( mScript.c_str() );
+	inElement->InsertEndChild(elem);
+}
+
+
+void	CPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+{
+	
 }
 
 

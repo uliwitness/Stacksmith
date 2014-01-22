@@ -57,12 +57,94 @@ void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mShadowColorBlue = shadowColorElem ? CTinyXMLUtils::GetIntNamed( shadowColorElem, "blue", 0 ) : 0;
 	mShadowColorAlpha = shadowColorElem ? CTinyXMLUtils::GetIntNamed( shadowColorElem, "alpha", 0 ) : 0;
 	tinyxml2::XMLElement *	shadowOffsetElem = inElement->FirstChildElement( "shadowOffset" );
-	mShadowOffsetWidth = shadowOffsetElem ? CTinyXMLUtils::GetIntNamed( shadowOffsetElem, "width", 0 ) : 0;
-	mShadowOffsetHeight = shadowOffsetElem ? CTinyXMLUtils::GetIntNamed( shadowOffsetElem, "height", 0 ) : 0;
-	mShadowBlurRadius = CTinyXMLUtils::GetIntNamed( inElement, "shadowBlurRadius", 0 );
+	mShadowOffsetWidth = shadowOffsetElem ? CTinyXMLUtils::GetDoubleNamed( shadowOffsetElem, "width", 0 ) : 0;
+	mShadowOffsetHeight = shadowOffsetElem ? CTinyXMLUtils::GetDoubleNamed( shadowOffsetElem, "height", 0 ) : 0;
+	mShadowBlurRadius = CTinyXMLUtils::GetDoubleNamed( inElement, "shadowBlurRadius", 0 );
 	mLineWidth = CTinyXMLUtils::GetIntNamed( inElement, "lineWidth", 1 );
 	mBevelWidth = CTinyXMLUtils::GetIntNamed( inElement, "bevelWidth", 1 );
 	mBevelAngle = CTinyXMLUtils::GetIntNamed( inElement, "bevelAngle", 315 );
+}
+
+
+void	CVisiblePart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+{
+	tinyxml2::XMLElement	*	elem = document->NewElement("visible");
+	elem->SetBoolFirstChild(mVisible);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("enabled");
+	elem->SetBoolFirstChild(mEnabled);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("fillColor");
+	tinyxml2::XMLElement	*	subElem = document->NewElement("red");
+	subElem->SetText(mFillColorRed);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("green");
+	subElem->SetText(mFillColorGreen);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("blue");
+	subElem->SetText(mFillColorBlue);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("alpha");
+	subElem->SetText(mFillColorAlpha);
+	elem->InsertEndChild(subElem);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("lineColor");
+	subElem = document->NewElement("red");
+	subElem->SetText(mLineColorRed);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("green");
+	subElem->SetText(mLineColorGreen);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("blue");
+	subElem->SetText(mLineColorBlue);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("alpha");
+	subElem->SetText(mLineColorAlpha);
+	elem->InsertEndChild(subElem);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("shadowColor");
+	subElem = document->NewElement("red");
+	subElem->SetText(mShadowColorRed);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("green");
+	subElem->SetText(mShadowColorGreen);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("blue");
+	subElem->SetText(mShadowColorBlue);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("alpha");
+	subElem->SetText(mShadowColorAlpha);
+	elem->InsertEndChild(subElem);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("shadowOffset");
+	subElem = document->NewElement("width");
+	subElem->SetText(mShadowOffsetWidth);
+	elem->InsertEndChild(subElem);
+	subElem = document->NewElement("height");
+	subElem->SetText(mShadowOffsetHeight);
+	elem->InsertEndChild(subElem);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("shadowBlurRadius");
+	elem->SetText(mShadowBlurRadius);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("lineWidth");
+	elem->SetText(mLineWidth);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("bevelWidth");
+	elem->SetText(mBevelWidth);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("bevelAngle");
+	elem->SetText(mBevelAngle);
+	inElement->InsertEndChild(elem);
 }
 
 
@@ -124,6 +206,15 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 }
 
 
+/*static*/ const char*	CVisiblePart::GetStringFromTextAlign( TPartTextAlign inAlign )
+{
+	if( inAlign >= EPartTextAlign_Last )
+		return "";
+	else
+		return sTextAlignNames[inAlign];
+}
+
+
 /*static*/ TPartTextStyle	CVisiblePart::GetStyleFromString( const char* inString )
 {
 	for( size_t x = 0; x < EPartTextStyleBit_Last; x++ )
@@ -132,6 +223,18 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 			return (1 << x);
 	}
 	return EPartTextStylePlain;
+}
+
+
+/*static*/ std::vector<const char*>		CVisiblePart::GetStringsForStyle( TPartTextStyle inStyle )
+{
+	std::vector<const char*>	styles;
+	for( size_t x = 0; x < EPartTextStyleBit_Last; x++ )
+	{
+		if( inStyle & (1 << x) )
+			styles.push_back( sTextStyleNames[x] );
+	}
+	return styles;
 }
 
 

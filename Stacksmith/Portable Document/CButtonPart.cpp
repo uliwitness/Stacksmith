@@ -73,6 +73,70 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
+void	CButtonPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+{
+	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	
+	tinyxml2::XMLElement	*	elem = document->NewElement("style");
+	elem->SetText( sButtonStyleStrings[mButtonStyle] );
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("showName");
+	elem->SetBoolFirstChild(mShowName);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("highlight");
+	elem->SetBoolFirstChild(mHighlight);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("autoHighlight");
+	elem->SetBoolFirstChild(mAutoHighlight);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("sharedHighlight");
+	elem->SetBoolFirstChild(mSharedHighlight);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("family");
+	elem->SetText(mFamily);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("titleWidth");
+	elem->SetText(mTitleWidth);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("icon");
+	elem->SetText(mIconID);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("textAlign");
+	elem->SetText(GetStringFromTextAlign(mTextAlign));
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("font");
+	elem->SetText(mFont.c_str());
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("textSize");
+	elem->SetText(mTextSize);
+	inElement->InsertEndChild(elem);
+	
+	std::vector<const char*>	styles = GetStringsForStyle( mTextStyle );
+	for( const char* currStyle : styles )
+	{
+		elem = document->NewElement("textStyle");
+		elem->SetText(currStyle);
+		inElement->InsertEndChild(elem);
+	}
+	if( styles.size() == 0 )
+	{
+		elem = document->NewElement("textStyle");
+		elem->SetText("plain");
+		inElement->InsertEndChild(elem);
+	}
+}
+
+
 bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
 	if( strcasecmp("family", inPropertyName) == 0 )

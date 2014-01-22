@@ -60,6 +60,7 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mFont.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "font", mFont );
 	mTextSize = CTinyXMLUtils::GetIntNamed( inElement, "textSize", 12 );
+	mTextHeight = CTinyXMLUtils::GetIntNamed( inElement, "textHeight", 12 );
 	tinyxml2::XMLElement * currStyle = inElement->FirstChildElement("textStyle");
 	mTextStyle = EPartTextStylePlain;
 	while( currStyle )
@@ -72,6 +73,88 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	std::string	styleStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );
 	mFieldStyle = GetFieldStyleFromString( styleStr.c_str() );
+}
+
+
+void	CFieldPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+{
+	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	
+	tinyxml2::XMLElement	*	elem = document->NewElement("dontWrap");
+	elem->SetBoolFirstChild(mDontWrap);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("dontSearch");
+	elem->SetBoolFirstChild(mDontSearch);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("sharedText");
+	elem->SetBoolFirstChild(mSharedText);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("fixedLineHeight");
+	elem->SetBoolFirstChild(mFixedLineHeight);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("autoTab");
+	elem->SetBoolFirstChild(mAutoTab);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("lockText");
+	elem->SetBoolFirstChild(mLockText);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("style");
+	elem->SetText( sFieldStyleStrings[mFieldStyle] );
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("autoSelect");
+	elem->SetBoolFirstChild(mAutoSelect);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("showLines");
+	elem->SetBoolFirstChild(mShowLines);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("wideMargins");
+	elem->SetBoolFirstChild(mWideMargins);
+	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("multipleLines");
+	elem->SetBoolFirstChild(mMultipleLines);
+	inElement->InsertEndChild(elem);
+	
+	
+	
+	elem = document->NewElement("textAlign");
+	elem->SetText(GetStringFromTextAlign(mTextAlign));
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("font");
+	elem->SetText(mFont.c_str());
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("textSize");
+	elem->SetText(mTextSize);
+	inElement->InsertEndChild(elem);
+	
+	std::vector<const char*>	styles = GetStringsForStyle( mTextStyle );
+	for( const char* currStyle : styles )
+	{
+		elem = document->NewElement("textStyle");
+		elem->SetText(currStyle);
+		inElement->InsertEndChild(elem);
+	}
+	if( styles.size() == 0 )
+	{
+		elem = document->NewElement("textStyle");
+		elem->SetText("plain");
+		inElement->InsertEndChild(elem);
+	}
+	
+	elem = document->NewElement("textHeight");
+	elem->SetText(mTextHeight);
+	inElement->InsertEndChild(elem);
 }
 
 

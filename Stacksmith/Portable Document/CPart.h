@@ -91,6 +91,7 @@ public:
 	
 protected:
 	virtual void				LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	virtual void				SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
 	virtual const char*			GetIdentityForDump()					{ return "Part"; };
 	virtual void				DumpProperties( size_t inIndent );
 
