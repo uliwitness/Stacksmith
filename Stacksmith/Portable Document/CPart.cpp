@@ -231,6 +231,10 @@ bool	CPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart,
 	{
 		LEOInitRectValue( outValue, mLeft, mTop, mRight, mBottom, kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("selected", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mSelected, kLEOInvalidateReferences, inContext );
+	}
 	else
 		return CConcreteObject::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 	return true;
@@ -268,6 +272,10 @@ bool	CPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 		LEOInteger		l = 0, t = 0, r = 0, b = 0;
 		LEOGetValueAsRect( inValue, &l, &t, &r, &b, inContext);
 		SetRect( l, t, r, b );
+	}
+	else if( strcasecmp("selected", inPropertyName) == 0 )
+	{
+		SetSelected( LEOGetValueAsBoolean( inValue, inContext) );
 	}
 	else
 		return CConcreteObject::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
