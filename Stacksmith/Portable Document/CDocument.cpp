@@ -291,7 +291,7 @@ void	CDocument::Save()
 		stackfile->InsertEndChild( mediaElement );
 	}
 
-	document.SaveFile( "/Users/uli/Saved.xstk/toc.xml" );
+	document.SaveFile( "/Users/uli/Saved.xstk/project.xml" );
 }
 
 

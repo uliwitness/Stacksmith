@@ -167,10 +167,20 @@ void	WILDFirstNativeCall( void )
 	Carlson::CDocumentMac::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 	
 	std::string		fileURL( theFile.absoluteString.UTF8String );
-	fileURL.append("/toc.xml");
+	fileURL.append("/project.xml");
 	size_t	foundPos = fileURL.find("x-stack://");
+	size_t	foundPos2 = fileURL.find("file://");
     if( foundPos == 0 )
 		fileURL.replace(foundPos, 10, "http://");
+	else if( foundPos2 == 0 )
+	{
+		NSError		*		err = nil;
+		if( ![[NSURL URLWithString: [NSString stringWithUTF8String: fileURL.c_str()]]checkResourceIsReachableAndReturnError: &err] )	// File not found?
+		{
+			fileURL = theFile.absoluteString.UTF8String;
+			fileURL.append("/toc.xml");	// +++ old betas used toc.xml for the main file.
+		}
+	}
 	
 	sOpenDocuments.push_back( new CDocumentMac() );
 	CDocumentRef	currDoc = sOpenDocuments.back();
