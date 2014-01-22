@@ -28,15 +28,15 @@ using namespace Carlson;
 -(NSView *)	hitTest: (NSPoint)aPoint
 {
 	NSView	*	hitView = [super hitTest: aPoint];
-	if( hitView != nil )
-		return self;
-	return nil;
+//	if( hitView != nil )
+//		return self;
+	return hitView;
 }
 
 
 -(void)	mouseDown: (NSEvent*)theEvt
 {
-	NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
+	/*NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
 	CStack	*	theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
 	CCard	*	theCard = theStack->GetCurrentCard();
 	bool		foundOne = false;
@@ -67,7 +67,7 @@ using namespace Carlson;
 		else
 			thePart->SetSelected(false);
 	}
-	[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];
+	[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];*/
 }
 
 @end
@@ -178,7 +178,7 @@ using namespace Carlson;
 		currPart->CreateViewIn( self.window.contentView );
 	}
 	
-	[self drawBoundingBoxes];
+	//[self drawBoundingBoxes];
 }
 
 
