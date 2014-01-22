@@ -18,6 +18,7 @@
 #include "CPicturePart.h"
 #include "CDocument.h"
 #include <sys/stat.h>
+#include <sstream>
 
 
 using namespace Carlson;
@@ -211,7 +212,26 @@ void	CLayer::Save()
 	stackfile->InsertEndChild(elem);
 	
 	SavePropertiesToElementOfDocument( stackfile, &document );
+	
+	tinyxml2::XMLNode*	lastChildBeforeStyles = stackfile->LastChild();
+	// We remember lastChildBeforeStyles so we can later insert a "link" tag referencing our CSS here, if needed.
+	
+	CStyleSheet	theStyles;
 
+	for( auto currPart : mParts )
+	{
+		elem = document.NewElement("part");
+		currPart->SaveToElementOfDocument( elem, &document );
+		stackfile->InsertEndChild(elem);
+	}
+	
+	for( auto currContent : mContents )
+	{
+		elem = document.NewElement("content");
+		currContent->SaveToElementOfDocumentStyleSheet( elem, &document, &theStyles );
+		stackfile->InsertEndChild(elem);
+	}
+	
 	elem = document.NewElement("name");
 	elem->SetText( mName.c_str() );
 	stackfile->InsertEndChild(elem);
@@ -220,7 +240,25 @@ void	CLayer::Save()
 	elem->SetText( mScript.c_str() );
 	stackfile->InsertEndChild(elem);
 
-	mkdir( "/Users/uli/Saved.xstk", 0777 );
+	std::string	styleSheet = theStyles.GetCSS();
+	if( styleSheet.length() > 0 )
+	{
+		std::string	destStylesPath("/Users/uli/Saved.xstk/");
+		std::stringstream	destStylesName;
+		destStylesName << "stylesheet_card_" << mID << ".css";
+		destStylesPath.append(destStylesName.str());
+		
+		elem = document.NewElement("link");
+		elem->SetAttribute("rel", "stylesheet");
+		elem->SetAttribute("type", "text/css");
+		elem->SetAttribute("name", destStylesName.str().c_str());
+		stackfile->InsertAfterChild(lastChildBeforeStyles,elem);
+		
+		FILE*	theFile = fopen( destStylesPath.c_str(), "w" );
+		fwrite( styleSheet.c_str(), styleSheet.size(), 1, theFile );
+		fclose( theFile );
+	}
+
 	std::string	destPath("/Users/uli/Saved.xstk/");
 	destPath.append( mFileName );
 	document.SaveFile( destPath.c_str() );

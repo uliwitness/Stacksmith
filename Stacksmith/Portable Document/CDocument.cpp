@@ -175,6 +175,8 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 
 void	CDocument::Save()
 {
+	mkdir( "/Users/uli/Saved.xstk", 0777 );
+
 	tinyxml2::XMLDocument		document;
 	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
 	declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
@@ -289,7 +291,6 @@ void	CDocument::Save()
 		stackfile->InsertEndChild( mediaElement );
 	}
 
-	mkdir( "/Users/uli/Saved.xstk", 0777 );
 	document.SaveFile( "/Users/uli/Saved.xstk/toc.xml" );
 }
 

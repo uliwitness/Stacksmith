@@ -55,6 +55,7 @@ public:
 	explicit CPart( CLayer *inOwner );
 	
 	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
+	virtual void				SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
 	
 	ObjectID					GetID()			{ return mID; };
 	LEOInteger					GetFamily()		{ return mFamily; };

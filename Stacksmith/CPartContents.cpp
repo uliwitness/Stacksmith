@@ -30,6 +30,32 @@ CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElem
 }
 
 
+void	CPartContents::SaveToElementOfDocumentStyleSheet( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document, CStyleSheet *styleSheet )
+{
+	tinyxml2::XMLElement	*	elem = document->NewElement("layer");
+	elem->SetText( mIsOnBackground ? "background" : "card");
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("id");
+	elem->SetText(mID);
+	inElement->InsertEndChild(elem);
+
+	if( mHighlight )
+	{
+		elem = document->NewElement("highlight");
+		elem->SetBoolFirstChild(mHighlight);
+		inElement->InsertEndChild(elem);
+	}
+	
+	if( mAttributedString.GetLength() > 0 )
+	{
+		elem = document->NewElement("text");
+		mAttributedString.SaveToXMLDocumentElementStyleSheet( document, elem, styleSheet );
+		inElement->InsertEndChild(elem);
+	}
+}
+
+
 void	CPartContents::Dump( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);

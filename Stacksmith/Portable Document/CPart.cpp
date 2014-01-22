@@ -86,6 +86,14 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
+void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+{
+	tinyxml2::XMLElement	*	elem = document->NewElement("id");
+	elem->SetText(mID);
+	inElement->InsertEndChild(elem);
+}
+
+
 CScriptableObject*	CPart::GetParentObject()
 {
 	return mOwner;

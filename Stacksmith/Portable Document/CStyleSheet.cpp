@@ -143,12 +143,12 @@ std::string	CStyleSheet::GetCSS() const
 	
 	for( auto styleParts : mStyles )
 	{
-		sstream << "\t\t" << styleParts.first << "\n\t\t{\n";
+		sstream << styleParts.first << "\n{\n";
 		for( auto currStyle : styleParts.second )
 		{
-			sstream << "\t\t\t" << currStyle.first << ": " << currStyle.second << ";\n";
+			sstream << "\t" << currStyle.first << ": " << currStyle.second << ";\n";
 		}
-		sstream << "\t\t}\n";
+		sstream << "}\n";
 	}
 	
 	return sstream.str();

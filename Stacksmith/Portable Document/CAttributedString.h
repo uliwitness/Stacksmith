@@ -35,6 +35,7 @@ public:
 	void			SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLElement* inElement, CStyleSheet *styleSheet );
 	std::string		GetString()								{ return mString; };
 	void			SetString( const std::string& inStr )	{ mString = inStr; mRanges.clear(); };
+	size_t			GetLength()								{ return mString.size(); };
 	void			AddAttributeValueForRange( const std::string& inAttribute, const std::string& inValue, size_t inStart, size_t inEnd );
 	void			ClearAttributeForRange( const std::string& inAttribute, size_t inStart, size_t inEnd );
 	void			ClearAllAttributesForRange( size_t inStart, size_t inEnd );
