@@ -18,8 +18,15 @@ class CWebBrowserPart : public CVisiblePart
 public:
 	explicit CWebBrowserPart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
 	
+	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
+	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	
+	virtual void			SetCurrentURL( const std::string& inURL )	{ mCurrentURL = inURL; }
+	virtual std::string		GetCurrentURL()								{ return mCurrentURL; };
 	
 	virtual const char*		GetIdentityForDump()	{ return "Web Browser"; };
 	virtual void			DumpProperties( size_t inIndent );

@@ -22,6 +22,44 @@ void	CWebBrowserPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElemen
 }
 
 
+void	CWebBrowserPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+{
+	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	
+	tinyxml2::XMLElement	*	elem = document->NewElement("currentURL");
+	elem->SetText(GetCurrentURL().c_str());
+	inElement->InsertEndChild(elem);
+}
+
+
+bool	CWebBrowserPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp("currentURL", inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, GetCurrentURL().c_str(), GetCurrentURL().size(), kLEOInvalidateReferences, inContext );
+	}
+	else
+		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+	return true;
+}
+
+
+bool	CWebBrowserPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp("currentURL", inPropertyName) == 0 )
+	{
+		char		msgBuf[1024] = {0};
+		const char* msgStr = LEOGetValueAsString( inValue, msgBuf, sizeof(msgBuf), inContext );
+		if( !msgStr || !inContext->keepRunning )
+			return true;
+		SetCurrentURL( msgStr );
+	}
+	else
+		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+	return true;
+}
+
+
 void	CWebBrowserPart::DumpProperties( size_t inIndentLevel )
 {
 	const char*	indentStr = IndentString(inIndentLevel);

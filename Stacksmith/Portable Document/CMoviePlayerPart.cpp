@@ -25,6 +25,24 @@ void	CMoviePlayerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inEleme
 }
 
 
+void	CMoviePlayerPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+{
+	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	
+	tinyxml2::XMLElement	*	elem = document->NewElement("mediaPath");
+	elem->SetText(mMediaPath.c_str());
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("currentTime");
+	elem->SetText(GetCurrentTime());
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("controllerVisible");
+	elem->SetBoolFirstChild(mControllerVisible);
+	inElement->InsertEndChild(elem);
+}
+
+
 bool	CMoviePlayerPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
 	if( strcasecmp("currentTime", inPropertyName) == 0 )

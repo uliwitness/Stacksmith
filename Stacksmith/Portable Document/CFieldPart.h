@@ -10,6 +10,7 @@
 #define __Stacksmith__CFieldPart__
 
 #include "CVisiblePart.h"
+#include <set>
 
 namespace Carlson {
 
@@ -82,6 +83,7 @@ protected:
 	bool			mHasVerticalScroller;
 	bool			mViewTextNeedsSync;		// Did the text in the view change and we haven't updated the part contents yet?
 	TFieldStyle		mFieldStyle;
+	std::set<size_t>mSelectedLines;
 };
 
 }

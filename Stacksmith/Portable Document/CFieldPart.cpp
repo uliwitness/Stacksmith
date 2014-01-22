@@ -73,6 +73,18 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	std::string	styleStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );
 	mFieldStyle = GetFieldStyleFromString( styleStr.c_str() );
+	
+	mSelectedLines.erase(mSelectedLines.begin(), mSelectedLines.end());
+	tinyxml2::XMLElement * selLines = inElement->FirstChildElement("selectedLines");
+	if( selLines )
+	{
+		tinyxml2::XMLElement * currSelLine = selLines->FirstChildElement("integer");
+		while( currSelLine )
+		{
+			mSelectedLines.insert( currSelLine->LongLongText() );
+			currSelLine = currSelLine->NextSiblingElement( "integer" );
+		}
+	}
 }
 
 
@@ -124,7 +136,17 @@ void	CFieldPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEle
 	elem->SetBoolFirstChild(mMultipleLines);
 	inElement->InsertEndChild(elem);
 	
-	
+	if( !mSelectedLines.empty() )
+	{
+		elem = document->NewElement("selectedLines");
+		for( size_t currLine : mSelectedLines )
+		{
+			tinyxml2::XMLElement	*	subElem = document->NewElement("integer");
+			subElem->SetText( (long long) currLine );
+			elem->InsertEndChild( subElem );
+		}
+		inElement->InsertEndChild(elem);
+	}
 	
 	elem = document->NewElement("textAlign");
 	elem->SetText(GetStringFromTextAlign(mTextAlign));
