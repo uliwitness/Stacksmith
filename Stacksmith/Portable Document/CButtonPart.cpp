@@ -70,6 +70,18 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	std::string	styleStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );
 	mButtonStyle = GetButtonStyleFromString( styleStr.c_str() );
+	
+	mSelectedLines.erase(mSelectedLines.begin(), mSelectedLines.end());
+	tinyxml2::XMLElement * selLines = inElement->FirstChildElement("selectedLines");
+	if( selLines )
+	{
+		tinyxml2::XMLElement * currSelLine = selLines->FirstChildElement("integer");
+		while( currSelLine )
+		{
+			mSelectedLines.insert( currSelLine->LongLongText() );
+			currSelLine = currSelLine->NextSiblingElement( "integer" );
+		}
+	}
 }
 
 
@@ -108,6 +120,18 @@ void	CButtonPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEl
 	elem = document->NewElement("icon");
 	elem->SetText(mIconID);
 	inElement->InsertEndChild(elem);
+	
+	if( !mSelectedLines.empty() )
+	{
+		elem = document->NewElement("selectedLines");
+		for( size_t currLine : mSelectedLines )
+		{
+			tinyxml2::XMLElement	*	subElem = document->NewElement("integer");
+			subElem->SetText( (long long) currLine );
+			elem->InsertEndChild( subElem );
+		}
+		inElement->InsertEndChild(elem);
+	}
 	
 	elem = document->NewElement("textAlign");
 	elem->SetText(GetStringFromTextAlign(mTextAlign));
@@ -162,6 +186,14 @@ bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRange
 	else if( strcasecmp("showName", inPropertyName) == 0 )
 	{
 		LEOInitBooleanValue( outValue, GetShowName(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("selectedLine", inPropertyName) == 0 )
+	{
+		auto foundLine = mSelectedLines.lower_bound(0);
+		if( foundLine != mSelectedLines.end() )
+			LEOInitIntegerValue( outValue, *foundLine, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		else
+			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
 	}
 	else
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
@@ -223,6 +255,23 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		if( !inContext->keepRunning )
 			return true;
 		SetShowName( theShowName );
+	}
+	else if( strcasecmp("selectedLine", inPropertyName) == 0 )
+	{
+		LEOInteger	theSelectedLine = 0;
+		char		strBuf[5] = {0};
+		const char* str = LEOGetValueAsString( inValue, strBuf, sizeof(strBuf), inContext );
+		if( strcasecmp(str, "none") != 0 && str[0] != 0 )
+		{
+			LEOUnit		outUnit = kLEOUnitNone;
+			theSelectedLine = LEOGetValueAsInteger( inValue, &outUnit, inContext );
+			if( !inContext->keepRunning )
+				return true;
+		}
+		mSelectedLines.erase(mSelectedLines.begin(), mSelectedLines.end());
+		if( theSelectedLine != 0 )
+			mSelectedLines.insert(theSelectedLine);
+		ApplyChangedSelectedLinesToView();
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

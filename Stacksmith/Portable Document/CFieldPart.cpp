@@ -180,6 +180,15 @@ void	CFieldPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEle
 }
 
 
+bool	CFieldPart::GetTextContents( std::string &outString )
+{
+	if( mViewTextNeedsSync )
+		LoadChangedTextFromView();
+		
+	return CVisiblePart::GetTextContents( outString );
+}
+
+
 bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
 	if( strcasecmp("textStyle", inPropertyName) == 0 )
@@ -244,6 +253,14 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	else if( strcasecmp("autoSelect", inPropertyName) == 0 )
 	{
 		LEOInitBooleanValue( outValue, mAutoSelect, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("selectedLine", inPropertyName) == 0 )
+	{
+		auto foundLine = mSelectedLines.lower_bound(0);
+		if( foundLine != mSelectedLines.end() )
+			LEOInitIntegerValue( outValue, *foundLine, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		else
+			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
 	}
 	else
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
@@ -349,6 +366,23 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		if( !inContext->keepRunning )
 			return true;
 		SetLockText( theShowName );
+	}
+	else if( strcasecmp("selectedLine", inPropertyName) == 0 )
+	{
+		LEOInteger	theSelectedLine = 0;
+		char		strBuf[5] = {0};
+		const char* str = LEOGetValueAsString( inValue, strBuf, sizeof(strBuf), inContext );
+		if( strcasecmp(str, "none") != 0 && str[0] != 0 )
+		{
+			LEOUnit		outUnit = kLEOUnitNone;
+			theSelectedLine = LEOGetValueAsInteger( inValue, &outUnit, inContext );
+			if( !inContext->keepRunning )
+				return true;
+		}
+		mSelectedLines.erase(mSelectedLines.begin(), mSelectedLines.end());
+		if( theSelectedLine != 0 )
+			mSelectedLines.insert(theSelectedLine);
+		ApplyChangedSelectedLinesToView();
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

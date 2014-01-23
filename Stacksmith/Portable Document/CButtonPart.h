@@ -10,6 +10,7 @@
 #define __Stacksmith__CButtonPart__
 
 #include "CVisiblePart.h"
+#include <set>
 
 namespace Carlson {
 
@@ -51,6 +52,7 @@ public:
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			ApplyChangedSelectedLinesToView()		{};
 	
 	virtual const char*		GetIdentityForDump()	{ return "Button"; };
 	virtual void			DumpProperties( size_t inIndent );
@@ -69,6 +71,7 @@ protected:
 	int				mTextSize;
 	TPartTextStyle	mTextStyle;
 	TButtonStyle	mButtonStyle;
+	std::set<size_t>mSelectedLines;
 };
 
 }

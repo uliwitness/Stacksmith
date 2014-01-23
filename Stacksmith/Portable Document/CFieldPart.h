@@ -39,6 +39,8 @@ public:
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	virtual void			SetViewTextNeedsSync( bool inNeeded )	{ mViewTextNeedsSync = inNeeded; };
 
+	virtual bool			GetTextContents( std::string &outString );
+
 protected:
 	~CFieldPart()	{};
 	
@@ -56,6 +58,7 @@ protected:
 	
 	virtual void			LoadChangedTextStylesIntoView()			{ mViewTextNeedsSync = false; };
 	virtual void			LoadChangedTextFromView()				{};
+	virtual void			ApplyChangedSelectedLinesToView()		{};
 	
 	virtual const char*		GetIdentityForDump()	{ return "Field"; };
 	virtual void			DumpProperties( size_t inIndent );
