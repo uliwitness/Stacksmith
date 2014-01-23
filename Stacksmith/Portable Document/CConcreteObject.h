@@ -45,6 +45,7 @@ public:
 
 protected:
 	virtual void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );
+	virtual void		SaveUserPropertiesToElementOfDocument( tinyxml2::XMLElement * elem, tinyxml2::XMLDocument * document );
 	
 	virtual void		DumpUserProperties( size_t inIndent );
 

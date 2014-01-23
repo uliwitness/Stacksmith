@@ -193,6 +193,8 @@ void	CStack::Save()
 	scriptElem->SetText( mScript.c_str() );
 	root->InsertEndChild( scriptElem );
 	
+	SaveUserPropertiesToElementOfDocument( root, &document );
+	
 	for( auto currBackground : mBackgrounds )
 	{
 		tinyxml2::XMLElement*		bgElem = document.NewElement("background");

@@ -240,6 +240,8 @@ void	CLayer::Save()
 	elem->SetText( mScript.c_str() );
 	stackfile->InsertEndChild(elem);
 
+	SaveUserPropertiesToElementOfDocument( stackfile, &document );
+
 	std::string	styleSheet = theStyles.GetCSS();
 	if( styleSheet.length() > 0 )
 	{

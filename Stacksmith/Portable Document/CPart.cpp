@@ -120,6 +120,8 @@ void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2:
 	elem = document->NewElement("script");
 	elem->SetText( mScript.c_str() );
 	inElement->InsertEndChild(elem);
+	
+	SaveUserPropertiesToElementOfDocument( inElement, document );
 }
 
 

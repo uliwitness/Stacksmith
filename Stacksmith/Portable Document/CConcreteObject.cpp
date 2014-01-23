@@ -116,6 +116,25 @@ void	CConcreteObject::LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem
 }
 
 
+void	CConcreteObject::SaveUserPropertiesToElementOfDocument( tinyxml2::XMLElement * elem, tinyxml2::XMLDocument * document )
+{
+	if( mUserProperties.size() > 0 )
+	{
+		tinyxml2::XMLElement	*	userPropsElem = document->NewElement("userProperties");
+		for( auto userPropPair : mUserProperties )
+		{
+			tinyxml2::XMLElement	*	propNameElem = document->NewElement("name");
+			propNameElem->SetText(userPropPair.first.c_str());
+			userPropsElem->InsertEndChild(propNameElem);
+			tinyxml2::XMLElement	*	propValueElem = document->NewElement("value");
+			propValueElem->SetText(userPropPair.second.c_str());
+			userPropsElem->InsertEndChild(propValueElem);
+		}
+		elem->InsertEndChild(userPropsElem);
+	}
+}
+
+
 void	CConcreteObject::DumpUserProperties( size_t inIndentLevel )
 {
 	const char*	indentStr = IndentString(inIndentLevel);
