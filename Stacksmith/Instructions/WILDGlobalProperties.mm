@@ -11,7 +11,8 @@
 #import <string.h>
 #import <Foundation/Foundation.h>
 #import "UKSystemInfo.h"
-#import "CScriptableObjectValue.h"
+#include "CScriptableObjectValue.h"
+#include "CSound.h"
 
 
 using namespace Carlson;
@@ -35,6 +36,7 @@ void	LEOPushPhysicalMemoryInstruction( LEOContext* inContext );
 void	LEOPushMachineInstruction( LEOContext* inContext );
 void	LEOPushSystemVersionInstruction( LEOContext* inContext );
 void	LEOPushTargetInstruction( LEOContext* inContext );
+void	LEOPushSoundInstruction( LEOContext* inContext );
 
 
 
@@ -143,6 +145,14 @@ void	LEOPushTargetInstruction( LEOContext* inContext )
 }
 
 
+void	LEOPushSoundInstruction( LEOContext* inContext )
+{
+	LEOPushStringConstantValueOnStack( inContext, CSound::IsDone() ? "done" : "" );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOSetCursorInstruction)
 LEOINSTR(LEOPushCursorInstruction)
@@ -153,6 +163,7 @@ LEOINSTR(LEOPushPlatformInstruction)
 LEOINSTR(LEOPushPhysicalMemoryInstruction)
 LEOINSTR(LEOPushMachineInstruction)
 LEOINSTR(LEOPushSystemVersionInstruction)
+LEOINSTR(LEOPushSoundInstruction)
 LEOINSTR_LAST(LEOPushTargetInstruction)
 
 
@@ -167,5 +178,6 @@ struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 	{ EPhysicalMemoryIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_PHYSICALMEMORY_INSTR },
 	{ EMachineIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_MACHINE_INSTR },
 	{ ETargetIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_TARGET_INSTR },
+	{ ESoundIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SOUND_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };
