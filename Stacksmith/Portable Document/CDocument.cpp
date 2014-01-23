@@ -324,12 +324,7 @@ std::string	CDocument::GetMediaURLByNameOfType( const std::string& inName, TMedi
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
 	{
 		if( inType == currMedia->GetMediaType() && (strcasecmp( str, currMedia->GetName().c_str() ) == 0) )
-		{
-			std::string	fullURL = mURL;
-			fullURL.append( 1, '/' );
-			fullURL.append( currMedia->GetFileName() );
-			return fullURL;
-		}
+			return currMedia->GetFileName();
 	}
 	
 	return std::string();
@@ -341,12 +336,7 @@ std::string	CDocument::GetMediaURLByIDOfType( ObjectID inID, TMediaType inType )
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
 	{
 		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
-		{
-			std::string	fullURL = mURL;
-			fullURL.append( 1, '/' );
-			fullURL.append( currMedia->GetFileName() );
-			return fullURL;
-		}
+			return currMedia->GetFileName();
 	}
 	
 	return std::string();

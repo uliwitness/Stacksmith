@@ -75,4 +75,22 @@
 			<top>4</top>
 		</hotspot>
 	</media>
+	<media>
+		<id>128</id>
+		<type>sound</type>
+		<name>Harpsichord</name>
+		<file>harpsichord.aiff</file>
+	</media>
+	<media>
+		<id>129</id>
+		<type>sound</type>
+		<name>Boing</name>
+		<file>boing.aiff</file>
+	</media>
+	<media>
+		<id>146</id>
+		<type>sound</type>
+		<name>Flute</name>
+		<file>flute.aiff</file>
+	</media>
 </stackfile>
