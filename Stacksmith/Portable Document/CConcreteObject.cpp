@@ -135,6 +135,137 @@ void	CConcreteObject::SaveUserPropertiesToElementOfDocument( tinyxml2::XMLElemen
 }
 
 
+bool	CConcreteObject::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp("userProperties", inPropertyName) == 0 )
+	{
+		LEOArrayEntry	*	theArray = NULL;
+		char				tmpKey[512] = {0};
+		size_t				x = 0;
+		for( auto currProp : mUserProperties )
+		{
+			snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
+			LEOAddCStringArrayEntryToRoot( &theArray, tmpKey, currProp.first.c_str(), inContext );
+		}
+		
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	
+	std::string	propValue;
+	if( GetUserPropertyValueForName( inPropertyName, propValue ) )
+	{
+		LEOInitStringValue( outValue, propValue.c_str(), propValue.length(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else
+		return CScriptableObject::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+}
+
+
+bool	CConcreteObject::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	char		tmpKey[512] = {0};
+	if( strcasecmp("userProperties", inPropertyName) == 0 )
+	{
+		size_t	numProps = LEOGetKeyCount( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		LEOValue	tmpStorage = {{0}};
+		for( size_t x = 1; x <= numProps; x++ )
+		{
+			snprintf(tmpKey, sizeof(tmpKey)-1, "%zu", x );
+			LEOValuePtr theValue = LEOGetValueForKey( inValue, tmpKey, &tmpStorage, kLEOInvalidateReferences, inContext );
+			const char*	currPropName = LEOGetValueAsString( theValue, tmpKey, sizeof(tmpKey), inContext );
+			if( !inContext->keepRunning )
+				return true;
+			AddUserPropertyNamed( currPropName );
+			if( theValue == &tmpStorage )
+				LEOCleanUpValue( theValue, kLEOInvalidateReferences, inContext );
+		}
+		return true;
+	}
+	
+	const char*	currPropVal = LEOGetValueAsString( inValue, tmpKey, sizeof(tmpKey), inContext );
+	if( !SetUserPropertyValueForName( currPropVal, inPropertyName ) )
+		return CScriptableObject::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+	else
+		return true;
+}
+
+
+bool	CConcreteObject::AddUserPropertyNamed( const char* userPropName )
+{
+	std::map<std::string,std::string>::iterator foundProp = mUserProperties.find(userPropName);
+	if( foundProp == mUserProperties.end() )
+		mUserProperties[userPropName] = std::string();
+	
+	DumpUserProperties(0);
+	
+	return true;
+}
+
+
+bool	CConcreteObject::DeleteUserPropertyNamed( const char* userPropName )
+{
+	auto	foundProp = mUserProperties.find( userPropName );
+	if( foundProp != mUserProperties.end() )
+		mUserProperties.erase( foundProp );
+	return true;
+}
+
+
+size_t	CConcreteObject::GetNumUserProperties()
+{
+	return mUserProperties.size();
+}
+
+
+std::string	CConcreteObject::GetUserPropertyNameAtIndex( size_t inIndex )
+{
+	std::map<std::string,std::string>::iterator foundProp = mUserProperties.begin();
+	for( size_t x = 0; x <= inIndex && foundProp != mUserProperties.end(); x++ )
+		foundProp++;
+	return foundProp->first;
+}
+
+
+bool	CConcreteObject::SetUserPropertyNameAtIndex( const char* inNewName, size_t inIndex )
+{
+	std::map<std::string,std::string>::iterator foundProp = mUserProperties.begin();
+	for( size_t x = 0; x <= inIndex && foundProp != mUserProperties.end(); x++ )
+		foundProp++;
+	
+	mUserProperties[inNewName] = foundProp->second;
+	mUserProperties.erase( foundProp );
+	return true;
+}
+
+
+bool	CConcreteObject::GetUserPropertyValueForName( const char* inPropName, std::string& outValue )
+{
+	std::map<std::string,std::string>::iterator foundProp = mUserProperties.find(inPropName);
+	if( foundProp == mUserProperties.end() )
+		return false;
+	
+	outValue = foundProp->second;
+	
+	return true;
+}
+
+
+bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, const char* inPropName )
+{
+	std::map<std::string,std::string>::iterator foundProp = mUserProperties.find(inPropName);
+	if( foundProp == mUserProperties.end() )
+		return false;
+	
+	foundProp->second = inValue;
+	
+	return true;
+}
+
+
 void	CConcreteObject::DumpUserProperties( size_t inIndentLevel )
 {
 	const char*	indentStr = IndentString(inIndentLevel);

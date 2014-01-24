@@ -34,6 +34,16 @@ public:
 	
 	virtual void		SetScript( std::string inScript );
 	virtual std::string	GetScript()							{ return mScript; };
+	virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
+	virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	
+	virtual bool		AddUserPropertyNamed( const char* userPropName );
+	virtual bool		DeleteUserPropertyNamed( const char* userPropName );
+	virtual size_t		GetNumUserProperties();
+	virtual std::string	GetUserPropertyNameAtIndex( size_t inIndex );
+	virtual bool		SetUserPropertyNameAtIndex( const char* inNewName, size_t inIndex );
+	virtual bool		GetUserPropertyValueForName( const char* inPropName, std::string& outValue );
+	virtual bool		SetUserPropertyValueForName( const std::string& inValue, const char* inPropName );
 	
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );	// Calls errorHandler with NULL message on success, calls error handler with error message and returns NULL on failure.
 	virtual CDocument*	GetDocument()		{ return mDocument; };
