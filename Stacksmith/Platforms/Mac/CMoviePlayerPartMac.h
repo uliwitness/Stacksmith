@@ -33,11 +33,13 @@ public:
 	virtual void		SetMediaPath( const std::string& inPath );
 	virtual void		SetCurrentTime( LEOInteger inTicks );
 	virtual LEOInteger	GetCurrentTime();
+	virtual void		SetControllerVisible( bool inStart );
 
 protected:
 	~CMoviePlayerPartMac()	{ DestroyView(); };
 	
 	void			SetUpMoviePlayer();
+	void			SetUpMoviePlayerControls();
 	
 	ULIInvisiblePlayerView	*	mView;
 };

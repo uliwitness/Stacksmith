@@ -9,6 +9,7 @@
 #include "CMoviePlayerPartMac.h"
 #import "ULIInvisiblePlayerView.h"
 #import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 
 using namespace Carlson;
@@ -17,15 +18,17 @@ using namespace Carlson;
 void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 {
 	if( mView )
+	{
+		[mView removeFromSuperview];
 		[mView release];
-	mView = [[ULIInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
-	[mView setWantsLayer: YES];
-	mView.layer.masksToBounds = NO;
-	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
-	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, -mShadowOffsetHeight)];
-	[mView.layer setShadowRadius: mShadowBlurRadius];
-	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
-	mView.player = [AVPlayer playerWithURL: [[NSBundle mainBundle] URLForResource: @"PlaceholderMovie" withExtension: @"mov"]];
+	}
+	if( mControllerVisible )
+	{
+		mView = (ULIInvisiblePlayerView*)[[AVPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		SetUpMoviePlayerControls();
+	}
+	else
+		mView = [[ULIInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 	SetUpMoviePlayer();
 	[inSuperView addSubview: mView];
 }
@@ -39,9 +42,50 @@ void	CMoviePlayerPartMac::DestroyView()
 }
 
 
+void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
+{
+	CMoviePlayerPart::SetControllerVisible(inStart);
+	
+	NSView	*	oldSuper = nil;
+	if( mView )
+	{
+		oldSuper = [mView superview];
+		[mView removeFromSuperview];
+		[mView release];
+	}
+	if( mControllerVisible )
+	{
+		mView = (ULIInvisiblePlayerView*)[[AVPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		SetUpMoviePlayerControls();
+	}
+	else
+		mView = [[ULIInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	SetUpMoviePlayer();
+	[oldSuper addSubview: mView];
+}
+
+
 void	CMoviePlayerPartMac::SetUpMoviePlayer()
 {
+	[mView setWantsLayer: YES];
+	mView.layer.masksToBounds = NO;
+	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
+	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, -mShadowOffsetHeight)];
+	[mView.layer setShadowRadius: mShadowBlurRadius];
+	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
+	mView.player = [AVPlayer playerWithURL: [[NSBundle mainBundle] URLForResource: @"PlaceholderMovie" withExtension: @"mov"]];
 	mView.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+}
+
+
+void	CMoviePlayerPartMac::SetUpMoviePlayerControls()
+{
+	if( (mRight -mLeft) > 432 )
+		[(AVPlayerView*)mView setControlsStyle: AVPlayerViewControlsStyleFloating];
+	else if( (mRight -mLeft) > 150 )
+		[(AVPlayerView*)mView setControlsStyle: AVPlayerViewControlsStyleInline];
+	else
+		[(AVPlayerView*)mView setControlsStyle: AVPlayerViewControlsStyleMinimal];
 }
 
 

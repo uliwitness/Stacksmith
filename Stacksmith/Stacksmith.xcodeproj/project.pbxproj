@@ -182,6 +182,7 @@
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
 		555BA0DC138DC9CB00B3B1D8 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555BA0DA138DC9CB00B3B1D8 /* PlaceholderMovie.mov */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
+		555E539E18922766001487C1 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555E539D18922766001487C1 /* AVKit.framework */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */; };
 		555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */; };
@@ -702,6 +703,7 @@
 		554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CForgeExceptions.cpp; path = ../../CForgeExceptions.cpp; sourceTree = "<group>"; };
 		555BA0DB138DC9CB00B3B1D8 /* English */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = English; path = English.lproj/PlaceholderMovie.mov; sourceTree = "<group>"; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
+		555E539D18922766001487C1 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = ../../../../../System/Library/Frameworks/AVKit.framework; sourceTree = "<group>"; };
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintbrushTool.tiff; path = ../UKPaintView/UKPaintbrushTool.tiff; sourceTree = "<group>"; };
@@ -938,6 +940,7 @@
 			files = (
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				55B07416188A1DA10023BA3E /* CoreMedia.framework in Frameworks */,
+				555E539E18922766001487C1 /* AVKit.framework in Frameworks */,
 				552FF245113F247A005742C8 /* QTKit.framework in Frameworks */,
 				552386A4187E274C00D7FAB3 /* AVFoundation.framework in Frameworks */,
 				55A5A6421142D4DD00F5EF0F /* QuartzCore.framework in Frameworks */,
@@ -956,6 +959,7 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				555E539D18922766001487C1 /* AVKit.framework */,
 				552386A3187E274C00D7FAB3 /* AVFoundation.framework */,
 				55B29CA81727731800B38E75 /* AddressBook.framework */,
 				55943B1B171F675E0051166C /* WebKit.framework */,
