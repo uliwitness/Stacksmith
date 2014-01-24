@@ -14,6 +14,7 @@
 #include "CStack.h"
 #include "CString.h"
 #include <sstream>
+#include "CAlert.h"
 
 
 using namespace Carlson;
@@ -603,7 +604,7 @@ LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* 
 			theScript = scriptableParent->GetScriptObject([](const char * errMsg, size_t errLine, size_t errOffs, CScriptableObject * owner)
 			{
 				if( errMsg )
-					printf("%s\n",errMsg);
+					CAlert::RunMessageAlert( errMsg );
 			});
 		}
 	}

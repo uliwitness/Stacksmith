@@ -137,7 +137,8 @@ using namespace Carlson;
 	
 	std::function<void(const char *, size_t, size_t, CScriptableObject *)>	errHandler = [](const char * errMsg, size_t, size_t, CScriptableObject *)
 	{
-		CAlert::RunMessageAlert( errMsg );
+		if( errMsg )
+			CAlert::RunMessageAlert( errMsg );
 	};
 	
 	theCard->SendMessage( NULL, errHandler, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
