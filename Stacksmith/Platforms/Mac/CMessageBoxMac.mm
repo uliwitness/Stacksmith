@@ -17,6 +17,7 @@ using namespace Carlson;
 @interface WILDMessageBoxWindowController : NSWindowController
 
 @property (assign,nonatomic) IBOutlet NSTextView	*	messageField;
+@property (assign,nonatomic) IBOutlet NSButton		*	runButton;
 @property (assign,nonatomic) CMessageBoxMac			*	messageBox;
 
 @end
@@ -39,6 +40,17 @@ using namespace Carlson;
 -(void)	windowWillClose: (NSNotification *)notification
 {
 	self.messageBox->SetVisible(false);
+}
+
+-(BOOL) textView: (NSTextView *)textView doCommandBySelector: (SEL)commandSelector
+{
+	if( commandSelector == @selector(insertNewline:) )
+	{
+		[self.runButton performClick: self];
+		return YES;
+	}
+	else
+		return NO;
 }
 
 @end
