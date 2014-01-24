@@ -296,10 +296,13 @@ using namespace Carlson;
 	[NSGraphicsContext saveGraphicsState];
 	[NSGraphicsContext setCurrentContext: cocoaContext];
 	
-	NSColor	*	peekColor = [NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22"]];
+	static NSColor	*	sPeekColor = nil;
+	if( !sPeekColor )
+		sPeekColor = [[NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22"]] retain];
+	static NSColor	*	sSelectedColor = nil;
+	if( !sSelectedColor )
+		sSelectedColor = [[NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_14"]] retain];
 	[NSBezierPath setDefaultLineWidth: 1];
-	const CGFloat		theDashes[] = { 4, 4 };
-	NSTimeInterval		currTime = [NSDate timeIntervalSinceReferenceDate];
 	
 	size_t		cardHeight = mStack->GetCardHeight();
 	
@@ -310,16 +313,12 @@ using namespace Carlson;
 		CPart*	currPart = theBackground->GetPart(x);
 		if( currPart->IsSelected() )
 		{
-			NSBezierPath		*		rectPath = [NSBezierPath bezierPathWithRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
-			[[NSColor whiteColor] set];
-			[rectPath stroke];
-			[rectPath setLineDash: theDashes count: sizeof(theDashes) / sizeof(CGFloat) phase: currTime];
-			[[NSColor darkGrayColor] set];
-			[rectPath stroke];
+			[sSelectedColor set];
+			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
 		}
 		else if( mStack->GetPeeking() )
 		{
-			[peekColor set];
+			[sPeekColor set];
 			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
 		}
 	}
@@ -330,16 +329,12 @@ using namespace Carlson;
 		CPart*	currPart = theCard->GetPart(x);
 		if( currPart->IsSelected() )
 		{
-			NSBezierPath		*		rectPath = [NSBezierPath bezierPathWithRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
-			[[NSColor whiteColor] set];
-			[rectPath stroke];
-			[rectPath setLineDash: theDashes count: sizeof(theDashes) / sizeof(CGFloat) phase: currTime];
-			[[NSColor darkGrayColor] set];
-			[rectPath stroke];
+			[sSelectedColor set];
+			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
 		}
 		else if( mStack->GetPeeking() )
 		{
-			[peekColor set];
+			[sPeekColor set];
 			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
 		}
 	}
