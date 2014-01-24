@@ -674,7 +674,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	{
 		size_t	numParams = 0;
 		// Calculate how much space we need for params temporarily:
-		for( int x = 0; paramStart[x] != '\0'; x++ )
+		for( size_t x = 0; paramStart[x] != '\0'; x++ )
 		{
 			if( paramStart[x] != '%' )
 				continue;
@@ -722,7 +722,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 			char	*	currPos = theBytes;
 			va_list		ap;
 			va_start( ap, fmt );
-				for( int x = 0; paramStart[x] != '\0'; x++ )
+				for( size_t x = 0; paramStart[x] != '\0'; x++ )
 				{
 					if( paramStart[x] != '%' )
 						continue;
@@ -786,12 +786,16 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 
 			// Push the params in reverse order:
 			currPos = theBytes +bytesNeeded;
-			for( int x = 0; paramStart[x] != '\0'; x++ )
+			for( size_t x = strlen(paramStart) -1; true; x-- )
 			{
-				if( paramStart[x] != '%' )
+				if( x == 0 )
+					break;
+
+				if( paramStart[x] != 'l' && paramStart[x] != 's' && paramStart[x] != 'd'
+					&& paramStart[x] != 'f' && paramStart[x] != 'B' )
 					continue;
-				x++;
-				switch( paramStart[x] )
+				char		currCh = paramStart[x];
+				switch( currCh )
 				{
 					case 's':
 					{
@@ -802,24 +806,23 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 						break;
 					}
 
-					case 'l':
-					{
-						x++;
-						if( paramStart[x] != 'd' )
-							throw std::logic_error("Only %ld is currently supported in SendMessage format strings, no other %l...s.");
-						currPos -= sizeof(long);
-						long	currLong = *((long*)currPos);
-						DBGLOGPAR( "pushed %ld", currLong );
-						LEOPushIntegerOnStack( &ctx, currLong, kLEOUnitNone );
-						break;
-					}
-
 					case 'd':
 					{
-						currPos -= sizeof(int);
-						int	currInt = *((int*)currPos);
-						DBGLOGPAR( "pushed %d", currInt );
-						LEOPushIntegerOnStack( &ctx, currInt, kLEOUnitNone );
+						x--;
+						if( paramStart[x] == 'l' )
+						{
+							currPos -= sizeof(long);
+							long	currLong = *((long*)currPos);
+							DBGLOGPAR( "pushed %ld", currLong );
+							LEOPushIntegerOnStack( &ctx, currLong, kLEOUnitNone );
+						}
+						else
+						{
+							currPos -= sizeof(int);
+							int	currInt = *((int*)currPos);
+							DBGLOGPAR( "pushed %d", currInt );
+							LEOPushIntegerOnStack( &ctx, currInt, kLEOUnitNone );
+						}
 						break;
 					}
 
@@ -845,6 +848,9 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 						throw std::logic_error("Unknown format in SendMessage format string.");
 						break;
 				}
+				
+				if( x == 0 )
+					break;
 			}
 
 			DBGLOGPAR( @"pushed PC %zu", numParams );
