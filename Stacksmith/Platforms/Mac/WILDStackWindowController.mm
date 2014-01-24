@@ -12,6 +12,20 @@
 #include "CBackground.h"
 #include "CDocument.h"
 #include "CMacPartBase.h"
+#include "CAlert.h"
+
+
+static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c, const char ** d, const char* theAppendee )
+{
+        if( *a == nil )
+                *a = theAppendee;
+        else if( *b == nil )
+                *b = theAppendee;
+        else if( *c == nil )
+                *c = theAppendee;
+        else if( *d == nil )
+                *d = theAppendee;
+}
 
 
 using namespace Carlson;
@@ -28,46 +42,128 @@ using namespace Carlson;
 -(NSView *)	hitTest: (NSPoint)aPoint
 {
 	NSView	*	hitView = [super hitTest: aPoint];
-//	if( hitView != nil )
-//		return self;
+	bool	isPeeking = [(WILDStackWindowController*)[[self window] windowController] cppStack]->GetPeeking();
+	if( isPeeking && hitView != nil )
+		return self;
 	return hitView;
 }
 
 
 -(void)	mouseDown: (NSEvent*)theEvt
 {
-	/*NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
-	CStack	*	theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
-	CCard	*	theCard = theStack->GetCurrentCard();
-	bool		foundOne = false;
+	bool	isPeeking = [(WILDStackWindowController*)[[self window] windowController] cppStack]->GetPeeking();
+	if( isPeeking )
+	{
+		NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
+		CStack	*	theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
+		CCard	*	theCard = theStack->GetCurrentCard();
+		bool		foundOne = false;
+		
+		size_t		numParts = theCard->GetNumParts();
+		for( size_t x = numParts; x > 0; x-- )
+		{
+			CPart	*	thePart = theCard->GetPart( x-1 );
+			if( !foundOne && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
+				&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
+			{
+				thePart->SetSelected(true);
+				foundOne = true;
+			}
+			else
+				thePart->SetSelected(false);
+		}
+		numParts = theCard->GetBackground()->GetNumParts();
+		for( size_t x = numParts; x > 0; x-- )
+		{
+			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
+			if( !foundOne && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
+				&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
+			{
+				thePart->SetSelected(true);
+				foundOne = true;
+			}
+			else
+				thePart->SetSelected(false);
+		}
+		[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];
+	}
+	else
+		[self.window makeFirstResponder: self];
+}
+
+
+- (BOOL)acceptsFirstResponder
+{
+	return YES;
+}
+
+
+- (BOOL)becomeFirstResponder
+{
+	return YES;
+}
+
+
+- (BOOL)resignFirstResponder
+{
+	return YES;
+}
+
+
+-(void)        keyDown: (NSEvent *)theEvent
+{
+	CStack *			theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
+	CCard *				theCard = theStack->GetCurrentCard();
+	const char *        firstModifier = nil;
+	const char *        secondModifier = nil;
+	const char *        thirdModifier = nil;
+	const char *        fourthModifier = nil;
 	
-	size_t		numParts = theCard->GetNumParts();
-	for( size_t x = numParts; x > 0; x-- )
+	if( theEvent.modifierFlags & NSShiftKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shift" );
+	else if( theEvent.modifierFlags & NSAlphaShiftKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shiftlock" );
+	if( theEvent.modifierFlags & NSAlternateKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "alternate" );
+	if( theEvent.modifierFlags & NSControlKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "control" );
+	if( theEvent.modifierFlags & NSCommandKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "command" );
+	
+	if( !firstModifier ) firstModifier = "";
+	if( !secondModifier ) secondModifier = "";
+	if( !thirdModifier ) thirdModifier = "";
+	if( !fourthModifier ) fourthModifier = "";
+	
+	std::function<void(const char *, size_t, size_t, CScriptableObject *)>	errHandler = [](const char * errMsg, size_t, size_t, CScriptableObject *)
 	{
-		CPart	*	thePart = theCard->GetPart( x-1 );
-		if( !foundOne && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
-			&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
-		{
-			thePart->SetSelected(true);
-			foundOne = true;
-		}
-		else
-			thePart->SetSelected(false);
-	}
-	numParts = theCard->GetBackground()->GetNumParts();
-	for( size_t x = numParts; x > 0; x-- )
+		CAlert::RunMessageAlert( errMsg );
+	};
+	
+	theCard->SendMessage( NULL, errHandler, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
+
+	if( theEvent.charactersIgnoringModifiers.length > 0 )
 	{
-		CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
-		if( !foundOne && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
-			&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
+		unichar theKey = [theEvent.charactersIgnoringModifiers characterAtIndex: 0];
+		switch( theKey )
 		{
-			thePart->SetSelected(true);
-			foundOne = true;
+			case NSLeftArrowFunctionKey:
+				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "left", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				break;
+			case NSRightArrowFunctionKey:
+				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "right", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				break;
+			case NSUpArrowFunctionKey:
+				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "up", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				break;
+			case NSDownArrowFunctionKey:
+				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "down", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				break;
+			case NSF1FunctionKey ... NSF35FunctionKey:
+				theCard->SendMessage( NULL, errHandler, "functionKey %d,%s,%s,%s,%s", (int)(theKey -NSF1FunctionKey +1), firstModifier, secondModifier, thirdModifier, fourthModifier );
+				break;
 		}
-		else
-			thePart->SetSelected(false);
 	}
-	[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];*/
 }
 
 @end
