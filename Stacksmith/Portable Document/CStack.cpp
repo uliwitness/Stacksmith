@@ -49,7 +49,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 	Retain();
 	
 	CURLRequest		request( mURL );
-	printf("Loading %s\n",mURL.c_str());
+	//printf("Loading %s\n",mURL.c_str());
 	CURLConnection::SendRequestWithCompletionHandler( request, [this,inCompletionBlock] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
 	{
 		tinyxml2::XMLDocument		document;

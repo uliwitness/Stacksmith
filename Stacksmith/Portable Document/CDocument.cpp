@@ -154,7 +154,8 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			{
 				std::string		fileName( currStackElem->Attribute("file") );
 				std::string		stackURL = mURL;
-				stackURL.append( 1, '/' );
+				if( stackURL[stackURL.length()-1] != '/' )
+					stackURL.append( 1, '/' );
 				stackURL.append( fileName );
 				char*			endPtr = NULL;
 				ObjectID	stackID = strtoll( currStackElem->Attribute("id"), &endPtr, 10 );
