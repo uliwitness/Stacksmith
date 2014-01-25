@@ -293,11 +293,15 @@ bool	CButtonPart::GetHighlight()
 
 void	CButtonPart::PrepareMouseUp()
 {
-	if( mAutoHighlight && (mFamily != 0 || mButtonStyle == EButtonStyleCheckBox || mButtonStyle == EButtonStyleRadioButton) )
+	if( mAutoHighlight && mFamily != 0 )	// Select this button in its radio button group.
 	{
 		SetHighlight(true);
 		if( mFamily != 0 )
 			mOwner->UnhighlightFamilyMembersOfPart( this );
+	}
+	else if( mAutoHighlight && (mButtonStyle == EButtonStyleCheckBox || mButtonStyle == EButtonStyleRadioButton) ) // Toggle checkboxes (and radio buttons abused as checkboxes).
+	{
+		SetHighlight(!GetHighlight());
 	}
 }
 
