@@ -675,6 +675,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	LEOScript*	theScript = GetScriptObject(errorHandler);
 	if( !theScript )
 		return;
+	LEOContextGroup*	contextGroup = GetScriptContextGroupObject();
 	LEOContext	ctx = {0};
 	const char*	paramStart = strchr( fmt, ' ' );
 	char		msg[512] = {0};
@@ -688,7 +689,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	
 	CScriptableObject*	parent = GetParentObject();
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this );
-	LEOInitContext( &ctx, GetScriptContextGroupObject(), ud, CScriptContextUserData::CleanUp );
+	LEOInitContext( &ctx, contextGroup, ud, CScriptContextUserData::CleanUp );
 	#if REMOTE_DEBUGGER
 	ctx.preInstructionProc = CScriptableObject::PreInstructionProc;
 	ctx.promptProc = LEORemoteDebuggerPrompt;
@@ -901,12 +902,15 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 		LEOPushIntegerOnStack( &ctx, 0, kLEOUnitNone );
 	
 	// Send message:
-	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( GetScriptContextGroupObject(), msg );
+	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( contextGroup, msg );
+	if( ctx.group->messageSent )
+		ctx.group->messageSent( handlerID, ctx.group );
+
 	LEOHandler*		theHandler = NULL;
 	while( !theHandler )
 	{
 		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
-
+	
 		if( theHandler )
 		{
 			LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.

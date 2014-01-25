@@ -124,6 +124,8 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( mContext.group, [msgName UTF8String] );
 	LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( mOwningScript, handlerID );
 
+	if( mContext.group->messageSent )
+		mContext.group->messageSent( handlerID, mContext.group );
 	if( theHandler )
 	{
 		LEOContextPushHandlerScriptReturnAddressAndBasePtr( &mContext, theHandler, mOwningScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.

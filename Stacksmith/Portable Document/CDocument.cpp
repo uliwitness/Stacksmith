@@ -399,6 +399,12 @@ ObjectID	CDocument::GetUniqueIDForMedia()
 }
 
 
+static void		CDocumentMessageSent( LEOHandlerID inHandlerID, LEOContextGroup* inContext )
+{
+	printf( "Message: %s\n", LEOContextGroupHandlerNameForHandlerID( inContext, inHandlerID ) );
+}
+
+
 LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 {
 	if( !mContextGroup )
@@ -406,6 +412,7 @@ LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 		mContextGroup = LEOContextGroupCreate();
 		if( mURL.find_first_of( "file://" ) != 0 )
 			mContextGroup->flags |= kLEOContextGroupFlagFromNetwork;
+		mContextGroup->messageSent = CDocumentMessageSent;
 	}
 	
 	return mContextGroup;
