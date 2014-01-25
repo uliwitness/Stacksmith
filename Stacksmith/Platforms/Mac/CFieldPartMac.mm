@@ -76,12 +76,19 @@ using namespace Carlson;
 
 @end;
 
+struct ListChunkCallbackContext
+{
+	NSMutableArray	*	lines;
+	CPartContents	*	contents;
+	NSDictionary	*	defaultAttrs;
+};
+
 
 static bool	ListChunkCallback( const char* currStr, size_t currLen, size_t currStart, size_t currEnd, void* userData )
 {
-	NSMutableArray	*	lines = (NSMutableArray*)userData;
-	NSString	*		itemTitle = [[NSString alloc] initWithBytes: currStr length: currLen encoding:NSUTF8StringEncoding];
-	[lines addObject: itemTitle];
+	ListChunkCallbackContext*	context = (ListChunkCallbackContext*)userData;
+	NSAttributedString		*	itemTitle = CFieldPartMac::GetCocoaAttributedString( context->contents->GetAttributedText(), context->defaultAttrs, currStart, currEnd );
+	[context->lines addObject: itemTitle];
 		
 	return true;
 }
@@ -131,12 +138,12 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		if( contents )
 		{
 			CAttributedString&		cppstr = contents->GetAttributedText();
-			NSAttributedString*		attrStr = GetCocoaAttributedString( &cppstr, GetCocoaAttributesForPart() );
+			NSAttributedString*		attrStr = GetCocoaAttributedString( cppstr, GetCocoaAttributesForPart() );
 			bool					oldRTF = cppstr.GetString().find("{\\rtf1\\ansi\\") == 0;
 			if( oldRTF )	// +++ Remove before shipping, this is to import old Stacksmith beta styles.
 			{
 				NSDictionary*	docAttrs = nil;
-				attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetString().length()] documentAttributes: &docAttrs];
+				attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetLength()] documentAttributes: &docAttrs];
 			}
 			[mView setAttributedStringValue: attrStr];
 			if( oldRTF )
@@ -169,21 +176,20 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 	CPartContents*	contents = GetContentsOnCurrentCard();
 	if( mAutoSelect )
 	{
-		NSMutableArray	*	theLines = [[NSMutableArray alloc] init];
-		std::string		contentsStr;
-		GetTextContents(contentsStr);
-		LEODoForEachChunk( contentsStr.c_str(), contentsStr.length(), kLEOChunkTypeLine, ListChunkCallback, 0, theLines );
-		[mMacDelegate setLines: theLines];
+		ListChunkCallbackContext	ctx = { .lines = [[NSMutableArray alloc] init], .contents = contents, .defaultAttrs = GetCocoaAttributesForPart() };
+		LEODoForEachChunk( contents->GetText().c_str(), contents->GetText().length(), kLEOChunkTypeLine, ListChunkCallback, 0, &ctx );
+		[mMacDelegate setLines: ctx.lines];
+		[ctx.lines release];
 		[mTableView reloadData];
 	}
 	else if( contents )
 	{
 		CAttributedString&		cppstr = contents->GetAttributedText();
-		NSAttributedString*		attrStr = GetCocoaAttributedString( &cppstr, GetCocoaAttributesForPart() );
+		NSAttributedString*		attrStr = GetCocoaAttributedString( cppstr, GetCocoaAttributesForPart() );
 		if( cppstr.GetString().find("{\\rtf1\\ansi\\") == 0 )	// +++ Remove before shipping, this is to import old Stacksmith beta styles.
 		{
 			NSDictionary*	docAttrs = nil;
-			attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetString().length()] documentAttributes: &docAttrs];
+			attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetLength()] documentAttributes: &docAttrs];
 		}
 		[mView setAttributedStringValue: attrStr];
 	}
@@ -258,15 +264,28 @@ NSDictionary*	CFieldPartMac::GetCocoaAttributesForPart()
 }
 
 
-NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( CAttributedString * attrStr, NSDictionary * defaultAttrs )
+NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs, size_t endOffs )
 {
 //	attrStr->Dump();
-	NSMutableAttributedString	*	newAttrStr = [[[NSMutableAttributedString alloc] initWithString: [NSString stringWithUTF8String: attrStr->GetString().c_str()] attributes: defaultAttrs] autorelease];
-	attrStr->ForEachRangeDo([newAttrStr,defaultAttrs](CAttributeRange *currRange, const std::string &txt)
+	size_t	len = ((endOffs != SIZE_T_MAX) ? endOffs : attrStr.GetLength()) -startOffs;
+	NSMutableAttributedString	*	newAttrStr = [[[NSMutableAttributedString alloc] initWithString: [[[NSString alloc] initWithBytes: attrStr.GetString().c_str() +startOffs length: len encoding: NSUTF8StringEncoding] autorelease] attributes: defaultAttrs] autorelease];
+	attrStr.ForEachRangeDo([newAttrStr,defaultAttrs,endOffs,startOffs](CAttributeRange *currRange, const std::string &txt)
 	{
 		if( currRange )
 		{
+			if( currRange->mStart > endOffs || currRange->mEnd < startOffs )
+				return;
 			NSRange	currCocoaRange = { currRange->mStart, currRange->mEnd -currRange->mStart };
+			if( currCocoaRange.location < startOffs )
+			{
+				currCocoaRange.length -= startOffs -currCocoaRange.location;
+				currCocoaRange.location = startOffs;
+			}
+			if( (currCocoaRange.location +currCocoaRange.length) > endOffs )
+			{
+				currCocoaRange.length -= (currCocoaRange.location +currCocoaRange.length) -endOffs;
+			}
+			currCocoaRange.location -= startOffs;
 			
 			// +++ Convert UTF8 to UTF16 range!
 			

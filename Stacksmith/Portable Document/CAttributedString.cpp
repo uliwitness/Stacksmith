@@ -12,7 +12,7 @@
 using namespace Carlson;
 
 
-std::map<std::string,std::string>	CAttributeRange::GetAttributesWithoutInternal()
+std::map<std::string,std::string>	CAttributeRange::GetAttributesWithoutInternal() const
 {
 	std::map<std::string,std::string>	filteredAttrs;
 	for( auto currElem : mAttributes )
@@ -182,7 +182,7 @@ void	CAttributedString::NormalizeStyleRuns()
 }
 
 
-void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLElement* inElement, CStyleSheet *styleSheet )
+void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLElement* inElement, CStyleSheet *styleSheet ) const
 {
 	int		styleNum = 0;
 	size_t	currOffs = 0;
@@ -409,7 +409,7 @@ void	CAttributedString::ClearAllAttributesForRange( size_t inStart, size_t inEnd
 }
 
 
-void	CAttributedString::GetAttributesInRange( size_t inStart, size_t inEnd, std::map<std::string,std::string>& outStyles, bool *outMixed )
+void	CAttributedString::GetAttributesInRange( size_t inStart, size_t inEnd, std::map<std::string,std::string>& outStyles, bool *outMixed ) const
 {
 	for( CAttributeRange currRun : mRanges )
 	{
@@ -429,7 +429,7 @@ void	CAttributedString::GetAttributesInRange( size_t inStart, size_t inEnd, std:
 }
 
 
-void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback )
+void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback ) const
 {
 	size_t	currOffs = 0;
 	for( CAttributeRange currRun : mRanges )
@@ -445,7 +445,7 @@ void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,cons
 }
 
 
-void	CAttributedString::Dump()
+void	CAttributedString::Dump() const
 {
 #if 0
 	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )

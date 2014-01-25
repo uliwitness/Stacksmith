@@ -12,6 +12,7 @@
 
 #include "CFieldPart.h"
 #include "CMacPartBase.h"
+#include <climits>
 
 @class WILDFieldDelegate;
 
@@ -32,7 +33,7 @@ public:
 	virtual void	LoadChangedTextFromView();
 	virtual NSDictionary*			GetCocoaAttributesForPart();
 
-	static NSAttributedString	*	GetCocoaAttributedString( CAttributedString * attrStr, NSDictionary * defaultAttrs );
+	static NSAttributedString	*	GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs = 0, size_t endOffs = SIZE_T_MAX );
 	static void						SetAttributedStringWithCocoa( CAttributedString& stringToSet, NSAttributedString* cocoaAttrStr );
 	
 protected:
