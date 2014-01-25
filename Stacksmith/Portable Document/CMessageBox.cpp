@@ -38,7 +38,7 @@ bool	CMessageBox::GetTextContents( std::string& outString )
 }
 
 
-bool	CMessageBox::SetTextContents( std::string inString )
+bool	CMessageBox::SetTextContents( const std::string& inString )
 {
 	mScript = inString;
 	

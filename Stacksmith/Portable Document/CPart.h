@@ -71,7 +71,7 @@ public:
 	virtual void				SetIndex( LEOInteger inIndex, CPartCreatorBase* inType = NULL );
 	
 	virtual bool				GetTextContents( std::string& outString );
-	virtual bool				SetTextContents( std::string inString);
+	virtual bool				SetTextContents( const std::string& inString);
 
 	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );

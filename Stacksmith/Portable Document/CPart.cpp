@@ -184,7 +184,7 @@ bool	CPart::GetTextContents( std::string& outString )
 }
 
 
-bool	CPart::SetTextContents( std::string inString )
+bool	CPart::SetTextContents( const std::string& inString )
 {
 	CPartContents*	contents = GetContentsOnCurrentCard();
 	if( contents )

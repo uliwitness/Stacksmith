@@ -89,7 +89,7 @@ CMessageBoxMac::~CMessageBoxMac()
 }
 
 
-bool	CMessageBoxMac::SetTextContents( std::string inString )
+bool	CMessageBoxMac::SetTextContents( const std::string& inString )
 {
 	CMessageBox::SetTextContents( inString );
 	

@@ -189,6 +189,16 @@ bool	CFieldPart::GetTextContents( std::string &outString )
 }
 
 
+bool	CFieldPart::SetTextContents( const std::string& inString )
+{
+	CVisiblePart::SetTextContents( inString );
+	
+	LoadChangedTextStylesIntoView();
+	
+	return true;
+}
+
+
 bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
 	if( strcasecmp("textStyle", inPropertyName) == 0 )

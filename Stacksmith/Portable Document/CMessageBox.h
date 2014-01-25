@@ -26,7 +26,7 @@ public:
 	virtual void		Run();
 	
 	virtual bool		GetTextContents( std::string& outString );
-	virtual bool		SetTextContents( std::string inString);
+	virtual bool		SetTextContents( const std::string& inString);
 
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );
 	virtual LEOContextGroup*	GetScriptContextGroupObject();

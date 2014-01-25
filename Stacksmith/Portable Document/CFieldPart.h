@@ -40,6 +40,7 @@ public:
 	virtual void			SetViewTextNeedsSync( bool inNeeded )	{ mViewTextNeedsSync = inNeeded; };
 
 	virtual bool			GetTextContents( std::string &outString );
+	virtual bool			SetTextContents( const std::string &inString );
 
 protected:
 	~CFieldPart()	{};

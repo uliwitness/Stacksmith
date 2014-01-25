@@ -54,7 +54,7 @@ public:
 //	NO. If an object has no contents, the same.
 
 	virtual bool				GetTextContents( std::string& outString )		{ return false; };
-	virtual bool				SetTextContents( std::string inString)			{ return false; };
+	virtual bool				SetTextContents( const std::string& inString)	{ return false; };
 
 	virtual bool				GoThereInNewWindow( bool inNewWindow )			{ return false; };
 
