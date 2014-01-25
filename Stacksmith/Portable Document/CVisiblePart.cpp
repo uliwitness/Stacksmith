@@ -197,6 +197,9 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 
 /*static*/ TPartTextAlign	CVisiblePart::GetTextAlignFromString( const char* inString )
 {
+	if( !inString )
+		return EPartTextAlignDefault;
+		
 	for( TPartTextAlign x = 0; x < EPartTextAlign_Last; x++ )
 	{
 		if( strcasecmp(inString,sTextAlignNames[x]) == 0 )
@@ -218,6 +221,9 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 
 /*static*/ TPartTextStyle	CVisiblePart::GetStyleFromString( const char* inString )
 {
+	if( !inString )
+		return EPartTextStylePlain;
+		
 	for( size_t x = 0; x < EPartTextStyleBit_Last; x++ )
 	{
 		if( strcasecmp(inString,sTextStyleNames[x]) == 0 )
