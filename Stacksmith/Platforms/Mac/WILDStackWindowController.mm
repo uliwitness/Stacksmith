@@ -262,24 +262,27 @@ using namespace Carlson;
 		currPart->CreateViewIn( self.window.contentView );
 	}
 
-	numParts = theCard->GetNumParts();
-	std::string		cdPictureURL( theCard->GetPictureURL() );
-	if( theCard->GetShowPicture() && cdPictureURL.length() > 0 )
+	if( !theCard->GetStack()->GetEditingBackground() )
 	{
-		mCardImageView = [[NSImageView alloc] initWithFrame: NSMakeRect(0,0,mStack->GetCardWidth(), mStack->GetCardHeight())];
-		[mCardImageView setWantsLayer: YES];
-		mCardImageView.image = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cdPictureURL.c_str()]]] autorelease];
-		[self.window.contentView addSubview: mCardImageView];
-	}
-	for( size_t x = 0; x < numParts; x++ )
-	{
-		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
-		if( !currPart )
-			continue;
-		currPart->CreateViewIn( self.window.contentView );
+		numParts = theCard->GetNumParts();
+		std::string		cdPictureURL( theCard->GetPictureURL() );
+		if( theCard->GetShowPicture() && cdPictureURL.length() > 0 )
+		{
+			mCardImageView = [[NSImageView alloc] initWithFrame: NSMakeRect(0,0,mStack->GetCardWidth(), mStack->GetCardHeight())];
+			[mCardImageView setWantsLayer: YES];
+			mCardImageView.image = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cdPictureURL.c_str()]]] autorelease];
+			[self.window.contentView addSubview: mCardImageView];
+		}
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
+			if( !currPart )
+				continue;
+			currPart->CreateViewIn( self.window.contentView );
+		}
 	}
 	
-	//[self drawBoundingBoxes];
+	[self drawBoundingBoxes];
 }
 
 

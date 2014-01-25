@@ -13,6 +13,7 @@
 #import "UKSystemInfo.h"
 #include "CScriptableObjectValue.h"
 #include "CSound.h"
+#include "CStack.h"
 
 
 using namespace Carlson;
@@ -37,7 +38,8 @@ void	LEOPushMachineInstruction( LEOContext* inContext );
 void	LEOPushSystemVersionInstruction( LEOContext* inContext );
 void	LEOPushTargetInstruction( LEOContext* inContext );
 void	LEOPushSoundInstruction( LEOContext* inContext );
-
+void	LEOPushEditBackgroundInstruction( LEOContext* inContext );
+void	LEOSetEditBackgroundInstruction( LEOContext* inContext );
 
 
 void	LEOSetCursorInstruction( LEOContext* inContext )
@@ -153,6 +155,27 @@ void	LEOPushSoundInstruction( LEOContext* inContext )
 }
 
 
+void	LEOPushEditBackgroundInstruction( LEOContext* inContext )
+{
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+
+	LEOPushBooleanOnStack( inContext, userData->GetStack()->GetEditingBackground() );
+	
+	inContext->currentInstruction++;
+}
+
+
+void	LEOSetEditBackgroundInstruction( LEOContext* inContext )
+{
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+
+	userData->GetStack()->SetEditingBackground( LEOGetValueAsBoolean( inContext->stackEndPtr -1, inContext ) );
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOSetCursorInstruction)
 LEOINSTR(LEOPushCursorInstruction)
@@ -164,6 +187,8 @@ LEOINSTR(LEOPushPhysicalMemoryInstruction)
 LEOINSTR(LEOPushMachineInstruction)
 LEOINSTR(LEOPushSystemVersionInstruction)
 LEOINSTR(LEOPushSoundInstruction)
+LEOINSTR(LEOPushEditBackgroundInstruction)
+LEOINSTR(LEOSetEditBackgroundInstruction)
 LEOINSTR_LAST(LEOPushTargetInstruction)
 
 
@@ -179,5 +204,6 @@ struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 	{ EMachineIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_MACHINE_INSTR },
 	{ ETargetIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_TARGET_INSTR },
 	{ ESoundIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SOUND_INSTR },
+	{ EEditBackgroundIdentifier, ELastIdentifier_Sentinel, SET_EDIT_BACKGROUND_INSTR, PUSH_EDIT_BACKGROUND_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };

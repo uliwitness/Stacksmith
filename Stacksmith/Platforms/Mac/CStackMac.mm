@@ -17,6 +17,7 @@
 #include "CDocument.h"
 #include "CAlert.h"
 #include "WILDStackWindowController.h"
+#include <QuartzCore/QuartzCore.h>
 
 
 using namespace Carlson;
@@ -49,16 +50,29 @@ void	CStackMac::SetPeeking( bool inState )
 }
 
 
+void	CStackMac::SetEditingBackground( bool inState )
+{
+	CStack::SetEditingBackground(inState);
+	
+	SetCurrentCard( GetCurrentCard() );
+}
+
+
 void	CStackMac::SetCurrentCard( CCard* inCard )
 {
 	if( !mMacWindowController )
 		mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
 
+	[CATransaction begin];
+	[CATransaction setAnimationDuration: 0.0];
+	
 	[mMacWindowController removeAllViews];
 	
 	CStack::SetCurrentCard(inCard);
 	
 	[mMacWindowController createAllViews];
+
+	[CATransaction commit];
 }
 
 

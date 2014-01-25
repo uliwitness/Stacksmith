@@ -31,6 +31,7 @@ public:
 	virtual void				SetPeeking( bool inState );
 
 	virtual void				SetCurrentCard( CCard* inCard );
+	virtual void				SetEditingBackground( bool inState );
 	
 	static void					RegisterPartCreators();
 
