@@ -24,6 +24,7 @@
 +(WILDButtonView*)		shapeButton;	// with WILDButtonCell.
 +(NSTextField*)			textField;
 +(NSPopUpButton*)		popUpButton;
++(NSTableView*)			tableViewInContainer;	// Scroll view containing a table view. Ask this view for its enclosingScrollView.
 
 @end
 

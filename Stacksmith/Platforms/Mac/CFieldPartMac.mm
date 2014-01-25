@@ -88,7 +88,7 @@ static bool	ListChunkCallback( const char* currStr, size_t currLen, size_t currS
 
 
 CFieldPartMac::CFieldPartMac( CLayer *inOwner )
-	: CFieldPart( inOwner ), mView(nil), mMacDelegate(nil)
+	: CFieldPart( inOwner ), mView(nil), mMacDelegate(nil), mTableView(nil)
 {
 	
 }
@@ -111,13 +111,16 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	mMacDelegate.owningField = this;
 	if( mAutoSelect )
 	{
-		NSTableView	*	tv = [[NSTableView alloc] initWithFrame: NSMakeRect(10, 10, 100, 100)];
-		[tv setDataSource: mMacDelegate];
-		mView = (NSTextField*)tv;
+		mTableView = [WILDViewFactory tableViewInContainer];
+		mTableView.dataSource = mMacDelegate;
+		mTableView.delegate = mMacDelegate;
+		mView = (NSTextField*)[[mTableView enclosingScrollView] retain];
 	}
 	else
+	{
 		mView = [[WILDViewFactory textField] retain];
-	mView.delegate = mMacDelegate;
+		mView.delegate = mMacDelegate;
+	}
 	if( mAutoSelect )
 	{
 		LoadChangedTextStylesIntoView();
@@ -161,7 +164,7 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 		GetTextContents(contentsStr);
 		LEODoForEachChunk( contentsStr.c_str(), contentsStr.length(), kLEOChunkTypeLine, ListChunkCallback, 0, theLines );
 		[mMacDelegate setLines: theLines];
-		[(NSTableView*)mView reloadData];
+		[mTableView reloadData];
 	}
 	else if( contents )
 	{

@@ -40,6 +40,7 @@ protected:
 
 	NSTextField	*		mView;
 	WILDFieldDelegate*	mMacDelegate;
+	NSTableView *		mTableView;
 };
 
 
