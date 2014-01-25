@@ -271,15 +271,15 @@ void	WILDCreateInstruction( LEOContext* inContext )
 
     CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
     CStack		*	frontStack = userData->GetStack();
-    CCard		*	currentCard = frontStack->GetCurrentCard();
+    CLayer		*	currentLayer = frontStack->GetCurrentLayer();
     tinyxml2::XMLDocument   document;
     std::string             xml( "<part><type>" );
     xml.append( typeNameBuf );
     xml.append( "</type></part>" );
     document.Parse( xml.c_str() );
-    CPart * thePart = CPart::NewPartWithElement( document.RootElement(), currentCard );
+    CPart * thePart = CPart::NewPartWithElement( document.RootElement(), currentLayer );
     thePart->SetName( nameBuf );
-    currentCard->AddPart( thePart );
+    currentLayer->AddPart( thePart );
 
 	inContext->currentInstruction++;
 }

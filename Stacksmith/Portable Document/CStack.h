@@ -27,7 +27,7 @@ public:
 	static CStack*	GetFrontStack()						{ return sFrontStack; };
 	static void		SetFrontStack( CStack* inStack )	{ sFrontStack = inStack; };
 
-	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false) { mName = inName; mDocument = inDocument; };
+	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	void			Save();
@@ -55,12 +55,15 @@ public:
 	
 	virtual void	SetCurrentCard( CCard* inCard )	{ mCurrentCard = inCard; };
 	virtual CCard*	GetCurrentCard()				{ return mCurrentCard; };
+	virtual CLayer*	GetCurrentLayer()				{ if( mEditingBackground ) return mCurrentCard->GetBackground(); return mCurrentCard; };
 	virtual CStack*	GetStack()						{ return this; };
 	size_t			GetCardWidth()					{ return mCardWidth; };
 	size_t			GetCardHeight()					{ return mCardHeight; };
 	
 	virtual void	SetPeeking( bool inState );
-	virtual bool	GetPeeking()					{ return mPeeking; };
+	virtual bool	GetPeeking()							{ return mPeeking; };
+	virtual void	SetEditingBackground( bool inState )	{ mEditingBackground = inState; };
+	virtual bool	GetEditingBackground()					{ return mEditingBackground; };
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	
@@ -91,6 +94,7 @@ protected:
 	std::set<CCardRef>			mMarkedCards;		// List of all cards in this stack.
 	CCardRef					mCurrentCard;		// The card that is currently being shown in this stack's window.
 	std::vector<std::function<void(CStack*)>>	mLoadCompletionBlocks;
+	bool						mEditingBackground;	// Are we editing the background, or are we showing the full mixed card/bg layers?
 	
 	static CStack*				sFrontStack;		// The stack whose window is currently frontmost and will e.g. receive messages from the message box.
 };
