@@ -534,7 +534,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	tabKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "tabkey" );
 	if( inHandler == arrowKeyHandlerID )
 	{
-		LEOValuePtr	directionParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 0 );
+		LEOValuePtr	directionParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 1 );
 		char		buf[40] = {};
 		if( directionParam )
 		{
@@ -566,7 +566,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	}
 	else if( inHandler == tabKeyHandlerID )
 	{
-		LEOValuePtr	shiftModifierParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 0 );
+		LEOValuePtr	shiftModifierParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 1 );
 		char		buf[40] = {};
 		if( shiftModifierParam )
 		{
