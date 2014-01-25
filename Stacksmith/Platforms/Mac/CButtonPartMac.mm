@@ -40,6 +40,7 @@ static bool	PopUpChunkCallback( const char* currStr, size_t currLen, size_t curr
 
 void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 {
+	NSRect		box = NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop);
 	if( mButtonStyle == EButtonStyleCheckBox )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
@@ -61,22 +62,27 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
 		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
+		[mView setBordered: NO];
 	}
 	else if( mButtonStyle == EButtonStyleRoundrect )
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
-		[mView setBezelStyle: NSTexturedRoundedBezelStyle];
+		[mView setBezelStyle: NSRoundedBezelStyle];
 	}
 	else if( mButtonStyle == EButtonStyleStandard )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
 		[mView setBezelStyle: NSRoundedBezelStyle];
+		box = NSInsetRect( box, -5, -3 );
+		box.size.height += 3;
 	}
 	else if( mButtonStyle == EButtonStyleDefault )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
 		[mView setBezelStyle: NSRoundedBezelStyle];
 		[mView setKeyEquivalent: @"\n"];
+		box = NSInsetRect( box, -5, -3 );
+		box.size.height += 3;
 	}
 	else if( mButtonStyle == EButtonStyleOval )
 	{
@@ -86,13 +92,17 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	else if( mButtonStyle == EButtonStylePopUp )
 	{
 		mView = (WILDButtonView*)[[WILDViewFactory popUpButton] retain];
+		box = NSInsetRect( box, -1, 0 );
+		box.size.width += 1;
+		box.origin.y += 1;
 	}
 	else
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
-		[mView setBezelStyle: NSRoundedBezelStyle];
+		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
+		[mView setBordered: NO];
 	}
-	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[mView setFrame: box];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
 	[mView.layer setShadowRadius: mShadowBlurRadius];
@@ -113,7 +123,14 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 		if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
 		{
 			[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
-			[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
+			if( mButtonStyle == EButtonStyleTransparent )
+			{
+				[((WILDButtonCell*)mView.cell) setBackgroundColor: nil];
+			}
+			else
+			{
+				[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
+			}
 			[((WILDButtonCell*)mView.cell) setLineWidth: mLineWidth];
 		}
 	}

@@ -131,12 +131,12 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		else
 			bgColor = self.backgroundColor;
 		
-		if( self.bevelWidth == 0 )
+		if( self.bevelWidth == 0 && bgColor )
 		{
 			[bgColor set];
 			[buttonShape fill];
 		}
-		else
+		else if( bgColor )
 			WILDDrawAddColorBezel( buttonShape, bgColor, self.bevelWidth, self.bevelAngle, nil, nil );
 	}
 	
@@ -187,14 +187,13 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		if( highlightColor == self.lineColor )	// We didn't have to generate highlight cuz line & bg are same?
 		{
 			NSColor		*	bgColor = [self backgroundColor];
-			if( bgColor )
-			{
-				NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
-				
-				[muAttrTitle addAttribute: NSForegroundColorAttributeName value: bgColor
-								range: NSMakeRange(0,[muAttrTitle length])];
-				attrTitle = muAttrTitle;
-			}
+			if( !bgColor )
+				bgColor = NSColor.whiteColor;
+			NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
+			
+			[muAttrTitle addAttribute: NSForegroundColorAttributeName value: bgColor
+							range: NSMakeRange(0,[muAttrTitle length])];
+			attrTitle = muAttrTitle;
 		}
 	}
 	else if( !isActive )
