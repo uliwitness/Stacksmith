@@ -93,4 +93,10 @@
 		<name>Flute</name>
 		<file>flute.aiff</file>
 	</media>
+	<media>
+		<id>128</id>
+		<type>movie</type>
+		<name>Placeholder Movie</name>
+		<file>PlaceholderMovie.mov</file>
+	</media>
 </stackfile>

@@ -23,7 +23,8 @@ typedef enum
 	EMediaTypePicture,		// Compatibility image type used for PICT resources.
 	EMediaTypeCursor,		// Compatibility image type used for CURS resources.
 	EMediaTypeSound,		// Preferred media type for sounds in new stacks.
-	EMediaTypePattern		// Compatibility image type used for the 40 patterns in a HyperCard stack.
+	EMediaTypePattern,		// Compatibility image type used for the 40 patterns in a HyperCard stack.
+	EMediaTypeMovie			// Preferred media type to use for movies embedded in new stacks.
 } TMediaType;
 
 

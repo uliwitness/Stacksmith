@@ -62,6 +62,8 @@ void	CDocument::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root,
 				mediaType = EMediaTypeSound;
 			else if( typeName.compare( "pattern" ) == 0 )
 				mediaType = EMediaTypePattern;
+			else if( typeName.compare( "movie" ) == 0 )
+				mediaType = EMediaTypeMovie;
 			tinyxml2::XMLElement	*	hotspotElem = currMediaElem->FirstChildElement( "hotspot" );
 			int		hotspotLeft = CTinyXMLUtils::GetIntNamed( hotspotElem, "left", 0 );
 			int		hotspotTop = CTinyXMLUtils::GetIntNamed( hotspotElem, "top", 0 );
@@ -261,10 +263,12 @@ void	CDocument::Save()
 			case EMediaTypePattern:
 				mediaTypeStr = "pattern";
 				break;
+			case EMediaTypeMovie:
+				mediaTypeStr = "movie";
+				break;
 			case EMediaTypeUnknown:
 				break;
 		}
-
 		
 		CTinyXMLUtils::SetLongLongAttributeNamed( mediaElement, currEntry.GetID(), "id" );
 		

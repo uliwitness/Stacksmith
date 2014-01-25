@@ -10,6 +10,7 @@
 #import "ULIInvisiblePlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#include "CDocument.h"
 
 
 using namespace Carlson;
@@ -73,7 +74,25 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, -mShadowOffsetHeight)];
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
-	mView.player = [AVPlayer playerWithURL: [[NSBundle mainBundle] URLForResource: @"PlaceholderMovie" withExtension: @"mov"]];
+	NSURL	*	movieURL = nil;
+	std::string	mediaURL = GetDocument()->GetMediaURLByNameOfType( mMediaPath.c_str(), EMediaTypeMovie );
+	if( mediaURL.length() == 0 && mMediaPath.find("file://") == 0 )
+	{
+		LEOContextGroup*	theGroup = GetDocument()->GetScriptContextGroupObject();
+		if( (theGroup->flags & kLEOContextGroupFlagFromNetwork) == 0 );
+			mediaURL = mMediaPath;
+	}
+	else if( mediaURL.length() == 0 && mMediaPath.find("http://") == 0 )
+	{
+		LEOContextGroup*	theGroup = GetDocument()->GetScriptContextGroupObject();
+		if( (theGroup->flags & kLEOContextGroupFlagNoNetwork) == 0 );
+			mediaURL = mMediaPath;
+	}
+	if( mediaURL.length() == 0 )
+		mediaURL = GetDocument()->GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
+	if( mediaURL.length() > 0 )
+		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
+	mView.player = [AVPlayer playerWithURL: movieURL];
 	mView.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
 }
 
