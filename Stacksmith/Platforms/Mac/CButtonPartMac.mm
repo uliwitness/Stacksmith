@@ -21,11 +21,17 @@ using namespace Carlson;
 static bool	PopUpChunkCallback( const char* currStr, size_t currLen, size_t currStart, size_t currEnd, void* userData )
 {
 	NSPopUpButton	*	popUp = (NSPopUpButton*)userData;
-	NSString	*		itemTitle = [[NSString alloc] initWithBytes: currStr length: currLen encoding:NSUTF8StringEncoding];
-	NSMenuItem	*		theItem = [[NSMenuItem alloc] initWithTitle: itemTitle action:Nil keyEquivalent: @""];
+	NSMenuItem	*		theItem = nil;
+	if( currLen == 1 && currStr[0] == '-' )
+		theItem = [[NSMenuItem separatorItem] retain];
+	else
+	{
+		NSString	*		itemTitle = [[NSString alloc] initWithBytes: currStr length: currLen encoding:NSUTF8StringEncoding];
+		theItem = [[NSMenuItem alloc] initWithTitle: itemTitle action:Nil keyEquivalent: @""];
+		[itemTitle release];
+	}
 	[popUp.menu addItem: theItem];
 	[theItem release];
-	[itemTitle release];
 	
 	return true;
 }
@@ -115,6 +121,28 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	[mView setEnabled: mEnabled];
 	[inSuperView addSubview: mView];
+}
+
+
+bool	CButtonPartMac::SetTextContents( const std::string &inString )
+{
+	CButtonPart::SetTextContents( inString );
+	
+	if( mButtonStyle == EButtonStylePopUp )
+	{
+		NSInteger	oldSel = [(NSPopUpButton*)mView indexOfSelectedItem];
+		[(NSPopUpButton*)mView removeAllItems];
+		LEODoForEachChunk( inString.c_str(), inString.length(), kLEOChunkTypeLine, PopUpChunkCallback, 0, mView );
+		NSInteger	numItems = [(NSPopUpButton*)mView numberOfItems];
+		if( numItems > 0 )
+		{
+			if( oldSel >= numItems )
+				oldSel = numItems -1;
+			[(NSPopUpButton*)mView selectItemAtIndex: oldSel];
+		}
+	}
+	
+	return true;
 }
 
 
