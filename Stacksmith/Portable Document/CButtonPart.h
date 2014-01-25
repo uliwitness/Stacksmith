@@ -44,10 +44,12 @@ public:
 	virtual void			SetSharedHighlight( bool inHighlight )	{ mSharedHighlight = inHighlight; };
 	virtual bool			GetAutoHighlight()						{ return mAutoHighlight; };
 	virtual void			SetAutoHighlight( bool inHighlight )	{ mAutoHighlight = inHighlight; };
-	virtual bool			GetHighlight()							{ return mHighlight; };
-	virtual void			SetHighlight( bool inHighlight )		{ mHighlight = inHighlight; };
+	virtual bool			GetHighlight();
+	virtual void			SetHighlight( bool inHighlight );
 	virtual bool			GetShowName()							{ return mShowName; };
 	virtual void			SetShowName( bool inShowName )			{ mShowName = inShowName; };
+	
+	virtual void			PrepareMouseUp();
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );

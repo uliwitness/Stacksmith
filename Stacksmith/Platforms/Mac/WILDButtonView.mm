@@ -109,6 +109,7 @@ using namespace Carlson;
 			[self.window display];
 		}
 		[[self target] performSelector: [self action] withObject: self];
+		self->owningPart->PrepareMouseUp();
 		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUp %ld", [event buttonNumber] +1 );
 	}

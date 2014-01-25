@@ -49,6 +49,7 @@ public:
 	std::string		GetPictureURL();
 	std::string		GetPictureName()		{ return mPictureName; };
 	bool			GetShowPicture()		{ return mShowPict; };
+	void			UnhighlightFamilyMembersOfPart( CPart* inPart );	// inPart will not be unhighlighted, only everyone from the same family.
 	
 	CPartContents*	GetPartContentsByID( ObjectID inID, bool isForBackgroundPart );
 	void			AddPartContents( CPartContents* inContents );
@@ -86,7 +87,6 @@ protected:
 	std::vector<CPartRef>			mParts;				// Array of parts on this card/bg.
 	std::vector<CPartRef>			mAddColorParts;		// Array of parts for which we have AddColor color information. May contain parts that are already in mParts.
 	std::vector<CPartContentsRef>	mContents;			// Dictionary of part ID -> contents mappings
-	std::multimap<int,CPartRef>		mButtonFamilies;	// Family ID as key, and arrays of button parts belonging to these families.
 	CStyleSheet						mStyles;
 	CStack	*						mStack;
 };

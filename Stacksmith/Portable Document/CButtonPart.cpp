@@ -169,11 +169,7 @@ bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRange
 	}
 	else if( strcasecmp("highlight", inPropertyName) == 0 )
 	{
-		CPartContents*	theContents = NULL;
-		CCard	*		currCard = GetStack()->GetCurrentCard();
-		if( mOwner != currCard && !GetSharedHighlight() )	// We're on the background layer, not on the card?
-			theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
-		LEOInitBooleanValue( outValue, (theContents ? theContents->GetHighlight() : GetHighlight()), kLEOInvalidateReferences, inContext );
+		LEOInitBooleanValue( outValue, GetHighlight(), kLEOInvalidateReferences, inContext );
 	}
 	else if( strcasecmp("sharedHighlight", inPropertyName) == 0 )
 	{
@@ -213,27 +209,10 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 	}
 	else if( strcasecmp("highlight", inPropertyName) == 0 )
 	{
-		CPartContents*	theContents = NULL;
 		bool			theHighlight = LEOGetValueAsBoolean( inValue, inContext );
 		if( !inContext->keepRunning )
 			return true;
-		CCard	*		currCard = GetStack()->GetCurrentCard();
-		if( mOwner != currCard && !GetSharedHighlight() )	// We're on the background layer, not on the card?
-		{
-			theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
-			if( !theContents )
-			{
-				theContents = new CPartContents( currCard );
-				theContents->SetID( GetID() );
-				theContents->SetIsOnBackground( mOwner != currCard );
-				theContents->SetHighlight( theHighlight );
-				currCard->AddPartContents( theContents );
-			}
-			else
-				theContents->SetHighlight( theHighlight );
-		}
-		else
-			SetHighlight( theHighlight );
+		SetHighlight( theHighlight );
 	}
 	else if( strcasecmp("autoHighlight", inPropertyName) == 0 )
 	{
@@ -276,6 +255,50 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 	return true;
+}
+
+
+void	CButtonPart::SetHighlight(bool inHighlight)
+{
+	CPartContents*	theContents = NULL;
+	CCard	*		currCard = GetStack()->GetCurrentCard();
+	if( mOwner != currCard && !GetSharedHighlight() )	// We're on the background layer, not on the card?
+	{
+		theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
+		if( !theContents )
+		{
+			theContents = new CPartContents( currCard );
+			theContents->SetID( GetID() );
+			theContents->SetIsOnBackground( mOwner != currCard );
+			theContents->SetHighlight( inHighlight );
+			currCard->AddPartContents( theContents );
+		}
+		else
+			theContents->SetHighlight( inHighlight );
+	}
+	else
+		mHighlight = inHighlight;
+}
+
+
+bool	CButtonPart::GetHighlight()
+{
+	CPartContents*	theContents = NULL;
+	CCard	*	currCard = GetStack()->GetCurrentCard();
+	if( mOwner != currCard && !GetSharedHighlight() )	// We're on the background layer, not on the card?
+		theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
+	return (theContents ? theContents->GetHighlight() : mHighlight);
+}
+
+
+void	CButtonPart::PrepareMouseUp()
+{
+	if( mAutoHighlight && (mFamily != 0 || mButtonStyle == EButtonStyleCheckBox || mButtonStyle == EButtonStyleRadioButton) )
+	{
+		SetHighlight(true);
+		if( mFamily != 0 )
+			mOwner->UnhighlightFamilyMembersOfPart( this );
+	}
 }
 
 

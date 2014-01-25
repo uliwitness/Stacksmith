@@ -28,6 +28,7 @@ public:
 	virtual void	DestroyView();
 	virtual void	SetName( const std::string& inStr );
 	virtual void	SetPeeking( bool inState );
+	virtual void	SetHighlight( bool inHighlight );
 	
 protected:
 	~CButtonPartMac()	{ DestroyView(); };

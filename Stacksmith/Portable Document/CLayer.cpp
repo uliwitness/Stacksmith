@@ -95,7 +95,6 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 					thePart->Autorelease();
 					mParts.push_back( thePart );
 					thePart->Retain();	// Retain for the button families array.
-					mButtonFamilies.insert( std::make_pair(thePart->GetFamily(), thePart) );
 
 					currPartElem = currPartElem->NextSiblingElement( "part" );
 				}
@@ -504,6 +503,18 @@ void	CLayer::SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase
 	
 	mParts.erase( mParts.begin() +oldIndex );
 	mParts.insert( mParts.begin() +inIndex, inPart );
+}
+
+
+void	CLayer::UnhighlightFamilyMembersOfPart( CPart* inPart )
+{
+	LEOInteger		theFamily = inPart->GetFamily();
+	for( auto currPart : mParts )
+	{
+		if( currPart->GetFamily() == theFamily
+			&& (currPart != inPart) )
+			currPart->SetHighlight( false );
+	}
 }
 
 
