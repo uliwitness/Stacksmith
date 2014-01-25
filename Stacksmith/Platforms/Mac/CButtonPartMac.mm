@@ -61,26 +61,22 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
 		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
-		[mView setBordered: NO];
 	}
 	else if( mButtonStyle == EButtonStyleRoundrect )
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
 		[mView setBezelStyle: NSTexturedRoundedBezelStyle];
-		[mView setBordered: NO];
 	}
 	else if( mButtonStyle == EButtonStyleStandard )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
-		[mView setBezelStyle: NSRoundRectBezelStyle];
-		[mView setBordered: NO];
+		[mView setBezelStyle: NSRoundedBezelStyle];
 	}
 	else if( mButtonStyle == EButtonStyleDefault )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
-		[mView setBezelStyle: NSRoundRectBezelStyle];
+		[mView setBezelStyle: NSRoundedBezelStyle];
 		[mView setKeyEquivalent: @"\n"];
-		[mView setBordered: NO];
 	}
 	else if( mButtonStyle == EButtonStyleOval )
 	{
