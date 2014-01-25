@@ -21,7 +21,8 @@ static const char*		sTextStyleNames[EPartTextStyleBit_Last] =
 	"outline",
 	"shadow",
 	"condensed",
-	"extended"
+	"extended",
+	"group"
 };
 
 
