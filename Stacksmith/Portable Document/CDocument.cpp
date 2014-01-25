@@ -188,12 +188,10 @@ void	CDocument::Save()
 	tinyxml2::XMLElement*		stackfile = document.NewElement("project");
 	document.InsertEndChild( stackfile );
 	
-	char	numStr[512] = {0};
 	for( auto currStack : mStacks )
 	{
 		tinyxml2::XMLElement*	stackElement = document.NewElement("stack");
-		snprintf( numStr, sizeof(numStr) -1, "%lld", currStack->GetID() );
-		stackElement->SetAttribute( "id", numStr );
+		CTinyXMLUtils::SetLongLongAttributeNamed( stackElement, currStack->GetID(), "id" );
 		stackElement->SetAttribute( "file", currStack->GetFileName().c_str() );
 		stackElement->SetAttribute( "name", currStack->GetName().c_str() );
 		stackfile->InsertEndChild( stackElement );
@@ -257,12 +255,8 @@ void	CDocument::Save()
 				break;
 		}
 
-		snprintf(numStr, sizeof(numStr)-1, "%lld", currEntry.GetID());
 		
-		tinyxml2::XMLElement*	idElem = document.NewElement("id");
-		tinyxml2::XMLText*		idText = document.NewText(numStr);
-		idElem->InsertEndChild( idText );
-		mediaElement->InsertEndChild( idElem );
+		CTinyXMLUtils::SetLongLongAttributeNamed( mediaElement, currEntry.GetID(), "id" );
 		
 		tinyxml2::XMLElement*	nameElem = document.NewElement("name");
 		nameElem->SetText(currEntry.GetName().c_str());
@@ -278,14 +272,7 @@ void	CDocument::Save()
 		
 		if( currEntry.GetMediaType() == EMediaTypeCursor )
 		{
-			tinyxml2::XMLElement*	hotspotElem = document.NewElement("hotspot");
-			tinyxml2::XMLElement*	leftElem = document.NewElement("left");
-			tinyxml2::XMLElement*	topElem = document.NewElement("top");
-			leftElem->SetText(currEntry.GetHotspotLeft());
-			topElem->SetText(currEntry.GetHotspotTop());
-			hotspotElem->InsertEndChild( leftElem );
-			hotspotElem->InsertEndChild( topElem );
-			mediaElement->InsertEndChild( hotspotElem );
+			CTinyXMLUtils::AddPointNamed( mediaElement, currEntry.GetHotspotLeft(), currEntry.GetHotspotTop(), "hotspot" );
 		}
 		
 		stackfile->InsertEndChild( mediaElement );
