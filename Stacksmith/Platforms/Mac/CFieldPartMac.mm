@@ -14,13 +14,21 @@
 using namespace Carlson;
 
 
-@interface WILDFieldDelegate : NSObject <NSTextFieldDelegate>
+@interface WILDFieldDelegate : NSObject <NSTextFieldDelegate,NSTableViewDelegate, NSTableViewDataSource>
 
 @property (assign,nonatomic) CFieldPartMac*	owningField;
+@property (retain,nonatomic) NSArray*		lines;
 
 @end
 
 @implementation WILDFieldDelegate
+
+-(void)	dealloc
+{
+	self.lines = nil;
+	
+	[super dealloc];
+}
 
 -(BOOL)	control: (NSControl *)control textShouldBeginEditing: (NSText *)fieldEditor
 {
@@ -52,7 +60,31 @@ using namespace Carlson;
 //	NSLog( @"Edited styles or so." );
 }
 
+
+-(NSInteger)	numberOfRowsInTableView: (NSTableView *)tableView
+{
+	return [self.lines count];
+}
+
+/* This method is required for the "Cell Based" TableView, and is optional for the "View Based" TableView. If implemented in the latter case, the value will be set to the view at a given row/column if the view responds to -setObjectValue: (such as NSControl and NSTableCellView).
+ */
+-(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
+{
+	return [self.lines objectAtIndex: row];
+}
+
+
 @end;
+
+
+static bool	ListChunkCallback( const char* currStr, size_t currLen, size_t currStart, size_t currEnd, void* userData )
+{
+	NSMutableArray	*	lines = (NSMutableArray*)userData;
+	NSString	*		itemTitle = [[NSString alloc] initWithBytes: currStr length: currLen encoding:NSUTF8StringEncoding];
+	[lines addObject: itemTitle];
+		
+	return true;
+}
 
 
 CFieldPartMac::CFieldPartMac( CLayer *inOwner )
@@ -75,27 +107,41 @@ void	CFieldPartMac::DestroyView()
 
 void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 {
-	mView = [[WILDViewFactory textField] retain];
 	mMacDelegate = [[WILDFieldDelegate alloc] init];
 	mMacDelegate.owningField = this;
-	mView.delegate = mMacDelegate;
-	CPartContents*	contents = GetContentsOnCurrentCard();
-	if( contents )
+	if( mAutoSelect )
 	{
-		CAttributedString&		cppstr = contents->GetAttributedText();
-		NSAttributedString*		attrStr = GetCocoaAttributedString( &cppstr, GetCocoaAttributesForPart() );
-		bool					oldRTF = cppstr.GetString().find("{\\rtf1\\ansi\\") == 0;
-		if( oldRTF )	// +++ Remove before shipping, this is to import old Stacksmith beta styles.
-		{
-			NSDictionary*	docAttrs = nil;
-			attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetString().length()] documentAttributes: &docAttrs];
-		}
-		[mView setAttributedStringValue: attrStr];
-		if( oldRTF )
-			SetAttributedStringWithCocoa( cppstr, attrStr );	// Save the parsed RTF back as something the cross-platform code understands.
+		NSTableView	*	tv = [[NSTableView alloc] initWithFrame: NSMakeRect(10, 10, 100, 100)];
+		[tv setDataSource: mMacDelegate];
+		mView = (NSTextField*)tv;
 	}
 	else
-		[mView setStringValue: @""];
+		mView = [[WILDViewFactory textField] retain];
+	mView.delegate = mMacDelegate;
+	if( mAutoSelect )
+	{
+		LoadChangedTextStylesIntoView();
+	}
+	else
+	{
+		CPartContents*	contents = GetContentsOnCurrentCard();
+		if( contents )
+		{
+			CAttributedString&		cppstr = contents->GetAttributedText();
+			NSAttributedString*		attrStr = GetCocoaAttributedString( &cppstr, GetCocoaAttributesForPart() );
+			bool					oldRTF = cppstr.GetString().find("{\\rtf1\\ansi\\") == 0;
+			if( oldRTF )	// +++ Remove before shipping, this is to import old Stacksmith beta styles.
+			{
+				NSDictionary*	docAttrs = nil;
+				attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetString().length()] documentAttributes: &docAttrs];
+			}
+			[mView setAttributedStringValue: attrStr];
+			if( oldRTF )
+				SetAttributedStringWithCocoa( cppstr, attrStr );	// Save the parsed RTF back as something the cross-platform code understands.
+		}
+		else
+			[mView setStringValue: @""];
+	}
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
@@ -108,7 +154,16 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 void	CFieldPartMac::LoadChangedTextStylesIntoView()
 {
 	CPartContents*	contents = GetContentsOnCurrentCard();
-	if( contents )
+	if( mAutoSelect )
+	{
+		NSMutableArray	*	theLines = [[NSMutableArray alloc] init];
+		std::string		contentsStr;
+		GetTextContents(contentsStr);
+		LEODoForEachChunk( contentsStr.c_str(), contentsStr.length(), kLEOChunkTypeLine, ListChunkCallback, 0, theLines );
+		[mMacDelegate setLines: theLines];
+		[(NSTableView*)mView reloadData];
+	}
+	else if( contents )
 	{
 		CAttributedString&		cppstr = contents->GetAttributedText();
 		NSAttributedString*		attrStr = GetCocoaAttributedString( &cppstr, GetCocoaAttributesForPart() );
