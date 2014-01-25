@@ -10,6 +10,7 @@
 #include "CPartContents.h"
 #include "CCard.h"
 #include "CStack.h"
+#include "CDocument.h"
 #import "WILDViewFactory.h"
 #import "WILDButtonView.h"
 #import "WILDButtonCell.h"
@@ -134,6 +135,21 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 			[((WILDButtonCell*)mView.cell) setLineWidth: mLineWidth];
 		}
 	}
+	if( mIconID != 0 )
+	{
+		std::string	iconURL = GetDocument()->GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
+		if( iconURL.length() > 0 )
+		{
+			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]]autorelease];
+			[mView setImage: theIcon];
+			[mView setImagePosition: NSImageAbove];
+			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		}
+		else
+			[mView setImagePosition: NSNoImage];
+	}
+	else
+		[mView setImagePosition: NSNoImage];
 	[mView setEnabled: mEnabled];
 	[inSuperView addSubview: mView];
 }
