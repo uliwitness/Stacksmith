@@ -76,8 +76,8 @@ public:
 	virtual void		SetPeeking( bool inState );
 	virtual bool		GetPeeking()				{ return mPeeking; };
 	
-	std::string			GetMediaURLByNameOfType( const std::string& inName, TMediaType inType );
-	std::string			GetMediaURLByIDOfType( ObjectID, TMediaType inType );
+	std::string			GetMediaURLByNameOfType( const std::string& inName, TMediaType inType, int *outHotspotLeft = NULL, int *outHotspotTop = NULL );
+	std::string			GetMediaURLByIDOfType( ObjectID, TMediaType inType, int *outHotspotLeft = NULL, int *outHotspotTop = NULL );
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 	

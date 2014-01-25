@@ -81,11 +81,12 @@ using namespace Carlson;
 	NSCursor	*	currentCursor = nil;
 	if( !currentCursor )
 	{
-		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaURLByIDOfType( 128, EMediaTypeCursor );
+		int			hotSpotLeft = 0, hotSpotTop = 0;
+		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
 		if( cursorURL.length() > 0 )
 		{
 			NSImage	*			cursorImage = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cursorURL.c_str()]]] autorelease];
-			NSCursor *			cursorInstance = [[NSCursor alloc] initWithImage: cursorImage hotSpot: NSMakePoint(8,8)];
+			NSCursor *			cursorInstance = [[NSCursor alloc] initWithImage: cursorImage hotSpot: NSMakePoint(hotSpotLeft,hotSpotTop)];
 			currentCursor = cursorInstance;
 		}
 	}

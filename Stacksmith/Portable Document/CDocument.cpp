@@ -319,25 +319,33 @@ CStack*	CDocument::GetStackByName( const char *inName )
 }
 
 
-std::string	CDocument::GetMediaURLByNameOfType( const std::string& inName, TMediaType inType )
+std::string	CDocument::GetMediaURLByNameOfType( const std::string& inName, TMediaType inType, int *outHotspotLeft, int *outHotspotTop )
 {
 	const char*	str = inName.c_str();
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
 	{
 		if( inType == currMedia->GetMediaType() && (strcasecmp( str, currMedia->GetName().c_str() ) == 0) )
+		{
+			if (outHotspotLeft) *outHotspotLeft = currMedia->GetHotspotLeft();
+			if (outHotspotTop) *outHotspotTop = currMedia->GetHotspotTop();
 			return currMedia->GetFileName();
+		}
 	}
 	
 	return std::string();
 }
 
 
-std::string	CDocument::GetMediaURLByIDOfType( ObjectID inID, TMediaType inType )
+std::string	CDocument::GetMediaURLByIDOfType( ObjectID inID, TMediaType inType, int *outHotspotLeft, int *outHotspotTop )
 {
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
 	{
 		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+		{
+			if (outHotspotLeft) *outHotspotLeft = currMedia->GetHotspotLeft();
+			if (outHotspotTop) *outHotspotTop = currMedia->GetHotspotTop();
 			return currMedia->GetFileName();
+		}
 	}
 	
 	return std::string();
