@@ -151,7 +151,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	}
 	
 	[NSGraphicsContext saveGraphicsState];
-	//[buttonShape setClip];
+	[buttonShape addClip];
 	NSRect				imgBox = origCellFrame;
 	imgBox.origin.x = imgBox.origin.x +truncf((origCellFrame.size.width -[self image].size.width) /2);
 	imgBox.origin.y = imgBox.origin.y +truncf((origCellFrame.size.height -[self image].size.height) /2);
