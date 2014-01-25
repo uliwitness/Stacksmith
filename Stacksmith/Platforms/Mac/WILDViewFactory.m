@@ -16,6 +16,7 @@ static WILDViewFactory*		sViewFactory = nil;
 @property (assign,nonatomic) IBOutlet NSButton* systemButton;
 @property (assign,nonatomic) IBOutlet WILDButtonView* shapeButton;
 @property (assign,nonatomic) IBOutlet NSTextField* textField;
+@property (assign,nonatomic) IBOutlet NSPopUpButton* popUpButton;
 
 @end
 
@@ -54,6 +55,12 @@ static WILDViewFactory*		sViewFactory = nil;
 +(NSTextField*)			textField
 {
 	return [self anotherInstanceOfView: [[self sharedViewFactory] textField]];
+}
+
+
++(NSPopUpButton*)			popUpButton
+{
+	return [self anotherInstanceOfView: [[self sharedViewFactory] popUpButton]];
 }
 
 @end

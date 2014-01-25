@@ -23,6 +23,7 @@
 +(WILDButtonView*)		systemButton;	// with NSButtonCell.
 +(WILDButtonView*)		shapeButton;	// with WILDButtonCell.
 +(NSTextField*)			textField;
++(NSPopUpButton*)		popUpButton;
 
 @end
 

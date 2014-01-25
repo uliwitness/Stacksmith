@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDViewFactory">
             <connections>
+                <outlet property="popUpButton" destination="rTy-LC-svo" id="Tgq-ru-PFU"/>
                 <outlet property="shapeButton" destination="4e3-X0-Mhw" id="GBI-hH-FTu"/>
                 <outlet property="systemButton" destination="lym-Xb-7iL" id="9px-Tt-eev"/>
                 <outlet property="textField" destination="5Wh-1D-lnZ" id="EXy-ap-Bzd"/>
@@ -56,6 +57,25 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <popUpButton wantsLayer="YES" verticalHuggingPriority="750" id="rTy-LC-svo">
+                    <rect key="frame" x="190" y="185" width="101" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <shadow key="shadow" blurRadius="8">
+                        <size key="offset" width="4" height="4"/>
+                        <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </shadow>
+                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="oLM-wa-kDH" id="hQO-SO-0JP">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <menu key="menu" title="OtherViews" id="ijG-eb-Xlv">
+                            <items>
+                                <menuItem title="Item 1" state="on" id="oLM-wa-kDH"/>
+                                <menuItem title="Item 2" id="vaJ-ld-jvE"/>
+                                <menuItem title="Item 3" id="1rN-Oe-ui4"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                </popUpButton>
             </subviews>
         </customView>
     </objects>
