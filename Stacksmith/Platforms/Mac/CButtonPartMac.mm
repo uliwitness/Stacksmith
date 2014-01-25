@@ -13,6 +13,7 @@
 #import "WILDViewFactory.h"
 #import "WILDButtonView.h"
 #import "WILDButtonCell.h"
+#import "WILDPopUpButtonView.h"
 
 
 using namespace Carlson;
@@ -100,6 +101,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
+	[mView setOwningPart: this];
 	if( mButtonStyle == EButtonStylePopUp )
 	{
 		[(NSPopUpButton*)mView removeAllItems];
@@ -111,7 +113,6 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		[mView setState: GetHighlight() ? NSOnState : NSOffState];
 		[mView setTitle: [NSString stringWithUTF8String: mName.c_str()]];
-		[mView setOwningPart: this];
 		if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
 		{
 			[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
@@ -167,6 +168,31 @@ void	CButtonPartMac::SetHighlight( bool inHighlight )
 	
 	if( mButtonStyle != EButtonStylePopUp )
 		[mView setState: inHighlight ? NSOnState : NSOffState];
+}
+
+
+void	CButtonPartMac::PrepareMouseUp()
+{
+	if( mButtonStyle == EButtonStylePopUp )
+	{
+		mSelectedLines.clear();
+		mSelectedLines.insert([(NSPopUpButton*)mView indexOfSelectedItem] +1);
+	}
+	else
+		CButtonPart::PrepareMouseUp();
+}
+
+
+void	CButtonPartMac::ApplyChangedSelectedLinesToView()
+{
+	CButtonPart::ApplyChangedSelectedLinesToView();
+	
+	if( mSelectedLines.size() > 0 )
+	{
+		auto	foundIndex = mSelectedLines.lower_bound(1);
+		if( foundIndex != mSelectedLines.end() )
+			[(NSPopUpButton*)mView selectItemAtIndex: (*foundIndex) -1];
+	}
 }
 
 

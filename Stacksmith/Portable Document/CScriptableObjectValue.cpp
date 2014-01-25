@@ -657,6 +657,8 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	msg[paramStart -fmt] = '\0';
 	size_t		bytesNeeded = 0;
 	
+	//printf("Sending: %s\n",msg);
+	
 	CScriptableObject*	parent = GetParentObject();
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this );
 	LEOInitContext( &ctx, GetScriptContextGroupObject(), ud, CScriptContextUserData::CleanUp );

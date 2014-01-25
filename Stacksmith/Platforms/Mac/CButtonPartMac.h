@@ -32,8 +32,12 @@ public:
 
 	virtual bool	SetTextContents( const std::string &inString );
 	
+	virtual void	PrepareMouseUp();
+	
 protected:
 	~CButtonPartMac()	{ DestroyView(); };
+	
+	virtual void	ApplyChangedSelectedLinesToView();
 	
 	WILDButtonView	*	mView;
 };

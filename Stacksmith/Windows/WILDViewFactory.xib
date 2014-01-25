@@ -57,7 +57,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton wantsLayer="YES" verticalHuggingPriority="750" id="rTy-LC-svo">
+                <popUpButton wantsLayer="YES" verticalHuggingPriority="750" id="rTy-LC-svo" customClass="WILDPopUpButtonView">
                     <rect key="frame" x="190" y="185" width="101" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <shadow key="shadow" blurRadius="8">
@@ -66,7 +66,7 @@
                     </shadow>
                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="oLM-wa-kDH" id="hQO-SO-0JP">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="ijG-eb-Xlv">
                             <items>
                                 <menuItem title="Item 1" state="on" id="oLM-wa-kDH"/>

@@ -183,6 +183,7 @@
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E539E18922766001487C1 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555E539D18922766001487C1 /* AVKit.framework */; };
 		555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555E53A3189351AA001487C1 /* PlaceholderMovie.mov */; };
+		555E53A918936817001487C1 /* WILDPopUpButtonView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 555E53A818936817001487C1 /* WILDPopUpButtonView.mm */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */; };
 		555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */; };
@@ -704,6 +705,8 @@
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
 		555E539D18922766001487C1 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = ../../../../../System/Library/Frameworks/AVKit.framework; sourceTree = "<group>"; };
 		555E53A3189351AA001487C1 /* PlaceholderMovie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PlaceholderMovie.mov; sourceTree = "<group>"; };
+		555E53A718936817001487C1 /* WILDPopUpButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPopUpButtonView.h; path = Platforms/Mac/WILDPopUpButtonView.h; sourceTree = "<group>"; };
+		555E53A818936817001487C1 /* WILDPopUpButtonView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDPopUpButtonView.mm; path = Platforms/Mac/WILDPopUpButtonView.mm; sourceTree = "<group>"; };
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintbrushTool.tiff; path = ../UKPaintView/UKPaintbrushTool.tiff; sourceTree = "<group>"; };
@@ -1116,6 +1119,8 @@
 				552386B2188335A000D7FAB3 /* WILDButtonCell.m */,
 				552386B3188335A000D7FAB3 /* WILDButtonView.h */,
 				552386B4188335A000D7FAB3 /* WILDButtonView.mm */,
+				555E53A718936817001487C1 /* WILDPopUpButtonView.h */,
+				555E53A818936817001487C1 /* WILDPopUpButtonView.mm */,
 				552386CA1883E86200D7FAB3 /* CFieldPartMac.h */,
 				552386C91883E86200D7FAB3 /* CFieldPartMac.mm */,
 				552386CD1883E92F00D7FAB3 /* CMoviePlayerPartMac.h */,
@@ -2074,6 +2079,7 @@
 				55039F68136C66ED0082E32E /* NSBezierPath+ULIRegularPolygon.m in Sources */,
 				55039FC4136D5CCF0082E32E /* UlisBresenham.c in Sources */,
 				55039FC5136D5CCF0082E32E /* ULILineSizeView.m in Sources */,
+				555E53A918936817001487C1 /* WILDPopUpButtonView.mm in Sources */,
 				55039FC6136D5CCF0082E32E /* ULIPaintBrushTool.m in Sources */,
 				55039FC7136D5CCF0082E32E /* ULIPaintEraseRectTool.m in Sources */,
 				55039FC8136D5CCF0082E32E /* ULIPaintEraserTool.m in Sources */,
