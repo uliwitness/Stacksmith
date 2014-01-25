@@ -48,6 +48,7 @@ public:
 	virtual void			SetHighlight( bool inHighlight );
 	virtual bool			GetShowName()							{ return mShowName; };
 	virtual void			SetShowName( bool inShowName )			{ mShowName = inShowName; };
+	virtual void			SetHighlightForTracking( bool inState )	{ mHighlightForTracking = inState; };
 	
 	virtual void			PrepareMouseUp();
 	
@@ -66,6 +67,7 @@ protected:
 	bool			mHighlight;
 	bool			mAutoHighlight;
 	bool			mSharedHighlight;
+	bool			mHighlightForTracking;
 	int				mTitleWidth;
 	ObjectID		mIconID;
 	TPartTextAlign	mTextAlign;

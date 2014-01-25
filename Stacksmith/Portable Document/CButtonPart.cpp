@@ -171,6 +171,10 @@ bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRange
 	{
 		LEOInitBooleanValue( outValue, GetHighlight(), kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("pressed", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mHighlightForTracking, kLEOInvalidateReferences, inContext );
+	}
 	else if( strcasecmp("sharedHighlight", inPropertyName) == 0 )
 	{
 		LEOInitBooleanValue( outValue, GetSharedHighlight(), kLEOInvalidateReferences, inContext );
@@ -213,6 +217,13 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		if( !inContext->keepRunning )
 			return true;
 		SetHighlight( theHighlight );
+	}
+	else if( strcasecmp("pressed", inPropertyName) == 0 )
+	{
+		bool			theHighlight = LEOGetValueAsBoolean( inValue, inContext );
+		if( !inContext->keepRunning )
+			return true;
+		SetHighlightForTracking( theHighlight );
 	}
 	else if( strcasecmp("autoHighlight", inPropertyName) == 0 )
 	{

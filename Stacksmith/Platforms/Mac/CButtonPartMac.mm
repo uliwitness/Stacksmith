@@ -98,6 +98,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[mView setOwningPart: this];
+	[[mView cell] setHighlighted: mHighlightForTracking];
 	if( mButtonStyle == EButtonStylePopUp )
 	{
 		[(NSPopUpButton*)mView removeAllItems];
@@ -164,6 +165,15 @@ void	CButtonPartMac::SetHighlight( bool inHighlight )
 	
 	if( mButtonStyle != EButtonStylePopUp )
 		[mView setState: inHighlight ? NSOnState : NSOffState];
+}
+
+
+void	CButtonPartMac::SetHighlightForTracking( bool inHighlight )
+{
+	CButtonPart::SetHighlightForTracking( inHighlight );
+	
+	[[mView cell] setHighlighted: inHighlight];
+	[mView setNeedsDisplay: YES];
 }
 
 

@@ -55,7 +55,10 @@ using namespace Carlson;
 		return;
 	
 	if( autoHighlight && isInside )
+	{
 		[[self cell] setHighlighted: YES];
+		self->owningPart->SetHighlightForTracking(isInside);
+	}
 	
 	{
 		CAutoreleasePool	cppPool;
@@ -87,7 +90,10 @@ using namespace Carlson;
 						isInside = newIsInside;
 
 						if( autoHighlight )
+						{
 							[[self cell] setHighlighted: isInside];
+							self->owningPart->SetHighlightForTracking(isInside);
+						}
 					}
 					CAutoreleasePool	cppPool;
 					self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDrag %ld", [event buttonNumber] +1 );
@@ -105,6 +111,7 @@ using namespace Carlson;
 		if( autoHighlight )
 		{
 			[[self cell] setHighlighted: NO];
+			self->owningPart->SetHighlightForTracking(false);
 			[self setNeedsDisplay: YES];
 			[self.window display];
 		}

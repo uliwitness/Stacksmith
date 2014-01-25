@@ -29,6 +29,7 @@ public:
 	virtual void	SetName( const std::string& inStr );
 	virtual void	SetPeeking( bool inState );
 	virtual void	SetHighlight( bool inHighlight );
+	virtual void	SetHighlightForTracking( bool inHighlight );
 
 	virtual bool	SetTextContents( const std::string &inString );
 	
