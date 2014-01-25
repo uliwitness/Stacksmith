@@ -148,6 +148,10 @@ using namespace Carlson;
 		unichar theKey = [theEvent.charactersIgnoringModifiers characterAtIndex: 0];
 		switch( theKey )
 		{
+			case '\t':
+				theCard->SendMessage( NULL, errHandler, "tabKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				break;
+				
 			case NSLeftArrowFunctionKey:
 				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "left", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;

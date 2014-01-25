@@ -529,6 +529,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	mouseDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedrag" );
 	LEOHandlerID	loadPageHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "loadpage" );
 	LEOHandlerID	linkClickedHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "linkclicked" );
+	LEOHandlerID	tabKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "tabkey" );
 	if( inHandler == arrowKeyHandlerID )
 	{
 		LEOValuePtr	directionParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 0 );
@@ -536,24 +537,46 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		if( directionParam )
 		{
 			const char*	directionStr = LEOGetValueAsString( directionParam, buf, sizeof(buf), inContext );
-			if( strcasecmp( directionStr, "left") )
+			if( strcasecmp( directionStr, "left") == 0 )
 			{
 	//			[[NSApplication sharedApplication] sendAction: @selector(goPrevCard:) to: nil from: [NSApplication sharedApplication]];
 				handled = true;
 			}
-			else if( strcasecmp( directionStr, "right") )
+			else if( strcasecmp( directionStr, "right") == 0 )
 			{
 	//			[[NSApplication sharedApplication] sendAction: @selector(goNextCard:) to: nil from: [NSApplication sharedApplication]];
 				handled = true;
 			}
-			else if( strcasecmp( directionStr, "up") )
+			else if( strcasecmp( directionStr, "up") == 0 )
 			{
 	//			[[NSApplication sharedApplication] sendAction: @selector(goFirstCard:) to: nil from: [NSApplication sharedApplication]];
 				handled = true;
 			}
-			else if( strcasecmp( directionStr, "down") )
+			else if( strcasecmp( directionStr, "down") == 0 )
 			{
 	//			[[NSApplication sharedApplication] sendAction: @selector(goLastCard:) to: nil from: [NSApplication sharedApplication]];
+				handled = true;
+			}
+		}
+		else
+			handled = false;
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
+	else if( inHandler == tabKeyHandlerID )
+	{
+		LEOValuePtr	shiftModifierParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 0 );
+		char		buf[40] = {};
+		if( shiftModifierParam )
+		{
+			const char*	directionStr = LEOGetValueAsString( shiftModifierParam, buf, sizeof(buf), inContext );
+			if( strcasecmp( directionStr, "shift") == 0 )
+			{
+				// +++ Backwards tab.
+				handled = true;
+			}
+			else if( directionStr[0] == 0 )
+			{
+				// +++ Regular tab.
 				handled = true;
 			}
 		}
