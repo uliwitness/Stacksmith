@@ -30,7 +30,7 @@ public:
 	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
-	void			Save();
+	void			Save( const std::string& inPackagePath );
 	
 	ObjectID		GetID()			{ return mStackID; };
 	std::string		GetURL()		{ return mURL; };

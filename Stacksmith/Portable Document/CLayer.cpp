@@ -186,7 +186,7 @@ void	CLayer::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile,
 }
 
 
-void	CLayer::Save()
+void	CLayer::Save( const std::string& inPackagePath )
 {
 	if( !mLoaded )
 		return;
@@ -245,7 +245,7 @@ void	CLayer::Save()
 	std::string	styleSheet = theStyles.GetCSS();
 	if( styleSheet.length() > 0 )
 	{
-		std::string	destStylesPath("/Users/uli/Saved.xstk/");
+		std::string	destStylesPath(inPackagePath);
 		std::stringstream	destStylesName;
 		destStylesName << "stylesheet_card_" << mID << ".css";
 		destStylesPath.append(destStylesName.str());
@@ -261,7 +261,7 @@ void	CLayer::Save()
 		fclose( theFile );
 	}
 
-	std::string	destPath("/Users/uli/Saved.xstk/");
+	std::string	destPath(inPackagePath);
 	destPath.append( mFileName );
 	document.SaveFile( destPath.c_str() );
 }

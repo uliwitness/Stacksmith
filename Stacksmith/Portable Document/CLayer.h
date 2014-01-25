@@ -33,7 +33,7 @@ public:
 	std::string		GetFileName() const		{ return mFileName; };
 	
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
-	virtual void	Save();
+	virtual void	Save( const std::string& inPackagePath );
 	
 	bool			IsLoaded()	{ return mLoaded; };
 	virtual void	SetStack( CStack* inStack );

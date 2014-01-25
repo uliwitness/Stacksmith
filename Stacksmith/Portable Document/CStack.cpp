@@ -144,7 +144,7 @@ void	CStack::CallAllCompletionBlocks()
 
 
 
-void	CStack::Save()
+void	CStack::Save( const std::string& inPackagePath )
 {
 	if( !mLoaded )
 		return;
@@ -203,7 +203,7 @@ void	CStack::Save()
 		bgElem->SetAttribute( "name", currBackground->GetName().c_str() );
 		root->InsertEndChild( bgElem );
 		
-		currBackground->Save();
+		currBackground->Save( inPackagePath );
 	}
 
 	for( auto currCard : mCards )
@@ -214,10 +214,10 @@ void	CStack::Save()
 		cdElem->SetAttribute( "name", currCard->GetName().c_str() );
 		root->InsertEndChild( cdElem );
 		
-		currCard->Save();
+		currCard->Save( inPackagePath );
 	}
 
-	std::string	stackFilePath("/Users/uli/Saved.xstk/");
+	std::string	stackFilePath(inPackagePath);
 	stackFilePath.append(mFileName);
 	document.SaveFile( stackFilePath.c_str() );
 }

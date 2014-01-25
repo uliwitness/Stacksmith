@@ -175,7 +175,16 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 
 void	CDocument::Save()
 {
-	mkdir( "/Users/uli/Saved.xstk", 0777 );
+	std::string		destPath;
+	if( mURL.find("file://") != 0 )
+		return;
+	destPath = mURL.substr( 7 );
+	size_t	lpcStart = destPath.rfind('/');
+	if( lpcStart == std::string::npos )
+		return;
+	destPath = destPath.substr(0,lpcStart);
+	destPath.append(1,'/');
+	mkdir( destPath.c_str(), 0777 );
 
 	tinyxml2::XMLDocument		document;
 	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
@@ -196,7 +205,7 @@ void	CDocument::Save()
 		stackElement->SetAttribute( "name", currStack->GetName().c_str() );
 		stackfile->InsertEndChild( stackElement );
 		
-		currStack->Save();
+		currStack->Save( destPath );
 	}
 	
 	tinyxml2::XMLElement*		userLevelElement = document.NewElement("userLevel");
@@ -278,7 +287,7 @@ void	CDocument::Save()
 		stackfile->InsertEndChild( mediaElement );
 	}
 
-	document.SaveFile( "/Users/uli/Saved.xstk/project.xml" );
+	document.SaveFile( (destPath + "project.xml").c_str() );
 }
 
 
