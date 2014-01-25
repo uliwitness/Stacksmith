@@ -63,23 +63,6 @@ double		CTinyXMLUtils::GetDoubleNamed( tinyxml2::XMLElement* root, const char* i
 }
 
 
-long		CTinyXMLUtils::GetLongNamed( tinyxml2::XMLElement* root, const char* inName, long defaultValue )
-{
-	if( !root )
-		return defaultValue;
-	
-	char	*	endPtr = NULL;
-	tinyxml2::XMLElement*	child = root->FirstChildElement( inName );
-	const char*	str = child ? child->GetText() : NULL;
-	if( !str )
-		return defaultValue;
-	long	num = strtol( str, &endPtr, 10 );
-	if( endPtr != (str+ strlen(str)) )
-		return defaultValue;
-	return num;
-}
-
-
 void		CTinyXMLUtils::GetStringNamed( tinyxml2::XMLElement* root, const char* inName, std::string &outName )
 {
 	if( !root )
@@ -151,6 +134,166 @@ void	CTinyXMLUtils::GetColorNamed( tinyxml2::XMLElement* root, const char* inNam
 	subElem = elem ? elem->FirstChildElement("alpha") : NULL;
 	if( subElem )
 		subElem->QueryIntText( outAlpha );
+}
+
+
+void	CTinyXMLUtils::GetPointNamed( tinyxml2::XMLElement* root, const char* inName, int *outLeft, int *outTop )
+{
+	if( !root )
+		return;
+	
+	tinyxml2::XMLElement*	subElem = NULL;
+	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	subElem = elem ? elem->FirstChildElement("left") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outLeft );
+	subElem = elem ? elem->FirstChildElement("top") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outTop );
+}
+
+
+void	CTinyXMLUtils::GetSizeNamed( tinyxml2::XMLElement* root, const char* inName, int *outLeft, int *outTop )
+{
+	if( !root )
+		return;
+	
+	tinyxml2::XMLElement*	subElem = NULL;
+	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	subElem = elem ? elem->FirstChildElement("width") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outLeft );
+	subElem = elem ? elem->FirstChildElement("height") : NULL;
+	if( subElem )
+		subElem->QueryIntText( outTop );
+}
+
+
+void	CTinyXMLUtils::AddLongLongNamed( tinyxml2::XMLElement* root, long long inValue, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	char		str[200] = {0};
+	snprintf( str, sizeof(str) -1, "%lld", inValue );
+	elem->SetText(str);
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::AddStringNamed( tinyxml2::XMLElement* root, const std::string& inValue, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	elem->SetText(inValue.c_str());
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::AddBoolNamed( tinyxml2::XMLElement* root, bool inValue, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	elem->SetBoolFirstChild(inValue);
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::AddIntNamed( tinyxml2::XMLElement* root, int inValue, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	elem->SetText(inValue);
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::AddDoubleNamed( tinyxml2::XMLElement* root, double inValue, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	elem->SetText(inValue);
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::AddRectNamed( tinyxml2::XMLElement* root, int inLeft, int inTop, int inRight, int inBottom, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	subElem = root->GetDocument()->NewElement("left");
+	subElem->SetText(inLeft);
+	elem->InsertEndChild( subElem );
+	subElem = root->GetDocument()->NewElement("top");
+	subElem->SetText(inTop);
+	elem->InsertEndChild( subElem );
+	subElem = root->GetDocument()->NewElement("right");
+	subElem->SetText(inRight);
+	elem->InsertEndChild( subElem );
+	subElem = root->GetDocument()->NewElement("bottom");
+	subElem->SetText(inBottom);
+	elem->InsertEndChild( subElem );
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::AddColorNamed( tinyxml2::XMLElement* root, int inLeft, int inTop, int inRight, int inBottom, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	subElem = root->GetDocument()->NewElement("red");
+	subElem->SetText(inLeft);
+	elem->InsertEndChild( subElem );
+	subElem = root->GetDocument()->NewElement("green");
+	subElem->SetText(inTop);
+	elem->InsertEndChild( subElem );
+	subElem = root->GetDocument()->NewElement("blue");
+	subElem->SetText(inRight);
+	elem->InsertEndChild( subElem );
+	subElem = root->GetDocument()->NewElement("alpha");
+	subElem->SetText(inBottom);
+	elem->InsertEndChild( subElem );
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::AddPointNamed( tinyxml2::XMLElement* root, int inLeft, int inTop, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	subElem = root->GetDocument()->NewElement("left");
+	subElem->SetText(inLeft);
+	elem->InsertEndChild( subElem );
+	subElem = root->GetDocument()->NewElement("top");
+	subElem->SetText(inTop);
+	elem->InsertEndChild( subElem );
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::AddSizeNamed( tinyxml2::XMLElement* root, int inLeft, int inTop, const char* inName )
+{
+	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	subElem = root->GetDocument()->NewElement("width");
+	subElem->SetText(inLeft);
+	elem->InsertEndChild( subElem );
+	subElem = root->GetDocument()->NewElement("height");
+	subElem->SetText(inTop);
+	elem->InsertEndChild( subElem );
+	root->InsertEndChild( elem );
+}
+
+
+void	CTinyXMLUtils::SetLongLongAttributeNamed( tinyxml2::XMLElement* root, long long inValue, const char* inName )
+{
+	char	numStr[200] = {0};
+	snprintf( numStr, sizeof(numStr) -1, "%lld", inValue );
+	root->SetAttribute( inName, numStr );
+}
+
+
+long long	CTinyXMLUtils::GetLongLongAttributeNamed( tinyxml2::XMLElement* root, const char* inName, long long defaultValue )
+{
+	const char* str = root->Attribute( inName );
+	if( !str )
+		return defaultValue;
+	char*       endPtr = NULL;
+	long long	theNum = strtoll( str, &endPtr, 10 );
+	if( endPtr != str +strlen(str) )
+		theNum = defaultValue;
+
+	return theNum;
 }
 
 
