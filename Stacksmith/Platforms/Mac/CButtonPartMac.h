@@ -39,6 +39,7 @@ protected:
 	~CButtonPartMac()	{ DestroyView(); };
 	
 	virtual void	ApplyChangedSelectedLinesToView();
+	virtual void	SetButtonStyle( TButtonStyle inButtonStyle );
 	
 	WILDButtonView	*	mView;
 };

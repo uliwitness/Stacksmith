@@ -195,6 +195,10 @@ bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRange
 		else
 			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("style", inPropertyName) == 0 )
+	{
+		LEOInitStringConstantValue( outValue, sButtonStyleStrings[mButtonStyle], kLEOInvalidateReferences, inContext );
+	}
 	else
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 	return true;
@@ -262,6 +266,16 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		if( theSelectedLine != 0 )
 			mSelectedLines.insert(theSelectedLine);
 		ApplyChangedSelectedLinesToView();
+	}
+	else if( strcasecmp("style", inPropertyName) == 0 )
+	{
+		char		nameBuf[1024];
+		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
+		TButtonStyle	style = GetButtonStyleFromString(nameStr);
+		if( style == EButtonStyle_Last )
+			LEOContextStopWithError( inContext, "Unknown button style \"%s\".", nameStr );
+		else
+			SetButtonStyle( style );
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

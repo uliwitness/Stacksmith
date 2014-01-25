@@ -161,6 +161,16 @@ bool	CButtonPartMac::SetTextContents( const std::string &inString )
 }
 
 
+void	CButtonPartMac::SetButtonStyle( TButtonStyle inButtonStyle )
+{
+	NSView*	oldSuper = mView.superview;
+	DestroyView();
+	CButtonPart::SetButtonStyle(inButtonStyle);
+	if( oldSuper )
+		CreateViewIn( oldSuper );
+}
+
+
 void	CButtonPartMac::SetName( const std::string& inStr )
 {
 	CButtonPart::SetName(inStr);
