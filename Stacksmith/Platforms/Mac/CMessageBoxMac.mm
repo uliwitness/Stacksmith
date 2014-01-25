@@ -27,7 +27,7 @@ using namespace Carlson;
 
 -(void)	windowDidLoad
 {
-	[self.window setLevel: NSNormalWindowLevel];
+	//[self.window setLevel: NSNormalWindowLevel];
 }
 
 
