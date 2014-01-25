@@ -154,6 +154,16 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 }
 
 
+void	CFieldPartMac::SetFieldStyle( TFieldStyle inFieldStyle )
+{
+	NSView*	oldSuper = mView.superview;
+	DestroyView();
+	CFieldPart::SetFieldStyle(inFieldStyle);
+	if( oldSuper )
+		CreateViewIn( oldSuper );
+}
+
+
 void	CFieldPartMac::LoadChangedTextStylesIntoView()
 {
 	CPartContents*	contents = GetContentsOnCurrentCard();

@@ -272,6 +272,10 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 		else
 			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("style", inPropertyName) == 0 )
+	{
+		LEOInitStringConstantValue( outValue, sFieldStyleStrings[mFieldStyle], kLEOInvalidateReferences, inContext );
+	}
 	else
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 	return true;
@@ -393,6 +397,16 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		if( theSelectedLine != 0 )
 			mSelectedLines.insert(theSelectedLine);
 		ApplyChangedSelectedLinesToView();
+	}
+	else if( strcasecmp("style", inPropertyName) == 0 )
+	{
+		char		nameBuf[1024];
+		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
+		TFieldStyle	style = GetFieldStyleFromString(nameStr);
+		if( style == EFieldStyle_Last )
+			LEOContextStopWithError( inContext, "Unknown field style \"%s\".", nameStr );
+		else
+			SetFieldStyle( style );
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

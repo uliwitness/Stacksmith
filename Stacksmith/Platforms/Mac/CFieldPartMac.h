@@ -38,6 +38,8 @@ public:
 protected:
 	~CFieldPartMac()	{ DestroyView(); };
 
+	virtual void		SetFieldStyle( TFieldStyle inFieldStyle );
+
 	NSTextField	*		mView;
 	WILDFieldDelegate*	mMacDelegate;
 	NSTableView *		mTableView;

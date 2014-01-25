@@ -47,6 +47,7 @@ protected:
 	
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SetFieldStyle( TFieldStyle inStyle )	{ mFieldStyle = inStyle; };
 	
 	virtual bool			GetSharedText()					{ return mSharedText; };
 	virtual void			SetSharedText( bool inST )		{ mSharedText = inST; };
