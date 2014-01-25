@@ -524,9 +524,11 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	mouseDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedown" );
 	LEOHandlerID	mouseUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseup" );
 	LEOHandlerID	mouseUpOutsideHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseupoutside" );
+	LEOHandlerID	mouseDoubleClickHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedoubleclick" );
 	LEOHandlerID	mouseLeaveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseleave" );
 	LEOHandlerID	mouseMoveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousemove" );
 	LEOHandlerID	mouseDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedrag" );
+	LEOHandlerID	selectionChangeHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "selectionchange" );
 	LEOHandlerID	loadPageHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "loadpage" );
 	LEOHandlerID	linkClickedHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "linkclicked" );
 	LEOHandlerID	tabKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "tabkey" );
@@ -598,7 +600,9 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == functionKeyHandlerID
 			|| inHandler == keyDownHandlerID
 			|| inHandler == loadPageHandlerID
-			|| inHandler == linkClickedHandlerID )
+			|| inHandler == linkClickedHandlerID
+			|| inHandler == selectionChangeHandlerID
+			|| inHandler == mouseDoubleClickHandlerID )
 	{
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );

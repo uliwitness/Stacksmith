@@ -9,6 +9,7 @@
 #include "CFieldPartMac.h"
 #include "CPartContents.h"
 #import "WILDViewFactory.h"
+#import "CAlert.h"
 
 
 using namespace Carlson;
@@ -74,6 +75,43 @@ using namespace Carlson;
 }
 
 
+-(void)	tableViewSelectionDidChange:(NSNotification *)notification
+{
+	self.owningField->ClearSelectedLines();
+	NSIndexSet	*	selRows = [[notification object] selectedRowIndexes];
+	NSInteger idx = [selRows firstIndex];
+	while( idx != NSNotFound )
+	{
+		self.owningField->AddSelectedLine( idx +1 );
+		
+		idx = [selRows indexGreaterThanIndex: idx];
+	}
+	
+	CAutoreleasePool	cppPool;
+	self.owningField->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "selectionChange" );
+}
+
+-(BOOL)	tableView: (NSTableView *)tableView shouldEditTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
+{
+	return !self.owningField->GetLockText();
+}
+
+
+-(void)	tableViewRowClicked: (id)sender
+{
+	CAutoreleasePool	cppPool;
+	self.owningField->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUp" );
+//	NSLog(@"tableViewRowClicked");
+}
+
+
+-(void)	tableViewRowDoubleClicked: (id)sender
+{
+	CAutoreleasePool	cppPool;
+	self.owningField->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDoubleClick" );
+//	NSLog(@"tableViewRowDoubleClicked");
+}
+
 @end;
 
 struct ListChunkCallbackContext
@@ -121,6 +159,9 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		mTableView = [WILDViewFactory tableViewInContainer];
 		mTableView.dataSource = mMacDelegate;
 		mTableView.delegate = mMacDelegate;
+		[mTableView setTarget: mMacDelegate];
+		[mTableView setAction: @selector(tableViewRowClicked:)];
+		[mTableView setDoubleAction: @selector(tableViewRowDoubleClicked:)];
 		mView = (NSTextField*)[[mTableView enclosingScrollView] retain];
 	}
 	else

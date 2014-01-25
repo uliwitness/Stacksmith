@@ -42,6 +42,10 @@ public:
 	virtual bool			GetTextContents( std::string &outString );
 	virtual bool			SetTextContents( const std::string &inString );
 
+	virtual void			ClearSelectedLines()			{ mSelectedLines.clear(); };
+	virtual void			AddSelectedLine( size_t inLine )	{ mSelectedLines.insert(inLine); };
+	virtual bool			GetLockText()					{ return mLockText; };
+	
 protected:
 	~CFieldPart()	{};
 	
@@ -52,7 +56,6 @@ protected:
 	virtual bool			GetSharedText()					{ return mSharedText; };
 	virtual void			SetSharedText( bool inST )		{ mSharedText = inST; };
 	
-	virtual bool			GetLockText()					{ return mLockText; };
 	virtual void			SetLockText( bool inST )		{ mLockText = inST; };
 	
 	virtual bool			GetAutoSelect()					{ return mAutoSelect; };
