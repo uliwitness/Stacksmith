@@ -203,7 +203,7 @@ void	WILDFirstNativeCall( void )
 				inCard->WakeUp();
 				inStack->GoThereInNewWindow( true );
 				
-				inDocument->Save();
+				//inDocument->Save();
 			} );
 		} );
 	});
