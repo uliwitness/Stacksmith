@@ -171,6 +171,27 @@ using namespace Carlson;
 	}
 }
 
+
+//-(void)	resetCursorRects
+//{
+//	NSCursor	*	currentCursor = nil;
+//	if( !currentCursor )
+//	{
+//		CStack*		theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
+//		int			hotSpotLeft = 0, hotSpotTop = 0;
+//		std::string	cursorURL = theStack->GetDocument()->GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
+//		if( cursorURL.length() > 0 )
+//		{
+//			NSImage	*			cursorImage = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cursorURL.c_str()]]] autorelease];
+//			NSCursor *			cursorInstance = [[NSCursor alloc] initWithImage: cursorImage hotSpot: NSMakePoint(hotSpotLeft,hotSpotTop)];
+//			currentCursor = cursorInstance;
+//		}
+//	}
+//	if( !currentCursor )
+//		currentCursor = [NSCursor arrowCursor];
+//	[self addCursorRect: [self bounds] cursor: currentCursor];
+//}
+
 @end
 
 
