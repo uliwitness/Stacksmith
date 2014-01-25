@@ -77,7 +77,7 @@
                         </menu>
                     </popUpButtonCell>
                 </popUpButton>
-                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" id="4KR-Rg-Nhj">
+                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" id="4KR-Rg-Nhj">
                     <rect key="frame" x="20" y="33" width="240" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" id="mfh-gE-6L5">
@@ -109,6 +109,10 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
+                    <shadow key="shadow" blurRadius="8">
+                        <size key="offset" width="4" height="4"/>
+                        <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </shadow>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="uNN-lU-9wq">
                         <rect key="frame" x="-100" y="-100" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
