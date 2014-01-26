@@ -9,6 +9,9 @@
 #include "CAttributedString.h"
 
 
+#define DEBUG_NORMALIZE_STYLE_RUNS		0
+
+
 using namespace Carlson;
 
 
@@ -101,8 +104,16 @@ void	CAttributedString::NormalizeStyleRuns()
 	sort( mRanges.begin(), mRanges.end(),
             [](const CAttributeRange& a, const CAttributeRange& b)
             {
-                return a.mStart > b.mStart;
+                return a.mStart < b.mStart;
             });
+	
+	#if DEBUG_NORMALIZE_STYLE_RUNS
+	printf("Sorted ranges:\n");
+	for( CAttributeRange currRange : mRanges )
+	{
+		printf( "\t%zu - %zu\n", currRange.mStart, currRange.mEnd );
+	}
+	#endif
 	
 	// Split overlapping runs.
 	if( mRanges.size() > 1 )
@@ -128,6 +139,14 @@ void	CAttributedString::NormalizeStyleRuns()
 		}
 	}
 	
+	#if DEBUG_NORMALIZE_STYLE_RUNS
+	printf("Split ranges:\n");
+	for( CAttributeRange currRange : mRanges )
+	{
+		printf( "\t%zu - %zu\n", currRange.mStart, currRange.mEnd );
+	}
+	#endif
+	
 	// Merge runs covering the same range.
 	if( mRanges.size() > 1 )
 	{
@@ -152,6 +171,14 @@ void	CAttributedString::NormalizeStyleRuns()
 		}
 	}
 	
+	#if DEBUG_NORMALIZE_STYLE_RUNS
+	printf("Merged overlapping ranges:\n");
+	for( CAttributeRange currRange : mRanges )
+	{
+		printf( "\t%zu - %zu\n", currRange.mStart, currRange.mEnd );
+	}
+	#endif
+	
 	// Merge adjacent runs with same attributes.
 	if( mRanges.size() > 1 )
 	{
@@ -170,13 +197,29 @@ void	CAttributedString::NormalizeStyleRuns()
 		}
 	}
 
+	#if DEBUG_NORMALIZE_STYLE_RUNS
+	printf("Merged adjacent ranges:\n");
+	for( CAttributeRange currRange : mRanges )
+	{
+		printf( "\t%zu - %zu\n", currRange.mStart, currRange.mEnd );
+	}
+	#endif
+	
 	// Remove zero-length runs.
-	std::vector<CAttributeRange>	newRanges = mRanges;
+	std::vector<CAttributeRange>	newRanges;
 	for( auto currAttr : mRanges )
 	{
 		if( currAttr.mStart != currAttr.mEnd )
 			newRanges.push_back(currAttr);
 	}
+	
+	#if DEBUG_NORMALIZE_STYLE_RUNS
+	printf("Removed empty ranges:\n");
+	for( CAttributeRange currRange : newRanges )
+	{
+		printf( "\t%zu - %zu\n", currRange.mStart, currRange.mEnd );
+	}
+	#endif
 	
 	mRanges = newRanges;
 }
@@ -485,6 +528,7 @@ void	CAttributedString::Dump() const
 		printf( "%s", text.c_str() );
 	} );
 #else
+	printf("<%zu>",mRanges.size());
 	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
 	{
 		printf("[");
