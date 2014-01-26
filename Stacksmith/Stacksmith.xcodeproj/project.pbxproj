@@ -187,6 +187,7 @@
 		555E53B018946BC1001487C1 /* CMessageWatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555E53AE18946BC1001487C1 /* CMessageWatcher.cpp */; };
 		555E53B3189472E0001487C1 /* CMessageWatcherMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */; };
 		555E53B5189472F9001487C1 /* WILDMessageWatcherWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */; };
+		555E53B818953843001487C1 /* NSObject+JCSKVOWithBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E53B718953843001487C1 /* NSObject+JCSKVOWithBlocks.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */; };
 		555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */; };
@@ -715,6 +716,8 @@
 		555E53B1189472E0001487C1 /* CMessageWatcherMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessageWatcherMac.h; path = Platforms/Mac/CMessageWatcherMac.h; sourceTree = "<group>"; };
 		555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMessageWatcherMac.mm; path = Platforms/Mac/CMessageWatcherMac.mm; sourceTree = "<group>"; };
 		555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDMessageWatcherWindowController.xib; path = Platforms/Mac/WILDMessageWatcherWindowController.xib; sourceTree = "<group>"; };
+		555E53B618953843001487C1 /* NSObject+JCSKVOWithBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+JCSKVOWithBlocks.h"; path = "../KVOWithBlocks/NSObject+JCSKVOWithBlocks.h"; sourceTree = "<group>"; };
+		555E53B718953843001487C1 /* NSObject+JCSKVOWithBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+JCSKVOWithBlocks.m"; path = "../KVOWithBlocks/NSObject+JCSKVOWithBlocks.m"; sourceTree = "<group>"; };
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintbrushTool.tiff; path = ../UKPaintView/UKPaintbrushTool.tiff; sourceTree = "<group>"; };
@@ -1403,6 +1406,8 @@
 				553AF61D17491AEE00AF3BBA /* UKCoordinateUtils.m */,
 				5523869C187E265000D7FAB3 /* ULIInvisiblePlayerView.h */,
 				5523869D187E265000D7FAB3 /* ULIInvisiblePlayerView.m */,
+				555E53B618953843001487C1 /* NSObject+JCSKVOWithBlocks.h */,
+				555E53B718953843001487C1 /* NSObject+JCSKVOWithBlocks.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -2142,6 +2147,7 @@
 				556DB7C51870ADE9002F7CB2 /* CURLResponse.mm in Sources */,
 				552386BC1883858300D7FAB3 /* CString.cpp in Sources */,
 				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,
+				555E53B818953843001487C1 /* NSObject+JCSKVOWithBlocks.m in Sources */,
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
 				55CD60BF187510F0002450E2 /* CWebBrowserPart.cpp in Sources */,

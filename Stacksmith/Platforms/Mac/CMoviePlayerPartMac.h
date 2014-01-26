@@ -23,7 +23,7 @@ namespace Carlson {
 class CMoviePlayerPartMac : public CMoviePlayerPart, public CMacPartBase
 {
 public:
-	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil) {};
+	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil), mRateObserver(nil), mLastNotifiedRate(0.0) {};
 
 	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView();
@@ -42,8 +42,11 @@ protected:
 	
 	void			SetUpMoviePlayer();
 	void			SetUpMoviePlayerControls();
+	void			SetUpRateObserver();
 	
 	ULIInvisiblePlayerView	*	mView;
+	id							mRateObserver;
+	float						mLastNotifiedRate;
 };
 
 

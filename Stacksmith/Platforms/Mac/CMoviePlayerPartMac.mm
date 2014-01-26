@@ -11,6 +11,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #include "CDocument.h"
+#import "UKHelperMacros.h"
+#import "NSObject+JCSKVOWithBlocks.h"
+#include "CAlert.h"
 
 
 using namespace Carlson;
@@ -20,6 +23,11 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 {
 	if( mView )
 	{
+		if( mRateObserver )
+		{
+			[mView.player jcsRemoveObserver: mRateObserver];
+			mRateObserver = nil;
+		}
 		[mView removeFromSuperview];
 		[mView release];
 	}
@@ -37,6 +45,11 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 
 void	CMoviePlayerPartMac::DestroyView()
 {
+	if( mRateObserver )
+	{
+		[mView.player jcsRemoveObserver: mRateObserver];
+		mRateObserver = nil;
+	}
 	[mView removeFromSuperview];
 	[mView release];
 	mView = nil;
@@ -50,6 +63,11 @@ void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
 	NSView	*	oldSuper = nil;
 	if( mView )
 	{
+		if( mRateObserver )
+		{
+			[mView.player jcsRemoveObserver: mRateObserver];
+			mRateObserver = nil;
+		}
 		oldSuper = [mView superview];
 		[mView removeFromSuperview];
 		[mView release];
@@ -93,7 +111,28 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 	if( mediaURL.length() > 0 )
 		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
 	mView.player = [AVPlayer playerWithURL: movieURL];
+	SetUpRateObserver();
 	mView.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+}
+
+
+void	CMoviePlayerPartMac::SetUpRateObserver()
+{
+	mRateObserver = [mView.player jcsAddObserverForKeyPath: PROPERTY(rate) options: NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew queue: [NSOperationQueue mainQueue] block: ^(NSDictionary *change)
+	{
+		const char*	msg = NULL;
+		float		theRate = mView.player.rate;
+		if( theRate != mLastNotifiedRate )
+		{
+			if( theRate == 0.0 )
+				msg = "stopMovie";
+			else if( mLastNotifiedRate == 0.0 )
+				msg = "playMovie";
+			if( msg )
+				this->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, msg );
+			mLastNotifiedRate = theRate;
+		}
+	}];
 }
 
 
@@ -120,7 +159,13 @@ void	CMoviePlayerPartMac::SetStarted( bool inStart )
 
 void	CMoviePlayerPartMac::SetMediaPath( const std::string& inPath )
 {
+	if( mRateObserver )
+	{
+		[mView.player jcsRemoveObserver: mRateObserver];
+		mRateObserver = nil;
+	}
 	mView.player = [AVPlayer playerWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inPath.c_str()]]];
+	SetUpRateObserver();
 	CMoviePlayerPart::SetMediaPath( inPath );
 }
 
