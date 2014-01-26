@@ -16,6 +16,13 @@
 namespace Carlson {
 
 
+struct CMessageWatcherEntry
+{
+	std::string		mMessage;
+	size_t			mNumOccurrences;
+};
+
+
 class CMessageWatcher : public CScriptableObject
 {
 public:
@@ -24,12 +31,12 @@ public:
 	
 	CMessageWatcher() {};
 	
-	virtual void		AddMessage( const std::string& inMessage )	{ while( mMessages.size() >= 50 ) mMessages.erase( mMessages.begin() ); mMessages.push_back( inMessage ); };
+	virtual void		AddMessage( const std::string& inMessage );
 	size_t				GetNumMessages()							{ return mMessages.size(); };
-	std::string			GetMessageAtIndex( size_t inIndex )			{ return mMessages[inIndex]; };
+	std::string			GetMessageAtIndex( size_t inIndex );
 	
 protected:
-	std::vector<std::string>	mMessages;
+	std::vector<CMessageWatcherEntry>	mMessages;
 };
 
 
