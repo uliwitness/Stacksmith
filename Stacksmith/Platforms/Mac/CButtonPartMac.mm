@@ -145,10 +145,10 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 			[mView setImagePosition: NSImageAbove];
 			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		}
-		else
+		else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
 			[mView setImagePosition: NSNoImage];
 	}
-	else
+	else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
 		[mView setImagePosition: NSNoImage];
 	[mView setEnabled: mEnabled];
 	[inSuperView addSubview: mView];
