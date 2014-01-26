@@ -536,6 +536,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	stopMovieHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "stopMovie" );
 	if( inHandler == arrowKeyHandlerID )
 	{
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
 		LEOValuePtr	directionParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 1 );
 		char		buf[40] = {};
 		if( directionParam )
@@ -543,22 +544,22 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			const char*	directionStr = LEOGetValueAsString( directionParam, buf, sizeof(buf), inContext );
 			if( strcasecmp( directionStr, "left") == 0 )
 			{
-	//			[[NSApplication sharedApplication] sendAction: @selector(goPrevCard:) to: nil from: [NSApplication sharedApplication]];
+				userData->GetStack()->GetPreviousCard()->GoThereInNewWindow( false, userData->GetStack() );
 				handled = true;
 			}
 			else if( strcasecmp( directionStr, "right") == 0 )
 			{
-	//			[[NSApplication sharedApplication] sendAction: @selector(goNextCard:) to: nil from: [NSApplication sharedApplication]];
+				userData->GetStack()->GetNextCard()->GoThereInNewWindow( false, userData->GetStack() );
 				handled = true;
 			}
 			else if( strcasecmp( directionStr, "up") == 0 )
 			{
-	//			[[NSApplication sharedApplication] sendAction: @selector(goFirstCard:) to: nil from: [NSApplication sharedApplication]];
+				userData->GetStack()->GetCard( 0 )->GoThereInNewWindow( false, userData->GetStack() );
 				handled = true;
 			}
 			else if( strcasecmp( directionStr, "down") == 0 )
 			{
-	//			[[NSApplication sharedApplication] sendAction: @selector(goLastCard:) to: nil from: [NSApplication sharedApplication]];
+				userData->GetStack()->GetCard( userData->GetStack()->GetNumCards() -1 )->GoThereInNewWindow( false, userData->GetStack() );
 				handled = true;
 			}
 		}

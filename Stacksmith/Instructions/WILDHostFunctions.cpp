@@ -309,12 +309,7 @@ void	WILDBackgroundPartInstruction( LEOContext* inContext )
 void	WILDNextCardInstruction( LEOContext* inContext )
 {
 	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
-	CCard		*	theCard = theStack->GetCurrentCard();
-	size_t			cardIdx = theStack->GetIndexOfCard(theCard);
-	cardIdx++;
-	if( cardIdx >= theStack->GetNumCards() )
-		cardIdx = 0;
-	theCard = theStack->GetCard( cardIdx );
+	CCard		*	theCard = theStack->GetNextCard();
 	
 	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
@@ -326,13 +321,7 @@ void	WILDNextCardInstruction( LEOContext* inContext )
 void	WILDPreviousCardInstruction( LEOContext* inContext )
 {
 	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
-	CCard		*	theCard = theStack->GetCurrentCard();
-	size_t			cardIdx = theStack->GetIndexOfCard(theCard);
-	if( cardIdx == 0 )
-		cardIdx = theStack->GetNumCards() -1;
-	else
-		cardIdx--;
-	theCard = theStack->GetCard( cardIdx );
+	CCard		*	theCard = theStack->GetPreviousCard();
 	
 	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;

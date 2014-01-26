@@ -56,6 +56,8 @@ public:
 	
 	virtual void	SetCurrentCard( CCard* inCard )	{ mCurrentCard = inCard; };
 	virtual CCard*	GetCurrentCard()				{ return mCurrentCard; };
+	CCard*			GetNextCard();
+	CCard*			GetPreviousCard();
 	virtual CLayer*	GetCurrentLayer()				{ if( mEditingBackground ) return mCurrentCard->GetBackground(); return mCurrentCard; };
 	virtual CStack*	GetStack()						{ return this; };
 	size_t			GetCardWidth()					{ return mCardWidth; };

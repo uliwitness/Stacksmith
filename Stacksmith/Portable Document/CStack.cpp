@@ -362,6 +362,27 @@ size_t	CStack::GetIndexOfCard( CCard* inCard )
 }
 
 
+CCard*	CStack::GetNextCard()
+{
+	size_t			cardIdx = GetIndexOfCard(mCurrentCard);
+	cardIdx++;
+	if( cardIdx >= mCards.size() )
+		cardIdx = 0;
+	return mCards[cardIdx];
+}
+
+
+CCard*	CStack::GetPreviousCard()
+{
+	size_t			cardIdx = GetIndexOfCard(mCurrentCard);
+	if( cardIdx == 0 )
+		cardIdx = mCards.size() -1;
+	else
+		cardIdx--;
+	return mCards[cardIdx];
+}
+
+
 size_t	CStack::GetIndexOfBackground( CBackground* inBackground )
 {
 	size_t		currIdx = 0;
