@@ -184,6 +184,9 @@
 		555E539E18922766001487C1 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555E539D18922766001487C1 /* AVKit.framework */; };
 		555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555E53A3189351AA001487C1 /* PlaceholderMovie.mov */; };
 		555E53A918936817001487C1 /* WILDPopUpButtonView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 555E53A818936817001487C1 /* WILDPopUpButtonView.mm */; };
+		555E53B018946BC1001487C1 /* CMessageWatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555E53AE18946BC1001487C1 /* CMessageWatcher.cpp */; };
+		555E53B3189472E0001487C1 /* CMessageWatcherMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */; };
+		555E53B5189472F9001487C1 /* WILDMessageWatcherWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */; };
 		555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */; };
 		555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */; };
 		555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F102E13881DB700E26037 /* UKPaintEraserTool.tiff */; };
@@ -707,6 +710,11 @@
 		555E53A3189351AA001487C1 /* PlaceholderMovie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PlaceholderMovie.mov; sourceTree = "<group>"; };
 		555E53A718936817001487C1 /* WILDPopUpButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPopUpButtonView.h; path = Platforms/Mac/WILDPopUpButtonView.h; sourceTree = "<group>"; };
 		555E53A818936817001487C1 /* WILDPopUpButtonView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDPopUpButtonView.mm; path = Platforms/Mac/WILDPopUpButtonView.mm; sourceTree = "<group>"; };
+		555E53AE18946BC1001487C1 /* CMessageWatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessageWatcher.cpp; path = "Portable Document/CMessageWatcher.cpp"; sourceTree = "<group>"; };
+		555E53AF18946BC1001487C1 /* CMessageWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessageWatcher.h; path = "Portable Document/CMessageWatcher.h"; sourceTree = "<group>"; };
+		555E53B1189472E0001487C1 /* CMessageWatcherMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessageWatcherMac.h; path = Platforms/Mac/CMessageWatcherMac.h; sourceTree = "<group>"; };
+		555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMessageWatcherMac.mm; path = Platforms/Mac/CMessageWatcherMac.mm; sourceTree = "<group>"; };
+		555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDMessageWatcherWindowController.xib; path = Platforms/Mac/WILDMessageWatcherWindowController.xib; sourceTree = "<group>"; };
 		555E5798115BFE7800AAF9CA /* UKProgressPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKProgressPanelController.h; sourceTree = "<group>"; };
 		555E5799115BFE7800AAF9CA /* UKProgressPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKProgressPanelController.m; sourceTree = "<group>"; };
 		555F102C13881DB700E26037 /* UKPaintbrushTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintbrushTool.tiff; path = ../UKPaintView/UKPaintbrushTool.tiff; sourceTree = "<group>"; };
@@ -1130,6 +1138,9 @@
 				55B0740D1889C6E90023BA3E /* CMessageBoxMac.h */,
 				55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */,
 				55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */,
+				555E53B1189472E0001487C1 /* CMessageWatcherMac.h */,
+				555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */,
+				555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */,
 			);
 			name = Document;
 			sourceTree = "<group>";
@@ -1454,6 +1465,8 @@
 				55C2B646115E5780008B094D /* CSearchContext.cpp */,
 				55CD61171879F464002450E2 /* CMessageBox.h */,
 				55CD61161879F464002450E2 /* CMessageBox.cpp */,
+				555E53AF18946BC1001487C1 /* CMessageWatcher.h */,
+				555E53AE18946BC1001487C1 /* CMessageWatcher.cpp */,
 				55CD611D187A60CD002450E2 /* CRecentCardsList.h */,
 				55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */,
 				552386BA1883858300D7FAB3 /* CString.cpp */,
@@ -1886,6 +1899,7 @@
 				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
 				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
 				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
+				555E53B5189472F9001487C1 /* WILDMessageWatcherWindowController.xib in Resources */,
 				55F34D38136A50D600E8588D /* ICON_902.pdf in Resources */,
 				55F34D39136A50D600E8588D /* ICON_1009.pdf in Resources */,
 				55F34D3A136A50D600E8588D /* ICON_24830.pdf in Resources */,
@@ -2065,6 +2079,7 @@
 				556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */,
 				556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */,
 				55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */,
+				555E53B018946BC1001487C1 /* CMessageWatcher.cpp in Sources */,
 				556DB7BF1870A6EB002F7CB2 /* CURLRequest.mm in Sources */,
 				55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */,
 				55E805C41360AA25006F1287 /* LEOPropertyInstructions.c in Sources */,
@@ -2123,6 +2138,7 @@
 				55A7BA4714668D5900AB0F34 /* ULIMelodyQueue.m in Sources */,
 				552386BF1883E1B000D7FAB3 /* CMacPartBase.mm in Sources */,
 				55CD60C818752ECA002450E2 /* CTimer.mm in Sources */,
+				555E53B3189472E0001487C1 /* CMessageWatcherMac.mm in Sources */,
 				556DB7C51870ADE9002F7CB2 /* CURLResponse.mm in Sources */,
 				552386BC1883858300D7FAB3 /* CString.cpp in Sources */,
 				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,

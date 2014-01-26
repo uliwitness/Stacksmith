@@ -16,6 +16,7 @@
 #include "LEOScript.h"
 #include "LEOContextGroup.h"
 #include "CMessageBox.h"
+#include "CMessageWatcher.h"
 
 
 void	WILDStackInstruction( LEOContext* inContext );
@@ -53,6 +54,7 @@ void	WILDBackgroundTimerInstruction( LEOContext* inContext );
 void	WILDNumberOfCardTimersInstruction( LEOContext* inContext );
 void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext );
 void	WILDMessageBoxInstruction( LEOContext* inContext );
+void	WILDMessageWatcherInstruction( LEOContext* inContext );
 void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType );
 void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* inType );
 
@@ -713,6 +715,17 @@ void	WILDMessageBoxInstruction( LEOContext* inContext )
 }
 
 
+void	WILDMessageWatcherInstruction( LEOContext* inContext )
+{
+	CMessageWatcher*	msg = CMessageWatcher::GetSharedInstance();
+	
+	inContext->stackEndPtr++;
+	CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, msg, kLEOInvalidateReferences, inContext );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(StacksmithHostFunction,WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS)
 LEOINSTR(WILDStackInstruction)
 LEOINSTR(WILDBackgroundInstruction)
@@ -748,7 +761,8 @@ LEOINSTR(WILDCardTimerInstruction)
 LEOINSTR(WILDBackgroundTimerInstruction)
 LEOINSTR(WILDNumberOfCardTimersInstruction)
 LEOINSTR(WILDNumberOfBackgroundTimersInstruction)
-LEOINSTR_LAST(WILDMessageBoxInstruction)
+LEOINSTR(WILDMessageBoxInstruction)
+LEOINSTR_LAST(WILDMessageWatcherInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostFunctions[] =
@@ -1048,10 +1062,10 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		EMessageIdentifier, INVALID_INSTR2, 0, 0, '\0',
+		EMessageIdentifier, INVALID_INSTR2, 0, 0, 'X',
 		{
-			{ EHostParamInvisibleIdentifier, EBoxIdentifier, EHostParameterRequired, WILD_MESSAGE_BOX_INSTRUCTION, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, EBoxIdentifier, EHostParameterOptional, WILD_MESSAGE_BOX_INSTRUCTION, 0, 0, '\0', 'X' },
+			{ EHostParamInvisibleIdentifier, EWatcherIdentifier, EHostParameterOptional, WILD_MESSAGE_WATCHER_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

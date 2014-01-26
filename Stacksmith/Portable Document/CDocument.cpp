@@ -11,6 +11,7 @@
 #include "CStack.h"
 #include "CTinyXMLUtils.h"
 #include "CVisiblePart.h"
+#include "CMessageWatcher.h"
 #include <sys/stat.h>
 #include "StacksmithVersion.h"
 
@@ -401,7 +402,7 @@ ObjectID	CDocument::GetUniqueIDForMedia()
 
 static void		CDocumentMessageSent( LEOHandlerID inHandlerID, LEOContextGroup* inContext )
 {
-	printf( "Message: %s\n", LEOContextGroupHandlerNameForHandlerID( inContext, inHandlerID ) );
+	CMessageWatcher::GetSharedInstance()->AddMessage( LEOContextGroupHandlerNameForHandlerID( inContext, inHandlerID ) );
 }
 
 
