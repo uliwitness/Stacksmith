@@ -52,7 +52,7 @@ bool	CWebBrowserPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext*
 		const char* msgStr = LEOGetValueAsString( inValue, msgBuf, sizeof(msgBuf), inContext );
 		if( !msgStr || !inContext->keepRunning )
 			return true;
-		SetCurrentURL( msgStr );
+		LoadCurrentURL( msgStr );
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

@@ -27,7 +27,7 @@ using namespace Carlson;
 	if( frame == sender.mainFrame )
 	{
 		const char*	currURLStr = sender.mainFrame.dataSource.request.URL.absoluteString.UTF8String;
-		self.owningBrowser->AssignCurrentURL( currURLStr );
+		self.owningBrowser->SetCurrentURL( currURLStr );
 		self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "loadPage" );
 	}
 }
@@ -76,9 +76,18 @@ void	CWebBrowserPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger ri
 }
 
 
-void	CWebBrowserPartMac::SetCurrentURL( const std::string& inURL )
+void	CWebBrowserPartMac::LoadCurrentURL( const std::string& inURL )
 {
-	NSURLRequest*	theRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
-	[mView.mainFrame loadRequest: theRequest];
+	if( inURL.length() == 0 )	// No URL? Just load an empty HTML doc filled with our bg color:
+	{
+		// CSS's rgb() is 0...255, we use 0...65535, so we divide by 65535/255, which is 257:
+		NSString* coloredBackgorundHTML = [NSString stringWithFormat: @"<html><head><title></title></head><body style=\"background-color: rgba(%d,%d,%d,%d);\"></body></html>",mFillColorRed / 257,mFillColorGreen / 257,mFillColorBlue / 257,mFillColorAlpha / 257];
+		[mView.mainFrame loadHTMLString: coloredBackgorundHTML baseURL: nil];
+	}
+	else
+	{
+		NSURLRequest*	theRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
+		[mView.mainFrame loadRequest: theRequest];
+	}
 }
 

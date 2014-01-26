@@ -34,8 +34,7 @@ public:
 	virtual void	SetPeeking( bool inState );
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetVisible( bool visible )		{ CWebBrowserPart::SetVisible(visible); [mView setHidden: !visible]; };
-	virtual void	SetCurrentURL( const std::string& inURL );	// Triggers view update.
-	void			AssignCurrentURL( const std::string& inURL )	{ mCurrentURL = inURL; };	// Used by view to tell us of a changed current page.
+	virtual void	LoadCurrentURL( const std::string& inURL );	// Triggers view update.
 
 protected:
 	~CWebBrowserPartMac()	{ DestroyView(); };
