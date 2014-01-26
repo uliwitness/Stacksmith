@@ -37,12 +37,12 @@ public:
 	CRecentCardInfo( const std::string& inURL, ObjectID inID, CCard* inCard ) {};
 	
 	std::string		GetDocumentURL()	{ return mDocumentURL; };
-	ObjectID	GetCardID()			{ return mCardID; };
+	ObjectID		GetCardID()			{ return mCardID; };
 	CCard*			GetCard()			{ return mCard; };
 
 protected:
 	std::string		mDocumentURL;	// To get back to a closed stack.
-	ObjectID	mCardID;		// To get back to a closed stack's card.
+	ObjectID		mCardID;		// To get back to a closed stack's card.
 	CCardRef		mCard;			// If still loaded, this is the card for quick access.
 };
 
@@ -50,8 +50,7 @@ protected:
 class CRecentCardsList
 {
 public:
-	template<class RecentCardInfoSubclass>
-	static void	Initialize();	// Create the shared instance & customize the class used for recents entries.
+	static void					SetSharedInstance( CRecentCardsList* inSI );
 	static CRecentCardsList*	GetSharedInstance();	// Shared across all subclasses.
 	
 	virtual void	AddCard( CCard* inCard ) = 0;
@@ -65,7 +64,7 @@ public:
 
 protected:
 	CRecentCardsList() : mMaxRecentsToKeep(16)	{};
-	~CRecentCardsList() {};
+	virtual ~CRecentCardsList() {};
 	
 	size_t		mMaxRecentsToKeep;		// Maximum number of items in list before we start purging some.
 };
@@ -78,6 +77,8 @@ template<class RecentCardInfoSubclass>
 class CRecentCardsListConcrete : public CRecentCardsList
 {
 public:
+	virtual ~CRecentCardsListConcrete() {};
+	
 	virtual void	AddCard( CCard* inCard )
 	{
 		if( mRecentCardInfos.size() > mMaxRecentsToKeep )

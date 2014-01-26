@@ -43,6 +43,7 @@ public:
 	CCard*			GetCardByID( ObjectID inID );
 	CCard*			GetCardByName( const char* inName );
 	size_t			GetIndexOfCard( CCard* inBackground );
+	CCard*			GetCardWithBackground( CBackground* inBg, CCard *startAtCard = NULL, bool searchForward = true );
 	
 	size_t			GetNumBackgrounds()					{ return mBackgrounds.size(); };
 	CBackground*	GetBackground( size_t inIndex )		{ if( inIndex >= mBackgrounds.size() ) return NULL; return mBackgrounds[inIndex]; };

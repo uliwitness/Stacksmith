@@ -32,6 +32,12 @@ void	CWebBrowserPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * 
 }
 
 
+void	CWebBrowserPart::WakeUp()
+{
+	LoadCurrentURL( mCurrentURL );
+}
+
+
 bool	CWebBrowserPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
 	if( strcasecmp("currentURL", inPropertyName) == 0 )

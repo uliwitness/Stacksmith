@@ -66,7 +66,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
 		destinationObject = (CScriptableObject*)theValue->object.object;
-		canGoThere = destinationObject->GoThereInNewWindow(false);
+		canGoThere = destinationObject->GoThereInNewWindow(false,userData->GetStack());
 	}
 	else
 	{
@@ -74,7 +74,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 		LEOGetValueAsString( theValue, stackName, sizeof(stackName), inContext );
 		CStack*	theStack = userData->GetStack()->GetDocument()->GetStackByName( stackName );
 		if( theStack )
-			canGoThere = theStack->GoThereInNewWindow(false);
+			canGoThere = theStack->GoThereInNewWindow(false,userData->GetStack());
 		destinationObject = theStack;
 	}
 	if( canGoThere )

@@ -31,13 +31,17 @@ CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string
 }
 
 
-bool	CStackMac::GoThereInNewWindow( bool inNewWindow )
+bool	CStackMac::GoThereInNewWindow( bool inNewWindow, CStack* oldStack )
 {
 	if( !mMacWindowController )
 		mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
-	[mMacWindowController showWindow: nil];
-	GetCurrentCard()->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "openStack" );
-	GetCurrentCard()->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "openCard" );
+	
+	if( GetCurrentCard() == NULL )
+	{
+		GetCard(0)->GoThereInNewWindow( inNewWindow, oldStack );
+	}
+	else
+		[mMacWindowController showWindow: nil];
 	
 	return true;
 }
@@ -73,6 +77,8 @@ void	CStackMac::SetCurrentCard( CCard* inCard )
 	[mMacWindowController createAllViews];
 
 	[CATransaction commit];
+	
+	[mMacWindowController showWindow: nil];
 }
 
 

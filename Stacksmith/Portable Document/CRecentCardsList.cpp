@@ -15,16 +15,15 @@ using namespace Carlson;
 static CRecentCardsList*	sRecentCardsList = NULL;
 
 
-CRecentCardsList*	CRecentCardsList::GetSharedInstance()
+void	CRecentCardsList::SetSharedInstance( CRecentCardsList* inSI )
 {
-	return sRecentCardsList;
+	sRecentCardsList = inSI;
 }
 
 
-template<class RecentCardInfoSubclass>
-void	CRecentCardsList::Initialize()
+CRecentCardsList*	CRecentCardsList::GetSharedInstance()
 {
-	sRecentCardsList = new CRecentCardsListConcrete<RecentCardInfoSubclass>;
+	return sRecentCardsList;
 }
 
 

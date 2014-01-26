@@ -56,7 +56,7 @@ public:
 	virtual bool				GetTextContents( std::string& outString )		{ return false; };
 	virtual bool				SetTextContents( const std::string& inString)	{ return false; };
 
-	virtual bool				GoThereInNewWindow( bool inNewWindow )			{ return false; };
+	virtual bool				GoThereInNewWindow( bool inNewWindow, CStack* oldStack )			{ return false; };
 
 	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )						{ return false; };
 	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )	{ return false; };

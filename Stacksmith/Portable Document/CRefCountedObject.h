@@ -42,8 +42,8 @@ class CRefCountedObjectRef
 {
 public:
 	CRefCountedObjectRef( T* inObject = NULL, bool inTakeOverOwnership = false ) : mObject(inObject) { if( mObject && !inTakeOverOwnership ) mObject->Retain(); };
-	CRefCountedObjectRef( const CRefCountedObjectRef<T>& inObjectRef ) { mObject = inObjectRef.mObject; mObject->Retain(); };
-	virtual ~CRefCountedObjectRef() { mObject->Release(); mObject = NULL; };
+	CRefCountedObjectRef( const CRefCountedObjectRef<T>& inObjectRef ) { mObject = inObjectRef.mObject; if( mObject ) mObject->Retain(); };
+	virtual ~CRefCountedObjectRef() { if( mObject ) mObject->Release(); mObject = NULL; };
 	
 	virtual T&							operator *()				{ return *mObject; };
 	virtual T*							operator ->()				{ return mObject; };

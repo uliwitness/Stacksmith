@@ -9,6 +9,7 @@
 #include "CCard.h"
 #include "CStack.h"
 #include "CTinyXMLUtils.h"
+#include "CAlert.h"
 
 
 using namespace Carlson;
@@ -72,5 +73,44 @@ void	CCard::SetPeeking( bool inState )
 CScriptableObject*	CCard::GetParentObject()
 {
 	return mOwningBackground;
+}
+
+
+bool	CCard::GoThereInNewWindow( bool inNewWindow, CStack* oldStack )
+{
+	Retain();
+	Load([this,oldStack,inNewWindow](CLayer *inThisCard)
+	{
+		CCard	*	oldCard = oldStack ? oldStack->GetCurrentCard() : NULL;
+		bool		destStackWasntOpenYet = GetStack()->GetCurrentCard() == NULL;
+		// We're moving away
+		if( oldCard && oldStack && oldStack != GetStack() && !inNewWindow )	// Leaving this stack? Close it.
+		{
+			oldCard->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "closeCard" );
+			oldCard->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "closeStack" );
+			oldCard->GoToSleep();
+			oldStack->SetCurrentCard(NULL);
+		}
+		if( GetStack()->GetCurrentCard() != NULL && GetStack()->GetCurrentCard() != this )	// Dest stack was already open with another card? Close that card (too).
+		{
+			GetStack()->GetCurrentCard()->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "closeCard" );
+			GetStack()->GetCurrentCard()->GoToSleep();
+		}
+		
+		if( GetStack()->GetCurrentCard() != this )	// Dest stack didn't already have this card open?
+		{
+			GetStack()->SetCurrentCard( this );	// Go there!
+			
+			WakeUp();
+			if( destStackWasntOpenYet )
+			{
+				SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "openStack" );
+			}
+			SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "openCard" );
+		}
+		Release();
+	});
+	
+	return true;
 }
 

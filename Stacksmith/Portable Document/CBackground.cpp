@@ -35,3 +35,14 @@ CScriptableObject*	CBackground::GetParentObject()
 }
 
 
+bool	CBackground::GoThereInNewWindow( bool inNewWindow, CStack* oldStack )
+{
+	CCard*	searchStart = GetStack()->GetCurrentCard();
+	if( searchStart && searchStart->GetBackground() == this )
+		return searchStart->GoThereInNewWindow( inNewWindow, oldStack );
+	else
+		return GetStack()->GetCardWithBackground( this, searchStart )->GoThereInNewWindow( inNewWindow, oldStack );
+	return false;
+}
+
+

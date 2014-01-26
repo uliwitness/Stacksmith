@@ -25,6 +25,7 @@
 #import <Sparkle/Sparkle.h>
 #include <ios>
 #include <sstream>
+#include "CRecentCardsList.h"
 
 
 using namespace Carlson;
@@ -84,6 +85,7 @@ void	WILDFirstNativeCall( void )
 	
 	CMessageBox::SetSharedInstance( new CMessageBoxMac );
 	CMessageWatcher::SetSharedInstance( new CMessageWatcherMac );
+	CRecentCardsList::SetSharedInstance( new CRecentCardsListConcrete<CRecentCardInfo>() );
 }
 
 
@@ -201,9 +203,7 @@ void	WILDFirstNativeCall( void )
 		{
 			inStack->GetCard(0)->Load( [inDocument,inStack,self](Carlson::CLayer*inCard)
 			{
-				inStack->SetCurrentCard((Carlson::CCard*)inCard);
-				inCard->WakeUp();
-				inStack->GoThereInNewWindow( true );
+				inCard->GoThereInNewWindow( true, NULL );
 				
 				//inDocument->Save();
 			} );

@@ -52,8 +52,6 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	mView = [[WebView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 	[mView setFrameLoadDelegate: mMacDelegate];
-	NSURLRequest*	theRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: mCurrentURL.c_str()]]];
-	[mView.mainFrame loadRequest: theRequest];
 	[mView setWantsLayer: YES];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
