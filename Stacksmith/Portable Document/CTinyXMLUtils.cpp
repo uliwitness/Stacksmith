@@ -68,7 +68,8 @@ void		CTinyXMLUtils::GetStringNamed( tinyxml2::XMLElement* root, const char* inN
 	if( !root )
 		return;
 	
-	const char*	str = root->FirstChildElement( inName )->GetText();
+	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	const char*	str = elem ? elem->GetText() : NULL;
 	if( str )
 		outName = str;
 }
