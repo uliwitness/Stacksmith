@@ -1035,7 +1035,6 @@
 			isa = PBXGroup;
 			children = (
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
-				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				555E53BE18959842001487C1 /* StacksmithTests */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
@@ -1055,13 +1054,6 @@
 				553C469D13577334000219FA /* Interpreter */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Other Sources";
 			sourceTree = "<group>";
 		};
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
@@ -2556,6 +2548,7 @@
 				555E53C518959842001487C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55E23BFB133FAB9E00E6B444 /* Build configuration list for PBXNativeTarget "BuildVersionHeader" */ = {
 			isa = XCConfigurationList;

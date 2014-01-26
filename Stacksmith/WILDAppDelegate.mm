@@ -204,8 +204,6 @@ void	WILDFirstNativeCall( void )
 			inStack->GetCard(0)->Load( [inDocument,inStack,self](Carlson::CLayer*inCard)
 			{
 				inCard->GoThereInNewWindow( true, NULL );
-				
-				//inDocument->Save();
 			} );
 		} );
 	});

@@ -388,6 +388,12 @@ using namespace Carlson;
 }
 
 
+-(void)	saveDocument: (id)sender
+{
+	mStack->GetDocument()->Save();
+}
+
+
 -(void)	windowDidBecomeKey: (NSNotification *)notification
 {
 	CStack::SetFrontStack( mStack );
