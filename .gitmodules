@@ -32,3 +32,6 @@
 [submodule "tinyxml2"]
 	path = tinyxml2
 	url = https://github.com/uliwitness/tinyxml2.git
+[submodule "KVOWithBlocks"]
+	path = KVOWithBlocks
+	url = git@github.com:uliwitness/KVOWithBlocks.git
