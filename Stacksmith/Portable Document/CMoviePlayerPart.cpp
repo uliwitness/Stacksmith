@@ -57,7 +57,7 @@ bool	CMoviePlayerPart::GetPropertyNamed( const char* inPropertyName, size_t byte
 	{
 		LEOInitBooleanValue( outValue, GetStarted(), kLEOInvalidateReferences, inContext );
 	}
-	else if( strcasecmp("mediaPath", inPropertyName) == 0 )
+	else if( strcasecmp("movie", inPropertyName) == 0 )
 	{
 		LEOInitStringValue( outValue, GetMediaPath().c_str(), GetMediaPath().size(), kLEOInvalidateReferences, inContext );
 	}
@@ -100,7 +100,7 @@ bool	CMoviePlayerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext
 			return true;
 		SetControllerVisible( theHighlight );
 	}
-	else if( strcasecmp("mediaPath", inPropertyName) == 0 )
+	else if( strcasecmp("movie", inPropertyName) == 0 )
 	{
 		char		msgBuf[1024] = {0};
 		const char* msgStr = LEOGetValueAsString( inValue, msgBuf, sizeof(msgBuf), inContext );

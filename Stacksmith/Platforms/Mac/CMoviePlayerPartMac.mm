@@ -143,4 +143,11 @@ void	CMoviePlayerPartMac::SetPeeking( bool inState )
 }
 
 
+void	CMoviePlayerPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
+{
+	CMoviePlayerPart::SetRect( left, top, right, bottom );
+	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+}
+
+
 

@@ -252,3 +252,10 @@ void	CButtonPartMac::DestroyView()
 }
 
 
+void	CButtonPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
+{
+	CButtonPart::SetRect( left, top, right, bottom );
+	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+}
+
+

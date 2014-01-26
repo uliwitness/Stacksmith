@@ -34,6 +34,8 @@ public:
 	virtual void		SetCurrentTime( LEOInteger inTicks );
 	virtual LEOInteger	GetCurrentTime();
 	virtual void		SetControllerVisible( bool inStart );
+	virtual void		SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
+	virtual void	SetVisible( bool visible )		{ CMoviePlayerPart::SetVisible(visible); [mView setHidden: !visible]; };
 
 protected:
 	~CMoviePlayerPartMac()	{ DestroyView(); };

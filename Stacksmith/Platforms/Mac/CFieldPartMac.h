@@ -31,6 +31,8 @@ public:
 	virtual void	SetPeeking( bool inState )			{ ApplyPeekingStateToView(inState, mView); };
 	virtual void	LoadChangedTextStylesIntoView();
 	virtual void	LoadChangedTextFromView();
+	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
+	virtual void	SetVisible( bool visible )		{ CFieldPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual NSDictionary*			GetCocoaAttributesForPart();
 
 	static NSAttributedString	*	GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs = 0, size_t endOffs = SIZE_T_MAX );

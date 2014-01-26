@@ -35,3 +35,16 @@ void	CWebBrowserPartMac::SetPeeking( bool inState )
 }
 
 
+void	CWebBrowserPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
+{
+	CWebBrowserPart::SetRect( left, top, right, bottom );
+	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+}
+
+
+void	CWebBrowserPartMac::SetCurrentURL( const std::string& inURL )
+{
+	NSURLRequest*	theRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
+	[mView.mainFrame loadRequest: theRequest];
+}
+

@@ -432,3 +432,10 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 
 //	stringToSet.Dump();
 }
+
+
+void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
+{
+	CFieldPart::SetRect( left, top, right, bottom );
+	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+}
