@@ -16,7 +16,7 @@ namespace Carlson {
 class CMoviePlayerPart : public CVisiblePart
 {
 public:
-	explicit CMoviePlayerPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mStarted(false), mControllerVisible(false) {};
+	explicit CMoviePlayerPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mStarted(false), mControllerVisible(false), mCurrentTime(0) {};
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -32,8 +32,8 @@ protected:
 	virtual void			SetStarted( bool inStart )					{ mStarted = inStart; };
 	bool					GetControllerVisible()						{ return mControllerVisible; };
 	virtual void			SetControllerVisible( bool inStart )		{ mControllerVisible = inStart; };
-	virtual LEOInteger		GetCurrentTime()							{ return 0LL; };
-	virtual void			SetCurrentTime( LEOInteger inTicks )		{};
+	virtual LEOInteger		GetCurrentTime()							{ return mCurrentTime; };
+	virtual void			SetCurrentTime( LEOInteger inTicks )		{ mCurrentTime = inTicks;};
 	std::string				GetMediaPath()								{ return mMediaPath; };
 	virtual void			SetMediaPath( const std::string& inPath )	{ mMediaPath = inPath; };
 
@@ -41,6 +41,7 @@ protected:
 	std::string			mMediaPath;
 	bool				mControllerVisible;
 	bool				mStarted;
+	LEOInteger			mCurrentTime;
 };
 
 }

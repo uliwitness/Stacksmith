@@ -23,6 +23,7 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 {
 	if( mView )
 	{
+		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
 		if( mRateObserver )
 		{
 			[mView.player jcsRemoveObserver: mRateObserver];
@@ -45,6 +46,8 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 
 void	CMoviePlayerPartMac::DestroyView()
 {
+	if( mView )
+		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
 	if( mRateObserver )
 	{
 		[mView.player jcsRemoveObserver: mRateObserver];
@@ -63,6 +66,7 @@ void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
 	NSView	*	oldSuper = nil;
 	if( mView )
 	{
+		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
 		if( mRateObserver )
 		{
 			[mView.player jcsRemoveObserver: mRateObserver];
@@ -113,6 +117,7 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 	mView.player = [AVPlayer playerWithURL: movieURL];
 	SetUpRateObserver();
 	mView.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+	[mView.player seekToTime: CMTimeMakeWithSeconds( mCurrentTime / 60.0, 1)];
 }
 
 
@@ -130,6 +135,7 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 				msg = "playMovie";
 			if( msg )
 				this->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, msg );
+			mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
 			mLastNotifiedRate = theRate;
 		}
 	}];
@@ -172,13 +178,16 @@ void	CMoviePlayerPartMac::SetMediaPath( const std::string& inPath )
 
 void	CMoviePlayerPartMac::SetCurrentTime( LEOInteger inTicks )
 {
+	CMoviePlayerPart::SetCurrentTime(inTicks);
 	[mView.player seekToTime: CMTimeMakeWithSeconds( inTicks / 60.0, 1 )];
 }
 
 
 LEOInteger	CMoviePlayerPartMac::GetCurrentTime()
 {
-	return CMTimeGetSeconds([mView.player currentTime]) * 60.0;
+	if( mView )
+		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
+	return mCurrentTime;
 }
 
 
