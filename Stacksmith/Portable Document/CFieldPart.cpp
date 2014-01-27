@@ -81,7 +81,7 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 		tinyxml2::XMLElement * currSelLine = selLines->FirstChildElement("integer");
 		while( currSelLine )
 		{
-			mSelectedLines.insert( currSelLine->LongLongText() );
+			mSelectedLines.insert( CTinyXMLUtils::GetLongLongNamed( currSelLine, NULL ) );
 			currSelLine = currSelLine->NextSiblingElement( "integer" );
 		}
 	}
@@ -141,9 +141,7 @@ void	CFieldPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEle
 		elem = document->NewElement("selectedLines");
 		for( size_t currLine : mSelectedLines )
 		{
-			tinyxml2::XMLElement	*	subElem = document->NewElement("integer");
-			subElem->SetText( (long long) currLine );
-			elem->InsertEndChild( subElem );
+			CTinyXMLUtils::AddLongLongNamed( elem, currLine, "integer" );
 		}
 		inElement->InsertEndChild(elem);
 	}

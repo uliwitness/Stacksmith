@@ -42,9 +42,7 @@ void	CCard::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, 
 {
 	CLayer::SavePropertiesToElementOfDocument( stackfile, document );
 	
-	tinyxml2::XMLElement*	elem = document->NewElement("owner");
-	elem->SetText( mOwningBackground->GetID() );
-	stackfile->InsertEndChild(elem);
+	CTinyXMLUtils::AddLongLongNamed( stackfile, mOwningBackground->GetID(), "owner" );
 }
 
 void	CCard::WakeUp()

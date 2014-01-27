@@ -18,7 +18,7 @@ long long		CTinyXMLUtils::GetLongLongNamed( tinyxml2::XMLElement* root, const ch
 		return defaultValue;
 	
 	char	*	endPtr = NULL;
-	tinyxml2::XMLElement*	child = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	child = inName ? root->FirstChildElement( inName ) : root;
 	const char*	str = child ? child->GetText() : NULL;
 	if( !str )
 		return defaultValue;
@@ -35,7 +35,7 @@ int		CTinyXMLUtils::GetIntNamed( tinyxml2::XMLElement* root, const char* inName,
 		return defaultValue;
 	
 	char	*	endPtr = NULL;
-	tinyxml2::XMLElement*	child = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	child = inName ? root->FirstChildElement( inName ) : root;
 	const char*	str = child ? child->GetText() : NULL;
 	if( !str )
 		return defaultValue;
@@ -52,7 +52,7 @@ double		CTinyXMLUtils::GetDoubleNamed( tinyxml2::XMLElement* root, const char* i
 		return defaultValue;
 	
 	char	*	endPtr = NULL;
-	tinyxml2::XMLElement*	child = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	child = inName ? root->FirstChildElement( inName ) : root;
 	const char*	str = child ? child->GetText() : NULL;
 	if( !str )
 		return defaultValue;
@@ -68,7 +68,7 @@ void		CTinyXMLUtils::GetStringNamed( tinyxml2::XMLElement* root, const char* inN
 	if( !root )
 		return;
 	
-	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	elem = inName ? root->FirstChildElement( inName ) : root;
 	const char*	str = elem ? elem->GetText() : NULL;
 	if( str )
 		outName = str;
@@ -80,7 +80,7 @@ bool		CTinyXMLUtils::GetBoolNamed( tinyxml2::XMLElement* root, const char* inNam
 	if( !root )
 		return defaultValue;
 	
-	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	elem = inName ? root->FirstChildElement( inName ) : root;
 	if( elem )
 		elem = elem->FirstChildElement();
 	if( elem )
@@ -100,7 +100,7 @@ void	CTinyXMLUtils::GetRectNamed( tinyxml2::XMLElement* root, const char* inName
 		return;
 	
 	tinyxml2::XMLElement*	subElem = NULL;
-	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	elem = inName ? root->FirstChildElement( inName ) : root;
 	subElem = elem ? elem->FirstChildElement("left") : NULL;
 	if( subElem )
 		subElem->QueryIntText( outLeft );
@@ -122,7 +122,7 @@ void	CTinyXMLUtils::GetColorNamed( tinyxml2::XMLElement* root, const char* inNam
 		return;
 	
 	tinyxml2::XMLElement*	subElem = NULL;
-	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	elem = inName ? root->FirstChildElement( inName ) : root;
 	subElem = elem ? elem->FirstChildElement("red") : NULL;
 	if( subElem )
 		subElem->QueryIntText( outRed );
@@ -144,7 +144,7 @@ void	CTinyXMLUtils::GetPointNamed( tinyxml2::XMLElement* root, const char* inNam
 		return;
 	
 	tinyxml2::XMLElement*	subElem = NULL;
-	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	elem = inName ? root->FirstChildElement( inName ) : root;
 	subElem = elem ? elem->FirstChildElement("left") : NULL;
 	if( subElem )
 		subElem->QueryIntText( outLeft );
@@ -160,7 +160,7 @@ void	CTinyXMLUtils::GetSizeNamed( tinyxml2::XMLElement* root, const char* inName
 		return;
 	
 	tinyxml2::XMLElement*	subElem = NULL;
-	tinyxml2::XMLElement*	elem = root->FirstChildElement( inName );
+	tinyxml2::XMLElement*	elem = inName ? root->FirstChildElement( inName ) : root;
 	subElem = elem ? elem->FirstChildElement("width") : NULL;
 	if( subElem )
 		subElem->QueryIntText( outLeft );
@@ -172,68 +172,66 @@ void	CTinyXMLUtils::GetSizeNamed( tinyxml2::XMLElement* root, const char* inName
 
 void	CTinyXMLUtils::AddLongLongNamed( tinyxml2::XMLElement* root, long long inValue, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
 	char		str[200] = {0};
 	snprintf( str, sizeof(str) -1, "%lld", inValue );
 	elem->SetText(str);
-	root->InsertEndChild( elem );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 
 void	CTinyXMLUtils::AddStringNamed( tinyxml2::XMLElement* root, const std::string& inValue, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
 	elem->SetText(inValue.c_str());
-	root->InsertEndChild( elem );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 
 void	CTinyXMLUtils::AddBoolNamed( tinyxml2::XMLElement* root, bool inValue, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
 	elem->SetBoolFirstChild(inValue);
-	root->InsertEndChild( elem );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 
 void	CTinyXMLUtils::AddIntNamed( tinyxml2::XMLElement* root, int inValue, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
 	elem->SetText(inValue);
-	root->InsertEndChild( elem );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 
 void	CTinyXMLUtils::AddDoubleNamed( tinyxml2::XMLElement* root, double inValue, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
 	elem->SetText(inValue);
-	root->InsertEndChild( elem );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 
-void	CTinyXMLUtils::AddRectNamed( tinyxml2::XMLElement* root, int inLeft, int inTop, int inRight, int inBottom, const char* inName )
+void	CTinyXMLUtils::AddRectNamed( tinyxml2::XMLElement* root, long long inLeft, long long inTop, long long inRight, long long inBottom, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
-	tinyxml2::XMLElement	*	subElem = root->GetDocument()->NewElement("left");
-	subElem->SetText(inLeft);
-	elem->InsertEndChild( subElem );
-	subElem = root->GetDocument()->NewElement("top");
-	subElem->SetText(inTop);
-	elem->InsertEndChild( subElem );
-	subElem = root->GetDocument()->NewElement("right");
-	subElem->SetText(inRight);
-	elem->InsertEndChild( subElem );
-	subElem = root->GetDocument()->NewElement("bottom");
-	subElem->SetText(inBottom);
-	elem->InsertEndChild( subElem );
-	root->InsertEndChild( elem );
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
+	AddLongLongNamed( elem, inLeft, "left" );
+	AddLongLongNamed( elem, inTop, "top" );
+	AddLongLongNamed( elem, inRight, "right" );
+	AddLongLongNamed( elem, inBottom, "bottom" );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 
 void	CTinyXMLUtils::AddColorNamed( tinyxml2::XMLElement* root, int inLeft, int inTop, int inRight, int inBottom, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
 	tinyxml2::XMLElement	*	subElem = root->GetDocument()->NewElement("red");
 	subElem->SetText(inLeft);
 	elem->InsertEndChild( subElem );
@@ -246,33 +244,36 @@ void	CTinyXMLUtils::AddColorNamed( tinyxml2::XMLElement* root, int inLeft, int i
 	subElem = root->GetDocument()->NewElement("alpha");
 	subElem->SetText(inBottom);
 	elem->InsertEndChild( subElem );
-	root->InsertEndChild( elem );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 
 void	CTinyXMLUtils::AddPointNamed( tinyxml2::XMLElement* root, int inLeft, int inTop, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
 	tinyxml2::XMLElement	*	subElem = root->GetDocument()->NewElement("left");
 	subElem->SetText(inLeft);
 	elem->InsertEndChild( subElem );
 	subElem = root->GetDocument()->NewElement("top");
 	subElem->SetText(inTop);
 	elem->InsertEndChild( subElem );
-	root->InsertEndChild( elem );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 
 void	CTinyXMLUtils::AddSizeNamed( tinyxml2::XMLElement* root, int inLeft, int inTop, const char* inName )
 {
-	tinyxml2::XMLElement	*	elem = root->GetDocument()->NewElement(inName);
+	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
 	tinyxml2::XMLElement	*	subElem = root->GetDocument()->NewElement("width");
 	subElem->SetText(inLeft);
 	elem->InsertEndChild( subElem );
 	subElem = root->GetDocument()->NewElement("height");
 	subElem->SetText(inTop);
 	elem->InsertEndChild( subElem );
-	root->InsertEndChild( elem );
+	if( inName )
+		root->InsertEndChild( elem );
 }
 
 

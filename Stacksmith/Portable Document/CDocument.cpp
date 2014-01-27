@@ -160,8 +160,7 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 				if( stackURL[stackURL.length()-1] != '/' )
 					stackURL.append( 1, '/' );
 				stackURL.append( fileName );
-				char*			endPtr = NULL;
-				ObjectID	stackID = strtoll( currStackElem->Attribute("id"), &endPtr, 10 );
+				ObjectID		stackID = CTinyXMLUtils::GetLongLongAttributeNamed( currStackElem, "id" );
 				const char*		theName = currStackElem->Attribute("name");
 				
 				CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, (theName ? theName : ""), fileName, this );

@@ -90,8 +90,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 				std::string		backgroundURL = mURL.substr(0,slashOffset);
 				backgroundURL.append( 1, '/' );
 				backgroundURL.append( currBgElem->Attribute("file") );
-				char*			endPtr = NULL;
-				ObjectID	bgID = strtoll( currBgElem->Attribute("id"), &endPtr, 10 );
+				ObjectID		bgID = CTinyXMLUtils::GetLongLongAttributeNamed( currBgElem, "id" );
 				const char*		theName = currBgElem->Attribute("name");
 				
 				CBackground	*	theBackground = new CBackground( backgroundURL, bgID, (theName ? theName : ""), currBgElem->Attribute("file"), this );
@@ -109,8 +108,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 				std::string		cardURL = mURL.substr(0,slashOffset);
 				cardURL.append( 1, '/' );
 				cardURL.append( currCdElem->Attribute("file") );
-				char*			endPtr = NULL;
-				ObjectID	cdID = strtoll( currCdElem->Attribute("id"), &endPtr, 10 );
+				ObjectID		cdID = CTinyXMLUtils::GetLongLongAttributeNamed( currCdElem, "id" );
 				const char*		theName = currCdElem->Attribute("name");
 				const char*	markedAttrStr = currCdElem->Attribute("marked");
 				bool	marked = markedAttrStr ? (strcmp("true", markedAttrStr) == 0) : false;
@@ -198,7 +196,7 @@ void	CStack::Save( const std::string& inPackagePath )
 	for( auto currBackground : mBackgrounds )
 	{
 		tinyxml2::XMLElement*		bgElem = document.NewElement("background");
-		bgElem->SetAttribute( "id", currBackground->GetID() );
+		CTinyXMLUtils::SetLongLongAttributeNamed( bgElem, currBackground->GetID(), "id");
 		bgElem->SetAttribute( "file", currBackground->GetFileName().c_str() );
 		bgElem->SetAttribute( "name", currBackground->GetName().c_str() );
 		root->InsertEndChild( bgElem );
@@ -209,7 +207,7 @@ void	CStack::Save( const std::string& inPackagePath )
 	for( auto currCard : mCards )
 	{
 		tinyxml2::XMLElement*		cdElem = document.NewElement("card");
-		cdElem->SetAttribute( "id", currCard->GetID() );
+		CTinyXMLUtils::SetLongLongAttributeNamed( cdElem, currCard->GetID(), "id");
 		cdElem->SetAttribute( "file", currCard->GetFileName().c_str() );
 		cdElem->SetAttribute( "name", currCard->GetName().c_str() );
 		root->InsertEndChild( cdElem );

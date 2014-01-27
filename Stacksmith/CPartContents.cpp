@@ -32,14 +32,10 @@ CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElem
 
 void	CPartContents::SaveToElementOfDocumentStyleSheet( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document, CStyleSheet *styleSheet )
 {
-	tinyxml2::XMLElement	*	elem = document->NewElement("layer");
-	elem->SetText( mIsOnBackground ? "background" : "card");
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddStringNamed(inElement, (mIsOnBackground ? "background" : "card"), "layer" );
+	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
+	tinyxml2::XMLElement	*	elem = NULL;
 	
-	elem = document->NewElement("id");
-	elem->SetText(mID);
-	inElement->InsertEndChild(elem);
-
 	if( mHighlight )
 	{
 		elem = document->NewElement("highlight");

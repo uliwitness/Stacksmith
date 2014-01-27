@@ -203,12 +203,11 @@ void	CLayer::Save( const std::string& inPackagePath )
 	tinyxml2::XMLUnknown*	dtd = document.NewUnknown(dtdContents.c_str());
 	document.InsertEndChild( dtd );
 	
+	tinyxml2::XMLElement*		elem = NULL;
 	tinyxml2::XMLElement*		stackfile = document.NewElement(GetLayerXMLType());
 	document.InsertEndChild( stackfile );
 
-	tinyxml2::XMLElement	*	elem = document.NewElement("id");
-	elem->SetText(mID);
-	stackfile->InsertEndChild(elem);
+	CTinyXMLUtils::AddLongLongNamed( stackfile, mID, "id" );
 	
 	SavePropertiesToElementOfDocument( stackfile, &document );
 	

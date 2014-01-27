@@ -33,9 +33,7 @@ void	CMoviePlayerPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement *
 	elem->SetText(mMediaPath.c_str());
 	inElement->InsertEndChild(elem);
 	
-	elem = document->NewElement("currentTime");
-	elem->SetText(GetCurrentTime());
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddLongLongNamed( inElement, GetCurrentTime(), "currentTime" );
 	
 	elem = document->NewElement("controllerVisible");
 	elem->SetBoolFirstChild(mControllerVisible);

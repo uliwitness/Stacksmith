@@ -78,7 +78,7 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 		tinyxml2::XMLElement * currSelLine = selLines->FirstChildElement("integer");
 		while( currSelLine )
 		{
-			mSelectedLines.insert( currSelLine->LongLongText() );
+			mSelectedLines.insert( CTinyXMLUtils::GetLongLongNamed( currSelLine, NULL ) );
 			currSelLine = currSelLine->NextSiblingElement( "integer" );
 		}
 	}
@@ -109,26 +109,20 @@ void	CButtonPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEl
 	elem->SetBoolFirstChild(mSharedHighlight);
 	inElement->InsertEndChild(elem);
 	
-	elem = document->NewElement("family");
-	elem->SetText(mFamily);
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddLongLongNamed( inElement, mFamily, "family");
 	
 	elem = document->NewElement("titleWidth");
 	elem->SetText(mTitleWidth);
 	inElement->InsertEndChild(elem);
 	
-	elem = document->NewElement("icon");
-	elem->SetText(mIconID);
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddLongLongNamed( inElement, mIconID, "icon");
 	
 	if( !mSelectedLines.empty() )
 	{
 		elem = document->NewElement("selectedLines");
 		for( size_t currLine : mSelectedLines )
 		{
-			tinyxml2::XMLElement	*	subElem = document->NewElement("integer");
-			subElem->SetText( (long long) currLine );
-			elem->InsertEndChild( subElem );
+			CTinyXMLUtils::AddLongLongNamed( elem, currLine, "integer");
 		}
 		inElement->InsertEndChild(elem);
 	}

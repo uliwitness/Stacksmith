@@ -33,7 +33,7 @@ public:
 	static void			AddBoolNamed( tinyxml2::XMLElement* root, bool inValue, const char* inName );
 	static void			AddIntNamed( tinyxml2::XMLElement* root, int inValue, const char* inName );
 	static void			AddDoubleNamed( tinyxml2::XMLElement* root, double inValue, const char* inName );
-	static void			AddRectNamed( tinyxml2::XMLElement* root, int left, int top, int right, int bottom, const char* inName );
+	static void			AddRectNamed( tinyxml2::XMLElement* root, long long left, long long top, long long right, long long bottom, const char* inName );
 	static void			AddColorNamed( tinyxml2::XMLElement* root, int red, int green, int blue, int alpha, const char* inName );
 	static void			AddPointNamed( tinyxml2::XMLElement* root, int left, int top, const char* inName );
 	static void			AddSizeNamed( tinyxml2::XMLElement* root, int width, int height, const char* inName );
