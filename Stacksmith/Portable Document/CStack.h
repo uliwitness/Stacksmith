@@ -21,13 +21,22 @@
 namespace Carlson {
 
 
+enum
+{
+	EBrowseTool = 0,
+	EPointerTool,
+	ETool_Last
+};
+typedef uint16_t	TTool;
+
+
 class CStack : public CConcreteObject
 {
 public:
 	static CStack*	GetFrontStack()						{ return sFrontStack; };
 	static void		SetFrontStack( CStack* inStack )	{ sFrontStack = inStack; };
 
-	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false) { mName = inName; mDocument = inDocument; };
+	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false), mCurrentTool(EBrowseTool) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	void			Save( const std::string& inPackagePath );
@@ -68,7 +77,13 @@ public:
 	virtual void	SetEditingBackground( bool inState )	{ mEditingBackground = inState; };
 	virtual bool	GetEditingBackground()					{ return mEditingBackground; };
 	
+	virtual void	SetTool( TTool inTool )					{ mCurrentTool = inTool; };
+	virtual TTool	GetTool()								{ return mCurrentTool; };
+	
 	virtual void	Dump( size_t inIndent = 0 );
+	
+	static const char*	GetToolName( TTool inTool );
+	static TTool		GetToolFromName( const char* inName );
 	
 protected:
 	void			CallAllCompletionBlocks();
@@ -98,6 +113,7 @@ protected:
 	CCardRef					mCurrentCard;		// The card that is currently being shown in this stack's window.
 	std::vector<std::function<void(CStack*)>>	mLoadCompletionBlocks;
 	bool						mEditingBackground;	// Are we editing the background, or are we showing the full mixed card/bg layers?
+	TTool						mCurrentTool;		// The tool that applies when clicking in this stack's window.
 	
 	static CStack*				sFrontStack;		// The stack whose window is currently frontmost and will e.g. receive messages from the message box.
 };

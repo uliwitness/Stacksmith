@@ -20,6 +20,13 @@ using namespace Carlson;
 CStack*		CStack::sFrontStack = NULL;
 
 
+static const char*		sToolNames[ETool_Last] =
+{
+	"browse",
+	"pointer"
+};
+
+
 CStack::~CStack()
 {
 	if( sFrontStack == this )
@@ -433,3 +440,21 @@ void	CStack::Dump( size_t inIndent )
 	}
 	printf( "%s\t}\n%s}\n", indentStr, indentStr );
 }
+
+
+/*static*/ const char*	CStack::GetToolName( TTool inTool )
+{
+	return sToolNames[inTool];
+}
+
+
+/*static*/ TTool	CStack::GetToolFromName( const char* inName )
+{
+	for( int x = 0; x < ETool_Last; x++ )
+	{
+		if( strcasecmp(inName, sToolNames[x]) == 0 )
+			return x;
+	}
+	return ETool_Last;
+}
+

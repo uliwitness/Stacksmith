@@ -42,8 +42,8 @@ using namespace Carlson;
 -(NSView *)	hitTest: (NSPoint)aPoint
 {
 	NSView	*	hitView = [super hitTest: aPoint];
-	bool	isPeeking = [(WILDStackWindowController*)[[self window] windowController] cppStack]->GetPeeking();
-	if( isPeeking && hitView != nil )
+	bool	isEditing = [(WILDStackWindowController*)[[self window] windowController] cppStack]->GetTool() != EBrowseTool;
+	if( isEditing && hitView != nil )
 		return self;
 	return hitView;
 }
@@ -51,27 +51,34 @@ using namespace Carlson;
 
 -(void)	mouseDown: (NSEvent*)theEvt
 {
-	bool	isPeeking = [(WILDStackWindowController*)[[self window] windowController] cppStack]->GetPeeking();
-	if( isPeeking )
+	bool	isEditing = [(WILDStackWindowController*)[[self window] windowController] cppStack]->GetTool() != EBrowseTool;
+	if( isEditing )
 	{
 		NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
 		CStack	*	theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
 		CCard	*	theCard = theStack->GetCurrentCard();
 		bool		foundOne = false;
+		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
+		size_t		numParts = 0;
 		
-		size_t		numParts = theCard->GetNumParts();
-		for( size_t x = numParts; x > 0; x-- )
+		if( !theStack->GetEditingBackground() )
 		{
-			CPart	*	thePart = theCard->GetPart( x-1 );
-			if( !foundOne && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
-				&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
+			numParts = theCard->GetNumParts();
+			for( size_t x = numParts; x > 0; x-- )
 			{
-				thePart->SetSelected(true);
-				foundOne = true;
+				CPart	*	thePart = theCard->GetPart( x-1 );
+				if( !foundOne && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
+					&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
+				{
+					thePart->SetSelected(true);
+					thePart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
+					foundOne = true;
+				}
+				else if( !shiftKeyDown )
+					thePart->SetSelected(false);
 			}
-			else
-				thePart->SetSelected(false);
 		}
+		
 		numParts = theCard->GetBackground()->GetNumParts();
 		for( size_t x = numParts; x > 0; x-- )
 		{
@@ -80,12 +87,18 @@ using namespace Carlson;
 				&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
 			{
 				thePart->SetSelected(true);
+				thePart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
 				foundOne = true;
 			}
-			else
+			else if( !shiftKeyDown )
 				thePart->SetSelected(false);
 		}
 		[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];
+		
+		if( !foundOne )
+		{
+			theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
+		}
 	}
 	else
 		[self.window makeFirstResponder: self];
@@ -332,8 +345,7 @@ using namespace Carlson;
 		sPeekColor = [[NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22"]] retain];
 	static NSColor	*	sSelectedColor = nil;
 	if( !sSelectedColor )
-		sSelectedColor = [[NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_14"]] retain];
-	[NSBezierPath setDefaultLineWidth: 1];
+		sSelectedColor = [[NSColor selectedControlColor] retain];
 	
 	size_t		cardHeight = mStack->GetCardHeight();
 	
@@ -344,8 +356,18 @@ using namespace Carlson;
 		CPart*	currPart = theBackground->GetPart(x);
 		if( currPart->IsSelected() )
 		{
+			NSRect		partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
 			[sSelectedColor set];
-			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
+			NSRect		grabby = partRect;
+			grabby.size.width = 8;
+			grabby.size.height = 8;
+			NSRectFill(grabby);
+			grabby.origin.y = NSMaxY(partRect) -8;
+			NSRectFill(grabby);
+			grabby.origin.x = NSMaxX(partRect) -8;
+			NSRectFill(grabby);
+			grabby.origin.y = NSMinY(partRect);
+			NSRectFill(grabby);
 		}
 		else if( mStack->GetPeeking() )
 		{
@@ -360,8 +382,18 @@ using namespace Carlson;
 		CPart*	currPart = theCard->GetPart(x);
 		if( currPart->IsSelected() )
 		{
+			NSRect		partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
 			[sSelectedColor set];
-			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
+			NSRect		grabby = partRect;
+			grabby.size.width = 8;
+			grabby.size.height = 8;
+			NSRectFill(grabby);
+			grabby.origin.y = NSMaxY(partRect) -8;
+			NSRectFill(grabby);
+			grabby.origin.x = NSMaxX(partRect) -8;
+			NSRectFill(grabby);
+			grabby.origin.y = NSMinY(partRect);
+			NSRectFill(grabby);
 		}
 		else if( mStack->GetPeeking() )
 		{

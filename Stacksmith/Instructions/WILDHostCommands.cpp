@@ -36,6 +36,7 @@ void	WILDStopInstruction( LEOContext* inContext );
 void	WILDShowInstruction( LEOContext* inContext );
 void	WILDHideInstruction( LEOContext* inContext );
 void	WILDWaitInstruction( LEOContext* inContext );
+void	WILDChooseInstruction( LEOContext* inContext );
 
 
 using namespace Carlson;
@@ -660,6 +661,36 @@ void	WILDWaitInstruction( LEOContext* inContext )
 }
 
 
+/*!
+	Implements the 'choose' command. The first parameter must be a
+	string, the name of the tool you want.
+	
+	(WILD_CHOOSE_INSTR)
+*/
+void	WILDChooseInstruction( LEOContext* inContext )
+{
+	LEOValuePtr				theValue = inContext->stackEndPtr -1;
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+
+	char toolName[1024] = { 0 };
+	LEOGetValueAsString( theValue, toolName, sizeof(toolName), inContext );
+	if( !inContext->keepRunning )
+		return;
+	TTool		requestedTool = CStack::GetToolFromName( toolName );
+	if( requestedTool == ETool_Last )
+	{
+		LEOContextStopWithError( inContext, "Unknown tool \"%s\".", toolName );
+		return;
+	}
+	userData->GetStack()->SetTool( requestedTool );
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
+
+
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
 LEOINSTR(WILDVisualEffectInstruction)
@@ -675,7 +706,8 @@ LEOINSTR(WILDStartInstruction)
 LEOINSTR(WILDStopInstruction)
 LEOINSTR(WILDShowInstruction)
 LEOINSTR(WILDHideInstruction)
-LEOINSTR_LAST(WILDWaitInstruction)
+LEOINSTR(WILDWaitInstruction)
+LEOINSTR_LAST(WILDChooseInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostCommands[] =
@@ -881,6 +913,20 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		{
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EChooseIdentifier, WILD_CHOOSE_INSTR, 0, 0, 'X',
+		{
+			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, EToolIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
