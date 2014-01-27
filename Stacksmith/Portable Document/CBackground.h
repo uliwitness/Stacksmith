@@ -21,7 +21,7 @@ public:
 
 	virtual void	WakeUp();		// The current card has started its timers etc.
 	virtual void	GoToSleep();	// The current card has stopped its timers etc.
-	virtual bool	GoThereInNewWindow( bool inNewWindow, CStack* oldStack );
+	virtual bool	GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack );
 	
 	virtual CScriptableObject*	GetParentObject();
 	

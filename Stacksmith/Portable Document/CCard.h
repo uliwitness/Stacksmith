@@ -45,7 +45,7 @@ public:
 	virtual CScriptableObject*	GetParentObject();
 	virtual CBackground*		GetBackground()		{ return mOwningBackground; };
 	
-	virtual bool				GoThereInNewWindow( bool inNewWindow, CStack* oldStack );
+	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack );
 	
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );

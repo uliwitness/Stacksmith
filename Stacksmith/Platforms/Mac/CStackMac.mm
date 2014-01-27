@@ -31,17 +31,26 @@ CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string
 }
 
 
-bool	CStackMac::GoThereInNewWindow( bool inNewWindow, CStack* oldStack )
+bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack )
 {
-	if( !mMacWindowController )
-		mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
-	
-	if( GetCurrentCard() == NULL )
+	Load([this,oldStack,inOpenInMode](CStack *inStack)
 	{
-		GetCard(0)->GoThereInNewWindow( inNewWindow, oldStack );
-	}
-	else
-		[mMacWindowController showWindow: nil];
+		if( GetCurrentCard() == NULL )
+		{
+			CCard	*	theCard = inStack->GetCard(0);
+			theCard->Load([inOpenInMode, oldStack]( CLayer *inCard )
+			{
+				inCard->GoThereInNewWindow( inOpenInMode, oldStack );
+			});
+		}
+		else
+		{
+			if( !mMacWindowController )
+				mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
+		
+			[mMacWindowController showWindow: nil];
+		}
+	});
 	
 	return true;
 }
@@ -64,21 +73,34 @@ void	CStackMac::SetEditingBackground( bool inState )
 
 void	CStackMac::SetCurrentCard( CCard* inCard )
 {
-	if( !mMacWindowController )
+	if( inCard && !mMacWindowController )
 		mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
-
-	[CATransaction begin];
-	[CATransaction setAnimationDuration: 0.0];
 	
-	[mMacWindowController removeAllViews];
+	if( mMacWindowController )
+	{
+		[CATransaction begin];
+		[CATransaction setAnimationDuration: 0.0];
+		
+		[mMacWindowController removeAllViews];
+	}
 	
 	CStack::SetCurrentCard(inCard);
 	
-	[mMacWindowController createAllViews];
+	if( mMacWindowController )
+	{
+		[mMacWindowController createAllViews];
 
-	[CATransaction commit];
+		[CATransaction commit];
+	}
 	
-	[mMacWindowController showWindow: nil];
+	if( inCard )
+		[mMacWindowController showWindow: nil];
+	else
+	{
+		[mMacWindowController close];
+		[mMacWindowController release];
+		mMacWindowController = nil;
+	}
 }
 
 

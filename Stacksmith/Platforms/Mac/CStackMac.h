@@ -27,7 +27,7 @@ class CStackMac : public CStack
 public:
 	CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 
-	virtual bool				GoThereInNewWindow( bool inNewWindow, CStack* oldStack );
+	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack );
 	virtual void				SetPeeking( bool inState );
 
 	virtual void				SetCurrentCard( CCard* inCard );

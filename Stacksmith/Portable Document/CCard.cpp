@@ -74,15 +74,15 @@ CScriptableObject*	CCard::GetParentObject()
 }
 
 
-bool	CCard::GoThereInNewWindow( bool inNewWindow, CStack* oldStack )
+bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack )
 {
 	Retain();
-	Load([this,oldStack,inNewWindow](CLayer *inThisCard)
+	Load([this,oldStack,inOpenInMode](CLayer *inThisCard)
 	{
 		CCard	*	oldCard = oldStack ? oldStack->GetCurrentCard() : NULL;
 		bool		destStackWasntOpenYet = GetStack()->GetCurrentCard() == NULL;
 		// We're moving away
-		if( oldCard && oldStack && oldStack != GetStack() && !inNewWindow )	// Leaving this stack? Close it.
+		if( oldCard && oldStack && oldStack != GetStack() && inOpenInMode == EOpenInSameWindow )	// Leaving this stack? Close it.
 		{
 			oldCard->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "closeCard" );
 			oldCard->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "closeStack" );

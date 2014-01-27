@@ -67,7 +67,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
 	{
 		destinationObject = (CScriptableObject*)theValue->object.object;
-		canGoThere = destinationObject->GoThereInNewWindow(false,userData->GetStack());
+		canGoThere = destinationObject->GoThereInNewWindow( inContext->currentInstruction->param1, userData->GetStack() );
 	}
 	else
 	{
@@ -75,7 +75,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 		LEOGetValueAsString( theValue, stackName, sizeof(stackName), inContext );
 		CStack*	theStack = userData->GetStack()->GetDocument()->GetStackByName( stackName );
 		if( theStack )
-			canGoThere = theStack->GoThereInNewWindow(false,userData->GetStack());
+			canGoThere = theStack->GoThereInNewWindow( inContext->currentInstruction->param1, userData->GetStack() );
 		destinationObject = theStack;
 	}
 	if( canGoThere )
@@ -83,9 +83,9 @@ void	WILDGoInstruction( LEOContext* inContext )
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
-	CStack		*	frontStack = userData->GetStack();
-	CCard		*	currentCard = frontStack->GetCurrentCard();
-	currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
+//	CStack		*	frontStack = userData->GetStack();
+//	CCard		*	currentCard = frontStack->GetCurrentCard();
+//	currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
 	
 	if( !canGoThere )
 		LEOContextStopWithError( inContext, "Can't go there." );
@@ -713,12 +713,13 @@ LEOINSTR_LAST(WILDChooseInstruction)
 struct THostCommandEntry	gStacksmithHostCommands[] =
 {
 	{
-		EGoIdentifier, WILD_GO_INSTR, 0, 0, '\0',
+		EGoIdentifier, WILD_GO_INSTR, EOpenInSameWindow, 0, 'X',
 		{
 			{ EHostParamInvisibleIdentifier, EToIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
+			{ EHostParamInvisibleIdentifier, EInIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'I' },
+			{ EHostParamInvisibleIdentifier, ENewIdentifier, EHostParameterOptional, WILD_GO_INSTR, EOpenInNewWindow, 0, 'I', 'W' },
+			{ EHostParamInvisibleIdentifier, EWindowIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'W', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
