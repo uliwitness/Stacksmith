@@ -77,7 +77,7 @@ public:
 	virtual void	SetEditingBackground( bool inState )	{ mEditingBackground = inState; };
 	virtual bool	GetEditingBackground()					{ return mEditingBackground; };
 	
-	virtual void	SetTool( TTool inTool )					{ mCurrentTool = inTool; };
+	virtual void	SetTool( TTool inTool );
 	virtual TTool	GetTool()								{ return mCurrentTool; };
 	
 	virtual void	Dump( size_t inIndent = 0 );

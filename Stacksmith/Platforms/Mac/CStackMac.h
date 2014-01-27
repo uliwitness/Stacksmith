@@ -32,6 +32,7 @@ public:
 
 	virtual void				SetCurrentCard( CCard* inCard );
 	virtual void				SetEditingBackground( bool inState );
+	virtual void				SetTool( TTool inTool );
 	
 	static void					RegisterPartCreators();
 

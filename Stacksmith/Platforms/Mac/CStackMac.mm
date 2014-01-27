@@ -82,6 +82,14 @@ void	CStackMac::SetCurrentCard( CCard* inCard )
 }
 
 
+void	CStackMac::SetTool( TTool inTool )
+{
+	CStack::SetTool(inTool);
+	
+	[mMacWindowController drawBoundingBoxes];
+}
+
+
 void	CStackMac::RegisterPartCreators()
 {
 	static bool	sAlreadyDidThis = false;
