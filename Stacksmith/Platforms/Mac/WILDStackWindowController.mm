@@ -57,9 +57,9 @@ using namespace Carlson;
 		NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
 		CStack	*	theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
 		CCard	*	theCard = theStack->GetCurrentCard();
-		bool		foundOne = false;
 		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
 		size_t		numParts = 0;
+		CPart*		hitPart = NULL;
 		
 		if( !theStack->GetEditingBackground() )
 		{
@@ -67,15 +67,11 @@ using namespace Carlson;
 			for( size_t x = numParts; x > 0; x-- )
 			{
 				CPart	*	thePart = theCard->GetPart( x-1 );
-				if( !foundOne && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
+				if( !hitPart && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
 					&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
 				{
-					thePart->SetSelected(true);
-					thePart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
-					foundOne = true;
+					hitPart = thePart;
 				}
-				else if( !shiftKeyDown )
-					thePart->SetSelected(false);
 			}
 		}
 		
@@ -83,22 +79,52 @@ using namespace Carlson;
 		for( size_t x = numParts; x > 0; x-- )
 		{
 			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
-			if( !foundOne && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
+			if( !hitPart && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
 				&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
 			{
-				thePart->SetSelected(true);
-				thePart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
-				foundOne = true;
+				hitPart = thePart;
 			}
-			else if( !shiftKeyDown )
-				thePart->SetSelected(false);
 		}
-		[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];
 		
-		if( !foundOne )
+		if( !theStack->GetEditingBackground() )
+		{
+			numParts = theCard->GetNumParts();
+			for( size_t x = numParts; x > 0; x-- )
+			{
+				CPart	*	thePart = theCard->GetPart( x-1 );
+				if( thePart != hitPart )
+				{
+					if( !hitPart || (!shiftKeyDown && !hitPart->IsSelected()) )
+						thePart->SetSelected(false);
+				}
+			}
+		}
+		
+		numParts = theCard->GetBackground()->GetNumParts();
+		for( size_t x = numParts; x > 0; x-- )
+		{
+			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
+			if( thePart != hitPart )
+			{
+				if( !hitPart || (!shiftKeyDown && !hitPart->IsSelected()) )
+					thePart->SetSelected(false);
+			}
+		}
+		
+		if( !hitPart )
 		{
 			theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
 		}
+		else
+		{
+			if( !hitPart->IsSelected() )
+				hitPart->SetSelected(true);
+			else if( hitPart->IsSelected() && shiftKeyDown )
+				hitPart->SetSelected(false);
+			hitPart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
+		}
+		
+		[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];
 	}
 	else
 		[self.window makeFirstResponder: self];
