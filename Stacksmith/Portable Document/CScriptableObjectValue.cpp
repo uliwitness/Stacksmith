@@ -536,6 +536,9 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	stopMovieHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "stopMovie" );
 	LEOHandlerID	pointerDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerDown" );
 	LEOHandlerID	pointerDoubleDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerDoubleDown" );
+	LEOHandlerID	pointerUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerUp" );
+	LEOHandlerID	pointerDoubleUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerDoubleUp" );
+	LEOHandlerID	pointerDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerDrag" );
 	if( inHandler == arrowKeyHandlerID )
 	{
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
@@ -611,7 +614,10 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == playMovieHandlerID
 			|| inHandler == stopMovieHandlerID
 			|| inHandler == pointerDownHandlerID
-			|| inHandler == pointerDoubleDownHandlerID )
+			|| inHandler == pointerDoubleDownHandlerID
+			|| inHandler == pointerUpHandlerID
+			|| inHandler == pointerDoubleUpHandlerID
+			|| inHandler == pointerDragHandlerID )
 	{
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );

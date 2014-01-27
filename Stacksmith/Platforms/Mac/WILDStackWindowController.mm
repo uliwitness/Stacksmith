@@ -52,11 +52,13 @@ using namespace Carlson;
 -(void)	mouseDown: (NSEvent*)theEvt
 {
 	bool	isEditing = [(WILDStackWindowController*)[[self window] windowController] cppStack]->GetTool() != EBrowseTool;
+	CScriptableObject	*hitObject = NULL;
+	CStack	*	theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
+	CCard	*	theCard = theStack->GetCurrentCard();
+	const char*	dragMessage = NULL, *upMessage = NULL, *doubleUpMessage = NULL;
 	if( isEditing )
 	{
 		NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
-		CStack	*	theStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
-		CCard	*	theCard = theStack->GetCurrentCard();
 		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
 		size_t		numParts = 0;
 		CPart*		hitPart = NULL;
@@ -113,7 +115,9 @@ using namespace Carlson;
 		
 		if( !hitPart )
 		{
+			CAutoreleasePool	cppPool;
 			theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
+			hitObject = theCard;
 		}
 		else
 		{
@@ -121,13 +125,57 @@ using namespace Carlson;
 				hitPart->SetSelected(true);
 			else if( hitPart->IsSelected() && shiftKeyDown )
 				hitPart->SetSelected(false);
+			CAutoreleasePool	cppPool;
 			hitPart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
+			hitObject = hitPart;
 		}
 		
 		[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];
+		
+		dragMessage = "pointerDrag";
+		upMessage = "pointerUp";
+		doubleUpMessage = "pointerDoubleUp";
 	}
 	else
+	{
 		[self.window makeFirstResponder: self];
+		hitObject = theCard;
+		
+		dragMessage = "mouseDrag";
+		upMessage = "mouseUp";
+		doubleUpMessage = "mouseDoubleUp";
+		
+		theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown" );
+	}
+
+	NSAutoreleasePool	*	pool = [NSAutoreleasePool new];
+	BOOL					keepGoing = YES;
+	while( keepGoing )
+	{
+		NSEvent	*	loopEvt = [[NSApplication sharedApplication] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
+		if( theEvt )
+		{
+			switch( loopEvt.type )
+			{
+				case NSLeftMouseUp:
+					keepGoing = NO;
+					break;
+				case NSLeftMouseDragged:
+				{
+					CAutoreleasePool	cppPool;
+					hitObject->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, dragMessage );
+					break;
+				}
+			}
+			
+			[pool release];
+			pool = [NSAutoreleasePool new];
+		}
+	}
+	[pool release];
+
+	CAutoreleasePool	cppPool;
+	hitObject->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage );
 }
 
 
