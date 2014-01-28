@@ -169,7 +169,7 @@ bool	CConcreteObject::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext*
 	if( strcasecmp("userProperties", inPropertyName) == 0 )
 	{
 		size_t	numProps = LEOGetKeyCount( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		LEOValue	tmpStorage = {{0}};
 		for( size_t x = 1; x <= numProps; x++ )
@@ -177,7 +177,7 @@ bool	CConcreteObject::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext*
 			snprintf(tmpKey, sizeof(tmpKey)-1, "%zu", x );
 			LEOValuePtr theValue = LEOGetValueForKey( inValue, tmpKey, &tmpStorage, kLEOInvalidateReferences, inContext );
 			const char*	currPropName = LEOGetValueAsString( theValue, tmpKey, sizeof(tmpKey), inContext );
-			if( !inContext->keepRunning )
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 				return true;
 			AddUserPropertyNamed( currPropName );
 			if( theValue == &tmpStorage )

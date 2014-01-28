@@ -231,7 +231,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		return;
 	}
 	urlString = LEOGetValueAsString( urlValue, urlBuf, sizeof(urlBuf), inContext );
-	if( !inContext->keepRunning )
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
 		
 	NSString			*	urlObjcString = [NSString stringWithCString: urlString encoding: NSUTF8StringEncoding];
@@ -247,7 +247,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		return;
 	}
 	progressMsgString = LEOGetValueAsString( progressMsgValue, progressBuf, sizeof(progressBuf), inContext );
-	if( !inContext->keepRunning )
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
 	NSString			*	progressMsgObjcString = [NSString stringWithCString: progressMsgString encoding: NSUTF8StringEncoding];
 
@@ -262,7 +262,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		return;
 	}
 	completionMsgString = LEOGetValueAsString( completionMsgValue, completionBuf, sizeof(completionBuf), inContext );
-	if( !inContext->keepRunning )
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
 	NSString			*	completionMsgObjcString = [NSString stringWithCString: completionMsgString encoding: NSUTF8StringEncoding];
 	

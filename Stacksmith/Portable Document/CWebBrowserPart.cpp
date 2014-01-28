@@ -56,7 +56,7 @@ bool	CWebBrowserPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext*
 	{
 		char		msgBuf[1024] = {0};
 		const char* msgStr = LEOGetValueAsString( inValue, msgBuf, sizeof(msgBuf), inContext );
-		if( !msgStr || !inContext->keepRunning )
+		if( !msgStr || (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		LoadCurrentURL( msgStr );
 	}

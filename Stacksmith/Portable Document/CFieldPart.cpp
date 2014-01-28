@@ -308,7 +308,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	{
 		LEOUnit		theUnit = kLEOUnitNone;
 		LEOInteger	familyNum = LEOGetValueAsInteger( inValue, &theUnit, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetFamily( familyNum );
 	}
@@ -319,7 +319,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		
 		CPartContents*	theContents = NULL;
 		size_t	numStyles = LEOGetKeyCount( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		CCard	*		currCard = GetStack()->GetCurrentCard();
 		CLayer	*		contentsOwner = (mOwner != currCard && !GetSharedText()) ? currCard : mOwner;
@@ -341,7 +341,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			snprintf(tmpKey, sizeof(tmpKey)-1, "%zu", x );
 			LEOValuePtr theValue = LEOGetValueForKey( inValue, tmpKey, &tmpStorage, kLEOInvalidateReferences, inContext );
 			const char*	currStyleName = LEOGetValueAsString( theValue, tmpKey, sizeof(tmpKey), inContext );
-			if( !inContext->keepRunning )
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 				return true;
 			ApplyStyleStringToRangeOfAttributedString( currStyleName, byteRangeStart, byteRangeEnd, attrStr );
 			if( theValue == &tmpStorage )
@@ -351,7 +351,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		if( numStyles == 0 )	// Not a valid array? Also permit just specifying a single style string.
 		{
 			const char*	currStyleName = LEOGetValueAsString( inValue, tmpKey, sizeof(tmpKey), inContext );
-			if( !inContext->keepRunning )
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 				return true;
 			ApplyStyleStringToRangeOfAttributedString( currStyleName, byteRangeStart, byteRangeEnd, attrStr );
 		}
@@ -361,21 +361,21 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	else if( strcasecmp("autoSelect", inPropertyName) == 0 )
 	{
 		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetAutoSelect( theHighlight );
 	}
 	else if( strcasecmp("sharedText", inPropertyName) == 0 )
 	{
 		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetSharedText( theHighlight );
 	}
 	else if( strcasecmp("lockText", inPropertyName) == 0 )
 	{
 		bool	theShowName = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetLockText( theShowName );
 	}
@@ -388,7 +388,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		{
 			LEOUnit		outUnit = kLEOUnitNone;
 			theSelectedLine = LEOGetValueAsInteger( inValue, &outUnit, inContext );
-			if( !inContext->keepRunning )
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 				return true;
 		}
 		mSelectedLines.erase(mSelectedLines.begin(), mSelectedLines.end());

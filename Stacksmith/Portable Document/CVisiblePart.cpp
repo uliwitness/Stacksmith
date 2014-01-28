@@ -185,7 +185,7 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 	if( strcasecmp("visible", inPropertyName) == 0 )
 	{
 		bool	visState = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetVisible( visState );
 	}

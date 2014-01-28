@@ -71,7 +71,7 @@ bool	CMoviePlayerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext
 	{
 		LEOUnit		theUnit = kLEOUnitNone;
 		LEOInteger	theInterval = LEOGetValueAsInteger( inValue, &theUnit, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		if( theUnit != kLEOUnitNone )	// We take "none" to be ticks as well.
 		{
@@ -87,14 +87,14 @@ bool	CMoviePlayerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext
 	else if( strcasecmp("started", inPropertyName) == 0 )
 	{
 		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetStarted( theHighlight );
 	}
 	else if( strcasecmp("controllerVisible", inPropertyName) == 0 )
 	{
 		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetControllerVisible( theHighlight );
 	}
@@ -102,7 +102,7 @@ bool	CMoviePlayerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext
 	{
 		char		msgBuf[1024] = {0};
 		const char* msgStr = LEOGetValueAsString( inValue, msgBuf, sizeof(msgBuf), inContext );
-		if( !msgStr || !inContext->keepRunning )
+		if( !msgStr || (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetMediaPath( msgStr );
 	}

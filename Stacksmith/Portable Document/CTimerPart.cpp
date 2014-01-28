@@ -98,7 +98,7 @@ bool	CTimerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	if( strcasecmp("started", inPropertyName) == 0 )
 	{
 		bool	startState = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetStarted( startState );
 	}
@@ -106,7 +106,7 @@ bool	CTimerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	{
 		LEOUnit		theUnit = kLEOUnitNone;
 		LEOInteger	theInterval = LEOGetValueAsInteger( inValue, &theUnit, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		if( theUnit != kLEOUnitNone )	// We take "none" to be ticks as well.
 		{
@@ -124,7 +124,7 @@ bool	CTimerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	{
 		char		msgBuf[1024] = {0};
 		const char* msgStr = LEOGetValueAsString( inValue, msgBuf, sizeof(msgBuf), inContext );
-		if( !msgStr || !inContext->keepRunning )
+		if( !msgStr || (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetMessage( msgStr );
 	}

@@ -151,19 +151,19 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 {
 	char msgBuf[1024] = { 0 };
 	const char*	msgStr = LEOGetValueAsString( inContext->stackEndPtr -4, msgBuf, sizeof(msgBuf), inContext );
-	if( !inContext->keepRunning )
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
 	char btn1Buf[1024] = { 0 };
 	const char*	btn1Str = LEOGetValueAsString( inContext->stackEndPtr -3, btn1Buf, sizeof(btn1Buf), inContext );
-	if( !inContext->keepRunning )
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
 	char btn2Buf[1024] = { 0 };
 	const char*	btn2Str = LEOGetValueAsString( inContext->stackEndPtr -2, btn2Buf, sizeof(btn2Buf), inContext );
-	if( !inContext->keepRunning )
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
 	char btn3Buf[1024] = { 0 };
 	const char*	btn3Str = LEOGetValueAsString( inContext->stackEndPtr -1, btn3Buf, sizeof(btn3Buf), inContext );
-	if( !inContext->keepRunning )
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
 	
 	size_t	returnValue = CAlert::RunMessageAlert( msgStr, btn1Str, btn2Str, btn3Str );
@@ -436,11 +436,11 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 	{
 		char		instrNameStrBuf[256] = {};
 		const char*	instrNameStr = LEOGetValueAsString( theInstrument, instrNameStrBuf, sizeof(instrNameStrBuf), inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return;
 		char		melodyStrBuf[256] = {};
 		const char*	melodyStr = LEOGetValueAsString( theMelody, melodyStrBuf, sizeof(melodyStrBuf), inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return;
 		
 		std::string			mediaURL = frontStack->GetDocument()->GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
@@ -674,7 +674,7 @@ void	WILDChooseInstruction( LEOContext* inContext )
 
 	char toolName[1024] = { 0 };
 	LEOGetValueAsString( theValue, toolName, sizeof(toolName), inContext );
-	if( !inContext->keepRunning )
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
 	TTool		requestedTool = CStack::GetToolFromName( toolName );
 	if( requestedTool == ETool_Last )

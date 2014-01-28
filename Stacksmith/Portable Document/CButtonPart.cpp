@@ -205,42 +205,42 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 	{
 		LEOUnit		theUnit = kLEOUnitNone;
 		LEOInteger	familyNum = LEOGetValueAsInteger( inValue, &theUnit, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetFamily( familyNum );
 	}
 	else if( strcasecmp("highlight", inPropertyName) == 0 )
 	{
 		bool			theHighlight = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetHighlight( theHighlight );
 	}
 	else if( strcasecmp("pressed", inPropertyName) == 0 )
 	{
 		bool			theHighlight = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetHighlightForTracking( theHighlight );
 	}
 	else if( strcasecmp("autoHighlight", inPropertyName) == 0 )
 	{
 		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetAutoHighlight( theHighlight );
 	}
 	else if( strcasecmp("sharedHighlight", inPropertyName) == 0 )
 	{
 		bool	theHighlight = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetSharedHighlight( theHighlight );
 	}
 	else if( strcasecmp("showName", inPropertyName) == 0 )
 	{
 		bool	theShowName = LEOGetValueAsBoolean( inValue, inContext );
-		if( !inContext->keepRunning )
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetShowName( theShowName );
 	}
@@ -253,7 +253,7 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		{
 			LEOUnit		outUnit = kLEOUnitNone;
 			theSelectedLine = LEOGetValueAsInteger( inValue, &outUnit, inContext );
-			if( !inContext->keepRunning )
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 				return true;
 		}
 		mSelectedLines.erase(mSelectedLines.begin(), mSelectedLines.end());

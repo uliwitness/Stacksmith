@@ -673,7 +673,7 @@ void	CScriptContextUserData::CleanUp( void* inData )
 void	CScriptableObject::PreInstructionProc( LEOContext* inContext )
 {
 	if( CCancelPolling::GetUserWantsToCancel() )
-		inContext->keepRunning = false;
+		inContext->flags &= ~kLEOContextKeepRunning;
 	else
 		LEORemoteDebuggerPreInstructionProc( inContext );
 }

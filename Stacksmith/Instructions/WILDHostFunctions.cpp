@@ -374,7 +374,7 @@ void	WILDFirstCardInstruction( LEOContext* inContext )
 	
 	CCard	*	theCard = theStack->GetCard( 0 );
 		
-	if( inContext->keepRunning )	// No error?
+	if( inContext->flags & kLEOContextKeepRunning )	// No error?
 	{
 		CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 		inContext->stackEndPtr ++;
@@ -393,7 +393,7 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 	
 	CCard	*	theCard = theStack->GetCard( theStack->GetNumCards() -1 );
 	
-	if( inContext->keepRunning )	// No error?
+	if( inContext->flags & kLEOContextKeepRunning )	// No error?
 	{
 		CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
 		inContext->stackEndPtr ++;
@@ -411,7 +411,7 @@ void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 	if( numBackgrounds == 0 )
 		LEOContextStopWithError( inContext, "No such background." );
 	
-	if( inContext->keepRunning )
+	if( inContext->flags & kLEOContextKeepRunning )
 	{
 		CBackground	*	theBackground = (inContext->currentInstruction->param1 & 32) ? theStack->GetBackground( numBackgrounds -1 ) : theStack->GetBackground(0);
 		
@@ -447,7 +447,7 @@ void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 	else if( partTypeNum != 0 )
 		LEOContextStopWithError( inContext, "Can only list parts, buttons, fields, browsers and movie players on cards and backgrounds." );
 	
-	if( inContext->keepRunning )	// No error?
+	if( inContext->flags & kLEOContextKeepRunning )	// No error?
 	{
 		size_t		numParts = theLayer->GetPartCountOfType(partType);
 		if( numParts == 0 )
@@ -458,7 +458,7 @@ void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 		if( inContext->currentInstruction->param1 & 32 )
 			desiredIndex = numParts -1;
 		
-		if( inContext->keepRunning )	// Still no error? I.e. we have parts of this type?
+		if( inContext->flags & kLEOContextKeepRunning )	// Still no error? I.e. we have parts of this type?
 		{
 			CPart	*	thePart = theLayer->GetPartOfType(desiredIndex, partType);
 			
