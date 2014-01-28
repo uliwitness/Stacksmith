@@ -691,7 +691,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	if( !theScript )
 		return;
 	LEOContextGroup*	contextGroup = GetScriptContextGroupObject();
-	LEOContext	ctx = {0};
+	LEOContext*	ctx = NULL;
 	const char*	paramStart = strchr( fmt, ' ' );
 	char		msg[512] = {0};
 	if( paramStart == NULL )
@@ -704,17 +704,17 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	
 	CScriptableObject*	parent = GetParentObject();
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this );
-	LEOInitContext( &ctx, contextGroup, ud, CScriptContextUserData::CleanUp );
+	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
 	#if REMOTE_DEBUGGER
-	ctx.preInstructionProc = CScriptableObject::PreInstructionProc;
-	ctx.promptProc = LEORemoteDebuggerPrompt;
+	ctx->preInstructionProc = CScriptableObject::PreInstructionProc;
+	ctx->promptProc = LEORemoteDebuggerPrompt;
 	#elif COMMAND_LINE_DEBUGGER
-	ctx.preInstructionProc =  LEODebuggerPreInstructionProc;
-	ctx.promptProc = LEODebuggerPrompt;
+	ctx->preInstructionProc =  LEODebuggerPreInstructionProc;
+	ctx->promptProc = LEODebuggerPrompt;
 	#endif
-	ctx.callNonexistentHandlerProc = ScriptableObjectCallNonexistentHandler;
+	ctx->callNonexistentHandlerProc = ScriptableObjectCallNonexistentHandler;
 	
-	LEOPushEmptyValueOnStack( &ctx );	// Reserve space for return value.
+	LEOPushEmptyValueOnStack( ctx );	// Reserve space for return value.
 	
 	if( paramStart[0] != '\0' )	// We have params?
 	{
@@ -848,7 +848,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 						currPos -= sizeof(const char*);
 						const char* str = *((const char**)currPos);
 						DBGLOGPAR( "pushed \"%s\"", str ? str : "(null)");
-						LEOPushStringValueOnStack( &ctx, str, str? strlen(str) : 0 );
+						LEOPushStringValueOnStack( ctx, str, str? strlen(str) : 0 );
 						break;
 					}
 
@@ -860,14 +860,14 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 							currPos -= sizeof(long);
 							long	currLong = *((long*)currPos);
 							DBGLOGPAR( "pushed %ld", currLong );
-							LEOPushIntegerOnStack( &ctx, currLong, kLEOUnitNone );
+							LEOPushIntegerOnStack( ctx, currLong, kLEOUnitNone );
 						}
 						else
 						{
 							currPos -= sizeof(int);
 							int	currInt = *((int*)currPos);
 							DBGLOGPAR( "pushed %d", currInt );
-							LEOPushIntegerOnStack( &ctx, currInt, kLEOUnitNone );
+							LEOPushIntegerOnStack( ctx, currInt, kLEOUnitNone );
 						}
 						break;
 					}
@@ -877,7 +877,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 						currPos -= sizeof(double);
 						double	currDouble = *((double*)currPos);
 						DBGLOGPAR( "pushed %f", currDouble );
-						LEOPushNumberOnStack( &ctx, currDouble, kLEOUnitNone );
+						LEOPushNumberOnStack( ctx, currDouble, kLEOUnitNone );
 						break;
 					}
 
@@ -886,7 +886,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 						currPos -= sizeof(bool);
 						bool	currBool = (*((bool*)currPos)) == true;
 						DBGLOGPAR( "pushed %s", currBool ? "true" : "false" );
-						LEOPushBooleanOnStack( &ctx, currBool );
+						LEOPushBooleanOnStack( ctx, currBool );
 						break;
 					}
 
@@ -900,7 +900,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 			}
 
 			DBGLOGPAR( @"pushed PC %zu", numParams );
-			LEOPushIntegerOnStack( &ctx, numParams, kLEOUnitNone );
+			LEOPushIntegerOnStack( ctx, numParams, kLEOUnitNone );
 			
 			if( theBytes )
 				free(theBytes);
@@ -910,16 +910,16 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 		else
 		{
 			DBGLOGPAR(@"Internal error: Invalid format string in message send.");
-			LEOPushIntegerOnStack( &ctx, 0, kLEOUnitNone );
+			LEOPushIntegerOnStack( ctx, 0, kLEOUnitNone );
 		}
 	}
 	else
-		LEOPushIntegerOnStack( &ctx, 0, kLEOUnitNone );
+		LEOPushIntegerOnStack( ctx, 0, kLEOUnitNone );
 	
 	// Send message:
 	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( contextGroup, msg );
-	if( ctx.group->messageSent )
-		ctx.group->messageSent( handlerID, ctx.group );
+	if( ctx->group->messageSent )
+		ctx->group->messageSent( handlerID, ctx->group );
 
 	LEOHandler*		theHandler = NULL;
 	while( !theHandler )
@@ -928,42 +928,42 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	
 		if( theHandler )
 		{
-			LEOContextPushHandlerScriptReturnAddressAndBasePtr( &ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
+			LEOContextPushHandlerScriptReturnAddressAndBasePtr( ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
 //			LEODebugPrintScript( GetScriptContextGroupObject(), theScript );
 //			LEODebuggerAddBreakpoint(theHandler->instructions);
-//			LEODebugPrintContext(&ctx);
-			LEORunInContext( theHandler->instructions, &ctx );
-			if( ctx.errMsg[0] != 0 )
+//			LEODebugPrintContext(ctx);
+			LEORunInContext( theHandler->instructions, ctx );
+			if( ctx->errMsg[0] != 0 )
 				break;
-//			LEODebugPrintContext(&ctx);
+//			LEODebugPrintContext(ctx);
 		}
 		if( !theHandler )
 		{
 			if( theScript->GetParentScript )
-				theScript = theScript->GetParentScript( theScript, &ctx );
+				theScript = theScript->GetParentScript( theScript, ctx );
 			if( !theScript )
 			{
-				if( ctx.callNonexistentHandlerProc )
-					ctx.callNonexistentHandlerProc( &ctx, handlerID );
+				if( ctx->callNonexistentHandlerProc )
+					ctx->callNonexistentHandlerProc( ctx, handlerID );
 				break;
 			}
 		}
 	}
-	if( ctx.errMsg[0] != 0 )
+	if( ctx->errMsg[0] != 0 )
 	{
-		errorHandler( ctx.errMsg, SIZE_T_MAX, SIZE_T_MAX, this );
+		errorHandler( ctx->errMsg, SIZE_T_MAX, SIZE_T_MAX, this );
 	}
-	else if( ctx.stackEndPtr != ctx.stack && outValue )	// We still have an object at the end of the stack and someone asked for a result?
+	else if( ctx->stackEndPtr != ctx->stack && outValue )	// We still have an object at the end of the stack and someone asked for a result?
 	{
-		LEOInitCopy( ctx.stack, outValue, kLEOInvalidateReferences, &ctx );	// Push that object, which should be return value from last handler.
+		LEOInitCopy( ctx->stack, outValue, kLEOInvalidateReferences, ctx );	// Push that object, which should be return value from last handler.
 	}
 	else if( outValue )	// No object at the end of the stack? That's bad. But give a result, if requested, so caller doesn't blow up just because we got confused.
 	{
 		printf( "Internal error: Someone deleted the storage for the return value. Synthesizing empty return value.\n" );
-		LEOInitStringConstantValue( outValue, "", kLEOInvalidateReferences, &ctx );
+		LEOInitStringConstantValue( outValue, "", kLEOInvalidateReferences, ctx );
 	}
 	
-	LEOCleanUpContext( &ctx );
+	LEOContextRelease( ctx );
 }
 
 

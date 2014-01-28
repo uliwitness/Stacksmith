@@ -51,7 +51,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	LEOScript			*	mOwningScript;
 	NSString			*	mProgressMessage;
 	NSString			*	mCompletionMessage;
-	LEOContext				mContext;
+	LEOContext			*	mContext;
 	LEOValueArray			mDownloadArrayValue;	// Value for "the download" parameter, which is an array whose properties users can query.
 	LEOValuePtr				mHeadersArrayValue;		// Sub-value of mDownloadArrayValue.
 	NSInteger				mMaxBytes;
@@ -71,19 +71,19 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	{
 		mMaxBytes = -1;
 		CScriptContextUserData	*	ud = new CScriptContextUserData( inUserData->GetStack(), inUserData->GetTarget() );
-		LEOInitContext( &mContext, inGroup, ud, CScriptContextUserData::CleanUp );
+		mContext = LEOContextCreate( inGroup, ud, CScriptContextUserData::CleanUp );
 		mOwningScript = LEOScriptRetain( inScript );
 		mProgressMessage = [inProgressMsg retain];
 		mCompletionMessage = [inCompletionMsg retain];
-		LEOInitArrayValue( &mDownloadArrayValue, NULL, kLEOInvalidateReferences, &mContext );
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", -1, kLEOUnitBytes, &mContext );
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", 0, kLEOUnitBytes, &mContext );
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", 0, kLEOUnitNone, &mContext );
-		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", "", &mContext );
-		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "url", [inURLString UTF8String], &mContext );
-		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "address", [inURLString UTF8String], &mContext );
-		mHeadersArrayValue = LEOAddArrayEntryToRoot( &mDownloadArrayValue.array, "headers", NULL, &mContext );
-		LEOInitArrayValue( &mHeadersArrayValue->array, NULL, kLEOInvalidateReferences, &mContext );
+		LEOInitArrayValue( &mDownloadArrayValue, NULL, kLEOInvalidateReferences, mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", -1, kLEOUnitBytes, mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", 0, kLEOUnitBytes, mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", 0, kLEOUnitNone, mContext );
+		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", "", mContext );
+		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "url", [inURLString UTF8String], mContext );
+		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "address", [inURLString UTF8String], mContext );
+		mHeadersArrayValue = LEOAddArrayEntryToRoot( &mDownloadArrayValue.array, "headers", NULL, mContext );
+		LEOInitArrayValue( &mHeadersArrayValue->array, NULL, kLEOInvalidateReferences, mContext );
 	}
 	
 	return self;
@@ -91,14 +91,15 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 
 -(void)	dealloc
 {
-	LEOCleanUpValue( &mDestination, kLEOInvalidateReferences, &mContext );
+	LEOCleanUpValue( &mDestination, kLEOInvalidateReferences, mContext );
 	if( mOwningScript )
 		LEOScriptRelease(mOwningScript);
 	DESTROY_DEALLOC(mProgressMessage);
 	DESTROY_DEALLOC(mCompletionMessage);
-	LEOCleanUpContext( &mContext );
-	LEOCleanUpValue( &mDownloadArrayValue, kLEOInvalidateReferences, &mContext );
+	LEOCleanUpValue( &mDownloadArrayValue, kLEOInvalidateReferences, mContext );
 	mHeadersArrayValue = NULL;	// Was just disposed cuz it points into mDownloadArrayValue.
+	LEOContextRelease( mContext );
+	mContext = NULL;
 	
 	[super dealloc];
 }
@@ -107,31 +108,31 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 -(void)	sendDownloadMessage: (NSString*)msgName forConnection: (NSURLConnection*)inConnection
 {
 	#if REMOTE_DEBUGGER
-	mContext.preInstructionProc = CScriptableObject::PreInstructionProc;
-	mContext.promptProc = LEORemoteDebuggerPrompt;
+	mContext->preInstructionProc = CScriptableObject::PreInstructionProc;
+	mContext->promptProc = LEORemoteDebuggerPrompt;
 	#elif COMMAND_LINE_DEBUGGER
-	mContext.preInstructionProc =  LEODebuggerPreInstructionProc;
-	mContext.promptProc = LEODebuggerPrompt;
+	mContext->preInstructionProc =  LEODebuggerPreInstructionProc;
+	mContext->promptProc = LEODebuggerPrompt;
 	#endif
 	
-	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", mMaxBytes, kLEOUnitBytes, &mContext );
-	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", mDownloadedData.length, kLEOUnitBytes, &mContext );
+	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", mMaxBytes, kLEOUnitBytes, mContext );
+	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", mDownloadedData.length, kLEOUnitBytes, mContext );
 
-	LEOPushEmptyValueOnStack( &mContext );	// Reserve space for return value.
-	LEOPushValueOnStack( &mContext, (LEOValuePtr) &mDownloadArrayValue );
-	LEOPushIntegerOnStack( &mContext, 1, kLEOUnitNone );
+	LEOPushEmptyValueOnStack( mContext );	// Reserve space for return value.
+	LEOPushValueOnStack( mContext, (LEOValuePtr) &mDownloadArrayValue );
+	LEOPushIntegerOnStack( mContext, 1, kLEOUnitNone );
 	
-	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( mContext.group, [msgName UTF8String] );
+	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( mContext->group, [msgName UTF8String] );
 	LEOHandler*		theHandler = LEOScriptFindCommandHandlerWithID( mOwningScript, handlerID );
 
-	if( mContext.group->messageSent )
-		mContext.group->messageSent( handlerID, mContext.group );
+	if( mContext->group->messageSent )
+		mContext->group->messageSent( handlerID, mContext->group );
 	if( theHandler )
 	{
-		LEOContextPushHandlerScriptReturnAddressAndBasePtr( &mContext, theHandler, mOwningScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
-		LEORunInContext( theHandler->instructions, &mContext );
+		LEOContextPushHandlerScriptReturnAddressAndBasePtr( mContext, theHandler, mOwningScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
+		LEORunInContext( theHandler->instructions, mContext );
 	}
-	if( mContext.errMsg[0] != 0 )
+	if( mContext->errMsg[0] != 0 )
 	{
 		[inConnection cancel];
 		[sRunningConnections removeObject: inConnection];
@@ -165,15 +166,15 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 			const char*		currKeyCStr = [currKey UTF8String];
 			id				valueObj = [headers objectForKey: currKey];
 			const char*		valueCStr = [valueObj UTF8String];
-			LEOAddCStringArrayEntryToRoot( &mHeadersArrayValue->array.array, currKeyCStr, valueCStr, &mContext );
+			LEOAddCStringArrayEntryToRoot( &mHeadersArrayValue->array.array, currKeyCStr, valueCStr, mContext );
 		}
 	}
 	if( [response respondsToSelector: @selector(statusCode)] )
 	{
 		NSInteger	statusCode = [(id)response statusCode];
-		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", statusCode, kLEOUnitNone, &mContext );
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", statusCode, kLEOUnitNone, mContext );
 		const char*	errMsg = [[NSHTTPURLResponse localizedStringForStatusCode: statusCode] UTF8String];
-		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", errMsg, &mContext );
+		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", errMsg, mContext );
 	}
 	
 	[self sendDownloadMessage: mProgressMessage forConnection: connection];
@@ -186,7 +187,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 		mDownloadedData = [data mutableCopy];
 	else
 		[mDownloadedData appendData: data];
-	LEOSetValueAsString( &mDestination, (const char*)[mDownloadedData bytes], mDownloadedData.length, &mContext );
+	LEOSetValueAsString( &mDestination, (const char*)[mDownloadedData bytes], mDownloadedData.length, mContext );
 	
 	[self sendDownloadMessage: mProgressMessage forConnection: connection];
 }
@@ -276,7 +277,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		LEOContextStopWithError( inContext, "Internal error: Invalid dest value." );
 		return;
 	}
-	LEOInitCopy( containerValue, &theDelegate->mDestination, kLEOInvalidateReferences, &theDelegate->mContext );
+	LEOInitCopy( containerValue, &theDelegate->mDestination, kLEOInvalidateReferences, theDelegate->mContext );
 	
 	// Start the download and finish this instruction:
 	NSURL				*	theURL = [NSURL URLWithString: urlObjcString];
