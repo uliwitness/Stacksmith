@@ -21,12 +21,12 @@ void	WILDTest( const char* expr, const char* found, const char* expected )
 {
 	if( strcmp(expected, found) == 0 )
 	{
-		std::cout << "[pass]\t" << expr << std::endl;
+		std::cout << "note: " << expr << std::endl;
 		sPassed++;
 	}
 	else
 	{
-		std::cout << "[FAIL]\t" << expr << "\"" << expected << "\"" << std::endl << "\"" << found << "\"" << std::endl;
+		std::cout << "error: " << expr << " -> \"" << expected << "\" == \"" << found << "\"" << std::endl;
 		sFailed++;
 	}
 }
@@ -37,12 +37,12 @@ void	WILDTest( const char* expr, T found, T expected )
 {
 	if( expected == found )
 	{
-		std::cout << "[pass]\t" << expr << std::endl;
+		std::cout << "note: " << expr << std::endl;
 		sPassed++;
 	}
 	else
 	{
-		std::cout << "[FAIL]\t" << expr << " -> " << expected << " == " << found << std::endl;
+		std::cout << "error: " << expr << " -> " << expected << " == " << found << std::endl;
 		sFailed++;
 	}
 }
@@ -52,8 +52,6 @@ void	WILDTest( const char* expr, T found, T expected )
 int main(int argc, const char * argv[])
 {
 	{
-		std::cout << "===== Basic Text style parsing: =====" << std::endl;
-		
 		CAttributedString		attrStr;
 		CStyleSheet				styles;
 		tinyxml2::XMLDocument	doc;
@@ -96,8 +94,6 @@ int main(int argc, const char * argv[])
 		WILDTest( ".style2 contains 1 style", styleTwo.size(), size_t(1) );
 		WILDTest( ".style2 is italic", styleTwo["text-style"].c_str(), "italic" );
 	}
-	
-	std::cout << std::endl << "Pass " << sPassed << ", Fail " << sFailed << std::endl;
 	
     return (int)sFailed;
 }

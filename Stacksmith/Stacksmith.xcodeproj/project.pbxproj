@@ -410,15 +410,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		555E53BB18959842001487C1 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		55818A761331999000480D30 /* Copy Included Stacks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1739,7 +1730,7 @@
 			buildPhases = (
 				555E53B918959842001487C1 /* Sources */,
 				555E53BA18959842001487C1 /* Frameworks */,
-				555E53BB18959842001487C1 /* CopyFiles */,
+				555E53D818972D00001487C1 /* Run Tests */,
 			);
 			buildRules = (
 			);
@@ -2021,6 +2012,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		555E53D818972D00001487C1 /* Run Tests */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Tests";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${TARGET_BUILD_DIR}/${PRODUCT_NAME}";
+			showEnvVarsInLog = 0;
+		};
 		55E23BFE133FABBB00E6B444 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
