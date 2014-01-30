@@ -33,6 +33,8 @@ public:
 	virtual void	LoadChangedTextFromView();
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetVisible( bool visible )		{ CFieldPart::SetVisible(visible); [mView setHidden: !visible]; };
+	virtual void	SetHasHorizontalScroller( bool inHS );
+	virtual void	SetHasVerticalScroller( bool inHS );
 	virtual NSDictionary*			GetCocoaAttributesForPart();
 
 	static NSAttributedString	*	GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs = 0, size_t endOffs = SIZE_T_MAX );
@@ -43,9 +45,10 @@ protected:
 
 	virtual void		SetFieldStyle( TFieldStyle inFieldStyle );
 
-	NSTextField	*		mView;
+	NSScrollView*		mView;
 	WILDFieldDelegate*	mMacDelegate;
 	NSTableView *		mTableView;
+	NSTextView	*		mTextView;
 };
 
 

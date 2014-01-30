@@ -136,6 +136,14 @@ void	CFieldPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEle
 	elem->SetBoolFirstChild(mMultipleLines);
 	inElement->InsertEndChild(elem);
 	
+	elem = document->NewElement("hasHorizontalScroller");
+	elem->SetBoolFirstChild(mHasHorizontalScroller);
+	inElement->InsertEndChild(elem);
+	
+	elem = document->NewElement("hasVerticalScroller");
+	elem->SetBoolFirstChild(mHasVerticalScroller);
+	inElement->InsertEndChild(elem);
+	
 	if( !mSelectedLines.empty() )
 	{
 		elem = document->NewElement("selectedLines");
@@ -274,6 +282,14 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	{
 		LEOInitStringConstantValue( outValue, sFieldStyleStrings[mFieldStyle], kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("hasHorizontalScroller", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mHasHorizontalScroller, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("hasVerticalScroller", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mHasVerticalScroller, kLEOInvalidateReferences, inContext );
+	}
 	else
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 	return true;
@@ -405,6 +421,20 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			LEOContextStopWithError( inContext, "Unknown field style \"%s\".", nameStr );
 		else
 			SetFieldStyle( style );
+	}
+	else if( strcasecmp("hasHorizontalScroller", inPropertyName) == 0 )
+	{
+		bool	theHasScroller = LEOGetValueAsBoolean( inValue, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		SetHasHorizontalScroller( theHasScroller );
+	}
+	else if( strcasecmp("hasVerticalScroller", inPropertyName) == 0 )
+	{
+		bool	theHasScroller = LEOGetValueAsBoolean( inValue, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		SetHasVerticalScroller( theHasScroller );
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

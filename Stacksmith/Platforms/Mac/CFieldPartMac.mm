@@ -15,7 +15,7 @@
 using namespace Carlson;
 
 
-@interface WILDFieldDelegate : NSObject <NSTextFieldDelegate,NSTableViewDelegate, NSTableViewDataSource>
+@interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource>
 
 @property (assign,nonatomic) CFieldPartMac*	owningField;
 @property (retain,nonatomic) NSArray*		lines;
@@ -31,34 +31,30 @@ using namespace Carlson;
 	[super dealloc];
 }
 
--(BOOL)	control: (NSControl *)control textShouldBeginEditing: (NSText *)fieldEditor
-{
-	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(textStorageDidProcessEditing:) name: NSTextStorageDidProcessEditingNotification object: ((NSTextView*) fieldEditor).textStorage];
-//	NSLog( @"Editing started." );
-	return YES;
-}
 
-
--(BOOL)	control: (NSControl *)control textShouldEndEditing: (NSText *)fieldEditor
-{
-	[[NSNotificationCenter defaultCenter] removeObserver: self name: NSTextStorageDidProcessEditingNotification object: ((NSTextView*) fieldEditor).textStorage];
-//	NSLog( @"Editing stopped." );
-	
-	return YES;
-}
-
-
--(void)	controlTextDidChange: (NSNotification *)obj
+-(void)	textDidChange: (NSNotification *)obj
 {
 	self.owningField->SetViewTextNeedsSync( true );
 //	NSLog( @"Edited text." );
 }
 
 
--(void)	textStorageDidProcessEditing: (NSNotification *)obj
+-(void)	textViewDidChangeTypingAttributes: (NSNotification *)notification
 {
 	self.owningField->SetViewTextNeedsSync( true );
 //	NSLog( @"Edited styles or so." );
+}
+
+
+-(BOOL)	textView: (NSTextView *)textView clickedOnLink: (id)link atIndex: (NSUInteger)charIndex
+{
+	NSURL*	theLink = [textView.textStorage attribute: NSLinkAttributeName atIndex: charIndex effectiveRange:NULL];
+	self.owningField->SendMessage( NULL, []( const char *errMsg, size_t, size_t, CScriptableObject *)
+	{
+		CAlert::RunMessageAlert(errMsg);
+	}, "linkClicked %s", [[theLink absoluteString] UTF8String] );
+	
+	return YES;
 }
 
 
@@ -133,7 +129,7 @@ static bool	ListChunkCallback( const char* currStr, size_t currLen, size_t currS
 
 
 CFieldPartMac::CFieldPartMac( CLayer *inOwner )
-	: CFieldPart( inOwner ), mView(nil), mMacDelegate(nil), mTableView(nil)
+	: CFieldPart( inOwner ), mView(nil), mMacDelegate(nil), mTableView(nil), mTextView(nil)
 {
 	
 }
@@ -162,13 +158,16 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTableView setTarget: mMacDelegate];
 		[mTableView setAction: @selector(tableViewRowClicked:)];
 		[mTableView setDoubleAction: @selector(tableViewRowDoubleClicked:)];
-		mView = (NSTextField*)[[mTableView enclosingScrollView] retain];
+		mView = [[mTableView enclosingScrollView] retain];
 	}
 	else
 	{
-		mView = [[WILDViewFactory textField] retain];
-		mView.delegate = mMacDelegate;
+		mTextView = [WILDViewFactory textViewInContainer];
+		mTextView.delegate = mMacDelegate;
+		mView = [[mTextView enclosingScrollView] retain];
 	}
+	[mView setHasHorizontalScroller: mHasHorizontalScroller != false];
+	[mView setHasVerticalScroller: mHasVerticalScroller != false];
 	if( mAutoSelect )
 	{
 		LoadChangedTextStylesIntoView();
@@ -186,12 +185,12 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 				NSDictionary*	docAttrs = nil;
 				attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetLength()] documentAttributes: &docAttrs];
 			}
-			[mView setAttributedStringValue: attrStr];
+			[mTextView.textStorage setAttributedString: attrStr];
 			if( oldRTF )
 				SetAttributedStringWithCocoa( cppstr, attrStr );	// Save the parsed RTF back as something the cross-platform code understands.
 		}
 		else
-			[mView setStringValue: @""];
+			[mTextView setString: @""];
 	}
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
@@ -199,6 +198,20 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[inSuperView addSubview: mView];
+}
+
+
+void	CFieldPartMac::SetHasHorizontalScroller( bool inHS )
+{
+	CFieldPart::SetHasHorizontalScroller(inHS);
+	[mView setHasHorizontalScroller: inHS != false];
+}
+
+
+void	CFieldPartMac::SetHasVerticalScroller( bool inHS )
+{
+	CFieldPart::SetHasVerticalScroller(inHS);
+	[mView setHasVerticalScroller: inHS != false];
 }
 
 
@@ -232,10 +245,10 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 			NSDictionary*	docAttrs = nil;
 			attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetLength()] documentAttributes: &docAttrs];
 		}
-		[mView setAttributedStringValue: attrStr];
+		[mTextView.textStorage setAttributedString: attrStr];
 	}
 	else
-		[mView setStringValue: @""];
+		[mTextView setString: @""];
 }
 
 
@@ -245,7 +258,7 @@ void	CFieldPartMac::LoadChangedTextFromView()
 	if( contents )
 	{
 		CAttributedString&		cppstr = contents->GetAttributedText();
-		NSAttributedString*		attrStr = [mView attributedStringValue];
+		NSAttributedString*		attrStr = [mTextView textStorage];
 		SetAttributedStringWithCocoa( cppstr, attrStr );
 	}
 	

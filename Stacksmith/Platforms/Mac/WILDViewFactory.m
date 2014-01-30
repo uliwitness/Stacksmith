@@ -15,7 +15,7 @@ static WILDViewFactory*		sViewFactory = nil;
 
 @property (assign,nonatomic) IBOutlet NSButton* systemButton;
 @property (assign,nonatomic) IBOutlet WILDButtonView* shapeButton;
-@property (assign,nonatomic) IBOutlet NSTextField* textField;
+@property (assign,nonatomic) IBOutlet NSScrollView* textViewInContainer;
 @property (assign,nonatomic) IBOutlet NSPopUpButton* popUpButton;
 @property (assign,nonatomic) IBOutlet NSScrollView* tableViewInContainer;
 
@@ -53,9 +53,10 @@ static WILDViewFactory*		sViewFactory = nil;
 }
 
 
-+(NSTextField*)		textField
++(NSTextView*)		textViewInContainer
 {
-	return [self anotherInstanceOfView: [[self sharedViewFactory] textField]];
+	NSScrollView	*	scroller = [self anotherInstanceOfView: [[self sharedViewFactory] textViewInContainer]];
+	return scroller.documentView;
 }
 
 

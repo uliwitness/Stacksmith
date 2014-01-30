@@ -61,6 +61,9 @@ protected:
 	virtual bool			GetAutoSelect()					{ return mAutoSelect; };
 	virtual void			SetAutoSelect( bool inST )		{ mAutoSelect = inST; };
 	
+	virtual void			SetHasHorizontalScroller( bool inHS )	{ mHasHorizontalScroller = inHS; };
+	virtual void			SetHasVerticalScroller( bool inHS )		{ mHasVerticalScroller = inHS; };
+	
 	virtual void			LoadChangedTextStylesIntoView()			{ mViewTextNeedsSync = false; };
 	virtual void			LoadChangedTextFromView()				{};
 	virtual void			ApplyChangedSelectedLinesToView()		{};
