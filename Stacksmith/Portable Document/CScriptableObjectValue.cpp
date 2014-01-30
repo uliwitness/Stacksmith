@@ -960,7 +960,7 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	else if( outValue )	// No object at the end of the stack? That's bad. But give a result, if requested, so caller doesn't blow up just because we got confused.
 	{
 		printf( "Internal error: Someone deleted the storage for the return value. Synthesizing empty return value.\n" );
-		LEOInitStringConstantValue( outValue, "", kLEOInvalidateReferences, ctx );
+		LEOInitUnsetValue( outValue, kLEOInvalidateReferences, ctx );
 	}
 	
 	LEOContextRelease( ctx );
