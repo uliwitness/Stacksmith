@@ -261,7 +261,7 @@ void	CLayer::Save( const std::string& inPackagePath )
 
 	std::string	destPath(inPackagePath);
 	destPath.append( mFileName );
-	document.SaveFile( destPath.c_str() );
+	document.SaveFile( destPath.c_str(), true );
 }
 
 

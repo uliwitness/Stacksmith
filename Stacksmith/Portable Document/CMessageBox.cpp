@@ -123,12 +123,18 @@ LEOScript*	CMessageBox::GetScriptObject( std::function<void(const char*,size_t,s
 
 LEOContextGroup*	CMessageBox::GetScriptContextGroupObject()
 {
-	return CStack::GetFrontStack()->GetScriptContextGroupObject();
+	CStack*	theStack = CStack::GetFrontStack();
+	if( !theStack )
+		return NULL;
+	return theStack->GetScriptContextGroupObject();
 }
 
 
 CScriptableObject*	CMessageBox::GetParentObject()
 {
-	return CStack::GetFrontStack()->GetCurrentCard();
+	CStack*	theStack = CStack::GetFrontStack();
+	if( !theStack )
+		return NULL;
+	return theStack->GetCurrentCard();
 }
 

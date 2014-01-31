@@ -112,6 +112,13 @@ void	CStackMac::SetTool( TTool inTool )
 }
 
 
+void	CStackMac::SetStyle( TStackStyle inStyle )
+{
+	CStack::SetStyle(inStyle);
+	[mMacWindowController updateStyle];
+}
+
+
 void	CStackMac::RegisterPartCreators()
 {
 	static bool	sAlreadyDidThis = false;

@@ -29,6 +29,7 @@ public:
 
 	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack );
 	virtual void				SetPeeking( bool inState );
+	virtual void				SetStyle( TStackStyle inStyle );
 
 	virtual void				SetCurrentCard( CCard* inCard );
 	virtual void				SetEditingBackground( bool inState );

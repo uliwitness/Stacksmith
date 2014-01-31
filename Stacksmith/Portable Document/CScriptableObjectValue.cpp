@@ -679,6 +679,12 @@ void	CScriptableObject::PreInstructionProc( LEOContext* inContext )
 }
 
 
+void	CScriptableObject::ContextCompletedProc( LEOContext *ctx )
+{
+
+}
+
+
 void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... )
 {
 #if 0
@@ -915,6 +921,8 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	}
 	else
 		LEOPushIntegerOnStack( ctx, 0, kLEOUnitNone );
+	
+	ctx->contextCompleted = CScriptableObject::ContextCompletedProc;
 	
 	// Send message:
 	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( contextGroup, msg );

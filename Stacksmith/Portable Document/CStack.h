@@ -30,13 +30,24 @@ enum
 typedef uint16_t	TTool;
 
 
+enum
+{
+	EStackStyleStandard,	// Standard document window.
+	EStackStyleRectangle,	// Window with a simple border.
+	EStackStylePopup,		// Pop-up utility window, like popovers on Mac/iOS. May be possible to tear one off as some kind of floating palette, or OSes may just make them palettes.
+	EStackStylePalette,		// Floating utility window with additional stuff in it.
+	EStackStyle_Last
+};
+typedef uint16_t	TStackStyle;
+
+
 class CStack : public CConcreteObject
 {
 public:
 	static CStack*	GetFrontStack()						{ return sFrontStack; };
 	static void		SetFrontStack( CStack* inStack )	{ sFrontStack = inStack; };
 
-	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false), mCurrentTool(EBrowseTool) { mName = inName; mDocument = inDocument; };
+	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false), mCurrentTool(EBrowseTool), mStyle(EStackStyleStandard) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	void			Save( const std::string& inPackagePath );
@@ -79,12 +90,19 @@ public:
 	
 	virtual void	SetTool( TTool inTool );
 	virtual TTool	GetTool()								{ return mCurrentTool; };
+
+	virtual void	SetStyle( TStackStyle inStyle )			{ mStyle = inStyle; };
+	TStackStyle		GetStyle()								{ return mStyle; };
+	
+	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
+	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	
 	static const char*	GetToolName( TTool inTool );
 	static TTool		GetToolFromName( const char* inName );
-	
+	static TStackStyle	GetStackStyleFromString( const char* inStyleStr );
+
 protected:
 	void			CallAllCompletionBlocks();
 	
@@ -114,6 +132,7 @@ protected:
 	std::vector<std::function<void(CStack*)>>	mLoadCompletionBlocks;
 	bool						mEditingBackground;	// Are we editing the background, or are we showing the full mixed card/bg layers?
 	TTool						mCurrentTool;		// The tool that applies when clicking in this stack's window.
+	TStackStyle					mStyle;				// Window style.
 	
 	static CStack*				sFrontStack;		// The stack whose window is currently frontmost and will e.g. receive messages from the message box.
 };

@@ -19,12 +19,18 @@ class CStackMac;
 }
 
 
+@class WILDFlippedContentView;
+
+
 @interface WILDStackWindowController : NSWindowController <NSWindowDelegate>
 {
 	Carlson::CStackMac	*	mStack;
 	CALayer				*	mSelectionOverlay;	// Draw "peek" outline and selection rectangles in this layer.
 	NSImageView			*	mBackgroundImageView;
 	NSImageView			*	mCardImageView;
+	BOOL					mWasVisible;
+	NSPopover			*	mPopover;
+	WILDFlippedContentView*	mContentView;
 }
 
 -(id)	initWithCppStack: (Carlson::CStackMac*)inStack;
@@ -41,9 +47,11 @@ class CStackMac;
 
 @interface WILDFlippedContentView : NSView
 {
-	NSView	*	lastHitView;
+	NSView				*	lastHitView;
+	Carlson::CStackMac	*	mStack;
 }
 
+@property (assign,nonatomic) Carlson::CStackMac*	stack;
 
 @end
 

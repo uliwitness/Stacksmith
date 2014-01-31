@@ -95,6 +95,7 @@ public:
 
 	static CScriptableObject*	GetOwnerScriptableObjectFromContext( LEOContext * inContext );
 	static void					PreInstructionProc( LEOContext* inContext );
+	static void					ContextCompletedProc( LEOContext* inContext );
 };
 
 

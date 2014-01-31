@@ -27,6 +27,16 @@ static const char*		sToolNames[ETool_Last] =
 };
 
 
+static const char*	sStackStyleStrings[EStackStyle_Last +1] =
+{
+	"standard",
+	"rectangle",
+	"popup",
+	"palette",
+	"*UNKNOWN*"
+};
+
+
 CStack::~CStack()
 {
 	if( sFrontStack == this )
@@ -80,6 +90,12 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 			tinyxml2::XMLElement	*	sizeElem = root->FirstChildElement( "cardSize" );
 			mCardWidth = CTinyXMLUtils::GetIntNamed( sizeElem, "width", 512 );
 			mCardHeight = CTinyXMLUtils::GetIntNamed( sizeElem, "height", 342 );
+			
+			std::string	stackStyle("standard");
+			CTinyXMLUtils::GetStringNamed( root, "style", stackStyle );
+			mStyle = GetStackStyleFromString( stackStyle.c_str() );
+			if( mStyle == EStackStyle_Last )
+				mStyle = EStackStyleStandard;
 			
 			mScript.erase();
 			CTinyXMLUtils::GetStringNamed( root, "script", mScript );
@@ -168,7 +184,11 @@ void	CStack::Save( const std::string& inPackagePath )
 	tinyxml2::XMLElement*		nameElem = document.NewElement("name");
 	nameElem->SetText(mName.c_str());
 	root->InsertEndChild( nameElem );
-
+	
+	tinyxml2::XMLElement*		styleElem = document.NewElement("style");
+	styleElem->SetText( sStackStyleStrings[mStyle] );
+	root->InsertEndChild( styleElem );
+	
 	tinyxml2::XMLElement*		cardCountElem = document.NewElement("cardCount");
 	cardCountElem->SetText((unsigned)mCards.size());
 	root->InsertEndChild( cardCountElem );
@@ -428,6 +448,7 @@ void	CStack::Dump( size_t inIndent )
 {
 	const char * indentStr = IndentString( inIndent );
 	printf( "%sStack ID %lld \"%s\" <%p>\n%s{\n", indentStr, mStackID, mName.c_str(), this, indentStr );
+	printf( "%s\tstyle = %s\n", indentStr, sStackStyleStrings[mStyle] );
 	printf( "%s\tloaded = %s\n", indentStr, (mLoaded? "true" : "false") );
 	printf( "%s\tuserLevel = %d\n", indentStr, mUserLevel );
 	printf( "%s\twidth = %d\n", indentStr, mCardWidth );
@@ -456,6 +477,34 @@ void	CStack::Dump( size_t inIndent )
 }
 
 
+bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp(inPropertyName, "style") == 0 )
+	{
+		LEOInitStringConstantValue( outValue, sStackStyleStrings[mStyle], kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else
+		return CConcreteObject::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+}
+
+
+bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp(inPropertyName, "style") == 0 )
+	{
+		char		styleBuf[100] = {0};
+		const char*	styleStr = LEOGetValueAsString( inValue, styleBuf, sizeof(styleBuf), inContext );
+		TStackStyle		style = GetStackStyleFromString(styleStr);
+		if( style != EStackStyle_Last )
+			SetStyle( style );
+		return true;
+	}
+	else
+		return CConcreteObject::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+}
+
+
 /*static*/ const char*	CStack::GetToolName( TTool inTool )
 {
 	return sToolNames[inTool];
@@ -471,4 +520,17 @@ void	CStack::Dump( size_t inIndent )
 	}
 	return ETool_Last;
 }
+
+
+/*static*/ TStackStyle	CStack::GetStackStyleFromString( const char* inStyleStr )
+{
+	for( size_t x = 0; x < EStackStyle_Last; x++ )
+	{
+		if( strcmp(sStackStyleStrings[x],inStyleStr) == 0 )
+			return (TStackStyle)x;
+	}
+	return EStackStyle_Last;
+}
+
+
 
