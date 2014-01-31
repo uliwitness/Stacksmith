@@ -47,11 +47,13 @@ class CStackMac;
 
 @interface WILDFlippedContentView : NSView
 {
-	NSView				*	lastHitView;
-	Carlson::CStackMac	*	mStack;
+	NSView				*		lastHitView;
+	Carlson::CStackMac	*		mStack;
+	WILDStackWindowController*	mOwningStackWindowController;
 }
 
-@property (assign,nonatomic) Carlson::CStackMac*	stack;
+@property (assign,nonatomic) Carlson::CStackMac*		stack;
+@property (assign,nonatomic) WILDStackWindowController*	owningStackWindowController;
 
 @end
 

@@ -39,6 +39,7 @@ using namespace Carlson;
 @implementation WILDFlippedContentView
 
 @synthesize stack = mStack;
+@synthesize owningStackWindowController = mOwningStackWindowController;
 
 -(BOOL)	isFlipped
 {
@@ -136,7 +137,7 @@ using namespace Carlson;
 			hitObject = hitPart;
 		}
 		
-		[(WILDStackWindowController*)[[self window] windowController] drawBoundingBoxes];
+		[mOwningStackWindowController drawBoundingBoxes];
 		
 		dragMessage = "pointerDrag";
 		upMessage = "pointerUp";
@@ -272,7 +273,6 @@ using namespace Carlson;
 //	NSCursor	*	currentCursor = nil;
 //	if( !currentCursor )
 //	{
-//		CStack*		mStack = [(WILDStackWindowController*)[[self window] windowController] cppStack];
 //		int			hotSpotLeft = 0, hotSpotTop = 0;
 //		std::string	cursorURL = mStack->GetDocument()->GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
 //		if( cursorURL.length() > 0 )
@@ -360,8 +360,15 @@ using namespace Carlson;
 	{
 		mContentView = [[WILDFlippedContentView alloc] initWithFrame: NSMakeRect(0, 0, mStack->GetCardWidth(), mStack->GetCardWidth())];
 		mContentView.stack = mStack;
+		mContentView.owningStackWindowController = self;
 		mContentView.wantsLayer = YES;
 		[mContentView setLayerUsesCoreImageFilters: YES];
+	}
+	else
+	{
+		NSRect		box = [mContentView frame];
+		box.size = NSMakeSize(mStack->GetCardWidth(), mStack->GetCardHeight() );
+		[mContentView setFrame: box];
 	}
 	
 	CBackground	*	theBackground = theCard->GetBackground();
@@ -486,9 +493,11 @@ using namespace Carlson;
 		}
 	}
 
-	mSelectionOverlay = [[CALayer alloc] init];
+	if( !mSelectionOverlay )
+		mSelectionOverlay = [[CALayer alloc] init];
 	[[mContentView layer] addSublayer: mSelectionOverlay];
 	[mSelectionOverlay setFrame: [mContentView layer].frame];
+		
 	
 	[NSGraphicsContext restoreGraphicsState];
 	CGImageRef	bmImage = CGBitmapContextCreateImage( bmContext );
@@ -529,17 +538,20 @@ using namespace Carlson;
 			break;
 		
 		case EStackStylePopup:
-			self.window = [[[NSWindow alloc] initWithContentRect: NSMakeRect(wdBox.origin.x,wdBox.origin.y,10,10) styleMask: NSBorderlessWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[NSWindow alloc] initWithContentRect: NSMakeRect(wdBox.origin.x,wdBox.origin.y,10,10) styleMask: NSTitledWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setBackgroundColor: NSColor.redColor];
-			[self.window setLevel: NSFloatingWindowLevel];
+			//[self.window setLevel: NSFloatingWindowLevel];
 			[self.window setAlphaValue: 0.0];
 			break;
 	}
 	
 	if( !mContentView )
 	{
+		NSRect		box = wdBox;
+		box.size = NSMakeSize(mStack->GetCardWidth(), mStack->GetCardHeight() );
 		mContentView = [[WILDFlippedContentView alloc] initWithFrame: wdBox];
 		mContentView.stack = mStack;
+		mContentView.owningStackWindowController = self;
 		mContentView.wantsLayer = YES;
 		[mContentView setLayerUsesCoreImageFilters: YES];
 	}
@@ -560,7 +572,10 @@ using namespace Carlson;
 	}
 	NSDisableScreenUpdates();
 	if( mWasVisible )
+	{
+		[self removeAllViews];
 		[self createAllViews];
+	}
 	else
 		[self.window center];
 	[self.window setDelegate: self];
@@ -631,6 +646,13 @@ using namespace Carlson;
 -(void)	windowWillClose: (NSNotification *)notification
 {
 	mWasVisible = NO;
+}
+
+
+-(void)	popoverWillShow: (NSNotification *)notification
+{
+	[self removeAllViews];
+	[self createAllViews];
 }
 
 
