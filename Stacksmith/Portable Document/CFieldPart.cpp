@@ -33,7 +33,7 @@ TFieldStyle	CFieldPart::GetFieldStyleFromString( const char* inStyleStr )
 {
 	for( size_t x = 0; x < EFieldStyle_Last; x++ )
 	{
-		if( strcmp(sFieldStyleStrings[x],inStyleStr) == 0 )
+		if( strcasecmp(sFieldStyleStrings[x],inStyleStr) == 0 )
 			return (TFieldStyle)x;
 	}
 	return EFieldStyle_Last;

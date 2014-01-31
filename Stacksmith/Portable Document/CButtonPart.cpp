@@ -36,7 +36,7 @@ TButtonStyle	CButtonPart::GetButtonStyleFromString( const char* inStyleStr )
 {
 	for( size_t x = 0; x < EButtonStyle_Last; x++ )
 	{
-		if( strcmp(sButtonStyleStrings[x],inStyleStr) == 0 )
+		if( strcasecmp(sButtonStyleStrings[x],inStyleStr) == 0 )
 			return (TButtonStyle)x;
 	}
 	return EButtonStyle_Last;

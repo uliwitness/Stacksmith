@@ -526,7 +526,7 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 {
 	for( size_t x = 0; x < EStackStyle_Last; x++ )
 	{
-		if( strcmp(sStackStyleStrings[x],inStyleStr) == 0 )
+		if( strcasecmp(sStackStyleStrings[x],inStyleStr) == 0 )
 			return (TStackStyle)x;
 	}
 	return EStackStyle_Last;
