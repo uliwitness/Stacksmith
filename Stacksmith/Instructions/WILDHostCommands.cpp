@@ -80,16 +80,21 @@ void	WILDGoInstruction( LEOContext* inContext )
 	if( theDestination && theDestination->base.isa == &kLeoValueTypeScriptableObject )
 	{
 		destinationObject = (CScriptableObject*)theDestination->object.object;
-		canGoThere = destinationObject->GoThereInNewWindow( inContext->currentInstruction->param1, userData->GetStack(), overPartObject );
 	}
 	else
 	{
 		char stackName[1024] = { 0 };
 		LEOGetValueAsString( theDestination, stackName, sizeof(stackName), inContext );
-		CStack*	theStack = userData->GetStack()->GetDocument()->GetStackByName( stackName );
-		if( theStack )
-			canGoThere = theStack->GoThereInNewWindow( inContext->currentInstruction->param1, userData->GetStack(), overPartObject );
-		destinationObject = theStack;
+		destinationObject = userData->GetStack()->GetDocument()->GetStackByName( stackName );
+	}
+	if( destinationObject )
+	{
+		TOpenInMode	openInMode = inContext->currentInstruction->param1;
+		CStack	*	theStack = destinationObject->GetStack();
+		if( theStack && theStack->GetStyle() == EStackStylePopup && overPartObject )
+			openInMode |= EOpenInNewWindow;
+		
+		canGoThere = destinationObject->GoThereInNewWindow( openInMode, userData->GetStack(), overPartObject );
 	}
 	if( canGoThere )
 		userData->SetStack( destinationObject->GetStack() );
@@ -733,7 +738,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 			{ EHostParamInvisibleIdentifier, EInIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'I' },
 			{ EHostParamInvisibleIdentifier, ENewIdentifier, EHostParameterOptional, WILD_GO_INSTR, EOpenInNewWindow, 0, 'I', 'W' },
 			{ EHostParamInvisibleIdentifier, EWindowIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'W', 'X' },
-			{ EHostParamLabeledContainer, EOnIdentifier, EHostParameterOptional, WILD_GO_INSTR, EOpenInNewWindow, 0, 'X', 'X' },
+			{ EHostParamLabeledContainer, EOnIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
