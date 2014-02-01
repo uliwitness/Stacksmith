@@ -235,6 +235,7 @@ void	CLayer::Save( const std::string& inPackagePath )
 	stackfile->InsertEndChild(elem);
 
 	elem = document.NewElement("script");
+	elem->SetForceCompactMode(true);
 	elem->SetText( mScript.c_str() );
 	stackfile->InsertEndChild(elem);
 
@@ -261,7 +262,7 @@ void	CLayer::Save( const std::string& inPackagePath )
 
 	std::string	destPath(inPackagePath);
 	destPath.append( mFileName );
-	document.SaveFile( destPath.c_str(), true );
+	document.SaveFile( destPath.c_str(), false );
 }
 
 

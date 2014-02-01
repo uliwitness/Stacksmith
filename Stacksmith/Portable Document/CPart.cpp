@@ -103,6 +103,7 @@ void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2:
 	inElement->InsertEndChild(elem);
 	
 	elem = document->NewElement("script");
+	elem->SetForceCompactMode(true);
 	elem->SetText( mScript.c_str() );
 	inElement->InsertEndChild(elem);
 	

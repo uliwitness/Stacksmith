@@ -215,6 +215,7 @@ void	CStack::Save( const std::string& inPackagePath )
 	root->InsertEndChild( cardSizeElem );
 
 	tinyxml2::XMLElement*		scriptElem = document.NewElement("script");
+	scriptElem->SetForceCompactMode(true);
 	scriptElem->SetText( mScript.c_str() );
 	root->InsertEndChild( scriptElem );
 	
