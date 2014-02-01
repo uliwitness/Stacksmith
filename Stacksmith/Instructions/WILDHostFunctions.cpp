@@ -77,12 +77,23 @@ size_t	kFirstStacksmithHostFunctionInstruction = 0;
 
 void	WILDStackInstruction( LEOContext* inContext )
 {
-	char		stackNameBuf[1024] = { 0 };
-	const char*	stackName = LEOGetValueAsString( inContext->stackEndPtr -1, stackNameBuf, sizeof(stackNameBuf), inContext );
-	
+	char						stackNameBuf[1024] = { 0 };
+	const char*					stackName = NULL;
+	CStack	*					theStack = NULL;
 	CScriptContextUserData	*	userData = (CScriptContextUserData*)inContext->userData;
-	CStack	*					theStack = userData->GetDocument()->GetStackByName( stackName );
-		
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	{
+		size_t	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
+		if( theNumber <= userData->GetDocument()->GetNumStacks() )
+			theStack = userData->GetDocument()->GetStack( theNumber -1 );
+	}
+	
+	if( !theStack )
+	{
+		stackName = LEOGetValueAsString( inContext->stackEndPtr -1, stackNameBuf, sizeof(stackNameBuf), inContext );
+		theStack = userData->GetDocument()->GetStackByName( stackName );
+	}
+	
 	if( theStack )
 	{
 		LEOValuePtr	valueToReplace = inContext->stackEndPtr -1;
@@ -110,7 +121,7 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 		if( theNumber <= frontStack->GetNumBackgrounds() )
 			theBackground = frontStack->GetBackground( theNumber -1 );
 		else
-			snprintf( backgroundName, sizeof(backgroundName), "%zu", theNumber );
+			snprintf( backgroundName, sizeof(backgroundName) -1, "%zu", theNumber );
 	}
 	else
 	{
@@ -145,7 +156,7 @@ void	WILDCardInstruction( LEOContext* inContext )
 		if( theNumber <= frontStack->GetNumBackgrounds() )
 			theCard = frontStack->GetCard( theNumber -1 );
 		else
-			snprintf( cardName, sizeof(cardName), "%zu", theNumber );
+			snprintf( cardName, sizeof(cardName) -1, "%zu", theNumber );
 	}
 	else
 	{
@@ -188,7 +199,7 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 			thePart = theCard->GetPartOfType( theNumber -1, CPart::GetPartCreatorForType(inType) );
 		
 		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
+			snprintf( partName, sizeof(partName) -1, "%lld", theNumber );
 	}
 	else if( !lookUpByID )
 	{
@@ -232,7 +243,7 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 			thePart = theBackground->GetPartOfType( theNumber -1, CPart::GetPartCreatorForType(inType) );
 		
 		if( !thePart )
-			snprintf( partName, sizeof(partName), "%lld", theNumber );
+			snprintf( partName, sizeof(partName) -1, "%lld", theNumber );
 	}
 	else if( !lookUpByID )
 	{
