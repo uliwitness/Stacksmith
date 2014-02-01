@@ -9,6 +9,10 @@
 #	AddressBook
 #	QTKit
 #	ScreenSaver
+#	AVFoundation
+#	QuartzCore
+#	AVKit
+#	EventKit
 # 
 # The format of this file is easy: The first char of each line indicates what
 # is on that line. An 'F' marks which framework the subsequent items come from,
@@ -36,10 +40,43 @@
 # with a character that is none of the above or that are empty to allow for
 # future expansion.
 # 
-# Created on 2013-10-26 17:15
+# Created on 2014-02-01 20:09
 
 FCoreFoundation
 HCoreFoundation/CoreFoundation.h
+*NSObject
+:
+<NSObject
++load,void
++initialize,void
+-init,id
++new,id
++allocWithZone:,id,struct _NSZone*
++alloc,id
+-dealloc,void
+-finalize,void
+-copy,id
+-mutableCopy,id
++copyWithZone:,id,struct _NSZone*
++mutableCopyWithZone:,id,struct _NSZone*
++superclass,Class
++class,Class
++instancesRespondToSelector:,BOOL,SEL
++conformsToProtocol:,BOOL,Protocol*
+-methodForSelector:,IMP,SEL
++instanceMethodForSelector:,IMP,SEL
+-doesNotRecognizeSelector:,void,SEL
+-forwardingTargetForSelector:,id,SEL
+-forwardInvocation:,void,NSInvocation*
+-methodSignatureForSelector:,NSMethodSignature*,SEL
++instanceMethodSignatureForSelector:,NSMethodSignature*,SEL
+-allowsWeakReference __attribute__((unavailable)),BOOL
+-retainWeakReference __attribute__((unavailable)),BOOL
++description,NSString*
++isSubclassOfClass:,BOOL,Class
++resolveClassMethod:,BOOL,SEL
++resolveInstanceMethod:,BOOL,SEL
+
 =acosf,float,float
 =acos,double,double
 =asinf,float,float
@@ -5279,7 +5316,6 @@ HCarbon/Carbon.h
 
 *NSEnumerator
 :NSObject
-<NSFastEnumeration
 -nextObject,id
 
 *NSEnumerator
@@ -5288,8 +5324,6 @@ HCarbon/Carbon.h
 
 *NSValue
 :NSObject
-<NSCopying
-<NSSecureCoding
 -getValue:,void,void*
 -objCType __attribute__((objc_returns_inner_pointer)),const char*
 
@@ -5369,10 +5403,6 @@ HCarbon/Carbon.h
 
 *NSArray
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSSecureCoding
-<NSFastEnumeration
 -count,NSUInteger
 -objectAtIndex:,id,NSUInteger
 
@@ -5548,8 +5578,6 @@ HCarbon/Carbon.h
 
 *NSDate
 :NSObject
-<NSCopying
-<NSSecureCoding
 -timeIntervalSinceReferenceDate,NSTimeInterval
 
 *NSDate
@@ -5584,8 +5612,6 @@ HCarbon/Carbon.h
 
 *NSCalendar
 :NSObject
-<NSCopying
-<NSSecureCoding
 +currentCalendar,id
 +autoupdatingCurrentCalendar __attribute__((availability(macosx,introduced=10.5))),id
 +calendarWithIdentifier:,id,NSString*
@@ -5657,8 +5683,6 @@ HCarbon/Carbon.h
 
 *NSDateComponents
 :NSObject
-<NSCopying
-<NSSecureCoding
 -calendar __attribute__((availability(macosx,introduced=10.7))),NSCalendar*
 -timeZone __attribute__((availability(macosx,introduced=10.7))),NSTimeZone*
 -era,NSInteger
@@ -5703,9 +5727,6 @@ HCarbon/Carbon.h
 
 *NSString
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSSecureCoding
 -length,NSUInteger
 -characterAtIndex:,unichar,NSUInteger
 
@@ -5864,9 +5885,6 @@ HCarbon/Carbon.h
 
 *NSCharacterSet
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSCoding
 +controlCharacterSet,id
 +whitespaceCharacterSet,id
 +whitespaceAndNewlineCharacterSet,id
@@ -5895,8 +5913,6 @@ HCarbon/Carbon.h
 
 *NSMutableCharacterSet
 :NSCharacterSet
-<NSCopying
-<NSMutableCopying
 -addCharactersInRange:,void,NSRange
 -removeCharactersInRange:,void,NSRange
 -addCharactersInString:,void,NSString*
@@ -5966,9 +5982,6 @@ HCarbon/Carbon.h
 
 *NSData
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSSecureCoding
 -length,NSUInteger
 -bytes __attribute__((objc_returns_inner_pointer)),const void*
 
@@ -6046,12 +6059,9 @@ HCarbon/Carbon.h
 
 *NSPurgeableData
 :NSMutableData
-<NSDiscardableContent
 
 *NSFormatter
 :NSObject
-<NSCopying
-<NSCoding
 -stringForObjectValue:,NSString*,id
 -attributedStringForObjectValue:withDefaultAttributes:,NSAttributedString*,id,NSDictionary*
 -editingStringForObjectValue:,NSString*,id
@@ -6142,7 +6152,6 @@ HCarbon/Carbon.h
 
 *NSScanner
 :NSObject
-<NSCopying
 -string,NSString*
 -scanLocation,NSUInteger
 -setScanLocation:,void,NSUInteger
@@ -6176,10 +6185,6 @@ HCarbon/Carbon.h
 
 *NSDictionary
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSSecureCoding
-<NSFastEnumeration
 -count,NSUInteger
 -objectForKey:,id,id
 -keyEnumerator,NSEnumerator*
@@ -6292,8 +6297,6 @@ HCarbon/Carbon.h
 
 *NSDecimalNumberHandler
 :NSObject
-<NSDecimalNumberBehaviors
-<NSCoding
 +defaultDecimalNumberHandler,id
 -initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:,id,NSRoundingMode,short,BOOL,BOOL,BOOL,BOOL
 +decimalNumberHandlerWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:,id,NSRoundingMode,short,BOOL,BOOL,BOOL,BOOL
@@ -6308,8 +6311,6 @@ HCarbon/Carbon.h
 
 *NSError
 :NSObject
-<NSCopying
-<NSSecureCoding
 -initWithDomain:code:userInfo:,id,NSString*,NSInteger,NSDictionary*
 +errorWithDomain:code:userInfo:,id,NSString*,NSInteger,NSDictionary*
 -domain,NSString*
@@ -6329,8 +6330,6 @@ HCarbon/Carbon.h
 
 *NSException
 :NSObject
-<NSCopying
-<NSCoding
 +exceptionWithName:reason:userInfo:,NSException*,NSString*,NSString*,NSDictionary*
 -initWithName:reason:userInfo:,id,NSString*,NSString*,NSDictionary*
 -name,NSString*
@@ -6353,7 +6352,6 @@ HCarbon/Carbon.h
 
 *NSFileHandle
 :NSObject
-<NSSecureCoding
 -availableData,NSData*
 -readDataToEndOfFile,NSData*
 -readDataOfLength:,NSData*,NSUInteger
@@ -6531,7 +6529,6 @@ HCarbon/Carbon.h
 
 *NSPointerFunctions
 :NSObject
-<NSCopying
 -initWithOptions:,id,NSPointerFunctionsOptions
 +pointerFunctionsWithOptions:,id,NSPointerFunctionsOptions
 -setR:,void,NSUIntege
@@ -6553,9 +6550,6 @@ HCarbon/Carbon.h
 
 *NSHashTable
 :NSObject
-<NSCopying
-<NSCoding
-<NSFastEnumeration
 -initWithOptions:capacity:,id,NSPointerFunctionsOptions,NSUInteger
 -initWithPointerFunctions:capacity:,id,NSPointerFunctions*,NSUInteger
 +hashTableWithOptions:,id,NSPointerFunctionsOptions
@@ -6613,8 +6607,6 @@ HCarbon/Carbon.h
 
 *NSIndexPath
 :NSObject
-<NSCopying
-<NSCoding
 +indexPathWithIndex:,instancetype,NSUInteger
 +indexPathWithIndexes:length:,instancetype,const NSUInteger*,NSUInteger
 -init,instancetype
@@ -6629,9 +6621,6 @@ HCarbon/Carbon.h
 
 *NSIndexSet
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSCoding
 +indexSet,instancetype
 +indexSetWithIndex:,instancetype,NSUInteger
 +indexSetWithIndexesInRange:,instancetype,NSRange
@@ -6704,10 +6693,6 @@ HCarbon/Carbon.h
 
 *NSOrderedSet
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSSecureCoding
-<NSFastEnumeration
 -count,NSUInteger
 -objectAtIndex:,id,NSUInteger
 -indexOfObject:,NSUInteger,id
@@ -6812,10 +6797,6 @@ HCarbon/Carbon.h
 
 *NSSet
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSSecureCoding
-<NSFastEnumeration
 -count,NSUInteger
 -member:,id,id
 -objectEnumerator,NSEnumerator*
@@ -7090,8 +7071,6 @@ HCarbon/Carbon.h
 
 *NSLocale
 :NSObject
-<NSCopying
-<NSSecureCoding
 -objectForKey:,id,id
 -displayNameForKey:value:,NSString*,id,id
 
@@ -7127,7 +7106,6 @@ HCarbon/Carbon.h
 
 *NSLock
 :NSObject
-<NSLocking
 -tryLock,BOOL
 -lockBeforeDate:,BOOL,NSDate*
 -setName:,void,NSString*
@@ -7135,7 +7113,6 @@ HCarbon/Carbon.h
 
 *NSConditionLock
 :NSObject
-<NSLocking
 -initWithCondition:,id,NSInteger
 -condition,NSInteger
 -lockWhenCondition:,void,NSInteger
@@ -7149,7 +7126,6 @@ HCarbon/Carbon.h
 
 *NSRecursiveLock
 :NSObject
-<NSLocking
 -tryLock,BOOL
 -lockBeforeDate:,BOOL,NSDate*
 -setName:,void,NSString*
@@ -7157,7 +7133,6 @@ HCarbon/Carbon.h
 
 *NSCondition
 :NSObject
-<NSLocking
 -wait,void
 -waitUntilDate:,BOOL,NSDate*
 -signal,void
@@ -7167,9 +7142,6 @@ HCarbon/Carbon.h
 
 *NSMapTable
 :NSObject
-<NSCopying
-<NSCoding
-<NSFastEnumeration
 -initWithKeyOptions:valueOptions:capacity:,id,NSPointerFunctionsOptions,NSPointerFunctionsOptions,NSUInteger
 -initWithKeyPointerFunctions:valuePointerFunctions:capacity:,id,NSPointerFunctions*,NSPointerFunctions*,NSUInteger
 +mapTableWithKeyOptions:valueOptions:,id,NSPointerFunctionsOptions,NSPointerFunctionsOptions
@@ -7204,8 +7176,6 @@ HCarbon/Carbon.h
 
 *NSNotification
 :NSObject
-<NSCopying
-<NSCoding
 -name,NSString*
 -object,id
 -userInfo,NSDictionary*
@@ -7239,8 +7209,6 @@ HCarbon/Carbon.h
 
 *NSNull
 :NSObject
-<NSCopying
-<NSSecureCoding
 +null,NSNull*
 
 *NSNumberFormatter
@@ -7438,8 +7406,6 @@ HCarbon/Carbon.h
 
 *NSOrthography
 :NSObject
-<NSCopying
-<NSCoding
 -dominantScript,NSString*
 -languageMap,NSDictionary*
 
@@ -7458,9 +7424,6 @@ HCarbon/Carbon.h
 
 *NSPointerArray
 :NSObject
-<NSFastEnumeration
-<NSCopying
-<NSCoding
 -options,initWithOptions:(NSPointerFunctionsOptions
 -functions,initWithPointerFunctions:(NSPointerFunctions*
 +options,pointerArrayWithOptions:(NSPointerFunctionsOptions
@@ -7485,8 +7448,6 @@ HCarbon/Carbon.h
 
 *NSPort
 :NSObject
-<NSCopying
-<NSCoding
 +port,NSPort*
 -invalidate,void
 -isValid,BOOL
@@ -7553,10 +7514,30 @@ HCarbon/Carbon.h
 -setAutomaticTerminationSupportEnabled:,void,BOOL
 -automaticTerminationSupportEnabled __attribute__((availability(macosx,introduced=10.7))),BOOL
 
+*NSProcessInfo
+(
+-beginActivityWithOptions:reason:,id <NSObject>,NSActivityOptions,NSString*
+-endActivity:,void,id <NSObject>
+-performActivityWithOptions:reason:usingBlock:,void,NSActivityOptions,NSString*,id
+
+*NSProxy
+:
+<NSObject
++alloc,id
++allocWithZone:,id,NSZone*
++class,Class
+-forwardInvocation:,void,NSInvocation*
+-methodSignatureForSelector:,NSMethodSignature*,SEL
+-dealloc,void
+-finalize,void
+-description,NSString*
+-debugDescription,NSString*
++respondsToSelector:,BOOL,SEL
+-allowsWeakReference __attribute__((unavailable)),BOOL
+-retainWeakReference __attribute__((unavailable)),BOOL
+
 *NSTextCheckingResult
 :NSObject
-<NSCopying
-<NSCoding
 -resultType,NSTextCheckingType
 -range,NSRange
 
@@ -7598,8 +7579,6 @@ HCarbon/Carbon.h
 
 *NSRegularExpression
 :NSObject
-<NSCopying
-<NSCoding
 +regularExpressionWithPattern:options:error:,NSRegularExpression*,NSString*,NSRegularExpressionOptions,NSError**
 -initWithPattern:options:error:,id,NSString*,NSRegularExpressionOptions,NSError**
 -pattern,NSString*
@@ -7662,8 +7641,6 @@ HCarbon/Carbon.h
 
 *NSSortDescriptor
 :NSObject
-<NSSecureCoding
-<NSCopying
 +sortDescriptorWithKey:ascending:,id,NSString*,BOOL
 +sortDescriptorWithKey:ascending:selector:,id,NSString*,BOOL,SEL
 -initWithKey:ascending:,id,NSString*,BOOL
@@ -7787,8 +7764,6 @@ HCarbon/Carbon.h
 
 *NSTimeZone
 :NSObject
-<NSCopying
-<NSSecureCoding
 -name,NSString*
 -data,NSData*
 -secondsFromGMTForDate:,NSInteger,NSDate*
@@ -7872,9 +7847,6 @@ HCarbon/Carbon.h
 
 *NSURL
 :NSObject
-<NSSecureCoding
-<NSCopying
-<NSURLHandleClient
 -initWithScheme:host:path:,id,NSString*,NSString*,NSString*
 -initFileURLWithPath:isDirectory:,id,NSString*,BOOL
 -initFileURLWithPath:,id,NSString*
@@ -7927,7 +7899,6 @@ HCarbon/Carbon.h
 
 *NSURLComponents
 :NSObject
-<NSCopying
 -init,id
 -initWithURL:resolvingAgainstBaseURL:,id,NSURL*,BOOL
 +componentsWithURL:resolvingAgainstBaseURL:,id,NSURL*,BOOL
@@ -7996,8 +7967,6 @@ HCarbon/Carbon.h
 
 *NSFileSecurity
 :NSObject
-<NSCopying
-<NSCoding
 
 *NSObject
 (NSURLClient
@@ -8017,7 +7986,6 @@ HCarbon/Carbon.h
 
 *NSURLAuthenticationChallenge
 :NSObject
-<NSSecureCoding
 -initWithProtectionSpace:proposedCredential:previousFailureCount:failureResponse:error:sender:,id,NSURLProtectionSpace*,NSURLCredential*,NSInteger,NSURLResponse*,NSError*,id<NSURLAuthenticationChallengeSender>
 -initWithAuthenticationChallenge:sender:,id,NSURLAuthenticationChallenge*,id<NSURLAuthenticationChallengeSender>
 -protectionSpace,NSURLProtectionSpace*
@@ -8029,8 +7997,6 @@ HCarbon/Carbon.h
 
 *NSCachedURLResponse
 :NSObject
-<NSCoding
-<NSCopying
 -initWithResponse:data:,id,NSURLResponse*,NSData*
 -initWithResponse:data:userInfo:storagePolicy:,id,NSURLResponse*,NSData*,NSDictionary*,NSURLCacheStoragePolicy
 -response,NSURLResponse*
@@ -8078,8 +8044,6 @@ HCarbon/Carbon.h
 
 *NSURLCredential
 :NSObject
-<NSSecureCoding
-<NSCopying
 -persistence,NSURLCredentialPersistence
 
 *NSURLCredential
@@ -8115,8 +8079,6 @@ HCarbon/Carbon.h
 
 *NSURLProtectionSpace
 :NSObject
-<NSSecureCoding
-<NSCopying
 -initWithHost:port:protocol:realm:authenticationMethod:,id,NSString*,NSInteger,NSString*,NSString*,NSString*
 -initWithProxyHost:port:type:realm:authenticationMethod:,id,NSString*,NSInteger,NSString*,NSString*,NSString*
 -realm,NSString*
@@ -8155,9 +8117,6 @@ HCarbon/Carbon.h
 
 *NSURLRequest
 :NSObject
-<NSSecureCoding
-<NSCopying
-<NSMutableCopying
 +requestWithURL:,id,NSURL*
 +supportsSecureCoding,BOOL
 +requestWithURL:cachePolicy:timeoutInterval:,id,NSURL*,NSURLRequestCachePolicy,NSTimeInterval
@@ -8202,8 +8161,6 @@ HCarbon/Carbon.h
 
 *NSURLResponse
 :NSObject
-<NSSecureCoding
-<NSCopying
 -initWithURL:MIMEType:expectedContentLength:textEncodingName:,id,NSURL*,NSString*,NSInteger,NSString*
 -URL,NSURL*
 -MIMEType,NSString*
@@ -8295,9 +8252,6 @@ HCarbon/Carbon.h
 
 *NSAttributedString
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSCoding
 -string,NSString*
 -attributesAtIndex:effectiveRange:,NSDictionary*,NSUInteger,NSRangePointer
 
@@ -8375,8 +8329,6 @@ HCarbon/Carbon.h
 
 *NSPredicate
 :NSObject
-<NSSecureCoding
-<NSCopying
 +predicateWithFormat:argumentArray:,NSPredicate*,NSString*,NSArray*
 +predicateWithFormat:,NSPredicate*,NSString*,...
 +predicateWithFormat:arguments:,NSPredicate*,NSString*,va_list
@@ -8437,8 +8389,6 @@ HCarbon/Carbon.h
 
 *NSExpression
 :NSObject
-<NSSecureCoding
-<NSCopying
 +expressionWithFormat:argumentArray:,NSExpression*,NSString*,NSArray*
 +expressionWithFormat:,NSExpression*,NSString*,...
 +expressionWithFormat:arguments:,NSExpression*,NSString*,va_list
@@ -8510,7 +8460,6 @@ HCarbon/Carbon.h
 
 *NSFileWrapper
 :NSObject
-<NSCoding
 -initWithURL:options:error:,id,NSURL*,NSFileWrapperReadingOptions,NSError**
 -initDirectoryWithFileWrappers:,id,NSDictionary*
 -initRegularFileWithContents:,id,NSData*
@@ -8815,7 +8764,6 @@ HCarbon/Carbon.h
 
 *NSURLSessionTask
 :NSObject
-<NSCopying
 -taskIdentifier,NSUInteger
 -originalRequest,NSURLRequest*
 -currentRequest,NSURLRequest*
@@ -8844,7 +8792,6 @@ HCarbon/Carbon.h
 
 *NSURLSessionConfiguration
 :NSObject
-<NSCopying
 +defaultSessionConfiguration,NSURLSessionConfiguration*
 +ephemeralSessionConfiguration,NSURLSessionConfiguration*
 +backgroundSessionConfiguration:,NSURLSessionConfiguration*,NSString*
@@ -8895,8 +8842,6 @@ HCarbon/Carbon.h
 
 *NSUUID
 :NSObject
-<NSCopying
-<NSSecureCoding
 +UUID,id
 -init,id
 -initWithUUIDString:,id,NSString*
@@ -9026,7 +8971,6 @@ HCarbon/Carbon.h
 
 *NSDistantObject
 :NSProxy
-<NSCoding
 +proxyWithTarget:connection:,NSDistantObject*,id,NSConnection*
 -initWithTarget:connection:,id,id,NSConnection*
 +proxyWithLocal:connection:,NSDistantObject*,id,NSConnection*
@@ -9154,7 +9098,6 @@ HCarbon/Carbon.h
 
 *NSXMLNode
 :NSObject
-<NSCopying
 -initWithKind:,id,NSXMLNodeKind
 -initWithKind:options:,id,NSXMLNodeKind,NSUInteger
 +document,id
@@ -9321,8 +9264,6 @@ HCarbon/Carbon.h
 
 *NSAffineTransform
 :NSObject
-<NSCopying
-<NSCoding
 +transform,NSAffineTransform*
 -initWithTransform:,id,NSAffineTransform*
 -translateXBy:yBy:,void,CGFloat,CGFloat
@@ -9340,8 +9281,6 @@ HCarbon/Carbon.h
 
 *NSAppleEventDescriptor
 :NSObject
-<NSCopying
-<NSSecureCoding
 +nullDescriptor,NSAppleEventDescriptor*
 +descriptorWithDescriptorType:bytes:length:,NSAppleEventDescriptor*,DescType,const void*,NSUInteger
 +descriptorWithDescriptorType:data:,NSAppleEventDescriptor*,DescType,NSData*
@@ -9402,7 +9341,6 @@ HCarbon/Carbon.h
 
 *NSAppleScript
 :NSObject
-<NSCopying
 -initWithContentsOfURL:error:,id,NSURL*,NSDictionary**
 -initWithSource:,id,NSString*
 -source,NSString*
@@ -9514,7 +9452,6 @@ HCarbon/Carbon.h
 
 *NSScriptCommand
 :NSObject
-<NSCoding
 -initWithCommandDescription:,id,NSScriptCommandDescription*
 -commandDescription,NSScriptCommandDescription*
 -setDirectParameter:,void,id
@@ -9543,7 +9480,6 @@ HCarbon/Carbon.h
 
 *NSScriptCommandDescription
 :NSObject
-<NSCoding
 -initWithSuiteName:commandName:dictionary:,id,NSString*,NSString*,NSDictionary*
 -suiteName,NSString*
 -commandName,NSString*
@@ -9582,7 +9518,6 @@ HCarbon/Carbon.h
 
 *NSScriptObjectSpecifier
 :NSObject
-<NSCoding
 +objectSpecifierWithDescriptor:,NSScriptObjectSpecifier*,NSAppleEventDescriptor*
 -initWithContainerSpecifier:key:,id,NSScriptObjectSpecifier*,NSString*
 -initWithContainerClassDescription:containerSpecifier:key:,id,NSScriptClassDescription*,NSScriptObjectSpecifier*,NSString*
@@ -9743,7 +9678,6 @@ HCarbon/Carbon.h
 
 *NSScriptWhoseTest
 :NSObject
-<NSCoding
 -isTrue,BOOL
 
 *NSLogicalTest
@@ -9789,7 +9723,6 @@ HCarbon/Carbon.h
 
 *NSUserNotification
 :NSObject
-<NSCopying
 -setTitle:,void,NSString*
 -title,NSString*
 -setSubtitle:,void,NSString*
@@ -9868,7 +9801,6 @@ HCarbon/Carbon.h
 
 *NSXPCConnection
 :NSObject
-<NSXPCProxyCreating
 -initWithServiceName:,id,NSString*
 -serviceName,NSString*
 -initWithMachServiceName:options:,id,NSString*,NSXPCConnectionOptions
@@ -9918,7 +9850,6 @@ HCarbon/Carbon.h
 
 *NSXPCListenerEndpoint
 :NSObject
-<NSSecureCoding
 
 =HIPointConvert,void,HIPoint*,HICoordinateSpace,void*,HICoordinateSpace,void*
 =HIRectConvert,void,HIRect*,HICoordinateSpace,void*,HICoordinateSpace,void*
@@ -11367,7 +11298,6 @@ HAppKit/AppKit.h
 
 *NSTouch
 :NSObject
-<NSCopying
 -d,i
 -phase,NSTouchPhase
 -normalizedPosition,NSPoint
@@ -11377,8 +11307,6 @@ HAppKit/AppKit.h
 
 *NSEvent
 :NSObject
-<NSCopying
-<NSCoding
 -type,NSEventType
 -modifierFlags,NSUInteger
 -timestamp,NSTimeInterval
@@ -11456,7 +11384,6 @@ HAppKit/AppKit.h
 
 *NSResponder
 :NSObject
-<NSCoding
 -nextResponder,NSResponder*
 -setNextResponder:,void,NSResponder*
 -tryToPerform:with:,BOOL,SEL,id
@@ -11727,7 +11654,6 @@ HAppKit/AppKit.h
 
 *NSApplication
 :NSResponder
-<NSUserInterfaceValidations
 +sharedApplication,NSApplication*
 -setDelegate:,void,id <NSApplicationDelegate>
 -delegate,id <NSApplicationDelegate>
@@ -11850,8 +11776,6 @@ HAppKit/AppKit.h
 
 *NSAnimation
 :NSObject
-<NSCopying
-<NSCoding
 -initWithDuration:animationCurve:,id,NSTimeInterval,NSAnimationCurve
 -startAnimation,void
 -stopAnimation,void
@@ -11897,7 +11821,6 @@ HAppKit/AppKit.h
 
 *NSAppearance
 :NSObject
-<NSCoding
 +currentAppearance,NSAppearance*
 +setCurrentAppearance:,void,NSAppearance*
 +appearanceNamed:,NSAppearance*,NSString*
@@ -11905,10 +11828,6 @@ HAppKit/AppKit.h
 
 *NSView
 :NSResponder
-<NSAnimatablePropertyContainer
-<NSUserInterfaceItemIdentification
-<NSDraggingDestination
-<NSAppearanceCustomization
 -initWithFrame:,id,NSRect
 -window,NSWindow*
 -superview,NSView*
@@ -12182,8 +12101,6 @@ HAppKit/AppKit.h
 
 *NSText
 :NSView
-<NSChangeSpelling
-<NSIgnoreMisspelledWords
 -string,NSString*
 -setString:,void,NSString*
 -replaceCharactersInRange:withString:,void,NSRange,NSString*
@@ -12257,8 +12174,6 @@ HAppKit/AppKit.h
 
 *NSTextTab
 :NSObject
-<NSCopying
-<NSCoding
 -initWithTextAlignment:location:options:,id,NSTextAlignment,CGFloat,NSDictionary*
 -alignment,NSTextAlignment
 -options,NSDictionary*
@@ -12268,9 +12183,6 @@ HAppKit/AppKit.h
 
 *NSParagraphStyle
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSCoding
 +defaultParagraphStyle,NSParagraphStyle*
 +defaultWritingDirectionForLanguage:,NSWritingDirection,NSString*
 -lineSpacing,CGFloat
@@ -12320,9 +12232,6 @@ HAppKit/AppKit.h
 
 *NSCell
 :NSObject
-<NSCopying
-<NSCoding
-<NSUserInterfaceItemIdentification
 +prefersTrackingUntilMouseUp,BOOL
 -initTextCell:,id,NSString*
 -initImageCell:,id,NSImage*
@@ -12753,7 +12662,6 @@ HAppKit/AppKit.h
 
 *NSButton
 :NSControl
-<NSUserInterfaceValidations
 -title,NSString*
 -setTitle:,void,NSString*
 -alternateTitle,NSString*
@@ -12855,8 +12763,6 @@ HAppKit/AppKit.h
 
 *NSFont
 :NSObject
-<NSCopying
-<NSCoding
 +fontWithName:size:,NSFont*,NSString*,CGFloat
 +fontWithName:matrix:,NSFont*,NSString*,const CGFloat*
 +fontWithDescriptor:size:,NSFont*,NSFontDescriptor*,CGFloat
@@ -12917,9 +12823,6 @@ HAppKit/AppKit.h
 
 *NSFontCollection
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSCoding
 +fontCollectionWithDescriptors:,id,NSArray*
 +fontCollectionWithAllAvailableDescriptors,id
 +fontCollectionWithLocale:,id,NSLocale*
@@ -12945,8 +12848,6 @@ HAppKit/AppKit.h
 
 *NSFontDescriptor
 :NSObject
-<NSCopying
-<NSCoding
 -postscriptName,NSString*
 -pointSize,CGFloat
 -matrix,NSAffineTransform*
@@ -13033,10 +12934,6 @@ HAppKit/AppKit.h
 
 *NSWindow
 :NSResponder
-<NSAnimatablePropertyContainer
-<NSUserInterfaceValidations
-<NSUserInterfaceItemIdentification
-<NSAppearanceCustomization
 +frameRectForContentRect:styleMask:,NSRect,NSRect,NSUInteger
 +contentRectForFrameRect:styleMask:,NSRect,NSRect,NSUInteger
 +minFrameWidthWithTitle:styleMask:,CGFloat,NSString*,NSUInteger
@@ -13339,7 +13236,6 @@ HAppKit/AppKit.h
 
 *NSMatrix
 :NSControl
-<NSUserInterfaceValidations
 -initWithFrame:,id,NSRect
 -initWithFrame:mode:prototype:numberOfRows:numberOfColumns:,id,NSRect,NSMatrixMode,NSCell*,NSInteger,NSInteger
 -initWithFrame:mode:cellClass:numberOfRows:numberOfColumns:,id,NSRect,NSMatrixMode,Class,NSInteger,NSInteger
@@ -13500,9 +13396,6 @@ HAppKit/AppKit.h
 
 *NSMenuItem
 :NSObject
-<NSCopying
-<NSCoding
-<NSValidatedUserInterfaceItem
 +setUsesUserKeyEquivalents:,void,BOOL
 +usesUserKeyEquivalents,BOOL
 +separatorItem,NSMenuItem*
@@ -13569,8 +13462,6 @@ HAppKit/AppKit.h
 
 *NSMenu
 :NSObject
-<NSCopying
-<NSCoding
 -initWithTitle:,id,NSString*
 -setTitle:,void,NSString*
 -title,NSString*
@@ -13712,8 +13603,6 @@ HAppKit/AppKit.h
 
 *CIVector
 :NSObject
-<NSCopying
-<NSCoding
 +vectorWithValues:count:,CIVector*,const CGFloat*,size_t
 +vectorWithX:,CIVector*,CGFloat
 +vectorWithX:Y:,CIVector*,CGFloat,CGFloat
@@ -13745,8 +13634,6 @@ HAppKit/AppKit.h
 
 *CIColor
 :NSObject
-<NSCoding
-<NSCopying
 +colorWithCGColor:,CIColor*,CGColorRef
 +colorWithRed:green:blue:alpha:,CIColor*,CGFloat,CGFloat,CGFloat,CGFloat
 +colorWithRed:green:blue:,CIColor*,CGFloat,CGFloat,CGFloat
@@ -13763,10 +13650,6 @@ HAppKit/AppKit.h
 
 *NSColor
 :NSObject
-<NSCopying
-<NSCoding
-<NSPasteboardReading
-<NSPasteboardWriting
 +colorWithCalibratedWhite:alpha:,NSColor*,CGFloat,CGFloat
 +colorWithCalibratedHue:saturation:brightness:alpha:,NSColor*,CGFloat,CGFloat,CGFloat,CGFloat
 +colorWithCalibratedRed:green:blue:alpha:,NSColor*,CGFloat,CGFloat,CGFloat,CGFloat
@@ -13889,7 +13772,6 @@ HAppKit/AppKit.h
 
 *NSColorSpace
 :NSObject
-<NSCoding
 -initWithICCProfileData:,id,NSData*
 -ICCProfileData,NSData*
 -initWithColorSyncProfile:,id,void*
@@ -13912,8 +13794,6 @@ HAppKit/AppKit.h
 
 *NSImageRep
 :NSObject
-<NSCopying
-<NSCoding
 -draw,BOOL
 -drawAtPoint:,BOOL,NSPoint
 -drawInRect:,BOOL,NSRect
@@ -14004,7 +13884,6 @@ HAppKit/AppKit.h
 
 *NSViewController
 :NSResponder
-<NSCoding
 -initWithNibName:bundle:,id,NSString*,NSBundle*
 -setRepresentedObject:,void,id
 -representedObject,id
@@ -14170,8 +14049,6 @@ HAppKit/AppKit.h
 
 *CIImage
 :NSObject
-<NSCoding
-<NSCopying
 +imageWithCGImage:,CIImage*,CGImageRef
 +imageWithCGImage:options:,CIImage*,CGImageRef,NSDictionary*
 +imageWithCGLayer:,CIImage*,CGLayerRef
@@ -14237,7 +14114,6 @@ HAppKit/AppKit.h
 
 *NSColorList
 :NSObject
-<NSCoding
 +availableColorLists,NSArray*
 +colorListNamed:,NSColorList*,NSString*
 -initWithName:,id,NSString*
@@ -14285,7 +14161,6 @@ HAppKit/AppKit.h
 
 *NSColorPicker
 :NSObject
-<NSColorPickingDefault
 -initWithPickerMask:colorPanel:,id,NSUInteger,NSColorPanel*
 -colorPanel,NSColorPanel*
 -provideNewButtonImage,NSImage*
@@ -14311,7 +14186,6 @@ HAppKit/AppKit.h
 
 *NSCursor
 :NSObject
-<NSCoding
 +currentCursor,NSCursor*
 +currentSystemCursor __attribute__((availability(macosx,introduced=10.6))),NSCursor*
 +arrowCursor,NSCursor*
@@ -14360,8 +14234,6 @@ HAppKit/AppKit.h
 
 *NSDocument
 :NSObject
-<NSFilePresenter
-<NSUserInterfaceValidations
 -init,id
 -initWithType:error:,id,NSString*,NSError**
 +canConcurrentlyReadDocumentsOfType:,BOOL,NSString*
@@ -14510,8 +14382,6 @@ HAppKit/AppKit.h
 
 *NSDocumentController
 :NSObject
-<NSCoding
-<NSUserInterfaceValidations
 +sharedDocumentController,id
 -init,id
 -documents,NSArray*
@@ -14644,8 +14514,6 @@ HAppKit/AppKit.h
 
 *NSGradient
 :NSObject
-<NSCopying
-<NSCoding
 -initWithStartingColor:endingColor:,id,NSColor*,NSColor*
 -initWithColors:,id,NSArray*
 -initWithColorsAndLocations:,id,NSColor*,...
@@ -14663,10 +14531,6 @@ HAppKit/AppKit.h
 
 *NSImage
 :NSObject
-<NSCopying
-<NSCoding
-<NSPasteboardReading
-<NSPasteboardWriting
 +imageNamed:,id,NSString*
 -initWithSize:,id,NSSize
 -initWithData:,id,NSData*
@@ -14762,8 +14626,6 @@ HAppKit/AppKit.h
 
 *NSImageCell
 :NSCell
-<NSCopying
-<NSCoding
 -imageAlignment,NSImageAlignment
 -setImageAlignment:,void,NSImageAlignment
 -imageScaling,NSImageScaling
@@ -14790,7 +14652,6 @@ HAppKit/AppKit.h
 
 *NSLayoutConstraint
 :NSObject
-<NSAnimatablePropertyContainer
 +constraintsWithVisualFormat:options:metrics:views:,NSArray*,NSString*,NSLayoutFormatOptions,NSDictionary*,NSDictionary*
 +constraintWithItem:attribute:relatedBy:toItem:attribute:multiplier:constant:,id,id,NSLayoutAttribute,NSLayoutRelation,id,NSLayoutAttribute,CGFloat,CGFloat
 -setPriority:,void,NSLayoutPriority
@@ -14879,7 +14740,6 @@ HAppKit/AppKit.h
 
 *NSNib
 :NSObject
-<NSCoding
 -initWithNibNamed:bundle:,id,NSString*,NSBundle*
 -initWithNibData:bundle:,id,NSData*,NSBundle*
 -instantiateWithOwner:topLevelObjects:,BOOL,id,NSArray**
@@ -14906,8 +14766,6 @@ HAppKit/AppKit.h
 
 *NSPrinter
 :NSObject
-<NSCopying
-<NSCoding
 +printerNames,NSArray*
 +printerTypes,NSArray*
 +printerWithName:,NSPrinter*,NSString*
@@ -15173,8 +15031,6 @@ HAppKit/AppKit.h
 
 *NSPasteboardItem
 :NSObject
-<NSPasteboardWriting
-<NSPasteboardReading
 -types,NSArray*
 -availableTypeFromArray:,NSString*,NSArray*
 -setDataProvider:forTypes:,BOOL,id <NSPasteboardItemDataProvider>,NSArray*
@@ -15250,8 +15106,6 @@ HAppKit/AppKit.h
 
 *NSPrintInfo
 :NSObject
-<NSCopying
-<NSCoding
 +setSharedPrintInfo:,void,NSPrintInfo*
 +sharedPrintInfo,NSPrintInfo*
 -initWithDictionary:,id,NSDictionary*
@@ -15381,8 +15235,6 @@ HAppKit/AppKit.h
 
 *NSPDFInfo
 :NSObject
-<NSCopying
-<NSCoding
 -setURL:,void,NSURL*
 -URL,NSURL*
 -setFileExtensionHidden:,void,BOOL
@@ -15476,7 +15328,6 @@ HAppKit/AppKit.h
 
 *NSTextFinder
 :NSObject
-<NSCoding
 -init,id
 -set_:,void,__attribute_
 -_,__attribute_
@@ -15497,7 +15348,6 @@ HAppKit/AppKit.h
 
 *NSScrollView
 :NSView
-<NSTextFinderBarContainer
 +frameSizeForContentSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle:,NSSize,NSSize,Class,Class,NSBorderType,NSControlSize,NSScrollerStyle
 +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle:,NSSize,NSSize,Class,Class,NSBorderType,NSControlSize,NSScrollerStyle
 +frameSizeForContentSize:hasHorizontalScroller:hasVerticalScroller:borderType:,NSSize,NSSize,BOOL,BOOL,NSBorderType
@@ -15808,7 +15658,6 @@ HAppKit/AppKit.h
 
 *NSTextField
 :NSControl
-<NSUserInterfaceValidations
 -setBackgroundColor:,void,NSColor*
 -backgroundColor,NSColor*
 -setDrawsBackground:,void,BOOL
@@ -15855,8 +15704,6 @@ HAppKit/AppKit.h
 
 *NSLayoutManager
 :NSObject
-<NSCoding
-<NSGlyphStorage
 -init,id
 -textStorage,NSTextStorage*
 -setTextStorage:,void,NSTextStorage*
@@ -16000,8 +15847,6 @@ HAppKit/AppKit.h
 
 *NSTextContainer
 :NSObject
-<NSCoding
-<NSTextLayoutOrientationProvider
 -initWithContainerSize:,id,NSSize
 -layoutManager,NSLayoutManager*
 -setLayoutManager:,void,NSLayoutManager*
@@ -16048,8 +15893,6 @@ HAppKit/AppKit.h
 
 *NSTrackingArea
 :NSObject
-<NSCopying
-<NSCoding
 -initWithRect:options:owner:userInfo:,id,NSRect,NSTrackingAreaOptions,id,NSDictionary*
 -rect,NSRect
 -options,NSTrackingAreaOptions
@@ -16058,7 +15901,6 @@ HAppKit/AppKit.h
 
 *NSWindowController
 :NSResponder
-<NSCoding
 -initWithWindow:,id,NSWindow*
 -initWithWindowNibName:,id,NSString*
 -initWithWindowNibName:owner:,id,NSString*,id
@@ -16167,7 +16009,6 @@ HAppKit/AppKit.h
 
 *NSInputManager
 :NSObject
-<NSTextInput
 +currentInputManager,NSInputManager*
 +cycleToNextInputLanguage:,void,id
 +cycleToNextInputServerInLanguage:,void,id
@@ -16245,11 +16086,9 @@ HAppKit/AppKit.h
 
 *NSTextAttachmentCell
 :NSCell
-<NSTextAttachmentCell
 
 *NSTextAttachment
 :NSObject
-<NSCoding
 -initWithFileWrapper:,id,NSFileWrapper*
 -setFileWrapper:,void,NSFileWrapper*
 -fileWrapper,NSFileWrapper*
@@ -16266,11 +16105,6 @@ HAppKit/AppKit.h
 
 *NSTextView
 :NSText
-<NSTextInput
-<NSUserInterfaceValidations
-<NSTextInputClient
-<NSTextLayoutOrientationProvider
-<NSDraggingSource
 -initWithFrame:textContainer:,id,NSRect,NSTextContainer*
 -initWithFrame:,id,NSRect
 -textContainer,NSTextContainer*
@@ -16496,9 +16330,6 @@ HAppKit/AppKit.h
 
 *NSTableView
 :NSControl
-<NSUserInterfaceValidations
-<NSTextViewDelegate
-<NSDraggingSource
 -setDataSource:,void,id <NSTableViewDataSource>
 -dataSource,id <NSTableViewDataSource>
 -setDelegate:,void,id <NSTableViewDelegate>
@@ -16666,8 +16497,6 @@ HAppKit/AppKit.h
 
 *NSTableColumn
 :NSObject
-<NSCoding
-<NSUserInterfaceItemIdentification
 -initWithIdentifier:,id,NSString*
 -setIdentifier:,void,NSString*
 -identifier,NSString*
@@ -16803,8 +16632,6 @@ HAppKit/AppKit.h
 
 *NSInputServer
 :NSObject
-<NSInputServiceProvider
-<NSInputServerMouseTracker
 -name:,initWithDelegate:(id,NSString*
 
 *NSString
@@ -16831,8 +16658,6 @@ HAppKit/AppKit.h
 
 *NSRulerMarker
 :NSObject
-<NSCopying
-<NSCoding
 -initWithRulerView:markerLocation:image:imageOrigin:,id,NSRulerView*,CGFloat,NSImage*,NSPoint
 -ruler,NSRulerView*
 -setMarkerLocation:,void,CGFloat
@@ -16988,7 +16813,6 @@ HAppKit/AppKit.h
 
 *NSTabViewItem
 :NSObject
-<NSCoding
 -initWithIdentifier:,id,id
 -identifier,id
 -view,id
@@ -17065,8 +16889,6 @@ HAppKit/AppKit.h
 
 *NSBezierPath
 :NSObject
-<NSCopying
-<NSCoding
 +bezierPath,NSBezierPath*
 +bezierPathWithRect:,NSBezierPath*,NSRect
 +bezierPathWithOvalInRect:,NSBezierPath*,NSRect
@@ -17199,10 +17021,6 @@ HAppKit/AppKit.h
 
 *NSSound
 :NSObject
-<NSCopying
-<NSCoding
-<NSPasteboardReading
-<NSPasteboardWriting
 +soundNamed:,id,NSString*
 -initWithContentsOfURL:byReference:,id,NSURL*,BOOL
 -initWithContentsOfFile:byReference:,id,NSString*,BOOL
@@ -17243,7 +17061,6 @@ HAppKit/AppKit.h
 
 *NSMovie
 :NSObject
-<NSCoding
 -initWithMovie:,id,QTMovie*
 -QTMovie,QTMovie*
 
@@ -17293,7 +17110,6 @@ HAppKit/AppKit.h
 
 *NSOpenGLPixelFormat
 :NSObject
-<NSCoding
 -initWithAttributes:,id,const NSOpenGLPixelFormatAttribute*
 -initWithData:,id,NSData*
 -initWithCGLPixelFormatObj:,id,void*
@@ -17348,8 +17164,6 @@ HAppKit/AppKit.h
 
 *CALayer
 :NSObject
-<NSCoding
-<CAMediaTiming
 +layer,id
 -init,id
 -initWithLayer:,id,id
@@ -17616,8 +17430,6 @@ HAppKit/AppKit.h
 
 *NSToolbarItem
 :NSObject
-<NSCopying
-<NSValidatedUserInterfaceItem
 -initWithItemIdentifier:,id,NSString*
 -itemIdentifier,NSString*
 -toolbar,NSToolbar*
@@ -17707,8 +17519,6 @@ HAppKit/AppKit.h
 
 *NSGlyphInfo
 :NSObject
-<NSCopying
-<NSCoding
 +glyphInfoWithGlyphName:forFont:baseString:,NSGlyphInfo*,NSString*,NSFont*,NSString*
 +glyphInfoWithGlyph:forFont:baseString:,NSGlyphInfo*,NSGlyph,NSFont*,NSString*
 +glyphInfoWithCharacterIdentifier:collection:baseString:,NSGlyphInfo*,NSUInteger,NSCharacterCollection,NSString*
@@ -17718,8 +17528,6 @@ HAppKit/AppKit.h
 
 *NSShadow
 :NSObject
-<NSCopying
-<NSCoding
 -init,id
 -shadowOffset,NSSize
 -setShadowOffset:,void,NSSize
@@ -17919,7 +17727,6 @@ HAppKit/AppKit.h
 
 *NSController
 :NSObject
-<NSCoding
 -objectDidBeginEditing:,void,id
 -objectDidEndEditing:,void,id
 -discardEditing,void
@@ -18118,8 +17925,6 @@ HAppKit/AppKit.h
 
 *NSTextList
 :NSObject
-<NSCoding
-<NSCopying
 -initWithMarkerFormat:options:,id,NSString*,NSUInteger
 -markerFormat,NSString*
 -listOptions,NSUInteger
@@ -18129,8 +17934,6 @@ HAppKit/AppKit.h
 
 *NSTextBlock
 :NSObject
-<NSCoding
-<NSCopying
 -init,id
 -setValue:type:forDimension:,void,CGFloat,NSTextBlockValueType,NSTextBlockDimension
 -valueForDimension:,CGFloat,NSTextBlockDimension
@@ -18351,8 +18154,6 @@ HAppKit/AppKit.h
 
 *NSPropertyDescription
 :NSObject
-<NSCoding
-<NSCopying
 -entity,NSEntityDescription*
 -name,NSString*
 -setName:,void,NSString*
@@ -18393,8 +18194,6 @@ HAppKit/AppKit.h
 
 *NSPredicateEditorRowTemplate
 :NSObject
-<NSCoding
-<NSCopying
 -matchForPredicate:,double,NSPredicate*
 -templateViews,NSArray*
 -setPredicate:,void,NSPredicate*
@@ -18414,7 +18213,6 @@ HAppKit/AppKit.h
 
 *NSPathCell
 :NSActionCell
-<NSOpenSavePanelDelegate
 -pathStyle,NSPathStyle
 -setPathStyle:,void,NSPathStyle
 -URL,NSURL*
@@ -18470,8 +18268,6 @@ HAppKit/AppKit.h
 
 *NSPageController
 :NSViewController
-<NSAnimatablePropertyContainer
-<NSCoding
 -set_:,void,__attribute_
 -_,__attribute_
 -selectedViewController,NSViewController*
@@ -18510,7 +18306,6 @@ HAppKit/AppKit.h
 
 *NSCollectionViewItem
 :NSViewController
-<NSCopying
 -collectionView,NSCollectionView*
 -setSelected:,void,BOOL
 -isSelected,BOOL
@@ -18522,8 +18317,6 @@ HAppKit/AppKit.h
 
 *NSCollectionView
 :NSView
-<NSDraggingSource
-<NSDraggingDestination
 -setDelegate:,void,id <NSCollectionViewDelegate>
 -delegate,id <NSCollectionViewDelegate>
 -isFirstResponder,BOOL
@@ -19323,13 +19116,10 @@ HWebKit/WebKit.h
 
 *WebUndefined
 :NSObject
-<NSCoding
-<NSCopying
 +undefined,WebUndefined*
 
 *DOMObject
 :WebScriptObject
-<NSCopying
 
 *DOMObject
 (DOMLinkStyle
@@ -19337,7 +19127,6 @@ HWebKit/WebKit.h
 
 *DOMNode
 :DOMObject
-<DOMEventTarget
 -nodeName,NSString*
 -setNodeValue:,void,NSString*
 -nodeValue,NSString*
@@ -21137,8 +20926,6 @@ HWebKit/WebKit.h
 
 *WebArchive
 :NSObject
-<NSCoding
-<NSCopying
 -initWithMainResource:subresources:subframeArchives:,id,WebResource*,NSArray*,NSArray*
 -initWithData:,id,NSData*
 -mainResource,WebResource*
@@ -21171,9 +20958,6 @@ HWebKit/WebKit.h
 
 *NSEntityDescription
 :NSObject
-<NSCoding
-<NSCopying
-<NSFastEnumeration
 +entityForName:inManagedObjectContext:,NSEntityDescription*,NSString*,NSManagedObjectContext*
 +insertNewObjectForEntityForName:inManagedObjectContext:,id,NSString*,NSManagedObjectContext*
 -managedObjectModel,NSManagedObjectModel*
@@ -21235,14 +21019,12 @@ HWebKit/WebKit.h
 
 *NSPersistentStoreRequest
 :NSObject
-<NSCopying
 -affectedStores,NSArray*
 -setAffectedStores:,void,NSArray*
 -requestType,NSPersistentStoreRequestType
 
 *NSFetchRequest
 :NSPersistentStoreRequest
-<NSCoding
 +fetchRequestWithEntityName:,NSFetchRequest*,NSString*
 -init,id
 -initWithEntityName:,id,NSString*
@@ -21293,9 +21075,6 @@ HWebKit/WebKit.h
 
 *NSManagedObjectModel
 :NSObject
-<NSCoding
-<NSCopying
-<NSFastEnumeration
 +mergedModelFromBundles:,NSManagedObjectModel*,NSArray*
 +modelByMergingModels:,NSManagedObjectModel*,NSArray*
 -init,id
@@ -21363,7 +21142,6 @@ HWebKit/WebKit.h
 
 *NSManagedObjectID
 :NSObject
-<NSCopying
 -entity,NSEntityDescription*
 -persistentStore,NSPersistentStore*
 -isTemporaryID,BOOL
@@ -21371,8 +21149,6 @@ HWebKit/WebKit.h
 
 *NSManagedObjectContext
 :NSObject
-<NSCoding
-<NSLocking
 -initWithConcurrencyType:,id,NSManagedObjectContextConcurrencyType
 -performBlock:,void,id
 -performBlockAndWait:,void,id
@@ -21422,7 +21198,6 @@ HWebKit/WebKit.h
 
 *NSPersistentStoreCoordinator
 :NSObject
-<NSLocking
 +registeredStoreTypes __attribute__((availability(macosx,introduced=10.5))),NSDictionary*
 +registerStoreClass:forStoreType:,void,Class,NSString*
 +metadataForPersistentStoreOfType:URL:error:,NSDictionary*,NSString*,NSURL*,NSError**
@@ -21758,7 +21533,6 @@ HWebKit/WebKit.h
 
 *WebHistoryItem
 :NSObject
-<NSCopying
 -initWithURLString:title:lastVisitedTimeInterval:,id,NSString*,NSString*,NSTimeInterval
 -originalURLString,NSString*
 -URLString,NSString*
@@ -21797,7 +21571,6 @@ HWebKit/WebKit.h
 
 *WebPreferences
 :NSObject
-<NSCoding
 +standardPreferences,WebPreferences*
 -initWithIdentifier:,id,NSString*
 -identifier,NSString*
@@ -21858,8 +21631,6 @@ HWebKit/WebKit.h
 
 *WebResource
 :NSObject
-<NSCoding
-<NSCopying
 -initWithData:URL:MIMEType:textEncodingName:frameName:,id,NSData*,NSURL*,NSString*,NSString*,NSString*
 -data,NSData*
 -URL,NSURL*
@@ -22187,9 +21958,6 @@ HAddressBook/AddressBook.h
 
 *ABMultiValue
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSFastEnumeration
 -count,NSUInteger
 -valueAtIndex:,id,NSUInteger
 -labelAtIndex:,NSString*,NSUInteger
@@ -22216,7 +21984,6 @@ FQTKit
 HQTKit/QTKit.h
 *QTDataReference
 :NSObject
-<NSCoding
 +dataReferenceWithDataRef:type:,id,Handle,NSString*
 +dataReferenceWithDataRefData:type:,id,NSData*,NSString*
 +dataReferenceWithReferenceToFile:,id,NSString*
@@ -22280,8 +22047,6 @@ HQTKit/QTKit.h
 
 *QTMovie
 :NSObject
-<NSCoding
-<NSCopying
 -duration __attribute__((deprecated)),QTTime
 
 *QTMovie
@@ -22465,8 +22230,6 @@ HQTKit/QTKit.h
 
 *QTMovieView
 :NSView
-<NSCoding
-<NSUserInterfaceValidations
 -movie __attribute__((deprecated)),QTMovie*
 -setMovie:,void,QTMovie*
 -preservesAspectRatio __attribute__((deprecated)),BOOL
@@ -22539,8 +22302,6 @@ HQTKit/QTKit.h
 
 *CIFilter
 :NSObject
-<NSCoding
-<NSCopying
 -inputKeys,NSArray*
 -outputKeys,NSArray*
 -setDefaults,void
@@ -22567,9 +22328,6 @@ HQTKit/QTKit.h
 
 *CIFilterGenerator
 :NSObject
-<NSCoding
-<NSCopying
-<CIFilterConstructor
 +filterGenerator,CIFilterGenerator*
 +filterGeneratorWithContentsOfURL:,CIFilterGenerator*,NSURL*
 -initWithContentsOfURL:,id,NSURL*
@@ -22587,7 +22345,6 @@ HQTKit/QTKit.h
 
 *CIFilterShape
 :NSObject
-<NSCopying
 +shapeWithRect:,id,CGRect
 -initWithRect:,id,CGRect
 -transformBy:interior:,CIFilterShape*,CGAffineTransform,BOOL
@@ -22639,7 +22396,6 @@ HQTKit/QTKit.h
 
 *CISampler
 :NSObject
-<NSCopying
 +samplerWithImage:,CISampler*,CIImage*
 +samplerWithImage:keysAndValues:,CISampler*,CIImage*,id,...
 +samplerWithImage:options:,CISampler*,CIImage*,NSDictionary*
@@ -22681,10 +22437,6 @@ HQTKit/QTKit.h
 
 *CAAnimation
 :NSObject
-<NSCoding
-<NSCopying
-<CAMediaTiming
-<CAAction
 +animation,id
 +defaultValueForKey:,id,NSString*
 -shouldArchiveValueForKey:,BOOL,NSString*
@@ -22769,7 +22521,6 @@ HQTKit/QTKit.h
 
 *CAConstraint
 :NSObject
-<NSCoding
 +constraintWithAttribute:relativeTo:attribute:scale:offset:,id,CAConstraintAttribute,NSString*,CAConstraintAttribute,CGFloat,CGFloat
 +constraintWithAttribute:relativeTo:attribute:offset:,id,CAConstraintAttribute,NSString*,CAConstraintAttribute,CGFloat
 +constraintWithAttribute:relativeTo:attribute:,id,CAConstraintAttribute,NSString*,CAConstraintAttribute
@@ -22781,8 +22532,6 @@ HQTKit/QTKit.h
 
 *CAEmitterCell
 :NSObject
-<NSCoding
-<CAMediaTiming
 +emitterCell,id
 +defaultValueForKey:,id,NSString*
 -shouldArchiveValueForKey:,BOOL,NSString*
@@ -22871,7 +22620,6 @@ HQTKit/QTKit.h
 
 *CAMediaTimingFunction
 :NSObject
-<NSCoding
 +functionWithName:,id,NSString*
 +functionWithControlPoints:,id,float,...,...,...
 -initWithControlPoints:,id,float,...,...,...
@@ -23013,7 +22761,6 @@ HQTKit/QTKit.h
 
 *CAValueFunction
 :NSObject
-<NSCoding
 +functionWithName:,id,NSString*
 -name,NSString*
 
@@ -23122,7 +22869,6 @@ HQTKit/QTKit.h
 
 *QTCaptureDevice
 :NSObject
-<NSCoding
 +inputDevices __attribute__((deprecated)),NSArray*
 +inputDevicesWithMediaType:,NSArray*,NSString*
 +defaultInputDeviceWithMediaType:,QTCaptureDevice*,NSString*
@@ -23240,9 +22986,6 @@ HQTKit/QTKit.h
 
 *QTMetadataItem
 :NSObject
-<NSCopying
-<NSMutableCopying
-<NSCoding
 -key,id<NSCopying>
 -keySpace,NSString*
 -locale,NSLocale*
@@ -23561,3 +23304,2559 @@ HScreenSaver/ScreenSaver.h
 :NSUserDefaults
 +defaultsForModuleWithName:,id,NSString*
 
+FAVFoundation
+HAVFoundation/AVFoundation.h
+*AVAudioPlayer
+:NSObject
+-initWithContentsOfURL:error:,id,NSURL*,NSError**
+-initWithData:error:,id,NSData*,NSError**
+-initWithContentsOfURL:fileTypeHint:error:,id,NSURL*,NSString*,NSError**
+-initWithData:fileTypeHint:error:,id,NSData*,NSString*,NSError**
+-prepareToPlay,BOOL
+-play,BOOL
+-playAtTime:,BOOL,NSTimeInterval
+-pause,void
+-stop,void
+-isPlaying,BOOL
+-numberOfChannels,NSUInteger
+-duration,NSTimeInterval
+-setDelegate:,void,id<AVAudioPlayerDelegate>
+-delegate,id<AVAudioPlayerDelegate>
+-url,NSURL*
+-data,NSData*
+-setPan:,void,float
+-pan,float
+-setVolume:,void,float
+-volume,float
+-setEnableRate:,void,BOOL
+-enableRate,BOOL
+-setRate:,void,float
+-rate,float
+-setCurrentTime:,void,NSTimeInterval
+-currentTime,NSTimeInterval
+-deviceCurrentTime,NSTimeInterval
+-setNumberOfLoops:,void,NSInteger
+-numberOfLoops,NSInteger
+-settings,NSDictionary*
+-setMeteringEnabled:,void,BOOL
+-isMeteringEnabled,BOOL
+-updateMeters,void
+-peakPowerForChannel:,float,NSUInteger
+-averagePowerForChannel:,float,NSUInteger
+
+*AVAudioRecorder
+:NSObject
+-initWithURL:settings:error:,id,NSURL*,NSDictionary*,NSError**
+-prepareToRecord,BOOL
+-record,BOOL
+-recordAtTime:,BOOL,NSTimeInterval
+-recordForDuration:,BOOL,NSTimeInterval
+-recordAtTime:forDuration:,BOOL,NSTimeInterval,NSTimeInterval
+-pause,void
+-stop,void
+-deleteRecording,BOOL
+-isRecording,BOOL
+-url,NSURL*
+-settings,NSDictionary*
+-setDelegate:,void,id<AVAudioRecorderDelegate>
+-delegate,id<AVAudioRecorderDelegate>
+-currentTime,NSTimeInterval
+-deviceCurrentTime,NSTimeInterval
+-setMeteringEnabled:,void,BOOL
+-isMeteringEnabled,BOOL
+-updateMeters,void
+-peakPowerForChannel:,float,NSUInteger
+-averagePowerForChannel:,float,NSUInteger
+
+*AVAsset
+:NSObject
++assetWithURL:,id,NSURL*
+-duration,CMTime
+-preferredRate,float
+-preferredVolume,float
+-preferredTransform,CGAffineTransform
+-naturalSize,CGSize
+
+*AVAsset
+(AVAssetAsynchronousLoading
+-providesPreciseDurationAndTiming,BOOL
+-cancelLoading,void
+
+*AVAsset
+(AVAssetReferenceRestrictions
+-referenceRestrictions,AVAssetReferenceRestrictions
+
+*AVAsset
+(AVAssetTrackInspection
+-tracks,NSArray*
+-trackWithTrackID:,AVAssetTrack*,CMPersistentTrackID
+-tracksWithMediaType:,NSArray*,NSString*
+-tracksWithMediaCharacteristic:,NSArray*,NSString*
+-trackGroups,NSArray*
+
+*AVAsset
+(AVAssetMetadataReading
+-creationDate,AVMetadataItem*
+-lyrics,NSString*
+-commonMetadata,NSArray*
+-availableMetadataFormats,NSArray*
+-metadataForFormat:,NSArray*,NSString*
+
+*AVAsset
+(AVAssetChapterInspection
+-availableChapterLocales,NSArray*
+-chapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:,NSArray*,NSLocale*,NSArray*
+-chapterMetadataGroupsBestMatchingPreferredLanguages:,NSArray*,NSArray*
+
+*AVAsset
+(AVAssetMediaSelection
+-availableMediaCharacteristicsWithMediaSelectionOptions,NSArray*
+-mediaSelectionGroupForMediaCharacteristic:,AVMediaSelectionGroup*,NSString*
+
+*AVAsset
+(AVAssetProtectedContent
+-hasProtectedContent,BOOL
+
+*AVAsset
+(AVAssetUsability
+-isPlayable,BOOL
+-isExportable,BOOL
+-isReadable,BOOL
+-isComposable,BOOL
+
+*AVURLAsset
+:AVAsset
++audiovisualTypes __attribute__((availability(macosx,introduced=10.7))),NSArray*
++audiovisualMIMETypes __attribute__((availability(macosx,introduced=10.7))),NSArray*
++isPlayableExtendedMIMEType:,BOOL,NSString*
++URLAssetWithURL:options:,AVURLAsset*,NSURL*,NSDictionary*
+-initWithURL:options:,id,NSURL*,NSDictionary*
+-URL,NSURL*
+
+*AVURLAsset
+(AVURLAssetURLHandling
+-resourceLoader,AVAssetResourceLoader*
+
+*AVURLAsset
+(AVAssetCompositionUtility
+-compatibleTrackForCompositionTrack:,AVAssetTrack*,AVCompositionTrack*
+
+*AVAssetExportSession
+:NSObject
++allExportPresets,NSArray*
++exportPresetsCompatibleWithAsset:,NSArray*,AVAsset*
++determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:,void,NSString*,AVAsset*,NSString*,id
++exportSessionWithAsset:presetName:,AVAssetExportSession*,AVAsset*,NSString*
+-initWithAsset:presetName:,id,AVAsset*,NSString*
+-presetName,NSString*
+-asset,AVAsset*
+-supportedFileTypes,NSArray*
+-setOutputFileType:,void,NSString*
+-outputFileType,NSString*
+-setOutputURL:,void,NSURL*
+-outputURL,NSURL*
+-status,AVAssetExportSessionStatus
+-error,NSError*
+-progress,float
+-long,long
+-setTimeRange:,void,CMTimeRange
+-timeRange,CMTimeRange
+-setMetadata:,void,NSArray*
+-metadata,NSArray*
+-setMetadataItemFilter:,void,AVMetadataItemFilter*
+-metadataItemFilter,AVMetadataItemFilter*
+-setAudioTimePitchAlgorithm:,void,NSString*
+-audioTimePitchAlgorithm,NSString*
+-setAudioMix:,void,AVAudioMix*
+-audioMix,AVAudioMix*
+-setVideoComposition:,void,AVVideoComposition*
+-videoComposition,AVVideoComposition*
+-customVideoCompositor,id<AVVideoCompositing>
+-setShouldOptimizeForNetworkUse:,void,BOOL
+-shouldOptimizeForNetworkUse,BOOL
+-determineCompatibleFileTypesWithCompletionHandler:,void,id
+-exportAsynchronouslyWithCompletionHandler:,void,id
+-cancelExport,void
+
+*AVAssetImageGenerator
+:NSObject
+-asset,AVAsset*
+-setAppliesPreferredTrackTransform:,void,BOOL
+-appliesPreferredTrackTransform,BOOL
+-setMaximumSize:,void,CGSize
+-maximumSize,CGSize
+-setApertureMode:,void,NSString*
+-apertureMode,NSString*
+-setVideoComposition:,void,AVVideoComposition*
+-videoComposition,AVVideoComposition*
+-customVideoCompositor,id<AVVideoCompositing>
+-setRequestedTimeToleranceBefore:,void,CMTime
+-requestedTimeToleranceBefore,CMTime
+-setRequestedTimeToleranceAfter:,void,CMTime
+-requestedTimeToleranceAfter,CMTime
++assetImageGeneratorWithAsset:,AVAssetImageGenerator*,AVAsset*
+-initWithAsset:,id,AVAsset*
+-copyCGImageAtTime:actualTime:error:,CGImageRef,CMTime,CMTime*,NSError**
+-generateCGImagesAsynchronouslyForTimes:completionHandler:,void,NSArray*,AVAssetImageGeneratorCompletionHandler
+-cancelAllCGImageGeneration,void
+
+*AVAssetReader
+:NSObject
++assetReaderWithAsset:error:,AVAssetReader*,AVAsset*,NSError**
+-initWithAsset:error:,id,AVAsset*,NSError**
+-asset,AVAsset*
+-status,AVAssetReaderStatus
+-error,NSError*
+-setTimeRange:,void,CMTimeRange
+-timeRange,CMTimeRange
+-outputs,NSArray*
+-canAddOutput:,BOOL,AVAssetReaderOutput*
+-addOutput:,void,AVAssetReaderOutput*
+-startReading,BOOL
+-cancelReading,void
+
+*AVVideoCompositionRenderContext
+:NSObject
+-size,CGSize
+-renderTransform,CGAffineTransform
+-renderScale,float
+-pixelAspectRatio,AVPixelAspectRatio
+-edgeWidths,AVEdgeWidths
+-highQualityRendering,BOOL
+-videoComposition,AVVideoComposition*
+-newPixelBuffer,CVPixelBufferRef
+
+*AVAsynchronousVideoCompositionRequest
+:NSObject
+-renderContext,AVVideoCompositionRenderContext*
+-compositionTime,CMTime
+-sourceTrackIDs,NSArray*
+-videoCompositionInstruction,id<AVVideoCompositionInstruction>
+-sourceFrameByTrackID:,CVPixelBufferRef,CMPersistentTrackID
+-finishWithComposedVideoFrame:,void,CVPixelBufferRef
+-finishWithError:,void,NSError*
+-finishCancelledRequest,void
+
+*AVVideoComposition
+:NSObject
++videoCompositionWithPropertiesOfAsset:,AVVideoComposition*,AVAsset*
+-customVideoCompositorClass,Class<AVVideoCompositing>
+-frameDuration,CMTime
+-renderSize,CGSize
+-instructions,NSArray*
+-animationTool,AVVideoCompositionCoreAnimationTool*
+
+*AVMutableVideoComposition
+:AVVideoComposition
++videoComposition,AVMutableVideoComposition*
++videoCompositionWithPropertiesOfAsset:,AVMutableVideoComposition*,AVAsset*
+-setCustomVideoCompositorClass:,void,Class<AVVideoCompositing>
+-customVideoCompositorClass,Class<AVVideoCompositing>
+-setFrameDuration:,void,CMTime
+-frameDuration,CMTime
+-setRenderSize:,void,CGSize
+-renderSize,CGSize
+-setInstructions:,void,NSArray*
+-instructions,NSArray*
+-setAnimationTool:,void,AVVideoCompositionCoreAnimationTool*
+-animationTool,AVVideoCompositionCoreAnimationTool*
+
+*AVVideoCompositionInstruction
+:NSObject
+-timeRange,CMTimeRange
+-set_:,void,__attribute_
+-_,__attribute_
+-layerInstructions,NSArray*
+-enablePostProcessing,BOOL
+-requiredSourceTrackIDs,NSArray*
+-passthroughTrackID,CMPersistentTrackID
+
+*AVMutableVideoCompositionInstruction
+:AVVideoCompositionInstruction
++videoCompositionInstruction,AVMutableVideoCompositionInstruction*
+-setTimeRange:,void,CMTimeRange
+-timeRange,CMTimeRange
+-set_:,void,__attribute_
+-_,__attribute_
+-setLayerInstructions:,void,NSArray*
+-layerInstructions,NSArray*
+-setEnablePostProcessing:,void,BOOL
+-enablePostProcessing,BOOL
+
+*AVVideoCompositionLayerInstruction
+:NSObject
+-trackID,CMPersistentTrackID
+-getTransformRampForTime:startTransform:endTransform:timeRange:,BOOL,CMTime,CGAffineTransform*,CGAffineTransform*,CMTimeRange*
+-getOpacityRampForTime:startOpacity:endOpacity:timeRange:,BOOL,CMTime,float*,float*,CMTimeRange*
+-getCropRectangleRampForTime:startCropRectangle:endCropRectangle:timeRange:,BOOL,CMTime,CGRect*,CGRect*,CMTimeRange*
+
+*AVMutableVideoCompositionLayerInstruction
+:AVVideoCompositionLayerInstruction
++videoCompositionLayerInstructionWithAssetTrack:,AVMutableVideoCompositionLayerInstruction*,AVAssetTrack*
++videoCompositionLayerInstruction,AVMutableVideoCompositionLayerInstruction*
+-setTrackID:,void,CMPersistentTrackID
+-trackID,CMPersistentTrackID
+-setTransformRampFromStartTransform:toEndTransform:timeRange:,void,CGAffineTransform,CGAffineTransform,CMTimeRange
+-setTransform:atTime:,void,CGAffineTransform,CMTime
+-setOpacityRampFromStartOpacity:toEndOpacity:timeRange:,void,float,float,CMTimeRange
+-setOpacity:atTime:,void,float,CMTime
+-setCropRectangleRampFromStartCropRectangle:toEndCropRectangle:timeRange:,void,CGRect,CGRect,CMTimeRange
+-setCropRectangle:atTime:,void,CGRect,CMTime
+
+*AVVideoCompositionCoreAnimationTool
+:NSObject
++videoCompositionCoreAnimationToolWithAdditionalLayer:asTrackID:,AVVideoCompositionCoreAnimationTool*,CALayer*,CMPersistentTrackID
++videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:inLayer:,AVVideoCompositionCoreAnimationTool*,CALayer*,CALayer*
++videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:inLayer:,AVVideoCompositionCoreAnimationTool*,NSArray*,CALayer*
+
+*AVAsset
+(AVAssetVideoCompositionUtility
+-unusedTrackID,CMPersistentTrackID
+
+*AVVideoComposition
+(AVVideoCompositionValidation
+-isValidForAsset:timeRange:validationDelegate:,BOOL,AVAsset*,CMTimeRange,id<AVVideoCompositionValidationHandling>
+
+*AVAssetReaderOutput
+:NSObject
+-mediaType,NSString*
+-setAlwaysCopiesSampleData:,void,BOOL
+-alwaysCopiesSampleData,BOOL
+-copyNextSampleBuffer,CMSampleBufferRef
+
+*AVAssetReaderTrackOutput
+:AVAssetReaderOutput
++assetReaderTrackOutputWithTrack:outputSettings:,AVAssetReaderTrackOutput*,AVAssetTrack*,NSDictionary*
+-initWithTrack:outputSettings:,id,AVAssetTrack*,NSDictionary*
+-track,AVAssetTrack*
+-outputSettings,NSDictionary*
+-setAudioTimePitchAlgorithm:,void,NSString*
+-audioTimePitchAlgorithm,NSString*
+
+*AVAssetReaderAudioMixOutput
+:AVAssetReaderOutput
++assetReaderAudioMixOutputWithAudioTracks:audioSettings:,AVAssetReaderAudioMixOutput*,NSArray*,NSDictionary*
+-initWithAudioTracks:audioSettings:,id,NSArray*,NSDictionary*
+-audioTracks,NSArray*
+-audioSettings,NSDictionary*
+-setAudioMix:,void,AVAudioMix*
+-audioMix,AVAudioMix*
+-setAudioTimePitchAlgorithm:,void,NSString*
+-audioTimePitchAlgorithm,NSString*
+
+*AVAssetReaderVideoCompositionOutput
+:AVAssetReaderOutput
++assetReaderVideoCompositionOutputWithVideoTracks:videoSettings:,AVAssetReaderVideoCompositionOutput*,NSArray*,NSDictionary*
+-initWithVideoTracks:videoSettings:,id,NSArray*,NSDictionary*
+-videoTracks,NSArray*
+-videoSettings,NSDictionary*
+-setVideoComposition:,void,AVVideoComposition*
+-videoComposition,AVVideoComposition*
+-customVideoCompositor,id<AVVideoCompositing>
+
+*AVAssetResourceLoader
+:NSObject
+-setDelegate:queue:,void,id<AVAssetResourceLoaderDelegate>,dispatch_queue_t
+-delegate,id<AVAssetResourceLoaderDelegate>
+-delegateQueue,dispatch_queue_t
+
+*AVAssetResourceLoadingRequest
+:NSObject
+-request,NSURLRequest*
+-isFinished,BOOL
+-isCancelled,BOOL
+-contentInformationRequest,AVAssetResourceLoadingContentInformationRequest*
+-dataRequest,AVAssetResourceLoadingDataRequest*
+-setResponse:,void,NSURLResponse*
+-response,NSURLResponse*
+-setRedirect:,void,NSURLRequest*
+-redirect,NSURLRequest*
+-finishLoading __attribute__((availability(macosx,introduced=10.9))),void
+-finishLoadingWithError:,void,NSError*
+
+*AVAssetResourceLoadingContentInformationRequest
+:NSObject
+-setContentType:,void,NSString*
+-contentType,NSString*
+-setLong:,void,long
+-long,long
+-setByteRangeAccessSupported:,void,BOOL
+-isByteRangeAccessSupported,BOOL
+
+*AVAssetResourceLoadingDataRequest
+:NSObject
+-long,long
+-requestedLength,NSInteger
+-long,long
+-respondWithData:,void,NSData*
+
+*AVAssetResourceLoadingRequest
+(AVAssetResourceLoader_ContentKeyRequestSupport
+-streamingContentKeyRequestDataForApp:contentIdentifier:options:error:,NSData*,NSData*,NSData*,NSDictionary*,NSError**
+
+*AVAssetResourceLoadingRequest
+(AVAssetResourceLoadingRequestDeprecated
+-finishLoadingWithResponse:data:redirect:,void,NSURLResponse*,NSData*,NSURLRequest*
+
+*AVAssetTrackSegment
+:NSObject
+-timeMapping,CMTimeMapping
+-isEmpty,BOOL
+
+*AVAssetTrack
+:NSObject
+-asset,AVAsset*
+-trackID,CMPersistentTrackID
+
+*AVAssetTrack
+(AVAssetTrackBasicPropertiesAndCharacteristics
+-mediaType,NSString*
+-formatDescriptions,NSArray*
+-isPlayable,BOOL
+-isEnabled,BOOL
+-isSelfContained,BOOL
+-long,long
+-hasMediaCharacteristic:,BOOL,NSString*
+
+*AVAssetTrack
+(AVAssetTrackTemporalProperties
+-timeRange,CMTimeRange
+-naturalTimeScale,CMTimeScale
+-estimatedDataRate,float
+
+*AVAssetTrack
+(AVAssetTrackLanguageProperties
+-languageCode,NSString*
+-extendedLanguageTag,NSString*
+
+*AVAssetTrack
+(AVAssetTrackPropertiesForVisualCharacteristic
+-naturalSize,CGSize
+-preferredTransform,CGAffineTransform
+
+*AVAssetTrack
+(AVAssetTrackPropertiesForAudibleCharacteristic
+-preferredVolume,float
+
+*AVAssetTrack
+(AVAssetTrackPropertiesForFrameBasedCharacteristic
+-nominalFrameRate,float
+
+*AVAssetTrack
+(AVAssetTrackSegments
+-segments,NSArray*
+-segmentForTrackTime:,AVAssetTrackSegment*,CMTime
+-samplePresentationTimeForTrackTime:,CMTime,CMTime
+
+*AVAssetTrack
+(AVAssetTrackMetadataReading
+-commonMetadata,NSArray*
+-availableMetadataFormats,NSArray*
+-metadataForFormat:,NSArray*,NSString*
+
+*AVAssetTrack
+(AVAssetTrackTrackAssociations
+-availableTrackAssociationTypes,NSArray*
+-associatedTracksOfType:,NSArray*,NSString*
+
+*AVAssetTrackGroup
+:NSObject
+-trackIDs,NSArray*
+
+*AVMediaSelectionGroup
+:NSObject
+-options,NSArray*
+-allowsEmptySelection,BOOL
+-mediaSelectionOptionWithPropertyList:,AVMediaSelectionOption*,id
+
+*AVMediaSelectionGroup
+(AVMediaSelectionOptionFiltering
++playableMediaSelectionOptionsFromArray:,NSArray*,NSArray*
++mediaSelectionOptionsFromArray:filteredAndSortedAccordingToPreferredLanguages:,NSArray*,NSArray*,NSArray*
++mediaSelectionOptionsFromArray:withLocale:,NSArray*,NSArray*,NSLocale*
++mediaSelectionOptionsFromArray:withMediaCharacteristics:,NSArray*,NSArray*,NSArray*
++mediaSelectionOptionsFromArray:withoutMediaCharacteristics:,NSArray*,NSArray*,NSArray*
+
+*AVMediaSelectionOption
+:NSObject
+-mediaType,NSString*
+-mediaSubTypes,NSArray*
+-hasMediaCharacteristic:,BOOL,NSString*
+-isPlayable,BOOL
+-extendedLanguageTag,NSString*
+-locale,NSLocale*
+-commonMetadata,NSArray*
+-availableMetadataFormats,NSArray*
+-metadataForFormat:,NSArray*,NSString*
+-associatedMediaSelectionOptionInMediaSelectionGroup:,AVMediaSelectionOption*,AVMediaSelectionGroup*
+-propertyList,id
+-displayNameWithLocale:,NSString*,NSLocale*
+-displayName,NSString*
+
+*AVAssetWriter
+:NSObject
++assetWriterWithURL:fileType:error:,AVAssetWriter*,NSURL*,NSString*,NSError**
+-initWithURL:fileType:error:,id,NSURL*,NSString*,NSError**
+-outputURL,NSURL*
+-outputFileType,NSString*
+-availableMediaTypes,NSArray*
+-status,AVAssetWriterStatus
+-error,NSError*
+-setMetadata:,void,NSArray*
+-metadata,NSArray*
+-setShouldOptimizeForNetworkUse:,void,BOOL
+-shouldOptimizeForNetworkUse,BOOL
+-inputs,NSArray*
+-canApplyOutputSettings:forMediaType:,BOOL,NSDictionary*,NSString*
+-canAddInput:,BOOL,AVAssetWriterInput*
+-addInput:,void,AVAssetWriterInput*
+-startWriting,BOOL
+-startSessionAtSourceTime:,void,CMTime
+-endSessionAtSourceTime:,void,CMTime
+-cancelWriting,void
+-finishWriting __attribute__((availability(macosx,introduced=10.7 ,deprecated=10.9,message="" ))),BOOL
+-finishWritingWithCompletionHandler:,void,id
+
+*AVAssetWriter
+(AVAssetWriterFileTypeSpecificProperties
+-setMovieFragmentInterval:,void,CMTime
+-movieFragmentInterval,CMTime
+-setMovieTimeScale:,void,CMTimeScale
+-movieTimeScale,CMTimeScale
+
+*AVAssetWriter
+(AVAssetWriterInputGroups
+-canAddInputGroup:,BOOL,AVAssetWriterInputGroup*
+-addInputGroup:,void,AVAssetWriterInputGroup*
+-inputGroups,NSArray*
+
+*AVAssetWriterInputGroup
+:AVMediaSelectionGroup
++assetWriterInputGroupWithInputs:defaultInput:,AVAssetWriterInputGroup*,NSArray*,AVAssetWriterInput*
+-initWithInputs:defaultInput:,id,NSArray*,AVAssetWriterInput*
+-inputs,NSArray*
+-defaultInput,AVAssetWriterInput*
+
+*AVAssetWriterInput
+:NSObject
++assetWriterInputWithMediaType:outputSettings:,AVAssetWriterInput*,NSString*,NSDictionary*
++assetWriterInputWithMediaType:outputSettings:sourceFormatHint:,AVAssetWriterInput*,NSString*,NSDictionary*,CMFormatDescriptionRef
+-initWithMediaType:outputSettings:,id,NSString*,NSDictionary*
+-initWithMediaType:outputSettings:sourceFormatHint:,id,NSString*,NSDictionary*,CMFormatDescriptionRef
+-mediaType,NSString*
+-outputSettings,NSDictionary*
+-_,__attribute_
+-setMetadata:,void,NSArray*
+-metadata,NSArray*
+-isReadyForMoreMediaData,BOOL
+-setExpectsMediaDataInRealTime:,void,BOOL
+-expectsMediaDataInRealTime,BOOL
+-requestMediaDataWhenReadyOnQueue:usingBlock:,void,dispatch_queue_t,id
+-appendSampleBuffer:,BOOL,CMSampleBufferRef
+-markAsFinished,void
+
+*AVAssetWriterInput
+(AVAssetWriterInputLanguageProperties
+-setLanguageCode:,void,NSString*
+-languageCode,NSString*
+-setExtendedLanguageTag:,void,NSString*
+-extendedLanguageTag,NSString*
+
+*AVAssetWriterInput
+(AVAssetWriterInputPropertiesForVisualCharacteristic
+-setNaturalSize:,void,CGSize
+-naturalSize,CGSize
+-setTransform:,void,CGAffineTransform
+-transform,CGAffineTransform
+
+*AVAssetWriterInput
+(AVAssetWriterInputPropertiesForAudibleCharacteristic
+-setPreferredVolume:,void,float
+-preferredVolume,float
+
+*AVAssetWriterInput
+(AVAssetWriterInputFileTypeSpecificProperties
+-setMarksOutputTrackAsEnabled:,void,BOOL
+-marksOutputTrackAsEnabled,BOOL
+-setMediaTimeScale:,void,CMTimeScale
+-mediaTimeScale,CMTimeScale
+
+*AVAssetWriterInput
+(AVAssetWriterInputTrackAssociations
+-canAddTrackAssociationWithTrackOfInput:type:,BOOL,AVAssetWriterInput*,NSString*
+-addTrackAssociationWithTrackOfInput:type:,void,AVAssetWriterInput*,NSString*
+
+*AVAssetWriterInputPixelBufferAdaptor
+:NSObject
++assetWriterInputPixelBufferAdaptorWithAssetWriterInput:sourcePixelBufferAttributes:,AVAssetWriterInputPixelBufferAdaptor*,AVAssetWriterInput*,NSDictionary*
+-initWithAssetWriterInput:sourcePixelBufferAttributes:,id,AVAssetWriterInput*,NSDictionary*
+-assetWriterInput,AVAssetWriterInput*
+-sourcePixelBufferAttributes,NSDictionary*
+-pixelBufferPool,CVPixelBufferPoolRef
+-appendPixelBuffer:withPresentationTime:,BOOL,CVPixelBufferRef,CMTime
+
+*AVAudioMix
+:NSObject
+-inputParameters,NSArray*
+
+*AVMutableAudioMix
+:AVAudioMix
++audioMix,AVMutableAudioMix*
+-setInputParameters:,void,NSArray*
+-inputParameters,NSArray*
+
+*AVAudioMixInputParameters
+:NSObject
+-trackID,CMPersistentTrackID
+-_,__attribute_
+-getVolumeRampForTime:startVolume:endVolume:timeRange:,BOOL,CMTime,float*,float*,CMTimeRange*
+
+*AVMutableAudioMixInputParameters
+:AVAudioMixInputParameters
++audioMixInputParametersWithTrack:,AVMutableAudioMixInputParameters*,AVAssetTrack*
++audioMixInputParameters,AVMutableAudioMixInputParameters*
+-setTrackID:,void,CMPersistentTrackID
+-trackID,CMPersistentTrackID
+-set_:,void,__attribute_
+-_,__attribute_
+-setVolumeRampFromStartVolume:toEndVolume:timeRange:,void,float,float,CMTimeRange
+-setVolume:atTime:,void,float,CMTime
+
+*AVCaptureDevice
+:NSObject
++devices,NSArray*
++devicesWithMediaType:,NSArray*,NSString*
++defaultDeviceWithMediaType:,AVCaptureDevice*,NSString*
++deviceWithUniqueID:,AVCaptureDevice*,NSString*
+-uniqueID,NSString*
+-modelID,NSString*
+-localizedName,NSString*
+-manufacturer,NSString*
+-transportType,int32_t
+-hasMediaType:,BOOL,NSString*
+-lockForConfiguration:,BOOL,NSError**
+-unlockForConfiguration,void
+-supportsAVCaptureSessionPreset:,BOOL,NSString*
+-isConnected,BOOL
+-isInUseByAnotherApplication,BOOL
+-isSuspended,BOOL
+-linkedDevices,NSArray*
+-formats,NSArray*
+-setActiveFormat:,void,AVCaptureDeviceFormat*
+-activeFormat,AVCaptureDeviceFormat*
+-setActiveVideoMinFrameDuration:,void,CMTime
+-activeVideoMinFrameDuration,CMTime
+-setActiveVideoMaxFrameDuration:,void,CMTime
+-activeVideoMaxFrameDuration,CMTime
+-inputSources,NSArray*
+-setActiveInputSource:,void,AVCaptureDeviceInputSource*
+-activeInputSource,AVCaptureDeviceInputSource*
+
+*AVCaptureDevice
+(AVCaptureDevicePosition
+-position,AVCaptureDevicePosition
+
+*AVCaptureDevice
+(AVCaptureDeviceFlash
+-hasFlash,BOOL
+-isFlashAvailable,BOOL
+-isFlashActive,BOOL
+-isFlashModeSupported:,BOOL,AVCaptureFlashMode
+-setFlashMode:,void,AVCaptureFlashMode
+-flashMode,AVCaptureFlashMode
+
+*AVCaptureDevice
+(AVCaptureDeviceTorch
+-hasTorch,BOOL
+-isTorchAvailable,BOOL
+-isTorchActive,BOOL
+-torchLevel,float
+-isTorchModeSupported:,BOOL,AVCaptureTorchMode
+-setTorchMode:,void,AVCaptureTorchMode
+-torchMode,AVCaptureTorchMode
+-setTorchModeOnWithLevel:error:,BOOL,float,NSError**
+
+*AVCaptureDevice
+(AVCaptureDeviceFocus
+-isFocusModeSupported:,BOOL,AVCaptureFocusMode
+-setFocusMode:,void,AVCaptureFocusMode
+-focusMode,AVCaptureFocusMode
+-isFocusPointOfInterestSupported,BOOL
+-setFocusPointOfInterest:,void,CGPoint
+-focusPointOfInterest,CGPoint
+-isAdjustingFocus,BOOL
+
+*AVCaptureDevice
+(AVCaptureDeviceExposure
+-isExposureModeSupported:,BOOL,AVCaptureExposureMode
+-setExposureMode:,void,AVCaptureExposureMode
+-exposureMode,AVCaptureExposureMode
+-isExposurePointOfInterestSupported,BOOL
+-setExposurePointOfInterest:,void,CGPoint
+-exposurePointOfInterest,CGPoint
+-isAdjustingExposure,BOOL
+
+*AVCaptureDevice
+(AVCaptureDeviceWhiteBalance
+-isWhiteBalanceModeSupported:,BOOL,AVCaptureWhiteBalanceMode
+-setWhiteBalanceMode:,void,AVCaptureWhiteBalanceMode
+-whiteBalanceMode,AVCaptureWhiteBalanceMode
+-isAdjustingWhiteBalance,BOOL
+
+*AVCaptureDevice
+(AVCaptureDeviceSubjectAreaChangeMonitoring
+-setSubjectAreaChangeMonitoringEnabled:,void,BOOL
+-isSubjectAreaChangeMonitoringEnabled,BOOL
+
+*AVCaptureDevice
+(AVCaptureDeviceLowLightBoost
+-isLowLightBoostSupported,BOOL
+-isLowLightBoostEnabled,BOOL
+-setAutomaticallyEnablesLowLightBoostWhenAvailable:,void,BOOL
+-automaticallyEnablesLowLightBoostWhenAvailable,BOOL
+
+*AVCaptureDevice
+(AVCaptureDeviceTransportControls
+-transportControlsSupported,BOOL
+-transportControlsPlaybackMode,AVCaptureDeviceTransportControlsPlaybackMode
+-transportControlsSpeed,AVCaptureDeviceTransportControlsSpeed
+-setTransportControlsPlaybackMode:speed:,void,AVCaptureDeviceTransportControlsPlaybackMode,AVCaptureDeviceTransportControlsSpeed
+
+*AVFrameRateRange
+:NSObject
+-minFrameRate,Float64
+-maxFrameRate,Float64
+-maxFrameDuration,CMTime
+-minFrameDuration,CMTime
+
+*AVCaptureDeviceFormat
+:NSObject
+-mediaType,NSString*
+-formatDescription,CMFormatDescriptionRef
+-videoSupportedFrameRateRanges,NSArray*
+
+*AVCaptureDeviceInputSource
+:NSObject
+-inputSourceID,NSString*
+-localizedName,NSString*
+
+*AVCaptureInput
+:NSObject
+-ports,NSArray*
+
+*AVCaptureInputPort
+:NSObject
+-input,AVCaptureInput*
+-mediaType,NSString*
+-formatDescription,CMFormatDescriptionRef
+-setEnabled:,void,BOOL
+-isEnabled,BOOL
+-_,__attribute_
+
+*AVCaptureDeviceInput
+:AVCaptureInput
++deviceInputWithDevice:error:,id,AVCaptureDevice*,NSError**
+-initWithDevice:error:,id,AVCaptureDevice*,NSError**
+-device,AVCaptureDevice*
+
+*AVCaptureScreenInput
+:AVCaptureInput
+-initWithDisplayID:,id,CGDirectDisplayID
+-setMinFrameDuration:,void,CMTime
+-minFrameDuration,CMTime
+-setCropRect:,void,CGRect
+-cropRect,CGRect
+-setScaleFactor:,void,CGFloat
+-scaleFactor,CGFloat
+-setCapturesMouseClicks:,void,BOOL
+-capturesMouseClicks,BOOL
+-setCapturesCursor:,void,BOOL
+-capturesCursor,BOOL
+-setRemovesDuplicateFrames:,void,BOOL
+-removesDuplicateFrames,BOOL
+
+*AVCaptureSession
+:NSObject
+-canSetSessionPreset:,BOOL,NSString*
+-setSessionPreset:,void,NSString*
+-sessionPreset,NSString*
+-inputs,NSArray*
+-canAddInput:,BOOL,AVCaptureInput*
+-addInput:,void,AVCaptureInput*
+-removeInput:,void,AVCaptureInput*
+-outputs,NSArray*
+-canAddOutput:,BOOL,AVCaptureOutput*
+-addOutput:,void,AVCaptureOutput*
+-removeOutput:,void,AVCaptureOutput*
+-addInputWithNoConnections:,void,AVCaptureInput*
+-addOutputWithNoConnections:,void,AVCaptureOutput*
+-canAddConnection:,BOOL,AVCaptureConnection*
+-addConnection:,void,AVCaptureConnection*
+-removeConnection:,void,AVCaptureConnection*
+-beginConfiguration,void
+-commitConfiguration,void
+-isRunning,BOOL
+-startRunning,void
+-stopRunning,void
+-_,__attribute_
+
+*AVCaptureConnection
+:NSObject
++connectionWithInputPorts:output:,AVCaptureConnection*,NSArray*,AVCaptureOutput*
++connectionWithInputPort:videoPreviewLayer:,AVCaptureConnection*,AVCaptureInputPort*,AVCaptureVideoPreviewLayer*
+-initWithInputPorts:output:,id,NSArray*,AVCaptureOutput*
+-initWithInputPort:videoPreviewLayer:,id,AVCaptureInputPort*,AVCaptureVideoPreviewLayer*
+-inputPorts,NSArray*
+-output,AVCaptureOutput*
+-videoPreviewLayer,AVCaptureVideoPreviewLayer*
+-setEnabled:,void,BOOL
+-isEnabled,BOOL
+-isActive,BOOL
+-audioChannels,NSArray*
+-isVideoMirroringSupported,BOOL
+-setVideoMirrored:,void,BOOL
+-isVideoMirrored,BOOL
+-setAutomaticallyAdjustsVideoMirroring:,void,BOOL
+-automaticallyAdjustsVideoMirroring,BOOL
+-isVideoOrientationSupported,BOOL
+-setVideoOrientation:,void,AVCaptureVideoOrientation
+-videoOrientation,AVCaptureVideoOrientation
+-isVideoFieldModeSupported,BOOL
+-setVideoFieldMode:,void,AVVideoFieldMode
+-videoFieldMode,AVVideoFieldMode
+-isVideoMinFrameDurationSupported,BOOL
+-setVideoMinFrameDuration:,void,CMTime
+-videoMinFrameDuration,CMTime
+-isVideoMaxFrameDurationSupported,BOOL
+-setVideoMaxFrameDuration:,void,CMTime
+-videoMaxFrameDuration,CMTime
+-videoMaxScaleAndCropFactor,CGFloat
+-setVideoScaleAndCropFactor:,void,CGFloat
+-videoScaleAndCropFactor,CGFloat
+-isVideoStabilizationSupported,BOOL
+-isVideoStabilizationEnabled,BOOL
+-setEnablesVideoStabilizationWhenAvailable:,void,BOOL
+-enablesVideoStabilizationWhenAvailable,BOOL
+
+*AVCaptureAudioChannel
+:NSObject
+-averagePowerLevel,float
+-peakHoldLevel,float
+-setVolume:,void,float
+-volume,float
+-setEnabled:,void,BOOL
+-isEnabled,BOOL
+
+*AVCaptureOutput
+:NSObject
+-connections,NSArray*
+-connectionWithMediaType:,AVCaptureConnection*,NSString*
+-transformedMetadataObjectForMetadataObject:connection:,AVMetadataObject*,AVMetadataObject*,AVCaptureConnection*
+
+*AVCaptureVideoDataOutput
+:AVCaptureOutput
+-setSampleBufferDelegate:queue:,void,id<AVCaptureVideoDataOutputSampleBufferDelegate>,dispatch_queue_t
+-sampleBufferDelegate,id<AVCaptureVideoDataOutputSampleBufferDelegate>
+-sampleBufferCallbackQueue,dispatch_queue_t
+-setVideoSettings:,void,NSDictionary*
+-videoSettings,NSDictionary*
+-availableVideoCVPixelFormatTypes,NSArray*
+-availableVideoCodecTypes,NSArray*
+-setMinFrameDuration:,void,CMTime
+-minFrameDuration,CMTime
+-setAlwaysDiscardsLateVideoFrames:,void,BOOL
+-alwaysDiscardsLateVideoFrames,BOOL
+
+*AVCaptureAudioDataOutput
+:AVCaptureOutput
+-setSampleBufferDelegate:queue:,void,id<AVCaptureAudioDataOutputSampleBufferDelegate>,dispatch_queue_t
+-sampleBufferDelegate,id<AVCaptureAudioDataOutputSampleBufferDelegate>
+-sampleBufferCallbackQueue,dispatch_queue_t
+-setAudioSettings:,void,NSDictionary*
+-audioSettings,NSDictionary*
+
+*AVCaptureFileOutput
+:AVCaptureOutput
+-setDelegate:,void,id<AVCaptureFileOutputDelegate>
+-delegate,id<AVCaptureFileOutputDelegate>
+-outputFileURL,NSURL*
+-startRecordingToOutputFileURL:recordingDelegate:,void,NSURL*,id<AVCaptureFileOutputRecordingDelegate>
+-stopRecording,void
+-isRecording,BOOL
+-isRecordingPaused,BOOL
+-pauseRecording __attribute__((availability(macosx,introduced=10.7))),void
+-resumeRecording __attribute__((availability(macosx,introduced=10.7))),void
+-recordedDuration,CMTime
+-recordedFileSize,int64_t
+-setMaxRecordedDuration:,void,CMTime
+-maxRecordedDuration,CMTime
+-setMaxRecordedFileSize:,void,int64_t
+-maxRecordedFileSize,int64_t
+-setMinFreeDiskSpaceLimit:,void,int64_t
+-minFreeDiskSpaceLimit,int64_t
+
+*AVCaptureMovieFileOutput
+:AVCaptureFileOutput
+-setMovieFragmentInterval:,void,CMTime
+-movieFragmentInterval,CMTime
+-setMetadata:,void,NSArray*
+-metadata,NSArray*
+-outputSettingsForConnection:,NSDictionary*,AVCaptureConnection*
+-setOutputSettings:forConnection:,void,NSDictionary*,AVCaptureConnection*
+
+*AVCaptureAudioFileOutput
+:AVCaptureFileOutput
++availableOutputFileTypes,NSArray*
+-startRecordingToOutputFileURL:outputFileType:recordingDelegate:,void,NSURL*,NSString*,id<AVCaptureFileOutputRecordingDelegate>
+-setMetadata:,void,NSArray*
+-metadata,NSArray*
+-setAudioSettings:,void,NSDictionary*
+-audioSettings,NSDictionary*
+
+*AVCaptureStillImageOutput
+:AVCaptureOutput
+-setOutputSettings:,void,NSDictionary*
+-outputSettings,NSDictionary*
+-availableImageDataCVPixelFormatTypes,NSArray*
+-availableImageDataCodecTypes,NSArray*
+-isCapturingStillImage,BOOL
+-captureStillImageAsynchronouslyFromConnection:completionHandler:,void,AVCaptureConnection*,id
++jpegStillImageNSDataRepresentation:,NSData*,CMSampleBufferRef
+
+*AVCaptureAudioPreviewOutput
+:AVCaptureOutput
+-setOutputDeviceUniqueID:,void,NSString*
+-outputDeviceUniqueID,NSString*
+-setVolume:,void,float
+-volume,float
+
+*AVCaptureMetadataOutput
+:AVCaptureOutput
+-setMetadataObjectsDelegate:queue:,void,id<AVCaptureMetadataOutputObjectsDelegate>,dispatch_queue_t
+-metadataObjectsDelegate,id<AVCaptureMetadataOutputObjectsDelegate>
+-metadataObjectsCallbackQueue,dispatch_queue_t
+-availableMetadataObjectTypes,NSArray*
+-setMetadataObjectTypes:,void,NSArray*
+-metadataObjectTypes,NSArray*
+
+*AVCaptureVideoPreviewLayer
+:CALayer
++layerWithSession:,id,AVCaptureSession*
+-initWithSession:,id,AVCaptureSession*
++layerWithSessionWithNoConnection:,id,AVCaptureSession*
+-initWithSessionWithNoConnection:,id,AVCaptureSession*
+-setSession:,void,AVCaptureSession*
+-session,AVCaptureSession*
+-setSessionWithNoConnection:,void,AVCaptureSession*
+-connection,AVCaptureConnection*
+-setVideoGravity:,void,NSString*
+-videoGravity,NSString*
+-captureDevicePointOfInterestForPoint:,CGPoint,CGPoint
+-pointForCaptureDevicePointOfInterest:,CGPoint,CGPoint
+-transformedMetadataObjectForMetadataObject:,AVMetadataObject*,AVMetadataObject*
+
+*AVComposition
+:AVAsset
+-tracks,NSArray*
+-naturalSize,CGSize
+
+*AVMutableComposition
+:AVComposition
+-tracks,NSArray*
+-setNaturalSize:,void,CGSize
+-naturalSize,CGSize
++composition,AVMutableComposition*
+
+*AVMutableComposition
+(AVMutableCompositionCompositionLevelEditing
+-insertTimeRange:ofAsset:atTime:error:,BOOL,CMTimeRange,AVAsset*,CMTime,NSError**
+-insertEmptyTimeRange:,void,CMTimeRange
+-removeTimeRange:,void,CMTimeRange
+-scaleTimeRange:toDuration:,void,CMTimeRange,CMTime
+
+*AVMutableComposition
+(AVMutableCompositionTrackLevelEditing
+-addMutableTrackWithMediaType:preferredTrackID:,AVMutableCompositionTrack*,NSString*,CMPersistentTrackID
+-removeTrack:,void,AVCompositionTrack*
+-mutableTrackCompatibleWithTrack:,AVMutableCompositionTrack*,AVAssetTrack*
+
+*AVCompositionTrack
+:AVAssetTrack
+-segments,NSArray*
+
+*AVMutableCompositionTrack
+:AVCompositionTrack
+-setNaturalTimeScale:,void,CMTimeScale
+-naturalTimeScale,CMTimeScale
+-setLanguageCode:,void,NSString*
+-languageCode,NSString*
+-setExtendedLanguageTag:,void,NSString*
+-extendedLanguageTag,NSString*
+-setPreferredTransform:,void,CGAffineTransform
+-preferredTransform,CGAffineTransform
+-setPreferredVolume:,void,float
+-preferredVolume,float
+-setSegments:,void,NSArray*
+-segments,NSArray*
+-insertTimeRange:ofTrack:atTime:error:,BOOL,CMTimeRange,AVAssetTrack*,CMTime,NSError**
+-insertTimeRanges:ofTracks:atTime:error:,BOOL,NSArray*,NSArray*,CMTime,NSError**
+-insertEmptyTimeRange:,void,CMTimeRange
+-removeTimeRange:,void,CMTimeRange
+-scaleTimeRange:toDuration:,void,CMTimeRange,CMTime
+-validateTrackSegments:error:,BOOL,NSArray*,NSError**
+
+*AVCompositionTrackSegment
+:AVAssetTrackSegment
++compositionTrackSegmentWithURL:trackID:sourceTimeRange:targetTimeRange:,AVCompositionTrackSegment*,NSURL*,CMPersistentTrackID,CMTimeRange,CMTimeRange
++compositionTrackSegmentWithTimeRange:,AVCompositionTrackSegment*,CMTimeRange
+-initWithURL:trackID:sourceTimeRange:targetTimeRange:,id,NSURL*,CMPersistentTrackID,CMTimeRange,CMTimeRange
+-initWithTimeRange:,id,CMTimeRange
+-isEmpty,BOOL
+-sourceURL,NSURL*
+-sourceTrackID,CMPersistentTrackID
+
+*AVMetadataItem
+:NSObject
+-d,i
+-commonKey,NSString*
+-keySpace,NSString*
+-locale,NSLocale*
+-time,CMTime
+-duration,CMTime
+-d,i
+-extraAttributes,NSDictionary*
+
+*AVMetadataItem
+(AVMetadataItemTypeCoercion
+-stringValue,NSString*
+-numberValue,NSNumber*
+-dateValue,NSDate*
+-dataValue,NSData*
+
+*AVMetadataItem
+(AVAsynchronousKeyValueLoading
+-statusOfValueForKey:error:,AVKeyValueStatus,NSString*,NSError**
+-loadValuesAsynchronouslyForKeys:completionHandler:,void,NSArray*,id
+
+*AVMetadataItem
+(AVMetadataItemArrayFiltering
++metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:,NSArray*,NSArray*,NSArray*
++metadataItemsFromArray:withLocale:,NSArray*,NSArray*,NSLocale*
++metadataItemsFromArray:withKey:keySpace:,NSArray*,NSArray*,id,NSString*
++metadataItemsFromArray:filteredByMetadataItemFilter:,NSArray*,NSArray*,AVMetadataItemFilter*
+
+*AVMutableMetadataItem
+:AVMetadataItem
+-setD:,void,i
+-d,i
+-setKeySpace:,void,NSString*
+-keySpace,NSString*
+-setLocale:,void,NSLocale*
+-locale,NSLocale*
+-setTime:,void,CMTime
+-time,CMTime
+-setDuration:,void,CMTime
+-duration,CMTime
+-setD:,void,i
+-d,i
+-setExtraAttributes:,void,NSDictionary*
+-extraAttributes,NSDictionary*
++metadataItem,AVMutableMetadataItem*
+
+*AVMetadataItemFilter
+:NSObject
++metadataItemFilterForSharing,AVMetadataItemFilter*
+
+*AVOutputSettingsAssistant
+:NSObject
++outputSettingsAssistantWithPreset:,instancetype,NSString*
+-audioSettings,NSDictionary*
+-videoSettings,NSDictionary*
+-outputFileType,NSString*
+
+*AVOutputSettingsAssistant
+(AVOutputSettingsAssistant_SourceInformation
+-set_:,void,__attribute_
+-_,__attribute_
+-set_:,void,__attribute_
+-_,__attribute_
+-setSourceVideoAverageFrameDuration:,void,CMTime
+-sourceVideoAverageFrameDuration,CMTime
+
+*AVPlayer
+:NSObject
++playerWithURL:,id,NSURL*
++playerWithPlayerItem:,id,AVPlayerItem*
+-initWithURL:,id,NSURL*
+-initWithPlayerItem:,id,AVPlayerItem*
+-status,AVPlayerStatus
+-error,NSError*
+
+*AVPlayer
+(AVPlayerPlaybackControl
+-setRate:,void,float
+-rate,float
+-play,void
+-pause,void
+
+*AVPlayer
+(AVPlayerItemControl
+-currentItem,AVPlayerItem*
+-replaceCurrentItemWithPlayerItem:,void,AVPlayerItem*
+-setActionAtItemEnd:,void,AVPlayerActionAtItemEnd
+-actionAtItemEnd,AVPlayerActionAtItemEnd
+
+*AVPlayer
+(AVPlayerTimeControl
+-currentTime,CMTime
+-seekToDate:,void,NSDate*
+-seekToDate:completionHandler:,void,NSDate*,id
+-seekToTime:,void,CMTime
+-seekToTime:toleranceBefore:toleranceAfter:,void,CMTime,CMTime,CMTime
+-seekToTime:completionHandler:,void,CMTime,id
+-seekToTime:toleranceBefore:toleranceAfter:completionHandler:,void,CMTime,CMTime,CMTime,id
+
+*AVPlayer
+(AVPlayerAdvancedRateControl
+-setRate:time:atHostTime:,void,float,CMTime,CMTime
+-prerollAtRate:completionHandler:,void,float,id
+-cancelPendingPrerolls __attribute__((availability(macosx,introduced=10.8))),void
+-set_:,void,__attribute_
+-_,__attribute_
+
+*AVPlayer
+(AVPlayerTimeObservation
+-addPeriodicTimeObserverForInterval:queue:usingBlock:,id,CMTime,dispatch_queue_t,id
+-addBoundaryTimeObserverForTimes:queue:usingBlock:,id,NSArray*,dispatch_queue_t,id
+-removeTimeObserver:,void,id
+
+*AVPlayer
+(AVPlayerMediaControl
+-setVolume:,void,float
+-volume,float
+-setMuted:,void,BOOL
+-isMuted,BOOL
+-setClosedCaptionDisplayEnabled:,void,BOOL
+-isClosedCaptionDisplayEnabled,BOOL
+
+*AVPlayer
+(AVPlayerAutomaticMediaSelection
+-setAppliesMediaSelectionCriteriaAutomatically:,void,BOOL
+-appliesMediaSelectionCriteriaAutomatically,BOOL
+-setMediaSelectionCriteria:forMediaCharacteristic:,void,AVPlayerMediaSelectionCriteria*,NSString*
+-mediaSelectionCriteriaForMediaCharacteristic:,AVPlayerMediaSelectionCriteria*,NSString*
+
+*AVPlayer
+(AVPlayerAudioDeviceSupport
+-setAudioOutputDeviceUniqueID:,void,NSString*
+-audioOutputDeviceUniqueID,NSString*
+
+*AVQueuePlayer
+:AVPlayer
++queuePlayerWithItems:,id,NSArray*
+-initWithItems:,id,NSArray*
+-items,NSArray*
+-advanceToNextItem,void
+-canInsertItem:afterItem:,BOOL,AVPlayerItem*,AVPlayerItem*
+-insertItem:afterItem:,void,AVPlayerItem*,AVPlayerItem*
+-removeItem:,void,AVPlayerItem*
+-removeAllItems,void
+
+*AVPlayerItem
+:NSObject
++playerItemWithURL:,AVPlayerItem*,NSURL*
++playerItemWithAsset:,AVPlayerItem*,AVAsset*
++playerItemWithAsset:automaticallyLoadedAssetKeys:,AVPlayerItem*,AVAsset*,NSArray*
+-initWithURL:,id,NSURL*
+-initWithAsset:,id,AVAsset*
+-initWithAsset:automaticallyLoadedAssetKeys:,id,AVAsset*,NSArray*
+-status,AVPlayerItemStatus
+-error,NSError*
+
+*AVPlayerItem
+(AVPlayerItemInspection
+-asset,AVAsset*
+-tracks,NSArray*
+-duration,CMTime
+-presentationSize,CGSize
+-timedMetadata,NSArray*
+-automaticallyLoadedAssetKeys,NSArray*
+
+*AVPlayerItem
+(AVPlayerItemRateAndSteppingSupport
+-canPlayFastForward,BOOL
+-canPlaySlowForward,BOOL
+-canPlayReverse,BOOL
+-canPlaySlowReverse,BOOL
+-canPlayFastReverse,BOOL
+-canStepForward,BOOL
+-canStepBackward,BOOL
+
+*AVPlayerItem
+(AVPlayerItemTimeControl
+-currentTime,CMTime
+-setForwardPlaybackEndTime:,void,CMTime
+-forwardPlaybackEndTime,CMTime
+-setReversePlaybackEndTime:,void,CMTime
+-reversePlaybackEndTime,CMTime
+-seekableTimeRanges,NSArray*
+-seekToTime:,void,CMTime
+-seekToTime:completionHandler:,void,CMTime,id
+-seekToTime:toleranceBefore:toleranceAfter:,void,CMTime,CMTime,CMTime
+-seekToTime:toleranceBefore:toleranceAfter:completionHandler:,void,CMTime,CMTime,CMTime,id
+-cancelPendingSeeks __attribute__((availability(macosx,introduced=10.7))),void
+-currentDate,NSDate*
+-seekToDate:,BOOL,NSDate*
+-seekToDate:completionHandler:,BOOL,NSDate*,id
+-stepByCount:,void,NSInteger
+-_,__attribute_
+
+*AVPlayerItem
+(AVPlayerItemVisualPresentation
+-setVideoComposition:,void,AVVideoComposition*
+-videoComposition,AVVideoComposition*
+-customVideoCompositor,id<AVVideoCompositing>
+-setSeekingWaitsForVideoCompositionRendering:,void,BOOL
+-seekingWaitsForVideoCompositionRendering,BOOL
+-setTextStyleRules:,void,NSArray*
+-textStyleRules,NSArray*
+
+*AVPlayerItem
+(AVPlayerItemAudioProcessing
+-setAudioTimePitchAlgorithm:,void,NSString*
+-audioTimePitchAlgorithm,NSString*
+-setAudioMix:,void,AVAudioMix*
+-audioMix,AVAudioMix*
+
+*AVPlayerItem
+(AVPlayerItemPlayability
+-loadedTimeRanges,NSArray*
+-isPlaybackLikelyToKeepUp,BOOL
+-isPlaybackBufferFull,BOOL
+-isPlaybackBufferEmpty,BOOL
+
+*AVPlayerItem
+(AVPlayerItemMediaSelection
+-selectMediaOption:inMediaSelectionGroup:,void,AVMediaSelectionOption*,AVMediaSelectionGroup*
+-selectMediaOptionAutomaticallyInMediaSelectionGroup:,void,AVMediaSelectionGroup*
+-selectedMediaOptionInMediaSelectionGroup:,AVMediaSelectionOption*,AVMediaSelectionGroup*
+
+*AVPlayerItem
+(AVPlayerItemLogging
+-accessLog __attribute__((availability(macosx,introduced=10.7))),AVPlayerItemAccessLog*
+-errorLog __attribute__((availability(macosx,introduced=10.7))),AVPlayerItemErrorLog*
+
+*AVPlayerItem
+(AVPlayerItemOutputs
+-addOutput:,void,AVPlayerItemOutput*
+-removeOutput:,void,AVPlayerItemOutput*
+-outputs,NSArray*
+
+*AVPlayerItemAccessLog
+:NSObject
+-extendedLogData,NSData*
+-extendedLogDataStringEncoding,NSStringEncoding
+-events,NSArray*
+
+*AVPlayerItemErrorLog
+:NSObject
+-extendedLogData,NSData*
+-extendedLogDataStringEncoding,NSStringEncoding
+-events,NSArray*
+
+*AVPlayerItemAccessLogEvent
+:NSObject
+-numberOfSegmentsDownloaded,NSInteger
+-numberOfMediaRequests,NSInteger
+-playbackStartDate,NSDate*
+-URI,NSString*
+-serverAddress,NSString*
+-numberOfServerAddressChanges,NSInteger
+-playbackSessionID,NSString*
+-playbackStartOffset,NSTimeInterval
+-segmentsDownloadedDuration,NSTimeInterval
+-durationWatched,NSTimeInterval
+-numberOfStalls,NSInteger
+-long,long
+-transferDuration,NSTimeInterval
+-observedBitrate,double
+-indicatedBitrate,double
+-numberOfDroppedVideoFrames,NSInteger
+-startupTime,NSTimeInterval
+-downloadOverdue,NSInteger
+-observedMaxBitrate,double
+-observedMinBitrate,double
+-observedBitrateStandardDeviation,double
+-playbackType,NSString*
+-mediaRequestsWWAN,NSInteger
+-switchBitrate,double
+
+*AVPlayerItemErrorLogEvent
+:NSObject
+-date,NSDate*
+-URI,NSString*
+-serverAddress,NSString*
+-playbackSessionID,NSString*
+-errorStatusCode,NSInteger
+-errorDomain,NSString*
+-errorComment,NSString*
+
+*AVPlayerItemOutput
+:NSObject
+-itemTimeForHostTime:,CMTime,CFTimeInterval
+-itemTimeForMachAbsoluteTime:,CMTime,int64_t
+-itemTimeForCVTimeStamp:,CMTime,CVTimeStamp
+-setSuppressesPlayerRendering:,void,BOOL
+-suppressesPlayerRendering,BOOL
+
+*AVPlayerItemVideoOutput
+:AVPlayerItemOutput
+-initWithPixelBufferAttributes:,id,NSDictionary*
+-hasNewPixelBufferForItemTime:,BOOL,CMTime
+-copyPixelBufferForItemTime:itemTimeForDisplay:,CVPixelBufferRef,CMTime,CMTime*
+-setDelegate:queue:,void,id<AVPlayerItemOutputPullDelegate>,dispatch_queue_t
+-requestNotificationOfMediaDataChangeWithAdvanceInterval:,void,NSTimeInterval
+-delegate,id<AVPlayerItemOutputPullDelegate>
+-delegateQueue,dispatch_queue_t
+
+*AVPlayerItemLegibleOutput
+:AVPlayerItemOutput
+-setDelegate:queue:,void,id <AVPlayerItemLegibleOutputPushDelegate>,dispatch_queue_t
+-delegate,id<AVPlayerItemLegibleOutputPushDelegate>
+-delegateQueue,dispatch_queue_t
+-setAdvanceIntervalForDelegateInvocation:,void,NSTimeInterval
+-advanceIntervalForDelegateInvocation,NSTimeInterval
+
+*AVPlayerItemLegibleOutput
+(AVPlayerItemLegibleOutput_NativeRepresentation
+-initWithMediaSubtypesForNativeRepresentation:,id,NSArray*
+
+*AVPlayerItemLegibleOutput
+(AVPlayerItemLegibleOutput_TextStylingResolution
+-setTextStylingResolution:,void,NSString*
+-textStylingResolution,NSString*
+
+*AVPlayerItem
+(AVPlayerItemProtectedContent
+-isAuthorizationRequiredForPlayback,BOOL
+-isApplicationAuthorizedForPlayback,BOOL
+-isContentAuthorizedForPlayback,BOOL
+-requestContentAuthorizationAsynchronouslyWithTimeoutInterval:completionHandler:,void,NSTimeInterval,id
+-cancelContentAuthorizationRequest __attribute__((availability(macosx,introduced=10.7))),void
+-contentAuthorizationRequestStatus,AVContentAuthorizationStatus
+
+*AVPlayerItemTrack
+:NSObject
+-assetTrack,AVAssetTrack*
+-setEnabled:,void,BOOL
+-isEnabled,BOOL
+-currentVideoFrameRate,float
+
+*AVPlayerLayer
+:CALayer
++playerLayerWithPlayer:,AVPlayerLayer*,AVPlayer*
+-setPlayer:,void,AVPlayer*
+-player,AVPlayer*
+-setVideoGravity:,void,NSString*
+-videoGravity,NSString*
+-isReadyForDisplay,BOOL
+-videoRect,CGRect
+
+*AVPlayerMediaSelectionCriteria
+:NSObject
+-preferredLanguages,NSArray*
+-preferredMediaCharacteristics,NSArray*
+-initWithPreferredLanguages:preferredMediaCharacteristics:,id,NSArray*,NSArray*
+
+*AVSampleBufferDisplayLayer
+:CALayer
+-set_:,void,__attribute_
+-_,__attribute_
+-setVideoGravity:,void,NSString*
+-videoGravity,NSString*
+
+*AVSampleBufferDisplayLayer
+(AVSampleBufferDisplayLayerQueueManagement
+-enqueueSampleBuffer:,void,CMSampleBufferRef
+-flush,void
+-flushAndRemoveImage,void
+-isReadyForMoreMediaData,BOOL
+-requestMediaDataWhenReadyOnQueue:usingBlock:,void,dispatch_queue_t,id
+-stopRequestingMediaData,void
+
+*AVSynchronizedLayer
+:CALayer
++synchronizedLayerWithPlayerItem:,AVSynchronizedLayer*,AVPlayerItem*
+-setPlayerItem:,void,AVPlayerItem*
+-playerItem,AVPlayerItem*
+
+*AVTextStyleRule
+:NSObject
++propertyListForTextStyleRules:,id,NSArray*
++textStyleRulesFromPropertyList:,NSArray*,id
++textStyleRuleWithTextMarkupAttributes:,AVTextStyleRule*,NSDictionary*
++textStyleRuleWithTextMarkupAttributes:textSelector:,AVTextStyleRule*,NSDictionary*,NSString*
+-initWithTextMarkupAttributes:,id,NSDictionary*
+-initWithTextMarkupAttributes:textSelector:,id,NSDictionary*,NSString*
+-textMarkupAttributes,NSDictionary*
+-textSelector,NSString*
+
+*NSValue
+(NSValueAVFoundationExtensions
++valueWithCMTime:,NSValue*,CMTime
+-CMTimeValue __attribute__((availability(macosx,introduced=10.7))),CMTime
++valueWithCMTimeRange:,NSValue*,CMTimeRange
+-CMTimeRangeValue __attribute__((availability(macosx,introduced=10.7))),CMTimeRange
++valueWithCMTimeMapping:,NSValue*,CMTimeMapping
+-CMTimeMappingValue __attribute__((availability(macosx,introduced=10.7))),CMTimeMapping
+
+*NSCoder
+(AVTimeCoding
+-encodeCMTime:forKey:,void,CMTime,NSString*
+-decodeCMTimeForKey:,CMTime,NSString*
+-encodeCMTimeRange:forKey:,void,CMTimeRange,NSString*
+-decodeCMTimeRangeForKey:,CMTimeRange,NSString*
+-encodeCMTimeMapping:forKey:,void,CMTimeMapping,NSString*
+-decodeCMTimeMappingForKey:,CMTimeMapping,NSString*
+
+*AVTimedMetadataGroup
+:NSObject
+-initWithItems:timeRange:,id,NSArray*,CMTimeRange
+-timeRange,CMTimeRange
+-items,NSArray*
+
+*AVMutableTimedMetadataGroup
+:AVTimedMetadataGroup
+-setTimeRange:,void,CMTimeRange
+-timeRange,CMTimeRange
+-setItems:,void,NSArray*
+-items,NSArray*
+
+=AudioFileCreateWithURL,OSStatus,CFURLRef,AudioFileTypeID,const AudioStreamBasicDescription*,UInt32,AudioFileID*
+=AudioFileOpenURL,OSStatus,CFURLRef,SInt8,AudioFileTypeID,AudioFileID*
+=AudioFileInitializeWithCallbacks,OSStatus,void*,AudioFile_ReadProc,AudioFile_WriteProc,AudioFile_GetSizeProc,AudioFile_SetSizeProc,AudioFileTypeID,const AudioStreamBasicDescription*,UInt32,AudioFileID*
+=AudioFileOpenWithCallbacks,OSStatus,void*,AudioFile_ReadProc,AudioFile_WriteProc,AudioFile_GetSizeProc,AudioFile_SetSizeProc,AudioFileTypeID,AudioFileID*
+=AudioFileClose,OSStatus,AudioFileID
+=AudioFileOptimize,OSStatus,AudioFileID
+=AudioFileReadBytes,OSStatus,AudioFileID,Boolean,SInt64,UInt32*,void*
+=AudioFileWriteBytes,OSStatus,AudioFileID,Boolean,SInt64,UInt32*,const void*
+=AudioFileReadPacketData,OSStatus,AudioFileID,Boolean,UInt32*,AudioStreamPacketDescription*,SInt64,UInt32*,void*
+=AudioFileReadPackets,OSStatus,AudioFileID,Boolean,UInt32*,AudioStreamPacketDescription*,SInt64,UInt32*,void*
+=AudioFileWritePackets,OSStatus,AudioFileID,Boolean,UInt32,const AudioStreamPacketDescription*,SInt64,UInt32*,const void*
+=AudioFileCountUserData,OSStatus,AudioFileID,UInt32,UInt32*
+=AudioFileGetUserDataSize,OSStatus,AudioFileID,UInt32,UInt32,UInt32*
+=AudioFileGetUserData,OSStatus,AudioFileID,UInt32,UInt32,UInt32*,void*
+=AudioFileSetUserData,OSStatus,AudioFileID,UInt32,UInt32,UInt32,const void*
+=AudioFileRemoveUserData,OSStatus,AudioFileID,UInt32,UInt32
+=AudioFileGetPropertyInfo,OSStatus,AudioFileID,AudioFilePropertyID,UInt32*,UInt32*
+=AudioFileGetProperty,OSStatus,AudioFileID,AudioFilePropertyID,UInt32*,void*
+=AudioFileSetProperty,OSStatus,AudioFileID,AudioFilePropertyID,UInt32,const void*
+=AudioFileGetGlobalInfoSize,OSStatus,AudioFilePropertyID,UInt32,void*,UInt32*
+=AudioFileGetGlobalInfo,OSStatus,AudioFilePropertyID,UInt32,void*,UInt32*,void*
+=AudioFileCreate,OSStatus,const struct,CFStringRef,AudioFileTypeID,const AudioStreamBasicDescription*,UInt32,struct,AudioFileID*
+=AudioFileInitialize,OSStatus,const struct,AudioFileTypeID,const AudioStreamBasicDescription*,UInt32,AudioFileID*
+=AudioFileOpen,OSStatus,const struct,SInt8,AudioFileTypeID,AudioFileID*
+=CMTimeMake,CMTime,int64_t,int32_t
+=CMTimeMakeWithEpoch,CMTime,int64_t,int32_t,int64_t
+=CMTimeMakeWithSeconds,CMTime,Float64,int32_t
+=CMTimeGetSeconds,Float64,CMTime
+=CMTimeConvertScale,CMTime,CMTime,int32_t,CMTimeRoundingMethod
+=CMTimeAdd,CMTime,CMTime,CMTime
+=CMTimeSubtract,CMTime,CMTime,CMTime
+=CMTimeMultiply,CMTime,CMTime,int32_t
+=CMTimeMultiplyByFloat64,CMTime,CMTime,Float64
+=CMTimeCompare,int32_t,CMTime,CMTime
+=CMTimeMinimum,CMTime,CMTime,CMTime
+=CMTimeMaximum,CMTime,CMTime,CMTime
+=CMTimeAbsoluteValue,CMTime,CMTime
+=CMTimeCopyAsDictionary,CFDictionaryRef,CMTime,CFAllocatorRef
+=CMTimeMakeFromDictionary,CMTime,CFDictionaryRef
+=CMTimeCopyDescription,CFStringRef,CFAllocatorRef,CMTime
+=CMTimeShow,void,CMTime
+=CMTimeRangeMake,CMTimeRange,CMTime,CMTime
+=CMTimeRangeGetUnion,CMTimeRange,CMTimeRange,CMTimeRange
+=CMTimeRangeGetIntersection,CMTimeRange,CMTimeRange,CMTimeRange
+=CMTimeRangeEqual,Boolean,CMTimeRange,CMTimeRange
+=CMTimeRangeContainsTime,Boolean,CMTimeRange,CMTime
+=CMTimeRangeContainsTimeRange,Boolean,CMTimeRange,CMTimeRange
+=CMTimeRangeGetEnd,CMTime,CMTimeRange
+=CMTimeMapTimeFromRangeToRange,CMTime,CMTime,CMTimeRange,CMTimeRange
+=CMTimeClampToRange,CMTime,CMTime,CMTimeRange
+=CMTimeMapDurationFromRangeToRange,CMTime,CMTime,CMTimeRange,CMTimeRange
+=CMTimeRangeFromTimeToTime,CMTimeRange,CMTime,CMTime
+=CMTimeRangeCopyAsDictionary,CFDictionaryRef,CMTimeRange,CFAllocatorRef
+=CMTimeRangeMakeFromDictionary,CMTimeRange,CFDictionaryRef
+=CMTimeRangeCopyDescription,CFStringRef,CFAllocatorRef,CMTimeRange
+=CMTimeRangeShow,void,CMTimeRange
+=CMSetAttachment,void,CMAttachmentBearerRef,CFStringRef,CFTypeRef,CMAttachmentMode
+=CMGetAttachment,CFTypeRef,CMAttachmentBearerRef,CFStringRef,CMAttachmentMode*
+=CMRemoveAttachment,void,CMAttachmentBearerRef,CFStringRef
+=CMRemoveAllAttachments,void,CMAttachmentBearerRef
+=CMCopyDictionaryOfAttachments,CFDictionaryRef,CFAllocatorRef,CMAttachmentBearerRef,CMAttachmentMode
+=CMSetAttachments,void,CMAttachmentBearerRef,CFDictionaryRef,CMAttachmentMode
+=CMPropagateAttachments,void,CMAttachmentBearerRef,CMAttachmentBearerRef
+=CMBlockBufferCreateEmpty,OSStatus,CFAllocatorRef,uint32_t,CMBlockBufferFlags,CMBlockBufferRef*
+=CMBlockBufferCreateWithMemoryBlock,OSStatus,CFAllocatorRef,void*,size_t,CFAllocatorRef,const CMBlockBufferCustomBlockSource*,size_t,size_t,CMBlockBufferFlags,CMBlockBufferRef*
+=CMBlockBufferCreateWithBufferReference,OSStatus,CFAllocatorRef,CMBlockBufferRef,size_t,size_t,CMBlockBufferFlags,CMBlockBufferRef*
+=CMBlockBufferCreateContiguous,OSStatus,CFAllocatorRef,CMBlockBufferRef,CFAllocatorRef,const CMBlockBufferCustomBlockSource*,size_t,size_t,CMBlockBufferFlags,CMBlockBufferRef*
+=CMBlockBufferGetTypeID,CFTypeID,void
+=CMBlockBufferAppendMemoryBlock,OSStatus,CMBlockBufferRef,void*,size_t,CFAllocatorRef,const CMBlockBufferCustomBlockSource*,size_t,size_t,CMBlockBufferFlags
+=CMBlockBufferAppendBufferReference,OSStatus,CMBlockBufferRef,CMBlockBufferRef,size_t,size_t,CMBlockBufferFlags
+=CMBlockBufferAssureBlockMemory,OSStatus,CMBlockBufferRef
+=CMBlockBufferAccessDataBytes,OSStatus,CMBlockBufferRef,size_t,size_t,void*,char**
+=CMBlockBufferCopyDataBytes,OSStatus,CMBlockBufferRef,size_t,size_t,void*
+=CMBlockBufferReplaceDataBytes,OSStatus,const void*,CMBlockBufferRef,size_t,size_t
+=CMBlockBufferFillDataBytes,OSStatus,char,CMBlockBufferRef,size_t,size_t
+=CMBlockBufferGetDataPointer,OSStatus,CMBlockBufferRef,size_t,size_t*,size_t*,char**
+=CMBlockBufferGetDataLength,size_t,CMBlockBufferRef
+=CMBlockBufferIsRangeContiguous,Boolean,CMBlockBufferRef,size_t,size_t
+=CMBlockBufferIsEmpty,Boolean,CMBlockBufferRef
+=AudioFormatGetPropertyInfo,OSStatus,AudioFormatPropertyID,UInt32,const void*,UInt32*
+=AudioFormatGetProperty,OSStatus,AudioFormatPropertyID,UInt32,const void*,UInt32*,void*
+=CMFormatDescriptionCreate,OSStatus,CFAllocatorRef,CMMediaType,FourCharCode,CFDictionaryRef,CMFormatDescriptionRef*
+=CMFormatDescriptionGetTypeID,CFTypeID,void
+=CMFormatDescriptionEqual,Boolean,CMFormatDescriptionRef,CMFormatDescriptionRef
+=CMFormatDescriptionEqualIgnoringExtensionKeys,Boolean,CMFormatDescriptionRef,CMFormatDescriptionRef,CFTypeRef,CFTypeRef
+=CMFormatDescriptionGetMediaType,CMMediaType,CMFormatDescriptionRef
+=CMFormatDescriptionGetMediaSubType,FourCharCode,CMFormatDescriptionRef
+=CMFormatDescriptionGetExtensions,CFDictionaryRef,CMFormatDescriptionRef
+=CMFormatDescriptionGetExtension,CFPropertyListRef,CMFormatDescriptionRef,CFStringRef
+=CMAudioFormatDescriptionCreate,OSStatus,CFAllocatorRef,const AudioStreamBasicDescription*,size_t,const AudioChannelLayout*,size_t,const void*,CFDictionaryRef,CMAudioFormatDescriptionRef*
+=CMAudioFormatDescriptionGetStreamBasicDescription,const AudioStreamBasicDescription *,CMAudioFormatDescriptionRef
+=CMAudioFormatDescriptionGetMagicCookie,const void *,CMAudioFormatDescriptionRef,size_t*
+=CMAudioFormatDescriptionGetChannelLayout,const AudioChannelLayout *,CMAudioFormatDescriptionRef,size_t*
+=CMAudioFormatDescriptionGetFormatList,const AudioFormatListItem *,CMAudioFormatDescriptionRef,size_t*
+=CMAudioFormatDescriptionGetRichestDecodableFormat,const AudioFormatListItem *,CMAudioFormatDescriptionRef
+=CMAudioFormatDescriptionGetMostCompatibleFormat,const AudioFormatListItem *,CMAudioFormatDescriptionRef
+=CMAudioFormatDescriptionCreateSummary,OSStatus,CFAllocatorRef,CFArrayRef,uint32_t,CMAudioFormatDescriptionRef*
+=CMAudioFormatDescriptionEqual,Boolean,CMAudioFormatDescriptionRef,CMAudioFormatDescriptionRef,CMAudioFormatDescriptionMask,CMAudioFormatDescriptionMask*
+=CMVideoFormatDescriptionCreate,OSStatus,CFAllocatorRef,CMVideoCodecType,int32_t,int32_t,CFDictionaryRef,CMVideoFormatDescriptionRef*
+=CMVideoFormatDescriptionCreateForImageBuffer,OSStatus,CFAllocatorRef,CVImageBufferRef,CMVideoFormatDescriptionRef*
+=CMVideoFormatDescriptionCreateFromH264ParameterSets,OSStatus,CFAllocatorRef,size_t,const uint8_t*,const size_t*,int,CMFormatDescriptionRef*
+=CMVideoFormatDescriptionGetH264ParameterSetAtIndex,OSStatus,CMFormatDescriptionRef,size_t,const uint8_t**,size_t*,size_t*,int*
+=CMVideoFormatDescriptionGetDimensions,CMVideoDimensions,CMVideoFormatDescriptionRef
+=CMVideoFormatDescriptionGetPresentationDimensions,CGSize,CMVideoFormatDescriptionRef,Boolean,Boolean
+=CMVideoFormatDescriptionGetCleanAperture,CGRect,CMVideoFormatDescriptionRef,Boolean
+=CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers,CFArrayRef,void
+=CMVideoFormatDescriptionMatchesImageBuffer,Boolean,CMVideoFormatDescriptionRef,CVImageBufferRef
+=CMMuxedFormatDescriptionCreate,OSStatus,CFAllocatorRef,CMMuxedStreamType,CFDictionaryRef,CMMuxedFormatDescriptionRef*
+=CMTextFormatDescriptionGetDisplayFlags,OSStatus,CMFormatDescriptionRef,CMTextDisplayFlags*
+=CMTextFormatDescriptionGetJustification,OSStatus,CMFormatDescriptionRef,CMTextJustificationValue*,CMTextJustificationValue*
+=CMTextFormatDescriptionGetDefaultTextBox,OSStatus,CMFormatDescriptionRef,Boolean,CGFloat,CGRect*
+=CMTextFormatDescriptionGetDefaultStyle,OSStatus,CMFormatDescriptionRef,uint16_t*,Boolean*,Boolean*,Boolean*,CGFloat*,CGFloat
+=CMTextFormatDescriptionGetFontName,OSStatus,CMFormatDescriptionRef,uint16_t,CFStringRef*
+=CMTimeCodeFormatDescriptionCreate,OSStatus,CFAllocatorRef,CMTimeCodeFormatType,CMTime,uint32_t,uint32_t,CFDictionaryRef,CMTimeCodeFormatDescriptionRef*
+=CMTimeCodeFormatDescriptionGetFrameDuration,CMTime,CMTimeCodeFormatDescriptionRef
+=CMTimeCodeFormatDescriptionGetFrameQuanta,uint32_t,CMTimeCodeFormatDescriptionRef
+=CMTimeCodeFormatDescriptionGetTimeCodeFlags,uint32_t,CMTimeCodeFormatDescriptionRef
+=CMMetadataFormatDescriptionCreateWithKeys,OSStatus,CFAllocatorRef,CMMetadataFormatType,CFArrayRef,CMMetadataFormatDescriptionRef*
+=CMMetadataFormatDescriptionGetKeyWithLocalID,CFDictionaryRef,CMMetadataFormatDescriptionRef,OSType
+=CMSampleBufferCreate,OSStatus,CFAllocatorRef,CMBlockBufferRef,Boolean,CMSampleBufferMakeDataReadyCallback,void*,CMFormatDescriptionRef,CMItemCount,CMItemCount,const CMSampleTimingInfo*,CMItemCount,const size_t*,CMSampleBufferRef*
+=CMAudioSampleBufferCreateWithPacketDescriptions,OSStatus,CFAllocatorRef,CMBlockBufferRef,Boolean,CMSampleBufferMakeDataReadyCallback,void*,CMFormatDescriptionRef,CMItemCount,CMTime,const AudioStreamPacketDescription*,CMSampleBufferRef*
+=CMSampleBufferCreateForImageBuffer,OSStatus,CFAllocatorRef,CVImageBufferRef,Boolean,CMSampleBufferMakeDataReadyCallback,void*,CMVideoFormatDescriptionRef,const CMSampleTimingInfo*,CMSampleBufferRef*
+=CMSampleBufferCreateCopy,OSStatus,CFAllocatorRef,CMSampleBufferRef,CMSampleBufferRef*
+=CMSampleBufferCreateCopyWithNewTiming,OSStatus,CFAllocatorRef,CMSampleBufferRef,CMItemCount,const CMSampleTimingInfo*,CMSampleBufferRef*
+=CMSampleBufferCopySampleBufferForRange,OSStatus,CFAllocatorRef,CMSampleBufferRef,CFRange,CMSampleBufferRef*
+=CMSampleBufferGetTypeID,CFTypeID,void
+=CMSampleBufferSetDataBuffer,OSStatus,CMSampleBufferRef,CMBlockBufferRef
+=CMSampleBufferGetDataBuffer,CMBlockBufferRef,CMSampleBufferRef
+=CMSampleBufferGetImageBuffer,CVImageBufferRef,CMSampleBufferRef
+=CMSampleBufferSetDataBufferFromAudioBufferList,OSStatus,CMSampleBufferRef,CFAllocatorRef,CFAllocatorRef,uint32_t,const AudioBufferList*
+=CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer,OSStatus,CMSampleBufferRef,size_t*,AudioBufferList*,size_t,CFAllocatorRef,CFAllocatorRef,uint32_t,CMBlockBufferRef*
+=CMSampleBufferGetAudioStreamPacketDescriptions,OSStatus,CMSampleBufferRef,size_t,AudioStreamPacketDescription*,size_t*
+=CMSampleBufferGetAudioStreamPacketDescriptionsPtr,OSStatus,CMSampleBufferRef,const AudioStreamPacketDescription**,size_t*
+=CMSampleBufferCopyPCMDataIntoAudioBufferList,OSStatus,CMSampleBufferRef,int32_t,int32_t,AudioBufferList*
+=CMSampleBufferSetDataReady,OSStatus,CMSampleBufferRef
+=CMSampleBufferDataIsReady,Boolean,CMSampleBufferRef
+=CMSampleBufferMakeDataReady,OSStatus,CMSampleBufferRef
+=CMSampleBufferTrackDataReadiness,OSStatus,CMSampleBufferRef,CMSampleBufferRef
+=CMSampleBufferInvalidate,OSStatus,CMSampleBufferRef
+=CMSampleBufferSetInvalidateCallback,OSStatus,CMSampleBufferRef,CMSampleBufferInvalidateCallback,uint64_t
+=CMSampleBufferIsValid,Boolean,CMSampleBufferRef
+=CMSampleBufferGetNumSamples,CMItemCount,CMSampleBufferRef
+=CMSampleBufferGetDuration,CMTime,CMSampleBufferRef
+=CMSampleBufferGetPresentationTimeStamp,CMTime,CMSampleBufferRef
+=CMSampleBufferGetDecodeTimeStamp,CMTime,CMSampleBufferRef
+=CMSampleBufferGetOutputDuration,CMTime,CMSampleBufferRef
+=CMSampleBufferGetOutputPresentationTimeStamp,CMTime,CMSampleBufferRef
+=CMSampleBufferSetOutputPresentationTimeStamp,OSStatus,CMSampleBufferRef,CMTime
+=CMSampleBufferGetOutputDecodeTimeStamp,CMTime,CMSampleBufferRef
+=CMSampleBufferGetSampleTimingInfoArray,OSStatus,CMSampleBufferRef,CMItemCount,CMSampleTimingInfo*,CMItemCount*
+=CMSampleBufferGetOutputSampleTimingInfoArray,OSStatus,CMSampleBufferRef,CMItemCount,CMSampleTimingInfo*,CMItemCount*
+=CMSampleBufferGetSampleTimingInfo,OSStatus,CMSampleBufferRef,CMItemIndex,CMSampleTimingInfo*
+=CMSampleBufferGetSampleSizeArray,OSStatus,CMSampleBufferRef,CMItemCount,size_t*,CMItemCount*
+=CMSampleBufferGetSampleSize,size_t,CMSampleBufferRef,CMItemIndex
+=CMSampleBufferGetTotalSampleSize,size_t,CMSampleBufferRef
+=CMSampleBufferGetFormatDescription,CMFormatDescriptionRef,CMSampleBufferRef
+=CMSampleBufferGetSampleAttachmentsArray,CFArrayRef,CMSampleBufferRef,Boolean
+=CMSampleBufferCallForEachSample,OSStatus,CMSampleBufferRef,OSStatus
+=AudioFileStreamOpen,OSStatus,void*,AudioFileStream_PropertyListenerProc,AudioFileStream_PacketsProc,AudioFileTypeID,AudioFileStreamID*
+=AudioFileStreamParseBytes,OSStatus,AudioFileStreamID,UInt32,const void*,UInt32
+=AudioFileStreamSeek,OSStatus,AudioFileStreamID,SInt64,SInt64*,UInt32*
+=AudioFileStreamGetPropertyInfo,OSStatus,AudioFileStreamID,AudioFileStreamPropertyID,UInt32*,Boolean*
+=AudioFileStreamGetProperty,OSStatus,AudioFileStreamID,AudioFileStreamPropertyID,UInt32*,void*
+=AudioFileStreamSetProperty,OSStatus,AudioFileStreamID,AudioFileStreamPropertyID,UInt32,const void*
+=AudioFileStreamClose,OSStatus,AudioFileStreamID
+=AudioQueueNewOutput,OSStatus,const AudioStreamBasicDescription*,AudioQueueOutputCallback,void*,CFRunLoopRef,CFStringRef,UInt32,AudioQueueRef*
+=AudioQueueNewInput,OSStatus,const AudioStreamBasicDescription*,AudioQueueInputCallback,void*,CFRunLoopRef,CFStringRef,UInt32,AudioQueueRef*
+=AudioQueueNewOutputWithDispatchQueue,OSStatus,AudioQueueRef*,const AudioStreamBasicDescription*,UInt32,dispatch_queue_t,AudioQueueOutputCallbackBlock
+=AudioQueueNewInputWithDispatchQueue,OSStatus,AudioQueueRef*,const AudioStreamBasicDescription*,UInt32,dispatch_queue_t,AudioQueueInputCallbackBlock
+=AudioQueueDispose,OSStatus,AudioQueueRef,Boolean
+=AudioQueueAllocateBuffer,OSStatus,AudioQueueRef,UInt32,AudioQueueBufferRef*
+=AudioQueueAllocateBufferWithPacketDescriptions,OSStatus,AudioQueueRef,UInt32,UInt32,AudioQueueBufferRef*
+=AudioQueueFreeBuffer,OSStatus,AudioQueueRef,AudioQueueBufferRef
+=AudioQueueEnqueueBuffer,OSStatus,AudioQueueRef,AudioQueueBufferRef,UInt32,const AudioStreamPacketDescription*
+=AudioQueueEnqueueBufferWithParameters,OSStatus,AudioQueueRef,AudioQueueBufferRef,UInt32,const AudioStreamPacketDescription*,UInt32,UInt32,UInt32,const AudioQueueParameterEvent*,const AudioTimeStamp*,AudioTimeStamp*
+=AudioQueueStart,OSStatus,AudioQueueRef,const AudioTimeStamp*
+=AudioQueuePrime,OSStatus,AudioQueueRef,UInt32,UInt32*
+=AudioQueueStop,OSStatus,AudioQueueRef,Boolean
+=AudioQueuePause,OSStatus,AudioQueueRef
+=AudioQueueFlush,OSStatus,AudioQueueRef
+=AudioQueueReset,OSStatus,AudioQueueRef
+=AudioQueueGetParameter,OSStatus,AudioQueueRef,AudioQueueParameterID,AudioQueueParameterValue*
+=AudioQueueSetParameter,OSStatus,AudioQueueRef,AudioQueueParameterID,AudioQueueParameterValue
+=AudioQueueGetProperty,OSStatus,AudioQueueRef,AudioQueuePropertyID,void*,UInt32*
+=AudioQueueSetProperty,OSStatus,AudioQueueRef,AudioQueuePropertyID,const void*,UInt32
+=AudioQueueGetPropertySize,OSStatus,AudioQueueRef,AudioQueuePropertyID,UInt32*
+=AudioQueueAddPropertyListener,OSStatus,AudioQueueRef,AudioQueuePropertyID,AudioQueuePropertyListenerProc,void*
+=AudioQueueRemovePropertyListener,OSStatus,AudioQueueRef,AudioQueuePropertyID,AudioQueuePropertyListenerProc,void*
+=AudioQueueCreateTimeline,OSStatus,AudioQueueRef,AudioQueueTimelineRef*
+=AudioQueueDisposeTimeline,OSStatus,AudioQueueRef,AudioQueueTimelineRef
+=AudioQueueGetCurrentTime,OSStatus,AudioQueueRef,AudioQueueTimelineRef,AudioTimeStamp*,Boolean*
+=AudioQueueDeviceGetCurrentTime,OSStatus,AudioQueueRef,AudioTimeStamp*
+=AudioQueueDeviceTranslateTime,OSStatus,AudioQueueRef,const AudioTimeStamp*,AudioTimeStamp*
+=AudioQueueDeviceGetNearestStartTime,OSStatus,AudioQueueRef,AudioTimeStamp*,UInt32
+=AudioQueueSetOfflineRenderFormat,OSStatus,AudioQueueRef,const AudioStreamBasicDescription*,const AudioChannelLayout*
+=AudioQueueOfflineRender,OSStatus,AudioQueueRef,const AudioTimeStamp*,AudioQueueBufferRef,UInt32
+=AudioQueueProcessingTapNew,OSStatus,AudioQueueRef,AudioQueueProcessingTapCallback,void*,UInt32,UInt32*,AudioStreamBasicDescription*,AudioQueueProcessingTapRef*
+=AudioQueueProcessingTapDispose,OSStatus,AudioQueueProcessingTapRef
+=AudioQueueProcessingTapGetSourceAudio,OSStatus,AudioQueueProcessingTapRef,UInt32,AudioTimeStamp*,UInt32*,UInt32*,AudioBufferList*
+=AudioQueueProcessingTapGetQueueTime,OSStatus,AudioQueueProcessingTapRef,Float64*,UInt32*
+=AudioObjectShow,void,AudioObjectID
+=AudioObjectHasProperty,Boolean,AudioObjectID,const AudioObjectPropertyAddress*
+=AudioObjectIsPropertySettable,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,Boolean*
+=AudioObjectGetPropertyDataSize,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,UInt32,const void*,UInt32*
+=AudioObjectGetPropertyData,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,UInt32,const void*,UInt32*,void*
+=AudioObjectSetPropertyData,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,UInt32,const void*,UInt32,const void*
+=AudioObjectAddPropertyListener,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,AudioObjectPropertyListenerProc,void*
+=AudioObjectRemovePropertyListener,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,AudioObjectPropertyListenerProc,void*
+=AudioObjectAddPropertyListenerBlock,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,dispatch_queue_t,AudioObjectPropertyListenerBlock
+=AudioObjectRemovePropertyListenerBlock,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,dispatch_queue_t,AudioObjectPropertyListenerBlock
+=AudioHardwareUnload,OSStatus,
+=AudioDeviceCreateIOProcID,OSStatus,AudioObjectID,AudioDeviceIOProc,void*,AudioDeviceIOProcID*
+=AudioDeviceCreateIOProcIDWithBlock,OSStatus,AudioDeviceIOProcID*,AudioObjectID,dispatch_queue_t,AudioDeviceIOBlock
+=AudioDeviceDestroyIOProcID,OSStatus,AudioObjectID,AudioDeviceIOProcID
+=AudioDeviceStart,OSStatus,AudioObjectID,AudioDeviceIOProcID
+=AudioDeviceStartAtTime,OSStatus,AudioObjectID,AudioDeviceIOProcID,AudioTimeStamp*,UInt32
+=AudioDeviceStop,OSStatus,AudioObjectID,AudioDeviceIOProcID
+=AudioDeviceGetCurrentTime,OSStatus,AudioObjectID,AudioTimeStamp*
+=AudioDeviceTranslateTime,OSStatus,AudioObjectID,const AudioTimeStamp*,AudioTimeStamp*
+=AudioDeviceGetNearestStartTime,OSStatus,AudioObjectID,AudioTimeStamp*,UInt32
+=AudioHardwareAddRunLoopSource,OSStatus,CFRunLoopSourceRef
+=AudioHardwareRemoveRunLoopSource,OSStatus,CFRunLoopSourceRef
+=AudioHardwareGetPropertyInfo,OSStatus,AudioHardwarePropertyID,UInt32*,Boolean*
+=AudioHardwareGetProperty,OSStatus,AudioHardwarePropertyID,UInt32*,void*
+=AudioHardwareSetProperty,OSStatus,AudioHardwarePropertyID,UInt32,const void*
+=AudioHardwareAddPropertyListener,OSStatus,AudioHardwarePropertyID,AudioHardwarePropertyListenerProc,void*
+=AudioHardwareRemovePropertyListener,OSStatus,AudioHardwarePropertyID,AudioHardwarePropertyListenerProc
+=AudioDeviceAddIOProc,OSStatus,AudioDeviceID,AudioDeviceIOProc,void*
+=AudioDeviceRemoveIOProc,OSStatus,AudioDeviceID,AudioDeviceIOProc
+=AudioDeviceRead,OSStatus,AudioDeviceID,const AudioTimeStamp*,AudioBufferList*
+=AudioDeviceGetPropertyInfo,OSStatus,AudioDeviceID,UInt32,Boolean,AudioDevicePropertyID,UInt32*,Boolean*
+=AudioDeviceGetProperty,OSStatus,AudioDeviceID,UInt32,Boolean,AudioDevicePropertyID,UInt32*,void*
+=AudioDeviceSetProperty,OSStatus,AudioDeviceID,const AudioTimeStamp*,UInt32,Boolean,AudioDevicePropertyID,UInt32,const void*
+=AudioDeviceAddPropertyListener,OSStatus,AudioDeviceID,UInt32,Boolean,AudioDevicePropertyID,AudioDevicePropertyListenerProc,void*
+=AudioDeviceRemovePropertyListener,OSStatus,AudioDeviceID,UInt32,Boolean,AudioDevicePropertyID,AudioDevicePropertyListenerProc
+=AudioStreamGetPropertyInfo,OSStatus,AudioStreamID,UInt32,AudioDevicePropertyID,UInt32*,Boolean*
+=AudioStreamGetProperty,OSStatus,AudioStreamID,UInt32,AudioDevicePropertyID,UInt32*,void*
+=AudioStreamSetProperty,OSStatus,AudioStreamID,const AudioTimeStamp*,UInt32,AudioDevicePropertyID,UInt32,const void*
+=AudioStreamAddPropertyListener,OSStatus,AudioStreamID,UInt32,AudioDevicePropertyID,AudioStreamPropertyListenerProc,void*
+=AudioStreamRemovePropertyListener,OSStatus,AudioStreamID,UInt32,AudioDevicePropertyID,AudioStreamPropertyListenerProc
+=AudioServicesPlayAlertSound,void,SystemSoundID
+=AudioServicesPlaySystemSound,void,SystemSoundID
+=AudioServicesCreateSystemSoundID,OSStatus,CFURLRef,SystemSoundID*
+=AudioServicesDisposeSystemSoundID,OSStatus,SystemSoundID
+=AudioServicesAddSystemSoundCompletion,OSStatus,SystemSoundID,CFRunLoopRef,CFStringRef,AudioServicesSystemSoundCompletionProc,void*
+=AudioServicesRemoveSystemSoundCompletion,void,SystemSoundID
+=AudioServicesGetPropertyInfo,OSStatus,AudioServicesPropertyID,UInt32,const void*,UInt32*,Boolean*
+=AudioServicesGetProperty,OSStatus,AudioServicesPropertyID,UInt32,const void*,UInt32*,void*
+=AudioServicesSetProperty,OSStatus,AudioServicesPropertyID,UInt32,const void*,UInt32,const void*
+=AudioHardwareServiceHasProperty,Boolean,AudioObjectID,const AudioObjectPropertyAddress*
+=AudioHardwareServiceIsPropertySettable,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,Boolean*
+=AudioHardwareServiceGetPropertyDataSize,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,UInt32,const void*,UInt32*
+=AudioHardwareServiceGetPropertyData,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,UInt32,const void*,UInt32*,void*
+=AudioHardwareServiceSetPropertyData,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,UInt32,const void*,UInt32,const void*
+=AudioHardwareServiceAddPropertyListener,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,AudioObjectPropertyListenerProc,void*
+=AudioHardwareServiceRemovePropertyListener,OSStatus,AudioObjectID,const AudioObjectPropertyAddress*,AudioObjectPropertyListenerProc,void*
+=AudioComponentFindNext,AudioComponent,AudioComponent,const AudioComponentDescription*
+=AudioComponentCount,UInt32,const AudioComponentDescription*
+=AudioComponentCopyName,OSStatus,AudioComponent,CFStringRef*
+=AudioComponentGetDescription,OSStatus,AudioComponent,AudioComponentDescription*
+=AudioComponentGetVersion,OSStatus,AudioComponent,UInt32*
+=AudioComponentInstanceNew,OSStatus,AudioComponent,AudioComponentInstance*
+=AudioComponentInstanceDispose,OSStatus,AudioComponentInstance
+=AudioComponentInstanceGetComponent,AudioComponent,AudioComponentInstance
+=AudioComponentInstanceCanDo,Boolean,AudioComponentInstance,SInt16
+=AudioComponentRegister,AudioComponent,const AudioComponentDescription*,CFStringRef,UInt32,AudioComponentFactoryFunction
+=AudioComponentCopyConfigurationInfo,OSStatus,AudioComponent,CFDictionaryRef*
+=AudioUnitInitialize,OSStatus,AudioUnit
+=AudioUnitUninitialize,OSStatus,AudioUnit
+=AudioUnitGetPropertyInfo,OSStatus,AudioUnit,AudioUnitPropertyID,AudioUnitScope,AudioUnitElement,UInt32*,Boolean*
+=AudioUnitGetProperty,OSStatus,AudioUnit,AudioUnitPropertyID,AudioUnitScope,AudioUnitElement,void*,UInt32*
+=AudioUnitSetProperty,OSStatus,AudioUnit,AudioUnitPropertyID,AudioUnitScope,AudioUnitElement,const void*,UInt32
+=AudioUnitAddPropertyListener,OSStatus,AudioUnit,AudioUnitPropertyID,AudioUnitPropertyListenerProc,void*
+=AudioUnitRemovePropertyListenerWithUserData,OSStatus,AudioUnit,AudioUnitPropertyID,AudioUnitPropertyListenerProc,void*
+=AudioUnitAddRenderNotify,OSStatus,AudioUnit,AURenderCallback,void*
+=AudioUnitRemoveRenderNotify,OSStatus,AudioUnit,AURenderCallback,void*
+=AudioUnitGetParameter,OSStatus,AudioUnit,AudioUnitParameterID,AudioUnitScope,AudioUnitElement,AudioUnitParameterValue*
+=AudioUnitSetParameter,OSStatus,AudioUnit,AudioUnitParameterID,AudioUnitScope,AudioUnitElement,AudioUnitParameterValue,UInt32
+=AudioUnitScheduleParameters,OSStatus,AudioUnit,const AudioUnitParameterEvent*,UInt32
+=AudioUnitRender,OSStatus,AudioUnit,AudioUnitRenderActionFlags*,const AudioTimeStamp*,UInt32,UInt32,AudioBufferList*
+=AudioUnitProcess,OSStatus,AudioUnit,AudioUnitRenderActionFlags*,const AudioTimeStamp*,UInt32,AudioBufferList*
+=AudioUnitProcessMultiple,OSStatus,AudioUnit,AudioUnitRenderActionFlags*,const AudioTimeStamp*,UInt32,UInt32,const AudioBufferList**,UInt32,AudioBufferList**
+=AudioUnitReset,OSStatus,AudioUnit,AudioUnitScope,AudioUnitElement
+=AudioOutputUnitStart,OSStatus,AudioUnit
+=AudioOutputUnitStop,OSStatus,AudioUnit
+=MusicDeviceMIDIEvent,OSStatus,MusicDeviceComponent,UInt32,UInt32,UInt32,UInt32
+=MusicDeviceSysEx,OSStatus,MusicDeviceComponent,const UInt8*,UInt32
+=MusicDeviceStartNote,OSStatus,MusicDeviceComponent,MusicDeviceInstrumentID,MusicDeviceGroupID,NoteInstanceID*,UInt32,const MusicDeviceNoteParams*
+=MusicDeviceStopNote,OSStatus,MusicDeviceComponent,MusicDeviceGroupID,NoteInstanceID,UInt32
+=MusicDevicePrepareInstrument,OSStatus,MusicDeviceComponent,MusicDeviceInstrumentID
+=MusicDeviceReleaseInstrument,OSStatus,MusicDeviceComponent,MusicDeviceInstrumentID
+=AudioCodecGetPropertyInfo,OSStatus,AudioCodec,AudioCodecPropertyID,UInt32*,Boolean*
+=AudioCodecGetProperty,OSStatus,AudioCodec,AudioCodecPropertyID,UInt32*,void*
+=AudioCodecSetProperty,OSStatus,AudioCodec,AudioCodecPropertyID,UInt32,const void*
+=AudioCodecInitialize,OSStatus,AudioCodec,const AudioStreamBasicDescription*,const AudioStreamBasicDescription*,const void*,UInt32
+=AudioCodecUninitialize,OSStatus,AudioCodec
+=AudioCodecAppendInputData,OSStatus,AudioCodec,const void*,UInt32*,UInt32*,const AudioStreamPacketDescription*
+=AudioCodecProduceOutputPackets,OSStatus,AudioCodec,void*,UInt32*,UInt32*,AudioStreamPacketDescription*,UInt32*
+=AudioCodecAppendInputBufferList,OSStatus,AudioCodec,const AudioBufferList*,UInt32*,const AudioStreamPacketDescription*,UInt32*
+=AudioCodecProduceOutputBufferList,OSStatus,AudioCodec,AudioBufferList*,UInt32*,AudioStreamPacketDescription*,UInt32*
+=AudioCodecReset,OSStatus,AudioCodec
+=NewAUGraph,OSStatus,AUGraph*
+=DisposeAUGraph,OSStatus,AUGraph
+=AUGraphAddNode,OSStatus,AUGraph,const AudioComponentDescription*,AUNode*
+=AUGraphRemoveNode,OSStatus,AUGraph,AUNode
+=AUGraphGetNodeCount,OSStatus,AUGraph,UInt32*
+=AUGraphGetIndNode,OSStatus,AUGraph,UInt32,AUNode*
+=AUGraphNodeInfo,OSStatus,AUGraph,AUNode,AudioComponentDescription*,AudioUnit*
+=AUGraphNewNodeSubGraph,OSStatus,AUGraph,AUNode*
+=AUGraphGetNodeInfoSubGraph,OSStatus,const AUGraph,AUNode,AUGraph*
+=AUGraphIsNodeSubGraph,OSStatus,const AUGraph,AUNode,Boolean*
+=AUGraphConnectNodeInput,OSStatus,AUGraph,AUNode,UInt32,AUNode,UInt32
+=AUGraphSetNodeInputCallback,OSStatus,AUGraph,AUNode,UInt32,const AURenderCallbackStruct*
+=AUGraphDisconnectNodeInput,OSStatus,AUGraph,AUNode,UInt32
+=AUGraphClearConnections,OSStatus,AUGraph
+=AUGraphGetNumberOfInteractions,OSStatus,AUGraph,UInt32*
+=AUGraphGetInteractionInfo,OSStatus,AUGraph,UInt32,AUNodeInteraction*
+=AUGraphCountNodeInteractions,OSStatus,AUGraph,AUNode,UInt32*
+=AUGraphGetNodeInteractions,OSStatus,AUGraph,AUNode,UInt32*,AUNodeInteraction*
+=AUGraphUpdate,OSStatus,AUGraph,Boolean*
+=AUGraphOpen,OSStatus,AUGraph
+=AUGraphClose,OSStatus,AUGraph
+=AUGraphInitialize,OSStatus,AUGraph
+=AUGraphUninitialize,OSStatus,AUGraph
+=AUGraphStart,OSStatus,AUGraph
+=AUGraphStop,OSStatus,AUGraph
+=AUGraphIsOpen,OSStatus,AUGraph,Boolean*
+=AUGraphIsInitialized,OSStatus,AUGraph,Boolean*
+=AUGraphIsRunning,OSStatus,AUGraph,Boolean*
+=AUGraphGetCPULoad,OSStatus,AUGraph,Float32*
+=AUGraphGetMaxCPULoad,OSStatus,AUGraph,Float32*
+=AUGraphAddRenderNotify,OSStatus,AUGraph,AURenderCallback,void*
+=AUGraphRemoveRenderNotify,OSStatus,AUGraph,AURenderCallback,void*
+=AUGraphNewNode,OSStatus,AUGraph,const struct,UInt32,const void*,AUNode*
+=AUGraphGetNodeInfo,OSStatus,AUGraph,AUNode,struct,UInt32*,void**,AudioUnit*
+=AUGraphGetNumberOfConnections,OSStatus,AUGraph,UInt32*
+=AUGraphGetConnectionInfo,OSStatus,AUGraph,UInt32,AUNode*,UInt32*,AUNode*,UInt32*
+=AUGraphCountNodeConnections,OSStatus,AUGraph,AUNode,UInt32*
+=AUGraphGetNodeConnections,OSStatus,AUGraph,AUNode,AudioUnitNodeConnection*,UInt32*
+=AudioConverterNew,OSStatus,const AudioStreamBasicDescription*,const AudioStreamBasicDescription*,AudioConverterRef*
+=AudioConverterNewSpecific,OSStatus,const AudioStreamBasicDescription*,const AudioStreamBasicDescription*,UInt32,const AudioClassDescription*,AudioConverterRef*
+=AudioConverterDispose,OSStatus,AudioConverterRef
+=AudioConverterReset,OSStatus,AudioConverterRef
+=AudioConverterGetPropertyInfo,OSStatus,AudioConverterRef,AudioConverterPropertyID,UInt32*,Boolean*
+=AudioConverterGetProperty,OSStatus,AudioConverterRef,AudioConverterPropertyID,UInt32*,void*
+=AudioConverterSetProperty,OSStatus,AudioConverterRef,AudioConverterPropertyID,UInt32,const void*
+=AudioConverterFillBuffer,OSStatus,AudioConverterRef,AudioConverterInputDataProc,void*,UInt32*,void*
+=AudioConverterConvertBuffer,OSStatus,AudioConverterRef,UInt32,const void*,UInt32*,void*
+=AudioConverterFillComplexBuffer,OSStatus,AudioConverterRef,AudioConverterComplexInputDataProc,void*,UInt32*,AudioBufferList*,AudioStreamPacketDescription*
+=AudioConverterConvertComplexBuffer,OSStatus,AudioConverterRef,UInt32,const AudioBufferList*,AudioBufferList*
+=ExtAudioFileOpenURL,OSStatus,CFURLRef,ExtAudioFileRef*
+=ExtAudioFileWrapAudioFileID,OSStatus,AudioFileID,Boolean,ExtAudioFileRef*
+=ExtAudioFileCreateWithURL,OSStatus,CFURLRef,AudioFileTypeID,const AudioStreamBasicDescription*,const AudioChannelLayout*,UInt32,ExtAudioFileRef*
+=ExtAudioFileOpen,OSStatus,const struct,ExtAudioFileRef*
+=ExtAudioFileCreateNew,OSStatus,const struct,CFStringRef,AudioFileTypeID,const AudioStreamBasicDescription*,const AudioChannelLayout*,ExtAudioFileRef*
+=ExtAudioFileDispose,OSStatus,ExtAudioFileRef
+=ExtAudioFileRead,OSStatus,ExtAudioFileRef,UInt32*,AudioBufferList*
+=ExtAudioFileWrite,OSStatus,ExtAudioFileRef,UInt32,const AudioBufferList*
+=ExtAudioFileWriteAsync,OSStatus,ExtAudioFileRef,UInt32,const AudioBufferList*
+=ExtAudioFileSeek,OSStatus,ExtAudioFileRef,SInt64
+=ExtAudioFileTell,OSStatus,ExtAudioFileRef,SInt64*
+=ExtAudioFileGetPropertyInfo,OSStatus,ExtAudioFileRef,ExtAudioFilePropertyID,UInt32*,Boolean*
+=ExtAudioFileGetProperty,OSStatus,ExtAudioFileRef,ExtAudioFilePropertyID,UInt32*,void*
+=ExtAudioFileSetProperty,OSStatus,ExtAudioFileRef,ExtAudioFilePropertyID,UInt32,const void*
+=MIDIClientCreate,OSStatus,CFStringRef,MIDINotifyProc,void*,MIDIClientRef*
+=MIDIClientDispose,OSStatus,MIDIClientRef
+=MIDIInputPortCreate,OSStatus,MIDIClientRef,CFStringRef,MIDIReadProc,void*,MIDIPortRef*
+=MIDIOutputPortCreate,OSStatus,MIDIClientRef,CFStringRef,MIDIPortRef*
+=MIDIPortDispose,OSStatus,MIDIPortRef
+=MIDIPortConnectSource,OSStatus,MIDIPortRef,MIDIEndpointRef,void*
+=MIDIPortDisconnectSource,OSStatus,MIDIPortRef,MIDIEndpointRef
+=MIDIGetNumberOfDevices,ItemCount,
+=MIDIGetDevice,MIDIDeviceRef,ItemCount
+=MIDIDeviceGetNumberOfEntities,ItemCount,MIDIDeviceRef
+=MIDIDeviceGetEntity,MIDIEntityRef,MIDIDeviceRef,ItemCount
+=MIDIEntityGetNumberOfSources,ItemCount,MIDIEntityRef
+=MIDIEntityGetSource,MIDIEndpointRef,MIDIEntityRef,ItemCount
+=MIDIEntityGetNumberOfDestinations,ItemCount,MIDIEntityRef
+=MIDIEntityGetDestination,MIDIEndpointRef,MIDIEntityRef,ItemCount
+=MIDIEntityGetDevice,OSStatus,MIDIEntityRef,MIDIDeviceRef*
+=MIDIGetNumberOfSources,ItemCount,
+=MIDIGetSource,MIDIEndpointRef,ItemCount
+=MIDIGetNumberOfDestinations,ItemCount,
+=MIDIGetDestination,MIDIEndpointRef,ItemCount
+=MIDIEndpointGetEntity,OSStatus,MIDIEndpointRef,MIDIEntityRef*
+=MIDIDestinationCreate,OSStatus,MIDIClientRef,CFStringRef,MIDIReadProc,void*,MIDIEndpointRef*
+=MIDISourceCreate,OSStatus,MIDIClientRef,CFStringRef,MIDIEndpointRef*
+=MIDIEndpointDispose,OSStatus,MIDIEndpointRef
+=MIDIGetNumberOfExternalDevices,ItemCount,
+=MIDIGetExternalDevice,MIDIDeviceRef,ItemCount
+=MIDIObjectGetIntegerProperty,OSStatus,MIDIObjectRef,CFStringRef,SInt32*
+=MIDIObjectSetIntegerProperty,OSStatus,MIDIObjectRef,CFStringRef,SInt32
+=MIDIObjectGetStringProperty,OSStatus,MIDIObjectRef,CFStringRef,CFStringRef*
+=MIDIObjectSetStringProperty,OSStatus,MIDIObjectRef,CFStringRef,CFStringRef
+=MIDIObjectGetDataProperty,OSStatus,MIDIObjectRef,CFStringRef,CFDataRef*
+=MIDIObjectSetDataProperty,OSStatus,MIDIObjectRef,CFStringRef,CFDataRef
+=MIDIObjectGetDictionaryProperty,OSStatus,MIDIObjectRef,CFStringRef,CFDictionaryRef*
+=MIDIObjectSetDictionaryProperty,OSStatus,MIDIObjectRef,CFStringRef,CFDictionaryRef
+=MIDIObjectGetProperties,OSStatus,MIDIObjectRef,CFPropertyListRef*,Boolean
+=MIDIObjectRemoveProperty,OSStatus,MIDIObjectRef,CFStringRef
+=MIDIObjectFindByUniqueID,OSStatus,MIDIUniqueID,MIDIObjectRef*,MIDIObjectType*
+=MIDISend,OSStatus,MIDIPortRef,MIDIEndpointRef,const MIDIPacketList*
+=MIDISendSysex,OSStatus,MIDISysexSendRequest*
+=MIDIReceived,OSStatus,MIDIEndpointRef,const MIDIPacketList*
+=MIDIFlushOutput,OSStatus,MIDIEndpointRef
+=MIDIRestart,OSStatus,
+=MIDIPacketListInit,MIDIPacket *,MIDIPacketList*
+=MIDIPacketListAdd,MIDIPacket *,MIDIPacketList*,ByteCount,MIDIPacket*,MIDITimeStamp,ByteCount,const Byte*
+=CAClockNew,OSStatus,UInt32,CAClockRef*
+=CAClockDispose,OSStatus,CAClockRef
+=CAClockGetPropertyInfo,OSStatus,CAClockRef,CAClockPropertyID,UInt32*,Boolean*
+=CAClockGetProperty,OSStatus,CAClockRef,CAClockPropertyID,UInt32*,void*
+=CAClockSetProperty,OSStatus,CAClockRef,CAClockPropertyID,UInt32,const void*
+=CAClockAddListener,OSStatus,CAClockRef,CAClockListenerProc,void*
+=CAClockRemoveListener,OSStatus,CAClockRef,CAClockListenerProc,void*
+=CAClockSetCurrentTime,OSStatus,CAClockRef,const CAClockTime*
+=CAClockGetCurrentTime,OSStatus,CAClockRef,CAClockTimeFormat,CAClockTime*
+=CAClockGetStartTime,OSStatus,CAClockRef,CAClockTimeFormat,CAClockTime*
+=CAClockTranslateTime,OSStatus,CAClockRef,const CAClockTime*,CAClockTimeFormat,CAClockTime*
+=CAClockStart,OSStatus,CAClockRef
+=CAClockStop,OSStatus,CAClockRef
+=CAClockArm,OSStatus,CAClockRef
+=CAClockDisarm,OSStatus,CAClockRef
+=CAClockSetPlayRate,OSStatus,CAClockRef,Float64
+=CAClockGetPlayRate,OSStatus,CAClockRef,Float64*
+=CAClockGetCurrentTempo,OSStatus,CAClockRef,CAClockTempo*,CAClockTime*
+=CAClockSetCurrentTempo,OSStatus,CAClockRef,CAClockTempo,const CAClockTime*
+=CAClockSecondsToSMPTETime,OSStatus,CAClockRef,CAClockSeconds,UInt16,SMPTETime*
+=CAClockSMPTETimeToSeconds,OSStatus,CAClockRef,const SMPTETime*,CAClockSeconds*
+=CAClockBeatsToBarBeatTime,OSStatus,CAClockRef,CAClockBeats,UInt16,CABarBeatTime*
+=CAClockBarBeatTimeToBeats,OSStatus,CAClockRef,const CABarBeatTime*,CAClockBeats*
+=CAClockParseMIDI,OSStatus,CAClockRef,const struct
+=NewMusicPlayer,OSStatus,MusicPlayer*
+=DisposeMusicPlayer,OSStatus,MusicPlayer
+=MusicPlayerSetSequence,OSStatus,MusicPlayer,MusicSequence
+=MusicPlayerGetSequence,OSStatus,MusicPlayer,MusicSequence*
+=MusicPlayerSetTime,OSStatus,MusicPlayer,MusicTimeStamp
+=MusicPlayerGetTime,OSStatus,MusicPlayer,MusicTimeStamp*
+=MusicPlayerGetHostTimeForBeats,OSStatus,MusicPlayer,MusicTimeStamp,UInt64*
+=MusicPlayerGetBeatsForHostTime,OSStatus,MusicPlayer,UInt64,MusicTimeStamp*
+=MusicPlayerPreroll,OSStatus,MusicPlayer
+=MusicPlayerStart,OSStatus,MusicPlayer
+=MusicPlayerStop,OSStatus,MusicPlayer
+=MusicPlayerIsPlaying,OSStatus,MusicPlayer,Boolean*
+=MusicPlayerSetPlayRateScalar,OSStatus,MusicPlayer,Float64
+=MusicPlayerGetPlayRateScalar,OSStatus,MusicPlayer,Float64*
+=NewMusicSequence,OSStatus,MusicSequence*
+=DisposeMusicSequence,OSStatus,MusicSequence
+=MusicSequenceNewTrack,OSStatus,MusicSequence,MusicTrack*
+=MusicSequenceDisposeTrack,OSStatus,MusicSequence,MusicTrack
+=MusicSequenceGetTrackCount,OSStatus,MusicSequence,UInt32*
+=MusicSequenceGetIndTrack,OSStatus,MusicSequence,UInt32,MusicTrack*
+=MusicSequenceGetTrackIndex,OSStatus,MusicSequence,MusicTrack,UInt32*
+=MusicSequenceGetTempoTrack,OSStatus,MusicSequence,MusicTrack*
+=MusicSequenceSetAUGraph,OSStatus,MusicSequence,AUGraph
+=MusicSequenceGetAUGraph,OSStatus,MusicSequence,AUGraph*
+=MusicSequenceSetMIDIEndpoint,OSStatus,MusicSequence,MIDIEndpointRef
+=MusicSequenceSetSequenceType,OSStatus,MusicSequence,MusicSequenceType
+=MusicSequenceGetSequenceType,OSStatus,MusicSequence,MusicSequenceType*
+=MusicSequenceFileLoad,OSStatus,MusicSequence,CFURLRef,MusicSequenceFileTypeID,MusicSequenceLoadFlags
+=MusicSequenceFileLoadData,OSStatus,MusicSequence,CFDataRef,MusicSequenceFileTypeID,MusicSequenceLoadFlags
+=MusicSequenceFileCreate,OSStatus,MusicSequence,CFURLRef,MusicSequenceFileTypeID,MusicSequenceFileFlags,SInt16
+=MusicSequenceFileCreateData,OSStatus,MusicSequence,MusicSequenceFileTypeID,MusicSequenceFileFlags,SInt16,CFDataRef*
+=MusicSequenceReverse,OSStatus,MusicSequence
+=MusicSequenceGetSecondsForBeats,OSStatus,MusicSequence,MusicTimeStamp,Float64*
+=MusicSequenceGetBeatsForSeconds,OSStatus,MusicSequence,Float64,MusicTimeStamp*
+=MusicSequenceSetUserCallback,OSStatus,MusicSequence,MusicSequenceUserCallback,void*
+=MusicSequenceBeatsToBarBeatTime,OSStatus,MusicSequence,MusicTimeStamp,UInt32,CABarBeatTime*
+=MusicSequenceBarBeatTimeToBeats,OSStatus,MusicSequence,const CABarBeatTime*,MusicTimeStamp*
+=MusicSequenceGetInfoDictionary,CFDictionaryRef,MusicSequence
+=MusicTrackGetSequence,OSStatus,MusicTrack,MusicSequence*
+=MusicTrackSetDestNode,OSStatus,MusicTrack,AUNode
+=MusicTrackSetDestMIDIEndpoint,OSStatus,MusicTrack,MIDIEndpointRef
+=MusicTrackGetDestNode,OSStatus,MusicTrack,AUNode*
+=MusicTrackGetDestMIDIEndpoint,OSStatus,MusicTrack,MIDIEndpointRef*
+=MusicTrackSetProperty,OSStatus,MusicTrack,UInt32,void*,UInt32
+=MusicTrackGetProperty,OSStatus,MusicTrack,UInt32,void*,UInt32*
+=MusicTrackMoveEvents,OSStatus,MusicTrack,MusicTimeStamp,MusicTimeStamp,MusicTimeStamp
+=MusicTrackClear,OSStatus,MusicTrack,MusicTimeStamp,MusicTimeStamp
+=MusicTrackCut,OSStatus,MusicTrack,MusicTimeStamp,MusicTimeStamp
+=MusicTrackCopyInsert,OSStatus,MusicTrack,MusicTimeStamp,MusicTimeStamp,MusicTrack,MusicTimeStamp
+=MusicTrackMerge,OSStatus,MusicTrack,MusicTimeStamp,MusicTimeStamp,MusicTrack,MusicTimeStamp
+=MusicTrackNewMIDINoteEvent,OSStatus,MusicTrack,MusicTimeStamp,const MIDINoteMessage*
+=MusicTrackNewMIDIChannelEvent,OSStatus,MusicTrack,MusicTimeStamp,const MIDIChannelMessage*
+=MusicTrackNewMIDIRawDataEvent,OSStatus,MusicTrack,MusicTimeStamp,const MIDIRawData*
+=MusicTrackNewExtendedNoteEvent,OSStatus,MusicTrack,MusicTimeStamp,const ExtendedNoteOnEvent*
+=MusicTrackNewParameterEvent,OSStatus,MusicTrack,MusicTimeStamp,const ParameterEvent*
+=MusicTrackNewExtendedTempoEvent,OSStatus,MusicTrack,MusicTimeStamp,Float64
+=MusicTrackNewMetaEvent,OSStatus,MusicTrack,MusicTimeStamp,const MIDIMetaEvent*
+=MusicTrackNewUserEvent,OSStatus,MusicTrack,MusicTimeStamp,const MusicEventUserData*
+=MusicTrackNewAUPresetEvent,OSStatus,MusicTrack,MusicTimeStamp,const AUPresetEvent*
+=NewMusicEventIterator,OSStatus,MusicTrack,MusicEventIterator*
+=DisposeMusicEventIterator,OSStatus,MusicEventIterator
+=MusicEventIteratorSeek,OSStatus,MusicEventIterator,MusicTimeStamp
+=MusicEventIteratorNextEvent,OSStatus,MusicEventIterator
+=MusicEventIteratorPreviousEvent,OSStatus,MusicEventIterator
+=MusicEventIteratorGetEventInfo,OSStatus,MusicEventIterator,MusicTimeStamp*,MusicEventType*,const void**,UInt32*
+=MusicEventIteratorSetEventInfo,OSStatus,MusicEventIterator,MusicEventType,const void*
+=MusicEventIteratorSetEventTime,OSStatus,MusicEventIterator,MusicTimeStamp
+=MusicEventIteratorDeleteEvent,OSStatus,MusicEventIterator
+=MusicEventIteratorHasPreviousEvent,OSStatus,MusicEventIterator,Boolean*
+=MusicEventIteratorHasNextEvent,OSStatus,MusicEventIterator,Boolean*
+=MusicEventIteratorHasCurrentEvent,OSStatus,MusicEventIterator,Boolean*
+=MusicSequenceLoadSMFWithFlags,OSStatus,MusicSequence,const struct,MusicSequenceLoadFlags
+=MusicSequenceLoadSMFDataWithFlags,OSStatus,MusicSequence,CFDataRef,MusicSequenceLoadFlags
+=MusicSequenceSaveMIDIFile,OSStatus,MusicSequence,const struct,CFStringRef,UInt16,UInt32
+=MusicSequenceSaveSMFData,OSStatus,MusicSequence,CFDataRef*,UInt16
+=NewMusicTrackFrom,OSStatus,MusicTrack,MusicTimeStamp,MusicTimeStamp,MusicTrack*
+=MusicTrackNewExtendedControlEvent,OSStatus,MusicTrack,MusicTimeStamp,const ExtendedControlEvent*
+=AudioFileComponentCreateURL,OSStatus,AudioFileComponent,CFURLRef,const AudioStreamBasicDescription*,UInt32
+=AudioFileComponentOpenURL,OSStatus,AudioFileComponent,CFURLRef,SInt8,int
+=AudioFileComponentOpenWithCallbacks,OSStatus,AudioFileComponent,void*,AudioFile_ReadProc,AudioFile_WriteProc,AudioFile_GetSizeProc,AudioFile_SetSizeProc
+=AudioFileComponentInitializeWithCallbacks,OSStatus,AudioFileComponent,void*,AudioFile_ReadProc,AudioFile_WriteProc,AudioFile_GetSizeProc,AudioFile_SetSizeProc,UInt32,const AudioStreamBasicDescription*,UInt32
+=AudioFileComponentCloseFile,OSStatus,AudioFileComponent
+=AudioFileComponentOptimize,OSStatus,AudioFileComponent
+=AudioFileComponentReadBytes,OSStatus,AudioFileComponent,Boolean,SInt64,UInt32*,void*
+=AudioFileComponentWriteBytes,OSStatus,AudioFileComponent,Boolean,SInt64,UInt32*,const void*
+=AudioFileComponentReadPackets,OSStatus,AudioFileComponent,Boolean,UInt32*,AudioStreamPacketDescription*,SInt64,UInt32*,void*
+=AudioFileComponentReadPacketData,OSStatus,AudioFileComponent,Boolean,UInt32*,AudioStreamPacketDescription*,SInt64,UInt32*,void*
+=AudioFileComponentWritePackets,OSStatus,AudioFileComponent,Boolean,UInt32,const AudioStreamPacketDescription*,SInt64,UInt32*,const void*
+=AudioFileComponentGetPropertyInfo,OSStatus,AudioFileComponent,AudioFileComponentPropertyID,UInt32*,UInt32*
+=AudioFileComponentGetProperty,OSStatus,AudioFileComponent,AudioFileComponentPropertyID,UInt32*,void*
+=AudioFileComponentSetProperty,OSStatus,AudioFileComponent,AudioFileComponentPropertyID,UInt32,const void*
+=AudioFileComponentCountUserData,OSStatus,AudioFileComponent,UInt32,UInt32*
+=AudioFileComponentGetUserDataSize,OSStatus,AudioFileComponent,UInt32,UInt32,UInt32*
+=AudioFileComponentGetUserData,OSStatus,AudioFileComponent,UInt32,UInt32,UInt32*,void*
+=AudioFileComponentSetUserData,OSStatus,AudioFileComponent,UInt32,UInt32,UInt32,const void*
+=AudioFileComponentRemoveUserData,OSStatus,AudioFileComponent,UInt32,UInt32
+=AudioFileComponentExtensionIsThisFormat,OSStatus,AudioFileComponent,CFStringRef,UInt32*
+=AudioFileComponentFileDataIsThisFormat,OSStatus,AudioFileComponent,UInt32,const void*,UInt32*
+=AudioFileComponentFileIsThisFormat,OSStatus,AudioFileComponent,SInt16,UInt32*
+=AudioFileComponentDataIsThisFormat,OSStatus,AudioFileComponent,void*,AudioFile_ReadProc,AudioFile_WriteProc,AudioFile_GetSizeProc,AudioFile_SetSizeProc,UInt32*
+=AudioFileComponentGetGlobalInfoSize,OSStatus,AudioFileComponent,AudioFileComponentPropertyID,UInt32,const void*,UInt32*
+=AudioFileComponentGetGlobalInfo,OSStatus,AudioFileComponent,AudioFileComponentPropertyID,UInt32,const void*,UInt32*,void*
+=AudioFileComponentCreate,OSStatus,AudioFileComponent,const struct,CFStringRef,const AudioStreamBasicDescription*,UInt32,struct
+=AudioFileComponentInitialize,OSStatus,AudioFileComponent,const struct,const AudioStreamBasicDescription*,UInt32
+=AudioFileComponentOpenFile,OSStatus,AudioFileComponent,const struct,SInt8,SInt16
+=AUListenerCreateWithDispatchQueue,OSStatus,AUParameterListenerRef*,Float32,dispatch_queue_t,AUParameterListenerBlock
+=AUListenerCreate,OSStatus,AUParameterListenerProc,void*,CFRunLoopRef,CFStringRef,Float32,AUParameterListenerRef*
+=AUListenerDispose,OSStatus,AUParameterListenerRef
+=AUListenerAddParameter,OSStatus,AUParameterListenerRef,void*,const AudioUnitParameter*
+=AUListenerRemoveParameter,OSStatus,AUParameterListenerRef,void*,const AudioUnitParameter*
+=AUParameterSet,OSStatus,AUParameterListenerRef,void*,const AudioUnitParameter*,AudioUnitParameterValue,UInt32
+=AUParameterListenerNotify,OSStatus,AUParameterListenerRef,void*,const AudioUnitParameter*
+=AUEventListenerCreateWithDispatchQueue,OSStatus,AUEventListenerRef*,Float32,Float32,dispatch_queue_t,AUEventListenerBlock
+=AUEventListenerCreate,OSStatus,AUEventListenerProc,void*,CFRunLoopRef,CFStringRef,Float32,Float32,AUEventListenerRef*
+=AUEventListenerAddEventType,OSStatus,AUEventListenerRef,void*,const AudioUnitEvent*
+=AUEventListenerRemoveEventType,OSStatus,AUEventListenerRef,void*,const AudioUnitEvent*
+=AUEventListenerNotify,OSStatus,AUEventListenerRef,void*,const AudioUnitEvent*
+=AUParameterValueFromLinear,AudioUnitParameterValue,Float32,const AudioUnitParameter*
+=AUParameterValueToLinear,Float32,AudioUnitParameterValue,const AudioUnitParameter*
+=AUParameterFormatValue,char *,Float64,const AudioUnitParameter*,char*,UInt32
+=CAShow,void,void*
+=CAShowFile,void,void*,FILE*
+=GetNameFromSoundBank,OSStatus,const struct,CFStringRef*
+=CopyNameFromSoundBank,OSStatus,CFURLRef,CFStringRef*
+=CopyInstrumentInfoFromSoundBank,OSStatus,CFURLRef,CFArrayRef*
+=MTAudioProcessingTapGetTypeID,CFTypeID,void
+=MTAudioProcessingTapCreate,OSStatus,CFAllocatorRef,const MTAudioProcessingTapCallbacks*,MTAudioProcessingTapCreationFlags,MTAudioProcessingTapRef*
+=MTAudioProcessingTapGetStorage,void *,MTAudioProcessingTapRef
+=MTAudioProcessingTapGetSourceAudio,OSStatus,MTAudioProcessingTapRef,CMItemCount,AudioBufferList*,MTAudioProcessingTapFlags*,CMTimeRange*,CMItemCount*
+=CMClockGetTypeID,CFTypeID,void
+=CMClockGetHostTimeClock,CMClockRef,void
+=CMClockConvertHostTimeToSystemUnits,uint64_t,CMTime
+=CMClockMakeHostTimeFromSystemUnits,CMTime,uint64_t
+=CMClockGetTime,CMTime,CMClockRef
+=CMClockGetAnchorTime,OSStatus,CMClockRef,CMTime*,CMTime*
+=CMClockMightDrift,Boolean,CMClockRef,CMClockRef
+=CMClockInvalidate,void,CMClockRef
+=CMTimebaseGetTypeID,CFTypeID,void
+=CMTimebaseCreateWithMasterClock,OSStatus,CFAllocatorRef,CMClockRef,CMTimebaseRef*
+=CMTimebaseCreateWithMasterTimebase,OSStatus,CFAllocatorRef,CMTimebaseRef,CMTimebaseRef*
+=CMTimebaseGetMasterTimebase,CMTimebaseRef,CMTimebaseRef
+=CMTimebaseGetMasterClock,CMClockRef,CMTimebaseRef
+=CMTimebaseGetMaster,CMClockOrTimebaseRef,CMTimebaseRef
+=CMTimebaseGetUltimateMasterClock,CMClockRef,CMTimebaseRef
+=CMTimebaseGetTime,CMTime,CMTimebaseRef
+=CMTimebaseGetTimeWithTimeScale,CMTime,CMTimebaseRef,CMTimeScale,CMTimeRoundingMethod
+=CMTimebaseSetTime,OSStatus,CMTimebaseRef,CMTime
+=CMTimebaseSetAnchorTime,OSStatus,CMTimebaseRef,CMTime,CMTime
+=CMTimebaseGetRate,Float64,CMTimebaseRef
+=CMTimebaseGetTimeAndRate,OSStatus,CMTimebaseRef,CMTime*,Float64*
+=CMTimebaseSetRate,OSStatus,CMTimebaseRef,Float64
+=CMTimebaseSetRateAndAnchorTime,OSStatus,CMTimebaseRef,Float64,CMTime,CMTime
+=CMTimebaseGetEffectiveRate,Float64,CMTimebaseRef
+=CMTimebaseAddTimer,OSStatus,CMTimebaseRef,CFRunLoopTimerRef,CFRunLoopRef
+=CMTimebaseRemoveTimer,OSStatus,CMTimebaseRef,CFRunLoopTimerRef
+=CMTimebaseSetTimerNextFireTime,OSStatus,CMTimebaseRef,CFRunLoopTimerRef,CMTime,uint32_t
+=CMTimebaseSetTimerToFireImmediately,OSStatus,CMTimebaseRef,CFRunLoopTimerRef
+=CMTimebaseAddTimerDispatchSource,OSStatus,CMTimebaseRef,dispatch_source_t
+=CMTimebaseRemoveTimerDispatchSource,OSStatus,CMTimebaseRef,dispatch_source_t
+=CMTimebaseSetTimerDispatchSourceNextFireTime,OSStatus,CMTimebaseRef,dispatch_source_t,CMTime,uint32_t
+=CMTimebaseSetTimerDispatchSourceToFireImmediately,OSStatus,CMTimebaseRef,dispatch_source_t
+=CMSyncGetRelativeRate,Float64,CMClockOrTimebaseRef,CMClockOrTimebaseRef
+=CMSyncGetRelativeRateAndAnchorTime,OSStatus,CMClockOrTimebaseRef,CMClockOrTimebaseRef,Float64*,CMTime*,CMTime*
+=CMSyncConvertTime,CMTime,CMTime,CMClockOrTimebaseRef,CMClockOrTimebaseRef
+=CMSyncMightDrift,Boolean,CMClockOrTimebaseRef,CMClockOrTimebaseRef
+=CMSyncGetTime,CMTime,CMClockOrTimebaseRef
+=CMTimebaseNotificationBarrier,OSStatus,CMTimebaseRef
+=AVMakeRectWithAspectRatioInsideRect,CGRect,CGSize,CGRect
+&AudioFile_ReadProc,OSStatus,void*,SInt64,UInt32,void*,UInt32*
+&AudioFile_WriteProc,OSStatus,void*,SInt64,UInt32,const void*,UInt32*
+&AudioFile_GetSizeProc,SInt64,void*
+&AudioFile_SetSizeProc,OSStatus,void*,SInt64
+&CMSampleBufferMakeDataReadyCallback,OSStatus,CMSampleBufferRef,void*
+&CMSampleBufferInvalidateCallback,void,CMSampleBufferRef,uint64_t
+&AudioFileStream_PropertyListenerProc,void,void*,AudioFileStreamID,AudioFileStreamPropertyID,UInt32*
+&AudioFileStream_PacketsProc,void,void*,UInt32,UInt32,const void*,AudioStreamPacketDescription*
+&AudioQueueOutputCallback,void,void*,AudioQueueRef,AudioQueueBufferRef
+&AudioQueueInputCallback,void,void*,AudioQueueRef,AudioQueueBufferRef,const AudioTimeStamp*,UInt32,const AudioStreamPacketDescription*
+&AudioQueuePropertyListenerProc,void,void*,AudioQueueRef,AudioQueuePropertyID
+&AudioQueueProcessingTapCallback,void,void*,AudioQueueProcessingTapRef,UInt32,AudioTimeStamp*,UInt32*,UInt32*,AudioBufferList*
+&AudioObjectPropertyListenerProc,OSStatus,AudioObjectID,UInt32,const AudioObjectPropertyAddress,void*
+&AudioDeviceIOProc,OSStatus,AudioObjectID,const AudioTimeStamp*,const AudioBufferList*,const AudioTimeStamp*,AudioBufferList*,const AudioTimeStamp*,void*
+&AudioHardwarePropertyListenerProc,OSStatus,AudioHardwarePropertyID,void*
+&AudioDevicePropertyListenerProc,OSStatus,AudioDeviceID,UInt32,Boolean,AudioDevicePropertyID,void*
+&AudioStreamPropertyListenerProc,OSStatus,AudioStreamID,UInt32,AudioDevicePropertyID,void*
+&AudioServicesSystemSoundCompletionProc,void,SystemSoundID,void*
+&AudioComponentMethod,OSStatus,void*,
+&AURenderCallback,OSStatus,void*,AudioUnitRenderActionFlags*,const AudioTimeStamp*,UInt32,UInt32,AudioBufferList*
+&AudioUnitPropertyListenerProc,void,void*,AudioUnit,AudioUnitPropertyID,AudioUnitScope,AudioUnitElement
+&AUInputSamplesInOutputCallback,void,void*,const AudioTimeStamp*,Float64,Float64
+&AudioUnitInitializeProc,OSStatus,void*
+&AudioUnitUninitializeProc,OSStatus,void*
+&AudioUnitGetPropertyInfoProc,OSStatus,void*,AudioUnitPropertyID,AudioUnitScope,AudioUnitElement,UInt32*,Boolean*
+&AudioUnitGetPropertyProc,OSStatus,void*,AudioUnitPropertyID,AudioUnitScope,AudioUnitElement,void*,UInt32*
+&AudioUnitSetPropertyProc,OSStatus,void*,AudioUnitPropertyID,AudioUnitScope,AudioUnitElement,const void*,UInt32
+&AudioUnitAddPropertyListenerProc,OSStatus,void*,AudioUnitPropertyID,AudioUnitPropertyListenerProc,void*
+&AudioUnitRemovePropertyListenerProc,OSStatus,void*,AudioUnitPropertyID,AudioUnitPropertyListenerProc
+&AudioUnitRemovePropertyListenerWithUserDataProc,OSStatus,void*,AudioUnitPropertyID,AudioUnitPropertyListenerProc,void*
+&AudioUnitAddRenderNotifyProc,OSStatus,void*,AURenderCallback,void*
+&AudioUnitRemoveRenderNotifyProc,OSStatus,void*,AURenderCallback,void*
+&AudioUnitScheduleParametersProc,OSStatus,void*,const AudioUnitParameterEvent*,UInt32
+&AudioUnitResetProc,OSStatus,void*,AudioUnitScope,AudioUnitElement
+&AudioUnitComplexRenderProc,OSStatus,void*,AudioUnitRenderActionFlags*,const AudioTimeStamp*,UInt32,UInt32,UInt32*,AudioStreamPacketDescription*,AudioBufferList*,void*,UInt32*
+&AudioUnitProcessProc,OSStatus,void*,AudioUnitRenderActionFlags*,const AudioTimeStamp*,UInt32,AudioBufferList*
+&AudioUnitProcessMultipleProc,OSStatus,void*,AudioUnitRenderActionFlags*,const AudioTimeStamp*,UInt32,UInt32,const AudioBufferList**,UInt32,AudioBufferList**
+&AudioUnitGetParameterProc,OSStatus,void*,AudioUnitParameterID,AudioUnitScope,AudioUnitElement,AudioUnitParameterValue*
+&AudioUnitSetParameterProc,OSStatus,void*,AudioUnitParameterID,AudioUnitScope,AudioUnitElement,AudioUnitParameterValue,UInt32
+&AudioUnitRenderProc,OSStatus,void*,AudioUnitRenderActionFlags*,const AudioTimeStamp*,UInt32,UInt32,AudioBufferList*
+&AudioOutputUnitStartProc,OSStatus,void*
+&AudioOutputUnitStopProc,OSStatus,void*
+&HostCallback_GetBeatAndTempo,OSStatus,void*,Float64*,Float64*
+&HostCallback_GetMusicalTimeLocation,OSStatus,void*,UInt32*,Float32*,UInt32*,Float64*
+&HostCallback_GetTransportState,OSStatus,void*,Boolean*,Boolean*,Float64*,Boolean*,Float64*,Float64*
+&HostCallback_GetTransportState2,OSStatus,void*,Boolean*,Boolean*,Boolean*,Float64*,Boolean*,Float64*,Float64*
+&AUMIDIOutputCallback,OSStatus,void*,const AudioTimeStamp*,UInt32,const struct
+&ScheduledAudioSliceCompletionProc,void,void*,ScheduledAudioSlice*
+&ScheduledAudioFileRegionCompletionProc,void,void*,ScheduledAudioFileRegion*,OSStatus
+&MusicDeviceMIDIEventProc,OSStatus,void*,UInt32,UInt32,UInt32,UInt32
+&MusicDeviceSysExProc,OSStatus,void*,const UInt8*,UInt32
+&MusicDeviceStartNoteProc,OSStatus,void*,MusicDeviceInstrumentID,MusicDeviceGroupID,NoteInstanceID*,UInt32,const MusicDeviceNoteParams*
+&MusicDeviceStopNoteProc,OSStatus,void*,MusicDeviceGroupID,NoteInstanceID,UInt32
+&AudioCodecGetPropertyInfoProc,OSStatus,void*,AudioCodecPropertyID,UInt32*,Boolean*
+&AudioCodecGetPropertyProc,OSStatus,void*,AudioCodecPropertyID,UInt32*,void*
+&AudioCodecSetPropertyProc,OSStatus,void*,AudioCodecPropertyID,UInt32,const void*
+&AudioCodecInitializeProc,OSStatus,void*,const AudioStreamBasicDescription*,const AudioStreamBasicDescription*,const void*,UInt32
+&AudioCodecUninitializeProc,OSStatus,void*
+&AudioCodecAppendInputDataProc,OSStatus,void*,const void*,UInt32*,UInt32*,const AudioStreamPacketDescription*
+&AudioCodecProduceOutputPacketsProc,OSStatus,void*,void*,UInt32*,UInt32*,AudioStreamPacketDescription*,UInt32*
+&AudioCodecResetProc,OSStatus,void*
+&AudioCodecAppendInputBufferListProc,OSStatus,void*,const AudioBufferList*,UInt32*,const AudioStreamPacketDescription*,UInt32*
+&AudioCodecProduceOutputBufferListProc,OSStatus,void*,AudioBufferList*,UInt32*,AudioStreamPacketDescription*,UInt32*
+&AudioConverterInputDataProc,OSStatus,AudioConverterRef,UInt32*,void**,void*
+&AudioConverterComplexInputDataProc,OSStatus,AudioConverterRef,UInt32*,AudioBufferList*,AudioStreamPacketDescription**,void*
+&MIDINotifyProc,void,const MIDINotification*,void*
+&MIDIReadProc,void,const MIDIPacketList*,void*,void*
+&MIDICompletionProc,void,MIDISysexSendRequest*
+&CAClockListenerProc,void,void*,CAClockMessage,const void*
+&MusicSequenceUserCallback,void,void*,MusicSequence,MusicTrack,MusicTimeStamp,const MusicEventUserData*,MusicTimeStamp,MusicTimeStamp
+&ReadBytesFDF,OSStatus,void*,Boolean,SInt64,UInt32*,void*
+&WriteBytesFDF,OSStatus,void*,Boolean,SInt64,UInt32*,const void*
+&ReadPacketsFDF,OSStatus,void*,Boolean,UInt32*,AudioStreamPacketDescription*,SInt64,UInt32*,void*
+&ReadPacketDataFDF,OSStatus,void*,Boolean,UInt32*,AudioStreamPacketDescription*,SInt64,UInt32*,void*
+&WritePacketsFDF,OSStatus,void*,Boolean,UInt32,const AudioStreamPacketDescription*,SInt64,UInt32*,const void*
+&GetPropertyInfoFDF,OSStatus,void*,AudioFilePropertyID,UInt32*,UInt32*
+&GetPropertyFDF,OSStatus,void*,AudioFilePropertyID,UInt32*,void*
+&SetPropertyFDF,OSStatus,void*,AudioFilePropertyID,UInt32,const void*
+&CountUserDataFDF,OSStatus,void*,UInt32,UInt32*
+&GetUserDataSizeFDF,OSStatus,void*,UInt32,UInt32,UInt32*
+&GetUserDataFDF,OSStatus,void*,UInt32,UInt32,UInt32*,void*
+&SetUserDataFDF,OSStatus,void*,UInt32,UInt32,UInt32,const void*
+&AudioFileComponentCreateURLProc,OSStatus,void*,CFURLRef,const AudioStreamBasicDescription*,UInt32
+&AudioFileComponentOpenURLProc,OSStatus,void*,CFURLRef,SInt8,int
+&AudioFileComponentOpenWithCallbacksProc,OSStatus,void*,void*,AudioFile_ReadProc,AudioFile_WriteProc,AudioFile_GetSizeProc,AudioFile_SetSizeProc
+&AudioFileComponentInitializeWithCallbacksProc,OSStatus,void*,void*,AudioFile_ReadProc,AudioFile_WriteProc,AudioFile_GetSizeProc,AudioFile_SetSizeProc,UInt32,const AudioStreamBasicDescription*,UInt32
+&AudioFileComponentCloseProc,OSStatus,void*
+&AudioFileComponentOptimizeProc,OSStatus,void*
+&AudioFileComponentReadBytesProc,OSStatus,void*,Boolean,SInt64,UInt32*,void*
+&AudioFileComponentWriteBytesProc,OSStatus,void*,Boolean,SInt64,UInt32*,const void*
+&AudioFileComponentReadPacketsProc,OSStatus,void*,Boolean,UInt32*,AudioStreamPacketDescription*,SInt64,UInt32*,void*
+&AudioFileComponentReadPacketDataProc,OSStatus,void*,Boolean,UInt32*,AudioStreamPacketDescription*,SInt64,UInt32*,void*
+&AudioFileComponentWritePacketsProc,OSStatus,void*,Boolean,UInt32,const AudioStreamPacketDescription*,SInt64,UInt32*,const void*
+&AudioFileComponentGetPropertyInfoProc,OSStatus,void*,AudioFileComponentPropertyID,UInt32*,UInt32*
+&AudioFileComponentGetPropertyProc,OSStatus,void*,AudioFileComponentPropertyID,UInt32*,void*
+&AudioFileComponentSetPropertyProc,OSStatus,void*,AudioFileComponentPropertyID,UInt32,const void*
+&AudioFileComponentCountUserDataProc,OSStatus,void*,UInt32,UInt32*
+&AudioFileComponentGetUserDataSizeProc,OSStatus,void*,UInt32,UInt32,UInt32*
+&AudioFileComponentGetUserDataProc,OSStatus,void*,UInt32,UInt32,UInt32*,void*
+&AudioFileComponentSetUserDataProc,OSStatus,void*,UInt32,UInt32,UInt32,const void*
+&AudioFileComponentRemoveUserDataProc,OSStatus,void*,UInt32,UInt32
+&AudioFileComponentExtensionIsThisFormatProc,OSStatus,void*,CFStringRef,UInt32*
+&AudioFileComponentFileDataIsThisFormatProc,OSStatus,void*,UInt32,const void*,UInt32*
+&AudioFileComponentGetGlobalInfoSizeProc,OSStatus,void*,AudioFileComponentPropertyID,UInt32,const void*,UInt32*
+&AudioFileComponentGetGlobalInfoProc,OSStatus,void*,AudioFileComponentPropertyID,UInt32,const void*,UInt32*,void*
+&AUParameterListenerProc,void,void*,void*,const AudioUnitParameter*,AudioUnitParameterValue
+&AUEventListenerProc,void,void*,void*,const AudioUnitEvent*,UInt64,AudioUnitParameterValue
+&MTAudioProcessingTapInitCallback,void,MTAudioProcessingTapRef,void*,void**
+&MTAudioProcessingTapFinalizeCallback,void,MTAudioProcessingTapRef
+&MTAudioProcessingTapPrepareCallback,void,MTAudioProcessingTapRef,CMItemCount,const AudioStreamBasicDescription*
+&MTAudioProcessingTapUnprepareCallback,void,MTAudioProcessingTapRef
+&MTAudioProcessingTapProcessCallback,void,MTAudioProcessingTapRef,CMItemCount,MTAudioProcessingTapFlags,AudioBufferList*,CMItemCount*,MTAudioProcessingTapFlags*
+~AVAudioQuality,NSInteger
+~AudioFileTypeID,UInt32
+~AudioFilePropertyID,UInt32
+~AVKeyValueStatus,NSInteger
+~CMPersistentTrackID,int32_t
+~CMTimeValue,int64_t
+~CMTimeScale,int32_t
+~CMTimeEpoch,int64_t
+~CMTimeFlags,uint32_t
+~CMTimeRoundingMethod,uint32_t
+~AVAssetReferenceRestrictions,NSUInteger
+~AVAssetExportSessionStatus,NSInteger
+~AVAssetImageGeneratorResult,NSInteger
+~CMAttachmentBearerRef,CFTypeRef
+~CMAttachmentMode,uint32_t
+~CMBlockBufferFlags,uint32_t
+~AudioFormatPropertyID,UInt32
+~CMMediaType,FourCharCode
+~CMAudioCodecType,FourCharCode
+~CMAudioFormatDescriptionRef,CMFormatDescriptionRef
+~CMAudioFormatDescriptionMask,uint32_t
+~CMVideoFormatDescriptionRef,CMFormatDescriptionRef
+~CMPixelFormatType,FourCharCode
+~CMVideoCodecType,FourCharCode
+~CMMuxedFormatDescriptionRef,CMFormatDescriptionRef
+~CMMuxedStreamType,FourCharCode
+~CMClosedCaptionFormatDescriptionRef,CMFormatDescriptionRef
+~CMClosedCaptionFormatType,FourCharCode
+~CMTextFormatType,FourCharCode
+~CMTextDisplayFlags,uint32_t
+~CMTextJustificationValue,int8_t
+~CMSubtitleFormatType,FourCharCode
+~CMTimeCodeFormatDescriptionRef,CMFormatDescriptionRef
+~CMTimeCodeFormatType,FourCharCode
+~CMMetadataFormatDescriptionRef,CMFormatDescriptionRef
+~CMMetadataFormatType,FourCharCode
+~AVAssetReaderStatus,NSInteger
+~AVAssetWriterStatus,NSInteger
+~AudioFileStreamPropertyID,UInt32
+~AudioQueuePropertyID,UInt32
+~AudioQueueParameterID,UInt32
+~AudioQueueParameterValue,Float32
+~AudioObjectID,UInt32
+~AudioClassID,UInt32
+~AudioObjectPropertySelector,UInt32
+~AudioObjectPropertyScope,UInt32
+~AudioObjectPropertyElement,UInt32
+&AudioDeviceIOProcID,OSStatus,AudioObjectID,const AudioTimeStamp*,const AudioBufferList*,const AudioTimeStamp*,AudioBufferList*,const AudioTimeStamp*,void*
+~AudioHardwarePropertyID,AudioObjectPropertySelector
+~AudioDeviceID,AudioObjectID
+~AudioDevicePropertyID,AudioObjectPropertySelector
+~AudioStreamID,AudioObjectID
+~SystemSoundID,UInt32
+~AudioServicesPropertyID,UInt32
+~AudioUnit,AudioComponentInstance
+~AudioUnitRenderActionFlags,UInt32
+~AudioUnitPropertyID,UInt32
+~AudioUnitScope,UInt32
+~AudioUnitElement,UInt32
+~AudioUnitParameterID,UInt32
+~AudioUnitParameterValue,Float32
+~AUParameterEventType,UInt32
+~AudioUnitParameterUnit,UInt32
+~MusicDeviceInstrumentID,UInt32
+~MusicDeviceGroupID,UInt32
+~NoteInstanceID,UInt32
+~MusicDeviceComponent,AudioComponentInstance
+~AudioCodec,AudioComponentInstance
+~AudioCodecPropertyID,UInt32
+~AUNode,SInt32
+~AudioConverterPropertyID,UInt32
+~ExtAudioFilePropertyID,UInt32
+~MIDIObjectRef,UInt32
+~MIDIClientRef,MIDIObjectRef
+~MIDIPortRef,MIDIObjectRef
+~MIDIDeviceRef,MIDIObjectRef
+~MIDIEntityRef,MIDIObjectRef
+~MIDIEndpointRef,MIDIObjectRef
+~MIDITimeStamp,UInt64
+~MIDIObjectType,SInt32
+~MIDIUniqueID,SInt32
+~MIDINotificationMessageID,SInt32
+~MusicEventType,UInt32
+~MusicSequenceLoadFlags,UInt32
+~MusicSequenceType,UInt32
+~MusicSequenceFileTypeID,UInt32
+~MusicSequenceFileFlags,UInt32
+~MusicTimeStamp,Float64
+~CAClockPropertyID,UInt32
+~CAClockTimebase,UInt32
+~CAClockSyncMode,UInt32
+~CAClockSMPTEFormat,UInt32
+~CAClockMessage,UInt32
+~CAClockTimeFormat,UInt32
+~CAClockBeats,Float64
+~CAClockTempo,Float64
+~CAClockSamples,Float64
+~CAClockSeconds,Float64
+~AudioFileComponent,AudioComponentInstance
+~AudioFileComponentPropertyID,UInt32
+~AudioUnitEventType,UInt32
+~AUEventListenerRef,AUParameterListenerRef
+~MTAudioProcessingTapCreationFlags,uint32_t
+~MTAudioProcessingTapFlags,uint32_t
+~AVCaptureDevicePosition,NSInteger
+~AVCaptureFlashMode,NSInteger
+~AVCaptureTorchMode,NSInteger
+~AVCaptureFocusMode,NSInteger
+~AVCaptureExposureMode,NSInteger
+~AVCaptureWhiteBalanceMode,NSInteger
+~AVCaptureDeviceTransportControlsSpeed,float
+~AVCaptureDeviceTransportControlsPlaybackMode,NSInteger
+~CMClockOrTimebaseRef,CFTypeRef
+~AVCaptureVideoOrientation,NSInteger
+~AVVideoFieldMode,NSInteger
+~AVPlayerStatus,NSInteger
+~AVPlayerActionAtItemEnd,NSInteger
+~AVPlayerItemStatus,NSInteger
+~AVContentAuthorizationStatus,NSInteger
+FQuartzCore
+HQuartzCore/QuartzCore.h
+FAVKit
+HAVKit/AVKit.h
+*AVPlayerView
+:NSView
+-setPlayer:,void,AVPlayer*
+-player,AVPlayer*
+-setControlsStyle:,void,AVPlayerViewControlsStyle
+-controlsStyle,AVPlayerViewControlsStyle
+
+*AVPlayerView
+(AVPlayerViewCustomization
+-setShowsFrameSteppingButtons:,void,BOOL
+-showsFrameSteppingButtons,BOOL
+-setShowsSharingServiceButton:,void,BOOL
+-showsSharingServiceButton,BOOL
+-setActionPopUpButtonMenu:,void,NSMenu*
+-actionPopUpButtonMenu,NSMenu*
+-setShowsFullScreenToggleButton:,void,BOOL
+-showsFullScreenToggleButton,BOOL
+
+*AVPlayerView
+(AVPlayerViewTrimming
+-canBeginTrimming,BOOL
+-beginTrimmingWithCompletionHandler:,void,id
+
+*AVPlayerView
+(AVPlayerViewChapterIndicator
+-flashChapterNumber:chapterTitle:,void,NSUInteger,NSString*
+
+~AVPlayerViewControlsStyle,NSInteger
+~AVPlayerViewTrimResult,NSInteger
+FEventKit
+HEventKit/EventKit.h
+*EKObject
+:NSObject
+-hasChanges,BOOL
+-isNew,BOOL
+-reset,void
+-rollback,void
+-refresh,BOOL
+
+*EKAlarm
+:EKObject
++alarmWithAbsoluteDate:,EKAlarm*,NSDate*
++alarmWithRelativeOffset:,EKAlarm*,NSTimeInterval
+-setRelativeOffset:,void,NSTimeInterval
+-relativeOffset,NSTimeInterval
+-setAbsoluteDate:,void,NSDate*
+-absoluteDate,NSDate*
+-setStructuredLocation:,void,EKStructuredLocation*
+-structuredLocation,EKStructuredLocation*
+-setProximity:,void,EKAlarmProximity
+-proximity,EKAlarmProximity
+-type,EKAlarmType
+-setEmailAddress:,void,NSString*
+-emailAddress,NSString*
+-setSoundName:,void,NSString*
+-soundName,NSString*
+-setUrl:,void,NSURL*
+-url,NSURL*
+
+*EKEventStore
+:NSObject
++authorizationStatusForEntityType:,EKAuthorizationStatus,EKEntityType
+-initWithAccessToEntityTypes:,id,EKEntityMask
+-init __attribute__((availability(macosx,introduced=10.9))),id
+-requestAccessToEntityType:completion:,void,EKEntityType,EKEventStoreRequestAccessCompletionHandler
+-eventStoreIdentifier,NSString*
+-sources __attribute__((availability(macosx,introduced=10.8))),NSArray*
+-sourceWithIdentifier:,EKSource*,NSString*
+-calendarsForEntityType:,NSArray*,EKEntityType
+-defaultCalendarForNewEvents,EKCalendar*
+-defaultCalendarForNewReminders __attribute__((availability(macosx,introduced=10.8))),EKCalendar*
+-calendarWithIdentifier:,EKCalendar*,NSString*
+-saveCalendar:commit:error:,BOOL,EKCalendar*,BOOL,NSError**
+-removeCalendar:commit:error:,BOOL,EKCalendar*,BOOL,NSError**
+-calendarItemWithIdentifier:,EKCalendarItem*,NSString*
+-calendarItemsWithExternalIdentifier:,NSArray*,NSString*
+-saveEvent:span:commit:error:,BOOL,EKEvent*,EKSpan,BOOL,NSError**
+-removeEvent:span:commit:error:,BOOL,EKEvent*,EKSpan,BOOL,NSError**
+-eventWithIdentifier:,EKEvent*,NSString*
+-eventsMatchingPredicate:,NSArray*,NSPredicate*
+-enumerateEventsMatchingPredicate:usingBlock:,void,NSPredicate*,EKEventSearchCallback
+-predicateForEventsWithStartDate:endDate:calendars:,NSPredicate*,NSDate*,NSDate*,NSArray*
+-saveReminder:commit:error:,BOOL,EKReminder*,BOOL,NSError**
+-removeReminder:commit:error:,BOOL,EKReminder*,BOOL,NSError**
+-fetchRemindersMatchingPredicate:completion:,id,NSPredicate*,id
+-cancelFetchRequest:,void,id
+-predicateForRemindersInCalendars:,NSPredicate*,NSArray*
+-predicateForIncompleteRemindersWithDueDateStarting:ending:calendars:,NSPredicate*,NSDate*,NSDate*,NSArray*
+-predicateForCompletedRemindersWithCompletionDateStarting:ending:calendars:,NSPredicate*,NSDate*,NSDate*,NSArray*
+-commit:,BOOL,NSError**
+-reset __attribute__((availability(macosx,introduced=10.8))),void
+-refreshSourcesIfNecessary __attribute__((availability(macosx,introduced=10.8))),void
+
+*EKCalendar
+:EKObject
++calendarForEntityType:eventStore:,EKCalendar*,EKEntityType,EKEventStore*
+-setSource:,void,EKSource*
+-source,EKSource*
+-calendarIdentifier,NSString*
+-setTitle:,void,NSString*
+-title,NSString*
+-type,EKCalendarType
+-allowsContentModifications,BOOL
+-isSubscribed,BOOL
+-isImmutable,BOOL
+-setColor:,void,NSColor*
+-color,NSColor*
+-supportedEventAvailabilities,EKCalendarEventAvailabilityMask
+-allowedEntityTypes,EKEntityMask
+
+*EKCalendarItem
+:EKObject
+-setCalendar:,void,EKCalendar*
+-calendar,EKCalendar*
+-calendarItemIdentifier,NSString*
+-calendarItemExternalIdentifier,NSString*
+-setTitle:,void,NSString*
+-title,NSString*
+-setLocation:,void,NSString*
+-location,NSString*
+-setNotes:,void,NSString*
+-notes,NSString*
+-setURL:,void,NSURL*
+-URL,NSURL*
+-lastModifiedDate,NSDate*
+-creationDate,NSDate*
+-setTimeZone:,void,NSTimeZone*
+-timeZone,NSTimeZone*
+-hasAlarms,BOOL
+-hasRecurrenceRules,BOOL
+-hasAttendees,BOOL
+-hasNotes,BOOL
+-attendees,NSArray*
+-setAlarms:,void,NSArray*
+-alarms,NSArray*
+-addAlarm:,void,EKAlarm*
+-removeAlarm:,void,EKAlarm*
+-setRecurrenceRules:,void,NSArray*
+-recurrenceRules,NSArray*
+-addRecurrenceRule:,void,EKRecurrenceRule*
+-removeRecurrenceRule:,void,EKRecurrenceRule*
+
+*EKEvent
+:EKCalendarItem
++eventWithEventStore:,EKEvent*,EKEventStore*
+-eventIdentifier,NSString*
+-setAllDay:,void,BOOL
+-isAllDay,BOOL
+-setStartDate:,void,NSDate*
+-startDate,NSDate*
+-setEndDate:,void,NSDate*
+-endDate,NSDate*
+-compareStartDateWithEvent:,NSComparisonResult,EKEvent*
+-organizer,EKParticipant*
+-setAvailability:,void,EKEventAvailability
+-availability,EKEventAvailability
+-status,EKEventStatus
+-isDetached,BOOL
+-occurrenceDate,NSDate*
+-refresh,BOOL
+-birthdayPersonUniqueID,NSString*
+
+*EKParticipant
+:EKObject
+-URL,NSURL*
+-name,NSString*
+-participantStatus,EKParticipantStatus
+-participantRole,EKParticipantRole
+-participantType,EKParticipantType
+-isCurrentUser,BOOL
+-ABPersonInAddressBook:,ABPerson*,ABAddressBook*
+
+*EKRecurrenceEnd
+:NSObject
++recurrenceEndWithEndDate:,id,NSDate*
++recurrenceEndWithOccurrenceCount:,id,NSUInteger
+-endDate,NSDate*
+-occurrenceCount,NSUInteger
+
+*EKRecurrenceDayOfWeek
+:NSObject
++dayOfWeek:,EKRecurrenceDayOfWeek*,NSInteger
++dayOfWeek:weekNumber:,EKRecurrenceDayOfWeek*,NSInteger,NSInteger
+-initWithDayOfTheWeek:weekNumber:,id,NSInteger,NSInteger
+-dayOfTheWeek,NSInteger
+-weekNumber,NSInteger
+
+*EKRecurrenceRule
+:EKObject
+-initRecurrenceWithFrequency:interval:end:,id,EKRecurrenceFrequency,NSInteger,EKRecurrenceEnd*
+-initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:,id,EKRecurrenceFrequency,NSInteger,NSArray*,NSArray*,NSArray*,NSArray*,NSArray*,NSArray*,EKRecurrenceEnd*
+-calendarIdentifier,NSString*
+-setRecurrenceEnd:,void,EKRecurrenceEnd*
+-recurrenceEnd,EKRecurrenceEnd*
+-frequency,EKRecurrenceFrequency
+-interval,NSInteger
+-firstDayOfTheWeek,NSInteger
+-daysOfTheWeek,NSArray*
+-daysOfTheMonth,NSArray*
+-daysOfTheYear,NSArray*
+-weeksOfTheYear,NSArray*
+-monthsOfTheYear,NSArray*
+-setPositions,NSArray*
+
+*EKReminder
+:EKCalendarItem
++reminderWithEventStore:,EKReminder*,EKEventStore*
+-setStartDateComponents:,void,NSDateComponents*
+-startDateComponents,NSDateComponents*
+-setDueDateComponents:,void,NSDateComponents*
+-dueDateComponents,NSDateComponents*
+-setCompleted:,void,BOOL
+-isCompleted,BOOL
+-setCompletionDate:,void,NSDate*
+-completionDate,NSDate*
+-setPriority:,void,NSUInteger
+-priority,NSUInteger
+
+*EKSource
+:EKObject
+-sourceIdentifier,NSString*
+-sourceType,EKSourceType
+-title,NSString*
+-calendarsForEntityType:,NSSet*,EKEntityType
+
+*CLLocation
+:NSObject
+-initWithLatitude:longitude:,id,CLLocationDegrees,CLLocationDegrees
+-initWithCoordinate:altitude:horizontalAccuracy:verticalAccuracy:timestamp:,id,CLLocationCoordinate2D,CLLocationDistance,CLLocationAccuracy,CLLocationAccuracy,NSDate*
+-initWithCoordinate:altitude:horizontalAccuracy:verticalAccuracy:course:speed:timestamp:,id,CLLocationCoordinate2D,CLLocationDistance,CLLocationAccuracy,CLLocationAccuracy,CLLocationDirection,CLLocationSpeed,NSDate*
+-coordinate,CLLocationCoordinate2D
+-altitude,CLLocationDistance
+-horizontalAccuracy,CLLocationAccuracy
+-verticalAccuracy,CLLocationAccuracy
+-course,CLLocationDirection
+-speed,CLLocationSpeed
+-timestamp,NSDate*
+-description,NSString*
+-getDistanceFrom:,CLLocationDistance,const CLLocation*
+-distanceFromLocation:,CLLocationDistance,const CLLocation*
+
+*EKStructuredLocation
+:EKObject
++locationWithTitle:,EKStructuredLocation*,NSString*
+-setTitle:,void,NSString*
+-title,NSString*
+-setGeoLocation:,void,CLLocation*
+-geoLocation,CLLocation*
+-setRadius:,void,double
+-radius,double
+
+~EKCalendarEventAvailabilityMask,NSUInteger
+~EKEntityType,NSUInteger
+~EKEntityMask,NSUInteger
+~EKAlarmProximity,NSInteger
+~EKAuthorizationStatus,NSInteger
+~CLLocationDegrees,double
+~CLLocationAccuracy,double
+~CLLocationSpeed,double
+~CLLocationDirection,double
+~CLLocationDistance,double
+~EKErrorCode,int
+eEKErrorEventNotMutable,0
+eEKErrorNoCalendar,1
+eEKErrorNoStartDate,2
+eEKErrorNoEndDate,3
+eEKErrorDatesInverted,4
+eEKErrorInternalFailure,5
+eEKErrorCalendarReadOnly,6
+eEKErrorDurationGreaterThanRecurrence,7
+eEKErrorAlarmGreaterThanRecurrence,8
+eEKErrorStartDateTooFarInFuture,9
+eEKErrorStartDateCollidesWithOtherOccurrence,10
+eEKErrorObjectBelongsToDifferentStore,11
+eEKErrorInvitesCannotBeMoved,12
+eEKErrorInvalidSpan,13
+eEKErrorCalendarHasNoSource,14
+eEKErrorCalendarSourceCannotBeModified,15
+eEKErrorCalendarIsImmutable,16
+eEKErrorSourceDoesNotAllowCalendarAddDelete,17
+eEKErrorRecurringReminderRequiresDueDate,18
+eEKErrorStructuredLocationsNotSupported,19
+eEKErrorReminderLocationsNotSupported,20
+eEKErrorAlarmProximityNotSupported,21
+eEKErrorCalendarDoesNotAllowEvents,22
+eEKErrorCalendarDoesNotAllowReminders,23
+eEKErrorSourceDoesNotAllowReminders,24
+eEKErrorSourceDoesNotAllowEvents,25
+eEKErrorPriorityIsInvalid,26
+eEKErrorInvalidEntityType,27
+eEKErrorProcedureAlarmsNotMutable,28
+eEKErrorEventStoreNotAuthorized,29
+eEKErrorLast,30
