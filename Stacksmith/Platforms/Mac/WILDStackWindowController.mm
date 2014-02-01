@@ -358,7 +358,7 @@ using namespace Carlson;
 	
 	if( !mContentView )
 	{
-		mContentView = [[WILDFlippedContentView alloc] initWithFrame: NSMakeRect(0, 0, mStack->GetCardWidth(), mStack->GetCardWidth())];
+		mContentView = [[WILDFlippedContentView alloc] initWithFrame: NSMakeRect(0, 0, mStack->GetCardWidth(), mStack->GetCardHeight())];
 		mContentView.stack = mStack;
 		mContentView.owningStackWindowController = self;
 		mContentView.wantsLayer = YES;
@@ -547,9 +547,8 @@ using namespace Carlson;
 	
 	if( !mContentView )
 	{
-		NSRect		box = wdBox;
-		box.size = NSMakeSize(mStack->GetCardWidth(), mStack->GetCardHeight() );
-		mContentView = [[WILDFlippedContentView alloc] initWithFrame: wdBox];
+		NSRect		box = { NSZeroPoint, { (CGFloat)mStack->GetCardWidth(), (CGFloat)mStack->GetCardHeight() } };
+		mContentView = [[WILDFlippedContentView alloc] initWithFrame: box];
 		mContentView.stack = mStack;
 		mContentView.owningStackWindowController = self;
 		mContentView.wantsLayer = YES;
@@ -571,12 +570,7 @@ using namespace Carlson;
 		[self.window setRepresentedURL: [NSURL URLWithString: [NSString stringWithUTF8String: mStack->GetURL().c_str()]]];
 	}
 	NSDisableScreenUpdates();
-	if( mWasVisible )
-	{
-		[self removeAllViews];
-		[self createAllViews];
-	}
-	else
+	if( !prevWindow )
 		[self.window center];
 	[self.window setDelegate: self];
 	if( mWasVisible )
@@ -604,9 +598,6 @@ using namespace Carlson;
 		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
 	}
 	mWasVisible = YES;
-
-	[self removeAllViews];
-	[self createAllViews];
 }
 
 
@@ -617,12 +608,10 @@ using namespace Carlson;
 	{
 		CMacPartBase	*	thePart = dynamic_cast<CMacPartBase*>(overPart);
 		NSView			*	theView = thePart ? thePart->GetView() : self.window.contentView;
+		[mPopover setBehavior: NSPopoverBehaviorTransient];
 		[mPopover showRelativeToRect: theView.bounds ofView: theView preferredEdge: NSMaxYEdge];
 	}
 	mWasVisible = YES;
-	
-	[self removeAllViews];
-	[self createAllViews];
 }
 
 
