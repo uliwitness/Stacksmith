@@ -81,7 +81,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 	{
 		destinationObject = (CScriptableObject*)theDestination->object.object;
 	}
-	else
+	else if( theDestination )
 	{
 		char stackName[1024] = { 0 };
 		LEOGetValueAsString( theDestination, stackName, sizeof(stackName), inContext );
@@ -737,9 +737,9 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
 			{ EHostParamInvisibleIdentifier, EInIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'I' },
 			{ EHostParamInvisibleIdentifier, ENewIdentifier, EHostParameterOptional, WILD_GO_INSTR, EOpenInNewWindow, 0, 'I', 'W' },
-			{ EHostParamInvisibleIdentifier, EWindowIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'W', 'X' },
-			{ EHostParamLabeledContainer, EOnIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, EWindowIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'W', 'X' },
+			{ EHostParamInvisibleIdentifier, EPopupIdentifier, EHostParameterOptional, WILD_GO_INSTR, EOpenInNewWindow, 0, 'I', 'X' },
+			{ EHostParamLabeledContainer, EFromIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
