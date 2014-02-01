@@ -34,6 +34,7 @@ public:
 	virtual void				SetCurrentCard( CCard* inCard );
 	virtual void				SetEditingBackground( bool inState );
 	virtual void				SetTool( TTool inTool );
+	virtual void				SetName( const std::string& inName );
 	
 	static void					RegisterPartCreators();
 

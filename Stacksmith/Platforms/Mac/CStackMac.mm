@@ -56,6 +56,13 @@ bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, 
 }
 
 
+void	CStackMac::SetName( const std::string& inName )
+{
+	CStack::SetName(inName);
+	[[mMacWindowController window] setTitle: [NSString stringWithUTF8String: inName.c_str()]];
+}
+
+
 void	CStackMac::SetPeeking( bool inState )
 {
 	CStack::SetPeeking( inState );
