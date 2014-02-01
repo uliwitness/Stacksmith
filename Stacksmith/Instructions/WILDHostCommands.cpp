@@ -63,7 +63,7 @@ size_t	kFirstStacksmithHostCommandInstruction = 0;
 */
 void	WILDGoInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
+//	LEODebugPrintContext( inContext );
 
 	LEOValuePtr				theDestination = inContext->stackEndPtr -2;
 	LEOValuePtr				theOverPart = inContext->stackEndPtr -1;

@@ -77,7 +77,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 			
 			tinyxml2::XMLElement	*	root = document.RootElement();
 			
-			mStackID = CTinyXMLUtils::GetLongLongNamed( root, "id" );
+			mStackID = CTinyXMLUtils::GetLongLongNamed( root, "id", mStackID );
 			mName = "Untitled";
 			CTinyXMLUtils::GetStringNamed( root, "name", mName );
 			mUserLevel = CTinyXMLUtils::GetIntNamed( root, "userLevel", 5 );
@@ -180,6 +180,8 @@ void	CStack::Save( const std::string& inPackagePath )
 	
 	tinyxml2::XMLElement*		root = document.NewElement("stack");
 	document.InsertEndChild( root );
+	
+	CTinyXMLUtils::AddLongLongNamed( root, GetID(), "id" );
 	
 	tinyxml2::XMLElement*		nameElem = document.NewElement("name");
 	nameElem->SetText(mName.c_str());
@@ -388,6 +390,23 @@ size_t	CStack::GetIndexOfCard( CCard* inCard )
 }
 
 
+void	CStack::SetIndexOfCardTo( CCard* inCd, size_t newIndex )
+{
+	CCardRef	holdOnToBgWhileWeMoveIt(inCd);
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+	{
+		if( (*itty) == inCd )
+		{
+			mCards.erase(itty);
+			break;
+		}
+	}
+	
+	auto itty = mCards.begin() +newIndex;
+	mCards.insert(itty, inCd);
+}
+
+
 CCard*	CStack::GetNextCard()
 {
 	size_t			cardIdx = GetIndexOfCard(mCurrentCard);
@@ -412,13 +431,30 @@ CCard*	CStack::GetPreviousCard()
 size_t	CStack::GetIndexOfBackground( CBackground* inBackground )
 {
 	size_t		currIdx = 0;
-	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+	for( auto currBg : mBackgrounds )
 	{
-		if( (*itty) == inBackground )
+		if( currBg == inBackground )
 			return currIdx;
 		currIdx++;
 	}
 	return SIZE_T_MAX;
+}
+
+
+void	CStack::SetIndexOfBackgroundTo( CBackground* inBg, size_t newIndex )
+{
+	CBackgroundRef	holdOnToBgWhileWeMoveIt(inBg);
+	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+	{
+		if( (*itty) == inBg )
+		{
+			mBackgrounds.erase(itty);
+			break;
+		}
+	}
+	
+	auto itty = mBackgrounds.begin() +newIndex;
+	mBackgrounds.insert(itty, inBg);
 }
 
 
@@ -480,7 +516,17 @@ void	CStack::Dump( size_t inIndent )
 
 bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
-	if( strcasecmp(inPropertyName, "style") == 0 )
+	if( strcasecmp(inPropertyName, "name") == 0 )
+	{
+		LEOInitStringValue( outValue, mName.c_str(), mName.size(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "id") == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetID(), kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "style") == 0 )
 	{
 		LEOInitStringConstantValue( outValue, sStackStyleStrings[mStyle], kLEOInvalidateReferences, inContext );
 		return true;
@@ -492,7 +538,19 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 
 bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
 {
-	if( strcasecmp(inPropertyName, "style") == 0 )
+	if( strcasecmp(inPropertyName, "name") == 0 )
+	{
+		char		styleBuf[100] = {0};
+		const char*	styleStr = LEOGetValueAsString( inValue, styleBuf, sizeof(styleBuf), inContext );
+		SetName( styleStr );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "id") == 0 )
+	{
+		LEOContextStopWithError( inContext, "The ID of an object can't be changed." );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "style") == 0 )
 	{
 		char		styleBuf[100] = {0};
 		const char*	styleStr = LEOGetValueAsString( inValue, styleBuf, sizeof(styleBuf), inContext );

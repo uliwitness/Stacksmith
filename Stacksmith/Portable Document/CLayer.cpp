@@ -484,7 +484,8 @@ LEOInteger	CLayer::GetIndexOfPart( CPart* inPart, CPartCreatorBase* inType )
 void	CLayer::SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase* inType )
 {
 	CPartRef	keepPart = inPart;	// Make sure it doesn't get released while we're removing/re-adding it.
-	LEOInteger	oldIndex = -1;
+	LEOInteger	oldPartIndex = -1;
+	LEOInteger	newPartIndex = inIndex;
 	LEOInteger	numParts = 0;
 	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
 	{
@@ -492,17 +493,17 @@ void	CLayer::SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase
 		{
 			if( (*currPart) == inPart )
 			{
-				if( inIndex > numParts )
-					inIndex --;
-				oldIndex = numParts;
+				if( newPartIndex > numParts )
+					newPartIndex --;
+				oldPartIndex = numParts;
 				break;
 			}
 			numParts++;
 		}
 	}
 	
-	mParts.erase( mParts.begin() +oldIndex );
-	mParts.insert( mParts.begin() +inIndex, inPart );
+	mParts.erase( mParts.begin() +oldPartIndex );
+	mParts.insert( mParts.begin() +newPartIndex, inPart );
 }
 
 
@@ -536,6 +537,42 @@ std::string	CLayer::GetPictureURL()
 	stackURL.append( 1, '/' );
 	stackURL.append( GetPictureName() );
 	return stackURL;
+}
+
+
+bool	CLayer::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp(inPropertyName, "name") == 0 )
+	{
+		LEOInitStringValue( outValue, mName.c_str(), mName.size(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "id") == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetID(), kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else
+		return CConcreteObject::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+}
+
+
+bool	CLayer::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp(inPropertyName, "name") == 0 )
+	{
+		char		styleBuf[100] = {0};
+		const char*	styleStr = LEOGetValueAsString( inValue, styleBuf, sizeof(styleBuf), inContext );
+		SetName( styleStr );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "id") == 0 )
+	{
+		LEOContextStopWithError( inContext, "The ID of an object can't be changed." );
+		return true;
+	}
+	else
+		return CConcreteObject::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 }
 
 

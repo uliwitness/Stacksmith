@@ -112,3 +112,36 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 	return true;
 }
 
+
+bool	CCard::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp(inPropertyName, "number") == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetStack()->GetIndexOfCard(this) +1, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else
+		return CLayer::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+}
+
+
+bool	CCard::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp(inPropertyName, "number") == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEOInteger	number = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		if( number <= 0 || number > (LEOInteger)GetStack()->GetNumCards() )
+		{
+			LEOContextStopWithError( inContext, "Card number must be between 1 and %zu.", GetStack()->GetNumCards() );
+		}
+		else
+		{
+			GetStack()->SetIndexOfCardTo( this, number -1 );
+		}
+		return true;
+	}
+	else
+		return CLayer::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+}
+

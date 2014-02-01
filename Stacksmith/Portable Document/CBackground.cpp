@@ -35,6 +35,39 @@ CScriptableObject*	CBackground::GetParentObject()
 }
 
 
+bool	CBackground::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp(inPropertyName, "number") == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetStack()->GetIndexOfBackground(this) +1, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else
+		return CLayer::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+}
+
+
+bool	CBackground::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp(inPropertyName, "number") == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEOInteger	number = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		if( number <= 0 || number > (LEOInteger)GetStack()->GetNumBackgrounds() )
+		{
+			LEOContextStopWithError( inContext, "Background number must be between 1 and %zu.", GetStack()->GetNumBackgrounds() );
+		}
+		else
+		{
+			GetStack()->SetIndexOfBackgroundTo( this, number -1 );
+		}
+		return true;
+	}
+	else
+		return CLayer::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+}
+
+
 bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart )
 {
 	CCard*	searchStart = GetStack()->GetCurrentCard();

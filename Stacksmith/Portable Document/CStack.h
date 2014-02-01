@@ -63,6 +63,7 @@ public:
 	CCard*			GetCardByID( ObjectID inID );
 	CCard*			GetCardByName( const char* inName );
 	size_t			GetIndexOfCard( CCard* inBackground );
+	void			SetIndexOfCardTo( CCard* inCd, size_t newIndex );
 	CCard*			GetCardWithBackground( CBackground* inBg, CCard *startAtCard = NULL, bool searchForward = true );
 	
 	size_t			GetNumBackgrounds()					{ return mBackgrounds.size(); };
@@ -70,6 +71,7 @@ public:
 	CBackground*	GetBackgroundByID( ObjectID inID );
 	CBackground*	GetBackgroundByName( const char* inName );
 	size_t			GetIndexOfBackground( CBackground* inBackground );
+	void			SetIndexOfBackgroundTo( CBackground* inBg, size_t newIndex );
 	
 	virtual void	WakeUp()	{};	// The current card has started its timers etc.
 	virtual void	GoToSleep()	{};	// The current card has stopped its timers etc.

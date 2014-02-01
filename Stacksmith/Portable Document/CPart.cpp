@@ -237,6 +237,10 @@ bool	CPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
 		SetName( nameStr );
 	}
+	else if( strcasecmp(inPropertyName, "id") == 0 )
+	{
+		LEOContextStopWithError( inContext, "The ID of an object can't be changed." );
+	}
 	else if( strcasecmp("script", inPropertyName) == 0 )
 	{
 		char		scriptBuf[1024];

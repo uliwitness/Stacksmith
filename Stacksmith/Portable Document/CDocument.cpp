@@ -307,6 +307,18 @@ void	CDocument::CallAllCompletionBlocks()
 }
 
 
+CStack*	CDocument::GetStackWithID( ObjectID inID )
+{
+	for( auto itty = mStacks.begin(); itty != mStacks.end(); itty++ )
+	{
+		if( (*itty)->GetID() == inID )
+			return *itty;
+	}
+	
+	return NULL;
+}
+
+
 CStack*	CDocument::GetStackByName( const char *inName )
 {
 	for( auto itty = mStacks.begin(); itty != mStacks.end(); itty++ )

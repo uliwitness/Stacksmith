@@ -46,6 +46,8 @@ public:
 	virtual CBackground*		GetBackground()		{ return mOwningBackground; };
 	
 	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart );
+	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
+	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );

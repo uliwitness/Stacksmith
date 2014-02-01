@@ -69,6 +69,7 @@ public:
 	
 	std::string			GetURL()					{ return mURL; };
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
+	CStack*				GetStackWithID( ObjectID inID );
 	size_t				GetNumStacks()				{ return mStacks.size(); };
 	CStack*				GetStackByName( const char* inName );
 	ObjectID			GetUniqueIDForStack();
