@@ -133,79 +133,99 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 		NSInvocation		*	inv = [NSInvocation invocationWithMethodSignature: theSignature];
 		[inv setTarget: theReceiver];
 		[inv setSelector: methodSelector];
-	
+		
+		LEODebugPrintContext(inContext);
+		
 		for( int x = 0; x < paramCount; x++ )
 		{
 			NSString	*	currType = [typesArray objectAtIndex: x +1];
-			LEOValuePtr		currParam = inContext->stackEndPtr -x;
+			LEOValuePtr		currParam = inContext->stackEndPtr -x -1;
 			if( [currType isEqualToString: @"NSString*"] )
 			{
 				char			currParamStrBuf[256] = {};
 				const char*		currParamStr = LEOGetValueAsString( currParam, currParamStrBuf, sizeof(currParamStrBuf), inContext );
 				
 				NSString	*	objCStr = [NSString stringWithUTF8String: currParamStr];
-				[inv setArgument: &objCStr atIndex: x];
+				[inv setArgument: &objCStr atIndex: x +2];
 			}
 			else if( [currType isEqualToString: @"const char*"] )
 			{
 				char			currParamStrBuf[256] = {};
 				const char*		currParamStr = LEOGetValueAsString( currParam, currParamStrBuf, sizeof(currParamStrBuf), inContext );
 				
-				[inv setArgument: &currParamStr atIndex: x];
+				[inv setArgument: &currParamStr atIndex: x +2];
 			}
-			else if( [currType isEqualToString: @"char"] )
+			else if( [currType isEqualToString: @"char"] || [currType isEqualToString: @"signed char"] || [currType isEqualToString: @"unsigned char"] )
 			{
 				char			currParamStrBuf[256] = {};
 				const char*		currParamStr = LEOGetValueAsString( currParam, currParamStrBuf, sizeof(currParamStrBuf), inContext );
 				
-				[inv setArgument: (void*) currParamStr atIndex: x];
+				[inv setArgument: (void*) currParamStr atIndex: x +2];
 			}
-			else if( [currType isEqualToString: @"int"] )
+			else if( [currType isEqualToString: @"int"] || [currType isEqualToString: @"signed int"] )
 			{
 				LEOUnit			theUnit = kLEOUnitNone;
 				int				cNum = (int) LEOGetValueAsInteger( currParam, &theUnit, inContext );
-				[inv setArgument: &cNum atIndex: x];
+				[inv setArgument: &cNum atIndex: x +2];
 			}
-			else if( [currType isEqualToString: @"long"] )
+			else if( [currType isEqualToString: @"unsigned"] || [currType isEqualToString: @"unsigned int"] )
+			{
+				LEOUnit			theUnit = kLEOUnitNone;
+				unsigned		cNum = (int) LEOGetValueAsInteger( currParam, &theUnit, inContext );
+				[inv setArgument: &cNum atIndex: x +2];
+			}
+			else if( [currType isEqualToString: @"long"] || [currType isEqualToString: @"signed long"] )
 			{
 				LEOUnit			theUnit = kLEOUnitNone;
 				long			cNum = LEOGetValueAsInteger( currParam, &theUnit, inContext );
-				[inv setArgument: &cNum atIndex: x];
+				[inv setArgument: &cNum atIndex: x +2];
 			}
-			else if( [currType isEqualToString: @"long long"] )
+			else if( [currType isEqualToString: @"unsigned long"] )
+			{
+				LEOUnit			theUnit = kLEOUnitNone;
+				unsigned long	cNum = LEOGetValueAsInteger( currParam, &theUnit, inContext );
+				[inv setArgument: &cNum atIndex: x +2];
+			}
+			else if( [currType isEqualToString: @"long long"] || [currType isEqualToString: @"signed long long"] )
 			{
 				LEOUnit			theUnit = kLEOUnitNone;
 				long long		cNum = LEOGetValueAsInteger( currParam, &theUnit, inContext );
-				[inv setArgument: &cNum atIndex: x];
+				[inv setArgument: &cNum atIndex: x +2];
+			}
+			else if( [currType isEqualToString: @"unsigned long long"] )
+			{
+				LEOUnit				theUnit = kLEOUnitNone;
+				unsigned long long	cNum = LEOGetValueAsInteger( currParam, &theUnit, inContext );
+				[inv setArgument: &cNum atIndex: x +2];
 			}
 			else if( [currType isEqualToString: @"double"] )
 			{
 				LEOUnit			theUnit = kLEOUnitNone;
 				double			cNum = LEOGetValueAsNumber( currParam, &theUnit, inContext );
-				[inv setArgument: &cNum atIndex: x];
+				[inv setArgument: &cNum atIndex: x +2];
 			}
 			else if( [currType isEqualToString: @"float"] )
 			{
 				LEOUnit			theUnit = kLEOUnitNone;
 				float			cNum = LEOGetValueAsNumber( currParam, &theUnit, inContext );
-				[inv setArgument: &cNum atIndex: x];
+				[inv setArgument: &cNum atIndex: x +2];
 			}
 			else if( [currType isEqualToString: @"bool"] )
 			{
 				bool			cFlag = LEOGetValueAsBoolean( currParam, inContext );
-				[inv setArgument: &cFlag atIndex: x];
+				[inv setArgument: &cFlag atIndex: x +2];
 			}
 			else if( [currType isEqualToString: @"BOOL"] )
 			{
 				BOOL			cFlag = LEOGetValueAsBoolean( currParam, inContext );
-				[inv setArgument: &cFlag atIndex: x];
+				[inv setArgument: &cFlag atIndex: x +2];
 			}
 			else if( [currType isEqualToString: @"Boolean"] )
 			{
 				Boolean			cFlag = LEOGetValueAsBoolean( currParam, inContext );
-				[inv setArgument: &cFlag atIndex: x];
+				[inv setArgument: &cFlag atIndex: x +2];
 			}
-			else if( [currType hasSuffix: @"*"] )
+			else if( [currType hasSuffix: @"*"] || [currType isEqualToString: @"id"] )
 			{
 				if( receiver->base.isa != &kLeoValueTypeNativeObject )
 				{
@@ -214,7 +234,7 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 				}
 
 				id	obj = (id) currParam->object.object;
-				[inv setArgument: &obj atIndex: x];
+				[inv setArgument: &obj atIndex: x +2];
 			}
 			else
 			{
@@ -241,28 +261,53 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 			[inv getReturnValue: &retStr];
 			LEOPushStringValueOnStack( inContext, retStr, strlen(retStr) );
 		}
-		else if( [returnType isEqualToString: @"char"] )
+		else if( [returnType isEqualToString: @"unsigned char"] )
 		{
 			char	retStr[2] = {};
 			[inv getReturnValue: retStr];
 			
 			LEOPushStringValueOnStack( inContext, retStr, 1 );
 		}
-		else if( [returnType isEqualToString: @"int"] )
+		else if( [returnType isEqualToString: @"char"] || [returnType isEqualToString: @"signed char"] )
+		{
+			char	retStr[2] = {};
+			[inv getReturnValue: retStr];
+			
+			LEOPushStringValueOnStack( inContext, retStr, 1 );
+		}
+		else if( [returnType isEqualToString: @"int"] || [returnType isEqualToString: @"signed int"] )
 		{
 			int	retVal = 0;
 			[inv getReturnValue: &retVal];
 			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
 		}
-		else if( [returnType isEqualToString: @"long"] )
+		else if( [returnType isEqualToString: @"unsigned"] || [returnType isEqualToString: @"unsigned int"] )
+		{
+			unsigned	retVal = 0;
+			[inv getReturnValue: &retVal];
+			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
+		}
+		else if( [returnType isEqualToString: @"long"] || [returnType isEqualToString: @"signed long"] )
 		{
 			long	retVal = 0;
 			[inv getReturnValue: &retVal];
 			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
 		}
-		else if( [returnType isEqualToString: @"long long"] )
+		else if( [returnType isEqualToString: @"unsigned long"] )
+		{
+			unsigned long	retVal = 0;
+			[inv getReturnValue: &retVal];
+			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
+		}
+		else if( [returnType isEqualToString: @"long long"] || [returnType isEqualToString: @"signed long long"] )
 		{
 			long long	retVal = 0;
+			[inv getReturnValue: &retVal];
+			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
+		}
+		else if( [returnType isEqualToString: @"unsigned long long"] )
+		{
+			unsigned long long	retVal = 0;
 			[inv getReturnValue: &retVal];
 			LEOPushIntegerOnStack( inContext, retVal, kLEOUnitNone );
 		}
@@ -296,7 +341,7 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 			[inv getReturnValue: &retVal];
 			LEOPushBooleanOnStack( inContext, retVal );
 		}
-		else if( [returnType hasSuffix: @"*"] )
+		else if( [returnType isEqualToString: @"id"] || [returnType hasSuffix: @"*"] )
 		{
 			void	*	retVal = NULL;
 			[inv getReturnValue: &retVal];

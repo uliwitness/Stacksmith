@@ -57,16 +57,19 @@ void	CMessageBox::Run()
 	CAutoreleasePool	pool;
 	LEOValue			returnValue = {{0}};
 	char				returnValBuf[1024] = {0};
-	SendMessage( &returnValue, [](const char * errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, ":run" );
-	if( returnValue.base.isa != NULL )
+	LEOContext	*		ctx = NULL;
+	SendMessage( &ctx, [](const char * errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, ":run" );
+	if( ctx && ctx->stackEndPtr != ctx->stack && ctx->stack[0].base.isa != NULL )
 	{
-		if( !LEOGetValueIsUnset( &returnValue, NULL ) )
+		if( !LEOGetValueIsUnset( &ctx->stack[0], NULL ) )
 		{
-			const char*	resultString = LEOGetValueAsString( &returnValue, returnValBuf, sizeof(returnValBuf), NULL );
+			const char*	resultString = LEOGetValueAsString( &ctx->stack[0], returnValBuf, sizeof(returnValBuf), ctx );
 			SetTextContents( resultString );
 		}
 		LEOCleanUpValue( &returnValue, kLEOInvalidateReferences, NULL );
 	}
+	if( ctx )
+		LEOContextRelease(ctx);
 }
 
 

@@ -685,7 +685,7 @@ void	CScriptableObject::ContextCompletedProc( LEOContext *ctx )
 }
 
 
-void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... )
+void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... )
 {
 #if 0
 	#define DBGLOGPAR(args...)	printf(args)
@@ -711,6 +711,8 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	CScriptableObject*	parent = GetParentObject();
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this );
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
+	if( outContext )
+		*outContext = ctx;
 	#if REMOTE_DEBUGGER
 	ctx->preInstructionProc = CScriptableObject::PreInstructionProc;
 	ctx->promptProc = LEORemoteDebuggerPrompt;
@@ -961,17 +963,9 @@ void	CScriptableObject::SendMessage( LEOValuePtr outValue, std::function<void(co
 	{
 		errorHandler( ctx->errMsg, SIZE_T_MAX, SIZE_T_MAX, this );
 	}
-	else if( ctx->stackEndPtr != ctx->stack && outValue )	// We still have an object at the end of the stack and someone asked for a result?
-	{
-		LEOInitCopy( ctx->stack, outValue, kLEOInvalidateReferences, ctx );	// Push that object, which should be return value from last handler.
-	}
-	else if( outValue )	// No object at the end of the stack? That's bad. But give a result, if requested, so caller doesn't blow up just because we got confused.
-	{
-		printf( "Internal error: Someone deleted the storage for the return value. Synthesizing empty return value.\n" );
-		LEOInitUnsetValue( outValue, kLEOInvalidateReferences, ctx );
-	}
 	
-	LEOContextRelease( ctx );
+	if( !outContext )
+		LEOContextRelease( ctx );
 }
 
 

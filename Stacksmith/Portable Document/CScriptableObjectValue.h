@@ -87,7 +87,7 @@ public:
 	virtual bool				GetUserPropertyValueForName( const char* inPropName, std::string& outValue )	{ return false; };
 	virtual bool				SetUserPropertyValueForName( const std::string& inValue, const char* inPropName )	{ return false; };
 	
-	virtual void				SendMessage( LEOValuePtr outValue, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
+	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
 	
 	virtual LEOContextGroup*	GetScriptContextGroupObject()				{ return NULL; };
 	
