@@ -35,6 +35,7 @@ public:
 	virtual void	SetVisible( bool visible )		{ CFieldPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual void	SetHasHorizontalScroller( bool inHS );
 	virtual void	SetHasVerticalScroller( bool inHS );
+	virtual NSView*	GetView();
 	virtual NSDictionary*			GetCocoaAttributesForPart();
 
 	static NSAttributedString	*	GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs = 0, size_t endOffs = SIZE_T_MAX );

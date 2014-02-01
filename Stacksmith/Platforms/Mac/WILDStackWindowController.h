@@ -15,6 +15,7 @@
 namespace Carlson {
 
 class CStackMac;
+class CPart;
 
 }
 
@@ -41,6 +42,8 @@ class CStackMac;
 -(void)	drawBoundingBoxes;
 
 -(Carlson::CStackMac*)	cppStack;
+
+-(void)	showWindowOverPart: (Carlson::CPart*)overPart;
 
 @end
 

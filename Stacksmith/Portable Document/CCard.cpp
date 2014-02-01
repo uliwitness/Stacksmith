@@ -74,7 +74,7 @@ CScriptableObject*	CCard::GetParentObject()
 }
 
 
-bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack )
+bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart )
 {
 	Retain();
 	Load([this,oldStack,inOpenInMode](CLayer *inThisCard)

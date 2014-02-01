@@ -452,3 +452,10 @@ void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, 
 	CFieldPart::SetRect( left, top, right, bottom );
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 }
+
+
+NSView*	CFieldPartMac::GetView()
+{
+	return mView;
+}
+

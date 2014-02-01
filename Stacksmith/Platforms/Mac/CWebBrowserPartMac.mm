@@ -89,3 +89,10 @@ void	CWebBrowserPartMac::LoadCurrentURL( const std::string& inURL )
 	}
 }
 
+
+NSView*	CWebBrowserPartMac::GetView()
+{
+	return mView;
+}
+
+

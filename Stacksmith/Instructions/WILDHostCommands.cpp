@@ -47,10 +47,14 @@ size_t	kFirstStacksmithHostCommandInstruction = 0;
 
 /*!
 	Implements the 'go' command. The first (and only) parameter must be a
-	WILDObjectValue (i.e. isa = kLeoValueTypeScriptableObject) that will be sent
-	a goThereInNewWindow: NO message. If the parameter is a string instead,
-	we will assume it is a stack that's not yet open and attempt to open that.
-	It will remove its parameters from the stack once it is done.
+	CScriptableObjectValue (i.e. isa = kLeoValueTypeScriptableObject) on which
+	the GoThereInNewWindow() method will be called. If the parameter is a string
+	instead, we will assume it is a stack that's not yet open and attempt to
+	open that. It will remove its parameters from the stack once it is done.
+	
+	If the second parameter isn't empty, it is assumed to be a part from which
+	the transition is to start (e.g. if we do a "zoom" effect opening the window)
+	or to which the window will be attached in the case of a popup window.
 	
 	It will use the current visual effect to perform the transition and will
 	clear the current visual effect once done.
@@ -59,23 +63,32 @@ size_t	kFirstStacksmithHostCommandInstruction = 0;
 */
 void	WILDGoInstruction( LEOContext* inContext )
 {
-	LEOValuePtr				theValue = inContext->stackEndPtr -1;
+	LEODebugPrintContext( inContext );
+
+	LEOValuePtr				theDestination = inContext->stackEndPtr -2;
+	LEOValuePtr				theOverPart = inContext->stackEndPtr -1;
 	bool					canGoThere = false;
 	CScriptableObject*		destinationObject = NULL;
+	CPart			*		overPartObject = NULL;
 	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
 	CRecentCardsList::GetSharedInstance()->AddCard( userData->GetStack()->GetCurrentCard() );
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	theDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
+	theOverPart = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -1, &kLeoValueTypeScriptableObject, inContext );
+	if( theOverPart && theOverPart->base.isa == &kLeoValueTypeScriptableObject )
+		overPartObject = dynamic_cast<CPart*>((CScriptableObject*)theOverPart->object.object);
+
+	if( theDestination && theDestination->base.isa == &kLeoValueTypeScriptableObject )
 	{
-		destinationObject = (CScriptableObject*)theValue->object.object;
-		canGoThere = destinationObject->GoThereInNewWindow( inContext->currentInstruction->param1, userData->GetStack() );
+		destinationObject = (CScriptableObject*)theDestination->object.object;
+		canGoThere = destinationObject->GoThereInNewWindow( inContext->currentInstruction->param1, userData->GetStack(), overPartObject );
 	}
 	else
 	{
 		char stackName[1024] = { 0 };
-		LEOGetValueAsString( theValue, stackName, sizeof(stackName), inContext );
+		LEOGetValueAsString( theDestination, stackName, sizeof(stackName), inContext );
 		CStack*	theStack = userData->GetStack()->GetDocument()->GetStackByName( stackName );
 		if( theStack )
-			canGoThere = theStack->GoThereInNewWindow( inContext->currentInstruction->param1, userData->GetStack() );
+			canGoThere = theStack->GoThereInNewWindow( inContext->currentInstruction->param1, userData->GetStack(), overPartObject );
 		destinationObject = theStack;
 	}
 	if( canGoThere )
@@ -720,7 +733,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 			{ EHostParamInvisibleIdentifier, EInIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'I' },
 			{ EHostParamInvisibleIdentifier, ENewIdentifier, EHostParameterOptional, WILD_GO_INSTR, EOpenInNewWindow, 0, 'I', 'W' },
 			{ EHostParamInvisibleIdentifier, EWindowIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'W', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamLabeledContainer, EOnIdentifier, EHostParameterOptional, WILD_GO_INSTR, EOpenInNewWindow, 0, 'X', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

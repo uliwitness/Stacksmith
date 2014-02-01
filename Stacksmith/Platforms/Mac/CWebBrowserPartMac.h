@@ -35,6 +35,7 @@ public:
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetVisible( bool visible )		{ CWebBrowserPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual void	LoadCurrentURL( const std::string& inURL );	// Triggers view update.
+	virtual NSView*	GetView();
 
 protected:
 	~CWebBrowserPartMac()	{ DestroyView(); };

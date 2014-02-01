@@ -31,16 +31,16 @@ CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string
 }
 
 
-bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack )
+bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart )
 {
-	Load([this,oldStack,inOpenInMode](CStack *inStack)
+	Load([this,oldStack,inOpenInMode,overPart](CStack *inStack)
 	{
 		if( GetCurrentCard() == NULL )
 		{
 			CCard	*	theCard = inStack->GetCard(0);
-			theCard->Load([inOpenInMode, oldStack]( CLayer *inCard )
+			theCard->Load([inOpenInMode,oldStack,overPart]( CLayer *inCard )
 			{
-				inCard->GoThereInNewWindow( inOpenInMode, oldStack );
+				inCard->GoThereInNewWindow( inOpenInMode, oldStack, overPart );
 			});
 		}
 		else
@@ -48,7 +48,7 @@ bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack )
 			if( !mMacWindowController )
 				mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
 		
-			[mMacWindowController showWindow: nil];
+			[mMacWindowController showWindowOverPart: overPart];
 		}
 	});
 	

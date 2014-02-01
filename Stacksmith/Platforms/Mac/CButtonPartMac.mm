@@ -259,3 +259,9 @@ void	CButtonPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right,
 }
 
 
+NSView*	CButtonPartMac::GetView()
+{
+	return mView;
+}
+
+

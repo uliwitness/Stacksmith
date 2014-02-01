@@ -36,6 +36,7 @@ public:
 	virtual void		SetControllerVisible( bool inStart );
 	virtual void		SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetVisible( bool visible )		{ CMoviePlayerPart::SetVisible(visible); [mView setHidden: !visible]; };
+	virtual NSView*	GetView();
 
 protected:
 	~CMoviePlayerPartMac()	{ DestroyView(); };

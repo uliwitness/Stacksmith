@@ -436,7 +436,7 @@ using namespace Carlson;
 		sPeekColor = [[NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22"]] retain];
 	static NSColor	*	sSelectedColor = nil;
 	if( !sSelectedColor )
-		sSelectedColor = [[NSColor selectedControlColor] retain];
+		sSelectedColor = [[NSColor colorWithCalibratedRed: 0.102 green: 0.180 blue: 0.998 alpha: 1.000] retain];
 	
 	size_t		cardHeight = mStack->GetCardHeight();
 	
@@ -604,6 +604,25 @@ using namespace Carlson;
 		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
 	}
 	mWasVisible = YES;
+
+	[self removeAllViews];
+	[self createAllViews];
+}
+
+
+-(void)	showWindowOverPart: (CPart*)overPart
+{
+	[super showWindow: nil];
+	if( mStack->GetStyle() == EStackStylePopup )
+	{
+		CMacPartBase	*	thePart = dynamic_cast<CMacPartBase*>(overPart);
+		NSView			*	theView = thePart ? thePart->GetView() : self.window.contentView;
+		[mPopover showRelativeToRect: theView.bounds ofView: theView preferredEdge: NSMaxYEdge];
+	}
+	mWasVisible = YES;
+	
+	[self removeAllViews];
+	[self createAllViews];
 }
 
 
@@ -651,8 +670,8 @@ using namespace Carlson;
 
 -(void)	popoverWillShow: (NSNotification *)notification
 {
-	[self removeAllViews];
-	[self createAllViews];
+//	[self removeAllViews];
+//	[self createAllViews];
 }
 
 

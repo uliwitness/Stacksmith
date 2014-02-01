@@ -204,4 +204,8 @@ void	CMoviePlayerPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger r
 }
 
 
+NSView*	CMoviePlayerPartMac::GetView()
+{
+	return mView;
+}
 
