@@ -985,23 +985,9 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ECardIdentifier, WILD_CARD_INSTRUCTION, 0, 0, '\0',
-		{
-			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterOptional, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, '\0', 'A' },
-			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterOptional, WILD_CARD_FIELD_INSTRUCTION, 0, 0, '\0', 'A' },
-			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0', 'A' },
-			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', 'B' },
-			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, 'B', 'A' },
-			{ EHostParamIdentifier, ETimerIdentifier, EHostParameterOptional, WILD_CARD_TIMER_INSTRUCTION, 0, 0, '\0', 'A' },
-			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
-			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-		}
-	},
-	{
 		ECardIdentifier, WILD_CARD_BROWSER_INSTRUCTION, 0, 0, '\0',
 		{
-			{ EHostParamIdentifier, EBrowserIdentifier, EHostParameterOptional, WILD_CARD_BROWSER_INSTRUCTION, 0, 0, '\0', 'A' },
+			{ EHostParamIdentifier, EBrowserIdentifier, EHostParameterRequired, WILD_CARD_BROWSER_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1010,7 +996,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 	{
 		ECardIdentifier, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0',
 		{
-			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', 'B' },
+			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterRequired, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', 'B' },
 			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, 'B', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
@@ -1020,7 +1006,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 	{
 		ECardIdentifier, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0',
 		{
-			{ EHostParamIdentifier, EPartIdentifier, EHostParameterOptional, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0', 'A' },
+			{ EHostParamIdentifier, EPartIdentifier, EHostParameterRequired, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1039,14 +1025,6 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		ECardIdentifier, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterRequired, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, '\0', 'A' },
-			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
-			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-		}
-	},
-	{
-		ECardIdentifier, WILD_CARD_INSTRUCTION, 0, 0, '\0',
-		{
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1078,10 +1056,26 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
+		EBrowserIdentifier, WILD_CARD_BROWSER_INSTRUCTION, 0, 0, '\0',
+		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
 		EPartIdentifier, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0',
 		{
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		ECardIdentifier, WILD_CARD_INSTRUCTION, 0, 0, '\0',
+		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},
