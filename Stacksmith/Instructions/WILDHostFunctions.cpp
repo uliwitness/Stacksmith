@@ -985,7 +985,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ECardIdentifier, WILD_CARD_BROWSER_INSTRUCTION, 0, 0, '\0',
+		ECardIdentifier, WILD_CARD_BROWSER_INSTRUCTION, 0, 0, 'X',
 		{
 			{ EHostParamIdentifier, EBrowserIdentifier, EHostParameterRequired, WILD_CARD_BROWSER_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
@@ -994,7 +994,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ECardIdentifier, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0',
+		ECardIdentifier, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, 'X',
 		{
 			{ EHostParamIdentifier, EMovieIdentifier, EHostParameterRequired, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, '\0', 'B' },
 			{ EHostParamIdentifier, EPlayerIdentifier, EHostParameterOptional, WILD_CARD_MOVIEPLAYER_INSTRUCTION, 0, 0, 'B', 'A' },
@@ -1004,7 +1004,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ECardIdentifier, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0',
+		ECardIdentifier, WILD_CARD_PART_INSTRUCTION, 0, 0, 'X',
 		{
 			{ EHostParamIdentifier, EPartIdentifier, EHostParameterRequired, WILD_CARD_PART_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
@@ -1013,7 +1013,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ECardIdentifier, WILD_CARD_FIELD_INSTRUCTION, 0, 0, '\0',
+		ECardIdentifier, WILD_CARD_FIELD_INSTRUCTION, 0, 0, 'X',
 		{
 			{ EHostParamIdentifier, EFieldIdentifier, EHostParameterRequired, WILD_CARD_FIELD_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
@@ -1022,7 +1022,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ECardIdentifier, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, '\0',
+		ECardIdentifier, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, 'X',
 		{
 			{ EHostParamIdentifier, EButtonIdentifier, EHostParameterRequired, WILD_CARD_BUTTON_INSTRUCTION, 0, 0, '\0', 'A' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
