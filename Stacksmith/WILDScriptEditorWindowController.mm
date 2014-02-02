@@ -42,9 +42,6 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 {
 	mContainer = NULL;
 	
-	[mSymbols release];
-	mSymbols = nil;
-	
 	[super dealloc];
 }
 
@@ -56,7 +53,18 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	char*			theText = NULL;
 	size_t			theTextLen = 0;
 	size_t			cursorPos = 0;
+	size_t			theLine = 0;
+	size_t			errOffset = 0;
+	size_t			x = 0;
+	const char*		currErrMsg = "";
 	LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( mContainer->GetScript().c_str(), mContainer->GetScript().length(), 0 );
+	for( x = 0; currErrMsg != NULL; x++ )
+	{
+		LEOParserGetNonFatalErrorMessageAtIndex( x, &currErrMsg, &theLine, &errOffset );
+		if( !currErrMsg )
+			break;
+		printf( "Error: %s\n", currErrMsg );
+	}
 	LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
 	LEODisplayInfoTableApplyToText( displayInfo, mContainer->GetScript().c_str(), mContainer->GetScript().length(), &theText, &theTextLen, &cursorPos );
 	NSString	*	formattedText = [[[NSString alloc] initWithBytesNoCopy: theText length: theTextLen encoding: NSUTF8StringEncoding freeWhenDone: YES] autorelease];
@@ -64,12 +72,11 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	
 	[mPopUpButton removeAllItems];
 	const char*	theName = "";
-	size_t		x = 0;
-	size_t		theLine = 0;
+	
 	bool		isCommand = false;
-	while( theName != NULL )
+	for( x = 0; theName != NULL; x++ )
 	{
-		LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x++, &theName, &theLine, &isCommand );
+		LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isCommand );
 		if( !theName ) break;
 		NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
 		[theItem setImage: [NSImage imageNamed: isCommand ? @"HandlerPopupMessage" : @"HandlerPopupFunction"]];

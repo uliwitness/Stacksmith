@@ -51,7 +51,8 @@ using namespace Carlson;
 {
 	NSView	*	hitView = [super hitTest: aPoint];
 	bool	isEditing = mStack ? mStack->GetTool() != EBrowseTool : false;
-	if( isEditing && hitView != nil )
+	bool	isPeeking = mStack ? mStack->GetPeeking() : false;
+	if( (isEditing || isPeeking) && hitView != nil )
 		return self;
 	return hitView;
 }
@@ -60,10 +61,11 @@ using namespace Carlson;
 -(void)	mouseDown: (NSEvent*)theEvt
 {
 	bool	isEditing = mStack->GetTool() != EBrowseTool;
+	bool	isPeeking = mStack->GetPeeking();
 	CScriptableObject	*hitObject = NULL;
 	CCard	*	theCard = mStack->GetCurrentCard();
 	const char*	dragMessage = NULL, *upMessage = NULL, *doubleUpMessage = NULL;
-	if( isEditing )
+	if( isEditing || isPeeking )
 	{
 		NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
 		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
@@ -109,39 +111,58 @@ using namespace Carlson;
 			}
 		}
 		
-		numParts = theCard->GetBackground()->GetNumParts();
-		for( size_t x = numParts; x > 0; x-- )
+		const char*	mouseDownMessage = NULL;
+		const char*	mouseDoubleDownMessage = NULL;
+		
+		if( isPeeking )
 		{
-			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
-			if( thePart != hitPart )
+			mouseDownMessage = "mouseDownWhilePeeking";
+			mouseDoubleDownMessage = "mouseDoubleDownWhilePeeking";
+			dragMessage = "mouseDragWhilePeeking";
+			upMessage = "mouseUpWhilePeeking";
+			doubleUpMessage = "mouseDoubleClickWhilePeeking";
+		}
+		else if( isEditing )
+		{
+			mouseDownMessage = "mouseDownWhileEditing";
+			mouseDoubleDownMessage = "mouseDoubleDownWhileEditing";
+			dragMessage = "mouseDragWhileEditing";
+			upMessage = "mouseUpWhileEditing";
+			doubleUpMessage = "mouseDoubleClickWhileEditing";
+		
+			numParts = theCard->GetBackground()->GetNumParts();
+			for( size_t x = numParts; x > 0; x-- )
 			{
-				if( !hitPart || (!shiftKeyDown && !hitPart->IsSelected()) )
-					thePart->SetSelected(false);
+				CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
+				if( thePart != hitPart )
+				{
+					if( !hitPart || (!shiftKeyDown && !hitPart->IsSelected()) )
+						thePart->SetSelected(false);
+				}
 			}
 		}
 		
 		if( !hitPart )
 		{
 			CAutoreleasePool	cppPool;
-			theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
+			theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage );
 			hitObject = theCard;
 		}
 		else
 		{
-			if( !hitPart->IsSelected() )
-				hitPart->SetSelected(true);
-			else if( hitPart->IsSelected() && shiftKeyDown )
-				hitPart->SetSelected(false);
+			if( isEditing && !isPeeking )
+			{
+				if( !hitPart->IsSelected() )
+					hitPart->SetSelected(true);
+				else if( hitPart->IsSelected() && shiftKeyDown )
+					hitPart->SetSelected(false);
+			}
 			CAutoreleasePool	cppPool;
-			hitPart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"pointerDown":"pointerDoubleDown" );
+			hitPart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage );
 			hitObject = hitPart;
 		}
 		
 		[mOwningStackWindowController drawBoundingBoxes];
-		
-		dragMessage = "pointerDrag";
-		upMessage = "pointerUp";
-		doubleUpMessage = "pointerDoubleUp";
 	}
 	else
 	{
@@ -150,7 +171,7 @@ using namespace Carlson;
 		
 		dragMessage = "mouseDrag";
 		upMessage = "mouseUp";
-		doubleUpMessage = "mouseDoubleUp";
+		doubleUpMessage = "mouseDoubleClick";
 		
 		theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown" );
 	}

@@ -41,6 +41,8 @@ public:
 	
 	virtual WILDNSWindowPtr		GetMacWindow();
 	
+	virtual bool				ShowScriptEditorForObject( CConcreteObject* inObject );
+	
 	static void					RegisterPartCreators();
 
 protected:

@@ -523,6 +523,8 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	mouseEnterHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseenter" );
 	LEOHandlerID	mouseDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedown" );
 	LEOHandlerID	mouseUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseup" );
+	LEOHandlerID	mouseDoubleDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedoubledown" );
+	LEOHandlerID	mouseDoubleUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedoubleclick" );
 	LEOHandlerID	mouseUpOutsideHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseupoutside" );
 	LEOHandlerID	mouseDoubleClickHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mousedoubleclick" );
 	LEOHandlerID	mouseLeaveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseleave" );
@@ -534,11 +536,16 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	tabKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "tabkey" );
 	LEOHandlerID	playMovieHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "playMovie" );
 	LEOHandlerID	stopMovieHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "stopMovie" );
-	LEOHandlerID	pointerDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerDown" );
-	LEOHandlerID	pointerDoubleDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerDoubleDown" );
-	LEOHandlerID	pointerUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerUp" );
-	LEOHandlerID	pointerDoubleUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerDoubleUp" );
-	LEOHandlerID	pointerDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "pointerDrag" );
+	LEOHandlerID	pointerDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDownWhileEditing" );
+	LEOHandlerID	pointerDoubleDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleDownWhileEditing" );
+	LEOHandlerID	pointerUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseUpWhileEditing" );
+	LEOHandlerID	pointerDoubleUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleClickWhileEditing" );
+	LEOHandlerID	pointerDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDragWhileEditing" );
+	LEOHandlerID	peekingDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDownWhilePeeking" );
+	LEOHandlerID	peekingDoubleDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleDownWhilePeeking" );
+	LEOHandlerID	peekingUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseUpWhilePeeking" );
+	LEOHandlerID	peekingDoubleUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleClickWhilePeeking" );
+	LEOHandlerID	peekingDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDragWhilePeeking" );
 	if( inHandler == arrowKeyHandlerID )
 	{
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
@@ -594,6 +601,14 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			handled = false;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
 	}
+	else if( inHandler == peekingDownHandlerID )
+	{
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+		CConcreteObject*		so = dynamic_cast<CConcreteObject*>( userData->GetTarget() );
+		userData->GetStack()->ShowScriptEditorForObject( so );
+		handled = true;
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
 	else if( inHandler == openCardHandlerID
 			|| inHandler == closeCardHandlerID
 			|| inHandler == openStackHandlerID
@@ -602,6 +617,8 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == mouseDownHandlerID
 			|| inHandler == mouseUpHandlerID
 			|| inHandler == mouseUpOutsideHandlerID
+			|| inHandler == mouseDoubleDownHandlerID
+			|| inHandler == mouseDoubleUpHandlerID
 			|| inHandler == mouseLeaveHandlerID
 			|| inHandler == mouseMoveHandlerID
 			|| inHandler == mouseDragHandlerID
@@ -617,7 +634,11 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == pointerDoubleDownHandlerID
 			|| inHandler == pointerUpHandlerID
 			|| inHandler == pointerDoubleUpHandlerID
-			|| inHandler == pointerDragHandlerID )
+			|| inHandler == pointerDragHandlerID
+			|| inHandler == peekingDoubleDownHandlerID
+			|| inHandler == peekingUpHandlerID
+			|| inHandler == peekingDoubleUpHandlerID
+			|| inHandler == peekingDragHandlerID )
 	{
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );

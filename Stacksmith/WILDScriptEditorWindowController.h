@@ -16,7 +16,6 @@
 @interface WILDScriptEditorWindowController : NSWindowController
 {
 	Carlson::CConcreteObject*					mContainer;			// Not retained, this is our owner!
-	NSArray*									mSymbols;			// List of symbol name/type -> line mappings for handler popup.
 	IBOutlet NSTextView*						mTextView;			// Script text.
 	IBOutlet NSPopUpButton*						mPopUpButton;		// Handlers popup.
 	IBOutlet UKSyntaxColoredTextViewController*	mSyntaxController;	// Provides some extra functionality like syntax coloring.

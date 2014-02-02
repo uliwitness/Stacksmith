@@ -98,6 +98,7 @@ public:
 	
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	virtual bool	ShowScriptEditorForObject( CConcreteObject* inObject ) { return false; };
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	

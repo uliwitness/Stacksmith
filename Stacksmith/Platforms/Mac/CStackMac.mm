@@ -16,8 +16,9 @@
 #include "CPicturePart.h"
 #include "CDocument.h"
 #include "CAlert.h"
-#include "WILDStackWindowController.h"
-#include <QuartzCore/QuartzCore.h>
+#import "WILDStackWindowController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "WILDScriptEditorWindowController.h"
 
 
 using namespace Carlson;
@@ -131,6 +132,13 @@ WILDNSWindowPtr	CStackMac::GetMacWindow()
 	return mMacWindowController.window;
 }
 
+
+bool	CStackMac::ShowScriptEditorForObject( CConcreteObject* inObject )
+{
+	WILDScriptEditorWindowController	*	sewc = [[WILDScriptEditorWindowController alloc] initWithScriptContainer: inObject];
+	[sewc showWindow: nil];
+	return true;
+}
 
 
 void	CStackMac::RegisterPartCreators()

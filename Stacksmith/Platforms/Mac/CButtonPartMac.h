@@ -37,6 +37,8 @@ public:
 	
 	virtual void	PrepareMouseUp();
 	
+	virtual NSImage*	GetDisplayIcon()	{ return [NSImage imageNamed: @"ButtonIconSmall"]; };
+	
 protected:
 	~CButtonPartMac()	{ DestroyView(); };
 	
