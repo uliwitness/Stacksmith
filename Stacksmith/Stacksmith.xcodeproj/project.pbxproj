@@ -179,6 +179,58 @@
 		553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */; };
 		55405B78189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */; };
 		55405B7F189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */; };
+		55405B80189EDF1D001D3C99 /* Forge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C469F13577334000219FA /* Forge.cpp */; };
+		55405B81189EDF24001D3C99 /* CCodeBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A113577334000219FA /* CCodeBlock.cpp */; };
+		55405B82189EDF2D001D3C99 /* CVariableEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A313577334000219FA /* CVariableEntry.cpp */; };
+		55405B83189EDF2D001D3C99 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
+		55405B84189EDF2D001D3C99 /* CToken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A613577334000219FA /* CToken.cpp */; };
+		55405B85189EDF2D001D3C99 /* CParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46A813577334000219FA /* CParser.cpp */; };
+		55405B86189EDF2D001D3C99 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
+		55405B87189EDF38001D3C99 /* CParseTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46AC13577334000219FA /* CParseTree.cpp */; };
+		55405B88189EDF38001D3C99 /* CNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46AE13577334000219FA /* CNode.cpp */; };
+		55405B89189EDF38001D3C99 /* CValueNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B013577334000219FA /* CValueNode.cpp */; };
+		55405B8A189EDF5B001D3C99 /* CCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B413577334000219FA /* CCommandNode.cpp */; };
+		55405B8B189EDF5B001D3C99 /* CPushValueCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B613577334000219FA /* CPushValueCommandNode.cpp */; };
+		55405B8C189EDF5B001D3C99 /* CAssignCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46B813577334000219FA /* CAssignCommandNode.cpp */; };
+		55405B8D189EDF5B001D3C99 /* CPutCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46BA13577334000219FA /* CPutCommandNode.cpp */; };
+		55405B8E189EDF5B001D3C99 /* CGetParamCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46BC13577334000219FA /* CGetParamCommandNode.cpp */; };
+		55405B8F189EDF5B001D3C99 /* CReturnCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C013577334000219FA /* CReturnCommandNode.cpp */; };
+		55405B90189EDF5B001D3C99 /* CFunctionCallNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C213577334000219FA /* CFunctionCallNode.cpp */; };
+		55405B91189EDF5B001D3C99 /* COperatorNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C413577334000219FA /* COperatorNode.cpp */; };
+		55405B92189EDF5B001D3C99 /* CAddCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C613577334000219FA /* CAddCommandNode.cpp */; };
+		55405B93189EDF5B001D3C99 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
+		55405B94189EDF5B001D3C99 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
+		55405B95189EDF5B001D3C99 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
+		55405B96189EDF5B001D3C99 /* CLineMarkerNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C813577334000219FA /* CLineMarkerNode.cpp */; };
+		55405B97189EDF5B001D3C99 /* CAssignChunkArrayNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46CA13577334000219FA /* CAssignChunkArrayNode.cpp */; };
+		55405B98189EDF5B001D3C99 /* CGetArrayItemCountNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46CC13577334000219FA /* CGetArrayItemCountNode.cpp */; };
+		55405B99189EDF5B001D3C99 /* CGetArrayItemNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46CE13577334000219FA /* CGetArrayItemNode.cpp */; };
+		55405B9A189EDF5B001D3C99 /* CMakeChunkRefNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D013577334000219FA /* CMakeChunkRefNode.cpp */; };
+		55405B9B189EDF5B001D3C99 /* CMakeChunkConstNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D213577334000219FA /* CMakeChunkConstNode.cpp */; };
+		55405B9C189EDF5B001D3C99 /* CSetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */; };
+		55405B9D189EDF5B001D3C99 /* CGetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */; };
+		55405B9E189EDF5B001D3C99 /* CObjectPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805BF1360A7B3006F1287 /* CObjectPropertyNode.cpp */; };
+		55405B9F189EDF5B001D3C99 /* CGlobalPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E805F71366091F006F1287 /* CGlobalPropertyNode.cpp */; };
+		55405BA0189EDF5B001D3C99 /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
+		55405BA1189EDF5B001D3C99 /* CParseErrorCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60EE18779641002450E2 /* CParseErrorCommandNode.cpp */; };
+		55405BA2189EDF64001D3C99 /* CCodeBlockNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D413577334000219FA /* CCodeBlockNode.cpp */; };
+		55405BA3189EDF64001D3C99 /* CFunctionDefinitionNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D613577334000219FA /* CFunctionDefinitionNode.cpp */; };
+		55405BA4189EDF64001D3C99 /* CWhileLoopNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46D813577334000219FA /* CWhileLoopNode.cpp */; };
+		55405BA5189EDF64001D3C99 /* CIfNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553C46DA13577334000219FA /* CIfNode.cpp */; };
+		55405BA6189EDF70001D3C99 /* CNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */; };
+		55405BA7189EDFF0001D3C99 /* LEOValue.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46DC13577334000219FA /* LEOValue.c */; };
+		55405BA8189EDFF0001D3C99 /* LEOInterpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46DE13577334000219FA /* LEOInterpreter.c */; };
+		55405BA9189EDFF0001D3C99 /* LEOInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E013577334000219FA /* LEOInstructions.c */; };
+		55405BAA189EDFF0001D3C99 /* LEOScript.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E213577334000219FA /* LEOScript.c */; };
+		55405BAB189EDFF0001D3C99 /* LEOChunks.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46E813577334000219FA /* LEOChunks.c */; };
+		55405BAC189EDFF0001D3C99 /* LEOContextGroup.c in Sources */ = {isa = PBXBuildFile; fileRef = 553C46EA13577334000219FA /* LEOContextGroup.c */; };
+		55405BAD189EDFF0001D3C99 /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
+		55405BAE189EDFF0001D3C99 /* LEOPropertyInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */; };
+		55405BAF189EDFF0001D3C99 /* LEOObjCCallInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 5538245817272767007785D8 /* LEOObjCCallInstructions.c */; };
+		55405BB0189EE008001D3C99 /* CChunkPropertyNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */; };
+		55405BB1189EE008001D3C99 /* COperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13316F4B5E20056CB4D /* COperatorNodeTransformation.cpp */; };
+		55405BB2189EE008001D3C99 /* CConcatOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13A16F4B7B60056CB4D /* CConcatOperatorNodeTransformation.cpp */; };
+		55405BB3189EE008001D3C99 /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13D16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp */; };
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
@@ -2058,11 +2110,63 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55405BA7189EDFF0001D3C99 /* LEOValue.c in Sources */,
+				55405B83189EDF2D001D3C99 /* UTF8UTF32Utilities.c in Sources */,
+				55405B86189EDF2D001D3C99 /* CForgeExceptions.cpp in Sources */,
+				55405B87189EDF38001D3C99 /* CParseTree.cpp in Sources */,
+				55405B9A189EDF5B001D3C99 /* CMakeChunkRefNode.cpp in Sources */,
+				55405BB0189EE008001D3C99 /* CChunkPropertyNodeTransformation.cpp in Sources */,
+				55405BA9189EDFF0001D3C99 /* LEOInstructions.c in Sources */,
+				55405B8B189EDF5B001D3C99 /* CPushValueCommandNode.cpp in Sources */,
+				55405B91189EDF5B001D3C99 /* COperatorNode.cpp in Sources */,
 				555E53C81895990F001487C1 /* tinyxml2.cpp in Sources */,
+				55405B80189EDF1D001D3C99 /* Forge.cpp in Sources */,
+				55405BAC189EDFF0001D3C99 /* LEOContextGroup.c in Sources */,
+				55405B9B189EDF5B001D3C99 /* CMakeChunkConstNode.cpp in Sources */,
 				555E53C61895986A001487C1 /* CAttributedString.cpp in Sources */,
+				55405BA2189EDF64001D3C99 /* CCodeBlockNode.cpp in Sources */,
+				55405B81189EDF24001D3C99 /* CCodeBlock.cpp in Sources */,
+				55405B8C189EDF5B001D3C99 /* CAssignCommandNode.cpp in Sources */,
+				55405B94189EDF5B001D3C99 /* CDivideCommandNode.cpp in Sources */,
+				55405B99189EDF5B001D3C99 /* CGetArrayItemNode.cpp in Sources */,
+				55405BAA189EDFF0001D3C99 /* LEOScript.c in Sources */,
+				55405B96189EDF5B001D3C99 /* CLineMarkerNode.cpp in Sources */,
+				55405BA1189EDF5B001D3C99 /* CParseErrorCommandNode.cpp in Sources */,
+				55405B84189EDF2D001D3C99 /* CToken.cpp in Sources */,
+				55405B95189EDF5B001D3C99 /* CMultiplyCommandNode.cpp in Sources */,
+				55405BAD189EDFF0001D3C99 /* LEODownloadInstructions.c in Sources */,
+				55405B9E189EDF5B001D3C99 /* CObjectPropertyNode.cpp in Sources */,
 				555E53C718959871001487C1 /* CStyleSheet.cpp in Sources */,
+				55405BB3189EE008001D3C99 /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */,
+				55405B8D189EDF5B001D3C99 /* CPutCommandNode.cpp in Sources */,
+				55405B92189EDF5B001D3C99 /* CAddCommandNode.cpp in Sources */,
+				55405BA4189EDF64001D3C99 /* CWhileLoopNode.cpp in Sources */,
+				55405BAB189EDFF0001D3C99 /* LEOChunks.c in Sources */,
+				55405B9F189EDF5B001D3C99 /* CGlobalPropertyNode.cpp in Sources */,
+				55405BAF189EDFF0001D3C99 /* LEOObjCCallInstructions.c in Sources */,
+				55405B8A189EDF5B001D3C99 /* CCommandNode.cpp in Sources */,
+				55405BA3189EDF64001D3C99 /* CFunctionDefinitionNode.cpp in Sources */,
+				55405B8F189EDF5B001D3C99 /* CReturnCommandNode.cpp in Sources */,
 				555E53C918959912001487C1 /* CTinyXMLUtils.cpp in Sources */,
+				55405B97189EDF5B001D3C99 /* CAssignChunkArrayNode.cpp in Sources */,
+				55405B93189EDF5B001D3C99 /* CSubtractCommandNode.cpp in Sources */,
+				55405BB1189EE008001D3C99 /* COperatorNodeTransformation.cpp in Sources */,
+				55405BA0189EDF5B001D3C99 /* CDownloadCommandNode.cpp in Sources */,
+				55405B8E189EDF5B001D3C99 /* CGetParamCommandNode.cpp in Sources */,
+				55405BB2189EE008001D3C99 /* CConcatOperatorNodeTransformation.cpp in Sources */,
+				55405B85189EDF2D001D3C99 /* CParser.cpp in Sources */,
+				55405BAE189EDFF0001D3C99 /* LEOPropertyInstructions.c in Sources */,
+				55405B88189EDF38001D3C99 /* CNode.cpp in Sources */,
+				55405BA5189EDF64001D3C99 /* CIfNode.cpp in Sources */,
+				55405BA6189EDF70001D3C99 /* CNodeTransformation.cpp in Sources */,
+				55405B82189EDF2D001D3C99 /* CVariableEntry.cpp in Sources */,
+				55405B90189EDF5B001D3C99 /* CFunctionCallNode.cpp in Sources */,
 				555E53C018959842001487C1 /* StacksmithTestsMain.cpp in Sources */,
+				55405B89189EDF38001D3C99 /* CValueNode.cpp in Sources */,
+				55405B9D189EDF5B001D3C99 /* CGetChunkPropertyNode.cpp in Sources */,
+				55405B98189EDF5B001D3C99 /* CGetArrayItemCountNode.cpp in Sources */,
+				55405B9C189EDF5B001D3C99 /* CSetChunkPropertyNode.cpp in Sources */,
+				55405BA8189EDFF0001D3C99 /* LEOInterpreter.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
