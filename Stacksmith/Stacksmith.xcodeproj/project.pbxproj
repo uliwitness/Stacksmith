@@ -177,6 +177,8 @@
 		553E3C9616F6698300258F72 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55C9F965136E1E950096FC4D /* Sparkle.framework */; };
 		553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680A157D3291009E0517 /* CSetChunkPropertyNode.cpp */; };
 		553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */; };
+		55405B78189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */; };
+		55405B7F189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */; };
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
@@ -705,6 +707,9 @@
 		553F680B157D3291009E0517 /* CSetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CSetChunkPropertyNode.h; path = ../../CSetChunkPropertyNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		553F680D157D3547009E0517 /* CGetChunkPropertyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CGetChunkPropertyNode.cpp; path = ../../CGetChunkPropertyNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		553F680E157D3547009E0517 /* CGetChunkPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CGetChunkPropertyNode.h; path = ../../CGetChunkPropertyNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WILDScriptEditorWindowController.xib; sourceTree = "<group>"; };
+		55405B7D189E8FE8001D3C99 /* WILDScriptEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDScriptEditorWindowController.h; sourceTree = "<group>"; };
+		55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WILDScriptEditorWindowController.mm; sourceTree = "<group>"; };
 		5542CABF113A2CB300555C64 /* UKPBMImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPBMImageRep.h; sourceTree = "<group>"; };
 		5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPBMImageRep.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
@@ -1152,6 +1157,9 @@
 				555E53B1189472E0001487C1 /* CMessageWatcherMac.h */,
 				555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */,
 				555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */,
+				55405B7D189E8FE8001D3C99 /* WILDScriptEditorWindowController.h */,
+				55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */,
+				55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */,
 			);
 			name = Document;
 			sourceTree = "<group>";
@@ -1900,6 +1908,7 @@
 				552FF20D113F23F3005742C8 /* PAT_19.pbm in Resources */,
 				552FF20E113F23F3005742C8 /* PAT_20.pbm in Resources */,
 				552FF20F113F23F3005742C8 /* PAT_21.pbm in Resources */,
+				55405B78189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib in Resources */,
 				552FF210113F23F3005742C8 /* PAT_22.pbm in Resources */,
 				552FF211113F23F3005742C8 /* PAT_23.pbm in Resources */,
 				552FF212113F23F3005742C8 /* PAT_24.pbm in Resources */,
@@ -2229,6 +2238,7 @@
 				552386B5188335A000D7FAB3 /* WILDButtonCell.m in Sources */,
 				552386CE1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm in Sources */,
 				5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */,
+				55405B7F189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm in Sources */,
 				55382463172730B4007785D8 /* WILDObjCCallInstructions.mm in Sources */,
 				55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */,
 				55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */,

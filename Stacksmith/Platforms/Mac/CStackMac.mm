@@ -126,6 +126,13 @@ void	CStackMac::SetStyle( TStackStyle inStyle )
 }
 
 
+WILDNSWindowPtr	CStackMac::GetMacWindow()
+{
+	return mMacWindowController.window;
+}
+
+
+
 void	CStackMac::RegisterPartCreators()
 {
 	static bool	sAlreadyDidThis = false;

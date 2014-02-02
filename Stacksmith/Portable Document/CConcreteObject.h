@@ -50,6 +50,7 @@ public:
 	
 	virtual std::string	GetName()			{ return mName; };
     virtual void        SetName( const std::string& inStr ) { mName = inStr; };
+	virtual std::string	GetDisplayName()	{ return mName; };
 		
 	virtual LEOContextGroup*	GetScriptContextGroupObject();
 

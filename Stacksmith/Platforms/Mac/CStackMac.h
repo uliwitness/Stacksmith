@@ -15,8 +15,11 @@
 #if __OBJC__
 @class WILDStackWindowController;
 typedef WILDStackWindowController*			WILDStackWindowControllerPtr;
+@class NSWindow;
+typedef NSWindow*							WILDNSWindowPtr;
 #else
 typedef struct WILDStackWindowController*	WILDStackWindowControllerPtr;
+typedef struct NSWindow*					WILDNSWindowPtr;
 #endif
 
 
@@ -35,6 +38,8 @@ public:
 	virtual void				SetEditingBackground( bool inState );
 	virtual void				SetTool( TTool inTool );
 	virtual void				SetName( const std::string& inName );
+	
+	virtual WILDNSWindowPtr		GetMacWindow();
 	
 	static void					RegisterPartCreators();
 

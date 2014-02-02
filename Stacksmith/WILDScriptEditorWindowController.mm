@@ -1,0 +1,207 @@
+//
+//  WILDScriptEditorWindowController.m
+//  Propaganda
+//
+//  Created by Uli Kusterer on 13.03.10.
+//  Copyright 2010 The Void Software. All rights reserved.
+//
+
+#import "WILDScriptEditorWindowController.h"
+#import "UKSyntaxColoredTextViewController.h"
+#import "NSWindow+ULIZoomEffect.h"
+#include "Forge.h"
+#include "CMacPartBase.h"
+#include "CStackMac.h"
+
+
+using namespace Carlson;
+
+
+static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEditorTopAreaToolbarItemIdentifier";
+
+
+@interface WILDScriptEditorWindowController () <NSToolbarDelegate>
+
+@end
+
+
+@implementation WILDScriptEditorWindowController
+
+-(id)	initWithScriptContainer: (CConcreteObject*)inContainer
+{
+	if(( self = [super initWithWindowNibName: NSStringFromClass( [self class] )] ))
+	{
+		mContainer = inContainer;
+	}
+	
+	return self;
+}
+
+
+-(void)	dealloc
+{
+	mContainer = NULL;
+	
+	[mSymbols release];
+	mSymbols = nil;
+	
+	[super dealloc];
+}
+
+
+-(void)	awakeFromNib
+{
+	[super awakeFromNib];
+	
+	char*			theText = NULL;
+	size_t			theTextLen = 0;
+	size_t			cursorPos = 0;
+	LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( mContainer->GetScript().c_str(), mContainer->GetScript().length(), 0 );
+	LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
+	LEODisplayInfoTableApplyToText( displayInfo, mContainer->GetScript().c_str(), mContainer->GetScript().length(), &theText, &theTextLen, &cursorPos );
+	NSString	*	formattedText = [[[NSString alloc] initWithBytesNoCopy: theText length: theTextLen encoding: NSUTF8StringEncoding freeWhenDone: YES] autorelease];
+	[mTextView setString: formattedText];
+	
+	[mPopUpButton removeAllItems];
+	const char*	theName = "";
+	size_t		x = 0;
+	size_t		theLine = 0;
+	bool		isCommand = false;
+	while( theName != NULL )
+	{
+		LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x++, &theName, &theLine, &isCommand );
+		if( !theName ) break;
+		NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
+		[theItem setImage: [NSImage imageNamed: isCommand ? @"HandlerPopupMessage" : @"HandlerPopupFunction"]];
+		[theItem setRepresentedObject: @(theLine)];
+	}
+	LEOCleanUpDisplayInfoTable( displayInfo );
+	LEOCleanUpParseTree( parseTree );
+	
+	if( x == 0 )	// We added no items?
+	{
+		[mPopUpButton addItemWithTitle: @"None"];
+		[mPopUpButton setEnabled: NO];
+	}
+	
+	NSToolbar	*	editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDScriptEditorToolbar"] autorelease];
+	[editToolbar setDelegate: self];
+	[editToolbar setAllowsUserCustomization: NO];
+	[editToolbar setVisible: NO];
+	[editToolbar setDisplayMode: NSToolbarDisplayModeIconOnly];
+	[editToolbar setSizeMode: NSToolbarSizeModeSmall];
+	[self.window setToolbar: editToolbar];
+	[self.window toggleToolbarShown: self];
+}
+
+
+-(void)	showWindow:(id)sender
+{
+	NSWindow	*	theWindow = [self window];
+	
+	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: mGlobalStartRect];
+}
+
+
+-(BOOL)	windowShouldClose: (id)sender
+{
+	NSWindow	*	theWindow = [self window];
+	
+	[theWindow orderOutWithZoomEffectToRect: mGlobalStartRect];
+	
+	return YES;
+}
+
+
+-(void)	windowWillClose: (NSNotification*)notification
+{
+	mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
+}
+
+
+-(void) setDocument: (NSDocument *)document
+{
+	[super setDocument: document];
+	
+	NSButton*	btn = [[self window] standardWindowButton: NSWindowDocumentIconButton];
+	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>(mContainer);
+	if( macPart )
+		[btn setImage: macPart->GetDisplayIcon()];
+}
+
+-(IBAction)	handlerPopupSelectionChanged: (id)sender
+{
+	NSNumber*	destLineObj = [mPopUpButton.selectedItem representedObject];
+	[mSyntaxController goToLine: [destLineObj integerValue]];
+}
+
+
+-(NSString *)	windowTitleForDocumentDisplayName: (NSString *)displayName
+{
+	return [NSString stringWithFormat: @"%1$@’s Script", [NSString stringWithUTF8String: mContainer->GetDisplayName().c_str()]];
+}
+
+
+-(BOOL)	window: (NSWindow *)window shouldPopUpDocumentPathMenu: (NSMenu *)menu
+{
+	// Make sure the former top item (pointing to the file) selects the main doc window:
+	CStackMac*		macStack = dynamic_cast<CStackMac*>(mContainer->GetStack());
+	NSMenuItem*		fileItem = [menu itemAtIndex: 0];
+	[fileItem setTarget: macStack->GetMacWindow()];
+	[fileItem setAction: @selector(makeKeyAndOrderFront:)];
+	
+	// Now add a new item above that for this window, the script:
+	NSMenuItem*		newItem = [menu insertItemWithTitle: [NSString stringWithFormat: @"%1$@’s Script", [NSString stringWithUTF8String: mContainer->GetDisplayName().c_str()]]
+											action: nil keyEquivalent: @"" atIndex: 0];
+	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>(mContainer);
+	if( macPart )
+		[newItem setImage: macPart->GetDisplayIcon()];
+	
+	return YES;
+}
+
+
+-(void)		setGlobalStartRect: (NSRect)theBox
+{
+	mGlobalStartRect = theBox;
+}
+
+
+-(void)		goToLine: (NSUInteger)lineNum
+{
+	[mSyntaxController goToLine: lineNum];
+}
+
+
+-(void)		goToCharacter: (NSUInteger)charNum
+{
+	[mSyntaxController goToCharacter: charNum];
+}
+
+
+- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+{
+	NSToolbarItem	*	theItem = [[[NSToolbarItem alloc] initWithItemIdentifier: itemIdentifier] autorelease];
+	
+	if( [itemIdentifier isEqualToString: WILDScriptEditorTopAreaToolbarItemIdentifier] )
+	{
+		[theItem setLabel: @"Top Area"];
+		[theItem setView: mTopNavAreaView];
+	}
+	
+	return theItem;
+}
+
+/* Returns the ordered list of items to be shown in the toolbar by default.   If during initialization, no overriding values are found in the user defaults, or if the user chooses to revert to the default items this set will be used. */
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+	return @[ WILDScriptEditorTopAreaToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier ];
+}
+
+/* Returns the list of all allowed items by identifier.  By default, the toolbar does not assume any items are allowed, even the separator.  So, every allowed item must be explicitly listed.  The set of allowed items is used to construct the customization palette.  The order of items does not necessarily guarantee the order of appearance in the palette.  At minimum, you should return the default item list.*/
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+	return @[ WILDScriptEditorTopAreaToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier ];
+}
+
+@end

@@ -33,7 +33,8 @@ public:
 		//inView.layer.borderWidth = inState? 1 : 0;
 		//inView.layer.borderColor = inState? [NSColor grayColor].CGColor : NULL;
 	}
-	virtual NSView*	GetView()	{ return NULL; };
+	virtual NSView*		GetView()			{ return NULL; };
+	virtual NSImage*	GetDisplayIcon()	{ return [NSImage imageNamed: @"FieldIconSmall"]; };
 
 protected:
 	virtual ~CMacPartBase() {};
