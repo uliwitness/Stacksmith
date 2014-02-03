@@ -50,9 +50,26 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 {
 	[super awakeFromNib];
 	
+	[self formatText];
+	
+	NSToolbar	*	editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDScriptEditorToolbar"] autorelease];
+	[editToolbar setDelegate: self];
+	[editToolbar setAllowsUserCustomization: NO];
+	[editToolbar setVisible: NO];
+	[editToolbar setDisplayMode: NSToolbarDisplayModeIconOnly];
+	[editToolbar setSizeMode: NSToolbarSizeModeSmall];
+	[self.window setToolbar: editToolbar];
+	[self.window toggleToolbarShown: self];
+}
+
+
+-(void)	formatText
+{
 	char*			theText = NULL;
 	size_t			theTextLen = 0;
-	size_t			cursorPos = 0;
+	NSRange			selRange = mTextView.selectedRange;
+	size_t			cursorPos = selRange.location,
+					cursorEndPos = selRange.location +selRange.length;
 	size_t			theLine = 0;
 	size_t			errOffset = 0;
 	size_t			x = 0;
@@ -66,9 +83,10 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 		printf( "Error: %s\n", currErrMsg );
 	}
 	LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
-	LEODisplayInfoTableApplyToText( displayInfo, mContainer->GetScript().c_str(), mContainer->GetScript().length(), &theText, &theTextLen, &cursorPos );
+	LEODisplayInfoTableApplyToText( displayInfo, mContainer->GetScript().c_str(), mContainer->GetScript().length(), &theText, &theTextLen, &cursorPos, &cursorEndPos );
 	NSString	*	formattedText = [[[NSString alloc] initWithBytesNoCopy: theText length: theTextLen encoding: NSUTF8StringEncoding freeWhenDone: YES] autorelease];
 	[mTextView setString: formattedText];
+	[mTextView setSelectedRange: NSMakeRange(cursorPos,cursorEndPos -cursorPos)];
 	
 	[mPopUpButton removeAllItems];
 	const char*	theName = "";
@@ -78,6 +96,8 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	{
 		LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isCommand );
 		if( !theName ) break;
+		if( theName[0] == ':' )	// Skip any fake internal handlers we add.
+			continue;
 		NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
 		[theItem setImage: [NSImage imageNamed: isCommand ? @"HandlerPopupMessage" : @"HandlerPopupFunction"]];
 		[theItem setRepresentedObject: @(theLine)];
@@ -90,15 +110,6 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 		[mPopUpButton addItemWithTitle: @"None"];
 		[mPopUpButton setEnabled: NO];
 	}
-	
-	NSToolbar	*	editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDScriptEditorToolbar"] autorelease];
-	[editToolbar setDelegate: self];
-	[editToolbar setAllowsUserCustomization: NO];
-	[editToolbar setVisible: NO];
-	[editToolbar setDisplayMode: NSToolbarDisplayModeIconOnly];
-	[editToolbar setSizeMode: NSToolbarSizeModeSmall];
-	[self.window setToolbar: editToolbar];
-	[self.window toggleToolbarShown: self];
 }
 
 
@@ -183,6 +194,19 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 -(void)		goToCharacter: (NSUInteger)charNum
 {
 	[mSyntaxController goToCharacter: charNum];
+}
+
+
+-(BOOL) textView: (NSTextView *)textView doCommandBySelector: (SEL)commandSelector
+{
+	if( commandSelector == @selector(insertTab:) )
+	{
+		mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
+		[self formatText];
+		return YES;
+	}
+	else
+		return NO;
 }
 
 
