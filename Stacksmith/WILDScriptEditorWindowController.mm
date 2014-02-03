@@ -197,14 +197,25 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 }
 
 
+-(void)	reformatText
+{
+	mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
+	[self formatText];
+}
+
+
 -(BOOL) textView: (NSTextView *)textView doCommandBySelector: (SEL)commandSelector
 {
 	if( commandSelector == @selector(insertTab:) )
 	{
-		mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
-		[self formatText];
+		[self reformatText];
 		return YES;
 	}
+//	else if( commandSelector == @selector(insertNewline:) )
+//	{
+//		[self performSelector: @selector(reformatText) withObject: nil afterDelay: 0.0];
+//		return NO;
+//	}
 	else
 		return NO;
 }
