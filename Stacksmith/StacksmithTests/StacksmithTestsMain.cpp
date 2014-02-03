@@ -819,6 +819,14 @@ int main(int argc, const char * argv[])
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream, 0 );
 		LEOCleanUpParseTree(tree);
 		WILDTest( "Test a few object descriptors", sstream.str().c_str(), resultOne );
+
+		const char*scriptTwo = "on mouseUp\n\tif foo is true then\n\tput \"Yay me!\"\n\tend if\nend mouseUp";
+		const char*resultTwo = "Command mouseup\n{\n	# LINE 2\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 3\n		Operator Call \"WILDPrintInstruction\"\n		{\n			\"Yay me!\"\n		}\n	}\n}\n";
+		tree = LEOParseTreeCreateFromUTF8Characters( scriptTwo, strlen(scriptTwo), theFileID );
+		std::stringstream	sstream2;
+		((Carlson::CParseTree*)tree)->DebugPrint( sstream2, 0 );
+		LEOCleanUpParseTree(tree);
+		WILDTest( "Test conditionals parsing", sstream2.str().c_str(), resultTwo );
 	}
 	
     return (int)sFailed;
