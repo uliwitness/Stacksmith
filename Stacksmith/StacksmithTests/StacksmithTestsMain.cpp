@@ -727,7 +727,12 @@ static size_t	sFailed = 0, sPassed = 0;
 
 void	WILDTest( const char* expr, const char* found, const char* expected )
 {
-	if( strcmp(expected, found) == 0 )
+	bool		testPassed = false;
+	if( found == NULL || expected == NULL )
+		testPassed = (expected == found);
+	else
+		testPassed = (strcmp(expected, found) == 0);
+	if( testPassed )
 	{
 		std::cout << "note: " << expr << std::endl;
 		sPassed++;
@@ -811,30 +816,38 @@ int main(int argc, const char * argv[])
 		LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
 		LEOAddHostCommandsAndOffsetInstructions( gStacksmithHostCommands, kFirstStacksmithHostCommandInstruction );
 		uint16_t	theFileID = LEOFileIDForFileName("filename");
+		const char*	errMsg = NULL;
+		size_t		errLine = 0, errOffset = 0;
 		
 		const char*scriptOne = "on mouseUp\n\tput card field 1 into theArray\n\tset the currentButton of theArray to the short name of me\n\tput theArray into card field 1\nend mouseUp";
 		const char*resultOne = "Command mouseup\n{\n	# LINE 2\n	Command \"Put\"\n	{\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n		}\n		localVar( var_thearray )\n	}\n	# LINE 3\n	Command \"Put\"\n	{\n		Property \"short name\"\n		{\n			Operator Call \"LEONoOpInstruction\"\n			{\n			}\n		}\n		Property \"currentbutton\"\n		{\n			localVar( var_thearray )\n		}\n	}\n	# LINE 4\n	Command \"Put\"\n	{\n		localVar( var_thearray )\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n		}\n	}\n}\n";
 		LEOParseTree*	tree = LEOParseTreeCreateFromUTF8Characters( scriptOne, strlen(scriptOne), theFileID );
 		std::stringstream	sstream;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream, 0 );
-		LEOCleanUpParseTree(tree);
 		WILDTest( "Test a few object descriptors", sstream.str().c_str(), resultOne );
+		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset );
+		WILDTest( "Test a few object descriptors (2)", errMsg, NULL );
+		LEOCleanUpParseTree(tree);
 
 		const char*scriptTwo = "on mouseUp\n\tif foo is true then\n\tput \"Yay me!\"\n\tend if\nend mouseUp";
 		const char*resultTwo = "Command mouseup\n{\n	# LINE 2\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 3\n		Operator Call \"WILDPrintInstruction\"\n		{\n			\"Yay me!\"\n		}\n	}\n}\n";
 		tree = LEOParseTreeCreateFromUTF8Characters( scriptTwo, strlen(scriptTwo), theFileID );
 		std::stringstream	sstream2;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream2, 0 );
-		LEOCleanUpParseTree(tree);
 		WILDTest( "Test conditionals parsing", sstream2.str().c_str(), resultTwo );
+		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset );
+		WILDTest( "Test conditionals parsing (2)", errMsg, NULL );
+		LEOCleanUpParseTree(tree);
 
-		const char*script3 = "on mouseUp\n\tdownload \"http://www.zathras.de\" into cd fld 1\n\tfor each chunk\n\t\tput \"Busy...\"\n\twhen done\n\t\tput \"Done.\"\n\tend download\n\tif foo is true then\n\tput \"Yay me!\"\n\tend if\nend mouseUp";
-		const char*result3 = "Command mouseup\n{\n	# LINE 2\n	Command \"download\"\n	{\n		\"http://www.zathras.de\"\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n		}\n		\"::downloadProgress:0\"\n		\"::downloadCompletion:1\"\n	}\n	# LINE 8\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 9\n		Operator Call \"WILDPrintInstruction\"\n		{\n			\"Yay me!\"\n		}\n	}\n}\nCommand ::downloadProgress:0\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 4\n	Operator Call \"WILDPrintInstruction\"\n	{\n		\"Busy...\"\n	}\n}\nCommand ::downloadCompletion:1\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 6\n	Operator Call \"WILDPrintInstruction\"\n	{\n		\"Done.\"\n	}\n}\n";
+		const char*script3 = "on selectionChange\n	put line the selectedLine of me of me into cd fld 2\n	download “http://www.zathras.de” to cd fld 2\n	for each chunk\n		put size of the download\n	when done\n		put “Done”\n	end download\n	if foo is true then\n	put boo\n	end if\n	answer “Huh”\nend selectionChange";
+		const char*result3 = "Command selectionchange\n{\n	# LINE 2\n	Command \"Put\"\n	{\n		Function Call \"MakeChunkConst\"\n		{\n			Operator Call \"LEONoOpInstruction\"\n			{\n			}\n			int( 4 )\n			Property \"selectedline\"\n			{\n				Operator Call \"LEONoOpInstruction\"\n				{\n				}\n			}\n			Property \"selectedline\"\n			{\n				Operator Call \"LEONoOpInstruction\"\n				{\n				}\n			}\n		}\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 2 )\n		}\n	}\n	# LINE 3\n	Command \"download\"\n	{\n		\"http://www.zathras.de\"\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 2 )\n		}\n		\"::downloadProgress:0\"\n		\"::downloadCompletion:1\"\n	}\n	# LINE 9\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 10\n		Operator Call \"WILDPrintInstruction\"\n		{\n			localVar( var_boo )\n		}\n	}\n	# LINE 12\n	Operator Call \"WILDAnswerInstruction\"\n	{\n		\"Huh\"\n		\"\"\n		\"\"\n		\"\"\n	}\n}\nCommand ::downloadProgress:0\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 5\n	Operator Call \"WILDPrintInstruction\"\n	{\n		Property \"size\"\n		{\n			localVar( download )\n		}\n	}\n}\nCommand ::downloadCompletion:1\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 7\n	Operator Call \"WILDPrintInstruction\"\n	{\n		\"Done\"\n	}\n}\n";
 		tree = LEOParseTreeCreateFromUTF8Characters( script3, strlen(script3), theFileID );
 		std::stringstream	sstream3;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream3, 0 );
+		WILDTest( "Test conditionals after download parsing", sstream3.str().c_str(), result3 );
+		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset );
+		WILDTest( "Test conditionals after download parsing (2)", errMsg, NULL );
 		LEOCleanUpParseTree(tree);
-		WILDTest( "Test conditionals parsing", sstream3.str().c_str(), result3 );
 	}
 	
     return (int)sFailed;
