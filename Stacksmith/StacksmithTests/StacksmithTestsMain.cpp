@@ -827,6 +827,14 @@ int main(int argc, const char * argv[])
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream2, 0 );
 		LEOCleanUpParseTree(tree);
 		WILDTest( "Test conditionals parsing", sstream2.str().c_str(), resultTwo );
+
+		const char*script3 = "on mouseUp\n\tdownload \"http://www.zathras.de\" into cd fld 1\n\tfor each chunk\n\t\tput \"Busy...\"\n\twhen done\n\t\tput \"Done.\"\n\tend download\n\tif foo is true then\n\tput \"Yay me!\"\n\tend if\nend mouseUp";
+		const char*result3 = "Command mouseup\n{\n	# LINE 2\n	Command \"download\"\n	{\n		\"http://www.zathras.de\"\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n		}\n		\"::downloadProgress:0\"\n		\"::downloadCompletion:1\"\n	}\n	# LINE 8\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 9\n		Operator Call \"WILDPrintInstruction\"\n		{\n			\"Yay me!\"\n		}\n	}\n}\nCommand ::downloadProgress:0\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 4\n	Operator Call \"WILDPrintInstruction\"\n	{\n		\"Busy...\"\n	}\n}\nCommand ::downloadCompletion:1\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 6\n	Operator Call \"WILDPrintInstruction\"\n	{\n		\"Done.\"\n	}\n}\n";
+		tree = LEOParseTreeCreateFromUTF8Characters( script3, strlen(script3), theFileID );
+		std::stringstream	sstream3;
+		((Carlson::CParseTree*)tree)->DebugPrint( sstream3, 0 );
+		LEOCleanUpParseTree(tree);
+		WILDTest( "Test conditionals parsing", sstream3.str().c_str(), result3 );
 	}
 	
     return (int)sFailed;
