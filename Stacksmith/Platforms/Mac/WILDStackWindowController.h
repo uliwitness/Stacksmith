@@ -40,6 +40,7 @@ class CPart;
 -(void)	createAllViews;
 
 -(void)	drawBoundingBoxes;
+-(void)	updateStyle;
 
 -(Carlson::CStackMac*)	cppStack;
 
