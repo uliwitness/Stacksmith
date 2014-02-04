@@ -739,7 +739,7 @@ void	WILDTest( const char* expr, const char* found, const char* expected )
 	}
 	else
 	{
-		std::cout << "error: " << expr << " -> \"" << expected << "\" == \"" << found << "\"" << std::endl;
+		std::cout << "error: " << expr << " -> \"" << found << "\" == \"" << expected << "\"" << std::endl;
 		sFailed++;
 	}
 }
@@ -755,7 +755,7 @@ void	WILDTest( const char* expr, T found, T expected )
 	}
 	else
 	{
-		std::cout << "error: " << expr << " -> " << expected << " == " << found << std::endl;
+		std::cout << "error: " << expr << " -> " << found << " == " << expected << std::endl;
 		sFailed++;
 	}
 }
@@ -807,15 +807,16 @@ int main(int argc, const char * argv[])
 		WILDTest( ".style2 contains 1 style", styleTwo.size(), size_t(1) );
 		WILDTest( ".style2 is italic", styleTwo["text-style"].c_str(), "italic" );
 	}
+		
+	// Set up some parser tables (but not enough to actually generate bytecode) to be able to test the parser:
+	LEOInitInstructionArray();
+	LEOAddInstructionsToInstructionArray( gStacksmithHostCommandInstructions, WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS, &kFirstStacksmithHostCommandInstruction );
+	LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
+	LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
+	LEOAddHostCommandsAndOffsetInstructions( gStacksmithHostCommands, kFirstStacksmithHostCommandInstruction );
+	uint16_t	theFileID = LEOFileIDForFileName("filename");
 	
 	{
-		// Set up some parser tables (but not enough to actually generate bytecode) to be able to test the parser:
-		LEOInitInstructionArray();
-		LEOAddInstructionsToInstructionArray( gStacksmithHostCommandInstructions, WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS, &kFirstStacksmithHostCommandInstruction );
-		LEOAddInstructionsToInstructionArray( gStacksmithHostFunctionInstructions, WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS, &kFirstStacksmithHostFunctionInstruction );
-		LEOAddHostFunctionsAndOffsetInstructions( gStacksmithHostFunctions, kFirstStacksmithHostFunctionInstruction );
-		LEOAddHostCommandsAndOffsetInstructions( gStacksmithHostCommands, kFirstStacksmithHostCommandInstruction );
-		uint16_t	theFileID = LEOFileIDForFileName("filename");
 		const char*	errMsg = NULL;
 		size_t		errLine = 0, errOffset = 0;
 		
@@ -848,6 +849,36 @@ int main(int argc, const char * argv[])
 		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset );
 		WILDTest( "Test conditionals after download parsing (2)", errMsg, NULL );
 		LEOCleanUpParseTree(tree);
+	}
+
+	{
+		const char*	code = "on meh\nif foo = true then put \"yay\" else put \"nay\"\n"
+		"if foo = true then put \"yay\"\nelse put \"nay\"\n"
+		"if foo = true\nthen put \"yay\" else put \"nay\"\n"
+		"if foo = true then\nput \"yay\"\nelse put \"nay\"\n"
+		"if foo = true then\nput \"yay\"\nelse\nput \"nay\"\nend if\n"
+		"if foo = true\nthen\nput \"yay\"\nelse\nput \"nay\"\nend if\n"
+		"if foo = true then put \"yay\"\nelse\nput \"nay\"\nend if\n"
+		"if foo = true then\nelse\nend if\n"
+		"if foo = true then put \"yay\"\nelse\n\nend if\n"
+		"end meh";
+		const char*		expectedText = "on meh\n\tif foo = true then put \"yay\" else put \"nay\"\n"
+		"\tif foo = true then put \"yay\"\n\telse put \"nay\"\n"
+		"\tif foo = true\n\tthen put \"yay\" else put \"nay\"\n"
+		"\tif foo = true then\n\t\tput \"yay\"\n\telse put \"nay\"\n"
+		"\tif foo = true then\n\t\tput \"yay\"\n\telse\n\t\tput \"nay\"\n\tend if\n"
+		"\tif foo = true\n\tthen\n\t\tput \"yay\"\n\telse\n\t\tput \"nay\"\n\tend if\n"
+		"\tif foo = true then put \"yay\"\n\telse\n\t\tput \"nay\"\n\tend if\n"
+		"\tif foo = true then\n\telse\n\tend if\n"
+		"\tif foo = true then put \"yay\"\n\telse\n\t\t\n\tend if\n"
+		"end meh";
+		LEOParseTree*	tree = LEOParseTreeCreateFromUTF8Characters( code, strlen(code), theFileID );
+		LEODisplayInfoTable*	lit = LEODisplayInfoTableCreateForParseTree( tree );
+		char*	theText = NULL;
+		size_t	theLength = 0;
+		LEODisplayInfoTableApplyToText( lit, code, strlen(code), &theText, &theLength, NULL, NULL );
+		WILDTest( "If-then indentation is done right.", theText, expectedText );
+		free( theText );
 	}
 	
     return (int)sFailed;
