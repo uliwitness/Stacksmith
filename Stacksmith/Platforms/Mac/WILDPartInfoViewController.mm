@@ -97,6 +97,17 @@ using namespace Carlson;
 		[shadowOffsetSlider setDoubleValue: visPart->GetShadowOffsetWidth()];
 		[lineWidthSlider setDoubleValue: visPart->GetLineWidth()];
 	}
+	else
+	{
+		[enabledSwitch setEnabled: NO];
+		[visibleSwitch setEnabled: NO];
+		[fillColorWell setEnabled: NO];
+		[lineColorWell setEnabled: NO];
+		[shadowColorWell setEnabled: NO];
+		[shadowBlurRadiusSlider setEnabled: NO];
+		[shadowOffsetSlider setEnabled: NO];
+		[lineWidthSlider setEnabled: NO];
+	}
 }
 
 
