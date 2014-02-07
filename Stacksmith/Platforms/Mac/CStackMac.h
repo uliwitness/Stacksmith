@@ -16,10 +16,13 @@
 @class WILDStackWindowController;
 typedef WILDStackWindowController*			WILDStackWindowControllerPtr;
 @class NSWindow;
+@class NSPopover;
 typedef NSWindow*							WILDNSWindowPtr;
+typedef NSPopover*							WILDNSPopoverPtr;
 #else
 typedef struct WILDStackWindowController*	WILDStackWindowControllerPtr;
 typedef struct NSWindow*					WILDNSWindowPtr;
+typedef struct NSPopover*					WILDNSPopoverPtr;
 #endif
 
 
@@ -29,6 +32,7 @@ class CStackMac : public CStack
 {
 public:
 	CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
+	virtual ~CStackMac();
 
 	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart );
 	virtual void				SetPeeking( bool inState );
@@ -42,11 +46,13 @@ public:
 	virtual WILDNSWindowPtr		GetMacWindow();
 	
 	virtual bool				ShowScriptEditorForObject( CConcreteObject* inObject );
+	virtual bool				ShowPropertyEditorForObject( CConcreteObject* inObject );
 	
 	static void					RegisterPartCreators();
 
 protected:
 	WILDStackWindowControllerPtr	mMacWindowController;
+	WILDNSPopoverPtr				mPopover;
 };
 
 }

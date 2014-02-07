@@ -19,6 +19,7 @@
 #import "WILDStackWindowController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "WILDScriptEditorWindowController.h"
+#import "WILDPartInfoViewController.h"
 
 
 using namespace Carlson;
@@ -28,6 +29,16 @@ using namespace Carlson;
 CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument )
 	: CStack( inURL, inID, inName, inFileName, inDocument )
 {
+	mMacWindowController = nil;
+	mPopover = nil;
+}
+
+
+CStackMac::~CStackMac()
+{
+	[mPopover release];
+	mPopover = nil;
+	[mMacWindowController release];
 	mMacWindowController = nil;
 }
 
@@ -137,6 +148,24 @@ bool	CStackMac::ShowScriptEditorForObject( CConcreteObject* inObject )
 {
 	WILDScriptEditorWindowController	*	sewc = [[WILDScriptEditorWindowController alloc] initWithScriptContainer: inObject];
 	[sewc showWindow: nil];
+	return true;
+}
+
+
+bool	CStackMac::ShowPropertyEditorForObject( CConcreteObject* inObject )
+{
+	CPart	*	thePart = dynamic_cast<CPart*>(inObject);
+	if( !thePart )
+		return false;
+	CMacPartBase	*	macPart = dynamic_cast<CMacPartBase*>(inObject);
+	WILDPartInfoViewController	*	piv = [[[WILDPartInfoViewController alloc] initWithPart: thePart] autorelease];
+	[mPopover release];
+	mPopover = [[NSPopover alloc] init];
+	//mPopover.delegate = self;
+	mPopover.contentSize = piv.view.frame.size;
+	mPopover.contentViewController = piv;
+	[mPopover setBehavior: NSPopoverBehaviorTransient];
+	[mPopover showRelativeToRect: macPart->GetView().bounds ofView: macPart->GetView() preferredEdge: NSMaxYEdge];
 	return true;
 }
 
