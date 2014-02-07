@@ -9,22 +9,20 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class WILDPart;
-@class WILDCardView;
-
+namespace Carlson
+{
+	class CPart;
+}
 
 @interface WILDContentsEditorWindowController : NSWindowController
 {
-	WILDPart*						mContainer;			// Not retained, this is our owner!
+	Carlson::CPart*					mContainer;			// Not retained, this is our owner!
 	IBOutlet NSTextView*			mTextView;			// Part text.
 	NSRect							mGlobalStartRect;	// For opening animation.
-	WILDCardView*					mCardView;
 }
 
--(id)		initWithPart: (WILDPart*)inContainer;
+-(id)		initWithPart: (Carlson::CPart*)inContainer;
 
 -(void)		setGlobalStartRect: (NSRect)theBox;
-
--(void)		setCardView: (WILDCardView*)inView;
 
 @end

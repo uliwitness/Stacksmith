@@ -235,6 +235,8 @@
 		55405BB918A39796001D3C99 /* WILDPartInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BB718A39796001D3C99 /* WILDPartInfoViewController.xib */; };
 		55405BBD18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm */; };
 		55405BBE18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BBC18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib */; };
+		55405BC218A4CD17001D3C99 /* WILDContentsEditorWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */; };
+		55405BC318A4CD17001D3C99 /* WILDContentsEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */; };
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
@@ -772,6 +774,9 @@
 		55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDUserPropertyEditorWindowController.h; path = Platforms/Mac/WILDUserPropertyEditorWindowController.h; sourceTree = "<group>"; };
 		55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDUserPropertyEditorWindowController.mm; path = Platforms/Mac/WILDUserPropertyEditorWindowController.mm; sourceTree = "<group>"; };
 		55405BBC18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDUserPropertyEditorWindowController.xib; path = Platforms/Mac/WILDUserPropertyEditorWindowController.xib; sourceTree = "<group>"; };
+		55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDContentsEditorWindowController.h; path = Platforms/Mac/WILDContentsEditorWindowController.h; sourceTree = "<group>"; };
+		55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDContentsEditorWindowController.mm; path = Platforms/Mac/WILDContentsEditorWindowController.mm; sourceTree = "<group>"; };
+		55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDContentsEditorWindowController.xib; path = Platforms/Mac/WILDContentsEditorWindowController.xib; sourceTree = "<group>"; };
 		5542CABF113A2CB300555C64 /* UKPBMImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPBMImageRep.h; sourceTree = "<group>"; };
 		5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPBMImageRep.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
@@ -1443,6 +1448,9 @@
 				55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.h */,
 				55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm */,
 				55405BBC18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib */,
+				55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */,
+				55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */,
+				55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -2057,6 +2065,7 @@
 				55039F59136B52C80082E32E /* brush23.png in Resources */,
 				55039F5A136B52C80082E32E /* brush24.png in Resources */,
 				55039F5B136B52C80082E32E /* brush25.png in Resources */,
+				55405BC318A4CD17001D3C99 /* WILDContentsEditorWindowController.xib in Resources */,
 				55039F5C136B52C80082E32E /* brush26.png in Resources */,
 				55039F5D136B52C80082E32E /* brush27.png in Resources */,
 				555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */,
@@ -2296,6 +2305,7 @@
 				55B0740E1889C6E90023BA3E /* CMessageBoxMac.mm in Sources */,
 				55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */,
 				55E806541368B2CD006F1287 /* UKColorListView.m in Sources */,
+				55405BC218A4CD17001D3C99 /* WILDContentsEditorWindowController.mm in Sources */,
 				55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */,
 				55039F68136C66ED0082E32E /* NSBezierPath+ULIRegularPolygon.m in Sources */,
 				55039FC4136D5CCF0082E32E /* UlisBresenham.c in Sources */,

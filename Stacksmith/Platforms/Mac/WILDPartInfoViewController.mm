@@ -114,13 +114,13 @@ using namespace Carlson;
 
 -(IBAction)	doContentsEditorButton: (id)sender
 {
-//	NSRect		box = [contentsEditorButton convertRect: [contentsEditorButton bounds] toView: nil];
-//	NSRect		wFrame = [[[self view] window] frame];
-//	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
-//	WILDContentsEditorWindowController*	se = [[[WILDContentsEditorWindowController alloc] initWithPart: part] autorelease];
-//	[se setGlobalStartRect: box];
-//	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];
-//	[se showWindow: self];
+	NSRect		box = [contentsEditorButton convertRect: [contentsEditorButton bounds] toView: nil];
+	NSRect		wFrame = [[[self view] window] frame];
+	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
+	WILDContentsEditorWindowController*	se = [[[WILDContentsEditorWindowController alloc] initWithPart: part] autorelease];
+	[se setGlobalStartRect: box];
+	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];
+	[se showWindow: self];
 }
 
 
