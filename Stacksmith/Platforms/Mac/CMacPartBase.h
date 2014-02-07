@@ -16,6 +16,7 @@
 #define __Stacksmith__CMacPartBase__
 
 #import <Cocoa/Cocoa.h>
+#import "WILDPartInfoViewController.h"
 
 
 namespace Carlson {
@@ -35,7 +36,8 @@ public:
 	}
 	virtual NSView*		GetView()			{ return NULL; };
 	virtual NSImage*	GetDisplayIcon()	{ return [NSImage imageNamed: @"FieldIconSmall"]; };
-
+	virtual Class		GetPropertyEditorClass()	{ return [WILDPartInfoViewController class]; };
+	
 protected:
 	virtual ~CMacPartBase() {};
 };

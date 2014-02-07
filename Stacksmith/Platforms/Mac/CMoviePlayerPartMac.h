@@ -12,6 +12,7 @@
 
 #include "CMoviePlayerPart.h"
 #include "CMacPartBase.h"
+#import "WILDMoviePlayerInfoViewController.h"
 
 
 @class ULIInvisiblePlayerView;
@@ -37,6 +38,7 @@ public:
 	virtual void		SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetVisible( bool visible )		{ CMoviePlayerPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual NSView*	GetView();
+	virtual Class	GetPropertyEditorClass()	{ return [WILDMoviePlayerInfoViewController class]; };
 
 protected:
 	~CMoviePlayerPartMac()	{ DestroyView(); };

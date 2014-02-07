@@ -11,6 +11,7 @@
 
 #include "CButtonPart.h"
 #include "CMacPartBase.h"
+#import "WILDButtonInfoViewController.h"
 
 
 @class WILDButtonView;
@@ -38,6 +39,7 @@ public:
 	virtual void	PrepareMouseUp();
 	
 	virtual NSImage*	GetDisplayIcon()	{ return [NSImage imageNamed: @"ButtonIconSmall"]; };
+	virtual Class		GetPropertyEditorClass()	{ return [WILDButtonInfoViewController class]; };
 	
 protected:
 	~CButtonPartMac()	{ DestroyView(); };

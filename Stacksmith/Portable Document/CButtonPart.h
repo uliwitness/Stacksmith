@@ -50,6 +50,9 @@ public:
 	virtual void			SetShowName( bool inShowName )			{ mShowName = inShowName; };
 	virtual void			SetHighlightForTracking( bool inState )	{ mHighlightForTracking = inState; };
 	
+	virtual void			SetStyle( TButtonStyle s )		{ mButtonStyle = s; };
+	virtual TButtonStyle	GetStyle()						{ return mButtonStyle; };
+	
 	virtual void			PrepareMouseUp();
 	
 protected:

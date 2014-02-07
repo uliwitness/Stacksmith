@@ -158,7 +158,7 @@ bool	CStackMac::ShowPropertyEditorForObject( CConcreteObject* inObject )
 	if( !thePart )
 		return false;
 	CMacPartBase	*	macPart = dynamic_cast<CMacPartBase*>(inObject);
-	WILDPartInfoViewController	*	piv = [[[WILDPartInfoViewController alloc] initWithPart: thePart] autorelease];
+	WILDPartInfoViewController	*	piv = [[[macPart->GetPropertyEditorClass() alloc] initWithPart: thePart] autorelease];
 	[mPopover release];
 	mPopover = [[NSPopover alloc] init];
 	//mPopover.delegate = self;

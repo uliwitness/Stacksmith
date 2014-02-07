@@ -13,6 +13,7 @@
 #include "CFieldPart.h"
 #include "CMacPartBase.h"
 #include <climits>
+#import "WILDFieldInfoViewController.h"
 
 @class WILDFieldDelegate;
 
@@ -37,6 +38,8 @@ public:
 	virtual void	SetHasVerticalScroller( bool inHS );
 	virtual NSView*	GetView();
 	virtual NSDictionary*			GetCocoaAttributesForPart();
+	
+	virtual Class	GetPropertyEditorClass()	{ return [WILDFieldInfoViewController class]; };
 
 	static NSAttributedString	*	GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs = 0, size_t endOffs = SIZE_T_MAX );
 	static void						SetAttributedStringWithCocoa( CAttributedString& stringToSet, NSAttributedString* cocoaAttrStr );

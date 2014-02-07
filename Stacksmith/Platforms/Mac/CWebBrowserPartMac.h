@@ -12,6 +12,7 @@
 
 #include "CWebBrowserPart.h"
 #include "CMacPartBase.h"
+#import "WILDPartInfoViewController.h"
 
 
 @class WebView;
@@ -36,6 +37,7 @@ public:
 	virtual void	SetVisible( bool visible )		{ CWebBrowserPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual void	LoadCurrentURL( const std::string& inURL );	// Triggers view update.
 	virtual NSView*	GetView();
+	virtual Class	GetPropertyEditorClass()	{ return [WILDPartInfoViewController class]; };
 
 protected:
 	~CWebBrowserPartMac()	{ DestroyView(); };

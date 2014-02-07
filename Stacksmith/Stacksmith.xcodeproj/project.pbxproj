@@ -237,6 +237,15 @@
 		55405BBE18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BBC18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib */; };
 		55405BC218A4CD17001D3C99 /* WILDContentsEditorWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */; };
 		55405BC318A4CD17001D3C99 /* WILDContentsEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */; };
+		55405BD018A59D06001D3C99 /* WILDButtonInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BC518A59D06001D3C99 /* WILDButtonInfoViewController.mm */; };
+		55405BD118A59D06001D3C99 /* WILDButtonInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BC618A59D06001D3C99 /* WILDButtonInfoViewController.xib */; };
+		55405BD218A59D06001D3C99 /* WILDFieldInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BC818A59D06001D3C99 /* WILDFieldInfoViewController.mm */; };
+		55405BD318A59D06001D3C99 /* WILDFieldInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BC918A59D06001D3C99 /* WILDFieldInfoViewController.xib */; };
+		55405BD418A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BCB18A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm */; };
+		55405BD518A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BCC18A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib */; };
+		55405BD618A59D06001D3C99 /* WILDTimerInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BCE18A59D06001D3C99 /* WILDTimerInfoViewController.mm */; };
+		55405BD718A59D06001D3C99 /* WILDTimerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BCF18A59D06001D3C99 /* WILDTimerInfoViewController.xib */; };
+		55405BDA18A59DB6001D3C99 /* CTimerPartMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BD818A59DB6001D3C99 /* CTimerPartMac.mm */; };
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
@@ -777,6 +786,20 @@
 		55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDContentsEditorWindowController.h; path = Platforms/Mac/WILDContentsEditorWindowController.h; sourceTree = "<group>"; };
 		55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDContentsEditorWindowController.mm; path = Platforms/Mac/WILDContentsEditorWindowController.mm; sourceTree = "<group>"; };
 		55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDContentsEditorWindowController.xib; path = Platforms/Mac/WILDContentsEditorWindowController.xib; sourceTree = "<group>"; };
+		55405BC418A59D06001D3C99 /* WILDButtonInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDButtonInfoViewController.h; path = Platforms/Mac/WILDButtonInfoViewController.h; sourceTree = "<group>"; };
+		55405BC518A59D06001D3C99 /* WILDButtonInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDButtonInfoViewController.mm; path = Platforms/Mac/WILDButtonInfoViewController.mm; sourceTree = "<group>"; };
+		55405BC618A59D06001D3C99 /* WILDButtonInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDButtonInfoViewController.xib; path = Platforms/Mac/WILDButtonInfoViewController.xib; sourceTree = "<group>"; };
+		55405BC718A59D06001D3C99 /* WILDFieldInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDFieldInfoViewController.h; path = Platforms/Mac/WILDFieldInfoViewController.h; sourceTree = "<group>"; };
+		55405BC818A59D06001D3C99 /* WILDFieldInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDFieldInfoViewController.mm; path = Platforms/Mac/WILDFieldInfoViewController.mm; sourceTree = "<group>"; };
+		55405BC918A59D06001D3C99 /* WILDFieldInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDFieldInfoViewController.xib; path = Platforms/Mac/WILDFieldInfoViewController.xib; sourceTree = "<group>"; };
+		55405BCA18A59D06001D3C99 /* WILDMoviePlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMoviePlayerInfoViewController.h; path = Platforms/Mac/WILDMoviePlayerInfoViewController.h; sourceTree = "<group>"; };
+		55405BCB18A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDMoviePlayerInfoViewController.mm; path = Platforms/Mac/WILDMoviePlayerInfoViewController.mm; sourceTree = "<group>"; };
+		55405BCC18A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDMoviePlayerInfoViewController.xib; path = Platforms/Mac/WILDMoviePlayerInfoViewController.xib; sourceTree = "<group>"; };
+		55405BCD18A59D06001D3C99 /* WILDTimerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTimerInfoViewController.h; path = Platforms/Mac/WILDTimerInfoViewController.h; sourceTree = "<group>"; };
+		55405BCE18A59D06001D3C99 /* WILDTimerInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDTimerInfoViewController.mm; path = Platforms/Mac/WILDTimerInfoViewController.mm; sourceTree = "<group>"; };
+		55405BCF18A59D06001D3C99 /* WILDTimerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDTimerInfoViewController.xib; path = Platforms/Mac/WILDTimerInfoViewController.xib; sourceTree = "<group>"; };
+		55405BD818A59DB6001D3C99 /* CTimerPartMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CTimerPartMac.mm; path = Platforms/Mac/CTimerPartMac.mm; sourceTree = "<group>"; };
+		55405BD918A59DB6001D3C99 /* CTimerPartMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimerPartMac.h; path = Platforms/Mac/CTimerPartMac.h; sourceTree = "<group>"; };
 		5542CABF113A2CB300555C64 /* UKPBMImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPBMImageRep.h; sourceTree = "<group>"; };
 		5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPBMImageRep.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
@@ -1215,6 +1238,8 @@
 				555E53A818936817001487C1 /* WILDPopUpButtonView.mm */,
 				552386CA1883E86200D7FAB3 /* CFieldPartMac.h */,
 				552386C91883E86200D7FAB3 /* CFieldPartMac.mm */,
+				55405BD918A59DB6001D3C99 /* CTimerPartMac.h */,
+				55405BD818A59DB6001D3C99 /* CTimerPartMac.mm */,
 				552386CD1883E92F00D7FAB3 /* CMoviePlayerPartMac.h */,
 				552386CC1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm */,
 				552386D01883EAA300D7FAB3 /* CWebBrowserPartMac.h */,
@@ -1445,6 +1470,18 @@
 				55405BB518A39796001D3C99 /* WILDPartInfoViewController.h */,
 				55405BB618A39796001D3C99 /* WILDPartInfoViewController.mm */,
 				55405BB718A39796001D3C99 /* WILDPartInfoViewController.xib */,
+				55405BC418A59D06001D3C99 /* WILDButtonInfoViewController.h */,
+				55405BC518A59D06001D3C99 /* WILDButtonInfoViewController.mm */,
+				55405BC618A59D06001D3C99 /* WILDButtonInfoViewController.xib */,
+				55405BC718A59D06001D3C99 /* WILDFieldInfoViewController.h */,
+				55405BC818A59D06001D3C99 /* WILDFieldInfoViewController.mm */,
+				55405BC918A59D06001D3C99 /* WILDFieldInfoViewController.xib */,
+				55405BCA18A59D06001D3C99 /* WILDMoviePlayerInfoViewController.h */,
+				55405BCB18A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm */,
+				55405BCC18A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib */,
+				55405BCD18A59D06001D3C99 /* WILDTimerInfoViewController.h */,
+				55405BCE18A59D06001D3C99 /* WILDTimerInfoViewController.mm */,
+				55405BCF18A59D06001D3C99 /* WILDTimerInfoViewController.xib */,
 				55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.h */,
 				55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm */,
 				55405BBC18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib */,
@@ -1984,6 +2021,7 @@
 				552FF205113F23F3005742C8 /* PAT_11.pbm in Resources */,
 				552FF206113F23F3005742C8 /* PAT_12.pbm in Resources */,
 				552FF207113F23F3005742C8 /* PAT_13.pbm in Resources */,
+				55405BD318A59D06001D3C99 /* WILDFieldInfoViewController.xib in Resources */,
 				552FF208113F23F3005742C8 /* PAT_14.pbm in Resources */,
 				552FF209113F23F3005742C8 /* PAT_15.pbm in Resources */,
 				552FF20A113F23F3005742C8 /* PAT_16.pbm in Resources */,
@@ -2052,6 +2090,7 @@
 				55039F4D136B52C80082E32E /* brush11.png in Resources */,
 				55039F4E136B52C80082E32E /* brush12.png in Resources */,
 				55039F4F136B52C80082E32E /* brush13.png in Resources */,
+				55405BD518A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib in Resources */,
 				55039F50136B52C80082E32E /* brush14.png in Resources */,
 				55039F51136B52C80082E32E /* brush15.png in Resources */,
 				55039F52136B52C80082E32E /* brush16.png in Resources */,
@@ -2060,6 +2099,7 @@
 				55039F54136B52C80082E32E /* brush18.png in Resources */,
 				55039F55136B52C80082E32E /* brush19.png in Resources */,
 				55039F56136B52C80082E32E /* brush20.png in Resources */,
+				55405BD718A59D06001D3C99 /* WILDTimerInfoViewController.xib in Resources */,
 				55039F57136B52C80082E32E /* brush21.png in Resources */,
 				55039F58136B52C80082E32E /* brush22.png in Resources */,
 				55039F59136B52C80082E32E /* brush23.png in Resources */,
@@ -2087,6 +2127,7 @@
 				55405BB918A39796001D3C99 /* WILDPartInfoViewController.xib in Resources */,
 				555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */,
 				555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */,
+				55405BD118A59D06001D3C99 /* WILDButtonInfoViewController.xib in Resources */,
 				555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */,
 				55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */,
 				55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */,
@@ -2211,6 +2252,7 @@
 			files = (
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				55CD60F018779641002450E2 /* CParseErrorCommandNode.cpp in Sources */,
+				55405BD418A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm in Sources */,
 				552386D11883EAA300D7FAB3 /* CWebBrowserPartMac.mm in Sources */,
 				5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */,
 				55CD61121878EBF9002450E2 /* CCancelPolling.cpp in Sources */,
@@ -2224,6 +2266,7 @@
 				55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */,
 				55255A7F114C177400279B03 /* UKTextDocGoToBox.m in Sources */,
 				55255A84114C178100279B03 /* UKSCTDColorWellPrefsController.m in Sources */,
+				55405BD018A59D06001D3C99 /* WILDButtonInfoViewController.mm in Sources */,
 				55255A85114C178100279B03 /* UKSCTDUserIdentifiersPrefsController.m in Sources */,
 				55AC961B1870D50400488B51 /* CTinyXMLUtils.cpp in Sources */,
 				55255A8D114C179C00279B03 /* NSScanner+SkipUpToCharset.m in Sources */,
@@ -2235,6 +2278,7 @@
 				55CD610F18788CEB002450E2 /* CScriptableObjectValue.cpp in Sources */,
 				556DB7C21870A971002F7CB2 /* CURLConnection.mm in Sources */,
 				55C2B647115E5780008B094D /* CSearchContext.cpp in Sources */,
+				55405BD618A59D06001D3C99 /* WILDTimerInfoViewController.mm in Sources */,
 				5523869E187E265000D7FAB3 /* ULIInvisiblePlayerView.m in Sources */,
 				55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */,
 				55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */,
@@ -2283,6 +2327,7 @@
 				553C470913577334000219FA /* CIfNode.cpp in Sources */,
 				553C470A13577334000219FA /* LEOValue.c in Sources */,
 				553C470B13577334000219FA /* LEOInterpreter.c in Sources */,
+				55405BDA18A59DB6001D3C99 /* CTimerPartMac.mm in Sources */,
 				55CD6124187B188E002450E2 /* CDocumentMac.cpp in Sources */,
 				553C470C13577334000219FA /* LEOInstructions.c in Sources */,
 				553C470D13577334000219FA /* LEOScript.c in Sources */,
@@ -2381,6 +2426,7 @@
 				552386CE1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm in Sources */,
 				5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */,
 				55405B7F189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm in Sources */,
+				55405BD218A59D06001D3C99 /* WILDFieldInfoViewController.mm in Sources */,
 				55382463172730B4007785D8 /* WILDObjCCallInstructions.mm in Sources */,
 				55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */,
 				55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */,
