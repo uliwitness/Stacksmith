@@ -67,6 +67,8 @@ public:
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	
+	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
+	
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
 	void			LoadAddColorPartsFromElement( tinyxml2::XMLElement* root );
@@ -74,8 +76,6 @@ protected:
 	virtual void	SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document );
 	virtual void	DumpProperties( size_t inIndent );
 	virtual void	CallAllCompletionBlocks();
-	
-	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
 
 	ObjectID						mID;
 	std::string						mURL;

@@ -73,10 +73,36 @@ public:
 	static TPartTextStyle	GetStyleFromString( const char* inString );
 	static std::vector<const char*>		GetStringsForStyle( TPartTextStyle inStyle );
 	
-	virtual void			SetFillColor( int red, int green, int blue, int alpha )	{ mFillColorRed = red; mFillColorGreen = green; mFillColorBlue = blue; mFillColorAlpha = alpha; };
-	virtual void			SetBevelWidth( int bevel )		{ mBevelWidth = bevel; };
 	virtual void			SetVisible( bool visible )		{ mVisible = visible; };
 	bool					GetVisible()					{ return mVisible; };
+	virtual void			SetEnabled( bool n )			{ mEnabled = n; };
+	bool					GetEnabled()					{ return mEnabled; };
+	virtual void			SetFillColor( int r, int g, int b, int a )	{ mFillColorRed = r; mFillColorGreen = g; mFillColorBlue = b; mFillColorAlpha = a; };
+	int						GetFillColorRed()				{ return mFillColorRed; };
+	int						GetFillColorGreen()				{ return mFillColorGreen; };
+	int						GetFillColorBlue()				{ return mFillColorBlue; };
+	int						GetFillColorAlpha()				{ return mFillColorAlpha; };
+	virtual void			SetLineColor( int r, int g, int b, int a )	{ mLineColorRed = r; mLineColorGreen = g; mLineColorBlue = b; mLineColorAlpha = a; };
+	int						GetLineColorRed()				{ return mLineColorRed; };
+	int						GetLineColorGreen()				{ return mLineColorGreen; };
+	int						GetLineColorBlue()				{ return mLineColorBlue; };
+	int						GetLineColorAlpha()				{ return mLineColorAlpha; };
+	virtual void			SetShadowColor( int r, int g, int b, int a )	{ mShadowColorRed = r; mShadowColorGreen = g; mShadowColorBlue = b; mShadowColorAlpha = a; };
+	int						GetShadowColorRed()				{ return mShadowColorRed; };
+	int						GetShadowColorGreen()			{ return mShadowColorGreen; };
+	int						GetShadowColorBlue()			{ return mShadowColorBlue; };
+	int						GetShadowColorAlpha()			{ return mShadowColorAlpha; };
+	virtual void			SetShadowOffset( double w, double h )	{ mShadowOffsetWidth = w; mShadowOffsetHeight = h; };
+	double					GetShadowOffsetWidth()			{ return mShadowOffsetWidth; };
+	double					GetShadowOffsetHeight()			{ return mShadowOffsetHeight; };
+	virtual void			SetShadowBlurRadius( double r )	{ mShadowBlurRadius = r; };
+	double					GetShadowBlurRadius()			{ return mShadowBlurRadius; };
+	virtual void			SetLineWidth( int w )			{ mLineWidth = w; };
+	int						GetLineWidth()					{ return mLineWidth; };
+	virtual void			SetBevelWidth( int bevel )		{ mBevelWidth = bevel; };
+	int						GetBevelWidth()					{ return mBevelWidth; };
+	virtual void			SetBevelAngle( int a )			{ mBevelAngle = a; };
+	int						GetBevelAngle()					{ return mBevelAngle; };
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );

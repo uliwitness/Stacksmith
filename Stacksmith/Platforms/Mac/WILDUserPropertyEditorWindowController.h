@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "WILDObjectValue.h"
-#import "WILDScriptContainer.h"
+#import "CConcreteObject.h"
+#import "CPart.h"
 
 
 @class WILDCardView;
@@ -16,18 +16,15 @@
 
 @interface WILDUserPropertyEditorWindowController : NSWindowController <NSTableViewDataSource>
 {
-	id<WILDObject,WILDScriptContainer>	mContainer;			// Not retained, this is our owner!
-	IBOutlet NSTableView*				mTableView;			// List of property->content entries.
-	NSRect								mGlobalStartRect;	// For opening animation.
-	WILDCardView*						mCardView;
-	NSMutableArray*						mUserProperties;
+	Carlson::CConcreteObject*	mContainer;			// Not retained, this is our owner!
+	IBOutlet NSTableView*		mTableView;			// List of property->content entries.
+	NSRect						mGlobalStartRect;	// For opening animation.
+	NSMutableArray*				mUserProperties;
 }
 
--(id)		initWithPropertyContainer: (id<WILDObject,WILDScriptContainer>)inContainer;
+-(id)		initWithPropertyContainer: (Carlson::CConcreteObject*)inContainer;
 
 -(void)		setGlobalStartRect: (NSRect)theBox;
-
--(void)		setCardView: (WILDCardView*)inView;
 
 -(IBAction)	doAddNewProperty: (id)sender;
 

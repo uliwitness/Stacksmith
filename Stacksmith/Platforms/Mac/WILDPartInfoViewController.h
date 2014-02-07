@@ -8,15 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@class WILDPart;
-@class WILDCardView;
-
+namespace Carlson
+{
+	class CPart;
+}
 
 @interface WILDPartInfoViewController : NSViewController
 {
-	WILDPart*				part;				// The card/bg part we're editing.
-	WILDCardView*			cardView;			// BG parts can have different values/contents on each card, so we need to know which one. NOT RETAINED, IT'S OUR OWNER.
+	Carlson::CPart*			part;				// The card/bg part we're editing.
 	NSButton		*		scriptEditorButton;
 	NSTextField		*		nameField;
 	NSButton		*		enabledSwitch;
@@ -52,7 +51,7 @@
 @property(retain)	IBOutlet NSSlider			*		lineWidthSlider;
 @property(retain)	IBOutlet NSButton			*		userPropertyEditorButton;
 
--(id)		initWithPart: (WILDPart*)inPart ofCardView: (WILDCardView*)owningView;
+-(id)		initWithPart: (Carlson::CPart*)inPart;
 
 -(IBAction)	doScriptEditorButton: (id)sender;
 -(IBAction) doEnabledSwitchToggled:(id)sender;
