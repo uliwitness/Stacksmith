@@ -7,9 +7,11 @@
 //
 
 #import "WILDTimerInfoViewController.h"
-#import "WILDNotifications.h"
 #import "UKHelperMacros.h"
-#import "WILDPart.h"
+#import "CTimerPart.h"
+
+
+using namespace Carlson;
 
 
 @implementation WILDTimerInfoViewController
@@ -21,10 +23,10 @@
 {
 	[super loadView];
 	
-	[mMessageField setStringValue: [part timerMessage]];
-	[mIntervalField setIntegerValue: [part timerInterval]];
-	[self.startedSwitch setState: (part.started ? NSOnState : NSOffState)];
-	[self.repeatSwitch setState: (part.repeat ? NSOnState : NSOffState)];
+	[mMessageField setStringValue: [NSString stringWithUTF8String: ((CTimerPart*)part)->GetMessage().c_str()]];
+	[mIntervalField setIntegerValue: ((CTimerPart*)part)->GetInterval()];
+	[self.startedSwitch setState: (((CTimerPart*)part)->GetStarted() ? NSOnState : NSOffState)];
+	[self.repeatSwitch setState: (((CTimerPart*)part)->GetRepeat() ? NSOnState : NSOffState)];
 }
 
 
@@ -32,60 +34,24 @@
 {
 	if( [notif object] == mMessageField )
 	{
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(timerMessage), WILDAffectedPropertyKey,
-										nil]];
-
-		[part setTimerMessage: [mMessageField stringValue]];
-			
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(timerMessage), WILDAffectedPropertyKey,
-										nil]];
-		[part updateChangeCount: NSChangeDone];
+		((CTimerPart*)part)->SetMessage( [mMessageField stringValue].UTF8String );
 	}
 	else if( [notif object] == mIntervalField )
 	{
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(timerInterval), WILDAffectedPropertyKey,
-										nil]];
-
-		[part setTimerInterval: [mIntervalField integerValue]];
-			
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(timerInterval), WILDAffectedPropertyKey,
-										nil]];
-		[part updateChangeCount: NSChangeDone];
+		((CTimerPart*)part)->SetInterval( [mIntervalField integerValue] );
 	}
 }
 
 
 -(IBAction)	doStartedSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-									PROPERTY(started), WILDAffectedPropertyKey,
-									nil]];
-
-	[part setStarted: [sender state] == NSOnState];
-			
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-									PROPERTY(started), WILDAffectedPropertyKey,
-									nil]];
-	[part updateChangeCount: NSChangeDone];
+	((CTimerPart*)part)->SetStarted( [sender state] == NSOnState );
 }
 
 
 -(IBAction)	doRepeatSwitchToggled: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-									PROPERTY(repeat), WILDAffectedPropertyKey,
-									nil]];
-
-	[part setRepeat: [sender state] == NSOnState];
-			
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-									PROPERTY(repeat), WILDAffectedPropertyKey,
-									nil]];
-	[part updateChangeCount: NSChangeDone];
+	((CTimerPart*)part)->SetRepeat( [sender state] == NSOnState );
 }
 
 @end

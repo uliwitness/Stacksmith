@@ -20,6 +20,13 @@ public:
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+
+	bool					GetStarted()								{ return mStarted; };
+	virtual void			SetStarted( bool inStart )					{ mStarted = inStart; };
+	bool					GetControllerVisible()						{ return mControllerVisible; };
+	virtual void			SetControllerVisible( bool inStart )		{ mControllerVisible = inStart; };
+	std::string				GetMediaPath()								{ return mMediaPath; };
+	virtual void			SetMediaPath( const std::string& inPath )	{ mMediaPath = inPath; };
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
@@ -28,14 +35,8 @@ protected:
 	virtual const char*		GetIdentityForDump()	{ return "Movie Player"; };
 	virtual void			DumpProperties( size_t inIndent );
 	
-	bool					GetStarted()								{ return mStarted; };
-	virtual void			SetStarted( bool inStart )					{ mStarted = inStart; };
-	bool					GetControllerVisible()						{ return mControllerVisible; };
-	virtual void			SetControllerVisible( bool inStart )		{ mControllerVisible = inStart; };
-	virtual LEOInteger		GetCurrentTime()							{ return mCurrentTime; };
 	virtual void			SetCurrentTime( LEOInteger inTicks )		{ mCurrentTime = inTicks;};
-	std::string				GetMediaPath()								{ return mMediaPath; };
-	virtual void			SetMediaPath( const std::string& inPath )	{ mMediaPath = inPath; };
+	virtual LEOInteger		GetCurrentTime()							{ return mCurrentTime; };
 
 protected:
 	std::string			mMediaPath;

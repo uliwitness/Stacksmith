@@ -7,10 +7,12 @@
 //
 
 #import "WILDMoviePlayerInfoViewController.h"
-#import "WILDNotifications.h"
 #import <QTKit/QTKit.h>
 #import "UKHelperMacros.h"
-#import "WILDPart.h"
+#import "CMoviePlayerPart.h"
+
+
+using namespace Carlson;
 
 
 @implementation WILDMoviePlayerInfoViewController
@@ -29,9 +31,9 @@
 {
 	[super loadView];
 	
-	[mMoviePathField setStringValue: [part mediaPath]];
-	[self.controllerVisibleSwitch setState: part.controllerVisible ? NSOnState : NSOffState];
-	[self.playingSwitch setState: part.started ? NSOnState : NSOffState];
+	[mMoviePathField setStringValue: [NSString stringWithUTF8String: ((CMoviePlayerPart*)part)->GetMediaPath().c_str()]];
+	[self.controllerVisibleSwitch setState: ((CMoviePlayerPart*)part)->GetControllerVisible() ? NSOnState : NSOffState];
+	[self.playingSwitch setState: ((CMoviePlayerPart*)part)->GetStarted() ? NSOnState : NSOffState];
 }
 
 
@@ -45,45 +47,18 @@
 		[[self retain] autorelease];	// Make sure we're not released if the movie player property change recreates its view.
 
 		NSURL		*	theURL = [thePanel URL];
-		NSDictionary*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"moviePath", WILDAffectedPropertyKey,
-										nil];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-		[part setMediaPath: [theURL path]];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-		[part updateChangeCount: NSChangeDone];
+		((CMoviePlayerPart*)part)->SetMediaPath( [[theURL absoluteString] UTF8String] );
 	}
 }
 
 -(IBAction)	doToggleControllerVisibleSwitch: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(controllerVisible), WILDAffectedPropertyKey,
-										nil]];
-
-	[part setControllerVisible: [self.controllerVisibleSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(controllerVisible), WILDAffectedPropertyKey,
-										nil]];
-	[part updateChangeCount: NSChangeDone];
+	((CMoviePlayerPart*)part)->SetControllerVisible( [self.controllerVisibleSwitch state] == NSOnState );
 }
 
 -(IBAction)	doTogglePlayingSwitch: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(started), WILDAffectedPropertyKey,
-										nil]];
-
-	[part setStarted: [self.playingSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(started), WILDAffectedPropertyKey,
-										nil]];
-	[part updateChangeCount: NSChangeDone];
+	((CMoviePlayerPart*)part)->SetStarted( [self.playingSwitch state] == NSOnState );
 }
 
 @end
