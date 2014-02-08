@@ -1252,15 +1252,6 @@
 				552386CC1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm */,
 				552386D01883EAA300D7FAB3 /* CWebBrowserPartMac.h */,
 				552386CF1883EAA300D7FAB3 /* CWebBrowserPartMac.mm */,
-				55B0740D1889C6E90023BA3E /* CMessageBoxMac.h */,
-				55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */,
-				55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */,
-				555E53B1189472E0001487C1 /* CMessageWatcherMac.h */,
-				555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */,
-				555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */,
-				55405B7D189E8FE8001D3C99 /* WILDScriptEditorWindowController.h */,
-				55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */,
-				55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */,
 			);
 			name = Document;
 			sourceTree = "<group>";
@@ -1501,6 +1492,15 @@
 				55405BDD18A6220D001D3C99 /* WILDIconPickerViewController.h */,
 				55405BDE18A6220D001D3C99 /* WILDIconPickerViewController.mm */,
 				55405BDF18A6220D001D3C99 /* WILDIconPickerViewController.xib */,
+				55B0740D1889C6E90023BA3E /* CMessageBoxMac.h */,
+				55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */,
+				55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */,
+				555E53B1189472E0001487C1 /* CMessageWatcherMac.h */,
+				555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */,
+				555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */,
+				55405B7D189E8FE8001D3C99 /* WILDScriptEditorWindowController.h */,
+				55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */,
+				55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
