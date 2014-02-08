@@ -51,9 +51,9 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[super loadView];
 	
 	if( !sStylesInMenuOrder )
-		sStylesInMenuOrder = @[	@(EFieldStyleRectangle),
+		sStylesInMenuOrder = [@[@(EFieldStyleRectangle),
 								@(EFieldStyleStandard),
-								@(EFieldStylePopUp)];
+								@(EFieldStylePopUp)] retain];
 	
 	[mStylePopUp selectItemAtIndex: [sStylesInMenuOrder indexOfObject: @(((CFieldPart*)part)->GetStyle())]];
 
