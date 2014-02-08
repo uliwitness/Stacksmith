@@ -146,8 +146,7 @@ WILDNSWindowPtr	CStackMac::GetMacWindow()
 
 bool	CStackMac::ShowScriptEditorForObject( CConcreteObject* inObject )
 {
-	WILDScriptEditorWindowController	*	sewc = [[WILDScriptEditorWindowController alloc] initWithScriptContainer: inObject];
-	[sewc showWindow: nil];
+	inObject->OpenScriptEditorAndShowLine( SIZE_T_MAX );
 	return true;
 }
 

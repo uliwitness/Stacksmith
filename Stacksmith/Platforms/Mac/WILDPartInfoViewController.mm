@@ -113,25 +113,13 @@ using namespace Carlson;
 
 -(IBAction)	doScriptEditorButton: (id)sender
 {
-	NSRect		box = [scriptEditorButton convertRect: [scriptEditorButton bounds] toView: nil];
-	NSRect		wFrame = [[[self view] window] frame];
-	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
-	WILDScriptEditorWindowController*	se = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: part] autorelease];
-	[se setGlobalStartRect: box];
-	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];
-	[se showWindow: self];
+	part->OpenScriptEditorAndShowLine( SIZE_T_MAX );
 }
 
 
 -(IBAction)	doContentsEditorButton: (id)sender
 {
-	NSRect		box = [contentsEditorButton convertRect: [contentsEditorButton bounds] toView: nil];
-	NSRect		wFrame = [[[self view] window] frame];
-	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
-	WILDContentsEditorWindowController*	se = [[[WILDContentsEditorWindowController alloc] initWithPart: part] autorelease];
-	[se setGlobalStartRect: box];
-	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];
-	[se showWindow: self];
+	part->OpenContentsEditor();
 }
 
 

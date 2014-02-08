@@ -41,6 +41,10 @@ public:
 	virtual NSImage*	GetDisplayIcon()	{ return [NSImage imageNamed: @"ButtonIconSmall"]; };
 	virtual Class		GetPropertyEditorClass()	{ return [WILDButtonInfoViewController class]; };
 	
+	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
+	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };
+	virtual void		OpenContentsEditor()	{ CMacPartBase::OpenContentsEditor(); };
+	
 protected:
 	~CButtonPartMac()	{ DestroyView(); };
 	

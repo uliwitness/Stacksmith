@@ -78,6 +78,7 @@ public:
 
 	virtual void				OpenScriptEditorAndShowOffset( size_t byteOffset )	{};
 	virtual void				OpenScriptEditorAndShowLine( size_t lineIndex )		{};
+	virtual void				OpenContentsEditor()								{};
 
 	virtual bool				AddUserPropertyNamed( const char* userPropName )	{ return false; };
 	virtual bool				DeleteUserPropertyNamed( const char* userPropName )	{ return false; };

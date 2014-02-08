@@ -19,6 +19,10 @@
 #import "WILDPartInfoViewController.h"
 
 
+@class WILDScriptEditorWindowController;
+@class WILDContentsEditorWindowController;
+
+
 namespace Carlson {
 
 
@@ -34,12 +38,19 @@ public:
 		//inView.layer.borderWidth = inState? 1 : 0;
 		//inView.layer.borderColor = inState? [NSColor grayColor].CGColor : NULL;
 	}
-	virtual NSView*		GetView()			{ return NULL; };
-	virtual NSImage*	GetDisplayIcon()	{ return [NSImage imageNamed: @"FieldIconSmall"]; };
+	virtual NSView*		GetView()					{ return NULL; };
+	virtual NSImage*	GetDisplayIcon()			{ return [NSImage imageNamed: @"FieldIconSmall"]; };
 	virtual Class		GetPropertyEditorClass()	{ return [WILDPartInfoViewController class]; };
 	
+	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset );
+	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex );
+	virtual void		OpenContentsEditor();
+	
 protected:
-	virtual ~CMacPartBase() {};
+	virtual ~CMacPartBase() { [mScriptEditor release]; mScriptEditor = nil; [mContentsEditor release]; mContentsEditor = nil; };
+	
+	WILDScriptEditorWindowController*	mScriptEditor;
+	WILDContentsEditorWindowController*	mContentsEditor;
 };
 
 
