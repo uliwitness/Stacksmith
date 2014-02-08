@@ -628,6 +628,12 @@
                                     <action selector="performZoom:" target="-1" id="240"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Pc8-Lw-M70"/>
+                            <menuItem title="Message Box" keyEquivalent="M" id="vSR-5M-aEy">
+                                <connections>
+                                    <action selector="orderFrontMessageBox:" target="556" id="7qv-up-car"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="724">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

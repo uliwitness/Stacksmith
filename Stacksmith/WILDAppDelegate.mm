@@ -232,7 +232,22 @@ void	WILDFirstNativeCall( void )
 
 -(IBAction)	orderFrontMessageBox: (id)sender
 {
-	// +++ TODO: Do something with CMessageBox here!
+	CMessageBox::GetSharedInstance()->SetVisible( !CMessageBox::GetSharedInstance()->IsVisible() );
+}
+
+
+-(BOOL)	validateMenuItem: (NSMenuItem*)inItem
+{
+	if( inItem.action == @selector(orderFrontMessageBox:) )
+	{
+		if( CMessageBox::GetSharedInstance()->IsVisible() )
+			[inItem setTitle: @"Hide Message Box"];
+		else
+			[inItem setTitle: @"Show Message Box"];
+		return YES;
+	}
+	else
+		return [self respondsToSelector: inItem.action];
 }
 
 

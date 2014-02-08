@@ -23,7 +23,10 @@ public:
 	
 	CMessageBox() : mScriptObject(NULL), mIDForScripts(kLEOObjectIDINVALID), mSeedForScripts(0) {};
 	
+	virtual void		Show()	{};
 	virtual void		Run();
+	virtual void		SetVisible( bool n )	{};
+	virtual bool		IsVisible()				{ return false; };
 	
 	virtual bool		GetTextContents( std::string& outString );
 	virtual bool		SetTextContents( const std::string& inString);

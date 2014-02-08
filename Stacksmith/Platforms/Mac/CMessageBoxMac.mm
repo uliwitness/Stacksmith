@@ -39,7 +39,7 @@ using namespace Carlson;
 
 -(void)	windowWillClose: (NSNotification *)notification
 {
-	self.messageBox->SetVisible(false);
+	self.messageBox->UpdateVisible(false);
 }
 
 -(BOOL) textView: (NSTextView *)textView doCommandBySelector: (SEL)commandSelector
@@ -169,6 +169,16 @@ bool	CMessageBoxMac::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* 
 	else
 		return CMessageBox::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 	return true;
+}
+
+
+void	CMessageBoxMac::SetVisible( bool n )
+{
+	if( n )
+		[mMacWindowController.window makeKeyAndOrderFront: nil];
+	else
+		[mMacWindowController.window orderOut: nil];
+	mVisible = n;
 }
 
 
