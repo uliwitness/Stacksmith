@@ -246,6 +246,9 @@
 		55405BD618A59D06001D3C99 /* WILDTimerInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BCE18A59D06001D3C99 /* WILDTimerInfoViewController.mm */; };
 		55405BD718A59D06001D3C99 /* WILDTimerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BCF18A59D06001D3C99 /* WILDTimerInfoViewController.xib */; };
 		55405BDA18A59DB6001D3C99 /* CTimerPartMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BD818A59DB6001D3C99 /* CTimerPartMac.mm */; };
+		55405BE018A6220D001D3C99 /* WILDIconListDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BDC18A6220D001D3C99 /* WILDIconListDataSource.mm */; };
+		55405BE118A6220D001D3C99 /* WILDIconPickerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BDE18A6220D001D3C99 /* WILDIconPickerViewController.mm */; };
+		55405BE218A6220D001D3C99 /* WILDIconPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BDF18A6220D001D3C99 /* WILDIconPickerViewController.xib */; };
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
@@ -800,6 +803,11 @@
 		55405BCF18A59D06001D3C99 /* WILDTimerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDTimerInfoViewController.xib; path = Platforms/Mac/WILDTimerInfoViewController.xib; sourceTree = "<group>"; };
 		55405BD818A59DB6001D3C99 /* CTimerPartMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CTimerPartMac.mm; path = Platforms/Mac/CTimerPartMac.mm; sourceTree = "<group>"; };
 		55405BD918A59DB6001D3C99 /* CTimerPartMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTimerPartMac.h; path = Platforms/Mac/CTimerPartMac.h; sourceTree = "<group>"; };
+		55405BDB18A6220D001D3C99 /* WILDIconListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIconListDataSource.h; path = Platforms/Mac/WILDIconListDataSource.h; sourceTree = "<group>"; };
+		55405BDC18A6220D001D3C99 /* WILDIconListDataSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDIconListDataSource.mm; path = Platforms/Mac/WILDIconListDataSource.mm; sourceTree = "<group>"; };
+		55405BDD18A6220D001D3C99 /* WILDIconPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIconPickerViewController.h; path = Platforms/Mac/WILDIconPickerViewController.h; sourceTree = "<group>"; };
+		55405BDE18A6220D001D3C99 /* WILDIconPickerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDIconPickerViewController.mm; path = Platforms/Mac/WILDIconPickerViewController.mm; sourceTree = "<group>"; };
+		55405BDF18A6220D001D3C99 /* WILDIconPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDIconPickerViewController.xib; path = Platforms/Mac/WILDIconPickerViewController.xib; sourceTree = "<group>"; };
 		5542CABF113A2CB300555C64 /* UKPBMImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPBMImageRep.h; sourceTree = "<group>"; };
 		5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPBMImageRep.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
@@ -1488,6 +1496,11 @@
 				55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */,
 				55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */,
 				55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */,
+				55405BDB18A6220D001D3C99 /* WILDIconListDataSource.h */,
+				55405BDC18A6220D001D3C99 /* WILDIconListDataSource.mm */,
+				55405BDD18A6220D001D3C99 /* WILDIconPickerViewController.h */,
+				55405BDE18A6220D001D3C99 /* WILDIconPickerViewController.mm */,
+				55405BDF18A6220D001D3C99 /* WILDIconPickerViewController.xib */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -2142,6 +2155,7 @@
 				55ADC5091744525F0084AAA9 /* BackgroundIcon.icns in Resources */,
 				55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */,
 				55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */,
+				55405BE218A6220D001D3C99 /* WILDIconPickerViewController.xib in Resources */,
 				55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2258,6 +2272,7 @@
 				55CD61121878EBF9002450E2 /* CCancelPolling.cpp in Sources */,
 				55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */,
 				55CD61151879EDA3002450E2 /* CAlert.mm in Sources */,
+				55405BE118A6220D001D3C99 /* WILDIconPickerViewController.mm in Sources */,
 				55405BB818A39796001D3C99 /* WILDPartInfoViewController.mm in Sources */,
 				5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */,
 				552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */,
@@ -2435,6 +2450,7 @@
 				556DB7AD18709ADB002F7CB2 /* CStack.cpp in Sources */,
 				552386D41883EF1E00D7FAB3 /* WILDStackWindowController.mm in Sources */,
 				553AF61E17491AEF00AF3BBA /* UKCoordinateUtils.m in Sources */,
+				55405BE018A6220D001D3C99 /* WILDIconListDataSource.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

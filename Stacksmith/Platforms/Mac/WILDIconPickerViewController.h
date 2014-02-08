@@ -9,18 +9,20 @@
 #import <Cocoa/Cocoa.h>
 #import "WILDIconListDataSource.h"
 
-
-@class WILDPart;
+namespace Carlson
+{
+	class CButtonPart;
+}
 
 
 @interface WILDIconPickerViewController : NSViewController <WILDIconListDataSourceDelegate>
 {
 	WILDIconListDataSource	*iconListDataSource;
-	WILDPart				*part;
+	Carlson::CButtonPart	*part;
 }
 
 @property (assign) IBOutlet WILDIconListDataSource *iconListDataSource;
 
--(id)	initWithPart: (WILDPart*)inPart;
+-(id)	initWithPart: (Carlson::CButtonPart*)inPart;
 
 @end

@@ -364,6 +364,104 @@ std::string	CDocument::GetMediaURLByIDOfType( ObjectID inID, TMediaType inType, 
 }
 
 
+size_t		CDocument::GetNumMediaOfType( TMediaType inType )
+{
+	if( inType == EMediaTypeUnknown )
+		return mMediaList.size();
+	
+	size_t	numMedia = 0;
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( currMedia->GetMediaType() == inType )
+			numMedia++;
+	}
+	
+	return numMedia;
+}
+
+
+ObjectID	CDocument::GetIDOfMediaOfTypeAtIndex( TMediaType inType, size_t inIndex )
+{
+	if( inType == EMediaTypeUnknown )
+		return mMediaList[inIndex].GetID();
+	
+	size_t	x = 0;
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( currMedia->GetMediaType() == inType )
+		{
+			if( x == inIndex )
+				return currMedia->GetID();
+			else
+				x++;
+		}
+	}
+	
+	return 0;
+}
+
+
+std::string		CDocument::GetMediaNameByIDOfType( ObjectID inID, TMediaType inType )
+{
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+			return currMedia->GetName();
+	}
+	
+	return std::string();
+}
+
+
+bool	CDocument::GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType )
+{
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+			return currMedia->IsBuiltIn();
+	}
+	
+	return false;
+}
+
+
+std::string		CDocument::AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot, int yHotSpot, bool isBuiltIn )
+{
+	std::string		fileName( mURL );
+	switch( inType )
+	{
+		case EMediaTypeIcon:
+			fileName.append( "/icon_" );
+			break;
+		case EMediaTypePicture:
+			fileName.append( "/picture_" );
+			break;
+		case EMediaTypeCursor:
+			fileName.append( "/cursor_" );
+			break;
+		case EMediaTypeSound:
+			fileName.append( "/sound_" );
+			break;
+		case EMediaTypePattern:
+			fileName.append( "/pattern_" );
+			break;
+		case EMediaTypeMovie:
+			fileName.append( "/movie_" );
+			break;
+		case EMediaTypeUnknown:
+			fileName.append( "/unknown_" );
+			break;
+	}
+	char	numStr[100] = {0};
+	snprintf(numStr, sizeof(numStr)-1, "%lld", inID );
+	fileName.append(numStr);
+	fileName.append(1, '.');
+	fileName.append(inSuffix);
+	mMediaList.push_back( CMediaEntry( inID, inName, fileName, inType, xHotSpot, yHotSpot, isBuiltIn ) );
+	return fileName;
+}
+
+
 ObjectID	CDocument::GetUniqueIDForStack()
 {
 	bool	notUnique = true;

@@ -7,25 +7,28 @@
 //
 
 #import "WILDIconListDataSource.h"
-#import "WILDStack.h"
-#import "WILDDocument.h"
+#import "CStack.h"
+#import "CDocument.h"
 #import <Quartz/Quartz.h>
+
+
+using namespace Carlson;
 
 
 @interface WILDSimpleImageBrowserItem : NSObject // IKImageBrowserItem
 {
-	NSImage*						mImage;
-	NSString*						mName;
-	NSString*						mFileName;
-	BOOL							mIsBuiltIn;
-	WILDObjectID					mID;
-	WILDIconListDataSource*			mOwner;	
+	NSImage*					mImage;
+	NSString*					mName;
+	NSString*					mFileName;
+	BOOL						mIsBuiltIn;
+	ObjectID					mID;
+	WILDIconListDataSource*		mOwner;
 }
 
 @property (retain) NSImage*							image;
 @property (retain) NSString*						name;
 @property (retain) NSString*						filename;
-@property (assign) WILDObjectID						pictureID;
+@property (assign) ObjectID							pictureID;
 @property (assign) WILDIconListDataSource*			owner;
 @property (assign) BOOL								isBuiltIn;
 
@@ -67,7 +70,11 @@
 -(id) imageRepresentation
 {
 	if( !mImage )
-		mImage = [[[mOwner document] pictureOfType: @"icon" id: mID] retain];
+	{
+		std::string	imagePath = [mOwner document]->GetMediaURLByIDOfType( mID, EMediaTypeIcon );
+		if( imagePath.size() != 0 )
+			mImage = [[NSImage alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithUTF8String: imagePath.c_str()]]];
+	}
 	
 	return mImage;
 }
@@ -87,7 +94,7 @@
 @synthesize imagePathField = mImagePathField;
 @synthesize delegate = mDelegate;
 
--(id)	initWithDocument: (WILDDocument*)inDocument
+-(id)	initWithDocument: (CDocument*)inDocument
 {
 	if(( self = [super init] ))
 	{
@@ -137,17 +144,19 @@
 		sibi.owner = self;
 		[mIcons addObject: sibi];
 
-		NSInteger	x = 0, count = [mDocument numberOfPictures];
+		NSInteger	x = 0, count = mDocument->GetNumMediaOfType( EMediaTypeIcon );
 		for( x = 0; x < count; x++ )
 		{
 			NSString*		theName = nil;
-			WILDObjectID	theID = 0;
+			ObjectID		theID = 0;
 			NSString*		fileName = nil;
 			BOOL			isBuiltIn = NO;
 			sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
 			
-			[mDocument infoForPictureAtIndex: x name: &theName id: &theID
-					image: nil fileName: &fileName isBuiltIn: &isBuiltIn];
+			theID = mDocument->GetIDOfMediaOfTypeAtIndex( EMediaTypeIcon, x );
+			theName = [NSString stringWithUTF8String: mDocument->GetMediaNameByIDOfType( theID, EMediaTypeIcon ).c_str()];
+			fileName = [NSString stringWithUTF8String: mDocument->GetMediaURLByIDOfType( theID, EMediaTypeIcon ).c_str()];
+			isBuiltIn = mDocument->GetMediaIsBuiltInByIDOfType( theID, EMediaTypeIcon );
 			
 			sibi.name = theName;
 			sibi.filename = fileName;
@@ -164,7 +173,7 @@
 }
 
 
--(void)	setSelectedIconID: (WILDObjectID)theID
+-(void)	setSelectedIconID: (ObjectID)theID
 {
 	[self ensureIconListExists];
 	
@@ -182,7 +191,7 @@
 }
 
 
--(WILDObjectID)	selectedIconID
+-(ObjectID)	selectedIconID
 {
 	NSInteger	selectedIndex = [[mIconListView selectionIndexes] firstIndex];
 	return [[mIcons objectAtIndex: selectedIndex] pictureID];
@@ -226,22 +235,27 @@
 
 -(IBAction)	paste: (id)sender
 {
-	WILDObjectID	iconToSelect = 0;
+	ObjectID		iconToSelect = 0;
 	NSPasteboard*	thePastie = [NSPasteboard generalPasteboard];
-	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options:[NSDictionary dictionary]];
+	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options: [NSDictionary dictionary]];
 	for( NSImage* theImg in images )
 	{
-		NSString*		pictureName = @"From Clipboard";
-		WILDObjectID	pictureID = [mDocument uniqueIDForMedia];
-		[mDocument addMediaFile: nil withType: @"icon" name: pictureName
-			andID: pictureID
-			hotSpot: NSZeroPoint 
-			imageOrCursor: theImg
-			isBuiltIn: NO];
+		NSString*	pictureName = @"From Clipboard";
+		ObjectID	pictureID = mDocument->GetUniqueIDForMedia();
+		
+		std::string	filePath = mDocument->AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
+		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
+		
+		[theImg lockFocus];
+			NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
+		[theImg unlockFocus];
+		NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
+		[pngData writeToURL: imgFileURL atomically: YES];
 		
 		WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
 		sibi.name = pictureName;
-		sibi.filename = nil;
+		sibi.filename = imgFileURLStr;
 		sibi.pictureID = pictureID;
 		sibi.image = theImg;
 		sibi.owner = self;
@@ -282,8 +296,8 @@
 
 - (BOOL)performDragOperation: (id <NSDraggingInfo>)sender
 {
-	WILDObjectID	iconToSelect = 0;
-	NSPasteboard*	pb = [sender draggingPasteboard];
+	ObjectID			iconToSelect = 0;
+	NSPasteboard*		pb = [sender draggingPasteboard];
 	NSArray	*		urls = [pb readObjectsForClasses: [NSArray arrayWithObject: [NSURL class]] options: [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool: YES], NSPasteboardURLReadingFileURLsOnlyKey, [NSArray arrayWithObject: @"public.image"], NSPasteboardURLReadingContentsConformToTypesKey, nil]];
 	
 	if( urls.count > 0 )
@@ -292,16 +306,21 @@
 		{
 			NSImage *		theImg = [[[NSImage alloc] initWithContentsOfURL: theImgFile] autorelease];
 			NSString*		pictureName = [[NSFileManager defaultManager] displayNameAtPath: [theImgFile path]];
-			WILDObjectID	pictureID = [mDocument uniqueIDForMedia];
-			[mDocument addMediaFile: nil withType: @"icon" name: pictureName
-				andID: pictureID
-				hotSpot: NSZeroPoint 
-				imageOrCursor: theImg
-				isBuiltIn: NO];
+			ObjectID	pictureID = mDocument->GetUniqueIDForMedia();
+			
+			std::string	filePath = mDocument->AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
+			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
+			
+			[theImg lockFocus];
+				NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
+			[theImg unlockFocus];
+			NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
+			[pngData writeToURL: imgFileURL atomically: YES];
 			
 			WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
 			sibi.name = pictureName;
-			sibi.filename = nil;
+			sibi.filename = imgFileURLStr;
 			sibi.pictureID = pictureID;
 			sibi.image = theImg;
 			sibi.owner = self;
@@ -312,21 +331,26 @@
 	else
 	{
 		NSArray*		images = [pb readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options:[NSDictionary dictionary]];
-		for( NSImage* img in images )
+		for( NSImage* theImg in images )
 		{
-			NSString*		pictureName = @"";
-			WILDObjectID	pictureID = [mDocument uniqueIDForMedia];
-			[mDocument addMediaFile: nil withType: @"icon" name: pictureName
-				andID: pictureID
-				hotSpot: NSZeroPoint 
-				imageOrCursor: img
-				isBuiltIn: NO];
+			NSString*		pictureName = @"Dropped Image";
+			ObjectID	pictureID = mDocument->GetUniqueIDForMedia();
+			
+			std::string	filePath = mDocument->AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
+			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
+			
+			[theImg lockFocus];
+				NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
+			[theImg unlockFocus];
+			NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
+			[pngData writeToURL: imgFileURL atomically: YES];
 			
 			WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
 			sibi.name = pictureName;
-			sibi.filename = nil;
+			sibi.filename = imgFileURLStr;
 			sibi.pictureID = pictureID;
-			sibi.image = img;
+			sibi.image = theImg;
 			sibi.owner = self;
 			[mIcons addObject: sibi];
 			iconToSelect = pictureID;

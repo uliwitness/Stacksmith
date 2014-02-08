@@ -105,7 +105,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction) doStylePopUpChanged:(id)sender
 {
-	((CButtonPartMac*)part)->SetPartStyle( [[sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]] intValue] );
+	((CButtonPartMac*)part)->SetStyle( (TButtonStyle) [[sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]] intValue] );
 }
 
 
@@ -114,7 +114,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mIconPopover close];
 	DESTROY(mIconPopover);
 	
-	WILDIconPickerViewController	*	iconPickerViewController = [[[WILDIconPickerViewController alloc] initWithPart: part] autorelease];
+	WILDIconPickerViewController	*	iconPickerViewController = [[[WILDIconPickerViewController alloc] initWithPart: (CButtonPart*)part] autorelease];
 	
 	mIconPopover = [[NSPopover alloc] init];
 	[mIconPopover setDelegate: self];

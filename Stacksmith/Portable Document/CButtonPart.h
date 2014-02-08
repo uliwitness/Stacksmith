@@ -50,8 +50,11 @@ public:
 	virtual void			SetShowName( bool inShowName )			{ mShowName = inShowName; };
 	virtual void			SetHighlightForTracking( bool inState )	{ mHighlightForTracking = inState; };
 	
-	virtual void			SetStyle( TButtonStyle s )		{ mButtonStyle = s; };
+	virtual void			SetStyle( TButtonStyle s )			{ mButtonStyle = s; };
 	virtual TButtonStyle	GetStyle()						{ return mButtonStyle; };
+	
+	ObjectID				GetIconID()						{ return mIconID; };
+	virtual void			SetIconID( ObjectID inID )			{ mIconID = inID; };
 	
 	virtual void			PrepareMouseUp();
 	
@@ -61,25 +64,25 @@ protected:
 	virtual void			ApplyChangedSelectedLinesToView()		{};
 	virtual void			SetButtonStyle( TButtonStyle inStyle )	{ mButtonStyle = inStyle; };
 	
-	virtual const char*		GetIdentityForDump()	{ return "Button"; };
+	virtual const char*	GetIdentityForDump()	{ return "Button"; };
 	virtual void			DumpProperties( size_t inIndent );
 
-	static TButtonStyle		GetButtonStyleFromString( const char* inStyleStr );
+	static TButtonStyle	GetButtonStyleFromString( const char* inStyleStr );
 
 protected:
-	bool			mShowName;
-	bool			mHighlight;
-	bool			mAutoHighlight;
-	bool			mSharedHighlight;
-	bool			mHighlightForTracking;
+	bool				mShowName;
+	bool				mHighlight;
+	bool				mAutoHighlight;
+	bool				mSharedHighlight;
+	bool				mHighlightForTracking;
 	int				mTitleWidth;
-	ObjectID		mIconID;
+	ObjectID			mIconID;
 	TPartTextAlign	mTextAlign;
 	std::string		mFont;
 	int				mTextSize;
 	TPartTextStyle	mTextStyle;
-	TButtonStyle	mButtonStyle;
-	std::set<size_t>mSelectedLines;
+	TButtonStyle		mButtonStyle;
+	std::set<size_t>	mSelectedLines;
 };
 
 }

@@ -189,6 +189,15 @@ bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRange
 		else
 			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("icon", inPropertyName) == 0 )
+	{
+		if( mIconID != 0 )
+		{
+			LEOInitIntegerValue( outValue, mIconID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		}
+		else
+			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
+	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{
 		LEOInitStringConstantValue( outValue, sButtonStyleStrings[mButtonStyle], kLEOInvalidateReferences, inContext );
@@ -260,6 +269,20 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		if( theSelectedLine != 0 )
 			mSelectedLines.insert(theSelectedLine);
 		ApplyChangedSelectedLinesToView();
+	}
+	else if( strcasecmp("icon", inPropertyName) == 0 )
+	{
+		LEOInteger	theIconID = 0;
+		char		strBuf[100] = {0};
+		const char* str = LEOGetValueAsString( inValue, strBuf, sizeof(strBuf), inContext );
+		if( strcasecmp(str, "none") != 0 && str[0] != 0 )
+		{
+			LEOUnit		outUnit = kLEOUnitNone;
+			theIconID = LEOGetValueAsInteger( inValue, &outUnit, inContext );
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+				return true;
+		}
+		SetIconID(theIconID);
 	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{

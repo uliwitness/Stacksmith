@@ -7,11 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "WILDObjectID.h"
+#import "CObjectID.h"
+
+
+namespace Carlson
+{
+	class CDocument;
+};
 
 
 @class IKImageBrowserView;
-@class WILDDocument;
 @class WILDIconListDataSource;
 
 
@@ -25,22 +30,22 @@
 
 @interface WILDIconListDataSource : NSObject
 {
-	WILDDocument*			mDocument;			// This is who we get the icons from.
+	Carlson::CDocument*		mDocument;			// This is who we get the icons from.
 	NSMutableArray*			mIcons;				// Cached lists of icon names/IDs.
 	IKImageBrowserView*		mIconListView;		// View in which we show the icons.
 	NSTextField*			mImagePathField;	// Field where we show where the icon comes from.
 	id<WILDIconListDataSourceDelegate>	mDelegate;
 }
 
-@property (assign,nonatomic) WILDDocument*						document;
+@property (assign,nonatomic) Carlson::CDocument*				document;
 @property (retain,nonatomic) IBOutlet IKImageBrowserView*		iconListView;
 @property (retain,nonatomic) IBOutlet NSTextField*				imagePathField;
 @property (assign,nonatomic) id<WILDIconListDataSourceDelegate>	delegate;
 
--(id)			initWithDocument: (WILDDocument*)inDocument;
+-(id)			initWithDocument: (Carlson::CDocument*)inDocument;
 
--(void)			setSelectedIconID: (WILDObjectID)theID;
--(WILDObjectID)	selectedIconID;
+-(void)					setSelectedIconID: (Carlson::ObjectID)theID;
+-(Carlson::ObjectID)	selectedIconID;
 
 -(void)			ensureIconListExists;
 
