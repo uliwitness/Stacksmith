@@ -236,6 +236,12 @@ void	WILDFirstNativeCall( void )
 }
 
 
+-(IBAction)	orderFrontMessageWatcher: (id)sender
+{
+	CMessageWatcher::GetSharedInstance()->SetVisible( !CMessageWatcher::GetSharedInstance()->IsVisible() );
+}
+
+
 -(BOOL)	validateMenuItem: (NSMenuItem*)inItem
 {
 	if( inItem.action == @selector(orderFrontMessageBox:) )
@@ -244,6 +250,14 @@ void	WILDFirstNativeCall( void )
 			[inItem setTitle: @"Hide Message Box"];
 		else
 			[inItem setTitle: @"Show Message Box"];
+		return YES;
+	}
+	else if( inItem.action == @selector(orderFrontMessageWatcher:) )
+	{
+		if( CMessageWatcher::GetSharedInstance()->IsVisible() )
+			[inItem setTitle: @"Hide Message Watcher"];
+		else
+			[inItem setTitle: @"Show Message Watcher"];
 		return YES;
 	}
 	else

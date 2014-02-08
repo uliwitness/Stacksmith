@@ -629,9 +629,15 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Pc8-Lw-M70"/>
-                            <menuItem title="Message Box" keyEquivalent="M" id="vSR-5M-aEy">
+                            <menuItem title="Show Message Box" keyEquivalent="M" id="vSR-5M-aEy">
                                 <connections>
                                     <action selector="orderFrontMessageBox:" target="556" id="7qv-up-car"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show Message Watcher" id="6H8-Vo-IWp">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="orderFrontMessageWatcher:" target="556" id="UQ9-Ma-vkA"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="724">

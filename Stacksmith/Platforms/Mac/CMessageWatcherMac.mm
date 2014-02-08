@@ -143,3 +143,13 @@ bool	CMessageWatcherMac::SetValueForPropertyNamed( LEOValuePtr inValue, LEOConte
 }
 
 
+void	CMessageWatcherMac::SetVisible( bool n )
+{
+	if( n )
+		[mMacWindowController.window makeKeyAndOrderFront: nil];
+	else
+		[mMacWindowController.window orderOut: nil];
+	mVisible = n;
+}
+
+

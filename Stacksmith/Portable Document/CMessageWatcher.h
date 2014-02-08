@@ -35,6 +35,9 @@ public:
 	size_t				GetNumMessages()							{ return mMessages.size(); };
 	std::string			GetMessageAtIndex( size_t inIndex );
 	
+	virtual void		SetVisible( bool n )						{};
+	virtual bool		IsVisible()									{ return false; };
+	
 protected:
 	std::vector<CMessageWatcherEntry>	mMessages;
 };
