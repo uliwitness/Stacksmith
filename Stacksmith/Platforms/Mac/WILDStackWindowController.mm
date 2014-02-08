@@ -13,6 +13,7 @@
 #include "CDocument.h"
 #include "CMacPartBase.h"
 #include "CAlert.h"
+#import "WILDCustomWidgetWindow.h"
 
 
 static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c, const char ** d, const char* theAppendee )
@@ -542,7 +543,7 @@ using namespace Carlson;
 	switch( theStyle )
 	{
 		case EStackStyleStandard:
-			self.window = [[[NSWindow alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[WILDCustomWidgetWindow alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setCollectionBehavior: NSWindowCollectionBehaviorFullScreenPrimary];
 			break;
 		
@@ -675,6 +676,12 @@ using namespace Carlson;
 -(void)	windowWillClose: (NSNotification *)notification
 {
 	mWasVisible = NO;
+}
+
+
+-(void)	customWidgetWindowEditButtonClicked: (NSButton*)sender
+{
+	mStack->SetTool( ([sender state] == NSOnState) ? EPointerTool : EBrowseTool );
 }
 
 
