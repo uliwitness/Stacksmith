@@ -7,10 +7,12 @@
 //
 
 #import "WILDFieldInfoViewController.h"
-#import "WILDNotifications.h"
 #import "WILDIconPickerViewController.h"
 #import "UKHelperMacros.h"
-#import "WILDPart.h"
+#import "CFieldPart.h"
+
+
+using namespace Carlson;
 
 
 static 	NSArray*	sStylesInMenuOrder = nil;
@@ -49,149 +51,74 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[super loadView];
 	
 	if( !sStylesInMenuOrder )
-		sStylesInMenuOrder = [[NSArray alloc] initWithObjects:
-													@"rectangle",
-													@"standard",
-													@"popup",
-													nil];
+		sStylesInMenuOrder = @[	@(EFieldStyleRectangle),
+								@(EFieldStyleStandard),
+								@(EFieldStylePopUp)];
 	
-	
-	[mStylePopUp selectItemAtIndex: [sStylesInMenuOrder indexOfObject: [part partStyle]]];
+	[mStylePopUp selectItemAtIndex: [sStylesInMenuOrder indexOfObject: @(((CFieldPart*)part)->GetStyle())]];
 
-	[mLockTextSwitch setState: [part lockText]];
-	[mAutoSelectSwitch setState: [part autoSelect]];
-	[mMultipleLinesSwitch setState: [part canSelectMultipleLines]];
-	[mSharedTextSwitch setState: [part sharedText]];
-	[mDontWrapSwitch setState: [part dontWrap]];
-	[mDontSearchSwitch setState: [part dontSearch]];
-	[mHorizontalScrollerSwitch setState: [part hasHorizontalScroller]];
-	[mVerticalScrollerSwitch setState: [part hasVerticalScroller]];
+	[mLockTextSwitch setState: ((CFieldPart*)part)->GetLockText()];
+	[mAutoSelectSwitch setState: ((CFieldPart*)part)->GetAutoSelect()];
+	[mMultipleLinesSwitch setState: ((CFieldPart*)part)->GetCanSelectMultipleLines()];
+	[mSharedTextSwitch setState: ((CFieldPart*)part)->GetSharedText()];
+	[mDontWrapSwitch setState: ((CFieldPart*)part)->GetDontWrap()];
+	[mDontSearchSwitch setState: ((CFieldPart*)part)->GetDontSearch()];
+	[mHorizontalScrollerSwitch setState: ((CFieldPart*)part)->GetHasHorizontalScroller()];
+	[mVerticalScrollerSwitch setState: ((CFieldPart*)part)->GetHasVerticalScroller()];
 }
 
 
 -(IBAction)	doAutoSelectSwitchToggled: (id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"autoSelect", WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setAutoSelect: [mAutoSelectSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetAutoSelect( [mAutoSelectSwitch state] == NSOnState );
 }
 
 
 -(IBAction)	doMultipleLinesSwitchToggled: (id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"multipleLines", WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setCanSelectMultipleLines: [mMultipleLinesSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetCanSelectMultipleLines( [mMultipleLinesSwitch state] == NSOnState );
 }
 
 
 -(IBAction)	doSharedTextSwitchToggled: (id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"sharedText", WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setSharedText: [mSharedTextSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetSharedText( [mSharedTextSwitch state] == NSOnState );
 }
 
 
 -(IBAction)	doLockTextSwitchToggled: (id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"lockText", WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setLockText: [mLockTextSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetLockText( [mLockTextSwitch state] == NSOnState );
 }
 
 
 -(IBAction)	doDontWrapSwitchToggled: (id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"dontWrap", WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setDontWrap: [mDontWrapSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetDontWrap( [mDontWrapSwitch state] == NSOnState );
 }
 
 
 -(IBAction) doDontSearchSwitchToggled: (id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"dontSearch", WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setDontSearch: [mDontSearchSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetDontSearch( [mDontSearchSwitch state] == NSOnState );
 }
 
 
 -(IBAction)	doHorizontalScrollerSwitchToggled: (id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"horizontalScroller", WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setHasHorizontalScroller: [mHorizontalScrollerSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetHasHorizontalScroller( [mHorizontalScrollerSwitch state] == NSOnState );
 }
 
 
 -(IBAction)	doVerticalScrollerSwitchToggled: (id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										@"verticalScroller", WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setHasVerticalScroller: [mVerticalScrollerSwitch state] == NSOnState];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetHasVerticalScroller( [mVerticalScrollerSwitch state] == NSOnState );
 }
 
 
 -(IBAction) doStylePopUpChanged:(id)sender
 {
-	NSDictionary	*	infoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(partStyle), WILDAffectedPropertyKey,
-										nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartWillChangeNotification object: part userInfo: infoDict];
-
-	[part setPartStyle: [sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]]];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDPartDidChangeNotification object: part userInfo: infoDict];
-	[part updateChangeCount: NSChangeDone];
+	((CFieldPart*)part)->SetStyle( (TFieldStyle) [[sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]] intValue] );
 }
 
 @end

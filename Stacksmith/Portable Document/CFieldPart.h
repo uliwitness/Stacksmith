@@ -42,16 +42,12 @@ public:
 	virtual bool			GetTextContents( std::string &outString );
 	virtual bool			SetTextContents( const std::string &inString );
 
-	virtual void			ClearSelectedLines()			{ mSelectedLines.clear(); };
+	virtual void			ClearSelectedLines()				{ mSelectedLines.clear(); };
 	virtual void			AddSelectedLine( size_t inLine )	{ mSelectedLines.insert(inLine); };
-	virtual bool			GetLockText()					{ return mLockText; };
+	virtual bool			GetLockText()						{ return mLockText; };
 	
-protected:
-	~CFieldPart()	{};
-	
-	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
-	virtual void			SetFieldStyle( TFieldStyle inStyle )	{ mFieldStyle = inStyle; };
+	TFieldStyle				GetStyle()							{ return mFieldStyle; };
+	virtual void			SetStyle( TFieldStyle s )			{ mFieldStyle = s; };
 	
 	virtual bool			GetSharedText()					{ return mSharedText; };
 	virtual void			SetSharedText( bool inST )		{ mSharedText = inST; };
@@ -60,9 +56,26 @@ protected:
 	
 	virtual bool			GetAutoSelect()					{ return mAutoSelect; };
 	virtual void			SetAutoSelect( bool inST )		{ mAutoSelect = inST; };
+	virtual bool			GetCanSelectMultipleLines()				{ return mMultipleLines; };
+	virtual void			SetCanSelectMultipleLines( bool inST )	{ mMultipleLines = inST; };
 	
 	virtual void			SetHasHorizontalScroller( bool inHS )	{ mHasHorizontalScroller = inHS; };
+	bool					GetHasHorizontalScroller()				{ return mHasHorizontalScroller; };
 	virtual void			SetHasVerticalScroller( bool inHS )		{ mHasVerticalScroller = inHS; };
+	bool					GetHasVerticalScroller()				{ return mHasVerticalScroller; };
+
+	virtual bool			GetDontWrap()					{ return mDontWrap; };
+	virtual void			SetDontWrap( bool inST )		{ mDontWrap = inST; };
+
+	virtual bool			GetDontSearch()					{ return mDontSearch; };
+	virtual void			SetDontSearch( bool inST )		{ mDontSearch = inST; };
+	
+protected:
+	~CFieldPart()	{};
+	
+	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
+	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SetFieldStyle( TFieldStyle inStyle )	{ mFieldStyle = inStyle; };
 	
 	virtual void			LoadChangedTextStylesIntoView()			{ mViewTextNeedsSync = false; };
 	virtual void			LoadChangedTextFromView()				{};
