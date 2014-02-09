@@ -10,6 +10,7 @@
 #include "CTinyXMLUtils.h"
 #include "CDocument.h"
 #include "LEOScript.h"
+#include "CToken.h"	// for ToLowerString().
 
 
 using namespace Carlson;
@@ -106,7 +107,7 @@ void	CConcreteObject::LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem
 	tinyxml2::XMLElement	*	currUserPropNameNode = userPropsElem ? userPropsElem->FirstChildElement() : NULL;
 	while( currUserPropNameNode )
 	{
-		std::string		propName = currUserPropNameNode ? CTinyXMLUtils::EnsureNonNULLString(currUserPropNameNode->GetText()) : std::string();
+		std::string		propName = ToLowerString( currUserPropNameNode ? CTinyXMLUtils::EnsureNonNULLString(currUserPropNameNode->GetText()) : std::string() );
 		currUserPropNameNode = currUserPropNameNode->NextSiblingElement();
 		std::string		propValue = currUserPropNameNode ? CTinyXMLUtils::EnsureNonNULLString(currUserPropNameNode->GetText()) : std::string();
 		currUserPropNameNode = currUserPropNameNode->NextSiblingElement();
