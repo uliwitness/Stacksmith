@@ -305,6 +305,8 @@
 		559700FD137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */; };
 		559700FE137C9B6B000264B8 /* WILDIrisCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */; };
 		559BA99918A6EBE400760273 /* WILDCustomWidgetWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99818A6EBE400760273 /* WILDCustomWidgetWindow.m */; };
+		559BA99D18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */; };
+		559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
@@ -889,6 +891,9 @@
 		559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisCloseFilter.m; path = "Custom Effects/WILDIrisCloseFilter.m"; sourceTree = "<group>"; };
 		559BA99718A6EBE400760273 /* WILDCustomWidgetWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCustomWidgetWindow.h; path = Platforms/Mac/WILDCustomWidgetWindow.h; sourceTree = "<group>"; };
 		559BA99818A6EBE400760273 /* WILDCustomWidgetWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCustomWidgetWindow.m; path = Platforms/Mac/WILDCustomWidgetWindow.m; sourceTree = "<group>"; };
+		559BA99A18A7AC3000760273 /* WILDWebBrowserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDWebBrowserInfoViewController.h; path = Platforms/Mac/WILDWebBrowserInfoViewController.h; sourceTree = "<group>"; };
+		559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDWebBrowserInfoViewController.mm; path = Platforms/Mac/WILDWebBrowserInfoViewController.mm; sourceTree = "<group>"; };
+		559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDWebBrowserInfoViewController.xib; path = Platforms/Mac/WILDWebBrowserInfoViewController.xib; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
 		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
@@ -1482,6 +1487,9 @@
 				55405BCD18A59D06001D3C99 /* WILDTimerInfoViewController.h */,
 				55405BCE18A59D06001D3C99 /* WILDTimerInfoViewController.mm */,
 				55405BCF18A59D06001D3C99 /* WILDTimerInfoViewController.xib */,
+				559BA99A18A7AC3000760273 /* WILDWebBrowserInfoViewController.h */,
+				559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */,
+				559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */,
 				55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorController.h */,
 				55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorController.mm */,
 				55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */,
@@ -2069,6 +2077,7 @@
 				55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */,
 				55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */,
 				55EBC523114C539300BAA09D /* HandlerPopupMessage.png in Resources */,
+				559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */,
 				55EBC524114C539300BAA09D /* HandlerPopupFunction.png in Resources */,
 				55EBC646114CFAE000BAA09D /* BackgroundIconSmall.png in Resources */,
 				55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */,
@@ -2363,6 +2372,7 @@
 				55E805C61360ACD3006F1287 /* WILDPropertyInstructions.cpp in Sources */,
 				55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */,
 				55E805F91366091F006F1287 /* CGlobalPropertyNode.cpp in Sources */,
+				559BA99D18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm in Sources */,
 				55E806521368B2CD006F1287 /* NSCursor+Box.m in Sources */,
 				55B0740E1889C6E90023BA3E /* CMessageBoxMac.mm in Sources */,
 				55E806531368B2CD006F1287 /* NSCursor+CrossHair.m in Sources */,

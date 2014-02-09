@@ -12,7 +12,7 @@
 
 #include "CWebBrowserPart.h"
 #include "CMacPartBase.h"
-#import "WILDPartInfoViewController.h"
+#import "WILDWebBrowserInfoViewController.h"
 
 
 @class WebView;
@@ -37,7 +37,7 @@ public:
 	virtual void	SetVisible( bool visible )		{ CWebBrowserPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual void	LoadCurrentURL( const std::string& inURL );	// Triggers view update.
 	virtual NSView*	GetView();
-	virtual Class	GetPropertyEditorClass()	{ return [WILDPartInfoViewController class]; };
+	virtual Class	GetPropertyEditorClass()	{ return [WILDWebBrowserInfoViewController class]; };
 
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };
