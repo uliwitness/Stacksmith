@@ -507,6 +507,7 @@ using namespace Carlson;
 		if( currPart->IsSelected() )
 		{
 			NSRect		partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
+			NSRectFillUsingOperation( partRect, NSCompositeClear );
 			[sSelectedColor set];
 			NSRect		grabby = partRect;
 			grabby.size.width = 8;
@@ -521,8 +522,10 @@ using namespace Carlson;
 		}
 		else if( mStack->GetPeeking() )
 		{
+			NSRect	partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
+			NSRectFillUsingOperation( partRect, NSCompositeClear );
 			[sPeekColor set];
-			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
+			[NSBezierPath strokeRect: partRect];
 		}
 	}
 
@@ -533,6 +536,7 @@ using namespace Carlson;
 		if( currPart->IsSelected() )
 		{
 			NSRect		partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
+			NSRectFillUsingOperation( partRect, NSCompositeClear );
 			[sSelectedColor set];
 			NSRect		grabby = partRect;
 			grabby.size.width = 8;
@@ -547,8 +551,10 @@ using namespace Carlson;
 		}
 		else if( mStack->GetPeeking() )
 		{
+			NSRect	partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
+			NSRectFillUsingOperation( partRect, NSCompositeClear );
 			[sPeekColor set];
-			[NSBezierPath strokeRect: NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 )];
+			[NSBezierPath strokeRect: partRect];
 		}
 	}
 
@@ -556,7 +562,6 @@ using namespace Carlson;
 		mSelectionOverlay = [[CALayer alloc] init];
 	[[mContentView layer] addSublayer: mSelectionOverlay];
 	[mSelectionOverlay setFrame: [mContentView layer].frame];
-		
 	
 	[NSGraphicsContext restoreGraphicsState];
 	CGImageRef	bmImage = CGBitmapContextCreateImage( bmContext );
