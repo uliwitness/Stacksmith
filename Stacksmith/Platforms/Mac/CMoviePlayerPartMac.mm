@@ -21,6 +21,12 @@ using namespace Carlson;
 
 void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 {
+	if( mView.superview == inSuperView )
+	{
+		[mView removeFromSuperview];
+		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		return;
+	}
 	if( mView )
 	{
 		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;

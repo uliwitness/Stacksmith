@@ -7,3 +7,35 @@
 //
 
 #include "CTimerPartMac.h"
+#include "CStack.h"
+
+
+using namespace Carlson;
+
+
+void	CTimerPartMac::CreateViewIn( NSView* inSuperView )
+{
+	// We don't short-circuit here, as the tool may have changed forcing us to need to be recreated.
+	if( mView )
+	{
+		[mView removeFromSuperview];
+		[mView release];
+	}
+	if( GetStack()->GetTool() == EPointerTool )
+	{
+		mView = [[NSImageView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		[mView setImage: [NSImage imageNamed: @"TimerIcon"]];
+		[inSuperView addSubview: mView];
+	}
+}
+
+
+void	CTimerPartMac::DestroyView()
+{
+	if( mView )
+	{
+		[mView removeFromSuperview];
+		[mView release];
+		mView = nil;
+	}
+}

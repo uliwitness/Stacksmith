@@ -43,6 +43,12 @@ using namespace Carlson;
 
 void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 {
+	if( mView.superview == inSuperView )
+	{
+		[mView removeFromSuperview];
+		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		return;
+	}
 	if( mView )
 		[mView release];
 	if( !mMacDelegate )

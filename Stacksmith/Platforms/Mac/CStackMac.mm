@@ -11,7 +11,7 @@
 #include "CFieldPartMac.h"
 #include "CMoviePlayerPartMac.h"
 #include "CWebBrowserPartMac.h"
-#include "CTimerPart.h"
+#include "CTimerPartMac.h"
 #include "CRectanglePart.h"
 #include "CPicturePart.h"
 #include "CDocument.h"
@@ -127,6 +127,7 @@ void	CStackMac::SetTool( TTool inTool )
 {
 	CStack::SetTool(inTool);
 	
+	[mMacWindowController refreshExistenceAndOrderOfAllViews];
 	[mMacWindowController drawBoundingBoxes];
 }
 
@@ -178,7 +179,7 @@ void	CStackMac::RegisterPartCreators()
 		CPart::RegisterPartCreator( new CPartCreator<CFieldPartMac>( "field" ) );
 		CPart::RegisterPartCreator( new CPartCreator<CWebBrowserPartMac>( "browser" ) );
 		CPart::RegisterPartCreator( new CPartCreator<CMoviePlayerPartMac>( "moviePlayer" ) );
-		CPart::RegisterPartCreator( new CPartCreator<CTimerPart>( "timer" ) );
+		CPart::RegisterPartCreator( new CPartCreator<CTimerPartMac>( "timer" ) );
 		CPart::RegisterPartCreator( new CPartCreator<CRectanglePart>( "rectangle" ) );
 		CPart::RegisterPartCreator( new CPartCreator<CPicturePart>( "picture" ) );
 		

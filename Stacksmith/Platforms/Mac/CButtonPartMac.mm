@@ -41,6 +41,12 @@ static bool	PopUpChunkCallback( const char* currStr, size_t currLen, size_t curr
 
 void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 {
+	if( mView.superview == inSuperView )
+	{
+		[mView removeFromSuperview];
+		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		return;
+	}
 	NSRect		box = NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop);
 	if( mButtonStyle == EButtonStyleCheckBox )
 	{

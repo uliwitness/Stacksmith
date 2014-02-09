@@ -358,6 +358,16 @@ using namespace Carlson;
 			continue;
 		currPart->DestroyView();
 	}
+
+	CBackground	*	theBg = theCard->GetBackground();
+	numParts = theBg->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+	{
+		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theBg->GetPart(x));
+		if( !currPart )
+			continue;
+		currPart->DestroyView();
+	}
 	
 	[mSelectionOverlay removeFromSuperlayer];
 	[mSelectionOverlay release];
@@ -433,6 +443,33 @@ using namespace Carlson;
 	}
 	
 	[self drawBoundingBoxes];
+}
+
+
+-(void)	refreshExistenceAndOrderOfAllViews
+{
+	CCard	*	theCard = mStack->GetCurrentCard();
+	if( !theCard )
+		return;
+	
+	size_t	numParts = theCard->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+	{
+		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
+		if( !currPart )
+			continue;
+		currPart->CreateViewIn( mContentView );
+	}
+
+	CBackground	*	theBg = theCard->GetBackground();
+	numParts = theBg->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+	{
+		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theBg->GetPart(x));
+		if( !currPart )
+			continue;
+		currPart->CreateViewIn( mContentView );
+	}
 }
 
 
