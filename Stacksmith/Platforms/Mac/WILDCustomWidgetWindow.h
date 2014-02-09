@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Uli Kusterer. All rights reserved.
 //
 
+/*
+	A window with an "Edit" button in the upper right corner, next to the 'fullscreen' button.
+*/
+
 #import <Cocoa/Cocoa.h>
 
 @interface WILDCustomWidgetWindow : NSWindow
@@ -17,6 +21,7 @@
 
 @protocol WILDCustomWidgetWindowDelegate <NSWindowDelegate>
 
--(void)	customWidgetWindowEditButtonClicked: (NSButton*)sender;
+@required
+-(void)	customWidgetWindowEditButtonClicked: (NSButton*)sender;	// Message sent to window delegate when edit button is clicked. Look at sender.state to see whether you're editing (NSOnState) or browsing (NSOffState).
 
 @end
