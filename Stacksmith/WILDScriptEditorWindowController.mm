@@ -12,6 +12,7 @@
 #include "Forge.h"
 #include "CMacPartBase.h"
 #include "CStackMac.h"
+#include "CDocument.h"
 
 
 using namespace Carlson;
@@ -116,6 +117,14 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 -(void)	showWindow:(id)sender
 {
 	NSWindow	*	theWindow = [self window];
+	NSURL		*	theURL = [NSURL URLWithString: [NSString stringWithUTF8String: mContainer->GetDocument()->GetURL().c_str()]];
+	[theWindow setTitleWithRepresentedFilename: theURL.path];
+
+	NSButton	*	btn = [[self window] standardWindowButton: NSWindowDocumentIconButton];
+	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>(mContainer);
+	if( macPart )
+		[btn setImage: macPart->GetDisplayIcon()];
+	[theWindow setTitle: [self windowTitleForDocumentDisplayName: nil]];
 	
 	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: mGlobalStartRect];
 }
