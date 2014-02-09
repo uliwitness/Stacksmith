@@ -1,12 +1,12 @@
 //
-//  WILDUserPropertyEditorWindowController.m
+//  WILDUserPropertyEditorController.m
 //  Propaganda
 //
 //  Created by Uli Kusterer on 13.03.10.
 //  Copyright 2010 The Void Software. All rights reserved.
 //
 
-#import "WILDUserPropertyEditorWindowController.h"
+#import "WILDUserPropertyEditorController.h"
 #import "CConcreteObject.h"
 #import "NSWindow+ULIZoomEffect.h"
 #import "UKHelperMacros.h"
@@ -16,11 +16,13 @@
 using namespace Carlson;
 
 
-@implementation WILDUserPropertyEditorWindowController
+@implementation WILDUserPropertyEditorController
+
+@synthesize propertyContainer = mContainer;
 
 -(id)	initWithPropertyContainer: (CConcreteObject*)inContainer
 {
-	if(( self = [super initWithWindowNibName: NSStringFromClass( [self class] )] ))
+	if(( self = [super init] ))
 	{
 		mContainer = inContainer;
 	}
@@ -37,6 +39,13 @@ using namespace Carlson;
 }
 
 
+-(void)	setPropertyContainer: (CConcreteObject*)inPC
+{
+	mContainer = inPC;
+	[mTableView reloadData];
+}
+
+
 -(void)	awakeFromNib
 {
 	[super awakeFromNib];
@@ -44,71 +53,10 @@ using namespace Carlson;
 	[mTableView reloadData];
 }
 
-
--(void)	showWindow:(id)sender
-{
-	NSWindow	*	theWindow = [self window];
-	
-	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: mGlobalStartRect];
-	[mTableView reloadData];
-}
-
-
--(BOOL)	windowShouldClose: (id)sender
-{
-	NSWindow	*	theWindow = [self window];
-	
-	[theWindow orderOutWithZoomEffectToRect: mGlobalStartRect];
-	
-	return YES;
-}
-
-
--(void) setDocument: (NSDocument *)document
-{
-	[super setDocument: document];
-	
-	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>( mContainer );
-	if( macPart )
-	{
-		NSButton*	btn = [[self window] standardWindowButton: NSWindowDocumentIconButton];
-		[btn setImage: macPart->GetDisplayIcon()];
-	}
-}
-
-
--(NSString *)	windowTitleForDocumentDisplayName: (NSString *)displayName
-{
-	return [NSString stringWithFormat: @"%1$@’s User Properties", [NSString stringWithUTF8String: mContainer->GetDisplayName().c_str()]];
-}
-
-
--(BOOL)	window: (NSWindow *)window shouldPopUpDocumentPathMenu: (NSMenu *)menu
-{
-	// Make sure the former top item (pointing to the file) selects the main doc window:
-	NSMenuItem*		fileItem = [menu itemAtIndex: 0];
-	[fileItem setTarget: [[[[self document] windowControllers] objectAtIndex: 0] window]];
-	[fileItem setAction: @selector(makeKeyAndOrderFront:)];
-	
-	// Now add a new item above that for this window, the script:
-	NSMenuItem*		newItem = [menu insertItemWithTitle: [NSString stringWithFormat: @"%1$@’s User Properties", [NSString stringWithUTF8String: mContainer->GetDisplayName().c_str()]]
-											action: nil keyEquivalent: @"" atIndex: 0];
-	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>( mContainer );
-	if( macPart )
-		[newItem setImage: macPart->GetDisplayIcon()];
-	
-	return YES;
-}
-
-
--(void)		setGlobalStartRect: (NSRect)theBox
-{
-	mGlobalStartRect = theBox;
-}
-
-
 -(IBAction)	doAddNewProperty: (id)sender
 {
+	if( !mContainer )
+		return;
 	mContainer->AddUserPropertyNamed( "" );
 	[mTableView reloadData];
 	[mTableView editColumn: 0 row: mContainer->GetNumUserProperties() -1 withEvent: nil select: YES];
@@ -117,6 +65,8 @@ using namespace Carlson;
 
 -(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
+	if( !mContainer )
+		return nil;
 	if( [tableColumn.identifier isEqualToString: @"WILDUserPropertyNameKey"] )
 	{
 		std::string	upName = mContainer->GetUserPropertyNameAtIndex( row );
@@ -128,18 +78,22 @@ using namespace Carlson;
 		mContainer->GetUserPropertyValueForName( mContainer->GetUserPropertyNameAtIndex( row ).c_str(), upValue );
 		return [[[NSString alloc] initWithBytes: upValue.c_str() length: upValue.length() encoding: NSUTF8StringEncoding] autorelease];
 	}
-	return [[mUserProperties objectAtIndex: row] objectForKey: tableColumn.identifier];
+	return @"Hallo Daniel!";
 }
 
 
 -(NSInteger)	numberOfRowsInTableView: (NSTableView *)tableView
 {
+	if( !mContainer )
+		return 0;
 	return mContainer->GetNumUserProperties();
 }
 
 
 -(void)	tableView: (NSTableView *)tableView setObjectValue: (id)object forTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
+	if( !mContainer )
+		return;
 	if( [tableColumn.identifier isEqualToString: @"WILDUserPropertyNameKey"] )
 	{
 		if( [object length] == 0 )

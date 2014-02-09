@@ -198,7 +198,7 @@ bool	CConcreteObject::AddUserPropertyNamed( const char* userPropName )
 {
 	std::map<std::string,std::string>::iterator foundProp = mUserProperties.find(userPropName);
 	if( foundProp == mUserProperties.end() )
-		mUserProperties[userPropName] = std::string();
+		mUserProperties[userPropName] = "";
 	
 	DumpUserProperties(0);
 	
@@ -236,8 +236,16 @@ bool	CConcreteObject::SetUserPropertyNameAtIndex( const char* inNewName, size_t 
 	for( size_t x = 0; x <= inIndex && foundProp != mUserProperties.end(); x++ )
 		foundProp++;
 	
-	mUserProperties[inNewName] = foundProp->second;
-	mUserProperties.erase( foundProp );
+	if( foundProp != mUserProperties.end() )
+	{
+		mUserProperties[inNewName] = foundProp->second;
+		mUserProperties.erase( foundProp );
+	}
+	else
+		mUserProperties[inNewName] = "";
+	
+	DumpUserProperties(0);
+	
 	return true;
 }
 
@@ -250,6 +258,8 @@ bool	CConcreteObject::GetUserPropertyValueForName( const char* inPropName, std::
 	
 	outValue = foundProp->second;
 	
+	DumpUserProperties(0);
+	
 	return true;
 }
 
@@ -261,6 +271,8 @@ bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, c
 		return false;
 	
 	foundProp->second = inValue;
+	
+	DumpUserProperties(0);
 	
 	return true;
 }

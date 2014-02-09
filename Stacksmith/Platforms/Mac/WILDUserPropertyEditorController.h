@@ -1,5 +1,5 @@
 //
-//  WILDUserPropertyEditorWindowController.h
+//  WILDUserPropertyEditorController.h
 //  Propaganda
 //
 //  Created by Uli Kusterer on 13.03.10.
@@ -11,20 +11,15 @@
 #import "CPart.h"
 
 
-@class WILDCardView;
-
-
-@interface WILDUserPropertyEditorWindowController : NSWindowController <NSTableViewDataSource>
+@interface WILDUserPropertyEditorController : NSObject <NSTableViewDataSource>
 {
 	Carlson::CConcreteObject*	mContainer;			// Not retained, this is our owner!
 	IBOutlet NSTableView*		mTableView;			// List of property->content entries.
-	NSRect						mGlobalStartRect;	// For opening animation.
-	NSMutableArray*				mUserProperties;
 }
 
--(id)		initWithPropertyContainer: (Carlson::CConcreteObject*)inContainer;
+@property (assign,nonatomic) Carlson::CConcreteObject*	propertyContainer;
 
--(void)		setGlobalStartRect: (NSRect)theBox;
+-(id)		initWithPropertyContainer: (Carlson::CConcreteObject*)inContainer;
 
 -(IBAction)	doAddNewProperty: (id)sender;
 

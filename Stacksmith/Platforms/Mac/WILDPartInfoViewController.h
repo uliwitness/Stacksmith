@@ -13,6 +13,10 @@ namespace Carlson
 	class CPart;
 }
 
+
+@class WILDUserPropertyEditorController;
+
+
 @interface WILDPartInfoViewController : NSViewController
 {
 	Carlson::CPart*			part;				// The card/bg part we're editing.
@@ -31,7 +35,6 @@ namespace Carlson
 	NSSlider		*		shadowOffsetSlider;
 	NSButton		*		contentsEditorButton;
 	NSSlider		*		lineWidthSlider;
-	NSButton		*		userPropertyEditorButton;
 }
 
 @property(retain)	IBOutlet NSButton			*		scriptEditorButton;
@@ -49,7 +52,7 @@ namespace Carlson
 @property(retain)	IBOutlet NSSlider			*		shadowOffsetSlider;
 @property(retain)	IBOutlet NSButton			*		contentsEditorButton;
 @property(retain)	IBOutlet NSSlider			*		lineWidthSlider;
-@property(retain)	IBOutlet NSButton			*		userPropertyEditorButton;
+@property(retain)	IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
 
 -(id)		initWithPart: (Carlson::CPart*)inPart;
 
@@ -57,7 +60,6 @@ namespace Carlson
 -(IBAction) doEnabledSwitchToggled:(id)sender;
 -(IBAction) doVisibleSwitchToggled:(id)sender;
 -(IBAction)	doContentsEditorButton: (id)sender;
--(IBAction)	doUserPropertyEditorButton: (id)sender;
 
 -(IBAction)	doShadowBlurRadiusChanged:(id)sender;
 -(IBAction)	doShadowOffsetChanged:(id)sender;

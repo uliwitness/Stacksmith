@@ -233,8 +233,7 @@
 		55405BB3189EE008001D3C99 /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ADB13D16F4B9D20056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp */; };
 		55405BB818A39796001D3C99 /* WILDPartInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BB618A39796001D3C99 /* WILDPartInfoViewController.mm */; };
 		55405BB918A39796001D3C99 /* WILDPartInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BB718A39796001D3C99 /* WILDPartInfoViewController.xib */; };
-		55405BBD18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm */; };
-		55405BBE18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BBC18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib */; };
+		55405BBD18A4BBDB001D3C99 /* WILDUserPropertyEditorController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorController.mm */; };
 		55405BC218A4CD17001D3C99 /* WILDContentsEditorWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */; };
 		55405BC318A4CD17001D3C99 /* WILDContentsEditorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */; };
 		55405BD018A59D06001D3C99 /* WILDButtonInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55405BC518A59D06001D3C99 /* WILDButtonInfoViewController.mm */; };
@@ -784,9 +783,8 @@
 		55405BB518A39796001D3C99 /* WILDPartInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPartInfoViewController.h; path = Platforms/Mac/WILDPartInfoViewController.h; sourceTree = "<group>"; };
 		55405BB618A39796001D3C99 /* WILDPartInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDPartInfoViewController.mm; path = Platforms/Mac/WILDPartInfoViewController.mm; sourceTree = "<group>"; };
 		55405BB718A39796001D3C99 /* WILDPartInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDPartInfoViewController.xib; path = Platforms/Mac/WILDPartInfoViewController.xib; sourceTree = "<group>"; };
-		55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDUserPropertyEditorWindowController.h; path = Platforms/Mac/WILDUserPropertyEditorWindowController.h; sourceTree = "<group>"; };
-		55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDUserPropertyEditorWindowController.mm; path = Platforms/Mac/WILDUserPropertyEditorWindowController.mm; sourceTree = "<group>"; };
-		55405BBC18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDUserPropertyEditorWindowController.xib; path = Platforms/Mac/WILDUserPropertyEditorWindowController.xib; sourceTree = "<group>"; };
+		55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDUserPropertyEditorController.h; path = Platforms/Mac/WILDUserPropertyEditorController.h; sourceTree = "<group>"; };
+		55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDUserPropertyEditorController.mm; path = Platforms/Mac/WILDUserPropertyEditorController.mm; sourceTree = "<group>"; };
 		55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDContentsEditorWindowController.h; path = Platforms/Mac/WILDContentsEditorWindowController.h; sourceTree = "<group>"; };
 		55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDContentsEditorWindowController.mm; path = Platforms/Mac/WILDContentsEditorWindowController.mm; sourceTree = "<group>"; };
 		55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDContentsEditorWindowController.xib; path = Platforms/Mac/WILDContentsEditorWindowController.xib; sourceTree = "<group>"; };
@@ -1484,9 +1482,8 @@
 				55405BCD18A59D06001D3C99 /* WILDTimerInfoViewController.h */,
 				55405BCE18A59D06001D3C99 /* WILDTimerInfoViewController.mm */,
 				55405BCF18A59D06001D3C99 /* WILDTimerInfoViewController.xib */,
-				55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.h */,
-				55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm */,
-				55405BBC18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib */,
+				55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorController.h */,
+				55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorController.mm */,
 				55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */,
 				55405BC018A4CD17001D3C99 /* WILDContentsEditorWindowController.mm */,
 				55405BC118A4CD17001D3C99 /* WILDContentsEditorWindowController.xib */,
@@ -2087,7 +2084,6 @@
 				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
 				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
 				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
-				55405BBE18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.xib in Resources */,
 				555E53B5189472F9001487C1 /* WILDMessageWatcherWindowController.xib in Resources */,
 				55F34D38136A50D600E8588D /* ICON_902.pdf in Resources */,
 				55F34D39136A50D600E8588D /* ICON_1009.pdf in Resources */,
@@ -2441,7 +2437,7 @@
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
 				55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */,
 				55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */,
-				55405BBD18A4BBDB001D3C99 /* WILDUserPropertyEditorWindowController.mm in Sources */,
+				55405BBD18A4BBDB001D3C99 /* WILDUserPropertyEditorController.mm in Sources */,
 				55AC96211870FFC200488B51 /* CPartContents.cpp in Sources */,
 				552386B5188335A000D7FAB3 /* WILDButtonCell.m in Sources */,
 				552386CE1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm in Sources */,

@@ -9,7 +9,7 @@
 #import "WILDPartInfoViewController.h"
 #import "WILDScriptEditorWindowController.h"
 #import "WILDContentsEditorWindowController.h"
-#import "WILDUserPropertyEditorWindowController.h"
+#import "WILDUserPropertyEditorController.h"
 #import "CVisiblePart.h"
 #import "CLayer.h"
 #import "UKHelperMacros.h"
@@ -35,7 +35,7 @@ using namespace Carlson;
 @synthesize shadowOffsetSlider;
 @synthesize contentsEditorButton;
 @synthesize lineWidthSlider;
-@synthesize userPropertyEditorButton;
+@synthesize userPropertyEditor;
 
 
 -(id)	initWithPart: (CPart*)inPart
@@ -64,16 +64,21 @@ using namespace Carlson;
 	DESTROY(fillColorWell);
 	DESTROY(lineColorWell);
 	DESTROY(shadowColorWell);
+	DESTROY(shadowBlurRadiusSlider);
+	DESTROY(shadowOffsetSlider);
 	DESTROY(contentsEditorButton);
+	DESTROY(lineWidthSlider);
+	DESTROY(userPropertyEditor);
 	
 	[super dealloc];
 }
 
 
-
 -(void)	loadView
 {
 	[super loadView];
+	
+	[self.userPropertyEditor setPropertyContainer: part];
 	
 	[nameField setStringValue: [NSString stringWithUTF8String: part->GetName().c_str()]];
 	
@@ -120,18 +125,6 @@ using namespace Carlson;
 -(IBAction)	doContentsEditorButton: (id)sender
 {
 	part->OpenContentsEditor();
-}
-
-
--(IBAction)	doUserPropertyEditorButton: (id)sender
-{
-	NSRect		box = [userPropertyEditorButton convertRect: [userPropertyEditorButton bounds] toView: nil];
-	NSRect		wFrame = [[[self view] window] frame];
-	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
-	WILDUserPropertyEditorWindowController*	se = [[[WILDUserPropertyEditorWindowController alloc] initWithPropertyContainer: part] autorelease];
-	[se setGlobalStartRect: box];
-	[[[[[[self view] window] parentWindow] windowController] document] addWindowController: se];
-	[se showWindow: self];
 }
 
 
