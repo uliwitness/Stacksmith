@@ -13,6 +13,17 @@
 #include "ForgeTypes.h"
 #include "CParseTree.h"
 #include <sstream>
+#include "CMap.h"
+
+
+#define FIXING_TESTS		0
+
+
+#if FIXING_TESTS
+#define	TEST_FAIL_PREFIX		"warning: "
+#else
+#define	TEST_FAIL_PREFIX		"error: "
+#endif
 
 
 enum
@@ -739,7 +750,7 @@ void	WILDTest( const char* expr, const char* found, const char* expected )
 	}
 	else
 	{
-		std::cout << "error: " << expr << " -> \"" << found << "\" == \"" << expected << "\"" << std::endl;
+		std::cout << TEST_FAIL_PREFIX << expr << " -> \"" << found << "\" == \"" << expected << "\"" << std::endl;
 		sFailed++;
 	}
 }
@@ -755,7 +766,7 @@ void	WILDTest( const char* expr, T found, T expected )
 	}
 	else
 	{
-		std::cout << "error: " << expr << " -> " << found << " == " << expected << std::endl;
+		std::cout << TEST_FAIL_PREFIX << expr << " -> " << found << " == " << expected << std::endl;
 		sFailed++;
 	}
 }
@@ -881,6 +892,42 @@ int main(int argc, const char * argv[])
 		free( theText );
 	}
 	
+	{
+		CMap<std::string>	testMap;
+		testMap["boom"] = "This is boom.";
+		#if FIXING_TESTS
+		testMap.Dump();
+		#endif
+		WILDTest( "Test one CMap insertion", testMap["Boom"].c_str(), "This is boom." );
+		testMap["FOO"] = "This is foo uppercase.";
+		#if FIXING_TESTS
+		testMap.Dump();
+		#endif
+		WILDTest( "Test uppercase CMap insertion", testMap["foo"].c_str(), "This is foo uppercase." );
+		testMap["foo"] = "This is foo lowercase.";
+		#if FIXING_TESTS
+		testMap.Dump();
+		#endif
+		WILDTest( "Test lowercase CMap insertion", testMap["foo"].c_str(), "This is foo lowercase." );
+		testMap["baz"] = "This is baz.";
+		#if FIXING_TESTS
+		testMap.Dump();
+		#endif
+		WILDTest( "Test third CMap insertion", testMap["BAZ"].c_str(), "This is baz." );
+		#if FIXING_TESTS
+		testMap.Dump();
+		#endif
+		WILDTest( "Verify entry 'boom' hasn't changed.", testMap["Boom"].c_str(), "This is boom." );
+		#if FIXING_TESTS
+		testMap.Dump();
+		#endif
+		WILDTest( "Verify entry 'foo' hasn't changed.", testMap["foo"].c_str(), "This is foo lowercase." );
+	}
+	
+	#if FIXING_TESTS
+	return 0;
+	#else
     return (int)sFailed;
+	#endif
 }
 

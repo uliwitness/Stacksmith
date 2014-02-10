@@ -12,7 +12,7 @@
 #include "CRefCountedObject.h"
 #include "CScriptableObjectValue.h"
 #include <string>
-#include <map>
+#include "CMap.h"
 #include "tinyxml2.h"
 extern "C" {
 #include "LEOInterpreter.h"
@@ -63,7 +63,7 @@ protected:
 // ivars:
 	std::string							mName;			// Name of this object for referring to it from scripts.
 	std::string							mScript;		// Uncompiled text of this object's script.
-	std::map<std::string,std::string>	mUserProperties;
+	CMap<std::string>					mUserProperties;
 	
 	struct LEOScript *					mScriptObject;		// Compiled script, lazily created/recreated on changes.
 	LEOObjectID							mIDForScripts;		// The ID Leonie uses to refer to this object.

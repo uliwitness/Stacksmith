@@ -197,7 +197,7 @@ bool	CConcreteObject::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext*
 
 bool	CConcreteObject::AddUserPropertyNamed( const char* userPropName )
 {
-	std::map<std::string,std::string>::iterator foundProp = mUserProperties.find(userPropName);
+	CMap<std::string>::iterator foundProp = mUserProperties.find(userPropName);
 	if( foundProp == mUserProperties.end() )
 		mUserProperties[userPropName] = "";
 	
@@ -224,7 +224,7 @@ size_t	CConcreteObject::GetNumUserProperties()
 
 std::string	CConcreteObject::GetUserPropertyNameAtIndex( size_t inIndex )
 {
-	std::map<std::string,std::string>::iterator foundProp = mUserProperties.begin();
+	CMap<std::string>::iterator foundProp = mUserProperties.begin();
 	for( size_t x = 0; x <= inIndex && foundProp != mUserProperties.end(); x++ )
 		foundProp++;
 	return foundProp->first;
@@ -233,7 +233,7 @@ std::string	CConcreteObject::GetUserPropertyNameAtIndex( size_t inIndex )
 
 bool	CConcreteObject::SetUserPropertyNameAtIndex( const char* inNewName, size_t inIndex )
 {
-	std::map<std::string,std::string>::iterator foundProp = mUserProperties.begin();
+	CMap<std::string>::iterator foundProp = mUserProperties.begin();
 	for( size_t x = 0; x <= inIndex && foundProp != mUserProperties.end(); x++ )
 		foundProp++;
 	
@@ -253,7 +253,7 @@ bool	CConcreteObject::SetUserPropertyNameAtIndex( const char* inNewName, size_t 
 
 bool	CConcreteObject::GetUserPropertyValueForName( const char* inPropName, std::string& outValue )
 {
-	std::map<std::string,std::string>::iterator foundProp = mUserProperties.find(inPropName);
+	CMap<std::string>::iterator foundProp = mUserProperties.find(inPropName);
 	if( foundProp == mUserProperties.end() )
 		return false;
 	
@@ -267,7 +267,7 @@ bool	CConcreteObject::GetUserPropertyValueForName( const char* inPropName, std::
 
 bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, const char* inPropName )
 {
-	std::map<std::string,std::string>::iterator foundProp = mUserProperties.find(inPropName);
+	CMap<std::string>::iterator foundProp = mUserProperties.find(inPropName);
 	if( foundProp == mUserProperties.end() )
 		return false;
 	

@@ -307,6 +307,8 @@
 		559BA99918A6EBE400760273 /* WILDCustomWidgetWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99818A6EBE400760273 /* WILDCustomWidgetWindow.m */; };
 		559BA99D18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */; };
 		559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */; };
+		559BA9A118A84BD800760273 /* CMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99F18A84BD700760273 /* CMap.cpp */; };
+		559BA9A218A8588800760273 /* CMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99F18A84BD700760273 /* CMap.cpp */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
@@ -894,6 +896,8 @@
 		559BA99A18A7AC3000760273 /* WILDWebBrowserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDWebBrowserInfoViewController.h; path = Platforms/Mac/WILDWebBrowserInfoViewController.h; sourceTree = "<group>"; };
 		559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDWebBrowserInfoViewController.mm; path = Platforms/Mac/WILDWebBrowserInfoViewController.mm; sourceTree = "<group>"; };
 		559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDWebBrowserInfoViewController.xib; path = Platforms/Mac/WILDWebBrowserInfoViewController.xib; sourceTree = "<group>"; };
+		559BA99F18A84BD700760273 /* CMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMap.cpp; sourceTree = "<group>"; };
+		559BA9A018A84BD800760273 /* CMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMap.h; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
 		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
@@ -1648,6 +1652,8 @@
 				556DB7A318709A15002F7CB2 /* tinyxml2.cpp */,
 				55AC961A1870D50400488B51 /* CTinyXMLUtils.h */,
 				55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */,
+				559BA9A018A84BD800760273 /* CMap.h */,
+				559BA99F18A84BD700760273 /* CMap.cpp */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -2244,6 +2250,7 @@
 				55405BAB189EDFF0001D3C99 /* LEOChunks.c in Sources */,
 				55405B9F189EDF5B001D3C99 /* CGlobalPropertyNode.cpp in Sources */,
 				55405BAF189EDFF0001D3C99 /* LEOObjCCallInstructions.c in Sources */,
+				559BA9A218A8588800760273 /* CMap.cpp in Sources */,
 				55405B8A189EDF5B001D3C99 /* CCommandNode.cpp in Sources */,
 				55405BA3189EDF64001D3C99 /* CFunctionDefinitionNode.cpp in Sources */,
 				55405B8F189EDF5B001D3C99 /* CReturnCommandNode.cpp in Sources */,
@@ -2418,6 +2425,7 @@
 				55BFEE22137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m in Sources */,
 				55CD610818786BAC002450E2 /* CRectanglePart.cpp in Sources */,
 				552386C51883E2DF00D7FAB3 /* WILDViewFactory.m in Sources */,
+				559BA9A118A84BD800760273 /* CMap.cpp in Sources */,
 				552386CB1883E86200D7FAB3 /* CFieldPartMac.mm in Sources */,
 				554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */,
 				55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */,
