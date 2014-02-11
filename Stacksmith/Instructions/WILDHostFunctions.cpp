@@ -252,12 +252,12 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 			theCard = ownerObject;
 	}
 	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -1, idStrBuf, sizeof(idStrBuf), inContext );
 	bool			lookUpByID = idStr[0] != 0;
 	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -2, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -2, NULL, inContext );
 		if( lookUpByID )
 			thePart = theCard->GetPartWithID( theNumber );
 		else
@@ -268,7 +268,7 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 	}
 	else if( !lookUpByID )
 	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		LEOGetValueAsString( inContext->stackEndPtr -2, partName, sizeof(partName), inContext );
 		
 		thePart = theCard->GetPartWithNameOfType( partName, CPart::GetPartCreatorForType(inType) );
 	}
@@ -308,9 +308,9 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
 	bool			lookUpByID = idStr[0] != 0;
 	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -2, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -2, NULL, inContext );
 		if( lookUpByID )
 			thePart = theBackground->GetPartWithID( theNumber );
 		else
@@ -321,7 +321,7 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 	}
 	else if( !lookUpByID )
 	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, partName, sizeof(partName), inContext );
+		LEOGetValueAsString( inContext->stackEndPtr -2, partName, sizeof(partName), inContext );
 		
 		thePart = theBackground->GetPartWithNameOfType( partName, CPart::GetPartCreatorForType(inType) );
 	}
