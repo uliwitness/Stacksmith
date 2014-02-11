@@ -242,7 +242,7 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 	CStack	*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	char		partName[1024] = { 0 };
 	CCard	*	theCard = frontStack->GetCurrentCard();
-	LEOValuePtr	theOwner = inContext->stackEndPtr -3;
+	LEOValuePtr	theOwner = inContext->stackEndPtr -1;
 	theOwner = LEOFollowReferencesAndReturnValueOfType( theOwner, &kLeoValueTypeScriptableObject, inContext );
 	if( theOwner && theOwner->base.isa == &kLeoValueTypeScriptableObject )
 	{
@@ -252,7 +252,7 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 			theCard = ownerObject;
 	}
 	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -1, idStrBuf, sizeof(idStrBuf), inContext );
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -3, idStrBuf, sizeof(idStrBuf), inContext );
 	bool			lookUpByID = idStr[0] != 0;
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -2, inContext ) )
@@ -294,10 +294,13 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 	CStack	*		frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	char			partName[1024] = { 0 };
 	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
-	LEOValuePtr		theOwner = inContext->stackEndPtr -3;
+	LEOValuePtr		theOwner = inContext->stackEndPtr -1;
 	theOwner = LEOFollowReferencesAndReturnValueOfType( theOwner, &kLeoValueTypeScriptableObject, inContext );
 	if( theOwner && theOwner->base.isa == &kLeoValueTypeScriptableObject )
 	{
+		CCard* ownerCard = dynamic_cast<CCard*>((CScriptableObject*)theOwner->object.object);
+		if( ownerCard )
+			theBackground = ownerCard->GetBackground();
 		CBackground	*	ownerObject = NULL;
 		ownerObject = dynamic_cast<CBackground*>((CScriptableObject*)theOwner->object.object);
 		if( ownerObject )
@@ -305,7 +308,7 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 	}
 	
 	char			idStrBuf[256] = {};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -3, idStrBuf, sizeof(idStrBuf), inContext );
 	bool			lookUpByID = idStr[0] != 0;
 	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -2, inContext ) )
