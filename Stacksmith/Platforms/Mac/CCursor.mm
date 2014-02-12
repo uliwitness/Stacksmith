@@ -14,8 +14,9 @@
 void	CCursor::GetGlobalPosition( LEONumber* outX, LEONumber *outY )
 {
 	NSPoint		pos = [NSEvent mouseLocation];
+	CGFloat		screenHeight = [[NSScreen screens][0] frame].size.height;
 	*outX = pos.x;
-	*outY = pos.y;
+	*outY = screenHeight -pos.y;
 }
 
 
