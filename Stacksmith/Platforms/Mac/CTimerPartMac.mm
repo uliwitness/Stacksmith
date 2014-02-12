@@ -30,6 +30,19 @@ void	CTimerPartMac::CreateViewIn( NSView* inSuperView )
 }
 
 
+NSImage*	CTimerPartMac::GetDisplayIcon()
+{
+	static NSImage*	sTimerIcon = nil;
+	if( !sTimerIcon )
+	{
+		sTimerIcon = [[NSImage imageNamed: @"TimerIcon"] copy];
+		[sTimerIcon setSize: NSMakeSize(16,16)];
+	}
+	return sTimerIcon;
+}
+
+
+
 void	CTimerPartMac::DestroyView()
 {
 	if( mView )

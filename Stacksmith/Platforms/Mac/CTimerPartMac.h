@@ -30,7 +30,7 @@ public:
 	virtual void		CreateViewIn( NSView* inSuperView );
 	virtual void		DestroyView();
 	virtual NSView*		GetView()					{ return mView; };
-	virtual NSImage*	GetDisplayIcon()			{ return [NSImage imageNamed: @"TimerIcon"]; };
+	virtual NSImage*	GetDisplayIcon();
 
 protected:
 	NSImageView*	mView;	// Only created & shown while editing.
