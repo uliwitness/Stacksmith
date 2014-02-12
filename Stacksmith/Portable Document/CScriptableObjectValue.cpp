@@ -617,6 +617,15 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
 	}
+	else if( inHandler == pointerDragHandlerID )
+	{
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+		CPart*		so = dynamic_cast<CPart*>( userData->GetTarget() );
+		so->Grab();
+		
+		handled = true;
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
 	else if( inHandler == openCardHandlerID
 			|| inHandler == closeCardHandlerID
 			|| inHandler == openStackHandlerID
@@ -641,7 +650,6 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == pointerDownHandlerID
 			|| inHandler == pointerDoubleDownHandlerID
 			|| inHandler == pointerUpHandlerID
-			|| inHandler == pointerDragHandlerID
 			|| inHandler == peekingDoubleDownHandlerID
 			|| inHandler == peekingUpHandlerID
 			|| inHandler == peekingDoubleUpHandlerID

@@ -89,6 +89,8 @@ public:
 	virtual void				SetHighlight( bool inHighlighted )	{};
 	virtual void				PrepareMouseUp()				{};	// Sent when a mouse click was inside, right before we send mouseUp.
 	
+	virtual void				Grab();
+	
 	virtual void				Dump( size_t inIndent = 0 );
 	
 protected:

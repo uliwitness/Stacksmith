@@ -20,6 +20,7 @@ void	CTimerPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		[mView removeFromSuperview];
 		[mView release];
+		mView = nil;
 	}
 	if( GetStack()->GetTool() == EPointerTool )
 	{

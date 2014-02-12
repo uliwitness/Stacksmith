@@ -10,6 +10,8 @@
 #include "CTinyXMLUtils.h"
 #include "CLayer.h"
 #include "CStack.h"
+#include "CCursor.h"
+#include <iostream>
 
 
 using namespace Carlson;
@@ -286,5 +288,22 @@ void		CPart::SetIndex( LEOInteger inIndex, CPartCreatorBase* inType )
 	mOwner->SetIndexOfPart( this, inIndex, inType );
 }
 
+
+void	CPart::Grab()
+{
+	LEONumber	oldL = mLeft, oldT = mTop, oldB = mBottom, oldR = mRight;
+	LEONumber	oldX = 0, oldY = 0;
+	CCursor::GetGlobalPosition( &oldX, &oldY );
+	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,this]()
+	{
+		LEONumber	x = 0, y = 0;
+		CCursor::GetGlobalPosition( &x, &y );
+		
+		std::cout << "X: " << x << " Y: " << y << std::endl;
+		
+		SetRect( oldL +(x -oldX), oldT +(y -oldY), oldB +(x -oldX), oldR +(y -oldY) );
+	});
+	std::cout << "Done tracking." << std::endl;
+}
 
 
