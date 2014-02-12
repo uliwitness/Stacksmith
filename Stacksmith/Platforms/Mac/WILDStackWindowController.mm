@@ -200,6 +200,9 @@ using namespace Carlson;
 			[pool release];
 			pool = [NSAutoreleasePool new];
 		}
+		
+		if( ([NSEvent pressedMouseButtons] & 1) == 0 )
+			keepGoing = NO;
 	}
 	[pool release];
 
