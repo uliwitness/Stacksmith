@@ -301,7 +301,7 @@ void	CPart::Grab()
 		
 		std::cout << "X: " << x << " Y: " << y << std::endl;
 		
-		SetRect( oldL +(x -oldX), oldT +(y -oldY), oldB +(x -oldX), oldR +(y -oldY) );
+		SetRect( oldL +(x -oldX), oldT +(y -oldY), oldR +(x -oldX), oldB +(y -oldY) );
 	});
 	std::cout << "Done tracking." << std::endl;
 }
