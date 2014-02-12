@@ -65,6 +65,8 @@ public:
 	size_t			GetIndexOfCard( CCard* inBackground );
 	void			SetIndexOfCardTo( CCard* inCd, size_t newIndex );
 	CCard*			GetCardWithBackground( CBackground* inBg, CCard *startAtCard = NULL, bool searchForward = true );
+	size_t			GetNumCardsWithBackground( CBackground* inBg );
+	CCard*			GetCardAtIndexWithBackground( size_t cardIdx, CBackground* inBg );
 	
 	size_t			GetNumBackgrounds()					{ return mBackgrounds.size(); };
 	CBackground*	GetBackground( size_t inIndex )		{ if( inIndex >= mBackgrounds.size() ) return NULL; return mBackgrounds[inIndex]; };

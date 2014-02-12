@@ -291,6 +291,38 @@ CCard*	CStack::GetCardByID( ObjectID inID )
 }
 
 
+size_t	CStack::GetNumCardsWithBackground( CBackground* inBg )
+{
+	size_t	count = 0;
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+	{
+		if( (*itty)->GetBackground() == inBg )
+		{
+			count++;
+		}
+	}
+	
+	return count;
+}
+
+
+CCard*	CStack::GetCardAtIndexWithBackground( size_t cardIdx, CBackground* inBg )
+{
+	size_t	currIdx = 0;
+	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
+	{
+		if( (*itty)->GetBackground() == inBg )
+		{
+			if( cardIdx == currIdx )
+				return *itty;
+			currIdx++;
+		}
+	}
+	
+	return NULL;
+}
+
+
 CCard*	CStack::GetCardWithBackground( CBackground* inBg, CCard *startAtCard, bool searchForward )
 {
 	bool		hadStartCard = (startAtCard == NULL);

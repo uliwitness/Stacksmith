@@ -110,8 +110,8 @@ void	WILDStackInstruction( LEOContext* inContext )
 	
 	if( theStack )
 	{
-		LEOValuePtr	valueToReplace = inContext->stackEndPtr -3;
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
+		LEOValuePtr	valueToReplace = inContext->stackEndPtr -2;
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( valueToReplace, kLEOInvalidateReferences, inContext );
 		CScriptableObject::InitScriptableObjectValue( &valueToReplace->object, theStack, kLEOInvalidateReferences, inContext );
 	}
@@ -128,21 +128,28 @@ void	WILDStackInstruction( LEOContext* inContext )
 
 void	WILDBackgroundInstruction( LEOContext* inContext )
 {
+//	LEODebugPrintContext(inContext);
+	
 	char			idStrBuf[256] = {0};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -3, idStrBuf, sizeof(idStrBuf), inContext );
 	bool			lookUpByID = idStr[0] != 0;
 	CBackground	*	theBackground = NULL;
 	char			backgroundName[1024] = { 0 };
-	LEOValuePtr		theOwner = inContext->stackEndPtr -3;
+	LEOValuePtr		theOwner = inContext->stackEndPtr -1;
 	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
 	CStack*			ownerObject = userData->GetStack();
 	theOwner = LEOFollowReferencesAndReturnValueOfType( theOwner, &kLeoValueTypeScriptableObject, inContext );
 	if( theOwner && theOwner->base.isa == &kLeoValueTypeScriptableObject )
 		ownerObject = dynamic_cast<CStack*>((CScriptableObject*)theOwner->object.object);
-	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	if( !ownerObject )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
+		LEOContextStopWithError( inContext, "Only stacks contain backgrounds." );
+		return;
+	}
+	
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -2, inContext ) )
+	{
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -2, NULL, inContext );
 		if( lookUpByID )
 		{
 			theBackground = ownerObject->GetBackgroundByID( theNumber );
@@ -158,7 +165,7 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 	
 	if( !theBackground && !lookUpByID )
 	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, backgroundName, sizeof(backgroundName), inContext );
+		LEOGetValueAsString( inContext->stackEndPtr -2, backgroundName, sizeof(backgroundName), inContext );
 		
 		theBackground = ownerObject->GetBackgroundByName( backgroundName );
 	}
@@ -181,25 +188,31 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 
 void	WILDCardInstruction( LEOContext* inContext )
 {
+//	LEODebugPrintContext(inContext);
+
 	char			idStrBuf[256] = {0};
-	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -3, idStrBuf, sizeof(idStrBuf), inContext );
 	bool			lookUpByID = idStr[0] != 0;
 	CCard		*	theCard = NULL;
 	char			cardName[1024] = { 0 };
-	LEOValuePtr		theOwner = inContext->stackEndPtr -3;
+	LEOValuePtr		theOwner = inContext->stackEndPtr -1;
 	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
 	CStack*			frontStack = userData->GetStack();
+	CBackground*	owningBg = NULL;
 	theOwner = LEOFollowReferencesAndReturnValueOfType( theOwner, &kLeoValueTypeScriptableObject, inContext );
 	if( theOwner && theOwner->base.isa == &kLeoValueTypeScriptableObject )
 	{
+		owningBg = dynamic_cast<CBackground*>((CScriptableObject*)theOwner->object.object);
+		if( owningBg )
+			frontStack = owningBg->GetStack();
 		CStack*		ownerObject = dynamic_cast<CStack*>((CScriptableObject*)theOwner->object.object);
 		if( ownerObject )
 			frontStack = ownerObject;
 	}
 	
-	if( LEOCanGetAsNumber( inContext->stackEndPtr -1, inContext ) )
+	if( LEOCanGetAsNumber( inContext->stackEndPtr -2, inContext ) )
 	{
-		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -1, NULL, inContext );
+		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -2, NULL, inContext );
 		if( lookUpByID )
 		{
 			theCard = frontStack->GetCardByID( theNumber );
@@ -208,14 +221,19 @@ void	WILDCardInstruction( LEOContext* inContext )
 			
 		}
 		else if( theNumber > 0 && theNumber <= (LEOInteger)frontStack->GetNumBackgrounds() )
-			theCard = frontStack->GetCard( theNumber -1 );
+		{
+			if( owningBg )
+				theCard = frontStack->GetCardAtIndexWithBackground( theNumber -1, owningBg );
+			else
+				theCard = frontStack->GetCard( theNumber -1 );
+		}
 		else
 			snprintf( cardName, sizeof(cardName) -1, "%lld", theNumber );
 	}
 	
 	if( !theCard && !lookUpByID )
 	{
-		LEOGetValueAsString( inContext->stackEndPtr -1, cardName, sizeof(cardName), inContext );
+		LEOGetValueAsString( inContext->stackEndPtr -2, cardName, sizeof(cardName), inContext );
 		
 		theCard = frontStack->GetCardByName( cardName );
 	}
@@ -1112,10 +1130,10 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ECardIdentifier, WILD_CARD_INSTRUCTION, 0, 0, '\0',
+		ECardIdentifier, WILD_CARD_INSTRUCTION, 0, 0, 'X',
 		{
-			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'A', 'A' },
-			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'A', 'X' },
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
 			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
