@@ -53,3 +53,11 @@ void	CTimerPartMac::DestroyView()
 		mView = nil;
 	}
 }
+
+
+void	CTimerPartMac::SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )
+{
+	CTimerPart::SetRect( l, t, r, b );
+	[mView setFrame: NSMakeRect(l, t, r-l, b-t)];
+}
+

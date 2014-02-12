@@ -31,6 +31,9 @@ public:
 	virtual void		DestroyView();
 	virtual NSView*		GetView()					{ return mView; };
 	virtual NSImage*	GetDisplayIcon();
+	
+	virtual void		SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b );
+
 
 protected:
 	NSImageView*	mView;	// Only created & shown while editing.
