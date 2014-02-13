@@ -9,6 +9,7 @@
 #include "CWebBrowserPartMac.h"
 #import <WebKit/WebKit.h>
 #include "CAlert.h"
+#include "CStack.h"
 
 
 using namespace Carlson;
@@ -77,6 +78,7 @@ void	CWebBrowserPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger ri
 {
 	CWebBrowserPart::SetRect( left, top, right, bottom );
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	GetStack()->RectChangedOfPart( this );
 }
 
 

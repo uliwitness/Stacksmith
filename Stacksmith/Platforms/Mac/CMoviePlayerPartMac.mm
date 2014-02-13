@@ -207,6 +207,7 @@ void	CMoviePlayerPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger r
 {
 	CMoviePlayerPart::SetRect( left, top, right, bottom );
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	GetStack()->RectChangedOfPart( this );
 }
 
 

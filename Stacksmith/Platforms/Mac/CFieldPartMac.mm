@@ -10,6 +10,7 @@
 #include "CPartContents.h"
 #import "WILDViewFactory.h"
 #import "CAlert.h"
+#include "CStack.h"
 
 
 using namespace Carlson;
@@ -457,6 +458,7 @@ void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, 
 {
 	CFieldPart::SetRect( left, top, right, bottom );
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	GetStack()->RectChangedOfPart( this );
 }
 
 

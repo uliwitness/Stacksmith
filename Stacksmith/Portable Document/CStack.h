@@ -103,6 +103,8 @@ public:
 	virtual bool	ShowScriptEditorForObject( CConcreteObject* inObject ) { return false; };
 	virtual bool	ShowPropertyEditorForObject( CConcreteObject* inObject ) { return false; };
 	
+	virtual void	RectChangedOfPart( CPart* inChangedPart )	{};
+	
 	virtual void	Dump( size_t inIndent = 0 );
 	
 	static const char*	GetToolName( TTool inTool );

@@ -48,6 +48,8 @@ public:
 	virtual bool				ShowScriptEditorForObject( CConcreteObject* inObject );
 	virtual bool				ShowPropertyEditorForObject( CConcreteObject* inObject );
 	
+	virtual void				RectChangedOfPart( CPart* inChangedPart );
+
 	static void					RegisterPartCreators();
 
 protected:

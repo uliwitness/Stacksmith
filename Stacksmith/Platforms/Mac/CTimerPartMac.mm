@@ -59,5 +59,6 @@ void	CTimerPartMac::SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOIntege
 {
 	CTimerPart::SetRect( l, t, r, b );
 	[mView setFrame: NSMakeRect(l, t, r-l, b-t)];
+	GetStack()->RectChangedOfPart( this );
 }
 

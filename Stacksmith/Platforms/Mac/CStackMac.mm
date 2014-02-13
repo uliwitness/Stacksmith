@@ -170,6 +170,12 @@ bool	CStackMac::ShowPropertyEditorForObject( CConcreteObject* inObject )
 }
 
 
+void	CStackMac::RectChangedOfPart( CPart* inChangedPart )
+{
+	[mMacWindowController drawBoundingBoxes];
+}
+
+
 void	CStackMac::RegisterPartCreators()
 {
 	static bool	sAlreadyDidThis = false;
