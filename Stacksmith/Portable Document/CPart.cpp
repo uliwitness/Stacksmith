@@ -299,11 +299,9 @@ void	CPart::Grab()
 		LEONumber	x = 0, y = 0;
 		CCursor::GetGlobalPosition( &x, &y );
 		
-		std::cout << "X: " << x << " Y: " << y << std::endl;
-		
 		SetRect( oldL +(x -oldX), oldT +(y -oldY), oldR +(x -oldX), oldB +(y -oldY) );
 	});
-	std::cout << "Done tracking." << std::endl;
+//	std::cout << "Done tracking." << std::endl;
 }
 
 

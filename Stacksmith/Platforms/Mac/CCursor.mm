@@ -31,16 +31,16 @@ void	CCursor::Grab( std::function<void()> trackingHandler )
 		{
 			if( currEvt.type == NSLeftMouseDragged )
 			{
-				std::cout << "tracking." << std::endl;
+				//std::cout << "tracking." << std::endl;
 				trackingHandler();
 			}
 			else if( currEvt.type == NSLeftMouseUp )
 			{
-				std::cout << "Stop tracking." << std::endl;
+				//std::cout << "Stop tracking." << std::endl;
 				break;
 			}
-			else
-				std::cout << "Huh?." << std::endl;
+//			else
+//				std::cout << "Huh?." << std::endl;
 		}
 		else
 			std::cout << "NIL event?" << std::endl;
