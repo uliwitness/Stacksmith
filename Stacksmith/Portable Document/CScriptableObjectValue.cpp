@@ -621,7 +621,8 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	{
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
 		CPart*		so = dynamic_cast<CPart*>( userData->GetTarget() );
-		so->Grab();
+		if( so )
+			so->Grab();
 		
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
