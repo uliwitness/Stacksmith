@@ -201,7 +201,7 @@ bool	CConcreteObject::AddUserPropertyNamed( const char* userPropName )
 	if( foundProp == mUserProperties.end() )
 		mUserProperties[userPropName] = "";
 	
-	DumpUserProperties(0);
+//	DumpUserProperties(0);
 	
 	return true;
 }
@@ -245,7 +245,7 @@ bool	CConcreteObject::SetUserPropertyNameAtIndex( const char* inNewName, size_t 
 	else
 		mUserProperties[inNewName] = "";
 	
-	DumpUserProperties(0);
+//	DumpUserProperties(0);
 	
 	return true;
 }
@@ -259,7 +259,7 @@ bool	CConcreteObject::GetUserPropertyValueForName( const char* inPropName, std::
 	
 	outValue = foundProp->second;
 	
-	DumpUserProperties(0);
+//	DumpUserProperties(0);
 	
 	return true;
 }
@@ -273,7 +273,7 @@ bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, c
 	
 	foundProp->second = inValue;
 	
-	DumpUserProperties(0);
+//	DumpUserProperties(0);
 	
 	return true;
 }
