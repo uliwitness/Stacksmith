@@ -50,10 +50,7 @@ using namespace Carlson;
 -(BOOL)	textView: (NSTextView *)textView clickedOnLink: (id)link atIndex: (NSUInteger)charIndex
 {
 	NSURL*	theLink = [textView.textStorage attribute: NSLinkAttributeName atIndex: charIndex effectiveRange:NULL];
-	self.owningField->SendMessage( NULL, []( const char *errMsg, size_t, size_t, CScriptableObject *)
-	{
-		CAlert::RunMessageAlert(errMsg);
-	}, "linkClicked %s", [[theLink absoluteString] UTF8String] );
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "linkClicked %s", [[theLink absoluteString] UTF8String] );
 	
 	return YES;
 }
@@ -85,7 +82,7 @@ using namespace Carlson;
 	}
 	
 	CAutoreleasePool	cppPool;
-	self.owningField->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "selectionChange" );
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
 }
 
 -(BOOL)	tableView: (NSTableView *)tableView shouldEditTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
@@ -97,7 +94,7 @@ using namespace Carlson;
 -(void)	tableViewRowClicked: (id)sender
 {
 	CAutoreleasePool	cppPool;
-	self.owningField->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUp" );
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp" );
 //	NSLog(@"tableViewRowClicked");
 }
 
@@ -105,7 +102,7 @@ using namespace Carlson;
 -(void)	tableViewRowDoubleClicked: (id)sender
 {
 	CAutoreleasePool	cppPool;
-	self.owningField->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDoubleClick" );
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDoubleClick" );
 //	NSLog(@"tableViewRowDoubleClicked");
 }
 

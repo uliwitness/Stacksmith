@@ -65,7 +65,7 @@ void	LEOPushCursorInstruction( LEOContext* inContext )
 void	LEOSetVersionInstruction( LEOContext* inContext )
 {
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	LEOContextStopWithError( inContext, "You can't change the version number." );
+	LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "You can't change the version number." );
 	
 	inContext->currentInstruction++;
 }

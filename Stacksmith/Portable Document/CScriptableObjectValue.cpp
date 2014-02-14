@@ -119,7 +119,7 @@ LEONumber	GetScriptableObjectValueAsNumber( LEOValuePtr self, LEOUnit *outUnit, 
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return -1;
 	}
 	
@@ -159,7 +159,7 @@ LEOInteger	GetScriptableObjectValueAsInteger( LEOValuePtr self, LEOUnit *outUnit
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return -1;
 	}
 
@@ -199,7 +199,7 @@ const char*	GetScriptableObjectValueAsString( LEOValuePtr self, char* outBuf, si
 	txt->Autorelease();
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt->GetString() ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return NULL;
 	}
 	const char*	str = txt->GetString().c_str();
@@ -218,7 +218,7 @@ bool	GetScriptableObjectValueAsBoolean( LEOValuePtr self, LEOContext* inContext 
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return false;
 	}
 	const char*	str = txt.c_str();
@@ -239,7 +239,7 @@ void	GetScriptableObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inT
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return;
 	}
 	const char*	str = txt.c_str();
@@ -265,7 +265,7 @@ void	SetScriptableObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, LEO
 	sstream << inNumber << gUnitLabels[inUnit];
 	if( !((CScriptableObject*)self->object.object)->SetTextContents( sstream.str().c_str() ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 	}
 }
 
@@ -276,7 +276,7 @@ void	SetScriptableObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, L
 	sstream << inNumber << gUnitLabels[inUnit];
 	if( !((CScriptableObject*)self->object.object)->SetTextContents(sstream.str()) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 	}
 }
 
@@ -286,7 +286,7 @@ void	SetScriptableObjectValueAsString( LEOValuePtr self, const char* inBuf, size
 	std::string		txt( inBuf, inBufLen );
 	if( !((CScriptableObject*)self->object.object)->SetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 	}
 }
 
@@ -295,7 +295,7 @@ void	SetScriptableObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, LEOCon
 {
 	if( !((CScriptableObject*)self->object.object)->SetTextContents( inBoolean ? "true" : "false" ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 	}
 }
 
@@ -307,7 +307,7 @@ void	SetScriptableObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inTyp
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return;
 	}
 	size_t		outChunkStart = 0,
@@ -339,7 +339,7 @@ void	SetScriptableObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inTyp
 	
 	if( !((CScriptableObject*)self->object.object)->SetTextContents(newStr) )
 	{
-		LEOContextStopWithError( inContext, "This object's contents can't be changed." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object's contents can't be changed." );
 	}
 
 	free(newStr);
@@ -353,7 +353,7 @@ void	SetScriptableObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return;
 	}
 	const char*	str = txt.c_str();
@@ -372,7 +372,7 @@ void	SetScriptableObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 	
 	if( !((CScriptableObject*)self->object.object)->SetTextContents(newStr) )
 	{
-		LEOContextStopWithError( inContext, "This object's contents can't be changed." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object's contents can't be changed." );
 	}
 
 	free( newStr );
@@ -393,7 +393,7 @@ void	InitScriptableObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LE
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return;
 	}
 	LEOInitStringValue( dest, txt.c_str(), txt.size(), keepReferences, inContext );
@@ -405,7 +405,7 @@ void	PutScriptableObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, LEOC
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return;
 	}
 
@@ -421,7 +421,7 @@ void	DetermineChunkRangeOfSubstringOfScriptableObjectValue( LEOValuePtr self, si
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return;
 	}
 	const char*	str = txt.c_str();
@@ -469,7 +469,7 @@ bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContex
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, "This object can have no contents." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
 		return false;
 	}
 	
@@ -500,7 +500,7 @@ void		GetScriptableObjectValueForKeyOfRange( LEOValuePtr self, const char* keyNa
 	CScriptableObject*		theObject = (CScriptableObject*)self->object.object;
 	
 	if( !theObject->GetPropertyNamed( keyName, startOffset, endOffset, inContext, outValue ) )
-		LEOContextStopWithError( inContext, "No property \"%s\".", keyName );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No property \"%s\".", keyName );
 }
 
 
@@ -670,7 +670,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	}
 	
 	if( !handled )
-		LEOContextStopWithError( inContext, "Couldn't find handler for %s.", LEOContextGroupHandlerNameForHandlerID( inContext->group, inHandler ) );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Couldn't find handler for %s.", LEOContextGroupHandlerNameForHandlerID( inContext->group, inHandler ) );
 }
 
 
@@ -689,11 +689,7 @@ LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* 
 		CScriptableObject*	scriptableParent = theObject->GetParentObject();
 		if( scriptableParent )
 		{
-			theScript = scriptableParent->GetScriptObject([](const char * errMsg, size_t errLine, size_t errOffs, CScriptableObject * owner)
-			{
-				if( errMsg )
-					CAlert::RunMessageAlert( errMsg );
-			});
+			theScript = scriptableParent->GetScriptObject([](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); });
 		}
 	}
 	
@@ -1007,7 +1003,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	}
 	if( ctx->errMsg[0] != 0 )
 	{
-		errorHandler( ctx->errMsg, SIZE_T_MAX, SIZE_T_MAX, this );
+		errorHandler( ctx->errMsg, ctx->errLine, ctx->errOffset, this );
 	}
 	
 	if( !outContext )

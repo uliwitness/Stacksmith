@@ -227,7 +227,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	union LEOValue*	urlValue = inContext->stackEndPtr -4;
 	if( urlValue == NULL || urlValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, "Internal error: Invalid url value." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid url value." );
 		return;
 	}
 	urlString = LEOGetValueAsString( urlValue, urlBuf, sizeof(urlBuf), inContext );
@@ -243,7 +243,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	union LEOValue*	progressMsgValue = inContext->stackEndPtr -2;
 	if( progressMsgValue == NULL || progressMsgValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, "Internal error: Invalid progress message value." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid progress message value." );
 		return;
 	}
 	progressMsgString = LEOGetValueAsString( progressMsgValue, progressBuf, sizeof(progressBuf), inContext );
@@ -258,7 +258,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	union LEOValue*	completionMsgValue = inContext->stackEndPtr -1;
 	if( completionMsgValue == NULL || completionMsgValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, "Internal error: Invalid completion message value." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid completion message value." );
 		return;
 	}
 	completionMsgString = LEOGetValueAsString( completionMsgValue, completionBuf, sizeof(completionBuf), inContext );
@@ -274,7 +274,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	union LEOValue*	containerValue = inContext->stackEndPtr -3;
 	if( containerValue == NULL || containerValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, "Internal error: Invalid dest value." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid dest value." );
 		return;
 	}
 	LEOInitCopy( containerValue, &theDelegate->mDestination, kLEOInvalidateReferences, theDelegate->mContext );
@@ -283,7 +283,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	NSURL				*	theURL = [NSURL URLWithString: urlObjcString];
 	if( !theURL )
 	{
-		LEOContextStopWithError( inContext, "Invalid URL '%s' passed to 'download' command.", urlString );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Invalid URL '%s' passed to 'download' command.", urlString );
 		return;
 	}
 	

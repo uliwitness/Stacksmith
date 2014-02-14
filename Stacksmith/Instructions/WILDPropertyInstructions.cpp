@@ -61,7 +61,7 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
 		if( !((CScriptableObject*)objectValue->object.object)->GetPropertyNamed( propNameStr, 0, 0, inContext, thePropertyName ) )
 		{
-			LEOContextStopWithError( inContext,"Object does not have property \"%s\".", propNameStr );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Object does not have property \"%s\".", propNameStr );
 			return;
 		}
 	}
@@ -71,7 +71,7 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 		LEOValuePtr	theValue = LEOGetValueForKey( theObject, propNameStr, thePropertyName, kLEOInvalidateReferences, inContext );
 		if( !theValue )
 		{
-			LEOContextStopWithError( inContext, "Can't get property \"%s\" of this.", propNameStr );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't get property \"%s\" of this.", propNameStr );
 			return;
 		}
 		else if( theValue != thePropertyName )
@@ -115,7 +115,7 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 		CScriptableObject*	theScriptObject = (CScriptableObject*)theObjectValue->object.object;
 		if( !theScriptObject->SetValueForPropertyNamed( theValue, inContext, propNameStr, 0, 0 ) )
 		{
-			LEOContextStopWithError( inContext, "Object does not have property \"%s\".", propNameStr );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Object does not have property \"%s\".", propNameStr );
 			return;
 		}
 	}

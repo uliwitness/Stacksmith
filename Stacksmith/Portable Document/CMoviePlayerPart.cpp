@@ -77,7 +77,7 @@ bool	CMoviePlayerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext
 		{
 			if( gUnitGroupsForLabels[theUnit] != gUnitGroupsForLabels[kLEOUnitTicks] )
 			{
-				LEOContextStopWithError( inContext, "Expected a time interval, found%s.", gUnitLabels[theUnit] );
+				LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Expected a time interval, found%s.", gUnitLabels[theUnit] );
 				return true;
 			}
 			theInterval = LEONumberWithUnitAsUnit( theInterval, theUnit, kLEOUnitTicks );

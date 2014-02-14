@@ -290,7 +290,7 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
 		TButtonStyle	style = GetButtonStyleFromString(nameStr);
 		if( style == EButtonStyle_Last )
-			LEOContextStopWithError( inContext, "Unknown button style \"%s\".", nameStr );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unknown button style \"%s\".", nameStr );
 		else
 			SetButtonStyle( style );
 	}

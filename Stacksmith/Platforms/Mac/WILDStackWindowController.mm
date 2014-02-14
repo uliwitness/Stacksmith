@@ -156,7 +156,7 @@ using namespace Carlson;
 		if( !hitPart )
 		{
 			CAutoreleasePool	cppPool;
-			theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage );
+			theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage );
 			hitObject = theCard;
 		}
 		else
@@ -169,7 +169,7 @@ using namespace Carlson;
 					hitPart->SetSelected(false);
 			}
 			CAutoreleasePool	cppPool;
-			hitPart->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage );
+			hitPart->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage );
 			hitObject = hitPart;
 		}
 		
@@ -184,7 +184,7 @@ using namespace Carlson;
 		upMessage = "mouseUp";
 		doubleUpMessage = "mouseDoubleClick";
 		
-		theCard->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown" );
+		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown" );
 	}
 
 	NSAutoreleasePool	*	pool = [NSAutoreleasePool new];
@@ -202,7 +202,7 @@ using namespace Carlson;
 				case NSLeftMouseDragged:
 				{
 					CAutoreleasePool	cppPool;
-					hitObject->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, dragMessage );
+					hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage );
 					break;
 				}
 			}
@@ -217,7 +217,7 @@ using namespace Carlson;
 	[pool release];
 
 	CAutoreleasePool	cppPool;
-	hitObject->SendMessage(NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage );
+	hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage );
 }
 
 
@@ -263,11 +263,7 @@ using namespace Carlson;
 	if( !thirdModifier ) thirdModifier = "";
 	if( !fourthModifier ) fourthModifier = "";
 	
-	std::function<void(const char *, size_t, size_t, CScriptableObject *)>	errHandler = [](const char * errMsg, size_t, size_t, CScriptableObject *)
-	{
-		if( errMsg )
-			CAlert::RunMessageAlert( errMsg );
-	};
+	std::function<void(const char *, size_t, size_t, CScriptableObject *)>	errHandler = [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); };
 	
 	theCard->SendMessage( NULL, errHandler, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
 

@@ -241,7 +241,7 @@ bool	CPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 	}
 	else if( strcasecmp(inPropertyName, "id") == 0 )
 	{
-		LEOContextStopWithError( inContext, "The ID of an object can't be changed." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "The ID of an object can't be changed." );
 	}
 	else if( strcasecmp("script", inPropertyName) == 0 )
 	{

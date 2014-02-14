@@ -579,7 +579,7 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 	}
 	else if( strcasecmp(inPropertyName, "id") == 0 )
 	{
-		LEOContextStopWithError( inContext, "The ID of an object can't be changed." );
+		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "The ID of an object can't be changed." );
 		return true;
 	}
 	else if( strcasecmp(inPropertyName, "style") == 0 )

@@ -52,7 +52,7 @@ using namespace Carlson;
 	lastMouseUpWasInside = false;
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDown %ld", lastButtonNumber );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDown %ld", lastButtonNumber );
 	}
 	
 	[super mouseDown: event];
@@ -60,7 +60,7 @@ using namespace Carlson;
 	if( !lastMouseUpWasInside )
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUpOutside %ld", lastButtonNumber );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUpOutside %ld", lastButtonNumber );
 	}
 }
 
@@ -70,7 +70,7 @@ using namespace Carlson;
 	lastMouseUpWasInside = true;
 	self->owningPart->PrepareMouseUp();
 	CAutoreleasePool	cppPool;
-	self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUp %ld", lastButtonNumber );
+	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp %ld", lastButtonNumber );
 	
 	return [super sendAction: theAction to: theTarget];
 }

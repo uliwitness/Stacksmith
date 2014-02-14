@@ -62,7 +62,7 @@ using namespace Carlson;
 	
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDown %ld", [event buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDown %ld", [event buttonNumber] +1 );
 	}
 	
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
@@ -96,7 +96,7 @@ using namespace Carlson;
 						}
 					}
 					CAutoreleasePool	cppPool;
-					self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseDrag %ld", [event buttonNumber] +1 );
+					self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDrag %ld", [event buttonNumber] +1 );
 					break;
 				}
 			}
@@ -118,12 +118,12 @@ using namespace Carlson;
 		[[self target] performSelector: [self action] withObject: self];
 		self->owningPart->PrepareMouseUp();
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUp %ld", [event buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp %ld", [event buttonNumber] +1 );
 	}
 	else
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char* errMsg,size_t,size_t,CScriptableObject*) { if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "mouseUpOutside %ld", [event buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUpOutside %ld", [event buttonNumber] +1 );
 	}
 	
 	[pool release];

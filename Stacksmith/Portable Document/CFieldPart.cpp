@@ -418,7 +418,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
 		TFieldStyle	style = GetFieldStyleFromString(nameStr);
 		if( style == EFieldStyle_Last )
-			LEOContextStopWithError( inContext, "Unknown field style \"%s\".", nameStr );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unknown field style \"%s\".", nameStr );
 		else
 			SetFieldStyle( style );
 	}

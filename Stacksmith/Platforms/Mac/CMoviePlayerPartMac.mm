@@ -140,7 +140,7 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 			else if( mLastNotifiedRate == 0.0 )
 				msg = "playMovie";
 			if( msg )
-				this->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, msg );
+				this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, msg );
 			mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
 			mLastNotifiedRate = theRate;
 		}

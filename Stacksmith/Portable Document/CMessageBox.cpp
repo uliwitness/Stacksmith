@@ -58,7 +58,7 @@ void	CMessageBox::Run()
 	LEOValue			returnValue = {{0}};
 	char				returnValBuf[1024] = {0};
 	LEOContext	*		ctx = NULL;
-	SendMessage( &ctx, [](const char * errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, ":run" );
+	SendMessage( &ctx, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ":run" );
 	if( ctx && ctx->stackEndPtr != ctx->stack && ctx->stack[0].base.isa != NULL )
 	{
 		if( !LEOGetValueIsUnset( &ctx->stack[0], NULL ) )

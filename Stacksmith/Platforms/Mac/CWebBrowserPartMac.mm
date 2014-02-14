@@ -29,14 +29,14 @@ using namespace Carlson;
 	{
 		const char*	currURLStr = sender.mainFrame.dataSource.request.URL.absoluteString.UTF8String;
 		self.owningBrowser->SetCurrentURL( currURLStr );
-		self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "loadPage" );
+		self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "loadPage" );
 	}
 }
 
 
 -(void)	webView: (WebView *)sender didFailLoadWithError: (NSError *)error forFrame: (WebFrame *)frame
 {
-	self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert(errMsg); }, "loadPage %s", error.localizedDescription.UTF8String );
+	self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "loadPage %s", error.localizedDescription.UTF8String );
 }
 
 @end

@@ -9,9 +9,25 @@
 #include "CAlert.h"
 #import "WILDInputPanelController.h"
 #import <AppKit/AppKit.h>
+#include "CScriptableObjectValue.h"
 
 
 using namespace Carlson;
+
+
+void	CAlert::RunScriptErrorAlert( CScriptableObject* inErrObj, const char* errMsg, size_t inLineOffset, size_t inOffset )
+{
+	if( !errMsg || !inErrObj )
+		return;
+	
+	if( 2 == RunMessageAlert( errMsg, "Abort", (inLineOffset != SIZE_T_MAX) ? "Edit Script" : std::string() ) )
+	{
+		if( inOffset != SIZE_T_MAX )
+			inErrObj->OpenScriptEditorAndShowOffset( inOffset );
+		else
+			inErrObj->OpenScriptEditorAndShowLine( inLineOffset );
+	}
+}
 
 
 size_t	CAlert::RunMessageAlert( const std::string& inMessage, const std::string& button1, const std::string& button2, const std::string& button3 )

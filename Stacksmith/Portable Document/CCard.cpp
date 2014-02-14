@@ -84,14 +84,14 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 		// We're moving away
 		if( oldCard && oldStack && oldStack != GetStack() && inOpenInMode == EOpenInSameWindow )	// Leaving this stack? Close it.
 		{
-			oldCard->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "closeCard" );
-			oldCard->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "closeStack" );
+			oldCard->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeCard" );
+			oldCard->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeStack" );
 			oldCard->GoToSleep();
 			oldStack->SetCurrentCard(NULL);
 		}
 		if( GetStack()->GetCurrentCard() != NULL && GetStack()->GetCurrentCard() != this )	// Dest stack was already open with another card? Close that card (too).
 		{
-			GetStack()->GetCurrentCard()->SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "closeCard" );
+			GetStack()->GetCurrentCard()->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeCard" );
 			GetStack()->GetCurrentCard()->GoToSleep();
 		}
 		
@@ -102,9 +102,9 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			WakeUp();
 			if( destStackWasntOpenYet )
 			{
-				SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "openStack" );
+				SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openStack" );
 			}
-			SendMessage( NULL, [](const char *errMsg, size_t, size_t, CScriptableObject *){ if( errMsg ) CAlert::RunMessageAlert( errMsg ); }, "openCard" );
+			SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openCard" );
 		}
 		Release();
 	});
@@ -133,7 +133,7 @@ bool	CCard::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 		LEOInteger	number = LEOGetValueAsInteger( inValue, &theUnit, inContext );
 		if( number <= 0 || number > (LEOInteger)GetStack()->GetNumCards() )
 		{
-			LEOContextStopWithError( inContext, "Card number must be between 1 and %zu.", GetStack()->GetNumCards() );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Card number must be between 1 and %zu.", GetStack()->GetNumCards() );
 		}
 		else
 		{
