@@ -103,6 +103,7 @@ public:
 	virtual bool	ShowScriptEditorForObject( CConcreteObject* inObject ) { return false; };
 	virtual bool	ShowPropertyEditorForObject( CConcreteObject* inObject ) { return false; };
 	
+	virtual void	GetMousePosition( LEONumber *x, LEONumber *y )	{ *x = 0; *y = 0; };
 	virtual void	RectChangedOfPart( CPart* inChangedPart )	{};
 	
 	virtual void	Dump( size_t inIndent = 0 );

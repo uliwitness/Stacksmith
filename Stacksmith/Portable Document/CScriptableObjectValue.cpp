@@ -14,6 +14,7 @@
 #include "CStack.h"
 #include "CString.h"
 #include <sstream>
+#include <iostream>
 #include "CAlert.h"
 
 
@@ -622,7 +623,17 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
 		CPart*		so = dynamic_cast<CPart*>( userData->GetTarget() );
 		if( so )
-			so->Grab();
+		{
+			LEONumber x = 0;
+			LEONumber y = 0;
+			so->GetStack()->GetMousePosition( &x, &y );
+			
+			std::cout << "mouse: " << x << ", " << y << std::endl;
+			
+			THitPart	hitPart = so->HitTestForEditing( x, y );
+			if( hitPart != ENothingHitPart )
+				so->Grab( hitPart );
+		}
 		
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );

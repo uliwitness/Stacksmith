@@ -170,6 +170,19 @@ bool	CStackMac::ShowPropertyEditorForObject( CConcreteObject* inObject )
 }
 
 
+void	CStackMac::GetMousePosition( LEONumber *x, LEONumber *y )
+{
+	NSPoint	mousePos = [NSEvent mouseLocation];
+	NSRect	wBox = [mMacWindowController.window frame];
+	
+	mousePos.x -= wBox.origin.x;
+	mousePos.y -= wBox.origin.y;
+	
+	*x = mousePos.x;
+	*y = wBox.size.height -mousePos.y;
+}
+
+
 void	CStackMac::RectChangedOfPart( CPart* inChangedPart )
 {
 	[mMacWindowController drawBoundingBoxes];

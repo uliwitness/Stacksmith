@@ -21,6 +21,21 @@ class CPart;
 class CPartContents;
 
 
+enum
+{
+	ENothingHitPart			= 0,
+	ELeftGrabberHitPart		= (1 << 0),
+	ETopGrabberHitPart		= (1 << 1),
+	ERightGrabberHitPart	= (1 << 2),
+	EBottomGrabberHitPart	= (1 << 3),
+	EContentHitPart			= (ELeftGrabberHitPart | ETopGrabberHitPart | ERightGrabberHitPart | EBottomGrabberHitPart),
+	// Left & right == horizontal move with shift key.
+	// Top & bottom == vertical move with shift key.
+};
+typedef uint32_t THitPart;
+
+
+
 class CPartCreatorBase
 {
 public:
@@ -89,7 +104,8 @@ public:
 	virtual void				SetHighlight( bool inHighlighted )	{};
 	virtual void				PrepareMouseUp()				{};	// Sent when a mouse click was inside, right before we send mouseUp.
 	
-	virtual void				Grab();
+	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y );	// Stack-relative coordinates relative to top left, descending down and right.
+	virtual void				Grab( THitPart inHitPart = EContentHitPart );
 	
 	virtual void				Dump( size_t inIndent = 0 );
 	

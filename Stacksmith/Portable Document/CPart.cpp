@@ -289,17 +289,39 @@ void		CPart::SetIndex( LEOInteger inIndex, CPartCreatorBase* inType )
 }
 
 
-void	CPart::Grab()
+THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y )
+{
+	THitPart	hitPart = ENothingHitPart;
+	if( x > mLeft && x < (mLeft + 8) )
+		hitPart |= ELeftGrabberHitPart;
+	else if( x < mRight && x > (mRight - 8) )
+		hitPart |= ERightGrabberHitPart;
+	if( y > mTop && y < (mTop + 8) )
+		hitPart |= ETopGrabberHitPart;
+	else if( y < mBottom && y > (mBottom - 8) )
+		hitPart |= EBottomGrabberHitPart;
+	
+	if( hitPart == ENothingHitPart && x > mLeft && x < mRight && y > mTop && y < mBottom )
+		hitPart = EContentHitPart;
+	
+	return hitPart;
+}
+
+
+void	CPart::Grab( THitPart inHitPart )
 {
 	LEONumber	oldL = mLeft, oldT = mTop, oldB = mBottom, oldR = mRight;
 	LEONumber	oldX = 0, oldY = 0;
 	CCursor::GetGlobalPosition( &oldX, &oldY );
-	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,this]()
+	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,this]()
 	{
 		LEONumber	x = 0, y = 0;
 		CCursor::GetGlobalPosition( &x, &y );
 		
-		SetRect( oldL +(x -oldX), oldT +(y -oldY), oldR +(x -oldX), oldB +(y -oldY) );
+		SetRect( (inHitPart & ELeftGrabberHitPart) ? (oldL +(x -oldX)) : oldL,
+				(inHitPart & ETopGrabberHitPart) ? (oldT +(y -oldY)) : oldT,
+				(inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
+				(inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB );
 	});
 //	std::cout << "Done tracking." << std::endl;
 }

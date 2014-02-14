@@ -48,6 +48,7 @@ public:
 	virtual bool				ShowScriptEditorForObject( CConcreteObject* inObject );
 	virtual bool				ShowPropertyEditorForObject( CConcreteObject* inObject );
 	
+	virtual void				GetMousePosition( LEONumber *x, LEONumber *y );
 	virtual void				RectChangedOfPart( CPart* inChangedPart );
 
 	static void					RegisterPartCreators();
