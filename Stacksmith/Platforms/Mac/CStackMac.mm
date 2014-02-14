@@ -173,7 +173,7 @@ bool	CStackMac::ShowPropertyEditorForObject( CConcreteObject* inObject )
 void	CStackMac::GetMousePosition( LEONumber *x, LEONumber *y )
 {
 	NSPoint	mousePos = [NSEvent mouseLocation];
-	NSRect	wBox = [mMacWindowController.window frame];
+	NSRect	wBox = [mMacWindowController.window contentRectForFrameRect: mMacWindowController.window.frame];
 	
 	mousePos.x -= wBox.origin.x;
 	mousePos.y -= wBox.origin.y;
