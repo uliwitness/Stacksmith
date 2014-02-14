@@ -44,6 +44,11 @@ class CPart;
 -(void)	updateStyle;
 -(void)	updateToolbarVisibility;
 
+-(IBAction)	goFirstCard: (id)sender;
+-(IBAction)	goPrevCard: (id)sender;
+-(IBAction)	goNextCard: (id)sender;
+-(IBAction)	goLastCard: (id)sender;
+
 -(Carlson::CStackMac*)	cppStack;
 
 -(void)	showWindowOverPart: (Carlson::CPart*)overPart;

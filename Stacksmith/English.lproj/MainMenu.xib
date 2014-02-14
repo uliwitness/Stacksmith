@@ -353,6 +353,32 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Go" id="Vab-gO-wsM">
+                    <menu key="submenu" title="Go" id="C95-84-MdY">
+                        <items>
+                            <menuItem title="First Card" keyEquivalent="1" id="Iwm-6C-IiX">
+                                <connections>
+                                    <action selector="goFirstCard:" target="-1" id="oMS-f6-WPj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Previous Card" keyEquivalent="2" id="ecb-gS-bnq">
+                                <connections>
+                                    <action selector="goPrevCard:" target="-1" id="xd6-LT-KHE"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Next Card" keyEquivalent="3" id="IXn-Uy-xep">
+                                <connections>
+                                    <action selector="goNextCard:" target="-1" id="P4X-7d-9D7"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Last Card" keyEquivalent="4" id="Osa-zS-6TE">
+                                <connections>
+                                    <action selector="goLastCard:" target="-1" id="URR-70-M37"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Format" id="374">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Format" id="375">

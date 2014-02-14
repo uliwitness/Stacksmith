@@ -827,6 +827,12 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	goFirstCard: (id)sender
+{
+	mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+}
+
+
 -(IBAction)	goPrevCard: (id)sender
 {
 	mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
@@ -836,6 +842,12 @@ using namespace Carlson;
 -(IBAction)	goNextCard: (id)sender
 {
 	mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+}
+
+
+-(IBAction)	goLastCard: (id)sender
+{
+	mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
 }
 
 
