@@ -627,9 +627,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			LEONumber x = 0;
 			LEONumber y = 0;
 			so->GetStack()->GetMousePosition( &x, &y );
-			
-			std::cout << "mouse: " << x << ", " << y << std::endl;
-			
+						
 			THitPart	hitPart = so->HitTestForEditing( x, y );
 			if( hitPart != ENothingHitPart )
 				so->Grab( hitPart );
