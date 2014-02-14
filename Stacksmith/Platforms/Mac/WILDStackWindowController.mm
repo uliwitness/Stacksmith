@@ -14,6 +14,16 @@
 #include "CMacPartBase.h"
 #include "CAlert.h"
 #import "WILDCustomWidgetWindow.h"
+#import "ULIHighlightingButton.h"
+
+
+NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
+NSString*	WILDCardToolbarItemIdentifier = @"WILDCardToolbarItemIdentifier";
+NSString*	WILDBackgroundToolbarItemIdentifier = @"WILDBackgroundToolbarItemIdentifier";
+NSString*	WILDEditBackgroundToolbarItemIdentifier = @"WILDEditBackgroundToolbarItemIdentifier";
+
+NSString*	WILDPrevCardToolbarItemIdentifier = @"WILDPrevCardToolbarItemIdentifier";
+NSString*	WILDNextCardToolbarItemIdentifier = @"WILDNextCardToolbarItemIdentifier";
 
 
 static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c, const char ** d, const char* theAppendee )
@@ -32,7 +42,7 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 using namespace Carlson;
 
 
-@interface WILDStackWindowController () <NSPopoverDelegate>
+@interface WILDStackWindowController () <NSPopoverDelegate,NSToolbarDelegate>
 
 @end
 
@@ -657,6 +667,27 @@ using namespace Carlson;
 }
 
 
+-(void)	updateToolbarVisibility
+{
+	if( mStack->GetTool() != EBrowseTool )
+	{
+		NSToolbar	*editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDEditToolbar"] autorelease];
+		[editToolbar setDelegate: self];
+		[editToolbar setAllowsUserCustomization: NO];
+		[editToolbar setVisible: NO];
+		[self.window setToolbar: editToolbar];
+		[self.window toggleToolbarShown: self];
+	}
+	else
+	{
+		[self.window toggleToolbarShown: self];
+		[self.window setToolbar: nil];
+		if( mStack->GetEditingBackground() )
+			mStack->SetEditingBackground( false );	// Switch back to foreground.
+	}
+}
+
+
 -(void)	showWindow: (id)sender
 {
 	[super showWindow: sender];
@@ -747,6 +778,169 @@ using namespace Carlson;
 -(void)	popoverWillClose: (NSNotification *)notification
 {
 	mWasVisible = NO;
+}
+
+
+-(IBAction)	showCardInfoPanel: (id)sender
+{
+//	if( mCurrentPopover )
+//		[mCurrentPopover close];
+//	
+//	WILDCardInfoViewController*	cardInfo = [[[WILDCardInfoViewController alloc] initWithCard: mCurrentCard ofCardView: (WILDCardView*) [self view]] autorelease];
+//	mCurrentPopover = [[NSPopover alloc] init];
+//	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+//	[mCurrentPopover setDelegate: self];
+//	[mCurrentPopover setContentViewController: cardInfo];
+//	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
+}
+
+-(IBAction)	showBackgroundInfoPanel: (id)sender
+{
+//	if( mCurrentPopover )
+//		[mCurrentPopover close];
+//	
+//	WILDBackgroundInfoViewController*	backgroundInfo = [[[WILDBackgroundInfoViewController alloc] initWithBackground: [mCurrentCard owningBackground] ofCardView: (WILDCardView*) [self view]] autorelease];
+//	mCurrentPopover = [[NSPopover alloc] init];
+//	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+//	[mCurrentPopover setDelegate: self];
+//	[mCurrentPopover setContentViewController: backgroundInfo];
+//	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
+}
+
+-(IBAction)	showStackInfoPanel: (id)sender
+{
+//	if( mCurrentPopover )
+//		[mCurrentPopover close];
+//	
+//	WILDStackInfoViewController*	stackInfo = [[[WILDStackInfoViewController alloc] initWithStack: [mCurrentCard stack] ofCardView: (WILDCardView*) [self view]] autorelease];
+//	mCurrentPopover = [[NSPopover alloc] init];
+//	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+//	[mCurrentPopover setDelegate: self];
+//	[mCurrentPopover setContentViewController: stackInfo];
+//	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
+}
+
+
+-(IBAction)	toggleBackgroundEditMode: (id)sender
+{
+	mStack->SetEditingBackground( !mStack->GetEditingBackground() );
+}
+
+
+-(IBAction)	goPrevCard: (id)sender
+{
+	mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+}
+
+
+-(IBAction)	goNextCard: (id)sender
+{
+	mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+}
+
+
+- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+{
+	NSToolbarItem	*	theItem = [[[NSToolbarItem alloc] initWithItemIdentifier: itemIdentifier] autorelease];
+	
+	if( [itemIdentifier isEqualToString: WILDCardToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"CardIcon"]];
+		[theButton setAction: @selector(showCardInfoPanel:)];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Card Info"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDBackgroundToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"BackgroundIcon"]];
+		[theButton setAction: @selector(showBackgroundInfoPanel:)];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Background Info"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDEditBackgroundToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"BackgroundEditIcon"]];
+		[theButton setAction: @selector(toggleBackgroundEditMode:)];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Edit Background"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDStackToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"StackIcon"]];
+		[theButton setAction: @selector(showStackInfoPanel:)];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Stack Info"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDPrevCardToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"ICON_902"]];
+		[theButton setAction: @selector(goPrevCard:)];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Previous Card"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
+		[theItem setView: theButton];
+	}
+	else if( [itemIdentifier isEqualToString: WILDNextCardToolbarItemIdentifier] )
+	{
+		NSButton	*	theButton = [[[ULIHighlightingButton alloc] initWithFrame: NSMakeRect(0,0,32,32)] autorelease];
+		[theButton setBordered: NO];
+		[theButton setImage: [NSImage imageNamed: @"ICON_26425"]];
+		[theButton setAction: @selector(goNextCard:)];
+		[theButton setImagePosition: NSImageOnly];
+		[theItem setLabel: @"Next Card"];
+		[theButton setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		[theButton.cell setControlSize: NSSmallControlSize];
+		[theButton.cell setImageScaling: NSImageScaleProportionallyUpOrDown];
+		[theButton.cell setButtonType: NSMomentaryChangeButton];
+		[theItem setView: theButton];
+	}
+	
+	return theItem;
+}
+    
+/* Returns the ordered list of items to be shown in the toolbar by default.   If during initialization, no overriding values are found in the user defaults, or if the user chooses to revert to the default items this set will be used. */
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+	return @[ WILDStackToolbarItemIdentifier, WILDBackgroundToolbarItemIdentifier, WILDCardToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDEditBackgroundToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDPrevCardToolbarItemIdentifier, WILDNextCardToolbarItemIdentifier ];
+}
+
+/* Returns the list of all allowed items by identifier.  By default, the toolbar does not assume any items are allowed, even the separator.  So, every allowed item must be explicitly listed.  The set of allowed items is used to construct the customization palette.  The order of items does not necessarily guarantee the order of appearance in the palette.  At minimum, you should return the default item list.*/
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+	return @[ WILDStackToolbarItemIdentifier, WILDBackgroundToolbarItemIdentifier, WILDCardToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDPrevCardToolbarItemIdentifier, WILDNextCardToolbarItemIdentifier ];
 }
 
 @end

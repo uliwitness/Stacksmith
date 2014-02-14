@@ -42,6 +42,7 @@ class CPart;
 -(void)	drawBoundingBoxes;
 -(void)	refreshExistenceAndOrderOfAllViews;
 -(void)	updateStyle;
+-(void)	updateToolbarVisibility;
 
 -(Carlson::CStackMac*)	cppStack;
 

@@ -129,6 +129,7 @@ void	CStackMac::SetTool( TTool inTool )
 	
 	[mMacWindowController refreshExistenceAndOrderOfAllViews];
 	[mMacWindowController drawBoundingBoxes];
+	[mMacWindowController updateToolbarVisibility];
 }
 
 
