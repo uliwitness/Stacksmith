@@ -8,11 +8,12 @@
 
 #import "WILDLayerInfoViewController.h"
 #import "WILDScriptEditorWindowController.h"
-#import "WILDCardView.h"
-#import "WILDLayer.h"
+#import "CLayer.h"
 #import "UKHelperMacros.h"
-#import "WILDNotifications.h"
-#import "WILDUserPropertyEditorWindowController.h"
+#import "WILDUserPropertyEditorController.h"
+
+
+using namespace Carlson;
 
 
 @interface WILDLayerInfoViewController () <NSTextFieldDelegate>
@@ -22,7 +23,6 @@
 
 @implementation WILDLayerInfoViewController
 
-@synthesize cardView = mCardView;
 @synthesize layer = mLayer;
 
 @synthesize nameField = mNameField;
@@ -36,12 +36,11 @@
 @synthesize userPropertyEditButton = mUserPropertyEditButton;
 
 
--(id)	initWithLayer: (WILDLayer*)inCard ofCardView: (WILDCardView*)owningView
+-(id)	initWithLayer: (CLayer*)inCard
 {
 	if(( self = [super initWithNibName: NSStringFromClass([self class]) bundle: nil] ))
 	{
-		mLayer = [inCard retain];
-		mCardView = [owningView retain];
+		mLayer = inCard->Retain();
 	}
 	
 	return self;
@@ -49,8 +48,7 @@
 
 -(void)	dealloc
 {
-	DESTROY_DEALLOC( mCardView );
-	DESTROY_DEALLOC( mLayer );
+	mLayer->Release();
 	
 	DESTROY_DEALLOC( mEditScriptButton );
 	DESTROY_DEALLOC( mDontSearchSwitch );
@@ -69,14 +67,14 @@
 {
 	[super awakeFromNib];
 	
-	[mNameField setStringValue: [mLayer name]];
-	[mCantDeleteSwitch setState: [mLayer cantDelete] ? NSOnState : NSOffState];
-	[mDontSearchSwitch setState: [mLayer dontSearch] ? NSOnState : NSOffState];
+	[mNameField setStringValue: [NSString stringWithUTF8String: mLayer->GetName().c_str()]];
+	[mCantDeleteSwitch setState: mLayer->GetCantDelete() ? NSOnState : NSOffState];
+	[mDontSearchSwitch setState: mLayer->GetDontSearch() ? NSOnState : NSOffState];
 		
-	unsigned long	numFields = [mLayer numberOfPartsOfType: @"field"];
+	unsigned long	numFields = mLayer->GetPartCountOfType( CPart::GetPartCreatorForType("field") );
 	[mFieldCountField setStringValue: [NSString stringWithFormat: @"Contains %ld card fields", numFields]];
 
-	unsigned long	numButtons = [mLayer numberOfPartsOfType: @"button"];
+	unsigned long	numButtons = mLayer->GetPartCountOfType( CPart::GetPartCreatorForType("button") );
 	[mButtonCountField setStringValue: [NSString stringWithFormat: @"Contains %ld card buttons", numButtons]];
 }
 

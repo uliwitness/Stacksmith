@@ -15,6 +15,7 @@
 #include "CAlert.h"
 #import "WILDCustomWidgetWindow.h"
 #import "ULIHighlightingButton.h"
+#import "WILDCardInfoViewController.h"
 
 
 NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
@@ -759,35 +760,41 @@ using namespace Carlson;
 
 -(void)	popoverWillShow: (NSNotification *)notification
 {
-//	[self removeAllViews];
-//	[self createAllViews];
+	if( notification.object == mPopover )
+		;
 }
 
 
 -(void)	popoverDidShow: (NSNotification *)notification
 {
-	CStack::SetFrontStack( mStack );
-	mWasVisible = YES;
+	if( notification.object == mPopover )
+	{
+		CStack::SetFrontStack( mStack );
+		mWasVisible = YES;
+	}
 }
 
 
 -(void)	popoverWillClose: (NSNotification *)notification
 {
-	mWasVisible = NO;
+	if( notification.object == mPopover )
+	{
+		mWasVisible = NO;
+	}
 }
 
 
 -(IBAction)	showCardInfoPanel: (id)sender
 {
-//	if( mCurrentPopover )
-//		[mCurrentPopover close];
-//	
-//	WILDCardInfoViewController*	cardInfo = [[[WILDCardInfoViewController alloc] initWithCard: mCurrentCard ofCardView: (WILDCardView*) [self view]] autorelease];
-//	mCurrentPopover = [[NSPopover alloc] init];
-//	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
-//	[mCurrentPopover setDelegate: self];
-//	[mCurrentPopover setContentViewController: cardInfo];
-//	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
+	if( mCurrentPopover )
+		[mCurrentPopover close];
+	
+	WILDCardInfoViewController*	cardInfo = [[[WILDCardInfoViewController alloc] initWithCard: mStack->GetCurrentCard()] autorelease];
+	mCurrentPopover = [[NSPopover alloc] init];
+	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+	[mCurrentPopover setDelegate: self];
+	[mCurrentPopover setContentViewController: cardInfo];
+	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
 }
 
 -(IBAction)	showBackgroundInfoPanel: (id)sender

@@ -30,7 +30,8 @@ class CPart;
 	NSImageView			*	mBackgroundImageView;
 	NSImageView			*	mCardImageView;
 	BOOL					mWasVisible;
-	NSPopover			*	mPopover;
+	NSPopover			*	mPopover;			// If this stack is of style 'popover', this is the popover it is shown in.
+	NSPopover			*	mCurrentPopover;	// WHatever current info popover is shown on the toolbar.
 	WILDFlippedContentView*	mContentView;
 }
 

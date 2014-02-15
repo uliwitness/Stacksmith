@@ -8,15 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@class WILDCardView;
-@class WILDLayer;
-
+using namespace Carlson
+{
+	class CLayer;
+}
 
 @interface WILDLayerInfoViewController : NSViewController
 {
-    WILDCardView	*	mCardView;
-	WILDLayer		*	mLayer;
+	Carlson::CLayer	*	mLayer;
 	
 	NSTextField		*	mNameField;
 	NSTextField		*	mNumberField;
@@ -29,8 +28,7 @@
 	NSButton		*	mUserPropertyEditButton;
 }
 
-@property (retain) WILDCardView				*	cardView;
-@property (retain) WILDLayer				*	layer;
+@property (assign) Carlson::CLayer			*	layer;
 
 @property (retain) IBOutlet	NSButton		*	editScriptButton;
 @property (retain) IBOutlet	NSButton		*	dontSearchSwitch;
@@ -42,7 +40,7 @@
 @property (retain) IBOutlet	NSTextField		*	buttonCountField;
 @property (retain) IBOutlet	NSButton		*	userPropertyEditButton;
 
--(id)		initWithLayer: (WILDLayer*)inCard ofCardView: (WILDCardView*)owningView;
+-(id)		initWithLayer: (Carlson::CLayer*)inCard;
 
 -(IBAction)	doEditScriptButton: (id)sender;
 -(IBAction)	doUserPropertyEditButton: (id)sender;
