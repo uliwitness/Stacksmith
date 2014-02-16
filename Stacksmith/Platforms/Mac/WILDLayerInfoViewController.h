@@ -8,10 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-using namespace Carlson
+namespace Carlson
 {
 	class CLayer;
 }
+
+@class WILDUserPropertyEditorController;
+
 
 @interface WILDLayerInfoViewController : NSViewController
 {
@@ -39,11 +42,11 @@ using namespace Carlson
 @property (retain) IBOutlet	NSTextField		*	fieldCountField;
 @property (retain) IBOutlet	NSTextField		*	buttonCountField;
 @property (retain) IBOutlet	NSButton		*	userPropertyEditButton;
+@property (retain) IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
 
 -(id)		initWithLayer: (Carlson::CLayer*)inCard;
 
 -(IBAction)	doEditScriptButton: (id)sender;
--(IBAction)	doUserPropertyEditButton: (id)sender;
 
 -(IBAction)	doCantDeleteSwitchChanged: (id)sender;
 -(IBAction)	doDontSearchSwitchChanged: (id)sender;

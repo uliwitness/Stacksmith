@@ -311,9 +311,9 @@
 		559BA9A218A8588800760273 /* CMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99F18A84BD700760273 /* CMap.cpp */; };
 		559BA9A518AB85D100760273 /* CCursor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9A318AB85D100760273 /* CCursor.mm */; };
 		559BA9AB18AE70B900760273 /* ULIHighlightingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9AA18AE70B900760273 /* ULIHighlightingButton.m */; };
-		559BA9AF18AE909100760273 /* WILDCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9AD18AE909100760273 /* WILDCardInfoViewController.m */; };
+		559BA9AF18AE909100760273 /* WILDCardInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9AD18AE909100760273 /* WILDCardInfoViewController.mm */; };
 		559BA9B018AE909100760273 /* WILDCardInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA9AE18AE909100760273 /* WILDCardInfoViewController.xib */; };
-		559BA9B318AE90AE00760273 /* WILDLayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9B218AE90AE00760273 /* WILDLayerInfoViewController.m */; };
+		559BA9B318AE90AE00760273 /* WILDLayerInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9B218AE90AE00760273 /* WILDLayerInfoViewController.mm */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
@@ -908,10 +908,10 @@
 		559BA9A918AE70B900760273 /* ULIHighlightingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIHighlightingButton.h; path = ../UliKit/ULIHighlightingButton.h; sourceTree = "<group>"; };
 		559BA9AA18AE70B900760273 /* ULIHighlightingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIHighlightingButton.m; path = ../UliKit/ULIHighlightingButton.m; sourceTree = "<group>"; };
 		559BA9AC18AE909100760273 /* WILDCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCardInfoViewController.h; path = Platforms/Mac/WILDCardInfoViewController.h; sourceTree = "<group>"; };
-		559BA9AD18AE909100760273 /* WILDCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCardInfoViewController.m; path = Platforms/Mac/WILDCardInfoViewController.m; sourceTree = "<group>"; };
+		559BA9AD18AE909100760273 /* WILDCardInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDCardInfoViewController.mm; path = Platforms/Mac/WILDCardInfoViewController.mm; sourceTree = "<group>"; };
 		559BA9AE18AE909100760273 /* WILDCardInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDCardInfoViewController.xib; path = Platforms/Mac/WILDCardInfoViewController.xib; sourceTree = "<group>"; };
 		559BA9B118AE90AD00760273 /* WILDLayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDLayerInfoViewController.h; path = Platforms/Mac/WILDLayerInfoViewController.h; sourceTree = "<group>"; };
-		559BA9B218AE90AE00760273 /* WILDLayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDLayerInfoViewController.m; path = Platforms/Mac/WILDLayerInfoViewController.m; sourceTree = "<group>"; };
+		559BA9B218AE90AE00760273 /* WILDLayerInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDLayerInfoViewController.mm; path = Platforms/Mac/WILDLayerInfoViewController.mm; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
 		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
@@ -1521,9 +1521,9 @@
 				55405BDE18A6220D001D3C99 /* WILDIconPickerViewController.mm */,
 				55405BDF18A6220D001D3C99 /* WILDIconPickerViewController.xib */,
 				559BA9B118AE90AD00760273 /* WILDLayerInfoViewController.h */,
-				559BA9B218AE90AE00760273 /* WILDLayerInfoViewController.m */,
+				559BA9B218AE90AE00760273 /* WILDLayerInfoViewController.mm */,
 				559BA9AC18AE909100760273 /* WILDCardInfoViewController.h */,
-				559BA9AD18AE909100760273 /* WILDCardInfoViewController.m */,
+				559BA9AD18AE909100760273 /* WILDCardInfoViewController.mm */,
 				559BA9AE18AE909100760273 /* WILDCardInfoViewController.xib */,
 				55B0740D1889C6E90023BA3E /* CMessageBoxMac.h */,
 				55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */,
@@ -2355,7 +2355,7 @@
 				553C46F213577334000219FA /* CParser.cpp in Sources */,
 				553C46F313577334000219FA /* CParseTree.cpp in Sources */,
 				552386A71880D72E00D7FAB3 /* ULIURLHandlingApplication.m in Sources */,
-				559BA9B318AE90AE00760273 /* WILDLayerInfoViewController.m in Sources */,
+				559BA9B318AE90AE00760273 /* WILDLayerInfoViewController.mm in Sources */,
 				55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */,
 				553C46F413577334000219FA /* CNode.cpp in Sources */,
 				55CD611E187A60CD002450E2 /* CRecentCardsList.cpp in Sources */,
@@ -2396,7 +2396,7 @@
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
 				556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */,
 				556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */,
-				559BA9AF18AE909100760273 /* WILDCardInfoViewController.m in Sources */,
+				559BA9AF18AE909100760273 /* WILDCardInfoViewController.mm in Sources */,
 				55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */,
 				555E53B018946BC1001487C1 /* CMessageWatcher.cpp in Sources */,
 				556DB7BF1870A6EB002F7CB2 /* CURLRequest.mm in Sources */,

@@ -10,8 +10,10 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class WILDCardView;
-@class WILDCard;
+namespace Carlson
+{
+	class CCard;
+}
 
 
 @interface WILDCardInfoViewController : WILDLayerInfoViewController
@@ -21,7 +23,7 @@
 
 @property (retain) IBOutlet	NSButton		*	markedSwitch;
 
--(id)		initWithCard: (WILDCard*)inCard ofCardView: (WILDCardView*)owningView;
+-(id)		initWithCard: (Carlson::CCard*)inCard;
 
 -(IBAction)	doMarkedSwitchChanged: (id)sender;
 

@@ -62,7 +62,7 @@ public:
 	CCard*			GetCard( size_t inIndex )			{ if( inIndex >= mCards.size() ) return NULL; return mCards[inIndex]; };
 	CCard*			GetCardByID( ObjectID inID );
 	CCard*			GetCardByName( const char* inName );
-	size_t			GetIndexOfCard( CCard* inBackground );
+	size_t			GetIndexOfCard( CCard* inCard );
 	void			SetIndexOfCardTo( CCard* inCd, size_t newIndex );
 	CCard*			GetCardWithBackground( CBackground* inBg, CCard *startAtCard = NULL, bool searchForward = true );
 	size_t			GetNumCardsWithBackground( CBackground* inBg );

@@ -65,6 +65,13 @@ public:
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
+	virtual bool	GetCantDelete()				{ return mCantDelete; };
+	virtual void	SetCantDelete( bool n )		{ mCantDelete = n; };
+	virtual bool	GetDontSearch()				{ return mDontSearch; };
+	virtual void	SetDontSearch( bool n )		{ mDontSearch = n; };
+	virtual bool	GetShowPict()				{ return mShowPict; };
+	virtual void	SetShowPict( bool n )		{ mShowPict = n; };
+	
 	virtual void	Dump( size_t inIndent = 0 );
 	
 	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
