@@ -10,8 +10,10 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class WILDCardView;
-@class WILDBackground;
+namespace Carlson
+{
+	class CBackground;
+}
 
 
 @interface WILDBackgroundInfoViewController : WILDLayerInfoViewController
@@ -19,6 +21,6 @@
 	
 }
 
--(id)		initWithBackground: (WILDBackground*)inCard ofCardView: (WILDCardView*)owningView;
+-(id)		initWithBackground: (Carlson::CBackground*)inCard;
 
 @end

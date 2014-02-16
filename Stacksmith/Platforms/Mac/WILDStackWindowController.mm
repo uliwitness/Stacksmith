@@ -16,6 +16,7 @@
 #import "WILDCustomWidgetWindow.h"
 #import "ULIHighlightingButton.h"
 #import "WILDCardInfoViewController.h"
+#import "WILDBackgroundInfoViewController.h"
 
 
 NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
@@ -799,15 +800,15 @@ using namespace Carlson;
 
 -(IBAction)	showBackgroundInfoPanel: (id)sender
 {
-//	if( mCurrentPopover )
-//		[mCurrentPopover close];
-//	
-//	WILDBackgroundInfoViewController*	backgroundInfo = [[[WILDBackgroundInfoViewController alloc] initWithBackground: [mCurrentCard owningBackground] ofCardView: (WILDCardView*) [self view]] autorelease];
-//	mCurrentPopover = [[NSPopover alloc] init];
-//	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
-//	[mCurrentPopover setDelegate: self];
-//	[mCurrentPopover setContentViewController: backgroundInfo];
-//	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
+	if( mCurrentPopover )
+		[mCurrentPopover close];
+	
+	WILDBackgroundInfoViewController*	backgroundInfo = [[[WILDBackgroundInfoViewController alloc] initWithBackground: mStack->GetCurrentCard()->GetBackground()] autorelease];
+	mCurrentPopover = [[NSPopover alloc] init];
+	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+	[mCurrentPopover setDelegate: self];
+	[mCurrentPopover setContentViewController: backgroundInfo];
+	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
 }
 
 -(IBAction)	showStackInfoPanel: (id)sender

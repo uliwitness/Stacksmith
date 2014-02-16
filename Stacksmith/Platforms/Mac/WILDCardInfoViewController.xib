@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="451" height="226"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <tabView id="WKO-ZB-G2d">
+                <tabView initialItem="bHC-HI-4zo" id="WKO-ZB-G2d">
                     <rect key="frame" x="-8" y="-10" width="467" height="236"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <font key="font" metaFont="system"/>
