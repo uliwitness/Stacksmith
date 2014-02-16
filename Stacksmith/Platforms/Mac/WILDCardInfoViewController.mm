@@ -44,7 +44,7 @@ using namespace Carlson;
 
 	[mMarkedSwitch setState: ((CCard*)mLayer)->IsMarked() ? NSOnState : NSOffState];
 	
-	size_t		cardNum = mLayer->GetStack()->GetIndexOfCard( (CCard*) mLayer );
+	size_t		cardNum = mLayer->GetStack()->GetIndexOfCard( (CCard*) mLayer ) +1;
 	size_t		numOfCards = mLayer->GetStack()->GetNumCards();
 	[mNumberField setStringValue: [NSString stringWithFormat: @"%1$zu out of %2$zu", cardNum, numOfCards]];
 }
