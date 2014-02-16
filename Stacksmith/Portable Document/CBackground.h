@@ -9,15 +9,15 @@
 #ifndef __Stacksmith__CBackground__
 #define __Stacksmith__CBackground__
 
-#include "CLayer.h"
+#include "CPlatformLayer.h"
 
 namespace Carlson {
 
-class CBackground : public CLayer
+class CBackground : public CPlatformLayer
 {
 public:
-	CBackground( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack ) : CLayer(inURL,inID,inName,inFileName,inStack)	{};
-	~CBackground()	{ printf("Released Background %p\n",this); };
+	CBackground( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack)	{};
+	~CBackground()	{};
 
 	virtual void	WakeUp();		// The current card has started its timers etc.
 	virtual void	GoToSleep();	// The current card has stopped its timers etc.

@@ -31,6 +31,7 @@ namespace Carlson
 	NSButton		*	mUserPropertyEditButton;
 	NSPopUpButton	*	mSizePopUpButton;
 	NSButton		*	mResizableSwitch;
+	NSSize				mOldCustomSize;
 }
 
 @property (retain) IBOutlet	NSButton		*	editScriptButton;

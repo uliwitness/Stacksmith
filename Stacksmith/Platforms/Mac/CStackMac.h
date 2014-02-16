@@ -14,15 +14,18 @@
 
 #if __OBJC__
 @class WILDStackWindowController;
-typedef WILDStackWindowController*			WILDStackWindowControllerPtr;
+typedef WILDStackWindowController*					WILDStackWindowControllerPtr;
 @class NSWindow;
 @class NSPopover;
-typedef NSWindow*							WILDNSWindowPtr;
-typedef NSPopover*							WILDNSPopoverPtr;
+@class WILDScriptEditorWindowController;
+typedef NSWindow*									WILDNSWindowPtr;
+typedef NSPopover*									WILDNSPopoverPtr;
+typedef WILDScriptEditorWindowController*			WILDScriptEditorWindowControllerPtr;
 #else
-typedef struct WILDStackWindowController*	WILDStackWindowControllerPtr;
-typedef struct NSWindow*					WILDNSWindowPtr;
-typedef struct NSPopover*					WILDNSPopoverPtr;
+typedef struct WILDStackWindowController*			WILDStackWindowControllerPtr;
+typedef struct NSWindow*							WILDNSWindowPtr;
+typedef struct NSPopover*							WILDNSPopoverPtr;
+typedef struct WILDScriptEditorWindowController*	WILDScriptEditorWindowControllerPtr;
 #endif
 
 
@@ -47,6 +50,8 @@ public:
 	
 	virtual bool				ShowScriptEditorForObject( CConcreteObject* inObject );
 	virtual bool				ShowPropertyEditorForObject( CConcreteObject* inObject );
+	virtual void				OpenScriptEditorAndShowOffset( size_t byteOffset );
+	virtual void				OpenScriptEditorAndShowLine( size_t lineIndex );
 	
 	virtual void				GetMousePosition( LEONumber *x, LEONumber *y );
 	virtual void				RectChangedOfPart( CPart* inChangedPart );
@@ -54,8 +59,9 @@ public:
 	static void					RegisterPartCreators();
 
 protected:
-	WILDStackWindowControllerPtr	mMacWindowController;
-	WILDNSPopoverPtr				mPopover;
+	WILDStackWindowControllerPtr		mMacWindowController;
+	WILDNSPopoverPtr					mPopover;
+	WILDScriptEditorWindowControllerPtr	mScriptEditor;
 };
 
 }

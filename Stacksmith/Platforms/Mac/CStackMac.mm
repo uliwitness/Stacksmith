@@ -36,6 +36,9 @@ CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string
 
 CStackMac::~CStackMac()
 {
+	[mScriptEditor close];
+	[mScriptEditor release];
+	mScriptEditor = nil;
 	[mPopover release];
 	mPopover = nil;
 	[mMacWindowController release];
@@ -168,6 +171,28 @@ bool	CStackMac::ShowPropertyEditorForObject( CConcreteObject* inObject )
 	[mPopover setBehavior: NSPopoverBehaviorTransient];
 	[mPopover showRelativeToRect: macPart->GetView().bounds ofView: macPart->GetView() preferredEdge: NSMaxYEdge];
 	return true;
+}
+
+
+void	CStackMac::OpenScriptEditorAndShowOffset( size_t byteOffset )
+{
+	if( !mScriptEditor )
+		mScriptEditor = [[WILDScriptEditorWindowController alloc] initWithScriptContainer: this];
+	
+	[mScriptEditor showWindow: nil];
+	if( byteOffset != SIZE_T_MAX )
+		[mScriptEditor goToCharacter: byteOffset];
+}
+
+
+void	CStackMac::OpenScriptEditorAndShowLine( size_t lineIndex )
+{
+	if( !mScriptEditor )
+		mScriptEditor = [[WILDScriptEditorWindowController alloc] initWithScriptContainer: this];
+	
+	[mScriptEditor showWindow: nil];
+	if( lineIndex != SIZE_T_MAX )
+		[mScriptEditor goToLine: lineIndex];
 }
 
 

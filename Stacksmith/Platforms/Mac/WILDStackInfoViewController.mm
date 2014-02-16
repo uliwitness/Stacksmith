@@ -102,7 +102,7 @@ using namespace Carlson;
 	for( NSUInteger x = 0; x < NUM_POPUP_MENU_SIZES; x++ )
 	{
 		if( sPopUpMenuSizes[x].width == cardSize.width
-			|| sPopUpMenuSizes[x].height == cardSize.height )
+			&& sPopUpMenuSizes[x].height == cardSize.height )
 		{
 			[mSizePopUpButton selectItemAtIndex: x];
 			foundSomething = YES;
@@ -116,6 +116,7 @@ using namespace Carlson;
 		[mWidthField setEnabled: YES];
 		[mHeightField setEnabled: YES];
 		[mApplySizeButton setEnabled: YES];
+		mOldCustomSize = cardSize;
 	}
 	else
 	{
@@ -138,11 +139,7 @@ using namespace Carlson;
 -(IBAction)	sizePopUpSelectionChanged: (id)sender
 {
 	NSInteger	selectedItem = [mSizePopUpButton indexOfSelectedItem];
-	BOOL		shouldEnableFields = (selectedItem == ([mSizePopUpButton numberOfItems] -1));
-	
-	[mWidthField setEnabled: shouldEnableFields];
-	[mHeightField setEnabled: shouldEnableFields];
-	
+	BOOL		shouldEnableFields = NO;
 	NSSize		currentSize = sPopUpMenuSizes[selectedItem];
 	
 	/*if( currentSize.width == -1 )
@@ -161,16 +158,21 @@ using namespace Carlson;
 	}
 	else*/ if( currentSize.width == 0 )
 	{
-		currentSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
+		currentSize = NSMakeSize( mOldCustomSize.width, mOldCustomSize.height );
+		shouldEnableFields = YES;
 	}
 	else
 	{
-		[mWidthField setIntValue: currentSize.width];
-		[mHeightField setIntValue: currentSize.height];
+		mStack->SetCardWidth( currentSize.width );
+		mStack->SetCardHeight( currentSize.height );
 	}
 	
-	mStack->SetCardWidth( currentSize.width );
-	mStack->SetCardHeight( currentSize.height );
+	[mWidthField setIntValue: currentSize.width];
+	[mHeightField setIntValue: currentSize.height];
+	
+	[mApplySizeButton setEnabled: shouldEnableFields];
+	[mWidthField setEnabled: shouldEnableFields];
+	[mHeightField setEnabled: shouldEnableFields];
 }
 
 

@@ -318,6 +318,7 @@
 		559BA9C618B0F80800760273 /* WILDBackgroundInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA9C418B0F80800760273 /* WILDBackgroundInfoViewController.xib */; };
 		559BA9CE18B1027500760273 /* WILDStackInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9CC18B1027500760273 /* WILDStackInfoViewController.mm */; };
 		559BA9CF18B1027500760273 /* WILDStackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA9CD18B1027500760273 /* WILDStackInfoViewController.xib */; };
+		559BA9D118B11E4600760273 /* CPlatformLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9D018B11E4500760273 /* CPlatformLayer.mm */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
@@ -922,6 +923,8 @@
 		559BA9CB18B1027500760273 /* WILDStackInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStackInfoViewController.h; path = Platforms/Mac/WILDStackInfoViewController.h; sourceTree = "<group>"; };
 		559BA9CC18B1027500760273 /* WILDStackInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDStackInfoViewController.mm; path = Platforms/Mac/WILDStackInfoViewController.mm; sourceTree = "<group>"; };
 		559BA9CD18B1027500760273 /* WILDStackInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDStackInfoViewController.xib; path = Platforms/Mac/WILDStackInfoViewController.xib; sourceTree = "<group>"; };
+		559BA9D018B11E4500760273 /* CPlatformLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CPlatformLayer.mm; path = Platforms/Mac/CPlatformLayer.mm; sourceTree = "<group>"; };
+		559BA9D218B11E6F00760273 /* CPlatformLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CPlatformLayer.h; path = Platforms/Mac/CPlatformLayer.h; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
 		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
@@ -1263,6 +1266,8 @@
 				55CD6122187B188E002450E2 /* CDocumentMac.cpp */,
 				55CD6120187B14E6002450E2 /* CStackMac.h */,
 				55CD611F187B14E6002450E2 /* CStackMac.mm */,
+				559BA9D218B11E6F00760273 /* CPlatformLayer.h */,
+				559BA9D018B11E4500760273 /* CPlatformLayer.mm */,
 				552386D31883EF1E00D7FAB3 /* WILDStackWindowController.h */,
 				552386D21883EF1E00D7FAB3 /* WILDStackWindowController.mm */,
 				552386BE1883E1B000D7FAB3 /* CMacPartBase.h */,
@@ -2461,6 +2466,7 @@
 				55039FD7136D5CCF0082E32E /* ULIPaintTextTool.m in Sources */,
 				55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */,
 				55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */,
+				559BA9D118B11E4600760273 /* CPlatformLayer.mm in Sources */,
 				552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */,
 				552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */,
 				559700EC137BB38B000264B8 /* WILDIrisOpenFilter.m in Sources */,

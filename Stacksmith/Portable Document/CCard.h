@@ -9,7 +9,7 @@
 #ifndef __Stacksmith__CCard__
 #define __Stacksmith__CCard__
 
-#include "CLayer.h"
+#include "CPlatformLayer.h"
 
 
 namespace Carlson {
@@ -27,10 +27,10 @@ typedef enum
 } TVisualEffectSpeed;
 
 
-class CCard : public CLayer
+class CCard : public CPlatformLayer
 {
 public:
-	CCard( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(NULL)	{};
+	CCard( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(NULL)	{};
 	
 	bool			IsMarked()					{ return mMarked; };
 	void			SetMarked( bool inMarked )	{ mMarked = inMarked; };
