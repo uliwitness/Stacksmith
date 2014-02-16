@@ -1,5 +1,5 @@
 //
-//  WILDStackInfoViewController.m
+//  WILDStackInfoViewController.mm
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 18.03.11.
@@ -7,13 +7,10 @@
 //
 
 #import "WILDStackInfoViewController.h"
-#import "WILDScriptEditorWindowController.h"
-#import "WILDCardView.h"
-#import "WILDStack.h"
+#import "CStack.h"
 #import "UKHelperMacros.h"
 #import "NSWindow+ULIZoomEffect.h"
-#import "WILDNotifications.h"
-#import "WILDUserPropertyEditorWindowController.h"
+#import "WILDUserPropertyEditorController.h"
 
 
 static NSSize		sPopUpMenuSizes[] =
@@ -30,10 +27,10 @@ static NSSize		sPopUpMenuSizes[] =
 #define NUM_POPUP_MENU_SIZES	(sizeof(sPopUpMenuSizes) / sizeof(NSSize))
 
 
-@implementation WILDStackInfoViewController
+using namespace Carlson;
 
-@synthesize cardView = mCardView;
-@synthesize stack = mStack;
+
+@implementation WILDStackInfoViewController
 
 @synthesize nameField = mNameField;
 @synthesize IDField = mIDField;
@@ -47,12 +44,11 @@ static NSSize		sPopUpMenuSizes[] =
 @synthesize sizePopUpButton = mSizePopUpButton;
 @synthesize resizableSwitch = mResizableSwitch;
 
--(id)	initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView
+-(id)	initWithStack: (CStack*)inStack
 {
 	if(( self = [super initWithNibName: NSStringFromClass([self class]) bundle: nil] ))
 	{
-		mStack = [inStack retain];
-		mCardView = [owningView retain];
+		mStack = (CStack*)inStack->Retain();
 	}
 	
 	return self;
@@ -60,8 +56,7 @@ static NSSize		sPopUpMenuSizes[] =
 
 -(void)	dealloc
 {
-	DESTROY_DEALLOC( mCardView );
-	DESTROY_DEALLOC( mStack );
+	mStack->Release();
 	
 	DESTROY_DEALLOC( mEditScriptButton );
 	DESTROY_DEALLOC( mNameField );
@@ -81,25 +76,25 @@ static NSSize		sPopUpMenuSizes[] =
 {
 	[super awakeFromNib];
 	
-	[mNameField setStringValue: [mStack name]];
-	if( [[mStack document] fileURL] == nil )
-		[mNameField setEnabled: NO];
+	[self.userPropertyEditor setPropertyContainer: mStack];
+		
+	[mNameField setStringValue: [NSString stringWithUTF8String: mStack->GetName().c_str()]];
 	
-	unsigned long	numCards = [[mStack cards] count];
-	[mCardCountField setStringValue: [NSString stringWithFormat: @"Contains %ld cards.", numCards]];
+	size_t	numCards = mStack->GetNumCards();
+	[mCardCountField setStringValue: [NSString stringWithFormat: @"Contains %zu cards.", numCards]];
 
-	unsigned long	numBackgrounds = [[mStack backgrounds] count];
+	size_t	numBackgrounds = mStack->GetNumBackgrounds();
 	[mBackgroundCountField setStringValue: [NSString stringWithFormat: @"Contains %ld backgrounds.", numBackgrounds]];
 	
 	[self updateCardSizePopUpAndFields];
 	
-	[mResizableSwitch setState: mStack.resizable ? NSOnState : NSOffState];
+	[mResizableSwitch setState: mStack->IsResizable() ? NSOnState : NSOffState];
 }
 
 
 -(void)	updateCardSizePopUpAndFields
 {
-	NSSize		cardSize = [mStack cardSize];
+	NSSize		cardSize = { (CGFloat)mStack->GetCardWidth(), (CGFloat)mStack->GetCardHeight() };
 	if( (cardSize.width <= 1 || cardSize.height <= 1) )
 		cardSize = NSMakeSize(512, 342);
 	
@@ -136,25 +131,7 @@ static NSSize		sPopUpMenuSizes[] =
 
 -(IBAction)	doEditScriptButton: (id)sender
 {
-	NSRect		box = [mEditScriptButton convertRect: [mEditScriptButton bounds] toView: nil];
-	NSRect		wFrame = [[self.view window] frame];
-	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
-	WILDScriptEditorWindowController*	se = [[[WILDScriptEditorWindowController alloc] initWithScriptContainer: mStack] autorelease];
-	[se setGlobalStartRect: box];
-	[[mStack document] addWindowController: se];
-	[se showWindow: self];
-}
-
-
--(IBAction)	doUserPropertyEditButton: (id)sender
-{
-	NSRect		box = [mUserPropertyEditButton convertRect: [mUserPropertyEditButton bounds] toView: nil];
-	NSRect		wFrame = [[self.view window] frame];
-	box = NSOffsetRect(box, wFrame.origin.x, wFrame.origin.y );
-	WILDUserPropertyEditorWindowController*	se = [[[WILDUserPropertyEditorWindowController alloc] initWithPropertyContainer: mStack] autorelease];
-	[se setGlobalStartRect: box];
-	[[mStack document] addWindowController: se];
-	[se showWindow: self];
+	mStack->OpenScriptEditorAndShowLine( SIZE_T_MAX );
 }
 
 
@@ -168,7 +145,7 @@ static NSSize		sPopUpMenuSizes[] =
 	
 	NSSize		currentSize = sPopUpMenuSizes[selectedItem];
 	
-	if( currentSize.width == -1 )
+	/*if( currentSize.width == -1 )
 	{
 		currentSize = [[mCardView window] contentRectForFrameRect: [[mCardView window] frame]].size;
 		[mWidthField setIntValue: currentSize.width];
@@ -182,33 +159,32 @@ static NSSize		sPopUpMenuSizes[] =
 		[mHeightField setIntValue: currentSize.height];
 		[mStack setCardSize: currentSize];
 	}
-	else if( currentSize.width == 0 )
+	else*/ if( currentSize.width == 0 )
 	{
 		currentSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
-		[mStack setCardSize: currentSize];
 	}
 	else
 	{
 		[mWidthField setIntValue: currentSize.width];
 		[mHeightField setIntValue: currentSize.height];
 	}
+	
+	mStack->SetCardWidth( currentSize.width );
+	mStack->SetCardHeight( currentSize.height );
 }
 
 
 -(IBAction)	doApplySizeButton: (id)sender
 {
 	NSSize	currentSize = NSMakeSize( [mWidthField intValue], [mHeightField intValue] );
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"cardSize", WILDAffectedPropertyKey, nil]];
-	[mStack setCardSize: currentSize];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"cardSize", WILDAffectedPropertyKey, nil]];
+	mStack->SetCardWidth( currentSize.width );
+	mStack->SetCardHeight( currentSize.height );
 }
 
 
 -(IBAction)	doResizableSwitchChanged: (id)sender
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"resizable", WILDAffectedPropertyKey, nil]];
-	[mStack setResizable: mResizableSwitch.state == NSOnState];
-	[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackDidChangeNotification object: self userInfo: [NSDictionary dictionaryWithObjectsAndKeys: @"resizable", WILDAffectedPropertyKey, nil]];
+	mStack->SetResizable( mResizableSwitch.state == NSOnState );
 }
 
 
@@ -216,16 +192,7 @@ static NSSize		sPopUpMenuSizes[] =
 {
 	if( [notif object] == mNameField )
 	{
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: mStack userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(name), WILDAffectedPropertyKey,
-										nil]];
-
-		[mStack setName: [mNameField stringValue]];
-			
-		[[NSNotificationCenter defaultCenter] postNotificationName: WILDStackWillChangeNotification object: mStack userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-										PROPERTY(name), WILDAffectedPropertyKey,
-										nil]];
-		[mStack updateChangeCount: NSChangeDone];
+		mStack->SetName( [mNameField stringValue].UTF8String );
 	}
 }
 

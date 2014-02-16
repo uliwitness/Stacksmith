@@ -9,14 +9,16 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class WILDCardView;
-@class WILDStack;
+namespace Carlson
+{
+	class CStack;
+}
+@class WILDUserPropertyEditorController;
 
 
 @interface WILDStackInfoViewController : NSViewController
 {
-    WILDCardView	*	mCardView;
-	WILDStack		*	mStack;
+	Carlson::CStack	*	mStack;
 	
 	NSTextField		*	mNameField;
 	NSTextField		*	mIDField;
@@ -31,9 +33,6 @@
 	NSButton		*	mResizableSwitch;
 }
 
-@property (retain) WILDCardView				*	cardView;
-@property (retain) WILDStack				*	stack;
-
 @property (retain) IBOutlet	NSButton		*	editScriptButton;
 @property (retain) IBOutlet	NSButton		*	applySizeButton;
 @property (retain) IBOutlet	NSTextField		*	nameField;
@@ -45,8 +44,9 @@
 @property (retain) IBOutlet	NSButton		*	userPropertyEditButton;
 @property (retain) IBOutlet	NSPopUpButton	*	sizePopUpButton;
 @property (retain) IBOutlet	NSButton		*	resizableSwitch;
+@property (retain) IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
 
--(id)		initWithStack: (WILDStack*)inStack ofCardView: (WILDCardView*)owningView;
+-(id)		initWithStack: (Carlson::CStack*)inStack;
 
 -(IBAction)	doEditScriptButton: (id)sender;
 

@@ -17,6 +17,7 @@
 #import "ULIHighlightingButton.h"
 #import "WILDCardInfoViewController.h"
 #import "WILDBackgroundInfoViewController.h"
+#import "WILDStackInfoViewController.h"
 
 
 NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
@@ -813,15 +814,15 @@ using namespace Carlson;
 
 -(IBAction)	showStackInfoPanel: (id)sender
 {
-//	if( mCurrentPopover )
-//		[mCurrentPopover close];
-//	
-//	WILDStackInfoViewController*	stackInfo = [[[WILDStackInfoViewController alloc] initWithStack: [mCurrentCard stack] ofCardView: (WILDCardView*) [self view]] autorelease];
-//	mCurrentPopover = [[NSPopover alloc] init];
-//	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
-//	[mCurrentPopover setDelegate: self];
-//	[mCurrentPopover setContentViewController: stackInfo];
-//	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
+	if( mCurrentPopover )
+		[mCurrentPopover close];
+	
+	WILDStackInfoViewController*	stackInfo = [[[WILDStackInfoViewController alloc] initWithStack: mStack] autorelease];
+	mCurrentPopover = [[NSPopover alloc] init];
+	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+	[mCurrentPopover setDelegate: self];
+	[mCurrentPopover setContentViewController: stackInfo];
+	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
 }
 
 

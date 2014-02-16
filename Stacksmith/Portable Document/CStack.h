@@ -85,7 +85,9 @@ public:
 	virtual CLayer*	GetCurrentLayer()				{ if( mEditingBackground ) return mCurrentCard->GetBackground(); return mCurrentCard; };
 	virtual CStack*	GetStack()						{ return this; };
 	size_t			GetCardWidth()					{ return mCardWidth; };
+	virtual void	SetCardWidth( int n )			{ mCardWidth = n; };
 	size_t			GetCardHeight()					{ return mCardHeight; };
+	virtual void	SetCardHeight( int n )			{ mCardHeight = n; };
 	
 	virtual void	SetPeeking( bool inState );
 	virtual bool	GetPeeking()							{ return mPeeking; };
@@ -97,6 +99,8 @@ public:
 
 	virtual void	SetStyle( TStackStyle inStyle )			{ mStyle = inStyle; };
 	TStackStyle		GetStyle()								{ return mStyle; };
+	virtual bool	IsResizable()							{ return mResizable; };
+	virtual void	SetResizable( bool n )					{ mResizable = n; };
 	
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );

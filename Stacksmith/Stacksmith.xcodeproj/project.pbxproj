@@ -316,6 +316,8 @@
 		559BA9B318AE90AE00760273 /* WILDLayerInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9B218AE90AE00760273 /* WILDLayerInfoViewController.mm */; };
 		559BA9C518B0F80800760273 /* WILDBackgroundInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9C318B0F80800760273 /* WILDBackgroundInfoViewController.mm */; };
 		559BA9C618B0F80800760273 /* WILDBackgroundInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA9C418B0F80800760273 /* WILDBackgroundInfoViewController.xib */; };
+		559BA9CE18B1027500760273 /* WILDStackInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9CC18B1027500760273 /* WILDStackInfoViewController.mm */; };
+		559BA9CF18B1027500760273 /* WILDStackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA9CD18B1027500760273 /* WILDStackInfoViewController.xib */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
@@ -917,6 +919,9 @@
 		559BA9C218B0F80800760273 /* WILDBackgroundInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDBackgroundInfoViewController.h; path = Platforms/Mac/WILDBackgroundInfoViewController.h; sourceTree = "<group>"; };
 		559BA9C318B0F80800760273 /* WILDBackgroundInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDBackgroundInfoViewController.mm; path = Platforms/Mac/WILDBackgroundInfoViewController.mm; sourceTree = "<group>"; };
 		559BA9C418B0F80800760273 /* WILDBackgroundInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDBackgroundInfoViewController.xib; path = Platforms/Mac/WILDBackgroundInfoViewController.xib; sourceTree = "<group>"; };
+		559BA9CB18B1027500760273 /* WILDStackInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStackInfoViewController.h; path = Platforms/Mac/WILDStackInfoViewController.h; sourceTree = "<group>"; };
+		559BA9CC18B1027500760273 /* WILDStackInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDStackInfoViewController.mm; path = Platforms/Mac/WILDStackInfoViewController.mm; sourceTree = "<group>"; };
+		559BA9CD18B1027500760273 /* WILDStackInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDStackInfoViewController.xib; path = Platforms/Mac/WILDStackInfoViewController.xib; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
 		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
@@ -1533,6 +1538,9 @@
 				559BA9C218B0F80800760273 /* WILDBackgroundInfoViewController.h */,
 				559BA9C318B0F80800760273 /* WILDBackgroundInfoViewController.mm */,
 				559BA9C418B0F80800760273 /* WILDBackgroundInfoViewController.xib */,
+				559BA9CB18B1027500760273 /* WILDStackInfoViewController.h */,
+				559BA9CC18B1027500760273 /* WILDStackInfoViewController.mm */,
+				559BA9CD18B1027500760273 /* WILDStackInfoViewController.xib */,
 				55B0740D1889C6E90023BA3E /* CMessageBoxMac.h */,
 				55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */,
 				55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */,
@@ -2146,6 +2154,7 @@
 				55039F48136B52C80082E32E /* brush06.png in Resources */,
 				55039F49136B52C80082E32E /* brush07.png in Resources */,
 				55039F4A136B52C80082E32E /* brush08.png in Resources */,
+				559BA9CF18B1027500760273 /* WILDStackInfoViewController.xib in Resources */,
 				55039F4B136B52C80082E32E /* brush09.png in Resources */,
 				55039F4C136B52C80082E32E /* brush10.png in Resources */,
 				55039F4D136B52C80082E32E /* brush11.png in Resources */,
@@ -2447,6 +2456,7 @@
 				55039FD3136D5CCF0082E32E /* ULIPaintTempLineTool.m in Sources */,
 				55039FD4136D5CCF0082E32E /* ULIPaintTempOvalTool.m in Sources */,
 				55039FD5136D5CCF0082E32E /* ULIPaintTempRectangleTool.m in Sources */,
+				559BA9CE18B1027500760273 /* WILDStackInfoViewController.mm in Sources */,
 				55039FD6136D5CCF0082E32E /* ULIPaintTempRoundrectTool.m in Sources */,
 				55039FD7136D5CCF0082E32E /* ULIPaintTextTool.m in Sources */,
 				55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */,
