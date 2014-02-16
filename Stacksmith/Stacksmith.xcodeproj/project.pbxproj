@@ -319,6 +319,7 @@
 		559BA9CE18B1027500760273 /* WILDStackInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9CC18B1027500760273 /* WILDStackInfoViewController.mm */; };
 		559BA9CF18B1027500760273 /* WILDStackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA9CD18B1027500760273 /* WILDStackInfoViewController.xib */; };
 		559BA9D118B11E4600760273 /* CPlatformLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9D018B11E4500760273 /* CPlatformLayer.mm */; };
+		559BA9D518B15EDD00760273 /* CMacScriptableObjectBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9D318B15EDD00760273 /* CMacScriptableObjectBase.mm */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
@@ -925,6 +926,8 @@
 		559BA9CD18B1027500760273 /* WILDStackInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDStackInfoViewController.xib; path = Platforms/Mac/WILDStackInfoViewController.xib; sourceTree = "<group>"; };
 		559BA9D018B11E4500760273 /* CPlatformLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CPlatformLayer.mm; path = Platforms/Mac/CPlatformLayer.mm; sourceTree = "<group>"; };
 		559BA9D218B11E6F00760273 /* CPlatformLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CPlatformLayer.h; path = Platforms/Mac/CPlatformLayer.h; sourceTree = "<group>"; };
+		559BA9D318B15EDD00760273 /* CMacScriptableObjectBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMacScriptableObjectBase.mm; path = Platforms/Mac/CMacScriptableObjectBase.mm; sourceTree = "<group>"; };
+		559BA9D418B15EDD00760273 /* CMacScriptableObjectBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMacScriptableObjectBase.h; path = Platforms/Mac/CMacScriptableObjectBase.h; sourceTree = "<group>"; };
 		55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSubtractCommandNode.cpp; path = ../../CSubtractCommandNode.cpp; sourceTree = "<group>"; };
 		55A46A53170A5C1800750972 /* CSubtractCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSubtractCommandNode.h; path = ../../CSubtractCommandNode.h; sourceTree = "<group>"; };
 		55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDivideCommandNode.cpp; path = ../../CDivideCommandNode.cpp; sourceTree = "<group>"; };
@@ -1270,6 +1273,8 @@
 				559BA9D018B11E4500760273 /* CPlatformLayer.mm */,
 				552386D31883EF1E00D7FAB3 /* WILDStackWindowController.h */,
 				552386D21883EF1E00D7FAB3 /* WILDStackWindowController.mm */,
+				559BA9D418B15EDD00760273 /* CMacScriptableObjectBase.h */,
+				559BA9D318B15EDD00760273 /* CMacScriptableObjectBase.mm */,
 				552386BE1883E1B000D7FAB3 /* CMacPartBase.h */,
 				552386BD1883E1AF00D7FAB3 /* CMacPartBase.mm */,
 				552386C31883E2DF00D7FAB3 /* WILDViewFactory.h */,
@@ -2330,6 +2335,7 @@
 			files = (
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				55CD60F018779641002450E2 /* CParseErrorCommandNode.cpp in Sources */,
+				559BA9D518B15EDD00760273 /* CMacScriptableObjectBase.mm in Sources */,
 				55405BD418A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm in Sources */,
 				552386D11883EAA300D7FAB3 /* CWebBrowserPartMac.mm in Sources */,
 				5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */,

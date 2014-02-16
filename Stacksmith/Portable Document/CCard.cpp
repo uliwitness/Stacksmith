@@ -10,6 +10,7 @@
 #include "CStack.h"
 #include "CTinyXMLUtils.h"
 #include "CAlert.h"
+#include <sstream>
 
 
 using namespace Carlson;
@@ -144,4 +145,17 @@ bool	CCard::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 	else
 		return CLayer::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 }
+
+
+std::string		CCard::GetDisplayName()
+{
+	std::stringstream		strs;
+	if( mName.length() > 0 )
+		strs << "Card \"" << mName << "\"";
+	else
+		strs << "Card ID " << GetID();
+	return strs.str();
+}
+
+
 

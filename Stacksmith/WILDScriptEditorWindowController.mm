@@ -120,8 +120,8 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	NSURL		*	theURL = [NSURL URLWithString: [NSString stringWithUTF8String: mContainer->GetDocument()->GetURL().c_str()]];
 	[theWindow setTitleWithRepresentedFilename: theURL.path];
 
-	NSButton	*	btn = [[self window] standardWindowButton: NSWindowDocumentIconButton];
-	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>(mContainer);
+	NSButton				*	btn = [[self window] standardWindowButton: NSWindowDocumentIconButton];
+	CMacScriptableObjectBase*	macPart = dynamic_cast<CMacScriptableObjectBase*>(mContainer);
 	if( macPart )
 		[btn setImage: macPart->GetDisplayIcon()];
 	[theWindow setTitle: [self windowTitleForDocumentDisplayName: nil]];
@@ -150,8 +150,8 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 {
 	[super setDocument: document];
 	
-	NSButton*	btn = [[self window] standardWindowButton: NSWindowDocumentIconButton];
-	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>(mContainer);
+	NSButton*					btn = [[self window] standardWindowButton: NSWindowDocumentIconButton];
+	CMacScriptableObjectBase*	macPart = dynamic_cast<CMacScriptableObjectBase*>(mContainer);
 	if( macPart )
 		[btn setImage: macPart->GetDisplayIcon()];
 }
@@ -180,7 +180,7 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	// Now add a new item above that for this window, the script:
 	NSMenuItem*		newItem = [menu insertItemWithTitle: [NSString stringWithFormat: @"%1$@’s Script", [NSString stringWithUTF8String: mContainer->GetDisplayName().c_str()]]
 											action: nil keyEquivalent: @"" atIndex: 0];
-	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>(mContainer);
+	CMacScriptableObjectBase*	macPart = dynamic_cast<CMacScriptableObjectBase*>(mContainer);
 	if( macPart )
 		[newItem setImage: macPart->GetDisplayIcon()];
 	

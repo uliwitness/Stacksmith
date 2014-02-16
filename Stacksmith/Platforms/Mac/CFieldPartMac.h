@@ -15,7 +15,9 @@
 #include <climits>
 #import "WILDFieldInfoViewController.h"
 
+
 @class WILDFieldDelegate;
+
 
 namespace Carlson {
 

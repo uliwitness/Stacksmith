@@ -104,8 +104,11 @@ public:
 	virtual void				SetHighlight( bool inHighlighted )	{};
 	virtual void				PrepareMouseUp()				{};	// Sent when a mouse click was inside, right before we send mouseUp.
 	
+	virtual CLayer*				GetOwner()						{ return mOwner; };
+	
 	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y );	// Stack-relative coordinates relative to top left, descending down and right.
 	virtual void				Grab( THitPart inHitPart = EContentHitPart );
+	virtual std::string			GetDisplayName()	{ return GenerateDisplayName( GetIdentityForDump() ); };
 	
 	virtual void				Dump( size_t inIndent = 0 );
 	
@@ -114,6 +117,7 @@ protected:
 	virtual void				SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
 	virtual const char*			GetIdentityForDump()					{ return "Part"; };
 	virtual void				DumpProperties( size_t inIndent );
+	virtual std::string			GenerateDisplayName( const char* inTypeName );
 
 	LEOInteger			mFamily;
 	ObjectID			mID;

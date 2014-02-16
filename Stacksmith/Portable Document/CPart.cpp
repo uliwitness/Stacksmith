@@ -12,6 +12,7 @@
 #include "CStack.h"
 #include "CCursor.h"
 #include <iostream>
+#include <sstream>
 
 
 using namespace Carlson;
@@ -325,5 +326,18 @@ void	CPart::Grab( THitPart inHitPart )
 	});
 //	std::cout << "Done tracking." << std::endl;
 }
+
+
+std::string		CPart::GenerateDisplayName( const char* inTypeName )
+{
+	std::stringstream		strs;
+	strs << (dynamic_cast<CCard*>(GetOwner()) ? "Card " : "Background ");
+	if( mName.length() > 0 )
+		strs << inTypeName << " \"" << mName << "\"";
+	else
+		strs << inTypeName << " ID " << GetID();
+	return strs.str();
+}
+
 
 

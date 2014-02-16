@@ -10,24 +10,30 @@
 #define Stacksmith_CPlatformLayer_h
 
 #include "CLayer.h"
+#include "CMacScriptableObjectBase.h"
 
 
 #if __OBJC__
 @class WILDScriptEditorWindowController;
 typedef WILDScriptEditorWindowController*			WILDScriptEditorWindowControllerPtr;
+@class NSimage;
+typedef NSImage*									WILDNSImagePtr;
 #else
 typedef struct WILDScriptEditorWindowController*	WILDScriptEditorWindowControllerPtr;
+typedef struct NSImage*								WILDNSImagePtr;
 #endif
 
 
 namespace Carlson
 {
 
-class CPlatformLayer : public CLayer
+class CPlatformLayer : public CLayer, public CMacScriptableObjectBase
 {
 public:
 	CPlatformLayer( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack ) : CLayer( inURL, inID, inName, inFileName, inStack ) {};
 	~CPlatformLayer();
+
+	virtual WILDNSImagePtr		GetDisplayIcon();
 	
 	virtual void				OpenScriptEditorAndShowOffset( size_t byteOffset );
 	virtual void				OpenScriptEditorAndShowLine( size_t lineIndex );

@@ -8,6 +8,7 @@
 
 #include "CBackground.h"
 #include "CStack.h"
+#include <sstream>
 
 
 using namespace Carlson;
@@ -77,5 +78,17 @@ bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack
 		return GetStack()->GetCardWithBackground( this, searchStart )->GoThereInNewWindow( inOpenInMode, oldStack, overPart );
 	return false;
 }
+
+
+std::string		CBackground::GetDisplayName()
+{
+	std::stringstream		strs;
+	if( mName.length() > 0 )
+		strs << "Background \"" << mName << "\"";
+	else
+		strs << "Background ID " << GetID();
+	return strs.str();
+}
+
 
 

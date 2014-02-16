@@ -15,6 +15,7 @@
 #import "WILDButtonView.h"
 #import "WILDButtonCell.h"
 #import "WILDPopUpButtonView.h"
+#include <sstream>
 
 
 using namespace Carlson;
@@ -270,5 +271,8 @@ NSView*	CButtonPartMac::GetView()
 {
 	return mView;
 }
+
+
+
 
 

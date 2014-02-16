@@ -15,8 +15,9 @@
 #ifndef __Stacksmith__CMacPartBase__
 #define __Stacksmith__CMacPartBase__
 
-#import <Cocoa/Cocoa.h>
 #import "WILDPartInfoViewController.h"
+#import <Cocoa/Cocoa.h>
+#include "CMacScriptableObjectBase.h"
 
 
 @class WILDScriptEditorWindowController;
@@ -26,7 +27,7 @@
 namespace Carlson {
 
 
-class CMacPartBase
+class CMacPartBase : public CMacScriptableObjectBase
 {
 public:
 	CMacPartBase() {};

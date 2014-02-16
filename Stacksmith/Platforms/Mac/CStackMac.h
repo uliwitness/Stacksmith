@@ -10,6 +10,7 @@
 #define __Stacksmith__CStackMac__
 
 #include "CStack.h"
+#include "CMacScriptableObjectBase.h"
 
 
 #if __OBJC__
@@ -18,20 +19,23 @@ typedef WILDStackWindowController*					WILDStackWindowControllerPtr;
 @class NSWindow;
 @class NSPopover;
 @class WILDScriptEditorWindowController;
+@class NSImage;
 typedef NSWindow*									WILDNSWindowPtr;
 typedef NSPopover*									WILDNSPopoverPtr;
 typedef WILDScriptEditorWindowController*			WILDScriptEditorWindowControllerPtr;
+typedef NSImage*									WILDNSImagePtr;
 #else
 typedef struct WILDStackWindowController*			WILDStackWindowControllerPtr;
 typedef struct NSWindow*							WILDNSWindowPtr;
 typedef struct NSPopover*							WILDNSPopoverPtr;
 typedef struct WILDScriptEditorWindowController*	WILDScriptEditorWindowControllerPtr;
+typedef struct NSImage*								WILDNSImagePtr;
 #endif
 
 
 namespace Carlson {
 
-class CStackMac : public CStack
+class CStackMac : public CStack, public CMacScriptableObjectBase
 {
 public:
 	CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
@@ -45,6 +49,9 @@ public:
 	virtual void				SetEditingBackground( bool inState );
 	virtual void				SetTool( TTool inTool );
 	virtual void				SetName( const std::string& inName );
+
+	virtual std::string			GetDisplayName();
+	virtual WILDNSImagePtr		GetDisplayIcon();
 	
 	virtual WILDNSWindowPtr		GetMacWindow();
 	

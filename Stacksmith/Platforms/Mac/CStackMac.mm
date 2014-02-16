@@ -20,6 +20,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "WILDScriptEditorWindowController.h"
 #import "WILDPartInfoViewController.h"
+#include <sstream>
 
 
 using namespace Carlson;
@@ -43,6 +44,17 @@ CStackMac::~CStackMac()
 	mPopover = nil;
 	[mMacWindowController release];
 	mMacWindowController = nil;
+}
+
+
+std::string		CStackMac::GetDisplayName()
+{
+	std::stringstream		strs;
+	if( mName.length() > 0 )
+		strs << "Stack \"" << mName << "\"";
+	else
+		strs << "Stack ID " << GetID();
+	return strs.str();
 }
 
 
@@ -231,3 +243,18 @@ void	CStackMac::RegisterPartCreators()
 		sAlreadyDidThis = true;
 	}
 }
+
+
+NSImage*	CStackMac::GetDisplayIcon()
+{
+	static NSImage*	sStackIcon = nil;
+	if( !sStackIcon )
+	{
+		sStackIcon = [[NSImage imageNamed: @"Stack"] copy];
+		[sStackIcon setSize: NSMakeSize(16,16)];
+	}
+	return sStackIcon;
+}
+
+
+

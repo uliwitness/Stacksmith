@@ -40,3 +40,13 @@ void	CPlatformLayer::OpenScriptEditorAndShowLine( size_t lineIndex )
 	if( lineIndex != SIZE_T_MAX )
 		[mScriptEditor goToLine: lineIndex];
 }
+
+
+NSImage*	CPlatformLayer::GetDisplayIcon()
+{
+	static NSImage*	sLayerIcon = nil;
+	if( !sLayerIcon )
+		sLayerIcon = [[NSImage imageNamed: @"CardIconSmall"] retain];
+	return sLayerIcon;
+}
+
