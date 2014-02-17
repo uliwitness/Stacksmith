@@ -227,16 +227,14 @@ void	CAttributedString::NormalizeStyleRuns()
 
 void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLElement* inElement, CStyleSheet *styleSheet ) const
 {
-	int		styleNum = 0;
 	size_t	currOffs = 0;
 	for( CAttributeRange currRun : mRanges )
 	{
 		if( currOffs < currRun.mStart )
 			inElement->InsertEndChild( inDoc->NewText( mString.substr( currOffs, currRun.mStart -currOffs ).c_str() ) );
-		char	styleName[1024] = {0};
-		snprintf( styleName, sizeof(styleName) -1, "style%d", ++styleNum );
+		std::string	styleName( styleSheet->UniqueNameForClass( "style" ) );
 		tinyxml2::XMLElement* spanElement = inDoc->NewElement( "span" );
-		spanElement->SetAttribute( "class", styleName );
+		spanElement->SetAttribute( "class", styleName.c_str() );
 		spanElement->InsertEndChild( inDoc->NewText( mString.substr( currRun.mStart, currRun.mEnd -currRun.mStart ).c_str() ) );
 		auto	currLink = currRun.mAttributes.find("$link");
 		if( currLink != currRun.mAttributes.end() )
@@ -250,7 +248,7 @@ void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocumen
 		else
 			inElement->InsertEndChild( spanElement );
 		
-		styleSheet->SetStyleForClass( styleName, currRun.GetAttributesWithoutInternal() );
+		styleSheet->SetStyleForClass( styleName.c_str(), currRun.GetAttributesWithoutInternal() );
 		
 		currOffs = currRun.mEnd;
 	}

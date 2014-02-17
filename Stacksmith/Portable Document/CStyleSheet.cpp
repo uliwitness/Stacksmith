@@ -153,3 +153,39 @@ std::string	CStyleSheet::GetCSS() const
 	
 	return sstream.str();
 }
+
+
+std::string	CStyleSheet::UniqueNameForClass( const char* inBaseName )
+{
+	size_t			counter = 1;
+	std::string		currName;
+	{
+		std::stringstream	nameStream;
+		nameStream << '.' << inBaseName << counter++;
+		currName = nameStream.str();
+	}
+	
+	bool			isUnique = false;
+	while( !isUnique )
+	{
+		isUnique = true;
+		for( auto currStyle : mStyles )
+		{
+			if( currStyle.first.compare( currName ) == 0 )
+			{
+				isUnique = false;
+				break;
+			}
+		}
+		
+		if( !isUnique )
+		{
+			std::stringstream	nameStream;
+			nameStream << '.' << inBaseName << counter++;
+			currName = nameStream.str();
+		}
+	}
+	
+	return currName.substr(1);
+}
+

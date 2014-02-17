@@ -42,6 +42,7 @@ public:
 	
 	size_t		GetNumClasses()						{ return mStyles.size(); };
 	std::string	GetClassAtIndex( size_t inIdx )		{ if( inIdx >= mStyles.size() ) return ""; auto itty = mStyles.begin(); for( ; inIdx > 0; itty++, inIdx-- ) {} return itty->first; };
+	std::string	UniqueNameForClass( const char* inBaseName );	// *always* appends a number to the class name.
 	
 	void	Dump() const;
 	
