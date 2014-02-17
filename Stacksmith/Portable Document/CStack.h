@@ -56,7 +56,8 @@ public:
 	std::string		GetURL()		{ return mURL; };
 	std::string		GetFileName()	{ return mFileName; };
 	
-	void			AddCard( CCard* inCard );
+	void			AddCard( CCard* inCard );	// Add at end.
+	void			InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard = NULL );	// If precedingCard == NULL insert at start.
 	void			RemoveCard( CCard* inCard );
 	size_t			GetNumCards()						{ return mCards.size(); };
 	CCard*			GetCard( size_t inIndex )			{ if( inIndex >= mCards.size() ) return NULL; return mCards[inIndex]; };
@@ -67,13 +68,16 @@ public:
 	CCard*			GetCardWithBackground( CBackground* inBg, CCard *startAtCard = NULL, bool searchForward = true );
 	size_t			GetNumCardsWithBackground( CBackground* inBg );
 	CCard*			GetCardAtIndexWithBackground( size_t cardIdx, CBackground* inBg );
+	CCard*			AddNewCard();
 	
+	void			AddBackground( CBackground* inBackground );	// Add at end.
 	size_t			GetNumBackgrounds()					{ return mBackgrounds.size(); };
 	CBackground*	GetBackground( size_t inIndex )		{ if( inIndex >= mBackgrounds.size() ) return NULL; return mBackgrounds[inIndex]; };
 	CBackground*	GetBackgroundByID( ObjectID inID );
 	CBackground*	GetBackgroundByName( const char* inName );
 	size_t			GetIndexOfBackground( CBackground* inBackground );
 	void			SetIndexOfBackgroundTo( CBackground* inBg, size_t newIndex );
+	CCard*			AddNewCardWithBackground( CBackground* inBg = NULL );	// NULL inBg means create a new background.
 	
 	virtual void	WakeUp()	{};	// The current card has started its timers etc.
 	virtual void	GoToSleep()	{};	// The current card has stopped its timers etc.

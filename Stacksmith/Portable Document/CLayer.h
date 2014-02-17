@@ -35,7 +35,8 @@ public:
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
 	virtual void	Save( const std::string& inPackagePath );
 	
-	bool			IsLoaded()	{ return mLoaded; };
+	bool			IsLoaded()					{ return mLoaded; };
+	virtual void	SetLoaded( bool n )			{ mLoaded = true; };	// For marking a newly created never-before-saved card/bg in RAM as not needing to be loaded.
 	virtual void	SetStack( CStack* inStack );
 	size_t			GetNumParts()				{ return GetPartCountOfType( NULL ); };
 	CPart*			GetPart( size_t inIndex )	{ return GetPartOfType(inIndex,NULL); };

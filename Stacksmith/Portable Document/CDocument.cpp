@@ -485,6 +485,61 @@ ObjectID	CDocument::GetUniqueIDForStack()
 }
 
 
+ObjectID	CDocument::GetUniqueIDForCard()
+{
+	bool	notUnique = true;
+	
+	while( notUnique )
+	{
+		notUnique = false;
+		
+		for( auto currStack = mStacks.begin(); currStack != mStacks.end(); currStack ++ )
+		{
+			size_t	numCards = (*currStack)->GetNumCards();
+			for( size_t x = 0; x < numCards; x++ )
+			{
+				CCard	*	currCard = (*currStack)->GetCard(x);
+				if( currCard->GetID() == mCardIDSeed )
+				{
+					notUnique = true;
+					mCardIDSeed++;
+					break;
+				}
+			}
+		}
+	}
+	
+	return mCardIDSeed;
+}
+
+
+ObjectID	CDocument::GetUniqueIDForBackground()
+{
+	bool	notUnique = true;
+	
+	while( notUnique )
+	{
+		notUnique = false;
+		
+		for( auto currStack = mStacks.begin(); currStack != mStacks.end(); currStack ++ )
+		{
+			size_t	numBackgrounds = (*currStack)->GetNumBackgrounds();
+			for( size_t x = 0; x < numBackgrounds; x++ )
+			{
+				CBackground	*	currBackground = (*currStack)->GetBackground(x);
+				if( currBackground->GetID() == mBackgroundIDSeed )
+				{
+					notUnique = true;
+					mBackgroundIDSeed++;
+					break;
+				}
+			}
+		}
+	}
+	
+	return mBackgroundIDSeed;
+}
+
 
 ObjectID	CDocument::GetUniqueIDForMedia()
 {

@@ -12,6 +12,8 @@
 #include "CURLConnection.h"
 #include "tinyxml2.h"
 #include "CTinyXMLUtils.h"
+#include "CDocument.h"
+#include <sstream>
 
 
 using namespace Carlson;
@@ -253,13 +255,35 @@ void	CStack::Save( const std::string& inPackagePath )
 
 void	CStack::AddCard( CCard* inCard )
 {
-	inCard->Retain();
 	inCard->SetStack( this );
 	mCards.push_back( inCard );
 	
 	if( inCard->IsMarked() )
 		mMarkedCards.insert( inCard );
 }
+
+
+void	CStack::InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard )
+{
+	inNewCard->SetStack( this );
+	if( precedingCard == NULL )
+		mCards.insert( mCards.begin(), inNewCard );
+	else
+	{
+		for( auto currCard = mCards.begin(); currCard != mCards.end(); currCard++ )
+		{
+			if( (*currCard) == precedingCard )
+			{
+				mCards.insert( currCard +1, inNewCard );
+				break;
+			}
+		}
+	}
+	
+	if( inNewCard->IsMarked() )
+		mMarkedCards.insert( inNewCard );
+}
+
 
 void	CStack::RemoveCard( CCard* inCard )
 {
@@ -288,6 +312,44 @@ CCard*	CStack::GetCardByID( ObjectID inID )
 	}
 	
 	return NULL;
+}
+
+
+CCard*	CStack::AddNewCard()
+{
+	return AddNewCardWithBackground( GetCurrentCard()->GetBackground() );
+}
+
+CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
+{
+	size_t			slashOffset = mURL.rfind( '/' );
+	if( slashOffset == std::string::npos )
+		slashOffset = 0;
+	
+	if( inBg == NULL )
+	{
+		ObjectID				bgID = GetDocument()->GetUniqueIDForBackground();
+		std::stringstream		bgName;
+		std::string				bgURL( mURL.substr(0,slashOffset) );
+		bgURL.append( 1, '/' );
+		bgName << "background_" << bgID << ".xml";
+		bgURL.append( bgName.str() );
+		inBg = new CBackground( bgURL, bgID, "", bgName.str(), this );
+		inBg->SetLoaded(true);
+		AddBackground( inBg );
+	}
+	
+	ObjectID		theID = GetDocument()->GetUniqueIDForCard();
+	std::stringstream		cardName;
+	std::string				cardURL( mURL.substr(0,slashOffset) );
+	cardURL.append( 1, '/' );
+	cardName << "card_" << theID << ".xml";
+	cardURL.append( cardName.str() );
+	CCard	*	theCard = new CCard( cardURL, theID, "", cardName.str(), this, false );
+	theCard->SetBackground( inBg );
+	theCard->SetLoaded(true);
+	InsertCardAfterCard( theCard, GetCurrentCard() );
+	return theCard;
 }
 
 
@@ -370,6 +432,13 @@ CCard*	CStack::GetCardWithBackground( CBackground* inBg, CCard *startAtCard, boo
 	}
 	
 	return NULL;
+}
+
+
+void	CStack::AddBackground( CBackground* inBackground )
+{
+	inBackground->SetStack( this );
+	mBackgrounds.push_back( inBackground );
 }
 
 

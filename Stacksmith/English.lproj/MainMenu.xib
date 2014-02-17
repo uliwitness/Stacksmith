@@ -198,6 +198,20 @@
                                     <action selector="deselectAll:" target="-1" id="691"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="AlQ-PN-eRf">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="New Card" keyEquivalent="n" id="z6Z-Ih-7v1">
+                                <connections>
+                                    <action selector="newCard:" target="-1" id="LhL-XL-lxy"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Background" id="Zxq-fC-9bs">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newBackground:" target="-1" id="2aI-yT-xS9"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="214">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

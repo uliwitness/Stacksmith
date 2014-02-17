@@ -60,7 +60,7 @@ class CDocument : public CRefCountedObject
 public:
 	static void		SetStandardResourcesPath( const std::string& inStdResPath );
 
-	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false) {};
+	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false) {};
 	
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
 	void				Save();
@@ -73,6 +73,8 @@ public:
 	size_t				GetNumStacks()				{ return mStacks.size(); };
 	CStack*				GetStackByName( const char* inName );
 	ObjectID			GetUniqueIDForStack();
+	ObjectID			GetUniqueIDForCard();
+	ObjectID			GetUniqueIDForBackground();
 	ObjectID			GetUniqueIDForMedia();
 	
 	virtual void		SetPeeking( bool inState );
@@ -113,6 +115,8 @@ protected:
 	bool											mPeeking;
 	
 	ObjectID										mStackIDSeed;
+	ObjectID										mCardIDSeed;
+	ObjectID										mBackgroundIDSeed;
 	ObjectID										mMediaIDSeed;
 	
 	LEOContextGroup*								mContextGroup;

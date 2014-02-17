@@ -856,6 +856,18 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	newCard: (id)sender
+{
+	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+}
+
+
+-(IBAction)	newBackground: (id)sender
+{
+	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+}
+
+
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
 	NSToolbarItem	*	theItem = [[[NSToolbarItem alloc] initWithItemIdentifier: itemIdentifier] autorelease];
