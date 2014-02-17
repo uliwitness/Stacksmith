@@ -420,6 +420,8 @@ using namespace Carlson;
 	if( theBackground->GetShowPicture() && bgPictureURL.length() > 0 )
 	{
 		mBackgroundImageView = [[NSImageView alloc] initWithFrame: NSMakeRect(0,0,mStack->GetCardWidth(), mStack->GetCardHeight())];
+		[mBackgroundImageView setImageAlignment: NSImageAlignTopLeft];
+		[mBackgroundImageView setImageScaling: NSImageScaleNone];
 		[mBackgroundImageView setWantsLayer: YES];
 		mBackgroundImageView.image = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: bgPictureURL.c_str()]]] autorelease];
 		[mContentView addSubview: mBackgroundImageView];
@@ -441,6 +443,8 @@ using namespace Carlson;
 		if( theCard->GetShowPicture() && cdPictureURL.length() > 0 )
 		{
 			mCardImageView = [[NSImageView alloc] initWithFrame: NSMakeRect(0,0,mStack->GetCardWidth(), mStack->GetCardHeight())];
+			[mCardImageView setImageAlignment: NSImageAlignTopLeft];
+			[mCardImageView setImageScaling: NSImageScaleNone];
 			[mCardImageView setWantsLayer: YES];
 			mCardImageView.image = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cdPictureURL.c_str()]]] autorelease];
 			[mContentView addSubview: mCardImageView];
