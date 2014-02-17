@@ -74,9 +74,14 @@ using namespace Carlson;
 	[mDontSearchSwitch setState: mLayer->GetDontSearch() ? NSOnState : NSOffState];
 		
 	unsigned long	numFields = mLayer->GetPartCountOfType( CPart::GetPartCreatorForType("field") );
-	[mFieldCountField setStringValue: [NSString stringWithFormat: @"Contains %ld card fields", numFields]];
-
 	unsigned long	numButtons = mLayer->GetPartCountOfType( CPart::GetPartCreatorForType("button") );
+	[self setLayerFieldCount: numFields buttonCount: numButtons];
+}
+
+
+-(void)	setLayerFieldCount: (unsigned long)numFields buttonCount: (unsigned long)numButtons
+{
+	[mFieldCountField setStringValue: [NSString stringWithFormat: @"Contains %ld card fields", numFields]];
 	[mButtonCountField setStringValue: [NSString stringWithFormat: @"Contains %ld card buttons", numButtons]];
 }
 

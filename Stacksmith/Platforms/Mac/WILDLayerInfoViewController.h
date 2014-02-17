@@ -51,4 +51,6 @@ namespace Carlson
 -(IBAction)	doCantDeleteSwitchChanged: (id)sender;
 -(IBAction)	doDontSearchSwitchChanged: (id)sender;
 
+-(void)	setLayerFieldCount: (unsigned long)numFields buttonCount: (unsigned long)numButtons;	// Override point for subclasses to provide text.
+
 @end

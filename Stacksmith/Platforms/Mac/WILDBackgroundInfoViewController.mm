@@ -43,4 +43,11 @@ using namespace Carlson;
 	[mNumberField setStringValue: [NSString stringWithFormat: @"Background shared by %1$zu cards", numOfCards]];
 }
 
+
+-(void)	setLayerFieldCount: (unsigned long)numFields buttonCount: (unsigned long)numButtons
+{
+	[mFieldCountField setStringValue: [NSString stringWithFormat: @"Contains %ld background fields", numFields]];
+	[mButtonCountField setStringValue: [NSString stringWithFormat: @"Contains %ld background buttons", numButtons]];
+}
+
 @end
