@@ -36,9 +36,11 @@ public:
 	virtual void	SetVisible( bool visible )		{ CButtonPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual NSView*	GetView();
 	
+	virtual void	SetIconID( ObjectID inID );
+	
 	virtual void	PrepareMouseUp();
 	
-	virtual NSImage*	GetDisplayIcon()	{ return [NSImage imageNamed: @"ButtonIconSmall"]; };
+	virtual NSImage*	GetDisplayIcon()			{ return [NSImage imageNamed: @"ButtonIconSmall"]; };
 	virtual Class		GetPropertyEditorClass()	{ return [WILDButtonInfoViewController class]; };
 	
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };

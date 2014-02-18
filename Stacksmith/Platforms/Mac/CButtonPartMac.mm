@@ -273,6 +273,26 @@ NSView*	CButtonPartMac::GetView()
 }
 
 
+void	CButtonPartMac::SetIconID( ObjectID inID )
+{
+	CButtonPart::SetIconID(inID);
+
+	if( mIconID != 0 )
+	{
+		std::string	iconURL = GetDocument()->GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
+		if( iconURL.length() > 0 )
+		{
+			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]]autorelease];
+			[mView setImage: theIcon];
+			[mView setImagePosition: NSImageAbove];
+			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+		}
+		else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+			[mView setImagePosition: NSNoImage];
+	}
+	else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+		[mView setImagePosition: NSNoImage];
+}
 
 
 

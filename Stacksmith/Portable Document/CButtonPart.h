@@ -51,9 +51,9 @@ public:
 	virtual void			SetHighlightForTracking( bool inState )	{ mHighlightForTracking = inState; };
 	
 	virtual void			SetStyle( TButtonStyle s )			{ mButtonStyle = s; };
-	virtual TButtonStyle	GetStyle()						{ return mButtonStyle; };
+	virtual TButtonStyle	GetStyle()							{ return mButtonStyle; };
 	
-	ObjectID				GetIconID()						{ return mIconID; };
+	ObjectID				GetIconID()							{ return mIconID; };
 	virtual void			SetIconID( ObjectID inID )			{ mIconID = inID; };
 	
 	virtual void			PrepareMouseUp();
