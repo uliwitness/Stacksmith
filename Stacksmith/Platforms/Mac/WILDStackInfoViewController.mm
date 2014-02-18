@@ -88,6 +88,8 @@ using namespace Carlson;
 	
 	[self updateCardSizePopUpAndFields];
 	
+	[mIDField setIntegerValue: mStack->GetID()];
+	
 	[mResizableSwitch setState: mStack->IsResizable() ? NSOnState : NSOffState];
 }
 

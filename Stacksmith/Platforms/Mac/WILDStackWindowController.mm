@@ -860,6 +860,12 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	newStack: (id)sender
+{
+	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL );
+}
+
+
 -(IBAction)	newCard: (id)sender
 {
 	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );

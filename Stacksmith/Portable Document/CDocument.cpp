@@ -14,6 +14,7 @@
 #include "CMessageWatcher.h"
 #include <sys/stat.h>
 #include "StacksmithVersion.h"
+#include <sstream>
 
 
 using namespace Carlson;
@@ -328,6 +329,29 @@ CStack*	CDocument::GetStackByName( const char *inName )
 	}
 	
 	return NULL;
+}
+
+
+CStack*	CDocument::AddNewStack()
+{
+	ObjectID			stackID = GetUniqueIDForStack();
+	std::stringstream	fileName;
+	fileName << "stack_" << stackID << ".xml";
+	std::string			stackURL = mURL;
+	if( stackURL[stackURL.length()-1] != '/' )
+		stackURL.append( 1, '/' );
+	stackURL.append( fileName.str() );
+	
+	std::stringstream	nameForUser;
+	nameForUser << "Stack " << mStacks.size() +1;
+	
+	CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, nameForUser.str(), fileName.str(), this );
+	theStack->AddNewCardWithBackground();
+	theStack->SetLoaded(true);
+	mStacks.push_back( theStack );
+	theStack->Release();
+	
+	return theStack;
 }
 
 

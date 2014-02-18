@@ -44,12 +44,10 @@ typedef uint16_t	TStackStyle;
 class CStack : public CConcreteObject
 {
 public:
-	static CStack*	GetFrontStack()						{ return sFrontStack; };
-	static void		SetFrontStack( CStack* inStack )	{ sFrontStack = inStack; };
-
-	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false), mCurrentTool(EBrowseTool), mStyle(EStackStyleStandard) { mName = inName; mDocument = inDocument; };
+	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false), mCantPeek(false), mCantAbort(false), mResizable(false), mCantDelete(false), mCantModify(false), mCurrentTool(EBrowseTool), mStyle(EStackStyleStandard), mUserLevel(5), mCardWidth(512), mCardHeight(342) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
+	void			SetLoaded( bool n )	{ mLoaded = n; };	// Used when creating a brand new stack in RAM that's never been saved before.
 	void			Save( const std::string& inPackagePath );
 	
 	ObjectID		GetID()			{ return mStackID; };
@@ -116,6 +114,10 @@ public:
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	
+// statics:
+	static CStack*		GetFrontStack()						{ return sFrontStack; };
+	static void			SetFrontStack( CStack* inStack )	{ sFrontStack = inStack; };
+
 	static const char*	GetToolName( TTool inTool );
 	static TTool		GetToolFromName( const char* inName );
 	static TStackStyle	GetStackStyleFromString( const char* inStyleStr );

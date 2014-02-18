@@ -78,13 +78,13 @@
                 <menuItem title="File" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
-                            <menuItem title="New Stack" id="82">
+                            <menuItem title="New Project" id="82">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="newDocument:" target="-1" id="371"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open Stack…" keyEquivalent="o" id="72">
+                            <menuItem title="Open Project…" keyEquivalent="o" id="72">
                                 <connections>
                                     <action selector="openDocument:" target="-1" id="372"/>
                                 </connections>
@@ -103,7 +103,7 @@
                             <menuItem isSeparatorItem="YES" id="79">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Close Stack" keyEquivalent="w" id="73">
+                            <menuItem title="Close Window" keyEquivalent="w" id="73">
                                 <connections>
                                     <action selector="performClose:" target="-1" id="193"/>
                                 </connections>
@@ -201,9 +201,15 @@
                             <menuItem isSeparatorItem="YES" id="AlQ-PN-eRf">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="New Card" keyEquivalent="n" id="z6Z-Ih-7v1">
+                            <menuItem title="New Stack" id="z6Z-Ih-7v1">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="newCard:" target="-1" id="LhL-XL-lxy"/>
+                                    <action selector="newStack:" target="-1" id="MsB-QP-MT5"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Card" keyEquivalent="n" id="Bbb-fm-WXJ">
+                                <connections>
+                                    <action selector="newCard:" target="-1" id="IP5-um-BpU"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="New Background" id="Zxq-fC-9bs">

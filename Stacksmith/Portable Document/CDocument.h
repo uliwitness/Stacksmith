@@ -72,6 +72,8 @@ public:
 	CStack*				GetStackWithID( ObjectID inID );
 	size_t				GetNumStacks()				{ return mStacks.size(); };
 	CStack*				GetStackByName( const char* inName );
+	CStack*				AddNewStack();
+	
 	ObjectID			GetUniqueIDForStack();
 	ObjectID			GetUniqueIDForCard();
 	ObjectID			GetUniqueIDForBackground();
