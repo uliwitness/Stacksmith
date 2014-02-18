@@ -116,7 +116,6 @@ using namespace Carlson;
 		[mWidthField setEnabled: YES];
 		[mHeightField setEnabled: YES];
 		[mApplySizeButton setEnabled: YES];
-		mOldCustomSize = cardSize;
 	}
 	else
 	{
@@ -124,6 +123,7 @@ using namespace Carlson;
 		[mHeightField setEnabled: NO];
 		[mApplySizeButton setEnabled: NO];
 	}
+	mOldCustomSize = cardSize;
 	
 	[mWidthField setIntValue: cardSize.width];
 	[mHeightField setIntValue: cardSize.height];
@@ -141,22 +141,21 @@ using namespace Carlson;
 	NSInteger	selectedItem = [mSizePopUpButton indexOfSelectedItem];
 	BOOL		shouldEnableFields = NO;
 	NSSize		currentSize = sPopUpMenuSizes[selectedItem];
+	NSWindow	*wd = self.view.window.parentWindow;
 	
-	/*if( currentSize.width == -1 )
+	if( currentSize.width == -1 )
 	{
-		currentSize = [[mCardView window] contentRectForFrameRect: [[mCardView window] frame]].size;
-		[mWidthField setIntValue: currentSize.width];
-		[mHeightField setIntValue: currentSize.height];
-		[mStack setCardSize: currentSize];
+		currentSize = [wd contentRectForFrameRect: [wd frame]].size;
+		mStack->SetCardWidth( currentSize.width );
+		mStack->SetCardHeight( currentSize.height );
 	}
 	else if( currentSize.width == -2 )
 	{
-		currentSize = [[[mCardView window] screen] frame].size;
-		[mWidthField setIntValue: currentSize.width];
-		[mHeightField setIntValue: currentSize.height];
-		[mStack setCardSize: currentSize];
+		currentSize = [[wd screen] frame].size;
+		mStack->SetCardWidth( currentSize.width );
+		mStack->SetCardHeight( currentSize.height );
 	}
-	else*/ if( currentSize.width == 0 )
+	else if( currentSize.width == 0 )
 	{
 		currentSize = NSMakeSize( mOldCustomSize.width, mOldCustomSize.height );
 		shouldEnableFields = YES;
