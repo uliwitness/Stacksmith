@@ -47,6 +47,7 @@ public:
 	virtual void    AddPart( CPart* inPart );
 	virtual LEOInteger	GetIndexOfPart( CPart* inPart, CPartCreatorBase* inType );
 	virtual void	SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase* inType );
+	virtual ObjectID	GetUniqueIDForPart();
 	std::string		GetPictureURL();
 	std::string		GetPictureName()		{ return mPictureName; };
 	bool			GetShowPicture()		{ return mShowPict; };
@@ -100,6 +101,8 @@ protected:
 	std::vector<CPartContentsRef>	mContents;			// Dictionary of part ID -> contents mappings
 	CStyleSheet						mStyles;
 	CStack	*						mStack;
+	
+	ObjectID						mPartIDSeed;
 };
 
 typedef CRefCountedObjectRef<CLayer>	CLayerRef;

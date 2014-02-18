@@ -72,9 +72,10 @@ public:
 	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
 	virtual void				SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
 	
-	ObjectID					GetID()			{ return mID; };
-	LEOInteger					GetFamily()		{ return mFamily; };
-	virtual void				SetFamily( LEOInteger inFamily )					{ mFamily = inFamily; };
+	ObjectID					GetID()				{ return mID; };
+	virtual void				SetID( ObjectID i )	{ mID = i; };
+	LEOInteger					GetFamily()								{ return mFamily; };
+	virtual void				SetFamily( LEOInteger inFamily )		{ mFamily = inFamily; };
 	virtual void				SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )	{ mLeft = left; mTop = top; mRight = right; mBottom = bottom; };
 	LEOInteger					GetLeft()		{ return mLeft; };
 	LEOInteger					GetTop()		{ return mTop; };

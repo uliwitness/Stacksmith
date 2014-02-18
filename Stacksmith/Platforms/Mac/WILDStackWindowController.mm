@@ -878,6 +878,67 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	newButton: (id)sender
+{
+	mStack->SetTool(EPointerTool);
+	CLayer	*	owner = mStack->GetCurrentLayer();
+	CPart	*	thePart = CPart::GetPartCreatorForType("button")->NewPartInOwner( owner );
+	thePart->SetID( owner->GetUniqueIDForPart() );
+	owner->AddPart(thePart);
+	thePart->Release();
+	[self refreshExistenceAndOrderOfAllViews];
+	thePart->SetSelected(true);
+}
+
+
+-(IBAction)	newField: (id)sender
+{
+	mStack->SetTool(EPointerTool);
+	CLayer	*	owner = mStack->GetCurrentLayer();
+	CPart	*	thePart = CPart::GetPartCreatorForType("field")->NewPartInOwner( owner );
+	owner->AddPart(thePart);
+	thePart->Release();
+	[self refreshExistenceAndOrderOfAllViews];
+	thePart->SetSelected(true);
+}
+
+
+-(IBAction)	newMoviePlayer: (id)sender
+{
+	mStack->SetTool(EPointerTool);
+	CLayer	*	owner = mStack->GetCurrentLayer();
+	CPart	*	thePart = CPart::GetPartCreatorForType("moviePlayer")->NewPartInOwner( owner );
+	owner->AddPart(thePart);
+	thePart->Release();
+	[self refreshExistenceAndOrderOfAllViews];
+	thePart->SetSelected(true);
+}
+
+
+-(IBAction)	newWebBrowser: (id)sender
+{
+	mStack->SetTool(EPointerTool);
+	CLayer	*	owner = mStack->GetCurrentLayer();
+	CPart	*	thePart = CPart::GetPartCreatorForType("browser")->NewPartInOwner( owner );
+	owner->AddPart(thePart);
+	thePart->Release();
+	[self refreshExistenceAndOrderOfAllViews];
+	thePart->SetSelected(true);
+}
+
+
+-(IBAction)	newTimer: (id)sender
+{
+	mStack->SetTool(EPointerTool);
+	CLayer	*	owner = mStack->GetCurrentLayer();
+	CPart	*	thePart = CPart::GetPartCreatorForType("timer")->NewPartInOwner( owner );
+	owner->AddPart(thePart);
+	thePart->Release();
+	[self refreshExistenceAndOrderOfAllViews];
+	thePart->SetSelected(true);
+}
+
+
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
 	NSToolbarItem	*	theItem = [[[NSToolbarItem alloc] initWithItemIdentifier: itemIdentifier] autorelease];

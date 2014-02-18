@@ -54,6 +54,13 @@ class CPart;
 
 -(void)	showWindowOverPart: (Carlson::CPart*)overPart;
 
+-(IBAction)	newButton: (id)sender;
+-(IBAction)	newField: (id)sender;
+-(IBAction)	newMoviePlayer: (id)sender;
+-(IBAction)	newWebBrowser: (id)sender;
+-(IBAction)	newTimer: (id)sender;
+
+
 @end
 
 

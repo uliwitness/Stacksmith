@@ -66,7 +66,7 @@ typedef unsigned	TPartTextStyle;	// Bit field of above constants.
 class CVisiblePart : public CPart
 {
 public:
-	CVisiblePart( CLayer * inOwner ) : CPart(inOwner) {};
+	CVisiblePart( CLayer * inOwner ) : CPart(inOwner), mVisible(true), mEnabled(true), mFillColorRed(65535), mFillColorGreen(65535), mFillColorBlue(65535), mFillColorAlpha(65535), mLineColorRed(0), mLineColorGreen(0), mLineColorBlue(0), mLineColorAlpha(65535), mShadowColorRed(0), mShadowColorGreen(0), mShadowColorBlue(0), mShadowColorAlpha(0), mShadowOffsetWidth(0), mShadowOffsetHeight(0), mShadowBlurRadius(0), mLineWidth(1), mBevelWidth(0), mBevelAngle(0) {};
 	
 	static TPartTextAlign	GetTextAlignFromString( const char* inString );
 	static const char*		GetStringFromTextAlign( TPartTextAlign inAlign );

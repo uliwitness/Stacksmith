@@ -201,26 +201,6 @@
                             <menuItem isSeparatorItem="YES" id="AlQ-PN-eRf">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="New Stack" id="z6Z-Ih-7v1">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="newStack:" target="-1" id="MsB-QP-MT5"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="New Card" keyEquivalent="n" id="Bbb-fm-WXJ">
-                                <connections>
-                                    <action selector="newCard:" target="-1" id="IP5-um-BpU"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="New Background" id="Zxq-fC-9bs">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="newBackground:" target="-1" id="2aI-yT-xS9"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="214">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
                             <menuItem title="Find" id="218">
                                 <menu key="submenu" title="Find" id="220">
                                     <items>
@@ -394,6 +374,62 @@
                             <menuItem title="Last Card" keyEquivalent="4" id="Osa-zS-6TE">
                                 <connections>
                                     <action selector="goLastCard:" target="-1" id="URR-70-M37"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Objects" id="LOr-cY-aQg">
+                    <menu key="submenu" title="Objects" id="JE6-c7-TPM">
+                        <items>
+                            <menuItem title="New Stack" id="z6Z-Ih-7v1">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newStack:" target="-1" id="MsB-QP-MT5"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Card" keyEquivalent="n" id="Bbb-fm-WXJ">
+                                <connections>
+                                    <action selector="newCard:" target="-1" id="IP5-um-BpU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Background" id="Zxq-fC-9bs">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newBackground:" target="-1" id="2aI-yT-xS9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="214">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="New Button" id="5ct-I6-KCb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newButton:" target="-1" id="2mB-lk-EAI"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Field" id="J4z-Ke-Af6">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newField:" target="-1" id="PnR-ZC-2JL"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Movie Player" id="1NJ-oS-OM0">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newMoviePlayer:" target="-1" id="mXW-qr-NEI"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Web Browser" id="Iid-YZ-wqv">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newWebBrowser:" target="-1" id="5Tj-ig-RKU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Timer" id="6b2-F5-jc7">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="newTimer:" target="-1" id="lIX-CN-fmd"/>
                                 </connections>
                             </menuItem>
                         </items>

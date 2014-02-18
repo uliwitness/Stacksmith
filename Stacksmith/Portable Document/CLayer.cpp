@@ -507,6 +507,27 @@ void	CLayer::SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase
 }
 
 
+ObjectID	CLayer::GetUniqueIDForPart()
+{
+	bool	isUnique = false;
+	while( !isUnique )
+	{
+		isUnique = true;
+		for( CPart* currPart : mParts )
+		{
+			if( currPart->GetID() == mPartIDSeed )
+			{
+				isUnique = false;
+				mPartIDSeed++;
+				break;
+			}
+		}
+	}
+	
+	return mPartIDSeed;
+}
+
+
 void	CLayer::UnhighlightFamilyMembersOfPart( CPart* inPart )
 {
 	LEOInteger		theFamily = inPart->GetFamily();
