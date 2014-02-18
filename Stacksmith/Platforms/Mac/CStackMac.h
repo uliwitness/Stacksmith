@@ -62,6 +62,8 @@ public:
 	
 	virtual void				GetMousePosition( LEONumber *x, LEONumber *y );
 	virtual void				RectChangedOfPart( CPart* inChangedPart );
+	virtual void				SetCardWidth( int n );
+	virtual void				SetCardHeight( int n );
 
 	static void					RegisterPartCreators();
 

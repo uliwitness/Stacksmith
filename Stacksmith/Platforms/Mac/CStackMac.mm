@@ -256,5 +256,28 @@ NSImage*	CStackMac::GetDisplayIcon()
 	return sStackIcon;
 }
 
+void	CStackMac::SetCardWidth( int n )
+{
+	CStack::SetCardWidth(n);
+	
+	NSWindow	*	wd = mMacWindowController.window;
+	NSRect	box = [wd contentRectForFrameRect: wd.frame];
+	box.size.width = n;
+	box = [wd frameRectForContentRect: box];
+	[wd setFrame: box display: YES];
+}
+
+
+void	CStackMac::SetCardHeight( int n )
+{
+	CStack::SetCardHeight(n);
+	
+	NSWindow	*	wd = mMacWindowController.window;
+	NSRect	box = [wd contentRectForFrameRect: wd.frame];
+	box.origin.y -= n -box.size.height;
+	box.size.height = n;
+	box = [wd frameRectForContentRect: box];
+	[wd setFrame: box display: YES];
+}
 
 
