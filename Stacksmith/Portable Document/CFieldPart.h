@@ -33,7 +33,7 @@ typedef enum
 class CFieldPart : public CVisiblePart
 {
 public:
-	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mViewTextNeedsSync(false) {};
+	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mViewTextNeedsSync(false), mFieldStyle(EFieldStyleStandard), mDontWrap(false), mDontSearch(false), mSharedText(false), mFixedLineHeight(false), mAutoTab(false), mLockText(false), mAutoSelect(false), mMultipleLines(false), mShowLines(false), mWideMargins(false), mTextStyle(EPartTextStylePlain), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextHeight(0), mHasHorizontalScroller(false), mHasVerticalScroller(false)	 {};
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
