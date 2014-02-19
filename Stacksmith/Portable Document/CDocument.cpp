@@ -297,6 +297,32 @@ void	CDocument::Save()
 }
 
 
+void	CDocument::CreateAtURL( const std::string& inURL )
+{
+	size_t			slashOffset = inURL.rfind( '/' );
+	if( slashOffset == std::string::npos )
+		slashOffset = 0;
+	mURL = inURL.substr(0,slashOffset) + '/';
+	
+	if( sStandardResourcesPath.length() > 0 )
+	{
+		tinyxml2::XMLDocument		standardResDocument;
+		
+		if( tinyxml2::XML_SUCCESS == standardResDocument.LoadFile( sStandardResourcesPath.c_str() ) )
+		{
+			tinyxml2::XMLElement	*	standardResRoot = standardResDocument.RootElement();
+			LoadMediaTableFromElementAsBuiltIn( standardResRoot, true );	// Load media built into the app.
+		}
+	}
+	
+	mLoaded = true;
+
+	AddNewStack();
+	
+	Save();
+}
+
+
 void	CDocument::CallAllCompletionBlocks()
 {
 	mLoaded = true;

@@ -64,6 +64,7 @@ public:
 	
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
 	void				Save();
+	void				CreateAtURL( const std::string& inURL );
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	

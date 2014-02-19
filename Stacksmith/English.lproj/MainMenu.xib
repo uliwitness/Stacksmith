@@ -751,35 +751,17 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title=" " id="799">
+                <menuItem title="Locked" image="NSLockLockedTemplate" id="B2w-H7-ZGl">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title=" " id="800">
-                        <items>
-                            <menuItem title="Edit Card Script…" keyEquivalent="c" id="802">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="editCardScript:" target="-1" id="806"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Edit Background Script…" keyEquivalent="b" id="803">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="editBackgroundScript:" target="-1" id="805"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Edit Stack Script…" keyEquivalent="s" id="804">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="editStackScript:" target="-1" id="807"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                 </menuItem>
             </items>
         </menu>
         <customObject id="419" customClass="NSFontManager"/>
-        <customObject id="556" customClass="WILDAppDelegate"/>
+        <customObject id="556" customClass="WILDAppDelegate">
+            <connections>
+                <outlet property="mLockPseudoMenu" destination="B2w-H7-ZGl" id="KB3-0O-h06"/>
+            </connections>
+        </customObject>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="UKPropagandaProgressSheetPosition" animationBehavior="default" id="566" userLabel="ProgressSheet" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -818,4 +800,7 @@
         </customObject>
         <customObject id="811" customClass="UKFeedbackProvider"/>
     </objects>
+    <resources>
+        <image name="NSLockLockedTemplate" width="9" height="12"/>
+    </resources>
 </document>

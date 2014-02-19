@@ -212,6 +212,27 @@ void	WILDFirstNativeCall( void )
 }
 
 
+-(IBAction)	newDocument: (id)sender
+{
+	NSSavePanel		*	savePanel = [NSSavePanel savePanel];
+	[savePanel setAllowedFileTypes: @[@"xstk"]];
+	[savePanel beginWithCompletionHandler: ^(NSInteger result)
+	{
+		if( result == NSFileHandlingPanelCancelButton )
+			return;
+		
+		NSError	*	err = nil;
+		[[NSFileManager defaultManager] removeItemAtPath: savePanel.URL.path error: &err];
+		
+		CDocumentMac*	theDoc = new CDocumentMac();
+		sOpenDocuments.push_back( theDoc );
+		theDoc->CreateAtURL( [savePanel.URL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String );
+		
+		theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL );
+	}];
+}
+
+
 -(BOOL)	applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender
 {
 	return NO;
