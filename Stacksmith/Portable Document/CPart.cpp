@@ -31,7 +31,6 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 	if( foundItem != sPartCreators.end() )
 	{
 		thePart = foundItem->second->NewPartInOwner( inOwner );
-		thePart->SetPartType( (*foundItem).second );	// Remember who created this part so we can compare its type.
 	}
 	else
 	{
@@ -94,7 +93,8 @@ void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2:
 	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
 	
 	tinyxml2::XMLElement	*	elem = document->NewElement("type");
-	elem->SetText( GetPartType()->GetPartTypeName().c_str() );
+	if( GetPartType() )
+		elem->SetText( GetPartType()->GetPartTypeName().c_str() );
 	inElement->InsertEndChild(elem);
 
 	CTinyXMLUtils::AddRectNamed( inElement, mLeft, mTop, mRight, mBottom, "rect" );

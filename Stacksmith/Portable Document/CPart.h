@@ -50,15 +50,6 @@ protected:
 	std::string		mPartTypeName;
 };
 
-template<class T>
-class CPartCreator : public CPartCreatorBase
-{
-public:
-	CPartCreator( const std::string inTypeString = std::string() ) : CPartCreatorBase(inTypeString) {};
-	virtual CPart	*	NewPartInOwner( CLayer *inOwner )	{ return new T( inOwner ); };
-};
-
-
 
 class CPart : public CConcreteObject
 {
@@ -133,6 +124,15 @@ protected:
 
 
 typedef CRefCountedObjectRef<CPart>		CPartRef;
+
+
+template<class T>
+class CPartCreator : public CPartCreatorBase
+{
+public:
+	CPartCreator( const std::string inTypeString = std::string() ) : CPartCreatorBase(inTypeString) {};
+	virtual CPart	*	NewPartInOwner( CLayer *inOwner )	{ CPart* thePart = new T( inOwner ); thePart->SetPartType(this); return thePart; };
+};
 
 }
 
