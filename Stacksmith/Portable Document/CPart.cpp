@@ -34,8 +34,10 @@ static std::map<std::string,CPartCreatorBase*>	sPartCreators;
 	}
 	else
 	{
-		thePart = new CPart( inOwner );
-		fprintf( stderr, "error: Unknown part type %s, falling back on plain part.\n", partType.c_str() );
+		CPartCreator<CPart>* pc = new CPartCreator<CPart>(partType);
+		RegisterPartCreator( pc );
+		thePart = pc->NewPartInOwner( inOwner );
+		fprintf( stderr, "error: Unknown part type %s, falling back on plain part. This error message will only be printed once.\n", partType.c_str() );
 	}
 	thePart->LoadFromElement( inElement );
 	return thePart;
@@ -93,8 +95,7 @@ void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2:
 	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
 	
 	tinyxml2::XMLElement	*	elem = document->NewElement("type");
-	if( GetPartType() )
-		elem->SetText( GetPartType()->GetPartTypeName().c_str() );
+	elem->SetText( GetPartType()->GetPartTypeName().c_str() );
 	inElement->InsertEndChild(elem);
 
 	CTinyXMLUtils::AddRectNamed( inElement, mLeft, mTop, mRight, mBottom, "rect" );
