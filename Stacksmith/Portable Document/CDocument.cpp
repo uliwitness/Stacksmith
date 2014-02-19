@@ -315,6 +315,11 @@ void	CDocument::CreateAtURL( const std::string& inURL )
 		}
 	}
 	
+	mCreatedByVersion = "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION);
+	mLastCompactedVersion = "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION);
+	mFirstEditedVersion = "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION);
+	mLastEditedVersion = "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION);
+	
 	mLoaded = true;
 
 	AddNewStack();
