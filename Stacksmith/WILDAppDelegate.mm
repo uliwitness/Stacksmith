@@ -86,6 +86,8 @@ void	WILDFirstNativeCall( void )
 	CMessageBox::SetSharedInstance( new CMessageBoxMac );
 	CMessageWatcher::SetSharedInstance( new CMessageWatcherMac );
 	CRecentCardsList::SetSharedInstance( new CRecentCardsListConcrete<CRecentCardInfo>() );
+	
+	Carlson::CDocumentMac::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 }
 
 
@@ -168,8 +170,6 @@ void	WILDFirstNativeCall( void )
 
 -(BOOL)	application: (ULIURLHandlingApplication*)sender openURL: (NSURL*)theFile
 {
-	Carlson::CDocumentMac::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
-	
 	std::string		fileURL( theFile.absoluteString.UTF8String );
 	fileURL.append("/project.xml");
 	size_t	foundPos = fileURL.find("x-stack://");
