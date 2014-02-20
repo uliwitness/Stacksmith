@@ -58,6 +58,8 @@ void	CPartContents::Dump( size_t inIndent )
 	const char	*	indentStr = IndentString(inIndent);
 	printf( "%sContents for %s part ID %lld\n%s{\n", indentStr, (mIsOnBackground?"bg":"cd"), mID, indentStr );
 	printf( "%s\thighlight = %s\n", indentStr, (mHighlight?"true":"false") );
-	printf( "%s\ttext = %s\n", indentStr, mAttributedString.GetString().c_str() );
+	printf( "%s\ttext =\n%s\t{\n", indentStr, indentStr );
+	mAttributedString.Dump( inIndent +2 );
+	printf( "%s\t}\n", indentStr );
 	printf( "%s}\n", indentStr );
 }

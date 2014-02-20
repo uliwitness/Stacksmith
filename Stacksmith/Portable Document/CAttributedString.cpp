@@ -15,6 +15,24 @@
 using namespace Carlson;
 
 
+static const char*	IndentString( size_t inIndentLevel )
+{
+	static char		sIndentChars[] = { '\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t',
+										'\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t',
+										'\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t',
+										'\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t',
+										'\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t',
+										'\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t',
+										'\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t',
+										'\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t',
+										0 };
+	if( inIndentLevel >= (sizeof(sIndentChars) -1) )
+		return sIndentChars;
+	
+	return sIndentChars +(sizeof(sIndentChars) -1) -inIndentLevel;
+}
+
+
 std::map<std::string,std::string>	CAttributeRange::GetAttributesWithoutInternal() const
 {
 	std::map<std::string,std::string>	filteredAttrs;
@@ -486,7 +504,7 @@ void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,cons
 }
 
 
-void	CAttributedString::Dump() const
+void	CAttributedString::Dump( size_t inIndent ) const
 {
 #if 0
 	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
@@ -526,7 +544,8 @@ void	CAttributedString::Dump() const
 		printf( "%s", text.c_str() );
 	} );
 #else
-	printf("<%zu>",mRanges.size());
+	const char*	indentStr = IndentString( inIndent );
+	printf("%s<%zu>",indentStr,mRanges.size());
 	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
 	{
 		printf("[");
@@ -541,7 +560,7 @@ void	CAttributedString::Dump() const
 		}
 		printf("%s]",inText.c_str());
 	} );
-	printf("\n\n");
+	printf("\n%s\n",indentStr);
 #endif
 }
 
