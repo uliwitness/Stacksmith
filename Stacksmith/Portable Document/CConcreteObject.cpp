@@ -41,6 +41,7 @@ void	CConcreteObject::SetScript( std::string inScript )
 		LEOScriptRelease( mScriptObject );
 		mScriptObject = NULL;
 	}
+	IncrementChangeCount();
 }
 
 
@@ -199,7 +200,10 @@ bool	CConcreteObject::AddUserPropertyNamed( const char* userPropName )
 {
 	CMap<std::string>::iterator foundProp = mUserProperties.find(userPropName);
 	if( foundProp == mUserProperties.end() )
+	{
 		mUserProperties[userPropName] = "";
+		IncrementChangeCount();
+	}
 	
 //	DumpUserProperties(0);
 	
@@ -211,7 +215,10 @@ bool	CConcreteObject::DeleteUserPropertyNamed( const char* userPropName )
 {
 	auto	foundProp = mUserProperties.find( userPropName );
 	if( foundProp != mUserProperties.end() )
+	{
 		mUserProperties.erase( foundProp );
+		IncrementChangeCount();
+	}
 	return true;
 }
 
@@ -244,6 +251,7 @@ bool	CConcreteObject::SetUserPropertyNameAtIndex( const char* inNewName, size_t 
 	}
 	else
 		mUserProperties[inNewName] = "";
+	IncrementChangeCount();
 	
 //	DumpUserProperties(0);
 	
@@ -272,6 +280,7 @@ bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, c
 		return false;
 	
 	foundProp->second = inValue;
+	IncrementChangeCount();
 	
 //	DumpUserProperties(0);
 	

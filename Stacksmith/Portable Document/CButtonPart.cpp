@@ -319,7 +319,10 @@ void	CButtonPart::SetHighlight(bool inHighlight)
 			theContents->SetHighlight( inHighlight );
 	}
 	else
+	{
 		mHighlight = inHighlight;
+		IncrementChangeCount();
+	}
 }
 
 

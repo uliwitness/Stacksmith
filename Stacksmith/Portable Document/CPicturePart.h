@@ -18,8 +18,8 @@ class CPicturePart : public CVisiblePart
 public:
 	explicit CPicturePart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
 	
-	virtual void			SetMediaPath( const std::string& inNameOrPath )	{ mMediaPath = inNameOrPath; };
-	virtual void			SetTransparent( bool inTransparent )	{ mTransparent = inTransparent; };
+	virtual void			SetMediaPath( const std::string& inNameOrPath )	{ mMediaPath = inNameOrPath; IncrementChangeCount(); };
+	virtual void			SetTransparent( bool inTransparent )	{ mTransparent = inTransparent; IncrementChangeCount(); };
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );

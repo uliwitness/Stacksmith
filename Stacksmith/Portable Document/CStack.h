@@ -44,7 +44,7 @@ typedef uint16_t	TStackStyle;
 class CStack : public CConcreteObject
 {
 public:
-	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false), mCantPeek(false), mCantAbort(false), mResizable(false), mCantDelete(false), mCantModify(false), mCurrentTool(EBrowseTool), mStyle(EStackStyleStandard), mUserLevel(5), mCardWidth(512), mCardHeight(342) { mName = inName; mDocument = inDocument; };
+	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mPeeking(false), mEditingBackground(false), mCantPeek(false), mCantAbort(false), mResizable(false), mCantDelete(false), mCantModify(false), mCurrentTool(EBrowseTool), mStyle(EStackStyleStandard), mUserLevel(5), mCardWidth(512), mCardHeight(342), mChangeCount(0) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	void			SetLoaded( bool n )	{ mLoaded = n; };	// Used when creating a brand new stack in RAM that's never been saved before.
@@ -90,7 +90,7 @@ public:
 	size_t			GetCardWidth()					{ return mCardWidth; };
 	virtual void	SetCardWidth( int n )			{ mCardWidth = n; };
 	size_t			GetCardHeight()					{ return mCardHeight; };
-	virtual void	SetCardHeight( int n )			{ mCardHeight = n; };
+	virtual void	SetCardHeight( int n )			{ mCardHeight = n; IncrementChangeCount(); };
 	
 	virtual void	SetPeeking( bool inState );
 	virtual bool	GetPeeking()							{ return mPeeking; };
@@ -100,10 +100,10 @@ public:
 	virtual void	SetTool( TTool inTool );
 	virtual TTool	GetTool()								{ return mCurrentTool; };
 
-	virtual void	SetStyle( TStackStyle inStyle )			{ mStyle = inStyle; };
+	virtual void	SetStyle( TStackStyle inStyle )			{ mStyle = inStyle; IncrementChangeCount(); };
 	TStackStyle		GetStyle()								{ return mStyle; };
 	virtual bool	IsResizable()							{ return mResizable; };
-	virtual void	SetResizable( bool n )					{ mResizable = n; };
+	virtual void	SetResizable( bool n )					{ mResizable = n; IncrementChangeCount(); };
 	
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -112,6 +112,9 @@ public:
 	
 	virtual void	GetMousePosition( LEONumber *x, LEONumber *y )	{ *x = 0; *y = 0; };
 	virtual void	RectChangedOfPart( CPart* inChangedPart )	{};
+
+	virtual void	IncrementChangeCount()	{ mChangeCount++; };
+	virtual bool	GetNeedsToBeSaved();
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	
@@ -129,9 +132,6 @@ protected:
 	~CStack();
 
 protected:
-	bool						mLoading;			// Currently loading, not yet ready for use.
-	bool						mLoaded;			// Finished loading, ready for use.
-	bool						mPeeking;			// Are we currently showing the "peek" outline.
 	std::string					mURL;				// URL of the file backing this stack on disk.
 	std::string					mFileName;			// Partial path relative to containing .xstk package to our file (i.e. the one at mURL).
 	ObjectID					mStackID;			// Unique ID number of this stack in the document.
@@ -144,15 +144,20 @@ protected:
 	bool						mCantDelete;		// Are scripts allowed to delete this stack?
 	bool						mCantModify;		// Is this stack write-protected?
 	bool						mResizable;			// Can the stack's window be resized by the user?
-	ObjectID					mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
 	std::vector<CCardRef>		mCards;				// List of all cards in this stack.
 	std::vector<CBackgroundRef>	mBackgrounds;		// List of all backgrounds in this stack.
-	std::set<CCardRef>			mMarkedCards;		// List of all cards in this stack.
+	std::set<CCardRef>			mMarkedCards;		// List of all cards whose 'marked' property is true in this stack.
+	TStackStyle					mStyle;				// Window style.
+	
+	bool						mLoading;			// Currently loading, not yet ready for use.
+	bool						mLoaded;			// Finished loading, ready for use.
+	bool						mPeeking;			// Are we currently showing the "peek" outline.
+	ObjectID					mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
 	CCardRef					mCurrentCard;		// The card that is currently being shown in this stack's window.
 	std::vector<std::function<void(CStack*)>>	mLoadCompletionBlocks;
 	bool						mEditingBackground;	// Are we editing the background, or are we showing the full mixed card/bg layers?
 	TTool						mCurrentTool;		// The tool that applies when clicking in this stack's window.
-	TStackStyle					mStyle;				// Window style.
+	size_t						mChangeCount;
 	
 	static CStack*				sFrontStack;		// The stack whose window is currently frontmost and will e.g. receive messages from the message box.
 };

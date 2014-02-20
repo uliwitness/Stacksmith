@@ -134,6 +134,26 @@ void	WILDFirstNativeCall( void )
 }
 
 
+-(void)	applicationWillTerminate:(NSNotification *)notification
+{
+	for( auto currDocument : sOpenDocuments )
+	{
+		if( currDocument->GetNeedsToBeSaved() )
+			currDocument->Save();
+	}
+}
+
+
+//-(void)	applicationWillResignActive:(NSNotification *)notification
+//{
+//	for( auto currDocument : sOpenDocuments )
+//	{
+//		if( currDocument->GetNeedsToBeSaved() )
+//			currDocument->Save();
+//	}
+//}
+
+
 -(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
 {
 	static BOOL	sDidTryToOpenOverrideStack = NO;

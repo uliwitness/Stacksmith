@@ -26,7 +26,7 @@ class CStack;
 class CLayer : public CConcreteObject
 {
 public:
-	CLayer( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID), mFileName(inFileName) { mName = inName; };
+	CLayer( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID), mFileName(inFileName), mChangeCount(0) { mName = inName; };
 	~CLayer();
 	
 	ObjectID		GetID()	const			{ return mID; };
@@ -74,6 +74,9 @@ public:
 	virtual bool	GetShowPict()				{ return mShowPict; };
 	virtual void	SetShowPict( bool n )		{ mShowPict = n; };
 	
+	virtual void	IncrementChangeCount()		{ mChangeCount++; };
+	virtual bool	GetNeedsToBeSaved()			{ return mChangeCount != 0; };
+	
 	virtual void	Dump( size_t inIndent = 0 );
 	
 	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
@@ -103,6 +106,7 @@ protected:
 	CStack	*						mStack;
 	
 	ObjectID						mPartIDSeed;
+	size_t							mChangeCount;
 };
 
 typedef CRefCountedObjectRef<CLayer>	CLayerRef;

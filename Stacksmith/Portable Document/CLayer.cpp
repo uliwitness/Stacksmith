@@ -129,6 +129,7 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 						}
 						delete document;
 						
+						mChangeCount = 0;
 						CallAllCompletionBlocks();
 					} );
 				}
@@ -146,6 +147,7 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 					}
 					delete document;
 					
+					mChangeCount = 0;
 					CallAllCompletionBlocks();
 				}
 			}
@@ -263,6 +265,8 @@ void	CLayer::Save( const std::string& inPackagePath )
 	std::string	destPath(inPackagePath);
 	destPath.append( mFileName );
 	document.SaveFile( destPath.c_str(), false );
+	
+	mChangeCount = 0;
 }
 
 
@@ -281,6 +285,7 @@ CPartContents*	CLayer::GetPartContentsByID( ObjectID inID, bool isForBackgroundP
 void	CLayer::AddPartContents( CPartContents* inContents )
 {
 	mContents.push_back( inContents );
+	IncrementChangeCount();
 }
 
 

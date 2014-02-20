@@ -27,6 +27,7 @@ CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElem
 	std::string	theLayerStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "layer", theLayerStr );
 	mIsOnBackground = (theLayerStr.compare("background") == 0);
+	mOwningLayer = owningLayer;
 }
 
 
@@ -50,6 +51,12 @@ void	CPartContents::SaveToElementOfDocumentStyleSheet( tinyxml2::XMLElement * in
 		mAttributedString.SaveToXMLDocumentElementStyleSheet( document, elem, styleSheet );
 		inElement->InsertEndChild(elem);
 	}
+}
+
+
+void	CPartContents::IncrementChangeCount()
+{
+	mOwningLayer->IncrementChangeCount();
 }
 
 

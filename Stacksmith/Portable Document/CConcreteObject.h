@@ -49,11 +49,14 @@ public:
 	virtual CDocument*	GetDocument()		{ return mDocument; };
 	
 	virtual std::string	GetName()			{ return mName; };
-    virtual void        SetName( const std::string& inStr ) { mName = inStr; };
+    virtual void        SetName( const std::string& inStr ) { mName = inStr; IncrementChangeCount(); };
 	virtual std::string	GetDisplayName()	{ return mName; };
 		
 	virtual LEOContextGroup*	GetScriptContextGroupObject();
 
+	virtual void		IncrementChangeCount()	{};
+	virtual bool		GetNeedsToBeSaved()		{ return false; };
+	
 protected:
 	virtual void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );
 	virtual void		SaveUserPropertiesToElementOfDocument( tinyxml2::XMLElement * elem, tinyxml2::XMLDocument * document );

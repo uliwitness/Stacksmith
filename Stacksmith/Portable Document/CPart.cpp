@@ -155,6 +155,12 @@ void	CPart::Dump( size_t inIndent )
 }
 
 
+void	CPart::IncrementChangeCount()
+{
+	mOwner->IncrementChangeCount();
+}
+
+
 CPartContents*	CPart::GetContentsOnCurrentCard()
 {
 	CCard	*	currCard = GetStack()->GetCurrentCard();

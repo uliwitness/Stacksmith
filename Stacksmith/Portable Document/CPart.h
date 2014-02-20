@@ -102,6 +102,8 @@ public:
 	virtual void				Grab( THitPart inHitPart = EContentHitPart );
 	virtual std::string			GetDisplayName()	{ return GenerateDisplayName( GetIdentityForDump() ); };
 	
+	virtual void				IncrementChangeCount();
+	
 	virtual void				Dump( size_t inIndent = 0 );
 	
 protected:

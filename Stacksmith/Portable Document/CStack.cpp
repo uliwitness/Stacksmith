@@ -149,6 +149,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 			}
 		}
 		
+		mChangeCount = 0;
 		CallAllCompletionBlocks();
 		Release();
 	} );
@@ -166,90 +167,110 @@ void	CStack::CallAllCompletionBlocks()
 }
 
 
-
 void	CStack::Save( const std::string& inPackagePath )
 {
 	if( !mLoaded )
 		return;
 	
-	tinyxml2::XMLDocument		document;
-	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
-	declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
-	document.InsertEndChild( declaration );
-	
-	tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE stack PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\"");
-	document.InsertEndChild( dtd );
-	
-	tinyxml2::XMLElement*		root = document.NewElement("stack");
-	document.InsertEndChild( root );
-	
-	CTinyXMLUtils::AddLongLongNamed( root, GetID(), "id" );
-	
-	tinyxml2::XMLElement*		nameElem = document.NewElement("name");
-	nameElem->SetText(mName.c_str());
-	root->InsertEndChild( nameElem );
-	
-	tinyxml2::XMLElement*		styleElem = document.NewElement("style");
-	styleElem->SetText( sStackStyleStrings[mStyle] );
-	root->InsertEndChild( styleElem );
-	
-	tinyxml2::XMLElement*		cardCountElem = document.NewElement("cardCount");
-	cardCountElem->SetText((unsigned)mCards.size());
-	root->InsertEndChild( cardCountElem );
-	
-	tinyxml2::XMLElement*		cantModifyElem = document.NewElement("cantModify");
-	cantModifyElem->SetBoolFirstChild( mCantModify );
-	root->InsertEndChild( cantModifyElem );
-	
-	tinyxml2::XMLElement*		cantDeleteElem = document.NewElement("cantDelete");
-	cantDeleteElem->SetBoolFirstChild( mCantModify );
-	root->InsertEndChild( cantDeleteElem );
-
-	tinyxml2::XMLElement*		cantAbortElem = document.NewElement("cantAbort");
-	cantAbortElem->SetBoolFirstChild( mCantAbort );
-	root->InsertEndChild( cantAbortElem );
-
-	tinyxml2::XMLElement*		cardSizeElem = document.NewElement("cardSize");
-	tinyxml2::XMLElement*		cardSizeWidthElem = document.NewElement("width");
-	cardSizeWidthElem->SetText( mCardWidth );
-	cardSizeElem->InsertEndChild( cardSizeWidthElem );
-	tinyxml2::XMLElement*		cardSizeHeightElem = document.NewElement("height");
-	cardSizeHeightElem->SetText( mCardHeight );
-	cardSizeElem->InsertEndChild( cardSizeHeightElem );
-	root->InsertEndChild( cardSizeElem );
-
-	tinyxml2::XMLElement*		scriptElem = document.NewElement("script");
-	scriptElem->SetForceCompactMode(true);
-	scriptElem->SetText( mScript.c_str() );
-	root->InsertEndChild( scriptElem );
-	
-	SaveUserPropertiesToElementOfDocument( root, &document );
-	
-	for( auto currBackground : mBackgrounds )
+	if( mChangeCount != 0 )	// We ourselves have changed? Write it out!
 	{
-		tinyxml2::XMLElement*		bgElem = document.NewElement("background");
-		CTinyXMLUtils::SetLongLongAttributeNamed( bgElem, currBackground->GetID(), "id");
-		bgElem->SetAttribute( "file", currBackground->GetFileName().c_str() );
-		bgElem->SetAttribute( "name", currBackground->GetName().c_str() );
-		root->InsertEndChild( bgElem );
+		tinyxml2::XMLDocument		document;
+		tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
+		declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
+		document.InsertEndChild( declaration );
 		
-		currBackground->Save( inPackagePath );
-	}
+		tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE stack PUBLIC \"-//Apple, Inc.//DTD stack V 2.0//EN\" \"\"");
+		document.InsertEndChild( dtd );
+		
+		tinyxml2::XMLElement*		root = document.NewElement("stack");
+		document.InsertEndChild( root );
+		
+		CTinyXMLUtils::AddLongLongNamed( root, GetID(), "id" );
+		
+		tinyxml2::XMLElement*		nameElem = document.NewElement("name");
+		nameElem->SetText(mName.c_str());
+		root->InsertEndChild( nameElem );
+		
+		tinyxml2::XMLElement*		styleElem = document.NewElement("style");
+		styleElem->SetText( sStackStyleStrings[mStyle] );
+		root->InsertEndChild( styleElem );
+		
+		tinyxml2::XMLElement*		cardCountElem = document.NewElement("cardCount");
+		cardCountElem->SetText((unsigned)mCards.size());
+		root->InsertEndChild( cardCountElem );
+		
+		tinyxml2::XMLElement*		cantModifyElem = document.NewElement("cantModify");
+		cantModifyElem->SetBoolFirstChild( mCantModify );
+		root->InsertEndChild( cantModifyElem );
+		
+		tinyxml2::XMLElement*		cantDeleteElem = document.NewElement("cantDelete");
+		cantDeleteElem->SetBoolFirstChild( mCantModify );
+		root->InsertEndChild( cantDeleteElem );
 
-	for( auto currCard : mCards )
+		tinyxml2::XMLElement*		cantAbortElem = document.NewElement("cantAbort");
+		cantAbortElem->SetBoolFirstChild( mCantAbort );
+		root->InsertEndChild( cantAbortElem );
+
+		tinyxml2::XMLElement*		cardSizeElem = document.NewElement("cardSize");
+		tinyxml2::XMLElement*		cardSizeWidthElem = document.NewElement("width");
+		cardSizeWidthElem->SetText( mCardWidth );
+		cardSizeElem->InsertEndChild( cardSizeWidthElem );
+		tinyxml2::XMLElement*		cardSizeHeightElem = document.NewElement("height");
+		cardSizeHeightElem->SetText( mCardHeight );
+		cardSizeElem->InsertEndChild( cardSizeHeightElem );
+		root->InsertEndChild( cardSizeElem );
+
+		tinyxml2::XMLElement*		scriptElem = document.NewElement("script");
+		scriptElem->SetForceCompactMode(true);
+		scriptElem->SetText( mScript.c_str() );
+		root->InsertEndChild( scriptElem );
+		
+		SaveUserPropertiesToElementOfDocument( root, &document );
+		
+		for( auto currBackground : mBackgrounds )
+		{
+			tinyxml2::XMLElement*		bgElem = document.NewElement("background");
+			CTinyXMLUtils::SetLongLongAttributeNamed( bgElem, currBackground->GetID(), "id");
+			bgElem->SetAttribute( "file", currBackground->GetFileName().c_str() );
+			bgElem->SetAttribute( "name", currBackground->GetName().c_str() );
+			root->InsertEndChild( bgElem );
+			
+			if( currBackground->GetNeedsToBeSaved() )
+				currBackground->Save( inPackagePath );
+		}
+
+		for( auto currCard : mCards )
+		{
+			tinyxml2::XMLElement*		cdElem = document.NewElement("card");
+			CTinyXMLUtils::SetLongLongAttributeNamed( cdElem, currCard->GetID(), "id");
+			cdElem->SetAttribute( "file", currCard->GetFileName().c_str() );
+			cdElem->SetAttribute( "name", currCard->GetName().c_str() );
+			root->InsertEndChild( cdElem );
+			
+			if( currCard->GetNeedsToBeSaved() )
+				currCard->Save( inPackagePath );
+		}
+
+		std::string	stackFilePath(inPackagePath);
+		stackFilePath.append(mFileName);
+		document.SaveFile( stackFilePath.c_str() );
+		
+		mChangeCount = 0;
+	}
+	else	// We return TRUE from GetNeedsToBeSaved() if a card or background has changed. So give it a chance to save even if we didn't change:
 	{
-		tinyxml2::XMLElement*		cdElem = document.NewElement("card");
-		CTinyXMLUtils::SetLongLongAttributeNamed( cdElem, currCard->GetID(), "id");
-		cdElem->SetAttribute( "file", currCard->GetFileName().c_str() );
-		cdElem->SetAttribute( "name", currCard->GetName().c_str() );
-		root->InsertEndChild( cdElem );
-		
-		currCard->Save( inPackagePath );
-	}
+		for( auto currBackground : mBackgrounds )
+		{
+			if( currBackground->GetNeedsToBeSaved() )
+				currBackground->Save( inPackagePath );
+		}
 
-	std::string	stackFilePath(inPackagePath);
-	stackFilePath.append(mFileName);
-	document.SaveFile( stackFilePath.c_str() );
+		for( auto currCard : mCards )
+		{
+			if( currCard->GetNeedsToBeSaved() )
+				currCard->Save( inPackagePath );
+		}
+	}
 }
 
 
@@ -260,6 +281,8 @@ void	CStack::AddCard( CCard* inCard )
 	
 	if( inCard->IsMarked() )
 		mMarkedCards.insert( inCard );
+	
+	IncrementChangeCount();
 }
 
 
@@ -282,6 +305,8 @@ void	CStack::InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard )
 	
 	if( inNewCard->IsMarked() )
 		mMarkedCards.insert( inNewCard );
+	
+	IncrementChangeCount();
 }
 
 
@@ -300,6 +325,8 @@ void	CStack::RemoveCard( CCard* inCard )
 	}
 	inCard->SetStack( NULL );
 	inCard->Release();
+	
+	IncrementChangeCount();
 }
 
 
@@ -327,6 +354,7 @@ void	CStack::MarkedStateChangedOfCard( CCard* inCard )
 		mMarkedCards.insert( inCard );
 	else
 		mMarkedCards.erase( inCard );
+	IncrementChangeCount();
 }
 
 
@@ -359,6 +387,7 @@ CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 	theCard->SetBackground( inBg );
 	theCard->SetLoaded(true);
 	InsertCardAfterCard( theCard, GetCurrentCard() );
+	
 	return theCard;
 }
 
@@ -449,6 +478,8 @@ void	CStack::AddBackground( CBackground* inBackground )
 {
 	inBackground->SetStack( this );
 	mBackgrounds.push_back( inBackground );
+	
+	IncrementChangeCount();
 }
 
 
@@ -515,6 +546,8 @@ void	CStack::SetIndexOfCardTo( CCard* inCd, size_t newIndex )
 	
 	auto itty = mCards.begin() +newIndex;
 	mCards.insert(itty, inCd);
+	
+	IncrementChangeCount();
 }
 
 
@@ -566,6 +599,8 @@ void	CStack::SetIndexOfBackgroundTo( CBackground* inBg, size_t newIndex )
 	
 	auto itty = mBackgrounds.begin() +newIndex;
 	mBackgrounds.insert(itty, inBg);
+	
+	IncrementChangeCount();
 }
 
 
@@ -592,6 +627,28 @@ void	CStack::SetTool( TTool inTool )
 }
 
 
+bool	CStack::GetNeedsToBeSaved()
+{
+	if( mChangeCount != 0 )
+		return true;
+	
+	for( auto currBackground : mBackgrounds )
+	{
+		if( currBackground->GetNeedsToBeSaved() )
+			return true;
+	}
+
+	for( auto currCard : mCards )
+	{
+		if( currCard->GetNeedsToBeSaved() )
+			return true;
+	}
+
+	return false;
+};
+
+
+
 void	CStack::Dump( size_t inIndent )
 {
 	const char * indentStr = IndentString( inIndent );
@@ -607,6 +664,7 @@ void	CStack::Dump( size_t inIndent )
 	printf( "%s\tcantDelete = %s\n", indentStr, (mCantDelete? "true" : "false") );
 	printf( "%s\tcantModify = %s\n", indentStr, (mCantModify? "true" : "false") );
 	printf( "%s\tresizable = %s\n", indentStr, (mResizable? "true" : "false") );
+	printf( "%s\tneedsToBeSaved = %s\n", indentStr, ((mChangeCount != 0)? "true" : "false") );
 	printf( "%s\tscript = <<%s>>\n", indentStr, mScript.c_str() );
 	DumpUserProperties( inIndent +1 );
 	printf( "%s\tcards\n%s\t{\n", indentStr, indentStr );

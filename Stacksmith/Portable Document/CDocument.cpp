@@ -172,6 +172,8 @@ void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocume
 			}
 		}
 		
+		mChangeCount = 0;
+		
 		CallAllCompletionBlocks();
 	} );
 }
@@ -209,7 +211,8 @@ void	CDocument::Save()
 		stackElement->SetAttribute( "name", currStack->GetName().c_str() );
 		stackfile->InsertEndChild( stackElement );
 		
-		currStack->Save( destPath );
+		if( currStack->GetNeedsToBeSaved() )
+			currStack->Save( destPath );
 	}
 	
 	tinyxml2::XMLElement*		userLevelElement = document.NewElement("userLevel");
@@ -294,6 +297,8 @@ void	CDocument::Save()
 	}
 
 	document.SaveFile( (destPath + "project.xml").c_str() );
+	
+	mChangeCount = 0;
 }
 
 
@@ -336,6 +341,27 @@ void	CDocument::CallAllCompletionBlocks()
 	for( auto itty = mLoadCompletionBlocks.begin(); itty != mLoadCompletionBlocks.end(); itty++ )
 		(*itty)( this );
 	mLoadCompletionBlocks.clear();
+}
+
+
+bool	CDocument::GetNeedsToBeSaved()
+{
+	if( mChangeCount != 0 )
+		return true;
+	
+	for( auto currStack : mStacks )
+	{
+		if( currStack->GetNeedsToBeSaved() )
+			return true;
+	}
+	
+	for( CMediaEntry& currMedia : mMediaList )
+	{
+		if( currMedia.GetNeedsToBeSaved() )
+			return true;
+	}
+	
+	return false;
 }
 
 

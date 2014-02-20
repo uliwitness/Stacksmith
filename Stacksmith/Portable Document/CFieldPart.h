@@ -42,40 +42,40 @@ public:
 	virtual bool			GetTextContents( std::string &outString );
 	virtual bool			SetTextContents( const std::string &inString );
 
-	virtual void			ClearSelectedLines()				{ mSelectedLines.clear(); };
-	virtual void			AddSelectedLine( size_t inLine )	{ mSelectedLines.insert(inLine); };
+	virtual void			ClearSelectedLines()				{ mSelectedLines.clear(); IncrementChangeCount(); };
+	virtual void			AddSelectedLine( size_t inLine )	{ mSelectedLines.insert(inLine); IncrementChangeCount(); };
+	
 	virtual bool			GetLockText()						{ return mLockText; };
+	virtual void			SetLockText( bool inST )			{ mLockText = inST; };
 	
 	TFieldStyle				GetStyle()							{ return mFieldStyle; };
-	virtual void			SetStyle( TFieldStyle s )			{ mFieldStyle = s; };
+	virtual void			SetStyle( TFieldStyle s )			{ mFieldStyle = s; IncrementChangeCount(); };
 	
 	virtual bool			GetSharedText()					{ return mSharedText; };
-	virtual void			SetSharedText( bool inST )		{ mSharedText = inST; };
-	
-	virtual void			SetLockText( bool inST )		{ mLockText = inST; };
+	virtual void			SetSharedText( bool inST )		{ mSharedText = inST; IncrementChangeCount(); };
 	
 	virtual bool			GetAutoSelect()					{ return mAutoSelect; };
-	virtual void			SetAutoSelect( bool inST )		{ mAutoSelect = inST; };
+	virtual void			SetAutoSelect( bool inST )		{ mAutoSelect = inST; IncrementChangeCount(); };
 	virtual bool			GetCanSelectMultipleLines()				{ return mMultipleLines; };
-	virtual void			SetCanSelectMultipleLines( bool inST )	{ mMultipleLines = inST; };
+	virtual void			SetCanSelectMultipleLines( bool inST )	{ mMultipleLines = inST; IncrementChangeCount(); };
 	
-	virtual void			SetHasHorizontalScroller( bool inHS )	{ mHasHorizontalScroller = inHS; };
+	virtual void			SetHasHorizontalScroller( bool inHS )	{ mHasHorizontalScroller = inHS; IncrementChangeCount(); };
 	bool					GetHasHorizontalScroller()				{ return mHasHorizontalScroller; };
-	virtual void			SetHasVerticalScroller( bool inHS )		{ mHasVerticalScroller = inHS; };
+	virtual void			SetHasVerticalScroller( bool inHS )		{ mHasVerticalScroller = inHS; IncrementChangeCount(); };
 	bool					GetHasVerticalScroller()				{ return mHasVerticalScroller; };
 
 	virtual bool			GetDontWrap()					{ return mDontWrap; };
-	virtual void			SetDontWrap( bool inST )		{ mDontWrap = inST; };
+	virtual void			SetDontWrap( bool inST )		{ mDontWrap = inST; IncrementChangeCount(); };
 
 	virtual bool			GetDontSearch()					{ return mDontSearch; };
-	virtual void			SetDontSearch( bool inST )		{ mDontSearch = inST; };
+	virtual void			SetDontSearch( bool inST )		{ mDontSearch = inST; IncrementChangeCount(); };
 	
 protected:
 	~CFieldPart()	{};
 	
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
-	virtual void			SetFieldStyle( TFieldStyle inStyle )	{ mFieldStyle = inStyle; };
+	virtual void			SetFieldStyle( TFieldStyle inStyle )	{ mFieldStyle = inStyle; IncrementChangeCount(); };
 	
 	virtual void			LoadChangedTextStylesIntoView()			{ mViewTextNeedsSync = false; };
 	virtual void			LoadChangedTextFromView()				{};

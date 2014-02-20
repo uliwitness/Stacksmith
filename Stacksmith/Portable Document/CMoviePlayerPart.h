@@ -22,11 +22,11 @@ public:
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 
 	bool					GetStarted()								{ return mStarted; };
-	virtual void			SetStarted( bool inStart )					{ mStarted = inStart; };
+	virtual void			SetStarted( bool inStart )					{ mStarted = inStart; IncrementChangeCount(); };
 	bool					GetControllerVisible()						{ return mControllerVisible; };
-	virtual void			SetControllerVisible( bool inStart )		{ mControllerVisible = inStart; };
+	virtual void			SetControllerVisible( bool inStart )		{ mControllerVisible = inStart; IncrementChangeCount(); };
 	std::string				GetMediaPath()								{ return mMediaPath; };
-	virtual void			SetMediaPath( const std::string& inPath )	{ mMediaPath = inPath; };
+	virtual void			SetMediaPath( const std::string& inPath )	{ mMediaPath = inPath; IncrementChangeCount(); };
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
@@ -35,7 +35,7 @@ protected:
 	virtual const char*		GetIdentityForDump()	{ return "Movie Player"; };
 	virtual void			DumpProperties( size_t inIndent );
 	
-	virtual void			SetCurrentTime( LEOInteger inTicks )		{ mCurrentTime = inTicks;};
+	virtual void			SetCurrentTime( LEOInteger inTicks )		{ mCurrentTime = inTicks; IncrementChangeCount(); };
 	virtual LEOInteger		GetCurrentTime()							{ return mCurrentTime; };
 
 protected:

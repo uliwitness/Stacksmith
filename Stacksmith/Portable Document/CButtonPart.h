@@ -41,20 +41,20 @@ public:
 	
 	virtual bool			GetSharedText()			{ return true; };
 	virtual bool			GetSharedHighlight()	{ return mSharedHighlight; };
-	virtual void			SetSharedHighlight( bool inHighlight )	{ mSharedHighlight = inHighlight; };
+	virtual void			SetSharedHighlight( bool inHighlight )	{ mSharedHighlight = inHighlight; IncrementChangeCount(); };
 	virtual bool			GetAutoHighlight()						{ return mAutoHighlight; };
-	virtual void			SetAutoHighlight( bool inHighlight )	{ mAutoHighlight = inHighlight; };
+	virtual void			SetAutoHighlight( bool inHighlight )	{ mAutoHighlight = inHighlight; IncrementChangeCount(); };
 	virtual bool			GetHighlight();
 	virtual void			SetHighlight( bool inHighlight );
 	virtual bool			GetShowName()							{ return mShowName; };
-	virtual void			SetShowName( bool inShowName )			{ mShowName = inShowName; };
-	virtual void			SetHighlightForTracking( bool inState )	{ mHighlightForTracking = inState; };
+	virtual void			SetShowName( bool inShowName )			{ mShowName = inShowName; IncrementChangeCount(); };
+	virtual void			SetHighlightForTracking( bool inState )	{ mHighlightForTracking = inState; IncrementChangeCount(); };
 	
-	virtual void			SetStyle( TButtonStyle s )			{ mButtonStyle = s; };
+	virtual void			SetStyle( TButtonStyle s )			{ mButtonStyle = s; IncrementChangeCount(); };
 	virtual TButtonStyle	GetStyle()							{ return mButtonStyle; };
 	
 	ObjectID				GetIconID()							{ return mIconID; };
-	virtual void			SetIconID( ObjectID inID )			{ mIconID = inID; };
+	virtual void			SetIconID( ObjectID inID )			{ mIconID = inID; IncrementChangeCount(); };
 	
 	virtual void			PrepareMouseUp();
 	
@@ -64,7 +64,7 @@ protected:
 	virtual void			ApplyChangedSelectedLinesToView()		{};
 	virtual void			SetButtonStyle( TButtonStyle inStyle )	{ mButtonStyle = inStyle; };
 	
-	virtual const char*	GetIdentityForDump()	{ return "Button"; };
+	virtual const char*		GetIdentityForDump()	{ return "Button"; };
 	virtual void			DumpProperties( size_t inIndent );
 
 	static TButtonStyle	GetButtonStyleFromString( const char* inStyleStr );

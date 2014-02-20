@@ -21,16 +21,16 @@ class CTimerPart : public CPart
 public:
 	explicit CTimerPart( CLayer *inOwner ) : CPart( inOwner ) {};
 	
-	virtual void			SetStarted( bool inStarted )	{ mStarted = inStarted; if( inStarted ) mActualTimer.Start(); else mActualTimer.Stop(); };
+	virtual void			SetStarted( bool inStarted )	{ mStarted = inStarted; if( inStarted ) mActualTimer.Start(); else mActualTimer.Stop(); IncrementChangeCount(); };
 	virtual bool			GetStarted()					{ return mStarted; };
 	
-	virtual void			SetInterval( long long inInterval )	{ mInterval = inInterval; mActualTimer.SetInterval( inInterval ); };
+	virtual void			SetInterval( long long inInterval )	{ mInterval = inInterval; mActualTimer.SetInterval( inInterval ); IncrementChangeCount(); };
 	virtual long long		GetInterval()						{ return mInterval; };
 
 	virtual std::string		GetMessage()						{ return mMessage; };
-	virtual void			SetMessage( const std::string& inMessage )	{ mMessage = inMessage; };
+	virtual void			SetMessage( const std::string& inMessage )	{ mMessage = inMessage; IncrementChangeCount(); };
 
-	virtual void			SetRepeat( bool n )					{ mRepeat = n; };
+	virtual void			SetRepeat( bool n )					{ mRepeat = n; IncrementChangeCount(); };
 	bool					GetRepeat()							{ return mRepeat; };
 
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );

@@ -31,10 +31,10 @@ typedef enum
 class CMediaEntry
 {
 public:
-	CMediaEntry() : mIconID(0LL), mMediaType(EMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false) {};
-	CMediaEntry( ObjectID iconID, const std::string iconName, const std::string fileName, TMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn) {};
+	CMediaEntry() : mIconID(0LL), mMediaType(EMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false), mChangeCount(0) {};
+	CMediaEntry( ObjectID iconID, const std::string iconName, const std::string fileName, TMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn), mChangeCount(0) {};
 	
-	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %lld, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false")); };
+	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %lld, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s, needsToBeSaved = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false"), ((mChangeCount != 0) ? "true" : "false")); };
 	
 	ObjectID			GetID()	const		{ return mIconID; };
 	const std::string	GetName() const		{ return mIconName; };
@@ -44,6 +44,9 @@ public:
 	int					GetHotspotTop() const	{ return mHotspotTop; };
 	bool				IsBuiltIn() const		{ return mIsBuiltIn; };
 	
+	void				IncrementChangeCount()	{ mChangeCount++; };
+	bool				GetNeedsToBeSaved()		{ return mChangeCount != 0; };
+	
 protected:
 	ObjectID		mIconID;
 	std::string		mIconName;
@@ -52,6 +55,7 @@ protected:
 	int				mHotspotLeft;
 	int				mHotspotTop;
 	bool			mIsBuiltIn;
+	size_t			mChangeCount;
 };
 
 
@@ -60,7 +64,7 @@ class CDocument : public CRefCountedObject
 public:
 	static void		SetStandardResourcesPath( const std::string& inStdResPath );
 
-	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false) {};
+	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0) {};
 	
 	void				LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock );
 	void				Save();
@@ -92,6 +96,9 @@ public:
 	std::string			AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot = 0, int yHotSpot = 0, bool isBuiltIn = false );
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
+
+	virtual void		IncrementChangeCount()	{ mChangeCount++; };
+	virtual bool		GetNeedsToBeSaved();
 	
 	virtual void		Dump( size_t inNestingLevel = 0 );
 
@@ -121,6 +128,7 @@ protected:
 	ObjectID										mCardIDSeed;
 	ObjectID										mBackgroundIDSeed;
 	ObjectID										mMediaIDSeed;
+	size_t											mChangeCount;
 	
 	LEOContextGroup*								mContextGroup;
 };
