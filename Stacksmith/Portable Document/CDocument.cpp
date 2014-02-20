@@ -90,7 +90,7 @@ void	CDocument::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root,
 }
 
 
-void	CDocument::LoadFromURL( const std::string inURL, std::function<void(CDocument*)> inCompletionBlock )
+void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock )
 {
 	if( mLoaded )
 	{

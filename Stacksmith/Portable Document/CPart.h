@@ -39,7 +39,7 @@ typedef uint32_t THitPart;
 class CPartCreatorBase
 {
 public:
-	CPartCreatorBase( const std::string inTypeString = std::string() ) : mPartTypeName(inTypeString) {};
+	CPartCreatorBase( const std::string& inTypeString = std::string() ) : mPartTypeName(inTypeString) {};
 	virtual ~CPartCreatorBase() {};
 	
 	virtual CPart	*	NewPartInOwner( CLayer *inOwner )	{ return NULL; };
@@ -132,7 +132,7 @@ template<class T>
 class CPartCreator : public CPartCreatorBase
 {
 public:
-	CPartCreator( const std::string inTypeString = std::string() ) : CPartCreatorBase(inTypeString) {};
+	CPartCreator( const std::string& inTypeString = std::string() ) : CPartCreatorBase(inTypeString) {};
 	virtual CPart	*	NewPartInOwner( CLayer *inOwner )	{ CPart* thePart = new T( inOwner ); thePart->SetPartType(this); return thePart; };
 };
 

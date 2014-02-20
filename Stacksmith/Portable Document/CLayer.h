@@ -26,7 +26,7 @@ class CStack;
 class CLayer : public CConcreteObject
 {
 public:
-	CLayer( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID), mFileName(inFileName), mChangeCount(0) { mName = inName; };
+	CLayer( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID), mFileName(inFileName), mChangeCount(0) { mName = inName; };
 	~CLayer();
 	
 	ObjectID		GetID()	const			{ return mID; };
