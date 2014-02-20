@@ -292,7 +292,7 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		if( style == EButtonStyle_Last )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unknown button style \"%s\".", nameStr );
 		else
-			SetButtonStyle( style );
+			SetStyle( style );
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

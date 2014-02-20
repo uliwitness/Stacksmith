@@ -184,11 +184,11 @@ bool	CButtonPartMac::SetTextContents( const std::string &inString )
 }
 
 
-void	CButtonPartMac::SetButtonStyle( TButtonStyle inButtonStyle )
+void	CButtonPartMac::SetStyle( TButtonStyle inButtonStyle )
 {
 	NSView*	oldSuper = mView.superview;
 	DestroyView();
-	CButtonPart::SetButtonStyle(inButtonStyle);
+	CButtonPart::SetStyle(inButtonStyle);
 	if( oldSuper )
 		CreateViewIn( oldSuper );
 }

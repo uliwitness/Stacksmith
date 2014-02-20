@@ -39,6 +39,7 @@ public:
 	virtual void	SetIconID( ObjectID inID );
 	
 	virtual void	PrepareMouseUp();
+	virtual void	SetStyle( TButtonStyle inButtonStyle );
 	
 	virtual NSImage*	GetDisplayIcon()			{ return [NSImage imageNamed: @"ButtonIconSmall"]; };
 	virtual Class		GetPropertyEditorClass()	{ return [WILDButtonInfoViewController class]; };
@@ -51,7 +52,6 @@ protected:
 	~CButtonPartMac()	{ DestroyView(); };
 	
 	virtual void	ApplyChangedSelectedLinesToView();
-	virtual void	SetButtonStyle( TButtonStyle inButtonStyle );
 	
 	WILDButtonView	*	mView;
 };
