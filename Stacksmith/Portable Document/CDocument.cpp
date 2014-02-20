@@ -190,115 +190,127 @@ void	CDocument::Save()
 		return;
 	destPath = destPath.substr(0,lpcStart);
 	destPath.append(1,'/');
-	mkdir( destPath.c_str(), 0777 );
-
-	tinyxml2::XMLDocument		document;
-	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
-	declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
-	document.InsertEndChild( declaration );
 	
-	tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE project PUBLIC \"-//Apple, Inc.//DTD project V 2.0//EN\" \"\"");
-	document.InsertEndChild( dtd );
-	
-	tinyxml2::XMLElement*		stackfile = document.NewElement("project");
-	document.InsertEndChild( stackfile );
-	
-	for( auto currStack : mStacks )
+	if( mChangeCount != 0 || mLastEditedVersion.compare( "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION) ) != 0 )	// Project itself (property or stack/media lists) changed, or this file was last written by another version of Stacksmith and we need to update 'last edited version'?
 	{
-		tinyxml2::XMLElement*	stackElement = document.NewElement("stack");
-		CTinyXMLUtils::SetLongLongAttributeNamed( stackElement, currStack->GetID(), "id" );
-		stackElement->SetAttribute( "file", currStack->GetFileName().c_str() );
-		stackElement->SetAttribute( "name", currStack->GetName().c_str() );
-		stackfile->InsertEndChild( stackElement );
+		mkdir( destPath.c_str(), 0777 );
+
+		tinyxml2::XMLDocument		document;
+		tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
+		declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
+		document.InsertEndChild( declaration );
 		
-		if( currStack->GetNeedsToBeSaved() )
-			currStack->Save( destPath );
-	}
-	
-	tinyxml2::XMLElement*		userLevelElement = document.NewElement("userLevel");
-	userLevelElement->SetText(mUserLevel);
-	stackfile->InsertEndChild( userLevelElement );
-
-	tinyxml2::XMLElement*		privateAccessElement = document.NewElement("privateAccess");
-	stackfile->InsertEndChild( privateAccessElement );
-	privateAccessElement->SetBoolFirstChild(mPrivateAccess);
-
-	tinyxml2::XMLElement*		cantPeekElement = document.NewElement("cantPeek");
-	stackfile->InsertEndChild( cantPeekElement );
-	cantPeekElement->SetBoolFirstChild(mCantPeek);
-	
-	tinyxml2::XMLElement*		createdByElement = document.NewElement("createdByVersion");
-	stackfile->InsertEndChild( createdByElement );
-	createdByElement->SetText(mCreatedByVersion.c_str());
-
-	createdByElement = document.NewElement("lastCompactedVersion");
-	stackfile->InsertEndChild( createdByElement );
-	createdByElement->SetText(mLastCompactedVersion.c_str());
-
-	createdByElement = document.NewElement("firstEditedVersion");
-	stackfile->InsertEndChild( createdByElement );
-	createdByElement->SetText(mFirstEditedVersion.c_str());
-
-	createdByElement = document.NewElement("lastEditedVersion");
-	stackfile->InsertEndChild( createdByElement );
-	createdByElement->SetText("Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION));
-	
-	for( auto currEntry : mMediaList )
-	{
-		if( currEntry.IsBuiltIn() )
-			continue;
+		tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE project PUBLIC \"-//Apple, Inc.//DTD project V 2.0//EN\" \"\"");
+		document.InsertEndChild( dtd );
 		
-		tinyxml2::XMLElement*	mediaElement = document.NewElement("media");
-		const char*				mediaTypeStr = NULL;
-		switch( currEntry.GetMediaType() )
+		tinyxml2::XMLElement*		stackfile = document.NewElement("project");
+		document.InsertEndChild( stackfile );
+		
+		for( auto currStack : mStacks )
 		{
-			case EMediaTypeCursor:
-				mediaTypeStr = "cursor";
-				break;
-			case EMediaTypeIcon:
-				mediaTypeStr = "icon";
-				break;
-			case EMediaTypeSound:
-				mediaTypeStr = "sound";
-				break;
-			case EMediaTypePicture:
-				mediaTypeStr = "picture";
-				break;
-			case EMediaTypePattern:
-				mediaTypeStr = "pattern";
-				break;
-			case EMediaTypeMovie:
-				mediaTypeStr = "movie";
-				break;
-			case EMediaTypeUnknown:
-				break;
+			tinyxml2::XMLElement*	stackElement = document.NewElement("stack");
+			CTinyXMLUtils::SetLongLongAttributeNamed( stackElement, currStack->GetID(), "id" );
+			stackElement->SetAttribute( "file", currStack->GetFileName().c_str() );
+			stackElement->SetAttribute( "name", currStack->GetName().c_str() );
+			stackfile->InsertEndChild( stackElement );
+			
+			if( currStack->GetNeedsToBeSaved() )
+				currStack->Save( destPath );
 		}
 		
-		CTinyXMLUtils::SetLongLongAttributeNamed( mediaElement, currEntry.GetID(), "id" );
-		
-		tinyxml2::XMLElement*	nameElem = document.NewElement("name");
-		nameElem->SetText(currEntry.GetName().c_str());
-		mediaElement->InsertEndChild( nameElem );
+		tinyxml2::XMLElement*		userLevelElement = document.NewElement("userLevel");
+		userLevelElement->SetText(mUserLevel);
+		stackfile->InsertEndChild( userLevelElement );
 
-		tinyxml2::XMLElement*	fileElem = document.NewElement("file");
-		fileElem->SetText(currEntry.GetFileName().c_str());
-		mediaElement->InsertEndChild( fileElem );
+		tinyxml2::XMLElement*		privateAccessElement = document.NewElement("privateAccess");
+		stackfile->InsertEndChild( privateAccessElement );
+		privateAccessElement->SetBoolFirstChild(mPrivateAccess);
 
-		tinyxml2::XMLElement*	typeElem = document.NewElement("type");
-		typeElem->SetText(mediaTypeStr);
-		mediaElement->InsertEndChild( typeElem );
+		tinyxml2::XMLElement*		cantPeekElement = document.NewElement("cantPeek");
+		stackfile->InsertEndChild( cantPeekElement );
+		cantPeekElement->SetBoolFirstChild(mCantPeek);
 		
-		if( currEntry.GetMediaType() == EMediaTypeCursor )
+		tinyxml2::XMLElement*		createdByElement = document.NewElement("createdByVersion");
+		stackfile->InsertEndChild( createdByElement );
+		createdByElement->SetText(mCreatedByVersion.c_str());
+
+		createdByElement = document.NewElement("lastCompactedVersion");
+		stackfile->InsertEndChild( createdByElement );
+		createdByElement->SetText(mLastCompactedVersion.c_str());
+
+		createdByElement = document.NewElement("firstEditedVersion");
+		stackfile->InsertEndChild( createdByElement );
+		createdByElement->SetText(mFirstEditedVersion.c_str());
+
+		createdByElement = document.NewElement("lastEditedVersion");
+		stackfile->InsertEndChild( createdByElement );
+		createdByElement->SetText("Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION));
+		
+		for( auto currEntry : mMediaList )
 		{
-			CTinyXMLUtils::AddPointNamed( mediaElement, currEntry.GetHotspotLeft(), currEntry.GetHotspotTop(), "hotspot" );
-		}
-		
-		stackfile->InsertEndChild( mediaElement );
-	}
+			if( currEntry.IsBuiltIn() )
+				continue;
+			
+			tinyxml2::XMLElement*	mediaElement = document.NewElement("media");
+			const char*				mediaTypeStr = NULL;
+			switch( currEntry.GetMediaType() )
+			{
+				case EMediaTypeCursor:
+					mediaTypeStr = "cursor";
+					break;
+				case EMediaTypeIcon:
+					mediaTypeStr = "icon";
+					break;
+				case EMediaTypeSound:
+					mediaTypeStr = "sound";
+					break;
+				case EMediaTypePicture:
+					mediaTypeStr = "picture";
+					break;
+				case EMediaTypePattern:
+					mediaTypeStr = "pattern";
+					break;
+				case EMediaTypeMovie:
+					mediaTypeStr = "movie";
+					break;
+				case EMediaTypeUnknown:
+					break;
+			}
+			
+			CTinyXMLUtils::SetLongLongAttributeNamed( mediaElement, currEntry.GetID(), "id" );
+			
+			tinyxml2::XMLElement*	nameElem = document.NewElement("name");
+			nameElem->SetText(currEntry.GetName().c_str());
+			mediaElement->InsertEndChild( nameElem );
 
-	document.SaveFile( (destPath + "project.xml").c_str() );
-	
-	mChangeCount = 0;
+			tinyxml2::XMLElement*	fileElem = document.NewElement("file");
+			fileElem->SetText(currEntry.GetFileName().c_str());
+			mediaElement->InsertEndChild( fileElem );
+
+			tinyxml2::XMLElement*	typeElem = document.NewElement("type");
+			typeElem->SetText(mediaTypeStr);
+			mediaElement->InsertEndChild( typeElem );
+			
+			if( currEntry.GetMediaType() == EMediaTypeCursor )
+			{
+				CTinyXMLUtils::AddPointNamed( mediaElement, currEntry.GetHotspotLeft(), currEntry.GetHotspotTop(), "hotspot" );
+			}
+			
+			stackfile->InsertEndChild( mediaElement );
+		}
+
+		document.SaveFile( (destPath + "project.xml").c_str() );
+		
+		mChangeCount = 0;
+	}
+	else
+	{
+		for( auto currStack : mStacks )
+		{
+			if( currStack->GetNeedsToBeSaved() )
+				currStack->Save( destPath );
+		}
+	}
 }
 
 
@@ -407,6 +419,8 @@ CStack*	CDocument::AddNewStack()
 	theStack->SetLoaded(true);
 	mStacks.push_back( theStack );
 	theStack->Release();
+	
+	IncrementChangeCount();
 	
 	return theStack;
 }
@@ -539,6 +553,9 @@ std::string		CDocument::AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL
 	fileName.append(1, '.');
 	fileName.append(inSuffix);
 	mMediaList.push_back( CMediaEntry( inID, inName, fileName, inType, xHotSpot, yHotSpot, isBuiltIn ) );
+	
+	IncrementChangeCount();
+	
 	return fileName;
 }
 

@@ -566,6 +566,14 @@ std::string	CLayer::GetPictureURL()
 }
 
 
+void	CLayer::SetName( const std::string &inName )
+{
+	CConcreteObject::SetName( inName );
+	
+	mStack->IncrementChangeCount();	// List of cards/backgrounds contains the names so we can go to a card by name without having to load them all. Make sure that gets updated.
+}
+
+
 bool	CLayer::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
 	if( strcasecmp(inPropertyName, "name") == 0 )

@@ -51,6 +51,7 @@ public:
 	std::string		GetPictureURL();
 	std::string		GetPictureName()		{ return mPictureName; };
 	bool			GetShowPicture()		{ return mShowPict; };
+	virtual void	SetName( const std::string& inName );
 	void			UnhighlightFamilyMembersOfPart( CPart* inPart );	// inPart will not be unhighlighted, only everyone from the same family.
 	
 	CPartContents*	GetPartContentsByID( ObjectID inID, bool isForBackgroundPart );
