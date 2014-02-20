@@ -53,7 +53,7 @@ public:
 protected:
 	~CFieldPartMac()	{ DestroyView(); };
 
-	virtual void		SetFieldStyle( TFieldStyle inFieldStyle );
+	virtual void		SetStyle( TFieldStyle inFieldStyle );
 
 	NSScrollView*		mView;
 	WILDFieldDelegate*	mMacDelegate;

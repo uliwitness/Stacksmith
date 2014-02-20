@@ -420,7 +420,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		if( style == EFieldStyle_Last )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unknown field style \"%s\".", nameStr );
 		else
-			SetFieldStyle( style );
+			SetStyle( style );
 	}
 	else if( strcasecmp("hasHorizontalScroller", inPropertyName) == 0 )
 	{

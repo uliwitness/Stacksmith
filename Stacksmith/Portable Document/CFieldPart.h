@@ -75,7 +75,6 @@ protected:
 	
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
-	virtual void			SetFieldStyle( TFieldStyle inStyle )	{ mFieldStyle = inStyle; IncrementChangeCount(); };
 	
 	virtual void			LoadChangedTextStylesIntoView()			{ mViewTextNeedsSync = false; };
 	virtual void			LoadChangedTextFromView()				{};

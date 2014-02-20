@@ -172,6 +172,15 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	[mView setHasHorizontalScroller: mHasHorizontalScroller != false];
 	[mView setHasVerticalScroller: mHasVerticalScroller != false];
+	if( mFieldStyle == EFieldStyleTransparent )
+	{
+		[mView setBorderType: NSNoBorder];
+		[mView setBackgroundColor: [NSColor clearColor]];
+	}
+	else if( mFieldStyle == EFieldStyleOpaque )
+		[mView setBorderType: NSNoBorder];
+	else if( mFieldStyle == EFieldStyleRectangle )
+		[mView setBorderType: NSLineBorder];
 	if( mAutoSelect )
 	{
 		LoadChangedTextStylesIntoView();
@@ -219,11 +228,11 @@ void	CFieldPartMac::SetHasVerticalScroller( bool inHS )
 }
 
 
-void	CFieldPartMac::SetFieldStyle( TFieldStyle inFieldStyle )
+void	CFieldPartMac::SetStyle( TFieldStyle inFieldStyle )
 {
 	NSView*	oldSuper = mView.superview;
 	DestroyView();
-	CFieldPart::SetFieldStyle(inFieldStyle);
+	CFieldPart::SetStyle(inFieldStyle);
 	if( oldSuper )
 		CreateViewIn( oldSuper );
 }
