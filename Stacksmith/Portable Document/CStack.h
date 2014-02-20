@@ -48,7 +48,7 @@ public:
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	void			SetLoaded( bool n )	{ mLoaded = n; };	// Used when creating a brand new stack in RAM that's never been saved before.
-	void			Save( const std::string& inPackagePath );
+	bool			Save( const std::string& inPackagePath );
 	
 	ObjectID		GetID()			{ return mStackID; };
 	std::string		GetURL()		{ return mURL; };

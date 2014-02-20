@@ -67,8 +67,8 @@ public:
 	CDocument() : mLoaded(false), mLoading(false), mMediaIDSeed(128), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0) {};
 	
 	void				LoadFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
-	void				Save();
-	void				CreateAtURL( const std::string& inURL );
+	bool				Save();
+	bool				CreateAtURL( const std::string& inURL );
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	

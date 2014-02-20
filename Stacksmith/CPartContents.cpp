@@ -47,7 +47,6 @@ void	CPartContents::SaveToElementOfDocumentStyleSheet( tinyxml2::XMLElement * in
 	if( mAttributedString.GetLength() > 0 )
 	{
 		elem = document->NewElement("text");
-		elem->SetForceCompactMode(true);
 		mAttributedString.SaveToXMLDocumentElementStyleSheet( document, elem, styleSheet );
 		inElement->InsertEndChild(elem);
 	}

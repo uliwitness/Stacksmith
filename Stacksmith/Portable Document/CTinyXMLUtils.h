@@ -44,6 +44,16 @@ public:
 	static std::string	EnsureNonNULLString( const char* inStr );
 };
 
+
+class CStacksmithXMLPrinter : public tinyxml2::XMLPrinter
+{
+public:
+    CStacksmithXMLPrinter( FILE* file=0, bool compact = false, int depth = 0 ) : XMLPrinter( file, compact, depth ) {};
+	virtual ~CStacksmithXMLPrinter()	{};
+	
+	virtual bool CompactMode( const tinyxml2::XMLElement& elem );
+};
+
 }
 
 #endif /* defined(__Stacksmith__CTinyXmlUtils__) */

@@ -179,15 +179,15 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 }
 
 
-void	CDocument::Save()
+bool	CDocument::Save()
 {
 	std::string		destPath;
 	if( mURL.find("file://") != 0 )
-		return;
+		return false;
 	destPath = mURL.substr( 7 );
 	size_t	lpcStart = destPath.rfind('/');
 	if( lpcStart == std::string::npos )
-		return;
+		return false;
 	destPath = destPath.substr(0,lpcStart);
 	destPath.append(1,'/');
 	
@@ -215,7 +215,10 @@ void	CDocument::Save()
 			stackfile->InsertEndChild( stackElement );
 			
 			if( currStack->GetNeedsToBeSaved() )
-				currStack->Save( destPath );
+			{
+				if( !currStack->Save( destPath ) )
+					return false;
+			}
 		}
 		
 		tinyxml2::XMLElement*		userLevelElement = document.NewElement("userLevel");
@@ -299,7 +302,12 @@ void	CDocument::Save()
 			stackfile->InsertEndChild( mediaElement );
 		}
 
-		document.SaveFile( (destPath + "project.xml").c_str() );
+		FILE*	theFile = fopen( (destPath + "project.xml").c_str(), "w" );
+		if( !theFile )
+			return false;
+		CStacksmithXMLPrinter	printer( theFile );
+		document.Print( &printer );
+		fclose(theFile);
 		
 		mChangeCount = 0;
 	}
@@ -308,13 +316,18 @@ void	CDocument::Save()
 		for( auto currStack : mStacks )
 		{
 			if( currStack->GetNeedsToBeSaved() )
-				currStack->Save( destPath );
+			{
+				if( !currStack->Save( destPath ) )
+					return false;
+			}
 		}
 	}
+	
+	return true;
 }
 
 
-void	CDocument::CreateAtURL( const std::string& inURL )
+bool	CDocument::CreateAtURL( const std::string& inURL )
 {
 	size_t			slashOffset = inURL.rfind( '/' );
 	if( slashOffset == std::string::npos )
@@ -341,7 +354,7 @@ void	CDocument::CreateAtURL( const std::string& inURL )
 
 	AddNewStack();
 	
-	Save();
+	return Save();
 }
 
 

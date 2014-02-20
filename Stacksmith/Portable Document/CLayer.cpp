@@ -187,10 +187,10 @@ void	CLayer::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile,
 }
 
 
-void	CLayer::Save( const std::string& inPackagePath )
+bool	CLayer::Save( const std::string& inPackagePath )
 {
 	if( !mLoaded )
-		return;
+		return true;
 	
 	tinyxml2::XMLDocument		document;
 	tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
@@ -237,7 +237,6 @@ void	CLayer::Save( const std::string& inPackagePath )
 	stackfile->InsertEndChild(elem);
 
 	elem = document.NewElement("script");
-	elem->SetForceCompactMode(true);
 	elem->SetText( mScript.c_str() );
 	stackfile->InsertEndChild(elem);
 
@@ -258,15 +257,24 @@ void	CLayer::Save( const std::string& inPackagePath )
 		stackfile->InsertAfterChild(lastChildBeforeStyles,elem);
 		
 		FILE*	theFile = fopen( destStylesPath.c_str(), "w" );
+		if( !theFile )
+			return false;
 		fwrite( styleSheet.c_str(), styleSheet.size(), 1, theFile );
 		fclose( theFile );
 	}
 
 	std::string	destPath(inPackagePath);
 	destPath.append( mFileName );
-	document.SaveFile( destPath.c_str(), false );
+	FILE*	theFile = fopen( destPath.c_str(), "w" );
+	if( !theFile )
+		return false;
+	CStacksmithXMLPrinter	printer( theFile );
+	document.Print( &printer );
+	fclose(theFile);
 	
 	mChangeCount = 0;
+	
+	return true;
 }
 
 

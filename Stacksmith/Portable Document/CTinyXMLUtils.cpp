@@ -305,3 +305,20 @@ std::string	CTinyXMLUtils::EnsureNonNULLString( const char* inStr )
 		return std::string();
 	return std::string( inStr );
 }
+
+
+bool	CStacksmithXMLPrinter::CompactMode( const tinyxml2::XMLElement& elem )
+{
+	if( strcmp(elem.Name(),"text") == 0 || strcmp(elem.Name(),"script") == 0 )
+		return true;
+	const tinyxml2::XMLElement*	firstElem = elem.FirstChildElement();
+	const tinyxml2::XMLNode*	firstChild = elem.FirstChild();
+	if( firstChild && firstElem && firstChild == elem.LastChild() && firstElem == firstChild	// Exactly one child, and it's an element?
+		&& firstElem->FirstChild() == NULL )	// And this element has no children? I.e. is self-closing?
+	{
+		return true;
+	}
+	
+	return false;
+}
+

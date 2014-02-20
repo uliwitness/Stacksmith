@@ -167,10 +167,10 @@ void	CStack::CallAllCompletionBlocks()
 }
 
 
-void	CStack::Save( const std::string& inPackagePath )
+bool	CStack::Save( const std::string& inPackagePath )
 {
 	if( !mLoaded )
-		return;
+		return true;
 	
 	if( mChangeCount != 0 )	// We ourselves have changed? Write it out!
 	{
@@ -221,7 +221,6 @@ void	CStack::Save( const std::string& inPackagePath )
 		root->InsertEndChild( cardSizeElem );
 
 		tinyxml2::XMLElement*		scriptElem = document.NewElement("script");
-		scriptElem->SetForceCompactMode(true);
 		scriptElem->SetText( mScript.c_str() );
 		root->InsertEndChild( scriptElem );
 		
@@ -236,7 +235,10 @@ void	CStack::Save( const std::string& inPackagePath )
 			root->InsertEndChild( bgElem );
 			
 			if( currBackground->GetNeedsToBeSaved() )
-				currBackground->Save( inPackagePath );
+			{
+				if( !currBackground->Save( inPackagePath ) )
+					return false;
+			}
 		}
 
 		for( auto currCard : mCards )
@@ -248,12 +250,20 @@ void	CStack::Save( const std::string& inPackagePath )
 			root->InsertEndChild( cdElem );
 			
 			if( currCard->GetNeedsToBeSaved() )
-				currCard->Save( inPackagePath );
+			{
+				if( !currCard->Save( inPackagePath ) )
+					return false;
+			}
 		}
 
 		std::string	stackFilePath(inPackagePath);
 		stackFilePath.append(mFileName);
-		document.SaveFile( stackFilePath.c_str() );
+		FILE*	theFile = fopen( stackFilePath.c_str(), "w" );
+		if( !theFile )
+			return false;
+		CStacksmithXMLPrinter	printer( theFile );
+		document.Print( &printer );
+		fclose(theFile);
 		
 		mChangeCount = 0;
 	}
@@ -262,15 +272,23 @@ void	CStack::Save( const std::string& inPackagePath )
 		for( auto currBackground : mBackgrounds )
 		{
 			if( currBackground->GetNeedsToBeSaved() )
-				currBackground->Save( inPackagePath );
+			{
+				if( !currBackground->Save( inPackagePath ) )
+					return false;
+			}
 		}
 
 		for( auto currCard : mCards )
 		{
 			if( currCard->GetNeedsToBeSaved() )
-				currCard->Save( inPackagePath );
+			{
+				if( !currCard->Save( inPackagePath ) )
+					return false;
+			}
 		}
 	}
+	
+	return true;
 }
 
 

@@ -33,7 +33,7 @@ public:
 	std::string		GetFileName() const		{ return mFileName; };
 	
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );
-	virtual void	Save( const std::string& inPackagePath );
+	virtual bool	Save( const std::string& inPackagePath );
 	
 	bool			IsLoaded()					{ return mLoaded; };
 	virtual void	SetLoaded( bool n )			{ mLoaded = true; };	// For marking a newly created never-before-saved card/bg in RAM as not needing to be loaded.
