@@ -121,6 +121,11 @@ bool	CCard::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart,
 		LEOInitIntegerValue( outValue, GetStack()->GetIndexOfCard(this) +1, kLEOUnitNone, kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "marked") == 0 )
+	{
+		LEOInitBooleanValue( outValue, mMarked, kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return CLayer::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
@@ -142,8 +147,22 @@ bool	CCard::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 		}
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "marked") == 0 )
+	{
+		bool	newState = LEOGetValueAsBoolean( inValue, inContext );
+		if( inContext->flags & kLEOContextKeepRunning )
+			SetMarked( newState );
+		return true;
+	}
 	else
 		return CLayer::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+}
+
+
+void	CCard::SetMarked( bool inMarked )
+{
+	mMarked = inMarked;
+	GetStack()->MarkedStateChangedOfCard( this );
 }
 
 

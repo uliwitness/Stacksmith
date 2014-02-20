@@ -67,6 +67,7 @@ public:
 	size_t			GetNumCardsWithBackground( CBackground* inBg );
 	CCard*			GetCardAtIndexWithBackground( size_t cardIdx, CBackground* inBg );
 	CCard*			AddNewCard();
+	virtual void	MarkedStateChangedOfCard( CCard* inCard );
 	
 	void			AddBackground( CBackground* inBackground );	// Add at end.
 	size_t			GetNumBackgrounds()					{ return mBackgrounds.size(); };

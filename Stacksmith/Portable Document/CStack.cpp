@@ -320,6 +320,16 @@ CCard*	CStack::AddNewCard()
 	return AddNewCardWithBackground( GetCurrentCard()->GetBackground() );
 }
 
+
+void	CStack::MarkedStateChangedOfCard( CCard* inCard )
+{
+	if( inCard->IsMarked() )
+		mMarkedCards.insert( inCard );
+	else
+		mMarkedCards.erase( inCard );
+}
+
+
 CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 {
 	size_t			slashOffset = mURL.rfind( '/' );

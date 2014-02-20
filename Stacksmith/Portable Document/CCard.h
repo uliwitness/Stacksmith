@@ -33,7 +33,7 @@ public:
 	CCard( std::string inURL, ObjectID inID, const std::string inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(NULL)	{};
 	
 	bool			IsMarked()					{ return mMarked; };
-	void			SetMarked( bool inMarked )	{ mMarked = inMarked; };
+	void			SetMarked( bool inMarked );
 	
 	virtual void	WakeUp();
 	virtual void	GoToSleep();
