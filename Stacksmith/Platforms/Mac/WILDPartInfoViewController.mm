@@ -95,9 +95,9 @@ using namespace Carlson;
 		[enabledSwitch setState: visPart->GetEnabled()];
 		[visibleSwitch setState: visPart->GetVisible()];
 		
-		[fillColorWell setColor: [NSColor colorWithCalibratedRed: visPart->GetFillColorRed() green: visPart->GetFillColorGreen() blue: visPart->GetFillColorBlue() alpha: visPart->GetFillColorAlpha()]];
-		[lineColorWell setColor: [NSColor colorWithCalibratedRed: visPart->GetLineColorRed() green: visPart->GetLineColorGreen() blue: visPart->GetLineColorBlue() alpha: visPart->GetLineColorAlpha()]];
-		[shadowColorWell setColor: [NSColor colorWithCalibratedRed: visPart->GetShadowColorRed() green: visPart->GetShadowColorGreen() blue: visPart->GetShadowColorBlue() alpha: visPart->GetShadowColorAlpha()]];
+		[fillColorWell setColor: [NSColor colorWithCalibratedRed: visPart->GetFillColorRed() / 65535.0 green: visPart->GetFillColorGreen() / 65535.0 blue: visPart->GetFillColorBlue() / 65535.0 alpha: visPart->GetFillColorAlpha() / 65535.0]];
+		[lineColorWell setColor: [NSColor colorWithCalibratedRed: visPart->GetLineColorRed() / 65535.0 green: visPart->GetLineColorGreen() / 65535.0 blue: visPart->GetLineColorBlue() / 65535.0 alpha: visPart->GetLineColorAlpha() / 65535.0]];
+		[shadowColorWell setColor: [NSColor colorWithCalibratedRed: visPart->GetShadowColorRed() / 65535.0 green: visPart->GetShadowColorGreen() / 65535.0 blue: visPart->GetShadowColorBlue() / 65535.0 alpha: visPart->GetShadowColorAlpha() / 65535.0]];
 		[shadowBlurRadiusSlider setDoubleValue: visPart->GetShadowBlurRadius()];
 		[shadowOffsetSlider setDoubleValue: visPart->GetShadowOffsetWidth()];
 		[lineWidthSlider setDoubleValue: visPart->GetLineWidth()];
@@ -149,7 +149,7 @@ using namespace Carlson;
 	NSColor			*	fillColor = [fillColorWell.color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
-		visPart->SetFillColor( fillColor.redComponent, fillColor.greenComponent, fillColor.blueComponent, fillColor.alphaComponent );
+		visPart->SetFillColor( fillColor.redComponent * 65535.0, fillColor.greenComponent * 65535.0, fillColor.blueComponent * 65535.0, fillColor.alphaComponent * 65535.0 );
 }
 
 -(IBAction)	doLineColorChanged:(id)sender
@@ -157,7 +157,7 @@ using namespace Carlson;
 	NSColor			*	fillColor = [lineColorWell.color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
-		visPart->SetLineColor( fillColor.redComponent, fillColor.greenComponent, fillColor.blueComponent, fillColor.alphaComponent );
+		visPart->SetLineColor( fillColor.redComponent * 65535.0, fillColor.greenComponent * 65535.0, fillColor.blueComponent * 65535.0, fillColor.alphaComponent * 65535.0 );
 }
 
 
@@ -166,7 +166,7 @@ using namespace Carlson;
 	NSColor			*	fillColor = [shadowColorWell.color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
 	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
-		visPart->SetShadowColor( fillColor.redComponent, fillColor.greenComponent, fillColor.blueComponent, fillColor.alphaComponent );
+		visPart->SetShadowColor( fillColor.redComponent * 65535.0, fillColor.greenComponent * 65535.0, fillColor.blueComponent * 65535.0, fillColor.alphaComponent * 65535.0 );
 }
 
 

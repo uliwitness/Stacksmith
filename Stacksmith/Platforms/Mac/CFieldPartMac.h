@@ -14,6 +14,7 @@
 #include "CMacPartBase.h"
 #include <climits>
 #import "WILDFieldInfoViewController.h"
+#import "WILDScrollView.h"
 
 
 @class WILDFieldDelegate;
@@ -55,7 +56,7 @@ protected:
 
 	virtual void		SetStyle( TFieldStyle inFieldStyle );
 
-	NSScrollView*		mView;
+	WILDScrollView*		mView;
 	WILDFieldDelegate*	mMacDelegate;
 	NSTableView *		mTableView;
 	NSTextView	*		mTextView;

@@ -342,6 +342,7 @@
 		55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC5081744525F0084AAA9 /* StackIcon.icns */; };
 		55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */; };
 		55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */; };
+		55AF101F18B6BFFD00819AE9 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AF101E18B6BFFD00819AE9 /* WILDScrollView.m */; };
 		55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B07407188612EB0023BA3E /* CStyleSheet.cpp */; };
 		55B0740E1889C6E90023BA3E /* CMessageBoxMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */; };
 		55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */; };
@@ -962,6 +963,8 @@
 		55ADC5081744525F0084AAA9 /* StackIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = StackIcon.icns; path = Resources/StackIcon.icns; sourceTree = "<group>"; };
 		55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = BackgroundEditIcon.icns; path = Resources/BackgroundEditIcon.icns; sourceTree = "<group>"; };
 		55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactory.xib; path = Windows/WILDViewFactory.xib; sourceTree = "<group>"; };
+		55AF101D18B6BFFC00819AE9 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDScrollView.h; path = Platforms/Mac/WILDScrollView.h; sourceTree = "<group>"; };
+		55AF101E18B6BFFD00819AE9 /* WILDScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDScrollView.m; path = Platforms/Mac/WILDScrollView.m; sourceTree = "<group>"; };
 		55B07407188612EB0023BA3E /* CStyleSheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CStyleSheet.cpp; path = "Portable Document/CStyleSheet.cpp"; sourceTree = "<group>"; };
 		55B07408188612EB0023BA3E /* CStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CStyleSheet.h; path = "Portable Document/CStyleSheet.h"; sourceTree = "<group>"; };
 		55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMessageBoxMac.mm; path = Platforms/Mac/CMessageBoxMac.mm; sourceTree = "<group>"; };
@@ -1290,6 +1293,8 @@
 				555E53A818936817001487C1 /* WILDPopUpButtonView.mm */,
 				552386CA1883E86200D7FAB3 /* CFieldPartMac.h */,
 				552386C91883E86200D7FAB3 /* CFieldPartMac.mm */,
+				55AF101D18B6BFFC00819AE9 /* WILDScrollView.h */,
+				55AF101E18B6BFFD00819AE9 /* WILDScrollView.m */,
 				55405BD918A59DB6001D3C99 /* CTimerPartMac.h */,
 				55405BD818A59DB6001D3C99 /* CTimerPartMac.mm */,
 				552386CD1883E92F00D7FAB3 /* CMoviePlayerPartMac.h */,
@@ -2511,6 +2516,7 @@
 				551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */,
 				551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */,
 				55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */,
+				55AF101F18B6BFFD00819AE9 /* WILDScrollView.m in Sources */,
 				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
 				55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */,

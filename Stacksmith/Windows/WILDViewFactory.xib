@@ -64,7 +64,7 @@
                         </menu>
                     </popUpButtonCell>
                 </popUpButton>
-                <scrollView wantsLayer="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="4KR-Rg-Nhj">
+                <scrollView wantsLayer="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="4KR-Rg-Nhj" customClass="WILDScrollView">
                     <rect key="frame" x="20" y="33" width="240" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" id="mfh-gE-6L5">
@@ -105,11 +105,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="LW5-Eo-5oI">
-                        <rect key="frame" x="223" y="1" width="16" height="133"/>
+                        <rect key="frame" x="224" y="1" width="15" height="133"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="ifP-Hf-OYq">
+                <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="ifP-Hf-OYq" customClass="WILDScrollView">
                     <rect key="frame" x="280" y="33" width="180" height="135"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <clipView key="contentView" id="b0e-W5-03U">
@@ -138,7 +138,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="rZo-0f-uvk">
-                        <rect key="frame" x="163" y="1" width="16" height="133"/>
+                        <rect key="frame" x="164" y="1" width="15" height="133"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>

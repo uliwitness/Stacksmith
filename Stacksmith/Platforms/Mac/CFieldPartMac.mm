@@ -162,14 +162,17 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTableView setTarget: mMacDelegate];
 		[mTableView setAction: @selector(tableViewRowClicked:)];
 		[mTableView setDoubleAction: @selector(tableViewRowDoubleClicked:)];
-		mView = [[mTableView enclosingScrollView] retain];
+		mView = (WILDScrollView*) [[mTableView enclosingScrollView] retain];
 	}
 	else
 	{
 		mTextView = [WILDViewFactory textViewInContainer];
 		mTextView.delegate = mMacDelegate;
-		mView = [[mTextView enclosingScrollView] retain];
+		mView = (WILDScrollView*) [[mTextView enclosingScrollView] retain];
+		[mTextView setDrawsBackground: NO];
+		[mTextView setBackgroundColor: [NSColor clearColor]];
 	}
+	[mView setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
 	[mView setHasHorizontalScroller: mHasHorizontalScroller != false];
 	[mView setHasVerticalScroller: mHasVerticalScroller != false];
 	if( mFieldStyle == EFieldStyleTransparent )
@@ -180,7 +183,11 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	else if( mFieldStyle == EFieldStyleOpaque )
 		[mView setBorderType: NSNoBorder];
 	else if( mFieldStyle == EFieldStyleRectangle )
+	{
 		[mView setBorderType: NSLineBorder];
+		[mView setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
+		[mView setLineWidth: mLineWidth];
+	}
 	if( mAutoSelect )
 	{
 		LoadChangedTextStylesIntoView();
