@@ -343,6 +343,7 @@
 		55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */; };
 		55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */; };
 		55AF101F18B6BFFD00819AE9 /* WILDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AF101E18B6BFFD00819AE9 /* WILDScrollView.m */; };
+		55AF107A18B8F5D600819AE9 /* CRefCountedObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7B118709CAF002F7CB2 /* CRefCountedObject.cpp */; };
 		55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B07407188612EB0023BA3E /* CStyleSheet.cpp */; };
 		55B0740E1889C6E90023BA3E /* CMessageBoxMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */; };
 		55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */; };
@@ -2316,6 +2317,7 @@
 				55405B93189EDF5B001D3C99 /* CSubtractCommandNode.cpp in Sources */,
 				55405BB1189EE008001D3C99 /* COperatorNodeTransformation.cpp in Sources */,
 				55405BA0189EDF5B001D3C99 /* CDownloadCommandNode.cpp in Sources */,
+				55AF107A18B8F5D600819AE9 /* CRefCountedObject.cpp in Sources */,
 				55405B8E189EDF5B001D3C99 /* CGetParamCommandNode.cpp in Sources */,
 				55405BB2189EE008001D3C99 /* CConcatOperatorNodeTransformation.cpp in Sources */,
 				55405B85189EDF2D001D3C99 /* CParser.cpp in Sources */,

@@ -92,9 +92,8 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 				while( currPartElem )
 				{
 					CPart	*	thePart = CPart::NewPartWithElement( currPartElem, this );
-					thePart->Autorelease();
 					mParts.push_back( thePart );
-					thePart->Retain();	// Retain for the button families array.
+					thePart->Release();
 
 					currPartElem = currPartElem->NextSiblingElement( "part" );
 				}
@@ -559,6 +558,30 @@ void	CLayer::SetPeeking( bool inState )
 	{
 		currPart->SetPeeking( inState );
 	}
+}
+
+
+void	CLayer::DeleteSelectedItem()
+{
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			(*currPart)->GoToSleep();
+			currPart = mParts.erase(currPart);
+		}
+	}
+}
+
+
+bool	CLayer::CanDeleteDeleteSelectedItem()
+{
+	for( auto currPart : mParts )
+	{
+		if( currPart->IsSelected() )
+			return true;
+	}
+	return false;
 }
 
 

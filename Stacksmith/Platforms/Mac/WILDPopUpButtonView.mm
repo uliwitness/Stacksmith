@@ -22,8 +22,7 @@ using namespace Carlson;
 
 -(void)	dealloc
 {
-	if( self->owningPart )
-		self->owningPart->Release();
+	self->owningPart = NULL;
 
 	[super dealloc];
 }
@@ -31,15 +30,7 @@ using namespace Carlson;
 
 -(void)	setOwningPart: (CButtonPart*)inPart
 {
-	if( self->owningPart != inPart )
-	{
-		if( self->owningPart )
-			self->owningPart->Release();
-		if( inPart )
-			self->owningPart = (CButtonPart*) inPart->Retain();
-		else
-			self->owningPart = NULL;
-	}
+	self->owningPart = inPart;
 }
 
 

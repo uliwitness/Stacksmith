@@ -14,6 +14,7 @@
 #include "CParseTree.h"
 #include <sstream>
 #include "CMap.h"
+#include "CRefCountedObject.h"
 
 
 #define FIXING_TESTS		0
@@ -811,6 +812,23 @@ LEOINSTR_DUMMY_LAST(WILDChooseInstruction)
 using namespace Carlson;
 
 
+class TestRefCountedObject : public CRefCountedObject
+{
+public:
+	TestRefCountedObject()	{ sExistingObjects++; };
+
+	inline size_t		GetRefCount()	{ return mRefCount; };	// Only for unit tests.
+	
+	static size_t	sExistingObjects;
+	
+protected:
+	virtual ~TestRefCountedObject()	{ sExistingObjects--; };
+};
+
+
+size_t	TestRefCountedObject::sExistingObjects = 0;
+
+
 static size_t	sFailed = 0, sPassed = 0;
 
 
@@ -1012,6 +1030,53 @@ int main(int argc, const char * argv[])
 		testMap.Dump();
 		#endif
 		WILDTest( "Verify entry 'foo' hasn't changed.", testMap["foo"].c_str(), "This is foo lowercase." );
+	}
+	
+	{
+		TestRefCountedObject*	obj = new TestRefCountedObject;
+		WILDTest( "CRefCountedObject created with retain count 1.", obj->GetRefCount(), (size_t)1 );
+		TestRefCountedObject*	obj2 = new TestRefCountedObject;
+		WILDTest( "CRefCountedObject created with retain count 1.", obj2->GetRefCount(), (size_t)1 );
+		
+		{
+		CRefCountedObjectRef<TestRefCountedObject>		smartPtr;
+		smartPtr = obj;
+		WILDTest( "CRefCountedObjectRef retains.", obj->GetRefCount(), (size_t)2 );
+		
+		smartPtr = obj2;
+		WILDTest( "CRefCountedObjectRef retains on assignment.", obj2->GetRefCount(), (size_t)2 );
+		WILDTest( "CRefCountedObjectRef releases on assignment.", obj->GetRefCount(), (size_t)1 );
+		}
+		
+		WILDTest( "CRefCountedObjectRef releases on destruction.", obj2->GetRefCount(), (size_t)1 );
+		
+		obj->Release();
+		WILDTest( "CRefCountedObject destructed on last Release().", TestRefCountedObject::sExistingObjects, (size_t)1 );
+		
+		obj2->Release();
+		WILDTest( "CRefCountedObject destructed on last Release().", TestRefCountedObject::sExistingObjects, (size_t)0 );
+	}
+	
+	
+	{
+		{
+			CAutoreleasePool		pool;
+			TestRefCountedObject*	obj = new TestRefCountedObject;
+			obj->Autorelease();
+		}
+		WILDTest( "CRefCountedObject destructed when autorelease pool goes out of scope.", TestRefCountedObject::sExistingObjects, (size_t)0 );
+	}
+
+	{
+		{
+			std::vector<CRefCountedObjectRef<TestRefCountedObject>>	retainingList;
+			TestRefCountedObject*	obj = new TestRefCountedObject;
+			retainingList.push_back(obj);
+			WILDTest( "CRefCountedObjectRef in vector retains properly.", obj->GetRefCount(), (size_t)2 );
+			obj->Release();
+			WILDTest( "CRefCountedObjectRef in vector retains properly after release.", obj->GetRefCount(), (size_t)1 );
+		}
+		WILDTest( "CRefCountedObject destructed when vector goes out of scope.", TestRefCountedObject::sExistingObjects, (size_t)0 );
 	}
 	
 	#if FIXING_TESTS

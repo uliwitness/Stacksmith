@@ -299,6 +299,7 @@ void	WILDCreateInstruction( LEOContext* inContext )
     CPart * thePart = CPart::NewPartWithElement( document.RootElement(), currentLayer );
     thePart->SetName( nameBuf );
     currentLayer->AddPart( thePart );
+	thePart->Release();
 
 	inContext->currentInstruction++;
 }

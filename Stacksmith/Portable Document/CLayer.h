@@ -56,11 +56,13 @@ public:
 	
 	CPartContents*	GetPartContentsByID( ObjectID inID, bool isForBackgroundPart );
 	void			AddPartContents( CPartContents* inContents );
-
+	
 	virtual CStack*	GetStack()			{ return mStack; };
 	const CStyleSheet&	GetStyles()		{ return mStyles; };
 
 	virtual void	SetPeeking( bool inState );
+	virtual void	DeleteSelectedItem();
+	virtual bool	CanDeleteDeleteSelectedItem();
 
 	virtual void	WakeUp();
 	virtual void	GoToSleep();

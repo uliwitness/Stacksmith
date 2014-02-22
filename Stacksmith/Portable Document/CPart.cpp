@@ -68,6 +68,24 @@ CPart::CPart( CLayer *inOwner )
 }
 
 
+CPart::~CPart()
+{
+	printf("Deleting one part.\n");
+}
+
+
+CPart*	CPart::Retain()
+{
+	return (CPart*) CConcreteObject::Retain();
+}
+
+
+void	CPart::Release()
+{
+	CConcreteObject::Release();
+}
+
+
 void	CPart::LoadFromElement( tinyxml2::XMLElement * inElement )
 {
 	LoadPropertiesFromElement( inElement );

@@ -63,6 +63,9 @@ public:
 	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
 	virtual void				SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
 	
+	virtual CPart*				Retain();
+	virtual void				Release();
+	
 	ObjectID					GetID()				{ return mID; };
 	virtual void				SetID( ObjectID i )	{ mID = i; };
 	LEOInteger					GetFamily()								{ return mFamily; };
@@ -107,6 +110,8 @@ public:
 	virtual void				Dump( size_t inIndent = 0 );
 	
 protected:
+	virtual ~CPart();
+
 	virtual void				LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void				SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
 	virtual const char*			GetIdentityForDump()					{ return "Part"; };

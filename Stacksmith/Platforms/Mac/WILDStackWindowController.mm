@@ -860,6 +860,26 @@ using namespace Carlson;
 }
 
 
+-(BOOL)	validateMenuItem: (NSMenuItem*)theItem
+{
+	if( theItem.action == @selector(delete:) )
+	{
+		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanDeleteDeleteSelectedItem() );
+	}
+	else
+		return [self respondsToSelector: theItem.action];
+}
+
+
+-(IBAction)	delete: (id)sender
+{
+	if( mStack->GetTool() == EPointerTool )
+	{
+		mStack->GetCurrentLayer()->DeleteSelectedItem();
+	}
+}
+
+
 -(IBAction)	newStack: (id)sender
 {
 	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL );
