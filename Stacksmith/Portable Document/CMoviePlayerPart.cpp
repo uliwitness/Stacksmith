@@ -35,9 +35,7 @@ void	CMoviePlayerPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement *
 	
 	CTinyXMLUtils::AddLongLongNamed( inElement, GetCurrentTime(), "currentTime" );
 	
-	elem = document->NewElement("controllerVisible");
-	elem->SetBoolFirstChild(mControllerVisible);
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddBoolNamed( inElement, mControllerVisible, "controllerVisible" );
 }
 
 

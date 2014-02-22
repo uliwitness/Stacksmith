@@ -93,21 +93,11 @@ void	CButtonPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEl
 	elem->SetText( sButtonStyleStrings[mButtonStyle] );
 	inElement->InsertEndChild(elem);
 	
-	elem = document->NewElement("showName");
-	elem->SetBoolFirstChild(mShowName);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("highlight");
-	elem->SetBoolFirstChild(mHighlight);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("autoHighlight");
-	elem->SetBoolFirstChild(mAutoHighlight);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("sharedHighlight");
-	elem->SetBoolFirstChild(mSharedHighlight);
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddBoolNamed( inElement, mShowName, "showName" );
+	if( mSharedHighlight )
+		CTinyXMLUtils::AddBoolNamed( inElement, mHighlight, "highlight" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mAutoHighlight, "autoHighlight" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mSharedHighlight, "sharedHighlight" );
 	
 	CTinyXMLUtils::AddLongLongNamed( inElement, mFamily, "family");
 	

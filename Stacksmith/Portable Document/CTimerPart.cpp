@@ -37,13 +37,8 @@ void	CTimerPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEle
 	
 	CTinyXMLUtils::AddLongLongNamed( inElement, mInterval, "interval" );
 	
-	elem = document->NewElement("started");
-	elem->SetBoolFirstChild(mStarted);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("repeat");
-	elem->SetBoolFirstChild(mRepeat);
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddBoolNamed( inElement, mStarted, "started" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mRepeat, "repeat" );
 }
 
 

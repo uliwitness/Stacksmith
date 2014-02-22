@@ -92,57 +92,23 @@ void	CFieldPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEle
 {
 	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
 	
-	tinyxml2::XMLElement	*	elem = document->NewElement("dontWrap");
-	elem->SetBoolFirstChild(mDontWrap);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("dontSearch");
-	elem->SetBoolFirstChild(mDontSearch);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("sharedText");
-	elem->SetBoolFirstChild(mSharedText);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("fixedLineHeight");
-	elem->SetBoolFirstChild(mFixedLineHeight);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("autoTab");
-	elem->SetBoolFirstChild(mAutoTab);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("lockText");
-	elem->SetBoolFirstChild(mLockText);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("style");
+	CTinyXMLUtils::AddBoolNamed( inElement, mDontWrap, "dontWrap" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mDontSearch, "dontSearch" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mSharedText, "sharedText" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mFixedLineHeight, "fixedLineHeight" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mAutoTab, "autoTab" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mLockText, "lockText" );
+
+	tinyxml2::XMLElement	*	elem = document->NewElement("style");
 	elem->SetText( sFieldStyleStrings[mFieldStyle] );
 	inElement->InsertEndChild(elem);
 	
-	elem = document->NewElement("autoSelect");
-	elem->SetBoolFirstChild(mAutoSelect);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("showLines");
-	elem->SetBoolFirstChild(mShowLines);
-	inElement->InsertEndChild(elem);
-
-	elem = document->NewElement("wideMargins");
-	elem->SetBoolFirstChild(mWideMargins);
-	inElement->InsertEndChild(elem);
-
-	elem = document->NewElement("multipleLines");
-	elem->SetBoolFirstChild(mMultipleLines);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("hasHorizontalScroller");
-	elem->SetBoolFirstChild(mHasHorizontalScroller);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("hasVerticalScroller");
-	elem->SetBoolFirstChild(mHasVerticalScroller);
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddBoolNamed( inElement, mAutoSelect, "autoSelect" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mShowLines, "showLines" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mWideMargins, "wideMargins" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mMultipleLines, "multipleLines" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mHasHorizontalScroller, "hasHorizontalScroller" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mHasVerticalScroller, "hasVerticalScroller" );
 	
 	if( !mSelectedLines.empty() )
 	{

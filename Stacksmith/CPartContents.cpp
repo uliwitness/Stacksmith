@@ -38,11 +38,7 @@ void	CPartContents::SaveToElementOfDocumentStyleSheet( tinyxml2::XMLElement * in
 	tinyxml2::XMLElement	*	elem = NULL;
 	
 	if( mHighlight )
-	{
-		elem = document->NewElement("highlight");
-		elem->SetBoolFirstChild(mHighlight);
-		inElement->InsertEndChild(elem);
-	}
+		CTinyXMLUtils::AddBoolNamed( inElement, mHighlight, "highlight" );
 	
 	if( mAttributedString.GetLength() > 0 )
 	{

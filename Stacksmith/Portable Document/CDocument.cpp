@@ -225,13 +225,8 @@ bool	CDocument::Save()
 		userLevelElement->SetText(mUserLevel);
 		stackfile->InsertEndChild( userLevelElement );
 
-		tinyxml2::XMLElement*		privateAccessElement = document.NewElement("privateAccess");
-		stackfile->InsertEndChild( privateAccessElement );
-		privateAccessElement->SetBoolFirstChild(mPrivateAccess);
-
-		tinyxml2::XMLElement*		cantPeekElement = document.NewElement("cantPeek");
-		stackfile->InsertEndChild( cantPeekElement );
-		cantPeekElement->SetBoolFirstChild(mCantPeek);
+		CTinyXMLUtils::AddBoolNamed( stackfile, mPrivateAccess, "privateAccess" );
+		CTinyXMLUtils::AddBoolNamed( stackfile, mCantPeek, "cantPeek" );
 		
 		tinyxml2::XMLElement*		createdByElement = document.NewElement("createdByVersion");
 		stackfile->InsertEndChild( createdByElement );

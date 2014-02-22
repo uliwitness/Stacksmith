@@ -172,17 +172,9 @@ void	CLayer::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile,
 	elem->SetText( mPictureName.c_str() );
 	stackfile->InsertEndChild(elem);
 
-	elem = document->NewElement("cantDelete");
-	elem->SetBoolFirstChild( mCantDelete );
-	stackfile->InsertEndChild(elem);
-
-	elem = document->NewElement("showPict");
-	elem->SetBoolFirstChild( mShowPict );
-	stackfile->InsertEndChild(elem);
-
-	elem = document->NewElement("dontSearch");
-	elem->SetBoolFirstChild( mDontSearch );
-	stackfile->InsertEndChild(elem);
+	CTinyXMLUtils::AddBoolNamed( stackfile, mCantDelete, "cantDelete" );
+	CTinyXMLUtils::AddBoolNamed( stackfile, mShowPict, "showPict" );
+	CTinyXMLUtils::AddBoolNamed( stackfile, mDontSearch, "dontSearch" );
 }
 
 
@@ -543,7 +535,7 @@ ObjectID	CLayer::GetUniqueIDForPart()
 void	CLayer::UnhighlightFamilyMembersOfPart( CPart* inPart )
 {
 	LEOInteger		theFamily = inPart->GetFamily();
-	for( auto currPart : mParts )
+	for( CPart* currPart : mParts )
 	{
 		if( currPart->GetFamily() == theFamily
 			&& (currPart != inPart) )

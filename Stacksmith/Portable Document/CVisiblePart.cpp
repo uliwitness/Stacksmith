@@ -69,15 +69,10 @@ void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 
 void	CVisiblePart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
 {
-	tinyxml2::XMLElement	*	elem = document->NewElement("visible");
-	elem->SetBoolFirstChild(mVisible);
-	inElement->InsertEndChild(elem);
+	CTinyXMLUtils::AddBoolNamed( inElement, mVisible, "visible" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mEnabled, "enabled" );
 	
-	elem = document->NewElement("enabled");
-	elem->SetBoolFirstChild(mEnabled);
-	inElement->InsertEndChild(elem);
-	
-	elem = document->NewElement("fillColor");
+	tinyxml2::XMLElement	*	elem = document->NewElement("fillColor");
 	tinyxml2::XMLElement	*	subElem = document->NewElement("red");
 	subElem->SetText(mFillColorRed);
 	elem->InsertEndChild(subElem);

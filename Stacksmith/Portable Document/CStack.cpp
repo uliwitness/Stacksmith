@@ -199,17 +199,9 @@ bool	CStack::Save( const std::string& inPackagePath )
 		cardCountElem->SetText((unsigned)mCards.size());
 		root->InsertEndChild( cardCountElem );
 		
-		tinyxml2::XMLElement*		cantModifyElem = document.NewElement("cantModify");
-		cantModifyElem->SetBoolFirstChild( mCantModify );
-		root->InsertEndChild( cantModifyElem );
-		
-		tinyxml2::XMLElement*		cantDeleteElem = document.NewElement("cantDelete");
-		cantDeleteElem->SetBoolFirstChild( mCantModify );
-		root->InsertEndChild( cantDeleteElem );
-
-		tinyxml2::XMLElement*		cantAbortElem = document.NewElement("cantAbort");
-		cantAbortElem->SetBoolFirstChild( mCantAbort );
-		root->InsertEndChild( cantAbortElem );
+		CTinyXMLUtils::AddBoolNamed( root, mCantModify, "cantModify" );
+		CTinyXMLUtils::AddBoolNamed( root, mCantModify, "cantDelete" );
+		CTinyXMLUtils::AddBoolNamed( root, mCantAbort, "cantAbort" );
 
 		tinyxml2::XMLElement*		cardSizeElem = document.NewElement("cardSize");
 		tinyxml2::XMLElement*		cardSizeWidthElem = document.NewElement("width");
