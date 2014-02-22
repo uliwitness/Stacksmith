@@ -19,6 +19,36 @@
 using namespace Carlson;
 
 
+CMoviePlayerPartMac::~CMoviePlayerPartMac()
+{
+	DestroyView();
+	DESTROY_DEALLOC(mCurrentMovie);
+}
+
+
+void	CMoviePlayerPartMac::WakeUp()
+{
+	CMoviePlayerPart::WakeUp();
+}
+
+
+void	CMoviePlayerPartMac::GoToSleep()
+{
+	if( mCurrentMovie )
+	{
+		mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
+		if( mRateObserver )
+		{
+			[mCurrentMovie jcsRemoveObserver: mRateObserver];
+			mRateObserver = nil;
+		}
+		DESTROY(mCurrentMovie);
+	}
+	
+	CMoviePlayerPart::GoToSleep();
+}
+
+
 void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 {
 	if( mView.superview == inSuperView )
@@ -27,13 +57,16 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
 		return;
 	}
-	if( mView )
+	if( mView || mCurrentMovie )
 	{
-		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
-		if( mRateObserver )
+		if( mCurrentMovie )
 		{
-			[mView.player jcsRemoveObserver: mRateObserver];
-			mRateObserver = nil;
+			mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
+			if( mRateObserver )
+			{
+				[mCurrentMovie jcsRemoveObserver: mRateObserver];
+				mRateObserver = nil;
+			}
 		}
 		[mView removeFromSuperview];
 		[mView release];
@@ -52,11 +85,11 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 
 void	CMoviePlayerPartMac::DestroyView()
 {
-	if( mView )
-		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
+	if( mCurrentMovie )
+		mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 	if( mRateObserver )
 	{
-		[mView.player jcsRemoveObserver: mRateObserver];
+		[mCurrentMovie jcsRemoveObserver: mRateObserver];
 		mRateObserver = nil;
 	}
 	[mView removeFromSuperview];
@@ -72,10 +105,10 @@ void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
 	NSView	*	oldSuper = nil;
 	if( mView )
 	{
-		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
+		mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 		if( mRateObserver )
 		{
-			[mView.player jcsRemoveObserver: mRateObserver];
+			[mCurrentMovie jcsRemoveObserver: mRateObserver];
 			mRateObserver = nil;
 		}
 		oldSuper = [mView superview];
@@ -120,19 +153,23 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 		mediaURL = GetDocument()->GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
 	if( mediaURL.length() > 0 )
 		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
-	mView.player = [AVPlayer playerWithURL: movieURL];
-	SetUpRateObserver();
-	mView.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
-	[mView.player seekToTime: CMTimeMakeWithSeconds( mCurrentTime / 60.0, 1)];
+	if( !mCurrentMovie )
+	{
+		ASSIGN(mCurrentMovie,[AVPlayer playerWithURL: movieURL]);
+		mCurrentMovie.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+		SetUpRateObserver();
+	}
+	mView.player = mCurrentMovie;
+	[mCurrentMovie seekToTime: CMTimeMakeWithSeconds( mCurrentTime / 60.0, 1)];
 }
 
 
 void	CMoviePlayerPartMac::SetUpRateObserver()
 {
-	mRateObserver = [mView.player jcsAddObserverForKeyPath: PROPERTY(rate) options: NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew queue: [NSOperationQueue mainQueue] block: ^(NSDictionary *change)
+	mRateObserver = [mCurrentMovie jcsAddObserverForKeyPath: PROPERTY(rate) options: NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew queue: [NSOperationQueue mainQueue] block: ^(NSDictionary *change)
 	{
 		const char*	msg = NULL;
-		float		theRate = mView.player.rate;
+		float		theRate = mCurrentMovie.rate;
 		if( theRate != mLastNotifiedRate )
 		{
 			if( theRate == 0.0 )
@@ -141,7 +178,7 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 				msg = "playMovie";
 			if( msg )
 				this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, msg );
-			mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
+			mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 			mLastNotifiedRate = theRate;
 		}
 	}];
@@ -162,9 +199,9 @@ void	CMoviePlayerPartMac::SetUpMoviePlayerControls()
 void	CMoviePlayerPartMac::SetStarted( bool inStart )
 {
 	if( inStart )
-		[mView.player play];
+		[mCurrentMovie play];
 	else
-		[mView.player pause];
+		[mCurrentMovie pause];
 	CMoviePlayerPart::SetStarted( inStart );
 }
 
@@ -173,10 +210,11 @@ void	CMoviePlayerPartMac::SetMediaPath( const std::string& inPath )
 {
 	if( mRateObserver )
 	{
-		[mView.player jcsRemoveObserver: mRateObserver];
+		[mCurrentMovie jcsRemoveObserver: mRateObserver];
 		mRateObserver = nil;
 	}
-	mView.player = [AVPlayer playerWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inPath.c_str()]]];
+	ASSIGN(mCurrentMovie,[AVPlayer playerWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inPath.c_str()]]]);
+	mView.player = mCurrentMovie;
 	SetUpRateObserver();
 	CMoviePlayerPart::SetMediaPath( inPath );
 }
@@ -185,14 +223,14 @@ void	CMoviePlayerPartMac::SetMediaPath( const std::string& inPath )
 void	CMoviePlayerPartMac::SetCurrentTime( LEOInteger inTicks )
 {
 	CMoviePlayerPart::SetCurrentTime(inTicks);
-	[mView.player seekToTime: CMTimeMakeWithSeconds( inTicks / 60.0, 1 )];
+	[mCurrentMovie seekToTime: CMTimeMakeWithSeconds( inTicks / 60.0, 1 )];
 }
 
 
 LEOInteger	CMoviePlayerPartMac::GetCurrentTime()
 {
-	if( mView )
-		mCurrentTime = CMTimeGetSeconds([mView.player currentTime]) * 60.0;
+	if( mCurrentMovie )
+		mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 	return mCurrentTime;
 }
 
