@@ -218,8 +218,8 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 			theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
 		else
 			theContents = mOwner->GetPartContentsByID( GetID(), (mOwner != currCard) );
-		std::map<std::string,std::string>	styles;
-		bool								mixed = false;
+		CMap<std::string>	styles;
+		bool				mixed = false;
 		theContents->GetAttributedText().GetAttributesInRange( byteRangeStart, byteRangeEnd, styles, &mixed );
 		if( mixed )
 			LEOInitStringConstantValue( outValue, "mixed", kLEOInvalidateReferences, inContext );

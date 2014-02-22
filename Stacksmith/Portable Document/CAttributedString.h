@@ -13,6 +13,7 @@
 #include "tinyxml2.h"
 #include <string>
 #include <vector>
+#include "CMap.h"
 
 
 namespace Carlson
@@ -20,11 +21,11 @@ namespace Carlson
 
 struct CAttributeRange
 {
-	std::map<std::string,std::string>	mAttributes;
-	size_t								mStart;
-	size_t								mEnd;
+	CMap<std::string>	mAttributes;
+	size_t				mStart;
+	size_t				mEnd;
 	
-	std::map<std::string,std::string>	GetAttributesWithoutInternal() const;
+	CMap<std::string>	GetAttributesWithoutInternal() const;
 };
 
 
@@ -39,7 +40,7 @@ public:
 	void			AddAttributeValueForRange( const std::string& inAttribute, const std::string& inValue, size_t inStart, size_t inEnd );
 	void			ClearAttributeForRange( const std::string& inAttribute, size_t inStart, size_t inEnd );
 	void			ClearAllAttributesForRange( size_t inStart, size_t inEnd );
-	void			GetAttributesInRange( size_t inStart, size_t inEnd, std::map<std::string,std::string>& outStyles, bool *outMixed ) const;
+	void			GetAttributesInRange( size_t inStart, size_t inEnd, CMap<std::string>& outStyles, bool *outMixed ) const;
 	
 	void			ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback ) const;
 	

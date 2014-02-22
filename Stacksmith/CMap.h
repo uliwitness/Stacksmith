@@ -11,6 +11,7 @@
 
 #include <map>
 #include <string>
+#include <iostream>
 
 
 using namespace std;
@@ -28,7 +29,12 @@ template<class V>
 class CMap : public map<string,V,CCaseInsensitiveStringComparator>
 {
 public:
-	void	Dump() const;
+	void	Dump() const
+	{
+		for( auto val : *this )
+			std::cout << "[" << val.first << "] = " << val.second << std::endl;
+		std::cout << "-----" << std::endl;
+	}
 };
 
 }

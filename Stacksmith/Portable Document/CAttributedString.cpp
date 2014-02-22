@@ -33,9 +33,9 @@ static const char*	IndentString( size_t inIndentLevel )
 }
 
 
-std::map<std::string,std::string>	CAttributeRange::GetAttributesWithoutInternal() const
+CMap<std::string>	CAttributeRange::GetAttributesWithoutInternal() const
 {
-	std::map<std::string,std::string>	filteredAttrs;
+	CMap<std::string>	filteredAttrs;
 	for( auto currElem : mAttributes )
 	{
 		if( currElem.first[0] != '$' )
@@ -468,7 +468,7 @@ void	CAttributedString::ClearAllAttributesForRange( size_t inStart, size_t inEnd
 }
 
 
-void	CAttributedString::GetAttributesInRange( size_t inStart, size_t inEnd, std::map<std::string,std::string>& outStyles, bool *outMixed ) const
+void	CAttributedString::GetAttributesInRange( size_t inStart, size_t inEnd, CMap<std::string>& outStyles, bool *outMixed ) const
 {
 	for( CAttributeRange currRun : mRanges )
 	{

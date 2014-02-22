@@ -10,15 +10,18 @@
 #define __Stacksmith__CStyleSheet__
 
 #include <string>
-#include <map>
+#include "CMap.h"
 
+
+namespace Carlson
+{
 
 class CStyleSheet
 {
 public:
 	void	LoadFromStream( const std::string& inCSS );
 	
-	std::map<std::string,std::string>	GetStyleForClass( const char* inClassName ) const
+	CMap<std::string>	GetStyleForClass( const char* inClassName ) const
 	{
 		std::string	fullClassName(".");
 		fullClassName.append(inClassName);
@@ -27,10 +30,10 @@ public:
 		if( foundClass != mStyles.end() )
 			return foundClass->second;
 		else
-			return std::map<std::string,std::string>();
+			return CMap<std::string>();
 	};
 	
-	void	SetStyleForClass( const char* inClassName, const std::map<std::string,std::string>& inStyle )
+	void	SetStyleForClass( const char* inClassName, const CMap<std::string>& inStyle )
 	{
 		std::string	fullClassName(".");
 		fullClassName.append(inClassName);
@@ -47,7 +50,9 @@ public:
 	void	Dump() const;
 	
 protected:
-	std::map<std::string,std::map<std::string,std::string>>	mStyles;
+	CMap<CMap<std::string>>	mStyles;
 };
+
+}
 
 #endif /* defined(__Stacksmith__CStyleSheet__) */

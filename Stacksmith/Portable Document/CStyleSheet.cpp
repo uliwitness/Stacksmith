@@ -8,6 +8,10 @@
 
 #include "CStyleSheet.h"
 #include <sstream>
+#include "CMap.h"
+
+
+using namespace Carlson;
 
 
 bool	iswhitespaceornewline( char ch );
@@ -48,7 +52,7 @@ void	CStyleSheet::LoadFromStream( const std::string& inCSS )
 				if( iswhitespaceornewline(currCh) )
 				{
 					state = kStateWhitespaceAfterStyleClass;
-					mStyles[styleClassName] = std::map<std::string,std::string>();
+					mStyles[styleClassName] = CMap<std::string>();
 				}
 				else if( currCh == '{' )
 					state = kStateInsideStyle;

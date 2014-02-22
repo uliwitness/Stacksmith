@@ -8,7 +8,6 @@
 
 #include "CMap.h"
 #include "UTF8UTF32Utilities.h"
-#include <iostream>
 
 using namespace Carlson;
 
@@ -38,10 +37,3 @@ bool CCaseInsensitiveStringComparator::operator()( const string & s1, const stri
 	return (s1Len < s2Len);
 }
 
-template<class V>
-void	CMap<V>::Dump() const
-{
-	for( auto val : *this )
-		std::cout << "note: [" << val.first << "] = " << val.second << std::endl;
-	std::cout << "-----" << std::endl;
-}
