@@ -19,7 +19,7 @@ namespace Carlson
 
 @interface WILDPartInfoViewController : NSViewController
 {
-	Carlson::CPart*			part;				// The card/bg part we're editing.
+	Carlson::CPart	*		part;				// The card/bg part we're editing.
 	NSButton		*		scriptEditorButton;
 	NSTextField		*		nameField;
 	NSButton		*		enabledSwitch;

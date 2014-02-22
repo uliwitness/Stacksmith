@@ -32,7 +32,7 @@ using namespace Carlson;
 
 -(void)	dealloc
 {
-	mContainer = nil;
+	mContainer = NULL;
 	
 	[super dealloc];
 }
