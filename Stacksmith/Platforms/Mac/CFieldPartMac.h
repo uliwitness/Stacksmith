@@ -36,9 +36,22 @@ public:
 	virtual void	LoadChangedTextStylesIntoView();
 	virtual void	LoadChangedTextFromView();
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
-	virtual void	SetVisible( bool visible )		{ CFieldPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual void	SetHasHorizontalScroller( bool inHS );
 	virtual void	SetHasVerticalScroller( bool inHS );
+	
+	virtual void	SetVisible( bool visible );
+	virtual void	SetEnabled( bool n );
+	virtual void	SetLockText( bool n );
+	virtual void	SetAutoSelect( bool n );
+	virtual void	SetFillColor( int r, int g, int b, int a );
+	virtual void	SetLineColor( int r, int g, int b, int a );
+	virtual void	SetShadowColor( int r, int g, int b, int a );
+	virtual void	SetShadowOffset( double w, double h );
+	virtual void	SetShadowBlurRadius( double r );
+	virtual void	SetLineWidth( int w );
+	virtual void	SetBevelWidth( int bevel );
+	virtual void	SetBevelAngle( int a );
+	
 	virtual NSView*	GetView();
 	virtual NSDictionary*			GetCocoaAttributesForPart();
 	

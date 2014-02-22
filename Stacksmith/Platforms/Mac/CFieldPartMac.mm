@@ -104,6 +104,12 @@ using namespace Carlson;
 	CAutoreleasePool	cppPool;
 	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDoubleClick" );
 //	NSLog(@"tableViewRowDoubleClicked");
+	if( !self.owningField->GetLockText() )
+	{
+		NSInteger	currRow = [sender clickedRow];
+		NSInteger	currColumn = [sender clickedColumn];
+		[sender editColumn: currColumn row: currRow withEvent: nil select: YES];
+	}
 }
 
 @end;
@@ -191,6 +197,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	if( mAutoSelect )
 	{
 		LoadChangedTextStylesIntoView();
+		[mTableView.tableColumns[0] setEditable: !GetLockText()];
 	}
 	else
 	{
@@ -211,6 +218,8 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		}
 		else
 			[mTextView setString: @""];
+		[mTextView setEditable: !GetLockText() && GetEnabled()];
+		[mTextView setSelectable: !GetLockText()];
 	}
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
@@ -242,6 +251,116 @@ void	CFieldPartMac::SetStyle( TFieldStyle inFieldStyle )
 	CFieldPart::SetStyle(inFieldStyle);
 	if( oldSuper )
 		CreateViewIn( oldSuper );
+}
+
+
+void	CFieldPartMac::SetVisible( bool visible )
+{
+	CFieldPart::SetVisible( visible );
+	
+	[mView setHidden: !visible];
+}
+
+
+void	CFieldPartMac::SetEnabled( bool n )
+{
+	CFieldPart::SetEnabled( n );
+
+	if( mTextView )
+	{
+		[mView setLineColor: n ? [NSColor colorWithCalibratedRed: mLineColorRed / 65535.0 green: mLineColorGreen / 65535.0 blue: mLineColorBlue / 65535.0 alpha: mLineColorAlpha / 65535.0] : [NSColor disabledControlTextColor]];
+		[mTextView setEditable: n && !GetLockText()];
+	}
+	else
+		[mTableView setEnabled: n];
+}
+
+
+void	CFieldPartMac::SetAutoSelect( bool n )
+{
+	NSView*	oldSuper = mView.superview;
+	DestroyView();
+	CFieldPart::SetAutoSelect( n );
+	if( oldSuper )
+		CreateViewIn( oldSuper );
+}
+
+
+void	CFieldPartMac::SetLockText( bool n )
+{
+	CFieldPart::SetLockText( n );
+
+	if( mTextView )
+	{
+		[mTextView setEditable: !n && GetEnabled()];
+		[mTextView setSelectable: !n];
+	}
+	else
+		[mTableView.tableColumns[0] setEditable: !n];
+}
+
+
+void	CFieldPartMac::SetFillColor( int r, int g, int b, int a )
+{
+	CFieldPart::SetFillColor( r, g, b, a );
+
+	[mView setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+}
+
+
+void	CFieldPartMac::SetLineColor( int r, int g, int b, int a )
+{
+	CFieldPart::SetLineColor( r, g, b, a );
+
+	[mView setLineColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+}
+
+
+void	CFieldPartMac::SetShadowColor( int r, int g, int b, int a )
+{
+	CFieldPart::SetShadowColor( r, g, b, a );
+	
+	[mView.layer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
+	if( a != 0 )
+	{
+		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+	}
+}
+
+
+void	CFieldPartMac::SetShadowOffset( double w, double h )
+{
+	CFieldPart::SetShadowOffset( w, h );
+	
+	[mView.layer setShadowOffset: NSMakeSize(w,h)];
+}
+
+
+void	CFieldPartMac::SetShadowBlurRadius( double r )
+{
+	CFieldPart::SetShadowBlurRadius( r );
+	
+	[mView.layer setShadowRadius: r];
+}
+
+
+void	CFieldPartMac::SetLineWidth( int w )
+{
+	CFieldPart::SetLineWidth( w );
+	
+	[mView setLineWidth: w];
+}
+
+
+void	CFieldPartMac::SetBevelWidth( int bevel )
+{
+	CFieldPart::SetBevelWidth( bevel );
+}
+
+
+void	CFieldPartMac::SetBevelAngle( int a )
+{
+	CFieldPart::SetBevelAngle( a );
 }
 
 

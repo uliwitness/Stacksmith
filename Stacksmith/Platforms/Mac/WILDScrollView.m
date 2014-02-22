@@ -54,18 +54,35 @@
 		[[self backgroundColor] set];
 		NSRectFill( dirtyRect );
 		
-		NSRect	lineBox = self.bounds;
-		lineBox.origin.x += lineWidth / 2.0;
-		lineBox.origin.y += lineWidth / 2.0;
-		lineBox.size.width -= lineWidth / 2.0;
-		lineBox.size.height -= lineWidth / 2.0;
-		[lineColor set];
-		[NSBezierPath setDefaultLineWidth: lineWidth];
-		[NSBezierPath strokeRect: lineBox];
-		[NSBezierPath setDefaultLineWidth: 1.0];
+		if( lineWidth > 0 )
+		{
+			NSRect	lineBox = self.bounds;
+			lineBox.origin.x += lineWidth / 2.0;
+			lineBox.origin.y += lineWidth / 2.0;
+			lineBox.size.width -= lineWidth / 2.0;
+			lineBox.size.height -= lineWidth / 2.0;
+			[lineColor set];
+			[NSBezierPath setDefaultLineWidth: lineWidth];
+			[NSBezierPath strokeRect: lineBox];
+			[NSBezierPath setDefaultLineWidth: 1.0];
+		}
 	}
 	else
 		[super drawRect: dirtyRect];
+}
+
+
+-(void)	setLineColor: (NSColor*)theColor
+{
+	ASSIGN(self->lineColor,theColor);
+	[self setNeedsDisplay: YES];
+}
+
+
+-(void)	setLineWidth: (CGFloat)inLineWidth
+{
+	self->lineWidth = inLineWidth;
+	[self setNeedsDisplay: YES];
 }
 
 @end

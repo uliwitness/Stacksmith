@@ -15,7 +15,7 @@
 	CGFloat				lineWidth;
 }
 
-@property (retain) NSColor		*	lineColor;
-@property (assign) CGFloat			lineWidth;
+@property (retain,nonatomic) NSColor		*	lineColor;
+@property (assign,nonatomic) CGFloat			lineWidth;
 
 @end
