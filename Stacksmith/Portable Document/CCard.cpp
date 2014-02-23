@@ -16,12 +16,20 @@
 using namespace Carlson;
 
 
+CCard::~CCard()
+{
+	if( mOwningBackground )
+		mOwningBackground->RemoveCard( this );
+}
+
+
 void	CCard::LoadPropertiesFromElement( tinyxml2::XMLElement* root )
 {
 	CLayer::LoadPropertiesFromElement( root );
 	
 	ObjectID owningBackgroundID = CTinyXMLUtils::GetLongLongNamed( root, "owner", 0 );
 	mOwningBackground = mStack->GetBackgroundByID( owningBackgroundID );
+	mOwningBackground->AddCard( this );
 }
 
 

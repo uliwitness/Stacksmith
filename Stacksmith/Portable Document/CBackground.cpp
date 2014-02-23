@@ -14,6 +14,15 @@
 using namespace Carlson;
 
 
+CBackground::~CBackground()
+{
+	for( auto currCard : mMemberCards )
+	{
+		currCard->SetBackground( NULL );
+	}
+}
+
+
 void	CBackground::WakeUp()
 {
 	CLayer::WakeUp();

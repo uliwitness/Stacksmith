@@ -185,6 +185,16 @@
                                     <action selector="delete:" target="-1" id="235"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Delete This Card" id="6QK-5k-e4m">
+                                <connections>
+                                    <action selector="deleteCard:" target="-1" id="WxF-zl-rYB"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete This Stack" id="JUf-YU-SHa">
+                                <connections>
+                                    <action selector="deleteStack:" target="-1" id="hpH-Uu-0S8"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="694">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

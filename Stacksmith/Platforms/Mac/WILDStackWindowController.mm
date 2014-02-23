@@ -866,6 +866,14 @@ using namespace Carlson;
 	{
 		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanDeleteDeleteSelectedItem() );
 	}
+	else if( theItem.action == @selector(deleteCard:) )
+	{
+		return( mStack->GetNumCards() > 1 && !mStack->GetCurrentCard()->GetCantDelete() );
+	}
+	else if( theItem.action == @selector(deleteStack:) )
+	{
+		return( mStack->GetDocument()->GetNumStacks() > 1 && !mStack->GetCantDelete() );
+	}
 	else
 		return [self respondsToSelector: theItem.action];
 }
@@ -877,6 +885,18 @@ using namespace Carlson;
 	{
 		mStack->GetCurrentLayer()->DeleteSelectedItem();
 	}
+}
+
+
+-(IBAction)	deleteCard: (id)sender
+{
+	mStack->DeleteCard( mStack->GetCurrentCard() );
+}
+
+
+-(IBAction)	deleteStack: (id)sender
+{
+	mStack->GetDocument()->DeleteStack( mStack );
 }
 
 

@@ -67,9 +67,11 @@ public:
 	size_t			GetNumCardsWithBackground( CBackground* inBg );
 	CCard*			GetCardAtIndexWithBackground( size_t cardIdx, CBackground* inBg );
 	CCard*			AddNewCard();
+	bool			DeleteCard( CCard* inCard );	// May implicitly delete card's background if it was the only card with that background.
 	virtual void	MarkedStateChangedOfCard( CCard* inCard );
 	
 	void			AddBackground( CBackground* inBackground );	// Add at end.
+	void			RemoveBackground( CBackground* inBg );
 	size_t			GetNumBackgrounds()					{ return mBackgrounds.size(); };
 	CBackground*	GetBackground( size_t inIndex )		{ if( inIndex >= mBackgrounds.size() ) return NULL; return mBackgrounds[inIndex]; };
 	CBackground*	GetBackgroundByID( ObjectID inID );
@@ -105,6 +107,8 @@ public:
 	TStackStyle		GetStyle()								{ return mStyle; };
 	virtual bool	IsResizable()							{ return mResizable; };
 	virtual void	SetResizable( bool n )					{ mResizable = n; IncrementChangeCount(); };
+	virtual bool	GetCantDelete()							{ return mCantDelete; };
+	virtual void	SetCantDelete( bool n )					{ mCantDelete = n; };
 	
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );

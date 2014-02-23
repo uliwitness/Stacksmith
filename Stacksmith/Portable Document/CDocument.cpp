@@ -434,6 +434,29 @@ CStack*	CDocument::AddNewStack()
 }
 
 
+bool	CDocument::DeleteStack( CStack* inStack )
+{
+	if( mStacks.size() == 1 )
+		return false;
+	
+	if( inStack->GetCantDelete() )
+		return false;
+	
+	for( auto currStack = mStacks.begin(); currStack != mStacks.end(); currStack++ )
+	{
+		if( (*currStack) == inStack )
+		{
+			mStacks.erase( currStack );
+			break;
+		}
+	}
+	
+	IncrementChangeCount();
+	
+	return true;
+}
+
+
 std::string	CDocument::GetMediaURLByNameOfType( const std::string& inName, TMediaType inType, int *outHotspotLeft, int *outHotspotTop )
 {
 	const char*	str = inName.c_str();

@@ -43,10 +43,12 @@ CStack::~CStack()
 {
 	if( sFrontStack == this )
 		sFrontStack = NULL;
-	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
-		(*itty)->SetStack( NULL );
 	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
 		(*itty)->SetStack( NULL );
+	mCards.clear();
+	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+		(*itty)->SetStack( NULL );
+	mBackgrounds.clear();
 }
 
 
@@ -322,6 +324,8 @@ void	CStack::InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard )
 
 void	CStack::RemoveCard( CCard* inCard )
 {
+	CCardRef	theCard( inCard );
+	
 	if( inCard->IsMarked() )
 		mMarkedCards.erase( inCard );
 	
@@ -333,8 +337,24 @@ void	CStack::RemoveCard( CCard* inCard )
 			break;
 		}
 	}
-	inCard->SetStack( NULL );
-	inCard->Release();
+	theCard->SetStack( NULL );
+	
+	IncrementChangeCount();
+}
+
+
+void	CStack::RemoveBackground( CBackground* inBg )
+{
+	CBackgroundRef		theBg( inBg );
+	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
+	{
+		if( (*itty) == inBg )
+		{
+			mBackgrounds.erase( itty );
+			break;
+		}
+	}
+	theBg->SetStack( NULL );
 	
 	IncrementChangeCount();
 }
@@ -355,6 +375,30 @@ CCard*	CStack::GetCardByID( ObjectID inID )
 CCard*	CStack::AddNewCard()
 {
 	return AddNewCardWithBackground( GetCurrentCard()->GetBackground() );
+}
+
+
+bool	CStack::DeleteCard( CCard* inCard )
+{
+	CBackgroundRef	theBg( inCard->GetBackground() );
+	
+	if( mCards.size() == 1 )	// Can't delete last card.
+		return false;
+
+	bool	lastCardInBg = theBg->GetNumCards() == 1;
+	if( lastCardInBg && theBg->GetCantDelete() )
+		return false;
+	
+	if( GetCurrentCard() == inCard )
+	{
+		GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, this, NULL );
+		RemoveCard(inCard);
+		
+		if( lastCardInBg )
+			RemoveBackground( theBg );
+	}
+	
+	return true;
 }
 
 

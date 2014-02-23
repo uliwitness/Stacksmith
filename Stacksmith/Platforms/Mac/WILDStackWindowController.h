@@ -60,6 +60,9 @@ class CPart;
 -(IBAction)	newWebBrowser: (id)sender;
 -(IBAction)	newTimer: (id)sender;
 
+-(IBAction)	delete: (id)sender;
+-(IBAction)	deleteCard: (id)sender;
+-(IBAction)	deleteStack: (id)sender;
 
 @end
 

@@ -10,14 +10,17 @@
 #define __Stacksmith__CBackground__
 
 #include "CPlatformLayer.h"
+#include <set>
 
 namespace Carlson {
+
+class CCard;
 
 class CBackground : public CPlatformLayer
 {
 public:
 	CBackground( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack)	{};
-	~CBackground()	{};
+	~CBackground();
 
 	virtual void	WakeUp();		// The current card has started its timers etc.
 	virtual void	GoToSleep();	// The current card has stopped its timers etc.
@@ -26,6 +29,10 @@ public:
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
+	virtual void	AddCard( CCard* inCard )	{ mMemberCards.insert(inCard); };
+	virtual void	RemoveCard( CCard* inCard )	{ mMemberCards.erase(inCard); };
+	virtual size_t	GetNumCards()				{ return mMemberCards.size(); };
+	
 	virtual std::string			GetDisplayName();
 	
 	virtual CScriptableObject*	GetParentObject();
@@ -33,6 +40,8 @@ public:
 protected:
 	virtual const char*	GetLayerXMLType()			{ return "background"; };
 	virtual const char*	GetIdentityForDump()		{ return "Background"; };
+	
+	std::set<CCard*>	mMemberCards;
 };
 
 typedef CRefCountedObjectRef<CBackground>	CBackgroundRef;

@@ -78,6 +78,7 @@ public:
 	size_t				GetNumStacks()				{ return mStacks.size(); };
 	CStack*				GetStackByName( const char* inName );
 	CStack*				AddNewStack();
+	bool				DeleteStack( CStack* inStack );
 	
 	ObjectID			GetUniqueIDForStack();
 	ObjectID			GetUniqueIDForCard();
