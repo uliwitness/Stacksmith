@@ -7,6 +7,7 @@
 //
 
 #include "CAttributedString.h"
+#include <assert.h>
 
 
 #define DEBUG_NORMALIZE_STYLE_RUNS		0
