@@ -290,7 +290,13 @@ bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, c
 
 void	CConcreteObject::InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
 {
-	LEOInitReferenceValue( (LEOValuePtr) &mValueForScripts, outObject, keepReferences, kLEOChunkTypeINVALID, 0, 0, inContext );
+	if( mIDForScripts == kLEOObjectIDINVALID )
+	{
+		InitScriptableObjectValue( &mValueForScripts, this, kLEOInvalidateReferences, inContext );
+		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( GetScriptContextGroupObject(), &mValueForScripts );
+		mSeedForScripts = LEOContextGroupGetSeedForObjectID( GetScriptContextGroupObject(), mIDForScripts );
+	}
+	LEOInitReferenceValue( outObject, (LEOValuePtr) &mValueForScripts, keepReferences, kLEOChunkTypeINVALID, 0, 0, inContext );
 }
 
 
