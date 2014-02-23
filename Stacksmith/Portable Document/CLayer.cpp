@@ -388,7 +388,7 @@ void	CLayer::LoadAddColorPartsFromElement( tinyxml2::XMLElement* root )
 	
 	for( ; theObject != NULL; theObject = theObject->NextSiblingElement("addcolorobject") )
 	{
-		ObjectID	objectID = CTinyXMLUtils::GetLongLongNamed( theObject, "id" );
+		ObjectID		objectID = CTinyXMLUtils::GetLongLongNamed( theObject, "id" );
 		int				objectBevel = CTinyXMLUtils::GetIntNamed( theObject, "bevel" );
 		std::string		objectType;
 		CTinyXMLUtils::GetStringNamed( theObject, "type", objectType );
@@ -561,6 +561,8 @@ void	CLayer::DeleteSelectedItem()
 		{
 			(*currPart)->GoToSleep();
 			currPart = mParts.erase(currPart);
+			if( currPart == mParts.end() )
+				break;
 		}
 	}
 }
