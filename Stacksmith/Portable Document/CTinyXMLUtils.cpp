@@ -193,7 +193,17 @@ void	CTinyXMLUtils::AddStringNamed( tinyxml2::XMLElement* root, const std::strin
 void	CTinyXMLUtils::AddBoolNamed( tinyxml2::XMLElement* root, bool inValue, const char* inName )
 {
 	tinyxml2::XMLElement	*	elem = inName ? root->GetDocument()->NewElement(inName) : root;
-	elem->SetBoolFirstChild(inValue);
+	tinyxml2::XMLElement	*	theBoolElem = elem->FirstChild() ? elem->FirstChild()->ToElement() : NULL;
+	if( theBoolElem
+		&& (strcasecmp(theBoolElem->Value(),"true") == 0 || strcasecmp(theBoolElem->Value(),"false") == 0) )
+	{
+		theBoolElem->SetValue( inValue ? "true" : "false" );
+	}
+	else if( !elem->FirstChild() )
+	{
+		theBoolElem = root->GetDocument()->NewElement( inValue ? "true" : "false" );
+		elem->InsertFirstChild( theBoolElem );
+	}
 	if( inName )
 		root->InsertEndChild( elem );
 }
