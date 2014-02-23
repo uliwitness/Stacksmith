@@ -109,7 +109,7 @@ void	CScriptableObject::InitScriptableObjectValue( LEOValueObject* inStorage, CS
 	inStorage->base.isa = &kLeoValueTypeScriptableObject;
 	if( keepReferences == kLEOInvalidateReferences )
 		inStorage->base.refObjectID = kLEOObjectIDINVALID;
-	inStorage->object = (void*)wildObject->Retain();
+	inStorage->object = (void*)wildObject;	// We don't retain here, as all native objects create one 'canonical' mValueForScripts ivar that would lead to a retain circle. Keep references to that object, which will get invalidated when the object goes away.
 }
 
 
@@ -384,7 +384,7 @@ void	InitScriptableObjectValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepR
 	dest->base.isa = &kLeoValueTypeScriptableObject;
 	if( keepReferences == kLEOInvalidateReferences )
 		dest->base.refObjectID = kLEOObjectIDINVALID;
-	dest->object.object = (void*)((CScriptableObject*)self->object.object)->Retain();
+	dest->object.object = self->object.object;	// We don't retain this. See InitScriptableObjectValue() for details.
 }
 
 
@@ -453,9 +453,7 @@ void	DetermineChunkRangeOfSubstringOfScriptableObjectValue( LEOValuePtr self, si
 void	CleanUpScriptableObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
 {
 	self->base.isa = NULL;
-	if( self->object.object )
-		((CScriptableObject*)self->object.object)->Release();
-	self->object.object = NULL;
+	self->object.object = NULL;	// We don't retain it to avoid circles, so we don't release it here.
 	if( keepReferences == kLEOInvalidateReferences && self->base.refObjectID != kLEOObjectIDINVALID )
 	{
 		LEOContextGroupRecycleObjectID( inContext->group, self->base.refObjectID );
@@ -1011,6 +1009,9 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 }
 
 
+//static int	sScriptUserDatasInExistence = 0;
+
+
 CScriptContextUserData::CScriptContextUserData( CStack* currStack, CScriptableObject* target )
 	: mCurrentStack(currStack), mTarget(target)
 {
@@ -1018,11 +1019,13 @@ CScriptContextUserData::CScriptContextUserData( CStack* currStack, CScriptableOb
 		mCurrentStack->Retain();
 	if( mTarget )
 		mTarget->Retain();
+	//sScriptUserDatasInExistence++;
 }
 
 
 CScriptContextUserData::~CScriptContextUserData()
 {
+	//sScriptUserDatasInExistence--;
 	if( mCurrentStack )
 		mCurrentStack->Release();
 	if( mTarget )
