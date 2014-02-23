@@ -70,7 +70,7 @@ CPart::CPart( CLayer *inOwner )
 
 CPart::~CPart()
 {
-	printf("Deleting one part.\n");
+	//printf("Deleting one part.\n");
 }
 
 
