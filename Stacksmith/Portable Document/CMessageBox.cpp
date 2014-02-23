@@ -78,11 +78,11 @@ LEOScript*	CMessageBox::GetScriptObject( std::function<void(const char*,size_t,s
 	if( !mScriptObject )
 	{
 		const char*		scriptStr = mScript.c_str();
-		uint16_t		fileID = LEOFileIDForFileName( "message box" );	// +++ TODO: Use long name!
+		uint16_t		fileID = LEOFileIDForFileName( "message box" );
 		LEOParseTree*	parseTree = LEOParseTreeCreateForCommandOrExpressionFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
 		if( LEOParserGetLastErrorMessage() == NULL )
 		{
-			if( mIDForScripts == kLEOObjectIDINVALID )
+			if( mIDForScripts == kLEOObjectIDINVALID )	// +++ FIXME! What if we're run for a new context group?
 			{
 				InitScriptableObjectValue( &mValueForScripts, this, kLEOInvalidateReferences, NULL );
 				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( GetScriptContextGroupObject(), &mValueForScripts );

@@ -34,6 +34,7 @@ public:
 	virtual void		AddMessage( const std::string& inMessage );
 	size_t				GetNumMessages()							{ return mMessages.size(); };
 	std::string			GetMessageAtIndex( size_t inIndex );
+	// We don't provide InitValue here because the message watcher can be referenced from many context groups.
 	
 	virtual void		SetVisible( bool n )						{};
 	virtual bool		IsVisible()									{ return false; };

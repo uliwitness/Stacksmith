@@ -30,6 +30,7 @@ public:
 	
 	virtual bool		GetTextContents( std::string& outString );
 	virtual bool		SetTextContents( const std::string& inString);
+	// We don't provide InitValue here because the message box can be used to run scripts in many context groups.
 
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );
 	virtual LEOContextGroup*	GetScriptContextGroupObject();
