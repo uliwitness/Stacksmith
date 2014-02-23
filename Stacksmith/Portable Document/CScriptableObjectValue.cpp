@@ -1009,6 +1009,12 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 }
 
 
+void	CScriptableObject::InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
+{
+	InitScriptableObjectValue( &outObject->object, this, keepReferences, inContext );
+}
+
+
 //static int	sScriptUserDatasInExistence = 0;
 
 

@@ -91,6 +91,7 @@ public:
 	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
 	
 	virtual LEOContextGroup*	GetScriptContextGroupObject()				{ return NULL; };
+	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	
 	static void			InitScriptableObjectValue( LEOValueObject* inStorage, CScriptableObject* wildObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	static LEOScript*	GetParentScript( LEOScript* inScript, LEOContext* inContext );

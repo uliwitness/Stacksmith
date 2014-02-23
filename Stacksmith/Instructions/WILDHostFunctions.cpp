@@ -113,7 +113,7 @@ void	WILDStackInstruction( LEOContext* inContext )
 		LEOValuePtr	valueToReplace = inContext->stackEndPtr -2;
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( valueToReplace, kLEOInvalidateReferences, inContext );
-		CScriptableObject::InitScriptableObjectValue( &valueToReplace->object, theStack, kLEOInvalidateReferences, inContext );
+		theStack->InitValue( valueToReplace, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -175,7 +175,7 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 		LEOValuePtr	valueToReplace = inContext->stackEndPtr -3;
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 		LEOCleanUpValue( valueToReplace, kLEOInvalidateReferences, inContext );
-		CScriptableObject::InitScriptableObjectValue( &valueToReplace->object, theBackground, kLEOInvalidateReferences, inContext );
+		theBackground->InitValue( valueToReplace, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -243,7 +243,7 @@ void	WILDCardInstruction( LEOContext* inContext )
 		LEOValuePtr	valueToReplace = inContext->stackEndPtr -3;
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		CScriptableObject::InitScriptableObjectValue( &valueToReplace->object, theCard, kLEOInvalidateReferences, inContext );
+		theCard->InitValue( valueToReplace, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -295,7 +295,7 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 	{
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		thePart->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -351,7 +351,7 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 	{
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+		thePart->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -439,7 +439,7 @@ void	WILDNextCardInstruction( LEOContext* inContext )
 	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	CCard		*	theCard = theStack->GetNextCard();
 	
-	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+	theCard->InitValue( inContext->stackEndPtr, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -451,7 +451,7 @@ void	WILDPreviousCardInstruction( LEOContext* inContext )
 	CStack		*	theStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	CCard		*	theCard = theStack->GetPreviousCard();
 	
-	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theCard, kLEOInvalidateReferences, inContext );
+	theCard->InitValue( inContext->stackEndPtr, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -468,7 +468,7 @@ void	WILDNextBackgroundInstruction( LEOContext* inContext )
 		bkgdIndex = 0;
 	theBackground = theStack->GetBackground( bkgdIndex );
 	
-	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
+	theBackground->InitValue( inContext->stackEndPtr, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -486,7 +486,7 @@ void	WILDPreviousBackgroundInstruction( LEOContext* inContext )
 		bkgdIndex--;
 	theBackground = theStack->GetBackground( bkgdIndex );
 	
-	CScriptableObject::InitScriptableObjectValue( &inContext->stackEndPtr->object, theBackground, kLEOInvalidateReferences, inContext );
+	theBackground->InitValue( inContext->stackEndPtr, kLEOInvalidateReferences, inContext );
 	inContext->stackEndPtr ++;
 	
 	inContext->currentInstruction++;
@@ -514,7 +514,7 @@ void	WILDFirstCardInstruction( LEOContext* inContext )
 	if( inContext->flags & kLEOContextKeepRunning )	// No error?
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
+		theCard->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	}
 	
 	inContext->currentInstruction++;
@@ -542,7 +542,7 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 	if( inContext->flags & kLEOContextKeepRunning )	// No error?
 	{
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
+		theCard->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	}
 	
 	inContext->currentInstruction++;
@@ -571,7 +571,7 @@ void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 		CBackground	*	theBackground = (inContext->currentInstruction->param1 & 32) ? theStack->GetBackground( numBackgrounds -1 ) : theStack->GetBackground(0);
 		
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
+		theBackground->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	}
 	
 	inContext->currentInstruction++;
@@ -630,7 +630,7 @@ void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 			CPart	*	thePart = theLayer->GetPartOfType(desiredIndex, partType);
 			
 			LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
-			CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, thePart, kLEOInvalidateReferences, inContext );
+			thePart->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 		}
 	}
 	
@@ -645,7 +645,7 @@ void	WILDThisStackInstruction( LEOContext* inContext )
 	if( frontStack )
 	{
 		inContext->stackEndPtr++;
-		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, frontStack, kLEOInvalidateReferences, inContext );
+		frontStack->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -664,7 +664,7 @@ void	WILDThisBackgroundInstruction( LEOContext* inContext )
 	if( theBackground )
 	{
 		inContext->stackEndPtr++;
-		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theBackground, kLEOInvalidateReferences, inContext );
+		theBackground->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -683,7 +683,7 @@ void	WILDThisCardInstruction( LEOContext* inContext )
 	if( theCard )
 	{
 		inContext->stackEndPtr++;
-		CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, theCard, kLEOInvalidateReferences, inContext );
+		theCard->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
@@ -888,7 +888,7 @@ void	WILDMessageBoxInstruction( LEOContext* inContext )
 	CMessageBox*	msg = CMessageBox::GetSharedInstance();
 		
 	inContext->stackEndPtr++;
-	CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, msg, kLEOInvalidateReferences, inContext );
+	msg->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }
@@ -899,7 +899,7 @@ void	WILDMessageWatcherInstruction( LEOContext* inContext )
 	CMessageWatcher*	msg = CMessageWatcher::GetSharedInstance();
 	
 	inContext->stackEndPtr++;
-	CScriptableObject::InitScriptableObjectValue( &(inContext->stackEndPtr -1)->object, msg, kLEOInvalidateReferences, inContext );
+	msg->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }

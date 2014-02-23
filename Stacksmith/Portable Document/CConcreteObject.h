@@ -45,6 +45,8 @@ public:
 	virtual bool		GetUserPropertyValueForName( const char* inPropName, std::string& outValue );
 	virtual bool		SetUserPropertyValueForName( const std::string& inValue, const char* inPropName );
 	
+	virtual void		InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
+	
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );	// Calls errorHandler with NULL message on success, calls error handler with error message and returns NULL on failure.
 	virtual CDocument*	GetDocument()		{ return mDocument; };
 	

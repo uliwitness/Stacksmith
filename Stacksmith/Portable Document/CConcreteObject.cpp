@@ -288,6 +288,13 @@ bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, c
 }
 
 
+void	CConcreteObject::InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
+{
+	LEOInitReferenceValue( (LEOValuePtr) &mValueForScripts, outObject, keepReferences, kLEOChunkTypeINVALID, 0, 0, inContext );
+}
+
+
+
 void	CConcreteObject::DumpUserProperties( size_t inIndentLevel )
 {
 	const char*	indentStr = IndentString(inIndentLevel);

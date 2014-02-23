@@ -141,7 +141,7 @@ void	LEOPushMachineInstruction( LEOContext* inContext )
 void	LEOPushTargetInstruction( LEOContext* inContext )
 {
 	LEOValuePtr	newVal = LEOPushValueOnStack( inContext, NULL );
-	CScriptableObject::InitScriptableObjectValue( &newVal->object, ((CScriptContextUserData*) inContext->userData)->GetTarget(), kLEOInvalidateReferences, inContext );
+	((CScriptContextUserData*) inContext->userData)->GetTarget()->InitValue( newVal, kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }
