@@ -56,6 +56,7 @@ void	CAttributedString::LoadFromElementWithStyles( tinyxml2::XMLElement * inElem
 
 void	CAttributedString::AppendFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles )
 {
+//	inStyles.Dump();
 	tinyxml2::XMLNode * currChild = inElement->FirstChild();
 	while( currChild )
 	{
@@ -118,6 +119,9 @@ void	CAttributedString::AppendFromElementWithStyles( tinyxml2::XMLElement * inEl
 
 void	CAttributedString::NormalizeStyleRuns()
 {
+	#if DEBUG_NORMALIZE_STYLE_RUNS
+	Dump();
+	#endif
 	// Sort runs by start.
 	sort( mRanges.begin(), mRanges.end(),
             [](const CAttributeRange& a, const CAttributeRange& b)
@@ -506,6 +510,11 @@ void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,cons
 
 void	CAttributedString::Dump( size_t inIndent ) const
 {
+	Dump( std::cout, inIndent );
+}
+
+void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const
+{
 #if 0
 	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
 	{
@@ -545,22 +554,22 @@ void	CAttributedString::Dump( size_t inIndent ) const
 	} );
 #else
 	const char*	indentStr = IndentString( inIndent );
-	printf("%s<%zu>",indentStr,mRanges.size());
-	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
+	stream << indentStr << "<" << mRanges.size() << ">";
+	ForEachRangeDo( [&]( CAttributeRange* currRun,const std::string& inText )
 	{
-		printf("[");
+		stream << "[";
 		if( currRun )
 		{
-			printf("{%zu,%zu",currRun->mStart,currRun->mEnd);
+			stream << "{" << currRun->mStart << "," << currRun->mEnd;
 			for( auto currStyle : currRun->mAttributes )
 			{
-				printf(",%s:%s", currStyle.first.c_str(), currStyle.second.c_str() );
+				stream << "," << currStyle.first << ":" << currStyle.second;
 			}
-			printf("}");
+			stream << "}";
 		}
-		printf("%s]",inText.c_str());
+		stream << inText << "]";
 	} );
-	printf("\n%s\n",indentStr);
+	stream << std::endl << indentStr << std::endl;
 #endif
 }
 

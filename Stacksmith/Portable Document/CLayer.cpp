@@ -108,13 +108,24 @@ void	CLayer::Load( std::function<void(CLayer*)> completionBlock )
 				if( styleSheetFilename )
 				{
 					std::string		styleSheetURL( mURL );
-					styleSheetURL.append(1,'/');
+					size_t			slashPos = styleSheetURL.rfind('/');
+					if( slashPos == std::string::npos )
+						slashPos = styleSheetURL.length();
+					else
+						slashPos += 1;
+					styleSheetURL = styleSheetURL.substr(0, slashPos);
 					styleSheetURL.append(styleSheetFilename);
+					
+//					std::cout << styleSheetURL << std::endl;
+					
 					CURLRequest		styleSheetRequest( styleSheetURL );
 					CURLConnection::SendRequestWithCompletionHandler( styleSheetRequest, [this,root,document](CURLResponse inStyleSheetResponse, const char* inStyleSheetData, size_t inStyleSheetDataLength)
 					{
-						mStyles.LoadFromStream( std::string( inStyleSheetData, inStyleSheetDataLength ) );
-						//mStyles.Dump();
+						if( inStyleSheetData )	// Managed to load CSS file?
+						{
+							mStyles.LoadFromStream( std::string( inStyleSheetData, inStyleSheetDataLength ) );
+							//mStyles.Dump();
+						}
 						
 						// Load part contents:
 						tinyxml2::XMLElement	*	currPartContentsElem = root->FirstChildElement( "content" );

@@ -894,7 +894,7 @@ int main(int argc, const char * argv[])
 		WILDTest( ".style2 contains 1 style", styleTwo.size(), size_t(1) );
 		WILDTest( ".style2 is italic", styleTwo["text-style"].c_str(), "italic" );
 		
-		attrStr.LoadFromElementWithStyles( elem , styles );
+		attrStr.LoadFromElementWithStyles( elem, styles );
 		
 		CStyleSheet				writtenStyles;
 		CAttributedString		loadedStr;
@@ -913,6 +913,36 @@ int main(int argc, const char * argv[])
 		styleTwo = writtenStyles.GetStyleForClass("style2");
 		WILDTest( ".style2 contains 1 style", styleTwo.size(), size_t(1) );
 		WILDTest( ".style2 is italic", styleTwo["text-style"].c_str(), "italic" );
+	}
+	
+	{
+		CAttributedString		attrStr;
+		CStyleSheet				styles;
+		tinyxml2::XMLDocument	doc;
+		
+		doc.Parse( "<text>othervalue:foo\n<span class=\"style2\">somestuff:This</span>\navalue:123.457\ncurrentbutton:First Choice\nd:\nb:\nc:\na:\n</text>" );
+		
+		tinyxml2::XMLElement*	elem = doc.FirstChildElement( "text" );
+		
+		styles.LoadFromStream( ".style1 { font-weight: bold; } .style2 { text-style: italic; }" );
+		std::string	css = styles.GetCSS();
+		
+		WILDTest( "Read & Output round trip.", css.c_str(), ".style1\n{\n	font-weight: bold;\n}\n.style2\n{\n	text-style: italic;\n}\n" );
+		WILDTest( "Number of classes", styles.GetNumClasses(), size_t(2) );
+		WILDTest( ".style1 is there", styles.GetClassAtIndex(0).c_str(), ".style1" );
+		auto styleOne = styles.GetStyleForClass("style1");
+		WILDTest( ".style1 contains 1 style", styleOne.size(), size_t(1) );
+		WILDTest( ".style1 is bold", styleOne["font-weight"].c_str(), "bold" );
+		WILDTest( ".style2 is there", styles.GetClassAtIndex(1).c_str(), ".style2" );
+		auto styleTwo = styles.GetStyleForClass("style2");
+		WILDTest( ".style2 contains 1 style", styleTwo.size(), size_t(1) );
+		WILDTest( ".style2 is italic", styleTwo["text-style"].c_str(), "italic" );
+		
+		attrStr.LoadFromElementWithStyles( elem, styles );
+		std::stringstream	stylesStr;
+		attrStr.Dump(stylesStr);
+		
+		WILDTest( "styles were read correctly", stylesStr.str().c_str(), "<1>[othervalue:foo\n][{15,29,text-style:italic}somestuff:This][\navalue:123.457\ncurrentbutton:First Choice\nd:\nb:\nc:\na:\n]\n\n" );
 	}
 		
 	// Set up some parser tables (but not enough to actually generate bytecode) to be able to test the parser:

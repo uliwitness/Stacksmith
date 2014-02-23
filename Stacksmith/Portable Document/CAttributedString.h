@@ -45,6 +45,7 @@ public:
 	void			ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback ) const;
 	
 	void			Dump( size_t inIndent = 0 ) const;
+	void			Dump( std::ostream &stream, size_t inIndent = 0 ) const;
 	
 protected:
 	void	AppendFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );

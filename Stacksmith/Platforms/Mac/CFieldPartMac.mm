@@ -460,57 +460,83 @@ NSDictionary*	CFieldPartMac::GetCocoaAttributesForPart()
 
 NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs, size_t endOffs )
 {
-//	attrStr->Dump();
+//	attrStr.Dump();
 	size_t	len = ((endOffs != SIZE_T_MAX) ? endOffs : attrStr.GetLength()) -startOffs;
 	NSMutableAttributedString	*	newAttrStr = [[[NSMutableAttributedString alloc] initWithString: [[[NSString alloc] initWithBytes: attrStr.GetString().c_str() +startOffs length: len encoding: NSUTF8StringEncoding] autorelease] attributes: defaultAttrs] autorelease];
 	attrStr.ForEachRangeDo([newAttrStr,defaultAttrs,endOffs,startOffs](CAttributeRange *currRange, const std::string &txt)
 	{
+//		std::cout << "\"" << txt << "\"" << std::endl;
 		if( currRange )
 		{
+//			std::cout << currRange->mAttributes.size() << " attributes." << std::endl;
+//			std::cout << currRange->mStart << " > " << endOffs << " || " << currRange->mEnd << " < " << startOffs << std::endl;
 			if( currRange->mStart > endOffs || currRange->mEnd < startOffs )
+			{
+//				std::cout << "Skipping." << std::endl;
 				return;
+			}
 			NSRange	currCocoaRange = { currRange->mStart, currRange->mEnd -currRange->mStart };
+//			std::cout << "currCocoaRange = {" << currRange->mStart << "," << (currRange->mEnd -currRange->mStart) << "}" << std::endl;
 			if( currCocoaRange.location < startOffs )
 			{
 				currCocoaRange.length -= startOffs -currCocoaRange.location;
 				currCocoaRange.location = startOffs;
+//				std::cout << "\tSTARTS BEFORE: currCocoaRange = {" << currRange->mStart << "," << (currRange->mEnd -currRange->mStart) << "}" << std::endl;
 			}
 			if( (currCocoaRange.location +currCocoaRange.length) > endOffs )
 			{
 				currCocoaRange.length -= (currCocoaRange.location +currCocoaRange.length) -endOffs;
+//				std::cout << "\tENDS AFTER: currCocoaRange = {" << currRange->mStart << "," << (currRange->mEnd -currRange->mStart) << "}" << std::endl;
 			}
 			currCocoaRange.location -= startOffs;
+//			std::cout << "\tcurrCocoaRange = {" << currRange->mStart << "," << (currRange->mEnd -currRange->mStart) << "}" << std::endl;
 			
 			// +++ Convert UTF8 to UTF16 range!
 			
 			NSFont	*	newFont = nil;
 			for( auto currStyle : currRange->mAttributes )
 			{
+//				std::cout << "Style: " << currStyle.first << std::endl;
 				if( currStyle.first.compare("text-decoration") == 0 && currStyle.second.compare("underline") == 0 )
 				{
+//					std::cout << "\tAdding underline." << std::endl;
 					[newAttrStr addAttribute: NSUnderlineStyleAttributeName value: @(NSUnderlineStyleSingle) range: currCocoaRange];
 				}
 				else if( currStyle.first.compare("text-style") == 0 && currStyle.second.compare("italic") == 0 )
 				{
 					NSFont*	changedFont = [[NSFontManager sharedFontManager] convertFont: (newFont ? newFont : defaultAttrs[NSFontAttributeName]) toHaveTrait: NSItalicFontMask];
 					if( changedFont && [[NSFontManager sharedFontManager] traitsOfFont: changedFont] & NSItalicFontMask )
+					{
 						newFont = changedFont;
+//						std::cout << "\tAdding italic." << std::endl;
+					}
 					else
 					{
 						[newAttrStr addAttribute: NSObliquenessAttributeName value: @(0.5) range: currCocoaRange];
+//						std::cout << "\tAdding oblique." << std::endl;
 					}
 				}
 				else if( currStyle.first.compare("font-weight") == 0 && currStyle.second.compare("bold") == 0 )
 				{
 					NSFont*	changedFont = [[NSFontManager sharedFontManager] convertFont: (newFont ? newFont : defaultAttrs[NSFontAttributeName]) toHaveTrait: NSBoldFontMask];
 					if( changedFont )
+					{
+//						std::cout << "\tAdding bold." << std::endl;
 						newFont = changedFont;
+					}
+					else
+						;//std::cout << "\tAdding bold failed." << std::endl;
 				}
 				else if( currStyle.first.compare("font-family") == 0 )
 				{
 					NSFont*	changedFont = [[NSFontManager sharedFontManager] convertFont: (newFont ? newFont : defaultAttrs[NSFontAttributeName]) toFamily: [NSString stringWithUTF8String: currStyle.second.c_str()]];
 					if( changedFont )
+					{
 						newFont = changedFont;
+//						std::cout << "\tChanged font family." << std::endl;
+					}
+					else
+						;//std::cout << "\tFailed to change font family." << std::endl;
 				}
 				else if( currStyle.first.compare("font-size") == 0 )
 				{
@@ -518,18 +544,30 @@ NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedS
 					LEOInteger	fontSize = strtoll( currStyle.second.c_str(), &endPtr, 10 );
 					NSFont*	changedFont = [[NSFontManager sharedFontManager] convertFont: (newFont ? newFont : defaultAttrs[NSFontAttributeName]) toSize: fontSize];
 					if( changedFont )
+					{
 						newFont = changedFont;
+//						std::cout << "\tChanged font size." << std::endl;
+					}
+					else
+						;//std::cout << "\tFailed to change font size." << std::endl;
 				}
 				else if( currStyle.first.compare("$link") == 0 )
 				{
 					[newAttrStr addAttribute: NSLinkAttributeName value: [NSURL URLWithString: [NSString stringWithUTF8String: currStyle.second.c_str()]] range: currCocoaRange];
+//					std::cout << "\tAdded link." << std::endl;
 				}
 				// +++ Add outline/shadow/condense/extend
 			}
 			if( newFont )
+			{
 				[newAttrStr addAttribute: NSFontAttributeName value: newFont range: currCocoaRange];
+//				std::cout << "\tFont changed." << std::endl;
+			}
+			else
+				;//std::cout << "\tDidn't have to change font." << std::endl;
 		}
 	});
+//	std::cout << std::endl;
 	return newAttrStr;
 }
 
