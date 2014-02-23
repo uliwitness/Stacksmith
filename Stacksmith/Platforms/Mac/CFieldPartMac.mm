@@ -370,7 +370,8 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 	if( mAutoSelect )
 	{
 		ListChunkCallbackContext	ctx = { .lines = [[NSMutableArray alloc] init], .contents = contents, .defaultAttrs = GetCocoaAttributesForPart() };
-		LEODoForEachChunk( contents->GetText().c_str(), contents->GetText().length(), kLEOChunkTypeLine, ListChunkCallback, 0, &ctx );
+		if( contents )
+			LEODoForEachChunk( contents->GetText().c_str(), contents->GetText().length(), kLEOChunkTypeLine, ListChunkCallback, 0, &ctx );
 		[mMacDelegate setLines: ctx.lines];
 		[ctx.lines release];
 		[mTableView reloadData];
