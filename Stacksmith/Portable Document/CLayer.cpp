@@ -244,7 +244,7 @@ bool	CLayer::Save( const std::string& inPackagePath )
 		elem = document.NewElement("link");
 		elem->SetAttribute("rel", "stylesheet");
 		elem->SetAttribute("type", "text/css");
-		elem->SetAttribute("name", destStylesName.str().c_str());
+		elem->SetAttribute("href", destStylesName.str().c_str());
 		stackfile->InsertAfterChild(lastChildBeforeStyles,elem);
 		
 		FILE*	theFile = fopen( destStylesPath.c_str(), "w" );
