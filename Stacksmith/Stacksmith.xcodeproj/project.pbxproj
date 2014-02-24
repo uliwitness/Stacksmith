@@ -251,6 +251,7 @@
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
+		554F42F018BB4F0400F5F106 /* EndianStuff.h in Resources */ = {isa = PBXBuildFile; fileRef = 554F42EF18BB4F0400F5F106 /* EndianStuff.h */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E539E18922766001487C1 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555E539D18922766001487C1 /* AVKit.framework */; };
 		555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555E53A3189351AA001487C1 /* PlaceholderMovie.mov */; };
@@ -830,6 +831,7 @@
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
 		554DC3181863B6A000B514E3 /* CForgeExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgeExceptions.h; path = ../../CForgeExceptions.h; sourceTree = "<group>"; };
 		554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CForgeExceptions.cpp; path = ../../CForgeExceptions.cpp; sourceTree = "<group>"; };
+		554F42EF18BB4F0400F5F106 /* EndianStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = EndianStuff.h; path = ../stackimport/EndianStuff.h; sourceTree = "<group>"; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
 		555E539D18922766001487C1 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = ../../../../../System/Library/Frameworks/AVKit.framework; sourceTree = "<group>"; };
 		555E53A3189351AA001487C1 /* PlaceholderMovie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PlaceholderMovie.mov; sourceTree = "<group>"; };
@@ -1575,6 +1577,7 @@
 		5542CE3C113ADFCE00555C64 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				554F42EF18BB4F0400F5F106 /* EndianStuff.h */,
 				552386A51880D72E00D7FAB3 /* ULIURLHandlingApplication.h */,
 				552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */,
 				5542CABF113A2CB300555C64 /* UKPBMImageRep.h */,
@@ -2178,6 +2181,7 @@
 				55039F4F136B52C80082E32E /* brush13.png in Resources */,
 				55405BD518A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib in Resources */,
 				55039F50136B52C80082E32E /* brush14.png in Resources */,
+				554F42F018BB4F0400F5F106 /* EndianStuff.h in Resources */,
 				55039F51136B52C80082E32E /* brush15.png in Resources */,
 				55039F52136B52C80082E32E /* brush16.png in Resources */,
 				55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */,

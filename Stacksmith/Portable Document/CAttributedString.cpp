@@ -8,6 +8,7 @@
 
 #include "CAttributedString.h"
 #include <assert.h>
+#include "EndianStuff.h"
 
 
 #define DEBUG_NORMALIZE_STYLE_RUNS		0
@@ -493,8 +494,43 @@ void	CAttributedString::GetAttributesInRange( size_t inStart, size_t inEnd, CMap
 }
 
 
+static size_t	UTF16LengthForUTF32Char( char32_t inChar )
+{
+	const char16_t	HI_SURROGATE_START = 0xD800;
+	char16_t	X = (char16_t) inChar;
+	char32_t	U = (inChar >> 16) & ((1 << 5) - 1);
+	char16_t	W = (char16_t) U - 1;
+	char16_t	HiSurrogate = HI_SURROGATE_START | (W << 6) | X >> 10;
+
+	const char16_t	LO_SURROGATE_START = (HiSurrogate == 0xffc0) ? 0 : 0xDC00;
+	char16_t	X2 = (char16_t) inChar;
+	char16_t	LoSurrogate = (char16_t) (LO_SURROGATE_START | (X2 & ((1 << 10) - 1)));
+	
+	size_t		utf16len = ((HiSurrogate == 0xffc0) ? 0 : 1) +1;
+	uint8_t		u16txt[4] = {0};
+	if( utf16len == 1 )
+	{
+		printf( "0x%08x --> 0x%04x (%zu)\n", inChar, LoSurrogate, utf16len );
+		u16txt[0] = LoSurrogate & 0xff;
+		u16txt[1] = LoSurrogate >> 8;
+	}
+	else
+	{
+		printf( "0x%08x --> 0x%04x 0x%04x (%zu)\n", inChar, HiSurrogate, LoSurrogate, utf16len );
+		u16txt[0] = HiSurrogate & 0xff;
+		u16txt[1] = HiSurrogate >> 8;
+		u16txt[2] = LoSurrogate & 0xff;
+		u16txt[3] = LoSurrogate >> 8;
+	}
+	return utf16len;
+}
+
+
 void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback ) const
 {
+//	UTF16LengthForUTF32Char('a');
+//	UTF16LengthForUTF32Char( 0x1F313 );
+	
 	size_t	currOffs = 0;
 	for( CAttributeRange currRun : mRanges )
 	{
