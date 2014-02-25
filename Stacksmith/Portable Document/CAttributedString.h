@@ -42,7 +42,9 @@ public:
 	void			ClearAllAttributesForRange( size_t inStart, size_t inEnd );
 	void			GetAttributesInRange( size_t inStart, size_t inEnd, CMap<std::string>& outStyles, bool *outMixed ) const;
 	
-	void			ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback ) const;
+	void			ForEachRangeDo( std::function<void(size_t,size_t,CAttributeRange*,const std::string&)> inCallback ) const;
+	size_t	UTF16OffsetFromUTF8Offset( size_t inOffs ) const;
+	size_t	UTF32OffsetFromUTF8Offset( size_t inOffs ) const;
 	
 	void			Dump( size_t inIndent = 0 ) const;
 	void			Dump( std::ostream &stream, size_t inIndent = 0 ) const;

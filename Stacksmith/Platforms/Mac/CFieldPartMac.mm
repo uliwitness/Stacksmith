@@ -463,7 +463,8 @@ NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedS
 //	attrStr.Dump();
 	size_t	len = ((endOffs != SIZE_T_MAX) ? endOffs : attrStr.GetLength()) -startOffs;
 	NSMutableAttributedString	*	newAttrStr = [[[NSMutableAttributedString alloc] initWithString: [[[NSString alloc] initWithBytes: attrStr.GetString().c_str() +startOffs length: len encoding: NSUTF8StringEncoding] autorelease] attributes: defaultAttrs] autorelease];
-	attrStr.ForEachRangeDo([newAttrStr,defaultAttrs,endOffs,startOffs](CAttributeRange *currRange, const std::string &txt)
+	size_t	utf16StartOffs = attrStr.UTF16OffsetFromUTF8Offset(startOffs);
+	attrStr.ForEachRangeDo([newAttrStr,&attrStr,utf16StartOffs,defaultAttrs,endOffs,startOffs](size_t currOffs, size_t currLen, CAttributeRange *currRange, const std::string &txt)
 	{
 //		std::cout << "\"" << txt << "\"" << std::endl;
 		if( currRange )
@@ -488,10 +489,13 @@ NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedS
 				currCocoaRange.length -= (currCocoaRange.location +currCocoaRange.length) -endOffs;
 //				std::cout << "\tENDS AFTER: currCocoaRange = {" << currRange->mStart << "," << (currRange->mEnd -currRange->mStart) << "}" << std::endl;
 			}
-			currCocoaRange.location -= startOffs;
-//			std::cout << "\tcurrCocoaRange = {" << currRange->mStart << "," << (currRange->mEnd -currRange->mStart) << "}" << std::endl;
 			
-			// +++ Convert UTF8 to UTF16 range!
+			// Convert UTF8 to UTF16 range:
+			currCocoaRange.length = attrStr.UTF16OffsetFromUTF8Offset(currCocoaRange.location +currCocoaRange.length);
+			currCocoaRange.location = attrStr.UTF16OffsetFromUTF8Offset(currCocoaRange.location);
+			currCocoaRange.length -= currCocoaRange.location;
+			currCocoaRange.location -= utf16StartOffs;
+//			std::cout << "\tcurrCocoaRange = {" << currRange->mStart << "," << (currRange->mEnd -currRange->mStart) << "}" << std::endl;
 			
 			NSFont	*	newFont = nil;
 			for( auto currStyle : currRange->mAttributes )

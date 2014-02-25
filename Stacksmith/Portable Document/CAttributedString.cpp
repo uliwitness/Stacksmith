@@ -9,6 +9,7 @@
 #include "CAttributedString.h"
 #include <assert.h>
 #include "EndianStuff.h"
+#include "UTF8UTF32Utilities.h"
 
 
 #define DEBUG_NORMALIZE_STYLE_RUNS		0
@@ -494,54 +495,62 @@ void	CAttributedString::GetAttributesInRange( size_t inStart, size_t inEnd, CMap
 }
 
 
-static size_t	UTF16LengthForUTF32Char( char32_t inChar )
+void	CAttributedString::ForEachRangeDo( std::function<void(size_t,size_t,CAttributeRange*,const std::string&)> inCallback ) const
 {
-	const char16_t	HI_SURROGATE_START = 0xD800;
-	char16_t	X = (char16_t) inChar;
-	char32_t	U = (inChar >> 16) & ((1 << 5) - 1);
-	char16_t	W = (char16_t) U - 1;
-	char16_t	HiSurrogate = HI_SURROGATE_START | (W << 6) | X >> 10;
-
-	const char16_t	LO_SURROGATE_START = (HiSurrogate == 0xffc0) ? 0 : 0xDC00;
-	char16_t	X2 = (char16_t) inChar;
-	char16_t	LoSurrogate = (char16_t) (LO_SURROGATE_START | (X2 & ((1 << 10) - 1)));
-	
-	size_t		utf16len = ((HiSurrogate == 0xffc0) ? 0 : 1) +1;
-	uint8_t		u16txt[4] = {0};
-	if( utf16len == 1 )
-	{
-		printf( "0x%08x --> 0x%04x (%zu)\n", inChar, LoSurrogate, utf16len );
-		u16txt[0] = LoSurrogate & 0xff;
-		u16txt[1] = LoSurrogate >> 8;
-	}
-	else
-	{
-		printf( "0x%08x --> 0x%04x 0x%04x (%zu)\n", inChar, HiSurrogate, LoSurrogate, utf16len );
-		u16txt[0] = HiSurrogate & 0xff;
-		u16txt[1] = HiSurrogate >> 8;
-		u16txt[2] = LoSurrogate & 0xff;
-		u16txt[3] = LoSurrogate >> 8;
-	}
-	return utf16len;
-}
-
-
-void	CAttributedString::ForEachRangeDo( std::function<void(CAttributeRange*,const std::string&)> inCallback ) const
-{
-//	UTF16LengthForUTF32Char('a');
-//	UTF16LengthForUTF32Char( 0x1F313 );
-	
 	size_t	currOffs = 0;
 	for( CAttributeRange currRun : mRanges )
 	{
 		if( currOffs < currRun.mStart )
-			inCallback( NULL, mString.substr( currOffs, currRun.mStart -currOffs ) );
+			inCallback( currOffs, currRun.mStart -currOffs, NULL, mString.substr( currOffs, currRun.mStart -currOffs ) );
 		assert( currRun.mEnd >= currRun.mStart );
-		inCallback( &currRun, mString.substr( currRun.mStart, currRun.mEnd -currRun.mStart ) );
+		inCallback( currRun.mStart, currRun.mEnd -currRun.mStart, &currRun, mString.substr( currRun.mStart, currRun.mEnd -currRun.mStart ) );
 		currOffs = currRun.mEnd;
 	}
 	if( currOffs < mString.length() )
-		inCallback( NULL, mString.substr( currOffs, mString.length() -currOffs ) );
+		inCallback( currOffs, mString.length() -currOffs, NULL, mString.substr( currOffs, mString.length() -currOffs ) );
+}
+
+
+size_t	CAttributedString::UTF16OffsetFromUTF8Offset( size_t inOffs ) const
+{
+	size_t		len = GetString().size();
+	size_t		currOffs = 0;
+	size_t		currUTF16Offs = 0;
+	
+	if( inOffs == 0 )
+		return 0;
+	
+	while( currOffs < len )
+	{
+		uint32_t	currCh = UTF8StringParseUTF32CharacterAtOffset( GetString().c_str(), len, &currOffs );
+		currUTF16Offs += UTF16LengthForUTF32Char( currCh );
+		if( currOffs >= inOffs )
+			break;
+	}
+	
+	return currUTF16Offs;
+}
+
+
+size_t	CAttributedString::UTF32OffsetFromUTF8Offset( size_t inOffs ) const
+{
+	const char*	str = GetString().c_str();
+	size_t		len = GetString().size();
+	size_t		currOffs = 0;
+	size_t		currUTF16Offs = 0;
+	
+	if( inOffs == 0 )
+		return 0;
+	
+	while( currOffs < len )
+	{
+		UTF8StringParseUTF32CharacterAtOffset( str, len, &currOffs );
+		currUTF16Offs += 1;
+		if( currOffs >= inOffs )
+			break;
+	}
+	
+	return currUTF16Offs;
 }
 
 
@@ -553,7 +562,7 @@ void	CAttributedString::Dump( size_t inIndent ) const
 void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const
 {
 #if 0
-	ForEachRangeDo( []( CAttributeRange* currRun,const std::string& inText )
+	ForEachRangeDo( []( size_t currOffs, size_t currLen, CAttributeRange* currRun,const std::string& inText )
 	{
 		std::string	text("<span style=\"");
 		std::string	currLink;
@@ -592,7 +601,7 @@ void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const
 #else
 	const char*	indentStr = IndentString( inIndent );
 	stream << indentStr << "<" << mRanges.size() << ">";
-	ForEachRangeDo( [&]( CAttributeRange* currRun,const std::string& inText )
+	ForEachRangeDo( [&]( size_t currOffs, size_t currLen, CAttributeRange* currRun,const std::string& inText )
 	{
 		stream << "[";
 		if( currRun )
