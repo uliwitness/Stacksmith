@@ -179,12 +179,44 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 }
 
 
-bool	CDocument::Save()
+std::string	CDocument::PathFromFileURL( const std::string& inURL )
 {
 	std::string		destPath;
 	if( mURL.find("file://") != 0 )
+		return std::string();
+	destPath = inURL.substr( 7 );
+	
+	std::string	outPath;
+	size_t		lastPos = 0;
+	size_t		currPos = 0;
+	while( currPos != std::string::npos )
+	{
+		currPos = destPath.find( '%', lastPos );
+		if( currPos == std::string::npos )
+			break;
+		char*	endPtr = NULL;
+		char	hexChars[3] = {0};
+		memmove( hexChars, destPath.c_str() +currPos +1, 2 );
+		long	charCode = strtol( hexChars, &endPtr, 16 );
+		if( endPtr != hexChars +2 )
+			return std::string();
+		outPath.append( destPath, lastPos, currPos -lastPos );
+		outPath.append( 1, (char)charCode );
+		lastPos = currPos +1 +2;
+	}
+	
+	if( lastPos != destPath.length() )
+		outPath.append( destPath, lastPos, destPath.length() -lastPos );
+	
+	return outPath;
+}
+
+
+bool	CDocument::Save()
+{
+	std::string		destPath = PathFromFileURL( mURL );
+	if( destPath.size() == 0 )
 		return false;
-	destPath = mURL.substr( 7 );
 	size_t	lpcStart = destPath.rfind('/');
 	if( lpcStart == std::string::npos )
 		return false;

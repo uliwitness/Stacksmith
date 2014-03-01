@@ -106,6 +106,8 @@ public:
 protected:
 	virtual ~CDocument();
 
+	std::string			PathFromFileURL( const std::string& inURL );
+
 	void				CallAllCompletionBlocks();
 
 	void				LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root, bool isBuiltIn );
