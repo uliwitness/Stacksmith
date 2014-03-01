@@ -11,6 +11,7 @@
 #import "WILDViewFactory.h"
 #import "CAlert.h"
 #include "CStack.h"
+#include "UTF8UTF32Utilities.h"
 
 
 using namespace Carlson;
@@ -361,6 +362,61 @@ void	CFieldPartMac::SetBevelWidth( int bevel )
 void	CFieldPartMac::SetBevelAngle( int a )
 {
 	CFieldPart::SetBevelAngle( a );
+}
+
+
+/*static*/ size_t	CFieldPartMac::UTF8OffsetFromUTF16OffsetInCocoaString( NSInteger inCharOffs, NSString* cocoaStr )
+{
+	NSInteger	currOffs = 0;
+	size_t		currUTF8Offs = 0;
+	
+	if( inCharOffs == 0 )
+		return 0;
+	
+	NSInteger	strLen = [cocoaStr length];
+	
+	while( currOffs < strLen )
+	{
+		size_t	remainingLen = strLen -currOffs;
+		unichar	currCh = [cocoaStr characterAtIndex: currOffs];
+		
+		if( remainingLen < 2 || currCh < 0xD800 || currCh > 0xDBFF )
+		{
+			currOffs += 1;
+			currUTF8Offs += UTF8LengthForUTF32Char(currCh);
+		}
+		else
+		{
+			currUTF8Offs += UTF8LengthForUTF32Char( (currCh -0xD800) * 0x400 +([cocoaStr characterAtIndex: currOffs +1] -0xDC00) + 0x10000 );
+			currOffs += 2;
+		}
+		
+		if( currOffs >= inCharOffs )
+			break;
+	}
+	
+	return currUTF8Offs;
+}
+
+
+void	CFieldPartMac::SetSelectedRange( size_t inStartOffs, size_t inEndOffs )
+{
+	if( mViewTextNeedsSync )
+		LoadChangedTextFromView();
+	
+	NSRange	cocoaRange;
+	CPartContents*	contents = GetContentsOnCurrentCard();
+	cocoaRange.location = contents->GetAttributedText().UTF16OffsetFromUTF8Offset( inStartOffs );
+	cocoaRange.length = contents->GetAttributedText().UTF16OffsetFromUTF8Offset( inEndOffs ) -cocoaRange.location;
+	[mTextView setSelectedRange: cocoaRange];
+}
+
+
+void	CFieldPartMac::GetSelectedRange( size_t* outStartOffs, size_t* outEndOffs )
+{
+	NSRange	selRange = [mTextView selectedRange];
+	*outStartOffs = UTF8OffsetFromUTF16OffsetInCocoaString( selRange.location, [[mTextView textStorage] string] );
+	*outEndOffs = UTF8OffsetFromUTF16OffsetInCocoaString( selRange.location +selRange.length, [[mTextView textStorage] string] );
 }
 
 

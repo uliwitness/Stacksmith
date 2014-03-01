@@ -69,6 +69,9 @@ public:
 
 	virtual bool			GetDontSearch()					{ return mDontSearch; };
 	virtual void			SetDontSearch( bool inST )		{ mDontSearch = inST; IncrementChangeCount(); };
+
+	virtual void			GetSelectedRange( size_t* outStartOffs, size_t* outEndOffs ) = 0;
+	virtual void			SetSelectedRange( size_t inStartOffs, size_t inEndOffs ) = 0;
 	
 protected:
 	~CFieldPart()	{};

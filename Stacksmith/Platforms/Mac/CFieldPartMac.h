@@ -51,6 +51,8 @@ public:
 	virtual void	SetLineWidth( int w );
 	virtual void	SetBevelWidth( int bevel );
 	virtual void	SetBevelAngle( int a );
+	virtual void	GetSelectedRange( size_t* outStartOffs, size_t* outEndOffs );
+	virtual void	SetSelectedRange( size_t inStartOffs, size_t inEndOffs );
 	
 	virtual NSView*	GetView();
 	virtual NSDictionary*			GetCocoaAttributesForPart();
@@ -59,6 +61,7 @@ public:
 
 	static NSAttributedString	*	GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs = 0, size_t endOffs = SIZE_T_MAX );
 	static void						SetAttributedStringWithCocoa( CAttributedString& stringToSet, NSAttributedString* cocoaAttrStr );
+	static size_t					UTF8OffsetFromUTF16OffsetInCocoaString( NSInteger inCharOffs, NSString* cocoaStr );
 	
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };

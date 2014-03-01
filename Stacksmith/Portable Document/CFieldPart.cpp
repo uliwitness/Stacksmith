@@ -240,9 +240,15 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	{
 		auto foundLine = mSelectedLines.lower_bound(0);
 		if( foundLine != mSelectedLines.end() )
-			LEOInitIntegerValue( outValue, *foundLine, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+			LEOInitRangeValue( outValue, *foundLine, *foundLine, kLEOChunkTypeLine, kLEOInvalidateReferences, inContext );
 		else
 			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("selectedRange", inPropertyName) == 0 )
+	{
+		size_t		startOffs = 0, endOffs = 0;
+		GetSelectedRange( &startOffs, &endOffs );
+		LEOInitRangeValue( outValue, startOffs, endOffs, kLEOChunkTypeCharacter, kLEOInvalidateReferences, inContext );
 	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{
@@ -377,6 +383,15 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		if( theSelectedLine != 0 )
 			mSelectedLines.insert(theSelectedLine);
 		ApplyChangedSelectedLinesToView();
+	}
+	else if( strcasecmp("selectedRange",inPropertyName) == 0 )
+	{
+		LEOInteger		s = 0, e = 0;
+		LEOChunkType	t = kLEOChunkTypeINVALID;
+		LEOGetValueAsRange( inValue, &s, &e, &t, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		SetSelectedRange( s, e );
 	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{

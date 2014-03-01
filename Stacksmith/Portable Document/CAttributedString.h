@@ -51,6 +51,8 @@ public:
 	
 	static size_t	UTF8OffsetFromUTF16Offset( size_t inCharOffs, const uint16_t* utf16, size_t byteLen );
 	static size_t	UTF16OffsetFromUTF8Offset( size_t inOffs, const uint8_t* utf8, size_t byteLen );
+	static size_t	UTF32OffsetFromUTF16Offset( size_t inCharOffs, const uint16_t* utf16, size_t byteLen );
+	static size_t	UTF16OffsetFromUTF32Offset( size_t inCharOffs, const uint32_t* utf32, size_t byteLen );
 	
 protected:
 	void	AppendFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
