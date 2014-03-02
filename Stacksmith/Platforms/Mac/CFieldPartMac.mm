@@ -23,6 +23,7 @@ using namespace Carlson;
 
 @property (assign,nonatomic) CFieldPartMac*	owningField;
 @property (retain,nonatomic) NSArray*		lines;
+@property (assign,nonatomic) BOOL			dontSendSelectionChange;
 
 @end
 
@@ -61,7 +62,10 @@ using namespace Carlson;
 
 -(void)	textViewDidChangeSelection: (NSNotification *)notification
 {
-	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
+	if( !self.dontSendSelectionChange )
+	{
+		self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
+	}
 }
 
 
@@ -80,18 +84,21 @@ using namespace Carlson;
 
 -(void)	tableViewSelectionDidChange:(NSNotification *)notification
 {
-	self.owningField->ClearSelectedLines();
-	NSIndexSet	*	selRows = [[notification object] selectedRowIndexes];
-	NSInteger idx = [selRows firstIndex];
-	while( idx != NSNotFound )
+	if( !self.dontSendSelectionChange )
 	{
-		self.owningField->AddSelectedLine( idx +1 );
+		self.owningField->ClearSelectedLines();
+		NSIndexSet	*	selRows = [[notification object] selectedRowIndexes];
+		NSInteger idx = [selRows firstIndex];
+		while( idx != NSNotFound )
+		{
+			self.owningField->AddSelectedLine( idx +1 );
+			
+			idx = [selRows indexGreaterThanIndex: idx];
+		}
 		
-		idx = [selRows indexGreaterThanIndex: idx];
+		CAutoreleasePool	cppPool;
+		self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
 	}
-	
-	CAutoreleasePool	cppPool;
-	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
 }
 
 -(BOOL)	tableView: (NSTableView *)tableView shouldEditTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
@@ -211,10 +218,12 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mView setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
 		[mView setLineWidth: mLineWidth];
 	}
+	mMacDelegate.dontSendSelectionChange = YES;
 	if( mAutoSelect )
 	{
 		LoadChangedTextStylesIntoView();
 		[mTableView.tableColumns[0] setEditable: !GetLockText()];
+				
 		[mTableView deselectAll: nil];
 		std::set<size_t>	selLines = mSelectedLines;
 		for( size_t currLine : selLines )
@@ -244,6 +253,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTextView setEditable: !GetLockText() && GetEnabled()];
 		[mTextView setSelectable: !GetLockText()];
 	}
+	mMacDelegate.dontSendSelectionChange = NO;
 	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
