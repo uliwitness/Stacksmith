@@ -33,4 +33,26 @@ using namespace Carlson;
 //	NSLog(@"mouseUp END");
 //}
 
+
+-(BOOL)	becomeFirstResponder
+{
+	BOOL state = [super becomeFirstResponder];
+	if( state && owningPart )
+	{
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "openField" );
+	}
+	return state;
+}
+
+
+-(BOOL)	resignFirstResponder
+{
+	BOOL state = [super resignFirstResponder];
+	if( state && owningPart )
+	{
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "closeField" );
+	}
+	return state;
+}
+
 @end
