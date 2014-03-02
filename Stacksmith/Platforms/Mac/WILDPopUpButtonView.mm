@@ -62,6 +62,7 @@ using namespace Carlson;
 	self->owningPart->PrepareMouseUp();
 	CAutoreleasePool	cppPool;
 	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp %ld", lastButtonNumber );
+	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
 	
 	return [super sendAction: theAction to: theTarget];
 }
