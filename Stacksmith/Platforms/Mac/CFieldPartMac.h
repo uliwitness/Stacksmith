@@ -18,6 +18,8 @@
 
 
 @class WILDFieldDelegate;
+@class WILDTextView;
+@class WILDTableView;
 
 
 namespace Carlson {
@@ -76,8 +78,8 @@ protected:
 
 	WILDScrollView*		mView;
 	WILDFieldDelegate*	mMacDelegate;
-	NSTableView *		mTableView;
-	NSTextView	*		mTextView;
+	WILDTableView *		mTableView;
+	WILDTextView	*	mTextView;
 };
 
 

@@ -9,7 +9,9 @@
 #include "CFieldPartMac.h"
 #include "CPartContents.h"
 #import "WILDViewFactory.h"
-#import "CAlert.h"
+#import "WILDTextView.h"
+#import "WILDTableView.h"
+#include "CAlert.h"
 #include "CStack.h"
 #include "UTF8UTF32Utilities.h"
 
@@ -148,9 +150,15 @@ CFieldPartMac::CFieldPartMac( CLayer *inOwner )
 
 void	CFieldPartMac::DestroyView()
 {
+	if( mTextView )
+		mTextView.owningPart = NULL;
+	if( mTableView )
+		mTableView.owningPart = NULL;
 	[mView removeFromSuperview];
 	[mView release];
 	mView = nil;
+	mTableView = nil;
+	mTextView = nil;
 	[mMacDelegate release];
 	mMacDelegate = nil;
 }
@@ -170,6 +178,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	if( mAutoSelect )
 	{
 		mTableView = [WILDViewFactory tableViewInContainer];
+		mTableView.owningPart = this;
 		mTableView.dataSource = mMacDelegate;
 		mTableView.delegate = mMacDelegate;
 		[mTableView setTarget: mMacDelegate];
@@ -180,6 +189,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	else
 	{
 		mTextView = [WILDViewFactory textViewInContainer];
+		mTextView.owningPart = this;
 		mTextView.delegate = mMacDelegate;
 		mView = (WILDScrollView*) [[mTextView enclosingScrollView] retain];
 		[mTextView setDrawsBackground: NO];

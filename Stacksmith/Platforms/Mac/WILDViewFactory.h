@@ -16,14 +16,16 @@
 
 
 @class WILDButtonView;
+@class WILDTextView;
+@class WILDTableView;
 
 @interface WILDViewFactory : NSViewController
 
 +(WILDButtonView*)		systemButton;	// with NSButtonCell.
 +(WILDButtonView*)		shapeButton;	// with WILDButtonCell.
-+(NSTextView*)			textViewInContainer;
++(WILDTextView*)		textViewInContainer;
 +(NSPopUpButton*)		popUpButton;
-+(NSTableView*)			tableViewInContainer;	// Scroll view containing a table view. Ask this view for its enclosingScrollView.
++(WILDTableView*)		tableViewInContainer;	// Scroll view containing a table view. Ask this view for its enclosingScrollView.
 
 @end
 

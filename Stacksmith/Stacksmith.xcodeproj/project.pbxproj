@@ -63,6 +63,8 @@
 		55039FD7136D5CCF0082E32E /* ULIPaintTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */; };
 		55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC2136D5CCF0082E32E /* ULIPaintTool.m */; };
 		55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC3136D5CCF0082E32E /* ULIPaintView.m */; };
+		551583D618C37C8200DB3431 /* WILDTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583D518C37C8200DB3431 /* WILDTextView.mm */; };
+		551583DD18C3826100DB3431 /* WILDTableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583DC18C3826100DB3431 /* WILDTableView.mm */; };
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
 		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
@@ -75,7 +77,7 @@
 		552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386B4188335A000D7FAB3 /* WILDButtonView.mm */; };
 		552386BC1883858300D7FAB3 /* CString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552386BA1883858300D7FAB3 /* CString.cpp */; };
 		552386BF1883E1B000D7FAB3 /* CMacPartBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386BD1883E1AF00D7FAB3 /* CMacPartBase.mm */; };
-		552386C51883E2DF00D7FAB3 /* WILDViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 552386C41883E2DF00D7FAB3 /* WILDViewFactory.m */; };
+		552386C51883E2DF00D7FAB3 /* WILDViewFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386C41883E2DF00D7FAB3 /* WILDViewFactory.mm */; };
 		552386C81883E7C800D7FAB3 /* CButtonPartMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386C61883E7C800D7FAB3 /* CButtonPartMac.mm */; };
 		552386CB1883E86200D7FAB3 /* CFieldPartMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386C91883E86200D7FAB3 /* CFieldPartMac.mm */; };
 		552386CE1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 552386CC1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm */; };
@@ -613,6 +615,10 @@
 		55039FC1136D5CCF0082E32E /* ULIPaintTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTextTool.m; path = ../UKPaintView/ULIPaintTextTool.m; sourceTree = "<group>"; };
 		55039FC2136D5CCF0082E32E /* ULIPaintTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintTool.m; path = ../UKPaintView/ULIPaintTool.m; sourceTree = "<group>"; };
 		55039FC3136D5CCF0082E32E /* ULIPaintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIPaintView.m; path = ../UKPaintView/ULIPaintView.m; sourceTree = "<group>"; };
+		551583D418C37C8200DB3431 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTextView.h; path = Platforms/Mac/WILDTextView.h; sourceTree = "<group>"; };
+		551583D518C37C8200DB3431 /* WILDTextView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDTextView.mm; path = Platforms/Mac/WILDTextView.mm; sourceTree = "<group>"; };
+		551583DB18C3826100DB3431 /* WILDTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTableView.h; path = Platforms/Mac/WILDTableView.h; sourceTree = "<group>"; };
+		551583DC18C3826100DB3431 /* WILDTableView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDTableView.mm; path = Platforms/Mac/WILDTableView.mm; sourceTree = "<group>"; };
 		551D938717058397003766DA /* CDownloadCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDownloadCommandNode.cpp; path = ../../CDownloadCommandNode.cpp; sourceTree = "<group>"; };
 		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
@@ -636,7 +642,7 @@
 		552386BD1883E1AF00D7FAB3 /* CMacPartBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMacPartBase.mm; path = Platforms/Mac/CMacPartBase.mm; sourceTree = "<group>"; };
 		552386BE1883E1B000D7FAB3 /* CMacPartBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMacPartBase.h; path = Platforms/Mac/CMacPartBase.h; sourceTree = "<group>"; };
 		552386C31883E2DF00D7FAB3 /* WILDViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDViewFactory.h; path = Platforms/Mac/WILDViewFactory.h; sourceTree = "<group>"; };
-		552386C41883E2DF00D7FAB3 /* WILDViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDViewFactory.m; path = Platforms/Mac/WILDViewFactory.m; sourceTree = "<group>"; };
+		552386C41883E2DF00D7FAB3 /* WILDViewFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDViewFactory.mm; path = Platforms/Mac/WILDViewFactory.mm; sourceTree = "<group>"; };
 		552386C61883E7C800D7FAB3 /* CButtonPartMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CButtonPartMac.mm; path = Platforms/Mac/CButtonPartMac.mm; sourceTree = "<group>"; };
 		552386C71883E7C800D7FAB3 /* CButtonPartMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CButtonPartMac.h; path = Platforms/Mac/CButtonPartMac.h; sourceTree = "<group>"; };
 		552386C91883E86200D7FAB3 /* CFieldPartMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CFieldPartMac.mm; path = Platforms/Mac/CFieldPartMac.mm; sourceTree = "<group>"; };
@@ -831,7 +837,7 @@
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
 		554DC3181863B6A000B514E3 /* CForgeExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgeExceptions.h; path = ../../CForgeExceptions.h; sourceTree = "<group>"; };
 		554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CForgeExceptions.cpp; path = ../../CForgeExceptions.cpp; sourceTree = "<group>"; };
-		554F42EF18BB4F0400F5F106 /* EndianStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = EndianStuff.h; path = ../stackimport/EndianStuff.h; sourceTree = "<group>"; };
+		554F42EF18BB4F0400F5F106 /* EndianStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EndianStuff.h; path = ../stackimport/EndianStuff.h; sourceTree = "<group>"; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
 		555E539D18922766001487C1 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = ../../../../../System/Library/Frameworks/AVKit.framework; sourceTree = "<group>"; };
 		555E53A3189351AA001487C1 /* PlaceholderMovie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PlaceholderMovie.mov; sourceTree = "<group>"; };
@@ -1284,7 +1290,7 @@
 				552386BE1883E1B000D7FAB3 /* CMacPartBase.h */,
 				552386BD1883E1AF00D7FAB3 /* CMacPartBase.mm */,
 				552386C31883E2DF00D7FAB3 /* WILDViewFactory.h */,
-				552386C41883E2DF00D7FAB3 /* WILDViewFactory.m */,
+				552386C41883E2DF00D7FAB3 /* WILDViewFactory.mm */,
 				55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */,
 				552386C71883E7C800D7FAB3 /* CButtonPartMac.h */,
 				552386C61883E7C800D7FAB3 /* CButtonPartMac.mm */,
@@ -1298,6 +1304,10 @@
 				552386C91883E86200D7FAB3 /* CFieldPartMac.mm */,
 				55AF101D18B6BFFC00819AE9 /* WILDScrollView.h */,
 				55AF101E18B6BFFD00819AE9 /* WILDScrollView.m */,
+				551583D418C37C8200DB3431 /* WILDTextView.h */,
+				551583D518C37C8200DB3431 /* WILDTextView.mm */,
+				551583DB18C3826100DB3431 /* WILDTableView.h */,
+				551583DC18C3826100DB3431 /* WILDTableView.mm */,
 				55405BD918A59DB6001D3C99 /* CTimerPartMac.h */,
 				55405BD818A59DB6001D3C99 /* CTimerPartMac.mm */,
 				552386CD1883E92F00D7FAB3 /* CMoviePlayerPartMac.h */,
@@ -2463,6 +2473,7 @@
 				55039FC8136D5CCF0082E32E /* ULIPaintEraserTool.m in Sources */,
 				55CD610718786BAC002450E2 /* CPicturePart.cpp in Sources */,
 				55039FC9136D5CCF0082E32E /* ULIPaintFreehandTool.m in Sources */,
+				551583DD18C3826100DB3431 /* WILDTableView.mm in Sources */,
 				55039FCA136D5CCF0082E32E /* ULIPaintLineTool.m in Sources */,
 				55039FCB136D5CCF0082E32E /* ULIPaintOvalTool.m in Sources */,
 				55039FCC136D5CCF0082E32E /* ULIPaintPathTool.m in Sources */,
@@ -2495,7 +2506,7 @@
 				552386C81883E7C800D7FAB3 /* CButtonPartMac.mm in Sources */,
 				55BFEE22137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m in Sources */,
 				55CD610818786BAC002450E2 /* CRectanglePart.cpp in Sources */,
-				552386C51883E2DF00D7FAB3 /* WILDViewFactory.m in Sources */,
+				552386C51883E2DF00D7FAB3 /* WILDViewFactory.mm in Sources */,
 				559BA9A118A84BD800760273 /* CMap.cpp in Sources */,
 				552386CB1883E86200D7FAB3 /* CFieldPartMac.mm in Sources */,
 				554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */,
@@ -2537,6 +2548,7 @@
 				55382463172730B4007785D8 /* WILDObjCCallInstructions.mm in Sources */,
 				55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */,
 				55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */,
+				551583D618C37C8200DB3431 /* WILDTextView.mm in Sources */,
 				55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */,
 				55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */,
 				556DB7AD18709ADB002F7CB2 /* CStack.cpp in Sources */,
