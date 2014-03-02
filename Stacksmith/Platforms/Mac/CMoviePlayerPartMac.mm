@@ -140,6 +140,9 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, -mShadowOffsetHeight)];
 	[mView.layer setShadowRadius: mShadowBlurRadius];
+	[mView.layer setBorderWidth: mLineWidth];
+	[mView.layer setBorderColor: [NSColor colorWithCalibratedRed: mLineColorRed / 65535.0 green: mLineColorGreen / 65535.0 blue: mLineColorBlue / 65535.0 alpha: mLineColorAlpha / 65535.0].CGColor];
+	[mView.layer setBackgroundColor: [NSColor colorWithCalibratedRed: mFillColorRed / 65535.0 green: mFillColorGreen / 65535.0 blue: mFillColorBlue / 65535.0 alpha: mFillColorAlpha / 65535.0].CGColor];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	NSURL	*	movieURL = nil;
 	std::string	mediaURL = GetDocument()->GetMediaURLByNameOfType( mMediaPath.c_str(), EMediaTypeMovie );
@@ -238,6 +241,58 @@ LEOInteger	CMoviePlayerPartMac::GetCurrentTime()
 	if( mCurrentMovie )
 		mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 	return mCurrentTime;
+}
+
+
+void	CMoviePlayerPartMac::SetFillColor( int r, int g, int b, int a )
+{
+	CMoviePlayerPart::SetFillColor( r, g, b, a );
+
+	[mView.layer setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+}
+
+
+void	CMoviePlayerPartMac::SetLineColor( int r, int g, int b, int a )
+{
+	CMoviePlayerPart::SetLineColor( r, g, b, a );
+
+	[mView.layer setBorderColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+}
+
+
+void	CMoviePlayerPartMac::SetShadowColor( int r, int g, int b, int a )
+{
+	CMoviePlayerPart::SetShadowColor( r, g, b, a );
+	
+	[mView.layer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
+	if( a != 0 )
+	{
+		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+	}
+}
+
+
+void	CMoviePlayerPartMac::SetShadowOffset( double w, double h )
+{
+	CMoviePlayerPart::SetShadowOffset( w, -h );
+	
+	[mView.layer setShadowOffset: NSMakeSize(w,-h)];
+}
+
+
+void	CMoviePlayerPartMac::SetShadowBlurRadius( double r )
+{
+	CMoviePlayerPart::SetShadowBlurRadius( r );
+	
+	[mView.layer setShadowRadius: r];
+}
+
+
+void	CMoviePlayerPartMac::SetLineWidth( int w )
+{
+	CMoviePlayerPart::SetLineWidth( w );
+	
+	[mView.layer setBorderWidth: w];
 }
 
 

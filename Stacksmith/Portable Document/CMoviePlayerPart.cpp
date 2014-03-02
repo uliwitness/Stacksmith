@@ -119,4 +119,5 @@ void	CMoviePlayerPart::DumpProperties( size_t inIndentLevel )
 	printf( "%smediaPath = %s\n", indentStr, mMediaPath.c_str() );
 	printf( "%scurrentTime = %lld\n", indentStr, GetCurrentTime() );
 	printf( "%scontrollerVisible = %s\n", indentStr, (mControllerVisible ? "true" : "false") );
+	printf( "%sstarted = %s\n", indentStr, (mStarted ? "true" : "false") );
 }

@@ -40,9 +40,17 @@ public:
 	virtual LEOInteger	GetCurrentTime();
 	virtual void		SetControllerVisible( bool inStart );
 	virtual void		SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
-	virtual void	SetVisible( bool visible )		{ CMoviePlayerPart::SetVisible(visible); [mView setHidden: !visible]; };
-	virtual NSView*	GetView();
-	virtual Class	GetPropertyEditorClass()	{ return [WILDMoviePlayerInfoViewController class]; };
+	virtual void		SetVisible( bool visible )		{ CMoviePlayerPart::SetVisible(visible); [mView setHidden: !visible]; };
+
+	virtual void		SetFillColor( int r, int g, int b, int a );
+	virtual void		SetLineColor( int r, int g, int b, int a );
+	virtual void		SetShadowColor( int r, int g, int b, int a );
+	virtual void		SetShadowOffset( double w, double h );
+	virtual void		SetShadowBlurRadius( double r );
+	virtual void		SetLineWidth( int w );
+
+	virtual NSView*		GetView();
+	virtual Class		GetPropertyEditorClass()	{ return [WILDMoviePlayerInfoViewController class]; };
 
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };
