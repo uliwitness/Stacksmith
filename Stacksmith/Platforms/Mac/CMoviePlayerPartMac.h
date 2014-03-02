@@ -15,7 +15,7 @@
 #import "WILDMoviePlayerInfoViewController.h"
 
 
-@class ULIInvisiblePlayerView;
+@class WILDInvisiblePlayerView;
 @class AVPlayer;
 
 
@@ -55,7 +55,7 @@ protected:
 	void			SetUpMoviePlayerControls();
 	void			SetUpRateObserver();
 	
-	ULIInvisiblePlayerView	*	mView;
+	WILDInvisiblePlayerView	*	mView;
 	AVPlayer				*	mCurrentMovie;
 	id							mRateObserver;
 	float						mLastNotifiedRate;

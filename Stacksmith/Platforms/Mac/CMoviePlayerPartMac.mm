@@ -7,9 +7,9 @@
 //
 
 #include "CMoviePlayerPartMac.h"
-#import "ULIInvisiblePlayerView.h"
+#import "WILDInvisiblePlayerView.h"
 #import <AVFoundation/AVFoundation.h>
-#import <AVKit/AVKit.h>
+#import "WILDPlayerView.h"
 #include "CDocument.h"
 #import "UKHelperMacros.h"
 #import "NSObject+JCSKVOWithBlocks.h"
@@ -73,11 +73,14 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mControllerVisible )
 	{
-		mView = (ULIInvisiblePlayerView*)[[AVPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = (WILDInvisiblePlayerView*)[[WILDPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 		SetUpMoviePlayerControls();
 	}
 	else
-		mView = [[ULIInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	{
+		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	}
+	mView.owningPart = this;
 	SetUpMoviePlayer();
 	[inSuperView addSubview: mView];
 }
@@ -117,11 +120,14 @@ void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
 	}
 	if( mControllerVisible )
 	{
-		mView = (ULIInvisiblePlayerView*)[[AVPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = (WILDInvisiblePlayerView*)[[WILDPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 		SetUpMoviePlayerControls();
 	}
 	else
-		mView = [[ULIInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	{
+		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	}
+	mView.owningPart = this;
 	SetUpMoviePlayer();
 	[oldSuper addSubview: mView];
 }
