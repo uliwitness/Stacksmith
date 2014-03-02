@@ -342,9 +342,10 @@ void	WILDCreateUserPropertyInstruction( LEOContext* inContext )
 	char propNameBuf[1024] = { 0 };
 	const char*	propNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, propNameBuf, sizeof(propNameBuf), inContext );
 	LEOValuePtr objValue = inContext->stackEndPtr -1;
-	if( objValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( objValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
-        CScriptableObject*	theObject = (CScriptableObject*) objValue->object.object;
+        CScriptableObject*	theObject = (CScriptableObject*) objectValue->object.object;
 		theObject->AddUserPropertyNamed( propNameStr );
 	}
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
@@ -407,9 +408,10 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
-		bool	couldDelete = ((CScriptableObject*)theValue->object.object)->DeleteObject();
+		bool	couldDelete = ((CScriptableObject*)objectValue->object.object)->DeleteObject();
 		if( !couldDelete )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to delete this object." );
 	}
@@ -442,9 +444,10 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
 	LEOValuePtr	theMelody = inContext->stackEndPtr -1;
 	
-	if( theInstrument->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theInstrument, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
-		CScriptableObject*	thePart = (CScriptableObject*)theInstrument->object.object;
+		CScriptableObject*	thePart = (CScriptableObject*)objectValue->object.object;
 		LEOValue	trueValue;
 		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
 		couldStart = thePart->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
@@ -499,11 +502,12 @@ void	WILDStartInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
 		LEOValue	trueValue;
 		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
-		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
+		bool	couldStart = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
 		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to start this object." );
@@ -538,11 +542,12 @@ void	WILDStopInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
 		LEOValue	falseValue;
 		LEOInitBooleanValue( &falseValue, false, kLEOInvalidateReferences, inContext );
-		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "started", 0, 0 );
+		bool		couldStop = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "started", 0, 0 );
 		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to stop this object." );
@@ -577,11 +582,12 @@ void	WILDShowInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
 		LEOValue	trueValue;
 		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
-		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "visible", 0, 0 );
+		bool	couldStart = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "visible", 0, 0 );
 		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to show this object." );
@@ -616,11 +622,12 @@ void	WILDHideInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
 		LEOValue	falseValue;
 		LEOInitBooleanValue( &falseValue, false, kLEOInvalidateReferences, inContext );
-		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "visible", 0, 0 );
+		bool		couldStop = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "visible", 0, 0 );
 		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to hide this object." );
