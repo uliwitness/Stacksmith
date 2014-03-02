@@ -18,7 +18,7 @@ using namespace Carlson;
 
 -(void)	mouseDown: (NSEvent*)evt
 {
-	if( owningPart )
+	if( [self.window isKeyWindow] && owningPart )	// When the window isn't active, the table ignores the front click and we'd send a mouseDown w/o a mouseUp.
 	{
 		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "mouseDown %ld", [evt buttonNumber] );
 	}
@@ -26,11 +26,11 @@ using namespace Carlson;
 }
 
 
--(void)	mouseUp: (NSEvent*)evt
-{
+//-(void)	mouseUp: (NSEvent*)evt
+//{
 //	NSLog(@"mouseUp START");
 //	[super mouseUp: evt];
 //	NSLog(@"mouseUp END");
-}
+//}
 
 @end
