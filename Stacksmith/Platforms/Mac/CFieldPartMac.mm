@@ -57,6 +57,12 @@ using namespace Carlson;
 }
 
 
+-(void)	textViewDidChangeSelection: (NSNotification *)notification
+{
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
+}
+
+
 -(NSInteger)	numberOfRowsInTableView: (NSTableView *)tableView
 {
 	return [self.lines count];
@@ -199,6 +205,12 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		LoadChangedTextStylesIntoView();
 		[mTableView.tableColumns[0] setEditable: !GetLockText()];
+		[mTableView deselectAll: nil];
+		std::set<size_t>	selLines = mSelectedLines;
+		for( size_t currLine : selLines )
+		{
+			[mTableView selectRowIndexes: [NSIndexSet indexSetWithIndex: currLine -1] byExtendingSelection: YES];
+		}
 	}
 	else
 	{
@@ -399,24 +411,126 @@ void	CFieldPartMac::SetBevelAngle( int a )
 }
 
 
-void	CFieldPartMac::SetSelectedRange( size_t inStartOffs, size_t inEndOffs )
+/*static*/ size_t	CFieldPartMac::UTF32OffsetFromUTF16OffsetInCocoaString( NSInteger inCharOffs, NSString* cocoaStr )
 {
-	if( mViewTextNeedsSync )
-		LoadChangedTextFromView();
+	NSInteger	currOffs = 0;
+	size_t		currUTF32Offs = 0;
 	
-	NSRange	cocoaRange;
-	CPartContents*	contents = GetContentsOnCurrentCard();
-	cocoaRange.location = contents->GetAttributedText().UTF16OffsetFromUTF8Offset( inStartOffs );
-	cocoaRange.length = contents->GetAttributedText().UTF16OffsetFromUTF8Offset( inEndOffs ) -cocoaRange.location;
-	[mTextView setSelectedRange: cocoaRange];
+	if( inCharOffs == 0 )
+		return 0;
+	
+	NSInteger	strLen = [cocoaStr length];
+	
+	while( currOffs < strLen )
+	{
+		size_t	remainingLen = strLen -currOffs;
+		unichar	currCh = [cocoaStr characterAtIndex: currOffs];
+	
+		if( remainingLen < 1 )
+			;
+		else if( remainingLen < 2 || currCh < 0xD800 || currCh > 0xDBFF )
+		{
+			currOffs += 1;
+			currUTF32Offs += 1;
+		}
+		else
+		{
+			currOffs += 2;
+			currUTF32Offs += 1;
+		}
+		
+		if( currOffs >= inCharOffs )
+			break;
+	}
+	
+	return currUTF32Offs;
 }
 
 
-void	CFieldPartMac::GetSelectedRange( size_t* outStartOffs, size_t* outEndOffs )
+/*static*/ NSInteger	CFieldPartMac::UTF16OffsetFromUTF32OffsetInCocoaString( size_t inUTF32Offs, NSString* cocoaStr )
 {
-	NSRange	selRange = [mTextView selectedRange];
-	*outStartOffs = UTF8OffsetFromUTF16OffsetInCocoaString( selRange.location, [[mTextView textStorage] string] );
-	*outEndOffs = UTF8OffsetFromUTF16OffsetInCocoaString( selRange.location +selRange.length, [[mTextView textStorage] string] );
+	NSInteger	currUTF16Offs = 0;
+	size_t		currUTF32Offs = 0;
+	
+	if( inUTF32Offs == 0 )
+		return 0;
+	
+	NSInteger	strLen = [cocoaStr length];
+	
+	while( currUTF16Offs < strLen )
+	{
+		size_t	remainingLen = strLen -currUTF16Offs;
+		unichar	currCh = [cocoaStr characterAtIndex: currUTF16Offs];
+	
+		if( remainingLen < 1 )
+			;
+		else if( remainingLen < 2 || currCh < 0xD800 || currCh > 0xDBFF )
+		{
+			currUTF16Offs += 1;
+			currUTF32Offs += 1;
+		}
+		else
+		{
+			currUTF16Offs += 2;
+			currUTF32Offs += 1;
+		}
+		
+		if( currUTF32Offs >= inUTF32Offs )
+			break;
+	}
+	
+	return currUTF16Offs;
+}
+
+
+void	CFieldPartMac::SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs )
+{
+	if( mTableView )
+	{
+		if( inEndOffs < inStartOffs )
+			[mTableView deselectAll: nil];
+		else
+		{
+			NSRange		lineRange = { inStartOffs -1, inEndOffs -inStartOffs +1 };
+			[mTableView selectRowIndexes: [NSIndexSet indexSetWithIndexesInRange: lineRange] byExtendingSelection: NO];
+		}
+	}
+	else
+	{
+		if( inEndOffs < inStartOffs )
+		{
+			NSInteger selStart = 0;
+			if( mTextView.textStorage.length > 0 )
+				selStart = mTextView.textStorage.length -1;
+			[mTextView setSelectedRange: NSMakeRange(selStart,0)];
+		}
+		else
+		{
+			NSRange	cocoaRange;
+			cocoaRange.location = UTF16OffsetFromUTF32OffsetInCocoaString( inStartOffs -1, [[mTextView textStorage] string] );
+			cocoaRange.length = UTF16OffsetFromUTF32OffsetInCocoaString( inEndOffs -1, [[mTextView textStorage] string] ) +1 -cocoaRange.location;
+			[mTextView setSelectedRange: cocoaRange];
+		}
+	}
+}
+
+
+void	CFieldPartMac::GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs )
+{
+	if( mTableView )
+	{
+		NSInteger selLine = [mTableView selectedRow];
+		*outStartOffs = selLine +1;
+		*outEndOffs = selLine +1;
+		*outType = kLEOChunkTypeLine;
+	}
+	else
+	{
+		NSRange	selRange = [mTextView selectedRange];
+		*outStartOffs = UTF32OffsetFromUTF16OffsetInCocoaString( selRange.location, [[mTextView textStorage] string] ) +1;
+		*outEndOffs = UTF32OffsetFromUTF16OffsetInCocoaString( selRange.location +selRange.length, [[mTextView textStorage] string] );
+		*outType = kLEOChunkTypeCharacter;
+	}
 }
 
 

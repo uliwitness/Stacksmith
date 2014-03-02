@@ -246,9 +246,10 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	}
 	else if( strcasecmp("selectedRange", inPropertyName) == 0 )
 	{
-		size_t		startOffs = 0, endOffs = 0;
-		GetSelectedRange( &startOffs, &endOffs );
-		LEOInitRangeValue( outValue, startOffs, endOffs, kLEOChunkTypeCharacter, kLEOInvalidateReferences, inContext );
+		size_t			startOffs = 0, endOffs = 0;
+		LEOChunkType	type = kLEOChunkTypeINVALID;
+		GetSelectedRange( &type, &startOffs, &endOffs );
+		LEOInitRangeValue( outValue, startOffs, endOffs, type, kLEOInvalidateReferences, inContext );
 	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{
@@ -391,7 +392,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		LEOGetValueAsRange( inValue, &s, &e, &t, inContext );
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
-		SetSelectedRange( s, e );
+		SetSelectedRange( t, s, e );
 	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{
