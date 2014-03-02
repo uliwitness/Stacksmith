@@ -20,11 +20,13 @@ using namespace Carlson;
 {
 	if( owningPart )
 	{
+		CAutoreleasePool		pool;
 		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "mouseDown %ld", [evt buttonNumber] );
 	}
 	[super mouseDown: evt];
 	if( owningPart )
 	{
+		CAutoreleasePool		pool;
 		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "mouseUp %ld", [evt buttonNumber] );
 	}
 }
@@ -43,6 +45,7 @@ using namespace Carlson;
 	BOOL state = [super becomeFirstResponder];
 	if( state && owningPart )
 	{
+		CAutoreleasePool		pool;
 		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "openField" );
 	}
 	return state;
@@ -54,6 +57,7 @@ using namespace Carlson;
 	BOOL state = [super resignFirstResponder];
 	if( state && owningPart )
 	{
+		CAutoreleasePool		pool;
 		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "closeField" );
 	}
 	return state;

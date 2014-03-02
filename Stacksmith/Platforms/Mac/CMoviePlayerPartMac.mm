@@ -186,7 +186,10 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 			else if( mLastNotifiedRate == 0.0 )
 				msg = "playMovie";
 			if( msg )
+			{
+				CAutoreleasePool		pool;
 				this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, msg );
+			}
 			mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 			mLastNotifiedRate = theRate;
 		}

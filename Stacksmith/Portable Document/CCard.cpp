@@ -93,6 +93,7 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 		// We're moving away
 		if( oldCard && oldStack && oldStack != GetStack() && inOpenInMode == EOpenInSameWindow )	// Leaving this stack? Close it.
 		{
+			CAutoreleasePool		pool;
 			oldCard->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeCard" );
 			oldCard->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeStack" );
 			oldCard->GoToSleep();
@@ -100,6 +101,7 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 		}
 		if( GetStack()->GetCurrentCard() != NULL && GetStack()->GetCurrentCard() != this )	// Dest stack was already open with another card? Close that card (too).
 		{
+			CAutoreleasePool		pool;
 			GetStack()->GetCurrentCard()->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeCard" );
 			GetStack()->GetCurrentCard()->GoToSleep();
 		}
@@ -111,8 +113,10 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			WakeUp();
 			if( destStackWasntOpenYet )
 			{
+				CAutoreleasePool		pool;
 				SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openStack" );
 			}
+			CAutoreleasePool		pool;
 			SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openCard" );
 		}
 		Release();

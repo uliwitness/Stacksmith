@@ -187,6 +187,7 @@ using namespace Carlson;
 		upMessage = "mouseUp";
 		doubleUpMessage = "mouseDoubleClick";
 		
+		CAutoreleasePool		pool;
 		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown" );
 	}
 
@@ -268,10 +269,14 @@ using namespace Carlson;
 	
 	std::function<void(const char *, size_t, size_t, CScriptableObject *)>	errHandler = [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); };
 	
-	theCard->SendMessage( NULL, errHandler, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
-
+	{
+		CAutoreleasePool		pool;
+		theCard->SendMessage( NULL, errHandler, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
+	}
+	
 	if( theEvent.charactersIgnoringModifiers.length > 0 )
 	{
+		CAutoreleasePool		pool;
 		unichar theKey = [theEvent.charactersIgnoringModifiers characterAtIndex: 0];
 		switch( theKey )
 		{

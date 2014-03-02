@@ -53,6 +53,7 @@ using namespace Carlson;
 
 -(BOOL)	textView: (NSTextView *)textView clickedOnLink: (id)link atIndex: (NSUInteger)charIndex
 {
+	CAutoreleasePool		pool;
 	NSURL*	theLink = [textView.textStorage attribute: NSLinkAttributeName atIndex: charIndex effectiveRange:NULL];
 	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUpInLink %s", [[theLink absoluteString] UTF8String] );
 	
@@ -64,6 +65,7 @@ using namespace Carlson;
 {
 	if( !self.dontSendSelectionChange )
 	{
+		CAutoreleasePool		pool;
 		self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
 	}
 }

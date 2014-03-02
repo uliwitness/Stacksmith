@@ -44,6 +44,7 @@ void	CTimerPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEle
 
 void	CTimerPart::Trigger()
 {
+	CAutoreleasePool		pool;
 	SendMessage( NULL, [](const char *, size_t, size_t, CScriptableObject *){}, mMessage.c_str() );
 	
 	if( !mRepeat )
