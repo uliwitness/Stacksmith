@@ -65,8 +65,8 @@
 		55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55039FC3136D5CCF0082E32E /* ULIPaintView.m */; };
 		551583D618C37C8200DB3431 /* WILDTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583D518C37C8200DB3431 /* WILDTextView.mm */; };
 		551583DD18C3826100DB3431 /* WILDTableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583DC18C3826100DB3431 /* WILDTableView.mm */; };
-		551583E018C3B8AE00DB3431 /* WILDInvisiblePlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583DF18C3B8AE00DB3431 /* WILDInvisiblePlayerView.mm */; };
-		551583E318C3BF9200DB3431 /* WILDPlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583E218C3BF9200DB3431 /* WILDPlayerView.mm */; };
+		551583E018C3B8AE00DB3431 /* WILDPlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583DF18C3B8AE00DB3431 /* WILDPlayerView.mm */; };
+		551583E318C3BF9200DB3431 /* WILDInvisiblePlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583E218C3BF9200DB3431 /* WILDInvisiblePlayerView.mm */; };
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
 		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
@@ -622,9 +622,9 @@
 		551583DB18C3826100DB3431 /* WILDTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTableView.h; path = Platforms/Mac/WILDTableView.h; sourceTree = "<group>"; };
 		551583DC18C3826100DB3431 /* WILDTableView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDTableView.mm; path = Platforms/Mac/WILDTableView.mm; sourceTree = "<group>"; };
 		551583DE18C3B8AE00DB3431 /* WILDInvisiblePlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDInvisiblePlayerView.h; path = Platforms/Mac/WILDInvisiblePlayerView.h; sourceTree = "<group>"; };
-		551583DF18C3B8AE00DB3431 /* WILDInvisiblePlayerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDInvisiblePlayerView.mm; path = Platforms/Mac/WILDInvisiblePlayerView.mm; sourceTree = "<group>"; };
+		551583DF18C3B8AE00DB3431 /* WILDPlayerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDPlayerView.mm; path = Platforms/Mac/WILDPlayerView.mm; sourceTree = "<group>"; };
 		551583E118C3BF9200DB3431 /* WILDPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPlayerView.h; path = Platforms/Mac/WILDPlayerView.h; sourceTree = "<group>"; };
-		551583E218C3BF9200DB3431 /* WILDPlayerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDPlayerView.mm; path = Platforms/Mac/WILDPlayerView.mm; sourceTree = "<group>"; };
+		551583E218C3BF9200DB3431 /* WILDInvisiblePlayerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDInvisiblePlayerView.mm; path = Platforms/Mac/WILDInvisiblePlayerView.mm; sourceTree = "<group>"; };
 		551D938717058397003766DA /* CDownloadCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDownloadCommandNode.cpp; path = ../../CDownloadCommandNode.cpp; sourceTree = "<group>"; };
 		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
@@ -1319,9 +1319,9 @@
 				552386CD1883E92F00D7FAB3 /* CMoviePlayerPartMac.h */,
 				552386CC1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm */,
 				551583DE18C3B8AE00DB3431 /* WILDInvisiblePlayerView.h */,
-				551583DF18C3B8AE00DB3431 /* WILDInvisiblePlayerView.mm */,
+				551583E218C3BF9200DB3431 /* WILDInvisiblePlayerView.mm */,
 				551583E118C3BF9200DB3431 /* WILDPlayerView.h */,
-				551583E218C3BF9200DB3431 /* WILDPlayerView.mm */,
+				551583DF18C3B8AE00DB3431 /* WILDPlayerView.mm */,
 				552386D01883EAA300D7FAB3 /* CWebBrowserPartMac.h */,
 				552386CF1883EAA300D7FAB3 /* CWebBrowserPartMac.mm */,
 			);
@@ -2475,7 +2475,7 @@
 				55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */,
 				55039F68136C66ED0082E32E /* NSBezierPath+ULIRegularPolygon.m in Sources */,
 				55039FC4136D5CCF0082E32E /* UlisBresenham.c in Sources */,
-				551583E018C3B8AE00DB3431 /* WILDInvisiblePlayerView.mm in Sources */,
+				551583E018C3B8AE00DB3431 /* WILDPlayerView.mm in Sources */,
 				55039FC5136D5CCF0082E32E /* ULILineSizeView.m in Sources */,
 				555E53A918936817001487C1 /* WILDPopUpButtonView.mm in Sources */,
 				55039FC6136D5CCF0082E32E /* ULIPaintBrushTool.m in Sources */,
@@ -2546,7 +2546,7 @@
 				55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */,
 				55AF101F18B6BFFD00819AE9 /* WILDScrollView.m in Sources */,
 				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
-				551583E318C3BF9200DB3431 /* WILDPlayerView.mm in Sources */,
+				551583E318C3BF9200DB3431 /* WILDInvisiblePlayerView.mm in Sources */,
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
 				55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */,
 				55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */,
