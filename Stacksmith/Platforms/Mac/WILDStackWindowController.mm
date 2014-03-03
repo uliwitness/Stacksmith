@@ -879,6 +879,11 @@ using namespace Carlson;
 	{
 		return( mStack->GetDocument()->GetNumStacks() > 1 && !mStack->GetCantDelete() );
 	}
+	else if( theItem.action == @selector(toggleBackgroundEditMode:) )
+	{
+		[theItem setState: mStack->GetEditingBackground() ? NSOnState : NSOffState];
+		return YES;
+	}
 	else
 		return [self respondsToSelector: theItem.action];
 }
