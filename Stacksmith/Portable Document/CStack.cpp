@@ -428,6 +428,7 @@ CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 		bgURL.append( bgName.str() );
 		inBg = new CBackground( bgURL, bgID, "", bgName.str(), this );
 		inBg->SetLoaded(true);
+		inBg->IncrementChangeCount();
 		AddBackground( inBg );
 	}
 	
@@ -440,6 +441,7 @@ CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 	CCard	*	theCard = new CCard( cardURL, theID, "", cardName.str(), this, false );
 	theCard->SetBackground( inBg );
 	theCard->SetLoaded(true);
+	theCard->IncrementChangeCount();
 	InsertCardAfterCard( theCard, GetCurrentCard() );
 	
 	return theCard;
