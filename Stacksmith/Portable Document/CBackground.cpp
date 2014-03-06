@@ -78,13 +78,13 @@ bool	CBackground::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 }
 
 
-bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart )
+bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
 {
 	CCard*	searchStart = GetStack()->GetCurrentCard();
 	if( searchStart && searchStart->GetBackground() == this )
-		return searchStart->GoThereInNewWindow( inOpenInMode, oldStack, overPart );
+		return searchStart->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler );
 	else
-		return GetStack()->GetCardWithBackground( this, searchStart )->GoThereInNewWindow( inOpenInMode, oldStack, overPart );
+		return GetStack()->GetCardWithBackground( this, searchStart )->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler );
 	return false;
 }
 

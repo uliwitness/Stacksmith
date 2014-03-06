@@ -22,4 +22,6 @@
 -(IBAction)	orderFrontStandardAboutPanel: (id)sender;
 -(IBAction)	goHelp: (id)sender;
 
+-(void)	checkForScriptToResume: (id)sender;
+
 @end

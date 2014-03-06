@@ -65,50 +65,68 @@ void	WILDGoInstruction( LEOContext* inContext )
 {
 //	LEODebugPrintContext( inContext );
 
-	LEOValuePtr				theDestination = inContext->stackEndPtr -2;
-	LEOValuePtr				theOverPart = inContext->stackEndPtr -1;
-	bool					canGoThere = false;
-	CScriptableObject*		destinationObject = NULL;
-	CPart			*		overPartObject = NULL;
-	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
-	CRecentCardsList::GetSharedInstance()->AddCard( userData->GetStack()->GetCurrentCard() );
-	theDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
-	theOverPart = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -1, &kLeoValueTypeScriptableObject, inContext );
-	if( theOverPart && theOverPart->base.isa == &kLeoValueTypeScriptableObject )
-		overPartObject = dynamic_cast<CPart*>((CScriptableObject*)theOverPart->object.object);
+	if( (inContext->flags & kLEOContextResuming) == 0 )
+	{
+		LEOValuePtr				theDestination = inContext->stackEndPtr -2;
+		LEOValuePtr				theOverPart = inContext->stackEndPtr -1;
+		bool					canGoThere = false;
+		CScriptableObject*		destinationObject = NULL;
+		CPart			*		overPartObject = NULL;
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+		CRecentCardsList::GetSharedInstance()->AddCard( userData->GetStack()->GetCurrentCard() );
+		theDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
+		theOverPart = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -1, &kLeoValueTypeScriptableObject, inContext );
+		if( theOverPart && theOverPart->base.isa == &kLeoValueTypeScriptableObject )
+			overPartObject = dynamic_cast<CPart*>((CScriptableObject*)theOverPart->object.object);
 
-	if( theDestination && theDestination->base.isa == &kLeoValueTypeScriptableObject )
-	{
-		destinationObject = (CScriptableObject*)theDestination->object.object;
-	}
-	else if( theDestination )
-	{
-		char stackName[1024] = { 0 };
-		LEOGetValueAsString( theDestination, stackName, sizeof(stackName), inContext );
-		destinationObject = userData->GetStack()->GetDocument()->GetStackByName( stackName );
-	}
-	if( destinationObject )
-	{
-		TOpenInMode	openInMode = inContext->currentInstruction->param1;
-		CStack	*	theStack = destinationObject->GetStack();
-		if( theStack && theStack->GetStyle() == EStackStylePopup && overPartObject )
-			openInMode |= EOpenInNewWindow;
+		if( theDestination && theDestination->base.isa == &kLeoValueTypeScriptableObject )
+		{
+			destinationObject = (CScriptableObject*)theDestination->object.object;
+		}
+		else if( theDestination )
+		{
+			char stackName[1024] = { 0 };
+			LEOGetValueAsString( theDestination, stackName, sizeof(stackName), inContext );
+			destinationObject = userData->GetStack()->GetDocument()->GetStackByName( stackName );
+		}
+		if( destinationObject )
+		{
+			TOpenInMode	openInMode = inContext->currentInstruction->param1;
+			CStack	*	theStack = destinationObject->GetStack();
+			if( theStack && theStack->GetStyle() == EStackStylePopup && overPartObject )
+				openInMode |= EOpenInNewWindow;
 		
-		canGoThere = destinationObject->GoThereInNewWindow( openInMode, userData->GetStack(), overPartObject );
+			LEOPauseContext( inContext );
+			
+			LEOContextRetain( inContext );
+			canGoThere = destinationObject->GoThereInNewWindow( openInMode, userData->GetStack(), overPartObject,
+			[inContext]()
+			{
+				LEOResumeContext( inContext );
+				LEOContextRelease(inContext);
+			} );
+		}
+		if( canGoThere )
+			userData->SetStack( destinationObject->GetStack() );
+		
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+		
+//		CStack		*	frontStack = userData->GetStack();
+//		CCard		*	currentCard = frontStack->GetCurrentCard();
+//		currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
+		
+		if( !canGoThere )
+		{
+			LEOResumeContext( inContext );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't go there." );
+		}
 	}
-	if( canGoThere )
-		userData->SetStack( destinationObject->GetStack() );
-	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-//	CStack		*	frontStack = userData->GetStack();
-//	CCard		*	currentCard = frontStack->GetCurrentCard();
-//	currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
-	
-	if( !canGoThere )
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't go there." );
-
-	inContext->currentInstruction++;
+	else
+	{
+//		LEODebugPrintContext( inContext );
+		
+		inContext->currentInstruction++;
+	}
 }
 
 

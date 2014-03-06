@@ -843,25 +843,25 @@ using namespace Carlson;
 
 -(IBAction)	goFirstCard: (id)sender
 {
-	mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	goPrevCard: (id)sender
 {
-	mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	goNextCard: (id)sender
 {
-	mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	goLastCard: (id)sender
 {
-	mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
@@ -912,19 +912,19 @@ using namespace Carlson;
 
 -(IBAction)	newStack: (id)sender
 {
-	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL );
+	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	newCard: (id)sender
 {
-	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	newBackground: (id)sender
 {
-	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 

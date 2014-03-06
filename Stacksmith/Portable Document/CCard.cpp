@@ -83,10 +83,10 @@ CScriptableObject*	CCard::GetParentObject()
 }
 
 
-bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart )
+bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
 {
 	Retain();
-	Load([this,oldStack,inOpenInMode](CLayer *inThisCard)
+	Load([this,oldStack,inOpenInMode,completionHandler](CLayer *inThisCard)
 	{
 		CCard	*	oldCard = oldStack ? oldStack->GetCurrentCard() : NULL;
 		bool		destStackWasntOpenYet = GetStack()->GetCurrentCard() == NULL;
@@ -119,6 +119,8 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			CAutoreleasePool		pool;
 			SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openCard" );
 		}
+			
+		completionHandler();
 		Release();
 	});
 	

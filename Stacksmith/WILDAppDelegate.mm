@@ -42,6 +42,14 @@ void	WILDFirstNativeCall( void )
 }
 
 
+void	WILDScheduleResumeOfScript( void );
+
+void	WILDScheduleResumeOfScript( void )
+{
+	[(WILDAppDelegate*)[NSApplication.sharedApplication delegate] performSelector: @selector(checkForScriptToResume:) withObject: nil afterDelay: 0.0];
+}
+
+
 @implementation WILDAppDelegate
 
 -(void)	initializeParser
@@ -75,6 +83,7 @@ void	WILDFirstNativeCall( void )
 	LEOAddInstructionsToInstructionArray( gObjCCallInstructions, LEO_NUMBER_OF_OBJCCALL_INSTRUCTIONS, &kFirstObjCCallInstruction );
 	
 	LEOSetFirstNativeCallCallback( WILDFirstNativeCall );	// This calls us to lazily load the (several MB) of native headers when needed.
+	LEOSetCheckForResumeProc( WILDScheduleResumeOfScript );	// This calls us whenever someone requests to queue up their context to resume a script that has been paused.
 	
 	#if REMOTE_DEBUGGER
 	LEOInitRemoteDebugger( "127.0.0.1" );
@@ -223,7 +232,7 @@ void	WILDFirstNativeCall( void )
 		{
 			inStack->GetCard(0)->Load( [inDocument,inStack,self](Carlson::CLayer*inCard)
 			{
-				inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL );
+				inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
 			} );
 		} );
 	});
@@ -248,7 +257,7 @@ void	WILDFirstNativeCall( void )
 		sOpenDocuments.push_back( theDoc );
 		theDoc->CreateAtURL( [savePanel.URL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String );
 		
-		theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL );
+		theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
 	}];
 }
 
@@ -309,6 +318,12 @@ void	WILDFirstNativeCall( void )
 -(NSString*)	feedURLStringForUpdater: (SUUpdater*)inUpdater
 {
 	return @"http://stacksmith.org/nightlies/stacksmith_nightlies.rss";
+}
+
+
+-(void)	checkForScriptToResume: (id)sender
+{
+	LEOContextResumeIfAvailable();
 }
 
 @end

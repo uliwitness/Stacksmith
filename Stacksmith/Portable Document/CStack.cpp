@@ -391,11 +391,14 @@ bool	CStack::DeleteCard( CCard* inCard )
 	
 	if( GetCurrentCard() == inCard )
 	{
-		GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, this, NULL );
-		RemoveCard(inCard);
+		GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, this, NULL, [this,inCard,lastCardInBg,theBg]()
+		{
+			RemoveCard(inCard);
+			
+			if( lastCardInBg )
+				RemoveBackground( theBg );
+		} );
 		
-		if( lastCardInBg )
-			RemoveBackground( theBg );
 	}
 	
 	return true;
