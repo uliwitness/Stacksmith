@@ -579,6 +579,24 @@ using namespace Carlson;
 		}
 	}
 
+	NSSize	cardSize = [mContentView layer].frame.size;
+	size_t	numGuidelines = mStack->GetNumGuidelines();
+	for( size_t x = 0; x < numGuidelines; x++ )
+	{
+		long long	coord = 0LL;
+		bool		horzNotVert = false;
+		mStack->GetGuidelineAtIndex( x, &coord, &horzNotVert );
+		[NSColor.blueColor set];
+		if( horzNotVert )
+		{
+			[NSBezierPath strokeLineFromPoint: NSMakePoint(0,cardSize.height -coord) toPoint: NSMakePoint(cardSize.width,cardSize.height -coord)];
+		}
+		else
+		{
+			[NSBezierPath strokeLineFromPoint: NSMakePoint(coord,0) toPoint: NSMakePoint(coord,cardSize.height)];
+		}
+	}
+	
 	if( !mSelectionOverlay )
 		mSelectionOverlay = [[CALayer alloc] init];
 	[[mContentView layer] addSublayer: mSelectionOverlay];

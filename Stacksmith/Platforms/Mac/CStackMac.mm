@@ -283,3 +283,12 @@ void	CStackMac::SetCardHeight( int n )
 }
 
 
+void	CStackMac::ClearAllGuidelines( bool inTrackingDone )
+{
+	CStack::ClearAllGuidelines( inTrackingDone );
+	
+	if( inTrackingDone )
+		[mMacWindowController drawBoundingBoxes];
+}
+
+

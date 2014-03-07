@@ -102,7 +102,7 @@ public:
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	
 	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y );	// Stack-relative coordinates relative to top left, descending down and right.
-	virtual void				Grab( THitPart inHitPart = EContentHitPart );
+	virtual void				Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock );	// If the callback coord is LLONG_MAX and bool is TRUE, this means tracking has finished and you should remove all guidelines from the screen. If bool is FALSE in this situation, it just means we're starting a new set of guidelines.
 	virtual std::string			GetDisplayName()	{ return GenerateDisplayName( GetIdentityForDump() ); };
 	
 	virtual void				IncrementChangeCount();

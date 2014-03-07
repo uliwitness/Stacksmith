@@ -121,6 +121,11 @@ public:
 	virtual void	IncrementChangeCount()	{ mChangeCount++; };
 	virtual bool	GetNeedsToBeSaved();
 	
+	virtual void	ClearAllGuidelines( bool inTrackingDone = false )	{ mHorizontalGuidelines.clear(); mVerticalGuidelines.clear(); };
+	virtual void	AddGuideline( long long inGuidelineCoord, bool inHorzNotVert )	{ if( inHorzNotVert ) mHorizontalGuidelines.push_back(inGuidelineCoord); else mVerticalGuidelines.push_back(inGuidelineCoord); };
+	virtual size_t	GetNumGuidelines()		{ return mHorizontalGuidelines.size() + mVerticalGuidelines.size(); };
+	virtual void	GetGuidelineAtIndex( size_t idx, long long *outCoord, bool *outHorzNotVert )	{ size_t hcount = mHorizontalGuidelines.size(); if( idx >= hcount ) { *outCoord = mVerticalGuidelines[idx-hcount]; *outHorzNotVert = false; } else { *outCoord = mHorizontalGuidelines[idx]; *outHorzNotVert = true; } };
+
 	virtual void	Dump( size_t inIndent = 0 );
 	
 // statics:
@@ -163,6 +168,9 @@ protected:
 	bool						mEditingBackground;	// Are we editing the background, or are we showing the full mixed card/bg layers?
 	TTool						mCurrentTool;		// The tool that applies when clicking in this stack's window.
 	size_t						mChangeCount;
+
+	std::vector<long long>		mHorizontalGuidelines;	// Temp. guidelines shown when moving/resizing objects on the card.
+	std::vector<long long>		mVerticalGuidelines;	// Temp. guidelines shown when moving/resizing objects on the card.
 	
 	static CStack*				sFrontStack;		// The stack whose window is currently frontmost and will e.g. receive messages from the message box.
 };

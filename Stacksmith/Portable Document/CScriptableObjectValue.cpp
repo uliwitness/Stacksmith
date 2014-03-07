@@ -626,11 +626,20 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		{
 			LEONumber x = 0;
 			LEONumber y = 0;
-			so->GetStack()->GetMousePosition( &x, &y );
+			CStack*	theStack = so->GetStack();
+			theStack->GetMousePosition( &x, &y );
 						
 			THitPart	hitPart = so->HitTestForEditing( x, y );
 			if( hitPart != ENothingHitPart )
-				so->Grab( hitPart );
+			{
+				so->Grab( hitPart, [theStack](long long inGuidelineCoord,bool inHorzNotVert)
+				{
+					if( inGuidelineCoord == LLONG_MAX )
+						theStack->ClearAllGuidelines( inHorzNotVert );
+					else
+						theStack->AddGuideline( inGuidelineCoord, inHorzNotVert );
+				} );
+			}
 		}
 		
 		handled = true;

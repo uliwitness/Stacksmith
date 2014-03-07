@@ -333,21 +333,25 @@ THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y )
 }
 
 
-void	CPart::Grab( THitPart inHitPart )
+void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock )
 {
 	LEONumber	oldL = mLeft, oldT = mTop, oldB = mBottom, oldR = mRight;
 	LEONumber	oldX = 0, oldY = 0;
 	CCursor::GetGlobalPosition( &oldX, &oldY );
-	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,this]()
+	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,addGuidelineBlock,this]()
 	{
 		LEONumber	x = 0, y = 0;
 		CCursor::GetGlobalPosition( &x, &y );
 		
-		SetRect( (inHitPart & ELeftGrabberHitPart) ? (oldL +(x -oldX)) : oldL,
-				(inHitPart & ETopGrabberHitPart) ? (oldT +(y -oldY)) : oldT,
-				(inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
-				(inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB );
+		long long	l = (inHitPart & ELeftGrabberHitPart) ? (oldL +(x -oldX)) : oldL,
+					t = (inHitPart & ETopGrabberHitPart) ? (oldT +(y -oldY)) : oldT,
+					r = (inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
+					b = (inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB;
+		
+		GetOwner()->CorrectRectOfPart( this, &l, &t, &r, &b, addGuidelineBlock );
+		SetRect( l, t, r, b );
 	});
+	addGuidelineBlock( LLONG_MAX, true );	// Clear all guidelines after dragging.
 //	std::cout << "Done tracking." << std::endl;
 }
 

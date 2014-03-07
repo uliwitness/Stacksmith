@@ -652,6 +652,83 @@ const char*	CLayer::GetIdentityForDump()
 }
 
 
+void	CLayer::CorrectRectOfPart( CPart* inMovedPart, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock )
+{
+	long long		xLeftDist = LLONG_MAX,
+					yTopDist = LLONG_MAX;
+	long			leftGuide = 0, topGuide = 0;
+	
+	for( CPart* currPart : mParts )
+	{
+		if( currPart != inMovedPart )
+		{
+			long long		currXLeftDist = llabs( currPart->GetLeft() -*ioLeft ),
+							currXRightDist = llabs( currPart->GetRight() -*ioRight ),
+							currYTopDist = llabs( currPart->GetTop() -*ioTop ),
+							currYBottomDist = llabs( currPart->GetBottom() -*ioBottom ),
+							currXLeftDist2 = llabs( currPart->GetRight() -*ioLeft ),
+							currXRightDist2 = llabs( currPart->GetLeft() -*ioRight ),
+							currYTopDist2 = llabs( currPart->GetBottom() -*ioTop ),
+							currYBottomDist2 = llabs( currPart->GetTop() -*ioBottom );
+			bool			verticallyNear = currYTopDist < 50 || currYBottomDist < 50
+											|| currYTopDist2 < 50 || currYBottomDist2 < 50;
+			bool			horizontallyNear = currXLeftDist < 50 || currXRightDist < 50
+											|| currXLeftDist2 < 50 || currXRightDist2 < 50;
+			if( !horizontallyNear || !verticallyNear )
+				continue;
+			
+			if( currXLeftDist < xLeftDist )
+			{
+				xLeftDist = currXLeftDist;
+				leftGuide = currPart->GetLeft();
+			}
+			if( currXLeftDist2 < xLeftDist )
+			{
+				xLeftDist = currXLeftDist2;
+				leftGuide = currPart->GetRight();
+			}
+			if( currXRightDist < xLeftDist )
+			{
+				xLeftDist = currXRightDist;
+				leftGuide = currPart->GetRight();
+			}
+			if( currXRightDist2 < xLeftDist )
+			{
+				xLeftDist = currXRightDist2;
+				leftGuide = currPart->GetLeft();
+			}
+
+			if( currYTopDist < yTopDist )
+			{
+				yTopDist = currYTopDist;
+				topGuide = currPart->GetTop();
+			}
+			if( currYTopDist2 < yTopDist )
+			{
+				yTopDist = currYTopDist2;
+				topGuide = currPart->GetBottom();
+			}
+			if( currYBottomDist < yTopDist )
+			{
+				yTopDist = currYBottomDist;
+				topGuide = currPart->GetBottom();
+			}
+			if( currYBottomDist2 < yTopDist )
+			{
+				yTopDist = currYBottomDist2;
+				topGuide = currPart->GetTop();
+			}
+		}
+	}
+	
+	addGuidelineBlock( LLONG_MAX, false );	// Clear all guidelines.
+	if( xLeftDist < 8 )
+		addGuidelineBlock( leftGuide, false );
+	if( yTopDist < 8 )
+		addGuidelineBlock( topGuide, true );
+}
+
+
 void	CLayer::DumpProperties( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);
