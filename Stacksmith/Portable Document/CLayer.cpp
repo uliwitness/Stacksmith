@@ -652,11 +652,12 @@ const char*	CLayer::GetIdentityForDump()
 }
 
 
-void	CLayer::CorrectRectOfPart( CPart* inMovedPart, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock )
+void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock )
 {
-	long long		xLeftDist = LLONG_MAX,
-					yTopDist = LLONG_MAX;
+	long long		minXDist = LLONG_MAX,
+					minYDist = LLONG_MAX;
 	long			leftGuide = 0, topGuide = 0;
+	long long		xNudge = 0, yNudge = 0;
 	
 	for( CPart* currPart : mParts )
 	{
@@ -677,54 +678,77 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, long long *ioLeft, long long
 			if( !horizontallyNear || !verticallyNear )
 				continue;
 			
-			if( currXLeftDist < xLeftDist )
+			if( currXLeftDist < minXDist && (partsToCorrect & ELeftGrabberHitPart) )
 			{
-				xLeftDist = currXLeftDist;
+				xNudge = currPart->GetLeft() -*ioLeft;
+				minXDist = currXLeftDist;
 				leftGuide = currPart->GetLeft();
 			}
-			if( currXLeftDist2 < xLeftDist )
+			if( currXLeftDist2 < minXDist && (partsToCorrect & ELeftGrabberHitPart) )
 			{
-				xLeftDist = currXLeftDist2;
+				xNudge = currPart->GetRight() -*ioLeft;
+				minXDist = currXLeftDist2;
 				leftGuide = currPart->GetRight();
 			}
-			if( currXRightDist < xLeftDist )
+			if( currXRightDist < minXDist && (partsToCorrect & ERightGrabberHitPart) )
 			{
-				xLeftDist = currXRightDist;
+				xNudge = currPart->GetRight() -*ioRight;
+				minXDist = currXRightDist;
 				leftGuide = currPart->GetRight();
 			}
-			if( currXRightDist2 < xLeftDist )
+			if( currXRightDist2 < minXDist && (partsToCorrect & ERightGrabberHitPart) )
 			{
-				xLeftDist = currXRightDist2;
+				xNudge = currPart->GetLeft() -*ioRight;
+				minXDist = currXRightDist2;
 				leftGuide = currPart->GetLeft();
 			}
 
-			if( currYTopDist < yTopDist )
+			if( currYTopDist < minYDist && (partsToCorrect & ETopGrabberHitPart) )
 			{
-				yTopDist = currYTopDist;
+				yNudge = currPart->GetTop() -*ioTop;
+				minYDist = currYTopDist;
 				topGuide = currPart->GetTop();
 			}
-			if( currYTopDist2 < yTopDist )
+			if( currYTopDist2 < minYDist && (partsToCorrect & ETopGrabberHitPart) )
 			{
-				yTopDist = currYTopDist2;
+				yNudge = currPart->GetBottom() -*ioTop;
+				minYDist = currYTopDist2;
 				topGuide = currPart->GetBottom();
 			}
-			if( currYBottomDist < yTopDist )
+			if( currYBottomDist < minYDist && (partsToCorrect & EBottomGrabberHitPart) )
 			{
-				yTopDist = currYBottomDist;
+				yNudge = currPart->GetBottom() -*ioBottom;
+				minYDist = currYBottomDist;
 				topGuide = currPart->GetBottom();
 			}
-			if( currYBottomDist2 < yTopDist )
+			if( currYBottomDist2 < minYDist && (partsToCorrect & EBottomGrabberHitPart) )
 			{
-				yTopDist = currYBottomDist2;
+				yNudge = currPart->GetTop() -*ioBottom;
+				minYDist = currYBottomDist2;
 				topGuide = currPart->GetTop();
 			}
 		}
 	}
 	
+	if( minXDist < 8 )
+	{
+		if( partsToCorrect & ELeftGrabberHitPart )
+			*ioLeft += xNudge;
+		if( partsToCorrect & ERightGrabberHitPart )
+			*ioRight += xNudge;
+	}
+	if( minYDist < 8 )
+	{
+		if( partsToCorrect & ETopGrabberHitPart )
+			*ioTop += yNudge;
+		if( partsToCorrect & EBottomGrabberHitPart )
+			*ioBottom += yNudge;
+	}
+	
 	addGuidelineBlock( LLONG_MAX, false );	// Clear all guidelines.
-	if( xLeftDist < 8 )
+	if( minXDist < 8 )
 		addGuidelineBlock( leftGuide, false );
-	if( yTopDist < 8 )
+	if( minYDist < 8 )
 		addGuidelineBlock( topGuide, true );
 }
 

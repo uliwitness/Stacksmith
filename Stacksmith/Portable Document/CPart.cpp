@@ -348,7 +348,7 @@ void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCo
 					r = (inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
 					b = (inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB;
 		
-		GetOwner()->CorrectRectOfPart( this, &l, &t, &r, &b, addGuidelineBlock );
+		GetOwner()->CorrectRectOfPart( this, inHitPart, &l, &t, &r, &b, addGuidelineBlock );
 		SetRect( l, t, r, b );
 	});
 	addGuidelineBlock( LLONG_MAX, true );	// Clear all guidelines after dragging.
