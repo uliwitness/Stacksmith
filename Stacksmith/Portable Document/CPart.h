@@ -35,6 +35,18 @@ enum
 typedef uint32_t THitPart;
 
 
+enum
+{
+	EGuidelineCallbackActionAddHorizontal,			// Request to add a guideline at the given h coordinate.
+	EGuidelineCallbackActionAddVertical,			// Request to add a guideline at the given v coordinate.
+	EGuidelineCallbackActionAddHorizontalSpacer,	// Request to add a 'distance indicator' between the corrected coordinate and the given h coordinate.
+	EGuidelineCallbackActionAddVerticalSpacer,		// Request to add a 'distance indicator' between the corrected coordinate and the given v coordinate.
+	EGuidelineCallbackActionClearAllForFilling,		// Request to clear your list of guidelines in preparation for us calling you back with the new set. (don't redraw yet)
+	EGuidelineCallbackActionClearAllDone			// Request to clear your list of guidelines, we're done tracking. (redraw now)
+};
+typedef uint8_t	TGuidelineCallbackAction;
+
+
 
 class CPartCreatorBase
 {
@@ -102,7 +114,7 @@ public:
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	
 	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y );	// Stack-relative coordinates relative to top left, descending down and right.
-	virtual void				Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock );	// If the callback coord is LLONG_MAX and bool is TRUE, this means tracking has finished and you should remove all guidelines from the screen. If bool is FALSE in this situation, it just means we're starting a new set of guidelines.
+	virtual void				Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// If the callback coord is LLONG_MAX and bool is TRUE, this means tracking has finished and you should remove all guidelines from the screen. If bool is FALSE in this situation, it just means we're starting a new set of guidelines.
 	virtual std::string			GetDisplayName()	{ return GenerateDisplayName( GetIdentityForDump() ); };
 	
 	virtual void				IncrementChangeCount();

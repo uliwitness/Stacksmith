@@ -632,12 +632,17 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			THitPart	hitPart = so->HitTestForEditing( x, y );
 			if( hitPart != ENothingHitPart )
 			{
-				so->Grab( hitPart, [theStack](long long inGuidelineCoord,bool inHorzNotVert)
+				so->Grab( hitPart, [theStack](long long inGuidelineCoord,TGuidelineCallbackAction action)
 				{
-					if( inGuidelineCoord == LLONG_MAX )
-						theStack->ClearAllGuidelines( inHorzNotVert );
+					if( action == EGuidelineCallbackActionClearAllDone
+						|| action == EGuidelineCallbackActionClearAllForFilling )
+					{
+						theStack->ClearAllGuidelines( action == EGuidelineCallbackActionClearAllDone );
+					}
 					else
-						theStack->AddGuideline( inGuidelineCoord, inHorzNotVert );
+					{
+						theStack->AddGuideline( inGuidelineCoord, action == EGuidelineCallbackActionAddHorizontal );
+					}
 				} );
 			}
 		}

@@ -672,7 +672,7 @@ const char*	CLayer::GetIdentityForDump()
 #define IDEAL_PART_DISTANCE					9LL
 
 
-void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock )
+void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
 {
 	long long		minXDist = LLONG_MAX,
 					minYDist = LLONG_MAX;
@@ -749,7 +749,11 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 							currXLeftDist2 = llabs( currPart->GetRight() -*ioLeft ),
 							currXRightDist2 = llabs( currPart->GetLeft() -*ioRight ),
 							currYTopDist2 = llabs( currPart->GetBottom() -*ioTop ),
-							currYBottomDist2 = llabs( currPart->GetTop() -*ioBottom );
+							currYBottomDist2 = llabs( currPart->GetTop() -*ioBottom ),
+							currIdealXLeftDist = currPart->GetLeft() -IDEAL_PART_DISTANCE -*ioRight,
+							currIdealXRightDist = currPart->GetRight() +IDEAL_PART_DISTANCE -*ioLeft,
+							currIdealYTopDist = currPart->GetTop() -IDEAL_PART_DISTANCE -*ioBottom,
+							currIdealYBottomDist = currPart->GetBottom() +IDEAL_PART_DISTANCE -*ioTop;
 			bool			verticallyNear = currYTopDist < MAX_CONSIDERATION_DISTANCE || currYBottomDist < MAX_CONSIDERATION_DISTANCE
 											|| currYTopDist2 < MAX_CONSIDERATION_DISTANCE || currYBottomDist2 < MAX_CONSIDERATION_DISTANCE;
 			bool			horizontallyNear = currXLeftDist < MAX_CONSIDERATION_DISTANCE || currXRightDist < MAX_CONSIDERATION_DISTANCE
@@ -757,22 +761,25 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 			if( !horizontallyNear || !verticallyNear )
 				continue;
 			
+			// Horizontal:
+			// Align equivalent edges?
 			if( currXLeftDist < minXDist && (partsToCorrect & ELeftGrabberHitPart) )
 			{
 				xNudge = currPart->GetLeft() -*ioLeft;
 				minXDist = currXLeftDist;
 				leftGuide = currPart->GetLeft();
 			}
-			if( currXLeftDist2 < minXDist && (partsToCorrect & ELeftGrabberHitPart) )
-			{
-				xNudge = currPart->GetRight() -*ioLeft;
-				minXDist = currXLeftDist2;
-				leftGuide = currPart->GetRight();
-			}
 			if( currXRightDist < minXDist && (partsToCorrect & ERightGrabberHitPart) )
 			{
 				xNudge = currPart->GetRight() -*ioRight;
 				minXDist = currXRightDist;
+				leftGuide = currPart->GetRight();
+			}
+			// Abut right next to this part?
+			if( currXLeftDist2 < minXDist && (partsToCorrect & ELeftGrabberHitPart) )
+			{
+				xNudge = currPart->GetRight() -*ioLeft;
+				minXDist = currXLeftDist2;
 				leftGuide = currPart->GetRight();
 			}
 			if( currXRightDist2 < minXDist && (partsToCorrect & ERightGrabberHitPart) )
@@ -781,23 +788,47 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 				minXDist = currXRightDist2;
 				leftGuide = currPart->GetLeft();
 			}
-
+			// Snap at an ideal distance from that part? (Note that these don't
+			//	align equivalent edges, but abut adjoining ones, hence the grabber is
+			//	the opposite of the distance variable:
+			if( (-currIdealXLeftDist) < minXDist && currIdealXLeftDist < 0 && (partsToCorrect & ERightGrabberHitPart) )
+			{
+				if( llabs( currIdealXLeftDist ) < MAX_SNAPPING_DISTANCE )
+				{
+					xNudge = currIdealXLeftDist;
+					minXDist = currIdealXLeftDist;
+					leftGuide = currPart->GetLeft() -IDEAL_PART_DISTANCE;
+				}
+			}
+			if( currIdealXRightDist < minXDist && currIdealXRightDist >= 0 && (partsToCorrect & ELeftGrabberHitPart) )
+			{
+				if( llabs( currIdealXRightDist ) < MAX_SNAPPING_DISTANCE )
+				{
+					xNudge = currIdealXRightDist;
+					minXDist = currIdealXRightDist;
+					leftGuide = currPart->GetRight() +IDEAL_PART_DISTANCE;
+				}
+			}
+			
+			// Vertical:
+			// Align equivalent edges?
 			if( currYTopDist < minYDist && (partsToCorrect & ETopGrabberHitPart) )
 			{
 				yNudge = currPart->GetTop() -*ioTop;
 				minYDist = currYTopDist;
 				topGuide = currPart->GetTop();
 			}
-			if( currYTopDist2 < minYDist && (partsToCorrect & ETopGrabberHitPart) )
-			{
-				yNudge = currPart->GetBottom() -*ioTop;
-				minYDist = currYTopDist2;
-				topGuide = currPart->GetBottom();
-			}
 			if( currYBottomDist < minYDist && (partsToCorrect & EBottomGrabberHitPart) )
 			{
 				yNudge = currPart->GetBottom() -*ioBottom;
 				minYDist = currYBottomDist;
+				topGuide = currPart->GetBottom();
+			}
+			// Abut right above/below this part?
+			if( currYTopDist2 < minYDist && (partsToCorrect & ETopGrabberHitPart) )
+			{
+				yNudge = currPart->GetBottom() -*ioTop;
+				minYDist = currYTopDist2;
 				topGuide = currPart->GetBottom();
 			}
 			if( currYBottomDist2 < minYDist && (partsToCorrect & EBottomGrabberHitPart) )
@@ -806,9 +837,31 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 				minYDist = currYBottomDist2;
 				topGuide = currPart->GetTop();
 			}
+			// Snap at an ideal distance from that part? (Note that these don't
+			//	align equivalent edges, but abut adjoining ones, hence the grabber is
+			//	the opposite of the distance variable:
+			if( (-currIdealYTopDist) < minYDist && currIdealYTopDist < 0 && (partsToCorrect & EBottomGrabberHitPart) )
+			{
+				if( llabs( currIdealYTopDist ) < MAX_SNAPPING_DISTANCE )
+				{
+					yNudge = currIdealYTopDist;
+					minYDist = currIdealYTopDist;
+					topGuide = currPart->GetTop() -IDEAL_PART_DISTANCE;
+				}
+			}
+			if( currIdealYBottomDist < minYDist && currIdealYBottomDist >= 0 && (partsToCorrect & ETopGrabberHitPart) )
+			{
+				if( llabs( currIdealYBottomDist ) < MAX_SNAPPING_DISTANCE )
+				{
+					yNudge = currIdealYBottomDist;
+					minYDist = currIdealYBottomDist;
+					topGuide = currPart->GetBottom() +IDEAL_PART_DISTANCE;
+				}
+			}
 		}
 	}
 	
+	// Correct the rect coordinates we're supposed to modify of the rect we were given:
 	if( minXDist < MAX_SNAPPING_DISTANCE )
 	{
 		if( partsToCorrect & ELeftGrabberHitPart )
@@ -824,11 +877,12 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 			*ioBottom += yNudge;
 	}
 	
-	addGuidelineBlock( LLONG_MAX, false );	// Clear all guidelines.
+	// Call back to indicate which guidelines we want:
+	addGuidelineBlock( LLONG_MAX, EGuidelineCallbackActionClearAllForFilling );
 	if( minXDist < MAX_SNAPPING_DISTANCE )
-		addGuidelineBlock( leftGuide, false );
+		addGuidelineBlock( leftGuide, EGuidelineCallbackActionAddVertical );
 	if( minYDist < MAX_SNAPPING_DISTANCE )
-		addGuidelineBlock( topGuide, true );
+		addGuidelineBlock( topGuide, EGuidelineCallbackActionAddHorizontal );
 }
 
 

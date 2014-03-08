@@ -333,7 +333,7 @@ THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y )
 }
 
 
-void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock )
+void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
 {
 	LEONumber	oldL = mLeft, oldT = mTop, oldB = mBottom, oldR = mRight;
 	LEONumber	oldX = 0, oldY = 0;
@@ -351,7 +351,7 @@ void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCo
 		GetOwner()->CorrectRectOfPart( this, inHitPart, &l, &t, &r, &b, addGuidelineBlock );
 		SetRect( l, t, r, b );
 	});
-	addGuidelineBlock( LLONG_MAX, true );	// Clear all guidelines after dragging.
+	addGuidelineBlock( LLONG_MAX, EGuidelineCallbackActionClearAllDone );
 //	std::cout << "Done tracking." << std::endl;
 }
 
