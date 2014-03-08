@@ -652,13 +652,92 @@ const char*	CLayer::GetIdentityForDump()
 }
 
 
+// Maximum distance between two objects for us to even consider aligning them
+//	when snapping/showing guidelines. This applies to any direction, i.e. if a
+//	button is at 49 pixels horz. from ours, we consider aligning them horz. or vert.
+#define	MAX_CONSIDERATION_DISTANCE			50LL
+
+// If a particular coordinate of our object is at most this far from a parallel
+//	line on another object, we snap and show the guideline:
+#define MAX_SNAPPING_DISTANCE				8LL
+
+// When snapping to the card egde, we snap only if user gets a bit closer or
+//	moves beyond the card edge:
+#define MAX_INNER_EDGE_SNAPPING_DISTANCE	2LL
+
+// Margin from the window edge that we snap to apart from 0:
+#define IDEAL_EDGE_DISTANCE					20LL
+
+// Distance at which we snap to other parts apart from 0:
+#define IDEAL_PART_DISTANCE					9LL
+
+
 void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,bool inHorzNotVert)> addGuidelineBlock )
 {
 	long long		minXDist = LLONG_MAX,
 					minYDist = LLONG_MAX;
 	long			leftGuide = 0, topGuide = 0;
 	long long		xNudge = 0, yNudge = 0;
+
+	// See if we're near the card edge at the recommended Aqua border distance and snap to that:
+	if( (*ioRight) > (((long long)mStack->GetCardWidth()) -IDEAL_EDGE_DISTANCE -MAX_INNER_EDGE_SNAPPING_DISTANCE) && (partsToCorrect & ERightGrabberHitPart) )
+	{
+		xNudge = ((long long)mStack->GetCardWidth() -IDEAL_EDGE_DISTANCE) -*ioRight;
+		minXDist = llabs( xNudge );
+		leftGuide = mStack->GetCardWidth() -IDEAL_EDGE_DISTANCE;
+	}
+
+	if( (*ioLeft) < (MAX_INNER_EDGE_SNAPPING_DISTANCE +IDEAL_EDGE_DISTANCE) && (partsToCorrect & ELeftGrabberHitPart) )
+	{
+		xNudge = IDEAL_EDGE_DISTANCE -*ioLeft;
+		minXDist = llabs( xNudge );
+		leftGuide = IDEAL_EDGE_DISTANCE;
+	}
+
+	if( (*ioBottom) > (((long long)mStack->GetCardHeight()) -MAX_INNER_EDGE_SNAPPING_DISTANCE -IDEAL_EDGE_DISTANCE) && (partsToCorrect & EBottomGrabberHitPart) )
+	{
+		yNudge = ((long long)mStack->GetCardHeight() -IDEAL_EDGE_DISTANCE) -*ioBottom;
+		minYDist = llabs( yNudge );
+		topGuide = mStack->GetCardHeight() -IDEAL_EDGE_DISTANCE;
+	}
 	
+	if( (*ioTop) < (MAX_INNER_EDGE_SNAPPING_DISTANCE +IDEAL_EDGE_DISTANCE) && (partsToCorrect & ETopGrabberHitPart) )
+	{
+		yNudge = IDEAL_EDGE_DISTANCE -*ioTop;
+		minYDist = llabs( yNudge );
+		topGuide = IDEAL_EDGE_DISTANCE;
+	}
+	
+	// See if we're at a card edge and snap to that:
+	if( (*ioRight) > (((long long)mStack->GetCardWidth()) -MAX_INNER_EDGE_SNAPPING_DISTANCE) && (partsToCorrect & ERightGrabberHitPart) )
+	{
+		xNudge = ((long long)mStack->GetCardWidth()) -*ioRight;
+		minXDist = llabs( xNudge );
+		leftGuide = mStack->GetCardWidth();
+	}
+
+	if( (*ioLeft) < MAX_INNER_EDGE_SNAPPING_DISTANCE && (partsToCorrect & ELeftGrabberHitPart) )
+	{
+		xNudge = -*ioLeft;
+		minXDist = llabs( xNudge );
+		leftGuide = 0;
+	}
+
+	if( (*ioBottom) > (((long long)mStack->GetCardHeight()) -MAX_INNER_EDGE_SNAPPING_DISTANCE) && (partsToCorrect & EBottomGrabberHitPart) )
+	{
+		yNudge = ((long long)mStack->GetCardHeight()) -*ioBottom;
+		minYDist = llabs( yNudge );
+		topGuide = mStack->GetCardHeight();
+	}
+	
+	if( (*ioTop) < MAX_INNER_EDGE_SNAPPING_DISTANCE && (partsToCorrect & ETopGrabberHitPart) )
+	{
+		yNudge = -*ioTop;
+		minYDist = llabs( yNudge );
+		topGuide = 0;
+	}
+
+	// See if we're near any other parts and snap to those:
 	for( CPart* currPart : mParts )
 	{
 		if( currPart != inMovedPart )
@@ -671,10 +750,10 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 							currXRightDist2 = llabs( currPart->GetLeft() -*ioRight ),
 							currYTopDist2 = llabs( currPart->GetBottom() -*ioTop ),
 							currYBottomDist2 = llabs( currPart->GetTop() -*ioBottom );
-			bool			verticallyNear = currYTopDist < 50 || currYBottomDist < 50
-											|| currYTopDist2 < 50 || currYBottomDist2 < 50;
-			bool			horizontallyNear = currXLeftDist < 50 || currXRightDist < 50
-											|| currXLeftDist2 < 50 || currXRightDist2 < 50;
+			bool			verticallyNear = currYTopDist < MAX_CONSIDERATION_DISTANCE || currYBottomDist < MAX_CONSIDERATION_DISTANCE
+											|| currYTopDist2 < MAX_CONSIDERATION_DISTANCE || currYBottomDist2 < MAX_CONSIDERATION_DISTANCE;
+			bool			horizontallyNear = currXLeftDist < MAX_CONSIDERATION_DISTANCE || currXRightDist < MAX_CONSIDERATION_DISTANCE
+											|| currXLeftDist2 < MAX_CONSIDERATION_DISTANCE || currXRightDist2 < MAX_CONSIDERATION_DISTANCE;
 			if( !horizontallyNear || !verticallyNear )
 				continue;
 			
@@ -730,14 +809,14 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 		}
 	}
 	
-	if( minXDist < 8 )
+	if( minXDist < MAX_SNAPPING_DISTANCE )
 	{
 		if( partsToCorrect & ELeftGrabberHitPart )
 			*ioLeft += xNudge;
 		if( partsToCorrect & ERightGrabberHitPart )
 			*ioRight += xNudge;
 	}
-	if( minYDist < 8 )
+	if( minYDist < MAX_SNAPPING_DISTANCE )
 	{
 		if( partsToCorrect & ETopGrabberHitPart )
 			*ioTop += yNudge;
@@ -746,9 +825,9 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 	}
 	
 	addGuidelineBlock( LLONG_MAX, false );	// Clear all guidelines.
-	if( minXDist < 8 )
+	if( minXDist < MAX_SNAPPING_DISTANCE )
 		addGuidelineBlock( leftGuide, false );
-	if( minYDist < 8 )
+	if( minYDist < MAX_SNAPPING_DISTANCE )
 		addGuidelineBlock( topGuide, true );
 }
 
