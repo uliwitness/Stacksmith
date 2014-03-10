@@ -77,7 +77,7 @@ protected:
 	~CFieldPart()	{};
 	
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	
 	virtual void			LoadChangedTextStylesIntoView()			{ mViewTextNeedsSync = false; };
 	virtual void			LoadChangedTextFromView()				{};

@@ -90,7 +90,7 @@ protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
 	void			LoadAddColorPartsFromElement( tinyxml2::XMLElement* root );
 	virtual const char*	GetLayerXMLType();
-	virtual void	SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document );
+	virtual void	SavePropertiesToElement( tinyxml2::XMLElement* stackfile );
 	virtual void	DumpProperties( size_t inIndent );
 	virtual void	CallAllCompletionBlocks();
 

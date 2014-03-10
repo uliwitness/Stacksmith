@@ -125,7 +125,7 @@ protected:
 	virtual ~CPart();
 
 	virtual void				LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void				SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
+	virtual void				SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	virtual const char*			GetIdentityForDump()					{ return "Part"; };
 	virtual void				DumpProperties( size_t inIndent );
 	virtual std::string			GenerateDisplayName( const char* inTypeName );

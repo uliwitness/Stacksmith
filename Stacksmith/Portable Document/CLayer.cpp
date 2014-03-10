@@ -177,8 +177,9 @@ const char*	CLayer::GetLayerXMLType()
 }
 
 
-void	CLayer::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document )
+void	CLayer::SavePropertiesToElement( tinyxml2::XMLElement* stackfile )
 {
+	tinyxml2::XMLDocument* document = stackfile->GetDocument();
 	tinyxml2::XMLElement*	elem = document->NewElement("bitmap");
 	elem->SetText( mPictureName.c_str() );
 	stackfile->InsertEndChild(elem);
@@ -213,7 +214,7 @@ bool	CLayer::Save( const std::string& inPackagePath )
 
 	CTinyXMLUtils::AddLongLongNamed( stackfile, mID, "id" );
 	
-	SavePropertiesToElementOfDocument( stackfile, &document );
+	SavePropertiesToElement( stackfile );
 	
 	tinyxml2::XMLNode*	lastChildBeforeStyles = stackfile->LastChild();
 	// We remember lastChildBeforeStyles so we can later insert a "link" tag referencing our CSS here, if needed.

@@ -88,9 +88,11 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-void	CFieldPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
-	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	CVisiblePart::SavePropertiesToElement( inElement );
+
+	tinyxml2::XMLDocument* document = inElement->GetDocument();
 	
 	CTinyXMLUtils::AddBoolNamed( inElement, mDontWrap, "dontWrap" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mDontSearch, "dontSearch" );

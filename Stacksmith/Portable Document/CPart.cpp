@@ -118,7 +118,7 @@ void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2:
 
 	CTinyXMLUtils::AddRectNamed( inElement, mLeft, mTop, mRight, mBottom, "rect" );
 	
-	SavePropertiesToElementOfDocument( inElement, document );
+	SavePropertiesToElement( inElement );
 	
 	elem = document->NewElement("name");
 	elem->SetText( mName.c_str() );
@@ -132,7 +132,7 @@ void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2:
 }
 
 
-void	CPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
 	
 }

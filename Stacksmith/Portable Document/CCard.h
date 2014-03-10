@@ -55,7 +55,7 @@ public:
 	
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
-	virtual void	SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document );
+	virtual void	SavePropertiesToElement( tinyxml2::XMLElement* stackfile );
 	virtual void	CallAllCompletionBlocks();
 	virtual const char*	GetLayerXMLType()			{ return "card"; };
 

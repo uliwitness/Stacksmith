@@ -67,8 +67,9 @@ void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-void	CVisiblePart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CVisiblePart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
+	tinyxml2::XMLDocument* document = inElement->GetDocument();
 	CTinyXMLUtils::AddBoolNamed( inElement, mVisible, "visible" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mEnabled, "enabled" );
 	

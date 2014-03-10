@@ -85,9 +85,10 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-void	CButtonPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CButtonPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
-	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	tinyxml2::XMLDocument* document = inElement->GetDocument();
+	CVisiblePart::SavePropertiesToElement( inElement );
 	
 	tinyxml2::XMLElement	*	elem = document->NewElement("style");
 	elem->SetText( sButtonStyleStrings[mButtonStyle] );

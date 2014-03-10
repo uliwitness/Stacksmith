@@ -27,10 +27,11 @@ void	CTimerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-void	CTimerPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CTimerPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
-	CPart::SavePropertiesToElementOfDocument( inElement, document );
+	CPart::SavePropertiesToElement( inElement );
 	
+	tinyxml2::XMLDocument	*	document = inElement->GetDocument();
 	tinyxml2::XMLElement	*	elem = document->NewElement("message");
 	elem->SetText(mMessage.c_str());
 	inElement->InsertEndChild(elem);

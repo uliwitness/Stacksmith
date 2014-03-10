@@ -47,9 +47,9 @@ void	CCard::CallAllCompletionBlocks()
 }
 
 
-void	CCard::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document )
+void	CCard::SavePropertiesToElement( tinyxml2::XMLElement* stackfile )
 {
-	CLayer::SavePropertiesToElementOfDocument( stackfile, document );
+	CLayer::SavePropertiesToElement( stackfile );
 	
 	CTinyXMLUtils::AddLongLongNamed( stackfile, mOwningBackground->GetID(), "owner" );
 }
