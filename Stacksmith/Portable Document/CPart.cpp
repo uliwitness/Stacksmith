@@ -104,7 +104,7 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mLeft = CTinyXMLUtils::GetLongLongNamed( rectElement, "left", 10LL );
 	mTop = CTinyXMLUtils::GetLongLongNamed( rectElement, "top", 10LL );
 	mRight = CTinyXMLUtils::GetLongLongNamed( rectElement, "right", mLeft + 100LL );
-	mBottom = CTinyXMLUtils::GetLongLongNamed( rectElement, "bottom", mLeft + 100LL );
+	mBottom = CTinyXMLUtils::GetLongLongNamed( rectElement, "bottom", mTop + 100LL );
 }
 
 
