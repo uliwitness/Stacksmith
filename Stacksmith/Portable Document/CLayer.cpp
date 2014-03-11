@@ -224,14 +224,14 @@ bool	CLayer::Save( const std::string& inPackagePath )
 	for( auto currPart : mParts )
 	{
 		elem = document.NewElement("part");
-		currPart->SaveToElementOfDocument( elem, &document );
+		currPart->SaveToElementOfDocument( elem );
 		stackfile->InsertEndChild(elem);
 	}
 	
 	for( auto currContent : mContents )
 	{
 		elem = document.NewElement("content");
-		currContent->SaveToElementOfDocumentStyleSheet( elem, &document, &theStyles );
+		currContent->SaveToElementAndStyleSheet( elem, &theStyles );
 		stackfile->InsertEndChild(elem);
 	}
 	

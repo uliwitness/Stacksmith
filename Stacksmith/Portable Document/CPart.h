@@ -73,7 +73,7 @@ public:
 	explicit CPart( CLayer *inOwner );
 	
 	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
-	virtual void				SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
+	virtual void				SaveToElement( tinyxml2::XMLElement * inElement );
 	
 	virtual CPart*				Retain();
 	virtual void				Release();

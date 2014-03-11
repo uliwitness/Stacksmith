@@ -108,10 +108,11 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
 {
 	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
 	
+	tinyxml2::XMLDocument	*	document = inElement->GetDocument();
 	tinyxml2::XMLElement	*	elem = document->NewElement("type");
 	elem->SetText( GetPartType()->GetPartTypeName().c_str() );
 	inElement->InsertEndChild(elem);

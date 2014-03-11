@@ -26,7 +26,7 @@ public:
 	explicit CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElement = NULL );
 	virtual ~CPartContents()	{};
 	
-	virtual void		SaveToElementOfDocumentStyleSheet( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document, CStyleSheet *styleSheet );
+	virtual void		SaveToElementAndStyleSheet( tinyxml2::XMLElement * inElement, CStyleSheet *styleSheet );
 	virtual void		Dump( size_t inIndent );
 	
 	ObjectID			GetID()							{ return mID; };
