@@ -65,6 +65,7 @@ public:
 	virtual bool		CanDeleteSelectedItem();
 	virtual std::string	CopySelectedItem();
 	virtual bool		CanCopySelectedItem();
+	virtual void		PasteObject( const std::string& inXMLStr );
 
 	virtual void	WakeUp();
 	virtual void	GoToSleep();

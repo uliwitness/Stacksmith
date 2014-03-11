@@ -893,6 +893,10 @@ using namespace Carlson;
 	{
 		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanCopySelectedItem() );
 	}
+	else if( theItem.action == @selector(paste:) )
+	{
+		return( mStack->GetTool() == EPointerTool && [[NSPasteboard generalPasteboard] availableTypeFromArray: @[ @"com.the-void-software.stacksmith.parts.xml" ]] != nil );
+	}
 	else if( theItem.action == @selector(deleteCard:) )
 	{
 		return( mStack->GetNumCards() > 1 && !mStack->GetCurrentCard()->GetCantDelete() );
@@ -929,6 +933,17 @@ using namespace Carlson;
 		[pb clearContents];
 		[pb addTypes: @[ @"com.the-void-software.stacksmith.parts.xml" ] owner: nil];
 		[pb setString: [NSString stringWithUTF8String: xml.c_str()] forType: @"com.the-void-software.stacksmith.parts.xml"];
+	}
+}
+
+
+-(IBAction)	paste: (id)sender
+{
+	if( mStack->GetTool() == EPointerTool )
+	{
+		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
+		NSString*		xmlStr = [pb stringForType: @"com.the-void-software.stacksmith.parts.xml"];
+		mStack->GetCurrentLayer()->PasteObject( std::string(xmlStr.UTF8String) );
 	}
 }
 

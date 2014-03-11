@@ -630,6 +630,8 @@ std::string	CLayer::CopySelectedItem()
 	partsElement->InsertEndChild( cardElement );
 	partsElement->InsertEndChild( backgroundElement );
 	
+	// +++ Copy any icons this part references!
+	
 	CStacksmithXMLPrinter	printer;
 	document.Print( &printer );
 	return std::string(printer.CStr());
@@ -644,6 +646,49 @@ bool	CLayer::CanCopySelectedItem()
 			return true;
 	}
 	return false;
+}
+
+
+void	CLayer::PasteObject( const std::string& inXMLStr )
+{
+	tinyxml2::XMLDocument	document;
+	if( tinyxml2::XML_SUCCESS == document.Parse( inXMLStr.c_str(), inXMLStr.size() ) )
+	{
+		tinyxml2::XMLElement*	rootElement = document.FirstChildElement();
+		if( strcasecmp( rootElement->Value(), "parts" ) == 0 )
+		{
+			tinyxml2::XMLElement*	styles = document.FirstChildElement( "style" );
+			CStyleSheet				styleSheet;
+			if( styles )
+				styleSheet.LoadFromStream( styles->GetText() );
+			
+			tinyxml2::XMLElement*	currPart = rootElement->FirstChildElement( "part" );
+			tinyxml2::XMLElement*	cardContents = rootElement->FirstChildElement( "card" );
+			tinyxml2::XMLElement*	bgContents = rootElement->FirstChildElement( "background" );
+			tinyxml2::XMLElement*	currCardContents = cardContents->FirstChildElement("contents");
+			tinyxml2::XMLElement*	currBgContents = bgContents->FirstChildElement("contents");
+			while( currPart )
+			{
+				CPart	*	newPart = CPart::NewPartWithElement( currPart, this );
+				mParts.push_back( newPart );
+				newPart->Release();
+				
+				CPartContents*	pc = new CPartContents( this, currCardContents );
+				mContents.push_back( pc );
+				pc->Release();
+				
+				// +++ Load background contents *if this is a background*
+				
+				// +++ Fix up ID numbers if duplicate!
+				
+				// +++ Paste any icons this part references!
+				
+				currPart = currPart->NextSiblingElement( "part" );
+				currCardContents = cardContents->FirstChildElement("contents");
+				currBgContents = bgContents->FirstChildElement("contents");
+			}
+		}
+	}
 }
 
 
