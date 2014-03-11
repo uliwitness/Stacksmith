@@ -224,7 +224,7 @@ bool	CLayer::Save( const std::string& inPackagePath )
 	for( auto currPart : mParts )
 	{
 		elem = document.NewElement("part");
-		currPart->SaveToElementOfDocument( elem );
+		currPart->SaveToElement( elem );
 		stackfile->InsertEndChild(elem);
 	}
 	
@@ -580,7 +580,63 @@ void	CLayer::DeleteSelectedItem()
 }
 
 
-bool	CLayer::CanDeleteDeleteSelectedItem()
+bool	CLayer::CanDeleteSelectedItem()
+{
+	for( auto currPart : mParts )
+	{
+		if( currPart->IsSelected() )
+			return true;
+	}
+	return false;
+}
+
+
+std::string	CLayer::CopySelectedItem()
+{
+	tinyxml2::XMLDocument	document;
+	CStyleSheet				styleSheet;
+	tinyxml2::XMLElement *	partsElement = document.NewElement("parts");
+	document.InsertEndChild( partsElement );
+	tinyxml2::XMLElement *	cardElement = document.NewElement("card");
+	tinyxml2::XMLElement *	backgroundElement = document.NewElement("background");
+	
+	for( CPart* currPart : mParts )
+	{
+		if( currPart->IsSelected() )
+		{
+			tinyxml2::XMLElement *	partElement = document.NewElement("part");
+			partsElement->InsertEndChild( partElement );
+			currPart->SaveToElement( partElement );
+			CPartContents*	cardContents = GetPartContentsByID( currPart->GetID(), false );
+			if( cardContents )
+			{
+				tinyxml2::XMLElement *	contentsElement = document.NewElement("contents");
+				cardElement->InsertEndChild( contentsElement );
+				cardContents->SaveToElementAndStyleSheet( contentsElement, &styleSheet );
+			}
+			CPartContents*	bgContents = GetPartContentsByID( currPart->GetID(), true );
+			if( bgContents )
+			{
+				tinyxml2::XMLElement *	contentsElement = document.NewElement("contents");
+				backgroundElement->InsertEndChild( contentsElement );
+				bgContents->SaveToElementAndStyleSheet( contentsElement, &styleSheet );
+			}
+		}
+	}
+	
+	tinyxml2::XMLElement *	stylesElement = document.NewElement("style");
+	stylesElement->SetText( styleSheet.GetCSS().c_str() );
+	partsElement->InsertEndChild( stylesElement );
+	partsElement->InsertEndChild( cardElement );
+	partsElement->InsertEndChild( backgroundElement );
+	
+	CStacksmithXMLPrinter	printer;
+	document.Print( &printer );
+	return std::string(printer.CStr());
+}
+
+
+bool	CLayer::CanCopySelectedItem()
 {
 	for( auto currPart : mParts )
 	{

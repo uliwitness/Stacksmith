@@ -887,7 +887,11 @@ using namespace Carlson;
 {
 	if( theItem.action == @selector(delete:) )
 	{
-		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanDeleteDeleteSelectedItem() );
+		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanDeleteSelectedItem() );
+	}
+	else if( theItem.action == @selector(copy:) )
+	{
+		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanCopySelectedItem() );
 	}
 	else if( theItem.action == @selector(deleteCard:) )
 	{
@@ -912,6 +916,19 @@ using namespace Carlson;
 	if( mStack->GetTool() == EPointerTool )
 	{
 		mStack->GetCurrentLayer()->DeleteSelectedItem();
+	}
+}
+
+
+-(IBAction)	copy: (id)sender
+{
+	if( mStack->GetTool() == EPointerTool )
+	{
+		std::string	xml = mStack->GetCurrentLayer()->CopySelectedItem();
+		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
+		[pb clearContents];
+		[pb addTypes: @[ @"com.the-void-software.stacksmith.parts.xml" ] owner: nil];
+		[pb setString: [NSString stringWithUTF8String: xml.c_str()] forType: @"com.the-void-software.stacksmith.parts.xml"];
 	}
 }
 
