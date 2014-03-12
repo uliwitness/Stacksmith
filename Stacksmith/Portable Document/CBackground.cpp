@@ -89,6 +89,33 @@ bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack
 }
 
 
+void	CBackground::LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents )
+{
+	CPartContents*	pc = new CPartContents( this, currBgContents );
+	mContents.push_back( pc );
+	pc->Release();
+}
+
+
+void	CBackground::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents )
+{
+	if( haveBgContents )
+	{
+		CPartContents*	pc = new CPartContents( this, currCardContents );
+		mStack->GetCurrentCard()->AddPartContents( pc );
+		pc->Release();
+	}
+	else
+	{
+		if( !newPart->GetSharedText() )
+			newPart->SetSharedText( true );
+		CPartContents*	pc = new CPartContents( this, currCardContents );
+		mContents.push_back( pc );
+		pc->Release();
+	}
+}
+
+
 std::string		CBackground::GetDisplayName()
 {
 	std::stringstream		strs;

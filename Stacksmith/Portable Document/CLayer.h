@@ -96,6 +96,9 @@ protected:
 	virtual void	SavePropertiesToElement( tinyxml2::XMLElement* stackfile );
 	virtual void	DumpProperties( size_t inIndent );
 	virtual void	CallAllCompletionBlocks();
+	virtual void	LoadPastedPartContents( CPart* newPart, tinyxml2::XMLElement* *currCardContents, tinyxml2::XMLElement* *currBgContents );
+	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents );
+	virtual void	LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents );
 
 	ObjectID						mID;
 	std::string						mURL;

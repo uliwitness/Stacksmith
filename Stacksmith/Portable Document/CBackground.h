@@ -38,6 +38,8 @@ public:
 	virtual CScriptableObject*	GetParentObject();
 	
 protected:
+	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents );
+	virtual void	LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents );
 	virtual const char*	GetLayerXMLType()			{ return "background"; };
 	virtual const char*	GetIdentityForDump()		{ return "Background"; };
 	

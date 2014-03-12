@@ -106,6 +106,7 @@ public:
 	virtual CPartContents*		GetContentsOnCurrentCard();
 	
 	virtual bool				GetSharedText()					{ return true; };	// By default, background part contents are the same on all cards of that background.
+	virtual void				SetSharedText( bool n )			{};
 	virtual void				SetSelected( bool inSelected )	{ mSelected = inSelected; };
 	virtual bool				IsSelected()					{ return mSelected; };
 	virtual void				SetHighlight( bool inHighlighted )	{};

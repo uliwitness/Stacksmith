@@ -649,6 +649,50 @@ bool	CLayer::CanCopySelectedItem()
 }
 
 
+void	CLayer::LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents )
+{
+	if( newPart->GetSharedText() )
+	{
+		CPartContents*	pc = new CPartContents( this, currBgContents );
+		mContents.push_back( pc );
+		pc->Release();
+	}
+}
+
+
+void	CLayer::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents )
+{
+	if( !newPart->GetSharedText() )
+	{
+		CPartContents*	pc = new CPartContents( this, currCardContents );
+		mContents.push_back( pc );
+		pc->Release();
+	}
+}
+
+
+void	CLayer::LoadPastedPartContents( CPart* newPart, tinyxml2::XMLElement* *currCardContents, tinyxml2::XMLElement* *currBgContents )
+{
+	ObjectID	theID = CTinyXMLUtils::GetLongLongNamed( *currCardContents, "id" );
+	bool		haveCardContents = (theID == newPart->GetID());
+	theID = CTinyXMLUtils::GetLongLongNamed( *currBgContents, "id" );
+	bool		haveBgContents = (theID == newPart->GetID());
+	if( haveCardContents )
+	{
+		LoadPastedPartCardContents( newPart, *currCardContents, haveBgContents );
+		
+		*currCardContents = (*currCardContents)->NextSiblingElement("contents");
+	}
+	
+	if( haveBgContents )
+	{
+		LoadPastedPartBackgroundContents( newPart, *currBgContents, haveCardContents );
+		
+		*currBgContents = (*currBgContents)->NextSiblingElement("contents");
+	}
+}
+
+
 void	CLayer::PasteObject( const std::string& inXMLStr )
 {
 	tinyxml2::XMLDocument	document;
@@ -673,19 +717,13 @@ void	CLayer::PasteObject( const std::string& inXMLStr )
 				mParts.push_back( newPart );
 				newPart->Release();
 				
-				CPartContents*	pc = new CPartContents( this, currCardContents );
-				mContents.push_back( pc );
-				pc->Release();
-				
-				// +++ Load background contents *if this is a background*
+				LoadPastedPartContents( newPart, &currCardContents, &currBgContents );
 				
 				// +++ Fix up ID numbers if duplicate!
 				
 				// +++ Paste any icons this part references!
 				
 				currPart = currPart->NextSiblingElement( "part" );
-				currCardContents = cardContents->FirstChildElement("contents");
-				currBgContents = bgContents->FirstChildElement("contents");
 			}
 		}
 	}
