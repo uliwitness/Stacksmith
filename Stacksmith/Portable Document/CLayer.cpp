@@ -649,52 +649,60 @@ bool	CLayer::CanCopySelectedItem()
 }
 
 
-void	CLayer::LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents )
+void	CLayer::LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet )
 {
 	if( newPart->GetSharedText() )
 	{
-		CPartContents*	pc = new CPartContents( this, currBgContents );
+		CPartContents*	pc = new CPartContents( this, currBgContents, inStyleSheet );
+		pc->SetID( newPart->GetID() );
 		mContents.push_back( pc );
 		pc->Release();
 	}
 }
 
 
-void	CLayer::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents )
+void	CLayer::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents, CStyleSheet * inStyleSheet )
 {
 	if( !newPart->GetSharedText() )
 	{
-		CPartContents*	pc = new CPartContents( this, currCardContents );
+		CPartContents*	pc = new CPartContents( this, currCardContents, inStyleSheet );
+		pc->SetID( newPart->GetID() );
 		mContents.push_back( pc );
 		pc->Release();
 	}
 }
 
 
-void	CLayer::LoadPastedPartContents( CPart* newPart, tinyxml2::XMLElement* *currCardContents, tinyxml2::XMLElement* *currBgContents )
+void	CLayer::LoadPastedPartContents( CPart* newPart, ObjectID oldID, tinyxml2::XMLElement* *currCardContents, tinyxml2::XMLElement* *currBgContents, CStyleSheet * inStyleSheet )
 {
+	// We get the next part contents in the list on the clipboard. So if this doesn't
+	//	match our ID, and don't consume the contents.
+	
 	ObjectID	theID = CTinyXMLUtils::GetLongLongNamed( *currCardContents, "id" );
-	bool		haveCardContents = (theID == newPart->GetID());
+	bool		haveCardContents = (theID == oldID);
 	theID = CTinyXMLUtils::GetLongLongNamed( *currBgContents, "id" );
-	bool		haveBgContents = (theID == newPart->GetID());
+	bool		haveBgContents = (theID == oldID);
 	if( haveCardContents )
 	{
-		LoadPastedPartCardContents( newPart, *currCardContents, haveBgContents );
+		LoadPastedPartCardContents( newPart, *currCardContents, haveBgContents, inStyleSheet );
 		
 		*currCardContents = (*currCardContents)->NextSiblingElement("contents");
 	}
 	
 	if( haveBgContents )
 	{
-		LoadPastedPartBackgroundContents( newPart, *currBgContents, haveCardContents );
+		LoadPastedPartBackgroundContents( newPart, *currBgContents, haveCardContents, inStyleSheet );
 		
 		*currBgContents = (*currBgContents)->NextSiblingElement("contents");
 	}
 }
 
 
-void	CLayer::PasteObject( const std::string& inXMLStr )
+std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr )
 {
+	//Dump();
+	
+	std::vector<CPartRef>	newParts;
 	tinyxml2::XMLDocument	document;
 	if( tinyxml2::XML_SUCCESS == document.Parse( inXMLStr.c_str(), inXMLStr.size() ) )
 	{
@@ -713,20 +721,36 @@ void	CLayer::PasteObject( const std::string& inXMLStr )
 			tinyxml2::XMLElement*	currBgContents = bgContents->FirstChildElement("contents");
 			while( currPart )
 			{
+				ObjectID	oldID = CTinyXMLUtils::GetLongLongNamed( currPart, "id" );
+				ObjectID	newID = oldID;
+				if( GetPartWithID( newID ) != NULL )
+				{
+					newID = GetUniqueIDForPart();
+					currPart->DeleteChild( currPart->FirstChildElement("id") );
+					CTinyXMLUtils::AddLongLongNamed( currPart, newID, "id" );
+				}
+				
 				CPart	*	newPart = CPart::NewPartWithElement( currPart, this );
 				mParts.push_back( newPart );
 				newPart->Release();
 				
-				LoadPastedPartContents( newPart, &currCardContents, &currBgContents );
-				
-				// +++ Fix up ID numbers if duplicate!
+				LoadPastedPartContents( newPart, oldID, &currCardContents, &currBgContents, &styleSheet );
 				
 				// +++ Paste any icons this part references!
+				
+				IncrementChangeCount();
+				
+				newParts.push_back(newPart);
+				newPart->WakeUp();
 				
 				currPart = currPart->NextSiblingElement( "part" );
 			}
 		}
 	}
+	
+	//Dump();
+	
+	return newParts;
 }
 
 

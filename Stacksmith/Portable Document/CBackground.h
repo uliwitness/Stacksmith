@@ -15,6 +15,7 @@
 namespace Carlson {
 
 class CCard;
+class CStyleSheet;
 
 class CBackground : public CPlatformLayer
 {
@@ -38,8 +39,8 @@ public:
 	virtual CScriptableObject*	GetParentObject();
 	
 protected:
-	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents );
-	virtual void	LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents );
+	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet );
+	virtual void	LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents, CStyleSheet * inStyleSheet );
 	virtual const char*	GetLayerXMLType()			{ return "background"; };
 	virtual const char*	GetIdentityForDump()		{ return "Background"; };
 	

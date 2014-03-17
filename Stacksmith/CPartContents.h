@@ -23,7 +23,7 @@ class CLayer;
 class CPartContents : public CRefCountedObject
 {
 public:
-	explicit CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElement = NULL );
+	explicit CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElement = NULL, CStyleSheet * inStyleSheet = NULL );
 	virtual ~CPartContents()	{};
 	
 	virtual void		SaveToElementAndStyleSheet( tinyxml2::XMLElement * inElement, CStyleSheet *styleSheet );

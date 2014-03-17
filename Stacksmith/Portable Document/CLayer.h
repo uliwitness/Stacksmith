@@ -60,12 +60,12 @@ public:
 	virtual CStack*	GetStack()			{ return mStack; };
 	const CStyleSheet&	GetStyles()		{ return mStyles; };
 
-	virtual void		SetPeeking( bool inState );
-	virtual void		DeleteSelectedItem();
-	virtual bool		CanDeleteSelectedItem();
-	virtual std::string	CopySelectedItem();
-	virtual bool		CanCopySelectedItem();
-	virtual void		PasteObject( const std::string& inXMLStr );
+	virtual void					SetPeeking( bool inState );
+	virtual void					DeleteSelectedItem();
+	virtual bool					CanDeleteSelectedItem();
+	virtual std::string				CopySelectedItem();
+	virtual bool					CanCopySelectedItem();
+	virtual std::vector<CPartRef>	PasteObject( const std::string& inXMLStr );
 
 	virtual void	WakeUp();
 	virtual void	GoToSleep();
@@ -96,9 +96,9 @@ protected:
 	virtual void	SavePropertiesToElement( tinyxml2::XMLElement* stackfile );
 	virtual void	DumpProperties( size_t inIndent );
 	virtual void	CallAllCompletionBlocks();
-	virtual void	LoadPastedPartContents( CPart* newPart, tinyxml2::XMLElement* *currCardContents, tinyxml2::XMLElement* *currBgContents );
-	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents );
-	virtual void	LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents );
+	virtual void	LoadPastedPartContents( CPart* newPart, ObjectID oldID, tinyxml2::XMLElement* *currCardContents, tinyxml2::XMLElement* *currBgContents, CStyleSheet * inStyleSheet );
+	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet );
+	virtual void	LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents, CStyleSheet * inStyleSheet );
 
 	ObjectID						mID;
 	std::string						mURL;

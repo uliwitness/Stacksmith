@@ -89,19 +89,20 @@ bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack
 }
 
 
-void	CBackground::LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents )
+void	CBackground::LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet )
 {
-	CPartContents*	pc = new CPartContents( this, currBgContents );
+	CPartContents*	pc = new CPartContents( this, currBgContents, inStyleSheet );
 	mContents.push_back( pc );
 	pc->Release();
 }
 
 
-void	CBackground::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents )
+void	CBackground::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents, CStyleSheet * inStyleSheet )
 {
 	if( haveBgContents )
 	{
-		CPartContents*	pc = new CPartContents( this, currCardContents );
+		CPartContents*	pc = new CPartContents( this, currCardContents, inStyleSheet );
+		pc->SetID( newPart->GetID() );
 		mStack->GetCurrentCard()->AddPartContents( pc );
 		pc->Release();
 	}
@@ -109,7 +110,9 @@ void	CBackground::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLEleme
 	{
 		if( !newPart->GetSharedText() )
 			newPart->SetSharedText( true );
-		CPartContents*	pc = new CPartContents( this, currCardContents );
+		CPartContents*	pc = new CPartContents( this, currCardContents, inStyleSheet );
+		pc->SetID( newPart->GetID() );
+		pc->SetIsOnBackground( true );
 		mContents.push_back( pc );
 		pc->Release();
 	}

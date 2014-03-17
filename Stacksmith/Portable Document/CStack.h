@@ -102,6 +102,11 @@ public:
 	virtual void	SetTool( TTool inTool );
 	virtual TTool	GetTool()								{ return mCurrentTool; };
 
+	virtual void	DeselectAllObjectsOnCard();
+	virtual void	SelectAllObjectsOnCard();
+	virtual void	DeselectAllObjectsOnBackground();
+	virtual void	SelectAllObjectsOnBackground();
+
 	virtual void	SetName( const std::string& inName );
 	virtual void	SetStyle( TStackStyle inStyle )			{ mStyle = inStyle; IncrementChangeCount(); };
 	TStackStyle		GetStyle()								{ return mStyle; };

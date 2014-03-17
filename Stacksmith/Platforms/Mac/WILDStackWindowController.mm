@@ -472,24 +472,27 @@ using namespace Carlson;
 	CCard	*	theCard = mStack->GetCurrentCard();
 	if( !theCard )
 		return;
-	
-	size_t	numParts = theCard->GetNumParts();
-	for( size_t x = 0; x < numParts; x++ )
-	{
-		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
-		if( !currPart )
-			continue;
-		currPart->CreateViewIn( mContentView );
-	}
 
 	CBackground	*	theBg = theCard->GetBackground();
-	numParts = theBg->GetNumParts();
+	size_t			numParts = theBg->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 	{
 		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theBg->GetPart(x));
 		if( !currPart )
 			continue;
 		currPart->CreateViewIn( mContentView );
+	}
+	
+	if( !mStack->GetEditingBackground() )
+	{
+		numParts = theCard->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
+			if( !currPart )
+				continue;
+			currPart->CreateViewIn( mContentView );
+		}
 	}
 }
 
@@ -943,7 +946,12 @@ using namespace Carlson;
 	{
 		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 		NSString*		xmlStr = [pb stringForType: @"com.the-void-software.stacksmith.parts.xml"];
-		mStack->GetCurrentLayer()->PasteObject( std::string(xmlStr.UTF8String) );
+		mStack->DeselectAllObjectsOnCard();
+		mStack->DeselectAllObjectsOnBackground();
+		std::vector<CPartRef>	newParts = mStack->GetCurrentLayer()->PasteObject( std::string(xmlStr.UTF8String) );
+		[self refreshExistenceAndOrderOfAllViews];
+		for( CPart* thePart : newParts )
+			thePart->SetSelected(true);
 	}
 }
 

@@ -672,17 +672,48 @@ void	CStack::SetPeeking( bool inState )
 }
 
 
-void	CStack::SetTool( TTool inTool )
+void	CStack::DeselectAllObjectsOnCard()
 {
-	mCurrentTool = inTool;
-	
 	CCard	*	theCard = GetCurrentCard();
 	size_t	numParts = theCard->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 		theCard->GetPart(x)->SetSelected(false);
-	numParts = theCard->GetBackground()->GetNumParts();
+}
+
+
+void	CStack::SelectAllObjectsOnCard()
+{
+	CCard	*	theCard = GetCurrentCard();
+	size_t	numParts = theCard->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+		theCard->GetPart(x)->SetSelected(true);
+}
+
+
+void	CStack::DeselectAllObjectsOnBackground()
+{
+	CCard	*	theCard = GetCurrentCard();
+	size_t numParts = theCard->GetBackground()->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 		theCard->GetBackground()->GetPart(x)->SetSelected(false);
+}
+
+
+void	CStack::SelectAllObjectsOnBackground()
+{
+	CCard	*	theCard = GetCurrentCard();
+	size_t numParts = theCard->GetBackground()->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+		theCard->GetBackground()->GetPart(x)->SetSelected(true);
+}
+
+
+void	CStack::SetTool( TTool inTool )
+{
+	mCurrentTool = inTool;
+	
+	DeselectAllObjectsOnCard();
+	DeselectAllObjectsOnBackground();
 }
 
 
