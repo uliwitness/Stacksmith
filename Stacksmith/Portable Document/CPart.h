@@ -74,6 +74,7 @@ public:
 	
 	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
 	virtual void				SaveToElement( tinyxml2::XMLElement * inElement );
+	virtual void				SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement );
 	
 	virtual CPart*				Retain();
 	virtual void				Release();

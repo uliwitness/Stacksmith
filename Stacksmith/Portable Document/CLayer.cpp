@@ -599,6 +599,7 @@ std::string	CLayer::CopySelectedItem()
 	document.InsertEndChild( partsElement );
 	tinyxml2::XMLElement *	cardElement = document.NewElement("card");
 	tinyxml2::XMLElement *	backgroundElement = document.NewElement("background");
+	tinyxml2::XMLElement *	resourcesElement = document.NewElement("resources");
 	
 	for( CPart* currPart : mParts )
 	{
@@ -621,6 +622,8 @@ std::string	CLayer::CopySelectedItem()
 				backgroundElement->InsertEndChild( contentsElement );
 				bgContents->SaveToElementAndStyleSheet( contentsElement, &styleSheet );
 			}
+			
+			currPart->SaveAssociatedResourcesToElement( resourcesElement );
 		}
 	}
 	
@@ -629,8 +632,7 @@ std::string	CLayer::CopySelectedItem()
 	partsElement->InsertEndChild( stylesElement );
 	partsElement->InsertEndChild( cardElement );
 	partsElement->InsertEndChild( backgroundElement );
-	
-	// +++ Copy any icons this part references!
+	partsElement->InsertEndChild( resourcesElement );
 	
 	CStacksmithXMLPrinter	printer;
 	document.Print( &printer );

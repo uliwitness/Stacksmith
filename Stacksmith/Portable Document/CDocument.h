@@ -28,6 +28,14 @@ typedef enum
 } TMediaType;
 
 
+enum
+{
+	EIncludeContent = true,
+	EDontIncludeContent = false
+};
+typedef bool	TIncludeContentFlag;
+
+
 class CMediaEntry
 {
 public:
@@ -46,6 +54,8 @@ public:
 	
 	void				IncrementChangeCount()	{ mChangeCount++; };
 	bool				GetNeedsToBeSaved()		{ return mChangeCount != 0; };
+	
+	void				CreateMediaElementInElement( tinyxml2::XMLElement * inElement, TIncludeContentFlag inIncludeContent = EDontIncludeContent );
 	
 protected:
 	ObjectID		mIconID;
@@ -95,6 +105,8 @@ public:
 	std::string			GetMediaNameByIDOfType( ObjectID inID, TMediaType inType );
 	bool				GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType );
 	std::string			AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot = 0, int yHotSpot = 0, bool isBuiltIn = false );
+	
+	void				SaveMediaToElement( ObjectID inID, TMediaType mediaType, tinyxml2::XMLElement * inElement );
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 

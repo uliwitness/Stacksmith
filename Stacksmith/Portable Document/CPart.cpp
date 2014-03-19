@@ -133,6 +133,11 @@ void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
 }
 
 
+void	CPart::SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement )
+{
+	
+}
+
 void	CPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
 	

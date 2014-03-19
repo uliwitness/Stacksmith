@@ -249,52 +249,7 @@ bool	CDocument::Save()
 			if( currEntry.IsBuiltIn() )
 				continue;
 			
-			tinyxml2::XMLElement*	mediaElement = document.NewElement("media");
-			const char*				mediaTypeStr = NULL;
-			switch( currEntry.GetMediaType() )
-			{
-				case EMediaTypeCursor:
-					mediaTypeStr = "cursor";
-					break;
-				case EMediaTypeIcon:
-					mediaTypeStr = "icon";
-					break;
-				case EMediaTypeSound:
-					mediaTypeStr = "sound";
-					break;
-				case EMediaTypePicture:
-					mediaTypeStr = "picture";
-					break;
-				case EMediaTypePattern:
-					mediaTypeStr = "pattern";
-					break;
-				case EMediaTypeMovie:
-					mediaTypeStr = "movie";
-					break;
-				case EMediaTypeUnknown:
-					break;
-			}
-			
-			CTinyXMLUtils::SetLongLongAttributeNamed( mediaElement, currEntry.GetID(), "id" );
-			
-			tinyxml2::XMLElement*	nameElem = document.NewElement("name");
-			nameElem->SetText(currEntry.GetName().c_str());
-			mediaElement->InsertEndChild( nameElem );
-
-			tinyxml2::XMLElement*	fileElem = document.NewElement("file");
-			fileElem->SetText(currEntry.GetFileName().c_str());
-			mediaElement->InsertEndChild( fileElem );
-
-			tinyxml2::XMLElement*	typeElem = document.NewElement("type");
-			typeElem->SetText(mediaTypeStr);
-			mediaElement->InsertEndChild( typeElem );
-			
-			if( currEntry.GetMediaType() == EMediaTypeCursor )
-			{
-				CTinyXMLUtils::AddPointNamed( mediaElement, currEntry.GetHotspotLeft(), currEntry.GetHotspotTop(), "hotspot" );
-			}
-			
-			stackfile->InsertEndChild( mediaElement );
+			currEntry.CreateMediaElementInElement( stackfile );
 		}
 
 		FILE*	theFile = fopen( (destPath + "project.xml").c_str(), "w" );
@@ -727,6 +682,19 @@ void	CDocument::SetPeeking( bool inState )
 }
 
 
+void	CDocument::SaveMediaToElement( ObjectID inID, TMediaType inType, tinyxml2::XMLElement * inElement )
+{
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+		{
+			currMedia->CreateMediaElementInElement( inElement, EIncludeContent );
+			break;
+		}
+	}
+}
+
+
 void	CDocument::Dump( size_t inNestingLevel )
 {
 	printf( "Document\n{\n\tloaded = %s\n\tloading= %s\n\tcreatedByVersion = %s\n\tlastCompactedVersion = %s\n\tfirstEditedVersion = %s\n\tlastEditedVersion = %s\n",
@@ -740,4 +708,66 @@ void	CDocument::Dump( size_t inNestingLevel )
 	for( auto itty = mStacks.begin(); itty != mStacks.end(); itty++ )
 		(*itty)->Dump(2);
 	printf( "\t}\n}\n" );
+}
+
+
+void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, TIncludeContentFlag inIncludeContent )
+{
+	tinyxml2::XMLElement*	mediaElement = stackfile->GetDocument()->NewElement("media");
+	const char*				mediaTypeStr = NULL;
+	switch( GetMediaType() )
+	{
+		case EMediaTypeCursor:
+			mediaTypeStr = "cursor";
+			break;
+		case EMediaTypeIcon:
+			mediaTypeStr = "icon";
+			break;
+		case EMediaTypeSound:
+			mediaTypeStr = "sound";
+			break;
+		case EMediaTypePicture:
+			mediaTypeStr = "picture";
+			break;
+		case EMediaTypePattern:
+			mediaTypeStr = "pattern";
+			break;
+		case EMediaTypeMovie:
+			mediaTypeStr = "movie";
+			break;
+		case EMediaTypeUnknown:
+			break;
+	}
+	
+	CTinyXMLUtils::SetLongLongAttributeNamed( mediaElement, GetID(), "id" );
+	
+	tinyxml2::XMLElement*	nameElem = stackfile->GetDocument()->NewElement("name");
+	nameElem->SetText(GetName().c_str());
+	mediaElement->InsertEndChild( nameElem );
+
+	tinyxml2::XMLElement*	fileElem = stackfile->GetDocument()->NewElement("file");
+	fileElem->SetText(GetFileName().c_str());
+	mediaElement->InsertEndChild( fileElem );
+
+	tinyxml2::XMLElement*	typeElem = stackfile->GetDocument()->NewElement("type");
+	typeElem->SetText(mediaTypeStr);
+	mediaElement->InsertEndChild( typeElem );
+	
+	if( GetMediaType() == EMediaTypeCursor )
+	{
+		CTinyXMLUtils::AddPointNamed( mediaElement, GetHotspotLeft(), GetHotspotTop(), "hotspot" );
+	}
+	
+	if( inIncludeContent == EIncludeContent )
+	{
+		const char*	rawFileData = "";
+		
+		tinyxml2::XMLElement*	contentElem = stackfile->GetDocument()->NewElement("content");
+		contentElem->SetAttribute( "name", GetName().c_str() );
+		tinyxml2::XMLText*	cdata = stackfile->GetDocument()->NewText( rawFileData );
+		cdata->SetCData( true );
+		mediaElement->InsertEndChild( contentElem );
+	}
+	
+	stackfile->InsertEndChild( mediaElement );
 }

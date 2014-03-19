@@ -10,6 +10,7 @@
 #include "CTinyXMLUtils.h"
 #include "CPartContents.h"
 #include "CStack.h"
+#include "CDocument.h"
 
 
 using namespace Carlson;
@@ -143,6 +144,13 @@ void	CButtonPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 		elem->SetText("plain");
 		inElement->InsertEndChild(elem);
 	}
+}
+
+
+void	CButtonPart::SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement )
+{
+	if( mIconID != 0 )
+		GetDocument()->SaveMediaToElement( mIconID, EMediaTypeIcon, inElement );
 }
 
 
