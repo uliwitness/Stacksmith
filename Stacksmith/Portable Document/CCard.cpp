@@ -180,6 +180,14 @@ void	CCard::SetMarked( bool inMarked )
 }
 
 
+void	CCard::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
+{
+	std::vector<CPartRef>	parts( mParts );
+	GetBackground()->AddPartsToList( parts );
+	CPlatformLayer::CorrectRectOfPart( inMovedPart, parts, partsToCorrect, ioLeft, ioTop, ioRight, ioBottom, addGuidelineBlock );
+}
+
+
 std::string		CCard::GetDisplayName()
 {
 	std::stringstream		strs;

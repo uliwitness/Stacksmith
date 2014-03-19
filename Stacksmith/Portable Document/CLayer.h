@@ -83,7 +83,10 @@ public:
 	virtual void	IncrementChangeCount()		{ mChangeCount++; };
 	virtual bool	GetNeedsToBeSaved()			{ return mChangeCount != 0; };
 	
-	void			CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines. If coord == LLONG_MAX, it means clear the guidelines. If that is the case, the bool is FALSE.
+	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines.
+	void			CorrectRectOfPart( CPart* inMovedPart, std::vector<CPartRef> inEligibleParts, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );
+	
+	void			AddPartsToList( std::vector<CPartRef>& ioList )	{ ioList.insert( ioList.end(), mParts.begin(), mParts.end() ); };
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	

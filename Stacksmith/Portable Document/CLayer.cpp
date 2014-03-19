@@ -840,6 +840,12 @@ const char*	CLayer::GetIdentityForDump()
 
 void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
 {
+	CorrectRectOfPart( inMovedPart, mParts, partsToCorrect, ioLeft, ioTop, ioRight, ioBottom, addGuidelineBlock );
+}
+
+
+void	CLayer::CorrectRectOfPart( CPart* inMovedPart, std::vector<CPartRef> inEligibleParts, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
+{
 	long long		minXDist = LLONG_MAX,
 					minYDist = LLONG_MAX;
 	long			leftGuide = 0, topGuide = 0;
@@ -904,7 +910,7 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, lon
 	}
 
 	// See if we're near any other parts and snap to those:
-	for( CPart* currPart : mParts )
+	for( CPart* currPart : inEligibleParts )
 	{
 		if( currPart != inMovedPart )
 		{

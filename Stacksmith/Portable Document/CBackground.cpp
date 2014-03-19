@@ -130,4 +130,14 @@ std::string		CBackground::GetDisplayName()
 }
 
 
+void	CBackground::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
+{
+	std::vector<CPartRef>	parts( mParts );
+	if( !GetStack()->GetEditingBackground() )
+		GetStack()->GetCurrentCard()->AddPartsToList( parts );
+	CPlatformLayer::CorrectRectOfPart( inMovedPart, parts, partsToCorrect, ioLeft, ioTop, ioRight, ioBottom, addGuidelineBlock );
+}
+
+
+
 
