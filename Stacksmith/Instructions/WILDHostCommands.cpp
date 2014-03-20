@@ -483,7 +483,7 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return;
 		
-		std::string			mediaURL = frontStack->GetDocument()->GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
+		std::string			mediaURL = frontStack->GetDocument()->GetMediaCache().GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
 			
 		if( mediaURL.length() == 0 )
 		{

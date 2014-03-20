@@ -150,7 +150,7 @@ void	CButtonPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 void	CButtonPart::SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement )
 {
 	if( mIconID != 0 )
-		GetDocument()->SaveMediaToElement( mIconID, EMediaTypeIcon, inElement );
+		GetDocument()->GetMediaCache().SaveMediaToElement( mIconID, EMediaTypeIcon, inElement );
 }
 
 

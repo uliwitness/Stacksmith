@@ -300,6 +300,7 @@
 		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5589DD771378B16400B0F6CF /* TransitionMappings.plist */; };
+		559331BD18DB06190061CC37 /* CMediaCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559331BB18DB06190061CC37 /* CMediaCache.mm */; };
 		55943B1C171F675E0051166C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55943B1B171F675E0051166C /* WebKit.framework */; };
 		559700EC137BB38B000264B8 /* WILDIrisOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */; };
 		559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */; };
@@ -905,6 +906,8 @@
 		558970E5118C853600F92788 /* UKIsDragStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKIsDragStart.h; path = ../UliKit/UKIsDragStart.h; sourceTree = SOURCE_ROOT; };
 		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		5589DD771378B16400B0F6CF /* TransitionMappings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TransitionMappings.plist; sourceTree = "<group>"; };
+		559331BB18DB06190061CC37 /* CMediaCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMediaCache.mm; path = Platforms/Mac/CMediaCache.mm; sourceTree = "<group>"; };
+		559331BC18DB06190061CC37 /* CMediaCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMediaCache.h; path = Platforms/Mac/CMediaCache.h; sourceTree = "<group>"; };
 		55943B1B171F675E0051166C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = ../../../../../System/Library/Frameworks/WebKit.framework; sourceTree = "<group>"; };
 		559700EA137BB38A000264B8 /* WILDIrisOpenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIrisOpenFilter.h; path = "Custom Effects/WILDIrisOpenFilter.h"; sourceTree = "<group>"; };
 		559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisOpenFilter.m; path = "Custom Effects/WILDIrisOpenFilter.m"; sourceTree = "<group>"; };
@@ -1349,6 +1352,8 @@
 				55CD6119187A154A002450E2 /* CSound.mm */,
 				559BA9A418AB85D100760273 /* CCursor.h */,
 				559BA9A318AB85D100760273 /* CCursor.mm */,
+				559331BC18DB06190061CC37 /* CMediaCache.h */,
+				559331BB18DB06190061CC37 /* CMediaCache.mm */,
 			);
 			name = "OS abstraction";
 			sourceTree = "<group>";
@@ -2385,6 +2390,7 @@
 				55405BD018A59D06001D3C99 /* WILDButtonInfoViewController.mm in Sources */,
 				55255A85114C178100279B03 /* UKSCTDUserIdentifiersPrefsController.m in Sources */,
 				55AC961B1870D50400488B51 /* CTinyXMLUtils.cpp in Sources */,
+				559331BD18DB06190061CC37 /* CMediaCache.mm in Sources */,
 				55255A8D114C179C00279B03 /* NSScanner+SkipUpToCharset.m in Sources */,
 				559BA9C518B0F80800760273 /* WILDBackgroundInfoViewController.mm in Sources */,
 				55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */,

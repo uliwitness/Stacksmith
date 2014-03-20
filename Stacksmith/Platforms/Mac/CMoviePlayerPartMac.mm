@@ -145,7 +145,7 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 	[mView.layer setBackgroundColor: [NSColor colorWithCalibratedRed: mFillColorRed / 65535.0 green: mFillColorGreen / 65535.0 blue: mFillColorBlue / 65535.0 alpha: mFillColorAlpha / 65535.0].CGColor];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	NSURL	*	movieURL = nil;
-	std::string	mediaURL = GetDocument()->GetMediaURLByNameOfType( mMediaPath.c_str(), EMediaTypeMovie );
+	std::string	mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( mMediaPath.c_str(), EMediaTypeMovie );
 	if( mediaURL.length() == 0 && mMediaPath.find("file://") == 0 )
 	{
 		LEOContextGroup*	theGroup = GetDocument()->GetScriptContextGroupObject();
@@ -159,7 +159,7 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 			mediaURL = mMediaPath;
 	}
 	if( mediaURL.length() == 0 )
-		mediaURL = GetDocument()->GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
+		mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
 	if( mediaURL.length() > 0 )
 		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
 	if( !mCurrentMovie )

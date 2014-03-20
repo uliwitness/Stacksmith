@@ -144,7 +144,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mIconID != 0 )
 	{
-		std::string	iconURL = GetDocument()->GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
+		std::string	iconURL = GetDocument()->GetMediaCache().GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
 		if( iconURL.length() > 0 )
 		{
 			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]]autorelease];
@@ -279,7 +279,7 @@ void	CButtonPartMac::SetIconID( ObjectID inID )
 
 	if( mIconID != 0 )
 	{
-		std::string	iconURL = GetDocument()->GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
+		std::string	iconURL = GetDocument()->GetMediaCache().GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
 		if( iconURL.length() > 0 )
 		{
 			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]]autorelease];

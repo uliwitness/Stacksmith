@@ -74,7 +74,7 @@ using namespace Carlson;
 	if( !currentCursor )
 	{
 		int			hotSpotLeft = 0, hotSpotTop = 0;
-		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
+		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaCache().GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
 		if( cursorURL.length() > 0 )
 		{
 			NSImage	*			cursorImage = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cursorURL.c_str()]]] autorelease];

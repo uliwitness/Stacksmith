@@ -96,7 +96,7 @@ void	WILDScheduleResumeOfScript( void )
 	CMessageWatcher::SetSharedInstance( new CMessageWatcherMac );
 	CRecentCardsList::SetSharedInstance( new CRecentCardsListConcrete<CRecentCardInfo>() );
 	
-	Carlson::CDocumentMac::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
+	Carlson::CMediaCache::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 }
 
 
