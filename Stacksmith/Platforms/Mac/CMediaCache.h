@@ -13,6 +13,7 @@
 #include "CRefCountedObject.h"
 #include "tinyxml2.h"
 #include <string>
+#include <functional>
 
 #if __OBJC__
 #import <Cocoa/Cocoa.h>
@@ -49,8 +50,10 @@ typedef enum
 class CMediaEntry
 {
 public:
-	CMediaEntry() : mIconID(0LL), mMediaType(EMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false), mChangeCount(0), mFileData(NULL) {};
-	CMediaEntry( ObjectID iconID, const std::string& iconName, const std::string& fileName, TMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn, bool inDirty = false ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn), mChangeCount(inDirty?1:0), mFileData(NULL) {};
+	CMediaEntry();
+	CMediaEntry( ObjectID iconID, const std::string& iconName, const std::string& fileName, TMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn, bool inDirty = false );
+	CMediaEntry( const CMediaEntry& orig );
+	~CMediaEntry();
 	
 	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %lld, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s, needsToBeSaved = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false"), ((mChangeCount != 0) ? "true" : "false")); };
 	
@@ -77,6 +80,9 @@ protected:
 	bool			mIsBuiltIn;
 	size_t			mChangeCount;
 	WILDNSDataPtr	mFileData;
+	WILDNSImagePtr	mImage;
+	
+	friend class CMediaCache;
 };
 
 
@@ -102,6 +108,7 @@ public:
 	std::string			GetMediaNameByIDOfType( ObjectID inID, TMediaType inType );
 	bool				GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType );
 	std::string			AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot = 0, int yHotSpot = 0, bool isBuiltIn = false );
+	void				GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std::function<void(WILDNSImagePtr)> completionBlock );
 	
 	void				SaveMediaElementsToElement( tinyxml2::XMLElement * stackfile );
 	void				SaveMediaToElement( ObjectID inID, TMediaType mediaType, tinyxml2::XMLElement * inElement );

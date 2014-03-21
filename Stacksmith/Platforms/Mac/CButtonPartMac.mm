@@ -144,16 +144,12 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mIconID != 0 )
 	{
-		std::string	iconURL = GetDocument()->GetMediaCache().GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
-		if( iconURL.length() > 0 )
+		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mIconID, EMediaTypeIcon, [this](WILDNSImagePtr theIcon)
 		{
-			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]]autorelease];
 			[mView setImage: theIcon];
 			[mView setImagePosition: NSImageAbove];
 			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
-		}
-		else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
-			[mView setImagePosition: NSNoImage];
+		} );
 	}
 	else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
 		[mView setImagePosition: NSNoImage];

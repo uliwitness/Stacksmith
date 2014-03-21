@@ -8,6 +8,7 @@
 
 #include "CMediaCache.h"
 #include "CTinyXMLUtils.h"
+#include "CURLConnection.h"
 
 
 using namespace Carlson;
@@ -164,6 +165,36 @@ bool	CMediaCache::GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType 
 }
 
 
+void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std::function<void(WILDNSImagePtr)> completionBlock )
+{
+	NSCAssert( inType == EMediaTypeIcon || inType == EMediaTypePattern || inType == EMediaTypePicture || inType == EMediaTypeCursor, @"Requested image for non-image resource." );
+	
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+		{
+			if( currMedia->mFileData == nil )
+			{
+				CURLRequest		request( currMedia->GetFileName() );
+				CURLConnection::SendRequestWithCompletionHandler( request, [completionBlock,currMedia](CURLResponse response, const char * data, size_t dataLen)
+				{
+					if( !currMedia->mFileData && dataLen > 0 )
+						currMedia->mFileData = [[NSData alloc] initWithBytes: data length: dataLen];
+					if( !currMedia->mImage && currMedia->mFileData )
+						currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
+					completionBlock( currMedia->mImage );
+				});
+			}
+			else if( currMedia->mImage == nil )
+				currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
+			
+			if( currMedia->mImage )
+				completionBlock( currMedia->mImage );
+		}
+	}
+}
+
+
 std::string		CMediaCache::AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot, int yHotSpot, bool isBuiltIn )
 {
 	std::string		fileName( mURL );
@@ -276,7 +307,49 @@ void	CMediaCache::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * roo
 		
 		currMediaElem = currMediaElem->NextSiblingElement( "media" );
 	}
+}
 
+
+void	CMediaCache::Dump( size_t inIndent )
+{
+	for( auto itty = mMediaList.begin(); itty != mMediaList.end(); itty++ )
+		itty->Dump( inIndent );
+}
+
+
+CMediaEntry::CMediaEntry() : mIconID(0LL), mMediaType(EMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false), mChangeCount(0), mFileData(NULL), mImage(NULL)
+{
+
+}
+
+
+CMediaEntry::CMediaEntry( ObjectID iconID, const std::string& iconName, const std::string& fileName, TMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn, bool inDirty ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn), mChangeCount(inDirty?1:0), mFileData(NULL), mImage(NULL)
+{
+
+}
+
+
+CMediaEntry::CMediaEntry( const CMediaEntry& orig )
+{
+	mIconID = orig.mIconID;
+	mMediaType = orig.mMediaType;
+	mHotspotLeft = orig.mHotspotLeft;
+	mHotspotTop = orig.mHotspotTop;
+	mIsBuiltIn = orig.mIsBuiltIn;
+	mChangeCount = orig.mChangeCount;
+	mFileName = orig.mFileName;
+	mIconName = orig.mIconName;
+	mFileData = [orig.mFileData retain];
+	mImage = [orig.mImage retain];
+}
+
+
+CMediaEntry::~CMediaEntry()
+{
+	if( mFileData )
+		[mFileData release];
+	if( mImage )
+		[mImage release];
 }
 
 
@@ -308,7 +381,7 @@ void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, 
 			break;
 	}
 	
-	CTinyXMLUtils::SetLongLongAttributeNamed( mediaElement, GetID(), "id" );
+	CTinyXMLUtils::AddLongLongNamed( mediaElement, GetID(), "id" );
 	
 	tinyxml2::XMLElement*	nameElem = stackfile->GetDocument()->NewElement("name");
 	nameElem->SetText(GetName().c_str());
@@ -330,18 +403,17 @@ void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, 
 	if( inIncludeContent == EIncludeContent )
 	{
 		tinyxml2::XMLElement*	contentElem = stackfile->GetDocument()->NewElement("content");
-		contentElem->SetAttribute( "name", GetName().c_str() );
+		size_t		foundPos = GetFileName().rfind( '/' );
+		if( foundPos == std::string::npos )
+			foundPos = 0;
+		else
+			foundPos++;
+		std::string	fileLeafName = GetFileName().substr(foundPos);
+		contentElem->SetAttribute( "name", fileLeafName.c_str() );
 		tinyxml2::XMLText*	cdata = stackfile->GetDocument()->NewText( [[mFileData base64EncodedStringWithOptions: NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed] UTF8String] );
 		contentElem->InsertEndChild( cdata );
 		mediaElement->InsertEndChild( contentElem );
 	}
 	
 	stackfile->InsertEndChild( mediaElement );
-}
-
-
-void	CMediaCache::Dump( size_t inIndent )
-{
-	for( auto itty = mMediaList.begin(); itty != mMediaList.end(); itty++ )
-		itty->Dump( inIndent );
 }
