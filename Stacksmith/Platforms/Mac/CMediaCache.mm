@@ -181,15 +181,23 @@ bool	CMediaCache::GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType 
 }
 
 
-ObjectID	CMediaCache::GetUniqueMediaIDForPossiblyDuplicateIDOfType( ObjectID inID, TMediaType inType )
+ObjectID	CMediaCache::GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( CMediaEntry& newEntry )
 {
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
 	{
-		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
-			return GetUniqueIDForMedia();
+		if( newEntry.GetID() == currMedia->GetID() && newEntry.GetMediaType() == currMedia->GetMediaType() )
+		{
+			if( currMedia->GetName().compare( newEntry.GetName() ) == 0
+				&& currMedia->GetHotspotLeft() == newEntry.GetHotspotLeft()
+				&& currMedia->GetHotspotTop() == newEntry.GetHotspotTop()
+				&& [newEntry.mFileData isEqualTo: currMedia->mFileData] )
+				return 0;
+			else
+				return GetUniqueIDForMedia();
+		}
 	}
 	
-	return inID;
+	return newEntry.GetID();
 }
 
 

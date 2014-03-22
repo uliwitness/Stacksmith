@@ -112,7 +112,7 @@ public:
 	bool				GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType );
 	std::string			AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot = 0, int yHotSpot = 0, bool isBuiltIn = false );
 	void				GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std::function<void(WILDNSImagePtr)> completionBlock );
-	ObjectID			GetUniqueMediaIDForPossiblyDuplicateIDOfType( ObjectID inID, TMediaType inType );
+	ObjectID			GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( CMediaEntry& newEntry );	// Gives 0 to indicate identical item already exists, newEntry.GetID() if the ID already is unique.
 	void				AddMediaEntry( const CMediaEntry& inEntry )	{ mMediaList.push_back( inEntry ); };
 	
 	void				SaveMediaElementsToElement( tinyxml2::XMLElement * stackfile );	// In addition to doing XML, does what SaveMediaContents() does, too.

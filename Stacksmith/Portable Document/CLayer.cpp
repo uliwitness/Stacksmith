@@ -756,15 +756,18 @@ std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr )
 			CMediaEntry		newEntry;
 			newEntry.LoadFromElement( currMedia, mStack->GetDocument()->GetURL(), false );
 			
-			ObjectID	newID = mStack->GetDocument()->GetMediaCache().GetUniqueMediaIDForPossiblyDuplicateIDOfType( newEntry.GetID(), newEntry.GetMediaType() );
-			if( newID != newEntry.GetID() )
+			ObjectID	newID = mStack->GetDocument()->GetMediaCache().GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( newEntry );
+			if( newID != 0 )	// 0 == already exists, no need to paste.
 			{
-				changedMediaIDs[newEntry.GetID()] = newID;	// +++ Keep track of type.
-				newEntry.SetID(newID);
+				if( newID != newEntry.GetID() )
+				{
+					changedMediaIDs[newEntry.GetID()] = newID;	// +++ Keep track of type.
+					newEntry.SetID(newID);
+				}
+				newEntry.IncrementChangeCount();
+				mStack->GetDocument()->GetMediaCache().AddMediaEntry( newEntry );
+				mStack->GetDocument()->IncrementChangeCount();
 			}
-			newEntry.IncrementChangeCount();
-			mStack->GetDocument()->GetMediaCache().AddMediaEntry( newEntry );
-			mStack->GetDocument()->IncrementChangeCount();
 			
 			currMedia = currMedia->NextSiblingElement( "media" );
 		}
