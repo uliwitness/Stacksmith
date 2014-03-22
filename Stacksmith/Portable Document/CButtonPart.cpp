@@ -154,6 +154,17 @@ void	CButtonPart::SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inEle
 }
 
 
+void	CButtonPart::UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings )
+{
+	if( mIconID != 0 )
+	{
+		auto	foundNewID = changedIDMappings.find( mIconID );
+		if( foundNewID != changedIDMappings.end() )
+			mIconID = foundNewID->second;
+	}
+}
+
+
 bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
 	if( strcasecmp("family", inPropertyName) == 0 )

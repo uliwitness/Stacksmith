@@ -31,6 +31,22 @@ void	CMediaCache::SaveMediaElementsToElement( tinyxml2::XMLElement *stackfile )
 			continue;
 		
 		currEntry.CreateMediaElementInElement( stackfile );
+		
+		if( currEntry.GetNeedsToBeSaved() )
+			currEntry.SaveContents();
+	}
+}
+
+
+void	CMediaCache::SaveMediaContents()
+{
+	for( auto currEntry : mMediaList )
+	{
+		if( currEntry.IsBuiltIn() )
+			continue;
+		
+		if( currEntry.GetNeedsToBeSaved() )
+			currEntry.SaveContents();
 	}
 }
 
@@ -165,6 +181,18 @@ bool	CMediaCache::GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType 
 }
 
 
+ObjectID	CMediaCache::GetUniqueMediaIDForPossiblyDuplicateIDOfType( ObjectID inID, TMediaType inType )
+{
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+			return GetUniqueIDForMedia();
+	}
+	
+	return inID;
+}
+
+
 void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std::function<void(WILDNSImagePtr)> completionBlock )
 {
 	NSCAssert( inType == EMediaTypeIcon || inType == EMediaTypePattern || inType == EMediaTypePicture || inType == EMediaTypeCursor, @"Requested image for non-image resource." );
@@ -265,45 +293,9 @@ void	CMediaCache::LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * roo
 	tinyxml2::XMLElement	*	currMediaElem = root->FirstChildElement( "media" );
 	while( currMediaElem )
 	{
-		ObjectID	iconID = CTinyXMLUtils::GetLongLongNamed( currMediaElem, "id", 0 );
-		std::string	iconName;
-		CTinyXMLUtils::GetStringNamed( currMediaElem, "name", iconName );
-		std::string	fileName;
-		CTinyXMLUtils::GetStringNamed( currMediaElem, "file", fileName );
-		if( fileName.find( "../" ) != 0 && fileName.find( "/../" ) == std::string::npos )	// Don't let paths escape the file package.
-		{
-			std::string	typeName;
-			TMediaType	mediaType = EMediaTypeUnknown;
-			CTinyXMLUtils::GetStringNamed( currMediaElem, "type", typeName );
-			if( typeName.compare( "icon" ) == 0 )
-				mediaType = EMediaTypeIcon;
-			else if( typeName.compare( "picture" ) == 0 )
-				mediaType = EMediaTypePicture;
-			else if( typeName.compare( "cursor" ) == 0 )
-				mediaType = EMediaTypeCursor;
-			else if( typeName.compare( "sound" ) == 0 )
-				mediaType = EMediaTypeSound;
-			else if( typeName.compare( "pattern" ) == 0 )
-				mediaType = EMediaTypePattern;
-			else if( typeName.compare( "movie" ) == 0 )
-				mediaType = EMediaTypeMovie;
-			tinyxml2::XMLElement	*	hotspotElem = currMediaElem->FirstChildElement( "hotspot" );
-			int		hotspotLeft = CTinyXMLUtils::GetIntNamed( hotspotElem, "left", 0 );
-			int		hotspotTop = CTinyXMLUtils::GetIntNamed( hotspotElem, "top", 0 );
-			
-			if( isBuiltIn )
-			{
-				size_t	slashPos = sStandardResourcesPath.rfind('/');
-				std::string	builtInResPath = sStandardResourcesPath.substr(0,slashPos);
-				fileName = std::string("file://") + builtInResPath + "/" + fileName;
-			}
-			else
-			{
-				fileName = mURL + "/" + fileName;
-			}
-			
-			mMediaList.push_back( CMediaEntry( iconID, iconName, fileName, mediaType, hotspotLeft, hotspotTop, isBuiltIn ) );
-		}
+		CMediaEntry	newEntry;
+		if( newEntry.LoadFromElement( currMediaElem, mURL, isBuiltIn ) )
+			mMediaList.push_back( newEntry );
 		
 		currMediaElem = currMediaElem->NextSiblingElement( "media" );
 	}
@@ -353,6 +345,19 @@ CMediaEntry::~CMediaEntry()
 }
 
 
+void	CMediaEntry::SaveContents()
+{
+	if( mFileName.find("file:///") != 0 )
+		return;
+		
+	if( mFileData )
+	{
+		NSURL*	fileURL = [NSURL URLWithString: [NSString stringWithUTF8String: GetFileName().c_str()]];
+		[mFileData writeToURL: fileURL atomically: YES];
+	}
+}
+
+
 void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, TIncludeContentFlag inIncludeContent )
 {
 	tinyxml2::XMLElement*	mediaElement = stackfile->GetDocument()->NewElement("media");
@@ -388,7 +393,13 @@ void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, 
 	mediaElement->InsertEndChild( nameElem );
 
 	tinyxml2::XMLElement*	fileElem = stackfile->GetDocument()->NewElement("file");
-	fileElem->SetText(GetFileName().c_str());
+	size_t		foundPos = GetFileName().rfind( '/' );
+	if( foundPos == std::string::npos )
+		foundPos = 0;
+	else
+		foundPos++;
+	std::string	fileLeafName = GetFileName().substr(foundPos);
+	fileElem->SetText(fileLeafName.c_str());
 	mediaElement->InsertEndChild( fileElem );
 
 	tinyxml2::XMLElement*	typeElem = stackfile->GetDocument()->NewElement("type");
@@ -403,17 +414,69 @@ void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, 
 	if( inIncludeContent == EIncludeContent )
 	{
 		tinyxml2::XMLElement*	contentElem = stackfile->GetDocument()->NewElement("content");
-		size_t		foundPos = GetFileName().rfind( '/' );
-		if( foundPos == std::string::npos )
-			foundPos = 0;
-		else
-			foundPos++;
-		std::string	fileLeafName = GetFileName().substr(foundPos);
-		contentElem->SetAttribute( "name", fileLeafName.c_str() );
-		tinyxml2::XMLText*	cdata = stackfile->GetDocument()->NewText( [[mFileData base64EncodedStringWithOptions: NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed] UTF8String] );
+		tinyxml2::XMLText	*	cdata = stackfile->GetDocument()->NewText( [[mFileData base64EncodedStringWithOptions: NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed] UTF8String] );
 		contentElem->InsertEndChild( cdata );
 		mediaElement->InsertEndChild( contentElem );
 	}
 	
 	stackfile->InsertEndChild( mediaElement );
+}
+
+
+bool	CMediaEntry::LoadFromElement( tinyxml2::XMLElement* currMediaElem, const std::string& inDocumentPackageURL, bool isBuiltIn )
+{
+	ObjectID	iconID = CTinyXMLUtils::GetLongLongNamed( currMediaElem, "id", 0 );
+	std::string	iconName;
+	CTinyXMLUtils::GetStringNamed( currMediaElem, "name", iconName );
+	std::string	fileName;
+	CTinyXMLUtils::GetStringNamed( currMediaElem, "file", fileName );
+	if( fileName.find( "../" ) != 0 && fileName.find( "/../" ) == std::string::npos )	// Don't let paths escape the file package.
+	{
+		std::string	typeName;
+		TMediaType	mediaType = EMediaTypeUnknown;
+		CTinyXMLUtils::GetStringNamed( currMediaElem, "type", typeName );
+		if( typeName.compare( "icon" ) == 0 )
+			mediaType = EMediaTypeIcon;
+		else if( typeName.compare( "picture" ) == 0 )
+			mediaType = EMediaTypePicture;
+		else if( typeName.compare( "cursor" ) == 0 )
+			mediaType = EMediaTypeCursor;
+		else if( typeName.compare( "sound" ) == 0 )
+			mediaType = EMediaTypeSound;
+		else if( typeName.compare( "pattern" ) == 0 )
+			mediaType = EMediaTypePattern;
+		else if( typeName.compare( "movie" ) == 0 )
+			mediaType = EMediaTypeMovie;
+		tinyxml2::XMLElement	*	hotspotElem = currMediaElem->FirstChildElement( "hotspot" );
+		int		hotspotLeft = CTinyXMLUtils::GetIntNamed( hotspotElem, "left", 0 );
+		int		hotspotTop = CTinyXMLUtils::GetIntNamed( hotspotElem, "top", 0 );
+		
+		if( isBuiltIn )
+		{
+			size_t	slashPos = sStandardResourcesPath.rfind('/');
+			std::string	builtInResPath = sStandardResourcesPath.substr(0,slashPos);
+			fileName = std::string("file://") + builtInResPath + "/" + fileName;
+		}
+		else
+		{
+			fileName = inDocumentPackageURL + "/" + fileName;
+		}
+
+		tinyxml2::XMLElement	*	contentElem = currMediaElem->FirstChildElement( "content" );
+		if( contentElem )
+		{
+			mFileData = [[NSData alloc] initWithBase64EncodedData: [NSData dataWithBytes: contentElem->GetText() length: strlen(contentElem->GetText())] options: NSDataBase64DecodingIgnoreUnknownCharacters];
+		}
+		mIconID = iconID;
+		mIconName = iconName;
+		mFileName = fileName;
+		mMediaType = mediaType;
+		mHotspotLeft = hotspotLeft;
+		mHotspotTop = hotspotTop;
+		mIsBuiltIn = isBuiltIn;
+		
+		return true;
+	}
+	
+	return false;
 }

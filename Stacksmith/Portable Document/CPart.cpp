@@ -135,8 +135,20 @@ void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
 
 void	CPart::SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement )
 {
-	
+	// If a part has associated resources, this is how we copy them when this part is copied.
+	//	You'd likely call SaveMediaToElement() for whatever media you depend on, on your document's media cache.
 }
+
+
+void	CPart::UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings )
+{
+	// When a part is pasted its associated media are pasted as well. If media uses an ID
+	//	that already exists for a different item, it gets re-numbered. This function gets
+	//	called in that case to let you fix up any IDs that may have changed. As the new
+	//	number may collide with a later one, you get a list of all changed IDs at once,
+	//	so subsequent ID changes don't cause your ID to be re-mapped again.
+}
+
 
 void	CPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {

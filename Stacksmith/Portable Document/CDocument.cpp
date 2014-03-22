@@ -197,6 +197,8 @@ bool	CDocument::Save()
 					return false;
 			}
 		}
+		
+		mMediaCache.SaveMediaContents();
 	}
 	
 	return true;

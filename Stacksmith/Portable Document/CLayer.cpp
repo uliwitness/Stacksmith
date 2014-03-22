@@ -684,14 +684,14 @@ void	CLayer::LoadPastedPartContents( CPart* newPart, ObjectID oldID, tinyxml2::X
 	bool		haveCardContents = (theID == oldID);
 	theID = CTinyXMLUtils::GetLongLongNamed( *currBgContents, "id" );
 	bool		haveBgContents = (theID == oldID);
-	if( haveCardContents )
+	if( haveCardContents && (*currCardContents) != NULL )
 	{
 		LoadPastedPartCardContents( newPart, *currCardContents, haveBgContents, inStyleSheet );
 		
 		*currCardContents = (*currCardContents)->NextSiblingElement("contents");
 	}
 	
-	if( haveBgContents )
+	if( haveBgContents && (*currBgContents) != NULL )
 	{
 		LoadPastedPartBackgroundContents( newPart, *currBgContents, haveCardContents, inStyleSheet );
 		
@@ -743,10 +743,43 @@ std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr )
 				IncrementChangeCount();
 				
 				newParts.push_back(newPart);
-				newPart->WakeUp();
 				
 				currPart = currPart->NextSiblingElement( "part" );
 			}
+		}
+		
+		std::map<ObjectID,ObjectID>	changedMediaIDs;
+		tinyxml2::XMLElement*		resourcesElement = rootElement->FirstChildElement( "resources" );
+		tinyxml2::XMLElement*		currMedia = resourcesElement->FirstChildElement( "media" );
+		while( currMedia )
+		{
+			CMediaEntry		newEntry;
+			newEntry.LoadFromElement( currMedia, mStack->GetDocument()->GetURL(), false );
+			
+			ObjectID	newID = mStack->GetDocument()->GetMediaCache().GetUniqueMediaIDForPossiblyDuplicateIDOfType( newEntry.GetID(), newEntry.GetMediaType() );
+			if( newID != newEntry.GetID() )
+			{
+				changedMediaIDs[newEntry.GetID()] = newID;	// +++ Keep track of type.
+				newEntry.SetID(newID);
+			}
+			newEntry.IncrementChangeCount();
+			mStack->GetDocument()->GetMediaCache().AddMediaEntry( newEntry );
+			mStack->GetDocument()->IncrementChangeCount();
+			
+			currMedia = currMedia->NextSiblingElement( "media" );
+		}
+		
+		if( changedMediaIDs.size() > 0 )	// Had to assign a unique ID to a pasted icon?
+		{
+			for( CPart* currPart : newParts )
+			{
+				// Tell each part to update its stuff:
+				currPart->UpdateMediaIDs( changedMediaIDs );	// +++ Pass along type.
+			}
+		}
+		for( CPart* currPart : newParts )
+		{
+			currPart->WakeUp();
 		}
 	}
 	

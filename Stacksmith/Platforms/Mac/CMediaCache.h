@@ -57,7 +57,8 @@ public:
 	
 	void	Dump( size_t inIndentLevel = 0 )	{ const char* indentStr = CRefCountedObject::IndentString( inIndentLevel ); printf("%s{ id = %lld, name = %s, file = %s, type = %u, hotspot = %d,%d, builtIn = %s, needsToBeSaved = %s }\n", indentStr, mIconID, mIconName.c_str(), mFileName.c_str(), mMediaType, mHotspotLeft, mHotspotTop, (mIsBuiltIn ? "true" : "false"), ((mChangeCount != 0) ? "true" : "false")); };
 	
-	ObjectID			GetID()	const		{ return mIconID; };
+	ObjectID			GetID()	const			{ return mIconID; };
+	void				SetID( ObjectID inID )	{ mIconID = inID; };	// Used when creating new icons (e.g. by pasting).
 	const std::string	GetName() const		{ return mIconName; };
 	TMediaType			GetMediaType() const{ return mMediaType; };
 	const std::string	GetFileName() const { return mFileName; };
@@ -68,7 +69,9 @@ public:
 	void				IncrementChangeCount()	{ mChangeCount++; };
 	bool				GetNeedsToBeSaved()		{ return mChangeCount != 0; };
 	
+	bool				LoadFromElement( tinyxml2::XMLElement* currMediaElem, const std::string& inDocumentPackageURL, bool isBuiltIn );
 	void				CreateMediaElementInElement( tinyxml2::XMLElement * inElement, TIncludeContentFlag inIncludeContent = EDontIncludeContent );
+	void				SaveContents();	// Saves the actual data to the file, if loaded.
 	
 protected:
 	ObjectID		mIconID;
@@ -109,8 +112,11 @@ public:
 	bool				GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType );
 	std::string			AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot = 0, int yHotSpot = 0, bool isBuiltIn = false );
 	void				GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std::function<void(WILDNSImagePtr)> completionBlock );
+	ObjectID			GetUniqueMediaIDForPossiblyDuplicateIDOfType( ObjectID inID, TMediaType inType );
+	void				AddMediaEntry( const CMediaEntry& inEntry )	{ mMediaList.push_back( inEntry ); };
 	
-	void				SaveMediaElementsToElement( tinyxml2::XMLElement * stackfile );
+	void				SaveMediaElementsToElement( tinyxml2::XMLElement * stackfile );	// In addition to doing XML, does what SaveMediaContents() does, too.
+	void				SaveMediaContents();
 	void				SaveMediaToElement( ObjectID inID, TMediaType mediaType, tinyxml2::XMLElement * inElement );
 	
 	void				Dump( size_t inIndent );
