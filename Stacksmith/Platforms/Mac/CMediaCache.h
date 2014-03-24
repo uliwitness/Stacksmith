@@ -71,7 +71,7 @@ public:
 	
 	bool				LoadFromElement( tinyxml2::XMLElement* currMediaElem, const std::string& inDocumentPackageURL, bool isBuiltIn );
 	void				CreateMediaElementInElement( tinyxml2::XMLElement * inElement, TIncludeContentFlag inIncludeContent = EDontIncludeContent );
-	void				SaveContents();	// Saves the actual data to the file, if loaded.
+	bool				SaveContents();	// Saves the actual data to the file, if loaded.
 	
 protected:
 	ObjectID		mIconID;
@@ -115,8 +115,8 @@ public:
 	ObjectID			GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( CMediaEntry& newEntry );	// Gives 0 to indicate identical item already exists, newEntry.GetID() if the ID already is unique.
 	void				AddMediaEntry( const CMediaEntry& inEntry )	{ mMediaList.push_back( inEntry ); };
 	
-	void				SaveMediaElementsToElement( tinyxml2::XMLElement * stackfile );	// In addition to doing XML, does what SaveMediaContents() does, too.
-	void				SaveMediaContents();
+	bool				SaveMediaElementsToElement( tinyxml2::XMLElement * stackfile );	// In addition to doing XML, does what SaveMediaContents() does, too.
+	bool				SaveMediaContents();
 	void				SaveMediaToElement( ObjectID inID, TMediaType mediaType, tinyxml2::XMLElement * inElement );
 	
 	void				Dump( size_t inIndent );

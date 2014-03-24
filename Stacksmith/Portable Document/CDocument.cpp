@@ -176,7 +176,8 @@ bool	CDocument::Save()
 		stackfile->InsertEndChild( createdByElement );
 		createdByElement->SetText("Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION));
 		
-		mMediaCache.SaveMediaElementsToElement( stackfile );
+		if( !mMediaCache.SaveMediaElementsToElement( stackfile ) )
+			return false;
 
 		FILE*	theFile = fopen( (destPath + "project.xml").c_str(), "w" );
 		if( !theFile )
@@ -198,7 +199,8 @@ bool	CDocument::Save()
 			}
 		}
 		
-		mMediaCache.SaveMediaContents();
+		if( !mMediaCache.SaveMediaContents() )
+			return false;
 	}
 	
 	return true;

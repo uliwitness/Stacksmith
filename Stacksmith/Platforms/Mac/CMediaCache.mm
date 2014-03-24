@@ -23,7 +23,7 @@ static std::string		sStandardResourcesPath;
 }
 
 
-void	CMediaCache::SaveMediaElementsToElement( tinyxml2::XMLElement *stackfile )
+bool	CMediaCache::SaveMediaElementsToElement( tinyxml2::XMLElement *stackfile )
 {
 	for( auto currEntry : mMediaList )
 	{
@@ -32,22 +32,26 @@ void	CMediaCache::SaveMediaElementsToElement( tinyxml2::XMLElement *stackfile )
 		
 		currEntry.CreateMediaElementInElement( stackfile );
 		
-		if( currEntry.GetNeedsToBeSaved() )
-			currEntry.SaveContents();
+		if( currEntry.GetNeedsToBeSaved() && !currEntry.SaveContents() )
+			return false;
 	}
+	
+	return true;
 }
 
 
-void	CMediaCache::SaveMediaContents()
+bool	CMediaCache::SaveMediaContents()
 {
 	for( auto currEntry : mMediaList )
 	{
 		if( currEntry.IsBuiltIn() )
 			continue;
 		
-		if( currEntry.GetNeedsToBeSaved() )
-			currEntry.SaveContents();
+		if( currEntry.GetNeedsToBeSaved() && !currEntry.SaveContents() )
+			return false;
 	}
+	
+	return true;
 }
 
 
@@ -353,16 +357,18 @@ CMediaEntry::~CMediaEntry()
 }
 
 
-void	CMediaEntry::SaveContents()
+bool	CMediaEntry::SaveContents()
 {
 	if( mFileName.find("file:///") != 0 )
-		return;
+		return false;
 		
 	if( mFileData )
 	{
 		NSURL*	fileURL = [NSURL URLWithString: [NSString stringWithUTF8String: GetFileName().c_str()]];
-		[mFileData writeToURL: fileURL atomically: YES];
+		return [mFileData writeToURL: fileURL atomically: YES];
 	}
+	
+	return true;
 }
 
 
