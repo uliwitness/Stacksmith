@@ -127,7 +127,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	else
 	{
 		[mView setState: GetHighlight() ? NSOnState : NSOffState];
-		[mView setTitle: [NSString stringWithUTF8String: mName.c_str()]];
+		[mView setTitle: mShowName ? [NSString stringWithUTF8String: mName.c_str()] : @""];
 		if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
 		{
 			[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
@@ -147,7 +147,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mIconID, EMediaTypeIcon, [this](WILDNSImagePtr theIcon)
 		{
 			[mView setImage: theIcon];
-			[mView setImagePosition: NSImageAbove];
+			[mView setImagePosition: mShowName ? NSImageAbove : NSImageOnly];
 			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		} );
 	}
@@ -223,6 +223,37 @@ void	CButtonPartMac::SetHighlightForTracking( bool inHighlight )
 }
 
 
+void	CButtonPartMac::SetShowName( bool inShowName )
+{
+	CButtonPart::SetShowName( inShowName );
+	
+	if( inShowName )
+		[mView setTitle: [NSString stringWithUTF8String: GetName().c_str()]];
+	else
+		[mView setTitle: @""];
+	if( mIconID != 0 )
+	{
+		std::string	iconURL = GetDocument()->GetMediaCache().GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
+		if( iconURL.length() > 0 )
+		{
+			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]] autorelease];
+			[mView setImagePosition: inShowName ? NSImageAbove : NSImageOnly];
+			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+			[mView setImage: theIcon];
+		}
+		else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+		{
+			[mView setImagePosition: NSNoImage];
+		}
+	}
+	else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+	{
+		[mView setImagePosition: NSNoImage];
+	}
+	[mView setNeedsDisplay: YES];
+}
+
+
 void	CButtonPartMac::PrepareMouseUp()
 {
 	if( mButtonStyle == EButtonStylePopUp )
@@ -280,14 +311,26 @@ void	CButtonPartMac::SetIconID( ObjectID inID )
 		{
 			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]]autorelease];
 			[mView setImage: theIcon];
-			[mView setImagePosition: NSImageAbove];
+			[mView setImagePosition: mShowName ? NSImageAbove : NSImageOnly];
 			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		}
 		else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+		{
 			[mView setImagePosition: NSNoImage];
+			if( mShowName )
+				[mView setTitle: [NSString stringWithUTF8String: GetName().c_str()]];
+			else
+				[mView setTitle: @""];
+		}
 	}
 	else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+	{
 		[mView setImagePosition: NSNoImage];
+		if( mShowName )
+			[mView setTitle: [NSString stringWithUTF8String: GetName().c_str()]];
+		else
+			[mView setTitle: @""];
+	}
 }
 
 
