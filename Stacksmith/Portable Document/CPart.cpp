@@ -199,6 +199,8 @@ void	CPart::IncrementChangeCount()
 CPartContents*	CPart::GetContentsOnCurrentCard()
 {
 	CCard	*	currCard = GetStack()->GetCurrentCard();
+	if( !currCard )
+		return NULL;
 	if( mOwner != currCard && !GetSharedText() )	// We're on the background layer, not on the card?
 		return currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
 	else
