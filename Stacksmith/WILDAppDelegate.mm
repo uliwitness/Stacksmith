@@ -140,6 +140,9 @@ void	WILDScheduleResumeOfScript( void )
 -(void)	applicationDidFinishLaunching:(NSNotification *)notification
 {
 	UKCrashReporterCheckForCrash();
+	
+	if( sOpenDocuments.size() == 0 )
+		[self applicationOpenUntitledFile: NSApp];
 }
 
 
@@ -191,6 +194,11 @@ void	WILDScheduleResumeOfScript( void )
 	return [self application: NSApp openFile: [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"Home.xstk"]];
 }
 
+
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+{
+	return sOpenDocuments.size() == 0;
+}
 
 -(BOOL)	application:(NSApplication *)sender openFile:(NSString *)filename
 {
