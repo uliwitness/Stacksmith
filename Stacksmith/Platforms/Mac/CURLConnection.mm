@@ -19,6 +19,7 @@ using namespace Carlson;
 	{
 		CURLResponse	responseObject(nil);
 		NSData*	data = [NSData dataWithContentsOfFile: [inRequest.GetMacRequest().URL.absoluteURL path]];
+		CAutoreleasePool	pool;
 		completionBlock( responseObject, (const char*)data.bytes, data.length );
 	}
 	else
