@@ -2290,11 +2290,10 @@
 			);
 			outputPaths = (
 				svn_version.h,
-				"Stacksmith-Info.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../UliKit/make_git_version_header.sh\ntouch ${CODESIGNING_FOLDER_PATH} #dummy file to shut up codesign\n";
+			shellScript = "../UliKit/make_git_version_header.sh\ntouch ${CODESIGNING_FOLDER_PATH} 2> /dev/null || true #dummy file to shut up codesign\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
