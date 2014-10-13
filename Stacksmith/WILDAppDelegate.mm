@@ -26,6 +26,7 @@
 #include <ios>
 #include <sstream>
 #include "CRecentCardsList.h"
+#import "UKHelperMacros.h"
 
 
 using namespace Carlson;
@@ -207,6 +208,8 @@ void	WILDScheduleResumeOfScript( void )
 
 -(BOOL)	application: (ULIURLHandlingApplication*)sender openURL: (NSURL*)theFile
 {
+	UKLog(@"Entered");
+	
 	std::string		fileURL( theFile.absoluteString.UTF8String );
 	fileURL.append("/project.xml");
 	size_t	foundPos = fileURL.find("x-stack://");
@@ -228,6 +231,7 @@ void	WILDScheduleResumeOfScript( void )
 	
 	currDoc->LoadFromURL( fileURL, [self](Carlson::CDocument * inDocument)
 	{
+		UKLog(@"Doc completion entered");
 		Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
 		if( !theCppStack )
 		{
@@ -238,12 +242,21 @@ void	WILDScheduleResumeOfScript( void )
 		}
 		theCppStack->Load( [inDocument,self](Carlson::CStack* inStack)
 		{
+			UKLog(@"Stack completion entered %p", inStack);
+			inStack->Dump();
+			UKLog(@"Stack completion entered (2) %p", (inStack? inStack->GetCard(0) : NULL));
 			inStack->GetCard(0)->Load( [inDocument,inStack,self](Carlson::CLayer*inCard)
 			{
-				inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
+				UKLog(@"Card completion entered %p",inCard);
+				inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){ UKLog(@"Go completion called"); } );
+				UKLog(@"Card completion exited");
 			} );
+			UKLog(@"Stack completion exited");
 		} );
+		UKLog(@"Doc completion exited");
 	});
+
+	UKLog(@"Exited");
 	
 	return YES;	// We show our own errors asynchronously.
 }

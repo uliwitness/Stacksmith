@@ -90,6 +90,9 @@ using namespace Carlson;
 					self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDrag %ld", [event buttonNumber] +1 );
 					break;
 				}
+				
+				default:
+					break;
 			}
 		}
 		

@@ -88,6 +88,7 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 	Retain();
 	Load([this,oldStack,inOpenInMode,completionHandler](CLayer *inThisCard)
 	{
+		inThisCard->Dump();
 		CCard	*	oldCard = oldStack ? oldStack->GetCurrentCard() : NULL;
 		bool		destStackWasntOpenYet = GetStack()->GetCurrentCard() == NULL;
 		// We're moving away
@@ -99,15 +100,18 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			oldCard->GoToSleep();
 			oldStack->SetCurrentCard(NULL);
 		}
+		printf("Moved away from card %p\n", oldCard);
 		if( GetStack()->GetCurrentCard() != NULL && GetStack()->GetCurrentCard() != this )	// Dest stack was already open with another card? Close that card (too).
 		{
 			CAutoreleasePool		pool;
 			GetStack()->GetCurrentCard()->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeCard" );
 			GetStack()->GetCurrentCard()->GoToSleep();
 		}
+		printf("Moved away from card in dest stack\n");
 		
 		if( GetStack()->GetCurrentCard() != this )	// Dest stack didn't already have this card open?
 		{
+			printf("Opening new card\n");
 			GetStack()->SetCurrentCard( this );	// Go there!
 			
 			WakeUp();
@@ -118,8 +122,10 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			}
 			CAutoreleasePool		pool;
 			SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openCard" );
+			printf("Opened new card\n");
 		}
 			
+		printf("Calling card completion handler.\n");
 		completionHandler();
 		Release();
 	});

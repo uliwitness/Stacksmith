@@ -209,6 +209,9 @@ using namespace Carlson;
 					hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage );
 					break;
 				}
+				
+				default:
+					break;
 			}
 			
 			[pool release];
@@ -764,7 +767,14 @@ using namespace Carlson;
 	
 	if( mStack->GetStyle() == EStackStylePopup )
 	{
-		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
+		@try
+		{
+			[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
+		}
+		@catch( NSException* err )
+		{
+			NSLog(@"error opening stack window %@",err);
+		}
 	}
 }
 
