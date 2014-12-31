@@ -370,6 +370,7 @@
 		55BFEE22137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BFEE21137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m */; };
 		55C2B647115E5780008B094D /* CSearchContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* CSearchContext.cpp */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
+		55C7794E1A547DA200F0A022 /* memory_clearing_operator_new.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */; };
 		55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */; };
 		55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */; };
 		55CD60BC187510F0002450E2 /* CButtonPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60B4187510EF002450E2 /* CButtonPart.cpp */; };
@@ -1014,6 +1015,7 @@
 		55C2B69B115EA2CD008B094D /* NSView+SizeWindowForViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSView+SizeWindowForViewSize.h"; path = "../UliKit/NSView+SizeWindowForViewSize.h"; sourceTree = SOURCE_ROOT; };
 		55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSView+SizeWindowForViewSize.m"; path = "../UliKit/NSView+SizeWindowForViewSize.m"; sourceTree = SOURCE_ROOT; };
 		55C68C9D116413E300D8B44C /* svn_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svn_version.h; sourceTree = "<group>"; };
+		55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory_clearing_operator_new.cpp; sourceTree = "<group>"; };
 		55C8D04D13EF0DD700B502C5 /* UKWindowBodyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKWindowBodyView.h; path = ../UliKit/UKWindowBodyView.h; sourceTree = "<group>"; };
 		55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKWindowBodyView.m; path = ../UliKit/UKWindowBodyView.m; sourceTree = "<group>"; };
 		55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = ../Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
@@ -1655,6 +1657,7 @@
 				555E53B718953843001487C1 /* NSObject+JCSKVOWithBlocks.m */,
 				559BA9A918AE70B900760273 /* ULIHighlightingButton.h */,
 				559BA9AA18AE70B900760273 /* ULIHighlightingButton.m */,
+				55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -2562,6 +2565,7 @@
 				5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */,
 				55405B7F189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm in Sources */,
 				55405BD218A59D06001D3C99 /* WILDFieldInfoViewController.mm in Sources */,
+				55C7794E1A547DA200F0A022 /* memory_clearing_operator_new.cpp in Sources */,
 				55382463172730B4007785D8 /* WILDObjCCallInstructions.mm in Sources */,
 				55B29C9717276C4700B38E75 /* UKCrashReporter.m in Sources */,
 				55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */,

@@ -69,8 +69,9 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
                 	UKLog(@"Error loading stack for document %p", inDocument);
 					return;
 				}
-                UKLog(@"Stack completion entered (2) %p", (inStack? inStack->GetCard(0) : NULL));
-                inStack->GetCard(0)->Load( [inDocument,inStack,inCompletionBlock](Carlson::CLayer*inCard)
+				CCard	*	firstCard = (inStack ? inStack->GetCard(0) : NULL);
+                UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
+                firstCard->Load( [inDocument,inStack,inCompletionBlock](Carlson::CLayer*inCard)
                 {
                     UKLog(@"Card completion entered %p",inCard);
 					if( inCard )

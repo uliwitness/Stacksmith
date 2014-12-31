@@ -62,7 +62,7 @@ CPartCreatorBase*	CPart::GetPartCreatorForType( const char* inType )
 
 
 CPart::CPart( CLayer *inOwner )
-	: mFamily(0), mOwner(inOwner), mSelected(false), mLeft(10), mTop(10), mRight(110), mBottom(60)
+	: mOwner(inOwner), mFamily(0), mID(0), mLeft(10), mTop(10), mRight(110), mBottom(60), mPartType(NULL), mSelected(false)
 {
 	mDocument = inOwner->GetDocument();
 }
@@ -172,7 +172,6 @@ void	CPart::DumpProperties( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);
 	printf( "%srect = %lld,%lld,%lld,%lld\n", indentStr, mLeft, mTop, mRight, mBottom );
-	
 }
 
 

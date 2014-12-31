@@ -30,7 +30,7 @@ typedef enum
 class CCard : public CPlatformLayer
 {
 public:
-	CCard( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(NULL)	{};
+	CCard( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(NULL), mSpeed(EVisualEffectSpeedNormal)	{};
 	~CCard();
 	
 	bool			IsMarked()					{ return mMarked; };

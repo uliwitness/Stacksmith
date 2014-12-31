@@ -563,7 +563,18 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 	{
 		ListChunkCallbackContext	ctx = { .lines = [[NSMutableArray alloc] init], .contents = contents, .defaultAttrs = GetCocoaAttributesForPart() };
 		if( contents )
-			LEODoForEachChunk( contents->GetText().c_str(), contents->GetText().length(), kLEOChunkTypeLine, ListChunkCallback, 0, &ctx );
+		{
+			std::string	theStr( contents->GetText() );
+			if( theStr.find("{\\rtf1\\ansi\\") == 0 )
+			{
+				NSDictionary*			docAttrs = nil;
+				NSAttributedString*		attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: theStr.c_str() length: theStr.length()] documentAttributes: &docAttrs];
+				CAttributedString&		cppstr = contents->GetAttributedText();
+				SetAttributedStringWithCocoa( cppstr, attrStr );
+				theStr = contents->GetText();
+			}
+			LEODoForEachChunk( theStr.c_str(), contents->GetText().length(), kLEOChunkTypeLine, ListChunkCallback, 0, &ctx );
+		}
 		[mMacDelegate setLines: ctx.lines];
 		[ctx.lines release];
 		[mTableView reloadData];

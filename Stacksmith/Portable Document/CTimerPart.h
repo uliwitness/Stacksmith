@@ -19,7 +19,7 @@ namespace Carlson {
 class CTimerPart : public CPart
 {
 public:
-	explicit CTimerPart( CLayer *inOwner ) : CPart( inOwner ) {};
+	explicit CTimerPart( CLayer *inOwner ) : CPart( inOwner ), mInterval(120), mStarted(false), mRepeat(false) {};
 	
 	virtual void			SetStarted( bool inStarted )	{ mStarted = inStarted; if( inStarted ) mActualTimer.Start(); else mActualTimer.Stop(); IncrementChangeCount(); };
 	virtual bool			GetStarted()					{ return mStarted; };
