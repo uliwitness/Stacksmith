@@ -19,7 +19,8 @@
 using namespace Carlson;
 
 
-CStack*		CStack::sFrontStack = NULL;
+CStack*							CStack::sFrontStack = NULL;
+std::function<void(CStack*)>	CStack::sFrontStackChangedBlock = NULL;
 
 
 static const char*		sToolNames[ETool_Last] =
@@ -68,6 +69,9 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 	mLoading = true;
 	
 	Retain();
+	
+	if( mURL.find("file://") != 0 )
+		mFileReadOnly = true;
 	
 	CURLRequest		request( mURL );
 	//printf("Loading %s\n",mURL.c_str());

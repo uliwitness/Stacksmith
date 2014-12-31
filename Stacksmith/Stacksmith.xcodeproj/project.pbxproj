@@ -390,7 +390,7 @@
 		55CD611B187A154A002450E2 /* CSound.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD6119187A154A002450E2 /* CSound.mm */; };
 		55CD611E187A60CD002450E2 /* CRecentCardsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */; };
 		55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD611F187B14E6002450E2 /* CStackMac.mm */; };
-		55CD6124187B188E002450E2 /* CDocumentMac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD6122187B188E002450E2 /* CDocumentMac.cpp */; };
+		55CD6124187B188E002450E2 /* CDocumentMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD6122187B188E002450E2 /* CDocumentMac.mm */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
@@ -1054,7 +1054,7 @@
 		55CD611D187A60CD002450E2 /* CRecentCardsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRecentCardsList.h; path = "Portable Document/CRecentCardsList.h"; sourceTree = "<group>"; };
 		55CD611F187B14E6002450E2 /* CStackMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CStackMac.mm; path = Platforms/Mac/CStackMac.mm; sourceTree = "<group>"; };
 		55CD6120187B14E6002450E2 /* CStackMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CStackMac.h; path = Platforms/Mac/CStackMac.h; sourceTree = "<group>"; };
-		55CD6122187B188E002450E2 /* CDocumentMac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDocumentMac.cpp; path = Platforms/Mac/CDocumentMac.cpp; sourceTree = "<group>"; };
+		55CD6122187B188E002450E2 /* CDocumentMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CDocumentMac.mm; path = Platforms/Mac/CDocumentMac.mm; sourceTree = "<group>"; };
 		55CD6123187B188E002450E2 /* CDocumentMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDocumentMac.h; path = Platforms/Mac/CDocumentMac.h; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
@@ -1287,7 +1287,7 @@
 			isa = PBXGroup;
 			children = (
 				55CD6123187B188E002450E2 /* CDocumentMac.h */,
-				55CD6122187B188E002450E2 /* CDocumentMac.cpp */,
+				55CD6122187B188E002450E2 /* CDocumentMac.mm */,
 				55CD6120187B14E6002450E2 /* CStackMac.h */,
 				55CD611F187B14E6002450E2 /* CStackMac.mm */,
 				559BA9D218B11E6F00760273 /* CPlatformLayer.h */,
@@ -2452,7 +2452,7 @@
 				553C470A13577334000219FA /* LEOValue.c in Sources */,
 				553C470B13577334000219FA /* LEOInterpreter.c in Sources */,
 				55405BDA18A59DB6001D3C99 /* CTimerPartMac.mm in Sources */,
-				55CD6124187B188E002450E2 /* CDocumentMac.cpp in Sources */,
+				55CD6124187B188E002450E2 /* CDocumentMac.mm in Sources */,
 				553C470C13577334000219FA /* LEOInstructions.c in Sources */,
 				553C470D13577334000219FA /* LEOScript.c in Sources */,
 				553C470E13577334000219FA /* LEODebugger.c in Sources */,

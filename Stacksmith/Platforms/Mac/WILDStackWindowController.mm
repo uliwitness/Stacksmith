@@ -18,6 +18,7 @@
 #import "WILDCardInfoViewController.h"
 #import "WILDBackgroundInfoViewController.h"
 #import "WILDStackInfoViewController.h"
+#import "UKHelperMacros.h"
 
 
 NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
@@ -674,9 +675,16 @@ using namespace Carlson;
 	}
 	else
 	{
+        @try
+        {
 		self.window.contentView = mContentView;
 		[self.window setTitle: [NSString stringWithUTF8String: mStack->GetName().c_str()]];
 		[self.window setRepresentedURL: [NSURL URLWithString: [NSString stringWithUTF8String: mStack->GetURL().c_str()]]];
+        }
+        @catch( NSException* err )
+        {
+            UKLog(@"Exception caught: %@", err);
+        }
 	}
 	NSDisableScreenUpdates();
 	if( !prevWindow )

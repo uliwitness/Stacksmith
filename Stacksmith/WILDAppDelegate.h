@@ -15,6 +15,7 @@
 	BOOL				mBackgroundEditMode;
 	id					mFlagsChangedEventMonitor;
 	IBOutlet NSMenuItem	*mNewObjectSeparator;
+	IBOutlet NSMenuItem	*mLockPseudoMenu;
 }
 
 

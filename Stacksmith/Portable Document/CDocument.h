@@ -17,6 +17,29 @@
 
 namespace Carlson {
 
+typedef CRefCountedObjectRef<CDocument>		CDocumentRef;
+
+class CDocumentManager	// Subclass this and instantiate it at startup. First subclass instantiated wins & becomes the shared singleton.
+{
+public:
+	CDocumentManager();
+	virtual ~CDocumentManager()	{};
+	
+	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock ) = 0;
+	
+	virtual void	AddDocument( CDocumentRef inDocument )	{ mOpenDocuments.push_back(inDocument); };
+	virtual void	SetPeeking( bool inState );
+	virtual void	SaveAll();
+	virtual bool	HaveDocuments()							{ return mOpenDocuments.size() > 0; };
+	
+	static CDocumentManager*	GetSharedDocumentManager();
+
+protected:
+	std::vector<CDocumentRef>	mOpenDocuments;
+	static CDocumentManager*	sSharedDocumentManager;
+};
+
+
 class CDocument : public CRefCountedObject
 {
 public:
@@ -79,8 +102,6 @@ protected:
 	
 	LEOContextGroup*								mContextGroup;
 };
-
-typedef CRefCountedObjectRef<CDocument>		CDocumentRef;
 
 }
 

@@ -20,6 +20,9 @@
 using namespace Carlson;
 
 
+CDocumentManager*	CDocumentManager::sSharedDocumentManager = NULL;
+
+
 CDocument::~CDocument()
 {
 	if( mContextGroup )
@@ -457,3 +460,37 @@ void	CDocument::Dump( size_t inNestingLevel )
 		(*itty)->Dump(2);
 	printf( "\t}\n}\n" );
 }
+
+
+CDocumentManager::CDocumentManager()
+{
+	if( sSharedDocumentManager )
+		throw std::logic_error( "Attempt to create more than one document manager." );
+	sSharedDocumentManager = this;
+}
+
+
+void	CDocumentManager::SetPeeking( bool inState )
+{
+	for( auto currDoc : mOpenDocuments )
+	{
+		currDoc->SetPeeking( inState );
+	}
+}
+
+
+void	CDocumentManager::SaveAll()
+{
+	for( auto currDoc : mOpenDocuments )
+	{
+		if( currDoc->GetNeedsToBeSaved() )
+			currDoc->Save();
+	}
+}
+
+
+/*static*/ CDocumentManager*	CDocumentManager::GetSharedDocumentManager()
+{
+	return sSharedDocumentManager;
+}
+

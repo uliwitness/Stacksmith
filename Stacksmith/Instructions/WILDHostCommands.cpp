@@ -14,6 +14,7 @@
 #include "LEOContextGroup.h"
 #include "CStack.h"
 #include "CDocument.h"
+#include "CDocumentMac.h"
 #include "CRecentCardsList.h"
 #include "CAlert.h"
 #include "CMessageBox.h"
@@ -46,11 +47,11 @@ size_t	kFirstStacksmithHostCommandInstruction = 0;
 
 
 /*!
-	Implements the 'go' command. The first (and only) parameter must be a
+	Implements the 'go' command. The first (and only required) parameter on the LEO stack must be a
 	CScriptableObjectValue (i.e. isa = kLeoValueTypeScriptableObject) on which
 	the GoThereInNewWindow() method will be called. If the parameter is a string
 	instead, we will assume it is a stack that's not yet open and attempt to
-	open that. It will remove its parameters from the stack once it is done.
+	open that. It will remove its parameters from the LEO stack once it is done.
 	
 	If the second parameter isn't empty, it is assumed to be a part from which
 	the transition is to start (e.g. if we do a "zoom" effect opening the window)
@@ -59,13 +60,15 @@ size_t	kFirstStacksmithHostCommandInstruction = 0;
 	It will use the current visual effect to perform the transition and will
 	clear the current visual effect once done.
 	
+	param1 in the instruction is a TOpenInMode that will be passed to GoThereInNewWindow().
+	
 	(WILD_GO_INSTR)
 */
 void	WILDGoInstruction( LEOContext* inContext )
 {
 //	LEODebugPrintContext( inContext );
 
-	if( (inContext->flags & kLEOContextResuming) == 0 )
+	if( (inContext->flags & kLEOContextResuming) == 0 )	// This is the actual call to this instruction, we're not resuming the script once the asynchronous 'go' has completed after pausing the script (think "continuation"):
 	{
 		LEOValuePtr				theDestination = inContext->stackEndPtr -2;
 		LEOValuePtr				theOverPart = inContext->stackEndPtr -1;
@@ -74,20 +77,41 @@ void	WILDGoInstruction( LEOContext* inContext )
 		CPart			*		overPartObject = NULL;
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
 		CRecentCardsList::GetSharedInstance()->AddCard( userData->GetStack()->GetCurrentCard() );
-		theDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
+		LEOValuePtr				theObjectDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
 		theOverPart = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -1, &kLeoValueTypeScriptableObject, inContext );
 		if( theOverPart && theOverPart->base.isa == &kLeoValueTypeScriptableObject )
 			overPartObject = dynamic_cast<CPart*>((CScriptableObject*)theOverPart->object.object);
 
-		if( theDestination && theDestination->base.isa == &kLeoValueTypeScriptableObject )
+		LEODebugPrintContext( inContext );
+
+		if( theObjectDestination && theObjectDestination->base.isa == &kLeoValueTypeScriptableObject )
 		{
-			destinationObject = (CScriptableObject*)theDestination->object.object;
+			destinationObject = (CScriptableObject*)theObjectDestination->object.object;
 		}
 		else if( theDestination )
 		{
 			char stackName[1024] = { 0 };
 			LEOGetValueAsString( theDestination, stackName, sizeof(stackName), inContext );
 			destinationObject = userData->GetStack()->GetDocument()->GetStackByName( stackName );
+			if( !destinationObject )
+			{
+				LEOPauseContext( inContext );
+				
+				LEOContextRetain( inContext );
+
+				CDocumentManager::GetSharedDocumentManager()->OpenDocumentFromURL( std::string(stackName),
+				[inContext,overPartObject,userData]( CDocument * inNewDocument )
+				{
+					LEOResumeContext( inContext );
+					
+					// +++ Should we set the result here to indicate success?
+					
+					LEOContextRelease(inContext);
+				});
+				
+				LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+				return;
+			}
 		}
 		if( destinationObject )
 		{
@@ -103,6 +127,9 @@ void	WILDGoInstruction( LEOContext* inContext )
 			[inContext]()
 			{
 				LEOResumeContext( inContext );
+				
+				// +++ Should we set the result here to indicate success?
+				
 				LEOContextRelease(inContext);
 			} );
 		}
@@ -118,10 +145,10 @@ void	WILDGoInstruction( LEOContext* inContext )
 		if( !canGoThere )
 		{
 			LEOResumeContext( inContext );
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't go there." );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't go there." ); // +++ Should we instead set the result here?
 		}
 	}
-	else
+	else	// The "go" has completed and resumed the script.
 	{
 //		LEODebugPrintContext( inContext );
 		
