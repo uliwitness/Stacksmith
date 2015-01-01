@@ -37,7 +37,7 @@ using namespace Carlson;
 
 -(void)	mouseEntered:(NSEvent *)theEvent
 {
-	if( self->owningPart->GetStack()->GetTool() == EBrowseTool )
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseEnter %ld", [theEvent buttonNumber] +1 );
@@ -47,7 +47,7 @@ using namespace Carlson;
 
 -(void)	mouseExited:(NSEvent *)theEvent
 {
-	if( self->owningPart->GetStack()->GetTool() == EBrowseTool )
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseLeave %ld", [theEvent buttonNumber] +1 );
@@ -57,7 +57,7 @@ using namespace Carlson;
 
 -(void)	mouseMoved:(NSEvent *)theEvent
 {
-	if( self->owningPart->GetStack()->GetTool() == EBrowseTool )
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseMove" );

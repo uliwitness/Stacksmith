@@ -113,6 +113,7 @@ public:
 	virtual bool				IsSelected()					{ return mSelected; };
 	virtual void				SetHighlight( bool inHighlighted )	{};
 	virtual void				PrepareMouseUp()				{};	// Sent when a mouse click was inside, right before we send mouseUp.
+	bool						GetShouldSendMouseEventsRightNow();
 	
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	

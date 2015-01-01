@@ -11,6 +11,7 @@
 #include "CLayer.h"
 #include "CStack.h"
 #include "CCursor.h"
+#include "CDocument.h"
 #include <iostream>
 #include <sstream>
 
@@ -384,6 +385,12 @@ std::string		CPart::GenerateDisplayName( const char* inTypeName )
 	else
 		strs << inTypeName << " ID " << GetID();
 	return strs.str();
+}
+
+
+bool	CPart::GetShouldSendMouseEventsRightNow()
+{
+	return GetStack()->GetTool() == EBrowseTool && !GetStack()->GetDocument()->GetPeeking();
 }
 
 
