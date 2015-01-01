@@ -25,7 +25,7 @@ namespace Carlson {
 class CMoviePlayerPartMac : public CMoviePlayerPart, public CMacPartBase
 {
 public:
-	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil), mRateObserver(nil), mLastNotifiedRate(0.0), mCurrentMovie(nil) {};
+	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil), mRateObserver(nil), mLastNotifiedRate(0.0), mCurrentMovie(nil), mTimeObserver(NULL) {};
 
 	virtual void		WakeUp();
 	virtual void		GoToSleep();
@@ -69,6 +69,7 @@ protected:
 	AVPlayer				*	mCurrentMovie;
 	id							mRateObserver;
 	float						mLastNotifiedRate;
+	NSObject				*	mTimeObserver;
 };
 
 

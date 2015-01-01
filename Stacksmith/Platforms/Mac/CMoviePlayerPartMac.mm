@@ -42,6 +42,7 @@ void	CMoviePlayerPartMac::GoToSleep()
 			[mCurrentMovie jcsRemoveObserver: mRateObserver];
 			mRateObserver = nil;
 		}
+		DESTROY(mTimeObserver);
 		DESTROY(mCurrentMovie);
 	}
 	
@@ -89,6 +90,7 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 
 void	CMoviePlayerPartMac::DestroyView()
 {
+	DESTROY(mTimeObserver);
 	if( mCurrentMovie )
 		mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 	if( mRateObserver )
@@ -167,15 +169,18 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 	{
 		ASSIGN(mCurrentMovie,[AVPlayer playerWithURL: movieURL]);
 		mCurrentMovie.actionAtItemEnd = AVPlayerActionAtItemEndPause;
-		SetUpRateObserver();
+		DESTROY(mRateObserver);
 	}
 	mView.player = mCurrentMovie;
+	if( !mRateObserver )
+		SetUpRateObserver();
 	[mCurrentMovie seekToTime: CMTimeMakeWithSeconds( mCurrentTime / 60.0, 1)];
 }
 
 
 void	CMoviePlayerPartMac::SetUpRateObserver()
 {
+	DESTROY(mRateObserver);
 	mRateObserver = [mCurrentMovie jcsAddObserverForKeyPath: PROPERTY(rate) options: NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew queue: [NSOperationQueue mainQueue] block: ^(NSDictionary *change)
 	{
 		const char*	msg = NULL;
@@ -195,6 +200,19 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 			mLastNotifiedRate = theRate;
 		}
 	}];
+
+	DESTROY(mTimeObserver);
+	mTimeObserver = [[mView.player addPeriodicTimeObserverForInterval: CMTimeMakeWithSeconds( 7.0 * 24.0 * 60.0 * 60.0, 1 ) queue: dispatch_get_main_queue() usingBlock:
+	^( CMTime time )
+	{
+		LEOInteger	newTime = CMTimeGetSeconds( time ) * 60;
+		if( newTime != mCurrentTime )
+		{
+			CAutoreleasePool		pool;
+			this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ /*CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs );*/ }, "timeChange %d", newTime );
+			mCurrentTime = newTime;
+		}
+	}] retain];
 }
 
 
