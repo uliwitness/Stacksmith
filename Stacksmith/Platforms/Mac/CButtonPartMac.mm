@@ -289,7 +289,24 @@ void	CButtonPartMac::DestroyView()
 void	CButtonPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CButtonPart::SetRect( left, top, right, bottom );
-	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	NSRect		box = NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop);
+	if( mButtonStyle == EButtonStyleStandard )
+	{
+		box = NSInsetRect( box, -5, -3 );
+		box.size.height += 3;
+	}
+	else if( mButtonStyle == EButtonStyleDefault )
+	{
+		box = NSInsetRect( box, -5, -3 );
+		box.size.height += 3;
+	}
+	else if( mButtonStyle == EButtonStylePopUp )
+	{
+		box = NSInsetRect( box, -1, 0 );
+		box.size.width += 1;
+		box.origin.y += 1;
+	}
+	[mView setFrame: box];
 	GetStack()->RectChangedOfPart( this );
 }
 
