@@ -120,11 +120,11 @@ bool	CDocument::Save()
 	if( mURL.find("file://") != 0 )
 		return false;
 	destPath = mURL.substr( 7 );
-	size_t	lpcStart = destPath.rfind('/');
-	if( lpcStart == std::string::npos )
-		return false;
-	destPath = destPath.substr(0,lpcStart);
-	destPath.append(1,'/');
+//	size_t	lpcStart = destPath.rfind('/');
+//	if( lpcStart == std::string::npos )
+//		return false;
+//	destPath = destPath.substr(0,lpcStart);
+//	destPath.append(1,'/');
 	
 	if( mChangeCount != 0 || mLastEditedVersion.compare( "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION) ) != 0 )	// Project itself (property or stack/media lists) changed, or this file was last written by another version of Stacksmith and we need to update 'last edited version'?
 	{

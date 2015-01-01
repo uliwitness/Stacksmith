@@ -29,7 +29,9 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
         UKLog(@"Entered");
         
         std::string		fileURL( inURL );
-        fileURL.append("/project.xml");
+		if( fileURL.length() > 0 && fileURL[fileURL.length() -1] != '/' )
+			fileURL.append( 1, '/' );
+        fileURL.append("project.xml");
         size_t	foundPos = fileURL.find("x-stack://");
         size_t	foundPos2 = fileURL.find("file://");
         if( foundPos == 0 )
@@ -40,7 +42,9 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
             if( ![[NSURL URLWithString: [NSString stringWithUTF8String: fileURL.c_str()]]checkResourceIsReachableAndReturnError: &err] )	// File not found?
             {
                 fileURL = inURL;
-                fileURL.append("/toc.xml");	// +++ old betas used toc.xml for the main file.
+				if( fileURL.length() > 0 && fileURL[fileURL.length() -1] != '/' )
+					fileURL.append( 1, '/' );
+                fileURL.append("toc.xml");	// +++ old betas used toc.xml for the main file.
             }
         }
 		
@@ -110,11 +114,11 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
     catch( std::exception& inException )
     {
         UKLog( @"Exception caught: %s", inException.what() );
-        return inCompletionBlock(NULL);
+        inCompletionBlock(NULL);
     }
     catch( ... )
     {
         UKLog( @"Unknown exception caught" );
-        return inCompletionBlock(NULL);
+        inCompletionBlock(NULL);
     }
 }

@@ -249,6 +249,8 @@ bool	CLayer::Save( const std::string& inPackagePath )
 	if( styleSheet.length() > 0 )
 	{
 		std::string	destStylesPath(inPackagePath);
+		if( destStylesPath.length() > 0 && destStylesPath[destStylesPath.length() -1] != '/' )
+			destStylesPath.append(1,'/');
 		std::stringstream	destStylesName;
 		destStylesName << "stylesheet_card_" << mID << ".css";
 		destStylesPath.append(destStylesName.str());
@@ -267,6 +269,8 @@ bool	CLayer::Save( const std::string& inPackagePath )
 	}
 
 	std::string	destPath(inPackagePath);
+	if( destPath.length() > 0 && destPath[destPath.length() -1] != '/' )
+		destPath.append(1,'/');
 	destPath.append( mFileName );
 	FILE*	theFile = fopen( destPath.c_str(), "w" );
 	if( !theFile )
