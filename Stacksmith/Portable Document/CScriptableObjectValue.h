@@ -89,6 +89,7 @@ public:
 	virtual bool				SetUserPropertyValueForName( const std::string& inValue, const char* inPropName )	{ return false; };
 	
 	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
+	virtual bool				HasMessageHandler( const char* inMsgName );	// To find whether this object implements the given message (e.g. to not ask the OS for mouseMoved events unless actually implemented).
 	
 	virtual LEOContextGroup*	GetScriptContextGroupObject()				{ return NULL; };
 	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );

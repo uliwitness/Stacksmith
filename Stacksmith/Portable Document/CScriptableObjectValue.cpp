@@ -743,6 +743,23 @@ void	CScriptableObject::ContextCompletedProc( LEOContext *ctx )
 }
 
 
+bool	CScriptableObject::HasMessageHandler( const char* inMsgName )
+{
+	LEOScript*	theScript = GetScriptObject(NULL);
+	if( !theScript )
+		return false;
+	
+	LEOContextGroup*	contextGroup = GetScriptContextGroupObject();
+	LEOHandlerID		handlerID = LEOContextGroupHandlerIDForHandlerName( contextGroup, inMsgName );
+	if( handlerID == kLEOHandlerIDINVALID )
+		return false;
+	
+	LEOHandler*	foundHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
+	
+	return foundHandler != NULL;
+}
+
+
 void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... )
 {
 #if 0

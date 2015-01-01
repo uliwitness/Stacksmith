@@ -14,6 +14,7 @@
 #include "CAlert.h"
 #include "CStack.h"
 #include "UTF8UTF32Utilities.h"
+#import "UKHelperMacros.h"
 
 
 using namespace Carlson;
@@ -163,15 +164,14 @@ void	CFieldPartMac::DestroyView()
 		mTextView.owningPart = NULL;
 	if( mTableView )
 		mTableView.owningPart = NULL;
+	if( mView )
+		mView.owningPart = NULL;
 	[mView removeFromSuperview];
-	[mView release];
-	mView = nil;
+	DESTROY(mView);
 	mTableView = nil;
 	mTextView = nil;
-	[mMacDelegate release];
-	mMacDelegate = nil;
+	DESTROY(mMacDelegate);
 }
-
 
 
 void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
@@ -194,6 +194,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTableView setAction: @selector(tableViewRowClicked:)];
 		[mTableView setDoubleAction: @selector(tableViewRowDoubleClicked:)];
 		mView = (WILDScrollView*) [[mTableView enclosingScrollView] retain];
+		mView.owningPart = this;
 	}
 	else
 	{
@@ -201,6 +202,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		mTextView.owningPart = this;
 		mTextView.delegate = mMacDelegate;
 		mView = (WILDScrollView*) [[mTextView enclosingScrollView] retain];
+		mView.owningPart = this;
 		[mTextView setDrawsBackground: NO];
 		[mTextView setBackgroundColor: [NSColor clearColor]];
 	}
@@ -845,4 +847,13 @@ NSView*	CFieldPartMac::GetView()
 {
 	return mView;
 }
+
+
+void	CFieldPartMac::SetScript( std::string inScript )
+{
+	CFieldPart::SetScript( inScript );
+	
+	[mView updateTrackingAreas];
+}
+
 

@@ -7,15 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#include "CPart.h"
 
 
 @interface WILDScrollView : NSScrollView
 {
 	NSColor			*	lineColor;
 	CGFloat				lineWidth;
+	NSTrackingArea	*	mCursorTrackingArea;
+	Carlson::CPart	*	owningPart;
 }
 
 @property (retain,nonatomic) NSColor		*	lineColor;
 @property (assign,nonatomic) CGFloat			lineWidth;
+@property (assign,nonatomic) Carlson::CPart	*	owningPart;
 
 @end

@@ -49,6 +49,7 @@ public:
 	virtual void		SetShadowBlurRadius( double r );
 	virtual void		SetLineWidth( int w );
 	virtual void		SetToolTip( const std::string& inToolTip )	{ CMoviePlayerPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
+	virtual void		SetScript( std::string inScript );
 
 	virtual NSView*		GetView();
 	virtual Class		GetPropertyEditorClass()	{ return [WILDMoviePlayerInfoViewController class]; };

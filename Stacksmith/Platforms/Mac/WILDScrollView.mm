@@ -1,12 +1,12 @@
 //
-//  WILDInvisiblePlayerView.mm
+//  WILDScrollView.m
 //  Stacksmith
 //
-//  Created by Uli Kusterer on 2014-03-02.
-//  Copyright (c) 2014 Uli Kusterer. All rights reserved.
+//  Created by Uli Kusterer on 09.05.10.
+//  Copyright 2010 Uli Kusterer. All rights reserved.
 //
 
-#import "WILDInvisiblePlayerView.h"
+#import "WILDScrollView.h"
 #import "UKHelperMacros.h"
 #include "CStack.h"
 #include "CRefCountedObject.h"
@@ -16,45 +16,81 @@
 using namespace Carlson;
 
 
-@implementation WILDInvisiblePlayerView
+@implementation WILDScrollView
 
-@synthesize owningPart = owningPart;
+@synthesize lineColor;
+@synthesize lineWidth;
+@synthesize owningPart;
+
+-(id)	initWithFrame: (NSRect)inBox
+{
+	self = [super initWithFrame: inBox];
+	if( self )
+	{
+		lineColor = [[NSColor blackColor] retain];
+		lineWidth = 1.0;
+	}
+	return self;
+}
+
+
+-(id)	initWithCoder: (NSCoder *)aDecoder
+{
+	self = [super initWithCoder: aDecoder];
+	if( self )
+	{
+		lineColor = [[NSColor blackColor] retain];
+		lineWidth = 1.0;
+	}
+	return self;
+}
 
 
 -(void)	dealloc
 {
+	DESTROY_DEALLOC(lineColor);
 	DESTROY_DEALLOC(mCursorTrackingArea);
-
+	
 	[super dealloc];
 }
 
--(void)	mouseDown: (NSEvent *)theEvent
+
+-(void)	drawRect: (NSRect)dirtyRect
 {
-	if( owningPart )
+	if( [self borderType] == NSLineBorder )
 	{
-		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "mouseDown %ld", [theEvent buttonNumber] );
+		[[self backgroundColor] set];
+		NSRectFill( dirtyRect );
+		
+		if( lineWidth > 0 )
+		{
+			NSRect	lineBox = self.bounds;
+			lineBox.origin.x += lineWidth / 2.0;
+			lineBox.origin.y += lineWidth / 2.0;
+			lineBox.size.width -= lineWidth / 2.0;
+			lineBox.size.height -= lineWidth / 2.0;
+			[lineColor set];
+			[NSBezierPath setDefaultLineWidth: lineWidth];
+			[NSBezierPath strokeRect: lineBox];
+			[NSBezierPath setDefaultLineWidth: 1.0];
+		}
 	}
+	else
+		[super drawRect: dirtyRect];
 }
 
 
--(void)	mouseDragged: (NSEvent *)theEvent
+-(void)	setLineColor: (NSColor*)theColor
 {
-	if( owningPart )
-	{
-		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "mouseDrag %ld", [theEvent buttonNumber] );
-	}
+	ASSIGN(self->lineColor,theColor);
+	[self setNeedsDisplay: YES];
 }
 
 
--(void)	mouseUp: (NSEvent *)theEvent
+-(void)	setLineWidth: (CGFloat)inLineWidth
 {
-	if( owningPart )
-	{
-		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "mouseUp %ld", [theEvent buttonNumber] );
-	}
+	self->lineWidth = inLineWidth;
+	[self setNeedsDisplay: YES];
 }
 
 

@@ -11,6 +11,9 @@
 
 
 @interface WILDInvisiblePlayerView : ULIInvisiblePlayerView
+{
+	NSTrackingArea	*	mCursorTrackingArea;
+}
 
 @property (assign) Carlson::CMoviePlayerPart*	owningPart;
 

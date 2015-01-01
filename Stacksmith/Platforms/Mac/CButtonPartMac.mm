@@ -352,4 +352,12 @@ void	CButtonPartMac::SetIconID( ObjectID inID )
 }
 
 
+void	CButtonPartMac::SetScript( std::string inScript )
+{
+	CButtonPart::SetScript( inScript );
+	
+	[mView updateTrackingAreas];
+}
+
+
 

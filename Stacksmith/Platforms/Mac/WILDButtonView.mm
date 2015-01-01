@@ -35,6 +35,36 @@ using namespace Carlson;
 }
 
 
+-(void)	mouseEntered:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetStack()->GetTool() == EBrowseTool )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseEnter %ld", [theEvent buttonNumber] +1 );
+	}
+}
+
+
+-(void)	mouseExited:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetStack()->GetTool() == EBrowseTool )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseLeave %ld", [theEvent buttonNumber] +1 );
+	}
+}
+
+
+-(void)	mouseMoved:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetStack()->GetTool() == EBrowseTool )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseMove" );
+	}
+}
+
+
 -(void)	mouseDown: (NSEvent*)event
 {
 	BOOL					keepLooping = YES;
@@ -141,6 +171,31 @@ using namespace Carlson;
 	if( !currentCursor )
 		currentCursor = [NSCursor arrowCursor];
 	[self addCursorRect: [self bounds] cursor: currentCursor];
+}
+
+
+-(void)	updateTrackingAreas
+{
+	[super updateTrackingAreas];
+	
+	if( mCursorTrackingArea )
+	{
+		[self removeTrackingArea: mCursorTrackingArea];
+		DESTROY(mCursorTrackingArea);
+	}
+	NSTrackingAreaOptions	trackingOptions = 0;
+	
+	if( self.owningPart->HasMessageHandler("mouseEnter") || self.owningPart->HasMessageHandler("mouseLeave") )
+		trackingOptions |= NSTrackingMouseEnteredAndExited;
+	if( self.owningPart->HasMessageHandler("mouseMove") )
+		trackingOptions |= NSTrackingMouseMoved;
+	
+	if( trackingOptions != 0 )
+	{
+		trackingOptions |= NSTrackingActiveInActiveApp;
+		mCursorTrackingArea = [[NSTrackingArea alloc] initWithRect: self.bounds options: trackingOptions owner: self userInfo: nil];
+		[self addTrackingArea: mCursorTrackingArea];
+	}
 }
 
 

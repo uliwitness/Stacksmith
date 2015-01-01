@@ -56,6 +56,7 @@ public:
 	virtual void	GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs );
 	virtual void	SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs );
 	virtual void	SetToolTip( const std::string& inToolTip )	{ CFieldPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
+	virtual void	SetScript( std::string inScript );
 	
 	virtual NSView*	GetView();
 	virtual NSDictionary*			GetCocoaAttributesForPart();

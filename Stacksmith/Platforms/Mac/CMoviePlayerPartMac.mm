@@ -319,3 +319,11 @@ NSView*	CMoviePlayerPartMac::GetView()
 	return mView;
 }
 
+
+void	CMoviePlayerPartMac::SetScript( std::string inScript )
+{
+	CMoviePlayerPart::SetScript( inScript );
+	
+	[mView updateTrackingAreas];
+}
+
