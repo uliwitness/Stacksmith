@@ -261,6 +261,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
+	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
 }
 

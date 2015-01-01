@@ -82,6 +82,7 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	mView.owningPart = this;
 	SetUpMoviePlayer();
+	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
 }
 

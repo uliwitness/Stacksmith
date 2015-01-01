@@ -36,6 +36,7 @@ using namespace Carlson;
 @synthesize contentsEditorButton;
 @synthesize lineWidthSlider;
 @synthesize userPropertyEditor;
+@synthesize toolTipField;
 
 
 -(id)	initWithPart: (CPart*)inPart
@@ -69,6 +70,7 @@ using namespace Carlson;
 	DESTROY(contentsEditorButton);
 	DESTROY(lineWidthSlider);
 	DESTROY(userPropertyEditor);
+	DESTROY(toolTipField);
 	
 	[super dealloc];
 }
@@ -101,6 +103,7 @@ using namespace Carlson;
 		[shadowBlurRadiusSlider setDoubleValue: visPart->GetShadowBlurRadius()];
 		[shadowOffsetSlider setDoubleValue: visPart->GetShadowOffsetWidth()];
 		[lineWidthSlider setDoubleValue: visPart->GetLineWidth()];
+		[toolTipField setStringValue: [NSString stringWithUTF8String: visPart->GetToolTip().c_str()]];
 	}
 	else
 	{
@@ -112,6 +115,7 @@ using namespace Carlson;
 		[shadowBlurRadiusSlider setEnabled: NO];
 		[shadowOffsetSlider setEnabled: NO];
 		[lineWidthSlider setEnabled: NO];
+		[toolTipField setEnabled: NO];
 	}
 }
 
@@ -197,7 +201,17 @@ using namespace Carlson;
 -(void)	controlTextDidChange: (NSNotification *)notif
 {
 	if( [notif object] == nameField )
+	{
 		part->SetName( std::string( nameField.stringValue.UTF8String, [nameField.stringValue lengthOfBytesUsingEncoding: NSUTF8StringEncoding] ) );
+	}
+	else if( [notif object] == toolTipField )
+	{
+		CVisiblePart*	visPart = dynamic_cast<CVisiblePart*>(part);
+		if( visPart )
+		{
+			visPart->SetToolTip( std::string( toolTipField.stringValue.UTF8String, [toolTipField.stringValue lengthOfBytesUsingEncoding: NSUTF8StringEncoding] ) );
+		}
+	}
 }
 
 @end
