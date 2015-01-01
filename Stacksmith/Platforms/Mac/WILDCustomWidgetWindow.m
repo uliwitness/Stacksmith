@@ -30,8 +30,8 @@
 	{
 		NSButton*	rightmostButton = [self standardWindowButton: NSWindowCloseButton];	// If this was generic code, I'd fall back on other window buttons here if the window doesn't support fullscreen, and maybe the toolbar button on older OSes.
 		NSRect		box = rightmostButton.frame;
-		box.origin.x = rightmostButton.superview.frame.size.width - 58;
-		box.origin.y -= 2;
+		box.origin.x = rightmostButton.superview.frame.size.width - 54;
+		box.origin.y -= 3;
 		box.size.width = 48;
 		NSView*		superView = rightmostButton.superview;	// Use same superview as another widget, as DTS recommended.
 		self.customWidget = [[[NSButton alloc] initWithFrame: box] autorelease];
