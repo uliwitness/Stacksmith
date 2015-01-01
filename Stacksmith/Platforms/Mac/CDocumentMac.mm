@@ -43,7 +43,23 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
                 fileURL.append("/toc.xml");	// +++ old betas used toc.xml for the main file.
             }
         }
-        
+		
+		size_t			slashOffset = fileURL.rfind( '/' );
+		if( slashOffset == std::string::npos )
+			slashOffset = 0;
+		std::string		slashlessFileURL = fileURL.substr(0,slashOffset);
+		
+		// If the document already exists, open the stack:
+		for( auto currDoc : mOpenDocuments )
+		{
+			if( currDoc->GetURL().compare( slashlessFileURL ) == 0 )
+			{
+				currDoc->GetStack(0)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); } );
+				return;
+			}
+		}
+		
+		// Wasn't already open? Create a new one and load the URL into it:
         mOpenDocuments.push_back( new CDocumentMac() );
         CDocumentRef	currDoc = mOpenDocuments.back();
         

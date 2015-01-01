@@ -51,7 +51,8 @@ public:
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	
-	std::string			GetURL()					{ return mURL; };
+	std::string			GetURL()							{ return mURL; };
+	void				SetURL( const std::string& inURL )	{ mURL = inURL; };
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
 	CStack*				GetStackWithID( ObjectID inID );
 	size_t				GetNumStacks()				{ return mStacks.size(); };
