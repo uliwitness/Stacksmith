@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>Mouse Events</string>
+		<key>WILDHandlerGroupRow</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseUp</string>
+		<key>WILDHandlerDescription</key>
+		<string>React to a click in the card window.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDown</string>
+		<key>WILDHandlerDescription</key>
+		<string>React to the mouse being held down somewhere in the card window.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDrag</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse is being held down and moving while over an object in the card window.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseUpOutside</string>
+		<key>WILDHandlerDescription</key>
+		<string>A click was started somewhere in the card window but not released inside that object.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseUpInLink</string>
+		<key>WILDHandlerDescription</key>
+		<string>A link in a text field was clicked. </string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDoubleClick</string>
+		<key>WILDHandlerDescription</key>
+		<string>A double click in the card window completed.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseEnter</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse arrow has moved onto an object in the card window.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseMove</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse arrow has moved while over an object in the card window.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseLeave</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse arrow has moved off an object in the card window after being inside.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>Movie Player Events</string>
+		<key>WILDHandlerGroupRow</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>playMovie</string>
+		<key>WILDHandlerDescription</key>
+		<string>Playback of a movie player has started.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>stopMovie</string>
+		<key>WILDHandlerDescription</key>
+		<string>Playback of a movie player has stopped.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>timeChanged</string>
+		<key>WILDHandlerDescription</key>
+		<string>The playback time of a movie player was changed (e.g. by dragging the playhead).</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>Card Events</string>
+		<key>WILDHandlerGroupRow</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>openCard</string>
+		<key>WILDHandlerDescription</key>
+		<string>The current card just changed, prepare this card for the user.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>closeCard</string>
+		<key>WILDHandlerDescription</key>
+		<string>The current card is about to change, last chance for clean-up.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>Stack Events</string>
+		<key>WILDHandlerGroupRow</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>closeStack</string>
+		<key>WILDHandlerDescription</key>
+		<string>The current stack is about to change, last chance for clean-up.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>openStack</string>
+		<key>WILDHandlerDescription</key>
+		<string>The current stack just changed, prepare this stack for the user.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>Field Events</string>
+		<key>WILDHandlerGroupRow</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>selectionChange</string>
+		<key>WILDHandlerDescription</key>
+		<string>The text selection in a text field has changed.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseUpInLink</string>
+		<key>WILDHandlerDescription</key>
+		<string>A link in a text field was clicked. </string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>openField</string>
+		<key>WILDHandlerDescription</key>
+		<string>A text field has been given keyboard focus.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>closeField</string>
+		<key>WILDHandlerDescription</key>
+		<string>A text field is about to lose keyboard focus.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>keyDown</string>
+		<key>WILDHandlerDescription</key>
+		<string>A key was pressed on the keyboard.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>tabKey</string>
+		<key>WILDHandlerDescription</key>
+		<string>The tab key was pressed on the keyboard.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>arrowKey</string>
+		<key>WILDHandlerDescription</key>
+		<string>One of the arrow keys was pressed on the keyboard.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>functionKey</string>
+		<key>WILDHandlerDescription</key>
+		<string>One of the function keys was pressed on the keyboard.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>Web Browser Events</string>
+		<key>WILDHandlerGroupRow</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>loadPage</string>
+		<key>WILDHandlerDescription</key>
+		<string>The web page has finished loading.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>Editor Events</string>
+		<key>WILDHandlerGroupRow</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDownWhilePeeking</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDragWhilePeeking</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been held and moved while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseUpWhilePeeking</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDoubleDownWhilePeeking</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been double-clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDoubleClickWhilePeeking</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been double-clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDownWhileEditing</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been clicked while the pointer tool is active.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDragWhileEditing</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been held and moved while the pointer tool is active.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseUpWhileEditing</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been clicked while the pointer tool is active.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDoubleDownWhileEditing</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been double-clicked while the pointer tool is active.</string>
+	</dict>
+	<dict>
+		<key>WILDHandlerName</key>
+		<string>mouseDoubleClickWhileEditing</string>
+		<key>WILDHandlerDescription</key>
+		<string>The mouse has been double-clicked while the pointer tool is active.</string>
+	</dict>
+</array>
+</plist>
