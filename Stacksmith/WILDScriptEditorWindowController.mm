@@ -276,21 +276,15 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	}
 	else
 	{
-		[self addHandlerNamed: handlerName];
+		NSString	*	str = [inDictionary objectForKey: @"WILDHandlerTemplate"];
+		if( !str )
+			str = [NSString stringWithFormat: @"\n\non %1$@\n\t\nend %1$@", handlerName];
+		NSMutableAttributedString	*	attrStr = [[NSMutableAttributedString alloc] initWithString: str attributes: mSyntaxController.defaultTextAttributes];
+		[mTextView.textStorage appendAttributedString: attrStr];
+		
+		[self reformatText];
 	}
 	[mAddHandlersPopover close];
-}
-
-
--(void)	addHandlerNamed: (NSString*)handlerName
-{
-	//[mTextView.textStorage beginEditing];
-	NSString	*	str = [NSString stringWithFormat: @"\n\non %1$@\n\t\nend %1$@", handlerName];
-	NSMutableAttributedString	*	attrStr = [[NSMutableAttributedString alloc] initWithString: str attributes: mSyntaxController.defaultTextAttributes];
-	[mTextView.textStorage appendAttributedString: attrStr];
-	//[mTextView.textStorage endEditing];
-	
-	[self reformatText];
 }
 
 

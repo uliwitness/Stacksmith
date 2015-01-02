@@ -173,6 +173,12 @@
 	<dict>
 		<key>WILDHandlerName</key>
 		<string>functionKey</string>
+		<key>WILDHandlerTemplate</key>
+		<string>
+
+on functionKey fKeyNumber,modifier1,modifier2,modifier3,modifier4
+
+end functionKey</string>
 		<key>WILDHandlerDescription</key>
 		<string>One of the function keys was pressed on the keyboard.</string>
 	</dict>
