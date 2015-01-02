@@ -218,10 +218,8 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 
 void	CMoviePlayerPartMac::SetUpMoviePlayerControls()
 {
-	if( (mRight -mLeft) > 432 )
+	if( (mRight -mLeft) > 160 && (mBottom -mTop) > 80 )
 		[(AVPlayerView*)mView setControlsStyle: AVPlayerViewControlsStyleFloating];
-	else if( (mRight -mLeft) > 150 )
-		[(AVPlayerView*)mView setControlsStyle: AVPlayerViewControlsStyleInline];
 	else
 		[(AVPlayerView*)mView setControlsStyle: AVPlayerViewControlsStyleMinimal];
 }
