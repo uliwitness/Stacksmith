@@ -69,24 +69,26 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 
 -(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
-	return [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"];
+	NSString*	 desc = [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerDescription"];
+	if( desc )
+	{
+		NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString:[[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"] attributes: @{ NSFontAttributeName: [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]] }] autorelease];
+		NSMutableAttributedString	*	greyDesc = [[[NSMutableAttributedString alloc] initWithString: [@" • " stringByAppendingString: desc] attributes: @{ NSFontAttributeName: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]], NSForegroundColorAttributeName: [NSColor grayColor] }] autorelease];
+		
+		[attrStr appendAttributedString: greyDesc];
+		
+		return attrStr;
+	}
+	else
+	{
+		return [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"];
+	}
 }
 
 
 -(BOOL)	tableView: (NSTableView *)tableView isGroupRow: (NSInteger)row
 {
 	return [[[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerGroupRow"] boolValue];
-}
-
-
--(NSString *)	tableView: (NSTableView *)tableView toolTipForCell: (NSCell *)cell rect: (NSRectPointer)rect tableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row mouseLocation: (NSPoint)mouseLocation
-{
-	if( ![[[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerGroupRow"] boolValue] )
-	{
-		return [NSString stringWithFormat: @"%@ - %@", [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"], [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerDescription"]];
-	}
-	else
-		return [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"];
 }
 
 
