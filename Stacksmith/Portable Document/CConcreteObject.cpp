@@ -94,7 +94,7 @@ LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size
 				mScriptObject = NULL;
 			}
 		}
-		else
+		else if( errorHandler )
 			errorHandler( NULL, SIZE_T_MAX, SIZE_T_MAX, this );
 	}
 	

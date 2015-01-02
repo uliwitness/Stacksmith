@@ -78,14 +78,44 @@ bool	CBackground::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 }
 
 
-bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart )
+bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
 {
 	CCard*	searchStart = GetStack()->GetCurrentCard();
 	if( searchStart && searchStart->GetBackground() == this )
-		return searchStart->GoThereInNewWindow( inOpenInMode, oldStack, overPart );
+		return searchStart->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler );
 	else
-		return GetStack()->GetCardWithBackground( this, searchStart )->GoThereInNewWindow( inOpenInMode, oldStack, overPart );
+		return GetStack()->GetCardWithBackground( this, searchStart )->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler );
 	return false;
+}
+
+
+void	CBackground::LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet )
+{
+	CPartContents*	pc = new CPartContents( this, currBgContents, inStyleSheet );
+	mContents.push_back( pc );
+	pc->Release();
+}
+
+
+void	CBackground::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents, CStyleSheet * inStyleSheet )
+{
+	if( haveBgContents )
+	{
+		CPartContents*	pc = new CPartContents( this, currCardContents, inStyleSheet );
+		pc->SetID( newPart->GetID() );
+		mStack->GetCurrentCard()->AddPartContents( pc );
+		pc->Release();
+	}
+	else
+	{
+		if( !newPart->GetSharedText() )
+			newPart->SetSharedText( true );
+		CPartContents*	pc = new CPartContents( this, currCardContents, inStyleSheet );
+		pc->SetID( newPart->GetID() );
+		pc->SetIsOnBackground( true );
+		mContents.push_back( pc );
+		pc->Release();
+	}
 }
 
 
@@ -98,6 +128,16 @@ std::string		CBackground::GetDisplayName()
 		strs << "Background ID " << GetID();
 	return strs.str();
 }
+
+
+void	CBackground::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
+{
+	std::vector<CPartRef>	parts( mParts );
+	if( !GetStack()->GetEditingBackground() )
+		GetStack()->GetCurrentCard()->AddPartsToList( parts );
+	CPlatformLayer::CorrectRectOfPart( inMovedPart, parts, partsToCorrect, ioLeft, ioTop, ioRight, ioBottom, addGuidelineBlock );
+}
+
 
 
 

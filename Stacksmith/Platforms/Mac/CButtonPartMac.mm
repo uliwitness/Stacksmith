@@ -127,7 +127,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	else
 	{
 		[mView setState: GetHighlight() ? NSOnState : NSOffState];
-		[mView setTitle: [NSString stringWithUTF8String: mName.c_str()]];
+		[mView setTitle: mShowName ? [NSString stringWithUTF8String: mName.c_str()] : @""];
 		if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
 		{
 			[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
@@ -144,20 +144,17 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mIconID != 0 )
 	{
-		std::string	iconURL = GetDocument()->GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
-		if( iconURL.length() > 0 )
+		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mIconID, EMediaTypeIcon, [this](WILDNSImagePtr theIcon)
 		{
-			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]]autorelease];
 			[mView setImage: theIcon];
-			[mView setImagePosition: NSImageAbove];
+			[mView setImagePosition: mShowName ? NSImageAbove : NSImageOnly];
 			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
-		}
-		else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
-			[mView setImagePosition: NSNoImage];
+		} );
 	}
 	else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
 		[mView setImagePosition: NSNoImage];
 	[mView setEnabled: mEnabled];
+	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
 }
 
@@ -227,6 +224,37 @@ void	CButtonPartMac::SetHighlightForTracking( bool inHighlight )
 }
 
 
+void	CButtonPartMac::SetShowName( bool inShowName )
+{
+	CButtonPart::SetShowName( inShowName );
+	
+	if( inShowName )
+		[mView setTitle: [NSString stringWithUTF8String: GetName().c_str()]];
+	else
+		[mView setTitle: @""];
+	if( mIconID != 0 )
+	{
+		std::string	iconURL = GetDocument()->GetMediaCache().GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
+		if( iconURL.length() > 0 )
+		{
+			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]] autorelease];
+			[mView setImagePosition: inShowName ? NSImageAbove : NSImageOnly];
+			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
+			[mView setImage: theIcon];
+		}
+		else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+		{
+			[mView setImagePosition: NSNoImage];
+		}
+	}
+	else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+	{
+		[mView setImagePosition: NSNoImage];
+	}
+	[mView setNeedsDisplay: YES];
+}
+
+
 void	CButtonPartMac::PrepareMouseUp()
 {
 	if( mButtonStyle == EButtonStylePopUp )
@@ -262,7 +290,24 @@ void	CButtonPartMac::DestroyView()
 void	CButtonPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CButtonPart::SetRect( left, top, right, bottom );
-	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	NSRect		box = NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop);
+	if( mButtonStyle == EButtonStyleStandard )
+	{
+		box = NSInsetRect( box, -5, -3 );
+		box.size.height += 3;
+	}
+	else if( mButtonStyle == EButtonStyleDefault )
+	{
+		box = NSInsetRect( box, -5, -3 );
+		box.size.height += 3;
+	}
+	else if( mButtonStyle == EButtonStylePopUp )
+	{
+		box = NSInsetRect( box, -1, 0 );
+		box.size.width += 1;
+		box.origin.y += 1;
+	}
+	[mView setFrame: box];
 	GetStack()->RectChangedOfPart( this );
 }
 
@@ -279,19 +324,39 @@ void	CButtonPartMac::SetIconID( ObjectID inID )
 
 	if( mIconID != 0 )
 	{
-		std::string	iconURL = GetDocument()->GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
+		std::string	iconURL = GetDocument()->GetMediaCache().GetMediaURLByIDOfType( mIconID, EMediaTypeIcon );
 		if( iconURL.length() > 0 )
 		{
 			NSImage*	theIcon = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: iconURL.c_str()]]]autorelease];
 			[mView setImage: theIcon];
-			[mView setImagePosition: NSImageAbove];
+			[mView setImagePosition: mShowName ? NSImageAbove : NSImageOnly];
 			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		}
 		else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+		{
 			[mView setImagePosition: NSNoImage];
+			if( mShowName )
+				[mView setTitle: [NSString stringWithUTF8String: GetName().c_str()]];
+			else
+				[mView setTitle: @""];
+		}
 	}
 	else if( mButtonStyle != EButtonStyleCheckBox && mButtonStyle != EButtonStyleRadioButton )
+	{
 		[mView setImagePosition: NSNoImage];
+		if( mShowName )
+			[mView setTitle: [NSString stringWithUTF8String: GetName().c_str()]];
+		else
+			[mView setTitle: @""];
+	}
+}
+
+
+void	CButtonPartMac::SetScript( std::string inScript )
+{
+	CButtonPart::SetScript( inScript );
+	
+	[mView updateTrackingAreas];
 }
 
 

@@ -13,6 +13,7 @@
 #include "CMacPartBase.h"
 #include "CStackMac.h"
 #include "CDocument.h"
+#import "UKHelperMacros.h"
 
 
 using namespace Carlson;
@@ -21,7 +22,83 @@ using namespace Carlson;
 static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEditorTopAreaToolbarItemIdentifier";
 
 
-@interface WILDScriptEditorWindowController () <NSToolbarDelegate>
+
+@protocol WILDScriptEditorHandlerListDelegate <NSObject>
+
+-(void)	scriptEditorAddHandlersPopupDidSelectHandler: (NSDictionary*)inDictionary;
+
+@end
+
+
+@interface WILDScriptEditorHandlerListPopoverViewController : NSViewController <NSTableViewDataSource>
+{
+	NSArray*		mHandlerList;
+}
+
+@property (nonatomic,assign) IBOutlet NSTableView*		handlersTable;
+@property (nonatomic,assign) id<WILDScriptEditorHandlerListDelegate>	delegate;
+
+@end
+
+
+@implementation WILDScriptEditorHandlerListPopoverViewController
+
+-(id)	initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+	self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
+	if( self )
+	{
+		ASSIGN(mHandlerList,[NSArray arrayWithContentsOfFile: [[NSBundle bundleForClass: [self class]] pathForResource: @"WILDAddHandlersList" ofType: @"plist"]]);
+	}
+	return self;
+}
+
+
+-(void)	dealloc
+{
+	DESTROY_DEALLOC(mHandlerList);
+	[super dealloc];
+}
+
+
+-(NSInteger)	numberOfRowsInTableView: (NSTableView *)tableView
+{
+	return mHandlerList.count;
+}
+
+
+-(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
+{
+	return [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"];
+}
+
+
+-(BOOL)	tableView: (NSTableView *)tableView isGroupRow: (NSInteger)row
+{
+	return [[[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerGroupRow"] boolValue];
+}
+
+
+-(NSString *)	tableView: (NSTableView *)tableView toolTipForCell: (NSCell *)cell rect: (NSRectPointer)rect tableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row mouseLocation: (NSPoint)mouseLocation
+{
+	if( ![[[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerGroupRow"] boolValue] )
+	{
+		return [NSString stringWithFormat: @"%@ - %@", [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"], [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerDescription"]];
+	}
+	else
+		return [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"];
+}
+
+
+-(void)	tableViewSelectionDidChange: (NSNotification*)notif
+{
+	[self.delegate scriptEditorAddHandlersPopupDidSelectHandler: [mHandlerList objectAtIndex: self.handlersTable.selectedRow]];
+}
+
+@end
+
+
+@interface WILDScriptEditorWindowController () <NSToolbarDelegate,NSPopoverDelegate,WILDScriptEditorHandlerListDelegate>
 
 @end
 
@@ -81,7 +158,7 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 		LEOParserGetNonFatalErrorMessageAtIndex( x, &currErrMsg, &theLine, &errOffset );
 		if( !currErrMsg )
 			break;
-		printf( "Error: %s\n", currErrMsg );
+		fprintf( stderr, "Error: %s\n", currErrMsg );
 	}
 	LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
 	LEODisplayInfoTableApplyToText( displayInfo, mContainer->GetScript().c_str(), mContainer->GetScript().length(), &theText, &theTextLen, &cursorPos, &cursorEndPos );
@@ -156,10 +233,58 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 		[btn setImage: macPart->GetDisplayIcon()];
 }
 
+
 -(IBAction)	handlerPopupSelectionChanged: (id)sender
 {
 	NSNumber*	destLineObj = [mPopUpButton.selectedItem representedObject];
 	[mSyntaxController goToLine: [destLineObj integerValue]];
+}
+
+
+-(IBAction)	addHandler: (id)sender
+{
+	if( mAddHandlersPopover )
+	{
+		[mAddHandlersPopover close];
+	}
+	else
+	{
+		mAddHandlersPopover = [[NSPopover alloc] init];
+		WILDScriptEditorHandlerListPopoverViewController	*	vc = [[[WILDScriptEditorHandlerListPopoverViewController alloc] initWithNibName: @"WILDScriptEditorHandlerListPopover" bundle: [NSBundle bundleForClass: [self class]]] autorelease];
+		vc.delegate = self;
+		mAddHandlersPopover.contentViewController = vc;
+		mAddHandlersPopover.behavior = NSPopoverBehaviorTransient;
+		mAddHandlersPopover.delegate = self;
+		[mAddHandlersPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMaxYEdge];
+	}
+}
+
+
+-(void)	popoverDidClose:(NSNotification *)notification
+{
+	DESTROY(mAddHandlersPopover);
+}
+
+
+-(void)	scriptEditorAddHandlersPopupDidSelectHandler: (NSDictionary*)inDictionary
+{
+	NSString*	handlerName = [inDictionary objectForKey: @"WILDHandlerName"];
+	NSNumber*	destLineObj = [[mPopUpButton itemWithTitle: handlerName.lowercaseString] representedObject];
+	if( destLineObj )
+	{
+		[mSyntaxController goToLine: [destLineObj integerValue]];
+	}
+	else
+	{
+		NSString	*	str = [inDictionary objectForKey: @"WILDHandlerTemplate"];
+		if( !str )
+			str = [NSString stringWithFormat: @"\n\non %1$@\n\t\nend %1$@", handlerName];
+		NSMutableAttributedString	*	attrStr = [[NSMutableAttributedString alloc] initWithString: str attributes: mSyntaxController.defaultTextAttributes];
+		[mTextView.textStorage appendAttributedString: attrStr];
+		
+		[self reformatText];
+	}
+	[mAddHandlersPopover close];
 }
 
 

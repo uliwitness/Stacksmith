@@ -88,9 +88,11 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-void	CFieldPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
-	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	CVisiblePart::SavePropertiesToElement( inElement );
+
+	tinyxml2::XMLDocument* document = inElement->GetDocument();
 	
 	CTinyXMLUtils::AddBoolNamed( inElement, mDontWrap, "dontWrap" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mDontSearch, "dontSearch" );
@@ -240,9 +242,16 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	{
 		auto foundLine = mSelectedLines.lower_bound(0);
 		if( foundLine != mSelectedLines.end() )
-			LEOInitIntegerValue( outValue, *foundLine, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+			LEOInitRangeValue( outValue, *foundLine, *foundLine, kLEOChunkTypeLine, kLEOInvalidateReferences, inContext );
 		else
 			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("selectedRange", inPropertyName) == 0 )
+	{
+		size_t			startOffs = 0, endOffs = 0;
+		LEOChunkType	type = kLEOChunkTypeINVALID;
+		GetSelectedRange( &type, &startOffs, &endOffs );
+		LEOInitRangeValue( outValue, startOffs, endOffs, type, kLEOInvalidateReferences, inContext );
 	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{
@@ -377,6 +386,15 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		if( theSelectedLine != 0 )
 			mSelectedLines.insert(theSelectedLine);
 		ApplyChangedSelectedLinesToView();
+	}
+	else if( strcasecmp("selectedRange",inPropertyName) == 0 )
+	{
+		LEOInteger		s = 0, e = 0;
+		LEOChunkType	t = kLEOChunkTypeINVALID;
+		LEOGetValueAsRange( inValue, &s, &e, &t, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		SetSelectedRange( t, s, e );
 	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{

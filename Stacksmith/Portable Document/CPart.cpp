@@ -11,6 +11,7 @@
 #include "CLayer.h"
 #include "CStack.h"
 #include "CCursor.h"
+#include "CDocument.h"
 #include <iostream>
 #include <sstream>
 
@@ -62,7 +63,7 @@ CPartCreatorBase*	CPart::GetPartCreatorForType( const char* inType )
 
 
 CPart::CPart( CLayer *inOwner )
-	: mFamily(0), mOwner(inOwner), mSelected(false), mLeft(10), mTop(10), mRight(110), mBottom(60)
+	: mOwner(inOwner), mFamily(0), mID(0), mLeft(10), mTop(10), mRight(110), mBottom(60), mPartType(NULL), mSelected(false)
 {
 	mDocument = inOwner->GetDocument();
 }
@@ -104,21 +105,22 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mLeft = CTinyXMLUtils::GetLongLongNamed( rectElement, "left", 10LL );
 	mTop = CTinyXMLUtils::GetLongLongNamed( rectElement, "top", 10LL );
 	mRight = CTinyXMLUtils::GetLongLongNamed( rectElement, "right", mLeft + 100LL );
-	mBottom = CTinyXMLUtils::GetLongLongNamed( rectElement, "bottom", mLeft + 100LL );
+	mBottom = CTinyXMLUtils::GetLongLongNamed( rectElement, "bottom", mTop + 100LL );
 }
 
 
-void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
 {
 	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
 	
+	tinyxml2::XMLDocument	*	document = inElement->GetDocument();
 	tinyxml2::XMLElement	*	elem = document->NewElement("type");
 	elem->SetText( GetPartType()->GetPartTypeName().c_str() );
 	inElement->InsertEndChild(elem);
 
 	CTinyXMLUtils::AddRectNamed( inElement, mLeft, mTop, mRight, mBottom, "rect" );
 	
-	SavePropertiesToElementOfDocument( inElement, document );
+	SavePropertiesToElement( inElement );
 	
 	elem = document->NewElement("name");
 	elem->SetText( mName.c_str() );
@@ -132,7 +134,24 @@ void	CPart::SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2:
 }
 
 
-void	CPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CPart::SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement )
+{
+	// If a part has associated resources, this is how we copy them when this part is copied.
+	//	You'd likely call SaveMediaToElement() for whatever media you depend on, on your document's media cache.
+}
+
+
+void	CPart::UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings )
+{
+	// When a part is pasted its associated media are pasted as well. If media uses an ID
+	//	that already exists for a different item, it gets re-numbered. This function gets
+	//	called in that case to let you fix up any IDs that may have changed. As the new
+	//	number may collide with a later one, you get a list of all changed IDs at once,
+	//	so subsequent ID changes don't cause your ID to be re-mapped again.
+}
+
+
+void	CPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
 	
 }
@@ -154,7 +173,6 @@ void	CPart::DumpProperties( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);
 	printf( "%srect = %lld,%lld,%lld,%lld\n", indentStr, mLeft, mTop, mRight, mBottom );
-	
 }
 
 
@@ -181,6 +199,8 @@ void	CPart::IncrementChangeCount()
 CPartContents*	CPart::GetContentsOnCurrentCard()
 {
 	CCard	*	currCard = GetStack()->GetCurrentCard();
+	if( !currCard )
+		return NULL;
 	if( mOwner != currCard && !GetSharedText() )	// We're on the background layer, not on the card?
 		return currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
 	else
@@ -333,21 +353,25 @@ THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y )
 }
 
 
-void	CPart::Grab( THitPart inHitPart )
+void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
 {
 	LEONumber	oldL = mLeft, oldT = mTop, oldB = mBottom, oldR = mRight;
 	LEONumber	oldX = 0, oldY = 0;
 	CCursor::GetGlobalPosition( &oldX, &oldY );
-	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,this]()
+	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,addGuidelineBlock,this]()
 	{
 		LEONumber	x = 0, y = 0;
 		CCursor::GetGlobalPosition( &x, &y );
 		
-		SetRect( (inHitPart & ELeftGrabberHitPart) ? (oldL +(x -oldX)) : oldL,
-				(inHitPart & ETopGrabberHitPart) ? (oldT +(y -oldY)) : oldT,
-				(inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
-				(inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB );
+		long long	l = (inHitPart & ELeftGrabberHitPart) ? (oldL +(x -oldX)) : oldL,
+					t = (inHitPart & ETopGrabberHitPart) ? (oldT +(y -oldY)) : oldT,
+					r = (inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
+					b = (inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB;
+		
+		GetOwner()->CorrectRectOfPart( this, inHitPart, &l, &t, &r, &b, addGuidelineBlock );
+		SetRect( l, t, r, b );
 	});
+	addGuidelineBlock( LLONG_MAX, EGuidelineCallbackActionClearAllDone );
 //	std::cout << "Done tracking." << std::endl;
 }
 
@@ -361,6 +385,12 @@ std::string		CPart::GenerateDisplayName( const char* inTypeName )
 	else
 		strs << inTypeName << " ID " << GetID();
 	return strs.str();
+}
+
+
+bool	CPart::GetShouldSendMouseEventsRightNow()
+{
+	return GetStack()->GetTool() == EBrowseTool && !GetStack()->GetDocument()->GetPeeking();
 }
 
 

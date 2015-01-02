@@ -33,7 +33,7 @@ typedef enum
 class CFieldPart : public CVisiblePart
 {
 public:
-	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mViewTextNeedsSync(false), mFieldStyle(EFieldStyleStandard), mDontWrap(false), mDontSearch(false), mSharedText(false), mFixedLineHeight(false), mAutoTab(false), mLockText(false), mAutoSelect(false), mMultipleLines(false), mShowLines(false), mWideMargins(false), mTextStyle(EPartTextStylePlain), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextHeight(0), mHasHorizontalScroller(false), mHasVerticalScroller(false)	 {};
+	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mDontWrap(false), mDontSearch(false), mSharedText(false), mFixedLineHeight(false), mAutoTab(false), mLockText(false), mAutoSelect(false), mMultipleLines(false), mShowLines(false), mWideMargins(false), mTextStyle(EPartTextStylePlain), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextHeight(0), mHasHorizontalScroller(false), mHasVerticalScroller(false), mViewTextNeedsSync(false), mFieldStyle(EFieldStyleStandard)	 {};
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -69,12 +69,15 @@ public:
 
 	virtual bool			GetDontSearch()					{ return mDontSearch; };
 	virtual void			SetDontSearch( bool inST )		{ mDontSearch = inST; IncrementChangeCount(); };
+
+	virtual void			GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs ) = 0;
+	virtual void			SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs ) = 0;
 	
 protected:
 	~CFieldPart()	{};
 	
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	
 	virtual void			LoadChangedTextStylesIntoView()			{ mViewTextNeedsSync = false; };
 	virtual void			LoadChangedTextFromView()				{};

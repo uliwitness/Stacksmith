@@ -25,10 +25,11 @@ void	CMoviePlayerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inEleme
 }
 
 
-void	CMoviePlayerPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CMoviePlayerPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
-	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	CVisiblePart::SavePropertiesToElement( inElement );
 	
+	tinyxml2::XMLDocument	*	document = inElement->GetDocument();
 	tinyxml2::XMLElement	*	elem = document->NewElement("mediaPath");
 	elem->SetText(mMediaPath.c_str());
 	inElement->InsertEndChild(elem);
@@ -119,4 +120,5 @@ void	CMoviePlayerPart::DumpProperties( size_t inIndentLevel )
 	printf( "%smediaPath = %s\n", indentStr, mMediaPath.c_str() );
 	printf( "%scurrentTime = %lld\n", indentStr, GetCurrentTime() );
 	printf( "%scontrollerVisible = %s\n", indentStr, (mControllerVisible ? "true" : "false") );
+	printf( "%sstarted = %s\n", indentStr, (mStarted ? "true" : "false") );
 }

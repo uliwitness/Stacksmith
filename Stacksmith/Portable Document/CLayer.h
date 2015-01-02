@@ -26,7 +26,7 @@ class CStack;
 class CLayer : public CConcreteObject
 {
 public:
-	CLayer( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack ) : mURL(inURL), mLoaded(false), mStack(inStack), mID(inID), mFileName(inFileName), mChangeCount(0) { mName = inName; };
+	CLayer( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack ) : mURL(inURL), mStack(inStack), mID(inID), mFileName(inFileName), mLoaded(false), mLoading(false), mShowPict(true), mDontSearch(false), mCantDelete(false), mChangeCount(0), mPartIDSeed(0) { mName = inName; };
 	~CLayer();
 	
 	ObjectID		GetID()	const			{ return mID; };
@@ -60,9 +60,12 @@ public:
 	virtual CStack*	GetStack()			{ return mStack; };
 	const CStyleSheet&	GetStyles()		{ return mStyles; };
 
-	virtual void	SetPeeking( bool inState );
-	virtual void	DeleteSelectedItem();
-	virtual bool	CanDeleteDeleteSelectedItem();
+	virtual void					SetPeeking( bool inState );
+	virtual void					DeleteSelectedItem();
+	virtual bool					CanDeleteSelectedItem();
+	virtual std::string				CopySelectedItem();
+	virtual bool					CanCopySelectedItem();
+	virtual std::vector<CPartRef>	PasteObject( const std::string& inXMLStr );
 
 	virtual void	WakeUp();
 	virtual void	GoToSleep();
@@ -80,6 +83,11 @@ public:
 	virtual void	IncrementChangeCount()		{ mChangeCount++; };
 	virtual bool	GetNeedsToBeSaved()			{ return mChangeCount != 0; };
 	
+	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines.
+	void			CorrectRectOfPart( CPart* inMovedPart, std::vector<CPartRef> inEligibleParts, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );
+	
+	void			AddPartsToList( std::vector<CPartRef>& ioList )	{ ioList.insert( ioList.end(), mParts.begin(), mParts.end() ); };
+	
 	virtual void	Dump( size_t inIndent = 0 );
 	
 	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
@@ -88,9 +96,12 @@ protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
 	void			LoadAddColorPartsFromElement( tinyxml2::XMLElement* root );
 	virtual const char*	GetLayerXMLType();
-	virtual void	SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document );
+	virtual void	SavePropertiesToElement( tinyxml2::XMLElement* stackfile );
 	virtual void	DumpProperties( size_t inIndent );
 	virtual void	CallAllCompletionBlocks();
+	virtual void	LoadPastedPartContents( CPart* newPart, ObjectID oldID, tinyxml2::XMLElement* *currCardContents, tinyxml2::XMLElement* *currBgContents, CStyleSheet * inStyleSheet );
+	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet );
+	virtual void	LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents, CStyleSheet * inStyleSheet );
 
 	ObjectID						mID;
 	std::string						mURL;

@@ -19,7 +19,7 @@ namespace Carlson {
 class CTimerPart : public CPart
 {
 public:
-	explicit CTimerPart( CLayer *inOwner ) : CPart( inOwner ) {};
+	explicit CTimerPart( CLayer *inOwner ) : CPart( inOwner ), mInterval(120), mStarted(false), mRepeat(false) {};
 	
 	virtual void			SetStarted( bool inStarted )	{ mStarted = inStarted; if( inStarted ) mActualTimer.Start(); else mActualTimer.Stop(); IncrementChangeCount(); };
 	virtual bool			GetStarted()					{ return mStarted; };
@@ -41,7 +41,7 @@ public:
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	
 	virtual const char*		GetIdentityForDump()	{ return "Timer"; };
 	virtual void			DumpProperties( size_t inIndent );

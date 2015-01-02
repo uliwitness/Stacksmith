@@ -15,7 +15,7 @@
 #import "WILDMoviePlayerInfoViewController.h"
 
 
-@class ULIInvisiblePlayerView;
+@class WILDInvisiblePlayerView;
 @class AVPlayer;
 
 
@@ -25,7 +25,7 @@ namespace Carlson {
 class CMoviePlayerPartMac : public CMoviePlayerPart, public CMacPartBase
 {
 public:
-	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil), mRateObserver(nil), mLastNotifiedRate(0.0), mCurrentMovie(nil) {};
+	CMoviePlayerPartMac( CLayer *inOwner ) : CMoviePlayerPart( inOwner ), mView(nil), mRateObserver(nil), mLastNotifiedRate(0.0), mCurrentMovie(nil), mTimeObserver(NULL) {};
 
 	virtual void		WakeUp();
 	virtual void		GoToSleep();
@@ -40,9 +40,19 @@ public:
 	virtual LEOInteger	GetCurrentTime();
 	virtual void		SetControllerVisible( bool inStart );
 	virtual void		SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
-	virtual void	SetVisible( bool visible )		{ CMoviePlayerPart::SetVisible(visible); [mView setHidden: !visible]; };
-	virtual NSView*	GetView();
-	virtual Class	GetPropertyEditorClass()	{ return [WILDMoviePlayerInfoViewController class]; };
+	virtual void		SetVisible( bool visible )		{ CMoviePlayerPart::SetVisible(visible); [mView setHidden: !visible]; };
+
+	virtual void		SetFillColor( int r, int g, int b, int a );
+	virtual void		SetLineColor( int r, int g, int b, int a );
+	virtual void		SetShadowColor( int r, int g, int b, int a );
+	virtual void		SetShadowOffset( double w, double h );
+	virtual void		SetShadowBlurRadius( double r );
+	virtual void		SetLineWidth( int w );
+	virtual void		SetToolTip( const std::string& inToolTip )	{ CMoviePlayerPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
+	virtual void		SetScript( std::string inScript );
+
+	virtual NSView*		GetView();
+	virtual Class		GetPropertyEditorClass()	{ return [WILDMoviePlayerInfoViewController class]; };
 
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };
@@ -55,10 +65,11 @@ protected:
 	void			SetUpMoviePlayerControls();
 	void			SetUpRateObserver();
 	
-	ULIInvisiblePlayerView	*	mView;
+	WILDInvisiblePlayerView	*	mView;
 	AVPlayer				*	mCurrentMovie;
 	id							mRateObserver;
 	float						mLastNotifiedRate;
+	NSObject				*	mTimeObserver;
 };
 
 

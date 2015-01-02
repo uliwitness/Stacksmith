@@ -532,6 +532,86 @@ size_t	CAttributedString::UTF16OffsetFromUTF8Offset( size_t inOffs ) const
 }
 
 
+/*static*/ size_t	CAttributedString::UTF8OffsetFromUTF16Offset( size_t inCharOffs, const uint16_t* utf16, size_t byteLen )
+{
+	size_t		currOffs = 0;
+	size_t		currUTF8Offs = 0;
+	
+	if( inCharOffs == 0 )
+		return 0;
+	
+	while( (currOffs * sizeof(uint16_t)) < byteLen )
+	{
+		uint32_t	currCh = UTF16StringParseUTF32CharacterAtOffset( utf16, byteLen, &currOffs );
+		currUTF8Offs += UTF8LengthForUTF32Char( currCh );
+		if( currOffs >= inCharOffs )
+			break;
+	}
+	
+	return currUTF8Offs;
+}
+
+
+/*static*/ size_t	CAttributedString::UTF32OffsetFromUTF16Offset( size_t inCharOffs, const uint16_t* utf16, size_t byteLen )
+{
+	size_t		currOffs = 0;
+	size_t		currUTF32Offs = 0;
+	
+	if( inCharOffs == 0 )
+		return 0;
+	
+	while( (currOffs * sizeof(uint16_t)) < byteLen )
+	{
+		UTF16StringParseUTF32CharacterAtOffset( utf16, byteLen, &currOffs );
+		currUTF32Offs += 1;
+		if( currOffs >= inCharOffs )
+			break;
+	}
+	
+	return currUTF32Offs;
+}
+
+
+/*static*/ size_t	CAttributedString::UTF16OffsetFromUTF32Offset( size_t inOffs, const uint32_t* utf32, size_t byteLen )
+{
+	size_t		currOffs = 0;
+	size_t		currUTF16Offs = 0;
+	
+	if( inOffs == 0 )
+		return 0;
+	
+	while( (currOffs * sizeof(uint32_t)) < byteLen )
+	{
+		uint32_t	currCh = utf32[currOffs];
+		currUTF16Offs += UTF16LengthForUTF32Char( currCh );
+		if( currOffs >= inOffs )
+			break;
+	}
+	
+	return currUTF16Offs;
+}
+
+
+/*static*/ size_t	CAttributedString::UTF16OffsetFromUTF8Offset( size_t inOffs, const uint8_t* utf8, size_t byteLen )
+{
+	size_t		currOffs = 0;
+	size_t		currUTF16Offs = 0;
+	
+	if( inOffs == 0 )
+		return 0;
+	
+	while( currOffs < byteLen )
+	{
+		uint32_t	currCh = UTF8StringParseUTF32CharacterAtOffset( (char*) utf8, byteLen, &currOffs );
+		currUTF16Offs += UTF16LengthForUTF32Char( currCh );
+		if( currOffs >= inOffs )
+			break;
+	}
+	
+	return currUTF16Offs;
+}
+
+
 size_t	CAttributedString::UTF32OffsetFromUTF8Offset( size_t inOffs ) const
 {
 	const char*	str = GetString().c_str();

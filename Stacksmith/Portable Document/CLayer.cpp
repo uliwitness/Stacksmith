@@ -177,8 +177,9 @@ const char*	CLayer::GetLayerXMLType()
 }
 
 
-void	CLayer::SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document )
+void	CLayer::SavePropertiesToElement( tinyxml2::XMLElement* stackfile )
 {
+	tinyxml2::XMLDocument* document = stackfile->GetDocument();
 	tinyxml2::XMLElement*	elem = document->NewElement("bitmap");
 	elem->SetText( mPictureName.c_str() );
 	stackfile->InsertEndChild(elem);
@@ -213,7 +214,7 @@ bool	CLayer::Save( const std::string& inPackagePath )
 
 	CTinyXMLUtils::AddLongLongNamed( stackfile, mID, "id" );
 	
-	SavePropertiesToElementOfDocument( stackfile, &document );
+	SavePropertiesToElement( stackfile );
 	
 	tinyxml2::XMLNode*	lastChildBeforeStyles = stackfile->LastChild();
 	// We remember lastChildBeforeStyles so we can later insert a "link" tag referencing our CSS here, if needed.
@@ -223,14 +224,14 @@ bool	CLayer::Save( const std::string& inPackagePath )
 	for( auto currPart : mParts )
 	{
 		elem = document.NewElement("part");
-		currPart->SaveToElementOfDocument( elem, &document );
+		currPart->SaveToElement( elem );
 		stackfile->InsertEndChild(elem);
 	}
 	
 	for( auto currContent : mContents )
 	{
 		elem = document.NewElement("content");
-		currContent->SaveToElementOfDocumentStyleSheet( elem, &document, &theStyles );
+		currContent->SaveToElementAndStyleSheet( elem, &theStyles );
 		stackfile->InsertEndChild(elem);
 	}
 	
@@ -248,6 +249,8 @@ bool	CLayer::Save( const std::string& inPackagePath )
 	if( styleSheet.length() > 0 )
 	{
 		std::string	destStylesPath(inPackagePath);
+		if( destStylesPath.length() > 0 && destStylesPath[destStylesPath.length() -1] != '/' )
+			destStylesPath.append(1,'/');
 		std::stringstream	destStylesName;
 		destStylesName << "stylesheet_card_" << mID << ".css";
 		destStylesPath.append(destStylesName.str());
@@ -266,6 +269,8 @@ bool	CLayer::Save( const std::string& inPackagePath )
 	}
 
 	std::string	destPath(inPackagePath);
+	if( destPath.length() > 0 && destPath[destPath.length() -1] != '/' )
+		destPath.append(1,'/');
 	destPath.append( mFileName );
 	FILE*	theFile = fopen( destPath.c_str(), "w" );
 	if( !theFile )
@@ -579,7 +584,7 @@ void	CLayer::DeleteSelectedItem()
 }
 
 
-bool	CLayer::CanDeleteDeleteSelectedItem()
+bool	CLayer::CanDeleteSelectedItem()
 {
 	for( auto currPart : mParts )
 	{
@@ -587,6 +592,207 @@ bool	CLayer::CanDeleteDeleteSelectedItem()
 			return true;
 	}
 	return false;
+}
+
+
+std::string	CLayer::CopySelectedItem()
+{
+	tinyxml2::XMLDocument	document;
+	CStyleSheet				styleSheet;
+	tinyxml2::XMLElement *	partsElement = document.NewElement("parts");
+	document.InsertEndChild( partsElement );
+	tinyxml2::XMLElement *	cardElement = document.NewElement("card");
+	tinyxml2::XMLElement *	backgroundElement = document.NewElement("background");
+	tinyxml2::XMLElement *	resourcesElement = document.NewElement("resources");
+	
+	for( CPart* currPart : mParts )
+	{
+		if( currPart->IsSelected() )
+		{
+			tinyxml2::XMLElement *	partElement = document.NewElement("part");
+			partsElement->InsertEndChild( partElement );
+			currPart->SaveToElement( partElement );
+			CPartContents*	cardContents = GetPartContentsByID( currPart->GetID(), false );
+			if( cardContents )
+			{
+				tinyxml2::XMLElement *	contentsElement = document.NewElement("contents");
+				cardElement->InsertEndChild( contentsElement );
+				cardContents->SaveToElementAndStyleSheet( contentsElement, &styleSheet );
+			}
+			CPartContents*	bgContents = GetPartContentsByID( currPart->GetID(), true );
+			if( bgContents )
+			{
+				tinyxml2::XMLElement *	contentsElement = document.NewElement("contents");
+				backgroundElement->InsertEndChild( contentsElement );
+				bgContents->SaveToElementAndStyleSheet( contentsElement, &styleSheet );
+			}
+			
+			currPart->SaveAssociatedResourcesToElement( resourcesElement );
+		}
+	}
+	
+	tinyxml2::XMLElement *	stylesElement = document.NewElement("style");
+	stylesElement->SetText( styleSheet.GetCSS().c_str() );
+	partsElement->InsertEndChild( stylesElement );
+	partsElement->InsertEndChild( cardElement );
+	partsElement->InsertEndChild( backgroundElement );
+	partsElement->InsertEndChild( resourcesElement );
+	
+	CStacksmithXMLPrinter	printer;
+	document.Print( &printer );
+	return std::string(printer.CStr());
+}
+
+
+bool	CLayer::CanCopySelectedItem()
+{
+	for( auto currPart : mParts )
+	{
+		if( currPart->IsSelected() )
+			return true;
+	}
+	return false;
+}
+
+
+void	CLayer::LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet )
+{
+	if( newPart->GetSharedText() )
+	{
+		CPartContents*	pc = new CPartContents( this, currBgContents, inStyleSheet );
+		pc->SetID( newPart->GetID() );
+		mContents.push_back( pc );
+		pc->Release();
+	}
+}
+
+
+void	CLayer::LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents, CStyleSheet * inStyleSheet )
+{
+	if( !newPart->GetSharedText() )
+	{
+		CPartContents*	pc = new CPartContents( this, currCardContents, inStyleSheet );
+		pc->SetID( newPart->GetID() );
+		mContents.push_back( pc );
+		pc->Release();
+	}
+}
+
+
+void	CLayer::LoadPastedPartContents( CPart* newPart, ObjectID oldID, tinyxml2::XMLElement* *currCardContents, tinyxml2::XMLElement* *currBgContents, CStyleSheet * inStyleSheet )
+{
+	// We get the next part contents in the list on the clipboard. So if this doesn't
+	//	match our ID, and don't consume the contents.
+	
+	ObjectID	theID = CTinyXMLUtils::GetLongLongNamed( *currCardContents, "id" );
+	bool		haveCardContents = (theID == oldID);
+	theID = CTinyXMLUtils::GetLongLongNamed( *currBgContents, "id" );
+	bool		haveBgContents = (theID == oldID);
+	if( haveCardContents && (*currCardContents) != NULL )
+	{
+		LoadPastedPartCardContents( newPart, *currCardContents, haveBgContents, inStyleSheet );
+		
+		*currCardContents = (*currCardContents)->NextSiblingElement("contents");
+	}
+	
+	if( haveBgContents && (*currBgContents) != NULL )
+	{
+		LoadPastedPartBackgroundContents( newPart, *currBgContents, haveCardContents, inStyleSheet );
+		
+		*currBgContents = (*currBgContents)->NextSiblingElement("contents");
+	}
+}
+
+
+std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr )
+{
+	//Dump();
+	
+	std::vector<CPartRef>	newParts;
+	tinyxml2::XMLDocument	document;
+	if( tinyxml2::XML_SUCCESS == document.Parse( inXMLStr.c_str(), inXMLStr.size() ) )
+	{
+		tinyxml2::XMLElement*	rootElement = document.FirstChildElement();
+		if( strcasecmp( rootElement->Value(), "parts" ) == 0 )
+		{
+			tinyxml2::XMLElement*	styles = document.FirstChildElement( "style" );
+			CStyleSheet				styleSheet;
+			if( styles )
+				styleSheet.LoadFromStream( styles->GetText() );
+			
+			tinyxml2::XMLElement*	currPart = rootElement->FirstChildElement( "part" );
+			tinyxml2::XMLElement*	cardContents = rootElement->FirstChildElement( "card" );
+			tinyxml2::XMLElement*	bgContents = rootElement->FirstChildElement( "background" );
+			tinyxml2::XMLElement*	currCardContents = cardContents->FirstChildElement("contents");
+			tinyxml2::XMLElement*	currBgContents = bgContents->FirstChildElement("contents");
+			while( currPart )
+			{
+				ObjectID	oldID = CTinyXMLUtils::GetLongLongNamed( currPart, "id" );
+				ObjectID	newID = oldID;
+				if( GetPartWithID( newID ) != NULL )
+				{
+					newID = GetUniqueIDForPart();
+					currPart->DeleteChild( currPart->FirstChildElement("id") );
+					CTinyXMLUtils::AddLongLongNamed( currPart, newID, "id" );
+				}
+				
+				CPart	*	newPart = CPart::NewPartWithElement( currPart, this );
+				mParts.push_back( newPart );
+				newPart->Release();
+				
+				LoadPastedPartContents( newPart, oldID, &currCardContents, &currBgContents, &styleSheet );
+				
+				// +++ Paste any icons this part references!
+				
+				IncrementChangeCount();
+				
+				newParts.push_back(newPart);
+				
+				currPart = currPart->NextSiblingElement( "part" );
+			}
+		}
+		
+		std::map<ObjectID,ObjectID>	changedMediaIDs;
+		tinyxml2::XMLElement*		resourcesElement = rootElement->FirstChildElement( "resources" );
+		tinyxml2::XMLElement*		currMedia = resourcesElement->FirstChildElement( "media" );
+		while( currMedia )
+		{
+			CMediaEntry		newEntry;
+			newEntry.LoadFromElement( currMedia, mStack->GetDocument()->GetURL(), false );
+			
+			ObjectID	newID = mStack->GetDocument()->GetMediaCache().GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( newEntry );
+			if( newID != 0 )	// 0 == already exists, no need to paste.
+			{
+				if( newID != newEntry.GetID() )
+				{
+					changedMediaIDs[newEntry.GetID()] = newID;	// +++ Keep track of type.
+					newEntry.SetID(newID);
+				}
+				newEntry.IncrementChangeCount();
+				mStack->GetDocument()->GetMediaCache().AddMediaEntry( newEntry );
+				mStack->GetDocument()->IncrementChangeCount();
+			}
+			
+			currMedia = currMedia->NextSiblingElement( "media" );
+		}
+		
+		if( changedMediaIDs.size() > 0 )	// Had to assign a unique ID to a pasted icon?
+		{
+			for( CPart* currPart : newParts )
+			{
+				// Tell each part to update its stuff:
+				currPart->UpdateMediaIDs( changedMediaIDs );	// +++ Pass along type.
+			}
+		}
+		for( CPart* currPart : newParts )
+		{
+			currPart->WakeUp();
+		}
+	}
+	
+	//Dump();
+	
+	return newParts;
 }
 
 
@@ -649,6 +855,246 @@ bool	CLayer::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 const char*	CLayer::GetIdentityForDump()
 {
 	return "Layer";
+}
+
+
+// Maximum distance between two objects for us to even consider aligning them
+//	when snapping/showing guidelines. This applies to any direction, i.e. if a
+//	button is at 49 pixels horz. from ours, we consider aligning them horz. or vert.
+#define	MAX_CONSIDERATION_DISTANCE			50LL
+
+// If a particular coordinate of our object is at most this far from a parallel
+//	line on another object, we snap and show the guideline:
+#define MAX_SNAPPING_DISTANCE				8LL
+
+// When snapping to the card egde, we snap only if user gets a bit closer or
+//	moves beyond the card edge:
+#define MAX_INNER_EDGE_SNAPPING_DISTANCE	2LL
+
+// Margin from the window edge that we snap to apart from 0:
+#define IDEAL_EDGE_DISTANCE					20LL
+
+// Distance at which we snap to other parts apart from 0:
+#define IDEAL_PART_DISTANCE					9LL
+
+
+void	CLayer::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
+{
+	CorrectRectOfPart( inMovedPart, mParts, partsToCorrect, ioLeft, ioTop, ioRight, ioBottom, addGuidelineBlock );
+}
+
+
+void	CLayer::CorrectRectOfPart( CPart* inMovedPart, std::vector<CPartRef> inEligibleParts, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
+{
+	long long		minXDist = LLONG_MAX,
+					minYDist = LLONG_MAX;
+	long			leftGuide = 0, topGuide = 0;
+	long long		xNudge = 0, yNudge = 0;
+
+	// See if we're near the card edge at the recommended Aqua border distance and snap to that:
+	if( (*ioRight) > (((long long)mStack->GetCardWidth()) -IDEAL_EDGE_DISTANCE -MAX_INNER_EDGE_SNAPPING_DISTANCE) && (partsToCorrect & ERightGrabberHitPart) )
+	{
+		xNudge = ((long long)mStack->GetCardWidth() -IDEAL_EDGE_DISTANCE) -*ioRight;
+		minXDist = llabs( xNudge );
+		leftGuide = mStack->GetCardWidth() -IDEAL_EDGE_DISTANCE;
+	}
+
+	if( (*ioLeft) < (MAX_INNER_EDGE_SNAPPING_DISTANCE +IDEAL_EDGE_DISTANCE) && (partsToCorrect & ELeftGrabberHitPart) )
+	{
+		xNudge = IDEAL_EDGE_DISTANCE -*ioLeft;
+		minXDist = llabs( xNudge );
+		leftGuide = IDEAL_EDGE_DISTANCE;
+	}
+
+	if( (*ioBottom) > (((long long)mStack->GetCardHeight()) -MAX_INNER_EDGE_SNAPPING_DISTANCE -IDEAL_EDGE_DISTANCE) && (partsToCorrect & EBottomGrabberHitPart) )
+	{
+		yNudge = ((long long)mStack->GetCardHeight() -IDEAL_EDGE_DISTANCE) -*ioBottom;
+		minYDist = llabs( yNudge );
+		topGuide = mStack->GetCardHeight() -IDEAL_EDGE_DISTANCE;
+	}
+	
+	if( (*ioTop) < (MAX_INNER_EDGE_SNAPPING_DISTANCE +IDEAL_EDGE_DISTANCE) && (partsToCorrect & ETopGrabberHitPart) )
+	{
+		yNudge = IDEAL_EDGE_DISTANCE -*ioTop;
+		minYDist = llabs( yNudge );
+		topGuide = IDEAL_EDGE_DISTANCE;
+	}
+	
+	// See if we're at a card edge and snap to that:
+	if( (*ioRight) > (((long long)mStack->GetCardWidth()) -MAX_INNER_EDGE_SNAPPING_DISTANCE) && (partsToCorrect & ERightGrabberHitPart) )
+	{
+		xNudge = ((long long)mStack->GetCardWidth()) -*ioRight;
+		minXDist = llabs( xNudge );
+		leftGuide = mStack->GetCardWidth();
+	}
+
+	if( (*ioLeft) < MAX_INNER_EDGE_SNAPPING_DISTANCE && (partsToCorrect & ELeftGrabberHitPart) )
+	{
+		xNudge = -*ioLeft;
+		minXDist = llabs( xNudge );
+		leftGuide = 0;
+	}
+
+	if( (*ioBottom) > (((long long)mStack->GetCardHeight()) -MAX_INNER_EDGE_SNAPPING_DISTANCE) && (partsToCorrect & EBottomGrabberHitPart) )
+	{
+		yNudge = ((long long)mStack->GetCardHeight()) -*ioBottom;
+		minYDist = llabs( yNudge );
+		topGuide = mStack->GetCardHeight();
+	}
+	
+	if( (*ioTop) < MAX_INNER_EDGE_SNAPPING_DISTANCE && (partsToCorrect & ETopGrabberHitPart) )
+	{
+		yNudge = -*ioTop;
+		minYDist = llabs( yNudge );
+		topGuide = 0;
+	}
+
+	// See if we're near any other parts and snap to those:
+	for( CPart* currPart : inEligibleParts )
+	{
+		if( currPart != inMovedPart )
+		{
+			long long		currXLeftDist = llabs( currPart->GetLeft() -*ioLeft ),
+							currXRightDist = llabs( currPart->GetRight() -*ioRight ),
+							currYTopDist = llabs( currPart->GetTop() -*ioTop ),
+							currYBottomDist = llabs( currPart->GetBottom() -*ioBottom ),
+							currXLeftDist2 = llabs( currPart->GetRight() -*ioLeft ),
+							currXRightDist2 = llabs( currPart->GetLeft() -*ioRight ),
+							currYTopDist2 = llabs( currPart->GetBottom() -*ioTop ),
+							currYBottomDist2 = llabs( currPart->GetTop() -*ioBottom ),
+							currIdealXLeftDist = currPart->GetLeft() -IDEAL_PART_DISTANCE -*ioRight,
+							currIdealXRightDist = currPart->GetRight() +IDEAL_PART_DISTANCE -*ioLeft,
+							currIdealYTopDist = currPart->GetTop() -IDEAL_PART_DISTANCE -*ioBottom,
+							currIdealYBottomDist = currPart->GetBottom() +IDEAL_PART_DISTANCE -*ioTop;
+			bool			verticallyNear = currYTopDist < MAX_CONSIDERATION_DISTANCE || currYBottomDist < MAX_CONSIDERATION_DISTANCE
+											|| currYTopDist2 < MAX_CONSIDERATION_DISTANCE || currYBottomDist2 < MAX_CONSIDERATION_DISTANCE;
+			bool			horizontallyNear = currXLeftDist < MAX_CONSIDERATION_DISTANCE || currXRightDist < MAX_CONSIDERATION_DISTANCE
+											|| currXLeftDist2 < MAX_CONSIDERATION_DISTANCE || currXRightDist2 < MAX_CONSIDERATION_DISTANCE;
+			if( !horizontallyNear || !verticallyNear )
+				continue;
+			
+			// Horizontal:
+			// Align equivalent edges?
+			if( currXLeftDist < minXDist && (partsToCorrect & ELeftGrabberHitPart) )
+			{
+				xNudge = currPart->GetLeft() -*ioLeft;
+				minXDist = currXLeftDist;
+				leftGuide = currPart->GetLeft();
+			}
+			if( currXRightDist < minXDist && (partsToCorrect & ERightGrabberHitPart) )
+			{
+				xNudge = currPart->GetRight() -*ioRight;
+				minXDist = currXRightDist;
+				leftGuide = currPart->GetRight();
+			}
+			// Abut right next to this part?
+			if( currXLeftDist2 < minXDist && (partsToCorrect & ELeftGrabberHitPart) )
+			{
+				xNudge = currPart->GetRight() -*ioLeft;
+				minXDist = currXLeftDist2;
+				leftGuide = currPart->GetRight();
+			}
+			if( currXRightDist2 < minXDist && (partsToCorrect & ERightGrabberHitPart) )
+			{
+				xNudge = currPart->GetLeft() -*ioRight;
+				minXDist = currXRightDist2;
+				leftGuide = currPart->GetLeft();
+			}
+			// Snap at an ideal distance from that part? (Note that these don't
+			//	align equivalent edges, but abut adjoining ones, hence the grabber is
+			//	the opposite of the distance variable:
+			if( (-currIdealXLeftDist) < minXDist && currIdealXLeftDist < 0 && (partsToCorrect & ERightGrabberHitPart) )
+			{
+				if( llabs( currIdealXLeftDist ) < MAX_SNAPPING_DISTANCE )
+				{
+					xNudge = currIdealXLeftDist;
+					minXDist = currIdealXLeftDist;
+					leftGuide = currPart->GetLeft() -IDEAL_PART_DISTANCE;
+				}
+			}
+			if( currIdealXRightDist < minXDist && currIdealXRightDist >= 0 && (partsToCorrect & ELeftGrabberHitPart) )
+			{
+				if( llabs( currIdealXRightDist ) < MAX_SNAPPING_DISTANCE )
+				{
+					xNudge = currIdealXRightDist;
+					minXDist = currIdealXRightDist;
+					leftGuide = currPart->GetRight() +IDEAL_PART_DISTANCE;
+				}
+			}
+			
+			// Vertical:
+			// Align equivalent edges?
+			if( currYTopDist < minYDist && (partsToCorrect & ETopGrabberHitPart) )
+			{
+				yNudge = currPart->GetTop() -*ioTop;
+				minYDist = currYTopDist;
+				topGuide = currPart->GetTop();
+			}
+			if( currYBottomDist < minYDist && (partsToCorrect & EBottomGrabberHitPart) )
+			{
+				yNudge = currPart->GetBottom() -*ioBottom;
+				minYDist = currYBottomDist;
+				topGuide = currPart->GetBottom();
+			}
+			// Abut right above/below this part?
+			if( currYTopDist2 < minYDist && (partsToCorrect & ETopGrabberHitPart) )
+			{
+				yNudge = currPart->GetBottom() -*ioTop;
+				minYDist = currYTopDist2;
+				topGuide = currPart->GetBottom();
+			}
+			if( currYBottomDist2 < minYDist && (partsToCorrect & EBottomGrabberHitPart) )
+			{
+				yNudge = currPart->GetTop() -*ioBottom;
+				minYDist = currYBottomDist2;
+				topGuide = currPart->GetTop();
+			}
+			// Snap at an ideal distance from that part? (Note that these don't
+			//	align equivalent edges, but abut adjoining ones, hence the grabber is
+			//	the opposite of the distance variable:
+			if( (-currIdealYTopDist) < minYDist && currIdealYTopDist < 0 && (partsToCorrect & EBottomGrabberHitPart) )
+			{
+				if( llabs( currIdealYTopDist ) < MAX_SNAPPING_DISTANCE )
+				{
+					yNudge = currIdealYTopDist;
+					minYDist = currIdealYTopDist;
+					topGuide = currPart->GetTop() -IDEAL_PART_DISTANCE;
+				}
+			}
+			if( currIdealYBottomDist < minYDist && currIdealYBottomDist >= 0 && (partsToCorrect & ETopGrabberHitPart) )
+			{
+				if( llabs( currIdealYBottomDist ) < MAX_SNAPPING_DISTANCE )
+				{
+					yNudge = currIdealYBottomDist;
+					minYDist = currIdealYBottomDist;
+					topGuide = currPart->GetBottom() +IDEAL_PART_DISTANCE;
+				}
+			}
+		}
+	}
+	
+	// Correct the rect coordinates we're supposed to modify of the rect we were given:
+	if( minXDist < MAX_SNAPPING_DISTANCE )
+	{
+		if( partsToCorrect & ELeftGrabberHitPart )
+			*ioLeft += xNudge;
+		if( partsToCorrect & ERightGrabberHitPart )
+			*ioRight += xNudge;
+	}
+	if( minYDist < MAX_SNAPPING_DISTANCE )
+	{
+		if( partsToCorrect & ETopGrabberHitPart )
+			*ioTop += yNudge;
+		if( partsToCorrect & EBottomGrabberHitPart )
+			*ioBottom += yNudge;
+	}
+	
+	// Call back to indicate which guidelines we want:
+	addGuidelineBlock( LLONG_MAX, EGuidelineCallbackActionClearAllForFilling );
+	if( minXDist < MAX_SNAPPING_DISTANCE )
+		addGuidelineBlock( leftGuide, EGuidelineCallbackActionAddVertical );
+	if( minYDist < MAX_SNAPPING_DISTANCE )
+		addGuidelineBlock( topGuide, EGuidelineCallbackActionAddHorizontal );
 }
 
 

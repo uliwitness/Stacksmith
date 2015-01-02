@@ -14,6 +14,15 @@
 namespace Carlson
 {
 
+class CDocumentManagerMac : public CDocumentManager
+{
+public:
+	virtual ~CDocumentManagerMac()	{};
+	
+	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
+};
+
+
 class CDocumentMac : public CDocument
 {
 public:

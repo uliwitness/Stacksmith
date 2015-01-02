@@ -7,9 +7,9 @@
 //
 
 #include "CMoviePlayerPartMac.h"
-#import "ULIInvisiblePlayerView.h"
+#import "WILDInvisiblePlayerView.h"
 #import <AVFoundation/AVFoundation.h>
-#import <AVKit/AVKit.h>
+#import "WILDPlayerView.h"
 #include "CDocument.h"
 #import "UKHelperMacros.h"
 #import "NSObject+JCSKVOWithBlocks.h"
@@ -42,6 +42,7 @@ void	CMoviePlayerPartMac::GoToSleep()
 			[mCurrentMovie jcsRemoveObserver: mRateObserver];
 			mRateObserver = nil;
 		}
+		DESTROY(mTimeObserver);
 		DESTROY(mCurrentMovie);
 	}
 	
@@ -73,18 +74,23 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mControllerVisible )
 	{
-		mView = (ULIInvisiblePlayerView*)[[AVPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = (WILDInvisiblePlayerView*)[[WILDPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 		SetUpMoviePlayerControls();
 	}
 	else
-		mView = [[ULIInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	{
+		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	}
+	mView.owningPart = this;
 	SetUpMoviePlayer();
+	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
 }
 
 
 void	CMoviePlayerPartMac::DestroyView()
 {
+	DESTROY(mTimeObserver);
 	if( mCurrentMovie )
 		mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 	if( mRateObserver )
@@ -117,11 +123,14 @@ void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
 	}
 	if( mControllerVisible )
 	{
-		mView = (ULIInvisiblePlayerView*)[[AVPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = (WILDInvisiblePlayerView*)[[WILDPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 		SetUpMoviePlayerControls();
 	}
 	else
-		mView = [[ULIInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	{
+		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	}
+	mView.owningPart = this;
 	SetUpMoviePlayer();
 	[oldSuper addSubview: mView];
 }
@@ -134,9 +143,12 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, -mShadowOffsetHeight)];
 	[mView.layer setShadowRadius: mShadowBlurRadius];
+	[mView.layer setBorderWidth: mLineWidth];
+	[mView.layer setBorderColor: [NSColor colorWithCalibratedRed: mLineColorRed / 65535.0 green: mLineColorGreen / 65535.0 blue: mLineColorBlue / 65535.0 alpha: mLineColorAlpha / 65535.0].CGColor];
+	[mView.layer setBackgroundColor: [NSColor colorWithCalibratedRed: mFillColorRed / 65535.0 green: mFillColorGreen / 65535.0 blue: mFillColorBlue / 65535.0 alpha: mFillColorAlpha / 65535.0].CGColor];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	NSURL	*	movieURL = nil;
-	std::string	mediaURL = GetDocument()->GetMediaURLByNameOfType( mMediaPath.c_str(), EMediaTypeMovie );
+	std::string	mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( mMediaPath.c_str(), EMediaTypeMovie );
 	if( mediaURL.length() == 0 && mMediaPath.find("file://") == 0 )
 	{
 		LEOContextGroup*	theGroup = GetDocument()->GetScriptContextGroupObject();
@@ -150,22 +162,25 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 			mediaURL = mMediaPath;
 	}
 	if( mediaURL.length() == 0 )
-		mediaURL = GetDocument()->GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
+		mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
 	if( mediaURL.length() > 0 )
 		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
 	if( !mCurrentMovie )
 	{
 		ASSIGN(mCurrentMovie,[AVPlayer playerWithURL: movieURL]);
 		mCurrentMovie.actionAtItemEnd = AVPlayerActionAtItemEndPause;
-		SetUpRateObserver();
+		DESTROY(mRateObserver);
 	}
 	mView.player = mCurrentMovie;
+	if( !mRateObserver )
+		SetUpRateObserver();
 	[mCurrentMovie seekToTime: CMTimeMakeWithSeconds( mCurrentTime / 60.0, 1)];
 }
 
 
 void	CMoviePlayerPartMac::SetUpRateObserver()
 {
+	DESTROY(mRateObserver);
 	mRateObserver = [mCurrentMovie jcsAddObserverForKeyPath: PROPERTY(rate) options: NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew queue: [NSOperationQueue mainQueue] block: ^(NSDictionary *change)
 	{
 		const char*	msg = NULL;
@@ -177,11 +192,27 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 			else if( mLastNotifiedRate == 0.0 )
 				msg = "playMovie";
 			if( msg )
+			{
+				CAutoreleasePool		pool;
 				this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, msg );
+			}
 			mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 			mLastNotifiedRate = theRate;
 		}
 	}];
+
+	DESTROY(mTimeObserver);
+	mTimeObserver = [[mView.player addPeriodicTimeObserverForInterval: CMTimeMakeWithSeconds( 7.0 * 24.0 * 60.0 * 60.0, 1 ) queue: dispatch_get_main_queue() usingBlock:
+	^( CMTime time )
+	{
+		LEOInteger	newTime = CMTimeGetSeconds( time ) * 60;
+		if( newTime != mCurrentTime )
+		{
+			CAutoreleasePool		pool;
+			this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ /*CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs );*/ }, "timeChange %d", newTime );
+			mCurrentTime = newTime;
+		}
+	}] retain];
 }
 
 
@@ -235,6 +266,58 @@ LEOInteger	CMoviePlayerPartMac::GetCurrentTime()
 }
 
 
+void	CMoviePlayerPartMac::SetFillColor( int r, int g, int b, int a )
+{
+	CMoviePlayerPart::SetFillColor( r, g, b, a );
+
+	[mView.layer setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+}
+
+
+void	CMoviePlayerPartMac::SetLineColor( int r, int g, int b, int a )
+{
+	CMoviePlayerPart::SetLineColor( r, g, b, a );
+
+	[mView.layer setBorderColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+}
+
+
+void	CMoviePlayerPartMac::SetShadowColor( int r, int g, int b, int a )
+{
+	CMoviePlayerPart::SetShadowColor( r, g, b, a );
+	
+	[mView.layer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
+	if( a != 0 )
+	{
+		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+	}
+}
+
+
+void	CMoviePlayerPartMac::SetShadowOffset( double w, double h )
+{
+	CMoviePlayerPart::SetShadowOffset( w, -h );
+	
+	[mView.layer setShadowOffset: NSMakeSize(w,-h)];
+}
+
+
+void	CMoviePlayerPartMac::SetShadowBlurRadius( double r )
+{
+	CMoviePlayerPart::SetShadowBlurRadius( r );
+	
+	[mView.layer setShadowRadius: r];
+}
+
+
+void	CMoviePlayerPartMac::SetLineWidth( int w )
+{
+	CMoviePlayerPart::SetLineWidth( w );
+	
+	[mView.layer setBorderWidth: w];
+}
+
+
 void	CMoviePlayerPartMac::SetPeeking( bool inState )
 {
 	ApplyPeekingStateToView(inState, mView);
@@ -252,5 +335,13 @@ void	CMoviePlayerPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger r
 NSView*	CMoviePlayerPartMac::GetView()
 {
 	return mView;
+}
+
+
+void	CMoviePlayerPartMac::SetScript( std::string inScript )
+{
+	CMoviePlayerPart::SetScript( inScript );
+	
+	[mView updateTrackingAreas];
 }
 

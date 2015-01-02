@@ -58,16 +58,16 @@ std::string		CStackMac::GetDisplayName()
 }
 
 
-bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart )
+bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
 {
-	Load([this,oldStack,inOpenInMode,overPart](CStack *inStack)
+	Load([this,oldStack,inOpenInMode,overPart,completionHandler](CStack *inStack)
 	{
 		if( GetCurrentCard() == NULL )
 		{
 			CCard	*	theCard = inStack->GetCard(0);
-			theCard->Load([inOpenInMode,oldStack,overPart]( CLayer *inCard )
+			theCard->Load([inOpenInMode,oldStack,overPart,completionHandler]( CLayer *inCard )
 			{
-				inCard->GoThereInNewWindow( inOpenInMode, oldStack, overPart );
+				inCard->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler );
 			});
 		}
 		else
@@ -76,6 +76,8 @@ bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, 
 				mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
 		
 			[mMacWindowController showWindowOverPart: overPart];
+			
+			completionHandler();
 		}
 	});
 	
@@ -278,6 +280,15 @@ void	CStackMac::SetCardHeight( int n )
 	box.size.height = n;
 	box = [wd frameRectForContentRect: box];
 	[wd setFrame: box display: YES];
+}
+
+
+void	CStackMac::ClearAllGuidelines( bool inTrackingDone )
+{
+	CStack::ClearAllGuidelines( inTrackingDone );
+	
+	if( inTrackingDone )
+		[mMacWindowController drawBoundingBoxes];
 }
 
 

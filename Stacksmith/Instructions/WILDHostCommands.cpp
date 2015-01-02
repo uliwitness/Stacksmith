@@ -14,6 +14,7 @@
 #include "LEOContextGroup.h"
 #include "CStack.h"
 #include "CDocument.h"
+#include "CDocumentMac.h"
 #include "CRecentCardsList.h"
 #include "CAlert.h"
 #include "CMessageBox.h"
@@ -46,11 +47,11 @@ size_t	kFirstStacksmithHostCommandInstruction = 0;
 
 
 /*!
-	Implements the 'go' command. The first (and only) parameter must be a
+	Implements the 'go' command. The first (and only required) parameter on the LEO stack must be a
 	CScriptableObjectValue (i.e. isa = kLeoValueTypeScriptableObject) on which
 	the GoThereInNewWindow() method will be called. If the parameter is a string
 	instead, we will assume it is a stack that's not yet open and attempt to
-	open that. It will remove its parameters from the stack once it is done.
+	open that. It will remove its parameters from the LEO stack once it is done.
 	
 	If the second parameter isn't empty, it is assumed to be a part from which
 	the transition is to start (e.g. if we do a "zoom" effect opening the window)
@@ -59,56 +60,100 @@ size_t	kFirstStacksmithHostCommandInstruction = 0;
 	It will use the current visual effect to perform the transition and will
 	clear the current visual effect once done.
 	
+	param1 in the instruction is a TOpenInMode that will be passed to GoThereInNewWindow().
+	
 	(WILD_GO_INSTR)
 */
 void	WILDGoInstruction( LEOContext* inContext )
 {
 //	LEODebugPrintContext( inContext );
 
-	LEOValuePtr				theDestination = inContext->stackEndPtr -2;
-	LEOValuePtr				theOverPart = inContext->stackEndPtr -1;
-	bool					canGoThere = false;
-	CScriptableObject*		destinationObject = NULL;
-	CPart			*		overPartObject = NULL;
-	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
-	CRecentCardsList::GetSharedInstance()->AddCard( userData->GetStack()->GetCurrentCard() );
-	theDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
-	theOverPart = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -1, &kLeoValueTypeScriptableObject, inContext );
-	if( theOverPart && theOverPart->base.isa == &kLeoValueTypeScriptableObject )
-		overPartObject = dynamic_cast<CPart*>((CScriptableObject*)theOverPart->object.object);
+	if( (inContext->flags & kLEOContextResuming) == 0 )	// This is the actual call to this instruction, we're not resuming the script once the asynchronous 'go' has completed after pausing the script (think "continuation"):
+	{
+		LEOValuePtr				theDestination = inContext->stackEndPtr -2;
+		LEOValuePtr				theOverPart = inContext->stackEndPtr -1;
+		bool					canGoThere = false;
+		CScriptableObject*		destinationObject = NULL;
+		CPart			*		overPartObject = NULL;
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+		CRecentCardsList::GetSharedInstance()->AddCard( userData->GetStack()->GetCurrentCard() );
+		LEOValuePtr				theObjectDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
+		theOverPart = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -1, &kLeoValueTypeScriptableObject, inContext );
+		if( theOverPart && theOverPart->base.isa == &kLeoValueTypeScriptableObject )
+			overPartObject = dynamic_cast<CPart*>((CScriptableObject*)theOverPart->object.object);
 
-	if( theDestination && theDestination->base.isa == &kLeoValueTypeScriptableObject )
-	{
-		destinationObject = (CScriptableObject*)theDestination->object.object;
-	}
-	else if( theDestination )
-	{
-		char stackName[1024] = { 0 };
-		LEOGetValueAsString( theDestination, stackName, sizeof(stackName), inContext );
-		destinationObject = userData->GetStack()->GetDocument()->GetStackByName( stackName );
-	}
-	if( destinationObject )
-	{
-		TOpenInMode	openInMode = inContext->currentInstruction->param1;
-		CStack	*	theStack = destinationObject->GetStack();
-		if( theStack && theStack->GetStyle() == EStackStylePopup && overPartObject )
-			openInMode |= EOpenInNewWindow;
+		LEODebugPrintContext( inContext );
+
+		if( theObjectDestination && theObjectDestination->base.isa == &kLeoValueTypeScriptableObject )
+		{
+			destinationObject = (CScriptableObject*)theObjectDestination->object.object;
+		}
+		else if( theDestination )
+		{
+			char stackName[1024] = { 0 };
+			LEOGetValueAsString( theDestination, stackName, sizeof(stackName), inContext );
+			destinationObject = userData->GetStack()->GetDocument()->GetStackByName( stackName );
+			if( !destinationObject )
+			{
+				LEOPauseContext( inContext );
+				
+				LEOContextRetain( inContext );
+
+				CDocumentManager::GetSharedDocumentManager()->OpenDocumentFromURL( std::string(stackName),
+				[inContext,overPartObject,userData]( CDocument * inNewDocument )
+				{
+					LEOResumeContext( inContext );
+					
+					// +++ Should we set the result here to indicate success?
+					
+					LEOContextRelease(inContext);
+				});
+				
+				LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+				return;
+			}
+		}
+		if( destinationObject )
+		{
+			TOpenInMode	openInMode = inContext->currentInstruction->param1;
+			CStack	*	theStack = destinationObject->GetStack();
+			if( theStack && theStack->GetStyle() == EStackStylePopup && overPartObject )
+				openInMode |= EOpenInNewWindow;
 		
-		canGoThere = destinationObject->GoThereInNewWindow( openInMode, userData->GetStack(), overPartObject );
+			LEOPauseContext( inContext );
+			
+			LEOContextRetain( inContext );
+			canGoThere = destinationObject->GoThereInNewWindow( openInMode, userData->GetStack(), overPartObject,
+			[inContext]()
+			{
+				LEOResumeContext( inContext );
+				
+				// +++ Should we set the result here to indicate success?
+				
+				LEOContextRelease(inContext);
+			} );
+		}
+		if( canGoThere )
+			userData->SetStack( destinationObject->GetStack() );
+		
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+		
+//		CStack		*	frontStack = userData->GetStack();
+//		CCard		*	currentCard = frontStack->GetCurrentCard();
+//		currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
+		
+		if( !canGoThere )
+		{
+			LEOResumeContext( inContext );
+			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't go there." ); // +++ Should we instead set the result here?
+		}
 	}
-	if( canGoThere )
-		userData->SetStack( destinationObject->GetStack() );
-	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-	
-//	CStack		*	frontStack = userData->GetStack();
-//	CCard		*	currentCard = frontStack->GetCurrentCard();
-//	currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
-	
-	if( !canGoThere )
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't go there." );
-
-	inContext->currentInstruction++;
+	else	// The "go" has completed and resumed the script.
+	{
+//		LEODebugPrintContext( inContext );
+		
+		inContext->currentInstruction++;
+	}
 }
 
 
@@ -342,9 +387,10 @@ void	WILDCreateUserPropertyInstruction( LEOContext* inContext )
 	char propNameBuf[1024] = { 0 };
 	const char*	propNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, propNameBuf, sizeof(propNameBuf), inContext );
 	LEOValuePtr objValue = inContext->stackEndPtr -1;
-	if( objValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( objValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
-        CScriptableObject*	theObject = (CScriptableObject*) objValue->object.object;
+        CScriptableObject*	theObject = (CScriptableObject*) objectValue->object.object;
 		theObject->AddUserPropertyNamed( propNameStr );
 	}
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
@@ -407,9 +453,10 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
-		bool	couldDelete = ((CScriptableObject*)theValue->object.object)->DeleteObject();
+		bool	couldDelete = ((CScriptableObject*)objectValue->object.object)->DeleteObject();
 		if( !couldDelete )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to delete this object." );
 	}
@@ -442,9 +489,10 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
 	LEOValuePtr	theMelody = inContext->stackEndPtr -1;
 	
-	if( theInstrument->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theInstrument, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
-		CScriptableObject*	thePart = (CScriptableObject*)theInstrument->object.object;
+		CScriptableObject*	thePart = (CScriptableObject*)objectValue->object.object;
 		LEOValue	trueValue;
 		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
 		couldStart = thePart->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
@@ -462,7 +510,7 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return;
 		
-		std::string			mediaURL = frontStack->GetDocument()->GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
+		std::string			mediaURL = frontStack->GetDocument()->GetMediaCache().GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
 			
 		if( mediaURL.length() == 0 )
 		{
@@ -499,11 +547,12 @@ void	WILDStartInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
 		LEOValue	trueValue;
 		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
-		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
+		bool	couldStart = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
 		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to start this object." );
@@ -538,11 +587,12 @@ void	WILDStopInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
 		LEOValue	falseValue;
 		LEOInitBooleanValue( &falseValue, false, kLEOInvalidateReferences, inContext );
-		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "started", 0, 0 );
+		bool		couldStop = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "started", 0, 0 );
 		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to stop this object." );
@@ -577,11 +627,12 @@ void	WILDShowInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
 		LEOValue	trueValue;
 		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
-		bool	couldStart = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "visible", 0, 0 );
+		bool	couldStart = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "visible", 0, 0 );
 		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to show this object." );
@@ -616,11 +667,12 @@ void	WILDHideInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( theValue->base.isa == &kLeoValueTypeScriptableObject )
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
 	{
 		LEOValue	falseValue;
 		LEOInitBooleanValue( &falseValue, false, kLEOInvalidateReferences, inContext );
-		bool		couldStop = ((CScriptableObject*)theValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "visible", 0, 0 );
+		bool		couldStop = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "visible", 0, 0 );
 		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
 			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to hide this object." );

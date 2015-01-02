@@ -22,10 +22,11 @@ void	CWebBrowserPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElemen
 }
 
 
-void	CWebBrowserPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CWebBrowserPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
-	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	CVisiblePart::SavePropertiesToElement( inElement );
 	
+	tinyxml2::XMLDocument	*	document = inElement->GetDocument();
 	tinyxml2::XMLElement	*	elem = document->NewElement("currentURL");
 	elem->SetText(GetCurrentURL().c_str());
 	inElement->InsertEndChild(elem);

@@ -15,6 +15,7 @@
 namespace Carlson {
 
 class CCard;
+class CStyleSheet;
 
 class CBackground : public CPlatformLayer
 {
@@ -24,7 +25,7 @@ public:
 
 	virtual void	WakeUp();		// The current card has started its timers etc.
 	virtual void	GoToSleep();	// The current card has stopped its timers etc.
-	virtual bool	GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart );
+	virtual bool	GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler );
 
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -37,7 +38,11 @@ public:
 	
 	virtual CScriptableObject*	GetParentObject();
 	
+	virtual void				CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );
+
 protected:
+	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet );
+	virtual void	LoadPastedPartCardContents( CPart* newPart, tinyxml2::XMLElement* currCardContents, bool haveBgContents, CStyleSheet * inStyleSheet );
 	virtual const char*	GetLayerXMLType()			{ return "background"; };
 	virtual const char*	GetIdentityForDump()		{ return "Background"; };
 	

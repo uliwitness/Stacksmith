@@ -35,6 +35,36 @@ using namespace Carlson;
 }
 
 
+-(void)	mouseEntered:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseEnter %ld", [theEvent buttonNumber] +1 );
+	}
+}
+
+
+-(void)	mouseExited:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseLeave %ld", [theEvent buttonNumber] +1 );
+	}
+}
+
+
+-(void)	mouseMoved:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseMove" );
+	}
+}
+
+
 -(void)	mouseDown: (NSEvent*)event
 {
 	BOOL					keepLooping = YES;
@@ -90,6 +120,9 @@ using namespace Carlson;
 					self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDrag %ld", [event buttonNumber] +1 );
 					break;
 				}
+				
+				default:
+					break;
 			}
 		}
 		
@@ -127,7 +160,7 @@ using namespace Carlson;
 	if( !currentCursor )
 	{
 		int			hotSpotLeft = 0, hotSpotTop = 0;
-		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
+		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaCache().GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
 		if( cursorURL.length() > 0 )
 		{
 			NSImage	*			cursorImage = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cursorURL.c_str()]]] autorelease];
@@ -138,6 +171,31 @@ using namespace Carlson;
 	if( !currentCursor )
 		currentCursor = [NSCursor arrowCursor];
 	[self addCursorRect: [self bounds] cursor: currentCursor];
+}
+
+
+-(void)	updateTrackingAreas
+{
+	[super updateTrackingAreas];
+	
+	if( mCursorTrackingArea )
+	{
+		[self removeTrackingArea: mCursorTrackingArea];
+		DESTROY(mCursorTrackingArea);
+	}
+	NSTrackingAreaOptions	trackingOptions = 0;
+	
+	if( self.owningPart->HasMessageHandler("mouseEnter") || self.owningPart->HasMessageHandler("mouseLeave") )
+		trackingOptions |= NSTrackingMouseEnteredAndExited;
+	if( self.owningPart->HasMessageHandler("mouseMove") )
+		trackingOptions |= NSTrackingMouseMoved;
+	
+	if( trackingOptions != 0 )
+	{
+		trackingOptions |= NSTrackingActiveInActiveApp;
+		mCursorTrackingArea = [[NSTrackingArea alloc] initWithRect: self.bounds options: trackingOptions owner: self userInfo: nil];
+		[self addTrackingArea: mCursorTrackingArea];
+	}
 }
 
 

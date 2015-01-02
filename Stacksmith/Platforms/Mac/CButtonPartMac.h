@@ -33,10 +33,13 @@ public:
 	virtual void	SetHighlightForTracking( bool inHighlight );
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual bool	SetTextContents( const std::string &inString );
+	virtual void	SetShowName( bool inShowName );
 	virtual void	SetVisible( bool visible )		{ CButtonPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual NSView*	GetView();
+	virtual void	SetToolTip( const std::string& inToolTip )	{ CButtonPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
 	
 	virtual void	SetIconID( ObjectID inID );
+	virtual void	SetScript( std::string inScript );
 	
 	virtual void	PrepareMouseUp();
 	virtual void	SetStyle( TButtonStyle inButtonStyle );

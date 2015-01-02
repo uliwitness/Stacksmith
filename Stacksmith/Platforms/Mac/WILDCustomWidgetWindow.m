@@ -28,14 +28,16 @@
 	[super setDelegate: anObject];
 	if( !self.customWidget )
 	{
-		NSButton*	rightmostButton = [self standardWindowButton: NSWindowFullScreenButton];	// If this was generic code, I'd fall back on other window buttons here if the window doesn't support fullscreen, and maybe the toolbar button on older OSes.
+		NSButton*	rightmostButton = [self standardWindowButton: NSWindowCloseButton];	// If this was generic code, I'd fall back on other window buttons here if the window doesn't support fullscreen, and maybe the toolbar button on older OSes.
 		NSRect		box = rightmostButton.frame;
-		box.origin.x -= 56;
+		box.origin.x = rightmostButton.superview.frame.size.width - 54;
+		box.origin.y -= 3;
 		box.size.width = 48;
 		NSView*		superView = rightmostButton.superview;	// Use same superview as another widget, as DTS recommended.
 		self.customWidget = [[[NSButton alloc] initWithFrame: box] autorelease];
+		[self.customWidget sizeToFit];
 		[self.customWidget setBezelStyle: NSRoundRectBezelStyle];
-		[self.customWidget.cell setControlSize: NSSmallControlSize];
+		[self.customWidget.cell setControlSize: NSMiniControlSize];
 		[self.customWidget setTitle: @"Edit"];
 		[self.customWidget setTranslatesAutoresizingMaskIntoConstraints: YES];
 		[self.customWidget setAutoresizingMask: NSViewMinXMargin | NSViewMinYMargin];	// Remember, AppKit specifies the *flexible* parts, not the fixed-distance ones.

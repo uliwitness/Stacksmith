@@ -18,6 +18,7 @@
 #import "WILDCardInfoViewController.h"
 #import "WILDBackgroundInfoViewController.h"
 #import "WILDStackInfoViewController.h"
+#import "UKHelperMacros.h"
 
 
 NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
@@ -187,6 +188,7 @@ using namespace Carlson;
 		upMessage = "mouseUp";
 		doubleUpMessage = "mouseDoubleClick";
 		
+		CAutoreleasePool		pool;
 		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown" );
 	}
 
@@ -208,6 +210,9 @@ using namespace Carlson;
 					hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage );
 					break;
 				}
+				
+				default:
+					break;
 			}
 			
 			[pool release];
@@ -268,10 +273,14 @@ using namespace Carlson;
 	
 	std::function<void(const char *, size_t, size_t, CScriptableObject *)>	errHandler = [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); };
 	
-	theCard->SendMessage( NULL, errHandler, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
-
+	{
+		CAutoreleasePool		pool;
+		theCard->SendMessage( NULL, errHandler, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
+	}
+	
 	if( theEvent.charactersIgnoringModifiers.length > 0 )
 	{
+		CAutoreleasePool		pool;
 		unichar theKey = [theEvent.charactersIgnoringModifiers characterAtIndex: 0];
 		switch( theKey )
 		{
@@ -467,24 +476,27 @@ using namespace Carlson;
 	CCard	*	theCard = mStack->GetCurrentCard();
 	if( !theCard )
 		return;
-	
-	size_t	numParts = theCard->GetNumParts();
-	for( size_t x = 0; x < numParts; x++ )
-	{
-		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
-		if( !currPart )
-			continue;
-		currPart->CreateViewIn( mContentView );
-	}
 
 	CBackground	*	theBg = theCard->GetBackground();
-	numParts = theBg->GetNumParts();
+	size_t			numParts = theBg->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 	{
 		CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theBg->GetPart(x));
 		if( !currPart )
 			continue;
 		currPart->CreateViewIn( mContentView );
+	}
+	
+	if( !mStack->GetEditingBackground() )
+	{
+		numParts = theCard->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CMacPartBase*	currPart = dynamic_cast<CMacPartBase*>(theCard->GetPart(x));
+			if( !currPart )
+				continue;
+			currPart->CreateViewIn( mContentView );
+		}
 	}
 }
 
@@ -574,6 +586,24 @@ using namespace Carlson;
 		}
 	}
 
+	NSSize	cardSize = [mContentView layer].frame.size;
+	size_t	numGuidelines = mStack->GetNumGuidelines();
+	for( size_t x = 0; x < numGuidelines; x++ )
+	{
+		long long	coord = 0LL;
+		bool		horzNotVert = false;
+		mStack->GetGuidelineAtIndex( x, &coord, &horzNotVert );
+		[NSColor.blueColor set];
+		if( horzNotVert )
+		{
+			[NSBezierPath strokeLineFromPoint: NSMakePoint(0,cardSize.height -coord) toPoint: NSMakePoint(cardSize.width,cardSize.height -coord)];
+		}
+		else
+		{
+			[NSBezierPath strokeLineFromPoint: NSMakePoint(coord,0) toPoint: NSMakePoint(coord,cardSize.height)];
+		}
+	}
+	
 	if( !mSelectionOverlay )
 		mSelectionOverlay = [[CALayer alloc] init];
 	[[mContentView layer] addSublayer: mSelectionOverlay];
@@ -645,9 +675,16 @@ using namespace Carlson;
 	}
 	else
 	{
+        @try
+        {
 		self.window.contentView = mContentView;
 		[self.window setTitle: [NSString stringWithUTF8String: mStack->GetName().c_str()]];
 		[self.window setRepresentedURL: [NSURL URLWithString: [NSString stringWithUTF8String: mStack->GetURL().c_str()]]];
+        }
+        @catch( NSException* err )
+        {
+            UKLog(@"Exception caught: %@", err);
+        }
 	}
 	NSDisableScreenUpdates();
 	if( !prevWindow )
@@ -672,6 +709,7 @@ using namespace Carlson;
 
 -(void)	updateToolbarVisibility
 {
+	BOOL	haveToolbar = self.window.toolbar != nil;
 	if( mStack->GetTool() != EBrowseTool )
 	{
 		NSToolbar	*editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDEditToolbar"] autorelease];
@@ -679,11 +717,13 @@ using namespace Carlson;
 		[editToolbar setAllowsUserCustomization: NO];
 		[editToolbar setVisible: NO];
 		[self.window setToolbar: editToolbar];
-		[self.window toggleToolbarShown: self];
+		if( !haveToolbar )
+			[self.window toggleToolbarShown: self];
 	}
-	else
+	else if( mStack->GetTool() != EPointerTool )
 	{
-		[self.window toggleToolbarShown: self];
+		if( haveToolbar )
+			[self.window toggleToolbarShown: self];
 		[self.window setToolbar: nil];
 		if( mStack->GetEditingBackground() )
 			mStack->SetEditingBackground( false );	// Switch back to foreground.
@@ -735,7 +775,14 @@ using namespace Carlson;
 	
 	if( mStack->GetStyle() == EStackStylePopup )
 	{
-		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
+		@try
+		{
+			[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
+		}
+		@catch( NSException* err )
+		{
+			NSLog(@"error opening stack window %@",err);
+		}
 	}
 }
 
@@ -838,25 +885,25 @@ using namespace Carlson;
 
 -(IBAction)	goFirstCard: (id)sender
 {
-	mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	goPrevCard: (id)sender
 {
-	mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	goNextCard: (id)sender
 {
-	mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	goLastCard: (id)sender
 {
-	mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
@@ -864,7 +911,15 @@ using namespace Carlson;
 {
 	if( theItem.action == @selector(delete:) )
 	{
-		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanDeleteDeleteSelectedItem() );
+		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanDeleteSelectedItem() );
+	}
+	else if( theItem.action == @selector(copy:) )
+	{
+		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanCopySelectedItem() );
+	}
+	else if( theItem.action == @selector(paste:) )
+	{
+		return( mStack->GetTool() == EPointerTool && [[NSPasteboard generalPasteboard] availableTypeFromArray: @[ @"com.the-void-software.stacksmith.parts.xml" ]] != nil );
 	}
 	else if( theItem.action == @selector(deleteCard:) )
 	{
@@ -873,6 +928,11 @@ using namespace Carlson;
 	else if( theItem.action == @selector(deleteStack:) )
 	{
 		return( mStack->GetDocument()->GetNumStacks() > 1 && !mStack->GetCantDelete() );
+	}
+	else if( theItem.action == @selector(toggleBackgroundEditMode:) )
+	{
+		[theItem setState: mStack->GetEditingBackground() ? NSOnState : NSOffState];
+		return YES;
 	}
 	else
 		return [self respondsToSelector: theItem.action];
@@ -884,6 +944,35 @@ using namespace Carlson;
 	if( mStack->GetTool() == EPointerTool )
 	{
 		mStack->GetCurrentLayer()->DeleteSelectedItem();
+	}
+}
+
+
+-(IBAction)	copy: (id)sender
+{
+	if( mStack->GetTool() == EPointerTool )
+	{
+		std::string	xml = mStack->GetCurrentLayer()->CopySelectedItem();
+		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
+		[pb clearContents];
+		[pb addTypes: @[ @"com.the-void-software.stacksmith.parts.xml" ] owner: nil];
+		[pb setString: [NSString stringWithUTF8String: xml.c_str()] forType: @"com.the-void-software.stacksmith.parts.xml"];
+	}
+}
+
+
+-(IBAction)	paste: (id)sender
+{
+	if( mStack->GetTool() == EPointerTool )
+	{
+		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
+		NSString*		xmlStr = [pb stringForType: @"com.the-void-software.stacksmith.parts.xml"];
+		mStack->DeselectAllObjectsOnCard();
+		mStack->DeselectAllObjectsOnBackground();
+		std::vector<CPartRef>	newParts = mStack->GetCurrentLayer()->PasteObject( std::string(xmlStr.UTF8String) );
+		[self refreshExistenceAndOrderOfAllViews];
+		for( CPart* thePart : newParts )
+			thePart->SetSelected(true);
 	}
 }
 
@@ -902,19 +991,19 @@ using namespace Carlson;
 
 -(IBAction)	newStack: (id)sender
 {
-	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL );
+	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	newCard: (id)sender
 {
-	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	newBackground: (id)sender
 {
-	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL );
+	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 

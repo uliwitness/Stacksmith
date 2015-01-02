@@ -16,7 +16,7 @@ namespace Carlson {
 class CPicturePart : public CVisiblePart
 {
 public:
-	explicit CPicturePart( CLayer *inOwner ) : CVisiblePart( inOwner ) {};
+	explicit CPicturePart( CLayer *inOwner ) : CVisiblePart( inOwner ), mTransparent(false) {};
 	
 	virtual void			SetMediaPath( const std::string& inNameOrPath )	{ mMediaPath = inNameOrPath; IncrementChangeCount(); };
 	virtual void			SetTransparent( bool inTransparent )	{ mTransparent = inTransparent; IncrementChangeCount(); };

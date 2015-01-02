@@ -53,6 +53,7 @@ namespace Carlson
 @property(retain)	IBOutlet NSButton			*		contentsEditorButton;
 @property(retain)	IBOutlet NSSlider			*		lineWidthSlider;
 @property(retain)	IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
+@property(retain)	IBOutlet NSTextField		*		toolTipField;
 
 -(id)		initWithPart: (Carlson::CPart*)inPart;
 

@@ -104,12 +104,15 @@ public:
 	virtual void			SetBevelAngle( int a )			{ mBevelAngle = a; IncrementChangeCount(); };
 	int						GetBevelAngle()					{ return mBevelAngle; };
 	
+	virtual void			SetToolTip( const std::string& inToolTip )	{ mToolTip = inToolTip; IncrementChangeCount(); };
+	virtual std::string		GetToolTip()								{ return mToolTip; };
+	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	
 	virtual void			DumpProperties( size_t inIndent );
 
@@ -134,6 +137,7 @@ protected:
 	int				mLineWidth;
 	int				mBevelWidth;
 	int				mBevelAngle;
+	std::string		mToolTip;
 };
 
 }

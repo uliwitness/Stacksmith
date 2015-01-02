@@ -15,12 +15,22 @@ using namespace Carlson;
 
 /*static*/ void	CURLConnection::SendRequestWithCompletionHandler( CURLRequest& inRequest, std::function<void (CURLResponse inResponse, const char* inData, size_t inDataLength)> completionBlock )
 {
-	[NSURLConnection sendAsynchronousRequest: inRequest.GetMacRequest()
-                          queue: [NSOperationQueue mainQueue]
-              completionHandler: ^(NSURLResponse* response, NSData* data, NSError* connectionError)
-								{
-									CAutoreleasePool	pool;
-									CURLResponse		responseObject(response);
-									completionBlock( responseObject, (const char*)[data bytes], [data length] );
-								}];
+	if( [inRequest.GetMacRequest().URL.scheme isEqualToString: @"file"] )
+	{
+		CURLResponse	responseObject(nil);
+		NSData*	data = [NSData dataWithContentsOfFile: [inRequest.GetMacRequest().URL.absoluteURL path]];
+		CAutoreleasePool	pool;
+		completionBlock( responseObject, (const char*)data.bytes, data.length );
+	}
+	else
+	{
+		[NSURLConnection sendAsynchronousRequest: inRequest.GetMacRequest()
+							  queue: [NSOperationQueue mainQueue]
+				  completionHandler: ^(NSURLResponse* response, NSData* data, NSError* connectionError)
+									{
+										CAutoreleasePool	pool;
+										CURLResponse		responseObject(response);
+										completionBlock( responseObject, (const char*)[data bytes], [data length] );
+									}];
+	}
 }

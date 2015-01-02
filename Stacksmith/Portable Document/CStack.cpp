@@ -19,7 +19,8 @@
 using namespace Carlson;
 
 
-CStack*		CStack::sFrontStack = NULL;
+CStack*							CStack::sFrontStack = NULL;
+std::function<void(CStack*)>	CStack::sFrontStackChangedBlock = NULL;
 
 
 static const char*		sToolNames[ETool_Last] =
@@ -68,6 +69,9 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 	mLoading = true;
 	
 	Retain();
+	
+	if( mURL.find("file://") != 0 )
+		mFileReadOnly = true;
 	
 	CURLRequest		request( mURL );
 	//printf("Loading %s\n",mURL.c_str());
@@ -391,11 +395,14 @@ bool	CStack::DeleteCard( CCard* inCard )
 	
 	if( GetCurrentCard() == inCard )
 	{
-		GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, this, NULL );
-		RemoveCard(inCard);
+		GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, this, NULL, [this,inCard,lastCardInBg,theBg]()
+		{
+			RemoveCard(inCard);
+			
+			if( lastCardInBg )
+				RemoveBackground( theBg );
+		} );
 		
-		if( lastCardInBg )
-			RemoveBackground( theBg );
 	}
 	
 	return true;
@@ -669,17 +676,48 @@ void	CStack::SetPeeking( bool inState )
 }
 
 
-void	CStack::SetTool( TTool inTool )
+void	CStack::DeselectAllObjectsOnCard()
 {
-	mCurrentTool = inTool;
-	
 	CCard	*	theCard = GetCurrentCard();
 	size_t	numParts = theCard->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 		theCard->GetPart(x)->SetSelected(false);
-	numParts = theCard->GetBackground()->GetNumParts();
+}
+
+
+void	CStack::SelectAllObjectsOnCard()
+{
+	CCard	*	theCard = GetCurrentCard();
+	size_t	numParts = theCard->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+		theCard->GetPart(x)->SetSelected(true);
+}
+
+
+void	CStack::DeselectAllObjectsOnBackground()
+{
+	CCard	*	theCard = GetCurrentCard();
+	size_t numParts = theCard->GetBackground()->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 		theCard->GetBackground()->GetPart(x)->SetSelected(false);
+}
+
+
+void	CStack::SelectAllObjectsOnBackground()
+{
+	CCard	*	theCard = GetCurrentCard();
+	size_t numParts = theCard->GetBackground()->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+		theCard->GetBackground()->GetPart(x)->SetSelected(true);
+}
+
+
+void	CStack::SetTool( TTool inTool )
+{
+	mCurrentTool = inTool;
+	
+	DeselectAllObjectsOnCard();
+	DeselectAllObjectsOnBackground();
 }
 
 

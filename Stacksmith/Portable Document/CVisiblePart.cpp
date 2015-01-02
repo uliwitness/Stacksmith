@@ -64,11 +64,13 @@ void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mLineWidth = CTinyXMLUtils::GetIntNamed( inElement, "lineWidth", 1 );
 	mBevelWidth = CTinyXMLUtils::GetIntNamed( inElement, "bevelWidth", 1 );
 	mBevelAngle = CTinyXMLUtils::GetIntNamed( inElement, "bevelAngle", 315 );
+	CTinyXMLUtils::GetStringNamed( inElement, "toolTip", mToolTip );
 }
 
 
-void	CVisiblePart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CVisiblePart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
+	tinyxml2::XMLDocument* document = inElement->GetDocument();
 	CTinyXMLUtils::AddBoolNamed( inElement, mVisible, "visible" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mEnabled, "enabled" );
 	
@@ -141,6 +143,10 @@ void	CVisiblePart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inE
 	elem = document->NewElement("bevelAngle");
 	elem->SetText(mBevelAngle);
 	inElement->InsertEndChild(elem);
+
+	elem = document->NewElement("toolTip");
+	elem->SetText( mToolTip.c_str() );
+	inElement->InsertEndChild(elem);
 }
 
 
@@ -160,6 +166,7 @@ void	CVisiblePart::DumpProperties( size_t inIndentLevel )
 	printf( "%slineWidth = %d\n", indentStr, mLineWidth );
 	printf( "%sbevelWidth = %d\n", indentStr, mBevelWidth );
 	printf( "%sbevelAngle = %d\n", indentStr, mBevelAngle );
+	printf( "%stoolTip = %s\n", indentStr, mToolTip.c_str() );
 }
 
 
@@ -168,6 +175,10 @@ bool	CVisiblePart::GetPropertyNamed( const char* inPropertyName, size_t byteRang
 	if( strcasecmp("visible", inPropertyName) == 0 )
 	{
 		LEOInitBooleanValue( outValue, GetVisible(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("tooltip", inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mToolTip.c_str(), mToolTip.length(), kLEOInvalidateReferences, inContext );
 	}
 	else
 		return CPart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
@@ -183,6 +194,14 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetVisible( visState );
+	}
+	else if( strcasecmp("tooltip", inPropertyName) == 0 )
+	{
+		char	str[1024] = {0};
+		const char*	theStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		SetToolTip( std::string(theStr) );
 	}
 	else
 		return CPart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

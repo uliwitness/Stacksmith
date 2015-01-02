@@ -71,7 +71,7 @@ using namespace Carlson;
 {
 	if( !mImage )
 	{
-		std::string	imagePath = [mOwner document]->GetMediaURLByIDOfType( mID, EMediaTypeIcon );
+		std::string	imagePath = [mOwner document]->GetMediaCache().GetMediaURLByIDOfType( mID, EMediaTypeIcon );
 		if( imagePath.size() != 0 )
 			mImage = [[NSImage alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithUTF8String: imagePath.c_str()]]];
 	}
@@ -144,7 +144,7 @@ using namespace Carlson;
 		sibi.owner = self;
 		[mIcons addObject: sibi];
 
-		NSInteger	x = 0, count = mDocument->GetNumMediaOfType( EMediaTypeIcon );
+		NSInteger	x = 0, count = mDocument->GetMediaCache().GetNumMediaOfType( EMediaTypeIcon );
 		for( x = 0; x < count; x++ )
 		{
 			NSString*		theName = nil;
@@ -153,10 +153,10 @@ using namespace Carlson;
 			BOOL			isBuiltIn = NO;
 			sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
 			
-			theID = mDocument->GetIDOfMediaOfTypeAtIndex( EMediaTypeIcon, x );
-			theName = [NSString stringWithUTF8String: mDocument->GetMediaNameByIDOfType( theID, EMediaTypeIcon ).c_str()];
-			fileName = [NSString stringWithUTF8String: mDocument->GetMediaURLByIDOfType( theID, EMediaTypeIcon ).c_str()];
-			isBuiltIn = mDocument->GetMediaIsBuiltInByIDOfType( theID, EMediaTypeIcon );
+			theID = mDocument->GetMediaCache().GetIDOfMediaOfTypeAtIndex( EMediaTypeIcon, x );
+			theName = [NSString stringWithUTF8String: mDocument->GetMediaCache().GetMediaNameByIDOfType( theID, EMediaTypeIcon ).c_str()];
+			fileName = [NSString stringWithUTF8String: mDocument->GetMediaCache().GetMediaURLByIDOfType( theID, EMediaTypeIcon ).c_str()];
+			isBuiltIn = mDocument->GetMediaCache().GetMediaIsBuiltInByIDOfType( theID, EMediaTypeIcon );
 			
 			sibi.name = theName;
 			sibi.filename = fileName;
@@ -241,9 +241,9 @@ using namespace Carlson;
 	for( NSImage* theImg in images )
 	{
 		NSString*	pictureName = @"From Clipboard";
-		ObjectID	pictureID = mDocument->GetUniqueIDForMedia();
+		ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 		
-		std::string	filePath = mDocument->AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+		std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
 		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 		
@@ -306,9 +306,9 @@ using namespace Carlson;
 		{
 			NSImage *		theImg = [[[NSImage alloc] initWithContentsOfURL: theImgFile] autorelease];
 			NSString*		pictureName = [[NSFileManager defaultManager] displayNameAtPath: [theImgFile path]];
-			ObjectID	pictureID = mDocument->GetUniqueIDForMedia();
+			ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 			
-			std::string	filePath = mDocument->AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
 			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 			
@@ -334,9 +334,9 @@ using namespace Carlson;
 		for( NSImage* theImg in images )
 		{
 			NSString*		pictureName = @"Dropped Image";
-			ObjectID	pictureID = mDocument->GetUniqueIDForMedia();
+			ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 			
-			std::string	filePath = mDocument->AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
 			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 			

@@ -26,7 +26,7 @@ public:
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	
 	virtual void			LoadCurrentURL( const std::string& inURL )	{ /* Download, and then: */ SetCurrentURL(inURL); }
 	

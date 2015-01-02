@@ -30,7 +30,7 @@ typedef enum
 class CCard : public CPlatformLayer
 {
 public:
-	CCard( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(NULL)	{};
+	CCard( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(NULL), mSpeed(EVisualEffectSpeedNormal)	{};
 	~CCard();
 	
 	bool			IsMarked()					{ return mMarked; };
@@ -47,15 +47,17 @@ public:
 	virtual CBackground*		GetBackground()		{ return mOwningBackground; };
 	virtual void				SetBackground( CBackground* inBg )	{ mOwningBackground = inBg; };	// Used mainly for assigning a background to a newly-created, never-before saved card in RAM.
 	
-	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart );
+	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler );
 	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
 	virtual std::string			GetDisplayName();
+
+	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines.
 	
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
-	virtual void	SavePropertiesToElementOfDocument( tinyxml2::XMLElement* stackfile, tinyxml2::XMLDocument* document );
+	virtual void	SavePropertiesToElement( tinyxml2::XMLElement* stackfile );
 	virtual void	CallAllCompletionBlocks();
 	virtual const char*	GetLayerXMLType()			{ return "card"; };
 

@@ -65,7 +65,7 @@ public:
 	virtual bool				GetTextContents( std::string& outString )		{ return false; };
 	virtual bool				SetTextContents( const std::string& inString)	{ return false; };
 
-	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart )			{ return false; };
+	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )			{ return false; };
 
 	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )						{ return false; };
 	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )	{ return false; };
@@ -89,6 +89,7 @@ public:
 	virtual bool				SetUserPropertyValueForName( const std::string& inValue, const char* inPropName )	{ return false; };
 	
 	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
+	virtual bool				HasMessageHandler( const char* inMsgName );	// To find whether this object implements the given message (e.g. to not ask the OS for mouseMoved events unless actually implemented).
 	
 	virtual LEOContextGroup*	GetScriptContextGroupObject()				{ return NULL; };
 	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );

@@ -62,7 +62,7 @@ CMessageBoxMac::CMessageBoxMac()
 	mMacWindowController = [[WILDMessageBoxWindowController alloc] initWithWindowNibName: @"WILDMessageBoxWindowController"];
 	mMacWindowController.messageBox = this;
 	
-#if 0
+#if 1
 	[mMacWindowController.window.contentView setLayerUsesCoreImageFilters: YES];
 	CIFilter	*	theFilter = [CIFilter filterWithName: @"CIGaussianBlur"];
 	[theFilter setDefaults];

@@ -15,11 +15,14 @@
 	BOOL				mBackgroundEditMode;
 	id					mFlagsChangedEventMonitor;
 	IBOutlet NSMenuItem	*mNewObjectSeparator;
+	IBOutlet NSMenuItem	*mLockPseudoMenu;
 }
 
 
 -(IBAction)	orderFrontMessageBox: (id)sender;
 -(IBAction)	orderFrontStandardAboutPanel: (id)sender;
 -(IBAction)	goHelp: (id)sender;
+
+-(void)	checkForScriptToResume: (id)sender;
 
 @end

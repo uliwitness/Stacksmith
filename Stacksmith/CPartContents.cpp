@@ -15,14 +15,14 @@ using namespace Carlson;
 
 
 
-CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElement )
+CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElement, CStyleSheet* inStyleSheet )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
 	mHighlight = CTinyXMLUtils::GetBoolNamed( inElement, "highlight", false );
 	tinyxml2::XMLElement * textElement = inElement->FirstChildElement( "text" );
 	if( textElement )
 	{
-		mAttributedString.LoadFromElementWithStyles( textElement, owningLayer->GetStyles() );
+		mAttributedString.LoadFromElementWithStyles( textElement, inStyleSheet ? *inStyleSheet : owningLayer->GetStyles() );
 	}
 	std::string	theLayerStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "layer", theLayerStr );
@@ -31,8 +31,9 @@ CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElem
 }
 
 
-void	CPartContents::SaveToElementOfDocumentStyleSheet( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document, CStyleSheet *styleSheet )
+void	CPartContents::SaveToElementAndStyleSheet( tinyxml2::XMLElement * inElement, CStyleSheet *styleSheet )
 {
+	tinyxml2::XMLDocument	*	document = inElement->GetDocument();
 	CTinyXMLUtils::AddStringNamed(inElement, (mIsOnBackground ? "background" : "card"), "layer" );
 	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
 	tinyxml2::XMLElement	*	elem = NULL;

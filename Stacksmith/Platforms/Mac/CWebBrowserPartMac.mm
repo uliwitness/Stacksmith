@@ -27,6 +27,7 @@ using namespace Carlson;
 {
 	if( frame == sender.mainFrame )
 	{
+		CAutoreleasePool		pool;
 		const char*	currURLStr = sender.mainFrame.dataSource.request.URL.absoluteString.UTF8String;
 		self.owningBrowser->SetCurrentURL( currURLStr );
 		self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "loadPage" );
@@ -36,6 +37,7 @@ using namespace Carlson;
 
 -(void)	webView: (WebView *)sender didFailLoadWithError: (NSError *)error forFrame: (WebFrame *)frame
 {
+	CAutoreleasePool		pool;
 	self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "loadPage %s", error.localizedDescription.UTF8String );
 }
 
@@ -64,6 +66,7 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
+	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
 }
 

@@ -10,6 +10,7 @@
 #include "CTinyXMLUtils.h"
 #include "CPartContents.h"
 #include "CStack.h"
+#include "CDocument.h"
 
 
 using namespace Carlson;
@@ -85,9 +86,10 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-void	CButtonPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document )
+void	CButtonPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
-	CVisiblePart::SavePropertiesToElementOfDocument( inElement, document );
+	tinyxml2::XMLDocument* document = inElement->GetDocument();
+	CVisiblePart::SavePropertiesToElement( inElement );
 	
 	tinyxml2::XMLElement	*	elem = document->NewElement("style");
 	elem->SetText( sButtonStyleStrings[mButtonStyle] );
@@ -141,6 +143,24 @@ void	CButtonPart::SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inEl
 		elem = document->NewElement("textStyle");
 		elem->SetText("plain");
 		inElement->InsertEndChild(elem);
+	}
+}
+
+
+void	CButtonPart::SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement )
+{
+	if( mIconID != 0 )
+		GetDocument()->GetMediaCache().SaveMediaToElement( mIconID, EMediaTypeIcon, inElement );
+}
+
+
+void	CButtonPart::UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings )
+{
+	if( mIconID != 0 )
+	{
+		auto	foundNewID = changedIDMappings.find( mIconID );
+		if( foundNewID != changedIDMappings.end() )
+			mIconID = foundNewID->second;
 	}
 }
 

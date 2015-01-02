@@ -26,12 +26,16 @@
 #include <ios>
 #include <sstream>
 #include "CRecentCardsList.h"
+#import "UKHelperMacros.h"
+
+
+// On startup, if not asked to open any stack, we will look for a stack
+//	of this name, first in our resources folder, and if none is there,
+//	we will look next to the application for it.
+#define HOME_STACK_NAME		"Home"
 
 
 using namespace Carlson;
-
-
-static std::vector<CDocumentRef>		sOpenDocuments;
 
 
 void	WILDFirstNativeCall( void );
@@ -42,7 +46,27 @@ void	WILDFirstNativeCall( void )
 }
 
 
+void	WILDScheduleResumeOfScript( void );
+
+void	WILDScheduleResumeOfScript( void )
+{
+	[(WILDAppDelegate*)[NSApplication.sharedApplication delegate] performSelector: @selector(checkForScriptToResume:) withObject: nil afterDelay: 0.0];
+}
+
+
 @implementation WILDAppDelegate
+
+-(id)	init
+{
+	self = [super init];
+	if( self )
+	{
+		new CDocumentManagerMac;	// Create the singleton of our subclass.
+	}
+	
+	return self;
+}
+
 
 -(void)	initializeParser
 {
@@ -75,6 +99,7 @@ void	WILDFirstNativeCall( void )
 	LEOAddInstructionsToInstructionArray( gObjCCallInstructions, LEO_NUMBER_OF_OBJCCALL_INSTRUCTIONS, &kFirstObjCCallInstruction );
 	
 	LEOSetFirstNativeCallCallback( WILDFirstNativeCall );	// This calls us to lazily load the (several MB) of native headers when needed.
+	LEOSetCheckForResumeProc( WILDScheduleResumeOfScript );	// This calls us whenever someone requests to queue up their context to resume a script that has been paused.
 	
 	#if REMOTE_DEBUGGER
 	LEOInitRemoteDebugger( "127.0.0.1" );
@@ -87,7 +112,7 @@ void	WILDFirstNativeCall( void )
 	CMessageWatcher::SetSharedInstance( new CMessageWatcherMac );
 	CRecentCardsList::SetSharedInstance( new CRecentCardsListConcrete<CRecentCardInfo>() );
 	
-	Carlson::CDocumentMac::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
+	Carlson::CMediaCache::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
 }
 
 
@@ -108,10 +133,7 @@ void	WILDFirstNativeCall( void )
 	
 	if( peekingStateDidChange )
 	{
-		for( auto currDoc : sOpenDocuments )
-		{
-			currDoc->SetPeeking( mPeeking == YES );
-		}
+		CDocumentManager::GetSharedDocumentManager()->SetPeeking( mPeeking == YES );
 	}
 
 	return inEvent;
@@ -125,32 +147,32 @@ void	WILDFirstNativeCall( void )
 	mFlagsChangedEventMonitor = [[NSEvent addLocalMonitorForEventsMatchingMask: NSFlagsChangedMask handler: ^(NSEvent* inEvent){ return [self handleFlagsChangedEvent: inEvent]; }] retain];
 	
 	[[NSColorPanel sharedColorPanel] setShowsAlpha: YES];
+	
+	CStack::SetFrontStackChangedCallback( [self]( CStack* inFrontStack )
+	{
+		[mLockPseudoMenu setHidden: inFrontStack == NULL || (inFrontStack->GetEffectiveCantModify() == false)];
+	} );
 }
 
 
 -(void)	applicationDidFinishLaunching:(NSNotification *)notification
 {
 	UKCrashReporterCheckForCrash();
+	
+	if( !CDocumentManager::GetSharedDocumentManager()->HaveDocuments() )
+		[self applicationOpenUntitledFile: NSApp];
 }
 
 
 -(void)	applicationWillTerminate:(NSNotification *)notification
 {
-	for( auto currDocument : sOpenDocuments )
-	{
-		if( currDocument->GetNeedsToBeSaved() )
-			currDocument->Save();
-	}
+	CDocumentManager::GetSharedDocumentManager()->SaveAll();
 }
 
 
 //-(void)	applicationWillResignActive:(NSNotification *)notification
 //{
-//	for( auto currDocument : sOpenDocuments )
-//	{
-//		if( currDocument->GetNeedsToBeSaved() )
-//			currDocument->Save();
-//	}
+//	CDocumentManager::GetSharedDocumentManager()->SaveAll();
 //}
 
 
@@ -179,9 +201,19 @@ void	WILDFirstNativeCall( void )
 		}
 	}
 
-	return [self application: NSApp openFile: [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"Home.xstk"]];
+	NSString*	thePath = [[NSBundle mainBundle] pathForResource: @"" HOME_STACK_NAME ofType: @"xstk"];
+	if( !thePath )
+	{
+		thePath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"" HOME_STACK_NAME ".xstk"];
+	}
+	return [self application: NSApp openFile: thePath];
 }
 
+
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+{
+	return CDocumentManager::GetSharedDocumentManager()->HaveDocuments();
+}
 
 -(BOOL)	application:(NSApplication *)sender openFile:(NSString *)filename
 {
@@ -191,41 +223,10 @@ void	WILDFirstNativeCall( void )
 -(BOOL)	application: (ULIURLHandlingApplication*)sender openURL: (NSURL*)theFile
 {
 	std::string		fileURL( theFile.absoluteString.UTF8String );
-	fileURL.append("/project.xml");
-	size_t	foundPos = fileURL.find("x-stack://");
-	size_t	foundPos2 = fileURL.find("file://");
-    if( foundPos == 0 )
-		fileURL.replace(foundPos, 10, "http://");
-	else if( foundPos2 == 0 )
+	CDocumentManager::GetSharedDocumentManager()->OpenDocumentFromURL( fileURL,
+	[]( CDocument * inNewDocument )
 	{
-		NSError		*		err = nil;
-		if( ![[NSURL URLWithString: [NSString stringWithUTF8String: fileURL.c_str()]]checkResourceIsReachableAndReturnError: &err] )	// File not found?
-		{
-			fileURL = theFile.absoluteString.UTF8String;
-			fileURL.append("/toc.xml");	// +++ old betas used toc.xml for the main file.
-		}
-	}
-	
-	sOpenDocuments.push_back( new CDocumentMac() );
-	CDocumentRef	currDoc = sOpenDocuments.back();
-	
-	currDoc->LoadFromURL( fileURL, [self](Carlson::CDocument * inDocument)
-	{
-		Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
-		if( !theCppStack )
-		{
-			std::stringstream	errMsg;
-			errMsg << "Can't find stack at " << inDocument->GetURL() << ".";
-			CAlert::RunMessageAlert( errMsg.str() );
-			return;
-		}
-		theCppStack->Load( [inDocument,self](Carlson::CStack* inStack)
-		{
-			inStack->GetCard(0)->Load( [inDocument,inStack,self](Carlson::CLayer*inCard)
-			{
-				inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL );
-			} );
-		} );
+		
 	});
 	
 	return YES;	// We show our own errors asynchronously.
@@ -244,11 +245,22 @@ void	WILDFirstNativeCall( void )
 		NSError	*	err = nil;
 		[[NSFileManager defaultManager] removeItemAtPath: savePanel.URL.path error: &err];
 		
-		CDocumentMac*	theDoc = new CDocumentMac();
-		sOpenDocuments.push_back( theDoc );
-		theDoc->CreateAtURL( [savePanel.URL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String );
-		
-		theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL );
+        try
+        {
+            CDocumentMac*	theDoc = new CDocumentMac();
+            CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
+            theDoc->CreateAtURL( [savePanel.URL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String );
+            
+            theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
+        }
+        catch( std::exception& inException )
+        {
+            UKLog( @"Exception caught: %s", inException.what() );
+        }
+        catch( ... )
+        {
+            UKLog( @"Unknown exception caught" );
+        }
 	}];
 }
 
@@ -309,6 +321,12 @@ void	WILDFirstNativeCall( void )
 -(NSString*)	feedURLStringForUpdater: (SUUpdater*)inUpdater
 {
 	return @"http://stacksmith.org/nightlies/stacksmith_nightlies.rss";
+}
+
+
+-(void)	checkForScriptToResume: (id)sender
+{
+	LEOContextResumeIfAvailable();
 }
 
 @end

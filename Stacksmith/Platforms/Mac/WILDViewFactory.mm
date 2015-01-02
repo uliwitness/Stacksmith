@@ -8,6 +8,10 @@
 
 #import "WILDViewFactory.h"
 #import "WILDButtonView.h"
+#import "WILDTextView.h"
+#import "WILDTableView.h"
+#import "WILDScrollView.h"
+
 
 static WILDViewFactory*		sViewFactory = nil;
 
@@ -15,9 +19,9 @@ static WILDViewFactory*		sViewFactory = nil;
 
 @property (assign,nonatomic) IBOutlet NSButton* systemButton;
 @property (assign,nonatomic) IBOutlet WILDButtonView* shapeButton;
-@property (assign,nonatomic) IBOutlet NSScrollView* textViewInContainer;
+@property (assign,nonatomic) IBOutlet WILDScrollView* textViewInContainer;
 @property (assign,nonatomic) IBOutlet NSPopUpButton* popUpButton;
-@property (assign,nonatomic) IBOutlet NSScrollView* tableViewInContainer;
+@property (assign,nonatomic) IBOutlet WILDScrollView* tableViewInContainer;
 
 @end
 
@@ -53,9 +57,9 @@ static WILDViewFactory*		sViewFactory = nil;
 }
 
 
-+(NSTextView*)		textViewInContainer
++(WILDTextView*)		textViewInContainer
 {
-	NSScrollView	*	scroller = [self anotherInstanceOfView: [[self sharedViewFactory] textViewInContainer]];
+	WILDScrollView	*	scroller = [self anotherInstanceOfView: [[self sharedViewFactory] textViewInContainer]];
 	return scroller.documentView;
 }
 
@@ -65,9 +69,9 @@ static WILDViewFactory*		sViewFactory = nil;
 	return [self anotherInstanceOfView: [[self sharedViewFactory] popUpButton]];
 }
 
-+(NSTableView*)	tableViewInContainer
++(WILDTableView*)	tableViewInContainer
 {
-	NSScrollView	*	scroller = [self anotherInstanceOfView: [[self sharedViewFactory] tableViewInContainer]];
+	WILDScrollView	*	scroller = [self anotherInstanceOfView: [[self sharedViewFactory] tableViewInContainer]];
 	return scroller.documentView;
 }
 

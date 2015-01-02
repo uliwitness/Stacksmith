@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,7 +11,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
                 <menuItem title="Stacksmith" id="56">
@@ -209,6 +209,15 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="AlQ-PN-eRf">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Edit Background" id="htT-ns-xrL">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleBackgroundEditMode:" target="-1" id="VGR-ch-QE5"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="IzQ-Gu-6Dp">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Find" id="218">
@@ -761,15 +770,16 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Locked" image="NSLockLockedTemplate" id="B2w-H7-ZGl">
+                <menuItem title="Locked" image="NSLockLockedTemplate" id="DXo-F9-GAP" userLabel="Locked">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Locked" autoenablesItems="NO" id="bVI-W1-xl1" userLabel="Locked"/>
                 </menuItem>
             </items>
         </menu>
         <customObject id="419" customClass="NSFontManager"/>
         <customObject id="556" customClass="WILDAppDelegate">
             <connections>
-                <outlet property="mLockPseudoMenu" destination="B2w-H7-ZGl" id="KB3-0O-h06"/>
+                <outlet property="mLockPseudoMenu" destination="DXo-F9-GAP" id="E2a-ue-3Jg"/>
             </connections>
         </customObject>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="UKPropagandaProgressSheetPosition" animationBehavior="default" id="566" userLabel="ProgressSheet" customClass="NSPanel">
@@ -811,6 +821,6 @@
         <customObject id="811" customClass="UKFeedbackProvider"/>
     </objects>
     <resources>
-        <image name="NSLockLockedTemplate" width="9" height="12"/>
+        <image name="NSLockLockedTemplate" width="10" height="14"/>
     </resources>
 </document>

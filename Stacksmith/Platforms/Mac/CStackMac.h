@@ -41,7 +41,7 @@ public:
 	CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	virtual ~CStackMac();
 
-	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart );
+	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler );
 	virtual void				SetPeeking( bool inState );
 	virtual void				SetStyle( TStackStyle inStyle );
 
@@ -65,6 +65,8 @@ public:
 	virtual void				SetCardWidth( int n );
 	virtual void				SetCardHeight( int n );
 
+	virtual void				ClearAllGuidelines( bool inTrackingDone = false );
+	
 	static void					RegisterPartCreators();
 
 protected:

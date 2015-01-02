@@ -62,6 +62,7 @@ using namespace Carlson;
 	self->owningPart->PrepareMouseUp();
 	CAutoreleasePool	cppPool;
 	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp %ld", lastButtonNumber );
+	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
 	
 	return [super sendAction: theAction to: theTarget];
 }
@@ -73,7 +74,7 @@ using namespace Carlson;
 	if( !currentCursor )
 	{
 		int			hotSpotLeft = 0, hotSpotTop = 0;
-		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
+		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaCache().GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
 		if( cursorURL.length() > 0 )
 		{
 			NSImage	*			cursorImage = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cursorURL.c_str()]]] autorelease];

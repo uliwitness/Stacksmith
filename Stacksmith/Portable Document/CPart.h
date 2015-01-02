@@ -35,6 +35,18 @@ enum
 typedef uint32_t THitPart;
 
 
+enum
+{
+	EGuidelineCallbackActionAddHorizontal,			// Request to add a guideline at the given h coordinate.
+	EGuidelineCallbackActionAddVertical,			// Request to add a guideline at the given v coordinate.
+	EGuidelineCallbackActionAddHorizontalSpacer,	// Request to add a 'distance indicator' between the corrected coordinate and the given h coordinate.
+	EGuidelineCallbackActionAddVerticalSpacer,		// Request to add a 'distance indicator' between the corrected coordinate and the given v coordinate.
+	EGuidelineCallbackActionClearAllForFilling,		// Request to clear your list of guidelines in preparation for us calling you back with the new set. (don't redraw yet)
+	EGuidelineCallbackActionClearAllDone			// Request to clear your list of guidelines, we're done tracking. (redraw now)
+};
+typedef uint8_t	TGuidelineCallbackAction;
+
+
 
 class CPartCreatorBase
 {
@@ -61,7 +73,9 @@ public:
 	explicit CPart( CLayer *inOwner );
 	
 	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
-	virtual void				SaveToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
+	virtual void				SaveToElement( tinyxml2::XMLElement * inElement );
+	virtual void				SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement );
+	virtual void				UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings );
 	
 	virtual CPart*				Retain();
 	virtual void				Release();
@@ -94,15 +108,17 @@ public:
 	virtual CPartContents*		GetContentsOnCurrentCard();
 	
 	virtual bool				GetSharedText()					{ return true; };	// By default, background part contents are the same on all cards of that background.
+	virtual void				SetSharedText( bool n )			{};
 	virtual void				SetSelected( bool inSelected )	{ mSelected = inSelected; };
 	virtual bool				IsSelected()					{ return mSelected; };
 	virtual void				SetHighlight( bool inHighlighted )	{};
 	virtual void				PrepareMouseUp()				{};	// Sent when a mouse click was inside, right before we send mouseUp.
+	bool						GetShouldSendMouseEventsRightNow();
 	
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	
 	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y );	// Stack-relative coordinates relative to top left, descending down and right.
-	virtual void				Grab( THitPart inHitPart = EContentHitPart );
+	virtual void				Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// If the callback coord is LLONG_MAX and bool is TRUE, this means tracking has finished and you should remove all guidelines from the screen. If bool is FALSE in this situation, it just means we're starting a new set of guidelines.
 	virtual std::string			GetDisplayName()	{ return GenerateDisplayName( GetIdentityForDump() ); };
 	
 	virtual void				IncrementChangeCount();
@@ -113,7 +129,7 @@ protected:
 	virtual ~CPart();
 
 	virtual void				LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void				SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument* document );
+	virtual void				SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	virtual const char*			GetIdentityForDump()					{ return "Part"; };
 	virtual void				DumpProperties( size_t inIndent );
 	virtual std::string			GenerateDisplayName( const char* inTypeName );

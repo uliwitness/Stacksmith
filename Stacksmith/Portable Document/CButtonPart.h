@@ -38,6 +38,9 @@ public:
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+
+	virtual void			SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement );
+	virtual void			UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings );
 	
 	virtual bool			GetSharedText()			{ return true; };
 	virtual bool			GetSharedHighlight()	{ return mSharedHighlight; };
@@ -60,7 +63,7 @@ public:
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	virtual void			ApplyChangedSelectedLinesToView()		{};
 	
 	virtual const char*		GetIdentityForDump()	{ return "Button"; };

@@ -16,7 +16,7 @@ namespace Carlson {
 class CMoviePlayerPart : public CVisiblePart
 {
 public:
-	explicit CMoviePlayerPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mStarted(false), mControllerVisible(false), mCurrentTime(0) {};
+	explicit CMoviePlayerPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mControllerVisible(false), mStarted(false), mCurrentTime(0) {};
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -30,7 +30,7 @@ public:
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
-	virtual void			SavePropertiesToElementOfDocument( tinyxml2::XMLElement * inElement, tinyxml2::XMLDocument * inDocument );
+	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	
 	virtual const char*		GetIdentityForDump()	{ return "Movie Player"; };
 	virtual void			DumpProperties( size_t inIndent );

@@ -48,6 +48,9 @@ public:
 	virtual T&							operator *()				{ return *mObject; };
 	virtual T*							operator ->()				{ return mObject; };
 	virtual								operator T*()				{ return mObject; };
+	virtual T&							operator *() const			{ return *mObject; };
+	virtual T*							operator ->() const			{ return mObject; };
+	virtual								operator T*() const			{ return mObject; };
 	virtual	bool						operator <( const CRefCountedObjectRef<T>& inObject ) const	{ return mObject < inObject.mObject; };
 	virtual	bool						operator >( const CRefCountedObjectRef<T>& inObject ) const	{ return mObject > inObject.mObject; };
 	virtual	bool						operator ==( const CRefCountedObjectRef<T>& inObject ) const { return mObject == inObject.mObject; };

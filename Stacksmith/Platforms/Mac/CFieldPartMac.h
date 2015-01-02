@@ -18,6 +18,8 @@
 
 
 @class WILDFieldDelegate;
+@class WILDTextView;
+@class WILDTableView;
 
 
 namespace Carlson {
@@ -51,6 +53,10 @@ public:
 	virtual void	SetLineWidth( int w );
 	virtual void	SetBevelWidth( int bevel );
 	virtual void	SetBevelAngle( int a );
+	virtual void	GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs );
+	virtual void	SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs );
+	virtual void	SetToolTip( const std::string& inToolTip )	{ CFieldPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
+	virtual void	SetScript( std::string inScript );
 	
 	virtual NSView*	GetView();
 	virtual NSDictionary*			GetCocoaAttributesForPart();
@@ -59,6 +65,9 @@ public:
 
 	static NSAttributedString	*	GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs = 0, size_t endOffs = SIZE_T_MAX );
 	static void						SetAttributedStringWithCocoa( CAttributedString& stringToSet, NSAttributedString* cocoaAttrStr );
+	static size_t					UTF8OffsetFromUTF16OffsetInCocoaString( NSInteger inCharOffs, NSString* cocoaStr );
+	static size_t					UTF32OffsetFromUTF16OffsetInCocoaString( NSInteger inCharOffs, NSString* cocoaStr );
+	static NSInteger				UTF16OffsetFromUTF32OffsetInCocoaString( size_t inUTF32Offs, NSString* cocoaStr );
 	
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };
@@ -71,8 +80,8 @@ protected:
 
 	WILDScrollView*		mView;
 	WILDFieldDelegate*	mMacDelegate;
-	NSTableView *		mTableView;
-	NSTextView	*		mTextView;
+	WILDTableView *		mTableView;
+	WILDTextView	*	mTextView;
 };
 
 
