@@ -94,7 +94,13 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 
 -(void)	tableViewSelectionDidChange: (NSNotification*)notif
 {
-	[self.delegate scriptEditorAddHandlersPopupDidSelectHandler: [mHandlerList objectAtIndex: self.handlersTable.selectedRow]];
+	if( self.handlersTable.selectedRow == -1 )
+		return;	// Nothing selected, nothing to do.
+	NSDictionary	*	selectedDict = [mHandlerList objectAtIndex: self.handlersTable.selectedRow];
+	if( [selectedDict[@"WILDHandlerGroupRow"] boolValue] )	// Don't let the user insert handlers named after headlines.
+		return;
+	
+	[self.delegate scriptEditorAddHandlersPopupDidSelectHandler: selectedDict];
 }
 
 @end
