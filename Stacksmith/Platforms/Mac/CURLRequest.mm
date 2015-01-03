@@ -21,7 +21,7 @@ CURLRequest::CURLRequest( const CURLRequest& inRequest )
 
 CURLRequest::CURLRequest( const std::string& inURL )
 {
-	mMacRequestObject = [[NSURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
+	mMacRequestObject = [[NSURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]] cachePolicy: NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30.0];
 }
 
 
