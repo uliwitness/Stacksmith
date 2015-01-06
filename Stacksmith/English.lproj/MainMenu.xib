@@ -735,8 +735,7 @@
                                     <action selector="orderFrontMessageBox:" target="556" id="7qv-up-car"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show Message Watcher" id="6H8-Vo-IWp">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Show Message Watcher" keyEquivalent="W" id="6H8-Vo-IWp">
                                 <connections>
                                     <action selector="orderFrontMessageWatcher:" target="556" id="UQ9-Ma-vkA"/>
                                 </connections>
@@ -770,9 +769,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Locked" image="NSLockLockedTemplate" id="DXo-F9-GAP" userLabel="Locked">
+                <menuItem title="🔒" image="NSLockLockedTemplate" id="DXo-F9-GAP" userLabel="Locked">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Locked" autoenablesItems="NO" id="bVI-W1-xl1" userLabel="Locked"/>
+                    <menu key="submenu" title="🔒" autoenablesItems="NO" id="bVI-W1-xl1" userLabel="Locked"/>
                 </menuItem>
             </items>
         </menu>
