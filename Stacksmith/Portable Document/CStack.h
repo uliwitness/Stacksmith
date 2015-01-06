@@ -51,9 +51,10 @@ public:
 	bool			IsLoaded()			{ return mLoaded; };
 	bool			Save( const std::string& inPackagePath );
 	
-	ObjectID		GetID()			{ return mStackID; };
-	std::string		GetURL()		{ return mURL; };
-	std::string		GetFileName()	{ return mFileName; };
+	ObjectID			GetID()			{ return mStackID; };
+	std::string			GetURL()		{ return mURL; };
+	std::string			GetFileName()	{ return mFileName; };
+	virtual std::string	GetTypeName()	{ return std::string("stack"); };
 	
 	void			AddCard( CCard* inCard );	// Add at end.
 	void			InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard = NULL );	// If precedingCard == NULL insert at start.

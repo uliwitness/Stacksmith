@@ -35,6 +35,7 @@ public:
 	virtual size_t	GetNumCards()				{ return mMemberCards.size(); };
 	
 	virtual std::string			GetDisplayName();
+	virtual std::string			GetTypeName()			{ return std::string("background"); };
 	
 	virtual CScriptableObject*	GetParentObject();
 	
