@@ -16,6 +16,7 @@
 @interface WILDScriptEditorWindowController : NSWindowController
 {
 	Carlson::CConcreteObject*					mContainer;			// Not retained, this is our owner!
+	IBOutlet NSScrollView*						mTextScrollView;	// Scroll view around mTextView.
 	IBOutlet NSTextView*						mTextView;			// Script text.
 	IBOutlet NSPopUpButton*						mPopUpButton;		// Handlers popup.
 	IBOutlet UKSyntaxColoredTextViewController*	mSyntaxController;	// Provides some extra functionality like syntax coloring.

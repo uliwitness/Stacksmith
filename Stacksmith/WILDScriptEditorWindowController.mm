@@ -30,6 +30,111 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 @end
 
 
+@interface WILDScriptEditorRulerView : NSRulerView
+{
+	NSTextView			*	targetView;
+	NSMutableIndexSet	*	selectedLines;
+}
+
+@property (readonly) NSIndexSet	*	selectedLines;
+
+@end
+
+@implementation WILDScriptEditorRulerView
+
+-(id)	initWithTargetView: (NSTextView*)inTargetView
+{
+	self = [super initWithFrame: NSMakeRect(0, 0, 8, 8)];
+	if( self )
+	{
+		targetView = inTargetView;
+		selectedLines = [[NSMutableIndexSet alloc] init];
+	}
+	return self;
+}
+
+
+-(void)	dealloc
+{
+	DESTROY_DEALLOC(selectedLines);
+	targetView = nil;
+	
+	[super dealloc];
+}
+
+
+-(NSIndexSet*)	selectedLines
+{
+	return selectedLines;
+}
+
+
+-(CGFloat)	ruleThickness
+{
+	return 16;
+}
+
+
+-(CGFloat)	requiredThickness
+{
+	return 16;
+}
+
+
+-(void)	drawRect: (NSRect)inFrame
+{
+	[NSColor.whiteColor set];
+	[NSBezierPath fillRect: self.bounds];
+	NSRect			theBox = [self bounds];
+	NSString	*	string = targetView.string;
+	
+	NSUInteger	currIndex = [selectedLines indexGreaterThanOrEqualToIndex: 0];
+	while(( currIndex != NSNotFound ))
+	{
+		NSUInteger numberOfLines = 1, index = 0;
+
+		for( ; numberOfLines < currIndex; numberOfLines++ )
+			index = NSMaxRange([string lineRangeForRange:NSMakeRange(index, 0)]);
+		
+		NSUInteger	theGlyphIdx = [targetView.layoutManager glyphIndexForCharacterAtIndex: index];
+		NSRange		effectiveRange = { 0, 0 };
+		NSRect		lineFragmentBox = [targetView.layoutManager lineFragmentRectForGlyphAtIndex:theGlyphIdx effectiveRange: &effectiveRange];
+		NSRect		checkpointBox = { NSZeroPoint, { 8, 8 } };
+		
+		checkpointBox.origin.y = lineFragmentBox.origin.y + truncf((lineFragmentBox.size.height -checkpointBox.size.height) /2);
+		checkpointBox.origin.x = truncf((theBox.size.width -checkpointBox.size.width) /2);
+		
+		[NSColor.redColor set];
+		[[NSBezierPath bezierPathWithOvalInRect: checkpointBox] fill];
+		
+		currIndex = [selectedLines indexGreaterThanIndex: currIndex];
+	}
+}
+
+
+-(void)	mouseDown: (NSEvent*)inEvent
+{
+	NSPoint		pos = [self convertPoint: inEvent.locationInWindow fromView: nil];
+	CGFloat		insertionMarkFraction = 0;
+	pos.x = 4;
+	NSUInteger	charIndex = [targetView.layoutManager characterIndexForPoint: pos inTextContainer:targetView.textContainer fractionOfDistanceBetweenInsertionPoints: &insertionMarkFraction];
+	
+	NSString *string = targetView.string;
+	NSUInteger numberOfLines = 0, index = 0;
+
+	for( ; index <= charIndex; numberOfLines++ )
+		index = NSMaxRange([string lineRangeForRange:NSMakeRange(index, 0)]);
+	
+	if( [selectedLines containsIndex: numberOfLines] )
+		[selectedLines removeIndex: numberOfLines];
+	else
+		[selectedLines addIndex: numberOfLines];
+	[self setNeedsDisplay: YES];
+}
+
+@end
+
+
 @interface WILDScriptEditorHandlerListPopoverViewController : NSViewController <NSTableViewDataSource>
 {
 	NSArray*		mHandlerList;
@@ -135,6 +240,11 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 -(void)	awakeFromNib
 {
 	[super awakeFromNib];
+	
+	WILDScriptEditorRulerView	*	theRulerView = [[[WILDScriptEditorRulerView alloc] initWithTargetView: mTextView] autorelease];
+	[mTextScrollView setHasVerticalRuler: YES];
+	[mTextScrollView setVerticalRulerView: theRulerView];
+	[mTextScrollView setRulersVisible: YES];
 	
 	[self formatText];
 	

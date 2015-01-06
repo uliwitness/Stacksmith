@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="mPopUpButton" destination="15" id="23"/>
                 <outlet property="mSyntaxController" destination="10" id="24"/>
+                <outlet property="mTextScrollView" destination="5" id="qWB-kp-erl"/>
                 <outlet property="mTextView" destination="8" id="14"/>
                 <outlet property="mTopNavAreaView" destination="IzM-tx-aPG" id="kJd-cq-H1p"/>
                 <outlet property="window" destination="1" id="3"/>
