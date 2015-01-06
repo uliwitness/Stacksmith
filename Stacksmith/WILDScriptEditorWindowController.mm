@@ -1,5 +1,5 @@
 //
-//  WILDScriptEditorWindowController.m
+//  WILDScriptEditorWindowController.mm
 //  Propaganda
 //
 //  Created by Uli Kusterer on 13.03.10.
@@ -26,7 +26,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 @protocol WILDScriptEditorHandlerListDelegate <NSObject>
 
--(void)	scriptEditorAddHandlersPopupDidSelectHandler: (NSDictionary*)inDictionary;
+-(void)	scriptEditorAddHandlersPopupDidSelectHandler: (const CAddHandlerListEntry&)inDictionary;
 
 @end
 
@@ -170,7 +170,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 @interface WILDScriptEditorHandlerListPopoverViewController : NSViewController <NSTableViewDataSource>
 {
-	NSArray*		mHandlerList;
+	std::vector<CAddHandlerListEntry>	mHandlerList;
 }
 
 @property (nonatomic,assign) IBOutlet NSTableView*		handlersTable;
@@ -181,37 +181,31 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 @implementation WILDScriptEditorHandlerListPopoverViewController
 
--(id)	initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)	initWithHandlerList: (const std::vector<CAddHandlerListEntry>&)handlers
 {
-	self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
+	NSBundle	*	myBundle = [NSBundle bundleForClass: [self class]];
+	self = [super initWithNibName: @"WILDScriptEditorHandlerListPopover" bundle: myBundle];
 	if( self )
 	{
-		ASSIGN(mHandlerList,[NSArray arrayWithContentsOfFile: [[NSBundle bundleForClass: [self class]] pathForResource: @"WILDAddHandlersList" ofType: @"plist"]]);
+		mHandlerList = handlers;
 	}
 	return self;
 }
 
 
--(void)	dealloc
-{
-	DESTROY_DEALLOC(mHandlerList);
-	[super dealloc];
-}
-
-
 -(NSInteger)	numberOfRowsInTableView: (NSTableView *)tableView
 {
-	return mHandlerList.count;
+	return mHandlerList.size();
 }
 
 
 -(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
-	NSString*	 desc = [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerDescription"];
-	if( desc )
+	const CAddHandlerListEntry&	currHandler = mHandlerList[row];
+	if( currHandler.mHandlerDescription.size() > 0 )
 	{
-		NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString:[[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"] attributes: @{ NSFontAttributeName: [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]] }] autorelease];
-		NSMutableAttributedString	*	greyDesc = [[[NSMutableAttributedString alloc] initWithString: [@" • " stringByAppendingString: desc] attributes: @{ NSFontAttributeName: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]], NSForegroundColorAttributeName: [NSColor grayColor] }] autorelease];
+		NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithUTF8String: currHandler.mHandlerName.c_str()] attributes: @{ NSFontAttributeName: [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]] }] autorelease];
+		NSMutableAttributedString	*	greyDesc = [[[NSMutableAttributedString alloc] initWithString: [@" • " stringByAppendingString: [NSString stringWithUTF8String: currHandler.mHandlerDescription.c_str()]] attributes: @{ NSFontAttributeName: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]], NSForegroundColorAttributeName: [NSColor grayColor] }] autorelease];
 		
 		[attrStr appendAttributedString: greyDesc];
 		
@@ -219,14 +213,15 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	}
 	else
 	{
-		return [[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerName"];
+		return [NSString stringWithUTF8String: currHandler.mHandlerName.c_str()];
 	}
 }
 
 
 -(BOOL)	tableView: (NSTableView *)tableView isGroupRow: (NSInteger)row
 {
-	return [[[mHandlerList objectAtIndex: row] objectForKey: @"WILDHandlerGroupRow"] boolValue];
+	const CAddHandlerListEntry&	currHandler = mHandlerList[row];
+	return currHandler.mType == kHandlerEntryGroupHeader;
 }
 
 
@@ -234,11 +229,11 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	if( self.handlersTable.selectedRow == -1 )
 		return;	// Nothing selected, nothing to do.
-	NSDictionary	*	selectedDict = [mHandlerList objectAtIndex: self.handlersTable.selectedRow];
-	if( [selectedDict[@"WILDHandlerGroupRow"] boolValue] )	// Don't let the user insert handlers named after headlines.
+	const CAddHandlerListEntry&	currHandler = mHandlerList[self.handlersTable.selectedRow];
+	if( currHandler.mType == kHandlerEntryGroupHeader )	// Don't let the user insert handlers named after headlines.
 		return;
 	
-	[self.delegate scriptEditorAddHandlersPopupDidSelectHandler: selectedDict];
+	[self.delegate scriptEditorAddHandlersPopupDidSelectHandler: currHandler];
 }
 
 @end
@@ -420,7 +415,8 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	else
 	{
 		mAddHandlersPopover = [[NSPopover alloc] init];
-		WILDScriptEditorHandlerListPopoverViewController	*	vc = [[[WILDScriptEditorHandlerListPopoverViewController alloc] initWithNibName: @"WILDScriptEditorHandlerListPopover" bundle: [NSBundle bundleForClass: [self class]]] autorelease];
+		std::vector<CAddHandlerListEntry> handlers = mContainer->GetAddHandlerList();
+		WILDScriptEditorHandlerListPopoverViewController	*	vc = [[[WILDScriptEditorHandlerListPopoverViewController alloc] initWithHandlerList: handlers] autorelease];
 		vc.delegate = self;
 		mAddHandlersPopover.contentViewController = vc;
 		mAddHandlersPopover.behavior = NSPopoverBehaviorTransient;
@@ -436,9 +432,9 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 }
 
 
--(void)	scriptEditorAddHandlersPopupDidSelectHandler: (NSDictionary*)inDictionary
+-(void)	scriptEditorAddHandlersPopupDidSelectHandler: (const CAddHandlerListEntry&)inHandler
 {
-	NSString*	handlerName = [inDictionary objectForKey: @"WILDHandlerName"];
+	NSString*	handlerName = [NSString stringWithUTF8String: inHandler.mHandlerName.c_str()];
 	NSNumber*	destLineObj = [[mPopUpButton itemWithTitle: handlerName.lowercaseString] representedObject];
 	if( destLineObj )
 	{
@@ -446,9 +442,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	}
 	else
 	{
-		NSString	*	str = [inDictionary objectForKey: @"WILDHandlerTemplate"];
-		if( !str )
-			str = [NSString stringWithFormat: @"\n\non %1$@\n\t\nend %1$@", handlerName];
+		NSString	*	str = [NSString stringWithUTF8String: inHandler.mHandlerTemplate.c_str()];
 		NSMutableAttributedString	*	attrStr = [[NSMutableAttributedString alloc] initWithString: str attributes: mSyntaxController.defaultTextAttributes];
 		[mTextView.textStorage appendAttributedString: attrStr];
 		

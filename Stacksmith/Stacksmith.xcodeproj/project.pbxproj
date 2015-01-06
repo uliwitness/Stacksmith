@@ -371,7 +371,6 @@
 		55C2B647115E5780008B094D /* CSearchContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* CSearchContext.cpp */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
 		55C476691A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C476681A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib */; };
-		55C4766C1A560F95004DFAB2 /* WILDAddHandlersList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C4766A1A560F95004DFAB2 /* WILDAddHandlersList.plist */; };
 		55C7794E1A547DA200F0A022 /* memory_clearing_operator_new.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */; };
 		55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */; };
 		55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */; };
@@ -1017,7 +1016,6 @@
 		55C2B69B115EA2CD008B094D /* NSView+SizeWindowForViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSView+SizeWindowForViewSize.h"; path = "../UliKit/NSView+SizeWindowForViewSize.h"; sourceTree = SOURCE_ROOT; };
 		55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSView+SizeWindowForViewSize.m"; path = "../UliKit/NSView+SizeWindowForViewSize.m"; sourceTree = SOURCE_ROOT; };
 		55C476681A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WILDScriptEditorHandlerListPopover.xib; sourceTree = "<group>"; };
-		55C4766B1A560F95004DFAB2 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = English; path = English.lproj/WILDAddHandlersList.plist; sourceTree = "<group>"; };
 		55C68C9D116413E300D8B44C /* svn_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svn_version.h; sourceTree = "<group>"; };
 		55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory_clearing_operator_new.cpp; sourceTree = "<group>"; };
 		55C8D04D13EF0DD700B502C5 /* UKWindowBodyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKWindowBodyView.h; path = ../UliKit/UKWindowBodyView.h; sourceTree = "<group>"; };
@@ -1227,7 +1225,6 @@
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
 				5589DD771378B16400B0F6CF /* TransitionMappings.plist */,
-				55C4766A1A560F95004DFAB2 /* WILDAddHandlersList.plist */,
 				55EBC521114C539300BAA09D /* HandlerPopupMessage.png */,
 				55EBC522114C539300BAA09D /* HandlerPopupFunction.png */,
 				55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */,
@@ -2266,7 +2263,6 @@
 				55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */,
 				556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */,
 				55ADC5091744525F0084AAA9 /* BackgroundIcon.icns in Resources */,
-				55C4766C1A560F95004DFAB2 /* WILDAddHandlersList.plist in Resources */,
 				55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */,
 				55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */,
 				55405BE218A6220D001D3C99 /* WILDIconPickerViewController.xib in Resources */,
@@ -2654,14 +2650,6 @@
 				55B29C9F17276D4100B38E75 /* English */,
 			);
 			name = UKCrashReporter.xib;
-			sourceTree = "<group>";
-		};
-		55C4766A1A560F95004DFAB2 /* WILDAddHandlersList.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55C4766B1A560F95004DFAB2 /* English */,
-			);
-			name = WILDAddHandlersList.plist;
 			sourceTree = "<group>";
 		};
 		55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */ = {

@@ -11,6 +11,7 @@
 #include "CDocument.h"
 #include "LEOScript.h"
 #include "CToken.h"	// for ToLowerString().
+#include <sstream>
 
 
 using namespace Carlson;
@@ -62,6 +63,351 @@ void	CConcreteObject::SetBreakpointLines( const std::vector<size_t>& inBreakpoin
 			LEOScriptAddBreakpointAtLine( mScriptObject, currLine );
 		}
 	}
+}
+
+
+static CAddHandlerListEntry	sMasterHandlerList[] =
+{
+	{
+		kHandlerEntryGroupHeader,
+		0,
+		"Mouse Events",
+		"",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseUp",
+		"React to a click in the card window.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDown",
+		"React to the mouse being held down somewhere in the card window.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDrag",
+		"The mouse is being held down and moving while over an object in the card window.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseUpOutside",
+		"A click was started somewhere in the card window but not released inside that object.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseUpInLink",
+		"A link in a text field was clicked. ",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDoubleClick",
+		"A double click in the card window completed.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseEnter",
+		"The mouse arrow has moved onto an object in the card window.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseMove",
+		"The mouse arrow has moved while over an object in the card window.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseLeave",
+		"The mouse arrow has moved off an object in the card window after being inside.",
+		""
+	},
+	{
+		kHandlerEntryGroupHeader,
+		0,
+		"Movie Player Events",
+		"",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"playMovie",
+		"Playback of a movie player has started.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"stopMovie",
+		"Playback of a movie player has stopped.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"timeChanged",
+		"The playback time of a movie player was changed (e.g. by dragging the playhead).",
+		""
+	},
+	{
+		kHandlerEntryGroupHeader,
+		0,
+		"Card Events",
+		"",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"openCard",
+		"The current card just changed, prepare this card for the user.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"closeCard",
+		"The current card is about to change, last chance for clean-up.",
+		""
+	},
+	{
+		kHandlerEntryGroupHeader,
+		0,
+		"Stack Events",
+		"",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"closeStack",
+		"The current stack is about to change, last chance for clean-up.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"openStack",
+		"The current stack just changed, prepare this stack for the user.",
+		""
+	},
+	{
+		kHandlerEntryGroupHeader,
+		0,
+		"Field Events",
+		"",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"selectionChange",
+		"The text selection in a text field has changed.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseUpInLink",
+		"A link in a text field was clicked. ",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"openField",
+		"A text field has been given keyboard focus.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"closeField",
+		"A text field is about to lose keyboard focus.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"keyDown",
+		"A key was pressed on the keyboard.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"tabKey",
+		"The tab key was pressed on the keyboard.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"arrowKey",
+		"One of the arrow keys was pressed on the keyboard.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"functionKey",
+		"One of the function keys was pressed on the keyboard.",
+		"\n\non functionKey fKeyNumber,modifier1,modifier2,modifier3,modifier4\n\t\nend functionKey"
+	},
+	{
+		kHandlerEntryGroupHeader,
+		0,
+		"Web Browser Events",
+		"",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"loadPage",
+		"The web page has finished loading.",
+		""
+	},
+	{
+		kHandlerEntryGroupHeader,
+		0,
+		"Editor Events",
+		"",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDownWhilePeeking",
+		"The mouse has been clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDragWhilePeeking",
+		"The mouse has been held and moved while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseUpWhilePeeking",
+		"The mouse has been clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDoubleDownWhilePeeking",
+		"The mouse has been double-clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDoubleClickWhilePeeking",
+		"The mouse has been double-clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDownWhileEditing",
+		"The mouse has been clicked while the pointer tool is active.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDragWhileEditing",
+		"The mouse has been held and moved while the pointer tool is active.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseUpWhileEditing",
+		"The mouse has been clicked while the pointer tool is active.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDoubleDownWhileEditing",
+		"The mouse has been double-clicked while the pointer tool is active.",
+		""
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"mouseDoubleClickWhileEditing",
+		"The mouse has been double-clicked while the pointer tool is active.",
+		""
+	},
+	{
+		kHandlerEntry_LAST,
+		0,
+		"",
+		"",
+		""
+	}
+};
+
+
+std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
+{
+	std::vector<CAddHandlerListEntry>	handlers;
+	
+	for( size_t x = 0; sMasterHandlerList[x].mType != kHandlerEntry_LAST; x++ )
+	{
+		CAddHandlerListEntry&	currHandler = sMasterHandlerList[x];
+		if( currHandler.mHandlerID == kLEOHandlerIDINVALID )	// First time iterating master table? Initialize some fields.
+		{
+			LEOContextGroup*	theGroup = GetScriptContextGroupObject();
+			currHandler.mHandlerID = LEOContextGroupHandlerIDForHandlerName( theGroup, currHandler.mHandlerName.c_str() );
+			
+			if( currHandler.mHandlerTemplate.empty() )
+			{
+				std::stringstream	strstr;
+				strstr << "\n\non " << currHandler.mHandlerName << "\n\t\nend" << currHandler.mHandlerName;
+				currHandler.mHandlerTemplate = strstr.str();
+			}
+		}
+		
+		// Don't add handlers we already have:
+		if( currHandler.mType == kHandlerEntryCommand && (mScriptObject == NULL || LEOScriptFindCommandHandlerWithID( mScriptObject, currHandler.mHandlerID ) == NULL) )
+		{
+			handlers.push_back( currHandler );
+		}
+		else if( currHandler.mType == kHandlerEntryFunction && (mScriptObject == NULL || LEOScriptFindFunctionHandlerWithID( mScriptObject, currHandler.mHandlerID ) == NULL) )
+		{
+			handlers.push_back( currHandler );
+		}
+		else if( currHandler.mType == kHandlerEntryGroupHeader )
+		{
+			handlers.push_back( currHandler );
+		}
+	}
+	
+	return handlers;
 }
 
 

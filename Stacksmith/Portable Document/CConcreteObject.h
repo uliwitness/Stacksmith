@@ -26,6 +26,23 @@ namespace Carlson {
 
 class CDocument;
 
+
+enum EHandlerListEntryType { kHandlerEntryCommand, kHandlerEntryFunction, kHandlerEntryGroupHeader, kHandlerEntry_LAST };
+
+// List entries for our "add handler" popup's entries.
+//	This only includes handlers that make sense for this
+//	object, and may e.g. include user-specified handlers
+//	like a timer's action.
+struct CAddHandlerListEntry
+{
+	enum EHandlerListEntryType	mType;				// Only mHandlerName is valid, containing the name of the new section.
+	LEOHandlerID				mHandlerID;				// Handler ID corresponding to mHandlerName.
+	std::string					mHandlerName;			// Name of the handler to be added.
+	std::string					mHandlerDescription;	// Longer description for this handler, for presenting to user in addition to the actual name.
+	std::string					mHandlerTemplate;		// A dummy example of this handler that can be appended to a script to create a new handler of this type.
+};
+
+
 class CConcreteObject : public CScriptableObject
 {
 public:
@@ -61,6 +78,8 @@ public:
 
 	virtual void		IncrementChangeCount()	{};
 	virtual bool		GetNeedsToBeSaved()		{ return false; };
+	
+	std::vector<CAddHandlerListEntry>	GetAddHandlerList();
 	
 protected:
 	virtual void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );
