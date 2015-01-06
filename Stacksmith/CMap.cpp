@@ -10,6 +10,7 @@
 #include "UTF8UTF32Utilities.h"
 
 using namespace Carlson;
+using namespace std;
 
 
 bool CCaseInsensitiveStringComparator::operator()( const string & s1, const string & s2 ) const

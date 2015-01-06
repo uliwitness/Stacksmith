@@ -14,19 +14,17 @@
 #include <iostream>
 
 
-using namespace std;
-
 namespace Carlson
 {
 
-class CCaseInsensitiveStringComparator : public binary_function<string, string, bool>
+class CCaseInsensitiveStringComparator : public std::binary_function<std::string, std::string, bool>
 {
 public:
-	bool operator()( const string & s1, const string & s2 ) const;
+	bool operator()( const std::string & s1, const std::string & s2 ) const;
 };
 
 template<class V>
-class CMap : public map<string,V,CCaseInsensitiveStringComparator>
+class CMap : public std::map<std::string,V,CCaseInsensitiveStringComparator>
 {
 public:
 	void	Dump() const
