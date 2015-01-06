@@ -36,7 +36,7 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	NSMutableIndexSet	*	selectedLines;
 }
 
-@property (readonly) NSIndexSet	*	selectedLines;
+@property (copy,nonatomic) NSIndexSet	*	selectedLines;
 
 @end
 
@@ -66,6 +66,14 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 -(NSIndexSet*)	selectedLines
 {
 	return selectedLines;
+}
+
+
+-(void)	setSelectedLines: (NSIndexSet*)inSelectedLines
+{
+	DESTROY(selectedLines);
+	selectedLines = [inSelectedLines mutableCopy];
+	[self setNeedsDisplay: YES];
 }
 
 
