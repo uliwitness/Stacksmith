@@ -109,7 +109,7 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 		NSRect		lineFragmentBox = [targetView.layoutManager lineFragmentRectForGlyphAtIndex:theGlyphIdx effectiveRange: &effectiveRange];
 		NSRect		checkpointBox = { NSZeroPoint, { 8, 8 } };
 		
-		checkpointBox.origin.y = lineFragmentBox.origin.y + truncf((lineFragmentBox.size.height -checkpointBox.size.height) /2);
+		checkpointBox.origin.y = lineFragmentBox.origin.y + truncf((lineFragmentBox.size.height -checkpointBox.size.height) /2) -self.scrollView.documentVisibleRect.origin.y;
 		checkpointBox.origin.x = truncf((theBox.size.width -checkpointBox.size.width) /2);
 		
 		[NSColor.redColor set];
