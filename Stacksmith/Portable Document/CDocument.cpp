@@ -215,7 +215,7 @@ bool	CDocument::Save()
 		if( !mMediaCache.SaveMediaElementsToElement( stackfile ) )
 			return false;
 
-		FILE*	theFile = fopen( (destPath + "project.xml").c_str(), "w" );
+		FILE*	theFile = fopen( (destPath + "/project.xml").c_str(), "w" );
 		if( !theFile )
 			return false;
 		CStacksmithXMLPrinter	printer( theFile );
