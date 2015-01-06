@@ -51,6 +51,20 @@ LEOContextGroup*	CConcreteObject::GetScriptContextGroupObject()
 }
 
 
+void	CConcreteObject::SetBreakpointLines( const std::vector<size_t>& inBreakpointLines )
+{
+	mBreakpointLines = inBreakpointLines;
+	if( mScriptObject )	// If we already have a compiled script, make sure it's updated accordingly:
+	{
+		LEOScriptRemoveAllBreakpoints( mScriptObject );
+		for( size_t currLine : mBreakpointLines )
+		{
+			LEOScriptAddBreakpointAtLine( mScriptObject, currLine );
+		}
+	}
+}
+
+
 LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )
 {
 	if( !mScriptObject )
@@ -68,6 +82,11 @@ LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size
 			}
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, GetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, GetScriptContextGroupObject(), parseTree, fileID );
+			
+			for( size_t currLine : mBreakpointLines )
+			{
+				LEOScriptAddBreakpointAtLine( mScriptObject, currLine );
+			}
 			
 #if REMOTE_DEBUGGER
 			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );

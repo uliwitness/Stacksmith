@@ -21,6 +21,7 @@ using namespace Carlson;
 
 static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEditorTopAreaToolbarItemIdentifier";
 
+void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowControllerKVOContext;
 
 
 @protocol WILDScriptEditorHandlerListDelegate <NSObject>
@@ -49,6 +50,10 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	{
 		targetView = inTargetView;
 		selectedLines = [[NSMutableIndexSet alloc] init];
+		
+		#if REMOTE_DEBUGGER
+		[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver: self selector: @selector(debuggerMayHaveLaunchedNotification:) name: NSWorkspaceDidLaunchApplicationNotification object: [NSWorkspace sharedWorkspace]];
+		#endif
 	}
 	return self;
 }
@@ -56,11 +61,27 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 
 -(void)	dealloc
 {
+#if REMOTE_DEBUGGER
+	[[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver: self name: NSWorkspaceDidLaunchApplicationNotification object: [NSWorkspace sharedWorkspace]];
+#endif
+
 	DESTROY_DEALLOC(selectedLines);
 	targetView = nil;
 	
 	[super dealloc];
 }
+
+
+#if REMOTE_DEBUGGER
+-(void)	debuggerMayHaveLaunchedNotification: (NSNotification*)notif
+{
+	NSRunningApplication	*	launchedApp = [notif.userInfo objectForKey: NSWorkspaceApplicationKey];
+	if( [launchedApp.bundleIdentifier isEqualToString: @"com.thevoidsoftware.ForgeDebugger"] )
+	{
+		LEOInitRemoteDebugger( NULL );
+	}
+}
+#endif
 
 
 -(NSIndexSet*)	selectedLines
@@ -71,8 +92,10 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 
 -(void)	setSelectedLines: (NSIndexSet*)inSelectedLines
 {
+	[self willChangeValueForKey: PROPERTY(selectedLines)];
 	DESTROY(selectedLines);
 	selectedLines = [inSelectedLines mutableCopy];
+	[self didChangeValueForKey: PROPERTY(selectedLines)];
 	[self setNeedsDisplay: YES];
 }
 
@@ -133,10 +156,12 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	for( ; index <= charIndex; numberOfLines++ )
 		index = NSMaxRange([string lineRangeForRange:NSMakeRange(index, 0)]);
 	
+	[self willChangeValueForKey: PROPERTY(selectedLines)];
 	if( [selectedLines containsIndex: numberOfLines] )
 		[selectedLines removeIndex: numberOfLines];
 	else
 		[selectedLines addIndex: numberOfLines];
+	[self didChangeValueForKey: PROPERTY(selectedLines)];
 	[self setNeedsDisplay: YES];
 }
 
@@ -239,6 +264,8 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 
 -(void)	dealloc
 {
+	[mTextBreakpointsRulerView removeObserver: self forKeyPath: PROPERTY(selectedLines) context: kWILDScriptEditorWindowControllerKVOContext];
+	
 	mContainer = NULL;
 	
 	[super dealloc];
@@ -249,13 +276,25 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 {
 	[super awakeFromNib];
 	
-	WILDScriptEditorRulerView	*	theRulerView = [[[WILDScriptEditorRulerView alloc] initWithTargetView: mTextView] autorelease];
+	// Set up a ruler view (for indicating what lines breakpoints are on and setting/removing them):
+	mTextBreakpointsRulerView = [[WILDScriptEditorRulerView alloc] initWithTargetView: mTextView];
 	[mTextScrollView setHasVerticalRuler: YES];
-	[mTextScrollView setVerticalRulerView: theRulerView];
+	[mTextScrollView setVerticalRulerView: mTextBreakpointsRulerView];
 	[mTextScrollView setRulersVisible: YES];
 	
+	[mTextBreakpointsRulerView addObserver: self forKeyPath: PROPERTY(selectedLines) options:0 context: kWILDScriptEditorWindowControllerKVOContext];
+	
+	NSMutableIndexSet	*	indexes = [NSMutableIndexSet indexSet];
+	std::vector<size_t>		breakpointLines;
+	mContainer->GetBreakpointLines( breakpointLines );
+	for( size_t currIndex : breakpointLines )
+		[indexes addIndex: currIndex];
+	mTextBreakpointsRulerView.selectedLines = indexes;
+	
+	// Format our script so it looks pretty:
 	[self formatText];
 	
+	// Create a toolbar containing our handler list popup etc.:
 	NSToolbar	*	editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDScriptEditorToolbar"] autorelease];
 	[editToolbar setDelegate: self];
 	[editToolbar setAllowsUserCustomization: NO];
@@ -265,6 +304,7 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	[self.window setToolbar: editToolbar];
 	[self.window toggleToolbarShown: self];
 
+	// Make sure we don't do smart quotes in the script editor:
 	mTextView.automaticQuoteSubstitutionEnabled = NO;
 	mTextView.automaticDashSubstitutionEnabled = NO;
 	mTextView.automaticTextReplacementEnabled = NO;
@@ -508,6 +548,39 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
 	return @[ WILDScriptEditorTopAreaToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier ];
+}
+
+
+-(void)	observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if( context == kWILDScriptEditorWindowControllerKVOContext )
+	{
+		if( object == mTextBreakpointsRulerView && [keyPath isEqualToString: PROPERTY(selectedLines)] )
+		{
+			std::vector<size_t>	breakpointLines;
+			NSIndexSet*	selectedLines = mTextBreakpointsRulerView.selectedLines;
+			NSUInteger	currIndex = [selectedLines indexGreaterThanOrEqualToIndex: 0];
+			while( currIndex != NSNotFound )
+			{
+				breakpointLines.push_back( currIndex );
+				currIndex = [selectedLines indexGreaterThanIndex: currIndex];
+			}
+			mContainer->SetBreakpointLines( breakpointLines );
+			
+			#if REMOTE_DEBUGGER
+			if( !LEOInitRemoteDebugger( NULL ) )	// Try to connect to debugger. If not able, launch it.
+			{
+				NSString	*	debuggerPath = [[NSBundle mainBundle] pathForResource: @"ForgeDebugger" ofType: @"app"];
+				if( debuggerPath )
+					[[NSWorkspace sharedWorkspace] openFile: debuggerPath];
+				else
+					NSLog(@"Error: Can't find debugger.");
+			}
+			#endif
+		}
+	}
+	else
+		[super observeValueForKeyPath: keyPath ofObject: object change: change context: context];
 }
 
 @end

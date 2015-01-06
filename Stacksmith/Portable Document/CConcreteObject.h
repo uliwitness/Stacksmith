@@ -55,6 +55,9 @@ public:
 	virtual std::string	GetDisplayName()	{ return mName; };
 		
 	virtual LEOContextGroup*	GetScriptContextGroupObject();
+	
+	virtual void		SetBreakpointLines( const std::vector<size_t>& inBreakpointLines );
+	virtual void		GetBreakpointLines( std::vector<size_t>& outBreakpointLines ) { outBreakpointLines = mBreakpointLines; };
 
 	virtual void		IncrementChangeCount()	{};
 	virtual bool		GetNeedsToBeSaved()		{ return false; };
@@ -69,6 +72,7 @@ protected:
 	std::string							mName;			// Name of this object for referring to it from scripts.
 	std::string							mScript;		// Uncompiled text of this object's script.
 	CMap<std::string>					mUserProperties;
+	std::vector<size_t>					mBreakpointLines;	// Lines on which the user set breakpoints using the UI that should be applied to the script when compiled.
 	
 	struct LEOScript *					mScriptObject;		// Compiled script, lazily created/recreated on changes.
 	LEOObjectID							mIDForScripts;		// The ID Leonie uses to refer to this object.
