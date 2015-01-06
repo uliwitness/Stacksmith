@@ -146,6 +146,10 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 	[editToolbar setSizeMode: NSToolbarSizeModeSmall];
 	[self.window setToolbar: editToolbar];
 	[self.window toggleToolbarShown: self];
+
+	mTextView.automaticQuoteSubstitutionEnabled = NO;
+	mTextView.automaticDashSubstitutionEnabled = NO;
+	mTextView.automaticTextReplacementEnabled = NO;
 }
 
 

@@ -28,6 +28,9 @@ using namespace Carlson;
 -(void)	windowDidLoad
 {
 	//[self.window setLevel: NSNormalWindowLevel];
+	self.messageField.automaticQuoteSubstitutionEnabled = NO;
+	self.messageField.automaticDashSubstitutionEnabled = NO;
+	self.messageField.automaticTextReplacementEnabled = NO;
 }
 
 
