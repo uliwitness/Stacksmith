@@ -287,8 +287,15 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		const char* str = LEOGetValueAsString( inValue, strBuf, sizeof(strBuf), inContext );
 		if( strcasecmp(str, "none") != 0 && str[0] != 0 )
 		{
-			LEOUnit		outUnit = kLEOUnitNone;
-			theIconID = LEOGetValueAsInteger( inValue, &outUnit, inContext );
+			if( LEOCanGetAsNumber( inValue, inContext ) )
+			{
+				LEOUnit		outUnit = kLEOUnitNone;
+				theIconID = LEOGetValueAsInteger( inValue, &outUnit, inContext );
+			}
+			else
+			{
+				theIconID = GetStack()->GetDocument()->GetMediaCache().GetMediaIDByNameOfType( str, EMediaTypeIcon );
+			}
 			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 				return true;
 		}

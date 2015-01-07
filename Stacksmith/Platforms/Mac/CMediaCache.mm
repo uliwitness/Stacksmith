@@ -108,6 +108,21 @@ std::string	CMediaCache::GetMediaURLByNameOfType( const std::string& inName, TMe
 }
 
 
+ObjectID	CMediaCache::GetMediaIDByNameOfType( const std::string& inName, TMediaType inType )
+{
+	const char*	str = inName.c_str();
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inType == currMedia->GetMediaType() && (strcasecmp( str, currMedia->GetName().c_str() ) == 0) )
+		{
+			return currMedia->GetID();
+		}
+	}
+	
+	return 0;
+}
+
+
 std::string	CMediaCache::GetMediaURLByIDOfType( ObjectID inID, TMediaType inType, int *outHotspotLeft, int *outHotspotTop )
 {
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
