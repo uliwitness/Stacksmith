@@ -90,6 +90,7 @@ public:
 	
 	virtual void	Dump( size_t inIndent = 0 );
 	
+	virtual bool	ShowHandlersForObjectType( std::string inTypeName )	{ return true; };	// Show all handlers in our popup, we may get them forwarded through the message path.
 	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.
 	
 protected:

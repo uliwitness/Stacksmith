@@ -82,6 +82,7 @@ public:
 	
 	virtual std::string	GetTypeName()							{ return std::string(); };
 	std::vector<CAddHandlerListEntry>	GetAddHandlerList();	// List for an "add handler" popup in script editor.
+	virtual bool		ShowHandlersForObjectType( std::string inTypeName )	{ return GetTypeName().compare(inTypeName) == 0; };
 	
 protected:
 	virtual void		LoadUserPropertiesFromElement( tinyxml2::XMLElement * elem );

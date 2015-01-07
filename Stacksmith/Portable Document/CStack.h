@@ -55,6 +55,7 @@ public:
 	std::string			GetURL()		{ return mURL; };
 	std::string			GetFileName()	{ return mFileName; };
 	virtual std::string	GetTypeName()	{ return std::string("stack"); };
+	virtual bool		ShowHandlersForObjectType( std::string inTypeName )	{ return true; };	// Show all handlers in our popup, we may get them forwarded through the message path.
 	
 	void			AddCard( CCard* inCard );	// Add at end.
 	void			InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard = NULL );	// If precedingCard == NULL insert at start.

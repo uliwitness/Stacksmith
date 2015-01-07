@@ -71,6 +71,54 @@ static CAddHandlerListEntry	sMasterHandlerList[] =
 	{
 		kHandlerEntryGroupHeader,
 		0,
+		"Card Events",
+		"",
+		"",
+		"card"
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"openCard",
+		"The current card just changed, prepare this card for the user.",
+		"",
+		"card"
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"closeCard",
+		"The current card is about to change, last chance for clean-up.",
+		"",
+		"card"
+	},
+	{
+		kHandlerEntryGroupHeader,
+		0,
+		"Stack Events",
+		"",
+		"",
+		"card"
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"closeStack",
+		"The current stack is about to change, last chance for clean-up.",
+		"",
+		"card"
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"openStack",
+		"The current stack just changed, prepare this stack for the user.",
+		"",
+		"card"
+	},
+	{
+		kHandlerEntryGroupHeader,
+		0,
 		"Mouse Events",
 		"",
 		"",
@@ -179,54 +227,6 @@ static CAddHandlerListEntry	sMasterHandlerList[] =
 		"The playback time of a movie player was changed (e.g. by dragging the playhead).",
 		"",
 		"moviePlayer"
-	},
-	{
-		kHandlerEntryGroupHeader,
-		0,
-		"Card Events",
-		"",
-		"",
-		"card"
-	},
-	{
-		kHandlerEntryCommand,
-		kLEOHandlerIDINVALID,
-		"openCard",
-		"The current card just changed, prepare this card for the user.",
-		"",
-		"card"
-	},
-	{
-		kHandlerEntryCommand,
-		kLEOHandlerIDINVALID,
-		"closeCard",
-		"The current card is about to change, last chance for clean-up.",
-		"",
-		"card"
-	},
-	{
-		kHandlerEntryGroupHeader,
-		0,
-		"Stack Events",
-		"",
-		"",
-		"card"
-	},
-	{
-		kHandlerEntryCommand,
-		kLEOHandlerIDINVALID,
-		"closeStack",
-		"The current stack is about to change, last chance for clean-up.",
-		"",
-		"card"
-	},
-	{
-		kHandlerEntryCommand,
-		kLEOHandlerIDINVALID,
-		"openStack",
-		"The current stack just changed, prepare this stack for the user.",
-		"",
-		"card"
 	},
 	{
 		kHandlerEntryGroupHeader,
@@ -419,8 +419,6 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 {
 	std::vector<CAddHandlerListEntry>	handlers;
 	
-	std::string		myTypeName = GetTypeName();
-	
 	for( size_t x = 0; sMasterHandlerList[x].mType != kHandlerEntry_LAST; x++ )
 	{
 		CAddHandlerListEntry&	currHandler = sMasterHandlerList[x];
@@ -438,7 +436,7 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 		}
 		
 		// Only show handlers that are either usable from all object types, or specific to this one:
-		if( currHandler.mTiedToType.empty() || currHandler.mTiedToType.compare(myTypeName) == 0 )
+		if( currHandler.mTiedToType.empty() || ShowHandlersForObjectType(currHandler.mTiedToType) )
 		{
 			// Don't add handlers we already have:
 			if( currHandler.mType == kHandlerEntryCommand && (mScriptObject == NULL || LEOScriptFindCommandHandlerWithID( mScriptObject, currHandler.mHandlerID ) == NULL) )
@@ -451,10 +449,15 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 			}
 			else if( currHandler.mType == kHandlerEntryGroupHeader )
 			{
+				if( handlers.back().mType == kHandlerEntryGroupHeader )	// Previous group was empty? Remove it.
+					handlers.pop_back();
 				handlers.push_back( currHandler );
 			}
 		}
 	}
+
+	if( handlers.back().mType == kHandlerEntryGroupHeader )	// Last group was empty? Remove it.
+		handlers.pop_back();
 	
 	return handlers;
 }
