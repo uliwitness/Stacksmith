@@ -176,6 +176,23 @@ void	WILDScheduleResumeOfScript( void )
 //}
 
 
+-(IBAction)	openDocument: (id)sender
+{
+	NSOpenPanel*	thePanel = [NSOpenPanel openPanel];
+	[thePanel setAllowedFileTypes: @[ @"xstk" ]];
+	[thePanel beginWithCompletionHandler:^(NSInteger result)
+	{
+		if( result == NSFileHandlingPanelOKButton )
+		{
+			for( NSURL* theFile in thePanel.URLs )
+			{
+				[self application: NSApp openURL: theFile];
+			}
+		}
+	}];
+}
+
+
 -(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
 {
 	static BOOL	sDidTryToOpenOverrideStack = NO;
