@@ -402,7 +402,12 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		const char*	nameStr = LEOGetValueAsString( inValue, nameBuf, sizeof(nameBuf), inContext );
 		TFieldStyle	style = GetFieldStyleFromString(nameStr);
 		if( style == EFieldStyle_Last )
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unknown field style \"%s\".", nameStr );
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unknown field style \"%s\".", nameStr );
+		}
 		else
 			SetStyle( style );
 	}

@@ -72,7 +72,10 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 {
 	if( (inContext->group->flags & kLEOContextGroupFlagFromNetwork) != 0 )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This stack is not permitted to make native calls." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This stack is not permitted to make native calls." );
 		return;
 	}
 	
@@ -110,7 +113,10 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 			theReceiver = (id)receiver->object.object;
 		else
 		{
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Invalid receiver of method call \"%s\".", methodNameStr );
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Invalid receiver of method call \"%s\".", methodNameStr );
 			return;
 		}
 		
@@ -127,7 +133,10 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 		NSMethodSignature	*	theSignature = [theReceiver methodSignatureForSelector: methodSelector];
 		if( !theSignature )
 		{
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't determine signature for method call \"%s\".", selName );
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't determine signature for method call \"%s\".", selName );
 			return;
 		}
 		NSInvocation		*	inv = [NSInvocation invocationWithMethodSignature: theSignature];
@@ -229,7 +238,10 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 			{
 				if( receiver->base.isa != &kLeoValueTypeNativeObject )
 				{
-					LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Invalid parameter %d to method call \"%s\".", x +1, methodNameStr );
+					size_t		lineNo = SIZE_T_MAX;
+					uint16_t	fileID = 0;
+					LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+					LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Invalid parameter %d to method call \"%s\".", x +1, methodNameStr );
 					return;
 				}
 
@@ -238,7 +250,10 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 			}
 			else
 			{
-				LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unknown type \"%s\" of parameter %d to method call \"%s\".", [currType UTF8String], x +1, methodNameStr );
+				size_t		lineNo = SIZE_T_MAX;
+				uint16_t	fileID = 0;
+				LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+				LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unknown type \"%s\" of parameter %d to method call \"%s\".", [currType UTF8String], x +1, methodNameStr );
 				return;
 			}
 		}
@@ -354,14 +369,20 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 		}
 		else
 		{
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unknown return value of type \"%s\" from native method call \"%s\".", [returnType UTF8String], methodNameStr );
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unknown return value of type \"%s\" from native method call \"%s\".", [returnType UTF8String], methodNameStr );
 			return;
 		}
 
 	}
 	@catch ( NSException* err )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Exception raised during method call: \"%s\".", [[err description] UTF8String] );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Exception raised during method call: \"%s\".", [[err description] UTF8String] );
 		return;
 	}
 	

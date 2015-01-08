@@ -117,7 +117,10 @@ void	WILDStackInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't find stack \"%s\".", stackName );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't find stack \"%s\".", stackName );
 	}
 	
 //	LEODebugPrintContext(inContext);
@@ -143,7 +146,10 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 		ownerObject = dynamic_cast<CStack*>((CScriptableObject*)theOwner->object.object);
 	if( !ownerObject )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Only stacks contain backgrounds." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Only stacks contain backgrounds." );
 		return;
 	}
 	
@@ -179,7 +185,10 @@ void	WILDBackgroundInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't find background \"%s\".", backgroundName );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't find background \"%s\".", backgroundName );
 	}
 	
 	inContext->currentInstruction++;
@@ -247,7 +256,10 @@ void	WILDCardInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't find card \"%s\".", cardName );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't find card \"%s\".", cardName );
 	}
 	
 	inContext->currentInstruction++;
@@ -299,7 +311,10 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't find card %s \"%s\".", (inType ? inType : "part"), partName );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't find card %s \"%s\".", (inType ? inType : "part"), partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -355,7 +370,10 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't find background %s \"%s\".", (inType ? inType : "part"), partName );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't find background %s \"%s\".", (inType ? inType : "part"), partName );
 	}
 	
 	inContext->currentInstruction++;
@@ -507,7 +525,12 @@ void	WILDFirstCardInstruction( LEOContext* inContext )
 	}
 	
 	if( theStack->GetNumCards() == 0 )
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No such card." );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No such card." );
+	}
 	
 	CCard	*	theCard = theStack->GetCard( 0 );
 		
@@ -535,7 +558,12 @@ void	WILDLastCardInstruction( LEOContext* inContext )
 	}
 	
 	if( theStack->GetNumCards() == 0 )
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No such card." );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No such card." );
+	}
 	
 	CCard	*	theCard = theStack->GetCard( theStack->GetNumCards() -1 );
 	
@@ -564,7 +592,12 @@ void	WILDPushOrdinalBackgroundInstruction( LEOContext* inContext )
 	
 	size_t		numBackgrounds = theStack ? theStack->GetNumBackgrounds() : 0;
 	if( numBackgrounds == 0 )
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No such background." );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No such background." );
+	}
 	
 	if( inContext->flags & kLEOContextKeepRunning )
 	{
@@ -612,14 +645,22 @@ void	WILDPushOrdinalPartInstruction( LEOContext* inContext )
 	else if( partTypeNum == 4 )
 		partType = CPart::GetPartCreatorForType("browser");
 	else if( partTypeNum != 0 )
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can only list parts, buttons, fields, browsers and movie players on cards and backgrounds." );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can only list parts, buttons, fields, browsers and movie players on cards and backgrounds." );
+	}
 	
 	if( inContext->flags & kLEOContextKeepRunning )	// No error?
 	{
 		size_t		numParts = theLayer->GetPartCountOfType(partType);
 		if( numParts == 0 )
 		{
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No such %s %s.", ((theCard == theLayer)? "card" : "background"), partType->GetPartTypeName().c_str() );
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No such %s %s.", ((theCard == theLayer)? "card" : "background"), partType->GetPartTypeName().c_str() );
 		}
 		size_t	desiredIndex = 0;
 		if( inContext->currentInstruction->param1 & 32 )
@@ -649,7 +690,10 @@ void	WILDThisStackInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No stack open at the moment." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -668,7 +712,10 @@ void	WILDThisBackgroundInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No stack open at the moment." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -687,7 +734,10 @@ void	WILDThisCardInstruction( LEOContext* inContext )
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No stack open at the moment." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -718,7 +768,10 @@ void	WILDNumberOfCardPartsInstructionInternal( LEOContext* inContext, const char
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No stack open at the moment." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -751,7 +804,10 @@ void	WILDNumberOfBackgroundPartsInstructionInternal( LEOContext* inContext, cons
 	}
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No stack open at the moment." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -838,7 +894,10 @@ void	WILDNumberOfCardsInstruction( LEOContext* inContext )
 		LEOPushIntegerOnStack( inContext, frontStack->GetNumCards(), kLEOUnitNone );
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No stack open at the moment." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -861,7 +920,10 @@ void	WILDNumberOfBackgroundsInstruction( LEOContext* inContext )
 		LEOPushIntegerOnStack( inContext, frontStack->GetNumBackgrounds(), kLEOUnitNone );
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No stack open at the moment." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
 	}
 	
 	inContext->currentInstruction++;
@@ -876,7 +938,10 @@ void	WILDNumberOfStacksInstruction( LEOContext* inContext )
 		LEOPushIntegerOnStack( inContext, doc->GetNumStacks(), kLEOUnitNone );
 	else
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No document open at the moment." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No document open at the moment." );
 	}
 	
 	inContext->currentInstruction++;

@@ -227,7 +227,10 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	union LEOValue*	urlValue = inContext->stackEndPtr -4;
 	if( urlValue == NULL || urlValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid url value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid url value." );
 		return;
 	}
 	urlString = LEOGetValueAsString( urlValue, urlBuf, sizeof(urlBuf), inContext );
@@ -243,7 +246,10 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	union LEOValue*	progressMsgValue = inContext->stackEndPtr -2;
 	if( progressMsgValue == NULL || progressMsgValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid progress message value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid progress message value." );
 		return;
 	}
 	progressMsgString = LEOGetValueAsString( progressMsgValue, progressBuf, sizeof(progressBuf), inContext );
@@ -258,7 +264,10 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	union LEOValue*	completionMsgValue = inContext->stackEndPtr -1;
 	if( completionMsgValue == NULL || completionMsgValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid completion message value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid completion message value." );
 		return;
 	}
 	completionMsgString = LEOGetValueAsString( completionMsgValue, completionBuf, sizeof(completionBuf), inContext );
@@ -274,7 +283,10 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	union LEOValue*	containerValue = inContext->stackEndPtr -3;
 	if( containerValue == NULL || containerValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid dest value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid dest value." );
 		return;
 	}
 	LEOInitCopy( containerValue, &theDelegate->mDestination, kLEOInvalidateReferences, theDelegate->mContext );
@@ -283,7 +295,10 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	NSURL				*	theURL = [NSURL URLWithString: urlObjcString];
 	if( !theURL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Invalid URL '%s' passed to 'download' command.", urlString );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Invalid URL '%s' passed to 'download' command.", urlString );
 		return;
 	}
 	

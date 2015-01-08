@@ -119,7 +119,10 @@ LEONumber	GetScriptableObjectValueAsNumber( LEOValuePtr self, LEOUnit *outUnit, 
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return -1;
 	}
 	
@@ -159,7 +162,10 @@ LEOInteger	GetScriptableObjectValueAsInteger( LEOValuePtr self, LEOUnit *outUnit
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return -1;
 	}
 
@@ -199,7 +205,10 @@ const char*	GetScriptableObjectValueAsString( LEOValuePtr self, char* outBuf, si
 	txt->Autorelease();
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt->GetString() ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return NULL;
 	}
 	const char*	str = txt->GetString().c_str();
@@ -218,7 +227,10 @@ bool	GetScriptableObjectValueAsBoolean( LEOValuePtr self, LEOContext* inContext 
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return false;
 	}
 	const char*	str = txt.c_str();
@@ -239,7 +251,10 @@ void	GetScriptableObjectValueAsRangeOfString( LEOValuePtr self, LEOChunkType inT
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return;
 	}
 	const char*	str = txt.c_str();
@@ -265,7 +280,10 @@ void	SetScriptableObjectValueAsNumber( LEOValuePtr self, LEONumber inNumber, LEO
 	sstream << inNumber << gUnitLabels[inUnit];
 	if( !((CScriptableObject*)self->object.object)->SetTextContents( sstream.str().c_str() ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 	}
 }
 
@@ -276,7 +294,10 @@ void	SetScriptableObjectValueAsInteger( LEOValuePtr self, LEOInteger inNumber, L
 	sstream << inNumber << gUnitLabels[inUnit];
 	if( !((CScriptableObject*)self->object.object)->SetTextContents(sstream.str()) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 	}
 }
 
@@ -286,7 +307,10 @@ void	SetScriptableObjectValueAsString( LEOValuePtr self, const char* inBuf, size
 	std::string		txt( inBuf, inBufLen );
 	if( !((CScriptableObject*)self->object.object)->SetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 	}
 }
 
@@ -295,7 +319,10 @@ void	SetScriptableObjectValueAsBoolean( LEOValuePtr self, bool inBoolean, LEOCon
 {
 	if( !((CScriptableObject*)self->object.object)->SetTextContents( inBoolean ? "true" : "false" ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 	}
 }
 
@@ -307,7 +334,10 @@ void	SetScriptableObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inTyp
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return;
 	}
 	size_t		outChunkStart = 0,
@@ -339,7 +369,10 @@ void	SetScriptableObjectValueRangeAsString( LEOValuePtr self, LEOChunkType inTyp
 	
 	if( !((CScriptableObject*)self->object.object)->SetTextContents(newStr) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object's contents can't be changed." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object's contents can't be changed." );
 	}
 
 	free(newStr);
@@ -353,7 +386,10 @@ void	SetScriptableObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return;
 	}
 	const char*	str = txt.c_str();
@@ -372,7 +408,10 @@ void	SetScriptableObjectValuePredeterminedRangeAsString( LEOValuePtr self,
 	
 	if( !((CScriptableObject*)self->object.object)->SetTextContents(newStr) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object's contents can't be changed." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object's contents can't be changed." );
 	}
 
 	free( newStr );
@@ -393,7 +432,10 @@ void	InitScriptableObjectValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LE
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return;
 	}
 	LEOInitStringValue( dest, txt.c_str(), txt.size(), keepReferences, inContext );
@@ -405,7 +447,10 @@ void	PutScriptableObjectValueIntoValue( LEOValuePtr self, LEOValuePtr dest, LEOC
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return;
 	}
 
@@ -421,7 +466,10 @@ void	DetermineChunkRangeOfSubstringOfScriptableObjectValue( LEOValuePtr self, si
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return;
 	}
 	const char*	str = txt.c_str();
@@ -467,7 +515,10 @@ bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContex
 	std::string	txt;
 	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "This object can have no contents." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
 		return false;
 	}
 	
@@ -498,7 +549,12 @@ void		GetScriptableObjectValueForKeyOfRange( LEOValuePtr self, const char* keyNa
 	CScriptableObject*		theObject = (CScriptableObject*)self->object.object;
 	
 	if( !theObject->GetPropertyNamed( keyName, startOffset, endOffset, inContext, outValue ) )
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "No property \"%s\".", keyName );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No property \"%s\".", keyName );
+	}
 }
 
 
@@ -686,7 +742,12 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	}
 	
 	if( !handled )
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Couldn't find handler for %s.", LEOContextGroupHandlerNameForHandlerID( inContext->group, inHandler ) );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Couldn't find handler for %s.", LEOContextGroupHandlerNameForHandlerID( inContext->group, inHandler ) );
+	}
 }
 
 

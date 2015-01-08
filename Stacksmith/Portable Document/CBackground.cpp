@@ -65,7 +65,10 @@ bool	CBackground::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		LEOInteger	number = LEOGetValueAsInteger( inValue, &theUnit, inContext );
 		if( number <= 0 || number > (LEOInteger)GetStack()->GetNumBackgrounds() )
 		{
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Background number must be between 1 and %zu.", GetStack()->GetNumBackgrounds() );
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Background number must be between 1 and %zu.", GetStack()->GetNumBackgrounds() );
 		}
 		else
 		{

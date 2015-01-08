@@ -114,7 +114,10 @@ bool	CTimerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		{
 			if( gUnitGroupsForLabels[theUnit] != gUnitGroupsForLabels[kLEOUnitTicks] )
 			{
-				LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Expected a time interval, found%s.", gUnitLabels[theUnit] );
+				size_t		lineNo = SIZE_T_MAX;
+				uint16_t	fileID = 0;
+				LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+				LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Expected a time interval, found%s.", gUnitLabels[theUnit] );
 				return true;
 			}
 			theInterval = LEONumberWithUnitAsUnit( theInterval, theUnit, kLEOUnitTicks );

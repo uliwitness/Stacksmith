@@ -145,7 +145,10 @@ void	WILDGoInstruction( LEOContext* inContext )
 		if( !canGoThere )
 		{
 			LEOResumeContext( inContext );
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't go there." ); // +++ Should we instead set the result here?
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't go there." ); // +++ Should we instead set the result here?
 		}
 	}
 	else	// The "go" has completed and resumed the script.
@@ -418,7 +421,10 @@ void	WILDPrintInstruction( LEOContext* inContext )
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
 	if( theValue == NULL || theValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
 		return;
 	}
 	const char* newStr = LEOGetValueAsString( theValue, buf, sizeof(buf), inContext );
@@ -449,7 +455,10 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
 	if( theValue == NULL || theValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
 		return;
 	}
 	
@@ -458,7 +467,12 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 	{
 		bool	couldDelete = ((CScriptableObject*)objectValue->object.object)->DeleteObject();
 		if( !couldDelete )
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to delete this object." );
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to delete this object." );
+		}
 	}
 	else
 		LEOSetValueAsString( theValue, NULL, 0, inContext );
@@ -514,7 +528,10 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 			
 		if( mediaURL.length() == 0 )
 		{
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Can't find sound '%s'.", instrNameStr );
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't find sound '%s'.", instrNameStr );
 			return;
 		}
 		
@@ -543,7 +560,10 @@ void	WILDStartInstruction( LEOContext* inContext )
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
 	if( theValue == NULL || theValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
 		return;
 	}
 	
@@ -555,10 +575,20 @@ void	WILDStartInstruction( LEOContext* inContext )
 		bool	couldStart = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "started", 0, 0 );
 		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to start this object." );
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to start this object." );
+		}
 	}
 	else
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to start this object." );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to start this object." );
+	}
 	
 	if( popOffStack )
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
@@ -583,7 +613,10 @@ void	WILDStopInstruction( LEOContext* inContext )
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
 	if( theValue == NULL || theValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
 		return;
 	}
 	
@@ -595,10 +628,20 @@ void	WILDStopInstruction( LEOContext* inContext )
 		bool		couldStop = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "started", 0, 0 );
 		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to stop this object." );
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to stop this object." );
+		}
 	}
 	else
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to stop this object." );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to stop this object." );
+	}
 	
 	if( popOffStack )
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
@@ -623,7 +666,10 @@ void	WILDShowInstruction( LEOContext* inContext )
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
 	if( theValue == NULL || theValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
 		return;
 	}
 	
@@ -635,10 +681,20 @@ void	WILDShowInstruction( LEOContext* inContext )
 		bool	couldStart = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &trueValue, inContext, "visible", 0, 0 );
 		LEOCleanUpValue( &trueValue, kLEOInvalidateReferences, inContext );
 		if( !couldStart )
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to show this object." );
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to show this object." );
+		}
 	}
 	else
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to show this object." );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to show this object." );
+	}
 	
 	if( popOffStack )
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
@@ -663,7 +719,10 @@ void	WILDHideInstruction( LEOContext* inContext )
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
 	if( theValue == NULL || theValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
 		return;
 	}
 	
@@ -675,10 +734,20 @@ void	WILDHideInstruction( LEOContext* inContext )
 		bool		couldStop = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &falseValue, inContext, "visible", 0, 0 );
 		LEOCleanUpValue( &falseValue, kLEOInvalidateReferences, inContext );
 		if( !couldStop )
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to hide this object." );
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to hide this object." );
+		}
 	}
 	else
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unable to hide this object." );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to hide this object." );
+	}
 	
 	if( popOffStack )
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
@@ -703,7 +772,10 @@ void	WILDWaitInstruction( LEOContext* inContext )
 	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
 	if( theValue == NULL || theValue->base.isa == NULL )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Internal error: Invalid value." );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
 		return;
 	}
 	
@@ -713,7 +785,10 @@ void	WILDWaitInstruction( LEOContext* inContext )
 	{
 		if( gUnitGroupsForLabels[theUnit] != gUnitGroupsForLabels[kLEOUnitTicks] )	// Comparing apples and oranges, fail!
 		{
-			LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Expected%s here, found%s.", gUnitLabels[kLEOUnitTicks], gUnitLabels[theUnit] );
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Expected%s here, found%s.", gUnitLabels[kLEOUnitTicks], gUnitLabels[theUnit] );
 			return;
 		}
 		
@@ -750,7 +825,10 @@ void	WILDChooseInstruction( LEOContext* inContext )
 	TTool		requestedTool = CStack::GetToolFromName( toolName );
 	if( requestedTool == ETool_Last )
 	{
-		LEOContextStopWithError( inContext, SIZE_T_MAX, SIZE_T_MAX, 0, "Unknown tool \"%s\".", toolName );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unknown tool \"%s\".", toolName );
 		return;
 	}
 	userData->GetStack()->SetTool( requestedTool );
