@@ -63,11 +63,13 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else if( mButtonStyle == EButtonStyleRectangle )
 	{
+		box = NSInsetRect( box, -2, -2 );
 		mView = [[WILDViewFactory shapeButton] retain];
 		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
 	}
 	else if( mButtonStyle == EButtonStyleOpaque )
 	{
+		box = NSInsetRect( box, -2, -2 );
 		mView = [[WILDViewFactory shapeButton] retain];
 		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
 		[mView setBordered: NO];
@@ -106,6 +108,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else
 	{
+		box = NSInsetRect( box, -2, -2 );
 		mView = [[WILDViewFactory shapeButton] retain];
 		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
 		[mView setBordered: NO];
