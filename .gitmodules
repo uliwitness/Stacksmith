@@ -51,7 +51,7 @@
 
 [submodule "tinyxml2"]
 	path = tinyxml2
-	url = https://github.com/uliwitness/tinyxml2.git
+	url = git://github.com/uliwitness/tinyxml2.git
 	ignore = all
 	fetchRecurseSubmodules = true
 [submodule "KVOWithBlocks"]
