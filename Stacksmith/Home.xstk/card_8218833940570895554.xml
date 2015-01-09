@@ -1,421 +1,354 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "" >
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "">
 <card>
-	<id>8218833940570895554</id>
-	<name></name>
-	<showPict><true /></showPict>
-	<cantDelete><false /></cantDelete>
-	<dontSearch><false /></dontSearch>
-	<bitmap>bitmap_8218833940570895554.tiff</bitmap>
-	<script></script>
-	<part>
-		<id>1</id>
-		<type>field</type>
-		<layer>card</layer>
-		<visible><true /></visible>
-		<enabled><true /></enabled>
-		<rect>
-			<left>470</left>
-			<top>64</top>
-			<right>620</right>
-			<bottom>173</bottom>
-		</rect>
-		<style>standard</style>
-		<showName><false /></showName>
-		<highlight><false /></highlight>
-		<autoHighlight><true /></autoHighlight>
-		<sharedHighlight><false /></sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<dontWrap><false /></dontWrap>
-		<dontSearch><false /></dontSearch>
-		<sharedText><false /></sharedText>
-		<fixedLineHeight><false /></fixedLineHeight>
-		<autoTab><false /></autoTab>
-		<lockText><true /></lockText>
-		<autoSelect><true /></autoSelect>
-		<multipleLines><false /></multipleLines>
-		<showLines><false /></showLines>
-		<wideMargins><false /></wideMargins>
-		<currentTime>0:00:00:00.00/1</currentTime>
-		<controllerVisible><false /></controllerVisible>
-		<fillColor>
-			<red>65535</red>
-			<green>65535</green>
-			<blue>65535</blue>
-			<alpha>65535</alpha>
-		</fillColor>
-		<lineColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</lineColor>
-		<shadowColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</shadowColor>
-		<shadowOffset>
-			<width>1</width>
-			<height>-1</height>
-		</shadowOffset>
-		<shadowBlurRadius>3</shadowBlurRadius>
-		<selectedLines>
-			<integer>5</integer>
-		</selectedLines>
-		<textAlign>left</textAlign>
-		<font>Geneva</font>
-		<textSize>12</textSize>
-		<hasHorizontalScroller><false /></hasHorizontalScroller>
-		<hasVerticalScroller><true /></hasVerticalScroller>
-		<name></name>
-		<script></script>
-	</part>
-	<part>
-		<id>2</id>
-		<type>button</type>
-		<layer>card</layer>
-		<visible><true /></visible>
-		<enabled><true /></enabled>
-		<rect>
-			<left>456</left>
-			<top>275</top>
-			<right>623</right>
-			<bottom>298</bottom>
-		</rect>
-		<style>popup</style>
-		<showName><true /></showName>
-		<highlight><false /></highlight>
-		<autoHighlight><true /></autoHighlight>
-		<sharedHighlight><false /></sharedHighlight>
-		<family>0</family>
-		<titleWidth>91</titleWidth>
-		<icon>0</icon>
-		<dontWrap><false /></dontWrap>
-		<dontSearch><false /></dontSearch>
-		<sharedText><false /></sharedText>
-		<fixedLineHeight><false /></fixedLineHeight>
-		<autoTab><false /></autoTab>
-		<lockText><false /></lockText>
-		<autoSelect><false /></autoSelect>
-		<multipleLines><false /></multipleLines>
-		<showLines><false /></showLines>
-		<wideMargins><false /></wideMargins>
-		<currentTime>0:00:00:00.00/1</currentTime>
-		<controllerVisible><false /></controllerVisible>
-		<fillColor>
-			<red>65535</red>
-			<green>65535</green>
-			<blue>65535</blue>
-			<alpha>65535</alpha>
-		</fillColor>
-		<lineColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</lineColor>
-		<shadowColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>0</alpha>
-		</shadowColor>
-		<shadowOffset>
-			<width>0</width>
-			<height>0</height>
-		</shadowOffset>
-		<shadowBlurRadius>0</shadowBlurRadius>
-		<selectedLines>
-			<integer>1</integer>
-		</selectedLines>
-		<textAlign>center</textAlign>
-		<font>Lucida Grande</font>
-		<textSize>13</textSize>
-		<hasHorizontalScroller><true /></hasHorizontalScroller>
-		<hasVerticalScroller><true /></hasVerticalScroller>
-		<name>Are you nuts?</name>
-		<script>on mouseUp
+    <id>8218833940570895554</id>
+    <bitmap>bitmap_8218833940570895554.tiff</bitmap>
+    <cantDelete><false/></cantDelete>
+    <showPict><true/></showPict>
+    <dontSearch><false/></dontSearch>
+    <owner>1112344475840500876</owner>
+    <link rel="stylesheet" type="text/css" href="stylesheet_card_8218833940570895554.css"/>
+    <part>
+        <id>1</id>
+        <type>field</type>
+        <rect>
+            <left>470</left>
+            <top>64</top>
+            <right>620</right>
+            <bottom>173</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>65535</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>1</width>
+            <height>-1</height>
+        </shadowOffset>
+        <shadowBlurRadius>3</shadowBlurRadius>
+        <lineWidth>1</lineWidth>
+        <bevelWidth>1</bevelWidth>
+        <bevelAngle>315</bevelAngle>
+        <toolTip></toolTip>
+        <dontWrap><false/></dontWrap>
+        <dontSearch><false/></dontSearch>
+        <sharedText><false/></sharedText>
+        <fixedLineHeight><false/></fixedLineHeight>
+        <autoTab><false/></autoTab>
+        <lockText><true/></lockText>
+        <style>standard</style>
+        <autoSelect><true/></autoSelect>
+        <showLines><false/></showLines>
+        <wideMargins><false/></wideMargins>
+        <multipleLines><false/></multipleLines>
+        <hasHorizontalScroller><false/></hasHorizontalScroller>
+        <hasVerticalScroller><true/></hasVerticalScroller>
+        <selectedLines>
+            <integer>5</integer>
+        </selectedLines>
+        <textAlign>left</textAlign>
+        <font>Geneva</font>
+        <textSize>12</textSize>
+        <textStyle>plain</textStyle>
+        <textHeight>12</textHeight>
+        <name></name>
+        <script></script>
+    </part>
+    <part>
+        <id>2</id>
+        <type>button</type>
+        <rect>
+            <left>456</left>
+            <top>275</top>
+            <right>623</right>
+            <bottom>298</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>65535</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>0</width>
+            <height>0</height>
+        </shadowOffset>
+        <shadowBlurRadius>0</shadowBlurRadius>
+        <lineWidth>1</lineWidth>
+        <bevelWidth>1</bevelWidth>
+        <bevelAngle>315</bevelAngle>
+        <toolTip></toolTip>
+        <style>popup</style>
+        <showName><true/></showName>
+        <autoHighlight><true/></autoHighlight>
+        <sharedHighlight><false/></sharedHighlight>
+        <family>0</family>
+        <titleWidth>91</titleWidth>
+        <icon>0</icon>
+        <selectedLines>
+            <integer>1</integer>
+        </selectedLines>
+        <textAlign>center</textAlign>
+        <font>Lucida Grande</font>
+        <textSize>13</textSize>
+        <textStyle>plain</textStyle>
+        <name>Are you nuts?</name>
+        <script>on mouseUp
 	put cd fld 1 into theInfo
 	set somestuff of theInfo to line my selectedline of me
 	put theInfo into cd fld 1
 end mouseUp</script>
-	</part>
-	<part>
-		<id>3</id>
-		<type>field</type>
-		<layer>card</layer>
-		<visible><true /></visible>
-		<enabled><true /></enabled>
-		<rect>
-			<left>470</left>
-			<top>20</top>
-			<right>620</right>
-			<bottom>58</bottom>
-		</rect>
-		<style>standard</style>
-		<showName><false /></showName>
-		<highlight><false /></highlight>
-		<autoHighlight><true /></autoHighlight>
-		<sharedHighlight><false /></sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<dontWrap><false /></dontWrap>
-		<dontSearch><false /></dontSearch>
-		<sharedText><false /></sharedText>
-		<fixedLineHeight><false /></fixedLineHeight>
-		<autoTab><false /></autoTab>
-		<lockText><false /></lockText>
-		<autoSelect><false /></autoSelect>
-		<multipleLines><false /></multipleLines>
-		<showLines><false /></showLines>
-		<wideMargins><false /></wideMargins>
-		<currentTime>0:00:00:00.00/1</currentTime>
-		<controllerVisible><false /></controllerVisible>
-		<fillColor>
-			<red>65535</red>
-			<green>65535</green>
-			<blue>65535</blue>
-			<alpha>65535</alpha>
-		</fillColor>
-		<lineColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</lineColor>
-		<shadowColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</shadowColor>
-		<shadowOffset>
-			<width>1</width>
-			<height>-1</height>
-		</shadowOffset>
-		<shadowBlurRadius>3</shadowBlurRadius>
-		<textAlign>left</textAlign>
-		<font>Lucida Grande</font>
-		<textSize>13</textSize>
-		<hasHorizontalScroller><false /></hasHorizontalScroller>
-		<hasVerticalScroller><false /></hasVerticalScroller>
-		<name></name>
-		<script></script>
-	</part>
-	<part>
-		<id>4</id>
-		<type>moviePlayer</type>
-		<layer>card</layer>
-		<visible><true /></visible>
-		<enabled><true /></enabled>
-		<rect>
-			<left>20</left>
-			<top>20</top>
-			<right>429</right>
-			<bottom>252</bottom>
-		</rect>
-		<style>standard</style>
-		<showName><true /></showName>
-		<highlight><false /></highlight>
-		<autoHighlight><true /></autoHighlight>
-		<sharedHighlight><false /></sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<dontWrap><false /></dontWrap>
-		<dontSearch><false /></dontSearch>
-		<sharedText><false /></sharedText>
-		<fixedLineHeight><false /></fixedLineHeight>
-		<autoTab><false /></autoTab>
-		<lockText><false /></lockText>
-		<autoSelect><false /></autoSelect>
-		<multipleLines><false /></multipleLines>
-		<showLines><false /></showLines>
-		<wideMargins><false /></wideMargins>
-		<currentTime>0:00:00:34.265/600</currentTime>
-		<controllerVisible><false /></controllerVisible>
-		<fillColor>
-			<red>65535</red>
-			<green>65535</green>
-			<blue>65535</blue>
-			<alpha>65535</alpha>
-		</fillColor>
-		<lineColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</lineColor>
-		<shadowColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</shadowColor>
-		<shadowOffset>
-			<width>1</width>
-			<height>-1</height>
-		</shadowOffset>
-		<shadowBlurRadius>3</shadowBlurRadius>
-		<textAlign>center</textAlign>
-		<font>Lucida Grande</font>
-		<textSize>13</textSize>
-		<hasHorizontalScroller><true /></hasHorizontalScroller>
-		<hasVerticalScroller><true /></hasVerticalScroller>
-		<name>New Movie Player</name>
-		<mediaPath>PlaceholderMovie.mov</mediaPath>
-		<script></script>
-	</part>
-	<part>
-		<id>5</id>
-		<type>button</type>
-		<layer>card</layer>
-		<visible><true /></visible>
-		<enabled><true /></enabled>
-		<rect>
-			<left>20</left>
-			<top>268</top>
-			<right>86</right>
-			<bottom>322</bottom>
-		</rect>
-		<style>rectangle</style>
-		<showName><false /></showName>
-		<highlight><false /></highlight>
-		<autoHighlight><true /></autoHighlight>
-		<sharedHighlight><false /></sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>128</icon>
-		<dontWrap><false /></dontWrap>
-		<dontSearch><false /></dontSearch>
-		<sharedText><false /></sharedText>
-		<fixedLineHeight><false /></fixedLineHeight>
-		<autoTab><false /></autoTab>
-		<lockText><false /></lockText>
-		<autoSelect><false /></autoSelect>
-		<multipleLines><false /></multipleLines>
-		<showLines><false /></showLines>
-		<wideMargins><false /></wideMargins>
-		<currentTime>0:00:00:00.00/1</currentTime>
-		<controllerVisible><false /></controllerVisible>
-		<fillColor>
-			<red>65535</red>
-			<green>65003</green>
-			<blue>46242</blue>
-			<alpha>65535</alpha>
-		</fillColor>
-		<lineColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</lineColor>
-		<shadowColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</shadowColor>
-		<shadowOffset>
-			<width>1</width>
-			<height>-1</height>
-		</shadowOffset>
-		<shadowBlurRadius>4</shadowBlurRadius>
-		<textAlign>center</textAlign>
-		<font>Lucida Grande</font>
-		<textSize>13</textSize>
-		<hasHorizontalScroller><true /></hasHorizontalScroller>
-		<hasVerticalScroller><true /></hasVerticalScroller>
-		<name>Message Box!</name>
-		<script>on mouseUp
+    </part>
+    <part>
+        <id>3</id>
+        <type>field</type>
+        <rect>
+            <left>470</left>
+            <top>20</top>
+            <right>620</right>
+            <bottom>58</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>65535</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>1</width>
+            <height>-1</height>
+        </shadowOffset>
+        <shadowBlurRadius>3</shadowBlurRadius>
+        <lineWidth>1</lineWidth>
+        <bevelWidth>1</bevelWidth>
+        <bevelAngle>315</bevelAngle>
+        <toolTip></toolTip>
+        <dontWrap><false/></dontWrap>
+        <dontSearch><false/></dontSearch>
+        <sharedText><false/></sharedText>
+        <fixedLineHeight><false/></fixedLineHeight>
+        <autoTab><false/></autoTab>
+        <lockText><false/></lockText>
+        <style>standard</style>
+        <autoSelect><false/></autoSelect>
+        <showLines><false/></showLines>
+        <wideMargins><false/></wideMargins>
+        <multipleLines><false/></multipleLines>
+        <hasHorizontalScroller><false/></hasHorizontalScroller>
+        <hasVerticalScroller><false/></hasVerticalScroller>
+        <textAlign>left</textAlign>
+        <font>Lucida Grande</font>
+        <textSize>13</textSize>
+        <textStyle>plain</textStyle>
+        <textHeight>12</textHeight>
+        <name></name>
+        <script></script>
+    </part>
+    <part>
+        <id>4</id>
+        <type>moviePlayer</type>
+        <rect>
+            <left>20</left>
+            <top>20</top>
+            <right>429</right>
+            <bottom>252</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>65535</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>1</width>
+            <height>-1</height>
+        </shadowOffset>
+        <shadowBlurRadius>3</shadowBlurRadius>
+        <lineWidth>1</lineWidth>
+        <bevelWidth>1</bevelWidth>
+        <bevelAngle>315</bevelAngle>
+        <toolTip></toolTip>
+        <mediaPath>PlaceholderMovie.mov</mediaPath>
+        <currentTime>0</currentTime>
+        <controllerVisible><false/></controllerVisible>
+        <name>New Movie Player</name>
+        <script></script>
+    </part>
+    <part>
+        <id>5</id>
+        <type>button</type>
+        <rect>
+            <left>20</left>
+            <top>268</top>
+            <right>86</right>
+            <bottom>322</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65003</green>
+            <blue>46242</blue>
+            <alpha>65535</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>1</width>
+            <height>-1</height>
+        </shadowOffset>
+        <shadowBlurRadius>4</shadowBlurRadius>
+        <lineWidth>1</lineWidth>
+        <bevelWidth>1</bevelWidth>
+        <bevelAngle>315</bevelAngle>
+        <toolTip></toolTip>
+        <style>rectangle</style>
+        <showName><false/></showName>
+        <autoHighlight><true/></autoHighlight>
+        <sharedHighlight><false/></sharedHighlight>
+        <family>0</family>
+        <titleWidth>0</titleWidth>
+        <icon>128</icon>
+        <textAlign>center</textAlign>
+        <font>Lucida Grande</font>
+        <textSize>13</textSize>
+        <textStyle>plain</textStyle>
+        <name>Message Box!</name>
+        <script>on mouseUp
 	set the visible of message box to not the visible of message box
 end mouseUp</script>
-	</part>
-	<part>
-		<id>6</id>
-		<type>button</type>
-		<layer>card</layer>
-		<visible><true /></visible>
-		<enabled><true /></enabled>
-		<rect>
-			<left>457</left>
-			<top>301</top>
-			<right>626</right>
-			<bottom>325</bottom>
-		</rect>
-		<style>standard</style>
-		<showName><true /></showName>
-		<highlight><false /></highlight>
-		<autoHighlight><true /></autoHighlight>
-		<sharedHighlight><false /></sharedHighlight>
-		<family>0</family>
-		<titleWidth>0</titleWidth>
-		<icon>0</icon>
-		<dontWrap><false /></dontWrap>
-		<dontSearch><false /></dontSearch>
-		<sharedText><false /></sharedText>
-		<fixedLineHeight><false /></fixedLineHeight>
-		<autoTab><false /></autoTab>
-		<lockText><false /></lockText>
-		<autoSelect><false /></autoSelect>
-		<multipleLines><false /></multipleLines>
-		<showLines><false /></showLines>
-		<wideMargins><false /></wideMargins>
-		<currentTime>0:00:00:00.00/1</currentTime>
-		<controllerVisible><false /></controllerVisible>
-		<fillColor>
-			<red>65535</red>
-			<green>65535</green>
-			<blue>65535</blue>
-			<alpha>65535</alpha>
-		</fillColor>
-		<lineColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>65535</alpha>
-		</lineColor>
-		<shadowColor>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-			<alpha>0</alpha>
-		</shadowColor>
-		<shadowOffset>
-			<width>0</width>
-			<height>0</height>
-		</shadowOffset>
-		<shadowBlurRadius>0</shadowBlurRadius>
-		<textAlign>center</textAlign>
-		<font>Lucida Grande</font>
-		<textSize>13</textSize>
-		<hasHorizontalScroller><true /></hasHorizontalScroller>
-		<hasVerticalScroller><true /></hasVerticalScroller>
-		<name>Set Chunk Property</name>
-		<script>on mouseUp
+    </part>
+    <part>
+        <id>6</id>
+        <type>button</type>
+        <rect>
+            <left>457</left>
+            <top>301</top>
+            <right>626</right>
+            <bottom>325</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>65535</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>0</width>
+            <height>0</height>
+        </shadowOffset>
+        <shadowBlurRadius>0</shadowBlurRadius>
+        <lineWidth>1</lineWidth>
+        <bevelWidth>1</bevelWidth>
+        <bevelAngle>315</bevelAngle>
+        <toolTip></toolTip>
+        <style>standard</style>
+        <showName><true/></showName>
+        <autoHighlight><true/></autoHighlight>
+        <sharedHighlight><false/></sharedHighlight>
+        <family>0</family>
+        <titleWidth>0</titleWidth>
+        <icon>0</icon>
+        <textAlign>center</textAlign>
+        <font>Lucida Grande</font>
+        <textSize>13</textSize>
+        <textStyle>plain</textStyle>
+        <name>Set Chunk Property</name>
+        <script>on mouseUp
 	set the textStyle of word 2 of card field 1 to italic
 end mouseUp</script>
-	</part>
-	<content>
-		<layer>card</layer>
-		<id>3</id>
-		<text>{\rtf1\ansi\ansicpg1252\cocoartf1138
-{\fonttbl\f0\fnil\fcharset0 LucidaGrande;}
-{\colortbl;\red255\green255\blue255;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
-
-\f0\fs26 \cf0 Swing low sweet chariot.}</text>
-		<highlight><false /></highlight>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>1</id>
-		<text>othervalue:foo
+    </part>
+    <content>
+        <layer>card</layer>
+        <id>3</id>
+        <text><span class="style1">Swing low sweet chariot.</span></text>
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>1</id>
+        <text>othervalue:foo
 somestuff:This
 avalue:123.457
 currentbutton:Choice 2
@@ -424,40 +357,31 @@ b:
 c:
 a:
 </text>
-		<highlight><false /></highlight>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>5</id>
-		<text></text>
-		<highlight><false /></highlight>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>2</id>
-		<text>This
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>5</id>
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>2</id>
+        <text>This
 that
 more</text>
-		<highlight><false /></highlight>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>3030564423061831540</id>
-		<text></text>
-		<highlight><false /></highlight>
-	</content>
-	<content>
-		<layer>background</layer>
-		<id>4368531217426424881</id>
-		<text></text>
-		<highlight><true /></highlight>
-	</content>
-	<content>
-		<layer>card</layer>
-		<id>6</id>
-		<text></text>
-		<highlight><false /></highlight>
-	</content>
-	<owner>1112344475840500876</owner>
-	<marked><false /></marked>
+    </content>
+    <content>
+        <layer>background</layer>
+        <id>3030564423061831540</id>
+    </content>
+    <content>
+        <layer>background</layer>
+        <id>4368531217426424881</id>
+        <highlight><true/></highlight>
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>6</id>
+    </content>
+    <name></name>
+    <script></script>
 </card>
