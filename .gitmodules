@@ -1,60 +1,48 @@
 [submodule "UliKit"]
 	path = UliKit
 	url = git@github.com:uliwitness/UliKit.git
-	ignore = all
 	fetchRecurseSubmodules = true
 [submodule "Forge"]
 	path = Forge
 	url = git@github.com:uliwitness/Forge.git
-	ignore = all
 	fetchRecurseSubmodules = true
 [submodule "ForgeDebugger"]
 	path = ForgeDebugger
 	url = git@github.com:uliwitness/ForgeDebugger.git
 	fetchRecurseSubmodules = true
-	ignore = all
 [submodule "stackimport"]
 	path = stackimport
 	url = git@github.com:uliwitness/stackimport.git
-	ignore = all
 	fetchRecurseSubmodules = true
 [submodule "UKSyntaxColoredTextDocument"]
 	path = UKSyntaxColoredTextDocument
 	url = git@github.com:uliwitness/UKSyntaxColoredTextDocument.git
 	fetchRecurseSubmodules = true
-	ignore = all
 [submodule "UKPaintView"]
 	path = UKPaintView
 	url = git@github.com:uliwitness/UKPaintView.git
 	fetchRecurseSubmodules = true
-	ignore = all
 [submodule "Sparkle"]
 	path = Sparkle
 	url = git@github.com:uliwitness/Sparkle.git
-	ignore = all
 	fetchRecurseSubmodules = true
 [submodule "ULIMelodyQueue"]
 	path = ULIMelodyQueue
 	url = git@github.com:uliwitness/ULIMelodyQueue.git
-	ignore = all
 	fetchRecurseSubmodules = true
 [submodule "ULINetSocket"]
 	path = ULINetSocket
 	url = git@github.com:uliwitness/ULINetSocket.git
-	ignore = all
 	fetchRecurseSubmodules = true
 [submodule "Stacks"]
 	path = Stacks
 	url = git@github.com:uliwitness/Stacks.git
 	fetchRecurseSubmodules = true
-	ignore = all
 [submodule "tinyxml2"]
 	path = tinyxml2
 	url = git@github.com:uliwitness/tinyxml2.git
-	ignore = all
 	fetchRecurseSubmodules = true
 [submodule "KVOWithBlocks"]
 	path = KVOWithBlocks
 	url = git@github.com:uliwitness/KVOWithBlocks.git
-	ignore = all
 	fetchRecurseSubmodules = true
