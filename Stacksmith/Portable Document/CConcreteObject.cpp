@@ -450,14 +450,18 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 			else if( currHandler.mType == kHandlerEntryGroupHeader )
 			{
 				if( !handlers.empty() && handlers.back().mType == kHandlerEntryGroupHeader )	// Previous group was empty? Remove it.
+				{
 					handlers.pop_back();
+				}
 				handlers.push_back( currHandler );
 			}
 		}
 	}
 
 	if( handlers.back().mType == kHandlerEntryGroupHeader )	// Last group was empty? Remove it.
+	{
 		handlers.pop_back();
+	}
 	
 	return handlers;
 }
@@ -649,7 +653,7 @@ size_t	CConcreteObject::GetNumUserProperties()
 std::string	CConcreteObject::GetUserPropertyNameAtIndex( size_t inIndex )
 {
 	CMap<std::string>::iterator foundProp = mUserProperties.begin();
-	for( size_t x = 0; x <= inIndex && foundProp != mUserProperties.end(); x++ )
+	for( size_t x = 0; x < inIndex && foundProp != mUserProperties.end(); x++ )
 		foundProp++;
 	return foundProp->first;
 }
@@ -658,7 +662,7 @@ std::string	CConcreteObject::GetUserPropertyNameAtIndex( size_t inIndex )
 bool	CConcreteObject::SetUserPropertyNameAtIndex( const char* inNewName, size_t inIndex )
 {
 	CMap<std::string>::iterator foundProp = mUserProperties.begin();
-	for( size_t x = 0; x <= inIndex && foundProp != mUserProperties.end(); x++ )
+	for( size_t x = 0; x < inIndex && foundProp != mUserProperties.end(); x++ )
 		foundProp++;
 	
 	if( foundProp != mUserProperties.end() )
