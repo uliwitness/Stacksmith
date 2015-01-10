@@ -30,6 +30,7 @@ void	WILDCreateInstruction( LEOContext* inContext );
 void	WILDDeleteInstruction( LEOContext* inContext );
 void	WILDDebugCheckpointInstruction( LEOContext* inContext );
 void	WILDCreateUserPropertyInstruction( LEOContext* inContext );
+void	WILDDeleteUserPropertyInstruction( LEOContext* inContext );
 void	WILDPrintInstruction( LEOContext* inContext );
 void	WILDPlayMelodyInstruction( LEOContext* inContext );
 void	WILDStartInstruction( LEOContext* inContext );
@@ -395,6 +396,36 @@ void	WILDCreateUserPropertyInstruction( LEOContext* inContext )
 	{
         CScriptableObject*	theObject = (CScriptableObject*) objectValue->object.object;
 		theObject->AddUserPropertyNamed( propNameStr );
+	}
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
+	
+	inContext->currentInstruction++;
+}
+
+
+/*!
+	Implements the 'delete property' command. Deletes a user property of the specified
+	name from the specified object. Only works for properties added using the
+	'create property' command. Takes 2 parameters and removes them from the stack on
+	completion:
+	
+	propertyName	-	The name of the property to delete, as a string.
+	object			-	The object to remove the property from, as a WILDObjectValue
+						(i.e. isa = kLeoValueTypeScriptableObject)
+	
+	(WILD_DELETE_USER_PROPERTY_INSTR)
+*/
+
+void	WILDDeleteUserPropertyInstruction( LEOContext* inContext )
+{
+	char propNameBuf[1024] = { 0 };
+	const char*	propNameStr = LEOGetValueAsString( inContext->stackEndPtr -2, propNameBuf, sizeof(propNameBuf), inContext );
+	LEOValuePtr objValue = inContext->stackEndPtr -1;
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( objValue, &kLeoValueTypeScriptableObject, inContext );
+	if( objectValue )
+	{
+        CScriptableObject*	theObject = (CScriptableObject*) objectValue->object.object;
+		theObject->DeleteUserPropertyNamed( propNameStr );
 	}
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 	
@@ -849,6 +880,7 @@ LEOINSTR(WILDCreateInstruction)
 LEOINSTR(WILDDeleteInstruction)
 LEOINSTR(WILDDebugCheckpointInstruction)
 LEOINSTR(WILDCreateUserPropertyInstruction)
+LEOINSTR(WILDDeleteUserPropertyInstruction)
 LEOINSTR(WILDPrintInstruction)
 LEOINSTR(WILDPlayMelodyInstruction)
 LEOINSTR(WILDStartInstruction)
@@ -938,6 +970,20 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'O' },
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'O', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		EDeleteIdentifier, WILD_DELETE_USER_PROPERTY_INSTR, 0, 0, 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EPropertyIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'P' },
+			{ EHostParamImmediateValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'P', 'p' },
+			{ EHostParamLabeledContainer, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'p', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
