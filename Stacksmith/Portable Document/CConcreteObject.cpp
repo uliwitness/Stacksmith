@@ -449,7 +449,7 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 			}
 			else if( currHandler.mType == kHandlerEntryGroupHeader )
 			{
-				if( handlers.back().mType == kHandlerEntryGroupHeader )	// Previous group was empty? Remove it.
+				if( !handlers.empty() && handlers.back().mType == kHandlerEntryGroupHeader )	// Previous group was empty? Remove it.
 					handlers.pop_back();
 				handlers.push_back( currHandler );
 			}
