@@ -105,10 +105,13 @@ using namespace Carlson;
 	}
 	NSTrackingAreaOptions	trackingOptions = 0;
 	
-	if( self.owningPart->HasMessageHandler("mouseEnter") || self.owningPart->HasMessageHandler("mouseLeave") )
-		trackingOptions |= NSTrackingMouseEnteredAndExited;
-	if( self.owningPart->HasMessageHandler("mouseMove") )
-		trackingOptions |= NSTrackingMouseMoved;
+	if( self.owningPart )
+	{
+		if( self.owningPart->HasMessageHandler("mouseEnter") || self.owningPart->HasMessageHandler("mouseLeave") )
+			trackingOptions |= NSTrackingMouseEnteredAndExited;
+		if( self.owningPart->HasMessageHandler("mouseMove") )
+			trackingOptions |= NSTrackingMouseMoved;
+	}
 	
 	if( trackingOptions != 0 )
 	{
