@@ -255,6 +255,8 @@ bool	CStack::Save( const std::string& inPackagePath )
 		}
 
 		std::string	stackFilePath(inPackagePath);
+		if( stackFilePath[stackFilePath.length()-1] != '/' )
+			stackFilePath.append( 1, '/' );
 		stackFilePath.append(mFileName);
 		FILE*	theFile = fopen( stackFilePath.c_str(), "w" );
 		if( !theFile )
