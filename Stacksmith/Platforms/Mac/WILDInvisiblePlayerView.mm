@@ -52,8 +52,14 @@ using namespace Carlson;
 {
 	if( owningPart )
 	{
+		const char*	theMsg = "mouseUp %ld";
+		if( !NSPointInRect( [self convertPoint: [theEvent locationInWindow] fromView: nil], self.bounds ) )
+		{
+			theMsg = "mouseUpOutside %ld";
+		}
+		
 		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, "mouseUp %ld", [theEvent buttonNumber] );
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, theMsg, [theEvent buttonNumber] );
 	}
 }
 
