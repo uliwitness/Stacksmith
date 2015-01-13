@@ -603,6 +603,8 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	peekingDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDragWhilePeeking" );
 	LEOHandlerID	openFieldHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openField" );
 	LEOHandlerID	closeFieldHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closeField" );
+	LEOHandlerID	openBackgroundHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openBackground" );
+	LEOHandlerID	closeBackgroundHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closeBackground" );
 	if( inHandler == arrowKeyHandlerID )
 	{
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
@@ -735,7 +737,9 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == peekingDoubleUpHandlerID
 			|| inHandler == peekingDragHandlerID
 			|| inHandler == openFieldHandlerID
-			|| inHandler == closeFieldHandlerID )
+			|| inHandler == closeFieldHandlerID
+			|| inHandler == closeBackgroundHandlerID
+			|| inHandler == openBackgroundHandlerID )
 	{
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
