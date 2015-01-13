@@ -89,13 +89,20 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 	Load([this,oldStack,inOpenInMode,completionHandler](CLayer *inThisCard)
 	{
 		inThisCard->Dump();
-		CCard	*	oldCard = oldStack ? oldStack->GetCurrentCard() : NULL;
-		bool		destStackWasntOpenYet = GetStack()->GetCurrentCard() == NULL;
+		CCard		*	oldCard = oldStack ? oldStack->GetCurrentCard() : NULL;
+		CBackground	*	oldBackground = oldCard ? oldCard->GetBackground() : NULL;
+		CBackground	*	thisBackground = inThisCard ? dynamic_cast<CCard*>(inThisCard)->GetBackground() : NULL;
+		bool			destStackWasntOpenYet = GetStack()->GetCurrentCard() == NULL;
+		bool			thisIsANewBackground = false;
 		// We're moving away
 		if( oldCard && oldStack && oldStack != GetStack() && inOpenInMode == EOpenInSameWindow )	// Leaving this stack? Close it.
 		{
 			CAutoreleasePool		pool;
 			oldCard->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeCard" );
+			if( oldBackground != thisBackground )
+			{
+				oldCard->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeBackground" );
+			}
 			oldCard->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeStack" );
 			oldCard->GoToSleep();
 			oldStack->SetCurrentCard(NULL);
@@ -105,12 +112,19 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 		{
 			CAutoreleasePool		pool;
 			GetStack()->GetCurrentCard()->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeCard" );
+			thisIsANewBackground = GetStack()->GetCurrentCard()->GetBackground() != thisBackground;
+			if( thisIsANewBackground )
+			{
+				GetStack()->GetCurrentCard()->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeBackground" );
+			}
 			GetStack()->GetCurrentCard()->GoToSleep();
 		}
 		printf("Moved away from card in dest stack\n");
 		
 		if( GetStack()->GetCurrentCard() != this )	// Dest stack didn't already have this card open?
 		{
+			thisIsANewBackground = GetStack()->GetCurrentCard() == NULL || GetStack()->GetCurrentCard()->GetBackground() != thisBackground;
+			
 			printf("Opening new card\n");
 			GetStack()->SetCurrentCard( this );	// Go there!
 			
@@ -119,6 +133,11 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			{
 				CAutoreleasePool		pool;
 				SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openStack" );
+			}
+			if( thisIsANewBackground )
+			{
+				CAutoreleasePool		pool;
+				SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openBackground" );
 			}
 			CAutoreleasePool		pool;
 			SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "openCard" );
