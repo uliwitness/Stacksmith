@@ -710,23 +710,25 @@ using namespace Carlson;
 -(void)	updateToolbarVisibility
 {
 	BOOL	haveToolbar = self.window.toolbar != nil;
-	if( mStack->GetTool() != EBrowseTool )
+	if( !haveToolbar && mStack->GetTool() != EBrowseTool )
 	{
 		NSToolbar	*editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDEditToolbar"] autorelease];
 		[editToolbar setDelegate: self];
 		[editToolbar setAllowsUserCustomization: NO];
 		[editToolbar setVisible: NO];
 		[self.window setToolbar: editToolbar];
-		if( !haveToolbar )
-			[self.window toggleToolbarShown: self];
+		[self.window toggleToolbarShown: self];
+		
+		[[(WILDCustomWidgetWindow*)self.window customWidget] setState: NSOnState];
 	}
-	else if( mStack->GetTool() != EPointerTool )
+	else if( haveToolbar && mStack->GetTool() == EBrowseTool )
 	{
-		if( haveToolbar )
-			[self.window toggleToolbarShown: self];
+		[self.window toggleToolbarShown: self];
 		[self.window setToolbar: nil];
 		if( mStack->GetEditingBackground() )
 			mStack->SetEditingBackground( false );	// Switch back to foreground.
+
+		[[(WILDCustomWidgetWindow*)self.window customWidget] setState: NSOffState];
 	}
 }
 
