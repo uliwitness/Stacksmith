@@ -253,7 +253,11 @@ void	WILDScheduleResumeOfScript( void )
 -(IBAction)	newDocument: (id)sender
 {
 	NSSavePanel		*	savePanel = [NSSavePanel savePanel];
-	[savePanel setAllowedFileTypes: @[@"xstk"]];
+	savePanel.allowedFileTypes = @[@"xstk"];
+	savePanel.allowsOtherFileTypes = NO;
+	savePanel.canCreateDirectories = YES;
+	savePanel.canSelectHiddenExtension = YES;
+	savePanel.showsTagField = YES;
 	[savePanel beginWithCompletionHandler: ^(NSInteger result)
 	{
 		if( result == NSFileHandlingPanelCancelButton )
@@ -267,6 +271,8 @@ void	WILDScheduleResumeOfScript( void )
             CDocumentMac*	theDoc = new CDocumentMac();
             CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
             theDoc->CreateAtURL( [savePanel.URL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String );
+			[savePanel.URL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
+			[savePanel.URL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
             
             theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
         }
