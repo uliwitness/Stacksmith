@@ -243,7 +243,7 @@ using namespace Carlson;
 		NSString*	pictureName = @"From Clipboard";
 		ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 		
-		std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+		std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], "png" );
 		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 		
@@ -308,7 +308,7 @@ using namespace Carlson;
 			NSString*		pictureName = [[NSFileManager defaultManager] displayNameAtPath: [theImgFile path]];
 			ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 			
-			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], "png" );
 			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 			
@@ -336,7 +336,7 @@ using namespace Carlson;
 			NSString*		pictureName = @"Dropped Image";
 			ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 			
-			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], ".png" );
+			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], "png" );
 			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 			
