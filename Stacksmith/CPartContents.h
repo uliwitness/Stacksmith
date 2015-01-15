@@ -37,6 +37,8 @@ public:
 	void				SetText( std::string inText )	{ mAttributedString.SetString( inText ); IncrementChangeCount(); };
 	CAttributedString&	GetAttributedText()				{ return mAttributedString; };
 	void				SetAttributedText( const CAttributedString& inAttrStr )		{ mAttributedString = inAttrStr; IncrementChangeCount(); };
+	CAttributedString&	GetAttributedTextInRowColumn( size_t row, size_t column )										{ return mCells[row][column]; };
+	void				SetAttributedTextInRowColumn( const CAttributedString& inAttrStr, size_t row, size_t column )	{ mCells[row][column] = inAttrStr; IncrementChangeCount(); };
 	bool				IsOnBackground()				{ return mIsOnBackground; };
 	void				SetIsOnBackground( bool inBg )	{ mIsOnBackground = inBg; };
 	
@@ -47,6 +49,7 @@ protected:
 	bool				mIsOnBackground;	// Is the object with ID mID on the background or on the card layer?
 	bool				mHighlight;			// The highlight property for a background button with sharedHighlight == FALSE.
 	CAttributedString	mAttributedString;	// Actual text & styles of these contents.
+	std::vector<std::vector<CAttributedString>>	mCells;	// For table fields, this is an array of rows with an array of cells (one for each column) in it. The cell contents are attributed strings.
 	CLayer		*		mOwningLayer;
 };
 
