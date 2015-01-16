@@ -22,10 +22,10 @@ using namespace Carlson;
 
 @interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource>
 
-@property (assign,nonatomic) CFieldPartMac*	owningField;
-@property (retain,nonatomic) NSArray*		lines;
-@property (assign,nonatomic) BOOL			dontSendSelectionChange;
-@property (assign,nonatomic) BOOL			multipleColumns;
+@property (assign,nonatomic) CFieldPartMac*		owningField;
+@property (retain,nonatomic) NSMutableArray*	lines;
+@property (assign,nonatomic) BOOL				dontSendSelectionChange;
+@property (assign,nonatomic) BOOL				multipleColumns;
 
 @end
 
@@ -42,6 +42,8 @@ using namespace Carlson;
 -(void)	textDidChange: (NSNotification *)obj
 {
 	self.owningField->SetViewTextNeedsSync( true );
+	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
+	if( contents ) contents->IncrementChangeCount();
 //	NSLog( @"Edited text." );
 }
 
@@ -49,6 +51,8 @@ using namespace Carlson;
 -(void)	textViewDidChangeTypingAttributes: (NSNotification *)notification
 {
 	self.owningField->SetViewTextNeedsSync( true );
+	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
+	if( contents ) contents->IncrementChangeCount();
 //	NSLog( @"Edited styles or so." );
 }
 
@@ -91,6 +95,22 @@ using namespace Carlson;
 }
 
 
+-(void)	tableView: (NSTableView *)tableView setObjectValue: (id)theValue forTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
+{
+	if( self.multipleColumns )
+	{
+		NSMutableArray*		cols = [self.lines objectAtIndex: row];
+		[cols replaceObjectAtIndex: [tableView.tableColumns indexOfObject: tableColumn] withObject: theValue];
+	}
+	else
+		[self.lines replaceObjectAtIndex: row withObject: theValue];
+	
+	self.owningField->SetViewTextNeedsSync( true );
+	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
+	if( contents ) contents->IncrementChangeCount();
+}
+
+
 -(void)	tableViewSelectionDidChange:(NSNotification *)notification
 {
 	if( !self.dontSendSelectionChange )
@@ -104,6 +124,8 @@ using namespace Carlson;
 			
 			idx = [selRows indexGreaterThanIndex: idx];
 		}
+		
+		self.owningField->IncrementChangeCount();
 		
 		CAutoreleasePool	cppPool;
 		self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
@@ -643,9 +665,45 @@ void	CFieldPartMac::LoadChangedTextFromView()
 	CPartContents*	contents = GetContentsOnCurrentCard();
 	if( contents )
 	{
-		CAttributedString&		cppstr = contents->GetAttributedText();
-		NSAttributedString*		attrStr = [mTextView textStorage];
-		SetAttributedStringWithCocoa( cppstr, attrStr );
+		if( mAutoSelect && mColumnTypes.size() > 0 )
+		{
+			size_t	x = 0;
+			for( NSArray* currRow in mMacDelegate.lines )
+			{
+				size_t y = 0;
+				for( NSAttributedString* attrStr in currRow )
+				{
+					CAttributedString&	cppstr = contents->GetAttributedTextInRowColumn( x, y );
+					if( ![attrStr isKindOfClass: [NSAttributedString class]] )
+						attrStr = [[[NSAttributedString alloc] initWithString: (NSString*)attrStr attributes: @{}] autorelease];
+					SetAttributedStringWithCocoa( cppstr, attrStr );
+					y++;
+				}
+				
+				x++;
+			}
+		}
+		else if( mAutoSelect )
+		{
+			NSMutableAttributedString*	finalStr = [[NSMutableAttributedString alloc] init];
+			BOOL						firstLine = YES;
+			for( NSAttributedString * attrStr in mMacDelegate.lines )
+			{
+				if( firstLine )
+					firstLine = NO;
+				else
+					[finalStr.mutableString appendString: @"\n"];
+				[finalStr appendAttributedString: attrStr];
+			}
+			CAttributedString&		cppstr = contents->GetAttributedText();
+			SetAttributedStringWithCocoa( cppstr, finalStr );
+		}
+		else
+		{
+			CAttributedString&		cppstr = contents->GetAttributedText();
+			NSAttributedString*		attrStr = [mTextView textStorage];
+			SetAttributedStringWithCocoa( cppstr, attrStr );
+		}
 	}
 	
 	mViewTextNeedsSync = false;

@@ -641,7 +641,9 @@ void	CAttributedString::Dump( size_t inIndent ) const
 
 void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const
 {
-#if 0
+	const char*	indentStr = IndentString( inIndent );
+	printf("%s", indentStr);
+#if 1
 	ForEachRangeDo( []( size_t currOffs, size_t currLen, CAttributeRange* currRun,const std::string& inText )
 	{
 		std::string	text("<span style=\"");
@@ -679,7 +681,6 @@ void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const
 		printf( "%s", text.c_str() );
 	} );
 #else
-	const char*	indentStr = IndentString( inIndent );
 	stream << indentStr << "<" << mRanges.size() << ">";
 	ForEachRangeDo( [&]( size_t currOffs, size_t currLen, CAttributeRange* currRun,const std::string& inText )
 	{
@@ -695,7 +696,7 @@ void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const
 		}
 		stream << inText << "]";
 	} );
-	stream << std::endl << indentStr << std::endl;
+	stream << std::endl;
 #endif
 }
 

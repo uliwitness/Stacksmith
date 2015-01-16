@@ -46,7 +46,7 @@ public:
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
-	virtual void			SetViewTextNeedsSync( bool inNeeded )	{ mViewTextNeedsSync = inNeeded; };
+	virtual void			SetViewTextNeedsSync( bool inNeeded )	{ mViewTextNeedsSync = inNeeded;  };
 
 	virtual bool			GetTextContents( std::string &outString );
 	virtual bool			SetTextContents( const std::string &inString );
@@ -81,6 +81,8 @@ public:
 
 	virtual void			GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs ) = 0;
 	virtual void			SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs ) = 0;
+	
+	virtual void			GoToSleep()						{ if( mViewTextNeedsSync ) LoadChangedTextFromView(); };
 	
 protected:
 	~CFieldPart()	{};

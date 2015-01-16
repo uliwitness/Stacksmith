@@ -470,9 +470,6 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	}
 	else if( strcasecmp("columnTypes", inPropertyName) == 0 )
 	{
-		if( mViewTextNeedsSync )
-			LoadChangedTextFromView();
-		
 		CPartContents*	theContents = NULL;
 		size_t	numStyles = LEOGetKeyCount( inValue, inContext );
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
@@ -526,8 +523,6 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			if( !foundType )
 				return true;
 		}
-		
-		LoadChangedTextStylesIntoView();
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
