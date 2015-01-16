@@ -25,6 +25,7 @@ using namespace Carlson;
 @property (assign,nonatomic) CFieldPartMac*	owningField;
 @property (retain,nonatomic) NSArray*		lines;
 @property (assign,nonatomic) BOOL			dontSendSelectionChange;
+@property (assign,nonatomic) BOOL			multipleColumns;
 
 @end
 
@@ -77,11 +78,16 @@ using namespace Carlson;
 	return [self.lines count];
 }
 
-/* This method is required for the "Cell Based" TableView, and is optional for the "View Based" TableView. If implemented in the latter case, the value will be set to the view at a given row/column if the view responds to -setObjectValue: (such as NSControl and NSTableCellView).
- */
+
 -(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
-	return [self.lines objectAtIndex: row];
+	if( self.multipleColumns )
+	{
+		NSArray*	cols = [self.lines objectAtIndex: row];
+		return [cols objectAtIndex: [tableView.tableColumns indexOfObject: tableColumn]];
+	}
+	else
+		return [self.lines objectAtIndex: row];
 }
 
 
@@ -195,6 +201,20 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTableView setDoubleAction: @selector(tableViewRowDoubleClicked:)];
 		mView = (WILDScrollView*) [[mTableView enclosingScrollView] retain];
 		mView.owningPart = this;
+		
+		NSInteger	numCols = [mTableView numberOfColumns];
+		while( numCols-- > 0 )
+			[mTableView removeTableColumn: mTableView.tableColumns.lastObject];
+		
+		size_t 		numColumns = mColumnTypes.size();
+		if( numColumns < 1 )
+			numColumns = 1;
+		for( size_t x = 0; x < numColumns; x++ )
+		{
+			NSTableColumn	*	col = [[NSTableColumn alloc] initWithIdentifier: [NSString stringWithFormat: @"%zu", x +1]];
+			[mTableView addTableColumn: col];
+			[col release];
+		}
 	}
 	else
 	{
@@ -562,7 +582,26 @@ void	CFieldPartMac::GetSelectedRange( LEOChunkType* outType, size_t* outStartOff
 void	CFieldPartMac::LoadChangedTextStylesIntoView()
 {
 	CPartContents*	contents = GetContentsOnCurrentCard();
-	if( mAutoSelect )
+	if( mAutoSelect && mColumnTypes.size() > 0 )
+	{
+		NSMutableArray*		lines = [[NSMutableArray alloc] init];
+		for( size_t x = 0; x < contents->GetRowCount(); x++ )
+		{
+			NSMutableArray * cols = [NSMutableArray array];
+			size_t	numCols = contents->GetColumnCount( x );
+			for( size_t y = 0; y < numCols; y++ )
+			{
+				NSAttributedString*	attrStr = GetCocoaAttributedString( contents->GetAttributedTextInRowColumn(x, y), GetCocoaAttributesForPart() );
+				[cols addObject: attrStr];
+			}
+			[lines addObject: cols];
+		}
+		mMacDelegate.multipleColumns = YES;
+		[mMacDelegate setLines: lines];
+		[lines release];
+		[mTableView reloadData];
+	}
+	else if( mAutoSelect )
 	{
 		ListChunkCallbackContext	ctx = { .lines = [[NSMutableArray alloc] init], .contents = contents, .defaultAttrs = GetCocoaAttributesForPart() };
 		if( contents )
@@ -578,6 +617,7 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 			}
 			LEODoForEachChunk( theStr.c_str(), contents->GetText().length(), kLEOChunkTypeLine, ListChunkCallback, 0, &ctx );
 		}
+		mMacDelegate.multipleColumns = NO;
 		[mMacDelegate setLines: ctx.lines];
 		[ctx.lines release];
 		[mTableView reloadData];

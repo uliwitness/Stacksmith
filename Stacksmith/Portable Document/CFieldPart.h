@@ -30,6 +30,15 @@ typedef enum
 } TFieldStyle;
 
 
+typedef enum
+{
+	EColumnTypeText,
+	EColumnTypeCheckbox,
+	EColumnTypeIcon,
+	EColumnType_Last
+} TColumnType;
+
+
 class CFieldPart : public CVisiblePart
 {
 public:
@@ -109,6 +118,7 @@ protected:
 	bool			mHasVerticalScroller;
 	bool			mViewTextNeedsSync;		// Did the text in the view change and we haven't updated the part contents yet?
 	TFieldStyle		mFieldStyle;
+	std::vector<TColumnType>	mColumnTypes;
 	std::set<size_t>mSelectedLines;
 };
 

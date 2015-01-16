@@ -37,8 +37,11 @@ public:
 	void				SetText( std::string inText )	{ mAttributedString.SetString( inText ); IncrementChangeCount(); };
 	CAttributedString&	GetAttributedText()				{ return mAttributedString; };
 	void				SetAttributedText( const CAttributedString& inAttrStr )		{ mAttributedString = inAttrStr; IncrementChangeCount(); };
-	CAttributedString&	GetAttributedTextInRowColumn( size_t row, size_t column )										{ return mCells[row][column]; };
-	void				SetAttributedTextInRowColumn( const CAttributedString& inAttrStr, size_t row, size_t column )	{ mCells[row][column] = inAttrStr; IncrementChangeCount(); };
+	size_t				GetRowCount()					{ return mCells.size(); };
+	size_t				GetColumnCount( size_t row )	{ return mCells[row].size(); };
+	CAttributedString&	GetAttributedTextInRowColumn( size_t row, size_t column )										{ if( mCells.size() <= row ) mCells.resize( row +1 ); if( mCells[row].size() <= column ) mCells[row].resize( column +1 ); return mCells[row][column]; };
+	void				SetAttributedTextInRowColumn( const CAttributedString& inAttrStr, size_t row, size_t column )	{ if( mCells.size() <= row ) mCells.resize( row +1 ); if( mCells[row].size() <= column ) mCells[row].resize( column +1 ); mCells[row][column] = inAttrStr; IncrementChangeCount(); };
+	
 	bool				IsOnBackground()				{ return mIsOnBackground; };
 	void				SetIsOnBackground( bool inBg )	{ mIsOnBackground = inBg; };
 	

@@ -19,7 +19,7 @@ CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElem
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
 	mHighlight = CTinyXMLUtils::GetBoolNamed( inElement, "highlight", false );
-	tinyxml2::XMLElement * tableElement = inElement->FirstChildElement( "table" );
+	tinyxml2::XMLElement * tableElement = inElement? inElement->FirstChildElement( "table" ) : NULL;
 	if( tableElement )
 	{
 		tinyxml2::XMLElement * rowElement = tableElement->FirstChildElement( "tr" );
@@ -28,7 +28,7 @@ CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElem
 			mCells.push_back( std::vector<CAttributedString>() );
 			std::vector<CAttributedString>&		currRow = mCells.back();
 			
-			tinyxml2::XMLElement * cellElement = tableElement->FirstChildElement( "td" );
+			tinyxml2::XMLElement * cellElement = rowElement->FirstChildElement( "td" );
 			while( cellElement )
 			{
 				CAttributedString	attrStr;
@@ -40,13 +40,10 @@ CPartContents::CPartContents( CLayer* owningLayer, tinyxml2::XMLElement * inElem
 			rowElement = rowElement->NextSiblingElement( "tr" );
 		}
 	}
-	else
+	tinyxml2::XMLElement * textElement = inElement ? inElement->FirstChildElement( "text" ) : NULL;
+	if( textElement )
 	{
-		tinyxml2::XMLElement * textElement = inElement->FirstChildElement( "text" );
-		if( textElement )
-		{
-			mAttributedString.LoadFromElementWithStyles( textElement, inStyleSheet ? *inStyleSheet : owningLayer->GetStyles() );
-		}
+		mAttributedString.LoadFromElementWithStyles( textElement, inStyleSheet ? *inStyleSheet : owningLayer->GetStyles() );
 	}
 	std::string	theLayerStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "layer", theLayerStr );
@@ -81,7 +78,7 @@ void	CPartContents::SaveToElementAndStyleSheet( tinyxml2::XMLElement * inElement
 		}
 		inElement->InsertEndChild(elem);
 	}
-	else if( mAttributedString.GetLength() > 0 )
+	if( mAttributedString.GetLength() > 0 )
 	{
 		elem = document->NewElement("text");
 		mAttributedString.SaveToXMLDocumentElementStyleSheet( document, elem, styleSheet );

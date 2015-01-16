@@ -29,6 +29,15 @@ static const char*	sFieldStyleStrings[EFieldStyle_Last +1] =
 };
 
 
+static const char*	sColumnTypeStrings[EColumnType_Last +1] =
+{
+	"text",
+	"checkbox",
+	"icon",
+	"*UNKNOWN*"
+};
+
+
 TFieldStyle	CFieldPart::GetFieldStyleFromString( const char* inStyleStr )
 {
 	for( size_t x = 0; x < EFieldStyle_Last; x++ )
@@ -84,6 +93,20 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 			mSelectedLines.insert( CTinyXMLUtils::GetLongLongNamed( currSelLine, NULL ) );
 			currSelLine = currSelLine->NextSiblingElement( "integer" );
 		}
+	}
+	
+	tinyxml2::XMLElement * currType = inElement->FirstChildElement("columnType");
+	while( currType )
+	{
+		for( size_t x = 0; x < EColumnType_Last; x++ )
+		{
+			if( strcasecmp(currType->GetText(), sColumnTypeStrings[x]) == 0 )
+			{
+				mColumnTypes.push_back( (TColumnType) x );
+				break;
+			}
+		}
+		currType = currType->NextSiblingElement( "columnType" );
 	}
 }
 
@@ -151,6 +174,13 @@ void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	elem = document->NewElement("textHeight");
 	elem->SetText(mTextHeight);
 	inElement->InsertEndChild(elem);
+
+	for( TColumnType currType : mColumnTypes )
+	{
+		elem = document->NewElement("columnType");
+		elem->SetText( sColumnTypeStrings[currType] );
+		inElement->InsertEndChild(elem);
+	}
 }
 
 
@@ -264,6 +294,19 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	else if( strcasecmp("hasVerticalScroller", inPropertyName) == 0 )
 	{
 		LEOInitBooleanValue( outValue, mHasVerticalScroller, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("columnTypes", inPropertyName) == 0 )
+	{
+		LEOArrayEntry	*	theArray = NULL;
+		char				tmpKey[512] = {0};
+		size_t				x = 0;
+		for( auto currColumnType : mColumnTypes )
+		{
+			snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
+			LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, sColumnTypeStrings[currColumnType], inContext );
+		}
+		
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
 	}
 	else
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
@@ -425,6 +468,67 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			return true;
 		SetHasVerticalScroller( theHasScroller );
 	}
+	else if( strcasecmp("columnTypes", inPropertyName) == 0 )
+	{
+		if( mViewTextNeedsSync )
+			LoadChangedTextFromView();
+		
+		CPartContents*	theContents = NULL;
+		size_t	numStyles = LEOGetKeyCount( inValue, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		CCard	*		currCard = GetStack()->GetCurrentCard();
+		CLayer	*		contentsOwner = (mOwner != currCard && !GetSharedText()) ? currCard : mOwner;
+		theContents = contentsOwner->GetPartContentsByID( GetID(), (mOwner != currCard) );
+		if( !theContents )
+		{
+			theContents = new CPartContents( currCard );
+			theContents->SetID( GetID() );
+			theContents->SetIsOnBackground( mOwner != currCard );
+			contentsOwner->AddPartContents( theContents );
+		}
+
+		mColumnTypes.clear();	// Clear other styles.
+		LEOValue	tmpStorage = {{0}};
+		char		tmpKey[512] = {0};
+		for( size_t x = 1; x <= numStyles; x++ )
+		{
+			bool		foundType = false;
+			
+			snprintf(tmpKey, sizeof(tmpKey)-1, "%zu", x );
+			LEOValuePtr theValue = LEOGetValueForKey( inValue, tmpKey, &tmpStorage, kLEOInvalidateReferences, inContext );
+			const char*	currColumnType = LEOGetValueAsString( theValue, tmpKey, sizeof(tmpKey), inContext );
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+				return true;
+			
+			for( size_t y = 0; (y < EColumnType_Last) && !foundType; y++ )
+			{
+				if( strcasecmp( sColumnTypeStrings[y], currColumnType ) == 0 )
+				{
+					mColumnTypes.push_back( (TColumnType) y );
+					foundType = true;
+				}
+			}
+			
+			if( !foundType )
+			{
+				size_t		lineNo = 0;
+				uint16_t	fileID = 0;
+				LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+				LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unknown column type '%s'.", currColumnType );
+			}
+			
+			if( theValue == &tmpStorage )
+			{
+				LEOCleanUpValue( theValue, kLEOInvalidateReferences, inContext );
+			}
+			
+			if( !foundType )
+				return true;
+		}
+		
+		LoadChangedTextStylesIntoView();
+	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 	return true;
@@ -453,4 +557,10 @@ void	CFieldPart::DumpProperties( size_t inIndentLevel )
 	printf( "%stextSize = %d\n", indentStr, mTextSize );
 	printf( "%shasHorizontalScroller = %s\n", indentStr, (mHasHorizontalScroller ? "true" : "false") );
 	printf( "%shasVerticalScroller = %s\n", indentStr, (mHasVerticalScroller ? "true" : "false") );
+	printf( "%scolumnTypes =", indentStr );
+	for( auto currColumnType : mColumnTypes )
+	{
+		printf( " %s", sColumnTypeStrings[currColumnType] );
+	}
+	printf( "\n" );
 }
