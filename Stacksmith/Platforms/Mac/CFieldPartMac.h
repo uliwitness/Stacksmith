@@ -40,6 +40,7 @@ public:
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetHasHorizontalScroller( bool inHS );
 	virtual void	SetHasVerticalScroller( bool inHS );
+	virtual void	SetHasColumnHeaders( bool inCH );
 	
 	virtual void	SetVisible( bool visible );
 	virtual void	SetEnabled( bool n );

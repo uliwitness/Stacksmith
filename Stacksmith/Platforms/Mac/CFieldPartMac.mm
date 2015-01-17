@@ -221,6 +221,8 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTableView setTarget: mMacDelegate];
 		[mTableView setAction: @selector(tableViewRowClicked:)];
 		[mTableView setDoubleAction: @selector(tableViewRowDoubleClicked:)];
+		if( mHasColumnHeaders )
+			mTableView.headerView = [[[NSTableHeaderView alloc] initWithFrame: NSMakeRect(0, 0, 60, 17)] autorelease];
 		mView = (WILDScrollView*) [[mTableView enclosingScrollView] retain];
 		mView.owningPart = this;
 		
@@ -307,6 +309,19 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
+}
+
+
+void	CFieldPartMac::SetHasColumnHeaders( bool inCH )
+{
+	CFieldPart::SetHasColumnHeaders( inCH );
+	if( mHasColumnHeaders )
+	{
+		mTableView.headerView = [[[NSTableHeaderView alloc] initWithFrame: NSMakeRect(0, 0, 60, 17)] autorelease];
+		[mTableView tile];
+	}
+	else
+		mTableView.headerView = nil;
 }
 
 

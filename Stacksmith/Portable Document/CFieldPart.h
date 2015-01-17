@@ -42,7 +42,7 @@ typedef enum
 class CFieldPart : public CVisiblePart
 {
 public:
-	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mDontWrap(false), mDontSearch(false), mSharedText(false), mFixedLineHeight(false), mAutoTab(false), mLockText(false), mAutoSelect(false), mMultipleLines(false), mShowLines(false), mWideMargins(false), mTextStyle(EPartTextStylePlain), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextHeight(0), mHasHorizontalScroller(false), mHasVerticalScroller(false), mViewTextNeedsSync(false), mFieldStyle(EFieldStyleStandard)	 {};
+	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mDontWrap(false), mDontSearch(false), mSharedText(false), mFixedLineHeight(false), mAutoTab(false), mLockText(false), mAutoSelect(false), mMultipleLines(false), mShowLines(false), mWideMargins(false), mTextStyle(EPartTextStylePlain), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextHeight(0), mHasHorizontalScroller(false), mHasVerticalScroller(false), mHasColumnHeaders(false), mViewTextNeedsSync(false), mFieldStyle(EFieldStyleStandard)	 {};
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -72,6 +72,8 @@ public:
 	bool					GetHasHorizontalScroller()				{ return mHasHorizontalScroller; };
 	virtual void			SetHasVerticalScroller( bool inHS )		{ mHasVerticalScroller = inHS; IncrementChangeCount(); };
 	bool					GetHasVerticalScroller()				{ return mHasVerticalScroller; };
+	virtual void			SetHasColumnHeaders( bool inHS )		{ mHasColumnHeaders = inHS; IncrementChangeCount(); };
+	bool					GetHasColumnHeaders()					{ return mHasColumnHeaders; };
 
 	virtual bool			GetDontWrap()					{ return mDontWrap; };
 	virtual void			SetDontWrap( bool inST )		{ mDontWrap = inST; IncrementChangeCount(); };
@@ -118,6 +120,7 @@ protected:
 	int				mTextHeight;
 	bool			mHasHorizontalScroller;
 	bool			mHasVerticalScroller;
+	bool			mHasColumnHeaders;
 	bool			mViewTextNeedsSync;		// Did the text in the view change and we haven't updated the part contents yet?
 	TFieldStyle		mFieldStyle;
 	std::vector<TColumnType>	mColumnTypes;

@@ -79,6 +79,7 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	}
 	mHasHorizontalScroller = CTinyXMLUtils::GetBoolNamed( inElement, "hasHorizontalScroller", false );
 	mHasVerticalScroller = CTinyXMLUtils::GetBoolNamed( inElement, "hasVerticalScroller", false );
+	mHasColumnHeaders = CTinyXMLUtils::GetBoolNamed( inElement, "hasColumnHeaders", false );
 	std::string	styleStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );
 	mFieldStyle = GetFieldStyleFromString( styleStr.c_str() );
@@ -134,6 +135,7 @@ void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	CTinyXMLUtils::AddBoolNamed( inElement, mMultipleLines, "multipleLines" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mHasHorizontalScroller, "hasHorizontalScroller" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mHasVerticalScroller, "hasVerticalScroller" );
+	CTinyXMLUtils::AddBoolNamed( inElement, mHasColumnHeaders, "hasColumnHeaders" );
 	
 	if( !mSelectedLines.empty() )
 	{
@@ -294,6 +296,10 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	else if( strcasecmp("hasVerticalScroller", inPropertyName) == 0 )
 	{
 		LEOInitBooleanValue( outValue, mHasVerticalScroller, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("hasColumnHeaders", inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mHasColumnHeaders, kLEOInvalidateReferences, inContext );
 	}
 	else if( strcasecmp("columnTypes", inPropertyName) == 0 )
 	{
@@ -468,6 +474,13 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			return true;
 		SetHasVerticalScroller( theHasScroller );
 	}
+	else if( strcasecmp("hasColumnHeaders", inPropertyName) == 0 )
+	{
+		bool	theHasScroller = LEOGetValueAsBoolean( inValue, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		SetHasColumnHeaders( theHasScroller );
+	}
 	else if( strcasecmp("columnTypes", inPropertyName) == 0 )
 	{
 		CPartContents*	theContents = NULL;
@@ -552,6 +565,7 @@ void	CFieldPart::DumpProperties( size_t inIndentLevel )
 	printf( "%stextSize = %d\n", indentStr, mTextSize );
 	printf( "%shasHorizontalScroller = %s\n", indentStr, (mHasHorizontalScroller ? "true" : "false") );
 	printf( "%shasVerticalScroller = %s\n", indentStr, (mHasVerticalScroller ? "true" : "false") );
+	printf( "%shasColumnHeaders = %s\n", indentStr, (mHasColumnHeaders ? "true" : "false") );
 	printf( "%scolumnTypes =", indentStr );
 	for( auto currColumnType : mColumnTypes )
 	{
