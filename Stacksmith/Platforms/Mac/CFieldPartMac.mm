@@ -14,6 +14,7 @@
 #include "CAlert.h"
 #include "CStack.h"
 #include "UTF8UTF32Utilities.h"
+#include "CDocument.h"
 #import "UKHelperMacros.h"
 
 
@@ -22,20 +23,35 @@ using namespace Carlson;
 
 @interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource>
 
-@property (assign,nonatomic) CFieldPartMac*		owningField;
-@property (retain,nonatomic) NSMutableArray*	lines;
-@property (assign,nonatomic) BOOL				dontSendSelectionChange;
-@property (assign,nonatomic) BOOL				multipleColumns;
+@property (assign,nonatomic) CFieldPartMac*			owningField;
+@property (retain,nonatomic) NSMutableArray*		lines;
+@property (assign,nonatomic) BOOL					dontSendSelectionChange;
+@property (assign,nonatomic) BOOL					multipleColumns;
+@property (retain,nonatomic) NSMutableDictionary*	images;
+@property (assign,nonatomic) NSTableView*			table;
 
 @end
 
 @implementation WILDFieldDelegate
 
+@synthesize images;
+
 -(void)	dealloc
 {
+	self.images = nil;
 	self.lines = nil;
 	
 	[super dealloc];
+}
+
+
+-(NSMutableDictionary*)	images
+{
+	if( !images )
+	{
+		images = [[NSMutableDictionary alloc] init];
+	}
+	return images;
 }
 
 
@@ -83,12 +99,64 @@ using namespace Carlson;
 }
 
 
+-(void)	setImage: (NSImage*)inImage forRow: (NSInteger)inRow column: (NSInteger)inColumn
+{
+	NSString* theKey = [NSString stringWithFormat: @"%ld-%ld", (long)inRow, (long)inColumn];
+	[self.images setObject: inImage forKey: theKey];
+	[self.table performSelector: @selector(reloadData) withObject: nil afterDelay: 0.0];	// In case we get called directly from the -tableView:objectValueForTableColumn:row: callback, which happens for local files.
+}
+
+
+-(NSImage*)	imageForRow: (NSInteger)inRow column: (NSInteger)inColumn
+{
+	NSString* theKey = [NSString stringWithFormat: @"%ld-%ld", (long)inRow, (long)inColumn];
+	return [self.images objectForKey: theKey];
+}
+
+
 -(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
 	if( self.multipleColumns )
 	{
 		NSArray*	cols = [self.lines objectAtIndex: row];
-		return [cols objectAtIndex: [tableView.tableColumns indexOfObject: tableColumn]];
+		NSInteger	colIdx = [tableView.tableColumns indexOfObject: tableColumn];
+		id			currCellContent = [cols objectAtIndex: colIdx];
+		TColumnType	theColumnType = self.owningField->GetColumnType(colIdx);
+		if( theColumnType == EColumnTypeIcon )
+		{
+			CFieldPartMac*	theField = self.owningField;
+			WILDNSImagePtr	theImage = [self imageForRow: row column: colIdx];
+			if( !theImage )
+			{
+				//[self retain];
+				NSInteger	iconID = [[currCellContent string] integerValue];
+				if( iconID == 0 )
+				{
+					iconID = theField->GetDocument()->GetMediaCache().GetMediaIDByNameOfType( [[currCellContent string] UTF8String], EMediaTypeIcon );
+					theField->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( iconID, EMediaTypeIcon, [self,row,colIdx](WILDNSImagePtr inImage)
+					{
+						if( inImage )
+							[self setImage: inImage forRow: row column: colIdx];
+						//[self release];
+					});
+				}
+				else
+				{
+					theField->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( iconID, EMediaTypeIcon, [self,row,colIdx](WILDNSImagePtr inImage)
+					{
+						if( inImage )
+							[self setImage: inImage forRow: row column: colIdx];
+						//[self release];
+					});
+				}
+			}
+			return theImage;
+		}
+		else if( theColumnType == EColumnTypeCheckbox )
+		{
+			return (([[currCellContent string] caseInsensitiveCompare: @"true"] == 0) ? [NSNumber numberWithBool: YES] : [NSNumber numberWithBool: NO]);
+		}
+		return currCellContent;
 	}
 	else
 		return [self.lines objectAtIndex: row];
@@ -100,7 +168,24 @@ using namespace Carlson;
 	if( self.multipleColumns )
 	{
 		NSMutableArray*		cols = [self.lines objectAtIndex: row];
-		[cols replaceObjectAtIndex: [tableView.tableColumns indexOfObject: tableColumn] withObject: theValue];
+		NSInteger			colIdx = [tableView.tableColumns indexOfObject: tableColumn];
+		TColumnType			theColumnType = self.owningField->GetColumnType(colIdx);
+		if( theColumnType == EColumnTypeCheckbox )
+		{
+			if( [theValue boolValue] )
+			{
+				theValue = [[[NSAttributedString alloc] initWithString: @"true" attributes: @{}] autorelease];
+			}
+			else
+			{
+				theValue = [[[NSAttributedString alloc] initWithString: @"false" attributes: @{}] autorelease];
+			}
+		}
+		else if( theColumnType == EColumnTypeText )
+		{
+			theValue = [[[NSAttributedString alloc] initWithString: theValue attributes: @{}] autorelease];
+		}
+		[cols replaceObjectAtIndex: colIdx withObject: theValue];
 	}
 	else
 		[self.lines replaceObjectAtIndex: row withObject: theValue];
@@ -218,6 +303,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		mTableView.owningPart = this;
 		mTableView.dataSource = mMacDelegate;
 		mTableView.delegate = mMacDelegate;
+		mMacDelegate.table = mTableView;
 		[mTableView setTarget: mMacDelegate];
 		[mTableView setAction: @selector(tableViewRowClicked:)];
 		[mTableView setDoubleAction: @selector(tableViewRowDoubleClicked:)];
@@ -231,11 +317,34 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 			[mTableView removeTableColumn: mTableView.tableColumns.lastObject];
 		
 		size_t 		numColumns = mColumnTypes.size();
+		size_t		actualNumColumns = numColumns;
 		if( numColumns < 1 )
 			numColumns = 1;
 		for( size_t x = 0; x < numColumns; x++ )
 		{
 			NSTableColumn	*	col = [[NSTableColumn alloc] initWithIdentifier: [NSString stringWithFormat: @"%zu", x +1]];
+			if( actualNumColumns > x )
+			{
+				switch( mColumnTypes[x] )
+				{
+					case EColumnTypeCheckbox:
+					{
+						NSButtonCell*	btnCell = [[[NSButtonCell alloc] initTextCell: @""] autorelease];
+						[btnCell setButtonType: NSSwitchButton];
+						[col setDataCell: btnCell];
+						break;
+					}
+					case EColumnTypeIcon:
+					{
+						NSImageCell*	imgCell = [[[NSImageCell alloc] initImageCell: [NSImage imageNamed: @"NSApplicationIcon"]] autorelease];
+						[col setDataCell: imgCell];
+						break;
+					}
+					case EColumnTypeText:	// Nothing to do.
+					case EColumnType_Last:	// When opening new stack with old app, just treat it as text.
+						break;
+				}
+			}
 			[mTableView addTableColumn: col];
 			[col release];
 		}
@@ -968,5 +1077,4 @@ void	CFieldPartMac::SetScript( std::string inScript )
 	
 	[mView updateTrackingAreas];
 }
-
 

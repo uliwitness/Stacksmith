@@ -86,6 +86,8 @@ public:
 	
 	virtual void			GoToSleep()						{ if( mViewTextNeedsSync ) LoadChangedTextFromView(); };
 	
+	TColumnType				GetColumnType( size_t idx )		{ return mColumnTypes[idx]; };
+	
 protected:
 	~CFieldPart()	{};
 	
