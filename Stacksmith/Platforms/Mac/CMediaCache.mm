@@ -237,14 +237,21 @@ void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std
 						currMedia->mFileData = [[NSData alloc] initWithBytes: data length: dataLen];
 					if( !currMedia->mImage && currMedia->mFileData )
 						currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
+					[currMedia->mImage setName: [NSString stringWithUTF8String: currMedia->GetFileName().c_str()].lastPathComponent];
 					completionBlock( currMedia->mImage );
 				});
 			}
 			else if( currMedia->mImage == nil )
+			{
 				currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
+				[currMedia->mImage setName: [NSString stringWithUTF8String: currMedia->GetFileName().c_str()].lastPathComponent];
+			}
 			
 			if( currMedia->mImage )
+			{
 				completionBlock( currMedia->mImage );
+				break;
+			}
 		}
 	}
 }
