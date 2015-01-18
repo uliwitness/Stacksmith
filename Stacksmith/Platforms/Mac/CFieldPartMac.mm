@@ -121,7 +121,7 @@ using namespace Carlson;
 		NSArray*	cols = [self.lines objectAtIndex: row];
 		NSInteger	colIdx = [tableView.tableColumns indexOfObject: tableColumn];
 		id			currCellContent = [cols objectAtIndex: colIdx];
-		TColumnType	theColumnType = self.owningField->GetColumnType(colIdx);
+		TColumnType	theColumnType = self.owningField->GetColumnInfo(colIdx).mType;
 		if( theColumnType == EColumnTypeIcon )
 		{
 			CFieldPartMac*	theField = self.owningField;
@@ -169,7 +169,7 @@ using namespace Carlson;
 	{
 		NSMutableArray*		cols = [self.lines objectAtIndex: row];
 		NSInteger			colIdx = [tableView.tableColumns indexOfObject: tableColumn];
-		TColumnType			theColumnType = self.owningField->GetColumnType(colIdx);
+		TColumnType			theColumnType = self.owningField->GetColumnInfo(colIdx).mType;
 		if( theColumnType == EColumnTypeCheckbox )
 		{
 			if( [theValue boolValue] )
@@ -183,7 +183,10 @@ using namespace Carlson;
 		}
 		else if( theColumnType == EColumnTypeText )
 		{
-			theValue = [[[NSAttributedString alloc] initWithString: theValue attributes: @{}] autorelease];
+			if( [theValue isKindOfClass: [NSString class]] )	// Permit unstyled text.
+				theValue = [[[NSAttributedString alloc] initWithString: theValue attributes: @{}] autorelease];
+			else
+				theValue = theValue;
 		}
 		[cols replaceObjectAtIndex: colIdx withObject: theValue];
 	}
@@ -219,6 +222,9 @@ using namespace Carlson;
 
 -(BOOL)	tableView: (NSTableView *)tableView shouldEditTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
+	NSInteger			colIdx = [tableView.tableColumns indexOfObject: tableColumn];
+	if( !self.owningField->GetColumnInfo(colIdx).mEditable )
+		return NO;
 	return !self.owningField->GetLockText();
 }
 
@@ -316,16 +322,19 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		while( numCols-- > 0 )
 			[mTableView removeTableColumn: mTableView.tableColumns.lastObject];
 		
-		size_t 		numColumns = mColumnTypes.size();
-		size_t		actualNumColumns = numColumns;
-		if( numColumns < 1 )
-			numColumns = 1;
-		for( size_t x = 0; x < numColumns; x++ )
+		size_t		actualNumColumns = mColumns.size();
+		size_t 		numColumnsToCreate = actualNumColumns;
+		if( numColumnsToCreate < 1 )
+			numColumnsToCreate = 1;
+		for( size_t x = 0; x < numColumnsToCreate; x++ )
 		{
 			NSTableColumn	*	col = [[NSTableColumn alloc] initWithIdentifier: [NSString stringWithFormat: @"%zu", x +1]];
 			if( actualNumColumns > x )
 			{
-				switch( mColumnTypes[x] )
+				const CColumnInfo&	currColumn = mColumns[x];
+				col.title = [NSString stringWithUTF8String: currColumn.mName.c_str()];
+				col.width = currColumn.mWidth;
+				switch( currColumn.mType )
 				{
 					case EColumnTypeCheckbox:
 					{
@@ -340,8 +349,12 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 						[col setDataCell: imgCell];
 						break;
 					}
-					case EColumnTypeText:	// Nothing to do.
+					case EColumnTypeText:
 					case EColumnType_Last:	// When opening new stack with old app, just treat it as text.
+						NSTextFieldCell*	txtCell = [[[NSTextFieldCell alloc] initTextCell: @""] autorelease];
+						txtCell.editable = YES;
+						txtCell.allowsEditingTextAttributes = YES;
+						[col setDataCell: txtCell];
 						break;
 				}
 			}
@@ -728,7 +741,7 @@ void	CFieldPartMac::GetSelectedRange( LEOChunkType* outType, size_t* outStartOff
 void	CFieldPartMac::LoadChangedTextStylesIntoView()
 {
 	CPartContents*	contents = GetContentsOnCurrentCard();
-	if( mAutoSelect && mColumnTypes.size() > 0 )
+	if( mAutoSelect && mColumns.size() > 0 )
 	{
 		NSMutableArray*		lines = [[NSMutableArray alloc] init];
 		for( size_t x = 0; x < contents->GetRowCount(); x++ )
@@ -789,7 +802,7 @@ void	CFieldPartMac::LoadChangedTextFromView()
 	CPartContents*	contents = GetContentsOnCurrentCard();
 	if( contents )
 	{
-		if( mAutoSelect && mColumnTypes.size() > 0 )
+		if( mAutoSelect && mColumns.size() > 0 )
 		{
 			size_t	x = 0;
 			for( NSArray* currRow in mMacDelegate.lines )

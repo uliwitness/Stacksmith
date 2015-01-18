@@ -39,6 +39,15 @@ typedef enum
 } TColumnType;
 
 
+struct CColumnInfo
+{
+	TColumnType		mType;
+	long long		mWidth;
+	std::string		mName;
+	bool			mEditable;
+};
+
+
 class CFieldPart : public CVisiblePart
 {
 public:
@@ -84,9 +93,9 @@ public:
 	virtual void			GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs ) = 0;
 	virtual void			SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs ) = 0;
 	
-	virtual void			GoToSleep()						{ if( mViewTextNeedsSync ) LoadChangedTextFromView(); };
+	virtual void			GoToSleep()								{ if( mViewTextNeedsSync ) LoadChangedTextFromView(); };
 	
-	TColumnType				GetColumnType( size_t idx )		{ return mColumnTypes[idx]; };
+	const CColumnInfo&		GetColumnInfo( size_t idx ) const		{ return mColumns[idx]; };
 	
 protected:
 	~CFieldPart()	{};
@@ -125,8 +134,8 @@ protected:
 	bool			mHasColumnHeaders;
 	bool			mViewTextNeedsSync;		// Did the text in the view change and we haven't updated the part contents yet?
 	TFieldStyle		mFieldStyle;
-	std::vector<TColumnType>	mColumnTypes;
-	std::set<size_t>mSelectedLines;
+	std::vector<CColumnInfo>	mColumns;
+	std::set<size_t>			mSelectedLines;
 };
 
 }

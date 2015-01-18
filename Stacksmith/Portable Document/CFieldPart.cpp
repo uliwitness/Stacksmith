@@ -96,18 +96,36 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 		}
 	}
 	
-	tinyxml2::XMLElement * currType = inElement->FirstChildElement("columnType");
-	while( currType )
+	bool					columnObjects = true;
+	tinyxml2::XMLElement *	column = inElement->FirstChildElement("column");
+	if( !column )
 	{
+		column = inElement->FirstChildElement("columnType");
+		columnObjects = false;
+	}
+	while( column )
+	{
+		tinyxml2::XMLElement	*	currType = column->FirstChildElement("type");
+		tinyxml2::XMLElement	*	currName = column->FirstChildElement("name");
+		long long					currWidth = CTinyXMLUtils::GetLongLongNamed( column, "width", 100 );
+		bool						currEditable = CTinyXMLUtils::GetBoolNamed( column, "editable", false );
+		if( !columnObjects )
+		{
+			currType = column;
+		}
+		const char*	columnTypeStr = currType->GetText();
 		for( size_t x = 0; x < EColumnType_Last; x++ )
 		{
-			if( strcasecmp(currType->GetText(), sColumnTypeStrings[x]) == 0 )
+			if( strcasecmp(columnTypeStr, sColumnTypeStrings[x]) == 0 )
 			{
-				mColumnTypes.push_back( (TColumnType) x );
+				CColumnInfo	info = { (TColumnType) x, currWidth, "", currEditable };
+				if( currName )
+					info.mName = currName->GetText();
+				mColumns.push_back( info );
 				break;
 			}
 		}
-		currType = currType->NextSiblingElement( "columnType" );
+		column = column->NextSiblingElement( columnObjects ? "column" : "columnType" );
 	}
 }
 
@@ -177,10 +195,13 @@ void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	elem->SetText(mTextHeight);
 	inElement->InsertEndChild(elem);
 
-	for( TColumnType currType : mColumnTypes )
+	for( const CColumnInfo& currColumn : mColumns )
 	{
-		elem = document->NewElement("columnType");
-		elem->SetText( sColumnTypeStrings[currType] );
+		elem = document->NewElement("column");
+		CTinyXMLUtils::AddStringNamed( elem, sColumnTypeStrings[currColumn.mType], "type" );
+		CTinyXMLUtils::AddLongLongNamed( elem, currColumn.mWidth, "width" );
+		CTinyXMLUtils::AddStringNamed( elem, currColumn.mName.c_str(), "name" );
+		CTinyXMLUtils::AddBoolNamed( elem, currColumn.mEditable, "editable" );
 		inElement->InsertEndChild(elem);
 	}
 }
@@ -306,10 +327,10 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 		LEOArrayEntry	*	theArray = NULL;
 		char				tmpKey[512] = {0};
 		size_t				x = 0;
-		for( auto currColumnType : mColumnTypes )
+		for( const CColumnInfo& currColumn : mColumns )
 		{
 			snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
-			LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, sColumnTypeStrings[currColumnType], inContext );
+			LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, sColumnTypeStrings[currColumn.mType], inContext );
 		}
 		
 		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
@@ -498,7 +519,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			contentsOwner->AddPartContents( theContents );
 		}
 
-		mColumnTypes.clear();	// Clear other styles.
+		mColumns.clear();	// Clear columns.
 		LEOValue	tmpStorage = {{0}};
 		char		tmpKey[512] = {0};
 		for( size_t x = 1; x <= numStyles; x++ )
@@ -515,7 +536,8 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			{
 				if( strcasecmp( sColumnTypeStrings[y], currColumnType ) == 0 )
 				{
-					mColumnTypes.push_back( (TColumnType) y );
+					CColumnInfo	info = { (TColumnType) y, 100, "New Column", (y == EColumnTypeCheckbox) || (y == EColumnTypeText) };	// Check boxes *must* be editable, and text is useful for creating new rows. Images are usually not intended for editing, so default to false.
+					mColumns.push_back( info );
 					foundType = true;
 				}
 			}
@@ -567,9 +589,9 @@ void	CFieldPart::DumpProperties( size_t inIndentLevel )
 	printf( "%shasVerticalScroller = %s\n", indentStr, (mHasVerticalScroller ? "true" : "false") );
 	printf( "%shasColumnHeaders = %s\n", indentStr, (mHasColumnHeaders ? "true" : "false") );
 	printf( "%scolumnTypes =", indentStr );
-	for( auto currColumnType : mColumnTypes )
+	for( const CColumnInfo& currColumn : mColumns )
 	{
-		printf( " %s", sColumnTypeStrings[currColumnType] );
+		printf( " [%s \"%s\" (%lld pt)%s]", sColumnTypeStrings[currColumn.mType], currColumn.mName.c_str(), currColumn.mWidth, currColumn.mEditable? " editable" : "" );
 	}
 	printf( "\n" );
 }
