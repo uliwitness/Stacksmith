@@ -30,9 +30,9 @@ public:
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	
-	virtual void	AddCard( CCard* inCard )	{ mMemberCards.insert(inCard); };
-	virtual void	RemoveCard( CCard* inCard )	{ mMemberCards.erase(inCard); };
-	virtual size_t	GetNumCards()				{ return mMemberCards.size(); };
+	virtual void	AddCard( CCard* inCard );
+	virtual void	RemoveCard( CCard* inCard );
+	virtual size_t	GetNumCards();
 	
 	virtual std::string			GetDisplayName();
 	virtual std::string			GetTypeName()			{ return std::string("background"); };

@@ -81,6 +81,24 @@ bool	CBackground::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 }
 
 
+void	CBackground::AddCard( CCard* inCard )
+{
+	mMemberCards.insert(inCard);
+}
+
+
+void	CBackground::RemoveCard( CCard* inCard )
+{
+	mMemberCards.erase(inCard);
+}
+
+
+size_t	CBackground::GetNumCards()
+{
+	return mMemberCards.size();
+}
+
+
 bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
 {
 	CCard*	searchStart = GetStack()->GetCurrentCard();
