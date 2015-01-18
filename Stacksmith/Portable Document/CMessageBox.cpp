@@ -64,7 +64,10 @@ void	CMessageBox::Run()
 		if( !LEOGetValueIsUnset( &ctx->stack[0], NULL ) )
 		{
 			const char*	resultString = LEOGetValueAsString( &ctx->stack[0], returnValBuf, sizeof(returnValBuf), ctx );
-			SetTextContents( resultString );
+			if( (ctx->flags & kLEOContextKeepRunning) == 0 )
+				SetResultText( ctx->errMsg );
+			else
+				SetResultText( resultString );
 		}
 		LEOCleanUpValue( &returnValue, kLEOInvalidateReferences, NULL );
 	}

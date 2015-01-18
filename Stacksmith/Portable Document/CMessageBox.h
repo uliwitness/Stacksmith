@@ -30,6 +30,8 @@ public:
 	
 	virtual bool		GetTextContents( std::string& outString );
 	virtual bool		SetTextContents( const std::string& inString);
+	virtual std::string	GetResultText()									{ return mResultText; };
+	virtual void		SetResultText( const std::string& inString)		{ mResultText = inString; };
 	// We don't provide InitValue here because the message box can be used to run scripts in many context groups.
 
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );
@@ -42,6 +44,7 @@ protected:
 	LEOObjectID				mIDForScripts;		// The ID Leonie uses to refer to this object.
 	LEOObjectSeed			mSeedForScripts;	// The seed value to go with mIDForScripts.
 	struct LEOValueObject	mValueForScripts;	// A LEOValue so scripts can reference us (see mIDForScripts).
+	std::string				mResultText;		// If you type an expression into the message box, its result will go here.
 };
 
 

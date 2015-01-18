@@ -17,6 +17,7 @@ using namespace Carlson;
 @interface WILDMessageBoxWindowController : NSWindowController
 
 @property (assign,nonatomic) IBOutlet NSTextView	*	messageField;
+@property (assign,nonatomic) IBOutlet NSTextField	*	resultField;
 @property (assign,nonatomic) IBOutlet NSButton		*	runButton;
 @property (assign,nonatomic) CMessageBoxMac			*	messageBox;
 
@@ -36,6 +37,7 @@ using namespace Carlson;
 
 -(IBAction) run: (id)sender
 {
+	self.messageBox->SetResultText( "" );
 	self.messageBox->SetTextContents( [self.messageField.string UTF8String] );
 	self.messageBox->Run();
 }
@@ -182,6 +184,13 @@ void	CMessageBoxMac::SetVisible( bool n )
 	else
 		[mMacWindowController.window orderOut: nil];
 	mVisible = n;
+}
+
+
+void	CMessageBoxMac::SetResultText( const std::string &inString )
+{
+	CMessageBox::SetResultText( inString );
+	[mMacWindowController.resultField setStringValue: [NSString stringWithUTF8String: inString.c_str()]];
 }
 
 
