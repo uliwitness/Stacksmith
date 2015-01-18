@@ -74,11 +74,11 @@ public:
 	virtual bool		GetNeedsToBeSaved();
 	
 	virtual void		Dump( size_t inNestingLevel = 0 );
+	static std::string	PathFromFileURL( const std::string& inURL );
+
 
 protected:
 	virtual ~CDocument();
-
-	std::string			PathFromFileURL( const std::string& inURL );
 
 	void				CallAllCompletionBlocks();
 

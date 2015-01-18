@@ -513,8 +513,6 @@ void	CLayer::SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase
 		{
 			if( (*currPart) == inPart )
 			{
-				if( newPartIndex > numParts )
-					newPartIndex --;
 				oldPartIndex = numParts;
 				break;
 			}
@@ -522,8 +520,11 @@ void	CLayer::SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase
 		}
 	}
 	
-	mParts.erase( mParts.begin() +oldPartIndex );
-	mParts.insert( mParts.begin() +newPartIndex, inPart );
+	if( (size_t)newPartIndex < mParts.size() )
+	{
+		mParts.erase( mParts.begin() +oldPartIndex );
+		mParts.insert( mParts.begin() +newPartIndex, inPart );
+	}
 }
 
 

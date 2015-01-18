@@ -27,9 +27,13 @@ void	CCard::LoadPropertiesFromElement( tinyxml2::XMLElement* root )
 {
 	CLayer::LoadPropertiesFromElement( root );
 	
-	ObjectID owningBackgroundID = CTinyXMLUtils::GetLongLongNamed( root, "owner", 0 );
-	mOwningBackground = mStack->GetBackgroundByID( owningBackgroundID );
-	mOwningBackground->AddCard( this );
+	if( mOwningBackground == NULL )	// We had no "owner" entry in stack TOC? Grab it from card file contents and make sure we re-save list of cards
+	{
+		ObjectID owningBackgroundID = CTinyXMLUtils::GetLongLongNamed( root, "owner", 0 );
+		mOwningBackground = mStack->GetBackgroundByID( owningBackgroundID );
+		mOwningBackground->AddCard( this );
+		mStack->IncrementChangeCount();
+	}
 }
 
 

@@ -78,6 +78,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 	CURLConnection::SendRequestWithCompletionHandler( request, [this,inCompletionBlock] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
 	{
 		tinyxml2::XMLDocument		document;
+		bool						neededToConvertStackToLoad = false;
 		
 		if( tinyxml2::XML_SUCCESS == document.Parse( inData, inDataLength ) )
 		{
@@ -142,20 +143,26 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 				ObjectID		cdID = CTinyXMLUtils::GetLongLongAttributeNamed( currCdElem, "id" );
 				const char*		theName = currCdElem->Attribute("name");
 				const char*	markedAttrStr = currCdElem->Attribute("marked");
-				bool	marked = markedAttrStr ? (strcmp("true", markedAttrStr) == 0) : false;
-				
-				CCard	*	theCard = new CCard( cardURL, cdID, (theName ? theName : ""), currCdElem->Attribute("file"), this, marked );
+				bool			marked = markedAttrStr ? (strcmp("true", markedAttrStr) == 0) : false;
+				ObjectID		bgID = CTinyXMLUtils::GetLongLongAttributeNamed( currCdElem, "owner" );
+				CBackground	*	owningBackground = GetBackgroundByID( bgID );
+				CCard	*	theCard = new CCard( cardURL, cdID, owningBackground, (theName ? theName : ""), currCdElem->Attribute("file"), this, marked );
 				theCard->Autorelease();
 				mCards.push_back( theCard );
 				theCard->SetStack( this );
 				if( marked )
 					mMarkedCards.insert( theCard );
-				
+				if( !owningBackground )	// Don't have background ID in the stack's list?
+				{
+					theCard->Load([](CLayer *){ printf("Loaded card to get background ID\n"); });	// Load card so we can get the ID from its file.
+					neededToConvertStackToLoad = true;
+				}
 				currCdElem = currCdElem->NextSiblingElement( "card" );
 			}
 		}
 		
-		mChangeCount = 0;
+		if( !neededToConvertStackToLoad )
+			mChangeCount = 0;
 		CallAllCompletionBlocks();
 		Release();
 	} );
@@ -245,6 +252,7 @@ bool	CStack::Save( const std::string& inPackagePath )
 			CTinyXMLUtils::SetLongLongAttributeNamed( cdElem, currCard->GetID(), "id");
 			cdElem->SetAttribute( "file", currCard->GetFileName().c_str() );
 			cdElem->SetAttribute( "name", currCard->GetName().c_str() );
+			CTinyXMLUtils::SetLongLongAttributeNamed( cdElem, currCard->GetBackground()->GetID(), "owner");
 			root->InsertEndChild( cdElem );
 			
 			if( currCard->GetNeedsToBeSaved() )
@@ -447,8 +455,7 @@ CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 	cardURL.append( 1, '/' );
 	cardName << "card_" << theID << ".xml";
 	cardURL.append( cardName.str() );
-	CCard	*	theCard = new CCard( cardURL, theID, "", cardName.str(), this, false );
-	theCard->SetBackground( inBg );
+	CCard	*	theCard = new CCard( cardURL, theID, inBg, "", cardName.str(), this, false );
 	theCard->SetLoaded(true);
 	theCard->IncrementChangeCount();
 	InsertCardAfterCard( theCard, GetCurrentCard() );
