@@ -332,7 +332,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 			if( actualNumColumns > x )
 			{
 				const CColumnInfo&	currColumn = mColumns[x];
-				col.title = [NSString stringWithUTF8String: currColumn.mName.c_str()];
+				[col.headerCell setTitle: [NSString stringWithUTF8String: currColumn.mName.c_str()]];
 				col.width = currColumn.mWidth;
 				switch( currColumn.mType )
 				{

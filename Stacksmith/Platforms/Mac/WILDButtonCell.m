@@ -252,7 +252,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 }
 
 
--(NSCellHitResult)	hitTestForEvent: (NSEvent *)event inRect: (NSRect)cellFrame ofView: (NSView *)controlView
+-(NSUInteger /*NSCellHitResult*/)	hitTestForEvent: (NSEvent *)event inRect: (NSRect)cellFrame ofView: (NSView *)controlView
 {
 	NSUInteger		hitPart = NSCellHitNone;
 	NSPoint			mousePos = [controlView convertPoint: [event locationInWindow] fromView: nil];
