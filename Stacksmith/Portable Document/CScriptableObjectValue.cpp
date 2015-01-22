@@ -750,7 +750,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		size_t		lineNo = SIZE_T_MAX;
 		uint16_t	fileID = 0;
 		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
-		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Couldn't find handler for %s.", LEOContextGroupHandlerNameForHandlerID( inContext->group, inHandler ) );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Couldn't find a handler for %s.", LEOContextGroupHandlerNameForHandlerID( inContext->group, inHandler ) );
 	}
 }
 
