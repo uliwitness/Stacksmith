@@ -636,6 +636,8 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			mColumns[oneBasedColumnIndex-1].mName = newColumnName;
 		}
 		
+		LoadChangedTextStylesIntoView();
+		
 		return true;
 	}
 	else

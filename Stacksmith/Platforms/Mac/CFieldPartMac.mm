@@ -35,6 +35,7 @@ using namespace Carlson;
 @implementation WILDFieldDelegate
 
 @synthesize images;
+@synthesize lines;
 
 -(void)	dealloc
 {
@@ -248,6 +249,13 @@ using namespace Carlson;
 		NSInteger	currColumn = [sender clickedColumn];
 		[sender editColumn: currColumn row: currRow withEvent: nil select: YES];
 	}
+}
+
+
+-(void)	setLines: (NSMutableArray*)inLines
+{
+	ASSIGN(lines,inLines);
+	DESTROY(images);
 }
 
 @end;
