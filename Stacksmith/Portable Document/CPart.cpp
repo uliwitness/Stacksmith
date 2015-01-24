@@ -198,13 +198,19 @@ void	CPart::IncrementChangeCount()
 
 CPartContents*	CPart::GetContentsOnCurrentCard()
 {
-	CCard	*	currCard = GetStack()->GetCurrentCard();
+	CCard	*	currCard = NULL;
+	currCard = GetStack()->GetCurrentCard();
 	if( !currCard )
 		return NULL;
-	if( mOwner != currCard && !GetSharedText() )	// We're on the background layer, not on the card?
-		return currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
+	bool	isBgField = dynamic_cast<CBackground*>(mOwner) != NULL;
+	if( isBgField && !GetSharedText() )	// We're on the background layer, not on the card, and don't have shared text?
+	{
+		return currCard->GetPartContentsByID( GetID(), isBgField );
+	}
 	else
-		return mOwner->GetPartContentsByID( GetID(), (mOwner != currCard) );
+	{
+		return mOwner->GetPartContentsByID( GetID(), isBgField );
+	}
 }
 
 

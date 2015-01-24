@@ -281,10 +281,30 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 		if( ownerObject )
 			theCard = ownerObject;
 	}
+	
+	if( !theCard->IsLoaded() )
+	{
+		LEOContextRetain( inContext );
+		LEOPauseContext( inContext );
+		
+		theCard->Load( [inContext,theCard]( CLayer* inLoadedCard )
+		{
+			if( inLoadedCard == NULL || !inLoadedCard->IsLoaded() )
+			{
+				size_t		lineNo = 0;
+				uint16_t	fileID = 0;
+				LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+				LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Couldn't load %s.", theCard->GetDisplayName().c_str() );
+			}
+			LEOResumeContext( inContext );
+			LEOContextRelease( inContext );
+		});
+		return;
+	}
+	
 	char			idStrBuf[256] = {};
 	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -3, idStrBuf, sizeof(idStrBuf), inContext );
 	bool			lookUpByID = idStr[0] != 0;
-	
 	if( LEOCanGetAsNumber( inContext->stackEndPtr -2, inContext ) )
 	{
 		LEOInteger	theNumber = LEOGetValueAsInteger( inContext->stackEndPtr -2, NULL, inContext );
