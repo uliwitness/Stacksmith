@@ -110,6 +110,8 @@ protected:
 	virtual const char*		GetIdentityForDump()	{ return "Field"; };
 	virtual void			DumpProperties( size_t inIndent );
 
+	bool					ParseRowColumnString( const char* inPropertyName, LEOInteger *outRow, LEOInteger *outColumn );
+
 	static void				ApplyStyleStringToRangeOfAttributedString( const char* currStyleName, size_t byteRangeStart, size_t byteRangeEnd, CAttributedString& attrStr );
 	static TFieldStyle		GetFieldStyleFromString( const char* inStyleStr );
 	

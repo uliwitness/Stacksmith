@@ -226,8 +226,38 @@ bool	CFieldPart::SetTextContents( const std::string& inString )
 }
 
 
+bool	CFieldPart::ParseRowColumnString( const char* inPropertyName, LEOInteger *outRow, LEOInteger *outColumn )
+{
+	if( strncasecmp("column ", inPropertyName, 7) != 0 )
+		return false;
+	
+	char*		endPtr = NULL;
+	LEOInteger	oneBasedColumnIndex = strtoll(inPropertyName + 7, &endPtr, 10 );
+	LEOInteger	oneBasedRowIndex = 0LL;
+	if( strncasecmp(endPtr, " row ", 5 ) == 0 )	// We have a row.
+	{
+		char*		rowStr = endPtr +5;
+		char*		endPtr2 = NULL;
+		oneBasedRowIndex = strtoll(rowStr, &endPtr2, 10 );
+		
+		if( endPtr2 != (rowStr +strlen(rowStr)) )
+			return false;
+	}
+	else if( (*endPtr) != 0 )	// String hasn't ended after column but isn't " row "? Invalid!
+		return false;
+	
+	*outColumn = oneBasedColumnIndex;
+	*outRow = oneBasedRowIndex;
+	
+	return true;
+}
+
+
 bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
 {
+	LEOInteger		oneBasedColumnIndex = 0;
+	LEOInteger		oneBasedRowIndex = 0;
+
 	if( strcasecmp("textStyle", inPropertyName) == 0 )
 	{
 		if( mViewTextNeedsSync )
@@ -335,8 +365,31 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 		
 		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
 	}
+	else if( ParseRowColumnString( inPropertyName, &oneBasedRowIndex, &oneBasedColumnIndex ) )	// Starts with "column "?
+	{
+		std::string			currText;
+		if( oneBasedRowIndex != 0 )
+		{
+			CPartContents*		contents = GetContentsOnCurrentCard();
+			if( contents )
+			{
+				currText = contents->GetAttributedTextInRowColumn( oneBasedRowIndex -1, oneBasedColumnIndex -1 ).GetString();
+			}
+		}
+		else
+		{
+			if( oneBasedColumnIndex < 1 || (size_t)oneBasedColumnIndex > mColumns.size() )
+				return false;
+			
+			currText = mColumns[oneBasedColumnIndex-1].mName;
+		}
+		
+		LEOInitStringValue( outValue, currText.c_str(), currText.length(), kLEOInvalidateReferences, inContext );
+	}
 	else
+	{
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+	}
 	return true;
 }
 
@@ -365,6 +418,9 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 
 bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
 {
+	LEOInteger		oneBasedColumnIndex = 0;
+	LEOInteger		oneBasedRowIndex = 0;
+	
 	if( strcasecmp("family", inPropertyName) == 0 )
 	{
 		LEOUnit		theUnit = kLEOUnitNone;
@@ -558,6 +614,29 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			if( !foundType )
 				return true;
 		}
+	}
+	else if( ParseRowColumnString( inPropertyName, &oneBasedRowIndex, &oneBasedColumnIndex ) )
+	{
+		char		tmpStr[1024] = {0};
+		const char*	newColumnName = LEOGetValueAsString( inValue, tmpStr, sizeof(tmpStr), inContext );
+		
+		if( oneBasedRowIndex != 0 )
+		{
+			CPartContents*		contents = GetContentsOnCurrentCard();
+			if( contents )
+			{
+				contents->SetAttributedTextInRowColumn( CAttributedString(newColumnName), oneBasedRowIndex -1, oneBasedColumnIndex -1 );
+			}
+		}
+		else
+		{
+			if( oneBasedColumnIndex < 1 || (size_t)oneBasedColumnIndex > mColumns.size() )
+				return false;
+			
+			mColumns[oneBasedColumnIndex-1].mName = newColumnName;
+		}
+		
+		return true;
 	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
