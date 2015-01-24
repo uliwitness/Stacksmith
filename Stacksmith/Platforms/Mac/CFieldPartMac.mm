@@ -287,6 +287,9 @@ CFieldPartMac::CFieldPartMac( CLayer *inOwner )
 
 void	CFieldPartMac::DestroyView()
 {
+	if( mViewTextNeedsSync )
+		LoadChangedTextFromView();
+	
 	if( mTextView )
 		mTextView.owningPart = NULL;
 	if( mTableView )

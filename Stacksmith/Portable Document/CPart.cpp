@@ -198,19 +198,33 @@ void	CPart::IncrementChangeCount()
 
 CPartContents*	CPart::GetContentsOnCurrentCard()
 {
-	CCard	*	currCard = NULL;
-	currCard = GetStack()->GetCurrentCard();
+	CPartContents*	contents = NULL;
+	CCard		*	currCard = GetStack()->GetCurrentCard();
 	if( !currCard )
 		return NULL;
-	bool	isBgField = dynamic_cast<CBackground*>(mOwner) != NULL;
-	if( isBgField && !GetSharedText() )	// We're on the background layer, not on the card, and don't have shared text?
+	bool	isBgPart = dynamic_cast<CBackground*>(mOwner) != NULL;
+	bool 	bgPartWithNonSharedText = (isBgPart && !GetSharedText());
+	if( isBgPart && !GetSharedText() )	// We're on the background layer, not on the card, and don't have shared text?
 	{
-		return currCard->GetPartContentsByID( GetID(), isBgField );
+		contents = currCard->GetPartContentsByID( GetID(), isBgPart );
 	}
 	else
 	{
-		return mOwner->GetPartContentsByID( GetID(), isBgField );
+		contents = mOwner->GetPartContentsByID( GetID(), isBgPart );
 	}
+	
+	if( !contents )
+	{
+		contents = new CPartContents( currCard );
+		contents->SetID( mID );
+		contents->SetIsOnBackground( isBgPart );
+		if( bgPartWithNonSharedText )
+			currCard->AddPartContents( contents );
+		else
+			mOwner->AddPartContents( contents );
+	}
+
+	return contents;
 }
 
 
@@ -231,15 +245,20 @@ bool	CPart::SetTextContents( const std::string& inString )
 	else
 	{
 		CCard	*	currCard = GetStack()->GetCurrentCard();
-		bool bgPartWithNonSharedText = (mOwner != currCard && !GetSharedText());
+		bool		isBgPart = dynamic_cast<CBackground*>(mOwner) != NULL;
+		bool 		bgPartWithNonSharedText = (isBgPart && !GetSharedText());
 		contents = new CPartContents( bgPartWithNonSharedText ? currCard : mOwner );
 		contents->SetID( mID );
 		contents->SetText( inString );
-		contents->SetIsOnBackground( (mOwner != currCard) );
+		contents->SetIsOnBackground( isBgPart );
 		if( bgPartWithNonSharedText )	// We're on the background layer, not on the card? But we don't have shared text? Add the contents to the current *card*!
+		{
 			currCard->AddPartContents( contents );
+		}
 		else	// Otherwise, we're on the card, or on the background with shared text, add the contents to that.
+		{
 			mOwner->AddPartContents( contents );
+		}
 	}
 	return true;
 }
