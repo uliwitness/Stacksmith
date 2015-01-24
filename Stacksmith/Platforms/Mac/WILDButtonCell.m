@@ -14,6 +14,11 @@
 #import "WILDDrawAddColorBezel.h"
 
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED == MAC_OS_X_VERSION_10_9
+typedef NSUInteger NSCellHitResult;
+#endif
+
+
 NSImage*	WILDInvertedImage( NSImage* img );
 
 
@@ -252,7 +257,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 }
 
 
--(NSUInteger /*NSCellHitResult*/)	hitTestForEvent: (NSEvent *)event inRect: (NSRect)cellFrame ofView: (NSView *)controlView
+-(NSCellHitResult)	hitTestForEvent: (NSEvent *)event inRect: (NSRect)cellFrame ofView: (NSView *)controlView
 {
 	NSUInteger		hitPart = NSCellHitNone;
 	NSPoint			mousePos = [controlView convertPoint: [event locationInWindow] fromView: nil];
