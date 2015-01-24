@@ -323,7 +323,9 @@ NSView*	CButtonPartMac::GetView()
 
 void	CButtonPartMac::SetIconID( ObjectID inID )
 {
-	CButtonPart::SetIconID(inID);
+    NSView*	oldSuper = mView.superview;
+	
+    CButtonPart::SetIconID(inID);
 
 	if( mIconID != 0 )
 	{
@@ -352,6 +354,14 @@ void	CButtonPartMac::SetIconID( ObjectID inID )
 		else
 			[mView setTitle: @""];
 	}
+    else if( mButtonStyle == EButtonStyleCheckBox || mButtonStyle == EButtonStyleRadioButton )
+    {
+		if( oldSuper )
+		{
+			DestroyView();
+			CreateViewIn( oldSuper );
+		}
+    }
 }
 
 
