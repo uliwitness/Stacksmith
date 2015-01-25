@@ -81,7 +81,7 @@
                             <menuItem title="New Project" id="82">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="newDocument:" target="-1" id="371"/>
+                                    <action selector="newDocumentFromTemplate:" target="556" id="gTh-3v-iGX"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Project…" keyEquivalent="o" id="72">

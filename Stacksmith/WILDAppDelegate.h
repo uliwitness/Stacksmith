@@ -9,13 +9,17 @@
 #import <Cocoa/Cocoa.h>
 
 
+@class WILDTemplateProjectPickerController;
+
+
 @interface WILDAppDelegate : NSResponder <NSApplicationDelegate>
 {
-	BOOL				mPeeking;
-	BOOL				mBackgroundEditMode;
-	id					mFlagsChangedEventMonitor;
-	IBOutlet NSMenuItem	*mNewObjectSeparator;
-	IBOutlet NSMenuItem	*mLockPseudoMenu;
+	BOOL									mPeeking;
+	BOOL									mBackgroundEditMode;
+	id										mFlagsChangedEventMonitor;
+	IBOutlet NSMenuItem			*			mNewObjectSeparator;
+	IBOutlet NSMenuItem			*			mLockPseudoMenu;
+	WILDTemplateProjectPickerController*	mTemplatePickerWindow;
 }
 
 

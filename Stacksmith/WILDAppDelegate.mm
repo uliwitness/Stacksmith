@@ -27,6 +27,7 @@
 #include <sstream>
 #include "CRecentCardsList.h"
 #import "UKHelperMacros.h"
+#import "WILDTemplateProjectPickerController.h"
 
 
 // On startup, if not asked to open any stack, we will look for a stack
@@ -247,6 +248,48 @@ void	WILDScheduleResumeOfScript( void )
 	});
 	
 	return YES;	// We show our own errors asynchronously.
+}
+
+
+-(IBAction)	newDocumentFromTemplate: (id)sender
+{
+	if( mTemplatePickerWindow )
+	{
+		[mTemplatePickerWindow.window makeKeyAndOrderFront: self];
+	}
+	else
+	{
+		mTemplatePickerWindow = [[WILDTemplateProjectPickerController alloc] init];
+		mTemplatePickerWindow.callbackHandler = ^(NSString* inSelectedPath)
+		{
+			NSSavePanel		*	savePanel = [NSSavePanel savePanel];
+			savePanel.allowedFileTypes = @[@"xstk"];
+			savePanel.allowsOtherFileTypes = NO;
+			savePanel.canCreateDirectories = YES;
+			savePanel.canSelectHiddenExtension = YES;
+			savePanel.showsTagField = YES;
+			savePanel.nameFieldStringValue = [inSelectedPath lastPathComponent];
+			
+			[savePanel beginWithCompletionHandler: ^(NSInteger result)
+			{
+				if( result == NSFileHandlingPanelCancelButton )
+					return;
+				
+				NSError	*	err = nil;
+				NSString*	newPath = savePanel.URL.path;
+				[[NSFileManager defaultManager] removeItemAtPath: newPath error: &err];
+				if( ![[NSFileManager defaultManager] copyItemAtPath: inSelectedPath toPath: newPath error: &err])
+				{
+					[[NSApplication sharedApplication] presentError: err];
+					return;
+				}
+				
+				[self application: [NSApplication sharedApplication] openFile: newPath];
+			}];
+			
+		};
+		[mTemplatePickerWindow showWindow: self];
+	}
 }
 
 
