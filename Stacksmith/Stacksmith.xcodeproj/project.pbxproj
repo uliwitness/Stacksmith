@@ -304,6 +304,7 @@
 		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5589DD771378B16400B0F6CF /* TransitionMappings.plist */; };
+		558FB9AC1A75438E0034FD23 /* Empty Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 558FB9A61A7543700034FD23 /* Empty Stacks */; };
 		559331BD18DB06190061CC37 /* CMediaCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559331BB18DB06190061CC37 /* CMediaCache.mm */; };
 		55943B1C171F675E0051166C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55943B1B171F675E0051166C /* WebKit.framework */; };
 		559700EC137BB38B000264B8 /* WILDIrisOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700EB137BB38A000264B8 /* WILDIrisOpenFilter.m */; };
@@ -519,6 +520,7 @@
 			files = (
 				557AECC41A7527C500086275 /* Sample Stacks in Copy Stack Templates */,
 				557AECC51A7527C700086275 /* Test Stacks in Copy Stack Templates */,
+				558FB9AC1A75438E0034FD23 /* Empty Stacks in Copy Stack Templates */,
 			);
 			name = "Copy Stack Templates";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,6 +931,7 @@
 		558970E5118C853600F92788 /* UKIsDragStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKIsDragStart.h; path = ../UliKit/UKIsDragStart.h; sourceTree = SOURCE_ROOT; };
 		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		5589DD771378B16400B0F6CF /* TransitionMappings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TransitionMappings.plist; sourceTree = "<group>"; };
+		558FB9A61A7543700034FD23 /* Empty Stacks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Empty Stacks"; path = "Resources/Empty Stacks"; sourceTree = "<group>"; };
 		559331BB18DB06190061CC37 /* CMediaCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMediaCache.mm; path = Platforms/Mac/CMediaCache.mm; sourceTree = "<group>"; };
 		559331BC18DB06190061CC37 /* CMediaCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMediaCache.h; path = Platforms/Mac/CMediaCache.h; sourceTree = "<group>"; };
 		55943B1B171F675E0051166C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = ../../../../../System/Library/Frameworks/WebKit.framework; sourceTree = "<group>"; };
@@ -1280,6 +1283,7 @@
 				5538245F17272EC2007785D8 /* frameworkheaders.hhc */,
 				55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */,
 				55B29C9E17276D4100B38E75 /* UKCrashReporter.xib */,
+				558FB9A61A7543700034FD23 /* Empty Stacks */,
 				557AECC01A7527B200086275 /* Sample Stacks */,
 				557AECC11A7527B200086275 /* Test Stacks */,
 			);

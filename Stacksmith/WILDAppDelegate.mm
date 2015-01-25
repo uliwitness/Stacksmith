@@ -278,13 +278,32 @@ void	WILDScheduleResumeOfScript( void )
 				NSError	*	err = nil;
 				NSString*	newPath = savePanel.URL.path;
 				[[NSFileManager defaultManager] removeItemAtPath: newPath error: &err];
-				if( ![[NSFileManager defaultManager] copyItemAtPath: inSelectedPath toPath: newPath error: &err])
-				{
-					[[NSApplication sharedApplication] presentError: err];
-					return;
-				}
 				
-				[self application: [NSApplication sharedApplication] openFile: newPath];
+				NSArray	*	filesInTemplate = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: inSelectedPath error:&err];
+				if( [filesInTemplate containsObject: @"_new_empty_file_template"] )
+				{
+					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
+					CDocumentMac*	theDoc = new CDocumentMac();
+					CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
+					theDoc->CreateAtURL( [newFileURL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String );
+					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
+					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
+					
+					theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
+				}
+				else
+				{
+					if( ![[NSFileManager defaultManager] copyItemAtPath: inSelectedPath toPath: newPath error: &err])
+					{
+						[[NSApplication sharedApplication] presentError: err];
+						return;
+					}
+					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
+					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
+					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
+					
+					[self application: [NSApplication sharedApplication] openFile: newPath];
+				}
 			}];
 			
 		};
