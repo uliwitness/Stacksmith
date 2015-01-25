@@ -318,7 +318,34 @@ void	CMediaCache::LoadStandardResources()
 			tinyxml2::XMLElement	*	standardResRoot = standardResDocument.RootElement();
 			LoadMediaTableFromElementAsBuiltIn( standardResRoot, true );	// Load media built into the app.
 		}
+		
+		// Add system sounds to our list of built-in sounds:
+		LoadSystemSoundsFromFolder( @"/System/Library/Sounds" );
+		LoadSystemSoundsFromFolder( [@"~/Library/Sounds" stringByExpandingTildeInPath] );
 	}
+}
+
+
+bool	CMediaCache::LoadSystemSoundsFromFolder( WILDNSStringPtr inFolderPath )
+{
+	// Add system sounds to our list of built-in sounds:
+	NSError		*	err = nil;
+	NSArray		*	subpaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: inFolderPath error: &err];
+	
+	if( !subpaths )
+	{
+		NSLog( @"Error loading system sounds: %@", err );
+		return false;
+	}
+	
+	for( NSString* currSubPath in subpaths )
+	{
+		NSString*	currPath = [inFolderPath stringByAppendingPathComponent: currSubPath];
+		CMediaEntry	newEntry( GetUniqueIDForMedia(), [currSubPath stringByDeletingPathExtension].UTF8String, currPath.UTF8String, EMediaTypeSound, 0, 0, true );
+		mMediaList.push_back( newEntry );
+	}
+	
+	return true;
 }
 
 

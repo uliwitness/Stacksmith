@@ -17,11 +17,13 @@
 
 #if __OBJC__
 #import <Cocoa/Cocoa.h>
-typedef NSImage*		WILDNSImagePtr;
-typedef NSData*			WILDNSDataPtr;
+typedef NSImage*			WILDNSImagePtr;
+typedef NSData*				WILDNSDataPtr;
+typedef NSString*			WILDNSStringPtr;
 #else
-typedef struct NSImage*	WILDNSImagePtr;
-typedef struct NSData*	WILDNSDataPtr;
+typedef struct NSImage*		WILDNSImagePtr;
+typedef struct NSData*		WILDNSDataPtr;
+typedef struct NSString*	WILDNSStringPtr;
 #endif
 
 namespace Carlson
@@ -125,6 +127,10 @@ public:
 	static void			SetStandardResourcesPath( const std::string &inStdResPath );
 
 protected:
+	bool				LoadSystemSoundsFromFolder( WILDNSStringPtr inFolderPath );
+
+
+// ivars:
 	ObjectID					mMediaIDSeed;
 	std::vector<CMediaEntry>	mMediaList;
 	std::string					mURL;
