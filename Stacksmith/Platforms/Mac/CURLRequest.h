@@ -15,9 +15,9 @@
 #if __OBJC__
 @class NSURLRequest;
 
-typedef NSURLRequest*			NSURLRequestPtr;
+typedef NSURLRequest*			WILDNSURLRequestPtr;
 #else
-typedef struct NSURLRequest*	NSURLRequestPtr;
+typedef struct NSURLRequest*	WILDNSURLRequestPtr;
 #endif
 
 
@@ -35,10 +35,10 @@ public:
 	
 	std::string		GetURL();
 	
-	NSURLRequestPtr	GetMacRequest()	{ return mMacRequestObject; };	// Mac-specific, for use by CURLConnection only.
+	WILDNSURLRequestPtr	GetMacRequest()	{ return mMacRequestObject; };	// Mac-specific, for use by CURLConnection only.
 
 protected:
-	NSURLRequestPtr		mMacRequestObject;
+	WILDNSURLRequestPtr		mMacRequestObject;
 };
 
 }

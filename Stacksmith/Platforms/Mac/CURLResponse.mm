@@ -20,7 +20,7 @@ CURLResponse::CURLResponse( const CURLResponse& inResponse )
 }
 
 
-CURLResponse::CURLResponse( NSURLResponsePtr inMacResponse )
+CURLResponse::CURLResponse( WILDNSURLResponsePtr inMacResponse )
 {
 	mMacURLResponse = [inMacResponse retain];
 }

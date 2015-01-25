@@ -16,9 +16,9 @@
 #if __OBJC__
 @class NSURLResponse;
 
-typedef NSURLResponse*			NSURLResponsePtr;
+typedef NSURLResponse*			WILDNSURLResponsePtr;
 #else
-typedef struct NSURLResponse*	NSURLResponsePtr;
+typedef struct NSURLResponse*	WILDNSURLResponsePtr;
 #endif
 
 
@@ -29,7 +29,7 @@ namespace Carlson {
 class CURLResponse
 {
 public:
-	explicit CURLResponse( NSURLResponsePtr inMacResponse );	// Mac-specific constructor.
+	explicit CURLResponse( WILDNSURLResponsePtr inMacResponse );	// Mac-specific constructor.
 	CURLResponse( const CURLResponse& inResponse );
 	~CURLResponse();
 	
@@ -40,7 +40,7 @@ public:
 	std::string							GetValueForHeaderField( std::string inFieldName );
 
 protected:
-	NSURLResponsePtr	mMacURLResponse;
+	WILDNSURLResponsePtr	mMacURLResponse;
 };
 
 }
