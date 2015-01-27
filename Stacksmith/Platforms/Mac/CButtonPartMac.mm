@@ -227,6 +227,74 @@ void	CButtonPartMac::SetHighlightForTracking( bool inHighlight )
 }
 
 
+void	CButtonPartMac::SetFillColor( int r, int g, int b, int a )
+{
+	CButtonPart::SetFillColor( r, g, b, a );
+
+	[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+}
+
+
+void	CButtonPartMac::SetLineColor( int r, int g, int b, int a )
+{
+	CButtonPart::SetLineColor( r, g, b, a );
+
+	[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+}
+
+
+void	CButtonPartMac::SetShadowColor( int r, int g, int b, int a )
+{
+	CButtonPart::SetShadowColor( r, g, b, a );
+	
+	[mView.layer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
+	if( a != 0 )
+	{
+		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+	}
+}
+
+
+void	CButtonPartMac::SetShadowOffset( double w, double h )
+{
+	CButtonPart::SetShadowOffset( w, h );
+	
+	[mView.layer setShadowOffset: NSMakeSize(w,h)];
+}
+
+
+void	CButtonPartMac::SetShadowBlurRadius( double r )
+{
+	CButtonPart::SetShadowBlurRadius( r );
+	
+	[mView.layer setShadowRadius: r];
+}
+
+
+void	CButtonPartMac::SetLineWidth( int w )
+{
+	CButtonPart::SetLineWidth( w );
+	
+	[((WILDButtonCell*)mView.cell) setLineWidth: w];
+}
+
+
+void	CButtonPartMac::SetBevelWidth( int bevel )
+{
+	CButtonPart::SetBevelWidth( bevel );
+
+	[((WILDButtonCell*)mView.cell) setBevelWidth: bevel];
+}
+
+
+void	CButtonPartMac::SetBevelAngle( int a )
+{
+	CButtonPart::SetBevelAngle( a );
+
+	[((WILDButtonCell*)mView.cell) setBevelAngle: a];
+}
+
+
 void	CButtonPartMac::SetShowName( bool inShowName )
 {
 	CButtonPart::SetShowName( inShowName );

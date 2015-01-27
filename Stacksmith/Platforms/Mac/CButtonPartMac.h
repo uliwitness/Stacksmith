@@ -35,6 +35,16 @@ public:
 	virtual bool	SetTextContents( const std::string &inString );
 	virtual void	SetShowName( bool inShowName );
 	virtual void	SetVisible( bool visible )		{ CButtonPart::SetVisible(visible); [mView setHidden: !visible]; };
+	
+	virtual void	SetFillColor( int r, int g, int b, int a );
+	virtual void	SetLineColor( int r, int g, int b, int a );
+	virtual void	SetShadowColor( int r, int g, int b, int a );
+	virtual void	SetShadowOffset( double w, double h );
+	virtual void	SetShadowBlurRadius( double r );
+	virtual void	SetLineWidth( int w );
+	virtual void	SetBevelWidth( int bevel );
+	virtual void	SetBevelAngle( int a );
+	
 	virtual NSView*	GetView();
 	virtual void	SetToolTip( const std::string& inToolTip )	{ CButtonPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
 	

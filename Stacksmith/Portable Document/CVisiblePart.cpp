@@ -241,6 +241,8 @@ bool	CVisiblePart::GetColorFromValue( LEOValuePtr inValue, LEOContext* inContext
 	union LEOValue		tmp = {{0}};
 	LEOUnit				theUnit = kLEOUnitNone;
 	LEOValuePtr	theValue = LEOGetValueForKey( inValue, "red", &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
 	*outRed = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
 	if( theValue == &tmp )
 		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
@@ -248,6 +250,8 @@ bool	CVisiblePart::GetColorFromValue( LEOValuePtr inValue, LEOContext* inContext
 		return false;
 	
 	theValue = LEOGetValueForKey( inValue, "green", &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
 	*outGreen = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
 	if( theValue == &tmp )
 		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
@@ -255,6 +259,8 @@ bool	CVisiblePart::GetColorFromValue( LEOValuePtr inValue, LEOContext* inContext
 		return false;
 	
 	theValue = LEOGetValueForKey( inValue, "blue", &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
 	*outBlue = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
 	if( theValue == &tmp )
 		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
@@ -262,6 +268,8 @@ bool	CVisiblePart::GetColorFromValue( LEOValuePtr inValue, LEOContext* inContext
 		return false;
 	
 	theValue = LEOGetValueForKey( inValue, "alpha", &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
 	*outAlpha = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
 	if( theValue == &tmp )
 		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
@@ -277,6 +285,8 @@ bool	CVisiblePart::GetSizeFromValue( LEOValuePtr inValue, LEOContext* inContext,
 	union LEOValue		tmp = {{0}};
 	LEOUnit				theUnit = kLEOUnitNone;
 	LEOValuePtr	theValue = LEOGetValueForKey( inValue, "width", &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
 	*outWidth = LEOGetValueAsNumber( theValue, &theUnit, inContext );
 	if( theValue == &tmp )
 		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
@@ -284,6 +294,8 @@ bool	CVisiblePart::GetSizeFromValue( LEOValuePtr inValue, LEOContext* inContext,
 		return false;
 	
 	theValue = LEOGetValueForKey( inValue, "height", &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
 	*outHeight = LEOGetValueAsNumber( theValue, &theUnit, inContext );
 	if( theValue == &tmp )
 		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
