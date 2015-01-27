@@ -176,12 +176,120 @@ bool	CVisiblePart::GetPropertyNamed( const char* inPropertyName, size_t byteRang
 	{
 		LEOInitBooleanValue( outValue, GetVisible(), kLEOInvalidateReferences, inContext );
 	}
-	else if( strcasecmp("tooltip", inPropertyName) == 0 )
+	else if( strcasecmp("toolTip", inPropertyName) == 0 )
 	{
 		LEOInitStringValue( outValue, mToolTip.c_str(), mToolTip.length(), kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("lineWidth", inPropertyName) == 0 )
+	{
+		LEOInitNumberValue( outValue, mLineWidth, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("lineColor", inPropertyName) == 0 )
+	{
+		struct LEOArrayEntry *theArray = NULL;
+		
+		LEOAddNumberArrayEntryToRoot( &theArray, "red", mLineColorRed / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "green", mLineColorGreen / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "blue", mLineColorBlue / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "alpha", mLineColorAlpha / 65535.0, kLEOUnitNone, inContext );
+		
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("fillColor", inPropertyName) == 0 )
+	{
+		struct LEOArrayEntry *theArray = NULL;
+		
+		LEOAddNumberArrayEntryToRoot( &theArray, "red", mFillColorRed / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "green", mFillColorGreen / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "blue", mFillColorBlue / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "alpha", mFillColorAlpha / 65535.0, kLEOUnitNone, inContext );
+		
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("shadowColor", inPropertyName) == 0 )
+	{
+		struct LEOArrayEntry *theArray = NULL;
+		
+		LEOAddNumberArrayEntryToRoot( &theArray, "red", mShadowColorRed / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "green", mShadowColorGreen / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "blue", mShadowColorBlue / 65535.0, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "alpha", mShadowColorAlpha / 65535.0, kLEOUnitNone, inContext );
+		
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("shadowOffset", inPropertyName) == 0 )
+	{
+		struct LEOArrayEntry *theArray = NULL;
+		
+		LEOAddNumberArrayEntryToRoot( &theArray, "width", mShadowOffsetWidth, kLEOUnitNone, inContext );
+		LEOAddNumberArrayEntryToRoot( &theArray, "height", mShadowOffsetHeight, kLEOUnitNone, inContext );
+		
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("shadowBlurRadius", inPropertyName) == 0 )
+	{
+		LEOInitNumberValue( outValue, mShadowBlurRadius, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+	}
 	else
 		return CPart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+	return true;
+}
+
+
+bool	CVisiblePart::GetColorFromValue( LEOValuePtr inValue, LEOContext* inContext, int* outRed, int* outGreen, int* outBlue, int* outAlpha )
+{
+	union LEOValue		tmp = {{0}};
+	LEOUnit				theUnit = kLEOUnitNone;
+	LEOValuePtr	theValue = LEOGetValueForKey( inValue, "red", &tmp, kLEOInvalidateReferences, inContext );
+	*outRed = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
+	if( theValue == &tmp )
+		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
+	
+	theValue = LEOGetValueForKey( inValue, "green", &tmp, kLEOInvalidateReferences, inContext );
+	*outGreen = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
+	if( theValue == &tmp )
+		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
+	
+	theValue = LEOGetValueForKey( inValue, "blue", &tmp, kLEOInvalidateReferences, inContext );
+	*outBlue = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
+	if( theValue == &tmp )
+		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
+	
+	theValue = LEOGetValueForKey( inValue, "alpha", &tmp, kLEOInvalidateReferences, inContext );
+	*outAlpha = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
+	if( theValue == &tmp )
+		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
+	
+	return true;
+}
+
+
+bool	CVisiblePart::GetSizeFromValue( LEOValuePtr inValue, LEOContext* inContext, double* outWidth, double* outHeight )
+{
+	union LEOValue		tmp = {{0}};
+	LEOUnit				theUnit = kLEOUnitNone;
+	LEOValuePtr	theValue = LEOGetValueForKey( inValue, "width", &tmp, kLEOInvalidateReferences, inContext );
+	*outWidth = LEOGetValueAsNumber( theValue, &theUnit, inContext );
+	if( theValue == &tmp )
+		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
+	
+	theValue = LEOGetValueForKey( inValue, "height", &tmp, kLEOInvalidateReferences, inContext );
+	*outHeight = LEOGetValueAsNumber( theValue, &theUnit, inContext );
+	if( theValue == &tmp )
+		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return false;
+	
 	return true;
 }
 
@@ -195,13 +303,53 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 			return true;
 		SetVisible( visState );
 	}
-	else if( strcasecmp("tooltip", inPropertyName) == 0 )
+	else if( strcasecmp("toolTip", inPropertyName) == 0 )
 	{
 		char	str[1024] = {0};
 		const char*	theStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetToolTip( std::string(theStr) );
+	}
+	else if( strcasecmp("lineWidth", inPropertyName) == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEONumber	lineWidth = LEOGetValueAsNumber( inValue, &theUnit, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		SetLineWidth( lineWidth );
+	}
+	else if( strcasecmp("lineColor", inPropertyName) == 0 )
+	{
+		int	r = 0, g = 0, b = 0, a = 0;
+		if( GetColorFromValue( inValue, inContext, &r, &g, &b, &a ) )
+			SetLineColor( r, g, b, a );
+	}
+	else if( strcasecmp("fillColor", inPropertyName) == 0 )
+	{
+		int	r = 0, g = 0, b = 0, a = 0;
+		if( GetColorFromValue( inValue, inContext, &r, &g, &b, &a ) )
+			SetFillColor( r, g, b, a );
+	}
+	else if( strcasecmp("shadowColor", inPropertyName) == 0 )
+	{
+		int	r = 0, g = 0, b = 0, a = 0;
+		if( GetColorFromValue( inValue, inContext, &r, &g, &b, &a ) )
+			SetShadowColor( r, g, b, a );
+	}
+	else if( strcasecmp("shadowOffset", inPropertyName) == 0 )
+	{
+		double		w = 0, h = 0;
+		if( GetSizeFromValue( inValue, inContext, &w, &h ) )
+			SetShadowOffset( w, h );
+	}
+	else if( strcasecmp("shadowBlurRadius", inPropertyName) == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEONumber	lineWidth = LEOGetValueAsNumber( inValue, &theUnit, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return true;
+		SetShadowBlurRadius( lineWidth );
 	}
 	else
 		return CPart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );

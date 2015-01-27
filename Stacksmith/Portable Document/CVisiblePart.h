@@ -114,6 +114,9 @@ protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	
+	static bool				GetColorFromValue( LEOValuePtr inValue, LEOContext* inContext, int* outRed, int* outGreen, int* outBlue, int* outAlpha );
+	static bool				GetSizeFromValue( LEOValuePtr inValue, LEOContext* inContext, double* outWidth, double* outHeight );
+	
 	virtual void			DumpProperties( size_t inIndent );
 
 protected:
