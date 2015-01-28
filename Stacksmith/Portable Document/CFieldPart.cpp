@@ -132,6 +132,9 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 
 void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
+	if( mViewTextNeedsSync )
+		LoadChangedTextFromView();
+
 	CVisiblePart::SavePropertiesToElement( inElement );
 
 	tinyxml2::XMLDocument* document = inElement->GetDocument();
