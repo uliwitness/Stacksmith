@@ -34,7 +34,7 @@ typedef enum
 class CButtonPart : public CVisiblePart
 {
 public:
-	explicit CButtonPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mShowName(true), mHighlight(false), mAutoHighlight(true), mSharedHighlight(false), mHighlightForTracking(false), mTitleWidth(0), mIconID(0), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextStyle(EPartTextStylePlain), mButtonStyle(EButtonStyleRectangle) {};
+	explicit CButtonPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mShowName(true), mHighlight(false), mAutoHighlight(true), mSharedHighlight(false), mHighlightForTracking(false), mTitleWidth(0), mIconID(0), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextStyle(EPartTextStylePlain), mButtonStyle(EButtonStyleStandard) { mName = "New Button"; };
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
