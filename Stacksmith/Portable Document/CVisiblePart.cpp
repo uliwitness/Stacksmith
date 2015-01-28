@@ -268,13 +268,18 @@ bool	CVisiblePart::GetColorFromValue( LEOValuePtr inValue, LEOContext* inContext
 		return false;
 	
 	theValue = LEOGetValueForKey( inValue, "alpha", &tmp, kLEOInvalidateReferences, inContext );
-	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
-		return false;
-	*outAlpha = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
-	if( theValue == &tmp )
-		LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
-	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
-		return false;
+	if( theValue )
+	{
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return false;
+		*outAlpha = LEOGetValueAsNumber( theValue, &theUnit, inContext ) * 65535.0;
+		if( theValue == &tmp )
+			LEOCleanUpValue( &tmp, kLEOInvalidateReferences, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return false;
+	}
+	else
+		*outAlpha = 65535;
 	
 	return true;
 }
