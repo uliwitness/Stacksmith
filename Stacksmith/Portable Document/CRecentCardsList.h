@@ -34,7 +34,7 @@ class CRecentCardInfo
 {
 public:
 	CRecentCardInfo() {};
-	CRecentCardInfo( const std::string& inURL, ObjectID inID, CCard* inCard ) {};
+	CRecentCardInfo( const std::string& inURL, ObjectID inID, CCard* inCard ) : mDocumentURL(inURL), mCardID(inID), mCard(inCard) {};
 	
 	std::string		GetDocumentURL()	{ return mDocumentURL; };
 	ObjectID		GetCardID()			{ return mCardID; };
@@ -58,6 +58,7 @@ public:
 	
 	virtual size_t	GetNumRecentCards() = 0;
 	virtual CCard*	GetCard( size_t inIndex ) = 0;
+	virtual CCard*	PopCard()					{ size_t numCds = GetNumRecentCards(); if( numCds == 0 ) return NULL; CCard* theCard = GetCard( numCds -1 ); RemoveCard(theCard); return theCard; };
 	
 	void	SetMaxRecentsToKeep( size_t inNumRecents )	{ mMaxRecentsToKeep = inNumRecents; };
 	size_t	GetMaxRecentsToKeep()						{ return mMaxRecentsToKeep; };

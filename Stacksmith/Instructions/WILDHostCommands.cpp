@@ -23,6 +23,7 @@
 
 
 void	WILDGoInstruction( LEOContext* inContext );
+void	WILDGoBackInstruction( LEOContext* inContext );
 void	WILDVisualEffectInstruction( LEOContext* inContext );
 void	WILDAnswerInstruction( LEOContext* inContext );
 void	WILDAskInstruction( LEOContext* inContext );
@@ -45,6 +46,72 @@ using namespace Carlson;
 
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
+
+
+/*!
+	Implements the 'go back' command.
+	
+	It will use the current visual effect to perform the transition and will
+	clear the current visual effect once done.
+	
+	param1 in the instruction is a TOpenInMode that will be passed to GoThereInNewWindow().
+	
+	(WILD_GO_BACK_INSTR)
+*/
+void	WILDGoBackInstruction( LEOContext* inContext )
+{
+//	LEODebugPrintContext( inContext );
+
+	if( (inContext->flags & kLEOContextResuming) == 0 )	// This is the actual call to this instruction, we're not resuming the script once the asynchronous 'go' has completed after pausing the script (think "continuation"):
+	{
+		bool					canGoThere = false;
+		CScriptableObject*		destinationObject = CRecentCardsList::GetSharedInstance()->PopCard();
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+
+		//LEODebugPrintContext( inContext );
+
+		if( destinationObject )
+		{
+			TOpenInMode	openInMode = inContext->currentInstruction->param1;
+		
+			LEOPauseContext( inContext );
+			
+			LEOContextRetain( inContext );
+			canGoThere = destinationObject->GoThereInNewWindow( openInMode, userData->GetStack(), NULL,
+			[inContext]()
+			{
+				LEOResumeContext( inContext );
+				
+				// +++ Should we set the result here to indicate success?
+				
+				LEOContextRelease(inContext);
+			} );
+		}
+		if( canGoThere )
+			userData->SetStack( destinationObject->GetStack() );
+		
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+		
+//		CStack		*	frontStack = userData->GetStack();
+//		CCard		*	currentCard = frontStack->GetCurrentCard();
+//		currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
+		
+		if( !canGoThere )
+		{
+			LEOResumeContext( inContext );
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't go there." ); // +++ Should we instead set the result here?
+		}
+	}
+	else	// The "go" has completed and resumed the script.
+	{
+//		LEODebugPrintContext( inContext );
+		
+		inContext->currentInstruction++;
+	}
+}
 
 
 /*!
@@ -873,6 +940,7 @@ void	WILDChooseInstruction( LEOContext* inContext )
 
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
+LEOINSTR(WILDGoBackInstruction)
 LEOINSTR(WILDVisualEffectInstruction)
 LEOINSTR(WILDAnswerInstruction)
 LEOINSTR(WILDAskInstruction)
@@ -893,6 +961,21 @@ LEOINSTR_LAST(WILDChooseInstruction)
 
 struct THostCommandEntry	gStacksmithHostCommands[] =
 {
+	{
+		EGoIdentifier, WILD_GO_INSTR, EOpenInSameWindow, 0, 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EBackIdentifier, EHostParameterOptional, WILD_GO_BACK_INSTR, 0, 0, '\0', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, EInIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'I' },
+			{ EHostParamInvisibleIdentifier, ENewIdentifier, EHostParameterOptional, WILD_GO_INSTR, EOpenInNewWindow, 0, 'I', 'W' },
+			{ EHostParamInvisibleIdentifier, EWindowIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'W', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
 	{
 		EGoIdentifier, WILD_GO_INSTR, EOpenInSameWindow, 0, 'X',
 		{

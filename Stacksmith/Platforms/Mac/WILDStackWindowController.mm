@@ -19,6 +19,7 @@
 #import "WILDBackgroundInfoViewController.h"
 #import "WILDStackInfoViewController.h"
 #import "UKHelperMacros.h"
+#include "CRecentCardsList.h"
 
 
 NSString*	WILDStackToolbarItemIdentifier = @"WILDStackToolbarItemIdentifier";
@@ -887,25 +888,33 @@ using namespace Carlson;
 
 -(IBAction)	goFirstCard: (id)sender
 {
-	mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
+	CCardRef	oldCard = mStack->GetCurrentCard();
+	if( mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
+		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
 
 -(IBAction)	goPrevCard: (id)sender
 {
-	mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
+	CCardRef	oldCard = mStack->GetCurrentCard();
+	if( mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
+		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
 
 -(IBAction)	goNextCard: (id)sender
 {
-	mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
+	CCardRef	oldCard = mStack->GetCurrentCard();
+	if( mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
+		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
 
 -(IBAction)	goLastCard: (id)sender
 {
-	mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
+	CCardRef	oldCard = mStack->GetCurrentCard();
+	if( mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
+		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
 
