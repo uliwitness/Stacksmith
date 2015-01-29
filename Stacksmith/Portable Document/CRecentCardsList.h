@@ -58,7 +58,8 @@ public:
 	
 	virtual size_t	GetNumRecentCards() = 0;
 	virtual CCard*	GetCard( size_t inIndex ) = 0;
-	virtual CCard*	PopCard()					{ size_t numCds = GetNumRecentCards(); if( numCds == 0 ) return NULL; CCard* theCard = GetCard( numCds -1 ); RemoveCard(theCard); return theCard; };
+	virtual CCard*	PopCard()					{ CCard* theCard = PeekCard(); if( theCard ) RemoveCard(theCard); return theCard; };
+	virtual CCard*	PeekCard()					{ size_t numCds = GetNumRecentCards(); if( numCds == 0 ) return NULL; CCard* theCard = GetCard( numCds -1 ); return theCard; };
 	
 	void	SetMaxRecentsToKeep( size_t inNumRecents )	{ mMaxRecentsToKeep = inNumRecents; };
 	size_t	GetMaxRecentsToKeep()						{ return mMaxRecentsToKeep; };

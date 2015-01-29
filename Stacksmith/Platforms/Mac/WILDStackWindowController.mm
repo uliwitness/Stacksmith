@@ -886,6 +886,13 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	goBack: (id)sender
+{
+	CCardRef	theCard = CRecentCardsList::GetSharedInstance()->PopCard();
+	theCard->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
+}
+
+
 -(IBAction)	goFirstCard: (id)sender
 {
 	CCardRef	oldCard = mStack->GetCurrentCard();
@@ -939,6 +946,10 @@ using namespace Carlson;
 	else if( theItem.action == @selector(deleteStack:) )
 	{
 		return( mStack->GetDocument()->GetNumStacks() > 1 && !mStack->GetCantDelete() );
+	}
+	else if( theItem.action == @selector(goBack:) )
+	{
+		return CRecentCardsList::GetSharedInstance()->PeekCard() != NULL;
 	}
 	else if( theItem.action == @selector(toggleBackgroundEditMode:) )
 	{

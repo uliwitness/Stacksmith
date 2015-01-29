@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
@@ -375,9 +375,16 @@
                 <menuItem title="Go" id="Vab-gO-wsM">
                     <menu key="submenu" title="Go" id="C95-84-MdY">
                         <items>
-                            <menuItem title="First Card" keyEquivalent="1" id="Iwm-6C-IiX">
+                            <menuItem title="Back" id="Iwm-6C-IiX">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="goFirstCard:" target="-1" id="oMS-f6-WPj"/>
+                                    <action selector="goBack:" target="-1" id="00e-1O-u6Y"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="dPX-Tu-qfe"/>
+                            <menuItem title="First Card" keyEquivalent="1" id="Dzp-Oe-WI3">
+                                <connections>
+                                    <action selector="goFirstCard:" target="-1" id="gSv-vd-Bf2"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Previous Card" keyEquivalent="2" id="ecb-gS-bnq">
