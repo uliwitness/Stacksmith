@@ -54,6 +54,7 @@ void	CButtonPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mSharedHighlight = CTinyXMLUtils::GetBoolNamed( inElement, "sharedHighlight", true );
 	mTitleWidth = CTinyXMLUtils::GetIntNamed( inElement, "titleWidth", 0 );
 	mIconID = CTinyXMLUtils::GetLongLongNamed( inElement, "icon", 0 );
+	mCursorID = CTinyXMLUtils::GetLongLongNamed( inElement, "cursor", 128 );
 	std::string	textAlignStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "textAlign", textAlignStr );
 	mTextAlign = GetTextAlignFromString( textAlignStr.c_str() );
@@ -108,6 +109,7 @@ void	CButtonPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	inElement->InsertEndChild(elem);
 	
 	CTinyXMLUtils::AddLongLongNamed( inElement, mIconID, "icon");
+	CTinyXMLUtils::AddLongLongNamed( inElement, mCursorID, "cursor");
 	
 	if( !mSelectedLines.empty() )
 	{
@@ -208,6 +210,10 @@ bool	CButtonPart::GetPropertyNamed( const char* inPropertyName, size_t byteRange
 		else
 			LEOInitStringConstantValue( outValue, "none", kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("cursor", inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, mCursorID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{
 		LEOInitStringConstantValue( outValue, sButtonStyleStrings[mButtonStyle], kLEOInvalidateReferences, inContext );
@@ -300,6 +306,27 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 				return true;
 		}
 		SetIconID(theIconID);
+	}
+	else if( strcasecmp("cursor", inPropertyName) == 0 )
+	{
+		LEOInteger	theIconID = 0;
+		char		strBuf[100] = {0};
+		const char* str = LEOGetValueAsString( inValue, strBuf, sizeof(strBuf), inContext );
+		if( strcasecmp(str, "none") != 0 && str[0] != 0 )
+		{
+			if( LEOCanGetAsNumber( inValue, inContext ) )
+			{
+				LEOUnit		outUnit = kLEOUnitNone;
+				theIconID = LEOGetValueAsInteger( inValue, &outUnit, inContext );
+			}
+			else
+			{
+				theIconID = GetStack()->GetDocument()->GetMediaCache().GetMediaIDByNameOfType( str, EMediaTypeCursor );
+			}
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+				return true;
+		}
+		SetCursorID(theIconID);
 	}
 	else if( strcasecmp("style", inPropertyName) == 0 )
 	{

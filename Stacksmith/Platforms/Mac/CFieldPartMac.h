@@ -54,6 +54,7 @@ public:
 	virtual void	SetLineWidth( int w );
 	virtual void	SetBevelWidth( int bevel );
 	virtual void	SetBevelAngle( int a );
+	virtual void	SetCursorID( ObjectID inID );
 	virtual void	GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs );
 	virtual void	SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs );
 	virtual void	SetToolTip( const std::string& inToolTip )	{ CFieldPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };

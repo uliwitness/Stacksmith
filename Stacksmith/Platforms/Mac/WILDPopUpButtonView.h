@@ -16,8 +16,9 @@ namespace Carlson
 
 @interface WILDPopUpButtonView : NSPopUpButton
 {
-	BOOL	lastMouseUpWasInside;
-	long	lastButtonNumber;
+	BOOL		lastMouseUpWasInside;
+	long		lastButtonNumber;
+	NSCursor*	mCursor;
 }
 
 @property (assign,nonatomic) Carlson::CButtonPart*	owningPart;

@@ -49,6 +49,8 @@ public:
 	virtual void	SetToolTip( const std::string& inToolTip )	{ CButtonPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
 	
 	virtual void	SetIconID( ObjectID inID );
+	virtual void	SetCursorID( ObjectID inID );
+
 	virtual void	SetScript( std::string inScript );
 	
 	virtual void	PrepareMouseUp();

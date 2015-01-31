@@ -11,6 +11,7 @@
 #include "CCard.h"
 #include "CBackground.h"
 #include "CStack.h"
+#include "CDocument.h"
 
 
 using namespace Carlson;
@@ -63,6 +64,7 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mMultipleLines = CTinyXMLUtils::GetBoolNamed( inElement, "multipleLines", false );
 	mShowLines = CTinyXMLUtils::GetBoolNamed( inElement, "showLines", false );
 	mWideMargins = CTinyXMLUtils::GetBoolNamed( inElement, "wideMargins", false );
+	mCursorID = CTinyXMLUtils::GetLongLongNamed( inElement, "cursor", 128 );
 	std::string	textAlignStr;
 	CTinyXMLUtils::GetStringNamed( inElement, "textAlign", textAlignStr );
 	mTextAlign = CVisiblePart::GetTextAlignFromString( textAlignStr.c_str() );
@@ -154,6 +156,7 @@ void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	CTinyXMLUtils::AddBoolNamed( inElement, mShowLines, "showLines" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mWideMargins, "wideMargins" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mMultipleLines, "multipleLines" );
+	CTinyXMLUtils::AddLongLongNamed( inElement, mCursorID, "cursor");
 	CTinyXMLUtils::AddBoolNamed( inElement, mHasHorizontalScroller, "hasHorizontalScroller" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mHasVerticalScroller, "hasVerticalScroller" );
 	CTinyXMLUtils::AddBoolNamed( inElement, mHasColumnHeaders, "hasColumnHeaders" );
@@ -389,6 +392,10 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 		
 		LEOInitStringValue( outValue, currText.c_str(), currText.length(), kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("cursor", inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, mCursorID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+	}
 	else
 	{
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
@@ -617,6 +624,27 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 			if( !foundType )
 				return true;
 		}
+	}
+	else if( strcasecmp("cursor", inPropertyName) == 0 )
+	{
+		LEOInteger	theIconID = 0;
+		char		strBuf[100] = {0};
+		const char* str = LEOGetValueAsString( inValue, strBuf, sizeof(strBuf), inContext );
+		if( strcasecmp(str, "none") != 0 && str[0] != 0 )
+		{
+			if( LEOCanGetAsNumber( inValue, inContext ) )
+			{
+				LEOUnit		outUnit = kLEOUnitNone;
+				theIconID = LEOGetValueAsInteger( inValue, &outUnit, inContext );
+			}
+			else
+			{
+				theIconID = GetStack()->GetDocument()->GetMediaCache().GetMediaIDByNameOfType( str, EMediaTypeCursor );
+			}
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+				return true;
+		}
+		SetCursorID(theIconID);
 	}
 	else if( ParseRowColumnString( inPropertyName, &oneBasedRowIndex, &oneBasedColumnIndex ) )
 	{

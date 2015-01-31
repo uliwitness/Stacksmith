@@ -147,7 +147,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mIconID != 0 )
 	{
-		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mIconID, EMediaTypeIcon, [this](WILDNSImagePtr theIcon)
+		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mIconID, EMediaTypeIcon, [this](WILDNSImagePtr theIcon, int xHotSpot, int yHotSpot)
 		{
 			[mView setImage: theIcon];
 			[mView setImagePosition: mShowName ? NSImageAbove : NSImageOnly];
@@ -430,6 +430,15 @@ void	CButtonPartMac::SetIconID( ObjectID inID )
 			CreateViewIn( oldSuper );
 		}
     }
+}
+
+
+void	CButtonPartMac::SetCursorID( ObjectID inID )
+{
+	CButtonPart::SetCursorID( inID );
+	
+	if( [mView respondsToSelector: @selector(reloadCursor)] )
+		[mView reloadCursor];
 }
 
 

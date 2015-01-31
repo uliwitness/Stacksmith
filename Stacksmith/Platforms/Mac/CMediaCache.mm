@@ -220,7 +220,7 @@ ObjectID	CMediaCache::GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( CMediaEntry& n
 }
 
 
-void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std::function<void(WILDNSImagePtr)> completionBlock )
+void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, CImageGetterCallback completionBlock )
 {
 	NSCAssert( inType == EMediaTypeIcon || inType == EMediaTypePattern || inType == EMediaTypePicture || inType == EMediaTypeCursor, @"Requested image for non-image resource." );
 	
@@ -228,18 +228,49 @@ void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std
 	{
 		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
 		{
+			if( currMedia->mPendingClients.size() > 0 )
+			{
+				currMedia->mPendingClients.push_back( completionBlock );
+				break;
+			}
+			
 			if( currMedia->mFileData == nil )
 			{
+				currMedia->mPendingClients.push_back( completionBlock );
 				CURLRequest		request( currMedia->GetFileName() );
-				CURLConnection::SendRequestWithCompletionHandler( request, [completionBlock,currMedia](CURLResponse response, const char * data, size_t dataLen)
+				CURLConnection::SendRequestWithCompletionHandler( request, [completionBlock,currMedia,inType](CURLResponse response, const char * data, size_t dataLen)
 				{
 					if( !currMedia->mFileData && dataLen > 0 )
 						currMedia->mFileData = [[NSData alloc] initWithBytes: data length: dataLen];
 					if( !currMedia->mImage && currMedia->mFileData )
 						currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
 					[currMedia->mImage setName: [NSString stringWithUTF8String: currMedia->GetFileName().c_str()].lastPathComponent];
-					completionBlock( currMedia->mImage );
+					
+					if( inType == EMediaTypeCursor )
+					{
+						// Generate several pixel representations so we can use PDFs as cursors and they don't get rendered at the smallest pixellated scale:
+						NSImage	*oldImage = currMedia->mImage;
+						currMedia->mImage = [[NSImage alloc] initWithSize: [oldImage size]];
+						
+						for (int scale = 1; scale <= 4; scale++)
+						{
+							NSAffineTransform *xform = [[NSAffineTransform alloc] init];
+							[xform scaleBy:scale];
+							id hints = @{ NSImageHintCTM: xform };
+							CGImageRef rasterCGImage = [oldImage CGImageForProposedRect:NULL context:nil hints:hints];
+							NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:rasterCGImage];
+							[rep setSize: [oldImage size]];
+							[currMedia->mImage addRepresentation:rep];
+						}
+					}
+					
+					for( const CImageGetterCallback& currBlock : currMedia->mPendingClients )
+					{
+						currBlock( currMedia->mImage, currMedia->mHotspotLeft, currMedia->mHotspotTop );
+					}
+					currMedia->mPendingClients.erase( currMedia->mPendingClients.begin(), currMedia->mPendingClients.end() );
 				});
+				break;
 			}
 			else if( currMedia->mImage == nil )
 			{
@@ -249,7 +280,7 @@ void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std
 			
 			if( currMedia->mImage )
 			{
-				completionBlock( currMedia->mImage );
+				completionBlock( currMedia->mImage, currMedia->mHotspotLeft, currMedia->mHotspotTop );
 				break;
 			}
 		}
@@ -370,13 +401,13 @@ void	CMediaCache::Dump( size_t inIndent )
 }
 
 
-CMediaEntry::CMediaEntry() : mIconID(0LL), mMediaType(EMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false), mChangeCount(0), mFileData(NULL), mImage(NULL)
+CMediaEntry::CMediaEntry() : mIconID(0LL), mMediaType(EMediaTypeUnknown), mHotspotLeft(0), mHotspotTop(0), mIsBuiltIn(false), mChangeCount(0), mFileData(NULL), mImage(NULL), mLoading(false)
 {
 
 }
 
 
-CMediaEntry::CMediaEntry( ObjectID iconID, const std::string& iconName, const std::string& fileName, TMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn, bool inDirty ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn), mChangeCount(inDirty?1:0), mFileData(NULL), mImage(NULL)
+CMediaEntry::CMediaEntry( ObjectID iconID, const std::string& iconName, const std::string& fileName, TMediaType mediaType, int hotspotLeft, int hotspotTop, bool isBuiltIn, bool inDirty ) : mIconID(iconID), mIconName(iconName), mFileName(fileName), mMediaType(mediaType), mHotspotLeft(hotspotLeft), mHotspotTop(hotspotTop), mIsBuiltIn(isBuiltIn), mChangeCount(inDirty?1:0), mFileData(NULL), mImage(NULL), mLoading(false)
 {
 
 }
@@ -394,6 +425,7 @@ CMediaEntry::CMediaEntry( const CMediaEntry& orig )
 	mIconName = orig.mIconName;
 	mFileData = [orig.mFileData retain];
 	mImage = [orig.mImage retain];
+	mLoading = false;
 }
 
 

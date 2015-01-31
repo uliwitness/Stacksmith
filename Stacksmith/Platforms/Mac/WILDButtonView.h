@@ -14,10 +14,13 @@
 @interface WILDButtonView : NSButton
 {
 	NSTrackingArea	*	mCursorTrackingArea;
+	NSCursor*			mCursor;
 }
 
 #if __cplusplus
 @property (assign,nonatomic) Carlson::CButtonPart*	owningPart;
 #endif
+
+-(void)	reloadCursor;
 
 @end

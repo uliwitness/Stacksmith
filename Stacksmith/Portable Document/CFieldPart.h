@@ -51,7 +51,7 @@ struct CColumnInfo
 class CFieldPart : public CVisiblePart
 {
 public:
-	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mDontWrap(false), mDontSearch(false), mSharedText(false), mFixedLineHeight(false), mAutoTab(false), mLockText(false), mAutoSelect(false), mMultipleLines(false), mShowLines(false), mWideMargins(false), mTextStyle(EPartTextStylePlain), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextHeight(0), mHasHorizontalScroller(false), mHasVerticalScroller(false), mHasColumnHeaders(false), mViewTextNeedsSync(false), mFieldStyle(EFieldStyleStandard)	 {};
+	explicit CFieldPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mDontWrap(false), mDontSearch(false), mSharedText(false), mFixedLineHeight(false), mAutoTab(false), mLockText(false), mAutoSelect(false), mMultipleLines(false), mShowLines(false), mWideMargins(false), mTextStyle(EPartTextStylePlain), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextHeight(0), mHasHorizontalScroller(false), mHasVerticalScroller(false), mHasColumnHeaders(false), mViewTextNeedsSync(false), mFieldStyle(EFieldStyleStandard), mCursorID(128)	 {};
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -89,7 +89,10 @@ public:
 
 	virtual bool			GetDontSearch()					{ return mDontSearch; };
 	virtual void			SetDontSearch( bool inST )		{ mDontSearch = inST; IncrementChangeCount(); };
-
+	
+	virtual void			SetCursorID( ObjectID inID )	{ mCursorID = inID; IncrementChangeCount(); };
+	virtual ObjectID		GetCursorID()					{ return mCursorID; };
+	
 	virtual void			GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs ) = 0;
 	virtual void			SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs ) = 0;
 	
@@ -138,6 +141,7 @@ protected:
 	TFieldStyle		mFieldStyle;
 	std::vector<CColumnInfo>	mColumns;
 	std::set<size_t>			mSelectedLines;
+	ObjectID		mCursorID;
 };
 
 }

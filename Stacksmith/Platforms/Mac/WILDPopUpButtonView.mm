@@ -23,6 +23,7 @@ using namespace Carlson;
 -(void)	dealloc
 {
 	self->owningPart = NULL;
+	DESTROY_DEALLOC(mCursor);
 
 	[super dealloc];
 }
@@ -31,6 +32,18 @@ using namespace Carlson;
 -(void)	setOwningPart: (CButtonPart*)inPart
 {
 	self->owningPart = inPart;
+	[self reloadCursor];
+}
+
+
+-(void)	reloadCursor
+{
+	ASSIGN( mCursor, [NSCursor arrowCursor] );
+	self->owningPart->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( self->owningPart->GetCursorID(), EMediaTypeCursor, [self]( WILDNSImagePtr theImage, int xHotSpot, int yHotSpot )
+	{
+		DESTROY(mCursor);
+		mCursor = [[NSCursor alloc] initWithImage: theImage hotSpot: NSMakePoint(xHotSpot,yHotSpot)];
+	} );
 }
 
 
@@ -70,21 +83,7 @@ using namespace Carlson;
 
 -(void)	resetCursorRects
 {
-	NSCursor	*	currentCursor = nil;
-	if( !currentCursor )
-	{
-		int			hotSpotLeft = 0, hotSpotTop = 0;
-		std::string	cursorURL = self->owningPart->GetDocument()->GetMediaCache().GetMediaURLByIDOfType( 128, EMediaTypeCursor, &hotSpotLeft, &hotSpotTop );
-		if( cursorURL.length() > 0 )
-		{
-			NSImage	*			cursorImage = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cursorURL.c_str()]]] autorelease];
-			NSCursor *			cursorInstance = [[NSCursor alloc] initWithImage: cursorImage hotSpot: NSMakePoint(hotSpotLeft,hotSpotTop)];
-			currentCursor = cursorInstance;
-		}
-	}
-	if( !currentCursor )
-		currentCursor = [NSCursor arrowCursor];
-	[self addCursorRect: [self bounds] cursor: currentCursor];
+	[self addCursorRect: [self bounds] cursor: (self.owningPart->GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : mCursor];
 }
 
 @end

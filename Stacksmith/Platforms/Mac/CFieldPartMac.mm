@@ -134,7 +134,7 @@ using namespace Carlson;
 				if( iconID == 0 )
 				{
 					iconID = theField->GetDocument()->GetMediaCache().GetMediaIDByNameOfType( [[currCellContent string] UTF8String], EMediaTypeIcon );
-					theField->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( iconID, EMediaTypeIcon, [self,row,colIdx](WILDNSImagePtr inImage)
+					theField->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( iconID, EMediaTypeIcon, [self,row,colIdx](WILDNSImagePtr inImage, int xHotSpot, int yHotSpot)
 					{
 						if( inImage )
 							[self setImage: inImage forRow: row column: colIdx];
@@ -143,7 +143,7 @@ using namespace Carlson;
 				}
 				else
 				{
-					theField->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( iconID, EMediaTypeIcon, [self,row,colIdx](WILDNSImagePtr inImage)
+					theField->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( iconID, EMediaTypeIcon, [self,row,colIdx](WILDNSImagePtr inImage, int xHotSpot, int yHotSpot)
 					{
 						if( inImage )
 							[self setImage: inImage forRow: row column: colIdx];
@@ -442,6 +442,15 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
+
+	[mView setDocumentCursor: [NSCursor arrowCursor]];
+	
+	GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mCursorID, EMediaTypeCursor,
+	[this]( WILDNSImagePtr inImage, int xHotSpot, int yHotSpot )
+	{
+		NSCursor *theCursor = (GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : [[[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(xHotSpot, yHotSpot)] autorelease];
+		[mView setDocumentCursor: theCursor];
+	} );
 }
 
 
@@ -589,6 +598,21 @@ void	CFieldPartMac::SetBevelWidth( int bevel )
 void	CFieldPartMac::SetBevelAngle( int a )
 {
 	CFieldPart::SetBevelAngle( a );
+}
+
+
+void	CFieldPartMac::SetCursorID( ObjectID inID )
+{
+	CFieldPart::SetCursorID( inID );
+	
+	[mView setDocumentCursor: [NSCursor arrowCursor]];
+	
+	GetDocument()->GetMediaCache().GetMediaImageByIDOfType( inID, EMediaTypeCursor,
+	[this]( WILDNSImagePtr inImage, int xHotSpot, int yHotSpot )
+	{
+		NSCursor *theCursor = (GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : [[[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(xHotSpot, yHotSpot)] autorelease];
+		[mView setDocumentCursor: theCursor];
+	} );
 }
 
 

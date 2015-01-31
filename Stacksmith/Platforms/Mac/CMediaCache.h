@@ -49,6 +49,9 @@ typedef enum
 } TMediaType;
 
 
+typedef std::function<void(WILDNSImagePtr inImage, int inHotspotLeft, int inHotspotTop)> CImageGetterCallback;
+
+
 class CMediaEntry
 {
 public:
@@ -82,10 +85,12 @@ protected:
 	TMediaType		mMediaType;
 	int				mHotspotLeft;
 	int				mHotspotTop;
+	bool			mLoading;
 	bool			mIsBuiltIn;
 	size_t			mChangeCount;
 	WILDNSDataPtr	mFileData;
 	WILDNSImagePtr	mImage;
+	std::vector<CImageGetterCallback>	mPendingClients;
 	
 	friend class CMediaCache;
 };
@@ -114,7 +119,7 @@ public:
 	std::string			GetMediaNameByIDOfType( ObjectID inID, TMediaType inType );
 	bool				GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType );
 	std::string			AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot = 0, int yHotSpot = 0, bool isBuiltIn = false );
-	void				GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, std::function<void(WILDNSImagePtr)> completionBlock );
+	void				GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, CImageGetterCallback completionBlock );
 	ObjectID			GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( CMediaEntry& newEntry );	// Gives 0 to indicate identical item already exists, newEntry.GetID() if the ID already is unique.
 	void				AddMediaEntry( const CMediaEntry& inEntry )	{ mMediaList.push_back( inEntry ); };
 	

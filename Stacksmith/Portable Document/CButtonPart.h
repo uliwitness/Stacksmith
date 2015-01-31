@@ -34,7 +34,7 @@ typedef enum
 class CButtonPart : public CVisiblePart
 {
 public:
-	explicit CButtonPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mShowName(true), mHighlight(false), mAutoHighlight(true), mSharedHighlight(false), mHighlightForTracking(false), mTitleWidth(0), mIconID(0), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextStyle(EPartTextStylePlain), mButtonStyle(EButtonStyleStandard) { mName = "New Button"; };
+	explicit CButtonPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mShowName(true), mHighlight(false), mAutoHighlight(true), mSharedHighlight(false), mHighlightForTracking(false), mTitleWidth(0), mIconID(0), mTextAlign(EPartTextAlignDefault), mTextSize(12), mTextStyle(EPartTextStylePlain), mButtonStyle(EButtonStyleStandard), mCursorID(128) { mName = "New Button"; };
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -59,6 +59,9 @@ public:
 	ObjectID				GetIconID()							{ return mIconID; };
 	virtual void			SetIconID( ObjectID inID )			{ mIconID = inID; IncrementChangeCount(); };
 	
+	ObjectID				GetCursorID()						{ return mCursorID; };
+	virtual void			SetCursorID( ObjectID inID )		{ mCursorID = inID; IncrementChangeCount(); };
+	
 	virtual void			PrepareMouseUp();
 	
 protected:
@@ -79,6 +82,7 @@ protected:
 	bool				mHighlightForTracking;
 	int					mTitleWidth;
 	ObjectID			mIconID;
+	ObjectID			mCursorID;
 	TPartTextAlign		mTextAlign;
 	std::string			mFont;
 	int					mTextSize;
