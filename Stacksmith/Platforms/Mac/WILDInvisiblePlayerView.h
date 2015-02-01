@@ -13,8 +13,10 @@
 @interface WILDInvisiblePlayerView : ULIInvisiblePlayerView
 {
 	NSTrackingArea	*	mCursorTrackingArea;
+	NSCursor*			mCursor;
 }
 
-@property (assign) Carlson::CMoviePlayerPart*	owningPart;
+@property (assign,nonatomic) Carlson::CMoviePlayerPart*	owningPart;
+@property (retain,nonatomic) NSCursor*					cursor;
 
 @end

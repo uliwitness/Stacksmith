@@ -19,11 +19,12 @@ using namespace Carlson;
 @implementation WILDInvisiblePlayerView
 
 @synthesize owningPart = owningPart;
-
+@synthesize cursor = mCursor;
 
 -(void)	dealloc
 {
 	DESTROY_DEALLOC(mCursorTrackingArea);
+	DESTROY_DEALLOC(mCursor);
 
 	[super dealloc];
 }
@@ -116,6 +117,23 @@ using namespace Carlson;
 		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseMove" );
 	}
+}
+
+
+-(void)	resetCursorRects
+{
+	[super resetCursorRects];
+	
+	if( mCursor && self.owningPart )
+	{
+		[self addCursorRect: [self bounds] cursor: (self.owningPart->GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : mCursor];
+	}
+}
+
+
+-(void)	setCursor: (NSCursor*)inCursor
+{
+	ASSIGN(mCursor,inCursor);
 }
 
 @end

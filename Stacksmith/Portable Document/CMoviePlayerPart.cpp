@@ -8,6 +8,8 @@
 
 #include "CMoviePlayerPart.h"
 #include "CTinyXMLUtils.h"
+#include "CStack.h"
+#include "CDocument.h"
 #include <CoreMedia/CoreMedia.h>
 
 
@@ -22,6 +24,7 @@ void	CMoviePlayerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inEleme
 	CTinyXMLUtils::GetStringNamed( inElement, "mediaPath", mMediaPath );
 	SetCurrentTime( CTinyXMLUtils::GetLongLongNamed( inElement, "currentTime", 0 ) );
 	mControllerVisible = CTinyXMLUtils::GetBoolNamed( inElement, "controllerVisible", true );
+	mCursorID = CTinyXMLUtils::GetLongLongNamed( inElement, "cursor", 128 );
 }
 
 
@@ -35,8 +38,8 @@ void	CMoviePlayerPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement
 	inElement->InsertEndChild(elem);
 	
 	CTinyXMLUtils::AddLongLongNamed( inElement, GetCurrentTime(), "currentTime" );
-	
 	CTinyXMLUtils::AddBoolNamed( inElement, mControllerVisible, "controllerVisible" );
+	CTinyXMLUtils::AddLongLongNamed( inElement, mCursorID, "cursor");
 }
 
 
@@ -57,6 +60,10 @@ bool	CMoviePlayerPart::GetPropertyNamed( const char* inPropertyName, size_t byte
 	else if( strcasecmp("movie", inPropertyName) == 0 )
 	{
 		LEOInitStringValue( outValue, GetMediaPath().c_str(), GetMediaPath().size(), kLEOInvalidateReferences, inContext );
+	}
+	else if( strcasecmp("cursor", inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, mCursorID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
 	}
 	else
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
@@ -108,6 +115,27 @@ bool	CMoviePlayerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext
 			return true;
 		SetMediaPath( msgStr );
 	}
+	else if( strcasecmp("cursor", inPropertyName) == 0 )
+	{
+		LEOInteger	theIconID = 0;
+		char		strBuf[100] = {0};
+		const char* str = LEOGetValueAsString( inValue, strBuf, sizeof(strBuf), inContext );
+		if( strcasecmp(str, "none") != 0 && str[0] != 0 )
+		{
+			if( LEOCanGetAsNumber( inValue, inContext ) )
+			{
+				LEOUnit		outUnit = kLEOUnitNone;
+				theIconID = LEOGetValueAsInteger( inValue, &outUnit, inContext );
+			}
+			else
+			{
+				theIconID = GetStack()->GetDocument()->GetMediaCache().GetMediaIDByNameOfType( str, EMediaTypeCursor );
+			}
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+				return true;
+		}
+		SetCursorID(theIconID);
+	}
 	else
 		return CVisiblePart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 	return true;
@@ -124,4 +152,5 @@ void	CMoviePlayerPart::DumpProperties( size_t inIndentLevel )
 	printf( "%scurrentTime = %lld\n", indentStr, GetCurrentTime() );
 	printf( "%scontrollerVisible = %s\n", indentStr, (mControllerVisible ? "true" : "false") );
 	printf( "%sstarted = %s\n", indentStr, (mStarted ? "true" : "false") );
+	printf( "%scursor = %lld\n", indentStr, GetCursorID() );
 }

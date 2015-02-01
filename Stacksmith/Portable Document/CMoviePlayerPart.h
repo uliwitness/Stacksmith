@@ -28,6 +28,9 @@ public:
 	std::string				GetMediaPath()								{ return mMediaPath; };
 	virtual void			SetMediaPath( const std::string& inPath )	{ mMediaPath = inPath; IncrementChangeCount(); };
 	
+	virtual void			SetCursorID( ObjectID inID )	{ mCursorID = inID; IncrementChangeCount(); };
+	virtual ObjectID		GetCursorID()					{ return mCursorID; };
+	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
@@ -43,6 +46,7 @@ protected:
 	bool				mControllerVisible;
 	bool				mStarted;
 	LEOInteger			mCurrentTime;
+	ObjectID			mCursorID;
 };
 
 }
