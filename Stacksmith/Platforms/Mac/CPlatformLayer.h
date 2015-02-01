@@ -27,6 +27,12 @@ typedef struct NSImage*								WILDNSImagePtr;
 namespace Carlson
 {
 
+/*!
+	@class CPlatformLayer
+	Mac-specific subclass of CLayer that contains code that we want both
+	kinds of layer, cards and backgrounds, to have.
+*/
+
 class CPlatformLayer : public CLayer, public CMacScriptableObjectBase
 {
 public:

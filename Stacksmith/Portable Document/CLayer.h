@@ -23,6 +23,12 @@ namespace Carlson {
 class CStack;
 
 
+/*!
+	@class CLayer
+	Base class for CBackground and CCard that implements most of the behaviour
+	of those two things that can contain parts (HyperCard terminology for controls & text fields).
+*/
+
 class CLayer : public CConcreteObject
 {
 public:
@@ -32,8 +38,8 @@ public:
 	ObjectID		GetID()	const			{ return mID; };
 	std::string		GetFileName() const		{ return mFileName; };
 	
-	virtual void	Load( std::function<void(CLayer*)> completionBlock );
-	virtual bool	Save( const std::string& inPackagePath );
+	virtual void	Load( std::function<void(CLayer*)> completionBlock );	//!< Load this layer from its XML file, asynchronously. Once successfully done, sets mLoaded.
+	virtual bool	Save( const std::string& inPackagePath );	//!< Save this layer to the given file package (i.e. .xstk folder) as an XML file.
 	
 	bool			IsLoaded()					{ return mLoaded; };
 	virtual void	SetLoaded( bool n )			{ mLoaded = true; };	// For marking a newly created never-before-saved card/bg in RAM as not needing to be loaded.
@@ -67,8 +73,8 @@ public:
 	virtual bool					CanCopySelectedItem();
 	virtual std::vector<CPartRef>	PasteObject( const std::string& inXMLStr );
 
-	virtual void	WakeUp();
-	virtual void	GoToSleep();
+	virtual void	WakeUp();		//!< Actually activate the completely loaded layer because the user is about to use it. All OS-specific UI objects (windows, views) already exist at this point. Use this to e.g. start the insertion point of a text field flashing, or start a movie player that was playing when we quit.
+	virtual void	GoToSleep();	//!< Opposite of WakeUp().
 
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -88,7 +94,7 @@ public:
 	
 	void			AddPartsToList( std::vector<CPartRef>& ioList )	{ ioList.insert( ioList.end(), mParts.begin(), mParts.end() ); };
 	
-	virtual void	Dump( size_t inIndent = 0 );
+	virtual void	Dump( size_t inIndent = 0 );	//!< Print a debug description of this object to the console.
 	
 	virtual bool	ShowHandlersForObjectType( std::string inTypeName )	{ return true; };	// Show all handlers in our popup, we may get them forwarded through the message path.
 	virtual const char*	GetIdentityForDump();	// Called by "Dump" for the name of the class.

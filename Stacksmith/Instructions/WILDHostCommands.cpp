@@ -229,7 +229,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 
 
 /*!
-	Implement the 'visual effect' command. This sets the current card view's
+	Implement the 'visual effect' command. This sets the current context user data's
 	transition effect to the specified visual effect so the next 'go' command can
 	use it.
 	
@@ -247,10 +247,8 @@ void	WILDVisualEffectInstruction( LEOContext* inContext )
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
 	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
-	CStack				*	frontStack = userData->GetStack();
-	CCard				*	currentCard = frontStack->GetCurrentCard();
-    
-    currentCard->SetTransitionTypeAndSpeed( str, EVisualEffectSpeedNormal );
+	
+    userData->SetVisualEffectTypeAndSpeed( str, EVisualEffectSpeedNormal );
 
 	inContext->currentInstruction++;
 }

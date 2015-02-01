@@ -134,6 +134,8 @@ using namespace Carlson;
 -(void)	setCursor: (NSCursor*)inCursor
 {
 	ASSIGN(mCursor,inCursor);
+	
+	[self.window invalidateCursorRectsForView: self];
 }
 
 @end

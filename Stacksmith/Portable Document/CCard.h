@@ -17,20 +17,18 @@ namespace Carlson {
 class CBackground;
 
 
-typedef enum
-{
-    EVisualEffectSpeedVerySlow,
-    EVisualEffectSpeedSlow,
-    EVisualEffectSpeedNormal,
-    EVisualEffectSpeedFast,
-    EVisualEffectSpeedVeryFast
-} TVisualEffectSpeed;
-
+/*!
+	@class CCard
+	This is the class that implements each card. It contains an ordered list of
+	parts (HyperCard terminology for controls like buttons and text fields) and
+	of contents (which contain contents of both the card, and for any background
+	parts that have sharedText turned off). Each card is a member of a background.
+*/
 
 class CCard : public CPlatformLayer
 {
 public:
-	CCard( std::string inURL, ObjectID inID, CBackground* inOwningBackground, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(inOwningBackground), mSpeed(EVisualEffectSpeedNormal)	{};
+	CCard( std::string inURL, ObjectID inID, CBackground* inOwningBackground, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(inOwningBackground)	{};
 	~CCard();
 	
 	bool			IsMarked()					{ return mMarked; };
@@ -38,9 +36,7 @@ public:
 	
 	virtual void	WakeUp();
 	virtual void	GoToSleep();
-	
-	virtual void	SetTransitionTypeAndSpeed( const std::string& inType, TVisualEffectSpeed inSpeed ) {  mTransitionType = inType; mSpeed = inSpeed; };
-	
+		
 	virtual void	SetPeeking( bool inState );
 	
 	virtual CScriptableObject*	GetParentObject();
@@ -67,8 +63,6 @@ protected:
 protected:
 	bool			    mMarked;
 	CBackground	*	    mOwningBackground;
-	std::string		    mTransitionType;
-    TVisualEffectSpeed	mSpeed;
 };
 
 typedef CRefCountedObjectRef<CCard>	CCardRef;

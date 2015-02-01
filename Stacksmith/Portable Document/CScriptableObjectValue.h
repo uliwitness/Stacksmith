@@ -53,15 +53,35 @@ enum
 typedef uint16_t	TOpenInMode;
 
 
+typedef enum
+{
+    EVisualEffectSpeedVerySlow,
+    EVisualEffectSpeedSlow,
+    EVisualEffectSpeedNormal,
+    EVisualEffectSpeedFast,
+    EVisualEffectSpeedVeryFast
+} TVisualEffectSpeed;
+
+
+/*!
+	@class CScriptableObject
+	Base class for all objects that can be referenced from a script.
+	This defines an interface for the basics, like using them as containers,
+	querying and modifying properties, adding/removing user properties,
+	deleting the object, Getting a context to run scripts in,
+	sending messages and passing them up the hierarchy, opening a script editor etc.
+	
+	The bool returns on these methods indicate whether the given object can do
+	what was asked (as in, ever). So if a property doesn't exist, they'd return
+	FALSE. If an object has no contents, the same. Some other calls may return NULL
+	instead of an object for the same reason.
+*/
+
 class CScriptableObject : public CRefCountedObject
 {
 public:
 	virtual ~CScriptableObject() {};
 	
-// The BOOL returns on these methods indicate whether the given object can do
-//	what was asked (as in, ever). So if a property doesn't exist, they'd return
-//	NO. If an object has no contents, the same.
-
 	virtual bool				GetTextContents( std::string& outString )		{ return false; };
 	virtual bool				SetTextContents( const std::string& inString)	{ return false; };
 
@@ -70,10 +90,6 @@ public:
 	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )						{ return false; };
 	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )	{ return false; };
 
-	virtual LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )								{ return NULL; };
-	virtual CScriptableObject*	GetParentObject()								{ return NULL; };
-
-	virtual CStack*				GetStack()			{ return NULL; };
 	virtual bool				DeleteObject()		{ return false; };
 
 	virtual void				OpenScriptEditorAndShowOffset( size_t byteOffset )	{};
@@ -89,11 +105,15 @@ public:
 	virtual bool				SetUserPropertyValueForName( const std::string& inValue, const char* inPropName )	{ return false; };
 	
 	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
-	virtual bool				HasMessageHandler( const char* inMsgName );	// To find whether this object implements the given message (e.g. to not ask the OS for mouseMoved events unless actually implemented).
-	
-	virtual LEOContextGroup*	GetScriptContextGroupObject()				{ return NULL; };
+	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message (e.g. to not ask the OS for mouseMoved events unless actually implemented).
+
+	virtual CStack*				GetStack()										{ return NULL; };
+	virtual CScriptableObject*	GetParentObject()								{ return NULL; };
+	virtual LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )										{ return NULL; };
+	virtual LEOContextGroup*	GetScriptContextGroupObject()					{ return NULL; };
 	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	
+// statics:
 	static void			InitScriptableObjectValue( LEOValueObject* inStorage, CScriptableObject* wildObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	static LEOScript*	GetParentScript( LEOScript* inScript, LEOContext* inContext );
 
@@ -103,6 +123,13 @@ public:
 };
 
 
+/*!
+	@class CScriptContextUserData
+	An instance of these class should be passed as the userData into every
+	LEOCreateContext(). We use it to associate some Stacksmith-specific
+	state with each execution thread (not actually an OS thread, at least yet,
+	but sort of, due to our continuation-like approach to e.g. the "go" command).
+*/
 class CScriptContextUserData
 {
 public:
@@ -114,12 +141,17 @@ public:
 	void				SetTarget( CScriptableObject* target );
 	CScriptableObject*	GetTarget()						{ return mTarget; };
 	CDocument*			GetDocument();
-
+	void				SetVisualEffectTypeAndSpeed( const std::string& inType, TVisualEffectSpeed inSpeed ) { mVisualEffectType = inType; mVisualEffectSpeed = inSpeed; };
+	const std::string&	GetVisualEffectType()	{ return mVisualEffectType; };
+	TVisualEffectSpeed	GetVisualEffectSpeed()	{ return mVisualEffectSpeed; };
+	
 	static void			CleanUp( void* inData );
 	
 protected:
 	CStack				*	mCurrentStack;
 	CScriptableObject	*	mTarget;
+	std::string				mVisualEffectType;
+	TVisualEffectSpeed		mVisualEffectSpeed;
 };
 
 }

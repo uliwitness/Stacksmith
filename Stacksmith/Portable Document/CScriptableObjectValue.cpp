@@ -1119,7 +1119,7 @@ void	CScriptableObject::InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag 
 
 
 CScriptContextUserData::CScriptContextUserData( CStack* currStack, CScriptableObject* target )
-	: mCurrentStack(currStack), mTarget(target)
+	: mCurrentStack(currStack), mTarget(target), mVisualEffectSpeed(EVisualEffectSpeedNormal)
 {
 	if( mCurrentStack )
 		mCurrentStack->Retain();
