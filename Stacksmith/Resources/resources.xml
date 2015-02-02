@@ -76,6 +76,26 @@
 		</hotspot>
 	</media>
 	<media>
+		<id>4</id>
+		<type>cursor</type>
+		<name>watch</name>
+		<file>CURS_4.tiff</file>
+		<hotspot>
+			<left>8</left>
+			<top>8</top>
+		</hotspot>
+	</media>
+	<media>
+		<id>3</id>
+		<type>cursor</type>
+		<name>plus</name>
+		<file>CURS_3.tiff</file>
+		<hotspot>
+			<left>8</left>
+			<top>8</top>
+		</hotspot>
+	</media>
+	<media>
 		<id>128</id>
 		<type>sound</type>
 		<name>Harpsichord</name>

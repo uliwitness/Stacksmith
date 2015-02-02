@@ -246,7 +246,7 @@ void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, CIm
 						currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
 					[currMedia->mImage setName: [NSString stringWithUTF8String: currMedia->GetFileName().c_str()].lastPathComponent];
 					
-					if( inType == EMediaTypeCursor )
+					if( inType == EMediaTypeCursor && currMedia->mImage )
 					{
 						// Generate several pixel representations so we can use PDFs as cursors and they don't get rendered at the smallest pixellated scale:
 						NSImage	*oldImage = currMedia->mImage;
