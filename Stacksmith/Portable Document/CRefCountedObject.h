@@ -15,6 +15,15 @@
 
 namespace Carlson {
 
+/*!
+	Base class for reference-counted objects that stay around until the last
+	owner releases them. After the object's been created, every other owner who
+	wants to keep it around must call Retain() to get shared custody, and Release()
+	when they're OK with it going away. If you need to return an object of this
+	type and don't need to keep it around yourself, use Autorelease() to hand it
+	over to the current CAutoreleasePool, which will release it if nobody retains
+	it by the time it goes out of scope. Or use a CRefCountedObjectRef.
+*/
 class CRefCountedObject
 {
 public:
@@ -35,7 +44,9 @@ protected:
 };
 
 
-// A smart pointer to a CRefCountedObject that retains/releases the object as needed:
+/*!
+	A smart pointer to a CRefCountedObject that retains/releases the object as needed.
+*/
 
 template<class T>
 class CRefCountedObjectRef
@@ -67,6 +78,13 @@ protected:
 	T*	mObject;
 };
 
+
+/*!
+	Stack object that holds on to any CRefCountedObjects that you call Autorelease() on.
+	Whatever object you create last becomes the current pool that autoreleased objects will
+	be attached to, until it goes out of scope, at which point in time the previous pool
+	is made current again.
+*/
 
 class CAutoreleasePool
 {
