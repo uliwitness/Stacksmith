@@ -329,7 +329,13 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	LEODisplayInfoTableApplyToText( displayInfo, mContainer->GetScript().c_str(), mContainer->GetScript().length(), &theText, &theTextLen, &cursorPos, &cursorEndPos );
 	NSString	*	formattedText = [[[NSString alloc] initWithBytesNoCopy: theText length: theTextLen encoding: NSUTF8StringEncoding freeWhenDone: YES] autorelease];
 	[mTextView setString: formattedText];
-	[mTextView setSelectedRange: NSMakeRange(cursorPos,cursorEndPos -cursorPos)];
+	NSRange		newSelRange = NSMakeRange(cursorPos,cursorEndPos -cursorPos);
+	if( (newSelRange.location + newSelRange.length) > formattedText.length )
+	{
+		newSelRange.location = formattedText.length;
+		newSelRange.length = 0;
+	}
+	[mTextView setSelectedRange: newSelRange];
 	
 	[mPopUpButton removeAllItems];
 	const char*	theName = "";
