@@ -29,10 +29,10 @@ class CDocument;
 
 enum EHandlerListEntryType { kHandlerEntryCommand, kHandlerEntryFunction, kHandlerEntryGroupHeader, kHandlerEntry_LAST };
 
-// List entries for our "add handler" popup's entries.
-//	This only includes handlers that make sense for this
-//	object, and may e.g. include user-specified handlers
-//	like a timer's action.
+/*! List entries for our "add handler" popup's entries.
+	This only includes handlers that make sense for this
+	object, and may e.g. include user-specified handlers
+	like a timer's action. */
 struct CAddHandlerListEntry
 {
 	enum EHandlerListEntryType	mType;				// Only mHandlerName is valid, containing the name of the new section.
@@ -43,7 +43,12 @@ struct CAddHandlerListEntry
 	std::string					mTiedToType;			// Part type this handler/section should only be shown for.
 };
 
-
+/*!
+	This is an object that can be addressed from a script (it's a CScriptableObject) but
+	also contains the basic framework needed for an object that can be saved to a project
+	and be read again. Objects of this type have a script and save it to XML, and support
+	creating user-defined properties on them that also get saved.
+*/
 class CConcreteObject : public CScriptableObject
 {
 public:
@@ -80,8 +85,8 @@ public:
 	virtual void		IncrementChangeCount()	{};
 	virtual bool		GetNeedsToBeSaved()		{ return false; };
 	
-	virtual std::string	GetTypeName()							{ return std::string(); };
-	std::vector<CAddHandlerListEntry>	GetAddHandlerList();	// List for an "add handler" popup in script editor.
+	virtual std::string							GetTypeName()			{ return std::string(); };
+	virtual std::vector<CAddHandlerListEntry>	GetAddHandlerList();	// List for an "add handler" popup in script editor.
 	virtual bool		ShowHandlersForObjectType( std::string inTypeName )	{ return GetTypeName().compare(inTypeName) == 0; };
 	
 protected:

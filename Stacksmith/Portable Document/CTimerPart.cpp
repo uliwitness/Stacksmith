@@ -10,6 +10,7 @@
 #include "CTinyXMLUtils.h"
 #include "CStack.h"
 #include "CAlert.h"
+#include <sstream>
 
 
 using namespace Carlson;
@@ -136,6 +137,39 @@ bool	CTimerPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	else
 		return CPart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 	return true;
+}
+
+
+std::vector<CAddHandlerListEntry>	CTimerPart::GetAddHandlerList()
+{
+	std::vector<CAddHandlerListEntry>	handlers = CPart::GetAddHandlerList();
+	
+	if( mMessage.length() == 0 )
+		SetMessage("timerTriggered");
+	
+	LEOContextGroup*	theGroup = GetScriptContextGroupObject();
+	LEOHandlerID timerMessageHandlerID = LEOContextGroupHandlerIDForHandlerName( theGroup, mMessage.c_str() );
+	if( LEOScriptFindCommandHandlerWithID( mScriptObject, timerMessageHandlerID ) == NULL )
+	{
+		CAddHandlerListEntry	currSeparator;
+		currSeparator.mHandlerName = "Timer Messages";
+		currSeparator.mType = kHandlerEntryGroupHeader;
+		handlers.push_back( currSeparator );
+		
+		CAddHandlerListEntry	currHandler;
+		currSeparator.mType = kHandlerEntryCommand;
+		currHandler.mHandlerName = mMessage;
+		currHandler.mHandlerID = timerMessageHandlerID;
+		currHandler.mHandlerDescription = "The message that this timer will periodically send to itself.";
+		
+		std::stringstream	strstr;
+		strstr << "\n\non " << currHandler.mHandlerName << "\n\t\nend " << currHandler.mHandlerName;
+		currHandler.mHandlerTemplate = strstr.str();
+		
+		handlers.push_back( currHandler );
+	}
+	
+	return handlers;
 }
 
 
