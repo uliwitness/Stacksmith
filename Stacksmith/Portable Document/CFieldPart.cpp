@@ -447,7 +447,10 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 		CPartContents*	theContents = NULL;
 		size_t	numStyles = LEOGetKeyCount( inValue, inContext );
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
-			return true;
+		{
+			numStyles = 0;	// Single style is caught below.
+			inContext->flags |= kLEOContextKeepRunning;
+		}
 		CCard	*		currCard = GetStack()->GetCurrentCard();
 		CLayer	*		contentsOwner = (mOwner != currCard && !GetSharedText()) ? currCard : mOwner;
 		theContents = contentsOwner->GetPartContentsByID( GetID(), (mOwner != currCard) );
