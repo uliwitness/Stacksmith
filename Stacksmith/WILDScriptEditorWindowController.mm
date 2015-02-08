@@ -348,7 +348,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		if( theName[0] == ':' )	// Skip any fake internal handlers we add.
 			continue;
 		NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
-		[theItem setImage: [NSImage imageNamed: isCommand ? @"HandlerPopupMessage" : @"HandlerPopupFunction"]];
+		[theItem setImage: [NSImage imageNamed: isCommand ? @"CommandHandlerIcon" : @"FunctionHandlerIcon"]];
 		[theItem setRepresentedObject: @(theLine)];
 	}
 	LEOCleanUpDisplayInfoTable( displayInfo );

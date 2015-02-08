@@ -355,6 +355,8 @@
 		55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */; };
 		55AF101F18B6BFFD00819AE9 /* WILDScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55AF101E18B6BFFD00819AE9 /* WILDScrollView.mm */; };
 		55AF107A18B8F5D600819AE9 /* CRefCountedObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7B118709CAF002F7CB2 /* CRefCountedObject.cpp */; };
+		55B063E61A84369800DE26FB /* CommandHandlerIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B063E41A84369800DE26FB /* CommandHandlerIcon.tiff */; };
+		55B063E71A84369800DE26FB /* FunctionHandlerIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B063E51A84369800DE26FB /* FunctionHandlerIcon.tiff */; };
 		55B07409188612EB0023BA3E /* CStyleSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B07407188612EB0023BA3E /* CStyleSheet.cpp */; };
 		55B0740E1889C6E90023BA3E /* CMessageBoxMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */; };
 		55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B074131889CC0E0023BA3E /* WILDMessageBoxWindowController.xib */; };
@@ -421,8 +423,6 @@
 		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
 		55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC406114C273400BAA09D /* SyntaxDefinition.plist */; };
 		55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */; };
-		55EBC523114C539300BAA09D /* HandlerPopupMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC521114C539300BAA09D /* HandlerPopupMessage.png */; };
-		55EBC524114C539300BAA09D /* HandlerPopupFunction.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC522114C539300BAA09D /* HandlerPopupFunction.png */; };
 		55EBC646114CFAE000BAA09D /* BackgroundIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */; };
 		55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */; };
 		55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC644114CFAE000BAA09D /* CardIconSmall.png */; };
@@ -1011,6 +1011,8 @@
 		55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactory.xib; path = Windows/WILDViewFactory.xib; sourceTree = "<group>"; };
 		55AF101D18B6BFFC00819AE9 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDScrollView.h; path = Platforms/Mac/WILDScrollView.h; sourceTree = "<group>"; };
 		55AF101E18B6BFFD00819AE9 /* WILDScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDScrollView.mm; path = Platforms/Mac/WILDScrollView.mm; sourceTree = "<group>"; };
+		55B063E41A84369800DE26FB /* CommandHandlerIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = CommandHandlerIcon.tiff; path = Resources/CommandHandlerIcon.tiff; sourceTree = "<group>"; };
+		55B063E51A84369800DE26FB /* FunctionHandlerIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = FunctionHandlerIcon.tiff; path = Resources/FunctionHandlerIcon.tiff; sourceTree = "<group>"; };
 		55B07407188612EB0023BA3E /* CStyleSheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CStyleSheet.cpp; path = "Portable Document/CStyleSheet.cpp"; sourceTree = "<group>"; };
 		55B07408188612EB0023BA3E /* CStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CStyleSheet.h; path = "Portable Document/CStyleSheet.h"; sourceTree = "<group>"; };
 		55B0740C1889C6E90023BA3E /* CMessageBoxMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMessageBoxMac.mm; path = Platforms/Mac/CMessageBoxMac.mm; sourceTree = "<group>"; };
@@ -1123,8 +1125,6 @@
 		55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FetchNextLine.m"; path = "../UliKit/NSString+FetchNextLine.m"; sourceTree = SOURCE_ROOT; };
 		55EBC406114C273400BAA09D /* SyntaxDefinition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinition.plist; sourceTree = "<group>"; };
 		55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxColorDefaults.plist; path = ../UKSyntaxColoredTextDocument/SyntaxColorDefaults.plist; sourceTree = SOURCE_ROOT; };
-		55EBC521114C539300BAA09D /* HandlerPopupMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HandlerPopupMessage.png; sourceTree = "<group>"; };
-		55EBC522114C539300BAA09D /* HandlerPopupFunction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HandlerPopupFunction.png; sourceTree = "<group>"; };
 		55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundIconSmall.png; sourceTree = "<group>"; };
 		55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonIconSmall.png; sourceTree = "<group>"; };
 		55EBC644114CFAE000BAA09D /* CardIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CardIconSmall.png; sourceTree = "<group>"; };
@@ -1253,8 +1253,6 @@
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
 				5589DD771378B16400B0F6CF /* TransitionMappings.plist */,
-				55EBC521114C539300BAA09D /* HandlerPopupMessage.png */,
-				55EBC522114C539300BAA09D /* HandlerPopupFunction.png */,
 				55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */,
 				55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */,
 				55EBC644114CFAE000BAA09D /* CardIconSmall.png */,
@@ -1269,6 +1267,8 @@
 				55ADC5071744525F0084AAA9 /* CardIcon.icns */,
 				55ADC5081744525F0084AAA9 /* StackIcon.icns */,
 				55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */,
+				55B063E41A84369800DE26FB /* CommandHandlerIcon.tiff */,
+				55B063E51A84369800DE26FB /* FunctionHandlerIcon.tiff */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
 				559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */,
@@ -2179,6 +2179,7 @@
 				552FF205113F23F3005742C8 /* PAT_11.pbm in Resources */,
 				552FF206113F23F3005742C8 /* PAT_12.pbm in Resources */,
 				552FF207113F23F3005742C8 /* PAT_13.pbm in Resources */,
+				55B063E71A84369800DE26FB /* FunctionHandlerIcon.tiff in Resources */,
 				55405BD318A59D06001D3C99 /* WILDFieldInfoViewController.xib in Resources */,
 				552FF208113F23F3005742C8 /* PAT_14.pbm in Resources */,
 				552FF209113F23F3005742C8 /* PAT_15.pbm in Resources */,
@@ -2213,9 +2214,7 @@
 				552FF22E113F23F3005742C8 /* resources.xml in Resources */,
 				55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */,
 				55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */,
-				55EBC523114C539300BAA09D /* HandlerPopupMessage.png in Resources */,
 				559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */,
-				55EBC524114C539300BAA09D /* HandlerPopupFunction.png in Resources */,
 				55EBC646114CFAE000BAA09D /* BackgroundIconSmall.png in Resources */,
 				55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */,
 				55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */,
@@ -2238,6 +2237,7 @@
 				55F34D3D136A554500E8588D /* ICON_31885.pdf in Resources */,
 				55F34D3F136A555300E8588D /* ICON_1000.pdf in Resources */,
 				55039F43136B52C80082E32E /* brush01.png in Resources */,
+				55B063E61A84369800DE26FB /* CommandHandlerIcon.tiff in Resources */,
 				55039F44136B52C80082E32E /* brush02.png in Resources */,
 				55039F45136B52C80082E32E /* brush03.png in Resources */,
 				55039F46136B52C80082E32E /* brush04.png in Resources */,
