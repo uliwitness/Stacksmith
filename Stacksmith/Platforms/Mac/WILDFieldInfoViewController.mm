@@ -7,7 +7,7 @@
 //
 
 #import "WILDFieldInfoViewController.h"
-#import "WILDIconPickerViewController.h"
+#import "WILDMediaPickerViewController.h"
 #import "UKHelperMacros.h"
 #import "CFieldPart.h"
 

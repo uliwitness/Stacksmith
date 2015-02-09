@@ -7,7 +7,7 @@
 //
 
 #import "WILDButtonInfoViewController.h"
-#import "WILDIconPickerViewController.h"
+#import "WILDMediaPickerViewController.h"
 #import "CButtonPartMac.h"
 #import "UKHelperMacros.h"
 
@@ -114,7 +114,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mIconPopover close];
 	DESTROY(mIconPopover);
 	
-	WILDIconPickerViewController	*	iconPickerViewController = [[[WILDIconPickerViewController alloc] initWithPart: (CButtonPart*)part] autorelease];
+	WILDMediaPickerViewController	*	iconPickerViewController = [[[WILDMediaPickerViewController alloc] initWithPart: (CButtonPart*)part] autorelease];
 	
 	mIconPopover = [[NSPopover alloc] init];
 	[mIconPopover setDelegate: self];

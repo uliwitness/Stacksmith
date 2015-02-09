@@ -1,12 +1,12 @@
 //
-//  WILDIconListDataSource.m
+//  WILDMediaListDataSource.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 05.04.10.
 //  Copyright 2010 Apple Inc. All rights reserved.
 //
 
-#import "WILDIconListDataSource.h"
+#import "WILDMediaListDataSource.h"
 #import "CStack.h"
 #import "CDocument.h"
 #import <Quartz/Quartz.h>
@@ -22,14 +22,14 @@ using namespace Carlson;
 	NSString*					mFileName;
 	BOOL						mIsBuiltIn;
 	ObjectID					mID;
-	WILDIconListDataSource*		mOwner;
+	WILDMediaListDataSource*	mOwner;
 }
 
 @property (retain) NSImage*							image;
 @property (retain) NSString*						name;
 @property (retain) NSString*						filename;
 @property (assign) ObjectID							pictureID;
-@property (assign) WILDIconListDataSource*			owner;
+@property (assign) WILDMediaListDataSource*			owner;
 @property (assign) BOOL								isBuiltIn;
 
 @end
@@ -71,7 +71,7 @@ using namespace Carlson;
 {
 	if( !mImage )
 	{
-		std::string	imagePath = [mOwner document]->GetMediaCache().GetMediaURLByIDOfType( mID, EMediaTypeIcon );
+		std::string	imagePath = [mOwner document]->GetMediaCache().GetMediaURLByIDOfType( mID, mOwner.mediaType );
 		if( imagePath.size() != 0 )
 			mImage = [[NSImage alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithUTF8String: imagePath.c_str()]]];
 	}
@@ -87,18 +87,19 @@ using namespace Carlson;
 @end
 
 
-@implementation WILDIconListDataSource
+@implementation WILDMediaListDataSource
 
 @synthesize document = mDocument;
 @synthesize iconListView = mIconListView;
 @synthesize imagePathField = mImagePathField;
 @synthesize delegate = mDelegate;
+@synthesize mediaType = mMediaType;
 
--(id)	initWithDocument: (CDocument*)inDocument
+-(id)	init
 {
 	if(( self = [super init] ))
 	{
-		mDocument = inDocument;
+		mMediaType = EMediaTypeIcon;
 	}
 	
 	return self;
@@ -137,14 +138,25 @@ using namespace Carlson;
 		mIcons = [[NSMutableArray alloc] init];
 
 		WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
-		sibi.name = @"No Icon";
+		if( mMediaType == EMediaTypeIcon )
+			sibi.name = @"No Icon";
+		else if( mMediaType == EMediaTypePicture )
+			sibi.name = @"No Picture";
+		else if( mMediaType == EMediaTypeCursor )
+			sibi.name = @"Default Cursor";
+		else if( mMediaType == EMediaTypeSound )
+			sibi.name = @"No Sound";
+		else if( mMediaType == EMediaTypeMovie )
+			sibi.name = @"No Movie";
+		else if( mMediaType == EMediaTypePattern )
+			sibi.name = @"No Pattern";
 		sibi.filename = nil;
 		sibi.pictureID = 0;
 		sibi.image = [NSImage imageNamed: @"NoIcon"];
 		sibi.owner = self;
 		[mIcons addObject: sibi];
 
-		NSInteger	x = 0, count = mDocument->GetMediaCache().GetNumMediaOfType( EMediaTypeIcon );
+		NSInteger	x = 0, count = mDocument->GetMediaCache().GetNumMediaOfType( mMediaType );
 		for( x = 0; x < count; x++ )
 		{
 			NSString*		theName = nil;
@@ -152,17 +164,17 @@ using namespace Carlson;
 			NSString*		fileName = nil;
 			BOOL			isBuiltIn = NO;
 			sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
+			sibi.owner = self;
 			
-			theID = mDocument->GetMediaCache().GetIDOfMediaOfTypeAtIndex( EMediaTypeIcon, x );
-			theName = [NSString stringWithUTF8String: mDocument->GetMediaCache().GetMediaNameByIDOfType( theID, EMediaTypeIcon ).c_str()];
-			fileName = [NSString stringWithUTF8String: mDocument->GetMediaCache().GetMediaURLByIDOfType( theID, EMediaTypeIcon ).c_str()];
-			isBuiltIn = mDocument->GetMediaCache().GetMediaIsBuiltInByIDOfType( theID, EMediaTypeIcon );
+			theID = mDocument->GetMediaCache().GetIDOfMediaOfTypeAtIndex( mMediaType, x );
+			theName = [NSString stringWithUTF8String: mDocument->GetMediaCache().GetMediaNameByIDOfType( theID, mMediaType ).c_str()];
+			fileName = [NSString stringWithUTF8String: mDocument->GetMediaCache().GetMediaURLByIDOfType( theID, mMediaType ).c_str()];
+			isBuiltIn = mDocument->GetMediaCache().GetMediaIsBuiltInByIDOfType( theID, mMediaType );
 			
 			sibi.name = theName;
 			sibi.filename = fileName;
 			sibi.pictureID = theID;
 			sibi.isBuiltIn = isBuiltIn;
-			sibi.owner = self;
 			
 			[mIcons addObject: sibi];
 		}
@@ -243,7 +255,7 @@ using namespace Carlson;
 		NSString*	pictureName = @"From Clipboard";
 		ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 		
-		std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], "png" );
+		std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, mMediaType, [pictureName UTF8String], "png" );
 		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 		
@@ -308,7 +320,7 @@ using namespace Carlson;
 			NSString*		pictureName = [[NSFileManager defaultManager] displayNameAtPath: [theImgFile path]];
 			ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 			
-			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], "png" );
+			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, mMediaType, [pictureName UTF8String], "png" );
 			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 			
@@ -336,7 +348,7 @@ using namespace Carlson;
 			NSString*		pictureName = @"Dropped Image";
 			ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 			
-			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], "png" );
+			std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, mMediaType, [pictureName UTF8String], "png" );
 			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 			

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11A511</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<int key="IBDocument.SystemTarget">1080</int>
+		<string key="IBDocument.SystemVersion">14C109</string>
+		<string key="IBDocument.InterfaceBuilderVersion">6249</string>
+		<string key="IBDocument.AppKitVersion">1344.72</string>
+		<string key="IBDocument.HIToolboxVersion">757.30</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="com.apple.InterfaceBuilder.CocoaPlugin">1617</string>
-			<string key="com.apple.imagekit.ibplugin">518</string>
+			<string key="com.apple.InterfaceBuilder.CocoaPlugin">6249</string>
+			<string key="com.apple.imagekit.ibplugin">6249</string>
 		</dictionary>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSTextField</string>
-			<string>NSCustomObject</string>
-			<string>NSScrollView</string>
-			<string>NSCustomView</string>
 			<string>IKImageBrowserView</string>
+			<string>NSCustomObject</string>
+			<string>NSCustomView</string>
+			<string>NSScrollView</string>
 			<string>NSScroller</string>
+			<string>NSTextField</string>
 			<string>NSTextFieldCell</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -26,7 +26,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<object class="NSCustomObject" id="1001">
-				<string key="NSClassName">WILDIconPickerViewController</string>
+				<string key="NSClassName">WILDMediaPickerViewController</string>
 			</object>
 			<object class="NSCustomObject" id="1003">
 				<string key="NSClassName">FirstResponder</string>
@@ -47,11 +47,11 @@
 						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="303570434">
-							<int key="NSCellFlags">68288064</int>
+							<int key="NSCellFlags">68157504</int>
 							<int key="NSCellFlags2">71435264</int>
 							<string key="NSContents">Built-in</string>
 							<object class="NSFont" key="NSSupport">
-								<string key="NSName">LucidaGrande</string>
+								<bool key="IBIsSystemFont">YES</bool>
 								<double key="NSSize">11</double>
 								<int key="NSfFlags">3100</int>
 							</object>
@@ -75,6 +75,8 @@
 								</object>
 							</object>
 						</object>
+						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSScrollView" id="622428409">
 						<reference key="NSNextResponder" ref="1005"/>
@@ -82,7 +84,7 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="NSClipView" id="127428153">
 								<reference key="NSNextResponder" ref="622428409"/>
-								<int key="NSvFlags">2304</int>
+								<int key="NSvFlags">2322</int>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="IKImageBrowserView" id="708444254">
 										<reference key="NSNextResponder" ref="127428153"/>
@@ -137,12 +139,14 @@
 											<string>NSTypedFilenamesPboardType:ICNS</string>
 											<string>NSTypedFilenamesPboardType:ICO</string>
 											<string>NSTypedFilenamesPboardType:JFAX</string>
+											<string>NSTypedFilenamesPboardType:JFIF</string>
 											<string>NSTypedFilenamesPboardType:JFX</string>
 											<string>NSTypedFilenamesPboardType:JP2</string>
 											<string>NSTypedFilenamesPboardType:JPE</string>
 											<string>NSTypedFilenamesPboardType:JPEG</string>
 											<string>NSTypedFilenamesPboardType:JPF</string>
 											<string>NSTypedFilenamesPboardType:JPG</string>
+											<string>NSTypedFilenamesPboardType:JPS</string>
 											<string>NSTypedFilenamesPboardType:MAC</string>
 											<string>NSTypedFilenamesPboardType:MOS</string>
 											<string>NSTypedFilenamesPboardType:MPO</string>
@@ -150,21 +154,29 @@
 											<string>NSTypedFilenamesPboardType:NEF</string>
 											<string>NSTypedFilenamesPboardType:NRW</string>
 											<string>NSTypedFilenamesPboardType:ORF</string>
+											<string>NSTypedFilenamesPboardType:PBM</string>
 											<string>NSTypedFilenamesPboardType:PCT</string>
 											<string>NSTypedFilenamesPboardType:PDF</string>
 											<string>NSTypedFilenamesPboardType:PEF</string>
+											<string>NSTypedFilenamesPboardType:PFM</string>
+											<string>NSTypedFilenamesPboardType:PGM</string>
 											<string>NSTypedFilenamesPboardType:PIC</string>
 											<string>NSTypedFilenamesPboardType:PICT</string>
 											<string>NSTypedFilenamesPboardType:PNG</string>
 											<string>NSTypedFilenamesPboardType:PNT</string>
 											<string>NSTypedFilenamesPboardType:PNTG</string>
+											<string>NSTypedFilenamesPboardType:PPM</string>
 											<string>NSTypedFilenamesPboardType:PS</string>
+											<string>NSTypedFilenamesPboardType:PSB</string>
 											<string>NSTypedFilenamesPboardType:PSD</string>
+											<string>NSTypedFilenamesPboardType:PVR</string>
 											<string>NSTypedFilenamesPboardType:QTI</string>
 											<string>NSTypedFilenamesPboardType:QTIF</string>
 											<string>NSTypedFilenamesPboardType:RAF</string>
 											<string>NSTypedFilenamesPboardType:RAW</string>
 											<string>NSTypedFilenamesPboardType:RGB</string>
+											<string>NSTypedFilenamesPboardType:RJPEG</string>
+											<string>NSTypedFilenamesPboardType:RJPG</string>
 											<string>NSTypedFilenamesPboardType:RW2</string>
 											<string>NSTypedFilenamesPboardType:RWL</string>
 											<string>NSTypedFilenamesPboardType:SGI</string>
@@ -200,12 +212,14 @@
 											<string>NSTypedFilenamesPboardType:icns</string>
 											<string>NSTypedFilenamesPboardType:ico</string>
 											<string>NSTypedFilenamesPboardType:jfax</string>
+											<string>NSTypedFilenamesPboardType:jfif</string>
 											<string>NSTypedFilenamesPboardType:jfx</string>
 											<string>NSTypedFilenamesPboardType:jp2</string>
 											<string>NSTypedFilenamesPboardType:jpe</string>
 											<string>NSTypedFilenamesPboardType:jpeg</string>
 											<string>NSTypedFilenamesPboardType:jpf</string>
 											<string>NSTypedFilenamesPboardType:jpg</string>
+											<string>NSTypedFilenamesPboardType:jps</string>
 											<string>NSTypedFilenamesPboardType:mac</string>
 											<string>NSTypedFilenamesPboardType:mos</string>
 											<string>NSTypedFilenamesPboardType:mpo</string>
@@ -213,21 +227,29 @@
 											<string>NSTypedFilenamesPboardType:nef</string>
 											<string>NSTypedFilenamesPboardType:nrw</string>
 											<string>NSTypedFilenamesPboardType:orf</string>
+											<string>NSTypedFilenamesPboardType:pbm</string>
 											<string>NSTypedFilenamesPboardType:pct</string>
 											<string>NSTypedFilenamesPboardType:pdf</string>
 											<string>NSTypedFilenamesPboardType:pef</string>
+											<string>NSTypedFilenamesPboardType:pfm</string>
+											<string>NSTypedFilenamesPboardType:pgm</string>
 											<string>NSTypedFilenamesPboardType:pic</string>
 											<string>NSTypedFilenamesPboardType:pict</string>
 											<string>NSTypedFilenamesPboardType:png</string>
 											<string>NSTypedFilenamesPboardType:pnt</string>
 											<string>NSTypedFilenamesPboardType:pntg</string>
+											<string>NSTypedFilenamesPboardType:ppm</string>
 											<string>NSTypedFilenamesPboardType:ps</string>
+											<string>NSTypedFilenamesPboardType:psb</string>
 											<string>NSTypedFilenamesPboardType:psd</string>
+											<string>NSTypedFilenamesPboardType:pvr</string>
 											<string>NSTypedFilenamesPboardType:qti</string>
 											<string>NSTypedFilenamesPboardType:qtif</string>
 											<string>NSTypedFilenamesPboardType:raf</string>
 											<string>NSTypedFilenamesPboardType:raw</string>
 											<string>NSTypedFilenamesPboardType:rgb</string>
+											<string>NSTypedFilenamesPboardType:rjpeg</string>
+											<string>NSTypedFilenamesPboardType:rjpg</string>
 											<string>NSTypedFilenamesPboardType:rw2</string>
 											<string>NSTypedFilenamesPboardType:rwl</string>
 											<string>NSTypedFilenamesPboardType:sgi</string>
@@ -269,6 +291,7 @@
 								<reference key="NSDocView" ref="708444254"/>
 								<reference key="NSBGColor" ref="768536242"/>
 								<int key="NScvFlags">6</int>
+								<bool key="NSAutomaticallyAdjustsContentInsets">YES</bool>
 							</object>
 							<object class="NSScroller" id="304103512">
 								<reference key="NSNextResponder" ref="622428409"/>
@@ -277,6 +300,9 @@
 								<reference key="NSSuperview" ref="622428409"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="780447866"/>
+								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+								<string key="NSControlAction">_doScroller:</string>
+								<reference key="NSControlTarget" ref="622428409"/>
 								<reference key="NSTarget" ref="622428409"/>
 								<string key="NSAction">_doScroller:</string>
 								<double key="NSCurValue">1</double>
@@ -289,6 +315,9 @@
 								<reference key="NSSuperview" ref="622428409"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="127428153"/>
+								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+								<string key="NSControlAction">_doScroller:</string>
+								<reference key="NSControlTarget" ref="622428409"/>
 								<int key="NSsFlags">1</int>
 								<reference key="NSTarget" ref="622428409"/>
 								<string key="NSAction">_doScroller:</string>
@@ -304,6 +333,9 @@
 						<reference key="NSHScroller" ref="476956889"/>
 						<reference key="NSContentView" ref="127428153"/>
 						<bytes key="NSScrollAmts">QSAAAEEgAABDCMAAQwwAAA</bytes>
+						<double key="NSMinMagnification">0.25</double>
+						<double key="NSMaxMagnification">4</double>
+						<double key="NSMagnification">1</double>
 					</object>
 				</array>
 				<string key="NSFrameSize">{414, 328}</string>
@@ -313,11 +345,11 @@
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSCustomObject" id="150198421">
-				<string key="NSClassName">WILDIconListDataSource</string>
+				<string key="NSClassName">WILDMediaListDataSource</string>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<array class="NSMutableArray" key="connectionRecords">
+			<array key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
@@ -328,19 +360,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">iconListView</string>
-						<reference key="source" ref="150198421"/>
-						<reference key="destination" ref="708444254"/>
+						<string key="label">iconListDataSource</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="150198421"/>
 					</object>
-					<int key="connectionID">10</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">imagePathField</string>
-						<reference key="source" ref="150198421"/>
-						<reference key="destination" ref="780447866"/>
-					</object>
-					<int key="connectionID">11</int>
+					<int key="connectionID">15</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -368,11 +392,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">iconListDataSource</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="150198421"/>
+						<string key="label">iconListView</string>
+						<reference key="source" ref="150198421"/>
+						<reference key="destination" ref="708444254"/>
 					</object>
-					<int key="connectionID">15</int>
+					<int key="connectionID">10</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">imagePathField</string>
+						<reference key="source" ref="150198421"/>
+						<reference key="destination" ref="780447866"/>
+					</object>
+					<int key="connectionID">11</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -477,7 +509,69 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
+					<string key="className">WILDMediaListDataSource</string>
+					<string key="superclassName">NSObject</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="iconListView">IKImageBrowserView</string>
+						<string key="imagePathField">NSTextField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="iconListView">
+							<string key="name">iconListView</string>
+							<string key="candidateClassName">IKImageBrowserView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imagePathField">
+							<string key="name">imagePathField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../Platforms/Mac/WILDMediaListDataSource.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">WILDMediaListDataSource</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">paste:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">paste:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">paste:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../Platforms/Mac/WILDMediaListDataSource.mm</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">WILDMediaPickerViewController</string>
+					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">iconListDataSource</string>
+						<string key="NS.object.0">WILDMediaListDataSource</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">iconListDataSource</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">iconListDataSource</string>
+							<string key="candidateClassName">WILDMediaListDataSource</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../Platforms/Mac/WILDMediaPickerViewController.h</string>
+					</object>
+				</object>
+			</array>
+			<array class="NSMutableArray" key="referencedPartialClassDescriptionsV3.2+">
+				<object class="IBPartialClassDescription">
 					<string key="className">IKImageBrowserView</string>
+					<string key="superclassName">NSView</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="_dataSource">id</string>
 						<string key="_delegate">id</string>
@@ -508,55 +602,19 @@
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/IKImageBrowserView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">WILDIconListDataSource</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="iconListView">IKImageBrowserView</string>
-						<string key="imagePathField">NSTextField</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="iconListView">
-							<string key="name">iconListView</string>
-							<string key="candidateClassName">IKImageBrowserView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="imagePathField">
-							<string key="name">imagePathField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/WILDIconListDataSource.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">WILDIconPickerViewController</string>
-					<string key="superclassName">NSViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">iconListDataSource</string>
-						<string key="NS.object.0">WILDIconListDataSource</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">iconListDataSource</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">iconListDataSource</string>
-							<string key="candidateClassName">WILDIconListDataSource</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/WILDIconPickerViewController.h</string>
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">Quartz.framework/Frameworks/ImageKit.framework/Headers/IKImageBrowserView.h</string>
 					</object>
 				</object>
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">NO</bool>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
+			<integer value="4600" key="NS.object.0"/>
+		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 	</data>

@@ -1,12 +1,12 @@
 //
-//  WILDIconPickerViewController.m
+//  WILDMediaPickerViewController.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 01.08.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#import "WILDIconPickerViewController.h"
+#import "WILDMediaPickerViewController.h"
 #import "CButtonPart.h"
 #import "CStack.h"
 
@@ -14,7 +14,7 @@
 using namespace Carlson;
 
 
-@implementation WILDIconPickerViewController
+@implementation WILDMediaPickerViewController
 
 @synthesize iconListDataSource;
 
@@ -40,7 +40,19 @@ using namespace Carlson;
 }
 
 
--(void)	iconListDataSourceSelectionDidChange:(WILDIconListDataSource *)inSender
+-(void)	setMediaType: (TMediaType)inType
+{
+	[iconListDataSource setMediaType: inType];
+}
+
+
+-(TMediaType)	mediaType
+{
+	return [iconListDataSource mediaType];
+}
+
+
+-(void)	iconListDataSourceSelectionDidChange:(WILDMediaListDataSource *)inSender
 {
 	part->SetIconID( [iconListDataSource selectedIconID] );
 }
