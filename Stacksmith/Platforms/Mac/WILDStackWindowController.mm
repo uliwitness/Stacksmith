@@ -597,11 +597,11 @@ using namespace Carlson;
 		[NSColor.blueColor set];
 		if( horzNotVert )
 		{
-			[NSBezierPath strokeLineFromPoint: NSMakePoint(0,cardSize.height -coord) toPoint: NSMakePoint(cardSize.width,cardSize.height -coord)];
+			[NSBezierPath strokeLineFromPoint: NSMakePoint(0,cardSize.height -coord +0.5) toPoint: NSMakePoint(cardSize.width,cardSize.height -coord +0.5)];
 		}
 		else
 		{
-			[NSBezierPath strokeLineFromPoint: NSMakePoint(coord,0) toPoint: NSMakePoint(coord,cardSize.height)];
+			[NSBezierPath strokeLineFromPoint: NSMakePoint(coord +0.5,0) toPoint: NSMakePoint(coord +0.5,cardSize.height)];
 		}
 	}
 	
