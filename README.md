@@ -17,7 +17,7 @@ then just build the Stacksmith Xcode project. If you want to contribute, note th
 Debugging Hammer code
 ---------------------
 
-Stacksmith's scripting language (its analog to HyperTalk) is called Hammer. There is a source-level debugger for it in the ForgeDebugger project. To use it, *first* start ForgeDebugger, *then* Stacksmith. Then put a "debug checkpoint" command on the line of your script where you want to start debugging. Stacksmith will connect to the separate ForgeDebugger application and display script text and bytecode in it, as well as local variables and the call stack, and even the stack where temporary variables live.
+Stacksmith's scripting language (its analog to HyperTalk) is called Hammer. There is a source-level debugger for it in the ForgeDebugger project. To use it, simply click to the left of a line of your script where you want to start debugging. Stacksmith will launch and connect to the separate ForgeDebugger application and display script text and bytecode in it, as well as local variables and the call stack, and even the stack where temporary variables live. Should this not work, you can also try launching the debugger application manually, and inserting a "debug checkpoint" command in your script.
 
 
 What is what
