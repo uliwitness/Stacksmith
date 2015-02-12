@@ -271,6 +271,30 @@ bool	CVisiblePart::GetPropertyNamed( const char* inPropertyName, size_t byteRang
 	{
 		LEOInitNumberValue( outValue, mShadowBlurRadius, kLEOUnitNone, kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("pinning", inPropertyName) == 0 )
+	{
+		struct LEOArrayEntry *theArray = NULL;
+		
+		if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignLeft )
+			LEOAddStringConstantArrayEntryToRoot( &theArray, "1", "left", inContext );
+		else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHBoth )
+			LEOAddStringConstantArrayEntryToRoot( &theArray, "1", "stretchHorizontally", inContext );
+		else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
+			LEOAddStringConstantArrayEntryToRoot( &theArray, "1", "centerHorizontally", inContext );
+		else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+			LEOAddStringConstantArrayEntryToRoot( &theArray, "1", "right", inContext );
+		
+		if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignTop )
+			LEOAddStringConstantArrayEntryToRoot( &theArray, "2", "top", inContext );
+		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHBoth )
+			LEOAddStringConstantArrayEntryToRoot( &theArray, "2", "stretchVertically", inContext );
+		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
+			LEOAddStringConstantArrayEntryToRoot( &theArray, "2", "centerVertically", inContext );
+		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
+			LEOAddStringConstantArrayEntryToRoot( &theArray, "2", "bottom", inContext );
+		
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
+	}
 	else
 		return CPart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 	return true;
@@ -408,6 +432,40 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetShadowBlurRadius( lineWidth );
+	}
+	else if( strcasecmp("pinning", inPropertyName) == 0 )
+	{
+		TPartLayoutFlags	plf = 0;
+		union LEOValue		tmp = {{0}};
+		const char*			keys[3] = { "1", "2", NULL };
+		
+		const char**		currKey = keys;
+		while( (*currKey) != NULL )
+		{
+			LEOValuePtr	theValue = LEOGetValueForKey( inValue, *currKey, &tmp, kLEOInvalidateReferences, inContext );
+			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+				return false;
+			char				strBuf[20] = {0};
+			const char* str = LEOGetValueAsString( theValue, strBuf, sizeof(strBuf), inContext );
+			if( strcasecmp(str, "left") == 0 )
+				plf |= EPartLayoutAlignLeft;
+			else if( strcasecmp(str, "stretchHorizontally") == 0 )
+				plf |= EPartLayoutAlignHBoth;
+			else if( strcasecmp(str, "centerHorizontally") == 0 )
+				plf |= EPartLayoutAlignHCenter;
+			else if( strcasecmp(str, "right") == 0 )
+				plf |= EPartLayoutAlignRight;
+			else if( strcasecmp(str, "top") == 0 )
+				plf |= EPartLayoutAlignTop;
+			else if( strcasecmp(str, "stretchVertically") == 0 )
+				plf |= EPartLayoutAlignVBoth;
+			else if( strcasecmp(str, "centerVertically") == 0 )
+				plf |= EPartLayoutAlignVCenter;
+			else if( strcasecmp(str, "bottom") == 0 )
+				plf |= EPartLayoutAlignBottom;
+			currKey++;
+		}
+		SetPartLayoutFlags( plf );
 	}
 	else
 		return CPart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
