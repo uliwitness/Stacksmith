@@ -39,7 +39,9 @@ public:
 	virtual void	SetToolTip( const std::string& inToolTip )	{ CWebBrowserPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
 	virtual NSView*	GetView();
 	virtual Class	GetPropertyEditorClass()	{ return [WILDWebBrowserInfoViewController class]; };
-
+	
+	virtual void	SetPartLayoutFlags( TPartLayoutFlags inFlags );
+	
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };
 	virtual void		OpenContentsEditor()	{ CMacPartBase::OpenContentsEditor(); };

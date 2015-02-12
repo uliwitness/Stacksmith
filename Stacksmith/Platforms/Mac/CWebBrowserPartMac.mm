@@ -60,6 +60,7 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 		mMacDelegate.owningBrowser = this;
 	}
 	mView = [[WebView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 	[mView setFrameLoadDelegate: mMacDelegate];
 	[mView setWantsLayer: YES];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
@@ -104,6 +105,14 @@ void	CWebBrowserPartMac::LoadCurrentURL( const std::string& inURL )
 NSView*	CWebBrowserPartMac::GetView()
 {
 	return mView;
+}
+
+
+void	CWebBrowserPartMac::SetPartLayoutFlags( TPartLayoutFlags inFlags )
+{
+	CWebBrowserPart::SetPartLayoutFlags( inFlags );
+	
+	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 }
 
 
