@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="contentsEditorButton" destination="145" id="148"/>
                 <outlet property="controllerVisibleSwitch" destination="SGE-wM-0Wo" id="xv7-fO-T9Z"/>
-                <outlet property="doToggleControllerVisible" destination="SGE-wM-0Wo" id="59g-I4-ZVc"/>
                 <outlet property="enabledSwitch" destination="9" id="32"/>
                 <outlet property="fillColorWell" destination="119" id="140"/>
                 <outlet property="idField" destination="6" id="29"/>
@@ -131,7 +130,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="doToggleControllerVisibleSwitch:" target="-2" id="J1g-3J-hBv"/>
+                                            <action selector="doToggleControllerVisibleSwitch:" target="-2" id="myc-Pq-5MV"/>
                                         </connections>
                                     </button>
                                     <button id="adR-aW-2HU">

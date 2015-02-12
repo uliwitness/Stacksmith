@@ -114,6 +114,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 		[mView setBordered: NO];
 	}
 	[mView setFrame: box];
+	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
 	[mView.layer setShadowRadius: mShadowBlurRadius];
@@ -159,6 +160,14 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	[mView setEnabled: mEnabled];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
+}
+
+
+void	CButtonPartMac::SetPartLayoutFlags( TPartLayoutFlags inFlags )
+{
+	CButtonPart::SetPartLayoutFlags( inFlags );
+	
+	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 }
 
 

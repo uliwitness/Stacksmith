@@ -383,6 +383,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTextView setDrawsBackground: NO];
 		[mTextView setBackgroundColor: [NSColor clearColor]];
 	}
+	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 	[mView setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
 	[mView setHasHorizontalScroller: mHasHorizontalScroller != false];
 	[mView setHasVerticalScroller: mHasVerticalScroller != false];
@@ -1116,6 +1117,14 @@ void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, 
 NSView*	CFieldPartMac::GetView()
 {
 	return mView;
+}
+
+
+void	CFieldPartMac::SetPartLayoutFlags( TPartLayoutFlags inFlags )
+{
+	CFieldPart::SetPartLayoutFlags( inFlags );
+	
+	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 }
 
 

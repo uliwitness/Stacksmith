@@ -18,6 +18,7 @@
 #import "WILDPartInfoViewController.h"
 #import <Cocoa/Cocoa.h>
 #include "CMacScriptableObjectBase.h"
+#include "CVisiblePart.h"
 
 
 @class WILDScriptEditorWindowController;
@@ -49,6 +50,7 @@ public:
 	
 protected:
 	virtual ~CMacPartBase() { [mScriptEditor release]; mScriptEditor = nil; [mContentsEditor release]; mContentsEditor = nil; };
+	NSAutoresizingMaskOptions	GetCocoaResizeFlags( TPartLayoutFlags inFlags );
 	
 	WILDScriptEditorWindowController*	mScriptEditor;
 	WILDContentsEditorWindowController*	mContentsEditor;

@@ -90,6 +90,7 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	mView.owningPart = this;
 	SetUpMoviePlayer();
+	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
 }
@@ -364,5 +365,13 @@ void	CMoviePlayerPartMac::SetScript( std::string inScript )
 	CMoviePlayerPart::SetScript( inScript );
 	
 	[mView updateTrackingAreas];
+}
+
+
+void	CMoviePlayerPartMac::SetPartLayoutFlags( TPartLayoutFlags inFlags )
+{
+	CMoviePlayerPart::SetPartLayoutFlags( inFlags );
+	
+	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 }
 
