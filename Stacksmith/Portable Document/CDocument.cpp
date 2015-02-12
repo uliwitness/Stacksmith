@@ -98,10 +98,14 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 				stackURL.append( fileName );
 				ObjectID		stackID = CTinyXMLUtils::GetLongLongAttributeNamed( currStackElem, "id" );
 				const char*		theName = currStackElem->Attribute("name");
+				const char*		theThumbnail = currStackElem->Attribute("thumbnail");
 				
 				CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, (theName ? theName : ""), fileName, this );
 				theStack->Autorelease();
 				mStacks.push_back( theStack );
+				
+				if( theThumbnail )
+					theStack->SetThumbnailName( theThumbnail );
 				
 				currStackElem = currStackElem->NextSiblingElement( "stack" );
 			}
@@ -174,6 +178,11 @@ bool	CDocument::Save()
 			CTinyXMLUtils::SetLongLongAttributeNamed( stackElement, currStack->GetID(), "id" );
 			stackElement->SetAttribute( "file", currStack->GetFileName().c_str() );
 			stackElement->SetAttribute( "name", currStack->GetName().c_str() );
+			std::string	thumbnailName = currStack->GetThumbnailName();
+			if( thumbnailName.length() != 0 )
+			{
+				stackElement->SetAttribute( "thumbnail", thumbnailName.c_str() );
+			}
 			stackfile->InsertEndChild( stackElement );
 			
 			if( currStack->GetNeedsToBeSaved() )
@@ -490,6 +499,7 @@ void	CDocument::Dump( size_t inNestingLevel )
 
 
 CDocumentManager::CDocumentManager()
+	: mFrontDocument(NULL)
 {
 	if( sSharedDocumentManager )
 		throw std::logic_error( "Attempt to create more than one document manager." );
@@ -513,6 +523,12 @@ void	CDocumentManager::SaveAll()
 		if( currDoc->GetNeedsToBeSaved() )
 			currDoc->Save();
 	}
+}
+
+
+void	CDocumentManager::SetFrontDocument( CDocument* inDocument )
+{
+	mFrontDocument = inDocument;
 }
 
 

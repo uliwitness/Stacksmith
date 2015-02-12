@@ -747,6 +747,11 @@
                                     <action selector="orderFrontMessageWatcher:" target="556" id="UQ9-Ma-vkA"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Show Stack Canvas" keyEquivalent="M" id="sFA-sH-79S">
+                                <connections>
+                                    <action selector="showStackCanvasWindow:" target="-1" id="wf6-De-baZ"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="724">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

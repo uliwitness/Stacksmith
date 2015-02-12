@@ -64,6 +64,8 @@ class CPart;
 -(IBAction)	deleteCard: (id)sender;
 -(IBAction)	deleteStack: (id)sender;
 
+-(NSData*)	currentCardSnapshotData;
+
 @end
 
 

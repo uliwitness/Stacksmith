@@ -67,6 +67,9 @@
 		551583DD18C3826100DB3431 /* WILDTableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583DC18C3826100DB3431 /* WILDTableView.mm */; };
 		551583E018C3B8AE00DB3431 /* WILDPlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583DF18C3B8AE00DB3431 /* WILDPlayerView.mm */; };
 		551583E318C3BF9200DB3431 /* WILDInvisiblePlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583E218C3BF9200DB3431 /* WILDInvisiblePlayerView.mm */; };
+		551B36851A8BF832006AFDFE /* WILDStackCanvasWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551B36831A8BF832006AFDFE /* WILDStackCanvasWindowController.mm */; };
+		551B36861A8BF832006AFDFE /* WILDStackCanvasWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551B36841A8BF832006AFDFE /* WILDStackCanvasWindowController.xib */; };
+		551B368D1A8BFA27006AFDFE /* WILDStackCanvasView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551B368C1A8BFA27006AFDFE /* WILDStackCanvasView.mm */; };
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
 		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
@@ -648,6 +651,11 @@
 		551583DF18C3B8AE00DB3431 /* WILDPlayerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDPlayerView.mm; path = Platforms/Mac/WILDPlayerView.mm; sourceTree = "<group>"; };
 		551583E118C3BF9200DB3431 /* WILDPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPlayerView.h; path = Platforms/Mac/WILDPlayerView.h; sourceTree = "<group>"; };
 		551583E218C3BF9200DB3431 /* WILDInvisiblePlayerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDInvisiblePlayerView.mm; path = Platforms/Mac/WILDInvisiblePlayerView.mm; sourceTree = "<group>"; };
+		551B36821A8BF832006AFDFE /* WILDStackCanvasWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStackCanvasWindowController.h; path = Platforms/Mac/WILDStackCanvasWindowController.h; sourceTree = "<group>"; };
+		551B36831A8BF832006AFDFE /* WILDStackCanvasWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDStackCanvasWindowController.mm; path = Platforms/Mac/WILDStackCanvasWindowController.mm; sourceTree = "<group>"; };
+		551B36841A8BF832006AFDFE /* WILDStackCanvasWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDStackCanvasWindowController.xib; path = Platforms/Mac/WILDStackCanvasWindowController.xib; sourceTree = "<group>"; };
+		551B368B1A8BFA27006AFDFE /* WILDStackCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStackCanvasView.h; path = Platforms/Mac/WILDStackCanvasView.h; sourceTree = "<group>"; };
+		551B368C1A8BFA27006AFDFE /* WILDStackCanvasView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDStackCanvasView.mm; path = Platforms/Mac/WILDStackCanvasView.mm; sourceTree = "<group>"; };
 		551D938717058397003766DA /* CDownloadCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDownloadCommandNode.cpp; path = ../../CDownloadCommandNode.cpp; sourceTree = "<group>"; };
 		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
@@ -1601,6 +1609,11 @@
 				559BA99A18A7AC3000760273 /* WILDWebBrowserInfoViewController.h */,
 				559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */,
 				559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */,
+				551B36821A8BF832006AFDFE /* WILDStackCanvasWindowController.h */,
+				551B36831A8BF832006AFDFE /* WILDStackCanvasWindowController.mm */,
+				551B36841A8BF832006AFDFE /* WILDStackCanvasWindowController.xib */,
+				551B368B1A8BFA27006AFDFE /* WILDStackCanvasView.h */,
+				551B368C1A8BFA27006AFDFE /* WILDStackCanvasView.mm */,
 				55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorController.h */,
 				55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorController.mm */,
 				55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */,
@@ -2280,6 +2293,7 @@
 				555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */,
 				555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */,
 				555F103B13881DB700E26037 /* UKPaintLassoTool.tiff in Resources */,
+				551B36861A8BF832006AFDFE /* WILDStackCanvasWindowController.xib in Resources */,
 				555F103C13881DB700E26037 /* UKPaintLineTool.tiff in Resources */,
 				55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */,
 				555F103D13881DB700E26037 /* UKPaintOvalTool.tiff in Resources */,
@@ -2492,6 +2506,7 @@
 				556DB7B318709CAF002F7CB2 /* CRefCountedObject.cpp in Sources */,
 				553C470513577334000219FA /* CMakeChunkConstNode.cpp in Sources */,
 				553C470613577334000219FA /* CCodeBlockNode.cpp in Sources */,
+				551B368D1A8BFA27006AFDFE /* WILDStackCanvasView.mm in Sources */,
 				556DB7B91870A3C2002F7CB2 /* CBackground.cpp in Sources */,
 				553C470713577334000219FA /* CFunctionDefinitionNode.cpp in Sources */,
 				553C470813577334000219FA /* CWhileLoopNode.cpp in Sources */,
@@ -2500,6 +2515,7 @@
 				553C470B13577334000219FA /* LEOInterpreter.c in Sources */,
 				55405BDA18A59DB6001D3C99 /* CTimerPartMac.mm in Sources */,
 				55CD6124187B188E002450E2 /* CDocumentMac.mm in Sources */,
+				551B36851A8BF832006AFDFE /* WILDStackCanvasWindowController.mm in Sources */,
 				553C470C13577334000219FA /* LEOInstructions.c in Sources */,
 				553C470D13577334000219FA /* LEOScript.c in Sources */,
 				553C470E13577334000219FA /* LEODebugger.c in Sources */,

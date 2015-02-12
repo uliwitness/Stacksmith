@@ -65,6 +65,20 @@ void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mBevelWidth = CTinyXMLUtils::GetIntNamed( inElement, "bevelWidth", 1 );
 	mBevelAngle = CTinyXMLUtils::GetIntNamed( inElement, "bevelAngle", 315 );
 	CTinyXMLUtils::GetStringNamed( inElement, "toolTip", mToolTip );
+	
+	tinyxml2::XMLElement *	layoutFlagsElem = inElement->FirstChildElement( "layoutFlags" );
+	if( layoutFlagsElem )
+	{
+		mPartLayoutFlags = 0;
+		if( layoutFlagsElem->FirstChildElement( "horizontalCenter" ) )
+			mPartLayoutFlags |= EPartLayoutAlignHCenter;
+		if( layoutFlagsElem->FirstChildElement( "verticalCenter" ) )
+			mPartLayoutFlags |= EPartLayoutAlignVCenter;
+		if( layoutFlagsElem->FirstChildElement( "top" ) )
+			mPartLayoutFlags |= EPartLayoutAlignTop;
+		if( layoutFlagsElem->FirstChildElement( "bottom" ) )
+			mPartLayoutFlags |= EPartLayoutAlignBottom;
+	}
 }
 
 
@@ -147,6 +161,32 @@ void	CVisiblePart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	elem = document->NewElement("toolTip");
 	elem->SetText( mToolTip.c_str() );
 	inElement->InsertEndChild(elem);
+
+	if( mPartLayoutFlags != 0 )	// No need to add layout flags element if it's the default, top/left:
+	{
+		elem = document->NewElement("layoutFlags");
+		if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
+		{
+			subElem = document->NewElement("horizontalCenter");
+			elem->InsertEndChild(subElem);
+		}
+		else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+		{
+			subElem = document->NewElement("right");
+			elem->InsertEndChild(subElem);
+		}
+		if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
+		{
+			subElem = document->NewElement("verticalCenter");
+			elem->InsertEndChild(subElem);
+		}
+		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
+		{
+			subElem = document->NewElement("bottom");
+			elem->InsertEndChild(subElem);
+		}
+		inElement->InsertEndChild(elem);
+	}
 }
 
 
@@ -167,6 +207,7 @@ void	CVisiblePart::DumpProperties( size_t inIndentLevel )
 	printf( "%sbevelWidth = %d\n", indentStr, mBevelWidth );
 	printf( "%sbevelAngle = %d\n", indentStr, mBevelAngle );
 	printf( "%stoolTip = %s\n", indentStr, mToolTip.c_str() );
+	printf( "%slayoutFlags = %u\n", indentStr, mPartLayoutFlags );
 }
 
 
@@ -371,6 +412,12 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 	else
 		return CPart::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
 	return true;
+}
+
+
+void	CVisiblePart::SetPartLayoutFlags( TPartLayoutFlags inFlags )
+{
+	mPartLayoutFlags = inFlags;
 }
 
 

@@ -464,6 +464,12 @@ CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 }
 
 
+void	CStack::SetCurrentCard( CCard* inCard )
+{
+	mCurrentCard = inCard;
+}
+
+
 size_t	CStack::GetNumCardsWithBackground( CBackground* inBg )
 {
 	size_t	count = 0;
@@ -759,6 +765,10 @@ bool	CStack::GetNeedsToBeSaved()
 };
 
 
+void	CStack::SaveThumbnail()
+{
+}
+
 
 void	CStack::Dump( size_t inIndent )
 {
@@ -872,6 +882,16 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 			return (TStackStyle)x;
 	}
 	return EStackStyle_Last;
+}
+
+
+
+/*static*/ void		CStack::SetFrontStack( CStack* inStack )
+{
+	sFrontStack = inStack;
+	CDocumentManager::GetSharedDocumentManager()->SetFrontDocument( inStack ? inStack->GetDocument() : NULL );
+	if( sFrontStackChangedBlock )
+		sFrontStackChangedBlock( inStack );
 }
 
 

@@ -292,3 +292,20 @@ void	CStackMac::ClearAllGuidelines( bool inTrackingDone )
 }
 
 
+void	CStackMac::SaveThumbnail()
+{
+	NSURL	*	theURL = [NSURL URLWithString: [NSString stringWithUTF8String: mURL.c_str()]];
+	if( mThumbnailName.length() == 0 )
+	{
+		theURL = [theURL.URLByDeletingPathExtension URLByAppendingPathExtension: @"jpg"];
+		mThumbnailName = theURL.lastPathComponent.UTF8String;
+		GetDocument()->IncrementChangeCount();	// Make sure stack TOC gets written again with the file name in it.
+	}
+	else
+		theURL = [theURL.URLByDeletingLastPathComponent URLByAppendingPathComponent: [NSString stringWithUTF8String:mThumbnailName.c_str()]];
+	[[mMacWindowController currentCardSnapshotData] writeToFile: theURL.path atomically: YES];
+	
+	CStack::SaveThumbnail();
+}
+
+

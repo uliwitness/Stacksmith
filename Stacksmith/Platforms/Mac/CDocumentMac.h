@@ -11,6 +11,14 @@
 
 #include "CDocument.h"
 
+
+#if __OBJC__
+@class WILDStackCanvasWindowController;
+typedef WILDStackCanvasWindowController*			WILDStackCanvasWindowControllerPtr;
+#else
+typedef struct WILDStackCanvasWindowController*		WILDStackCanvasWindowControllerPtr;
+#endif
+
 namespace Carlson
 {
 
@@ -26,8 +34,14 @@ public:
 class CDocumentMac : public CDocument
 {
 public:
+	CDocumentMac() : CDocument(), mCanvasWindowController(NULL) {};
+	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
-
+	
+	virtual void		ShowStackCanvasWindow();
+	
+protected:
+	WILDStackCanvasWindowController*	mCanvasWindowController;
 };
 
 }

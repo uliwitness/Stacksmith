@@ -53,6 +53,7 @@ public:
 	virtual std::string			GetDisplayName();
 	virtual WILDNSImagePtr		GetDisplayIcon();
 	
+	virtual void				SaveThumbnail();
 	virtual WILDNSWindowPtr		GetMacWindow();
 	
 	virtual bool				ShowScriptEditorForObject( CConcreteObject* inObject );

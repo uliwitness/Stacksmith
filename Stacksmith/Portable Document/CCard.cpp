@@ -98,6 +98,10 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 		CBackground	*	thisBackground = inThisCard ? dynamic_cast<CCard*>(inThisCard)->GetBackground() : NULL;
 		bool			destStackWasntOpenYet = GetStack()->GetCurrentCard() == NULL;
 		bool			thisIsANewBackground = false;
+		
+		if( oldStack && oldCard == oldStack->GetCard(0) )
+			oldStack->SaveThumbnail();
+
 		// We're moving away
 		if( oldCard && oldStack && oldStack != GetStack() && inOpenInMode == EOpenInSameWindow )	// Leaving this stack? Close it.
 		{

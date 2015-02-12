@@ -86,7 +86,7 @@ public:
 	virtual void	WakeUp()	{};	// The current card has started its timers etc.
 	virtual void	GoToSleep()	{};	// The current card has stopped its timers etc.
 	
-	virtual void	SetCurrentCard( CCard* inCard )	{ mCurrentCard = inCard; };
+	virtual void	SetCurrentCard( CCard* inCard );
 	virtual CCard*	GetCurrentCard()				{ return mCurrentCard; };
 	CCard*			GetNextCard();
 	CCard*			GetPreviousCard();
@@ -137,11 +137,15 @@ public:
 	virtual size_t	GetNumGuidelines()		{ return mHorizontalGuidelines.size() + mVerticalGuidelines.size(); };
 	virtual void	GetGuidelineAtIndex( size_t idx, long long *outCoord, bool *outHorzNotVert )	{ size_t hcount = mHorizontalGuidelines.size(); if( idx >= hcount ) { *outCoord = mVerticalGuidelines[idx-hcount]; *outHorzNotVert = false; } else { *outCoord = mHorizontalGuidelines[idx]; *outHorzNotVert = true; } };
 
+	std::string		GetThumbnailName()						{ return mThumbnailName; };	// Empty string if we have no thumbnail.
+	void			SetThumbnailName( std::string inName )	{ mThumbnailName = inName; };
+	virtual void	SaveThumbnail();
+
 	virtual void	Dump( size_t inIndent = 0 );
 	
 // statics:
 	static CStack*		GetFrontStack()						{ return sFrontStack; };
-	static void			SetFrontStack( CStack* inStack )	{ sFrontStack = inStack; if( sFrontStackChangedBlock ) sFrontStackChangedBlock( inStack ); };
+	static void			SetFrontStack( CStack* inStack );
 	static void			SetFrontStackChangedCallback( std::function<void(CStack*)> inCallback )	{ sFrontStackChangedBlock = inCallback; };
 
 	static const char*	GetToolName( TTool inTool );
@@ -156,6 +160,7 @@ protected:
 protected:
 	std::string					mURL;				// URL of the file backing this stack on disk.
 	std::string					mFileName;			// Partial path relative to containing .xstk package to our file (i.e. the one at mURL).
+	std::string					mThumbnailName;		// Name of image file where we save a thumbnail of the first card in the stack.
 	ObjectID					mStackID;			// Unique ID number of this stack in the document.
 	int							mUserLevel;			// Maximum user level for this stack.
 	int							mCardWidth;			// Size of cards in this stack.

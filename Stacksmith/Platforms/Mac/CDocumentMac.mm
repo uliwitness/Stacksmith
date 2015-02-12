@@ -11,6 +11,7 @@
 #include "CAlert.h"
 #import "UKHelperMacros.h"
 #include <sstream>
+#import "WILDStackCanvasWindowController.h"
 
 
 using namespace Carlson;
@@ -122,4 +123,17 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
         UKLog( @"Unknown exception caught" );
         inCompletionBlock(NULL);
     }
+}
+
+
+void	CDocumentMac::ShowStackCanvasWindow()
+{
+	if( !mCanvasWindowController )
+	{
+		mCanvasWindowController = [[WILDStackCanvasWindowController alloc] initWithWindowNibName: @"WILDStackCanvasWindowController"];
+		mCanvasWindowController.owningDocument = this;
+		[mCanvasWindowController showWindow: nil];
+	}
+	else
+		[mCanvasWindowController.window makeKeyAndOrderFront: nil];
 }

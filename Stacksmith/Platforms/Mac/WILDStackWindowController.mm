@@ -587,23 +587,29 @@ using namespace Carlson;
 		}
 	}
 
+	NSBezierPath*	linePath = [NSBezierPath bezierPath];
 	NSSize	cardSize = [mContentView layer].frame.size;
 	size_t	numGuidelines = mStack->GetNumGuidelines();
 	for( size_t x = 0; x < numGuidelines; x++ )
 	{
-		long long	coord = 0LL;
-		bool		horzNotVert = false;
+		long long		coord = 0LL;
+		bool			horzNotVert = false;
 		mStack->GetGuidelineAtIndex( x, &coord, &horzNotVert );
-		[NSColor.blueColor set];
 		if( horzNotVert )
 		{
-			[NSBezierPath strokeLineFromPoint: NSMakePoint(0,cardSize.height -coord +0.5) toPoint: NSMakePoint(cardSize.width,cardSize.height -coord +0.5)];
+			[linePath moveToPoint: NSMakePoint(0,cardSize.height -coord +0.5)];
+			[linePath lineToPoint: NSMakePoint(cardSize.width,cardSize.height -coord +0.5)];
 		}
 		else
 		{
-			[NSBezierPath strokeLineFromPoint: NSMakePoint(coord +0.5,0) toPoint: NSMakePoint(coord +0.5,cardSize.height)];
+			[linePath moveToPoint: NSMakePoint(coord +0.5,0)];
+			[linePath lineToPoint: NSMakePoint(coord +0.5,cardSize.height)];
 		}
 	}
+	[NSColor.blueColor set];
+	CGFloat	pattern[2] = { 4.0, 1.0 };
+	[linePath setLineDash: pattern count: sizeof(pattern) / sizeof(CGFloat) phase: 0.0];
+	[linePath stroke];
 	
 	if( !mSelectionOverlay )
 		mSelectionOverlay = [[CALayer alloc] init];
@@ -1192,6 +1198,19 @@ using namespace Carlson;
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
 	return @[ WILDStackToolbarItemIdentifier, WILDBackgroundToolbarItemIdentifier, WILDCardToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, WILDPrevCardToolbarItemIdentifier, WILDNextCardToolbarItemIdentifier ];
+}
+
+
+-(NSData*)	currentCardSnapshotData
+{
+	NSRect		wdBox = [mContentView.window contentRectForFrameRect: mContentView.window.frame];
+	if( NSScreen.screens.count > 0 )
+		wdBox.origin.y = [NSScreen.screens[0] frame].size.height -NSMaxY(wdBox);	// Flip rect, CGRect is upper-left relative for this API.
+	CGImageRef	img = CGWindowListCreateImage( wdBox, kCGWindowListOptionIncludingWindow, (int)mContentView.window.windowNumber, kCGWindowImageBoundsIgnoreFraming | kCGWindowImageBestResolution );
+	NSBitmapImageRep*	bir = [[[NSBitmapImageRep alloc] initWithCGImage: img] autorelease];
+	CGImageRelease( img );
+	return [bir representationUsingType: NSJPEGFileType properties: @{}];
+	//return [mContentView dataWithPDFInsideRect: [mContentView bounds]];
 }
 
 @end

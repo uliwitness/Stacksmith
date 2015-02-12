@@ -177,6 +177,12 @@ void	WILDScheduleResumeOfScript( void )
 //}
 
 
+-(IBAction) showStackCanvasWindow: (id)sender
+{
+	CDocumentManager::GetSharedDocumentManager()->GetFrontDocument()->ShowStackCanvasWindow();
+}
+
+
 -(IBAction)	openDocument: (id)sender
 {
 	NSOpenPanel*	thePanel = [NSOpenPanel openPanel];
@@ -397,6 +403,10 @@ void	WILDScheduleResumeOfScript( void )
 		else
 			[inItem setTitle: @"Show Message Watcher"];
 		return YES;
+	}
+	else if( inItem.action == @selector(showStackCanvasWindow:) )
+	{
+		return (CDocumentManager::GetSharedDocumentManager()->GetFrontDocument() != NULL);
 	}
 	else
 		return [self respondsToSelector: inItem.action];

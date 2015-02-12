@@ -32,10 +32,15 @@ public:
 	virtual void	SaveAll();
 	virtual bool	HaveDocuments()							{ return mOpenDocuments.size() > 0; };
 	
+	virtual void	SetFrontDocument( CDocument* inDocument );
+	CDocument*		GetFrontDocument()							{ return mFrontDocument; };
+	
 	static CDocumentManager*	GetSharedDocumentManager();
 
 protected:
 	std::vector<CDocumentRef>	mOpenDocuments;
+	CDocument*					mFrontDocument;
+	
 	static CDocumentManager*	sSharedDocumentManager;
 };
 
@@ -67,6 +72,8 @@ public:
 	
 	virtual void		SetPeeking( bool inState );
 	virtual bool		GetPeeking()				{ return mPeeking; };
+	
+	virtual void		ShowStackCanvasWindow()	{};
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 
