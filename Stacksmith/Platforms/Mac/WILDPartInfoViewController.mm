@@ -37,6 +37,12 @@ using namespace Carlson;
 @synthesize lineWidthSlider;
 @synthesize userPropertyEditor;
 @synthesize toolTipField;
+@synthesize horizontalPinningPopUp;
+@synthesize verticalPinningPopUp;
+@synthesize leftCoordinateField;
+@synthesize rightCoordinateField;
+@synthesize bottomCoordinateField;
+@synthesize topCoordinateField;
 
 
 -(id)	initWithPart: (CPart*)inPart
@@ -104,6 +110,43 @@ using namespace Carlson;
 		[shadowOffsetSlider setDoubleValue: visPart->GetShadowOffsetWidth()];
 		[lineWidthSlider setDoubleValue: visPart->GetLineWidth()];
 		[toolTipField setStringValue: [NSString stringWithUTF8String: visPart->GetToolTip().c_str()]];
+		NSInteger	popupIndex = 0;
+		switch( PART_H_LAYOUT_MODE(visPart->GetPartLayoutFlags()) )
+		{
+			case EPartLayoutAlignLeft:
+				popupIndex = 0;
+				break;
+			case EPartLayoutAlignHCenter:
+				popupIndex = 1;
+				break;
+			case EPartLayoutAlignHBoth:
+				popupIndex = 2;
+				break;
+			case EPartLayoutAlignRight:
+				popupIndex = 3;
+				break;
+		}
+		[horizontalPinningPopUp selectItemAtIndex: popupIndex];
+		switch( PART_V_LAYOUT_MODE(visPart->GetPartLayoutFlags()) )
+		{
+			case EPartLayoutAlignTop:
+				popupIndex = 0;
+				break;
+			case EPartLayoutAlignVCenter:
+				popupIndex = 1;
+				break;
+			case EPartLayoutAlignVBoth:
+				popupIndex = 2;
+				break;
+			case EPartLayoutAlignBottom:
+				popupIndex = 3;
+				break;
+		}
+		[verticalPinningPopUp selectItemAtIndex: popupIndex];
+		[leftCoordinateField setIntegerValue: visPart->GetLeft()];
+		[rightCoordinateField setIntegerValue: visPart->GetRight()];
+		[bottomCoordinateField setIntegerValue: visPart->GetBottom()];
+		[topCoordinateField setIntegerValue: visPart->GetTop()];
 	}
 	else
 	{
@@ -116,6 +159,12 @@ using namespace Carlson;
 		[shadowOffsetSlider setEnabled: NO];
 		[lineWidthSlider setEnabled: NO];
 		[toolTipField setEnabled: NO];
+		[horizontalPinningPopUp setEnabled: NO];
+		[verticalPinningPopUp setEnabled: NO];
+		[leftCoordinateField setEnabled: NO];
+		[rightCoordinateField setEnabled: NO];
+		[bottomCoordinateField setEnabled: NO];
+		[topCoordinateField setEnabled: NO];
 	}
 }
 
@@ -198,6 +247,47 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	doPinningChanged:(id)sender
+{
+	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
+	if( visPart )
+	{
+		TPartLayoutFlags layoutFlags = 0;
+		switch( horizontalPinningPopUp.indexOfSelectedItem )
+		{
+			case 0:
+				layoutFlags |= EPartLayoutAlignLeft;
+				break;
+			case 1:
+				layoutFlags |= EPartLayoutAlignHCenter;
+				break;
+			case 2:
+				layoutFlags |= EPartLayoutAlignHBoth;
+				break;
+			case 3:
+				layoutFlags |= EPartLayoutAlignRight;
+				break;
+		}
+		switch( verticalPinningPopUp.indexOfSelectedItem )
+		{
+			case 0:
+				layoutFlags |= EPartLayoutAlignTop;
+				break;
+			case 1:
+				layoutFlags |= EPartLayoutAlignVCenter;
+				break;
+			case 2:
+				layoutFlags |= EPartLayoutAlignVBoth;
+				break;
+			case 3:
+				layoutFlags |= EPartLayoutAlignBottom;
+				break;
+		}
+		visPart->SetPartLayoutFlags(layoutFlags);
+	}
+}
+
+
 -(void)	controlTextDidChange: (NSNotification *)notif
 {
 	if( [notif object] == nameField )
@@ -210,6 +300,15 @@ using namespace Carlson;
 		if( visPart )
 		{
 			visPart->SetToolTip( std::string( toolTipField.stringValue.UTF8String, [toolTipField.stringValue lengthOfBytesUsingEncoding: NSUTF8StringEncoding] ) );
+		}
+	}
+	else if( [notif object] == leftCoordinateField || [notif object] == topCoordinateField
+			|| [notif object] == rightCoordinateField || [notif object] == bottomCoordinateField )
+	{
+		CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
+		if( visPart )
+		{
+			visPart->SetRect( leftCoordinateField.integerValue, topCoordinateField.integerValue, rightCoordinateField.integerValue, bottomCoordinateField.integerValue );
 		}
 	}
 }

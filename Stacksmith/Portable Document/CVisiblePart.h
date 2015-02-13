@@ -130,6 +130,7 @@ public:
 	virtual std::string		GetToolTip()								{ return mToolTip; };
 	
 	virtual void			SetPartLayoutFlags( TPartLayoutFlags inFlags );
+	virtual TPartLayoutFlags GetPartLayoutFlags()						{ return mPartLayoutFlags; };
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );

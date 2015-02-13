@@ -54,6 +54,12 @@ namespace Carlson
 @property(retain)	IBOutlet NSSlider			*		lineWidthSlider;
 @property(retain)	IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
 @property(retain)	IBOutlet NSTextField		*		toolTipField;
+@property(assign)	IBOutlet NSPopUpButton		*		horizontalPinningPopUp;
+@property(assign)	IBOutlet NSPopUpButton		*		verticalPinningPopUp;
+@property(assign)	IBOutlet NSTextField		*		leftCoordinateField;
+@property(assign)	IBOutlet NSTextField		*		rightCoordinateField;
+@property(assign)	IBOutlet NSTextField		*		bottomCoordinateField;
+@property(assign)	IBOutlet NSTextField		*		topCoordinateField;
 
 -(id)		initWithPart: (Carlson::CPart*)inPart;
 

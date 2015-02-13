@@ -7,11 +7,14 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDMoviePlayerInfoViewController">
             <connections>
+                <outlet property="bottomCoordinateField" destination="Bd4-Uf-RLV" id="ezc-7u-4es"/>
                 <outlet property="contentsEditorButton" destination="145" id="148"/>
                 <outlet property="controllerVisibleSwitch" destination="SGE-wM-0Wo" id="xv7-fO-T9Z"/>
                 <outlet property="enabledSwitch" destination="9" id="32"/>
                 <outlet property="fillColorWell" destination="119" id="140"/>
+                <outlet property="horizontalPinningPopUp" destination="MNl-wm-rNm" id="bKg-Hj-5w9"/>
                 <outlet property="idField" destination="6" id="29"/>
+                <outlet property="leftCoordinateField" destination="rPb-kN-1WQ" id="ojp-Fv-8HL"/>
                 <outlet property="lineColorWell" destination="122" id="141"/>
                 <outlet property="lineWidthSlider" destination="150" id="155"/>
                 <outlet property="moviePathField" destination="113" id="117"/>
@@ -20,12 +23,15 @@
                 <outlet property="partNumberField" destination="5" id="30"/>
                 <outlet property="partNumberLabel" destination="7" id="31"/>
                 <outlet property="playingSwitch" destination="adR-aW-2HU" id="OkW-Xk-gRb"/>
+                <outlet property="rightCoordinateField" destination="t34-je-ftI" id="3K0-yP-6OL"/>
                 <outlet property="scriptEditorButton" destination="25" id="34"/>
                 <outlet property="shadowBlurRadiusSlider" destination="127" id="144"/>
                 <outlet property="shadowColorWell" destination="124" id="142"/>
                 <outlet property="shadowOffsetSlider" destination="125" id="143"/>
                 <outlet property="toolTipField" destination="3fo-5G-drQ" id="8lY-0c-dME"/>
+                <outlet property="topCoordinateField" destination="jF5-rR-rV5" id="Dhw-8k-1um"/>
                 <outlet property="userPropertyEditor" destination="CB2-2H-2op" id="lf5-cs-IyO"/>
+                <outlet property="verticalPinningPopUp" destination="wWu-gr-fdH" id="W1M-On-w0P"/>
                 <outlet property="view" destination="1" id="2"/>
                 <outlet property="visibleSwitch" destination="10" id="33"/>
             </connections>
@@ -339,6 +345,112 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                </subviews>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Dimensions" identifier="" id="ZLK-Ag-uK5">
+                            <view key="view" id="mg9-CD-gtb">
+                                <rect key="frame" x="10" y="33" width="425" height="297"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" id="KbP-Cd-cd7">
+                                        <rect key="frame" x="165" y="157" width="171" height="92"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView">
+                                            <rect key="frame" x="1" y="1" width="169" height="90"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField toolTip="top" verticalHuggingPriority="750" id="jF5-rR-rV5">
+                                                    <rect key="frame" x="61" y="67" width="47" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="K0L-TI-32O">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-2" id="GmX-62-X22"/>
+                                                    </connections>
+                                                </textField>
+                                                <textField toolTip="bottom" verticalHuggingPriority="750" id="Bd4-Uf-RLV">
+                                                    <rect key="frame" x="61" y="5" width="47" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Ty7-KQ-SYZ">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-2" id="Jbe-XO-psU"/>
+                                                    </connections>
+                                                </textField>
+                                                <textField toolTip="right" verticalHuggingPriority="750" id="t34-je-ftI">
+                                                    <rect key="frame" x="118" y="36" width="47" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4jT-fn-OYX">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-2" id="jvV-Wq-aNh"/>
+                                                    </connections>
+                                                </textField>
+                                                <textField toolTip="left" verticalHuggingPriority="750" id="rPb-kN-1WQ">
+                                                    <rect key="frame" x="5" y="36" width="47" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IAf-6S-kaF">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-2" id="eRz-oG-7DY"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                        </view>
+                                        <color key="borderColor" red="0.28712710740000003" green="0.27193883060000001" blue="0.42427253720000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="fillColor" red="0.70338284969999998" green="0.6954715252" blue="0.9214722514" alpha="0.70999999999999996" colorSpace="calibratedRGB"/>
+                                    </box>
+                                    <popUpButton toolTip="pinning" verticalHuggingPriority="750" id="MNl-wm-rNm">
+                                        <rect key="frame" x="24" y="191" width="137" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="push" title="Pin to Left" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="epa-ZD-3NU" id="ggP-PR-J9s">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <menu key="menu" id="Xc3-7e-DGf">
+                                                <items>
+                                                    <menuItem title="Pin to Left" state="on" id="epa-ZD-3NU"/>
+                                                    <menuItem title="Center Horizintally" id="iTa-6g-azW"/>
+                                                    <menuItem title="Stretch Horizontally" id="A8Z-Hy-WZ0"/>
+                                                    <menuItem title="Pin to Right" id="1Sn-rt-nrU"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <action selector="doPinningChanged:" target="-2" id="Qlc-cN-9Cc"/>
+                                        </connections>
+                                    </popUpButton>
+                                    <popUpButton toolTip="pinning" verticalHuggingPriority="750" id="wWu-gr-fdH">
+                                        <rect key="frame" x="189" y="251" width="123" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="push" title="Pin to Top" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="kal-zP-2ld" id="R2x-uO-m0C">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <menu key="menu" id="VPh-Zs-nBL">
+                                                <items>
+                                                    <menuItem title="Pin to Top" state="on" id="kal-zP-2ld"/>
+                                                    <menuItem title="Center Vertically" id="R0E-Zg-Rvz"/>
+                                                    <menuItem title="Stretch Vertically" id="SHJ-JP-m14"/>
+                                                    <menuItem title="Pin to Bottom" id="vrX-fd-CyU"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <action selector="doPinningChanged:" target="-2" id="lk5-P2-PkI"/>
+                                        </connections>
+                                    </popUpButton>
                                 </subviews>
                             </view>
                         </tabViewItem>
