@@ -48,7 +48,7 @@ protected:
 class CDocument : public CRefCountedObject
 {
 public:
-	CDocument() : mLoaded(false), mLoading(false), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0) {};
+	CDocument() : mLoaded(false), mLoading(false), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0), mWriteProtected(false) {};
 	
 	void				LoadFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
 	bool				Save();
@@ -72,6 +72,9 @@ public:
 	
 	virtual void		SetPeeking( bool inState );
 	virtual bool		GetPeeking()				{ return mPeeking; };
+	
+	virtual bool		IsWriteProtected()			{ return mWriteProtected; };
+	virtual void		SetWriteProtected( bool n )	{ mWriteProtected = n; };
 	
 	virtual void		ShowStackCanvasWindow()	{};
 	
@@ -98,6 +101,7 @@ protected:
 	int												mUserLevel;
 	bool											mPrivateAccess;
 	bool											mCantPeek;
+	bool											mWriteProtected;	// Disk locked or no write permissions?
 	std::string										mURL;
 	std::vector<CStackRef>							mStacks;
 	std::vector<std::function<void(CDocument*)>>	mLoadCompletionBlocks;

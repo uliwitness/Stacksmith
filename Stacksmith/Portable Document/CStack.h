@@ -44,7 +44,7 @@ typedef uint16_t	TStackStyle;
 class CStack : public CConcreteObject
 {
 public:
-	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mCantPeek(false), mCantAbort(false), mPrivateAccess(false), mCantDelete(false), mCantModify(false), mFileReadOnly(false), mResizable(false), mStyle(EStackStyleStandard), mUserLevel(5), mCardWidth(512), mCardHeight(342), mLoading(false), mLoaded(false), mPeeking(false), mCardIDSeed(0), mEditingBackground(false), mCurrentTool(EBrowseTool), mChangeCount(0) { mName = inName; mDocument = inDocument; };
+	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mCantPeek(false), mCantAbort(false), mPrivateAccess(false), mCantDelete(false), mCantModify(false), mResizable(false), mStyle(EStackStyleStandard), mUserLevel(5), mCardWidth(512), mCardHeight(342), mLoading(false), mLoaded(false), mPeeking(false), mCardIDSeed(0), mEditingBackground(false), mCurrentTool(EBrowseTool), mChangeCount(0) { mName = inName; mDocument = inDocument; };
 	
 	void			Load( std::function<void(CStack*)> inCompletionBlock );
 	void			SetLoaded( bool n )	{ mLoaded = n; };	// Used when creating a brand new stack in RAM that's never been saved before.
@@ -119,7 +119,7 @@ public:
 	virtual void	SetCantDelete( bool n )					{ mCantDelete = n; };
 	virtual bool	GetCantModify()							{ return mCantModify; };
 	virtual void	SetCantModify( bool n )					{ mCantModify = n; };
-	virtual bool	GetEffectiveCantModify()				{ return mCantModify || mFileReadOnly; };
+	virtual bool	GetEffectiveCantModify();
 	
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -170,7 +170,6 @@ protected:
 	bool						mPrivateAccess;		// Do we require a password before opening this stack?
 	bool						mCantDelete;		// Are scripts allowed to delete this stack?
 	bool						mCantModify;		// Is this stack write-protected using the cantModify property?
-	bool						mFileReadOnly;		// Is this stack write-protected because we can't write to the given file?
 	bool						mResizable;			// Can the stack's window be resized by the user?
 	std::vector<CCardRef>		mCards;				// List of all cards in this stack.
 	std::vector<CBackgroundRef>	mBackgrounds;		// List of all backgrounds in this stack.

@@ -71,6 +71,14 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
         
         currDoc->LoadFromURL( fileURL, [inCompletionBlock,inURL](Carlson::CDocument * inDocument)
         {
+			NSString*	urlStr = [[[NSBundle mainBundle] bundleURL] absoluteString];
+			if( [urlStr characterAtIndex: urlStr.length -1] != '/' )
+			{
+				urlStr = [urlStr stringByAppendingString: @"/"];	// Make sure it ends in a slash so we don't grab folders next to the app.
+			}
+			if( inURL.find( [urlStr UTF8String] ) == 0 )	// Built-in stack?
+				inDocument->SetWriteProtected(true);
+			
             UKLog(@"Doc completion entered");
             Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
             if( !theCppStack )

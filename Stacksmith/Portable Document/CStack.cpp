@@ -70,9 +70,6 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 	
 	Retain();
 	
-	if( mURL.find("file://") != 0 )
-		mFileReadOnly = true;
-	
 	CURLRequest		request( mURL );
 	//printf("Loading %s\n",mURL.c_str());
 	CURLConnection::SendRequestWithCompletionHandler( request, [this,inCompletionBlock] (CURLResponse inResponse, const char* inData, size_t inDataLength) -> void
@@ -801,6 +798,12 @@ void	CStack::Dump( size_t inIndent )
 		theCard->Dump( inIndent +2 );
 	}
 	printf( "%s\t}\n%s}\n", indentStr, indentStr );
+}
+
+
+bool	CStack::GetEffectiveCantModify()
+{
+	return mCantModify || mDocument->IsWriteProtected();
 }
 
 

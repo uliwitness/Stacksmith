@@ -57,6 +57,9 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 	CURLRequest		request( inURL );
 	CURLConnection::SendRequestWithCompletionHandler( request, [inURL,this](CURLResponse inResponse, const char* inData, size_t inDataLength)
 	{
+		if( inURL.find("file://") != 0 )	// Not a local file?
+			SetWriteProtected(true);		// Can't write changes to it to disk.
+		
 		CAutoreleasePool			pool;
 		tinyxml2::XMLDocument		document;
 		
@@ -155,6 +158,9 @@ bool	CDocument::Save()
 {
 	std::string		destPath = PathFromFileURL( mURL );
 	if( destPath.size() == 0 )
+		return false;
+	
+	if( mWriteProtected )
 		return false;
 	
 	if( mChangeCount != 0 || mLastEditedVersion.compare( "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION) ) != 0 )	// Project itself (property or stack/media lists) changed, or this file was last written by another version of Stacksmith and we need to update 'last edited version'?

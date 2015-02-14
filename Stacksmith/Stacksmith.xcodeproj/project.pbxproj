@@ -70,6 +70,7 @@
 		551B36851A8BF832006AFDFE /* WILDStackCanvasWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551B36831A8BF832006AFDFE /* WILDStackCanvasWindowController.mm */; };
 		551B36861A8BF832006AFDFE /* WILDStackCanvasWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551B36841A8BF832006AFDFE /* WILDStackCanvasWindowController.xib */; };
 		551B368D1A8BFA27006AFDFE /* WILDStackCanvasView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551B368C1A8BFA27006AFDFE /* WILDStackCanvasView.mm */; };
+		551B368E1A8FAC1E006AFDFE /* Home.xstk in Resources */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
 		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
@@ -304,7 +305,6 @@
 		557AECC41A7527C500086275 /* Sample Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 557AECC01A7527B200086275 /* Sample Stacks */; };
 		557AECC51A7527C700086275 /* Test Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 557AECC11A7527B200086275 /* Test Stacks */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
-		55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5589DD771378B16400B0F6CF /* TransitionMappings.plist */; };
 		558FB9AC1A75438E0034FD23 /* Empty Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 558FB9A61A7543700034FD23 /* Empty Stacks */; };
@@ -526,17 +526,6 @@
 				558FB9AC1A75438E0034FD23 /* Empty Stacks in Copy Stack Templates */,
 			);
 			name = "Copy Stack Templates";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		55818A761331999000480D30 /* Copy Included Stacks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-				55818A78133199AC00480D30 /* Home.xstk in Copy Included Stacks */,
-			);
-			name = "Copy Included Stacks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		55C9F96E136E1EE50096FC4D /* Copy Frameworks */ = {
@@ -2054,7 +2043,6 @@
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
-				55818A761331999000480D30 /* Copy Included Stacks */,
 				557AECBF1A75273A00086275 /* Copy Stack Templates */,
 			);
 			buildRules = (
@@ -2280,6 +2268,7 @@
 				55039F5F136B52C80082E32E /* brush29.png in Resources */,
 				55039F60136B52C80082E32E /* brush30.png in Resources */,
 				55039F61136B52C80082E32E /* brush31.png in Resources */,
+				551B368E1A8FAC1E006AFDFE /* Home.xstk in Resources */,
 				55039F62136B52C80082E32E /* brush32.png in Resources */,
 				5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */,
 				555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */,
