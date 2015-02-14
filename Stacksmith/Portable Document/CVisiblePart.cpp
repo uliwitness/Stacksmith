@@ -167,7 +167,12 @@ void	CVisiblePart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 		elem = document->NewElement("layoutFlags");
 		if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
 		{
-			subElem = document->NewElement("horizontalCenter");
+			subElem = document->NewElement("centerHorizontally");
+			elem->InsertEndChild(subElem);
+		}
+		if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHBoth )
+		{
+			subElem = document->NewElement("stretchHorizontally");
 			elem->InsertEndChild(subElem);
 		}
 		else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
@@ -177,7 +182,12 @@ void	CVisiblePart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 		}
 		if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
 		{
-			subElem = document->NewElement("verticalCenter");
+			subElem = document->NewElement("centerVertically");
+			elem->InsertEndChild(subElem);
+		}
+		if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVBoth )
+		{
+			subElem = document->NewElement("stretchVertically");
 			elem->InsertEndChild(subElem);
 		}
 		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
@@ -286,9 +296,9 @@ bool	CVisiblePart::GetPropertyNamed( const char* inPropertyName, size_t byteRang
 		
 		if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignTop )
 			LEOAddStringConstantArrayEntryToRoot( &theArray, "2", "top", inContext );
-		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHBoth )
+		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVBoth )
 			LEOAddStringConstantArrayEntryToRoot( &theArray, "2", "stretchVertically", inContext );
-		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
+		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
 			LEOAddStringConstantArrayEntryToRoot( &theArray, "2", "centerVertically", inContext );
 		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
 			LEOAddStringConstantArrayEntryToRoot( &theArray, "2", "bottom", inContext );
@@ -455,7 +465,7 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 				plf |= EPartLayoutAlignHCenter;
 			else if( strcasecmp(str, "right") == 0 )
 				plf |= EPartLayoutAlignRight;
-			else if( strcasecmp(str, "top") == 0 )
+			if( strcasecmp(str, "top") == 0 )
 				plf |= EPartLayoutAlignTop;
 			else if( strcasecmp(str, "stretchVertically") == 0 )
 				plf |= EPartLayoutAlignVBoth;
