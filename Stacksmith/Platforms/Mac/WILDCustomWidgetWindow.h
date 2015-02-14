@@ -19,6 +19,13 @@
 @end
 
 
+@interface WILDCustomWidgetPanel : NSPanel
+
+@property (retain,nonatomic) NSButton * customWidget;
+
+@end
+
+
 @protocol WILDCustomWidgetWindowDelegate <NSWindowDelegate>
 
 @required

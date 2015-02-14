@@ -821,6 +821,11 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 		LEOInitStringConstantValue( outValue, sStackStyleStrings[mStyle], kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "resizable") == 0 )
+	{
+		LEOInitBooleanValue( outValue, mResizable, kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return CConcreteObject::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
@@ -850,6 +855,15 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 		TStackStyle		style = GetStackStyleFromString(styleStr);
 		if( style != EStackStyle_Last )
 			SetStyle( style );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "resizable") == 0 )
+	{
+		bool			canResize = LEOGetValueAsBoolean( inValue, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) != 0 )
+		{
+			SetResizable( canResize );
+		}
 		return true;
 	}
 	else

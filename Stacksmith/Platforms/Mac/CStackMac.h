@@ -44,6 +44,7 @@ public:
 	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler );
 	virtual void				SetPeeking( bool inState );
 	virtual void				SetStyle( TStackStyle inStyle );
+	virtual void				SetResizable( bool n );
 
 	virtual void				SetCurrentCard( CCard* inCard );
 	virtual void				SetEditingBackground( bool inState );

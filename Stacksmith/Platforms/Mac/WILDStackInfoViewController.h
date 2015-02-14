@@ -30,6 +30,7 @@ namespace Carlson
 	NSTextField		*	mHeightField;
 	NSButton		*	mUserPropertyEditButton;
 	NSPopUpButton	*	mSizePopUpButton;
+	NSPopUpButton	*	mStylePopUpButton;
 	NSButton		*	mResizableSwitch;
 	NSSize				mOldCustomSize;
 }
@@ -44,6 +45,7 @@ namespace Carlson
 @property (retain) IBOutlet	NSTextField		*	heightField;
 @property (retain) IBOutlet	NSButton		*	userPropertyEditButton;
 @property (retain) IBOutlet	NSPopUpButton	*	sizePopUpButton;
+@property (retain) IBOutlet	NSPopUpButton	*	stylePopUpButton;
 @property (retain) IBOutlet	NSButton		*	resizableSwitch;
 @property (retain) IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
 
@@ -52,6 +54,7 @@ namespace Carlson
 -(IBAction)	doEditScriptButton: (id)sender;
 
 -(IBAction)	sizePopUpSelectionChanged: (id)sender;
+-(IBAction)	stylePopUpSelectionChanged: (id)sender;
 -(IBAction)	doApplySizeButton: (id)sender;
 -(IBAction)	doResizableSwitchChanged: (id)sender;
 

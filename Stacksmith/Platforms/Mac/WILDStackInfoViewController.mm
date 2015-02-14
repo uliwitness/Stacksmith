@@ -42,6 +42,7 @@ using namespace Carlson;
 @synthesize heightField = mHeightField;
 @synthesize userPropertyEditButton = mUserPropertyEditButton;
 @synthesize sizePopUpButton = mSizePopUpButton;
+@synthesize stylePopUpButton = mStylePopUpButton;
 @synthesize resizableSwitch = mResizableSwitch;
 
 -(id)	initWithStack: (CStack*)inStack
@@ -87,6 +88,8 @@ using namespace Carlson;
 	[mBackgroundCountField setStringValue: [NSString stringWithFormat: @"Contains %ld backgrounds.", numBackgrounds]];
 	
 	[self updateCardSizePopUpAndFields];
+	
+	[mStylePopUpButton selectItemWithTag: mStack->GetStyle()];
 	
 	[mIDField setIntegerValue: mStack->GetID()];
 	
@@ -175,6 +178,15 @@ using namespace Carlson;
 	[mWidthField setEnabled: shouldEnableFields];
 	[mHeightField setEnabled: shouldEnableFields];
 }
+
+
+-(IBAction)	stylePopUpSelectionChanged: (id)sender
+{
+	TStackStyle theStyle = (TStackStyle) [mStylePopUpButton selectedItem].tag;
+	
+	mStack->SetStyle( theStyle );
+}
+
 
 
 -(IBAction)	doApplySizeButton: (id)sender

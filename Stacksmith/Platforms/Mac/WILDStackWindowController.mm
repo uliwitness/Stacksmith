@@ -638,7 +638,7 @@ using namespace Carlson;
 	switch( theStyle )
 	{
 		case EStackStyleStandard:
-			self.window = [[[WILDCustomWidgetWindow alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[WILDCustomWidgetWindow alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | (mStack->IsResizable() ? NSResizableWindowMask : 0) backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setCollectionBehavior: NSWindowCollectionBehaviorFullScreenPrimary];
 			break;
 		
@@ -649,7 +649,7 @@ using namespace Carlson;
 			break;
 		
 		case EStackStylePalette:
-			self.window = [[[NSPanel alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask | NSUtilityWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[WILDCustomWidgetPanel alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | (mStack->IsResizable() ? NSResizableWindowMask : 0) | NSUtilityWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setCollectionBehavior: NSWindowCollectionBehaviorFullScreenAuxiliary];
 			[(NSPanel*)self.window setFloatingPanel: YES];
 			break;
@@ -684,9 +684,9 @@ using namespace Carlson;
 	{
         @try
         {
-		self.window.contentView = mContentView;
-		[self.window setTitle: [NSString stringWithUTF8String: mStack->GetName().c_str()]];
-		[self.window setRepresentedURL: [NSURL URLWithString: [NSString stringWithUTF8String: mStack->GetURL().c_str()]]];
+			self.window.contentView = mContentView;
+			[self.window setTitle: [NSString stringWithUTF8String: mStack->GetName().c_str()]];
+			[self.window setRepresentedURL: [NSURL URLWithString: [NSString stringWithUTF8String: mStack->GetURL().c_str()]]];
         }
         @catch( NSException* err )
         {
@@ -726,7 +726,14 @@ using namespace Carlson;
 		[self.window setToolbar: editToolbar];
 		[self.window toggleToolbarShown: self];
 		
-		[[(WILDCustomWidgetWindow*)self.window customWidget] setState: NSOnState];
+		if( [self.window respondsToSelector: @selector(customWidget)] )
+		{
+			[[(WILDCustomWidgetWindow*)self.window customWidget] setState: NSOnState];
+		}
+		else
+		{
+			// TODO: Do something special to provide support for editing borderless/popup windows.
+		}
 	}
 	else if( haveToolbar && mStack->GetTool() == EBrowseTool )
 	{
@@ -735,7 +742,14 @@ using namespace Carlson;
 		if( mStack->GetEditingBackground() )
 			mStack->SetEditingBackground( false );	// Switch back to foreground.
 
-		[[(WILDCustomWidgetWindow*)self.window customWidget] setState: NSOffState];
+		if( [self.window respondsToSelector: @selector(customWidget)] )
+		{
+			[[(WILDCustomWidgetWindow*)self.window customWidget] setState: NSOffState];
+		}
+		else
+		{
+			// TODO: Do something special to provide support for editing borderless/popup windows.
+		}
 	}
 }
 

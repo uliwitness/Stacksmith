@@ -157,6 +157,13 @@ void	CStackMac::SetStyle( TStackStyle inStyle )
 }
 
 
+void	CStackMac::SetResizable( bool n )
+{
+	CStack::SetResizable( n );
+	[mMacWindowController updateStyle];
+}
+
+
 WILDNSWindowPtr	CStackMac::GetMacWindow()
 {
 	return mMacWindowController.window;
