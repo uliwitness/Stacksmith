@@ -17,81 +17,16 @@
 #include "CDocument.h"
 #import "UKHelperMacros.h"
 #import "UKPushbackMessenger.h"
+#import "WILDSearchField.h"
+#import "WILDComboBox.h"
 
 
 using namespace Carlson;
 
 
-@interface WILDSearchField : NSSearchField
-{
-	UKPushbackMessenger	*	pushbackMessenger;
-}
-
-@property (assign,nonatomic) CFieldPartMac*			owningField;
-@property (assign,nonatomic) BOOL					dontSendSelectionChange;
-@property (assign,nonatomic) NSRange				selectedRange;
-
-@end
-
-@implementation WILDSearchField
-
-@synthesize owningField;
-@synthesize dontSendSelectionChange;
-@synthesize selectedRange;
-
--(void)	dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver: self name: NSTextViewDidChangeSelectionNotification object: nil];
-	DESTROY_DEALLOC(pushbackMessenger);
-	
-	[super dealloc];
-}
 
 
--(void)	beginWatchingForSelectionChanges
-{
-	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(fieldEditorsSelectionDidChange:) name: NSTextViewDidChangeSelectionNotification object: nil];
-}
-
-
--(void)	fieldEditorsSelectionDidChange: (NSNotification *)notif
-{
-	NSText*	fieldEditor = notif.object;
-	if( fieldEditor != self.currentEditor || self.dontSendSelectionChange )
-		return;
-	
-	if( !pushbackMessenger )
-	{
-		pushbackMessenger = [[UKPushbackMessenger alloc] initWithTarget: self];
-		[pushbackMessenger setDelay: 0.1];
-		[pushbackMessenger setMaxPushTime: 0.5];
-	}
-	[(id)pushbackMessenger sendSelectionChangeMessage];
-}
-
-
--(void)	sendSelectionChangeMessage
-{
-	if( self.currentEditor.selectedRange.location != selectedRange.location || self.currentEditor.selectedRange.length != selectedRange.length )
-	{
-		selectedRange = self.currentEditor.selectedRange;
-		
-		CAutoreleasePool		pool;
-		self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
-	}
-}
-
-
--(void)	setSelectedRange: (NSRange)inRange
-{
-	selectedRange = inRange;
-	[self.currentEditor setSelectedRange: inRange];
-}
-
-@end;
-
-
-@interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource,NSTextFieldDelegate>
+@interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource,NSTextFieldDelegate,NSComboBoxDataSource>
 
 @property (assign,nonatomic) CFieldPartMac*			owningField;
 @property (retain,nonatomic) NSMutableArray*		lines;
@@ -344,6 +279,16 @@ using namespace Carlson;
 	DESTROY(images);
 }
 
+- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox;
+{
+	return 5;
+}
+
+- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index
+{
+	return @[ @"foo", @"bar", @"zed", @"hullo", @"aardvark" ][ index ];
+}
+
 @end;
 
 struct ListChunkCallbackContext
@@ -477,6 +422,17 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		mSearchField.delegate = mMacDelegate;
 		mSearchField.owningField = this;
 		mMacDelegate.searchField = mSearchField;
+	}
+	else if( mFieldStyle == EFieldStylePopUp )
+	{
+		mSearchField = (WILDSearchField*)[[WILDComboBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		[mSearchField beginWatchingForSelectionChanges];
+		mSearchField.delegate = mMacDelegate;
+		mSearchField.owningField = this;
+		mMacDelegate.searchField = mSearchField;
+		((WILDComboBox*)mSearchField).dataSource = mMacDelegate;
+		((WILDComboBox*)mSearchField).usesDataSource = YES;
+		[(WILDComboBox*)mSearchField reloadData];
 	}
 	else
 	{
