@@ -92,7 +92,7 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 	Retain();
 	Load([this,oldStack,inOpenInMode,completionHandler](CLayer *inThisCard)
 	{
-		inThisCard->Dump();
+		//inThisCard->Dump();
 		CCard		*	oldCard = oldStack ? oldStack->GetCurrentCard() : NULL;
 		CBackground	*	oldBackground = oldCard ? oldCard->GetBackground() : NULL;
 		CBackground	*	thisBackground = inThisCard ? dynamic_cast<CCard*>(inThisCard)->GetBackground() : NULL;

@@ -27,7 +27,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 {
     try
     {
-        UKLog(@"Entered");
+        //UKLog(@"Entered");
         
         std::string		fileURL( inURL );
 		if( fileURL.length() > 0 && fileURL[fileURL.length() -1] != '/' )
@@ -79,7 +79,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 			if( inURL.find( [urlStr UTF8String] ) == 0 )	// Built-in stack?
 				inDocument->SetWriteProtected(true);
 			
-            UKLog(@"Doc completion entered");
+            //UKLog(@"Doc completion entered");
             Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
             if( !theCppStack )
             {
@@ -91,8 +91,8 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
             }
             theCppStack->Load( [inDocument,inCompletionBlock,inURL](Carlson::CStack* inStack)
             {
-				UKLog(@"Stack completion entered %p", inStack);
-                inStack->Dump();
+				//UKLog(@"Stack completion entered %p", inStack);
+                //inStack->Dump();
 				if( !inStack->IsLoaded() )
 				{
 					inCompletionBlock(NULL);
@@ -100,10 +100,10 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 					return;
 				}
 				CCard	*	firstCard = (inStack ? inStack->GetCard(0) : NULL);
-                UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
+                //UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
                 firstCard->Load( [inDocument,inStack,inCompletionBlock,inURL](Carlson::CLayer*inCard)
                 {
-                    UKLog(@"Card completion entered %p",inCard);
+                    //UKLog(@"Card completion entered %p",inCard);
 					if( inCard )
 					{
                     	inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [inDocument,inCompletionBlock,inURL](){ [NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]]; inCompletionBlock(inDocument); } );
@@ -112,14 +112,14 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 					{
 						inCompletionBlock(NULL);
 					}
-                    UKLog(@"Card completion exited");
+                    //UKLog(@"Card completion exited");
                 } );
-                UKLog(@"Stack completion exited");
+                //UKLog(@"Stack completion exited");
             } );
-            UKLog(@"Doc completion exited");
+            //UKLog(@"Doc completion exited");
         });
 
-        UKLog(@"Exited");
+        //UKLog(@"Exited");
     }
     catch( std::exception& inException )
     {
