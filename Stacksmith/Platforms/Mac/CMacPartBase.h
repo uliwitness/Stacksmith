@@ -25,6 +25,10 @@
 @class WILDContentsEditorWindowController;
 
 
+#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_9
+typedef NSUInteger NSAutoresizingMaskOptions;
+#endif
+
 namespace Carlson {
 
 
