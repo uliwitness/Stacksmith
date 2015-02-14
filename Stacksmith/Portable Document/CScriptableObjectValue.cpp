@@ -570,6 +570,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	bool			handled = false;
 	LEOHandlerID	arrowKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "arrowKey" );
 	LEOHandlerID	keyDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "keyDown" );
+	LEOHandlerID	textChangeHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "textChange" );
 	LEOHandlerID	functionKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "functionKey" );
 	LEOHandlerID	openCardHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openCard" );
 	LEOHandlerID	closeCardHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closeCard" );
@@ -722,6 +723,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == mouseMoveHandlerID
 			|| inHandler == mouseDragHandlerID
 			|| inHandler == functionKeyHandlerID
+			|| inHandler == textChangeHandlerID
 			|| inHandler == keyDownHandlerID
 			|| inHandler == loadPageHandlerID
 			|| inHandler == linkClickedHandlerID

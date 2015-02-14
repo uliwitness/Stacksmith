@@ -26,6 +26,7 @@ static const char*	sFieldStyleStrings[EFieldStyle_Last +1] =
 	"scrolling",
 	"standard",
 	"popup",
+	"search",
 	"*UNKNOWN*"
 };
 

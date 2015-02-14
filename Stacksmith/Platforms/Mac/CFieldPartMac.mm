@@ -21,7 +21,32 @@
 using namespace Carlson;
 
 
-@interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource>
+@interface WILDSearchField : NSSearchField
+
+@property (assign,nonatomic) CFieldPartMac*			owningField;
+@property (assign,nonatomic) BOOL					dontSendSelectionChange;
+
+@end
+
+@implementation WILDSearchField
+
+@synthesize owningField;
+@synthesize dontSendSelectionChange;
+
+- (void)selectWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
+{
+	[super selectWithFrame:aRect editor:textObj delegate:anObject start:selStart length:selLength];
+	
+	if( !dontSendSelectionChange )
+	{
+		NSLog( @"selection %ld,%ld", selStart, selLength );
+	}
+}
+
+@end;
+
+
+@interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource,NSTextFieldDelegate>
 
 @property (assign,nonatomic) CFieldPartMac*			owningField;
 @property (retain,nonatomic) NSMutableArray*		lines;
@@ -56,12 +81,27 @@ using namespace Carlson;
 }
 
 
--(void)	textDidChange: (NSNotification *)obj
+-(void)	controlTextDidChange:(NSNotification *)notif	// Search field text changed.
 {
 	self.owningField->SetViewTextNeedsSync( true );
 	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
 	if( contents ) contents->IncrementChangeCount();
-//	NSLog( @"Edited text." );
+//	NSLog( @"Edited SEARCH field text." );
+
+	CAutoreleasePool	pool;
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "textChange" );
+}
+
+
+-(void)	textDidChange: (NSNotification *)notif	// Regular multi-line field text changed.
+{
+	self.owningField->SetViewTextNeedsSync( true );
+	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
+	if( contents ) contents->IncrementChangeCount();
+//	NSLog( @"Edited regular field text." );
+
+	CAutoreleasePool	pool;
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "textChange" );
 }
 
 
@@ -279,7 +319,7 @@ static bool	ListChunkCallback( const char* currStr, size_t currLen, size_t currS
 
 
 CFieldPartMac::CFieldPartMac( CLayer *inOwner )
-	: CFieldPart( inOwner ), mView(nil), mMacDelegate(nil), mTableView(nil), mTextView(nil)
+	: CFieldPart( inOwner ), mView(nil), mMacDelegate(nil), mTableView(nil), mTextView(nil), mSearchField(nil)
 {
 	
 }
@@ -290,6 +330,10 @@ void	CFieldPartMac::DestroyView()
 	if( mViewTextNeedsSync )
 		LoadChangedTextFromView();
 	
+	if( mSearchField )
+	{
+		mSearchField.owningField = NULL;
+	}
 	if( mTextView )
 		mTextView.owningPart = NULL;
 	if( mTableView )
@@ -298,6 +342,8 @@ void	CFieldPartMac::DestroyView()
 		mView.owningPart = NULL;
 	[mView removeFromSuperview];
 	DESTROY(mView);
+	[mSearchField removeFromSuperview];
+	DESTROY(mSearchField);
 	mTableView = nil;
 	mTextView = nil;
 	DESTROY(mMacDelegate);
@@ -306,10 +352,15 @@ void	CFieldPartMac::DestroyView()
 
 void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 {
-	if( mView.superview == inSuperView )
+	if( (mView && mView.superview == inSuperView)
+		|| (mSearchField && mSearchField.superview == inSuperView) )
 	{
+		[mSearchField removeFromSuperview];
 		[mView removeFromSuperview];
-		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		if( mView )
+			[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		if( mSearchField )
+			[inSuperView addSubview: mSearchField];	// Make sure we show up in right layering order.
 		return;
 	}
 	mMacDelegate = [[WILDFieldDelegate alloc] init];
@@ -373,6 +424,11 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 			[col release];
 		}
 	}
+	else if( mFieldStyle == EFieldStyleSearch )
+	{
+		mSearchField = [[WILDSearchField alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mSearchField.delegate = mMacDelegate;
+	}
 	else
 	{
 		mTextView = [WILDViewFactory textViewInContainer];
@@ -383,22 +439,25 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTextView setDrawsBackground: NO];
 		[mTextView setBackgroundColor: [NSColor clearColor]];
 	}
-	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
-	[mView setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
-	[mView setHasHorizontalScroller: mHasHorizontalScroller != false];
-	[mView setHasVerticalScroller: mHasVerticalScroller != false];
-	if( mFieldStyle == EFieldStyleTransparent )
+	if( mView )
 	{
-		[mView setBorderType: NSNoBorder];
-		[mView setBackgroundColor: [NSColor clearColor]];
-	}
-	else if( mFieldStyle == EFieldStyleOpaque )
-		[mView setBorderType: NSNoBorder];
-	else if( mFieldStyle == EFieldStyleRectangle )
-	{
-		[mView setBorderType: NSLineBorder];
-		[mView setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
-		[mView setLineWidth: mLineWidth];
+		[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
+		[mView setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
+		[mView setHasHorizontalScroller: mHasHorizontalScroller != false];
+		[mView setHasVerticalScroller: mHasVerticalScroller != false || mFieldStyle == EFieldStyleScrolling];
+		if( mFieldStyle == EFieldStyleTransparent )
+		{
+			[mView setBorderType: NSNoBorder];
+			[mView setBackgroundColor: [NSColor clearColor]];
+		}
+		else if( mFieldStyle == EFieldStyleOpaque )
+			[mView setBorderType: NSNoBorder];
+		else if( mFieldStyle == EFieldStyleRectangle )
+		{
+			[mView setBorderType: NSLineBorder];
+			[mView setLineColor: [NSColor colorWithCalibratedRed: (mLineColorRed / 65535.0) green: (mLineColorGreen / 65535.0) blue: (mLineColorBlue / 65535.0) alpha:(mLineColorAlpha / 65535.0)]];
+			[mView setLineWidth: mLineWidth];
+		}
 	}
 	mMacDelegate.dontSendSelectionChange = YES;
 	if( mAutoSelect )
@@ -412,6 +471,18 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		{
 			[mTableView selectRowIndexes: [NSIndexSet indexSetWithIndex: currLine -1] byExtendingSelection: YES];
 		}
+	}
+	else if( mSearchField )
+	{
+		CPartContents*			contents = GetContentsOnCurrentCard();
+		if( contents )
+		{
+			CAttributedString&		cppstr = contents->GetAttributedText();
+			NSAttributedString*		attrStr = GetCocoaAttributedString( cppstr, GetCocoaAttributesForPart() );
+			[mSearchField setAttributedStringValue: attrStr];
+		}
+		[mSearchField setEditable: !GetLockText() && GetEnabled()];
+		[mSearchField setSelectable: !GetLockText()];
 	}
 	else
 	{
@@ -436,22 +507,34 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mTextView setSelectable: !GetLockText()];
 	}
 	mMacDelegate.dontSendSelectionChange = NO;
-	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
-	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
-	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
-	[mView.layer setShadowRadius: mShadowBlurRadius];
-	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
-	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
-	[inSuperView addSubview: mView];
-
-	[mView setDocumentCursor: [NSCursor arrowCursor]];
-	
-	GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mCursorID, EMediaTypeCursor,
-	[this]( WILDNSImagePtr inImage, int xHotSpot, int yHotSpot )
+	if( mView )
 	{
-		NSCursor *theCursor = (GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : [[[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(xHotSpot, yHotSpot)] autorelease];
-		[mView setDocumentCursor: theCursor];
-	} );
+		[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
+		[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
+		[mView.layer setShadowRadius: mShadowBlurRadius];
+		[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
+		[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
+		[inSuperView addSubview: mView];
+
+		[mView setDocumentCursor: [NSCursor arrowCursor]];
+		
+		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mCursorID, EMediaTypeCursor,
+		[this]( WILDNSImagePtr inImage, int xHotSpot, int yHotSpot )
+		{
+			NSCursor *theCursor = (GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : [[[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(xHotSpot, yHotSpot)] autorelease];
+			[mView setDocumentCursor: theCursor];
+		} );
+	}
+	else
+	{
+		[mSearchField.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
+		[mSearchField.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
+		[mSearchField.layer setShadowRadius: mShadowBlurRadius];
+		[mSearchField.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
+		[mSearchField setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
+		[inSuperView addSubview: mSearchField];
+	}
 }
 
 
@@ -484,7 +567,7 @@ void	CFieldPartMac::SetHasVerticalScroller( bool inHS )
 
 void	CFieldPartMac::SetStyle( TFieldStyle inFieldStyle )
 {
-	NSView*	oldSuper = mView.superview;
+	NSView*	oldSuper = (mView? mView : mSearchField).superview;
 	DestroyView();
 	CFieldPart::SetStyle(inFieldStyle);
 	if( oldSuper )
@@ -496,7 +579,7 @@ void	CFieldPartMac::SetVisible( bool visible )
 {
 	CFieldPart::SetVisible( visible );
 	
-	[mView setHidden: !visible];
+	[(mView? mView : mSearchField) setHidden: !visible];
 }
 
 
@@ -509,6 +592,10 @@ void	CFieldPartMac::SetEnabled( bool n )
 		[mView setLineColor: n ? [NSColor colorWithCalibratedRed: mLineColorRed / 65535.0 green: mLineColorGreen / 65535.0 blue: mLineColorBlue / 65535.0 alpha: mLineColorAlpha / 65535.0] : [NSColor disabledControlTextColor]];
 		[mTextView setEditable: n && !GetLockText()];
 	}
+	else if( mSearchField )
+	{
+		[mSearchField setEnabled: NO];
+	}
 	else
 		[mTableView setEnabled: n];
 }
@@ -516,7 +603,7 @@ void	CFieldPartMac::SetEnabled( bool n )
 
 void	CFieldPartMac::SetAutoSelect( bool n )
 {
-	NSView*	oldSuper = mView.superview;
+	NSView*	oldSuper = (mView? mView : mSearchField).superview;
 	DestroyView();
 	CFieldPart::SetAutoSelect( n );
 	if( oldSuper )
@@ -532,6 +619,11 @@ void	CFieldPartMac::SetLockText( bool n )
 	{
 		[mTextView setEditable: !n && GetEnabled()];
 		[mTextView setSelectable: !n];
+	}
+	else if( mSearchField )
+	{
+		[mSearchField setEditable: !n && GetEnabled()];
+		[mSearchField setSelectable: !n];
 	}
 	else
 		[mTableView.tableColumns[0] setEditable: !n];
@@ -558,10 +650,10 @@ void	CFieldPartMac::SetShadowColor( int r, int g, int b, int a )
 {
 	CFieldPart::SetShadowColor( r, g, b, a );
 	
-	[mView.layer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
+	[(mView? mView : mSearchField).layer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
 	if( a != 0 )
 	{
-		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+		[(mView? mView : mSearchField).layer setShadowColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
 }
 
@@ -570,7 +662,7 @@ void	CFieldPartMac::SetShadowOffset( double w, double h )
 {
 	CFieldPart::SetShadowOffset( w, h );
 	
-	[mView.layer setShadowOffset: NSMakeSize(w,h)];
+	[(mView? mView : mSearchField).layer setShadowOffset: NSMakeSize(w,h)];
 }
 
 
@@ -578,7 +670,7 @@ void	CFieldPartMac::SetShadowBlurRadius( double r )
 {
 	CFieldPart::SetShadowBlurRadius( r );
 	
-	[mView.layer setShadowRadius: r];
+	[(mView? mView : mSearchField).layer setShadowRadius: r];
 }
 
 
@@ -605,6 +697,8 @@ void	CFieldPartMac::SetBevelAngle( int a )
 void	CFieldPartMac::SetCursorID( ObjectID inID )
 {
 	CFieldPart::SetCursorID( inID );
+	
+	// +++ Implement cursor for search field.
 	
 	[mView setDocumentCursor: [NSCursor arrowCursor]];
 	
@@ -725,7 +819,11 @@ void	CFieldPartMac::SetCursorID( ObjectID inID )
 
 void	CFieldPartMac::SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs )
 {
-	if( mTableView )
+	if( mSearchField)
+	{
+		// +++ Implement selected range for search field.
+	}
+	else if( mTableView )
 	{
 		if( inEndOffs < inStartOffs )
 			[mTableView deselectAll: nil];
@@ -763,6 +861,16 @@ void	CFieldPartMac::GetSelectedRange( LEOChunkType* outType, size_t* outStartOff
 		*outStartOffs = selLine +1;
 		*outEndOffs = selLine +1;
 		*outType = kLEOChunkTypeLine;
+	}
+	else if( mSearchField )
+	{
+		// +++ Implement selected range for search fields.
+		*outStartOffs = 1;
+		*outEndOffs = 1;
+//		NSRange	selRange = [mSearchField selectedRange];
+//		*outStartOffs = UTF32OffsetFromUTF16OffsetInCocoaString( selRange.location, [[mTextView textStorage] string] ) +1;
+//		*outEndOffs = UTF32OffsetFromUTF16OffsetInCocoaString( selRange.location +selRange.length, [[mTextView textStorage] string] );
+		*outType = kLEOChunkTypeCharacter;
 	}
 	else
 	{
@@ -826,10 +934,18 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 			NSDictionary*	docAttrs = nil;
 			attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: cppstr.GetString().c_str() length: cppstr.GetLength()] documentAttributes: &docAttrs];
 		}
-		[mTextView.textStorage setAttributedString: attrStr];
+		if( mSearchField )
+			[mSearchField setAttributedStringValue: attrStr];
+		else
+			[mTextView.textStorage setAttributedString: attrStr];
 	}
 	else
-		[mTextView setString: @""];
+	{
+		if( mSearchField )
+			[mSearchField setStringValue: @""];
+		else
+			[mTextView setString: @""];
+	}
 }
 
 
@@ -870,6 +986,12 @@ void	CFieldPartMac::LoadChangedTextFromView()
 			}
 			CAttributedString&		cppstr = contents->GetAttributedText();
 			SetAttributedStringWithCocoa( cppstr, finalStr );
+		}
+		else if( mSearchField )
+		{
+			CAttributedString&		cppstr = contents->GetAttributedText();
+			NSAttributedString*		attrStr = [mSearchField attributedStringValue];
+			SetAttributedStringWithCocoa( cppstr, attrStr );
 		}
 		else
 		{
@@ -1109,14 +1231,14 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CFieldPart::SetRect( left, top, right, bottom );
-	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[(mView? mView : mSearchField) setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
 	GetStack()->RectChangedOfPart( this );
 }
 
 
 NSView*	CFieldPartMac::GetView()
 {
-	return mView;
+	return (mView? mView : mSearchField);
 }
 
 
@@ -1124,7 +1246,7 @@ void	CFieldPartMac::SetPartLayoutFlags( TPartLayoutFlags inFlags )
 {
 	CFieldPart::SetPartLayoutFlags( inFlags );
 	
-	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
+	[(mView? mView : mSearchField) setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 }
 
 
@@ -1132,6 +1254,6 @@ void	CFieldPartMac::SetScript( std::string inScript )
 {
 	CFieldPart::SetScript( inScript );
 	
-	[mView updateTrackingAreas];
+	[(mView? mView : mSearchField) updateTrackingAreas];
 }
 

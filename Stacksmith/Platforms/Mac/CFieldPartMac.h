@@ -20,6 +20,7 @@
 @class WILDFieldDelegate;
 @class WILDTextView;
 @class WILDTableView;
+@class WILDSearchField;
 
 
 namespace Carlson {
@@ -85,6 +86,7 @@ protected:
 	WILDFieldDelegate*	mMacDelegate;
 	WILDTableView *		mTableView;
 	WILDTextView	*	mTextView;
+	WILDSearchField*	mSearchField;
 };
 
 

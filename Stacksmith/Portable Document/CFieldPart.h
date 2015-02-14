@@ -26,6 +26,7 @@ typedef enum
 	EFieldStyleScrolling,
 	EFieldStyleStandard,
 	EFieldStylePopUp,
+	EFieldStyleSearch,
 	EFieldStyle_Last
 } TFieldStyle;
 

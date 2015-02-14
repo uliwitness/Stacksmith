@@ -53,7 +53,8 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	if( !sStylesInMenuOrder )
 		sStylesInMenuOrder = [@[@(EFieldStyleRectangle),
 								@(EFieldStyleStandard),
-								@(EFieldStylePopUp)] retain];
+								@(EFieldStylePopUp),
+								@(EFieldStyleSearch)] retain];
 	
 	[mStylePopUp selectItemAtIndex: [sStylesInMenuOrder indexOfObject: @(((CFieldPart*)part)->GetStyle())]];
 

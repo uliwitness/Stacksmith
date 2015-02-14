@@ -155,14 +155,15 @@
                                     <popUpButton verticalHuggingPriority="750" id="52">
                                         <rect key="frame" x="77" y="236" width="179" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="Rectangle" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="55" id="53">
+                                        <popUpButtonCell key="cell" type="push" title="Search" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="m6A-qT-x8v" id="53">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" title="OtherViews" id="54">
                                                 <items>
-                                                    <menuItem title="Rectangle" state="on" id="55"/>
+                                                    <menuItem title="Rectangle" id="55"/>
                                                     <menuItem title="Standard" id="56"/>
                                                     <menuItem title="Popup" id="91"/>
+                                                    <menuItem title="Search" state="on" id="m6A-qT-x8v"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>

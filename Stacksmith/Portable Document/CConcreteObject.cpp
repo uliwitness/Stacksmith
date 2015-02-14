@@ -271,6 +271,14 @@ static CAddHandlerListEntry	sMasterHandlerList[] =
 	{
 		kHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
+		"textChange",
+		"The text of a field was changed, by typing, pasteing or some other means.",
+		"",
+		"field"
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
 		"keyDown",
 		"A key was pressed on the keyboard.",
 		"",
