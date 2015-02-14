@@ -22,6 +22,7 @@ using namespace Carlson;
 @synthesize lineWidth;
 @synthesize owningPart;
 
+
 -(id)	initWithFrame: (NSRect)inBox
 {
 	self = [super initWithFrame: inBox];
@@ -148,6 +149,17 @@ using namespace Carlson;
 	{
 		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseMove" );
+	}
+}
+
+
+-(BOOL)	isOpaque
+{
+	if( self.borderType == NSLineBorder )
+		return NO;
+	else
+	{
+		return [super isOpaque];
 	}
 }
 
