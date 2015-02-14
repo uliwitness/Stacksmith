@@ -66,16 +66,20 @@ void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mBevelAngle = CTinyXMLUtils::GetIntNamed( inElement, "bevelAngle", 315 );
 	CTinyXMLUtils::GetStringNamed( inElement, "toolTip", mToolTip );
 	
-	tinyxml2::XMLElement *	layoutFlagsElem = inElement->FirstChildElement( "layoutFlags" );
+	tinyxml2::XMLElement *	layoutFlagsElem = inElement->FirstChildElement( "pinning" );
 	if( layoutFlagsElem )
 	{
 		mPartLayoutFlags = 0;
-		if( layoutFlagsElem->FirstChildElement( "horizontalCenter" ) )
+		if( layoutFlagsElem->FirstChildElement( "centerHorizontally" ) )
 			mPartLayoutFlags |= EPartLayoutAlignHCenter;
-		if( layoutFlagsElem->FirstChildElement( "verticalCenter" ) )
+		if( layoutFlagsElem->FirstChildElement( "centerVertically" ) )
 			mPartLayoutFlags |= EPartLayoutAlignVCenter;
-		if( layoutFlagsElem->FirstChildElement( "top" ) )
-			mPartLayoutFlags |= EPartLayoutAlignTop;
+		if( layoutFlagsElem->FirstChildElement( "stretchHorizontally" ) )
+			mPartLayoutFlags |= EPartLayoutAlignHBoth;
+		if( layoutFlagsElem->FirstChildElement( "stretchVertically" ) )
+			mPartLayoutFlags |= EPartLayoutAlignVBoth;
+		if( layoutFlagsElem->FirstChildElement( "right" ) )
+			mPartLayoutFlags |= EPartLayoutAlignRight;
 		if( layoutFlagsElem->FirstChildElement( "bottom" ) )
 			mPartLayoutFlags |= EPartLayoutAlignBottom;
 	}
@@ -164,7 +168,7 @@ void	CVisiblePart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 
 	if( mPartLayoutFlags != 0 )	// No need to add layout flags element if it's the default, top/left:
 	{
-		elem = document->NewElement("layoutFlags");
+		elem = document->NewElement("pinning");
 		if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
 		{
 			subElem = document->NewElement("centerHorizontally");
@@ -485,6 +489,8 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 
 void	CVisiblePart::SetPartLayoutFlags( TPartLayoutFlags inFlags )
 {
+	IncrementChangeCount();
+	
 	mPartLayoutFlags = inFlags;
 }
 
