@@ -4,7 +4,7 @@
     <id>1</id>
     <name>Untitled</name>
     <style>standard</style>
-    <cardCount>1</cardCount>
+    <cardCount>2</cardCount>
     <cantModify><false/></cantModify>
     <cantDelete><false/></cantDelete>
     <cantAbort><false/></cantAbort>
@@ -15,4 +15,5 @@
     <script></script>
     <background id="1000" file="background_1000.xml" name=""/>
     <card id="3000" file="card_3000.xml" name="" owner="1000"/>
+    <card id="3001" file="card_3001.xml" name="" owner="1000"/>
 </stack>

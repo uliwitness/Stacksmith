@@ -124,7 +124,7 @@
         <icon>0</icon>
         <cursor>128</cursor>
         <selectedLines>
-            <integer>1</integer>
+            <integer>2</integer>
         </selectedLines>
         <textAlign>center</textAlign>
         <font>Lucida Grande</font>
@@ -365,6 +365,135 @@ end mouseUp</script>
 	set the textStyle of word 2 of card field 1 to italic
 end mouseUp</script>
     </part>
+    <part>
+        <id>7</id>
+        <type>field</type>
+        <rect>
+            <left>95</left>
+            <top>268</top>
+            <right>283</right>
+            <bottom>291</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>0</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>0</width>
+            <height>0</height>
+        </shadowOffset>
+        <shadowBlurRadius>0</shadowBlurRadius>
+        <lineWidth>0</lineWidth>
+        <bevelWidth>0</bevelWidth>
+        <bevelAngle>0</bevelAngle>
+        <toolTip></toolTip>
+        <pinning><bottom/></pinning>
+        <dontWrap><false/></dontWrap>
+        <dontSearch><false/></dontSearch>
+        <sharedText><false/></sharedText>
+        <fixedLineHeight><false/></fixedLineHeight>
+        <autoTab><false/></autoTab>
+        <lockText><false/></lockText>
+        <style>search</style>
+        <autoSelect><false/></autoSelect>
+        <showLines><false/></showLines>
+        <wideMargins><false/></wideMargins>
+        <multipleLines><false/></multipleLines>
+        <cursor>128</cursor>
+        <hasHorizontalScroller><false/></hasHorizontalScroller>
+        <hasVerticalScroller><false/></hasVerticalScroller>
+        <hasColumnHeaders><false/></hasColumnHeaders>
+        <textAlign>default</textAlign>
+        <font></font>
+        <textSize>12</textSize>
+        <textStyle>plain</textStyle>
+        <textHeight>0</textHeight>
+        <name>sf</name>
+        <script>on textChange
+	put “Searching for "” &amp; me &amp; quote into cd fld "sstatus"
+end textChange</script>
+    </part>
+    <part>
+        <id>8</id>
+        <type>field</type>
+        <rect>
+            <left>95</left>
+            <top>296</top>
+            <right>429</right>
+            <bottom>322</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>0</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>0</width>
+            <height>0</height>
+        </shadowOffset>
+        <shadowBlurRadius>0</shadowBlurRadius>
+        <lineWidth>0</lineWidth>
+        <bevelWidth>0</bevelWidth>
+        <bevelAngle>0</bevelAngle>
+        <toolTip></toolTip>
+        <pinning>
+            <stretchHorizontally/>
+            <bottom/>
+        </pinning>
+        <dontWrap><false/></dontWrap>
+        <dontSearch><true/></dontSearch>
+        <sharedText><false/></sharedText>
+        <fixedLineHeight><false/></fixedLineHeight>
+        <autoTab><false/></autoTab>
+        <lockText><true/></lockText>
+        <style>rectangle</style>
+        <autoSelect><false/></autoSelect>
+        <showLines><false/></showLines>
+        <wideMargins><false/></wideMargins>
+        <multipleLines><false/></multipleLines>
+        <cursor>128</cursor>
+        <hasHorizontalScroller><true/></hasHorizontalScroller>
+        <hasVerticalScroller><false/></hasVerticalScroller>
+        <hasColumnHeaders><false/></hasColumnHeaders>
+        <textAlign>default</textAlign>
+        <font></font>
+        <textSize>12</textSize>
+        <textStyle>plain</textStyle>
+        <textHeight>0</textHeight>
+        <name>sstatus</name>
+        <script></script>
+    </part>
     <content>
         <layer>card</layer>
         <id>3</id>
@@ -374,7 +503,7 @@ end mouseUp</script>
         <layer>card</layer>
         <id>1</id>
         <text>othervalue:foo
-<span class="style2">somestuff:This</span>
+<span class="style2">somestuff:that</span>
 avalue:123.457
 currentbutton:Choice 2
 d:
@@ -410,6 +539,16 @@ more</text>
     <content>
         <layer>card</layer>
         <id>4</id>
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>8</id>
+        <text><span class="style3">Searching for "What you want"</span></text>
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>7</id>
+        <text><span class="style4">What you want</span></text>
     </content>
     <name></name>
     <script></script>
