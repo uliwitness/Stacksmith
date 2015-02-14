@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE project PUBLIC "-//Apple, Inc.//DTD project V 2.0//EN" "">
 <project>
-    <stack id="623168672883076813" file="stack_623168672883076813.xml" name="Untitled"/>
+    <stack id="1" file="stack_1.xml" name="Untitled" thumbnail="stack_1.jpg"/>
     <userLevel>5</userLevel>
     <privateAccess><false/></privateAccess>
     <cantPeek><false/></cantPeek>
     <createdByVersion>Stacksmith 2.5</createdByVersion>
     <lastCompactedVersion>Stacksmith 2.5</lastCompactedVersion>
     <firstEditedVersion>Stacksmith 2.5</firstEditedVersion>
-    <lastEditedVersion>Stacksmith 1.0a11 (1161)</lastEditedVersion>
+    <lastEditedVersion>Stacksmith 1.0a11 (1242)</lastEditedVersion>
 </project>

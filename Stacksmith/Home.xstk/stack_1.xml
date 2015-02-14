@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE stack PUBLIC "-//Apple, Inc.//DTD stack V 2.0//EN" "">
+<stack>
+    <id>1</id>
+    <name>Untitled</name>
+    <style>standard</style>
+    <cardCount>1</cardCount>
+    <cantModify><false/></cantModify>
+    <cantDelete><false/></cantDelete>
+    <cantAbort><false/></cantAbort>
+    <cardSize>
+        <width>640</width>
+        <height>342</height>
+    </cardSize>
+    <script></script>
+    <background id="1000" file="background_1000.xml" name=""/>
+    <card id="3000" file="card_3000.xml" name="" owner="1000"/>
+</stack>

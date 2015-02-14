@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "">
 <card>
-    <id>8218833940570895554</id>
-    <bitmap>bitmap_8218833940570895554.tiff</bitmap>
+    <id>3000</id>
+    <bitmap>bitmap_3000.tiff</bitmap>
     <cantDelete><false/></cantDelete>
     <showPict><true/></showPict>
     <dontSearch><false/></dontSearch>
-    <owner>1112344475840500876</owner>
-    <link rel="stylesheet" type="text/css" href="stylesheet_card_8218833940570895554.css"/>
+    <owner>1000</owner>
+    <link rel="stylesheet" type="text/css" href="stylesheet_card_3000.css"/>
     <part>
         <id>1</id>
         <type>field</type>
         <rect>
-            <left>470</left>
+            <left>440</left>
             <top>64</top>
             <right>620</right>
             <bottom>173</bottom>
@@ -46,6 +46,7 @@
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
+        <pinning><right/></pinning>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -57,10 +58,12 @@
         <showLines><false/></showLines>
         <wideMargins><false/></wideMargins>
         <multipleLines><false/></multipleLines>
+        <cursor>128</cursor>
         <hasHorizontalScroller><false/></hasHorizontalScroller>
         <hasVerticalScroller><true/></hasVerticalScroller>
+        <hasColumnHeaders><false/></hasColumnHeaders>
         <selectedLines>
-            <integer>5</integer>
+            <integer>1</integer>
         </selectedLines>
         <textAlign>left</textAlign>
         <font>Geneva</font>
@@ -74,7 +77,7 @@
         <id>2</id>
         <type>button</type>
         <rect>
-            <left>456</left>
+            <left>440</left>
             <top>275</top>
             <right>623</right>
             <bottom>298</bottom>
@@ -108,6 +111,10 @@
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
+        <pinning>
+            <right/>
+            <bottom/>
+        </pinning>
         <style>popup</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -115,6 +122,7 @@
         <family>0</family>
         <titleWidth>91</titleWidth>
         <icon>0</icon>
+        <cursor>128</cursor>
         <selectedLines>
             <integer>1</integer>
         </selectedLines>
@@ -133,7 +141,7 @@ end mouseUp</script>
         <id>3</id>
         <type>field</type>
         <rect>
-            <left>470</left>
+            <left>440</left>
             <top>20</top>
             <right>620</right>
             <bottom>58</bottom>
@@ -167,6 +175,7 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
+        <pinning><right/></pinning>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -178,8 +187,10 @@ end mouseUp</script>
         <showLines><false/></showLines>
         <wideMargins><false/></wideMargins>
         <multipleLines><false/></multipleLines>
+        <cursor>128</cursor>
         <hasHorizontalScroller><false/></hasHorizontalScroller>
         <hasVerticalScroller><false/></hasVerticalScroller>
+        <hasColumnHeaders><false/></hasColumnHeaders>
         <textAlign>left</textAlign>
         <font>Lucida Grande</font>
         <textSize>13</textSize>
@@ -200,9 +211,9 @@ end mouseUp</script>
         <visible><true/></visible>
         <enabled><true/></enabled>
         <fillColor>
-            <red>65535</red>
-            <green>65535</green>
-            <blue>65535</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
             <alpha>65535</alpha>
         </fillColor>
         <lineColor>
@@ -226,11 +237,18 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
+        <pinning>
+            <stretchHorizontally/>
+            <stretchVertically/>
+        </pinning>
         <mediaPath>PlaceholderMovie.mov</mediaPath>
-        <currentTime>0</currentTime>
+        <currentTime>600</currentTime>
         <controllerVisible><false/></controllerVisible>
+        <cursor>128</cursor>
         <name>New Movie Player</name>
-        <script></script>
+        <script>on mouseUp
+start me
+end mouseUp</script>
     </part>
     <part>
         <id>5</id>
@@ -270,6 +288,7 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
+        <pinning><bottom/></pinning>
         <style>rectangle</style>
         <showName><false/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -277,6 +296,7 @@ end mouseUp</script>
         <family>0</family>
         <titleWidth>0</titleWidth>
         <icon>128</icon>
+        <cursor>128</cursor>
         <textAlign>center</textAlign>
         <font>Lucida Grande</font>
         <textSize>13</textSize>
@@ -290,7 +310,7 @@ end mouseUp</script>
         <id>6</id>
         <type>button</type>
         <rect>
-            <left>457</left>
+            <left>440</left>
             <top>301</top>
             <right>626</right>
             <bottom>325</bottom>
@@ -324,6 +344,10 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
+        <pinning>
+            <right/>
+            <bottom/>
+        </pinning>
         <style>standard</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -331,6 +355,7 @@ end mouseUp</script>
         <family>0</family>
         <titleWidth>0</titleWidth>
         <icon>0</icon>
+        <cursor>128</cursor>
         <textAlign>center</textAlign>
         <font>Lucida Grande</font>
         <textSize>13</textSize>
@@ -349,7 +374,7 @@ end mouseUp</script>
         <layer>card</layer>
         <id>1</id>
         <text>othervalue:foo
-somestuff:This
+<span class="style2">somestuff:This</span>
 avalue:123.457
 currentbutton:Choice 2
 d:
@@ -371,16 +396,20 @@ more</text>
     </content>
     <content>
         <layer>background</layer>
-        <id>3030564423061831540</id>
+        <id>911</id>
     </content>
     <content>
         <layer>background</layer>
-        <id>4368531217426424881</id>
+        <id>912</id>
         <highlight><true/></highlight>
     </content>
     <content>
         <layer>card</layer>
         <id>6</id>
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>4</id>
     </content>
     <name></name>
     <script></script>
