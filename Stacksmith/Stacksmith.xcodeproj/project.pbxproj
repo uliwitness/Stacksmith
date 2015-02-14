@@ -371,6 +371,7 @@
 		55B29CA91727731800B38E75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B29CA81727731800B38E75 /* AddressBook.framework */; };
 		55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B9225C11675D270073EC6C /* Quartz.framework */; };
 		55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC02E1116B2ADE00BB094E /* NoIcon.png */; };
+		55BD35731A8FF88300D0BAF7 /* UKPushbackMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD35721A8FF88300D0BAF7 /* UKPushbackMessenger.m */; };
 		55BFEE15137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */; };
 		55BFEE18137CB1F7008FC8BB /* WILDShrinkToTopFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BFEE17137CB1F7008FC8BB /* WILDShrinkToTopFilter.m */; };
 		55BFEE1A137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */; };
@@ -1023,6 +1024,8 @@
 		55B29CA81727731800B38E75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = ../../../../../System/Library/Frameworks/AddressBook.framework; sourceTree = "<group>"; };
 		55B9225C11675D270073EC6C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		55BC02E1116B2ADE00BB094E /* NoIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoIcon.png; path = Resources/NoIcon.png; sourceTree = "<group>"; };
+		55BD35721A8FF88300D0BAF7 /* UKPushbackMessenger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPushbackMessenger.m; path = ../UliKit/UKPushbackMessenger.m; sourceTree = "<group>"; };
+		55BD35741A8FF88D00D0BAF7 /* UKPushbackMessenger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UKPushbackMessenger.h; path = ../UliKit/UKPushbackMessenger.h; sourceTree = "<group>"; };
 		55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDShrinkToTopFilter.cikernel; path = "Custom Effects/WILDShrinkToTopFilter.cikernel"; sourceTree = "<group>"; };
 		55BFEE16137CB1F7008FC8BB /* WILDShrinkToTopFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDShrinkToTopFilter.h; path = "Custom Effects/WILDShrinkToTopFilter.h"; sourceTree = "<group>"; };
 		55BFEE17137CB1F7008FC8BB /* WILDShrinkToTopFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDShrinkToTopFilter.m; path = "Custom Effects/WILDShrinkToTopFilter.m"; sourceTree = "<group>"; };
@@ -1690,6 +1693,8 @@
 				555E53B718953843001487C1 /* NSObject+JCSKVOWithBlocks.m */,
 				559BA9A918AE70B900760273 /* ULIHighlightingButton.h */,
 				559BA9AA18AE70B900760273 /* ULIHighlightingButton.m */,
+				55BD35741A8FF88D00D0BAF7 /* UKPushbackMessenger.h */,
+				55BD35721A8FF88300D0BAF7 /* UKPushbackMessenger.m */,
 				55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */,
 			);
 			name = Utilities;
@@ -2595,6 +2600,7 @@
 				551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */,
 				55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */,
 				55AF101F18B6BFFD00819AE9 /* WILDScrollView.mm in Sources */,
+				55BD35731A8FF88300D0BAF7 /* UKPushbackMessenger.m in Sources */,
 				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
 				551583E318C3BF9200DB3431 /* WILDInvisiblePlayerView.mm in Sources */,
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,

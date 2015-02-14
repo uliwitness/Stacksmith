@@ -16,15 +16,20 @@
 #include "UTF8UTF32Utilities.h"
 #include "CDocument.h"
 #import "UKHelperMacros.h"
+#import "UKPushbackMessenger.h"
 
 
 using namespace Carlson;
 
 
 @interface WILDSearchField : NSSearchField
+{
+	UKPushbackMessenger	*	pushbackMessenger;
+}
 
 @property (assign,nonatomic) CFieldPartMac*			owningField;
 @property (assign,nonatomic) BOOL					dontSendSelectionChange;
+@property (assign,nonatomic) NSRange				selectedRange;
 
 @end
 
@@ -32,15 +37,55 @@ using namespace Carlson;
 
 @synthesize owningField;
 @synthesize dontSendSelectionChange;
+@synthesize selectedRange;
 
-- (void)selectWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
+-(void)	dealloc
 {
-	[super selectWithFrame:aRect editor:textObj delegate:anObject start:selStart length:selLength];
+	[[NSNotificationCenter defaultCenter] removeObserver: self name: NSTextViewDidChangeSelectionNotification object: nil];
+	DESTROY_DEALLOC(pushbackMessenger);
 	
-	if( !dontSendSelectionChange )
+	[super dealloc];
+}
+
+
+-(void)	beginWatchingForSelectionChanges
+{
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(fieldEditorsSelectionDidChange:) name: NSTextViewDidChangeSelectionNotification object: nil];
+}
+
+
+-(void)	fieldEditorsSelectionDidChange: (NSNotification *)notif
+{
+	NSText*	fieldEditor = notif.object;
+	if( fieldEditor != self.currentEditor || self.dontSendSelectionChange )
+		return;
+	
+	if( !pushbackMessenger )
 	{
-		NSLog( @"selection %ld,%ld", selStart, selLength );
+		pushbackMessenger = [[UKPushbackMessenger alloc] initWithTarget: self];
+		[pushbackMessenger setDelay: 0.1];
+		[pushbackMessenger setMaxPushTime: 0.5];
 	}
+	[(id)pushbackMessenger sendSelectionChangeMessage];
+}
+
+
+-(void)	sendSelectionChangeMessage
+{
+	if( self.currentEditor.selectedRange.location != selectedRange.location || self.currentEditor.selectedRange.length != selectedRange.length )
+	{
+		selectedRange = self.currentEditor.selectedRange;
+		
+		CAutoreleasePool		pool;
+		self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
+	}
+}
+
+
+-(void)	setSelectedRange: (NSRange)inRange
+{
+	selectedRange = inRange;
+	[self.currentEditor setSelectedRange: inRange];
 }
 
 @end;
@@ -54,6 +99,7 @@ using namespace Carlson;
 @property (assign,nonatomic) BOOL					multipleColumns;
 @property (retain,nonatomic) NSMutableDictionary*	images;
 @property (assign,nonatomic) NSTableView*			table;
+@property (assign,nonatomic) WILDSearchField*		searchField;
 
 @end
 
@@ -427,7 +473,10 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	else if( mFieldStyle == EFieldStyleSearch )
 	{
 		mSearchField = [[WILDSearchField alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		[mSearchField beginWatchingForSelectionChanges];
 		mSearchField.delegate = mMacDelegate;
+		mSearchField.owningField = this;
+		mMacDelegate.searchField = mSearchField;
 	}
 	else
 	{
@@ -821,7 +870,20 @@ void	CFieldPartMac::SetSelectedRange( LEOChunkType inType, size_t inStartOffs, s
 {
 	if( mSearchField)
 	{
-		// +++ Implement selected range for search field.
+		if( inEndOffs < inStartOffs )
+		{
+			NSInteger selStart = 0;
+			if( mSearchField.stringValue.length > 0 )
+				selStart = mSearchField.stringValue.length -1;
+			[mSearchField setSelectedRange: NSMakeRange(selStart,0)];
+		}
+		else
+		{
+			NSRange	cocoaRange;
+			cocoaRange.location = UTF16OffsetFromUTF32OffsetInCocoaString( inStartOffs -1, mSearchField.stringValue );
+			cocoaRange.length = UTF16OffsetFromUTF32OffsetInCocoaString( inEndOffs -1, mSearchField.stringValue ) +1 -cocoaRange.location;
+			[mSearchField setSelectedRange: cocoaRange];
+		}
 	}
 	else if( mTableView )
 	{
@@ -864,12 +926,9 @@ void	CFieldPartMac::GetSelectedRange( LEOChunkType* outType, size_t* outStartOff
 	}
 	else if( mSearchField )
 	{
-		// +++ Implement selected range for search fields.
-		*outStartOffs = 1;
-		*outEndOffs = 1;
-//		NSRange	selRange = [mSearchField selectedRange];
-//		*outStartOffs = UTF32OffsetFromUTF16OffsetInCocoaString( selRange.location, [[mTextView textStorage] string] ) +1;
-//		*outEndOffs = UTF32OffsetFromUTF16OffsetInCocoaString( selRange.location +selRange.length, [[mTextView textStorage] string] );
+		NSRange	selRange = [mSearchField selectedRange];
+		*outStartOffs = UTF32OffsetFromUTF16OffsetInCocoaString( selRange.location, [[mTextView textStorage] string] ) +1;
+		*outEndOffs = UTF32OffsetFromUTF16OffsetInCocoaString( selRange.location +selRange.length, [[mTextView textStorage] string] );
 		*outType = kLEOChunkTypeCharacter;
 	}
 	else
