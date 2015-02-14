@@ -62,7 +62,7 @@
 	NSString*	version = @"" MGVH_TOSTRING(STACKSMITH_VERSION);
 	[mVersionField setStringValue: version];
 	[mLicenseeField setStringValue: @"" SVN_BUILD_DATE " " SVN_BUILD_MEANS_STR];
-	[mCompanyField setStringValue: @"Git Hash: " GIT_HASH];
+	[mCompanyField setStringValue: @"" GIT_HASH];
 }
 
 

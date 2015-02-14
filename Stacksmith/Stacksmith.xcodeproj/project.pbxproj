@@ -343,7 +343,6 @@
 		55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4914668D6E00AB0F34 /* boing.aiff */; };
 		55A7BA4D14668D6E00AB0F34 /* flute.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 55A7BA4A14668D6E00AB0F34 /* flute.aiff */; };
 		55A7BA73146690AF00AB0F34 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */; };
-		55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */; };
 		55AC961B1870D50400488B51 /* CTinyXMLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */; };
 		55AC961E1870FF2200488B51 /* CPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55AC961C1870FF2200488B51 /* CPart.cpp */; };
 		55AC96211870FFC200488B51 /* CPartContents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55AC961F1870FFC200488B51 /* CPartContents.cpp */; };
@@ -444,7 +443,6 @@
 		55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FDD875171B27020045A2B9 /* UKTiledImageView.m */; };
 		55FDD878171B29DE0045A2B9 /* CURS_0.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55FDD877171B29DC0045A2B9 /* CURS_0.pdf */; };
 		55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FDD880171B456E0045A2B9 /* UKBorderlessWindow.m */; };
-		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -561,7 +559,6 @@
 		1DDD582B0DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2564AD2C0F5327BB00F57823 /* Stacksmith_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stacksmith_Prefix.pch; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		5503472F1370A18800AE7681 /* StacksmithVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksmithVersion.h; sourceTree = "<group>"; };
@@ -996,7 +993,6 @@
 		55A7BA4914668D6E00AB0F34 /* boing.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = boing.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/boing.aiff; sourceTree = "<group>"; };
 		55A7BA4A14668D6E00AB0F34 /* flute.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = flute.aiff; path = ../ULIMelodyQueue/ULIMelodyQueue/flute.aiff; sourceTree = "<group>"; };
 		55A7BA72146690AF00AB0F34 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		55AA4B75131DA9CC00511656 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = English; path = English.lproj/StacksmithSplashScreen.jpg; sourceTree = "<group>"; };
 		55AAC04417109571008441AF /* WILDGlobalProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDGlobalProperties.h; path = Instructions/WILDGlobalProperties.h; sourceTree = SOURCE_ROOT; };
 		55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTinyXMLUtils.cpp; path = "Portable Document/CTinyXMLUtils.cpp"; sourceTree = "<group>"; };
 		55AC961A1870D50400488B51 /* CTinyXMLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTinyXMLUtils.h; path = "Portable Document/CTinyXMLUtils.h"; sourceTree = "<group>"; };
@@ -1254,7 +1250,6 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				8D15AC360486D014006FF6A4 /* Stacksmith-Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
@@ -1269,7 +1264,6 @@
 				55E3A6F911519B45008411BB /* HCSV.icns */,
 				55E3A6FA11519B45008411BB /* Stack.icns */,
 				557B182E113C5CD600F85327 /* OldStack.icns */,
-				55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */,
 				556C496E1731F48000C40D97 /* TimerIcon.pdf */,
 				55ADC5061744525F0084AAA9 /* BackgroundIcon.icns */,
 				55ADC5071744525F0084AAA9 /* CardIcon.icns */,
@@ -2165,7 +2159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CD60D818754007002450E2 /* stackimport in Resources */,
-				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
 				559BA9B018AE909100760273 /* WILDCardInfoViewController.xib in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
@@ -2238,7 +2231,6 @@
 				55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */,
 				555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */,
 				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
-				55AA4B76131DA9CC00511656 /* StacksmithSplashScreen.jpg in Resources */,
 				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
 				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
 				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
@@ -2675,22 +2667,6 @@
 				1DDD582B0DA1D0D100B32029 /* English */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A37F4BAFDCFA73011CA2CEA /* English */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		55AA4B74131DA9CC00511656 /* StacksmithSplashScreen.jpg */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55AA4B75131DA9CC00511656 /* English */,
-			);
-			name = StacksmithSplashScreen.jpg;
 			sourceTree = "<group>";
 		};
 		55B29C9C17276D4100B38E75 /* UKCrashReporter.strings */ = {
