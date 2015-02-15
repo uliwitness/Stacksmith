@@ -371,7 +371,7 @@ end mouseUp</script>
         <rect>
             <left>95</left>
             <top>268</top>
-            <right>283</right>
+            <right>250</right>
             <bottom>291</bottom>
         </rect>
         <visible><true/></visible>
@@ -436,7 +436,7 @@ end textChange</script>
             <left>95</left>
             <top>296</top>
             <right>429</right>
-            <bottom>322</bottom>
+            <bottom>338</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
@@ -483,7 +483,7 @@ end textChange</script>
         <wideMargins><false/></wideMargins>
         <multipleLines><false/></multipleLines>
         <cursor>128</cursor>
-        <hasHorizontalScroller><true/></hasHorizontalScroller>
+        <hasHorizontalScroller><false/></hasHorizontalScroller>
         <hasVerticalScroller><false/></hasVerticalScroller>
         <hasColumnHeaders><false/></hasColumnHeaders>
         <textAlign>default</textAlign>
@@ -493,6 +493,70 @@ end textChange</script>
         <textHeight>0</textHeight>
         <name>sstatus</name>
         <script></script>
+    </part>
+    <part>
+        <id>0</id>
+        <type>field</type>
+        <rect>
+            <left>252</left>
+            <top>268</top>
+            <right>440</right>
+            <bottom>292</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>0</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>0</width>
+            <height>0</height>
+        </shadowOffset>
+        <shadowBlurRadius>0</shadowBlurRadius>
+        <lineWidth>0</lineWidth>
+        <bevelWidth>0</bevelWidth>
+        <bevelAngle>0</bevelAngle>
+        <toolTip></toolTip>
+        <pinning><bottom/></pinning>
+        <dontWrap><false/></dontWrap>
+        <dontSearch><false/></dontSearch>
+        <sharedText><false/></sharedText>
+        <fixedLineHeight><false/></fixedLineHeight>
+        <autoTab><false/></autoTab>
+        <lockText><false/></lockText>
+        <style>popup</style>
+        <autoSelect><false/></autoSelect>
+        <showLines><false/></showLines>
+        <wideMargins><false/></wideMargins>
+        <multipleLines><false/></multipleLines>
+        <cursor>128</cursor>
+        <hasHorizontalScroller><false/></hasHorizontalScroller>
+        <hasVerticalScroller><false/></hasVerticalScroller>
+        <hasColumnHeaders><false/></hasColumnHeaders>
+        <textAlign>default</textAlign>
+        <font></font>
+        <textSize>12</textSize>
+        <textStyle>plain</textStyle>
+        <textHeight>0</textHeight>
+        <name>pf</name>
+        <script>on textChange
+	put “Picked "” &amp; line 1 of me &amp; quote into cd fld "sstatus"
+end textChange</script>
     </part>
     <content>
         <layer>card</layer>
@@ -543,12 +607,19 @@ more</text>
     <content>
         <layer>card</layer>
         <id>8</id>
-        <text><span class="style3">Searching for "What you want"</span></text>
+        <text><span class="style3">Picked "More??"</span></text>
     </content>
     <content>
         <layer>card</layer>
         <id>7</id>
         <text><span class="style4">What you want</span></text>
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>0</id>
+        <text><span class="style5">This
+That
+More</span></text>
     </content>
     <name></name>
     <script></script>
