@@ -225,11 +225,12 @@ bool	CFieldPart::GetTextContents( std::string &outString )
 
 bool	CFieldPart::SetTextContents( const std::string& inString )
 {
-	CVisiblePart::SetTextContents( inString );
+	bool didWork = CVisiblePart::SetTextContents( inString );
 	
-	LoadChangedTextStylesIntoView();
+	if( didWork )
+		LoadChangedTextStylesIntoView();
 	
-	return true;
+	return didWork;
 }
 
 

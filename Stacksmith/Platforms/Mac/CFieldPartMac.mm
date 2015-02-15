@@ -279,14 +279,14 @@ using namespace Carlson;
 	DESTROY(images);
 }
 
-- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox;
+-(NSInteger)	numberOfItemsInComboBox: (NSComboBox *)aComboBox;
 {
-	return 5;
+	return lines.count -1;		// Skip first line, it's already displayed in the combo box.
 }
 
-- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index
+-(id)	comboBox: (NSComboBox *)aComboBox objectValueForItemAtIndex: (NSInteger)index
 {
-	return @[ @"foo", @"bar", @"zed", @"hullo", @"aardvark" ][ index ];
+	return lines[ index +1 ];	// Skip first line, it's already displayed in the combo box.
 }
 
 @end;
@@ -430,8 +430,8 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		mSearchField.delegate = mMacDelegate;
 		mSearchField.owningField = this;
 		mMacDelegate.searchField = mSearchField;
-		((WILDComboBox*)mSearchField).dataSource = mMacDelegate;
 		((WILDComboBox*)mSearchField).usesDataSource = YES;
+		((WILDComboBox*)mSearchField).dataSource = mMacDelegate;
 		[(WILDComboBox*)mSearchField reloadData];
 	}
 	else
@@ -476,6 +476,12 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		{
 			[mTableView selectRowIndexes: [NSIndexSet indexSetWithIndex: currLine -1] byExtendingSelection: YES];
 		}
+	}
+	else if( mFieldStyle == EFieldStylePopUp )
+	{
+		LoadChangedTextStylesIntoView();
+		[mSearchField setEditable: !GetLockText() && GetEnabled()];
+		[mSearchField setSelectable: !GetLockText()];
 	}
 	else if( mSearchField )
 	{
@@ -925,7 +931,7 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 		if( contents )
 		{
 			std::string	theStr( contents->GetText() );
-			if( theStr.find("{\\rtf1\\ansi\\") == 0 )
+			if( theStr.find("{\\rtf1\\ansi\\") == 0 )	// +++ Remove before shipping, this is to import old Stacksmith beta styles.
 			{
 				NSDictionary*			docAttrs = nil;
 				NSAttributedString*		attrStr = [[NSAttributedString alloc] initWithRTF: [NSData dataWithBytes: theStr.c_str() length: theStr.length()] documentAttributes: &docAttrs];
@@ -939,6 +945,21 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 		[mMacDelegate setLines: ctx.lines];
 		[ctx.lines release];
 		[mTableView reloadData];
+	}
+	else if( contents && mFieldStyle == EFieldStylePopUp )
+	{
+		ListChunkCallbackContext	ctx = { .lines = [[NSMutableArray alloc] init], .contents = contents, .defaultAttrs = GetCocoaAttributesForPart() };
+		if( contents )
+		{
+			std::string	theStr( contents->GetText() );
+			LEODoForEachChunk( theStr.c_str(), contents->GetText().length(), kLEOChunkTypeLine, ListChunkCallback, 0, &ctx );
+		}
+		mMacDelegate.multipleColumns = NO;
+		[mMacDelegate setLines: ctx.lines];
+		[ctx.lines release];
+		[(WILDComboBox*)mSearchField reloadData];
+		[mSearchField setAttributedStringValue: mMacDelegate.lines[0]];
+		[(WILDComboBox*)mSearchField selectItemWithObjectValue: mMacDelegate.lines[0]];
 	}
 	else if( contents )
 	{
@@ -957,7 +978,11 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 	else
 	{
 		if( mSearchField )
+		{
 			[mSearchField setStringValue: @""];
+			if( mFieldStyle == EFieldStylePopUp )
+				mMacDelegate.lines = [NSMutableArray arrayWithObject: @""];
+		}
 		else
 			[mTextView setString: @""];
 	}
