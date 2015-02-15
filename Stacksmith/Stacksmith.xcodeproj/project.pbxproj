@@ -432,6 +432,7 @@
 		55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */; };
 		55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC644114CFAE000BAA09D /* CardIconSmall.png */; };
 		55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC645114CFAE000BAA09D /* FieldIconSmall.png */; };
+		55EE385E1A91473B00E1C2E7 /* CGraphicPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55EE385C1A91473B00E1C2E7 /* CGraphicPart.cpp */; };
 		55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */; };
 		55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */; };
 		55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D2E136A50D600E8588D /* ICON_128.pdf */; };
@@ -1131,6 +1132,8 @@
 		55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonIconSmall.png; sourceTree = "<group>"; };
 		55EBC644114CFAE000BAA09D /* CardIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CardIconSmall.png; sourceTree = "<group>"; };
 		55EBC645114CFAE000BAA09D /* FieldIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FieldIconSmall.png; sourceTree = "<group>"; };
+		55EE385C1A91473B00E1C2E7 /* CGraphicPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGraphicPart.cpp; path = "Portable Document/CGraphicPart.cpp"; sourceTree = "<group>"; };
+		55EE385D1A91473B00E1C2E7 /* CGraphicPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGraphicPart.h; path = "Portable Document/CGraphicPart.h"; sourceTree = "<group>"; };
 		55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDAboutPanelController.h; path = Windows/WILDAboutPanelController.h; sourceTree = "<group>"; };
 		55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDAboutPanelController.m; path = Windows/WILDAboutPanelController.m; sourceTree = "<group>"; };
 		55F2EAF1131DA26700913200 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDAboutPanelController.xib; sourceTree = "<group>"; };
@@ -1758,6 +1761,8 @@
 				55CD60B4187510EF002450E2 /* CButtonPart.cpp */,
 				55CD60B7187510F0002450E2 /* CFieldPart.h */,
 				55CD60B6187510EF002450E2 /* CFieldPart.cpp */,
+				55EE385D1A91473B00E1C2E7 /* CGraphicPart.h */,
+				55EE385C1A91473B00E1C2E7 /* CGraphicPart.cpp */,
 				55CD60B9187510F0002450E2 /* CMoviePlayerPart.h */,
 				55CD60B8187510F0002450E2 /* CMoviePlayerPart.cpp */,
 				55CD60BB187510F0002450E2 /* CWebBrowserPart.h */,
@@ -2571,6 +2576,7 @@
 				55039FD8136D5CCF0082E32E /* ULIPaintTool.m in Sources */,
 				55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */,
 				559BA9D118B11E4600760273 /* CPlatformLayer.mm in Sources */,
+				55EE385E1A91473B00E1C2E7 /* CGraphicPart.cpp in Sources */,
 				552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */,
 				552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */,
 				559700EC137BB38B000264B8 /* WILDIrisOpenFilter.m in Sources */,
