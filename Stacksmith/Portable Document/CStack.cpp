@@ -201,6 +201,14 @@ bool	CStack::Save( const std::string& inPackagePath )
 		nameElem->SetText(mName.c_str());
 		root->InsertEndChild( nameElem );
 		
+		tinyxml2::XMLElement*		elem = NULL;
+		if( mUserLevel != 5 )
+		{
+			elem = document.NewElement("userLevel");
+			elem->SetText( mUserLevel );
+			root->InsertEndChild( elem );
+		}
+
 		tinyxml2::XMLElement*		styleElem = document.NewElement("style");
 		styleElem->SetText( sStackStyleStrings[mStyle] );
 		root->InsertEndChild( styleElem );
@@ -212,6 +220,9 @@ bool	CStack::Save( const std::string& inPackagePath )
 		CTinyXMLUtils::AddBoolNamed( root, mCantModify, "cantModify" );
 		CTinyXMLUtils::AddBoolNamed( root, mCantModify, "cantDelete" );
 		CTinyXMLUtils::AddBoolNamed( root, mCantAbort, "cantAbort" );
+		CTinyXMLUtils::AddBoolNamed( root, mPrivateAccess, "privateAccess" );
+		CTinyXMLUtils::AddBoolNamed( root, mCantPeek, "cantPeek" );
+		CTinyXMLUtils::AddBoolNamed( root, mResizable, "resizable" );
 
 		tinyxml2::XMLElement*		cardSizeElem = document.NewElement("cardSize");
 		tinyxml2::XMLElement*		cardSizeWidthElem = document.NewElement("width");
