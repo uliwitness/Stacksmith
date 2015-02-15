@@ -289,6 +289,20 @@ using namespace Carlson;
 	return lines[ index +1 ];	// Skip first line, it's already displayed in the combo box.
 }
 
+- (void)comboBoxSelectionDidChange: (NSNotification *)notification
+{
+	self.lines[0] = ((WILDComboBox*)notification.object).attributedStringValue;
+	
+	self.owningField->SetViewTextNeedsSync( true );
+	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
+	if( contents ) contents->IncrementChangeCount();
+
+	CAutoreleasePool	cppPool;
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp" );
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "textChange" );
+}
+
 @end;
 
 struct ListChunkCallbackContext
@@ -959,7 +973,6 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 		[ctx.lines release];
 		[(WILDComboBox*)mSearchField reloadData];
 		[mSearchField setAttributedStringValue: mMacDelegate.lines[0]];
-		[(WILDComboBox*)mSearchField selectItemWithObjectValue: mMacDelegate.lines[0]];
 	}
 	else if( contents )
 	{
@@ -1012,7 +1025,7 @@ void	CFieldPartMac::LoadChangedTextFromView()
 				x++;
 			}
 		}
-		else if( mAutoSelect )
+		else if( mAutoSelect || mFieldStyle == EFieldStylePopUp )
 		{
 			NSMutableAttributedString*	finalStr = [[NSMutableAttributedString alloc] init];
 			BOOL						firstLine = YES;
