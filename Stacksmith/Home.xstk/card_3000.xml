@@ -242,7 +242,7 @@ end mouseUp</script>
             <stretchVertically/>
         </pinning>
         <mediaPath>PlaceholderMovie.mov</mediaPath>
-        <currentTime>600</currentTime>
+        <currentTime>691</currentTime>
         <controllerVisible><false/></controllerVisible>
         <cursor>128</cursor>
         <name>New Movie Player</name>
@@ -607,7 +607,7 @@ more</text>
     <content>
         <layer>card</layer>
         <id>8</id>
-        <text><span class="style3">Picked "More??"</span></text>
+        <text><span class="style3">Picked "This"</span></text>
     </content>
     <content>
         <layer>card</layer>
@@ -618,7 +618,7 @@ more</text>
         <layer>card</layer>
         <id>0</id>
         <text><span class="style5">This
-That
+</span><span class="style6">That
 More</span></text>
     </content>
     <name></name>
