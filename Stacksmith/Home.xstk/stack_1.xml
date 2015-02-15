@@ -8,6 +8,9 @@
     <cantModify><false/></cantModify>
     <cantDelete><false/></cantDelete>
     <cantAbort><false/></cantAbort>
+    <privateAccess><false/></privateAccess>
+    <cantPeek><false/></cantPeek>
+    <resizable><true/></resizable>
     <cardSize>
         <width>640</width>
         <height>342</height>
