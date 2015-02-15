@@ -64,6 +64,10 @@ using namespace Carlson;
 
 -(void)	controlTextDidChange:(NSNotification *)notif	// Search field text changed.
 {
+	if( self.owningField->GetStyle() == EFieldStylePopUp )
+	{
+		lines[0] = [notif.object attributedStringValue];
+	}
 	self.owningField->SetViewTextNeedsSync( true );
 	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
 	if( contents ) contents->IncrementChangeCount();
@@ -291,7 +295,7 @@ using namespace Carlson;
 
 - (void)comboBoxSelectionDidChange: (NSNotification *)notification
 {
-	self.lines[0] = ((WILDComboBox*)notification.object).attributedStringValue;
+	self.lines[0] = self.lines[((WILDComboBox*)notification.object).indexOfSelectedItem +1];
 	
 	self.owningField->SetViewTextNeedsSync( true );
 	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
