@@ -39,7 +39,7 @@
         </shadowColor>
         <shadowOffset>
             <width>1</width>
-            <height>-1</height>
+            <height>1</height>
         </shadowOffset>
         <shadowBlurRadius>3</shadowBlurRadius>
         <lineWidth>1</lineWidth>
@@ -168,7 +168,7 @@ end mouseUp</script>
         </shadowColor>
         <shadowOffset>
             <width>1</width>
-            <height>-1</height>
+            <height>1</height>
         </shadowOffset>
         <shadowBlurRadius>3</shadowBlurRadius>
         <lineWidth>1</lineWidth>
@@ -281,7 +281,7 @@ end mouseUp</script>
         </shadowColor>
         <shadowOffset>
             <width>1</width>
-            <height>-1</height>
+            <height>1</height>
         </shadowOffset>
         <shadowBlurRadius>4</shadowBlurRadius>
         <lineWidth>1</lineWidth>
@@ -607,7 +607,7 @@ more</text>
     <content>
         <layer>card</layer>
         <id>8</id>
-        <text><span class="style3">Picked "This"</span></text>
+        <text><span class="style3">Searching for "What you want"</span></text>
     </content>
     <content>
         <layer>card</layer>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE project PUBLIC "-//Apple, Inc.//DTD project V 2.0//EN" "">
 <project>
-    <stack id="1" file="stack_1.xml" name="Untitled" thumbnail="stack_1.jpg"/>
+    <stack id="1" file="stack_1.xml" name="Home" thumbnail="stack_1.jpg"/>
     <userLevel>5</userLevel>
     <privateAccess><false/></privateAccess>
     <cantPeek><false/></cantPeek>
