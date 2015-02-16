@@ -28,6 +28,7 @@ public:
 	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock ) = 0;
 	
 	virtual void	AddDocument( CDocumentRef inDocument )	{ mOpenDocuments.push_back(inDocument); };
+	virtual void	CloseDocument( CDocumentRef inDocument );
 	virtual void	SetPeeking( bool inState );
 	virtual void	SaveAll();
 	virtual bool	HaveDocuments()							{ return mOpenDocuments.size() > 0; };
@@ -82,6 +83,7 @@ public:
 
 	virtual void		IncrementChangeCount()	{ mChangeCount++; };
 	virtual bool		GetNeedsToBeSaved();
+	virtual void		CheckIfWeShouldCloseCauseLastStackClosed();
 	
 	virtual void		Dump( size_t inNestingLevel = 0 );
 	static std::string	PathFromFileURL( const std::string& inURL );

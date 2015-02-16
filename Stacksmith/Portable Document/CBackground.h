@@ -10,11 +10,11 @@
 #define __Stacksmith__CBackground__
 
 #include "CPlatformLayer.h"
+#include "CCard.h"
 #include <set>
 
 namespace Carlson {
 
-class CCard;
 class CStyleSheet;
 
 class CBackground : public CPlatformLayer
@@ -47,7 +47,7 @@ protected:
 	virtual const char*	GetLayerXMLType()			{ return "background"; };
 	virtual const char*	GetIdentityForDump()		{ return "Background"; };
 	
-	std::set<CCard*>	mMemberCards;
+	std::set<CCardRef>	mMemberCards;
 };
 
 typedef CRefCountedObjectRef<CBackground>	CBackgroundRef;

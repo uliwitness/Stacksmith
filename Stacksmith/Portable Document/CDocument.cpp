@@ -489,6 +489,17 @@ void	CDocument::SetPeeking( bool inState )
 }
 
 
+void	CDocument::CheckIfWeShouldCloseCauseLastStackClosed()
+{
+	for( auto currStack : mStacks )
+	{
+		if( currStack->IsVisible() )
+			return;
+	}
+	
+	CDocumentManager::GetSharedDocumentManager()->CloseDocument( this );
+}
+
 void	CDocument::Dump( size_t inNestingLevel )
 {
 	printf( "Document\n{\n\tloaded = %s\n\tloading= %s\n\tcreatedByVersion = %s\n\tlastCompactedVersion = %s\n\tfirstEditedVersion = %s\n\tlastEditedVersion = %s\n",
@@ -518,6 +529,21 @@ void	CDocumentManager::SetPeeking( bool inState )
 	for( auto currDoc : mOpenDocuments )
 	{
 		currDoc->SetPeeking( inState );
+	}
+}
+
+
+void	CDocumentManager::CloseDocument( CDocumentRef inDocument )
+{
+	for( auto currDoc = mOpenDocuments.begin(); currDoc != mOpenDocuments.end(); currDoc++ )
+	{
+		if( (*currDoc) == inDocument )
+		{
+			if( (*currDoc)->GetNeedsToBeSaved() )
+				(*currDoc)->Save();
+			mOpenDocuments.erase(currDoc);
+			break;
+		}
 	}
 }
 

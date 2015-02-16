@@ -67,7 +67,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 		
 		// Wasn't already open? Create a new one and load the URL into it:
         mOpenDocuments.push_back( new CDocumentMac() );
-        CDocumentRef	currDoc = mOpenDocuments.back();
+        CDocumentRef	currDoc( mOpenDocuments.back(), true );	// Take over ownership of the pointer we just 'new'ed, mOpenDocuments retains it by itself.
         
         currDoc->LoadFromURL( fileURL, [inCompletionBlock,inURL](Carlson::CDocument * inDocument)
         {

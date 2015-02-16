@@ -770,7 +770,18 @@ bool	CStack::GetNeedsToBeSaved()
 	}
 
 	return false;
-};
+}
+
+
+void	CStack::SetVisible( bool n )
+{
+	mVisible = n;
+	
+	if( !mVisible )
+	{
+		GetDocument()->CheckIfWeShouldCloseCauseLastStackClosed();
+	}
+}
 
 
 void	CStack::SaveThumbnail()

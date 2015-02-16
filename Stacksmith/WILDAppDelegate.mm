@@ -296,6 +296,7 @@ void	WILDScheduleResumeOfScript( void )
 					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
 					
 					theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
+					theDoc->Release();
 				}
 				else
 				{
@@ -343,6 +344,7 @@ void	WILDScheduleResumeOfScript( void )
 			[savePanel.URL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
             
             theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
+			theDoc->Release();
         }
         catch( std::exception& inException )
         {

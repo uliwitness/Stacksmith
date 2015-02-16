@@ -139,7 +139,7 @@ public:
 	
 	// Visibility feedback from the UI: (This is not whether the stack's window is obscured, but whether it's actually ordered out or closed)
 	virtual bool	IsVisible()								{ return mVisible; };
-	virtual void	SetVisible( bool n )					{ mVisible = n; };
+	virtual void	SetVisible( bool n );
 	
 	// Allow code to trigger showing the UI:
 	virtual void	Show()									{ mVisible = true; };
