@@ -68,6 +68,8 @@ public:
 	virtual void				SetCardHeight( int n );
 
 	virtual void				ClearAllGuidelines( bool inTrackingDone = false );
+
+	virtual void				Show();
 	
 	static void					RegisterPartCreators();
 

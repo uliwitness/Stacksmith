@@ -795,6 +795,7 @@ using namespace Carlson;
 {
 	CStack::SetFrontStack( mStack );
 	mWasVisible = YES;
+	mStack->SetVisible(true);
 	
 	if( mStack->GetStyle() == EStackStylePopup )
 	{
@@ -814,6 +815,7 @@ using namespace Carlson;
 {
 	CStack::SetFrontStack( mStack );
 	mWasVisible = YES;
+	mStack->SetVisible(true);
 	
 	if( mStack->GetStyle() == EStackStylePopup )
 	{
@@ -825,6 +827,7 @@ using namespace Carlson;
 -(void)	windowWillClose: (NSNotification *)notification
 {
 	mWasVisible = NO;
+	mStack->SetVisible(false);
 }
 
 
@@ -847,6 +850,7 @@ using namespace Carlson;
 	{
 		CStack::SetFrontStack( mStack );
 		mWasVisible = YES;
+		mStack->SetVisible(true);
 	}
 }
 
@@ -856,6 +860,7 @@ using namespace Carlson;
 	if( notification.object == mPopover )
 	{
 		mWasVisible = NO;
+		mStack->SetVisible(false);
 	}
 }
 

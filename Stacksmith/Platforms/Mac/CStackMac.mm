@@ -85,6 +85,16 @@ bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, 
 }
 
 
+void	CStackMac::Show()
+{
+	if( !mVisible )
+	{
+		[mMacWindowController showWindow: nil];
+	}
+}
+
+
+
 void	CStackMac::SetName( const std::string& inName )
 {
 	CStack::SetName(inName);

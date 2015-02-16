@@ -136,6 +136,13 @@ public:
 	virtual void	AddGuideline( long long inGuidelineCoord, bool inHorzNotVert )	{ if( inHorzNotVert ) mHorizontalGuidelines.push_back(inGuidelineCoord); else mVerticalGuidelines.push_back(inGuidelineCoord); };
 	virtual size_t	GetNumGuidelines()		{ return mHorizontalGuidelines.size() + mVerticalGuidelines.size(); };
 	virtual void	GetGuidelineAtIndex( size_t idx, long long *outCoord, bool *outHorzNotVert )	{ size_t hcount = mHorizontalGuidelines.size(); if( idx >= hcount ) { *outCoord = mVerticalGuidelines[idx-hcount]; *outHorzNotVert = false; } else { *outCoord = mHorizontalGuidelines[idx]; *outHorzNotVert = true; } };
+	
+	// Visibility feedback from the UI: (This is not whether the stack's window is obscured, but whether it's actually ordered out or closed)
+	virtual bool	IsVisible()								{ return mVisible; };
+	virtual void	SetVisible( bool n )					{ mVisible = n; };
+	
+	// Allow code to trigger showing the UI:
+	virtual void	Show()									{ mVisible = true; };
 
 	std::string		GetThumbnailName()						{ return mThumbnailName; };	// Empty string if we have no thumbnail.
 	void			SetThumbnailName( std::string inName )	{ mThumbnailName = inName; };
@@ -185,6 +192,7 @@ protected:
 	bool						mEditingBackground;	// Are we editing the background, or are we showing the full mixed card/bg layers?
 	TTool						mCurrentTool;		// The tool that applies when clicking in this stack's window.
 	size_t						mChangeCount;
+	bool						mVisible;			// Is this stack currently visible on screen?
 
 	std::vector<long long>		mHorizontalGuidelines;	// Temp. guidelines shown when moving/resizing objects on the card.
 	std::vector<long long>		mVerticalGuidelines;	// Temp. guidelines shown when moving/resizing objects on the card.
