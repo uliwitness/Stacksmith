@@ -467,6 +467,7 @@ CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 	theCard->SetLoaded(true);
 	theCard->IncrementChangeCount();
 	InsertCardAfterCard( theCard, GetCurrentCard() );
+	theCard->Autorelease();
 	
 	return theCard;
 }

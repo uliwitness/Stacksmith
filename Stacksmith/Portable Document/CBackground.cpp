@@ -89,6 +89,7 @@ void	CBackground::AddCard( CCard* inCard )
 
 void	CBackground::RemoveCard( CCard* inCard )
 {
+	inCard->SetBackground( NULL );
 	mMemberCards.erase(inCard);
 }
 
