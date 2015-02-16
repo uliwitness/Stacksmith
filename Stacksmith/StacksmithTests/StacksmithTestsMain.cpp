@@ -13,6 +13,7 @@
 #include "ForgeTypes.h"
 #include "CParseTree.h"
 #include <sstream>
+#include <set>
 #include "CMap.h"
 #include "CRefCountedObject.h"
 
@@ -942,7 +943,7 @@ int main(int argc, const char * argv[])
 		std::stringstream	stylesStr;
 		attrStr.Dump(stylesStr);
 		
-		WILDTest( "styles were read correctly", stylesStr.str().c_str(), "<1>[othervalue:foo\n][{15,29,text-style:italic}somestuff:This][\navalue:123.457\ncurrentbutton:First Choice\nd:\nb:\nc:\na:\n]\n\n" );
+		WILDTest( "styles were read correctly", stylesStr.str().c_str(), "othervalue:foo\n<span style=\"text-style:italic;\">somestuff:This</span>\navalue:123.457\ncurrentbutton:First Choice\nd:\nb:\nc:\na:\n" );
 	}
 		
 	// Set up some parser tables (but not enough to actually generate bytecode) to be able to test the parser:
@@ -1107,6 +1108,40 @@ int main(int argc, const char * argv[])
 			WILDTest( "CRefCountedObjectRef in vector retains properly after release.", obj->GetRefCount(), (size_t)1 );
 		}
 		WILDTest( "CRefCountedObject destructed when vector goes out of scope.", TestRefCountedObject::sExistingObjects, (size_t)0 );
+	}
+	
+	{
+		std::vector<CRefCountedObjectRef<TestRefCountedObject>>	retainingList;
+		TestRefCountedObject*	obj = new TestRefCountedObject;
+		retainingList.push_back(obj);
+		WILDTest( "CRefCountedObjectRef in vector retains properly (2).", obj->GetRefCount(), (size_t)2 );
+		obj->Release();
+		WILDTest( "CRefCountedObjectRef in vector retains properly after release.", obj->GetRefCount(), (size_t)1 );
+		retainingList.erase( retainingList.begin() );
+		WILDTest( "CRefCountedObject destructed when erased from vector.", TestRefCountedObject::sExistingObjects, (size_t)0 );
+	}
+
+	{
+		{
+			std::set<CRefCountedObjectRef<TestRefCountedObject>>	retainingList;
+			TestRefCountedObject*	obj = new TestRefCountedObject;
+			retainingList.insert(obj);
+			WILDTest( "CRefCountedObjectRef in set retains properly.", obj->GetRefCount(), (size_t)2 );
+			obj->Release();
+			WILDTest( "CRefCountedObjectRef in set retains properly after release.", obj->GetRefCount(), (size_t)1 );
+		}
+		WILDTest( "CRefCountedObject destructed when vector goes out of scope.", TestRefCountedObject::sExistingObjects, (size_t)0 );
+	}
+	
+	{
+		std::set<CRefCountedObjectRef<TestRefCountedObject>>	retainingList;
+		TestRefCountedObject*	obj = new TestRefCountedObject;
+		retainingList.insert(obj);
+		WILDTest( "CRefCountedObjectRef in set retains properly (2).", obj->GetRefCount(), (size_t)2 );
+		obj->Release();
+		WILDTest( "CRefCountedObjectRef in set retains properly after release.", obj->GetRefCount(), (size_t)1 );
+		retainingList.erase( retainingList.begin() );
+		WILDTest( "CRefCountedObject destructed when erased from set.", TestRefCountedObject::sExistingObjects, (size_t)0 );
 	}
 	
 	#if FIXING_TESTS

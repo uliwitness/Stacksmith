@@ -644,7 +644,7 @@ void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const
 	const char*	indentStr = IndentString( inIndent );
 	printf("%s", indentStr);
 #if 1
-	ForEachRangeDo( []( size_t currOffs, size_t currLen, CAttributeRange* currRun,const std::string& inText )
+	ForEachRangeDo( [&stream]( size_t currOffs, size_t currLen, CAttributeRange* currRun,const std::string& inText )
 	{
 		std::string	text("<span style=\"");
 		std::string	currLink;
@@ -678,7 +678,7 @@ void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const
 			text.append("</span>");
 		if( currLink.length() > 0 )
 			text.append("</a>");
-		printf( "%s", text.c_str() );
+		stream << text.c_str();
 	} );
 #else
 	stream << indentStr << "<" << mRanges.size() << ">";
