@@ -8,17 +8,17 @@
         <customObject id="-2" userLabel="File's Owner" customClass="WILDWebBrowserInfoViewController">
             <connections>
                 <outlet property="bottomCoordinateField" destination="A69-5Y-WQk" id="2cu-c7-w0q"/>
+                <outlet property="currentURLField" destination="113" id="blG-3r-c8n"/>
                 <outlet property="horizontalPinningPopUp" destination="CIc-ju-ydB" id="Y6J-J8-bgv"/>
                 <outlet property="idField" destination="6" id="29"/>
                 <outlet property="leftCoordinateField" destination="Oy2-ym-IUX" id="2Ey-kd-meH"/>
-                <outlet property="messageField" destination="113" id="169"/>
-                <outlet property="moviePathField" destination="113" id="117"/>
                 <outlet property="nameField" destination="11" id="27"/>
                 <outlet property="numberField" destination="4" id="28"/>
                 <outlet property="partNumberField" destination="5" id="30"/>
                 <outlet property="partNumberLabel" destination="7" id="31"/>
                 <outlet property="rightCoordinateField" destination="cvz-k8-Yo2" id="YLa-cT-QXI"/>
                 <outlet property="scriptEditorButton" destination="25" id="34"/>
+                <outlet property="toolTipField" destination="oRo-3h-2lo" id="993-0z-MAW"/>
                 <outlet property="topCoordinateField" destination="MOj-Gt-nCI" id="amJ-dD-Vuo"/>
                 <outlet property="userPropertyEditor" destination="aEe-bo-Afe" id="Qvh-7q-EG5"/>
                 <outlet property="verticalPinningPopUp" destination="eWZ-AS-Piu" id="eTq-AO-d1s"/>
@@ -107,18 +107,6 @@
                                             <outlet property="delegate" destination="-2" id="38"/>
                                         </connections>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" id="113">
-                                        <rect key="frame" x="105" y="89" width="327" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="114">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="172"/>
-                                        </connections>
-                                    </textField>
                                     <textField verticalHuggingPriority="750" id="12">
                                         <rect key="frame" x="40" y="141" width="60" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -145,6 +133,9 @@
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="-2" id="tB5-uv-ken"/>
+                                        </connections>
                                     </textField>
                                     <textField verticalHuggingPriority="750" id="FPf-DT-IEw">
                                         <rect key="frame" x="40" y="65" width="60" height="17"/>
@@ -166,6 +157,18 @@
                                             <action selector="doScriptEditorButton:" target="-2" id="37"/>
                                         </connections>
                                     </button>
+                                    <textField verticalHuggingPriority="750" id="113">
+                                        <rect key="frame" x="105" y="89" width="327" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="114">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="-2" id="172"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                             </view>
                         </tabViewItem>
