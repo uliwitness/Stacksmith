@@ -28,6 +28,8 @@ public:
 	virtual ~CDocumentManagerMac()	{};
 	
 	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
+	
+	virtual void	Quit();
 };
 
 

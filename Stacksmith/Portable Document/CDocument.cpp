@@ -545,6 +545,9 @@ void	CDocumentManager::CloseDocument( CDocumentRef inDocument )
 			break;
 		}
 	}
+	
+	if( mOpenDocuments.size() == 0 )
+		Quit();
 }
 
 

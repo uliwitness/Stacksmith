@@ -32,6 +32,7 @@ public:
 	virtual void	SetPeeking( bool inState );
 	virtual void	SaveAll();
 	virtual bool	HaveDocuments()							{ return mOpenDocuments.size() > 0; };
+	virtual void	Quit()									= 0;
 	
 	virtual void	SetFrontDocument( CDocument* inDocument );
 	CDocument*		GetFrontDocument()							{ return mFrontDocument; };

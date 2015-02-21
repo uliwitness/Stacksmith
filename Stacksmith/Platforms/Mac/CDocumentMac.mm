@@ -134,6 +134,12 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 }
 
 
+void	CDocumentManagerMac::Quit()
+{
+	[[NSApplication sharedApplication] terminate: nil];
+}
+
+
 void	CDocumentMac::ShowStackCanvasWindow()
 {
 	if( !mCanvasWindowController )
