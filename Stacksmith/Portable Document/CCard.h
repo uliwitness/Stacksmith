@@ -28,7 +28,7 @@ class CBackground;
 class CCard : public CPlatformLayer
 {
 public:
-	CCard( std::string inURL, ObjectID inID, CBackground* inOwningBackground, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(inOwningBackground)	{};
+	CCard( std::string inURL, ObjectID inID, CBackground* inOwningBackground, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked );
 	~CCard();
 	
 	bool			IsMarked()					{ return mMarked; };

@@ -42,14 +42,28 @@ static const char*	sStackStyleStrings[EStackStyle_Last +1] =
 
 CStack::~CStack()
 {
-	if( sFrontStack == this )
+	//printf("deleting stack %s.\n", DebugNameForPointer(this) );
+ 	if( sFrontStack == this )
 		sFrontStack = NULL;
-	for( auto itty = mCards.begin(); itty != mCards.end(); itty++ )
-		(*itty)->SetStack( NULL );
-	mCards.clear();
-	for( auto itty = mBackgrounds.begin(); itty != mBackgrounds.end(); itty++ )
-		(*itty)->SetStack( NULL );
-	mBackgrounds.clear();
+	mCurrentCard = CCardRef(NULL);
+	
+	{
+		auto saveBackgrounds = mBackgrounds;
+		mBackgrounds.clear();
+		for( auto itty = saveBackgrounds.begin(); itty != saveBackgrounds.end(); itty++ )
+			(*itty)->SetStack( NULL );
+		saveBackgrounds.clear();
+	}
+	{
+		auto saveCards = mCards;
+		mCards.clear();
+		for( auto itty = saveCards.begin(); itty != saveCards.end(); itty++ )
+		{
+			(*itty)->SetStack( NULL );
+		}
+		saveCards.clear();
+	}
+	//printf("stack %s deleted.\n", DebugNameForPointer(this) );
 }
 
 

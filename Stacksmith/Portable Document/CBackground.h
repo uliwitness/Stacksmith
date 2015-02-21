@@ -20,7 +20,7 @@ class CStyleSheet;
 class CBackground : public CPlatformLayer
 {
 public:
-	CBackground( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack)	{};
+	CBackground( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack ) : CPlatformLayer(inURL,inID,inName,inFileName,inStack)	{ /* printf("bkgnd %s created.\n", DebugNameForPointer(this) ); */ };
 	~CBackground();
 
 	virtual void	WakeUp();		// The current card has started its timers etc.

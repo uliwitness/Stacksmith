@@ -65,24 +65,27 @@ CPartCreatorBase*	CPart::GetPartCreatorForType( const char* inType )
 CPart::CPart( CLayer *inOwner )
 	: mOwner(inOwner), mFamily(0), mID(0), mLeft(10), mTop(10), mRight(110), mBottom(60), mPartType(NULL), mSelected(false)
 {
+	//printf("part %s created.\n", DebugNameForPointer(this) );
 	mDocument = inOwner->GetDocument();
 }
 
 
 CPart::~CPart()
 {
-	//printf("Deleting one part.\n");
+	//printf("part %s deleted.\n", DebugNameForPointer(this) );
 }
 
 
 CPart*	CPart::Retain()
 {
+	//printf("retaining part %s.\n", DebugNameForPointer(this) );
 	return (CPart*) CConcreteObject::Retain();
 }
 
 
 void	CPart::Release()
 {
+	//printf("releasing part %s.\n", DebugNameForPointer(this) );
 	CConcreteObject::Release();
 }
 
@@ -199,7 +202,10 @@ void	CPart::IncrementChangeCount()
 CPartContents*	CPart::GetContentsOnCurrentCard()
 {
 	CPartContents*	contents = NULL;
-	CCard		*	currCard = GetStack()->GetCurrentCard();
+	CStack		*	currStack = GetStack();
+	if( !currStack )
+		return NULL;
+	CCard		*	currCard = currStack->GetCurrentCard();
 	if( !currCard )
 		return NULL;
 	bool	isBgPart = dynamic_cast<CBackground*>(mOwner) != NULL;

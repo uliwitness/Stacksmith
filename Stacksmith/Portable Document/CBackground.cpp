@@ -16,10 +16,14 @@ using namespace Carlson;
 
 CBackground::~CBackground()
 {
-	for( auto currCard : mMemberCards )
+	//printf("deleting bkgnd %s (%zu cards).\n", DebugNameForPointer(this), mMemberCards.size() );
+	auto	saveMemberCards = mMemberCards;
+	mMemberCards.clear();
+	for( auto currCard : saveMemberCards )
 	{
 		currCard->SetBackground( NULL );
 	}
+	//printf("bkgnd %s deleted.\n", DebugNameForPointer(this) );
 }
 
 

@@ -15,11 +15,19 @@
 
 using namespace Carlson;
 
+CCard::CCard( std::string inURL, ObjectID inID, CBackground* inOwningBackground, const std::string& inName, const std::string& inFileName, CStack* inStack, bool inMarked )
+	: CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(inOwningBackground)
+{
+	//printf("card %s created.\n", DebugNameForPointer(this) );
+	mOwningBackground->AddCard(this);
+}
 
 CCard::~CCard()
 {
-	if( mOwningBackground )
+	//printf("deleting card %s.\n", DebugNameForPointer(this) );
+ 	if( mOwningBackground )
 		mOwningBackground->RemoveCard( this );
+ 	//printf("card %s deleted.\n", DebugNameForPointer(this) );
 }
 
 
