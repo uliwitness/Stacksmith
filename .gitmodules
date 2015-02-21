@@ -46,3 +46,6 @@
 	path = KVOWithBlocks
 	url = git@github.com:uliwitness/KVOWithBlocks.git
 	fetchRecurseSubmodules = true
+[submodule "UKDistributedView"]
+	path = UKDistributedView
+	url = https://uliwitness@github.com/uliwitness/UKDistributedView.git
