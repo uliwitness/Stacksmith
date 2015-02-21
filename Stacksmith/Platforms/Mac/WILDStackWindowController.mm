@@ -826,6 +826,9 @@ using namespace Carlson;
 
 -(void)	windowWillClose: (NSNotification *)notification
 {
+	if( mStack->GetNeedsToBeSaved() )
+		mStack->GetDocument()->Save();
+	
 	mWasVisible = NO;
 	mStack->SetVisible(false);
 }
@@ -1062,6 +1065,7 @@ using namespace Carlson;
 	thePart->SetID( owner->GetUniqueIDForPart() );
 	owner->AddPart(thePart);
 	thePart->Release();
+	thePart->IncrementChangeCount();
 	[self refreshExistenceAndOrderOfAllViews];
 	thePart->SetSelected(true);
 }
@@ -1075,6 +1079,7 @@ using namespace Carlson;
 	thePart->SetID( owner->GetUniqueIDForPart() );
 	owner->AddPart(thePart);
 	thePart->Release();
+	thePart->IncrementChangeCount();
 	[self refreshExistenceAndOrderOfAllViews];
 	thePart->SetSelected(true);
 }
@@ -1088,6 +1093,7 @@ using namespace Carlson;
 	thePart->SetID( owner->GetUniqueIDForPart() );
 	owner->AddPart(thePart);
 	thePart->Release();
+	thePart->IncrementChangeCount();
 	[self refreshExistenceAndOrderOfAllViews];
 	thePart->SetSelected(true);
 }
@@ -1101,6 +1107,7 @@ using namespace Carlson;
 	thePart->SetID( owner->GetUniqueIDForPart() );
 	owner->AddPart(thePart);
 	thePart->Release();
+	thePart->IncrementChangeCount();
 	[self refreshExistenceAndOrderOfAllViews];
 	thePart->SetSelected(true);
 }
@@ -1114,6 +1121,7 @@ using namespace Carlson;
 	thePart->SetID( owner->GetUniqueIDForPart() );
 	owner->AddPart(thePart);
 	thePart->Release();
+	thePart->IncrementChangeCount();
 	[self refreshExistenceAndOrderOfAllViews];
 	thePart->SetSelected(true);
 }

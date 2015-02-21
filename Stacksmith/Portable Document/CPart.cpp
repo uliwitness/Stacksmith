@@ -404,6 +404,7 @@ void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCo
 		
 		GetOwner()->CorrectRectOfPart( this, inHitPart, &l, &t, &r, &b, addGuidelineBlock );
 		SetRect( l, t, r, b );
+		IncrementChangeCount();
 	});
 	addGuidelineBlock( LLONG_MAX, EGuidelineCallbackActionClearAllDone );
 //	std::cout << "Done tracking." << std::endl;
