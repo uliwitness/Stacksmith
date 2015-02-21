@@ -104,6 +104,12 @@ size_t	CBackground::GetNumCards()
 }
 
 
+CCard*	CBackground::GetCard( size_t inIndex )
+{
+	return GetStack()->GetCardAtIndexWithBackground( inIndex, this );
+}
+
+
 bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
 {
 	CCard*	searchStart = GetStack()->GetCurrentCard();

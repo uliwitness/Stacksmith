@@ -33,6 +33,7 @@ public:
 	virtual void	AddCard( CCard* inCard );
 	virtual void	RemoveCard( CCard* inCard );
 	virtual size_t	GetNumCards();
+	virtual CCard*	GetCard( size_t inIndex );
 	
 	virtual std::string			GetDisplayName();
 	virtual std::string			GetTypeName()			{ return std::string("background"); };
