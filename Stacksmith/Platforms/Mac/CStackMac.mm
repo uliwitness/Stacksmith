@@ -315,6 +315,13 @@ void	CStackMac::ClearAllGuidelines( bool inTrackingDone )
 }
 
 
+void	CStackMac::SaveThumbnailIfFirstCardOpen()
+{
+	if( mCurrentCard && mCurrentCard->GetNeedsToBeSaved() && mCurrentCard == GetCard(0) )
+		SaveThumbnail();	// Make sure snapshot of first card is current.
+}
+
+
 void	CStackMac::SaveThumbnail()
 {
 	NSURL	*	theURL = [NSURL URLWithString: [NSString stringWithUTF8String: mURL.c_str()]];

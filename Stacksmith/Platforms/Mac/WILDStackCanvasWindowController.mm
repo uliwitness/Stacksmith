@@ -20,7 +20,9 @@
 -(void)	windowDidLoad
 {
     [super windowDidLoad];
-    
+	
+	self.owningDocument->SaveThumbnailsForOpenStacks();
+	
     self.stackCanvasView.owningDocument = self.owningDocument;
 	
 	NSURL	*	theURL = [NSURL URLWithString: [NSString stringWithUTF8String: self.owningDocument->GetURL().c_str()]];

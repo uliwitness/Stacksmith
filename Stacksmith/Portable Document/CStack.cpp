@@ -196,6 +196,8 @@ bool	CStack::Save( const std::string& inPackagePath )
 	if( !mLoaded )
 		return true;
 	
+	SaveThumbnailIfFirstCardOpen();	// Make sure snapshot of first card is current.
+		
 	if( mChangeCount != 0 )	// We ourselves have changed? Write it out!
 	{
 		tinyxml2::XMLDocument		document;

@@ -55,6 +55,7 @@ public:
 	void				LoadFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
 	bool				Save();
 	bool				CreateAtURL( const std::string& inURL );
+	void				SaveThumbnailsForOpenStacks();
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	

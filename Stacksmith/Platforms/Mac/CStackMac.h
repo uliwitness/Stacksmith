@@ -55,6 +55,7 @@ public:
 	virtual WILDNSImagePtr		GetDisplayIcon();
 	
 	virtual void				SaveThumbnail();
+	virtual void				SaveThumbnailIfFirstCardOpen();
 	virtual WILDNSWindowPtr		GetMacWindow();
 	
 	virtual bool				ShowScriptEditorForObject( CConcreteObject* inObject );

@@ -46,10 +46,10 @@ class CStack : public CConcreteObject
 public:
 	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mCantPeek(false), mCantAbort(false), mPrivateAccess(false), mCantDelete(false), mCantModify(false), mResizable(false), mStyle(EStackStyleStandard), mUserLevel(5), mCardWidth(512), mCardHeight(342), mLoading(false), mLoaded(false), mPeeking(false), mCardIDSeed(0), mEditingBackground(false), mCurrentTool(EBrowseTool), mChangeCount(0) { mName = inName; mDocument = inDocument; /* printf("stack %s created.\n", DebugNameForPointer(this) ); */ };
 	
-	void			Load( std::function<void(CStack*)> inCompletionBlock );
+	virtual void	Load( std::function<void(CStack*)> inCompletionBlock );
 	void			SetLoaded( bool n )	{ mLoaded = n; };	// Used when creating a brand new stack in RAM that's never been saved before.
-	bool			IsLoaded()			{ return mLoaded; };
-	bool			Save( const std::string& inPackagePath );
+	virtual bool	IsLoaded()			{ return mLoaded; };
+	virtual bool	Save( const std::string& inPackagePath );
 	
 	ObjectID			GetID()			{ return mStackID; };
 	std::string			GetURL()		{ return mURL; };
@@ -148,6 +148,7 @@ public:
 	std::string		GetThumbnailName()						{ return mThumbnailName; };	// Empty string if we have no thumbnail.
 	void			SetThumbnailName( std::string inName )	{ mThumbnailName = inName; };
 	virtual void	SaveThumbnail();
+	virtual void	SaveThumbnailIfFirstCardOpen()			{};
 
 	virtual void	Dump( size_t inIndent = 0 );
 	

@@ -275,6 +275,15 @@ bool	CDocument::CreateAtURL( const std::string& inURL )
 }
 
 
+void	CDocument::SaveThumbnailsForOpenStacks()
+{
+	for( CStack* currStack : mStacks )
+	{
+		currStack->SaveThumbnailIfFirstCardOpen();
+	}
+}
+
+
 void	CDocument::CallAllCompletionBlocks()
 {
 	mLoaded = true;
