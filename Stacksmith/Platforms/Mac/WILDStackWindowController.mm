@@ -910,12 +910,14 @@ using namespace Carlson;
 
 -(IBAction)	toggleBackgroundEditMode: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->SetEditingBackground( !mStack->GetEditingBackground() );
 }
 
 
 -(IBAction)	goBack: (id)sender
 {
+	CAutoreleasePool	pool;
 	CCardRef	theCard = CRecentCardsList::GetSharedInstance()->PopCard();
 	theCard->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
@@ -923,6 +925,7 @@ using namespace Carlson;
 
 -(IBAction)	goFirstCard: (id)sender
 {
+	CAutoreleasePool	pool;
 	CCardRef	oldCard = mStack->GetCurrentCard();
 	if( mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
@@ -931,6 +934,7 @@ using namespace Carlson;
 
 -(IBAction)	goPrevCard: (id)sender
 {
+	CAutoreleasePool	pool;
 	CCardRef	oldCard = mStack->GetCurrentCard();
 	if( mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
@@ -939,6 +943,7 @@ using namespace Carlson;
 
 -(IBAction)	goNextCard: (id)sender
 {
+	CAutoreleasePool	pool;
 	CCardRef	oldCard = mStack->GetCurrentCard();
 	if( mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
@@ -947,6 +952,7 @@ using namespace Carlson;
 
 -(IBAction)	goLastCard: (id)sender
 {
+	CAutoreleasePool	pool;
 	CCardRef	oldCard = mStack->GetCurrentCard();
 	if( mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
@@ -993,6 +999,7 @@ using namespace Carlson;
 {
 	if( mStack->GetTool() == EPointerTool )
 	{
+		CAutoreleasePool	pool;
 		mStack->GetCurrentLayer()->DeleteSelectedItem();
 	}
 }
@@ -1002,6 +1009,7 @@ using namespace Carlson;
 {
 	if( mStack->GetTool() == EPointerTool )
 	{
+		CAutoreleasePool	pool;
 		std::string	xml = mStack->GetCurrentLayer()->CopySelectedItem();
 		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 		[pb clearContents];
@@ -1015,6 +1023,7 @@ using namespace Carlson;
 {
 	if( mStack->GetTool() == EPointerTool )
 	{
+		CAutoreleasePool	pool;
 		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 		NSString*		xmlStr = [pb stringForType: @"com.the-void-software.stacksmith.parts.xml"];
 		mStack->DeselectAllObjectsOnCard();
@@ -1029,36 +1038,42 @@ using namespace Carlson;
 
 -(IBAction)	deleteCard: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->DeleteCard( mStack->GetCurrentCard() );
 }
 
 
 -(IBAction)	deleteStack: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->GetDocument()->DeleteStack( mStack );
 }
 
 
 -(IBAction)	newStack: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	newCard: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	newBackground: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
 }
 
 
 -(IBAction)	newButton: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->SetTool(EPointerTool);
 	CLayer	*	owner = mStack->GetCurrentLayer();
 	CPart	*	thePart = CPart::GetPartCreatorForType("button")->NewPartInOwner( owner );
@@ -1073,6 +1088,7 @@ using namespace Carlson;
 
 -(IBAction)	newField: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->SetTool(EPointerTool);
 	CLayer	*	owner = mStack->GetCurrentLayer();
 	CPart	*	thePart = CPart::GetPartCreatorForType("field")->NewPartInOwner( owner );
@@ -1087,6 +1103,7 @@ using namespace Carlson;
 
 -(IBAction)	newMoviePlayer: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->SetTool(EPointerTool);
 	CLayer	*	owner = mStack->GetCurrentLayer();
 	CPart	*	thePart = CPart::GetPartCreatorForType("moviePlayer")->NewPartInOwner( owner );
@@ -1101,6 +1118,7 @@ using namespace Carlson;
 
 -(IBAction)	newWebBrowser: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->SetTool(EPointerTool);
 	CLayer	*	owner = mStack->GetCurrentLayer();
 	CPart	*	thePart = CPart::GetPartCreatorForType("browser")->NewPartInOwner( owner );
@@ -1115,6 +1133,7 @@ using namespace Carlson;
 
 -(IBAction)	newTimer: (id)sender
 {
+	CAutoreleasePool	pool;
 	mStack->SetTool(EPointerTool);
 	CLayer	*	owner = mStack->GetCurrentLayer();
 	CPart	*	thePart = CPart::GetPartCreatorForType("timer")->NewPartInOwner( owner );
@@ -1253,6 +1272,7 @@ using namespace Carlson;
 
 -(void)	changeFont: (id)sender
 {
+	CAutoreleasePool	pool;
 	CLayer		*	owner = mStack->GetCurrentLayer();
 	CMacPartBase*	currMacPart = NULL;
 	size_t			numParts = owner->GetNumParts();
@@ -1272,6 +1292,7 @@ using namespace Carlson;
 
 -(void)	reflectFontOfSelectedParts
 {
+	CAutoreleasePool	pool;
 	CLayer		*	owner = mStack->GetCurrentLayer();
 	CMacPartBase*	currMacPart = NULL;
 	size_t			numParts = owner->GetNumParts();
