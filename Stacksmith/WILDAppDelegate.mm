@@ -288,6 +288,7 @@ void	WILDScheduleResumeOfScript( void )
 				NSArray	*	filesInTemplate = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: inSelectedPath error:&err];
 				if( [filesInTemplate containsObject: @"_new_empty_file_template"] )
 				{
+					CAutoreleasePool	pool;
 					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
 					CDocumentMac*	theDoc = new CDocumentMac();
 					CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );

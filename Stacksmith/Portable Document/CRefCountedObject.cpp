@@ -17,6 +17,7 @@ static CAutoreleasePool		*sCurrentPool = NULL;
 
 CRefCountedObject*	CRefCountedObject::Autorelease()
 {
+	assert(sCurrentPool != NULL);
 	sCurrentPool->Autorelease(this);
 	
 	return this;
