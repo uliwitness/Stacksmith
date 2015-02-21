@@ -62,6 +62,15 @@ public:
 	ObjectID				GetCursorID()						{ return mCursorID; };
 	virtual void			SetCursorID( ObjectID inID )		{ mCursorID = inID; IncrementChangeCount(); };
 	
+	virtual std::string		GetTextFont()						{ return mFont; };
+	virtual int				GetTextSize()						{ return mTextSize; };
+	virtual TPartTextStyle	GetTextStyle()						{ return mTextStyle; };
+	virtual TPartTextAlign	GetTextAlign()						{ return mTextAlign; };
+	virtual void			SetTextFont( std::string f )		{ mFont = f; };
+	virtual void			SetTextSize( int s )				{ mTextSize = s; };
+	virtual void			SetTextStyle( TPartTextStyle s )	{ mTextStyle = s; };
+	virtual void			SetTextAlign( TPartTextAlign a )	{ mTextAlign = a; };
+	
 	virtual void			PrepareMouseUp();
 	
 protected:

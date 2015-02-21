@@ -93,6 +93,15 @@ public:
 	
 	virtual void			SetCursorID( ObjectID inID )	{ mCursorID = inID; IncrementChangeCount(); };
 	virtual ObjectID		GetCursorID()					{ return mCursorID; };
+
+	virtual std::string		GetTextFont()					{ return mFont; };
+	virtual int				GetTextSize()					{ return mTextSize; };
+	virtual TPartTextStyle	GetTextStyle()					{ return mTextStyle; };
+	virtual TPartTextAlign	GetTextAlign()					{ return mTextAlign; };
+	virtual void			SetTextFont( std::string f )	{ mFont = f; };
+	virtual void			SetTextSize( int s )			{ mTextSize = s; };
+	virtual void			SetTextStyle( TPartTextStyle s ){ mTextStyle = s; };
+	virtual void			SetTextAlign( TPartTextAlign a ){ mTextAlign = a; };
 	
 	virtual void			GetSelectedRange( LEOChunkType* outType, size_t* outStartOffs, size_t* outEndOffs ) = 0;
 	virtual void			SetSelectedRange( LEOChunkType inType, size_t inStartOffs, size_t inEndOffs ) = 0;

@@ -45,6 +45,26 @@ void	CMacPartBase::OpenContentsEditor()
 }
 
 
+NSFont*		CMacPartBase::GetMacFont()
+{
+	CVisiblePart*	myself = dynamic_cast<CVisiblePart*>(this);
+	if( !myself )
+		return nil;
+	return [NSFont fontWithName: [NSString stringWithUTF8String: myself->GetTextFont().c_str()] size:myself->GetTextSize()];
+}
+
+
+void		CMacPartBase::SetMacFont( NSFont* inFont )
+{
+	CVisiblePart*	myself = dynamic_cast<CVisiblePart*>(this);
+	if( !myself )
+		return;
+	myself->SetTextFont( inFont.displayName.UTF8String );
+	myself->SetTextSize( inFont.pointSize );
+}
+
+
+
 NSAutoresizingMaskOptions	CMacPartBase::GetCocoaResizeFlags( TPartLayoutFlags inFlags )
 {
 	// NB: HyperCard starts coordinates at top left, Cocoa generally starts them

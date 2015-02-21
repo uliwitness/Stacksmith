@@ -66,6 +66,8 @@ class CPart;
 
 -(NSData*)	currentCardSnapshotData;
 
+-(void)	reflectFontOfSelectedParts;
+
 @end
 
 

@@ -42,6 +42,7 @@ public:
 	virtual void	SetHasHorizontalScroller( bool inHS );
 	virtual void	SetHasVerticalScroller( bool inHS );
 	virtual void	SetHasColumnHeaders( bool inCH );
+	virtual NSFont*	GetMacFont();
 	
 	virtual void	SetVisible( bool visible );
 	virtual void	SetEnabled( bool n );

@@ -1236,4 +1236,52 @@ using namespace Carlson;
 	//return [mContentView dataWithPDFInsideRect: [mContentView bounds]];
 }
 
+
+-(NSUInteger) validModesForFontPanel: (NSFontPanel *) fontPanel
+{
+	return NSFontPanelFaceModeMask | NSFontPanelSizeModeMask | NSFontPanelCollectionModeMask | NSFontPanelUnderlineEffectModeMask | NSFontPanelStrikethroughEffectModeMask | NSFontPanelTextColorEffectModeMask;
+}
+
+
+-(void)	changeFont: (id)sender
+{
+	CLayer		*	owner = mStack->GetCurrentLayer();
+	CMacPartBase*	currMacPart = NULL;
+	size_t			numParts = owner->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+	{
+		CPart*		currPart = owner->GetPart( x );
+		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+		if( currPart->IsSelected() )
+		{
+			NSFont*	oldFont = currMacPart->GetMacFont();
+			if( oldFont )
+				currMacPart->SetMacFont( [[NSFontManager sharedFontManager] convertFont: oldFont] );
+		}
+	}
+}
+
+
+-(void)	reflectFontOfSelectedParts
+{
+	CLayer		*	owner = mStack->GetCurrentLayer();
+	CMacPartBase*	currMacPart = NULL;
+	size_t			numParts = owner->GetNumParts();
+	BOOL			multiple = NO;
+	for( size_t x = 0; x < numParts; x++ )
+	{
+		CPart*		currPart = owner->GetPart( x );
+		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+		if( currPart->IsSelected() )
+		{
+			NSFont*	theFont = currMacPart->GetMacFont();
+			if( theFont )
+			{
+				[[NSFontManager sharedFontManager] setSelectedFont: theFont isMultiple: multiple];
+				multiple = YES;
+			}
+		}
+	}
+}
+
 @end

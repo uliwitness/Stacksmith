@@ -1314,3 +1314,19 @@ void	CFieldPartMac::SetScript( std::string inScript )
 	[(mView? mView : mSearchField) updateTrackingAreas];
 }
 
+
+NSFont*		CFieldPartMac::GetMacFont()
+{
+	NSFont	*	theFont = CMacPartBase::GetMacFont();
+	
+	if( !theFont && mTextView )
+		theFont = [mTextView font];
+	else if( !theFont && mTableView )
+		theFont = [mTableView font];
+	else if( !theFont && mSearchField )
+		theFont = [mSearchField font];
+	
+	return theFont;
+}
+
+

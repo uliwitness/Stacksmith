@@ -109,6 +109,12 @@ void	CStackMac::SetPeeking( bool inState )
 }
 
 
+void	CStackMac::SelectedPartChanged()
+{
+	[mMacWindowController reflectFontOfSelectedParts];
+}
+
+
 void	CStackMac::SetEditingBackground( bool inState )
 {
 	CStack::SetEditingBackground(inState);

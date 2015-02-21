@@ -128,6 +128,7 @@ public:
 	
 	virtual void	GetMousePosition( LEONumber *x, LEONumber *y )	{ *x = 0; *y = 0; };
 	virtual void	RectChangedOfPart( CPart* inChangedPart )	{};
+	virtual void	SelectedPartChanged()						{};
 
 	virtual void	IncrementChangeCount()	{ mChangeCount++; };
 	virtual bool	GetNeedsToBeSaved();

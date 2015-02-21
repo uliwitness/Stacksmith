@@ -110,7 +110,7 @@ public:
 	
 	virtual bool				GetSharedText()					{ return true; };	// By default, background part contents are the same on all cards of that background.
 	virtual void				SetSharedText( bool n )			{};
-	virtual void				SetSelected( bool inSelected )	{ mSelected = inSelected; };
+	virtual void				SetSelected( bool inSelected );
 	virtual bool				IsSelected()					{ return mSelected; };
 	virtual void				SetHighlight( bool inHighlighted )	{};
 	virtual void				PrepareMouseUp()				{};	// Sent when a mouse click was inside, right before we send mouseUp.

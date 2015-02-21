@@ -46,6 +46,8 @@ public:
 	}
 	virtual NSView*		GetView()					{ return NULL; };
 	virtual NSImage*	GetDisplayIcon()			{ return [NSImage imageNamed: @"FieldIconSmall"]; };
+	virtual NSFont*		GetMacFont();
+	virtual void		SetMacFont( NSFont* inFont );
 	virtual Class		GetPropertyEditorClass()	{ return [WILDPartInfoViewController class]; };
 	
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset );

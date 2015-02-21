@@ -416,6 +416,13 @@ std::string		CPart::GenerateDisplayName( const char* inTypeName )
 }
 
 
+void	CPart::SetSelected( bool inSelected )
+{
+	mSelected = inSelected;
+	GetStack()->SelectedPartChanged();
+}
+
+
 bool	CPart::GetShouldSendMouseEventsRightNow()
 {
 	return GetStack()->GetTool() == EBrowseTool && !GetStack()->GetDocument()->GetPeeking();

@@ -134,6 +134,15 @@ public:
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+
+	virtual std::string		GetTextFont()						{ return ""; };
+	virtual int				GetTextSize()						{ return -1; };
+	virtual TPartTextStyle	GetTextStyle()						{ return EPartTextStyle_Last; };
+	virtual TPartTextAlign	GetTextAlign()						{ return EPartTextAlign_Last; };
+	virtual void			SetTextFont( std::string f )		{};
+	virtual void			SetTextSize( int s )				{};
+	virtual void			SetTextStyle( TPartTextStyle s )	{};
+	virtual void			SetTextAlign( TPartTextAlign a )	{};
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
