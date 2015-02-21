@@ -69,8 +69,10 @@
 		551583E318C3BF9200DB3431 /* WILDInvisiblePlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583E218C3BF9200DB3431 /* WILDInvisiblePlayerView.mm */; };
 		551B36851A8BF832006AFDFE /* WILDStackCanvasWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551B36831A8BF832006AFDFE /* WILDStackCanvasWindowController.mm */; };
 		551B36861A8BF832006AFDFE /* WILDStackCanvasWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551B36841A8BF832006AFDFE /* WILDStackCanvasWindowController.xib */; };
-		551B368D1A8BFA27006AFDFE /* WILDStackCanvasView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551B368C1A8BFA27006AFDFE /* WILDStackCanvasView.mm */; };
 		551B368E1A8FAC1E006AFDFE /* Home.xstk in Resources */ = {isa = PBXBuildFile; fileRef = 55818A77133199AC00480D30 /* Home.xstk */; };
+		551B36BA1A9907B7006AFDFE /* UKDistributedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 551B36B91A9907B7006AFDFE /* UKDistributedView.m */; };
+		551B36C31A9907D9006AFDFE /* UKFinderIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551B36C01A9907D9006AFDFE /* UKFinderIconCell.m */; };
+		551B36C41A9907D9006AFDFE /* NSBezierPathCappedBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = 551B36C21A9907D9006AFDFE /* NSBezierPathCappedBoxes.m */; };
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
 		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
@@ -644,8 +646,12 @@
 		551B36821A8BF832006AFDFE /* WILDStackCanvasWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStackCanvasWindowController.h; path = Platforms/Mac/WILDStackCanvasWindowController.h; sourceTree = "<group>"; };
 		551B36831A8BF832006AFDFE /* WILDStackCanvasWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDStackCanvasWindowController.mm; path = Platforms/Mac/WILDStackCanvasWindowController.mm; sourceTree = "<group>"; };
 		551B36841A8BF832006AFDFE /* WILDStackCanvasWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDStackCanvasWindowController.xib; path = Platforms/Mac/WILDStackCanvasWindowController.xib; sourceTree = "<group>"; };
-		551B368B1A8BFA27006AFDFE /* WILDStackCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDStackCanvasView.h; path = Platforms/Mac/WILDStackCanvasView.h; sourceTree = "<group>"; };
-		551B368C1A8BFA27006AFDFE /* WILDStackCanvasView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDStackCanvasView.mm; path = Platforms/Mac/WILDStackCanvasView.mm; sourceTree = "<group>"; };
+		551B36B81A9907B7006AFDFE /* UKDistributedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKDistributedView.h; path = ../UKDistributedView/UKDistributedView.h; sourceTree = "<group>"; };
+		551B36B91A9907B7006AFDFE /* UKDistributedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKDistributedView.m; path = ../UKDistributedView/UKDistributedView.m; sourceTree = "<group>"; };
+		551B36BF1A9907D9006AFDFE /* UKFinderIconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKFinderIconCell.h; path = ../UKDistributedView/UKFinderIconCell/UKFinderIconCell.h; sourceTree = "<group>"; };
+		551B36C01A9907D9006AFDFE /* UKFinderIconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKFinderIconCell.m; path = ../UKDistributedView/UKFinderIconCell/UKFinderIconCell.m; sourceTree = "<group>"; };
+		551B36C11A9907D9006AFDFE /* NSBezierPathCappedBoxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBezierPathCappedBoxes.h; path = ../UKDistributedView/UKFinderIconCell/NSBezierPathCappedBoxes.h; sourceTree = "<group>"; };
+		551B36C21A9907D9006AFDFE /* NSBezierPathCappedBoxes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBezierPathCappedBoxes.m; path = ../UKDistributedView/UKFinderIconCell/NSBezierPathCappedBoxes.m; sourceTree = "<group>"; };
 		551D938717058397003766DA /* CDownloadCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDownloadCommandNode.cpp; path = ../../CDownloadCommandNode.cpp; sourceTree = "<group>"; };
 		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
@@ -1611,8 +1617,6 @@
 				551B36821A8BF832006AFDFE /* WILDStackCanvasWindowController.h */,
 				551B36831A8BF832006AFDFE /* WILDStackCanvasWindowController.mm */,
 				551B36841A8BF832006AFDFE /* WILDStackCanvasWindowController.xib */,
-				551B368B1A8BFA27006AFDFE /* WILDStackCanvasView.h */,
-				551B368C1A8BFA27006AFDFE /* WILDStackCanvasView.mm */,
 				55405BBA18A4BBDB001D3C99 /* WILDUserPropertyEditorController.h */,
 				55405BBB18A4BBDB001D3C99 /* WILDUserPropertyEditorController.mm */,
 				55405BBF18A4CD16001D3C99 /* WILDContentsEditorWindowController.h */,
@@ -1709,6 +1713,12 @@
 				55BD35741A8FF88D00D0BAF7 /* UKPushbackMessenger.h */,
 				55BD35721A8FF88300D0BAF7 /* UKPushbackMessenger.m */,
 				55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */,
+				551B36B81A9907B7006AFDFE /* UKDistributedView.h */,
+				551B36B91A9907B7006AFDFE /* UKDistributedView.m */,
+				551B36BF1A9907D9006AFDFE /* UKFinderIconCell.h */,
+				551B36C01A9907D9006AFDFE /* UKFinderIconCell.m */,
+				551B36C11A9907D9006AFDFE /* NSBezierPathCappedBoxes.h */,
+				551B36C21A9907D9006AFDFE /* NSBezierPathCappedBoxes.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -2498,6 +2508,7 @@
 				553C46FD13577334000219FA /* CFunctionCallNode.cpp in Sources */,
 				553C46FE13577334000219FA /* COperatorNode.cpp in Sources */,
 				553C46FF13577334000219FA /* CAddCommandNode.cpp in Sources */,
+				551B36BA1A9907B7006AFDFE /* UKDistributedView.m in Sources */,
 				55CD60BE187510F0002450E2 /* CMoviePlayerPart.cpp in Sources */,
 				553C470013577334000219FA /* CLineMarkerNode.cpp in Sources */,
 				553C470113577334000219FA /* CAssignChunkArrayNode.cpp in Sources */,
@@ -2508,7 +2519,6 @@
 				556DB7B318709CAF002F7CB2 /* CRefCountedObject.cpp in Sources */,
 				553C470513577334000219FA /* CMakeChunkConstNode.cpp in Sources */,
 				553C470613577334000219FA /* CCodeBlockNode.cpp in Sources */,
-				551B368D1A8BFA27006AFDFE /* WILDStackCanvasView.mm in Sources */,
 				556DB7B91870A3C2002F7CB2 /* CBackground.cpp in Sources */,
 				553C470713577334000219FA /* CFunctionDefinitionNode.cpp in Sources */,
 				553C470813577334000219FA /* CWhileLoopNode.cpp in Sources */,
@@ -2551,6 +2561,7 @@
 				55039FC6136D5CCF0082E32E /* ULIPaintBrushTool.m in Sources */,
 				559BA9AB18AE70B900760273 /* ULIHighlightingButton.m in Sources */,
 				55039FC7136D5CCF0082E32E /* ULIPaintEraseRectTool.m in Sources */,
+				551B36C31A9907D9006AFDFE /* UKFinderIconCell.m in Sources */,
 				55039FC8136D5CCF0082E32E /* ULIPaintEraserTool.m in Sources */,
 				55CD610718786BAC002450E2 /* CPicturePart.cpp in Sources */,
 				55039FC9136D5CCF0082E32E /* ULIPaintFreehandTool.m in Sources */,
@@ -2589,6 +2600,7 @@
 				552386C81883E7C800D7FAB3 /* CButtonPartMac.mm in Sources */,
 				55BFEE22137E7C4A008FC8BB /* WILDStretchFromBottomFilter.m in Sources */,
 				55CD610818786BAC002450E2 /* CRectanglePart.cpp in Sources */,
+				551B36C41A9907D9006AFDFE /* NSBezierPathCappedBoxes.m in Sources */,
 				552386C51883E2DF00D7FAB3 /* WILDViewFactory.mm in Sources */,
 				559BA9A118A84BD800760273 /* CMap.cpp in Sources */,
 				552386CB1883E86200D7FAB3 /* CFieldPartMac.mm in Sources */,

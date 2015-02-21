@@ -85,11 +85,15 @@ bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, 
 }
 
 
-void	CStackMac::Show()
+void	CStackMac::Show( TEvenIfVisible inEvenIfVisible )
 {
 	if( !mVisible )
 	{
 		[mMacWindowController showWindow: nil];
+	}
+	else if( inEvenIfVisible == EEvenIfVisible )
+	{
+		[mMacWindowController.window makeKeyAndOrderFront: nil];
 	}
 }
 

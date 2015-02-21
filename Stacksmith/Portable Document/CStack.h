@@ -32,6 +32,14 @@ typedef uint16_t	TTool;
 
 enum
 {
+	EEvenIfVisible = 0,
+	EOnlyIfNotVisible
+};
+typedef uint8_t		TEvenIfVisible;
+
+
+enum
+{
 	EStackStyleStandard,	// Standard document window.
 	EStackStyleRectangle,	// Window with a simple border.
 	EStackStylePopup,		// Pop-up utility window, like popovers on Mac/iOS. May be possible to tear one off as some kind of floating palette, or OSes may just make them palettes.
@@ -143,7 +151,7 @@ public:
 	virtual void	SetVisible( bool n );
 	
 	// Allow code to trigger showing the UI:
-	virtual void	Show()									{ mVisible = true; };
+	virtual void	Show( TEvenIfVisible inEvenIfVisible )		{ mVisible = true; };
 
 	std::string		GetThumbnailName()						{ return mThumbnailName; };	// Empty string if we have no thumbnail.
 	void			SetThumbnailName( std::string inName )	{ mThumbnailName = inName; };

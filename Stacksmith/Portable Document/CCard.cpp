@@ -160,7 +160,7 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			//printf("Opened new card\n");
 		}
 			
-		GetStack()->Show();
+		GetStack()->Show( EOnlyIfNotVisible );
 		//printf("Calling card completion handler.\n");
 		completionHandler();
 		Release();

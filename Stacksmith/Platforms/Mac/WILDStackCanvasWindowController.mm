@@ -7,8 +7,12 @@
 //
 
 #import "WILDStackCanvasWindowController.h"
-#import "WILDStackCanvasView.h"
+#import "UKDistributedView.h"
+#import "UKFinderIconCell.h"
 #include "CDocument.h"
+
+
+using namespace Carlson;
 
 
 @interface WILDStackCanvasWindowController ()
@@ -23,11 +27,57 @@
 	
 	self.owningDocument->SaveThumbnailsForOpenStacks();
 	
-    self.stackCanvasView.owningDocument = self.owningDocument;
+	/* Set up a finder icon cell to use: */
+	UKFinderIconCell*		bCell = [[[UKFinderIconCell alloc] init] autorelease];
+	[bCell setImagePosition: NSImageAbove];
+	[bCell setEditable: YES];
+	[self.stackCanvasView setPrototype: bCell];
+	[self.stackCanvasView setCellSize: NSMakeSize(100.0,80.0)];
+	
+	[self.stackCanvasView reloadData];
 	
 	NSURL	*	theURL = [NSURL URLWithString: [NSString stringWithUTF8String: self.owningDocument->GetURL().c_str()]];
 	[self.window setRepresentedURL: theURL];
 	[self.window setTitle: theURL.lastPathComponent.stringByDeletingPathExtension];
+}
+
+
+-(NSUInteger)	numberOfItemsInDistributedView: (UKDistributedView*)distributedView
+{
+	return self.owningDocument->GetNumStacks();
+}
+
+-(NSPoint)		distributedView: (UKDistributedView*)distributedView
+						positionForCell:(NSCell*)cell /* may be nil if the view only wants the item position. */
+						atItemIndex: (NSUInteger)row
+{
+	if( cell )
+	{
+		NSImage*	stackImage = [NSImage imageNamed: @"Stack"];
+		CStack* 	currStack = self.owningDocument->GetStack( row );
+		NSString*	nameStr = [NSString stringWithUTF8String: currStack->GetName().c_str()];
+		NSImage*	img = stackImage;
+		std::string	thumbName = currStack->GetThumbnailName();
+		
+		if( thumbName.length() > 0 )
+		{
+			NSURL	*	thumbURL = [NSURL URLWithString: [NSString stringWithUTF8String: currStack->GetURL().c_str()]];
+			thumbURL = [thumbURL.URLByDeletingLastPathComponent URLByAppendingPathComponent: [NSString stringWithUTF8String: thumbName.c_str()]];
+			img = [[[NSImage alloc] initWithContentsOfURL: thumbURL] autorelease];
+		}
+		
+		[cell setImage: img];
+		[cell setTitle: nameStr];
+	}
+	
+	return NSMakePoint( 10, 10 +(128 * row) );
+}
+
+
+-(void) distributedView: (UKDistributedView*)distributedView cellDoubleClickedAtItemIndex: (NSUInteger)item
+{
+	CStack* 	currStack = self.owningDocument->GetStack( item );
+	currStack->Show( EEvenIfVisible );
 }
 
 @end

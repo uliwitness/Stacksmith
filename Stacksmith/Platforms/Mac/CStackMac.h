@@ -71,7 +71,7 @@ public:
 
 	virtual void				ClearAllGuidelines( bool inTrackingDone = false );
 
-	virtual void				Show();
+	virtual void				Show( TEvenIfVisible inEvenIfVisible );
 	
 	static void					RegisterPartCreators();
 

@@ -15,12 +15,12 @@ namespace Carlson
 }
 
 
-@class WILDStackCanvasView;
+@class UKDistributedView;
 
 
 @interface WILDStackCanvasWindowController : NSWindowController
 
 @property (assign,nonatomic) Carlson::CDocument* 			owningDocument;
-@property (assign,nonatomic) IBOutlet WILDStackCanvasView*	stackCanvasView;
+@property (assign,nonatomic) IBOutlet UKDistributedView*	stackCanvasView;
 
 @end

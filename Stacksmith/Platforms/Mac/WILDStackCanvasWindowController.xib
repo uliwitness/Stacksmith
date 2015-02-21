@@ -29,18 +29,22 @@
                             <rect key="frame" x="1" y="1" width="166" height="79"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <customView id="gHw-aY-Nlr" customClass="WILDStackCanvasView">
+                                <customView id="gHw-aY-Nlr" customClass="UKDistributedView">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="380"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-2" id="4YS-1W-T7T"/>
+                                        <outlet property="delegate" destination="-2" id="SvU-gv-K2F"/>
+                                    </connections>
                                 </customView>
                             </subviews>
                             <color key="backgroundColor" red="0.27098289009999998" green="0.29317502629999997" blue="0.40624465320000003" alpha="1" colorSpace="deviceRGB"/>
                         </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="JPn-8L-XSJ">
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="JPn-8L-XSJ">
                             <rect key="frame" x="1" y="80" width="166" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cf2-8i-Qpt">
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cf2-8i-Qpt">
                             <rect key="frame" x="167" y="1" width="15" height="79"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
