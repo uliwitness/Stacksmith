@@ -37,6 +37,9 @@ public:
 	
 	static const char*			IndentString( size_t inIndentLevel );
 	
+	/*! Utility function for debugging. Returns a human-memorizable name for a pointer. */
+	static const char*			DebugNameForPointer( void* inPtr );
+	
 protected:
 	virtual ~CRefCountedObject() {};
 

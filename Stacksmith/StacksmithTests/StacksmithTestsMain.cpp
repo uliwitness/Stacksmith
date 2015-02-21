@@ -1143,6 +1143,21 @@ int main(int argc, const char * argv[])
 		retainingList.erase( retainingList.begin() );
 		WILDTest( "CRefCountedObject destructed when erased from set.", TestRefCountedObject::sExistingObjects, (size_t)0 );
 	}
+
+	{
+		void*		rebecca = (void*)1;
+		void*		tyler = (void*)2;
+		void*		ruth = (void*)3;
+		
+		WILDTest( "Initial debug name is \"Rebecca\".", CRefCountedObject::DebugNameForPointer( rebecca ), "Rebecca" );
+		WILDTest( "Second debug name is \"Tyler\".", CRefCountedObject::DebugNameForPointer( tyler ), "Tyler" );
+		WILDTest( "third debug name is \"Ruth\".", CRefCountedObject::DebugNameForPointer( ruth ), "Ruth" );
+		
+		WILDTest( "Retrieving name for initial pointer again.", CRefCountedObject::DebugNameForPointer( rebecca ), "Rebecca" );
+		WILDTest( "Retrieving name for second pointer again.", CRefCountedObject::DebugNameForPointer( tyler ), "Tyler" );
+		WILDTest( "Retrieving name for third pointer again.", CRefCountedObject::DebugNameForPointer( ruth ), "Ruth" );
+		WILDTest( "Retrieving name for third pointer a third time.", CRefCountedObject::DebugNameForPointer( ruth ), "Ruth" );
+	}
 	
 	#if FIXING_TESTS
 	return 0;

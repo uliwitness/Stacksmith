@@ -7,6 +7,9 @@
 //
 
 #include "CRefCountedObject.h"
+#include <map>
+#include <string>
+#include <cassert>
 
 
 using namespace Carlson;
@@ -39,6 +42,64 @@ CRefCountedObject*	CRefCountedObject::Autorelease()
 		return sIndentChars;
 	
 	return sIndentChars +(sizeof(sIndentChars) -1) -inIndentLevel;
+}
+
+
+/* static */ const char*	CRefCountedObject::DebugNameForPointer( void* inPtr )
+{
+	static const char*		sAvailableNames[] = {
+													"Rebecca",
+													"Tyler",
+													"Ruth",
+													"Mike",
+													"Kristee",
+													"Bill",
+													"Marge",
+													"Dan",
+													"Sioux",
+													"Ted",
+													"Carol",
+													"Adam",
+													"Susan",
+													"Mark",
+													"Elaine",
+													"Kevin",
+													"Jane",
+													"Martin",
+													"Jody",
+													"Steve",
+													"Paula",
+													"Ed",
+													"Alexis",
+													"David",
+													"Katie",
+													"Gary",
+													"Fabrice",
+													NULL
+												};
+	static int							sCurrNameIndex = 0;
+	static std::map<void*,const char*>	sPointerNames;
+	
+	auto	foundPtrItty = sPointerNames.find(inPtr);
+	if( foundPtrItty != sPointerNames.end() )
+	{
+		return foundPtrItty->second;
+	}
+	
+	const char*	currName = NULL;
+	if( sAvailableNames[sCurrNameIndex] == NULL )
+	{
+		currName = sAvailableNames[0];
+		sPointerNames.insert( std::pair<void*,const char*>(inPtr,currName) );
+		sCurrNameIndex = 1;
+	}
+	else
+	{
+		currName = sAvailableNames[sCurrNameIndex++];
+		sPointerNames.insert( std::pair<void*,const char*>(inPtr,currName) );
+	}
+	
+	return currName;
 }
 
 
