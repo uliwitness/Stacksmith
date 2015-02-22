@@ -87,7 +87,7 @@ public:
 	virtual CPart*				Retain();
 	virtual void				Release();
 	
-	ObjectID					GetID()				{ return mID; };
+	virtual ObjectID			GetID()	const		{ return mID; };
 	virtual void				SetID( ObjectID i )	{ mID = i; };
 	LEOInteger					GetFamily()								{ return mFamily; };
 	virtual void				SetFamily( LEOInteger inFamily )		{ mFamily = inFamily; };

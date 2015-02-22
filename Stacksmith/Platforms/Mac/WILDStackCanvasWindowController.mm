@@ -106,7 +106,7 @@ struct CCanvasEntry
 		NSImage*		objectImage = currItem.mCard ? [NSImage imageNamed: @"CardIcon"] : (currItem.mBackground ? [NSImage imageNamed: @"BackgroundIcon"] : [NSImage imageNamed: @"StackIcon"]);
 		CStack* 			currStack = currItem.mStack;
 		CConcreteObject* 	currObject = currItem.mCard ? (CConcreteObject*)currItem.mCard : (currItem.mBackground ? (CConcreteObject*)currItem.mBackground : (CConcreteObject*)currItem.mStack);
-		NSString*		nameStr = [NSString stringWithUTF8String: currObject->GetName().c_str()];
+		NSString*		nameStr = (currObject->GetName().size() > 0) ? [NSString stringWithUTF8String: currObject->GetName().c_str()] : [NSString stringWithFormat: @"ID %lld", currObject->GetID()];
 		NSImage*		img = nil;
 		
 		if( currObject == currStack )

@@ -35,8 +35,8 @@ public:
 	CLayer( std::string inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CStack* inStack ) : mURL(inURL), mStack(inStack), mID(inID), mFileName(inFileName), mLoaded(false), mLoading(false), mShowPict(true), mDontSearch(false), mCantDelete(false), mChangeCount(0), mPartIDSeed(0) { mName = inName; };
 	~CLayer();
 	
-	ObjectID		GetID()	const			{ return mID; };
-	std::string		GetFileName() const		{ return mFileName; };
+	virtual ObjectID	GetID()	const			{ return mID; };
+	virtual std::string	GetFileName() const		{ return mFileName; };
 	
 	virtual void	Load( std::function<void(CLayer*)> completionBlock );	//!< Load this layer from its XML file, asynchronously. Once successfully done, sets mLoaded.
 	virtual bool	Save( const std::string& inPackagePath );	//!< Save this layer to the given file package (i.e. .xstk folder) as an XML file.

@@ -14,6 +14,7 @@
 #include <string>
 #include "CMap.h"
 #include "tinyxml2.h"
+#include "CObjectID.h"
 extern "C" {
 #include "LEOInterpreter.h"
 #include "LEOScript.h"
@@ -76,7 +77,8 @@ public:
 	virtual std::string	GetName()			{ return mName; };
     virtual void        SetName( const std::string& inStr ) { mName = inStr; IncrementChangeCount(); };
 	virtual std::string	GetDisplayName()	{ return mName; };
-		
+	virtual ObjectID	GetID()	const		{ return 0; };
+	
 	virtual LEOContextGroup*	GetScriptContextGroupObject();
 	
 	virtual void		SetBreakpointLines( const std::vector<size_t>& inBreakpointLines );
@@ -102,7 +104,7 @@ protected:
 	std::vector<size_t>					mBreakpointLines;	// Lines on which the user set breakpoints using the UI that should be applied to the script when compiled.
 	
 	struct LEOScript *					mScriptObject;		// Compiled script, lazily created/recreated on changes.
-	LEOObjectID							mIDForScripts;		// The ID Leonie uses to refer to this object.
+	LEOObjectID							mIDForScripts;		// The ID Leonie uses to refer to this object. This is *not* the ID as Hammer understands it.
 	LEOObjectSeed						mSeedForScripts;	// The seed value to go with mIDForScripts.
 	struct LEOValueObject				mValueForScripts;	// A LEOValue so scripts can reference us (see mIDForScripts).
 	CDocument *							mDocument;			// Document that contains us.
