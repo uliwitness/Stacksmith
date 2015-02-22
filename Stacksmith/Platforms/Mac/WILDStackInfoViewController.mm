@@ -13,18 +13,31 @@
 #import "WILDUserPropertyEditorController.h"
 
 
-static NSSize		sPopUpMenuSizes[] =
+struct WILDStackInfoViewControllerSize
 {
-	{ 416, 240 },
-	{ 512, 342 },
-	{ 640, 400 },
-	{ 640, 480 },
-	{ 576, 720 },
-	{ -1, -1 },
-	{ -2, -2 },
-	{ 0, 0 }
+	NSSize		size;
+	NSString*	name;
 };
-#define NUM_POPUP_MENU_SIZES	(sizeof(sPopUpMenuSizes) / sizeof(NSSize))
+
+
+static WILDStackInfoViewControllerSize		sPopUpMenuSizes[] =
+{
+	{ {416, 240}, @"Small" },
+	{ {512, 342}, @"Classic" },
+	{ {640, 400}, @"PowerBook" },
+	{ {640, 480}, @"Large" },
+	{ {576, 720}, @"MacPaint" },
+	{ {800, 600}, @"Original iMac" },
+	{ {1366, 768}, @"MacBook Air 11\"" },
+	{ {1440, 900}, @"MacBook Air 13\"" },
+	{ {1280,720}, @"720p (HD Ready)" },
+	{ {1920,1080}, @"1080p (Full HD)" },
+	{ {2560,1440}, @"iMac 5K" },
+	{ {3840,2160}, @"2160p (UHDTV 4K)" },
+	{ {-1, -1}, @"Window" },
+	{ {-2, -2}, @"Screen" },
+	{ {0, 0}, @"Custom" }	// Must be last, used as terminator.
+};
 
 
 using namespace Carlson;
@@ -85,8 +98,14 @@ using namespace Carlson;
 	[mCardCountField setStringValue: [NSString stringWithFormat: @"Contains %zu cards.", numCards]];
 
 	size_t	numBackgrounds = mStack->GetNumBackgrounds();
-	[mBackgroundCountField setStringValue: [NSString stringWithFormat: @"Contains %ld backgrounds.", numBackgrounds]];
+	[mBackgroundCountField setStringValue: [NSString stringWithFormat: @"Contains %zu backgrounds.", numBackgrounds]];
 	
+	int x = 0;
+	for( ; sPopUpMenuSizes[x].size.width != 0; x++ )
+	{
+		[mSizePopUpButton addItemWithTitle: sPopUpMenuSizes[x].name];
+	}
+	[mSizePopUpButton addItemWithTitle: sPopUpMenuSizes[x].name];	// We also want a "Custom" item that doubles as the list terminator.
 	[self updateCardSizePopUpAndFields];
 	
 	[mStylePopUpButton selectItemWithTag: mStack->GetStyle()];
@@ -104,10 +123,16 @@ using namespace Carlson;
 		cardSize = NSMakeSize(512, 342);
 	
 	BOOL		foundSomething = NO;
-	for( NSUInteger x = 0; x < NUM_POPUP_MENU_SIZES; x++ )
+	for( NSUInteger x = 0; sPopUpMenuSizes[x].size.width != 0; x++ )
 	{
-		if( sPopUpMenuSizes[x].width == cardSize.width
-			&& sPopUpMenuSizes[x].height == cardSize.height )
+		NSSize	currSize = sPopUpMenuSizes[x].size;
+		if( currSize.width == -2 )	// "Screen".
+		{
+			NSWindow	*wd = self.view.window.parentWindow;
+			currSize = [[wd screen] frame].size;
+		}
+		if( currSize.width == cardSize.width
+			&& currSize.height == cardSize.height )
 		{
 			[mSizePopUpButton selectItemAtIndex: x];
 			foundSomething = YES;
@@ -115,7 +140,7 @@ using namespace Carlson;
 		}
 	}
 	
-	if( !foundSomething )
+	if( !foundSomething )	// Use last item, which is "Custom".
 	{
 		[mSizePopUpButton selectItemAtIndex: [mSizePopUpButton numberOfItems] -1];
 		[mWidthField setEnabled: YES];
@@ -145,22 +170,22 @@ using namespace Carlson;
 {
 	NSInteger	selectedItem = [mSizePopUpButton indexOfSelectedItem];
 	BOOL		shouldEnableFields = NO;
-	NSSize		currentSize = sPopUpMenuSizes[selectedItem];
+	NSSize		currentSize = sPopUpMenuSizes[selectedItem].size;
 	NSWindow	*wd = self.view.window.parentWindow;
 	
-	if( currentSize.width == -1 )
+	if( currentSize.width == -1 )	// "Window".
 	{
 		currentSize = [wd contentRectForFrameRect: [wd frame]].size;
 		mStack->SetCardWidth( currentSize.width );
 		mStack->SetCardHeight( currentSize.height );
 	}
-	else if( currentSize.width == -2 )
+	else if( currentSize.width == -2 )	// "Screen".
 	{
 		currentSize = [[wd screen] frame].size;
 		mStack->SetCardWidth( currentSize.width );
 		mStack->SetCardHeight( currentSize.height );
 	}
-	else if( currentSize.width == 0 )
+	else if( currentSize.width == 0 )	// "Custom".
 	{
 		currentSize = NSMakeSize( mOldCustomSize.width, mOldCustomSize.height );
 		shouldEnableFields = YES;

@@ -145,20 +145,7 @@ Gw
                                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="102">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
-                                            <menu key="menu" title="OtherViews" id="103">
-                                                <items>
-                                                    <menuItem title="Small" id="111"/>
-                                                    <menuItem title="Classic" id="110">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                    </menuItem>
-                                                    <menuItem title="PowerBook" id="109"/>
-                                                    <menuItem title="Large" id="108"/>
-                                                    <menuItem title="MacPaint" id="107"/>
-                                                    <menuItem title="Window" id="106"/>
-                                                    <menuItem title="Screen" id="105"/>
-                                                    <menuItem title="Custom" id="104"/>
-                                                </items>
-                                            </menu>
+                                            <menu key="menu" title="OtherViews" id="103"/>
                                         </popUpButtonCell>
                                         <connections>
                                             <action selector="sizePopUpSelectionChanged:" target="-2" id="125"/>
@@ -209,7 +196,7 @@ Gw
                                     <textField verticalHuggingPriority="750" id="81">
                                         <rect key="frame" x="260" y="49" width="58" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="pixels" id="94">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="points" id="94">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
