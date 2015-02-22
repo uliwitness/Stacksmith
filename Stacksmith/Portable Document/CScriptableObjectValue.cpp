@@ -677,6 +677,27 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
 	}
+	else if( inHandler == pointerDownHandlerID )
+	{
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+		CPart*					so = dynamic_cast<CPart*>( userData->GetTarget() );
+		if( so )
+		{
+			LEOValuePtr	buttonNumberParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 1 );
+			if( buttonNumberParam )
+			{
+				LEOUnit		theUnit = kLEOUnitNone;
+				LEOInteger	buttonNumber = LEOGetValueAsInteger( buttonNumberParam, &theUnit, inContext );
+				if( buttonNumber == 2 )
+				{
+					userData->GetStack()->ShowContextualMenuForObject( so );
+				}
+			}
+		}
+		
+		handled = true;
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
 	else if( inHandler == pointerDragHandlerID )
 	{
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
@@ -731,7 +752,6 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == mouseDoubleClickHandlerID
 			|| inHandler == playMovieHandlerID
 			|| inHandler == stopMovieHandlerID
-			|| inHandler == pointerDownHandlerID
 			|| inHandler == pointerDoubleDownHandlerID
 			|| inHandler == pointerUpHandlerID
 			|| inHandler == peekingDoubleDownHandlerID

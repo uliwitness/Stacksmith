@@ -59,6 +59,9 @@ class CPart;
 -(IBAction)	newWebBrowser: (id)sender;
 -(IBAction)	newTimer: (id)sender;
 
+-(void)		showContextualMenuForSelection;
+-(IBAction)	showPartInfoWindow: (id)sender;
+
 -(IBAction)	delete: (id)sender;
 -(IBAction)	deleteCard: (id)sender;
 -(IBAction)	deleteStack: (id)sender;

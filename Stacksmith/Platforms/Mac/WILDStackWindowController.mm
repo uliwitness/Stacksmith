@@ -64,7 +64,25 @@ using namespace Carlson;
 }
 
 
+-(void)	rightMouseDown: (NSEvent*)theEvt
+{
+	[self handleMouseEvent: theEvt];
+}
+
+
+-(void)	otherMouseDown: (NSEvent*)theEvt
+{
+	[self handleMouseEvent: theEvt];
+}
+
+
 -(void)	mouseDown: (NSEvent*)theEvt
+{
+	[self handleMouseEvent: theEvt];
+}
+
+
+-(void)	handleMouseEvent: (NSEvent*)theEvt
 {
 	bool	isEditing = mStack->GetTool() != EBrowseTool;
 	bool	isPeeking = mStack->GetPeeking();
@@ -120,19 +138,19 @@ using namespace Carlson;
 		
 		if( isPeeking )
 		{
-			mouseDownMessage = "mouseDownWhilePeeking";
-			mouseDoubleDownMessage = "mouseDoubleDownWhilePeeking";
-			dragMessage = "mouseDragWhilePeeking";
-			upMessage = "mouseUpWhilePeeking";
-			doubleUpMessage = "mouseDoubleClickWhilePeeking";
+			mouseDownMessage = "mouseDownWhilePeeking %ld";
+			mouseDoubleDownMessage = "mouseDoubleDownWhilePeeking %ld";
+			dragMessage = "mouseDragWhilePeeking %ld";
+			upMessage = "mouseUpWhilePeeking %ld";
+			doubleUpMessage = "mouseDoubleClickWhilePeeking %ld";
 		}
 		else if( isEditing )
 		{
-			mouseDownMessage = "mouseDownWhileEditing";
-			mouseDoubleDownMessage = "mouseDoubleDownWhileEditing";
-			dragMessage = "mouseDragWhileEditing";
-			upMessage = "mouseUpWhileEditing";
-			doubleUpMessage = "mouseDoubleClickWhileEditing";
+			mouseDownMessage = "mouseDownWhileEditing %ld";
+			mouseDoubleDownMessage = "mouseDoubleDownWhileEditing %ld";
+			dragMessage = "mouseDragWhileEditing %ld";
+			upMessage = "mouseUpWhileEditing %ld";
+			doubleUpMessage = "mouseDoubleClickWhileEditing %ld";
 		
 			numParts = theCard->GetBackground()->GetNumParts();
 			for( size_t x = numParts; x > 0; x-- )
@@ -149,7 +167,7 @@ using namespace Carlson;
 		if( !hitPart )
 		{
 			CAutoreleasePool	cppPool;
-			theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage );
+			theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
 			hitObject = theCard;
 		}
 		else
@@ -162,7 +180,7 @@ using namespace Carlson;
 					hitPart->SetSelected(false);
 			}
 			CAutoreleasePool	cppPool;
-			hitPart->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage );
+			hitPart->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
 			hitObject = hitPart;
 		}
 		
@@ -173,30 +191,39 @@ using namespace Carlson;
 		[self.window makeFirstResponder: self];
 		hitObject = theCard;
 		
-		dragMessage = "mouseDrag";
-		upMessage = "mouseUp";
-		doubleUpMessage = "mouseDoubleClick";
+		dragMessage = "mouseDrag %ld";
+		upMessage = "mouseUp %ld";
+		doubleUpMessage = "mouseDoubleClick %ld";
 		
 		CAutoreleasePool		pool;
-		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown" );
+		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown", [theEvt buttonNumber] +1 );
 	}
 
+	NSUInteger	evtMask = NSLeftMouseUpMask | NSLeftMouseDraggedMask;
+	if( theEvt.buttonNumber == 1 )
+		evtMask = NSRightMouseUpMask | NSRightMouseDraggedMask;
+	if( theEvt.buttonNumber > 1 )
+		evtMask = NSOtherMouseUpMask | NSOtherMouseDraggedMask;
 	NSAutoreleasePool	*	pool = [NSAutoreleasePool new];
 	BOOL					keepGoing = YES;
 	while( keepGoing )
 	{
-		NSEvent	*	loopEvt = [[NSApplication sharedApplication] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
+		NSEvent	*	loopEvt = [[NSApplication sharedApplication] nextEventMatchingMask: evtMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
 		if( theEvt )
 		{
 			switch( loopEvt.type )
 			{
 				case NSLeftMouseUp:
+				case NSRightMouseUp:
+				case NSOtherMouseUp:
 					keepGoing = NO;
 					break;
 				case NSLeftMouseDragged:
+				case NSRightMouseDragged:
+				case NSOtherMouseDragged:
 				{
 					CAutoreleasePool	cppPool;
-					hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage );
+					hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
 					break;
 				}
 				
@@ -208,13 +235,13 @@ using namespace Carlson;
 			pool = [NSAutoreleasePool new];
 		}
 		
-		if( ([NSEvent pressedMouseButtons] & 1) == 0 )
+		if( ([NSEvent pressedMouseButtons] & (1 << [theEvt buttonNumber])) == 0 )
 			keepGoing = NO;
 	}
 	[pool release];
 
 	CAutoreleasePool	cppPool;
-	hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage );
+	hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
 }
 
 
@@ -749,6 +776,51 @@ using namespace Carlson;
 		[mPopover showRelativeToRect: theView.bounds ofView: theView preferredEdge: NSMaxYEdge];
 	}
 	mWasVisible = YES;
+}
+
+
+-(void)	showContextualMenuForSelection
+{
+	NSMenu*	contextMenu = [[NSMenu alloc] initWithTitle: @"Part Actions"];
+	
+	[[contextMenu addItemWithTitle: @"Get Info…" action: @selector(showPartInfoWindow:) keyEquivalent: @""] setTarget: self];
+	
+	[contextMenu popUpMenuPositioningItem: nil atLocation: [NSEvent mouseLocation] inView: nil];
+	
+	[contextMenu release];
+}
+
+
+-(IBAction)	showPartInfoWindow: (id)sender
+{
+	CCard*	theCard = mStack->GetCurrentCard();
+	size_t	numParts = theCard->GetNumParts();
+	BOOL	foundOne = false;
+	
+	if( !mStack->GetEditingBackground() )
+	{
+		for( size_t x = numParts; x > 0 && !foundOne; x-- )
+		{
+			CPart*	currPart = theCard->GetPart(x -1);
+			if( currPart->IsSelected() )
+			{
+				mStack->ShowPropertyEditorForObject( currPart );
+				foundOne = true;
+			}
+		}
+	}
+	
+	CBackground* theLayer = theCard->GetBackground();
+	numParts = theLayer->GetNumParts();
+	for( size_t x = numParts; x > 0 && !foundOne; x-- )
+	{
+		CPart*	currPart = theLayer->GetPart(x -1);
+		if( currPart->IsSelected() )
+		{
+			mStack->ShowPropertyEditorForObject( currPart );
+			foundOne = true;
+		}
+	}
 }
 
 

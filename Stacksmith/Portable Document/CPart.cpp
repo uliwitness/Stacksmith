@@ -403,8 +403,8 @@ THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag
 
 LEONumber	CPart::GetHandleSize( bool *outAllowSideHandles, bool *outAllowCornerHandles )
 {
-	LEONumber	heightForFullHandles = (mBottom -mTop) / 4;
-	LEONumber	heightForReducedHandles = (mBottom -mTop) / 3;
+	LEONumber	heightForFullHandles = (mBottom -mTop) / 3;
+	LEONumber	heightForReducedHandles = (mBottom -mTop) / 2;
 	LEONumber	minHeightForHandles = 8;
 	LEONumber	maxHeightForHandles = 12;
 	LEONumber	handleHeight = minHeightForHandles;
@@ -526,6 +526,4 @@ bool	CPart::GetShouldSendMouseEventsRightNow()
 {
 	return GetStack()->GetTool() == EBrowseTool && !GetStack()->GetDocument()->GetPeeking();
 }
-
-
 

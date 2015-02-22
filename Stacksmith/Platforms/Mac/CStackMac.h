@@ -64,6 +64,7 @@ public:
 	virtual bool				ShowPropertyEditorForObject( CConcreteObject* inObject );
 	virtual void				OpenScriptEditorAndShowOffset( size_t byteOffset );
 	virtual void				OpenScriptEditorAndShowLine( size_t lineIndex );
+	virtual bool				ShowContextualMenuForObject( CConcreteObject* inObject );
 	
 	virtual void				GetMousePosition( LEONumber *x, LEONumber *y );
 	virtual void				RectChangedOfPart( CPart* inChangedPart );

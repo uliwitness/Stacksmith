@@ -349,3 +349,10 @@ void	CStackMac::SaveThumbnail()
 }
 
 
+bool	CStackMac::ShowContextualMenuForObject( CConcreteObject* inObject )
+{
+	[mMacWindowController performSelector: @selector(showContextualMenuForSelection) withObject: nil afterDelay: 0.0];
+	
+	return true;
+}
+

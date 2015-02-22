@@ -133,6 +133,7 @@ public:
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 	virtual bool	ShowScriptEditorForObject( CConcreteObject* inObject ) { return false; };
 	virtual bool	ShowPropertyEditorForObject( CConcreteObject* inObject ) { return false; };
+	virtual bool	ShowContextualMenuForObject( CConcreteObject* inObject ) { return false; };
 	
 	virtual void	GetMousePosition( LEONumber *x, LEONumber *y )	{ *x = 0; *y = 0; };
 	virtual void	RectChangedOfPart( CPart* inChangedPart )	{};
