@@ -56,7 +56,7 @@ using namespace Carlson;
 -(NSView *)	hitTest: (NSPoint)aPoint
 {
 	NSView	*	hitView = [super hitTest: aPoint];
-	bool	isEditing = mStack ? mStack->GetTool() != EBrowseTool : false;
+	bool	isEditing = mStack ? (mStack->GetTool() != EBrowseTool && mStack->GetTool() != EEditTextTool) : false;
 	bool	isPeeking = mStack ? mStack->GetPeeking() : false;
 	if( (isEditing || isPeeking) && hitView != nil )
 		return self;

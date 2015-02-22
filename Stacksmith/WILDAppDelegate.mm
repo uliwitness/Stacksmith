@@ -68,6 +68,7 @@ void	WILDScheduleResumeOfScript( void )
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowMightHaveGoneAway:) name: NSWindowWillCloseNotification object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(screenConfigurationMayHaveChanged:) name: NSApplicationDidChangeScreenParametersNotification object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(toolMayHaveChanged:) name: WILDToolDidChangeNotification object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(toolMayHaveChanged:) name: WILDBackgroundEditingDidChangeNotification object: nil];
 	}
 	
 	return self;
@@ -493,6 +494,7 @@ struct WILDAppDelegateValidatableButtonInfo
 	{
 		{ mBrowseToolButton, NO },
 		{ mPointerToolButton, NO },
+		{ mEditTextToolButton, NO },
 		{ mStackInfoButton, NO },
 		{ mBackgroundInfoButton, NO },
 		{ mCardInfoButton, NO },

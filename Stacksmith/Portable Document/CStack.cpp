@@ -26,7 +26,8 @@ std::function<void(CStack*)>	CStack::sFrontStackChangedBlock = NULL;
 static const char*		sToolNames[ETool_Last] =
 {
 	"browse",
-	"pointer"
+	"pointer",
+	"edit text"
 };
 
 

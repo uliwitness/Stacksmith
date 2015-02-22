@@ -251,7 +251,7 @@ using namespace Carlson;
 	NSInteger			colIdx = [tableView.tableColumns indexOfObject: tableColumn];
 	if( !self.owningField->GetColumnInfo(colIdx).mEditable )
 		return NO;
-	return !self.owningField->GetLockText();
+	return !self.owningField->GetLockText() || self.owningField->GetStack()->GetTool() == EEditTextTool;
 }
 
 
@@ -268,7 +268,7 @@ using namespace Carlson;
 	CAutoreleasePool	cppPool;
 	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDoubleClick" );
 //	NSLog(@"tableViewRowDoubleClicked");
-	if( !self.owningField->GetLockText() )
+	if( !self.owningField->GetLockText() || self.owningField->GetStack()->GetTool() == EEditTextTool )
 	{
 		NSInteger	currRow = [sender clickedRow];
 		NSInteger	currColumn = [sender clickedColumn];
@@ -486,7 +486,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	if( mAutoSelect )
 	{
 		LoadChangedTextStylesIntoView();
-		[mTableView.tableColumns[0] setEditable: !GetLockText()];
+		[mTableView.tableColumns[0] setEditable: !GetLockText() || GetStack()->GetTool() == EEditTextTool];
 				
 		[mTableView deselectAll: nil];
 		std::set<size_t>	selLines = mSelectedLines;
@@ -498,8 +498,8 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	else if( mFieldStyle == EFieldStylePopUp )
 	{
 		LoadChangedTextStylesIntoView();
-		[mSearchField setEditable: !GetLockText() && GetEnabled()];
-		[mSearchField setSelectable: !GetLockText()];
+		[mSearchField setEditable: (!GetLockText() && GetEnabled()) || GetStack()->GetTool() == EEditTextTool];
+		[mSearchField setSelectable: !GetLockText() || GetStack()->GetTool() == EEditTextTool];
 	}
 	else if( mSearchField )
 	{
@@ -510,8 +510,8 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 			NSAttributedString*		attrStr = GetCocoaAttributedString( cppstr, GetCocoaAttributesForPart() );
 			[mSearchField setAttributedStringValue: attrStr];
 		}
-		[mSearchField setEditable: !GetLockText() && GetEnabled()];
-		[mSearchField setSelectable: !GetLockText()];
+		[mSearchField setEditable: (!GetLockText() && GetEnabled()) || GetStack()->GetTool() == EEditTextTool];
+		[mSearchField setSelectable: !GetLockText() || GetStack()->GetTool() == EEditTextTool];
 	}
 	else
 	{
@@ -532,8 +532,8 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		}
 		else
 			[mTextView setString: @""];
-		[mTextView setEditable: !GetLockText() && GetEnabled()];
-		[mTextView setSelectable: !GetLockText()];
+		[mTextView setEditable: (!GetLockText() && GetEnabled()) || GetStack()->GetTool() == EEditTextTool];
+		[mTextView setSelectable: !GetLockText() || GetStack()->GetTool() == EEditTextTool];
 	}
 	mMacDelegate.dontSendSelectionChange = NO;
 	if( mView )
@@ -619,14 +619,14 @@ void	CFieldPartMac::SetEnabled( bool n )
 	if( mTextView )
 	{
 		[mView setLineColor: n ? [NSColor colorWithCalibratedRed: mLineColorRed / 65535.0 green: mLineColorGreen / 65535.0 blue: mLineColorBlue / 65535.0 alpha: mLineColorAlpha / 65535.0] : [NSColor disabledControlTextColor]];
-		[mTextView setEditable: n && !GetLockText()];
+		[mTextView setEditable: (n && !GetLockText()) || GetStack()->GetTool() == EEditTextTool];
 	}
 	else if( mSearchField )
 	{
-		[mSearchField setEnabled: NO];
+		[mSearchField setEnabled: n || GetStack()->GetTool() == EEditTextTool];
 	}
 	else
-		[mTableView setEnabled: n];
+		[mTableView setEnabled: n || GetStack()->GetTool() == EEditTextTool];
 }
 
 

@@ -28,6 +28,7 @@ using namespace Carlson;
 
 
 NSString*	WILDToolDidChangeNotification = @"WILDToolDidChangeNotification";
+NSString*	WILDBackgroundEditingDidChangeNotification = @"WILDBackgroundEditingDidChangeNotification";
 
 
 CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument )
@@ -129,6 +130,8 @@ void	CStackMac::SetEditingBackground( bool inState )
 		CStack::SetEditingBackground(inState);
 		
 		SetCurrentCard( GetCurrentCard() );
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName: WILDBackgroundEditingDidChangeNotification object: nil];
 	}
 }
 

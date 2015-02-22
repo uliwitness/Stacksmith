@@ -25,6 +25,7 @@ enum
 {
 	EBrowseTool = 0,
 	EPointerTool,
+	EEditTextTool,
 	ETool_Last
 };
 typedef uint16_t	TTool;
@@ -59,7 +60,7 @@ public:
 	virtual bool	IsLoaded()			{ return mLoaded; };
 	virtual bool	Save( const std::string& inPackagePath );
 	
-	ObjectID			GetID()			{ return mStackID; };
+	ObjectID			GetID()	const	{ return mStackID; };
 	std::string			GetURL()		{ return mURL; };
 	std::string			GetFileName()	{ return mFileName; };
 	virtual std::string	GetTypeName()	{ return std::string("stack"); };

@@ -793,7 +793,8 @@
                 <outlet property="mBackgroundInfoButton" destination="1oD-UL-G2Q" id="juq-ao-iOa"/>
                 <outlet property="mBrowseToolButton" destination="gIo-t9-M2n" id="bJG-DZ-yCV"/>
                 <outlet property="mCardInfoButton" destination="GPp-md-4F2" id="0fK-5b-dCv"/>
-                <outlet property="mEditBackgroundButton" destination="J38-Wh-F6i" id="zNA-ah-tnE"/>
+                <outlet property="mEditBackgroundButton" destination="J38-Wh-F6i" id="YIF-09-H8k"/>
+                <outlet property="mEditTextToolButton" destination="O60-s9-3f9" id="oxx-1k-Zql"/>
                 <outlet property="mGoNextButton" destination="d9P-4H-e88" id="dVi-qB-qPz"/>
                 <outlet property="mGoPrevButton" destination="EFo-B7-AVP" id="T8l-Y7-uPy"/>
                 <outlet property="mLockPseudoMenu" destination="DXo-F9-GAP" id="E2a-ue-3Jg"/>
@@ -950,6 +951,17 @@
                                         </button>
                                     </subviews>
                                 </customView>
+                                <button toolTip="Edit Text" verticalHuggingPriority="750" tag="2" id="O60-s9-3f9">
+                                    <rect key="frame" x="118" y="5" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="EditTextTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ikb-b2-jFu" customClass="WILDToolButtonCell">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="takeToolFromTag:" target="-1" id="LIP-JY-Wxx"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -965,6 +977,7 @@
         <image name="BackgroundIcon" width="512" height="512"/>
         <image name="BrowseTool" width="240" height="240"/>
         <image name="CardIcon" width="512" height="512"/>
+        <image name="EditTextTool" width="180" height="180"/>
         <image name="ICON_26425" width="26" height="26"/>
         <image name="ICON_902" width="26" height="26"/>
         <image name="NSLockLockedTemplate" width="10" height="14"/>

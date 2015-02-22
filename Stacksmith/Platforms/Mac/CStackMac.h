@@ -89,6 +89,7 @@ protected:
 
 #if __OBJC__
 extern NSString*	WILDToolDidChangeNotification;
+extern NSString*	WILDBackgroundEditingDidChangeNotification;
 #endif
 
 #endif /* defined(__Stacksmith__CStackMac__) */

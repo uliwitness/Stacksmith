@@ -22,6 +22,7 @@
 	IBOutlet NSPanel			*			mToolPanel;
 	IBOutlet NSButton			*			mBrowseToolButton;
 	IBOutlet NSButton			*			mPointerToolButton;
+	IBOutlet NSButton			*			mEditTextToolButton;
 	IBOutlet NSButton			*			mStackInfoButton;
 	IBOutlet NSButton			*			mBackgroundInfoButton;
 	IBOutlet NSButton			*			mCardInfoButton;
