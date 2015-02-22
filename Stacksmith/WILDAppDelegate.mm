@@ -192,6 +192,8 @@ void	WILDScheduleResumeOfScript( void )
 	box.size.width = screenBox.size.width;
 	box.origin.y = NSMaxY(screenBox) -box.size.height;
 	[mToolPanel setFrame: box display: YES];
+	[mToolPanel setBackgroundColor: NSColor.clearColor];
+	[mToolPanel setOpaque: NO];
 	[mToolPanel orderFront: self];
 }
 
