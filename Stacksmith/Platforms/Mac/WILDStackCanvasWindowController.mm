@@ -133,8 +133,10 @@ struct CCanvasEntry
 
 -(void) distributedView: (UKDistributedView*)distributedView cellDoubleClickedAtItemIndex: (NSUInteger)item
 {
-	CStack* 	currStack = items[item].mStack;
-	currStack->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currStack](){ currStack->Show(EEvenIfVisible); } );
+	CStack*				currStack = items[item].mStack;
+	CConcreteObject* 	currObj = items[item].mCard ? (CConcreteObject*)items[item].mCard : (items[item].mBackground ? (CConcreteObject*)items[item].mBackground : (CConcreteObject*)items[item].mStack);
+	bool				shouldEditBg = (!items[item].mCard && items[item].mBackground);
+	currObj->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currStack,shouldEditBg](){ currStack->Show(EEvenIfVisible); currStack->SetEditingBackground( shouldEditBg ); } );
 }
 
 @end
