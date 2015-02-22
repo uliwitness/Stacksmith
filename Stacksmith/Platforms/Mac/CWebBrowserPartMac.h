@@ -30,8 +30,7 @@ public:
 	CWebBrowserPartMac( CLayer *inOwner ) : CWebBrowserPart( inOwner ), mView(nil) {};
 
 	virtual void	CreateViewIn( NSView* inSuperView );
-	virtual void	DestroyView()						{ [mView removeFromSuperview]; [mView release]; mView = nil; [mMacDelegate release]; mMacDelegate = nil;
-	};
+	virtual void	DestroyView();
 	virtual void	SetPeeking( bool inState );
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetVisible( bool visible )		{ CWebBrowserPart::SetVisible(visible); [mView setHidden: !visible]; };

@@ -23,6 +23,11 @@ using namespace Carlson;
 
 @implementation WILDWebBrowserDelegate
 
+-(void)	dealloc
+{
+	[super dealloc];
+}
+
 -(void)	webView: (WebView *)sender didFinishLoadForFrame: (WebFrame *)frame
 {
 	if( frame == sender.mainFrame )
@@ -53,7 +58,10 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 		return;
 	}
 	if( mView )
+	{
+		[mView setFrameLoadDelegate: nil];
 		[mView release];
+	}
 	if( !mMacDelegate )
 	{
 		mMacDelegate = [[WILDWebBrowserDelegate alloc] init];
@@ -69,6 +77,19 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView addSubview: mView];
+	LoadCurrentURL( mCurrentURL );
+}
+
+
+void	CWebBrowserPartMac::DestroyView()
+{
+	[mView setFrameLoadDelegate: nil];
+	[mView removeFromSuperview];
+	[mView release];
+	mView = nil;
+	
+	[mMacDelegate release];
+	mMacDelegate = nil;
 }
 
 
