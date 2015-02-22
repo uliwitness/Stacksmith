@@ -1029,6 +1029,10 @@ using namespace Carlson;
 		[theItem setState: mStack->GetEditingBackground() ? NSOnState : NSOffState];
 		return YES;
 	}
+	else if( theItem.action == @selector(saveDocument:) )
+	{
+		return mStack->GetDocument()->GetNeedsToBeSaved();
+	}
 	else
 		return [self respondsToSelector: theItem.action];
 }
