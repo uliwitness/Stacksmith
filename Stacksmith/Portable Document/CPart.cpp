@@ -14,6 +14,7 @@
 #include "CDocument.h"
 #include <iostream>
 #include <sstream>
+#include "math.h"
 
 
 using namespace Carlson;
@@ -368,22 +369,113 @@ void		CPart::SetIndex( LEOInteger inIndex, CPartCreatorBase* inType )
 }
 
 
-THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y )
+THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo )
 {
 	THitPart	hitPart = ENothingHitPart;
-	if( x > mLeft && x < (mLeft + 8) )
-		hitPart |= ELeftGrabberHitPart;
-	else if( x < mRight && x > (mRight - 8) )
-		hitPart |= ERightGrabberHitPart;
-	if( y > mTop && y < (mTop + 8) )
-		hitPart |= ETopGrabberHitPart;
-	else if( y < mBottom && y > (mBottom - 8) )
-		hitPart |= EBottomGrabberHitPart;
+	
+	if( handlesToo == EHitTestHandlesToo )
+	{
+		THitPart	parts[] = { ELeftGrabberHitPart, ELeftGrabberHitPart | ETopGrabberHitPart,
+								ETopGrabberHitPart, ERightGrabberHitPart | ETopGrabberHitPart,
+								ERightGrabberHitPart, ERightGrabberHitPart | EBottomGrabberHitPart,
+								EBottomGrabberHitPart, ELeftGrabberHitPart | EBottomGrabberHitPart,
+								0 };
+		for( int n = 0; parts[n] != 0; n++ )
+		{
+			LEONumber	l, t, r, b;
+			if( GetRectForHandle( parts[n], &l, &t, &r, &b ) )
+			{
+				if( x > l && x < r && y > t && y < b )
+				{
+					hitPart = parts[n];
+					break;
+				}
+			}
+		}
+	}
 	
 	if( hitPart == ENothingHitPart && x > mLeft && x < mRight && y > mTop && y < mBottom )
 		hitPart = EContentHitPart;
 	
 	return hitPart;
+}
+
+
+LEONumber	CPart::GetHandleSize( bool *outAllowSideHandles, bool *outAllowCornerHandles )
+{
+	LEONumber	heightForFullHandles = (mBottom -mTop) / 4;
+	LEONumber	heightForReducedHandles = (mBottom -mTop) / 3;
+	LEONumber	minHeightForHandles = 8;
+	LEONumber	maxHeightForHandles = 12;
+	LEONumber	handleHeight = minHeightForHandles;
+	*outAllowSideHandles = false;
+	*outAllowCornerHandles = false;
+	
+	if( heightForFullHandles >= minHeightForHandles )
+	{
+		handleHeight = heightForFullHandles;
+		*outAllowSideHandles = true;
+		*outAllowCornerHandles = true;
+	}
+	else if( heightForReducedHandles >= minHeightForHandles )
+	{
+		handleHeight = heightForReducedHandles;
+		*outAllowCornerHandles = true;
+	}
+	
+	if( handleHeight > maxHeightForHandles )
+		handleHeight = maxHeightForHandles;
+	
+	return handleHeight;
+}
+
+
+bool	CPart::GetRectForHandle( THitPart inDesiredPart, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom )
+{
+	bool		allowSideHandles = false;
+	bool		allowCornerHandles = false;
+	LEONumber	handleHeight = GetHandleSize( &allowSideHandles, &allowCornerHandles );
+	
+	if( inDesiredPart & ELeftGrabberHitPart )
+	{
+		*outLeft = mLeft -truncf(handleHeight /2);
+		*outRight = *outLeft +handleHeight;
+	}
+	else if( inDesiredPart & ERightGrabberHitPart )
+	{
+		*outLeft = mRight -truncf(handleHeight /2);
+		*outRight = *outLeft +handleHeight;
+	}
+	else
+	{
+		if( !allowSideHandles )
+			return false;
+		*outLeft = mLeft +truncf((mRight -mLeft) /2) -truncf(handleHeight /2);
+		*outRight = *outLeft +handleHeight;
+	}
+	
+	if( inDesiredPart & ETopGrabberHitPart )
+	{
+		*outTop = mTop -truncf(handleHeight /2);
+		*outBottom = *outTop +handleHeight;
+	}
+	else if( inDesiredPart & EBottomGrabberHitPart )
+	{
+		*outTop = mBottom -truncf(handleHeight /2);
+		*outBottom = *outTop +handleHeight;
+	}
+	else
+	{
+		if( !allowSideHandles )
+			return false;
+		*outTop = mTop +truncf((mBottom -mTop) /2) -truncf(handleHeight /2);
+		*outBottom = *outTop +handleHeight;
+	}
+	
+	if( !allowSideHandles && !allowCornerHandles && ((inDesiredPart & EBottomGrabberHitPart) == 0 || (inDesiredPart & ERightGrabberHitPart) == 0) )
+		return false;	// Minimal is only lower right handle.
+	
+	return true;
 }
 
 

@@ -688,7 +688,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			CStack*	theStack = so->GetStack();
 			theStack->GetMousePosition( &x, &y );
 						
-			THitPart	hitPart = so->HitTestForEditing( x, y );
+			THitPart	hitPart = so->HitTestForEditing( x, y, EHitTestHandlesToo );
 			if( hitPart != ENothingHitPart )
 			{
 				so->Grab( hitPart, [theStack](long long inGuidelineCoord,TGuidelineCallbackAction action)

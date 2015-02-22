@@ -84,8 +84,7 @@ using namespace Carlson;
 			for( size_t x = numParts; x > 0; x-- )
 			{
 				CPart	*	thePart = theCard->GetPart( x-1 );
-				if( !hitPart && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
-					&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
+				if( !hitPart && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles ) != ENothingHitPart )
 				{
 					hitPart = thePart;
 				}
@@ -96,8 +95,7 @@ using namespace Carlson;
 		for( size_t x = numParts; x > 0; x-- )
 		{
 			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
-			if( !hitPart && hitPos.x > thePart->GetLeft() && hitPos.x < thePart->GetRight()
-				&& hitPos.y > thePart->GetTop() && hitPos.y < thePart->GetBottom() )
+			if( !hitPart && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles ) != ENothingHitPart )
 			{
 				hitPart = thePart;
 			}
@@ -492,6 +490,84 @@ using namespace Carlson;
 }
 
 
+-(void)	drawOneBoundingBox: (CPart*)currPart
+{
+	static NSColor	*	sPeekColor = nil;
+	if( !sPeekColor )
+		sPeekColor = [[NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22"]] retain];
+	static NSColor	*	sSelectedColor = nil;
+	if( !sSelectedColor )
+		sSelectedColor = [[NSColor colorWithCalibratedRed: 0.102 green: 0.180 blue: 0.998 alpha: 1.000] retain];
+	static NSColor	*	sSelectedBorderColor = nil;
+	if( !sSelectedBorderColor )
+		sSelectedBorderColor = [[sSelectedColor blendedColorWithFraction: 0.2 ofColor: NSColor.blackColor] retain];
+	
+	size_t	cardHeight = mStack->GetCardHeight();
+	NSRect	partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
+	NSRectFillUsingOperation( partRect, NSCompositeClear );
+	if( mStack->GetPeeking() )
+	{
+		[sPeekColor set];
+		[NSBezierPath strokeRect: partRect];
+	}
+	if( currPart->IsSelected() )
+	{
+		[sSelectedColor setFill];
+		[sSelectedBorderColor setStroke];
+		
+		LEONumber	l, t, r, b;
+		if( currPart->GetRectForHandle( ELeftGrabberHitPart, &l, &t, &r, &b ) )
+		{
+			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+			NSRectFill(grabby);
+			[NSBezierPath strokeRect: grabby];
+		}
+		if( currPart->GetRectForHandle( ELeftGrabberHitPart | ETopGrabberHitPart, &l, &t, &r, &b ) )
+		{
+			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+			NSRectFill(grabby);
+			[NSBezierPath strokeRect: grabby];
+		}
+		if( currPart->GetRectForHandle( ETopGrabberHitPart, &l, &t, &r, &b ) )
+		{
+			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+			NSRectFill(grabby);
+			[NSBezierPath strokeRect: grabby];
+		}
+		if( currPart->GetRectForHandle( ERightGrabberHitPart | ETopGrabberHitPart, &l, &t, &r, &b ) )
+		{
+			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+			NSRectFill(grabby);
+			[NSBezierPath strokeRect: grabby];
+		}
+		if( currPart->GetRectForHandle( ERightGrabberHitPart, &l, &t, &r, &b ) )
+		{
+			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+			NSRectFill(grabby);
+			[NSBezierPath strokeRect: grabby];
+		}
+		if( currPart->GetRectForHandle( ERightGrabberHitPart | EBottomGrabberHitPart, &l, &t, &r, &b ) )
+		{
+			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+			NSRectFill(grabby);
+			[NSBezierPath strokeRect: grabby];
+		}
+		if( currPart->GetRectForHandle( EBottomGrabberHitPart, &l, &t, &r, &b ) )
+		{
+			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+			NSRectFill(grabby);
+			[NSBezierPath strokeRect: grabby];
+		}
+		if( currPart->GetRectForHandle( ELeftGrabberHitPart | EBottomGrabberHitPart, &l, &t, &r, &b ) )
+		{
+			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+			NSRectFill(grabby);
+			[NSBezierPath strokeRect: grabby];
+		}
+	}
+}
+
+
 -(void)	drawBoundingBoxes
 {
 	[mSelectionOverlay removeFromSuperlayer];
@@ -509,72 +585,19 @@ using namespace Carlson;
 	[NSGraphicsContext saveGraphicsState];
 	[NSGraphicsContext setCurrentContext: cocoaContext];
 	
-	static NSColor	*	sPeekColor = nil;
-	if( !sPeekColor )
-		sPeekColor = [[NSColor colorWithPatternImage: [NSImage imageNamed: @"PAT_22"]] retain];
-	static NSColor	*	sSelectedColor = nil;
-	if( !sSelectedColor )
-		sSelectedColor = [[NSColor colorWithCalibratedRed: 0.102 green: 0.180 blue: 0.998 alpha: 1.000] retain];
-	
-	size_t		cardHeight = mStack->GetCardHeight();
-	
 	CBackground	*	theBackground = theCard->GetBackground();
 	size_t	numParts = theBackground->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 	{
 		CPart*	currPart = theBackground->GetPart(x);
-		if( currPart->IsSelected() )
-		{
-			NSRect		partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
-			NSRectFillUsingOperation( partRect, NSCompositeClear );
-			[sSelectedColor set];
-			NSRect		grabby = partRect;
-			grabby.size.width = 8;
-			grabby.size.height = 8;
-			NSRectFill(grabby);
-			grabby.origin.y = NSMaxY(partRect) -8;
-			NSRectFill(grabby);
-			grabby.origin.x = NSMaxX(partRect) -8;
-			NSRectFill(grabby);
-			grabby.origin.y = NSMinY(partRect);
-			NSRectFill(grabby);
-		}
-		else if( mStack->GetPeeking() )
-		{
-			NSRect	partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
-			NSRectFillUsingOperation( partRect, NSCompositeClear );
-			[sPeekColor set];
-			[NSBezierPath strokeRect: partRect];
-		}
+		[self drawOneBoundingBox: currPart];
 	}
 
 	numParts = theCard->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
 	{
 		CPart*	currPart = theCard->GetPart(x);
-		if( currPart->IsSelected() )
-		{
-			NSRect		partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
-			NSRectFillUsingOperation( partRect, NSCompositeClear );
-			[sSelectedColor set];
-			NSRect		grabby = partRect;
-			grabby.size.width = 8;
-			grabby.size.height = 8;
-			NSRectFill(grabby);
-			grabby.origin.y = NSMaxY(partRect) -8;
-			NSRectFill(grabby);
-			grabby.origin.x = NSMaxX(partRect) -8;
-			NSRectFill(grabby);
-			grabby.origin.y = NSMinY(partRect);
-			NSRectFill(grabby);
-		}
-		else if( mStack->GetPeeking() )
-		{
-			NSRect	partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
-			NSRectFillUsingOperation( partRect, NSCompositeClear );
-			[sPeekColor set];
-			[NSBezierPath strokeRect: partRect];
-		}
+		[self drawOneBoundingBox: currPart];
 	}
 
 	NSBezierPath*	linePath = [NSBezierPath bezierPath];
