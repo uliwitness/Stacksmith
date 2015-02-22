@@ -27,6 +27,9 @@ using namespace Carlson;
 
 
 
+NSString*	WILDToolDidChangeNotification = @"WILDToolDidChangeNotification";
+
+
 CStackMac::CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument )
 	: CStack( inURL, inID, inName, inFileName, inDocument )
 {
@@ -121,9 +124,12 @@ void	CStackMac::SelectedPartChanged()
 
 void	CStackMac::SetEditingBackground( bool inState )
 {
-	CStack::SetEditingBackground(inState);
-	
-	SetCurrentCard( GetCurrentCard() );
+	if( mEditingBackground != inState )
+	{
+		CStack::SetEditingBackground(inState);
+		
+		SetCurrentCard( GetCurrentCard() );
+	}
 }
 
 
@@ -166,7 +172,7 @@ void	CStackMac::SetTool( TTool inTool )
 	
 	[mMacWindowController refreshExistenceAndOrderOfAllViews];
 	[mMacWindowController drawBoundingBoxes];
-	[mMacWindowController updateToolbarVisibility];
+	[[NSNotificationCenter defaultCenter] postNotificationName: WILDToolDidChangeNotification object: nil];
 }
 
 

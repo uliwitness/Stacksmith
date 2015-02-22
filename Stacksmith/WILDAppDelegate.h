@@ -19,6 +19,15 @@
 	id										mFlagsChangedEventMonitor;
 	IBOutlet NSMenuItem			*			mNewObjectSeparator;
 	IBOutlet NSMenuItem			*			mLockPseudoMenu;
+	IBOutlet NSPanel			*			mToolPanel;
+	IBOutlet NSButton			*			mBrowseToolButton;
+	IBOutlet NSButton			*			mPointerToolButton;
+	IBOutlet NSButton			*			mStackInfoButton;
+	IBOutlet NSButton			*			mBackgroundInfoButton;
+	IBOutlet NSButton			*			mCardInfoButton;
+	IBOutlet NSButton			*			mEditBackgroundButton;
+	IBOutlet NSButton			*			mGoPrevButton;
+	IBOutlet NSButton			*			mGoNextButton;
 	WILDTemplateProjectPickerController*	mTemplatePickerWindow;
 }
 

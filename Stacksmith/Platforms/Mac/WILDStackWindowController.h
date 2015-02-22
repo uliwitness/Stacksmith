@@ -43,7 +43,6 @@ class CPart;
 -(void)	drawBoundingBoxes;
 -(void)	refreshExistenceAndOrderOfAllViews;
 -(void)	updateStyle;
--(void)	updateToolbarVisibility;
 
 -(IBAction)	goFirstCard: (id)sender;
 -(IBAction)	goPrevCard: (id)sender;
@@ -63,6 +62,8 @@ class CPart;
 -(IBAction)	delete: (id)sender;
 -(IBAction)	deleteCard: (id)sender;
 -(IBAction)	deleteStack: (id)sender;
+
+-(IBAction)	takeToolFromTag: (id)sender;
 
 -(NSData*)	currentCardSnapshotData;
 

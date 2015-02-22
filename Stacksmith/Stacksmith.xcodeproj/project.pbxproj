@@ -73,6 +73,9 @@
 		551B36BA1A9907B7006AFDFE /* UKDistributedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 551B36B91A9907B7006AFDFE /* UKDistributedView.m */; };
 		551B36C31A9907D9006AFDFE /* UKFinderIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551B36C01A9907D9006AFDFE /* UKFinderIconCell.m */; };
 		551B36C41A9907D9006AFDFE /* NSBezierPathCappedBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = 551B36C21A9907D9006AFDFE /* NSBezierPathCappedBoxes.m */; };
+		551B36CD1A99567B006AFDFE /* PointerTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 551B36CB1A99567B006AFDFE /* PointerTool.tiff */; };
+		551B36CE1A99567B006AFDFE /* BrowseTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 551B36CC1A99567B006AFDFE /* BrowseTool.tiff */; };
+		551B36D11A995A67006AFDFE /* WILDToolButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551B36D01A995A67006AFDFE /* WILDToolButtonCell.m */; };
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
 		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
@@ -320,7 +323,6 @@
 		559700FC137C9B6B000264B8 /* WILDBarnDoorCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F7137C9B6B000264B8 /* WILDBarnDoorCloseFilter.m */; };
 		559700FD137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */; };
 		559700FE137C9B6B000264B8 /* WILDIrisCloseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */; };
-		559BA99918A6EBE400760273 /* WILDCustomWidgetWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99818A6EBE400760273 /* WILDCustomWidgetWindow.m */; };
 		559BA99D18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */; };
 		559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */; };
 		559BA9A118A84BD800760273 /* CMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99F18A84BD700760273 /* CMap.cpp */; };
@@ -652,6 +654,10 @@
 		551B36C01A9907D9006AFDFE /* UKFinderIconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKFinderIconCell.m; path = ../UKDistributedView/UKFinderIconCell/UKFinderIconCell.m; sourceTree = "<group>"; };
 		551B36C11A9907D9006AFDFE /* NSBezierPathCappedBoxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBezierPathCappedBoxes.h; path = ../UKDistributedView/UKFinderIconCell/NSBezierPathCappedBoxes.h; sourceTree = "<group>"; };
 		551B36C21A9907D9006AFDFE /* NSBezierPathCappedBoxes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBezierPathCappedBoxes.m; path = ../UKDistributedView/UKFinderIconCell/NSBezierPathCappedBoxes.m; sourceTree = "<group>"; };
+		551B36CB1A99567B006AFDFE /* PointerTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = PointerTool.tiff; path = Resources/PointerTool.tiff; sourceTree = "<group>"; };
+		551B36CC1A99567B006AFDFE /* BrowseTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = BrowseTool.tiff; path = Resources/BrowseTool.tiff; sourceTree = "<group>"; };
+		551B36CF1A995A67006AFDFE /* WILDToolButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDToolButtonCell.h; path = Platforms/Mac/WILDToolButtonCell.h; sourceTree = "<group>"; };
+		551B36D01A995A67006AFDFE /* WILDToolButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDToolButtonCell.m; path = Platforms/Mac/WILDToolButtonCell.m; sourceTree = "<group>"; };
 		551D938717058397003766DA /* CDownloadCommandNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDownloadCommandNode.cpp; path = ../../CDownloadCommandNode.cpp; sourceTree = "<group>"; };
 		551D938817058397003766DA /* CDownloadCommandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDownloadCommandNode.h; path = ../../CDownloadCommandNode.h; sourceTree = "<group>"; };
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
@@ -953,8 +959,6 @@
 		559700F9137C9B6B000264B8 /* WILDBarnDoorOpenFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDBarnDoorOpenFilter.m; path = "Custom Effects/WILDBarnDoorOpenFilter.m"; sourceTree = "<group>"; };
 		559700FA137C9B6B000264B8 /* WILDIrisCloseFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDIrisCloseFilter.h; path = "Custom Effects/WILDIrisCloseFilter.h"; sourceTree = "<group>"; };
 		559700FB137C9B6B000264B8 /* WILDIrisCloseFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDIrisCloseFilter.m; path = "Custom Effects/WILDIrisCloseFilter.m"; sourceTree = "<group>"; };
-		559BA99718A6EBE400760273 /* WILDCustomWidgetWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDCustomWidgetWindow.h; path = Platforms/Mac/WILDCustomWidgetWindow.h; sourceTree = "<group>"; };
-		559BA99818A6EBE400760273 /* WILDCustomWidgetWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDCustomWidgetWindow.m; path = Platforms/Mac/WILDCustomWidgetWindow.m; sourceTree = "<group>"; };
 		559BA99A18A7AC3000760273 /* WILDWebBrowserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDWebBrowserInfoViewController.h; path = Platforms/Mac/WILDWebBrowserInfoViewController.h; sourceTree = "<group>"; };
 		559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDWebBrowserInfoViewController.mm; path = Platforms/Mac/WILDWebBrowserInfoViewController.mm; sourceTree = "<group>"; };
 		559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDWebBrowserInfoViewController.xib; path = Platforms/Mac/WILDWebBrowserInfoViewController.xib; sourceTree = "<group>"; };
@@ -1278,6 +1282,8 @@
 				55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */,
 				55B063E41A84369800DE26FB /* CommandHandlerIcon.tiff */,
 				55B063E51A84369800DE26FB /* FunctionHandlerIcon.tiff */,
+				551B36CB1A99567B006AFDFE /* PointerTool.tiff */,
+				551B36CC1A99567B006AFDFE /* BrowseTool.tiff */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
 				559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */,
@@ -1351,6 +1357,8 @@
 				552386B2188335A000D7FAB3 /* WILDButtonCell.m */,
 				552386B3188335A000D7FAB3 /* WILDButtonView.h */,
 				552386B4188335A000D7FAB3 /* WILDButtonView.mm */,
+				551B36CF1A995A67006AFDFE /* WILDToolButtonCell.h */,
+				551B36D01A995A67006AFDFE /* WILDToolButtonCell.m */,
 				555E53A718936817001487C1 /* WILDPopUpButtonView.h */,
 				555E53A818936817001487C1 /* WILDPopUpButtonView.mm */,
 				552386CA1883E86200D7FAB3 /* CFieldPartMac.h */,
@@ -1648,8 +1656,6 @@
 				55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */,
 				55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */,
 				55C476681A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib */,
-				559BA99718A6EBE400760273 /* WILDCustomWidgetWindow.h */,
-				559BA99818A6EBE400760273 /* WILDCustomWidgetWindow.m */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -2274,6 +2280,7 @@
 				55039F4D136B52C80082E32E /* brush11.png in Resources */,
 				55039F4E136B52C80082E32E /* brush12.png in Resources */,
 				55039F4F136B52C80082E32E /* brush13.png in Resources */,
+				551B36CD1A99567B006AFDFE /* PointerTool.tiff in Resources */,
 				55405BD518A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib in Resources */,
 				55039F50136B52C80082E32E /* brush14.png in Resources */,
 				554F42F018BB4F0400F5F106 /* EndianStuff.h in Resources */,
@@ -2327,6 +2334,7 @@
 				55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */,
 				55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */,
 				556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */,
+				551B36CE1A99567B006AFDFE /* BrowseTool.tiff in Resources */,
 				55ADC5091744525F0084AAA9 /* BackgroundIcon.icns in Resources */,
 				55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */,
 				55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */,
@@ -2455,6 +2463,7 @@
 				552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */,
 				5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */,
 				552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */,
+				551B36D11A995A67006AFDFE /* WILDToolButtonCell.m in Sources */,
 				55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */,
 				55255A7F114C177400279B03 /* UKTextDocGoToBox.m in Sources */,
 				55255A84114C178100279B03 /* UKSCTDColorWellPrefsController.m in Sources */,
@@ -2477,7 +2486,6 @@
 				55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */,
 				55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */,
 				551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */,
-				559BA99918A6EBE400760273 /* WILDCustomWidgetWindow.m in Sources */,
 				55CD611B187A154A002450E2 /* CSound.mm in Sources */,
 				558970E7118C853600F92788 /* UKIsDragStart.m in Sources */,
 				55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */,

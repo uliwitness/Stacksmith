@@ -24,12 +24,14 @@ typedef NSWindow*									WILDNSWindowPtr;
 typedef NSPopover*									WILDNSPopoverPtr;
 typedef WILDScriptEditorWindowController*			WILDScriptEditorWindowControllerPtr;
 typedef NSImage*									WILDNSImagePtr;
+@class NSString;
 #else
 typedef struct WILDStackWindowController*			WILDStackWindowControllerPtr;
 typedef struct NSWindow*							WILDNSWindowPtr;
 typedef struct NSPopover*							WILDNSPopoverPtr;
 typedef struct WILDScriptEditorWindowController*	WILDScriptEditorWindowControllerPtr;
 typedef struct NSImage*								WILDNSImagePtr;
+typedef struct NSString								NSString;
 #endif
 
 
@@ -82,5 +84,10 @@ protected:
 };
 
 }
+
+
+#if __OBJC__
+extern NSString*	WILDToolDidChangeNotification;
+#endif
 
 #endif /* defined(__Stacksmith__CStackMac__) */

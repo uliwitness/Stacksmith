@@ -63,6 +63,11 @@ void	WILDScheduleResumeOfScript( void )
 	if( self )
 	{
 		new CDocumentManagerMac;	// Create the singleton of our subclass.
+		
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowChanged:) name: NSWindowDidBecomeMainNotification object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowMightHaveGoneAway:) name: NSWindowWillCloseNotification object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(screenConfigurationMayHaveChanged:) name: NSApplicationDidChangeScreenParametersNotification object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(toolMayHaveChanged:) name: WILDToolDidChangeNotification object: nil];
 	}
 	
 	return self;
@@ -158,6 +163,8 @@ void	WILDScheduleResumeOfScript( void )
 
 -(void)	applicationDidFinishLaunching:(NSNotification *)notification
 {
+	[self positionToolbarOnScreen: [[NSScreen screens] firstObject]];
+	
 	UKCrashReporterCheckForCrash();
 	
 	if( !CDocumentManager::GetSharedDocumentManager()->HaveDocuments() )
@@ -175,6 +182,18 @@ void	WILDScheduleResumeOfScript( void )
 //{
 //	CDocumentManager::GetSharedDocumentManager()->SaveAll();
 //}
+
+
+-(void)	positionToolbarOnScreen: (NSScreen*)scr
+{
+	NSRect		box = [mToolPanel frame];
+	NSRect		screenBox = scr.visibleFrame;
+	box.origin.x = screenBox.origin.x;
+	box.size.width = screenBox.size.width;
+	box.origin.y = NSMaxY(screenBox) -box.size.height;
+	[mToolPanel setFrame: box display: YES];
+	[mToolPanel orderFront: self];
+}
 
 
 -(IBAction) showStackCanvasWindow: (id)sender
@@ -425,6 +444,86 @@ void	WILDScheduleResumeOfScript( void )
 -(void)	checkForScriptToResume: (id)sender
 {
 	LEOContextResumeIfAvailable();
+}
+
+
+-(void)	toolMayHaveChanged: (NSNotification*)notif
+{
+	[self validateUIItemsForWindow: [NSApplication sharedApplication].mainWindow];
+}
+
+
+-(void)	mainWindowMightHaveGoneAway: (NSNotification*)notif
+{
+	[self validateUIItemsForWindow: [NSApplication sharedApplication].mainWindow];
+}
+
+
+-(void)	mainWindowChanged: (NSNotification*)notif
+{
+	NSWindow*		wd = notif.object;
+	[self validateUIItemsForWindow: wd];
+	
+	[self positionToolbarOnScreen: wd.screen];
+}
+
+
+-(void)	screenConfigurationMayHaveChanged: (NSNotification*)notif
+{
+	NSWindow*		wd = [NSApplication sharedApplication].mainWindow;
+	[self validateUIItemsForWindow: wd];
+	
+	[self positionToolbarOnScreen: wd.screen];
+}
+
+
+struct WILDAppDelegateValidatableButtonInfo
+{
+	NSButton	*	button;
+	BOOL			enable;
+};
+
+
+-(void)	validateUIItemsForWindow: (NSWindow*)wd
+{
+	NSResponder*	currResponder = [wd firstResponder];
+	WILDAppDelegateValidatableButtonInfo	buttons[] =
+	{
+		{ mBrowseToolButton, NO },
+		{ mPointerToolButton, NO },
+		{ mStackInfoButton, NO },
+		{ mBackgroundInfoButton, NO },
+		{ mCardInfoButton, NO },
+		{ mEditBackgroundButton, NO },
+		{ mGoPrevButton, NO },
+		{ mGoNextButton, NO },
+		{ nil, NO }
+	};
+	
+	while( currResponder )
+	{
+		if( [currResponder respondsToSelector: @selector(validateUserInterfaceItem:)] )
+		{
+			id<NSUserInterfaceValidations>	uiv = (id<NSUserInterfaceValidations>)currResponder;
+			
+			for( int x = 0; buttons[x].button != nil; x++ )
+			{
+				if( [currResponder respondsToSelector: buttons[x].button.action] && [uiv validateUserInterfaceItem: (id<NSValidatedUserInterfaceItem>)buttons[x].button] )
+				{
+					buttons[x].enable = YES;
+				}
+			}
+		}
+		
+		currResponder = [currResponder nextResponder];
+	}
+	
+	for( int x = 0; buttons[x].button != nil; x++ )
+	{
+		[buttons[x].button setEnabled: buttons[x].enable];
+		if( !buttons[x].enable )
+			[buttons[x].button setState: NSOffState];
+	}
 }
 
 @end

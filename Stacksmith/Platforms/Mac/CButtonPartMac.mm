@@ -240,7 +240,10 @@ void	CButtonPartMac::SetFillColor( int r, int g, int b, int a )
 {
 	CButtonPart::SetFillColor( r, g, b, a );
 
-	[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+	if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
+	{
+		[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+	}
 }
 
 
@@ -248,7 +251,10 @@ void	CButtonPartMac::SetLineColor( int r, int g, int b, int a )
 {
 	CButtonPart::SetLineColor( r, g, b, a );
 
-	[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+	if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
+	{
+		[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+	}
 }
 
 
