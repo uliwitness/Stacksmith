@@ -801,7 +801,6 @@
                 <outlet property="mPointerToolButton" destination="MF4-Xg-gT7" id="3nB-CD-IEc"/>
                 <outlet property="mStackInfoButton" destination="wkz-0c-d3L" id="GPi-BB-ghB"/>
                 <outlet property="mToolPanel" destination="2SR-K3-0lu" id="aC8-Qp-7LK"/>
-                <outlet property="mToolbarBackground" destination="xFC-RG-244" id="Fy7-7p-ocm"/>
             </connections>
         </customObject>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="UKPropagandaProgressSheetPosition" animationBehavior="default" id="566" userLabel="ProgressSheet" customClass="NSPanel">
