@@ -764,9 +764,12 @@ void	CStack::SetTool( TTool inTool )
 
 void	CStack::SetName( const std::string &inName )
 {
-	CConcreteObject::SetName( inName );
-	
-	mDocument->IncrementChangeCount();	// Stack list contains our name so we needn't be loaded just to find another card by name, make sure that's updated.
+	if( mName.compare(inName) != 0 )
+	{
+		CConcreteObject::SetName( inName );
+		
+		mDocument->IncrementChangeCount();	// Stack list contains our name so we needn't be loaded just to find another card by name, make sure that's updated.
+	}
 }
 
 

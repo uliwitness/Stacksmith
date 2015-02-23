@@ -92,10 +92,13 @@ using namespace Carlson;
 
 -(void)	textViewDidChangeTypingAttributes: (NSNotification *)notification
 {
-	self.owningField->SetViewTextNeedsSync( true );
-	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
-	if( contents ) contents->IncrementChangeCount();
-//	NSLog( @"Edited styles or so." );
+	if( !self.dontSendSelectionChange )
+	{
+		self.owningField->SetViewTextNeedsSync( true );
+		CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
+		if( contents ) contents->IncrementChangeCount();
+	//	NSLog( @"Edited styles or so." );
+	}
 }
 
 
