@@ -530,7 +530,7 @@ struct WILDAppDelegateValidatableButtonInfo
 	
 	while( currResponder )
 	{
-		UKLog(@"------");
+		//UKLog(@"------");
 		if( [currResponder respondsToSelector: @selector(validateUserInterfaceItem:)] )
 		{
 			id<NSUserInterfaceValidations>	uiv = (id<NSUserInterfaceValidations>)currResponder;
@@ -541,11 +541,11 @@ struct WILDAppDelegateValidatableButtonInfo
 				{
 					buttons[x].enable = YES;
 				}
-				UKLog(@"%@: %@ %s-> %s", currResponder, NSStringFromSelector(buttons[x].button.action), [currResponder respondsToSelector: buttons[x].button.action]? "(implemented) " :"", buttons[x].enable? "YES" : "no");
+				//UKLog(@"%@: %@ %s-> %s", currResponder, NSStringFromSelector(buttons[x].button.action), [currResponder respondsToSelector: buttons[x].button.action]? "(implemented) " :"", buttons[x].enable? "YES" : "no");
 			}
 		}
 		else
-			UKLog(@"%@", currResponder);
+			;//UKLog(@"%@", currResponder);
 		
 		currResponder = [currResponder respondsToSelector: @selector(nextResponder)] ? [currResponder nextResponder] : nil;
 		
