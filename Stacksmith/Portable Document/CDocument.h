@@ -83,7 +83,7 @@ public:
 	
 	LEOContextGroup*	GetScriptContextGroupObject();
 
-	virtual void		IncrementChangeCount()	{ mChangeCount++; };
+	virtual void		IncrementChangeCount();
 	virtual bool		GetNeedsToBeSaved();
 	virtual void		CheckIfWeShouldCloseCauseLastStackClosed();
 	

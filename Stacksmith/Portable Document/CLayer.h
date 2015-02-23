@@ -86,7 +86,7 @@ public:
 	virtual bool	GetShowPict()				{ return mShowPict; };
 	virtual void	SetShowPict( bool n )		{ mShowPict = n; };
 	
-	virtual void	IncrementChangeCount()		{ mChangeCount++; };
+	virtual void	IncrementChangeCount();
 	virtual bool	GetNeedsToBeSaved()			{ return mChangeCount != 0; };
 	
 	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines.

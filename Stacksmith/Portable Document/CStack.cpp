@@ -773,6 +773,12 @@ void	CStack::SetName( const std::string &inName )
 }
 
 
+void	CStack::IncrementChangeCount()
+{
+	mChangeCount++;
+}
+
+
 bool	CStack::GetNeedsToBeSaved()
 {
 	if( mChangeCount != 0 )

@@ -140,7 +140,7 @@ public:
 	virtual void	RectChangedOfPart( CPart* inChangedPart )	{};
 	virtual void	SelectedPartChanged()						{};
 
-	virtual void	IncrementChangeCount()	{ mChangeCount++; };
+	virtual void	IncrementChangeCount();
 	virtual bool	GetNeedsToBeSaved();
 	
 	virtual void	ClearAllGuidelines( bool inTrackingDone = false )	{ mHorizontalGuidelines.clear(); mVerticalGuidelines.clear(); };

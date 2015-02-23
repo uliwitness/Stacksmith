@@ -295,6 +295,12 @@ void	CDocument::CallAllCompletionBlocks()
 }
 
 
+void	CDocument::IncrementChangeCount()
+{
+	mChangeCount++;
+}
+
+
 bool	CDocument::GetNeedsToBeSaved()
 {
 	if( mChangeCount != 0 )
