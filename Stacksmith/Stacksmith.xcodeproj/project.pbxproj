@@ -264,6 +264,9 @@
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		55469F0C1A9A784E0072A721 /* EditTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55469F0B1A9A784E0072A721 /* EditTextTool.tiff */; };
+		554DBABC1A9B362300130864 /* MessageBoxIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 554DBAB91A9B362300130864 /* MessageBoxIcon.tiff */; };
+		554DBABD1A9B362300130864 /* MessageWatcherIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 554DBABA1A9B362300130864 /* MessageWatcherIcon.tiff */; };
+		554DBABE1A9B362300130864 /* StackCanvasIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 554DBABB1A9B362300130864 /* StackCanvasIcon.icns */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
 		554F42F018BB4F0400F5F106 /* EndianStuff.h in Resources */ = {isa = PBXBuildFile; fileRef = 554F42EF18BB4F0400F5F106 /* EndianStuff.h */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
@@ -876,6 +879,9 @@
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
 		55469F0B1A9A784E0072A721 /* EditTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = EditTextTool.tiff; path = Resources/EditTextTool.tiff; sourceTree = "<group>"; };
+		554DBAB91A9B362300130864 /* MessageBoxIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = MessageBoxIcon.tiff; path = Resources/MessageBoxIcon.tiff; sourceTree = "<group>"; };
+		554DBABA1A9B362300130864 /* MessageWatcherIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = MessageWatcherIcon.tiff; path = Resources/MessageWatcherIcon.tiff; sourceTree = "<group>"; };
+		554DBABB1A9B362300130864 /* StackCanvasIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = StackCanvasIcon.icns; path = Resources/StackCanvasIcon.icns; sourceTree = "<group>"; };
 		554DC3181863B6A000B514E3 /* CForgeExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgeExceptions.h; path = ../../CForgeExceptions.h; sourceTree = "<group>"; };
 		554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CForgeExceptions.cpp; path = ../../CForgeExceptions.cpp; sourceTree = "<group>"; };
 		554F42EF18BB4F0400F5F106 /* EndianStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EndianStuff.h; path = ../stackimport/EndianStuff.h; sourceTree = "<group>"; };
@@ -1287,6 +1293,9 @@
 				551B36CB1A99567B006AFDFE /* PointerTool.tiff */,
 				551B36CC1A99567B006AFDFE /* BrowseTool.tiff */,
 				55469F0B1A9A784E0072A721 /* EditTextTool.tiff */,
+				554DBAB91A9B362300130864 /* MessageBoxIcon.tiff */,
+				554DBABA1A9B362300130864 /* MessageWatcherIcon.tiff */,
+				554DBABB1A9B362300130864 /* StackCanvasIcon.icns */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
 				559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */,
@@ -2218,6 +2227,7 @@
 				552FF209113F23F3005742C8 /* PAT_15.pbm in Resources */,
 				552FF20A113F23F3005742C8 /* PAT_16.pbm in Resources */,
 				552FF20B113F23F3005742C8 /* PAT_17.pbm in Resources */,
+				554DBABC1A9B362300130864 /* MessageBoxIcon.tiff in Resources */,
 				552FF20C113F23F3005742C8 /* PAT_18.pbm in Resources */,
 				552FF20D113F23F3005742C8 /* PAT_19.pbm in Resources */,
 				552FF20E113F23F3005742C8 /* PAT_20.pbm in Resources */,
@@ -2244,6 +2254,7 @@
 				552FF220113F23F3005742C8 /* PAT_38.pbm in Resources */,
 				552FF221113F23F3005742C8 /* PAT_39.pbm in Resources */,
 				552FF222113F23F3005742C8 /* PAT_40.pbm in Resources */,
+				554DBABE1A9B362300130864 /* StackCanvasIcon.icns in Resources */,
 				552FF22E113F23F3005742C8 /* resources.xml in Resources */,
 				55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */,
 				55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */,
@@ -2256,6 +2267,7 @@
 				55E3A6FB11519B45008411BB /* HCSV.icns in Resources */,
 				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
 				55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */,
+				554DBABD1A9B362300130864 /* MessageWatcherIcon.tiff in Resources */,
 				555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */,
 				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
 				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,

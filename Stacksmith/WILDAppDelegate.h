@@ -27,6 +27,9 @@
 	IBOutlet NSButton			*			mBackgroundInfoButton;
 	IBOutlet NSButton			*			mCardInfoButton;
 	IBOutlet NSButton			*			mEditBackgroundButton;
+	IBOutlet NSButton			*			mMessageBoxButton;
+	IBOutlet NSButton			*			mMessageWatcherButton;
+	IBOutlet NSButton			*			mStackCanvasButton;
 	IBOutlet NSButton			*			mGoPrevButton;
 	IBOutlet NSButton			*			mGoNextButton;
 	WILDTemplateProjectPickerController*	mTemplatePickerWindow;

@@ -438,6 +438,25 @@ void	WILDScheduleResumeOfScript( void )
 }
 
 
+-(BOOL)	validateUserInterfaceItem: (id<NSValidatedUserInterfaceItem>)sender
+{
+	if( sender.action == @selector(showStackCanvasWindow:) )
+	{
+		return (CDocumentManager::GetSharedDocumentManager()->GetFrontDocument() != NULL);
+	}
+	else if( sender.action == @selector(orderFrontMessageBox:) )
+	{
+		return YES;
+	}
+	else if( sender.action == @selector(orderFrontMessageWatcher:) )
+	{
+		return YES;
+	}
+	else
+		return [self respondsToSelector: sender.action];
+}
+
+
 -(NSString*)	feedURLStringForUpdater: (SUUpdater*)inUpdater
 {
 	return @"http://stacksmith.org/nightlies/stacksmith_nightlies.rss";
@@ -499,13 +518,19 @@ struct WILDAppDelegateValidatableButtonInfo
 		{ mBackgroundInfoButton, NO },
 		{ mCardInfoButton, NO },
 		{ mEditBackgroundButton, NO },
+		{ mMessageBoxButton, NO },
+		{ mMessageWatcherButton, NO },
+		{ mStackCanvasButton, NO },
 		{ mGoPrevButton, NO },
 		{ mGoNextButton, NO },
 		{ nil, NO }
 	};
 	
+	bool	didAppDelegateYet = NO;
+	
 	while( currResponder )
 	{
+		UKLog(@"------");
 		if( [currResponder respondsToSelector: @selector(validateUserInterfaceItem:)] )
 		{
 			id<NSUserInterfaceValidations>	uiv = (id<NSUserInterfaceValidations>)currResponder;
@@ -516,10 +541,19 @@ struct WILDAppDelegateValidatableButtonInfo
 				{
 					buttons[x].enable = YES;
 				}
+				UKLog(@"%@: %@ %s-> %s", currResponder, NSStringFromSelector(buttons[x].button.action), [currResponder respondsToSelector: buttons[x].button.action]? "(implemented) " :"", buttons[x].enable? "YES" : "no");
 			}
 		}
+		else
+			UKLog(@"%@", currResponder);
 		
-		currResponder = [currResponder nextResponder];
+		currResponder = [currResponder respondsToSelector: @selector(nextResponder)] ? [currResponder nextResponder] : nil;
+		
+		if( !currResponder && !didAppDelegateYet )
+		{
+			didAppDelegateYet = YES;
+			currResponder = (NSResponder*)[[NSApplication sharedApplication] delegate];
+		}
 	}
 	
 	for( int x = 0; buttons[x].button != nil; x++ )
