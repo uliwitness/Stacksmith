@@ -620,11 +620,14 @@ using namespace Carlson;
 		[self drawOneBoundingBox: currPart];
 	}
 
-	numParts = theCard->GetNumParts();
-	for( size_t x = 0; x < numParts; x++ )
+	if( !mStack->GetEditingBackground() )
 	{
-		CPart*	currPart = theCard->GetPart(x);
-		[self drawOneBoundingBox: currPart];
+		numParts = theCard->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CPart*	currPart = theCard->GetPart(x);
+			[self drawOneBoundingBox: currPart];
+		}
 	}
 
 	NSBezierPath*	linePath = [NSBezierPath bezierPath];
