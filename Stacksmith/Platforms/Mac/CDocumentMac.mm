@@ -148,6 +148,8 @@ void	CDocumentMac::ShowStackCanvasWindow()
 		mCanvasWindowController.owningDocument = this;
 		[mCanvasWindowController showWindow: nil];
 	}
+	else if( mCanvasWindowController.window == [NSApplication.sharedApplication mainWindow] )
+		[mCanvasWindowController.window orderOut: nil];
 	else
 		[mCanvasWindowController.window makeKeyAndOrderFront: nil];
 }
