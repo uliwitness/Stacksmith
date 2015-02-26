@@ -211,8 +211,7 @@
                             <menuItem isSeparatorItem="YES" id="AlQ-PN-eRf">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Edit Background" id="htT-ns-xrL">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Edit Background" keyEquivalent="B" id="htT-ns-xrL">
                                 <connections>
                                     <action selector="toggleBackgroundEditMode:" target="-1" id="VGR-ch-QE5"/>
                                 </connections>
@@ -747,7 +746,7 @@
                                     <action selector="orderFrontMessageWatcher:" target="556" id="UQ9-Ma-vkA"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show Stack Canvas" keyEquivalent="M" id="sFA-sH-79S">
+                            <menuItem title="Show Stack Canvas" keyEquivalent="K" id="sFA-sH-79S">
                                 <connections>
                                     <action selector="showStackCanvasWindow:" target="-1" id="wf6-De-baZ"/>
                                 </connections>
