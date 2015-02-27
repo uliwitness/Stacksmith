@@ -1237,7 +1237,7 @@ using namespace Carlson;
 }
 
 
--(void)	changeFont: (id)sender
+-(void)	changeFont: (NSFontManager*)sender
 {
 	CAutoreleasePool	pool;
 	CLayer		*	owner = mStack->GetCurrentLayer();
@@ -1249,9 +1249,33 @@ using namespace Carlson;
 		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
 		if( currPart->IsSelected() )
 		{
-			NSFont*	oldFont = currMacPart->GetMacFont();
-			if( oldFont )
-				currMacPart->SetMacFont( [[NSFontManager sharedFontManager] convertFont: oldFont] );
+			NSMutableDictionary*	oldAttrs = [currMacPart->GetCocoaAttributesForPart() mutableCopy];
+			NSFont*					theFont = [oldAttrs objectForKey: NSFontAttributeName];
+			if( theFont )
+			{
+				[oldAttrs setObject: [sender convertFont: theFont] forKey: NSFontAttributeName];
+				currMacPart->SetCocoaAttributesForPart( oldAttrs );
+			}
+			[oldAttrs release];
+		}
+	}
+}
+
+
+-(void)	changeAttributes: (NSFontManager*)sender
+{
+	CAutoreleasePool	pool;
+	CLayer		*	owner = mStack->GetCurrentLayer();
+	CMacPartBase*	currMacPart = NULL;
+	size_t			numParts = owner->GetNumParts();
+	for( size_t x = 0; x < numParts; x++ )
+	{
+		CPart*		currPart = owner->GetPart( x );
+		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+		if( currPart->IsSelected() )
+		{
+			NSDictionary*	oldAttrs = currMacPart->GetCocoaAttributesForPart();
+			currMacPart->SetCocoaAttributesForPart( [sender convertAttributes: oldAttrs] );
 		}
 	}
 }
@@ -1270,12 +1294,14 @@ using namespace Carlson;
 		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
 		if( currPart->IsSelected() )
 		{
-			NSFont*	theFont = currMacPart->GetMacFont();
+			NSDictionary*	attrs = currMacPart->GetCocoaAttributesForPart();
+			NSFont*			theFont = [attrs objectForKey: NSFontAttributeName];
 			if( theFont )
 			{
 				[[NSFontManager sharedFontManager] setSelectedFont: theFont isMultiple: multiple];
 				multiple = YES;
 			}
+			[[NSFontManager sharedFontManager] setSelectedAttributes: attrs isMultiple: multiple];
 		}
 	}
 }

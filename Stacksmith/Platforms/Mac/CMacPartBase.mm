@@ -45,24 +45,119 @@ void	CMacPartBase::OpenContentsEditor()
 }
 
 
-NSFont*		CMacPartBase::GetMacFont()
-{
-	CVisiblePart*	myself = dynamic_cast<CVisiblePart*>(this);
-	if( !myself )
-		return nil;
-	return [NSFont fontWithName: [NSString stringWithUTF8String: myself->GetTextFont().c_str()] size:myself->GetTextSize()];
-}
-
-
-void		CMacPartBase::SetMacFont( NSFont* inFont )
+void	CMacPartBase::SetCocoaAttributesForPart( NSDictionary* inAttrs )
 {
 	CVisiblePart*	myself = dynamic_cast<CVisiblePart*>(this);
 	if( !myself )
 		return;
-	myself->SetTextFont( inFont.displayName.UTF8String );
-	myself->SetTextSize( inFont.pointSize );
+	
+	NSFont*	theFont = [inAttrs objectForKey: NSFontAttributeName];
+	if( !theFont )
+		theFont = [NSFont systemFontOfSize: [NSFont systemFontSize]];
+	
+	TPartTextStyle		textStyle = 0;
+	if( [[NSFontManager sharedFontManager] traitsOfFont: theFont] & NSItalicFontMask )
+		textStyle |= EPartTextStyleItalic;
+	else
+	{
+		NSNumber*	obliquenessNum = [inAttrs objectForKey: NSObliquenessAttributeName];
+		if( obliquenessNum && obliquenessNum.floatValue >= 0.2 )
+			textStyle |= EPartTextStyleItalic;
+	}
+
+	if( [[NSFontManager sharedFontManager] traitsOfFont: theFont] & NSBoldFontMask )
+		textStyle |= EPartTextStyleBold;
+	
+	myself->SetTextFont( [theFont familyName].UTF8String );
+	myself->SetTextSize( theFont.pointSize );
+	
+	NSNumber*	underlineNum = [inAttrs objectForKey: NSUnderlineStyleAttributeName];
+	if( underlineNum && underlineNum.integerValue == NSUnderlineStyleSingle )
+		textStyle |= EPartTextStyleUnderline;
+	
+	NSNumber*	outlineNum = [inAttrs objectForKey: NSStrokeWidthAttributeName];
+	if( outlineNum && outlineNum.integerValue <= -3.0 )
+		textStyle |= EPartTextStyleOutline;
+	
+	if( [inAttrs objectForKey: NSShadowAttributeName] )
+		textStyle |= EPartTextStyleShadow;
+	
+	if( [inAttrs objectForKey: NSLinkAttributeName] )
+		textStyle |= EPartTextStyleGroup;
+	
+	NSNumber*	kerningNum = [inAttrs objectForKey: NSKernAttributeName];
+	if( kerningNum && kerningNum.integerValue < 0 )
+		textStyle |= EPartTextStyleCondensed;
+	else if( kerningNum && kerningNum.integerValue > 0 )
+		textStyle |= EPartTextStyleExtended;
+	
+	myself->SetTextStyle( textStyle );
+	
+	NSLog( @"New Attrs: %s %d %u", myself->GetTextFont().c_str(), myself->GetTextSize(), textStyle );
 }
 
+
+NSDictionary*	CMacPartBase::GetCocoaAttributesForPart()
+{
+	CVisiblePart*			myself = dynamic_cast<CVisiblePart*>(this);
+	NSMutableDictionary	*	styles = [NSMutableDictionary dictionary];
+	NSFont	*				theFont = nil;
+	CGFloat					fontSize = myself->GetTextSize();
+	if( fontSize < 0 )
+		fontSize = [NSFont systemFontSize];
+	if( myself->GetTextFont().length() > 0 )
+		theFont = [NSFont fontWithName: [NSString stringWithUTF8String: myself->GetTextFont().c_str()] size: fontSize];
+	else
+		theFont = [NSFont systemFontOfSize: fontSize];
+	TPartTextStyle			styleFlags = myself->GetTextStyle();
+	
+	if( styleFlags & EPartTextStyleBold )
+	{
+		NSFont*	newFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSBoldFontMask];
+		if( newFont )
+			theFont = newFont;
+	}
+	if( styleFlags & EPartTextStyleItalic )
+	{
+		NSFont*	newFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSItalicFontMask];
+		if( newFont && [[NSFontManager sharedFontManager] traitsOfFont: newFont] & NSItalicFontMask )
+		{
+			theFont = newFont;
+		}
+		else
+		{
+			[styles setObject: @(0.5) forKey: NSObliquenessAttributeName];
+		}
+
+	}
+	if( styleFlags & EPartTextStyleUnderline )
+	{
+		[styles setObject: @(NSUnderlineStyleSingle) forKey: NSUnderlineStyleAttributeName];
+	}
+	if( styleFlags & EPartTextStyleOutline )
+	{
+		[styles setObject: @-3.0 forKey: NSStrokeWidthAttributeName];
+	}
+	if( styleFlags & EPartTextStyleShadow )
+	{
+		NSShadow*	textShadow = [[[NSShadow alloc] init] autorelease];
+		[textShadow setShadowColor: NSColor.blackColor];
+		[textShadow setShadowOffset: NSMakeSize(1,1)];
+		[styles setObject: textShadow forKey: NSShadowAttributeName];
+	}
+	if( styleFlags & EPartTextStyleCondensed )
+		[styles setObject: @(-3.0) forKey: NSKernAttributeName];
+	if( styleFlags & EPartTextStyleExtended )
+		[styles setObject: @(3.0) forKey: NSKernAttributeName];
+	if( styleFlags & EPartTextStyleGroup )
+		[styles setObject: [NSURL URLWithString: @"http://#"] forKey: NSLinkAttributeName];
+
+	[styles setObject: theFont forKey: NSFontAttributeName];
+
+	NSLog( @"Styles: %@", styles );
+	
+	return styles;
+}
 
 
 NSAutoresizingMaskOptions	CMacPartBase::GetCocoaResizeFlags( TPartLayoutFlags inFlags )

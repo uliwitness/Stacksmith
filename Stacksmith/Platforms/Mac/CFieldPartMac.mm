@@ -1065,58 +1065,6 @@ void	CFieldPartMac::LoadChangedTextFromView()
 }
 
 
-NSDictionary*	CFieldPartMac::GetCocoaAttributesForPart()
-{
-	NSMutableDictionary	*	styles = [NSMutableDictionary dictionary];
-	NSFont	*				theFont = nil;
-	CGFloat					fontSize = mTextSize;
-	if( fontSize < 0 )
-		fontSize = [NSFont systemFontSize];
-	if( mFont.length() > 0 )
-		theFont = [NSFont fontWithName: [NSString stringWithUTF8String: mFont.c_str()] size: fontSize];
-	else
-		theFont = [NSFont systemFontOfSize: fontSize];
-	
-	if( mTextStyle & EPartTextStyleBold )
-	{
-		NSFont*	newFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSBoldFontMask];
-		if( newFont )
-			theFont = newFont;
-	}
-	if( mTextStyle & EPartTextStyleItalic )
-	{
-		NSFont*	newFont = [[NSFontManager sharedFontManager] convertFont: theFont toHaveTrait: NSItalicFontMask];
-		if( newFont )
-			theFont = newFont;
-	}
-	if( mTextStyle & EPartTextStyleUnderline )
-	{
-		[styles setObject: @(NSUnderlineStyleSingle) forKey: NSUnderlineStyleAttributeName];
-	}
-	if( mTextStyle & EPartTextStyleOutline )
-	{
-		[styles setObject: @-3.0 forKey: NSStrokeWidthAttributeName];
-	}
-	if( mTextStyle & EPartTextStyleShadow )
-	{
-		NSShadow*	textShadow = [[[NSShadow alloc] init] autorelease];
-		[textShadow setShadowColor: NSColor.blackColor];
-		[textShadow setShadowOffset: NSMakeSize(1,1)];
-		[styles setObject: textShadow forKey: NSShadowAttributeName];
-	}
-	if( mTextStyle & EPartTextStyleCondensed )
-		[styles setObject: @(-3.0) forKey: NSKernAttributeName];
-	if( mTextStyle & EPartTextStyleExtended )
-		[styles setObject: @(3.0) forKey: NSKernAttributeName];
-	if( mTextStyle & EPartTextStyleGroup )
-		[styles setObject: [NSURL URLWithString: @"http://#"] forKey: NSLinkAttributeName];
-
-	[styles setObject: theFont forKey: NSFontAttributeName];
-	
-	return styles;
-}
-
-
 NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedString& attrStr, NSDictionary * defaultAttrs, size_t startOffs, size_t endOffs )
 {
 //	attrStr.Dump();
@@ -1316,20 +1264,4 @@ void	CFieldPartMac::SetScript( std::string inScript )
 	
 	[(mView? mView : mSearchField) updateTrackingAreas];
 }
-
-
-NSFont*		CFieldPartMac::GetMacFont()
-{
-	NSFont	*	theFont = CMacPartBase::GetMacFont();
-	
-	if( !theFont && mTextView )
-		theFont = [mTextView font];
-	else if( !theFont && mTableView )
-		theFont = [mTableView font];
-	else if( !theFont && mSearchField )
-		theFont = [mSearchField font];
-	
-	return theFont;
-}
-
 

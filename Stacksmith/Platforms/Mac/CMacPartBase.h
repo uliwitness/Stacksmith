@@ -44,11 +44,11 @@ public:
 		//inView.layer.borderWidth = inState? 1 : 0;
 		//inView.layer.borderColor = inState? [NSColor grayColor].CGColor : NULL;
 	}
-	virtual NSView*		GetView()					{ return NULL; };
-	virtual NSImage*	GetDisplayIcon()			{ return [NSImage imageNamed: @"FieldIconSmall"]; };
-	virtual NSFont*		GetMacFont();
-	virtual void		SetMacFont( NSFont* inFont );
-	virtual Class		GetPropertyEditorClass()	{ return [WILDPartInfoViewController class]; };
+	virtual NSView*			GetView()					{ return NULL; };
+	virtual NSImage*		GetDisplayIcon()			{ return [NSImage imageNamed: @"FieldIconSmall"]; };
+	virtual void			SetCocoaAttributesForPart( NSDictionary* inAttrs );
+	virtual NSDictionary*	GetCocoaAttributesForPart();
+	virtual Class			GetPropertyEditorClass()	{ return [WILDPartInfoViewController class]; };
 	
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset );
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex );
