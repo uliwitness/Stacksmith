@@ -224,7 +224,7 @@ void	CPart::SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )
 		mTop = t;
 		mBottom = b;
 	}
-	else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+	else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
 	{
 		mBottom = GetStack()->GetCardHeight() -b;
 		mTop = mBottom + h;
@@ -255,9 +255,9 @@ LEOInteger	CPart::GetLeft()
 
 LEOInteger	CPart::GetTop()
 {
-	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
+	if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
 		return GetStack()->GetCardHeight() -mTop;
-	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
+	else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
 		return (GetStack()->GetCardHeight() -(mBottom -mTop)) /2;
 	
 	return mTop;
@@ -277,9 +277,9 @@ LEOInteger	CPart::GetRight()
 
 LEOInteger	CPart::GetBottom()
 {
-	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom || PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVBoth )
+	if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom || PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVBoth )
 		return GetStack()->GetCardHeight() -mBottom;
-	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
+	else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
 		return (GetStack()->GetCardHeight() +(mBottom -mTop)) / 2;
 	
 	return mBottom;
@@ -566,8 +566,8 @@ THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag
 
 LEONumber	CPart::GetHandleSize( bool *outAllowSideHandles, bool *outAllowCornerHandles )
 {
-	LEONumber	heightForFullHandles = (mBottom -mTop) / 3;
-	LEONumber	heightForReducedHandles = (mBottom -mTop) / 2;
+	LEONumber	heightForFullHandles = (GetBottom() -GetTop()) / 3;
+	LEONumber	heightForReducedHandles = (GetBottom() -GetTop()) / 2;
 	LEONumber	minHeightForHandles = 8;
 	LEONumber	maxHeightForHandles = 12;
 	LEONumber	handleHeight = minHeightForHandles;
