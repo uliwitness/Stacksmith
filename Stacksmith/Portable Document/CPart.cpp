@@ -234,7 +234,7 @@ void	CPart::SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )
 		mBottom = GetStack()->GetCardHeight() -b;
 		mTop = t;
 	}
-	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
+	else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
 	{
 		mTop = (GetStack()->GetCardHeight() -h) /2;
 		mBottom = mTop +h;
@@ -247,7 +247,7 @@ LEOInteger	CPart::GetLeft()
 	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
 		return GetStack()->GetCardWidth() -mLeft;
 	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
-		return GetStack()->GetCardWidth() -(mRight -mLeft) / 2;
+		return (GetStack()->GetCardWidth() -(mRight -mLeft)) / 2;
 	
 	return mLeft;
 }
