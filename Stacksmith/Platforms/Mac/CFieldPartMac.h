@@ -13,6 +13,7 @@
 #include "CFieldPart.h"
 #include "CMacPartBase.h"
 #include <climits>
+#include "TTool.h"
 #import "WILDFieldInfoViewController.h"
 #import "WILDScrollView.h"
 
@@ -61,6 +62,8 @@ public:
 	virtual void	SetToolTip( const std::string& inToolTip )	{ CFieldPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
 	virtual void	SetPartLayoutFlags( TPartLayoutFlags inFlags );
 	virtual void	SetScript( std::string inScript );
+	
+	virtual void	ToolChangedFrom( TTool inOldTool );
 	
 	virtual NSView*	GetView();
 	

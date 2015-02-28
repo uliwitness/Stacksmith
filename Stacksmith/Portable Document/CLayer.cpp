@@ -1120,6 +1120,15 @@ void	CLayer::CorrectRectOfPart( CPart* inMovedPart, std::vector<CPartRef> inElig
 }
 
 
+void	CLayer::ToolChangedFrom( TTool inOldTool )
+{
+	DeselectAllItems();
+	
+	for( CPartRef currPart : mParts )
+		currPart->ToolChangedFrom( inOldTool );
+}
+
+
 void	CLayer::DumpProperties( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);

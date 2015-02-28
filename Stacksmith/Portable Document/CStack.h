@@ -16,19 +16,10 @@
 #include "CObjectID.h"
 #include "CCard.h"
 #include "CBackground.h"
+#include "TTool.h"
 
 
 namespace Carlson {
-
-
-enum
-{
-	EBrowseTool = 0,
-	EPointerTool,
-	EEditTextTool,
-	ETool_Last
-};
-typedef uint16_t	TTool;
 
 
 enum

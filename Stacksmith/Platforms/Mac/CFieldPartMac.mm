@@ -1236,6 +1236,18 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 }
 
 
+void	CFieldPartMac::ToolChangedFrom( TTool inOldTool )
+{
+	if( (inOldTool != EEditTextTool && GetStack()->GetTool() == EEditTextTool)
+		or (inOldTool == EEditTextTool && GetStack()->GetTool() != EEditTextTool) )
+	{
+		NSView*	oldSuper = (mView? mView : mSearchField).superview;
+		DestroyView();
+		CreateViewIn( oldSuper );
+	}
+}
+
+
 void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CFieldPart::SetRect( left, top, right, bottom );

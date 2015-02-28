@@ -1112,6 +1112,7 @@
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
+		55D61D621AA275C2006D117F /* TTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TTool.h; path = "Portable Document/TTool.h"; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
 		55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+centerHorizontallyAndVertically.m"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.m"; sourceTree = "<group>"; };
 		55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNodeTransformation.cpp; path = ../../CNodeTransformation.cpp; sourceTree = "<group>"; };
@@ -1771,6 +1772,7 @@
 				556DB7AE18709C73002F7CB2 /* CConcreteObject.cpp */,
 				55CD60DA187587CB002450E2 /* CDocument.h */,
 				55CD60D9187587CB002450E2 /* CDocument.cpp */,
+				55D61D621AA275C2006D117F /* TTool.h */,
 				556DB7AC18709ADB002F7CB2 /* CStack.h */,
 				556DB7AB18709ADB002F7CB2 /* CStack.cpp */,
 				556DB7B51870A352002F7CB2 /* CLayer.h */,

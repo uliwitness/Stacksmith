@@ -12,6 +12,7 @@
 #include "CConcreteObject.h"
 #include "tinyxml2.h"
 #include "CObjectID.h"
+#include "TTool.h"
 
 
 namespace Carlson {
@@ -123,6 +124,8 @@ public:
 	virtual std::string			GetTypeName()							{ return GetPartType()->GetPartTypeName(); };
 	virtual LEOInteger			GetIndex( CPartCreatorBase* inType = NULL );
 	virtual void				SetIndex( LEOInteger inIndex, CPartCreatorBase* inType = NULL );
+	
+	virtual void				ToolChangedFrom( TTool inOldTool )	{};
 	
 	virtual bool				GetTextContents( std::string& outString );
 	virtual bool				SetTextContents( const std::string& inString);

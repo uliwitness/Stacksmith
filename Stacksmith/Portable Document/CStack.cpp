@@ -755,10 +755,17 @@ void	CStack::SelectAllObjectsOnBackground()
 
 void	CStack::SetTool( TTool inTool )
 {
-	mCurrentTool = inTool;
-	
-	DeselectAllObjectsOnCard();
-	DeselectAllObjectsOnBackground();
+	if( inTool != mCurrentTool )
+	{
+		TTool		oldTool = mCurrentTool;
+		mCurrentTool = inTool;
+		
+		if( GetCurrentCard() )
+		{
+			GetCurrentCard()->ToolChangedFrom( oldTool );
+			GetCurrentCard()->GetBackground()->ToolChangedFrom( oldTool );
+		}
+	}
 }
 
 

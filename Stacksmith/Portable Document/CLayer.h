@@ -13,6 +13,7 @@
 #include "CObjectID.h"
 #include "CPart.h"
 #include "CPartContents.h"
+#include "TTool.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -89,6 +90,7 @@ public:
 	virtual void	IncrementChangeCount();
 	virtual bool	GetNeedsToBeSaved()			{ return mChangeCount != 0; };
 	
+	virtual void	ToolChangedFrom( TTool inOldTool );
 	virtual void	DeselectAllItems();
 	
 	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines.
