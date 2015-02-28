@@ -185,6 +185,9 @@ NSAutoresizingMaskOptions	CMacPartBase::GetCocoaResizeFlags( TPartLayoutFlags in
 		case EPartLayoutAlignHBoth:
 			cocoaFlags |= NSViewWidthSizable;
 			break;
+		case EPartLayoutAlignHCenter:
+			cocoaFlags |= NSViewMaxXMargin | NSViewMinXMargin;
+			break;
 		case EPartLayoutAlignRight:
 			cocoaFlags |= NSViewMinXMargin;
 			break;
@@ -196,6 +199,9 @@ NSAutoresizingMaskOptions	CMacPartBase::GetCocoaResizeFlags( TPartLayoutFlags in
 			break;
 		case EPartLayoutAlignVBoth:
 			cocoaFlags |= NSViewHeightSizable;
+			break;
+		case EPartLayoutAlignVCenter:
+			cocoaFlags |= NSViewMaxYMargin | NSViewMinYMargin;
 			break;
 		case EPartLayoutAlignBottom:
 			cocoaFlags |= NSViewMinYMargin;	// Cocoa coords start in lower left.
