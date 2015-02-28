@@ -2,42 +2,41 @@
 <?
 	/*
 		Call as:
-			./writerss.php <versionfile> <build means> <downloadfile> <username> <password> <buildNum>
+			./writerss.php <versionfile> <build means> <downloadfile>
 			
 		Ex.:
-			./writerss.php build/Stacksmith.app/Contents/Info.plist nightly build/Stacksmith.tgz jeff s3kr1t 21
+			./writerss.php Output/Stacksmith.app/Contents/Info.plist nightly Output/Stacksmith.tgz
 	*/
 	
 	date_default_timezone_set('Europe/Berlin');
 	$updatemessage = '';
 	$buildsinlist = 0;
-	$desirednumbuilds = date("N");
+	$desirednumdays = date("N");
+	ob_start();
+	passthru("git log --since=\"$desirednumdays days ago\"");
+	$revisions = ob_get_clean();
 	
-	for( $x = 0; $buildsinlist < $desirednumbuilds; $x++ )
+	preg_match_all("/(Date:   |    )(.*)/", $revisions, $matches, PREG_SET_ORDER);
+	
+	$updatemessage = "";
+	$lastdate = "";
+	$num = sizeof( $matches );
+	for( $x = 0; $x < $num; $x++ )
 	{
-		$fullurl = str_replace("http://","http://".urlencode($argv[4]).':'.urlencode($argv[5])."@",$_ENV['BUILD_URL'])."/api/xml?wrapper=changes&xpath=//changeSet//comment";
-		$matches = array();
-		preg_match( "/\\/([0-9]+)\\//", $fullurl, $matches, PREG_OFFSET_CAPTURE );
-		$newbuildno = ($matches[1][0] -$x);
-		$endoffs = $matches[1][1] +strlen($matches[1][0]);
-		$fullurl = substr( $fullurl, 0, $matches[1][1] ).$newbuildno.substr( $fullurl, $endoffs, strlen($fullurl) -$endoffs );
-		
-		$commitmessages = file_get_contents($fullurl);
-		if( strlen($commitmessages) > 0 && strcmp($commitmessages, "<changes/>") != 0 )
+		if( $matches[$x][1] == "Date:   " )
 		{
-			$commitmessages = str_replace("<changes>","&lt;ul&gt;",$commitmessages);
-			$commitmessages = str_replace("</changes>","&lt;/ul&gt;",$commitmessages);
-			$commitmessages = str_replace("<comment>","&lt;li&gt;",$commitmessages);
-			$commitmessages = str_replace("</comment>","&lt;/li&gt;",$commitmessages);
-			
-			$updatemessage .= "<h3>Build $newbuildno</h3>\n".$commitmessages;
-			$buildsinlist++;
+			$thedate = date( "Y-m-d", strtotime($matches[$x][2]));
+			if( $thedate != $lastdate )
+			{
+				$updatemessage .= "&lt;h3&gt;".htmlentities($thedate)."&lt;/h3&gt;\n";
+				$lastdate = $thedate;
+			}
 		}
-		if( $newbuildno == 1 )
-			break;
+		else
+			$updatemessage .= htmlentities($matches[$x][2])."&lt;br /&gt;\n";
 	}
 	
-	$infoplist = file_get_contents(dirname($argv[0]).'/'.$argv[1]);
+	$infoplist = file_get_contents($argv[1]);
 	$matches = array();
 	preg_match( '/<key>CFBundleVersion<\\/key>[\r\n]*/', $infoplist, $matches, PREG_OFFSET_CAPTURE );
 	$newoffs = $matches[0][1] +strlen($matches[0][0]);
@@ -56,13 +55,13 @@
        <title>Stacksmith $actualversion</title>
        <link>http://stacksmith.org/nightlies/".basename($argv[3])."</link>
        <description>".$updatemessage."</description>
-       <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize(dirname($argv[0]).'/'.$argv[3])."\" type=\"application/octet-stream\" />
+       <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize($argv[3])."\" type=\"application/octet-stream\" />
        <sparkle:version>$actualversion</sparkle:version>
      </item>
   </channel>
 </rss>";
 	
-	$fpath = dirname($argv[0]).'/build/'.$argv[2].'_feed.rss';
+	$fpath = dirname($argv[0]).'/../Output/'.$argv[2].'_feed.rss';
 	$fd = fopen($fpath,"w");
 	fwrite($fd,$feedstr);
 	fclose($fd);
