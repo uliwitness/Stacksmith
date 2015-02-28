@@ -266,7 +266,7 @@ LEOInteger	CPart::GetTop()
 
 LEOInteger	CPart::GetRight()
 {
-	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight || PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHBoth )
 		return GetStack()->GetCardWidth() -mRight;
 	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
 		return (GetStack()->GetCardWidth() +(mRight -mLeft)) / 2;
@@ -277,7 +277,7 @@ LEOInteger	CPart::GetRight()
 
 LEOInteger	CPart::GetBottom()
 {
-	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
+	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom || PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVBoth )
 		return GetStack()->GetCardHeight() -mBottom;
 	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
 		return (GetStack()->GetCardHeight() +(mBottom -mTop)) / 2;
@@ -557,7 +557,7 @@ THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag
 		}
 	}
 	
-	if( hitPart == ENothingHitPart && x > mLeft && x < mRight && y > mTop && y < mBottom )
+	if( hitPart == ENothingHitPart && x > GetLeft() && x < GetRight() && y > GetTop() && y < GetBottom() )
 		hitPart = EContentHitPart;
 	
 	return hitPart;
@@ -601,37 +601,37 @@ bool	CPart::GetRectForHandle( THitPart inDesiredPart, LEONumber *outLeft, LEONum
 	
 	if( inDesiredPart & ELeftGrabberHitPart )
 	{
-		*outLeft = mLeft -truncf(handleHeight /2);
+		*outLeft = GetLeft() -truncf(handleHeight /2);
 		*outRight = *outLeft +handleHeight;
 	}
 	else if( inDesiredPart & ERightGrabberHitPart )
 	{
-		*outLeft = mRight -truncf(handleHeight /2);
+		*outLeft = GetRight() -truncf(handleHeight /2);
 		*outRight = *outLeft +handleHeight;
 	}
 	else
 	{
 		if( !allowSideHandles )
 			return false;
-		*outLeft = mLeft +truncf((mRight -mLeft) /2) -truncf(handleHeight /2);
+		*outLeft = GetLeft() +truncf((GetRight() -GetLeft()) /2) -truncf(handleHeight /2);
 		*outRight = *outLeft +handleHeight;
 	}
 	
 	if( inDesiredPart & ETopGrabberHitPart )
 	{
-		*outTop = mTop -truncf(handleHeight /2);
+		*outTop = GetTop() -truncf(handleHeight /2);
 		*outBottom = *outTop +handleHeight;
 	}
 	else if( inDesiredPart & EBottomGrabberHitPart )
 	{
-		*outTop = mBottom -truncf(handleHeight /2);
+		*outTop = GetBottom() -truncf(handleHeight /2);
 		*outBottom = *outTop +handleHeight;
 	}
 	else
 	{
 		if( !allowSideHandles )
 			return false;
-		*outTop = mTop +truncf((mBottom -mTop) /2) -truncf(handleHeight /2);
+		*outTop = GetTop() +truncf((GetBottom() -GetTop()) /2) -truncf(handleHeight /2);
 		*outBottom = *outTop +handleHeight;
 	}
 	
@@ -644,7 +644,7 @@ bool	CPart::GetRectForHandle( THitPart inDesiredPart, LEONumber *outLeft, LEONum
 
 void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
 {
-	LEONumber	oldL = mLeft, oldT = mTop, oldB = mBottom, oldR = mRight;
+	LEONumber	oldL = GetLeft(), oldT = GetTop(), oldB = GetBottom(), oldR = GetRight();
 	LEONumber	oldX = 0, oldY = 0;
 	CCursor::GetGlobalPosition( &oldX, &oldY );
 	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,addGuidelineBlock,this]()
