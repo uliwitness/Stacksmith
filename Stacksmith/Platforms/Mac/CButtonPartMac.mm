@@ -159,6 +159,8 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 		[mView setImagePosition: NSNoImage];
 	[mView setEnabled: mEnabled];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
+	NSFont*	theFont = [GetCocoaAttributesForPart() objectForKey: NSFontAttributeName];
+	[mView setFont: theFont];
 	[inSuperView addSubview: mView];
 }
 

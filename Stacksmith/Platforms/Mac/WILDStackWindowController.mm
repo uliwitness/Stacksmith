@@ -1284,10 +1284,10 @@ using namespace Carlson;
 -(void)	reflectFontOfSelectedParts
 {
 	CAutoreleasePool	pool;
-	CLayer		*	owner = mStack->GetCurrentLayer();
-	CMacPartBase*	currMacPart = NULL;
-	size_t			numParts = owner->GetNumParts();
-	BOOL			multiple = NO;
+	CLayer		*		owner = mStack->GetCurrentCard()->GetBackground();
+	CMacPartBase*		currMacPart = NULL;
+	size_t				numParts = owner->GetNumParts();
+	BOOL				multiple = NO;
 	for( size_t x = 0; x < numParts; x++ )
 	{
 		CPart*		currPart = owner->GetPart( x );
@@ -1302,6 +1302,28 @@ using namespace Carlson;
 				multiple = YES;
 			}
 			[[NSFontManager sharedFontManager] setSelectedAttributes: attrs isMultiple: multiple];
+		}
+	}
+
+	if( !mStack->GetEditingBackground() )
+	{
+		owner = mStack->GetCurrentCard();
+		numParts = owner->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CPart*		currPart = owner->GetPart( x );
+			currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+			if( currPart->IsSelected() )
+			{
+				NSDictionary*	attrs = currMacPart->GetCocoaAttributesForPart();
+				NSFont*			theFont = [attrs objectForKey: NSFontAttributeName];
+				if( theFont )
+				{
+					[[NSFontManager sharedFontManager] setSelectedFont: theFont isMultiple: multiple];
+					multiple = YES;
+				}
+				[[NSFontManager sharedFontManager] setSelectedAttributes: attrs isMultiple: multiple];
+			}
 		}
 	}
 }

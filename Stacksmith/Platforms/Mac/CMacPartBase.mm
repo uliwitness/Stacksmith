@@ -93,7 +93,13 @@ void	CMacPartBase::SetCocoaAttributesForPart( NSDictionary* inAttrs )
 	
 	myself->SetTextStyle( textStyle );
 	
-	NSLog( @"New Attrs: %s %d %u", myself->GetTextFont().c_str(), myself->GetTextSize(), textStyle );
+	NSColor*	textColor = [[inAttrs objectForKey: NSForegroundColorAttributeName] colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	if( textColor )
+	{
+		myself->SetTextColor( textColor.redComponent * 65535.0, textColor.greenComponent * 65535.0, textColor.blueComponent * 65535.0, textColor.alphaComponent * 65535.0 );
+	}
+	
+	//NSLog( @"New Attrs: %s %d %u", myself->GetTextFont().c_str(), myself->GetTextSize(), textStyle );
 }
 
 
@@ -153,8 +159,13 @@ NSDictionary*	CMacPartBase::GetCocoaAttributesForPart()
 		[styles setObject: [NSURL URLWithString: @"http://#"] forKey: NSLinkAttributeName];
 
 	[styles setObject: theFont forKey: NSFontAttributeName];
-
-	NSLog( @"Styles: %@", styles );
+	
+	if( myself->GetTextColorRed() >= 0 )
+	{
+		[styles setObject: [NSColor colorWithCalibratedRed: myself->GetTextColorRed() / 65535.0 green: myself->GetTextColorGreen() / 65535.0 blue: myself->GetTextColorBlue() / 65535.0 alpha: myself->GetTextColorAlpha() / 65535.0] forKey: NSForegroundColorAttributeName];
+	}
+	
+	//NSLog( @"Styles: %@", styles );
 	
 	return styles;
 }
