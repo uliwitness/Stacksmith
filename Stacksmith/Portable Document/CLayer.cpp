@@ -585,6 +585,18 @@ void	CLayer::DeleteSelectedItem()
 }
 
 
+void	CLayer::DeselectAllItems()
+{
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			(*currPart)->SetSelected(false);
+		}
+	}
+}
+
+
 bool	CLayer::CanDeleteSelectedItem()
 {
 	for( auto currPart : mParts )
