@@ -485,6 +485,10 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 			[mView setLineWidth: mLineWidth];
 		}
 	}
+	else
+	{
+		[mSearchField setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
+	}
 	mMacDelegate.dontSendSelectionChange = YES;
 	if( mAutoSelect )
 	{
