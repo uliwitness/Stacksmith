@@ -46,7 +46,6 @@
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
-        <pinning><right/></pinning>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -111,10 +110,6 @@
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
-        <pinning>
-            <right/>
-            <bottom/>
-        </pinning>
         <style>popup</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -175,7 +170,6 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
-        <pinning><right/></pinning>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -237,10 +231,6 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
-        <pinning>
-            <stretchHorizontally/>
-            <stretchVertically/>
-        </pinning>
         <mediaPath>PlaceholderMovie.mov</mediaPath>
         <currentTime>691</currentTime>
         <controllerVisible><false/></controllerVisible>
@@ -288,7 +278,6 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
-        <pinning><bottom/></pinning>
         <style>rectangle</style>
         <showName><false/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -344,10 +333,6 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
-        <pinning>
-            <right/>
-            <bottom/>
-        </pinning>
         <style>standard</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -403,7 +388,6 @@ end mouseUp</script>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
         <toolTip></toolTip>
-        <pinning><bottom/></pinning>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -467,10 +451,6 @@ end textChange</script>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
         <toolTip></toolTip>
-        <pinning>
-            <stretchHorizontally/>
-            <bottom/>
-        </pinning>
         <dontWrap><false/></dontWrap>
         <dontSearch><true/></dontSearch>
         <sharedText><false/></sharedText>
@@ -532,7 +512,6 @@ end textChange</script>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
         <toolTip></toolTip>
-        <pinning><bottom/></pinning>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>

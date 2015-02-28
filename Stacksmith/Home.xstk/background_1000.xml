@@ -44,7 +44,6 @@
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
-        <pinning><right/></pinning>
         <style>radiobutton</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -102,7 +101,6 @@ end mouseUp</script>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
-        <pinning><right/></pinning>
         <style>radiobutton</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
