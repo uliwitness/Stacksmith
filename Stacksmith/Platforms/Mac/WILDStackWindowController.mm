@@ -882,6 +882,14 @@ using namespace Carlson;
 }
 
 
+-(void)	windowDidResize: (NSNotification *)notification
+{
+	NSRect	newBox = [self.window contentRectForFrameRect: self.window.frame];
+	mStack->SetCardWidth( newBox.size.width );
+	mStack->SetCardHeight( newBox.size.height );
+}
+
+
 -(void)	popoverWillShow: (NSNotification *)notification
 {
 	if( notification.object == mPopover )

@@ -438,7 +438,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else if( mFieldStyle == EFieldStyleSearch )
 	{
-		mSearchField = [[WILDSearchField alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mSearchField = [[WILDSearchField alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		[mSearchField beginWatchingForSelectionChanges];
 		mSearchField.delegate = mMacDelegate;
 		mSearchField.owningField = this;
@@ -446,7 +446,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else if( mFieldStyle == EFieldStylePopUp )
 	{
-		mSearchField = (WILDSearchField*)[[WILDComboBox alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mSearchField = (WILDSearchField*)[[WILDComboBox alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		[mSearchField beginWatchingForSelectionChanges];
 		mSearchField.delegate = mMacDelegate;
 		mSearchField.owningField = this;
@@ -541,7 +541,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	mMacDelegate.dontSendSelectionChange = NO;
 	if( mView )
 	{
-		[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		[mView setFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 		[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
 		[mView.layer setShadowRadius: mShadowBlurRadius];
@@ -1239,7 +1239,7 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CFieldPart::SetRect( left, top, right, bottom );
-	[(mView? mView : mSearchField) setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[(mView? mView : mSearchField) setFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 	GetStack()->RectChangedOfPart( this );
 }
 

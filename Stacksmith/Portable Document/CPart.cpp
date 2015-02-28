@@ -64,7 +64,7 @@ CPartCreatorBase*	CPart::GetPartCreatorForType( const char* inType )
 
 
 CPart::CPart( CLayer *inOwner )
-	: mOwner(inOwner), mFamily(0), mID(0), mLeft(10), mTop(10), mRight(110), mBottom(60), mPartType(NULL), mSelected(false)
+	: mOwner(inOwner), mFamily(0), mID(0), mLeft(10), mTop(10), mRight(110), mBottom(60), mPartType(NULL), mSelected(false), mPartLayoutFlags(0)
 {
 	//printf("part %s created.\n", DebugNameForPointer(this) );
 	mDocument = inOwner->GetDocument();
@@ -106,6 +106,25 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mScript.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
 	tinyxml2::XMLElement * rectElement = inElement->FirstChildElement( "rect" );
+	
+	tinyxml2::XMLElement *	layoutFlagsElem = inElement->FirstChildElement( "pinning" );
+	if( layoutFlagsElem )
+	{
+		mPartLayoutFlags = 0;
+		if( layoutFlagsElem->FirstChildElement( "centerHorizontally" ) )
+			mPartLayoutFlags |= EPartLayoutAlignHCenter;
+		if( layoutFlagsElem->FirstChildElement( "centerVertically" ) )
+			mPartLayoutFlags |= EPartLayoutAlignVCenter;
+		if( layoutFlagsElem->FirstChildElement( "stretchHorizontally" ) )
+			mPartLayoutFlags |= EPartLayoutAlignHBoth;
+		if( layoutFlagsElem->FirstChildElement( "stretchVertically" ) )
+			mPartLayoutFlags |= EPartLayoutAlignVBoth;
+		if( layoutFlagsElem->FirstChildElement( "right" ) )
+			mPartLayoutFlags |= EPartLayoutAlignRight;
+		if( layoutFlagsElem->FirstChildElement( "bottom" ) )
+			mPartLayoutFlags |= EPartLayoutAlignBottom;
+	}
+	
 	mLeft = CTinyXMLUtils::GetLongLongNamed( rectElement, "left", 10LL );
 	mTop = CTinyXMLUtils::GetLongLongNamed( rectElement, "top", 10LL );
 	mRight = CTinyXMLUtils::GetLongLongNamed( rectElement, "right", mLeft + 100LL );
@@ -122,6 +141,43 @@ void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
 	elem->SetText( GetPartType()->GetPartTypeName().c_str() );
 	inElement->InsertEndChild(elem);
 
+	tinyxml2::XMLElement	*	subElem = NULL;
+	if( mPartLayoutFlags != 0 )	// No need to add layout flags element if it's the default, top/left:
+	{
+		elem = document->NewElement("pinning");
+		if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
+		{
+			subElem = document->NewElement("centerHorizontally");
+			elem->InsertEndChild(subElem);
+		}
+		if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHBoth )
+		{
+			subElem = document->NewElement("stretchHorizontally");
+			elem->InsertEndChild(subElem);
+		}
+		else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+		{
+			subElem = document->NewElement("right");
+			elem->InsertEndChild(subElem);
+		}
+		if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
+		{
+			subElem = document->NewElement("centerVertically");
+			elem->InsertEndChild(subElem);
+		}
+		if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVBoth )
+		{
+			subElem = document->NewElement("stretchVertically");
+			elem->InsertEndChild(subElem);
+		}
+		else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
+		{
+			subElem = document->NewElement("bottom");
+			elem->InsertEndChild(subElem);
+		}
+		inElement->InsertEndChild(elem);
+	}
+
 	CTinyXMLUtils::AddRectNamed( inElement, mLeft, mTop, mRight, mBottom, "rect" );
 	
 	SavePropertiesToElement( inElement );
@@ -135,6 +191,98 @@ void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
 	inElement->InsertEndChild(elem);
 	
 	SaveUserPropertiesToElementOfDocument( inElement, document );
+}
+
+
+void	CPart::SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )
+{
+	LEONumber	w = r -l, h = b -t;
+	
+	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignLeft )
+	{
+		mLeft = l;
+		mRight = r;
+	}
+	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+	{
+		mRight = GetStack()->GetCardWidth() -r;
+		mLeft = mRight + w;
+	}
+	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHBoth )
+	{
+		mRight = GetStack()->GetCardWidth() -r;
+		mLeft = l;
+	}
+	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
+	{
+		mLeft = (GetStack()->GetCardWidth() -w) /2;
+		mRight = mLeft +w;
+	}
+	
+	if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignTop )
+	{
+		mTop = t;
+		mBottom = b;
+	}
+	else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+	{
+		mBottom = GetStack()->GetCardHeight() -b;
+		mTop = mBottom + h;
+	}
+	else if( PART_V_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVBoth )
+	{
+		mBottom = GetStack()->GetCardHeight() -b;
+		mTop = t;
+	}
+	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
+	{
+		mTop = (GetStack()->GetCardHeight() -h) /2;
+		mBottom = mTop +h;
+	}
+}
+
+
+LEOInteger	CPart::GetLeft()
+{
+	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+		return GetStack()->GetCardWidth() -mLeft;
+	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
+		return GetStack()->GetCardWidth() -(mRight -mLeft) / 2;
+	
+	return mLeft;
+}
+
+
+LEOInteger	CPart::GetTop()
+{
+	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
+		return GetStack()->GetCardHeight() -mTop;
+	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
+		return (GetStack()->GetCardHeight() -(mBottom -mTop)) /2;
+	
+	return mTop;
+}
+
+
+LEOInteger	CPart::GetRight()
+{
+	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignRight )
+		return GetStack()->GetCardWidth() -mRight;
+	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignHCenter )
+		return (GetStack()->GetCardWidth() +(mRight -mLeft)) / 2;
+	
+	return mRight;
+}
+
+
+LEOInteger	CPart::GetBottom()
+{
+	if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignBottom )
+		return GetStack()->GetCardHeight() -mBottom;
+	else if( PART_H_LAYOUT_MODE(mPartLayoutFlags) == EPartLayoutAlignVCenter )
+		return (GetStack()->GetCardHeight() +(mBottom -mTop)) / 2;
+	
+	return mBottom;
 }
 
 
@@ -161,6 +309,20 @@ void	CPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 }
 
 
+void	CPart::SetPartLayoutFlags( TPartLayoutFlags inFlags )
+{
+	IncrementChangeCount();
+	
+	// Save rect so we can change current rect to whatever relative format the new flags demand:
+	LEONumber	l = GetLeft(), t = GetTop(), r = GetRight(), b = GetBottom();
+	
+	// Actually change the flags:
+	mPartLayoutFlags = inFlags;
+	
+	SetRect( l, t, r, b );	// Re-set the rect so it's in whatever relative format the new flags demand.
+}
+
+
 CScriptableObject*	CPart::GetParentObject()
 {
 	return mOwner;
@@ -176,6 +338,7 @@ CStack*		CPart::GetStack()
 void	CPart::DumpProperties( size_t inIndent )
 {
 	const char	*	indentStr = IndentString(inIndent);
+	printf( "%slayoutFlags = %u\n", indentStr, mPartLayoutFlags );
 	printf( "%srect = %lld,%lld,%lld,%lld\n", indentStr, mLeft, mTop, mRight, mBottom );
 }
 
@@ -296,7 +459,7 @@ bool	CPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart,
 	}
 	else if( strcasecmp("rectangle", inPropertyName) == 0 || strcasecmp("rect", inPropertyName) == 0 )
 	{
-		LEOInitRectValue( outValue, mLeft, mTop, mRight, mBottom, kLEOInvalidateReferences, inContext );
+		LEOInitRectValue( outValue, GetLeft(), GetTop(), GetRight(), GetBottom(), kLEOInvalidateReferences, inContext );
 	}
 	else if( strcasecmp("selected", inPropertyName) == 0 )
 	{

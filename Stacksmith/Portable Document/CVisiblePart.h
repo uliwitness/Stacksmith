@@ -63,32 +63,10 @@ enum
 typedef unsigned	TPartTextStyle;	// Bit field of above constants.
 
 
-// 0 is top/left alignment, i.e. the default that you'd expect from HyperCard:
-enum
-{
-	// First 2 bits are horizontal resize flags:
-	EPartLayoutAlignHorizontalMask	=	0x03,
-	EPartLayoutAlignLeft	= 0,
-	EPartLayoutAlignHBoth	= 1,
-	EPartLayoutAlignRight	= 2,
-	EPartLayoutAlignHCenter	= 3,	// Center, left & both are mutually exclusive, so this is left + both.
-	// Second 2 bits are vertical resize flags:
-	EPartLayoutAlignVerticalMask	=	0x0C,
-	EPartLayoutAlignTop		= 0,
-	EPartLayoutAlignVBoth	= 4,
-	EPartLayoutAlignBottom	= 8,
-	EPartLayoutAlignVCenter	= 12,	// Center, top & both are mutually exclusive, so this is top + both.
-};
-typedef unsigned	TPartLayoutFlags;
-
-#define PART_H_LAYOUT_MODE(n)	((n) & EPartLayoutAlignHorizontalMask)	// Gives EPartLayoutAlignLeft, EPartLayoutAlignHBoth, EPartLayoutAlignRight or EPartLayoutAlignHCenter.
-#define PART_V_LAYOUT_MODE(n)	((n) & EPartLayoutAlignVerticalMask)	// Gives EPartLayoutAlignTop, EPartLayoutAlignVBoth, EPartLayoutAlignBottom or EPartLayoutAlignVCenter.
-
-
 class CVisiblePart : public CPart
 {
 public:
-	CVisiblePart( CLayer * inOwner ) : CPart(inOwner), mVisible(true), mEnabled(true), mFillColorRed(65535), mFillColorGreen(65535), mFillColorBlue(65535), mFillColorAlpha(65535), mLineColorRed(0), mLineColorGreen(0), mLineColorBlue(0), mLineColorAlpha(65535), mShadowColorRed(0), mShadowColorGreen(0), mShadowColorBlue(0), mShadowColorAlpha(0), mShadowOffsetWidth(0), mShadowOffsetHeight(0), mShadowBlurRadius(0), mLineWidth(1), mBevelWidth(0), mBevelAngle(0), mPartLayoutFlags(0) {};
+	CVisiblePart( CLayer * inOwner ) : CPart(inOwner), mVisible(true), mEnabled(true), mFillColorRed(65535), mFillColorGreen(65535), mFillColorBlue(65535), mFillColorAlpha(65535), mLineColorRed(0), mLineColorGreen(0), mLineColorBlue(0), mLineColorAlpha(65535), mShadowColorRed(0), mShadowColorGreen(0), mShadowColorBlue(0), mShadowColorAlpha(0), mShadowOffsetWidth(0), mShadowOffsetHeight(0), mShadowBlurRadius(0), mLineWidth(1), mBevelWidth(0), mBevelAngle(0) {};
 	
 	static TPartTextAlign	GetTextAlignFromString( const char* inString );
 	static const char*		GetStringFromTextAlign( TPartTextAlign inAlign );
@@ -129,20 +107,22 @@ public:
 	virtual void			SetToolTip( const std::string& inToolTip )	{ mToolTip = inToolTip; IncrementChangeCount(); };
 	virtual std::string		GetToolTip()								{ return mToolTip; };
 	
-	virtual void			SetPartLayoutFlags( TPartLayoutFlags inFlags );
-	virtual TPartLayoutFlags GetPartLayoutFlags()						{ return mPartLayoutFlags; };
-	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 
-	virtual std::string		GetTextFont()						{ return ""; };
-	virtual int				GetTextSize()						{ return -1; };
-	virtual TPartTextStyle	GetTextStyle()						{ return EPartTextStyle_Last; };
-	virtual TPartTextAlign	GetTextAlign()						{ return EPartTextAlign_Last; };
-	virtual void			SetTextFont( std::string f )		{};
-	virtual void			SetTextSize( int s )				{};
-	virtual void			SetTextStyle( TPartTextStyle s )	{};
-	virtual void			SetTextAlign( TPartTextAlign a )	{};
+	virtual std::string		GetTextFont()								{ return ""; };
+	virtual int				GetTextSize()								{ return -1; };
+	virtual TPartTextStyle	GetTextStyle()								{ return EPartTextStyle_Last; };
+	virtual TPartTextAlign	GetTextAlign()								{ return EPartTextAlign_Last; };
+	virtual int				GetTextColorRed()							{ return -1; };
+	virtual int				GetTextColorGreen()							{ return -1; };
+	virtual int				GetTextColorBlue()							{ return -1; };
+	virtual int				GetTextColorAlpha()							{ return -1; };
+	virtual void			SetTextFont( std::string f )				{};
+	virtual void			SetTextSize( int s )						{};
+	virtual void			SetTextStyle( TPartTextStyle s )			{};
+	virtual void			SetTextAlign( TPartTextAlign a )			{};
+	virtual void			SetTextColor( int r, int g, int b, int a )	{};
 	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
@@ -175,7 +155,6 @@ protected:
 	int				mBevelWidth;
 	int				mBevelAngle;
 	std::string		mToolTip;
-	TPartLayoutFlags mPartLayoutFlags;
 };
 
 }

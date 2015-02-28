@@ -55,6 +55,28 @@ enum
 typedef uint8_t	THitTestHandlesFlag;
 
 
+// 0 is top/left alignment, i.e. the default that you'd expect from HyperCard:
+enum
+{
+	// First 2 bits are horizontal resize flags:
+	EPartLayoutAlignHorizontalMask	=	0x03,
+	EPartLayoutAlignLeft	= 0,
+	EPartLayoutAlignHBoth	= 1,
+	EPartLayoutAlignRight	= 2,
+	EPartLayoutAlignHCenter	= 3,	// Center, left & both are mutually exclusive, so this is left + both.
+	// Second 2 bits are vertical resize flags:
+	EPartLayoutAlignVerticalMask	=	0x0C,
+	EPartLayoutAlignTop		= 0,
+	EPartLayoutAlignVBoth	= 4,
+	EPartLayoutAlignBottom	= 8,
+	EPartLayoutAlignVCenter	= 12,	// Center, top & both are mutually exclusive, so this is top + both.
+};
+typedef unsigned	TPartLayoutFlags;
+
+#define PART_H_LAYOUT_MODE(n)	((n) & EPartLayoutAlignHorizontalMask)	// Gives EPartLayoutAlignLeft, EPartLayoutAlignHBoth, EPartLayoutAlignRight or EPartLayoutAlignHCenter.
+#define PART_V_LAYOUT_MODE(n)	((n) & EPartLayoutAlignVerticalMask)	// Gives EPartLayoutAlignTop, EPartLayoutAlignVBoth, EPartLayoutAlignBottom or EPartLayoutAlignVCenter.
+
+
 class CPartCreatorBase
 {
 public:
@@ -91,11 +113,11 @@ public:
 	virtual void				SetID( ObjectID i )	{ mID = i; };
 	LEOInteger					GetFamily()								{ return mFamily; };
 	virtual void				SetFamily( LEOInteger inFamily )		{ mFamily = inFamily; };
-	virtual void				SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )	{ mLeft = left; mTop = top; mRight = right; mBottom = bottom; };
-	LEOInteger					GetLeft()		{ return mLeft; };
-	LEOInteger					GetTop()		{ return mTop; };
-	LEOInteger					GetRight()		{ return mRight; };
-	LEOInteger					GetBottom()		{ return mBottom; };
+	virtual void				SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
+	LEOInteger					GetLeft();
+	LEOInteger					GetTop();
+	LEOInteger					GetRight();
+	LEOInteger					GetBottom();
 	virtual void				SetPartType( CPartCreatorBase* inType )	{ mPartType = inType; };	// Remembers the type, can't possibly change the type of this class.
 	virtual CPartCreatorBase*	GetPartType()							{ return mPartType; };
 	virtual std::string			GetTypeName()							{ return GetPartType()->GetPartTypeName(); };
@@ -107,6 +129,9 @@ public:
 
 	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+
+	virtual void				SetPartLayoutFlags( TPartLayoutFlags inFlags );
+	virtual TPartLayoutFlags	GetPartLayoutFlags()						{ return mPartLayoutFlags; };
 	
 	virtual void				WakeUp()		{};
 	virtual void				GoToSleep()		{};
@@ -154,6 +179,7 @@ protected:
 	CLayer	*			mOwner;		// Card/background we are on.
 	CPartCreatorBase*	mPartType;	// Only used for comparing if two parts are same type.
 	bool				mSelected;
+	TPartLayoutFlags	mPartLayoutFlags;
 };
 
 

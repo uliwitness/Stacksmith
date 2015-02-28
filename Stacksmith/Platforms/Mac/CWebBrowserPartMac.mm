@@ -67,7 +67,7 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 		mMacDelegate = [[WILDWebBrowserDelegate alloc] init];
 		mMacDelegate.owningBrowser = this;
 	}
-	mView = [[WebView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	mView = [[WebView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 	[mView setFrameLoadDelegate: mMacDelegate];
 	[mView setWantsLayer: YES];
@@ -102,7 +102,7 @@ void	CWebBrowserPartMac::SetPeeking( bool inState )
 void	CWebBrowserPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CWebBrowserPart::SetRect( left, top, right, bottom );
-	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[mView setFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 	GetStack()->RectChangedOfPart( this );
 }
 

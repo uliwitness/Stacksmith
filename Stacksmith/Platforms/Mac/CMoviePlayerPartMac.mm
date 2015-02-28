@@ -74,12 +74,12 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mControllerVisible )
 	{
-		mView = (WILDInvisiblePlayerView*)[[WILDPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = (WILDInvisiblePlayerView*)[[WILDPlayerView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		SetUpMoviePlayerControls();
 	}
 	else
 	{
-		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		[mView setCursor: [NSCursor arrowCursor]];
 		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mCursorID, EMediaTypeCursor,
 		[this]( WILDNSImagePtr inImage, int xHotSpot, int yHotSpot )
@@ -131,12 +131,12 @@ void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
 	}
 	if( mControllerVisible )
 	{
-		mView = (WILDInvisiblePlayerView*)[[WILDPlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = (WILDInvisiblePlayerView*)[[WILDPlayerView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		SetUpMoviePlayerControls();
 	}
 	else
 	{
-		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 	}
 	mView.owningPart = this;
 	SetUpMoviePlayer();
@@ -226,7 +226,7 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 
 void	CMoviePlayerPartMac::SetUpMoviePlayerControls()
 {
-	if( (mRight -mLeft) > 160 && (mBottom -mTop) > 80 )
+	if( (GetRight() -GetLeft()) > 160 && (GetBottom() -GetTop()) > 80 )
 		[(AVPlayerView*)mView setControlsStyle: AVPlayerViewControlsStyleFloating];
 	else
 		[(AVPlayerView*)mView setControlsStyle: AVPlayerViewControlsStyleMinimal];
@@ -333,7 +333,7 @@ void	CMoviePlayerPartMac::SetPeeking( bool inState )
 void	CMoviePlayerPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CMoviePlayerPart::SetRect( left, top, right, bottom );
-	[mView setFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+	[mView setFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 	GetStack()->RectChangedOfPart( this );
 }
 

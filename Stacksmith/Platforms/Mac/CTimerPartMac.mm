@@ -24,7 +24,7 @@ void	CTimerPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( GetStack()->GetTool() == EPointerTool )
 	{
-		mView = [[NSImageView alloc] initWithFrame: NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop)];
+		mView = [[NSImageView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		[mView setImage: [NSImage imageNamed: @"TimerIcon"]];
 		[inSuperView addSubview: mView];
 	}

@@ -48,7 +48,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
 		return;
 	}
-	NSRect		box = NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop);
+	NSRect		box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
 	if( mButtonStyle == EButtonStyleCheckBox )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
@@ -378,7 +378,7 @@ void	CButtonPartMac::DestroyView()
 void	CButtonPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CButtonPart::SetRect( left, top, right, bottom );
-	NSRect		box = NSMakeRect(mLeft, mTop, mRight -mLeft, mBottom -mTop);
+	NSRect		box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
 	if( mButtonStyle == EButtonStyleStandard )
 	{
 		box = NSInsetRect( box, -5, -3 );
