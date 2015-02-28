@@ -9,10 +9,11 @@
     <part>
         <id>911</id>
         <type>button</type>
+        <pinning><right/></pinning>
         <rect>
-            <left>440</left>
+            <left>200</left>
             <top>181</top>
-            <right>620</right>
+            <right>20</right>
             <bottom>201</bottom>
         </rect>
         <visible><true/></visible>
@@ -66,10 +67,11 @@ end mouseUp</script>
     <part>
         <id>912</id>
         <type>button</type>
+        <pinning><right/></pinning>
         <rect>
-            <left>440</left>
+            <left>200</left>
             <top>207</top>
-            <right>620</right>
+            <right>20</right>
             <bottom>226</bottom>
         </rect>
         <visible><true/></visible>

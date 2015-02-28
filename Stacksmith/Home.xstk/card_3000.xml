@@ -11,10 +11,11 @@
     <part>
         <id>1</id>
         <type>field</type>
+        <pinning><right/></pinning>
         <rect>
-            <left>440</left>
+            <left>200</left>
             <top>64</top>
-            <right>620</right>
+            <right>20</right>
             <bottom>173</bottom>
         </rect>
         <visible><true/></visible>
@@ -75,11 +76,15 @@
     <part>
         <id>2</id>
         <type>button</type>
+        <pinning>
+            <right/>
+            <bottom/>
+        </pinning>
         <rect>
-            <left>440</left>
-            <top>275</top>
-            <right>623</right>
-            <bottom>298</bottom>
+            <left>200</left>
+            <top>67</top>
+            <right>17</right>
+            <bottom>44</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
@@ -135,10 +140,11 @@ end mouseUp</script>
     <part>
         <id>3</id>
         <type>field</type>
+        <pinning><right/></pinning>
         <rect>
-            <left>440</left>
+            <left>200</left>
             <top>20</top>
-            <right>620</right>
+            <right>20</right>
             <bottom>58</bottom>
         </rect>
         <visible><true/></visible>
@@ -196,11 +202,15 @@ end mouseUp</script>
     <part>
         <id>4</id>
         <type>moviePlayer</type>
+        <pinning>
+            <stretchHorizontally/>
+            <stretchVertically/>
+        </pinning>
         <rect>
             <left>20</left>
             <top>20</top>
-            <right>429</right>
-            <bottom>252</bottom>
+            <right>211</right>
+            <bottom>90</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
@@ -232,7 +242,7 @@ end mouseUp</script>
         <bevelAngle>315</bevelAngle>
         <toolTip></toolTip>
         <mediaPath>PlaceholderMovie.mov</mediaPath>
-        <currentTime>691</currentTime>
+        <currentTime>600</currentTime>
         <controllerVisible><false/></controllerVisible>
         <cursor>128</cursor>
         <name>New Movie Player</name>
@@ -243,11 +253,12 @@ end mouseUp</script>
     <part>
         <id>5</id>
         <type>button</type>
+        <pinning><bottom/></pinning>
         <rect>
             <left>20</left>
-            <top>268</top>
+            <top>74</top>
             <right>86</right>
-            <bottom>322</bottom>
+            <bottom>20</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
@@ -298,11 +309,15 @@ end mouseUp</script>
     <part>
         <id>6</id>
         <type>button</type>
+        <pinning>
+            <right/>
+            <bottom/>
+        </pinning>
         <rect>
-            <left>440</left>
-            <top>301</top>
-            <right>626</right>
-            <bottom>325</bottom>
+            <left>200</left>
+            <top>41</top>
+            <right>14</right>
+            <bottom>17</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
@@ -353,11 +368,12 @@ end mouseUp</script>
     <part>
         <id>7</id>
         <type>field</type>
+        <pinning><bottom/></pinning>
         <rect>
             <left>95</left>
-            <top>268</top>
+            <top>74</top>
             <right>250</right>
-            <bottom>291</bottom>
+            <bottom>51</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
@@ -416,11 +432,15 @@ end textChange</script>
     <part>
         <id>8</id>
         <type>field</type>
+        <pinning>
+            <stretchHorizontally/>
+            <bottom/>
+        </pinning>
         <rect>
             <left>95</left>
-            <top>296</top>
-            <right>429</right>
-            <bottom>338</bottom>
+            <top>46</top>
+            <right>211</right>
+            <bottom>4</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
@@ -477,11 +497,12 @@ end textChange</script>
     <part>
         <id>0</id>
         <type>field</type>
+        <pinning><bottom/></pinning>
         <rect>
             <left>252</left>
-            <top>268</top>
+            <top>74</top>
             <right>440</right>
-            <bottom>292</bottom>
+            <bottom>50</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
