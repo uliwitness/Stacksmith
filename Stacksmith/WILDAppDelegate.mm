@@ -193,6 +193,7 @@ void	WILDScheduleResumeOfScript( void )
 	box.size.width = screenBox.size.width;
 	box.origin.y = NSMaxY(screenBox) -box.size.height;
 	[mToolPanel setFrame: box display: YES];
+	mToolPanel.movableByWindowBackground = NO;
 	[mToolPanel orderFront: self];
 }
 
@@ -251,6 +252,17 @@ void	WILDScheduleResumeOfScript( void )
 		thePath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"" HOME_STACK_NAME ".xstk"];
 	}
 	return [self application: NSApp openFile: thePath];
+}
+
+
+-(IBAction)	goHome: (id)sender
+{
+	NSString*	thePath = [[NSBundle mainBundle] pathForResource: @"" HOME_STACK_NAME ofType: @"xstk"];
+	if( !thePath )
+	{
+		thePath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"" HOME_STACK_NAME ".xstk"];
+	}
+	[self application: NSApp openFile: thePath];
 }
 
 

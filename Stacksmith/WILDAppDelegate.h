@@ -40,6 +40,7 @@
 -(IBAction)	orderFrontMessageBox: (id)sender;
 -(IBAction)	orderFrontStandardAboutPanel: (id)sender;
 -(IBAction)	goHelp: (id)sender;
+-(IBAction)	goHome: (id)sender;
 
 -(void)	checkForScriptToResume: (id)sender;
 
