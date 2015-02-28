@@ -475,6 +475,11 @@ void	WILDScheduleResumeOfScript( void )
 
 -(void)	mainWindowMightHaveGoneAway: (NSNotification*)notif
 {
+	if( mObservedMainWindow && [NSApplication sharedApplication].mainWindow != mObservedMainWindow )
+	{
+		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidChangeScreenNotification object: mObservedMainWindow];
+		mObservedMainWindow = nil;
+	}
 	[self validateUIItemsForWindow: [NSApplication sharedApplication].mainWindow];
 }
 
@@ -485,10 +490,24 @@ void	WILDScheduleResumeOfScript( void )
 	[self validateUIItemsForWindow: wd];
 	
 	[self positionToolbarOnScreen: wd.screen];
+	
+	if( mObservedMainWindow )
+		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidChangeScreenNotification object: mObservedMainWindow];
+	mObservedMainWindow = wd;
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowDidChangeScreen:) name: NSWindowDidChangeScreenNotification object: mObservedMainWindow];
 }
 
 
 -(void)	screenConfigurationMayHaveChanged: (NSNotification*)notif
+{
+	NSWindow*		wd = [NSApplication sharedApplication].mainWindow;
+	[self validateUIItemsForWindow: wd];
+	
+	[self positionToolbarOnScreen: wd.screen];
+}
+
+
+-(void)	mainWindowDidChangeScreen: (NSNotification*)notif
 {
 	NSWindow*		wd = [NSApplication sharedApplication].mainWindow;
 	[self validateUIItemsForWindow: wd];
