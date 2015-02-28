@@ -532,7 +532,7 @@ using namespace Carlson;
 	size_t	cardHeight = mStack->GetCardHeight();
 	NSRect	partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
 	NSRectFillUsingOperation( partRect, NSCompositeClear );
-	if( mStack->GetPeeking() )
+	if( mStack->GetPeeking() || currPart->IsSelected() )
 	{
 		[sPeekColor set];
 		[NSBezierPath strokeRect: partRect];
