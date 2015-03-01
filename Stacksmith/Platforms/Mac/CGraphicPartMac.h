@@ -33,9 +33,17 @@ public:
 	virtual NSImage*	GetDisplayIcon();
 	
 	virtual void		SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b );
-
+	virtual void		SetPartLayoutFlags( TPartLayoutFlags inFlags );
+	virtual void		SetFillColor( int r, int g, int b, int a );
+	virtual void		SetLineColor( int r, int g, int b, int a );
+	virtual void		SetShadowColor( int r, int g, int b, int a );
+	virtual void		SetShadowOffset( double w, double h );
+	virtual void		SetShadowBlurRadius( double r );
+	virtual void		SetLineWidth( int w );
 
 protected:
+	void				RebuildViewLayerPath();
+	
 	NSView*			mView;
 };
 

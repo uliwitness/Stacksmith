@@ -14,7 +14,7 @@
 
 namespace Carlson {
 	
-	class CPathSegment
+	struct CPathSegment
 	{
 		LEONumber		x;
 		LEONumber		y;
@@ -23,10 +23,19 @@ namespace Carlson {
 		LEONumber		controlPoint2;
 	};
 	
+	typedef enum
+	{
+		EGraphicStyleRectangle,
+		EGraphicStyleRoundrect,
+		EGraphicStyleOval,
+		EGraphicStyleBezierPath,
+		EGraphicStyle_Last
+	} TGraphicStyle;
+
 	class CGraphicPart : public CVisiblePart
 	{
 	public:
-		explicit CGraphicPart( CLayer *inOwner ) : CVisiblePart( inOwner )	 {};
+		explicit CGraphicPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mStyle(EGraphicStyleRectangle)	 {};
 		
 		virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 		virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -39,9 +48,12 @@ namespace Carlson {
 		
 		virtual const char*		GetIdentityForDump()	{ return "Graphic"; };
 		virtual void			DumpProperties( size_t inIndent );
+
+		static TGraphicStyle	GetGraphicStyleFromString( const char* inStr );
 	
 	protected:
 		std::vector<CPathSegment>	mPoints;
+		TGraphicStyle				mStyle;
 	};
 	
 }

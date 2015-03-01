@@ -17,9 +17,38 @@
 using namespace Carlson;
 
 
+static const char*	sGraphicStyleStrings[EGraphicStyle_Last +1] =
+{
+	"rectangle",
+	"roundrect",
+	"oval",
+	"bezierpath",
+	"*UNKNOWN*"
+};
+
+
+TGraphicStyle	CGraphicPart::GetGraphicStyleFromString( const char* inStr )
+{
+	for( size_t x = 0; x < EGraphicStyle_Last; x++ )
+	{
+		if( strcasecmp( sGraphicStyleStrings[x], inStr ) == 0 )
+		{
+			return (TGraphicStyle)x;
+		}
+	}
+	return EGraphicStyle_Last;
+}
+
+
 void	CGraphicPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
 	CVisiblePart::LoadPropertiesFromElement( inElement );
+	
+	std::string		styleStr("rectangle");
+	CTinyXMLUtils::GetStringNamed( inElement, "style", styleStr );
+	mStyle = GetGraphicStyleFromString( styleStr.c_str() );
+	if( mStyle == EGraphicStyle_Last )
+		mStyle = EGraphicStyleRectangle;
 	
 //	mSelectedLines.erase(mSelectedLines.begin(), mSelectedLines.end());
 //	tinyxml2::XMLElement * selLines = inElement->FirstChildElement("selectedLines");
@@ -38,6 +67,8 @@ void	CGraphicPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 void	CGraphicPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
 	CVisiblePart::SavePropertiesToElement( inElement );
+	
+	CTinyXMLUtils::AddStringNamed( inElement, sGraphicStyleStrings[mStyle], "style" );
 
 //	tinyxml2::XMLDocument* document = inElement->GetDocument();
 //	
