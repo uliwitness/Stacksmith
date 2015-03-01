@@ -6,6 +6,16 @@
 //  Copyright (c) 2013 Uli Kusterer. All rights reserved.
 //
 
+/*!
+	@class CPart
+	This is the class that implements objects on a card or background, like buttons and fields.
+	A part usually has contents (which are separate as a background part may have differing
+	contents for each card). While parts are usually placed on a card and draw something, they
+	do not have to. For example timers in Stacksmith are objects on a card or background, and
+	are usually invisible. However, they show up as little icons that can be placed on a card
+	while editing.
+*/
+
 #ifndef __Stacksmith__CPart__
 #define __Stacksmith__CPart__
 
@@ -22,38 +32,39 @@ class CPart;
 class CPartContents;
 
 
-enum
-{
-	ENothingHitPart			= 0,
-	ELeftGrabberHitPart		= (1 << 0),
-	ETopGrabberHitPart		= (1 << 1),
-	ERightGrabberHitPart	= (1 << 2),
-	EBottomGrabberHitPart	= (1 << 3),
-	EContentHitPart			= (ELeftGrabberHitPart | ETopGrabberHitPart | ERightGrabberHitPart | EBottomGrabberHitPart),
-	// Left & right == horizontal move with shift key.
-	// Top & bottom == vertical move with shift key.
-};
-typedef uint32_t THitPart;
-
 
 enum
 {
-	EGuidelineCallbackActionAddHorizontal,			// Request to add a guideline at the given h coordinate.
-	EGuidelineCallbackActionAddVertical,			// Request to add a guideline at the given v coordinate.
-	EGuidelineCallbackActionAddHorizontalSpacer,	// Request to add a 'distance indicator' between the corrected coordinate and the given h coordinate.
-	EGuidelineCallbackActionAddVerticalSpacer,		// Request to add a 'distance indicator' between the corrected coordinate and the given v coordinate.
-	EGuidelineCallbackActionClearAllForFilling,		// Request to clear your list of guidelines in preparation for us calling you back with the new set. (don't redraw yet)
-	EGuidelineCallbackActionClearAllDone			// Request to clear your list of guidelines, we're done tracking. (redraw now)
+	ENothingHitPart			= 0,		//< Click was not on this object.
+	ELeftGrabberHitPart		= (1 << 0),	//< One of the left resize handles was clicked. If only bit set, it was the left center.
+	ETopGrabberHitPart		= (1 << 1),	//< Top resize handle was clicked. If only bit set, it was the top center.
+	ERightGrabberHitPart	= (1 << 2),	//< Right resize handle was clicked. If only bit set, it was the right center.
+	EBottomGrabberHitPart	= (1 << 3),	//< Bottom resize handle was clicked. If only bit set, it was the bottom center.
+	EContentHitPart			= (ELeftGrabberHitPart | ETopGrabberHitPart | ERightGrabberHitPart | EBottomGrabberHitPart),			//< No grab handle was clicked, but the click was inside the part's rectangle.
+	EHorizontalMoveHitPart	= (ELeftGrabberHitPart | ERightGrabberHitPart),	//< Left & right == horizontal move with shift key.
+	EVerticalMoveHitPart	= (ETopGrabberHitPart | EBottomGrabberHitPart),	//< Top & bottom == vertical move with shift key.
 };
-typedef uint8_t	TGuidelineCallbackAction;
+typedef uint32_t THitPart;	//< ENothingHitPart or similar values to indicate resize/move actions.
 
 
 enum
 {
-	EHitTestWithoutHandles = 0,
-	EHitTestHandlesToo
+	EGuidelineCallbackActionAddHorizontal,			//< Request to add a guideline at the given h coordinate.
+	EGuidelineCallbackActionAddVertical,			//< Request to add a guideline at the given v coordinate.
+	EGuidelineCallbackActionAddHorizontalSpacer,	//< Request to add a 'distance indicator' between the corrected coordinate and the given h coordinate.
+	EGuidelineCallbackActionAddVerticalSpacer,		//< Request to add a 'distance indicator' between the corrected coordinate and the given v coordinate.
+	EGuidelineCallbackActionClearAllForFilling,		//< Request to clear your list of guidelines in preparation for us calling you back with the new set. (don't redraw yet)
+	EGuidelineCallbackActionClearAllDone			//< Request to clear your list of guidelines, we're done tracking. (redraw now)
 };
-typedef uint8_t	THitTestHandlesFlag;
+typedef uint8_t	TGuidelineCallbackAction;	//< EGuidelineCallbackActionAddHorizontal or similar values to indicate to the callback block how to display this coordinate.
+
+
+enum
+{
+	EHitTestWithoutHandles = 0,		//< Only tell us whether the part's rect was hit (used when deciding which object to select, when handles are not visible yet).
+	EHitTestHandlesToo				//< The object is selected, the resize grabbers are visible, and should be hit-tested, too.
+};
+typedef uint8_t	THitTestHandlesFlag;	//< Modify the hit-testing behaviour of the function. Values like EHitTestWithoutHandles.
 
 
 // 0 is top/left alignment, i.e. the default that you'd expect from HyperCard:
@@ -104,8 +115,16 @@ public:
 	
 	virtual void				LoadFromElement( tinyxml2::XMLElement * inElement );
 	virtual void				SaveToElement( tinyxml2::XMLElement * inElement );
-	virtual void				SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement );
-	virtual void				UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings );
+	/*! If a part has associated resources, this is how we copy them when this part is copied.
+		You'd likely call SaveMediaToElement() for whatever media you depend on, on your
+		document's media cache. */
+	virtual void				SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement ) {};
+	/*! When a part is pasted its associated media are pasted as well.
+		If media uses an ID that already exists for a different item, it gets re-numbered.
+		This function gets called in that case to let you fix up any IDs that may have changed.
+		As the new number may collide with a later one, you get a list of all changed IDs at
+		once, so subsequent ID changes don't cause your ID to be re-mapped again. */
+	virtual void				UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings ) {};
 	
 	virtual CPart*				Retain();
 	virtual void				Release();

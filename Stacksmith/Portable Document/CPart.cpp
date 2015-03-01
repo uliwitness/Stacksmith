@@ -94,6 +94,12 @@ void	CPart::Release()
 void	CPart::LoadFromElement( tinyxml2::XMLElement * inElement )
 {
 	LoadPropertiesFromElement( inElement );
+
+	mName.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "name", mName );
+	mScript.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
+
 	LoadUserPropertiesFromElement( inElement );
 }
 
@@ -101,11 +107,8 @@ void	CPart::LoadFromElement( tinyxml2::XMLElement * inElement )
 void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
-	mName.erase();
-	CTinyXMLUtils::GetStringNamed( inElement, "name", mName );
-	mScript.erase();
-	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
-	tinyxml2::XMLElement * rectElement = inElement->FirstChildElement( "rect" );
+	
+	// No need to load the type here, whoever created us already looked at it when deciding to create *us* and not another subclass.
 	
 	tinyxml2::XMLElement *	layoutFlagsElem = inElement->FirstChildElement( "pinning" );
 	if( layoutFlagsElem )
@@ -125,6 +128,7 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 			mPartLayoutFlags |= EPartLayoutAlignBottom;
 	}
 	
+	tinyxml2::XMLElement * rectElement = inElement->FirstChildElement( "rect" );
 	mLeft = CTinyXMLUtils::GetLongLongNamed( rectElement, "left", 10LL );
 	mTop = CTinyXMLUtils::GetLongLongNamed( rectElement, "top", 10LL );
 	mRight = CTinyXMLUtils::GetLongLongNamed( rectElement, "right", mLeft + 100LL );
@@ -132,7 +136,7 @@ void	CPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 }
 
 
-void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
+void	CPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
 	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
 	
@@ -180,9 +184,15 @@ void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
 
 	CTinyXMLUtils::AddRectNamed( inElement, mLeft, mTop, mRight, mBottom, "rect" );
 	
+}
+
+
+void	CPart::SaveToElement( tinyxml2::XMLElement * inElement )
+{
 	SavePropertiesToElement( inElement );
 	
-	elem = document->NewElement("name");
+	tinyxml2::XMLDocument*	document = inElement->GetDocument();
+	tinyxml2::XMLElement* elem = document->NewElement("name");
 	elem->SetText( mName.c_str() );
 	inElement->InsertEndChild(elem);
 	
@@ -283,29 +293,6 @@ LEOInteger	CPart::GetBottom()
 		return (GetStack()->GetCardHeight() +(mBottom -mTop)) / 2;
 	
 	return mBottom;
-}
-
-
-void	CPart::SaveAssociatedResourcesToElement( tinyxml2::XMLElement * inElement )
-{
-	// If a part has associated resources, this is how we copy them when this part is copied.
-	//	You'd likely call SaveMediaToElement() for whatever media you depend on, on your document's media cache.
-}
-
-
-void	CPart::UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings )
-{
-	// When a part is pasted its associated media are pasted as well. If media uses an ID
-	//	that already exists for a different item, it gets re-numbered. This function gets
-	//	called in that case to let you fix up any IDs that may have changed. As the new
-	//	number may collide with a later one, you get a list of all changed IDs at once,
-	//	so subsequent ID changes don't cause your ID to be re-mapped again.
-}
-
-
-void	CPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
-{
-	
 }
 
 
