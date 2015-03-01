@@ -47,7 +47,8 @@ enum
 typedef uint32_t THitPart;	//< ENothingHitPart or similar values to indicate resize/move actions.
 
 
-enum
+/*! Indicate to the callback block how to display this coordinate. */
+typedef enum
 {
 	EGuidelineCallbackActionAddHorizontal,			//< Request to add a guideline at the given h coordinate.
 	EGuidelineCallbackActionAddVertical,			//< Request to add a guideline at the given v coordinate.
@@ -55,8 +56,7 @@ enum
 	EGuidelineCallbackActionAddVerticalSpacer,		//< Request to add a 'distance indicator' between the corrected coordinate and the given v coordinate.
 	EGuidelineCallbackActionClearAllForFilling,		//< Request to clear your list of guidelines in preparation for us calling you back with the new set. (don't redraw yet)
 	EGuidelineCallbackActionClearAllDone			//< Request to clear your list of guidelines, we're done tracking. (redraw now)
-};
-typedef uint8_t	TGuidelineCallbackAction;	//< EGuidelineCallbackActionAddHorizontal or similar values to indicate to the callback block how to display this coordinate.
+} TGuidelineCallbackAction;
 
 
 enum
