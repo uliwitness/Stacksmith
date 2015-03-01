@@ -78,8 +78,35 @@ using namespace Carlson;
 }
 
 
+- (void)textDidEndEditing:(NSNotification *)notification
+{
+	[self setTitle: self.currentEditor.string];
+	[[self cell] endEditing: self.currentEditor];
+}
+
+
 -(void)	mouseDown: (NSEvent*)event
 {
+	if( self->owningPart->GetStack()->GetTool() == EEditTextTool )
+	{
+		NSRect		box = [[self cell] titleRectForBounds: self.bounds];
+		if( NSPointInRect( [self convertPoint: [event locationInWindow] fromView: nil], box ) )
+		{
+			NSTextView*	fe = (NSTextView*) [self.window fieldEditor: YES forObject: self];
+			[[self cell] editWithFrame: box inView: self editor: fe delegate: self event: event];
+//			if( [fe respondsToSelector: @selector(setDrawsBackground:)] )
+//				[fe setDrawsBackground: NO];
+		}
+		else if( self.currentEditor )
+		{
+			[[self cell] endEditing: self.currentEditor];
+			[self.window makeFirstResponder: nil];
+		}
+		else
+			[self.window makeFirstResponder: nil];
+		return;
+	}
+	
 	BOOL					keepLooping = YES;
 	BOOL					autoHighlight = self->owningPart->GetAutoHighlight();
 	BOOL					isInside = [[self cell] hitTestForEvent: event inRect: [self bounds] ofView: self] != NSCellHitNone;

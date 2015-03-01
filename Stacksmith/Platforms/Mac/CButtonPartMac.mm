@@ -120,6 +120,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[mView setOwningPart: this];
+	[[mView cell] setEditable: GetStack()->GetTool() == EEditTextTool];
 	[[mView cell] setHighlighted: mHighlightForTracking];
 	if( mButtonStyle == EButtonStylePopUp )
 	{
@@ -309,6 +310,18 @@ void	CButtonPartMac::SetBevelAngle( int a )
 	CButtonPart::SetBevelAngle( a );
 
 	[((WILDButtonCell*)mView.cell) setBevelAngle: a];
+}
+
+
+void	CButtonPartMac::ToolChangedFrom( TTool inOldTool )
+{
+	if( (inOldTool != EEditTextTool && GetStack()->GetTool() == EEditTextTool)
+		or (inOldTool == EEditTextTool && GetStack()->GetTool() != EEditTextTool) )
+	{
+		NSView*	oldSuper = mView.superview;
+		DestroyView();
+		CreateViewIn( oldSuper );
+	}
 }
 
 

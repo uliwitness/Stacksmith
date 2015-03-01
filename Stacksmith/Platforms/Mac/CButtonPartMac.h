@@ -57,6 +57,7 @@ public:
 	
 	virtual void	PrepareMouseUp();
 	virtual void	SetStyle( TButtonStyle inButtonStyle );
+	virtual void	ToolChangedFrom( TTool inOldTool );
 	
 	virtual NSImage*	GetDisplayIcon()			{ return [NSImage imageNamed: @"ButtonIconSmall"]; };
 	virtual Class		GetPropertyEditorClass()	{ return [WILDButtonInfoViewController class]; };
