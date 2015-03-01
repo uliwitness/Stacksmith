@@ -434,6 +434,7 @@
 		55E806541368B2CD006F1287 /* UKColorListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8063E1368B2CA006F1287 /* UKColorListView.m */; };
 		55E806851368B571006F1287 /* NSBezierPath+RoundRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */; };
 		55E8535E1166341B00745C86 /* NSString+FetchNextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */; };
+		55EB03571AA3563D004AFB46 /* CGraphicPartMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55EB03561AA3563D004AFB46 /* CGraphicPartMac.mm */; };
 		55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC406114C273400BAA09D /* SyntaxDefinition.plist */; };
 		55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */; };
 		55EBC646114CFAE000BAA09D /* BackgroundIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */; };
@@ -1145,6 +1146,8 @@
 		55E806841368B56F006F1287 /* NSBezierPath+RoundRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+RoundRect.m"; path = "../UliKit/NSBezierPath+RoundRect.m"; sourceTree = "<group>"; };
 		55E8535C1166341100745C86 /* NSString+FetchNextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FetchNextLine.h"; path = "../UliKit/NSString+FetchNextLine.h"; sourceTree = SOURCE_ROOT; };
 		55E8535D1166341B00745C86 /* NSString+FetchNextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FetchNextLine.m"; path = "../UliKit/NSString+FetchNextLine.m"; sourceTree = SOURCE_ROOT; };
+		55EB03551AA3563D004AFB46 /* CGraphicPartMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGraphicPartMac.h; path = Platforms/Mac/CGraphicPartMac.h; sourceTree = "<group>"; };
+		55EB03561AA3563D004AFB46 /* CGraphicPartMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CGraphicPartMac.mm; path = Platforms/Mac/CGraphicPartMac.mm; sourceTree = "<group>"; };
 		55EBC406114C273400BAA09D /* SyntaxDefinition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinition.plist; sourceTree = "<group>"; };
 		55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxColorDefaults.plist; path = ../UKSyntaxColoredTextDocument/SyntaxColorDefaults.plist; sourceTree = SOURCE_ROOT; };
 		55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundIconSmall.png; sourceTree = "<group>"; };
@@ -1388,6 +1391,8 @@
 				55BD35791A9003B100D0BAF7 /* WILDComboBox.mm */,
 				55405BD918A59DB6001D3C99 /* CTimerPartMac.h */,
 				55405BD818A59DB6001D3C99 /* CTimerPartMac.mm */,
+				55EB03551AA3563D004AFB46 /* CGraphicPartMac.h */,
+				55EB03561AA3563D004AFB46 /* CGraphicPartMac.mm */,
 				552386CD1883E92F00D7FAB3 /* CMoviePlayerPartMac.h */,
 				552386CC1883E92F00D7FAB3 /* CMoviePlayerPartMac.mm */,
 				551583DE18C3B8AE00DB3431 /* WILDInvisiblePlayerView.h */,
@@ -2645,6 +2650,7 @@
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
 				55CD60BF187510F0002450E2 /* CWebBrowserPart.cpp in Sources */,
+				55EB03571AA3563D004AFB46 /* CGraphicPartMac.mm in Sources */,
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
 				55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */,
 				55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */,

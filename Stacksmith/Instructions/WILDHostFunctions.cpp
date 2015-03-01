@@ -60,6 +60,10 @@ void	WILDCardTimerInstruction( LEOContext* inContext );
 void	WILDBackgroundTimerInstruction( LEOContext* inContext );
 void	WILDNumberOfCardTimersInstruction( LEOContext* inContext );
 void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext );
+void	WILDCardGraphicInstruction( LEOContext* inContext );
+void	WILDBackgroundGraphicInstruction( LEOContext* inContext );
+void	WILDNumberOfCardGraphicsInstruction( LEOContext* inContext );
+void	WILDNumberOfBackgroundGraphicsInstruction( LEOContext* inContext );
 void	WILDMessageBoxInstruction( LEOContext* inContext );
 void	WILDMessageWatcherInstruction( LEOContext* inContext );
 void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType );
@@ -424,6 +428,12 @@ void	WILDCardTimerInstruction( LEOContext* inContext )
 }
 
 
+void	WILDCardGraphicInstruction( LEOContext* inContext )
+{
+	WILDCardPartInstructionInternal( inContext, "graphic" );
+}
+
+
 void	WILDCardBrowserInstruction( LEOContext* inContext )
 {
 	WILDCardPartInstructionInternal( inContext, "browser" );
@@ -457,6 +467,12 @@ void	WILDBackgroundMoviePlayerInstruction( LEOContext* inContext )
 void	WILDBackgroundTimerInstruction( LEOContext* inContext )
 {
 	WILDBackgroundPartInstructionInternal( inContext, "timer" );
+}
+
+
+void	WILDBackgroundGraphicInstruction( LEOContext* inContext )
+{
+	WILDBackgroundPartInstructionInternal( inContext, "graphic" );
 }
 
 
@@ -865,6 +881,12 @@ void	WILDNumberOfCardTimersInstruction( LEOContext* inContext )
 }
 
 
+void	WILDNumberOfCardGraphicsInstruction( LEOContext* inContext )
+{
+	WILDNumberOfCardPartsInstructionInternal( inContext, "graphic" );
+}
+
+
 void	WILDNumberOfCardPartsInstruction( LEOContext* inContext )
 {
 	WILDNumberOfCardPartsInstructionInternal( inContext, NULL );
@@ -898,6 +920,12 @@ void	WILDNumberOfBackgroundBrowsersInstruction( LEOContext* inContext )
 void	WILDNumberOfBackgroundTimersInstruction( LEOContext* inContext )
 {
 	WILDNumberOfBackgroundPartsInstructionInternal( inContext, "timer" );
+}
+
+
+void	WILDNumberOfBackgroundGraphicsInstruction( LEOContext* inContext )
+{
+	WILDNumberOfBackgroundPartsInstructionInternal( inContext, "graphic" );
 }
 
 
@@ -990,6 +1018,8 @@ void	WILDMessageWatcherInstruction( LEOContext* inContext )
 }
 
 
+#pragma mark Host Instruction array
+
 LEOINSTR_START(StacksmithHostFunction,WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS)
 LEOINSTR(WILDStackInstruction)
 LEOINSTR(WILDBackgroundInstruction)
@@ -1025,6 +1055,10 @@ LEOINSTR(WILDCardTimerInstruction)
 LEOINSTR(WILDBackgroundTimerInstruction)
 LEOINSTR(WILDNumberOfCardTimersInstruction)
 LEOINSTR(WILDNumberOfBackgroundTimersInstruction)
+LEOINSTR(WILDCardGraphicInstruction)
+LEOINSTR(WILDBackgroundGraphicInstruction)
+LEOINSTR(WILDNumberOfCardGraphicsInstruction)
+LEOINSTR(WILDNumberOfBackgroundGraphicsInstruction)
 LEOINSTR(WILDMessageBoxInstruction)
 LEOINSTR(WILDMessageWatcherInstruction)
 LEOINSTR(WILDCardBrowserInstruction)
@@ -1035,6 +1069,8 @@ LEOINSTR(WILDNumberOfCardsInstruction)
 LEOINSTR(WILDNumberOfBackgroundsInstruction)
 LEOINSTR_LAST(WILDNumberOfStacksInstruction)
 
+
+#pragma mark Host function syntax table
 
 struct THostCommandEntry	gStacksmithHostFunctions[] =
 {
@@ -1091,6 +1127,16 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		EBackgroundIdentifier, WILD_BACKGROUND_TIMER_INSTRUCTION, 0, 0, 'X',
 		{
 			{ EHostParamInvisibleIdentifier, ETimerIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
+			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		EBackgroundIdentifier, WILD_BACKGROUND_GRAPHIC_INSTRUCTION, 0, 0, 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EGraphicIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
 			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
@@ -1260,6 +1306,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamInvisibleIdentifier, EPlayersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_BACKGROUND_MOVIEPLAYERS_INSTRUCTION, 0, 0, 'M', 'X' },
 			{ EHostParamInvisibleIdentifier, EPartsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_BACKGROUND_PARTS_INSTRUCTION, 0, 0, 'B', 'X' },
 			{ EHostParamInvisibleIdentifier, ETimersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_BACKGROUND_TIMERS_INSTRUCTION, 0, 0, 'B', 'X' },
+			{ EHostParamInvisibleIdentifier, EGraphicsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_BACKGROUND_GRAPHICS_INSTRUCTION, 0, 0, 'B', 'X' },
 			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
@@ -1275,7 +1322,24 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamInvisibleIdentifier, EPlayersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_MOVIEPLAYERS_INSTRUCTION, 0, 0, 'm', 'X' },
 			{ EHostParamInvisibleIdentifier, EPartsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_PARTS_INSTRUCTION, 0, 0, 'C', 'X' },
 			{ EHostParamInvisibleIdentifier, ETimersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_TIMERS_INSTRUCTION, 0, 0, 'C', 'X' },
+			{ EHostParamInvisibleIdentifier, EGraphicsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_GRAPHICS_INSTRUCTION, 0, 0, 'C', 'X' },
 			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		ENumberIdentifier, INVALID_INSTR2, 0, 0, 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EOfIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'C' },
+			{ EHostParamInvisibleIdentifier, EButtonsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_BUTTONS_INSTRUCTION, 0, 0, 'C', 'X' },
+			{ EHostParamInvisibleIdentifier, EFieldsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_FIELDS_INSTRUCTION, 0, 0, 'C', 'X' },
+			{ EHostParamInvisibleIdentifier, EMovieIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'C', 'm' },
+			{ EHostParamInvisibleIdentifier, EPlayersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_MOVIEPLAYERS_INSTRUCTION, 0, 0, 'm', 'X' },
+			{ EHostParamInvisibleIdentifier, EPartsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_PARTS_INSTRUCTION, 0, 0, 'C', 'X' },
+			{ EHostParamInvisibleIdentifier, ETimersIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_TIMERS_INSTRUCTION, 0, 0, 'C', 'X' },
+			{ EHostParamInvisibleIdentifier, EGraphicsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_GRAPHICS_INSTRUCTION, 0, 0, 'C', 'X' },
+			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},
@@ -1398,6 +1462,15 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
+		EGraphicIdentifier, WILD_CARD_GRAPHIC_INSTRUCTION, 0, 0, 'X',
+		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
+			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
 		EMessageIdentifier, INVALID_INSTR2, 0, 0, 'X',
 		{
 			{ EHostParamInvisibleIdentifier, EBoxIdentifier, EHostParameterOptional, WILD_MESSAGE_BOX_INSTRUCTION, 0, 0, '\0', 'X' },
@@ -1405,7 +1478,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},
-	{
+	{	// END INDICATOR MUST BE LAST!!!
 		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0, '\0',
 		{
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

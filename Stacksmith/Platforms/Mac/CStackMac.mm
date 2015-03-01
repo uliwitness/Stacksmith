@@ -14,6 +14,7 @@
 #include "CTimerPartMac.h"
 #include "CRectanglePart.h"
 #include "CPicturePart.h"
+#include "CGraphicPartMac.h"
 #include "CDocument.h"
 #include "CAlert.h"
 #import "WILDStackWindowController.h"
@@ -277,6 +278,7 @@ void	CStackMac::RegisterPartCreators()
 		CPart::RegisterPartCreator( new CPartCreator<CTimerPartMac>( "timer" ) );
 		CPart::RegisterPartCreator( new CPartCreator<CRectanglePart>( "rectangle" ) );
 		CPart::RegisterPartCreator( new CPartCreator<CPicturePart>( "picture" ) );
+		CPart::RegisterPartCreator( new CPartCreator<CGraphicPartMac>( "graphic" ) );
 		
 		sAlreadyDidThis = true;
 	}
