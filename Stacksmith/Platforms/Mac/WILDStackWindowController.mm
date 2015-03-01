@@ -1255,7 +1255,7 @@ using namespace Carlson;
 	{
 		CPart*		currPart = owner->GetPart( x );
 		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-		if( currPart->IsSelected() )
+		if( currMacPart && currPart->IsSelected() )
 		{
 			NSMutableDictionary*	oldAttrs = [currMacPart->GetCocoaAttributesForPart() mutableCopy];
 			NSFont*					theFont = [oldAttrs objectForKey: NSFontAttributeName];
@@ -1280,7 +1280,7 @@ using namespace Carlson;
 	{
 		CPart*		currPart = owner->GetPart( x );
 		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-		if( currPart->IsSelected() )
+		if( currMacPart && currPart->IsSelected() )
 		{
 			NSDictionary*	oldAttrs = currMacPart->GetCocoaAttributesForPart();
 			currMacPart->SetCocoaAttributesForPart( [sender convertAttributes: oldAttrs] );
@@ -1300,7 +1300,7 @@ using namespace Carlson;
 	{
 		CPart*		currPart = owner->GetPart( x );
 		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-		if( currPart->IsSelected() )
+		if( currMacPart && currPart->IsSelected() )
 		{
 			NSDictionary*	attrs = currMacPart->GetCocoaAttributesForPart();
 			NSFont*			theFont = [attrs objectForKey: NSFontAttributeName];
@@ -1321,7 +1321,7 @@ using namespace Carlson;
 		{
 			CPart*		currPart = owner->GetPart( x );
 			currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-			if( currPart->IsSelected() )
+			if( currMacPart && currPart->IsSelected() )
 			{
 				NSDictionary*	attrs = currMacPart->GetCocoaAttributesForPart();
 				NSFont*			theFont = [attrs objectForKey: NSFontAttributeName];
