@@ -81,6 +81,7 @@ using namespace Carlson;
 - (void)textDidEndEditing:(NSNotification *)notification
 {
 	[self setTitle: self.currentEditor.string];
+	self->owningPart->SetName( self.currentEditor.string.UTF8String );
 	[[self cell] endEditing: self.currentEditor];
 }
 
