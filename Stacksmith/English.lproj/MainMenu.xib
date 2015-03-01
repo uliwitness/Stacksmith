@@ -374,7 +374,7 @@
                 <menuItem title="Go" id="Vab-gO-wsM">
                     <menu key="submenu" title="Go" id="C95-84-MdY">
                         <items>
-                            <menuItem title="Back" keyEquivalent="`" id="Iwm-6C-IiX">
+                            <menuItem title="Back" keyEquivalent="[" id="Iwm-6C-IiX">
                                 <connections>
                                     <action selector="goBack:" target="-1" id="00e-1O-u6Y"/>
                                 </connections>
@@ -1013,7 +1013,7 @@
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="877" y="285"/>
+            <point key="canvasLocation" x="842" y="297"/>
         </window>
     </objects>
     <resources>
