@@ -145,6 +145,7 @@ public:
 	virtual void				SetIndex( LEOInteger inIndex, CPartCreatorBase* inType = NULL );
 	
 	virtual void				ToolChangedFrom( TTool inOldTool )	{};
+	virtual bool				CanBeEditedWithTool( TTool inTool )	{ return inTool == EPointerTool; };
 	
 	virtual bool				GetTextContents( std::string& outString );
 	virtual bool				SetTextContents( const std::string& inString);

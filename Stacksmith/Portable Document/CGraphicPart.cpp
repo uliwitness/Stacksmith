@@ -233,6 +233,57 @@ void	CGraphicPart::UpdateLastPoint( LEONumber x, LEONumber y, LEONumber lineWidt
 }
 
 
+bool	CGraphicPart::CanBeEditedWithTool( TTool inTool )
+{
+	if( inTool == EPointerTool )
+		return true;
+	if( mStyle == EGraphicStyleRectangle && inTool == ERectangleTool )
+		return true;
+	if( mStyle == EGraphicStyleRoundrect && inTool == ERoundrectTool )
+		return true;
+	if( mStyle == EGraphicStyleOval && inTool == EOvalTool )
+		return true;
+	if( mStyle == EGraphicStyleBezierPath && inTool == EBezierPathTool )
+		return true;
+	
+	return false;
+}
+
+
+void	CGraphicPart::SizeToFit()
+{
+	if( mStyle == EGraphicStyleBezierPath )	// All other styles' sizes are defined by the part rect.
+	{
+		LEONumber	top = GetBottom(), bottom = GetTop(), left = GetRight(), right = GetLeft();
+		for( const CPathSegment& currPoint : mPoints )
+		{
+			if( currPoint.y < top )
+				top = currPoint.y;
+			if( currPoint.y > bottom )
+				bottom = currPoint.y;
+			if( currPoint.x < left )
+				left = currPoint.x;
+			if( currPoint.x > right )
+				right = currPoint.x;
+		}
+		
+		LEONumber	xoffs = GetLeft() -left, yoffs = GetTop() -top;
+		
+		if( xoffs != 0 || yoffs != 0 )
+		{
+			for( CPathSegment& currPoint : mPoints )
+			{
+				currPoint.x += xoffs;
+				currPoint.y += yoffs;
+			}
+			IncrementChangeCount();
+			
+			SetRect( left, top, right, bottom );
+		}
+	}
+}
+
+
 void	CGraphicPart::DumpProperties( size_t inIndentLevel )
 {
 //	const char*	indentStr = IndentString(inIndentLevel);

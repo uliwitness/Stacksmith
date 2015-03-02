@@ -86,14 +86,15 @@ using namespace Carlson;
 
 -(void)	handleMouseEvent: (NSEvent*)theEvt
 {
-	bool		isEditing = mStack->GetTool() == EPointerTool;
+	TTool		currentTool = mStack->GetTool();
+	bool		isEditing = currentTool == EPointerTool;
 	bool		isPeeking = mStack->GetPeeking();
 	CScriptableObject	*hitObject = NULL;
 	CCard	*	theCard = mStack->GetCurrentCard();
 	const char*	dragMessage = NULL, *upMessage = NULL, *doubleUpMessage = NULL;
 	NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
 	
-	if( mStack->GetTool() != EBrowseTool || isPeeking )
+	if( currentTool != EBrowseTool || isPeeking )
 	{
 		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
 		size_t		numParts = 0;
@@ -106,7 +107,7 @@ using namespace Carlson;
 			for( size_t x = numParts; x > 0; x-- )
 			{
 				CPart	*	thePart = theCard->GetPart( x-1 );
-				if( !hitPart && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles ) != ENothingHitPart )
+				if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles ) != ENothingHitPart )
 				{
 					hitPart = thePart;
 				}
@@ -117,7 +118,7 @@ using namespace Carlson;
 		for( size_t x = numParts; x > 0; x-- )
 		{
 			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
-			if( !hitPart && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles ) != ENothingHitPart )
+			if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles ) != ENothingHitPart )
 			{
 				hitPart = thePart;
 			}
@@ -199,7 +200,7 @@ using namespace Carlson;
 		}
 	}
 	
-	if( mStack->GetTool() == EBrowseTool )
+	if( currentTool == EBrowseTool )
 	{
 		[self.window makeFirstResponder: self];
 		hitObject = theCard;
@@ -211,7 +212,7 @@ using namespace Carlson;
 		CAutoreleasePool		pool;
 		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown", [theEvt buttonNumber] +1 );
 	}
-	else if( mStack->GetTool() == EOvalTool && hitObject == theCard )
+	else if( currentTool == EOvalTool && hitObject == theCard )
 	{
 		CLayer		*	owner = mStack->GetCurrentLayer();
 		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
@@ -225,7 +226,7 @@ using namespace Carlson;
 		thePart->SetSelected(true);
 		hitObject = thePart;
 	}
-	else if( mStack->GetTool() == ERectangleTool && hitObject == theCard )
+	else if( currentTool == ERectangleTool && hitObject == theCard )
 	{
 		CLayer		*	owner = mStack->GetCurrentLayer();
 		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
@@ -239,7 +240,7 @@ using namespace Carlson;
 		thePart->SetSelected(true);
 		hitObject = thePart;
 	}
-	else if( mStack->GetTool() == ERoundrectTool && hitObject == theCard )
+	else if( currentTool == ERoundrectTool && hitObject == theCard )
 	{
 		CLayer		*	owner = mStack->GetCurrentLayer();
 		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
@@ -253,7 +254,7 @@ using namespace Carlson;
 		thePart->SetSelected(true);
 		hitObject = thePart;
 	}
-	else if( mStack->GetTool() == EBezierPathTool && hitObject == theCard )
+	else if( currentTool == EBezierPathTool && hitObject == theCard )
 	{
 		CLayer		*	owner = mStack->GetCurrentLayer();
 		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
@@ -312,7 +313,7 @@ using namespace Carlson;
 						CAutoreleasePool	cppPool;
 						hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
 					}
-					else if( mStack->GetTool() == EBezierPathTool )
+					else if( currentTool == EBezierPathTool )
 					{
 						CGraphicPart*thePart = (CGraphicPart*)hitObject;
 						thePart->UpdateLastPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );
@@ -342,6 +343,10 @@ using namespace Carlson;
 	{
 		CAutoreleasePool	cppPool;
 		hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
+	}
+	else if( currentTool == EBezierPathTool )
+	{
+		((CGraphicPart*)hitObject)->SizeToFit();
 	}
 }
 
@@ -1114,15 +1119,15 @@ using namespace Carlson;
 {
 	if( theItem.action == @selector(delete:) )
 	{
-		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanDeleteSelectedItem() );
+		return( mStack->GetTool() != EBrowseTool && mStack->GetCurrentLayer()->CanDeleteSelectedItem() );
 	}
 	else if( theItem.action == @selector(copy:) )
 	{
-		return( mStack->GetTool() == EPointerTool && mStack->GetCurrentLayer()->CanCopySelectedItem() );
+		return( mStack->GetTool() != EBrowseTool && mStack->GetCurrentLayer()->CanCopySelectedItem() );
 	}
 	else if( theItem.action == @selector(paste:) )
 	{
-		return( mStack->GetTool() == EPointerTool && [[NSPasteboard generalPasteboard] availableTypeFromArray: @[ @"com.the-void-software.stacksmith.parts.xml" ]] != nil );
+		return( mStack->GetTool() != EBrowseTool && [[NSPasteboard generalPasteboard] availableTypeFromArray: @[ @"com.the-void-software.stacksmith.parts.xml" ]] != nil );
 	}
 	else if( theItem.action == @selector(deleteCard:) )
 	{

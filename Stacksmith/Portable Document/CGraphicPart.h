@@ -39,11 +39,15 @@ namespace Carlson {
 		
 		void					SetStyle( TGraphicStyle inStyle )	{ mStyle = inStyle; };
 		
+		virtual bool			CanBeEditedWithTool( TTool inTool );
+		
 		virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 		virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
 		
 		virtual void			AddPoint( LEONumber x, LEONumber y, LEONumber lineWidth );
 		virtual void			UpdateLastPoint( LEONumber x, LEONumber y, LEONumber lineWidth );
+		
+		virtual void			SizeToFit();
 		
 	protected:
 		~CGraphicPart()	{};
