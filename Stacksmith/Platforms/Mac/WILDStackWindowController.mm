@@ -211,7 +211,7 @@ using namespace Carlson;
 		CAutoreleasePool		pool;
 		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown", [theEvt buttonNumber] +1 );
 	}
-	else if( mStack->GetTool() == EOvalTool )
+	else if( mStack->GetTool() == EOvalTool && hitObject == theCard )
 	{
 		CLayer		*	owner = mStack->GetCurrentLayer();
 		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
@@ -225,7 +225,7 @@ using namespace Carlson;
 		thePart->SetSelected(true);
 		hitObject = thePart;
 	}
-	else if( mStack->GetTool() == ERectangleTool )
+	else if( mStack->GetTool() == ERectangleTool && hitObject == theCard )
 	{
 		CLayer		*	owner = mStack->GetCurrentLayer();
 		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
@@ -239,7 +239,7 @@ using namespace Carlson;
 		thePart->SetSelected(true);
 		hitObject = thePart;
 	}
-	else if( mStack->GetTool() == ERoundrectTool )
+	else if( mStack->GetTool() == ERoundrectTool && hitObject == theCard )
 	{
 		CLayer		*	owner = mStack->GetCurrentLayer();
 		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
@@ -252,6 +252,17 @@ using namespace Carlson;
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
 		thePart->SetSelected(true);
 		hitObject = thePart;
+	}
+	else if( hitObject != theCard )
+	{
+		const char*	mouseDownMessage = "mouseDownWhileEditing %ld";
+		const char*	mouseDoubleDownMessage = "mouseDoubleDownWhileEditing %ld";
+		dragMessage = "mouseDragWhileEditing %ld";
+		upMessage = "mouseUpWhileEditing %ld";
+		doubleUpMessage = "mouseDoubleClickWhileEditing %ld";
+
+		CAutoreleasePool	cppPool;
+		((CPart*)hitObject)->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
 	}
 		
 	[mOwningStackWindowController drawBoundingBoxes];
