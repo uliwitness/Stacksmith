@@ -803,7 +803,10 @@
                 <outlet property="mLockPseudoMenu" destination="DXo-F9-GAP" id="E2a-ue-3Jg"/>
                 <outlet property="mMessageBoxButton" destination="9ot-lO-F2x" id="SKT-cf-Jc2"/>
                 <outlet property="mMessageWatcherButton" destination="3Rl-eW-52o" id="ga6-Oe-571"/>
+                <outlet property="mOvalToolButton" destination="m0y-Bn-8Ww" id="mfW-vc-3eV"/>
                 <outlet property="mPointerToolButton" destination="MF4-Xg-gT7" id="3nB-CD-IEc"/>
+                <outlet property="mRectangleToolButton" destination="6Ra-1z-6td" id="DBh-gP-zZr"/>
+                <outlet property="mRoundrectToolButton" destination="RG6-nj-ASQ" id="bxS-yp-YuH"/>
                 <outlet property="mStackCanvasButton" destination="B8l-FW-2Oq" id="y1h-sF-s5X"/>
                 <outlet property="mStackInfoButton" destination="wkz-0c-d3L" id="GPi-BB-ghB"/>
                 <outlet property="mToolPanel" destination="2SR-K3-0lu" id="aC8-Qp-7LK"/>
@@ -967,6 +970,28 @@
                                         <action selector="takeToolFromTag:" target="-1" id="LIP-JY-Wxx"/>
                                     </connections>
                                 </button>
+                                <button toolTip="Edit Text" verticalHuggingPriority="750" tag="3" id="m0y-Bn-8Ww">
+                                    <rect key="frame" x="108" y="3" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintOvalTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eT6-ZL-JPk" customClass="WILDToolButtonCell">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="takeToolFromTag:" target="-1" id="EEp-Pb-oGb"/>
+                                    </connections>
+                                </button>
+                                <button toolTip="Edit Text" verticalHuggingPriority="750" tag="4" id="6Ra-1z-6td">
+                                    <rect key="frame" x="143" y="3" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintRectTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fQg-LZ-aMQ" customClass="WILDToolButtonCell">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="takeToolFromTag:" target="-1" id="xF0-ek-FBf"/>
+                                    </connections>
+                                </button>
                                 <customView id="CUv-2C-iA0">
                                     <rect key="frame" x="456" y="-1" width="132" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
@@ -1006,6 +1031,17 @@
                                         </button>
                                     </subviews>
                                 </customView>
+                                <button toolTip="Edit Text" verticalHuggingPriority="750" tag="5" id="RG6-nj-ASQ">
+                                    <rect key="frame" x="178" y="3" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintRoundrectTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WAp-L3-GTf" customClass="WILDToolButtonCell">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="takeToolFromTag:" target="-1" id="0G2-Io-GSU"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -1030,5 +1066,8 @@
         <image name="PointerTool" width="240" height="240"/>
         <image name="StackCanvasIcon" width="512" height="512"/>
         <image name="StackIcon" width="512" height="512"/>
+        <image name="UKPaintOvalTool" width="48" height="48"/>
+        <image name="UKPaintRectTool" width="48" height="48"/>
+        <image name="UKPaintRoundrectTool" width="48" height="48"/>
     </resources>
 </document>

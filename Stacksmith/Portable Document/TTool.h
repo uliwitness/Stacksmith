@@ -20,6 +20,9 @@ enum
 	EBrowseTool = 0,
 	EPointerTool,
 	EEditTextTool,
+	EOvalTool,
+	ERectangleTool,
+	ERoundrectTool,
 	ETool_Last
 };
 typedef uint16_t	TTool;

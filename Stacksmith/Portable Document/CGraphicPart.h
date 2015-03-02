@@ -25,9 +25,9 @@ namespace Carlson {
 	
 	typedef enum
 	{
+		EGraphicStyleOval,
 		EGraphicStyleRectangle,
 		EGraphicStyleRoundrect,
-		EGraphicStyleOval,
 		EGraphicStyleBezierPath,
 		EGraphicStyle_Last
 	} TGraphicStyle;
@@ -36,6 +36,8 @@ namespace Carlson {
 	{
 	public:
 		explicit CGraphicPart( CLayer *inOwner ) : CVisiblePart( inOwner ), mStyle(EGraphicStyleRectangle)	 {};
+		
+		void					SetStyle( TGraphicStyle inStyle )	{ mStyle = inStyle; };
 		
 		virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 		virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );

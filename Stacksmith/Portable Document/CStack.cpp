@@ -23,11 +23,15 @@ CStack*							CStack::sFrontStack = NULL;
 std::function<void(CStack*)>	CStack::sFrontStackChangedBlock = NULL;
 
 
-static const char*		sToolNames[ETool_Last] =
+static const char*		sToolNames[ETool_Last +1] =
 {
 	"browse",
 	"pointer",
-	"edit text"
+	"edit text",
+	"oval",
+	"rectangle",
+	"roundrect",
+	"*UNKNOWN*"
 };
 
 

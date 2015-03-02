@@ -12,6 +12,7 @@
 #include "CBackground.h"
 #include "CDocument.h"
 #include "CMacPartBase.h"
+#include "CGraphicPart.h"
 #include "CAlert.h"
 #import "ULIHighlightingButton.h"
 #import "WILDCardInfoViewController.h"
@@ -78,24 +79,27 @@ using namespace Carlson;
 
 -(void)	mouseDown: (NSEvent*)theEvt
 {
+	
 	[self handleMouseEvent: theEvt];
 }
 
 
 -(void)	handleMouseEvent: (NSEvent*)theEvt
 {
-	bool	isEditing = mStack->GetTool() != EBrowseTool;
-	bool	isPeeking = mStack->GetPeeking();
+	bool		isEditing = mStack->GetTool() == EPointerTool;
+	bool		isPeeking = mStack->GetPeeking();
 	CScriptableObject	*hitObject = NULL;
 	CCard	*	theCard = mStack->GetCurrentCard();
 	const char*	dragMessage = NULL, *upMessage = NULL, *doubleUpMessage = NULL;
-	if( isEditing || isPeeking )
+	NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
+	
+	if( mStack->GetTool() != EBrowseTool || isPeeking )
 	{
-		NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
 		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
 		size_t		numParts = 0;
 		CPart*		hitPart = NULL;
 		
+		// Find what was clicked:
 		if( !mStack->GetEditingBackground() )
 		{
 			numParts = theCard->GetNumParts();
@@ -119,16 +123,31 @@ using namespace Carlson;
 			}
 		}
 		
-		if( !mStack->GetEditingBackground() )
+		// Deselect all other background parts:
+		if( (isEditing || hitPart) && !isPeeking )
 		{
-			numParts = theCard->GetNumParts();
+			numParts = theCard->GetBackground()->GetNumParts();
 			for( size_t x = numParts; x > 0; x-- )
 			{
-				CPart	*	thePart = theCard->GetPart( x-1 );
+				CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
 				if( thePart != hitPart )
 				{
 					if( !hitPart || (!shiftKeyDown && !hitPart->IsSelected()) )
 						thePart->SetSelected(false);
+				}
+			}
+
+			if( !mStack->GetEditingBackground() )
+			{
+				numParts = theCard->GetNumParts();
+				for( size_t x = numParts; x > 0; x-- )
+				{
+					CPart	*	thePart = theCard->GetPart( x-1 );
+					if( thePart != hitPart )
+					{
+						if( !hitPart || (!shiftKeyDown && !hitPart->IsSelected()) )
+							thePart->SetSelected(false);
+					}
 				}
 			}
 		}
@@ -144,30 +163,22 @@ using namespace Carlson;
 			upMessage = "mouseUpWhilePeeking %ld";
 			doubleUpMessage = "mouseDoubleClickWhilePeeking %ld";
 		}
-		else if( isEditing )
+		else if( isEditing || hitPart )
 		{
 			mouseDownMessage = "mouseDownWhileEditing %ld";
 			mouseDoubleDownMessage = "mouseDoubleDownWhileEditing %ld";
 			dragMessage = "mouseDragWhileEditing %ld";
 			upMessage = "mouseUpWhileEditing %ld";
 			doubleUpMessage = "mouseDoubleClickWhileEditing %ld";
-		
-			numParts = theCard->GetBackground()->GetNumParts();
-			for( size_t x = numParts; x > 0; x-- )
-			{
-				CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
-				if( thePart != hitPart )
-				{
-					if( !hitPart || (!shiftKeyDown && !hitPart->IsSelected()) )
-						thePart->SetSelected(false);
-				}
-			}
 		}
 		
 		if( !hitPart )
 		{
-			CAutoreleasePool	cppPool;
-			theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
+			if( mouseDownMessage )
+			{
+				CAutoreleasePool	cppPool;
+				theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
+			}
 			hitObject = theCard;
 		}
 		else
@@ -179,14 +190,16 @@ using namespace Carlson;
 				else if( hitPart->IsSelected() && shiftKeyDown )
 					hitPart->SetSelected(false);
 			}
-			CAutoreleasePool	cppPool;
-			hitPart->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
+			if( mouseDownMessage )
+			{
+				CAutoreleasePool	cppPool;
+				hitPart->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
+			}
 			hitObject = hitPart;
 		}
-		
-		[mOwningStackWindowController drawBoundingBoxes];
 	}
-	else
+	
+	if( mStack->GetTool() == EBrowseTool )
 	{
 		[self.window makeFirstResponder: self];
 		hitObject = theCard;
@@ -198,6 +211,50 @@ using namespace Carlson;
 		CAutoreleasePool		pool;
 		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown", [theEvt buttonNumber] +1 );
 	}
+	else if( mStack->GetTool() == EOvalTool )
+	{
+		CLayer		*	owner = mStack->GetCurrentLayer();
+		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
+		thePart->SetID( owner->GetUniqueIDForPart() );
+		thePart->SetRect( hitPos.x, hitPos.y, hitPos.x, hitPos.y );
+		thePart->SetStyle(EGraphicStyleOval);
+		owner->AddPart(thePart);
+		thePart->Release();
+		thePart->IncrementChangeCount();
+		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		thePart->SetSelected(true);
+		hitObject = thePart;
+	}
+	else if( mStack->GetTool() == ERectangleTool )
+	{
+		CLayer		*	owner = mStack->GetCurrentLayer();
+		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
+		thePart->SetID( owner->GetUniqueIDForPart() );
+		thePart->SetRect( hitPos.x, hitPos.y, hitPos.x, hitPos.y );
+		thePart->SetStyle(EGraphicStyleRectangle);
+		owner->AddPart(thePart);
+		thePart->Release();
+		thePart->IncrementChangeCount();
+		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		thePart->SetSelected(true);
+		hitObject = thePart;
+	}
+	else if( mStack->GetTool() == ERoundrectTool )
+	{
+		CLayer		*	owner = mStack->GetCurrentLayer();
+		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
+		thePart->SetID( owner->GetUniqueIDForPart() );
+		thePart->SetRect( hitPos.x, hitPos.y, hitPos.x, hitPos.y );
+		thePart->SetStyle(EGraphicStyleRoundrect);
+		owner->AddPart(thePart);
+		thePart->Release();
+		thePart->IncrementChangeCount();
+		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		thePart->SetSelected(true);
+		hitObject = thePart;
+	}
+		
+	[mOwningStackWindowController drawBoundingBoxes];
 
 	NSUInteger	evtMask = NSLeftMouseUpMask | NSLeftMouseDraggedMask;
 	if( theEvt.buttonNumber == 1 )
@@ -209,8 +266,9 @@ using namespace Carlson;
 	while( keepGoing )
 	{
 		NSEvent	*	loopEvt = [[NSApplication sharedApplication] nextEventMatchingMask: evtMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
-		if( theEvt )
+		if( loopEvt )
 		{
+			hitPos = [self convertPoint: [loopEvt locationInWindow] fromView: nil];
 			switch( loopEvt.type )
 			{
 				case NSLeftMouseUp:
@@ -222,8 +280,16 @@ using namespace Carlson;
 				case NSRightMouseDragged:
 				case NSOtherMouseDragged:
 				{
-					CAutoreleasePool	cppPool;
-					hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
+					if( dragMessage )
+					{
+						CAutoreleasePool	cppPool;
+						hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
+					}
+					else
+					{
+						CPart*thePart = (CPart*)hitObject;
+						((CPart*)hitObject)->SetRect( thePart->GetLeft(), thePart->GetTop(), hitPos.x, hitPos.y );
+					}
 					break;
 				}
 				
@@ -240,8 +306,11 @@ using namespace Carlson;
 	}
 	[pool release];
 
-	CAutoreleasePool	cppPool;
-	hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
+	if( upMessage )
+	{
+		CAutoreleasePool	cppPool;
+		hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
+	}
 }
 
 
