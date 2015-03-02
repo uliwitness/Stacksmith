@@ -262,8 +262,8 @@ using namespace Carlson;
 		thePart->SetRect( 0, 0, mStack->GetCardWidth(), mStack->GetCardHeight() );
 		thePart->SetStyle(EGraphicStyleBezierPath);
 		owner->AddPart(thePart);
-		thePart->AddPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );
-		thePart->AddPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );
+		thePart->AddPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );	// +++ Only works cuz we know the part rect is at 0,0.
+		thePart->AddPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );	// +++ Only works cuz we know the part rect is at 0,0.
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
@@ -316,7 +316,7 @@ using namespace Carlson;
 					else if( currentTool == EBezierPathTool )
 					{
 						CGraphicPart*thePart = (CGraphicPart*)hitObject;
-						thePart->UpdateLastPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );
+						thePart->UpdateLastPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );	// +++ Only works cuz we know the part rect is at 0,0.
 					}
 					else
 					{
@@ -346,7 +346,7 @@ using namespace Carlson;
 	}
 	else if( currentTool == EBezierPathTool )
 	{
-		((CGraphicPart*)hitObject)->SizeToFit();
+		((CGraphicPart*)hitObject)->SizeToFit();	// Pull part rect snugly around the actual drawing.
 	}
 }
 

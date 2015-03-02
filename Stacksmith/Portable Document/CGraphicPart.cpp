@@ -254,17 +254,18 @@ void	CGraphicPart::SizeToFit()
 {
 	if( mStyle == EGraphicStyleBezierPath )	// All other styles' sizes are defined by the part rect.
 	{
+		LEONumber	originalTop = GetTop(), originalLeft = GetLeft();
 		LEONumber	top = GetBottom(), bottom = GetTop(), left = GetRight(), right = GetLeft();
 		for( const CPathSegment& currPoint : mPoints )
 		{
-			if( currPoint.y < top )
-				top = currPoint.y;
-			if( currPoint.y > bottom )
-				bottom = currPoint.y;
-			if( currPoint.x < left )
-				left = currPoint.x;
-			if( currPoint.x > right )
-				right = currPoint.x;
+			if( (currPoint.y +originalTop) < top )
+				top = (currPoint.y +originalTop);
+			if( (currPoint.y +originalTop) > bottom )
+				bottom = (currPoint.y +originalTop);
+			if( (currPoint.x +originalLeft) < left )
+				left = (currPoint.x +originalLeft);
+			if( (currPoint.x +originalLeft) > right )
+				right = (currPoint.x +originalLeft);
 		}
 		
 		LEONumber	xoffs = GetLeft() -left, yoffs = GetTop() -top;
