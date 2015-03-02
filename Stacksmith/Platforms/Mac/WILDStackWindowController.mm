@@ -1042,7 +1042,7 @@ using namespace Carlson;
 	}
 	else if( theItem.action == @selector(saveDocument:) )
 	{
-		return mStack->GetDocument()->GetNeedsToBeSaved();
+		return mStack->GetDocument()->GetNeedsToBeSaved() && !mStack->GetDocument()->IsWriteProtected();
 	}
 	else
 		return [self respondsToSelector: theItem.action];
