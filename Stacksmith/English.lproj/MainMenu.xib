@@ -794,6 +794,7 @@
         <customObject id="556" customClass="WILDAppDelegate">
             <connections>
                 <outlet property="mBackgroundInfoButton" destination="1oD-UL-G2Q" id="juq-ao-iOa"/>
+                <outlet property="mBezierPathToolButton" destination="AyT-VH-Z46" id="d28-ju-YQo"/>
                 <outlet property="mBrowseToolButton" destination="gIo-t9-M2n" id="bJG-DZ-yCV"/>
                 <outlet property="mCardInfoButton" destination="GPp-md-4F2" id="0fK-5b-dCv"/>
                 <outlet property="mEditBackgroundButton" destination="J38-Wh-F6i" id="YIF-09-H8k"/>
@@ -992,6 +993,17 @@
                                         <action selector="takeToolFromTag:" target="-1" id="xF0-ek-FBf"/>
                                     </connections>
                                 </button>
+                                <button toolTip="Edit Text" verticalHuggingPriority="750" tag="5" id="RG6-nj-ASQ">
+                                    <rect key="frame" x="178" y="3" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintRoundrectTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WAp-L3-GTf" customClass="WILDToolButtonCell">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="takeToolFromTag:" target="-1" id="0G2-Io-GSU"/>
+                                    </connections>
+                                </button>
                                 <customView id="CUv-2C-iA0">
                                     <rect key="frame" x="456" y="-1" width="132" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
@@ -1031,15 +1043,15 @@
                                         </button>
                                     </subviews>
                                 </customView>
-                                <button toolTip="Edit Text" verticalHuggingPriority="750" tag="5" id="RG6-nj-ASQ">
-                                    <rect key="frame" x="178" y="3" width="32" height="32"/>
+                                <button toolTip="Edit Text" verticalHuggingPriority="750" tag="6" id="AyT-VH-Z46">
+                                    <rect key="frame" x="213" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintRoundrectTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WAp-L3-GTf" customClass="WILDToolButtonCell">
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintLineTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pDS-fT-AmH" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <connections>
-                                        <action selector="takeToolFromTag:" target="-1" id="0G2-Io-GSU"/>
+                                        <action selector="takeToolFromTag:" target="-1" id="JO7-BT-gUu"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1066,6 +1078,7 @@
         <image name="PointerTool" width="240" height="240"/>
         <image name="StackCanvasIcon" width="512" height="512"/>
         <image name="StackIcon" width="512" height="512"/>
+        <image name="UKPaintLineTool" width="48" height="48"/>
         <image name="UKPaintOvalTool" width="48" height="48"/>
         <image name="UKPaintRectTool" width="48" height="48"/>
         <image name="UKPaintRoundrectTool" width="48" height="48"/>

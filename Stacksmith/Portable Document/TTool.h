@@ -23,6 +23,7 @@ enum
 	EOvalTool,
 	ERectangleTool,
 	ERoundrectTool,
+	EBezierPathTool,
 	ETool_Last
 };
 typedef uint16_t	TTool;

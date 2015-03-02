@@ -253,6 +253,22 @@ using namespace Carlson;
 		thePart->SetSelected(true);
 		hitObject = thePart;
 	}
+	else if( mStack->GetTool() == EBezierPathTool && hitObject == theCard )
+	{
+		CLayer		*	owner = mStack->GetCurrentLayer();
+		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
+		thePart->SetID( owner->GetUniqueIDForPart() );
+		thePart->SetRect( 0, 0, mStack->GetCardWidth(), mStack->GetCardHeight() );
+		thePart->SetStyle(EGraphicStyleBezierPath);
+		owner->AddPart(thePart);
+		thePart->AddPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );
+		thePart->AddPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );
+		thePart->Release();
+		thePart->IncrementChangeCount();
+		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		thePart->SetSelected(true);
+		hitObject = thePart;
+	}
 	else if( hitObject != theCard )
 	{
 		const char*	mouseDownMessage = "mouseDownWhileEditing %ld";
@@ -296,10 +312,15 @@ using namespace Carlson;
 						CAutoreleasePool	cppPool;
 						hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
 					}
+					else if( mStack->GetTool() == EBezierPathTool )
+					{
+						CGraphicPart*thePart = (CGraphicPart*)hitObject;
+						thePart->UpdateLastPoint( hitPos.x, mStack->GetCardHeight() -hitPos.y, 1 );
+					}
 					else
 					{
 						CPart*thePart = (CPart*)hitObject;
-						((CPart*)hitObject)->SetRect( thePart->GetLeft(), thePart->GetTop(), hitPos.x, hitPos.y );
+						thePart->SetRect( thePart->GetLeft(), thePart->GetTop(), hitPos.x, hitPos.y );
 					}
 					break;
 				}

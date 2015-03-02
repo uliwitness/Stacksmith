@@ -41,6 +41,9 @@ public:
 	virtual void		SetShadowBlurRadius( double r );
 	virtual void		SetLineWidth( int w );
 
+	virtual void		AddPoint( LEONumber x, LEONumber y, LEONumber lineWidth );
+	virtual void		UpdateLastPoint( LEONumber x, LEONumber y, LEONumber lineWidth );
+
 protected:
 	void				RebuildViewLayerPath();
 	

@@ -210,6 +210,29 @@ bool	CGraphicPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 }
 
 
+void	CGraphicPart::AddPoint( LEONumber x, LEONumber y, LEONumber lineWidth )
+{
+	CPathSegment		newPoint = {0};
+	newPoint.x = x;
+	newPoint.y = y;
+	newPoint.lineWidth = lineWidth;
+	mPoints.push_back( newPoint );
+	
+	IncrementChangeCount();
+}
+
+
+void	CGraphicPart::UpdateLastPoint( LEONumber x, LEONumber y, LEONumber lineWidth )
+{
+	CPathSegment& lastSegment = mPoints.back();
+	lastSegment.x = x;
+	lastSegment.y = y;
+	lastSegment.lineWidth = lineWidth;
+	
+	IncrementChangeCount();
+}
+
+
 void	CGraphicPart::DumpProperties( size_t inIndentLevel )
 {
 //	const char*	indentStr = IndentString(inIndentLevel);

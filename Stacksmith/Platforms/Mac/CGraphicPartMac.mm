@@ -70,10 +70,16 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 		CGMutablePathRef	thePath = CGPathCreateMutable();
 		if( mPoints.size() > 0 )
 		{
-			CGPathMoveToPoint( thePath, NULL, mPoints[0].x, mPoints[0].y );
+			bool		first = true;
 			for( const CPathSegment& currSegment : mPoints )
 			{
-				CGPathAddLineToPoint( thePath, NULL, currSegment.x, currSegment.y );
+				if( first )
+				{
+					CGPathMoveToPoint( thePath, NULL, currSegment.x, currSegment.y );
+					first = false;
+				}
+				else
+					CGPathAddLineToPoint( thePath, NULL, currSegment.x, currSegment.y );
 			}
 		}
 		theLayer.path = thePath;
@@ -188,6 +194,22 @@ void	CGraphicPartMac::SetLineWidth( int w )
 		[mView.layer setBorderWidth: w];
 	else
 		[(CAShapeLayer*)mView.layer setLineWidth: w];
+}
+
+
+void	CGraphicPartMac::AddPoint( LEONumber x, LEONumber y, LEONumber lineWidth )
+{
+	CGraphicPart::AddPoint( x, y, lineWidth );
+	
+	RebuildViewLayerPath();
+}
+
+
+void	CGraphicPartMac::UpdateLastPoint( LEONumber x, LEONumber y, LEONumber lineWidth )
+{
+	CGraphicPart::UpdateLastPoint( x, y, lineWidth );
+	
+	RebuildViewLayerPath();
 }
 
 
