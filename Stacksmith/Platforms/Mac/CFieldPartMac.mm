@@ -220,7 +220,13 @@ using namespace Carlson;
 		[cols replaceObjectAtIndex: colIdx withObject: theValue];
 	}
 	else
+	{
+		if( ![theValue isKindOfClass: [NSAttributedString class]] )
+		{
+			theValue = [[[NSAttributedString alloc] initWithString: theValue attributes: self.owningField->GetCocoaAttributesForPart()] autorelease];
+		}
 		[self.lines replaceObjectAtIndex: row withObject: theValue];
+	}
 	
 	self.owningField->SetViewTextNeedsSync( true );
 	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
@@ -251,9 +257,12 @@ using namespace Carlson;
 
 -(BOOL)	tableView: (NSTableView *)tableView shouldEditTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
-	NSInteger			colIdx = [tableView.tableColumns indexOfObject: tableColumn];
-	if( !self.owningField->GetColumnInfo(colIdx).mEditable )
-		return NO;
+	if( self.multipleColumns )
+	{
+		NSInteger			colIdx = [tableView.tableColumns indexOfObject: tableColumn];
+		if( !self.owningField->GetColumnInfo(colIdx).mEditable )
+			return NO;
+	}
 	return !self.owningField->GetLockText() || self.owningField->GetStack()->GetTool() == EEditTextTool;
 }
 
@@ -1005,7 +1014,7 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 		{
 			[mSearchField setStringValue: @""];
 			if( mFieldStyle == EFieldStylePopUp )
-				mMacDelegate.lines = [NSMutableArray arrayWithObject: @""];
+				mMacDelegate.lines = [NSMutableArray arrayWithObject: [[[NSAttributedString alloc] init] autorelease]];
 		}
 		else
 			[mTextView setString: @""];
