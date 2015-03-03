@@ -75,11 +75,11 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 			{
 				if( first )
 				{
-					CGPathMoveToPoint( thePath, NULL, currSegment.x, currSegment.y );
+					CGPathMoveToPoint( thePath, NULL, currSegment.x, localBox.size.height -currSegment.y );
 					first = false;
 				}
 				else
-					CGPathAddLineToPoint( thePath, NULL, currSegment.x, currSegment.y );
+					CGPathAddLineToPoint( thePath, NULL, currSegment.x,  localBox.size.height -currSegment.y );
 			}
 		}
 		theLayer.path = thePath;
