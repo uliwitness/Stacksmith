@@ -1157,7 +1157,7 @@ using namespace Carlson;
 
 -(IBAction)	delete: (id)sender
 {
-	if( mStack->GetTool() == EPointerTool )
+	if( mStack->GetTool() != EBrowseTool )
 	{
 		CAutoreleasePool	pool;
 		mStack->GetCurrentLayer()->DeleteSelectedItem();
@@ -1167,7 +1167,7 @@ using namespace Carlson;
 
 -(IBAction)	copy: (id)sender
 {
-	if( mStack->GetTool() == EPointerTool )
+	if( mStack->GetTool() != EBrowseTool )
 	{
 		CAutoreleasePool	pool;
 		std::string	xml = mStack->GetCurrentLayer()->CopySelectedItem();
@@ -1181,7 +1181,7 @@ using namespace Carlson;
 
 -(IBAction)	paste: (id)sender
 {
-	if( mStack->GetTool() == EPointerTool )
+	if( mStack->GetTool() == EBrowseTool )
 	{
 		CAutoreleasePool	pool;
 		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
