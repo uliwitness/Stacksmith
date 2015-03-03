@@ -30,6 +30,7 @@ public:
 	virtual void		CreateViewIn( NSView* inSuperView );
 	virtual void		DestroyView();
 	virtual NSView*		GetView()					{ return mView; };
+	virtual void		WillBeDeleted()				{ CMacPartBase::WillBeDeleted(); };
 	virtual NSImage*	GetDisplayIcon();
 	
 	virtual void		SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b );

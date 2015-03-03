@@ -210,3 +210,12 @@ NSAutoresizingMaskOptions	CMacPartBase::GetCocoaResizeFlags( TPartLayoutFlags in
 	return cocoaFlags;
 }
 
+
+void	CMacPartBase::WillBeDeleted()
+{
+	DestroyView();
+	
+	
+}
+
+

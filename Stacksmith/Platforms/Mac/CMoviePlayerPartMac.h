@@ -32,6 +32,7 @@ public:
 
 	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView();
+	virtual void	WillBeDeleted()					{ CMacPartBase::WillBeDeleted(); };
 	virtual void	SetPeeking( bool inState );
 
 	virtual void		SetStarted( bool inStart );

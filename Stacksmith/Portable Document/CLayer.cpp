@@ -577,6 +577,7 @@ void	CLayer::DeleteSelectedItem()
 		if( (*currPart)->IsSelected() )
 		{
 			(*currPart)->GoToSleep();
+			(*currPart)->WillBeDeleted();
 			currPart = mParts.erase(currPart);
 			if( currPart == mParts.end() )
 				break;

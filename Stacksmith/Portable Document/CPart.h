@@ -170,6 +170,7 @@ public:
 	virtual void				SetHighlight( bool inHighlighted )	{};
 	virtual void				PrepareMouseUp()				{};	// Sent when a mouse click was inside, right before we send mouseUp.
 	bool						GetShouldSendMouseEventsRightNow();
+	virtual void				WillBeDeleted()					{};
 	
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	

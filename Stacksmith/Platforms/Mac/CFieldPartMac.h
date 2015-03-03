@@ -64,6 +64,7 @@ public:
 	virtual void	SetScript( std::string inScript );
 	
 	virtual void	ToolChangedFrom( TTool inOldTool );
+	virtual void	WillBeDeleted()					{ CMacPartBase::WillBeDeleted(); };
 	
 	virtual NSView*	GetView();
 	

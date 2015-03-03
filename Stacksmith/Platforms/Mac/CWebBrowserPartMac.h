@@ -31,6 +31,7 @@ public:
 
 	virtual void	CreateViewIn( NSView* inSuperView );
 	virtual void	DestroyView();
+	virtual void	WillBeDeleted()					{ CMacPartBase::WillBeDeleted(); };
 	virtual void	SetPeeking( bool inState );
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetVisible( bool visible )		{ CWebBrowserPart::SetVisible(visible); [mView setHidden: !visible]; };

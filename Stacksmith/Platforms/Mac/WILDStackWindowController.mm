@@ -1161,6 +1161,7 @@ using namespace Carlson;
 	{
 		CAutoreleasePool	pool;
 		mStack->GetCurrentLayer()->DeleteSelectedItem();
+		[self drawBoundingBoxes];
 	}
 }
 
@@ -1192,6 +1193,7 @@ using namespace Carlson;
 		[self refreshExistenceAndOrderOfAllViews];
 		for( CPart* thePart : newParts )
 			thePart->SetSelected(true);
+		[self drawBoundingBoxes];
 	}
 }
 

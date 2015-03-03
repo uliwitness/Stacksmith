@@ -53,6 +53,8 @@ public:
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset );
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex );
 	virtual void		OpenContentsEditor();
+
+	virtual void		WillBeDeleted();
 	
 protected:
 	virtual ~CMacPartBase() { [mScriptEditor release]; mScriptEditor = nil; [mContentsEditor release]; mContentsEditor = nil; };
