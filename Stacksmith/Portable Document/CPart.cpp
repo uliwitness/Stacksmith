@@ -521,33 +521,55 @@ void		CPart::SetIndex( LEOInteger inIndex, CPartCreatorBase* inType )
 }
 
 
-THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo )
+THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo, LEOInteger *outCustomHandleIndex )
 {
 	THitPart	hitPart = ENothingHitPart;
 	
 	if( handlesToo == EHitTestHandlesToo )
 	{
-		THitPart	parts[] = { ELeftGrabberHitPart, ELeftGrabberHitPart | ETopGrabberHitPart,
-								ETopGrabberHitPart, ERightGrabberHitPart | ETopGrabberHitPart,
-								ERightGrabberHitPart, ERightGrabberHitPart | EBottomGrabberHitPart,
-								EBottomGrabberHitPart, ELeftGrabberHitPart | EBottomGrabberHitPart,
-								0 };
-		for( int n = 0; parts[n] != 0; n++ )
+		LEOInteger	numCustomHandles = GetNumCustomHandles();
+		if( numCustomHandles >= 0 )
 		{
-			LEONumber	l, t, r, b;
-			if( GetRectForHandle( parts[n], &l, &t, &r, &b ) )
+			for( LEOInteger n = 0; x < numCustomHandles; x++ )
 			{
+				LEONumber	l, t, r, b;
+				GetRectForCustomHandle( n, &l, &t, &r, &b );
 				if( x > l && x < r && y > t && y < b )
 				{
-					hitPart = parts[n];
+					*outCustomHandleIndex = n;
+					hitPart = ECustomGrabberHitPart;
 					break;
+				}
+			}
+		}
+		else
+		{
+			THitPart	parts[] = { ELeftGrabberHitPart, ELeftGrabberHitPart | ETopGrabberHitPart,
+									ETopGrabberHitPart, ERightGrabberHitPart | ETopGrabberHitPart,
+									ERightGrabberHitPart, ERightGrabberHitPart | EBottomGrabberHitPart,
+									EBottomGrabberHitPart, ELeftGrabberHitPart | EBottomGrabberHitPart,
+									0 };
+			for( int n = 0; parts[n] != 0; n++ )
+			{
+				LEONumber	l, t, r, b;
+				if( GetRectForHandle( parts[n], &l, &t, &r, &b ) )
+				{
+					if( x > l && x < r && y > t && y < b )
+					{
+						hitPart = parts[n];
+						*outCustomHandleIndex = -1;
+						break;
+					}
 				}
 			}
 		}
 	}
 	
 	if( hitPart == ENothingHitPart && x > GetLeft() && x < GetRight() && y > GetTop() && y < GetBottom() )
+	{
 		hitPart = EContentHitPart;
+		*outCustomHandleIndex = -1;
+	}
 	
 	return hitPart;
 }
@@ -631,23 +653,33 @@ bool	CPart::GetRectForHandle( THitPart inDesiredPart, LEONumber *outLeft, LEONum
 }
 
 
-void	CPart::Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
+void	CPart::Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock )
 {
 	LEONumber	oldL = GetLeft(), oldT = GetTop(), oldB = GetBottom(), oldR = GetRight();
 	LEONumber	oldX = 0, oldY = 0;
+	LEONumber	originalGHX = 0, originalGHY = 0;
+	if( inHitPart & ECustomGrabberHitPart )
+		GetPositionOfCustomHandleAtIndex( customGrabPartIndex, &originalGHX, &originalGHY );
 	CCursor::GetGlobalPosition( &oldX, &oldY );
-	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,addGuidelineBlock,this]()
+	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,addGuidelineBlock,originalGHX,originalGHY,customGrabPartIndex,this]()
 	{
 		LEONumber	x = 0, y = 0;
 		CCursor::GetGlobalPosition( &x, &y );
 		
-		long long	l = (inHitPart & ELeftGrabberHitPart) ? (oldL +(x -oldX)) : oldL,
-					t = (inHitPart & ETopGrabberHitPart) ? (oldT +(y -oldY)) : oldT,
-					r = (inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
-					b = (inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB;
-		
-		GetOwner()->CorrectRectOfPart( this, inHitPart, &l, &t, &r, &b, addGuidelineBlock );
-		SetRect( l, t, r, b );
+		if( inHitPart & ECustomGrabberHitPart )
+		{
+			SetPositionOfCustomHandleAtIndex( customGrabPartIndex, originalGHX +(x -oldX), originalGHY +(y -oldY) );
+		}
+		else
+		{
+			long long	l = (inHitPart & ELeftGrabberHitPart) ? (oldL +(x -oldX)) : oldL,
+						t = (inHitPart & ETopGrabberHitPart) ? (oldT +(y -oldY)) : oldT,
+						r = (inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
+						b = (inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB;
+			
+			GetOwner()->CorrectRectOfPart( this, inHitPart, &l, &t, &r, &b, addGuidelineBlock );
+			SetRect( l, t, r, b );
+		}
 		IncrementChangeCount();
 	});
 	addGuidelineBlock( LLONG_MAX, EGuidelineCallbackActionClearAllDone );

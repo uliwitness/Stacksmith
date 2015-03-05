@@ -12,6 +12,7 @@
 #include "CBackground.h"
 #include "CStack.h"
 #include "CDocument.h"
+#include <math.h>
 
 
 using namespace Carlson;
@@ -282,6 +283,28 @@ void	CGraphicPart::SizeToFit()
 			SetRect( left, top, right, bottom );
 		}
 	}
+}
+
+
+LEOInteger	CGraphicPart::GetNumCustomHandles()
+{
+	if( mStyle == EGraphicStyleBezierPath )
+	{
+		return mPoints.size();
+	}
+	
+	return -1;
+}
+
+
+void	CGraphicPart::GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom )
+{
+	bool		outAllowSideHandles, outAllowCornerHandles;
+	LEONumber	handleSize = GetHandleSize( &outAllowSideHandles, &outAllowCornerHandles );
+	*outLeft = mPoints[idx].x +GetLeft() -truncf(handleSize /2);
+	*outRight = (*outLeft) + handleSize;
+	*outTop = mPoints[idx].y +GetTop() -truncf(handleSize /2);
+	*outBottom = (*outTop) + handleSize;
 }
 
 

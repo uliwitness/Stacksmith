@@ -99,6 +99,7 @@ using namespace Carlson;
 		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
 		size_t		numParts = 0;
 		CPart*		hitPart = NULL;
+		LEOInteger	customPartIndex = -1;
 		
 		// Find what was clicked:
 		if( !mStack->GetEditingBackground() )
@@ -107,7 +108,7 @@ using namespace Carlson;
 			for( size_t x = numParts; x > 0; x-- )
 			{
 				CPart	*	thePart = theCard->GetPart( x-1 );
-				if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles ) != ENothingHitPart )
+				if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles, &customPartIndex ) != ENothingHitPart )
 				{
 					hitPart = thePart;
 				}
@@ -118,7 +119,7 @@ using namespace Carlson;
 		for( size_t x = numParts; x > 0; x-- )
 		{
 			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
-			if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles ) != ENothingHitPart )
+			if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles, &customPartIndex ) != ENothingHitPart )
 			{
 				hitPart = thePart;
 			}
@@ -638,7 +639,7 @@ using namespace Carlson;
 	size_t	cardHeight = mStack->GetCardHeight();
 	NSRect	partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
 	NSRectFillUsingOperation( partRect, NSCompositeClear );
-	if( mStack->GetPeeking() || currPart->IsSelected() )
+	if( mStack->GetPeeking() || (currPart->IsSelected() && currPart->GetNumCustomHandles() <= 0) )
 	{
 		[sPeekColor set];
 		[NSBezierPath strokeRect: partRect];
@@ -648,54 +649,69 @@ using namespace Carlson;
 		[sSelectedColor setFill];
 		[sSelectedBorderColor setStroke];
 		
-		LEONumber	l, t, r, b;
-		if( currPart->GetRectForHandle( ELeftGrabberHitPart, &l, &t, &r, &b ) )
+		LEOInteger	numCustomHandles = currPart->GetNumCustomHandles();
+		if( numCustomHandles >= 0 )
 		{
-			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
-			NSRectFill(grabby);
-			[NSBezierPath strokeRect: grabby];
+			for( LEOInteger x = 0; x < numCustomHandles; x++ )
+			{
+				LEONumber	l, t, r, b;
+				currPart->GetRectForCustomHandle( x, &l, &t, &r, &b );
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
 		}
-		if( currPart->GetRectForHandle( ELeftGrabberHitPart | ETopGrabberHitPart, &l, &t, &r, &b ) )
+		else
 		{
-			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
-			NSRectFill(grabby);
-			[NSBezierPath strokeRect: grabby];
-		}
-		if( currPart->GetRectForHandle( ETopGrabberHitPart, &l, &t, &r, &b ) )
-		{
-			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
-			NSRectFill(grabby);
-			[NSBezierPath strokeRect: grabby];
-		}
-		if( currPart->GetRectForHandle( ERightGrabberHitPart | ETopGrabberHitPart, &l, &t, &r, &b ) )
-		{
-			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
-			NSRectFill(grabby);
-			[NSBezierPath strokeRect: grabby];
-		}
-		if( currPart->GetRectForHandle( ERightGrabberHitPart, &l, &t, &r, &b ) )
-		{
-			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
-			NSRectFill(grabby);
-			[NSBezierPath strokeRect: grabby];
-		}
-		if( currPart->GetRectForHandle( ERightGrabberHitPart | EBottomGrabberHitPart, &l, &t, &r, &b ) )
-		{
-			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
-			NSRectFill(grabby);
-			[NSBezierPath strokeRect: grabby];
-		}
-		if( currPart->GetRectForHandle( EBottomGrabberHitPart, &l, &t, &r, &b ) )
-		{
-			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
-			NSRectFill(grabby);
-			[NSBezierPath strokeRect: grabby];
-		}
-		if( currPart->GetRectForHandle( ELeftGrabberHitPart | EBottomGrabberHitPart, &l, &t, &r, &b ) )
-		{
-			NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
-			NSRectFill(grabby);
-			[NSBezierPath strokeRect: grabby];
+			LEONumber	l, t, r, b;
+			if( currPart->GetRectForHandle( ELeftGrabberHitPart, &l, &t, &r, &b ) )
+			{
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
+			if( currPart->GetRectForHandle( ELeftGrabberHitPart | ETopGrabberHitPart, &l, &t, &r, &b ) )
+			{
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
+			if( currPart->GetRectForHandle( ETopGrabberHitPart, &l, &t, &r, &b ) )
+			{
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
+			if( currPart->GetRectForHandle( ERightGrabberHitPart | ETopGrabberHitPart, &l, &t, &r, &b ) )
+			{
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
+			if( currPart->GetRectForHandle( ERightGrabberHitPart, &l, &t, &r, &b ) )
+			{
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
+			if( currPart->GetRectForHandle( ERightGrabberHitPart | EBottomGrabberHitPart, &l, &t, &r, &b ) )
+			{
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
+			if( currPart->GetRectForHandle( EBottomGrabberHitPart, &l, &t, &r, &b ) )
+			{
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
+			if( currPart->GetRectForHandle( ELeftGrabberHitPart | EBottomGrabberHitPart, &l, &t, &r, &b ) )
+			{
+				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				NSRectFill(grabby);
+				[NSBezierPath strokeRect: grabby];
+			}
 		}
 	}
 }

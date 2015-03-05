@@ -704,15 +704,16 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		CPart*		so = dynamic_cast<CPart*>( userData->GetTarget() );
 		if( so )
 		{
-			LEONumber x = 0;
-			LEONumber y = 0;
+			LEOInteger	customPartIndex = -1;
+			LEONumber 	x = 0;
+			LEONumber 	y = 0;
 			CStack*	theStack = so->GetStack();
 			theStack->GetMousePosition( &x, &y );
 						
-			THitPart	hitPart = so->HitTestForEditing( x, y, EHitTestHandlesToo );
-			if( hitPart != ENothingHitPart )
+			THitPart	hitPart = so->HitTestForEditing( x, y, EHitTestHandlesToo, &customPartIndex );
+			if( hitPart != ENothingHitPart && hitPart != ECustomGrabberHitPart )
 			{
-				so->Grab( hitPart, [theStack](long long inGuidelineCoord,TGuidelineCallbackAction action)
+				so->Grab( hitPart, customPartIndex, [theStack](long long inGuidelineCoord,TGuidelineCallbackAction action)
 				{
 					if( action == EGuidelineCallbackActionClearAllDone
 						|| action == EGuidelineCallbackActionClearAllForFilling )

@@ -32,19 +32,20 @@ class CPart;
 class CPartContents;
 
 
-
+/*! Indicate which of the "resize handles" (aka "grabbers") have been clicked or
+	are being moved right now. */
 enum
 {
-	ENothingHitPart			= 0,		//< Click was not on this object.
-	ELeftGrabberHitPart		= (1 << 0),	//< One of the left resize handles was clicked. If only bit set, it was the left center.
-	ETopGrabberHitPart		= (1 << 1),	//< Top resize handle was clicked. If only bit set, it was the top center.
-	ERightGrabberHitPart	= (1 << 2),	//< Right resize handle was clicked. If only bit set, it was the right center.
-	EBottomGrabberHitPart	= (1 << 3),	//< Bottom resize handle was clicked. If only bit set, it was the bottom center.
-	EContentHitPart			= (ELeftGrabberHitPart | ETopGrabberHitPart | ERightGrabberHitPart | EBottomGrabberHitPart),			//< No grab handle was clicked, but the click was inside the part's rectangle.
+	ENothingHitPart			= 0,		//!< Click was not on this object.
+	ELeftGrabberHitPart		= (1 << 0),	//!< One of the left resize handles was clicked. If only bit set, it was the left center.
+	ETopGrabberHitPart		= (1 << 1),	//!< Top resize handle was clicked. If only bit set, it was the top center.
+	ERightGrabberHitPart	= (1 << 2),	//!< Right resize handle was clicked. If only bit set, it was the right center.
+	EBottomGrabberHitPart	= (1 << 3),	//!< Bottom resize handle was clicked. If only bit set, it was the bottom center.
+	EContentHitPart			= (ELeftGrabberHitPart | ETopGrabberHitPart | ERightGrabberHitPart | EBottomGrabberHitPart),			//!< No grab handle was clicked, but the click was inside the part's rectangle.
 	EHorizontalMoveHitPart	= (ELeftGrabberHitPart | ERightGrabberHitPart),	//< Left & right == horizontal move with shift key.
 	EVerticalMoveHitPart	= (ETopGrabberHitPart | EBottomGrabberHitPart),	//< Top & bottom == vertical move with shift key.
-};
-typedef uint32_t THitPart;	//< ENothingHitPart or similar values to indicate resize/move actions.
+	ECustomGrabberHitPart	= (1 << 4)
+}; typedef uint32_t THitPart;
 
 
 /*! Indicate to the callback block how to display this coordinate. */
@@ -59,12 +60,11 @@ typedef enum
 } TGuidelineCallbackAction;
 
 
-enum
+typedef enum
 {
 	EHitTestWithoutHandles = 0,		//< Only tell us whether the part's rect was hit (used when deciding which object to select, when handles are not visible yet).
 	EHitTestHandlesToo				//< The object is selected, the resize grabbers are visible, and should be hit-tested, too.
-};
-typedef uint8_t	THitTestHandlesFlag;	//< Modify the hit-testing behaviour of the function. Values like EHitTestWithoutHandles.
+} THitTestHandlesFlag;	//< Modify the hit-testing behaviour of the function. Values like EHitTestWithoutHandles.
 
 
 // 0 is top/left alignment, i.e. the default that you'd expect from HyperCard:
@@ -174,11 +174,15 @@ public:
 	
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	
-	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo );	// Stack-relative coordinates relative to top left, descending down and right.
+	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo, LEOInteger *outCustomHandleIndex );	// Stack-relative coordinates relative to top left, descending down and right.
 	virtual bool				GetRectForHandle( THitPart inDesiredPart, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom );
 	virtual LEONumber			GetHandleSize( bool *outAllowSideHandles, bool *outAllowCornerHandles );
+	virtual LEOInteger			GetNumCustomHandles()			{ return -1; };	// -1 means no custom handles, use the standard 8. 0 means no handles *at all*.
+	virtual void				SetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber x, LEONumber y )	{};
+	virtual void				GetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber *outX, LEONumber *outY )	{};
+	virtual void				GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom )	{};
 
-	virtual void				Grab( THitPart inHitPart, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// If the callback coord is LLONG_MAX and bool is TRUE, this means tracking has finished and you should remove all guidelines from the screen. If bool is FALSE in this situation, it just means we're starting a new set of guidelines.
+	virtual void				Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );
 	virtual std::string			GetDisplayName()	{ return GenerateDisplayName( GetIdentityForDump() ); };
 	
 	virtual void				IncrementChangeCount();
