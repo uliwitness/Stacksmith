@@ -180,7 +180,7 @@ public:
 	virtual LEOInteger			GetNumCustomHandles()			{ return -1; };	// -1 means no custom handles, use the standard 8. 0 means no handles *at all*.
 	virtual void				SetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber x, LEONumber y )	{};
 	virtual void				GetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber *outX, LEONumber *outY )	{};
-	virtual void				GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom )	{};
+	virtual void				GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom );
 
 	virtual void				Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );
 	virtual std::string			GetDisplayName()	{ return GenerateDisplayName( GetIdentityForDump() ); };

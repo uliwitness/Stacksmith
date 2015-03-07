@@ -41,7 +41,8 @@ namespace Carlson {
 		
 		virtual bool			CanBeEditedWithTool( TTool inTool );
 		virtual LEOInteger		GetNumCustomHandles();	// -1 means no custom handles, use the standard 8.
-		virtual void			GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom );
+		virtual void			SetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber x, LEONumber y );
+		virtual void			GetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber *outX, LEONumber *outY );
 		
 		virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 		virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );

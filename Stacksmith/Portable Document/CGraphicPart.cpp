@@ -297,15 +297,26 @@ LEOInteger	CGraphicPart::GetNumCustomHandles()
 }
 
 
-void	CGraphicPart::GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom )
+void	CGraphicPart::SetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber x, LEONumber y )
 {
-	bool		outAllowSideHandles, outAllowCornerHandles;
-	LEONumber	handleSize = GetHandleSize( &outAllowSideHandles, &outAllowCornerHandles );
-	*outLeft = mPoints[idx].x +GetLeft() -truncf(handleSize /2);
-	*outRight = (*outLeft) + handleSize;
-	*outTop = mPoints[idx].y +GetTop() -truncf(handleSize /2);
-	*outBottom = (*outTop) + handleSize;
+	CPathSegment& currPoint = mPoints[idx];
+	
+	currPoint.x = x -GetLeft();
+	currPoint.y = y -GetTop();
+	
+	SizeToFit();
+	IncrementChangeCount();
 }
+
+
+void	CGraphicPart::GetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber *outX, LEONumber *outY )
+{
+	const CPathSegment& currPoint = mPoints[idx];
+	
+	*outX = currPoint.x +GetLeft();
+	*outY = currPoint.y +GetTop();
+}
+
 
 
 void	CGraphicPart::DumpProperties( size_t inIndentLevel )

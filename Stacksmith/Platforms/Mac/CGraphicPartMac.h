@@ -44,6 +44,7 @@ public:
 
 	virtual void		AddPoint( LEONumber x, LEONumber y, LEONumber lineWidth );
 	virtual void		UpdateLastPoint( LEONumber x, LEONumber y, LEONumber lineWidth );
+	virtual void		SetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber x, LEONumber y );
 
 protected:
 	void				RebuildViewLayerPath();

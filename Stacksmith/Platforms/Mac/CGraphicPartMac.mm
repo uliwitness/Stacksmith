@@ -213,3 +213,11 @@ void	CGraphicPartMac::UpdateLastPoint( LEONumber x, LEONumber y, LEONumber lineW
 }
 
 
+void	CGraphicPartMac::SetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber x, LEONumber y )
+{
+	CGraphicPart::SetPositionOfCustomHandleAtIndex( idx, x, y );
+	
+	RebuildViewLayerPath();
+}
+
+

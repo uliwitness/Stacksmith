@@ -530,7 +530,7 @@ THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag
 		LEOInteger	numCustomHandles = GetNumCustomHandles();
 		if( numCustomHandles >= 0 )
 		{
-			for( LEOInteger n = 0; x < numCustomHandles; x++ )
+			for( LEOInteger n = 0; n < numCustomHandles; n++ )
 			{
 				LEONumber	l, t, r, b;
 				GetRectForCustomHandle( n, &l, &t, &r, &b );
@@ -650,6 +650,19 @@ bool	CPart::GetRectForHandle( THitPart inDesiredPart, LEONumber *outLeft, LEONum
 		return false;	// Minimal is only lower right handle.
 	
 	return true;
+}
+
+
+void	CPart::GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom )
+{
+	bool		outAllowSideHandles, outAllowCornerHandles;
+	LEONumber	handleSize = GetHandleSize( &outAllowSideHandles, &outAllowCornerHandles );
+	LEONumber	x = 0, y = 0;
+	GetPositionOfCustomHandleAtIndex( idx, &x, &y );
+	*outLeft = x -truncf(handleSize /2);
+	*outRight = (*outLeft) + handleSize;
+	*outTop = y -truncf(handleSize /2);
+	*outBottom = (*outTop) + handleSize;
 }
 
 
