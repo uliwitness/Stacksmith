@@ -14,6 +14,7 @@
 #include "CMacPartBase.h"
 #include "CGraphicPart.h"
 #include "CAlert.h"
+#include "CCursor.h"
 #import "ULIHighlightingButton.h"
 #import "WILDCardInfoViewController.h"
 #import "WILDBackgroundInfoViewController.h"
@@ -285,60 +286,89 @@ using namespace Carlson;
 		
 	[mOwningStackWindowController drawBoundingBoxes];
 
-	NSUInteger	evtMask = NSLeftMouseUpMask | NSLeftMouseDraggedMask;
-	if( theEvt.buttonNumber == 1 )
-		evtMask = NSRightMouseUpMask | NSRightMouseDraggedMask;
-	if( theEvt.buttonNumber > 1 )
-		evtMask = NSOtherMouseUpMask | NSOtherMouseDraggedMask;
-	NSAutoreleasePool	*	pool = [NSAutoreleasePool new];
-	BOOL					keepGoing = YES;
-	while( keepGoing )
+	CCursor::Grab( (int)theEvt.buttonNumber, [theEvt,hitObject,currentTool,dragMessage,self]( LEONumber screenX, LEONumber screenY, LEONumber pressure )
 	{
-		NSEvent	*	loopEvt = [[NSApplication sharedApplication] nextEventMatchingMask: evtMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
-		if( loopEvt )
+		LEONumber	x = screenX -self.window.frame.origin.x;
+		LEONumber	y = screenY -(self.window.screen.frame.size.height -NSMaxY([self.window contentRectForFrameRect: self.window.frame]));
+		if( dragMessage )
 		{
-			hitPos = [self convertPoint: [loopEvt locationInWindow] fromView: nil];
-			switch( loopEvt.type )
-			{
-				case NSLeftMouseUp:
-				case NSRightMouseUp:
-				case NSOtherMouseUp:
-					keepGoing = NO;
-					break;
-				case NSLeftMouseDragged:
-				case NSRightMouseDragged:
-				case NSOtherMouseDragged:
-				{
-					if( dragMessage )
-					{
-						CAutoreleasePool	cppPool;
-						hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
-					}
-					else if( currentTool == EBezierPathTool )
-					{
-						CGraphicPart*thePart = (CGraphicPart*)hitObject;
-						thePart->UpdateLastPoint( hitPos.x, hitPos.y, 1 );	// +++ Only works cuz we know the part rect is at 0,0.
-					}
-					else
-					{
-						CPart*thePart = (CPart*)hitObject;
-						thePart->SetRect( thePart->GetLeft(), thePart->GetTop(), hitPos.x, hitPos.y );
-					}
-					break;
-				}
-				
-				default:
-					break;
-			}
-			
-			[pool release];
-			pool = [NSAutoreleasePool new];
+			CAutoreleasePool	cppPool;
+			hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
+		}
+		else if( currentTool == EBezierPathTool )
+		{
+			CGraphicPart*thePart = (CGraphicPart*)hitObject;
+			if( pressure <= 0 )	// 0 *while* dragging without a mouse up? The pointing device probably can't report pressure.
+				pressure = 1.0;
+			thePart->UpdateLastPoint( x, y, pressure * mStack->GetLineSize() );	// +++ Only works cuz we know the part rect is at 0,0.
+		}
+		else
+		{
+			CPart*thePart = (CPart*)hitObject;
+			thePart->SetRect( thePart->GetLeft(), thePart->GetTop(), x, y );
 		}
 		
-		if( ([NSEvent pressedMouseButtons] & (1 << [theEvt buttonNumber])) == 0 )
-			keepGoing = NO;
-	}
-	[pool release];
+		return true;
+	} );
+
+//	NSUInteger	evtMask = NSLeftMouseUpMask | NSLeftMouseDraggedMask;
+//	if( theEvt.buttonNumber == 1 )
+//		evtMask = NSRightMouseUpMask | NSRightMouseDraggedMask;
+//	if( theEvt.buttonNumber > 1 )
+//		evtMask = NSOtherMouseUpMask | NSOtherMouseDraggedMask;
+//	NSPoint					startPt = [self convertPoint: [theEvt locationInWindow] fromView: nil];
+//	NSAutoreleasePool	*	pool = [NSAutoreleasePool new];
+//	BOOL					keepGoing = YES;
+//	while( keepGoing )
+//	{
+//		NSEvent	*	loopEvt = [[NSApplication sharedApplication] nextEventMatchingMask: evtMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
+//		if( loopEvt )
+//		{
+//			hitPos = [self convertPoint: [loopEvt locationInWindow] fromView: nil];
+//			switch( loopEvt.type )
+//			{
+//				case NSLeftMouseUp:
+//				case NSRightMouseUp:
+//				case NSOtherMouseUp:
+//					keepGoing = NO;
+//					break;
+//				case NSLeftMouseDragged:
+//				case NSRightMouseDragged:
+//				case NSOtherMouseDragged:
+//				{
+//					if( dragMessage )
+//					{
+//						CAutoreleasePool	cppPool;
+//						hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
+//					}
+//					else if( currentTool == EBezierPathTool )
+//					{
+//						CGraphicPart*thePart = (CGraphicPart*)hitObject;
+//						LEONumber	pressure = loopEvt.pressure;
+//						if( pressure <= 0 )	// 0 *while* dragging without a mouse up? The pointing device probably can't report pressure.
+//							pressure = 1.0;
+//						thePart->UpdateLastPoint( hitPos.x, hitPos.y, loopEvt.pressure * mStack->GetLineSize() );	// +++ Only works cuz we know the part rect is at 0,0.
+//					}
+//					else
+//					{
+//						CPart*thePart = (CPart*)hitObject;
+//						thePart->SetRect( thePart->GetLeft(), thePart->GetTop(), hitPos.x, hitPos.y );
+//					}
+//					break;
+//				}
+//				
+//				default:
+//					break;
+//			}
+//			
+//			[pool release];
+//			pool = [NSAutoreleasePool new];
+//		}
+//		
+//		if( ([NSEvent pressedMouseButtons] & (1 << [theEvt buttonNumber])) == 0 )
+//			keepGoing = NO;
+//	}
+//	[pool release];
 
 	if( upMessage )
 	{

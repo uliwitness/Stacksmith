@@ -674,11 +674,8 @@ void	CPart::Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::funct
 	if( inHitPart & ECustomGrabberHitPart )
 		GetPositionOfCustomHandleAtIndex( customGrabPartIndex, &originalGHX, &originalGHY );
 	CCursor::GetGlobalPosition( &oldX, &oldY );
-	CCursor::Grab( [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,addGuidelineBlock,originalGHX,originalGHY,customGrabPartIndex,this]()
+	CCursor::Grab( 0, [oldL,oldT,oldB,oldR,oldX,oldY,inHitPart,addGuidelineBlock,originalGHX,originalGHY,customGrabPartIndex,this]( LEONumber x, LEONumber y, LEONumber pressure )
 	{
-		LEONumber	x = 0, y = 0;
-		CCursor::GetGlobalPosition( &x, &y );
-		
 		if( inHitPart & ECustomGrabberHitPart )
 		{
 			SetPositionOfCustomHandleAtIndex( customGrabPartIndex, originalGHX +(x -oldX), originalGHY +(y -oldY) );
@@ -694,6 +691,8 @@ void	CPart::Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::funct
 			SetRect( l, t, r, b );
 		}
 		IncrementChangeCount();
+		
+		return true;
 	});
 	addGuidelineBlock( LLONG_MAX, EGuidelineCallbackActionClearAllDone );
 //	std::cout << "Done tracking." << std::endl;
