@@ -294,8 +294,6 @@ void	CGraphicPart::SizeToFit()
 			SetRect( left, top, right, bottom );
 			IncrementChangeCount();
 		}
-		
-		printf( "size=%f,%f rect=%f,%f,%f,%f\n", right -left, bottom -top,left, top, right, bottom );
 	}
 }
 
