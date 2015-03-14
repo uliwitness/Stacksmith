@@ -270,6 +270,11 @@ void	CGraphicPart::SizeToFit()
 				right = (currPoint.x +originalLeft);
 		}
 		
+		left = truncf(left) -GetLineWidth();
+		right = ceilf(right) +GetLineWidth();
+		top = truncf(top) -GetLineWidth();
+		bottom = ceilf(bottom) +GetLineWidth();
+		
 		LEONumber	xoffs = originalLeft -left, yoffs = originalTop -top;
 		
 		if( xoffs != 0 || yoffs != 0 )
