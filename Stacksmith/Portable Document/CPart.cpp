@@ -678,7 +678,7 @@ void	CPart::Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::funct
 	{
 		if( inHitPart & ECustomGrabberHitPart )
 		{
-			SetPositionOfCustomHandleAtIndex( customGrabPartIndex, originalGHX +(x -oldX), originalGHY +(y -oldY) );
+			SetPositionOfCustomHandleAtIndex( customGrabPartIndex, originalGHX +truncf(x -oldX), originalGHY +truncf(y -oldY) );
 		}
 		else
 		{
