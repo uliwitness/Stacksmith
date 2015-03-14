@@ -546,6 +546,7 @@ struct WILDAppDelegateValidatableButtonInfo
 		{ mOvalToolButton, NO },
 		{ mRectangleToolButton, NO },
 		{ mRoundrectToolButton, NO },
+		{ mLineToolButton, NO },
 		{ mBezierPathToolButton, NO },
 		{ mStackInfoButton, NO },
 		{ mBackgroundInfoButton, NO },

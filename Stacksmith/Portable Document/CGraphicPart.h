@@ -28,6 +28,7 @@ namespace Carlson {
 		EGraphicStyleOval,
 		EGraphicStyleRectangle,
 		EGraphicStyleRoundrect,
+		EGraphicStyleLine,
 		EGraphicStyleBezierPath,
 		EGraphicStyle_Last
 	} TGraphicStyle;

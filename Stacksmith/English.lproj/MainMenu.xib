@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
@@ -794,13 +794,14 @@
         <customObject id="556" customClass="WILDAppDelegate">
             <connections>
                 <outlet property="mBackgroundInfoButton" destination="1oD-UL-G2Q" id="juq-ao-iOa"/>
-                <outlet property="mBezierPathToolButton" destination="AyT-VH-Z46" id="d28-ju-YQo"/>
+                <outlet property="mBezierPathToolButton" destination="Pxd-Ed-7Tw" id="zPs-zQ-yjz"/>
                 <outlet property="mBrowseToolButton" destination="gIo-t9-M2n" id="bJG-DZ-yCV"/>
                 <outlet property="mCardInfoButton" destination="GPp-md-4F2" id="0fK-5b-dCv"/>
                 <outlet property="mEditBackgroundButton" destination="J38-Wh-F6i" id="YIF-09-H8k"/>
                 <outlet property="mEditTextToolButton" destination="O60-s9-3f9" id="oxx-1k-Zql"/>
                 <outlet property="mGoNextButton" destination="d9P-4H-e88" id="dVi-qB-qPz"/>
                 <outlet property="mGoPrevButton" destination="EFo-B7-AVP" id="T8l-Y7-uPy"/>
+                <outlet property="mLineToolButton" destination="AyT-VH-Z46" id="I8T-Vr-Awh"/>
                 <outlet property="mLockPseudoMenu" destination="DXo-F9-GAP" id="E2a-ue-3Jg"/>
                 <outlet property="mMessageBoxButton" destination="9ot-lO-F2x" id="SKT-cf-Jc2"/>
                 <outlet property="mMessageWatcherButton" destination="3Rl-eW-52o" id="ga6-Oe-571"/>
@@ -853,17 +854,17 @@
         <window title="Tools" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="2SR-K3-0lu" customClass="NSPanel">
             <windowStyleMask key="styleMask" utility="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES"/>
-            <rect key="contentRect" x="390" y="639" width="682" height="38"/>
+            <rect key="contentRect" x="390" y="639" width="817" height="38"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1366" height="745"/>
             <view key="contentView" id="doO-Tg-Kjq">
-                <rect key="frame" x="0.0" y="1" width="682" height="38"/>
+                <rect key="frame" x="0.0" y="0.0" width="817" height="38"/>
                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                 <subviews>
                     <box autoresizesSubviews="NO" transparent="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="xFC-RG-244">
-                        <rect key="frame" x="0.0" y="0.0" width="682" height="38"/>
+                        <rect key="frame" x="0.0" y="0.0" width="817" height="38"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="0.0" y="0.0" width="682" height="38"/>
+                            <rect key="frame" x="0.0" y="0.0" width="817" height="38"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button toolTip="Browse" verticalHuggingPriority="750" id="gIo-t9-M2n">
@@ -878,7 +879,7 @@
                                     </connections>
                                 </button>
                                 <button toolTip="Next Card" verticalHuggingPriority="750" id="d9P-4H-e88">
-                                    <rect key="frame" x="646" y="3" width="32" height="32"/>
+                                    <rect key="frame" x="780" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ICON_26425" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ruq-kX-9Nx" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -889,7 +890,7 @@
                                     </connections>
                                 </button>
                                 <button toolTip="Previous Card" verticalHuggingPriority="750" id="EFo-B7-AVP">
-                                    <rect key="frame" x="611" y="3" width="32" height="32"/>
+                                    <rect key="frame" x="745" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ICON_902" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uTJ-qZ-qaj" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -911,7 +912,7 @@
                                     </connections>
                                 </button>
                                 <customView id="tfF-pF-teQ">
-                                    <rect key="frame" x="262" y="-1" width="158" height="39"/>
+                                    <rect key="frame" x="329" y="-1" width="158" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <button toolTip="Stack Properties" verticalHuggingPriority="750" id="wkz-0c-d3L">
@@ -1005,7 +1006,7 @@
                                     </connections>
                                 </button>
                                 <customView id="CUv-2C-iA0">
-                                    <rect key="frame" x="456" y="-1" width="132" height="39"/>
+                                    <rect key="frame" x="590" y="-1" width="132" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <button toolTip="Stack Canvas" verticalHuggingPriority="750" id="B8l-FW-2Oq">
@@ -1054,6 +1055,17 @@
                                         <action selector="takeToolFromTag:" target="-1" id="JO7-BT-gUu"/>
                                     </connections>
                                 </button>
+                                <button toolTip="Edit Text" verticalHuggingPriority="750" tag="7" id="Pxd-Ed-7Tw">
+                                    <rect key="frame" x="248" y="3" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintPathTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DPr-Kh-xCX" customClass="WILDToolButtonCell">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="takeToolFromTag:" target="-1" id="Gu9-O8-I8M"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -1061,7 +1073,7 @@
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="842" y="297"/>
+            <point key="canvasLocation" x="909.5" y="297"/>
         </window>
     </objects>
     <resources>
@@ -1080,6 +1092,7 @@
         <image name="StackIcon" width="512" height="512"/>
         <image name="UKPaintLineTool" width="48" height="48"/>
         <image name="UKPaintOvalTool" width="48" height="48"/>
+        <image name="UKPaintPathTool" width="48" height="48"/>
         <image name="UKPaintRectTool" width="48" height="48"/>
         <image name="UKPaintRoundrectTool" width="48" height="48"/>
     </resources>

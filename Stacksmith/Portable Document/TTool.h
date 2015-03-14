@@ -23,6 +23,7 @@ enum
 	EOvalTool,
 	ERectangleTool,
 	ERoundrectTool,
+	ELineTool,
 	EBezierPathTool,
 	ETool_Last
 };

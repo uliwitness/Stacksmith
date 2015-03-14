@@ -256,6 +256,25 @@ using namespace Carlson;
 		thePart->SetSelected(true);
 		hitObject = thePart;
 	}
+	else if( currentTool == ELineTool && hitObject == theCard )
+	{
+		CLayer		*	owner = mStack->GetCurrentLayer();
+		CGraphicPart*	thePart = (CGraphicPart*) CPart::GetPartCreatorForType("graphic")->NewPartInOwner( owner );
+		thePart->SetID( owner->GetUniqueIDForPart() );
+		thePart->SetRect( 0, 0, mStack->GetCardWidth(), mStack->GetCardHeight() );
+		thePart->SetStyle(EGraphicStyleLine);
+		owner->AddPart(thePart);
+		LEONumber	pressure = theEvt.pressure;
+		if( pressure <= 0 )
+			pressure = 1;
+		thePart->AddPoint( hitPos.x, hitPos.y, pressure * mStack->GetLineSize() );	// Start point of line. +++ Only works cuz we know the part rect is at 0,0.
+		thePart->AddPoint( hitPos.x, hitPos.y, pressure * mStack->GetLineSize() );	// End point of line which we update while tracking. +++ Only works cuz we know the part rect is at 0,0.
+		thePart->Release();
+		thePart->IncrementChangeCount();
+		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		thePart->SetSelected(true);
+		hitObject = thePart;
+	}
 	else if( currentTool == EBezierPathTool && hitObject == theCard )
 	{
 		CLayer		*	owner = mStack->GetCurrentLayer();
@@ -264,8 +283,10 @@ using namespace Carlson;
 		thePart->SetRect( 0, 0, mStack->GetCardWidth(), mStack->GetCardHeight() );
 		thePart->SetStyle(EGraphicStyleBezierPath);
 		owner->AddPart(thePart);
-		thePart->AddPoint( hitPos.x, hitPos.y, 1 );	// Start point of line. +++ Only works cuz we know the part rect is at 0,0.
-		thePart->AddPoint( hitPos.x, hitPos.y, 1 );	// End point of line which we update while tracking. +++ Only works cuz we know the part rect is at 0,0.
+		LEONumber	pressure = theEvt.pressure;
+		if( pressure <= 0 )
+			pressure = 1;
+		thePart->AddPoint( hitPos.x, hitPos.y, pressure * mStack->GetLineSize() );	// Start point of line. +++ Only works cuz we know the part rect is at 0,0.
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
@@ -295,12 +316,19 @@ using namespace Carlson;
 			CAutoreleasePool	cppPool;
 			hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
 		}
-		else if( currentTool == EBezierPathTool )
+		else if( currentTool == ELineTool )
 		{
 			CGraphicPart*thePart = (CGraphicPart*)hitObject;
 			if( pressure <= 0 )	// 0 *while* dragging without a mouse up? The pointing device probably can't report pressure.
 				pressure = 1.0;
 			thePart->UpdateLastPoint( x, y, pressure * mStack->GetLineSize() );	// +++ Only works cuz we know the part rect is at 0,0.
+		}
+		else if( currentTool == EBezierPathTool )
+		{
+			CGraphicPart*thePart = (CGraphicPart*)hitObject;
+			if( pressure <= 0 )	// 0 *while* dragging without a mouse up? The pointing device probably can't report pressure.
+				pressure = 1.0;
+			thePart->AddPoint( x, y, pressure * mStack->GetLineSize() );	// +++ Only works cuz we know the part rect is at 0,0.
 		}
 		else
 		{
@@ -316,7 +344,7 @@ using namespace Carlson;
 		CAutoreleasePool	cppPool;
 		hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
 	}
-	else if( currentTool == EBezierPathTool )
+	else if( currentTool == ELineTool || currentTool == EBezierPathTool )
 	{
 		((CGraphicPart*)hitObject)->SizeToFit();	// Pull part rect snugly around the actual drawing.
 	}

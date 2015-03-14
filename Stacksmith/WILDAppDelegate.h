@@ -26,6 +26,7 @@
 	IBOutlet NSButton			*			mOvalToolButton;
 	IBOutlet NSButton			*			mRectangleToolButton;
 	IBOutlet NSButton			*			mRoundrectToolButton;
+	IBOutlet NSButton			*			mLineToolButton;
 	IBOutlet NSButton			*			mBezierPathToolButton;
 	IBOutlet NSButton			*			mStackInfoButton;
 	IBOutlet NSButton			*			mBackgroundInfoButton;

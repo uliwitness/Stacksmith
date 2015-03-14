@@ -65,7 +65,7 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 		localBox = NSInsetRect( localBox, mLineWidth, mLineWidth );
 		theLayer.path = (CGPathRef)[(id) CGPathCreateWithEllipseInRect( localBox, NULL) autorelease];
 	}
-	else if( mStyle == EGraphicStyleBezierPath )
+	else if( mStyle == EGraphicStyleBezierPath || mStyle == EGraphicStyleLine )
 	{
 		CGMutablePathRef	thePath = CGPathCreateMutable();
 		if( mPoints.size() > 0 )

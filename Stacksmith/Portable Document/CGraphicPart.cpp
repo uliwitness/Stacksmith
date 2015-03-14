@@ -23,6 +23,7 @@ static const char*	sGraphicStyleStrings[EGraphicStyle_Last +1] =
 	"rectangle",
 	"roundrect",
 	"oval",
+	"line",
 	"bezierpath",
 	"*UNKNOWN*"
 };
@@ -244,6 +245,8 @@ bool	CGraphicPart::CanBeEditedWithTool( TTool inTool )
 		return true;
 	if( mStyle == EGraphicStyleOval && inTool == EOvalTool )
 		return true;
+	if( mStyle == EGraphicStyleLine && inTool == ELineTool )
+		return true;
 	if( mStyle == EGraphicStyleBezierPath && inTool == EBezierPathTool )
 		return true;
 	
@@ -253,7 +256,7 @@ bool	CGraphicPart::CanBeEditedWithTool( TTool inTool )
 
 void	CGraphicPart::SizeToFit()
 {
-	if( mStyle == EGraphicStyleBezierPath )	// All other styles' sizes are defined by the part rect.
+	if( mStyle == EGraphicStyleLine || mStyle == EGraphicStyleBezierPath )	// All other styles' sizes are defined by the part rect.
 	{
 		LEONumber	originalTop = GetTop(), originalLeft = GetLeft(),
 					originalBottom = GetBottom(), originalRight = GetRight();
@@ -299,7 +302,7 @@ void	CGraphicPart::SizeToFit()
 
 LEOInteger	CGraphicPart::GetNumCustomHandles()
 {
-	if( mStyle == EGraphicStyleBezierPath )
+	if( mStyle == EGraphicStyleLine || mStyle == EGraphicStyleBezierPath )
 	{
 		return mPoints.size();
 	}
