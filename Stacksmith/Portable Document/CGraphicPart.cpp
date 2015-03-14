@@ -255,8 +255,9 @@ void	CGraphicPart::SizeToFit()
 {
 	if( mStyle == EGraphicStyleBezierPath )	// All other styles' sizes are defined by the part rect.
 	{
-		LEONumber	originalTop = GetTop(), originalLeft = GetLeft();
-		LEONumber	top = GetBottom(), bottom = GetTop(), left = GetRight(), right = GetLeft();
+		LEONumber	originalTop = GetTop(), originalLeft = GetLeft(),
+					originalBottom = GetBottom(), originalRight = GetRight();
+		LEONumber	top = originalBottom, bottom = originalTop, left = originalRight, right = originalLeft;	// Set to opposite sides so we can increment to calc min/max.
 		for( const CPathSegment& currPoint : mPoints )
 		{
 			if( (currPoint.y +originalTop) < top )
@@ -269,7 +270,7 @@ void	CGraphicPart::SizeToFit()
 				right = (currPoint.x +originalLeft);
 		}
 		
-		LEONumber	xoffs = GetLeft() -left, yoffs = GetTop() -top;
+		LEONumber	xoffs = originalLeft -left, yoffs = originalTop -top;
 		
 		if( xoffs != 0 || yoffs != 0 )
 		{
@@ -278,10 +279,15 @@ void	CGraphicPart::SizeToFit()
 				currPoint.x += xoffs;
 				currPoint.y += yoffs;
 			}
-			IncrementChangeCount();
-			
-			SetRect( left, top, right, bottom );
 		}
+		
+		if( left != originalLeft || right != originalRight || top != originalTop || bottom != originalBottom )
+		{
+			SetRect( left, top, right, bottom );
+			IncrementChangeCount();
+		}
+		
+		printf( "size=%f,%f rect=%f,%f,%f,%f\n", right -left, bottom -top,left, top, right, bottom );
 	}
 }
 
