@@ -31,6 +31,8 @@ static const char*		sToolNames[ETool_Last +1] =
 	"oval",
 	"rectangle",
 	"roundrect",
+	"line",
+	"bezierpath",
 	"*UNKNOWN*"
 };
 
