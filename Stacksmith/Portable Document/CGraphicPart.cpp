@@ -52,17 +52,21 @@ void	CGraphicPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	if( mStyle == EGraphicStyle_Last )
 		mStyle = EGraphicStyleRectangle;
 	
-//	mSelectedLines.erase(mSelectedLines.begin(), mSelectedLines.end());
-//	tinyxml2::XMLElement * selLines = inElement->FirstChildElement("selectedLines");
-//	if( selLines )
-//	{
-//		tinyxml2::XMLElement * currSelLine = selLines->FirstChildElement("integer");
-//		while( currSelLine )
-//		{
-//			mSelectedLines.insert( CTinyXMLUtils::GetLongLongNamed( currSelLine, NULL ) );
-//			currSelLine = currSelLine->NextSiblingElement( "integer" );
-//		}
-//	}
+	mPoints.erase(mPoints.begin(), mPoints.end());
+	tinyxml2::XMLElement * selLines = inElement->FirstChildElement("path");
+	if( selLines )
+	{
+		tinyxml2::XMLElement * currSelLine = selLines->FirstChildElement("segment");
+		while( currSelLine )
+		{
+			LEONumber		x = CTinyXMLUtils::GetDoubleNamed( currSelLine, "x" );
+			LEONumber		y = CTinyXMLUtils::GetDoubleNamed( currSelLine, "y" );
+			LEONumber		lineWidth = CTinyXMLUtils::GetDoubleNamed( currSelLine, "lineWidth", 1.0 );
+			CPathSegment	segment = { x, y, lineWidth };
+			mPoints.push_back( segment );
+			currSelLine = currSelLine->NextSiblingElement( "segment" );
+		}
+	}
 }
 
 
@@ -72,17 +76,22 @@ void	CGraphicPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	
 	CTinyXMLUtils::AddStringNamed( inElement, sGraphicStyleStrings[mStyle], "style" );
 
-//	tinyxml2::XMLDocument* document = inElement->GetDocument();
-//	
-//	if( !mSelectedLines.empty() )
-//	{
-//		elem = document->NewElement("selectedLines");
-//		for( size_t currLine : mSelectedLines )
-//		{
-//			CTinyXMLUtils::AddLongLongNamed( elem, currLine, "integer" );
-//		}
-//		inElement->InsertEndChild(elem);
-//	}
+	tinyxml2::XMLDocument* document = inElement->GetDocument();
+	
+	if( !mPoints.empty() )
+	{
+		tinyxml2::XMLElement	*	elem = document->NewElement("path");
+		for( const CPathSegment& currLine : mPoints )
+		{
+			tinyxml2::XMLElement	*	segmentElem = document->NewElement("segment");
+			CTinyXMLUtils::AddDoubleNamed( segmentElem, currLine.x, "x" );
+			CTinyXMLUtils::AddDoubleNamed( segmentElem, currLine.y, "y" );
+			if( currLine.lineWidth == 1.0 )
+				CTinyXMLUtils::AddDoubleNamed( segmentElem, currLine.lineWidth, "lineWidth" );
+			elem->InsertEndChild(segmentElem);
+		}
+		inElement->InsertEndChild(elem);
+	}
 }
 
 
