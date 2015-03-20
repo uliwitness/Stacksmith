@@ -71,6 +71,8 @@ public:
 	virtual void				SelectedPartChanged();
 	virtual void				SetCardWidth( int n );
 	virtual void				SetCardHeight( int n );
+	
+	virtual CUndoStack*			GetUndoStack();
 
 	virtual void				ClearAllGuidelines( bool inTrackingDone = false );
 

@@ -32,13 +32,16 @@ typedef uint8_t		TEvenIfVisible;
 
 enum
 {
-	EStackStyleStandard,	// Standard document window.
-	EStackStyleRectangle,	// Window with a simple border.
-	EStackStylePopup,		// Pop-up utility window, like popovers on Mac/iOS. May be possible to tear one off as some kind of floating palette, or OSes may just make them palettes.
-	EStackStylePalette,		// Floating utility window with additional stuff in it.
+	EStackStyleStandard,	//!< Standard document window.
+	EStackStyleRectangle,	//!< Window with a simple border.
+	EStackStylePopup,		//!< Pop-up utility window, like popovers on Mac/iOS. May be possible to tear one off as some kind of floating palette, or OSes may just make them palettes.
+	EStackStylePalette,		//!< Floating utility window with additional stuff in it.
 	EStackStyle_Last
 };
 typedef uint16_t	TStackStyle;
+
+
+class CUndoStack;
 
 
 class CStack : public CConcreteObject
@@ -47,7 +50,7 @@ public:
 	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mCantPeek(false), mCantAbort(false), mPrivateAccess(false), mCantDelete(false), mCantModify(false), mResizable(false), mStyle(EStackStyleStandard), mUserLevel(5), mCardWidth(512), mCardHeight(342), mLoading(false), mLoaded(false), mPeeking(false), mCardIDSeed(0), mEditingBackground(false), mCurrentTool(EBrowseTool), mChangeCount(0),mLineSize(1) { mName = inName; mDocument = inDocument; /* printf("stack %s created.\n", DebugNameForPointer(this) ); */ };
 	
 	virtual void	Load( std::function<void(CStack*)> inCompletionBlock );
-	void			SetLoaded( bool n )	{ mLoaded = n; };	// Used when creating a brand new stack in RAM that's never been saved before.
+	void			SetLoaded( bool n )	{ mLoaded = n; };	//!< Used when creating a brand new stack in RAM that's never been saved before.
 	virtual bool	IsLoaded()			{ return mLoaded; };
 	virtual bool	Save( const std::string& inPackagePath );
 	
@@ -55,9 +58,9 @@ public:
 	std::string			GetURL()		{ return mURL; };
 	std::string			GetFileName()	{ return mFileName; };
 	virtual std::string	GetTypeName()	{ return std::string("stack"); };
-	virtual bool		ShowHandlersForObjectType( std::string inTypeName )	{ return true; };	// Show all handlers in our popup, we may get them forwarded through the message path.
+	virtual bool		ShowHandlersForObjectType( std::string inTypeName )	{ return true; };	//!< Show all handlers in our popup, we may get them forwarded through the message path.
 	
-	void			AddCard( CCard* inCard );	// Add at end.
+	void			AddCard( CCard* inCard );	//!< Add at end.
 	void			InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard = NULL );	// If precedingCard == NULL insert at start.
 	void			RemoveCard( CCard* inCard );
 	size_t			GetNumCards()						{ return mCards.size(); };
@@ -70,10 +73,10 @@ public:
 	size_t			GetNumCardsWithBackground( CBackground* inBg );
 	CCard*			GetCardAtIndexWithBackground( size_t cardIdx, CBackground* inBg );
 	CCard*			AddNewCard();
-	bool			DeleteCard( CCard* inCard );	// May implicitly delete card's background if it was the only card with that background.
+	bool			DeleteCard( CCard* inCard );	//!< May implicitly delete card's background if it was the only card with that background.
 	virtual void	MarkedStateChangedOfCard( CCard* inCard );
 	
-	void			AddBackground( CBackground* inBackground );	// Add at end.
+	void			AddBackground( CBackground* inBackground );	//!< Add at end.
 	void			RemoveBackground( CBackground* inBg );
 	size_t			GetNumBackgrounds()					{ return mBackgrounds.size(); };
 	CBackground*	GetBackground( size_t inIndex )		{ if( inIndex >= mBackgrounds.size() ) return NULL; return mBackgrounds[inIndex]; };
@@ -81,10 +84,10 @@ public:
 	CBackground*	GetBackgroundByName( const char* inName );
 	size_t			GetIndexOfBackground( CBackground* inBackground );
 	void			SetIndexOfBackgroundTo( CBackground* inBg, size_t newIndex );
-	CCard*			AddNewCardWithBackground( CBackground* inBg = NULL );	// NULL inBg means create a new background.
+	CCard*			AddNewCardWithBackground( CBackground* inBg = NULL );	//!< NULL inBg means create a new background.
 	
-	virtual void	WakeUp()	{};	// The current card has started its timers etc.
-	virtual void	GoToSleep()	{};	// The current card has stopped its timers etc.
+	virtual void	WakeUp()	{};	//!< The current card has started its timers etc.
+	virtual void	GoToSleep()	{};	//!< The current card has stopped its timers etc.
 	
 	virtual void	SetCurrentCard( CCard* inCard );
 	virtual CCard*	GetCurrentCard()				{ return mCurrentCard; };
@@ -136,6 +139,8 @@ public:
 	virtual void	IncrementChangeCount();
 	virtual bool	GetNeedsToBeSaved();
 	
+	virtual CUndoStack*	GetUndoStack();
+	
 	virtual void	ClearAllGuidelines( bool inTrackingDone = false )	{ mHorizontalGuidelines.clear(); mVerticalGuidelines.clear(); };
 	virtual void	AddGuideline( long long inGuidelineCoord, bool inHorzNotVert )	{ if( inHorzNotVert ) mHorizontalGuidelines.push_back(inGuidelineCoord); else mVerticalGuidelines.push_back(inGuidelineCoord); };
 	virtual size_t	GetNumGuidelines()		{ return mHorizontalGuidelines.size() + mVerticalGuidelines.size(); };
@@ -147,8 +152,8 @@ public:
 	
 	// Allow code to trigger showing the UI:
 	virtual void	Show( TEvenIfVisible inEvenIfVisible )		{ mVisible = true; };
-
-	std::string		GetThumbnailName()						{ return mThumbnailName; };	// Empty string if we have no thumbnail.
+	
+	std::string		GetThumbnailName()						{ return mThumbnailName; };	//!< Empty string if we have no thumbnail.
 	void			SetThumbnailName( std::string inName )	{ mThumbnailName = inName; };
 	virtual void	SaveThumbnail();
 	virtual void	SaveThumbnailIfFirstCardOpen()			{};
@@ -170,40 +175,42 @@ protected:
 	~CStack();
 
 protected:
-	std::string					mURL;				// URL of the file backing this stack on disk.
-	std::string					mFileName;			// Partial path relative to containing .xstk package to our file (i.e. the one at mURL).
-	std::string					mThumbnailName;		// Name of image file where we save a thumbnail of the first card in the stack.
-	ObjectID					mStackID;			// Unique ID number of this stack in the document.
-	int							mUserLevel;			// Maximum user level for this stack.
-	int							mCardWidth;			// Size of cards in this stack.
-	int							mCardHeight;		// Size of cards in this stack.
-	bool						mCantPeek;			// Do we prevent "peeking" of button rects using Cmd-Option?
-	bool						mCantAbort;			// Do we prohibit Cmd-. from canceling scripts?
-	bool						mPrivateAccess;		// Do we require a password before opening this stack?
-	bool						mCantDelete;		// Are scripts allowed to delete this stack?
-	bool						mCantModify;		// Is this stack write-protected using the cantModify property?
-	bool						mResizable;			// Can the stack's window be resized by the user?
-	std::vector<CCardRef>		mCards;				// List of all cards in this stack.
-	std::vector<CBackgroundRef>	mBackgrounds;		// List of all backgrounds in this stack.
-	std::set<CCardRef>			mMarkedCards;		// List of all cards whose 'marked' property is true in this stack.
-	TStackStyle					mStyle;				// Window style.
+	std::string					mURL;				//!< URL of the file backing this stack on disk.
+	std::string					mFileName;			//!< Partial path relative to containing .xstk package to our file (i.e. the one at mURL).
+	std::string					mThumbnailName;		//!< Name of image file where we save a thumbnail of the first card in the stack.
+	ObjectID					mStackID;			//!< Unique ID number of this stack in the document.
+	int							mUserLevel;			//!< Maximum user level for this stack.
+	int							mCardWidth;			//!< Size of cards in this stack.
+	int							mCardHeight;		//!< Size of cards in this stack.
+	bool						mCantPeek;			//!< Do we prevent "peeking" of button rects using Cmd-Option?
+	bool						mCantAbort;			//!< Do we prohibit Cmd-. from canceling scripts?
+	bool						mPrivateAccess;		//!< Do we require a password before opening this stack?
+	bool						mCantDelete;		//!< Are scripts allowed to delete this stack?
+	bool						mCantModify;		//!< Is this stack write-protected using the cantModify property?
+	bool						mResizable;			//!< Can the stack's window be resized by the user?
+	std::vector<CCardRef>		mCards;				//!< List of all cards in this stack.
+	std::vector<CBackgroundRef>	mBackgrounds;		//!< List of all backgrounds in this stack.
+	std::set<CCardRef>			mMarkedCards;		//!< List of all cards whose 'marked' property is true in this stack.
+	TStackStyle					mStyle;				//!< Window style.
 	
-	bool						mLoading;			// Currently loading, not yet ready for use.
-	bool						mLoaded;			// Finished loading, ready for use.
-	bool						mPeeking;			// Are we currently showing the "peek" outline.
-	ObjectID					mCardIDSeed;		// ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
-	CCardRef					mCurrentCard;		// The card that is currently being shown in this stack's window.
+	bool						mLoading;			//!< Currently loading, not yet ready for use.
+	bool						mLoaded;			//!< Finished loading, ready for use.
+	bool						mPeeking;			//!< Are we currently showing the "peek" outline.
+	ObjectID					mCardIDSeed;		//!< ID number for next new card/background (unless already taken, then we'll add to it until we hit a free one).
+	CCardRef					mCurrentCard;		//!< The card that is currently being shown in this stack's window.
 	std::vector<std::function<void(CStack*)>>	mLoadCompletionBlocks;
-	bool						mEditingBackground;	// Are we editing the background, or are we showing the full mixed card/bg layers?
-	TTool						mCurrentTool;		// The tool that applies when clicking in this stack's window.
-	LEONumber					mLineSize;			// The width of new lines drawn in this window. (Or base width for pressure-sensitive pointing devices).
+	bool						mEditingBackground;	//!< Are we editing the background, or are we showing the full mixed card/bg layers?
+	TTool						mCurrentTool;		//!< The tool that applies when clicking in this stack's window.
+	LEONumber					mLineSize;			//!< The width of new lines drawn in this window. (Or base width for pressure-sensitive pointing devices).
 	size_t						mChangeCount;
-	bool						mVisible;			// Is this stack currently visible on screen?
-
-	std::vector<long long>		mHorizontalGuidelines;	// Temp. guidelines shown when moving/resizing objects on the card.
-	std::vector<long long>		mVerticalGuidelines;	// Temp. guidelines shown when moving/resizing objects on the card.
+	bool						mVisible;			//!< Is this stack currently visible on screen?
 	
-	static CStack*							sFrontStack;		// The stack whose window is currently frontmost and will e.g. receive messages from the message box.
+	CUndoStack*					mUndoStack;			//!< Add undo blocks to this object.
+	
+	std::vector<long long>		mHorizontalGuidelines;	//!< Temp. guidelines shown when moving/resizing objects on the card.
+	std::vector<long long>		mVerticalGuidelines;	//!< Temp. guidelines shown when moving/resizing objects on the card.
+	
+	static CStack*							sFrontStack;		//!< The stack whose window is currently frontmost and will e.g. receive messages from the message box.
 	static std::function<void(CStack*)>		sFrontStackChangedBlock;
 };
 

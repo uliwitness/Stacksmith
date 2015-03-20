@@ -295,6 +295,7 @@
 		555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103613881DB700E26037 /* UKPaintShapeTool.tiff */; };
 		555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 555F103713881DB700E26037 /* UKPaintTextTool.tiff */; };
 		555FDFCF1412F39B00A035E7 /* UTF8UTF32Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */; };
+		55612A5D1ABB880C006C0730 /* CUndoStack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55612A5B1ABB880C006C0730 /* CUndoStack.mm */; };
 		556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.mm */; };
 		556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */; };
 		55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.cpp */; };
@@ -915,6 +916,8 @@
 		555F103713881DB700E26037 /* UKPaintTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintTextTool.tiff; path = ../UKPaintView/UKPaintTextTool.tiff; sourceTree = "<group>"; };
 		555FDFCE1412F39B00A035E7 /* UTF8UTF32Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UTF8UTF32Utilities.c; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.c; sourceTree = "<group>"; };
 		555FDFD01412F3C200A035E7 /* UTF8UTF32Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF8UTF32Utilities.h; path = ../../../Forge/Leonie/generic/UTF8UTF32Utilities.h; sourceTree = "<group>"; };
+		55612A5B1ABB880C006C0730 /* CUndoStack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CUndoStack.mm; path = Platforms/Mac/CUndoStack.mm; sourceTree = "<group>"; };
+		55612A5C1ABB880C006C0730 /* CUndoStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CUndoStack.h; path = Platforms/Mac/CUndoStack.h; sourceTree = "<group>"; };
 		556866561359C47100C364D6 /* WILDGlobalProperties.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDGlobalProperties.mm; path = Instructions/WILDGlobalProperties.mm; sourceTree = SOURCE_ROOT; };
 		5568665C1359C82200C364D6 /* ForgeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgeTypes.h; path = ../../ForgeTypes.h; sourceTree = "<group>"; };
 		5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostCommands.cpp; path = Instructions/WILDHostCommands.cpp; sourceTree = SOURCE_ROOT; };
@@ -1428,6 +1431,8 @@
 				559BA9A318AB85D100760273 /* CCursor.mm */,
 				559331BC18DB06190061CC37 /* CMediaCache.h */,
 				559331BB18DB06190061CC37 /* CMediaCache.mm */,
+				55612A5C1ABB880C006C0730 /* CUndoStack.h */,
+				55612A5B1ABB880C006C0730 /* CUndoStack.mm */,
 			);
 			name = "OS abstraction";
 			sourceTree = "<group>";
@@ -2563,6 +2568,7 @@
 				553C470D13577334000219FA /* LEOScript.c in Sources */,
 				553C470E13577334000219FA /* LEODebugger.c in Sources */,
 				556DB7B018709C73002F7CB2 /* CConcreteObject.cpp in Sources */,
+				55612A5D1ABB880C006C0730 /* CUndoStack.mm in Sources */,
 				553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */,
 				553C471013577334000219FA /* LEOChunks.c in Sources */,
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,

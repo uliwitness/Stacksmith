@@ -22,6 +22,7 @@
 #import "WILDScriptEditorWindowController.h"
 #import "WILDPartInfoViewController.h"
 #include <sstream>
+#include "CUndoStack.h"
 
 
 using namespace Carlson;
@@ -121,6 +122,7 @@ void	CStackMac::SetPeeking( bool inState )
 void	CStackMac::SelectedPartChanged()
 {
 	[mMacWindowController reflectFontOfSelectedParts];
+	[mMacWindowController drawBoundingBoxes];
 }
 
 
@@ -134,6 +136,14 @@ void	CStackMac::SetEditingBackground( bool inState )
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName: WILDBackgroundEditingDidChangeNotification object: nil];
 	}
+}
+
+
+CUndoStack*	CStackMac::GetUndoStack()
+{
+	if( !mUndoStack )
+		mUndoStack = new CUndoStack( mMacWindowController.window.undoManager );
+	return mUndoStack;
 }
 
 

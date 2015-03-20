@@ -14,6 +14,7 @@
 #include "CTinyXMLUtils.h"
 #include "CDocument.h"
 #include <sstream>
+#include "CUndoStack.h"
 
 
 using namespace Carlson;
@@ -49,6 +50,9 @@ static const char*	sStackStyleStrings[EStackStyle_Last +1] =
 
 CStack::~CStack()
 {
+	delete mUndoStack;
+	mUndoStack = (CUndoStack*)0x5555555555555555;
+	
 	//printf("deleting stack %s.\n", DebugNameForPointer(this) );
  	if( sFrontStack == this )
 		sFrontStack = NULL;
@@ -810,6 +814,12 @@ bool	CStack::GetNeedsToBeSaved()
 	}
 
 	return false;
+}
+
+
+CUndoStack*	CStack::GetUndoStack()
+{
+	return nullptr;
 }
 
 
