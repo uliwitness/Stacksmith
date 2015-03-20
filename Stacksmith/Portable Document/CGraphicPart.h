@@ -19,8 +19,6 @@ namespace Carlson {
 		LEONumber		x;
 		LEONumber		y;
 		LEONumber		lineWidth;
-		LEONumber		controlPoint1;
-		LEONumber		controlPoint2;
 	};
 	
 	typedef enum
@@ -41,7 +39,7 @@ namespace Carlson {
 		void					SetStyle( TGraphicStyle inStyle )	{ mStyle = inStyle; };
 		
 		virtual bool			CanBeEditedWithTool( TTool inTool );
-		virtual LEOInteger		GetNumCustomHandles();	// -1 means no custom handles, use the standard 8.
+		virtual LEOInteger		GetNumCustomHandlesForTool( TTool inTool );	// -1 means no custom handles, use the standard 8.
 		virtual void			SetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber x, LEONumber y );
 		virtual void			GetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber *outX, LEONumber *outY );
 		

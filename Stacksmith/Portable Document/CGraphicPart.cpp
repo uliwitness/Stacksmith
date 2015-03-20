@@ -307,9 +307,13 @@ void	CGraphicPart::SizeToFit()
 }
 
 
-LEOInteger	CGraphicPart::GetNumCustomHandles()
+LEOInteger	CGraphicPart::GetNumCustomHandlesForTool( TTool inTool )
 {
-	if( mStyle == EGraphicStyleLine || mStyle == EGraphicStyleBezierPath )
+	if( mStyle == EGraphicStyleLine && inTool == ELineTool )
+	{
+		return mPoints.size();
+	}
+	else if( mStyle == EGraphicStyleBezierPath && inTool == EBezierPathTool )
 	{
 		return mPoints.size();
 	}

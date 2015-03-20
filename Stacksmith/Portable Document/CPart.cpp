@@ -527,7 +527,7 @@ THitPart	CPart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag
 	
 	if( handlesToo == EHitTestHandlesToo )
 	{
-		LEOInteger	numCustomHandles = GetNumCustomHandles();
+		LEOInteger	numCustomHandles = GetNumCustomHandlesForTool( GetStack()->GetTool() );
 		if( numCustomHandles >= 0 )
 		{
 			for( LEOInteger n = 0; n < numCustomHandles; n++ )
