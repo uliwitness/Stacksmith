@@ -106,7 +106,7 @@ using namespace Carlson;
 		if( !mStack->GetEditingBackground() )
 		{
 			numParts = theCard->GetNumParts();
-			for( size_t x = numParts; x > 0; x-- )
+			for( size_t x = numParts; x > 0 && hitPart == nullptr; x-- )
 			{
 				CPart	*	thePart = theCard->GetPart( x-1 );
 				if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles, &customPartIndex ) != ENothingHitPart )
@@ -117,7 +117,7 @@ using namespace Carlson;
 		}
 		
 		numParts = theCard->GetBackground()->GetNumParts();
-		for( size_t x = numParts; x > 0; x-- )
+		for( size_t x = numParts; x > 0 && hitPart == nullptr; x-- )
 		{
 			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
 			if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles, &customPartIndex ) != ENothingHitPart )
