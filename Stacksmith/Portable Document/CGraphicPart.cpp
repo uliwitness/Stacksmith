@@ -343,6 +343,11 @@ void	CGraphicPart::GetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber *
 }
 
 
+void	CGraphicPart::SetSelected( bool inSelected, LEOInteger inHandleIndex )
+{
+	CVisiblePart::SetSelected( inSelected, inHandleIndex );
+}
+
 
 void	CGraphicPart::DumpProperties( size_t inIndentLevel )
 {

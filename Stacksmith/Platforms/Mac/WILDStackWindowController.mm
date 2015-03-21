@@ -94,13 +94,13 @@ using namespace Carlson;
 	CCard	*	theCard = mStack->GetCurrentCard();
 	const char*	dragMessage = NULL, *upMessage = NULL, *doubleUpMessage = NULL;
 	NSPoint		hitPos = [self convertPoint: [theEvt locationInWindow] fromView: nil];
+	LEOInteger	customPartIndex = EAllHandlesSelected;
 	
 	if( currentTool != EBrowseTool || isPeeking )
 	{
 		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
 		size_t		numParts = 0;
 		CPart*		hitPart = NULL;
-		LEOInteger	customPartIndex = -1;
 		
 		// Find what was clicked:
 		if( !mStack->GetEditingBackground() )
@@ -190,6 +190,8 @@ using namespace Carlson;
 			{
 				if( !hitPart->IsSelected() )
 					hitPart->SetSelected(true);
+				else if( hitPart->IsSelected() && customPartIndex != -1 )
+					hitPart->SetSelected(true, customPartIndex);
 				else if( hitPart->IsSelected() && shiftKeyDown )
 					hitPart->SetSelected(false);
 			}
@@ -225,7 +227,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
-		thePart->SetSelected(true);
+		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
 	else if( currentTool == ERectangleTool && hitObject == theCard )
@@ -239,7 +241,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
-		thePart->SetSelected(true);
+		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
 	else if( currentTool == ERoundrectTool && hitObject == theCard )
@@ -253,7 +255,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
-		thePart->SetSelected(true);
+		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
 	else if( currentTool == ELineTool && hitObject == theCard )
@@ -272,7 +274,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
-		thePart->SetSelected(true);
+		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
 	else if( currentTool == EBezierPathTool && hitObject == theCard )
@@ -290,7 +292,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
-		thePart->SetSelected(true);
+		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
 	else if( hitObject != theCard )
@@ -631,6 +633,9 @@ using namespace Carlson;
 	static NSColor	*	sSelectedColor = nil;
 	if( !sSelectedColor )
 		sSelectedColor = [[NSColor colorWithCalibratedRed: 0.102 green: 0.180 blue: 0.998 alpha: 1.000] retain];
+	static NSColor	*	sUnselectedColor = nil;
+	if( !sUnselectedColor )
+		sUnselectedColor = [[NSColor colorWithCalibratedRed:0.682 green:0.805 blue:0.999 alpha:1.000] retain];
 	static NSColor	*	sSelectedBorderColor = nil;
 	if( !sSelectedBorderColor )
 		sSelectedBorderColor = [[sSelectedColor blendedColorWithFraction: 0.2 ofColor: NSColor.blackColor] retain];
@@ -651,12 +656,21 @@ using namespace Carlson;
 		LEOInteger	numCustomHandles = currPart->GetNumCustomHandlesForTool( mStack->GetTool() );
 		if( numCustomHandles >= 0 )
 		{
+			LEOInteger		selectedHandle = currPart->GetSelectedHandle();
 			for( LEOInteger x = 0; x < numCustomHandles; x++ )
 			{
 				LEONumber	l, t, r, b;
 				currPart->GetRectForCustomHandle( x, &l, &t, &r, &b );
 				NSRect		grabby = NSMakeRect(l +0.5, cardHeight -b +0.5, r -l -1.0, b -t -1.0 );
+				if( selectedHandle == EAllHandlesSelected || selectedHandle == x )
+				{
+					[sUnselectedColor setFill];
+				}
 				NSRectFill(grabby);
+				if( selectedHandle == EAllHandlesSelected || selectedHandle == x )
+				{
+					[sSelectedColor setFill];
+				}
 				[NSBezierPath strokeRect: grabby];
 			}
 		}

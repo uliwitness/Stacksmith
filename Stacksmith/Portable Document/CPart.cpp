@@ -67,7 +67,7 @@ CPartCreatorBase*	CPart::GetPartCreatorForType( const char* inType )
 
 
 CPart::CPart( CLayer *inOwner )
-	: mOwner(inOwner), mFamily(0), mID(0), mLeft(10), mTop(10), mRight(110), mBottom(60), mPartType(NULL), mSelected(false), mPartLayoutFlags(0)
+	: mOwner(inOwner), mFamily(0), mID(0), mLeft(10), mTop(10), mRight(110), mBottom(60), mPartType(NULL), mSelected(false), mPartLayoutFlags(0), mSelectedHandle(EAllHandlesSelected)
 {
 	//printf("part %s created.\n", DebugNameForPointer(this) );
 	mDocument = inOwner->GetDocument();
@@ -717,9 +717,10 @@ std::string		CPart::GenerateDisplayName( const char* inTypeName )
 }
 
 
-void	CPart::SetSelected( bool inSelected )
+void	CPart::SetSelected( bool inSelected, LEOInteger inHandleIndex )
 {
 	mSelected = inSelected;
+	mSelectedHandle = inHandleIndex;
 	GetStack()->SelectedPartChanged();
 }
 

@@ -86,6 +86,12 @@ enum
 };
 typedef unsigned	TPartLayoutFlags;
 
+
+enum
+{
+	EAllHandlesSelected = -1
+};
+
 #define PART_H_LAYOUT_MODE(n)	((n) & EPartLayoutAlignHorizontalMask)	// Gives EPartLayoutAlignLeft, EPartLayoutAlignHBoth, EPartLayoutAlignRight or EPartLayoutAlignHCenter.
 #define PART_V_LAYOUT_MODE(n)	((n) & EPartLayoutAlignVerticalMask)	// Gives EPartLayoutAlignTop, EPartLayoutAlignVBoth, EPartLayoutAlignBottom or EPartLayoutAlignVCenter.
 
@@ -165,21 +171,22 @@ public:
 	virtual CPartContents*		GetContentsOnCurrentCard();
 	virtual CUndoStack*			GetUndoStack();
 	
-	virtual bool				GetSharedText()					{ return true; };	// By default, background part contents are the same on all cards of that background.
+	virtual bool				GetSharedText()					{ return true; };	//!< By default, background part contents are the same on all cards of that background.
 	virtual void				SetSharedText( bool n )			{};
-	virtual void				SetSelected( bool inSelected );
+	virtual void				SetSelected( bool inSelected, LEOInteger handleIndex = EAllHandlesSelected );
 	virtual bool				IsSelected()					{ return mSelected; };
+	virtual LEOInteger			GetSelectedHandle()				{ return mSelectedHandle; };
 	virtual void				SetHighlight( bool inHighlighted )	{};
-	virtual void				PrepareMouseUp()				{};	// Sent when a mouse click was inside, right before we send mouseUp.
+	virtual void				PrepareMouseUp()				{};	//!< Sent when a mouse click was inside, right before we send mouseUp.
 	bool						GetShouldSendMouseEventsRightNow();
 	virtual void				WillBeDeleted()					{};
 	
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	
-	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo, LEOInteger *outCustomHandleIndex );	// Stack-relative coordinates relative to top left, descending down and right.
+	virtual THitPart			HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo, LEOInteger *outCustomHandleIndex );	//!< Stack-relative coordinates relative to top left, descending down and right.
 	virtual bool				GetRectForHandle( THitPart inDesiredPart, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom );
 	virtual LEONumber			GetHandleSize( bool *outAllowSideHandles, bool *outAllowCornerHandles );
-	virtual LEOInteger			GetNumCustomHandlesForTool( TTool inTool )			{ return -1; };	// -1 means no custom handles, use the standard 8. 0 means no handles *at all*.
+	virtual LEOInteger			GetNumCustomHandlesForTool( TTool inTool )			{ return -1; };	//!< -1 means no custom handles, use the standard 8. 0 means no handles *at all*.
 	virtual void				SetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber x, LEONumber y )	{};
 	virtual void				GetPositionOfCustomHandleAtIndex( LEOInteger idx, LEONumber *outX, LEONumber *outY )	{};
 	virtual void				GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom );
@@ -206,9 +213,10 @@ protected:
 	LEOInteger			mTop;
 	LEOInteger			mRight;
 	LEOInteger			mBottom;
-	CLayer	*			mOwner;		// Card/background we are on.
-	CPartCreatorBase*	mPartType;	// Only used for comparing if two parts are same type.
+	CLayer	*			mOwner;				//!< Card/background we are on.
+	CPartCreatorBase*	mPartType;			//!< Only used for comparing if two parts are same type.
 	bool				mSelected;
+	LEOInteger			mSelectedHandle;	//!< EAllHandlesSelected is valid here..
 	TPartLayoutFlags	mPartLayoutFlags;
 };
 

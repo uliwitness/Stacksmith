@@ -51,6 +51,8 @@ namespace Carlson {
 		
 		virtual void			SizeToFit();
 		
+		virtual void	SetSelected( bool inSelected, LEOInteger inHandleIndex = EAllHandlesSelected );
+		
 	protected:
 		~CGraphicPart()	{};
 		
