@@ -186,7 +186,7 @@ using namespace Carlson;
 		}
 		else
 		{
-			if( isEditing && !isPeeking )
+			if( !isPeeking )
 			{
 				if( !hitPart->IsSelected() )
 					hitPart->SetSelected(true);
