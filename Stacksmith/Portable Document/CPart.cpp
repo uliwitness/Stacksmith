@@ -352,6 +352,12 @@ void	CPart::IncrementChangeCount()
 }
 
 
+CUndoStack*		CPart::GetUndoStack()
+{
+	return GetStack()->GetUndoStack();
+}
+
+
 CPartContents*	CPart::GetContentsOnCurrentCard()
 {
 	CPartContents*	contents = NULL;

@@ -30,6 +30,7 @@ namespace Carlson {
 class CLayer;
 class CPart;
 class CPartContents;
+class CUndoStack;
 
 
 /*! Indicate which of the "resize handles" (aka "grabbers") have been clicked or
@@ -162,6 +163,7 @@ public:
 	virtual CScriptableObject*	GetParentObject();
 	virtual CStack*				GetStack();
 	virtual CPartContents*		GetContentsOnCurrentCard();
+	virtual CUndoStack*			GetUndoStack();
 	
 	virtual bool				GetSharedText()					{ return true; };	// By default, background part contents are the same on all cards of that background.
 	virtual void				SetSharedText( bool n )			{};
