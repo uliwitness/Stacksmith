@@ -1,54 +1,42 @@
-[submodule "UliKit"]
-	path = UliKit
-	url = git@github.com:uliwitness/UliKit.git
-	fetchRecurseSubmodules = true
-[submodule "Forge"]
-	path = Forge
-	url = git@github.com:uliwitness/Forge.git
-	fetchRecurseSubmodules = true
-[submodule "ForgeDebugger"]
-	path = ForgeDebugger
-	url = git@github.com:uliwitness/ForgeDebugger.git
-	fetchRecurseSubmodules = true
-[submodule "stackimport"]
-	path = stackimport
-	url = git@github.com:uliwitness/stackimport.git
-	fetchRecurseSubmodules = true
-[submodule "UKSyntaxColoredTextDocument"]
-	path = UKSyntaxColoredTextDocument
-	url = git@github.com:uliwitness/UKSyntaxColoredTextDocument.git
-	fetchRecurseSubmodules = true
-[submodule "UKPaintView"]
-	path = UKPaintView
-	url = git@github.com:uliwitness/UKPaintView.git
-	fetchRecurseSubmodules = true
-[submodule "Sparkle"]
-	path = Sparkle
-	url = git@github.com:uliwitness/Sparkle.git
-	fetchRecurseSubmodules = true
-[submodule "ULIMelodyQueue"]
-	path = ULIMelodyQueue
-	url = git@github.com:uliwitness/ULIMelodyQueue.git
-	fetchRecurseSubmodules = true
-[submodule "ULINetSocket"]
-	path = ULINetSocket
-	url = git@github.com:uliwitness/ULINetSocket.git
-	fetchRecurseSubmodules = true
-[submodule "Stacks"]
-	path = Stacks
-	url = git@github.com:uliwitness/Stacks.git
-	fetchRecurseSubmodules = true
-[submodule "tinyxml2"]
-	path = tinyxml2
-	url = git@github.com:uliwitness/tinyxml2.git
-	fetchRecurseSubmodules = true
-[submodule "KVOWithBlocks"]
-	path = KVOWithBlocks
-	url = git@github.com:uliwitness/KVOWithBlocks.git
-	fetchRecurseSubmodules = true
-[submodule "UKDistributedView"]
-	path = UKDistributedView
-	url = https://uliwitness@github.com/uliwitness/UKDistributedView.git
 [submodule "ULIWideningBezierPath"]
 	path = ULIWideningBezierPath
 	url = https://uliwitness@github.com/uliwitness/WideningBezierPathTest.git
+[submodule "Forge"]
+	path = Forge
+	url = https://uliwitness@github.com/uliwitness/Forge.git
+[submodule "ForgeDebugger"]
+	path = ForgeDebugger
+	url = https://uliwitness@github.com/uliwitness/ForgeDebugger.git
+[submodule "KVOWithBlocks"]
+	path = KVOWithBlocks
+	url = https://uliwitness@github.com/uliwitness/KVOWithBlocks.git
+[submodule "Sparkle"]
+	path = Sparkle
+	url = https://uliwitness@github.com/uliwitness/Sparkle.git
+[submodule "Stacks"]
+	path = Stacks
+	url = https://uliwitness@github.com/uliwitness/Stacks.git
+[submodule "stackimport"]
+	path = stackimport
+	url = https://uliwitness@github.com/uliwitness/stackimport.git
+[submodule "UKPaintView"]
+	path = UKPaintView
+	url = https://uliwitness@github.com/uliwitness/UKPaintView.git
+[submodule "UKDistributedView"]
+	path = UKDistributedView
+	url = https://uliwitness@github.com/uliwitness/UKDistributedView.git
+[submodule "UKSyntaxColoredTextDocument"]
+	path = UKSyntaxColoredTextDocument
+	url = https://uliwitness@github.com/uliwitness/UKSyntaxColoredTextDocument.git
+[submodule "tinyxml2"]
+	path = tinyxml2
+	url = https://uliwitness@github.com/uliwitness/tinyxml2.git
+[submodule "ULIMelodyQueue"]
+	path = ULIMelodyQueue
+	url = https://uliwitness@github.com/uliwitness/ULIMelodyQueue.git
+[submodule "UliKit"]
+	path = UliKit
+	url = https://uliwitness@github.com/uliwitness/UliKit.git
+[submodule "ULINetSocket"]
+	path = ULINetSocket
+	url = https://uliwitness@github.com/uliwitness/ULINetSocket.git
