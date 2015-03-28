@@ -49,3 +49,6 @@
 [submodule "UKDistributedView"]
 	path = UKDistributedView
 	url = https://uliwitness@github.com/uliwitness/UKDistributedView.git
+[submodule "ULIWideningBezierPath"]
+	path = ULIWideningBezierPath
+	url = https://uliwitness@github.com/uliwitness/WideningBezierPathTest.git
