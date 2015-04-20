@@ -80,7 +80,6 @@ using namespace Carlson;
 
 -(void)	mouseDown: (NSEvent*)theEvt
 {
-	
 	[self handleMouseEvent: theEvt];
 }
 

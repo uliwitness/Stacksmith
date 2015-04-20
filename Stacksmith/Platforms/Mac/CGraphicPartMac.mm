@@ -10,6 +10,7 @@
 #include "CStack.h"
 #import "UKHelperMacros.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ULIWideningBezierPath.h"
 
 
 using namespace Carlson;
@@ -67,6 +68,7 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 	}
 	else if( mStyle == EGraphicStyleBezierPath || mStyle == EGraphicStyleLine )
 	{
+	#if NO_VARYING_LINE_WIDTHS
 		CGMutablePathRef	thePath = CGPathCreateMutable();
 		if( mPoints.size() > 0 )
 		{
@@ -85,6 +87,27 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 		theLayer.path = thePath;
 		theLayer.contentsGravity = kCAGravityResize;
 		CGPathRelease(thePath);
+	#else
+		ULIWideningBezierPath	*	fillPath = [[[ULIWideningBezierPath alloc] init] autorelease];
+		if( mPoints.size() > 0 )
+		{
+			bool		first = true;
+			for( const CPathSegment& currSegment : mPoints )
+			{
+				if( first )
+				{
+					[fillPath moveToPoint: NSMakePoint(currSegment.x, localBox.size.height -currSegment.y) lineWidth: currSegment.lineWidth];
+					first = false;
+				}
+				else
+				{
+					[fillPath lineToPoint: NSMakePoint(currSegment.x, localBox.size.height -currSegment.y) lineWidth: currSegment.lineWidth];
+				}
+			}
+		}
+		theLayer.path = [fillPath CGPathForStroke];
+		theLayer.contentsGravity = kCAGravityResize;
+	#endif
 	}
 }
 
