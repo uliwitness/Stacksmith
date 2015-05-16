@@ -113,7 +113,7 @@ NSDictionary*	CMacPartBase::GetCocoaAttributesForPart()
 		fontSize = [NSFont systemFontSize];
 	if( myself->GetTextFont().length() > 0 )
 		theFont = [NSFont fontWithName: [NSString stringWithUTF8String: myself->GetTextFont().c_str()] size: fontSize];
-	else
+	if( !theFont )
 		theFont = [NSFont systemFontOfSize: fontSize];
 	TPartTextStyle			styleFlags = myself->GetTextStyle();
 	
@@ -157,7 +157,8 @@ NSDictionary*	CMacPartBase::GetCocoaAttributesForPart()
 		[styles setObject: @(3.0) forKey: NSKernAttributeName];
 	if( styleFlags & EPartTextStyleGroup )
 		[styles setObject: [NSURL URLWithString: @"http://#"] forKey: NSLinkAttributeName];
-
+	
+	if( theFont )
 	[styles setObject: theFont forKey: NSFontAttributeName];
 	
 	if( myself->GetTextColorRed() >= 0 )
