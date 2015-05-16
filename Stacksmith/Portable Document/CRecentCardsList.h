@@ -13,7 +13,7 @@
 	instance, e.g. to add a thumbnail image of the visited card to each entry.
 	
 	The "go" command and other spots update this history for you, no matter
-	what subclass you prevent them with.
+	what subclass you present them with.
 */
 
 #ifndef __Stacksmith__CRecentCardsList__
@@ -73,7 +73,7 @@ protected:
 
 
 // Template class with default behaviour. Preferentially subclass this instead of CRecentCardsList.
-//	E.g. to add an image subclass CRecentCardInfo, add the member, then in an AddCard override, call
+//	E.g. to add an image, subclass CRecentCardInfo, add the member, then in an AddCard override, call
 //	SetImage on mRecentCardInfos.back() to fill that last field.
 template<class RecentCardInfoSubclass>
 class CRecentCardsListConcrete : public CRecentCardsList
