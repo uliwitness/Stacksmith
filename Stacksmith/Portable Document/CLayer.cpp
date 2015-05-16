@@ -842,6 +842,11 @@ bool	CLayer::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 		LEOInitIntegerValue( outValue, GetID(), kLEOUnitNone, kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "showpict") == 0 )
+	{
+		LEOInitBooleanValue( outValue, GetShowPict(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return CConcreteObject::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
@@ -862,6 +867,13 @@ bool	CLayer::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 		uint16_t	fileID = 0;
 		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
 		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "The ID of an object can't be changed." );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "showpict") == 0 )
+	{
+		bool		shouldShow = LEOGetValueAsBoolean( inValue, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) != 0 )
+			SetShowPict( shouldShow );
 		return true;
 	}
 	else
