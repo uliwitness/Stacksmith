@@ -22,7 +22,9 @@ void	CGraphicPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		[mView removeFromSuperview];
 		if( mView )
+		{
 			[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		}
 		return;
 	}
 	[mView removeFromSuperview];
