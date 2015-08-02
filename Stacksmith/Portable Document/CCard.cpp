@@ -19,7 +19,8 @@ CCard::CCard( std::string inURL, ObjectID inID, CBackground* inOwningBackground,
 	: CPlatformLayer(inURL,inID,inName,inFileName,inStack), mMarked(inMarked), mOwningBackground(inOwningBackground)
 {
 	//printf("card %s created.\n", DebugNameForPointer(this) );
-	mOwningBackground->AddCard(this);
+	if( mOwningBackground )
+        mOwningBackground->AddCard(this);
 }
 
 CCard::~CCard()
