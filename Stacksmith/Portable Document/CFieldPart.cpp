@@ -123,7 +123,10 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 			{
 				CColumnInfo	info = { (TColumnType) x, currWidth, "", currEditable };
 				if( currName )
-					info.mName = currName->GetText();
+                {
+                    const char* theText = currName->GetText();
+					info.mName = theText ? theText : "";
+                }
 				mColumns.push_back( info );
 				break;
 			}
