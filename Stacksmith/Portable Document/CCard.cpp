@@ -130,9 +130,12 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 		//printf("Moved away from card %p\n", oldCard);
 		if( GetStack()->GetCurrentCard() != NULL && GetStack()->GetCurrentCard() != this )	// Dest stack was already open with another card? Close that card (too).
 		{
-			oldCard->DeselectAllItems();
-			oldCard->GetBackground()->DeselectAllItems();
-			
+			if( oldCard )
+            {
+                oldCard->DeselectAllItems();
+                oldCard->GetBackground()->DeselectAllItems();
+			}
+            
 			CAutoreleasePool		pool;
 			GetStack()->GetCurrentCard()->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeCard" );
 			thisIsANewBackground = GetStack()->GetCurrentCard()->GetBackground() != thisBackground;
