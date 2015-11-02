@@ -58,7 +58,7 @@ using namespace Carlson;
 	CMacPartBase*	macPart = dynamic_cast<CMacPartBase*>(mContainer);
 	if( macPart )
 		[btn setImage: macPart->GetDisplayIcon()];
-	[theWindow setTitle: [self windowTitleForDocumentDisplayName: nil]];
+	[theWindow setTitle: [self windowTitleForDocumentDisplayName: @""]];
 	
 	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: mGlobalStartRect];
 }

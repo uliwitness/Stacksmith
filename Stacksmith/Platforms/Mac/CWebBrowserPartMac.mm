@@ -15,7 +15,7 @@
 using namespace Carlson;
 
 
-@interface WILDWebBrowserDelegate : NSObject
+@interface WILDWebBrowserDelegate : NSObject <WebFrameLoadDelegate>
 
 @property (assign,nonatomic) CWebBrowserPartMac*	owningBrowser;
 

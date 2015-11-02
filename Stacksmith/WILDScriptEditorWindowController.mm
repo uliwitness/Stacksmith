@@ -372,7 +372,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	CMacScriptableObjectBase*	macPart = dynamic_cast<CMacScriptableObjectBase*>(mContainer);
 	if( macPart )
 		[btn setImage: macPart->GetDisplayIcon()];
-	[theWindow setTitle: [self windowTitleForDocumentDisplayName: nil]];
+	[theWindow setTitle: [self windowTitleForDocumentDisplayName: @""]];
 	
 	[theWindow makeKeyAndOrderFrontWithZoomEffectFromRect: mGlobalStartRect];
 }

@@ -26,7 +26,7 @@ using namespace Carlson;
 
 
 
-@interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource,NSTextFieldDelegate,NSComboBoxDataSource>
+@interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource,NSTextFieldDelegate,NSComboBoxDataSource,NSSearchFieldDelegate>
 
 @property (assign,nonatomic) CFieldPartMac*			owningField;
 @property (retain,nonatomic) NSMutableArray*		lines;
