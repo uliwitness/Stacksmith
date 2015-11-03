@@ -67,6 +67,7 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 	{
 		localBox = NSInsetRect( localBox, mLineWidth, mLineWidth );
 		theLayer.path = (CGPathRef)[(id) CGPathCreateWithEllipseInRect( localBox, NULL) autorelease];
+		theLayer.sublayers = @[];
 	}
 	else if( mStyle == EGraphicStyleBezierPath || mStyle == EGraphicStyleLine )
 	{
@@ -107,8 +108,27 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 				}
 			}
 		}
-		theLayer.path = [fillPath CGPathForStroke];
-		theLayer.contentsGravity = kCAGravityResize;
+		
+		if( mStyle == EGraphicStyleLine )
+		{
+			theLayer.path = [fillPath CGPathForStroke];
+			theLayer.contentsGravity = kCAGravityResize;
+			theLayer.sublayers = @[];
+		}
+		else
+		{
+			theLayer.path = [fillPath CGPathForFill];
+			theLayer.contentsGravity = kCAGravityResize;
+			
+			CAShapeLayer	*	strokeLayer = (CAShapeLayer*)theLayer.sublayers.lastObject;
+			if( !strokeLayer )
+			{
+				strokeLayer = [CAShapeLayer layer];
+				[mView.layer addSublayer: strokeLayer];
+			}
+			strokeLayer.path = [fillPath CGPathForStroke];
+			strokeLayer.contentsGravity = kCAGravityResize;
+		}
 	#endif
 	}
 }
@@ -176,6 +196,12 @@ void	CGraphicPartMac::SetLineColor( int r, int g, int b, int a )
 	{
 		[mView.layer setBorderColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
+	#if NO_VARYING_LINE_WIDTHS
+	else if( mStyle == EGraphicStyleBezierPath )
+	{
+		[(CAShapeLayer*)mView.layer setFillColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+	}
+	#endif
 	else
 	{
 		[(CAShapeLayer*)mView.layer setStrokeColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
