@@ -92,6 +92,7 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 		CGPathRelease(thePath);
 	#else
 		ULIWideningBezierPath	*	fillPath = [[[ULIWideningBezierPath alloc] init] autorelease];
+		CGFloat factor = GetLineWidth();
 		if( mPoints.size() > 0 )
 		{
 			bool		first = true;
@@ -99,12 +100,12 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 			{
 				if( first )
 				{
-					[fillPath moveToPoint: NSMakePoint(currSegment.x, localBox.size.height -currSegment.y) lineWidth: currSegment.lineWidth];
+					[fillPath moveToPoint: NSMakePoint(currSegment.x, localBox.size.height -currSegment.y) lineWidth: currSegment.lineWidth * factor];
 					first = false;
 				}
 				else
 				{
-					[fillPath lineToPoint: NSMakePoint(currSegment.x, localBox.size.height -currSegment.y) lineWidth: currSegment.lineWidth];
+					[fillPath lineToPoint: NSMakePoint(currSegment.x, localBox.size.height -currSegment.y) lineWidth: currSegment.lineWidth * factor];
 				}
 			}
 		}
@@ -268,6 +269,12 @@ void	CGraphicPartMac::SetLineWidth( int w )
 	
 	if( mStyle == EGraphicStyleRectangle || mStyle == EGraphicStyleRoundrect )
 		[mView.layer setBorderWidth: w];
+	#if !NO_VARYING_LINE_WIDTHS
+	else if( mStyle == EGraphicStyleBezierPath )
+	{
+		RebuildViewLayerPath();
+	}
+	#endif
 	else
 		[(CAShapeLayer*)mView.layer setLineWidth: w];
 }
