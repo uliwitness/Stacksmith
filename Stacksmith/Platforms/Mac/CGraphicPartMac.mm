@@ -196,10 +196,14 @@ void	CGraphicPartMac::SetLineColor( int r, int g, int b, int a )
 	{
 		[mView.layer setBorderColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
-	#if NO_VARYING_LINE_WIDTHS
+	#if !NO_VARYING_LINE_WIDTHS
 	else if( mStyle == EGraphicStyleBezierPath )
 	{
-		[(CAShapeLayer*)mView.layer setFillColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+		CAShapeLayer*	theLayer = (CAShapeLayer*)mView.layer;
+		if( theLayer.sublayers.count > 0 )
+			theLayer = (CAShapeLayer*)theLayer.sublayers[0];
+		
+		[theLayer setFillColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
 	#endif
 	else
@@ -213,10 +217,17 @@ void	CGraphicPartMac::SetShadowColor( int r, int g, int b, int a )
 {
 	CGraphicPart::SetShadowColor( r, g, b, a );
 	
-	[mView.layer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
+	CAShapeLayer*	theLayer = (CAShapeLayer*)mView.layer;
+	if( theLayer.sublayers.count > 0 && mFillColorAlpha == 0 )
+	{
+		[theLayer setShadowOpacity: 0.0];
+		theLayer = (CAShapeLayer*)theLayer.sublayers[0];
+	}
+	
+	[theLayer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
 	if( a != 0 )
 	{
-		[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+		[theLayer setShadowColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
 }
 
@@ -225,7 +236,14 @@ void	CGraphicPartMac::SetShadowOffset( double w, double h )
 {
 	CGraphicPart::SetShadowOffset( w, h );
 	
-	[mView.layer setShadowOffset: NSMakeSize(w,-h)];
+	CAShapeLayer*	theLayer = (CAShapeLayer*)mView.layer;
+	if( theLayer.sublayers.count > 0 && mFillColorAlpha == 0 )
+	{
+		[theLayer setShadowOpacity: 0.0];
+		theLayer = (CAShapeLayer*)theLayer.sublayers[0];
+	}
+	
+	[theLayer setShadowOffset: NSMakeSize(w,-h)];
 }
 
 
@@ -233,7 +251,14 @@ void	CGraphicPartMac::SetShadowBlurRadius( double r )
 {
 	CGraphicPart::SetShadowBlurRadius( r );
 	
-	[mView.layer setShadowRadius: r];
+	CAShapeLayer*	theLayer = (CAShapeLayer*)mView.layer;
+	if( theLayer.sublayers.count > 0 && mFillColorAlpha == 0 )
+	{
+		[theLayer setShadowOpacity: 0.0];
+		theLayer = (CAShapeLayer*)theLayer.sublayers[0];
+	}
+	
+	[theLayer setShadowRadius: r];
 }
 
 
