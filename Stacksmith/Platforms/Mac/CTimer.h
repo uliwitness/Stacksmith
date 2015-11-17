@@ -34,7 +34,7 @@ namespace Carlson {
 class CTimer
 {
 public:
-	explicit CTimer( long long inTimeIntervalInTicks = 60 );
+	explicit CTimer( long long inTimeIntervalInTicks = 60, std::function<void(CTimer*)> inTimerHandler = nullptr );
 	~CTimer();
 	
 	void		Start();

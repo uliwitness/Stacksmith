@@ -19,6 +19,7 @@
 #include "CAlert.h"
 #include "CMessageBox.h"
 #include "CSound.h"
+#include "CTimer.h"
 #include <unistd.h>
 
 
@@ -911,8 +912,10 @@ void	WILDWaitInstruction( LEOContext* inContext )
 
 void	WILDMoveInstruction( LEOContext* inContext )
 {
-	union LEOValue*	theValue = inContext->stackEndPtr -1;
-	if( theValue == NULL || theValue->base.isa == NULL )
+	union LEOValue*	thePoints = inContext->stackEndPtr -1;
+	union LEOValue*	theValue = inContext->stackEndPtr -2;
+	if( theValue == NULL || theValue->base.isa == NULL
+		|| thePoints == NULL || thePoints->base.isa == NULL )
 	{
 		size_t		lineNo = SIZE_T_MAX;
 		uint16_t	fileID = 0;
@@ -921,7 +924,25 @@ void	WILDMoveInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	// +++
+	theValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+	CPart	*	thePart = nullptr;
+	if( theValue && theValue->base.isa == &kLeoValueTypeScriptableObject )
+	{
+		thePart = dynamic_cast<CPart*>((CScriptableObject*)theValue->object.object);
+	}
+	if( thePart == nullptr )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "You're trying to use 'move' on something that isn't a part." );
+		return;
+	}
+	
+	thePart->Retain();
+	
+	CTimer	*	currTimer = new CTimer( 2, [thePart]( CTimer* inTimer ){ std::cout << "Do move here." << std::endl; inTimer->Stop(); thePart->Release(); delete inTimer; } );
+	currTimer->Start();
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	

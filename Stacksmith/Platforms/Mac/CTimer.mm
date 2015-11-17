@@ -45,8 +45,8 @@ using namespace Carlson;
 
 
 
-CTimer::CTimer( long long inTimeIntervalInTicks )
-	: mMacTimer(nil), mMacTarget(nil), mHandler(NULL), mTimeIntervalInTicks(inTimeIntervalInTicks)
+CTimer::CTimer( long long inTimeIntervalInTicks, std::function<void(CTimer*)> inTimerHandler )
+	: mMacTimer(nil), mMacTarget(nil), mHandler(inTimerHandler), mTimeIntervalInTicks(inTimeIntervalInTicks)
 {
 
 }
