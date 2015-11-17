@@ -39,6 +39,7 @@ void	WILDStopInstruction( LEOContext* inContext );
 void	WILDShowInstruction( LEOContext* inContext );
 void	WILDHideInstruction( LEOContext* inContext );
 void	WILDWaitInstruction( LEOContext* inContext );
+void	WILDMoveInstruction( LEOContext* inContext );
 void	WILDChooseInstruction( LEOContext* inContext );
 
 
@@ -904,6 +905,31 @@ void	WILDWaitInstruction( LEOContext* inContext )
 
 
 /*!
+	Animate a movement of an object along a series of points.
+ (WILD_MOVE_INSTR)
+ */
+
+void	WILDMoveInstruction( LEOContext* inContext )
+{
+	union LEOValue*	theValue = inContext->stackEndPtr -1;
+	if( theValue == NULL || theValue->base.isa == NULL )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
+		return;
+	}
+	
+	// +++
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
+
+/*!
 	Implements the 'choose' command. The first parameter must be a
 	string, the name of the tool you want.
 	
@@ -954,6 +980,7 @@ LEOINSTR(WILDStopInstruction)
 LEOINSTR(WILDShowInstruction)
 LEOINSTR(WILDHideInstruction)
 LEOINSTR(WILDWaitInstruction)
+LEOINSTR(WILDMoveInstruction)
 LEOINSTR_LAST(WILDChooseInstruction)
 
 
@@ -1205,6 +1232,21 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamInvisibleIdentifier, EToolIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EMoveIdentifier, WILD_MOVE_INSTR, 0, 0, 'X',
+		{
+			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamInvisibleIdentifier, EAlongIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'y' },
+			{ EHostParamInvisibleIdentifier, EToIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'y' },
+			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'y', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

@@ -99,54 +99,18 @@ bool	CGraphicPart::GetPropertyNamed( const char* inPropertyName, size_t byteRang
 {
 	if( strcasecmp("points", inPropertyName) == 0 )
 	{
-//		if( mViewTextNeedsSync )
-//			LoadChangedTextFromView();
-//		
-//		CPartContents*	theContents = NULL;
-//		CCard	*		currCard = GetStack()->GetCurrentCard();
-//		if( mOwner != currCard && !GetSharedText() )	// We're on the background layer, not on the card?
-//			theContents = currCard->GetPartContentsByID( GetID(), (mOwner != currCard) );
-//		else
-//			theContents = mOwner->GetPartContentsByID( GetID(), (mOwner != currCard) );
-//		CMap<std::string>	styles;
-//		bool				mixed = false;
-//		theContents->GetAttributedText().GetAttributesInRange( byteRangeStart, byteRangeEnd, styles, &mixed );
-//		if( mixed )
-//			LEOInitStringConstantValue( outValue, "mixed", kLEOInvalidateReferences, inContext );
-//		else if( styles.size() == 0 )
-//			LEOInitStringConstantValue( outValue, "plain", kLEOInvalidateReferences, inContext );
-//		else
-//		{
-//			LEOArrayEntry	*	theArray = NULL;
-//			char				tmpKey[512] = {0};
-//			size_t				x = 0;
-//			for( auto currStyle : styles )
-//			{
-//				if( currStyle.first.compare( "font-weight" ) == 0 && currStyle.second.compare( "bold" ) == 0 )
-//				{
-//					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
-//					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "bold", inContext );
-//				}
-//				else if( currStyle.first.compare( "text-style" ) == 0 && currStyle.second.compare( "italic" ) == 0 )
-//				{
-//					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
-//					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "italic", inContext );
-//				}
-//				else if( currStyle.first.compare( "text-decoration" ) == 0 && currStyle.second.compare( "underline" ) == 0 )
-//				{
-//					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
-//					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "underline", inContext );
-//				}
-//				else if( currStyle.first.compare( "$link" ) == 0 )
-//				{
-//					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
-//					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "group", inContext );
-//				}
-//				// +++ Add outline/shadow/condense/extend
-//			}
-//			
-//			LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
-//		}
+		LEOArrayEntry	*	theArray = NULL;
+		char				tmpKey[512] = {0};
+		size_t				x = 0;
+		
+		for( const CPathSegment& currLine :	mPoints )
+		{
+			snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
+			LEOAddIntegerArrayEntryToRoot( &theArray, tmpKey, currLine.x, kLEOUnitGroupNone, inContext );
+			LEOAddIntegerArrayEntryToRoot( &theArray, tmpKey, currLine.y, kLEOUnitGroupNone, inContext );
+		}
+
+		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
 	}
 	else
 	{
