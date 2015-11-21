@@ -939,9 +939,70 @@ void	WILDMoveInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	thePart->Retain();
+	int			coordIndex = 0;
+	int			numCoords = 0;
 	
-	CTimer	*	currTimer = new CTimer( 2, [thePart]( CTimer* inTimer ){ std::cout << "Do move here." << std::endl; inTimer->Stop(); thePart->Release(); delete inTimer; } );
+	std::vector<LEOInteger>	coordinates;
+	union LEOValue			tmpStorage = {};
+	char					keyStr[40] = {0};
+	LEOUnit					theUnit = kLEOUnitNone;
+	
+	while( true )
+	{
+		// See if there's another coordinate pair, X (horizontal) value comes first.
+		snprintf( keyStr, sizeof(keyStr)-1, "%d", numCoords +1 );
+		LEOValuePtr	currValue = LEOGetValueForKey( thePoints, keyStr, &tmpStorage, kLEOInvalidateReferences, inContext );
+		if( currValue == NULL || (inContext->flags & kLEOContextKeepRunning) == 0 )	// No such key.
+		{
+			inContext->flags |= kLEOContextKeepRunning;
+			break;	// We found all the values.
+		}
+		++numCoords;
+		LEOInteger	currCoordinate = LEOGetValueAsInteger( currValue, &theUnit, inContext );
+		coordinates.push_back( currCoordinate );
+		if( currValue == &tmpStorage )
+			LEOCleanUpValue( &tmpStorage, kLEOInvalidateReferences, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )	// X coordinate wasn't a number? Error!
+			return;
+		
+		// If we had an X coordinate, we also need a Y coordinate:
+		snprintf( keyStr, sizeof(keyStr)-1, "%d", numCoords +1 );
+		currValue = LEOGetValueForKey( thePoints, keyStr, &tmpStorage, kLEOInvalidateReferences, inContext );
+		if( currValue == NULL || (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return;	// No Y? Invalid coordinate list!
+		++numCoords;
+		currCoordinate = LEOGetValueAsInteger( &tmpStorage, &theUnit, inContext );
+		coordinates.push_back( currCoordinate );
+		if( currValue == &tmpStorage )
+			LEOCleanUpValue( &tmpStorage, kLEOInvalidateReferences, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )	// Y coordinate wasn't a number? Error!
+			return;
+	}
+	
+	if( numCoords == 0 )
+		return;
+	
+	thePart->Retain();
+	CTimer	*	currTimer = new CTimer( 2, [thePart,coordIndex,numCoords,coordinates]( CTimer* inTimer ) mutable
+	{
+		LEOInteger		l = coordinates[coordIndex++];
+		LEOInteger		t = coordinates[coordIndex++];
+		LEOInteger		w = thePart->GetRight() -thePart->GetLeft();
+		LEOInteger		h = thePart->GetBottom() -thePart->GetTop();
+		
+		// Center the button over the given coordinate:
+		l -= w / 2;
+		t -= h / 2;
+		
+		thePart->SetRect( l, t, l +w, t + h );	// Actually position it.
+		
+		if( coordIndex >= numCoords )
+		{
+			inTimer->Stop();
+			thePart->Release();
+			delete inTimer;
+		}
+	} );
 	currTimer->Start();
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );

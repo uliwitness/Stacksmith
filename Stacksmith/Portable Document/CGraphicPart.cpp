@@ -106,8 +106,9 @@ bool	CGraphicPart::GetPropertyNamed( const char* inPropertyName, size_t byteRang
 		for( const CPathSegment& currLine :	mPoints )
 		{
 			snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
-			LEOAddIntegerArrayEntryToRoot( &theArray, tmpKey, currLine.x, kLEOUnitGroupNone, inContext );
-			LEOAddIntegerArrayEntryToRoot( &theArray, tmpKey, currLine.y, kLEOUnitGroupNone, inContext );
+			LEOAddIntegerArrayEntryToRoot( &theArray, tmpKey, currLine.x +GetLeft(), kLEOUnitGroupNone, inContext );
+			snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
+			LEOAddIntegerArrayEntryToRoot( &theArray, tmpKey, currLine.y +GetTop(), kLEOUnitGroupNone, inContext );
 		}
 
 		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
