@@ -1147,7 +1147,7 @@ using namespace Carlson;
 {
 	if( theItem.action == @selector(delete:) )
 	{
-		return( mStack->GetTool() != EBrowseTool && mStack->GetCurrentLayer()->CanDeleteSelectedItem() );
+		return( mStack->GetTool() != EBrowseTool && ((mStack->GetEditingBackground() ? false : mStack->GetCurrentCard()->CanDeleteSelectedItem()) || mStack->GetCurrentCard()->GetBackground()->CanDeleteSelectedItem()) );
 	}
 	else if( theItem.action == @selector(copy:) )
 	{
@@ -1188,7 +1188,9 @@ using namespace Carlson;
 	if( mStack->GetTool() != EBrowseTool )
 	{
 		CAutoreleasePool	pool;
-		mStack->GetCurrentLayer()->DeleteSelectedItem();
+		if( !mStack->GetEditingBackground() )
+			mStack->GetCurrentCard()->DeleteSelectedItem();
+		mStack->GetCurrentCard()->GetBackground()->DeleteSelectedItem();
 		[self drawBoundingBoxes];
 	}
 }

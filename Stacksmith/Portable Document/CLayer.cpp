@@ -572,7 +572,7 @@ void	CLayer::SetPeeking( bool inState )
 
 void	CLayer::DeleteSelectedItem()
 {
-	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); )
 	{
 		if( (*currPart)->IsSelected() )
 		{
@@ -582,6 +582,8 @@ void	CLayer::DeleteSelectedItem()
 			if( currPart == mParts.end() )
 				break;
 		}
+		else
+			currPart++;
 	}
 }
 
