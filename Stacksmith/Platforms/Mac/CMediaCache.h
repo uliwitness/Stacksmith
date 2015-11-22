@@ -37,15 +37,21 @@ enum
 typedef bool	TIncludeContentFlag;
 
 
+#define MEDIA_TYPES		_X(Unknown) \
+						_X(Icon)		/* Preferred image type to use for images in new stacks. */ \
+						_X(Picture)		/* Compatibility image type used for PICT resources. */ \
+						_X(Cursor)		/* Compatibility image type used for CURS resources. */ \
+						_X(Sound)		/* Preferred media type for sounds in new stacks. */ \
+						_X(Pattern)		/* Compatibility image type used for the 40 patterns in a HyperCard stack. */ \
+						_X(Movie)		/* Preferred media type to use for movies embedded in new stacks. */
+
+
 typedef enum
 {
-	EMediaTypeUnknown = 0,
-	EMediaTypeIcon,			// Preferred image type to use for images in new stacks.
-	EMediaTypePicture,		// Compatibility image type used for PICT resources.
-	EMediaTypeCursor,		// Compatibility image type used for CURS resources.
-	EMediaTypeSound,		// Preferred media type for sounds in new stacks.
-	EMediaTypePattern,		// Compatibility image type used for the 40 patterns in a HyperCard stack.
-	EMediaTypeMovie			// Preferred media type to use for movies embedded in new stacks.
+#define _X(n)		EMediaType##n,
+	MEDIA_TYPES
+#undef _X
+	EMediaType_Last			// Number of media types.
 } TMediaType;
 
 
@@ -111,6 +117,10 @@ public:
 
 	void				LoadStandardResources();
 	void				LoadMediaTableFromElementAsBuiltIn( tinyxml2::XMLElement * root, bool isBuiltIn );
+	
+	size_t				GetNumMediaTypes( bool includeBuiltIn = false );	// expensive! O(number of media)
+	TMediaType			GetMediaTypeAtIndex( size_t idx, bool includeBuiltIn = false );	// expensive! O(number of media) + number of possible types.
+	const char*			GetNameOfType( TMediaType inType );
 	
 	std::string			GetMediaURLByNameOfType( const std::string& inName, TMediaType inType, int *outHotspotLeft = NULL, int *outHotspotTop = NULL );
 	ObjectID			GetMediaIDByNameOfType( const std::string& inName, TMediaType inType );

@@ -93,6 +93,70 @@ ObjectID	CMediaCache::GetUniqueIDForMedia()
 }
 
 
+size_t		CMediaCache::GetNumMediaTypes( bool includeBuiltIn )
+{
+	size_t	numMediaTypes = 0;
+	bool	haveMediaOfType[EMediaType_Last] = {0};
+	
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( !includeBuiltIn && currMedia->IsBuiltIn() )
+			continue;
+		if( haveMediaOfType[currMedia->GetMediaType()] != true )
+		{
+			haveMediaOfType[currMedia->GetMediaType()] = true;
+			numMediaTypes++;
+		}
+	}
+	
+	return numMediaTypes;
+}
+
+
+TMediaType	CMediaCache::GetMediaTypeAtIndex( size_t idx, bool includeBuiltIn )
+{
+	size_t	numMediaTypes = 0;
+	bool	haveMediaOfType[EMediaType_Last] = {0};
+	
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( !includeBuiltIn && currMedia->IsBuiltIn() )
+			continue;
+		if( haveMediaOfType[currMedia->GetMediaType()] != true )
+		{
+			haveMediaOfType[currMedia->GetMediaType()] = true;
+			numMediaTypes++;
+		}
+	}
+	
+	size_t	currIdx = 0;
+	for( size_t x = 0; x < EMediaType_Last; x++ )
+	{
+		if( haveMediaOfType[x] )
+		{
+			if( currIdx == idx )
+				return (TMediaType)x;
+			
+			currIdx++;
+		}
+	}
+	
+	return EMediaTypeUnknown;
+}
+
+
+const char*	CMediaCache::GetNameOfType( TMediaType inType )
+{
+	static const char*	sTypeNames[EMediaType_Last] = {
+#define _X(n)		#n,
+		MEDIA_TYPES
+#undef _X
+	};
+	
+	return sTypeNames[inType];
+}
+
+
 std::string	CMediaCache::GetMediaURLByNameOfType( const std::string& inName, TMediaType inType, int *outHotspotLeft, int *outHotspotTop )
 {
 	const char*	str = inName.c_str();
@@ -314,6 +378,7 @@ std::string		CMediaCache::AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningU
 			fileName.append( "/movie_" );
 			break;
 		case EMediaTypeUnknown:
+		case EMediaType_Last:
 			fileName.append( "/unknown_" );
 			break;
 	}
@@ -482,6 +547,7 @@ void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, 
 			mediaTypeStr = "movie";
 			break;
 		case EMediaTypeUnknown:
+		case EMediaType_Last:
 			break;
 	}
 	

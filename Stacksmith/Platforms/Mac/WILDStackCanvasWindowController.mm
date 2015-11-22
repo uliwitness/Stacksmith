@@ -17,15 +17,21 @@ using namespace Carlson;
 
 struct CCanvasEntry
 {
-	CCanvasEntry() : mColumnIdx(0),	mIndentLevel(0), mRowIdx(0) {};
-	CCanvasEntry( const CCanvasEntry& inOriginal ) : mStack(inOriginal.mStack), mBackground(inOriginal.mBackground), mCard(inOriginal.mCard), mColumnIdx(inOriginal.mColumnIdx),	mIndentLevel(inOriginal.mIndentLevel), mRowIdx(inOriginal.mRowIdx) {};
+	CCanvasEntry() : mMediaType(EMediaTypeUnknown), mMediaID(0), mColumnIdx(0),	mIndentLevel(0), mRowIdx(0), mIcon(nil) {};
+	CCanvasEntry( const CCanvasEntry& inOriginal ) : mStack(inOriginal.mStack), mBackground(inOriginal.mBackground), mCard(inOriginal.mCard), mColumnIdx(inOriginal.mColumnIdx),	mIndentLevel(inOriginal.mIndentLevel), mRowIdx(inOriginal.mRowIdx), mMediaType(inOriginal.mMediaType), mMediaID(inOriginal.mMediaID) { mIcon = [inOriginal.mIcon retain]; };
+	~CCanvasEntry()	{ [mIcon release]; }
+	
+	void	SetIcon( WILDNSImagePtr inImage )	{ if( mIcon != inImage ) { [mIcon release]; mIcon = [inImage retain]; } }
 	
 	CStackRef		mStack;
 	CBackgroundRef	mBackground;
 	CCardRef		mCard;
+	TMediaType		mMediaType;
+	ObjectID		mMediaID;
 	int				mColumnIdx;
 	int				mRowIdx;
 	int				mIndentLevel;
+	WILDNSImagePtr	mIcon;
 };
 
 
@@ -79,6 +85,38 @@ struct CCanvasEntry
 
 		currItem.mColumnIdx++;
 	}
+	
+	currItem.mStack = CStackRef();
+	currItem.mBackground = CBackgroundRef();
+	currItem.mCard = CCardRef();
+	CMediaCache&	mc = self.owningDocument->GetMediaCache();
+	size_t numTypes = mc.GetNumMediaTypes();
+	size_t currItemIdx = items.size();	// Need index as changing the array may reallocate the items, so can't keep a pointer.
+	for( size_t currMediaTypeIdx = 0; currMediaTypeIdx < numTypes; currMediaTypeIdx++ )
+	{
+		TMediaType	currType = mc.GetMediaTypeAtIndex( currMediaTypeIdx );
+		currItem.mRowIdx = 0;
+		currItem.mMediaType = currType;
+		
+		size_t numMedia = mc.GetNumMediaOfType( currType );
+		for( size_t currMediaIdx = 0; currMediaIdx < numMedia; currMediaIdx++ )
+		{
+			currItem.mMediaID = mc.GetIDOfMediaOfTypeAtIndex( currType, currMediaIdx );
+			items.push_back( currItem );
+			if( currType == EMediaTypeCursor || currType == EMediaTypeIcon || currType == EMediaTypePicture || currType == EMediaTypePattern )
+			{
+				mc.GetMediaImageByIDOfType( currItem.mMediaID, currType, [self,currItemIdx]( WILDNSImagePtr inImage, int hotspotX, int hotspotY )
+				{
+					if( items[currItemIdx].mIcon == nil )
+						items[currItemIdx].SetIcon( inImage );
+				} );
+			}
+			currItem.mRowIdx += 1;
+			currItemIdx++;
+		}
+		
+		currItem.mColumnIdx += 1;
+	}
 
 	/* Set up a finder icon cell to use: */
 	UKFinderIconCell*		bCell = [[[UKFinderIconCell alloc] init] autorelease];
@@ -96,6 +134,7 @@ struct CCanvasEntry
 	return items.size();
 }
 
+
 -(NSPoint)		distributedView: (UKDistributedView*)distributedView
 						positionForCell:(NSCell*)cell /* may be nil if the view only wants the item position. */
 						atItemIndex: (NSUInteger)row
@@ -103,13 +142,29 @@ struct CCanvasEntry
 	CCanvasEntry	currItem = items[row];
 	if( cell )
 	{
-		NSImage*		objectImage = currItem.mCard ? [NSImage imageNamed: @"CardIcon"] : (currItem.mBackground ? [NSImage imageNamed: @"BackgroundIcon"] : [NSImage imageNamed: @"StackIcon"]);
+		NSImage*		objectImage = currItem.mCard ? [NSImage imageNamed: @"CardIcon"] : (currItem.mBackground ? [NSImage imageNamed: @"BackgroundIcon"] : (currItem.mStack ? [NSImage imageNamed: @"StackIcon"] : [NSImage imageNamed: NSImageNameApplicationIcon]));
 		CStack* 			currStack = currItem.mStack;
-		CConcreteObject* 	currObject = currItem.mCard ? (CConcreteObject*)currItem.mCard : (currItem.mBackground ? (CConcreteObject*)currItem.mBackground : (CConcreteObject*)currItem.mStack);
-		NSString*		nameStr = (currObject->GetName().size() > 0) ? [NSString stringWithUTF8String: currObject->GetName().c_str()] : [NSString stringWithFormat: @"ID %lld", currObject->GetID()];
+		CConcreteObject* 	currObject = currItem.mCard ? (CConcreteObject*)currItem.mCard : (currItem.mBackground ? (CConcreteObject*)currItem.mBackground : (currItem.mStack ? (CConcreteObject*)currItem.mStack : nullptr));
+		NSString*		nameStr = currObject ? ((currObject->GetName().size() > 0) ? [NSString stringWithUTF8String: currObject->GetName().c_str()] : [NSString stringWithFormat: @"ID %lld", currObject->GetID()]) : [NSString stringWithFormat: @"ID %lld", currItem.mMediaID];
 		NSImage*		img = nil;
 		
-		if( currObject == currStack )
+		if( currObject == nullptr )
+		{
+			CMediaCache&	mc = self.owningDocument->GetMediaCache();
+			
+			std::string	mediaName = mc.GetMediaNameByIDOfType( currItem.mMediaID, currItem.mMediaType );
+			if( mediaName.length() > 0 )
+			{
+				nameStr = [NSString stringWithUTF8String: mediaName.c_str()];
+			}
+			else
+			{
+				nameStr = [NSString stringWithFormat: @"%s %lld", mc.GetNameOfType( currItem.mMediaType ), currItem.mMediaID];
+			}
+			if( currItem.mIcon )
+				objectImage = currItem.mIcon;
+		}
+		else if( currObject == currStack )
 		{
 			std::string		thumbName = currStack->GetThumbnailName();
 			
