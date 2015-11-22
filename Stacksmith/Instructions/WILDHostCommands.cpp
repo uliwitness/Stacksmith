@@ -945,7 +945,6 @@ void	WILDMoveInstruction( LEOContext* inContext )
 	std::vector<LEOInteger>	coordinates;
 	union LEOValue			tmpStorage = {};
 	char					keyStr[40] = {0};
-	LEOUnit					theUnit = kLEOUnitNone;
 	
 	while( true )
 	{
@@ -958,29 +957,20 @@ void	WILDMoveInstruction( LEOContext* inContext )
 			break;	// We found all the values.
 		}
 		++numCoords;
-		LEOInteger	currCoordinate = LEOGetValueAsInteger( currValue, &theUnit, inContext );
-		coordinates.push_back( currCoordinate );
+		LEOInteger	l = 0, t = 0;
+		LEOGetValueAsPoint( currValue, &l, &t, inContext );
 		if( currValue == &tmpStorage )
 			LEOCleanUpValue( &tmpStorage, kLEOInvalidateReferences, inContext );
-		if( (inContext->flags & kLEOContextKeepRunning) == 0 )	// X coordinate wasn't a number? Error!
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )	// Item wasn't a point? Error!
 			return;
-		
-		// If we had an X coordinate, we also need a Y coordinate:
-		snprintf( keyStr, sizeof(keyStr)-1, "%d", numCoords +1 );
-		currValue = LEOGetValueForKey( thePoints, keyStr, &tmpStorage, kLEOInvalidateReferences, inContext );
-		if( currValue == NULL || (inContext->flags & kLEOContextKeepRunning) == 0 )
-			return;	// No Y? Invalid coordinate list!
-		++numCoords;
-		currCoordinate = LEOGetValueAsInteger( &tmpStorage, &theUnit, inContext );
-		coordinates.push_back( currCoordinate );
-		if( currValue == &tmpStorage )
-			LEOCleanUpValue( &tmpStorage, kLEOInvalidateReferences, inContext );
-		if( (inContext->flags & kLEOContextKeepRunning) == 0 )	// Y coordinate wasn't a number? Error!
-			return;
+		coordinates.push_back( l );
+		coordinates.push_back( t );
 	}
 	
 	if( numCoords == 0 )
 		return;
+	
+	numCoords *= 2;
 	
 	thePart->Retain();
 	CTimer	*	currTimer = new CTimer( 2, [thePart,coordIndex,numCoords,coordinates]( CTimer* inTimer ) mutable
