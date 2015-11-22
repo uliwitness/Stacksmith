@@ -99,12 +99,13 @@ protected:
 class CMediaCache
 {
 public:
-	CMediaCache( const std::string& inURL = std::string() ) : mMediaIDSeed(128), mURL(inURL)	{};
+	CMediaCache( const std::string& inURL = std::string() ) : mMediaIDSeed(128), mURL(inURL), mChangeCount(0)	{};
 
 	void				SetURL( const std::string& inURL )	{ mURL = inURL; };
 	std::string			GetURL()							{ return mURL; };
 	
 	bool				GetNeedsToBeSaved();
+	bool				GetListNeedsToBeSaved()				{ return mChangeCount != 0; };
 	
 	ObjectID			GetUniqueIDForMedia();
 
@@ -139,6 +140,7 @@ protected:
 	ObjectID					mMediaIDSeed;
 	std::vector<CMediaEntry>	mMediaList;
 	std::string					mURL;
+	size_t						mChangeCount;
 };
 
 }

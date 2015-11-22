@@ -163,7 +163,7 @@ bool	CDocument::Save()
 	if( mWriteProtected )
 		return false;
 	
-	if( mChangeCount != 0 || mLastEditedVersion.compare( "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION) ) != 0 )	// Project itself (property or stack/media lists) changed, or this file was last written by another version of Stacksmith and we need to update 'last edited version'?
+	if( mChangeCount != 0 || mLastEditedVersion.compare( "Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION) ) != 0 || mMediaCache.GetListNeedsToBeSaved() )	// Project itself (property or stack/media lists) changed, or this file was last written by another version of Stacksmith and we need to update 'last edited version'?
 	{
 		mkdir( destPath.c_str(), 0777 );
 
@@ -312,7 +312,7 @@ bool	CDocument::GetNeedsToBeSaved()
 			return true;
 	}
 	
-	if( mMediaCache.GetNeedsToBeSaved() )
+	if( mMediaCache.GetNeedsToBeSaved() || mMediaCache.GetListNeedsToBeSaved() )
 		return true;
 	
 	return false;

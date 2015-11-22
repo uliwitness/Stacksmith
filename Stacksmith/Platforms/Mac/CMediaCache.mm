@@ -65,6 +65,8 @@ void	CMediaCache::SaveMediaToElement( ObjectID inID, TMediaType inType, tinyxml2
 			break;
 		}
 	}
+	
+	mChangeCount = 0;
 }
 
 
@@ -321,6 +323,8 @@ std::string		CMediaCache::AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningU
 	fileName.append(1, '.');
 	fileName.append(inSuffix);
 	mMediaList.push_back( CMediaEntry( inID, inName, fileName, inType, xHotSpot, yHotSpot, isBuiltIn, true ) );
+	
+	mChangeCount++;
 	
 	return fileName;
 }
