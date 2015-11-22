@@ -569,6 +569,8 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 {
 	bool			handled = false;
 	LEOHandlerID	arrowKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "arrowKey" );
+	LEOHandlerID	forwardDeleteKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "forwardDelete" );
+	LEOHandlerID	backspaceKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "backspaceKey" );
 	LEOHandlerID	keyDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "keyDown" );
 	LEOHandlerID	textChangeHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "textChange" );
 	LEOHandlerID	functionKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "functionKey" );
@@ -659,6 +661,15 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		}
 		else
 			handled = false;
+		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+	}
+	else if( inHandler == backspaceKeyHandlerID || inHandler == forwardDeleteKeyHandlerID )
+	{
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+		if( !userData->GetStack()->GetEditingBackground() )
+			userData->GetStack()->GetCurrentCard()->DeleteSelectedItem();
+		userData->GetStack()->GetCurrentCard()->GetBackground()->DeleteSelectedItem();
+		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
 	}
 	else if( inHandler == peekingDownHandlerID )

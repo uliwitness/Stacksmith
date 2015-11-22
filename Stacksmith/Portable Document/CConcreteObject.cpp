@@ -303,6 +303,22 @@ static CAddHandlerListEntry	sMasterHandlerList[] =
 	{
 		kHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
+		"forwardDeleteKey",
+		"The Forward Delete key was pressed (This key is usually between the alphabet keys and the number block, above the arrow keys, or what happens when you hold the fn key and press the backspace key on compact keyboards).",
+		"\n\non forwardDeleteKey modifier1,modifier2,modifier3,modifier4\n\t\nend forwardDeleteKey",
+		"field"
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"backspaceKey",
+		"The Backspace (often called \"delete\") key was pressed (This key is usually right above the return key).",
+		"\n\non backspaceKey modifier1,modifier2,modifier3,modifier4\n\t\nend backspaceKey",
+		"field"
+	},
+	{
+		kHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
 		"functionKey",
 		"One of the function keys was pressed on the keyboard.",
 		"\n\non functionKey fKeyNumber,modifier1,modifier2,modifier3,modifier4\n\t\nend functionKey",

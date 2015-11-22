@@ -413,6 +413,13 @@ using namespace Carlson;
 			case 0x0019:	// Back tab
 				theCard->SendMessage( NULL, errHandler, "tabKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
+
+			case NSDeleteFunctionKey:	// Delete
+				theCard->SendMessage( NULL, errHandler, "forwardDeleteKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				break;
+			case 0x007F:	// Backspace
+				theCard->SendMessage( NULL, errHandler, "backspaceKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				break;
 				
 			case NSLeftArrowFunctionKey:
 				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "left", firstModifier, secondModifier, thirdModifier, fourthModifier );
