@@ -1296,78 +1296,10 @@ using namespace Carlson;
 }
 
 
--(IBAction)	newButton: (id)sender
+-(IBAction)	newPart: (id)sender
 {
-	CAutoreleasePool	pool;
-	mStack->SetTool(EPointerTool);
-	CLayer	*	owner = mStack->GetCurrentLayer();
-	CPart	*	thePart = CPart::GetPartCreatorForType("button")->NewPartInOwner( owner );
-	thePart->SetID( owner->GetUniqueIDForPart() );
-	owner->AddPart(thePart);
-	thePart->Release();
-	thePart->IncrementChangeCount();
+	mStack->NewPart( [sender tag] );
 	[self refreshExistenceAndOrderOfAllViews];
-	thePart->SetSelected(true);
-}
-
-
--(IBAction)	newField: (id)sender
-{
-	CAutoreleasePool	pool;
-	mStack->SetTool(EPointerTool);
-	CLayer	*	owner = mStack->GetCurrentLayer();
-	CPart	*	thePart = CPart::GetPartCreatorForType("field")->NewPartInOwner( owner );
-	thePart->SetID( owner->GetUniqueIDForPart() );
-	owner->AddPart(thePart);
-	thePart->Release();
-	thePart->IncrementChangeCount();
-	[self refreshExistenceAndOrderOfAllViews];
-	thePart->SetSelected(true);
-}
-
-
--(IBAction)	newMoviePlayer: (id)sender
-{
-	CAutoreleasePool	pool;
-	mStack->SetTool(EPointerTool);
-	CLayer	*	owner = mStack->GetCurrentLayer();
-	CPart	*	thePart = CPart::GetPartCreatorForType("moviePlayer")->NewPartInOwner( owner );
-	thePart->SetID( owner->GetUniqueIDForPart() );
-	owner->AddPart(thePart);
-	thePart->Release();
-	thePart->IncrementChangeCount();
-	[self refreshExistenceAndOrderOfAllViews];
-	thePart->SetSelected(true);
-}
-
-
--(IBAction)	newWebBrowser: (id)sender
-{
-	CAutoreleasePool	pool;
-	mStack->SetTool(EPointerTool);
-	CLayer	*	owner = mStack->GetCurrentLayer();
-	CPart	*	thePart = CPart::GetPartCreatorForType("browser")->NewPartInOwner( owner );
-	thePart->SetID( owner->GetUniqueIDForPart() );
-	owner->AddPart(thePart);
-	thePart->Release();
-	thePart->IncrementChangeCount();
-	[self refreshExistenceAndOrderOfAllViews];
-	thePart->SetSelected(true);
-}
-
-
--(IBAction)	newTimer: (id)sender
-{
-	CAutoreleasePool	pool;
-	mStack->SetTool(EPointerTool);
-	CLayer	*	owner = mStack->GetCurrentLayer();
-	CPart	*	thePart = CPart::GetPartCreatorForType("timer")->NewPartInOwner( owner );
-	thePart->SetID( owner->GetUniqueIDForPart() );
-	owner->AddPart(thePart);
-	thePart->Release();
-	thePart->IncrementChangeCount();
-	[self refreshExistenceAndOrderOfAllViews];
-	thePart->SetSelected(true);
 }
 
 

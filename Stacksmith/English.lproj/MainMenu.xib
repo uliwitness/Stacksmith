@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <development version="6300" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -431,36 +432,6 @@
                             <menuItem isSeparatorItem="YES" id="214">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="New Button" id="5ct-I6-KCb">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="newButton:" target="-1" id="2mB-lk-EAI"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="New Field" id="J4z-Ke-Af6">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="newField:" target="-1" id="PnR-ZC-2JL"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="New Movie Player" id="1NJ-oS-OM0">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="newMoviePlayer:" target="-1" id="mXW-qr-NEI"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="New Web Browser" id="Iid-YZ-wqv">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="newWebBrowser:" target="-1" id="5Tj-ig-RKU"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="New Timer" id="6b2-F5-jc7">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="newTimer:" target="-1" id="lIX-CN-fmd"/>
-                                </connections>
-                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -805,6 +776,7 @@
                 <outlet property="mLockPseudoMenu" destination="DXo-F9-GAP" id="E2a-ue-3Jg"/>
                 <outlet property="mMessageBoxButton" destination="9ot-lO-F2x" id="SKT-cf-Jc2"/>
                 <outlet property="mMessageWatcherButton" destination="3Rl-eW-52o" id="ga6-Oe-571"/>
+                <outlet property="mNewObjectSeparator" destination="214" id="A7U-cH-HVi"/>
                 <outlet property="mOvalToolButton" destination="m0y-Bn-8Ww" id="mfW-vc-3eV"/>
                 <outlet property="mPointerToolButton" destination="MF4-Xg-gT7" id="3nB-CD-IEc"/>
                 <outlet property="mRectangleToolButton" destination="6Ra-1z-6td" id="DBh-gP-zZr"/>
@@ -826,10 +798,12 @@
                     <progressIndicator verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="bar" id="569">
                         <rect key="frame" x="18" y="16" width="345" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <animations/>
                     </progressIndicator>
                     <textField verticalHuggingPriority="750" id="568">
                         <rect key="frame" x="17" y="44" width="347" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <animations/>
                         <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="Loading…" id="570">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -837,6 +811,7 @@
                         </textFieldCell>
                     </textField>
                 </subviews>
+                <animations/>
             </view>
         </window>
         <customObject id="571" customClass="UKProgressPanelController">
@@ -870,6 +845,7 @@
                                 <button toolTip="Browse" verticalHuggingPriority="750" id="gIo-t9-M2n">
                                     <rect key="frame" x="3" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="BrowseTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6R0-16-eNY" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -881,6 +857,7 @@
                                 <button toolTip="Next Card" verticalHuggingPriority="750" id="d9P-4H-e88">
                                     <rect key="frame" x="780" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ICON_26425" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ruq-kX-9Nx" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -892,6 +869,7 @@
                                 <button toolTip="Previous Card" verticalHuggingPriority="750" id="EFo-B7-AVP">
                                     <rect key="frame" x="745" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ICON_902" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uTJ-qZ-qaj" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -903,6 +881,7 @@
                                 <button toolTip="Edit" verticalHuggingPriority="750" tag="1" id="MF4-Xg-gT7">
                                     <rect key="frame" x="38" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="PointerTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9zB-Ko-ny1" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -918,6 +897,7 @@
                                         <button toolTip="Stack Properties" verticalHuggingPriority="750" id="wkz-0c-d3L">
                                             <rect key="frame" x="6" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="StackIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dw5-bQ-tqg" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -929,6 +909,7 @@
                                         <button toolTip="Background Properties" verticalHuggingPriority="750" id="1oD-UL-G2Q">
                                             <rect key="frame" x="40" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="BackgroundIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VRJ-0D-cxa" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -940,6 +921,7 @@
                                         <button toolTip="Card Properties" verticalHuggingPriority="750" id="GPp-md-4F2">
                                             <rect key="frame" x="73" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="CardIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="P5N-PE-3zU" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -951,6 +933,7 @@
                                         <button toolTip="Edit Background" verticalHuggingPriority="750" id="J38-Wh-F6i">
                                             <rect key="frame" x="120" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="BackgroundEditIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UmE-pK-cfg" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -960,10 +943,12 @@
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <animations/>
                                 </customView>
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="2" id="O60-s9-3f9">
                                     <rect key="frame" x="73" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="EditTextTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ikb-b2-jFu" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -975,6 +960,7 @@
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="3" id="m0y-Bn-8Ww">
                                     <rect key="frame" x="108" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintOvalTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eT6-ZL-JPk" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -986,6 +972,7 @@
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="4" id="6Ra-1z-6td">
                                     <rect key="frame" x="143" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintRectTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fQg-LZ-aMQ" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -997,6 +984,7 @@
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="5" id="RG6-nj-ASQ">
                                     <rect key="frame" x="178" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintRoundrectTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WAp-L3-GTf" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -1012,6 +1000,7 @@
                                         <button toolTip="Stack Canvas" verticalHuggingPriority="750" id="B8l-FW-2Oq">
                                             <rect key="frame" x="95" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="StackCanvasIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VxP-KP-LhW" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1023,6 +1012,7 @@
                                         <button toolTip="Message Box" verticalHuggingPriority="750" id="9ot-lO-F2x">
                                             <rect key="frame" x="7" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="MessageBoxIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pLl-zL-v0s" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1034,6 +1024,7 @@
                                         <button toolTip="Message Watcher" verticalHuggingPriority="750" id="3Rl-eW-52o">
                                             <rect key="frame" x="41" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="MessageWatcherIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jAL-2C-b4y" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1043,10 +1034,12 @@
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <animations/>
                                 </customView>
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="6" id="AyT-VH-Z46">
                                     <rect key="frame" x="213" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintLineTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pDS-fT-AmH" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -1058,6 +1051,7 @@
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="7" id="Pxd-Ed-7Tw">
                                     <rect key="frame" x="248" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintPathTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DPr-Kh-xCX" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -1067,11 +1061,14 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <animations/>
                         </view>
+                        <animations/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                     </box>
                 </subviews>
+                <animations/>
             </view>
             <point key="canvasLocation" x="909.5" y="297"/>
         </window>

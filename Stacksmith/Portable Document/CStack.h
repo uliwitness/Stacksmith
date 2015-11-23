@@ -114,6 +114,7 @@ public:
 	virtual void	SelectAllObjectsOnCard();
 	virtual void	DeselectAllObjectsOnBackground();
 	virtual void	SelectAllObjectsOnBackground();
+	virtual CPart*	NewPart( size_t inIndex );
 
 	virtual void	SetName( const std::string& inName );
 	virtual void	SetStyle( TStackStyle inStyle )			{ mStyle = inStyle; IncrementChangeCount(); };

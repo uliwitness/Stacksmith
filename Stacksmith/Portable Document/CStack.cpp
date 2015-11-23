@@ -834,6 +834,24 @@ void	CStack::SetVisible( bool n )
 }
 
 
+CPart*	CStack::NewPart( size_t inIndex )
+{
+	CAutoreleasePool	pool;
+	SetTool(EPointerTool);
+	CLayer	*	owner = GetCurrentLayer();
+	CPart	*	thePart = CPart::GetPartCreatorForType( CDocument::GetNewPartTypeAtIndex(inIndex).c_str() )->NewPartInOwner( owner );
+	thePart->SetID( owner->GetUniqueIDForPart() );
+	owner->AddPart(thePart);
+	thePart->Release();
+	thePart->IncrementChangeCount();
+	mCurrentCard->DeselectAllItems();
+	mCurrentCard->GetBackground()->DeselectAllItems();
+	thePart->SetSelected(true);
+	
+	return thePart;
+}
+
+
 void	CStack::SaveThumbnail()
 {
 }

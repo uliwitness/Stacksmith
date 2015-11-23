@@ -20,7 +20,56 @@
 using namespace Carlson;
 
 
-CDocumentManager*	CDocumentManager::sSharedDocumentManager = NULL;
+struct CNewPartMenuItemEntry
+{
+	std::string		mMenuItemName;
+	std::string		mPartType;
+};
+
+
+CDocumentManager*					CDocumentManager::sSharedDocumentManager = NULL;
+std::vector<CNewPartMenuItemEntry>	sNewPartMenuItems;
+
+
+void	CDocument::LoadNewPartMenuItemsFromFilePath( const char* inPath )
+{
+	tinyxml2::XMLDocument	*	document = new tinyxml2::XMLDocument();
+
+	if( tinyxml2::XML_SUCCESS == document->LoadFile( inPath ) )
+	{
+		tinyxml2::XMLElement	*	root = document->RootElement();
+		tinyxml2::XMLElement	*	partElement = root->FirstChildElement("newpart");
+		while( partElement )
+		{
+			CNewPartMenuItemEntry		entry;
+			CTinyXMLUtils::GetStringNamed( partElement, "type", entry.mPartType );
+			CTinyXMLUtils::GetStringNamed( partElement, "menuItem", entry.mMenuItemName );
+			sNewPartMenuItems.push_back( entry );
+			
+			partElement = partElement->NextSiblingElement("newpart");
+		}
+	}
+	
+	delete document;
+}
+
+
+size_t	CDocument::GetNewPartMenuItemCount()
+{
+	return sNewPartMenuItems.size();
+}
+
+
+std::string	CDocument::GetNewPartMenuItemAtIndex( size_t inIndex )
+{
+	return sNewPartMenuItems[inIndex].mMenuItemName;
+}
+
+
+std::string	CDocument::GetNewPartTypeAtIndex( size_t inIndex )
+{
+	return sNewPartMenuItems[inIndex].mPartType;
+}
 
 
 CDocument::~CDocument()

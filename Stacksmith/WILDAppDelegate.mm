@@ -28,6 +28,7 @@
 #include "CRecentCardsList.h"
 #import "UKHelperMacros.h"
 #import "WILDTemplateProjectPickerController.h"
+#import "WILDStackWindowController.h"
 
 
 // On startup, if not asked to open any stack, we will look for a stack
@@ -63,6 +64,8 @@ void	WILDScheduleResumeOfScript( void )
 	if( self )
 	{
 		new CDocumentManagerMac;	// Create the singleton of our subclass.
+		
+		CDocument::LoadNewPartMenuItemsFromFilePath( [NSBundle.mainBundle pathForResource: @"new_part_descriptions" ofType: @"xml"].fileSystemRepresentation );
 		
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowChanged:) name: NSWindowDidBecomeMainNotification object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowMightHaveGoneAway:) name: NSWindowWillCloseNotification object: nil];
@@ -150,6 +153,13 @@ void	WILDScheduleResumeOfScript( void )
 -(void)	applicationWillFinishLaunching:(NSNotification *)notification
 {
 	[self initializeParser];
+	
+	size_t			numItems = CDocument::GetNewPartMenuItemCount();
+	for( size_t x = 0; x < numItems; x++ )
+	{
+		NSMenuItem	*	theItem = [mNewObjectSeparator.menu addItemWithTitle: [NSString stringWithUTF8String: CDocument::GetNewPartMenuItemAtIndex(x).c_str()] action: @selector(newPart:) keyEquivalent: @""];
+		theItem.tag = x;
+	}
 	
 	mFlagsChangedEventMonitor = [[NSEvent addLocalMonitorForEventsMatchingMask: NSFlagsChangedMask handler: ^(NSEvent* inEvent){ return [self handleFlagsChangedEvent: inEvent]; }] retain];
 	

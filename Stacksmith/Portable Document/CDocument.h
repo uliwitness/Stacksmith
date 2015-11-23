@@ -89,7 +89,12 @@ public:
 	
 	virtual void		Dump( size_t inNestingLevel = 0 );
 	static std::string	PathFromFileURL( const std::string& inURL );
-
+	
+	// "New Part" menu item list querying:
+	static void			LoadNewPartMenuItemsFromFilePath( const char* inPath );
+	static size_t		GetNewPartMenuItemCount();
+	static std::string	GetNewPartMenuItemAtIndex( size_t inIndex );
+	static std::string	GetNewPartTypeAtIndex( size_t inIndex );
 
 protected:
 	virtual ~CDocument();

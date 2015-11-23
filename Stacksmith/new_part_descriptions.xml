@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE newpartdescriptions PUBLIC "-//Stacksmith//DTD newpartdescriptions V 1.0//EN" "" >
+<newpartdescriptions>
+	<newpart>
+		<type>button</type>
+		<menuItem>New Button</menuItem>
+	</newpart>
+	<newpart>
+		<type>field</type>
+		<menuItem>New Field</menuItem>
+	</newpart>
+	<newpart>
+		<type>moviePlayer</type>
+		<menuItem>New Movie Player</menuItem>
+	</newpart>
+	<newpart>
+		<type>browser</type>
+		<menuItem>New Web Browser</menuItem>
+	</newpart>
+	<newpart>
+		<type>timer</type>
+		<menuItem>New Timer</menuItem>
+	</newpart>
+</newpartdescriptions>
