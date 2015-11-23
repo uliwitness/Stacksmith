@@ -106,6 +106,8 @@ void	CMacPartBase::SetCocoaAttributesForPart( NSDictionary* inAttrs )
 NSDictionary*	CMacPartBase::GetCocoaAttributesForPart()
 {
 	CVisiblePart*			myself = dynamic_cast<CVisiblePart*>(this);
+	if( !myself )
+		return nil;
 	NSMutableDictionary	*	styles = [NSMutableDictionary dictionary];
 	NSFont	*				theFont = nil;
 	CGFloat					fontSize = myself->GetTextSize();
