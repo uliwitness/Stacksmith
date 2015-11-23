@@ -16,6 +16,14 @@
 using namespace Carlson;
 
 
+CTimerPart::CTimerPart( CLayer *inOwner )
+	: CPart( inOwner ), mInterval(120), mStarted(false), mRepeat(false)
+{
+	mActualTimer.SetHandler( [this](CTimer *inSender) { Trigger(); });
+	mActualTimer.SetInterval( mInterval );
+}
+
+
 void	CTimerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 {
 	CPart::LoadPropertiesFromElement( inElement );
@@ -25,7 +33,6 @@ void	CTimerPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mInterval = CTinyXMLUtils::GetLongLongNamed( inElement, "interval", 0 );
 	mStarted = CTinyXMLUtils::GetBoolNamed( inElement, "started", true );
 	mRepeat = CTinyXMLUtils::GetBoolNamed( inElement, "repeat", true );
-	mActualTimer.SetHandler( [this](CTimer *inSender) { Trigger(); });
 	mActualTimer.SetInterval( mInterval );
 }
 
