@@ -412,6 +412,33 @@
                 <menuItem title="Objects" id="LOr-cY-aQg">
                     <menu key="submenu" title="Objects" id="JE6-c7-TPM">
                         <items>
+                            <menuItem title="Bring to Front" id="qjL-mY-LcT">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="bringToFront:" target="-1" id="X0C-jq-ahS"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Bring Forward" id="tO1-O9-9hv">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="bringForward:" target="-1" id="pAo-NV-vZa"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Send Backward" id="HoH-DI-bGt">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="sendBackward:" target="-1" id="yjZ-w3-s8h"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Send to Back" id="Rtv-B3-xWV">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="sendToBack:" target="-1" id="2en-pU-I1b"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="9Mn-xT-r4T">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
                             <menuItem title="New Stack" id="z6Z-Ih-7v1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

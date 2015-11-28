@@ -79,6 +79,10 @@ public:
 	virtual std::string				CopySelectedItem();
 	virtual bool					CanCopySelectedItem();
 	virtual std::vector<CPartRef>	PasteObject( const std::string& inXMLStr, TLayerPasteFlags pasteFlags = 0 );
+	virtual void					BringSelectedItemToFront();
+	virtual void					BringSelectedItemForward();
+	virtual void					SendSelectedItemBackward();
+	virtual void					SendSelectedItemToBack();
 
 	virtual void	WakeUp();		//!< Actually activate the completely loaded layer because the user is about to use it. All OS-specific UI objects (windows, views) already exist at this point. Use this to e.g. start the insertion point of a text field flashing, or start a movie player that was playing when we quit.
 	virtual void	GoToSleep();	//!< Opposite of WakeUp().

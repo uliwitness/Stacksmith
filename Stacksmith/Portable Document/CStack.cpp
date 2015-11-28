@@ -852,6 +852,34 @@ CPart*	CStack::NewPart( size_t inIndex )
 }
 
 
+void	CStack::BringSelectedItemToFront()
+{
+	mCurrentCard->BringSelectedItemToFront();
+	mCurrentCard->GetBackground()->BringSelectedItemToFront();
+}
+
+
+void	CStack::BringSelectedItemForward()
+{
+	mCurrentCard->BringSelectedItemForward();
+	mCurrentCard->GetBackground()->BringSelectedItemForward();
+}
+
+
+void	CStack::SendSelectedItemBackward()
+{
+	mCurrentCard->SendSelectedItemBackward();
+	mCurrentCard->GetBackground()->SendSelectedItemBackward();
+}
+
+
+void	CStack::SendSelectedItemToBack()
+{
+	mCurrentCard->SendSelectedItemToBack();
+	mCurrentCard->GetBackground()->SendSelectedItemToBack();
+}
+
+
 void	CStack::SaveThumbnail()
 {
 }

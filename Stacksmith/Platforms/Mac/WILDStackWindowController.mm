@@ -1275,6 +1275,30 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	bringToFront: (id)sender
+{
+	mStack->BringSelectedItemToFront();
+}
+
+
+-(IBAction)	bringForward: (id)sender
+{
+	mStack->BringSelectedItemForward();
+}
+
+
+-(IBAction)	sendBackward: (id)sender
+{
+	mStack->SendSelectedItemBackward();
+}
+
+
+-(IBAction)	sendToBack: (id)sender
+{
+	mStack->SendSelectedItemToBack();
+}
+
+
 -(IBAction)	takeToolFromTag: (id)sender
 {
 	mStack->SetTool( (TTool) [sender tag] );

@@ -848,6 +848,104 @@ std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr, TLayerPa
 }
 
 
+void	CLayer::BringSelectedItemToFront()
+{
+	std::vector<CPartRef>	partsToMove;
+	
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			partsToMove.push_back( *currPart );
+			currPart = mParts.erase( currPart );
+		}
+		else
+			currPart++;
+	}
+	
+	for( auto currPart : partsToMove )
+	{
+		mParts.insert( mParts.end(), currPart );
+	}
+	
+	IncrementChangeCount();
+}
+
+
+void	CLayer::BringSelectedItemForward()
+{
+	auto	lastItem = mParts.rbegin();	// Initialize to last item so we don't try to move the already-last item up.
+	auto	nextItem = mParts.rbegin();
+	
+	for( auto currPart = mParts.rbegin(); currPart != mParts.rend(); currPart++ )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			if( currPart != lastItem )	// Don't try to move beyond end of list.
+			{
+				if( !(*nextItem)->IsSelected() )	// Don't change order of selected items.
+				{
+					std::swap(*currPart, *nextItem);
+				}
+			}
+		}
+		
+		nextItem = currPart;
+	}
+	
+	IncrementChangeCount();
+}
+
+
+void	CLayer::SendSelectedItemBackward()
+{
+	auto	firstItem = mParts.begin();	// Initialize to first item so we don't try to move the already-first item down.
+	auto	prevItem = mParts.begin();
+	
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			if( currPart != firstItem )	// Don't try to move beyond start of list.
+			{
+				if( !(*prevItem)->IsSelected() )	// Don't change order of selected items.
+				{
+					std::swap(*currPart, *prevItem);
+				}
+			}
+		}
+			
+		prevItem = currPart;
+	}
+	
+	IncrementChangeCount();
+}
+
+
+void	CLayer::SendSelectedItemToBack()
+{
+	std::vector<CPartRef>	partsToMove;
+	
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			partsToMove.push_back( *currPart );
+			currPart = mParts.erase( currPart );
+		}
+		else
+			currPart++;
+	}
+	
+	for( auto currPart : partsToMove )
+	{
+		mParts.insert( mParts.begin(), currPart );
+	}
+	
+	IncrementChangeCount();
+}
+
+
 std::string	CLayer::GetPictureURL()
 {
 	if( GetPictureName().length() == 0 )
