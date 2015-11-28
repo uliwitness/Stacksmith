@@ -17,6 +17,7 @@
 #include "CRectanglePart.h"
 #include "CPicturePart.h"
 #include "CDocument.h"
+#include "CUndoStack.h"
 #include <sys/stat.h>
 #include <sstream>
 
@@ -572,6 +573,8 @@ void	CLayer::SetPeeking( bool inState )
 
 void	CLayer::DeleteSelectedItem()
 {
+	std::string		serializedSelectedParts( CopySelectedItem() );
+	
 	for( auto currPart = mParts.begin(); currPart != mParts.end(); )
 	{
 		if( (*currPart)->IsSelected() )
@@ -585,6 +588,17 @@ void	CLayer::DeleteSelectedItem()
 		else
 			currPart++;
 	}
+	
+	GetStack()->GetUndoStack()->AddUndoAction( "Undo Delete", [this,serializedSelectedParts]()
+	{
+		GetStack()->DeselectAllObjectsOnBackground();
+		GetStack()->DeselectAllObjectsOnCard();
+		std::vector<CPartRef>	newParts = PasteObject(serializedSelectedParts, EPasteAtPreviousPartIndex);
+		for( CPartRef currPart : newParts )
+		{
+			currPart->SetSelected(true);
+		}
+	} );
 }
 
 
@@ -595,6 +609,18 @@ void	CLayer::DeselectAllItems()
 		if( (*currPart)->IsSelected() )
 		{
 			(*currPart)->SetSelected(false);
+		}
+	}
+}
+
+
+void	CLayer::SelectAllItems()
+{
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			(*currPart)->SetSelected(true);
 		}
 	}
 }
@@ -620,6 +646,7 @@ std::string	CLayer::CopySelectedItem()
 	tinyxml2::XMLElement *	cardElement = document.NewElement("card");
 	tinyxml2::XMLElement *	backgroundElement = document.NewElement("background");
 	tinyxml2::XMLElement *	resourcesElement = document.NewElement("resources");
+	size_t					partNumber = 1;
 	
 	for( CPart* currPart : mParts )
 	{
@@ -628,6 +655,7 @@ std::string	CLayer::CopySelectedItem()
 			tinyxml2::XMLElement *	partElement = document.NewElement("part");
 			partsElement->InsertEndChild( partElement );
 			currPart->SaveToElement( partElement );
+			CTinyXMLUtils::AddLongLongNamed( partElement, partNumber, "partNumber" );	// So undo can restore a part at the right position.
 			CPartContents*	cardContents = GetPartContentsByID( currPart->GetID(), false );
 			if( cardContents )
 			{
@@ -645,6 +673,8 @@ std::string	CLayer::CopySelectedItem()
 			
 			currPart->SaveAssociatedResourcesToElement( resourcesElement );
 		}
+		
+		partNumber++;
 	}
 	
 	tinyxml2::XMLElement *	stylesElement = document.NewElement("style");
@@ -720,7 +750,7 @@ void	CLayer::LoadPastedPartContents( CPart* newPart, ObjectID oldID, tinyxml2::X
 }
 
 
-std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr )
+std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr, TLayerPasteFlags pasteFlags )
 {
 	//Dump();
 	
@@ -753,7 +783,13 @@ std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr )
 				}
 				
 				CPart	*	newPart = CPart::NewPartWithElement( currPart, this );
-				mParts.push_back( newPart );
+				if( pasteFlags & EPasteAtPreviousPartIndex )	// Used by undo to fully restore a part.
+				{
+					size_t	newIndex = CTinyXMLUtils::GetLongLongNamed( currPart, "partNumber" ) -1;
+					mParts.insert( mParts.begin() +newIndex, newPart );
+				}
+				else
+					mParts.push_back( newPart );
 				newPart->Release();
 				
 				LoadPastedPartContents( newPart, oldID, &currCardContents, &currBgContents, &styleSheet );

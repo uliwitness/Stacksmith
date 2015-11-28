@@ -23,6 +23,12 @@ namespace Carlson {
 
 class CStack;
 
+enum
+{
+	EPasteAtPreviousPartIndex = (1 << 0)
+};
+typedef uint32_t	TLayerPasteFlags;
+
 
 /*!
 	@class CLayer
@@ -72,7 +78,7 @@ public:
 	virtual bool					CanDeleteSelectedItem();
 	virtual std::string				CopySelectedItem();
 	virtual bool					CanCopySelectedItem();
-	virtual std::vector<CPartRef>	PasteObject( const std::string& inXMLStr );
+	virtual std::vector<CPartRef>	PasteObject( const std::string& inXMLStr, TLayerPasteFlags pasteFlags = 0 );
 
 	virtual void	WakeUp();		//!< Actually activate the completely loaded layer because the user is about to use it. All OS-specific UI objects (windows, views) already exist at this point. Use this to e.g. start the insertion point of a text field flashing, or start a movie player that was playing when we quit.
 	virtual void	GoToSleep();	//!< Opposite of WakeUp().
@@ -92,6 +98,7 @@ public:
 	
 	virtual void	ToolChangedFrom( TTool inOldTool );
 	virtual void	DeselectAllItems();
+	virtual void	SelectAllItems();
 	
 	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines.
 	void			CorrectRectOfPart( CPart* inMovedPart, std::vector<CPartRef> inEligibleParts, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );
