@@ -153,23 +153,25 @@ public:
 	virtual void	GetGuidelineAtIndex( size_t idx, long long *outCoord, bool *outHorzNotVert )	{ size_t hcount = mHorizontalGuidelines.size(); if( idx >= hcount ) { *outCoord = mVerticalGuidelines[idx-hcount]; *outHorzNotVert = false; } else { *outCoord = mHorizontalGuidelines[idx]; *outHorzNotVert = true; } };
 	
 	// Visibility feedback from the UI: (This is not whether the stack's window is obscured, but whether it's actually ordered out or closed)
-	virtual bool	IsVisible()								{ return mVisible; };
+	virtual bool	IsVisible()								{ return mVisible; }
 	virtual void	SetVisible( bool n );
 	
 	// Allow code to trigger showing the UI:
-	virtual void	Show( TEvenIfVisible inEvenIfVisible )		{ mVisible = true; };
+	virtual void	Show( TEvenIfVisible inEvenIfVisible )		{ mVisible = true; }
 	
-	std::string		GetThumbnailName()						{ return mThumbnailName; };	//!< Empty string if we have no thumbnail.
-	void			SetThumbnailName( std::string inName )	{ mThumbnailName = inName; };
+	std::string		GetThumbnailName()						{ return mThumbnailName; }	//!< Empty string if we have no thumbnail.
+	void			SetThumbnailName( std::string inName )	{ mThumbnailName = inName; }
 	virtual void	SaveThumbnail();
-	virtual void	SaveThumbnailIfFirstCardOpen()			{};
+	virtual void	SaveThumbnailIfFirstCardOpen()			{}
+
+	virtual void	NumberOrOrderOfPartsChanged()			{}
 
 	virtual void	Dump( size_t inIndent = 0 );
 	
 // statics:
-	static CStack*		GetFrontStack()						{ return sFrontStack; };
+	static CStack*		GetFrontStack()						{ return sFrontStack; }
 	static void			SetFrontStack( CStack* inStack );
-	static void			SetFrontStackChangedCallback( std::function<void(CStack*)> inCallback )	{ sFrontStackChangedBlock = inCallback; };
+	static void			SetFrontStackChangedCallback( std::function<void(CStack*)> inCallback )	{ sFrontStackChangedBlock = inCallback; }
 
 	static const char*	GetToolName( TTool inTool );
 	static TTool		GetToolFromName( const char* inName );

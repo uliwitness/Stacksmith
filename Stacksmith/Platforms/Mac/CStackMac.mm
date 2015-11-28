@@ -104,6 +104,12 @@ void	CStackMac::Show( TEvenIfVisible inEvenIfVisible )
 }
 
 
+void	CStackMac::NumberOrOrderOfPartsChanged()
+{
+	[mMacWindowController refreshExistenceAndOrderOfAllViews];
+	[mMacWindowController drawBoundingBoxes];
+}
+
 
 void	CStackMac::SetName( const std::string& inName )
 {

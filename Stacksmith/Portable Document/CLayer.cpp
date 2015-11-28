@@ -599,6 +599,8 @@ void	CLayer::DeleteSelectedItem()
 			currPart->SetSelected(true);
 		}
 	} );
+	
+	NumberOrOrderOfPartsChanged();
 }
 
 
@@ -842,6 +844,8 @@ std::vector<CPartRef>	CLayer::PasteObject( const std::string& inXMLStr, TLayerPa
 		}
 	}
 	
+	NumberOrOrderOfPartsChanged();
+	
 	//Dump();
 	
 	return newParts;
@@ -869,6 +873,7 @@ void	CLayer::BringSelectedItemToFront()
 	}
 	
 	IncrementChangeCount();
+	NumberOrOrderOfPartsChanged();
 }
 
 
@@ -894,6 +899,7 @@ void	CLayer::BringSelectedItemForward()
 	}
 	
 	IncrementChangeCount();
+	NumberOrOrderOfPartsChanged();
 }
 
 
@@ -919,6 +925,7 @@ void	CLayer::SendSelectedItemBackward()
 	}
 	
 	IncrementChangeCount();
+	NumberOrOrderOfPartsChanged();
 }
 
 
@@ -943,6 +950,7 @@ void	CLayer::SendSelectedItemToBack()
 	}
 	
 	IncrementChangeCount();
+	NumberOrOrderOfPartsChanged();
 }
 
 
@@ -1020,6 +1028,12 @@ bool	CLayer::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 const char*	CLayer::GetIdentityForDump()
 {
 	return "Layer";
+}
+
+
+void	CLayer::NumberOrOrderOfPartsChanged()
+{
+	mStack->NumberOrOrderOfPartsChanged();
 }
 
 

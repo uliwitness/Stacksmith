@@ -736,15 +736,22 @@ using namespace Carlson;
 }
 
 
--(void)	drawBoundingBoxes
+-(void)	destroySelectionOverlay
 {
 	[mSelectionOverlay removeFromSuperlayer];
 	[mSelectionOverlay release];
 	mSelectionOverlay = nil;
-	
+}
+
+
+-(void)	drawBoundingBoxes
+{
 	CCard	*	theCard = mStack->GetCurrentCard();
 	if( !theCard )
+	{
+		[self destroySelectionOverlay];
 		return;
+	}
 	
 	CGColorSpaceRef	colorSpace = CGColorSpaceCreateWithName( kCGColorSpaceGenericRGB );
 	CGContextRef	bmContext = CGBitmapContextCreate( NULL, mStack->GetCardWidth(), mStack->GetCardHeight(), 8, mStack->GetCardWidth() * 8 * 4, colorSpace, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little );
@@ -796,7 +803,9 @@ using namespace Carlson;
 	[linePath stroke];
 	
 	if( !mSelectionOverlay )
+	{
 		mSelectionOverlay = [[CALayer alloc] init];
+	}
 	[[mContentView layer] addSublayer: mSelectionOverlay];
 	[mSelectionOverlay setFrame: [mContentView layer].frame];
 	
@@ -1224,9 +1233,6 @@ using namespace Carlson;
 		if( !mStack->GetEditingBackground() )
 			mStack->GetCurrentCard()->DeleteSelectedItem();
 		mStack->GetCurrentCard()->GetBackground()->DeleteSelectedItem();
-		[self refreshExistenceAndOrderOfAllViews];
-		[self drawBoundingBoxes];
-		[mContentView setNeedsDisplay: YES];
 	}
 }
 
@@ -1255,10 +1261,8 @@ using namespace Carlson;
 		mStack->DeselectAllObjectsOnCard();
 		mStack->DeselectAllObjectsOnBackground();
 		std::vector<CPartRef>	newParts = mStack->GetCurrentLayer()->PasteObject( std::string(xmlStr.UTF8String) );
-		[self refreshExistenceAndOrderOfAllViews];
 		for( CPart* thePart : newParts )
 			thePart->SetSelected(true);
-		[self drawBoundingBoxes];
 	}
 }
 
@@ -1280,36 +1284,24 @@ using namespace Carlson;
 -(IBAction)	bringToFront: (id)sender
 {
 	mStack->BringSelectedItemToFront();
-	
-	[self refreshExistenceAndOrderOfAllViews];
-	[self drawBoundingBoxes];
 }
 
 
 -(IBAction)	bringForward: (id)sender
 {
 	mStack->BringSelectedItemForward();
-	
-	[self refreshExistenceAndOrderOfAllViews];
-	[self drawBoundingBoxes];
 }
 
 
 -(IBAction)	sendBackward: (id)sender
 {
 	mStack->SendSelectedItemBackward();
-	
-	[self refreshExistenceAndOrderOfAllViews];
-	[self drawBoundingBoxes];
 }
 
 
 -(IBAction)	sendToBack: (id)sender
 {
 	mStack->SendSelectedItemToBack();
-	
-	[self refreshExistenceAndOrderOfAllViews];
-	[self drawBoundingBoxes];
 }
 
 

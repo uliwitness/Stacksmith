@@ -78,6 +78,8 @@ public:
 
 	virtual void				Show( TEvenIfVisible inEvenIfVisible );
 	
+	virtual void				NumberOrOrderOfPartsChanged();
+	
 	static void					RegisterPartCreators();
 
 protected:
