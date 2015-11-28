@@ -412,26 +412,26 @@
                 <menuItem title="Objects" id="LOr-cY-aQg">
                     <menu key="submenu" title="Objects" id="JE6-c7-TPM">
                         <items>
-                            <menuItem title="Bring to Front" id="qjL-mY-LcT">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Bring to Front" keyEquivalent="]" id="qjL-mY-LcT">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="bringToFront:" target="-1" id="X0C-jq-ahS"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Bring Forward" id="tO1-O9-9hv">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Bring Forward" keyEquivalent="]" id="tO1-O9-9hv">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="bringForward:" target="-1" id="pAo-NV-vZa"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Send Backward" id="HoH-DI-bGt">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Send Backward" keyEquivalent="[" id="HoH-DI-bGt">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="sendBackward:" target="-1" id="yjZ-w3-s8h"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Send to Back" id="Rtv-B3-xWV">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Send to Back" keyEquivalent="[" id="Rtv-B3-xWV">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="sendToBack:" target="-1" id="2en-pU-I1b"/>
                                 </connections>
@@ -1097,7 +1097,7 @@
                 </subviews>
                 <animations/>
             </view>
-            <point key="canvasLocation" x="909.5" y="297"/>
+            <point key="canvasLocation" x="911.5" y="495"/>
         </window>
     </objects>
     <resources>
