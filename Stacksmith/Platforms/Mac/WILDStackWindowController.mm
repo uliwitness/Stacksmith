@@ -1164,6 +1164,14 @@ using namespace Carlson;
 	{
 		return( mStack->GetTool() != EBrowseTool && [[NSPasteboard generalPasteboard] availableTypeFromArray: @[ @"com.the-void-software.stacksmith.parts.xml" ]] != nil );
 	}
+	else if( theItem.action == @selector(selectAll:) )
+	{
+		return( mStack->GetTool() != EBrowseTool );
+	}
+	else if( theItem.action == @selector(deselectAll:) )
+	{
+		return( mStack->GetTool() != EBrowseTool );
+	}
 	else if( theItem.action == @selector(deleteCard:) )
 	{
 		return( mStack->GetNumCards() > 1 && !mStack->GetCurrentCard()->GetCantDelete() );
@@ -1187,6 +1195,24 @@ using namespace Carlson;
 	}
 	else
 		return [self respondsToSelector: theItem.action];
+}
+
+
+-(IBAction)	deselectAll:(id)sender
+{
+	// Always permit this, that way users might be able to work around any "we left an item selected" bugs.
+	mStack->DeselectAllObjectsOnCard();
+	mStack->DeselectAllObjectsOnBackground();
+}
+
+
+-(IBAction)	selectAll:(id)sender
+{
+	if( mStack->GetTool() != EBrowseTool )
+	{
+		mStack->SelectAllObjectsOnCard();
+		mStack->SelectAllObjectsOnBackground();
+	}
 }
 
 
