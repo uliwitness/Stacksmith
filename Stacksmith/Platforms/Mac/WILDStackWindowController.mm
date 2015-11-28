@@ -1224,7 +1224,9 @@ using namespace Carlson;
 		if( !mStack->GetEditingBackground() )
 			mStack->GetCurrentCard()->DeleteSelectedItem();
 		mStack->GetCurrentCard()->GetBackground()->DeleteSelectedItem();
+		[self refreshExistenceAndOrderOfAllViews];
 		[self drawBoundingBoxes];
+		[mContentView setNeedsDisplay: YES];
 	}
 }
 
@@ -1278,24 +1280,36 @@ using namespace Carlson;
 -(IBAction)	bringToFront: (id)sender
 {
 	mStack->BringSelectedItemToFront();
+	
+	[self refreshExistenceAndOrderOfAllViews];
+	[self drawBoundingBoxes];
 }
 
 
 -(IBAction)	bringForward: (id)sender
 {
 	mStack->BringSelectedItemForward();
+	
+	[self refreshExistenceAndOrderOfAllViews];
+	[self drawBoundingBoxes];
 }
 
 
 -(IBAction)	sendBackward: (id)sender
 {
 	mStack->SendSelectedItemBackward();
+	
+	[self refreshExistenceAndOrderOfAllViews];
+	[self drawBoundingBoxes];
 }
 
 
 -(IBAction)	sendToBack: (id)sender
 {
 	mStack->SendSelectedItemToBack();
+	
+	[self refreshExistenceAndOrderOfAllViews];
+	[self drawBoundingBoxes];
 }
 
 
