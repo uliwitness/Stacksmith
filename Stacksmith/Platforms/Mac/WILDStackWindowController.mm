@@ -753,12 +753,17 @@ using namespace Carlson;
 		return;
 	}
 	
+	CGFloat	scaleFactor = self.window.backingScaleFactor;
 	CGColorSpaceRef	colorSpace = CGColorSpaceCreateWithName( kCGColorSpaceGenericRGB );
-	CGContextRef	bmContext = CGBitmapContextCreate( NULL, mStack->GetCardWidth(), mStack->GetCardHeight(), 8, mStack->GetCardWidth() * 8 * 4, colorSpace, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little );
+	CGContextRef	bmContext = CGBitmapContextCreate( NULL, mStack->GetCardWidth() * scaleFactor, mStack->GetCardHeight() * scaleFactor, 8, mStack->GetCardWidth() * 8 * 4, colorSpace, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little );
 	CGColorSpaceRelease(colorSpace);
 	NSGraphicsContext	*	cocoaContext = [NSGraphicsContext graphicsContextWithGraphicsPort: bmContext flipped: NO];
 	[NSGraphicsContext saveGraphicsState];
 	[NSGraphicsContext setCurrentContext: cocoaContext];
+	
+	NSAffineTransform*	transform = [NSAffineTransform transform];
+	[transform scaleBy: scaleFactor];
+	[transform concat];
 	
 	CBackground	*	theBackground = theCard->GetBackground();
 	size_t	numParts = theBackground->GetNumParts();
