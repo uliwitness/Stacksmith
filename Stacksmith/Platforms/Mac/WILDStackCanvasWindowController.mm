@@ -10,6 +10,7 @@
 #import "UKDistributedView.h"
 #import "UKFinderIconCell.h"
 #include "CDocument.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 using namespace Carlson;
@@ -217,9 +218,14 @@ struct CCanvasEntry
 		return NSDragOperationCopy;
 	}
 
-	if( [info.draggingPasteboard canReadObjectForClasses: @[ [NSImage class], [NSURL class] ] options: @{ NSPasteboardURLReadingContentsConformToTypesKey: NSImage.imageTypes }] )
+	if( [info.draggingPasteboard canReadObjectForClasses: @[ [NSURL class] ] options: @{ NSPasteboardURLReadingContentsConformToTypesKey: NSImage.imageTypes }] )
 	{
 		return NSDragOperationCopy;
+	}
+	
+	if( [info.draggingPasteboard canReadObjectForClasses: @[ [NSURL class] ] options: @{ NSPasteboardURLReadingContentsConformToTypesKey: AVMovie.movieTypes }] )
+	{
+		return NSDragOperationLink;
 	}
 	
 	return NSDragOperationNone;
@@ -231,16 +237,23 @@ struct CCanvasEntry
 	NSArray*		images = [info.draggingPasteboard readObjectsForClasses: @[ [NSImage class] ] options: @{}];
 	if( !images || images.count == 0 )
 	{
-		NSMutableArray*	fileImages = [NSMutableArray arrayWithCapacity: images.count];
+		NSMutableArray*	fileImages = [NSMutableArray array];
 		NSArray*		urls = [info.draggingPasteboard readObjectsForClasses: @[ [NSURL class] ] options: @{ NSPasteboardURLReadingContentsConformToTypesKey: NSImage.imageTypes }];
 		for( NSURL* theURL in urls )
 		{
 			NSImage*	img = [[[NSImage alloc] initWithContentsOfURL: theURL] autorelease];
-			[fileImages addObject: img];
+			if( img )
+				[fileImages addObject: img];
 		}
 		images = fileImages;
 	}
-	[self addImages: images];
+	if( images && images.count > 0 )
+		[self addImages: images];
+	if( !images || images.count == 0 )
+	{
+		NSArray*		urls = [info.draggingPasteboard readObjectsForClasses: @[ [NSURL class] ] options: @{ NSPasteboardURLReadingContentsConformToTypesKey: AVMovie.movieTypes }];
+		[self addMediaURLs: urls mediaType: EMediaTypeMovie];
+	}
 	
 	return YES;
 }
@@ -303,6 +316,54 @@ struct CCanvasEntry
 		[pngData writeToURL: imgFileURL atomically: YES];
 		newIcon.mMediaID = pictureID;
 		newIcon.SetIcon( theImg );
+		items.push_back(newIcon);
+		iconToSelect = pictureID;
+		newIcon.mColumnIdx++;
+	}
+	
+	[self.stackCanvasView reloadData];
+}
+
+
+-(void)	addMediaURLs: (NSArray<NSURL*>*)urls mediaType: (TMediaType)inType
+{
+	// Make a first "new icon" entry as a new row below all existing items (in case there's no media, this will add a new row).
+	CCanvasEntry	newIcon;
+	newIcon = items[items.size() -1];
+	newIcon.mColumnIdx++;
+	newIcon.mRowIdx = 0;
+	for( auto currItem : items )
+	{
+		if( currItem.mMediaType == inType )
+		{
+			newIcon = currItem;
+			newIcon.mRowIdx++;
+		}
+	}
+	newIcon.mMediaType = inType;
+	newIcon.mStack = CStackRef();
+	newIcon.mCard = CCardRef();
+	newIcon.mBackground = CBackgroundRef();
+	newIcon.mIndentLevel = 0;
+	[newIcon.mIcon release];
+	newIcon.SetIcon( nil );
+	
+	ObjectID		iconToSelect = 0;
+	for( NSURL* theURL in urls )
+	{
+		NSString*	pictureName = [[theURL lastPathComponent] stringByDeletingPathExtension];
+		ObjectID	pictureID = self.owningDocument->GetMediaCache().GetUniqueIDForMedia();
+		
+		std::string	filePath = self.owningDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, inType, [pictureName UTF8String], [theURL pathExtension].UTF8String );
+		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
+		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
+		NSError*	err = nil;
+		if( ![[NSFileManager defaultManager] copyItemAtURL: theURL toURL: imgFileURL error: &err] )
+		{
+			[[NSApplication sharedApplication] presentError: err];
+			return;
+		}
+		newIcon.mMediaID = pictureID;
 		items.push_back(newIcon);
 		iconToSelect = pictureID;
 		newIcon.mColumnIdx++;
