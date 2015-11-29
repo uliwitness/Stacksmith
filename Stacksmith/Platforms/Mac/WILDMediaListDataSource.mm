@@ -252,7 +252,9 @@ using namespace Carlson;
 	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options: [NSDictionary dictionary]];
 	for( NSImage* theImg in images )
 	{
-		NSString*	pictureName = @"From Clipboard";
+		NSString*	pictureName = [theImg name];
+		if( !pictureName )
+			pictureName = @"From Clipboard";
 		ObjectID	pictureID = mDocument->GetMediaCache().GetUniqueIDForMedia();
 		
 		std::string	filePath = mDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, mMediaType, [pictureName UTF8String], "png" );

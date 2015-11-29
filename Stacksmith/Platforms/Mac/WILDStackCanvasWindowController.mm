@@ -104,6 +104,8 @@ struct CCanvasEntry
 		for( size_t currMediaIdx = 0; currMediaIdx < numMedia; currMediaIdx++ )
 		{
 			currItem.mMediaID = mc.GetIDOfMediaOfTypeAtIndex( currType, currMediaIdx );
+			if( mc.GetMediaIsBuiltInByIDOfType( currItem.mMediaID, currType ) )
+				continue;
 			items.push_back( currItem );
 			if( currType == EMediaTypeCursor || currType == EMediaTypeIcon || currType == EMediaTypePicture || currType == EMediaTypePattern )
 			{
@@ -231,7 +233,9 @@ struct CCanvasEntry
 	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options: [NSDictionary dictionary]];
 	for( NSImage* theImg in images )
 	{
-		NSString*	pictureName = @"From Clipboard";
+		NSString*	pictureName = [theImg name];
+		if( !pictureName )
+			pictureName = @"From Clipboard";
 		ObjectID	pictureID = self.owningDocument->GetMediaCache().GetUniqueIDForMedia();
 		
 		std::string	filePath = self.owningDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], "png" );
