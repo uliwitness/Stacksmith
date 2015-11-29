@@ -170,6 +170,8 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 			mediaURL = mMediaPath;
 	}
 	if( mediaURL.length() == 0 )
+		mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( mMediaPath, EMediaTypeMovie );
+	if( mediaURL.length() == 0 )
 		mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
 	if( mediaURL.length() > 0 )
 		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
@@ -250,7 +252,18 @@ void	CMoviePlayerPartMac::SetMediaPath( const std::string& inPath )
 		[mCurrentMovie jcsRemoveObserver: mRateObserver];
 		mRateObserver = nil;
 	}
-	ASSIGN(mCurrentMovie,[AVPlayer playerWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inPath.c_str()]]]);
+	NSURL	*	movieURL = nil;
+	if( inPath.length() > 0 && inPath[0] == '/' )
+		movieURL = [NSURL fileURLWithPath: [NSString stringWithUTF8String: inPath.c_str()]];
+	else if( inPath.find("file://") == 0 || inPath.find("http://") == 0 )
+		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: inPath.c_str()]];
+	else
+	{
+		std::string	mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( mMediaPath, EMediaTypeMovie );
+		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
+	}
+	
+	ASSIGN(mCurrentMovie,[AVPlayer playerWithURL: movieURL]);
 	mView.player = mCurrentMovie;
 	SetUpRateObserver();
 	CMoviePlayerPart::SetMediaPath( inPath );
