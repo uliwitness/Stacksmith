@@ -130,6 +130,8 @@ struct CCanvasEntry
 	[self.stackCanvasView setCellSize: NSMakeSize(100.0,80.0)];
 	
 	[self.stackCanvasView reloadData];
+	
+	[self.stackCanvasView registerForDraggedTypes: [NSImage.imageTypes arrayByAddingObjectsFromArray: @[ NSFilenamesPboardType ]]];
 }
 
 
@@ -205,7 +207,61 @@ struct CCanvasEntry
 	}
 }
 
+
+-(NSDragOperation)  distributedView: (UKDistributedView*)dv validateDrop: (id <NSDraggingInfo>)info proposedItem: (NSUInteger*)row
+{
+	*row = NSNotFound;
+
+	if( [info.draggingPasteboard canReadObjectForClasses: @[ [NSImage class] ] options: @{}] )
+	{
+		return NSDragOperationCopy;
+	}
+
+	if( [info.draggingPasteboard canReadObjectForClasses: @[ [NSImage class], [NSURL class] ] options: @{ NSPasteboardURLReadingContentsConformToTypesKey: NSImage.imageTypes }] )
+	{
+		return NSDragOperationCopy;
+	}
+	
+	return NSDragOperationNone;
+}
+
+// Say whether you accept a drop of an item:
+-(BOOL)	distributedView: (UKDistributedView*)dv acceptDrop:(id <NSDraggingInfo>)info onItem:(NSUInteger)row
+{
+	NSArray*		images = [info.draggingPasteboard readObjectsForClasses: @[ [NSImage class] ] options: @{}];
+	if( !images || images.count == 0 )
+	{
+		NSMutableArray*	fileImages = [NSMutableArray arrayWithCapacity: images.count];
+		NSArray*		urls = [info.draggingPasteboard readObjectsForClasses: @[ [NSURL class] ] options: @{ NSPasteboardURLReadingContentsConformToTypesKey: NSImage.imageTypes }];
+		for( NSURL* theURL in urls )
+		{
+			NSImage*	img = [[[NSImage alloc] initWithContentsOfURL: theURL] autorelease];
+			[fileImages addObject: img];
+		}
+		images = fileImages;
+	}
+	[self addImages: images];
+	
+	return YES;
+}
+
+// Use this to handle drops on the trash etc:
+-(void)				distributedView: (UKDistributedView*)dv dragEndedWithOperation: (NSDragOperation)operation
+{
+	
+}
+
+
 -(IBAction)	paste: (id)sender
+{
+	NSPasteboard*	thePastie = [NSPasteboard generalPasteboard];
+	NSArray*		images = [thePastie readObjectsForClasses: @[ [NSImage class] ] options: @{}];
+	
+	[self addImages: images];
+}
+
+
+-(void)	addImages: (NSArray<NSImage*>*)images
 {
 	// Make a first "new icon" entry as a new row below all existing items (in case there's no media, this will add a new row).
 	CCanvasEntry	newIcon;
@@ -229,8 +285,6 @@ struct CCanvasEntry
 	newIcon.SetIcon( nil );
 	
 	ObjectID		iconToSelect = 0;
-	NSPasteboard*	thePastie = [NSPasteboard generalPasteboard];
-	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options: [NSDictionary dictionary]];
 	for( NSImage* theImg in images )
 	{
 		NSString*	pictureName = [theImg name];
