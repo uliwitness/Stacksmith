@@ -21,6 +21,8 @@ struct CCanvasEntry
 	CCanvasEntry( const CCanvasEntry& inOriginal ) : mStack(inOriginal.mStack), mBackground(inOriginal.mBackground), mCard(inOriginal.mCard), mColumnIdx(inOriginal.mColumnIdx),	mIndentLevel(inOriginal.mIndentLevel), mRowIdx(inOriginal.mRowIdx), mMediaType(inOriginal.mMediaType), mMediaID(inOriginal.mMediaID) { mIcon = [inOriginal.mIcon retain]; };
 	~CCanvasEntry()	{ [mIcon release]; }
 	
+	CCanvasEntry& operator =( const CCanvasEntry& inOriginal )	{ mStack = inOriginal.mStack; mBackground = inOriginal.mBackground; mCard = inOriginal.mCard; mMediaType = inOriginal.mMediaType; mMediaID = inOriginal.mMediaID; mColumnIdx = inOriginal.mColumnIdx; mRowIdx = inOriginal.mRowIdx; mIndentLevel = inOriginal.mIndentLevel; if( mIcon != inOriginal.mIcon ) { [mIcon release]; mIcon = [inOriginal.mIcon retain]; } return *this; }
+	
 	void	SetIcon( WILDNSImagePtr inImage )	{ if( mIcon != inImage ) { [mIcon release]; mIcon = [inImage retain]; } }
 	
 	CStackRef		mStack;
@@ -191,7 +193,64 @@ struct CCanvasEntry
 	CStack*				currStack = items[item].mStack;
 	CConcreteObject* 	currObj = items[item].mCard ? (CConcreteObject*)items[item].mCard : (items[item].mBackground ? (CConcreteObject*)items[item].mBackground : (CConcreteObject*)items[item].mStack);
 	bool				shouldEditBg = (!items[item].mCard && items[item].mBackground);
-	currObj->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currStack,shouldEditBg](){ currStack->Show(EEvenIfVisible); currStack->SetEditingBackground( shouldEditBg ); } );
+	if( currObj )
+	{
+		currObj->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currStack,shouldEditBg]()
+		{
+			currStack->Show(EEvenIfVisible);
+			currStack->SetEditingBackground( shouldEditBg );
+		} );
+	}
+}
+
+-(IBAction)	paste: (id)sender
+{
+	// Make a first "new icon" entry as a new row below all existing items (in case there's no media, this will add a new row).
+	CCanvasEntry	newIcon;
+	newIcon = items[items.size() -1];
+	newIcon.mColumnIdx++;
+	newIcon.mRowIdx = 0;
+	for( auto currItem : items )
+	{
+		if( currItem.mMediaType == EMediaTypeIcon )
+		{
+			newIcon = currItem;
+			newIcon.mRowIdx++;
+		}
+	}
+	newIcon.mMediaType = EMediaTypeIcon;
+	newIcon.mStack = CStackRef();
+	newIcon.mCard = CCardRef();
+	newIcon.mBackground = CBackgroundRef();
+	newIcon.mIndentLevel = 0;
+	[newIcon.mIcon release];
+	newIcon.SetIcon( nil );
+	
+	ObjectID		iconToSelect = 0;
+	NSPasteboard*	thePastie = [NSPasteboard generalPasteboard];
+	NSArray*		images = [thePastie readObjectsForClasses: [NSArray arrayWithObject: [NSImage class]] options: [NSDictionary dictionary]];
+	for( NSImage* theImg in images )
+	{
+		NSString*	pictureName = @"From Clipboard";
+		ObjectID	pictureID = self.owningDocument->GetMediaCache().GetUniqueIDForMedia();
+		
+		std::string	filePath = self.owningDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, EMediaTypeIcon, [pictureName UTF8String], "png" );
+		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
+		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
+		
+		[theImg lockFocus];
+			NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
+		[theImg unlockFocus];
+		NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
+		[pngData writeToURL: imgFileURL atomically: YES];
+		newIcon.mMediaID = pictureID;
+		newIcon.SetIcon( theImg );
+		items.push_back(newIcon);
+		iconToSelect = pictureID;
+		newIcon.mColumnIdx++;
+	}
+	
+	[self.stackCanvasView reloadData];
 }
 
 @end
