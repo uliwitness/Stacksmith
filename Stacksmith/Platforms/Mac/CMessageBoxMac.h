@@ -32,6 +32,7 @@ public:
 	~CMessageBoxMac();
 
 	virtual bool	SetTextContents( const std::string& inString );
+	virtual bool	GetTextContents( std::string &outString );
 	virtual void	SetResultText( const std::string &inString );
 
 	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
@@ -42,9 +43,12 @@ public:
 	void			SetVisible( bool inVis );
 	virtual bool	IsVisible()	{ return mVisible; };
 	
+	void			SetNeedsToSyncContentsFromUI( bool inSync )	{ mNeedsToSyncContentsFromUI = inSync; }
+	
 protected:
 	WILDMessageBoxWindowControllerPtr	mMacWindowController;
 	bool								mVisible;
+	bool								mNeedsToSyncContentsFromUI;
 };
 
 

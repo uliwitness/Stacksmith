@@ -58,11 +58,19 @@ using namespace Carlson;
 		return NO;
 }
 
+
+- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRanges:(NSArray<NSValue *> *)affectedRanges replacementStrings:(nullable NSArray<NSString *> *)replacementStrings
+{
+	self.messageBox->SetNeedsToSyncContentsFromUI( true );
+	
+	return YES;
+}
+
 @end
 
 
 CMessageBoxMac::CMessageBoxMac()
-: mVisible(false)
+	: mVisible(false), mNeedsToSyncContentsFromUI(false)
 {
 	mMacWindowController = [[WILDMessageBoxWindowController alloc] initWithWindowNibName: @"WILDMessageBoxWindowController"];
 	mMacWindowController.messageBox = this;
@@ -91,6 +99,18 @@ CMessageBoxMac::~CMessageBoxMac()
 	[mMacWindowController close];
 	[mMacWindowController release];
 	mMacWindowController = nil;
+}
+
+
+bool	 CMessageBoxMac::GetTextContents( std::string &outString )
+{
+	if( mNeedsToSyncContentsFromUI )
+	{
+		mScript = mMacWindowController.messageField.string.UTF8String;
+		mNeedsToSyncContentsFromUI = false;
+	}
+	
+	return CMessageBox::GetTextContents( outString );
 }
 
 
