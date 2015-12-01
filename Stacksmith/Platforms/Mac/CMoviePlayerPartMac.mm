@@ -156,23 +156,7 @@ void	CMoviePlayerPartMac::SetUpMoviePlayer()
 	[mView.layer setBackgroundColor: [NSColor colorWithCalibratedRed: mFillColorRed / 65535.0 green: mFillColorGreen / 65535.0 blue: mFillColorBlue / 65535.0 alpha: mFillColorAlpha / 65535.0].CGColor];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	NSURL	*	movieURL = nil;
-	std::string	mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( mMediaPath.c_str(), EMediaTypeMovie );
-	if( mediaURL.length() == 0 && mMediaPath.find("file://") == 0 )
-	{
-		LEOContextGroup*	theGroup = GetDocument()->GetScriptContextGroupObject();
-		if( (theGroup->flags & kLEOContextGroupFlagFromNetwork) == 0 );
-			mediaURL = mMediaPath;
-	}
-	else if( mediaURL.length() == 0 && mMediaPath.find("http://") == 0 )
-	{
-		LEOContextGroup*	theGroup = GetDocument()->GetScriptContextGroupObject();
-		if( (theGroup->flags & kLEOContextGroupFlagNoNetwork) == 0 );
-			mediaURL = mMediaPath;
-	}
-	if( mediaURL.length() == 0 )
-		mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( mMediaPath, EMediaTypeMovie );
-	if( mediaURL.length() == 0 )
-		mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
+	std::string	mediaURL = SanitizeMediaPath( mMediaPath );
 	if( mediaURL.length() > 0 )
 		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
 	if( !mCurrentMovie )
@@ -245,6 +229,35 @@ void	CMoviePlayerPartMac::SetStarted( bool inStart )
 }
 
 
+std::string	CMoviePlayerPartMac::SanitizeMediaPath( const std::string& inPath )
+{
+	LEOContextGroup*	theGroup = GetDocument()->GetScriptContextGroupObject();
+	if( (theGroup->flags & kLEOContextGroupFlagFromNetwork) == 0 );
+	
+	std::string		outURL;
+	if( inPath.find( "http://" ) == 0 && (theGroup->flags & kLEOContextGroupFlagNoNetwork) == 0 )
+	{
+		outURL = inPath;
+	}
+	else if( inPath.find( "file://" ) == 0 && (theGroup->flags & kLEOContextGroupFlagFromNetwork) == 0 )
+	{
+		outURL = inPath;
+	}
+	else if( inPath.find( "/" ) == 0 && (theGroup->flags & kLEOContextGroupFlagFromNetwork) == 0 )
+	{
+		outURL = "file://" + inPath;
+	}
+	else
+	{
+		outURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( inPath, EMediaTypeMovie );
+	}
+	if( outURL.length() == 0 )
+		outURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( "Placeholder Movie", EMediaTypeMovie );
+	
+	return outURL;
+}
+
+
 void	CMoviePlayerPartMac::SetMediaPath( const std::string& inPath )
 {
 	if( mRateObserver )
@@ -252,21 +265,14 @@ void	CMoviePlayerPartMac::SetMediaPath( const std::string& inPath )
 		[mCurrentMovie jcsRemoveObserver: mRateObserver];
 		mRateObserver = nil;
 	}
-	NSURL	*	movieURL = nil;
-	if( inPath.length() > 0 && inPath[0] == '/' )
-		movieURL = [NSURL fileURLWithPath: [NSString stringWithUTF8String: inPath.c_str()]];
-	else if( inPath.find("file://") == 0 || inPath.find("http://") == 0 )
-		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: inPath.c_str()]];
-	else
-	{
-		std::string	mediaURL = GetDocument()->GetMediaCache().GetMediaURLByNameOfType( mMediaPath, EMediaTypeMovie );
-		movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]];
-	}
+	
+	std::string	movieURLCpp( SanitizeMediaPath(inPath) );
+	NSURL	*	movieURL = [NSURL URLWithString: [NSString stringWithUTF8String: movieURLCpp.c_str()]];
 	
 	ASSIGN(mCurrentMovie,[AVPlayer playerWithURL: movieURL]);
 	mView.player = mCurrentMovie;
 	SetUpRateObserver();
-	CMoviePlayerPart::SetMediaPath( inPath );
+	CMoviePlayerPart::SetMediaPath( movieURLCpp );
 }
 
 
