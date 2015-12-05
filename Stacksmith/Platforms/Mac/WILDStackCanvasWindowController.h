@@ -23,4 +23,6 @@ namespace Carlson
 @property (assign,nonatomic) Carlson::CDocument* 			owningDocument;
 @property (assign,nonatomic) IBOutlet UKDistributedView*	stackCanvasView;
 
+-(IBAction)	pickMediaFile: (id)sender;
+
 @end

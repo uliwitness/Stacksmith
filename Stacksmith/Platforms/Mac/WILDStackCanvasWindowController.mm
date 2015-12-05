@@ -348,13 +348,39 @@ struct CCanvasEntry
 	[newIcon.mIcon release];
 	newIcon.SetIcon( nil );
 	
+	NSWorkspace*	workspace = [NSWorkspace sharedWorkspace];
+	
 	ObjectID		iconToSelect = 0;
 	for( NSURL* theURL in urls )
 	{
 		NSString*	pictureName = [[theURL lastPathComponent] stringByDeletingPathExtension];
 		ObjectID	pictureID = self.owningDocument->GetMediaCache().GetUniqueIDForMedia();
+		TMediaType	currMediaType = inType;
 		
-		std::string	filePath = self.owningDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, inType, [pictureName UTF8String], [theURL pathExtension].UTF8String );
+		if( currMediaType == EMediaTypeUnknown )
+		{
+			NSString	*	uti = nil;
+			if( [theURL getResourceValue: &uti forKey: NSURLTypeIdentifierKey error: NULL] )
+			{
+				if( [workspace type: uti conformsToType: @"public.movie"] )
+				{
+					currMediaType = EMediaTypeMovie;
+				}
+				else if( [workspace type: uti conformsToType: @"public.image"] )
+				{
+					currMediaType = EMediaTypeIcon;
+				}
+				else if( [workspace type: uti conformsToType: @"public.audio"] )
+				{
+					currMediaType = EMediaTypeSound;
+				}
+			}
+		}
+		
+		if( currMediaType == EMediaTypeUnknown )
+			continue;
+		
+		std::string	filePath = self.owningDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, currMediaType, [pictureName UTF8String], [theURL pathExtension].UTF8String );
 		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 		NSError*	err = nil;
@@ -364,12 +390,29 @@ struct CCanvasEntry
 			return;
 		}
 		newIcon.mMediaID = pictureID;
+		if( currMediaType == EMediaTypeIcon || currMediaType == EMediaTypePicture || currMediaType == EMediaTypeCursor || currMediaType == EMediaTypePattern )
+		{
+			newIcon.SetIcon( [[[NSImage alloc] initWithContentsOfURL: imgFileURL] autorelease] );
+		}
 		items.push_back(newIcon);
 		iconToSelect = pictureID;
 		newIcon.mColumnIdx++;
 	}
 	
 	[self.stackCanvasView reloadData];
+}
+
+
+-(IBAction)	pickMediaFile: (id)sender
+{
+	NSOpenPanel	*	openPanel = [NSOpenPanel openPanel];
+	[openPanel beginSheetModalForWindow: self.window completionHandler: ^(NSInteger result)
+	{
+		if( result == NSFileHandlingPanelOKButton )
+		{
+			[self addMediaURLs: openPanel.URLs mediaType: EMediaTypeUnknown];
+		}
+	}];
 }
 
 @end
