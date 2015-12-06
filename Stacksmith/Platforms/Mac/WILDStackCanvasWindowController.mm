@@ -418,4 +418,30 @@ struct CCanvasEntry
 	}];
 }
 
+
+-(IBAction)	delete: (id)sender
+{
+	NSEnumerator * enny = self.stackCanvasView.selectedItemEnumerator;
+	while( NSNumber* currSelItemIdx = [enny nextObject] )
+	{
+		CCanvasEntry&	entry = items[currSelItemIdx.integerValue];
+		std::string		mediaURL = self.owningDocument->GetMediaCache().GetMediaURLByIDOfType( entry.mMediaID, entry.mMediaType);
+		[[NSFileManager defaultManager] removeItemAtURL: [NSURL URLWithString: [NSString stringWithUTF8String: mediaURL.c_str()]] error: NULL];
+		self.owningDocument->GetMediaCache().DeleteMediaWithIDOfType( entry.mMediaID, entry.mMediaType);
+		entry.mMediaType = EMediaTypeUnknown;	// Mark as deleted.
+	}
+	
+	for( auto itty = items.begin(); itty != items.end(); )
+	{
+		if( itty->mMediaType == EMediaTypeUnknown && itty->mStack == CStackRef() )
+		{
+			itty = items.erase( itty );
+		}
+		else
+			 itty++;
+	}
+	
+	[self.stackCanvasView reloadData];
+}
+
 @end

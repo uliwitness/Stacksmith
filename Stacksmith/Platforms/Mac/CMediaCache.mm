@@ -205,6 +205,22 @@ std::string	CMediaCache::GetMediaURLByIDOfType( ObjectID inID, TMediaType inType
 }
 
 
+bool	CMediaCache::DeleteMediaWithIDOfType( ObjectID inID, TMediaType inType )
+{
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+		{
+			mMediaList.erase( currMedia );
+			mChangeCount++;
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+
 size_t		CMediaCache::GetNumMediaOfType( TMediaType inType )
 {
 	if( inType == EMediaTypeUnknown )

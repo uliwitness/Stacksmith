@@ -125,6 +125,7 @@ public:
 	std::string			GetMediaURLByNameOfType( const std::string& inName, TMediaType inType, int *outHotspotLeft = NULL, int *outHotspotTop = NULL );
 	ObjectID			GetMediaIDByNameOfType( const std::string& inName, TMediaType inType );
 	std::string			GetMediaURLByIDOfType( ObjectID inID, TMediaType inType, int *outHotspotLeft = NULL, int *outHotspotTop = NULL );
+	bool				DeleteMediaWithIDOfType( ObjectID inID, TMediaType inType );	// Returns success == true, failure == false.
 	size_t				GetNumMediaOfType( TMediaType inType );
 	ObjectID			GetIDOfMediaOfTypeAtIndex( TMediaType inType, size_t inIndex );
 	std::string			GetMediaNameByIDOfType( ObjectID inID, TMediaType inType );
