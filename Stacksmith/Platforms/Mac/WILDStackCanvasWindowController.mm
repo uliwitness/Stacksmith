@@ -327,27 +327,7 @@ struct CCanvasEntry
 
 -(void)	addMediaURLs: (NSArray<NSURL*>*)urls mediaType: (TMediaType)inType
 {
-	// Make a first "new icon" entry as a new row below all existing items (in case there's no media, this will add a new row).
-	CCanvasEntry	newIcon;
-	newIcon = items[items.size() -1];
-	newIcon.mColumnIdx++;
-	newIcon.mRowIdx = 0;
-	for( auto currItem : items )
-	{
-		if( currItem.mMediaType == inType )
-		{
-			newIcon = currItem;
-			newIcon.mRowIdx++;
-		}
-	}
-	newIcon.mMediaType = inType;
-	newIcon.mStack = CStackRef();
-	newIcon.mCard = CCardRef();
-	newIcon.mBackground = CBackgroundRef();
-	newIcon.mIndentLevel = 0;
-	[newIcon.mIcon release];
-	newIcon.SetIcon( nil );
-	
+	CCanvasEntry	newEntry[EMediaType_Last];
 	NSWorkspace*	workspace = [NSWorkspace sharedWorkspace];
 	
 	ObjectID		iconToSelect = 0;
@@ -379,6 +359,29 @@ struct CCanvasEntry
 		
 		if( currMediaType == EMediaTypeUnknown )
 			continue;
+		
+		CCanvasEntry&	newIcon = newEntry[currMediaType];
+		if( newIcon.mMediaType != currMediaType	)
+		{
+			// Make a first "new icon" entry as a new row below all existing items (in case there's no media, this will add a new row).
+			newIcon = items[items.size() -1];
+			newIcon.mColumnIdx++;
+			newIcon.mRowIdx = 0;
+			for( auto currItem : items )
+			{
+				if( currItem.mMediaType == currMediaType )
+				{
+					newIcon = currItem;
+					newIcon.mRowIdx++;
+				}
+			}
+			newIcon.mMediaType = currMediaType;
+			newIcon.mStack = CStackRef();
+			newIcon.mCard = CCardRef();
+			newIcon.mBackground = CBackgroundRef();
+			newIcon.mIndentLevel = 0;
+			newIcon.SetIcon( nil );
+		}
 		
 		std::string	filePath = self.owningDocument->GetMediaCache().AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( pictureID, currMediaType, [pictureName UTF8String], [theURL pathExtension].UTF8String );
 		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
