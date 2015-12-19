@@ -1037,6 +1037,23 @@ void	CLayer::NumberOrOrderOfPartsChanged()
 }
 
 
+void	CLayer::TriggerDefaultButton()
+{
+	CPartCreatorBase	*	buttonPartType = CPart::GetPartCreatorForType("button");
+	for( CPartRef currPart : mParts )
+	{
+		if( currPart->GetPartType() == buttonPartType )
+		{
+			CButtonPart	*	theBtn = dynamic_cast<CButtonPart*>( (CPart*)currPart );
+			if( theBtn->GetStyle() == EButtonStyleDefault )
+			{
+				theBtn->Trigger();
+			}
+		}
+	}
+}
+
+
 // Maximum distance between two objects for us to even consider aligning them
 //	when snapping/showing guidelines. This applies to any direction, i.e. if a
 //	button is at 49 pixels horz. from ours, we consider aligning them horz. or vert.

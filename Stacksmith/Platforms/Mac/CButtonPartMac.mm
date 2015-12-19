@@ -90,7 +90,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
 		[mView setBezelStyle: NSRoundedBezelStyle];
-		[mView setKeyEquivalent: @"\n"];
+		[mView setKeyEquivalent: @"\r"];
 		box = NSInsetRect( box, -5, -3 );
 		box.size.height += 3;
 	}
@@ -480,4 +480,8 @@ void	CButtonPartMac::SetScript( std::string inScript )
 }
 
 
+void	CButtonPartMac::Trigger()
+{
+	[mView performClick: nil];
+}
 

@@ -116,6 +116,8 @@ public:
 	
 	virtual void	NumberOrOrderOfPartsChanged();
 	
+	virtual void	TriggerDefaultButton();
+	
 protected:
 	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
 	void			LoadAddColorPartsFromElement( tinyxml2::XMLElement* root );

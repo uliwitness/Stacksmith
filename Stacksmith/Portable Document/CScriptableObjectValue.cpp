@@ -672,6 +672,22 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
 	}
+	else if( inHandler == keyDownHandlerID )
+	{
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+		LEOValuePtr	directionParam = LEOGetParameterAtIndexFromEndOfStack( inContext, 1 );
+		char		buf[40] = {};
+		if( directionParam )
+		{
+			const char*	directionStr = LEOGetValueAsString( directionParam, buf, sizeof(buf), inContext );
+			if( strcasecmp( directionStr, "\r") == 0 )
+			{
+				userData->GetStack()->GetCurrentCard()->TriggerDefaultButton();
+			}
+			handled = true;
+			LEOCleanUpHandlerParametersFromEndOfStack( inContext );
+		}
+	}
 	else if( inHandler == peekingDownHandlerID )
 	{
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
@@ -757,7 +773,6 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == mouseDragHandlerID
 			|| inHandler == functionKeyHandlerID
 			|| inHandler == textChangeHandlerID
-			|| inHandler == keyDownHandlerID
 			|| inHandler == loadPageHandlerID
 			|| inHandler == linkClickedHandlerID
 			|| inHandler == selectionChangeHandlerID

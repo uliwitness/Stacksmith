@@ -66,6 +66,8 @@ public:
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };
 	virtual void		OpenContentsEditor()		{ CMacPartBase::OpenContentsEditor(); };
+
+	virtual void		Trigger();
 	
 protected:
 	~CButtonPartMac()	{ DestroyView(); };

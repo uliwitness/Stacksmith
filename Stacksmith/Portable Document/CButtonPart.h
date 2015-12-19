@@ -73,6 +73,8 @@ public:
 	
 	virtual void			PrepareMouseUp();
 	
+	virtual void			Trigger()							{};
+	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
