@@ -20,6 +20,7 @@
 #include "CMessageBox.h"
 #include "CSound.h"
 #include "CTimer.h"
+#include "CGraphicPart.h"
 #include <unistd.h>
 
 
@@ -942,7 +943,7 @@ void	WILDMoveInstruction( LEOContext* inContext )
 	int			coordIndex = 0;
 	int			numCoords = 0;
 	
-	std::vector<LEOInteger>	coordinates;
+	std::vector<LEONumber>	coordinates;
 	union LEOValue			tmpStorage = {};
 	char					keyStr[40] = {0};
 	
@@ -972,13 +973,20 @@ void	WILDMoveInstruction( LEOContext* inContext )
 	
 	numCoords *= 2;
 	
+	std::vector<LEONumber>	newCoordinates;
+	
+	CGraphicPart::ConvertPointsToStepSize( coordinates, 1, newCoordinates );
+	numCoords = (int)newCoordinates.size();
+	
 	thePart->Retain();
-	CTimer	*	currTimer = new CTimer( 2, [thePart,coordIndex,numCoords,coordinates]( CTimer* inTimer ) mutable
+	CTimer	*	currTimer = new CTimer( 2, [thePart,coordIndex,numCoords,newCoordinates]( CTimer* inTimer ) mutable
 	{
-		LEOInteger		l = coordinates[coordIndex++];
-		LEOInteger		t = coordinates[coordIndex++];
+		LEOInteger		l = newCoordinates[coordIndex++];
+		LEOInteger		t = newCoordinates[coordIndex++];
 		LEOInteger		w = thePart->GetRight() -thePart->GetLeft();
 		LEOInteger		h = thePart->GetBottom() -thePart->GetTop();
+		
+		std::cout << coordIndex << std::endl;
 		
 		// Center the button over the given coordinate:
 		l -= w / 2;

@@ -51,7 +51,8 @@ namespace Carlson {
 		
 		virtual void			SizeToFit();
 		
-		virtual void	SetSelected( bool inSelected, LEOInteger inHandleIndex = EAllHandlesSelected );
+		virtual void			SetSelected( bool inSelected, LEOInteger inHandleIndex = EAllHandlesSelected );
+		static void				ConvertPointsToStepSize( const std::vector<LEONumber>& inCoordinates, LEONumber stepSize, std::vector<LEONumber>& outCoordinates );
 		
 	protected:
 		~CGraphicPart()	{};

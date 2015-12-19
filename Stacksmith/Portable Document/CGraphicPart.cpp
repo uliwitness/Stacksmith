@@ -312,6 +312,75 @@ void	CGraphicPart::SetSelected( bool inSelected, LEOInteger inHandleIndex )
 }
 
 
+/*static*/ void	CGraphicPart::ConvertPointsToStepSize( const std::vector<LEONumber>& inCoordinates, LEONumber stepSize, std::vector<LEONumber>& outCoordinates )
+{
+	LEONumber		oldX = 0;
+	LEONumber		oldY = 0;
+	bool			firstRound = true;
+	LEONumber		leftoverLength = 0;
+	size_t			idx = 0;
+	
+	auto coordItty = inCoordinates.begin();
+	while( coordItty != inCoordinates.end() )
+	{
+		LEONumber	x = *coordItty;
+		coordItty++;
+		if( coordItty == inCoordinates.end() )
+			break;
+		LEONumber	y = *coordItty;
+		coordItty++;
+		
+		if( !firstRound )
+		{
+			LEONumber		xdiff = x - oldX;
+			LEONumber		ydiff = y - oldY;
+			LEONumber		startX = oldX;
+			LEONumber		startY = oldY;
+			
+			LEONumber		segmentLength = sqrt( xdiff * xdiff + ydiff * ydiff );
+			LEONumber		currLen = 0;
+			LEONumber		radians = (xdiff == 0) ? (M_PI / 2.0) : atan( ydiff / xdiff );
+			if( radians > (M_PI * 2.0) )
+			{
+				radians -= M_PI * 2.0;
+			}
+			if( radians < 0 )
+			{
+				radians += M_PI * 2.0;
+			}
+			for( currLen = leftoverLength; currLen <= segmentLength; currLen += stepSize )
+			{
+				LEONumber		newX = startX + currLen * cos( radians );
+				LEONumber		newY = startY + currLen * sin( radians );
+				
+				idx++;
+				idx++;
+				std::cout << idx << ": " << x << "," << y << " -> " << newX << "," << newY << " [" << currLen << ", " << (radians / (2 * M_PI)) << "]" << std::endl;
+				
+				outCoordinates.push_back( newX );
+				outCoordinates.push_back( newY );
+			}
+			
+			leftoverLength = std::min( LEONumber(0), segmentLength -currLen );
+		}
+		else
+		{
+			firstRound = false;
+			std::cout << idx << ": " << x << "," << y << std::endl;
+		}
+		
+		oldX = x;
+		oldY = y;
+	}
+	
+	if( leftoverLength > 0 )
+	{
+		outCoordinates.push_back( oldX );
+		outCoordinates.push_back( oldY );
+	}
+}
+
+
 void	CGraphicPart::DumpProperties( size_t inIndentLevel )
 {
 //	const char*	indentStr = IndentString(inIndentLevel);
