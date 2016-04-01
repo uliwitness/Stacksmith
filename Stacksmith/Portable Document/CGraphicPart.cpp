@@ -336,32 +336,59 @@ void	CGraphicPart::SetSelected( bool inSelected, LEOInteger inHandleIndex )
 			LEONumber		ydiff = y - oldY;
 			LEONumber		startX = oldX;
 			LEONumber		startY = oldY;
-			
-			LEONumber		segmentLength = sqrt( xdiff * xdiff + ydiff * ydiff );
 			LEONumber		currLen = 0;
-			LEONumber		radians = (xdiff == 0) ? (M_PI / 2.0) : atan( ydiff / xdiff );
-			if( radians > (M_PI * 2.0) )
-			{
-				radians -= M_PI * 2.0;
-			}
-			if( radians < 0 )
-			{
-				radians += M_PI * 2.0;
-			}
-			for( currLen = leftoverLength; currLen <= segmentLength; currLen += stepSize )
-			{
-				LEONumber		newX = startX + currLen * cos( radians );
-				LEONumber		newY = startY + currLen * sin( radians );
-				
-				idx++;
-				idx++;
-				std::cout << idx << ": " << x << "," << y << " -> " << newX << "," << newY << " [" << currLen << ", " << (radians / (2 * M_PI)) << "]" << std::endl;
-				
-				outCoordinates.push_back( newX );
-				outCoordinates.push_back( newY );
-			}
 			
-			leftoverLength = std::min( LEONumber(0), segmentLength -currLen );
+			if( xdiff == 0 )
+			{
+				for( currLen = leftoverLength; currLen <= ydiff; currLen += stepSize )
+				{
+					LEONumber		newX = startX;
+					LEONumber		newY = startY + currLen;
+					
+					outCoordinates.push_back( newX );
+					outCoordinates.push_back( newY );
+				}
+			
+				leftoverLength = std::min( LEONumber(0), ydiff -currLen );
+			}
+			else if( ydiff == 0 )
+			{
+				for( currLen = leftoverLength; currLen <= xdiff; currLen += stepSize )
+				{
+					LEONumber		newX = startX + currLen;
+					LEONumber		newY = startY;
+					
+					outCoordinates.push_back( newX );
+					outCoordinates.push_back( newY );
+				}
+			
+				leftoverLength = std::min( LEONumber(0), xdiff -currLen );
+			}
+			else
+			{
+				LEONumber		segmentLength = sqrt( xdiff * xdiff + ydiff * ydiff );
+				LEONumber		slope = ydiff / xdiff;
+				LEONumber		radians = atan( slope );
+				if( radians > (M_PI * 2.0) )
+				{
+					radians -= M_PI * 2.0;
+				}
+				if( radians < 0 )
+				{
+					radians += M_PI * 2.0;
+				}
+				LEONumber		segStartX = startX, segStartY = startY;
+				for( currLen = leftoverLength; currLen <= segmentLength; currLen += stepSize )
+				{
+					LEONumber		newX = segStartX + currLen * cos( radians );
+					LEONumber		newY = segStartY + currLen * sin( radians );
+					
+					outCoordinates.push_back( newX );
+					outCoordinates.push_back( newY );
+				}
+			
+				leftoverLength = std::min( LEONumber(0), segmentLength -currLen );
+			}
 		}
 		else
 		{
