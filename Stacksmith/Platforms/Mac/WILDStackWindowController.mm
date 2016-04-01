@@ -108,7 +108,7 @@ using namespace Carlson;
 			for( size_t x = numParts; x > 0 && hitPart == nullptr; x-- )
 			{
 				CPart	*	thePart = theCard->GetPart( x-1 );
-				if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles, &customPartIndex ) != ENothingHitPart )
+				if( !hitPart && (isPeeking || thePart->CanBeEditedWithTool(currentTool)) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles, &customPartIndex ) != ENothingHitPart )
 				{
 					hitPart = thePart;
 				}
@@ -119,7 +119,7 @@ using namespace Carlson;
 		for( size_t x = numParts; x > 0 && hitPart == nullptr; x-- )
 		{
 			CPart	*	thePart = theCard->GetBackground()->GetPart( x-1 );
-			if( !hitPart && thePart->CanBeEditedWithTool(currentTool) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles, &customPartIndex ) != ENothingHitPart )
+			if( !hitPart && (isPeeking || thePart->CanBeEditedWithTool(currentTool)) && thePart->HitTestForEditing( hitPos.x, hitPos.y, thePart->IsSelected() ? EHitTestHandlesToo : EHitTestWithoutHandles, &customPartIndex ) != ENothingHitPart )
 			{
 				hitPart = thePart;
 			}
