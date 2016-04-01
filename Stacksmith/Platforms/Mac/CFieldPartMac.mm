@@ -455,7 +455,9 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else if( mFieldStyle == EFieldStylePopUp )
 	{
-		mSearchField = (WILDSearchField*)[[WILDComboBox alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
+		NSRect		box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
+		box = NSInsetRect( box, 0, -2 );
+		mSearchField = (WILDSearchField*)[[WILDComboBox alloc] initWithFrame: box];
 		[mSearchField beginWatchingForSelectionChanges];
 		mSearchField.delegate = mMacDelegate;
 		mSearchField.owningField = this;
@@ -1264,7 +1266,12 @@ void	CFieldPartMac::ToolChangedFrom( TTool inOldTool )
 void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CFieldPart::SetRect( left, top, right, bottom );
-	[(mView? mView : mSearchField) setFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
+	NSRect		box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
+	if( mFieldStyle == EFieldStylePopUp )
+	{
+		box = NSInsetRect( box, 0, -2 );
+	}
+	[(mView? mView : mSearchField) setFrame: box];
 	GetStack()->RectChangedOfPart( this );
 }
 
