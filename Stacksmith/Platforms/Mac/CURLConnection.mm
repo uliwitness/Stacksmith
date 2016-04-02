@@ -24,13 +24,12 @@ using namespace Carlson;
 	}
 	else
 	{
-		[NSURLConnection sendAsynchronousRequest: inRequest.GetMacRequest()
-							  queue: [NSOperationQueue mainQueue]
-				  completionHandler: ^(NSURLResponse* response, NSData* data, NSError* connectionError)
-									{
-										CAutoreleasePool	pool;
-										CURLResponse		responseObject(response);
-										completionBlock( responseObject, (const char*)[data bytes], [data length] );
-									}];
+		NSURLSession		 *	session = [NSURLSession sharedSession];
+		NSURLSessionDataTask *	theTask = [session dataTaskWithRequest: inRequest.GetMacRequest() completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+			CAutoreleasePool	pool;
+			CURLResponse		responseObject(response);
+			completionBlock( responseObject, (const char*)[data bytes], [data length] );
+		}];
+		[theTask resume];
 	}
 }

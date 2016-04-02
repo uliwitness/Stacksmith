@@ -35,7 +35,22 @@ size_t	CAlert::RunMessageAlert( const std::string& inMessage, const std::string&
 	NSInteger	returnValue = 0;
 	@try
 	{
-		returnValue = NSRunAlertPanel( [NSString stringWithCString: inMessage.c_str() encoding:NSUTF8StringEncoding], @"", [NSString stringWithCString: button1.c_str() encoding:NSUTF8StringEncoding], [NSString stringWithCString: button2.c_str() encoding:NSUTF8StringEncoding], [NSString stringWithCString: button3.c_str() encoding:NSUTF8StringEncoding] );
+		NSAlert	*	theAlert = [[NSAlert new] autorelease];
+		theAlert.messageText = [NSString stringWithCString: inMessage.c_str() encoding:NSUTF8StringEncoding];
+		if( button1.length() > 0 )
+		{
+			[theAlert addButtonWithTitle: [NSString stringWithCString: button1.c_str() encoding:NSUTF8StringEncoding]];
+			if( button2.length() > 0 )
+			{
+				[theAlert addButtonWithTitle: [NSString stringWithCString: button2.c_str() encoding:NSUTF8StringEncoding]];
+				if( button3.length() > 0 )
+				{
+					[theAlert addButtonWithTitle: [NSString stringWithCString: button3.c_str() encoding:NSUTF8StringEncoding]];
+				}
+			}
+		}
+		
+		returnValue = [theAlert runModal];
 	}
 	@catch( NSException * err )
 	{
@@ -44,11 +59,11 @@ size_t	CAlert::RunMessageAlert( const std::string& inMessage, const std::string&
 	
 	switch( returnValue )
 	{
-		case NSAlertDefaultReturn:
+		case NSAlertFirstButtonReturn:
 			return 1;
-		case NSAlertAlternateReturn:
+		case NSAlertSecondButtonReturn:
 			return 2;
-		case NSAlertOtherReturn:
+		case NSAlertThirdButtonReturn:
 			return 3;
 		default:
 			return 0;
@@ -63,5 +78,5 @@ bool	CAlert::RunInputAlert( const std::string& inMessage, std::string& ioInputTe
 	NSString	*	answerString = [inputPanel answerString];
 	ioInputText = [answerString UTF8String];
 
-	return returnValue == NSAlertDefaultReturn;
+	return returnValue == NSAlertFirstButtonReturn;
 }

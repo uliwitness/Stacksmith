@@ -7,7 +7,7 @@
 //
 
 #import "WILDMoviePlayerInfoViewController.h"
-#import <QTKit/QTKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "UKHelperMacros.h"
 #import "CMoviePlayerPart.h"
 
@@ -40,7 +40,7 @@ using namespace Carlson;
 -(IBAction)	doChooseMovieFile: (id)sender
 {
 	NSOpenPanel	*	thePanel = [NSOpenPanel openPanel];
-	NSArray		*	types = [QTMovie movieFileTypes: QTIncludeCommonTypes];
+	NSArray		*	types = [AVURLAsset audiovisualTypes];
 	[thePanel setAllowedFileTypes: types];
 	if( NSFileHandlingPanelOKButton == [thePanel runModal] )
 	{

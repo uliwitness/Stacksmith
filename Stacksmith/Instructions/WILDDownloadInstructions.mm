@@ -36,6 +36,7 @@ using namespace Carlson;
 // Array in which we keep track of all running connections, so we can return
 //	this information in 'the downloads'.
 static NSMutableArray	*	sRunningConnections = nil;
+static NSURLSession		*	sDownloadInstructionSession = nil;
 
 
 void	LEODownloadInstruction( LEOContext* inContext );
@@ -45,7 +46,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 // Delegate class that remembers the context/context group, destination value,
 //	callback handler names and actual downloaded data so we can notify the script
 //	of download progress and actually make the downloaded data available to it.
-@interface WILDURLConnectionDelegate : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
+@interface WILDURLConnectionDelegate : NSObject <NSURLSessionDelegate,NSURLSessionDataDelegate>
 {
 	union LEOValue			mDestination;
 	LEOScript			*	mOwningScript;
@@ -54,7 +55,6 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	LEOContext			*	mContext;
 	LEOValueArray			mDownloadArrayValue;	// Value for "the download" parameter, which is an array whose properties users can query.
 	LEOValuePtr				mHeadersArrayValue;		// Sub-value of mDownloadArrayValue.
-	NSInteger				mMaxBytes;
 	NSMutableData		*	mDownloadedData;
 }
 
@@ -69,7 +69,6 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 {
 	if(( self = [super init] ))
 	{
-		mMaxBytes = -1;
 		CScriptContextUserData	*	ud = new CScriptContextUserData( inUserData->GetStack(), inUserData->GetTarget() );
 		mContext = LEOContextCreate( inGroup, ud, CScriptContextUserData::CleanUp );
 		mOwningScript = LEOScriptRetain( inScript );
@@ -91,6 +90,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 
 -(void)	dealloc
 {
+	DESTROY_DEALLOC(mDownloadedData);
 	LEOCleanUpValue( &mDestination, kLEOInvalidateReferences, mContext );
 	if( mOwningScript )
 		LEOScriptRelease(mOwningScript);
@@ -105,7 +105,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 }
 
 
--(void)	sendDownloadMessage: (NSString*)msgName forConnection: (NSURLConnection*)inConnection
+-(void)	sendDownloadMessage: (NSString*)msgName forConnection: (NSURLSessionTask*)inConnection
 {
 	#if REMOTE_DEBUGGER
 	mContext->preInstructionProc = CScriptableObject::PreInstructionProc;
@@ -115,8 +115,8 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	mContext->promptProc = LEODebuggerPrompt;
 	#endif
 	
-	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", mMaxBytes, kLEOUnitBytes, mContext );
-	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", mDownloadedData.length, kLEOUnitBytes, mContext );
+	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", inConnection.countOfBytesExpectedToReceive, kLEOUnitBytes, mContext );
+	LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", inConnection.countOfBytesReceived, kLEOUnitBytes, mContext );
 
 	LEOPushEmptyValueOnStack( mContext );	// Reserve space for return value.
 	LEOPushValueOnStack( mContext, (LEOValuePtr) &mDownloadArrayValue );
@@ -140,25 +140,20 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 }
 
 
--(void)	connection: (NSURLConnection *)connection didFailWithError: (NSError *)error
+-(void)	URLSession: (NSURLSession *)session dataTask: (NSURLSessionDataTask *)dataTask
+                                 didReceiveResponse: (NSURLResponse *)response
+                                  completionHandler: (void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
-	[self sendDownloadMessage: mCompletionMessage forConnection: connection];
-	[sRunningConnections removeObject: connection];
-}
-
-
--(void)	connection: (NSURLConnection *)connection didReceiveResponse: (NSURLResponse *)response
-{
-	mMaxBytes = [response expectedContentLength];
+	long long	maxBytes = [response expectedContentLength];
 	if( [response respondsToSelector: @selector(allHeaderFields)] )
 	{
 		NSDictionary	*	headers = [(NSHTTPURLResponse*)response allHeaderFields];
 		
-		if( mMaxBytes < 0 )
+		if( maxBytes < 0 )
 		{
 			NSString		*	theLengthString = [headers objectForKey: @"Content-Length"];
 			if( theLengthString )
-				mMaxBytes = [theLengthString integerValue];
+				maxBytes = [theLengthString longLongValue];
 		}
 		
 		for( NSString* currKey in headers )
@@ -177,27 +172,37 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", errMsg, mContext );
 	}
 	
-	[self sendDownloadMessage: mProgressMessage forConnection: connection];
+	[self sendDownloadMessage: mProgressMessage forConnection: dataTask];
+	
+	completionHandler( NSURLSessionResponseAllow );
 }
 
 
--(void)	connection: (NSURLConnection *)connection didReceiveData: (NSData *)data
+-(void)	URLSession: (NSURLSession *)session dataTask: (NSURLSessionDataTask *)dataTask didReceiveData: (NSData *)data
 {
 	if( !mDownloadedData )
-		mDownloadedData = [data mutableCopy];
-	else
-		[mDownloadedData appendData: data];
+	{
+		mDownloadedData = [NSMutableData new];
+	}
+	[mDownloadedData appendData: data];
 	LEOSetValueAsString( &mDestination, (const char*)[mDownloadedData bytes], mDownloadedData.length, mContext );
 	
-	[self sendDownloadMessage: mProgressMessage forConnection: connection];
+	[self sendDownloadMessage: mProgressMessage forConnection: dataTask];
 }
 
 
--(void)	connectionDidFinishLoading: (NSURLConnection *)connection
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+                           didCompleteWithError:(nullable NSError *)error
 {
-	[self sendDownloadMessage: mCompletionMessage forConnection: connection];
-	[sRunningConnections removeObject: connection];
+	if( error )
+	{
+		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", error.code, kLEOUnitBytes, mContext );
+		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", error.localizedDescription.UTF8String, mContext );
+	}
+	[self sendDownloadMessage: mCompletionMessage forConnection: task];
+	[sRunningConnections removeObject: task];
 }
+
 
 /*!
 	Instruction function used by the Leonie bytecode interpreter to download a
@@ -276,7 +281,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	NSString			*	completionMsgObjcString = [NSString stringWithCString: completionMsgString encoding: NSUTF8StringEncoding];
 	
 	// Create URL request object & delegate:
-	LEOScript			*	theScript = LEOContextPeekCurrentScript( inContext );
+	LEOScript			*		theScript = LEOContextPeekCurrentScript( inContext );
 	WILDURLConnectionDelegate*	theDelegate = [[[WILDURLConnectionDelegate alloc] initWithScript: theScript contextGroup: inContext->group progressMessage: progressMsgObjcString completionMessage: completionMsgObjcString urlString: urlObjcString scriptUserData: (CScriptContextUserData*) inContext->userData] autorelease];
 	
 	// Now copy param 2, destination container value, to the delegate:
@@ -302,11 +307,18 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		return;
 	}
 	
+	if( !sDownloadInstructionSession )
+	{
+		sDownloadInstructionSession = [[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate: theDelegate delegateQueue: [NSOperationQueue mainQueue]] retain];
+	}
+	
 	NSURLRequest		*	theRequest = [NSURLRequest requestWithURL: theURL];
-	NSURLConnection		*	conn = [NSURLConnection connectionWithRequest: theRequest delegate: theDelegate];
+	NSURLSessionDataTask *	theTask = [sDownloadInstructionSession dataTaskWithRequest: theRequest];
+	
 	if( !sRunningConnections )
 		sRunningConnections = [[NSMutableArray alloc] init];
-	[sRunningConnections addObject: conn];
+	[sRunningConnections addObject: theTask];
+	[theTask resume];
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -4 );
 	
@@ -321,7 +333,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext )
 	struct LEOArrayEntry *downloadsArray = NULL;
 	
 	int	currIdx = 0;
-	for( NSURLConnection* conn in sRunningConnections )
+	for( NSURLSessionDataTask* conn in sRunningConnections )
 	{
 		char	currIdxStr[40] = {};
 		snprintf( currIdxStr, sizeof(currIdxStr)-1, "%d", ++currIdx );

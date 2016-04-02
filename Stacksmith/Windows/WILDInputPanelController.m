@@ -38,7 +38,7 @@
 		[okButton setTitle: @"OK"];
 		[okButton setKeyEquivalent: @"\r"];
 		[okButton setFont: [NSFont systemFontOfSize: [NSFont systemFontSizeForControlSize: NSRegularControlSize]]];
-		[okButton setTag: NSAlertDefaultReturn];
+		[okButton setTag: NSAlertFirstButtonReturn];
 		[okButton setTarget: self];
 		[okButton setAction: @selector(doOKButton:)];
 		[contentView addSubview: okButton];
@@ -52,7 +52,7 @@
 		[cancelButton setTitle: @"Cancel"];
 		[cancelButton setKeyEquivalent: @"\033"];
 		[cancelButton setFont: [NSFont systemFontOfSize: [NSFont systemFontSizeForControlSize: NSRegularControlSize]]];
-		[cancelButton setTag: NSAlertAlternateReturn];
+		[cancelButton setTag: NSAlertSecondButtonReturn];
 		[cancelButton setTarget: self];
 		[cancelButton setAction: @selector(doCancelButton:)];
 		[contentView addSubview: cancelButton];
@@ -146,13 +146,13 @@
 
 -(IBAction)		doOKButton: (id)sender
 {
-	[NSApp stopModalWithCode: NSAlertDefaultReturn];
+	[NSApp stopModalWithCode: NSAlertFirstButtonReturn];
 }
 
 
 -(IBAction)		doCancelButton: (id)sender
 {
-	[NSApp stopModalWithCode: NSAlertAlternateReturn];
+	[NSApp stopModalWithCode: NSAlertSecondButtonReturn];
 }
 
 @end

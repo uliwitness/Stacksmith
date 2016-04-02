@@ -10,9 +10,6 @@
 [submodule "KVOWithBlocks"]
 	path = KVOWithBlocks
 	url = https://uliwitness@github.com/uliwitness/KVOWithBlocks.git
-[submodule "Sparkle"]
-	path = Sparkle
-	url = https://uliwitness@github.com/uliwitness/Sparkle.git
 [submodule "Stacks"]
 	path = Stacks
 	url = https://uliwitness@github.com/uliwitness/Stacks.git
@@ -40,3 +37,6 @@
 [submodule "ULINetSocket"]
 	path = ULINetSocket
 	url = https://uliwitness@github.com/uliwitness/ULINetSocket.git
+[submodule "Sparkle"]
+	path = Sparkle
+	url = git@github.com:uliwitness/Sparkle.git
