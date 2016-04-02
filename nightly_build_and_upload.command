@@ -7,6 +7,7 @@ cd ${REPO_DIR}/Stacksmith
 touch Stacksmith-Info.plist
 cd ${REPO_DIR}/../
 BUILD_DEST_PATH=`pwd`/Output/
+SIGN_SCRIPT=${REPO_DIR}/Sparkle/bin/sign_update
 mkdir ${BUILD_DEST_PATH}
 rm -rf ${BUILD_DEST_PATH}/*
 ##security unlock-keychain -p 'password' ~/Library/Keychains/login.keychain
@@ -26,7 +27,7 @@ cd ${BUILD_DEST_PATH}
 tar -czf Stacksmith.tgz Stacksmith.app
 PASSWORD=`security 2>&1 >/dev/null find-internet-password -ga jnknsuliwitness | cut -f2 -d'"'`
 cd ${REPO_DIR}
-${REPO_DIR}/writerss.php ${BUILD_DEST_PATH}/Stacksmith.app/Contents/Info.plist nightly ${BUILD_DEST_PATH}/Stacksmith.tgz
+${REPO_DIR}/writerss.php ${BUILD_DEST_PATH}/Stacksmith.app/Contents/Info.plist nightly ${BUILD_DEST_PATH}/Stacksmith.tgz `${SIGN_SCRIPT} ${BUILD_DEST_PATH}/Stacksmith.tgz "/Volumes/Confidential/Sparkle Keys/stacksmith_private_sparkle_dsa_key.pem"`
 cd ${BUILD_DEST_PATH}
 mv nightly_feed.rss stacksmith_nightlies.rss
 ftp -in -u "ftp://jnknsuliwitness:${PASSWORD}@stacksmith.org/stacksmith.org/nightlies/" Stacksmith.tgz

@@ -479,7 +479,7 @@ void	WILDScheduleResumeOfScript( void )
 
 -(NSString*)	feedURLStringForUpdater: (SUUpdater*)inUpdater
 {
-	return @"http://stacksmith.org/nightlies/stacksmith_nightlies.rss";
+	return @"https://stacksmith.org/nightlies/stacksmith_nightlies.rss";
 }
 
 

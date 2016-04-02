@@ -380,6 +380,7 @@
 		55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29CA517276E8E00B38E75 /* UKSystemInfo.m */; };
 		55B29CA91727731800B38E75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B29CA81727731800B38E75 /* AddressBook.framework */; };
 		55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B9225C11675D270073EC6C /* Quartz.framework */; };
+		55BA587E1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 55BA587D1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem */; };
 		55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC02E1116B2ADE00BB094E /* NoIcon.png */; };
 		55BD35731A8FF88300D0BAF7 /* UKPushbackMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD35721A8FF88300D0BAF7 /* UKPushbackMessenger.m */; };
 		55BD35771A8FFEC500D0BAF7 /* WILDSearchField.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55BD35761A8FFEC500D0BAF7 /* WILDSearchField.mm */; };
@@ -1059,6 +1060,7 @@
 		55B29CA517276E8E00B38E75 /* UKSystemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKSystemInfo.m; path = ../UliKit/UKSystemInfo.m; sourceTree = "<group>"; };
 		55B29CA81727731800B38E75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = ../../../../../System/Library/Frameworks/AddressBook.framework; sourceTree = "<group>"; };
 		55B9225C11675D270073EC6C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		55BA587D1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = stacksmith_public_sparkle_dsa_key.pem; path = Resources/stacksmith_public_sparkle_dsa_key.pem; sourceTree = "<group>"; };
 		55BC02E1116B2ADE00BB094E /* NoIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoIcon.png; path = Resources/NoIcon.png; sourceTree = "<group>"; };
 		55BD35721A8FF88300D0BAF7 /* UKPushbackMessenger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPushbackMessenger.m; path = ../UliKit/UKPushbackMessenger.m; sourceTree = "<group>"; };
 		55BD35741A8FF88D00D0BAF7 /* UKPushbackMessenger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UKPushbackMessenger.h; path = ../UliKit/UKPushbackMessenger.h; sourceTree = "<group>"; };
@@ -1294,6 +1296,7 @@
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
 				5589DD771378B16400B0F6CF /* TransitionMappings.plist */,
+				55BA587D1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem */,
 				55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */,
 				55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */,
 				55EBC644114CFAE000BAA09D /* CardIconSmall.png */,
@@ -1982,9 +1985,9 @@
 			children = (
 				55C9F965136E1E950096FC4D /* Sparkle.framework */,
 				55C9F967136E1E950096FC4D /* Sparkle Test App.app */,
-				55C9F969136E1E950096FC4D /* Sparkle Unit Tests.octest */,
+				55C9F969136E1E950096FC4D /* Sparkle Unit Tests.xctest */,
 				550346DA136F435800AE7681 /* BinaryDelta */,
-				556785E11379C8F5005CC245 /* finish_installation.app */,
+				556785E11379C8F5005CC245 /* Autoupdate.app */,
 				554E146A1CAF2D5F00430706 /* UI Tests.xctest */,
 			);
 			name = Products;
@@ -2187,7 +2190,7 @@
 			remoteRef = 554E14691CAF2D5F00430706 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		556785E11379C8F5005CC245 /* finish_installation.app */ = {
+		556785E11379C8F5005CC245 /* Autoupdate.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = Autoupdate.app;
@@ -2208,7 +2211,7 @@
 			remoteRef = 55C9F966136E1E950096FC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		55C9F969136E1E950096FC4D /* Sparkle Unit Tests.octest */ = {
+		55C9F969136E1E950096FC4D /* Sparkle Unit Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "Sparkle Unit Tests.xctest";
@@ -2379,6 +2382,7 @@
 				55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */,
 				55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */,
 				55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */,
+				55BA587E1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem in Resources */,
 				55A7BA4D14668D6E00AB0F34 /* flute.aiff in Resources */,
 				55FDD878171B29DE0045A2B9 /* CURS_0.pdf in Resources */,
 				5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */,

@@ -81,6 +81,8 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>ULIURLHandlingApplication</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>stacksmith_public_sparkle_dsa_key.pem</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

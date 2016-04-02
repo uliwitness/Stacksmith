@@ -2,10 +2,10 @@
 <?
 	/*
 		Call as:
-			./writerss.php <versionfile> <build means> <downloadfile>
+			./writerss.php <versionfile> <build means> <downloadfile> <dsaSignature>
 			
 		Ex.:
-			./writerss.php Output/Stacksmith.app/Contents/Info.plist nightly Output/Stacksmith.tgz
+			./writerss.php Output/Stacksmith.app/Contents/Info.plist nightly Output/Stacksmith.tgz 'ND0CFBfeCa1JyW21nbkBwniaOzrN6EQuAb='
 	*/
 	
 	date_default_timezone_set('Europe/Berlin');
@@ -55,7 +55,7 @@
        <title>Stacksmith $actualversion</title>
        <link>http://stacksmith.org/nightlies/".basename($argv[3])."</link>
        <description>".$updatemessage."</description>
-       <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize($argv[3])."\" type=\"application/octet-stream\" />
+       <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize($argv[3])."\" type=\"application/octet-stream\" sparkle:dsaSignature=\"".$argv[4]."\" />
        <sparkle:version>$actualversion</sparkle:version>
      </item>
   </channel>
