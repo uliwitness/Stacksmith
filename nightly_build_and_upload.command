@@ -19,10 +19,10 @@ rm -rf ${BUILD_DEST_PATH}/*
 ##  clean build
 cd ${REPO_DIR}/Stacksmith/
 xcodebuild CONFIGURATION_BUILD_DIR=$BUILD_DEST_PATH \
-  GCC_PREPROCESSOR_DEFINITIONS="SVN_VERSION_NUM=${BUILD_NUMBER} SVN_BUILD_MEANS=nightly" \
-  INFOPLIST_PREPROCESSOR_DEFINITIONS="SVN_VERSION_NUM=${BUILD_NUMBER} SVN_BUILD_MEANS=nightly" \
+  WILD_DEFINES_FROM_XCODEBUILD="SVN_VERSION_NUM=${BUILD_NUMBER} SVN_BUILD_MEANS=nightly" \
+  WILD_INFO_PLIST_DEFINES_FROM_XCODEBUILD="SVN_VERSION_NUM=${BUILD_NUMBER} SVN_BUILD_MEANS=nightly" \
   -configuration Release \
-  clean build
+  clean build || exit 1
 cd ${BUILD_DEST_PATH}
 tar -czf Stacksmith.tgz Stacksmith.app
 PASSWORD=`security 2>&1 >/dev/null find-internet-password -ga jnknsuliwitness | cut -f2 -d'"'`
