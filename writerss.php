@@ -43,6 +43,9 @@
 	preg_match( '/<string>(.*)?<\\/string>/', $infoplist, $matches, 0, $newoffs );
 	$theversion = $matches[1];
 	
+	echo "   Version: $theversion\n";
+	echo "     Build: $argv[2]\n";
+	
 	$actualversion = $theversion;
 	$feedstr = "<?xml version=\"1.0\"?>
 <rss version=\"2.0\" 
@@ -65,4 +68,6 @@
 	$fd = fopen($fpath,"w");
 	fwrite($fd,$feedstr);
 	fclose($fd);
+	
+	echo "Written to: $fpath\n";
 ?>
