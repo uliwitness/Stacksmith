@@ -268,6 +268,8 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 {
 	LEOInteger		oneBasedColumnIndex = 0;
 	LEOInteger		oneBasedRowIndex = 0;
+	bool			isShort = false,
+					isLong = false;
 
 	if( strcasecmp("textStyle", inPropertyName) == 0 )
 	{
@@ -401,33 +403,43 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	{
 		LEOInitIntegerValue( outValue, mCursorID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
 	}
-	else if( strcasecmp("htmlText", inPropertyName) == 0 )
+	else if( strcasecmp("htmlText", inPropertyName) == 0 || (isShort = (strcasecmp("short htmlText", inPropertyName) == 0))
+			|| (isLong = (strcasecmp("long htmlText", inPropertyName) == 0)) )
 	{
 		tinyxml2::XMLDocument		document;
 		tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
-		declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
-		document.InsertEndChild( declaration );
-		
-		tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"");
-		document.InsertEndChild( dtd );
-		
-		tinyxml2::XMLElement*		htmlRoot = document.NewElement("html");
-		document.InsertEndChild( htmlRoot );
+		tinyxml2::XMLNode*			htmlBody = &document;
+		tinyxml2::XMLElement*		htmlHead = NULL;
 
-		tinyxml2::XMLElement*		htmlHead = document.NewElement("head");
-		htmlRoot->InsertEndChild( htmlHead );
+		if( isLong )
+		{
+			declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
+			document.InsertEndChild( declaration );
+			
+			tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"");
+			document.InsertEndChild( dtd );
+			
+			tinyxml2::XMLElement*		htmlRoot = document.NewElement("html");
+			document.InsertEndChild( htmlRoot );
 
-		tinyxml2::XMLElement*		htmlBody = document.NewElement("body");
-		htmlRoot->InsertEndChild( htmlBody );
+			htmlHead = document.NewElement("head");
+			htmlRoot->InsertEndChild( htmlHead );
+
+			htmlBody = document.NewElement("body");
+			htmlRoot->InsertEndChild( htmlBody );
+		}
 		
 		CPartContents*		contents = GetContentsOnCurrentCard();
 		CStyleSheet			styleSheet;
 		contents->GetAttributedText().SaveToXMLDocumentElementStyleSheet( &document, htmlBody, &styleSheet );
 		
-		tinyxml2::XMLElement*		cssTag = document.NewElement("style");
-		htmlHead->InsertEndChild( cssTag );
-		cssTag->SetText( styleSheet.GetCSS().c_str() );
-		cssTag->InsertEndChild( document.NewText( "\nbody\n{\n    white-space: pre-wrap;\n}\n" ) );
+		if( htmlHead )
+		{
+			tinyxml2::XMLElement*		cssTag = document.NewElement("style");
+			htmlHead->InsertEndChild( cssTag );
+			cssTag->SetText( styleSheet.GetCSS().c_str() );
+			cssTag->InsertEndChild( document.NewText( "\nbody\n{\n    white-space: pre-wrap;\n}\n" ) );
+		}
 
 		CStacksmithXMLPrinter		printer;
 		document.Print( &printer );

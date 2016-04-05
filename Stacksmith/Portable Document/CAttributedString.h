@@ -37,7 +37,7 @@ public:
 	CAttributedString( const CAttributedString& inStr ) : mString(inStr.mString), mRanges(inStr.mRanges) {};
 	
 	void			LoadFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
-	void			SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLElement* inElement, CStyleSheet *styleSheet ) const;
+	void			SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLNode* inElement, CStyleSheet *styleSheet ) const;
 	std::string		GetString()	const						{ return mString; };
 	void			SetString( const std::string& inStr )	{ mString = inStr; mRanges.clear(); };
 	size_t			GetLength()	const						{ return mString.length(); };

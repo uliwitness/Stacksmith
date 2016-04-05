@@ -250,7 +250,7 @@ void	CAttributedString::NormalizeStyleRuns()
 }
 
 
-void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLElement* inElement, CStyleSheet *styleSheet ) const
+void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLNode* inElement, CStyleSheet *styleSheet ) const
 {
 	size_t	currOffs = 0;
 	for( CAttributeRange currRun : mRanges )
