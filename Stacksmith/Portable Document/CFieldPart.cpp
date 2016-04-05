@@ -299,7 +299,7 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
 					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "bold", inContext );
 				}
-				else if( currStyle.first.compare( "text-style" ) == 0 && currStyle.second.compare( "italic" ) == 0 )
+				else if( currStyle.first.compare( "font-style" ) == 0 && currStyle.second.compare( "italic" ) == 0 )
 				{
 					snprintf(tmpKey, sizeof(tmpKey) -1, "%zu", ++x );
 					LEOAddStringConstantArrayEntryToRoot( &theArray, tmpKey, "italic", inContext );
@@ -415,13 +415,13 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	{
 		attrStr.ClearAttributeForRange( "text-decoration", byteRangeStart, byteRangeEnd );
 		attrStr.ClearAttributeForRange( "font-weight", byteRangeStart, byteRangeEnd );
-		attrStr.ClearAttributeForRange( "text-style", byteRangeStart, byteRangeEnd );
+		attrStr.ClearAttributeForRange( "font-style", byteRangeStart, byteRangeEnd );
 		attrStr.ClearAttributeForRange( "$link", byteRangeStart, byteRangeEnd );
 	}
 	else if( strcasecmp(currStyleName, "bold") == 0 )
 		attrStr.AddAttributeValueForRange( "font-weight", "bold", byteRangeStart, byteRangeEnd );
 	else if( strcasecmp(currStyleName, "italic") == 0 )
-		attrStr.AddAttributeValueForRange( "text-style", "italic", byteRangeStart, byteRangeEnd );
+		attrStr.AddAttributeValueForRange( "font-style", "italic", byteRangeStart, byteRangeEnd );
 	else if( strcasecmp(currStyleName, "underline") == 0 )
 		attrStr.AddAttributeValueForRange( "text-decoration", "underline", byteRangeStart, byteRangeEnd );
 	else if( strcasecmp(currStyleName, "group") == 0 )

@@ -881,10 +881,10 @@ int main(int argc, const char * argv[])
 		
 		tinyxml2::XMLElement*	elem = doc.FirstChildElement( "text" );
 		
-		styles.LoadFromStream( ".style1 { font-weight: bold; } .style2 { text-style: italic; }" );
+		styles.LoadFromStream( ".style1 { font-weight: bold; } .style2 { font-style: italic; }" );
 		std::string	css = styles.GetCSS();
 		
-		WILDTest( "Read & Output round trip.", css.c_str(), ".style1\n{\n	font-weight: bold;\n}\n.style2\n{\n	text-style: italic;\n}\n" );
+		WILDTest( "Read & Output round trip.", css.c_str(), ".style1\n{\n	font-weight: bold;\n}\n.style2\n{\n	font-style: italic;\n}\n" );
 		WILDTest( "Number of classes", styles.GetNumClasses(), size_t(2) );
 		WILDTest( ".style1 is there", styles.GetClassAtIndex(0).c_str(), ".style1" );
 		auto styleOne = styles.GetStyleForClass("style1");
@@ -893,7 +893,7 @@ int main(int argc, const char * argv[])
 		WILDTest( ".style2 is there", styles.GetClassAtIndex(1).c_str(), ".style2" );
 		auto styleTwo = styles.GetStyleForClass("style2");
 		WILDTest( ".style2 contains 1 style", styleTwo.size(), size_t(1) );
-		WILDTest( ".style2 is italic", styleTwo["text-style"].c_str(), "italic" );
+		WILDTest( ".style2 is italic", styleTwo["font-style"].c_str(), "italic" );
 		
 		attrStr.LoadFromElementWithStyles( elem, styles );
 		
@@ -904,7 +904,7 @@ int main(int argc, const char * argv[])
 		doc2.InsertEndChild(elem2);
 		attrStr.SaveToXMLDocumentElementStyleSheet( &doc2, elem2, &writtenStyles );
 
-		WILDTest( "Output & Read round trip.", writtenStyles.GetCSS().c_str(), ".style1\n{\n	font-weight: bold;\n}\n.style2\n{\n	text-style: italic;\n}\n" );
+		WILDTest( "Output & Read round trip.", writtenStyles.GetCSS().c_str(), ".style1\n{\n	font-weight: bold;\n}\n.style2\n{\n	font-style: italic;\n}\n" );
 		WILDTest( "Number of classes", writtenStyles.GetNumClasses(), size_t(2) );
 		WILDTest( ".style1 is there", writtenStyles.GetClassAtIndex(0).c_str(), ".style1" );
 		styleOne = writtenStyles.GetStyleForClass("style1");
@@ -913,7 +913,7 @@ int main(int argc, const char * argv[])
 		WILDTest( ".style2 is there", writtenStyles.GetClassAtIndex(1).c_str(), ".style2" );
 		styleTwo = writtenStyles.GetStyleForClass("style2");
 		WILDTest( ".style2 contains 1 style", styleTwo.size(), size_t(1) );
-		WILDTest( ".style2 is italic", styleTwo["text-style"].c_str(), "italic" );
+		WILDTest( ".style2 is italic", styleTwo["font-style"].c_str(), "italic" );
 	}
 	
 	{
@@ -925,10 +925,10 @@ int main(int argc, const char * argv[])
 		
 		tinyxml2::XMLElement*	elem = doc.FirstChildElement( "text" );
 		
-		styles.LoadFromStream( ".style1 { font-weight: bold; } .style2 { text-style: italic; }" );
+		styles.LoadFromStream( ".style1 { font-weight: bold; } .style2 { font-style: italic; }" );
 		std::string	css = styles.GetCSS();
 		
-		WILDTest( "Read & Output round trip.", css.c_str(), ".style1\n{\n	font-weight: bold;\n}\n.style2\n{\n	text-style: italic;\n}\n" );
+		WILDTest( "Read & Output round trip.", css.c_str(), ".style1\n{\n	font-weight: bold;\n}\n.style2\n{\n	font-style: italic;\n}\n" );
 		WILDTest( "Number of classes", styles.GetNumClasses(), size_t(2) );
 		WILDTest( ".style1 is there", styles.GetClassAtIndex(0).c_str(), ".style1" );
 		auto styleOne = styles.GetStyleForClass("style1");
@@ -937,13 +937,13 @@ int main(int argc, const char * argv[])
 		WILDTest( ".style2 is there", styles.GetClassAtIndex(1).c_str(), ".style2" );
 		auto styleTwo = styles.GetStyleForClass("style2");
 		WILDTest( ".style2 contains 1 style", styleTwo.size(), size_t(1) );
-		WILDTest( ".style2 is italic", styleTwo["text-style"].c_str(), "italic" );
+		WILDTest( ".style2 is italic", styleTwo["font-style"].c_str(), "italic" );
 		
 		attrStr.LoadFromElementWithStyles( elem, styles );
 		std::stringstream	stylesStr;
 		attrStr.Dump(stylesStr);
 		
-		WILDTest( "styles were read correctly", stylesStr.str().c_str(), "othervalue:foo\n<span style=\"text-style:italic;\">somestuff:This</span>\navalue:123.457\ncurrentbutton:First Choice\nd:\nb:\nc:\na:\n" );
+		WILDTest( "styles were read correctly", stylesStr.str().c_str(), "othervalue:foo\n<span style=\"font-style:italic;\">somestuff:This</span>\navalue:123.457\ncurrentbutton:First Choice\nd:\nb:\nc:\na:\n" );
 	}
 		
 	// Set up some parser tables (but not enough to actually generate bytecode) to be able to test the parser:

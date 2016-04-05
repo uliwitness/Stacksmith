@@ -546,7 +546,9 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 			}
 			[mTextView.textStorage setAttributedString: attrStr];
 			if( oldRTF )
+			{
 				SetAttributedStringWithCocoa( cppstr, attrStr );	// Save the parsed RTF back as something the cross-platform code understands.
+			}
 		}
 		else
 			[mTextView setString: @""];
@@ -1128,7 +1130,7 @@ NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedS
 //					std::cout << "\tAdding underline." << std::endl;
 					[newAttrStr addAttribute: NSUnderlineStyleAttributeName value: @(NSUnderlineStyleSingle) range: currCocoaRange];
 				}
-				else if( currStyle.first.compare("text-style") == 0 && currStyle.second.compare("italic") == 0 )
+				else if( currStyle.first.compare("font-style") == 0 && currStyle.second.compare("italic") == 0 )
 				{
 					NSFont*	changedFont = [[NSFontManager sharedFontManager] convertFont: (newFont ? newFont : defaultAttrs[NSFontAttributeName]) toHaveTrait: NSItalicFontMask];
 					if( changedFont && [[NSFontManager sharedFontManager] traitsOfFont: changedFont] & NSItalicFontMask )
@@ -1225,13 +1227,13 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 				}
 				if( traits & NSItalicFontMask )
 				{
-					stringToSet.AddAttributeValueForRange( "text-style", "italic", range.location, range.location +range.length );
+					stringToSet.AddAttributeValueForRange( "font-style", "italic", range.location, range.location +range.length );
 				}
 			//	stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSObliquenessAttributeName] && [attrValue integerValue] != 0 )
 			{
-				stringToSet.AddAttributeValueForRange( "text-style", "italic", range.location, range.location +range.length );
+				stringToSet.AddAttributeValueForRange( "font-style", "italic", range.location, range.location +range.length );
 			//	stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSUnderlineStyleAttributeName] && [attrValue integerValue] == NSUnderlineStyleSingle )
