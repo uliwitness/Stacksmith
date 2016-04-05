@@ -24,6 +24,10 @@
 using namespace Carlson;
 
 
+// Combo boxes are fixed in their heights. As parts aren't, just show them at the
+//	system-defined height to make things look right:
+#define SYSTEM_DEFINED_COMBOBOX_HEIGHT		26
+
 
 
 @interface WILDFieldDelegate : NSObject <NSTextViewDelegate,NSTableViewDelegate, NSTableViewDataSource,NSTextFieldDelegate,NSComboBoxDataSource,NSSearchFieldDelegate>
@@ -447,7 +451,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else if( mFieldStyle == EFieldStyleSearch )
 	{
-		mSearchField = [[WILDSearchField alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
+		mSearchField = [[WILDSearchField alloc] initWithFrame: ConvertToViewRect(GetLeft(), GetTop(), GetRight(), GetBottom())];
 		[mSearchField beginWatchingForSelectionChanges];
 		mSearchField.delegate = mMacDelegate;
 		mSearchField.owningField = this;
@@ -455,8 +459,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else if( mFieldStyle == EFieldStylePopUp )
 	{
-		NSRect		box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
-		box = NSInsetRect( box, 0, -2 );
+		NSRect		box = ConvertToViewRect(GetLeft(), GetTop(), GetRight(), GetBottom());
 		mSearchField = (WILDSearchField*)[[WILDComboBox alloc] initWithFrame: box];
 		[mSearchField beginWatchingForSelectionChanges];
 		mSearchField.delegate = mMacDelegate;
@@ -584,6 +587,19 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mSearchField setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 		[inSuperView addSubview: mSearchField];
 	}
+}
+
+
+NSRect	CFieldPartMac::ConvertToViewRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
+{
+	NSRect		box = NSMakeRect(left, top, right -left, bottom -top);
+	if( mFieldStyle == EFieldStylePopUp )
+	{
+		box.origin.y += truncf((box.size.height - SYSTEM_DEFINED_COMBOBOX_HEIGHT) / 2);
+		box.size.height = SYSTEM_DEFINED_COMBOBOX_HEIGHT;
+	}
+	
+	return box;
 }
 
 
@@ -1268,11 +1284,7 @@ void	CFieldPartMac::ToolChangedFrom( TTool inOldTool )
 void	CFieldPartMac::SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom )
 {
 	CFieldPart::SetRect( left, top, right, bottom );
-	NSRect		box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
-	if( mFieldStyle == EFieldStylePopUp )
-	{
-		box = NSInsetRect( box, 0, -2 );
-	}
+	NSRect		box = ConvertToViewRect(GetLeft(), GetTop(), GetRight(), GetBottom());
 	[(mView? mView : mSearchField) setFrame: box];
 	GetStack()->RectChangedOfPart( this );
 }

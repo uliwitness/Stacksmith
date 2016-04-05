@@ -84,6 +84,7 @@ protected:
 	~CFieldPartMac()	{ DestroyView(); };
 
 	virtual void		SetStyle( TFieldStyle inFieldStyle );
+	NSRect				ConvertToViewRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 
 	WILDScrollView*		mView;
 	WILDFieldDelegate*	mMacDelegate;
