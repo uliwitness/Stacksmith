@@ -319,7 +319,8 @@ std::string	CTinyXMLUtils::EnsureNonNULLString( const char* inStr )
 
 bool	CStacksmithXMLPrinter::CompactMode( const tinyxml2::XMLElement& elem )
 {
-	if( strcmp(elem.Name(),"text") == 0 || strcmp(elem.Name(),"script") == 0 )
+	if( strcmp(elem.Name(),"text") == 0 || strcmp(elem.Name(),"script") == 0 || strcmp(elem.Name(),"td") == 0
+		|| strcmp(elem.Name(),"body") == 0 )	// For htmlText property.
 		return true;
 	const tinyxml2::XMLElement*	firstElem = elem.FirstChildElement();
 	const tinyxml2::XMLNode*	firstChild = elem.FirstChild();

@@ -401,6 +401,38 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 	{
 		LEOInitIntegerValue( outValue, mCursorID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("htmlText", inPropertyName) == 0 )
+	{
+		tinyxml2::XMLDocument		document;
+		tinyxml2::XMLDeclaration*	declaration = document.NewDeclaration();
+		declaration->SetValue("xml version=\"1.0\" encoding=\"utf-8\"");
+		document.InsertEndChild( declaration );
+		
+		tinyxml2::XMLUnknown*	dtd = document.NewUnknown("DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"");
+		document.InsertEndChild( dtd );
+		
+		tinyxml2::XMLElement*		htmlRoot = document.NewElement("html");
+		document.InsertEndChild( htmlRoot );
+
+		tinyxml2::XMLElement*		htmlHead = document.NewElement("head");
+		htmlRoot->InsertEndChild( htmlHead );
+
+		tinyxml2::XMLElement*		htmlBody = document.NewElement("body");
+		htmlRoot->InsertEndChild( htmlBody );
+		
+		CPartContents*		contents = GetContentsOnCurrentCard();
+		CStyleSheet			styleSheet;
+		contents->GetAttributedText().SaveToXMLDocumentElementStyleSheet( &document, htmlBody, &styleSheet );
+		
+		tinyxml2::XMLElement*		cssTag = document.NewElement("style");
+		htmlHead->InsertEndChild( cssTag );
+		cssTag->SetText( styleSheet.GetCSS().c_str() );
+		cssTag->InsertEndChild( document.NewText( "\nbody\n{\n    white-space: pre-wrap;\n}\n" ) );
+
+		CStacksmithXMLPrinter		printer;
+		document.Print( &printer );
+		LEOInitStringValue( outValue, printer.CStr(), printer.CStrSize(), kLEOInvalidateReferences, inContext );
+	}
 	else
 	{
 		return CVisiblePart::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
