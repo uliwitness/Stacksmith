@@ -159,6 +159,19 @@ std::string	CStyleSheet::GetCSS() const
 }
 
 
+/*static*/ std::string	CStyleSheet::GetInlineCSSForStyle( const CMap<std::string>& styleParts )
+{
+	std::stringstream	sstream;
+
+	for( auto currStyle : styleParts )
+	{
+		sstream << currStyle.first << ": " << currStyle.second << "; ";
+	}
+
+	return sstream.str();
+}
+
+
 std::string	CStyleSheet::UniqueNameForClass( const char* inBaseName )
 {
 	size_t			counter = 1;

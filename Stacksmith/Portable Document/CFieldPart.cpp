@@ -431,7 +431,7 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 		
 		CPartContents*		contents = GetContentsOnCurrentCard();
 		CStyleSheet			styleSheet;
-		contents->GetAttributedText().SaveToXMLDocumentElementStyleSheet( &document, htmlBody, &styleSheet );
+		contents->GetAttributedText().SaveToXMLDocumentElementStyleSheet( &document, htmlBody, &styleSheet, isLong ? EStyleModeSeparate : EStyleModeInline );
 		
 		if( htmlHead )
 		{

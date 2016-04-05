@@ -29,6 +29,12 @@ struct CAttributeRange
 };
 
 
+typedef enum {
+	EStyleModeSeparate,		//!< The styles are referenced using CSS classes written into the CStyleSheet object provided.
+	EStyleModeInline		//!< The styles are written into the style attribute of the span.
+} EStyleMode;
+
+
 class CAttributedString
 {
 public:
@@ -37,7 +43,7 @@ public:
 	CAttributedString( const CAttributedString& inStr ) : mString(inStr.mString), mRanges(inStr.mRanges) {};
 	
 	void			LoadFromElementWithStyles( tinyxml2::XMLElement * inElement, const CStyleSheet& inStyles );
-	void			SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLNode* inElement, CStyleSheet *styleSheet ) const;
+	void			SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocument* inDoc, tinyxml2::XMLNode* inElement, CStyleSheet *styleSheet, EStyleMode inlineStyles = EStyleModeSeparate ) const;
 	std::string		GetString()	const						{ return mString; };
 	void			SetString( const std::string& inStr )	{ mString = inStr; mRanges.clear(); };
 	size_t			GetLength()	const						{ return mString.length(); };

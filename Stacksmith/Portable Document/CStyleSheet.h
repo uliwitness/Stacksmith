@@ -48,6 +48,8 @@ public:
 	std::string	UniqueNameForClass( const char* inBaseName );	// *always* appends a number to the class name.
 	
 	void	Dump() const;
+
+	static std::string		GetInlineCSSForStyle( const CMap<std::string>& styleParts );
 	
 protected:
 	CMap<CMap<std::string>>	mStyles;
