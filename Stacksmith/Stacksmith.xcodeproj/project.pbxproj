@@ -103,8 +103,8 @@
 		55255A85114C178100279B03 /* UKSCTDUserIdentifiersPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A83114C178100279B03 /* UKSCTDUserIdentifiersPrefsController.m */; };
 		55255A8D114C179C00279B03 /* NSScanner+SkipUpToCharset.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A8A114C179C00279B03 /* NSScanner+SkipUpToCharset.m */; };
 		55255A8E114C179C00279B03 /* NSArray+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 55255A8C114C179C00279B03 /* NSArray+Color.m */; };
-		552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997CE1370BAD300F870DF /* WILDInputPanelController.m */; };
-		552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */; };
+		552997CF1370BAD300F870DF /* ULIInputPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997CE1370BAD300F870DF /* ULIInputPanelController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		552FF1FB113F23F3005742C8 /* PAT_1.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF0FE113F23F3005742C8 /* PAT_1.pbm */; };
 		552FF1FC113F23F3005742C8 /* PAT_2.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF0FF113F23F3005742C8 /* PAT_2.pbm */; };
 		552FF1FD113F23F3005742C8 /* PAT_3.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF100113F23F3005742C8 /* PAT_3.pbm */; };
@@ -726,8 +726,8 @@
 		55255A8A114C179C00279B03 /* NSScanner+SkipUpToCharset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSScanner+SkipUpToCharset.m"; path = "../UKSyntaxColoredTextDocument/NSScanner+SkipUpToCharset.m"; sourceTree = SOURCE_ROOT; };
 		55255A8B114C179C00279B03 /* NSArray+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Color.h"; path = "../UKSyntaxColoredTextDocument/NSArray+Color.h"; sourceTree = SOURCE_ROOT; };
 		55255A8C114C179C00279B03 /* NSArray+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Color.m"; path = "../UKSyntaxColoredTextDocument/NSArray+Color.m"; sourceTree = SOURCE_ROOT; };
-		552997CD1370BAD300F870DF /* WILDInputPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDInputPanelController.h; path = Windows/WILDInputPanelController.h; sourceTree = "<group>"; };
-		552997CE1370BAD300F870DF /* WILDInputPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDInputPanelController.m; path = Windows/WILDInputPanelController.m; sourceTree = "<group>"; };
+		552997CD1370BAD300F870DF /* ULIInputPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIInputPanelController.h; path = ../UliKit/ULIInputPanelController.h; sourceTree = "<group>"; };
+		552997CE1370BAD300F870DF /* ULIInputPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIInputPanelController.m; path = ../UliKit/ULIInputPanelController.m; sourceTree = "<group>"; };
 		552997D01370C5D800F870DF /* NSStringDrawing+SizeWithRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSStringDrawing+SizeWithRect.h"; path = "../UliKit/NSStringDrawing+SizeWithRect.h"; sourceTree = "<group>"; };
 		552997D11370C5D800F870DF /* NSStringDrawing+SizeWithRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSStringDrawing+SizeWithRect.m"; path = "../UliKit/NSStringDrawing+SizeWithRect.m"; sourceTree = "<group>"; };
 		552FF0FE113F23F3005742C8 /* PAT_1.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = PAT_1.pbm; path = Resources/PAT_1.pbm; sourceTree = "<group>"; };
@@ -1439,8 +1439,8 @@
 				55CD61101878EBF9002450E2 /* CCancelPolling.cpp */,
 				55CD61141879EDA3002450E2 /* CAlert.h */,
 				55CD61131879EDA3002450E2 /* CAlert.mm */,
-				552997CD1370BAD300F870DF /* WILDInputPanelController.h */,
-				552997CE1370BAD300F870DF /* WILDInputPanelController.m */,
+				552997CD1370BAD300F870DF /* ULIInputPanelController.h */,
+				552997CE1370BAD300F870DF /* ULIInputPanelController.m */,
 				55CD611A187A154A002450E2 /* CSound.h */,
 				55CD6119187A154A002450E2 /* CSound.mm */,
 				559BA9A418AB85D100760273 /* CCursor.h */,
@@ -2654,7 +2654,7 @@
 				55039FD9136D5CCF0082E32E /* ULIPaintView.m in Sources */,
 				559BA9D118B11E4600760273 /* CPlatformLayer.mm in Sources */,
 				55EE385E1A91473B00E1C2E7 /* CGraphicPart.cpp in Sources */,
-				552997CF1370BAD300F870DF /* WILDInputPanelController.m in Sources */,
+				552997CF1370BAD300F870DF /* ULIInputPanelController.m in Sources */,
 				552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */,
 				559700EC137BB38B000264B8 /* WILDIrisOpenFilter.m in Sources */,
 				55BD35771A8FFEC500D0BAF7 /* WILDSearchField.mm in Sources */,

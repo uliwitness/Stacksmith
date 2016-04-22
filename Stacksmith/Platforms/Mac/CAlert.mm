@@ -7,7 +7,7 @@
 //
 
 #include "CAlert.h"
-#import "WILDInputPanelController.h"
+#import "ULIInputPanelController.h"
 #import <AppKit/AppKit.h>
 #include "CScriptableObjectValue.h"
 
@@ -73,7 +73,7 @@ size_t	CAlert::RunMessageAlert( const std::string& inMessage, const std::string&
 
 bool	CAlert::RunInputAlert( const std::string& inMessage, std::string& ioInputText )
 {
-	WILDInputPanelController	*	inputPanel = [WILDInputPanelController inputPanelWithPrompt: [NSString stringWithUTF8String: inMessage.c_str()] answer: [NSString stringWithUTF8String: ioInputText.c_str()]];
+	ULIInputPanelController	*	inputPanel = [ULIInputPanelController inputPanelWithPrompt: [NSString stringWithUTF8String: inMessage.c_str()] answer: [NSString stringWithUTF8String: ioInputText.c_str()]];
 	NSInteger		returnValue = [inputPanel runModal];
 	NSString	*	answerString = [inputPanel answerString];
 	ioInputText = [answerString UTF8String];
