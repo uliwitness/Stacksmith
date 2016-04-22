@@ -323,7 +323,10 @@ void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, CIm
 				CURLConnection::SendRequestWithCompletionHandler( request, [completionBlock,currMedia,inType](CURLResponse response, const char * data, size_t dataLen)
 				{
 					if( !currMedia->mFileData && dataLen > 0 )
+					{
 						currMedia->mFileData = [[NSData alloc] initWithBytes: data length: dataLen];
+						assert( currMedia->mFileData != nil );
+					}
 					if( !currMedia->mImage && currMedia->mFileData )
 						currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
 					[currMedia->mImage setName: [NSString stringWithUTF8String: currMedia->GetFileName().c_str()].lastPathComponent];
@@ -514,6 +517,24 @@ CMediaEntry::CMediaEntry( const CMediaEntry& orig )
 }
 
 
+CMediaEntry&	CMediaEntry::operator =( const CMediaEntry& orig )
+{
+	mIconID = orig.mIconID;
+	mMediaType = orig.mMediaType;
+	mHotspotLeft = orig.mHotspotLeft;
+	mHotspotTop = orig.mHotspotTop;
+	mIsBuiltIn = orig.mIsBuiltIn;
+	mChangeCount = orig.mChangeCount;
+	mFileName = orig.mFileName;
+	mIconName = orig.mIconName;
+	mFileData = [orig.mFileData retain];
+	mImage = [orig.mImage retain];
+	mLoading = false;
+	
+	return *this;
+}
+
+
 CMediaEntry::~CMediaEntry()
 {
 	if( mFileData )
@@ -647,6 +668,7 @@ bool	CMediaEntry::LoadFromElement( tinyxml2::XMLElement* currMediaElem, const st
 		if( contentElem )
 		{
 			mFileData = [[NSData alloc] initWithBase64EncodedData: [NSData dataWithBytes: contentElem->GetText() length: strlen(contentElem->GetText())] options: NSDataBase64DecodingIgnoreUnknownCharacters];
+			assert(mFileData != nil);
 		}
 		mIconID = iconID;
 		mIconName = iconName;
