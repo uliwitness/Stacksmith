@@ -829,6 +829,8 @@ LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* 
 CScriptableObject*		CScriptableObject::GetOwnerScriptableObjectFromContext( LEOContext * inContext )
 {
 	LEOScript	*	script = LEOContextPeekCurrentScript( inContext );
+    if( !script )
+        return NULL;
 	LEOValuePtr		owner = (LEOValuePtr) LEOContextGroupGetPointerForObjectIDAndSeed( inContext->group, script->ownerObject, script->ownerObjectSeed );
 	if( !owner )
 		return NULL;
@@ -853,7 +855,9 @@ void	CScriptableObject::PreInstructionProc( LEOContext* inContext )
 
 void	CScriptableObject::ContextCompletedProc( LEOContext *ctx )
 {
-
+    CScriptableObject * me = ((CScriptContextUserData*)ctx->userData)->GetOwner();  // Can't use GetOwnerScriptableObjectFromContext() because that looks at the call stack, which is empty by now.
+    if( me )
+        me->ContextCompleted( ctx );
 }
 
 
@@ -898,7 +902,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	//printf("Sending: %s\n",msg);
 	
 	CScriptableObject*	parent = GetParentObject();
-	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this );
+	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this, this );
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
 	if( outContext )
 		*outContext = ctx;
@@ -1158,6 +1162,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 }
 
 
+
 void	CScriptableObject::InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
 {
 	InitScriptableObjectValue( &outObject->object, this, keepReferences, inContext );
@@ -1167,13 +1172,15 @@ void	CScriptableObject::InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag 
 //static int	sScriptUserDatasInExistence = 0;
 
 
-CScriptContextUserData::CScriptContextUserData( CStack* currStack, CScriptableObject* target )
-	: mCurrentStack(currStack), mTarget(target), mVisualEffectSpeed(EVisualEffectSpeedNormal)
+CScriptContextUserData::CScriptContextUserData( CStack* currStack, CScriptableObject* target, CScriptableObject* owner )
+	: mCurrentStack(currStack), mTarget(target), mOwner(owner), mVisualEffectSpeed(EVisualEffectSpeedNormal)
 {
 	if( mCurrentStack )
 		mCurrentStack->Retain();
-	if( mTarget )
-		mTarget->Retain();
+    if( mTarget )
+        mTarget->Retain();
+    if( mOwner )
+        mOwner->Retain();
 	//sScriptUserDatasInExistence++;
 }
 
@@ -1183,8 +1190,10 @@ CScriptContextUserData::~CScriptContextUserData()
 	//sScriptUserDatasInExistence--;
 	if( mCurrentStack )
 		mCurrentStack->Release();
-	if( mTarget )
-		mTarget->Release();
+    if( mTarget )
+        mTarget->Release();
+    if( mOwner )
+        mOwner->Release();
 }
 
 
@@ -1205,6 +1214,16 @@ void	CScriptContextUserData::SetTarget( CScriptableObject* target )
 	if( mTarget )
 		mTarget->Release();
 	mTarget = target;
+}
+
+
+void	CScriptContextUserData::SetOwner( CScriptableObject* owner )
+{
+	if( owner )
+		owner->Retain();
+	if( mOwner )
+		mOwner->Release();
+	mOwner = owner;
 }
 
 

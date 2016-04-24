@@ -55,7 +55,6 @@ bool	CMessageBox::SetTextContents( const std::string& inString )
 void	CMessageBox::Run()
 {
 	CAutoreleasePool	pool;
-	LEOValue			returnValue = {{0}};
 	char				returnValBuf[1024] = {0};
 	LEOContext	*		ctx = NULL;
 	SendMessage( &ctx, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ":run" );
@@ -69,10 +68,28 @@ void	CMessageBox::Run()
 			else
 				SetResultText( resultString );
 		}
-		LEOCleanUpValue( &returnValue, kLEOInvalidateReferences, NULL );
 	}
 	if( ctx )
 		LEOContextRelease(ctx);
+}
+
+
+void	CMessageBox::ContextCompleted( LEOContext *ctx )
+{
+    if( ctx && ctx->stackEndPtr != ctx->stack && ctx->stack[0].base.isa != NULL )
+    {
+        LEODebugPrintContext(ctx);
+        char		returnValBuf[1024] = {0};
+        if( (ctx->flags & kLEOContextKeepRunning) == 0 )
+            SetResultText( ctx->errMsg );
+        else if( !LEOGetValueIsUnset( &ctx->stack[0], NULL ) )
+        {
+            const char*	resultString = LEOGetValueAsString( &ctx->stack[0], returnValBuf, sizeof(returnValBuf), ctx );
+            SetResultText( resultString );
+        }
+    }
+    
+    CScriptableObject::ContextCompleted( ctx );
 }
 
 

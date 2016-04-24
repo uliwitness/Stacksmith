@@ -338,9 +338,13 @@ void	CDocument::CallAllCompletionBlocks()
 	mLoaded = true;
 	mLoading = false;
 	
+    Retain();   // In case one of the completion blocks wants to close us.
+    
 	for( auto itty = mLoadCompletionBlocks.begin(); itty != mLoadCompletionBlocks.end(); itty++ )
 		(*itty)( this );
 	mLoadCompletionBlocks.clear();
+    
+    Release();  // Now we can go away.
 }
 
 

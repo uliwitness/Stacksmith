@@ -290,9 +290,14 @@ void	WILDScheduleResumeOfScript( void )
 {
 	std::string		fileURL( theFile.absoluteString.UTF8String );
 	CDocumentManager::GetSharedDocumentManager()->OpenDocumentFromURL( fileURL,
-	[]( CDocument * inNewDocument )
+	[fileURL]( CDocument * inNewDocument )
 	{
-		
+        if( !inNewDocument )
+        {
+            std::stringstream	errMsg;
+            errMsg << "Can't find stack at " << fileURL << ".";
+            CAlert::RunMessageAlert( errMsg.str() );
+        }
 	}, "", EVisualEffectSpeedNormal);
 	
 	return YES;	// We show our own errors asynchronously.

@@ -106,6 +106,7 @@ public:
 	virtual bool				SetUserPropertyValueForName( const std::string& inValue, const char* inPropName )	{ return false; };
 	
 	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
+    virtual void                ContextCompleted( LEOContext* ctx )                 {};
 	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message (e.g. to not ask the OS for mouseMoved events unless actually implemented).
 
 	virtual CStack*				GetStack()										{ return NULL; };
@@ -134,13 +135,15 @@ public:
 class CScriptContextUserData
 {
 public:
-	CScriptContextUserData( CStack* currStack, CScriptableObject* target );
+	CScriptContextUserData( CStack* currStack, CScriptableObject* target, CScriptableObject* owner );
 	~CScriptContextUserData();
 	
 	void				SetStack( CStack* currStack );
 	CStack*				GetStack()						{ return mCurrentStack; };
-	void				SetTarget( CScriptableObject* target );
-	CScriptableObject*	GetTarget()						{ return mTarget; };
+    void				SetTarget( CScriptableObject* target );
+    CScriptableObject*	GetTarget()						{ return mTarget; };
+    void				SetOwner( CScriptableObject* owner );
+    CScriptableObject*	GetOwner()						{ return mOwner; };
 	CDocument*			GetDocument();
 	void				SetVisualEffectTypeAndSpeed( const std::string& inType, TVisualEffectSpeed inSpeed ) { mVisualEffectType = inType; mVisualEffectSpeed = inSpeed; };
 	const std::string&	GetVisualEffectType()	{ return mVisualEffectType; };
@@ -150,7 +153,8 @@ public:
 	
 protected:
 	CStack				*	mCurrentStack;
-	CScriptableObject	*	mTarget;
+    CScriptableObject	*	mTarget;
+    CScriptableObject	*	mOwner;
 	std::string				mVisualEffectType;
 	TVisualEffectSpeed		mVisualEffectSpeed;
 };

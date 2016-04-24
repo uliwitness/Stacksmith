@@ -69,7 +69,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
         mOpenDocuments.push_back( new CDocumentMac() );
         CDocumentRef	currDoc( mOpenDocuments.back(), true );	// Take over ownership of the pointer we just 'new'ed, mOpenDocuments retains it by itself.
         
-        currDoc->LoadFromURL( fileURL, [inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CDocument * inDocument)
+        currDoc->LoadFromURL( fileURL, [this,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CDocument * inDocument)
         {
 			NSString*	urlStr = [[[NSBundle mainBundle] bundleURL] absoluteString];
 			if( [urlStr characterAtIndex: urlStr.length -1] != '/' )
@@ -83,25 +83,25 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
             Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
             if( !theCppStack )
             {
-                std::stringstream	errMsg;
-                errMsg << "Can't find stack at " << inDocument->GetURL() << ".";
-                CAlert::RunMessageAlert( errMsg.str() );
+                UKLog(@"No stacks in document %p", inDocument);
+                CloseDocument( inDocument );
 				inCompletionBlock(NULL);
                 return;
             }
-            theCppStack->Load( [inDocument,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CStack* inStack)
+            theCppStack->Load( [this,inDocument,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CStack* inStack)
             {
 				//UKLog(@"Stack completion entered %p", inStack);
                 //inStack->Dump();
 				if( !inStack->IsLoaded() )
 				{
+                    CloseDocument( inDocument );
+                    UKLog(@"Error loading stack for document %p", inDocument);
 					inCompletionBlock(NULL);
-                	UKLog(@"Error loading stack for document %p", inDocument);
 					return;
 				}
 				CCard	*	firstCard = (inStack ? inStack->GetCard(0) : NULL);
                 //UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
-                firstCard->Load( [inDocument,inStack,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CLayer*inCard)
+                firstCard->Load( [this,inDocument,inStack,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CLayer*inCard)
                 {
                     //UKLog(@"Card completion entered %p",inCard);
 					if( inCard )
@@ -110,6 +110,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 					}
 					else
 					{
+                        CloseDocument( inDocument );
 						inCompletionBlock(NULL);
 					}
                     //UKLog(@"Card completion exited");
