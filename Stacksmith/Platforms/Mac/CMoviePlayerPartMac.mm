@@ -54,8 +54,8 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 {
 	if( mView.superview == inSuperView )
 	{
-		[mView removeFromSuperview];
-		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		[mView.animator removeFromSuperview];
+		[inSuperView.animator addSubview: mView];	// Make sure we show up in right layering order.
 		return;
 	}
 	if( mView || mCurrentMovie )
@@ -69,7 +69,7 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 				mRateObserver = nil;
 			}
 		}
-		[mView removeFromSuperview];
+		[mView.animator removeFromSuperview];
 		[mView release];
 	}
 	if( mControllerVisible )
@@ -92,7 +92,7 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 	SetUpMoviePlayer();
 	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
-	[inSuperView addSubview: mView];
+	[inSuperView.animator addSubview: mView];
 }
 
 
@@ -106,7 +106,7 @@ void	CMoviePlayerPartMac::DestroyView()
 		[mCurrentMovie jcsRemoveObserver: mRateObserver];
 		mRateObserver = nil;
 	}
-	[mView removeFromSuperview];
+	[mView.animator removeFromSuperview];
 	[mView release];
 	mView = nil;
 }
@@ -126,7 +126,7 @@ void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
 			mRateObserver = nil;
 		}
 		oldSuper = [mView superview];
-		[mView removeFromSuperview];
+		[mView.animator removeFromSuperview];
 		[mView release];
 	}
 	if( mControllerVisible )
@@ -140,7 +140,7 @@ void	CMoviePlayerPartMac::SetControllerVisible( bool inStart )
 	}
 	mView.owningPart = this;
 	SetUpMoviePlayer();
-	[oldSuper addSubview: mView];
+	[oldSuper.animator addSubview: mView];
 }
 
 

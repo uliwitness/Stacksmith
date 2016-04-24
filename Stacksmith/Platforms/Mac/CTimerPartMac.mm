@@ -18,7 +18,7 @@ void	CTimerPartMac::CreateViewIn( NSView* inSuperView )
 	// We don't short-circuit here, as the tool may have changed forcing us to need to be recreated.
 	if( mView )
 	{
-		[mView removeFromSuperview];
+		[mView.animator removeFromSuperview];
 		[mView release];
 		mView = nil;
 	}
@@ -26,7 +26,7 @@ void	CTimerPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		mView = [[NSImageView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		[mView setImage: [NSImage imageNamed: @"TimerIcon"]];
-		[inSuperView addSubview: mView];
+		[inSuperView.animator addSubview: mView];
 	}
 }
 
@@ -48,7 +48,7 @@ void	CTimerPartMac::DestroyView()
 {
 	if( mView )
 	{
-		[mView removeFromSuperview];
+		[mView.animator removeFromSuperview];
 		[mView release];
 		mView = nil;
 	}

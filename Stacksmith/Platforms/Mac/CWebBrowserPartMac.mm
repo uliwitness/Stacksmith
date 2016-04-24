@@ -53,8 +53,8 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 {
 	if( mView.superview == inSuperView )
 	{
-		[mView removeFromSuperview];
-		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		[mView.animator removeFromSuperview];
+		[inSuperView.animator addSubview: mView];	// Make sure we show up in right layering order.
 		return;
 	}
 	if( mView )
@@ -76,7 +76,7 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
-	[inSuperView addSubview: mView];
+	[inSuperView.animator addSubview: mView];
 	LoadCurrentURL( mCurrentURL );
 }
 
@@ -84,7 +84,7 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 void	CWebBrowserPartMac::DestroyView()
 {
 	[mView setFrameLoadDelegate: nil];
-	[mView removeFromSuperview];
+	[mView.animator removeFromSuperview];
 	[mView release];
 	mView = nil;
 	

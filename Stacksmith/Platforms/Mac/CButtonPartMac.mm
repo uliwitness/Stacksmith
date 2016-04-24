@@ -44,8 +44,8 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 {
 	if( mView.superview == inSuperView )
 	{
-		[mView removeFromSuperview];
-		[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+		[mView.animator removeFromSuperview];
+		[inSuperView.animator addSubview: mView];	// Make sure we show up in right layering order.
 		return;
 	}
 	NSRect		box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
@@ -162,7 +162,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	NSFont*	theFont = [GetCocoaAttributesForPart() objectForKey: NSFontAttributeName];
 	[mView setFont: theFont];
-	[inSuperView addSubview: mView];
+	[inSuperView.animator addSubview: mView];
 }
 
 
@@ -383,7 +383,7 @@ void	CButtonPartMac::ApplyChangedSelectedLinesToView()
 
 void	CButtonPartMac::DestroyView()
 {
-	[mView removeFromSuperview];
+	[mView.animator removeFromSuperview];
 	mView = nil;
 }
 

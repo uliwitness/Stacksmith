@@ -365,9 +365,9 @@ void	CFieldPartMac::DestroyView()
 		mTableView.owningPart = NULL;
 	if( mView )
 		mView.owningPart = NULL;
-	[mView removeFromSuperview];
+	[mView.animator removeFromSuperview];
 	DESTROY(mView);
-	[mSearchField removeFromSuperview];
+	[mSearchField.animator removeFromSuperview];
 	DESTROY(mSearchField);
 	mTableView = nil;
 	mTextView = nil;
@@ -380,12 +380,12 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	if( (mView && mView.superview == inSuperView)
 		|| (mSearchField && mSearchField.superview == inSuperView) )
 	{
-		[mSearchField removeFromSuperview];
-		[mView removeFromSuperview];
+		[mSearchField.animator removeFromSuperview];
+		[mView.animator removeFromSuperview];
 		if( mView )
-			[inSuperView addSubview: mView];	// Make sure we show up in right layering order.
+			[inSuperView.animator addSubview: mView];	// Make sure we show up in right layering order.
 		if( mSearchField )
-			[inSuperView addSubview: mSearchField];	// Make sure we show up in right layering order.
+			[inSuperView.animator addSubview: mSearchField];	// Make sure we show up in right layering order.
 		return;
 	}
 	mMacDelegate = [[WILDFieldDelegate alloc] init];
@@ -567,7 +567,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mView.layer setShadowRadius: mShadowBlurRadius];
 		[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 		[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
-		[inSuperView addSubview: mView];
+		[inSuperView.animator addSubview: mView];
 
 		[mView setDocumentCursor: [NSCursor arrowCursor]];
 		
@@ -585,7 +585,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mSearchField.layer setShadowRadius: mShadowBlurRadius];
 		[mSearchField.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 		[mSearchField setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
-		[inSuperView addSubview: mSearchField];
+		[inSuperView.animator addSubview: mSearchField];
 	}
 }
 
