@@ -454,7 +454,7 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 			if( currHandler.mHandlerTemplate.empty() )
 			{
 				std::stringstream	strstr;
-				strstr << "\n\non " << currHandler.mHandlerName << "\n\t\nend" << currHandler.mHandlerName;
+				strstr << "\n\non " << currHandler.mHandlerName << "\n\t\nend " << currHandler.mHandlerName;
 				currHandler.mHandlerTemplate = strstr.str();
 			}
 		}
