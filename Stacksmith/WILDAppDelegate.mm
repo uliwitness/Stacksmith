@@ -490,6 +490,8 @@ void	WILDScheduleResumeOfScript( void )
 
 -(void)	checkForScriptToResume: (id)sender
 {
+    CAutoreleasePool    pool;
+    
 	LEOContextResumeIfAvailable();
 }
 
