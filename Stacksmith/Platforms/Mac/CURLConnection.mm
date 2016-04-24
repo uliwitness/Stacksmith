@@ -28,7 +28,9 @@ using namespace Carlson;
 		NSURLSessionDataTask *	theTask = [session dataTaskWithRequest: inRequest.GetMacRequest() completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 			CAutoreleasePool	pool;
 			CURLResponse		responseObject(response);
-			completionBlock( responseObject, (const char*)[data bytes], [data length] );
+            dispatch_async( dispatch_get_main_queue(), ^{
+                completionBlock( responseObject, (const char*)[data bytes], [data length] );
+            });
 		}];
 		[theTask resume];
 	}
