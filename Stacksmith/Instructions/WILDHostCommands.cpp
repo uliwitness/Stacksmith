@@ -153,7 +153,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 		if( theOverPart && theOverPart->base.isa == &kLeoValueTypeScriptableObject )
 			overPartObject = dynamic_cast<CPart*>((CScriptableObject*)theOverPart->object.object);
 
-		LEODebugPrintContext( inContext );
+		//LEODebugPrintContext( inContext );
 
 		if( theObjectDestination && theObjectDestination->base.isa == &kLeoValueTypeScriptableObject )
 		{
