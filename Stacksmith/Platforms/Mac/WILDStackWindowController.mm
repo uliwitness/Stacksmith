@@ -633,6 +633,13 @@ using namespace Carlson;
 }
 
 
+-(NSTimeInterval)   durationFromVisualEffectSpeed: (TVisualEffectSpeed)inSpeed
+{
+    NSTimeInterval  speeds[EVisualEffectSpeed_Last] = { 1.5, 1.0, 0.5, 0.35, 0.2 };
+    return speeds[inSpeed];
+}
+
+
 -(void) setVisualEffectType: (NSString*)inEffectType speed: (TVisualEffectSpeed)inSpeed
 {
     static NSDictionary     *   sTransitionMappings = [[NSDictionary alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource: @"TransitionMappings" withExtension: @"plist"]];
@@ -666,7 +673,7 @@ using namespace Carlson;
             animation.type = transitionType;
             animation.subtype = transitionSubtype;
         }
-        [animation setDuration: 0.5];    // One and a half seconds.
+        [animation setDuration: [self durationFromVisualEffectSpeed: inSpeed]];    // One and a half seconds.
         [mContentView setAnimations: @{ @"subviews": animation }];
         //[mContentView setSubviewsAnimation: animation];
     }

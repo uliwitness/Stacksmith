@@ -59,7 +59,8 @@ typedef enum
     EVisualEffectSpeedSlow,
     EVisualEffectSpeedNormal,
     EVisualEffectSpeedFast,
-    EVisualEffectSpeedVeryFast
+    EVisualEffectSpeedVeryFast,
+    EVisualEffectSpeed_Last
 } TVisualEffectSpeed;
 
 
