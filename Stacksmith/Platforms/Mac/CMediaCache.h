@@ -84,6 +84,8 @@ public:
 	void				CreateMediaElementInElement( tinyxml2::XMLElement * inElement, TIncludeContentFlag inIncludeContent = EDontIncludeContent );
 	bool				SaveContents();	// Saves the actual data to the file, if loaded.
 	
+	CMediaEntry&		operator =( const CMediaEntry& orig );
+	
 protected:
 	ObjectID		mIconID;
 	std::string		mIconName;

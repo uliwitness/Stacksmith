@@ -1174,6 +1174,10 @@ using namespace Carlson;
 	{
 		return( mStack->GetTool() != EBrowseTool && mStack->GetCurrentLayer()->CanCopySelectedItem() );
 	}
+	else if( theItem.action == @selector(cut:) )
+	{
+		return( mStack->GetTool() != EBrowseTool && mStack->GetCurrentLayer()->CanCopySelectedItem() && mStack->GetCurrentLayer()->CanDeleteSelectedItem() );
+	}
 	else if( theItem.action == @selector(paste:) )
 	{
 		return( mStack->GetTool() != EBrowseTool && [[NSPasteboard generalPasteboard] availableTypeFromArray: @[ @"com.the-void-software.stacksmith.parts.xml" ]] != nil );
@@ -1248,6 +1252,21 @@ using namespace Carlson;
 	{
 		CAutoreleasePool	pool;
 		std::string	xml = mStack->GetCurrentLayer()->CopySelectedItem();
+		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
+		[pb clearContents];
+		[pb addTypes: @[ @"com.the-void-software.stacksmith.parts.xml" ] owner: nil];
+		[pb setString: [NSString stringWithUTF8String: xml.c_str()] forType: @"com.the-void-software.stacksmith.parts.xml"];
+	}
+}
+
+
+-(IBAction)	cut: (id)sender
+{
+	if( mStack->GetTool() != EBrowseTool )
+	{
+		CAutoreleasePool	pool;
+		std::string	xml = mStack->GetCurrentLayer()->CopySelectedItem();
+		mStack->GetCurrentLayer()->DeleteSelectedItem();
 		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 		[pb clearContents];
 		[pb addTypes: @[ @"com.the-void-software.stacksmith.parts.xml" ] owner: nil];
