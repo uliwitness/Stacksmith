@@ -88,7 +88,7 @@ void	WILDGoBackInstruction( LEOContext* inContext )
 				// +++ Should we set the result here to indicate success?
 				
 				LEOContextRelease(inContext);
-			} );
+			}, userData->GetVisualEffectType(), userData->GetVisualEffectSpeed() );
 		}
 		if( canGoThere )
 			userData->SetStack( destinationObject->GetStack() );
@@ -178,7 +178,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 					// +++ Should we set the result here to indicate success?
 					
 					LEOContextRelease(inContext);
-				});
+				}, userData->GetVisualEffectType(), userData->GetVisualEffectSpeed());
 				
 				LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 				return;
@@ -190,7 +190,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 			CStack	*	theStack = destinationObject->GetStack();
 			if( theStack && theStack->GetStyle() == EStackStylePopup && overPartObject )
 				openInMode |= EOpenInNewWindow;
-		
+            
 			LEOPauseContext( inContext );
 			
 			LEOContextRetain( inContext );
@@ -202,16 +202,12 @@ void	WILDGoInstruction( LEOContext* inContext )
 				// +++ Should we set the result here to indicate success?
 				
 				LEOContextRelease(inContext);
-			} );
+			}, userData->GetVisualEffectType(), userData->GetVisualEffectSpeed() );
 		}
 		if( canGoThere )
 			userData->SetStack( destinationObject->GetStack() );
 		
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
-		
-//		CStack		*	frontStack = userData->GetStack();
-//		CCard		*	currentCard = frontStack->GetCurrentCard();
-//		currentCard->SetTransitionTypeAndSpeed( std::string(), EVisualEffectSpeedNormal );
 		
 		if( !canGoThere )
 		{

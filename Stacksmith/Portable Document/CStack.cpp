@@ -446,7 +446,7 @@ bool	CStack::DeleteCard( CCard* inCard )
 			
 			if( lastCardInBg )
 				RemoveBackground( theBg );
-		} );
+		}, "", EVisualEffectSpeedNormal );
 		
 	}
 	
@@ -500,7 +500,7 @@ CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 }
 
 
-void	CStack::SetCurrentCard( CCard* inCard )
+void	CStack::SetCurrentCard( CCard* inCard, const std::string& inEffectType, TVisualEffectSpeed inSpeed )
 {
 	mCurrentCard = inCard;
 }

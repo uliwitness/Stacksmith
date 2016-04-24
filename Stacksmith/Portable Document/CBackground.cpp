@@ -110,13 +110,13 @@ CCard*	CBackground::GetCard( size_t inIndex )
 }
 
 
-bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
+bool	CBackground::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler, const std::string& inEffectType, TVisualEffectSpeed inSpeed )
 {
 	CCard*	searchStart = GetStack()->GetCurrentCard();
 	if( searchStart && searchStart->GetBackground() == this )
-		return searchStart->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler );
+		return searchStart->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler, inEffectType, inSpeed );
 	else
-		return GetStack()->GetCardWithBackground( this, searchStart )->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler );
+		return GetStack()->GetCardWithBackground( this, searchStart )->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler, inEffectType, inSpeed );
 	return false;
 }
 

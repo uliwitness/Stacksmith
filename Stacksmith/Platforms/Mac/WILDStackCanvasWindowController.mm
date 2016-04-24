@@ -204,7 +204,7 @@ struct CCanvasEntry
 		{
 			currStack->Show(EEvenIfVisible);
 			currStack->SetEditingBackground( shouldEditBg );
-		} );
+		}, "", EVisualEffectSpeedNormal );
 	}
 }
 

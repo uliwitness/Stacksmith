@@ -23,7 +23,7 @@ CStack*		CDocumentMac::NewStackWithURLIDNameForDocument( const std::string& inUR
 }
 
 
-void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock )
+void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed )
 {
     try
     {
@@ -59,7 +59,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 		{
 			if( currDoc->GetURL().compare( slashlessFileURL ) == 0 )
 			{
-				currDoc->GetStack(0)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); } );
+				currDoc->GetStack(0)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); }, inEffectType, inSpeed );
 				[NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
 				return;
 			}
@@ -69,7 +69,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
         mOpenDocuments.push_back( new CDocumentMac() );
         CDocumentRef	currDoc( mOpenDocuments.back(), true );	// Take over ownership of the pointer we just 'new'ed, mOpenDocuments retains it by itself.
         
-        currDoc->LoadFromURL( fileURL, [inCompletionBlock,inURL](Carlson::CDocument * inDocument)
+        currDoc->LoadFromURL( fileURL, [inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CDocument * inDocument)
         {
 			NSString*	urlStr = [[[NSBundle mainBundle] bundleURL] absoluteString];
 			if( [urlStr characterAtIndex: urlStr.length -1] != '/' )
@@ -89,7 +89,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 				inCompletionBlock(NULL);
                 return;
             }
-            theCppStack->Load( [inDocument,inCompletionBlock,inURL](Carlson::CStack* inStack)
+            theCppStack->Load( [inDocument,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CStack* inStack)
             {
 				//UKLog(@"Stack completion entered %p", inStack);
                 //inStack->Dump();
@@ -101,12 +101,12 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 				}
 				CCard	*	firstCard = (inStack ? inStack->GetCard(0) : NULL);
                 //UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
-                firstCard->Load( [inDocument,inStack,inCompletionBlock,inURL](Carlson::CLayer*inCard)
+                firstCard->Load( [inDocument,inStack,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CLayer*inCard)
                 {
                     //UKLog(@"Card completion entered %p",inCard);
 					if( inCard )
 					{
-                    	inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [inDocument,inCompletionBlock,inURL](){ [NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]]; inCompletionBlock(inDocument); } );
+                    	inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [inDocument,inCompletionBlock,inURL,inEffectType,inSpeed](){ [NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]]; inCompletionBlock(inDocument); }, inEffectType, inSpeed );
 					}
 					else
 					{

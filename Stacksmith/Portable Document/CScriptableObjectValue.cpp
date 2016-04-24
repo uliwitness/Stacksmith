@@ -618,22 +618,22 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			const char*	directionStr = LEOGetValueAsString( directionParam, buf, sizeof(buf), inContext );
 			if( strcasecmp( directionStr, "left") == 0 )
 			{
-				userData->GetStack()->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, userData->GetStack(), NULL, [](){  } );
+				userData->GetStack()->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, userData->GetStack(), NULL, [](){  }, "", EVisualEffectSpeedNormal );
 				handled = true;
 			}
 			else if( strcasecmp( directionStr, "right") == 0 )
 			{
-				userData->GetStack()->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, userData->GetStack(), NULL, [](){  } );
+				userData->GetStack()->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, userData->GetStack(), NULL, [](){  }, "", EVisualEffectSpeedNormal );
 				handled = true;
 			}
 			else if( strcasecmp( directionStr, "up") == 0 )
 			{
-				userData->GetStack()->GetCard( 0 )->GoThereInNewWindow( EOpenInSameWindow, userData->GetStack(), NULL, [](){  } );
+				userData->GetStack()->GetCard( 0 )->GoThereInNewWindow( EOpenInSameWindow, userData->GetStack(), NULL, [](){  }, "", EVisualEffectSpeedNormal );
 				handled = true;
 			}
 			else if( strcasecmp( directionStr, "down") == 0 )
 			{
-				userData->GetStack()->GetCard( userData->GetStack()->GetNumCards() -1 )->GoThereInNewWindow( EOpenInSameWindow, userData->GetStack(), NULL, [](){  } );
+				userData->GetStack()->GetCard( userData->GetStack()->GetNumCards() -1 )->GoThereInNewWindow( EOpenInSameWindow, userData->GetStack(), NULL, [](){  }, "", EVisualEffectSpeedNormal );
 				handled = true;
 			}
 		}

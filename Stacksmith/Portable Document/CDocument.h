@@ -25,7 +25,7 @@ public:
 	CDocumentManager();
 	virtual ~CDocumentManager()	{};
 	
-	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock ) = 0;
+	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed ) = 0;
 	
 	virtual void	AddDocument( CDocumentRef inDocument )	{ mOpenDocuments.push_back(inDocument); };
 	virtual void	CloseDocument( CDocumentRef inDocument );

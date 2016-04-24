@@ -10,6 +10,7 @@
 #define __Stacksmith__WILDStackWindowController__
 
 #import <Cocoa/Cocoa.h>
+#include "CScriptableObjectValue.h"
 
 
 namespace Carlson {
@@ -39,6 +40,7 @@ class CPart;
 
 -(void)	removeAllViews;
 -(void)	createAllViews;
+-(void) setVisualEffectType: (NSString*)inEffectType speed: (Carlson::TVisualEffectSpeed)inSpeed;
 
 -(void)	drawBoundingBoxes;
 -(void)	refreshExistenceAndOrderOfAllViews;

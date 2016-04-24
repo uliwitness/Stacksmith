@@ -27,7 +27,7 @@ class CDocumentManagerMac : public CDocumentManager
 public:
 	virtual ~CDocumentManagerMac()	{};
 	
-	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
+	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed );
 	
 	virtual void	Quit();
 };

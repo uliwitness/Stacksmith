@@ -96,10 +96,10 @@ CScriptableObject*	CCard::GetParentObject()
 }
 
 
-bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
+bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler, const std::string& inEffectType, TVisualEffectSpeed inSpeed )
 {
 	Retain();
-	Load([this,oldStack,inOpenInMode,completionHandler](CLayer *inThisCard)
+	Load([this,oldStack,inOpenInMode,completionHandler,inEffectType,inSpeed](CLayer *inThisCard)
 	{
 		//inThisCard->Dump();
 		CCard		*	oldCard = oldStack ? oldStack->GetCurrentCard() : NULL;
@@ -152,7 +152,7 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			thisIsANewBackground = GetStack()->GetCurrentCard() == NULL || GetStack()->GetCurrentCard()->GetBackground() != thisBackground;
 			
 			//printf("Opening new card\n");
-			GetStack()->SetCurrentCard( this );	// Go there!
+			GetStack()->SetCurrentCard( this, inEffectType, inSpeed );	// Go there!
 			
 			WakeUp();
 			if( destStackWasntOpenYet )

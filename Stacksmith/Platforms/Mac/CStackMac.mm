@@ -64,16 +64,16 @@ std::string		CStackMac::GetDisplayName()
 }
 
 
-bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler )
+bool	CStackMac::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler, const std::string& inEffectType, TVisualEffectSpeed inSpeed )
 {
-	Load([this,oldStack,inOpenInMode,overPart,completionHandler](CStack *inStack)
+	Load([this,oldStack,inOpenInMode,overPart,completionHandler,inEffectType,inSpeed](CStack *inStack)
 	{
 		if( GetCurrentCard() == NULL )
 		{
 			CCard	*	theCard = inStack->GetCard(0);
-			theCard->Load([inOpenInMode,oldStack,overPart,completionHandler]( CLayer *inCard )
+			theCard->Load([inOpenInMode,oldStack,overPart,completionHandler,inEffectType,inSpeed]( CLayer *inCard )
 			{
-				inCard->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler );
+				inCard->GoThereInNewWindow( inOpenInMode, oldStack, overPart, completionHandler, inEffectType, inSpeed);
 			});
 		}
 		else
@@ -153,7 +153,7 @@ CUndoStack*	CStackMac::GetUndoStack()
 }
 
 
-void	CStackMac::SetCurrentCard( CCard* inCard )
+void	CStackMac::SetCurrentCard( CCard* inCard, const std::string& inEffectType, TVisualEffectSpeed inSpeed )
 {
 	if( inCard && !mMacWindowController )
 		mMacWindowController = [[WILDStackWindowController alloc] initWithCppStack: this];
@@ -161,12 +161,14 @@ void	CStackMac::SetCurrentCard( CCard* inCard )
 	if( mMacWindowController )
 	{
 		[CATransaction begin];
-		[CATransaction setAnimationDuration: 0.0];
-		
+        if( inEffectType.empty() )
+            [CATransaction setAnimationDuration: 0.0];
+		else
+            [mMacWindowController setVisualEffectType: [NSString stringWithUTF8String: inEffectType.c_str()] speed: inSpeed];
 		[mMacWindowController removeAllViews];
 	}
 	
-	CStack::SetCurrentCard(inCard);
+	CStack::SetCurrentCard(inCard, inEffectType, inSpeed);
 	
 	if( mMacWindowController )
 	{

@@ -43,12 +43,12 @@ public:
 	CStackMac( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	virtual ~CStackMac();
 
-	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler );
+	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler, const std::string& inEffectType, TVisualEffectSpeed inSpeed );
 	virtual void				SetPeeking( bool inState );
 	virtual void				SetStyle( TStackStyle inStyle );
 	virtual void				SetResizable( bool n );
 
-	virtual void				SetCurrentCard( CCard* inCard );
+	virtual void				SetCurrentCard( CCard* inCard, const std::string& inEffectType = "", TVisualEffectSpeed inSpeed = EVisualEffectSpeedNormal );
 	virtual void				SetEditingBackground( bool inState );
 	virtual void				SetTool( TTool inTool );
 	virtual void				SetName( const std::string& inName );

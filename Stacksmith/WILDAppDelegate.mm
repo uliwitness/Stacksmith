@@ -293,7 +293,7 @@ void	WILDScheduleResumeOfScript( void )
 	[]( CDocument * inNewDocument )
 	{
 		
-	});
+	}, "", EVisualEffectSpeedNormal);
 	
 	return YES;	// We show our own errors asynchronously.
 }
@@ -338,7 +338,7 @@ void	WILDScheduleResumeOfScript( void )
 					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
 					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
 					
-					theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
+					theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  }, "", EVisualEffectSpeedNormal );
 					theDoc->Release();
 				}
 				else
@@ -386,7 +386,7 @@ void	WILDScheduleResumeOfScript( void )
 			[savePanel.URL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
 			[savePanel.URL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
             
-            theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  } );
+            theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  }, "", EVisualEffectSpeedNormal );
 			theDoc->Release();
         }
         catch( std::exception& inException )

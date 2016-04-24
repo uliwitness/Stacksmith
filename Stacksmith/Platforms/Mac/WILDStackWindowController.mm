@@ -21,6 +21,7 @@
 #import "WILDStackInfoViewController.h"
 #import "UKHelperMacros.h"
 #include "CRecentCardsList.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c, const char ** d, const char* theAppendee )
@@ -44,10 +45,25 @@ using namespace Carlson;
 @end
 
 
+@interface WILDFlippedContentView ()
+
+@property (retain) CATransition *   subviewsAnimation;
+
+@end
+
+
 @implementation WILDFlippedContentView
 
 @synthesize stack = mStack;
 @synthesize owningStackWindowController = mOwningStackWindowController;
+
+
+-(void) dealloc
+{
+    DESTROY_DEALLOC(_subviewsAnimation);
+    [super dealloc];
+}
+
 
 -(BOOL)	isFlipped
 {
@@ -441,6 +457,22 @@ using namespace Carlson;
 }
 
 
+//+(nullable id)  defaultAnimationForKey: (NSString *)key
+//{
+//    return [super defaultAnimationForKey: key];
+//}
+//
+//
+//-(nullable id)  animationForKey: (NSString *)key
+//{
+//    if( [key isEqualToString: @"subviews"] )
+//    {
+//        return self.subviewsAnimation;
+//    }
+//    else
+//        return [super animationForKey: key];
+//}
+
 //-(void)	resetCursorRects
 //{
 //	NSCursor	*	currentCursor = nil;
@@ -545,7 +577,7 @@ using namespace Carlson;
 		mContentView.stack = mStack;
 		mContentView.owningStackWindowController = self;
 		mContentView.wantsLayer = YES;
-		[mContentView setLayerUsesCoreImageFilters: YES];
+//		[mContentView setLayerUsesCoreImageFilters: YES];
 	}
 	else
 	{
@@ -563,7 +595,7 @@ using namespace Carlson;
 		[mBackgroundImageView setImageScaling: NSImageScaleNone];
 		[mBackgroundImageView setWantsLayer: YES];
 		mBackgroundImageView.image = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: bgPictureURL.c_str()]]] autorelease];
-		[mContentView addSubview: mBackgroundImageView];
+		[mContentView.animator addSubview: mBackgroundImageView];
 	}
 	
 	size_t	numParts = theBackground->GetNumParts();
@@ -600,6 +632,48 @@ using namespace Carlson;
 	[self drawBoundingBoxes];
 }
 
+
+-(void) setVisualEffectType: (NSString*)inEffectType speed: (TVisualEffectSpeed)inSpeed
+{
+    static NSDictionary     *   sTransitionMappings = [[NSDictionary alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource: @"TransitionMappings" withExtension: @"plist"]];
+    NSDictionary            *   attrs = [sTransitionMappings objectForKey: [inEffectType lowercaseString]];
+    if( attrs )
+    {
+        CATransition            *   animation = [CATransition animation];
+        if( [[attrs objectForKey: @"CATransitionSubtype"] isEqualToString: @"cifilter"] )
+        {
+            CIFilter                *   filter = [CIFilter filterWithName: [attrs objectForKey: @"CATransitionType"]];
+            [filter setDefaults];
+            NSDictionary*	sTransitionSubtypes = nil;
+            if( !sTransitionSubtypes )
+            {
+                sTransitionSubtypes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                       [NSNumber numberWithDouble: -M_PI_4], @"fromLeft",
+                                       [NSNumber numberWithDouble: -M_PI_2 -M_PI_4], @"fromTop",
+                                       [NSNumber numberWithDouble: M_PI], @"fromRight",
+                                       [NSNumber numberWithDouble: M_PI_2 +M_PI_4], @"fromBottom",
+                                       nil];
+            }
+            NSNumber*	theNumber = [sTransitionSubtypes objectForKey: [attrs objectForKey: @"CATransitionSubtype"]];
+            if( [theNumber intValue] != 0 )
+                [filter setValue: theNumber forKey: kCIInputAngleKey];
+            [animation setFilter: filter];
+        }
+        else
+        {
+            animation.type = [attrs objectForKey: @"CATransitionType"];
+            animation.subtype = [attrs objectForKey: @"CATransitionSubtype"];
+        }
+        [animation setDuration: 0.5];    // One and a half seconds.
+        [mContentView setAnimations: @{ @"subviews": animation }];
+        //[mContentView setSubviewsAnimation: animation];
+    }
+    else
+    {
+        [mContentView setSubviewsAnimation: nil];
+        [mContentView setAnimations: @{}];
+    }
+}
 
 -(void)	refreshExistenceAndOrderOfAllViews
 {
@@ -867,7 +941,7 @@ using namespace Carlson;
 		mContentView.stack = mStack;
 		mContentView.owningStackWindowController = self;
 		mContentView.wantsLayer = YES;
-		[mContentView setLayerUsesCoreImageFilters: YES];
+//		[mContentView setLayerUsesCoreImageFilters: YES];
 	}
 	if( theStyle == EStackStylePopup )
 	{
@@ -1124,7 +1198,7 @@ using namespace Carlson;
 {
 	CAutoreleasePool	pool;
 	CCardRef	theCard = CRecentCardsList::GetSharedInstance()->PopCard();
-	theCard->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
+	theCard->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
 }
 
 
@@ -1132,7 +1206,7 @@ using namespace Carlson;
 {
 	CAutoreleasePool	pool;
 	CCardRef	oldCard = mStack->GetCurrentCard();
-	if( mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
+	if( mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
@@ -1141,7 +1215,7 @@ using namespace Carlson;
 {
 	CAutoreleasePool	pool;
 	CCardRef	oldCard = mStack->GetCurrentCard();
-	if( mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
+	if( mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
@@ -1150,7 +1224,7 @@ using namespace Carlson;
 {
 	CAutoreleasePool	pool;
 	CCardRef	oldCard = mStack->GetCurrentCard();
-	if( mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
+	if( mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
@@ -1159,7 +1233,7 @@ using namespace Carlson;
 {
 	CAutoreleasePool	pool;
 	CCardRef	oldCard = mStack->GetCurrentCard();
-	if( mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } ) )
+	if( mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
@@ -1358,21 +1432,21 @@ using namespace Carlson;
 -(IBAction)	newStack: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL, [](){  } );
+	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
 }
 
 
 -(IBAction)	newCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
+	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
 }
 
 
 -(IBAction)	newBackground: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  } );
+	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
 }
 
 

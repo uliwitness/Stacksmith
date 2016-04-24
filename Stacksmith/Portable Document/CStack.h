@@ -89,7 +89,7 @@ public:
 	virtual void	WakeUp()	{};	//!< The current card has started its timers etc.
 	virtual void	GoToSleep()	{};	//!< The current card has stopped its timers etc.
 	
-	virtual void	SetCurrentCard( CCard* inCard );
+	virtual void	SetCurrentCard( CCard* inCard, const std::string& inEffectType = "", TVisualEffectSpeed inSpeed = EVisualEffectSpeedNormal );
 	virtual CCard*	GetCurrentCard()				{ return mCurrentCard; };
 	CCard*			GetNextCard();
 	CCard*			GetPreviousCard();
