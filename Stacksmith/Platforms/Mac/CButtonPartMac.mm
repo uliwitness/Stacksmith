@@ -210,7 +210,7 @@ void	CButtonPartMac::SetName( const std::string& inStr )
 {
 	CButtonPart::SetName(inStr);
 	
-	if( mButtonStyle != EButtonStylePopUp )
+	if( mButtonStyle != EButtonStylePopUp && mShowName )
 		[mView setTitle: [NSString stringWithUTF8String: mName.c_str()]];
 }
 
