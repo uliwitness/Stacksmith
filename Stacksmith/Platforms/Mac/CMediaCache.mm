@@ -615,6 +615,7 @@ void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, 
 	
 	if( inIncludeContent == EIncludeContent )
 	{
+        // +++ Copying from the background seems to crash because mFileData isn't loaded yet.
 		tinyxml2::XMLElement*	contentElem = stackfile->GetDocument()->NewElement("content");
 		tinyxml2::XMLText	*	cdata = stackfile->GetDocument()->NewText( [[mFileData base64EncodedStringWithOptions: NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed] UTF8String] );
 		contentElem->InsertEndChild( cdata );
