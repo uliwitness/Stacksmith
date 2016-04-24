@@ -164,7 +164,12 @@ void	CStackMac::SetCurrentCard( CCard* inCard, const std::string& inEffectType, 
         if( inEffectType.empty() )
             [CATransaction setAnimationDuration: 0.0];
 		else
+        {
             [mMacWindowController setVisualEffectType: [NSString stringWithUTF8String: inEffectType.c_str()] speed: inSpeed];
+            [CATransaction setCompletionBlock: ^{
+                [mMacWindowController setVisualEffectType: @"" speed: EVisualEffectSpeedNormal];
+            }];
+        }
 		[mMacWindowController removeAllViews];
 	}
 	
