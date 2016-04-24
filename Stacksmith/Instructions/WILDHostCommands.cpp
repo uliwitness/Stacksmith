@@ -175,7 +175,14 @@ void	WILDGoInstruction( LEOContext* inContext )
 				{
 					LEOResumeContext( inContext );
 					
-					// +++ Should we set the result here to indicate success?
+                    if( !inNewDocument )
+                    {
+                        LEOContextSetLocalVariable( inContext, "result", "Cancel" );  // TODO: Ask "where is..." with an open panel here, then return "Cancel" only if the user canceled that.
+                    }
+                    else
+                    {
+                        LEOContextSetLocalVariable( inContext, "result", "" );  // Set the result to empty here to indicate success.
+                    }
 					
 					LEOContextRelease(inContext);
 				}, userData->GetVisualEffectType(), userData->GetVisualEffectSpeed());
@@ -199,7 +206,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 			{
 				LEOResumeContext( inContext );
 				
-				// +++ Should we set the result here to indicate success?
+                LEOContextSetLocalVariable( inContext, "result", "" );  // Set the result to empty here to indicate success.
 				
 				LEOContextRelease(inContext);
 			}, userData->GetVisualEffectType(), userData->GetVisualEffectSpeed() );
@@ -212,10 +219,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 		if( !canGoThere )
 		{
 			LEOResumeContext( inContext );
-			size_t		lineNo = SIZE_T_MAX;
-			uint16_t	fileID = 0;
-			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
-			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't go there." ); // +++ Should we instead set the result here?
+            LEOContextSetLocalVariable( inContext, "result", "No such card" );
 		}
 	}
 	else	// The "go" has completed and resumed the script.
@@ -312,18 +316,8 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 	else if( returnValue == 3 )
 		hitButtonName = btn3Str;
 	
-	LEOHandler	*	theHandler = LEOContextPeekCurrentHandler( inContext );
-	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "result" );
-	if( bpRelativeOffset >= 0 )
-	{
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, hitButtonName, strlen(hitButtonName), inContext );	// TODO: Make NUL-safe.
-	}
-
-	bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "it" );
-	if( bpRelativeOffset >= 0 )
-	{
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, hitButtonName, strlen(hitButtonName), inContext );	// TODO: Make NUL-safe.
-	}
+    LEOContextSetLocalVariable( inContext, "result", "%s", hitButtonName ); // TODO: Make NUL-safe.
+    LEOContextSetLocalVariable( inContext, "it", "%s", hitButtonName ); // TODO: Make NUL-safe.
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -4 );
 	
@@ -359,19 +353,9 @@ void	WILDAskInstruction( LEOContext* inContext )
 	
 	bool	wasOK = CAlert::RunInputAlert( msgStr, theAnswer );
 	
-	LEOHandler	*	theHandler = LEOContextPeekCurrentHandler( inContext );
-	long			bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "result" );
-	if( bpRelativeOffset >= 0 )
-	{
-		const char*		theBtn = (wasOK ? "OK" : "Cancel");
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, theBtn, strlen(theBtn), inContext );
-	}
-
-	bpRelativeOffset = LEOHandlerFindVariableByName( theHandler, "it" );
-	if( bpRelativeOffset >= 0 )
-	{
-		LEOSetValueAsString( inContext->stackBasePtr +bpRelativeOffset, theAnswer.c_str(), theAnswer.size(), inContext );
-	}
+    const char*		hitButtonName = (wasOK ? "OK" : "Cancel");
+    LEOContextSetLocalVariable( inContext, "result", "%s", hitButtonName ); // TODO: Make NUL-safe.
+    LEOContextSetLocalVariable( inContext, "it", "%s", theAnswer.c_str() ); // TODO: Make NUL-safe.
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 	
