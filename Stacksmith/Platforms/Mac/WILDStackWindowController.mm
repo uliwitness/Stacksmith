@@ -47,8 +47,6 @@ using namespace Carlson;
 
 @interface WILDFlippedContentView ()
 
-@property (retain) CATransition *   subviewsAnimation;
-
 @end
 
 
@@ -56,14 +54,6 @@ using namespace Carlson;
 
 @synthesize stack = mStack;
 @synthesize owningStackWindowController = mOwningStackWindowController;
-
-
--(void) dealloc
-{
-    DESTROY_DEALLOC(_subviewsAnimation);
-    [super dealloc];
-}
-
 
 -(BOOL)	isFlipped
 {
@@ -457,22 +447,6 @@ using namespace Carlson;
 }
 
 
-//+(nullable id)  defaultAnimationForKey: (NSString *)key
-//{
-//    return [super defaultAnimationForKey: key];
-//}
-//
-//
-//-(nullable id)  animationForKey: (NSString *)key
-//{
-//    if( [key isEqualToString: @"subviews"] )
-//    {
-//        return self.subviewsAnimation;
-//    }
-//    else
-//        return [super animationForKey: key];
-//}
-
 //-(void)	resetCursorRects
 //{
 //	NSCursor	*	currentCursor = nil;
@@ -675,11 +649,9 @@ using namespace Carlson;
         }
         [animation setDuration: [self durationFromVisualEffectSpeed: inSpeed]];    // One and a half seconds.
         [mContentView setAnimations: @{ @"subviews": animation }];
-        //[mContentView setSubviewsAnimation: animation];
     }
     else
     {
-        [mContentView setSubviewsAnimation: nil];
         [mContentView setAnimations: @{}];
     }
 }
