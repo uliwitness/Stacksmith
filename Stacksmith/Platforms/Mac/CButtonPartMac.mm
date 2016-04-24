@@ -144,7 +144,8 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 			{
 				[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
 			}
-			[((WILDButtonCell*)mView.cell) setLineWidth: mLineWidth];
+            if( [mView.cell respondsToSelector: @selector(setLineWidth:)] )
+                [((WILDButtonCell*)mView.cell) setLineWidth: mLineWidth];
 		}
 	}
 	if( mIconID != 0 )
@@ -246,6 +247,7 @@ void	CButtonPartMac::SetFillColor( int r, int g, int b, int a )
 	if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
 	{
 		[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+        [mView setNeedsDisplay: YES];
 	}
 }
 
@@ -257,6 +259,7 @@ void	CButtonPartMac::SetLineColor( int r, int g, int b, int a )
 	if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
 	{
 		[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+        [mView setNeedsDisplay: YES];
 	}
 }
 
@@ -293,7 +296,11 @@ void	CButtonPartMac::SetLineWidth( int w )
 {
 	CButtonPart::SetLineWidth( w );
 	
-	[((WILDButtonCell*)mView.cell) setLineWidth: w];
+    if( [mView.cell respondsToSelector: @selector(setLineWidth:)] )
+    {
+        [((WILDButtonCell*)mView.cell) setLineWidth: w];
+        [mView setNeedsDisplay: YES];
+    }
 }
 
 
@@ -301,7 +308,11 @@ void	CButtonPartMac::SetBevelWidth( int bevel )
 {
 	CButtonPart::SetBevelWidth( bevel );
 
-	[((WILDButtonCell*)mView.cell) setBevelWidth: bevel];
+    if( [mView.cell respondsToSelector: @selector(setBevelWidth:)] )
+    {
+        [((WILDButtonCell*)mView.cell) setBevelWidth: bevel];
+        [mView setNeedsDisplay: YES];
+    }
 }
 
 
@@ -309,7 +320,11 @@ void	CButtonPartMac::SetBevelAngle( int a )
 {
 	CButtonPart::SetBevelAngle( a );
 
-	[((WILDButtonCell*)mView.cell) setBevelAngle: a];
+    if( [mView.cell respondsToSelector: @selector(setBevelAngle:)] )
+    {
+        [((WILDButtonCell*)mView.cell) setBevelAngle: a];
+        [mView setNeedsDisplay: YES];
+    }
 }
 
 
