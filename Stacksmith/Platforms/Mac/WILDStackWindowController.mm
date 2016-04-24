@@ -577,7 +577,7 @@ using namespace Carlson;
 		mContentView.stack = mStack;
 		mContentView.owningStackWindowController = self;
 		mContentView.wantsLayer = YES;
-//		[mContentView setLayerUsesCoreImageFilters: YES];
+		[mContentView setLayerUsesCoreImageFilters: YES];
 	}
 	else
 	{
@@ -640,9 +640,11 @@ using namespace Carlson;
     if( attrs )
     {
         CATransition            *   animation = [CATransition animation];
-        if( [[attrs objectForKey: @"CATransitionSubtype"] isEqualToString: @"cifilter"] )
+        NSString                *   transitionType = [attrs objectForKey: @"CATransitionType"];
+        NSString                *   transitionSubtype = [attrs objectForKey: @"CATransitionSubtype"];
+        if( [transitionType hasPrefix: @"CI"] || [transitionType hasPrefix: @"WILD"] )
         {
-            CIFilter                *   filter = [CIFilter filterWithName: [attrs objectForKey: @"CATransitionType"]];
+            CIFilter                *   filter = [CIFilter filterWithName: transitionType];
             [filter setDefaults];
             NSDictionary*	sTransitionSubtypes = nil;
             if( !sTransitionSubtypes )
@@ -654,15 +656,15 @@ using namespace Carlson;
                                        [NSNumber numberWithDouble: M_PI_2 +M_PI_4], @"fromBottom",
                                        nil];
             }
-            NSNumber*	theNumber = [sTransitionSubtypes objectForKey: [attrs objectForKey: @"CATransitionSubtype"]];
+            NSNumber*	theNumber = [sTransitionSubtypes objectForKey: transitionSubtype];
             if( [theNumber intValue] != 0 )
                 [filter setValue: theNumber forKey: kCIInputAngleKey];
             [animation setFilter: filter];
         }
         else
         {
-            animation.type = [attrs objectForKey: @"CATransitionType"];
-            animation.subtype = [attrs objectForKey: @"CATransitionSubtype"];
+            animation.type = transitionType;
+            animation.subtype = transitionSubtype;
         }
         [animation setDuration: 0.5];    // One and a half seconds.
         [mContentView setAnimations: @{ @"subviews": animation }];
@@ -941,7 +943,7 @@ using namespace Carlson;
 		mContentView.stack = mStack;
 		mContentView.owningStackWindowController = self;
 		mContentView.wantsLayer = YES;
-//		[mContentView setLayerUsesCoreImageFilters: YES];
+		[mContentView setLayerUsesCoreImageFilters: YES];
 	}
 	if( theStyle == EStackStylePopup )
 	{

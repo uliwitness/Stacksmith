@@ -27,7 +27,7 @@ void	CGraphicPartMac::CreateViewIn( NSView* inSuperView )
 		}
 		return;
 	}
-	[mView removeFromSuperview];
+	[mView.animator removeFromSuperview];
 	DESTROY(mView);
 	NSRect	box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
 	mView = [[NSView alloc] initWithFrame: box];
@@ -151,7 +151,7 @@ void	CGraphicPartMac::DestroyView()
 {
 	if( mView )
 	{
-		[mView removeFromSuperview];
+		[mView.animator removeFromSuperview];
 		DESTROY(mView);
 	}
 }
