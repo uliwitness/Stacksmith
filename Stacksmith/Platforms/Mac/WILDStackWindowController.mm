@@ -592,7 +592,7 @@ using namespace Carlson;
 			[mCardImageView setImageScaling: NSImageScaleNone];
 			[mCardImageView setWantsLayer: YES];
 			mCardImageView.image = [[[NSImage alloc] initByReferencingURL: [NSURL URLWithString: [NSString stringWithUTF8String: cdPictureURL.c_str()]]] autorelease];
-			[mContentView addSubview: mCardImageView];
+			[mContentView.animator addSubview: mCardImageView];
 		}
 		for( size_t x = 0; x < numParts; x++ )
 		{
