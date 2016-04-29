@@ -1,13 +1,13 @@
 kernel vec4 stretchFromBottomEffect(sampler image, sampler targetImage, float percentage)
 {
 	vec2 	pos = samplerCoord(image);
-	vec4	targetPixel = unpremultiply( sample(targetImage, pos) );
+	vec4	thePixel = unpremultiply( sample(image, pos) );
 	float	factor = percentage;
 	float	shrinkArea = (samplerSize(image).y * factor);
 	
 	pos.y = pos.y * (1.0 / factor);
 	
-	vec4	thePixel = unpremultiply( sample(image, pos) );
+	vec4	targetPixel = unpremultiply( sample(targetImage, pos) );
 	thePixel = (shrinkArea > pos.y) ? targetPixel : thePixel;
 	
 	return premultiply(thePixel);
