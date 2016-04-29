@@ -29,6 +29,7 @@
 #import "UKHelperMacros.h"
 #import "WILDTemplateProjectPickerController.h"
 #import "WILDStackWindowController.h"
+#import "WILDTransitionFilter.h"
 
 
 // On startup, if not asked to open any stack, we will look for a stack
@@ -164,6 +165,8 @@ void	WILDScheduleResumeOfScript( void )
 	mFlagsChangedEventMonitor = [[NSEvent addLocalMonitorForEventsMatchingMask: NSFlagsChangedMask handler: ^(NSEvent* inEvent){ return [self handleFlagsChangedEvent: inEvent]; }] retain];
 	
 	[[NSColorPanel sharedColorPanel] setShowsAlpha: YES];
+	
+	[WILDTransitionFilter registerFiltersFromFile: [[NSBundle mainBundle] pathForResource: @"TransitionMappings" ofType: @"plist"]];
 	
 	CStack::SetFrontStackChangedCallback( [self]( CStack* inFrontStack )
 	{

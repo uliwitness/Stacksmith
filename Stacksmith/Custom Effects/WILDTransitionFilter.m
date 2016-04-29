@@ -1,29 +1,53 @@
 //
-//  WILDBarnDoorOpenFilter.m
+//  WILDTransitionFilter.m
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 12.05.11.
 //  Copyright 2011 Uli Kusterer. All rights reserved.
 //
 
-#import "WILDBarnDoorOpenFilter.h"
+#import "WILDTransitionFilter.h"
 #import "UKHelperMacros.h"
 
 
-@implementation WILDBarnDoorOpenFilter
+@interface WILDTransitionFilter ()
+
+@property (retain) CIKernel	*	filterKernel;
+
+@end
+
+
+@implementation WILDTransitionFilter
 
 @synthesize inputTime;
 @synthesize inputImage;
 @synthesize inputTargetImage;
+@synthesize filterKernel;
 
-static CIKernel *sIrisFilterKernel = nil;
+static NSMutableDictionary<NSString*,CIKernel*>*	sFilterKernels = nil;
 
-+(void)	initialize
+
++(void)	registerFiltersFromFile: (NSString*)inPListFile
 {
-    [CIFilter registerFilterName: @"WILDBarnDoorOpenFilter"
+	NSDictionary*	mappings = [NSDictionary dictionaryWithContentsOfFile: inPListFile];
+	for( NSString* displayName in mappings.allKeys )
+	{
+		NSDictionary	*	filterInfo = mappings[displayName];
+		NSString		*	filterIdentifier = filterInfo[@"CATransitionType"];
+		if( [filterIdentifier hasPrefix: @"WILD"] )
+		{
+			[self registerForDisplayName: displayName filterName: filterIdentifier];
+		}
+	}
+}
+
+
++(void)	registerForDisplayName: (NSString*)inDisplayName filterName: (NSString*)inFilterName
+{
+    [CIFilter registerFilterName: inFilterName
         constructor: (id<CIFilterConstructor>)self
         classAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-             @"Barn Door Open Effect", kCIAttributeFilterDisplayName,
+             inDisplayName, kCIAttributeFilterDisplayName,
              [NSArray arrayWithObjects:
                 kCICategoryTransition, nil], kCIAttributeFilterCategories,
             nil]
@@ -33,18 +57,20 @@ static CIKernel *sIrisFilterKernel = nil;
 
 +(CIFilter *)	filterWithName: (NSString *)name
 {
-    CIFilter  *filter = [[self alloc] init];
+    CIFilter  *filter = [[self alloc] initWithName: name];
     return [filter autorelease];
 }
 
 
--(id)	init
+-(id)	initWithName: (NSString*)kernelName
 {
-    if(sIrisFilterKernel == nil)
+	if( !sFilterKernels )
+		sFilterKernels = [NSMutableDictionary new];
+	CIKernel	*	foundKernel = sFilterKernels[kernelName];
+    if(foundKernel == nil)
     {
         NSBundle    *bundle = [NSBundle bundleForClass: [self class]];
 		NSError		*theError = nil;
-		NSString	*kernelName = @"WILDBarnDoorOpenFilter";
         NSString    *code = [NSString stringWithContentsOfFile: [bundle
                                 pathForResource: kernelName ofType: @"cikernel"] encoding: NSUTF8StringEncoding error: &theError];
 		if( !code )
@@ -55,12 +81,16 @@ static CIKernel *sIrisFilterKernel = nil;
 		}
         NSArray     *kernels = [CIKernel kernelsWithString: code];
  
-        sIrisFilterKernel = [[kernels objectAtIndex: 0] retain];
+        foundKernel = [kernels objectAtIndex: 0];
+		[sFilterKernels setObject: foundKernel forKey: kernelName];
     }
  
     self = [super init];
 	if( self )
+	{
 		inputTime = [[NSNumber numberWithDouble: 0.5] retain];
+		filterKernel = [foundKernel retain];
+	}
 		
 	return self;
 }
@@ -71,6 +101,7 @@ static CIKernel *sIrisFilterKernel = nil;
 	DESTROY_DEALLOC(inputImage);
 	DESTROY_DEALLOC(inputTargetImage);
 	DESTROY_DEALLOC(inputTime);
+	DESTROY_DEALLOC(filterKernel);
 	
     [super dealloc];
 }
@@ -97,7 +128,19 @@ static CIKernel *sIrisFilterKernel = nil;
     CISampler *src = [CISampler samplerWithImage: inputImage];
 	CISampler *target = [CISampler samplerWithImage: inputTargetImage];
 
-    return [self apply: sIrisFilterKernel, src, target, inputTime, kCIApplyOptionDefinition, [src definition], nil];
+    return [self apply: filterKernel, src, target, inputTime, kCIApplyOptionDefinition, [src definition], nil];
+}
+
+
+-(instancetype) copyWithZone:(NSZone *)zone
+{
+	WILDTransitionFilter	*	tf = [super copyWithZone: zone];
+	tf->inputImage = [inputImage retain];
+	tf->inputTargetImage = [inputTargetImage retain];
+	tf->inputTime = [inputTime retain];
+	tf->filterKernel = [filterKernel retain];
+	
+	return tf;
 }
 
 @end

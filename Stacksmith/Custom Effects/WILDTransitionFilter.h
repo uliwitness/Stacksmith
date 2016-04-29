@@ -1,5 +1,5 @@
 //
-//  WILDShrinkToTopFilter.h
+//  WILDIrisCloseFilter.h
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 12.05.11.
@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface WILDShrinkToTopFilter : CIFilter
+@interface WILDTransitionFilter : CIFilter
 {
     CIImage   *inputImage;
     CIImage   *inputTargetImage;
@@ -20,5 +20,8 @@
 @property (retain) CIImage*		inputImage;
 @property (retain) CIImage*		inputTargetImage;
 @property (retain) NSNumber*	inputTime;
+
++(void)	registerFiltersFromFile: (NSString*)inPListFile;	// Calls registerForDisplayName:filterName: for each WILDxxx filter listed in the file.
++(void)	registerForDisplayName: (NSString*)inDisplayName filterName: (NSString*)inFilterName;
 
 @end
