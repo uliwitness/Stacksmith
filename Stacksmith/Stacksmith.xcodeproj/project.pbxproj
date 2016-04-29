@@ -79,6 +79,8 @@
 		551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 551D938717058397003766DA /* CDownloadCommandNode.cpp */; };
 		551D93901705A69A003766DA /* LEODownloadInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 551D938E1705A699003766DA /* LEODownloadInstructions.c */; };
 		551D93921705A7AF003766DA /* WILDDownloadInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */; };
+		551E0E0F1CD2CABD008B80E1 /* LEOStringUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 551E0E0D1CD2CABD008B80E1 /* LEOStringUtilities.c */; };
+		551E0E101CD2CABD008B80E1 /* LEOStringUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 551E0E0D1CD2CABD008B80E1 /* LEOStringUtilities.c */; };
 		551FBEEB1170A11000F32FBF /* UKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FBEEA1170A11000F32FBF /* UKGraphics.m */; };
 		5523653B1344C24C000145A0 /* NSImage+NiceScaling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523653A1344C24C000145A0 /* NSImage+NiceScaling.m */; };
 		5523869E187E265000D7FAB3 /* ULIInvisiblePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5523869D187E265000D7FAB3 /* ULIInvisiblePlayerView.m */; };
@@ -679,6 +681,8 @@
 		551D938E1705A699003766DA /* LEODownloadInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEODownloadInstructions.c; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.c; sourceTree = "<group>"; };
 		551D938F1705A69A003766DA /* LEODownloadInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEODownloadInstructions.h; path = ../../../Forge/Leonie/generic/LEODownloadInstructions.h; sourceTree = "<group>"; };
 		551D93911705A7AD003766DA /* WILDDownloadInstructions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDDownloadInstructions.mm; path = Instructions/WILDDownloadInstructions.mm; sourceTree = SOURCE_ROOT; };
+		551E0E0D1CD2CABD008B80E1 /* LEOStringUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOStringUtilities.c; path = ../../Leonie/common/LEOStringUtilities.c; sourceTree = "<group>"; };
+		551E0E0E1CD2CABD008B80E1 /* LEOStringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOStringUtilities.h; path = ../../Leonie/common/LEOStringUtilities.h; sourceTree = "<group>"; };
 		551FBEEA1170A11000F32FBF /* UKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKGraphics.m; path = ../UliKit/UKGraphics.m; sourceTree = SOURCE_ROOT; };
 		551FBEEC1170A11D00F32FBF /* UKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKGraphics.h; path = ../UliKit/UKGraphics.h; sourceTree = SOURCE_ROOT; };
 		552365391344C24C000145A0 /* NSImage+NiceScaling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+NiceScaling.h"; path = "../UliKit/NSImage+NiceScaling.h"; sourceTree = "<group>"; };
@@ -1560,6 +1564,8 @@
 				553C46E913577334000219FA /* LEOContextGroup.h */,
 				553C46EA13577334000219FA /* LEOContextGroup.c */,
 				553C46EB13577334000219FA /* LEOHandlerID.h */,
+				551E0E0E1CD2CABD008B80E1 /* LEOStringUtilities.h */,
+				551E0E0D1CD2CABD008B80E1 /* LEOStringUtilities.c */,
 				551D938F1705A69A003766DA /* LEODownloadInstructions.h */,
 				551D938E1705A699003766DA /* LEODownloadInstructions.c */,
 				55E805C31360AA25006F1287 /* LEOPropertyInstructions.h */,
@@ -2454,6 +2460,7 @@
 				555E53C61895986A001487C1 /* CAttributedString.cpp in Sources */,
 				55405BA2189EDF64001D3C99 /* CCodeBlockNode.cpp in Sources */,
 				55405B81189EDF24001D3C99 /* CCodeBlock.cpp in Sources */,
+				551E0E101CD2CABD008B80E1 /* LEOStringUtilities.c in Sources */,
 				55405B8C189EDF5B001D3C99 /* CAssignCommandNode.cpp in Sources */,
 				55405B94189EDF5B001D3C99 /* CDivideCommandNode.cpp in Sources */,
 				55405B99189EDF5B001D3C99 /* CGetArrayItemNode.cpp in Sources */,
@@ -2510,6 +2517,7 @@
 				55405BD418A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm in Sources */,
 				552386D11883EAA300D7FAB3 /* CWebBrowserPartMac.mm in Sources */,
 				5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */,
+				551E0E0F1CD2CABD008B80E1 /* LEOStringUtilities.c in Sources */,
 				55CD61121878EBF9002450E2 /* CCancelPolling.cpp in Sources */,
 				55CD60C518751DF6002450E2 /* CVisiblePart.cpp in Sources */,
 				55CD61151879EDA3002450E2 /* CAlert.mm in Sources */,
