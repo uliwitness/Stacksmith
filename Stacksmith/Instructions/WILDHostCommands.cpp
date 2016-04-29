@@ -187,7 +187,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 					LEOContextRelease(inContext);
 				}, userData->GetVisualEffectType(), userData->GetVisualEffectSpeed());
 				
-				LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+				LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 				return;
 			}
 		}
@@ -214,7 +214,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 		if( canGoThere )
 			userData->SetStack( destinationObject->GetStack() );
 		
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 		
 		if( !canGoThere )
 		{
