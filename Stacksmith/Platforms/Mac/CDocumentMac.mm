@@ -83,7 +83,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
             Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
             if( !theCppStack )
             {
-                UKLog(@"No stacks in document %p", inDocument);
+                UKLog(@"No stacks in project %p", inDocument);
                 CloseDocument( inDocument );
 				inCompletionBlock(NULL);
                 return;
