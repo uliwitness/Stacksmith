@@ -421,6 +421,7 @@
 		55D872B51A7F011700D5FA30 /* CURS_3.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D872B31A7F011700D5FA30 /* CURS_3.tiff */; };
 		55D872B61A7F011700D5FA30 /* CURS_4.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D872B41A7F011700D5FA30 /* CURS_4.tiff */; };
 		55DD40D01C02821C00E35713 /* new_part_descriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 55DD40CF1C02821C00E35713 /* new_part_descriptions.xml */; };
+		55DE0DFE1CD56A550036447D /* ULIFontPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DE0DFD1CD56A550036447D /* ULIFontPickerButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		55E397E91322520800C3739D /* NSFileManager+NameForTempFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E397E81322520800C3739D /* NSFileManager+NameForTempFile.m */; };
 		55E3A69E11503456008411BB /* CURS_128.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A69D11503456008411BB /* CURS_128.pdf */; };
 		55E3A6FB11519B45008411BB /* HCSV.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55E3A6F911519B45008411BB /* HCSV.icns */; };
@@ -1125,6 +1126,8 @@
 		55D872B31A7F011700D5FA30 /* CURS_3.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = CURS_3.tiff; path = Resources/CURS_3.tiff; sourceTree = "<group>"; };
 		55D872B41A7F011700D5FA30 /* CURS_4.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = CURS_4.tiff; path = Resources/CURS_4.tiff; sourceTree = "<group>"; };
 		55DD40CF1C02821C00E35713 /* new_part_descriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = new_part_descriptions.xml; sourceTree = "<group>"; };
+		55DE0DFC1CD56A550036447D /* ULIFontPickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIFontPickerButton.h; path = ../UKSyntaxColoredTextDocument/ULIFontPickerButton.h; sourceTree = "<group>"; };
+		55DE0DFD1CD56A550036447D /* ULIFontPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIFontPickerButton.m; path = ../UKSyntaxColoredTextDocument/ULIFontPickerButton.m; sourceTree = "<group>"; };
 		55E23BF5133FAB9E00E6B444 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E397E61322481500C3739D /* CObjectID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CObjectID.h; path = Model/CObjectID.h; sourceTree = "<group>"; };
 		55E397E71322520700C3739D /* NSFileManager+NameForTempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+NameForTempFile.h"; path = "../UliKit/NSFileManager+NameForTempFile.h"; sourceTree = "<group>"; };
@@ -1473,6 +1476,8 @@
 				55255A8A114C179C00279B03 /* NSScanner+SkipUpToCharset.m */,
 				55255A8B114C179C00279B03 /* NSArray+Color.h */,
 				55255A8C114C179C00279B03 /* NSArray+Color.m */,
+				55DE0DFC1CD56A550036447D /* ULIFontPickerButton.h */,
+				55DE0DFD1CD56A550036447D /* ULIFontPickerButton.m */,
 			);
 			name = UKSyntaxColoredTextViewController;
 			sourceTree = "<group>";
@@ -2562,6 +2567,7 @@
 				553C470513577334000219FA /* CMakeChunkConstNode.cpp in Sources */,
 				553C470613577334000219FA /* CCodeBlockNode.cpp in Sources */,
 				556DB7B91870A3C2002F7CB2 /* CBackground.cpp in Sources */,
+				55DE0DFE1CD56A550036447D /* ULIFontPickerButton.m in Sources */,
 				553C470713577334000219FA /* CFunctionDefinitionNode.cpp in Sources */,
 				5574AD321AC1FAC0004A27F8 /* ULIWideningBezierPath.m in Sources */,
 				553C470813577334000219FA /* CWhileLoopNode.cpp in Sources */,

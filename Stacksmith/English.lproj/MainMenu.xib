@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <development version="6300" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -39,7 +39,11 @@
                             <menuItem isSeparatorItem="YES" id="236">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Preferences…" keyEquivalent="," id="129"/>
+                            <menuItem title="Preferences…" keyEquivalent="," id="129">
+                                <connections>
+                                    <action selector="makeKeyAndOrderFront:" target="r1p-jg-hD4" id="3Yb-aQ-5LY"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -825,12 +829,10 @@
                     <progressIndicator verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="bar" id="569">
                         <rect key="frame" x="18" y="16" width="345" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <animations/>
                     </progressIndicator>
                     <textField verticalHuggingPriority="750" id="568">
                         <rect key="frame" x="17" y="44" width="347" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <animations/>
                         <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="Loading…" id="570">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -838,7 +840,6 @@
                         </textFieldCell>
                     </textField>
                 </subviews>
-                <animations/>
             </view>
         </window>
         <customObject id="571" customClass="UKProgressPanelController">
@@ -872,7 +873,6 @@
                                 <button toolTip="Browse" verticalHuggingPriority="750" id="gIo-t9-M2n">
                                     <rect key="frame" x="3" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="BrowseTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6R0-16-eNY" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -884,7 +884,6 @@
                                 <button toolTip="Next Card" verticalHuggingPriority="750" id="d9P-4H-e88">
                                     <rect key="frame" x="780" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ICON_26425" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ruq-kX-9Nx" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -896,7 +895,6 @@
                                 <button toolTip="Previous Card" verticalHuggingPriority="750" id="EFo-B7-AVP">
                                     <rect key="frame" x="745" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="ICON_902" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uTJ-qZ-qaj" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -908,7 +906,6 @@
                                 <button toolTip="Edit" verticalHuggingPriority="750" tag="1" id="MF4-Xg-gT7">
                                     <rect key="frame" x="38" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="PointerTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9zB-Ko-ny1" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -924,7 +921,6 @@
                                         <button toolTip="Stack Properties" verticalHuggingPriority="750" id="wkz-0c-d3L">
                                             <rect key="frame" x="6" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="StackIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dw5-bQ-tqg" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -936,7 +932,6 @@
                                         <button toolTip="Background Properties" verticalHuggingPriority="750" id="1oD-UL-G2Q">
                                             <rect key="frame" x="40" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="BackgroundIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VRJ-0D-cxa" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -948,7 +943,6 @@
                                         <button toolTip="Card Properties" verticalHuggingPriority="750" id="GPp-md-4F2">
                                             <rect key="frame" x="73" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="CardIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="P5N-PE-3zU" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -960,7 +954,6 @@
                                         <button toolTip="Edit Background" verticalHuggingPriority="750" id="J38-Wh-F6i">
                                             <rect key="frame" x="120" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="BackgroundEditIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UmE-pK-cfg" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -970,12 +963,10 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <animations/>
                                 </customView>
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="2" id="O60-s9-3f9">
                                     <rect key="frame" x="73" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="EditTextTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ikb-b2-jFu" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -987,7 +978,6 @@
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="3" id="m0y-Bn-8Ww">
                                     <rect key="frame" x="108" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintOvalTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eT6-ZL-JPk" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -999,7 +989,6 @@
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="4" id="6Ra-1z-6td">
                                     <rect key="frame" x="143" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintRectTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fQg-LZ-aMQ" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -1011,7 +1000,6 @@
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="5" id="RG6-nj-ASQ">
                                     <rect key="frame" x="178" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintRoundrectTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WAp-L3-GTf" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -1027,7 +1015,6 @@
                                         <button toolTip="Stack Canvas" verticalHuggingPriority="750" id="B8l-FW-2Oq">
                                             <rect key="frame" x="95" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="StackCanvasIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VxP-KP-LhW" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1039,7 +1026,6 @@
                                         <button toolTip="Message Box" verticalHuggingPriority="750" id="9ot-lO-F2x">
                                             <rect key="frame" x="7" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="MessageBoxIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pLl-zL-v0s" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1051,7 +1037,6 @@
                                         <button toolTip="Message Watcher" verticalHuggingPriority="750" id="3Rl-eW-52o">
                                             <rect key="frame" x="41" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <animations/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="MessageWatcherIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jAL-2C-b4y" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1061,12 +1046,10 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <animations/>
                                 </customView>
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="6" id="AyT-VH-Z46">
                                     <rect key="frame" x="213" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintLineTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pDS-fT-AmH" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -1078,7 +1061,6 @@
                                 <button toolTip="Edit Text" verticalHuggingPriority="750" tag="7" id="Pxd-Ed-7Tw">
                                     <rect key="frame" x="248" y="3" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <animations/>
                                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="UKPaintPathTool" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DPr-Kh-xCX" customClass="WILDToolButtonCell">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -1088,16 +1070,292 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <animations/>
                         </view>
-                        <animations/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                     </box>
                 </subviews>
-                <animations/>
             </view>
             <point key="canvasLocation" x="911.5" y="495"/>
+        </window>
+        <customObject id="5Vc-hx-qzN" userLabel="UKSCTDColorWellPrefsController" customClass="UKSCTDColorWellPrefsController">
+            <connections>
+                <outlet property="comments2Color" destination="OHE-S0-0mc" id="niy-o0-62d"/>
+                <outlet property="commentsColor" destination="Hnd-J8-gWu" id="VPZ-op-xe2"/>
+                <outlet property="defaultFontButton" destination="leb-jb-e5A" id="JFA-u2-ifb"/>
+                <outlet property="identifiers2Color" destination="mga-Um-r12" id="Bma-HW-oXu"/>
+                <outlet property="identifiersColor" destination="eEe-Wp-Cnr" id="9gK-yr-NlI"/>
+                <outlet property="preprocessorColor" destination="LAq-W3-R9A" id="hNG-PQ-1wP"/>
+                <outlet property="stringsColor" destination="w4x-YI-ixF" id="Ho6-oo-O83"/>
+                <outlet property="tagsColor" destination="kyE-xv-Tse" id="kwf-hp-8Gy"/>
+            </connections>
+        </customObject>
+        <customObject id="4c7-Nh-Ahs" userLabel="UKSCTDUserIdentifiersPrefsController" customClass="UKSCTDUserIdentifiersPrefsController">
+            <connections>
+                <outlet property="identifiersList" destination="TOx-Bf-TMH" id="xz5-Eg-kFk"/>
+                <outlet property="removeButton" destination="JlL-Er-uHo" id="CTE-Lh-eUM"/>
+            </connections>
+        </customObject>
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="UKSCTDPrefsWindow" animationBehavior="default" id="r1p-jg-hD4" userLabel="Preferences" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="7" y="392" width="565" height="375"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <value key="minSize" type="size" width="213" height="107"/>
+            <view key="contentView" id="wcU-cv-PXi">
+                <rect key="frame" x="0.0" y="0.0" width="565" height="375"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box title="Syntax Coloring:" id="lph-vT-u66">
+                        <rect key="frame" x="17" y="58" width="251" height="310"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView">
+                            <rect key="frame" x="2" y="2" width="247" height="293"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <colorWell id="Hnd-J8-gWu">
+                                    <rect key="frame" x="14" y="255" width="54" height="26"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="takeCommentsColorFrom:" target="5Vc-hx-qzN" id="1ss-9k-XFZ"/>
+                                    </connections>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" id="8tz-FF-CLX">
+                                    <rect key="frame" x="73" y="260" width="163" height="17"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Comments" id="AKV-rb-Puy">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <colorWell id="w4x-YI-ixF">
+                                    <rect key="frame" x="14" y="221" width="54" height="26"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="takeStringsColorFrom:" target="5Vc-hx-qzN" id="iPu-Kf-z7O"/>
+                                    </connections>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" id="WcF-ge-O8e">
+                                    <rect key="frame" x="73" y="226" width="163" height="17"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Strings" id="mxi-SC-WKy">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <colorWell id="eEe-Wp-Cnr">
+                                    <rect key="frame" x="14" y="187" width="54" height="26"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="takeIdentifiersColorFrom:" target="5Vc-hx-qzN" id="XIJ-YW-vmS"/>
+                                    </connections>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" id="2UT-mh-XBb">
+                                    <rect key="frame" x="73" y="192" width="163" height="17"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="RlP-Eb-aiQ">
+                                        <font key="font" metaFont="system"/>
+                                        <string key="title">Standard Identifiers
+</string>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <colorWell id="mga-Um-r12">
+                                    <rect key="frame" x="14" y="153" width="54" height="26"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="takeIdentifiers2ColorFrom:" target="5Vc-hx-qzN" id="YGc-fv-wD7"/>
+                                    </connections>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" id="mgx-1J-VnE">
+                                    <rect key="frame" x="73" y="158" width="163" height="17"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="S1x-cx-4cG">
+                                        <font key="font" metaFont="system"/>
+                                        <string key="title">User's Identifiers
+</string>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" id="7XC-Ny-HsY">
+                                    <rect key="frame" x="73" y="124" width="163" height="17"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="BxA-SR-2GS">
+                                        <font key="font" metaFont="system"/>
+                                        <string key="title">Preprocessor Directives
+</string>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <colorWell id="LAq-W3-R9A">
+                                    <rect key="frame" x="14" y="119" width="54" height="26"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="takePreprocessorColorFrom:" target="5Vc-hx-qzN" id="VEi-Xs-qRx"/>
+                                    </connections>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" id="PXa-1D-2Rh">
+                                    <rect key="frame" x="73" y="90" width="163" height="17"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="HTML Tags" id="sc7-NU-2W2">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <colorWell id="kyE-xv-Tse">
+                                    <rect key="frame" x="14" y="85" width="54" height="26"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="takeTagsColorFrom:" target="5Vc-hx-qzN" id="3d0-9Q-IBI"/>
+                                    </connections>
+                                </colorWell>
+                                <colorWell id="OHE-S0-0mc">
+                                    <rect key="frame" x="14" y="51" width="54" height="26"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="takeComments2ColorFrom:" target="5Vc-hx-qzN" id="cLr-Hc-knY"/>
+                                    </connections>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" id="Iye-qk-kc2">
+                                    <rect key="frame" x="73" y="56" width="163" height="17"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Secondary Comments" id="ofX-uC-5Yc">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <button verticalHuggingPriority="750" id="Zad-1I-RAj">
+                                    <rect key="frame" x="92" y="12" width="141" height="32"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="Reset to Default" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="5WD-aF-yMg">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="resetColors:" target="5Vc-hx-qzN" id="Uyg-bi-Jah"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </box>
+                    <box title="User-Defined Identifiers:" id="pfl-pj-d0T">
+                        <rect key="frame" x="281" y="58" width="267" height="310"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView">
+                            <rect key="frame" x="2" y="2" width="263" height="293"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="KZI-SB-2hk">
+                                    <rect key="frame" x="14" y="60" width="235" height="219"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <clipView key="contentView" id="R5x-og-bUo">
+                                        <rect key="frame" x="1" y="1" width="233" height="217"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" id="TOx-Bf-TMH">
+                                                <rect key="frame" x="0.0" y="0.0" width="233" height="217"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <size key="intercellSpacing" width="3" height="2"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                <tableColumns>
+                                                    <tableColumn width="230" minWidth="40" maxWidth="1000" id="6a8-2Y-4LY">
+                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </tableHeaderCell>
+                                                        <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" id="7TO-tR-heM">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </textFieldCell>
+                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    </tableColumn>
+                                                </tableColumns>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="4c7-Nh-Ahs" id="ZIR-9I-249"/>
+                                                    <outlet property="delegate" destination="4c7-Nh-Ahs" id="Wms-OA-tfU"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </clipView>
+                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZLH-cH-yGN">
+                                        <rect key="frame" x="-100" y="-100" width="218" height="15"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </scroller>
+                                    <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="QRd-yb-bVy">
+                                        <rect key="frame" x="218" y="1" width="16" height="217"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </scroller>
+                                </scrollView>
+                                <button verticalHuggingPriority="750" id="xah-Tp-iaS">
+                                    <rect key="frame" x="87" y="12" width="78" height="32"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="rMT-eq-SZv">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="createNewIdentifier:" target="4c7-Nh-Ahs" id="G5v-tM-5Ba"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" id="JlL-Er-uHo">
+                                    <rect key="frame" x="165" y="12" width="90" height="32"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="oER-f1-Rv5">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="deleteIdentifier:" target="4c7-Nh-Ahs" id="9Dq-b4-EnB"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </box>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="RgV-5f-ExY">
+                        <rect key="frame" x="18" y="23" width="35" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font:" id="qYm-r5-doO">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" id="leb-jb-e5A" customClass="ULIFontPickerButton">
+                        <rect key="frame" x="53" y="13" width="218" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Menlo – 10.0" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FyT-JS-in5">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="takePickedFontFrom:" target="5Vc-hx-qzN" id="2xo-P0-zbK"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="469.5" y="649.5"/>
         </window>
     </objects>
     <resources>
