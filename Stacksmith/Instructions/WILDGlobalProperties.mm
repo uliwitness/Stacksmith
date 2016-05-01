@@ -40,7 +40,6 @@ void	LEOPushTargetInstruction( LEOContext* inContext );
 void	LEOPushSoundInstruction( LEOContext* inContext );
 void	LEOPushEditBackgroundInstruction( LEOContext* inContext );
 void	LEOSetEditBackgroundInstruction( LEOContext* inContext );
-void	LEOPushScreensInstruction( LEOContext* inContext );
 
 
 void	LEOSetCursorInstruction( LEOContext* inContext )
@@ -180,37 +179,6 @@ void	LEOSetEditBackgroundInstruction( LEOContext* inContext )
 }
 
 
-void	LEOPushScreensInstruction( LEOContext* inContext )
-{
-	struct LEOArrayEntry	*	theArray = NULL;
-	NSArray					*	screens = [NSScreen screens];
-	
-	int	idx = 0;
-	for( NSScreen * currScreen in screens )
-	{
-		struct LEOArrayEntry	*	currScreenArray = NULL;
-
-		NSRect screenFrame = currScreen.frame;
-		LEOAddRectArrayEntryToRoot( &currScreenArray, "rectangle", NSMinX(screenFrame), NSMinY(screenFrame), NSMaxX(screenFrame), NSMaxY(screenFrame), inContext );
-		NSRect screenVisibleFrame = currScreen.visibleFrame;
-		LEOAddRectArrayEntryToRoot( &currScreenArray, "visibleRectangle", NSMinX(screenVisibleFrame), (LEOInteger) NSMinY(screenVisibleFrame), NSMaxX(screenVisibleFrame), NSMaxY(screenVisibleFrame), inContext );
-		LEOAddIntegerArrayEntryToRoot( &currScreenArray, "pixelsPerPoint", currScreen.backingScaleFactor, kLEOUnitNone, inContext );
-		
-		++idx;
-		
-		char	idxStr[100] = {};
-		snprintf( idxStr, sizeof(idxStr) -1, "%d", idx );
-		LEOValuePtr	currScreenArrayValue = LEOAddArrayEntryToRoot( &theArray, idxStr, NULL, inContext );
-		LEOInitArrayValue( &currScreenArrayValue->array, currScreenArray, kLEOInvalidateReferences, inContext );	// Takes over ownership of currScreenArray.
-	}
-	
-	LEOValuePtr	theArrayValue = LEOPushValueOnStack( inContext, NULL );
-	LEOInitArrayValue( &theArrayValue->array, theArray, kLEOInvalidateReferences, inContext );
-	
-	inContext->currentInstruction++;
-}
-
-
 LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOSetCursorInstruction)
 LEOINSTR(LEOPushCursorInstruction)
@@ -224,8 +192,7 @@ LEOINSTR(LEOPushSystemVersionInstruction)
 LEOINSTR(LEOPushSoundInstruction)
 LEOINSTR(LEOPushEditBackgroundInstruction)
 LEOINSTR(LEOSetEditBackgroundInstruction)
-LEOINSTR(LEOPushTargetInstruction)
-LEOINSTR_LAST(LEOPushScreensInstruction)
+LEOINSTR_LAST(LEOPushTargetInstruction)
 
 
 struct TGlobalPropertyEntry	gHostGlobalProperties[] =
@@ -241,6 +208,5 @@ struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 	{ ETargetIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_TARGET_INSTR },
 	{ ESoundIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SOUND_INSTR },
 	{ EEditBackgroundIdentifier, ELastIdentifier_Sentinel, SET_EDIT_BACKGROUND_INSTR, PUSH_EDIT_BACKGROUND_INSTR },
-	{ EScreensIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SCREENS_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };

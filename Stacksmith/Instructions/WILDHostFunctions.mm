@@ -73,6 +73,8 @@ void	WILDNumberOfBackgroundsInstruction( LEOContext* inContext, const char* inTy
 void	WILDNumberOfStacksInstruction( LEOContext* inContext, const char* inType );
 void	WILDNumberOfCardPartsInstructionInternal( LEOContext* inContext, const char* typeName );
 void	WILDNumberOfBackgroundPartsInstructionInternal( LEOContext* inContext, const char* typeName );
+void	WILDPushNumberOfScreensInstruction( LEOContext* inContext );
+void	WILDPushScreenInstruction( LEOContext* inContext );
 
 
 using namespace Carlson;
@@ -1018,6 +1020,46 @@ void	WILDMessageWatcherInstruction( LEOContext* inContext )
 }
 
 
+void	WILDPushNumberOfScreensInstruction( LEOContext* inContext )
+{
+	LEOPushIntegerOnStack( inContext, [NSScreen screens].count, kLEOUnitNone );
+	
+	inContext->currentInstruction++;
+}
+
+void	WILDPushScreenInstruction( LEOContext* inContext )
+{
+	LEOUnit						outUnit = kLEOUnitNone;
+	NSArray					*	screens = [NSScreen screens];
+	LEOValuePtr					screenIndexValue = (inContext->stackEndPtr -1);
+	
+	LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
+	
+	if( screenIndex < 1 || screenIndex > (long long)screens.count )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Screen index %lld out of bounds.", screenIndex );
+		return;
+	}
+	
+	NSScreen * currScreen = screens[screenIndex -1];
+	struct LEOArrayEntry	*	currScreenArray = NULL;
+	
+	NSRect screenFrame = currScreen.frame;
+	LEOAddRectArrayEntryToRoot( &currScreenArray, "rectangle", NSMinX(screenFrame), NSMinY(screenFrame), NSMaxX(screenFrame), NSMaxY(screenFrame), inContext );
+	NSRect screenVisibleFrame = currScreen.visibleFrame;
+	LEOAddRectArrayEntryToRoot( &currScreenArray, "visibleRectangle", NSMinX(screenVisibleFrame), (LEOInteger) NSMinY(screenVisibleFrame), NSMaxX(screenVisibleFrame), NSMaxY(screenVisibleFrame), inContext );
+	LEOAddIntegerArrayEntryToRoot( &currScreenArray, "scaleFactor", currScreen.backingScaleFactor, kLEOUnitNone, inContext );
+	
+	LEOCleanUpValue( screenIndexValue, kLEOInvalidateReferences, inContext );
+	LEOInitArrayValue( &screenIndexValue->array, currScreenArray, kLEOInvalidateReferences, inContext );	// Takes over ownership of currScreenArray.
+	
+	inContext->currentInstruction++;
+}
+
+
 #pragma mark Host Instruction array
 
 LEOINSTR_START(StacksmithHostFunction,WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS)
@@ -1067,7 +1109,9 @@ LEOINSTR(WILDNumberOfCardBrowsersInstruction)
 LEOINSTR(WILDNumberOfBackgroundBrowsersInstruction)
 LEOINSTR(WILDNumberOfCardsInstruction)
 LEOINSTR(WILDNumberOfBackgroundsInstruction)
-LEOINSTR_LAST(WILDNumberOfStacksInstruction)
+LEOINSTR(WILDNumberOfStacksInstruction)
+LEOINSTR(WILDPushNumberOfScreensInstruction)
+LEOINSTR_LAST(WILDPushScreenInstruction)
 
 
 #pragma mark Host function syntax table
@@ -1301,6 +1345,14 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		ENumberIdentifier, INVALID_INSTR2, 0, 0, 'X',
 		{
 			{ EHostParamInvisibleIdentifier, EOfIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'A' },
+			{ EHostParamInvisibleIdentifier, EScreensIdentifier, EHostParameterRequired, WILD_PUSH_NUMBER_OF_SCREENS_INSTRUCTION, 0, 0, 'A', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		ENumberIdentifier, INVALID_INSTR2, 0, 0, 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EOfIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'A' },
 			{ EHostParamInvisibleIdentifier, ECardsIdentifier, EHostParameterRequired, WILD_NUMBER_OF_CARDS_INSTRUCTION, 0, 0, 'A', 'X' },
 			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1485,6 +1537,13 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		{
 			{ EHostParamInvisibleIdentifier, EBoxIdentifier, EHostParameterOptional, WILD_MESSAGE_BOX_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParamInvisibleIdentifier, EWatcherIdentifier, EHostParameterOptional, WILD_MESSAGE_WATCHER_INSTRUCTION, 0, 0, '\0', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		EScreenIdentifier, INVALID_INSTR2, 0, 0, 'X',
+		{
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, WILD_PUSH_SCREEN_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},

@@ -300,7 +300,7 @@
 		55612A5D1ABB880C006C0730 /* CUndoStack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55612A5B1ABB880C006C0730 /* CUndoStack.mm */; };
 		556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556866561359C47100C364D6 /* WILDGlobalProperties.mm */; };
 		556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */; };
-		55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.cpp */; };
+		55686663135A161400C364D6 /* WILDHostFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.mm */; };
 		556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 556C496E1731F48000C40D97 /* TimerIcon.pdf */; };
 		556DB7A518709A15002F7CB2 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7A318709A15002F7CB2 /* tinyxml2.cpp */; };
 		556DB7AD18709ADB002F7CB2 /* CStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7AB18709ADB002F7CB2 /* CStack.cpp */; };
@@ -932,7 +932,7 @@
 		5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostCommands.cpp; path = Instructions/WILDHostCommands.cpp; sourceTree = SOURCE_ROOT; };
 		5568665F1359EBD000C364D6 /* WILDHostCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostCommands.h; path = Instructions/WILDHostCommands.h; sourceTree = SOURCE_ROOT; };
 		55686661135A161000C364D6 /* WILDHostFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostFunctions.h; path = Instructions/WILDHostFunctions.h; sourceTree = SOURCE_ROOT; };
-		55686662135A161100C364D6 /* WILDHostFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WILDHostFunctions.cpp; path = Instructions/WILDHostFunctions.cpp; sourceTree = SOURCE_ROOT; };
+		55686662135A161100C364D6 /* WILDHostFunctions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDHostFunctions.mm; path = Instructions/WILDHostFunctions.mm; sourceTree = SOURCE_ROOT; };
 		556C496E1731F48000C40D97 /* TimerIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = TimerIcon.pdf; path = Resources/TimerIcon.pdf; sourceTree = "<group>"; };
 		556DB7A318709A15002F7CB2 /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml2.cpp; path = ../tinyxml2/tinyxml2.cpp; sourceTree = "<group>"; };
 		556DB7A418709A15002F7CB2 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyxml2.h; path = ../tinyxml2/tinyxml2.h; sourceTree = "<group>"; };
@@ -1508,7 +1508,7 @@
 				5568665F1359EBD000C364D6 /* WILDHostCommands.h */,
 				5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */,
 				55686661135A161000C364D6 /* WILDHostFunctions.h */,
-				55686662135A161100C364D6 /* WILDHostFunctions.cpp */,
+				55686662135A161100C364D6 /* WILDHostFunctions.mm */,
 				55382462172730B4007785D8 /* WILDObjCCallInstructions.mm */,
 			);
 			name = Interpreter;
@@ -2588,7 +2588,7 @@
 				556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */,
 				556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */,
 				559BA9AF18AE909100760273 /* WILDCardInfoViewController.mm in Sources */,
-				55686663135A161400C364D6 /* WILDHostFunctions.cpp in Sources */,
+				55686663135A161400C364D6 /* WILDHostFunctions.mm in Sources */,
 				555E53B018946BC1001487C1 /* CMessageWatcher.cpp in Sources */,
 				556DB7BF1870A6EB002F7CB2 /* CURLRequest.mm in Sources */,
 				55E805C11360A7B3006F1287 /* CObjectPropertyNode.cpp in Sources */,
