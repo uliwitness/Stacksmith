@@ -28,6 +28,7 @@
 #import "Forge.h"
 #import "UKHelperMacros.h"
 #import "CScriptableObjectValue.h"
+#include <objc/runtime.h>
 
 
 using namespace Carlson;
@@ -36,7 +37,8 @@ using namespace Carlson;
 // Array in which we keep track of all running connections, so we can return
 //	this information in 'the downloads'.
 static NSMutableArray	*	sRunningConnections = nil;
-static NSURLSession		*	sDownloadInstructionSession = nil;
+
+static void	*				kURLSessionAssociatedObjectKey = &kURLSessionAssociatedObjectKey;
 
 
 void	LEODownloadInstruction( LEOContext* inContext );
@@ -72,8 +74,8 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 		CScriptContextUserData	*	ud = new CScriptContextUserData( inUserData->GetStack(), inUserData->GetTarget(), inUserData->GetOwner() );
 		mContext = LEOContextCreate( inGroup, ud, CScriptContextUserData::CleanUp );
 		mOwningScript = LEOScriptRetain( inScript );
-		mProgressMessage = [inProgressMsg retain];
-		mCompletionMessage = [inCompletionMsg retain];
+		mProgressMessage = [inProgressMsg copy];
+		mCompletionMessage = [inCompletionMsg copy];
 		LEOInitArrayValue( &mDownloadArrayValue, NULL, kLEOInvalidateReferences, mContext );
 		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "totalSize", -1, kLEOUnitBytes, mContext );
 		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "size", 0, kLEOUnitBytes, mContext );
@@ -83,6 +85,8 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "address", [inURLString UTF8String], mContext );
 		mHeadersArrayValue = LEOAddArrayEntryToRoot( &mDownloadArrayValue.array, "headers", NULL, mContext );
 		LEOInitArrayValue( &mHeadersArrayValue->array, NULL, kLEOInvalidateReferences, mContext );
+		
+		NSLog(@"Created connection delegate %@ (%@ %@)", self, mProgressMessage, mCompletionMessage);
 	}
 	
 	return self;
@@ -90,6 +94,8 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 
 -(void)	dealloc
 {
+	NSLog(@"DESTROYING connection delegate %@ (%@ %@)", self, mProgressMessage, mCompletionMessage);
+
 	DESTROY_DEALLOC(mDownloadedData);
 	LEOCleanUpValue( &mDestination, kLEOInvalidateReferences, mContext );
 	if( mOwningScript )
@@ -199,8 +205,11 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 		LEOAddIntegerArrayEntryToRoot( &mDownloadArrayValue.array, "statusCode", error.code, kLEOUnitBytes, mContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "statusMessage", error.localizedDescription.UTF8String, mContext );
 	}
+	objc_setAssociatedObject( self, kURLSessionAssociatedObjectKey, nil, OBJC_ASSOCIATION_RETAIN );
 	[self sendDownloadMessage: mCompletionMessage forConnection: task];
 	[sRunningConnections removeObject: task];
+	[session finishTasksAndInvalidate];
+	NSLog(@"Removed task from list.");
 }
 
 
@@ -260,7 +269,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	progressMsgString = LEOGetValueAsString( progressMsgValue, progressBuf, sizeof(progressBuf), inContext );
 	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
-	NSString			*	progressMsgObjcString = [NSString stringWithCString: progressMsgString encoding: NSUTF8StringEncoding];
+	NSString			*	progressMsgObjcString = [NSString stringWithUTF8String: progressMsgString];
 
 	// 4: Completion message name:
 	char			completionBuf[1024] = { 0 };
@@ -278,7 +287,7 @@ void	LEODownloadInstruction( LEOContext* inContext )
 	completionMsgString = LEOGetValueAsString( completionMsgValue, completionBuf, sizeof(completionBuf), inContext );
 	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 		return;
-	NSString			*	completionMsgObjcString = [NSString stringWithCString: completionMsgString encoding: NSUTF8StringEncoding];
+	NSString			*	completionMsgObjcString = [NSString stringWithUTF8String: completionMsgString];
 	
 	// Create URL request object & delegate:
 	LEOScript			*		theScript = LEOContextPeekCurrentScript( inContext );
@@ -307,13 +316,11 @@ void	LEODownloadInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	if( !sDownloadInstructionSession )
-	{
-		sDownloadInstructionSession = [[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate: theDelegate delegateQueue: [NSOperationQueue mainQueue]] retain];
-	}
+	NSURLSession		*	downloadInstructionSession = [[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate: theDelegate delegateQueue: [NSOperationQueue mainQueue]] retain];
 	
 	NSURLRequest		*	theRequest = [NSURLRequest requestWithURL: theURL];
-	NSURLSessionDataTask *	theTask = [sDownloadInstructionSession dataTaskWithRequest: theRequest];
+	NSURLSessionDataTask *	theTask = [downloadInstructionSession dataTaskWithRequest: theRequest];
+	objc_setAssociatedObject( theTask, kURLSessionAssociatedObjectKey, downloadInstructionSession, OBJC_ASSOCIATION_RETAIN );
 	
 	if( !sRunningConnections )
 		sRunningConnections = [[NSMutableArray alloc] init];
