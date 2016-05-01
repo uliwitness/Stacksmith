@@ -80,8 +80,10 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't get property \"%s\" of this.", propNameStr );
 			return;
 		}
-		else if( theValue != thePropertyName )
-			LEOInitCopy( theValue, thePropertyName, kLEOInvalidateReferences, inContext );
+		else if( theValue == thePropertyName )	// This makes "rectangle of screen 1" not complain because the dictionary went away.
+			LEOInitSimpleCopy( theValue, thePropertyName, kLEOInvalidateReferences, inContext );
+//		else if( theValue != thePropertyName )	// What was this for?
+//			LEOInitCopy( theValue, thePropertyName, kLEOInvalidateReferences, inContext );
 	}
 	
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
