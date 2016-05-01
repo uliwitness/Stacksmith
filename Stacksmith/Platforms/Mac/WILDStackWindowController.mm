@@ -244,6 +244,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
@@ -258,6 +259,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
@@ -272,6 +274,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
@@ -291,6 +294,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
@@ -309,6 +313,7 @@ using namespace Carlson;
 		thePart->Release();
 		thePart->IncrementChangeCount();
 		[mOwningStackWindowController refreshExistenceAndOrderOfAllViews];
+		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
 	}
