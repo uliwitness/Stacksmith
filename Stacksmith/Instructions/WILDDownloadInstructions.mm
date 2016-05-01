@@ -85,8 +85,6 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 		LEOAddCStringArrayEntryToRoot( &mDownloadArrayValue.array, "address", [inURLString UTF8String], mContext );
 		mHeadersArrayValue = LEOAddArrayEntryToRoot( &mDownloadArrayValue.array, "headers", NULL, mContext );
 		LEOInitArrayValue( &mHeadersArrayValue->array, NULL, kLEOInvalidateReferences, mContext );
-		
-		NSLog(@"Created connection delegate %@ (%@ %@)", self, mProgressMessage, mCompletionMessage);
 	}
 	
 	return self;
@@ -94,8 +92,6 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 
 -(void)	dealloc
 {
-	NSLog(@"DESTROYING connection delegate %@ (%@ %@)", self, mProgressMessage, mCompletionMessage);
-
 	DESTROY_DEALLOC(mDownloadedData);
 	LEOCleanUpValue( &mDestination, kLEOInvalidateReferences, mContext );
 	if( mOwningScript )
@@ -209,7 +205,6 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 	[self sendDownloadMessage: mCompletionMessage forConnection: task];
 	[sRunningConnections removeObject: task];
 	[session finishTasksAndInvalidate];
-	NSLog(@"Removed task from list.");
 }
 
 
