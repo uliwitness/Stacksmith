@@ -142,5 +142,12 @@
 		<key>CATransitionType</key>
 		<string>WILDStretchFromBottomFilter</string>
 	</dict>
+	<key>stretch from top</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>cifilter</string>
+		<key>CATransitionType</key>
+		<string>WILDStretchFromTopFilter</string>
+	</dict>
 </dict>
 </plist>

@@ -1,0 +1,14 @@
+kernel vec4 stretchFromTopEffect(sampler image, sampler targetImage, float percentage)
+{
+	vec2 	pos = samplerCoord(image);
+	vec4	targetPixel = unpremultiply( sample(targetImage, pos) );
+	float	factor = percentage;
+	float	shrinkArea = samplerSize(image).y -(samplerSize(image).y * factor);
+	
+	pos.y = pos.y * (1.0 / factor);
+	
+	vec4	thePixel = unpremultiply( sample(image, pos) );
+	thePixel = (shrinkArea < pos.y) ? thePixel : targetPixel;
+	
+	return premultiply(thePixel);
+}

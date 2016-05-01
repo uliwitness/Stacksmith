@@ -1,14 +1,16 @@
 kernel vec4 shrinkToTopEffect(sampler image, sampler targetImage, float percentage)
 {
-	vec2 	pos = samplerCoord(image);
-	vec4	targetPixel = unpremultiply( sample(targetImage, pos) );
-	float	factor = (1.0 -percentage);
-	float	shrinkArea = samplerSize(image).y -(samplerSize(image).y * factor);
-	
-	pos.y = pos.y * (1.0 / factor);
-	
-	vec4	thePixel = unpremultiply( sample(image, pos) );
-	thePixel = (shrinkArea < pos.y) ? thePixel : targetPixel;
-	
-	return premultiply(thePixel);
+	vec2 	targetPos = samplerCoord(image);
+	vec2 	thePos = targetPos;
+	vec4	targetPixel = unpremultiply( sample(targetImage, targetPos) );
+
+	float	shrinkArea = (samplerSize(image).y * percentage);
+
+	float	uncoveredHeight = samplerSize(image).y -shrinkArea;
+	thePos.y = thePos.y * (1.0 / percentage);
+	vec4	thePixel = unpremultiply( sample(image, thePos) );
+
+	vec4	finalPixel = (shrinkArea < targetPos.y) ? thePixel : targetPixel;
+
+	return premultiply(finalPixel);
 }

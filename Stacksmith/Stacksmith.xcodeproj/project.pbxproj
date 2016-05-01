@@ -318,6 +318,7 @@
 		557AECC41A7527C500086275 /* Sample Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 557AECC01A7527B200086275 /* Sample Stacks */; };
 		557AECC51A7527C700086275 /* Test Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 557AECC11A7527B200086275 /* Test Stacks */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
+		5587B8CF1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 5587B8CE1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel */; };
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5589DD771378B16400B0F6CF /* TransitionMappings.plist */; };
 		558FB9AC1A75438E0034FD23 /* Empty Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 558FB9A61A7543700034FD23 /* Empty Stacks */; };
@@ -963,6 +964,7 @@
 		557AECC11A7527B200086275 /* Test Stacks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Test Stacks"; path = "../Stacks/Test Stacks"; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
 		55818A77133199AC00480D30 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home.xstk; sourceTree = "<group>"; };
+		5587B8CE1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WILDStretchFromTopFilter.cikernel; path = "Custom Effects/WILDStretchFromTopFilter.cikernel"; sourceTree = "<group>"; };
 		558970E5118C853600F92788 /* UKIsDragStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKIsDragStart.h; path = ../UliKit/UKIsDragStart.h; sourceTree = SOURCE_ROOT; };
 		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		5589DD771378B16400B0F6CF /* TransitionMappings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TransitionMappings.plist; sourceTree = "<group>"; };
@@ -1316,6 +1318,7 @@
 				55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */,
 				55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */,
 				55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */,
+				5587B8CE1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel */,
 				555E53A3189351AA001487C1 /* PlaceholderMovie.mov */,
 				55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */,
 				55A7BA4914668D6E00AB0F34 /* boing.aiff */,
@@ -2356,6 +2359,7 @@
 				555F104013881DB700E26037 /* UKPaintRoundrectTool.tiff in Resources */,
 				55405BB918A39796001D3C99 /* WILDPartInfoViewController.xib in Resources */,
 				555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */,
+				5587B8CF1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel in Resources */,
 				555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */,
 				55405BD118A59D06001D3C99 /* WILDButtonInfoViewController.xib in Resources */,
 				555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */,
