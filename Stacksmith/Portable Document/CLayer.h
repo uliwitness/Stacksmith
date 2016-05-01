@@ -79,6 +79,7 @@ public:
 	virtual bool					CanDeleteSelectedItem();
 	virtual std::string				CopySelectedItem();
 	virtual bool					CanCopySelectedItem();
+	virtual std::string				CopyParts( const std::vector<CPartRef>& inItems );
 	virtual std::vector<CPartRef>	PasteObject( const std::string& inXMLStr, TLayerPasteFlags pasteFlags = 0 );
 	virtual void					BringSelectedItemToFront();
 	virtual void					BringSelectedItemForward();

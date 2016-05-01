@@ -661,6 +661,22 @@ bool	CLayer::CanDeleteSelectedItem()
 
 std::string	CLayer::CopySelectedItem()
 {
+	std::vector<CPartRef>	selectedParts;
+	
+	for( CPart* currPart : mParts )
+	{
+		if( currPart->IsSelected() )
+		{
+			selectedParts.push_back( currPart );
+		}
+	}
+	
+	return CopyParts( selectedParts );
+}
+
+
+std::string	CLayer::CopyParts( const std::vector<CPartRef>& inItems )
+{
 	tinyxml2::XMLDocument	document;
 	CStyleSheet				styleSheet;
 	tinyxml2::XMLElement *	partsElement = document.NewElement("parts");
