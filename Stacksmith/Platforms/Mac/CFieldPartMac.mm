@@ -1200,6 +1200,18 @@ NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedS
 					[newAttrStr addAttribute: NSLinkAttributeName value: [NSURL URLWithString: [NSString stringWithUTF8String: currStyle.second.c_str()]] range: currCocoaRange];
 //					std::cout << "\tAdded link." << std::endl;
 				}
+				else if( currStyle.first.compare("color") == 0 )
+				{
+					if( currStyle.second.size() == 9 && currStyle.second[0] == '#' )
+					{
+						long	red = strtol( currStyle.second.substr(1,2).c_str(), NULL, 16 ),
+								green = strtol( currStyle.second.substr(3,2).c_str(), NULL, 16 ),
+								blue = strtol( currStyle.second.substr(5,2).c_str(), NULL, 16 ),
+								alpha = strtol( currStyle.second.substr(7,2).c_str(), NULL, 16 );
+						[newAttrStr addAttribute: NSForegroundColorAttributeName value: [NSColor colorWithCalibratedRed: red / 255.0 green: green / 255.0 blue: blue / 255.0 alpha: alpha / 255.0] range: currCocoaRange];
+					}
+//					std::cout << "\tAdded color." << std::endl;
+				}
 				// +++ Add outline/shadow/condense/extend
 			}
 			if( newFont )
@@ -1245,6 +1257,13 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 				{
 					stringToSet.AddAttributeValueForRange( "font-style", "italic", range.location, range.location +range.length );
 				}
+			//	stringToSet.Dump();
+			}
+			else if( [currAttr isEqualToString: NSForegroundColorAttributeName] )
+			{
+				NSColor*	rgbColor = [attrValue colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+				NSString*	colorString = [NSString stringWithFormat: @"#%02X%02X%02X%02X", int(rgbColor.redComponent * 255.0), int(rgbColor.greenComponent * 255.0), int(rgbColor.blueComponent * 255.0), int(rgbColor.alphaComponent * 255.0)];
+				stringToSet.AddAttributeValueForRange( "color", colorString.UTF8String, range.location, range.location +range.length );
 			//	stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSObliquenessAttributeName] && [attrValue integerValue] != 0 )
