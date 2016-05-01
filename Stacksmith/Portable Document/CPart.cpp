@@ -692,7 +692,11 @@ void	CPart::Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::funct
 						t = (inHitPart & ETopGrabberHitPart) ? (oldT +(y -oldY)) : oldT,
 						r = (inHitPart & ERightGrabberHitPart) ? (oldR +(x -oldX)) : oldR,
 						b = (inHitPart & EBottomGrabberHitPart) ? (oldB +(y -oldY)) : oldB;
-			
+			if( l > r )
+				std::swap(l,r);
+			if( t > b )
+				std::swap(t,b);
+
 			GetOwner()->CorrectRectOfPart( this, inHitPart, &l, &t, &r, &b, addGuidelineBlock );
 			SetRect( l, t, r, b );
 		}

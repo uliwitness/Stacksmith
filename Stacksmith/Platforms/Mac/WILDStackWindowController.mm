@@ -326,7 +326,9 @@ using namespace Carlson;
 		
 	[mOwningStackWindowController drawBoundingBoxes];
 
-	CCursor::Grab( (int)theEvt.buttonNumber, [theEvt,hitObject,currentTool,dragMessage,self]( LEONumber screenX, LEONumber screenY, LEONumber pressure )
+	LEOInteger	partLeft = ((CGraphicPart*)hitObject)->GetLeft(),
+				partTop = ((CGraphicPart*)hitObject)->GetTop();
+	CCursor::Grab( (int)theEvt.buttonNumber, [theEvt,hitObject,currentTool,dragMessage,partLeft,partTop,self]( LEONumber screenX, LEONumber screenY, LEONumber pressure )
 	{
 		LEONumber	x = screenX -self.window.frame.origin.x;
 		LEONumber	y = screenY -(self.window.screen.frame.size.height -NSMaxY([self.window contentRectForFrameRect: self.window.frame]));
@@ -352,7 +354,12 @@ using namespace Carlson;
 		else
 		{
 			CPart*thePart = (CPart*)hitObject;
-			thePart->SetRect( thePart->GetLeft(), thePart->GetTop(), x, y );
+			LEOInteger	l = partLeft, t = partTop, r = x, b = y;
+			if( l > r )
+				std::swap(l,r);
+			if( t > b )
+				std::swap(t,b);
+			thePart->SetRect( l, t, r, b );
 		}
 		
 		return true;
