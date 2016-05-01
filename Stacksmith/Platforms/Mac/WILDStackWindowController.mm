@@ -459,37 +459,37 @@ using namespace Carlson;
 }
 
 
--(void)	resetCursorRects
-{
-	[super resetCursorRects];
-	
-	if( mStack->GetTool() == EPointerTool && currentCursorID != 777 )
-	{
-		mStack->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( 777, EMediaTypeCursor, [self](WILDNSImagePtr inImage, int inHotspotLeft, int inHotspotTop)
-		{
-			currentCursorID = 777;
-			NSCursor *	cursorInstance = [[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(inHotspotLeft,inHotspotTop)];
-			ASSIGN(currentCursor,cursorInstance);
-			[cursorInstance release];
-			[self.window invalidateCursorRectsForView: self];
-		} );
-	}
-	else if( currentCursorID != 128 )
-	{
-		mStack->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( 128, EMediaTypeCursor, [self](WILDNSImagePtr inImage, int inHotspotLeft, int inHotspotTop)
-		{
-			currentCursorID = 128;
-			NSCursor *	cursorInstance = [[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(inHotspotLeft,inHotspotTop)];
-			ASSIGN(currentCursor,cursorInstance);
-			[cursorInstance release];
-			[self.window invalidateCursorRectsForView: self];
-		} );
-	}
-
-	if( !currentCursor )
-		ASSIGN(currentCursor, [NSCursor arrowCursor]);
-	[self addCursorRect: [self bounds] cursor: currentCursor];
-}
+//-(void)	resetCursorRects
+//{
+//	[super resetCursorRects];
+//	
+//	if( mStack->GetTool() == EPointerTool && currentCursorID != 777 )
+//	{
+//		mStack->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( 777, EMediaTypeCursor, [self](WILDNSImagePtr inImage, int inHotspotLeft, int inHotspotTop)
+//		{
+//			currentCursorID = 777;
+//			NSCursor *	cursorInstance = [[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(inHotspotLeft,inHotspotTop)];
+//			ASSIGN(currentCursor,cursorInstance);
+//			[cursorInstance release];
+//			[self.window invalidateCursorRectsForView: self];
+//		} );
+//	}
+//	else if( currentCursorID != 128 )
+//	{
+//		mStack->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( 128, EMediaTypeCursor, [self](WILDNSImagePtr inImage, int inHotspotLeft, int inHotspotTop)
+//		{
+//			currentCursorID = 128;
+//			NSCursor *	cursorInstance = [[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(inHotspotLeft,inHotspotTop)];
+//			ASSIGN(currentCursor,cursorInstance);
+//			[cursorInstance release];
+//			[self.window invalidateCursorRectsForView: self];
+//		} );
+//	}
+//
+//	if( !currentCursor )
+//		ASSIGN(currentCursor, [NSCursor arrowCursor]);
+//	[self addCursorRect: [self bounds] cursor: currentCursor];
+//}
 
 @end
 
