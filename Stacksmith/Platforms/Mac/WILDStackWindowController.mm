@@ -389,7 +389,6 @@ using namespace Carlson;
 	if( currentTool == ELineTool || currentTool == EBezierPathTool || currentTool == EOvalTool
 	   || currentTool == ERectangleTool || currentTool == ERoundrectTool )
 	{
-		NSLog(@"didEverMove = %d",didEverMove);
 		if( !didEverMove && creatingNewObject )
 		{
 			hitObject->DeleteObject();
