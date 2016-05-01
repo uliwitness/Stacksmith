@@ -571,6 +571,26 @@ void	CLayer::SetPeeking( bool inState )
 }
 
 
+bool	CLayer::DeletePart( CPart* inPartToDelete, bool recordUndo )
+{
+	assert(recordUndo == false);	// +++ Implement undo!
+	
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart) == inPartToDelete )
+		{
+			// +++ If we had a cantDelete property on parts, this is where we'd bail.
+			(*currPart)->GoToSleep();
+			(*currPart)->WillBeDeleted();
+			mParts.erase(currPart);
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+
 void	CLayer::DeleteSelectedItem()
 {
 	std::string		serializedSelectedParts( CopySelectedItem() );

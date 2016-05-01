@@ -23,11 +23,12 @@ void	CCursor::GetGlobalPosition( LEONumber* outX, LEONumber *outY )
 }
 
 
-void	CCursor::Grab( int mouseButtonNumber, std::function<bool( LEONumber x, LEONumber y, LEONumber pressure )> trackingHandler )
+bool	CCursor::Grab( int mouseButtonNumber, std::function<bool( LEONumber x, LEONumber y, LEONumber pressure )> trackingHandler )
 {
 	CGFloat					screenHeight = [[NSScreen screens].firstObject frame].size.height;
 	NSDate				*	theDate = [NSDate distantFuture];
 	NSAutoreleasePool	*	pool = [NSAutoreleasePool new];
+	bool					didEverMove = false;
 	
 	NSUInteger				eventMask = NSLeftMouseUpMask | NSLeftMouseDraggedMask;
 	if( mouseButtonNumber == 1 )
@@ -42,6 +43,8 @@ void	CCursor::Grab( int mouseButtonNumber, std::function<bool( LEONumber x, LEON
 		{
 			if( currEvt.type == NSLeftMouseDragged || currEvt.type == NSRightMouseDragged || currEvt.type == NSOtherMouseDragged )
 			{
+				didEverMove = true;
+				
 				NSPoint		pos = [[currEvt window] frame].origin;
 				pos.x += [currEvt locationInWindow].x;
 				pos.y += [currEvt locationInWindow].y;
@@ -71,4 +74,6 @@ void	CCursor::Grab( int mouseButtonNumber, std::function<bool( LEONumber x, LEON
 			break;
 	}
 	[pool release];
+	
+	return didEverMove;
 }

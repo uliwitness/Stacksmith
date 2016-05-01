@@ -734,3 +734,9 @@ bool	CPart::GetShouldSendMouseEventsRightNow()
 	return GetStack()->GetTool() == EBrowseTool && !GetStack()->GetDocument()->GetPeeking();
 }
 
+
+bool	CPart::DeleteObject()
+{
+	return GetOwner()->DeletePart( this, false );	// +++ Doesn't record undo. Should we let scripts override this?
+}
+

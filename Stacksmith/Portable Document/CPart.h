@@ -180,6 +180,7 @@ public:
 	virtual void				PrepareMouseUp()				{};	//!< Sent when a mouse click was inside, right before we send mouseUp.
 	bool						GetShouldSendMouseEventsRightNow();
 	virtual void				WillBeDeleted()					{};
+	virtual bool				DeleteObject();
 	
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	

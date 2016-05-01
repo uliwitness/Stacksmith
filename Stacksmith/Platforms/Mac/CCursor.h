@@ -25,8 +25,9 @@ public:
 	/*! Return the current mouse position in coordinates relative to the upper left of the (main) screen. */
 	static void	GetGlobalPosition( LEONumber* outX, LEONumber *outY );
 	
-	/*! Synchronously track the mouse after a click until the mouse button is released again. Call us back whenever the mouse moves or the pressure changes. Button numbers are 0-based indexes: mouseButtonNumber == 0 is left, mouseButtonNumber == 1 is right, higher numbers mean other buttons. Coordinates are relative to the upper left of the (main) screen. If trackingHandler returns NO, tracking will be aborted. */
-	static void	Grab( int mouseButtonNumber, std::function<bool( LEONumber x, LEONumber y, LEONumber pressure )> trackingHandler );
+	/*! Synchronously track the mouse after a click until the mouse button is released again. Call us back whenever the mouse moves or the pressure changes. Button numbers are 0-based indexes: mouseButtonNumber == 0 is left, mouseButtonNumber == 1 is right, higher numbers mean other buttons. Coordinates are relative to the upper left of the (main) screen. If trackingHandler returns NO, tracking will be aborted.
+	 @return Returns whether the mouse ever moved or it was just a click or long hold. */
+	static bool	Grab( int mouseButtonNumber, std::function<bool( LEONumber x, LEONumber y, LEONumber pressure )> trackingHandler );
 };
 
 }

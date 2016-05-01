@@ -221,6 +221,8 @@ using namespace Carlson;
 		}
 	}
 	
+	bool	creatingNewObject = false;
+	
 	if( currentTool == EBrowseTool )
 	{
 		[self.window makeFirstResponder: self];
@@ -247,6 +249,7 @@ using namespace Carlson;
 		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
+		creatingNewObject = true;
 	}
 	else if( currentTool == ERectangleTool && hitObject == theCard )
 	{
@@ -262,6 +265,7 @@ using namespace Carlson;
 		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
+		creatingNewObject = true;
 	}
 	else if( currentTool == ERoundrectTool && hitObject == theCard )
 	{
@@ -277,6 +281,7 @@ using namespace Carlson;
 		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
+		creatingNewObject = true;
 	}
 	else if( currentTool == ELineTool && hitObject == theCard )
 	{
@@ -297,6 +302,7 @@ using namespace Carlson;
 		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
+		creatingNewObject = true;
 	}
 	else if( currentTool == EBezierPathTool && hitObject == theCard )
 	{
@@ -316,6 +322,7 @@ using namespace Carlson;
 		owner->DeselectAllItems();
 		thePart->SetSelected(true,customPartIndex);
 		hitObject = thePart;
+		creatingNewObject = true;
 	}
 	else if( hitObject != theCard )
 	{
@@ -333,7 +340,7 @@ using namespace Carlson;
 
 	LEOInteger	partLeft = ((CGraphicPart*)hitObject)->GetLeft(),
 				partTop = ((CGraphicPart*)hitObject)->GetTop();
-	CCursor::Grab( (int)theEvt.buttonNumber, [theEvt,hitObject,currentTool,dragMessage,partLeft,partTop,self]( LEONumber screenX, LEONumber screenY, LEONumber pressure )
+	bool didEverMove = CCursor::Grab( (int)theEvt.buttonNumber, [theEvt,hitObject,currentTool,dragMessage,partLeft,partTop,self]( LEONumber screenX, LEONumber screenY, LEONumber pressure )
 	{
 		LEONumber	x = screenX -self.window.frame.origin.x;
 		LEONumber	y = screenY -(self.window.screen.frame.size.height -NSMaxY([self.window contentRectForFrameRect: self.window.frame]));
@@ -378,6 +385,16 @@ using namespace Carlson;
 	else if( currentTool == ELineTool || currentTool == EBezierPathTool )
 	{
 		((CGraphicPart*)hitObject)->SizeToFit();	// Pull part rect snugly around the actual drawing.
+	}
+	if( currentTool == ELineTool || currentTool == EBezierPathTool || currentTool == EOvalTool
+	   || currentTool == ERectangleTool || currentTool == ERoundrectTool )
+	{
+		NSLog(@"didEverMove = %d",didEverMove);
+		if( !didEverMove && creatingNewObject )
+		{
+			hitObject->DeleteObject();
+			[mOwningStackWindowController drawBoundingBoxes];
+		}
 	}
 }
 

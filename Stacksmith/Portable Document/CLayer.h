@@ -75,6 +75,7 @@ public:
 
 	virtual void					SetPeeking( bool inState );
 	virtual void					DeleteSelectedItem();
+	virtual bool					DeletePart( CPart* inPartToDelete, bool recordUndo = true );
 	virtual bool					CanDeleteSelectedItem();
 	virtual std::string				CopySelectedItem();
 	virtual bool					CanCopySelectedItem();
