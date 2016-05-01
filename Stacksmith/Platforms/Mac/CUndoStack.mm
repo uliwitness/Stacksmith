@@ -55,13 +55,7 @@ CUndoStack::~CUndoStack()
 void	CUndoStack::AddUndoAction(std::string inActionName, std::function<void()> inAction )
 {
 	WILDLambdaRunner	*	bo = [WILDLambdaRunner lambdaRunnerWithLambda: inAction];
-	[mUndoManager registerUndoWithTarget: bo selector: @selector(run) object: bo];	// We pass bo as the object so it is retained.
-}
-
-
-void	CUndoStack::AddRedoAction(std::string inActionName, std::function<void()> inAction )
-{
-	WILDLambdaRunner	*	bo = [WILDLambdaRunner lambdaRunnerWithLambda: inAction];
+	[mUndoManager setActionName: [NSString stringWithUTF8String: inActionName.c_str()]];
 	[mUndoManager registerUndoWithTarget: bo selector: @selector(run) object: bo];	// We pass bo as the object so it is retained.
 }
 

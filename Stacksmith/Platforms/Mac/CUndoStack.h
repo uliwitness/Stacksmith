@@ -37,7 +37,6 @@ public:
 	~CUndoStack();
 	
 	void	AddUndoAction( std::string inActionName, std::function<void()> inAction );
-	void	AddRedoAction( std::string inActionName, std::function<void()> inAction );	// Can only call this from inside an undo action block.
 	
 protected:
 	NSUndoManager*	mUndoManager;		// Mac-specific.

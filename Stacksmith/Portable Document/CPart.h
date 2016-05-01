@@ -202,6 +202,7 @@ public:
 protected:
 	virtual ~CPart();
 
+	virtual void				SetRectFromUndo( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b );
 	virtual void				LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void				SavePropertiesToElement( tinyxml2::XMLElement * inElement );
 	virtual const char*			GetIdentityForDump()					{ return "Part"; };
