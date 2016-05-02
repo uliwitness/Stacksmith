@@ -128,6 +128,13 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 		std::string		contentsStr;
 		GetTextContents(contentsStr);
 		LEODoForEachChunk( contentsStr.c_str(), contentsStr.length(), kLEOChunkTypeLine, PopUpChunkCallback, 0, mView );
+		
+		if( mSelectedLines.size() > 0 )
+		{
+			auto	foundIndex = mSelectedLines.lower_bound(1);
+			if( foundIndex != mSelectedLines.end() )
+				[(NSPopUpButton*)mView selectItemAtIndex: (*foundIndex) -1];
+		}
 	}
 	else
 	{
