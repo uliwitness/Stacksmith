@@ -685,9 +685,11 @@ using namespace Carlson;
             {
                 sTransitionSubtypes = [[NSDictionary alloc] initWithObjectsAndKeys:
                                        [NSNumber numberWithDouble: -M_PI_4], @"fromLeft",
-                                       [NSNumber numberWithDouble: -M_PI_2 -M_PI_4], @"fromTop",
+                                       [NSNumber numberWithDouble: -M_PI_2], @"fromTop",
+                                       [NSNumber numberWithDouble: -M_PI_2 -M_PI_4], @"fromTopRight",
                                        [NSNumber numberWithDouble: M_PI], @"fromRight",
-                                       [NSNumber numberWithDouble: M_PI_2 +M_PI_4], @"fromBottom",
+                                       [NSNumber numberWithDouble: M_PI_2], @"fromBottom",
+                                       [NSNumber numberWithDouble: M_PI_2 +M_PI_4], @"fromBottomRight",
                                        nil];
             }
             NSNumber*	theNumber = [sTransitionSubtypes objectForKey: transitionSubtype];
