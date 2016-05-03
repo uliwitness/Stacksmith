@@ -7,11 +7,13 @@ kernel vec4 checkerboardEffect(sampler image, sampler targetImage, float percent
 	vec4	thePixel = unpremultiply( sample(image, targetPos) );
 	float	pixelInRowPercentage = 1.0 -(mod(targetPos.y, boxSize) / boxSize);
 	float	evenOrOddRow = mod((targetPos.x / boxSize), 2.0);
+	float	evenOrOddCol = mod((targetPos.y / boxSize), 2.0);
+	float	evenOrOddCell = mod(evenOrOddRow +evenOrOddCol, 2.0);
 	float	doublePercentage = percentage * 2.0;
 
 	vec4	finalPixelEven = (doublePercentage > pixelInRowPercentage) ? targetPixel : thePixel;
 	vec4	finalPixelOdd = (doublePercentage > (1.0 +pixelInRowPercentage)) ? targetPixel : thePixel;
-	vec4	finalPixel = (evenOrOddRow > 0.5) ? finalPixelOdd : finalPixelEven;
+	vec4	finalPixel = (evenOrOddCell > 0.5) ? finalPixelOdd : finalPixelEven;
 
 	return premultiply(finalPixel);
 }
