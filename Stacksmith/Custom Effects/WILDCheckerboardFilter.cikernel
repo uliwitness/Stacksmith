@@ -1,0 +1,17 @@
+kernel vec4 checkerboardEffect(sampler image, sampler targetImage, float percentage)
+{
+	vec2 	targetPos = samplerCoord(image);
+	vec4	targetPixel = unpremultiply( sample(targetImage, targetPos) );
+	float	boxSize = samplerSize(targetImage).y / 10.0;
+	boxSize = (boxSize > 0.0) ? boxSize : 10.0;
+	vec4	thePixel = unpremultiply( sample(image, targetPos) );
+	float	pixelInRowPercentage = 1.0 -(mod(targetPos.y, boxSize) / boxSize);
+	float	evenOrOddRow = mod((targetPos.x / boxSize), 2.0);
+	float	doublePercentage = percentage * 2.0;
+
+	vec4	finalPixelEven = (doublePercentage > pixelInRowPercentage) ? targetPixel : thePixel;
+	vec4	finalPixelOdd = (doublePercentage > (1.0 +pixelInRowPercentage)) ? targetPixel : thePixel;
+	vec4	finalPixel = (evenOrOddRow > 0.5) ? finalPixelOdd : finalPixelEven;
+
+	return premultiply(finalPixel);
+}

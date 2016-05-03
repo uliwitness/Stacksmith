@@ -156,5 +156,12 @@
 		<key>CATransitionType</key>
 		<string>WILDVenetianBlindsFilter</string>
 	</dict>
+	<key>checkerboard</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>cifilter</string>
+		<key>CATransitionType</key>
+		<string>WILDCheckerboardFilter</string>
+	</dict>
 </dict>
 </plist>

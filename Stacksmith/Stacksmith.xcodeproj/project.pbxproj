@@ -324,6 +324,7 @@
 		558970E7118C853600F92788 /* UKIsDragStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 558970E6118C853600F92788 /* UKIsDragStart.m */; };
 		5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5589DD771378B16400B0F6CF /* TransitionMappings.plist */; };
 		558AA6841CD842EE008AC095 /* WILDVenetianBlindsFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 558AA6831CD842EE008AC095 /* WILDVenetianBlindsFilter.cikernel */; };
+		558AA68E1CD90133008AC095 /* WILDCheckerboardFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 558AA68D1CD90133008AC095 /* WILDCheckerboardFilter.cikernel */; };
 		558FB9AC1A75438E0034FD23 /* Empty Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 558FB9A61A7543700034FD23 /* Empty Stacks */; };
 		559331BD18DB06190061CC37 /* CMediaCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559331BB18DB06190061CC37 /* CMediaCache.mm */; };
 		55943B1C171F675E0051166C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55943B1B171F675E0051166C /* WebKit.framework */; };
@@ -976,6 +977,7 @@
 		558970E6118C853600F92788 /* UKIsDragStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKIsDragStart.m; path = ../UliKit/UKIsDragStart.m; sourceTree = SOURCE_ROOT; };
 		5589DD771378B16400B0F6CF /* TransitionMappings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TransitionMappings.plist; sourceTree = "<group>"; };
 		558AA6831CD842EE008AC095 /* WILDVenetianBlindsFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WILDVenetianBlindsFilter.cikernel; path = "Custom Effects/WILDVenetianBlindsFilter.cikernel"; sourceTree = "<group>"; };
+		558AA68D1CD90133008AC095 /* WILDCheckerboardFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WILDCheckerboardFilter.cikernel; path = "Custom Effects/WILDCheckerboardFilter.cikernel"; sourceTree = "<group>"; };
 		558FB9A61A7543700034FD23 /* Empty Stacks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Empty Stacks"; path = "Resources/Empty Stacks"; sourceTree = "<group>"; };
 		559331BB18DB06190061CC37 /* CMediaCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMediaCache.mm; path = Platforms/Mac/CMediaCache.mm; sourceTree = "<group>"; };
 		559331BC18DB06190061CC37 /* CMediaCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMediaCache.h; path = Platforms/Mac/CMediaCache.h; sourceTree = "<group>"; };
@@ -1295,6 +1297,7 @@
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
 				5589DD771378B16400B0F6CF /* TransitionMappings.plist */,
+				558AA68F1CD901EF008AC095 /* Visual effect CIFilters */,
 				55BA587D1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem */,
 				55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */,
 				55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */,
@@ -1319,15 +1322,6 @@
 				554DBABB1A9B362300130864 /* StackCanvasIcon.icns */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
-				559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */,
-				559700F2137C9ACC000264B8 /* WILDIrisCloseFilter.cikernel */,
-				559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */,
-				559700F1137C9ACC000264B8 /* WILDBarnDoorOpenFilter.cikernel */,
-				55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */,
-				55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */,
-				55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */,
-				5587B8CE1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel */,
-				558AA6831CD842EE008AC095 /* WILDVenetianBlindsFilter.cikernel */,
 				555E53A3189351AA001487C1 /* PlaceholderMovie.mov */,
 				55A7BA4814668D6E00AB0F34 /* harpsichord.aiff */,
 				55A7BA4914668D6E00AB0F34 /* boing.aiff */,
@@ -1864,6 +1858,23 @@
 			name = "Portable Document";
 			sourceTree = "<group>";
 		};
+		558AA68F1CD901EF008AC095 /* Visual effect CIFilters */ = {
+			isa = PBXGroup;
+			children = (
+				559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */,
+				559700F2137C9ACC000264B8 /* WILDIrisCloseFilter.cikernel */,
+				559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */,
+				559700F1137C9ACC000264B8 /* WILDBarnDoorOpenFilter.cikernel */,
+				55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */,
+				55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */,
+				55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */,
+				5587B8CE1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel */,
+				558AA6831CD842EE008AC095 /* WILDVenetianBlindsFilter.cikernel */,
+				558AA68D1CD90133008AC095 /* WILDCheckerboardFilter.cikernel */,
+			);
+			name = "Visual effect CIFilters";
+			sourceTree = "<group>";
+		};
 		559700ED137BBB0C000264B8 /* Custom CIFilters */ = {
 			isa = PBXGroup;
 			children = (
@@ -2248,6 +2259,7 @@
 				552FF1FF113F23F3005742C8 /* PAT_5.pbm in Resources */,
 				552FF200113F23F3005742C8 /* PAT_6.pbm in Resources */,
 				552FF201113F23F3005742C8 /* PAT_7.pbm in Resources */,
+				558AA68E1CD90133008AC095 /* WILDCheckerboardFilter.cikernel in Resources */,
 				552FF202113F23F3005742C8 /* PAT_8.pbm in Resources */,
 				55C476691A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib in Resources */,
 				55D872B61A7F011700D5FA30 /* CURS_4.tiff in Resources */,
