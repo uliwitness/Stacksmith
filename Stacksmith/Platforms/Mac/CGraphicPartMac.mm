@@ -71,26 +71,6 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 	}
 	else if( mStyle == EGraphicStyleBezierPath || mStyle == EGraphicStyleLine )
 	{
-	#if NO_VARYING_LINE_WIDTHS
-		CGMutablePathRef	thePath = CGPathCreateMutable();
-		if( mPoints.size() > 0 )
-		{
-			bool		first = true;
-			for( const CPathSegment& currSegment : mPoints )
-			{
-				if( first )
-				{
-					CGPathMoveToPoint( thePath, NULL, currSegment.x, localBox.size.height -currSegment.y );
-					first = false;
-				}
-				else
-					CGPathAddLineToPoint( thePath, NULL, currSegment.x,  localBox.size.height -currSegment.y );
-			}
-		}
-		theLayer.path = thePath;
-		theLayer.contentsGravity = kCAGravityResize;
-		CGPathRelease(thePath);
-	#else
 		ULIWideningBezierPath	*	fillPath = [[[ULIWideningBezierPath alloc] init] autorelease];
 		CGFloat factor = GetLineWidth();
 		if( mPoints.size() > 0 )
@@ -130,7 +110,6 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 			strokeLayer.path = [fillPath CGPathForStroke];
 			strokeLayer.contentsGravity = kCAGravityResize;
 		}
-	#endif
 	}
 }
 
