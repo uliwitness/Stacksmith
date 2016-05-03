@@ -1,0 +1,13 @@
+kernel vec4 venetianBlindsEffect(sampler image, sampler targetImage, float percentage)
+{
+	vec2 	targetPos = samplerCoord(image);
+	vec4	targetPixel = unpremultiply( sample(targetImage, targetPos) );
+	float	blindsHeight = samplerSize(targetImage).y / 10.0;
+	blindsHeight = (blindsHeight > 0.0) ? blindsHeight : 10.0;
+	vec4	thePixel = unpremultiply( sample(image, targetPos) );
+	float	pixelInBlindPercentage = 1.0 -(mod(targetPos.y, blindsHeight) / blindsHeight);
+
+	vec4	finalPixel = (percentage > pixelInBlindPercentage) ? targetPixel : thePixel;
+
+	return premultiply(finalPixel);
+}

@@ -149,5 +149,12 @@
 		<key>CATransitionType</key>
 		<string>WILDStretchFromTopFilter</string>
 	</dict>
+	<key>venetian blinds</key>
+	<dict>
+		<key>CATransitionSubtype</key>
+		<string>cifilter</string>
+		<key>CATransitionType</key>
+		<string>WILDVenetianBlindsFilter</string>
+	</dict>
 </dict>
 </plist>
