@@ -68,6 +68,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "&quot;/Users/uli/Programming/Stacksmith/Stacks/Test Stacks/CardTransitions.xstk&quot;"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "&quot;/Users/uli/Programming/Stacksmith/Stacks/Test Stacks/GradientShapes.xstk&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

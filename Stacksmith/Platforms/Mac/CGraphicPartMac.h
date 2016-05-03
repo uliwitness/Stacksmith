@@ -14,13 +14,26 @@
 //#import "WILDGraphicInfoViewController.h"
 
 
+#if __OBJC__
+@class CAShapeLayer;
+@class CAGradientLayer;
+typedef CAShapeLayer*			WILDCAShapeLayerPtr;
+typedef CAGradientLayer*		WILDCAGradientLayerPtr;
+#else
+typedef struct CAShapeLayer*	WILDCAShapeLayerPtr;
+typedef struct CAGradientLayer*	WILDCAGradientLayerPtr;
+#endif
+
+
 namespace Carlson
 {
 
 class CGraphicPartMac : public CGraphicPart, public CMacPartBase
 {
 public:
-	explicit CGraphicPartMac( CLayer *inOwner ) : CGraphicPart( inOwner ), mView(NULL) {};
+	explicit CGraphicPartMac( CLayer *inOwner )
+		: CGraphicPart( inOwner ), mView(NULL), mFillColorLayer(NULL), mFillShapeLayer(NULL), mStrokeShapeLayer(NULL) {};
+	~CGraphicPartMac();
 	
 //	virtual Class		GetPropertyEditorClass()	{ return [WILDGraphicInfoViewController class]; };
 	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset )	{ CMacPartBase::OpenScriptEditorAndShowOffset(byteOffset); };
@@ -49,7 +62,10 @@ public:
 protected:
 	void				RebuildViewLayerPath();
 	
-	NSView*			mView;
+	CAGradientLayer*	mFillColorLayer;
+	CAShapeLayer*		mFillShapeLayer;
+	CAShapeLayer*		mStrokeShapeLayer;
+	NSView*				mView;
 };
 
 }

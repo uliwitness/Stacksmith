@@ -17,6 +17,7 @@
 #define __Stacksmith__CVisiblePart__
 
 #include "CPart.h"
+#include "CCanvas.h"
 
 
 namespace Carlson {
@@ -103,6 +104,7 @@ public:
 	int						GetBevelWidth()					{ return mBevelWidth; };
 	virtual void			SetBevelAngle( int a )			{ mBevelAngle = a; IncrementChangeCount(); };
 	int						GetBevelAngle()					{ return mBevelAngle; };
+	std::vector<CColor>		GetGradientColors()	const		{ return mGradientColors; }
 	
 	virtual void			SetToolTip( const std::string& inToolTip )	{ mToolTip = inToolTip; IncrementChangeCount(); };
 	virtual std::string		GetToolTip()								{ return mToolTip; };
@@ -154,6 +156,7 @@ protected:
 	int				mLineWidth;
 	int				mBevelWidth;
 	int				mBevelAngle;
+	std::vector<CColor> mGradientColors;
 	std::string		mToolTip;
 };
 

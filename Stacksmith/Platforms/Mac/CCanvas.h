@@ -120,12 +120,14 @@ public:
 	CColor( const CColor& inColor );
 	~CColor();
 	
-	TColorComponent	GetRed();
-	TColorComponent	GetGreen();
-	TColorComponent	GetBlue();
-	TColorComponent	GetAlpha();
+	TColorComponent	GetRed() const;
+	TColorComponent	GetGreen() const;
+	TColorComponent	GetBlue() const;
+	TColorComponent	GetAlpha() const;
 	
 	CColor& operator =( const CColor& inColor );
+	
+	WILDNSColorPtr	GetMacColor() const	{ return mColor; }
 	
 protected:
 	WILDNSColorPtr		mColor;

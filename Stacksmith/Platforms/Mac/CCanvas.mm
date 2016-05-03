@@ -15,7 +15,7 @@ using namespace Carlson;
 
 CColor::CColor( TColorComponent red, TColorComponent green, TColorComponent blue, TColorComponent alpha )
 {
-	mColor = [[NSColor colorWithCalibratedRed: red green: green blue: blue alpha: alpha] retain];
+	mColor = [[NSColor colorWithCalibratedRed: red / 65535.0 green: green / 65535.0 blue: blue / 65535.0 alpha: alpha / 65535.0] retain];
 }
 
 
@@ -37,27 +37,27 @@ CColor::~CColor()
 }
 
 
-TColorComponent	CColor::GetRed()
+TColorComponent	CColor::GetRed() const
 {
-	return [mColor redComponent];
+	return [mColor redComponent] * 65535.0;
 }
 
 
-TColorComponent	CColor::GetGreen()
+TColorComponent	CColor::GetGreen() const
 {
-	return [mColor greenComponent];
+	return [mColor greenComponent] * 65535.0;
 }
 
 
-TColorComponent	CColor::GetBlue()
+TColorComponent	CColor::GetBlue() const
 {
-	return [mColor blueComponent];
+	return [mColor blueComponent] * 65535.0;
 }
 
 
-TColorComponent	CColor::GetAlpha()
+TColorComponent	CColor::GetAlpha() const
 {
-	return [mColor alphaComponent];
+	return [mColor alphaComponent] * 65535.0;
 }
 
 

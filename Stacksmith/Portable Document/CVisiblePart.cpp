@@ -64,6 +64,19 @@ void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mLineWidth = CTinyXMLUtils::GetIntNamed( inElement, "lineWidth", 1 );
 	mBevelWidth = CTinyXMLUtils::GetIntNamed( inElement, "bevelWidth", 1 );
 	mBevelAngle = CTinyXMLUtils::GetIntNamed( inElement, "bevelAngle", 315 );
+	
+	tinyxml2::XMLElement *	gradientColorsElem = inElement->FirstChildElement( "gradientColors" );
+	tinyxml2::XMLElement *	colorElem = gradientColorsElem ? gradientColorsElem->FirstChildElement( "color" ) : NULL;
+	while( colorElem )
+	{
+		TColorComponent	red = colorElem ? CTinyXMLUtils::GetIntNamed( colorElem, "red", 65535 ) : 65535;
+		TColorComponent	green = colorElem ? CTinyXMLUtils::GetIntNamed( colorElem, "green", 65535 ) : 65535;
+		TColorComponent	blue = colorElem ? CTinyXMLUtils::GetIntNamed( colorElem, "blue", 65535 ) : 65535;
+		TColorComponent	alpha = colorElem ? CTinyXMLUtils::GetIntNamed( colorElem, "alpha", 65535 ) : 65535;
+		mGradientColors.push_back( CColor(red,green,blue,alpha) );
+		
+		colorElem = colorElem->NextSiblingElement("color");
+	}
 	CTinyXMLUtils::GetStringNamed( inElement, "toolTip", mToolTip );
 }
 
@@ -146,9 +159,35 @@ void	CVisiblePart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	elem->SetText(mBevelAngle);
 	inElement->InsertEndChild(elem);
 
-	elem = document->NewElement("toolTip");
-	elem->SetText( mToolTip.c_str() );
-	inElement->InsertEndChild(elem);
+	if( GetGradientColors().size() > 0 )
+	{
+		tinyxml2::XMLElement	*	listElem = document->NewElement("gradientColors");
+		for( const CColor& currColor : GetGradientColors() )
+		{
+			elem = document->NewElement("color");
+			subElem = document->NewElement("red");
+			subElem->SetText( currColor.GetRed() );
+			elem->InsertEndChild(subElem);
+			subElem = document->NewElement("green");
+			subElem->SetText( currColor.GetGreen() );
+			elem->InsertEndChild(subElem);
+			subElem = document->NewElement("blue");
+			subElem->SetText( currColor.GetBlue() );
+			elem->InsertEndChild(subElem);
+			subElem = document->NewElement("alpha");
+			subElem->SetText( currColor.GetAlpha() );
+			elem->InsertEndChild(subElem);
+			listElem->InsertEndChild(elem);
+		}
+		inElement->InsertEndChild(listElem);
+	}
+	
+	if( mToolTip.size() != 0 )
+	{
+		elem = document->NewElement("toolTip");
+		elem->SetText( mToolTip.c_str() );
+		inElement->InsertEndChild(elem);
+	}
 }
 
 

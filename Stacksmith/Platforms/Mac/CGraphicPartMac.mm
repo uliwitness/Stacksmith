@@ -16,6 +16,14 @@
 using namespace Carlson;
 
 
+CGraphicPartMac::~CGraphicPartMac()
+{
+	[mFillShapeLayer release];
+	[mStrokeShapeLayer release];
+	[mFillColorLayer release];
+}
+
+
 void	CGraphicPartMac::CreateViewIn( NSView* inSuperView )
 {
 	if( mView && mView.superview == inSuperView )
@@ -34,19 +42,29 @@ void	CGraphicPartMac::CreateViewIn( NSView* inSuperView )
 	if( mStyle == EGraphicStyleRectangle || mStyle == EGraphicStyleRoundrect )
 	{
 		mView.wantsLayer = YES;
-		mView.layer.borderColor = [NSColor colorWithCalibratedRed: GetLineColorRed() / 65535.0 green: GetLineColorGreen() / 65535.0 blue: GetLineColorBlue() / 65535.0 alpha: GetLineColorAlpha() / 65535.0].CGColor;
-		mView.layer.borderWidth = GetLineWidth();
-		mView.layer.backgroundColor = [NSColor colorWithCalibratedRed: GetFillColorRed() / 65535.0 green: GetFillColorGreen() / 65535.0 blue: GetFillColorBlue() / 65535.0 alpha: GetFillColorAlpha() / 65535.0].CGColor;
+		[mFillShapeLayer release];
+		mFillShapeLayer = [(CAShapeLayer*)[CALayer layer] retain];
+		mView.layer = mFillShapeLayer;
+		mFillShapeLayer.borderColor = [NSColor colorWithCalibratedRed: GetLineColorRed() / 65535.0 green: GetLineColorGreen() / 65535.0 blue: GetLineColorBlue() / 65535.0 alpha: GetLineColorAlpha() / 65535.0].CGColor;
+		mFillShapeLayer.borderWidth = GetLineWidth();
+		mFillShapeLayer.backgroundColor = [NSColor colorWithCalibratedRed: GetFillColorRed() / 65535.0 green: GetFillColorGreen() / 65535.0 blue: GetFillColorBlue() / 65535.0 alpha: GetFillColorAlpha() / 65535.0].CGColor;
 		if( mStyle == EGraphicStyleRoundrect )
-			mView.layer.cornerRadius = 8.0;
+			mFillShapeLayer.cornerRadius = 8.0;
 	}
 	else
 	{
-		CAShapeLayer	*	theLayer = [CAShapeLayer layer];
-		mView.layer = theLayer;
-		theLayer.fillColor = [NSColor colorWithCalibratedRed: GetFillColorRed() / 65535.0 green: GetFillColorGreen() / 65535.0 blue: GetFillColorBlue() / 65535.0 alpha: GetFillColorAlpha() / 65535.0].CGColor;
-		theLayer.strokeColor = [NSColor colorWithCalibratedRed: GetLineColorRed() / 65535.0 green: GetLineColorGreen() / 65535.0 blue: GetLineColorBlue() / 65535.0 alpha: GetLineColorAlpha() / 65535.0].CGColor;
-		theLayer.lineWidth = GetLineWidth();
+		[mFillShapeLayer release];
+		mFillShapeLayer = [[CAShapeLayer layer] retain];
+		mFillShapeLayer.fillColor = [NSColor colorWithCalibratedRed: GetFillColorRed() / 65535.0 green: GetFillColorGreen() / 65535.0 blue: GetFillColorBlue() / 65535.0 alpha: GetFillColorAlpha() / 65535.0].CGColor;
+		mFillShapeLayer.strokeColor = [NSColor colorWithCalibratedRed: GetLineColorRed() / 65535.0 green: GetLineColorGreen() / 65535.0 blue: GetLineColorBlue() / 65535.0 alpha: GetLineColorAlpha() / 65535.0].CGColor;
+		mFillShapeLayer.lineWidth = GetLineWidth();
+		if( mFillColorLayer )
+		{
+			mFillColorLayer.mask = mFillShapeLayer;
+			mView.layer = mFillColorLayer;
+		}
+		else
+			mView.layer = mFillShapeLayer;
 		RebuildViewLayerPath();
 		mView.wantsLayer = YES;
 	}
@@ -62,12 +80,10 @@ void	CGraphicPartMac::CreateViewIn( NSView* inSuperView )
 void	CGraphicPartMac::RebuildViewLayerPath()
 {
 	NSRect	localBox = NSMakeRect(0, 0, GetRight() -GetLeft(), GetBottom() -GetTop());
-	CAShapeLayer	*	theLayer = (CAShapeLayer*)mView.layer;
 	if( mStyle == EGraphicStyleOval )
 	{
 		localBox = NSInsetRect( localBox, mLineWidth, mLineWidth );
-		theLayer.path = (CGPathRef)[(id) CGPathCreateWithEllipseInRect( localBox, NULL) autorelease];
-		theLayer.sublayers = @[];
+		mFillShapeLayer.path = (CGPathRef)[(id) CGPathCreateWithEllipseInRect( localBox, NULL) autorelease];
 	}
 	else if( mStyle == EGraphicStyleBezierPath || mStyle == EGraphicStyleLine )
 	{
@@ -92,23 +108,41 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 		
 		if( mStyle == EGraphicStyleLine )
 		{
-			theLayer.path = [fillPath CGPathForStroke];
-			theLayer.contentsGravity = kCAGravityResize;
-			theLayer.sublayers = @[];
+			mFillShapeLayer.path = [fillPath CGPathForStroke];
+			mFillShapeLayer.contentsGravity = kCAGravityResize;
+			mFillShapeLayer.sublayers = @[];
 		}
 		else
 		{
-			theLayer.path = [fillPath CGPathForFill];
-			theLayer.contentsGravity = kCAGravityResize;
+			mFillShapeLayer.path = [fillPath CGPathForFill];
+			mFillShapeLayer.contentsGravity = kCAGravityResize;
 			
-			CAShapeLayer	*	strokeLayer = (CAShapeLayer*)theLayer.sublayers.lastObject;
-			if( !strokeLayer )
+			if( GetGradientColors().size() > 0 )
 			{
-				strokeLayer = [CAShapeLayer layer];
-				[mView.layer addSublayer: strokeLayer];
+				if( !mFillColorLayer )
+				{
+					mFillColorLayer = [[CAGradientLayer layer] retain];
+					NSMutableArray*	colors = [NSMutableArray array];
+					for( const CColor& currColor : GetGradientColors() )
+						[colors addObject: (id)currColor.GetMacColor().CGColor];
+					mFillColorLayer.colors = colors;
+					mFillColorLayer.startPoint = CGPointMake(0, 0.5);
+					mFillColorLayer.endPoint = CGPointMake(1, 0.5);
+				}
+				mFillColorLayer.mask = mFillShapeLayer;
+				mView.layer = mFillColorLayer;
 			}
-			strokeLayer.path = [fillPath CGPathForStroke];
-			strokeLayer.contentsGravity = kCAGravityResize;
+			else
+				mView.layer = mFillShapeLayer;
+			
+			if( !mStrokeShapeLayer )
+			{
+				mStrokeShapeLayer = [[CAShapeLayer layer] retain];
+			}
+			[mView.layer addSublayer: mStrokeShapeLayer];
+			
+			mStrokeShapeLayer.path = [fillPath CGPathForStroke];
+			mStrokeShapeLayer.contentsGravity = kCAGravityResize;
 		}
 	}
 }
@@ -159,11 +193,11 @@ void	CGraphicPartMac::SetFillColor( int r, int g, int b, int a )
 
 	if( mStyle == EGraphicStyleRectangle || mStyle == EGraphicStyleRoundrect )
 	{
-		[mView.layer setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+		[(CALayer*)mFillShapeLayer setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
 	else
 	{
-		[(CAShapeLayer*)mView.layer setFillColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+		[mFillShapeLayer setFillColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
 }
 
@@ -174,21 +208,15 @@ void	CGraphicPartMac::SetLineColor( int r, int g, int b, int a )
 
 	if( mStyle == EGraphicStyleRectangle || mStyle == EGraphicStyleRoundrect )
 	{
-		[mView.layer setBorderColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+		[(CALayer*)mFillShapeLayer setBorderColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
-	#if !NO_VARYING_LINE_WIDTHS
 	else if( mStyle == EGraphicStyleBezierPath )
 	{
-		CAShapeLayer*	theLayer = (CAShapeLayer*)mView.layer;
-		if( theLayer.sublayers.count > 0 )
-			theLayer = (CAShapeLayer*)theLayer.sublayers[0];
-		
-		[theLayer setFillColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+		[(mStrokeShapeLayer ?: mFillShapeLayer) setFillColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
-	#endif
 	else
 	{
-		[(CAShapeLayer*)mView.layer setStrokeColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
+		[mFillShapeLayer setStrokeColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0].CGColor];
 	}
 }
 
@@ -197,11 +225,11 @@ void	CGraphicPartMac::SetShadowColor( int r, int g, int b, int a )
 {
 	CGraphicPart::SetShadowColor( r, g, b, a );
 	
-	CAShapeLayer*	theLayer = (CAShapeLayer*)mView.layer;
+	CAShapeLayer*	theLayer = mFillShapeLayer;
 	if( theLayer.sublayers.count > 0 && mFillColorAlpha == 0 )
 	{
 		[theLayer setShadowOpacity: 0.0];
-		theLayer = (CAShapeLayer*)theLayer.sublayers[0];
+		theLayer = mStrokeShapeLayer;
 	}
 	
 	[theLayer setShadowOpacity: (a == 0) ? 0.0 : 1.0];
@@ -216,11 +244,11 @@ void	CGraphicPartMac::SetShadowOffset( double w, double h )
 {
 	CGraphicPart::SetShadowOffset( w, h );
 	
-	CAShapeLayer*	theLayer = (CAShapeLayer*)mView.layer;
+	CAShapeLayer*	theLayer = mFillShapeLayer;
 	if( theLayer.sublayers.count > 0 && mFillColorAlpha == 0 )
 	{
 		[theLayer setShadowOpacity: 0.0];
-		theLayer = (CAShapeLayer*)theLayer.sublayers[0];
+		theLayer = mStrokeShapeLayer;
 	}
 	
 	[theLayer setShadowOffset: NSMakeSize(w,-h)];
@@ -231,11 +259,11 @@ void	CGraphicPartMac::SetShadowBlurRadius( double r )
 {
 	CGraphicPart::SetShadowBlurRadius( r );
 	
-	CAShapeLayer*	theLayer = (CAShapeLayer*)mView.layer;
+	CAShapeLayer*	theLayer = mFillShapeLayer;
 	if( theLayer.sublayers.count > 0 && mFillColorAlpha == 0 )
 	{
 		[theLayer setShadowOpacity: 0.0];
-		theLayer = (CAShapeLayer*)theLayer.sublayers[0];
+		theLayer = mStrokeShapeLayer;
 	}
 	
 	[theLayer setShadowRadius: r];
@@ -247,15 +275,13 @@ void	CGraphicPartMac::SetLineWidth( int w )
 	CGraphicPart::SetLineWidth( w );
 	
 	if( mStyle == EGraphicStyleRectangle || mStyle == EGraphicStyleRoundrect )
-		[mView.layer setBorderWidth: w];
-	#if !NO_VARYING_LINE_WIDTHS
+		[mFillShapeLayer setBorderWidth: w];
 	else if( mStyle == EGraphicStyleBezierPath )
 	{
 		RebuildViewLayerPath();
 	}
-	#endif
 	else
-		[(CAShapeLayer*)mView.layer setLineWidth: w];
+		[mFillShapeLayer setLineWidth: w];
 }
 
 
