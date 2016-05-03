@@ -266,6 +266,8 @@
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		55469F0C1A9A784E0072A721 /* EditTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55469F0B1A9A784E0072A721 /* EditTextTool.tiff */; };
+		554CC83C1CD7EC0200D5D7B6 /* CCanvas.mm in Sources */ = {isa = PBXBuildFile; fileRef = 554CC83A1CD7EC0200D5D7B6 /* CCanvas.mm */; };
+		554CC8471CD8033B00D5D7B6 /* CImageCanvas.mm in Sources */ = {isa = PBXBuildFile; fileRef = 554CC8451CD8033B00D5D7B6 /* CImageCanvas.mm */; };
 		554DBABC1A9B362300130864 /* MessageBoxIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 554DBAB91A9B362300130864 /* MessageBoxIcon.tiff */; };
 		554DBABD1A9B362300130864 /* MessageWatcherIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 554DBABA1A9B362300130864 /* MessageWatcherIcon.tiff */; };
 		554DBABE1A9B362300130864 /* StackCanvasIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 554DBABB1A9B362300130864 /* StackCanvasIcon.icns */; };
@@ -892,6 +894,10 @@
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
 		55469F0B1A9A784E0072A721 /* EditTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = EditTextTool.tiff; path = Resources/EditTextTool.tiff; sourceTree = "<group>"; };
+		554CC83A1CD7EC0200D5D7B6 /* CCanvas.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CCanvas.mm; path = Platforms/Mac/CCanvas.mm; sourceTree = "<group>"; };
+		554CC83B1CD7EC0200D5D7B6 /* CCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCanvas.h; path = Platforms/Mac/CCanvas.h; sourceTree = "<group>"; };
+		554CC8451CD8033B00D5D7B6 /* CImageCanvas.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CImageCanvas.mm; path = Platforms/Mac/CImageCanvas.mm; sourceTree = "<group>"; };
+		554CC8461CD8033B00D5D7B6 /* CImageCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CImageCanvas.h; path = Platforms/Mac/CImageCanvas.h; sourceTree = "<group>"; };
 		554DBAB91A9B362300130864 /* MessageBoxIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = MessageBoxIcon.tiff; path = Resources/MessageBoxIcon.tiff; sourceTree = "<group>"; };
 		554DBABA1A9B362300130864 /* MessageWatcherIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = MessageWatcherIcon.tiff; path = Resources/MessageWatcherIcon.tiff; sourceTree = "<group>"; };
 		554DBABB1A9B362300130864 /* StackCanvasIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = StackCanvasIcon.icns; path = Resources/StackCanvasIcon.icns; sourceTree = "<group>"; };
@@ -1444,6 +1450,10 @@
 				559331BB18DB06190061CC37 /* CMediaCache.mm */,
 				55612A5C1ABB880C006C0730 /* CUndoStack.h */,
 				55612A5B1ABB880C006C0730 /* CUndoStack.mm */,
+				554CC83B1CD7EC0200D5D7B6 /* CCanvas.h */,
+				554CC83A1CD7EC0200D5D7B6 /* CCanvas.mm */,
+				554CC8461CD8033B00D5D7B6 /* CImageCanvas.h */,
+				554CC8451CD8033B00D5D7B6 /* CImageCanvas.mm */,
 			);
 			name = "OS abstraction";
 			sourceTree = "<group>";
@@ -2638,6 +2648,7 @@
 				559BA9A518AB85D100760273 /* CCursor.mm in Sources */,
 				55039FD3136D5CCF0082E32E /* ULIPaintTempLineTool.m in Sources */,
 				55039FD4136D5CCF0082E32E /* ULIPaintTempOvalTool.m in Sources */,
+				554CC83C1CD7EC0200D5D7B6 /* CCanvas.mm in Sources */,
 				55039FD5136D5CCF0082E32E /* ULIPaintTempRectangleTool.m in Sources */,
 				559BA9CE18B1027500760273 /* WILDStackInfoViewController.mm in Sources */,
 				55039FD6136D5CCF0082E32E /* ULIPaintTempRoundrectTool.m in Sources */,
@@ -2670,6 +2681,7 @@
 				555E53B818953843001487C1 /* NSObject+JCSKVOWithBlocks.m in Sources */,
 				55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */,
 				553F680C157D3292009E0517 /* CSetChunkPropertyNode.cpp in Sources */,
+				554CC8471CD8033B00D5D7B6 /* CImageCanvas.mm in Sources */,
 				55CD60BF187510F0002450E2 /* CWebBrowserPart.cpp in Sources */,
 				55EB03571AA3563D004AFB46 /* CGraphicPartMac.mm in Sources */,
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,

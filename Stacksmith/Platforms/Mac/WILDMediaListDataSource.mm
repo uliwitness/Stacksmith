@@ -10,6 +10,7 @@
 #import "CStack.h"
 #import "CDocument.h"
 #import <Quartz/Quartz.h>
+#include "CImageCanvas.h"
 
 
 using namespace Carlson;
@@ -17,12 +18,12 @@ using namespace Carlson;
 
 @interface WILDSimpleImageBrowserItem : NSObject // IKImageBrowserItem
 {
-	NSImage*					mImage;
 	NSString*					mName;
 	NSString*					mFileName;
 	BOOL						mIsBuiltIn;
 	ObjectID					mID;
 	WILDMediaListDataSource*	mOwner;
+	CImageCanvas				mImage;
 }
 
 @property (retain) NSImage*							image;
@@ -37,17 +38,24 @@ using namespace Carlson;
 
 @implementation WILDSimpleImageBrowserItem
 
-@synthesize image = mImage;
 @synthesize name = mName;
 @synthesize filename = mFileName;
 @synthesize pictureID = mID;
 @synthesize owner = mOwner;
 @synthesize isBuiltIn = mIsBuiltIn;
 
+-(id)	init
+{
+	self = [super init];
+	if( self )
+	{
+		mImage = CImageCanvas( [NSImage imageNamed: @"NoIcon"] );
+	}
+	return self;
+}
+
 -(void)	dealloc
 {
-	[mImage release];
-	mImage = nil;
 	[mName release];
 	mName = nil;
 	[mFileName release];
@@ -67,16 +75,29 @@ using namespace Carlson;
 	return IKImageBrowserNSImageRepresentationType;
 }
 
+
+-(NSImage*)	image
+{
+	return mImage.GetMacImage();
+}
+
+
+-(void)	setImage:(NSImage *)inImage
+{
+	mImage = CImageCanvas( inImage );
+}
+
+
 -(id) imageRepresentation
 {
-	if( !mImage )
+	if( !mImage.IsValid() )
 	{
 		std::string	imagePath = [mOwner document]->GetMediaCache().GetMediaURLByIDOfType( mID, mOwner.mediaType );
 		if( imagePath.size() != 0 )
-			mImage = [[NSImage alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithUTF8String: imagePath.c_str()]]];
+			mImage = CImageCanvas(imagePath);
 	}
 	
-	return mImage;
+	return mImage.GetMacImage();
 }
 
 -(NSString *) imageTitle
@@ -152,7 +173,6 @@ using namespace Carlson;
 			sibi.name = @"No Pattern";
 		sibi.filename = nil;
 		sibi.pictureID = 0;
-		sibi.image = [NSImage imageNamed: @"NoIcon"];
 		sibi.owner = self;
 		[mIcons addObject: sibi];
 
