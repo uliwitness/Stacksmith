@@ -54,7 +54,7 @@ public:
 	
 	void				LoadFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
 	bool				Save();
-	bool				CreateAtURL( const std::string& inURL );
+	bool				CreateAtURL( const std::string& inURL, const std::string inNameForUser = "" );
 	void				SaveThumbnailsForOpenStacks();
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
@@ -65,7 +65,7 @@ public:
 	CStack*				GetStackWithID( ObjectID inID );
 	size_t				GetNumStacks()				{ return mStacks.size(); };
 	CStack*				GetStackByName( const char* inName );
-	CStack*				AddNewStack();
+	CStack*				AddNewStack( std::string inNameForUser = "" );
 	bool				DeleteStack( CStack* inStack );
 	CMediaCache&		GetMediaCache()				{ return mMediaCache; };
 	

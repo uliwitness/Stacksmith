@@ -342,7 +342,7 @@ void	WILDScheduleResumeOfScript( void )
 					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
 					CDocumentMac*	theDoc = new CDocumentMac();
 					CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
-					theDoc->CreateAtURL( [newFileURL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String );
+					theDoc->CreateAtURL( [newFileURL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String, [[newFileURL lastPathComponent] stringByDeletingPathExtension].UTF8String );
 					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
 					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
 					
@@ -356,6 +356,19 @@ void	WILDScheduleResumeOfScript( void )
 						[[NSApplication sharedApplication] presentError: err];
 						return;
 					}
+					NSString*		stackName = [[newPath lastPathComponent] stringByDeletingPathExtension];
+					NSArray	*		filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: newPath error: NULL];
+					for( NSString* currName in filenames )
+					{
+						if( [currName hasPrefix: @"."] )
+							continue;
+						if( [currName hasSuffix: @".xml"] )
+						{
+							NSString*	templatePath = [newPath stringByAppendingPathComponent: currName];
+							[self replacePlaceholdersInTemplateFileAtPath: templatePath withStackName: stackName];
+						}
+					}
+
 					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
 					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
 					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
@@ -367,6 +380,27 @@ void	WILDScheduleResumeOfScript( void )
 		};
 		[mTemplatePickerWindow showWindow: self];
 	}
+}
+
+
+-(NSString*)	htmlSafeString: (NSString*)inStr
+{
+	NSMutableString*	safeString = [[inStr mutableCopy] autorelease];
+	[safeString replaceOccurrencesOfString: @"&" withString: @"&nbsp;" options: 0 range: NSMakeRange(0,safeString.length)];
+	[safeString replaceOccurrencesOfString: @"<" withString: @"&lt;" options: 0 range: NSMakeRange(0,safeString.length)];
+	[safeString replaceOccurrencesOfString: @">" withString: @"&gt;" options: 0 range: NSMakeRange(0,safeString.length)];
+	return safeString;
+}
+
+
+-(void)	replacePlaceholdersInTemplateFileAtPath: (NSString*)filePath withStackName: (NSString*)stackName
+{
+	
+	NSMutableString* fileContents = [NSMutableString stringWithContentsOfFile: filePath encoding: NSUTF8StringEncoding error: NULL];
+	[fileContents replaceOccurrencesOfString: @"%%STACKNAME" withString: [self htmlSafeString: stackName] options: 0 range: NSMakeRange(0,fileContents.length)];
+	[fileContents replaceOccurrencesOfString: @"%%USERNAME" withString: [self htmlSafeString: NSFullUserName()] options: 0 range: NSMakeRange(0,fileContents.length)];
+	[fileContents replaceOccurrencesOfString: @"%%SHORTUSERNAME" withString: [self htmlSafeString: NSUserName()] options: 0 range: NSMakeRange(0,fileContents.length)];
+	[fileContents writeToFile: filePath atomically: YES encoding: NSUTF8StringEncoding error: NULL];
 }
 
 

@@ -301,7 +301,7 @@ bool	CDocument::Save()
 }
 
 
-bool	CDocument::CreateAtURL( const std::string& inURL )
+bool	CDocument::CreateAtURL( const std::string& inURL, const std::string inNameForUser )
 {
 	size_t			slashOffset = inURL.rfind( '/' );
 	if( slashOffset == std::string::npos )
@@ -318,7 +318,7 @@ bool	CDocument::CreateAtURL( const std::string& inURL )
 	
 	mLoaded = true;
 
-	AddNewStack();
+	AddNewStack( inNameForUser );
 	
 	return Save();
 }
@@ -396,7 +396,7 @@ CStack*	CDocument::GetStackByName( const char *inName )
 }
 
 
-CStack*	CDocument::AddNewStack()
+CStack*	CDocument::AddNewStack( std::string inStackName )
 {
 	ObjectID			stackID = GetUniqueIDForStack();
 	std::stringstream	fileName;
@@ -406,10 +406,14 @@ CStack*	CDocument::AddNewStack()
 		stackURL.append( 1, '/' );
 	stackURL.append( fileName.str() );
 	
-	std::stringstream	nameForUser;
-	nameForUser << "Stack " << mStacks.size() +1;
+	if( inStackName.size() == 0 )
+	{
+		std::stringstream	nameForUser;
+		nameForUser << "Stack " << mStacks.size() +1;
+		inStackName = nameForUser.str();
+	}
 	
-	CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, nameForUser.str(), fileName.str(), this );
+	CStack	*	theStack = NewStackWithURLIDNameForDocument( stackURL, stackID, inStackName, fileName.str(), this );
 	theStack->AddNewCardWithBackground();
 	theStack->SetLoaded(true);
 	mStacks.push_back( theStack );
