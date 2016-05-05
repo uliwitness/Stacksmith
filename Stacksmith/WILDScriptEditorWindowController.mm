@@ -327,39 +327,42 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 			break;
 		fprintf( stderr, "Error: %s\n", currErrMsg );
 	}
-	LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
-	LEODisplayInfoTableApplyToText( displayInfo, mContainer->GetScript().c_str(), mContainer->GetScript().length(), &theText, &theTextLen, &cursorPos, &cursorEndPos );
-	NSString	*	formattedText = [[[NSString alloc] initWithBytesNoCopy: theText length: theTextLen encoding: NSUTF8StringEncoding freeWhenDone: YES] autorelease];
-	[mTextView setString: formattedText];
-	NSRange		newSelRange = NSMakeRange(cursorPos,cursorEndPos -cursorPos);
-	if( (newSelRange.location + newSelRange.length) > formattedText.length )
+	if( parseTree )
 	{
-		newSelRange.location = formattedText.length;
-		newSelRange.length = 0;
-	}
-	[mTextView setSelectedRange: newSelRange];
+		LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
+		LEODisplayInfoTableApplyToText( displayInfo, mContainer->GetScript().c_str(), mContainer->GetScript().length(), &theText, &theTextLen, &cursorPos, &cursorEndPos );
+		NSString	*	formattedText = [[[NSString alloc] initWithBytesNoCopy: theText length: theTextLen encoding: NSUTF8StringEncoding freeWhenDone: YES] autorelease];
+		[mTextView setString: formattedText];
+		NSRange		newSelRange = NSMakeRange(cursorPos,cursorEndPos -cursorPos);
+		if( (newSelRange.location + newSelRange.length) > formattedText.length )
+		{
+			newSelRange.location = formattedText.length;
+			newSelRange.length = 0;
+		}
+		[mTextView setSelectedRange: newSelRange];
 	
-	[mPopUpButton removeAllItems];
-	const char*	theName = "";
+		[mPopUpButton removeAllItems];
+		const char*	theName = "";
+		
+		bool		isCommand = false;
+		for( x = 0; theName != NULL; x++ )
+		{
+			LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isCommand );
+			if( !theName ) break;
+			if( theName[0] == ':' )	// Skip any fake internal handlers we add.
+				continue;
+			NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
+			[theItem setImage: [NSImage imageNamed: isCommand ? @"CommandHandlerIcon" : @"FunctionHandlerIcon"]];
+			[theItem setRepresentedObject: @(theLine)];
+		}
+		LEOCleanUpDisplayInfoTable( displayInfo );
+		LEOCleanUpParseTree( parseTree );
 	
-	bool		isCommand = false;
-	for( x = 0; theName != NULL; x++ )
-	{
-		LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isCommand );
-		if( !theName ) break;
-		if( theName[0] == ':' )	// Skip any fake internal handlers we add.
-			continue;
-		NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
-		[theItem setImage: [NSImage imageNamed: isCommand ? @"CommandHandlerIcon" : @"FunctionHandlerIcon"]];
-		[theItem setRepresentedObject: @(theLine)];
-	}
-	LEOCleanUpDisplayInfoTable( displayInfo );
-	LEOCleanUpParseTree( parseTree );
-	
-	if( x == 0 )	// We added no items?
-	{
-		[mPopUpButton addItemWithTitle: @"None"];
-		[mPopUpButton setEnabled: NO];
+		if( x == 0 )	// We added no items?
+		{
+			[mPopUpButton addItemWithTitle: @"None"];
+			[mPopUpButton setEnabled: NO];
+		}
 	}
 }
 

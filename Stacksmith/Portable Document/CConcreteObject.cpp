@@ -490,15 +490,30 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 	bool	hadScript = (mScriptObject != NULL );
 	if( !hadScript )
 		GetScriptObject( [](const char*,size_t,size_t,CScriptableObject*){} );
+	LEOContextGroup*	theGroup = GetScriptContextGroupObject();
 	
 	std::vector<CAddHandlerListEntry>	handlers;
 	
+	CAddHandlerListEntry	userHandlerGroupHeader;
+	userHandlerGroupHeader.mType = EHandlerEntryGroupHeader;
+	userHandlerGroupHeader.mHandlerName = "User-defined Handlers";
+	
+	// List all handlers for which this script contains documentation:
+	for( CAddHandlerListEntry& currHandlerNote : mHandlerNotes )
+	{
+		if( currHandlerNote.mHandlerID == kLEOHandlerIDINVALID )
+		{
+			currHandlerNote.mHandlerID = LEOContextGroupHandlerIDForHandlerName( theGroup, currHandlerNote.mHandlerName.c_str() );
+		}
+		handlers.push_back(currHandlerNote);
+	}
+	
+	// List all system-defined handlers that make sense for this object:
 	for( size_t x = 0; sMasterHandlerList[x].mType != EHandlerEntry_LAST; x++ )
 	{
 		CAddHandlerListEntry&	currHandler = sMasterHandlerList[x];
 		if( currHandler.mHandlerID == kLEOHandlerIDINVALID )	// First time iterating master table? Initialize some fields.
 		{
-			LEOContextGroup*	theGroup = GetScriptContextGroupObject();
 			currHandler.mHandlerID = LEOContextGroupHandlerIDForHandlerName( theGroup, currHandler.mHandlerName.c_str() );
 			
 			if( currHandler.mHandlerTemplate.empty() )
@@ -512,7 +527,7 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 		// Only show handlers that are either usable from all object types, or specific to this one:
 		if( currHandler.mTiedToType.empty() || ShowHandlersForObjectType(currHandler.mTiedToType) )
 		{
-			// Don't add handlers we already have:
+			// Mark up handlers we already have:
 			if( currHandler.mType == EHandlerEntryCommand )
 			{
 				bool	alreadyInScript = (mScriptObject != NULL && LEOScriptFindCommandHandlerWithID( mScriptObject, currHandler.mHandlerID ) != NULL);
@@ -535,7 +550,7 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 			}
 		}
 	}
-
+	
 	if( handlers.back().mType == EHandlerEntryGroupHeader )	// Last group was empty? Remove it.
 	{
 		handlers.pop_back();
@@ -569,6 +584,23 @@ LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, GetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, GetScriptContextGroupObject(), parseTree, fileID );
 			
+			mHandlerNotes.erase( mHandlerNotes.begin(),mHandlerNotes.end());
+			const char*	outHandlerName = NULL;
+			const char*	outNote = NULL;
+			size_t		x = 0;
+			while( true )
+			{
+				LEOParserGetHandlerNoteAtIndex( x++, &outHandlerName, &outNote );
+				if( !outHandlerName )
+					break;
+				CAddHandlerListEntry	handlerDocs;
+				handlerDocs.mType = EHandlerEntry_LAST;
+				handlerDocs.mHandlerName = outHandlerName;
+				handlerDocs.mHandlerDescription = outNote;
+				handlerDocs.mHandlerID = kLEOHandlerIDINVALID;
+				handlerDocs.mFlags = EHandlerListEntryAlreadyPresentFlag;
+				mHandlerNotes.push_back( handlerDocs );
+			}
 			for( size_t currLine : mBreakpointLines )
 			{
 				LEOScriptAddBreakpointAtLine( mScriptObject, currLine );

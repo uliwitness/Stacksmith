@@ -43,14 +43,15 @@ typedef enum { EHandlerEntryCommand, EHandlerEntryFunction, EHandlerEntryGroupHe
 	like a timer's action. */
 struct CAddHandlerListEntry
 {
-	THandlerListEntryType		mType;					// For EHandlerEntryGroupHeader, only mHandlerName is valid, containing the name of the new section.
-	LEOHandlerID				mHandlerID;				// Handler ID corresponding to mHandlerName.
-	std::string					mHandlerName;			// Name of the handler to be added.
-	std::string					mHandlerDescription;	// Longer description for this handler, for presenting to user in addition to the actual name.
-	std::string					mHandlerTemplate;		// A dummy example of this handler that can be appended to a script to create a new handler of this type.
-	std::string					mTiedToType;			// Part type this handler/section should only be shown for.
-	THandlerListEntryFlags		mFlags;
+	THandlerListEntryType		mType;					//!< For EHandlerEntryGroupHeader, only mHandlerName is valid, containing the name of the new section.
+	LEOHandlerID				mHandlerID;				//!< Handler ID corresponding to mHandlerName.
+	std::string					mHandlerName;			//!< Name of the handler to be added.
+	std::string					mHandlerDescription;	//!< Longer description for this handler, for presenting to user in addition to the actual name.
+	std::string					mHandlerTemplate;		//!< A dummy example of this handler that can be appended to a script to create a new handler of this type.
+	std::string					mTiedToType;			//!< Part type this handler/section should only be shown for.
+	THandlerListEntryFlags		mFlags;					//!< Additional information about this handler.
 };
+
 
 /*!
 	This is an object that can be addressed from a script (it's a CScriptableObject) but
@@ -106,16 +107,17 @@ protected:
 	virtual void		DumpUserProperties( size_t inIndent );
 
 // ivars:
-	std::string							mName;			// Name of this object for referring to it from scripts.
-	std::string							mScript;		// Uncompiled text of this object's script.
-	CMap<std::string>					mUserProperties;
-	std::vector<size_t>					mBreakpointLines;	// Lines on which the user set breakpoints using the UI that should be applied to the script when compiled.
+	std::string							mName;				//!< Name of this object for referring to it from scripts.
+	std::string							mScript;			//!< Uncompiled text of this object's script.
+	CMap<std::string>					mUserProperties;	//!< User-defined properties that we persist to the stack & which scripters can access.
+	std::vector<size_t>					mBreakpointLines;	//!< Lines on which the user set breakpoints using the UI that should be applied to the script when compiled.
 	
-	struct LEOScript *					mScriptObject;		// Compiled script, lazily created/recreated on changes.
-	LEOObjectID							mIDForScripts;		// The ID Leonie uses to refer to this object. This is *not* the ID as Hammer understands it.
-	LEOObjectSeed						mSeedForScripts;	// The seed value to go with mIDForScripts.
-	struct LEOValueObject				mValueForScripts;	// A LEOValue so scripts can reference us (see mIDForScripts).
-	CDocument *							mDocument;			// Document that contains us.
+	struct LEOScript *					mScriptObject;		//!< Compiled script, lazily created/recreated on changes.
+	LEOObjectID							mIDForScripts;		//!< The ID Leonie uses to refer to this object. This is *not* the ID as Hammer understands it.
+	LEOObjectSeed						mSeedForScripts;	//!< The seed value to go with mIDForScripts.
+	struct LEOValueObject				mValueForScripts;	//!< A LEOValue so scripts can reference us (see mIDForScripts).
+	CDocument *							mDocument;			//!< Document that contains us.
+	std::vector<CAddHandlerListEntry>	mHandlerNotes;		//!< Documentation comments parsed from the script.
 };
 
 typedef CRefCountedObjectRef<CConcreteObject>	CConcreteObjectRef;
