@@ -861,6 +861,31 @@ void	CScriptableObject::ContextCompletedProc( LEOContext *ctx )
 }
 
 
+bool	CScriptableObject::HasOrInheritsMessageHandler( const char* inMsgName )
+{
+	LEOScript*	theScript = GetScriptObject(NULL);
+	if( theScript )
+	{
+		LEOContextGroup*	contextGroup = GetScriptContextGroupObject();
+		LEOHandlerID		handlerID = LEOContextGroupHandlerIDForHandlerName( contextGroup, inMsgName );
+		if( handlerID != kLEOHandlerIDINVALID )
+		{
+			LEOHandler*	foundHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
+		
+			if( foundHandler != NULL )
+				return true;
+		}
+	}
+	
+	CScriptableObject	* parent = GetParentObject();
+	if( !parent )
+		return false;
+	
+	return parent->HasOrInheritsMessageHandler( inMsgName );
+}
+
+
+
 bool	CScriptableObject::HasMessageHandler( const char* inMsgName )
 {
 	LEOScript*	theScript = GetScriptObject(NULL);

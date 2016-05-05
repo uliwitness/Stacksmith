@@ -107,7 +107,8 @@ public:
 	
 	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... );
     virtual void                ContextCompleted( LEOContext* ctx )                 {};
-	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message (e.g. to not ask the OS for mouseMoved events unless actually implemented).
+	virtual bool				HasOrInheritsMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message, or someone up the hierarchy does that this object will forward it to (e.g. to not ask the OS for mouseMoved events unless actually implemented).
+	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message.
 
 	virtual CStack*				GetStack()										{ return NULL; };
 	virtual CScriptableObject*	GetParentObject()								{ return NULL; };
