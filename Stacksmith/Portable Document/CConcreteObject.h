@@ -28,7 +28,14 @@ namespace Carlson {
 class CDocument;
 
 
-enum EHandlerListEntryType { kHandlerEntryCommand, kHandlerEntryFunction, kHandlerEntryGroupHeader, kHandlerEntry_LAST };
+enum
+{
+	EHandlerListEntryAlreadyPresentFlag = (1 << 0)
+};
+typedef uint32_t	THandlerListEntryFlags;
+
+
+typedef enum { EHandlerEntryCommand, EHandlerEntryFunction, EHandlerEntryGroupHeader, EHandlerEntry_LAST } THandlerListEntryType;
 
 /*! List entries for our "add handler" popup's entries.
 	This only includes handlers that make sense for this
@@ -36,12 +43,13 @@ enum EHandlerListEntryType { kHandlerEntryCommand, kHandlerEntryFunction, kHandl
 	like a timer's action. */
 struct CAddHandlerListEntry
 {
-	enum EHandlerListEntryType	mType;				// Only mHandlerName is valid, containing the name of the new section.
+	THandlerListEntryType		mType;					// For EHandlerEntryGroupHeader, only mHandlerName is valid, containing the name of the new section.
 	LEOHandlerID				mHandlerID;				// Handler ID corresponding to mHandlerName.
 	std::string					mHandlerName;			// Name of the handler to be added.
 	std::string					mHandlerDescription;	// Longer description for this handler, for presenting to user in addition to the actual name.
 	std::string					mHandlerTemplate;		// A dummy example of this handler that can be appended to a script to create a new handler of this type.
 	std::string					mTiedToType;			// Part type this handler/section should only be shown for.
+	THandlerListEntryFlags		mFlags;
 };
 
 /*!

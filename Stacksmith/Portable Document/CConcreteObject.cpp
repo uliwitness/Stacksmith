@@ -69,381 +69,431 @@ void	CConcreteObject::SetBreakpointLines( const std::vector<size_t>& inBreakpoin
 static CAddHandlerListEntry	sMasterHandlerList[] =
 {
 	{
-		kHandlerEntryGroupHeader,
+		EHandlerEntryGroupHeader,
 		0,
 		"Card Events",
 		"",
 		"",
-		"card"
+		"card",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"openCard",
 		"The current card just changed, prepare this card for the user.",
 		"",
-		"card"
+		"card",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"closeCard",
 		"The current card is about to change, last chance for clean-up.",
 		"",
-		"card"
+		"card",
+		0
 	},
 	{
-		kHandlerEntryGroupHeader,
+		EHandlerEntryGroupHeader,
 		0,
 		"Stack Events",
 		"",
 		"",
-		"card"
+		"card",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"closeStack",
 		"The current stack is about to change, last chance for clean-up.",
 		"",
-		"card"
+		"card",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"openStack",
 		"The current stack just changed, prepare this stack for the user.",
 		"",
-		"card"
+		"card",
+		0
 	},
 	{
-		kHandlerEntryGroupHeader,
+		EHandlerEntryGroupHeader,
 		0,
 		"Mouse Events",
 		"",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseUp",
 		"React to a click in the card window.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDown",
 		"React to the mouse being held down somewhere in the card window.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDrag",
 		"The mouse is being held down and moving while over an object in the card window.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseUpOutside",
 		"A click was started somewhere in the card window but not released inside that object.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseUpInLink",
 		"A link in a text field was clicked. ",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDoubleClick",
 		"A double click in the card window completed.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseEnter",
 		"The mouse arrow has moved onto an object in the card window.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseMove",
 		"The mouse arrow has moved while over an object in the card window.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseLeave",
 		"The mouse arrow has moved off an object in the card window after being inside.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryGroupHeader,
+		EHandlerEntryGroupHeader,
 		0,
 		"Movie Player Events",
 		"",
 		"",
-		"moviePlayer"
+		"moviePlayer",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"playMovie",
 		"Playback of a movie player has started.",
 		"",
-		"moviePlayer"
+		"moviePlayer",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"stopMovie",
 		"Playback of a movie player has stopped.",
 		"",
-		"moviePlayer"
+		"moviePlayer",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"timeChange",
 		"The playback time of a movie player was changed (e.g. by dragging the playhead).",
 		"",
-		"moviePlayer"
+		"moviePlayer",
+		0
 	},
 	{
-		kHandlerEntryGroupHeader,
+		EHandlerEntryGroupHeader,
 		0,
 		"Field Events",
 		"",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"selectionChange",
 		"The text selection in a text field has changed.",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseUpInLink",
 		"A link in a text field was clicked. ",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"openField",
 		"A text field has been given keyboard focus.",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"closeField",
 		"A text field is about to lose keyboard focus.",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"textChange",
 		"The text of a field was changed, by typing, pasteing or some other means.",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"keyDown",
 		"A key was pressed on the keyboard.",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"tabKey",
 		"The tab key was pressed on the keyboard.",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"arrowKey",
 		"One of the arrow keys was pressed on the keyboard.",
 		"",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"forwardDeleteKey",
 		"The Forward Delete key was pressed (This key is usually between the alphabet keys and the number block, above the arrow keys, or what happens when you hold the fn key and press the backspace key on compact keyboards).",
 		"\n\non forwardDeleteKey modifier1,modifier2,modifier3,modifier4\n\t\nend forwardDeleteKey",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"backspaceKey",
 		"The Backspace (often called \"delete\") key was pressed (This key is usually right above the return key).",
 		"\n\non backspaceKey modifier1,modifier2,modifier3,modifier4\n\t\nend backspaceKey",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"functionKey",
 		"One of the function keys was pressed on the keyboard.",
 		"\n\non functionKey fKeyNumber,modifier1,modifier2,modifier3,modifier4\n\t\nend functionKey",
-		"field"
+		"field",
+		0
 	},
 	{
-		kHandlerEntryGroupHeader,
+		EHandlerEntryGroupHeader,
 		0,
 		"Web Browser Events",
 		"",
 		"",
-		"browser"
+		"browser",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"loadPage",
 		"The web page has finished loading.",
 		"",
-		"browser"
+		"browser",
+		0
 	},
 	{
-		kHandlerEntryGroupHeader,
+		EHandlerEntryGroupHeader,
 		0,
 		"Editor Events",
 		"",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDownWhilePeeking",
 		"The mouse has been clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDragWhilePeeking",
 		"The mouse has been held and moved while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseUpWhilePeeking",
 		"The mouse has been clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDoubleDownWhilePeeking",
 		"The mouse has been double-clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDoubleClickWhilePeeking",
 		"The mouse has been double-clicked while &quot;peeking&quot; (holding Option and Command to see the object outlines on the current card).",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDownWhileEditing",
 		"The mouse has been clicked while the pointer tool is active.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDragWhileEditing",
 		"The mouse has been held and moved while the pointer tool is active.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseUpWhileEditing",
 		"The mouse has been clicked while the pointer tool is active.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDoubleDownWhileEditing",
 		"The mouse has been double-clicked while the pointer tool is active.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntryCommand,
+		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
 		"mouseDoubleClickWhileEditing",
 		"The mouse has been double-clicked while the pointer tool is active.",
 		"",
-		""
+		"",
+		0
 	},
 	{
-		kHandlerEntry_LAST,
+		EHandlerEntry_LAST,
 		0,
 		"",
 		"",
 		"",
-		""
+		"",
+		0
 	}
 };
 
 
 std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 {
+	bool	hadScript = (mScriptObject != NULL );
+	if( !hadScript )
+		GetScriptObject( [](const char*,size_t,size_t,CScriptableObject*){} );
+	
 	std::vector<CAddHandlerListEntry>	handlers;
 	
-	for( size_t x = 0; sMasterHandlerList[x].mType != kHandlerEntry_LAST; x++ )
+	for( size_t x = 0; sMasterHandlerList[x].mType != EHandlerEntry_LAST; x++ )
 	{
 		CAddHandlerListEntry&	currHandler = sMasterHandlerList[x];
 		if( currHandler.mHandlerID == kLEOHandlerIDINVALID )	// First time iterating master table? Initialize some fields.
@@ -454,7 +504,7 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 			if( currHandler.mHandlerTemplate.empty() )
 			{
 				std::stringstream	strstr;
-				strstr << "\n\non " << currHandler.mHandlerName << "\n\t\nend " << currHandler.mHandlerName;
+				strstr << "on " << currHandler.mHandlerName << "\n\t\nend " << currHandler.mHandlerName;
 				currHandler.mHandlerTemplate = strstr.str();
 			}
 		}
@@ -463,17 +513,21 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 		if( currHandler.mTiedToType.empty() || ShowHandlersForObjectType(currHandler.mTiedToType) )
 		{
 			// Don't add handlers we already have:
-			if( currHandler.mType == kHandlerEntryCommand && (mScriptObject == NULL || LEOScriptFindCommandHandlerWithID( mScriptObject, currHandler.mHandlerID ) == NULL) )
+			if( currHandler.mType == EHandlerEntryCommand )
 			{
+				bool	alreadyInScript = (mScriptObject != NULL && LEOScriptFindCommandHandlerWithID( mScriptObject, currHandler.mHandlerID ) != NULL);
 				handlers.push_back( currHandler );
+				handlers.back().mFlags |= alreadyInScript ? EHandlerListEntryAlreadyPresentFlag : 0;
 			}
-			else if( currHandler.mType == kHandlerEntryFunction && (mScriptObject == NULL || LEOScriptFindFunctionHandlerWithID( mScriptObject, currHandler.mHandlerID ) == NULL) )
+			else if( currHandler.mType == EHandlerEntryFunction )
 			{
+				bool	alreadyInScript = (mScriptObject != NULL && LEOScriptFindCommandHandlerWithID( mScriptObject, currHandler.mHandlerID ) != NULL);
 				handlers.push_back( currHandler );
+				handlers.back().mFlags |= alreadyInScript ? EHandlerListEntryAlreadyPresentFlag : 0;
 			}
-			else if( currHandler.mType == kHandlerEntryGroupHeader )
+			else if( currHandler.mType == EHandlerEntryGroupHeader )
 			{
-				if( !handlers.empty() && handlers.back().mType == kHandlerEntryGroupHeader )	// Previous group was empty? Remove it.
+				if( !handlers.empty() && handlers.back().mType == EHandlerEntryGroupHeader )	// Previous group was empty? Remove it.
 				{
 					handlers.pop_back();
 				}
@@ -482,9 +536,15 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 		}
 	}
 
-	if( handlers.back().mType == kHandlerEntryGroupHeader )	// Last group was empty? Remove it.
+	if( handlers.back().mType == EHandlerEntryGroupHeader )	// Last group was empty? Remove it.
 	{
 		handlers.pop_back();
+	}
+	
+	if( !hadScript )	// Get rid of script we compiled, so user sees parse errors when it's next parsed.
+	{
+		LEOScriptRelease( mScriptObject );
+		mScriptObject = NULL;
 	}
 	
 	return handlers;

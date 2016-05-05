@@ -160,11 +160,11 @@ std::vector<CAddHandlerListEntry>	CTimerPart::GetAddHandlerList()
 	{
 		CAddHandlerListEntry	currSeparator;
 		currSeparator.mHandlerName = "Timer Messages";
-		currSeparator.mType = kHandlerEntryGroupHeader;
+		currSeparator.mType = EHandlerEntryGroupHeader;
 		handlers.push_back( currSeparator );
 		
 		CAddHandlerListEntry	currHandler;
-		currSeparator.mType = kHandlerEntryCommand;
+		currSeparator.mType = EHandlerEntryCommand;
 		currHandler.mHandlerName = mMessage;
 		currHandler.mHandlerID = timerMessageHandlerID;
 		currHandler.mHandlerDescription = "The message that this timer will periodically send to itself.";

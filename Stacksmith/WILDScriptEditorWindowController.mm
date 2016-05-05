@@ -204,7 +204,9 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	const CAddHandlerListEntry&	currHandler = mHandlerList[row];
 	if( currHandler.mHandlerDescription.size() > 0 )
 	{
-		NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithUTF8String: currHandler.mHandlerName.c_str()] attributes: @{ NSFontAttributeName: [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]] }] autorelease];
+		NSFont	*	nameFont = (currHandler.mFlags & EHandlerListEntryAlreadyPresentFlag) ? [NSFont systemFontOfSize: [NSFont smallSystemFontSize]] : [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]];
+		NSColor	*	nameColor = (currHandler.mFlags & EHandlerListEntryAlreadyPresentFlag) ? [NSColor grayColor] : [NSColor blackColor];
+		NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithUTF8String: currHandler.mHandlerName.c_str()] attributes: @{ NSFontAttributeName: nameFont, NSForegroundColorAttributeName: nameColor }] autorelease];
 		NSMutableAttributedString	*	greyDesc = [[[NSMutableAttributedString alloc] initWithString: [@" • " stringByAppendingString: [NSString stringWithUTF8String: currHandler.mHandlerDescription.c_str()]] attributes: @{ NSFontAttributeName: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]], NSForegroundColorAttributeName: [NSColor grayColor] }] autorelease];
 		
 		[attrStr appendAttributedString: greyDesc];
@@ -221,7 +223,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 -(BOOL)	tableView: (NSTableView *)tableView isGroupRow: (NSInteger)row
 {
 	const CAddHandlerListEntry&	currHandler = mHandlerList[row];
-	return currHandler.mType == kHandlerEntryGroupHeader;
+	return currHandler.mType == EHandlerEntryGroupHeader;
 }
 
 
@@ -230,7 +232,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	if( self.handlersTable.selectedRow == -1 )
 		return;	// Nothing selected, nothing to do.
 	const CAddHandlerListEntry&	currHandler = mHandlerList[self.handlersTable.selectedRow];
-	if( currHandler.mType == kHandlerEntryGroupHeader )	// Don't let the user insert handlers named after headlines.
+	if( currHandler.mType == EHandlerEntryGroupHeader )	// Don't let the user insert handlers named after headlines.
 		return;
 	
 	[self.delegate scriptEditorAddHandlersPopupDidSelectHandler: currHandler];
@@ -449,7 +451,10 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	else
 	{
 		NSString	*	str = [NSString stringWithUTF8String: inHandler.mHandlerTemplate.c_str()];
-		NSMutableAttributedString	*	attrStr = [[NSMutableAttributedString alloc] initWithString: str attributes: mSyntaxController.defaultTextAttributes];
+		NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString: str attributes: mSyntaxController.defaultTextAttributes] autorelease];
+		NSMutableAttributedString	*	newlinesAttrStr = [[[NSMutableAttributedString alloc] initWithString: @"\n\n" attributes: mSyntaxController.defaultTextAttributes] autorelease];
+		if( mTextView.textStorage.length > 0 )
+			[attrStr insertAttributedString: newlinesAttrStr atIndex: 0];
 		[mTextView.textStorage appendAttributedString: attrStr];
 		
 		[self reformatText];
