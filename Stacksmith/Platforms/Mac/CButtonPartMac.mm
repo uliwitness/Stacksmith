@@ -133,6 +133,11 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 			if( foundIndex != mSelectedLines.end() )
 				[(NSPopUpButton*)mView selectItemAtIndex: (*foundIndex) -1];
 		}
+		
+		if( (mLineColorAlpha == 0 || mLineWidth == 0) && mFillColorAlpha == 0 )
+		{
+			[(NSPopUpButton*)mView setBordered: NO];
+		}
 	}
 	else
 	{
@@ -254,6 +259,10 @@ void	CButtonPartMac::SetFillColor( int r, int g, int b, int a )
 		[((WILDButtonCell*)mView.cell) setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
         [mView setNeedsDisplay: YES];
 	}
+	else if( mButtonStyle == EButtonStylePopUp )
+	{
+		[(WILDPopUpButtonView*)mView setBordered: ((mLineColorAlpha != 0 && mLineWidth != 0) || mFillColorAlpha != 0)];
+	}
 }
 
 
@@ -265,6 +274,10 @@ void	CButtonPartMac::SetLineColor( int r, int g, int b, int a )
 	{
 		[((WILDButtonCell*)mView.cell) setLineColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
         [mView setNeedsDisplay: YES];
+	}
+	else if( mButtonStyle == EButtonStylePopUp )
+	{
+		[(WILDPopUpButtonView*)mView setBordered: ((mLineColorAlpha != 0 && mLineWidth != 0) || mFillColorAlpha != 0)];
 	}
 }
 
