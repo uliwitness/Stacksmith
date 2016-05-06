@@ -78,7 +78,7 @@ void	CMessageBox::ContextCompleted( LEOContext *ctx )
 {
     if( ctx && ctx->stackEndPtr != ctx->stack && ctx->stack[0].base.isa != NULL )
     {
-        LEODebugPrintContext(ctx);
+        //LEODebugPrintContext(ctx);
         char		returnValBuf[1024] = {0};
         if( (ctx->flags & kLEOContextKeepRunning) == 0 )
             SetResultText( ctx->errMsg );
