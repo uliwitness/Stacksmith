@@ -102,14 +102,21 @@ LEOScript*	CMessageBox::GetScriptObject( std::function<void(const char*,size_t,s
 		LEOParseTree*	parseTree = LEOParseTreeCreateForCommandOrExpressionFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
 		if( LEOParserGetLastErrorMessage() == NULL )
 		{
-			if( mIDForScripts == kLEOObjectIDINVALID )	// +++ FIXME! What if we're run for a new context group?
+			LEOContextGroup*	contextGroup = GetScriptContextGroupObject();
+			if( contextGroup != mLastContextGroup )
 			{
+				if( mLastContextGroup )
+				{
+					LEOContextGroupRecycleObjectID( mLastContextGroup, mIDForScripts );
+					LEOContextGroupRelease(mLastContextGroup);
+				}
+				mLastContextGroup = LEOContextGroupRetain( contextGroup );
 				InitScriptableObjectValue( &mValueForScripts, this, kLEOInvalidateReferences, NULL );
-				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( GetScriptContextGroupObject(), &mValueForScripts );
-				mSeedForScripts = LEOContextGroupGetSeedForObjectID( GetScriptContextGroupObject(), mIDForScripts );
+				mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( mLastContextGroup, &mValueForScripts );
+				mSeedForScripts = LEOContextGroupGetSeedForObjectID( mLastContextGroup, mIDForScripts );
 			}
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, GetParentScript );
-			LEOScriptCompileAndAddParseTree( mScriptObject, GetScriptContextGroupObject(), parseTree, fileID );
+			LEOScriptCompileAndAddParseTree( mScriptObject, mLastContextGroup, parseTree, fileID );
 			
 #if REMOTE_DEBUGGER
 			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );

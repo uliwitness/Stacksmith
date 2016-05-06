@@ -21,7 +21,7 @@ public:
 	static void			SetSharedInstance( CMessageBox* inMsg );	// Call once at startup
 	static CMessageBox*	GetSharedInstance();
 	
-	CMessageBox() : mScriptObject(NULL), mIDForScripts(kLEOObjectIDINVALID), mSeedForScripts(0) {};
+	CMessageBox() : mScriptObject(NULL), mIDForScripts(kLEOObjectIDINVALID), mSeedForScripts(0), mLastContextGroup(NULL) {};
 	
 	virtual void		Show()	{};
 	virtual void		Run();
@@ -46,6 +46,7 @@ protected:
 	LEOObjectID				mIDForScripts;		// The ID Leonie uses to refer to this object.
 	LEOObjectSeed			mSeedForScripts;	// The seed value to go with mIDForScripts.
 	struct LEOValueObject	mValueForScripts;	// A LEOValue so scripts can reference us (see mIDForScripts).
+	LEOContextGroup*		mLastContextGroup;	//!< The context group relative to which mSeedForScripts/mIDForScripts are.
 	std::string				mResultText;		// If you type an expression into the message box, its result will go here.
 };
 
