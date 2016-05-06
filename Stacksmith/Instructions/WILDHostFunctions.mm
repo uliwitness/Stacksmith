@@ -1050,7 +1050,7 @@ void	WILDPushScreenInstruction( LEOContext* inContext )
 	NSRect screenFrame = currScreen.frame;
 	LEOAddRectArrayEntryToRoot( &currScreenArray, "rectangle", NSMinX(screenFrame), NSMinY(screenFrame), NSMaxX(screenFrame), NSMaxY(screenFrame), inContext );
 	NSRect screenVisibleFrame = currScreen.visibleFrame;
-	LEOAddRectArrayEntryToRoot( &currScreenArray, "visibleRectangle", NSMinX(screenVisibleFrame), (LEOInteger) NSMinY(screenVisibleFrame), NSMaxX(screenVisibleFrame), NSMaxY(screenVisibleFrame), inContext );
+	LEOAddRectArrayEntryToRoot( &currScreenArray, "working rectangle", NSMinX(screenVisibleFrame), (LEOInteger) NSMinY(screenVisibleFrame), NSMaxX(screenVisibleFrame), NSMaxY(screenVisibleFrame), inContext );
 	LEOAddIntegerArrayEntryToRoot( &currScreenArray, "scaleFactor", currScreen.backingScaleFactor, kLEOUnitNone, inContext );
 	
 	LEOCleanUpValue( screenIndexValue, kLEOInvalidateReferences, inContext );
