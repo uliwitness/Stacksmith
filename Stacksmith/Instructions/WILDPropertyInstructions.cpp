@@ -28,6 +28,8 @@
 void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext );
 void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext );
 void	LEOPushMeInstruction( LEOContext* inContext );
+void	LEOHasPropertyInstruction( LEOContext* inContext );
+void	LEOIHavePropertyInstruction( LEOContext* inContext );
 
 
 using namespace Carlson;
@@ -161,9 +163,81 @@ void	LEOPushMeInstruction( LEOContext* inContext )
 }
 
 
+/*!
+	This instruction pushes a boolean that indicates whether the given object
+	has the given property.
+	
+	(HAS_PROPERTY_INSTR)
+*/
+
+void	LEOHasPropertyInstruction( LEOContext* inContext )
+{
+	LEODebugPrintContext( inContext );
+	
+	LEOValuePtr			theValue = inContext->stackEndPtr -1;
+	LEOValuePtr			meValue = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
+	if( !meValue )
+	{
+		LEOCleanUpStackToPtr( inContext, inContext->stack -2 );
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't find target object." );
+		return;
+	}
+	char				buf[200] = {};
+	const char*			propName = LEOGetValueAsString( theValue, buf, sizeof(buf), inContext );
+	LEOValue			propValue = {};
+	CScriptableObject*	me = (CScriptableObject*)meValue->object.object;
+	
+	bool	hasProp = me->GetPropertyNamed( propName, 0, 0, inContext, &propValue );
+	if( hasProp )
+		LEOCleanUpValue( &propValue, kLEOInvalidateReferences, inContext );
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stack -1 );
+	LEOCleanUpValue( meValue, kLEOInvalidateReferences, inContext );
+	LEOInitBooleanValue( meValue, hasProp, kLEOInvalidateReferences, inContext );
+	
+	inContext->currentInstruction++;
+}
+
+
+/*
+	This instruction pushes a boolean that indicates whether the object
+	owning the script has the given property.
+ 
+	(I_HAVE_PROPERTY_INSTRUCTION)
+*/
+
+void	LEOIHavePropertyInstruction( LEOContext* inContext )
+{
+	LEODebugPrintContext( inContext );
+	
+	LEOScript		*	myScript = LEOContextPeekCurrentScript( inContext );
+	LEOValuePtr			meValue = (LEOValuePtr) LEOContextGroupGetPointerForObjectIDAndSeed( inContext->group, myScript->ownerObject, myScript->ownerObjectSeed );
+	CScriptableObject*	me = (CScriptableObject*)meValue->object.object;
+	
+	LEOValuePtr		theValue = inContext->stackEndPtr -1;
+	char			buf[200] = {};
+	const char*	propName = LEOGetValueAsString( theValue, buf, sizeof(buf), inContext );
+	LEOValue		propValue = {};
+	
+	bool			hasProp = me->GetPropertyNamed( propName, 0, 0, inContext, &propValue );
+	if( hasProp )
+		LEOCleanUpValue( &propValue, kLEOInvalidateReferences, inContext );
+	
+	LEOCleanUpValue( theValue, kLEOInvalidateReferences, inContext );
+	LEOInitBooleanValue( theValue, hasProp, kLEOInvalidateReferences, inContext );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(Property,LEO_NUMBER_OF_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOPushPropertyOfObjectInstruction)
 LEOINSTR(LEOSetPropertyOfObjectInstruction)
-LEOINSTR_LAST(LEOPushMeInstruction)
+LEOINSTR(LEOPushMeInstruction)
+LEOINSTR(LEOHasPropertyInstruction)
+LEOINSTR_LAST(LEOIHavePropertyInstruction)
 
 
