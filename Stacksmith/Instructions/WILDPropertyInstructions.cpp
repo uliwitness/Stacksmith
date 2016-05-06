@@ -172,13 +172,11 @@ void	LEOPushMeInstruction( LEOContext* inContext )
 
 void	LEOHasPropertyInstruction( LEOContext* inContext )
 {
-	LEODebugPrintContext( inContext );
-	
 	LEOValuePtr			theValue = inContext->stackEndPtr -1;
 	LEOValuePtr			meValue = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
 	if( !meValue )
 	{
-		LEOCleanUpStackToPtr( inContext, inContext->stack -2 );
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 		size_t		lineNo = SIZE_T_MAX;
 		uint16_t	fileID = 0;
 		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
@@ -194,9 +192,9 @@ void	LEOHasPropertyInstruction( LEOContext* inContext )
 	if( hasProp )
 		LEOCleanUpValue( &propValue, kLEOInvalidateReferences, inContext );
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stack -1 );
-	LEOCleanUpValue( meValue, kLEOInvalidateReferences, inContext );
-	LEOInitBooleanValue( meValue, hasProp, kLEOInvalidateReferences, inContext );
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	LEOInitBooleanValue( inContext->stackEndPtr -1, hasProp, kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }
@@ -226,8 +224,8 @@ void	LEOIHavePropertyInstruction( LEOContext* inContext )
 	if( hasProp )
 		LEOCleanUpValue( &propValue, kLEOInvalidateReferences, inContext );
 	
-	LEOCleanUpValue( theValue, kLEOInvalidateReferences, inContext );
-	LEOInitBooleanValue( theValue, hasProp, kLEOInvalidateReferences, inContext );
+	LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	LEOInitBooleanValue( inContext->stackEndPtr -1, hasProp, kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }
