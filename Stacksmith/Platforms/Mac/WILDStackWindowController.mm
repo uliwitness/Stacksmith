@@ -1154,14 +1154,14 @@ using namespace Carlson;
 	mStack->SetCardHeight( newBox.size.height );
 
 	CAutoreleasePool	cppPool;
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ std::cerr << "Error while resizing window: " << errMsg << std::endl; }, "resizeWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, "resizeWindow" );
 }
 
 
 -(void)	windowDidMove: (NSNotification *)notification
 {
 	CAutoreleasePool	cppPool;
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ std::cerr << "Error while moving window: " << errMsg << std::endl; }, "moveWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while moving window: " << errMsg << std::endl; } }, "moveWindow" );
 }
 
 
