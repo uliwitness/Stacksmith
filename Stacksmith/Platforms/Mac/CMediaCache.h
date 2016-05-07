@@ -71,6 +71,7 @@ public:
 	ObjectID			GetID()	const			{ return mIconID; };
 	void				SetID( ObjectID inID )	{ mIconID = inID; };	// Used when creating new icons (e.g. by pasting).
 	const std::string	GetName() const		{ return mIconName; };
+	void				SetName( const std::string inName )		{ mIconName = inName; IncrementChangeCount(); };
 	TMediaType			GetMediaType() const{ return mMediaType; };
 	const std::string	GetFileName() const { return mFileName; };
 	int					GetHotspotLeft() const	{ return mHotspotLeft; };
@@ -131,6 +132,7 @@ public:
 	size_t				GetNumMediaOfType( TMediaType inType );
 	ObjectID			GetIDOfMediaOfTypeAtIndex( TMediaType inType, size_t inIndex );
 	std::string			GetMediaNameByIDOfType( ObjectID inID, TMediaType inType );
+	void				SetMediaNameByIDOfType( const std::string inName, ObjectID inID, TMediaType inType );
 	bool				GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType );
 	std::string			AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( ObjectID inID, TMediaType inType, const std::string& inName, const char* inSuffix, int xHotSpot = 0, int yHotSpot = 0, bool isBuiltIn = false );
 	void				GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, CImageGetterCallback completionBlock );

@@ -270,6 +270,19 @@ std::string		CMediaCache::GetMediaNameByIDOfType( ObjectID inID, TMediaType inTy
 }
 
 
+void	CMediaCache::SetMediaNameByIDOfType( const std::string inName, ObjectID inID, TMediaType inType )
+{
+	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
+	{
+		if( inID == currMedia->GetID() && inType == currMedia->GetMediaType() )
+		{
+			currMedia->SetName( inName );
+			break;
+		}
+	}
+}
+
+
 bool	CMediaCache::GetMediaIsBuiltInByIDOfType( ObjectID inID, TMediaType inType )
 {
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )

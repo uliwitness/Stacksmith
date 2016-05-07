@@ -201,6 +201,22 @@ struct CCanvasEntry
 }
 
 
+-(void)	distributedView: (UKDistributedView*)distributedView
+		   setObjectValue: (id)val
+			 forItemIndex: (NSUInteger)row;
+{
+	CCanvasEntry		currItem = items[row];
+	CConcreteObject* 	currObject = currItem.mCard ? (CConcreteObject*)currItem.mCard : (currItem.mBackground ? (CConcreteObject*)currItem.mBackground : (currItem.mStack ? (CConcreteObject*)currItem.mStack : nullptr));
+	if( currObject )
+		currObject->SetName( ((NSString*)val).UTF8String );
+	else
+	{
+		CMediaCache&	mc = self.owningDocument->GetMediaCache();
+		mc.SetMediaNameByIDOfType( ((NSString*)val).UTF8String, currItem.mMediaID, currItem.mMediaType );
+	}
+}
+
+
 -(void) distributedView: (UKDistributedView*)distributedView cellDoubleClickedAtItemIndex: (NSUInteger)item
 {
 	CStack*				currStack = items[item].mStack;
