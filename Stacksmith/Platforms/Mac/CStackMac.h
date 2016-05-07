@@ -71,6 +71,11 @@ public:
 	virtual void				SelectedPartChanged();
 	virtual void				SetCardWidth( int n );
 	virtual void				SetCardHeight( int n );
+	virtual LEOInteger			GetLeft();
+	virtual LEOInteger			GetTop();
+	virtual LEOInteger			GetRight();
+	virtual LEOInteger			GetBottom();
+	virtual void				SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b );
 	
 	virtual CUndoStack*			GetUndoStack();
 

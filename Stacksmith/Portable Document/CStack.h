@@ -130,6 +130,11 @@ public:
 	virtual void	SetCantDelete( bool n )					{ mCantDelete = n; };
 	virtual bool	GetCantModify()							{ return mCantModify; };
 	virtual void	SetCantModify( bool n )					{ mCantModify = n; };
+	virtual LEOInteger	GetLeft()							{ return 0LL; }
+	virtual LEOInteger	GetTop()							{ return 0LL; }
+	virtual LEOInteger	GetRight()							{ return mCardWidth; }			// +++ Platforms should override.
+	virtual LEOInteger	GetBottom()							{ return mCardHeight; }			// +++ Platforms should override.
+	virtual void		SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )	{}
 	virtual bool	GetEffectiveCantModify();
 	
 	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );

@@ -344,6 +344,57 @@ void	CStackMac::SetCardHeight( int n )
 }
 
 
+static NSRect	WILDFlippedScreenRect( NSRect inBox )
+{
+	NSRect		mainScreenBox = [NSScreen.screens[0] frame];
+	inBox.origin.y += inBox.size.height;						// Calc upper left of the box.
+	mainScreenBox.origin.y += mainScreenBox.size.height;		// Calc upper left of main screen.
+	inBox.origin.y = mainScreenBox.origin.y -inBox.origin.y;	// Since upper left of main screen is 0,0 in flipped, difference between those two coordinates is new Y coordinate for flipped box
+	return inBox;
+}
+
+
+LEOInteger	CStackMac::GetLeft()
+{
+	NSWindow	*	wd = mMacWindowController.window;
+	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
+	return box.origin.x;
+}
+
+
+LEOInteger	CStackMac::GetTop()
+{
+	NSWindow	*	wd = mMacWindowController.window;
+	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
+	return box.origin.y;
+}
+
+
+LEOInteger	CStackMac::GetRight()
+{
+	NSWindow	*	wd = mMacWindowController.window;
+	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
+	return NSMaxX(box);
+}
+
+
+LEOInteger	CStackMac::GetBottom()
+{
+	NSWindow	*	wd = mMacWindowController.window;
+	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
+	return NSMaxY(box);
+}
+
+
+void	CStackMac::SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )
+{
+	NSWindow	*	wd = mMacWindowController.window;
+	NSRect			box = WILDFlippedScreenRect( NSMakeRect(l,t,r-l,b-t) );
+	box = [wd frameRectForContentRect: box];
+	[wd setFrame: box display: YES];
+}
+
+
 void	CStackMac::ClearAllGuidelines( bool inTrackingDone )
 {
 	CStack::ClearAllGuidelines( inTrackingDone );

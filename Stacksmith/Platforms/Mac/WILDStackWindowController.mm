@@ -1152,6 +1152,16 @@ using namespace Carlson;
 	NSRect	newBox = [self.window contentRectForFrameRect: self.window.frame];
 	mStack->SetCardWidth( newBox.size.width );
 	mStack->SetCardHeight( newBox.size.height );
+
+	CAutoreleasePool	cppPool;
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ std::cerr << "Error while resizing window: " << errMsg << std::endl; }, "resizeWindow" );
+}
+
+
+-(void)	windowDidMove: (NSNotification *)notification
+{
+	CAutoreleasePool	cppPool;
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ std::cerr << "Error while moving window: " << errMsg << std::endl; }, "moveWindow" );
 }
 
 

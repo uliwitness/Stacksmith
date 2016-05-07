@@ -1027,6 +1027,17 @@ void	WILDPushNumberOfScreensInstruction( LEOContext* inContext )
 	inContext->currentInstruction++;
 }
 
+
+static NSRect	WILDFlippedScreenRect( NSRect inBox )
+{
+	NSRect		mainScreenBox = [NSScreen.screens[0] frame];
+	inBox.origin.y += inBox.size.height;						// Calc upper left of the box.
+	mainScreenBox.origin.y += mainScreenBox.size.height;		// Calc upper left of main screen.
+	inBox.origin.y = mainScreenBox.origin.y -inBox.origin.y;	// Since upper left of main screen is 0,0 in flipped, difference between those two coordinates is new Y coordinate for flipped box
+	return inBox;
+}
+
+
 void	WILDPushScreenInstruction( LEOContext* inContext )
 {
 	LEOUnit						outUnit = kLEOUnitNone;
@@ -1044,12 +1055,12 @@ void	WILDPushScreenInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	NSScreen * currScreen = screens[screenIndex -1];
+	NSScreen *	currScreen = screens[screenIndex -1];
 	struct LEOArrayEntry	*	currScreenArray = NULL;
 	
-	NSRect screenFrame = currScreen.frame;
+	NSRect screenFrame = WILDFlippedScreenRect(currScreen.frame);
 	LEOAddRectArrayEntryToRoot( &currScreenArray, "rectangle", NSMinX(screenFrame), NSMinY(screenFrame), NSMaxX(screenFrame), NSMaxY(screenFrame), inContext );
-	NSRect screenVisibleFrame = currScreen.visibleFrame;
+	NSRect screenVisibleFrame = WILDFlippedScreenRect(currScreen.visibleFrame);
 	LEOAddRectArrayEntryToRoot( &currScreenArray, "working rectangle", NSMinX(screenVisibleFrame), (LEOInteger) NSMinY(screenVisibleFrame), NSMaxX(screenVisibleFrame), NSMaxY(screenVisibleFrame), inContext );
 	LEOAddIntegerArrayEntryToRoot( &currScreenArray, "scaleFactor", currScreen.backingScaleFactor, kLEOUnitNone, inContext );
 	

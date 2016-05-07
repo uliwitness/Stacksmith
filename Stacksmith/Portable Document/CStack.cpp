@@ -949,6 +949,11 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 		LEOInitBooleanValue( outValue, mResizable, kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "rectangle") == 0 || strcasecmp(inPropertyName, "rect") == 0 )
+	{
+		LEOInitRectValue( outValue, GetLeft(), GetTop(), GetRight(), GetBottom(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return CConcreteObject::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
@@ -986,6 +991,16 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 		if( (inContext->flags & kLEOContextKeepRunning) != 0 )
 		{
 			SetResizable( canResize );
+		}
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "rectangle") == 0 || strcasecmp(inPropertyName, "rect") == 0 )
+	{
+		LEOInteger	l = 0, t = 0, r = 0, b = 0;
+		LEOGetValueAsRect( inValue, &l, &t, &r, &b, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) != 0 )
+		{
+			SetRect( l, t, r, b );
 		}
 		return true;
 	}
