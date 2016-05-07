@@ -99,6 +99,18 @@ struct LEOValueType	Carlson::kLeoValueTypeScriptableObject =
 	
 	GetScriptableObjectValueForKeyOfRange,
 	SetScriptableObjectValueForKeyOfRange,
+
+	LEOCantSetValueAsNativeObject,
+	
+	LEOSetStringLikeValueAsRect,
+	LEOGetStringLikeValueAsRect,
+	LEOSetStringLikeValueAsPoint,
+	LEOGetStringLikeValueAsPoint,
+	
+	LEOValueIsNotUnset,
+	
+	LEOSetStringLikeValueAsRange,
+	LEOGetStringLikeValueAsRange
 };
 
 
