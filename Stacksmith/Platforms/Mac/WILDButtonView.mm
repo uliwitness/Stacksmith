@@ -33,6 +33,8 @@ using namespace Carlson;
 -(void)	setOwningPart: (CButtonPart*)inPart
 {
 	self->owningPart = inPart;
+	self.action = @selector(buttonTriggered:);
+	self.target = self;
 	[self reloadCursor];
 }
 
@@ -180,7 +182,7 @@ using namespace Carlson;
 			[self setNeedsDisplay: YES];
 			[self.window display];
 		}
-		[[self target] performSelector: [self action] withObject: self];
+		//[[self target] performSelector: [self action] withObject: self];
 		self->owningPart->PrepareMouseUp();
 		CAutoreleasePool	cppPool;
 		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp %ld", [event buttonNumber] +1 );
@@ -258,6 +260,14 @@ using namespace Carlson;
 	}
 	
 	[super viewWillMoveToWindow: newWindow];
+}
+
+
+-(IBAction)	buttonTriggered: (id)sender
+{
+	self->owningPart->PrepareMouseUp();
+	CAutoreleasePool	cppPool;
+	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp" );
 }
 
 @end
