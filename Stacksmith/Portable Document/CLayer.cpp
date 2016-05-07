@@ -571,9 +571,40 @@ void	CLayer::SetPeeking( bool inState )
 }
 
 
-bool	CLayer::DeletePart( CPart* inPartToDelete, bool recordUndo )
+bool	CLayer::DeletePartWithID( ObjectID inID, bool recordUndo, const char* undoName )
 {
-	assert(recordUndo == false);	// +++ Implement undo!
+	CPart*	thePart = GetPartWithID( inID );
+	if( !thePart )
+		return false;
+	return DeletePart( thePart, recordUndo, undoName );
+}
+
+
+bool	CLayer::DeletePart( CPart* inPartToDelete, bool recordUndo, const char* undoName )
+{
+	if( recordUndo )
+	{
+		std::vector<CPartRef>	onePartList;
+		onePartList.push_back( inPartToDelete );
+		std::string				serializedDeletedParts = CopyParts( onePartList );
+		ObjectID				partToDeleteID = inPartToDelete->GetID();
+	
+		GetStack()->GetUndoStack()->AddUndoAction( undoName, [this,serializedDeletedParts,partToDeleteID,undoName]()
+		{
+			GetStack()->DeselectAllObjectsOnBackground();
+			GetStack()->DeselectAllObjectsOnCard();
+			std::vector<CPartRef>	newParts = PasteObject(serializedDeletedParts, EPasteAtPreviousPartIndex);
+			for( CPartRef currPart : newParts )
+			{
+				currPart->SetSelected(true);
+			}
+			
+			GetStack()->GetUndoStack()->AddUndoAction( undoName, [this,partToDeleteID]()
+			{
+				DeletePartWithID( partToDeleteID, true );
+			});
+		} );
+	}
 	
 	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
 	{
@@ -586,6 +617,8 @@ bool	CLayer::DeletePart( CPart* inPartToDelete, bool recordUndo )
 			return true;
 		}
 	}
+	
+	NumberOrOrderOfPartsChanged();
 	
 	return false;
 }

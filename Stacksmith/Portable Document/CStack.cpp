@@ -837,10 +837,12 @@ void	CStack::SetVisible( bool n )
 CPart*	CStack::NewPart( size_t inIndex )
 {
 	CAutoreleasePool	pool;
+	CLayer	*			owner = GetCurrentLayer();
+	ObjectID			theID = owner->GetUniqueIDForPart();
+	GetUndoStack()->AddUndoAction( "New Part", [owner,theID](){ owner->DeletePartWithID( theID, true, "New Part" ); } );
 	SetTool(EPointerTool);
-	CLayer	*	owner = GetCurrentLayer();
 	CPart	*	thePart = CPart::GetPartCreatorForType( CDocument::GetNewPartTypeAtIndex(inIndex).c_str() )->NewPartInOwner( owner );
-	thePart->SetID( owner->GetUniqueIDForPart() );
+	thePart->SetID( theID );
 	owner->AddPart(thePart);
 	thePart->Release();
 	thePart->IncrementChangeCount();

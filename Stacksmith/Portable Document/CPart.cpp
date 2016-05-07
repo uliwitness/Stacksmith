@@ -706,9 +706,11 @@ void	CPart::Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::funct
 		return true;
 	});
 	
-	GetUndoStack()->AddUndoAction( "Move/Resize", [this,oldL,oldT,oldR,oldB]()
+	ObjectID	myID = GetID();
+	CLayer*		owner = GetOwner();
+	GetUndoStack()->AddUndoAction( "Move/Resize", [owner,myID,oldL,oldT,oldR,oldB]()
 								  {
-									  SetRectFromUndo( oldL, oldT, oldR, oldB );
+									  owner->GetPartWithID(myID)->SetRectFromUndo( oldL, oldT, oldR, oldB );
 								  } );
 	
 	addGuidelineBlock( LLONG_MAX, EGuidelineCallbackActionClearAllDone );
@@ -720,9 +722,11 @@ void	CPart::SetRectFromUndo( LEOInteger l, LEOInteger t, LEOInteger r, LEOIntege
 {
 	LEONumber	oldL = GetLeft(), oldT = GetTop(), oldB = GetBottom(), oldR = GetRight();
 	SetRect( l, t, r, b );
-	GetUndoStack()->AddUndoAction( "Move/Resize", [this,oldL,oldT,oldR,oldB]()
+	ObjectID	myID = GetID();
+	CLayer*		owner = GetOwner();
+	GetUndoStack()->AddUndoAction( "Move/Resize", [owner,myID,oldL,oldT,oldR,oldB]()
 								  {
-									  SetRectFromUndo( oldL, oldT, oldR, oldB );
+									   owner->GetPartWithID(myID)->SetRectFromUndo( oldL, oldT, oldR, oldB );
 								  } );
 }
 
