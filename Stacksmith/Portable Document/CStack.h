@@ -148,6 +148,7 @@ public:
 	virtual void	SelectedPartChanged()						{};
 
 	virtual void	IncrementChangeCount();
+	virtual void	LayerIncrementedChangeCount( CLayer* inLayer );
 	virtual bool	GetNeedsToBeSaved();
 	
 	virtual CUndoStack*	GetUndoStack();

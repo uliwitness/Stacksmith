@@ -25,4 +25,6 @@ namespace Carlson
 
 -(IBAction)	pickMediaFile: (id)sender;
 
+-(void)	reloadData;
+
 @end

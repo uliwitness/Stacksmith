@@ -38,9 +38,13 @@ class CDocumentMac : public CDocument
 public:
 	CDocumentMac() : CDocument(), mCanvasWindowController(NULL) {};
 	
-	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
+	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) override;
 	
-	virtual void		ShowStackCanvasWindow();
+	virtual void		ShowStackCanvasWindow() override;
+	
+	virtual void		IncrementChangeCount() override;
+	virtual void		StackIncrementedChangeCount( CStack* inStack ) override;
+	virtual void		LayerIncrementedChangeCount( CLayer* inLayer ) override;
 	
 protected:
 	WILDStackCanvasWindowController*	mCanvasWindowController;

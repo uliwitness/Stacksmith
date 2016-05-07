@@ -57,6 +57,23 @@ struct CCanvasEntry
 	[self.window setRepresentedURL: theURL];
 	[self.window setTitle: theURL.lastPathComponent.stringByDeletingPathExtension];
 	
+	/* Set up a finder icon cell to use: */
+	UKFinderIconCell*		bCell = [[[UKFinderIconCell alloc] init] autorelease];
+	[bCell setImagePosition: NSImageAbove];
+	[bCell setEditable: YES];
+	[self.stackCanvasView setPrototype: bCell];
+	[self.stackCanvasView setCellSize: NSMakeSize(100.0,80.0)];
+	
+	[self reloadData];
+	
+	[self.stackCanvasView registerForDraggedTypes: [NSImage.imageTypes arrayByAddingObjectsFromArray: @[ NSFilenamesPboardType ]]];
+}
+
+
+-(void)	reloadData
+{
+	items.erase(items.begin(),items.end());
+	
 	CCanvasEntry	currItem;
 	for( size_t x = 0; x < self.owningDocument->GetNumStacks(); x++ )
 	{
@@ -85,7 +102,7 @@ struct CCanvasEntry
 				currItem.mCard->Load([](CLayer * theCd){});	// +++ Won't work with stacks on internet.
 			}
 		}
-
+		
 		currItem.mColumnIdx++;
 	}
 	
@@ -111,10 +128,10 @@ struct CCanvasEntry
 			if( currType == EMediaTypeCursor || currType == EMediaTypeIcon || currType == EMediaTypePicture || currType == EMediaTypePattern )
 			{
 				mc.GetMediaImageByIDOfType( currItem.mMediaID, currType, [self,currItemIdx]( WILDNSImagePtr inImage, int hotspotX, int hotspotY )
-				{
-					if( items[currItemIdx].mIcon == nil )
-						items[currItemIdx].SetIcon( inImage );
-				} );
+										   {
+											   if( items[currItemIdx].mIcon == nil )
+												   items[currItemIdx].SetIcon( inImage );
+										   } );
 			}
 			currItem.mRowIdx += 1;
 			currItemIdx++;
@@ -123,16 +140,7 @@ struct CCanvasEntry
 		currItem.mColumnIdx += 1;
 	}
 
-	/* Set up a finder icon cell to use: */
-	UKFinderIconCell*		bCell = [[[UKFinderIconCell alloc] init] autorelease];
-	[bCell setImagePosition: NSImageAbove];
-	[bCell setEditable: YES];
-	[self.stackCanvasView setPrototype: bCell];
-	[self.stackCanvasView setCellSize: NSMakeSize(100.0,80.0)];
-	
 	[self.stackCanvasView reloadData];
-	
-	[self.stackCanvasView registerForDraggedTypes: [NSImage.imageTypes arrayByAddingObjectsFromArray: @[ NSFilenamesPboardType ]]];
 }
 
 

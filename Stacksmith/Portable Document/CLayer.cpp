@@ -1148,6 +1148,7 @@ void	CLayer::TriggerDefaultButton()
 void	CLayer::IncrementChangeCount()
 {
 	mChangeCount++;
+	GetStack()->LayerIncrementedChangeCount( this );
 }
 
 

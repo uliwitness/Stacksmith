@@ -84,6 +84,8 @@ public:
 	LEOContextGroup*	GetScriptContextGroupObject();
 
 	virtual void		IncrementChangeCount();
+	virtual void		StackIncrementedChangeCount( CStack* inStack )	{}
+	virtual void		LayerIncrementedChangeCount( CLayer* inLayer )	{}
 	virtual bool		GetNeedsToBeSaved();
 	virtual void		CheckIfWeShouldCloseCauseLastStackClosed();
 	

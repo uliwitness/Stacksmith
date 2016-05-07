@@ -154,3 +154,26 @@ void	CDocumentMac::ShowStackCanvasWindow()
 	else
 		[mCanvasWindowController.window makeKeyAndOrderFront: nil];
 }
+
+
+void	CDocumentMac::IncrementChangeCount()
+{
+	CDocument::IncrementChangeCount();
+	if( mCanvasWindowController )
+		[mCanvasWindowController reloadData];
+}
+
+void	CDocumentMac::StackIncrementedChangeCount( CStack* inStack )
+{
+	CDocument::StackIncrementedChangeCount( inStack );
+	if( mCanvasWindowController )
+		[mCanvasWindowController reloadData];
+}
+
+
+void	CDocumentMac::LayerIncrementedChangeCount( CLayer* inLayer )
+{
+	CDocument::LayerIncrementedChangeCount( inLayer );
+	if( mCanvasWindowController )
+		[mCanvasWindowController reloadData];
+}

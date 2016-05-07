@@ -387,6 +387,7 @@ void	CStack::RemoveCard( CCard* inCard )
 		}
 	}
 	theCard->SetStack( NULL );
+	theCard->GetBackground()->RemoveCard( theCard );
 	
 	IncrementChangeCount();
 }
@@ -492,8 +493,8 @@ CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 	cardURL.append( cardName.str() );
 	CCard	*	theCard = new CCard( cardURL, theID, inBg, "", cardName.str(), this, false );
 	theCard->SetLoaded(true);
-	theCard->IncrementChangeCount();
 	InsertCardAfterCard( theCard, GetCurrentCard() );
+	theCard->IncrementChangeCount();
 	theCard->Autorelease();
 	
 	return theCard;
@@ -793,6 +794,13 @@ void	CStack::SetName( const std::string &inName )
 void	CStack::IncrementChangeCount()
 {
 	mChangeCount++;
+	GetDocument()->StackIncrementedChangeCount( this );
+}
+
+
+void	CStack::LayerIncrementedChangeCount( CLayer* inLayer )
+{
+	GetDocument()->LayerIncrementedChangeCount(inLayer);
 }
 
 
