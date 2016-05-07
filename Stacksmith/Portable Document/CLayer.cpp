@@ -618,6 +618,7 @@ bool	CLayer::DeletePart( CPart* inPartToDelete, bool recordUndo, const char* und
 		}
 	}
 	
+	IncrementChangeCount();
 	NumberOrOrderOfPartsChanged();
 	
 	return false;
@@ -653,6 +654,7 @@ void	CLayer::DeleteSelectedItem()
 		}
 	} );
 	
+	IncrementChangeCount();
 	NumberOrOrderOfPartsChanged();
 }
 
