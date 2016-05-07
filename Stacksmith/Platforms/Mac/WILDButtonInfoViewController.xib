@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDButtonInfoViewController">
@@ -178,12 +179,13 @@
                                     <popUpButton verticalHuggingPriority="750" id="60">
                                         <rect key="frame" x="77" y="204" width="76" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="65" id="61">
+                                        <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="65" id="61">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" title="OtherViews" id="62">
                                                 <items>
-                                                    <menuItem title="1" state="on" id="65"/>
+                                                    <menuItem title="None" state="on" id="65"/>
+                                                    <menuItem title="1" id="5nq-Sw-vwh"/>
                                                     <menuItem title="2" id="64"/>
                                                     <menuItem title="3" id="63"/>
                                                     <menuItem title="4" id="68"/>
@@ -425,7 +427,7 @@
                                     <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" id="168">
                                         <rect key="frame" x="172" y="9" width="28" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="359" doubleValue="89.75" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="circular" id="169"/>
+                                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="359" doubleValue="89.75" allowsTickMarkValuesOnly="YES" sliderType="circular" id="169"/>
                                         <connections>
                                             <action selector="doBevelAngleSliderChanged:" target="-2" id="171"/>
                                         </connections>
@@ -462,7 +464,7 @@
                                     <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" id="2OI-sm-0Of">
                                         <rect key="frame" x="165" y="171" width="171" height="92"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <view key="contentView">
+                                        <view key="contentView" id="YSG-oy-yWm">
                                             <rect key="frame" x="1" y="1" width="169" height="90"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -573,10 +575,10 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="1Nh-QL-drM" id="WOc-hw-X37">
-                                                    <rect key="frame" x="0.0" y="0.0" width="429" height="19"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="429" height="272"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn identifier="WILDUserPropertyNameKey" width="116" minWidth="40" maxWidth="1000" id="fY6-gZ-mkZ">
@@ -618,7 +620,7 @@
                                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ZhQ-EQ-u2U">
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ZhQ-EQ-u2U">
                                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
