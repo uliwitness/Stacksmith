@@ -294,7 +294,6 @@ struct CCanvasEntry
 	newIcon.mCard = CCardRef();
 	newIcon.mBackground = CBackgroundRef();
 	newIcon.mIndentLevel = 0;
-	[newIcon.mIcon release];
 	newIcon.SetIcon( nil );
 	
 	ObjectID		iconToSelect = 0;
@@ -310,7 +309,7 @@ struct CCanvasEntry
 		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 		
 		[theImg lockFocus];
-			NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
+			NSBitmapImageRep	*	bir = [[[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)] autorelease];
 		[theImg unlockFocus];
 		NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
 		[pngData writeToURL: imgFileURL atomically: YES];
