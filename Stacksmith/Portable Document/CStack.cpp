@@ -164,7 +164,7 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 				cardURL.append( currCdElem->Attribute("file") );
 				ObjectID		cdID = CTinyXMLUtils::GetLongLongAttributeNamed( currCdElem, "id" );
 				const char*		theName = currCdElem->Attribute("name");
-				const char*	markedAttrStr = currCdElem->Attribute("marked");
+				const char*		markedAttrStr = currCdElem->Attribute("marked");
 				bool			marked = markedAttrStr ? (strcmp("true", markedAttrStr) == 0) : false;
 				ObjectID		bgID = CTinyXMLUtils::GetLongLongAttributeNamed( currCdElem, "owner" );
 				CBackground	*	owningBackground = GetBackgroundByID( bgID );
@@ -287,6 +287,8 @@ bool	CStack::Save( const std::string& inPackagePath )
 			CTinyXMLUtils::SetLongLongAttributeNamed( cdElem, currCard->GetID(), "id");
 			cdElem->SetAttribute( "file", currCard->GetFileName().c_str() );
 			cdElem->SetAttribute( "name", currCard->GetName().c_str() );
+			if( mMarkedCards.find(currCard) != mMarkedCards.end() )
+				cdElem->SetAttribute( "marked", "true" );
 			CTinyXMLUtils::SetLongLongAttributeNamed( cdElem, currCard->GetBackground()->GetID(), "owner");
 			root->InsertEndChild( cdElem );
 			
