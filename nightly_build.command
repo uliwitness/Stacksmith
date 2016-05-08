@@ -28,4 +28,5 @@ cd ${BUILD_DEST_PATH}
 echo "$(tput setaf 6)$(tput bold)===== Compressing Build Product =====$(tput sgr0)"
 tar -czf ~/Programming/Output/Stacksmith.tgz Stacksmith.app
 
+open ~/Programming/Output/
 echo -ne '\007'
