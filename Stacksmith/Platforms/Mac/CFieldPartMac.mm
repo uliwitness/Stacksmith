@@ -94,6 +94,13 @@ using namespace Carlson;
 }
 
 
+-(void)	returnInFieldOrFinishedEditing: (id)sender
+{
+	CAutoreleasePool	pool;
+	self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "closeField" );
+}
+
+
 -(void)	textViewDidChangeTypingAttributes: (NSNotification *)notification
 {
 	if( !self.dontSendSelectionChange )
@@ -456,6 +463,11 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		mSearchField.delegate = mMacDelegate;
 		mSearchField.owningField = this;
 		mMacDelegate.searchField = mSearchField;
+		if( mAutoTab )
+		{
+			[mSearchField setTarget: mMacDelegate];
+			[mSearchField setAction: @selector(returnInFieldOrFinishedEditing:)];
+		}
 	}
 	else if( mFieldStyle == EFieldStylePopUp )
 	{
@@ -468,6 +480,11 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		((WILDComboBox*)mSearchField).usesDataSource = YES;
 		((WILDComboBox*)mSearchField).dataSource = mMacDelegate;
 		[(WILDComboBox*)mSearchField reloadData];
+		if( mAutoTab )
+		{
+			[mSearchField setTarget: mMacDelegate];
+			[mSearchField setAction: @selector(returnInFieldOrFinishedEditing:)];
+		}
 	}
 	else
 	{
@@ -478,6 +495,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		mView.owningPart = this;
 		[mTextView setDrawsBackground: NO];
 		[mTextView setBackgroundColor: [NSColor clearColor]];
+		[mTextView setFieldEditor: mAutoTab == true];
 	}
 	if( mView )
 	{
@@ -756,6 +774,22 @@ void	CFieldPartMac::SetBevelWidth( int bevel )
 void	CFieldPartMac::SetBevelAngle( int a )
 {
 	CFieldPart::SetBevelAngle( a );
+}
+
+
+void	CFieldPartMac::SetAutoTab( bool inST )
+{
+	CFieldPart::SetAutoTab(inST);
+	
+	if( mTextView )
+	{
+		[mTextView setFieldEditor: mAutoTab];
+	}
+	else if( mSearchField )
+	{
+		[mSearchField setTarget: mAutoTab ? mMacDelegate : nil];
+		[mSearchField setAction: mAutoTab ? @selector(returnInFieldOrFinishedEditing:) : NULL];
+	}
 }
 
 

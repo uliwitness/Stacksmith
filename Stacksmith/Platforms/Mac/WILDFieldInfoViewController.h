@@ -19,6 +19,7 @@
 	NSButton*			mDontSearchSwitch;
 	NSButton*			mHorizontalScrollerSwitch;
 	NSButton*			mVerticalScrollerSwitch;
+	NSButton*			mAutoTabSwitch;
 }
 
 @property (retain) IBOutlet NSPopUpButton*		stylePopUp;
@@ -30,6 +31,7 @@
 @property (retain) IBOutlet NSButton*			dontSearchSwitch;
 @property (retain) IBOutlet NSButton*			horizontalScrollerSwitch;
 @property (retain) IBOutlet NSButton*			verticalScrollerSwitch;
+@property (retain) IBOutlet NSButton*			autoTabSwitch;
 
 -(IBAction)	doAutoSelectSwitchToggled: (id)sender;
 -(IBAction)	doMultipleLinesSwitchToggled: (id)sender;
@@ -40,5 +42,6 @@
 -(IBAction)	doHorizontalScrollerSwitchToggled: (id)sender;
 -(IBAction)	doVerticalScrollerSwitchToggled: (id)sender;
 -(IBAction) doStylePopUpChanged: (id)sender;
+-(IBAction)	doAutoTabSwitchToggled: (id)sender;
 
 @end

@@ -90,6 +90,8 @@ public:
 
 	virtual bool			GetDontSearch()					{ return mDontSearch; };
 	virtual void			SetDontSearch( bool inST )		{ mDontSearch = inST; IncrementChangeCount(); };
+	virtual bool			GetAutoTab()					{ return mAutoTab; };
+	virtual void			SetAutoTab( bool inST )			{ mAutoTab = inST; IncrementChangeCount(); };
 	
 	virtual void			SetCursorID( ObjectID inID )	{ mCursorID = inID; IncrementChangeCount(); };
 	virtual ObjectID		GetCursorID()					{ return mCursorID; };

@@ -29,6 +29,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 @synthesize dontSearchSwitch = mDontSearchSwitch;
 @synthesize horizontalScrollerSwitch = mHorizontalScrollerSwitch;
 @synthesize verticalScrollerSwitch = mVerticalScrollerSwitch;
+@synthesize autoTabSwitch = mAutoTabSwitch;
 
 -(void)	dealloc
 {
@@ -41,6 +42,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	DESTROY_DEALLOC(mDontSearchSwitch);
 	DESTROY_DEALLOC(mHorizontalScrollerSwitch);
 	DESTROY_DEALLOC(mVerticalScrollerSwitch);
+	DESTROY_DEALLOC(mAutoTabSwitch);
 	
 	[super dealloc];
 }
@@ -66,6 +68,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 	[mDontSearchSwitch setState: ((CFieldPart*)part)->GetDontSearch()];
 	[mHorizontalScrollerSwitch setState: ((CFieldPart*)part)->GetHasHorizontalScroller()];
 	[mVerticalScrollerSwitch setState: ((CFieldPart*)part)->GetHasVerticalScroller()];
+	[mAutoTabSwitch setState: ((CFieldPart*)part)->GetAutoTab()];
 }
 
 
@@ -120,6 +123,12 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 -(IBAction) doStylePopUpChanged:(id)sender
 {
 	((CFieldPart*)part)->SetStyle( (TFieldStyle) [[sStylesInMenuOrder objectAtIndex: [mStylePopUp indexOfSelectedItem]] intValue] );
+}
+
+
+-(IBAction)	doAutoTabSwitchToggled: (id)sender
+{
+	((CFieldPart*)part)->SetAutoTab( [mAutoTabSwitch state] == NSOnState );
 }
 
 @end
