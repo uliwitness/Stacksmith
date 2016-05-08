@@ -75,6 +75,7 @@ public:
 	CCard*			AddNewCard();
 	bool			DeleteCard( CCard* inCard );	//!< May implicitly delete card's background if it was the only card with that background.
 	virtual void	MarkedStateChangedOfCard( CCard* inCard );
+	void			SetMarkedOfAllCards( bool inState );
 	
 	void			AddBackground( CBackground* inBackground );	//!< Add at end.
 	void			RemoveBackground( CBackground* inBg );

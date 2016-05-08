@@ -52,6 +52,7 @@ enum
 	WILD_WAIT_INSTR,
 	WILD_MOVE_INSTR,
 	WILD_CHOOSE_INSTR,
+	WILD_MARK_INSTR,
 	
 	WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS
 };
@@ -63,3 +64,11 @@ extern size_t						kFirstStacksmithHostCommandInstruction;
 
 
 extern struct THostCommandEntry	gStacksmithHostCommands[];
+
+
+enum {
+	WILDMarkModeClearMark = 0,			// For readability, or this into the bitfield to get same result as leaving out SetMark.
+	WILDMarkModeSetMark = (1 << 0),		// If not set, we clear the mark.
+	WILDMarkModeMarkAll = (1 << 1)		// If not, first object on stack is the object to mark/unmark.
+};
+typedef uint32_t	WILDMarkMode;	// param2 in a WILD_MARK_INSTR instruction.

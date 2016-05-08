@@ -467,6 +467,15 @@ void	CStack::MarkedStateChangedOfCard( CCard* inCard )
 }
 
 
+void	CStack::SetMarkedOfAllCards( bool inState )
+{
+	for( CCardRef currCard : mCards )
+	{
+		currCard->SetMarked( inState );
+	}
+}
+
+
 CCard*	CStack::AddNewCardWithBackground( CBackground* inBg )
 {
 	size_t			slashOffset = mURL.rfind( '/' );

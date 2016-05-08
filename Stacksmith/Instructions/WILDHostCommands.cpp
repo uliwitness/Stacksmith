@@ -43,6 +43,7 @@ void	WILDHideInstruction( LEOContext* inContext );
 void	WILDWaitInstruction( LEOContext* inContext );
 void	WILDMoveInstruction( LEOContext* inContext );
 void	WILDChooseInstruction( LEOContext* inContext );
+void	WILDMarkInstruction( LEOContext* inContext );
 
 
 using namespace Carlson;
@@ -1021,6 +1022,69 @@ void	WILDChooseInstruction( LEOContext* inContext )
 }
 
 
+/*!
+ Pop a value off the back of the stack (or just read it from the given
+ BasePointer-relative address) and set its "marked" property to whatever
+ value is in param2 (true or false, i.e. 1 or 0).
+ (WILD_MARK_INSTR)
+ 
+ param1	-	If this is BACK_OF_STACK, we're supposed to pop the last item
+ off the stack. Otherwise, this is a basePtr-relative address
+ where a value will just be read.
+ param2 -	1 to set the marked to true, 0 to set the marked to false.
+ */
+
+void	WILDMarkInstruction( LEOContext* inContext )
+{
+	bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
+	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
+	if( theValue == NULL || theValue->base.isa == NULL )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
+		return;
+	}
+	
+	if( inContext->currentInstruction->param2 & WILDMarkModeMarkAll )
+	{
+		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+		userData->GetStack()->SetMarkedOfAllCards( (inContext->currentInstruction->param2 & WILDMarkModeSetMark) == WILDMarkModeSetMark );
+	}
+	else
+	{
+		LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
+		if( objectValue )
+		{
+			LEOValue	trueFalseValue;
+			LEOInitBooleanValue( &trueFalseValue, (inContext->currentInstruction->param2 & WILDMarkModeSetMark) == WILDMarkModeSetMark, kLEOInvalidateReferences, inContext );
+			bool	couldMark = ((CScriptableObject*)objectValue->object.object)->SetValueForPropertyNamed( &trueFalseValue, inContext, "marked", 0, 0 );
+			LEOCleanUpValue( &trueFalseValue, kLEOInvalidateReferences, inContext );
+			if( !couldMark )
+			{
+				size_t		lineNo = SIZE_T_MAX;
+				uint16_t	fileID = 0;
+				LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+				LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to (un)mark this object." );
+			}
+		}
+		else
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to (un)mark this object." );
+		}
+	}
+	
+	// If this is mark all, remove the empty string pushed instead of object, else remove object:
+	if( popOffStack )
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
 
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
@@ -1041,7 +1105,8 @@ LEOINSTR(WILDShowInstruction)
 LEOINSTR(WILDHideInstruction)
 LEOINSTR(WILDWaitInstruction)
 LEOINSTR(WILDMoveInstruction)
-LEOINSTR_LAST(WILDChooseInstruction)
+LEOINSTR(WILDChooseInstruction)
+LEOINSTR_LAST(WILDMarkInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostCommands[] =
@@ -1307,6 +1372,34 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 			{ EHostParamInvisibleIdentifier, EAlongIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'y' },
 			{ EHostParamInvisibleIdentifier, EToIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'y' },
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'y', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EMarkIdentifier, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeSetMark, 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EAllIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'a' },
+			{ EHostParamInvisibleIdentifier, ECardsIdentifier, EHostParameterOptional, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeSetMark | WILDMarkModeMarkAll, 'a', 'X' },
+			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EUnmarkIdentifier, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeClearMark, '\0',
+		{
+			{ EHostParamInvisibleIdentifier, EAllIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'a' },
+			{ EHostParamInvisibleIdentifier, ECardsIdentifier, EHostParameterOptional, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeClearMark | WILDMarkModeMarkAll, 'a', 'X' },
+			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
