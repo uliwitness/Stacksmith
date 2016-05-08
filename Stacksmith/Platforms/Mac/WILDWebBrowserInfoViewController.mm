@@ -26,6 +26,12 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	loadPage: (id)sender
+{
+	((CWebBrowserPart*)part)->LoadCurrentURL( [mCurrentURLField stringValue].UTF8String );
+}
+
+
 -(void)	controlTextDidChange: (NSNotification *)notif
 {
 	if( [notif object] == mCurrentURLField )

@@ -20,6 +20,7 @@ public:
 	
 	virtual bool			GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
 	virtual bool			SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	virtual void			LoadCurrentURL( const std::string& inURL )	{ /* Download, and then: */ SetCurrentURL(inURL); }
 	virtual void			SetCurrentURL( const std::string& inURL )	{ mCurrentURL = inURL; IncrementChangeCount(); }	// Doesn't load the URL! Just called once it is loaded.
 	virtual std::string		GetCurrentURL()								{ return mCurrentURL; };
 	virtual void			WakeUp();
@@ -27,8 +28,6 @@ public:
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
-	
-	virtual void			LoadCurrentURL( const std::string& inURL )	{ /* Download, and then: */ SetCurrentURL(inURL); }
 	
 	virtual const char*		GetIdentityForDump()	{ return "Web Browser"; };
 	virtual void			DumpProperties( size_t inIndent );
