@@ -114,6 +114,38 @@ void	WILDScheduleResumeOfScript( void )
 	LEOSetFirstNativeCallCallback( WILDFirstNativeCall );	// This calls us to lazily load the (several MB) of native headers when needed.
 	LEOSetCheckForResumeProc( WILDScheduleResumeOfScript );	// This calls us whenever someone requests to queue up their context to resume a script that has been paused.
 	
+	struct TStringConstantEntry	visualEffectNames[] = {
+		{ { EBarnIdentifier, EDoorIdentifier, EOpenIdentifier }, "barn door open" },
+		{ { EBarnIdentifier, EDoorIdentifier, ECloseIdentifier }, "barn door close" },
+		{ { EIrisIdentifier, EOpenIdentifier, ELastIdentifier_Sentinel }, "iris open" },
+		{ { EIrisIdentifier, ECloseIdentifier, ELastIdentifier_Sentinel }, "iris close" },
+		{ { EPushIdentifier, EUpIdentifier, ELastIdentifier_Sentinel }, "push up" },
+		{ { EPushIdentifier, EDownIdentifier, ELastIdentifier_Sentinel }, "push down" },
+		{ { EPushIdentifier, ELeftIdentifier, ELastIdentifier_Sentinel }, "push left" },
+		{ { EPushIdentifier, ERightIdentifier, ELastIdentifier_Sentinel }, "push right" },
+		{ { EScrollIdentifier, EUpIdentifier, ELastIdentifier_Sentinel }, "scroll up" },
+		{ { EScrollIdentifier, EDownIdentifier, ELastIdentifier_Sentinel }, "scroll down" },
+		{ { EScrollIdentifier, ELeftIdentifier, ELastIdentifier_Sentinel }, "scroll left" },
+		{ { EScrollIdentifier, ERightIdentifier, ELastIdentifier_Sentinel }, "scroll right" },
+		{ { EShrinkIdentifier, EToIdentifier, ETopIdentifier }, "shrink to top" },
+		{ { EShrinkIdentifier, EToIdentifier, ECenterIdentifier }, "shrink to center" },
+		{ { EShrinkIdentifier, EToIdentifier, EBottomIdentifier }, "shrink to bottom" },
+		{ { EStretchIdentifier, EFromIdentifier, ETopIdentifier }, "stretch from top" },
+		{ { EStretchIdentifier, EFromIdentifier, ECenterIdentifier }, "stretch from center" },
+		{ { EStretchIdentifier, EFromIdentifier, EBottomIdentifier }, "stretch from bottom" },
+		{ { EVenetianIdentifier, EBlindsIdentifier, ELastIdentifier_Sentinel }, "venetian blinds" },
+		{ { EWipeIdentifier, EUpIdentifier, ELastIdentifier_Sentinel }, "wipe up" },
+		{ { EWipeIdentifier, EDownIdentifier, ELastIdentifier_Sentinel }, "wipe down" },
+		{ { EWipeIdentifier, ELeftIdentifier, ELastIdentifier_Sentinel }, "wipe left" },
+		{ { EWipeIdentifier, ERightIdentifier, ELastIdentifier_Sentinel }, "wipe right" },
+		{ { EZoomIdentifier, ECloseIdentifier, ELastIdentifier_Sentinel }, "zoom close" },
+		{ { EZoomIdentifier, EInIdentifier, ELastIdentifier_Sentinel }, "zoom in" },
+		{ { EZoomIdentifier, EOpenIdentifier, ELastIdentifier_Sentinel }, "zoom open" },
+		{ { EZoomIdentifier, EOutIdentifier, ELastIdentifier_Sentinel }, "zoom out" },
+		{ { ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, ELastIdentifier_Sentinel }, NULL }
+	};
+	LEOAddStringConstants( visualEffectNames );
+	
 	#if REMOTE_DEBUGGER
 	LEOInitRemoteDebugger( "127.0.0.1" );
 	#endif
