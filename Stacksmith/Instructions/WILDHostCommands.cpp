@@ -1036,16 +1036,6 @@ void	WILDChooseInstruction( LEOContext* inContext )
 
 void	WILDMarkInstruction( LEOContext* inContext )
 {
-	bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
-	union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
-	if( theValue == NULL || theValue->base.isa == NULL )
-	{
-		size_t		lineNo = SIZE_T_MAX;
-		uint16_t	fileID = 0;
-		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
-		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
-		return;
-	}
 	
 	if( inContext->currentInstruction->param2 & WILDMarkModeMarkAll )
 	{
@@ -1054,6 +1044,17 @@ void	WILDMarkInstruction( LEOContext* inContext )
 	}
 	else
 	{
+		bool			popOffStack = (inContext->currentInstruction->param1 == BACK_OF_STACK);
+		union LEOValue*	theValue = popOffStack ? (inContext->stackEndPtr -1) : (inContext->stackBasePtr +inContext->currentInstruction->param1);
+		if( theValue == NULL || theValue->base.isa == NULL )
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Internal error: Invalid value." );
+			return;
+		}
+		
 		LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( theValue, &kLeoValueTypeScriptableObject, inContext );
 		if( objectValue )
 		{
@@ -1076,11 +1077,10 @@ void	WILDMarkInstruction( LEOContext* inContext )
 			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
 			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Unable to (un)mark this object." );
 		}
+		
+		if( popOffStack )
+			LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	}
-	
-	// If this is mark all, remove the empty string pushed instead of object, else remove object:
-	if( popOffStack )
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 	
 	inContext->currentInstruction++;
 }
@@ -1112,7 +1112,7 @@ LEOINSTR_LAST(WILDMarkInstruction)
 struct THostCommandEntry	gStacksmithHostCommands[] =
 {
 	{
-		EGoIdentifier, WILD_GO_INSTR, EOpenInSameWindow, 0, 'X',
+		EGoIdentifier, WILD_GO_INSTR, EOpenInSameWindow, 0, '\0', 'X',
 		{
 			{ EHostParamInvisibleIdentifier, EBackIdentifier, EHostParameterOptional, WILD_GO_BACK_INSTR, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1127,7 +1127,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EGoIdentifier, WILD_GO_INSTR, EOpenInSameWindow, 0, 'X',
+		EGoIdentifier, WILD_GO_INSTR, EOpenInSameWindow, 0, '\0', 'X',
 		{
 			{ EHostParamInvisibleIdentifier, EToIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
@@ -1142,7 +1142,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EVisualIdentifier, WILD_VISUAL_EFFECT_INSTR, 0, 0, '\0',
+		EVisualIdentifier, WILD_VISUAL_EFFECT_INSTR, 0, 0, '\0', '\0',
 		{
 			{ EHostParamInvisibleIdentifier, EEffectIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamExpressionOrIdentifiersTillLineEnd, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1156,7 +1156,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EAnswerIdentifier, WILD_ANSWER_INSTR, 0, 0, '\0',
+		EAnswerIdentifier, WILD_ANSWER_INSTR, 0, 0, '\0', '\0',
 		{
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamLabeledValue, EWithIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1170,7 +1170,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EAskIdentifier, WILD_ASK_INSTR, 0, 0, '\0',
+		EAskIdentifier, WILD_ASK_INSTR, 0, 0, '\0', '\0',
 		{
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamLabeledValue, EWithIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1184,7 +1184,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		ECreateIdentifier, WILD_CREATE_USER_PROPERTY_INSTR, 0, 0, 'X',
+		ECreateIdentifier, WILD_CREATE_USER_PROPERTY_INSTR, 0, 0, '\0', 'X',
 		{
 			{ EHostParamInvisibleIdentifier, EPropertyIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'P' },
 			{ EHostParamImmediateValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'P', 'p' },
@@ -1198,7 +1198,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		ECreateIdentifier, WILD_CREATE_INSTR, 0, 0, 'X',
+		ECreateIdentifier, WILD_CREATE_INSTR, 0, 0, '\0', 'X',
 		{
 			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'O' },
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'O', 'X' },
@@ -1212,7 +1212,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EDeleteIdentifier, WILD_DELETE_USER_PROPERTY_INSTR, 0, 0, 'X',
+		EDeleteIdentifier, WILD_DELETE_USER_PROPERTY_INSTR, 0, 0, '\0', 'X',
 		{
 			{ EHostParamInvisibleIdentifier, EPropertyIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'P' },
 			{ EHostParamImmediateValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'P', 'p' },
@@ -1226,7 +1226,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EDeleteIdentifier, WILD_DELETE_INSTR, BACK_OF_STACK, 0, '\0',
+		EDeleteIdentifier, WILD_DELETE_INSTR, BACK_OF_STACK, 0, '\0', '\0',
 		{
 			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1240,7 +1240,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EDebugIdentifier, WILD_DEBUG_CHECKPOINT_INSTR, 0, 0, '\0',
+		EDebugIdentifier, WILD_DEBUG_CHECKPOINT_INSTR, 0, 0, '\0', '\0',
 		{
 			{ EHostParamIdentifier, ECheckpointIdentifier, EHostParameterRequired, WILD_DEBUG_CHECKPOINT_INSTR, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1254,7 +1254,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EPutIdentifier, WILD_PRINT_INSTR, BACK_OF_STACK, 0, '\0',
+		EPutIdentifier, WILD_PRINT_INSTR, BACK_OF_STACK, 0, '\0', '\0',
 		{
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1268,7 +1268,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EPlayIdentifier, WILD_PLAY_MELODY_INSTR, 0, 0, '\0',
+		EPlayIdentifier, WILD_PLAY_MELODY_INSTR, 0, 0, '\0', '\0',
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamExpressionOrIdentifiersTillLineEnd, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1282,7 +1282,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EStartIdentifier, WILD_START_INSTR, BACK_OF_STACK, 0, '\0',
+		EStartIdentifier, WILD_START_INSTR, BACK_OF_STACK, 0, '\0', '\0',
 		{
 			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1296,7 +1296,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EStopIdentifier, WILD_STOP_INSTR, BACK_OF_STACK, 0, '\0',
+		EStopIdentifier, WILD_STOP_INSTR, BACK_OF_STACK, 0, '\0', '\0',
 		{
 			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1310,7 +1310,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EShowIdentifier, WILD_SHOW_INSTR, BACK_OF_STACK, 0, '\0',
+		EShowIdentifier, WILD_SHOW_INSTR, BACK_OF_STACK, 0, '\0', '\0',
 		{
 			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1324,7 +1324,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EHideIdentifier, WILD_HIDE_INSTR, BACK_OF_STACK, 0, '\0',
+		EHideIdentifier, WILD_HIDE_INSTR, BACK_OF_STACK, 0, '\0', '\0',
 		{
 			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1338,7 +1338,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EWaitIdentifier, WILD_WAIT_INSTR, BACK_OF_STACK, 0, '\0',
+		EWaitIdentifier, WILD_WAIT_INSTR, BACK_OF_STACK, 0, '\0', '\0',
 		{
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1352,7 +1352,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EChooseIdentifier, WILD_CHOOSE_INSTR, 0, 0, 'X',
+		EChooseIdentifier, WILD_CHOOSE_INSTR, 0, 0, '\0', 'X',
 		{
 			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamInvisibleIdentifier, EToolIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
@@ -1366,7 +1366,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EMoveIdentifier, WILD_MOVE_INSTR, 0, 0, 'X',
+		EMoveIdentifier, WILD_MOVE_INSTR, 0, 0, '\0', 'X',
 		{
 			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamInvisibleIdentifier, EAlongIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'y' },
@@ -1381,11 +1381,11 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EMarkIdentifier, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeSetMark, 'X',
+		EMarkIdentifier, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeSetMark, '1', 'X',
 		{
-			{ EHostParamInvisibleIdentifier, EAllIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'a' },
-			{ EHostParamInvisibleIdentifier, ECardsIdentifier, EHostParameterOptional, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeSetMark | WILDMarkModeMarkAll, 'a', 'X' },
-			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'X' },
+			{ EHostParamInvisibleIdentifier, EAllIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '1', 'a' },
+			{ EHostParamInvisibleIdentifier, ECardsIdentifier, EHostParameterRequired, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeSetMark | WILDMarkModeMarkAll, 'a', 'X' },
+			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '1', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1395,11 +1395,11 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		EUnmarkIdentifier, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeClearMark, '\0',
+		EUnmarkIdentifier, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeClearMark, '1', 'X',
 		{
-			{ EHostParamInvisibleIdentifier, EAllIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'a' },
-			{ EHostParamInvisibleIdentifier, ECardsIdentifier, EHostParameterOptional, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeClearMark | WILDMarkModeMarkAll, 'a', 'X' },
-			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'X' },
+			{ EHostParamInvisibleIdentifier, EAllIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '1', 'a' },
+			{ EHostParamInvisibleIdentifier, ECardsIdentifier, EHostParameterRequired, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeClearMark | WILDMarkModeMarkAll, 'a', 'X' },
+			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '1', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
@@ -1409,7 +1409,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		}
 	},
 	{
-		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0, '\0',
+		ELastIdentifier_Sentinel, INVALID_INSTR2, 0, 0, '\0', '\0',
 		{
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
