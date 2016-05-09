@@ -212,11 +212,6 @@ using namespace Carlson;
 				else if( hitPart->IsSelected() && shiftKeyDown )
 					hitPart->SetSelected(false);
 			}
-			if( mouseDownMessage )
-			{
-				CAutoreleasePool	cppPool;
-				hitPart->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
-			}
 			hitObject = hitPart;
 		}
 	}
