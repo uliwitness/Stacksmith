@@ -1060,7 +1060,12 @@ void	CFieldPartMac::LoadChangedTextStylesIntoView()
 		if( mSearchField )
 			[mSearchField setAttributedStringValue: attrStr];
 		else
+		{
+			BOOL	oldDontSendSelectionChange = mMacDelegate.dontSendSelectionChange;
+			mMacDelegate.dontSendSelectionChange = GetLockText() || oldDontSendSelectionChange;
 			[mTextView.textStorage setAttributedString: attrStr];
+			mMacDelegate.dontSendSelectionChange = oldDontSendSelectionChange;
+		}
 	}
 	else
 	{
