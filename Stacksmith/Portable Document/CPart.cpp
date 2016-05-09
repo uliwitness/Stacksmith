@@ -13,6 +13,7 @@
 #include "CCursor.h"
 #include "CDocument.h"
 #include "CUndoStack.h"
+#include "CAlert.h"
 #include <iostream>
 #include <sstream>
 #include "math.h"
@@ -745,9 +746,14 @@ std::string		CPart::GenerateDisplayName( const char* inTypeName )
 
 void	CPart::SetSelected( bool inSelected, LEOInteger inHandleIndex )
 {
-	mSelected = inSelected;
-	mSelectedHandle = inHandleIndex;
-	GetStack()->SelectedPartChanged();
+	if( inSelected != mSelected || mSelectedHandle != inHandleIndex )
+	{
+		mSelected = inSelected;
+		mSelectedHandle = inHandleIndex;
+		GetStack()->SelectedPartChanged();
+		
+		SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChangeWhileEditing" );
+	}
 }
 
 

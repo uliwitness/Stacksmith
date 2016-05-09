@@ -474,6 +474,15 @@ static CAddHandlerListEntry	sMasterHandlerList[] =
 		0
 	},
 	{
+		EHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"selectionChangeWhileEditing",
+		"The user somehow caused a different set of objects to be selected (have the dotted outline and resize handles) than before.",
+		"",
+		"",
+		0
+	},
+	{
 		EHandlerEntry_LAST,
 		0,
 		"",

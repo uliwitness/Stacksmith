@@ -601,6 +601,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	mouseMoveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseMove" );
 	LEOHandlerID	mouseDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDrag" );
 	LEOHandlerID	selectionChangeHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "selectionChange" );
+	LEOHandlerID	pointerSelectionChangeHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "selectionChangeWhileEditing" );
 	LEOHandlerID	loadPageHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "loadPage" );
 	LEOHandlerID	linkClickedHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseUpInLink" );
 	LEOHandlerID	tabKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "tabKey" );
@@ -792,6 +793,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == loadPageHandlerID
 			|| inHandler == linkClickedHandlerID
 			|| inHandler == selectionChangeHandlerID
+			|| inHandler == pointerSelectionChangeHandlerID
 			|| inHandler == mouseDoubleClickHandlerID
 			|| inHandler == playMovieHandlerID
 			|| inHandler == stopMovieHandlerID
