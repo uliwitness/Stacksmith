@@ -1338,8 +1338,7 @@ using namespace Carlson;
 -(IBAction)	deselectAll:(id)sender
 {
 	// Always permit this, that way users might be able to work around any "we left an item selected" bugs.
-	mStack->DeselectAllObjectsOnCard();
-	mStack->DeselectAllObjectsOnBackground();
+	mStack->GetCurrentLayer()->SelectAllItems();
 }
 
 
@@ -1347,8 +1346,7 @@ using namespace Carlson;
 {
 	if( mStack->GetTool() != EBrowseTool )
 	{
-		mStack->SelectAllObjectsOnCard();
-		mStack->SelectAllObjectsOnBackground();
+		mStack->GetCurrentLayer()->SelectAllItems();
 	}
 }
 
