@@ -149,6 +149,7 @@
 		552FF222113F23F3005742C8 /* PAT_40.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 552FF125113F23F3005742C8 /* PAT_40.pbm */; };
 		552FF22E113F23F3005742C8 /* resources.xml in Resources */ = {isa = PBXBuildFile; fileRef = 552FF131113F23F3005742C8 /* resources.xml */; };
 		552FF245113F247A005742C8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FF244113F247A005742C8 /* QTKit.framework */; };
+		5532D4F91CDF977F00475B70 /* CSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5532D4F71CDF977F00475B70 /* CSocket.cpp */; };
 		5538245917272768007785D8 /* LEOObjCCallInstructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 5538245817272767007785D8 /* LEOObjCCallInstructions.c */; };
 		5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */ = {isa = PBXBuildFile; fileRef = 5538245F17272EC2007785D8 /* frameworkheaders.hhc */; };
 		55382463172730B4007785D8 /* WILDObjCCallInstructions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55382462172730B4007785D8 /* WILDObjCCallInstructions.mm */; };
@@ -776,6 +777,10 @@
 		552FF125113F23F3005742C8 /* PAT_40.pbm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PAT_40.pbm; path = Resources/PAT_40.pbm; sourceTree = "<group>"; };
 		552FF131113F23F3005742C8 /* resources.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = resources.xml; path = Resources/resources.xml; sourceTree = "<group>"; };
 		552FF244113F247A005742C8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		5532D4F71CDF977F00475B70 /* CSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSocket.cpp; path = Platforms/Mac/CSocket.cpp; sourceTree = "<group>"; };
+		5532D4F81CDF977F00475B70 /* CSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSocket.h; path = Platforms/Mac/CSocket.h; sourceTree = "<group>"; };
+		5532D5021CDFB24900475B70 /* CConcurrentQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConcurrentQueue.h; path = Platforms/Mac/CConcurrentQueue.h; sourceTree = "<group>"; };
+		5532D5031CDFB34500475B70 /* CSemaphore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CSemaphore.h; path = Platforms/Mac/CSemaphore.h; sourceTree = "<group>"; };
 		5538245817272767007785D8 /* LEOObjCCallInstructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = LEOObjCCallInstructions.c; path = ../../Leonie/generic/LEOObjCCallInstructions.c; sourceTree = "<group>"; };
 		5538245E17272775007785D8 /* LEOObjCCallInstructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOObjCCallInstructions.h; path = ../../Leonie/generic/LEOObjCCallInstructions.h; sourceTree = "<group>"; };
 		5538245F17272EC2007785D8 /* frameworkheaders.hhc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frameworkheaders.hhc; path = Resources/frameworkheaders.hhc; sourceTree = "<group>"; };
@@ -1448,6 +1453,10 @@
 				554CC83A1CD7EC0200D5D7B6 /* CCanvas.mm */,
 				554CC8461CD8033B00D5D7B6 /* CImageCanvas.h */,
 				554CC8451CD8033B00D5D7B6 /* CImageCanvas.mm */,
+				5532D4F81CDF977F00475B70 /* CSocket.h */,
+				5532D4F71CDF977F00475B70 /* CSocket.cpp */,
+				5532D5021CDFB24900475B70 /* CConcurrentQueue.h */,
+				5532D5031CDFB34500475B70 /* CSemaphore.h */,
 			);
 			name = "OS abstraction";
 			sourceTree = "<group>";
@@ -2644,6 +2653,7 @@
 				551B36C31A9907D9006AFDFE /* UKFinderIconCell.m in Sources */,
 				55039FC8136D5CCF0082E32E /* ULIPaintEraserTool.m in Sources */,
 				55CD610718786BAC002450E2 /* CPicturePart.cpp in Sources */,
+				5532D4F91CDF977F00475B70 /* CSocket.cpp in Sources */,
 				55039FC9136D5CCF0082E32E /* ULIPaintFreehandTool.m in Sources */,
 				551583DD18C3826100DB3431 /* WILDTableView.mm in Sources */,
 				55039FCA136D5CCF0082E32E /* ULIPaintLineTool.m in Sources */,
