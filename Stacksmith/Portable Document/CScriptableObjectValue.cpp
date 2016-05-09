@@ -622,6 +622,8 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 	LEOHandlerID	closeBackgroundHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closeBackground" );
 	LEOHandlerID	moveWindowHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "moveWindow" );
 	LEOHandlerID	resizeWindowHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "resizeWindow" );
+	LEOHandlerID	focusWindowHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "focusWindow" );
+	LEOHandlerID	selectWindowHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "selectWindow" );
 	if( inHandler == arrowKeyHandlerID )
 	{
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
@@ -804,7 +806,9 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 			|| inHandler == closeBackgroundHandlerID
 			|| inHandler == openBackgroundHandlerID
 			|| inHandler == moveWindowHandlerID
-			|| inHandler == resizeWindowHandlerID )
+			|| inHandler == resizeWindowHandlerID
+			|| inHandler == focusWindowHandlerID
+			|| inHandler == selectWindowHandlerID )
 	{
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );

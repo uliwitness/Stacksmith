@@ -1116,6 +1116,8 @@ using namespace Carlson;
 			NSLog(@"error opening stack window %@",err);
 		}
 	}
+	
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, "focusWindow" );
 }
 
 
@@ -1129,6 +1131,8 @@ using namespace Carlson;
 	{
 		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
 	}
+	
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, "selectWindow" );
 }
 
 
