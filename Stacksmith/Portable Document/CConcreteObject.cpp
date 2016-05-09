@@ -107,8 +107,8 @@ static CAddHandlerListEntry	sMasterHandlerList[] =
 	{
 		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
-		"closeStack",
-		"The current stack is about to change, last chance for clean-up.",
+		"openStack",
+		"The current stack just changed, prepare this stack for the user.",
 		"",
 		"card",
 		0
@@ -116,8 +116,26 @@ static CAddHandlerListEntry	sMasterHandlerList[] =
 	{
 		EHandlerEntryCommand,
 		kLEOHandlerIDINVALID,
-		"openStack",
-		"The current stack just changed, prepare this stack for the user.",
+		"focusWindow",
+		"This stack's window is about to receive keyboard focus. Keypresses will go to objects on this card from now on.",
+		"",
+		"card",
+		0
+	},
+	{
+		EHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"selectWindow",
+		"This stack's window is about to become active. E.g. the window is brought to front. Not sent to floating palette windows.",
+		"",
+		"card",
+		0
+	},
+	{
+		EHandlerEntryCommand,
+		kLEOHandlerIDINVALID,
+		"closeStack",
+		"The current stack is about to change, last chance for clean-up.",
 		"",
 		"card",
 		0
