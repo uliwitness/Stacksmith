@@ -563,7 +563,7 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 			}
 			else if( currHandler.mType == EHandlerEntryFunction )
 			{
-				bool	alreadyInScript = (mScriptObject != NULL && LEOScriptFindCommandHandlerWithID( mScriptObject, currHandler.mHandlerID ) != NULL);
+				bool	alreadyInScript = (mScriptObject != NULL && LEOScriptFindFunctionHandlerWithID( mScriptObject, currHandler.mHandlerID ) != NULL);
 				handlers.push_back( currHandler );
 				handlers.back().mFlags |= alreadyInScript ? EHandlerListEntryAlreadyPresentFlag : 0;
 			}
@@ -578,7 +578,30 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 		}
 	}
 	
-	if( handlers.back().mType == EHandlerEntryGroupHeader )	// Last group was empty? Remove it.
+	CAddHandlerListEntry	uPropHandler;
+	uPropHandler.mType = EHandlerEntryGroupHeader;
+	uPropHandler.mHandlerName = "User Properties";
+	handlers.push_back(uPropHandler);
+	
+	uPropHandler.mType = EHandlerEntryCommand;
+	for( std::pair<std::string,std::string> currProp : mUserProperties )
+	{
+		uPropHandler.mHandlerName = currProp.first;
+		uPropHandler.mHandlerName.append("PropertyChange");
+		uPropHandler.mHandlerID = LEOContextGroupHandlerIDForHandlerName( theGroup, uPropHandler.mHandlerName.c_str() );
+		uPropHandler.mHandlerDescription = "Called whenever the property \"";
+		uPropHandler.mHandlerDescription.append(currProp.first);
+		uPropHandler.mHandlerDescription.append("\" is changed so you can react to that change.");
+		uPropHandler.mHandlerTemplate = "on ";
+		uPropHandler.mHandlerTemplate.append(uPropHandler.mHandlerName);
+		uPropHandler.mHandlerTemplate.append("\n\t\nend ");
+		uPropHandler.mHandlerTemplate.append(uPropHandler.mHandlerName);
+		bool	alreadyInScript = (mScriptObject != NULL && LEOScriptFindCommandHandlerWithID( mScriptObject, uPropHandler.mHandlerID ) != NULL);
+		handlers.push_back(uPropHandler);
+		handlers.back().mFlags |= alreadyInScript ? EHandlerListEntryAlreadyPresentFlag : 0;
+	}
+	
+	while( handlers.back().mType == EHandlerEntryGroupHeader )	// Last group was empty? Remove it.
 	{
 		handlers.pop_back();
 	}
@@ -744,7 +767,10 @@ bool	CConcreteObject::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext*
 			LEOValuePtr theValue = LEOGetValueForKey( inValue, tmpKey, &tmpStorage, kLEOInvalidateReferences, inContext );
 			const char*	currPropName = LEOGetValueAsString( theValue, tmpKey, sizeof(tmpKey), inContext );
 			if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			{
+				inContext->flags |= kLEOContextKeepRunning;
 				return true;
+			}
 			AddUserPropertyNamed( currPropName );
 			if( theValue == &tmpStorage )
 				LEOCleanUpValue( theValue, kLEOInvalidateReferences, inContext );
@@ -845,6 +871,10 @@ bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, c
 	
 	foundProp->second = inValue;
 	IncrementChangeCount();
+	
+	char	msgName[1024] = {};
+	snprintf( msgName, sizeof(msgName) -1, "%sPropertyChange", inPropName );
+	SendMessage( NULL, [](const char *, size_t, size_t, CScriptableObject *){}, EMayGoUnhandled, msgName );
 	
 //	DumpUserProperties(0);
 	
