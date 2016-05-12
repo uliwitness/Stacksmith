@@ -40,6 +40,26 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 using namespace Carlson;
 
 
+@interface WILDRectangleWindow : NSWindow
+
+@end
+
+@implementation WILDRectangleWindow
+
+-(BOOL) canBecomeKeyWindow
+{
+	return YES;
+}
+
+
+-(BOOL) canBecomeMainWindow
+{
+	return YES;
+}
+
+@end
+
+
 @interface WILDStackWindowController () <NSPopoverDelegate>
 
 @end
@@ -946,8 +966,9 @@ using namespace Carlson;
 			break;
 		
 		case EStackStyleRectangle:
-			self.window = [[[NSWindow alloc] initWithContentRect: wdBox styleMask: NSBorderlessWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[WILDRectangleWindow alloc] initWithContentRect: wdBox styleMask: NSBorderlessWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setStyleMask: NSBorderlessWindowMask];
+			[self.window setLevel: NSNormalWindowLevel];
 			[self.window setCollectionBehavior: NSWindowCollectionBehaviorFullScreenAuxiliary];
 			break;
 		
@@ -958,7 +979,7 @@ using namespace Carlson;
 			break;
 		
 		case EStackStylePopup:
-			self.window = [[[NSWindow alloc] initWithContentRect: NSMakeRect(wdBox.origin.x,wdBox.origin.y,10,10) styleMask: NSTitledWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[WILDRectangleWindow alloc] initWithContentRect: NSMakeRect(wdBox.origin.x,wdBox.origin.y,10,10) styleMask: NSTitledWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setBackgroundColor: NSColor.redColor];
 			//[self.window setLevel: NSFloatingWindowLevel];
 			[self.window setAlphaValue: 0.0];
