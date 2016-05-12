@@ -197,7 +197,7 @@ using namespace Carlson;
 			if( mouseDownMessage )
 			{
 				CAutoreleasePool	cppPool;
-				theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
+				theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
 			}
 			hitObject = theCard;
 		}
@@ -228,7 +228,7 @@ using namespace Carlson;
 		doubleUpMessage = "mouseDoubleClick %ld";
 		
 		CAutoreleasePool		pool;
-		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown", [theEvt buttonNumber] +1 );
+		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown", [theEvt buttonNumber] +1 );
 	}
 	else if( currentTool == EOvalTool && hitObject == theCard )
 	{
@@ -328,7 +328,7 @@ using namespace Carlson;
 		doubleUpMessage = "mouseDoubleClickWhileEditing %ld";
 
 		CAutoreleasePool	cppPool;
-		((CPart*)hitObject)->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
+		((CPart*)hitObject)->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
 	}
 		
 	[mOwningStackWindowController drawBoundingBoxes];
@@ -342,7 +342,7 @@ using namespace Carlson;
 		if( dragMessage )
 		{
 			CAutoreleasePool	cppPool;
-			hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, dragMessage, [theEvt buttonNumber] +1 );
+			hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, dragMessage, [theEvt buttonNumber] +1 );
 		}
 		else if( currentTool == ELineTool )
 		{
@@ -375,7 +375,7 @@ using namespace Carlson;
 	if( upMessage )
 	{
 		CAutoreleasePool	cppPool;
-		hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
+		hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
 	}
 	else if( currentTool == ELineTool || currentTool == EBezierPathTool )
 	{
@@ -439,7 +439,7 @@ using namespace Carlson;
 	
 	{
 		CAutoreleasePool		pool;
-		theCard->SendMessage( NULL, errHandler, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
+		theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "keyDown %s,%s,%s,%s,%s", [[theEvent characters] UTF8String], firstModifier, secondModifier, thirdModifier, fourthModifier );
 	}
 	
 	if( theEvent.charactersIgnoringModifiers.length > 0 )
@@ -449,33 +449,33 @@ using namespace Carlson;
 		switch( theKey )
 		{
 			case '\t':
-				theCard->SendMessage( NULL, errHandler, "tabKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "tabKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 			case 0x0019:	// Back tab
-				theCard->SendMessage( NULL, errHandler, "tabKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "tabKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 
 			case NSDeleteFunctionKey:	// Delete
-				theCard->SendMessage( NULL, errHandler, "forwardDeleteKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "forwardDeleteKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 			case 0x007F:	// Backspace
-				theCard->SendMessage( NULL, errHandler, "backspaceKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "backspaceKey %s,%s,%s,%s", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 				
 			case NSLeftArrowFunctionKey:
-				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "left", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "arrowKey %s,%s,%s,%s,%s", "left", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 			case NSRightArrowFunctionKey:
-				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "right", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "arrowKey %s,%s,%s,%s,%s", "right", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 			case NSUpArrowFunctionKey:
-				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "up", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "arrowKey %s,%s,%s,%s,%s", "up", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 			case NSDownArrowFunctionKey:
-				theCard->SendMessage( NULL, errHandler, "arrowKey %s,%s,%s,%s,%s", "down", firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "arrowKey %s,%s,%s,%s,%s", "down", firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 			case NSF1FunctionKey ... NSF35FunctionKey:
-				theCard->SendMessage( NULL, errHandler, "functionKey %d,%s,%s,%s,%s", (int)(theKey -NSF1FunctionKey +1), firstModifier, secondModifier, thirdModifier, fourthModifier );
+				theCard->SendMessage( NULL, errHandler, EMayGoUnhandled, "functionKey %d,%s,%s,%s,%s", (int)(theKey -NSF1FunctionKey +1), firstModifier, secondModifier, thirdModifier, fourthModifier );
 				break;
 		}
 	}
@@ -1117,7 +1117,7 @@ using namespace Carlson;
 		}
 	}
 	
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, "focusWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "focusWindow" );
 }
 
 
@@ -1132,7 +1132,7 @@ using namespace Carlson;
 		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
 	}
 	
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, "selectWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "selectWindow" );
 }
 
 
@@ -1153,14 +1153,14 @@ using namespace Carlson;
 	mStack->SetCardHeight( newBox.size.height );
 
 	CAutoreleasePool	cppPool;
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, "resizeWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "resizeWindow" );
 }
 
 
 -(void)	windowDidMove: (NSNotification *)notification
 {
 	CAutoreleasePool	cppPool;
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while moving window: " << errMsg << std::endl; } }, "moveWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while moving window: " << errMsg << std::endl; } }, EMayGoUnhandled, "moveWindow" );
 }
 
 

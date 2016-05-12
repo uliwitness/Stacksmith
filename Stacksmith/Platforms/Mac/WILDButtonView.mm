@@ -15,6 +15,19 @@
 using namespace Carlson;
 
 
+static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c, const char ** d, const char* theAppendee )
+{
+	if( *a == nil )
+		*a = theAppendee;
+	else if( *b == nil )
+		*b = theAppendee;
+	else if( *c == nil )
+		*c = theAppendee;
+	else if( *d == nil )
+		*d = theAppendee;
+}
+
+
 @implementation WILDButtonView
 
 @synthesize owningPart = owningPart;
@@ -55,7 +68,7 @@ using namespace Carlson;
 	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseEnter %ld", [theEvent buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseEnter %ld", [theEvent buttonNumber] +1 );
 	}
 }
 
@@ -65,7 +78,7 @@ using namespace Carlson;
 	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseLeave %ld", [theEvent buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseLeave %ld", [theEvent buttonNumber] +1 );
 	}
 }
 
@@ -75,7 +88,7 @@ using namespace Carlson;
 	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseMove" );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseMove" );
 	}
 }
 
@@ -110,6 +123,27 @@ using namespace Carlson;
 		return;
 	}
 	
+	const char *        firstModifier = nil;
+	const char *        secondModifier = nil;
+	const char *        thirdModifier = nil;
+	const char *        fourthModifier = nil;
+	
+	if( event.modifierFlags & NSShiftKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shift" );
+	else if( event.modifierFlags & NSAlphaShiftKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shiftlock" );
+	if( event.modifierFlags & NSAlternateKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "alternate" );
+	if( event.modifierFlags & NSControlKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "control" );
+	if( event.modifierFlags & NSCommandKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "command" );
+	
+	if( !firstModifier ) firstModifier = "";
+	if( !secondModifier ) secondModifier = "";
+	if( !thirdModifier ) thirdModifier = "";
+	if( !fourthModifier ) fourthModifier = "";
+
 	BOOL					keepLooping = YES;
 	BOOL					autoHighlight = self->owningPart->GetAutoHighlight();
 	BOOL					isInside = [[self cell] hitTestForEvent: event inRect: [self bounds] ofView: self] != NSCellHitNone;
@@ -126,7 +160,7 @@ using namespace Carlson;
 	
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDown %ld", [event buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseDown %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 	}
 	
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
@@ -160,7 +194,7 @@ using namespace Carlson;
 						}
 					}
 					CAutoreleasePool	cppPool;
-					self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseDrag %ld", [event buttonNumber] +1 );
+					self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseDrag %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 					break;
 				}
 				
@@ -185,12 +219,12 @@ using namespace Carlson;
 		//[[self target] performSelector: [self action] withObject: self];
 		self->owningPart->PrepareMouseUp();
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp %ld", [event buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUp %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 	}
 	else
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUpOutside %ld", [event buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUpOutside %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 	}
 	
 	[pool release];
@@ -267,7 +301,7 @@ using namespace Carlson;
 {
 	self->owningPart->PrepareMouseUp();
 	CAutoreleasePool	cppPool;
-	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "mouseUp" );
+	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUp" );
 }
 
 @end

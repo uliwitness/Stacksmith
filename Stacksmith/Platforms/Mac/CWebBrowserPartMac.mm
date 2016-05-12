@@ -35,7 +35,7 @@ using namespace Carlson;
 		CAutoreleasePool		pool;
 		const char*	currURLStr = sender.mainFrame.dataSource.request.URL.absoluteString.UTF8String;
 		self.owningBrowser->SetCurrentURL( currURLStr );
-		self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "loadPage" );
+		self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "loadPage" );
 	}
 }
 
@@ -43,7 +43,7 @@ using namespace Carlson;
 -(void)	webView: (WebView *)sender didFailLoadWithError: (NSError *)error forFrame: (WebFrame *)frame
 {
 	CAutoreleasePool		pool;
-	self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "loadPage %s", error.localizedDescription.UTF8String );
+	self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "loadPage %s", error.localizedDescription.UTF8String );
 }
 
 @end

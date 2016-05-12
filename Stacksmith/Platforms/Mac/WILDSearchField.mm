@@ -60,7 +60,7 @@ using namespace Carlson;
 		selectedRange = self.currentEditor.selectedRange;
 		
 		CAutoreleasePool		pool;
-		self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, "selectionChange" );
+		self.owningField->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "selectionChange" );
 	}
 }
 

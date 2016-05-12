@@ -60,7 +60,7 @@ bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContex
 LEOValuePtr	GetScriptableObjectValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 size_t	GetScriptableObjectKeyCount( LEOValuePtr self, LEOContext* inContext );
 
-void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler );
+void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler, TMayGoUnhandledFlag mayGoUnhandled );
 
 
 
@@ -577,54 +577,18 @@ void		SetScriptableObjectValueForKeyOfRange( LEOValuePtr self, const char* keyNa
 }
 
 
-void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler )
+void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID inHandler, TMayGoUnhandledFlag mayGoUnhandled )
 {
 	bool			handled = false;
 	LEOHandlerID	arrowKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "arrowKey" );
 	LEOHandlerID	forwardDeleteKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "forwardDelete" );
 	LEOHandlerID	backspaceKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "backspaceKey" );
 	LEOHandlerID	keyDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "keyDown" );
-	LEOHandlerID	textChangeHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "textChange" );
-	LEOHandlerID	functionKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "functionKey" );
-	LEOHandlerID	openCardHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openCard" );
-	LEOHandlerID	closeCardHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closeCard" );
-	LEOHandlerID	openStackHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openStack" );
-	LEOHandlerID	closeStackHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closeStack" );
-	LEOHandlerID	mouseEnterHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseEnter" );
-	LEOHandlerID	mouseDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDown" );
-	LEOHandlerID	mouseUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseUp" );
-	LEOHandlerID	mouseDoubleDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleDown" );
-	LEOHandlerID	mouseDoubleUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleClick" );
-	LEOHandlerID	mouseUpOutsideHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseUpOutside" );
-	LEOHandlerID	mouseDoubleClickHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleClick" );
-	LEOHandlerID	mouseLeaveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseLeave" );
-	LEOHandlerID	mouseMoveHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseMove" );
-	LEOHandlerID	mouseDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDrag" );
-	LEOHandlerID	selectionChangeHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "selectionChange" );
-	LEOHandlerID	pointerSelectionChangeHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "selectionChangeWhileEditing" );
-	LEOHandlerID	loadPageHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "loadPage" );
-	LEOHandlerID	linkClickedHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseUpInLink" );
 	LEOHandlerID	tabKeyHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "tabKey" );
-	LEOHandlerID	playMovieHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "playMovie" );
-	LEOHandlerID	stopMovieHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "stopMovie" );
 	LEOHandlerID	pointerDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDownWhileEditing" );
-	LEOHandlerID	pointerDoubleDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleDownWhileEditing" );
-	LEOHandlerID	pointerUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseUpWhileEditing" );
 	LEOHandlerID	pointerDoubleUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleClickWhileEditing" );
 	LEOHandlerID	pointerDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDragWhileEditing" );
 	LEOHandlerID	peekingDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDownWhilePeeking" );
-	LEOHandlerID	peekingDoubleDownHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleDownWhilePeeking" );
-	LEOHandlerID	peekingUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseUpWhilePeeking" );
-	LEOHandlerID	peekingDoubleUpHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDoubleClickWhilePeeking" );
-	LEOHandlerID	peekingDragHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "mouseDragWhilePeeking" );
-	LEOHandlerID	openFieldHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openField" );
-	LEOHandlerID	closeFieldHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closeField" );
-	LEOHandlerID	openBackgroundHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "openBackground" );
-	LEOHandlerID	closeBackgroundHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "closeBackground" );
-	LEOHandlerID	moveWindowHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "moveWindow" );
-	LEOHandlerID	resizeWindowHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "resizeWindow" );
-	LEOHandlerID	focusWindowHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "focusWindow" );
-	LEOHandlerID	selectWindowHandlerID = LEOContextGroupHandlerIDForHandlerName( inContext->group, "selectWindow" );
 	if( inHandler == arrowKeyHandlerID )
 	{
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
@@ -775,42 +739,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
 	}
-	else if( inHandler == openCardHandlerID
-			|| inHandler == closeCardHandlerID
-			|| inHandler == openStackHandlerID
-			|| inHandler == closeStackHandlerID
-			|| inHandler == mouseEnterHandlerID
-			|| inHandler == mouseDownHandlerID
-			|| inHandler == mouseUpHandlerID
-			|| inHandler == mouseUpOutsideHandlerID
-			|| inHandler == mouseDoubleDownHandlerID
-			|| inHandler == mouseDoubleUpHandlerID
-			|| inHandler == mouseLeaveHandlerID
-			|| inHandler == mouseMoveHandlerID
-			|| inHandler == mouseDragHandlerID
-			|| inHandler == functionKeyHandlerID
-			|| inHandler == textChangeHandlerID
-			|| inHandler == loadPageHandlerID
-			|| inHandler == linkClickedHandlerID
-			|| inHandler == selectionChangeHandlerID
-			|| inHandler == pointerSelectionChangeHandlerID
-			|| inHandler == mouseDoubleClickHandlerID
-			|| inHandler == playMovieHandlerID
-			|| inHandler == stopMovieHandlerID
-			|| inHandler == pointerDoubleDownHandlerID
-			|| inHandler == pointerUpHandlerID
-			|| inHandler == peekingDoubleDownHandlerID
-			|| inHandler == peekingUpHandlerID
-			|| inHandler == peekingDoubleUpHandlerID
-			|| inHandler == peekingDragHandlerID
-			|| inHandler == openFieldHandlerID
-			|| inHandler == closeFieldHandlerID
-			|| inHandler == closeBackgroundHandlerID
-			|| inHandler == openBackgroundHandlerID
-			|| inHandler == moveWindowHandlerID
-			|| inHandler == resizeWindowHandlerID
-			|| inHandler == focusWindowHandlerID
-			|| inHandler == selectWindowHandlerID )
+	else if( mayGoUnhandled == EMayGoUnhandled )
 	{
 		handled = true;
 		LEOCleanUpHandlerParametersFromEndOfStack( inContext );
@@ -925,7 +854,7 @@ bool	CScriptableObject::HasMessageHandler( const char* inMsgName )
 }
 
 
-void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, const char* fmt, ... )
+void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, TMayGoUnhandledFlag mayGoUnhandled, const char* fmt, ... )
 {
 #if 0
 	#define DBGLOGPAR(args...)	printf(args)
@@ -1194,7 +1123,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 			if( !theScript )
 			{
 				if( ctx->callNonexistentHandlerProc )
-					ctx->callNonexistentHandlerProc( ctx, handlerID );
+					ctx->callNonexistentHandlerProc( ctx, handlerID, mayGoUnhandled );
 				break;
 			}
 		}

@@ -59,7 +59,7 @@ void	CTimerPart::Trigger()
 		return;
 	
 	CAutoreleasePool		pool;
-	SendMessage( NULL, [](const char * errMsg, size_t inLine, size_t inOffs, CScriptableObject * obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, mMessage.c_str() );
+	SendMessage( NULL, [](const char * errMsg, size_t inLine, size_t inOffs, CScriptableObject * obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, mMessage.c_str() );
 	
 	if( !mRepeat )
 	{
