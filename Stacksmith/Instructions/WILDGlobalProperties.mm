@@ -14,6 +14,8 @@
 #include "CScriptableObjectValue.h"
 #include "CSound.h"
 #include "CStack.h"
+#include "CStackMac.h"
+#include "CCursor.h"
 
 
 using namespace Carlson;
@@ -40,6 +42,7 @@ void	LEOPushTargetInstruction( LEOContext* inContext );
 void	LEOPushSoundInstruction( LEOContext* inContext );
 void	LEOPushEditBackgroundInstruction( LEOContext* inContext );
 void	LEOSetEditBackgroundInstruction( LEOContext* inContext );
+void	LEOPushMouseLocationInstruction( LEOContext* inContext );
 
 
 void	LEOSetCursorInstruction( LEOContext* inContext )
@@ -179,6 +182,21 @@ void	LEOSetEditBackgroundInstruction( LEOContext* inContext )
 }
 
 
+void	LEOPushMouseLocationInstruction( LEOContext* inContext )
+{
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+
+	LEONumber		l = 0, t = 0;
+	CCursor::GetGlobalPosition( &l, &t );
+	CStackMac*	stack = (CStackMac*) userData->GetStack();
+	l -= stack->GetLeft();
+	t -= stack->GetTop();
+	LEOPushPointOnStack( inContext, l, t );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOSetCursorInstruction)
 LEOINSTR(LEOPushCursorInstruction)
@@ -192,7 +210,8 @@ LEOINSTR(LEOPushSystemVersionInstruction)
 LEOINSTR(LEOPushSoundInstruction)
 LEOINSTR(LEOPushEditBackgroundInstruction)
 LEOINSTR(LEOSetEditBackgroundInstruction)
-LEOINSTR_LAST(LEOPushTargetInstruction)
+LEOINSTR(LEOPushTargetInstruction)
+LEOINSTR_LAST(LEOPushMouseLocationInstruction)
 
 
 struct TGlobalPropertyEntry	gHostGlobalProperties[] =
@@ -208,5 +227,6 @@ struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 	{ ETargetIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_TARGET_INSTR },
 	{ ESoundIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SOUND_INSTR },
 	{ EEditBackgroundIdentifier, ELastIdentifier_Sentinel, SET_EDIT_BACKGROUND_INSTR, PUSH_EDIT_BACKGROUND_INSTR },
+	{ EMouseLocationIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_MOUSE_LOCATION_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };
