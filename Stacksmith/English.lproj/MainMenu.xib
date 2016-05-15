@@ -762,6 +762,11 @@
                                     <action selector="makeKeyAndOrderFront:" target="2SR-K3-0lu" id="E4n-qW-xeZ"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Show Inspector" keyEquivalent="I" id="7wS-wk-Soa">
+                                <connections>
+                                    <action selector="makeKeyAndOrderFront:" target="KD6-Oz-Eaf" id="eDk-4s-Shp"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="724">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -1095,6 +1100,7 @@
                 <outlet property="tagsColor" destination="kyE-xv-Tse" id="kwf-hp-8Gy"/>
             </connections>
         </customObject>
+        <customObject id="KD6-Oz-Eaf" customClass="WILDInspectorWindowController"/>
         <customObject id="4c7-Nh-Ahs" userLabel="UKSCTDUserIdentifiersPrefsController" customClass="UKSCTDUserIdentifiersPrefsController">
             <connections>
                 <outlet property="identifiersList" destination="TOx-Bf-TMH" id="xz5-Eg-kFk"/>
@@ -1274,7 +1280,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" id="TOx-Bf-TMH">
-                                                <rect key="frame" x="0.0" y="0.0" width="233" height="19"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="217" height="19"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

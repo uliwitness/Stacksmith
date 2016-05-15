@@ -390,6 +390,9 @@
 		55BD35731A8FF88300D0BAF7 /* UKPushbackMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD35721A8FF88300D0BAF7 /* UKPushbackMessenger.m */; };
 		55BD35771A8FFEC500D0BAF7 /* WILDSearchField.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55BD35761A8FFEC500D0BAF7 /* WILDSearchField.mm */; };
 		55BD357A1A9003B100D0BAF7 /* WILDComboBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55BD35791A9003B100D0BAF7 /* WILDComboBox.mm */; };
+		55BE064A1CE8DE3E004CB2FC /* WILDInspectorWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55BE06481CE8DE3E004CB2FC /* WILDInspectorWindowController.mm */; };
+		55BE064B1CE8DE3E004CB2FC /* WILDInspectorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BE06491CE8DE3E004CB2FC /* WILDInspectorWindowController.xib */; };
+		55BE06561CE8EF91004CB2FC /* CInspectorRow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55BE06541CE8EF91004CB2FC /* CInspectorRow.cpp */; };
 		55BFEE15137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */; };
 		55BFEE1A137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */; };
 		55BFEE1F137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */; };
@@ -1078,6 +1081,11 @@
 		55BD35761A8FFEC500D0BAF7 /* WILDSearchField.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDSearchField.mm; path = Platforms/Mac/WILDSearchField.mm; sourceTree = "<group>"; };
 		55BD35781A9003B100D0BAF7 /* WILDComboBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDComboBox.h; path = Platforms/Mac/WILDComboBox.h; sourceTree = "<group>"; };
 		55BD35791A9003B100D0BAF7 /* WILDComboBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDComboBox.mm; path = Platforms/Mac/WILDComboBox.mm; sourceTree = "<group>"; };
+		55BE06471CE8DE3E004CB2FC /* WILDInspectorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDInspectorWindowController.h; path = Platforms/Mac/WILDInspectorWindowController.h; sourceTree = "<group>"; };
+		55BE06481CE8DE3E004CB2FC /* WILDInspectorWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDInspectorWindowController.mm; path = Platforms/Mac/WILDInspectorWindowController.mm; sourceTree = "<group>"; };
+		55BE06491CE8DE3E004CB2FC /* WILDInspectorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDInspectorWindowController.xib; path = Platforms/Mac/WILDInspectorWindowController.xib; sourceTree = "<group>"; };
+		55BE06541CE8EF91004CB2FC /* CInspectorRow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInspectorRow.cpp; path = Editor/CInspectorRow.cpp; sourceTree = "<group>"; };
+		55BE06551CE8EF91004CB2FC /* CInspectorRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CInspectorRow.h; path = Editor/CInspectorRow.h; sourceTree = "<group>"; };
 		55BFEE14137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDShrinkToTopFilter.cikernel; path = "Custom Effects/WILDShrinkToTopFilter.cikernel"; sourceTree = "<group>"; };
 		55BFEE19137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDShrinkToBottomFilter.cikernel; path = "Custom Effects/WILDShrinkToBottomFilter.cikernel"; sourceTree = "<group>"; };
 		55BFEE1E137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDStretchFromBottomFilter.cikernel; path = "Custom Effects/WILDStretchFromBottomFilter.cikernel"; sourceTree = "<group>"; };
@@ -1707,6 +1715,11 @@
 				55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */,
 				55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */,
 				55C476681A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib */,
+				55BE06471CE8DE3E004CB2FC /* WILDInspectorWindowController.h */,
+				55BE06481CE8DE3E004CB2FC /* WILDInspectorWindowController.mm */,
+				55BE06491CE8DE3E004CB2FC /* WILDInspectorWindowController.xib */,
+				55BE06551CE8EF91004CB2FC /* CInspectorRow.h */,
+				55BE06541CE8EF91004CB2FC /* CInspectorRow.cpp */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -2376,6 +2389,7 @@
 				55039F5E136B52C80082E32E /* brush28.png in Resources */,
 				55039F5F136B52C80082E32E /* brush29.png in Resources */,
 				55039F60136B52C80082E32E /* brush30.png in Resources */,
+				55BE064B1CE8DE3E004CB2FC /* WILDInspectorWindowController.xib in Resources */,
 				55039F61136B52C80082E32E /* brush31.png in Resources */,
 				551B368E1A8FAC1E006AFDFE /* Home.xstk in Resources */,
 				55039F62136B52C80082E32E /* brush32.png in Resources */,
@@ -2648,6 +2662,7 @@
 				55039FC5136D5CCF0082E32E /* ULILineSizeView.m in Sources */,
 				555E53A918936817001487C1 /* WILDPopUpButtonView.mm in Sources */,
 				55039FC6136D5CCF0082E32E /* ULIPaintBrushTool.m in Sources */,
+				55BE064A1CE8DE3E004CB2FC /* WILDInspectorWindowController.mm in Sources */,
 				559BA9AB18AE70B900760273 /* ULIHighlightingButton.m in Sources */,
 				55039FC7136D5CCF0082E32E /* ULIPaintEraseRectTool.m in Sources */,
 				551B36C31A9907D9006AFDFE /* UKFinderIconCell.m in Sources */,
@@ -2656,6 +2671,7 @@
 				5532D4F91CDF977F00475B70 /* CSocket.cpp in Sources */,
 				55039FC9136D5CCF0082E32E /* ULIPaintFreehandTool.m in Sources */,
 				551583DD18C3826100DB3431 /* WILDTableView.mm in Sources */,
+				55BE06561CE8EF91004CB2FC /* CInspectorRow.cpp in Sources */,
 				55039FCA136D5CCF0082E32E /* ULIPaintLineTool.m in Sources */,
 				55039FCB136D5CCF0082E32E /* ULIPaintOvalTool.m in Sources */,
 				55039FCC136D5CCF0082E32E /* ULIPaintPathTool.m in Sources */,
