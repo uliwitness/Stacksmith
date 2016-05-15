@@ -605,6 +605,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 		[mSearchField setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 		[inSuperView.animator addSubview: mSearchField];
 	}
+	[mView setHidden: !mVisible];
 }
 
 

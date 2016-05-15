@@ -54,6 +54,7 @@ public:
 	virtual void		SetShadowOffset( double w, double h );
 	virtual void		SetShadowBlurRadius( double r );
 	virtual void		SetLineWidth( int w );
+	virtual void		SetVisible( bool visible )		{ CGraphicPart::SetVisible(visible); [mView setHidden: !visible]; };
 
 	virtual void		AddPoint( LEONumber x, LEONumber y, LEONumber lineWidth );
 	virtual void		UpdateLastPoint( LEONumber x, LEONumber y, LEONumber lineWidth );

@@ -76,6 +76,7 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.layer setShadowRadius: mShadowBlurRadius];
 	[mView.layer setShadowOpacity: mShadowColorAlpha == 0 ? 0.0 : 1.0];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
+	[mView setHidden: !mVisible];
 	[inSuperView.animator addSubview: mView];
 	LoadCurrentURL( mCurrentURL );
 }

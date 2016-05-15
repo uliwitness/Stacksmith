@@ -93,6 +93,7 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
 	[mView setToolTip: [NSString stringWithUTF8String: mToolTip.c_str()]];
 	[inSuperView.animator addSubview: mView];
+	[mView setHidden: !mVisible];
 }
 
 
