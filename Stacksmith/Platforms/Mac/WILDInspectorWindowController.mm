@@ -150,15 +150,15 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"|-8-[label]" options: 0 metrics: nil views: @{ @"label": label }];
 		}
 		[container addConstraints: constraints];
-		if( *prevRow )
-		{
-			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[prevRow]-8-[label]" options: 0 metrics: nil views: @{ @"label": label, @"prevRow": *prevRow }];
-		}
-		else
-		{
-			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-8-[label]" options: 0 metrics: nil views: @{ @"label": label }];
-		}
-		[container addConstraints: constraints];
+//		if( *prevRow )
+//		{
+//			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[prevRow]-8-[label]" options: 0 metrics: nil views: @{ @"label": label, @"prevRow": *prevRow }];
+//		}
+//		else
+//		{
+//			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-8-[label]" options: 0 metrics: nil views: @{ @"label": label }];
+//		}
+//		[container addConstraints: constraints];
 	}
 	
 	return label;
@@ -168,15 +168,19 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 -(void)	windowDidLoad
 {
 	[super windowDidLoad];
-
+	
+	self.propertyListView.subviews = @[];
+	
 	CInspectorRow	rows[] =
 	{
 		{ EInspectorRowTypeSeparator, "Properties", "", {}, "" },
-		{ EInspectorRowTypeLabel, "ID:", "Unique identification number for this part on this card.", { "foo", "bar" }, "id" },
+		{ EInspectorRowTypeLabel, "ID:", "Unique identification number for this part on this card.", {}, "id" },
 		{ EInspectorRowTypeLabel, "Number:", "Number of the position at which this part is, from back to front.", {}, "number" },
 		{ EInspectorRowTypeLabel, "Part Number:", "Number of the position at which this part is, from back to front.", {}, "partNumber" },
 		{ EInspectorRowTypeCheckbox, "Auto Highlight", "Should the button highlight when clicked.", {}, "autoHighlight" },
 		{ EInspectorRowTypeButton, "Script…", "Edit the behaviours associated with this part.", {}, "script" },
+		{ EInspectorRowTypePopup, "Style:", "Appearance and behaviour of this part.", { "foo", "bar" }, "style" },
+		{ EInspectorRowTypeColorPicker, "Line Color:", "Color for the outline for this part.", {}, "lineColor" },
 		{ EInspectorRowType_Invalid, "", "", {}, "" }
 	};
 	
@@ -203,6 +207,7 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 			value.selectable = YES;
 			value.drawsBackground = NO;
 			value.stringValue = @"2000";
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
 			[self.propertyListView addSubview: value];
 			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value]-(>=8)-|" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
 			[self.propertyListView addConstraints: constraints];
@@ -223,6 +228,7 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 			value.translatesAutoresizingMaskIntoConstraints = NO;
 			value.buttonType = NSSwitchButton;
 			value.title = [NSString stringWithUTF8String: currRow.mLabel.c_str()];
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
 			[self.propertyListView addSubview: value];
 			if( label )
 			{
@@ -254,6 +260,7 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 			value.translatesAutoresizingMaskIntoConstraints = NO;
 			value.title = [NSString stringWithUTF8String: currRow.mLabel.c_str()];
 			value.bezelStyle = NSRoundedBezelStyle;
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
 			[self.propertyListView addSubview: value];
 			if( label )
 			{
@@ -271,6 +278,52 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 			if( prevRow )
 			{
 				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[prevRow]-8-[value]" options: 0 metrics: nil views: @{ @"value": value, @"prevRow": prevRow }];
+			}
+			else
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-8-[value]" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
+			}
+			[self.propertyListView addConstraints: constraints];
+			prevRow = value;
+		}
+		else if( currRow.mType == EInspectorRowTypePopup )
+		{
+			label = [self addLabelViewForRow: currRow inView: self.propertyListView withPrevRow: &prevRow prevLabel: &prevLabel fillRow: NO];
+			
+			NSPopUpButton*	value = [[[NSPopUpButton alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			value.translatesAutoresizingMaskIntoConstraints = NO;
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			for( const std::string& currItem : currRow.mPopupChoices )
+			{
+				[value addItemWithTitle: [NSString stringWithUTF8String: currItem.c_str()]];
+			}
+			[self.propertyListView addSubview: value];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value]-(>=8)-|" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
+			[self.propertyListView addConstraints: constraints];
+			if( prevRow )
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[prevRow]-8-[value]" options: 0 metrics: nil views: @{ @"label": label, @"value": value, @"prevRow": prevRow }];
+			}
+			else
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-8-[value]" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
+			}
+			[self.propertyListView addConstraints: constraints];
+			prevRow = value;
+		}
+		else if( currRow.mType == EInspectorRowTypeColorPicker )
+		{
+			label = [self addLabelViewForRow: currRow inView: self.propertyListView withPrevRow: &prevRow prevLabel: &prevLabel fillRow: NO];
+			
+			NSColorWell*	value = [[[NSColorWell alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			value.translatesAutoresizingMaskIntoConstraints = NO;
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: value];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value(60)]-(>=8)-|" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
+			[self.propertyListView addConstraints: constraints];
+			if( prevRow )
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[prevRow]-8-[value(24)]" options: 0 metrics: nil views: @{ @"label": label, @"value": value, @"prevRow": prevRow }];
 			}
 			else
 			{
@@ -306,7 +359,19 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 		else if( label )
 			prevRow = label;
 		if( label )
+		{
+			if( label != prevRow && currRow.mType == EInspectorRowTypeColorPicker )
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value]" options: NSLayoutFormatAlignAllCenterY metrics: nil views: @{ @"label": label, @"value": prevRow }];
+				[self.propertyListView addConstraints: constraints];
+			}
+			else if( label != prevRow )
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value]" options: NSLayoutFormatAlignAllBaseline metrics: nil views: @{ @"label": label, @"value": prevRow }];
+				[self.propertyListView addConstraints: constraints];
+			}
 			prevLabel = label;
+		}
 	}
 	
 	if( prevRow )
