@@ -143,11 +143,11 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 	{
 		if( *prevLabel )
 		{
-			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"|-8-[label(==prevLabel)]" options: 0 metrics: nil views: @{ @"label": label, @"prevLabel": *prevLabel }];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"|-12-[label(==prevLabel)]" options: 0 metrics: nil views: @{ @"label": label, @"prevLabel": *prevLabel }];
 		}
 		else
 		{
-			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"|-8-[label]" options: 0 metrics: nil views: @{ @"label": label }];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"|-12-[label]" options: 0 metrics: nil views: @{ @"label": label }];
 		}
 		[container addConstraints: constraints];
 //		if( *prevRow )
@@ -181,6 +181,9 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 		{ EInspectorRowTypeButton, "Script…", "Edit the behaviours associated with this part.", {}, "script" },
 		{ EInspectorRowTypePopup, "Style:", "Appearance and behaviour of this part.", { "foo", "bar" }, "style" },
 		{ EInspectorRowTypeColorPicker, "Line Color:", "Color for the outline for this part.", {}, "lineColor" },
+		{ EInspectorRowTypeAngleDial, "Shadow Angle:", "Angle at which the shadow falls.", {}, "shadowAngle" },
+		{ EInspectorRowTypeThreeLabelColumns, "", "", { "ID", "2000", "Number", "2", "Part Number", "5" }, "shadowAngle" },
+		
 		{ EInspectorRowType_Invalid, "", "", {}, "" }
 	};
 	
@@ -332,6 +335,29 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 			[self.propertyListView addConstraints: constraints];
 			prevRow = value;
 		}
+		else if( currRow.mType == EInspectorRowTypeAngleDial )
+		{
+			label = [self addLabelViewForRow: currRow inView: self.propertyListView withPrevRow: &prevRow prevLabel: &prevLabel fillRow: NO];
+			
+			NSSlider*	value = [[[NSSlider alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			value.sliderType = NSCircularSlider;
+			value.translatesAutoresizingMaskIntoConstraints = NO;
+//			value.controlSize = NSSmallControlSize;
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: value];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value]-(>=8)-|" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
+			[self.propertyListView addConstraints: constraints];
+			if( prevRow )
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[prevRow]-8-[value]" options: 0 metrics: nil views: @{ @"label": label, @"value": value, @"prevRow": prevRow }];
+			}
+			else
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-8-[value]" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
+			}
+			[self.propertyListView addConstraints: constraints];
+			prevRow = value;
+		}
 		else if( currRow.mType == EInspectorRowTypeSeparator )
 		{
 			WILDGradientView*	separator = [[[WILDGradientView alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
@@ -356,11 +382,146 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 			
 			prevRow = separator;
 		}
+		else if( currRow.mType == EInspectorRowTypeThreeLabelColumns )
+		{
+			// Column one:
+			NSBox*			separator = [[[NSBox alloc] initWithFrame: NSMakeRect(0,0,1, 16)] autorelease];
+			separator.boxType = NSBoxSeparator;
+			separator.translatesAutoresizingMaskIntoConstraints = NO;
+			[self.propertyListView addSubview: separator];
+		
+			NSTextField*	labelAbove = [[[NSTextField alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			labelAbove.translatesAutoresizingMaskIntoConstraints = NO;
+			labelAbove.font = [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]];
+			labelAbove.bordered = NO;
+			labelAbove.editable = NO;
+			labelAbove.selectable = YES;
+			labelAbove.drawsBackground = NO;
+			labelAbove.stringValue = [NSString stringWithUTF8String: currRow.mPopupChoices[0].c_str()];
+			labelAbove.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: labelAbove];
+
+			NSTextField*	value = [[[NSTextField alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			value.translatesAutoresizingMaskIntoConstraints = NO;
+			value.font = [NSFont systemFontOfSize: [NSFont smallSystemFontSize]];
+			value.bordered = NO;
+			value.editable = NO;
+			value.selectable = YES;
+			value.drawsBackground = NO;
+			value.stringValue = [NSString stringWithUTF8String: currRow.mPopupChoices[1].c_str()];
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: value];
+			
+			if( prevLabel )
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[prevLabel]-8-[labelAbove]-8-[separator]" options: 0 metrics: nil views: @{ @"prevLabel": prevLabel, @"labelAbove": labelAbove, @"separator": separator }];
+			}
+			else
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"|-(>=8)-[labelAbove]-(>=8)-[separator]" options: 0 metrics: nil views: @{ @"prevLabel": prevLabel, @"labelAbove": labelAbove, @"separator": separator }];
+			}
+			[self.propertyListView addConstraints: constraints];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[value]-(>=8)-[separator]" options: 0 metrics: nil views: @{ @"value": value, @"separator": separator }];
+			[self.propertyListView addConstraints: constraints];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[labelAbove]-4-[value]" options: NSLayoutFormatAlignAllLeading metrics: nil views: @{ @"labelAbove": labelAbove, @"value": value }];
+			[self.propertyListView addConstraints: constraints];
+			if( prevRow )
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[prevRow]-8-[labelAbove]" options: 0 metrics: nil views: @{ @"labelAbove": labelAbove, @"prevRow": prevRow }];
+			}
+			else
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-8-[labelAbove]" options: 0 metrics: nil views: @{ @"labelAbove": labelAbove }];
+			}
+			[self.propertyListView addConstraints: constraints];
+			NSLayoutConstraint	*lc = [NSLayoutConstraint constraintWithItem: separator attribute: NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem: labelAbove attribute: NSLayoutAttributeTop multiplier: 1.0 constant: 0.0];
+			[self.propertyListView addConstraint: lc];
+			lc = [NSLayoutConstraint constraintWithItem: separator attribute: NSLayoutAttributeBottom relatedBy: NSLayoutRelationEqual toItem: value attribute: NSLayoutAttributeBottom multiplier: 1.0 constant: 0.0];
+			[self.propertyListView addConstraint: lc];
+			
+			prevRow = value;
+			
+			// Column two:
+			labelAbove = [[[NSTextField alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			labelAbove.translatesAutoresizingMaskIntoConstraints = NO;
+			labelAbove.font = [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]];
+			labelAbove.bordered = NO;
+			labelAbove.editable = NO;
+			labelAbove.selectable = YES;
+			labelAbove.drawsBackground = NO;
+			labelAbove.stringValue = [NSString stringWithUTF8String: currRow.mPopupChoices[2].c_str()];
+			labelAbove.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: labelAbove];
+			
+			value = [[[NSTextField alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			value.translatesAutoresizingMaskIntoConstraints = NO;
+			value.font = [NSFont systemFontOfSize: [NSFont smallSystemFontSize]];
+			value.bordered = NO;
+			value.editable = NO;
+			value.selectable = YES;
+			value.drawsBackground = NO;
+			value.stringValue = [NSString stringWithUTF8String: currRow.mPopupChoices[3].c_str()];
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: value];
+			
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[separator]-8-[labelAbove]" options: 0 metrics: nil views: @{ @"separator": separator, @"labelAbove": labelAbove }];
+			[self.propertyListView addConstraints: constraints];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[labelAbove]-4-[value]" options: NSLayoutFormatAlignAllLeading metrics: nil views: @{ @"value": value, @"labelAbove": labelAbove }];
+			[self.propertyListView addConstraints: constraints];
+
+			lc = [NSLayoutConstraint constraintWithItem: separator attribute: NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem: labelAbove attribute: NSLayoutAttributeTop multiplier: 1.0 constant: 0.0];
+			[self.propertyListView addConstraint: lc];
+
+			separator = [[[NSBox alloc] initWithFrame: NSMakeRect(0,0,1, 16)] autorelease];
+			separator.boxType = NSBoxSeparator;
+			separator.translatesAutoresizingMaskIntoConstraints = NO;
+			[self.propertyListView addSubview: separator];
+		
+			lc = [NSLayoutConstraint constraintWithItem: separator attribute: NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem: labelAbove attribute: NSLayoutAttributeTop multiplier: 1.0 constant: 0.0];
+			[self.propertyListView addConstraint: lc];
+			lc = [NSLayoutConstraint constraintWithItem: separator attribute: NSLayoutAttributeBottom relatedBy: NSLayoutRelationEqual toItem: value attribute: NSLayoutAttributeBottom multiplier: 1.0 constant: 0.0];
+			[self.propertyListView addConstraint: lc];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[value]-(>=8)-[separator]" options: 0 metrics: nil views: @{ @"value": value, @"separator": separator }];
+			[self.propertyListView addConstraints: constraints];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[labelAbove]-(>=8)-[separator]" options: 0 metrics: nil views: @{ @"labelAbove": labelAbove, @"separator": separator }];
+			[self.propertyListView addConstraints: constraints];
+			
+			// Column three:
+			labelAbove = [[[NSTextField alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			labelAbove.translatesAutoresizingMaskIntoConstraints = NO;
+			labelAbove.font = [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]];
+			labelAbove.bordered = NO;
+			labelAbove.editable = NO;
+			labelAbove.selectable = YES;
+			labelAbove.drawsBackground = NO;
+			labelAbove.stringValue = [NSString stringWithUTF8String: currRow.mPopupChoices[4].c_str()];
+			labelAbove.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: labelAbove];
+			
+			value = [[[NSTextField alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 16)] autorelease];
+			value.translatesAutoresizingMaskIntoConstraints = NO;
+			value.font = [NSFont systemFontOfSize: [NSFont smallSystemFontSize]];
+			value.bordered = NO;
+			value.editable = NO;
+			value.selectable = YES;
+			value.drawsBackground = NO;
+			value.stringValue = [NSString stringWithUTF8String: currRow.mPopupChoices[5].c_str()];
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: value];
+			
+			lc = [NSLayoutConstraint constraintWithItem: separator attribute: NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem: labelAbove attribute: NSLayoutAttributeTop multiplier: 1.0 constant: 0.0];
+			[self.propertyListView addConstraint: lc];
+
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[separator]-8-[labelAbove]-(>=8)-|" options: 0 metrics: nil views: @{ @"separator": separator, @"labelAbove": labelAbove }];
+			[self.propertyListView addConstraints: constraints];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[labelAbove]-4-[value]-(>=8)-|" options: NSLayoutFormatAlignAllLeading metrics: nil views: @{ @"value": value, @"labelAbove": labelAbove }];
+			[self.propertyListView addConstraints: constraints];
+		}
 		else if( label )
 			prevRow = label;
 		if( label )
 		{
-			if( label != prevRow && currRow.mType == EInspectorRowTypeColorPicker )
+			if( label != prevRow && (currRow.mType == EInspectorRowTypeColorPicker || currRow.mType == EInspectorRowTypeAngleDial) )
 			{
 				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value]" options: NSLayoutFormatAlignAllCenterY metrics: nil views: @{ @"label": label, @"value": prevRow }];
 				[self.propertyListView addConstraints: constraints];
