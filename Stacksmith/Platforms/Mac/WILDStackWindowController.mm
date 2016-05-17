@@ -1253,6 +1253,24 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	editCardScript: (id)sender
+{
+	mStack->GetCurrentCard()->OpenScriptEditorAndShowLine(0);
+}
+
+
+-(IBAction)	editBackgroundScript: (id)sender
+{
+	mStack->GetCurrentCard()->GetBackground()->OpenScriptEditorAndShowLine(0);
+}
+
+
+-(IBAction)	editStackScript: (id)sender
+{
+	mStack->OpenScriptEditorAndShowLine(0);
+}
+
+
 -(IBAction)	toggleBackgroundEditMode: (id)sender
 {
 	CAutoreleasePool	pool;
