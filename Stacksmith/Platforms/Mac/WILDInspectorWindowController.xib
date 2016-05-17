@@ -22,7 +22,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="290" height="401"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="82Z-ry-Xfa">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="82Z-ry-Xfa" customClass="NSVisualEffectView">
                         <rect key="frame" x="0.0" y="0.0" width="290" height="401"/>
                     </customView>
                 </subviews>
