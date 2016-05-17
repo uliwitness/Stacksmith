@@ -174,15 +174,14 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 	CInspectorRow	rows[] =
 	{
 		{ EInspectorRowTypeSeparator, "Properties", "", {}, "" },
-		{ EInspectorRowTypeLabel, "ID:", "Unique identification number for this part on this card.", {}, "id" },
-		{ EInspectorRowTypeLabel, "Number:", "Number of the position at which this part is, from back to front.", {}, "number" },
+		{ EInspectorRowTypeEditField, "Name:", "Name you can use to reference this part from scripts.", {}, "name" },
+		{ EInspectorRowTypeThreeLabelColumns, "", "", { "ID", "2000", "Number", "2", "Part Number", "5" }, "shadowAngle" },
 		{ EInspectorRowTypeLabel, "Part Number:", "Number of the position at which this part is, from back to front.", {}, "partNumber" },
 		{ EInspectorRowTypeCheckbox, "Auto Highlight", "Should the button highlight when clicked.", {}, "autoHighlight" },
 		{ EInspectorRowTypeButton, "Script…", "Edit the behaviours associated with this part.", {}, "script" },
 		{ EInspectorRowTypePopup, "Style:", "Appearance and behaviour of this part.", { "foo", "bar" }, "style" },
 		{ EInspectorRowTypeColorPicker, "Line Color:", "Color for the outline for this part.", {}, "lineColor" },
 		{ EInspectorRowTypeAngleDial, "Shadow Angle:", "Angle at which the shadow falls.", {}, "shadowAngle" },
-		{ EInspectorRowTypeThreeLabelColumns, "", "", { "ID", "2000", "Number", "2", "Part Number", "5" }, "shadowAngle" },
 		
 		{ EInspectorRowType_Invalid, "", "", {}, "" }
 	};
@@ -213,6 +212,31 @@ static WILDInspectorWindowController*	sSharedInspectorWindowController = nil;
 			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
 			[self.propertyListView addSubview: value];
 			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value]-(>=8)-|" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
+			[self.propertyListView addConstraints: constraints];
+			if( prevRow )
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[prevRow]-8-[value]" options: 0 metrics: nil views: @{ @"label": label, @"value": value, @"prevRow": prevRow }];
+			}
+			else
+			{
+				constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-8-[value]" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
+			}
+			[self.propertyListView addConstraints: constraints];
+			prevRow = value;
+		}
+		else if( currRow.mType == EInspectorRowTypeEditField )
+		{
+			label = [self addLabelViewForRow: currRow inView: self.propertyListView withPrevRow: &prevRow prevLabel: &prevLabel fillRow: NO];
+			
+			NSTextField*	value = [[[NSTextField alloc] initWithFrame: NSMakeRect(0,0,self.window.contentView.bounds.size.width, 22)] autorelease];
+			value.translatesAutoresizingMaskIntoConstraints = NO;
+			value.bezeled = YES;
+			value.editable = YES;
+			value.selectable = YES;
+			value.stringValue = @"Foo";
+			value.toolTip = [NSString stringWithUTF8String: currRow.mToolTip.c_str()];
+			[self.propertyListView addSubview: value];
+			constraints = [NSLayoutConstraint constraintsWithVisualFormat: @"[label]-8-[value]-8-|" options: 0 metrics: nil views: @{ @"label": label, @"value": value }];
 			[self.propertyListView addConstraints: constraints];
 			if( prevRow )
 			{
