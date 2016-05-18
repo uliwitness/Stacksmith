@@ -16,6 +16,7 @@
 #include "CStack.h"
 #include "CStackMac.h"
 #include "CCursor.h"
+#import "WILDStackWindowController.h"
 
 
 using namespace Carlson;
@@ -43,6 +44,8 @@ void	LEOPushSoundInstruction( LEOContext* inContext );
 void	LEOPushEditBackgroundInstruction( LEOContext* inContext );
 void	LEOSetEditBackgroundInstruction( LEOContext* inContext );
 void	LEOPushMouseLocationInstruction( LEOContext* inContext );
+void	LEOPushMainStackInstruction( LEOContext* inContext );
+void	LEOPushFocusedStackInstruction( LEOContext* inContext );
 
 
 void	LEOSetCursorInstruction( LEOContext* inContext )
@@ -197,6 +200,72 @@ void	LEOPushMouseLocationInstruction( LEOContext* inContext )
 }
 
 
+void	LEOPushMainStackInstruction( LEOContext* inContext )
+{
+	CScriptableObject	*	wdObj = nullptr;
+	NSWindow			*	wd = [[NSApplication sharedApplication] mainWindow];
+	if( wd )
+	{
+		NSWindowController	*	wc = [wd windowController];
+		if( [wc isKindOfClass: [WILDStackWindowController class]] )
+		{
+			WILDStackWindowController	*	swc = (WILDStackWindowController*)wc;
+			CStack	*	theStack = swc.cppStack;
+			if( inContext->group == theStack->GetScriptContextGroupObject() )
+			{
+				wdObj = theStack;
+			}
+		}
+	}
+	
+	LEOValuePtr		returnValue = inContext->stackEndPtr;
+	inContext->stackEndPtr++;
+	if( wdObj )
+	{
+		wdObj->InitValue( returnValue, kLEOKeepReferences, inContext );
+	}
+	else
+	{
+		LEOInitUnsetValue( returnValue, kLEOKeepReferences, inContext );
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
+void	LEOPushFocusedStackInstruction( LEOContext* inContext )
+{
+	CScriptableObject	*	wdObj = nullptr;
+	NSWindow			*	wd = [[NSApplication sharedApplication] keyWindow];
+	if( wd )
+	{
+		NSWindowController	*	wc = [wd windowController];
+		if( [wc isKindOfClass: [WILDStackWindowController class]] )
+		{
+			WILDStackWindowController	*	swc = (WILDStackWindowController*)wc;
+			CStack	*	theStack = swc.cppStack;
+			if( inContext->group == theStack->GetScriptContextGroupObject() )
+			{
+				wdObj = theStack;
+			}
+		}
+	}
+	
+	LEOValuePtr		returnValue = inContext->stackEndPtr;
+	inContext->stackEndPtr++;
+	if( wdObj )
+	{
+		wdObj->InitValue( returnValue, kLEOKeepReferences, inContext );
+	}
+	else
+	{
+		LEOInitUnsetValue( returnValue, kLEOKeepReferences, inContext );
+	}
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 LEOINSTR(LEOSetCursorInstruction)
 LEOINSTR(LEOPushCursorInstruction)
@@ -211,7 +280,9 @@ LEOINSTR(LEOPushSoundInstruction)
 LEOINSTR(LEOPushEditBackgroundInstruction)
 LEOINSTR(LEOSetEditBackgroundInstruction)
 LEOINSTR(LEOPushTargetInstruction)
-LEOINSTR_LAST(LEOPushMouseLocationInstruction)
+LEOINSTR(LEOPushMouseLocationInstruction)
+LEOINSTR(LEOPushMainStackInstruction)
+LEOINSTR_LAST(LEOPushFocusedStackInstruction)
 
 
 struct TGlobalPropertyEntry	gHostGlobalProperties[] =
@@ -228,5 +299,7 @@ struct TGlobalPropertyEntry	gHostGlobalProperties[] =
 	{ ESoundIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_SOUND_INSTR },
 	{ EEditBackgroundIdentifier, ELastIdentifier_Sentinel, SET_EDIT_BACKGROUND_INSTR, PUSH_EDIT_BACKGROUND_INSTR },
 	{ EMouseLocationIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_MOUSE_LOCATION_INSTR },
+	{ EFocusedStackIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_FOCUSED_STACK_INSTR },
+	{ EMainStackIdentifier, ELastIdentifier_Sentinel, INVALID_INSTR2, PUSH_MAIN_STACK_INSTR },
 	{ ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, INVALID_INSTR2, INVALID_INSTR2 }
 };
