@@ -438,10 +438,6 @@ bool	CPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart,
 	{
 		LEOInitStringValue( outValue, mName.c_str(), mName.size(), kLEOInvalidateReferences, inContext );
 	}
-	else if( strcasecmp("script", inPropertyName) == 0 )
-	{
-		LEOInitStringValue( outValue, mScript.c_str(), mScript.size(), kLEOInvalidateReferences, inContext );
-	}
 	else if( strcasecmp("id", inPropertyName) == 0 )
 	{
 		LEOInitIntegerValue( outValue, GetID(), kLEOUnitNone, kLEOInvalidateReferences, inContext );
@@ -482,12 +478,6 @@ bool	CPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 		uint16_t	fileID = 0;
 		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
 		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "The ID of an object can't be changed." );
-	}
-	else if( strcasecmp("script", inPropertyName) == 0 )
-	{
-		char		scriptBuf[1024];
-		const char*	scriptStr = LEOGetValueAsString( inValue, scriptBuf, sizeof(scriptBuf), inContext );
-		SetScript( scriptStr );
 	}
 	else if( strcasecmp("number", inPropertyName) == 0 )
 	{

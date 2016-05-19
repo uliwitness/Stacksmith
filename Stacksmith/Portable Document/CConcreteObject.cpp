@@ -740,6 +740,11 @@ bool	CConcreteObject::GetPropertyNamed( const char* inPropertyName, size_t byteR
 		LEOInitArrayValue( &outValue->array, theArray, kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp("script", inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mScript.c_str(), mScript.size(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	
 	std::string	propValue;
 	if( GetUserPropertyValueForName( inPropertyName, propValue ) )
@@ -775,6 +780,13 @@ bool	CConcreteObject::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext*
 			if( theValue == &tmpStorage )
 				LEOCleanUpValue( theValue, kLEOInvalidateReferences, inContext );
 		}
+		return true;
+	}
+	else if( strcasecmp("script", inPropertyName) == 0 )
+	{
+		char		scriptBuf[1024];
+		const char*	scriptStr = LEOGetValueAsString( inValue, scriptBuf, sizeof(scriptBuf), inContext );
+		SetScript( scriptStr );
 		return true;
 	}
 	
