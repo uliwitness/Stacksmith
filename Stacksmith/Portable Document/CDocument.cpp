@@ -102,6 +102,7 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 		slashOffset = 0;
 	mURL = inURL.substr(0,slashOffset);
 	mMediaCache.SetURL( mURL );
+	mName = mURL;
 	
 	CURLRequest		request( inURL );
 	CURLConnection::SendRequestWithCompletionHandler( request, [inURL,this](CURLResponse inResponse, const char* inData, size_t inDataLength)
@@ -137,6 +138,11 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 			// Load media table of this document so others can access it: (ICONs, PICTs, CURSs and SNDs)
 			// Load style table so others can access it:
 			mMediaCache.LoadMediaTableFromElementAsBuiltIn( root, false );	// Load media from this stack.
+			
+			LoadUserPropertiesFromElement( root );
+
+			mScript.clear();
+			CTinyXMLUtils::GetStringNamed( root, "script", mScript );
 			
 			// Load stacks:
 			tinyxml2::XMLElement	*	currStackElem = root->FirstChildElement( "stack" );
@@ -227,26 +233,6 @@ bool	CDocument::Save()
 		tinyxml2::XMLElement*		stackfile = document.NewElement("project");
 		document.InsertEndChild( stackfile );
 		
-		for( auto currStack : mStacks )
-		{
-			tinyxml2::XMLElement*	stackElement = document.NewElement("stack");
-			CTinyXMLUtils::SetLongLongAttributeNamed( stackElement, currStack->GetID(), "id" );
-			stackElement->SetAttribute( "file", currStack->GetFileName().c_str() );
-			stackElement->SetAttribute( "name", currStack->GetName().c_str() );
-			std::string	thumbnailName = currStack->GetThumbnailName();
-			if( thumbnailName.length() != 0 )
-			{
-				stackElement->SetAttribute( "thumbnail", thumbnailName.c_str() );
-			}
-			stackfile->InsertEndChild( stackElement );
-			
-			if( currStack->GetNeedsToBeSaved() )
-			{
-				if( !currStack->Save( destPath ) )
-					return false;
-			}
-		}
-		
 		tinyxml2::XMLElement*		userLevelElement = document.NewElement("userLevel");
 		userLevelElement->SetText(mUserLevel);
 		stackfile->InsertEndChild( userLevelElement );
@@ -270,8 +256,34 @@ bool	CDocument::Save()
 		stackfile->InsertEndChild( createdByElement );
 		createdByElement->SetText("Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION));
 		
+		tinyxml2::XMLElement*		scriptElement = document.NewElement("script");
+		stackfile->InsertEndChild( scriptElement );
+		createdByElement->SetText( mScript.c_str() );
+		
 		if( !mMediaCache.SaveMediaElementsToElement( stackfile ) )
 			return false;
+		
+		LoadUserPropertiesFromElement( stackfile );
+		
+		for( auto currStack : mStacks )
+		{
+			tinyxml2::XMLElement*	stackElement = document.NewElement("stack");
+			CTinyXMLUtils::SetLongLongAttributeNamed( stackElement, currStack->GetID(), "id" );
+			stackElement->SetAttribute( "file", currStack->GetFileName().c_str() );
+			stackElement->SetAttribute( "name", currStack->GetName().c_str() );
+			std::string	thumbnailName = currStack->GetThumbnailName();
+			if( thumbnailName.length() != 0 )
+			{
+				stackElement->SetAttribute( "thumbnail", thumbnailName.c_str() );
+			}
+			stackfile->InsertEndChild( stackElement );
+			
+			if( currStack->GetNeedsToBeSaved() )
+			{
+				if( !currStack->Save( destPath ) )
+					return false;
+			}
+		}
 
 		FILE*	theFile = fopen( (destPath + "/project.xml").c_str(), "w" );
 		if( !theFile )
@@ -571,6 +583,86 @@ void	CDocument::CheckIfWeShouldCloseCauseLastStackClosed()
 	
 	CDocumentManager::GetSharedDocumentManager()->CloseDocument( this );
 }
+
+
+bool	CDocument::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp(inPropertyName, "name") == 0 )
+	{
+		LEOInitStringValue( outValue, mName.c_str(), mName.size(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "id") == 0 )
+	{
+		LEOInitIntegerValue( outValue, GetID(), kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "cantPeek") == 0 )
+	{
+		LEOInitBooleanValue( outValue, mCantPeek, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "privateAccess") == 0 )
+	{
+		LEOInitBooleanValue( outValue, mPrivateAccess, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "writeProtected") == 0 )
+	{
+		LEOInitBooleanValue( outValue, mWriteProtected, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else
+		return CConcreteObject::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
+}
+
+
+bool	CDocument::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp(inPropertyName, "name") == 0 )
+	{
+		char		styleBuf[100] = {0};
+		const char*	styleStr = LEOGetValueAsString( inValue, styleBuf, sizeof(styleBuf), inContext );
+		SetName( styleStr );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "id") == 0 )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "The ID of an object can't be changed." );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "cantPeek") == 0 )
+	{
+		bool			cantPeek = LEOGetValueAsBoolean( inValue, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) != 0 )
+		{
+			mCantPeek = cantPeek;
+		}
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "privateAccess") == 0 )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "You need to use the user interface to remove password protection from a project." );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "writeProtected") == 0 )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "The writeProtected property can't be changed." );
+		return true;
+	}
+	else
+		return CConcreteObject::SetValueForPropertyNamed( inValue, inContext, inPropertyName, byteRangeStart, byteRangeEnd );
+}
+
 
 void	CDocument::Dump( size_t inNestingLevel )
 {

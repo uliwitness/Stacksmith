@@ -75,6 +75,8 @@ void	WILDNumberOfCardPartsInstructionInternal( LEOContext* inContext, const char
 void	WILDNumberOfBackgroundPartsInstructionInternal( LEOContext* inContext, const char* typeName );
 void	WILDPushNumberOfScreensInstruction( LEOContext* inContext );
 void	WILDPushScreenInstruction( LEOContext* inContext );
+void	WILDPushThisProjectInstruction( LEOContext* inContext );
+void	WILDPushProjectInstruction( LEOContext* inContext );
 
 
 using namespace Carlson;
@@ -1071,6 +1073,41 @@ void	WILDPushScreenInstruction( LEOContext* inContext )
 }
 
 
+void	WILDPushThisProjectInstruction( LEOContext* inContext )
+{
+	CDocument	*	frontProject = nullptr;
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	if( frontStack )
+		frontProject = frontStack->GetDocument();
+	inContext->stackEndPtr++;
+	if( frontProject )
+		frontProject->InitValue( inContext->stackEndPtr -1, kLEOKeepReferences, inContext );
+	else
+		LEOInitUnsetValue( inContext->stackEndPtr -1, kLEOKeepReferences, inContext );
+	inContext->currentInstruction++;
+}
+
+
+void	WILDPushProjectInstruction( LEOContext* inContext )
+{
+//	LEOUnit		outUnit = kLEOUnitNone;
+	LEOValuePtr	screenIndexValue = (inContext->stackEndPtr -1);
+	
+//	LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
+	
+	LEOCleanUpValue( screenIndexValue, kLEOInvalidateReferences, inContext );
+	CDocument	*	frontProject = nullptr;
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	if( frontStack )
+		frontProject = frontStack->GetDocument();
+	if( frontProject )
+		frontProject->InitValue( screenIndexValue, kLEOInvalidateReferences, inContext );
+	else
+		LEOInitUnsetValue( screenIndexValue, kLEOInvalidateReferences, inContext );
+	inContext->currentInstruction++;
+}
+
+
 #pragma mark Host Instruction array
 
 LEOINSTR_START(StacksmithHostFunction,WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS)
@@ -1122,7 +1159,9 @@ LEOINSTR(WILDNumberOfCardsInstruction)
 LEOINSTR(WILDNumberOfBackgroundsInstruction)
 LEOINSTR(WILDNumberOfStacksInstruction)
 LEOINSTR(WILDPushNumberOfScreensInstruction)
-LEOINSTR_LAST(WILDPushScreenInstruction)
+LEOINSTR(WILDPushScreenInstruction)
+LEOINSTR(WILDPushThisProjectInstruction)
+LEOINSTR_LAST(WILDPushProjectInstruction)
 
 
 #pragma mark Host function syntax table
@@ -1540,6 +1579,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 			{ EHostParamInvisibleIdentifier, EStackIdentifier, EHostParameterOptional, WILD_THIS_STACK_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParamInvisibleIdentifier, EBackgroundIdentifier, EHostParameterOptional, WILD_THIS_BACKGROUND_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParamInvisibleIdentifier, ECardIdentifier, EHostParameterOptional, WILD_THIS_CARD_INSTRUCTION, 0, 0, '\0', 'X' },
+			{ EHostParamInvisibleIdentifier, EProjectIdentifier, EHostParameterOptional, WILD_PUSH_THIS_PROJECT_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},
@@ -1555,6 +1595,13 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		EScreenIdentifier, INVALID_INSTR2, 0, 0, '\0', 'X',
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, WILD_PUSH_SCREEN_INSTRUCTION, 0, 0, '\0', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		EProjectIdentifier, INVALID_INSTR2, 0, 0, '\0', 'X',
+		{
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, WILD_PUSH_PROJECT_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},

@@ -202,6 +202,12 @@ void	CStack::CallAllCompletionBlocks()
 }
 
 
+CScriptableObject*	CStack::GetParentObject()
+{
+	return mDocument;
+}
+
+
 bool	CStack::Save( const std::string& inPackagePath )
 {
 	if( !mLoaded )

@@ -47,7 +47,7 @@ protected:
 };
 
 
-class CDocument : public CRefCountedObject
+class CDocument : public CConcreteObject
 {
 public:
 	CDocument() : mLoaded(false), mLoading(false), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0), mWriteProtected(false) {};
@@ -57,10 +57,13 @@ public:
 	bool				CreateAtURL( const std::string& inURL, const std::string inNameForUser = "" );
 	void				SaveThumbnailsForOpenStacks();
 	
+	virtual CDocument*	GetDocument() override				{ return this; }
+	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	
 	std::string			GetURL()							{ return mURL; };
 	void				SetURL( const std::string& inURL )	{ mURL = inURL; };
+	virtual CStack*		GetStack() override					{ return nullptr; }
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
 	CStack*				GetStackWithID( ObjectID inID );
 	size_t				GetNumStacks()				{ return mStacks.size(); };
@@ -79,17 +82,20 @@ public:
 	virtual bool		IsWriteProtected()			{ return mWriteProtected; };
 	virtual void		SetWriteProtected( bool n )	{ mWriteProtected = n; };
 	
+	virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
+	virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
+
 	virtual void		ShowStackCanvasWindow()	{};
 	
-	LEOContextGroup*	GetScriptContextGroupObject();
+	virtual LEOContextGroup*	GetScriptContextGroupObject() override;
 
-	virtual void		IncrementChangeCount();
+	virtual void		IncrementChangeCount() override;
 	virtual void		StackIncrementedChangeCount( CStack* inStack )	{}
 	virtual void		LayerIncrementedChangeCount( CLayer* inLayer )	{}
-	virtual bool		GetNeedsToBeSaved();
+	virtual bool		GetNeedsToBeSaved() override;
 	virtual void		CheckIfWeShouldCloseCauseLastStackClosed();
 	
-	virtual void		Dump( size_t inNestingLevel = 0 );
+	virtual void		Dump( size_t inNestingLevel = 0 ) override;
 	static std::string	PathFromFileURL( const std::string& inURL );
 	
 	// "New Part" menu item list querying:
