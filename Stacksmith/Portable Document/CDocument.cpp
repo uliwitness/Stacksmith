@@ -256,9 +256,12 @@ bool	CDocument::Save()
 		stackfile->InsertEndChild( createdByElement );
 		createdByElement->SetText("Stacksmith " MGVH_TOSTRING(STACKSMITH_VERSION));
 		
-		tinyxml2::XMLElement*		scriptElement = document.NewElement("script");
-		stackfile->InsertEndChild( scriptElement );
-		createdByElement->SetText( mScript.c_str() );
+		if( mScript.length() > 0 )
+		{
+			tinyxml2::XMLElement*		scriptElement = document.NewElement("script");
+			stackfile->InsertEndChild( scriptElement );
+			scriptElement->SetText( mScript.c_str() );
+		}
 		
 		if( !mMediaCache.SaveMediaElementsToElement( stackfile ) )
 			return false;
