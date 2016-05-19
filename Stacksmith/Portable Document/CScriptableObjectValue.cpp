@@ -789,12 +789,6 @@ CScriptableObject*		CScriptableObject::GetOwnerScriptableObjectFromContext( LEOC
 }
 
 
-void	CScriptContextUserData::CleanUp( void* inData )
-{
-	delete (CScriptContextUserData*)inData;
-}
-
-
 void	CScriptableObject::PreInstructionProc( LEOContext* inContext )
 {
 	if( CCancelPolling::GetUserWantsToCancel() )
@@ -877,7 +871,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	
 	//printf("Sending: %s\n",msg);
 	
-	CScriptableObject*	parent = GetParentObject();
+	CScriptableObject*			parent = GetParentObject();
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this, this );
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
 	if( outContext )
@@ -1210,4 +1204,15 @@ CDocument*	CScriptContextUserData::GetDocument()
 	return mCurrentStack->GetDocument();
 }
 
+
+void	CScriptContextUserData::CleanUp( void* inData )
+{
+	delete (CScriptContextUserData*)inData;
+}
+
+
+void	CScriptContextGroupUserData::CleanUp( void* inData )
+{
+	delete (CScriptContextGroupUserData*)inData;
+}
 

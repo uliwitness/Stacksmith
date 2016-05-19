@@ -549,7 +549,7 @@ LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 {
 	if( !mContextGroup )
 	{
-		mContextGroup = LEOContextGroupCreate();
+		mContextGroup = LEOContextGroupCreate( new CScriptContextGroupUserData, CScriptContextGroupUserData::CleanUp );
 		if( mURL.find_first_of( "file://" ) != 0 )
 			mContextGroup->flags |= kLEOContextGroupFlagFromNetwork;
 		mContextGroup->messageSent = CDocumentMessageSent;

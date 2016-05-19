@@ -125,6 +125,8 @@ public:
 	static void					ContextCompletedProc( LEOContext* inContext );
 };
 
+typedef CRefCountedObjectRef<CScriptableObject>	CScriptableObjectRef;
+
 
 /*!
 	@class CScriptContextUserData
@@ -159,6 +161,16 @@ protected:
 	std::string				mVisualEffectType;
 	TVisualEffectSpeed		mVisualEffectSpeed;
 };
+
+
+class CScriptContextGroupUserData
+{
+public:
+	std::vector<CScriptableObjectRef>	mFrontScripts;
+	
+	static void			CleanUp( void* inData );
+};
+
 
 }
 

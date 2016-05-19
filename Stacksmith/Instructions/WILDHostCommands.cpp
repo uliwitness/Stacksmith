@@ -44,6 +44,7 @@ void	WILDWaitInstruction( LEOContext* inContext );
 void	WILDMoveInstruction( LEOContext* inContext );
 void	WILDChooseInstruction( LEOContext* inContext );
 void	WILDMarkInstruction( LEOContext* inContext );
+void	WILDInsertScriptInstruction( LEOContext* inContext );
 
 
 using namespace Carlson;
