@@ -142,6 +142,8 @@ void	WILDScheduleResumeOfScript( void )
 		{ { EZoomIdentifier, EInIdentifier, ELastIdentifier_Sentinel }, "zoom in" },
 		{ { EZoomIdentifier, EOpenIdentifier, ELastIdentifier_Sentinel }, "zoom open" },
 		{ { EZoomIdentifier, EOutIdentifier, ELastIdentifier_Sentinel }, "zoom out" },
+		{ { ECheckMarkIdentifier, ELastIdentifier_Sentinel, ELastIdentifier_Sentinel }, "\342\234\223" },	// E2 9C 93 ✓ "check mark"
+		{ { EMixedMarkIdentifier, ELastIdentifier_Sentinel, ELastIdentifier_Sentinel }, "-" },
 		{ { ELastIdentifier_Sentinel, ELastIdentifier_Sentinel, ELastIdentifier_Sentinel }, NULL }
 	};
 	LEOAddStringConstants( visualEffectNames );
