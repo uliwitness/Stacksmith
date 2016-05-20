@@ -167,6 +167,18 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 				
 				currStackElem = currStackElem->NextSiblingElement( "stack" );
 			}
+
+			// Load menus:
+			tinyxml2::XMLElement	*	currMenuElem = root->FirstChildElement( "menu" );
+			
+			while( currMenuElem )
+			{
+				CMenuRef	theMenu( new CMenu );
+				theMenu->LoadFromElement( currMenuElem );
+				mMenus.push_back( theMenu );
+				
+				currMenuElem = currMenuElem->NextSiblingElement( "menu" );
+			}
 		}
 		
 		mChangeCount = 0;
@@ -286,6 +298,14 @@ bool	CDocument::Save()
 				if( !currStack->Save( destPath ) )
 					return false;
 			}
+		}
+
+		for( auto currMenu : mMenus )
+		{
+			tinyxml2::XMLElement*	menuElement = document.NewElement("menu");
+			stackfile->InsertEndChild( menuElement );
+			
+			currMenu->SaveToElement( menuElement );
 		}
 
 		FILE*	theFile = fopen( (destPath + "/project.xml").c_str(), "w" );

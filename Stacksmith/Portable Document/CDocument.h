@@ -13,6 +13,7 @@
 #include "CStack.h"
 #include "CVisiblePart.h"
 #include "CMediaCache.h"
+#include "CMenu.h"
 
 
 namespace Carlson {
@@ -122,6 +123,7 @@ protected:
 	std::string										mURL;
 	std::vector<CStackRef>							mStacks;
 	std::vector<std::function<void(CDocument*)>>	mLoadCompletionBlocks;
+	std::vector<CMenuRef>							mMenus;
 	bool											mPeeking;
 	
 	ObjectID										mStackIDSeed;
