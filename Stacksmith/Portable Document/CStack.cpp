@@ -204,7 +204,7 @@ void	CStack::CallAllCompletionBlocks()
 
 CScriptableObject*	CStack::GetParentObject()
 {
-	return mDocument;
+	return (mStyle == EStackStylePopup || mStyle == EStackStylePalette) ? (CScriptableObject*)GetFrontStack()->GetCurrentCard() : (CScriptableObject*)mDocument;
 }
 
 
