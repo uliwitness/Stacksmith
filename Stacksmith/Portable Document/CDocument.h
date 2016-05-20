@@ -51,7 +51,7 @@ protected:
 class CDocument : public CConcreteObject
 {
 public:
-	CDocument( LEOContextGroup* inGroup = nullptr ) : mLoaded(false), mLoading(false), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(inGroup), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0), mWriteProtected(false) { if( mContextGroup ) LEOContextGroupRetain( mContextGroup ); };
+	CDocument( LEOContextGroup* inGroup = nullptr ) : mLoaded(false), mLoading(false), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mMenuIDSeed(100), mContextGroup(inGroup), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0), mWriteProtected(false) { if( mContextGroup ) LEOContextGroupRetain( mContextGroup ); };
 	
 	void				LoadFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
 	bool				Save();
@@ -79,6 +79,7 @@ public:
 	ObjectID			GetUniqueIDForStack();
 	ObjectID			GetUniqueIDForCard();
 	ObjectID			GetUniqueIDForBackground();
+	ObjectID			GetUniqueIDForMenu();
 	
 	virtual void		SetPeeking( bool inState );
 	virtual bool		GetPeeking()				{ return mPeeking; };
@@ -132,6 +133,7 @@ protected:
 	ObjectID										mStackIDSeed;
 	ObjectID										mCardIDSeed;
 	ObjectID										mBackgroundIDSeed;
+	ObjectID										mMenuIDSeed;
 	size_t											mChangeCount;
 	
 	CMediaCache										mMediaCache;

@@ -22,6 +22,29 @@ static const char*	sMenuItemStyleStrings[EMenuItemStyle_Last +1] =
 };
 
 
+ObjectID	CMenu::GetUniqueIDForItem()
+{
+	bool	notUnique = true;
+	
+	while( notUnique )
+	{
+		notUnique = false;
+		
+		for( auto currItem = mItems.begin(); currItem != mItems.end(); currItem ++ )
+		{
+			if( (*currItem)->GetID() == mItemIDSeed )
+			{
+				notUnique = true;
+				mItemIDSeed++;
+				break;
+			}
+		}
+	}
+	
+	return mItemIDSeed;
+}
+
+
 void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );

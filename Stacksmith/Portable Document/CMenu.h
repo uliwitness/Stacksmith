@@ -31,6 +31,8 @@ namespace Carlson
 	public:
 		explicit CMenuItem( CMenu * inParent );
 		
+		virtual ObjectID	GetID()	const override	{ return mID; }
+		
 		std::string		GetCommandChar()	{ return mCommandChar; }
 		std::string		GetMarkChar()		{ return mMarkChar; }
 		TMenuItemStyle	GetStyle()			{ return mStyle; }
@@ -45,14 +47,14 @@ namespace Carlson
 		virtual std::string		GetTypeName() override			{ return "menuItem"; };
 		
 		static TMenuItemStyle	GetMenuItemStyleFromString( const char* inStyleStr );
-		
 	protected:
-		LEOObjectID			mID;
+		ObjectID			mID;
 		std::string			mCommandChar;
 		std::string			mMarkChar;
 		CMenu*				mParent;
 		TMenuItemStyle		mStyle;
 		bool				mVisible;
+		bool				mEnabled;
 	};
 	
 	typedef CRefCountedObjectRef<CMenuItem>		CMenuItemRef;
@@ -61,11 +63,15 @@ namespace Carlson
 	class CMenu : public CConcreteObject
 	{
 	public:
-		explicit CMenu( CDocument* inDocument ) : mID(0), mVisible(true)	{ mDocument = inDocument; }
+		explicit CMenu( CDocument* inDocument ) : mID(0), mVisible(true), mEnabled(true), mItemIDSeed(100)	{ mDocument = inDocument; }
+		
+		virtual ObjectID	GetID() const override	{ return mID; }
 		
 		size_t		GetNumItems()				{ return mItems.size(); }
 		CMenuItem*	GetItem( size_t inIndex )	{ return mItems[inIndex]; }
+		ObjectID	GetUniqueIDForItem();
 		bool		GetVisible()				{ return mVisible; }
+		bool		GetEnabled()				{ return mEnabled; }
 
 		virtual std::string		GetTypeName() override			{ return "menu"; };
 		
@@ -76,8 +82,11 @@ namespace Carlson
 		
 	protected:
 		std::vector<CMenuItemRef>		mItems;
-		LEOObjectID						mID;
+		ObjectID						mID;
 		bool							mVisible;
+		bool							mEnabled;
+		
+		ObjectID						mItemIDSeed;
 	};
 
 	typedef CRefCountedObjectRef<CMenu>		CMenuRef;

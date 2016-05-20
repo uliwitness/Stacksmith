@@ -562,6 +562,29 @@ ObjectID	CDocument::GetUniqueIDForBackground()
 }
 
 
+ObjectID	CDocument::GetUniqueIDForMenu()
+{
+	bool	notUnique = true;
+	
+	while( notUnique )
+	{
+		notUnique = false;
+		
+		for( auto currMenu = mMenus.begin(); currMenu != mMenus.end(); currMenu ++ )
+		{
+			if( (*currMenu)->GetID() == mMenuIDSeed )
+			{
+				notUnique = true;
+				mMenuIDSeed++;
+				break;
+			}
+		}
+	}
+	
+	return mMenuIDSeed;
+}
+
+
 static void		CDocumentMessageSent( LEOHandlerID inHandlerID, LEOContextGroup* inContext )
 {
 	CMessageWatcher::GetSharedInstance()->AddMessage( LEOContextGroupHandlerNameForHandlerID( inContext, inHandlerID ) );
