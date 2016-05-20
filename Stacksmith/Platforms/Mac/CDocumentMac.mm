@@ -23,22 +23,59 @@ CStack*		CDocumentMac::NewStackWithURLIDNameForDocument( const std::string& inUR
 }
 
 
-void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed )
+void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup )
 {
     try
     {
         //UKLog(@"Entered");
+		bool		isFromNetwork = inGroup && (inGroup->flags & kLEOContextGroupFlagFromNetwork);
+		bool		networkForbidden = inGroup && (inGroup->flags & kLEOContextGroupFlagNoNetwork);
+		if( !networkForbidden ) networkForbidden = isFromNetwork;	// Files from network must be self-contained and may not open other files.
         
         std::string		fileURL( inURL );
 		if( fileURL.length() > 0 && fileURL[fileURL.length() -1] != '/' )
 			fileURL.append( 1, '/' );
         fileURL.append("project.xml");
-        size_t	foundPos = fileURL.find("x-stack://");
-        size_t	foundPos2 = fileURL.find("file://");
-        if( foundPos == 0 )
-            fileURL.replace(foundPos, 10, "http://");
-        else if( foundPos2 == 0 )
+        size_t	foundPosStack = fileURL.find("x-stack://");
+        size_t	foundPosFile = fileURL.find("file://");
+        size_t	foundPosHttp = fileURL.find("http://");
+        size_t	foundPosHttps = fileURL.find("https://");
+        size_t	foundPosStacks = fileURL.find("x-stacks://");
+        if( foundPosStack == 0 )	// x-stack URL?
+		{
+			if( isFromNetwork || networkForbidden )
+			{
+				inCompletionBlock(nullptr);
+				return;
+			}
+            fileURL.replace(foundPosStack, 10, "http://");
+		}
+        else if( foundPosStacks == 0 )	// x-stacks URL?
+		{
+			if( isFromNetwork || networkForbidden )
+			{
+				inCompletionBlock(nullptr);
+				return;
+			}
+            fileURL.replace(foundPosStacks, 10, "https://");
+		}
+		else if( foundPosHttp == 0 && (isFromNetwork || networkForbidden) )
+		{
+			inCompletionBlock(nullptr);
+			return;
+		}
+		else if( foundPosHttps == 0 && (isFromNetwork || networkForbidden) )
+		{
+			inCompletionBlock(nullptr);
+			return;
+		}
+        else if( foundPosFile == 0 )	// Local file URL.
         {
+			if( isFromNetwork )
+			{
+				inCompletionBlock(nullptr);
+				return;
+			}
             NSError		*		err = nil;
             if( ![[NSURL URLWithString: [NSString stringWithUTF8String: fileURL.c_str()]]checkResourceIsReachableAndReturnError: &err] )	// File not found?
             {
@@ -66,7 +103,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 		}
 		
 		// Wasn't already open? Create a new one and load the URL into it:
-        mOpenDocuments.push_back( new CDocumentMac() );
+        mOpenDocuments.push_back( new CDocumentMac(inGroup) );
         CDocumentRef	currDoc( mOpenDocuments.back(), true );	// Take over ownership of the pointer we just 'new'ed, mOpenDocuments retains it by itself.
         
         currDoc->LoadFromURL( fileURL, [this,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CDocument * inDocument)

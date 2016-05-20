@@ -19,6 +19,7 @@ typedef WILDStackCanvasWindowController*			WILDStackCanvasWindowControllerPtr;
 typedef struct WILDStackCanvasWindowController*		WILDStackCanvasWindowControllerPtr;
 #endif
 
+
 namespace Carlson
 {
 
@@ -27,16 +28,16 @@ class CDocumentManagerMac : public CDocumentManager
 public:
 	virtual ~CDocumentManagerMac()	{};
 	
-	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed );
+	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup ) override;
 	
-	virtual void	Quit();
+	virtual void	Quit() override;
 };
 
 
 class CDocumentMac : public CDocument
 {
 public:
-	CDocumentMac() : CDocument(), mCanvasWindowController(NULL) {};
+	CDocumentMac( LEOContextGroup* inGroup ) : CDocument(inGroup), mCanvasWindowController(NULL) {};
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) override;
 	

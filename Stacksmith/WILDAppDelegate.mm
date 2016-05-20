@@ -335,7 +335,7 @@ void	WILDScheduleResumeOfScript( void )
             errMsg << "Can't find stack at " << fileURL << ".";
             CAlert::RunMessageAlert( errMsg.str() );
         }
-	}, "", EVisualEffectSpeedNormal);
+	}, "", EVisualEffectSpeedNormal, nullptr);
 	
 	return YES;	// We show our own errors asynchronously.
 }
@@ -374,7 +374,7 @@ void	WILDScheduleResumeOfScript( void )
 				{
 					CAutoreleasePool	pool;
 					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
-					CDocumentMac*	theDoc = new CDocumentMac();
+					CDocumentMac*	theDoc = new CDocumentMac( nullptr );
 					CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
 					theDoc->CreateAtURL( [newFileURL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String, [[newFileURL lastPathComponent] stringByDeletingPathExtension].UTF8String );
 					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
@@ -456,7 +456,7 @@ void	WILDScheduleResumeOfScript( void )
 		
         try
         {
-            CDocumentMac*	theDoc = new CDocumentMac();
+            CDocumentMac*	theDoc = new CDocumentMac(nullptr);
             CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
             theDoc->CreateAtURL( [savePanel.URL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String );
 			[savePanel.URL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];

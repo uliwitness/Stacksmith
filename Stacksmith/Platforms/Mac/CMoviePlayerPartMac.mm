@@ -233,7 +233,6 @@ void	CMoviePlayerPartMac::SetStarted( bool inStart )
 std::string	CMoviePlayerPartMac::SanitizeMediaPath( const std::string& inPath )
 {
 	LEOContextGroup*	theGroup = GetDocument()->GetScriptContextGroupObject();
-	if( (theGroup->flags & kLEOContextGroupFlagFromNetwork) == 0 );
 	
 	std::string		outURL;
 	if( inPath.find( "http://" ) == 0 && (theGroup->flags & kLEOContextGroupFlagNoNetwork) == 0 )

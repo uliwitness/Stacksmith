@@ -25,7 +25,7 @@ public:
 	CDocumentManager();
 	virtual ~CDocumentManager()	{};
 	
-	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed ) = 0;
+	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup ) = 0;
 	
 	virtual void	AddDocument( CDocumentRef inDocument )	{ mOpenDocuments.push_back(inDocument); };
 	virtual void	CloseDocument( CDocumentRef inDocument );
@@ -50,7 +50,7 @@ protected:
 class CDocument : public CConcreteObject
 {
 public:
-	CDocument() : mLoaded(false), mLoading(false), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(NULL), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0), mWriteProtected(false) {};
+	CDocument( LEOContextGroup* inGroup = nullptr ) : mLoaded(false), mLoading(false), mStackIDSeed(1), mCardIDSeed(3000), mBackgroundIDSeed(1000), mContextGroup(inGroup), mUserLevel(5), mPrivateAccess(false), mCantPeek(false), mChangeCount(0), mWriteProtected(false) { if( mContextGroup ) LEOContextGroupRetain( mContextGroup ); };
 	
 	void				LoadFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock );
 	bool				Save();
