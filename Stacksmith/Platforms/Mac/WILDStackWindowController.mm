@@ -60,7 +60,7 @@ using namespace Carlson;
 @end
 
 
-@interface WILDStackWindowController () <NSPopoverDelegate>
+@interface WILDStackWindowController () <NSPopoverDelegate,NSMenuDelegate>
 
 @end
 
@@ -1161,7 +1161,7 @@ using namespace Carlson;
 	{
 		size_t	numMenus = mStack->GetDocument()->GetNumMenus();
 		if( !mMacMenus )
-			mMacMenus = [[NSMutableArray alloc] initWithCapacity: numMenus];
+			mMacMenus = [[NSMutableArray alloc] init];
 		for( size_t x = 0; x < numMenus; x++ )
 		{
 			CMenu	*	currMenu = mStack->GetDocument()->GetMenu( x );
@@ -1189,6 +1189,8 @@ using namespace Carlson;
 				[currMacItem release];
 			}
 			NSMenuItem*	menuTitleItem = [[NSMenuItem alloc] initWithTitle: macMenuName action:Nil keyEquivalent: @""];
+			menuTitleItem.tag = (intptr_t)currMenu;
+			currMacMenu.delegate = self;
 			menuTitleItem.submenu = currMacMenu;
 			menuTitleItem.hidden = !currMenu->GetVisible();
 			[[[NSApplication sharedApplication] mainMenu] addItem: menuTitleItem];
@@ -1371,6 +1373,15 @@ using namespace Carlson;
 	CCardRef	oldCard = mStack->GetCurrentCard();
 	if( mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
+}
+
+
+-(void)	menuNeedsUpdate: (NSMenu*)menu
+{
+	NSMenuItem	*	menuTitleItem = [menu.supermenu itemAtIndex: [menu.supermenu indexOfItemWithSubmenu: menu]];
+	CMenu*			currMenu = (CMenu*)[menuTitleItem tag];
+	
+	currMenu->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*){}, EMayGoUnhandled, "updateMenu %s", currMenu->GetName().c_str() );
 }
 
 
