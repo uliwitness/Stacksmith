@@ -73,6 +73,9 @@ public:
 	bool				DeleteStack( CStack* inStack );
 	CMediaCache&		GetMediaCache()				{ return mMediaCache; };
 	
+	size_t				GetNumMenus()				{ return mMenus.size(); }
+	CMenu*				GetMenu( size_t inIndex )	{ return mMenus[inIndex]; }
+	
 	ObjectID			GetUniqueIDForStack();
 	ObjectID			GetUniqueIDForCard();
 	ObjectID			GetUniqueIDForBackground();

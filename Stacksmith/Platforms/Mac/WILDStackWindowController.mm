@@ -1153,7 +1153,57 @@ using namespace Carlson;
 		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
 	}
 	
+	for( NSMenuItem* currMacMenuParentItem : mMacMenus )
+	{
+		[currMacMenuParentItem.menu removeItem: currMacMenuParentItem];
+	}
+	if( mStack->GetDocument()->GetNumMenus() > 0 )
+	{
+		size_t	numMenus = mStack->GetDocument()->GetNumMenus();
+		if( !mMacMenus )
+			mMacMenus = [[NSMutableArray alloc] initWithCapacity: numMenus];
+		for( size_t x = 0; x < numMenus; x++ )
+		{
+			CMenu	*	currMenu = mStack->GetDocument()->GetMenu( x );
+			NSString*	macMenuName = [NSString stringWithUTF8String: currMenu->GetName().c_str()];
+			NSMenu	*	currMacMenu = [[NSMenu alloc] initWithTitle: macMenuName];
+			size_t		numItems = currMenu->GetNumItems();
+			for( size_t ix = 0; ix < numItems; ix++ )
+			{
+				CMenuItem	*	currMenuItem = currMenu->GetItem( ix );
+				NSMenuItem	*	currMacItem = nil;
+				if( currMenuItem->GetStyle() == EMenuItemStyleSeparator )
+				{
+					currMacItem = [[NSMenuItem separatorItem] retain];
+				}
+				else
+				{
+					NSString*		macMenuItemName = [NSString stringWithUTF8String: currMenuItem->GetName().c_str()];
+					NSString*		macMenuItemShortcut = [NSString stringWithUTF8String: currMenuItem->GetCommandChar().c_str()];
+					currMacItem = [[NSMenuItem alloc] initWithTitle: macMenuItemName action: @selector(projectMenuItemSelected:) keyEquivalent: macMenuItemShortcut];
+					currMacItem.tag = (intptr_t)currMenuItem;
+					currMacItem.target = self;
+				}
+				[currMacMenu addItem: currMacItem];
+				[currMacItem release];
+			}
+			NSMenuItem*	menuTitleItem = [[NSMenuItem alloc] initWithTitle: macMenuName action:Nil keyEquivalent: @""];
+			menuTitleItem.submenu = currMacMenu;
+			[[[NSApplication sharedApplication] mainMenu] addItem: menuTitleItem];
+			[mMacMenus addObject: menuTitleItem];
+			[currMacMenu release];
+			[menuTitleItem release];
+		}
+	}
+	
 	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "selectWindow" );
+}
+
+
+-(IBAction)	projectMenuItemSelected: (id)sender
+{
+	CMenuItem*	currMenuItem = (CMenuItem*)[sender tag];
+	currMenuItem->SendMessage( NULL, [](const char *, size_t, size_t, CScriptableObject *){}, EMayGoUnhandled, "doMenu %s", [sender title].UTF8String );
 }
 
 

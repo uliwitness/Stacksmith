@@ -15,16 +15,39 @@
 
 namespace Carlson
 {
+	class CMenu;
+	
+	
+	typedef enum
+	{
+		EMenuItemStyleStandard,
+		EMenuItemStyleSeparator,
+		EMenuItemStyle_Last
+	} TMenuItemStyle;
+	
+	
 	class CMenuItem : public CConcreteObject
 	{
 	public:
-		CMenuItem() : mID(0)	{}
+		explicit CMenuItem( CMenu * inParent );
+		
+		std::string		GetCommandChar()	{ return mCommandChar; }
+		TMenuItemStyle	GetStyle()			{ return mStyle; }
 		
 		void	LoadFromElement( tinyxml2::XMLElement* inElement );
 		bool	SaveToElement( tinyxml2::XMLElement* inElement );
+
+		virtual CScriptableObject*	GetParentObject();
+
+		virtual std::string		GetTypeName()			{ return "menuItem"; };
+		
+		static TMenuItemStyle	GetMenuItemStyleFromString( const char* inStyleStr );
 		
 	protected:
-		LEOObjectID						mID;
+		LEOObjectID			mID;
+		std::string			mCommandChar;
+		CMenu*				mParent;
+		TMenuItemStyle		mStyle;
 	};
 	
 	typedef CRefCountedObjectRef<CMenuItem>		CMenuItemRef;
@@ -33,10 +56,17 @@ namespace Carlson
 	class CMenu : public CConcreteObject
 	{
 	public:
-		CMenu() : mID(0)	{}
+		explicit CMenu( CDocument* inDocument ) : mID(0)	{ mDocument = inDocument; }
+		
+		size_t		GetNumItems()				{ return mItems.size(); }
+		CMenuItem*	GetItem( size_t inIndex )	{ return mItems[inIndex]; }
 
+		virtual std::string		GetTypeName()			{ return "menu"; };
+		
 		void	LoadFromElement( tinyxml2::XMLElement* inElement );
 		bool	SaveToElement( tinyxml2::XMLElement* inElement );
+		
+		virtual CScriptableObject*	GetParentObject();
 		
 	protected:
 		std::vector<CMenuItemRef>		mItems;

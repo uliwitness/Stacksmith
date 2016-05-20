@@ -32,8 +32,9 @@ class CPart;
 	NSImageView			*	mCardImageView;
 	BOOL					mWasVisible;
 	NSPopover			*	mPopover;			// If this stack is of style 'popover', this is the popover it is shown in.
-	NSPopover			*	mCurrentPopover;	// WHatever current info popover is shown on the toolbar.
+	NSPopover			*	mCurrentPopover;	// Whatever current info popover is shown on the toolbar.
 	WILDFlippedContentView*	mContentView;
+	NSMutableArray		*	mMacMenus;			// List of menus the project has showing in the menu bar.
 }
 
 -(id)	initWithCppStack: (Carlson::CStackMac*)inStack;

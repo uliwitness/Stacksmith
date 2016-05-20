@@ -8,9 +8,18 @@
 
 #include "CMenu.h"
 #include "CTinyXMLUtils.h"
+#include "CDocument.h"
 
 
 using namespace Carlson;
+
+
+static const char*	sMenuItemStyleStrings[EMenuItemStyle_Last +1] =
+{
+	"standard",
+	"separator",
+	"*UNKNOWN*"
+};
 
 
 void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
@@ -27,7 +36,7 @@ void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
 	tinyxml2::XMLElement	*	currItemElem = inElement->FirstChildElement( "item" );
 	while( currItemElem )
 	{
-		CMenuItemRef		theItem( new CMenuItem, true );
+		CMenuItemRef		theItem( new CMenuItem( this ), true );
 		theItem->LoadFromElement( currItemElem );
 		mItems.push_back( theItem );
 
@@ -57,13 +66,33 @@ bool	CMenu::SaveToElement( tinyxml2::XMLElement* inElement )
 }
 
 
+CScriptableObject*	CMenu::GetParentObject()
+{
+	return CStack::GetFrontStack()->GetCurrentCard();
+}
+
+
+CMenuItem::CMenuItem( CMenu * inParent )
+	: mID(0), mParent(inParent), mStyle(EMenuItemStyleStandard)
+{
+	mDocument = inParent->GetDocument();
+}
+
+
 void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
+	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
 	mName.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "name", mName );
+	tinyxml2::XMLElement* styleElem = inElement->FirstChildElement( "style" );
+	if( styleElem )
+		mStyle = GetMenuItemStyleFromString( styleElem->GetText() );
+	if( mStyle == EMenuItemStyle_Last )
+		mStyle = EMenuItemStyleStandard;
+	mCommandChar.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "commandChar", mCommandChar );
 	mScript.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
-	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
 	
 	LoadUserPropertiesFromElement( inElement );
 }
@@ -71,11 +100,32 @@ void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 
 bool	CMenuItem::SaveToElement( tinyxml2::XMLElement* inElement )
 {
-	CTinyXMLUtils::AddStringNamed( inElement, mName, "name" );
-	CTinyXMLUtils::AddStringNamed( inElement, mScript, "script" );
 	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
+	CTinyXMLUtils::AddStringNamed( inElement, mName, "name" );
+	CTinyXMLUtils::AddStringNamed( inElement, sMenuItemStyleStrings[mStyle], "style" );
+	CTinyXMLUtils::AddStringNamed( inElement, mCommandChar, "commandChar" );
+	CTinyXMLUtils::AddStringNamed( inElement, mScript, "script" );
 
 	SaveUserPropertiesToElementOfDocument( inElement, inElement->GetDocument() );
 
 	return true;
 }
+
+
+CScriptableObject*	CMenuItem::GetParentObject()
+{
+	return mParent;
+}
+
+
+TMenuItemStyle	CMenuItem::GetMenuItemStyleFromString( const char* inStyleStr )
+{
+	for( size_t x = 0; x < EMenuItemStyle_Last; x++ )
+	{
+		if( strcasecmp(sMenuItemStyleStrings[x],inStyleStr) == 0 )
+			return (TMenuItemStyle)x;
+	}
+	return EMenuItemStyle_Last;
+}
+
+

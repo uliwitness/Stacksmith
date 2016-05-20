@@ -173,7 +173,7 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 			
 			while( currMenuElem )
 			{
-				CMenuRef	theMenu( new CMenu );
+				CMenuRef	theMenu( new CMenu( this ) );
 				theMenu->LoadFromElement( currMenuElem );
 				mMenus.push_back( theMenu );
 				
