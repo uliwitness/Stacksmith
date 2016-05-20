@@ -94,11 +94,19 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 		// If the document already exists, open the stack:
 		for( auto currDoc : mOpenDocuments )
 		{
-			if( currDoc->GetURL().compare( slashlessFileURL ) == 0 )
+			if( currDoc->GetURL().compare( slashlessFileURL ) == 0 )	// Already open?
 			{
-				currDoc->GetStack(0)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); }, inEffectType, inSpeed );
-				[NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
-				return;
+				if( currDoc->GetScriptContextGroupObject() == inGroup || inGroup == nullptr )
+				{
+					currDoc->GetStack(0)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); }, inEffectType, inSpeed );
+					[NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
+					return;
+				}
+				else	// Another context group already has it open?
+				{
+					inCompletionBlock( nullptr );
+					return;
+				}
 			}
 		}
 		
