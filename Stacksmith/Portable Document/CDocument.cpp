@@ -278,7 +278,7 @@ bool	CDocument::Save()
 		if( !mMediaCache.SaveMediaElementsToElement( stackfile ) )
 			return false;
 		
-		LoadUserPropertiesFromElement( stackfile );
+		SaveUserPropertiesToElementOfDocument( stackfile, &document );
 		
 		for( auto currStack : mStacks )
 		{
