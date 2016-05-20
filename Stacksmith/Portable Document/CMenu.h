@@ -32,8 +32,10 @@ namespace Carlson
 		explicit CMenuItem( CMenu * inParent );
 		
 		std::string		GetCommandChar()	{ return mCommandChar; }
+		std::string		GetMarkChar()		{ return mMarkChar; }
 		TMenuItemStyle	GetStyle()			{ return mStyle; }
 		bool			GetVisible()		{ return mVisible; }
+		bool			GetEnabled()		{ return mEnabled; }
 		
 		void	LoadFromElement( tinyxml2::XMLElement* inElement );
 		bool	SaveToElement( tinyxml2::XMLElement* inElement );
@@ -47,6 +49,7 @@ namespace Carlson
 	protected:
 		LEOObjectID			mID;
 		std::string			mCommandChar;
+		std::string			mMarkChar;
 		CMenu*				mParent;
 		TMenuItemStyle		mStyle;
 		bool				mVisible;

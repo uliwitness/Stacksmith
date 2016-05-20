@@ -1421,6 +1421,18 @@ using namespace Carlson;
 	{
 		return mStack->GetDocument()->GetNeedsToBeSaved() && !mStack->GetDocument()->IsWriteProtected();
 	}
+	else if( theItem.action == @selector(projectMenuItemSelected:) )
+	{
+		CMenuItem*	currMenuItem = (CMenuItem*)[theItem tag];
+		NSInteger	itemState = NSOffState;
+		std::string	markChar( currMenuItem->GetMarkChar() );
+		if( markChar.compare("-") == 0 )
+			itemState = NSMixedState;
+		else if( markChar.compare("\342\234\223") == 0 )	// E2 9C 93 ✓ "check mark"
+			itemState = NSOnState;
+		[theItem setState: itemState];
+		return currMenuItem->GetEnabled();
+	}
 	else
 		return [self respondsToSelector: theItem.action];
 }
