@@ -27,6 +27,7 @@ void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
 	mName.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "name", mName );
+	mVisible = CTinyXMLUtils::GetBoolNamed( inElement, "visible", true );
 	mScript.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
 	
@@ -49,6 +50,8 @@ bool	CMenu::SaveToElement( tinyxml2::XMLElement* inElement )
 {
 	CTinyXMLUtils::AddLongLongNamed( inElement, mID, "id" );
 	CTinyXMLUtils::AddStringNamed( inElement, mName, "name" );
+	if( !mVisible )
+		CTinyXMLUtils::AddBoolNamed( inElement, mVisible, "visible" );
 	CTinyXMLUtils::AddStringNamed( inElement, mScript, "script" );
 
 	SaveUserPropertiesToElementOfDocument( inElement, inElement->GetDocument() );
@@ -76,7 +79,7 @@ CScriptableObject*	CMenu::GetParentObject()
 
 
 CMenuItem::CMenuItem( CMenu * inParent )
-	: mID(0), mParent(inParent), mStyle(EMenuItemStyleStandard)
+	: mID(0), mParent(inParent), mStyle(EMenuItemStyleStandard), mVisible(true)
 {
 	mDocument = inParent->GetDocument();
 }
@@ -94,6 +97,7 @@ void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 		mStyle = EMenuItemStyleStandard;
 	mCommandChar.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "commandChar", mCommandChar );
+	mVisible = CTinyXMLUtils::GetBoolNamed( inElement, "visible", true );
 	mScript.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
 	
@@ -107,6 +111,8 @@ bool	CMenuItem::SaveToElement( tinyxml2::XMLElement* inElement )
 	CTinyXMLUtils::AddStringNamed( inElement, mName, "name" );
 	CTinyXMLUtils::AddStringNamed( inElement, sMenuItemStyleStrings[mStyle], "style" );
 	CTinyXMLUtils::AddStringNamed( inElement, mCommandChar, "commandChar" );
+	if( !mVisible )
+		CTinyXMLUtils::AddBoolNamed( inElement, mVisible, "visible" );
 	CTinyXMLUtils::AddStringNamed( inElement, mScript, "script" );
 
 	SaveUserPropertiesToElementOfDocument( inElement, inElement->GetDocument() );

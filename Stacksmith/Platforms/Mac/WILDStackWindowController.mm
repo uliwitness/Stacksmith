@@ -1184,11 +1184,13 @@ using namespace Carlson;
 					currMacItem.tag = (intptr_t)currMenuItem;
 					currMacItem.target = self;
 				}
+				currMacItem.hidden = !currMenuItem->GetVisible();
 				[currMacMenu addItem: currMacItem];
 				[currMacItem release];
 			}
 			NSMenuItem*	menuTitleItem = [[NSMenuItem alloc] initWithTitle: macMenuName action:Nil keyEquivalent: @""];
 			menuTitleItem.submenu = currMacMenu;
+			menuTitleItem.hidden = !currMenu->GetVisible();
 			[[[NSApplication sharedApplication] mainMenu] addItem: menuTitleItem];
 			[mMacMenus addObject: menuTitleItem];
 			[currMacMenu release];
