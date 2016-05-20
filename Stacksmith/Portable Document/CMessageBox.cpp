@@ -153,7 +153,9 @@ LEOScript*	CMessageBox::GetScriptObject( std::function<void(const char*,size_t,s
 
 LEOContextGroup*	CMessageBox::GetScriptContextGroupObject()
 {
-	CStack*	theStack = CStack::GetFrontStack();
+	CStack*	theStack = CStack::GetMainStack();
+	if( !theStack )
+		theStack = CStack::GetFrontStack();
 	if( !theStack )
 		return NULL;
 	return theStack->GetScriptContextGroupObject();

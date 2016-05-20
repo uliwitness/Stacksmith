@@ -1144,7 +1144,7 @@ using namespace Carlson;
 
 -(void)	windowDidBecomeMain: (NSNotification *)notification
 {
-	CStack::SetFrontStack( mStack );
+	CStack::SetMainStack( mStack );
 	mWasVisible = YES;
 	mStack->SetVisible(true);
 	

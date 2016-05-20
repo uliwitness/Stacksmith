@@ -202,9 +202,14 @@ void	WILDScheduleResumeOfScript( void )
 	
 	[WILDTransitionFilter registerFiltersFromFile: [[NSBundle mainBundle] pathForResource: @"TransitionMappings" ofType: @"plist"]];
 	
+	CStack::SetMainStackChangedCallback( [self]( CStack* inMainStack )
+	{
+		[mLockPseudoMenu setHidden: inMainStack == NULL || (inMainStack->GetEffectiveCantModify() == false)];
+	} );
 	CStack::SetFrontStackChangedCallback( [self]( CStack* inFrontStack )
 	{
-		[mLockPseudoMenu setHidden: inFrontStack == NULL || (inFrontStack->GetEffectiveCantModify() == false)];
+		if( CStack::GetMainStack() == NULL )	// User closed last document window?
+			[mLockPseudoMenu setHidden: YES];
 	} );
 }
 

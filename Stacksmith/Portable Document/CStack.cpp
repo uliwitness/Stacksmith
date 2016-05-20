@@ -22,6 +22,8 @@ using namespace Carlson;
 
 CStack*							CStack::sFrontStack = NULL;
 std::function<void(CStack*)>	CStack::sFrontStackChangedBlock = NULL;
+CStack*							CStack::sMainStack = NULL;
+std::function<void(CStack*)>	CStack::sMainStackChangedBlock = NULL;
 
 
 static const char*		sToolNames[ETool_Last +1] =
@@ -56,6 +58,8 @@ CStack::~CStack()
 	//printf("deleting stack %s.\n", DebugNameForPointer(this) );
  	if( sFrontStack == this )
 		sFrontStack = NULL;
+ 	if( sMainStack == this )
+		sMainStack = NULL;
 	mCurrentCard = CCardRef(NULL);
 	
 	{
@@ -204,7 +208,12 @@ void	CStack::CallAllCompletionBlocks()
 
 CScriptableObject*	CStack::GetParentObject()
 {
-	return (mStyle == EStackStylePopup || mStyle == EStackStylePalette) ? (CScriptableObject*)GetFrontStack()->GetCurrentCard() : (CScriptableObject*)mDocument;
+	bool	isFloater = (mStyle == EStackStylePopup || mStyle == EStackStylePalette);
+	CStack*	ms = GetMainStack();
+	CScriptableObject* parent = (isFloater && ms) ? (CScriptableObject*)ms->GetCurrentCard() : (CScriptableObject*)mDocument;
+	if( !parent )
+		parent = mDocument;
+	return parent;
 }
 
 
@@ -1069,6 +1078,15 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 	CDocumentManager::GetSharedDocumentManager()->SetFrontDocument( inStack ? inStack->GetDocument() : NULL );
 	if( sFrontStackChangedBlock )
 		sFrontStackChangedBlock( inStack );
+}
+
+
+/*static*/ void		CStack::SetMainStack( CStack* inStack )
+{
+	sMainStack = inStack;
+	CDocumentManager::GetSharedDocumentManager()->SetFrontDocument( inStack ? inStack->GetDocument() : NULL );
+	if( sMainStackChangedBlock )
+		sMainStackChangedBlock( inStack );
 }
 
 

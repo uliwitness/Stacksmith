@@ -180,6 +180,9 @@ public:
 	static CStack*		GetFrontStack()						{ return sFrontStack; }
 	static void			SetFrontStack( CStack* inStack );
 	static void			SetFrontStackChangedCallback( std::function<void(CStack*)> inCallback )	{ sFrontStackChangedBlock = inCallback; }
+	static CStack*		GetMainStack()						{ return sMainStack; }
+	static void			SetMainStack( CStack* inStack );
+	static void			SetMainStackChangedCallback( std::function<void(CStack*)> inCallback )	{ sMainStackChangedBlock = inCallback; }
 
 	static const char*	GetToolName( TTool inTool );
 	static TTool		GetToolFromName( const char* inName );
@@ -226,8 +229,10 @@ protected:
 	std::vector<long long>		mHorizontalGuidelines;	//!< Temp. guidelines shown when moving/resizing objects on the card.
 	std::vector<long long>		mVerticalGuidelines;	//!< Temp. guidelines shown when moving/resizing objects on the card.
 	
-	static CStack*							sFrontStack;		//!< The stack whose window is currently frontmost and will e.g. receive messages from the message box.
+	static CStack*							sFrontStack;		//!< Like sMainStack, but for the frontmost popover or palette window.
 	static std::function<void(CStack*)>		sFrontStackChangedBlock;
+	static CStack*							sMainStack;			//!< The stack whose window is currently frontmost among all non-palette-style stacks and will e.g. receive messages from the message box.
+	static std::function<void(CStack*)>		sMainStackChangedBlock;
 };
 
 typedef CRefCountedObjectRef<CStack>	CStackRef;
