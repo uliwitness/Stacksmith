@@ -57,6 +57,8 @@ void	CImageCanvas::EndDrawing()
 
 CRect	CImageCanvas::GetRect()
 {
+	if( !mImage )
+		return CRect();
 	return CRect( (CGRect){{0,0},[mImage size]} );
 }
 
