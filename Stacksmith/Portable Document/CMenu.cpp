@@ -22,6 +22,41 @@ static const char*	sMenuItemStyleStrings[EMenuItemStyle_Last +1] =
 };
 
 
+void	CMenu::SetName( const std::string &inName )
+{
+	mName = inName;
+	mDocument->MenuChanged(this);
+}
+
+
+void	CMenu::MenuItemChanged( CMenuItem* inItem )
+{
+	mDocument->MenuChanged(this);
+}
+
+
+CMenuItem*	CMenu::GetItemWithID( ObjectID inID )
+{
+	for( auto currItem : mItems )
+	{
+		if( currItem->GetID() == inID )
+			return currItem;
+	}
+	return nullptr;
+}
+
+
+CMenuItem*	CMenu::GetItemWithName( const std::string& inName )
+{
+	for( auto currItem : mItems )
+	{
+		if( strcasecmp( currItem->GetName().c_str(), inName.c_str() ) == 0 )
+			return currItem;
+	}
+	return nullptr;
+}
+
+
 ObjectID	CMenu::GetUniqueIDForItem()
 {
 	bool	notUnique = true;
@@ -43,6 +78,33 @@ ObjectID	CMenu::GetUniqueIDForItem()
 	
 	return mItemIDSeed;
 }
+
+
+bool	CMenu::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp("name",inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mName.c_str(), mName.length(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else
+		return false;
+}
+
+
+bool	CMenu::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp("name",inPropertyName) == 0 )
+	{
+		char		str[512] = {};
+		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
+		SetName( nameStr );
+		return true;
+	}
+	else
+		return false;
+}
+
 
 
 void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
@@ -111,6 +173,13 @@ CMenuItem::CMenuItem( CMenu * inParent )
 }
 
 
+void	CMenuItem::SetName( const std::string &inName )
+{
+	mName = inName;
+	mParent->MenuItemChanged( this );
+}
+
+
 void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
@@ -154,6 +223,32 @@ bool	CMenuItem::SaveToElement( tinyxml2::XMLElement* inElement )
 	SaveUserPropertiesToElementOfDocument( inElement, inElement->GetDocument() );
 
 	return true;
+}
+
+
+bool	CMenuItem::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue )
+{
+	if( strcasecmp("name",inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mName.c_str(), mName.length(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else
+		return false;
+}
+
+
+bool	CMenuItem::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd )
+{
+	if( strcasecmp("name",inPropertyName) == 0 )
+	{
+		char		str[512] = {};
+		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
+		SetName( nameStr );
+		return true;
+	}
+	else
+		return false;
 }
 
 

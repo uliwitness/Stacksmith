@@ -32,6 +32,7 @@ namespace Carlson
 		explicit CMenuItem( CMenu * inParent );
 		
 		virtual ObjectID	GetID()	const override	{ return mID; }
+		virtual void		SetName( const std::string& inName ) override;
 		
 		std::string		GetCommandChar()	{ return mCommandChar; }
 		std::string		GetMarkChar()		{ return mMarkChar; }
@@ -41,6 +42,9 @@ namespace Carlson
 		
 		void	LoadFromElement( tinyxml2::XMLElement* inElement );
 		bool	SaveToElement( tinyxml2::XMLElement* inElement );
+
+		virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
+		virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
 
 		virtual CScriptableObject*	GetParentObject() override;
 
@@ -66,9 +70,12 @@ namespace Carlson
 		explicit CMenu( CDocument* inDocument ) : mID(0), mVisible(true), mEnabled(true), mItemIDSeed(100)	{ mDocument = inDocument; }
 		
 		virtual ObjectID	GetID() const override	{ return mID; }
+		virtual void		SetName( const std::string& inName ) override;
 		
 		size_t		GetNumItems()				{ return mItems.size(); }
 		CMenuItem*	GetItem( size_t inIndex )	{ return mItems[inIndex]; }
+		CMenuItem*	GetItemWithID( ObjectID inID );
+		CMenuItem*	GetItemWithName( const std::string& inName );
 		ObjectID	GetUniqueIDForItem();
 		bool		GetVisible()				{ return mVisible; }
 		bool		GetEnabled()				{ return mEnabled; }
@@ -77,8 +84,13 @@ namespace Carlson
 		
 		void	LoadFromElement( tinyxml2::XMLElement* inElement );
 		bool	SaveToElement( tinyxml2::XMLElement* inElement );
-		
+
+		virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
+		virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
+
 		virtual CScriptableObject*	GetParentObject() override;
+		
+		virtual void	MenuItemChanged( CMenuItem* inItem );
 		
 	protected:
 		std::vector<CMenuItemRef>		mItems;

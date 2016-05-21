@@ -77,6 +77,8 @@ void	WILDPushNumberOfScreensInstruction( LEOContext* inContext );
 void	WILDPushScreenInstruction( LEOContext* inContext );
 void	WILDPushThisProjectInstruction( LEOContext* inContext );
 void	WILDPushProjectInstruction( LEOContext* inContext );
+void	WILDPushMenuInstruction( LEOContext* inContext );
+void	WILDPushMenuItemInstruction( LEOContext* inContext );
 
 
 using namespace Carlson;
@@ -1090,21 +1092,157 @@ void	WILDPushThisProjectInstruction( LEOContext* inContext )
 
 void	WILDPushProjectInstruction( LEOContext* inContext )
 {
-//	LEOUnit		outUnit = kLEOUnitNone;
-	LEOValuePtr	screenIndexValue = (inContext->stackEndPtr -1);
+	LEOValuePtr		screenIndexValue = (inContext->stackEndPtr -1);
+	CDocument	*	foundDoc = nullptr;
 	
-//	LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
-	
-	LEOCleanUpValue( screenIndexValue, kLEOInvalidateReferences, inContext );
-	CDocument	*	frontProject = nullptr;
-	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
-	if( frontStack )
-		frontProject = frontStack->GetDocument();
-	if( frontProject )
-		frontProject->InitValue( screenIndexValue, kLEOInvalidateReferences, inContext );
+	if( LEOCanGetAsNumber( screenIndexValue, inContext ) )
+	{
+		LEOUnit		outUnit = kLEOUnitNone;
+
+		LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
+		LEOCleanUpValue( screenIndexValue, kLEOInvalidateReferences, inContext );
+		
+		foundDoc = CDocumentManager::GetSharedDocumentManager()->GetDocument( screenIndex -1 );
+	}
+	else
+	{
+		char		buf[512] = {};
+		const char*	projectName = LEOGetValueAsString( screenIndexValue, buf, sizeof(buf), inContext );
+		
+		foundDoc = CDocumentManager::GetSharedDocumentManager()->GetDocumentWithName( projectName );
+		LEOCleanUpValue( screenIndexValue, kLEOInvalidateReferences, inContext );
+	}
+	if( foundDoc && foundDoc->GetScriptContextGroupObject() == inContext->group )
+		foundDoc->InitValue( screenIndexValue, kLEOInvalidateReferences, inContext );
 	else
 		LEOInitUnsetValue( screenIndexValue, kLEOInvalidateReferences, inContext );
 	inContext->currentInstruction++;
+}
+
+
+void	WILDPushMenuInstruction( LEOContext* inContext )
+{
+	char			idStrBuf[256] = {0};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -2, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	LEOValuePtr		screenIndexValue = (inContext->stackEndPtr -1);
+	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CDocument	*	frontProject = frontStack ? frontStack->GetDocument() : nullptr;
+	CMenu		*	foundMenu = nullptr;
+	
+	if( lookUpByID )
+	{
+		LEOUnit		outUnit = kLEOUnitNone;
+		
+		LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1);
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		
+		foundMenu = frontProject->GetMenuWithID( screenIndex );
+	}
+	else if( LEOCanGetAsNumber( screenIndexValue, inContext ) )
+	{
+		LEOUnit		outUnit = kLEOUnitNone;
+		
+		LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1);
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		
+		if( screenIndex >= (long long)frontProject->GetNumMenus() )
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Menu index %lld out of bounds.", screenIndex );
+		}
+		else
+			foundMenu = frontProject->GetMenu( screenIndex -1 );
+	}
+	else
+	{
+		char		buf[512] = {};
+		const char*	projectName = LEOGetValueAsString( screenIndexValue, buf, sizeof(buf), inContext );
+		
+		foundMenu = frontProject->GetMenuWithName( projectName );
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1);
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	}
+	if( foundMenu )
+		foundMenu->InitValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	else
+		LEOInitUnsetValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	inContext->currentInstruction++;
+	
+	//LEODebugPrintContext(inContext);
+}
+
+
+void	WILDPushMenuItemInstruction( LEOContext* inContext )
+{
+	char			idStrBuf[256] = {0};
+	const char*		idStr = LEOGetValueAsString( inContext->stackEndPtr -3, idStrBuf, sizeof(idStrBuf), inContext );
+	bool			lookUpByID = idStr[0] != 0;
+	LEOValuePtr		screenIndexValue = (inContext->stackEndPtr -2);
+	LEOValuePtr		menuObjectValue = (inContext->stackEndPtr -1);
+	CMenu		*	ownerObject = nullptr;
+	CMenuItem	*	foundMenuItem = nullptr;
+	
+	menuObjectValue = LEOFollowReferencesAndReturnValueOfType( menuObjectValue, &kLeoValueTypeScriptableObject, inContext );
+	if( menuObjectValue && menuObjectValue->base.isa == &kLeoValueTypeScriptableObject )
+		ownerObject = dynamic_cast<CMenu*>((CScriptableObject*)menuObjectValue->object.object);
+	if( !ownerObject )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Only menus contain menuItems." );
+		return;
+	}
+	
+	if( lookUpByID )
+	{
+		LEOUnit		outUnit = kLEOUnitNone;
+		
+		LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2);
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		
+		foundMenuItem = ownerObject->GetItemWithID( screenIndex );
+	}
+	else if( LEOCanGetAsNumber( screenIndexValue, inContext ) )
+	{
+		LEOUnit		outUnit = kLEOUnitNone;
+		
+		LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2);
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+		
+		if( screenIndex >= (long long)ownerObject->GetNumItems() )
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Menu index %lld out of bounds.", screenIndex );
+		}
+		else
+			foundMenuItem = ownerObject->GetItem( screenIndex -1 );
+	}
+	else
+	{
+		char		buf[512] = {};
+		const char*	projectName = LEOGetValueAsString( screenIndexValue, buf, sizeof(buf), inContext );
+		
+		foundMenuItem = ownerObject->GetItemWithName( projectName );
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2);
+		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	}
+	if( foundMenuItem )
+		foundMenuItem->InitValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	else
+		LEOInitUnsetValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	inContext->currentInstruction++;
+	
+	//LEODebugPrintContext(inContext);
 }
 
 
@@ -1161,7 +1299,9 @@ LEOINSTR(WILDNumberOfStacksInstruction)
 LEOINSTR(WILDPushNumberOfScreensInstruction)
 LEOINSTR(WILDPushScreenInstruction)
 LEOINSTR(WILDPushThisProjectInstruction)
-LEOINSTR_LAST(WILDPushProjectInstruction)
+LEOINSTR(WILDPushProjectInstruction)
+LEOINSTR(WILDPushMenuInstruction)
+LEOINSTR_LAST(WILDPushMenuItemInstruction)
 
 
 #pragma mark Host function syntax table
@@ -1458,9 +1598,9 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
-		ENumberIdentifier, INVALID_INSTR2, 0, 0, '\0', 'X',
+		ENumberIdentifier, INVALID_INSTR2, 0, 0, 'N', 'X',
 		{
-			{ EHostParamInvisibleIdentifier, EOfIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'C' },
+			{ EHostParamInvisibleIdentifier, EOfIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, 'N', 'C' },
 			{ EHostParamInvisibleIdentifier, EButtonsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_BUTTONS_INSTRUCTION, 0, 0, 'C', 'X' },
 			{ EHostParamInvisibleIdentifier, EFieldsIdentifier, EHostParameterOptional, WILD_NUMBER_OF_CARD_FIELDS_INSTRUCTION, 0, 0, 'C', 'X' },
 			{ EHostParamInvisibleIdentifier, EMovieIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'C', 'm' },
@@ -1603,6 +1743,24 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, WILD_PUSH_PROJECT_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		EMenuIdentifier, WILD_PUSH_MENU_INSTRUCTION, 0, 0, '\0', '\0',
+		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EMenuItemIdentifier, WILD_PUSH_MENUITEM_INSTRUCTION, 0, 0, '\0', '\0',
+		{
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
 		}
 	},
 	{	// END INDICATOR MUST BE LAST!!!

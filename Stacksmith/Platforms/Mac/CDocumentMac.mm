@@ -288,6 +288,16 @@ void	CDocumentMac::IncrementChangeCount()
 		[mCanvasWindowController reloadData];
 }
 
+
+void	CDocumentMac::MenuChanged( CMenu* inMenu )
+{
+	CDocument::MenuChanged( inMenu );
+	
+	// +++ Recreate Mac menus.
+}
+
+
+
 void	CDocumentMac::StackIncrementedChangeCount( CStack* inStack )
 {
 	CDocument::StackIncrementedChangeCount( inStack );

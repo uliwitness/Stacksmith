@@ -483,6 +483,30 @@ bool	CDocument::DeleteStack( CStack* inStack )
 }
 
 
+CMenu*	CDocument::GetMenuWithID( ObjectID inID )
+{
+	for( auto currMenu : mMenus )
+	{
+		if( currMenu->GetID() == inID )
+			return currMenu;
+	}
+	
+	return nullptr;
+}
+
+
+CMenu*	CDocument::GetMenuWithName( const std::string& inName )
+{
+	for( auto currMenu : mMenus )
+	{
+		if( strcasecmp( currMenu->GetName().c_str(), inName.c_str() ) == 0 )
+			return currMenu;
+	}
+	
+	return nullptr;
+}
+
+
 CMenu*	CDocument::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
 {
 	CMenu	*	theMenu = new CMenu( this );
@@ -787,6 +811,18 @@ void	CDocumentManager::SaveAll()
 void	CDocumentManager::SetFrontDocument( CDocument* inDocument )
 {
 	mFrontDocument = inDocument;
+}
+
+
+CDocument*	CDocumentManager::GetDocumentWithName( const std::string& inName )
+{
+	for( auto currDoc : mOpenDocuments )
+	{
+		if( strcasecmp( currDoc->GetName().c_str(), inName.c_str() ) == 0 )
+			return currDoc;
+	}
+	
+	return nullptr;
 }
 
 

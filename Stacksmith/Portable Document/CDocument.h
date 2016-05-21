@@ -28,12 +28,15 @@ public:
 	
 	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup ) = 0;
 	
-	virtual void	AddDocument( CDocumentRef inDocument )	{ mOpenDocuments.push_back(inDocument); };
-	virtual void	CloseDocument( CDocumentRef inDocument );
-	virtual void	SetPeeking( bool inState );
-	virtual void	SaveAll();
-	virtual bool	HaveDocuments()							{ return mOpenDocuments.size() > 0; };
-	virtual void	Quit()									= 0;
+	virtual void		AddDocument( CDocumentRef inDocument )	{ mOpenDocuments.push_back(inDocument); };
+	virtual void		CloseDocument( CDocumentRef inDocument );
+	virtual void		SetPeeking( bool inState );
+	virtual void		SaveAll();
+	virtual bool		HaveDocuments()							{ return mOpenDocuments.size() > 0; };
+	virtual size_t		GetNumDocuments()						{ return mOpenDocuments.size(); }
+	virtual CDocument*	GetDocument( size_t inIndex )			{ return mOpenDocuments[inIndex]; }
+	virtual CDocument*	GetDocumentWithName( const std::string& inName );
+	virtual void		Quit() = 0;
 	
 	virtual void	SetFrontDocument( CDocument* inDocument );
 	CDocument*		GetFrontDocument()							{ return mFrontDocument; };
@@ -75,6 +78,8 @@ public:
 	
 	size_t				GetNumMenus()				{ return mMenus.size(); }
 	CMenu*				GetMenu( size_t inIndex )	{ return mMenus[inIndex]; }
+	CMenu*				GetMenuWithID( ObjectID inID );
+	CMenu*				GetMenuWithName( const std::string& inName );
 	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML );
 	
 	ObjectID			GetUniqueIDForStack();
@@ -96,6 +101,7 @@ public:
 	virtual LEOContextGroup*	GetScriptContextGroupObject() override;
 
 	virtual void		IncrementChangeCount() override;
+	virtual void		MenuChanged( CMenu* inMenu )	{ IncrementChangeCount(); };
 	virtual void		StackIncrementedChangeCount( CStack* inStack )	{}
 	virtual void		LayerIncrementedChangeCount( CLayer* inLayer )	{}
 	virtual bool		GetNeedsToBeSaved() override;
