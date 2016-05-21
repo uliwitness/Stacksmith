@@ -24,7 +24,7 @@ class CPart;
 @class WILDFlippedContentView;
 
 
-@interface WILDStackWindowController : NSWindowController <NSWindowDelegate>
+@interface WILDStackWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate>
 {
 	Carlson::CStackMac	*	mStack;
 	CALayer				*	mSelectionOverlay;	// Draw "peek" outline and selection rectangles in this layer.
@@ -34,7 +34,6 @@ class CPart;
 	NSPopover			*	mPopover;			// If this stack is of style 'popover', this is the popover it is shown in.
 	NSPopover			*	mCurrentPopover;	// Whatever current info popover is shown on the toolbar.
 	WILDFlippedContentView*	mContentView;
-	NSMutableArray		*	mMacMenus;			// List of menus the project has showing in the menu bar.
 }
 
 -(id)	initWithCppStack: (Carlson::CStackMac*)inStack;
@@ -70,6 +69,8 @@ class CPart;
 -(NSData*)	currentCardSnapshotData;
 
 -(void)	reflectFontOfSelectedParts;
+
+-(IBAction)	projectMenuItemSelected: (id)sender;
 
 @end
 

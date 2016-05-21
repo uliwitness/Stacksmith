@@ -389,16 +389,28 @@ void	WILDCreateInstruction( LEOContext* inContext )
 
     CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
     CStack		*	frontStack = userData->GetStack();
-    CLayer		*	currentLayer = frontStack->GetCurrentLayer();
-    tinyxml2::XMLDocument   document;
-    std::string             xml( "<part><type>" );
-    xml.append( typeNameBuf );
-    xml.append( "</type></part>" );
-    document.Parse( xml.c_str() );
-    CPart * thePart = CPart::NewPartWithElement( document.RootElement(), currentLayer );
-    thePart->SetName( nameBuf );
-    currentLayer->AddPart( thePart );
-	thePart->Release();
+	if( strcasecmp(typeNameBuf,"menu") == 0 )
+	{
+		tinyxml2::XMLDocument   document;
+		std::string             xml( "<menu><name>" );
+		xml.append( nameBuf );
+		xml.append( "</name></menu>" );
+		document.Parse( xml.c_str() );
+		frontStack->GetDocument()->NewMenuWithElement( document.RootElement() );
+	}
+	else
+	{
+		CLayer		*	currentLayer = frontStack->GetCurrentLayer();
+		tinyxml2::XMLDocument   document;
+		std::string             xml( "<part><type>" );
+		xml.append( typeNameBuf );
+		xml.append( "</type></part>" );
+		document.Parse( xml.c_str() );
+		CPart * thePart = CPart::NewPartWithElement( document.RootElement(), currentLayer );
+		thePart->SetName( nameBuf );
+		currentLayer->AddPart( thePart );
+		thePart->Release();
+	}
 
 	inContext->currentInstruction++;
 }

@@ -59,6 +59,7 @@ public:
 	virtual void				SaveThumbnail();
 	virtual void				SaveThumbnailIfFirstCardOpen();
 	virtual WILDNSWindowPtr		GetMacWindow();
+	virtual WILDStackWindowControllerPtr	GetMacWindowController() { return mMacWindowController; }
 	
 	virtual bool				ShowScriptEditorForObject( CConcreteObject* inObject );
 	virtual bool				ShowPropertyEditorForObject( CConcreteObject* inObject );

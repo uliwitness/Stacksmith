@@ -11,10 +11,15 @@
 #include "CAlert.h"
 #import "UKHelperMacros.h"
 #include <sstream>
+#import "WILDStackWindowController.h"
 #import "WILDStackCanvasWindowController.h"
 
 
 using namespace Carlson;
+
+
+CDocumentMac*	CDocumentManagerMac::sCurrentMenuBarOwner = nullptr;
+
 
 
 CStack*		CDocumentMac::NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument )
@@ -186,6 +191,81 @@ void	CDocumentManagerMac::Quit()
 }
 
 
+CDocumentMac::~CDocumentMac()
+{
+	if( CDocumentManagerMac::sCurrentMenuBarOwner == this )
+		CDocumentManagerMac::sCurrentMenuBarOwner = nullptr;
+	[mMacMenus release];
+	mMacMenus = nil;
+}
+
+
+CMenu*	CDocumentMac::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
+{
+	CMenu	*	theMenu = CDocument::NewMenuWithElement( inMenuXML );
+	
+	if( CDocumentManagerMac::sCurrentMenuBarOwner == this )
+	{
+		AddMacMenuForMenu( theMenu );
+	}
+	
+	return theMenu;
+}
+
+
+void	CDocumentMac::AddMacMenuForMenu( CMenu* currMenu )
+{
+	CStackMac*		mainStack = (CStackMac*) CStack::GetMainStack();
+	if( !mainStack )
+		mainStack = (CStackMac*) CStack::GetFrontStack();
+	
+	NSString*	macMenuName = [NSString stringWithUTF8String: currMenu->GetName().c_str()];
+	NSMenu	*	currMacMenu = [[NSMenu alloc] initWithTitle: macMenuName];
+	size_t		numItems = currMenu->GetNumItems();
+	for( size_t ix = 0; ix < numItems; ix++ )
+	{
+		CMenuItem	*	currMenuItem = currMenu->GetItem( ix );
+		NSMenuItem	*	currMacItem = nil;
+		if( currMenuItem->GetStyle() == EMenuItemStyleSeparator )
+		{
+			currMacItem = [[NSMenuItem separatorItem] retain];
+		}
+		else
+		{
+			NSString*		macMenuItemName = [NSString stringWithUTF8String: currMenuItem->GetName().c_str()];
+			NSString*		macMenuItemShortcut = [NSString stringWithUTF8String: currMenuItem->GetCommandChar().c_str()];
+			currMacItem = [[NSMenuItem alloc] initWithTitle: macMenuItemName action: @selector(projectMenuItemSelected:) keyEquivalent: macMenuItemShortcut];
+			currMacItem.tag = (intptr_t)currMenuItem;
+			currMacItem.target = mainStack->GetMacWindowController();
+		}
+		currMacItem.hidden = !currMenuItem->GetVisible();
+		[currMacMenu addItem: currMacItem];
+		[currMacItem release];
+	}
+	NSMenuItem*	menuTitleItem = [[NSMenuItem alloc] initWithTitle: macMenuName action:Nil keyEquivalent: @""];
+	menuTitleItem.tag = (intptr_t)currMenu;
+	currMacMenu.delegate = mainStack->GetMacWindowController();
+	menuTitleItem.submenu = currMacMenu;
+	menuTitleItem.hidden = !currMenu->GetVisible();
+	[[[NSApplication sharedApplication] mainMenu] addItem: menuTitleItem];
+	[mMacMenus addObject: menuTitleItem];
+	[currMacMenu release];
+	[menuTitleItem release];
+}
+
+
+void	CDocumentMac::RemoveMacMenus()
+{
+	NSMutableArray	*	oldMacMenus = CDocumentManagerMac::sCurrentMenuBarOwner->GetMacMenus();
+	for( NSMenuItem* currMacMenuParentItem : oldMacMenus )
+	{
+		[currMacMenuParentItem.menu removeItem: currMacMenuParentItem];
+	}
+	[oldMacMenus removeAllObjects];
+	CDocumentManagerMac::sCurrentMenuBarOwner = nullptr;
+}
+
+
 void	CDocumentMac::ShowStackCanvasWindow()
 {
 	if( !mCanvasWindowController )
@@ -221,4 +301,12 @@ void	CDocumentMac::LayerIncrementedChangeCount( CLayer* inLayer )
 	CDocument::LayerIncrementedChangeCount( inLayer );
 	if( mCanvasWindowController )
 		[mCanvasWindowController reloadData];
+}
+
+
+WILDNSMutableArrayPtr	CDocumentMac::GetMacMenus()
+{
+	if( !mMacMenus )
+		mMacMenus = [[NSMutableArray alloc] init];
+	return mMacMenus;
 }

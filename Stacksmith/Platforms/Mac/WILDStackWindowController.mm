@@ -11,6 +11,7 @@
 #include "CCard.h"
 #include "CBackground.h"
 #include "CDocument.h"
+#include "CDocumentMac.h"
 #include "CMacPartBase.h"
 #include "CGraphicPart.h"
 #include "CAlert.h"
@@ -60,7 +61,7 @@ using namespace Carlson;
 @end
 
 
-@interface WILDStackWindowController () <NSPopoverDelegate,NSMenuDelegate>
+@interface WILDStackWindowController () <NSPopoverDelegate>
 
 @end
 
@@ -1153,50 +1154,19 @@ using namespace Carlson;
 		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
 	}
 	
-	for( NSMenuItem* currMacMenuParentItem : mMacMenus )
+	if( CDocumentManagerMac::sCurrentMenuBarOwner != mStack->GetDocument()
+		&& CDocumentManagerMac::sCurrentMenuBarOwner != nullptr )
 	{
-		[currMacMenuParentItem.menu removeItem: currMacMenuParentItem];
+		CDocumentManagerMac::sCurrentMenuBarOwner->RemoveMacMenus();
 	}
 	if( mStack->GetDocument()->GetNumMenus() > 0 )
 	{
-		size_t	numMenus = mStack->GetDocument()->GetNumMenus();
-		if( !mMacMenus )
-			mMacMenus = [[NSMutableArray alloc] init];
+		CDocumentManagerMac::sCurrentMenuBarOwner = (CDocumentMac*) mStack->GetDocument();
+		size_t	numMenus = CDocumentManagerMac::sCurrentMenuBarOwner->GetNumMenus();
 		for( size_t x = 0; x < numMenus; x++ )
 		{
 			CMenu	*	currMenu = mStack->GetDocument()->GetMenu( x );
-			NSString*	macMenuName = [NSString stringWithUTF8String: currMenu->GetName().c_str()];
-			NSMenu	*	currMacMenu = [[NSMenu alloc] initWithTitle: macMenuName];
-			size_t		numItems = currMenu->GetNumItems();
-			for( size_t ix = 0; ix < numItems; ix++ )
-			{
-				CMenuItem	*	currMenuItem = currMenu->GetItem( ix );
-				NSMenuItem	*	currMacItem = nil;
-				if( currMenuItem->GetStyle() == EMenuItemStyleSeparator )
-				{
-					currMacItem = [[NSMenuItem separatorItem] retain];
-				}
-				else
-				{
-					NSString*		macMenuItemName = [NSString stringWithUTF8String: currMenuItem->GetName().c_str()];
-					NSString*		macMenuItemShortcut = [NSString stringWithUTF8String: currMenuItem->GetCommandChar().c_str()];
-					currMacItem = [[NSMenuItem alloc] initWithTitle: macMenuItemName action: @selector(projectMenuItemSelected:) keyEquivalent: macMenuItemShortcut];
-					currMacItem.tag = (intptr_t)currMenuItem;
-					currMacItem.target = self;
-				}
-				currMacItem.hidden = !currMenuItem->GetVisible();
-				[currMacMenu addItem: currMacItem];
-				[currMacItem release];
-			}
-			NSMenuItem*	menuTitleItem = [[NSMenuItem alloc] initWithTitle: macMenuName action:Nil keyEquivalent: @""];
-			menuTitleItem.tag = (intptr_t)currMenu;
-			currMacMenu.delegate = self;
-			menuTitleItem.submenu = currMacMenu;
-			menuTitleItem.hidden = !currMenu->GetVisible();
-			[[[NSApplication sharedApplication] mainMenu] addItem: menuTitleItem];
-			[mMacMenus addObject: menuTitleItem];
-			[currMacMenu release];
-			[menuTitleItem release];
+			CDocumentManagerMac::sCurrentMenuBarOwner->AddMacMenuForMenu( currMenu );
 		}
 	}
 	

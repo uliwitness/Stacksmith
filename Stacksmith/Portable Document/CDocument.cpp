@@ -483,6 +483,19 @@ bool	CDocument::DeleteStack( CStack* inStack )
 }
 
 
+CMenu*	CDocument::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
+{
+	CMenu	*	theMenu = new CMenu( this );
+	theMenu->LoadFromElement( inMenuXML );
+	mMenus.push_back( theMenu );
+	theMenu->Autorelease();
+	
+	IncrementChangeCount();
+	
+	return theMenu;
+}
+
+
 ObjectID	CDocument::GetUniqueIDForStack()
 {
 	bool	notUnique = true;

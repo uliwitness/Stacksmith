@@ -75,6 +75,7 @@ public:
 	
 	size_t				GetNumMenus()				{ return mMenus.size(); }
 	CMenu*				GetMenu( size_t inIndex )	{ return mMenus[inIndex]; }
+	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML );
 	
 	ObjectID			GetUniqueIDForStack();
 	ObjectID			GetUniqueIDForCard();

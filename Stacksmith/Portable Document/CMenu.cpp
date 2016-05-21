@@ -47,7 +47,9 @@ ObjectID	CMenu::GetUniqueIDForItem()
 
 void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
-	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
+	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id", -1 );
+	if( mID == -1 )
+		mID = mDocument->GetUniqueIDForMenu();
 	mName.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "name", mName );
 	mVisible = CTinyXMLUtils::GetBoolNamed( inElement, "visible", true );
