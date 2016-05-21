@@ -33,6 +33,11 @@ namespace Carlson
 		
 		virtual ObjectID	GetID()	const override	{ return mID; }
 		virtual void		SetName( const std::string& inName ) override;
+		virtual void		SetCommandChar( const std::string& inName );
+		virtual void		SetMarkChar( const std::string& inName );
+		virtual void		SetVisible( bool inState );
+		virtual void		SetEnabled( bool inState );
+		virtual void		SetStyle( TMenuItemStyle inStyle );
 		
 		std::string		GetCommandChar()	{ return mCommandChar; }
 		std::string		GetMarkChar()		{ return mMarkChar; }
@@ -71,6 +76,8 @@ namespace Carlson
 		
 		virtual ObjectID	GetID() const override	{ return mID; }
 		virtual void		SetName( const std::string& inName ) override;
+		virtual void		SetVisible( bool inState );
+		virtual void		SetEnabled( bool inState );
 		
 		size_t		GetNumItems()				{ return mItems.size(); }
 		CMenuItem*	GetItem( size_t inIndex )	{ return mItems[inIndex]; }

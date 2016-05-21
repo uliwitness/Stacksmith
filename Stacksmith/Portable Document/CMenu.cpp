@@ -29,6 +29,20 @@ void	CMenu::SetName( const std::string &inName )
 }
 
 
+void	CMenu::SetEnabled( bool inState )
+{
+	mEnabled = inState;
+	mDocument->MenuChanged( this );
+}
+
+
+void	CMenu::SetVisible( bool inState )
+{
+	mVisible = inState;
+	mDocument->MenuChanged( this );
+}
+
+
 void	CMenu::MenuItemChanged( CMenuItem* inItem )
 {
 	mDocument->MenuChanged(this);
@@ -87,6 +101,11 @@ bool	CMenu::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart,
 		LEOInitStringValue( outValue, mName.c_str(), mName.length(), kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp("id",inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, mID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return false;
 }
@@ -99,6 +118,14 @@ bool	CMenu::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 		char		str[512] = {};
 		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
 		SetName( nameStr );
+		return true;
+	}
+	else if( strcasecmp("id",inPropertyName) == 0 )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't change IDs of objects." );
 		return true;
 	}
 	else
@@ -180,6 +207,41 @@ void	CMenuItem::SetName( const std::string &inName )
 }
 
 
+void	CMenuItem::SetCommandChar( const std::string &inName )
+{
+	mCommandChar = inName;
+	mParent->MenuItemChanged( this );
+}
+
+
+void	CMenuItem::SetMarkChar( const std::string &inName )
+{
+	mMarkChar = inName;
+	mParent->MenuItemChanged( this );
+}
+
+
+void	CMenuItem::SetEnabled( bool inState )
+{
+	mEnabled = inState;
+	mParent->MenuItemChanged( this );
+}
+
+
+void	CMenuItem::SetVisible( bool inState )
+{
+	mVisible = inState;
+	mParent->MenuItemChanged( this );
+}
+
+
+void	CMenuItem::SetStyle( TMenuItemStyle inStyle )
+{
+	mStyle = inStyle;
+	mParent->MenuItemChanged( this );
+}
+
+
 void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
@@ -233,8 +295,38 @@ bool	CMenuItem::GetPropertyNamed( const char* inPropertyName, size_t byteRangeSt
 		LEOInitStringValue( outValue, mName.c_str(), mName.length(), kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp("style",inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, sMenuItemStyleStrings[mStyle], strlen(sMenuItemStyleStrings[mStyle]), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp("commandCharacter",inPropertyName) == 0 || strcasecmp("commandChar",inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mCommandChar.c_str(), mCommandChar.length(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp("markCharacter",inPropertyName) == 0 || strcasecmp("markChar",inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mMarkChar.c_str(), mMarkChar.length(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp("visible",inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mVisible, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp("enabled",inPropertyName) == 0 )
+	{
+		LEOInitBooleanValue( outValue, mEnabled, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp("id",inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, mID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
-		return false;
+		return CScriptableObject::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
 
 
@@ -245,6 +337,49 @@ bool	CMenuItem::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCon
 		char		str[512] = {};
 		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
 		SetName( nameStr );
+		return true;
+	}
+	else if( strcasecmp("style",inPropertyName) == 0 )
+	{
+		char		str[512] = {};
+		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
+		TMenuItemStyle theStyle = GetMenuItemStyleFromString(nameStr);
+		if( theStyle != EMenuItemStyle_Last )
+			SetStyle( theStyle );
+		return true;
+	}
+	else if( strcasecmp("commandCharacter",inPropertyName) == 0 || strcasecmp("commandChar",inPropertyName) == 0 )
+	{
+		char		str[512] = {};
+		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
+		SetCommandChar( nameStr );
+		return true;
+	}
+	else if( strcasecmp("markCharacter",inPropertyName) == 0 || strcasecmp("markChar",inPropertyName) == 0 )
+	{
+		char		str[512] = {};
+		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
+		SetMarkChar( nameStr );
+		return true;
+	}
+	else if( strcasecmp("visible",inPropertyName) == 0 )
+	{
+		bool	state = LEOGetValueAsBoolean( inValue, inContext );
+		SetVisible( state );
+		return true;
+	}
+	else if( strcasecmp("enabled",inPropertyName) == 0 )
+	{
+		bool	state = LEOGetValueAsBoolean( inValue, inContext );
+		SetEnabled( state );
+		return true;
+	}
+	else if( strcasecmp("id",inPropertyName) == 0 )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't change IDs of objects." );
 		return true;
 	}
 	else
