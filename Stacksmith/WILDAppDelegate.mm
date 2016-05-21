@@ -38,6 +38,9 @@
 #define HOME_STACK_NAME		"Home"
 
 
+void*	kWILDAppDelegateMenuBarHeightKVOContext = &kWILDAppDelegateMenuBarHeightKVOContext;
+
+
 using namespace Carlson;
 
 
@@ -222,6 +225,9 @@ void	WILDScheduleResumeOfScript( void )
 	
 	UKCrashReporterCheckForCrash();
 	
+	NSStatusItem	*	si = [[[NSStatusBar systemStatusBar] statusItemWithLength: 1.0] retain];
+	[si.button.window addObserver: self forKeyPath: @"frame" options: 0 context: kWILDAppDelegateMenuBarHeightKVOContext];
+
 	if( !CDocumentManager::GetSharedDocumentManager()->HaveDocuments() )
 		[self applicationOpenUntitledFile: NSApp];
 }
@@ -242,10 +248,10 @@ void	WILDScheduleResumeOfScript( void )
 -(void)	positionToolbarOnScreen: (NSScreen*)scr
 {
 	NSRect		box = [mToolPanel frame];
-	NSRect		screenBox = scr.visibleFrame;
+	NSRect		screenBox = scr.frame;
 	box.origin.x = screenBox.origin.x;
 	box.size.width = screenBox.size.width;
-	box.origin.y = NSMaxY(screenBox) -box.size.height;
+	box.origin.y = NSMaxY(screenBox) -box.size.height -[[[NSApplication sharedApplication] mainMenu] menuBarHeight];
 	[mToolPanel setFrame: box display: YES];
 	mToolPanel.movableByWindowBackground = NO;
 	[mToolPanel orderFront: self];
@@ -690,6 +696,29 @@ struct WILDAppDelegateValidatableButtonInfo
 		[buttons[x].button setEnabled: buttons[x].enable];
 		if( !buttons[x].enable )
 			[buttons[x].button setState: NSOffState];
+	}
+}
+
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+	if( context == kWILDAppDelegateMenuBarHeightKVOContext )
+	{
+		NSScreen	*theScreen = [[NSApplication sharedApplication] mainWindow].screen;
+		if( !theScreen )
+			theScreen = [NSScreen mainScreen];
+		if( !theScreen )
+			theScreen = [NSScreen screens][0];
+		[self positionToolbarOnScreen: theScreen];
+		
+		CStack	*	frontStack = CStack::GetFrontStack();
+		CCard	*	frontCard = nullptr;
+		if( frontStack )
+			frontCard = frontStack->GetCurrentCard();
+		if( frontCard )
+		{
+			frontCard->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*){}, EMayGoUnhandled, "menuBarHeightChange %f", [[[NSApplication sharedApplication] mainMenu] menuBarHeight] );
+		}
 	}
 }
 
