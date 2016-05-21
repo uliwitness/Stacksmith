@@ -49,7 +49,7 @@ using namespace Carlson;
 	self = [super init];
 	if( self )
 	{
-		mImage = CImageCanvas( [NSImage imageNamed: @"NoIcon"] );
+		
 	}
 	return self;
 }
@@ -96,6 +96,8 @@ using namespace Carlson;
 		if( imagePath.size() != 0 )
 			mImage = CImageCanvas(imagePath);
 	}
+	if( !mImage.IsValid() )
+		mImage = CImageCanvas( [NSImage imageNamed: @"NoIcon"] );
 	
 	return mImage.GetMacImage();
 }
