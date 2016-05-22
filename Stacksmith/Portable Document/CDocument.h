@@ -80,6 +80,7 @@ public:
 	CMenu*				GetMenu( size_t inIndex )	{ return mMenus[inIndex]; }
 	CMenu*				GetMenuWithID( ObjectID inID );
 	CMenu*				GetMenuWithName( const std::string& inName );
+	LEOInteger			GetIndexOfMenu( CMenu* inMenu );
 	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML );
 	
 	ObjectID			GetUniqueIDForStack();
@@ -101,7 +102,7 @@ public:
 	virtual LEOContextGroup*	GetScriptContextGroupObject() override;
 
 	virtual void		IncrementChangeCount() override;
-	virtual void		MenuIncrementedChangeCount( CMenu* inMenu )	{ IncrementChangeCount(); };
+	virtual void		MenuIncrementedChangeCount( CMenuItem* inItem, CMenu* inMenu )	{ IncrementChangeCount(); };
 	virtual void		StackIncrementedChangeCount( CStack* inStack )	{}
 	virtual void		LayerIncrementedChangeCount( CLayer* inLayer )	{}
 	virtual bool		GetNeedsToBeSaved() override;

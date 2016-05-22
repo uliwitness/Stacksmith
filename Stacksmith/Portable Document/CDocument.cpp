@@ -514,6 +514,20 @@ CMenu*	CDocument::GetMenuWithName( const std::string& inName )
 }
 
 
+LEOInteger	CDocument::GetIndexOfMenu( CMenu* inMenu )
+{
+	LEOInteger	x = 0;
+	for( auto currMenu : mMenus )
+	{
+		if( currMenu == inMenu )
+			return x;
+		++x;
+	}
+	
+	return -1;
+}
+
+
 CMenu*	CDocument::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
 {
 	CMenu	*	theMenu = new CMenu( this );

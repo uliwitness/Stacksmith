@@ -26,6 +26,11 @@ namespace Carlson
 	} TMenuItemStyle;
 	
 	
+	extern const char*	EMenuItemMarkCharChecked;
+	extern const char*	EMenuItemMarkCharMixed;
+	extern const char*	EMenuItemMarkCharNone;
+	
+	
 	class CMenuItem : public CConcreteObject
 	{
 	public:
@@ -83,6 +88,7 @@ namespace Carlson
 		CMenuItem*	GetItem( size_t inIndex )	{ return mItems[inIndex]; }
 		CMenuItem*	GetItemWithID( ObjectID inID );
 		CMenuItem*	GetItemWithName( const std::string& inName );
+		LEOInteger	GetIndexOfItem( CMenuItem* inItem );
 		ObjectID	GetUniqueIDForItem();
 		bool		GetVisible()				{ return mVisible; }
 		bool		GetEnabled()				{ return mEnabled; }

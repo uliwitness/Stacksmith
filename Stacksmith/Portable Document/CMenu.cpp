@@ -14,6 +14,11 @@
 using namespace Carlson;
 
 
+const char*	Carlson::EMenuItemMarkCharChecked = "\342\234\223";	// E2 9C 93 ✓ "check mark"
+const char*	Carlson::EMenuItemMarkCharMixed = "-";
+const char*	Carlson::EMenuItemMarkCharNone = "";
+
+
 static const char*	sMenuItemStyleStrings[EMenuItemStyle_Last +1] =
 {
 	"standard",
@@ -25,27 +30,27 @@ static const char*	sMenuItemStyleStrings[EMenuItemStyle_Last +1] =
 void	CMenu::SetName( const std::string &inName )
 {
 	mName = inName;
-	mDocument->MenuIncrementedChangeCount(this);
+	mDocument->MenuIncrementedChangeCount( nullptr, this );
 }
 
 
 void	CMenu::SetEnabled( bool inState )
 {
 	mEnabled = inState;
-	mDocument->MenuIncrementedChangeCount( this );
+	mDocument->MenuIncrementedChangeCount( nullptr, this );
 }
 
 
 void	CMenu::SetVisible( bool inState )
 {
 	mVisible = inState;
-	mDocument->MenuIncrementedChangeCount( this );
+	mDocument->MenuIncrementedChangeCount( nullptr, this );
 }
 
 
 void	CMenu::MenuItemIncrementedChangeCount( CMenuItem* inItem )
 {
-	mDocument->MenuIncrementedChangeCount(this);
+	mDocument->MenuIncrementedChangeCount( inItem, this );
 }
 
 
@@ -68,6 +73,20 @@ CMenuItem*	CMenu::GetItemWithName( const std::string& inName )
 			return currItem;
 	}
 	return nullptr;
+}
+
+
+LEOInteger	CMenu::GetIndexOfItem( CMenuItem* inItem )
+{
+	LEOInteger	x = 0;
+	for( auto currItem : mItems )
+	{
+		if( currItem == inItem )
+			return x;
+		++x;
+	}
+	
+	return -1;
 }
 
 

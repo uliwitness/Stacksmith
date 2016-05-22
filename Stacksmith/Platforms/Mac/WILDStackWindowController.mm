@@ -1411,9 +1411,9 @@ using namespace Carlson;
 		CMenuItem*	currMenuItem = (CMenuItem*)[theItem tag];
 		NSInteger	itemState = NSOffState;
 		std::string	markChar( currMenuItem->GetMarkChar() );
-		if( markChar.compare("-") == 0 )
+		if( markChar.compare(EMenuItemMarkCharMixed) == 0 )
 			itemState = NSMixedState;
-		else if( markChar.compare("\342\234\223") == 0 )	// E2 9C 93 ✓ "check mark"
+		else if( markChar.compare(EMenuItemMarkCharChecked) == 0 )
 			itemState = NSOnState;
 		[theItem setState: itemState];
 		return currMenuItem->GetEnabled();

@@ -288,13 +288,30 @@ void	CDocumentMac::IncrementChangeCount()
 }
 
 
-void	CDocumentMac::MenuIncrementedChangeCount( CMenu* inMenu )
+void	CDocumentMac::MenuIncrementedChangeCount( CMenuItem* inItem, CMenu* inMenu )
 {
-	CDocument::MenuIncrementedChangeCount( inMenu );
+	CDocument::MenuIncrementedChangeCount( inItem, inMenu );
 	
-	// +++ Recreate Mac menus.
+	LEOInteger	theMenuIdx = GetIndexOfMenu( inMenu );
+	NSMenuItem*	menuParentItem = mMacMenus[theMenuIdx];
+	if( inItem )
+	{
+		LEOInteger	theItemIdx = inMenu->GetIndexOfItem( inItem );
+		NSMenuItem*	changedItem = [menuParentItem.submenu itemAtIndex: theItemIdx];
+		changedItem.title = [NSString stringWithUTF8String: inItem->GetName().c_str()];
+		changedItem.keyEquivalent = [NSString stringWithUTF8String: inItem->GetCommandChar().c_str()];
+		changedItem.hidden = !inItem->GetVisible();
+		// markChar and enabled are updated in WILDStackWindowController's -validateMenuItem:
+	}
+	else
+	{
+		NSString	*	titleMacStr = [NSString stringWithUTF8String: inMenu->GetName().c_str()];
+		menuParentItem.title = titleMacStr;
+		menuParentItem.submenu.title = titleMacStr;
+		menuParentItem.hidden = !inMenu->GetVisible();
+		menuParentItem.enabled = inMenu->GetEnabled();
+	}
 }
-
 
 
 void	CDocumentMac::StackIncrementedChangeCount( CStack* inStack )
