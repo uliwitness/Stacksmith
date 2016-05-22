@@ -56,7 +56,7 @@ public:
 	virtual void		ShowStackCanvasWindow() override;
 	
 	virtual void		IncrementChangeCount() override;
-	virtual void		MenuChanged( CMenu* inMenu ) override;
+	virtual void		MenuIncrementedChangeCount( CMenu* inMenu ) override;
 	virtual void		StackIncrementedChangeCount( CStack* inStack ) override;
 	virtual void		LayerIncrementedChangeCount( CLayer* inLayer ) override;
 	

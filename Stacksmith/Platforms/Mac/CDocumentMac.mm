@@ -289,9 +289,9 @@ void	CDocumentMac::IncrementChangeCount()
 }
 
 
-void	CDocumentMac::MenuChanged( CMenu* inMenu )
+void	CDocumentMac::MenuIncrementedChangeCount( CMenu* inMenu )
 {
-	CDocument::MenuChanged( inMenu );
+	CDocument::MenuIncrementedChangeCount( inMenu );
 	
 	// +++ Recreate Mac menus.
 }

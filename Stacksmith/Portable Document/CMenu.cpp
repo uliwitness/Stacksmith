@@ -25,27 +25,27 @@ static const char*	sMenuItemStyleStrings[EMenuItemStyle_Last +1] =
 void	CMenu::SetName( const std::string &inName )
 {
 	mName = inName;
-	mDocument->MenuChanged(this);
+	mDocument->MenuIncrementedChangeCount(this);
 }
 
 
 void	CMenu::SetEnabled( bool inState )
 {
 	mEnabled = inState;
-	mDocument->MenuChanged( this );
+	mDocument->MenuIncrementedChangeCount( this );
 }
 
 
 void	CMenu::SetVisible( bool inState )
 {
 	mVisible = inState;
-	mDocument->MenuChanged( this );
+	mDocument->MenuIncrementedChangeCount( this );
 }
 
 
-void	CMenu::MenuItemChanged( CMenuItem* inItem )
+void	CMenu::MenuItemIncrementedChangeCount( CMenuItem* inItem )
 {
-	mDocument->MenuChanged(this);
+	mDocument->MenuIncrementedChangeCount(this);
 }
 
 
@@ -203,42 +203,42 @@ CMenuItem::CMenuItem( CMenu * inParent )
 void	CMenuItem::SetName( const std::string &inName )
 {
 	mName = inName;
-	mParent->MenuItemChanged( this );
+	mParent->MenuItemIncrementedChangeCount( this );
 }
 
 
 void	CMenuItem::SetCommandChar( const std::string &inName )
 {
 	mCommandChar = inName;
-	mParent->MenuItemChanged( this );
+	mParent->MenuItemIncrementedChangeCount( this );
 }
 
 
 void	CMenuItem::SetMarkChar( const std::string &inName )
 {
 	mMarkChar = inName;
-	mParent->MenuItemChanged( this );
+	mParent->MenuItemIncrementedChangeCount( this );
 }
 
 
 void	CMenuItem::SetEnabled( bool inState )
 {
 	mEnabled = inState;
-	mParent->MenuItemChanged( this );
+	mParent->MenuItemIncrementedChangeCount( this );
 }
 
 
 void	CMenuItem::SetVisible( bool inState )
 {
 	mVisible = inState;
-	mParent->MenuItemChanged( this );
+	mParent->MenuItemIncrementedChangeCount( this );
 }
 
 
 void	CMenuItem::SetStyle( TMenuItemStyle inStyle )
 {
 	mStyle = inStyle;
-	mParent->MenuItemChanged( this );
+	mParent->MenuItemIncrementedChangeCount( this );
 }
 
 
