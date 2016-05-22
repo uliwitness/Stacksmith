@@ -248,7 +248,7 @@ void	CDocumentMac::AddMacMenuForMenu( CMenu* currMenu )
 	menuTitleItem.submenu = currMacMenu;
 	menuTitleItem.hidden = !currMenu->GetVisible();
 	[[[NSApplication sharedApplication] mainMenu] addItem: menuTitleItem];
-	[mMacMenus addObject: menuTitleItem];
+	[GetMacMenus() addObject: menuTitleItem];
 	[currMacMenu release];
 	[menuTitleItem release];
 }
@@ -256,12 +256,11 @@ void	CDocumentMac::AddMacMenuForMenu( CMenu* currMenu )
 
 void	CDocumentMac::RemoveMacMenus()
 {
-	NSMutableArray	*	oldMacMenus = CDocumentManagerMac::sCurrentMenuBarOwner->GetMacMenus();
-	for( NSMenuItem* currMacMenuParentItem : oldMacMenus )
+	for( NSMenuItem* currMacMenuParentItem : mMacMenus )
 	{
 		[currMacMenuParentItem.menu removeItem: currMacMenuParentItem];
 	}
-	[oldMacMenus removeAllObjects];
+	[mMacMenus removeAllObjects];
 	CDocumentManagerMac::sCurrentMenuBarOwner = nullptr;
 }
 

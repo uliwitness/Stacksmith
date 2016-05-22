@@ -1158,6 +1158,7 @@ using namespace Carlson;
 		&& CDocumentManagerMac::sCurrentMenuBarOwner != nullptr )
 	{
 		CDocumentManagerMac::sCurrentMenuBarOwner->RemoveMacMenus();
+		CDocumentManagerMac::sCurrentMenuBarOwner = nullptr;
 	}
 	if( mStack->GetDocument()->GetNumMenus() > 0 )
 	{
