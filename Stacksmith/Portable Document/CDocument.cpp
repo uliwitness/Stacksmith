@@ -102,7 +102,14 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 		slashOffset = 0;
 	mURL = inURL.substr(0,slashOffset);
 	mMediaCache.SetURL( mURL );
-	mName = mURL;
+	slashOffset = mURL.rfind( '/' );
+	if( slashOffset == std::string::npos )
+		slashOffset = 0;
+	mName = mURL.substr(slashOffset+1,std::string::npos);
+	slashOffset = mName.rfind( '.' );
+	if( slashOffset == std::string::npos )
+		slashOffset = 0;
+	mName = mName.substr(0,slashOffset);
 	
 	CURLRequest		request( inURL );
 	CURLConnection::SendRequestWithCompletionHandler( request, [inURL,this](CURLResponse inResponse, const char* inData, size_t inDataLength)
