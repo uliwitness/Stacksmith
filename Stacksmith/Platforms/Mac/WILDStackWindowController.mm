@@ -1154,20 +1154,23 @@ using namespace Carlson;
 		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
 	}
 	
-	if( CDocumentManagerMac::sCurrentMenuBarOwner != mStack->GetDocument()
-		&& CDocumentManagerMac::sCurrentMenuBarOwner != nullptr )
+	
+	if( CDocumentManagerMac::sCurrentMenuBarOwner != mStack->GetDocument() )
 	{
-		CDocumentManagerMac::sCurrentMenuBarOwner->RemoveMacMenus();
-		CDocumentManagerMac::sCurrentMenuBarOwner = nullptr;
-	}
-	if( mStack->GetDocument()->GetNumMenus() > 0 )
-	{
-		CDocumentManagerMac::sCurrentMenuBarOwner = (CDocumentMac*) mStack->GetDocument();
-		size_t	numMenus = CDocumentManagerMac::sCurrentMenuBarOwner->GetNumMenus();
-		for( size_t x = 0; x < numMenus; x++ )
+		if( CDocumentManagerMac::sCurrentMenuBarOwner != nullptr )
 		{
-			CMenu	*	currMenu = mStack->GetDocument()->GetMenu( x );
-			CDocumentManagerMac::sCurrentMenuBarOwner->AddMacMenuForMenu( currMenu );
+			CDocumentManagerMac::sCurrentMenuBarOwner->RemoveMacMenus();
+			CDocumentManagerMac::sCurrentMenuBarOwner = nullptr;
+		}
+		if( mStack->GetDocument()->GetNumMenus() > 0 )
+		{
+			CDocumentManagerMac::sCurrentMenuBarOwner = (CDocumentMac*) mStack->GetDocument();
+			size_t	numMenus = CDocumentManagerMac::sCurrentMenuBarOwner->GetNumMenus();
+			for( size_t x = 0; x < numMenus; x++ )
+			{
+				CMenu	*	currMenu = mStack->GetDocument()->GetMenu( x );
+				CDocumentManagerMac::sCurrentMenuBarOwner->AddMacMenuForMenu( currMenu );
+			}
 		}
 	}
 	
