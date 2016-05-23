@@ -16,9 +16,11 @@
 @class WILDStackCanvasWindowController;
 typedef WILDStackCanvasWindowController*			WILDStackCanvasWindowControllerPtr;
 typedef NSMutableArray*								WILDNSMutableArrayPtr;
+typedef NSMenu*										WILDNSMenuPtr;
 #else
 typedef struct WILDStackCanvasWindowController*		WILDStackCanvasWindowControllerPtr;
 typedef struct NSMutableArray*						WILDNSMutableArrayPtr;
+typedef struct NSMenu*								WILDNSMenuPtr;
 #endif
 
 
@@ -51,6 +53,7 @@ public:
 	
 	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML ) override;
 	void				AddMacMenuForMenu( CMenu* currMenu );
+	void				AddItemsToMacMenuForMenu( WILDNSMenuPtr currMacMenu, CMenu* currMenu );
 	void				RemoveMacMenus();
 
 	virtual void		ShowStackCanvasWindow() override;

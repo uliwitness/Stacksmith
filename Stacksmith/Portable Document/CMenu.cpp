@@ -152,6 +152,16 @@ bool	CMenu::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 }
 
 
+CMenuItem*	CMenu::NewMenuItemWithElement( tinyxml2::XMLElement* inElement )
+{
+	CMenuItemRef	newItem( new CMenuItem( this ), true );
+	newItem->LoadFromElement( inElement );
+	mItems.push_back( newItem );
+	mDocument->MenuIncrementedChangeCount( newItem, this );
+
+	return newItem;
+}
+
 
 void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
@@ -263,7 +273,9 @@ void	CMenuItem::SetStyle( TMenuItemStyle inStyle )
 
 void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
-	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id" );
+	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id", -1 );
+	if( mID < 0 )
+		mID = mParent->GetUniqueIDForItem();
 	mName.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "name", mName );
 	tinyxml2::XMLElement* styleElem = inElement->FirstChildElement( "style" );

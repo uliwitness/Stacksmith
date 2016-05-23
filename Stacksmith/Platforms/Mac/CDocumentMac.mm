@@ -213,14 +213,12 @@ CMenu*	CDocumentMac::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
 }
 
 
-void	CDocumentMac::AddMacMenuForMenu( CMenu* currMenu )
+void	CDocumentMac::AddItemsToMacMenuForMenu( WILDNSMenuPtr currMacMenu, CMenu* currMenu )
 {
 	CStackMac*		mainStack = (CStackMac*) CStack::GetMainStack();
 	if( !mainStack )
 		mainStack = (CStackMac*) CStack::GetFrontStack();
 	
-	NSString*	macMenuName = [NSString stringWithUTF8String: currMenu->GetName().c_str()];
-	NSMenu	*	currMacMenu = [[NSMenu alloc] initWithTitle: macMenuName];
 	size_t		numItems = currMenu->GetNumItems();
 	for( size_t ix = 0; ix < numItems; ix++ )
 	{
@@ -242,6 +240,18 @@ void	CDocumentMac::AddMacMenuForMenu( CMenu* currMenu )
 		[currMacMenu addItem: currMacItem];
 		[currMacItem release];
 	}
+}
+
+
+void	CDocumentMac::AddMacMenuForMenu( CMenu* currMenu )
+{
+	CStackMac*		mainStack = (CStackMac*) CStack::GetMainStack();
+	if( !mainStack )
+		mainStack = (CStackMac*) CStack::GetFrontStack();
+	
+	NSString*	macMenuName = [NSString stringWithUTF8String: currMenu->GetName().c_str()];
+	NSMenu	*	currMacMenu = [[NSMenu alloc] initWithTitle: macMenuName];
+	AddItemsToMacMenuForMenu( currMacMenu, currMenu );
 	NSMenuItem*	menuTitleItem = [[NSMenuItem alloc] initWithTitle: macMenuName action:Nil keyEquivalent: @""];
 	menuTitleItem.tag = (intptr_t)currMenu;
 	currMacMenu.delegate = mainStack->GetMacWindowController();
@@ -297,11 +307,39 @@ void	CDocumentMac::MenuIncrementedChangeCount( CMenuItem* inItem, CMenu* inMenu 
 	if( inItem )
 	{
 		LEOInteger	theItemIdx = inMenu->GetIndexOfItem( inItem );
-		NSMenuItem*	changedItem = [menuParentItem.submenu itemAtIndex: theItemIdx];
-		changedItem.title = [NSString stringWithUTF8String: inItem->GetName().c_str()];
-		changedItem.keyEquivalent = [NSString stringWithUTF8String: inItem->GetCommandChar().c_str()];
-		changedItem.hidden = !inItem->GetVisible();
-		// markChar and enabled are updated in WILDStackWindowController's -validateMenuItem:
+		if( theItemIdx >= menuParentItem.submenu.numberOfItems )	// No such item? Must be new!
+		{
+			[menuParentItem.submenu removeAllItems];
+			AddItemsToMacMenuForMenu( menuParentItem.submenu, inMenu );
+		}
+		else
+		{
+			NSMenuItem*	changedItem = [menuParentItem.submenu itemAtIndex: theItemIdx];
+			if( inItem->GetStyle() == EMenuItemStyleSeparator && !changedItem.isSeparatorItem )
+			{
+				[menuParentItem.submenu removeItemAtIndex: theItemIdx];
+				[menuParentItem.submenu insertItem: [NSMenuItem separatorItem] atIndex: theItemIdx];
+			}
+			else
+			{
+				if( inItem->GetStyle() != EMenuItemStyleSeparator && changedItem.isSeparatorItem )
+				{
+					CStackMac*		mainStack = (CStackMac*) CStack::GetMainStack();
+					if( !mainStack )
+						mainStack = (CStackMac*) CStack::GetFrontStack();
+
+					[menuParentItem.submenu removeItemAtIndex: theItemIdx];
+					changedItem = [menuParentItem.submenu insertItemWithTitle: @"" action: @selector(projectMenuItemSelected:) keyEquivalent: @"" atIndex: theItemIdx];
+					changedItem.tag = (intptr_t)inItem;
+					changedItem.target = mainStack->GetMacWindowController();
+				}
+				
+				changedItem.title = [NSString stringWithUTF8String: inItem->GetName().c_str()];
+				changedItem.keyEquivalent = [NSString stringWithUTF8String: inItem->GetCommandChar().c_str()];
+				changedItem.hidden = !inItem->GetVisible();
+				// markChar and enabled are updated in WILDStackWindowController's -validateMenuItem:
+			}
+		}
 	}
 	else
 	{

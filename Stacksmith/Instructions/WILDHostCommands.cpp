@@ -381,26 +381,64 @@ void	WILDAskInstruction( LEOContext* inContext )
 void	WILDCreateInstruction( LEOContext* inContext )
 {
 	char typeNameBuf[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -2, typeNameBuf, sizeof(typeNameBuf), inContext );
+	LEOGetValueAsString( inContext->stackEndPtr -3, typeNameBuf, sizeof(typeNameBuf), inContext );
 	char nameBuf[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, nameBuf, sizeof(nameBuf), inContext );
+	LEOGetValueAsString( inContext->stackEndPtr -2, nameBuf, sizeof(nameBuf), inContext );
+	LEOValuePtr	objectValue = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -1, &kLeoValueTypeScriptableObject, inContext );
+	CScriptableObject*	desiredParent = nullptr;
+	if( objectValue )
+	{
+		LEOValue	trueValue;
+		LEOInitBooleanValue( &trueValue, true, kLEOInvalidateReferences, inContext );
+		desiredParent = (CScriptableObject*)objectValue->object.object;
+	}
 
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -3 );
 
     CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
-    CStack		*	frontStack = userData->GetStack();
+    CStack				*	frontStack = userData->GetStack();
+	CDocument			*	frontDocument = frontStack ? frontStack->GetDocument() : nullptr;
 	if( strcasecmp(typeNameBuf,"menu") == 0 )
 	{
+		CDocument*					desiredDocument = desiredParent ? dynamic_cast<CDocument*>(desiredParent) : frontDocument;
+		if( !desiredDocument )
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Expected a project after \"of\"." );
+			return;
+		}
+
 		tinyxml2::XMLDocument   document;
 		std::string             xml( "<menu><name>" );
 		xml.append( nameBuf );
 		xml.append( "</name></menu>" );
 		document.Parse( xml.c_str() );
-		frontStack->GetDocument()->NewMenuWithElement( document.RootElement() );
+		frontDocument->NewMenuWithElement( document.RootElement() );
+	}
+	else if( strcasecmp(typeNameBuf,"menuItem") == 0 )
+	{
+		CMenu*					desiredMenu = desiredParent ? dynamic_cast<CMenu*>(desiredParent) : nullptr;
+		if( !desiredMenu )
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Expected \"of\" followed by the menu to add the new item to." );
+			return;
+		}
+
+		tinyxml2::XMLDocument   document;
+		std::string             xml( "<menuitem><name>" );
+		xml.append( nameBuf );
+		xml.append( "</name></menuitem>" );
+		document.Parse( xml.c_str() );
+		desiredMenu->NewMenuItemWithElement( document.RootElement() );
 	}
 	else
 	{
-		CLayer		*	currentLayer = frontStack->GetCurrentLayer();
+		CLayer				*	currentLayer = frontStack->GetCurrentLayer();
 		tinyxml2::XMLDocument   document;
 		std::string             xml( "<part><type>" );
 		xml.append( typeNameBuf );
@@ -1215,7 +1253,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		{
 			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'O' },
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'O', 'X' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamLabeledContainer, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
