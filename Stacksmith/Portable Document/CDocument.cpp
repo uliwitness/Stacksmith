@@ -528,6 +528,33 @@ LEOInteger	CDocument::GetIndexOfMenu( CMenu* inMenu )
 }
 
 
+void	CDocument::SetIndexOfMenu( CMenu* inItem, LEOInteger inIndex )
+{
+	CMenuRef		keepPart = inItem;	// Make sure it doesn't get released while we're removing/re-adding it.
+	LEOInteger		oldPartIndex = -1;
+	LEOInteger		newPartIndex = inIndex;
+	LEOInteger		numMenus = 0;
+	
+	for( auto currPart = mMenus.begin(); currPart != mMenus.end(); currPart++ )
+	{
+		if( (*currPart) == inItem )
+		{
+			oldPartIndex = numMenus;
+			break;
+		}
+		numMenus++;
+	}
+	
+	if( (size_t)newPartIndex < mMenus.size() )
+	{
+		mMenus.erase( mMenus.begin() +oldPartIndex );
+		mMenus.insert( mMenus.begin() +newPartIndex, inItem );
+	}
+	
+	MenuIncrementedChangeCount( nullptr, inItem );
+}
+
+
 CMenu*	CDocument::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
 {
 	CMenu	*	theMenu = new CMenu( this );

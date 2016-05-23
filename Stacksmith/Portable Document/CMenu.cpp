@@ -90,6 +90,33 @@ LEOInteger	CMenu::GetIndexOfItem( CMenuItem* inItem )
 }
 
 
+void	CMenu::SetIndexOfItem( CMenuItem* inItem, LEOInteger inIndex )
+{
+	CMenuItemRef	keepPart = inItem;	// Make sure it doesn't get released while we're removing/re-adding it.
+	LEOInteger		oldPartIndex = -1;
+	LEOInteger		newPartIndex = inIndex;
+	LEOInteger		numItems = 0;
+	
+	for( auto currPart = mItems.begin(); currPart != mItems.end(); currPart++ )
+	{
+		if( (*currPart) == inItem )
+		{
+			oldPartIndex = numItems;
+			break;
+		}
+		numItems++;
+	}
+	
+	if( (size_t)newPartIndex < mItems.size() )
+	{
+		mItems.erase( mItems.begin() +oldPartIndex );
+		mItems.insert( mItems.begin() +newPartIndex, inItem );
+	}
+	
+	mDocument->MenuIncrementedChangeCount( inItem, this );
+}
+
+
 ObjectID	CMenu::GetUniqueIDForItem()
 {
 	bool	notUnique = true;

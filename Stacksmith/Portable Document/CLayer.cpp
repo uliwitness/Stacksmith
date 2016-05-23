@@ -524,7 +524,7 @@ void	CLayer::SetIndexOfPart( CPart* inPart, LEOInteger inIndex, CPartCreatorBase
 	if( (size_t)newPartIndex < mParts.size() )
 	{
 		mParts.erase( mParts.begin() +oldPartIndex );
-		mParts.insert( mParts.begin() +newPartIndex, inPart );
+		mParts.insert( mParts.begin() +newPartIndex, inPart );	// +++ Don't think this would work for anything but partNumber, doesn't get adjusted for e.g button numbers.
 	}
 }
 

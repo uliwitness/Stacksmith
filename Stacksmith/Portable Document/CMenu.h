@@ -89,6 +89,7 @@ namespace Carlson
 		CMenuItem*	GetItemWithID( ObjectID inID );
 		CMenuItem*	GetItemWithName( const std::string& inName );
 		LEOInteger	GetIndexOfItem( CMenuItem* inItem );
+		void		SetIndexOfItem( CMenuItem* inItem, LEOInteger inIndex );
 		ObjectID	GetUniqueIDForItem();
 		bool		GetVisible()				{ return mVisible; }
 		bool		GetEnabled()				{ return mEnabled; }
