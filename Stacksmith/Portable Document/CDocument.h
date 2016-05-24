@@ -103,7 +103,7 @@ public:
 	virtual LEOContextGroup*	GetScriptContextGroupObject() override;
 
 	virtual void		IncrementChangeCount() override;
-	virtual void		MenuIncrementedChangeCount( CMenuItem* inItem, CMenu* inMenu )	{ IncrementChangeCount(); };
+	virtual void		MenuIncrementedChangeCount( CMenuItem* inItem, CMenu* inMenu, bool parentNeedsFullRebuild )	{ IncrementChangeCount(); };
 	virtual void		StackIncrementedChangeCount( CStack* inStack )	{}
 	virtual void		LayerIncrementedChangeCount( CLayer* inLayer )	{}
 	virtual bool		GetNeedsToBeSaved() override;

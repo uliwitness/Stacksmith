@@ -551,7 +551,7 @@ void	CDocument::SetIndexOfMenu( CMenu* inItem, LEOInteger inIndex )
 		mMenus.insert( mMenus.begin() +newPartIndex, inItem );
 	}
 	
-	MenuIncrementedChangeCount( nullptr, inItem );
+	MenuIncrementedChangeCount( nullptr, inItem, true );
 }
 
 

@@ -30,27 +30,27 @@ static const char*	sMenuItemStyleStrings[EMenuItemStyle_Last +1] =
 void	CMenu::SetName( const std::string &inName )
 {
 	mName = inName;
-	mDocument->MenuIncrementedChangeCount( nullptr, this );
+	mDocument->MenuIncrementedChangeCount( nullptr, this, false );
 }
 
 
 void	CMenu::SetEnabled( bool inState )
 {
 	mEnabled = inState;
-	mDocument->MenuIncrementedChangeCount( nullptr, this );
+	mDocument->MenuIncrementedChangeCount( nullptr, this, false );
 }
 
 
 void	CMenu::SetVisible( bool inState )
 {
 	mVisible = inState;
-	mDocument->MenuIncrementedChangeCount( nullptr, this );
+	mDocument->MenuIncrementedChangeCount( nullptr, this, false );
 }
 
 
-void	CMenu::MenuItemIncrementedChangeCount( CMenuItem* inItem )
+void	CMenu::MenuItemIncrementedChangeCount( CMenuItem* inItem, bool parentNeedsFullRebuild )
 {
-	mDocument->MenuIncrementedChangeCount( inItem, this );
+	mDocument->MenuIncrementedChangeCount( inItem, this, parentNeedsFullRebuild );
 }
 
 
@@ -113,7 +113,7 @@ void	CMenu::SetIndexOfItem( CMenuItem* inItem, LEOInteger inIndex )
 		mItems.insert( mItems.begin() +newPartIndex, inItem );
 	}
 	
-	mDocument->MenuIncrementedChangeCount( inItem, this );
+	mDocument->MenuIncrementedChangeCount( inItem, this, true );
 }
 
 
@@ -152,6 +152,11 @@ bool	CMenu::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart,
 		LEOInitIntegerValue( outValue, mID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp("number",inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, mDocument->GetIndexOfMenu( this ) +1, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return false;
 }
@@ -174,6 +179,13 @@ bool	CMenu::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't change IDs of objects." );
 		return true;
 	}
+	else if( strcasecmp("number",inPropertyName) == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEONumber	idx = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		mDocument->SetIndexOfMenu( this, idx -1 );
+		return true;
+	}
 	else
 		return false;
 }
@@ -184,7 +196,7 @@ CMenuItem*	CMenu::NewMenuItemWithElement( tinyxml2::XMLElement* inElement )
 	CMenuItemRef	newItem( new CMenuItem( this ), true );
 	newItem->LoadFromElement( inElement );
 	mItems.push_back( newItem );
-	mDocument->MenuIncrementedChangeCount( newItem, this );
+	mDocument->MenuIncrementedChangeCount( newItem, this, true );
 
 	return newItem;
 }
@@ -259,42 +271,42 @@ CMenuItem::CMenuItem( CMenu * inParent )
 void	CMenuItem::SetName( const std::string &inName )
 {
 	mName = inName;
-	mParent->MenuItemIncrementedChangeCount( this );
+	mParent->MenuItemIncrementedChangeCount( this, false );
 }
 
 
 void	CMenuItem::SetCommandChar( const std::string &inName )
 {
 	mCommandChar = inName;
-	mParent->MenuItemIncrementedChangeCount( this );
+	mParent->MenuItemIncrementedChangeCount( this, false );
 }
 
 
 void	CMenuItem::SetMarkChar( const std::string &inName )
 {
 	mMarkChar = inName;
-	mParent->MenuItemIncrementedChangeCount( this );
+	mParent->MenuItemIncrementedChangeCount( this, false );
 }
 
 
 void	CMenuItem::SetEnabled( bool inState )
 {
 	mEnabled = inState;
-	mParent->MenuItemIncrementedChangeCount( this );
+	mParent->MenuItemIncrementedChangeCount( this, false );
 }
 
 
 void	CMenuItem::SetVisible( bool inState )
 {
 	mVisible = inState;
-	mParent->MenuItemIncrementedChangeCount( this );
+	mParent->MenuItemIncrementedChangeCount( this, false );
 }
 
 
 void	CMenuItem::SetStyle( TMenuItemStyle inStyle )
 {
 	mStyle = inStyle;
-	mParent->MenuItemIncrementedChangeCount( this );
+	mParent->MenuItemIncrementedChangeCount( this, false );
 }
 
 
@@ -383,6 +395,11 @@ bool	CMenuItem::GetPropertyNamed( const char* inPropertyName, size_t byteRangeSt
 		LEOInitIntegerValue( outValue, mID, kLEOUnitNone, kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp("number",inPropertyName) == 0 )
+	{
+		LEOInitIntegerValue( outValue, mParent->GetIndexOfItem(this) +1, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return CScriptableObject::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
@@ -438,6 +455,13 @@ bool	CMenuItem::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCon
 		uint16_t	fileID = 0;
 		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
 		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Can't change IDs of objects." );
+		return true;
+	}
+	else if( strcasecmp("number",inPropertyName) == 0 )
+	{
+		LEOUnit		theUnit = kLEOUnitNone;
+		LEONumber	idx = LEOGetValueAsInteger( inValue, &theUnit, inContext );
+		mParent->SetIndexOfItem( this, idx -1 );
 		return true;
 	}
 	else

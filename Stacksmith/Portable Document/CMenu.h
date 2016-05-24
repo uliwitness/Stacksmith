@@ -105,7 +105,7 @@ namespace Carlson
 
 		virtual CScriptableObject*	GetParentObject() override;
 		
-		virtual void	MenuItemIncrementedChangeCount( CMenuItem* inItem );
+		virtual void	MenuItemIncrementedChangeCount( CMenuItem* inItem, bool parentNeedsFullRebuild );
 		
 	protected:
 		std::vector<CMenuItemRef>		mItems;
