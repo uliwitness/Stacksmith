@@ -21,7 +21,7 @@ using namespace Carlson;
 	if( [self.window isKeyWindow] && owningPart )	// When the window isn't active, the table ignores the front click and we'd send a mouseDown w/o a mouseUp.
 	{
 		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "mouseDown %ld", [evt buttonNumber] );
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool wasHandled){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "mouseDown %ld", [evt buttonNumber] );
 	}
 	[super mouseDown: evt];
 }
@@ -41,7 +41,7 @@ using namespace Carlson;
 	if( state && owningPart )
 	{
 		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "openField" );
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool wasHandled){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "openField" );
 	}
 	return state;
 }
@@ -53,7 +53,7 @@ using namespace Carlson;
 	if( state && owningPart )
 	{
 		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "closeField" );
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool wasHandled){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "closeField" );
 	}
 	return state;
 }

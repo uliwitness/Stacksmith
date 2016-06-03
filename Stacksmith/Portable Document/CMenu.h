@@ -43,12 +43,14 @@ namespace Carlson
 		virtual void		SetVisible( bool inState );
 		virtual void		SetEnabled( bool inState );
 		virtual void		SetStyle( TMenuItemStyle inStyle );
+		virtual void		SetMessage( const std::string& inMessage );
 		
 		std::string		GetCommandChar()	{ return mCommandChar; }
 		std::string		GetMarkChar()		{ return mMarkChar; }
 		TMenuItemStyle	GetStyle()			{ return mStyle; }
 		bool			GetVisible()		{ return mVisible; }
 		bool			GetEnabled()		{ return mEnabled; }
+		std::string		GetMessage()		{ return mMessage; }
 		
 		void	LoadFromElement( tinyxml2::XMLElement* inElement );
 		bool	SaveToElement( tinyxml2::XMLElement* inElement );
@@ -66,6 +68,7 @@ namespace Carlson
 		std::string			mCommandChar;
 		std::string			mMarkChar;
 		CMenu*				mParent;
+		std::string			mMessage;
 		TMenuItemStyle		mStyle;
 		bool				mVisible;
 		bool				mEnabled;

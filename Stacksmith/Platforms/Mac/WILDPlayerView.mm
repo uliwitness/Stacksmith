@@ -22,7 +22,7 @@ using namespace Carlson;
 	if( owningPart )
 	{
 		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "mouseDown %ld", [theEvent buttonNumber] );
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool wasHandled){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "mouseDown %ld", [theEvent buttonNumber] );
 	}
 }
 
@@ -32,7 +32,7 @@ using namespace Carlson;
 	if( owningPart )
 	{
 		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "mouseDrag %ld", [theEvent buttonNumber] );
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool wasHandled){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "mouseDrag %ld", [theEvent buttonNumber] );
 	}
 }
 
@@ -48,7 +48,7 @@ using namespace Carlson;
 		}
 		
 		CAutoreleasePool		pool;
-		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, theMsg, [theEvent buttonNumber] );
+		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool wasHandled){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, theMsg, [theEvent buttonNumber] );
 	}
 }
 

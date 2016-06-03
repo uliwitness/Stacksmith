@@ -886,7 +886,7 @@ bool	CConcreteObject::SetUserPropertyValueForName( const std::string& inValue, c
 	
 	char	msgName[1024] = {};
 	snprintf( msgName, sizeof(msgName) -1, "%sPropertyChange", inPropName );
-	SendMessage( NULL, [](const char *, size_t, size_t, CScriptableObject *){}, EMayGoUnhandled, msgName );
+	SendMessage( NULL, [](const char *, size_t, size_t, CScriptableObject *, bool){}, EMayGoUnhandled, msgName );
 	
 //	DumpUserProperties(0);
 	

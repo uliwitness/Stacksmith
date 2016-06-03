@@ -68,7 +68,7 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseEnter %ld", [theEvent buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseEnter %ld", [theEvent buttonNumber] +1 );
 	}
 }
 
@@ -78,7 +78,7 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseLeave %ld", [theEvent buttonNumber] +1 );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseLeave %ld", [theEvent buttonNumber] +1 );
 	}
 }
 
@@ -88,7 +88,7 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseMove" );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseMove" );
 	}
 }
 
@@ -160,7 +160,7 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 	
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseDown %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseDown %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 	}
 	
 	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
@@ -194,7 +194,7 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 						}
 					}
 					CAutoreleasePool	cppPool;
-					self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseDrag %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+					self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseDrag %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 					break;
 				}
 				
@@ -219,12 +219,12 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 		//[[self target] performSelector: [self action] withObject: self];
 		self->owningPart->PrepareMouseUp();
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUp %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUp %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 	}
 	else
 	{
 		CAutoreleasePool	cppPool;
-		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUpOutside %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUpOutside %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
 	}
 	
 	[pool release];
@@ -301,7 +301,7 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 {
 	self->owningPart->PrepareMouseUp();
 	CAutoreleasePool	cppPool;
-	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUp" );
+	self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUp" );
 }
 
 @end

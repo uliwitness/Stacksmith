@@ -310,6 +310,13 @@ void	CMenuItem::SetStyle( TMenuItemStyle inStyle )
 }
 
 
+void	CMenuItem::SetMessage( const std::string &inMessage )
+{
+	mMessage = inMessage;
+	mParent->MenuItemIncrementedChangeCount( this, false );
+}
+
+
 void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id", -1 );
@@ -328,6 +335,8 @@ void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 	CTinyXMLUtils::GetStringNamed( inElement, "markChar", mMarkChar );
 	mVisible = CTinyXMLUtils::GetBoolNamed( inElement, "visible", true );
 	mEnabled = CTinyXMLUtils::GetBoolNamed( inElement, "enabled", true );
+	mMessage.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "message", mMessage );
 	mScript.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
 	
@@ -349,6 +358,8 @@ bool	CMenuItem::SaveToElement( tinyxml2::XMLElement* inElement )
 		CTinyXMLUtils::AddBoolNamed( inElement, mVisible, "visible" );
 	if( !mEnabled )
 		CTinyXMLUtils::AddBoolNamed( inElement, mEnabled, "enabled" );
+	if( mMessage.length() != 0 )
+		CTinyXMLUtils::AddStringNamed( inElement, mMessage, "message" );
 	if( mScript.length() != 0 )
 		CTinyXMLUtils::AddStringNamed( inElement, mScript, "script" );
 
@@ -398,6 +409,11 @@ bool	CMenuItem::GetPropertyNamed( const char* inPropertyName, size_t byteRangeSt
 	else if( strcasecmp("number",inPropertyName) == 0 )
 	{
 		LEOInitIntegerValue( outValue, mParent->GetIndexOfItem(this) +1, kLEOUnitNone, kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp("message",inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mMessage.c_str(), mMessage.length(), kLEOInvalidateReferences, inContext );
 		return true;
 	}
 	else
@@ -462,6 +478,13 @@ bool	CMenuItem::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCon
 		LEOUnit		theUnit = kLEOUnitNone;
 		LEONumber	idx = LEOGetValueAsInteger( inValue, &theUnit, inContext );
 		mParent->SetIndexOfItem( this, idx -1 );
+		return true;
+	}
+	else if( strcasecmp("message",inPropertyName) == 0 )
+	{
+		char		str[512] = {};
+		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
+		SetMessage( nameStr );
 		return true;
 	}
 	else

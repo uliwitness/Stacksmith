@@ -218,7 +218,7 @@ using namespace Carlson;
 			if( mouseDownMessage )
 			{
 				CAutoreleasePool	cppPool;
-				theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
+				theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
 			}
 			hitObject = theCard;
 		}
@@ -249,7 +249,7 @@ using namespace Carlson;
 		doubleUpMessage = "mouseDoubleClick %ld";
 		
 		CAutoreleasePool		pool;
-		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown", [theEvt buttonNumber] +1 );
+		theCard->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?"mouseDown":"mouseDoubleDown", [theEvt buttonNumber] +1 );
 	}
 	else if( currentTool == EOvalTool && hitObject == theCard )
 	{
@@ -349,7 +349,7 @@ using namespace Carlson;
 		doubleUpMessage = "mouseDoubleClickWhileEditing %ld";
 
 		CAutoreleasePool	cppPool;
-		((CPart*)hitObject)->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
+		((CPart*)hitObject)->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?mouseDownMessage:mouseDoubleDownMessage, [theEvt buttonNumber] +1 );
 	}
 		
 	[mOwningStackWindowController drawBoundingBoxes];
@@ -363,7 +363,7 @@ using namespace Carlson;
 		if( dragMessage )
 		{
 			CAutoreleasePool	cppPool;
-			hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, dragMessage, [theEvt buttonNumber] +1 );
+			hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, dragMessage, [theEvt buttonNumber] +1 );
 		}
 		else if( currentTool == ELineTool )
 		{
@@ -396,7 +396,7 @@ using namespace Carlson;
 	if( upMessage )
 	{
 		CAutoreleasePool	cppPool;
-		hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
+		hitObject->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, ([theEvt clickCount] % 2)?upMessage:doubleUpMessage, [theEvt buttonNumber] +1 );
 	}
 	else if( currentTool == ELineTool || currentTool == EBezierPathTool )
 	{
@@ -456,7 +456,7 @@ using namespace Carlson;
 	if( !thirdModifier ) thirdModifier = "";
 	if( !fourthModifier ) fourthModifier = "";
 	
-	std::function<void(const char *, size_t, size_t, CScriptableObject *)>	errHandler = [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); };
+	std::function<void(const char *, size_t, size_t, CScriptableObject *, bool wasHandled)>	errHandler = [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); };
 	
 	{
 		CAutoreleasePool		pool;
@@ -1139,7 +1139,7 @@ using namespace Carlson;
 		}
 	}
 	
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "focusWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "focusWindow" );
 }
 
 
@@ -1174,14 +1174,30 @@ using namespace Carlson;
 		}
 	}
 	
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "selectWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "selectWindow" );
 }
 
 
 -(IBAction)	projectMenuItemSelected: (id)sender
 {
-	CMenuItem*	currMenuItem = (CMenuItem*)[sender tag];
-	currMenuItem->SendMessage( NULL, [](const char *, size_t, size_t, CScriptableObject *){}, EMayGoUnhandled, "doMenu %s", [sender title].UTF8String );
+	CMenuItemRef	currMenuItem = (CMenuItem*)[sender tag];
+	
+	// Second call gets regular error handler that just shows user the message:
+	auto			errorHandler2 = [](const char * inErrMsg, size_t inLine, size_t inOffset, CScriptableObject * inObject, bool wasHandled)
+	{
+		CAlert::RunScriptErrorAlert( inObject, inErrMsg, inLine, inOffset );
+	};
+	
+	// First error handler sends "message" of menu item if "doMenu" didn't handle it:
+	auto			errorHandler = [currMenuItem,errorHandler2](const char * inErrMsg, size_t inLine, size_t inOffset, CScriptableObject * inObject, bool wasHandled)
+	{
+		CAlert::RunScriptErrorAlert( inObject, inErrMsg, inLine, inOffset );
+		if( !wasHandled && currMenuItem->GetMessage().length() > 0 )
+			currMenuItem->SendMessage( NULL, errorHandler2, EMustBeHandled, "%s", currMenuItem->GetMessage().c_str() );
+	};
+	
+	// Actually send the doMenu message (and implicitly the menu's message):
+	currMenuItem->SendMessage( NULL, errorHandler, EMayGoUnhandled, "doMenu %s", [sender title].UTF8String );
 }
 
 
@@ -1202,14 +1218,14 @@ using namespace Carlson;
 	mStack->SetCardHeight( newBox.size.height );
 
 	CAutoreleasePool	cppPool;
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "resizeWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "resizeWindow" );
 }
 
 
 -(void)	windowDidMove: (NSNotification *)notification
 {
 	CAutoreleasePool	cppPool;
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ if( errMsg ) { std::cerr << "Error while moving window: " << errMsg << std::endl; } }, EMayGoUnhandled, "moveWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while moving window: " << errMsg << std::endl; } }, EMayGoUnhandled, "moveWindow" );
 }
 
 
@@ -1355,7 +1371,7 @@ using namespace Carlson;
 	NSMenuItem	*	menuTitleItem = [menu.supermenu itemAtIndex: [menu.supermenu indexOfItemWithSubmenu: menu]];
 	CMenu*			currMenu = (CMenu*)[menuTitleItem tag];
 	
-	currMenu->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*){}, EMayGoUnhandled, "updateMenu %s", currMenu->GetName().c_str() );
+	currMenu->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*, bool wasHandled){}, EMayGoUnhandled, "updateMenu %s", currMenu->GetName().c_str() );
 }
 
 
@@ -1416,6 +1432,11 @@ using namespace Carlson;
 		else if( markChar.compare(EMenuItemMarkCharChecked) == 0 )
 			itemState = NSOnState;
 		[theItem setState: itemState];
+		std::string	msg = currMenuItem->GetMessage();
+		if( msg.length() > 0 && !currMenuItem->HasOrInheritsMessageHandler( msg.c_str() ) )
+			return NO;
+		else if( msg.length() == 0 && !currMenuItem->HasOrInheritsMessageHandler( "doMenu" ) )
+			return NO;
 		return currMenuItem->GetEnabled();
 	}
 	else

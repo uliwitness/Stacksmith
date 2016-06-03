@@ -848,7 +848,7 @@ bool	CScriptableObject::HasMessageHandler( const char* inMsgName )
 }
 
 
-void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, TMayGoUnhandledFlag mayGoUnhandled, const char* fmt, ... )
+void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*,bool)> errorHandler, TMayGoUnhandledFlag mayGoUnhandled, const char* fmt, ... )
 {
 #if 0
 	#define DBGLOGPAR(args...)	printf(args)
@@ -856,17 +856,25 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	#define DBGLOGPAR(args...)	
 #endif
 
-	LEOScript*	theScript = GetScriptObject(errorHandler);
+	LEOScript*	theScript = GetScriptObject([errorHandler](const char* msg,size_t line,size_t offs,CScriptableObject* obj){ errorHandler(msg,line,offs,obj,false); });
 	if( !theScript )
 		return;
 	LEOContextGroup*	contextGroup = GetScriptContextGroupObject();
 	LEOContext*	ctx = NULL;
+	bool		firstParamIsMessageName = false;
 	const char*	paramStart = strchr( fmt, ' ' );
 	char		msg[512] = {0};
 	if( paramStart == NULL )
 		paramStart = fmt +strlen(fmt);
-	memmove( msg, fmt, paramStart -fmt );
-	msg[paramStart -fmt] = '\0';
+	if( fmt[0] != 0 && fmt[0] == '%' && fmt[1] == 's' )	//
+	{
+		firstParamIsMessageName = true;
+	}
+	else
+	{
+		memmove( msg, fmt, paramStart -fmt );
+		msg[paramStart -fmt] = '\0';
+	}
 	size_t		bytesNeeded = 0;
 	
 	//printf("Sending: %s\n",msg);
@@ -939,6 +947,12 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 			char	*	currPos = theBytes;
 			va_list		ap;
 			va_start( ap, fmt );
+				if( firstParamIsMessageName )
+				{
+					const char*		currMsgNameCStr = va_arg( ap, const char* );
+					strlcpy( msg, currMsgNameCStr, sizeof(msg) );
+				}
+			
 				for( size_t x = 0; paramStart[x] != '\0'; x++ )
 				{
 					if( paramStart[x] != '%' )
@@ -1085,7 +1099,18 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 		}
 	}
 	else
+	{
+		if( firstParamIsMessageName )
+		{
+			va_list		ap;
+			va_start( ap, fmt );
+				const char*		currMsgNameCStr = va_arg( ap, const char* );
+				strlcpy( msg, currMsgNameCStr, sizeof(msg) );
+			va_end(ap);
+		}
+		
 		LEOPushIntegerOnStack( ctx, 0, kLEOUnitNone );
+	}
 	
 	ctx->contextCompleted = CScriptableObject::ContextCompletedProc;
 	
@@ -1094,7 +1119,9 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	if( ctx->group->messageSent )
 		ctx->group->messageSent( handlerID, ctx->group );
 
-	LEOHandler*		theHandler = NULL;
+	bool				wasHandled = false;
+	LEOHandler*			theHandler = nullptr;
+	CScriptableObject*	handlingObject = nullptr;
 	while( !theHandler )
 	{
 		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
@@ -1106,6 +1133,10 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 //			LEODebuggerAddBreakpoint(theHandler->instructions);
 //			LEODebugPrintContext(ctx);
 			LEORunInContext( theHandler->instructions, ctx );
+			wasHandled = true;
+			LEOValuePtr			theObjectVal = (LEOValuePtr)LEOContextGroupGetPointerForObjectIDAndSeed( ctx->group, theScript->ownerObject, theScript->ownerObjectSeed );
+			if( theObjectVal )
+				handlingObject = (CScriptableObject*) theObjectVal->object.object;
 			if( ctx->errMsg[0] != 0 )
 				break;
 //			LEODebugPrintContext(ctx);
@@ -1117,14 +1148,20 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 			if( !theScript )
 			{
 				if( ctx->callNonexistentHandlerProc )
+				{
 					ctx->callNonexistentHandlerProc( ctx, handlerID, mayGoUnhandled );
+					if( ctx->errMsg[0] == 0 && mayGoUnhandled == EMayGoUnhandled )
+					{
+						errorHandler( nullptr, SIZE_T_MAX, SIZE_T_MAX, this, wasHandled );
+					}
+				}
 				break;
 			}
 		}
 	}
 	if( ctx->errMsg[0] != 0 )
 	{
-		errorHandler( ctx->errMsg, ctx->errLine, ctx->errOffset, this );
+		errorHandler( ctx->errMsg, ctx->errLine, ctx->errOffset, handlingObject ?: this, wasHandled );
 	}
 	
 	if( !outContext )

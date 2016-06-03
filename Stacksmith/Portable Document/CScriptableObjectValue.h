@@ -105,7 +105,7 @@ public:
 	virtual bool				GetUserPropertyValueForName( const char* inPropName, std::string& outValue )	{ return false; };
 	virtual bool				SetUserPropertyValueForName( const std::string& inValue, const char* inPropName )	{ return false; };
 	
-	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler, TMayGoUnhandledFlag inMayGoUnhandled, const char* fmt, ... );
+	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*,bool)> errorHandler, TMayGoUnhandledFlag inMayGoUnhandled, const char* fmt, ... );	//!< Error handler takes errMsg, line, offset, object, wasHandled.
     virtual void                ContextCompleted( LEOContext* ctx )                 {};
 	virtual bool				HasOrInheritsMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message, or someone up the hierarchy does that this object will forward it to (e.g. to not ask the OS for mouseMoved events unless actually implemented).
 	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message.

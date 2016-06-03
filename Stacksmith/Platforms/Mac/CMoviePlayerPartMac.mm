@@ -189,7 +189,7 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 			if( msg )
 			{
 				CAutoreleasePool		pool;
-				this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, msg );
+				this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, msg );
 			}
 			mCurrentTime = CMTimeGetSeconds([mCurrentMovie currentTime]) * 60.0;
 			mLastNotifiedRate = theRate;
@@ -204,7 +204,7 @@ void	CMoviePlayerPartMac::SetUpRateObserver()
 		if( newTime != mCurrentTime )
 		{
 			CAutoreleasePool		pool;
-			this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ /*CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs );*/ }, EMayGoUnhandled, "timeChange %d", newTime );
+			this->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ /*CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs );*/ }, EMayGoUnhandled, "timeChange %d", newTime );
 			mCurrentTime = newTime;
 		}
 	}] retain];

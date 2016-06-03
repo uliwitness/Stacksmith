@@ -717,7 +717,7 @@ struct WILDAppDelegateValidatableButtonInfo
 			frontCard = frontStack->GetCurrentCard();
 		if( frontCard )
 		{
-			frontCard->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*){}, EMayGoUnhandled, "menuBarHeightChange %f", [[[NSApplication sharedApplication] mainMenu] menuBarHeight] );
+			frontCard->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*,bool){}, EMayGoUnhandled, "menuBarHeightChange %f", [[[NSApplication sharedApplication] mainMenu] menuBarHeight] );
 		}
 	}
 }
