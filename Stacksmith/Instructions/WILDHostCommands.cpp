@@ -1273,7 +1273,7 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 	{
 		ECreateIdentifier, WILD_CREATE_INSTR, 0, 0, '\0', 'X',
 		{
-			{ EHostParamIdentifier, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'O' },
+			{ EHostParamExpressionOrConstant, EPartIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', 'O' },
 			{ EHostParamExpression, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'O', 'X' },
 			{ EHostParamLabeledContainer, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

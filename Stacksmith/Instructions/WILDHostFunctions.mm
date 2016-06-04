@@ -1746,6 +1746,16 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		}
 	},
 	{
+		EMenuIdentifier, WILD_PUSH_MENUITEM_INSTRUCTION, 0, 0, '\0', 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EItemIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', 'X' },
+			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, 'X', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
 		EMenuIdentifier, WILD_PUSH_MENU_INSTRUCTION, 0, 0, '\0', '\0',
 		{
 			{ EHostParamIdentifier, EIdIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
