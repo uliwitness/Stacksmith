@@ -19,6 +19,7 @@ using namespace Carlson;
 @property (assign,nonatomic) IBOutlet NSTextView	*	messageField;
 @property (assign,nonatomic) IBOutlet NSTextField	*	resultField;
 @property (assign,nonatomic) IBOutlet NSButton		*	runButton;
+@property (retain,nonatomic) NSMutableArray			*	messageHistory;
 @property (assign,nonatomic) CMessageBoxMac			*	messageBox;
 
 @end
@@ -26,26 +27,51 @@ using namespace Carlson;
 
 @implementation WILDMessageBoxWindowController
 
+-(void)	dealloc
+{
+	self.messageHistory = nil;
+	
+	[super dealloc];
+}
+
+
 -(void)	windowDidLoad
 {
 	//[self.window setLevel: NSNormalWindowLevel];
 	self.messageField.automaticQuoteSubstitutionEnabled = NO;
 	self.messageField.automaticDashSubstitutionEnabled = NO;
 	self.messageField.automaticTextReplacementEnabled = NO;
+	
+	_messageHistory = [[[NSUserDefaults standardUserDefaults] objectForKey: @"WILDMessageHistory"] mutableCopy];
+	if( !_messageHistory )
+		_messageHistory = [NSMutableArray new];
 }
 
 
 -(IBAction) run: (id)sender
 {
+	NSString	*	commandToRun = [[self.messageField.string copy] autorelease];
+	if( ![self.messageHistory containsObject: commandToRun] )
+	{
+		if( commandToRun.length > 0 )
+			[self.messageHistory addObject: commandToRun];
+		if( self.messageHistory.count > 20 )
+		{
+			[self.messageHistory removeObjectsInRange: NSMakeRange(0,self.messageHistory.count -20)];
+		}
+		[[NSUserDefaults standardUserDefaults] setObject: self.messageHistory forKey: @"WILDMessageHistory"];
+	}
 	self.messageBox->SetResultText( "" );
-	self.messageBox->SetTextContents( [self.messageField.string UTF8String] );
+	self.messageBox->SetTextContents( [commandToRun UTF8String] );
 	self.messageBox->Run();
 }
+
 
 -(void)	windowWillClose: (NSNotification *)notification
 {
 	self.messageBox->UpdateVisible(false);
 }
+
 
 -(BOOL) textView: (NSTextView *)textView doCommandBySelector: (SEL)commandSelector
 {
@@ -54,8 +80,82 @@ using namespace Carlson;
 		[self.runButton performClick: self];
 		return YES;
 	}
+	else if( commandSelector == @selector(moveUp:) )
+	{
+		NSRange	selection = self.messageField.selectedRange;
+		if( selection.location != 0 || selection.length != 0 )	// Give user opportunity to go to start of line first.
+		{
+			return NO;
+		}
+		else
+		{
+			NSString	*currMsg = [[self.messageField.string copy] autorelease];
+			NSUInteger	currLineIdx = [self.messageHistory indexOfObject: currMsg];
+			if( currLineIdx == NSNotFound )
+			{
+				if( self.messageHistory.count > 0 )	// We're at bottom of history
+				{
+					if( currMsg.length == 0 )	// Empty line? Just go up into history.
+						currLineIdx = self.messageHistory.count -1;
+					else
+					{
+						[self.messageHistory addObject: currMsg];	// Don't lose whatever user typed so far.
+						[[NSUserDefaults standardUserDefaults] setObject: self.messageHistory forKey: @"WILDMessageHistory"];
+						currLineIdx = self.messageHistory.count -2;
+					}
+				}
+				else
+					return NO;
+			}
+			else if( currLineIdx == 0 )
+				return NO;
+			else
+				currLineIdx --;
+			
+			self.messageField.string = self.messageHistory[currLineIdx];
+			self.messageField.selectedRange = (NSRange){0,0};
+			return YES;
+		}
+	}
+	else if( commandSelector == @selector(moveDown:) )
+	{
+		NSString	*currMsg = [[self.messageField.string copy] autorelease];
+		NSRange	selection = self.messageField.selectedRange;
+		if( selection.location != currMsg.length || selection.length != 0 )	// Give user opportunity to go to start of line first.
+		{
+			return NO;
+		}
+		else
+		{
+			NSUInteger	currLineIdx = [self.messageHistory indexOfObject: currMsg];
+			if( self.messageHistory.count == 0 || currLineIdx == (self.messageHistory.count -1)
+				|| currLineIdx == NSNotFound )
+			{
+				if( currMsg.length == 0 )	// Empty line and no history? Nothing to do.
+					return NO;
+				else	// Non-empty line? Put this line in history and give user an empty line:
+				{
+					if( currLineIdx == NSNotFound )
+					{
+						[self.messageHistory addObject: currMsg];	// Don't lose whatever user typed so far.
+						[[NSUserDefaults standardUserDefaults] setObject: self.messageHistory forKey: @"WILDMessageHistory"];
+					}
+					self.messageField.string = @"";
+					return YES;
+				}
+			}
+			else
+				currLineIdx ++;
+			
+			self.messageField.string = self.messageHistory[currLineIdx];
+			return YES;
+		}
+	}
 	else
+	{
+		//NSLog(@"%@", NSStringFromSelector(commandSelector));
 		return NO;
+	}
 }
 
 
