@@ -719,6 +719,7 @@ struct WILDAppDelegateValidatableButtonInfo
 {
 	if( context == kWILDAppDelegateMenuBarHeightKVOContext )
 	{
+		CAutoreleasePool	pool;
 		NSScreen	*theScreen = [[NSApplication sharedApplication] mainWindow].screen;
 		if( !theScreen )
 			theScreen = [NSScreen mainScreen];

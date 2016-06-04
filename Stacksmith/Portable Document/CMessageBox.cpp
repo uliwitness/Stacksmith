@@ -118,6 +118,8 @@ LEOScript*	CMessageBox::GetScriptObject( std::function<void(const char*,size_t,s
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, GetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, mLastContextGroup, parseTree, fileID );
 			
+			LEOCleanUpParseTree( parseTree );
+			
 #if REMOTE_DEBUGGER
 			LEORemoteDebuggerAddFile( scriptStr, fileID, mScriptObject );
 			

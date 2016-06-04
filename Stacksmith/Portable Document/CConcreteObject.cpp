@@ -633,6 +633,7 @@ LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size
 			}
 			mScriptObject = LEOScriptCreateForOwner( mIDForScripts, mSeedForScripts, GetParentScript );
 			LEOScriptCompileAndAddParseTree( mScriptObject, GetScriptContextGroupObject(), parseTree, fileID );
+			LEOCleanUpParseTree( parseTree );
 			
 			mHandlerNotes.erase( mHandlerNotes.begin(),mHandlerNotes.end());
 			const char*	outHandlerName = NULL;
