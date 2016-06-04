@@ -28,7 +28,7 @@ CStack*		CDocumentMac::NewStackWithURLIDNameForDocument( const std::string& inUR
 }
 
 
-void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup )
+void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup, TOpenInvisibly openInvisibly )
 {
     try
     {
@@ -103,7 +103,14 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 			{
 				if( currDoc->GetScriptContextGroupObject() == inGroup || inGroup == nullptr )
 				{
-					currDoc->GetStack(0)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); }, inEffectType, inSpeed );
+					if( openInvisibly == EOpenVisibly )
+					{
+						currDoc->GetStack(0)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); }, inEffectType, inSpeed );
+					}
+					else
+					{
+						inCompletionBlock(currDoc);
+					}
 					[NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
 					return;
 				}
@@ -119,7 +126,7 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
         mOpenDocuments.push_back( new CDocumentMac(inGroup) );
         CDocumentRef	currDoc( mOpenDocuments.back(), true );	// Take over ownership of the pointer we just 'new'ed, mOpenDocuments retains it by itself.
         
-        currDoc->LoadFromURL( fileURL, [this,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CDocument * inDocument)
+        currDoc->LoadFromURL( fileURL, [this,inCompletionBlock,inURL,inEffectType,inSpeed,openInvisibly](Carlson::CDocument * inDocument)
         {
 			NSString*	urlStr = [[[NSBundle mainBundle] bundleURL] absoluteString];
 			if( [urlStr characterAtIndex: urlStr.length -1] != '/' )
@@ -130,43 +137,48 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 				inDocument->SetWriteProtected(true);
 			
             //UKLog(@"Doc completion entered");
-            Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
-            if( !theCppStack )
-            {
-                UKLog(@"No stacks in project %p", inDocument);
-                CloseDocument( inDocument );
+			Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
+			if( !theCppStack )
+			{
+				UKLog(@"No stacks in project %p", inDocument);
+				CloseDocument( inDocument );
 				inCompletionBlock(NULL);
-                return;
-            }
-            theCppStack->Load( [this,inDocument,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CStack* inStack)
-            {
+				return;
+			}
+			theCppStack->Load( [this,inDocument,inCompletionBlock,inURL,inEffectType,inSpeed,openInvisibly](Carlson::CStack* inStack)
+			{
 				//UKLog(@"Stack completion entered %p", inStack);
-                //inStack->Dump();
+				//inStack->Dump();
 				if( !inStack->IsLoaded() )
 				{
-                    CloseDocument( inDocument );
-                    UKLog(@"Error loading stack for document %p", inDocument);
+					CloseDocument( inDocument );
+					UKLog(@"Error loading stack for document %p", inDocument);
 					inCompletionBlock(NULL);
 					return;
 				}
 				CCard	*	firstCard = (inStack ? inStack->GetCard(0) : NULL);
-                //UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
-                firstCard->Load( [this,inDocument,inStack,inCompletionBlock,inURL,inEffectType,inSpeed](Carlson::CLayer*inCard)
-                {
-                    //UKLog(@"Card completion entered %p",inCard);
+				//UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
+				firstCard->Load( [this,inDocument,inStack,inCompletionBlock,inURL,inEffectType,inSpeed,openInvisibly](Carlson::CLayer*inCard)
+				{
+					//UKLog(@"Card completion entered %p",inCard);
 					if( inCard )
 					{
-                    	inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [inDocument,inCompletionBlock,inURL,inEffectType,inSpeed](){ [NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]]; inCompletionBlock(inDocument); }, inEffectType, inSpeed );
+						if( openInvisibly == EOpenVisibly )
+						{
+							inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [inDocument,inCompletionBlock,inURL,inEffectType,inSpeed](){ [NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]]; inCompletionBlock(inDocument); }, inEffectType, inSpeed );
+						}
+						else
+							inCompletionBlock(inDocument);
 					}
 					else
 					{
-                        CloseDocument( inDocument );
+						CloseDocument( inDocument );
 						inCompletionBlock(NULL);
 					}
-                    //UKLog(@"Card completion exited");
-                } );
-                //UKLog(@"Stack completion exited");
-            } );
+					//UKLog(@"Card completion exited");
+				} );
+				//UKLog(@"Stack completion exited");
+			} );
             //UKLog(@"Doc completion exited");
         });
 

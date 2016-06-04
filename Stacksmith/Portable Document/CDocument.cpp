@@ -375,6 +375,16 @@ void	CDocument::SaveThumbnailsForOpenStacks()
 }
 
 
+CScriptableObject*	CDocument::GetParentObject()
+{
+	CDocumentRef	homeDocument = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument();
+	if( homeDocument != this && homeDocument->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
+		return homeDocument;
+	
+	return nullptr;
+}
+
+
 void	CDocument::CallAllCompletionBlocks()
 {
 	mLoaded = true;
@@ -704,15 +714,21 @@ void	CDocument::SetPeeking( bool inState )
 }
 
 
-void	CDocument::CheckIfWeShouldCloseCauseLastStackClosed()
+bool	CDocument::HasVisibleStacks()
 {
 	for( auto currStack : mStacks )
 	{
 		if( currStack->IsVisible() )
-			return;
+			return true;
 	}
-	
-	CDocumentManager::GetSharedDocumentManager()->CloseDocument( this );
+	return false;
+}
+
+
+void	CDocument::CheckIfWeShouldCloseCauseLastStackClosed()
+{
+	if( !HasVisibleStacks() && this != CDocumentManager::GetSharedDocumentManager()->GetHomeDocument() )
+		CDocumentManager::GetSharedDocumentManager()->CloseDocument( this );
 }
 
 
@@ -853,6 +869,21 @@ void	CDocumentManager::SaveAll()
 		if( currDoc->GetNeedsToBeSaved() )
 			currDoc->Save();
 	}
+}
+
+
+bool	CDocumentManager::HaveDocuments()
+{
+	for( auto currDoc : mOpenDocuments )
+	{
+		if( currDoc == mHomeDocument )
+		{
+			return currDoc->HasVisibleStacks();
+		}
+		else
+			return true;
+	}
+	return false;
 }
 
 

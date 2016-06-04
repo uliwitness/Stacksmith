@@ -35,7 +35,7 @@ class CDocumentManagerMac : public CDocumentManager
 public:
 	virtual ~CDocumentManagerMac()	{}
 	
-	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup ) override;
+	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup, TOpenInvisibly openInvisibly ) override;
 	
 	virtual void	Quit() override;
 	

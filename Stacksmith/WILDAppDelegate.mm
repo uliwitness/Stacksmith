@@ -32,12 +32,6 @@
 #import "WILDTransitionFilter.h"
 
 
-// On startup, if not asked to open any stack, we will look for a stack
-//	of this name, first in our resources folder, and if none is there,
-//	we will look next to the application for it.
-#define HOME_STACK_NAME		"Home"
-
-
 void*	kWILDAppDelegateMenuBarHeightKVOContext = &kWILDAppDelegateMenuBarHeightKVOContext;
 
 
@@ -245,6 +239,20 @@ void	WILDScheduleResumeOfScript( void )
 	NSStatusItem	*	si = [[[NSStatusBar systemStatusBar] statusItemWithLength: 1.0] retain];
 	[si.button.window addObserver: self forKeyPath: @"frame" options: 0 context: kWILDAppDelegateMenuBarHeightKVOContext];
 
+	std::string		fileURL( [NSURL fileURLWithPath: self.homeStackPath].absoluteString.UTF8String );
+	CDocumentManager::GetSharedDocumentManager()->OpenDocumentFromURL( fileURL,
+	[fileURL]( CDocument * inNewDocument )
+	{
+        if( !inNewDocument )
+        {
+            std::stringstream	errMsg;
+            errMsg << "Can't find home stack at " << fileURL << ".";
+            CAlert::RunMessageAlert( errMsg.str() );
+			[[NSApplication sharedApplication] terminate: nil];
+        }
+		CDocumentManager::GetSharedDocumentManager()->SetHomeDocument( inNewDocument );
+	}, "", EVisualEffectSpeedNormal, nullptr, EOpenInvisibly);
+	
 	if( !CDocumentManager::GetSharedDocumentManager()->HaveDocuments() )
 		[self applicationOpenUntitledFile: NSApp];
 }
@@ -298,6 +306,18 @@ void	WILDScheduleResumeOfScript( void )
 }
 
 
+-(NSString*)	homeStackPath
+{
+	NSString*	homeStackName = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"WILDHomeStack"];
+	NSString*	thePath = [[NSBundle mainBundle] pathForResource: homeStackName ofType: @"xstk"];
+	if( !thePath )
+	{
+		thePath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: [homeStackName stringByAppendingString: @".xstk"]];
+	}
+	return thePath;
+}
+
+
 -(BOOL)	applicationOpenUntitledFile: (NSApplication *)sender
 {
 	static BOOL	sDidTryToOpenOverrideStack = NO;
@@ -323,23 +343,13 @@ void	WILDScheduleResumeOfScript( void )
 		}
 	}
 
-	NSString*	thePath = [[NSBundle mainBundle] pathForResource: @"" HOME_STACK_NAME ofType: @"xstk"];
-	if( !thePath )
-	{
-		thePath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"" HOME_STACK_NAME ".xstk"];
-	}
-	return [self application: NSApp openFile: thePath];
+	return [self application: NSApp openFile: self.homeStackPath];
 }
 
 
 -(IBAction)	goHome: (id)sender
 {
-	NSString*	thePath = [[NSBundle mainBundle] pathForResource: @"" HOME_STACK_NAME ofType: @"xstk"];
-	if( !thePath )
-	{
-		thePath = [[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent: @"" HOME_STACK_NAME ".xstk"];
-	}
-	[self application: NSApp openFile: thePath];
+	[self application: NSApp openFile: self.homeStackPath];
 }
 
 
@@ -365,7 +375,7 @@ void	WILDScheduleResumeOfScript( void )
             errMsg << "Can't find stack at " << fileURL << ".";
             CAlert::RunMessageAlert( errMsg.str() );
         }
-	}, "", EVisualEffectSpeedNormal, nullptr);
+	}, "", EVisualEffectSpeedNormal, nullptr, EOpenVisibly);
 	
 	return YES;	// We show our own errors asynchronously.
 }

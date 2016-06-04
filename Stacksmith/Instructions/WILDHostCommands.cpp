@@ -200,7 +200,7 @@ void	WILDGoInstruction( LEOContext* inContext )
                     }
 					
 					LEOContextRelease(inContext);
-				}, userData->GetVisualEffectType(), userData->GetVisualEffectSpeed(), inContext->group );
+				}, userData->GetVisualEffectType(), userData->GetVisualEffectSpeed(), inContext->group, EOpenVisibly );
 				
 				LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 				return;

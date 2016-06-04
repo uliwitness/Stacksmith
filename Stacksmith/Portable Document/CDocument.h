@@ -20,32 +20,43 @@ namespace Carlson {
 
 typedef CRefCountedObjectRef<CDocument>		CDocumentRef;
 
+enum TOpenInvisibly
+{
+	EOpenVisibly,
+	EOpenInvisibly
+};
+
+
 class CDocumentManager	// Subclass this and instantiate it at startup. First subclass instantiated wins & becomes the shared singleton.
 {
 public:
 	CDocumentManager();
 	virtual ~CDocumentManager()	{};
 	
-	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup ) = 0;
+	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup, TOpenInvisibly openInvisibly ) = 0;
 	
 	virtual void		AddDocument( CDocumentRef inDocument )	{ mOpenDocuments.push_back(inDocument); };
 	virtual void		CloseDocument( CDocumentRef inDocument );
 	virtual void		SetPeeking( bool inState );
 	virtual void		SaveAll();
-	virtual bool		HaveDocuments()							{ return mOpenDocuments.size() > 0; };
+	virtual bool		HaveDocuments();
 	virtual size_t		GetNumDocuments()						{ return mOpenDocuments.size(); }
 	virtual CDocument*	GetDocument( size_t inIndex )			{ return mOpenDocuments[inIndex]; }
 	virtual CDocument*	GetDocumentWithName( const std::string& inName );
 	virtual void		Quit() = 0;
 	
-	virtual void	SetFrontDocument( CDocument* inDocument );
-	CDocument*		GetFrontDocument()							{ return mFrontDocument; };
+	virtual void			SetHomeDocument( CDocumentRef inDocument )	{ mHomeDocument = inDocument; }
+	virtual CDocumentRef	GetHomeDocument()							{ return mHomeDocument; }
+	
+	virtual void			SetFrontDocument( CDocument* inDocument );
+	CDocument*				GetFrontDocument()							{ return mFrontDocument; };
 	
 	static CDocumentManager*	GetSharedDocumentManager();
 
 protected:
 	std::vector<CDocumentRef>	mOpenDocuments;
 	CDocument*					mFrontDocument;
+	CDocumentRef				mHomeDocument;
 	
 	static CDocumentManager*	sSharedDocumentManager;
 };
@@ -61,7 +72,8 @@ public:
 	bool				CreateAtURL( const std::string& inURL, const std::string inNameForUser = "" );
 	void				SaveThumbnailsForOpenStacks();
 	
-	virtual CDocument*	GetDocument() override				{ return this; }
+	virtual CDocument*			GetDocument() override				{ return this; }
+	virtual CScriptableObject*	GetParentObject() override;
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	
@@ -107,6 +119,7 @@ public:
 	virtual void		StackIncrementedChangeCount( CStack* inStack )	{}
 	virtual void		LayerIncrementedChangeCount( CLayer* inLayer )	{}
 	virtual bool		GetNeedsToBeSaved() override;
+	virtual bool		HasVisibleStacks();
 	virtual void		CheckIfWeShouldCloseCauseLastStackClosed();
 	
 	virtual void		Dump( size_t inNestingLevel = 0 ) override;
