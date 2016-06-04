@@ -24,6 +24,19 @@
 #include <unistd.h>
 
 
+using namespace Carlson;
+
+
+static struct { const char* mStringName; TVisualEffectSpeed mSpeed; }	sSpeedNames[EVisualEffectSpeed_Last] =
+{
+	{ "very slow", EVisualEffectSpeedVerySlow },
+	{ "slow", EVisualEffectSpeedSlow },
+	{ "", EVisualEffectSpeedNormal },
+	{ "fast", EVisualEffectSpeedFast },
+	{ "very fast", EVisualEffectSpeedVeryFast },
+};
+
+
 void	WILDGoInstruction( LEOContext* inContext );
 void	WILDGoBackInstruction( LEOContext* inContext );
 void	WILDVisualEffectInstruction( LEOContext* inContext );
@@ -45,9 +58,6 @@ void	WILDMoveInstruction( LEOContext* inContext );
 void	WILDChooseInstruction( LEOContext* inContext );
 void	WILDMarkInstruction( LEOContext* inContext );
 void	WILDInsertScriptInstruction( LEOContext* inContext );
-
-
-using namespace Carlson;
 
 
 size_t	kFirstStacksmithHostCommandInstruction = 0;
@@ -246,14 +256,26 @@ void	WILDGoInstruction( LEOContext* inContext )
 
 void	WILDVisualEffectInstruction( LEOContext* inContext )
 {
-	char str[1024] = { 0 };
-	LEOGetValueAsString( inContext->stackEndPtr -1, str, sizeof(str), inContext );
+	char effectStr[1024] = { 0 };
+	LEOGetValueAsString( inContext->stackEndPtr -2, effectStr, sizeof(effectStr), inContext );
+	char speedStr[1024] = { 0 };
+	LEOGetValueAsString( inContext->stackEndPtr -1, speedStr, sizeof(speedStr), inContext );
 	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
+	
+	TVisualEffectSpeed	speed = EVisualEffectSpeedNormal;
+	for( size_t x = 0; x < EVisualEffectSpeed_Last; x++ )
+	{
+		if( strcasecmp( sSpeedNames[x].mStringName, speedStr ) == 0 )
+		{
+			speed = sSpeedNames[x].mSpeed;
+			break;
+		}
+	}
 	
 	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
 	
-    userData->SetVisualEffectTypeAndSpeed( str, EVisualEffectSpeedNormal );
+    userData->SetVisualEffectTypeAndSpeed( effectStr, speed );
 
 	inContext->currentInstruction++;
 }
@@ -1196,8 +1218,8 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		EVisualIdentifier, WILD_VISUAL_EFFECT_INSTR, 0, 0, '\0', '\0',
 		{
 			{ EHostParamInvisibleIdentifier, EEffectIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParamExpressionOrIdentifiersTillLineEnd, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
-			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamExpressionOrConstant, EVisualIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParamExpressionOrConstant, ESpeedIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
