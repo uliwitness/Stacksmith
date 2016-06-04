@@ -90,7 +90,7 @@ using namespace Carlson;
 	
 	[nameField setStringValue: [NSString stringWithUTF8String: part->GetName().c_str()]];
 	
-	CLayer*		parent = dynamic_cast<CLayer*>(part->GetParentObject());
+	CLayer*		parent = dynamic_cast<CLayer*>(part->GetParentObject( nullptr ));
 	NSString*	layerName = [[NSString stringWithUTF8String: parent->GetIdentityForDump()] capitalizedString];
 	[numberField setIntegerValue: parent->GetIndexOfPart( part, part->GetPartType() ) +1];
 	[partNumberLabel setStringValue: [NSString stringWithFormat: @"%@ Part Number:", layerName]];

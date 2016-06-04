@@ -28,17 +28,17 @@ public:
 	virtual void		SetVisible( bool n )	{};
 	virtual bool		IsVisible()				{ return false; };
 	
-	virtual bool		GetTextContents( std::string& outString );
-	virtual bool		SetTextContents( const std::string& inString);
+	virtual bool		GetTextContents( std::string& outString ) override;
+	virtual bool		SetTextContents( const std::string& inString) override;
 	virtual std::string	GetResultText()									{ return mResultText; };
 	virtual void		SetResultText( const std::string& inString)		{ mResultText = inString; };
 	// We don't provide InitValue here because the message box can be used to run scripts in many context groups.
     
-    virtual void        ContextCompleted( LEOContext* ctx );
+    virtual void        ContextCompleted( LEOContext* ctx ) override;
 
-	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );
-	virtual LEOContextGroup*	GetScriptContextGroupObject();
-	virtual CScriptableObject*	GetParentObject();
+	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler ) override;
+	virtual LEOContextGroup*	GetScriptContextGroupObject() override;
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
 	
 protected:
 	std::string				mScript;			// The actual text in the message box.

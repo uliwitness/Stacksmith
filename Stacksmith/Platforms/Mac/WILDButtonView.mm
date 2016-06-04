@@ -249,9 +249,9 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 	}
 	NSTrackingAreaOptions	trackingOptions = 0;
 	
-	if( self.owningPart->HasOrInheritsMessageHandler("mouseEnter") || self.owningPart->HasOrInheritsMessageHandler("mouseLeave") )
+	if( self.owningPart->HasOrInheritsMessageHandler("mouseEnter",nullptr) || self.owningPart->HasOrInheritsMessageHandler("mouseLeave",nullptr) )
 		trackingOptions |= NSTrackingMouseEnteredAndExited;
-	if( self.owningPart->HasOrInheritsMessageHandler("mouseMove") )
+	if( self.owningPart->HasOrInheritsMessageHandler("mouseMove",nullptr) )
 		trackingOptions |= NSTrackingMouseMoved;
 	
 	if( trackingOptions != 0 )

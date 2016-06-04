@@ -107,11 +107,11 @@ public:
 	
 	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*,bool)> errorHandler, TMayGoUnhandledFlag inMayGoUnhandled, const char* fmt, ... );	//!< Error handler takes errMsg, line, offset, object, wasHandled.
     virtual void                ContextCompleted( LEOContext* ctx )                 {};
-	virtual bool				HasOrInheritsMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message, or someone up the hierarchy does that this object will forward it to (e.g. to not ask the OS for mouseMoved events unless actually implemented).
+	virtual bool				HasOrInheritsMessageHandler( const char* inMsgName, CScriptableObject* previousParent );	//!< To find whether this object implements the given message, or someone up the hierarchy does that this object will forward it to (e.g. to not ask the OS for mouseMoved events unless actually implemented).
 	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message.
 
-	virtual CStack*				GetStack()										{ return NULL; };
-	virtual CScriptableObject*	GetParentObject()								{ return NULL; };
+	virtual CStack*				GetStack()												{ return NULL; };
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent )	{ return NULL; };
 	virtual LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )										{ return NULL; };
 	virtual LEOContextGroup*	GetScriptContextGroupObject()					{ return NULL; };
 	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );

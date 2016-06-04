@@ -58,7 +58,7 @@ namespace Carlson
 		virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
 		virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
 
-		virtual CScriptableObject*	GetParentObject() override;
+		virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
 
 		virtual std::string		GetTypeName() override			{ return "menuItem"; };
 		
@@ -106,7 +106,7 @@ namespace Carlson
 		virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
 		virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
 
-		virtual CScriptableObject*	GetParentObject() override;
+		virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
 		
 		virtual void	MenuItemIncrementedChangeCount( CMenuItem* inItem, bool parentNeedsFullRebuild );
 		

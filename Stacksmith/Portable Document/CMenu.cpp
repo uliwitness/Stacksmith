@@ -252,7 +252,7 @@ bool	CMenu::SaveToElement( tinyxml2::XMLElement* inElement )
 }
 
 
-CScriptableObject*	CMenu::GetParentObject()
+CScriptableObject*	CMenu::GetParentObject( CScriptableObject* previousParent )
 {
 	CScriptableObject* parent = CStack::GetFrontStack()->GetCurrentCard();
 	if( !parent )
@@ -492,7 +492,7 @@ bool	CMenuItem::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCon
 }
 
 
-CScriptableObject*	CMenuItem::GetParentObject()
+CScriptableObject*	CMenuItem::GetParentObject( CScriptableObject* previousParent )
 {
 	return mParent;
 }

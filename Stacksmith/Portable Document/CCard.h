@@ -34,31 +34,31 @@ public:
 	bool			IsMarked()					{ return mMarked; };
 	void			SetMarked( bool inMarked );
 	
-	virtual void	WakeUp();
-	virtual void	GoToSleep();
+	virtual void	WakeUp() override;
+	virtual void	GoToSleep() override;
 		
-	virtual void	SetPeeking( bool inState );
+	virtual void	SetPeeking( bool inState ) override;
 	
-	virtual CScriptableObject*	GetParentObject();
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
 	virtual CBackground*		GetBackground()		{ return mOwningBackground; };
 	virtual void				SetBackground( CBackground* inBg )	{ mOwningBackground = inBg; };	// Used mainly for assigning a background to a newly-created, never-before saved card in RAM.
 	
-	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler, const std::string& inEffectType, TVisualEffectSpeed inSpeed );
-	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
-	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	virtual bool				GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPart* overPart, std::function<void()> completionHandler, const std::string& inEffectType, TVisualEffectSpeed inSpeed ) override;
+	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
+	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
 	
-	virtual std::string			GetDisplayName();
-	virtual std::string			GetTypeName()			{ return std::string("card"); };
+	virtual std::string			GetDisplayName() override;
+	virtual std::string			GetTypeName() override			{ return std::string("card"); };
 
-	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines.
+	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock ) override;	// addGuidelineBlock gets called to create guidelines.
 	
 protected:
-	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root );
-	virtual void	SavePropertiesToElement( tinyxml2::XMLElement* stackfile );
-	virtual void	CallAllCompletionBlocks();
-	virtual const char*	GetLayerXMLType()			{ return "card"; };
+	virtual void	LoadPropertiesFromElement( tinyxml2::XMLElement* root ) override;
+	virtual void	SavePropertiesToElement( tinyxml2::XMLElement* stackfile ) override;
+	virtual void	CallAllCompletionBlocks() override;
+	virtual const char*	GetLayerXMLType() override			{ return "card"; };
 
-	virtual const char*	GetIdentityForDump()		{ return "Card"; };
+	virtual const char*	GetIdentityForDump() override		{ return "Card"; };
 
 protected:
 	bool			    mMarked;

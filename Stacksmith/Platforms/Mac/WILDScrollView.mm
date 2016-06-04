@@ -108,9 +108,9 @@ using namespace Carlson;
 	
 	if( self.owningPart )
 	{
-		if( self.owningPart->HasOrInheritsMessageHandler("mouseEnter") || self.owningPart->HasOrInheritsMessageHandler("mouseLeave") )
+		if( self.owningPart->HasOrInheritsMessageHandler("mouseEnter",nullptr) || self.owningPart->HasOrInheritsMessageHandler("mouseLeave",nullptr) )
 			trackingOptions |= NSTrackingMouseEnteredAndExited;
-		if( self.owningPart->HasOrInheritsMessageHandler("mouseMove") )
+		if( self.owningPart->HasOrInheritsMessageHandler("mouseMove",nullptr) )
 			trackingOptions |= NSTrackingMouseMoved;
 	}
 	

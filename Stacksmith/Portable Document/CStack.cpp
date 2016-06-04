@@ -206,14 +206,9 @@ void	CStack::CallAllCompletionBlocks()
 }
 
 
-CScriptableObject*	CStack::GetParentObject()
+CScriptableObject*	CStack::GetParentObject( CScriptableObject* previousParent )
 {
-	bool	isFloater = (mStyle == EStackStylePopup || mStyle == EStackStylePalette);
-	CStack*	ms = GetMainStack();
-	CScriptableObject* parent = (isFloater && ms) ? (CScriptableObject*)ms->GetCurrentCard() : (CScriptableObject*)mDocument;
-	if( !parent )
-		parent = mDocument;
-	return parent;
+	return mDocument;
 }
 
 

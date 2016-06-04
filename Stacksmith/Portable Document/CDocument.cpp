@@ -375,8 +375,25 @@ void	CDocument::SaveThumbnailsForOpenStacks()
 }
 
 
-CScriptableObject*	CDocument::GetParentObject()
+CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent )
 {
+	if( previousParent )
+	{
+		CStack*	stackForwardingToUs = dynamic_cast<CStack*>(previousParent);
+		if( stackForwardingToUs )
+		{
+			if( stackForwardingToUs->GetShouldForwardToMainStack() )
+			{
+				CStack	*	currentMainStack = CStack::GetMainStack();
+				if( currentMainStack != stackForwardingToUs && currentMainStack->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
+				{
+					CCard	*	currentCard = currentMainStack->GetCard(0);
+					if( currentCard )
+						return currentCard;
+				}
+			}
+		}
+	}
 	CDocumentRef	homeDocument = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument();
 	if( homeDocument != this && homeDocument->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
 		return homeDocument;

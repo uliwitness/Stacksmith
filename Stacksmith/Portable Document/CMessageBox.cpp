@@ -164,7 +164,7 @@ LEOContextGroup*	CMessageBox::GetScriptContextGroupObject()
 }
 
 
-CScriptableObject*	CMessageBox::GetParentObject()
+CScriptableObject*	CMessageBox::GetParentObject( CScriptableObject* previousParent )
 {
 	CStack*	theStack = CStack::GetFrontStack();
 	if( !theStack )

@@ -76,7 +76,7 @@ public:
 	void				SaveThumbnailsForOpenStacks();
 	
 	virtual CDocument*			GetDocument() override				{ return this; }
-	virtual CScriptableObject*	GetParentObject() override;
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument );
 	

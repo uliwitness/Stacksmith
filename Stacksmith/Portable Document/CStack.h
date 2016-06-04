@@ -54,12 +54,12 @@ public:
 	virtual bool	IsLoaded()			{ return mLoaded; };
 	virtual bool	Save( const std::string& inPackagePath );
 	
-	ObjectID			GetID()	const	{ return mStackID; };
-	std::string			GetURL()		{ return mURL; };
-	std::string			GetFileName()	{ return mFileName; };
-	virtual std::string	GetTypeName()	{ return std::string("stack"); };
-	virtual bool		ShowHandlersForObjectType( std::string inTypeName )	{ return true; };	//!< Show all handlers in our popup, we may get them forwarded through the message path.
-	virtual CScriptableObject*	GetParentObject();
+	ObjectID			GetID()	const override	{ return mStackID; };
+	std::string			GetURL()				{ return mURL; };
+	std::string			GetFileName()			{ return mFileName; };
+	virtual std::string	GetTypeName() override	{ return std::string("stack"); };
+	virtual bool		ShowHandlersForObjectType( std::string inTypeName ) override	{ return true; };	//!< Show all handlers in our popup, we may get them forwarded through the message path.
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
 	
 	void			AddCard( CCard* inCard );	//!< Add at end.
 	void			InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard = NULL );	// If precedingCard == NULL insert at start.
@@ -96,7 +96,7 @@ public:
 	CCard*			GetNextCard();
 	CCard*			GetPreviousCard();
 	virtual CLayer*	GetCurrentLayer()				{ if( mEditingBackground ) return mCurrentCard->GetBackground(); return mCurrentCard; };
-	virtual CStack*	GetStack()						{ return this; };
+	virtual CStack*	GetStack() override				{ return this; };
 	size_t			GetCardWidth()					{ return mCardWidth; };
 	virtual void	SetCardWidth( int n )			{ mCardWidth = n; };
 	size_t			GetCardHeight()					{ return mCardHeight; };
@@ -123,7 +123,7 @@ public:
 	virtual void	SendSelectedItemBackward();
 	virtual void	SendSelectedItemToBack();
 
-	virtual void	SetName( const std::string& inName );
+	virtual void	SetName( const std::string& inName ) override;
 	virtual void	SetStyle( TStackStyle inStyle )			{ mStyle = inStyle; IncrementChangeCount(); };
 	TStackStyle		GetStyle()								{ return mStyle; };
 	virtual bool	IsResizable()							{ return mResizable; };
@@ -139,8 +139,8 @@ public:
 	virtual void		SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )	{}
 	virtual bool	GetEffectiveCantModify();
 	
-	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
-	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	virtual bool	GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
+	virtual bool	SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
 	virtual bool	ShowScriptEditorForObject( CConcreteObject* inObject ) { return false; };
 	virtual bool	ShowPropertyEditorForObject( CConcreteObject* inObject ) { return false; };
 	virtual bool	ShowContextualMenuForObject( CConcreteObject* inObject ) { return false; };
@@ -149,9 +149,11 @@ public:
 	virtual void	RectChangedOfPart( CPart* inChangedPart )	{};
 	virtual void	SelectedPartChanged()						{};
 
-	virtual void	IncrementChangeCount();
+	virtual void	IncrementChangeCount() override;
 	virtual void	LayerIncrementedChangeCount( CLayer* inLayer );
-	virtual bool	GetNeedsToBeSaved();
+	virtual bool	GetNeedsToBeSaved() override;
+	
+	virtual bool	GetShouldForwardToMainStack()				{ return( mStyle == EStackStylePopup || mStyle == EStackStylePalette ); };
 	
 	virtual CUndoStack*	GetUndoStack();
 	
@@ -174,7 +176,7 @@ public:
 
 	virtual void	NumberOrOrderOfPartsChanged()			{}
 
-	virtual void	Dump( size_t inIndent = 0 );
+	virtual void	Dump( size_t inIndent = 0 ) override;
 	
 // statics:
 	static CStack*		GetFrontStack()						{ return sFrontStack; }

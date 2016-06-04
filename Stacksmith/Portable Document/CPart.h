@@ -133,10 +133,10 @@ public:
 		once, so subsequent ID changes don't cause your ID to be re-mapped again. */
 	virtual void				UpdateMediaIDs( std::map<ObjectID,ObjectID> changedIDMappings ) {};
 	
-	virtual CPart*				Retain();
-	virtual void				Release();
+	virtual CPart*				Retain() override;
+	virtual void				Release() override;
 	
-	virtual ObjectID			GetID()	const		{ return mID; };
+	virtual ObjectID			GetID()	const override	{ return mID; };
 	virtual void				SetID( ObjectID i )	{ mID = i; };
 	LEOInteger					GetFamily()								{ return mFamily; };
 	virtual void				SetFamily( LEOInteger inFamily )		{ mFamily = inFamily; };
@@ -147,18 +147,18 @@ public:
 	LEOInteger					GetBottom();
 	virtual void				SetPartType( CPartCreatorBase* inType )	{ mPartType = inType; };	// Remembers the type, can't possibly change the type of this class.
 	virtual CPartCreatorBase*	GetPartType()							{ return mPartType; };
-	virtual std::string			GetTypeName()							{ return GetPartType()->GetPartTypeName(); };
+	virtual std::string			GetTypeName() override					{ return GetPartType()->GetPartTypeName(); };
 	virtual LEOInteger			GetIndex( CPartCreatorBase* inType = NULL );
 	virtual void				SetIndex( LEOInteger inIndex, CPartCreatorBase* inType = NULL );
 	
 	virtual void				ToolChangedFrom( TTool inOldTool )	{};
 	virtual bool				CanBeEditedWithTool( TTool inTool )	{ return inTool == EPointerTool; };
 	
-	virtual bool				GetTextContents( std::string& outString );
-	virtual bool				SetTextContents( const std::string& inString);
+	virtual bool				GetTextContents( std::string& outString ) override;
+	virtual bool				SetTextContents( const std::string& inString) override;
 
-	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue );
-	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd );
+	virtual bool				GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
+	virtual bool				SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
 
 	virtual void				SetPartLayoutFlags( TPartLayoutFlags inFlags );
 	virtual TPartLayoutFlags	GetPartLayoutFlags()						{ return mPartLayoutFlags; };
@@ -166,8 +166,8 @@ public:
 	virtual void				WakeUp()		{};
 	virtual void				GoToSleep()		{};
 	virtual void				SetPeeking( bool inState )				{};
-	virtual CScriptableObject*	GetParentObject();
-	virtual CStack*				GetStack();
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
+	virtual CStack*				GetStack() override;
 	virtual CPartContents*		GetContentsOnCurrentCard();
 	virtual CUndoStack*			GetUndoStack();
 	
@@ -180,7 +180,7 @@ public:
 	virtual void				PrepareMouseUp()				{};	//!< Sent when a mouse click was inside, right before we send mouseUp.
 	bool						GetShouldSendMouseEventsRightNow();
 	virtual void				WillBeDeleted()					{};
-	virtual bool				DeleteObject();
+	virtual bool				DeleteObject() override;
 	
 	virtual CLayer*				GetOwner()						{ return mOwner; };
 	
@@ -193,11 +193,11 @@ public:
 	virtual void				GetRectForCustomHandle( LEOInteger idx, LEONumber *outLeft, LEONumber *outTop, LEONumber *outRight, LEONumber *outBottom );
 
 	virtual void				Grab( THitPart inHitPart, LEOInteger customGrabPartIndex, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );
-	virtual std::string			GetDisplayName()	{ return GenerateDisplayName( GetIdentityForDump() ); };
+	virtual std::string			GetDisplayName() override	{ return GenerateDisplayName( GetIdentityForDump() ); };
 	
-	virtual void				IncrementChangeCount();
+	virtual void				IncrementChangeCount() override;
 	
-	virtual void				Dump( size_t inIndent = 0 );
+	virtual void				Dump( size_t inIndent = 0 ) override;
 	
 protected:
 	virtual ~CPart();

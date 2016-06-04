@@ -767,7 +767,7 @@ LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* 
 	{
 		//printf( "Going up to parent %s\n", typeid(*theObject).name() );
 		
-		CScriptableObject*	scriptableParent = theObject->GetParentObject();
+		CScriptableObject*	scriptableParent = theObject->GetParentObject( theObject );
 		if( scriptableParent )
 		{
 			theScript = scriptableParent->GetScriptObject([](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); });
@@ -806,7 +806,7 @@ void	CScriptableObject::ContextCompletedProc( LEOContext *ctx )
 }
 
 
-bool	CScriptableObject::HasOrInheritsMessageHandler( const char* inMsgName )
+bool	CScriptableObject::HasOrInheritsMessageHandler( const char* inMsgName, CScriptableObject* previousParent )
 {
 	LEOScript*	theScript = GetScriptObject(NULL);
 	if( theScript )
@@ -822,11 +822,11 @@ bool	CScriptableObject::HasOrInheritsMessageHandler( const char* inMsgName )
 		}
 	}
 	
-	CScriptableObject	* parent = GetParentObject();
+	CScriptableObject	* parent = GetParentObject( previousParent );
 	if( !parent )
 		return false;
 	
-	return parent->HasOrInheritsMessageHandler( inMsgName );
+	return parent->HasOrInheritsMessageHandler( inMsgName, this );
 }
 
 
@@ -879,7 +879,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	
 	//printf("Sending: %s\n",msg);
 	
-	CScriptableObject*			parent = GetParentObject();
+	CScriptableObject*			parent = GetParentObject( nullptr );
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this, this );
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
 	if( outContext )
