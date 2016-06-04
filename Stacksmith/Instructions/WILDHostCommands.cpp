@@ -27,13 +27,16 @@
 using namespace Carlson;
 
 
-static struct { const char* mStringName; TVisualEffectSpeed mSpeed; }	sSpeedNames[EVisualEffectSpeed_Last] =
+static struct { const char* mStringName; TVisualEffectSpeed mSpeed; }	sSpeedNames[] =
 {
 	{ "very slow", EVisualEffectSpeedVerySlow },
 	{ "slow", EVisualEffectSpeedSlow },
 	{ "", EVisualEffectSpeedNormal },
 	{ "fast", EVisualEffectSpeedFast },
 	{ "very fast", EVisualEffectSpeedVeryFast },
+	{ "very slowly", EVisualEffectSpeedVerySlow },
+	{ "slowly", EVisualEffectSpeedSlow },
+	{ nullptr, EVisualEffectSpeed_Last }
 };
 
 
@@ -264,7 +267,7 @@ void	WILDVisualEffectInstruction( LEOContext* inContext )
 	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
 	
 	TVisualEffectSpeed	speed = EVisualEffectSpeedNormal;
-	for( size_t x = 0; x < EVisualEffectSpeed_Last; x++ )
+	for( size_t x = 0; sSpeedNames[x].mStringName != nullptr; x++ )
 	{
 		if( strcasecmp( sSpeedNames[x].mStringName, speedStr ) == 0 )
 		{
