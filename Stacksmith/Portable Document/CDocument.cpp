@@ -827,7 +827,7 @@ void	CDocument::Dump( size_t inNestingLevel )
 
 
 CDocumentManager::CDocumentManager()
-	: mFrontDocument(NULL)
+	: mFrontDocument(NULL), mDidSendStartup(false)
 {
 	if( sSharedDocumentManager )
 		throw std::logic_error( "Attempt to create more than one document manager." );

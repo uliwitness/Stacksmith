@@ -11,6 +11,7 @@
 #include "CTinyXMLUtils.h"
 #include "CAlert.h"
 #include <sstream>
+#include "CDocument.h"
 
 
 using namespace Carlson;
@@ -155,6 +156,12 @@ bool	CCard::GoThereInNewWindow( TOpenInMode inOpenInMode, CStack* oldStack, CPar
 			GetStack()->SetCurrentCard( this, inEffectType, inSpeed );	// Go there!
 			
 			WakeUp();
+			if( !CDocumentManager::GetSharedDocumentManager()->GetDidSendStartup() )
+			{
+				CDocumentManager::GetSharedDocumentManager()->SetDidSendStartup(true);
+				CAutoreleasePool		pool;
+				SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "startup" );
+			}
 			if( destStackWasntOpenYet )
 			{
 				CAutoreleasePool		pool;

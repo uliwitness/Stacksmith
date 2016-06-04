@@ -47,6 +47,8 @@ public:
 	
 	virtual void			SetHomeDocument( CDocumentRef inDocument )	{ mHomeDocument = inDocument; }
 	virtual CDocumentRef	GetHomeDocument()							{ return mHomeDocument; }
+	virtual bool			GetDidSendStartup()							{ return mDidSendStartup; }
+	virtual void			SetDidSendStartup( bool inDidSend )			{ mDidSendStartup = inDidSend; }
 	
 	virtual void			SetFrontDocument( CDocument* inDocument );
 	CDocument*				GetFrontDocument()							{ return mFrontDocument; };
@@ -57,6 +59,7 @@ protected:
 	std::vector<CDocumentRef>	mOpenDocuments;
 	CDocument*					mFrontDocument;
 	CDocumentRef				mHomeDocument;
+	bool						mDidSendStartup;
 	
 	static CDocumentManager*	sSharedDocumentManager;
 };
