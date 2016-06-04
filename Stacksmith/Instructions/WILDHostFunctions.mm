@@ -1162,9 +1162,19 @@ void	WILDPushMenuInstruction( LEOContext* inContext )
 	{
 		char		buf[512] = {};
 		const char*	projectName = LEOGetValueAsString( screenIndexValue, buf, sizeof(buf), inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return;
 		
 		foundMenu = frontProject->GetMenuWithName( projectName );
-		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1);
+		if( foundMenu == nullptr )
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No menu named \"%s\".", projectName );
+			return;
+		}
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 	}
 	if( foundMenu )
@@ -1239,7 +1249,12 @@ void	WILDPushMenuItemInstruction( LEOContext* inContext )
 	if( foundMenuItem )
 		foundMenuItem->InitValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 	else
-		LEOInitUnsetValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No such menu item." );
+	}
 	inContext->currentInstruction++;
 	
 	//LEODebugPrintContext(inContext);
