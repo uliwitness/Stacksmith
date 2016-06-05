@@ -414,7 +414,7 @@ void	WILDScheduleResumeOfScript( void )
 				{
 					CAutoreleasePool	pool;
 					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
-					CDocumentMac*	theDoc = new CDocumentMac( nullptr );
+					CDocumentMac*	theDoc = new CDocumentMac( CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetScriptContextGroupObject() );
 					CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
 					theDoc->CreateAtURL( [newFileURL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String, [[newFileURL lastPathComponent] stringByDeletingPathExtension].UTF8String );
 					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
@@ -447,7 +447,7 @@ void	WILDScheduleResumeOfScript( void )
 					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
 					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
 					
-					[self application: [NSApplication sharedApplication] openFile: newPath];
+					[self application: [NSApplication sharedApplication] openURL: newFileURL];
 				}
 			}];
 			
