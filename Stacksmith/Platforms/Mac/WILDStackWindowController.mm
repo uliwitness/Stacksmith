@@ -1011,7 +1011,10 @@ using namespace Carlson;
         {
 			self.window.contentView = mContentView;
 			[self.window setTitle: [NSString stringWithUTF8String: mStack->GetName().c_str()]];
-			[self.window setRepresentedURL: [NSURL URLWithString: [NSString stringWithUTF8String: mStack->GetURL().c_str()]]];
+			if( theStyle != EStackStylePalette )
+			{
+				[self.window setRepresentedURL: [NSURL URLWithString: [NSString stringWithUTF8String: mStack->GetURL().c_str()]]];
+			}
         }
         @catch( NSException* err )
         {
