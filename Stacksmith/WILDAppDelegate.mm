@@ -375,7 +375,7 @@ void	WILDScheduleResumeOfScript( void )
             errMsg << "Can't find stack at " << fileURL << ".";
             CAlert::RunMessageAlert( errMsg.str() );
         }
-	}, "", EVisualEffectSpeedNormal, nullptr, EOpenVisibly);
+	}, "", EVisualEffectSpeedNormal, CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetScriptContextGroupObject(), EOpenVisibly);
 	
 	return YES;	// We show our own errors asynchronously.
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE stack PUBLIC "-//Apple, Inc.//DTD stack V 2.0//EN" "">
+<stack>
+    <id>2</id>
+    <name>Tools</name>
+    <style>palette</style>
+    <cardCount>1</cardCount>
+    <cantModify><false/></cantModify>
+    <cantDelete><false/></cantDelete>
+    <cantAbort><false/></cantAbort>
+    <privateAccess><false/></privateAccess>
+    <cantPeek><false/></cantPeek>
+    <resizable><false/></resizable>
+    <cardSize>
+        <width>139</width>
+        <height>53</height>
+    </cardSize>
+    <script></script>
+    <background id="1001" file="background_1001.xml" name=""/>
+    <card id="3002" file="card_3002.xml" name="" owner="1001"/>
+</stack>

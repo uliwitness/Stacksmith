@@ -755,7 +755,7 @@ void	ScriptableObjectCallNonexistentHandler( LEOContext* inContext, LEOHandlerID
 }
 
 
-LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* inContext )
+LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* inContext, void* inParam )
 {
 	struct LEOScript*	theScript = NULL;
 	CScriptableObject*	theObject = NULL;
@@ -767,7 +767,7 @@ LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* 
 	{
 		//printf( "Going up to parent %s\n", typeid(*theObject).name() );
 		
-		CScriptableObject*	scriptableParent = theObject->GetParentObject( theObject );
+		CScriptableObject*	scriptableParent = theObject->GetParentObject( (CScriptableObject*)inParam );
 		if( scriptableParent )
 		{
 			theScript = scriptableParent->GetScriptObject([](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); });
@@ -1122,10 +1122,15 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	bool				wasHandled = false;
 	LEOHandler*			theHandler = nullptr;
 	CScriptableObject*	handlingObject = nullptr;
+	CScriptableObject*	prevHandlingObject = nullptr;
 	while( !theHandler )
 	{
+		prevHandlingObject = handlingObject;
+		LEOValuePtr			theObjectVal = (LEOValuePtr)LEOContextGroupGetPointerForObjectIDAndSeed( ctx->group, theScript->ownerObject, theScript->ownerObjectSeed );
+		if( theObjectVal )
+			handlingObject = (CScriptableObject*) theObjectVal->object.object;
+		
 		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
-	
 		if( theHandler )
 		{
 			LEOContextPushHandlerScriptReturnAddressAndBasePtr( ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
@@ -1134,9 +1139,6 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 //			LEODebugPrintContext(ctx);
 			LEORunInContext( theHandler->instructions, ctx );
 			wasHandled = true;
-			LEOValuePtr			theObjectVal = (LEOValuePtr)LEOContextGroupGetPointerForObjectIDAndSeed( ctx->group, theScript->ownerObject, theScript->ownerObjectSeed );
-			if( theObjectVal )
-				handlingObject = (CScriptableObject*) theObjectVal->object.object;
 			if( ctx->errMsg[0] != 0 )
 				break;
 //			LEODebugPrintContext(ctx);
@@ -1144,7 +1146,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 		if( !theHandler )
 		{
 			if( theScript->GetParentScript )
-				theScript = theScript->GetParentScript( theScript, ctx );
+				theScript = theScript->GetParentScript( theScript, ctx, prevHandlingObject );
 			if( !theScript )
 			{
 				if( ctx->callNonexistentHandlerProc )

@@ -118,7 +118,7 @@ public:
 	
 // statics:
 	static void			InitScriptableObjectValue( LEOValueObject* inStorage, CScriptableObject* wildObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
-	static LEOScript*	GetParentScript( LEOScript* inScript, LEOContext* inContext );
+	static LEOScript*	GetParentScript( LEOScript* inScript, LEOContext* inContext, void* inParam );
 
 	static CScriptableObject*	GetOwnerScriptableObjectFromContext( LEOContext * inContext );
 	static void					PreInstructionProc( LEOContext* inContext );

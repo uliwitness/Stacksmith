@@ -377,17 +377,19 @@ void	CDocument::SaveThumbnailsForOpenStacks()
 
 CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent )
 {
+	printf( "%s->GetParentObject()\n", GetName().c_str() );
 	if( previousParent )
 	{
 		CStack*	stackForwardingToUs = dynamic_cast<CStack*>(previousParent);
 		if( stackForwardingToUs )
 		{
+			printf( "\tGetParentObject( %s )\n", stackForwardingToUs->GetName().c_str() );
 			if( stackForwardingToUs->GetShouldForwardToMainStack() )
 			{
 				CStack	*	currentMainStack = CStack::GetMainStack();
 				if( currentMainStack != stackForwardingToUs && currentMainStack->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
 				{
-					CCard	*	currentCard = currentMainStack->GetCard(0);
+					CCard	*	currentCard = currentMainStack->GetCurrentCard();
 					if( currentCard )
 						return currentCard;
 				}
