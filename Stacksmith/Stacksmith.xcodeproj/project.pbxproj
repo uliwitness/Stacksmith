@@ -401,6 +401,7 @@
 		55C2B647115E5780008B094D /* CSearchContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B646115E5780008B094D /* CSearchContext.cpp */; };
 		55C2B69D115EA2CD008B094D /* NSView+SizeWindowForViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */; };
 		55C476691A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C476681A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib */; };
+		55C76D3D1D15CDFF00A07B65 /* ULISyntaxColoredTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C76D3C1D15CDFF00A07B65 /* ULISyntaxColoredTextView.m */; };
 		55C7794E1A547DA200F0A022 /* memory_clearing_operator_new.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */; };
 		55C8D04F13EF0DD700B502C5 /* UKWindowBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */; };
 		55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CD60AD1874FE7D002450E2 /* CTimerPart.cpp */; };
@@ -1101,6 +1102,8 @@
 		55C2B69C115EA2CD008B094D /* NSView+SizeWindowForViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSView+SizeWindowForViewSize.m"; path = "../UliKit/NSView+SizeWindowForViewSize.m"; sourceTree = SOURCE_ROOT; };
 		55C476681A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WILDScriptEditorHandlerListPopover.xib; sourceTree = "<group>"; };
 		55C68C9D116413E300D8B44C /* svn_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = svn_version.h; sourceTree = "<group>"; };
+		55C76D3B1D15CDFF00A07B65 /* ULISyntaxColoredTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULISyntaxColoredTextView.h; path = ../UKSyntaxColoredTextDocument/ULISyntaxColoredTextView.h; sourceTree = "<group>"; };
+		55C76D3C1D15CDFF00A07B65 /* ULISyntaxColoredTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULISyntaxColoredTextView.m; path = ../UKSyntaxColoredTextDocument/ULISyntaxColoredTextView.m; sourceTree = "<group>"; };
 		55C7794C1A547DA200F0A022 /* memory_clearing_operator_new.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory_clearing_operator_new.cpp; sourceTree = "<group>"; };
 		55C8D04D13EF0DD700B502C5 /* UKWindowBodyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKWindowBodyView.h; path = ../UliKit/UKWindowBodyView.h; sourceTree = "<group>"; };
 		55C8D04E13EF0DD700B502C5 /* UKWindowBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKWindowBodyView.m; path = ../UliKit/UKWindowBodyView.m; sourceTree = "<group>"; };
@@ -1499,6 +1502,8 @@
 			children = (
 				55255A79114C174300279B03 /* UKSyntaxColoredTextViewController.h */,
 				55255A7A114C174300279B03 /* UKSyntaxColoredTextViewController.m */,
+				55C76D3B1D15CDFF00A07B65 /* ULISyntaxColoredTextView.h */,
+				55C76D3C1D15CDFF00A07B65 /* ULISyntaxColoredTextView.m */,
 				55255A7D114C177400279B03 /* UKTextDocGoToBox.h */,
 				55255A7E114C177400279B03 /* UKTextDocGoToBox.m */,
 				55255A80114C178100279B03 /* UKSCTDColorWellPrefsController.h */,
@@ -2715,6 +2720,7 @@
 				55CD610818786BAC002450E2 /* CRectanglePart.cpp in Sources */,
 				551B36C41A9907D9006AFDFE /* NSBezierPathCappedBoxes.m in Sources */,
 				552386C51883E2DF00D7FAB3 /* WILDViewFactory.mm in Sources */,
+				55C76D3D1D15CDFF00A07B65 /* ULISyntaxColoredTextView.m in Sources */,
 				559BA9A118A84BD800760273 /* CMap.cpp in Sources */,
 				552386CB1883E86200D7FAB3 /* CFieldPartMac.mm in Sources */,
 				554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */,
