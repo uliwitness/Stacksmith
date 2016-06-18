@@ -546,6 +546,7 @@ using namespace Carlson;
 	if( self )
 	{
 		mStack = inStack;
+		self.shouldCascadeWindows = NO;
 	}
 	
 	return self;
@@ -950,7 +951,7 @@ using namespace Carlson;
 
 -(void)	updateStyle
 {
-	NSRect			wdBox = NSMakeRect(0,0,mStack->GetCardWidth(),mStack->GetCardHeight());
+	NSRect			wdBox = NSMakeRect(mStack->GetLeft(), mStack->GetTop(), mStack->GetRight() -mStack->GetLeft(), mStack->GetBottom() -mStack->GetTop());
 	NSWindow	*	prevWindow = nil;
 	if( mWasVisible && !mPopover )
 	{
@@ -962,6 +963,7 @@ using namespace Carlson;
 	switch( theStyle )
 	{
 		case EStackStyleStandard:
+		case EStackStyleDocument:
 			self.window = [[[NSWindow alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | (mStack->IsResizable() ? NSResizableWindowMask : 0) backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setCollectionBehavior: NSWindowCollectionBehaviorFullScreenPrimary];
 			break;
@@ -1011,7 +1013,7 @@ using namespace Carlson;
         {
 			self.window.contentView = mContentView;
 			[self.window setTitle: [NSString stringWithUTF8String: mStack->GetName().c_str()]];
-			if( theStyle != EStackStylePalette )
+			if( theStyle == EStackStyleDocument )
 			{
 				[self.window setRepresentedURL: [NSURL URLWithString: [NSString stringWithUTF8String: mStack->GetURL().c_str()]]];
 			}

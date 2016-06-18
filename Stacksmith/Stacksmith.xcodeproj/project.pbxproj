@@ -306,6 +306,7 @@
 		556866601359EBD200C364D6 /* WILDHostCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5568665E1359EBCD00C364D6 /* WILDHostCommands.cpp */; };
 		55686663135A161400C364D6 /* WILDHostFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55686662135A161100C364D6 /* WILDHostFunctions.mm */; };
 		556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 556C496E1731F48000C40D97 /* TimerIcon.pdf */; };
+		556CF8131D08945F00017042 /* CCompletionBlockCoalescer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556CF8111D08945F00017042 /* CCompletionBlockCoalescer.cpp */; };
 		556DB7A518709A15002F7CB2 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7A318709A15002F7CB2 /* tinyxml2.cpp */; };
 		556DB7AD18709ADB002F7CB2 /* CStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7AB18709ADB002F7CB2 /* CStack.cpp */; };
 		556DB7B018709C73002F7CB2 /* CConcreteObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7AE18709C73002F7CB2 /* CConcreteObject.cpp */; };
@@ -954,6 +955,8 @@
 		55686661135A161000C364D6 /* WILDHostFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDHostFunctions.h; path = Instructions/WILDHostFunctions.h; sourceTree = SOURCE_ROOT; };
 		55686662135A161100C364D6 /* WILDHostFunctions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDHostFunctions.mm; path = Instructions/WILDHostFunctions.mm; sourceTree = SOURCE_ROOT; };
 		556C496E1731F48000C40D97 /* TimerIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = TimerIcon.pdf; path = Resources/TimerIcon.pdf; sourceTree = "<group>"; };
+		556CF8111D08945F00017042 /* CCompletionBlockCoalescer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCompletionBlockCoalescer.cpp; path = "Portable Document/CCompletionBlockCoalescer.cpp"; sourceTree = "<group>"; };
+		556CF8121D08945F00017042 /* CCompletionBlockCoalescer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCompletionBlockCoalescer.h; path = "Portable Document/CCompletionBlockCoalescer.h"; sourceTree = "<group>"; };
 		556DB7A318709A15002F7CB2 /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml2.cpp; path = ../tinyxml2/tinyxml2.cpp; sourceTree = "<group>"; };
 		556DB7A418709A15002F7CB2 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyxml2.h; path = ../tinyxml2/tinyxml2.h; sourceTree = "<group>"; };
 		556DB7AB18709ADB002F7CB2 /* CStack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CStack.cpp; path = "Portable Document/CStack.cpp"; sourceTree = "<group>"; };
@@ -1828,6 +1831,8 @@
 				556DB7AE18709C73002F7CB2 /* CConcreteObject.cpp */,
 				55CD60DA187587CB002450E2 /* CDocument.h */,
 				55CD60D9187587CB002450E2 /* CDocument.cpp */,
+				556CF8111D08945F00017042 /* CCompletionBlockCoalescer.cpp */,
+				556CF8121D08945F00017042 /* CCompletionBlockCoalescer.h */,
 				55D61D621AA275C2006D117F /* TTool.h */,
 				556DB7AC18709ADB002F7CB2 /* CStack.h */,
 				556DB7AB18709ADB002F7CB2 /* CStack.cpp */,
@@ -2559,6 +2564,7 @@
 				5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */,
 				552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */,
 				5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */,
+				556CF8131D08945F00017042 /* CCompletionBlockCoalescer.cpp in Sources */,
 				552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */,
 				551B36D11A995A67006AFDFE /* WILDToolButtonCell.m in Sources */,
 				55255A7B114C174300279B03 /* UKSyntaxColoredTextViewController.m in Sources */,

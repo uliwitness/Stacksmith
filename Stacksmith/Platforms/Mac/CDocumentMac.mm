@@ -13,6 +13,7 @@
 #include <sstream>
 #import "WILDStackWindowController.h"
 #import "WILDStackCanvasWindowController.h"
+#include "CCompletionBlockCoalescer.h"
 
 
 using namespace Carlson;
@@ -105,7 +106,14 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 				{
 					if( openInvisibly == EOpenVisibly )
 					{
-						currDoc->GetStack(0)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); }, inEffectType, inSpeed );
+						size_t	numStacks = currDoc->GetNumStacks();
+						for( size_t x = 0; x < numStacks; x++ )
+						{
+							if( currDoc->GetStack(x)->IsVisible() )
+							{
+								currDoc->GetStack(x)->GetCard(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currDoc,inCompletionBlock](){ inCompletionBlock(currDoc); }, inEffectType, inSpeed );
+							}
+						}
 					}
 					else
 					{
@@ -137,48 +145,53 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 				inDocument->SetWriteProtected(true);
 			
             //UKLog(@"Doc completion entered");
-			Carlson::CStack		*		theCppStack = inDocument->GetStack( 0 );
-			if( !theCppStack )
+			size_t	numStacks = inDocument->GetNumStacks();
+			std::shared_ptr<CCompletionBlockCoalescer<CDocument*>>	completionBlockObj( std::make_shared<CCompletionBlockCoalescer<CDocument*>>( numStacks, inCompletionBlock ) );
+			for( size_t x = 0; x < numStacks; x++ )
 			{
-				UKLog(@"No stacks in project %p", inDocument);
-				CloseDocument( inDocument );
-				inCompletionBlock(NULL);
-				return;
-			}
-			theCppStack->Load( [this,inDocument,inCompletionBlock,inURL,inEffectType,inSpeed,openInvisibly](Carlson::CStack* inStack)
-			{
-				//UKLog(@"Stack completion entered %p", inStack);
-				//inStack->Dump();
-				if( !inStack->IsLoaded() )
+				Carlson::CStack		*		theCppStack = inDocument->GetStack( x );
+				if( !theCppStack )
 				{
+					UKLog(@"No stacks in project %p", inDocument);
 					CloseDocument( inDocument );
-					UKLog(@"Error loading stack for document %p", inDocument);
-					inCompletionBlock(NULL);
+					completionBlockObj->Abort(nullptr);
 					return;
 				}
-				CCard	*	firstCard = (inStack ? inStack->GetCard(0) : NULL);
-				//UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
-				firstCard->Load( [this,inDocument,inStack,inCompletionBlock,inURL,inEffectType,inSpeed,openInvisibly](Carlson::CLayer*inCard)
+				theCppStack->Load( [this,inDocument,completionBlockObj,inURL,inEffectType,inSpeed,openInvisibly](Carlson::CStack* inStack)
 				{
-					//UKLog(@"Card completion entered %p",inCard);
-					if( inCard )
-					{
-						if( openInvisibly == EOpenVisibly )
-						{
-							inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [inDocument,inCompletionBlock,inURL,inEffectType,inSpeed](){ [NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]]; inCompletionBlock(inDocument); }, inEffectType, inSpeed );
-						}
-						else
-							inCompletionBlock(inDocument);
-					}
-					else
+					//UKLog(@"Stack completion entered %p", inStack);
+					//inStack->Dump();
+					if( !inStack->IsLoaded() )
 					{
 						CloseDocument( inDocument );
-						inCompletionBlock(NULL);
+						UKLog(@"Error loading stack for document %p", inDocument);
+						completionBlockObj->Abort(nullptr);
+						return;
 					}
-					//UKLog(@"Card completion exited");
+					CCard	*	firstCard = (inStack ? inStack->GetCard(0) : NULL);
+					//UKLog(@"Stack completion entered (2) %p in %p", firstCard, inStack);
+					firstCard->Load( [this,inDocument,inStack,completionBlockObj,inURL,inEffectType,inSpeed,openInvisibly](Carlson::CLayer*inCard)
+					{
+						//UKLog(@"Card completion entered %p",inCard);
+						if( inCard )
+						{
+							if( openInvisibly == EOpenVisibly )
+							{
+								inCard->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [inDocument,completionBlockObj,inURL,inEffectType,inSpeed](){ [NSDocumentController.sharedDocumentController noteNewRecentDocumentURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]]; completionBlockObj->Success(inDocument); }, inEffectType, inSpeed );
+							}
+							else
+								completionBlockObj->Success(inDocument);
+						}
+						else
+						{
+							CloseDocument( inDocument );
+							completionBlockObj->Abort(nullptr);
+						}
+						//UKLog(@"Card completion exited");
+					} );
+					//UKLog(@"Stack completion exited");
 				} );
-				//UKLog(@"Stack completion exited");
-			} );
+			}
             //UKLog(@"Doc completion exited");
         });
 

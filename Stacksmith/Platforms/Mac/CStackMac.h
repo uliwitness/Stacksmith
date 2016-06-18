@@ -52,6 +52,7 @@ public:
 	virtual void				SetEditingBackground( bool inState );
 	virtual void				SetTool( TTool inTool );
 	virtual void				SetName( const std::string& inName );
+	virtual void				SetDocumentURL( const std::string& inName );
 
 	virtual std::string			GetDisplayName();
 	virtual WILDNSImagePtr		GetDisplayIcon();
@@ -83,6 +84,7 @@ public:
 	virtual void				ClearAllGuidelines( bool inTrackingDone = false );
 
 	virtual void				Show( TEvenIfVisible inEvenIfVisible );
+	virtual void				Hide();
 	
 	virtual void				NumberOrOrderOfPartsChanged();
 	

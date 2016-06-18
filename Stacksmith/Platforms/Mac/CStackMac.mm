@@ -104,6 +104,15 @@ void	CStackMac::Show( TEvenIfVisible inEvenIfVisible )
 }
 
 
+void	CStackMac::Hide()
+{
+	if( mVisible )
+	{
+		[mMacWindowController.window orderOut: nil];
+	}
+}
+
+
 void	CStackMac::NumberOrOrderOfPartsChanged()
 {
 	[mMacWindowController refreshExistenceAndOrderOfAllViews];
@@ -115,6 +124,22 @@ void	CStackMac::SetName( const std::string& inName )
 {
 	CStack::SetName(inName);
 	[[mMacWindowController window] setTitle: [NSString stringWithUTF8String: inName.c_str()]];
+}
+
+
+void	CStackMac::SetDocumentURL( const std::string& inName )
+{
+	CStack::SetDocumentURL(inName);
+	
+	NSURL*			theURL = nil;
+	if( inName.length() > 0 )
+	{
+		std::string		urlString = inName;
+		if( inName.compare("file://") == 0 )
+			urlString = mURL;
+		theURL = [NSURL URLWithString: [NSString stringWithUTF8String: urlString.c_str()]];
+	}
+	[[mMacWindowController window] setRepresentedURL: theURL];
 }
 
 
@@ -356,33 +381,38 @@ static NSRect	WILDFlippedScreenRect( NSRect inBox )
 
 LEOInteger	CStackMac::GetLeft()
 {
-	NSWindow	*	wd = mMacWindowController.window;
-	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
-	return box.origin.x;
+	return 0;
+	
+//	NSWindow	*	wd = mMacWindowController.window;
+//	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
+//	return box.origin.x;
 }
 
 
 LEOInteger	CStackMac::GetTop()
 {
-	NSWindow	*	wd = mMacWindowController.window;
-	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
-	return box.origin.y;
+	return 0;
+//	NSWindow	*	wd = mMacWindowController.window;
+//	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
+//	return box.origin.y;
 }
 
 
 LEOInteger	CStackMac::GetRight()
 {
-	NSWindow	*	wd = mMacWindowController.window;
-	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
-	return NSMaxX(box);
+	return mCardWidth;
+//	NSWindow	*	wd = mMacWindowController.window;
+//	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
+//	return NSMaxX(box);
 }
 
 
 LEOInteger	CStackMac::GetBottom()
 {
-	NSWindow	*	wd = mMacWindowController.window;
-	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
-	return NSMaxY(box);
+	return mCardHeight;
+//	NSWindow	*	wd = mMacWindowController.window;
+//	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
+//	return NSMaxY(box);
 }
 
 

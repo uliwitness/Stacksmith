@@ -32,7 +32,8 @@ typedef uint8_t		TEvenIfVisible;
 
 enum
 {
-	EStackStyleStandard,	//!< Standard document window.
+	EStackStyleStandard,	//!< Standard window.
+	EStackStyleDocument,	//!< Standard document window (file's icon in title bar etc.).
 	EStackStyleRectangle,	//!< Window with a simple border.
 	EStackStylePopup,		//!< Pop-up utility window, like popovers on Mac/iOS. May be possible to tear one off as some kind of floating palette, or OSes may just make them palettes.
 	EStackStylePalette,		//!< Floating utility window with additional stuff in it.
@@ -47,7 +48,7 @@ class CUndoStack;
 class CStack : public CConcreteObject
 {
 public:
-	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mCantPeek(false), mCantAbort(false), mPrivateAccess(false), mCantDelete(false), mCantModify(false), mResizable(false), mStyle(EStackStyleStandard), mUserLevel(5), mCardWidth(512), mCardHeight(342), mLoading(false), mLoaded(false), mPeeking(false), mCardIDSeed(0), mEditingBackground(false), mCurrentTool(EBrowseTool), mChangeCount(0),mLineSize(1) { mName = inName; mDocument = inDocument; /* printf("stack %s created.\n", DebugNameForPointer(this) ); */ };
+	CStack( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) : mStackID(inID), mURL(inURL), mFileName(inFileName), mCantPeek(false), mCantAbort(false), mPrivateAccess(false), mCantDelete(false), mCantModify(false), mResizable(false), mStyle(EStackStyleDocument), mUserLevel(5), mCardWidth(512), mCardHeight(342), mCardLeft(0), mLoading(false), mLoaded(false), mPeeking(false), mCardIDSeed(0), mEditingBackground(false), mCurrentTool(EBrowseTool), mChangeCount(0),mLineSize(1) { mName = inName; mDocument = inDocument; /* printf("stack %s created.\n", DebugNameForPointer(this) ); */ };
 	
 	virtual void	Load( std::function<void(CStack*)> inCompletionBlock );
 	void			SetLoaded( bool n )	{ mLoaded = n; };	//!< Used when creating a brand new stack in RAM that's never been saved before.
@@ -56,6 +57,7 @@ public:
 	
 	ObjectID			GetID()	const override	{ return mStackID; };
 	std::string			GetURL()				{ return mURL; };
+	std::string			GetDocumentURL()		{ return mDocumentURL; };
 	std::string			GetFileName()			{ return mFileName; };
 	virtual std::string	GetTypeName() override	{ return std::string("stack"); };
 	virtual bool		ShowHandlersForObjectType( std::string inTypeName ) override	{ return true; };	//!< Show all handlers in our popup, we may get them forwarded through the message path.
@@ -124,6 +126,7 @@ public:
 	virtual void	SendSelectedItemToBack();
 
 	virtual void	SetName( const std::string& inName ) override;
+	virtual void	SetDocumentURL( const std::string& inURL )	{ mDocumentURL = inURL; }
 	virtual void	SetStyle( TStackStyle inStyle )			{ mStyle = inStyle; IncrementChangeCount(); };
 	TStackStyle		GetStyle()								{ return mStyle; };
 	virtual bool	IsResizable()							{ return mResizable; };
@@ -168,6 +171,7 @@ public:
 	
 	// Allow code to trigger showing the UI:
 	virtual void	Show( TEvenIfVisible inEvenIfVisible )		{ mVisible = true; }
+	virtual void	Hide()										{ mVisible = false; }
 	
 	std::string		GetThumbnailName()						{ return mThumbnailName; }	//!< Empty string if we have no thumbnail.
 	void			SetThumbnailName( std::string inName )	{ mThumbnailName = inName; }
@@ -197,12 +201,15 @@ protected:
 
 protected:
 	std::string					mURL;				//!< URL of the file backing this stack on disk.
+	std::string					mDocumentURL;		//!< Script-provided URL to show in title bar.
 	std::string					mFileName;			//!< Partial path relative to containing .xstk package to our file (i.e. the one at mURL).
 	std::string					mThumbnailName;		//!< Name of image file where we save a thumbnail of the first card in the stack.
 	ObjectID					mStackID;			//!< Unique ID number of this stack in the document.
 	int							mUserLevel;			//!< Maximum user level for this stack.
 	int							mCardWidth;			//!< Size of cards in this stack.
 	int							mCardHeight;		//!< Size of cards in this stack.
+	int							mCardLeft;			//!< Position of this stack's window.
+	int							mCardTop;			//!< Position of this stack's window.
 	bool						mCantPeek;			//!< Do we prevent "peeking" of button rects using Cmd-Option?
 	bool						mCantAbort;			//!< Do we prohibit Cmd-. from canceling scripts?
 	bool						mPrivateAccess;		//!< Do we require a password before opening this stack?

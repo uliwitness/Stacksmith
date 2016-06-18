@@ -385,7 +385,7 @@ CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent
 			if( stackForwardingToUs->GetShouldForwardToMainStack() )
 			{
 				CStack	*	currentMainStack = CStack::GetMainStack();
-				if( currentMainStack != stackForwardingToUs && currentMainStack->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
+				if( currentMainStack && currentMainStack != stackForwardingToUs && currentMainStack->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
 				{
 					CCard	*	currentCard = currentMainStack->GetCurrentCard();
 					if( currentCard )

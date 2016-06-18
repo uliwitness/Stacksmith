@@ -33,9 +33,9 @@ static const char*		sToolNames[ETool_Last +1] =
 	"edit text",
 	"oval",
 	"rectangle",
-	"roundrect",
+	"rounded rectangle",
 	"line",
-	"bezierpath",
+	"bezier path",
 	"*UNKNOWN*"
 };
 
@@ -43,6 +43,7 @@ static const char*		sToolNames[ETool_Last +1] =
 static const char*	sStackStyleStrings[EStackStyle_Last +1] =
 {
 	"standard",
+	"document",
 	"rectangle",
 	"popup",
 	"palette",
@@ -115,6 +116,8 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 			mStackID = CTinyXMLUtils::GetLongLongNamed( root, "id", mStackID );
 			mName = "Untitled";
 			CTinyXMLUtils::GetStringNamed( root, "name", mName );
+			mDocumentURL = "file://";
+			CTinyXMLUtils::GetStringNamed( root, "documentURL", mDocumentURL );
 			mUserLevel = CTinyXMLUtils::GetIntNamed( root, "userLevel", 5 );
 			mCantModify = CTinyXMLUtils::GetBoolNamed( root, "cantModify", false );
 			mCantDelete = CTinyXMLUtils::GetBoolNamed( root, "cantDelete", false );
@@ -122,15 +125,16 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 			mCantAbort = CTinyXMLUtils::GetBoolNamed( root, "cantAbort", false );
 			mCantPeek = CTinyXMLUtils::GetBoolNamed( root, "cantPeek", false );
 			mResizable = CTinyXMLUtils::GetBoolNamed( root, "resizable", false );
+			mVisible = CTinyXMLUtils::GetBoolNamed( root, "visible", true );
 			tinyxml2::XMLElement	*	sizeElem = root->FirstChildElement( "cardSize" );
 			mCardWidth = CTinyXMLUtils::GetIntNamed( sizeElem, "width", 512 );
 			mCardHeight = CTinyXMLUtils::GetIntNamed( sizeElem, "height", 342 );
 			
-			std::string	stackStyle("standard");
+			std::string	stackStyle("document");
 			CTinyXMLUtils::GetStringNamed( root, "style", stackStyle );
 			mStyle = GetStackStyleFromString( stackStyle.c_str() );
 			if( mStyle == EStackStyle_Last )
-				mStyle = EStackStyleStandard;
+				mStyle = EStackStyleDocument;
 			
 			mScript.erase();
 			CTinyXMLUtils::GetStringNamed( root, "script", mScript );
@@ -234,9 +238,9 @@ bool	CStack::Save( const std::string& inPackagePath )
 		
 		CTinyXMLUtils::AddLongLongNamed( root, GetID(), "id" );
 		
-		tinyxml2::XMLElement*		nameElem = document.NewElement("name");
-		nameElem->SetText(mName.c_str());
-		root->InsertEndChild( nameElem );
+		CTinyXMLUtils::AddStringNamed( root, mName, "name" );
+		if( mDocumentURL.compare("file://") != 0 )
+			CTinyXMLUtils::AddStringNamed( root, mDocumentURL, "documentURL" );
 		
 		tinyxml2::XMLElement*		elem = NULL;
 		if( mUserLevel != 5 )
@@ -259,7 +263,10 @@ bool	CStack::Save( const std::string& inPackagePath )
 		CTinyXMLUtils::AddBoolNamed( root, mCantAbort, "cantAbort" );
 		CTinyXMLUtils::AddBoolNamed( root, mPrivateAccess, "privateAccess" );
 		CTinyXMLUtils::AddBoolNamed( root, mCantPeek, "cantPeek" );
-		CTinyXMLUtils::AddBoolNamed( root, mResizable, "resizable" );
+		if( mResizable )
+			CTinyXMLUtils::AddBoolNamed( root, mResizable, "resizable" );
+		if( !mVisible )
+			CTinyXMLUtils::AddBoolNamed( root, mVisible, "visible" );
 
 		tinyxml2::XMLElement*		cardSizeElem = document.NewElement("cardSize");
 		tinyxml2::XMLElement*		cardSizeWidthElem = document.NewElement("width");
@@ -267,6 +274,15 @@ bool	CStack::Save( const std::string& inPackagePath )
 		cardSizeElem->InsertEndChild( cardSizeWidthElem );
 		tinyxml2::XMLElement*		cardSizeHeightElem = document.NewElement("height");
 		cardSizeHeightElem->SetText( mCardHeight );
+		cardSizeElem->InsertEndChild( cardSizeHeightElem );
+		root->InsertEndChild( cardSizeElem );
+
+		cardSizeElem = document.NewElement("position");
+		cardSizeWidthElem = document.NewElement("left");
+		cardSizeWidthElem->SetText( mCardLeft );
+		cardSizeElem->InsertEndChild( cardSizeWidthElem );
+		cardSizeHeightElem = document.NewElement("top");
+		cardSizeHeightElem->SetText( mCardTop );
 		cardSizeElem->InsertEndChild( cardSizeHeightElem );
 		root->InsertEndChild( cardSizeElem );
 
@@ -978,9 +994,32 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 		LEOInitBooleanValue( outValue, mResizable, kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "visible") == 0 )
+	{
+		LEOInitBooleanValue( outValue, mVisible, kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else if( strcasecmp(inPropertyName, "rectangle") == 0 || strcasecmp(inPropertyName, "rect") == 0 )
 	{
 		LEOInitRectValue( outValue, GetLeft(), GetTop(), GetRight(), GetBottom(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "tool") == 0 )
+	{
+		LEOInitStringConstantValue( outValue, GetToolName(mStyle), kLEOInvalidateReferences, inContext );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "documentURL") == 0 )
+	{
+		if( mStyle != EStackStyleDocument )
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Only windows with style \"document\" have a documentURL property." );
+			return false;
+		}
+		LEOInitStringValue( outValue, mDocumentURL.c_str(), mDocumentURL.size(), kLEOInvalidateReferences, inContext );
 		return true;
 	}
 	else
@@ -1023,6 +1062,18 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 		}
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "visible") == 0 )
+	{
+		bool			shouldShow = LEOGetValueAsBoolean( inValue, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) != 0 )
+		{
+			if( shouldShow )
+				Show( false );
+			else
+				Hide();
+		}
+		return true;
+	}
 	else if( strcasecmp(inPropertyName, "rectangle") == 0 || strcasecmp(inPropertyName, "rect") == 0 )
 	{
 		LEOInteger	l = 0, t = 0, r = 0, b = 0;
@@ -1031,6 +1082,30 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 		{
 			SetRect( l, t, r, b );
 		}
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "tool") == 0 )
+	{
+		char		styleBuf[100] = {0};
+		const char*	styleStr = LEOGetValueAsString( inValue, styleBuf, sizeof(styleBuf), inContext );
+		TTool		style = GetToolFromName(styleStr);
+		if( style != ETool_Last )
+			SetTool( style );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "documentURL") == 0 )
+	{
+		if( mStyle != EStackStyleDocument )
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Only windows with style \"document\" have a documentURL property." );
+			return false;
+		}
+		char		styleBuf[100] = {0};
+		const char*	styleStr = LEOGetValueAsString( inValue, styleBuf, sizeof(styleBuf), inContext );
+		SetDocumentURL( styleStr );
 		return true;
 	}
 	else
