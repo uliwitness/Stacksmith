@@ -21,7 +21,4 @@
 @property (retain) CIImage*		inputTargetImage;
 @property (retain) NSNumber*	inputTime;
 
-+(void)	registerFiltersFromFile: (NSString*)inPListFile;	// Calls registerForDisplayName:filterName: for each WILDxxx filter listed in the file.
-+(void)	registerForDisplayName: (NSString*)inDisplayName filterName: (NSString*)inFilterName;
-
 @end

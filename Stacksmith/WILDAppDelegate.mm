@@ -224,7 +224,7 @@ void	WILDScheduleResumeOfScript( void )
 	
 	[[NSColorPanel sharedColorPanel] setShowsAlpha: YES];
 	
-	[WILDTransitionFilter registerFiltersFromFile: [[NSBundle mainBundle] pathForResource: @"TransitionMappings" ofType: @"plist"]];
+//	[WILDTransitionFilter registerFiltersFromFile: [[NSBundle mainBundle] pathForResource: @"TransitionMappings" ofType: @"plist"]];
 	
 	CStack::SetMainStackChangedCallback( [self]( CStack* inMainStack )
 	{

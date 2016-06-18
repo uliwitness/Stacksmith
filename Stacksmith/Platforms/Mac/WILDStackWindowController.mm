@@ -23,6 +23,7 @@
 #import "UKHelperMacros.h"
 #include "CRecentCardsList.h"
 #import <QuartzCore/QuartzCore.h>
+#import "WILDTransitionFilter.h"
 
 
 static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c, const char ** d, const char* theAppendee )
@@ -695,7 +696,7 @@ using namespace Carlson;
         NSString                *   transitionSubtype = [attrs objectForKey: @"CATransitionSubtype"];
         if( [transitionType hasPrefix: @"CI"] || [transitionType hasPrefix: @"WILD"] )
         {
-            CIFilter                *   filter = [CIFilter filterWithName: transitionType];
+            CIFilter                *   filter = [transitionType hasPrefix: @"WILD"] ? [WILDTransitionFilter filterWithName: transitionType] : [CIFilter filterWithName: transitionType];
             [filter setDefaults];
             NSDictionary*	sTransitionSubtypes = nil;
             if( !sTransitionSubtypes )

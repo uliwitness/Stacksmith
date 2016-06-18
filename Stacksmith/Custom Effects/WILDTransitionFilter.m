@@ -27,34 +27,6 @@
 static NSMutableDictionary<NSString*,CIKernel*>*	sFilterKernels = nil;
 
 
-+(void)	registerFiltersFromFile: (NSString*)inPListFile
-{
-	NSDictionary*	mappings = [NSDictionary dictionaryWithContentsOfFile: inPListFile];
-	for( NSString* displayName in mappings.allKeys )
-	{
-		NSDictionary	*	filterInfo = mappings[displayName];
-		NSString		*	filterIdentifier = filterInfo[@"CATransitionType"];
-		if( [filterIdentifier hasPrefix: @"WILD"] )
-		{
-			[self registerForDisplayName: displayName filterName: filterIdentifier];
-		}
-	}
-}
-
-
-+(void)	registerForDisplayName: (NSString*)inDisplayName filterName: (NSString*)inFilterName
-{
-    [CIFilter registerFilterName: inFilterName
-        constructor: (id<CIFilterConstructor>)self
-        classAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-             inDisplayName, kCIAttributeFilterDisplayName,
-             [NSArray arrayWithObjects:
-                kCICategoryTransition, nil], kCIAttributeFilterCategories,
-            nil]
-            ];
-}
-
-
 +(CIFilter *)	filterWithName: (NSString *)name
 {
     CIFilter  *filter = [[self alloc] initWithName: name];
