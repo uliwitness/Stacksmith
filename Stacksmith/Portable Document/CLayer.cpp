@@ -643,7 +643,7 @@ void	CLayer::DeleteSelectedItem()
 			currPart++;
 	}
 	
-	GetStack()->GetUndoStack()->AddUndoAction( "Undo Delete", [this,serializedSelectedParts]()
+	GetStack()->GetUndoStack()->AddUndoAction( "Delete", [this,serializedSelectedParts]()
 	{
 		GetStack()->DeselectAllObjectsOnBackground();
 		GetStack()->DeselectAllObjectsOnCard();
