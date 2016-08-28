@@ -1025,8 +1025,8 @@ using namespace Carlson;
         }
 	}
 	NSDisableScreenUpdates();
-	if( !prevWindow )
-		[self.window center];
+//	if( !prevWindow )
+//		[self.window center];
 	[self.window setDelegate: self];
 	if( mWasVisible )
 		[self.window orderFront: self];
