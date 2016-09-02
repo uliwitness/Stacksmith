@@ -953,6 +953,7 @@ using namespace Carlson;
 -(void)	updateStyle
 {
 	NSRect			wdBox = NSMakeRect(mStack->GetLeft(), mStack->GetTop(), mStack->GetRight() -mStack->GetLeft(), mStack->GetBottom() -mStack->GetTop());
+	wdBox = WILDFlippedScreenRect( wdBox );
 	NSWindow	*	prevWindow = nil;
 	if( mWasVisible && !mPopover )
 	{
@@ -1220,8 +1221,8 @@ using namespace Carlson;
 -(void)	windowDidResize: (NSNotification *)notification
 {
 	NSRect	newBox = [self.window contentRectForFrameRect: self.window.frame];
-	mStack->SetCardWidth( newBox.size.width );
-	mStack->SetCardHeight( newBox.size.height );
+	newBox = WILDFlippedScreenRect(newBox);
+	mStack->StackRectDidChangeTo( NSMinX(newBox), NSMinY(newBox), NSMaxX(newBox), NSMaxY(newBox) );
 
 	CAutoreleasePool	cppPool;
 	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "resizeWindow" );
@@ -1230,6 +1231,10 @@ using namespace Carlson;
 
 -(void)	windowDidMove: (NSNotification *)notification
 {
+	NSRect	newBox = [self.window contentRectForFrameRect: self.window.frame];
+	newBox = WILDFlippedScreenRect(newBox);
+	mStack->StackRectDidChangeTo( NSMinX(newBox), NSMinY(newBox), NSMaxX(newBox), NSMaxY(newBox) );
+	
 	CAutoreleasePool	cppPool;
 	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while moving window: " << errMsg << std::endl; } }, EMayGoUnhandled, "moveWindow" );
 }
@@ -1726,3 +1731,13 @@ using namespace Carlson;
 }
 
 @end
+
+
+NSRect	WILDFlippedScreenRect( NSRect inBox )
+{
+	NSRect		mainScreenBox = [NSScreen.screens[0] frame];
+	inBox.origin.y += inBox.size.height;						// Calc upper left of the box.
+	mainScreenBox.origin.y += mainScreenBox.size.height;		// Calc upper left of main screen.
+	inBox.origin.y = mainScreenBox.origin.y -inBox.origin.y;	// Since upper left of main screen is 0,0 in flipped, difference between those two coordinates is new Y coordinate for flipped box
+	return inBox;
+}

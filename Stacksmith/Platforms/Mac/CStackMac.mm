@@ -344,7 +344,7 @@ NSImage*	CStackMac::GetDisplayIcon()
 	return sStackIcon;
 }
 
-void	CStackMac::SetCardWidth( int n )
+void	CStackMac::SetCardWidth( LEOInteger n )
 {
 	CStack::SetCardWidth(n);
 	
@@ -356,7 +356,7 @@ void	CStackMac::SetCardWidth( int n )
 }
 
 
-void	CStackMac::SetCardHeight( int n )
+void	CStackMac::SetCardHeight( LEOInteger n )
 {
 	CStack::SetCardHeight(n);
 	
@@ -369,55 +369,36 @@ void	CStackMac::SetCardHeight( int n )
 }
 
 
-static NSRect	WILDFlippedScreenRect( NSRect inBox )
-{
-	NSRect		mainScreenBox = [NSScreen.screens[0] frame];
-	inBox.origin.y += inBox.size.height;						// Calc upper left of the box.
-	mainScreenBox.origin.y += mainScreenBox.size.height;		// Calc upper left of main screen.
-	inBox.origin.y = mainScreenBox.origin.y -inBox.origin.y;	// Since upper left of main screen is 0,0 in flipped, difference between those two coordinates is new Y coordinate for flipped box
-	return inBox;
-}
-
-
 LEOInteger	CStackMac::GetLeft()
 {
-	return 0;
-	
-//	NSWindow	*	wd = mMacWindowController.window;
-//	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
-//	return box.origin.x;
+	return mCardLeft;
 }
 
 
 LEOInteger	CStackMac::GetTop()
 {
-	return 0;
-//	NSWindow	*	wd = mMacWindowController.window;
-//	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
-//	return box.origin.y;
+	return mCardTop;
 }
 
 
 LEOInteger	CStackMac::GetRight()
 {
-	return mCardWidth;
-//	NSWindow	*	wd = mMacWindowController.window;
-//	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
-//	return NSMaxX(box);
+	return mCardLeft +mCardWidth;
 }
 
 
 LEOInteger	CStackMac::GetBottom()
 {
-	return mCardHeight;
-//	NSWindow	*	wd = mMacWindowController.window;
-//	NSRect			box = WILDFlippedScreenRect([wd contentRectForFrameRect: wd.frame]);
-//	return NSMaxY(box);
+	return mCardTop +mCardHeight;
 }
 
 
 void	CStackMac::SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )
 {
+	mCardLeft = l;
+	mCardTop = t;
+	mCardWidth = r- l;
+	mCardHeight = b - t;
 	NSWindow	*	wd = mMacWindowController.window;
 	NSRect			box = WILDFlippedScreenRect( NSMakeRect(l,t,r-l,b-t) );
 	box = [wd frameRectForContentRect: box];

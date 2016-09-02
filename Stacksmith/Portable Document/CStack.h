@@ -98,11 +98,12 @@ public:
 	CCard*			GetNextCard();
 	CCard*			GetPreviousCard();
 	virtual CLayer*	GetCurrentLayer()				{ if( mEditingBackground ) return mCurrentCard->GetBackground(); return mCurrentCard; };
-	virtual CStack*	GetStack() override				{ return this; };
-	size_t			GetCardWidth()					{ return mCardWidth; };
-	virtual void	SetCardWidth( int n )			{ mCardWidth = n; };
-	size_t			GetCardHeight()					{ return mCardHeight; };
-	virtual void	SetCardHeight( int n )			{ mCardHeight = n; IncrementChangeCount(); };
+	virtual CStack*	GetStack() override						{ return this; };
+	LEOInteger		GetCardWidth()							{ return mCardWidth; };
+	virtual void	SetCardWidth( LEOInteger n )			{ mCardWidth = n; IncrementChangeCount(); };
+	LEOInteger		GetCardHeight()							{ return mCardHeight; };
+	virtual void	SetCardHeight( LEOInteger n )			{ mCardHeight = n; IncrementChangeCount(); };
+	virtual void	StackRectDidChangeTo( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b ) { mCardLeft = l; mCardTop = t; mCardWidth = r - l; mCardHeight = b - t; IncrementChangeCount(); };
 	
 	virtual void	SetPeeking( bool inState );
 	virtual bool	GetPeeking()							{ return mPeeking; };
@@ -135,10 +136,10 @@ public:
 	virtual void	SetCantDelete( bool n )					{ mCantDelete = n; };
 	virtual bool	GetCantModify()							{ return mCantModify; };
 	virtual void	SetCantModify( bool n )					{ mCantModify = n; };
-	virtual LEOInteger	GetLeft()							{ return 0LL; }
-	virtual LEOInteger	GetTop()							{ return 0LL; }
-	virtual LEOInteger	GetRight()							{ return mCardWidth; }			// +++ Platforms should override.
-	virtual LEOInteger	GetBottom()							{ return mCardHeight; }			// +++ Platforms should override.
+	virtual LEOInteger	GetLeft()							{ return mCardLeft; }
+	virtual LEOInteger	GetTop()							{ return mCardTop; }
+	virtual LEOInteger	GetRight()							{ return mCardWidth; }
+	virtual LEOInteger	GetBottom()							{ return mCardHeight; }
 	virtual void		SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b )	{}
 	virtual bool	GetEffectiveCantModify();
 	
@@ -206,10 +207,10 @@ protected:
 	std::string					mThumbnailName;		//!< Name of image file where we save a thumbnail of the first card in the stack.
 	ObjectID					mStackID;			//!< Unique ID number of this stack in the document.
 	int							mUserLevel;			//!< Maximum user level for this stack.
-	int							mCardWidth;			//!< Size of cards in this stack.
-	int							mCardHeight;		//!< Size of cards in this stack.
-	int							mCardLeft;			//!< Position of this stack's window.
-	int							mCardTop;			//!< Position of this stack's window.
+	LEOInteger					mCardWidth;			//!< Size of cards in this stack.
+	LEOInteger					mCardHeight;		//!< Size of cards in this stack.
+	LEOInteger					mCardLeft;			//!< Position of this stack's window.
+	LEOInteger					mCardTop;			//!< Position of this stack's window.
 	bool						mCantPeek;			//!< Do we prevent "peeking" of button rects using Cmd-Option?
 	bool						mCantAbort;			//!< Do we prohibit Cmd-. from canceling scripts?
 	bool						mPrivateAccess;		//!< Do we require a password before opening this stack?

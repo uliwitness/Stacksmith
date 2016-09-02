@@ -87,5 +87,6 @@ class CPart;
 
 @end
 
+extern NSRect	WILDFlippedScreenRect( NSRect inBox );
 
 #endif /* defined(__Stacksmith__WILDStackWindowController__) */

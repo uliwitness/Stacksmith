@@ -129,6 +129,9 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 			tinyxml2::XMLElement	*	sizeElem = root->FirstChildElement( "cardSize" );
 			mCardWidth = CTinyXMLUtils::GetIntNamed( sizeElem, "width", 512 );
 			mCardHeight = CTinyXMLUtils::GetIntNamed( sizeElem, "height", 342 );
+			tinyxml2::XMLElement	*	positionElem = root->FirstChildElement( "position" );
+			mCardLeft = CTinyXMLUtils::GetIntNamed( positionElem, "left", 100 );
+			mCardTop = CTinyXMLUtils::GetIntNamed( positionElem, "top", 100 );
 			
 			std::string	stackStyle("document");
 			CTinyXMLUtils::GetStringNamed( root, "style", stackStyle );
@@ -269,22 +272,14 @@ bool	CStack::Save( const std::string& inPackagePath )
 			CTinyXMLUtils::AddBoolNamed( root, mVisible, "visible" );
 
 		tinyxml2::XMLElement*		cardSizeElem = document.NewElement("cardSize");
-		tinyxml2::XMLElement*		cardSizeWidthElem = document.NewElement("width");
-		cardSizeWidthElem->SetText( mCardWidth );
-		cardSizeElem->InsertEndChild( cardSizeWidthElem );
-		tinyxml2::XMLElement*		cardSizeHeightElem = document.NewElement("height");
-		cardSizeHeightElem->SetText( mCardHeight );
-		cardSizeElem->InsertEndChild( cardSizeHeightElem );
+		CTinyXMLUtils::AddLongLongNamed( cardSizeElem, mCardWidth, "width" );
+		CTinyXMLUtils::AddLongLongNamed( cardSizeElem, mCardHeight, "height" );
 		root->InsertEndChild( cardSizeElem );
 
-		cardSizeElem = document.NewElement("position");
-		cardSizeWidthElem = document.NewElement("left");
-		cardSizeWidthElem->SetText( mCardLeft );
-		cardSizeElem->InsertEndChild( cardSizeWidthElem );
-		cardSizeHeightElem = document.NewElement("top");
-		cardSizeHeightElem->SetText( mCardTop );
-		cardSizeElem->InsertEndChild( cardSizeHeightElem );
-		root->InsertEndChild( cardSizeElem );
+		tinyxml2::XMLElement*		cardPosElem = document.NewElement("position");
+		CTinyXMLUtils::AddLongLongNamed( cardPosElem, mCardLeft, "left" );
+		CTinyXMLUtils::AddLongLongNamed( cardPosElem, mCardTop, "top" );
+		root->InsertEndChild( cardPosElem );
 
 		tinyxml2::XMLElement*		scriptElem = document.NewElement("script");
 		scriptElem->SetText( mScript.c_str() );
@@ -939,8 +934,8 @@ void	CStack::Dump( size_t inIndent )
 	printf( "%s\tstyle = %s\n", indentStr, sStackStyleStrings[mStyle] );
 	printf( "%s\tloaded = %s\n", indentStr, (mLoaded? "true" : "false") );
 	printf( "%s\tuserLevel = %d\n", indentStr, mUserLevel );
-	printf( "%s\twidth = %d\n", indentStr, mCardWidth );
-	printf( "%s\theight = %d\n", indentStr, mCardHeight );
+	printf( "%s\twidth = %lld\n", indentStr, mCardWidth );
+	printf( "%s\theight = %lld\n", indentStr, mCardHeight );
 	printf( "%s\tcantPeek = %s\n", indentStr, (mCantPeek? "true" : "false") );
 	printf( "%s\tcantAbort = %s\n", indentStr, (mCantAbort? "true" : "false") );
 	printf( "%s\tprivateAccess = %s\n", indentStr, (mPrivateAccess? "true" : "false") );

@@ -71,8 +71,8 @@ public:
 	virtual void				GetMousePosition( LEONumber *x, LEONumber *y );
 	virtual void				RectChangedOfPart( CPart* inChangedPart );
 	virtual void				SelectedPartChanged();
-	virtual void				SetCardWidth( int n );
-	virtual void				SetCardHeight( int n );
+	virtual void				SetCardWidth( LEOInteger n );
+	virtual void				SetCardHeight( LEOInteger n );
 	virtual LEOInteger			GetLeft();
 	virtual LEOInteger			GetTop();
 	virtual LEOInteger			GetRight();
