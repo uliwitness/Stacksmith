@@ -82,7 +82,7 @@ public:
 	
 	std::string			GetURL()							{ return mURL; };
 	void				SetURL( const std::string& inURL )	{ mURL = inURL; };
-	virtual CStack*		GetStack() override					{ return nullptr; }
+	virtual CStack*		GetStack() override					{ return GetStack(0); }
 	CStack*				GetStack( size_t inIndex )	{ if( inIndex >= mStacks.size() ) return NULL; return mStacks[inIndex]; };
 	CStack*				GetStackWithID( ObjectID inID );
 	size_t				GetNumStacks()				{ return mStacks.size(); };

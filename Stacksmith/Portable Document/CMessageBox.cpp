@@ -159,7 +159,7 @@ LEOContextGroup*	CMessageBox::GetScriptContextGroupObject()
 	if( !theStack )
 		theStack = CStack::GetFrontStack();
 	if( !theStack )
-		return NULL;
+		theStack = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetStack(0);
 	return theStack->GetScriptContextGroupObject();
 }
 
@@ -168,7 +168,13 @@ CScriptableObject*	CMessageBox::GetParentObject( CScriptableObject* previousPare
 {
 	CStack*	theStack = CStack::GetFrontStack();
 	if( !theStack )
-		return NULL;
-	return theStack->GetCurrentCard();
+		theStack = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetStack(0);
+	CCard* theCard = theStack->GetCurrentCard();
+	if( !theCard )
+	{
+		theCard = theStack->GetCard(0);
+		theStack->GoThereInNewWindow( EOpenInNewWindow, nullptr, nullptr, [](){}, "", EVisualEffectSpeedNormal );
+	}
+	return theCard;
 }
 

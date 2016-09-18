@@ -10,4 +10,7 @@
     <lastEditedVersion>Stacksmith 1.0a11 (1570)</lastEditedVersion>
     <stack id="1" file="stack_1.xml" name="Home" thumbnail="stack_1.jpg"/>
     <stack id="2" file="stack_2.xml" name="Tools"/>
+	<script>on startUp
+	go to stack "Tools" in new window
+end startUp</script>
 </project>

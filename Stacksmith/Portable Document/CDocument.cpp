@@ -395,7 +395,7 @@ CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent
 		}
 	}
 	CDocumentRef	homeDocument = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument();
-	if( homeDocument != this && homeDocument->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
+	if( homeDocument != this && homeDocument != nullptr && homeDocument->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
 		return homeDocument;
 	
 	return nullptr;

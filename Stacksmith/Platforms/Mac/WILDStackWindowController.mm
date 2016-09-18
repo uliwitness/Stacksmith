@@ -1054,7 +1054,7 @@ using namespace Carlson;
 
 -(void)	showWindow: (id)sender
 {
-	[super showWindow: sender];
+	[super showWindow: sender];	// +++ This sends "selectWindow" message, but this is triggered by SetCurrentCard() when it's called by GoThereInNewWindow(), *before* WakeUp() has been called, and less evilly, before "openCard" etc. have been sent.
 	if( mStack->GetStyle() == EStackStylePopup )
 	{
 		[mPopover showRelativeToRect: NSMakeRect(0,0,10,10) ofView: self.window.contentView preferredEdge: NSMaxYEdge];
@@ -1187,7 +1187,7 @@ using namespace Carlson;
 		}
 	}
 	
-	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while resizing window: " << errMsg << std::endl; } }, EMayGoUnhandled, "selectWindow" );
+	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while selecting window: " << errMsg << std::endl; } }, EMayGoUnhandled, "selectWindow" );
 }
 
 

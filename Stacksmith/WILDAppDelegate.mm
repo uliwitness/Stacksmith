@@ -293,7 +293,10 @@ void	WILDScheduleResumeOfScript( void )
 
 -(IBAction) showStackCanvasWindow: (id)sender
 {
-	CDocumentManager::GetSharedDocumentManager()->GetFrontDocument()->ShowStackCanvasWindow();
+	CDocumentManager	*dman = CDocumentManager::GetSharedDocumentManager();
+	CDocument			*fdoc = dman->GetFrontDocument();
+	if( fdoc )
+		fdoc->ShowStackCanvasWindow();
 }
 
 

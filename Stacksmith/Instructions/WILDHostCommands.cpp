@@ -162,7 +162,9 @@ void	WILDGoInstruction( LEOContext* inContext )
 		CScriptableObject*		destinationObject = NULL;
 		CPart			*		overPartObject = NULL;
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
-		CRecentCardsList::GetSharedInstance()->AddCard( userData->GetStack()->GetCurrentCard() );
+		CCard*					prevCard = userData->GetStack()->GetCurrentCard();
+		if( prevCard )
+			CRecentCardsList::GetSharedInstance()->AddCard( prevCard );
 		LEOValuePtr				theObjectDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
 		theOverPart = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -1, &kLeoValueTypeScriptableObject, inContext );
 		if( theOverPart && theOverPart->base.isa == &kLeoValueTypeScriptableObject )

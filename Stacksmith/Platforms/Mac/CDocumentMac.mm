@@ -146,7 +146,15 @@ void	CDocumentManagerMac::OpenDocumentFromURL( const std::string& inURL, std::fu
 			
             //UKLog(@"Doc completion entered");
 			size_t	numStacks = inDocument->GetNumStacks();
-			std::shared_ptr<CCompletionBlockCoalescer<CDocument*>>	completionBlockObj( std::make_shared<CCompletionBlockCoalescer<CDocument*>>( numStacks, inCompletionBlock ) );
+			std::shared_ptr<CCompletionBlockCoalescer<CDocument*>>	completionBlockObj( std::make_shared<CCompletionBlockCoalescer<CDocument*>>( numStacks, [inCompletionBlock](CDocument*doc)
+			{
+				if( !CDocumentManager::GetSharedDocumentManager()->GetDidSendStartup() )
+				{
+					CDocumentManager::GetSharedDocumentManager()->SetDidSendStartup(true);
+					doc->SendMessage( nullptr, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject * obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "startUp" );
+					inCompletionBlock(doc);
+				}
+			} ) );
 			for( size_t x = 0; x < numStacks; x++ )
 			{
 				Carlson::CStack		*		theCppStack = inDocument->GetStack( x );

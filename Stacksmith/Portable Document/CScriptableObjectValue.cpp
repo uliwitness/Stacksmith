@@ -880,7 +880,8 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	//printf("Sending: %s\n",msg);
 	
 	CScriptableObject*			parent = GetParentObject( nullptr );
-	CScriptContextUserData	*	ud = new CScriptContextUserData( parent->GetStack(), this, this );
+	CStack*						parentStack = parent ? parent->GetStack() : GetStack();
+	CScriptContextUserData	*	ud = new CScriptContextUserData( parentStack, this, this );
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
 	if( outContext )
 		*outContext = ctx;
