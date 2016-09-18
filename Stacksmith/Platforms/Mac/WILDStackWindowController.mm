@@ -95,6 +95,12 @@ using namespace Carlson;
 }
 
 
+- (BOOL)acceptsFirstMouse:(nullable NSEvent *)event;
+{
+	return( mStack->GetTool() != EBrowseTool && mStack->GetTool() != EEditTextTool );
+}
+
+
 -(NSView *)	hitTest: (NSPoint)aPoint
 {
 	NSView	*	hitView = [super hitTest: aPoint];
@@ -1329,7 +1335,7 @@ using namespace Carlson;
 -(IBAction)	toggleBackgroundEditMode: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->SetEditingBackground( !mStack->GetEditingBackground() );
+	[self stackBeingEdited]->SetEditingBackground( ![self stackBeingEdited]->GetEditingBackground() );
 }
 
 
@@ -1337,15 +1343,15 @@ using namespace Carlson;
 {
 	CAutoreleasePool	pool;
 	CCardRef	theCard = CRecentCardsList::GetSharedInstance()->PopCard();
-	theCard->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	theCard->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal );
 }
 
 
 -(IBAction)	goFirstCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	CCardRef	oldCard = mStack->GetCurrentCard();
-	if( mStack->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
+	CCardRef	oldCard = [self stackBeingEdited]->GetCurrentCard();
+	if( [self stackBeingEdited]->GetCard(0)->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
@@ -1353,8 +1359,8 @@ using namespace Carlson;
 -(IBAction)	goPrevCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	CCardRef	oldCard = mStack->GetCurrentCard();
-	if( mStack->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
+	CCardRef	oldCard = [self stackBeingEdited]->GetCurrentCard();
+	if( [self stackBeingEdited]->GetPreviousCard()->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
@@ -1362,8 +1368,8 @@ using namespace Carlson;
 -(IBAction)	goNextCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	CCardRef	oldCard = mStack->GetCurrentCard();
-	if( mStack->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
+	CCardRef	oldCard = [self stackBeingEdited]->GetCurrentCard();
+	if( [self stackBeingEdited]->GetNextCard()->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
@@ -1371,8 +1377,8 @@ using namespace Carlson;
 -(IBAction)	goLastCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	CCardRef	oldCard = mStack->GetCurrentCard();
-	if( mStack->GetCard(mStack->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
+	CCardRef	oldCard = [self stackBeingEdited]->GetCurrentCard();
+	if( [self stackBeingEdited]->GetCard([self stackBeingEdited]->GetNumCards() -1)->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal ) )
 		CRecentCardsList::GetSharedInstance()->AddCard( oldCard );
 }
 
@@ -1390,35 +1396,35 @@ using namespace Carlson;
 {
 	if( theItem.action == @selector(delete:) )
 	{
-		return( mStack->GetTool() != EBrowseTool && ((mStack->GetEditingBackground() ? false : mStack->GetCurrentCard()->CanDeleteSelectedItem()) || mStack->GetCurrentCard()->GetBackground()->CanDeleteSelectedItem()) );
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && (([self stackBeingEdited]->GetEditingBackground() ? false : [self stackBeingEdited]->GetCurrentCard()->CanDeleteSelectedItem()) || [self stackBeingEdited]->GetCurrentCard()->GetBackground()->CanDeleteSelectedItem()) );
 	}
 	else if( theItem.action == @selector(copy:) )
 	{
-		return( mStack->GetTool() != EBrowseTool && mStack->GetCurrentLayer()->CanCopySelectedItem() );
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->CanCopySelectedItem() );
 	}
 	else if( theItem.action == @selector(cut:) )
 	{
-		return( mStack->GetTool() != EBrowseTool && mStack->GetCurrentLayer()->CanCopySelectedItem() && mStack->GetCurrentLayer()->CanDeleteSelectedItem() );
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->CanCopySelectedItem() && [self stackBeingEdited]->GetCurrentLayer()->CanDeleteSelectedItem() );
 	}
 	else if( theItem.action == @selector(paste:) )
 	{
-		return( mStack->GetTool() != EBrowseTool && [[NSPasteboard generalPasteboard] availableTypeFromArray: @[ @"com.the-void-software.stacksmith.parts.xml" ]] != nil );
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [[NSPasteboard generalPasteboard] availableTypeFromArray: @[ @"com.the-void-software.stacksmith.parts.xml" ]] != nil );
 	}
 	else if( theItem.action == @selector(selectAll:) )
 	{
-		return( mStack->GetTool() != EBrowseTool );
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool );
 	}
 	else if( theItem.action == @selector(deselectAll:) )
 	{
-		return( mStack->GetTool() != EBrowseTool );
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool );
 	}
 	else if( theItem.action == @selector(deleteCard:) )
 	{
-		return( mStack->GetNumCards() > 1 && !mStack->GetCurrentCard()->GetCantDelete() );
+		return( [self stackBeingEdited]->GetNumCards() > 1 && ![self stackBeingEdited]->GetCurrentCard()->GetCantDelete() );
 	}
 	else if( theItem.action == @selector(deleteStack:) )
 	{
-		return( mStack->GetDocument()->GetNumStacks() > 1 && !mStack->GetCantDelete() );
+		return( [self stackBeingEdited]->GetDocument()->GetNumStacks() > 1 && ![self stackBeingEdited]->GetCantDelete() );
 	}
 	else if( theItem.action == @selector(goBack:) )
 	{
@@ -1426,12 +1432,12 @@ using namespace Carlson;
 	}
 	else if( theItem.action == @selector(toggleBackgroundEditMode:) )
 	{
-		[theItem setState: mStack->GetEditingBackground() ? NSOnState : NSOffState];
+		[theItem setState: [self stackBeingEdited]->GetEditingBackground() ? NSOnState : NSOffState];
 		return YES;
 	}
 	else if( theItem.action == @selector(saveDocument:) )
 	{
-		return mStack->GetDocument()->GetNeedsToBeSaved() && !mStack->GetDocument()->IsWriteProtected();
+		return [self stackBeingEdited]->GetDocument()->GetNeedsToBeSaved() && ![self stackBeingEdited]->GetDocument()->IsWriteProtected();
 	}
 	else if( theItem.action == @selector(projectMenuItemSelected:) )
 	{
@@ -1458,37 +1464,37 @@ using namespace Carlson;
 -(IBAction)	deselectAll:(id)sender
 {
 	// Always permit this, that way users might be able to work around any "we left an item selected" bugs.
-	mStack->GetCurrentLayer()->SelectAllItems();
+	[self stackBeingEdited]->GetCurrentLayer()->DeselectAllItems();
 }
 
 
 -(IBAction)	selectAll:(id)sender
 {
-	if( mStack->GetTool() != EBrowseTool )
+	if( [self stackBeingEdited]->GetTool() != EBrowseTool )
 	{
-		mStack->GetCurrentLayer()->SelectAllItems();
+		[self stackBeingEdited]->GetCurrentLayer()->SelectAllItems();
 	}
 }
 
 
 -(IBAction)	delete: (id)sender
 {
-	if( mStack->GetTool() != EBrowseTool )
+	if( [self stackBeingEdited]->GetTool() != EBrowseTool )
 	{
 		CAutoreleasePool	pool;
-		if( !mStack->GetEditingBackground() )
-			mStack->GetCurrentCard()->DeleteSelectedItem();
-		mStack->GetCurrentCard()->GetBackground()->DeleteSelectedItem();
+		if( ![self stackBeingEdited]->GetEditingBackground() )
+			[self stackBeingEdited]->GetCurrentCard()->DeleteSelectedItem();
+		[self stackBeingEdited]->GetCurrentCard()->GetBackground()->DeleteSelectedItem();
 	}
 }
 
 
 -(IBAction)	copy: (id)sender
 {
-	if( mStack->GetTool() != EBrowseTool )
+	if( [self stackBeingEdited]->GetTool() != EBrowseTool )
 	{
 		CAutoreleasePool	pool;
-		std::string	xml = mStack->GetCurrentLayer()->CopySelectedItem();
+		std::string	xml = [self stackBeingEdited]->GetCurrentLayer()->CopySelectedItem();
 		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 		[pb clearContents];
 		[pb addTypes: @[ @"com.the-void-software.stacksmith.parts.xml" ] owner: nil];
@@ -1499,11 +1505,11 @@ using namespace Carlson;
 
 -(IBAction)	cut: (id)sender
 {
-	if( mStack->GetTool() != EBrowseTool )
+	if( [self stackBeingEdited]->GetTool() != EBrowseTool )
 	{
 		CAutoreleasePool	pool;
-		std::string	xml = mStack->GetCurrentLayer()->CopySelectedItem();
-		mStack->GetCurrentLayer()->DeleteSelectedItem();
+		std::string	xml = [self stackBeingEdited]->GetCurrentLayer()->CopySelectedItem();
+		[self stackBeingEdited]->GetCurrentLayer()->DeleteSelectedItem();
 		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 		[pb clearContents];
 		[pb addTypes: @[ @"com.the-void-software.stacksmith.parts.xml" ] owner: nil];
@@ -1514,14 +1520,14 @@ using namespace Carlson;
 
 -(IBAction)	paste: (id)sender
 {
-	if( mStack->GetTool() != EBrowseTool )
+	if( [self stackBeingEdited]->GetTool() != EBrowseTool )
 	{
 		CAutoreleasePool	pool;
 		NSPasteboard*	pb = [NSPasteboard generalPasteboard];
 		NSString*		xmlStr = [pb stringForType: @"com.the-void-software.stacksmith.parts.xml"];
-		mStack->DeselectAllObjectsOnCard();
-		mStack->DeselectAllObjectsOnBackground();
-		std::vector<CPartRef>	newParts = mStack->GetCurrentLayer()->PasteObject( std::string(xmlStr.UTF8String) );
+		[self stackBeingEdited]->DeselectAllObjectsOnCard();
+		[self stackBeingEdited]->DeselectAllObjectsOnBackground();
+		std::vector<CPartRef>	newParts = [self stackBeingEdited]->GetCurrentLayer()->PasteObject( std::string(xmlStr.UTF8String) );
 		for( CPart* thePart : newParts )
 			thePart->SetSelected(true);
 	}
@@ -1531,44 +1537,54 @@ using namespace Carlson;
 -(IBAction)	deleteCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->DeleteCard( mStack->GetCurrentCard() );
+	[self stackBeingEdited]->DeleteCard( [self stackBeingEdited]->GetCurrentCard() );
 }
 
 
 -(IBAction)	deleteStack: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->GetDocument()->DeleteStack( mStack );
+	[self stackBeingEdited]->GetDocument()->DeleteStack( [self stackBeingEdited] );
+}
+
+
+-(CStack*)	stackBeingEdited
+{
+	CStack*	theStack = mStack;
+	if( mStack->GetShouldForwardToMainStack() && CStack::GetMainStack() )
+		theStack = CStack::GetMainStack();
+	
+	return theStack;
 }
 
 
 -(IBAction)	bringToFront: (id)sender
 {
-	mStack->BringSelectedItemToFront();
+	[self stackBeingEdited]->BringSelectedItemToFront();
 }
 
 
 -(IBAction)	bringForward: (id)sender
 {
-	mStack->BringSelectedItemForward();
+	[self stackBeingEdited]->BringSelectedItemForward();
 }
 
 
 -(IBAction)	sendBackward: (id)sender
 {
-	mStack->SendSelectedItemBackward();
+	[self stackBeingEdited]->SendSelectedItemBackward();
 }
 
 
 -(IBAction)	sendToBack: (id)sender
 {
-	mStack->SendSelectedItemToBack();
+	[self stackBeingEdited]->SendSelectedItemToBack();
 }
 
 
 -(IBAction)	takeToolFromTag: (id)sender
 {
-	mStack->SetTool( (TTool) [sender tag] );
+	[self stackBeingEdited]->SetTool( (TTool) [sender tag] );
 }
 
 
@@ -1576,7 +1592,7 @@ using namespace Carlson;
 {
 	if( [sender action] == @selector(takeToolFromTag:) )
 	{
-		if( [sender tag] == mStack->GetTool() )
+		if( [sender tag] == [self stackBeingEdited]->GetTool() )
 			[(NSButton*)sender setState: NSOnState];
 		else
 			[(NSButton*)sender setState: NSOffState];
@@ -1584,7 +1600,7 @@ using namespace Carlson;
 	}
 	else if( sender.action == @selector(toggleBackgroundEditMode:) )
 	{
-		[(NSButton*)sender setState: mStack->GetEditingBackground() ? NSOnState : NSOffState];
+		[(NSButton*)sender setState: [self stackBeingEdited]->GetEditingBackground() ? NSOnState : NSOffState];
 		return YES;
 	}
 	else
@@ -1595,27 +1611,27 @@ using namespace Carlson;
 -(IBAction)	newStack: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	[self stackBeingEdited]->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal );
 }
 
 
 -(IBAction)	newCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	[self stackBeingEdited]->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal );
 }
 
 
 -(IBAction)	newBackground: (id)sender
 {
 	CAutoreleasePool	pool;
-	mStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, mStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	[self stackBeingEdited]->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal );
 }
 
 
 -(IBAction)	newPart: (id)sender
 {
-	mStack->NewPart( [sender tag] );
+	[self stackBeingEdited]->NewPart( [sender tag] );
 	[self refreshExistenceAndOrderOfAllViews];
 }
 
@@ -1642,7 +1658,7 @@ using namespace Carlson;
 -(void)	changeFont: (NSFontManager*)sender
 {
 	CAutoreleasePool	pool;
-	CLayer		*	owner = mStack->GetCurrentLayer();
+	CLayer		*	owner = [self stackBeingEdited]->GetCurrentLayer();
 	CMacPartBase*	currMacPart = NULL;
 	size_t			numParts = owner->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
@@ -1667,7 +1683,7 @@ using namespace Carlson;
 -(void)	changeAttributes: (NSFontManager*)sender
 {
 	CAutoreleasePool	pool;
-	CLayer		*	owner = mStack->GetCurrentLayer();
+	CLayer		*	owner = [self stackBeingEdited]->GetCurrentLayer();
 	CMacPartBase*	currMacPart = NULL;
 	size_t			numParts = owner->GetNumParts();
 	for( size_t x = 0; x < numParts; x++ )
@@ -1686,7 +1702,7 @@ using namespace Carlson;
 -(void)	reflectFontOfSelectedParts
 {
 	CAutoreleasePool	pool;
-	CLayer		*		owner = mStack->GetCurrentCard()->GetBackground();
+	CLayer		*		owner = [self stackBeingEdited]->GetCurrentCard()->GetBackground();
 	CMacPartBase*		currMacPart = NULL;
 	size_t				numParts = owner->GetNumParts();
 	BOOL				multiple = NO;
@@ -1707,9 +1723,9 @@ using namespace Carlson;
 		}
 	}
 
-	if( !mStack->GetEditingBackground() )
+	if( ![self stackBeingEdited]->GetEditingBackground() )
 	{
-		owner = mStack->GetCurrentCard();
+		owner = [self stackBeingEdited]->GetCurrentCard();
 		numParts = owner->GetNumParts();
 		for( size_t x = 0; x < numParts; x++ )
 		{

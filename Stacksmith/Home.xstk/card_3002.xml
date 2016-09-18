@@ -8,17 +8,16 @@
     <dontSearch><false/></dontSearch>
     <owner>1001</owner>
     <part>
-        <id>0</id>
+        <id>1</id>
         <type>button</type>
         <pinning>
             <centerHorizontally/>
-            <centerVertically/>
         </pinning>
         <rect>
             <left>206</left>
-            <top>159</top>
+            <top>12</top>
             <right>306</right>
-            <bottom>183</bottom>
+            <bottom>36</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
@@ -60,8 +59,67 @@
         <font></font>
         <textSize>12</textSize>
         <textStyle>plain</textStyle>
-        <name>Testing</name>
-        <script></script>
+        <name>Browse</name>
+        <script>on mouseUp
+	set the tool of the mainStack to browse
+end mouseUp</script>
+    </part>
+    <part>
+        <id>2</id>
+        <type>button</type>
+        <pinning>
+            <centerHorizontally/>
+        </pinning>
+        <rect>
+            <left>206</left>
+            <top>42</top>
+            <right>306</right>
+            <bottom>66</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>65535</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>0</width>
+            <height>0</height>
+        </shadowOffset>
+        <shadowBlurRadius>0</shadowBlurRadius>
+        <lineWidth>1</lineWidth>
+        <bevelWidth>0</bevelWidth>
+        <bevelAngle>0</bevelAngle>
+        <style>standard</style>
+        <showName><true/></showName>
+        <autoHighlight><true/></autoHighlight>
+        <sharedHighlight><false/></sharedHighlight>
+        <family>0</family>
+        <titleWidth>0</titleWidth>
+        <icon>0</icon>
+        <cursor>128</cursor>
+        <textAlign>default</textAlign>
+        <font></font>
+        <textSize>12</textSize>
+        <textStyle>plain</textStyle>
+        <name>Pointer</name>
+        <script>on mouseUp
+	set the tool of the mainStack to pointer
+end mouseUp</script>
     </part>
     <name></name>
     <script></script>
