@@ -12,5 +12,12 @@
     <stack id="2" file="stack_2.xml" name="Tools"/>
 	<script>on startUp
 	go to stack "Tools" in new window
-end startUp</script>
+end startUp
+
+on selectionChangeWhileEditing
+	global gTheCounter
+	if gTheCounter is empty then put 0 into gTheCounter
+	add 1 to gTheCounter
+	put "selection change" &amp;&amp; gTheCounter
+end selectionChangeWhileEditing</script>
 </project>

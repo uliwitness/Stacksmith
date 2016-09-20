@@ -1017,6 +1017,34 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 		LEOInitStringValue( outValue, mDocumentURL.c_str(), mDocumentURL.size(), kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "selectedPart") == 0 )
+	{
+		CCard		*	theCard = GetCurrentCard();
+		size_t numParts = theCard->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CPart*	currPart = theCard->GetPart(x);
+			if( currPart->IsSelected() )
+			{
+				currPart->InitValue( outValue, kLEOInvalidateReferences, inContext );
+				return true;
+			}
+		}
+		CBackground *	theBackground = theCard->GetBackground();
+		numParts = theBackground->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
+		{
+			CPart*	currPart = theBackground->GetPart(x);
+			if( currPart->IsSelected() )
+			{
+				currPart->InitValue( outValue, kLEOInvalidateReferences, inContext );
+				return true;
+			}
+		}
+		
+		LEOInitUnsetValue( outValue, kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return CConcreteObject::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
