@@ -80,6 +80,8 @@ void		GetObjectDescriptorValueAsRangeOfString( LEOValuePtr self, LEOChunkType in
 										size_t inRangeStart, size_t inRangeEnd,
 										char* outBuf, size_t bufSize, LEOContext* inContext );
 
+void	InitScriptableObjectDescriptorValue( LEOValuePtr inStorage, TScriptableObjectType objectType, TScriptableObjectReferenceType referenceType, LEOInteger objectNumID, const char* inName, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
+void	CleanUpScriptableObjectDescriptorValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 
 
 struct LEOValueType	Carlson::kLeoValueTypeScriptableObject =
@@ -1529,3 +1531,94 @@ void	CScriptContextGroupUserData::CleanUp( void* inData )
 	delete (CScriptContextGroupUserData*)inData;
 }
 
+
+struct LEOValueType	Carlson::kLeoValueTypeScriptableObjectDescriptor =
+{
+	"object descriptor",
+	sizeof(struct ScriptableObjectDescriptorValue),
+	
+	GetScriptableObjectDescriptorValueAsNumber,
+	GetScriptableObjectDescriptorValueAsInteger,
+	GetScriptableObjectDescriptorValueAsString,
+	GetScriptableObjectDescriptorValueAsBoolean,
+	GetScriptableObjectDescriptorValueAsRangeOfString,
+	
+	SetScriptableObjectDescriptorValueAsNumber,
+	SetScriptableObjectDescriptorValueAsInteger,
+	SetScriptableObjectDescriptorValueAsString,
+	SetScriptableObjectDescriptorValueAsBoolean,
+	SetScriptableObjectDescriptorValueRangeAsString,
+	SetScriptableObjectDescriptorValuePredeterminedRangeAsString,
+	
+	InitScriptableObjectDescriptorValueCopy,
+	InitScriptableObjectDescriptorValueSimpleCopy,
+	PutScriptableObjectDescriptorValueIntoValue,
+	LEOCantFollowReferencesAndReturnValueOfType,
+	DetermineChunkRangeOfSubstringOfScriptableObjectDescriptorValue,
+	
+	CleanUpScriptableObjectDescriptorValue,
+	
+	CanGetScriptableObjectDescriptorValueAsNumber,
+	
+	GetScriptableObjectDescriptorValueForKey,
+	LEOCantSetValueForKey,
+	LEOSetStringLikeValueAsArray,
+	GetScriptableObjectDescriptorKeyCount,
+	
+	GetScriptableObjectDescriptorValueForKeyOfRange,
+	SetScriptableObjectDescriptorValueForKeyOfRange,
+
+	LEOCantSetValueAsNativeObject,
+	
+	LEOSetStringLikeValueAsRect,
+	LEOGetStringLikeValueAsRect,
+	LEOSetStringLikeValueAsPoint,
+	LEOGetStringLikeValueAsPoint,
+	
+	LEOValueIsNotUnset,
+	
+	LEOSetStringLikeValueAsRange,
+	LEOGetStringLikeValueAsRange
+};
+
+
+void	InitScriptableObjectDescriptorValue( LEOValuePtr inStorage, TScriptableObjectType objectType, TScriptableObjectReferenceType referenceType, LEOInteger objectNumID, const char* inName, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
+{
+	assert( sizeof(ScriptableObjectDescriptorValue) <= sizeof(LEOValue) );
+
+	inStorage->base.isa = &kLeoValueTypeScriptableObjectDescriptor;
+	if( keepReferences == kLEOInvalidateReferences )
+		inStorage->base.refObjectID = kLEOObjectIDINVALID;
+	((ScriptableObjectDescriptorValue*)inStorage)->objectType = objectType;
+	((ScriptableObjectDescriptorValue*)inStorage)->referenceType = referenceType;
+	if( (referenceType & EScriptableObjectReferenceTypeMask) == EScriptableObjectReferenceByName )
+	{
+		size_t	nameLen = strlen(inName);
+		((ScriptableObjectDescriptorValue*)inStorage)->objectName = (char*) calloc( nameLen +1, sizeof(char) );
+		memmove( ((ScriptableObjectDescriptorValue*)inStorage)->objectName, inName, nameLen );
+	}
+	else
+	{
+		((ScriptableObjectDescriptorValue*)inStorage)->objectNumID = objectNumID;
+		((ScriptableObjectDescriptorValue*)inStorage)->objectName = NULL;
+	}
+}
+
+
+void	CleanUpScriptableObjectDescriptorValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
+{
+	self->base.isa = NULL;
+	if( ((ScriptableObjectDescriptorValue*)self)->objectName != NULL )
+	{
+		free( ((ScriptableObjectDescriptorValue*)self)->objectName );
+		((ScriptableObjectDescriptorValue*)self)->objectName = NULL;
+	}
+	((ScriptableObjectDescriptorValue*)self)->objectNumID = 0;
+	((ScriptableObjectDescriptorValue*)self)->objectType = EScriptableObjectType_Invalid;
+	((ScriptableObjectDescriptorValue*)self)->referenceType = EScriptableObjectReference_Invalid;
+	if( keepReferences == kLEOInvalidateReferences && self->base.refObjectID != kLEOObjectIDINVALID )
+	{
+		LEOContextGroupRecycleObjectID( inContext->group, self->base.refObjectID );
+		self->base.refObjectID = 0;
+	}
+}

@@ -39,6 +39,39 @@ namespace Carlson
 
 extern struct LEOValueType	kLeoValueTypeScriptableObject;
 extern struct LEOValueType	kLeoValueTypeObjectDescriptor;
+extern struct LEOValueType	kLeoValueTypeScriptableObjectDescriptor;
+
+typedef enum
+{
+EScriptableObjectType_Invalid	= 0,
+EScriptableObjectTypePart,
+EScriptableObjectTypeCard,
+EScriptableObjectTypeBackground,
+EScriptableObjectTypeStack,
+EScriptableObjectTypeProject
+} TScriptableObjectType;
+
+
+typedef enum
+{
+EScriptableObjectReference_Invalid	= 0,
+EScriptableObjectReferenceByName	= 1,
+EScriptableObjectReferenceByNumber	= 2,
+EScriptableObjectReferenceByID		= 3,
+EScriptableObjectReferenceOnCard	= (1 << 2)		// Needs to be large enough to be the bit *after* the above types.
+
+} TScriptableObjectReferenceType;
+#define EScriptableObjectReferenceTypeMask	(~EScriptableObjectReferenceOnCard)
+
+
+struct ScriptableObjectDescriptorValue
+{
+struct LEOValueBase				base;
+TScriptableObjectType			objectType;
+TScriptableObjectReferenceType	referenceType;
+LEOInteger						objectNumID;		// Number or ID depending on referenceType, or unused.
+char*							objectName;			// Name if referenceType is "by name".
+};
 
 
 class CStack;
