@@ -41,6 +41,7 @@ public:
 	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
 	
 	virtual void				CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock ) override;
+	
 
 protected:
 	virtual void	LoadPastedPartBackgroundContents( CPart* newPart, tinyxml2::XMLElement* currBgContents, bool haveCardContents, CStyleSheet * inStyleSheet ) override;

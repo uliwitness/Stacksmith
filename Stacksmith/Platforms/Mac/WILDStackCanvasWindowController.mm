@@ -11,6 +11,8 @@
 #import "UKFinderIconCell.h"
 #include "CDocument.h"
 #import <AVFoundation/AVFoundation.h>
+#import "WILDConcreteObjectInfoViewController.h"
+#import "UKHelperMacros.h"
 
 
 using namespace Carlson;
@@ -44,11 +46,19 @@ struct CCanvasEntry
 @interface WILDStackCanvasWindowController ()
 {
 	std::vector<CCanvasEntry>	items;
+	NSPopover*					popover;
 }
 
 @end
 
 @implementation WILDStackCanvasWindowController
+
+-(void)	dealloc
+{
+	DESTROY_DEALLOC(popover);
+	
+	[super dealloc];
+}
 
 -(void)	windowDidLoad
 {
@@ -307,11 +317,26 @@ struct CCanvasEntry
 	bool				shouldEditBg = (!currItem.mCard && currItem.mBackground);
 	if( currObj )
 	{
-		currObj->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currStack,shouldEditBg]()
+		bool success = currObj->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currStack,shouldEditBg]()
 		{
 			currStack->Show(EEvenIfVisible);
 			currStack->SetEditingBackground( shouldEditBg );
 		}, "", EVisualEffectSpeedNormal );
+		if( !success )
+		{
+			CMacScriptableObjectBase * macPart = dynamic_cast<CMacScriptableObjectBase*>(currObj);
+			if( macPart )
+			{
+				WILDConcreteObjectInfoViewController	*	piv = [[[macPart->GetPropertyEditorClass() alloc] initWithConcreteObject: currObj] autorelease];
+				[popover release];
+				popover = [[NSPopover alloc] init];
+				//popover.delegate = self;
+				popover.contentSize = piv.view.frame.size;
+				popover.contentViewController = piv;
+				[popover setBehavior: NSPopoverBehaviorTransient];
+				[popover showRelativeToRect: [distributedView rectForItemAtIndex: row] ofView: distributedView preferredEdge: NSMaxYEdge];
+			}
+		}
 	}
 }
 

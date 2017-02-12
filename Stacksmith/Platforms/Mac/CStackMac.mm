@@ -23,6 +23,7 @@
 #import "WILDPartInfoViewController.h"
 #include <sstream>
 #include "CUndoStack.h"
+#import "WILDStackInfoViewController.h"
 
 
 using namespace Carlson;
@@ -270,6 +271,12 @@ bool	CStackMac::ShowPropertyEditorForObject( CConcreteObject* inObject )
 	[mPopover setBehavior: NSPopoverBehaviorTransient];
 	[mPopover showRelativeToRect: macPart->GetView().bounds ofView: macPart->GetView() preferredEdge: NSMaxYEdge];
 	return true;
+}
+
+
+Class	CStackMac::GetPropertyEditorClass()
+{
+	return [WILDStackInfoViewController class];
 }
 
 

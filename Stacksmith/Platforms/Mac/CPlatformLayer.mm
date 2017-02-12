@@ -8,6 +8,9 @@
 
 #include "CPlatformLayer.h"
 #import "WILDScriptEditorWindowController.h"
+#import "WILDCardInfoViewController.h"
+#import "WILDBackgroundInfoViewController.h"
+#include "CCard.h"
 
 
 using namespace Carlson;
@@ -39,6 +42,19 @@ void	CPlatformLayer::OpenScriptEditorAndShowLine( size_t lineIndex )
 	[mScriptEditor showWindow: nil];
 	if( lineIndex != SIZE_T_MAX )
 		[mScriptEditor goToLine: lineIndex];
+}
+
+
+Class	CPlatformLayer::GetPropertyEditorClass()
+{
+	if( dynamic_cast<CCard*>(this) )
+	{
+		return [WILDCardInfoViewController class];
+	}
+	else
+	{
+		return [WILDBackgroundInfoViewController class];
+	}
 }
 
 

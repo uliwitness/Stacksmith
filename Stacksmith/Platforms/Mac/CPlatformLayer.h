@@ -44,6 +44,8 @@ public:
 	virtual void				OpenScriptEditorAndShowOffset( size_t byteOffset );
 	virtual void				OpenScriptEditorAndShowLine( size_t lineIndex );
 	
+	virtual Class				GetPropertyEditorClass();
+	
 protected:
 	WILDScriptEditorWindowControllerPtr	mScriptEditor;
 };

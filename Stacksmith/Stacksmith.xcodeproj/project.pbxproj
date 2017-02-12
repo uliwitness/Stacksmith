@@ -13,6 +13,8 @@
 		5500FDAF1E4FE13200BD6BA7 /* MenuIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDAB1E4FE13200BD6BA7 /* MenuIcon@2x.png */; };
 		5500FDB01E4FE13200BD6BA7 /* MenuItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDAC1E4FE13200BD6BA7 /* MenuItemIcon.png */; };
 		5500FDB11E4FE13200BD6BA7 /* MenuItemIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDAD1E4FE13200BD6BA7 /* MenuItemIcon@2x.png */; };
+		5500FDB51E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5500FDB31E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm */; };
+		5500FDB61E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDB41E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib */; };
 		55039F43136B52C80082E32E /* brush01.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F23136B52C70082E32E /* brush01.png */; };
 		55039F44136B52C80082E32E /* brush02.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F24136B52C70082E32E /* brush02.png */; };
 		55039F45136B52C80082E32E /* brush03.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F25136B52C70082E32E /* brush03.png */; };
@@ -600,6 +602,9 @@
 		5500FDAB1E4FE13200BD6BA7 /* MenuIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MenuIcon@2x.png"; path = "Resources/MenuIcon@2x.png"; sourceTree = "<group>"; };
 		5500FDAC1E4FE13200BD6BA7 /* MenuItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuItemIcon.png; path = Resources/MenuItemIcon.png; sourceTree = "<group>"; };
 		5500FDAD1E4FE13200BD6BA7 /* MenuItemIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MenuItemIcon@2x.png"; path = "Resources/MenuItemIcon@2x.png"; sourceTree = "<group>"; };
+		5500FDB21E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDConcreteObjectInfoViewController.h; path = Platforms/Mac/WILDConcreteObjectInfoViewController.h; sourceTree = "<group>"; };
+		5500FDB31E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDConcreteObjectInfoViewController.mm; path = Platforms/Mac/WILDConcreteObjectInfoViewController.mm; sourceTree = "<group>"; };
+		5500FDB41E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDConcreteObjectInfoViewController.xib; path = Platforms/Mac/WILDConcreteObjectInfoViewController.xib; sourceTree = "<group>"; };
 		5503472F1370A18800AE7681 /* StacksmithVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksmithVersion.h; sourceTree = "<group>"; };
 		55039F23136B52C70082E32E /* brush01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush01.png; path = Resources/brush01.png; sourceTree = "<group>"; };
 		55039F24136B52C70082E32E /* brush02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush02.png; path = Resources/brush02.png; sourceTree = "<group>"; };
@@ -1696,6 +1701,9 @@
 		55405BB418A39785001D3C99 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				5500FDB21E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.h */,
+				5500FDB31E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm */,
+				5500FDB41E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib */,
 				55405BB518A39796001D3C99 /* WILDPartInfoViewController.h */,
 				55405BB618A39796001D3C99 /* WILDPartInfoViewController.mm */,
 				55405BB718A39796001D3C99 /* WILDPartInfoViewController.xib */,
@@ -2381,6 +2389,7 @@
 				55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */,
 				55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */,
 				55E3A69E11503456008411BB /* CURS_128.pdf in Resources */,
+				5500FDB61E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib in Resources */,
 				55E3A6FB11519B45008411BB /* HCSV.icns in Resources */,
 				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
 				55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */,
@@ -2603,6 +2612,7 @@
 				55405BB818A39796001D3C99 /* WILDPartInfoViewController.mm in Sources */,
 				5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */,
 				552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */,
+				5500FDB51E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm in Sources */,
 				5525575E114BBF2B00279B03 /* WILDDrawAddColorBezel.m in Sources */,
 				556CF8131D08945F00017042 /* CCompletionBlockCoalescer.cpp in Sources */,
 				552558FE114BDE7C00279B03 /* WILDAppDelegate.mm in Sources */,
