@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDMessageBoxWindowController">
@@ -19,30 +21,26 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" nonactivatingPanel="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="70" y="65" width="432" height="42"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="746"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="432" height="42"/>
-            <value key="maxSize" type="size" width="10000" height="42"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="432" height="42"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" id="gHZ-QD-yxZ">
-                        <rect key="frame" x="8" y="12" width="381" height="18"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <scrollView wantsLayer="YES" horizontalHuggingPriority="200" verticalCompressionResistancePriority="1000" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="gHZ-QD-yxZ">
+                        <rect key="frame" x="8" y="13" width="381" height="17"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="4g6-wp-0hR">
-                            <rect key="frame" x="0.0" y="0.0" width="381" height="18"/>
+                            <rect key="frame" x="0.0" y="0.0" width="381" height="17"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView drawsBackground="NO" importsGraphics="NO" allowsUndo="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="jpC-Jm-XMf">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="18"/>
+                                <textView drawsBackground="NO" importsGraphics="NO" allowsUndo="YES" allowsNonContiguousLayout="YES" id="jpC-Jm-XMf">
+                                    <rect key="frame" x="0.0" y="0.0" width="381" height="17"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <size key="minSize" width="381" height="18"/>
+                                    <size key="minSize" width="381" height="17"/>
                                     <size key="maxSize" width="573" height="10000000"/>
                                     <color key="insertionPointColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <size key="minSize" width="381" height="18"/>
-                                    <size key="maxSize" width="573" height="10000000"/>
                                     <connections>
                                         <outlet property="delegate" destination="-2" id="hJn-j1-rRG"/>
                                     </connections>
@@ -59,9 +57,11 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button id="coT-1j-U7t">
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="coT-1j-U7t">
                         <rect key="frame" x="392" y="0.0" width="40" height="42"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="coT-1j-U7t" secondAttribute="height" multiplier="20:21" id="Eee-XZ-oD4"/>
+                        </constraints>
                         <buttonCell key="cell" type="bevel" title="⏎" bezelStyle="regularSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="59s-Ej-eOL">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="13" name="Helvetica"/>
@@ -73,9 +73,8 @@ DQ
                             <action selector="run:" target="-2" id="2e1-md-xf2"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="AVS-Cx-s6p" userLabel="Result Field">
+                    <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="AVS-Cx-s6p" userLabel="Result Field">
                         <rect key="frame" x="13" y="1" width="378" height="12"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="Xx5-O0-cA2">
                             <font key="font" size="9" name="Monaco"/>
                             <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
@@ -83,11 +82,25 @@ DQ
                         </textFieldCell>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="coT-1j-U7t" firstAttribute="top" secondItem="2" secondAttribute="top" id="2PJ-q9-uro"/>
+                    <constraint firstItem="coT-1j-U7t" firstAttribute="leading" secondItem="gHZ-QD-yxZ" secondAttribute="trailing" constant="3" id="9s5-G8-Xon"/>
+                    <constraint firstItem="gHZ-QD-yxZ" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8" id="BQW-Wx-Fx5"/>
+                    <constraint firstAttribute="bottom" secondItem="AVS-Cx-s6p" secondAttribute="bottom" constant="1" id="Cgx-vW-T9e"/>
+                    <constraint firstItem="AVS-Cx-s6p" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="15" id="KUP-jo-SMc"/>
+                    <constraint firstItem="coT-1j-U7t" firstAttribute="leading" secondItem="AVS-Cx-s6p" secondAttribute="trailing" constant="3" id="Vae-51-wyb"/>
+                    <constraint firstItem="AVS-Cx-s6p" firstAttribute="top" secondItem="gHZ-QD-yxZ" secondAttribute="bottom" id="iYY-US-aYD"/>
+                    <constraint firstItem="AVS-Cx-s6p" firstAttribute="trailing" secondItem="gHZ-QD-yxZ" secondAttribute="trailing" id="nMn-C0-IDO"/>
+                    <constraint firstItem="gHZ-QD-yxZ" firstAttribute="top" secondItem="2" secondAttribute="top" constant="12" id="oXF-3D-Ekr"/>
+                    <constraint firstItem="coT-1j-U7t" firstAttribute="leading" secondItem="AVS-Cx-s6p" secondAttribute="trailing" constant="3" id="qwO-Gv-gVw"/>
+                    <constraint firstAttribute="trailing" secondItem="coT-1j-U7t" secondAttribute="trailing" id="raH-8u-2Hp"/>
+                    <constraint firstAttribute="bottom" secondItem="coT-1j-U7t" secondAttribute="bottom" id="u5c-WJ-UjV"/>
+                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="4cB-Nu-gcM"/>
             </connections>
-            <point key="canvasLocation" x="343" y="209"/>
+            <point key="canvasLocation" x="71" y="-35"/>
         </window>
     </objects>
 </document>

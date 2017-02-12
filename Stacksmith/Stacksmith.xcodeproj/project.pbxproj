@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
+		5500FD9E1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5500FD9D1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist */; };
 		55039F43136B52C80082E32E /* brush01.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F23136B52C70082E32E /* brush01.png */; };
 		55039F44136B52C80082E32E /* brush02.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F24136B52C70082E32E /* brush02.png */; };
 		55039F45136B52C80082E32E /* brush03.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F25136B52C70082E32E /* brush03.png */; };
@@ -583,6 +584,7 @@
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		5500FD9D1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WILDInitialUserDefaults.plist; sourceTree = "<group>"; };
 		5503472F1370A18800AE7681 /* StacksmithVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksmithVersion.h; sourceTree = "<group>"; };
 		55039F23136B52C70082E32E /* brush01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush01.png; path = Resources/brush01.png; sourceTree = "<group>"; };
 		55039F24136B52C70082E32E /* brush02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush02.png; path = Resources/brush02.png; sourceTree = "<group>"; };
@@ -1319,6 +1321,7 @@
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
 				5589DD771378B16400B0F6CF /* TransitionMappings.plist */,
+				5500FD9D1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist */,
 				558AA68F1CD901EF008AC095 /* Visual effect CIFilters */,
 				55BA587D1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem */,
 				55EBC642114CFAE000BAA09D /* BackgroundIconSmall.png */,
@@ -2406,6 +2409,7 @@
 				55039F60136B52C80082E32E /* brush30.png in Resources */,
 				55BE064B1CE8DE3E004CB2FC /* WILDInspectorWindowController.xib in Resources */,
 				55039F61136B52C80082E32E /* brush31.png in Resources */,
+				5500FD9E1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist in Resources */,
 				551B368E1A8FAC1E006AFDFE /* Home.xstk in Resources */,
 				55039F62136B52C80082E32E /* brush32.png in Resources */,
 				5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */,

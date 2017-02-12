@@ -185,12 +185,19 @@ CMessageBoxMac::CMessageBoxMac()
 	[mMacWindowController.window setBackgroundColor: [NSColor colorWithCalibratedWhite: 0.3 alpha: 0.7]];
 #endif
 	
+	CGFloat	desiredFontSize = 12.0;
+	NSNumber* desiredFontSizeObj = [[NSUserDefaults standardUserDefaults] objectForKey: @"WILDMessageBoxFontSize"];
+	if( desiredFontSizeObj && [desiredFontSizeObj respondsToSelector: @selector(doubleValue)] )
+		desiredFontSize = [desiredFontSizeObj doubleValue];
+	
 	// We first set a space, because we need to set some string or the field will ignore our styles:
-	NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString: @" " attributes:@{ NSForegroundColorAttributeName: NSColor.whiteColor, NSFontAttributeName: [NSFont userFixedPitchFontOfSize: 12.0] }] autorelease];
+	NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString: @" " attributes:@{ NSForegroundColorAttributeName: NSColor.whiteColor, NSFontAttributeName: [NSFont userFixedPitchFontOfSize: desiredFontSize] }] autorelease];
 	[mMacWindowController.messageField.textStorage setAttributedString: attrStr];
 	// Now set it to an empty string, which is how we expect our window to start out:
 	[attrStr.mutableString setString: @""];
 	[mMacWindowController.messageField.textStorage setAttributedString: attrStr];
+	
+	mMacWindowController.resultField.font = [NSFont userFixedPitchFontOfSize: ceilf((desiredFontSize / 4.0) * 3.0)];
 }
 
 
@@ -218,8 +225,13 @@ bool	CMessageBoxMac::SetTextContents( const std::string& inString )
 {
 	CMessageBox::SetTextContents( inString );
 	
+	CGFloat	desiredFontSize = 12.0;
+	NSNumber* desiredFontSizeObj = [[NSUserDefaults standardUserDefaults] objectForKey: @"WILDMessageBoxFontSize"];
+	if( desiredFontSizeObj && [desiredFontSizeObj respondsToSelector: @selector(doubleValue)] )
+		desiredFontSize = [desiredFontSizeObj doubleValue];
+
 	NSString	*	str = [NSString stringWithUTF8String: inString.c_str()];
-	NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString: str attributes:@{ NSForegroundColorAttributeName: NSColor.whiteColor, NSFontAttributeName: [NSFont userFixedPitchFontOfSize: 12.0] }] autorelease];
+	NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString: str attributes:@{ NSForegroundColorAttributeName: NSColor.whiteColor, NSFontAttributeName: [NSFont userFixedPitchFontOfSize: desiredFontSize] }] autorelease];
 	[mMacWindowController.messageField.textStorage setAttributedString: attrStr];
 	[mMacWindowController.window makeKeyAndOrderFront: nil];
 	mVisible = true;

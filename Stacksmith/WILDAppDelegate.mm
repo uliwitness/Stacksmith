@@ -61,6 +61,10 @@ void	WILDScheduleResumeOfScript( void )
 	self = [super init];
 	if( self )
 	{
+		NSDictionary * initialDefaults = [NSDictionary dictionaryWithContentsOfURL: [[NSBundle mainBundle] URLForResource: @"WILDInitialUserDefaults" withExtension: @"plist"]];
+		if( initialDefaults )
+			[[NSUserDefaults standardUserDefaults] registerDefaults: initialDefaults];
+		
 		new CDocumentManagerMac;	// Create the singleton of our subclass.
 		
 		CDocument::LoadNewPartMenuItemsFromFilePath( [NSBundle.mainBundle pathForResource: @"new_part_descriptions" ofType: @"xml"].fileSystemRepresentation );
