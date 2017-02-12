@@ -9,10 +9,13 @@
 #include "CMenu.h"
 #include "CTinyXMLUtils.h"
 #include "CDocument.h"
+#include <sstream>
 
 
 using namespace Carlson;
 
+
+#pragma mark Constants
 
 const char*	Carlson::EMenuItemMarkCharChecked = "\342\234\223";	// E2 9C 93 ✓ "check mark"
 const char*	Carlson::EMenuItemMarkCharMixed = "-";
@@ -25,6 +28,9 @@ static const char*	sMenuItemStyleStrings[EMenuItemStyle_Last +1] =
 	"separator",
 	"*UNKNOWN*"
 };
+
+
+#pragma mark - Menu
 
 
 void	CMenu::SetName( const std::string &inName )
@@ -259,6 +265,66 @@ CScriptableObject*	CMenu::GetParentObject( CScriptableObject* previousParent )
 		parent = mDocument;
 	return parent;
 }
+
+
+std::vector<CAddHandlerListEntry>	CMenu::GetAddHandlerList()
+{
+	std::vector<CAddHandlerListEntry>	handlers;
+	
+	CAddHandlerListEntry	currSeparator;
+	currSeparator.mHandlerName = "Menu Item Messages";
+	currSeparator.mType = EHandlerEntryGroupHeader;
+	handlers.push_back( currSeparator );
+
+	LEOContextGroup*	theGroup = GetScriptContextGroupObject();
+	LEOScript*			theScript = GetScriptObject( [](const char*,size_t,size_t,CScriptableObject*){} );
+	
+	if( !theScript )
+		return handlers;
+	
+	for( CMenuItemRef currMenuItem : mItems )
+	{
+		if( currMenuItem->GetMessage().length() == 0 )
+			continue;
+		
+		std::string theMessage = currMenuItem->GetMessage();
+		
+		LEOHandlerID timerMessageHandlerID = LEOContextGroupHandlerIDForHandlerName( theGroup, theMessage.c_str() );
+		if( LEOScriptFindCommandHandlerWithID( theScript, timerMessageHandlerID ) == NULL )
+		{
+			CAddHandlerListEntry	currHandler;
+			currSeparator.mType = EHandlerEntryCommand;
+			currHandler.mHandlerName = theMessage;
+			currHandler.mHandlerID = timerMessageHandlerID;
+			std::stringstream	descStrStr;
+			descStrStr << "The message that the \"" << currMenuItem->GetName() << "\" menu item will send when the user chooses it.";
+			currHandler.mHandlerDescription = descStrStr.str();
+			
+			std::stringstream	strstr;
+			strstr << "\n\non " << currHandler.mHandlerName << "\n\t\nend " << currHandler.mHandlerName;
+			currHandler.mHandlerTemplate = strstr.str();
+			
+			handlers.push_back( currHandler );
+		}
+	}
+
+	CAddHandlerListEntry	currHandler;
+	currSeparator.mType = EHandlerEntryCommand;
+	currHandler.mHandlerName = "doMenu";
+	currHandler.mHandlerID = LEOContextGroupHandlerIDForHandlerName( theGroup, currHandler.mHandlerName.c_str() );
+	currHandler.mHandlerDescription = "The message that is sent when the user chooses a menu item inside this menu.";
+	
+	std::stringstream	strstr;
+	strstr << "\n\non " << currHandler.mHandlerName << "\n\t\nend " << currHandler.mHandlerName;
+	currHandler.mHandlerTemplate = strstr.str();
+	
+	handlers.push_back( currHandler );
+
+	return handlers;
+}
+
+
+#pragma mark - Menu Item
 
 
 CMenuItem::CMenuItem( CMenu * inParent )
@@ -519,4 +585,40 @@ TMenuItemStyle	CMenuItem::GetMenuItemStyleFromString( const char* inStyleStr )
 	return EMenuItemStyle_Last;
 }
 
+
+std::vector<CAddHandlerListEntry>	CMenuItem::GetAddHandlerList()
+{
+	std::vector<CAddHandlerListEntry>	handlers;
+	
+	std::string theMessage = (mMessage.length() > 0) ? mMessage : "doMenu";
+	
+	LEOContextGroup*	theGroup = GetScriptContextGroupObject();
+	LEOScript*			theScript = GetScriptObject( [](const char*,size_t,size_t,CScriptableObject*){} );
+	
+	if( !theScript )
+		return handlers;
+
+	LEOHandlerID timerMessageHandlerID = LEOContextGroupHandlerIDForHandlerName( theGroup, theMessage.c_str() );
+	if( LEOScriptFindCommandHandlerWithID( theScript, timerMessageHandlerID ) == NULL )
+	{
+		CAddHandlerListEntry	currSeparator;
+		currSeparator.mHandlerName = "Menu Item Messages";
+		currSeparator.mType = EHandlerEntryGroupHeader;
+		handlers.push_back( currSeparator );
+		
+		CAddHandlerListEntry	currHandler;
+		currSeparator.mType = EHandlerEntryCommand;
+		currHandler.mHandlerName = theMessage;
+		currHandler.mHandlerID = timerMessageHandlerID;
+		currHandler.mHandlerDescription = "The message that this menu item will send to itself when the user chooses it.";
+		
+		std::stringstream	strstr;
+		strstr << "\n\non " << currHandler.mHandlerName << "\n\t\nend " << currHandler.mHandlerName;
+		currHandler.mHandlerTemplate = strstr.str();
+		
+		handlers.push_back( currHandler );
+	}
+	
+	return handlers;
+}
 
