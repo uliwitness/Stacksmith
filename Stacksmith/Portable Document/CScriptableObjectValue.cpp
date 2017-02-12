@@ -81,8 +81,43 @@ void		GetObjectDescriptorValueAsRangeOfString( LEOValuePtr self, LEOChunkType in
 										char* outBuf, size_t bufSize, LEOContext* inContext );
 
 void	InitScriptableObjectDescriptorValue( LEOValuePtr inStorage, TScriptableObjectType objectType, TScriptableObjectReferenceType referenceType, LEOInteger objectNumID, const char* inName, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
-void	CleanUpScriptableObjectDescriptorValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
+LEONumber	GetScriptableObjectDescriptorValueAsNumber( LEOValuePtr self, LEOUnit *outUnit, struct LEOContext* inContext );
+LEOInteger	GetScriptableObjectDescriptorValueAsInteger( LEOValuePtr self, LEOUnit *outUnit, struct LEOContext* inContext );
+const char*	GetScriptableObjectDescriptorValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext );	// Either returns buf, or an internal pointer holding the entire string.
+bool		GetScriptableObjectDescriptorValueAsBoolean( LEOValuePtr self, struct LEOContext* inContext );
+void		GetScriptableObjectDescriptorValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType,
+										size_t inRangeStart, size_t inRangeEnd,
+										char* outBuf, size_t bufSize, struct LEOContext* inContext );
 
+void		SetScriptableObjectDescriptorValueAsNumber( LEOValuePtr self, LEONumber inNumber, LEOUnit inUnit, struct LEOContext* inContext );
+void		SetScriptableObjectDescriptorValueAsInteger( LEOValuePtr self, LEOInteger inNumber, LEOUnit inUnit, struct LEOContext* inContext );
+void		SetScriptableObjectDescriptorValueAsString( LEOValuePtr self, const char* inBuf, size_t bufLen, struct LEOContext* inContext );
+void		SetScriptableObjectDescriptorValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LEOContext* inContext );
+void		SetScriptableObjectDescriptorValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
+								size_t inRangeStart, size_t inRangeEnd,
+								const char* inBuf, struct LEOContext* inContext );
+void		SetScriptableObjectDescriptorValuePredeterminedRangeAsString( LEOValuePtr self,
+								size_t inRangeStart, size_t inRangeEnd,
+								const char* inBuf, struct LEOContext* inContext );
+
+void		InitScriptableObjectDescriptorValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );	//! dest is an uninitialized value.
+void		InitScriptableObjectDescriptorValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );	//! dest is an uninitialized value.
+void		PutScriptableObjectDescriptorValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext );	//! dest must be a VALID, initialized value!
+
+void		DetermineChunkRangeOfSubstringOfScriptableObjectDescriptorValue( LEOValuePtr self, size_t *ioBytesStart, size_t *ioBytesEnd,
+												size_t *ioBytesDelStart, size_t *ioBytesDelEnd,
+												LEOChunkType inType, size_t inRangeStart, size_t inRangeEnd,
+												struct LEOContext* inContext );
+void		CleanUpScriptableObjectDescriptorValue( LEOValuePtr self, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
+
+bool		CanGetScriptableObjectDescriptorValueAsNumber( LEOValuePtr self, struct LEOContext* inContext );
+
+LEOValuePtr	GetScriptableObjectDescriptorValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext );
+
+size_t		GetScriptableObjectDescriptorKeyCount( LEOValuePtr self, struct LEOContext* inContext );
+
+void		GetScriptableObjectDescriptorValueForKeyOfRange( LEOValuePtr self, const char* keyName, size_t startOffset, size_t endOffset, LEOValuePtr outValue, struct LEOContext* inContext );
+void		SetScriptableObjectDescriptorValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext );
 
 struct LEOValueType	Carlson::kLeoValueTypeScriptableObject =
 {
@@ -1622,3 +1657,306 @@ void	CleanUpScriptableObjectDescriptorValue( LEOValuePtr self, LEOKeepReferences
 		self->base.refObjectID = 0;
 	}
 }
+
+
+LEONumber	GetScriptableObjectDescriptorValueAsNumber( LEOValuePtr self, LEOUnit *outUnit, struct LEOContext* inContext )
+{
+	CScriptableObject*	foundObject = nullptr;
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+	CDocument* currDocument = userData->GetDocument();
+	TScriptableObjectType	objectType = ((ScriptableObjectDescriptorValue*)self)->objectType;
+	if( objectType == EScriptableObjectTypeProject )
+		foundObject = currDocument;
+	else
+	{
+		CStack* currStack = userData->GetStack();
+		if( objectType == EScriptableObjectTypeStack )
+			foundObject = currStack;
+		else
+		{
+			CLayer* currLayer = currStack->GetCurrentCard();
+			if( objectType == EScriptableObjectTypeCard )
+				foundObject = currStack;
+			else
+			{
+				if( objectType == EScriptableObjectTypePart )
+				{
+					foundObject = currLayer->GetPart( ((ScriptableObjectDescriptorValue*)self)->objectNumID );
+				}
+			}
+		}
+	}
+	
+	std::string	contents;
+	if( foundObject->GetTextContents(contents) )
+	{
+		const char* str = contents.c_str();
+		char*		endPtr = nullptr;
+		LEONumber	num = strtod( str, &endPtr );
+		if( endPtr == (str +strlen(str)) )
+			return num;
+	}
+	
+	size_t		lineNo = SIZE_T_MAX;
+	uint16_t	fileID = 0;
+	LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+	LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object's contents are not a number." );
+	return -1;
+}
+
+
+LEOInteger	GetScriptableObjectDescriptorValueAsInteger( LEOValuePtr self, LEOUnit *outUnit, struct LEOContext* inContext )
+{
+	CScriptableObject*	foundObject = nullptr;
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+	CDocument* currDocument = userData->GetDocument();
+	TScriptableObjectType	objectType = ((ScriptableObjectDescriptorValue*)self)->objectType;
+	if( objectType == EScriptableObjectTypeProject )
+		foundObject = currDocument;
+	else
+	{
+		CStack* currStack = userData->GetStack();
+		if( objectType == EScriptableObjectTypeStack )
+			foundObject = currStack;
+		else
+		{
+			CLayer* currLayer = currStack->GetCurrentCard();
+			if( objectType == EScriptableObjectTypeCard )
+				foundObject = currStack;
+			else
+			{
+				if( objectType == EScriptableObjectTypePart )
+				{
+					foundObject = currLayer->GetPart( ((ScriptableObjectDescriptorValue*)self)->objectNumID );
+				}
+			}
+		}
+	}
+	
+	std::string	contents;
+	if( foundObject->GetTextContents(contents) )
+	{
+		const char* str = contents.c_str();
+		char*		endPtr = nullptr;
+		LEOInteger	num = strtoll( str, &endPtr, 10 );
+		if( endPtr == (str +strlen(str)) )
+			return num;
+	}
+	
+	size_t		lineNo = SIZE_T_MAX;
+	uint16_t	fileID = 0;
+	LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+	LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object's contents are not an integer." );
+	return -1;
+}
+
+
+const char*	GetScriptableObjectDescriptorValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, struct LEOContext* inContext )
+{
+	CScriptableObject*	foundObject = nullptr;
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+	CDocument* currDocument = userData->GetDocument();
+	TScriptableObjectType	objectType = ((ScriptableObjectDescriptorValue*)self)->objectType;
+	if( objectType == EScriptableObjectTypeProject )
+		foundObject = currDocument;
+	else
+	{
+		CStack* currStack = userData->GetStack();
+		if( objectType == EScriptableObjectTypeStack )
+			foundObject = currStack;
+		else
+		{
+			CLayer* currLayer = currStack->GetCurrentCard();
+			if( objectType == EScriptableObjectTypeCard )
+				foundObject = currStack;
+			else
+			{
+				if( objectType == EScriptableObjectTypePart )
+				{
+					foundObject = currLayer->GetPart( ((ScriptableObjectDescriptorValue*)self)->objectNumID );
+				}
+			}
+		}
+	}
+	
+	std::string	contents;
+	if( foundObject->GetTextContents(contents) )
+	{
+		if( bufSize > contents.size() )
+		{
+			strncpy( outBuf, contents.c_str(), bufSize );
+			return outBuf;
+		}
+		else
+		{
+			CString*	theStr = new CString(contents);
+			theStr->Autorelease();
+			return theStr->GetString().c_str();
+		}
+	}
+	
+	size_t		lineNo = SIZE_T_MAX;
+	uint16_t	fileID = 0;
+	LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+	LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
+	return nullptr;
+}
+
+
+bool		GetScriptableObjectDescriptorValueAsBoolean( LEOValuePtr self, struct LEOContext* inContext )
+{
+	CScriptableObject*	foundObject = nullptr;
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+	CDocument* currDocument = userData->GetDocument();
+	TScriptableObjectType	objectType = ((ScriptableObjectDescriptorValue*)self)->objectType;
+	if( objectType == EScriptableObjectTypeProject )
+		foundObject = currDocument;
+	else
+	{
+		CStack* currStack = userData->GetStack();
+		if( objectType == EScriptableObjectTypeStack )
+			foundObject = currStack;
+		else
+		{
+			CLayer* currLayer = currStack->GetCurrentCard();
+			if( objectType == EScriptableObjectTypeCard )
+				foundObject = currStack;
+			else
+			{
+				if( objectType == EScriptableObjectTypePart )
+				{
+					foundObject = currLayer->GetPart( ((ScriptableObjectDescriptorValue*)self)->objectNumID );
+				}
+			}
+		}
+	}
+	
+	std::string	contents;
+	if( foundObject->GetTextContents(contents) )
+	{
+		if( strcasecmp(contents.c_str(), "true") == 0 )
+			return true;
+		else if( strcasecmp(contents.c_str(), "false") == 0 )
+			return false;
+	}
+	
+	size_t		lineNo = SIZE_T_MAX;
+	uint16_t	fileID = 0;
+	LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+	LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Expected \"true\" or \"false\" here." );
+	return false;
+}
+
+
+void		GetScriptableObjectDescriptorValueAsRangeOfString( LEOValuePtr self, LEOChunkType inType,
+										size_t inRangeStart, size_t inRangeEnd,
+										char* outBuf, size_t bufSize, struct LEOContext* inContext )
+{
+
+}
+
+
+
+void		SetScriptableObjectDescriptorValueAsNumber( LEOValuePtr self, LEONumber inNumber, LEOUnit inUnit, struct LEOContext* inContext )
+{
+
+}
+
+
+void		SetScriptableObjectDescriptorValueAsInteger( LEOValuePtr self, LEOInteger inNumber, LEOUnit inUnit, struct LEOContext* inContext )
+{
+
+}
+
+
+void		SetScriptableObjectDescriptorValueAsString( LEOValuePtr self, const char* inBuf, size_t bufLen, struct LEOContext* inContext )
+{
+
+}
+
+
+void		SetScriptableObjectDescriptorValueAsBoolean( LEOValuePtr self, bool inBoolean, struct LEOContext* inContext )
+{
+
+}
+
+
+void		SetScriptableObjectDescriptorValueRangeAsString( LEOValuePtr self, LEOChunkType inType,
+								size_t inRangeStart, size_t inRangeEnd,
+								const char* inBuf, struct LEOContext* inContext )
+{
+
+}
+
+
+void		SetScriptableObjectDescriptorValuePredeterminedRangeAsString( LEOValuePtr self,
+								size_t inRangeStart, size_t inRangeEnd,
+								const char* inBuf, struct LEOContext* inContext )
+{
+
+}
+
+
+
+void		InitScriptableObjectDescriptorValueCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
+{
+
+}
+
+	//! dest is an uninitialized value.
+void		InitScriptableObjectDescriptorValueSimpleCopy( LEOValuePtr self, LEOValuePtr dest, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
+{
+
+}
+
+	//! dest is an uninitialized value.
+void		PutScriptableObjectDescriptorValueIntoValue( LEOValuePtr self, LEOValuePtr dest, struct LEOContext* inContext )
+{
+
+}
+
+	//! dest must be a VALID, initialized value!
+
+void		DetermineChunkRangeOfSubstringOfScriptableObjectDescriptorValue( LEOValuePtr self, size_t *ioBytesStart, size_t *ioBytesEnd,
+												size_t *ioBytesDelStart, size_t *ioBytesDelEnd,
+												LEOChunkType inType, size_t inRangeStart, size_t inRangeEnd,
+												struct LEOContext* inContext )
+{
+
+}
+
+
+
+bool		CanGetScriptableObjectDescriptorValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
+{
+
+}
+
+
+
+LEOValuePtr	GetScriptableObjectDescriptorValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
+{
+
+}
+
+
+
+size_t		GetScriptableObjectDescriptorKeyCount( LEOValuePtr self, struct LEOContext* inContext )
+{
+
+}
+
+
+
+void		GetScriptableObjectDescriptorValueForKeyOfRange( LEOValuePtr self, const char* keyName, size_t startOffset, size_t endOffset, LEOValuePtr outValue, struct LEOContext* inContext )
+{
+
+}
+
+
+void		SetScriptableObjectDescriptorValueForKeyOfRange( LEOValuePtr self, const char* keyName, LEOValuePtr inValue, size_t startOffset, size_t endOffset, struct LEOContext* inContext )
+{
+
+}
+
+
