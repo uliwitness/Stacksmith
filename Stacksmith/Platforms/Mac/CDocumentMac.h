@@ -43,7 +43,7 @@ public:
 };
 
 
-class CDocumentMac : public CDocument
+class CDocumentMac : public CDocument, public CMacScriptableObjectBase
 {
 public:
 	CDocumentMac( LEOContextGroup* inGroup ) : CDocument(inGroup), mCanvasWindowController(NULL), mMacMenus(nil) {};
@@ -62,6 +62,11 @@ public:
 	virtual void		MenuIncrementedChangeCount( CMenuItem* inItem, CMenu* inMenu, bool parentNeedsFullRebuild ) override;
 	virtual void		StackIncrementedChangeCount( CStack* inStack ) override;
 	virtual void		LayerIncrementedChangeCount( CLayer* inLayer ) override;
+	
+	virtual WILDNSImagePtr	GetDisplayIcon() override;
+	virtual Class			GetPropertyEditorClass() override;
+	virtual void			OpenScriptEditorAndShowOffset( size_t byteOffset ) override	{ CMacScriptableObjectBase::OpenScriptEditorAndShowOffset( byteOffset ); }
+	virtual void			OpenScriptEditorAndShowLine( size_t lineIndex ) override	{ CMacScriptableObjectBase::OpenScriptEditorAndShowLine( lineIndex ); }
 	
 	WILDNSMutableArrayPtr	GetMacMenus();
 	

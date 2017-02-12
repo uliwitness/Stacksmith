@@ -15,6 +15,7 @@
 #import "WILDStackCanvasWindowController.h"
 #include "CCompletionBlockCoalescer.h"
 #include "CMenuMac.h"
+#import "WILDConcreteObjectInfoViewController.h"
 
 
 using namespace Carlson;
@@ -425,6 +426,18 @@ void	CDocumentMac::LayerIncrementedChangeCount( CLayer* inLayer )
 	CDocument::LayerIncrementedChangeCount( inLayer );
 	if( mCanvasWindowController )
 		[mCanvasWindowController reloadData];
+}
+
+
+WILDNSImagePtr	CDocumentMac::GetDisplayIcon()
+{
+	return [NSImage imageNamed: @"StackCanvasIcon"];
+}
+
+
+Class	CDocumentMac::GetPropertyEditorClass()
+{
+	return [WILDConcreteObjectInfoViewController class];
 }
 
 
