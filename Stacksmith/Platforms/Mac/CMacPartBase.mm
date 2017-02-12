@@ -15,28 +15,6 @@
 using namespace Carlson;
 
 
-void	CMacPartBase::OpenScriptEditorAndShowOffset( size_t byteOffset )
-{
-	if( !mScriptEditor )
-		mScriptEditor = [[WILDScriptEditorWindowController alloc] initWithScriptContainer: dynamic_cast<CConcreteObject*>(this)];
-	
-	[mScriptEditor showWindow: nil];
-	if( byteOffset != SIZE_T_MAX )
-		[mScriptEditor goToCharacter: byteOffset];
-}
-
-
-void	CMacPartBase::OpenScriptEditorAndShowLine( size_t lineIndex )
-{
-	if( !mScriptEditor )
-		mScriptEditor = [[WILDScriptEditorWindowController alloc] initWithScriptContainer: dynamic_cast<CConcreteObject*>(this)];
-	
-	[mScriptEditor showWindow: nil];
-	if( lineIndex != SIZE_T_MAX )
-		[mScriptEditor goToLine: lineIndex];
-}
-
-
 void	CMacPartBase::OpenContentsEditor()
 {
 	if( !mContentsEditor )

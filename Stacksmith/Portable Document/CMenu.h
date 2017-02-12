@@ -44,6 +44,7 @@ namespace Carlson
 		virtual void		SetEnabled( bool inState );
 		virtual void		SetStyle( TMenuItemStyle inStyle );
 		virtual void		SetMessage( const std::string& inMessage );
+		virtual void		SetToolTip( const std::string& inToolTip );
 		
 		std::string		GetCommandChar()	{ return mCommandChar; }
 		std::string		GetMarkChar()		{ return mMarkChar; }
@@ -51,6 +52,7 @@ namespace Carlson
 		bool			GetVisible()		{ return mVisible; }
 		bool			GetEnabled()		{ return mEnabled; }
 		std::string		GetMessage()		{ return mMessage; }
+		std::string		GetToolTip()		{ return mToolTip; }
 		
 		void	LoadFromElement( tinyxml2::XMLElement* inElement );
 		bool	SaveToElement( tinyxml2::XMLElement* inElement );
@@ -69,6 +71,7 @@ namespace Carlson
 		std::string			mMarkChar;
 		CMenu*				mParent;
 		std::string			mMessage;
+		std::string			mToolTip;
 		TMenuItemStyle		mStyle;
 		bool				mVisible;
 		bool				mEnabled;
@@ -99,9 +102,9 @@ namespace Carlson
 
 		virtual std::string		GetTypeName() override			{ return "menu"; };
 		
-		CMenuItem*	NewMenuItemWithElement( tinyxml2::XMLElement* inElement );
-		void		LoadFromElement( tinyxml2::XMLElement* inElement );
-		bool		SaveToElement( tinyxml2::XMLElement* inElement );
+		virtual CMenuItem*		NewMenuItemWithElement( tinyxml2::XMLElement* inElement );
+		void					LoadFromElement( tinyxml2::XMLElement* inElement );
+		bool					SaveToElement( tinyxml2::XMLElement* inElement );
 
 		virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
 		virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;

@@ -334,7 +334,10 @@ struct CCanvasEntry
 				popover.contentSize = piv.view.frame.size;
 				popover.contentViewController = piv;
 				[popover setBehavior: NSPopoverBehaviorTransient];
-				[popover showRelativeToRect: [distributedView rectForItemAtIndex: row] ofView: distributedView preferredEdge: NSMaxYEdge];
+				NSRect itemRect = [distributedView rectForItemAtIndex: row];
+				CGFloat distViewHeight = distributedView.frame.size.height;
+				itemRect.origin.y = distViewHeight -NSMaxY(itemRect);
+				[popover showRelativeToRect: itemRect ofView: distributedView preferredEdge: NSMaxYEdge];
 			}
 		}
 	}

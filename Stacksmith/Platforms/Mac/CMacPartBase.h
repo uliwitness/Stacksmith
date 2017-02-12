@@ -45,14 +45,14 @@ public:
 		//inView.layer.borderColor = inState? [NSColor grayColor].CGColor : NULL;
 	}
 	virtual NSView*			GetView()					{ return NULL; };
-	virtual NSImage*		GetDisplayIcon()			{ return [NSImage imageNamed: @"FieldIconSmall"]; };
+	virtual NSImage*		GetDisplayIcon() override	{ return [NSImage imageNamed: @"FieldIconSmall"]; };
 	virtual void			SetCocoaAttributesForPart( NSDictionary* inAttrs );
 	virtual NSDictionary*	GetCocoaAttributesForPart();
-	virtual Class			GetPropertyEditorClass()	{ return [WILDPartInfoViewController class]; };
+	virtual Class			GetPropertyEditorClass() override	{ return [WILDPartInfoViewController class]; };
 	
-	virtual void		OpenScriptEditorAndShowOffset( size_t byteOffset );
-	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex );
 	virtual void		OpenContentsEditor();
+	virtual void			OpenScriptEditorAndShowOffset( size_t byteOffset ) override	{ CMacScriptableObjectBase::OpenScriptEditorAndShowOffset( byteOffset ); }
+	virtual void			OpenScriptEditorAndShowLine( size_t lineIndex ) override	{ CMacScriptableObjectBase::OpenScriptEditorAndShowLine( lineIndex ); }
 
 	virtual void		WillBeDeleted();
 	
@@ -60,7 +60,6 @@ protected:
 	virtual ~CMacPartBase() { [mScriptEditor release]; mScriptEditor = nil; [mContentsEditor release]; mContentsEditor = nil; };
 	NSAutoresizingMaskOptions	GetCocoaResizeFlags( TPartLayoutFlags inFlags );
 	
-	WILDScriptEditorWindowController*	mScriptEditor;
 	WILDContentsEditorWindowController*	mContentsEditor;
 };
 

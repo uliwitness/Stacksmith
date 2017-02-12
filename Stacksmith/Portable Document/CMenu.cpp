@@ -317,6 +317,13 @@ void	CMenuItem::SetMessage( const std::string &inMessage )
 }
 
 
+void	CMenuItem::SetToolTip( const std::string &inToolTip )
+{
+	mToolTip = inToolTip;
+	mParent->MenuItemIncrementedChangeCount( this, false );
+}
+
+
 void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 {
 	mID = CTinyXMLUtils::GetLongLongNamed( inElement, "id", -1 );
@@ -337,6 +344,8 @@ void	CMenuItem::LoadFromElement( tinyxml2::XMLElement* inElement )
 	mEnabled = CTinyXMLUtils::GetBoolNamed( inElement, "enabled", true );
 	mMessage.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "message", mMessage );
+	mToolTip.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "toolTip", mToolTip );
 	mScript.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
 	
@@ -360,6 +369,8 @@ bool	CMenuItem::SaveToElement( tinyxml2::XMLElement* inElement )
 		CTinyXMLUtils::AddBoolNamed( inElement, mEnabled, "enabled" );
 	if( mMessage.length() != 0 )
 		CTinyXMLUtils::AddStringNamed( inElement, mMessage, "message" );
+	if( mToolTip.length() != 0 )
+		CTinyXMLUtils::AddStringNamed( inElement, mToolTip, "toolTip" );
 	if( mScript.length() != 0 )
 		CTinyXMLUtils::AddStringNamed( inElement, mScript, "script" );
 

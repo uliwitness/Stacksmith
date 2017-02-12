@@ -14,6 +14,7 @@
 #import "WILDStackWindowController.h"
 #import "WILDStackCanvasWindowController.h"
 #include "CCompletionBlockCoalescer.h"
+#include "CMenuMac.h"
 
 
 using namespace Carlson;
@@ -235,7 +236,12 @@ CDocumentMac::~CDocumentMac()
 
 CMenu*	CDocumentMac::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
 {
-	CMenu	*	theMenu = CDocument::NewMenuWithElement( inMenuXML );
+	CMenu	*	theMenu = new CMenuMac( this );
+	theMenu->LoadFromElement( inMenuXML );
+	mMenus.push_back( theMenu );
+	theMenu->Autorelease();
+	
+	IncrementChangeCount();
 	
 	if( CDocumentManagerMac::sCurrentMenuBarOwner == this )
 	{
@@ -265,8 +271,10 @@ void	CDocumentMac::AddItemsToMacMenuForMenu( WILDNSMenuPtr currMacMenu, CMenu* c
 		{
 			NSString*		macMenuItemName = [NSString stringWithUTF8String: currMenuItem->GetName().c_str()];
 			NSString*		macMenuItemShortcut = [NSString stringWithUTF8String: currMenuItem->GetCommandChar().c_str()];
+			NSString*		macMenuItemToolTip = [NSString stringWithUTF8String: currMenuItem->GetToolTip().c_str()];
 			currMacItem = [[NSMenuItem alloc] initWithTitle: macMenuItemName action: @selector(projectMenuItemSelected:) keyEquivalent: macMenuItemShortcut];
 			currMacItem.tag = (intptr_t)currMenuItem;
+			currMacItem.toolTip = macMenuItemToolTip;
 			currMacItem.target = mainStack->GetMacWindowController();
 		}
 		currMacItem.hidden = !currMenuItem->GetVisible();
@@ -385,6 +393,7 @@ void	CDocumentMac::MenuIncrementedChangeCount( CMenuItem* inItem, CMenu* inMenu,
 					}
 					
 					changedItem.title = [NSString stringWithUTF8String: inItem->GetName().c_str()];
+					changedItem.toolTip = [NSString stringWithUTF8String: inItem->GetToolTip().c_str()];
 					changedItem.keyEquivalent = [NSString stringWithUTF8String: inItem->GetCommandChar().c_str()];
 					changedItem.hidden = !inItem->GetVisible();
 					// markChar and enabled are updated in WILDStackWindowController's -validateMenuItem:

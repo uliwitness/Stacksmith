@@ -396,6 +396,9 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 -(void)	windowWillClose: (NSNotification*)notification
 {
 	mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
+	CMacScriptableObjectBase* msob = dynamic_cast<CMacScriptableObjectBase*>(mContainer);
+	if( msob )
+		msob->SetMacScriptEditor(nil);
 }
 
 
@@ -476,9 +479,12 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	// Make sure the former top item (pointing to the file) selects the main doc window:
 	CStackMac*		macStack = dynamic_cast<CStackMac*>(mContainer->GetStack());
-	NSMenuItem*		fileItem = [menu itemAtIndex: 0];
-	[fileItem setTarget: macStack->GetMacWindow()];
-	[fileItem setAction: @selector(makeKeyAndOrderFront:)];
+	if( macStack )
+	{
+		NSMenuItem*		fileItem = [menu itemAtIndex: 0];
+		[fileItem setTarget: macStack->GetMacWindow()];
+		[fileItem setAction: @selector(makeKeyAndOrderFront:)];
+	}
 	
 	// Now add a new item above that for this window, the script:
 	NSMenuItem*		newItem = [menu insertItemWithTitle: [NSString stringWithFormat: @"%1$@’s Script", [NSString stringWithUTF8String: mContainer->GetDisplayName().c_str()]]

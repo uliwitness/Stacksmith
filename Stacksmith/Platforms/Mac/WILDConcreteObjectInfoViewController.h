@@ -30,7 +30,7 @@ namespace Carlson
 @property (retain) IBOutlet	NSTextField		*	IDField;
 @property (retain) IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
 
--(id)	initWithConcreteObject: (Carlson::CConcreteObject*)inStack;
+-(id)	initWithConcreteObject: (Carlson::CConcreteObject*)inObject;
 
 -(IBAction)	doEditScriptButton: (id)sender;
 

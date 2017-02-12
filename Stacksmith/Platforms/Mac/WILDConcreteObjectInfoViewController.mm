@@ -22,11 +22,11 @@ using namespace Carlson;
 @synthesize IDField = mIDField;
 @synthesize editScriptButton = mEditScriptButton;
 
--(id)	initWithConcreteObject: (CConcreteObject*)inStack
+-(id)	initWithConcreteObject: (CConcreteObject*)inObject
 {
 	if(( self = [super initWithNibName: NSStringFromClass([self class]) bundle: nil] ))
 	{
-		mInfoedObject = (CStack*)inStack->Retain();
+		mInfoedObject = (CConcreteObject*)inObject->Retain();
 	}
 	
 	return self;

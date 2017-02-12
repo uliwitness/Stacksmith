@@ -15,6 +15,14 @@
 		5500FDB11E4FE13200BD6BA7 /* MenuItemIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDAD1E4FE13200BD6BA7 /* MenuItemIcon@2x.png */; };
 		5500FDB51E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5500FDB31E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm */; };
 		5500FDB61E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDB41E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib */; };
+		5500FDB91E50832600BD6BA7 /* CMenuMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5500FDB71E50832600BD6BA7 /* CMenuMac.mm */; };
+		5500FDBC1E50876100BD6BA7 /* CMenuItemMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5500FDBA1E50876100BD6BA7 /* CMenuItemMac.mm */; };
+		5500FDC11E50989700BD6BA7 /* MenuIconSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDBD1E50989700BD6BA7 /* MenuIconSmall@2x.png */; };
+		5500FDC21E50989700BD6BA7 /* MenuItemIconSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDBE1E50989700BD6BA7 /* MenuItemIconSmall@2x.png */; };
+		5500FDC31E50989700BD6BA7 /* MenuItemIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDBF1E50989700BD6BA7 /* MenuItemIconSmall.png */; };
+		5500FDC41E50989700BD6BA7 /* MenuIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDC01E50989700BD6BA7 /* MenuIconSmall.png */; };
+		5500FDC81E509B3600BD6BA7 /* WILDMenuItemInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5500FDC61E509B3600BD6BA7 /* WILDMenuItemInfoViewController.mm */; };
+		5500FDC91E509B3600BD6BA7 /* WILDMenuItemInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDC71E509B3600BD6BA7 /* WILDMenuItemInfoViewController.xib */; };
 		55039F43136B52C80082E32E /* brush01.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F23136B52C70082E32E /* brush01.png */; };
 		55039F44136B52C80082E32E /* brush02.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F24136B52C70082E32E /* brush02.png */; };
 		55039F45136B52C80082E32E /* brush03.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F25136B52C70082E32E /* brush03.png */; };
@@ -605,6 +613,17 @@
 		5500FDB21E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDConcreteObjectInfoViewController.h; path = Platforms/Mac/WILDConcreteObjectInfoViewController.h; sourceTree = "<group>"; };
 		5500FDB31E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDConcreteObjectInfoViewController.mm; path = Platforms/Mac/WILDConcreteObjectInfoViewController.mm; sourceTree = "<group>"; };
 		5500FDB41E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDConcreteObjectInfoViewController.xib; path = Platforms/Mac/WILDConcreteObjectInfoViewController.xib; sourceTree = "<group>"; };
+		5500FDB71E50832600BD6BA7 /* CMenuMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMenuMac.mm; path = Platforms/Mac/CMenuMac.mm; sourceTree = "<group>"; };
+		5500FDB81E50832600BD6BA7 /* CMenuMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMenuMac.h; path = Platforms/Mac/CMenuMac.h; sourceTree = "<group>"; };
+		5500FDBA1E50876100BD6BA7 /* CMenuItemMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMenuItemMac.mm; path = Platforms/Mac/CMenuItemMac.mm; sourceTree = "<group>"; };
+		5500FDBB1E50876100BD6BA7 /* CMenuItemMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMenuItemMac.h; path = Platforms/Mac/CMenuItemMac.h; sourceTree = "<group>"; };
+		5500FDBD1E50989700BD6BA7 /* MenuIconSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuIconSmall@2x.png"; sourceTree = "<group>"; };
+		5500FDBE1E50989700BD6BA7 /* MenuItemIconSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuItemIconSmall@2x.png"; sourceTree = "<group>"; };
+		5500FDBF1E50989700BD6BA7 /* MenuItemIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItemIconSmall.png; sourceTree = "<group>"; };
+		5500FDC01E50989700BD6BA7 /* MenuIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuIconSmall.png; sourceTree = "<group>"; };
+		5500FDC51E509B3600BD6BA7 /* WILDMenuItemInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDMenuItemInfoViewController.h; path = Platforms/Mac/WILDMenuItemInfoViewController.h; sourceTree = "<group>"; };
+		5500FDC61E509B3600BD6BA7 /* WILDMenuItemInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDMenuItemInfoViewController.mm; path = Platforms/Mac/WILDMenuItemInfoViewController.mm; sourceTree = "<group>"; };
+		5500FDC71E509B3600BD6BA7 /* WILDMenuItemInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDMenuItemInfoViewController.xib; path = Platforms/Mac/WILDMenuItemInfoViewController.xib; sourceTree = "<group>"; };
 		5503472F1370A18800AE7681 /* StacksmithVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksmithVersion.h; sourceTree = "<group>"; };
 		55039F23136B52C70082E32E /* brush01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush01.png; path = Resources/brush01.png; sourceTree = "<group>"; };
 		55039F24136B52C70082E32E /* brush02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush02.png; path = Resources/brush02.png; sourceTree = "<group>"; };
@@ -1348,6 +1367,10 @@
 				55EBC643114CFAE000BAA09D /* ButtonIconSmall.png */,
 				55EBC644114CFAE000BAA09D /* CardIconSmall.png */,
 				55EBC645114CFAE000BAA09D /* FieldIconSmall.png */,
+				5500FDBD1E50989700BD6BA7 /* MenuIconSmall@2x.png */,
+				5500FDBE1E50989700BD6BA7 /* MenuItemIconSmall@2x.png */,
+				5500FDBF1E50989700BD6BA7 /* MenuItemIconSmall.png */,
+				5500FDC01E50989700BD6BA7 /* MenuIconSmall.png */,
 				55BC02E1116B2ADE00BB094E /* NoIcon.png */,
 				55E3A6F911519B45008411BB /* HCSV.icns */,
 				55E3A6FA11519B45008411BB /* Stack.icns */,
@@ -1417,6 +1440,10 @@
 			children = (
 				55CD6123187B188E002450E2 /* CDocumentMac.h */,
 				55CD6122187B188E002450E2 /* CDocumentMac.mm */,
+				5500FDB81E50832600BD6BA7 /* CMenuMac.h */,
+				5500FDB71E50832600BD6BA7 /* CMenuMac.mm */,
+				5500FDBB1E50876100BD6BA7 /* CMenuItemMac.h */,
+				5500FDBA1E50876100BD6BA7 /* CMenuItemMac.mm */,
 				55CD6120187B14E6002450E2 /* CStackMac.h */,
 				55CD611F187B14E6002450E2 /* CStackMac.mm */,
 				559BA9D218B11E6F00760273 /* CPlatformLayer.h */,
@@ -1704,6 +1731,9 @@
 				5500FDB21E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.h */,
 				5500FDB31E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm */,
 				5500FDB41E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib */,
+				5500FDC51E509B3600BD6BA7 /* WILDMenuItemInfoViewController.h */,
+				5500FDC61E509B3600BD6BA7 /* WILDMenuItemInfoViewController.mm */,
+				5500FDC71E509B3600BD6BA7 /* WILDMenuItemInfoViewController.xib */,
 				55405BB518A39796001D3C99 /* WILDPartInfoViewController.h */,
 				55405BB618A39796001D3C99 /* WILDPartInfoViewController.mm */,
 				55405BB718A39796001D3C99 /* WILDPartInfoViewController.xib */,
@@ -2385,6 +2415,7 @@
 				558AA6841CD842EE008AC095 /* WILDVenetianBlindsFilter.cikernel in Resources */,
 				559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */,
 				55EBC646114CFAE000BAA09D /* BackgroundIconSmall.png in Resources */,
+				5500FDC31E50989700BD6BA7 /* MenuItemIconSmall.png in Resources */,
 				55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */,
 				55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */,
 				55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */,
@@ -2406,10 +2437,12 @@
 				55F34D3B136A50D600E8588D /* ICON_26425.pdf in Resources */,
 				55F34D3D136A554500E8588D /* ICON_31885.pdf in Resources */,
 				55F34D3F136A555300E8588D /* ICON_1000.pdf in Resources */,
+				5500FDC21E50989700BD6BA7 /* MenuItemIconSmall@2x.png in Resources */,
 				55039F43136B52C80082E32E /* brush01.png in Resources */,
 				55B063E61A84369800DE26FB /* CommandHandlerIcon.tiff in Resources */,
 				55039F44136B52C80082E32E /* brush02.png in Resources */,
 				55039F45136B52C80082E32E /* brush03.png in Resources */,
+				5500FDC41E50989700BD6BA7 /* MenuIconSmall.png in Resources */,
 				55039F46136B52C80082E32E /* brush04.png in Resources */,
 				55039F47136B52C80082E32E /* brush05.png in Resources */,
 				55039F48136B52C80082E32E /* brush06.png in Resources */,
@@ -2444,6 +2477,7 @@
 				55039F5D136B52C80082E32E /* brush27.png in Resources */,
 				555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */,
 				55039F5E136B52C80082E32E /* brush28.png in Resources */,
+				5500FDC11E50989700BD6BA7 /* MenuIconSmall@2x.png in Resources */,
 				55039F5F136B52C80082E32E /* brush29.png in Resources */,
 				55039F60136B52C80082E32E /* brush30.png in Resources */,
 				55BE064B1CE8DE3E004CB2FC /* WILDInspectorWindowController.xib in Resources */,
@@ -2462,6 +2496,7 @@
 				55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */,
 				555F103D13881DB700E26037 /* UKPaintOvalTool.tiff in Resources */,
 				555F103E13881DB700E26037 /* UKPaintPathTool.tiff in Resources */,
+				5500FDC91E509B3600BD6BA7 /* WILDMenuItemInfoViewController.xib in Resources */,
 				555F103F13881DB700E26037 /* UKPaintRectTool.tiff in Resources */,
 				559BA9C618B0F80800760273 /* WILDBackgroundInfoViewController.xib in Resources */,
 				555F104013881DB700E26037 /* UKPaintRoundrectTool.tiff in Resources */,
@@ -2687,12 +2722,14 @@
 				553C470813577334000219FA /* CWhileLoopNode.cpp in Sources */,
 				553C470913577334000219FA /* CIfNode.cpp in Sources */,
 				553C470A13577334000219FA /* LEOValue.c in Sources */,
+				5500FDBC1E50876100BD6BA7 /* CMenuItemMac.mm in Sources */,
 				553C470B13577334000219FA /* LEOInterpreter.c in Sources */,
 				55405BDA18A59DB6001D3C99 /* CTimerPartMac.mm in Sources */,
 				55CD6124187B188E002450E2 /* CDocumentMac.mm in Sources */,
 				551B36851A8BF832006AFDFE /* WILDStackCanvasWindowController.mm in Sources */,
 				553C470C13577334000219FA /* LEOInstructions.c in Sources */,
 				553C470D13577334000219FA /* LEOScript.c in Sources */,
+				5500FDC81E509B3600BD6BA7 /* WILDMenuItemInfoViewController.mm in Sources */,
 				553C470E13577334000219FA /* LEODebugger.c in Sources */,
 				556DB7B018709C73002F7CB2 /* CConcreteObject.cpp in Sources */,
 				55612A5D1ABB880C006C0730 /* CUndoStack.mm in Sources */,
@@ -2776,6 +2813,7 @@
 				552386BF1883E1B000D7FAB3 /* CMacPartBase.mm in Sources */,
 				55CD60C818752ECA002450E2 /* CTimer.mm in Sources */,
 				555E53B3189472E0001487C1 /* CMessageWatcherMac.mm in Sources */,
+				5500FDB91E50832600BD6BA7 /* CMenuMac.mm in Sources */,
 				556DB7C51870ADE9002F7CB2 /* CURLResponse.mm in Sources */,
 				552386BC1883858300D7FAB3 /* CString.cpp in Sources */,
 				55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */,
