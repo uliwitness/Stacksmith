@@ -19,13 +19,16 @@ using namespace Carlson;
 struct CCanvasEntry
 {
 	CCanvasEntry() : mMediaType(EMediaTypeUnknown), mMediaID(0), mColumnIdx(0),	mIndentLevel(0), mRowIdx(0), mIcon(nil) {};
-	CCanvasEntry( const CCanvasEntry& inOriginal ) : mStack(inOriginal.mStack), mBackground(inOriginal.mBackground), mCard(inOriginal.mCard), mColumnIdx(inOriginal.mColumnIdx),	mIndentLevel(inOriginal.mIndentLevel), mRowIdx(inOriginal.mRowIdx), mMediaType(inOriginal.mMediaType), mMediaID(inOriginal.mMediaID) { mIcon = [inOriginal.mIcon retain]; };
+	CCanvasEntry( const CCanvasEntry& inOriginal ) : mProject(inOriginal.mProject), mMenu(inOriginal.mMenu), mMenuItem(inOriginal.mMenuItem), mStack(inOriginal.mStack), mBackground(inOriginal.mBackground), mCard(inOriginal.mCard), mColumnIdx(inOriginal.mColumnIdx),	mIndentLevel(inOriginal.mIndentLevel), mRowIdx(inOriginal.mRowIdx), mMediaType(inOriginal.mMediaType), mMediaID(inOriginal.mMediaID) { mIcon = [inOriginal.mIcon retain]; };
 	~CCanvasEntry()	{ [mIcon release]; }
 	
-	CCanvasEntry& operator =( const CCanvasEntry& inOriginal )	{ mStack = inOriginal.mStack; mBackground = inOriginal.mBackground; mCard = inOriginal.mCard; mMediaType = inOriginal.mMediaType; mMediaID = inOriginal.mMediaID; mColumnIdx = inOriginal.mColumnIdx; mRowIdx = inOriginal.mRowIdx; mIndentLevel = inOriginal.mIndentLevel; if( mIcon != inOriginal.mIcon ) { [mIcon release]; mIcon = [inOriginal.mIcon retain]; } return *this; }
+	CCanvasEntry& operator =( const CCanvasEntry& inOriginal )	{ mProject = inOriginal.mProject; mMenu = inOriginal.mMenu; mMenuItem = inOriginal.mMenuItem; mStack = inOriginal.mStack; mBackground = inOriginal.mBackground; mCard = inOriginal.mCard; mMediaType = inOriginal.mMediaType; mMediaID = inOriginal.mMediaID; mColumnIdx = inOriginal.mColumnIdx; mRowIdx = inOriginal.mRowIdx; mIndentLevel = inOriginal.mIndentLevel; if( mIcon != inOriginal.mIcon ) { [mIcon release]; mIcon = [inOriginal.mIcon retain]; } return *this; }
 	
 	void	SetIcon( WILDNSImagePtr inImage )	{ if( mIcon != inImage ) { [mIcon release]; mIcon = [inImage retain]; } }
 	
+	CDocumentRef	mProject;
+	CMenuRef		mMenu;
+	CMenuItemRef	mMenuItem;
 	CStackRef		mStack;
 	CBackgroundRef	mBackground;
 	CCardRef		mCard;
@@ -75,19 +78,51 @@ struct CCanvasEntry
 	items.erase(items.begin(),items.end());
 	
 	CCanvasEntry	currItem;
+	
+	currItem.mProject = self.owningDocument;
+	currItem.mStack = nullptr;
+	currItem.mBackground = nullptr;
+	currItem.mCard = nullptr;
+	currItem.mIndentLevel = 0;
+	currItem.mRowIdx = 0;
+	items.push_back( currItem );
+	currItem.mColumnIdx += 1;
+	currItem.mProject = nullptr;
+
+	for( size_t x = 0; x < self.owningDocument->GetNumMenus(); x++ )
+	{
+		currItem.mMenu = self.owningDocument->GetMenu( x );
+		currItem.mStack = nullptr;
+		currItem.mBackground = nullptr;
+		currItem.mCard = nullptr;
+		currItem.mIndentLevel = 0;
+		currItem.mRowIdx = 0;
+		items.push_back( currItem );
+		for( size_t y = 0; y < currItem.mMenu->GetNumItems(); y++ )
+		{
+			currItem.mMenuItem = currItem.mMenu->GetItem(y);
+			currItem.mCard = nullptr;
+			currItem.mIndentLevel = 1;
+			currItem.mRowIdx += 1;
+			items.push_back( currItem );
+		}
+		
+		currItem.mColumnIdx++;
+	}
+	
 	for( size_t x = 0; x < self.owningDocument->GetNumStacks(); x++ )
 	{
 		currItem.mStack = self.owningDocument->GetStack( x );
 		currItem.mStack->Load([](CStack * theStack){});	// +++ Won't work with stacks on internet.
-		currItem.mBackground = NULL;
-		currItem.mCard = NULL;
+		currItem.mBackground = nullptr;
+		currItem.mCard = nullptr;
 		currItem.mIndentLevel = 0;
 		currItem.mRowIdx = 0;
 		items.push_back( currItem );
 		for( size_t y = 0; y < currItem.mStack->GetNumBackgrounds(); y++ )
 		{
 			currItem.mBackground = currItem.mStack->GetBackground(y);
-			currItem.mCard = NULL;
+			currItem.mCard = nullptr;
 			currItem.mIndentLevel = 1;
 			currItem.mRowIdx += 1;
 			items.push_back( currItem );
@@ -150,6 +185,50 @@ struct CCanvasEntry
 }
 
 
+-(void) concreteCppObject: (CConcreteObject**)outObject image: (NSImage**)outImage stack: (CStack**)outStack forCanvasEntry: (const CCanvasEntry&)currItem
+{
+	if( outImage )
+	{
+		NSImage * img = currItem.mCard ? [NSImage imageNamed: @"CardIcon"] : (currItem.mBackground ? [NSImage imageNamed: @"BackgroundIcon"] : (currItem.mStack ? [NSImage imageNamed: @"StackIcon"] : nil));
+		if( !img && currItem.mMenuItem )
+		{
+			img = [NSImage imageNamed: @"MenuItemIcon"];
+		}
+		if( !img && currItem.mMenu )
+		{
+			img = [NSImage imageNamed: @"MenuIcon"];
+		}
+		if( !img && currItem.mProject )
+		{
+			img = [NSImage imageNamed: @"StackCanvasIcon"];
+		}
+		if( !img )
+		{
+			img = [NSImage imageNamed: NSImageNameApplicationIcon];
+		}
+		*outImage = img;
+	}
+	if( outStack )
+	{
+		*outStack = currItem.mStack;
+	}
+	if( outObject )
+	{
+		CConcreteObject* 	currObject = currItem.mCard ? (CConcreteObject*)currItem.mCard : (currItem.mBackground ? (CConcreteObject*)currItem.mBackground : (currItem.mStack ? (CConcreteObject*)currItem.mStack : nullptr));
+		if( !currObject )
+		{
+			currObject = currItem.mMenuItem ? (CConcreteObject*)currItem.mMenuItem : (CConcreteObject*)currItem.mMenu;
+		}
+		if( !currObject )
+		{
+			currObject = (CConcreteObject*)currItem.mProject;
+		}
+		*outObject = currObject;
+	}
+	
+}
+
+
 -(NSPoint)		distributedView: (UKDistributedView*)distributedView
 						positionForCell:(NSCell*)cell /* may be nil if the view only wants the item position. */
 						atItemIndex: (NSUInteger)row
@@ -157,9 +236,10 @@ struct CCanvasEntry
 	CCanvasEntry	currItem = items[row];
 	if( cell )
 	{
-		NSImage*		objectImage = currItem.mCard ? [NSImage imageNamed: @"CardIcon"] : (currItem.mBackground ? [NSImage imageNamed: @"BackgroundIcon"] : (currItem.mStack ? [NSImage imageNamed: @"StackIcon"] : [NSImage imageNamed: NSImageNameApplicationIcon]));
-		CStack* 			currStack = currItem.mStack;
-		CConcreteObject* 	currObject = currItem.mCard ? (CConcreteObject*)currItem.mCard : (currItem.mBackground ? (CConcreteObject*)currItem.mBackground : (currItem.mStack ? (CConcreteObject*)currItem.mStack : nullptr));
+		CConcreteObject* 	currObject = nullptr;
+		NSImage*			objectImage = nil;
+		CStack* 			currStack = nil;
+		[self concreteCppObject: &currObject image: &objectImage stack: &currStack forCanvasEntry: currItem];
 		NSString*		nameStr = currObject ? ((currObject->GetName().size() > 0) ? [NSString stringWithUTF8String: currObject->GetName().c_str()] : [NSString stringWithFormat: @"ID %lld", currObject->GetID()]) : [NSString stringWithFormat: @"ID %lld", currItem.mMediaID];
 		NSImage*		img = nil;
 		
@@ -206,7 +286,8 @@ struct CCanvasEntry
 			 forItemIndex: (NSUInteger)row;
 {
 	CCanvasEntry		currItem = items[row];
-	CConcreteObject* 	currObject = currItem.mCard ? (CConcreteObject*)currItem.mCard : (currItem.mBackground ? (CConcreteObject*)currItem.mBackground : (currItem.mStack ? (CConcreteObject*)currItem.mStack : nullptr));
+	CConcreteObject* 	currObject = nullptr;
+	[self concreteCppObject: &currObject image: NULL stack: NULL forCanvasEntry: currItem];
 	if( currObject )
 		currObject->SetName( ((NSString*)val).UTF8String );
 	else
@@ -217,11 +298,13 @@ struct CCanvasEntry
 }
 
 
--(void) distributedView: (UKDistributedView*)distributedView cellDoubleClickedAtItemIndex: (NSUInteger)item
+-(void) distributedView: (UKDistributedView*)distributedView cellDoubleClickedAtItemIndex: (NSUInteger)row
 {
-	CStack*				currStack = items[item].mStack;
-	CConcreteObject* 	currObj = items[item].mCard ? (CConcreteObject*)items[item].mCard : (items[item].mBackground ? (CConcreteObject*)items[item].mBackground : (CConcreteObject*)items[item].mStack);
-	bool				shouldEditBg = (!items[item].mCard && items[item].mBackground);
+	CCanvasEntry		currItem = items[row];
+	CStack*				currStack = nullptr;
+	CConcreteObject* 	currObj = nullptr;
+	[self concreteCppObject: &currObj image: NULL stack: &currStack forCanvasEntry: currItem];
+	bool				shouldEditBg = (!currItem.mCard && currItem.mBackground);
 	if( currObj )
 	{
 		currObj->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [currStack,shouldEditBg]()

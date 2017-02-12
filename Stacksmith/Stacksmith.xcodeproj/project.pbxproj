@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		5500FD9E1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5500FD9D1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist */; };
+		5500FDAE1E4FE13200BD6BA7 /* MenuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDAA1E4FE13200BD6BA7 /* MenuIcon.png */; };
+		5500FDAF1E4FE13200BD6BA7 /* MenuIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDAB1E4FE13200BD6BA7 /* MenuIcon@2x.png */; };
+		5500FDB01E4FE13200BD6BA7 /* MenuItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDAC1E4FE13200BD6BA7 /* MenuItemIcon.png */; };
+		5500FDB11E4FE13200BD6BA7 /* MenuItemIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5500FDAD1E4FE13200BD6BA7 /* MenuItemIcon@2x.png */; };
 		55039F43136B52C80082E32E /* brush01.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F23136B52C70082E32E /* brush01.png */; };
 		55039F44136B52C80082E32E /* brush02.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F24136B52C70082E32E /* brush02.png */; };
 		55039F45136B52C80082E32E /* brush03.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F25136B52C70082E32E /* brush03.png */; };
@@ -476,6 +480,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5500FDA81E4FA66800BD6BA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 722954B41D04ADAF00ECF9CA;
+			remoteInfo = fileop;
+		};
 		550346D9136F435800AE7681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
@@ -585,6 +596,10 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		5500FD9D1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WILDInitialUserDefaults.plist; sourceTree = "<group>"; };
+		5500FDAA1E4FE13200BD6BA7 /* MenuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuIcon.png; path = Resources/MenuIcon.png; sourceTree = "<group>"; };
+		5500FDAB1E4FE13200BD6BA7 /* MenuIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MenuIcon@2x.png"; path = "Resources/MenuIcon@2x.png"; sourceTree = "<group>"; };
+		5500FDAC1E4FE13200BD6BA7 /* MenuItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuItemIcon.png; path = Resources/MenuItemIcon.png; sourceTree = "<group>"; };
+		5500FDAD1E4FE13200BD6BA7 /* MenuItemIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MenuItemIcon@2x.png"; path = "Resources/MenuItemIcon@2x.png"; sourceTree = "<group>"; };
 		5503472F1370A18800AE7681 /* StacksmithVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksmithVersion.h; sourceTree = "<group>"; };
 		55039F23136B52C70082E32E /* brush01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush01.png; path = Resources/brush01.png; sourceTree = "<group>"; };
 		55039F24136B52C70082E32E /* brush02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush02.png; path = Resources/brush02.png; sourceTree = "<group>"; };
@@ -1345,6 +1360,10 @@
 				554DBAB91A9B362300130864 /* MessageBoxIcon.tiff */,
 				554DBABA1A9B362300130864 /* MessageWatcherIcon.tiff */,
 				554DBABB1A9B362300130864 /* StackCanvasIcon.icns */,
+				5500FDAA1E4FE13200BD6BA7 /* MenuIcon.png */,
+				5500FDAB1E4FE13200BD6BA7 /* MenuIcon@2x.png */,
+				5500FDAC1E4FE13200BD6BA7 /* MenuItemIcon.png */,
+				5500FDAD1E4FE13200BD6BA7 /* MenuItemIcon@2x.png */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
 				555E53A3189351AA001487C1 /* PlaceholderMovie.mov */,
@@ -2037,6 +2056,7 @@
 				550346DA136F435800AE7681 /* BinaryDelta */,
 				556785E11379C8F5005CC245 /* Autoupdate.app */,
 				554E146A1CAF2D5F00430706 /* UI Tests.xctest */,
+				5500FDA91E4FA66800BD6BA7 /* fileop */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2224,6 +2244,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		5500FDA91E4FA66800BD6BA7 /* fileop */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = fileop;
+			remoteRef = 5500FDA81E4FA66800BD6BA7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		550346DA136F435800AE7681 /* BinaryDelta */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
@@ -2321,6 +2348,7 @@
 				552FF20F113F23F3005742C8 /* PAT_21.pbm in Resources */,
 				55405B78189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib in Resources */,
 				552FF210113F23F3005742C8 /* PAT_22.pbm in Resources */,
+				5500FDAE1E4FE13200BD6BA7 /* MenuIcon.png in Resources */,
 				55D872B51A7F011700D5FA30 /* CURS_3.tiff in Resources */,
 				552FF211113F23F3005742C8 /* PAT_23.pbm in Resources */,
 				552FF212113F23F3005742C8 /* PAT_24.pbm in Resources */,
@@ -2335,6 +2363,7 @@
 				552FF21A113F23F3005742C8 /* PAT_32.pbm in Resources */,
 				552FF21B113F23F3005742C8 /* PAT_33.pbm in Resources */,
 				552FF21C113F23F3005742C8 /* PAT_34.pbm in Resources */,
+				5500FDB01E4FE13200BD6BA7 /* MenuItemIcon.png in Resources */,
 				552FF21D113F23F3005742C8 /* PAT_35.pbm in Resources */,
 				552FF21E113F23F3005742C8 /* PAT_36.pbm in Resources */,
 				552FF21F113F23F3005742C8 /* PAT_37.pbm in Resources */,
@@ -2393,6 +2422,7 @@
 				55039F53136B52C80082E32E /* brush17.png in Resources */,
 				55039F54136B52C80082E32E /* brush18.png in Resources */,
 				55039F55136B52C80082E32E /* brush19.png in Resources */,
+				5500FDAF1E4FE13200BD6BA7 /* MenuIcon@2x.png in Resources */,
 				55039F56136B52C80082E32E /* brush20.png in Resources */,
 				55405BD718A59D06001D3C99 /* WILDTimerInfoViewController.xib in Resources */,
 				55039F57136B52C80082E32E /* brush21.png in Resources */,
@@ -2411,6 +2441,7 @@
 				55039F61136B52C80082E32E /* brush31.png in Resources */,
 				5500FD9E1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist in Resources */,
 				551B368E1A8FAC1E006AFDFE /* Home.xstk in Resources */,
+				5500FDB11E4FE13200BD6BA7 /* MenuItemIcon@2x.png in Resources */,
 				55039F62136B52C80082E32E /* brush32.png in Resources */,
 				5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */,
 				555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */,
