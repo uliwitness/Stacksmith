@@ -102,6 +102,7 @@ struct CCanvasEntry
 	for( size_t x = 0; x < self.owningDocument->GetNumMenus(); x++ )
 	{
 		currItem.mMenu = self.owningDocument->GetMenu( x );
+		currItem.mMenuItem = nullptr;
 		currItem.mStack = nullptr;
 		currItem.mBackground = nullptr;
 		currItem.mCard = nullptr;
