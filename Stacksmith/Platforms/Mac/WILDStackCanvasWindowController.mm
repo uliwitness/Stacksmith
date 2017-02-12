@@ -120,6 +120,9 @@ struct CCanvasEntry
 		currItem.mColumnIdx++;
 	}
 	
+	currItem.mMenu = nullptr;
+	currItem.mMenuItem = nullptr;
+	
 	for( size_t x = 0; x < self.owningDocument->GetNumStacks(); x++ )
 	{
 		currItem.mStack = self.owningDocument->GetStack( x );
