@@ -27,6 +27,11 @@ using namespace Carlson;
 -(void)	windowDidLoad
 {
 	//[self.window setLevel: NSNormalWindowLevel];
+	double fontSize = [[NSUserDefaults standardUserDefaults] doubleForKey: @"WILDMessageWatcherFontSize"];
+	NSFont * theFont = [NSFont systemFontOfSize: fontSize];
+	NSCell * dataCell = _messageList.tableColumns.firstObject.dataCell;
+	[dataCell setFont: theFont];
+	[_messageList setRowHeight: dataCell.cellSize.height];
 }
 
 -(void)	windowWillClose: (NSNotification *)notification
