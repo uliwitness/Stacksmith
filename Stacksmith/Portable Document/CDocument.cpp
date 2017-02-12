@@ -180,9 +180,7 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 			
 			while( currMenuElem )
 			{
-				CMenuRef	theMenu( new CMenu( this ) );
-				theMenu->LoadFromElement( currMenuElem );
-				mMenus.push_back( theMenu );
+				NewMenuWithElement( currMenuElem, EMenuDontMarkChanged );
 				
 				currMenuElem = currMenuElem->NextSiblingElement( "menu" );
 			}
@@ -582,14 +580,15 @@ void	CDocument::SetIndexOfMenu( CMenu* inItem, LEOInteger inIndex )
 }
 
 
-CMenu*	CDocument::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
+CMenu*	CDocument::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML, TMenuMarkChangedFlag inMarkChanged )
 {
 	CMenu	*	theMenu = new CMenu( this );
 	theMenu->LoadFromElement( inMenuXML );
 	mMenus.push_back( theMenu );
 	theMenu->Autorelease();
 	
-	IncrementChangeCount();
+	if( inMarkChanged == EMenuMarkChanged )
+		IncrementChangeCount();
 	
 	return theMenu;
 }

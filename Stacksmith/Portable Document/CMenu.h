@@ -25,6 +25,12 @@ namespace Carlson
 		EMenuItemStyle_Last
 	} TMenuItemStyle;
 	
+	typedef enum
+	{
+		EMenuItemDontMarkChanged,
+		EMenuItemMarkChanged
+	} TMenuItemMarkChangedFlag;
+	
 	
 	extern const char*	EMenuItemMarkCharChecked;
 	extern const char*	EMenuItemMarkCharMixed;
@@ -102,7 +108,7 @@ namespace Carlson
 
 		virtual std::string		GetTypeName() override			{ return "menu"; };
 		
-		virtual CMenuItem*		NewMenuItemWithElement( tinyxml2::XMLElement* inElement );
+		virtual CMenuItem*		NewMenuItemWithElement( tinyxml2::XMLElement* inElement, TMenuItemMarkChangedFlag markChanged = EMenuItemMarkChanged );
 		void					LoadFromElement( tinyxml2::XMLElement* inElement );
 		bool					SaveToElement( tinyxml2::XMLElement* inElement );
 

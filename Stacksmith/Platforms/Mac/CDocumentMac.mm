@@ -235,14 +235,15 @@ CDocumentMac::~CDocumentMac()
 }
 
 
-CMenu*	CDocumentMac::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML )
+CMenu*	CDocumentMac::NewMenuWithElement( tinyxml2::XMLElement* inMenuXML, TMenuMarkChangedFlag inMarkChanged )
 {
 	CMenu	*	theMenu = new CMenuMac( this );
 	theMenu->LoadFromElement( inMenuXML );
 	mMenus.push_back( theMenu );
 	theMenu->Autorelease();
 	
-	IncrementChangeCount();
+	if( inMarkChanged == EMenuMarkChanged )
+		IncrementChangeCount();
 	
 	if( CDocumentManagerMac::sCurrentMenuBarOwner == this )
 	{

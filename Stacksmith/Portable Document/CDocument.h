@@ -25,6 +25,12 @@ enum TOpenInvisibly
 	EOpenVisibly,
 	EOpenInvisibly
 };
+	
+typedef enum
+{
+	EMenuDontMarkChanged,
+	EMenuMarkChanged
+} TMenuMarkChangedFlag;
 
 
 class CDocumentManager	// Subclass this and instantiate it at startup. First subclass instantiated wins & becomes the shared singleton.
@@ -97,7 +103,7 @@ public:
 	CMenu*				GetMenuWithName( const std::string& inName );
 	LEOInteger			GetIndexOfMenu( CMenu* inMenu );
 	void				SetIndexOfMenu( CMenu* inMenu, LEOInteger inIndex );
-	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML );
+	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML, TMenuMarkChangedFlag inMarkChanged = EMenuMarkChanged );
 	
 	ObjectID			GetUniqueIDForStack();
 	ObjectID			GetUniqueIDForCard();

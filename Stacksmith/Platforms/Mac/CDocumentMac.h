@@ -51,7 +51,7 @@ public:
 	
 	virtual CStack*		NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) override;
 	
-	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML ) override;
+	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML, TMenuMarkChangedFlag inMarkChanged = EMenuMarkChanged ) override;
 	void				AddMacMenuForMenu( CMenu* currMenu );
 	void				AddItemsToMacMenuForMenu( WILDNSMenuPtr currMacMenu, CMenu* currMenu );
 	void				RemoveMacMenus();

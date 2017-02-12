@@ -15,12 +15,14 @@
 using namespace Carlson;
 
 
-CMenuItem*	CMenuMac::NewMenuItemWithElement( tinyxml2::XMLElement* inElement )
+CMenuItem*	CMenuMac::NewMenuItemWithElement( tinyxml2::XMLElement* inElement, TMenuItemMarkChangedFlag inMarkChanged )
 {
 	CMenuItemRef	newItem( new CMenuItemMac( this ), true );
 	newItem->LoadFromElement( inElement );
 	mItems.push_back( newItem );
-	mDocument->MenuIncrementedChangeCount( newItem, this, true );
+	
+	if( inMarkChanged == EMenuItemMarkChanged )
+		mDocument->MenuIncrementedChangeCount( newItem, this, true );
 	
 	return newItem;
 }

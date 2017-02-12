@@ -28,7 +28,7 @@ namespace Carlson {
 	public:
 		explicit CMenuMac( CDocument* inDocument ) : CMenu(inDocument) {}
 
-		virtual CMenuItem*	NewMenuItemWithElement( tinyxml2::XMLElement* inElement ) override;
+		virtual CMenuItem*	NewMenuItemWithElement( tinyxml2::XMLElement* inElement, TMenuItemMarkChangedFlag markChanged = EMenuItemMarkChanged ) override;
 
 		virtual WILDNSImagePtr	GetDisplayIcon() override;
 		virtual Class			GetPropertyEditorClass() override;

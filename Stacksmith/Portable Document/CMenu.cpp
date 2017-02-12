@@ -191,12 +191,14 @@ bool	CMenu::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 }
 
 
-CMenuItem*	CMenu::NewMenuItemWithElement( tinyxml2::XMLElement* inElement )
+CMenuItem*	CMenu::NewMenuItemWithElement( tinyxml2::XMLElement* inElement, TMenuItemMarkChangedFlag inMarkChanged )
 {
 	CMenuItemRef	newItem( new CMenuItem( this ), true );
 	newItem->LoadFromElement( inElement );
 	mItems.push_back( newItem );
-	mDocument->MenuIncrementedChangeCount( newItem, this, true );
+	
+	if( inMarkChanged == EMenuItemMarkChanged )
+		mDocument->MenuIncrementedChangeCount( newItem, this, true );
 
 	return newItem;
 }
@@ -219,9 +221,7 @@ void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
 	tinyxml2::XMLElement	*	currItemElem = inElement->FirstChildElement( "item" );
 	while( currItemElem )
 	{
-		CMenuItemRef		theItem( new CMenuItem( this ), true );
-		theItem->LoadFromElement( currItemElem );
-		mItems.push_back( theItem );
+		NewMenuItemWithElement( currItemElem, EMenuItemDontMarkChanged );
 
 		currItemElem = currItemElem->NextSiblingElement( "item" );
 	}
