@@ -313,12 +313,7 @@ Gw
         </view>
         <customObject id="fUI-gq-xOZ" customClass="WILDUserPropertyEditorController">
             <connections>
-                <outlet property="enabledSwitch" destination="UZh-mV-OmE" id="jbu-DD-rYw"/>
                 <outlet property="mTableView" destination="dLU-SV-Ocg" id="Lz3-ev-cz8"/>
-                <outlet property="messageField" destination="4I4-U3-17x" id="iwO-5l-EQc"/>
-                <outlet property="stylePopUp" destination="VI9-Xg-vN1" id="ZLc-QL-6MU"/>
-                <outlet property="toolTipField" destination="yHi-mV-o5L" id="L4U-fv-Vye"/>
-                <outlet property="visibleSwitch" destination="EzK-Fr-Arq" id="ahw-1e-mIT"/>
             </connections>
         </customObject>
     </objects>
