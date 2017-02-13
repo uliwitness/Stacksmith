@@ -1,19 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDMoviePlayerInfoViewController">
             <connections>
+                <outlet property="IDField" destination="6" id="RYP-Zv-7Jh"/>
                 <outlet property="bottomCoordinateField" destination="Bd4-Uf-RLV" id="ezc-7u-4es"/>
                 <outlet property="contentsEditorButton" destination="145" id="148"/>
                 <outlet property="controllerVisibleSwitch" destination="SGE-wM-0Wo" id="xv7-fO-T9Z"/>
+                <outlet property="editScriptButton" destination="25" id="x7g-Hc-RCy"/>
                 <outlet property="enabledSwitch" destination="9" id="32"/>
                 <outlet property="fillColorWell" destination="119" id="140"/>
                 <outlet property="horizontalPinningPopUp" destination="MNl-wm-rNm" id="bKg-Hj-5w9"/>
-                <outlet property="idField" destination="6" id="29"/>
                 <outlet property="leftCoordinateField" destination="rPb-kN-1WQ" id="ojp-Fv-8HL"/>
                 <outlet property="lineColorWell" destination="122" id="141"/>
                 <outlet property="lineWidthSlider" destination="150" id="155"/>
@@ -24,7 +27,6 @@
                 <outlet property="partNumberLabel" destination="7" id="31"/>
                 <outlet property="playingSwitch" destination="adR-aW-2HU" id="OkW-Xk-gRb"/>
                 <outlet property="rightCoordinateField" destination="t34-je-ftI" id="3K0-yP-6OL"/>
-                <outlet property="scriptEditorButton" destination="25" id="34"/>
                 <outlet property="shadowBlurRadiusSlider" destination="127" id="144"/>
                 <outlet property="shadowColorWell" destination="124" id="142"/>
                 <outlet property="shadowOffsetSlider" destination="125" id="143"/>
@@ -200,7 +202,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="doScriptEditorButton:" target="-2" id="37"/>
+                                            <action selector="doEditScriptButton:" target="-2" id="fiW-gl-U7o"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" id="106">
@@ -353,10 +355,10 @@
                                 <rect key="frame" x="10" y="33" width="425" height="297"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" id="KbP-Cd-cd7">
+                                    <box autoresizesSubviews="NO" boxType="custom" borderType="line" title="Box" titlePosition="noTitle" id="KbP-Cd-cd7">
                                         <rect key="frame" x="165" y="157" width="171" height="92"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <view key="contentView">
+                                        <view key="contentView" id="iVn-6A-2lY">
                                             <rect key="frame" x="1" y="1" width="169" height="90"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -463,14 +465,14 @@
                                         <rect key="frame" x="-1" y="18" width="431" height="276"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <clipView key="contentView" id="tYp-75-K9X">
-                                            <rect key="frame" x="1" y="17" width="429" height="258"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <rect key="frame" x="1" y="0.0" width="429" height="275"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="eiE-WQ-gho" id="BMC-XF-JJb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="429" height="19"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="429" height="258"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn identifier="WILDUserPropertyNameKey" width="116" minWidth="40" maxWidth="1000" id="BNF-mQ-X7Z">
@@ -506,7 +508,6 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="0ZG-tj-3P4">
                                             <rect key="frame" x="1" y="119" width="223" height="15"/>

@@ -1,25 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDButtonInfoViewController">
             <connections>
+                <outlet property="IDField" destination="6" id="Mfe-1T-BDa"/>
                 <outlet property="autoHighlightSwitch" destination="42" id="83"/>
                 <outlet property="bevelAngleSlider" destination="168" id="170"/>
                 <outlet property="bevelSlider" destination="162" id="166"/>
                 <outlet property="bottomCoordinateField" destination="y1d-fd-bZk" id="VG3-Gw-hU2"/>
                 <outlet property="contentsEditorButton" destination="111" id="147"/>
+                <outlet property="editScriptButton" destination="25" id="Xna-C3-yeU"/>
                 <outlet property="enabledSwitch" destination="9" id="32"/>
                 <outlet property="familyPopUp" destination="60" id="80"/>
                 <outlet property="fillColorWell" destination="114" id="137"/>
                 <outlet property="highlightedSwitch" destination="39" id="48"/>
                 <outlet property="horizontalPinningPopUp" destination="bSH-Db-8b1" id="HmB-de-8DI"/>
                 <outlet property="iconButton" destination="106" id="110"/>
-                <outlet property="idField" destination="6" id="29"/>
                 <outlet property="leftCoordinateField" destination="L7P-Er-Qgy" id="YX2-Es-dHB"/>
                 <outlet property="lineColorWell" destination="118" id="138"/>
                 <outlet property="lineWidthSlider" destination="150" id="156"/>
@@ -28,7 +30,6 @@
                 <outlet property="partNumberField" destination="5" id="30"/>
                 <outlet property="partNumberLabel" destination="7" id="31"/>
                 <outlet property="rightCoordinateField" destination="NG4-PD-7x3" id="eXj-pT-ARV"/>
-                <outlet property="scriptEditorButton" destination="25" id="34"/>
                 <outlet property="shadowBlurRadiusSlider" destination="134" id="141"/>
                 <outlet property="shadowColorWell" destination="121" id="139"/>
                 <outlet property="shadowOffsetSlider" destination="129" id="140"/>
@@ -224,7 +225,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="doScriptEditorButton:" target="-2" id="37"/>
+                                            <action selector="doEditScriptButton:" target="-2" id="KIg-W0-5Us"/>
                                         </connections>
                                     </button>
                                     <popUpButton verticalHuggingPriority="750" id="52">
@@ -461,7 +462,7 @@
                                 <rect key="frame" x="10" y="33" width="425" height="311"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" id="2OI-sm-0Of">
+                                    <box autoresizesSubviews="NO" boxType="custom" borderType="line" title="Box" titlePosition="noTitle" id="2OI-sm-0Of">
                                         <rect key="frame" x="165" y="171" width="171" height="92"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" id="YSG-oy-yWm">
@@ -571,8 +572,8 @@
                                         <rect key="frame" x="-3" y="18" width="431" height="290"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <clipView key="contentView" id="XRk-AC-PM6">
-                                            <rect key="frame" x="1" y="17" width="429" height="272"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <rect key="frame" x="1" y="0.0" width="429" height="289"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="1Nh-QL-drM" id="WOc-hw-X37">
                                                     <rect key="frame" x="0.0" y="0.0" width="429" height="272"/>
@@ -614,7 +615,6 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="lv0-8E-MT7">
                                             <rect key="frame" x="1" y="119" width="223" height="15"/>

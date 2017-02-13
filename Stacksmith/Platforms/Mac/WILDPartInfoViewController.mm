@@ -20,12 +20,9 @@ using namespace Carlson;
 
 @implementation WILDPartInfoViewController
 
-@synthesize scriptEditorButton;
-@synthesize nameField;
 @synthesize enabledSwitch;
 @synthesize visibleSwitch;
 @synthesize numberField;
-@synthesize idField;
 @synthesize partNumberField;
 @synthesize partNumberLabel;
 @synthesize fillColorWell;
@@ -35,7 +32,6 @@ using namespace Carlson;
 @synthesize shadowOffsetSlider;
 @synthesize contentsEditorButton;
 @synthesize lineWidthSlider;
-@synthesize userPropertyEditor;
 @synthesize toolTipField;
 @synthesize horizontalPinningPopUp;
 @synthesize verticalPinningPopUp;
@@ -47,7 +43,7 @@ using namespace Carlson;
 
 -(id)	initWithPart: (CPart*)inPart
 {
-    self = [super initWithNibName: NSStringFromClass([self class]) bundle: [NSBundle bundleForClass: [self class]]];
+    self = [super initWithConcreteObject: inPart];
     if( self )
 	{
         part = inPart;
@@ -60,12 +56,9 @@ using namespace Carlson;
 -(void)	dealloc
 {
 	part = NULL;
-	DESTROY(scriptEditorButton);
-	DESTROY(nameField);
 	DESTROY(enabledSwitch);
 	DESTROY(visibleSwitch);
 	DESTROY(numberField);
-	DESTROY(idField);
 	DESTROY(partNumberField);
 	DESTROY(partNumberLabel);
 	DESTROY(fillColorWell);
@@ -75,7 +68,6 @@ using namespace Carlson;
 	DESTROY(shadowOffsetSlider);
 	DESTROY(contentsEditorButton);
 	DESTROY(lineWidthSlider);
-	DESTROY(userPropertyEditor);
 	DESTROY(toolTipField);
 	
 	[super dealloc];
@@ -88,14 +80,11 @@ using namespace Carlson;
 	
 	[self.userPropertyEditor setPropertyContainer: part];
 	
-	[nameField setStringValue: [NSString stringWithUTF8String: part->GetName().c_str()]];
-	
 	CLayer*		parent = dynamic_cast<CLayer*>(part->GetParentObject( nullptr ));
 	NSString*	layerName = [[NSString stringWithUTF8String: parent->GetIdentityForDump()] capitalizedString];
 	[numberField setIntegerValue: parent->GetIndexOfPart( part, part->GetPartType() ) +1];
 	[partNumberLabel setStringValue: [NSString stringWithFormat: @"%@ Part Number:", layerName]];
 	[partNumberField setIntegerValue: parent->GetIndexOfPart( part, NULL ) +1];
-	[idField setIntegerValue: part->GetID()];
 	
 	CVisiblePart*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
@@ -166,12 +155,6 @@ using namespace Carlson;
 		[bottomCoordinateField setEnabled: NO];
 		[topCoordinateField setEnabled: NO];
 	}
-}
-
-
--(IBAction)	doScriptEditorButton: (id)sender
-{
-	part->OpenScriptEditorAndShowLine( SIZE_T_MAX );
 }
 
 
@@ -290,11 +273,7 @@ using namespace Carlson;
 
 -(void)	controlTextDidChange: (NSNotification *)notif
 {
-	if( [notif object] == nameField )
-	{
-		part->SetName( std::string( nameField.stringValue.UTF8String, [nameField.stringValue lengthOfBytesUsingEncoding: NSUTF8StringEncoding] ) );
-	}
-	else if( [notif object] == toolTipField )
+	if( [notif object] == toolTipField )
 	{
 		CVisiblePart*	visPart = dynamic_cast<CVisiblePart*>(part);
 		if( visPart )
@@ -310,6 +289,10 @@ using namespace Carlson;
 		{
 			visPart->SetRect( leftCoordinateField.integerValue, topCoordinateField.integerValue, rightCoordinateField.integerValue, bottomCoordinateField.integerValue );
 		}
+	}
+	else
+	{
+		[super controlTextDidChange: notif];
 	}
 }
 

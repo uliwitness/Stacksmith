@@ -1,24 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <development version="6300" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDWebBrowserInfoViewController">
             <connections>
+                <outlet property="IDField" destination="6" id="6Co-BF-0ae"/>
                 <outlet property="bottomCoordinateField" destination="A69-5Y-WQk" id="2cu-c7-w0q"/>
                 <outlet property="currentURLField" destination="113" id="blG-3r-c8n"/>
+                <outlet property="editScriptButton" destination="25" id="sJ5-xn-Nt3"/>
                 <outlet property="horizontalPinningPopUp" destination="CIc-ju-ydB" id="Y6J-J8-bgv"/>
-                <outlet property="idField" destination="6" id="29"/>
                 <outlet property="leftCoordinateField" destination="Oy2-ym-IUX" id="2Ey-kd-meH"/>
                 <outlet property="nameField" destination="11" id="27"/>
                 <outlet property="numberField" destination="4" id="28"/>
                 <outlet property="partNumberField" destination="5" id="30"/>
                 <outlet property="partNumberLabel" destination="7" id="31"/>
                 <outlet property="rightCoordinateField" destination="cvz-k8-Yo2" id="YLa-cT-QXI"/>
-                <outlet property="scriptEditorButton" destination="25" id="34"/>
                 <outlet property="toolTipField" destination="oRo-3h-2lo" id="993-0z-MAW"/>
                 <outlet property="topCoordinateField" destination="MOj-Gt-nCI" id="amJ-dD-Vuo"/>
                 <outlet property="userPropertyEditor" destination="aEe-bo-Afe" id="Qvh-7q-EG5"/>
@@ -155,7 +156,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="doScriptEditorButton:" target="-2" id="37"/>
+                                            <action selector="doEditScriptButton:" target="-2" id="jAS-bS-B8K"/>
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" id="113">
@@ -179,10 +180,10 @@
                                 <rect key="frame" x="10" y="33" width="453" height="164"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" id="mIQ-VJ-c1X">
+                                    <box autoresizesSubviews="NO" boxType="custom" borderType="line" title="Box" titlePosition="noTitle" id="mIQ-VJ-c1X">
                                         <rect key="frame" x="165" y="24" width="171" height="92"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <view key="contentView">
+                                        <view key="contentView" id="WtQ-DQ-w7k">
                                             <rect key="frame" x="1" y="1" width="169" height="90"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -289,8 +290,8 @@
                                         <rect key="frame" x="-1" y="18" width="457" height="143"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <clipView key="contentView" id="SL6-Fx-JRh">
-                                            <rect key="frame" x="1" y="17" width="455" height="125"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <rect key="frame" x="1" y="0.0" width="455" height="142"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="IkT-wg-qYD" id="ynB-T5-S4A">
                                                     <rect key="frame" x="0.0" y="0.0" width="455" height="125"/>
@@ -332,7 +333,6 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="qFj-c6-vuc">
                                             <rect key="frame" x="1" y="119" width="223" height="15"/>

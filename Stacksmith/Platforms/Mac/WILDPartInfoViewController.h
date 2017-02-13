@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "WILDConcreteObjectInfoViewController.h"
+
 
 namespace Carlson
 {
@@ -14,18 +16,12 @@ namespace Carlson
 }
 
 
-@class WILDUserPropertyEditorController;
-
-
-@interface WILDPartInfoViewController : NSViewController
+@interface WILDPartInfoViewController : WILDConcreteObjectInfoViewController
 {
 	Carlson::CPart	*		part;				// The card/bg part we're editing.
-	NSButton		*		scriptEditorButton;
-	NSTextField		*		nameField;
 	NSButton		*		enabledSwitch;
 	NSButton		*		visibleSwitch;
 	NSTextField		*		numberField;
-	NSTextField		*		idField;
 	NSTextField		*		partNumberField;
 	NSTextField		*		partNumberLabel;
 	NSColorWell		*		fillColorWell;
@@ -37,12 +33,9 @@ namespace Carlson
 	NSSlider		*		lineWidthSlider;
 }
 
-@property(retain)	IBOutlet NSButton			*		scriptEditorButton;
-@property(retain)	IBOutlet NSTextField		*		nameField;
 @property(retain)	IBOutlet NSButton			*		enabledSwitch;
 @property(retain)	IBOutlet NSButton			*		visibleSwitch;
 @property(retain)	IBOutlet NSTextField		*		numberField;
-@property(retain)	IBOutlet NSTextField		*		idField;
 @property(retain)	IBOutlet NSTextField		*		partNumberField;
 @property(retain)	IBOutlet NSTextField		*		partNumberLabel;
 @property(retain)	IBOutlet NSColorWell		*		fillColorWell;
@@ -52,7 +45,6 @@ namespace Carlson
 @property(retain)	IBOutlet NSSlider			*		shadowOffsetSlider;
 @property(retain)	IBOutlet NSButton			*		contentsEditorButton;
 @property(retain)	IBOutlet NSSlider			*		lineWidthSlider;
-@property(retain)	IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
 @property(retain)	IBOutlet NSTextField		*		toolTipField;
 @property(assign)	IBOutlet NSPopUpButton		*		horizontalPinningPopUp;
 @property(assign)	IBOutlet NSPopUpButton		*		verticalPinningPopUp;
@@ -63,7 +55,6 @@ namespace Carlson
 
 -(id)		initWithPart: (Carlson::CPart*)inPart;
 
--(IBAction)	doScriptEditorButton: (id)sender;
 -(IBAction) doEnabledSwitchToggled:(id)sender;
 -(IBAction) doVisibleSwitchToggled:(id)sender;
 -(IBAction)	doContentsEditorButton: (id)sender;
