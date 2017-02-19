@@ -153,6 +153,9 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	NSString *string = targetView.string;
 	NSUInteger numberOfLines = 0, index = 0;
 
+	if( string.length == 0 )
+		return;
+
 	for( ; index <= charIndex; numberOfLines++ )
 		index = NSMaxRange([string lineRangeForRange:NSMakeRange(index, 0)]);
 	
