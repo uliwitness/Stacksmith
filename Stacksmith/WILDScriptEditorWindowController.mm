@@ -13,6 +13,7 @@
 #include "CMacPartBase.h"
 #include "CStackMac.h"
 #include "CDocument.h"
+#include "CCodeSnippets.h"
 #import "UKHelperMacros.h"
 
 
@@ -244,7 +245,10 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 @end
 
 
-@interface WILDScriptEditorWindowController () <NSToolbarDelegate,NSPopoverDelegate,WILDScriptEditorHandlerListDelegate>
+@interface WILDScriptEditorWindowController () <NSToolbarDelegate,NSPopoverDelegate,WILDScriptEditorHandlerListDelegate,UKSyntaxColoredTextViewDelegate>
+{
+	CCodeSnippets		codeBlocksList;
+}
 
 @end
 
@@ -308,6 +312,22 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	mTextView.automaticQuoteSubstitutionEnabled = NO;
 	mTextView.automaticDashSubstitutionEnabled = NO;
 	mTextView.automaticTextReplacementEnabled = NO;
+	
+	NSNib * sectionHeaderNib = [[[NSNib alloc] initWithNibNamed: @"WILDScriptEditorCodeBlocksSectionHeader" bundle: nil] autorelease];
+	[self.codeBlocksListView registerNib: sectionHeaderNib forSupplementaryViewOfKind: NSCollectionElementKindSectionHeader withIdentifier: @"WILDScriptEditorCollectionViewSectionHeader"];
+	NSNib * theNib = [[[NSNib alloc] initWithNibNamed: @"WILDScriptEditorWindowController" bundle: nil] autorelease];
+	[self.codeBlocksListView registerNib: theNib forItemWithIdentifier: @"WILDScriptEditorCollectionViewItem"];
+	[self rebuildCodeBlocksList];
+}
+
+
+-(void)	rebuildCodeBlocksList
+{
+	codeBlocksList.Clear();
+	std::vector<CAddHandlerListEntry> addHandlerList = mContainer->GetAddHandlerList();
+	codeBlocksList.AddSectionsAndBlocksFromHandlerList( addHandlerList );
+	
+	[self.codeBlocksListView reloadData];
 }
 
 
@@ -371,6 +391,8 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 			[mPopUpButton setEnabled: YES];
 		}
 	}
+
+	[self rebuildCodeBlocksList];
 }
 
 
@@ -432,21 +454,20 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 -(IBAction)	addHandler: (id)sender
 {
-	if( mAddHandlersPopover )
-	{
-		[mAddHandlersPopover close];
-	}
-	else
-	{
-		mAddHandlersPopover = [[NSPopover alloc] init];
-		std::vector<CAddHandlerListEntry> handlers = mContainer->GetAddHandlerList();
-		WILDScriptEditorHandlerListPopoverViewController	*	vc = [[[WILDScriptEditorHandlerListPopoverViewController alloc] initWithHandlerList: handlers] autorelease];
-		vc.delegate = self;
-		mAddHandlersPopover.contentViewController = vc;
-		mAddHandlersPopover.behavior = NSPopoverBehaviorTransient;
-		mAddHandlersPopover.delegate = self;
-		[mAddHandlersPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMaxYEdge];
-	}
+//	if( mAddHandlersPopover )
+//	{
+//		[mAddHandlersPopover close];
+//	}
+//	else
+//	{
+//		mAddHandlersPopover = [[NSPopover alloc] init];
+//		WILDScriptEditorHandlerListPopoverViewController	*	vc = [[[WILDScriptEditorHandlerListPopoverViewController alloc] initWithHandlerList: mAddHandlerList] autorelease];
+//		vc.delegate = self;
+//		mAddHandlersPopover.contentViewController = vc;
+//		mAddHandlersPopover.behavior = NSPopoverBehaviorTransient;
+//		mAddHandlersPopover.delegate = self;
+//		[mAddHandlersPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMaxYEdge];
+//	}
 }
 
 
@@ -579,6 +600,45 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	[self close];
 }
+
+
+-(NSInteger)	numberOfSectionsInCollectionView: (NSCollectionView *)collectionView
+{
+	return codeBlocksList.GetNumSections();
+}
+
+
+-(NSView *)	collectionView:(NSCollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+	NSView * theView = nil;
+	if( [kind isEqualToString: NSCollectionElementKindSectionHeader] )
+	{
+		theView = [collectionView makeSupplementaryViewOfKind: kind withIdentifier: @"WILDScriptEditorCollectionViewSectionHeader" forIndexPath: indexPath];
+		NSTextField* titleView = ((NSBox*)theView).contentView.subviews.firstObject;
+		titleView.stringValue = [NSString stringWithUTF8String: codeBlocksList.GetSectionAt(indexPath.section).GetName().c_str()];
+	}
+	return theView;
+}
+
+
+-(NSInteger) collectionView:(NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+	return codeBlocksList.GetSectionAt(section).GetNumBlockEntries();
+}
+
+
+-(NSCollectionViewItem *) collectionView: (NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath: (NSIndexPath *)indexPath
+{
+	CCodeSnippetsBlockEntry& currEntry = codeBlocksList.GetBlockEntryAt( indexPath.section, indexPath.item );
+	
+	NSCollectionViewItem * theItem = [collectionView makeItemWithIdentifier: @"WILDScriptEditorCollectionViewItem" forIndexPath: indexPath];
+	
+	theItem.textField.stringValue = [NSString stringWithUTF8String: currEntry.GetName().c_str()];
+	theItem.representedObject = indexPath;
+	
+	return theItem;
+}
+
 
 
 -(void)	observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

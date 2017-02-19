@@ -345,6 +345,8 @@
 		558AA68E1CD90133008AC095 /* WILDCheckerboardFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 558AA68D1CD90133008AC095 /* WILDCheckerboardFilter.cikernel */; };
 		558FB9AC1A75438E0034FD23 /* Empty Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 558FB9A61A7543700034FD23 /* Empty Stacks */; };
 		559331BD18DB06190061CC37 /* CMediaCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559331BB18DB06190061CC37 /* CMediaCache.mm */; };
+		5593D0591E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5593D0581E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib */; };
+		5593D0651E58B03300E7F31D /* CCodeSnippets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5593D0631E58B03300E7F31D /* CCodeSnippets.cpp */; };
 		55943B1C171F675E0051166C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55943B1B171F675E0051166C /* WebKit.framework */; };
 		559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */; };
 		559700F3137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */; };
@@ -1037,6 +1039,9 @@
 		558FB9A61A7543700034FD23 /* Empty Stacks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Empty Stacks"; path = "Resources/Empty Stacks"; sourceTree = "<group>"; };
 		559331BB18DB06190061CC37 /* CMediaCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CMediaCache.mm; path = Platforms/Mac/CMediaCache.mm; sourceTree = "<group>"; };
 		559331BC18DB06190061CC37 /* CMediaCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMediaCache.h; path = Platforms/Mac/CMediaCache.h; sourceTree = "<group>"; };
+		5593D0581E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDScriptEditorCodeBlocksSectionHeader.xib; path = Platforms/Mac/WILDScriptEditorCodeBlocksSectionHeader.xib; sourceTree = "<group>"; };
+		5593D0631E58B03300E7F31D /* CCodeSnippets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCodeSnippets.cpp; path = Editor/CCodeSnippets.cpp; sourceTree = "<group>"; };
+		5593D0641E58B03300E7F31D /* CCodeSnippets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCodeSnippets.h; path = Editor/CCodeSnippets.h; sourceTree = "<group>"; };
 		55943B1B171F675E0051166C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = ../../../../../System/Library/Frameworks/WebKit.framework; sourceTree = "<group>"; };
 		559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDIrisOpenFilter.cikernel; path = "Custom Effects/WILDIrisOpenFilter.cikernel"; sourceTree = "<group>"; };
 		559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDBarnDoorCloseFilter.cikernel; path = "Custom Effects/WILDBarnDoorCloseFilter.cikernel"; sourceTree = "<group>"; };
@@ -1785,6 +1790,7 @@
 				55405B7D189E8FE8001D3C99 /* WILDScriptEditorWindowController.h */,
 				55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */,
 				55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */,
+				5593D0581E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib */,
 				55C476681A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib */,
 				55BE06471CE8DE3E004CB2FC /* WILDInspectorWindowController.h */,
 				55BE06481CE8DE3E004CB2FC /* WILDInspectorWindowController.mm */,
@@ -1951,6 +1957,8 @@
 				55AC96191870D50400488B51 /* CTinyXMLUtils.cpp */,
 				559BA9A018A84BD800760273 /* CMap.h */,
 				559BA99F18A84BD700760273 /* CMap.cpp */,
+				5593D0641E58B03300E7F31D /* CCodeSnippets.h */,
+				5593D0631E58B03300E7F31D /* CCodeSnippets.cpp */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -2460,6 +2468,7 @@
 				554F42F018BB4F0400F5F106 /* EndianStuff.h in Resources */,
 				55039F51136B52C80082E32E /* brush15.png in Resources */,
 				55039F52136B52C80082E32E /* brush16.png in Resources */,
+				5593D0591E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib in Resources */,
 				55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */,
 				55039F53136B52C80082E32E /* brush17.png in Resources */,
 				55039F54136B52C80082E32E /* brush18.png in Resources */,
@@ -2835,6 +2844,7 @@
 				55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */,
 				55AF101F18B6BFFD00819AE9 /* WILDScrollView.mm in Sources */,
 				55BD35731A8FF88300D0BAF7 /* UKPushbackMessenger.m in Sources */,
+				5593D0651E58B03300E7F31D /* CCodeSnippets.cpp in Sources */,
 				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
 				551583E318C3BF9200DB3431 /* WILDInvisiblePlayerView.mm in Sources */,
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,

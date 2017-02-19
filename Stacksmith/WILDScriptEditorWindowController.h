@@ -28,6 +28,8 @@
 	NSPopover				*					mAddHandlersPopover;
 }
 
+@property (assign) IBOutlet NSCollectionView	*	codeBlocksListView;
+
 -(id)		initWithScriptContainer: (Carlson::CConcreteObject*)inContainer;
 
 -(IBAction)	handlerPopupSelectionChanged: (id)sender;
