@@ -572,6 +572,12 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 }
 
 
+-(void)	textViewControllerHandleEnterKey: (UKSyntaxColoredTextViewController*)sender
+{
+	[self close];
+}
+
+
 -(void)	observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
 	if( context == kWILDScriptEditorWindowControllerKVOContext )
