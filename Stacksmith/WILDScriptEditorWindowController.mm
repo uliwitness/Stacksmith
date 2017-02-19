@@ -521,7 +521,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	for( NSIndexPath* currItemPath in indexPaths )
 	{
 		CCodeSnippetsBlockEntry& currEntry = codeBlocksList.GetBlockEntryAt( currItemPath.section, currItemPath.item );
-		NSString * codeSnippet = [NSString stringWithUTF8String: currEntry.mHandlerEntry.mHandlerTemplate.c_str()];
+		NSString * codeSnippet = [[NSString stringWithUTF8String: currEntry.mHandlerEntry.mHandlerTemplate.c_str()] stringByAppendingString: @"\n\n"];
 		[thePasteboardData addObject: codeSnippet];
 	}
 	
