@@ -25,13 +25,6 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowControllerKVOContext;
 
 
-@protocol WILDScriptEditorHandlerListDelegate <NSObject>
-
--(void)	scriptEditorAddHandlersPopupDidSelectHandler: (const CAddHandlerListEntry&)inDictionary;
-
-@end
-
-
 @interface WILDScriptEditorRulerView : NSRulerView
 {
 	NSTextView			*	targetView;
@@ -172,80 +165,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 @end
 
 
-@interface WILDScriptEditorHandlerListPopoverViewController : NSViewController <NSTableViewDataSource>
-{
-	std::vector<CAddHandlerListEntry>	mHandlerList;
-}
-
-@property (nonatomic,assign) IBOutlet NSTableView*		handlersTable;
-@property (nonatomic,assign) id<WILDScriptEditorHandlerListDelegate>	delegate;
-
-@end
-
-
-@implementation WILDScriptEditorHandlerListPopoverViewController
-
--(id)	initWithHandlerList: (const std::vector<CAddHandlerListEntry>&)handlers
-{
-	NSBundle	*	myBundle = [NSBundle bundleForClass: [self class]];
-	self = [super initWithNibName: @"WILDScriptEditorHandlerListPopover" bundle: myBundle];
-	if( self )
-	{
-		mHandlerList = handlers;
-	}
-	return self;
-}
-
-
--(NSInteger)	numberOfRowsInTableView: (NSTableView *)tableView
-{
-	return mHandlerList.size();
-}
-
-
--(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
-{
-	const CAddHandlerListEntry&	currHandler = mHandlerList[row];
-	if( currHandler.mHandlerDescription.size() > 0 )
-	{
-		NSFont	*	nameFont = (currHandler.mFlags & EHandlerListEntryAlreadyPresentFlag) ? [NSFont systemFontOfSize: [NSFont smallSystemFontSize]] : [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]];
-		NSColor	*	nameColor = (currHandler.mFlags & EHandlerListEntryAlreadyPresentFlag) ? [NSColor grayColor] : [NSColor blackColor];
-		NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithUTF8String: currHandler.mHandlerName.c_str()] attributes: @{ NSFontAttributeName: nameFont, NSForegroundColorAttributeName: nameColor }] autorelease];
-		NSMutableAttributedString	*	greyDesc = [[[NSMutableAttributedString alloc] initWithString: [@" • " stringByAppendingString: [NSString stringWithUTF8String: currHandler.mHandlerDescription.c_str()]] attributes: @{ NSFontAttributeName: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]], NSForegroundColorAttributeName: [NSColor grayColor] }] autorelease];
-		
-		[attrStr appendAttributedString: greyDesc];
-		
-		return attrStr;
-	}
-	else
-	{
-		return [NSString stringWithUTF8String: currHandler.mHandlerName.c_str()];
-	}
-}
-
-
--(BOOL)	tableView: (NSTableView *)tableView isGroupRow: (NSInteger)row
-{
-	const CAddHandlerListEntry&	currHandler = mHandlerList[row];
-	return currHandler.mType == EHandlerEntryGroupHeader;
-}
-
-
--(void)	tableViewSelectionDidChange: (NSNotification*)notif
-{
-	if( self.handlersTable.selectedRow == -1 )
-		return;	// Nothing selected, nothing to do.
-	const CAddHandlerListEntry&	currHandler = mHandlerList[self.handlersTable.selectedRow];
-	if( currHandler.mType == EHandlerEntryGroupHeader )	// Don't let the user insert handlers named after headlines.
-		return;
-	
-	[self.delegate scriptEditorAddHandlersPopupDidSelectHandler: currHandler];
-}
-
-@end
-
-
-@interface WILDScriptEditorWindowController () <NSToolbarDelegate,NSPopoverDelegate,WILDScriptEditorHandlerListDelegate,UKSyntaxColoredTextViewDelegate>
+@interface WILDScriptEditorWindowController () <NSToolbarDelegate,UKSyntaxColoredTextViewDelegate>
 {
 	CCodeSnippets		codeBlocksList;
 }
@@ -449,54 +369,6 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	NSNumber*	destLineObj = [mPopUpButton.selectedItem representedObject];
 	[mSyntaxController goToLine: [destLineObj integerValue]];
-}
-
-
--(IBAction)	addHandler: (id)sender
-{
-//	if( mAddHandlersPopover )
-//	{
-//		[mAddHandlersPopover close];
-//	}
-//	else
-//	{
-//		mAddHandlersPopover = [[NSPopover alloc] init];
-//		WILDScriptEditorHandlerListPopoverViewController	*	vc = [[[WILDScriptEditorHandlerListPopoverViewController alloc] initWithHandlerList: mAddHandlerList] autorelease];
-//		vc.delegate = self;
-//		mAddHandlersPopover.contentViewController = vc;
-//		mAddHandlersPopover.behavior = NSPopoverBehaviorTransient;
-//		mAddHandlersPopover.delegate = self;
-//		[mAddHandlersPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMaxYEdge];
-//	}
-}
-
-
--(void)	popoverDidClose:(NSNotification *)notification
-{
-	DESTROY(mAddHandlersPopover);
-}
-
-
--(void)	scriptEditorAddHandlersPopupDidSelectHandler: (const CAddHandlerListEntry&)inHandler
-{
-	NSString*	handlerName = [NSString stringWithUTF8String: inHandler.mHandlerName.c_str()];
-	NSNumber*	destLineObj = [[mPopUpButton itemWithTitle: handlerName.lowercaseString] representedObject];
-	if( destLineObj )
-	{
-		[mSyntaxController goToLine: [destLineObj integerValue]];
-	}
-	else
-	{
-		NSString	*	str = [NSString stringWithUTF8String: inHandler.mHandlerTemplate.c_str()];
-		NSMutableAttributedString	*	attrStr = [[[NSMutableAttributedString alloc] initWithString: str attributes: mSyntaxController.defaultTextAttributes] autorelease];
-		NSMutableAttributedString	*	newlinesAttrStr = [[[NSMutableAttributedString alloc] initWithString: @"\n\n" attributes: mSyntaxController.defaultTextAttributes] autorelease];
-		if( mTextView.textStorage.length > 0 )
-			[attrStr insertAttributedString: newlinesAttrStr atIndex: 0];
-		[mTextView.textStorage appendAttributedString: attrStr];
-		
-		[self reformatText];
-	}
-	[mAddHandlersPopover close];
 }
 
 
