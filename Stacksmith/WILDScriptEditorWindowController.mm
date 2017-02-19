@@ -402,10 +402,13 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 -(void)	windowWillClose: (NSNotification*)notification
 {
-	mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
-	CMacScriptableObjectBase* msob = dynamic_cast<CMacScriptableObjectBase*>(mContainer);
-	if( msob )
-		msob->SetMacScriptEditor(nil);
+	if( mContainer )
+	{
+		mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
+		CMacScriptableObjectBase* msob = dynamic_cast<CMacScriptableObjectBase*>(mContainer);
+		if( msob )
+			msob->SetMacScriptEditor(nil);
+	}
 }
 
 
