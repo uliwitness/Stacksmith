@@ -536,11 +536,11 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		[self reformatText];
 		return YES;
 	}
-//	else if( commandSelector == @selector(insertNewline:) )
-//	{
-//		[self performSelector: @selector(reformatText) withObject: nil afterDelay: 0.0];
-//		return NO;
-//	}
+	else if( commandSelector == @selector(insertNewline:) )
+	{
+		[self performSelector: @selector(reformatText) withObject: nil afterDelay: 0.0];
+		return NO;
+	}
 	else
 		return NO;
 }
