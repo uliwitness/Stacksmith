@@ -468,6 +468,56 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 }
 
 
+-(void) textViewControllerTextDidChange: (UKSyntaxColoredTextViewController*)sender;
+{
+	mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
+
+	size_t			theLine = 0;
+	size_t			errOffset = 0;
+	size_t			x = 0;
+	const char*		currErrMsg = "";
+	LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( mContainer->GetScript().c_str(), mContainer->GetScript().length(), 0 );
+	for( x = 0; currErrMsg != NULL; x++ )
+	{
+		LEOParserGetNonFatalErrorMessageAtIndex( x, &currErrMsg, &theLine, &errOffset );
+		if( !currErrMsg )
+			break;
+		fprintf( stderr, "Error: %s\n", currErrMsg );
+	}
+	if( parseTree )
+	{
+		LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
+	
+		[mPopUpButton removeAllItems];
+		const char*	theName = "";
+		
+		bool		isCommand = false;
+		for( x = 0; theName != NULL; x++ )
+		{
+			LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isCommand );
+			if( !theName ) break;
+			if( theName[0] == ':' )	// Skip any fake internal handlers we add.
+				continue;
+			NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
+			[theItem setImage: [NSImage imageNamed: isCommand ? @"CommandHandlerIcon" : @"FunctionHandlerIcon"]];
+			[theItem setRepresentedObject: @(theLine)];
+		}
+		LEOCleanUpDisplayInfoTable( displayInfo );
+		LEOCleanUpParseTree( parseTree );
+	
+		if( x == 0 )	// We added no items?
+		{
+			[mPopUpButton addItemWithTitle: @"None"];
+			[mPopUpButton setEnabled: NO];
+		}
+		else
+		{
+			[mPopUpButton setEnabled: YES];
+		}
+	}
+}
+
+
 -(void)	textViewControllerHandleEnterKey: (UKSyntaxColoredTextViewController*)sender
 {
 	[self close];
