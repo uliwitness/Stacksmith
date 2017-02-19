@@ -890,16 +890,17 @@ void	CDocumentManager::SaveAll()
 
 bool	CDocumentManager::HaveDocuments()
 {
+	bool	haveDocuments = false;
 	for( auto currDoc : mOpenDocuments )
 	{
 		if( currDoc == mHomeDocument )
 		{
-			return currDoc->HasVisibleStacks();
+			haveDocuments |= currDoc->HasVisibleStacks();
 		}
 		else
-			return true;
+			haveDocuments = true;
 	}
-	return false;
+	return haveDocuments;
 }
 
 
