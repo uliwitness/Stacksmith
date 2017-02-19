@@ -366,6 +366,10 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 			[mPopUpButton addItemWithTitle: @"None"];
 			[mPopUpButton setEnabled: NO];
 		}
+		else
+		{
+			[mPopUpButton setEnabled: YES];
+		}
 	}
 }
 
