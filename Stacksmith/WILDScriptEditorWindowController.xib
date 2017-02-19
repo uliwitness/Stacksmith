@@ -41,7 +41,7 @@
                                     <rect key="frame" x="1" y="1" width="250" height="602"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView id="bBq-XX-eIJ" userLabel="Code Blocks Collection View">
+                                        <collectionView selectable="YES" id="bBq-XX-eIJ" userLabel="Code Blocks Collection View">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="602"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" id="a4N-23-uI1">
@@ -123,19 +123,11 @@
             </connections>
         </collectionViewItem>
         <customView misplaced="YES" id="Xd8-jY-0nF" userLabel="Collection View Item">
-            <rect key="frame" x="0.0" y="0.0" width="192" height="96"/>
+            <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button misplaced="YES" id="f0V-gL-6Jb">
-                    <rect key="frame" x="0.0" y="20" width="192" height="76"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAdvanced" imagePosition="above" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YoB-E4-XPg">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" allowsCharacterPickerTouchBarItem="NO" id="8Vy-oF-3Xw">
-                    <rect key="frame" x="-2" y="0.0" width="196" height="17"/>
+                    <rect key="frame" x="-2" y="0.0" width="154" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Code Block" id="7X6-Hu-irs">
                         <font key="font" metaFont="smallSystem"/>
@@ -143,6 +135,14 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button misplaced="YES" id="f0V-gL-6Jb">
+                    <rect key="frame" x="59" y="18" width="32" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAdvanced" imagePosition="above" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YoB-E4-XPg">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <point key="canvasLocation" x="-226" y="-529"/>
         </customView>

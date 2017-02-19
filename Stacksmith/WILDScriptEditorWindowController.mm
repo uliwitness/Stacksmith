@@ -640,6 +640,24 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 }
 
 
+- (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths toPasteboard:(NSPasteboard *)pasteboard
+{
+	NSMutableArray * thePasteboardData = [NSMutableArray array];
+	
+	[pasteboard declareTypes: @[ NSStringPboardType ] owner: nil];
+	
+	for( NSIndexPath* currItemPath in indexPaths )
+	{
+		CCodeSnippetsBlockEntry& currEntry = codeBlocksList.GetBlockEntryAt( currItemPath.section, currItemPath.item );
+		NSString * codeSnippet = [NSString stringWithUTF8String: currEntry.mHandlerEntry.mHandlerTemplate.c_str()];
+		[thePasteboardData addObject: codeSnippet];
+	}
+	
+	[pasteboard writeObjects: thePasteboardData];
+	
+	return YES;
+}
+
 
 -(void)	observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

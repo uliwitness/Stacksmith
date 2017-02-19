@@ -27,7 +27,7 @@ namespace Carlson
 	class CCodeSnippetsBlockEntry : public CCodeSnippetsEntry
 	{
 	public:
-		virtual std::string	GetName() override	{ return mName; }
+		virtual std::string		GetName() override	{ return mName; }
 		virtual void			SetName( std::string inName )	{ mName = inName; }
 		std::string	GetImageName()				{ return mImageName; }
 		virtual void			SetImageName( std::string inImageName )	{ mImageName = inImageName; }
