@@ -32,7 +32,6 @@
 
 -(IBAction)	doAutoHighlightSwitchToggled:(id)sender;
 -(IBAction)	doHighlightedSwitchToggled:(id)sender;
--(IBAction)	doHighlightedSwitchToggled:(id)sender;
 -(IBAction)	doSharedHighlightSwitchToggled:(id)sender;
 -(IBAction) doFamilyPopUpChanged:(id)sender;
 -(IBAction) doStylePopUpChanged:(id)sender;
