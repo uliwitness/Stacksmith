@@ -522,10 +522,10 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		LEOCleanUpDisplayInfoTable( displayInfo );
 		LEOCleanUpParseTree( parseTree );
 		
-		for( const NSRange& currRange : handlerRanges )
-		{
-			NSLog(@"%lu,%lu", currRange.location, currRange.length);
-		}
+//		for( const NSRange& currRange : handlerRanges )
+//		{
+//			NSLog(@"%lu,%lu", currRange.location, currRange.length);
+//		}
 		
 		if( x == 0 )	// We added no items?
 		{
@@ -548,7 +548,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 -(void) textViewController: (UKSyntaxColoredTextViewController*)sender willInsertSnippetInRange: (NSRange*)insertionRange
 {
-	NSRange oldInsertionRange = *insertionRange;
+//	NSRange oldInsertionRange = *insertionRange;
 	
 	// find line matching insertionRange.location
 	NSUInteger insertionLine = [sender lineAtOffset: insertionRange->location];
@@ -561,7 +561,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		{
 			// If it is, adjust the line to be before/after the given handler (whatever is closer).
 			newInsertionLine = currRange.location -1;
-			NSLog( @"\tadjusted!" );
+//			NSLog( @"\tadjusted!" );
 			break;
 		}
 	}
@@ -570,7 +570,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	if( newInsertionLine != insertionLine )
 		insertionRange->location = [sender rangeForLine: newInsertionLine].location;
 	
-	NSLog(@"%@ -> %@ [%lu -> %lu]", NSStringFromRange(oldInsertionRange), NSStringFromRange(*insertionRange), insertionLine, newInsertionLine);
+//	NSLog(@"%@ -> %@ [%lu -> %lu]", NSStringFromRange(oldInsertionRange), NSStringFromRange(*insertionRange), insertionLine, newInsertionLine);
 }
 
 
