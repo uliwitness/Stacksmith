@@ -154,6 +154,26 @@
 		<dict>
 			<key>Charset</key>
 			<string>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890</string>
+			<key>Color</key>
+			<array>
+				<real>0.2</real>
+				<real>0.5</real>
+				<real>0.2</real>
+			</array>
+			<key>Keywords</key>
+			<array>
+				<string>__capsule__</string>
+			</array>
+			<key>Name</key>
+			<string>Capsules</string>
+			<key>Type</key>
+			<string>Keywords</string>
+			<key>Style</key>
+			<string>Capsule</string>
+		</dict>
+		<dict>
+			<key>Charset</key>
+			<string>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890</string>
 			<key>Name</key>
 			<string>UserIdentifiers</string>
 			<key>Type</key>
