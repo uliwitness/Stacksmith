@@ -11,6 +11,7 @@
 
 
 @class UKSyntaxColoredTextViewController;
+@class ULISyntaxColoredTextView;
 @class WILDScriptEditorRulerView;
 
 
@@ -18,7 +19,7 @@
 {
 	Carlson::CConcreteObject*					mContainer;			// Not retained, this is our owner!
 	IBOutlet NSScrollView*						mTextScrollView;	// Scroll view around mTextView.
-	IBOutlet NSTextView*						mTextView;			// Script text.
+	IBOutlet ULISyntaxColoredTextView*			mTextView;			// Script text.
 	WILDScriptEditorRulerView	*				mTextBreakpointsRulerView;	// View at left of text that the user can click in to set/remove breakpoints.
 	IBOutlet NSPopUpButton*						mPopUpButton;		// Handlers popup.
 	IBOutlet UKSyntaxColoredTextViewController*	mSyntaxController;	// Provides some extra functionality like syntax coloring.

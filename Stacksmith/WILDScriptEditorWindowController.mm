@@ -200,6 +200,9 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	[super awakeFromNib];
 	
+	mTextView.customSnippetPasteboardType = @"WILDCodeSnippetPBoardType";
+	mTextView.customSnippetsInsertionGranularity = NSSelectByParagraph;
+	
 	// Set up a ruler view (for indicating what lines breakpoints are on and setting/removing them):
 	mTextBreakpointsRulerView = [[WILDScriptEditorRulerView alloc] initWithTargetView: mTextView];
 	[mTextScrollView setHasVerticalRuler: YES];
@@ -566,7 +569,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	NSMutableArray * thePasteboardData = [NSMutableArray array];
 	
-	[pasteboard declareTypes: @[ NSStringPboardType ] owner: nil];
+	[pasteboard declareTypes: @[ @"WILDCodeSnippetPBoardType" ] owner: nil];
 	
 	for( NSIndexPath* currItemPath in indexPaths )
 	{
@@ -575,7 +578,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		[thePasteboardData addObject: codeSnippet];
 	}
 	
-	[pasteboard writeObjects: thePasteboardData];
+	[pasteboard setString: thePasteboardData.firstObject forType: @"WILDCodeSnippetPBoardType"];
 	
 	return YES;
 }
