@@ -167,7 +167,8 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 @interface WILDScriptEditorWindowController () <NSToolbarDelegate,UKSyntaxColoredTextViewDelegate>
 {
-	CCodeSnippets		codeBlocksList;
+	CCodeSnippets			codeBlocksList;
+	std::vector<NSRange>	handlerRanges;
 }
 
 @end
@@ -291,10 +292,12 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		const char*	theName = "";
 		
 		bool		isCommand = false;
+		bool		isHandlerEnd = false;
 		for( x = 0; theName != NULL; x++ )
 		{
-			LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isCommand );
+			LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isHandlerEnd, &isCommand );
 			if( !theName ) break;
+			if( isHandlerEnd ) continue;
 			if( theName[0] == ':' )	// Skip any fake internal handlers we add.
 				continue;
 			NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
@@ -492,22 +495,38 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
 	
 		[mPopUpButton removeAllItems];
+		handlerRanges.clear();
 		const char*	theName = "";
 		
 		bool		isCommand = false;
+		bool		isHandlerEnd = false;
 		for( x = 0; theName != NULL; x++ )
 		{
-			LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isCommand );
+			LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isHandlerEnd, &isCommand );
 			if( !theName ) break;
+			if( isHandlerEnd )
+			{
+				NSRange& theRange = handlerRanges.back();
+				theRange.length = theLine -theRange.location;
+				continue;
+			}
 			if( theName[0] == ':' )	// Skip any fake internal handlers we add.
 				continue;
+			
+			handlerRanges.push_back( NSMakeRange(theLine,0) );
+
 			NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
 			[theItem setImage: [NSImage imageNamed: isCommand ? @"CommandHandlerIcon" : @"FunctionHandlerIcon"]];
 			[theItem setRepresentedObject: @(theLine)];
 		}
 		LEOCleanUpDisplayInfoTable( displayInfo );
 		LEOCleanUpParseTree( parseTree );
-	
+		
+		for( const NSRange& currRange : handlerRanges )
+		{
+			NSLog(@"%lu,%lu", currRange.location, currRange.length);
+		}
+		
 		if( x == 0 )	// We added no items?
 		{
 			[mPopUpButton addItemWithTitle: @"None"];
@@ -524,6 +543,40 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 -(void)	textViewControllerHandleEnterKey: (UKSyntaxColoredTextViewController*)sender
 {
 	[self close];
+}
+
+
+-(void) textViewController: (UKSyntaxColoredTextViewController*)sender willInsertSnippetInRange: (NSRange*)insertionRange
+{
+	NSRange oldInsertionRange = *insertionRange;
+	
+	// find line matching insertionRange.location
+	NSUInteger insertionLine = [sender lineAtOffset: insertionRange->location];
+	NSUInteger newInsertionLine = insertionLine;
+	
+	// Check if line is within any ranges in handlerRanges
+	for( const NSRange& currRange : handlerRanges )
+	{
+		if( (insertionLine >= currRange.location) && (insertionLine <= (currRange.location + currRange.length)) )
+		{
+			// If it is, adjust the line to be before/after the given handler (whatever is closer).
+			newInsertionLine = currRange.location -1;
+			NSLog( @"\tadjusted!" );
+			break;
+		}
+	}
+	
+	// Translate the line back into an offset and store it back in insertionRange.location.
+	if( newInsertionLine != insertionLine )
+		insertionRange->location = [sender rangeForLine: newInsertionLine].location;
+	
+	NSLog(@"%@ -> %@ [%lu -> %lu]", NSStringFromRange(oldInsertionRange), NSStringFromRange(*insertionRange), insertionLine, newInsertionLine);
+}
+
+
+-(NSString*) textViewController: (UKSyntaxColoredTextViewController*)sender stringForSnippetOnPasteboard: (NSPasteboard*)pboard
+{
+	return [pboard stringForType: ((ULISyntaxColoredTextView*)sender.view).customSnippetPasteboardType];
 }
 
 
