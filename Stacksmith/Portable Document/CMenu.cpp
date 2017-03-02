@@ -47,6 +47,13 @@ void	CMenu::SetEnabled( bool inState )
 }
 
 
+void	CMenu::SetToolTip( std::string inStr )
+{
+	mToolTip = inStr;
+	mDocument->MenuIncrementedChangeCount( nullptr, this, false );
+}
+
+
 void	CMenu::SetVisible( bool inState )
 {
 	mVisible = inState;
@@ -218,6 +225,8 @@ void	CMenu::LoadFromElement( tinyxml2::XMLElement* inElement )
 	mName.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "name", mName );
 	mVisible = CTinyXMLUtils::GetBoolNamed( inElement, "visible", true );
+	mToolTip.erase();
+	CTinyXMLUtils::GetStringNamed( inElement, "tooltip", mToolTip );
 	mScript.erase();
 	CTinyXMLUtils::GetStringNamed( inElement, "script", mScript );
 	
@@ -240,6 +249,8 @@ bool	CMenu::SaveToElement( tinyxml2::XMLElement* inElement )
 	CTinyXMLUtils::AddStringNamed( inElement, mName, "name" );
 	if( !mVisible )
 		CTinyXMLUtils::AddBoolNamed( inElement, mVisible, "visible" );
+	if( mToolTip.length() != 0 )
+		CTinyXMLUtils::AddStringNamed( inElement, mToolTip, "tooltip" );
 	if( mScript.length() != 0 )
 		CTinyXMLUtils::AddStringNamed( inElement, mScript, "script" );
 
@@ -493,6 +504,11 @@ bool	CMenuItem::GetPropertyNamed( const char* inPropertyName, size_t byteRangeSt
 		LEOInitStringValue( outValue, mMessage.c_str(), mMessage.length(), kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp("tooltip",inPropertyName) == 0 )
+	{
+		LEOInitStringValue( outValue, mToolTip.c_str(), mToolTip.length(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return CScriptableObject::GetPropertyNamed( inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
@@ -562,6 +578,13 @@ bool	CMenuItem::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCon
 		char		str[512] = {};
 		const char*	nameStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
 		SetMessage( nameStr );
+		return true;
+	}
+	else if( strcasecmp("tooltip",inPropertyName) == 0 )
+	{
+		char		str[512] = {};
+		const char*	tipStr = LEOGetValueAsString( inValue, str, sizeof(str), inContext );
+		SetToolTip( tipStr );
 		return true;
 	}
 	else

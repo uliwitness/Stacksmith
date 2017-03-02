@@ -96,6 +96,7 @@ namespace Carlson
 		virtual void		SetName( const std::string& inName ) override;
 		virtual void		SetVisible( bool inState );
 		virtual void		SetEnabled( bool inState );
+		virtual void		SetToolTip( std::string inStr );
 		
 		size_t		GetNumItems()				{ return mItems.size(); }
 		CMenuItem*	GetItem( size_t inIndex )	{ return mItems[inIndex]; }
@@ -104,8 +105,9 @@ namespace Carlson
 		LEOInteger	GetIndexOfItem( CMenuItem* inItem );
 		void		SetIndexOfItem( CMenuItem* inItem, LEOInteger inIndex );
 		ObjectID	GetUniqueIDForItem();
-		bool		GetVisible()				{ return mVisible; }
-		bool		GetEnabled()				{ return mEnabled; }
+		bool		GetVisible()					{ return mVisible; }
+		bool		GetEnabled()					{ return mEnabled; }
+		std::string	GetToolTip( std::string inStr )	{ return mToolTip; }
 
 		virtual std::string		GetTypeName() override			{ return "menu"; };
 		
@@ -126,6 +128,7 @@ namespace Carlson
 		ObjectID						mID;
 		bool							mVisible;
 		bool							mEnabled;
+		std::string						mToolTip;
 		
 		ObjectID						mItemIDSeed;
 	};
