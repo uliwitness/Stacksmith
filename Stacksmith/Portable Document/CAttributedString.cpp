@@ -8,7 +8,6 @@
 
 #include "CAttributedString.h"
 #include <assert.h>
-#include "EndianStuff.h"
 #include "UTF8UTF32Utilities.h"
 
 

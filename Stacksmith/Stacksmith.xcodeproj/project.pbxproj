@@ -289,7 +289,6 @@
 		554DBABD1A9B362300130864 /* MessageWatcherIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 554DBABA1A9B362300130864 /* MessageWatcherIcon.tiff */; };
 		554DBABE1A9B362300130864 /* StackCanvasIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 554DBABB1A9B362300130864 /* StackCanvasIcon.icns */; };
 		554DC31A1863B6A000B514E3 /* CForgeExceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */; };
-		554F42F018BB4F0400F5F106 /* EndianStuff.h in Resources */ = {isa = PBXBuildFile; fileRef = 554F42EF18BB4F0400F5F106 /* EndianStuff.h */; };
 		555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 555BB9A213198C8200B22D89 /* WILDObjectTemplates */; };
 		555E539E18922766001487C1 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555E539D18922766001487C1 /* AVKit.framework */; };
 		555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */ = {isa = PBXBuildFile; fileRef = 555E53A3189351AA001487C1 /* PlaceholderMovie.mov */; };
@@ -519,6 +518,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 55C14BB7136EEF1500649790;
 			remoteInfo = finish_installation;
+		};
+		5593D0C31E679C2600E7F31D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5AE13FB31E0D9E07000D2C2C;
+			remoteInfo = generate_appcast;
 		};
 		55C9F964136E1E950096FC4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -960,7 +966,6 @@
 		554DBABB1A9B362300130864 /* StackCanvasIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = StackCanvasIcon.icns; path = Resources/StackCanvasIcon.icns; sourceTree = "<group>"; };
 		554DC3181863B6A000B514E3 /* CForgeExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgeExceptions.h; path = ../../CForgeExceptions.h; sourceTree = "<group>"; };
 		554DC3191863B6A000B514E3 /* CForgeExceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CForgeExceptions.cpp; path = ../../CForgeExceptions.cpp; sourceTree = "<group>"; };
-		554F42EF18BB4F0400F5F106 /* EndianStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EndianStuff.h; path = ../stackimport/EndianStuff.h; sourceTree = "<group>"; };
 		555BB9A213198C8200B22D89 /* WILDObjectTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WILDObjectTemplates; sourceTree = "<group>"; };
 		555E539D18922766001487C1 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = ../../../../../System/Library/Frameworks/AVKit.framework; sourceTree = "<group>"; };
 		555E53A3189351AA001487C1 /* PlaceholderMovie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PlaceholderMovie.mov; sourceTree = "<group>"; };
@@ -1804,7 +1809,6 @@
 		5542CE3C113ADFCE00555C64 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				554F42EF18BB4F0400F5F106 /* EndianStuff.h */,
 				552386A51880D72E00D7FAB3 /* ULIURLHandlingApplication.h */,
 				552386A61880D72E00D7FAB3 /* ULIURLHandlingApplication.m */,
 				5542CABF113A2CB300555C64 /* UKPBMImageRep.h */,
@@ -2103,6 +2107,7 @@
 				556785E11379C8F5005CC245 /* Autoupdate.app */,
 				554E146A1CAF2D5F00430706 /* UI Tests.xctest */,
 				5500FDA91E4FA66800BD6BA7 /* fileop */,
+				5593D0C41E679C2600E7F31D /* generate_appcast */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2318,6 +2323,13 @@
 			remoteRef = 556785E01379C8F5005CC245 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5593D0C41E679C2600E7F31D /* generate_appcast */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = generate_appcast;
+			remoteRef = 5593D0C31E679C2600E7F31D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		55C9F965136E1E950096FC4D /* Sparkle.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2465,7 +2477,6 @@
 				551B36CD1A99567B006AFDFE /* PointerTool.tiff in Resources */,
 				55405BD518A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib in Resources */,
 				55039F50136B52C80082E32E /* brush14.png in Resources */,
-				554F42F018BB4F0400F5F106 /* EndianStuff.h in Resources */,
 				55039F51136B52C80082E32E /* brush15.png in Resources */,
 				55039F52136B52C80082E32E /* brush16.png in Resources */,
 				5593D0591E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib in Resources */,
