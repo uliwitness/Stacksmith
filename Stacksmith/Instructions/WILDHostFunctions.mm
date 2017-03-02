@@ -1148,7 +1148,7 @@ void	WILDPushMenuInstruction( LEOContext* inContext )
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1);
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		
-		if( screenIndex >= (long long)frontProject->GetNumMenus() )
+		if( screenIndex > (long long)frontProject->GetNumMenus() )
 		{
 			size_t		lineNo = SIZE_T_MAX;
 			uint16_t	fileID = 0;
@@ -1227,7 +1227,7 @@ void	WILDPushMenuItemInstruction( LEOContext* inContext )
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2);
 		LEOCleanUpValue( inContext->stackEndPtr -1, kLEOInvalidateReferences, inContext );
 		
-		if( screenIndex >= (long long)ownerObject->GetNumItems() )
+		if( screenIndex > (long long)ownerObject->GetNumItems() )
 		{
 			size_t		lineNo = SIZE_T_MAX;
 			uint16_t	fileID = 0;
