@@ -395,12 +395,14 @@ void	WILDAskInstruction( LEOContext* inContext )
 /*!
 	Implements the 'create' command (for objects). Use this to create new card
 	parts on the current card or current background (if in editBackground mode).
-	2 parameters must be pushed on the stack before this is called and will be
+	3 parameters must be pushed on the stack before this is called and will be
 	removed on completion:
 	
 	typeName	-	The type of part to create, i.e. button, field, player or
 					browser, as a string.
 	objectName	-	The name to give the new object.
+	container	-	An object to which this will be added. E.g. the menu to
+					add a menu item to.
 	
 	(WILD_CREATE_INSTR)
 */
