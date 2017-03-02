@@ -60,8 +60,8 @@ namespace Carlson
 		std::string		GetMessage()		{ return mMessage; }
 		std::string		GetToolTip()		{ return mToolTip; }
 		
-		void	LoadFromElement( tinyxml2::XMLElement* inElement );
-		bool	SaveToElement( tinyxml2::XMLElement* inElement );
+		virtual void		LoadFromElement( tinyxml2::XMLElement* inElement );
+		virtual bool		SaveToElement( tinyxml2::XMLElement* inElement );
 
 		virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
 		virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
@@ -112,8 +112,8 @@ namespace Carlson
 		virtual std::string		GetTypeName() override			{ return "menu"; };
 		
 		virtual CMenuItem*		NewMenuItemWithElement( tinyxml2::XMLElement* inElement, TMenuItemMarkChangedFlag markChanged = EMenuItemMarkChanged );
-		void					LoadFromElement( tinyxml2::XMLElement* inElement );
-		bool					SaveToElement( tinyxml2::XMLElement* inElement );
+		virtual void			LoadFromElement( tinyxml2::XMLElement* inElement );
+		virtual bool			SaveToElement( tinyxml2::XMLElement* inElement );
 
 		virtual bool		GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd, LEOContext* inContext, LEOValuePtr outValue ) override;
 		virtual bool		SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext, const char* inPropertyName, size_t byteRangeStart, size_t byteRangeEnd ) override;
