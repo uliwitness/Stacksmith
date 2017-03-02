@@ -44,6 +44,8 @@ namespace Carlson {
 		virtual void			SetName( const std::string& inStr ) override;
 		virtual void			SetEnabled( bool inState ) override;
 		virtual void			SetVisible( bool inState ) override;
+
+		virtual void			SetIndexOfItem( CMenuItem* inItem, LEOInteger inIndex ) override;
 		
 		virtual WILDNSMenuPtr		GetMacMenu()			{ return mMacMenu; }
 		virtual WILDNSMenuItemPtr	GetOwningMacMenuItem()	{ return mOwningMacMenuItem; }

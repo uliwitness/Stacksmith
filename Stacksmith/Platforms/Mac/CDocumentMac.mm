@@ -285,6 +285,19 @@ void	CDocumentMac::RemoveMacMenus()
 }
 
 
+void	CDocumentMac::SetIndexOfMenu( CMenu* inMenu, LEOInteger inIndex )
+{
+	CMenuMac * macMenu = dynamic_cast<CMenuMac*>(inMenu);
+	NSMenuItem * macMenuItem = macMenu->GetOwningMacMenuItem();
+	NSMenu * mainMenu = macMenuItem.menu;
+	NSUInteger indexOffset = [mainMenu indexOfItem: macMenuItem] -GetIndexOfMenu(inMenu);	// Account for built-in non-script-created menus.
+	[mainMenu removeItem: macMenuItem];
+	[mainMenu insertItem: macMenuItem atIndex: indexOffset +inIndex];
+	
+	CDocument::SetIndexOfMenu( inMenu, inIndex );
+}
+
+
 void	CDocumentMac::ShowStackCanvasWindow()
 {
 	if( !mCanvasWindowController )

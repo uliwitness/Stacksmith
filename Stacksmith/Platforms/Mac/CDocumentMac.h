@@ -54,6 +54,8 @@ public:
 	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML, TMenuMarkChangedFlag inMarkChanged = EMenuMarkChanged ) override;
 	void				AddMacMenuForMenu( CMenu* currMenu );
 	void				RemoveMacMenus();
+	virtual void		SetIndexOfMenu( CMenu* inItem, LEOInteger inIndex ) override;
+
 
 	virtual void		ShowStackCanvasWindow() override;
 	

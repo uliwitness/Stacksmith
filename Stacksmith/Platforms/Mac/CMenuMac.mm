@@ -96,6 +96,18 @@ void	CMenuMac::SetVisible( bool inState )
 }
 
 
+void	CMenuMac::SetIndexOfItem( CMenuItem* inItem, LEOInteger inIndex )
+{
+	CMenuItemMac	*	macItem = dynamic_cast<CMenuItemMac*>(inItem);
+	NSMenuItem		*	macMenuItem = macItem->GetMacMenuItem();
+	NSMenu			*	macMenu = macMenuItem.menu;
+	[macMenu removeItem: macMenuItem];
+	[macMenu insertItem: macMenuItem atIndex: inIndex];
+	
+	CMenu::SetIndexOfItem( inItem, inIndex );
+}
+
+
 WILDNSImagePtr	CMenuMac::GetDisplayIcon()
 {
 	return [NSImage imageNamed: @"MenuIconSmall"];

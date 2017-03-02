@@ -102,7 +102,7 @@ public:
 	CMenu*				GetMenuWithID( ObjectID inID );
 	CMenu*				GetMenuWithName( const std::string& inName );
 	LEOInteger			GetIndexOfMenu( CMenu* inMenu );
-	void				SetIndexOfMenu( CMenu* inMenu, LEOInteger inIndex );
+	virtual void		SetIndexOfMenu( CMenu* inMenu, LEOInteger inIndex );
 	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML, TMenuMarkChangedFlag inMarkChanged = EMenuMarkChanged );
 	
 	ObjectID			GetUniqueIDForStack();

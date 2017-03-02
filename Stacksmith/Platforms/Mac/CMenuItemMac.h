@@ -47,6 +47,8 @@ namespace Carlson
 		virtual void			OpenScriptEditorAndShowOffset( size_t byteOffset ) override	{ CMacScriptableObjectBase::OpenScriptEditorAndShowOffset( byteOffset ); }
 		virtual void			OpenScriptEditorAndShowLine( size_t lineIndex ) override	{ CMacScriptableObjectBase::OpenScriptEditorAndShowLine( lineIndex ); }
 		
+		virtual WILDNSMenuItemPtr	GetMacMenuItem()	{ return mMacMenuItem; }
+		
 	protected:
 		WILDNSMenuItemPtr mMacMenuItem = nil;
 	};
