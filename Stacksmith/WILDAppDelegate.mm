@@ -19,6 +19,7 @@
 #include "CStackMac.h"
 #include "CMessageBoxMac.h"
 #include "CMessageWatcherMac.h"
+#include "CVariableWatcherMac.h"
 #include "LEOObjCCallInstructions.h"
 #import "ULIURLHandlingApplication.h"
 #include "CAlert.h"
@@ -183,6 +184,7 @@ void	WILDScheduleResumeOfScript( void )
 	
 	CMessageBox::SetSharedInstance( new CMessageBoxMac );
 	CMessageWatcher::SetSharedInstance( new CMessageWatcherMac );
+	CVariableWatcher::SetSharedInstance( new CVariableWatcherMac );
 	CRecentCardsList::SetSharedInstance( new CRecentCardsListConcrete<CRecentCardInfo>() );
 	
 	Carlson::CMediaCache::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
@@ -562,6 +564,12 @@ void	WILDScheduleResumeOfScript( void )
 }
 
 
+-(IBAction)	orderFrontVariableWatcher: (id)sender
+{
+	CVariableWatcher::GetSharedInstance()->SetVisible( !CVariableWatcher::GetSharedInstance()->IsVisible() );
+}
+
+
 -(BOOL)	validateMenuItem: (NSMenuItem*)inItem
 {
 	if( inItem.action == @selector(orderFrontMessageBox:) )
@@ -578,6 +586,14 @@ void	WILDScheduleResumeOfScript( void )
 			[inItem setTitle: @"Hide Message Watcher"];
 		else
 			[inItem setTitle: @"Show Message Watcher"];
+		return YES;
+	}
+	else if( inItem.action == @selector(orderFrontVariableWatcher:) )
+	{
+		if( CVariableWatcher::GetSharedInstance()->IsVisible() )
+			[inItem setTitle: @"Hide Variable Watcher"];
+		else
+			[inItem setTitle: @"Show Variable Watcher"];
 		return YES;
 	}
 	else if( inItem.action == @selector(showStackCanvasWindow:) )

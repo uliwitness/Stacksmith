@@ -346,6 +346,9 @@
 		559331BD18DB06190061CC37 /* CMediaCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559331BB18DB06190061CC37 /* CMediaCache.mm */; };
 		5593D0591E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5593D0581E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib */; };
 		5593D0651E58B03300E7F31D /* CCodeSnippets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5593D0631E58B03300E7F31D /* CCodeSnippets.cpp */; };
+		5593D0C71E6835EE00E7F31D /* CVariableWatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5593D0C51E6835EE00E7F31D /* CVariableWatcher.cpp */; };
+		5593D0C91E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5593D0C81E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib */; };
+		5593D0CC1E6B0E2D00E7F31D /* CVariableWatcherMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5593D0CB1E6B0E2D00E7F31D /* CVariableWatcherMac.mm */; };
 		55943B1C171F675E0051166C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55943B1B171F675E0051166C /* WebKit.framework */; };
 		559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */; };
 		559700F3137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */; };
@@ -1047,6 +1050,11 @@
 		5593D0581E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDScriptEditorCodeBlocksSectionHeader.xib; path = Platforms/Mac/WILDScriptEditorCodeBlocksSectionHeader.xib; sourceTree = "<group>"; };
 		5593D0631E58B03300E7F31D /* CCodeSnippets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCodeSnippets.cpp; path = Editor/CCodeSnippets.cpp; sourceTree = "<group>"; };
 		5593D0641E58B03300E7F31D /* CCodeSnippets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCodeSnippets.h; path = Editor/CCodeSnippets.h; sourceTree = "<group>"; };
+		5593D0C51E6835EE00E7F31D /* CVariableWatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVariableWatcher.cpp; path = "Portable Document/CVariableWatcher.cpp"; sourceTree = "<group>"; };
+		5593D0C61E6835EE00E7F31D /* CVariableWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVariableWatcher.h; path = "Portable Document/CVariableWatcher.h"; sourceTree = "<group>"; };
+		5593D0C81E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDVariableWatcherWindowController.xib; path = Platforms/Mac/WILDVariableWatcherWindowController.xib; sourceTree = "<group>"; };
+		5593D0CA1E6B0E2D00E7F31D /* CVariableWatcherMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVariableWatcherMac.h; path = Platforms/Mac/CVariableWatcherMac.h; sourceTree = "<group>"; };
+		5593D0CB1E6B0E2D00E7F31D /* CVariableWatcherMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVariableWatcherMac.mm; path = Platforms/Mac/CVariableWatcherMac.mm; sourceTree = "<group>"; };
 		55943B1B171F675E0051166C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = ../../../../../System/Library/Frameworks/WebKit.framework; sourceTree = "<group>"; };
 		559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDIrisOpenFilter.cikernel; path = "Custom Effects/WILDIrisOpenFilter.cikernel"; sourceTree = "<group>"; };
 		559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDBarnDoorCloseFilter.cikernel; path = "Custom Effects/WILDBarnDoorCloseFilter.cikernel"; sourceTree = "<group>"; };
@@ -1792,6 +1800,9 @@
 				555E53B1189472E0001487C1 /* CMessageWatcherMac.h */,
 				555E53B2189472E0001487C1 /* CMessageWatcherMac.mm */,
 				555E53B4189472F9001487C1 /* WILDMessageWatcherWindowController.xib */,
+				5593D0CA1E6B0E2D00E7F31D /* CVariableWatcherMac.h */,
+				5593D0CB1E6B0E2D00E7F31D /* CVariableWatcherMac.mm */,
+				5593D0C81E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib */,
 				55405B7D189E8FE8001D3C99 /* WILDScriptEditorWindowController.h */,
 				55405B7E189E8FE8001D3C99 /* WILDScriptEditorWindowController.mm */,
 				55405B77189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib */,
@@ -1951,6 +1962,8 @@
 				55CD61161879F464002450E2 /* CMessageBox.cpp */,
 				555E53AF18946BC1001487C1 /* CMessageWatcher.h */,
 				555E53AE18946BC1001487C1 /* CMessageWatcher.cpp */,
+				5593D0C61E6835EE00E7F31D /* CVariableWatcher.h */,
+				5593D0C51E6835EE00E7F31D /* CVariableWatcher.cpp */,
 				55CD611D187A60CD002450E2 /* CRecentCardsList.h */,
 				55CD611C187A60CC002450E2 /* CRecentCardsList.cpp */,
 				552386BA1883858300D7FAB3 /* CString.cpp */,
@@ -2401,6 +2414,7 @@
 				552FF20B113F23F3005742C8 /* PAT_17.pbm in Resources */,
 				554DBABC1A9B362300130864 /* MessageBoxIcon.tiff in Resources */,
 				552FF20C113F23F3005742C8 /* PAT_18.pbm in Resources */,
+				5593D0C91E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib in Resources */,
 				552FF20D113F23F3005742C8 /* PAT_19.pbm in Resources */,
 				552FF20E113F23F3005742C8 /* PAT_20.pbm in Resources */,
 				552FF20F113F23F3005742C8 /* PAT_21.pbm in Resources */,
@@ -2686,6 +2700,7 @@
 				55CD60DB187587CB002450E2 /* CDocument.cpp in Sources */,
 				552386D91884D49300D7FAB3 /* CAttributedString.cpp in Sources */,
 				555E579A115BFE7800AAF9CA /* UKProgressPanelController.m in Sources */,
+				5593D0C71E6835EE00E7F31D /* CVariableWatcher.cpp in Sources */,
 				55CD610F18788CEB002450E2 /* CScriptableObjectValue.cpp in Sources */,
 				556DB7C21870A971002F7CB2 /* CURLConnection.mm in Sources */,
 				55C2B647115E5780008B094D /* CSearchContext.cpp in Sources */,
@@ -2730,6 +2745,7 @@
 				553C470113577334000219FA /* CAssignChunkArrayNode.cpp in Sources */,
 				556DB7B61870A352002F7CB2 /* CLayer.cpp in Sources */,
 				553C470213577334000219FA /* CGetArrayItemCountNode.cpp in Sources */,
+				5593D0CC1E6B0E2D00E7F31D /* CVariableWatcherMac.mm in Sources */,
 				553C470313577334000219FA /* CGetArrayItemNode.cpp in Sources */,
 				553C470413577334000219FA /* CMakeChunkRefNode.cpp in Sources */,
 				556DB7B318709CAF002F7CB2 /* CRefCountedObject.cpp in Sources */,

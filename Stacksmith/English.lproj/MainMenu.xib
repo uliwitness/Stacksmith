@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <development version="6300" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -773,6 +774,12 @@
                                     <action selector="orderFrontMessageWatcher:" target="556" id="UQ9-Ma-vkA"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Show Variable Watcher" id="VDW-rn-w3G">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="orderFrontMessageWatcher:" target="556" id="Kxg-nA-cs7"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Show Stack Canvas" keyEquivalent="K" id="sFA-sH-79S">
                                 <connections>
                                     <action selector="showStackCanvasWindow:" target="-1" id="wf6-De-baZ"/>
@@ -894,10 +901,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="817" height="38"/>
                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" transparent="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="xFC-RG-244">
+                    <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" transparent="YES" id="xFC-RG-244">
                         <rect key="frame" x="0.0" y="0.0" width="817" height="38"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <view key="contentView">
+                        <view key="contentView" id="i5y-9n-41r">
                             <rect key="frame" x="0.0" y="0.0" width="817" height="38"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -1039,12 +1046,12 @@
                                         <action selector="takeToolFromTag:" target="-1" id="0G2-Io-GSU"/>
                                     </connections>
                                 </button>
-                                <customView id="CUv-2C-iA0">
-                                    <rect key="frame" x="590" y="-1" width="132" height="39"/>
+                                <customView misplaced="YES" id="CUv-2C-iA0">
+                                    <rect key="frame" x="561" y="-1" width="161" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <button toolTip="Stack Canvas" verticalHuggingPriority="750" id="B8l-FW-2Oq">
-                                            <rect key="frame" x="95" y="3" width="32" height="32"/>
+                                            <rect key="frame" x="124" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="StackCanvasIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VxP-KP-LhW" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1054,8 +1061,8 @@
                                                 <action selector="showStackCanvasWindow:" target="-1" id="U6d-Vf-qbH"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Message Box" verticalHuggingPriority="750" id="9ot-lO-F2x">
-                                            <rect key="frame" x="7" y="3" width="32" height="32"/>
+                                        <button toolTip="Message Box" verticalHuggingPriority="750" misplaced="YES" id="9ot-lO-F2x">
+                                            <rect key="frame" x="5" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="MessageBoxIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pLl-zL-v0s" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1065,8 +1072,8 @@
                                                 <action selector="orderFrontMessageBox:" target="-1" id="HSM-Nk-TTO"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Message Watcher" verticalHuggingPriority="750" id="3Rl-eW-52o">
-                                            <rect key="frame" x="41" y="3" width="32" height="32"/>
+                                        <button toolTip="Message Watcher" verticalHuggingPriority="750" misplaced="YES" id="3Rl-eW-52o">
+                                            <rect key="frame" x="39" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="MessageWatcherIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jAL-2C-b4y" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1074,6 +1081,17 @@
                                             </buttonCell>
                                             <connections>
                                                 <action selector="orderFrontMessageWatcher:" target="-1" id="8Ym-Il-ZqZ"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Message Watcher" verticalHuggingPriority="750" misplaced="YES" id="31V-S9-ZQ9">
+                                            <rect key="frame" x="73" y="3" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="VariableWatcherIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cZA-fw-Bta" customClass="WILDToolButtonCell">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="orderFrontVariableWatcher:" target="-1" id="0wK-Hm-yg7"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1102,7 +1120,6 @@
                                 </button>
                             </subviews>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                     </box>
                 </subviews>
@@ -1141,7 +1158,7 @@
                     <box title="Syntax Coloring:" id="lph-vT-u66">
                         <rect key="frame" x="17" y="58" width="251" height="310"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <view key="contentView">
+                        <view key="contentView" id="B1h-FH-UHw">
                             <rect key="frame" x="2" y="2" width="247" height="293"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -1283,13 +1300,11 @@
                                 </button>
                             </subviews>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <box title="User-Defined Identifiers:" id="pfl-pj-d0T">
                         <rect key="frame" x="281" y="58" width="267" height="310"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <view key="contentView">
+                        <view key="contentView" id="x8q-DI-1kW">
                             <rect key="frame" x="2" y="2" width="263" height="293"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -1298,10 +1313,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <clipView key="contentView" id="R5x-og-bUo">
                                         <rect key="frame" x="1" y="1" width="233" height="217"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" id="TOx-Bf-TMH">
-                                                <rect key="frame" x="0.0" y="0.0" width="217" height="19"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="233" height="217"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1327,7 +1342,6 @@
                                                 </connections>
                                             </tableView>
                                         </subviews>
-                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </clipView>
                                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZLH-cH-yGN">
                                         <rect key="frame" x="-100" y="-100" width="218" height="15"/>
@@ -1362,8 +1376,6 @@
                                 </button>
                             </subviews>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="RgV-5f-ExY">
                         <rect key="frame" x="18" y="23" width="35" height="17"/>
@@ -1409,5 +1421,6 @@
         <image name="UKPaintPathTool" width="48" height="48"/>
         <image name="UKPaintRectTool" width="48" height="48"/>
         <image name="UKPaintRoundrectTool" width="48" height="48"/>
+        <image name="VariableWatcherIcon" width="128" height="128"/>
     </resources>
 </document>

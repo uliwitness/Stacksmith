@@ -17,6 +17,7 @@
 #include "LEOContextGroup.h"
 #include "CMessageBox.h"
 #include "CMessageWatcher.h"
+#include "CVariableWatcher.h"
 
 
 void	WILDStackInstruction( LEOContext* inContext );
@@ -66,6 +67,7 @@ void	WILDNumberOfCardGraphicsInstruction( LEOContext* inContext );
 void	WILDNumberOfBackgroundGraphicsInstruction( LEOContext* inContext );
 void	WILDMessageBoxInstruction( LEOContext* inContext );
 void	WILDMessageWatcherInstruction( LEOContext* inContext );
+void	WILDVariableWatcherInstruction( LEOContext* inContext );
 void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType );
 void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* inType );
 void	WILDNumberOfCardsInstruction( LEOContext* inContext, const char* inType );
@@ -1024,6 +1026,17 @@ void	WILDMessageWatcherInstruction( LEOContext* inContext )
 }
 
 
+void	WILDVariableWatcherInstruction( LEOContext* inContext )
+{
+	CVariableWatcher*	msg = CVariableWatcher::GetSharedInstance();
+	
+	inContext->stackEndPtr++;
+	msg->InitValue( (inContext->stackEndPtr -1), kLEOInvalidateReferences, inContext );
+	
+	inContext->currentInstruction++;
+}
+
+
 void	WILDPushNumberOfScreensInstruction( LEOContext* inContext )
 {
 	LEOPushIntegerOnStack( inContext, [NSScreen screens].count, kLEOUnitNone );
@@ -1304,6 +1317,7 @@ LEOINSTR(WILDNumberOfCardGraphicsInstruction)
 LEOINSTR(WILDNumberOfBackgroundGraphicsInstruction)
 LEOINSTR(WILDMessageBoxInstruction)
 LEOINSTR(WILDMessageWatcherInstruction)
+LEOINSTR(WILDVariableWatcherInstruction)
 LEOINSTR(WILDCardBrowserInstruction)
 LEOINSTR(WILDBackgroundBrowserInstruction)
 LEOINSTR(WILDNumberOfCardBrowsersInstruction)
@@ -1743,6 +1757,13 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 		{
 			{ EHostParamInvisibleIdentifier, EBoxIdentifier, EHostParameterOptional, WILD_MESSAGE_BOX_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParamInvisibleIdentifier, EWatcherIdentifier, EHostParameterOptional, WILD_MESSAGE_WATCHER_INSTRUCTION, 0, 0, '\0', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+		}
+	},
+	{
+		EVariableIdentifier, INVALID_INSTR2, 0, 0, '\0', 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EWatcherIdentifier, EHostParameterRequired, WILD_VARIABLE_WATCHER_INSTRUCTION, 0, 0, '\0', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 		}
 	},
