@@ -104,7 +104,8 @@ public:
 	LEOInteger			GetIndexOfMenu( CMenu* inMenu );
 	virtual void		SetIndexOfMenu( CMenu* inMenu, LEOInteger inIndex );
 	virtual CMenu*		NewMenuWithElement( tinyxml2::XMLElement* inMenuXML, TMenuMarkChangedFlag inMarkChanged = EMenuMarkChanged );
-	
+	virtual std::string	GetUserName()				{ return std::string(); };
+
 	ObjectID			GetUniqueIDForStack();
 	ObjectID			GetUniqueIDForCard();
 	ObjectID			GetUniqueIDForBackground();

@@ -56,13 +56,14 @@ public:
 	void				RemoveMacMenus();
 	virtual void		SetIndexOfMenu( CMenu* inItem, LEOInteger inIndex ) override;
 
-
 	virtual void		ShowStackCanvasWindow() override;
 	
 	virtual void		IncrementChangeCount() override;
 	virtual void		MenuIncrementedChangeCount( CMenuItem* inItem, CMenu* inMenu, bool parentNeedsFullRebuild ) override;
 	virtual void		StackIncrementedChangeCount( CStack* inStack ) override;
 	virtual void		LayerIncrementedChangeCount( CLayer* inLayer ) override;
+
+	virtual std::string	GetUserName() override;
 	
 	virtual WILDNSImagePtr	GetDisplayIcon() override;
 	virtual Class			GetPropertyEditorClass() override;

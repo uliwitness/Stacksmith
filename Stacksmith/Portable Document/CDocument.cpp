@@ -710,6 +710,8 @@ LEOContextGroup*	CDocument::GetScriptContextGroupObject()
 		if( mURL.find_first_of( "file://" ) != 0 )
 			mContextGroup->flags |= kLEOContextGroupFlagFromNetwork;
 		mContextGroup->messageSent = CDocumentMessageSent;
+		std::string userName = GetUserName();
+		LEOAddStringArrayEntryToRoot( &mContextGroup->globals, "UserName", userName.c_str(), userName.length(), NULL );
 	}
 	
 	return mContextGroup;

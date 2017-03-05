@@ -343,6 +343,12 @@ void	CDocumentMac::LayerIncrementedChangeCount( CLayer* inLayer )
 }
 
 
+std::string	CDocumentMac::GetUserName()
+{
+	return [NSFullUserName() UTF8String];
+}
+
+
 WILDNSImagePtr	CDocumentMac::GetDisplayIcon()
 {
 	return [NSImage imageNamed: @"StackCanvasIcon"];
