@@ -349,6 +349,7 @@
 		5593D0C71E6835EE00E7F31D /* CVariableWatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5593D0C51E6835EE00E7F31D /* CVariableWatcher.cpp */; };
 		5593D0C91E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5593D0C81E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib */; };
 		5593D0CC1E6B0E2D00E7F31D /* CVariableWatcherMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5593D0CB1E6B0E2D00E7F31D /* CVariableWatcherMac.mm */; };
+		5593D0D21E6B4FA900E7F31D /* VariableWatcherIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5593D0D11E6B4FA900E7F31D /* VariableWatcherIcon.tiff */; };
 		55943B1C171F675E0051166C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55943B1B171F675E0051166C /* WebKit.framework */; };
 		559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */; };
 		559700F3137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */; };
@@ -1055,6 +1056,7 @@
 		5593D0C81E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDVariableWatcherWindowController.xib; path = Platforms/Mac/WILDVariableWatcherWindowController.xib; sourceTree = "<group>"; };
 		5593D0CA1E6B0E2D00E7F31D /* CVariableWatcherMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVariableWatcherMac.h; path = Platforms/Mac/CVariableWatcherMac.h; sourceTree = "<group>"; };
 		5593D0CB1E6B0E2D00E7F31D /* CVariableWatcherMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVariableWatcherMac.mm; path = Platforms/Mac/CVariableWatcherMac.mm; sourceTree = "<group>"; };
+		5593D0D11E6B4FA900E7F31D /* VariableWatcherIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = VariableWatcherIcon.tiff; path = Resources/VariableWatcherIcon.tiff; sourceTree = "<group>"; };
 		55943B1B171F675E0051166C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = ../../../../../System/Library/Frameworks/WebKit.framework; sourceTree = "<group>"; };
 		559700EE137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDIrisOpenFilter.cikernel; path = "Custom Effects/WILDIrisOpenFilter.cikernel"; sourceTree = "<group>"; };
 		559700F0137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDBarnDoorCloseFilter.cikernel; path = "Custom Effects/WILDBarnDoorCloseFilter.cikernel"; sourceTree = "<group>"; };
@@ -1405,6 +1407,7 @@
 				55469F0B1A9A784E0072A721 /* EditTextTool.tiff */,
 				554DBAB91A9B362300130864 /* MessageBoxIcon.tiff */,
 				554DBABA1A9B362300130864 /* MessageWatcherIcon.tiff */,
+				5593D0D11E6B4FA900E7F31D /* VariableWatcherIcon.tiff */,
 				554DBABB1A9B362300130864 /* StackCanvasIcon.icns */,
 				5500FDAA1E4FE13200BD6BA7 /* MenuIcon.png */,
 				5500FDAB1E4FE13200BD6BA7 /* MenuIcon@2x.png */,
@@ -2509,6 +2512,7 @@
 				55405BC318A4CD17001D3C99 /* WILDContentsEditorWindowController.xib in Resources */,
 				55039F5C136B52C80082E32E /* brush26.png in Resources */,
 				55039F5D136B52C80082E32E /* brush27.png in Resources */,
+				5593D0D21E6B4FA900E7F31D /* VariableWatcherIcon.tiff in Resources */,
 				555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */,
 				55039F5E136B52C80082E32E /* brush28.png in Resources */,
 				5500FDC11E50989700BD6BA7 /* MenuIconSmall@2x.png in Resources */,

@@ -1421,6 +1421,6 @@
         <image name="UKPaintPathTool" width="48" height="48"/>
         <image name="UKPaintRectTool" width="48" height="48"/>
         <image name="UKPaintRoundrectTool" width="48" height="48"/>
-        <image name="VariableWatcherIcon" width="128" height="128"/>
+        <image name="VariableWatcherIcon" width="200" height="200"/>
     </resources>
 </document>
