@@ -766,18 +766,18 @@
                             <menuItem isSeparatorItem="YES" id="Pc8-Lw-M70"/>
                             <menuItem title="Show Message Box" keyEquivalent="M" id="vSR-5M-aEy">
                                 <connections>
-                                    <action selector="orderFrontMessageBox:" target="556" id="7qv-up-car"/>
+                                    <action selector="orderFrontMessageBox:" target="-1" id="wq2-PI-GQC"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show Message Watcher" keyEquivalent="W" id="6H8-Vo-IWp">
                                 <connections>
-                                    <action selector="orderFrontMessageWatcher:" target="556" id="UQ9-Ma-vkA"/>
+                                    <action selector="orderFrontMessageWatcher:" target="-1" id="eXL-V0-y5H"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show Variable Watcher" id="VDW-rn-w3G">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="orderFrontMessageWatcher:" target="556" id="Kxg-nA-cs7"/>
+                                    <action selector="orderFrontVariableWatcher:" target="-1" id="mhp-wQ-VQt"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show Stack Canvas" keyEquivalent="K" id="sFA-sH-79S">
@@ -788,11 +788,6 @@
                             <menuItem title="Show Edit Toolbar" keyEquivalent="E" id="9jj-pf-nx2">
                                 <connections>
                                     <action selector="makeKeyAndOrderFront:" target="2SR-K3-0lu" id="E4n-qW-xeZ"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Show Inspector" keyEquivalent="I" id="7wS-wk-Soa">
-                                <connections>
-                                    <action selector="makeKeyAndOrderFront:" target="KD6-Oz-Eaf" id="eDk-4s-Shp"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="724">
