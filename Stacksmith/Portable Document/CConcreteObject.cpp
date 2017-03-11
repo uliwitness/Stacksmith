@@ -899,11 +899,23 @@ void	CConcreteObject::InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag ke
 {
 	if( mIDForScripts == kLEOObjectIDINVALID )
 	{
-		InitScriptableObjectValue( &mValueForScripts, this, kLEOInvalidateReferences, inContext );
+		CScriptableObject::InitScriptableObjectValue( &mValueForScripts, this, kLEOInvalidateReferences, inContext );
 		mIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( GetScriptContextGroupObject(), &mValueForScripts );
 		mSeedForScripts = LEOContextGroupGetSeedForObjectID( GetScriptContextGroupObject(), mIDForScripts );
 	}
 	LEOInitReferenceValue( outObject, (LEOValuePtr) &mValueForScripts, keepReferences, kLEOChunkTypeINVALID, 0, 0, inContext );
+}
+
+
+void	CConcreteObject::InitObjectDescriptorValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
+{
+	if( mObjectDescriptorIDForScripts == kLEOObjectIDINVALID )
+	{
+		CScriptableObject::InitObjectDescriptorValue( &mObjectDescriptorValueForScripts, this, kLEOInvalidateReferences, inContext );
+		mObjectDescriptorIDForScripts = LEOContextGroupCreateNewObjectIDForPointer( GetScriptContextGroupObject(), &mObjectDescriptorValueForScripts );
+		mObjectDescriptorSeedForScripts = LEOContextGroupGetSeedForObjectID( GetScriptContextGroupObject(), mObjectDescriptorIDForScripts );
+	}
+	LEOInitReferenceValue( outObject, (LEOValuePtr) &mObjectDescriptorValueForScripts, keepReferences, kLEOChunkTypeINVALID, 0, 0, inContext );
 }
 
 

@@ -38,6 +38,7 @@ namespace Carlson
 {
 
 extern struct LEOValueType	kLeoValueTypeScriptableObject;
+extern struct LEOValueType	kLeoValueTypeObjectDescriptor;
 
 
 class CStack;
@@ -115,9 +116,11 @@ public:
 	virtual LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )										{ return NULL; };
 	virtual LEOContextGroup*	GetScriptContextGroupObject()					{ return NULL; };
 	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
+	virtual void				InitObjectDescriptorValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	
 // statics:
 	static void			InitScriptableObjectValue( LEOValueObject* inStorage, CScriptableObject* wildObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
+	static void			InitObjectDescriptorValue( LEOValueObject* inStorage, CScriptableObject* wildObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	static LEOScript*	GetParentScript( LEOScript* inScript, LEOContext* inContext, void* inParam );
 
 	static CScriptableObject*	GetOwnerScriptableObjectFromContext( LEOContext * inContext );

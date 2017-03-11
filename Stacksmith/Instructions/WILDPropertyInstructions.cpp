@@ -58,6 +58,8 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 	LEOGetValueAsString( thePropertyName, propNameStr, sizeof(propNameStr), inContext );
 	
 	LEOValuePtr		objectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeScriptableObject, inContext );
+	if( !objectValue )
+		objectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeObjectDescriptor, inContext );
 	if( objectValue )
 	{
 		LEOCleanUpValue( thePropertyName, kLEOInvalidateReferences, inContext );
@@ -119,6 +121,8 @@ void	LEOSetPropertyOfObjectInstruction( LEOContext* inContext )
 	LEOGetValueAsString( thePropertyName, propNameStr, sizeof(propNameStr), inContext );
 	
 	LEOValuePtr	theObjectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeScriptableObject, inContext );
+	if( !theObjectValue )
+		theObjectValue = LEOFollowReferencesAndReturnValueOfType( theObject, &kLeoValueTypeObjectDescriptor, inContext );
 	
 	if( theObjectValue )
 	{
@@ -174,6 +178,8 @@ void	LEOHasPropertyInstruction( LEOContext* inContext )
 {
 	LEOValuePtr			theValue = inContext->stackEndPtr -1;
 	LEOValuePtr			meValue = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );
+	if( !meValue )
+		meValue = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeObjectDescriptor, inContext );
 	if( !meValue )
 	{
 		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );

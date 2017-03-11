@@ -79,6 +79,7 @@ public:
 	virtual bool		SetUserPropertyValueForName( const std::string& inValue, const char* inPropName );
 	
 	virtual void		InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
+	virtual void		InitObjectDescriptorValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler );	// Calls errorHandler with NULL message on success, calls error handler with error message and returns NULL on failure.
 	virtual CDocument*	GetDocument()		{ return mDocument; };
@@ -116,6 +117,9 @@ protected:
 	LEOObjectID							mIDForScripts;		//!< The ID Leonie uses to refer to this object. This is *not* the ID as Hammer understands it.
 	LEOObjectSeed						mSeedForScripts;	//!< The seed value to go with mIDForScripts.
 	struct LEOValueObject				mValueForScripts;	//!< A LEOValue so scripts can reference us (see mIDForScripts).
+	LEOObjectID							mObjectDescriptorIDForScripts;		//!< The ID Leonie uses to refer to this object. This is *not* the ID as Hammer understands it.
+	LEOObjectSeed						mObjectDescriptorSeedForScripts;	//!< The seed value to go with mObjectDescriptorIDForScripts.
+	struct LEOValueObject				mObjectDescriptorValueForScripts;	//!< A LEOValue so scripts can reference us (see mIDForScripts).
 	CDocument *							mDocument;			//!< Document that contains us.
 	std::vector<CAddHandlerListEntry>	mHandlerNotes;		//!< Documentation comments parsed from the script.
 };

@@ -61,7 +61,9 @@
         <textStyle>plain</textStyle>
         <name>Browse</name>
         <script>on mouseUp
-	set the tool of the mainStack to browse
+	if the mainStack is not empty then
+		set the tool of the mainStack to browse
+	end if
 end mouseUp</script>
     </part>
     <part>
@@ -118,7 +120,9 @@ end mouseUp</script>
         <textStyle>plain</textStyle>
         <name>Pointer</name>
         <script>on mouseUp
-	set the tool of the mainStack to pointer
+	if the mainStack is not empty then
+		set the tool of the mainStack to pointer
+	end if
 end mouseUp</script>
     </part>
     <name></name>

@@ -200,6 +200,11 @@ void	LEOPushMouseLocationInstruction( LEOContext* inContext )
 }
 
 
+/*
+	PUSH_MAIN_STACK_INSTR
+*/
+
+
 void	LEOPushMainStackInstruction( LEOContext* inContext )
 {
 	CScriptableObject	*	wdObj = nullptr;
@@ -222,7 +227,7 @@ void	LEOPushMainStackInstruction( LEOContext* inContext )
 	inContext->stackEndPtr++;
 	if( wdObj )
 	{
-		wdObj->InitValue( returnValue, kLEOKeepReferences, inContext );
+		wdObj->InitObjectDescriptorValue( returnValue, kLEOKeepReferences, inContext );
 	}
 	else
 	{
