@@ -7,7 +7,6 @@ cd ${REPO_DIR}/Stacksmith
 touch Stacksmith-Info.plist
 cd ${REPO_DIR}/../
 BUILD_DEST_PATH=`pwd`/Output/
-SIGN_SCRIPT=${REPO_DIR}/Sparkle/bin/sign_update
 ##security unlock-keychain -p 'password' ~/Library/Keychains/login.keychain
 ##xcodebuild CONFIGURATION_BUILD_DIR=$BUILD_DEST_PATH \
 ##  GCC_PREPROCESSOR_DEFINITIONS="SVN_VERSION_NUM=${BUILD_NUMBER} SVN_BUILD_MEANS=nightly" \
@@ -16,7 +15,9 @@ SIGN_SCRIPT=${REPO_DIR}/Sparkle/bin/sign_update
 ##  -configuration Release \
 ##  clean build
 PASSWORD=`security 2>&1 >/dev/null find-internet-password -ga jnknsuliwitness | cut -f2 -d'"'`
-mkdir ${BUILD_DEST_PATH}
+if [ ! -d "$BUILD_DEST_PATH" ]; then
+	mkdir ${BUILD_DEST_PATH}
+fi
 rm -rf ${BUILD_DEST_PATH}/*
 cd ${REPO_DIR}/Stacksmith/
 xcodebuild CONFIGURATION_BUILD_DIR=$BUILD_DEST_PATH \

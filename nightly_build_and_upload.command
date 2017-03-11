@@ -1,6 +1,11 @@
 #! /bin/bash
 cd `dirname $0`
 REPO_DIR=`pwd`
+SIGFILEPATH="/Volumes/Confidential/Sparkle Keys/stacksmith_private_sparkle_dsa_key.pem"
+if [ ! -f "$SIGFILEPATH" ]; then
+	echo "$(tput setaf 1)$(tput bold)Please make sure the signature file is at $SIGFILEPATH$(tput sgr0)"
+	exit 1
+fi
 cd ${REPO_DIR}
 BUILD_NUMBER=`git rev-list HEAD | /usr/bin/wc -l | tr -d ' '`
 cd ${REPO_DIR}/Stacksmith
@@ -16,7 +21,9 @@ SIGN_SCRIPT=${REPO_DIR}/Sparkle/bin/sign_update
 ##  -configuration Release \
 ##  clean build
 PASSWORD=`security 2>&1 >/dev/null find-internet-password -ga jnknsuliwitness | cut -f2 -d'"'`
-mkdir ${BUILD_DEST_PATH}
+if [ ! -d "$BUILD_DEST_PATH" ]; then
+	mkdir ${BUILD_DEST_PATH}
+fi
 rm -rf ${BUILD_DEST_PATH}/*
 cd ${REPO_DIR}/Stacksmith/
 xcodebuild CONFIGURATION_BUILD_DIR=$BUILD_DEST_PATH \
@@ -30,9 +37,10 @@ echo "File: $BUILD_DEST_PATH/Stacksmith.tgz"
 tar -czf Stacksmith.tgz Stacksmith.app
 echo "$(tput setaf 6)$(tput bold)===== Generating RSS Feed =====$(tput sgr0)"
 cd ${REPO_DIR}
-${REPO_DIR}/writerss.php ${BUILD_DEST_PATH}/Stacksmith.app/Contents/Info.plist nightly ${BUILD_DEST_PATH}/Stacksmith.tgz `${SIGN_SCRIPT} ${BUILD_DEST_PATH}/Stacksmith.tgz "/Volumes/Confidential/Sparkle Keys/stacksmith_private_sparkle_dsa_key.pem"`
+${REPO_DIR}/writerss.php ${BUILD_DEST_PATH}/Stacksmith.app/Contents/Info.plist nightly ${BUILD_DEST_PATH}/Stacksmith.tgz `${SIGN_SCRIPT} ${BUILD_DEST_PATH}/Stacksmith.tgz ${SIGFILEPATH}`
 cd ${BUILD_DEST_PATH}
 mv nightly_feed.rss stacksmith_nightlies.rss
 echo "$(tput setaf 6)$(tput bold)===== Uploading =====$(tput sgr0)"
 ftp -in -u "ftp://jnknsuliwitness:${PASSWORD}@stacksmith.org/stacksmith.org/nightlies/" Stacksmith.tgz
 ftp -in -u "ftp://jnknsuliwitness:${PASSWORD}@stacksmith.org/stacksmith.org/nightlies/" stacksmith_nightlies.rss
+echo -ne '\007'
