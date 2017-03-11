@@ -71,9 +71,13 @@ void	WILDScheduleResumeOfScript( void )
 		CDocument::LoadNewPartMenuItemsFromFilePath( [NSBundle.mainBundle pathForResource: @"new_part_descriptions" ofType: @"xml"].fileSystemRepresentation );
 		
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowChanged:) name: NSWindowDidBecomeMainNotification object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowMightHaveGoneAway:) name: NSWindowDidResignMainNotification object: nil];
+
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowMightHaveGoneAway:) name: NSWindowWillCloseNotification object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(screenConfigurationMayHaveChanged:) name: NSApplicationDidChangeScreenParametersNotification object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(toolMayHaveChanged:) name: WILDToolDidChangeNotification object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowChanged:) name: NSWindowDidBecomeKeyNotification object: nil];
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowChanged:) name: NSWindowDidResignKeyNotification object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(toolMayHaveChanged:) name: WILDBackgroundEditingDidChangeNotification object: nil];
 	}
 	
@@ -640,6 +644,7 @@ void	WILDScheduleResumeOfScript( void )
 
 -(void)	toolMayHaveChanged: (NSNotification*)notif
 {
+	UKLog(@"changed? %@ %@",notif.name,[NSApplication sharedApplication].mainWindow.title);
 	[self validateUIItemsForWindow: [NSApplication sharedApplication].mainWindow];
 }
 
@@ -651,6 +656,7 @@ void	WILDScheduleResumeOfScript( void )
 		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidChangeScreenNotification object: mObservedMainWindow];
 		mObservedMainWindow = nil;
 	}
+	UKLog(@"main gone away? %@ %@",notif.name,[NSApplication sharedApplication].mainWindow.title);
 	[self validateUIItemsForWindow: [NSApplication sharedApplication].mainWindow];
 }
 
@@ -658,14 +664,25 @@ void	WILDScheduleResumeOfScript( void )
 -(void)	mainWindowChanged: (NSNotification*)notif
 {
 	NSWindow*		wd = notif.object;
-	[self validateUIItemsForWindow: wd];
+	NSWindow*		mainWd = [NSApplication sharedApplication].mainWindow;
+	if( mainWd )
+		[self validateUIItemsForWindow: mainWd];
+	UKLog(@"main changed? %@ %@ %@",notif.name,wd.title,[NSApplication sharedApplication].mainWindow.title);
 	
-	[self positionToolbarOnScreen: wd.screen];
+	if( wd )
+	{
+		[self positionToolbarOnScreen: wd.screen];
+	}
 	
 	if( mObservedMainWindow )
+	{
 		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidChangeScreenNotification object: mObservedMainWindow];
+	}
 	mObservedMainWindow = wd;
-	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowDidChangeScreen:) name: NSWindowDidChangeScreenNotification object: mObservedMainWindow];
+	if( wd )
+	{
+		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mainWindowDidChangeScreen:) name: NSWindowDidChangeScreenNotification object: mObservedMainWindow];
+	}
 }
 
 

@@ -1537,14 +1537,18 @@ using namespace Carlson;
 -(IBAction)	deleteCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	[self stackBeingEdited]->DeleteCard( [self stackBeingEdited]->GetCurrentCard() );
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+		theStack->DeleteCard( [self stackBeingEdited]->GetCurrentCard() );
 }
 
 
 -(IBAction)	deleteStack: (id)sender
 {
 	CAutoreleasePool	pool;
-	[self stackBeingEdited]->GetDocument()->DeleteStack( [self stackBeingEdited] );
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+		theStack->GetDocument()->DeleteStack( [self stackBeingEdited] );
 }
 
 
@@ -1560,48 +1564,72 @@ using namespace Carlson;
 
 -(IBAction)	bringToFront: (id)sender
 {
-	[self stackBeingEdited]->BringSelectedItemToFront();
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+		theStack->BringSelectedItemToFront();
 }
 
 
 -(IBAction)	bringForward: (id)sender
 {
-	[self stackBeingEdited]->BringSelectedItemForward();
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+		theStack->BringSelectedItemForward();
 }
 
 
 -(IBAction)	sendBackward: (id)sender
 {
-	[self stackBeingEdited]->SendSelectedItemBackward();
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+		theStack->SendSelectedItemBackward();
 }
 
 
 -(IBAction)	sendToBack: (id)sender
 {
-	[self stackBeingEdited]->SendSelectedItemToBack();
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+		theStack->SendSelectedItemToBack();
 }
 
 
 -(IBAction)	takeToolFromTag: (id)sender
 {
-	[self stackBeingEdited]->SetTool( (TTool) [sender tag] );
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+		theStack->SetTool( (TTool) [sender tag] );
 }
 
 
 -(BOOL)	validateUserInterfaceItem: (id <NSValidatedUserInterfaceItem>)sender
 {
+	CStack* theStack = [self stackBeingEdited];
+	BOOL canEditStack = CStack::GetMainStack() == theStack;
 	if( [sender action] == @selector(takeToolFromTag:) )
 	{
-		if( [sender tag] == [self stackBeingEdited]->GetTool() )
+		if( canEditStack && [sender tag] == theStack->GetTool() )
 			[(NSButton*)sender setState: NSOnState];
 		else
 			[(NSButton*)sender setState: NSOffState];
-		return YES;
+		return canEditStack;
 	}
 	else if( sender.action == @selector(toggleBackgroundEditMode:) )
 	{
-		[(NSButton*)sender setState: [self stackBeingEdited]->GetEditingBackground() ? NSOnState : NSOffState];
-		return YES;
+		[(NSButton*)sender setState: (canEditStack && theStack->GetEditingBackground()) ? NSOnState : NSOffState];
+		return canEditStack;
+	}
+	else if( sender.action == @selector(newPart:) )
+	{
+		return canEditStack;
+	}
+	else if( sender.action == @selector(newCard:) )
+	{
+		return canEditStack;
+	}
+	else if( sender.action == @selector(newBackground:) )
+	{
+		return canEditStack;
 	}
 	else
 		return [self respondsToSelector: sender.action];
@@ -1611,28 +1639,44 @@ using namespace Carlson;
 -(IBAction)	newStack: (id)sender
 {
 	CAutoreleasePool	pool;
-	[self stackBeingEdited]->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+	{
+		theStack->GetDocument()->AddNewStack()->GoThereInNewWindow( EOpenInNewWindow, theStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	}
 }
 
 
 -(IBAction)	newCard: (id)sender
 {
 	CAutoreleasePool	pool;
-	[self stackBeingEdited]->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+	{
+		theStack->AddNewCard()->GoThereInNewWindow( EOpenInSameWindow, theStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	}
 }
 
 
 -(IBAction)	newBackground: (id)sender
 {
 	CAutoreleasePool	pool;
-	[self stackBeingEdited]->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, [self stackBeingEdited], NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+	{
+		theStack->AddNewCardWithBackground()->GoThereInNewWindow( EOpenInSameWindow, theStack, NULL, [](){  }, "", EVisualEffectSpeedNormal );
+	}
 }
 
 
 -(IBAction)	newPart: (id)sender
 {
-	[self stackBeingEdited]->NewPart( [sender tag] );
-	[self refreshExistenceAndOrderOfAllViews];
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+	{
+		theStack->NewPart( [sender tag] );
+		[self refreshExistenceAndOrderOfAllViews];
+	}
 }
 
 
@@ -1651,30 +1695,40 @@ using namespace Carlson;
 
 -(NSUInteger) validModesForFontPanel: (NSFontPanel *) fontPanel
 {
-	return NSFontPanelFaceModeMask | NSFontPanelSizeModeMask | NSFontPanelCollectionModeMask | NSFontPanelUnderlineEffectModeMask | NSFontPanelStrikethroughEffectModeMask | NSFontPanelTextColorEffectModeMask;
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
+	{
+		return NSFontPanelFaceModeMask | NSFontPanelSizeModeMask | NSFontPanelCollectionModeMask | NSFontPanelUnderlineEffectModeMask | NSFontPanelStrikethroughEffectModeMask | NSFontPanelTextColorEffectModeMask;
+	}
+	else
+		return 0;
 }
 
 
 -(void)	changeFont: (NSFontManager*)sender
 {
 	CAutoreleasePool	pool;
-	CLayer		*	owner = [self stackBeingEdited]->GetCurrentLayer();
-	CMacPartBase*	currMacPart = NULL;
-	size_t			numParts = owner->GetNumParts();
-	for( size_t x = 0; x < numParts; x++ )
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
 	{
-		CPart*		currPart = owner->GetPart( x );
-		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-		if( currMacPart && currPart->IsSelected() )
+		CLayer		*	owner = theStack->GetCurrentLayer();
+		CMacPartBase*	currMacPart = NULL;
+		size_t			numParts = owner->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
 		{
-			NSMutableDictionary*	oldAttrs = [currMacPart->GetCocoaAttributesForPart() mutableCopy];
-			NSFont*					theFont = [oldAttrs objectForKey: NSFontAttributeName];
-			if( theFont )
+			CPart*		currPart = owner->GetPart( x );
+			currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+			if( currMacPart && currPart->IsSelected() )
 			{
-				[oldAttrs setObject: [sender convertFont: theFont] forKey: NSFontAttributeName];
-				currMacPart->SetCocoaAttributesForPart( oldAttrs );
+				NSMutableDictionary*	oldAttrs = [currMacPart->GetCocoaAttributesForPart() mutableCopy];
+				NSFont*					theFont = [oldAttrs objectForKey: NSFontAttributeName];
+				if( theFont )
+				{
+					[oldAttrs setObject: [sender convertFont: theFont] forKey: NSFontAttributeName];
+					currMacPart->SetCocoaAttributesForPart( oldAttrs );
+				}
+				[oldAttrs release];
 			}
-			[oldAttrs release];
 		}
 	}
 }
@@ -1683,17 +1737,21 @@ using namespace Carlson;
 -(void)	changeAttributes: (NSFontManager*)sender
 {
 	CAutoreleasePool	pool;
-	CLayer		*	owner = [self stackBeingEdited]->GetCurrentLayer();
-	CMacPartBase*	currMacPart = NULL;
-	size_t			numParts = owner->GetNumParts();
-	for( size_t x = 0; x < numParts; x++ )
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
 	{
-		CPart*		currPart = owner->GetPart( x );
-		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-		if( currMacPart && currPart->IsSelected() )
+		CLayer		*	owner = theStack->GetCurrentLayer();
+		CMacPartBase*	currMacPart = NULL;
+		size_t			numParts = owner->GetNumParts();
+		for( size_t x = 0; x < numParts; x++ )
 		{
-			NSDictionary*	oldAttrs = currMacPart->GetCocoaAttributesForPart();
-			currMacPart->SetCocoaAttributesForPart( [sender convertAttributes: oldAttrs] );
+			CPart*		currPart = owner->GetPart( x );
+			currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+			if( currMacPart && currPart->IsSelected() )
+			{
+				NSDictionary*	oldAttrs = currMacPart->GetCocoaAttributesForPart();
+				currMacPart->SetCocoaAttributesForPart( [sender convertAttributes: oldAttrs] );
+			}
 		}
 	}
 }
@@ -1702,31 +1760,13 @@ using namespace Carlson;
 -(void)	reflectFontOfSelectedParts
 {
 	CAutoreleasePool	pool;
-	CLayer		*		owner = [self stackBeingEdited]->GetCurrentCard()->GetBackground();
-	CMacPartBase*		currMacPart = NULL;
-	size_t				numParts = owner->GetNumParts();
-	BOOL				multiple = NO;
-	for( size_t x = 0; x < numParts; x++ )
+	CStack* theStack = [self stackBeingEdited];
+	if( CStack::GetMainStack() == theStack )
 	{
-		CPart*		currPart = owner->GetPart( x );
-		currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-		if( currMacPart && currPart->IsSelected() )
-		{
-			NSDictionary*	attrs = currMacPart->GetCocoaAttributesForPart();
-			NSFont*			theFont = [attrs objectForKey: NSFontAttributeName];
-			if( theFont )
-			{
-				[[NSFontManager sharedFontManager] setSelectedFont: theFont isMultiple: multiple];
-				multiple = YES;
-			}
-			[[NSFontManager sharedFontManager] setSelectedAttributes: attrs isMultiple: multiple];
-		}
-	}
-
-	if( ![self stackBeingEdited]->GetEditingBackground() )
-	{
-		owner = [self stackBeingEdited]->GetCurrentCard();
-		numParts = owner->GetNumParts();
+		CLayer		*		owner = theStack->GetCurrentCard()->GetBackground();
+		CMacPartBase*		currMacPart = NULL;
+		size_t				numParts = owner->GetNumParts();
+		BOOL				multiple = NO;
 		for( size_t x = 0; x < numParts; x++ )
 		{
 			CPart*		currPart = owner->GetPart( x );
@@ -1741,6 +1781,28 @@ using namespace Carlson;
 					multiple = YES;
 				}
 				[[NSFontManager sharedFontManager] setSelectedAttributes: attrs isMultiple: multiple];
+			}
+		}
+
+		if( !theStack->GetEditingBackground() )
+		{
+			owner = [self stackBeingEdited]->GetCurrentCard();
+			numParts = owner->GetNumParts();
+			for( size_t x = 0; x < numParts; x++ )
+			{
+				CPart*		currPart = owner->GetPart( x );
+				currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+				if( currMacPart && currPart->IsSelected() )
+				{
+					NSDictionary*	attrs = currMacPart->GetCocoaAttributesForPart();
+					NSFont*			theFont = [attrs objectForKey: NSFontAttributeName];
+					if( theFont )
+					{
+						[[NSFontManager sharedFontManager] setSelectedFont: theFont isMultiple: multiple];
+						multiple = YES;
+					}
+					[[NSFontManager sharedFontManager] setSelectedAttributes: attrs isMultiple: multiple];
+				}
 			}
 		}
 	}
