@@ -606,7 +606,7 @@ std::vector<CAddHandlerListEntry>	CConcreteObject::GetAddHandlerList()
 		handlers.pop_back();
 	}
 	
-	if( !hadScript )	// Get rid of script we compiled, so user sees parse errors when it's next parsed.
+	if( !hadScript && mScriptObject )	// Get rid of script we compiled, so user sees parse errors when it's next parsed.
 	{
 		LEOScriptRelease( mScriptObject );
 		mScriptObject = NULL;
