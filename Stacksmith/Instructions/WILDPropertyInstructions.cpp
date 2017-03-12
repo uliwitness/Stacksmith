@@ -45,7 +45,7 @@ using namespace Carlson;
 					value that converts to a string.
 	
 	object -		The object from which to retrieve the property, as a
-					WILDObjectValue (i.e. isa = kLeoValueTypeWILDObject).
+					WILDObjectValue (i.e. isa = kLeoValueTypeWILDObject or isa = kLeoValueTypeObjectDescriptor).
 	
 	(PUSH_PROPERTY_OF_OBJECT_INSTR)
 */
@@ -105,7 +105,7 @@ void	LEOPushPropertyOfObjectInstruction( LEOContext* inContext )
 					that converts to a string.
 					
 	object -		The object to change the property on. This must be a
-					WILDObjectValue (i.e. isa = kLeoValueTypeWILDObject).
+					WILDObjectValue (i.e. isa = kLeoValueTypeWILDObject or isa = kLeoValueTypeObjectDescriptor).
 	
 	value -			The new value to assign to the given property.
 	
