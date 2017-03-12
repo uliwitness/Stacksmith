@@ -1032,8 +1032,11 @@ using namespace Carlson;
         }
 	}
 	NSDisableScreenUpdates();
-//	if( !prevWindow )
-//		[self.window center];
+	if( strcasecmp(mStack->GetThemeName().c_str(),"dark") == 0 )
+	{
+		self.window.appearance = [NSAppearance appearanceNamed: NSAppearanceNameVibrantDark];
+	}
+
 	[self.window setDelegate: self];
 	if( mWasVisible )
 		[self.window orderFront: self];

@@ -4,6 +4,7 @@
     <id>2</id>
     <name>Tools</name>
     <style>palette</style>
+	<theme>dark</theme>
     <cardCount>1</cardCount>
     <cantModify><false/></cantModify>
     <cantDelete><false/></cantDelete>

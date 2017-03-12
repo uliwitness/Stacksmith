@@ -413,6 +413,21 @@ void	CStackMac::SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b 
 }
 
 
+void	CStackMac::SetThemeName( std::string inThemeName )
+{
+	CStack::SetThemeName( inThemeName );
+	
+	if( strcasecmp(inThemeName.c_str(),"dark") == 0 )
+	{
+		mMacWindowController.window.appearance = [NSAppearance appearanceNamed: NSAppearanceNameVibrantDark];
+	}
+	else
+	{
+		mMacWindowController.window.appearance = nil;
+	}
+}
+
+
 void	CStackMac::ClearAllGuidelines( bool inTrackingDone )
 {
 	CStack::ClearAllGuidelines( inTrackingDone );

@@ -80,6 +80,9 @@ public:
 	virtual LEOInteger			GetBottom();
 	virtual void				SetRect( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b );
 	
+	virtual void				SetThemeName( std::string inThemeName );
+
+	
 	virtual CUndoStack*			GetUndoStack();
 
 	virtual void				ClearAllGuidelines( bool inTrackingDone = false );

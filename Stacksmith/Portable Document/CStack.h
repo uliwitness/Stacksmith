@@ -172,6 +172,9 @@ public:
 	virtual bool	IsVisible()								{ return mVisible; }
 	virtual void	SetVisible( bool n );
 	
+	virtual void		SetThemeName( std::string inThemeName )	{ mThemeName = inThemeName; IncrementChangeCount(); }
+	virtual std::string	GetThemeName()							{ return mThemeName; }
+	
 	// Allow code to trigger showing the UI:
 	virtual void	Show( TEvenIfVisible inEvenIfVisible )		{ mVisible = true; }
 	virtual void	Hide()										{ mVisible = false; }
@@ -223,6 +226,7 @@ protected:
 	std::vector<CBackgroundRef>	mBackgrounds;		//!< List of all backgrounds in this stack.
 	std::set<CCardRef>			mMarkedCards;		//!< List of all cards whose 'marked' property is true in this stack.
 	TStackStyle					mStyle;				//!< Window style.
+	std::string					mThemeName = "default";	//!< Theme controlling the window's appearance. Not all platforms may support all themes, and some may be platform-specific. If a theme isn't known to a platform, you get the default theme, otherwise you might get an exact match or the platform's closest match.
 	
 	bool						mLoading;			//!< Currently loading, not yet ready for use.
 	bool						mLoaded;			//!< Finished loading, ready for use.

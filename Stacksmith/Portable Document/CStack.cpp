@@ -138,6 +138,9 @@ void	CStack::Load( std::function<void(CStack*)> inCompletionBlock )
 			mStyle = GetStackStyleFromString( stackStyle.c_str() );
 			if( mStyle == EStackStyle_Last )
 				mStyle = EStackStyleDocument;
+
+			mThemeName = "default";
+			CTinyXMLUtils::GetStringNamed( root, "theme", mThemeName );
 			
 			mScript.erase();
 			CTinyXMLUtils::GetStringNamed( root, "script", mScript );
@@ -257,6 +260,13 @@ bool	CStack::Save( const std::string& inPackagePath )
 		styleElem->SetText( sStackStyleStrings[mStyle] );
 		root->InsertEndChild( styleElem );
 		
+		if( strcasecmp(mThemeName.c_str(), "default") != 0 )
+		{
+			tinyxml2::XMLElement*		themeElem = document.NewElement("theme");
+			themeElem->SetText( mThemeName.c_str() );
+			root->InsertEndChild( themeElem );
+		}
+
 		tinyxml2::XMLElement*		cardCountElem = document.NewElement("cardCount");
 		cardCountElem->SetText((unsigned)mCards.size());
 		root->InsertEndChild( cardCountElem );
@@ -1045,6 +1055,12 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 		LEOInitUnsetValue( outValue, kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp(inPropertyName, "theme") == 0 )
+	{
+		std::string	currentTheme = GetThemeName();
+		LEOInitStringValue( outValue, currentTheme.c_str(), currentTheme.size(), kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else
 		return CConcreteObject::GetPropertyNamed(inPropertyName, byteRangeStart, byteRangeEnd, inContext, outValue );
 }
@@ -1129,6 +1145,13 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 		char		styleBuf[100] = {0};
 		const char*	styleStr = LEOGetValueAsString( inValue, styleBuf, sizeof(styleBuf), inContext );
 		SetDocumentURL( styleStr );
+		return true;
+	}
+	else if( strcasecmp(inPropertyName, "theme") == 0 )
+	{
+		char		themeNameBuf[100] = {0};
+		const char*	nameStr = LEOGetValueAsString( inValue, themeNameBuf, sizeof(themeNameBuf), inContext );
+		SetThemeName( std::string(nameStr) );
 		return true;
 	}
 	else
