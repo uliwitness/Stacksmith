@@ -1026,7 +1026,7 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 			CPart*	currPart = theCard->GetPart(x);
 			if( currPart->IsSelected() )
 			{
-				currPart->InitValue( outValue, kLEOInvalidateReferences, inContext );
+				currPart->InitObjectDescriptorValue( outValue, kLEOInvalidateReferences, inContext );
 				return true;
 			}
 		}
@@ -1037,7 +1037,7 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 			CPart*	currPart = theBackground->GetPart(x);
 			if( currPart->IsSelected() )
 			{
-				currPart->InitValue( outValue, kLEOInvalidateReferences, inContext );
+				currPart->InitObjectDescriptorValue( outValue, kLEOInvalidateReferences, inContext );
 				return true;
 			}
 		}

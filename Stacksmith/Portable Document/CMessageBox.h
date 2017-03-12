@@ -33,7 +33,9 @@ public:
 	virtual std::string	GetResultText()									{ return mResultText; };
 	virtual void		SetResultText( const std::string& inString)		{ mResultText = inString; };
 	// We don't provide InitValue here because the message box can be used to run scripts in many context groups.
-    
+
+	virtual std::string	GetObjectDescriptorString() override { return "message box"; }
+	
     virtual void        ContextCompleted( LEOContext* ctx ) override;
 
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler ) override;

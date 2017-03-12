@@ -722,6 +722,12 @@ void	CPart::SetRectFromUndo( LEOInteger l, LEOInteger t, LEOInteger r, LEOIntege
 }
 
 
+std::string		CPart::GetObjectDescriptorString()
+{
+	return std::string((dynamic_cast<CCard*>(GetOwner()) ? "card part id " : "background part id ")) + std::to_string(GetID());
+}
+
+
 std::string		CPart::GenerateDisplayName( const char* inTypeName )
 {
 	std::stringstream		strs;

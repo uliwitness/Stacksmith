@@ -171,5 +171,9 @@ void	CBackground::CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect
 }
 
 
+std::string		CBackground::GetObjectDescriptorString()
+{
+	return std::string("background id ") + std::to_string(GetID());
+}
 
 

@@ -135,6 +135,9 @@ public:
 	
 	virtual CPart*				Retain() override;
 	virtual void				Release() override;
+
+	virtual std::string			GetObjectDescriptorString() override;
+
 	
 	virtual ObjectID			GetID()	const override	{ return mID; };
 	virtual void				SetID( ObjectID i )	{ mID = i; };

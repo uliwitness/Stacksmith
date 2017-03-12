@@ -37,6 +37,7 @@ public:
 	
 	virtual std::string			GetDisplayName() override;
 	virtual std::string			GetTypeName() override			{ return std::string("background"); };
+	virtual std::string			GetObjectDescriptorString() override;
 	
 	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
 	

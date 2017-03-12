@@ -149,6 +149,8 @@ public:
 	virtual bool	ShowPropertyEditorForObject( CConcreteObject* inObject ) { return false; };
 	virtual bool	ShowContextualMenuForObject( CConcreteObject* inObject ) { return false; };
 	
+	virtual std::string		GetObjectDescriptorString() override	{ return std::string("stack \"") + mURL + "\""; };
+	
 	virtual void	GetMousePosition( LEONumber *x, LEONumber *y )	{ *x = 0; *y = 0; };
 	virtual void	RectChangedOfPart( CPart* inChangedPart )	{};
 	virtual void	SelectedPartChanged()						{};

@@ -844,6 +844,12 @@ void	CDocument::Dump( size_t inNestingLevel )
 }
 
 
+std::string		CDocument::GetObjectDescriptorString()
+{
+	return std::string("project ") + mURL;
+}
+
+
 CDocumentManager::CDocumentManager()
 	: mFrontDocument(NULL), mDidSendStartup(false)
 {

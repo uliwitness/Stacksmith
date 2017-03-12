@@ -261,4 +261,8 @@ std::string		CCard::GetDisplayName()
 }
 
 
+std::string		CCard::GetObjectDescriptorString()
+{
+	return std::string("card id ") + std::to_string(GetID());
+}
 

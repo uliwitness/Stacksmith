@@ -49,6 +49,7 @@ public:
 	
 	virtual std::string			GetDisplayName() override;
 	virtual std::string			GetTypeName() override			{ return std::string("card"); };
+	virtual std::string			GetObjectDescriptorString() override;
 
 	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock ) override;	// addGuidelineBlock gets called to create guidelines.
 	

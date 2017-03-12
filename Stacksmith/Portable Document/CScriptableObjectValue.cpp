@@ -604,11 +604,12 @@ LEOInteger	GetObjectDescriptorValueAsInteger( LEOValuePtr self, LEOUnit *outUnit
 const char*	GetObjectDescriptorValueAsString( LEOValuePtr self, char* outBuf, size_t bufSize, LEOContext* inContext )
 {
 	CScriptableObject*	actualObject = ((CScriptableObject*)self->object.object);
-	#pragma unused(actualObject)
+	std::string str = actualObject->GetObjectDescriptorString();
 	
 	if( outBuf )
 	{
-		snprintf(outBuf, bufSize -1, "object descriptor");
+		strncpy( outBuf, str.c_str(), bufSize -1 );
+		outBuf[bufSize -1] = 0;
 	}
 	
 	return outBuf;
@@ -629,19 +630,20 @@ void	GetObjectDescriptorValueAsRangeOfString( LEOValuePtr self, LEOChunkType inT
 										size_t inRangeStart, size_t inRangeEnd,
 										char* outBuf, size_t bufSize, LEOContext* inContext )
 {
-	const char*	str = "object descriptor";
+	CScriptableObject*	actualObject = ((CScriptableObject*)self->object.object);
+	std::string str = actualObject->GetObjectDescriptorString();
 	size_t		outChunkStart = 0,
 				outChunkEnd = 0,
 				outDelChunkStart = 0,
 				outDelChunkEnd = 0;
-	LEOGetChunkRanges( str, inType,
+	LEOGetChunkRanges( str.c_str(), inType,
 						inRangeStart, inRangeEnd,
 						&outChunkStart, &outChunkEnd,
 						&outDelChunkStart, &outDelChunkEnd, inContext->itemDelimiter );
 	size_t		len = outChunkEnd -outChunkStart;
 	if( len > bufSize )
 		len = bufSize -1;
-	memmove( outBuf, str +outChunkStart, len );
+	memmove( outBuf, str.c_str() +outChunkStart, len );
 	outBuf[len] = 0;
 }
 

@@ -131,6 +131,8 @@ public:
 	virtual bool		GetNeedsToBeSaved() override;
 	virtual bool		HasVisibleStacks();
 	virtual void		CheckIfWeShouldCloseCauseLastStackClosed();
+
+	virtual std::string	GetObjectDescriptorString() override;
 	
 	virtual void		Dump( size_t inNestingLevel = 0 ) override;
 	static std::string	PathFromFileURL( const std::string& inURL );

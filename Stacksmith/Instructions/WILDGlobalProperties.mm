@@ -147,10 +147,14 @@ void	LEOPushMachineInstruction( LEOContext* inContext )
 }
 
 
+/*
+	PUSH_TARGET_INSTR
+*/
+
 void	LEOPushTargetInstruction( LEOContext* inContext )
 {
 	LEOValuePtr	newVal = LEOPushValueOnStack( inContext, NULL );
-	((CScriptContextUserData*) inContext->userData)->GetTarget()->InitValue( newVal, kLEOInvalidateReferences, inContext );
+	((CScriptContextUserData*) inContext->userData)->GetTarget()->InitObjectDescriptorValue( newVal, kLEOInvalidateReferences, inContext );
 	
 	inContext->currentInstruction++;
 }
