@@ -124,7 +124,7 @@ void	WILDObjCCallInstruction( LEOContext* inContext )
 		{
 			LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -paramCount -4 );
 			LEOValuePtr	retValValue = LEOPushValueOnStack( inContext, NULL );
-			LEOInitNativeObjectValue( retValValue, nil, kLEOInvalidateReferences, inContext );	// +++ Should be a special 'native object' type that doesn't convert to any usable type.
+			LEOInitNativeObjectValue( retValValue, nil, kLEOInvalidateReferences, inContext );
 			inContext->currentInstruction++;
 			return;
 		}
