@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Uli Kusterer. All rights reserved.
 //
 
-#include "CTinyXmlUtils.h"
+#include "CTinyXMLUtils.h"
 
 
 using namespace Carlson;

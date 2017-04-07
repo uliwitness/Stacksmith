@@ -57,7 +57,10 @@ void		CleanUpScriptableObjectValue( LEOValuePtr self, LEOKeepReferencesFlag keep
 
 
 bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContext );
+bool	CanGetScriptableObjectValueAsInteger( LEOValuePtr self, LEOContext* inContext );
+
 bool	CanGetObjectDescriptorValueAsNumber( LEOValuePtr self, LEOContext* inContext );
+bool	CanGetObjectDescriptorValueAsInteger( LEOValuePtr self, LEOContext* inContext );
 LEOValuePtr	GetScriptableObjectValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 size_t	GetScriptableObjectKeyCount( LEOValuePtr self, LEOContext* inContext );
 
@@ -124,7 +127,9 @@ struct LEOValueType	Carlson::kLeoValueTypeScriptableObject =
 	LEOValueIsNotUnset,
 	
 	LEOSetStringLikeValueAsRange,
-	LEOGetStringLikeValueAsRange
+	LEOGetStringLikeValueAsRange,
+	
+	CanGetScriptableObjectValueAsInteger
 };
 
 
@@ -174,7 +179,9 @@ struct LEOValueType	Carlson::kLeoValueTypeObjectDescriptor =
 	LEOValueIsNotUnset,
 	
 	LEOSetStringLikeValueAsRange,
-	LEOGetStringLikeValueAsRange
+	LEOGetStringLikeValueAsRange,
+	
+	CanGetObjectDescriptorValueAsInteger
 };
 
 
@@ -672,6 +679,36 @@ bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContex
 		return false;
 	}
 	
+	bool hadDot = false;
+	
+	for( size_t x = 0; x < txt.size(); x++ )
+	{
+		if( !hadDot && txt[x] == '.' )
+		{
+			hadDot = true;
+		}
+		else if( txt[x] < '0' || txt[x] > '9' )
+		{
+			return false;
+		}
+	}
+	
+	return true;
+}
+
+
+bool	CanGetScriptableObjectValueAsInteger( LEOValuePtr self, LEOContext* inContext )
+{
+	std::string	txt;
+	if( !((CScriptableObject*)self->object.object)->GetTextContents( txt ) )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "This object can have no contents." );
+		return false;
+	}
+	
 	for( size_t x = 0; x < txt.size(); x++ )
 	{
 		if( txt[x] < '0' || txt[x] > '9' )
@@ -683,6 +720,12 @@ bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContex
 
 
 bool	CanGetObjectDescriptorValueAsNumber( LEOValuePtr self, LEOContext* inContext )
+{
+	return false;
+}
+
+
+bool	CanGetObjectDescriptorValueAsInteger( LEOValuePtr self, LEOContext* inContext )
 {
 	return false;
 }
