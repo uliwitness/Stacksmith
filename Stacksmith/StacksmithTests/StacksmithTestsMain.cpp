@@ -13,9 +13,11 @@
 #include "ForgeTypes.h"
 #include "CParseTree.h"
 #include <sstream>
+#include <fstream>
 #include <set>
 #include "CMap.h"
 #include "CRefCountedObject.h"
+#include "CToken.h"
 
 
 #define FIXING_TESTS		0
@@ -813,6 +815,14 @@ LEOINSTR_DUMMY_LAST(WILDChooseInstruction)
 using namespace Carlson;
 
 
+std::ostream& operator << ( std::ostream& stream, const std::deque<CToken>::iterator& currToken )
+{
+	stream << currToken->GetDescription();
+	
+	return stream;
+}
+
+
 class TestRefCountedObject : public CRefCountedObject
 {
 public:
@@ -849,6 +859,17 @@ void	WILDTest( const char* expr, const char* found, const char* expected )
 	{
 		std::cout << TEST_FAIL_PREFIX << expr << " -> \"" << found << "\" == \"" << expected << "\"" << std::endl;
 		sFailed++;
+		
+		std::stringstream expectedFileName;
+		expectedFileName << "expected_" << expr << ".txt";
+		std::ofstream expectedFile(expectedFileName.str());
+		expectedFile << expected;
+		
+		std::stringstream foundFileName;
+		foundFileName << "found_" << expr << ".txt";
+		std::ofstream foundFile(foundFileName.str());
+		foundFile << found;
+		
 	}
 }
 
@@ -959,7 +980,7 @@ int main(int argc, const char * argv[])
 		size_t		errLine = 0, errOffset = 0;
 		
 		const char*scriptOne = "on mouseUp\n\tput card field 1 into theArray\n\tset the currentButton of theArray to the short name of me\n\tput theArray into card field 1\nend mouseUp";
-		const char*resultOne = "Command mouseup\n{\n	# LINE 2\n	Command \"Put\"\n	{\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n			\"\"\n		}\n		localVar( var_thearray )\n	}\n	# LINE 3\n	Command \"Put\"\n	{\n		Property \"short name\"\n		{\n			Operator Call \"LEONoOpInstruction\"\n			{\n			}\n		}\n		Property \"currentbutton\"\n		{\n			localVar( var_thearray )\n		}\n	}\n	# LINE 4\n	Command \"Put\"\n	{\n		localVar( var_thearray )\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n			\"\"\n		}\n	}\n}\n";
+		const char*resultOne = "Command mouseUp\n{\n	# LINE 2\n	Command \"Put\"\n	{\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n			\"\"\n		}\n		localVar( var_thearray )\n	}\n	# LINE 3\n	Command \"Put\"\n	{\n		Property \"short name\"\n		{\n			Operator Call \"LEONoOpInstruction\"\n			{\n			}\n		}\n		Property \"currentbutton\"\n		{\n			localVar( var_thearray )\n		}\n	}\n	# LINE 4\n	Command \"Put\"\n	{\n		localVar( var_thearray )\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n			\"\"\n		}\n	}\n}\n";
 		LEOParseTree*	tree = LEOParseTreeCreateFromUTF8Characters( scriptOne, strlen(scriptOne), theFileID );
 		std::stringstream	sstream;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream, 0 );
@@ -969,7 +990,7 @@ int main(int argc, const char * argv[])
 		LEOCleanUpParseTree(tree);
 
 		const char*scriptTwo = "on mouseUp\n\tif foo is true then\n\tput \"Yay me!\"\n\tend if\nend mouseUp";
-		const char*resultTwo = "Command mouseup\n{\n	# LINE 2\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 3\n		Operator Call \"WILDPrintInstruction\"\n		{\n			\"Yay me!\"\n		}\n	}\n}\n";
+		const char*resultTwo = "Command mouseUp\n{\n	# LINE 2\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 3\n		Operator Call \"WILDPrintInstruction\"\n		{\n			\"Yay me!\"\n		}\n	}\n}\n";
 		tree = LEOParseTreeCreateFromUTF8Characters( scriptTwo, strlen(scriptTwo), theFileID );
 		std::stringstream	sstream2;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream2, 0 );
@@ -979,7 +1000,7 @@ int main(int argc, const char * argv[])
 		LEOCleanUpParseTree(tree);
 
 		const char*script3 = "on selectionChange\n	put line the selectedLine of me of me into cd fld 2\n	download “http://www.zathras.de” to cd fld 2\n	for each chunk\n		put size of the download\n	when done\n		put “Done”\n	end download\n	if foo is true then\n	put boo\n	end if\n	answer “Huh”\nend selectionChange";
-		const char*result3 = "Command selectionchange\n{\n	# LINE 2\n	Command \"Put\"\n	{\n		Function Call \"MakeChunkConst\"\n		{\n			Operator Call \"LEONoOpInstruction\"\n			{\n			}\n			int( 4 )\n			Property \"selectedline\"\n			{\n				Operator Call \"LEONoOpInstruction\"\n				{\n				}\n			}\n			Property \"selectedline\"\n			{\n				Operator Call \"LEONoOpInstruction\"\n				{\n				}\n			}\n		}\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 2 )\n			\"\"\n		}\n	}\n	# LINE 3\n	Command \"download\"\n	{\n		\"http://www.zathras.de\"\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 2 )\n			\"\"\n		}\n		\"::downloadProgress:0\"\n		\"::downloadCompletion:1\"\n	}\n	# LINE 9\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 10\n		Operator Call \"WILDPrintInstruction\"\n		{\n			localVar( var_boo )\n		}\n	}\n	# LINE 12\n	Operator Call \"WILDAnswerInstruction\"\n	{\n		\"Huh\"\n		\"\"\n		\"\"\n		\"\"\n	}\n}\nCommand ::downloadProgress:0\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 5\n	Operator Call \"WILDPrintInstruction\"\n	{\n		Property \"size\"\n		{\n			localVar( download )\n		}\n	}\n}\nCommand ::downloadCompletion:1\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 7\n	Operator Call \"WILDPrintInstruction\"\n	{\n		\"Done\"\n	}\n}\n";
+		const char*result3 = "Command selectionChange\n{\n	# LINE 2\n	Command \"Put\"\n	{\n		Function Call \"MakeChunkConst\"\n		{\n			Operator Call \"LEONoOpInstruction\"\n			{\n			}\n			int( 4 )\n			Property \"selectedline\"\n			{\n				Operator Call \"LEONoOpInstruction\"\n				{\n				}\n			}\n			Property \"selectedline\"\n			{\n				Operator Call \"LEONoOpInstruction\"\n				{\n				}\n			}\n		}\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 2 )\n			\"\"\n		}\n	}\n	# LINE 3\n	Command \"download\"\n	{\n		\"http://www.zathras.de\"\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 2 )\n			\"\"\n		}\n		\"::downloadProgress:0\"\n		\"::downloadCompletion:1\"\n	}\n	# LINE 9\n	If (\n	Operator Call \"LEOEqualOperatorInstruction\"\n	{\n		localVar( var_foo )\n		true\n	}\n	)\n	{\n		# LINE 10\n		Operator Call \"WILDPrintInstruction\"\n		{\n			localVar( var_boo )\n		}\n	}\n	# LINE 12\n	Operator Call \"WILDAnswerInstruction\"\n	{\n		\"Huh\"\n		\"\"\n		\"\"\n		\"\"\n	}\n}\nCommand ::downloadProgress:0\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 5\n	Operator Call \"WILDPrintInstruction\"\n	{\n		Property \"size\"\n		{\n			localVar( download )\n		}\n	}\n}\nCommand ::downloadCompletion:1\n{\n	Command \"GetParameter\"\n	{\n		localVar( download )\n		int( 0 )\n	}\n	# LINE 7\n	Operator Call \"WILDPrintInstruction\"\n	{\n		\"Done\"\n	}\n}\n";
 		tree = LEOParseTreeCreateFromUTF8Characters( script3, strlen(script3), theFileID );
 		std::stringstream	sstream3;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream3, 0 );
@@ -1157,6 +1178,20 @@ int main(int argc, const char * argv[])
 		WILDTest( "Retrieving name for second pointer again.", CRefCountedObject::DebugNameForPointer( tyler ), "Tyler" );
 		WILDTest( "Retrieving name for third pointer again.", CRefCountedObject::DebugNameForPointer( ruth ), "Ruth" );
 		WILDTest( "Retrieving name for third pointer a third time.", CRefCountedObject::DebugNameForPointer( ruth ), "Ruth" );
+	}
+	
+	{
+		const char*			testText1 = "on answer messageName";
+		std::deque<CToken>	tokens1 = CTokenizer::TokenListFromText( testText1, strlen(testText1) );
+		std::deque<CToken>::iterator currentToken1 = tokens1.begin();
+		std::deque<CToken>::iterator expectedToken1 = tokens1.begin(); expectedToken1++; expectedToken1++;
+		std::deque<CToken>::iterator currentToken2 = tokens1.begin();
+		std::deque<CToken>::iterator expectedToken2 = tokens1.begin();
+		WILDTest( "Seeing if we can match tokens.", CTokenizer::NextTokensAreIdentifiers( "test1", currentToken1, tokens1, EOnIdentifier, EAnswerIdentifier, ELastIdentifier_Sentinel ), true );
+		WILDTest( "Verifying the current token was advanced correctly on match.", currentToken1, expectedToken1 );
+		
+		WILDTest( "Seeing if we can fail to match tokens.", CTokenizer::NextTokensAreIdentifiers( "test2", currentToken2, tokens1, EOnIdentifier, EStackIdentifier, ELastIdentifier_Sentinel ), false );
+		WILDTest( "Verifying the current token was not advanced on mismatch.", currentToken2, expectedToken2 );
 	}
 	
 	#if FIXING_TESTS
