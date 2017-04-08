@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -863,7 +863,7 @@
                         <rect key="frame" x="18" y="16" width="345" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </progressIndicator>
-                    <textField verticalHuggingPriority="750" id="568">
+                    <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="568">
                         <rect key="frame" x="17" y="44" width="347" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="Loading…" id="570">
@@ -1133,7 +1133,6 @@
                 <outlet property="tagsColor" destination="kyE-xv-Tse" id="kwf-hp-8Gy"/>
             </connections>
         </customObject>
-        <customObject id="KD6-Oz-Eaf" customClass="WILDInspectorWindowController"/>
         <customObject id="4c7-Nh-Ahs" userLabel="UKSCTDUserIdentifiersPrefsController" customClass="UKSCTDUserIdentifiersPrefsController">
             <connections>
                 <outlet property="identifiersList" destination="TOx-Bf-TMH" id="xz5-Eg-kFk"/>
@@ -1165,7 +1164,7 @@
                                         <action selector="takeCommentsColorFrom:" target="5Vc-hx-qzN" id="1ss-9k-XFZ"/>
                                     </connections>
                                 </colorWell>
-                                <textField verticalHuggingPriority="750" id="8tz-FF-CLX">
+                                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="8tz-FF-CLX">
                                     <rect key="frame" x="73" y="260" width="163" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Comments" id="AKV-rb-Puy">
@@ -1182,7 +1181,7 @@
                                         <action selector="takeStringsColorFrom:" target="5Vc-hx-qzN" id="iPu-Kf-z7O"/>
                                     </connections>
                                 </colorWell>
-                                <textField verticalHuggingPriority="750" id="WcF-ge-O8e">
+                                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="WcF-ge-O8e">
                                     <rect key="frame" x="73" y="226" width="163" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Strings" id="mxi-SC-WKy">
@@ -1199,7 +1198,7 @@
                                         <action selector="takeIdentifiersColorFrom:" target="5Vc-hx-qzN" id="XIJ-YW-vmS"/>
                                     </connections>
                                 </colorWell>
-                                <textField verticalHuggingPriority="750" id="2UT-mh-XBb">
+                                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="2UT-mh-XBb">
                                     <rect key="frame" x="73" y="192" width="163" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="RlP-Eb-aiQ">
@@ -1218,7 +1217,7 @@
                                         <action selector="takeIdentifiers2ColorFrom:" target="5Vc-hx-qzN" id="YGc-fv-wD7"/>
                                     </connections>
                                 </colorWell>
-                                <textField verticalHuggingPriority="750" id="mgx-1J-VnE">
+                                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="mgx-1J-VnE">
                                     <rect key="frame" x="73" y="158" width="163" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="S1x-cx-4cG">
@@ -1229,7 +1228,7 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" id="7XC-Ny-HsY">
+                                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="7XC-Ny-HsY">
                                     <rect key="frame" x="73" y="124" width="163" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="BxA-SR-2GS">
@@ -1248,7 +1247,7 @@
                                         <action selector="takePreprocessorColorFrom:" target="5Vc-hx-qzN" id="VEi-Xs-qRx"/>
                                     </connections>
                                 </colorWell>
-                                <textField verticalHuggingPriority="750" id="PXa-1D-2Rh">
+                                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="PXa-1D-2Rh">
                                     <rect key="frame" x="73" y="90" width="163" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="HTML Tags" id="sc7-NU-2W2">
@@ -1273,7 +1272,7 @@
                                         <action selector="takeComments2ColorFrom:" target="5Vc-hx-qzN" id="cLr-Hc-knY"/>
                                     </connections>
                                 </colorWell>
-                                <textField verticalHuggingPriority="750" id="Iye-qk-kc2">
+                                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="Iye-qk-kc2">
                                     <rect key="frame" x="73" y="56" width="163" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Secondary Comments" id="ofX-uC-5Yc">
@@ -1372,7 +1371,7 @@
                             </subviews>
                         </view>
                     </box>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="RgV-5f-ExY">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="RgV-5f-ExY">
                         <rect key="frame" x="18" y="23" width="35" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font:" id="qYm-r5-doO">

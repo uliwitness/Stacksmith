@@ -644,7 +644,7 @@ void	WILDScheduleResumeOfScript( void )
 
 -(void)	toolMayHaveChanged: (NSNotification*)notif
 {
-	UKLog(@"changed? %@ %@",notif.name,[NSApplication sharedApplication].mainWindow.title);
+	//UKLog(@"changed? %@ %@",notif.name,[NSApplication sharedApplication].mainWindow.title);
 	[self validateUIItemsForWindow: [NSApplication sharedApplication].mainWindow];
 }
 
@@ -656,7 +656,7 @@ void	WILDScheduleResumeOfScript( void )
 		[[NSNotificationCenter defaultCenter] removeObserver: self name: NSWindowDidChangeScreenNotification object: mObservedMainWindow];
 		mObservedMainWindow = nil;
 	}
-	UKLog(@"main gone away? %@ %@",notif.name,[NSApplication sharedApplication].mainWindow.title);
+	//UKLog(@"main gone away? %@ %@",notif.name,[NSApplication sharedApplication].mainWindow.title);
 	[self validateUIItemsForWindow: [NSApplication sharedApplication].mainWindow];
 }
 
@@ -667,7 +667,7 @@ void	WILDScheduleResumeOfScript( void )
 	NSWindow*		mainWd = [NSApplication sharedApplication].mainWindow;
 	if( mainWd )
 		[self validateUIItemsForWindow: mainWd];
-	UKLog(@"main changed? %@ %@ %@",notif.name,wd.title,[NSApplication sharedApplication].mainWindow.title);
+	//UKLog(@"main changed? %@ %@ %@",notif.name,wd.title,[NSApplication sharedApplication].mainWindow.title);
 	
 	if( wd )
 	{
