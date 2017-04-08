@@ -680,10 +680,13 @@ bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContex
 	}
 	
 	bool hadDot = false;
+	bool isFirst = true;
 	
 	for( size_t x = 0; x < txt.size(); x++ )
 	{
-		if( !hadDot && txt[x] == '.' )
+		if( isFirst && txt[x] == '-' )
+			;	// It's OK to have negative numbers.
+		else if( !hadDot && txt[x] == '.' )
 		{
 			hadDot = true;
 		}
@@ -691,6 +694,7 @@ bool	CanGetScriptableObjectValueAsNumber( LEOValuePtr self, LEOContext* inContex
 		{
 			return false;
 		}
+		isFirst = false;
 	}
 	
 	return true;
