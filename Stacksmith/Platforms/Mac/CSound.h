@@ -22,6 +22,9 @@ class CSound
 public:
 	static void		PlaySoundWithURLAndMelody( const std::string& inURL, const std::string& inMelody );
 	static bool		IsDone();
+	
+	static bool		StartRecordingToURL( const std::string& inURL );
+	static void		StopRecording();
 };
 
 

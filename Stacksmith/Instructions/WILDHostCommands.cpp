@@ -60,6 +60,8 @@ void	WILDWaitInstruction( LEOContext* inContext );
 void	WILDMoveInstruction( LEOContext* inContext );
 void	WILDChooseInstruction( LEOContext* inContext );
 void	WILDMarkInstruction( LEOContext* inContext );
+void	WILDStartRecordingSoundInstruction( LEOContext* inContext );
+void	WILDStopRecordingSoundInstruction( LEOContext* inContext );
 void	WILDInsertScriptInstruction( LEOContext* inContext );
 
 
@@ -1166,6 +1168,47 @@ void	WILDMarkInstruction( LEOContext* inContext )
 }
 
 
+/*!
+	Implements the 'start recording sound' command. The first parameter must be a
+	string, the name to give the newly recorded sound.
+	
+	(WILD_START_RECORDING_SOUND_INSTR)
+*/
+void	WILDStartRecordingSoundInstruction( LEOContext* inContext )
+{
+	LEOValuePtr				theValue = inContext->stackEndPtr -1;
+	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
+
+	char soundName[1024] = { 0 };
+	LEOGetValueAsString( theValue, soundName, sizeof(soundName), inContext );
+	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		return;
+	
+	CMediaCache	&	theMediaCache = userData->GetStack()->GetDocument()->GetMediaCache();
+	ObjectID		theID = theMediaCache.GetUniqueIDForMedia();
+	std::string		soundURL = theMediaCache.AddMediaWithIDTypeNameSuffixHotSpotIsBuiltInReturningURL( theID, EMediaTypeSound, soundName, "m4a" );
+	
+	CSound::StartRecordingToURL( soundURL );
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -1 );
+	
+	inContext->currentInstruction++;
+}
+
+/*!
+	Implements the 'start recording sound' command. The first parameter must be a
+	string, the name to give the newly recorded sound.
+	
+	(WILD_STOP_RECORDING_SOUND_INSTR)
+*/
+void	WILDStopRecordingSoundInstruction( LEOContext* inContext )
+{
+	CSound::StopRecording();
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
 LEOINSTR(WILDGoBackInstruction)
@@ -1186,7 +1229,9 @@ LEOINSTR(WILDHideInstruction)
 LEOINSTR(WILDWaitInstruction)
 LEOINSTR(WILDMoveInstruction)
 LEOINSTR(WILDChooseInstruction)
-LEOINSTR_LAST(WILDMarkInstruction)
+LEOINSTR(WILDMarkInstruction)
+LEOINSTR(WILDStartRecordingSoundInstruction)
+LEOINSTR_LAST(WILDStopRecordingSoundInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostCommands[] =
@@ -1352,6 +1397,34 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 		{
 			{ EHostParamImmediateValue, ELastIdentifier_Sentinel, EHostParameterRequired, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParamExpressionOrIdentifiersTillLineEnd, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EStartIdentifier, WILD_START_RECORDING_SOUND_INSTR, 0, 0, '1', 'X',
+		{
+			{ EHostParamInvisibleIdentifier, ERecordingIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '1', '1' },
+			{ EHostParamLabeledValue, ESoundIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '1', 'X' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EStopIdentifier, WILD_STOP_RECORDING_SOUND_INSTR, 0, 0, '1', 'X',
+		{
+			{ EHostParamInvisibleIdentifier, ERecordingIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '1', '1' },
+			{ EHostParamInvisibleIdentifier, ESoundIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '1', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

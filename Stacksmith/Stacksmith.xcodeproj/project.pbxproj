@@ -283,6 +283,9 @@
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		55469F0C1A9A784E0072A721 /* EditTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55469F0B1A9A784E0072A721 /* EditTextTool.tiff */; };
+		554AE1A51E9A628100B5E97D /* UKAudioStreamBasicDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 554AE1A21E9A628100B5E97D /* UKAudioStreamBasicDescription.m */; };
+		554AE1A61E9A628100B5E97D /* UKSoundFileRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 554AE1A41E9A628100B5E97D /* UKSoundFileRecorder.m */; };
+		554AE1B31E9A7DF500B5E97D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554AE1B21E9A7DF500B5E97D /* CoreAudio.framework */; };
 		554CC83C1CD7EC0200D5D7B6 /* CCanvas.mm in Sources */ = {isa = PBXBuildFile; fileRef = 554CC83A1CD7EC0200D5D7B6 /* CCanvas.mm */; };
 		554CC8471CD8033B00D5D7B6 /* CImageCanvas.mm in Sources */ = {isa = PBXBuildFile; fileRef = 554CC8451CD8033B00D5D7B6 /* CImageCanvas.mm */; };
 		554DBABC1A9B362300130864 /* MessageBoxIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 554DBAB91A9B362300130864 /* MessageBoxIcon.tiff */; };
@@ -958,6 +961,11 @@
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
 		55469F0B1A9A784E0072A721 /* EditTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = EditTextTool.tiff; path = Resources/EditTextTool.tiff; sourceTree = "<group>"; };
+		554AE1A11E9A628100B5E97D /* UKAudioStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKAudioStreamBasicDescription.h; path = ../UKSoundFileRecorder/UKAudioStreamBasicDescription.h; sourceTree = "<group>"; };
+		554AE1A21E9A628100B5E97D /* UKAudioStreamBasicDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKAudioStreamBasicDescription.m; path = ../UKSoundFileRecorder/UKAudioStreamBasicDescription.m; sourceTree = "<group>"; };
+		554AE1A31E9A628100B5E97D /* UKSoundFileRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKSoundFileRecorder.h; path = ../UKSoundFileRecorder/UKSoundFileRecorder.h; sourceTree = "<group>"; };
+		554AE1A41E9A628100B5E97D /* UKSoundFileRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKSoundFileRecorder.m; path = ../UKSoundFileRecorder/UKSoundFileRecorder.m; sourceTree = "<group>"; };
+		554AE1B21E9A7DF500B5E97D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		554CC83A1CD7EC0200D5D7B6 /* CCanvas.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CCanvas.mm; path = Platforms/Mac/CCanvas.mm; sourceTree = "<group>"; };
 		554CC83B1CD7EC0200D5D7B6 /* CCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCanvas.h; path = Platforms/Mac/CCanvas.h; sourceTree = "<group>"; };
 		554CC8451CD8033B00D5D7B6 /* CImageCanvas.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CImageCanvas.mm; path = Platforms/Mac/CImageCanvas.mm; sourceTree = "<group>"; };
@@ -1282,6 +1290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				554AE1B31E9A7DF500B5E97D /* CoreAudio.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				55B07416188A1DA10023BA3E /* CoreMedia.framework in Frameworks */,
 				555E539E18922766001487C1 /* AVKit.framework in Frameworks */,
@@ -1427,6 +1436,7 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				554AE1B21E9A7DF500B5E97D /* CoreAudio.framework */,
 				1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */,
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
@@ -1443,6 +1453,7 @@
 				5542CE3C113ADFCE00555C64 /* Utilities */,
 				55E806681368B2E0006F1287 /* UKPaintView */,
 				55255A6F114C171900279B03 /* UKSyntaxColoredTextViewController */,
+				554AE1B11E9A629000B5E97D /* UKSoundFileRecorder */,
 				559700ED137BBB0C000264B8 /* Custom CIFilters */,
 			);
 			name = Platform/Mac;
@@ -1875,6 +1886,17 @@
 				5574AD311AC1FAC0004A27F8 /* ULIWideningBezierPath.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		554AE1B11E9A629000B5E97D /* UKSoundFileRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				554AE1A11E9A628100B5E97D /* UKAudioStreamBasicDescription.h */,
+				554AE1A21E9A628100B5E97D /* UKAudioStreamBasicDescription.m */,
+				554AE1A31E9A628100B5E97D /* UKSoundFileRecorder.h */,
+				554AE1A41E9A628100B5E97D /* UKSoundFileRecorder.m */,
+			);
+			name = UKSoundFileRecorder;
 			sourceTree = "<group>";
 		};
 		555E53BE18959842001487C1 /* StacksmithTests */ = {
@@ -2796,6 +2818,7 @@
 				55039FC9136D5CCF0082E32E /* ULIPaintFreehandTool.m in Sources */,
 				551583DD18C3826100DB3431 /* WILDTableView.mm in Sources */,
 				55039FCA136D5CCF0082E32E /* ULIPaintLineTool.m in Sources */,
+				554AE1A61E9A628100B5E97D /* UKSoundFileRecorder.m in Sources */,
 				55039FCB136D5CCF0082E32E /* ULIPaintOvalTool.m in Sources */,
 				55039FCC136D5CCF0082E32E /* ULIPaintPathTool.m in Sources */,
 				55AC961E1870FF2200488B51 /* CPart.cpp in Sources */,
@@ -2822,6 +2845,7 @@
 				552997D21370C5D800F870DF /* NSStringDrawing+SizeWithRect.m in Sources */,
 				55BD35771A8FFEC500D0BAF7 /* WILDSearchField.mm in Sources */,
 				559700FE137C9B6B000264B8 /* WILDTransitionFilter.m in Sources */,
+				554AE1A51E9A628100B5E97D /* UKAudioStreamBasicDescription.m in Sources */,
 				552386C81883E7C800D7FAB3 /* CButtonPartMac.mm in Sources */,
 				55CD610818786BAC002450E2 /* CRectanglePart.cpp in Sources */,
 				551B36C41A9907D9006AFDFE /* NSBezierPathCappedBoxes.m in Sources */,

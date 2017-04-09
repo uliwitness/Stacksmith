@@ -8,13 +8,15 @@
 
 #include "CSound.h"
 #import "ULIMelodyQueue.h"
+#import "UKSoundFileRecorder.h"
 #import <AppKit/AppKit.h>
 
 
-static int		sBusySounds = 0;
+static int						sBusySounds = 0;
+static UKSoundFileRecorder	*	sCurrentSoundFileRecorder = nil;
 
 
-@interface WILDNSSoundDelegate : NSObject <NSSoundDelegate,ULIMelodyQueueDelegate>
+@interface WILDNSSoundDelegate : NSObject <NSSoundDelegate,ULIMelodyQueueDelegate,UKSoundFileRecorderDelegate>
 
 @end
 
@@ -31,6 +33,33 @@ static int		sBusySounds = 0;
 +(void)	melodyQueueDidFinishPlaying: (ULIMelodyQueue*)theQueue
 {
 	sBusySounds--;
+}
+
+
++(void)	soundFileRecorderWasStarted: (UKSoundFileRecorder*)sender
+{
+	NSLog(@"recording started.");
+}
+
+
+// Sent while we're recording:
++(void)	soundFileRecorder: (UKSoundFileRecorder*)sender reachedDuration: (NSTimeInterval)timeInSeconds
+{
+	NSLog(@"duration %f.", timeInSeconds);
+}
+
+
+// This is for level meters:
++(void)	soundFileRecorder: (UKSoundFileRecorder*)sender hasAmplitude: (float)theLevel
+{
+	NSLog(@"audio level %f.", theLevel);
+}
+
+
+// Sent after a successful stop:
++(void)	soundFileRecorderWasStopped: (UKSoundFileRecorder*)sender
+{
+	NSLog(@"recording ended.");
 }
 
 @end
@@ -62,3 +91,28 @@ bool	CSound::IsDone()
 {
 	return (sBusySounds == 0);
 }
+
+
+bool	CSound::StartRecordingToURL( const std::string& inURL )
+{
+	if( sCurrentSoundFileRecorder != nil )
+		return false;
+	
+	NSString			*	urlString = [NSString stringWithUTF8String: inURL.c_str()];
+	UKSoundFileRecorder	*	sfr = [[UKSoundFileRecorder alloc] initWithOutputFilePath: [NSURL URLWithString: urlString].path];
+	sfr.delegate = [WILDNSSoundDelegate class];
+	sfr.errorHandler = ^( NSError * errObj ){ NSLog(@"%@", errObj); };
+	[sfr start: nil];
+	sCurrentSoundFileRecorder = sfr;
+	
+	return sCurrentSoundFileRecorder != nil;
+}
+
+
+void	CSound::StopRecording()
+{
+	[sCurrentSoundFileRecorder stop: nil];
+	[sCurrentSoundFileRecorder release];
+	sCurrentSoundFileRecorder = nil;
+}
+
