@@ -11,6 +11,7 @@
 #include "CPaintEngine.h"
 #include "CPaintEngineBrushTool.h"
 #include "CPaintEngineOvalTool.h"
+#include "CPaintEnginePencilTool.h"
 
 
 using namespace Carlson;
@@ -23,6 +24,7 @@ using namespace Carlson;
 	CPaintEngine					paintEngine;
 	CPaintEngineBrushTool			brushTool;
 	CPaintEngineOvalTool			ovalTool;
+	CPaintEnginePencilTool			pencilTool;
 }
 
 @end
@@ -35,7 +37,7 @@ using namespace Carlson;
 	self = [super initWithFrame: frameRect];
 	if( self )
 	{
-		paintEngine.SetCurrentTool( &ovalTool );
+		paintEngine.SetCurrentTool( &pencilTool );
 	}
 	return self;
 }
@@ -46,9 +48,17 @@ using namespace Carlson;
 	self = [super initWithCoder: coder];
 	if( self )
 	{
-		paintEngine.SetCurrentTool( &ovalTool );
+		paintEngine.SetCurrentTool( &pencilTool );
 	}
 	return self;
+}
+
+
+-(void)	setFrame: (NSRect)inBox
+{
+	[super setFrame: inBox];
+	
+	self.bounds = (NSRect){ { 0, 0 }, { inBox.size.width / 8.0, inBox.size.height / 8.0 } };
 }
 
 
@@ -59,8 +69,13 @@ using namespace Carlson;
 	if( !temporaryCanvas.IsValid() )
 		temporaryCanvas.InitWithSize( CSize(self.bounds.size) );
 	
+	NSImageInterpolation oldInterpolation = [NSGraphicsContext currentContext].imageInterpolation;
+	[NSGraphicsContext currentContext].imageInterpolation = NSImageInterpolationNone;
+	
 	[imgCanvas.GetMacImage() drawAtPoint: NSZeroPoint fromRect: NSZeroRect operation: NSCompositeSourceAtop fraction: 1.0];
     [temporaryCanvas.GetMacImage() drawAtPoint: NSZeroPoint fromRect: NSZeroRect operation: NSCompositeSourceAtop fraction: 1.0];
+	
+	[NSGraphicsContext currentContext].imageInterpolation = oldInterpolation;
 }
 
 
@@ -78,6 +93,8 @@ using namespace Carlson;
 	paintEngine.SetLineColor( CColor( 0.0, 0.0, 65535.0, 65535.0 ) );
 	
 	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];
+	pos.x = trunc(pos.x) +0.5;
+	pos.y = trunc(pos.y) +0.5;
 	imgCanvas.ClearDirtyRects();
 	temporaryCanvas.ClearDirtyRects();
 	
@@ -97,6 +114,9 @@ using namespace Carlson;
 -(void) mouseDragged: (NSEvent *)event
 {
 	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];
+	pos.x = trunc(pos.x) +0.5;
+	pos.y = trunc(pos.y) +0.5;
+
 	imgCanvas.ClearDirtyRects();
 	temporaryCanvas.ClearDirtyRects();
 	
@@ -116,6 +136,9 @@ using namespace Carlson;
 -(void) mouseUp: (NSEvent *)event
 {
 	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];
+	pos.x = trunc(pos.x) +0.5;
+	pos.y = trunc(pos.y) +0.5;
+
 	imgCanvas.ClearDirtyRects();
 	temporaryCanvas.ClearDirtyRects();
 	

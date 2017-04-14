@@ -85,6 +85,16 @@ CColor& CColor::operator =( const CColor& inColor )
 }
 
 
+bool	CColor::operator ==( const CColor& inColor ) const
+{
+	CGFloat	ar, ag, ab, aa;
+	CGFloat	br, bg, bb, ba;
+	[mColor getRed: &ar green: &ag blue: &ab alpha: &aa];
+	[inColor.mColor getRed: &br green: &bg blue: &bb alpha: &ba];
+	return [mColor isEqual: inColor.mColor];
+}
+
+
 CPath::CPath()
 {
 	mBezierPath = CGPathCreateMutable();
@@ -250,6 +260,12 @@ void	CCanvas::DrawImageInRect( const CImageCanvas& inImage, const CRect& inBox )
 void	CCanvas::DrawImageAtPoint( const CImageCanvas& inImage, const CPoint& inPos )
 {
 	[inImage.mImage drawAtPoint: inPos.mPoint fromRect: NSZeroRect operation: NSCompositeSourceOver fraction: 1.0];
+}
+
+
+CColor	CCanvas::ColorAtPosition( const CPoint& pos )
+{
+	return CColor( NSReadPixel( pos.mPoint ) );
 }
 
 

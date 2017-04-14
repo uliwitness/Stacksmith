@@ -451,6 +451,7 @@
 		55D3E59A1EA11035002EF547 /* CPaintEngineOvalTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5981EA11035002EF547 /* CPaintEngineOvalTool.cpp */; };
 		55D3E5A01EA1503E002EF547 /* CPaintEngineRectTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E59E1EA1503E002EF547 /* CPaintEngineRectTool.cpp */; };
 		55D3E5A31EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5A11EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp */; };
+		55D3E5A61EA1560D002EF547 /* CPaintEnginePencilTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5A41EA1560D002EF547 /* CPaintEnginePencilTool.cpp */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
@@ -1228,6 +1229,8 @@
 		55D3E59F1EA1503E002EF547 /* CPaintEngineRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineRectTool.h; path = Editor/CPaintEngineRectTool.h; sourceTree = "<group>"; };
 		55D3E5A11EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngineRoundRectTool.cpp; path = Editor/CPaintEngineRoundRectTool.cpp; sourceTree = "<group>"; };
 		55D3E5A21EA151BF002EF547 /* CPaintEngineRoundRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineRoundRectTool.h; path = Editor/CPaintEngineRoundRectTool.h; sourceTree = "<group>"; };
+		55D3E5A41EA1560D002EF547 /* CPaintEnginePencilTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEnginePencilTool.cpp; path = Editor/CPaintEnginePencilTool.cpp; sourceTree = "<group>"; };
+		55D3E5A51EA1560D002EF547 /* CPaintEnginePencilTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEnginePencilTool.h; path = Editor/CPaintEnginePencilTool.h; sourceTree = "<group>"; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D61D621AA275C2006D117F /* TTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TTool.h; path = "Portable Document/TTool.h"; sourceTree = "<group>"; };
@@ -2020,6 +2023,8 @@
 				55D3E5A11EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp */,
 				55D3E5991EA11035002EF547 /* CPaintEngineOvalTool.h */,
 				55D3E5981EA11035002EF547 /* CPaintEngineOvalTool.cpp */,
+				55D3E5A51EA1560D002EF547 /* CPaintEnginePencilTool.h */,
+				55D3E5A41EA1560D002EF547 /* CPaintEnginePencilTool.cpp */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -2777,6 +2782,7 @@
 				55CD611E187A60CD002450E2 /* CRecentCardsList.cpp in Sources */,
 				553C46F513577334000219FA /* CValueNode.cpp in Sources */,
 				553C46F613577334000219FA /* CCommandNode.cpp in Sources */,
+				55D3E5A61EA1560D002EF547 /* CPaintEnginePencilTool.cpp in Sources */,
 				553C46F713577334000219FA /* CPushValueCommandNode.cpp in Sources */,
 				553C46F813577334000219FA /* CAssignCommandNode.cpp in Sources */,
 				553C46F913577334000219FA /* CPutCommandNode.cpp in Sources */,

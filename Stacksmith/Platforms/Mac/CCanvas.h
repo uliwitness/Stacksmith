@@ -137,6 +137,7 @@ public:
 	TColorComponent	GetAlpha() const;
 	
 	CColor& operator =( const CColor& inColor );
+	bool	operator ==( const CColor& inColor ) const;
 	
 	WILDNSColorPtr	GetMacColor() const	{ return mColor; }
 	
@@ -225,6 +226,8 @@ public:
 	virtual void	FillPath( const CPath& inPath, const CGraphicsState& inState );
 	virtual void	DrawImageInRect( const CImageCanvas& inImage, const CRect& inBox );
 	virtual void	DrawImageAtPoint( const CImageCanvas& inImage, const CPoint& inPos );
+	
+	virtual CColor	ColorAtPosition( const CPoint& pos );
 
 protected:
 	CCanvas&	operator =( const CCanvas& inOriginal ) { assert(false); return *this; }
