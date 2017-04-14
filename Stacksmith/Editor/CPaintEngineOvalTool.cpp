@@ -18,9 +18,9 @@ void	CPaintEngineOvalTool::MouseDownAtPoint( CPoint pos )
 	
 		mStartPosition = pos;
 		CRect	box( CRect::RectAroundPoints( mStartPosition, pos ) );
-		mPaintEngine->GetTemporaryCanvas()->FillOval( box, mPaintEngine->GetGraphicsState() );
+		mPaintEngine->GetTemporaryCanvas()->StrokeOval( box, mPaintEngine->GetGraphicsState() );
 		mLastTrackingRectangle = box;
-		mLastTrackingRectangle.Inset( -1, -1 );	// Oval might draw anti-aliasing a tad outside the rectangle.
+		mLastTrackingRectangle.Inset( -ceilf(mPaintEngine->GetGraphicsState().GetLineThickness() / 2.0) -1, -ceilf(mPaintEngine->GetGraphicsState().GetLineThickness() / 2.0) -1 );	// Line width, plus oval might draw anti-aliasing a tad outside the rectangle.
 	
 	mPaintEngine->GetTemporaryCanvas()->EndDrawing();
 }
@@ -33,9 +33,9 @@ void	CPaintEngineOvalTool::MouseDraggedToPoint( CPoint pos )
 		mPaintEngine->GetTemporaryCanvas()->ClearRect( mLastTrackingRectangle );
 		
 		CRect	box( CRect::RectAroundPoints( mStartPosition, pos ) );
-		mPaintEngine->GetTemporaryCanvas()->FillOval( box, mPaintEngine->GetGraphicsState() );
+		mPaintEngine->GetTemporaryCanvas()->StrokeOval( box, mPaintEngine->GetGraphicsState() );
 		mLastTrackingRectangle = box;
-		mLastTrackingRectangle.Inset( -1, -1 );	// Oval might draw anti-aliasing a tad outside the rectangle.
+		mLastTrackingRectangle.Inset( -ceilf(mPaintEngine->GetGraphicsState().GetLineThickness() / 2.0) -1, -ceilf(mPaintEngine->GetGraphicsState().GetLineThickness() / 2.0) -1 );	// Line width, plus oval might draw anti-aliasing a tad outside the rectangle.
 
 	mPaintEngine->GetTemporaryCanvas()->EndDrawing();
 }
@@ -52,7 +52,7 @@ void	CPaintEngineOvalTool::MouseReleasedAtPoint( CPoint pos )
 	mPaintEngine->GetCanvas()->BeginDrawing();
 	
 		CRect	box( CRect::RectAroundPoints( mStartPosition, pos ) );
-		mPaintEngine->GetCanvas()->FillOval( box, mPaintEngine->GetGraphicsState() );
+		mPaintEngine->GetCanvas()->StrokeOval( box, mPaintEngine->GetGraphicsState() );
 
 	mPaintEngine->GetCanvas()->EndDrawing();
 }

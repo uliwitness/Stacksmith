@@ -74,6 +74,7 @@ using namespace Carlson;
 	paintEngine.SetCanvas( &imgCanvas );
 	paintEngine.SetTemporaryCanvas( &temporaryCanvas );
 	paintEngine.SetFillColor( CColor( 65535.0, 0.0, 0.0, 65535.0 ) );
+	paintEngine.SetLineColor( CColor( 0.0, 0.0, 65535.0, 65535.0 ) );
 	
 	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];
 	imgCanvas.ClearDirtyRects();
