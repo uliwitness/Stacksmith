@@ -13,42 +13,29 @@
 using namespace Carlson;
 
 
-/*static*/ void	CPaintEngine::DrawOneBresenhamPixel( float h, float v, void* inUserData )
-{
-	CPaintEngine	&	self = *(CPaintEngine*)inUserData;
-	
-	CRect			box( CPoint(h,v), CSize(0,0) );
-	box.Inset( -8, -8 );
-	self.mCanvas->FillOval( box, self.mGraphicsState );
-}
-
-
 void	CPaintEngine::MouseDownAtPoint( CPoint pos )
 {
-	mCanvas->BeginDrawing();
-	
-		DrawOneBresenhamPixel( pos.GetH(), pos.GetV(), this );
-		mLastMousePos = pos;
-
-	mCanvas->EndDrawing();
+	if( mCurrentTool )
+		mCurrentTool->MouseDownAtPoint( pos );
 }
 
 
 void	CPaintEngine::MouseDraggedToPoint( CPoint pos )
 {
-	mCanvas->BeginDrawing();
-	
-		DrawBresenhamLine( mLastMousePos.GetH(), mLastMousePos.GetV(),
-							pos.GetH(), pos.GetV(),
-							DrawOneBresenhamPixel, this );
-
-		mLastMousePos = pos;
-
-	mCanvas->EndDrawing();
+	if( mCurrentTool )
+		mCurrentTool->MouseDraggedToPoint( pos );
 }
 
 
 void	CPaintEngine::MouseReleasedAtPoint( CPoint pos )
 {
-	
+	if( mCurrentTool )
+		mCurrentTool->MouseReleasedAtPoint( pos );
+}
+
+
+void	CPaintEngine::SetCurrentTool( CPaintEngineTool * inTool )
+{
+	mCurrentTool = inTool;
+	mCurrentTool->SetPaintEngine( this );
 }

@@ -447,6 +447,7 @@
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
 		55D3E5911EA0F2B3002EF547 /* WILDPaintView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5901EA0F2B3002EF547 /* WILDPaintView.mm */; };
 		55D3E5941EA0FEA6002EF547 /* CPaintEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5921EA0FEA6002EF547 /* CPaintEngine.cpp */; };
+		55D3E5971EA10A3D002EF547 /* CPaintEngineBrushTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5951EA10A3D002EF547 /* CPaintEngineBrushTool.cpp */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
@@ -1216,6 +1217,8 @@
 		55D3E5901EA0F2B3002EF547 /* WILDPaintView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDPaintView.mm; path = Platforms/Mac/WILDPaintView.mm; sourceTree = "<group>"; };
 		55D3E5921EA0FEA6002EF547 /* CPaintEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngine.cpp; path = Editor/CPaintEngine.cpp; sourceTree = "<group>"; };
 		55D3E5931EA0FEA6002EF547 /* CPaintEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngine.h; path = Editor/CPaintEngine.h; sourceTree = "<group>"; };
+		55D3E5951EA10A3D002EF547 /* CPaintEngineBrushTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngineBrushTool.cpp; path = Editor/CPaintEngineBrushTool.cpp; sourceTree = "<group>"; };
+		55D3E5961EA10A3D002EF547 /* CPaintEngineBrushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineBrushTool.h; path = Editor/CPaintEngineBrushTool.h; sourceTree = "<group>"; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D61D621AA275C2006D117F /* TTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TTool.h; path = "Portable Document/TTool.h"; sourceTree = "<group>"; };
@@ -2000,6 +2003,8 @@
 				5593D0631E58B03300E7F31D /* CCodeSnippets.cpp */,
 				55D3E5931EA0FEA6002EF547 /* CPaintEngine.h */,
 				55D3E5921EA0FEA6002EF547 /* CPaintEngine.cpp */,
+				55D3E5961EA10A3D002EF547 /* CPaintEngineBrushTool.h */,
+				55D3E5951EA10A3D002EF547 /* CPaintEngineBrushTool.cpp */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -2795,6 +2800,7 @@
 				55612A5D1ABB880C006C0730 /* CUndoStack.mm in Sources */,
 				553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */,
 				55D3E5911EA0F2B3002EF547 /* WILDPaintView.mm in Sources */,
+				55D3E5971EA10A3D002EF547 /* CPaintEngineBrushTool.cpp in Sources */,
 				553C471013577334000219FA /* LEOChunks.c in Sources */,
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
 				556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */,
