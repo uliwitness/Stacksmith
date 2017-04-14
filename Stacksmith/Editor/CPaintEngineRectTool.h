@@ -1,20 +1,20 @@
 //
-//  CPaintEngineFilledOvalTool.hpp
+//  CPaintEngineRectTool.hpp
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 14.04.17.
 //  Copyright © 2017 Uli Kusterer. All rights reserved.
 //
 
-#ifndef CPaintEngineFilledOvalTool_hpp
-#define CPaintEngineFilledOvalTool_hpp
+#ifndef CPaintEngineRectTool_hpp
+#define CPaintEngineRectTool_hpp
 
 #include "CPaintEngine.h"
 
 namespace Carlson
 {
 
-class CPaintEngineFilledOvalTool : public CPaintEngineTool
+class CPaintEngineRectTool : public CPaintEngineTool
 {
 public:
 	virtual void	MouseDownAtPoint( CPoint pos ) override;
@@ -28,4 +28,4 @@ protected:
 
 } // namespace Carlson
 
-#endif /* CPaintEngineFilledOvalTool_hpp */
+#endif /* CPaintEngineRectTool_hpp */

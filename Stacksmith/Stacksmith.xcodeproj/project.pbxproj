@@ -449,7 +449,8 @@
 		55D3E5941EA0FEA6002EF547 /* CPaintEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5921EA0FEA6002EF547 /* CPaintEngine.cpp */; };
 		55D3E5971EA10A3D002EF547 /* CPaintEngineBrushTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5951EA10A3D002EF547 /* CPaintEngineBrushTool.cpp */; };
 		55D3E59A1EA11035002EF547 /* CPaintEngineOvalTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5981EA11035002EF547 /* CPaintEngineOvalTool.cpp */; };
-		55D3E59D1EA11AFC002EF547 /* CPaintEngineFilledOvalTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E59B1EA11AFC002EF547 /* CPaintEngineFilledOvalTool.cpp */; };
+		55D3E5A01EA1503E002EF547 /* CPaintEngineRectTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E59E1EA1503E002EF547 /* CPaintEngineRectTool.cpp */; };
+		55D3E5A31EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5A11EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
@@ -1223,8 +1224,10 @@
 		55D3E5961EA10A3D002EF547 /* CPaintEngineBrushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineBrushTool.h; path = Editor/CPaintEngineBrushTool.h; sourceTree = "<group>"; };
 		55D3E5981EA11035002EF547 /* CPaintEngineOvalTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngineOvalTool.cpp; path = Editor/CPaintEngineOvalTool.cpp; sourceTree = "<group>"; };
 		55D3E5991EA11035002EF547 /* CPaintEngineOvalTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineOvalTool.h; path = Editor/CPaintEngineOvalTool.h; sourceTree = "<group>"; };
-		55D3E59B1EA11AFC002EF547 /* CPaintEngineFilledOvalTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngineFilledOvalTool.cpp; path = Editor/CPaintEngineFilledOvalTool.cpp; sourceTree = "<group>"; };
-		55D3E59C1EA11AFC002EF547 /* CPaintEngineFilledOvalTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineFilledOvalTool.h; path = Editor/CPaintEngineFilledOvalTool.h; sourceTree = "<group>"; };
+		55D3E59E1EA1503E002EF547 /* CPaintEngineRectTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngineRectTool.cpp; path = Editor/CPaintEngineRectTool.cpp; sourceTree = "<group>"; };
+		55D3E59F1EA1503E002EF547 /* CPaintEngineRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineRectTool.h; path = Editor/CPaintEngineRectTool.h; sourceTree = "<group>"; };
+		55D3E5A11EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngineRoundRectTool.cpp; path = Editor/CPaintEngineRoundRectTool.cpp; sourceTree = "<group>"; };
+		55D3E5A21EA151BF002EF547 /* CPaintEngineRoundRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineRoundRectTool.h; path = Editor/CPaintEngineRoundRectTool.h; sourceTree = "<group>"; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D61D621AA275C2006D117F /* TTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TTool.h; path = "Portable Document/TTool.h"; sourceTree = "<group>"; };
@@ -2011,10 +2014,12 @@
 				55D3E5921EA0FEA6002EF547 /* CPaintEngine.cpp */,
 				55D3E5961EA10A3D002EF547 /* CPaintEngineBrushTool.h */,
 				55D3E5951EA10A3D002EF547 /* CPaintEngineBrushTool.cpp */,
+				55D3E59F1EA1503E002EF547 /* CPaintEngineRectTool.h */,
+				55D3E59E1EA1503E002EF547 /* CPaintEngineRectTool.cpp */,
+				55D3E5A21EA151BF002EF547 /* CPaintEngineRoundRectTool.h */,
+				55D3E5A11EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp */,
 				55D3E5991EA11035002EF547 /* CPaintEngineOvalTool.h */,
 				55D3E5981EA11035002EF547 /* CPaintEngineOvalTool.cpp */,
-				55D3E59C1EA11AFC002EF547 /* CPaintEngineFilledOvalTool.h */,
-				55D3E59B1EA11AFC002EF547 /* CPaintEngineFilledOvalTool.cpp */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -2710,6 +2715,7 @@
 				55CD60F018779641002450E2 /* CParseErrorCommandNode.cpp in Sources */,
 				559BA9D518B15EDD00760273 /* CMacScriptableObjectBase.mm in Sources */,
 				55405BD418A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm in Sources */,
+				55D3E5A01EA1503E002EF547 /* CPaintEngineRectTool.cpp in Sources */,
 				552386D11883EAA300D7FAB3 /* CWebBrowserPartMac.mm in Sources */,
 				5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */,
 				551E0E0F1CD2CABD008B80E1 /* LEOStringUtilities.c in Sources */,
@@ -2718,7 +2724,6 @@
 				55CD61151879EDA3002450E2 /* CAlert.mm in Sources */,
 				55405BE118A6220D001D3C99 /* WILDMediaPickerViewController.mm in Sources */,
 				55405BB818A39796001D3C99 /* WILDPartInfoViewController.mm in Sources */,
-				55D3E59D1EA11AFC002EF547 /* CPaintEngineFilledOvalTool.cpp in Sources */,
 				5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */,
 				552386B6188335A000D7FAB3 /* WILDButtonView.mm in Sources */,
 				5500FDB51E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.mm in Sources */,
@@ -2851,6 +2856,7 @@
 				55039FCA136D5CCF0082E32E /* ULIPaintLineTool.m in Sources */,
 				554AE1A61E9A628100B5E97D /* UKSoundFileRecorder.m in Sources */,
 				55039FCB136D5CCF0082E32E /* ULIPaintOvalTool.m in Sources */,
+				55D3E5A31EA151BF002EF547 /* CPaintEngineRoundRectTool.cpp in Sources */,
 				55039FCC136D5CCF0082E32E /* ULIPaintPathTool.m in Sources */,
 				55AC961E1870FF2200488B51 /* CPart.cpp in Sources */,
 				55039FCD136D5CCF0082E32E /* ULIPaintRectangleTool.m in Sources */,

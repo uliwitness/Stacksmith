@@ -70,10 +70,11 @@ using namespace Carlson;
 		imgCanvas.InitWithSize( CSize(self.bounds.size) );
 	if( !temporaryCanvas.IsValid() )
 		temporaryCanvas.InitWithSize( CSize(self.bounds.size) );
-
+	
 	paintEngine.SetCanvas( &imgCanvas );
 	paintEngine.SetTemporaryCanvas( &temporaryCanvas );
 	paintEngine.SetFillColor( CColor( 65535.0, 0.0, 0.0, 65535.0 ) );
+	paintEngine.SetLineThickness( 2 );
 	paintEngine.SetLineColor( CColor( 0.0, 0.0, 65535.0, 65535.0 ) );
 	
 	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];

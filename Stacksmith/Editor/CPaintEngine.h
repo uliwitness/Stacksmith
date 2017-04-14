@@ -54,6 +54,9 @@ public:
 	
 	void	SetFillColor( CColor inColor )	{ mGraphicsState.SetFillColor( inColor ); }
 	CColor	GetFillColor()					{ return mGraphicsState.GetFillColor(); }
+	
+	void		SetLineThickness( TCoordinate inThickness )	{ mGraphicsState.SetLineThickness( inThickness ); }
+	TCoordinate	GetLineThickness() const					{ return mGraphicsState.GetLineThickness(); }
 
 	const CGraphicsState	&	GetGraphicsState()		{ return mGraphicsState; }
 	

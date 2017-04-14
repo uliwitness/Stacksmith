@@ -1,18 +1,18 @@
 //
-//  CPaintEngineOvalTool.cpp
+//  CPaintEngineRoundRectTool.cpp
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 14.04.17.
 //  Copyright © 2017 Uli Kusterer. All rights reserved.
 //
 
-#include "CPaintEngineOvalTool.h"
+#include "CPaintEngineRoundRectTool.h"
 
 
 using namespace Carlson;
 
 
-void	CPaintEngineOvalTool::MouseDownAtPoint( CPoint pos )
+void	CPaintEngineRoundRectTool::MouseDownAtPoint( CPoint pos )
 {
 	mPaintEngine->GetTemporaryCanvas()->BeginDrawing();
 	
@@ -20,11 +20,11 @@ void	CPaintEngineOvalTool::MouseDownAtPoint( CPoint pos )
 		CRect	box( CRect::RectAroundPoints( mStartPosition, pos ) );
 		if( mPaintEngine->GetGraphicsState().GetFillColor().GetAlpha() > 0 )
 		{
-			mPaintEngine->GetTemporaryCanvas()->FillOval( box, mPaintEngine->GetGraphicsState() );
+			mPaintEngine->GetTemporaryCanvas()->FillRoundRect( box, mCornerRadius, mPaintEngine->GetGraphicsState() );
 		}
 		if( mPaintEngine->GetGraphicsState().GetLineThickness() > 0 )
 		{
-			mPaintEngine->GetTemporaryCanvas()->StrokeOval( box, mPaintEngine->GetGraphicsState() );
+			mPaintEngine->GetTemporaryCanvas()->StrokeRoundRect( box, mCornerRadius, mPaintEngine->GetGraphicsState() );
 		}
 		mLastTrackingRectangle = box;
 		mLastTrackingRectangle.Inset( -ceilf(mPaintEngine->GetGraphicsState().GetLineThickness() / 2.0) -1, -ceilf(mPaintEngine->GetGraphicsState().GetLineThickness() / 2.0) -1 );	// Line width, plus oval might draw anti-aliasing a tad outside the rectangle.
@@ -33,7 +33,7 @@ void	CPaintEngineOvalTool::MouseDownAtPoint( CPoint pos )
 }
 
 
-void	CPaintEngineOvalTool::MouseDraggedToPoint( CPoint pos )
+void	CPaintEngineRoundRectTool::MouseDraggedToPoint( CPoint pos )
 {
 	mPaintEngine->GetTemporaryCanvas()->BeginDrawing();
 	
@@ -42,11 +42,11 @@ void	CPaintEngineOvalTool::MouseDraggedToPoint( CPoint pos )
 		CRect	box( CRect::RectAroundPoints( mStartPosition, pos ) );
 		if( mPaintEngine->GetGraphicsState().GetFillColor().GetAlpha() > 0 )
 		{
-			mPaintEngine->GetTemporaryCanvas()->FillOval( box, mPaintEngine->GetGraphicsState() );
+			mPaintEngine->GetTemporaryCanvas()->FillRoundRect( box, mCornerRadius, mPaintEngine->GetGraphicsState() );
 		}
 		if( mPaintEngine->GetGraphicsState().GetLineThickness() > 0 )
 		{
-			mPaintEngine->GetTemporaryCanvas()->StrokeOval( box, mPaintEngine->GetGraphicsState() );
+			mPaintEngine->GetTemporaryCanvas()->StrokeRoundRect( box, mCornerRadius, mPaintEngine->GetGraphicsState() );
 		}
 		mLastTrackingRectangle = box;
 		mLastTrackingRectangle.Inset( -ceilf(mPaintEngine->GetGraphicsState().GetLineThickness() / 2.0) -1, -ceilf(mPaintEngine->GetGraphicsState().GetLineThickness() / 2.0) -1 );	// Line width, plus oval might draw anti-aliasing a tad outside the rectangle.
@@ -55,7 +55,7 @@ void	CPaintEngineOvalTool::MouseDraggedToPoint( CPoint pos )
 }
 
 
-void	CPaintEngineOvalTool::MouseReleasedAtPoint( CPoint pos )
+void	CPaintEngineRoundRectTool::MouseReleasedAtPoint( CPoint pos )
 {
 	mPaintEngine->GetTemporaryCanvas()->BeginDrawing();
 	
@@ -69,11 +69,11 @@ void	CPaintEngineOvalTool::MouseReleasedAtPoint( CPoint pos )
 	
 		if( mPaintEngine->GetGraphicsState().GetFillColor().GetAlpha() > 0 )
 		{
-			mPaintEngine->GetCanvas()->FillOval( box, mPaintEngine->GetGraphicsState() );
+			mPaintEngine->GetCanvas()->FillRoundRect( box, mCornerRadius, mPaintEngine->GetGraphicsState() );
 		}
 		if( mPaintEngine->GetGraphicsState().GetLineThickness() > 0 )
 		{
-			mPaintEngine->GetCanvas()->StrokeOval( box, mPaintEngine->GetGraphicsState() );
+			mPaintEngine->GetCanvas()->StrokeRoundRect( box, mCornerRadius, mPaintEngine->GetGraphicsState() );
 		}
 
 	mPaintEngine->GetCanvas()->EndDrawing();
