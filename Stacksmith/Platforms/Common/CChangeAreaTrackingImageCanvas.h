@@ -41,6 +41,12 @@ public:
 		CImageCanvas::FillRect( inRect, inState );
 	}
 	
+	virtual void	ClearRect( const CRect& inRect )
+	{
+		mDirtyRects.push_back( inRect );
+		CImageCanvas::ClearRect( inRect );
+	}
+	
 	virtual void	StrokeOval( const CRect& inRect, const CGraphicsState& inState )
 	{
 		CRect	dirtyBox( inRect );
@@ -71,11 +77,7 @@ public:
 
 	virtual void	StrokeLineFromPointToPoint( const CPoint& inStart, const CPoint& inEnd, const CGraphicsState& inState )
 	{
-		CRect lineBox;
-		lineBox.SetH( std::min(inStart.GetH(),inEnd.GetH()) );
-		lineBox.SetV( std::min(inStart.GetV(),inEnd.GetV()) );
-		lineBox.ResizeByMovingMaxHEdgeTo( std::max(inStart.GetH(),inEnd.GetH()) );
-		lineBox.ResizeByMovingMaxVEdgeTo( std::max(inStart.GetV(),inEnd.GetV()) );
+		CRect lineBox( CRect::RectAroundPoints( inStart, inEnd ) );
 		lineBox.Inset( -ceilf(inState.GetLineThickness() / 2.0), -ceilf(inState.GetLineThickness() / 2.0) );
 		mDirtyRects.push_back( lineBox );
 		CImageCanvas::StrokeLineFromPointToPoint( inStart, inEnd, inState );

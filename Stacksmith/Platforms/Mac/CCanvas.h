@@ -112,6 +112,8 @@ public:
 	
 	const CGRect&	GetMacRect() const	{ return mRect; }	// Only for platform-specific code to get the underlying type back out.
 	
+	static CRect	RectAroundPoints( const CPoint& a, const CPoint& b );
+	
 protected:
 	CGRect	mRect;
 
@@ -213,6 +215,7 @@ public:
 	
 	virtual void	StrokeRect( const CRect& inRect, const CGraphicsState& inState );
 	virtual void	FillRect( const CRect& inRect, const CGraphicsState& inState );
+	virtual void	ClearRect( const CRect& inRect );
 	virtual void	StrokeOval( const CRect& inRect, const CGraphicsState& inState );
 	virtual void	FillOval( const CRect& inRect, const CGraphicsState& inState );
 	virtual void	StrokeRoundRect( const CRect& inRect, TCoordinate inCornerRadius, const CGraphicsState& inState );

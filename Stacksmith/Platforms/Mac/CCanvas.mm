@@ -13,6 +13,18 @@
 
 using namespace Carlson;
 
+
+/*static*/ CRect	CRect::RectAroundPoints( const CPoint& inStart, const CPoint& inEnd )
+{
+	CRect lineBox;
+	lineBox.SetH( std::min(inStart.GetH(),inEnd.GetH()) );
+	lineBox.SetV( std::min(inStart.GetV(),inEnd.GetV()) );
+	lineBox.ResizeByMovingMaxHEdgeTo( std::max(inStart.GetH(),inEnd.GetH()) );
+	lineBox.ResizeByMovingMaxVEdgeTo( std::max(inStart.GetV(),inEnd.GetV()) );
+	return lineBox;
+}
+
+
 CColor::CColor( TColorComponent red, TColorComponent green, TColorComponent blue, TColorComponent alpha )
 {
 	mColor = [[NSColor colorWithCalibratedRed: red / 65535.0 green: green / 65535.0 blue: blue / 65535.0 alpha: alpha / 65535.0] retain];
@@ -160,6 +172,12 @@ void	CCanvas::FillRect( const CRect& inRect, const CGraphicsState& inState )
 	ApplyGraphicsStateIfNeeded( inState );
 	
 	[NSBezierPath fillRect: inRect.mRect];
+}
+
+
+void	CCanvas::ClearRect( const CRect& inRect )
+{
+	NSRectFillUsingOperation( inRect.mRect, NSCompositingOperationClear );
 }
 
 

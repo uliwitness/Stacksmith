@@ -10,6 +10,7 @@
 #include "CChangeAreaTrackingImageCanvas.h"
 #include "CPaintEngine.h"
 #include "CPaintEngineBrushTool.h"
+#include "CPaintEngineOvalTool.h"
 
 
 using namespace Carlson;
@@ -21,6 +22,7 @@ using namespace Carlson;
 	CChangeAreaTrackingImageCanvas	temporaryCanvas;	// Used while tracking.
 	CPaintEngine					paintEngine;
 	CPaintEngineBrushTool			brushTool;
+	CPaintEngineOvalTool			ovalTool;
 }
 
 @end
@@ -33,7 +35,7 @@ using namespace Carlson;
 	self = [super initWithFrame: frameRect];
 	if( self )
 	{
-		paintEngine.SetCurrentTool( &brushTool );
+		paintEngine.SetCurrentTool( &ovalTool );
 	}
 	return self;
 }
@@ -44,7 +46,7 @@ using namespace Carlson;
 	self = [super initWithCoder: coder];
 	if( self )
 	{
-		paintEngine.SetCurrentTool( &brushTool );
+		paintEngine.SetCurrentTool( &ovalTool );
 	}
 	return self;
 }
