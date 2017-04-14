@@ -26,23 +26,27 @@ namespace Carlson {
 class CImageCanvas : public CCanvas
 {
 public:
-	CImageCanvas() : mImage(NULL) {}
-	CImageCanvas( const CSize& inSize );
-	CImageCanvas( const std::string& inImageURL );
-	CImageCanvas( CImageCanvas&& inOriginal );
+	CImageCanvas() : mImage(NULL) {}	//!< IsValid() returns false for a default-constructed image.
+	CImageCanvas( const CSize& inSize );			//!< Create an empty image of the given size.
+	CImageCanvas( const std::string& inImageURL );	//!< Load the given image file into this canvas, making it the same size.
+	CImageCanvas( CImageCanvas&& inOriginal );		//!< Move constructor for more efficient returning of images.
 	explicit CImageCanvas(WILDNSImagePtr inImage);
 	~CImageCanvas();
 	
-	virtual bool	IsValid()	{ return mImage != NULL; }
+	virtual void	InitWithSize( const CSize& inSize );	//!< Like CImageCanvas(CSize) for when you inited with the default constructor because you didn't know the size yet, or for resizing. Pass CSize(0,0) to free the actual image and get back to the way the default constructor leaves the image.
+	virtual void	InitWithImageFileURL( const std::string& inImageURL );	//!< Like CImageCanvas(string) for when you inited with the default constructor because you didn't know the file path yet.
 	
-	virtual CRect	GetRect();
+	virtual bool	IsValid() const	{ return mImage != NULL; }
+	
+	virtual CRect	GetRect() const;
+	virtual CSize	GetSize() const;
 	
 	virtual void	BeginDrawing();
 	virtual void	EndDrawing();
 	
-	CImageCanvas	Copy();
+	CImageCanvas	Copy() const;
 	
-	WILDNSImagePtr	GetMacImage()	{ return mImage; }	// Only for use by platform-specific code to e.g. hand icons to OS controls.
+	WILDNSImagePtr	GetMacImage() const	{ return mImage; }	// Only for use by platform-specific code to e.g. hand icons to OS controls.
 	
 	virtual CImageCanvas& operator =( const CImageCanvas& inOriginal );
 	

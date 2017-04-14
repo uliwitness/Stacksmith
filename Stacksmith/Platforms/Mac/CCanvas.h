@@ -45,8 +45,8 @@ public:
 	CPoint( TCoordinate h, TCoordinate v ) : mPoint((CGPoint){h,v}) {}
 	explicit CPoint( CGPoint macPoint ) : mPoint(macPoint) {}
 	
-	TCoordinate	GetH()					{ return mPoint.x; }
-	TCoordinate	GetV()					{ return mPoint.y; }
+	TCoordinate	GetH() const				{ return mPoint.x; }
+	TCoordinate	GetV() const			{ return mPoint.y; }
 	void		SetH( TCoordinate inH )	{ mPoint.x = inH; }
 	void		SetV( TCoordinate inV )	{ mPoint.y = inV; }
 	
@@ -66,8 +66,8 @@ public:
 	CSize( TCoordinate width, TCoordinate height ) : mSize((CGSize){width,height}) {}
 	explicit CSize( CGSize macSize ) : mSize(macSize) {}
 
-	TCoordinate	GetWidth()							{ return mSize.width; }
-	TCoordinate	GetHeight()							{ return mSize.height; }
+	TCoordinate	GetWidth() const					{ return mSize.width; }
+	TCoordinate	GetHeight() const					{ return mSize.height; }
 	void		SetWidth( TCoordinate inWidth )		{ mSize.width = inWidth; }
 	void		SetHeight( TCoordinate inHeight )	{ mSize.height = inHeight; }
 
@@ -89,19 +89,28 @@ public:
 	CRect( CPoint inOrigin, CSize inSize ) : mRect((CGRect){inOrigin.mPoint,inSize.mSize}) {}
 	explicit CRect( const CGRect inRect ) : mRect(inRect) {}
 	
-	TCoordinate	GetH()					{ return mRect.origin.x; }
-	TCoordinate	GetV()					{ return mRect.origin.y; }
+	TCoordinate	GetH() const			{ return mRect.origin.x; }
+	TCoordinate	GetV() const			{ return mRect.origin.y; }
 	void		SetH( TCoordinate inH )	{ mRect.origin.x = inH; }
 	void		SetV( TCoordinate inV )	{ mRect.origin.y = inV; }
-	TCoordinate	GetWidth()							{ return mRect.size.width; }
-	TCoordinate	GetHeight()							{ return mRect.size.height; }
+	TCoordinate	GetWidth() const					{ return mRect.size.width; }
+	TCoordinate	GetHeight() const					{ return mRect.size.height; }
 	void		SetWidth( TCoordinate inWidth )		{ mRect.size.width = inWidth; }
 	void		SetHeight( TCoordinate inHeight )	{ mRect.size.height = inHeight; }
 	
-	CPoint		GetOrigin()							{ return CPoint(mRect.origin); }
+	CPoint		GetOrigin() const					{ return CPoint(mRect.origin); }
 	void		SetOrigin( CPoint pos )				{ mRect.origin = pos.mPoint; }
-	CSize		GetSize()							{ return CSize(mRect.size); }
+	CSize		GetSize() const						{ return CSize(mRect.size); }
 	void		SetSize( CSize size )				{ mRect.size = size.mSize; }
+
+	void		ResizeByMovingMinHEdgeTo( TCoordinate inH )	{ mRect.size.width += mRect.origin.x -inH; mRect.origin.x = inH; }
+	void		ResizeByMovingMinVEdgeTo( TCoordinate inV )	{ mRect.size.height += mRect.origin.y -inV; mRect.origin.y = inV; }
+	void		ResizeByMovingMaxHEdgeTo( TCoordinate inH )	{ mRect.size.width = inH -mRect.origin.x; }
+	void		ResizeByMovingMaxVEdgeTo( TCoordinate inV )	{ mRect.size.height = inV -mRect.origin.y; }
+	
+	void		Inset( TCoordinate h, TCoordinate v )	{ mRect.origin.x += h; mRect.size.width -= h * 2.0; mRect.origin.y += v; mRect.size.height -= v * 2.0; }
+	
+	const CGRect&	GetMacRect() const	{ return mRect; }	// Only for platform-specific code to get the underlying type back out.
 	
 protected:
 	CGRect	mRect;
@@ -151,6 +160,8 @@ public:
 	void	MoveBy( CSize inDistance );
 	void	ScaleBy( CSize inHScaleVScale );
 	
+	CRect	GetSurroundingRect() const;
+	
 	CPath& operator =( const CPath& inPath );
 	
 protected:
@@ -166,8 +177,13 @@ public:
 	CGraphicsState() { mGraphicsStateSeed = ++sGraphicsStateSeed; }
 	
 	void		SetLineColor( CColor inColor )				{ mLineColor = inColor; mGraphicsStateSeed = ++sGraphicsStateSeed; }
+	CColor		GetLineColor() const						{ return mLineColor; }
+	
 	void		SetFillColor( CColor inColor )				{ mFillColor = inColor; mGraphicsStateSeed = ++sGraphicsStateSeed; }
+	CColor		GetFillColor() const						{ return mFillColor; }
+
 	void		SetLineThickness( TCoordinate inThickness )	{ mLineThickness = inThickness; mGraphicsStateSeed = ++sGraphicsStateSeed; }
+	TCoordinate	GetLineThickness() const					{ return mLineThickness; }
 
 protected:
 	TCoordinate		mLineThickness;
@@ -190,7 +206,7 @@ public:
 	CCanvas() : mLastGraphicsStateSeed(0) {}
 	virtual ~CCanvas() {}
 	
-	virtual CRect	GetRect() = 0;
+	virtual CRect	GetRect() const = 0;
 	
 	virtual void	BeginDrawing() {};
 	virtual void	EndDrawing() {};
@@ -224,7 +240,7 @@ public:
 	CMacCanvas( WILDNSGraphicsContextPtr inContext, CGRect inBounds );
 	virtual ~CMacCanvas();
 	
-	virtual CRect	GetRect() { return CRect(mBounds); };
+	virtual CRect	GetRect() const { return CRect(mBounds); };
 	
 	virtual void	BeginDrawing();
 	virtual void	EndDrawing();

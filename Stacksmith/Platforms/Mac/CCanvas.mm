@@ -125,6 +125,12 @@ void	CPath::ScaleBy( CSize inHScaleVScale )
 	CGPathRelease( oldPath );
 }
 
+
+CRect	CPath::GetSurroundingRect() const
+{
+	return CRect( CGPathGetBoundingBox( mBezierPath ) );
+}
+
 	
 CPath&	CPath::operator =( const CPath& inPath )
 {

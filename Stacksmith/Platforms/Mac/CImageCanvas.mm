@@ -43,9 +43,29 @@ CImageCanvas::~CImageCanvas()
 	[mImage release];
 }
 
+
+void	CImageCanvas::InitWithSize( const CSize& inSize )
+{
+	[mImage release];
+	mImage = nil;
+	if( inSize.GetWidth() > 0 && inSize.GetHeight() > 0 )
+		mImage = [[NSImage alloc] initWithSize: inSize.mSize];
+}
+
+
+void	CImageCanvas::InitWithImageFileURL( const std::string& inImageURL )
+{
+	[mImage release];
+	mImage = nil;
+	mImage = [[NSImage alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithUTF8String: inImageURL.c_str()]]];
+
+}
+
+
 void	CImageCanvas::BeginDrawing()
 {
 	[mImage lockFocus];
+	mLastGraphicsStateSeed = 0;	// lockFocus creates a new context for us, so need to re-apply graphics state.
 }
 
 
@@ -55,7 +75,7 @@ void	CImageCanvas::EndDrawing()
 }
 
 
-CRect	CImageCanvas::GetRect()
+CRect	CImageCanvas::GetRect() const
 {
 	if( !mImage )
 		return CRect();
@@ -63,7 +83,15 @@ CRect	CImageCanvas::GetRect()
 }
 
 
-CImageCanvas	CImageCanvas::Copy()
+CSize	CImageCanvas::GetSize() const
+{
+	if( !mImage )
+		return CSize();
+	return CSize( [mImage size] );
+}
+
+
+CImageCanvas	CImageCanvas::Copy() const
 {
 	NSImage		*	imageCopy = [mImage copy];
 	CImageCanvas	resultImg( imageCopy );

@@ -445,6 +445,8 @@
 		55CD6121187B14E6002450E2 /* CStackMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD611F187B14E6002450E2 /* CStackMac.mm */; };
 		55CD6124187B188E002450E2 /* CDocumentMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55CD6122187B188E002450E2 /* CDocumentMac.mm */; };
 		55D30F7F115832AB001C9DEC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D30F7E115832AB001C9DEC /* Carbon.framework */; };
+		55D3E5911EA0F2B3002EF547 /* WILDPaintView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5901EA0F2B3002EF547 /* WILDPaintView.mm */; };
+		55D3E5941EA0FEA6002EF547 /* CPaintEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5921EA0FEA6002EF547 /* CPaintEngine.cpp */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
@@ -1209,6 +1211,11 @@
 		55CD6122187B188E002450E2 /* CDocumentMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CDocumentMac.mm; path = Platforms/Mac/CDocumentMac.mm; sourceTree = "<group>"; };
 		55CD6123187B188E002450E2 /* CDocumentMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDocumentMac.h; path = Platforms/Mac/CDocumentMac.h; sourceTree = "<group>"; };
 		55D30F7E115832AB001C9DEC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		55D3E5841EA0E55E002EF547 /* CChangeAreaTrackingImageCanvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CChangeAreaTrackingImageCanvas.h; path = Platforms/Common/CChangeAreaTrackingImageCanvas.h; sourceTree = "<group>"; };
+		55D3E58F1EA0F2B3002EF547 /* WILDPaintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDPaintView.h; path = Platforms/Mac/WILDPaintView.h; sourceTree = "<group>"; };
+		55D3E5901EA0F2B3002EF547 /* WILDPaintView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDPaintView.mm; path = Platforms/Mac/WILDPaintView.mm; sourceTree = "<group>"; };
+		55D3E5921EA0FEA6002EF547 /* CPaintEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngine.cpp; path = Editor/CPaintEngine.cpp; sourceTree = "<group>"; };
+		55D3E5931EA0FEA6002EF547 /* CPaintEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngine.h; path = Editor/CPaintEngine.h; sourceTree = "<group>"; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D61D621AA275C2006D117F /* TTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TTool.h; path = "Portable Document/TTool.h"; sourceTree = "<group>"; };
@@ -1548,6 +1555,7 @@
 				554CC83A1CD7EC0200D5D7B6 /* CCanvas.mm */,
 				554CC8461CD8033B00D5D7B6 /* CImageCanvas.h */,
 				554CC8451CD8033B00D5D7B6 /* CImageCanvas.mm */,
+				55D3E5841EA0E55E002EF547 /* CChangeAreaTrackingImageCanvas.h */,
 				5532D4F81CDF977F00475B70 /* CSocket.h */,
 				5532D4F71CDF977F00475B70 /* CSocket.cpp */,
 				5532D5021CDFB24900475B70 /* CConcurrentQueue.h */,
@@ -1571,6 +1579,8 @@
 				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
 				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
+				55D3E58F1EA0F2B3002EF547 /* WILDPaintView.h */,
+				55D3E5901EA0F2B3002EF547 /* WILDPaintView.mm */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -1988,6 +1998,8 @@
 				559BA99F18A84BD700760273 /* CMap.cpp */,
 				5593D0641E58B03300E7F31D /* CCodeSnippets.h */,
 				5593D0631E58B03300E7F31D /* CCodeSnippets.cpp */,
+				55D3E5931EA0FEA6002EF547 /* CPaintEngine.h */,
+				55D3E5921EA0FEA6002EF547 /* CPaintEngine.cpp */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -2782,6 +2794,7 @@
 				556DB7B018709C73002F7CB2 /* CConcreteObject.cpp in Sources */,
 				55612A5D1ABB880C006C0730 /* CUndoStack.mm in Sources */,
 				553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */,
+				55D3E5911EA0F2B3002EF547 /* WILDPaintView.mm in Sources */,
 				553C471013577334000219FA /* LEOChunks.c in Sources */,
 				553C471113577334000219FA /* LEOContextGroup.c in Sources */,
 				556866581359C47300C364D6 /* WILDGlobalProperties.mm in Sources */,
@@ -2884,6 +2897,7 @@
 				55AF101F18B6BFFD00819AE9 /* WILDScrollView.mm in Sources */,
 				55BD35731A8FF88300D0BAF7 /* UKPushbackMessenger.m in Sources */,
 				5593D0651E58B03300E7F31D /* CCodeSnippets.cpp in Sources */,
+				55D3E5941EA0FEA6002EF547 /* CPaintEngine.cpp in Sources */,
 				55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */,
 				551583E318C3BF9200DB3431 /* WILDInvisiblePlayerView.mm in Sources */,
 				55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */,
