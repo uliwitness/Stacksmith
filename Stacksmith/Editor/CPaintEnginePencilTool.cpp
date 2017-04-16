@@ -17,7 +17,7 @@ using namespace Carlson;
 {
 	CPaintEnginePencilTool	&	self = *(CPaintEnginePencilTool*)inUserData;
 	
-	CRect			box( CPoint(h -0.5,v -0.5), CSize(1,1) );
+	CRect			box( CPoint(h,v), CSize(1,1) );
 	self.GetPaintEngine()->GetCanvas()->FillRect( box, self.GetPaintEngine()->GetGraphicsState() );
 }
 
