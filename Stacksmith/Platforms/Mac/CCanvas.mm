@@ -160,6 +160,12 @@ CRect	CPath::GetSurroundingRect() const
 	return CRect( CGPathGetBoundingBox( mBezierPath ) );
 }
 
+
+bool	CPath::IsEmpty() const
+{
+	return CGPathIsEmpty( mBezierPath );
+}
+
 	
 CPath&	CPath::operator =( const CPath& inPath )
 {

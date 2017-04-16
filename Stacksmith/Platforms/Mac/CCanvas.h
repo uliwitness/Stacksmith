@@ -110,6 +110,8 @@ public:
 	
 	void		Inset( TCoordinate h, TCoordinate v )	{ mRect.origin.x += h; mRect.size.width -= h * 2.0; mRect.origin.y += v; mRect.size.height -= v * 2.0; }
 	
+	bool		ContainsPoint( const CPoint& inPos )	{ return( inPos.GetH() >= mRect.origin.x && inPos.GetH() < (mRect.origin.x + mRect.size.width) && inPos.GetV() >= mRect.origin.y && inPos.GetV() < (mRect.origin.y + mRect.size.height) ); }
+	
 	const CGRect&	GetMacRect() const	{ return mRect; }	// Only for platform-specific code to get the underlying type back out.
 	
 	static CRect	RectAroundPoints( const CPoint& a, const CPoint& b );
@@ -164,6 +166,8 @@ public:
 	void	ScaleBy( CSize inHScaleVScale );
 	
 	CRect	GetSurroundingRect() const;
+	
+	bool	IsEmpty() const;
 	
 	CPath& operator =( const CPath& inPath );
 	

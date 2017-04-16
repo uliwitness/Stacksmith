@@ -13,20 +13,26 @@
 #include "CPaintEngineOvalTool.h"
 #include "CPaintEnginePencilTool.h"
 #include "CPaintEngineRegularPolygonTool.h"
+#include "CPaintEnginePolygonTool.h"
 
 
 using namespace Carlson;
 
 
+#define DEFAULT_TOOL		polygonTool
+
+
 @interface WILDPaintView ()
 {
+	NSTrackingArea				*	mouseMoveTrackingArea;
 	CChangeAreaTrackingImageCanvas	imgCanvas;			// Actual picture.
 	CChangeAreaTrackingImageCanvas	temporaryCanvas;	// Used while tracking.
 	CPaintEngine					paintEngine;
 	CPaintEngineBrushTool			brushTool;
 	CPaintEngineOvalTool			ovalTool;
 	CPaintEnginePencilTool			pencilTool;
-	CPaintEngineRegularPolygonTool	regPolygon;
+	CPaintEngineRegularPolygonTool	regPolygonTool;
+	CPaintEnginePolygonTool			polygonTool;
 }
 
 @end
@@ -39,7 +45,7 @@ using namespace Carlson;
 	self = [super initWithFrame: frameRect];
 	if( self )
 	{
-		paintEngine.SetCurrentTool( &regPolygon );
+		paintEngine.SetCurrentTool( &DEFAULT_TOOL );
 	}
 	return self;
 }
@@ -50,9 +56,18 @@ using namespace Carlson;
 	self = [super initWithCoder: coder];
 	if( self )
 	{
-		paintEngine.SetCurrentTool( &regPolygon );
+		paintEngine.SetCurrentTool( &DEFAULT_TOOL );
 	}
 	return self;
+}
+
+
+-(void)	dealloc
+{
+	[mouseMoveTrackingArea release];
+	mouseMoveTrackingArea = nil;
+	
+	[super dealloc];
 }
 
 
@@ -61,6 +76,40 @@ using namespace Carlson;
 	[super setFrame: inBox];
 	
 	self.bounds = (NSRect){ { 0, 0 }, { inBox.size.width / 8.0, inBox.size.height / 8.0 } };
+}
+
+
+-(void)	mouseEntered: (NSEvent *)event
+{
+	[[NSCursor crosshairCursor] push];
+}
+
+
+-(void)	mouseExited: (NSEvent *)event
+{
+	[[NSCursor crosshairCursor] pop];
+}
+
+
+-(void)	mouseMoved: (NSEvent *)event
+{
+	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];
+	pos.x = trunc(pos.x);
+	pos.y = trunc(pos.y);
+
+	imgCanvas.ClearDirtyRects();
+	temporaryCanvas.ClearDirtyRects();
+	
+	paintEngine.MouseMovedToPoint( CPoint(pos) );
+	
+	for( CRect dirtyBox : imgCanvas.GetDirtyRects() )
+	{
+		[self setNeedsDisplayInRect: dirtyBox.GetMacRect()];
+	}
+	for( CRect dirtyBox : temporaryCanvas.GetDirtyRects() )
+	{
+		[self setNeedsDisplayInRect: dirtyBox.GetMacRect()];
+	}
 }
 
 
@@ -154,6 +203,26 @@ using namespace Carlson;
 	{
 		[self setNeedsDisplayInRect: dirtyBox.GetMacRect()];
 	}
+}
+
+
+-(void) updateTrackingAreas
+{
+	[super updateTrackingAreas];
+	
+	if( mouseMoveTrackingArea )
+	{
+		[mouseMoveTrackingArea release];
+		mouseMoveTrackingArea = nil;
+	}
+	
+	NSTrackingAreaOptions options = (NSTrackingActiveAlways | NSTrackingInVisibleRect | NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited);
+
+	mouseMoveTrackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds]
+                                                    options:options
+                                                      owner:self
+                                                   userInfo:nil];
+	[self addTrackingArea: mouseMoveTrackingArea];
 }
 
 @end

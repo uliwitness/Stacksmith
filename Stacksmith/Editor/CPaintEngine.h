@@ -24,9 +24,12 @@ public:
 	void				SetPaintEngine( CPaintEngine * inEngine )	{ mPaintEngine = inEngine; }	// CPaintEngine calls this on a tool before it starts drawing.
 	CPaintEngine	*	GetPaintEngine()							{ return mPaintEngine; }
 	
-	virtual void	MouseDownAtPoint( CPoint pos ) {}
-	virtual void	MouseDraggedToPoint( CPoint pos ) {}
-	virtual void	MouseReleasedAtPoint( CPoint pos ) {}
+	virtual void	MouseDownAtPoint( CPoint pos )		{}
+	virtual void	MouseDraggedToPoint( CPoint pos )	{}
+	virtual void	MouseReleasedAtPoint( CPoint pos )	{}
+	
+	virtual bool	WantsMouseMoved()					{ return false; }
+	virtual void	MouseMovedToPoint( CPoint pos )		{}
 
 protected:
 	CPaintEngine	*	mPaintEngine = nullptr;
@@ -48,6 +51,9 @@ public:
 	void	MouseDownAtPoint( CPoint pos );
 	void	MouseDraggedToPoint( CPoint pos );
 	void	MouseReleasedAtPoint( CPoint pos );
+
+	bool	WantsMouseMoved()					{ return mCurrentTool->WantsMouseMoved(); }
+	void	MouseMovedToPoint( CPoint pos )		{ mCurrentTool->MouseMovedToPoint( pos ); }
 	
 	void	SetLineColor( CColor inColor )	{ mGraphicsState.SetLineColor( inColor ); }
 	CColor	GetLineColor()					{ return mGraphicsState.GetLineColor(); }
