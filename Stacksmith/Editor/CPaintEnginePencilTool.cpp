@@ -17,8 +17,8 @@ using namespace Carlson;
 {
 	CPaintEnginePencilTool	&	self = *(CPaintEnginePencilTool*)inUserData;
 	
-	CRect			box( CPoint(h,v), CSize(1,1) );
-	self.GetPaintEngine()->GetCanvas()->FillOval( box, self.GetPaintEngine()->GetGraphicsState() );
+	CRect			box( CPoint(h -0.5,v -0.5), CSize(1,1) );
+	self.GetPaintEngine()->GetCanvas()->FillRect( box, self.GetPaintEngine()->GetGraphicsState() );
 }
 
 
@@ -26,11 +26,14 @@ void	CPaintEnginePencilTool::MouseDownAtPoint( CPoint pos )
 {
 	mPaintEngine->GetCanvas()->BeginDrawing();
 	
-		mLastColor = GetPaintEngine()->GetGraphicsState().GetLineColor();
+		mLastColor = GetPaintEngine()->GetGraphicsState().GetFillColor();
+		mLastCompositingMode = GetPaintEngine()->GetGraphicsState().GetCompositingMode();
+	
 		CColor	currentColor = mPaintEngine->GetCanvas()->ColorAtPosition( pos );
 		if( currentColor == mLastColor )
 		{
-			GetPaintEngine()->SetLineColor( CColor(0,0,0,0) );
+			GetPaintEngine()->SetFillColor( CColor(0,0,0,0) );
+			GetPaintEngine()->SetCompositingMode( ECompositingModeCopy );
 		}
 		DrawOneBresenhamPixel( pos.GetH(), pos.GetV(), this );
 		mLastMousePos = pos;
@@ -50,6 +53,21 @@ void	CPaintEnginePencilTool::MouseDraggedToPoint( CPoint pos )
 		mLastMousePos = pos;
 
 	mPaintEngine->GetCanvas()->EndDrawing();
+	}
+
+
+void	CPaintEnginePencilTool::MouseReleasedAtPoint( CPoint pos )
+{
+	mPaintEngine->GetCanvas()->BeginDrawing();
 	
-	GetPaintEngine()->SetLineColor( mLastColor );
+		DrawBresenhamLine( mLastMousePos.GetH(), mLastMousePos.GetV(),
+							pos.GetH(), pos.GetV(),
+							DrawOneBresenhamPixel, this );
+
+		mLastMousePos = pos;
+
+	mPaintEngine->GetCanvas()->EndDrawing();
+	
+	GetPaintEngine()->SetFillColor( mLastColor );
+	GetPaintEngine()->SetCompositingMode( mLastCompositingMode );
 }

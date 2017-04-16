@@ -142,7 +142,7 @@ public:
 	WILDNSColorPtr	GetMacColor() const	{ return mColor; }
 	
 protected:
-	WILDNSColorPtr		mColor;
+	WILDNSColorPtr		mColor;	// Always in NSCalibratedRGBColorSpace
 
 	friend class CGraphicsState;
 	friend class CCanvas;
@@ -174,6 +174,15 @@ protected:
 };
 
 
+// The following are platform-agnostic wrappers around the
+//	Mac data type. Size and values of these may be different
+//	on other platforms.
+typedef unsigned long TCompositingMode;
+
+extern TCompositingMode	ECompositingModeAlphaComposite;
+extern TCompositingMode	ECompositingModeCopy;
+
+
 class CGraphicsState
 {
 public:
@@ -188,13 +197,17 @@ public:
 	void		SetLineThickness( TCoordinate inThickness )	{ mLineThickness = inThickness; mGraphicsStateSeed = ++sGraphicsStateSeed; }
 	TCoordinate	GetLineThickness() const					{ return mLineThickness; }
 
-protected:
-	TCoordinate		mLineThickness;
-	CColor			mLineColor;
-	CColor			mFillColor;
-	size_t			mGraphicsStateSeed;
+	void				SetCompositingMode( TCoordinate inMode )	{ mCompositingMode = inMode; mGraphicsStateSeed = ++sGraphicsStateSeed; }
+	TCompositingMode	GetCompositingMode() const					{ return mCompositingMode; }
 
-	static size_t	sGraphicsStateSeed;
+protected:
+	TCoordinate			mLineThickness = 1.0;
+	CColor				mLineColor = CColor(0,0,0,65535);
+	CColor				mFillColor = CColor(0,0,0,0);
+	TCompositingMode	mCompositingMode = ECompositingModeAlphaComposite;
+	size_t				mGraphicsStateSeed;
+
+	static size_t		sGraphicsStateSeed;
 	
 	friend class CCanvas;
 };

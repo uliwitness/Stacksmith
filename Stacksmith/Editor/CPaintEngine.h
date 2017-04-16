@@ -58,6 +58,9 @@ public:
 	void		SetLineThickness( TCoordinate inThickness )	{ mGraphicsState.SetLineThickness( inThickness ); }
 	TCoordinate	GetLineThickness() const					{ return mGraphicsState.GetLineThickness(); }
 
+	void				SetCompositingMode( TCompositingMode inMode )		{ mGraphicsState.SetCompositingMode( inMode ); }
+	TCompositingMode	GetCompositingMode() const					{ return mGraphicsState.GetCompositingMode(); }
+
 	const CGraphicsState	&	GetGraphicsState()		{ return mGraphicsState; }
 	
 	void	SetCurrentTool( CPaintEngineTool * inTool );

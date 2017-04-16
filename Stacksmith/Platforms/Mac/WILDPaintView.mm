@@ -93,8 +93,8 @@ using namespace Carlson;
 	paintEngine.SetLineColor( CColor( 0.0, 0.0, 65535.0, 65535.0 ) );
 	
 	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];
-	pos.x = trunc(pos.x) +0.5;
-	pos.y = trunc(pos.y) +0.5;
+	pos.x = trunc(pos.x);
+	pos.y = trunc(pos.y);
 	imgCanvas.ClearDirtyRects();
 	temporaryCanvas.ClearDirtyRects();
 	
@@ -114,8 +114,8 @@ using namespace Carlson;
 -(void) mouseDragged: (NSEvent *)event
 {
 	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];
-	pos.x = trunc(pos.x) +0.5;
-	pos.y = trunc(pos.y) +0.5;
+	pos.x = trunc(pos.x);
+	pos.y = trunc(pos.y);
 
 	imgCanvas.ClearDirtyRects();
 	temporaryCanvas.ClearDirtyRects();
@@ -136,8 +136,8 @@ using namespace Carlson;
 -(void) mouseUp: (NSEvent *)event
 {
 	NSPoint pos = [self convertPoint: event.locationInWindow fromView: nil];
-	pos.x = trunc(pos.x) +0.5;
-	pos.y = trunc(pos.y) +0.5;
+	pos.x = trunc(pos.x);
+	pos.y = trunc(pos.y);
 
 	imgCanvas.ClearDirtyRects();
 	temporaryCanvas.ClearDirtyRects();

@@ -10,8 +10,15 @@
 #include "CImageCanvas.h"
 #import <Cocoa/Cocoa.h>
 
-
 using namespace Carlson;
+
+
+namespace Carlson
+{
+	TCompositingMode	ECompositingModeAlphaComposite = NSCompositingOperationSourceOver;
+	TCompositingMode	ECompositingModeCopy = NSCompositingOperationCopy;
+}
+
 
 
 /*static*/ CRect	CRect::RectAroundPoints( const CPoint& inStart, const CPoint& inEnd )
@@ -91,7 +98,7 @@ bool	CColor::operator ==( const CColor& inColor ) const
 	CGFloat	br, bg, bb, ba;
 	[mColor getRed: &ar green: &ag blue: &ab alpha: &aa];
 	[inColor.mColor getRed: &br green: &bg blue: &bb alpha: &ba];
-	return [mColor isEqual: inColor.mColor];
+	return (fabs(ar - br) < 0.001) && (fabs(ag - bg) < 0.001) && (fabs(ab - bb) < 0.001) && (fabs(aa - ba) < 0.001);
 }
 
 
@@ -265,7 +272,7 @@ void	CCanvas::DrawImageAtPoint( const CImageCanvas& inImage, const CPoint& inPos
 
 CColor	CCanvas::ColorAtPosition( const CPoint& pos )
 {
-	return CColor( NSReadPixel( pos.mPoint ) );
+	return CColor( [NSReadPixel( pos.mPoint ) colorUsingColorSpaceName: NSCalibratedRGBColorSpace] );
 }
 
 
@@ -277,6 +284,7 @@ void	CCanvas::ApplyGraphicsStateIfNeeded( const CGraphicsState& inState )
 		[inState.mFillColor.mColor setFill];
 		[NSBezierPath setDefaultLineWidth: inState.mLineThickness];
 		mLastGraphicsStateSeed = inState.mGraphicsStateSeed;
+		[NSGraphicsContext.currentContext setCompositingOperation: (NSCompositingOperation)inState.mCompositingMode];
 	}
 }
 

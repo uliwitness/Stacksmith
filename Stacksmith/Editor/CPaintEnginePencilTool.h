@@ -19,12 +19,14 @@ class CPaintEnginePencilTool : public CPaintEngineTool
 public:
 	virtual void	MouseDownAtPoint( CPoint pos ) override;
 	virtual void	MouseDraggedToPoint( CPoint pos ) override;
+	virtual void	MouseReleasedAtPoint( CPoint pos ) override;
 	
 protected:
 	static void		DrawOneBresenhamPixel( float h, float v, void* inUserData );
 	
-	CPoint			mLastMousePos;
-	CColor			mLastColor;
+	CPoint				mLastMousePos;
+	CColor				mLastColor;
+	TCompositingMode	mLastCompositingMode;
 };
 
 } // namespace Carlson
