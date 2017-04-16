@@ -238,6 +238,36 @@ void	CCanvas::StrokeLineFromPointToPoint( const CPoint& inStart, const CPoint& i
 }
 
 
+CPath	CCanvas::RegularPolygon( const CPoint& centerPos, const CPoint& desiredCorner, TCoordinate numberOfCorners )
+{
+	CPath	thePath;
+	CPoint	startPos;
+	
+	TCoordinate	delta_x = desiredCorner.GetH() - centerPos.GetH();
+	TCoordinate	delta_y = desiredCorner.GetV() - centerPos.GetV();
+	TCoordinate	startAngle = atan2(delta_y, delta_x);
+	
+	for( int x = 0; x < numberOfCorners; x++ )
+	{
+		TCoordinate	a = startAngle +((M_PI * 2) / numberOfCorners) * TCoordinate(x);
+		TCoordinate r = sqrt( pow(desiredCorner.GetH() -centerPos.GetH(), 2) + pow(desiredCorner.GetV() -centerPos.GetV(), 2) );
+		CPoint	cornerPos( centerPos.GetH() + r * cos(a), centerPos.GetV() + r * sin(a) );
+		if( x == 0 )
+		{
+			startPos = cornerPos;
+			thePath.MoveToPoint( cornerPos );
+		}
+		else
+		{
+			thePath.LineToPoint( cornerPos );
+		}
+	}
+	thePath.LineToPoint( startPos );
+	
+	return thePath;
+}
+
+
 void	CCanvas::StrokePath( const CPath& inPath, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );

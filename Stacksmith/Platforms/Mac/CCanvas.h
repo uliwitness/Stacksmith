@@ -235,8 +235,12 @@ public:
 	virtual void	StrokeRoundRect( const CRect& inRect, TCoordinate inCornerRadius, const CGraphicsState& inState );
 	virtual void	FillRoundRect( const CRect& inRect, TCoordinate inCornerRadius, const CGraphicsState& inState );
 	virtual void	StrokeLineFromPointToPoint( const CPoint& inStart, const CPoint& inEnd, const CGraphicsState& inState );
+
+	virtual CPath	RegularPolygon( const CPoint& centerPos, const CPoint& desiredCorner, TCoordinate numberOfCorners );
+
 	virtual void	StrokePath( const CPath& inPath, const CGraphicsState& inState );
 	virtual void	FillPath( const CPath& inPath, const CGraphicsState& inState );
+
 	virtual void	DrawImageInRect( const CImageCanvas& inImage, const CRect& inBox );
 	virtual void	DrawImageAtPoint( const CImageCanvas& inImage, const CPoint& inPos );
 	

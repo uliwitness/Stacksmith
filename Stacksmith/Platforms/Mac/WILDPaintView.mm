@@ -12,6 +12,7 @@
 #include "CPaintEngineBrushTool.h"
 #include "CPaintEngineOvalTool.h"
 #include "CPaintEnginePencilTool.h"
+#include "CPaintEngineRegularPolygonTool.h"
 
 
 using namespace Carlson;
@@ -25,6 +26,7 @@ using namespace Carlson;
 	CPaintEngineBrushTool			brushTool;
 	CPaintEngineOvalTool			ovalTool;
 	CPaintEnginePencilTool			pencilTool;
+	CPaintEngineRegularPolygonTool	regPolygon;
 }
 
 @end
@@ -37,7 +39,7 @@ using namespace Carlson;
 	self = [super initWithFrame: frameRect];
 	if( self )
 	{
-		paintEngine.SetCurrentTool( &pencilTool );
+		paintEngine.SetCurrentTool( &regPolygon );
 	}
 	return self;
 }
@@ -48,7 +50,7 @@ using namespace Carlson;
 	self = [super initWithCoder: coder];
 	if( self )
 	{
-		paintEngine.SetCurrentTool( &pencilTool );
+		paintEngine.SetCurrentTool( &regPolygon );
 	}
 	return self;
 }
