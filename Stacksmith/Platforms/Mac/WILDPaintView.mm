@@ -25,6 +25,7 @@ using namespace Carlson;
 @interface WILDPaintView ()
 {
 	NSTrackingArea				*	mouseMoveTrackingArea;
+	NSCursor					*	currentCursor;
 	CChangeAreaTrackingImageCanvas	imgCanvas;			// Actual picture.
 	CChangeAreaTrackingImageCanvas	temporaryCanvas;	// Used while tracking.
 	CPaintEngine					paintEngine;
@@ -46,6 +47,7 @@ using namespace Carlson;
 	if( self )
 	{
 		paintEngine.SetCurrentTool( &DEFAULT_TOOL );
+		[self setUpCursor];
 	}
 	return self;
 }
@@ -57,6 +59,7 @@ using namespace Carlson;
 	if( self )
 	{
 		paintEngine.SetCurrentTool( &DEFAULT_TOOL );
+		[self setUpCursor];
 	}
 	return self;
 }
@@ -67,7 +70,19 @@ using namespace Carlson;
 	[mouseMoveTrackingArea release];
 	mouseMoveTrackingArea = nil;
 	
+	[currentCursor release];
+	currentCursor = nil;
+	
 	[super dealloc];
+}
+
+
+-(void)	setUpCursor
+{
+	CImageCanvas	cursorCanvas(CSize(16,16));
+	CPoint			hotSpot;
+	paintEngine.DrawCursorInCanvas( cursorCanvas, hotSpot );
+	currentCursor = [[NSCursor alloc] initWithImage: cursorCanvas.GetMacImage() hotSpot: hotSpot.GetMacPoint()];
 }
 
 
@@ -75,19 +90,19 @@ using namespace Carlson;
 {
 	[super setFrame: inBox];
 	
-	self.bounds = (NSRect){ { 0, 0 }, { inBox.size.width / 8.0, inBox.size.height / 8.0 } };
+//	self.bounds = (NSRect){ { 0, 0 }, { inBox.size.width / 8.0, inBox.size.height / 8.0 } };
 }
 
 
 -(void)	mouseEntered: (NSEvent *)event
 {
-	[[NSCursor crosshairCursor] push];
+	[currentCursor push];
 }
 
 
 -(void)	mouseExited: (NSEvent *)event
 {
-	[[NSCursor crosshairCursor] pop];
+	[currentCursor pop];
 }
 
 

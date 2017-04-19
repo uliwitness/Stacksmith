@@ -1307,7 +1307,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <clipView key="contentView" id="R5x-og-bUo">
                                         <rect key="frame" x="1" y="1" width="233" height="217"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" id="TOx-Bf-TMH">
                                                 <rect key="frame" x="0.0" y="0.0" width="233" height="217"/>
@@ -1394,6 +1394,17 @@
                 </subviews>
             </view>
             <point key="canvasLocation" x="469.5" y="649.5"/>
+        </window>
+        <window title="Paint Test" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="YYc-hw-0a9">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="109" y="131" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <view key="contentView" id="bFM-qh-abh" customClass="WILDPaintView">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </view>
+            <point key="canvasLocation" x="1043" y="770"/>
         </window>
     </objects>
     <resources>

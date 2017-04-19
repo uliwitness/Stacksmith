@@ -50,6 +50,8 @@ public:
 	void		SetH( TCoordinate inH )	{ mPoint.x = inH; }
 	void		SetV( TCoordinate inV )	{ mPoint.y = inV; }
 	
+	const CGPoint&	GetMacPoint()		{ return mPoint; }	// Only for platform-specific code to get the underlying type back out.
+	
 protected:
 	CGPoint	mPoint;
 
@@ -102,6 +104,11 @@ public:
 	void		SetOrigin( CPoint pos )				{ mRect.origin = pos.mPoint; }
 	CSize		GetSize() const						{ return CSize(mRect.size); }
 	void		SetSize( CSize size )				{ mRect.size = size.mSize; }
+	
+	TCoordinate	GetHCenter()						{ return mRect.origin.x + (mRect.size.width / 2.0); }
+	TCoordinate	GetVCenter()						{ return mRect.origin.y + (mRect.size.height / 2.0); }
+	TCoordinate	GetMaxH()							{ return mRect.origin.x + mRect.size.width; }
+	TCoordinate	GetMaxV()							{ return mRect.origin.y + mRect.size.height; }
 
 	void		ResizeByMovingMinHEdgeTo( TCoordinate inH )	{ mRect.size.width += mRect.origin.x -inH; mRect.origin.x = inH; }
 	void		ResizeByMovingMinVEdgeTo( TCoordinate inV )	{ mRect.size.height += mRect.origin.y -inV; mRect.origin.y = inV; }

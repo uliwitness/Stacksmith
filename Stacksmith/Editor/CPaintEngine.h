@@ -30,6 +30,8 @@ public:
 	
 	virtual bool	WantsMouseMoved()					{ return false; }
 	virtual void	MouseMovedToPoint( CPoint pos )		{}
+	
+	virtual void	DrawCursorInCanvas( CCanvas& inCanvas, CPoint& outHotSpot );
 
 protected:
 	CPaintEngine	*	mPaintEngine = nullptr;
@@ -70,6 +72,7 @@ public:
 	const CGraphicsState	&	GetGraphicsState()		{ return mGraphicsState; }
 	
 	void	SetCurrentTool( CPaintEngineTool * inTool );
+	void	DrawCursorInCanvas( CCanvas& inCanvas, CPoint &outHotSpot )		{ mCurrentTool->DrawCursorInCanvas( inCanvas, outHotSpot ); }
 	
 	
 protected:
