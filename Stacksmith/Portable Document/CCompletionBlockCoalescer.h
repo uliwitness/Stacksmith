@@ -31,7 +31,7 @@ class CCompletionBlockCoalescer
 public:
 	CCompletionBlockCoalescer( size_t numCallsToCombine, std::function<void(paramT)> block ) : mNumCallsToCombine(numCallsToCombine), mBlock(block) {}
 	
-	void		Abort( paramT ) { mNumCallsToCombine = SIZE_T_MAX; }
+	void		Abort( paramT inParam ) { mNumCallsToCombine = SIZE_T_MAX; mBlock( inParam ); }
 	void		Success( paramT inParam ) { if( mNumCallsToCombine == SIZE_T_MAX ) return; if( (--mNumCallsToCombine) == 0 ) mBlock( inParam ); }
 	
 protected:
