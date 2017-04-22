@@ -115,6 +115,7 @@ public:
 	void		ResizeByMovingMaxHEdgeTo( TCoordinate inH )	{ mRect.size.width = inH -mRect.origin.x; }
 	void		ResizeByMovingMaxVEdgeTo( TCoordinate inV )	{ mRect.size.height = inV -mRect.origin.y; }
 	
+	void		Offset( TCoordinate h, TCoordinate v )	{ mRect.origin.x += h; mRect.origin.y += v; }
 	void		Inset( TCoordinate h, TCoordinate v )	{ mRect.origin.x += h; mRect.size.width -= h * 2.0; mRect.origin.y += v; mRect.size.height -= v * 2.0; }
 	
 	bool		ContainsPoint( const CPoint& inPos )	{ return( inPos.GetH() >= mRect.origin.x && inPos.GetH() < (mRect.origin.x + mRect.size.width) && inPos.GetV() >= mRect.origin.y && inPos.GetV() < (mRect.origin.y + mRect.size.height) ); }
