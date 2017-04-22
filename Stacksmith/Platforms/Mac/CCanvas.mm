@@ -252,11 +252,12 @@ CPath	CCanvas::RegularPolygon( const CPoint& centerPos, const CPoint& desiredCor
 	TCoordinate	delta_x = desiredCorner.GetH() - centerPos.GetH();
 	TCoordinate	delta_y = desiredCorner.GetV() - centerPos.GetV();
 	TCoordinate	startAngle = atan2(delta_y, delta_x);
+	TCoordinate r = sqrt( pow(delta_x, 2) + pow(delta_y, 2) );
+	TCoordinate angleAdvance = (M_PI * 2) / numberOfCorners;
 	
 	for( int x = 0; x < numberOfCorners; x++ )
 	{
-		TCoordinate	a = startAngle +((M_PI * 2) / numberOfCorners) * TCoordinate(x);
-		TCoordinate r = sqrt( pow(desiredCorner.GetH() -centerPos.GetH(), 2) + pow(desiredCorner.GetV() -centerPos.GetV(), 2) );
+		TCoordinate	a = startAngle + angleAdvance * TCoordinate(x);
 		CPoint	cornerPos( centerPos.GetH() + r * cos(a), centerPos.GetV() + r * sin(a) );
 		if( x == 0 )
 		{
