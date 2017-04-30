@@ -28,6 +28,10 @@ void	CPaintEngineSelectionRectTool::MouseDownAtPoint( CPoint pos )
 				mPaintEngine->GetCanvas()->DrawImageInRect( mFloatingSelectionContents, selectedBox  );
 			mPaintEngine->GetCanvas()->EndDrawing();
 
+			mPaintEngine->GetTemporaryCanvas()->BeginDrawing();
+				mPaintEngine->GetTemporaryCanvas()->ClearRect( mLastTrackingRectangle );
+			mPaintEngine->GetTemporaryCanvas()->EndDrawing();
+
 			mFloatingSelectionContents = CImageCanvas();
 		}
 		
