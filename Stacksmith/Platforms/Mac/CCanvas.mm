@@ -186,7 +186,12 @@ void	CCanvas::StrokeRect( const CRect& inRect, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	[NSBezierPath strokeRect: inRect.mRect];
+	NSBezierPath * boxPath = [NSBezierPath bezierPathWithRect: inRect.mRect];
+		if( mLineDash.size() > 0 )
+	{
+		[boxPath setLineDash: mLineDash.data() count: mLineDash.size() phase: 0.0];
+	}
+	[boxPath stroke];
 }
 
 
@@ -208,7 +213,12 @@ void	CCanvas::StrokeOval( const CRect& inRect, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	[[NSBezierPath bezierPathWithOvalInRect: inRect.mRect] stroke];
+	NSBezierPath * boxPath = [NSBezierPath bezierPathWithOvalInRect: inRect.mRect];
+	if( mLineDash.size() > 0 )
+	{
+		[boxPath setLineDash: mLineDash.data() count: mLineDash.size() phase: 0.0];
+	}
+	[boxPath stroke];
 }
 
 
@@ -224,7 +234,12 @@ void	CCanvas::StrokeRoundRect( const CRect& inRect, TCoordinate inCornerRadius, 
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	[[NSBezierPath bezierPathWithRoundedRect: inRect.mRect xRadius: inCornerRadius yRadius: inCornerRadius] stroke];
+	NSBezierPath * boxPath = [NSBezierPath bezierPathWithRoundedRect: inRect.mRect xRadius: inCornerRadius yRadius: inCornerRadius];
+	if( mLineDash.size() > 0 )
+	{
+		[boxPath setLineDash: mLineDash.data() count: mLineDash.size() phase: 0.0];
+	}
+	[boxPath stroke];
 }
 
 
@@ -240,7 +255,14 @@ void	CCanvas::StrokeLineFromPointToPoint( const CPoint& inStart, const CPoint& i
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	[NSBezierPath strokeLineFromPoint: inStart.mPoint toPoint: inEnd.mPoint];
+	NSBezierPath * boxPath = [NSBezierPath bezierPath];
+	[boxPath moveToPoint: inStart.mPoint];
+	[boxPath lineToPoint: inEnd.mPoint];
+	if( mLineDash.size() > 0 )
+	{
+		[boxPath setLineDash: mLineDash.data() count: mLineDash.size() phase: 0.0];
+	}
+	[boxPath stroke];
 }
 
 
@@ -317,11 +339,14 @@ void	CCanvas::ApplyGraphicsStateIfNeeded( const CGraphicsState& inState )
 {
 	if( inState.mGraphicsStateSeed != mLastGraphicsStateSeed )
 	{
+		NSGraphicsContext*	ctx = NSGraphicsContext.currentContext;
+		
 		[inState.mLineColor.mColor setStroke];
 		[inState.mFillColor.mColor setFill];
 		[NSBezierPath setDefaultLineWidth: inState.mLineThickness];
 		mLastGraphicsStateSeed = inState.mGraphicsStateSeed;
-		[NSGraphicsContext.currentContext setCompositingOperation: (NSCompositingOperation)inState.mCompositingMode];
+		[ctx setCompositingOperation: (NSCompositingOperation)inState.mCompositingMode];
+		mLineDash = inState.mLineDash;
 	}
 }
 
@@ -351,6 +376,37 @@ void	CMacCanvas::EndDrawing()
 	[NSGraphicsContext setCurrentContext: mPreviousContext];
 	[mPreviousContext release];
 	mPreviousContext = nil;
+}
+
+
+CImageCanvas CMacCanvas::GetImageForRect( const CRect& box )
+{
+	NSGraphicsContext* previousContext = [[NSGraphicsContext currentContext] retain];
+	[NSGraphicsContext setCurrentContext: mContext];
+	
+		NSImage * img = [[[NSImage alloc] initWithSize: box.GetSize().GetMacSize()] autorelease];
+		NSBitmapImageRep * bir = [[[NSBitmapImageRep alloc] initWithFocusedViewRect: box.GetMacRect()] autorelease];
+		[img addRepresentation: bir];
+	
+	[NSGraphicsContext setCurrentContext: previousContext];
+	[previousContext release];
+	previousContext = nil;
+	
+	return CImageCanvas( img );
+}
+
+
+CImageCanvas CImageCanvas::GetImageForRect( const CRect& box )
+{
+	[mImage lockFocus];
+	
+		NSImage * img = [[[NSImage alloc] initWithSize: box.GetSize().GetMacSize()] autorelease];
+		NSBitmapImageRep * bir = [[[NSBitmapImageRep alloc] initWithFocusedViewRect: box.GetMacRect()] autorelease];
+		[img addRepresentation: bir];
+	
+	[mImage unlockFocus];
+	
+	return CImageCanvas( img );
 }
 
 

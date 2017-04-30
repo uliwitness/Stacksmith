@@ -13,9 +13,10 @@
 using namespace Carlson;
 
 
-CImageCanvas::CImageCanvas( const CSize& inSize )
+CImageCanvas::CImageCanvas( const CSize& inSize, TCoordinate scaleFactor )
 {
-	mImage = [[NSImage alloc] initWithSize: inSize.mSize];
+	NSSize	theSize = inSize.mSize;
+	mImage = [[NSImage alloc] initWithSize: theSize];
 }
 
 
@@ -44,7 +45,7 @@ CImageCanvas::~CImageCanvas()
 }
 
 
-void	CImageCanvas::InitWithSize( const CSize& inSize )
+void	CImageCanvas::InitWithSize( const CSize& inSize, TCoordinate scaleFactor )
 {
 	[mImage release];
 	mImage = nil;

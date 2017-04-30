@@ -454,6 +454,7 @@
 		55D3E5A61EA1560D002EF547 /* CPaintEnginePencilTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5A41EA1560D002EF547 /* CPaintEnginePencilTool.cpp */; };
 		55D3E5A91EA3A8D8002EF547 /* CPaintEngineRegularPolygonTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5A71EA3A8D8002EF547 /* CPaintEngineRegularPolygonTool.cpp */; };
 		55D3E5AC1EA3C6CF002EF547 /* CPaintEnginePolygonTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5AA1EA3C6CF002EF547 /* CPaintEnginePolygonTool.cpp */; };
+		55D3E5AF1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5AD1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.cpp */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
@@ -1237,6 +1238,8 @@
 		55D3E5A81EA3A8D8002EF547 /* CPaintEngineRegularPolygonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineRegularPolygonTool.h; path = Editor/CPaintEngineRegularPolygonTool.h; sourceTree = "<group>"; };
 		55D3E5AA1EA3C6CF002EF547 /* CPaintEnginePolygonTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEnginePolygonTool.cpp; path = Editor/CPaintEnginePolygonTool.cpp; sourceTree = "<group>"; };
 		55D3E5AB1EA3C6CF002EF547 /* CPaintEnginePolygonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEnginePolygonTool.h; path = Editor/CPaintEnginePolygonTool.h; sourceTree = "<group>"; };
+		55D3E5AD1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngineSelectionRectTool.cpp; path = Editor/CPaintEngineSelectionRectTool.cpp; sourceTree = "<group>"; };
+		55D3E5AE1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineSelectionRectTool.h; path = Editor/CPaintEngineSelectionRectTool.h; sourceTree = "<group>"; };
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D61D621AA275C2006D117F /* TTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TTool.h; path = "Portable Document/TTool.h"; sourceTree = "<group>"; };
@@ -2035,6 +2038,8 @@
 				55D3E5A71EA3A8D8002EF547 /* CPaintEngineRegularPolygonTool.cpp */,
 				55D3E5AB1EA3C6CF002EF547 /* CPaintEnginePolygonTool.h */,
 				55D3E5AA1EA3C6CF002EF547 /* CPaintEnginePolygonTool.cpp */,
+				55D3E5AE1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.h */,
+				55D3E5AD1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.cpp */,
 			);
 			name = "Portable Document";
 			sourceTree = "<group>";
@@ -2833,6 +2838,7 @@
 				556DB7B018709C73002F7CB2 /* CConcreteObject.cpp in Sources */,
 				55612A5D1ABB880C006C0730 /* CUndoStack.mm in Sources */,
 				553C470F13577334000219FA /* LEORemoteDebugger.c in Sources */,
+				55D3E5AF1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.cpp in Sources */,
 				55D3E5911EA0F2B3002EF547 /* WILDPaintView.mm in Sources */,
 				55D3E5971EA10A3D002EF547 /* CPaintEngineBrushTool.cpp in Sources */,
 				553C471013577334000219FA /* LEOChunks.c in Sources */,

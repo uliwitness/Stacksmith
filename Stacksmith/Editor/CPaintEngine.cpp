@@ -17,15 +17,21 @@ void	CPaintEngineTool::DrawCursorInCanvas( CCanvas& inCanvas, CPoint& outHotSpot
 {
 	inCanvas.BeginDrawing();
 	
+		CRect box = inCanvas.GetRect();
 		CGraphicsState	state;
 		state.SetLineColor( GetPaintEngine()->GetLineColor() );
-		CRect box = inCanvas.GetRect();
+		TCoordinate lineThickness = GetPaintEngine()->GetLineThickness();
+		if( lineThickness > (box.GetWidth() / 2) )
+			lineThickness = (box.GetWidth() / 2);
+		state.SetLineThickness( lineThickness );
+		box.Offset( -0.5, -0.5 );
 		inCanvas.StrokeLineFromPointToPoint( CPoint(box.GetH(),box.GetVCenter()), CPoint(box.GetMaxH(),box.GetVCenter()), state );
 		inCanvas.StrokeLineFromPointToPoint( CPoint(box.GetHCenter(),box.GetV()), CPoint(box.GetHCenter(),box.GetMaxV()), state );
 	
 	inCanvas.EndDrawing();
 	
-	outHotSpot = CPoint( box.GetHCenter(), box.GetVCenter() );
+	box = inCanvas.GetRect();
+	outHotSpot = CPoint( box.GetHCenter() -0.5, box.GetVCenter() -0.5 );
 }
 
 

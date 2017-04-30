@@ -14,6 +14,7 @@
 #include "CPaintEnginePencilTool.h"
 #include "CPaintEngineRegularPolygonTool.h"
 #include "CPaintEnginePolygonTool.h"
+#include "CPaintEngineSelectionRectTool.h"
 
 
 using namespace Carlson;
@@ -34,6 +35,7 @@ using namespace Carlson;
 	CPaintEnginePencilTool			pencilTool;
 	CPaintEngineRegularPolygonTool	regPolygonTool;
 	CPaintEnginePolygonTool			polygonTool;
+	CPaintEngineSelectionRectTool	selectionRectTool;
 }
 
 @end
@@ -147,6 +149,15 @@ using namespace Carlson;
 
 -(void) mouseDown: (NSEvent *)event
 {
+	if( event.modifierFlags & NSAlternateKeyMask )
+	{
+		paintEngine.SetCurrentTool( &selectionRectTool );
+	}
+	else
+	{
+		paintEngine.SetCurrentTool( &DEFAULT_TOOL );
+	}
+	
 	if( !imgCanvas.IsValid() )
 		imgCanvas.InitWithSize( CSize(self.bounds.size) );
 	if( !temporaryCanvas.IsValid() )

@@ -18,6 +18,7 @@
 
 
 #import <CoreGraphics/CoreGraphics.h>
+#include <vector>
 
 
 // Some internal, Mac-specific types. Clients shouldn't use these:
@@ -49,6 +50,8 @@ public:
 	TCoordinate	GetV() const			{ return mPoint.y; }
 	void		SetH( TCoordinate inH )	{ mPoint.x = inH; }
 	void		SetV( TCoordinate inV )	{ mPoint.y = inV; }
+
+	void		Offset( TCoordinate h, TCoordinate v )	{ mPoint.x += h; mPoint.y += v; }
 	
 	const CGPoint&	GetMacPoint()		{ return mPoint; }	// Only for platform-specific code to get the underlying type back out.
 	
@@ -72,6 +75,8 @@ public:
 	TCoordinate	GetHeight() const					{ return mSize.height; }
 	void		SetWidth( TCoordinate inWidth )		{ mSize.width = inWidth; }
 	void		SetHeight( TCoordinate inHeight )	{ mSize.height = inHeight; }
+
+	const CGSize&	GetMacSize() const	{ return mSize; }	// Only for platform-specific code to get the underlying type back out.
 
 protected:
 	CGSize	mSize;
@@ -211,13 +216,17 @@ public:
 
 	void				SetCompositingMode( TCoordinate inMode )	{ mCompositingMode = inMode; mGraphicsStateSeed = ++sGraphicsStateSeed; }
 	TCompositingMode	GetCompositingMode() const					{ return mCompositingMode; }
+	
+	void						SetLineDash( std::vector<TCoordinate> inDashes )	{ mLineDash = inDashes; }
+	std::vector<TCoordinate>	GetLineDash()										{ return mLineDash; }
 
 protected:
-	TCoordinate			mLineThickness = 1.0;
-	CColor				mLineColor = CColor(0,0,0,65535);
-	CColor				mFillColor = CColor(0,0,0,0);
-	TCompositingMode	mCompositingMode = ECompositingModeAlphaComposite;
-	size_t				mGraphicsStateSeed;
+	TCoordinate					mLineThickness = 1.0;
+	CColor						mLineColor = CColor(0,0,0,65535);
+	CColor						mFillColor = CColor(0,0,0,0);
+	std::vector<TCoordinate>	mLineDash;
+	TCompositingMode			mCompositingMode = ECompositingModeAlphaComposite;
+	size_t						mGraphicsStateSeed;
 
 	static size_t		sGraphicsStateSeed;
 	
@@ -257,13 +266,16 @@ public:
 	virtual void	DrawImageAtPoint( const CImageCanvas& inImage, const CPoint& inPos );
 	
 	virtual CColor	ColorAtPosition( const CPoint& pos );
+	
+	virtual CImageCanvas GetImageForRect( const CRect& box ) = 0;
 
 protected:
 	CCanvas&	operator =( const CCanvas& inOriginal ) { assert(false); return *this; }
 
 	void		ApplyGraphicsStateIfNeeded( const CGraphicsState& inState );
 	
-	size_t		mLastGraphicsStateSeed;
+	size_t						mLastGraphicsStateSeed;
+	std::vector<TCoordinate>	mLineDash;
 };
 
 
@@ -279,6 +291,8 @@ public:
 	
 	virtual void	BeginDrawing();
 	virtual void	EndDrawing();
+	
+	virtual CImageCanvas GetImageForRect( const CRect& box );
 	
 protected:
 	CGRect						mBounds;
