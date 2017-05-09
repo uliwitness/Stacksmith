@@ -322,7 +322,11 @@ void	CMessageBoxMac::SetVisible( bool n )
 void	CMessageBoxMac::SetResultText( const std::string &inString )
 {
 	CMessageBox::SetResultText( inString );
-	[mMacWindowController.resultField setStringValue: [NSString stringWithUTF8String: inString.c_str()]];
+	NSString * macStr = [NSString stringWithUTF8String: inString.c_str()];
+	macStr = [macStr stringByReplacingOccurrencesOfString: @"\r\n" withString: @" "];
+	macStr = [macStr stringByReplacingOccurrencesOfString: @"\n" withString: @" "];
+	macStr = [macStr stringByReplacingOccurrencesOfString: @"\r" withString: @" "];
+	[mMacWindowController.resultField setStringValue: macStr];
 }
 
 
