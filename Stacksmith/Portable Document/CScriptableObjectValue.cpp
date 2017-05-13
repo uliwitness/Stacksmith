@@ -1929,21 +1929,21 @@ void		DetermineChunkRangeOfSubstringOfScriptableObjectDescriptorValue( LEOValueP
 
 bool		CanGetScriptableObjectDescriptorValueAsNumber( LEOValuePtr self, struct LEOContext* inContext )
 {
-
+	return false;
 }
 
 
 
 LEOValuePtr	GetScriptableObjectDescriptorValueForKey( LEOValuePtr self, const char* keyName, union LEOValue* tempStorage, LEOKeepReferencesFlag keepReferences, struct LEOContext* inContext )
 {
-
+	return NULL;
 }
 
 
 
 size_t		GetScriptableObjectDescriptorKeyCount( LEOValuePtr self, struct LEOContext* inContext )
 {
-
+	return 0;
 }
 
 

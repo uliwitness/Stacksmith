@@ -356,7 +356,6 @@
 		559BA9CF18B1027500760273 /* WILDStackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA9CD18B1027500760273 /* WILDStackInfoViewController.xib */; };
 		559BA9D118B11E4600760273 /* CPlatformLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9D018B11E4500760273 /* CPlatformLayer.mm */; };
 		559BA9D518B15EDD00760273 /* CMacScriptableObjectBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA9D318B15EDD00760273 /* CMacScriptableObjectBase.mm */; };
-		55A029311E062895008DD206 /* LEOValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A0292F1E062895008DD206 /* LEOValue.cpp */; };
 		55A46A54170A5C1900750972 /* CSubtractCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A52170A5C1800750972 /* CSubtractCommandNode.cpp */; };
 		55A46A5D170A5CBA00750972 /* CDivideCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A59170A5CBA00750972 /* CDivideCommandNode.cpp */; };
 		55A46A5E170A5CBA00750972 /* CMultiplyCommandNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55A46A5B170A5CBA00750972 /* CMultiplyCommandNode.cpp */; };
