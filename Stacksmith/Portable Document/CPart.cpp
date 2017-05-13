@@ -454,6 +454,10 @@ bool	CPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart,
 	{
 		LEOInitRectValue( outValue, GetLeft(), GetTop(), GetRight(), GetBottom(), kLEOInvalidateReferences, inContext );
 	}
+	else if( strcasecmp("location", inPropertyName) == 0 || strcasecmp("loc", inPropertyName) == 0 )
+	{
+		LEOInitPointValue( outValue, GetLeft() + ((GetRight() -GetLeft()) / 2), GetTop() + ((GetBottom() -GetTop()) / 2), kLEOInvalidateReferences, inContext );
+	}
 	else if( strcasecmp("selected", inPropertyName) == 0 )
 	{
 		LEOInitBooleanValue( outValue, mSelected, kLEOInvalidateReferences, inContext );
@@ -495,6 +499,17 @@ bool	CPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContext
 	{
 		LEOInteger		l = 0, t = 0, r = 0, b = 0;
 		LEOGetValueAsRect( inValue, &l, &t, &r, &b, inContext);
+		SetRect( l, t, r, b );
+	}
+	else if( strcasecmp("location", inPropertyName) == 0 || strcasecmp("loc", inPropertyName) == 0 )
+	{
+		LEOInteger		l = 0, t = 0, r = 0, b = 0;
+		LEOInteger		x = 0, y = 0;
+		LEOGetValueAsPoint( inValue, &x, &y, inContext );
+		l = x -((mRight -mLeft) /2);
+		t = y -((mBottom -mTop) /2);
+		r = l +(mRight -mLeft);
+		b = t +(mBottom -mTop);
 		SetRect( l, t, r, b );
 	}
 	else if( strcasecmp("selected", inPropertyName) == 0 )
