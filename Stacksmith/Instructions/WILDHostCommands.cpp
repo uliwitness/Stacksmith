@@ -1031,8 +1031,25 @@ void	WILDMoveInstruction( LEOContext* inContext )
 		coordinates.push_back( t );
 	}
 	
-	if( numCoords == 0 )
-		return;
+	LEOInteger		w = thePart->GetRight() - thePart->GetLeft();
+	LEOInteger		h = thePart->GetBottom() - thePart->GetTop();
+
+	if( numCoords == 0 )	// Wasn't a list of point? Prolly was "move to" not "move along".
+	{
+		LEOInteger	l = 0, t = 0;
+		LEOGetValueAsPoint( thePoints, &l, &t, inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+		{
+			inContext->flags |= kLEOContextKeepRunning;
+			return;	// We found all the values.
+		}
+		++numCoords;
+		coordinates.push_back( thePart->GetLeft() + (w/2) );
+		coordinates.push_back( thePart->GetTop() + (h/2) );
+		++numCoords;
+		coordinates.push_back( l );
+		coordinates.push_back( t );
+	}
 	
 	numCoords *= 2;
 	
@@ -1042,14 +1059,10 @@ void	WILDMoveInstruction( LEOContext* inContext )
 	numCoords = (int)newCoordinates.size();
 	
 	thePart->Retain();
-	CTimer	*	currTimer = new CTimer( 2, [thePart,coordIndex,numCoords,newCoordinates]( CTimer* inTimer ) mutable
+	CTimer	*	currTimer = new CTimer( 2, [thePart,coordIndex,numCoords,newCoordinates,w,h]( CTimer* inTimer ) mutable
 	{
 		LEOInteger		l = newCoordinates[coordIndex++];
 		LEOInteger		t = newCoordinates[coordIndex++];
-		LEOInteger		w = thePart->GetRight() -thePart->GetLeft();
-		LEOInteger		h = thePart->GetBottom() -thePart->GetTop();
-		
-		std::cout << coordIndex << std::endl;
 		
 		// Center the button over the given coordinate:
 		l -= w / 2;

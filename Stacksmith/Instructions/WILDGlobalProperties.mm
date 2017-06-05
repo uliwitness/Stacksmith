@@ -189,6 +189,11 @@ void	LEOSetEditBackgroundInstruction( LEOContext* inContext )
 }
 
 
+/*
+	PUSH_MOUSE_LOCATION_INSTR
+*/
+
+
 void	LEOPushMouseLocationInstruction( LEOContext* inContext )
 {
 	CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
