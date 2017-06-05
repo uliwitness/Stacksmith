@@ -1009,6 +1009,11 @@ bool	CStack::GetPropertyNamed( const char* inPropertyName, size_t byteRangeStart
 		LEOInitRectValue( outValue, GetLeft(), GetTop(), GetRight(), GetBottom(), kLEOInvalidateReferences, inContext );
 		return true;
 	}
+	else if( strcasecmp("location", inPropertyName) == 0 || strcasecmp("loc", inPropertyName) == 0 )
+	{
+		LEOInitPointValue( outValue, GetLeft() + ((GetRight() -GetLeft()) / 2), GetTop() + ((GetBottom() -GetTop()) / 2), kLEOInvalidateReferences, inContext );
+		return true;
+	}
 	else if( strcasecmp(inPropertyName, "tool") == 0 )
 	{
 		LEOInitStringConstantValue( outValue, GetToolName(mStyle), kLEOInvalidateReferences, inContext );
@@ -1121,6 +1126,18 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 		{
 			SetRect( l, t, r, b );
 		}
+		return true;
+	}
+	else if( strcasecmp("location", inPropertyName) == 0 || strcasecmp("loc", inPropertyName) == 0 )
+	{
+		LEOInteger		l = 0, t = 0, r = 0, b = 0;
+		LEOInteger		x = 0, y = 0;
+		LEOGetValueAsPoint( inValue, &x, &y, inContext );
+		l = x -((GetRight() -GetLeft()) /2);
+		t = y -((GetBottom() -GetTop()) /2);
+		r = l +(GetRight() -GetLeft());
+		b = t +(GetBottom() -GetTop());
+		SetRect( l, t, r, b );
 		return true;
 	}
 	else if( strcasecmp(inPropertyName, "tool") == 0 )
