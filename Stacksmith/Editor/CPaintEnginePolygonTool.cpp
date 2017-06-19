@@ -18,7 +18,9 @@ void	CPaintEnginePolygonTool::MouseReleasedAtPoint( CPoint pos )
 	if( mCurrentPath.IsEmpty() )
 	{
 		mCurrentPath.MoveToPoint( pos );
-		mLastTrackingPathRect = mCurrentPath.GetSurroundingRect();
+		mLastTrackingPathRect = CRect(pos,CSize(0,0));
+		TCoordinate lineThickness = mPaintEngine->GetGraphicsState().GetLineThickness();
+		mLastTrackingPathRect.Inset( -ceil(lineThickness / 2.0), -ceil(lineThickness / 2.0) );
 		mFirstPointBox = CRect(pos,CSize(0,0));
 		mFirstPointBox.Inset(-2,-2);
 		mLastPointBox = CRect(pos,CSize(0,0));

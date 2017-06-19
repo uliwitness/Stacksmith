@@ -16,6 +16,7 @@
 #include "CCompletionBlockCoalescer.h"
 #include "CMenuMac.h"
 #import "WILDConcreteObjectInfoViewController.h"
+#import <Cocoa/Cocoa.h>
 
 
 using namespace Carlson;

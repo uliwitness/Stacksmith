@@ -125,7 +125,7 @@ void	CGraphicPartMac::RebuildViewLayerPath()
 					mFillColorLayer = [[CAGradientLayer layer] retain];
 					NSMutableArray*	colors = [NSMutableArray array];
 					for( const CColor& currColor : GetGradientColors() )
-						[colors addObject: (id)currColor.GetMacColor().CGColor];
+						[colors addObject: (id)currColor.GetMacColor()];
 					mFillColorLayer.colors = colors;
 					mFillColorLayer.startPoint = CGPointMake(0, 0.5);
 					mFillColorLayer.endPoint = CGPointMake(1, 0.5);

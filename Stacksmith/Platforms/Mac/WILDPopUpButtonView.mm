@@ -39,10 +39,10 @@ using namespace Carlson;
 -(void)	reloadCursor
 {
 	ASSIGN( mCursor, [NSCursor arrowCursor] );
-	self->owningPart->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( self->owningPart->GetCursorID(), EMediaTypeCursor, [self]( WILDNSImagePtr theImage, int xHotSpot, int yHotSpot )
+	self->owningPart->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( self->owningPart->GetCursorID(), EMediaTypeCursor, [self]( const CImageCanvas& theImage, int xHotSpot, int yHotSpot )
 	{
 		DESTROY(mCursor);
-		mCursor = [[NSCursor alloc] initWithImage: theImage hotSpot: NSMakePoint(xHotSpot,yHotSpot)];
+		mCursor = [[NSCursor alloc] initWithImage: [[[NSImage alloc] initWithCGImage: theImage.GetMacImage() size: NSZeroSize] autorelease] hotSpot: NSMakePoint(xHotSpot,yHotSpot)];
 	} );
 }
 

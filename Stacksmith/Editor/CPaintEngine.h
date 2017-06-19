@@ -9,7 +9,7 @@
 #ifndef CPaintEngine_hpp
 #define CPaintEngine_hpp
 
-#include "CCanvas.h"
+#include "CImageCanvas.h"
 
 
 namespace Carlson {
@@ -44,11 +44,11 @@ public:
 	CPaintEngine() { mCanvas = nullptr; mTemporaryCanvas = nullptr; mCurrentTool = nullptr; }
 	
 	/*! This canvas contains the result of the user's drawings. */
-	void		SetCanvas( CCanvas * inCanvas )			{ mCanvas = inCanvas; }
-	CCanvas	*	GetCanvas()								{ return mCanvas; }
+	void			SetCanvas( CImageCanvas * inCanvas )	{ mCanvas = inCanvas; }
+	CImageCanvas *	GetCanvas()								{ return mCanvas; }
 	/*! The temporary canvas is the one in which e.g. a rectangle is drawn and re-drawn until the mouse is released. It is erased between mouse events, and drawn on top of the actual canvas. */
-	void		SetTemporaryCanvas( CCanvas * inCanvas ){ mTemporaryCanvas = inCanvas; }
-	CCanvas	*	GetTemporaryCanvas()					{ return mTemporaryCanvas; }
+	void			SetTemporaryCanvas( CImageCanvas * inCanvas ){ mTemporaryCanvas = inCanvas; }
+	CImageCanvas *	GetTemporaryCanvas()					{ return mTemporaryCanvas; }
 	
 	void	MouseDownAtPoint( CPoint pos );
 	void	MouseDraggedToPoint( CPoint pos );
@@ -76,8 +76,8 @@ public:
 	
 	
 protected:
-	CCanvas			*		mCanvas = nullptr;			// Unowned pointer.
-	CCanvas			*		mTemporaryCanvas = nullptr;	// Unowned pointer.
+	CImageCanvas		*	mCanvas = nullptr;			// Unowned pointer.
+	CImageCanvas		*	mTemporaryCanvas = nullptr;	// Unowned pointer.
 	CGraphicsState			mGraphicsState;
 	CPoint					mLastMousePos;
 	CPaintEngineTool	*	mCurrentTool = nullptr;		// Unowned pointer.

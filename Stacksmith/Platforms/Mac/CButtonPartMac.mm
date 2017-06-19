@@ -160,9 +160,9 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mIconID != 0 )
 	{
-		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mIconID, EMediaTypeIcon, [this](WILDNSImagePtr theIcon, int xHotSpot, int yHotSpot)
+		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mIconID, EMediaTypeIcon, [this]( const CImageCanvas& theIcon, int xHotSpot, int yHotSpot)
 		{
-			[mView setImage: theIcon];
+			[mView setImage: theIcon.IsValid() ? [[[NSImage alloc] initWithCGImage: theIcon.GetMacImage() size: NSZeroSize] autorelease] : nil];
 			[mView setImagePosition: mShowName ? NSImageAbove : NSImageOnly];
 			[mView setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
 		} );

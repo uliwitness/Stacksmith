@@ -39,7 +39,7 @@ struct CCanvasEntry
 	int				mColumnIdx;
 	int				mRowIdx;
 	int				mIndentLevel;
-	WILDNSImagePtr	mIcon;
+	NSImage		*	mIcon;
 };
 
 
@@ -176,10 +176,10 @@ struct CCanvasEntry
 			items.push_back( currItem );
 			if( currType == EMediaTypeCursor || currType == EMediaTypeIcon || currType == EMediaTypePicture || currType == EMediaTypePattern )
 			{
-				mc.GetMediaImageByIDOfType( currItem.mMediaID, currType, [self,currItemIdx]( WILDNSImagePtr inImage, int hotspotX, int hotspotY )
+				mc.GetMediaImageByIDOfType( currItem.mMediaID, currType, [self,currItemIdx]( const CImageCanvas& inImage, int hotspotX, int hotspotY )
 										   {
 											   if( items[currItemIdx].mIcon == nil )
-												   items[currItemIdx].SetIcon( inImage );
+												   items[currItemIdx].SetIcon( [[[NSImage alloc] initWithCGImage: inImage.GetMacImage() size: NSZeroSize] autorelease] );
 										   } );
 			}
 			currItem.mRowIdx += 1;

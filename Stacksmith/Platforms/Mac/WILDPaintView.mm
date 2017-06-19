@@ -84,7 +84,7 @@ using namespace Carlson;
 	CImageCanvas	cursorCanvas(CSize(16,16));
 	CPoint			hotSpot;
 	paintEngine.DrawCursorInCanvas( cursorCanvas, hotSpot );
-	currentCursor = [[NSCursor alloc] initWithImage: cursorCanvas.GetMacImage() hotSpot: hotSpot.GetMacPoint()];
+	currentCursor = [[NSCursor alloc] initWithImage: [[[NSImage alloc] initWithCGImage: cursorCanvas.GetMacImage() size: NSZeroSize] autorelease] hotSpot: hotSpot.GetMacPoint()];
 }
 
 
@@ -140,8 +140,8 @@ using namespace Carlson;
 	NSImageInterpolation oldInterpolation = [NSGraphicsContext currentContext].imageInterpolation;
 	[NSGraphicsContext currentContext].imageInterpolation = NSImageInterpolationNone;
 	
-	[imgCanvas.GetMacImage() drawAtPoint: NSZeroPoint fromRect: NSZeroRect operation: NSCompositeSourceAtop fraction: 1.0];
-    [temporaryCanvas.GetMacImage() drawAtPoint: NSZeroPoint fromRect: NSZeroRect operation: NSCompositeSourceAtop fraction: 1.0];
+	CGContextDrawImage( NSGraphicsContext.currentContext.CGContext, imgCanvas.GetRect().GetMacRect(), imgCanvas.GetMacImage() );
+	CGContextDrawImage( NSGraphicsContext.currentContext.CGContext, temporaryCanvas.GetRect().GetMacRect(), temporaryCanvas.GetMacImage() );
 	
 	[NSGraphicsContext currentContext].imageInterpolation = oldInterpolation;
 }

@@ -82,9 +82,9 @@ void	CMoviePlayerPartMac::CreateViewIn( NSView* inSuperView )
 		mView = [[WILDInvisiblePlayerView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 		[mView setCursor: [NSCursor arrowCursor]];
 		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( mCursorID, EMediaTypeCursor,
-		[this]( WILDNSImagePtr inImage, int xHotSpot, int yHotSpot )
+		[this]( const CImageCanvas& inImage, int xHotSpot, int yHotSpot )
 		{
-			NSCursor *theCursor = (GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : [[[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(xHotSpot, yHotSpot)] autorelease];
+			NSCursor *theCursor = (GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : [[[NSCursor alloc] initWithImage: [[[NSImage alloc] initWithCGImage: inImage.GetMacImage() size: NSZeroSize] autorelease] hotSpot: NSMakePoint(xHotSpot, yHotSpot)] autorelease];
 			[mView setCursor: theCursor];
 		} );
 	}
@@ -364,9 +364,9 @@ void	CMoviePlayerPartMac::SetCursorID( ObjectID inID )
 	{
 		[mView setCursor: [NSCursor arrowCursor]];
 		GetDocument()->GetMediaCache().GetMediaImageByIDOfType( inID, EMediaTypeCursor,
-		[this]( WILDNSImagePtr inImage, int xHotSpot, int yHotSpot )
+		[this]( const CImageCanvas& inImage, int xHotSpot, int yHotSpot )
 		{
-			NSCursor *theCursor = (GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : [[[NSCursor alloc] initWithImage: inImage hotSpot: NSMakePoint(xHotSpot, yHotSpot)] autorelease];
+			NSCursor *theCursor = (GetStack()->GetTool() != EBrowseTool) ? [NSCursor arrowCursor] : [[[NSCursor alloc] initWithImage: [[[NSImage alloc] initWithCGImage: inImage.GetMacImage() size: NSZeroSize] autorelease] hotSpot: NSMakePoint(xHotSpot, yHotSpot)] autorelease];
 			[mView setCursor: theCursor];
 		} );
 	}

@@ -18,6 +18,7 @@
 #include "CMessageBox.h"
 #include "CMessageWatcher.h"
 #include "CVariableWatcher.h"
+#import <Cocoa/Cocoa.h>
 
 
 void	WILDStackInstruction( LEOContext* inContext );

@@ -315,44 +315,61 @@ void	WILDVisualEffectInstruction( LEOContext* inContext )
 
 void	WILDAnswerInstruction( LEOContext* inContext )
 {
-	char msgBuf[1024] = { 0 };
-	const char*	msgStr = LEOGetValueAsString( inContext->stackEndPtr -4, msgBuf, sizeof(msgBuf), inContext );
-	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
-		return;
-	char btn1Buf[1024] = { 0 };
-	const char*	btn1Str = LEOGetValueAsString( inContext->stackEndPtr -3, btn1Buf, sizeof(btn1Buf), inContext );
-	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
-		return;
-	char btn2Buf[1024] = { 0 };
-	const char*	btn2Str = LEOGetValueAsString( inContext->stackEndPtr -2, btn2Buf, sizeof(btn2Buf), inContext );
-	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
-		return;
-	char btn3Buf[1024] = { 0 };
-	const char*	btn3Str = LEOGetValueAsString( inContext->stackEndPtr -1, btn3Buf, sizeof(btn3Buf), inContext );
-	if( (inContext->flags & kLEOContextKeepRunning) == 0 )
-		return;
-	
-	size_t	returnValue = CAlert::RunMessageAlert( msgStr, btn1Str, btn2Str, btn3Str );
-	
-	const char	*hitButtonName = "OK";
-	if( returnValue == 1 )
+	if( (inContext->flags & kLEOContextResuming) == 0 )	// This is the actual call to this instruction, we're not resuming the script once the asynchronous 'answer' has completed after pausing the script (think "continuation"):
 	{
-		if( strlen(btn1Str) > 0 )
-			hitButtonName = btn1Str;
-		else
-			hitButtonName = "OK";
+		char msgBuf[1024] = { 0 };
+		const char*	msgStr = LEOGetValueAsString( inContext->stackEndPtr -4, msgBuf, sizeof(msgBuf), inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return;
+		char btn1Buf[1024] = { 0 };
+		const char*	btn1Str = LEOGetValueAsString( inContext->stackEndPtr -3, btn1Buf, sizeof(btn1Buf), inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return;
+		char btn2Buf[1024] = { 0 };
+		const char*	btn2Str = LEOGetValueAsString( inContext->stackEndPtr -2, btn2Buf, sizeof(btn2Buf), inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return;
+		char btn3Buf[1024] = { 0 };
+		const char*	btn3Str = LEOGetValueAsString( inContext->stackEndPtr -1, btn3Buf, sizeof(btn3Buf), inContext );
+		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
+			return;
+		
+		std::vector<std::string> buttonNames;
+		buttonNames.push_back(btn1Str);
+		buttonNames.push_back(btn2Str);
+		buttonNames.push_back(btn3Str);
+		
+		LEOPauseContext( inContext );
+		LEOContextRetain( inContext );
+		
+		CAlert::RunMessageAlert( msgStr, btn1Str, btn2Str, btn3Str, [inContext,buttonNames]( size_t	returnValue )
+								{
+									const char	*hitButtonName = "OK";
+									if( returnValue == 1 )
+									{
+										if( buttonNames[0].length() > 0 )
+											hitButtonName = buttonNames[0].c_str();
+										else
+											hitButtonName = "OK";
+									}
+									else if( returnValue == 2 )
+										hitButtonName = buttonNames[1].c_str();
+									else if( returnValue == 3 )
+										hitButtonName = buttonNames[2].c_str();
+									
+									LEOContextSetLocalVariable( inContext, "result", "%s", hitButtonName ); // TODO: Make NUL-safe.
+									LEOContextSetLocalVariable( inContext, "it", "%s", hitButtonName ); // TODO: Make NUL-safe.
+									
+									LEOResumeContext( inContext );
+									LEOContextRelease( inContext );
+								} );
 	}
-	else if( returnValue == 2 )
-		hitButtonName = btn2Str;
-	else if( returnValue == 3 )
-		hitButtonName = btn3Str;
-	
-    LEOContextSetLocalVariable( inContext, "result", "%s", hitButtonName ); // TODO: Make NUL-safe.
-    LEOContextSetLocalVariable( inContext, "it", "%s", hitButtonName ); // TODO: Make NUL-safe.
-	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -4 );
-	
-	inContext->currentInstruction++;
+	else
+	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -4 );
+		
+		inContext->currentInstruction++;
+	}
 }
 
 
@@ -376,21 +393,33 @@ void	WILDAnswerInstruction( LEOContext* inContext )
 
 void	WILDAskInstruction( LEOContext* inContext )
 {
-	char msgBuf[1024] = { 0 };
-	const char*	msgStr = LEOGetValueAsString( inContext->stackEndPtr -2, msgBuf, sizeof(msgBuf), inContext );
-	char answerBuf[1024] = { 0 };
-	const char*	answerStr = LEOGetValueAsString( inContext->stackEndPtr -1, answerBuf, sizeof(answerBuf), inContext );
-	std::string	theAnswer(answerStr);
-	
-	bool	wasOK = CAlert::RunInputAlert( msgStr, theAnswer );
-	
-    const char*		hitButtonName = (wasOK ? "OK" : "Cancel");
-    LEOContextSetLocalVariable( inContext, "result", "%s", hitButtonName ); // TODO: Make NUL-safe.
-    LEOContextSetLocalVariable( inContext, "it", "%s", theAnswer.c_str() ); // TODO: Make NUL-safe.
-	
-	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
-	
-	inContext->currentInstruction++;
+	if( (inContext->flags & kLEOContextResuming) == 0 )	// This is the actual call to this instruction, we're not resuming the script once the asynchronous 'ask' has completed after pausing the script (think "continuation"):
+	{
+		char msgBuf[1024] = { 0 };
+		const char*	msgStr = LEOGetValueAsString( inContext->stackEndPtr -2, msgBuf, sizeof(msgBuf), inContext );
+		char answerBuf[1024] = { 0 };
+		const char*	answerStr = LEOGetValueAsString( inContext->stackEndPtr -1, answerBuf, sizeof(answerBuf), inContext );
+		std::string	proposedAnswer(answerStr);
+		
+		LEOPauseContext( inContext );
+		LEOContextRetain( inContext );
+		
+		CAlert::RunInputAlert( msgStr, proposedAnswer, [inContext]( bool wasOK, std::string theAnswer )
+		{
+			const char*		hitButtonName = (wasOK ? "OK" : "Cancel");
+			LEOContextSetLocalVariable( inContext, "result", "%s", hitButtonName ); // TODO: Make NUL-safe.
+			LEOContextSetLocalVariable( inContext, "it", "%s", theAnswer.c_str() ); // TODO: Make NUL-safe.
+			
+			LEOResumeContext( inContext );
+			LEOContextRelease( inContext );
+		} );
+	}
+	else
+	{
+		LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr -2 );
+		
+		inContext->currentInstruction++;
+	}
 }
 
 

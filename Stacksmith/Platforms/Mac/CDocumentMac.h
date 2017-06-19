@@ -14,6 +14,8 @@
 
 #if __OBJC__
 @class WILDStackCanvasWindowController;
+@class NSMutableArray;
+@class NSMenu;
 typedef WILDStackCanvasWindowController*			WILDStackCanvasWindowControllerPtr;
 typedef NSMutableArray*								WILDNSMutableArrayPtr;
 typedef NSMenu*										WILDNSMenuPtr;

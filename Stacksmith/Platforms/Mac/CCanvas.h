@@ -19,18 +19,8 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 #include <vector>
-
-
-// Some internal, Mac-specific types. Clients shouldn't use these:
-#if __OBJC__
-@class NSColor;
-@class NSGraphicsContext;
-typedef NSColor	*					WILDNSColorPtr;
-typedef NSGraphicsContext	*		WILDNSGraphicsContextPtr;
-#else
-typedef struct NSColor	*			WILDNSColorPtr;
-typedef struct NSGraphicsContext*	WILDNSGraphicsContextPtr;
-#endif
+#include <cassert>
+#include <cmath>
 
 
 namespace Carlson {
@@ -53,7 +43,7 @@ public:
 
 	void		Offset( TCoordinate h, TCoordinate v )	{ mPoint.x += h; mPoint.y += v; }
 	
-	const CGPoint&	GetMacPoint()		{ return mPoint; }	// Only for platform-specific code to get the underlying type back out.
+	const CGPoint&	GetMacPoint() const		{ return mPoint; }	// Only for platform-specific code to get the underlying type back out.
 	
 protected:
 	CGPoint	mPoint;
@@ -110,10 +100,10 @@ public:
 	CSize		GetSize() const						{ return CSize(mRect.size); }
 	void		SetSize( CSize size )				{ mRect.size = size.mSize; }
 	
-	TCoordinate	GetHCenter()						{ return mRect.origin.x + (mRect.size.width / 2.0); }
-	TCoordinate	GetVCenter()						{ return mRect.origin.y + (mRect.size.height / 2.0); }
-	TCoordinate	GetMaxH()							{ return mRect.origin.x + mRect.size.width; }
-	TCoordinate	GetMaxV()							{ return mRect.origin.y + mRect.size.height; }
+	TCoordinate	GetHCenter() const					{ return mRect.origin.x + (mRect.size.width / 2.0); }
+	TCoordinate	GetVCenter() const					{ return mRect.origin.y + (mRect.size.height / 2.0); }
+	TCoordinate	GetMaxH() const						{ return mRect.origin.x + mRect.size.width; }
+	TCoordinate	GetMaxV() const						{ return mRect.origin.y + mRect.size.height; }
 
 	void		ResizeByMovingMinHEdgeTo( TCoordinate inH )	{ mRect.size.width += mRect.origin.x -inH; mRect.origin.x = inH; }
 	void		ResizeByMovingMinVEdgeTo( TCoordinate inV )	{ mRect.size.height += mRect.origin.y -inV; mRect.origin.y = inV; }
@@ -123,7 +113,7 @@ public:
 	void		Offset( TCoordinate h, TCoordinate v )	{ mRect.origin.x += h; mRect.origin.y += v; }
 	void		Inset( TCoordinate h, TCoordinate v )	{ mRect.origin.x += h; mRect.size.width -= h * 2.0; mRect.origin.y += v; mRect.size.height -= v * 2.0; }
 	
-	bool		ContainsPoint( const CPoint& inPos )	{ return( inPos.GetH() >= mRect.origin.x && inPos.GetH() < (mRect.origin.x + mRect.size.width) && inPos.GetV() >= mRect.origin.y && inPos.GetV() < (mRect.origin.y + mRect.size.height) ); }
+	bool		ContainsPoint( const CPoint& inPos ) const	{ return( inPos.GetH() >= mRect.origin.x && inPos.GetH() < (mRect.origin.x + mRect.size.width) && inPos.GetV() >= mRect.origin.y && inPos.GetV() < (mRect.origin.y + mRect.size.height) ); }
 	
 	const CGRect&	GetMacRect() const	{ return mRect; }	// Only for platform-specific code to get the underlying type back out.
 	
@@ -142,7 +132,7 @@ class CColor
 public:
 	CColor() : mColor(NULL) {}
 	CColor( TColorComponent red, TColorComponent green, TColorComponent blue, TColorComponent alpha );
-	explicit CColor( WILDNSColorPtr macColor );
+	explicit CColor( CGColorRef macColor );
 	CColor( const CColor& inColor );
 	~CColor();
 	
@@ -154,10 +144,10 @@ public:
 	CColor& operator =( const CColor& inColor );
 	bool	operator ==( const CColor& inColor ) const;
 	
-	WILDNSColorPtr	GetMacColor() const	{ return mColor; }
+	CGColorRef	GetMacColor() const	{ return mColor; }
 	
 protected:
-	WILDNSColorPtr		mColor;	// Always in NSCalibratedRGBColorSpace
+	CGColorRef		mColor;	// Always in NSCalibratedRGBColorSpace
 
 	friend class CGraphicsState;
 	friend class CCanvas;
@@ -173,6 +163,7 @@ public:
 	
 	void	MoveToPoint( CPoint inPoint );
 	void	LineToPoint( CPoint inPoint );
+	void	AddArcWithCenterRadiusStartAngleEndAngle( CPoint inCenterPoint, TCoordinate radius, double startAngle, double endAngle );
 	void	ConnectEndToStart();
 	
 	void	MoveBy( CSize inDistance );
@@ -265,7 +256,7 @@ public:
 	virtual void	DrawImageInRect( const CImageCanvas& inImage, const CRect& inBox );
 	virtual void	DrawImageAtPoint( const CImageCanvas& inImage, const CPoint& inPos );
 	
-	virtual CColor	ColorAtPosition( const CPoint& pos );
+	virtual void	ImageChanged()	{}
 	
 	virtual CImageCanvas GetImageForRect( const CRect& box ) = 0;
 
@@ -274,6 +265,7 @@ protected:
 
 	void		ApplyGraphicsStateIfNeeded( const CGraphicsState& inState );
 	
+	CGContextRef				mContext = nullptr;
 	size_t						mLastGraphicsStateSeed;
 	std::vector<TCoordinate>	mLineDash;
 };
@@ -284,20 +276,16 @@ protected:
 class CMacCanvas : public CCanvas
 {
 public:
-	CMacCanvas( WILDNSGraphicsContextPtr inContext, CGRect inBounds );
+	CMacCanvas( CGContextRef inContext, CGRect inBounds );
 	virtual ~CMacCanvas();
 	
 	virtual CRect	GetRect() const { return CRect(mBounds); };
 	
 	virtual void	BeginDrawing();
 	virtual void	EndDrawing();
-	
-	virtual CImageCanvas GetImageForRect( const CRect& box );
-	
+		
 protected:
-	CGRect						mBounds;
-	WILDNSGraphicsContextPtr	mContext;
-	WILDNSGraphicsContextPtr	mPreviousContext;
+	CGRect			mBounds;
 };
 
 } /* namespace Carlson */

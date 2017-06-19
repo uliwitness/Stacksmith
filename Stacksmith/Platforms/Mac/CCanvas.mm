@@ -8,15 +8,15 @@
 
 #include "CCanvas.h"
 #include "CImageCanvas.h"
-#import <Cocoa/Cocoa.h>
+
 
 using namespace Carlson;
 
 
 namespace Carlson
 {
-	TCompositingMode	ECompositingModeAlphaComposite = NSCompositingOperationSourceOver;
-	TCompositingMode	ECompositingModeCopy = NSCompositingOperationCopy;
+	TCompositingMode	ECompositingModeAlphaComposite = kCGBlendModeNormal;
+	TCompositingMode	ECompositingModeCopy = kCGBlendModeCopy;
 }
 
 
@@ -34,49 +34,60 @@ namespace Carlson
 
 CColor::CColor( TColorComponent red, TColorComponent green, TColorComponent blue, TColorComponent alpha )
 {
-	mColor = [[NSColor colorWithCalibratedRed: red / 65535.0 green: green / 65535.0 blue: blue / 65535.0 alpha: alpha / 65535.0] retain];
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName( kCGColorSpaceGenericRGB );
+	CGFloat components[4] = { red, green, blue, alpha };
+	mColor = CGColorCreate( colorSpace, components );
+	CGColorSpaceRelease(colorSpace);
 }
 
 
-CColor::CColor( WILDNSColorPtr macColor )
+CColor::CColor( CGColorRef macColor )
 {
-	mColor = [macColor retain];
+	mColor = CGColorRetain(macColor);
 }
 
 
 CColor::CColor( const CColor& inColor )
 {
-	mColor = [inColor.mColor retain];
+	mColor = CGColorRetain(inColor.mColor);
 }
 
 
 CColor::~CColor()
 {
-	[mColor release];
+	CGColorRelease(mColor);
 }
 
 
 TColorComponent	CColor::GetRed() const
 {
-	return [mColor redComponent] * 65535.0;
+	if( !mColor )
+		return 0.0;
+	return CGColorGetComponents(mColor)[0] * 65535.0;
 }
 
 
 TColorComponent	CColor::GetGreen() const
 {
-	return [mColor greenComponent] * 65535.0;
+	if( !mColor )
+		return 0.0;
+	return CGColorGetComponents(mColor)[1] * 65535.0;
 }
 
 
 TColorComponent	CColor::GetBlue() const
 {
-	return [mColor blueComponent] * 65535.0;
+	if( !mColor )
+		return 0.0;
+	return CGColorGetComponents(mColor)[2] * 65535.0;
 }
 
 
 TColorComponent	CColor::GetAlpha() const
 {
-	return [mColor alphaComponent] * 65535.0;
+	if( !mColor )
+		return 0.0;
+	return CGColorGetComponents(mColor)[3] * 65535.0;
 }
 
 
@@ -84,8 +95,8 @@ CColor& CColor::operator =( const CColor& inColor )
 {
 	if( mColor != inColor.mColor )
 	{
-		[mColor release];
-		mColor = [inColor.mColor retain];
+		CGColorRelease(mColor);
+		mColor = CGColorRetain(inColor.mColor);
 	}
 	
 	return *this;
@@ -94,11 +105,9 @@ CColor& CColor::operator =( const CColor& inColor )
 
 bool	CColor::operator ==( const CColor& inColor ) const
 {
-	CGFloat	ar, ag, ab, aa;
-	CGFloat	br, bg, bb, ba;
-	[mColor getRed: &ar green: &ag blue: &ab alpha: &aa];
-	[inColor.mColor getRed: &br green: &bg blue: &bb alpha: &ba];
-	return (fabs(ar - br) < 0.001) && (fabs(ag - bg) < 0.001) && (fabs(ab - bb) < 0.001) && (fabs(aa - ba) < 0.001);
+	const CGFloat * aComps = CGColorGetComponents(mColor);
+	const CGFloat * bComps = CGColorGetComponents(inColor.mColor);
+	return (fabs(aComps[0] - bComps[0]) < 0.001) && (fabs(aComps[1] - bComps[1]) < 0.001) && (fabs(aComps[2] - aComps[2]) < 0.001) && (fabs(aComps[3] - bComps[3]) < 0.001);
 }
 
 
@@ -130,6 +139,13 @@ void	CPath::LineToPoint( CPoint inPoint )
 	CGPathAddLineToPoint( mBezierPath, NULL, inPoint.mPoint.x, inPoint.mPoint.y );
 }
 	
+
+void	CPath::AddArcWithCenterRadiusStartAngleEndAngle( CPoint inCenterPoint, TCoordinate radius, double startAngle, double endAngle )
+{
+	CGPathAddArc( mBezierPath, NULL, inCenterPoint.GetH(), inCenterPoint.GetV(),
+				 radius, startAngle, endAngle, true );
+}
+
 
 void	CPath::ConnectEndToStart()
 {
@@ -186,12 +202,9 @@ void	CCanvas::StrokeRect( const CRect& inRect, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	NSBezierPath * boxPath = [NSBezierPath bezierPathWithRect: inRect.mRect];
-		if( mLineDash.size() > 0 )
-	{
-		[boxPath setLineDash: mLineDash.data() count: mLineDash.size() phase: 0.0];
-	}
-	[boxPath stroke];
+	CGContextStrokeRect( mContext, inRect.mRect );
+	
+	ImageChanged();
 }
 
 
@@ -199,13 +212,17 @@ void	CCanvas::FillRect( const CRect& inRect, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	[NSBezierPath fillRect: inRect.mRect];
+	CGContextFillRect( mContext, inRect.mRect );
+	
+	ImageChanged();
 }
 
 
 void	CCanvas::ClearRect( const CRect& inRect )
 {
-	NSRectFillUsingOperation( inRect.mRect, NSCompositingOperationClear );
+	CGContextClearRect( mContext, inRect.mRect );
+	
+	ImageChanged();
 }
 
 
@@ -213,12 +230,9 @@ void	CCanvas::StrokeOval( const CRect& inRect, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	NSBezierPath * boxPath = [NSBezierPath bezierPathWithOvalInRect: inRect.mRect];
-	if( mLineDash.size() > 0 )
-	{
-		[boxPath setLineDash: mLineDash.data() count: mLineDash.size() phase: 0.0];
-	}
-	[boxPath stroke];
+	CGContextStrokeEllipseInRect( mContext, inRect.mRect );
+	
+	ImageChanged();
 }
 
 
@@ -226,7 +240,9 @@ void	CCanvas::FillOval( const CRect& inRect, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	[[NSBezierPath bezierPathWithOvalInRect: inRect.mRect] fill];
+	CGContextFillEllipseInRect( mContext, inRect.mRect );
+	
+	ImageChanged();
 }
 
 
@@ -234,12 +250,44 @@ void	CCanvas::StrokeRoundRect( const CRect& inRect, TCoordinate inCornerRadius, 
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	NSBezierPath * boxPath = [NSBezierPath bezierPathWithRoundedRect: inRect.mRect xRadius: inCornerRadius yRadius: inCornerRadius];
-	if( mLineDash.size() > 0 )
+	CPath	roundRectPath;
+	// Make sure radius doesn't exceed a maximum size to avoid artifacts:
+	if( inCornerRadius >= (inRect.GetHeight() /2) )
+		inCornerRadius = truncf(inRect.GetHeight() /2) -1;
+	if( inCornerRadius >= (inRect.GetWidth() /2) )
+		inCornerRadius = truncf(inRect.GetWidth() /2) -1;
+	
+	// Make sure silly values simply lead to un-rounded corners:
+	if( inCornerRadius <= 0 )
 	{
-		[boxPath setLineDash: mLineDash.data() count: mLineDash.size() phase: 0.0];
+		StrokeRect( inRect, inState );
 	}
-	[boxPath stroke];
+	else
+	{
+		// Now draw our rectangle:
+		CRect	innerRect = inRect;
+		innerRect.Inset( inCornerRadius, inCornerRadius );	// Make rect with corners being centers of the corner circles.
+		
+		roundRectPath.MoveToPoint( CPoint(inRect.GetH(), inRect.GetV() +inCornerRadius) );
+		
+		// Bottom left (origin):
+		roundRectPath.AddArcWithCenterRadiusStartAngleEndAngle( CPoint(innerRect.GetH(), innerRect.GetV()), inCornerRadius, 180.0, 270.0 );
+		roundRectPath.LineToPoint( CPoint(innerRect.GetMaxH(), inRect.GetV()) ); // Bottom edge.
+		
+		// Bottom right:
+		roundRectPath.AddArcWithCenterRadiusStartAngleEndAngle( CPoint(innerRect.GetMaxH(), innerRect.GetV()), inCornerRadius, 270.0, 360.0 );
+		roundRectPath.LineToPoint( CPoint(inRect.GetMaxH(), innerRect.GetMaxV()) ); // Right edge.
+		
+		// Top right:
+		roundRectPath.AddArcWithCenterRadiusStartAngleEndAngle( CPoint(innerRect.GetMaxH(), innerRect.GetMaxV()), inCornerRadius, 0.0, 90.0 );
+		roundRectPath.LineToPoint( CPoint(innerRect.GetH(), inRect.GetMaxV()) ); // Top edge.
+		
+		// Top left:
+		roundRectPath.AddArcWithCenterRadiusStartAngleEndAngle( CPoint(innerRect.GetH(), innerRect.GetMaxV()), inCornerRadius, 90.0, 180.0 );
+		roundRectPath.LineToPoint( CPoint(inRect.GetH(), innerRect.GetV()) ); // Left edge.
+		
+		StrokePath( roundRectPath, inState );
+	}
 }
 
 
@@ -247,7 +295,44 @@ void	CCanvas::FillRoundRect( const CRect& inRect, TCoordinate inCornerRadius, co
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	[[NSBezierPath bezierPathWithRoundedRect: inRect.mRect xRadius: inCornerRadius yRadius: inCornerRadius] fill];
+	CPath	roundRectPath;
+	// Make sure radius doesn't exceed a maximum size to avoid artifacts:
+	if( inCornerRadius >= (inRect.GetHeight() /2) )
+		inCornerRadius = truncf(inRect.GetHeight() /2) -1;
+	if( inCornerRadius >= (inRect.GetWidth() /2) )
+		inCornerRadius = truncf(inRect.GetWidth() /2) -1;
+	
+	// Make sure silly values simply lead to un-rounded corners:
+	if( inCornerRadius <= 0 )
+	{
+		FillRect( inRect, inState );
+	}
+	else
+	{
+		// Now draw our rectangle:
+		CRect	innerRect = inRect;
+		innerRect.Inset( inCornerRadius, inCornerRadius );	// Make rect with corners being centers of the corner circles.
+		
+		roundRectPath.MoveToPoint( CPoint(inRect.GetH(), inRect.GetV() +inCornerRadius) );
+		
+		// Bottom left (origin):
+		roundRectPath.AddArcWithCenterRadiusStartAngleEndAngle( CPoint(innerRect.GetH(), innerRect.GetV()), inCornerRadius, 180.0, 270.0 );
+		roundRectPath.LineToPoint( CPoint(innerRect.GetMaxH(), inRect.GetV()) ); // Bottom edge.
+		
+		// Bottom right:
+		roundRectPath.AddArcWithCenterRadiusStartAngleEndAngle( CPoint(innerRect.GetMaxH(), innerRect.GetV()), inCornerRadius, 270.0, 360.0 );
+		roundRectPath.LineToPoint( CPoint(inRect.GetMaxH(), innerRect.GetMaxV()) ); // Right edge.
+		
+		// Top right:
+		roundRectPath.AddArcWithCenterRadiusStartAngleEndAngle( CPoint(innerRect.GetMaxH(), innerRect.GetMaxV()), inCornerRadius, 0.0, 90.0 );
+		roundRectPath.LineToPoint( CPoint(innerRect.GetH(), inRect.GetMaxV()) ); // Top edge.
+		
+		// Top left:
+		roundRectPath.AddArcWithCenterRadiusStartAngleEndAngle( CPoint(innerRect.GetH(), innerRect.GetMaxV()), inCornerRadius, 90.0, 180.0 );
+		roundRectPath.LineToPoint( CPoint(inRect.GetH(), innerRect.GetV()) ); // Left edge.
+		
+		FillPath( roundRectPath, inState );
+	}
 }
 
 
@@ -255,14 +340,10 @@ void	CCanvas::StrokeLineFromPointToPoint( const CPoint& inStart, const CPoint& i
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	NSBezierPath * boxPath = [NSBezierPath bezierPath];
-	[boxPath moveToPoint: inStart.mPoint];
-	[boxPath lineToPoint: inEnd.mPoint];
-	if( mLineDash.size() > 0 )
-	{
-		[boxPath setLineDash: mLineDash.data() count: mLineDash.size() phase: 0.0];
-	}
-	[boxPath stroke];
+	CPath	linePath;
+	linePath.MoveToPoint( inStart );
+	linePath.LineToPoint( inEnd );
+	StrokePath( linePath, inState );
 }
 
 
@@ -301,9 +382,10 @@ void	CCanvas::StrokePath( const CPath& inPath, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	CGContextRef	context = (CGContextRef) [[NSGraphicsContext currentContext] graphicsPort];
-	CGContextAddPath( context, inPath.mBezierPath );
-	CGContextStrokePath( context );
+	CGContextAddPath( mContext, inPath.mBezierPath );
+	CGContextStrokePath( mContext );
+	
+	ImageChanged();
 }
 
 
@@ -311,27 +393,27 @@ void	CCanvas::FillPath( const CPath& inPath, const CGraphicsState& inState )
 {
 	ApplyGraphicsStateIfNeeded( inState );
 	
-	CGContextRef	context = (CGContextRef) [[NSGraphicsContext currentContext] graphicsPort];
-	CGContextAddPath( context, inPath.mBezierPath );
-	CGContextFillPath( context );
+	CGContextAddPath( mContext, inPath.mBezierPath );
+	CGContextFillPath( mContext );
+	
+	ImageChanged();
 }
 
 
 void	CCanvas::DrawImageInRect( const CImageCanvas& inImage, const CRect& inBox )
 {
-	[inImage.mImage drawInRect: inBox.mRect];
+	CGContextDrawImage( mContext, inBox.GetMacRect(), inImage.GetMacImage() );
+	
+	ImageChanged();
 }
 
 
 void	CCanvas::DrawImageAtPoint( const CImageCanvas& inImage, const CPoint& inPos )
 {
-	[inImage.mImage drawAtPoint: inPos.mPoint fromRect: NSZeroRect operation: NSCompositeSourceOver fraction: 1.0];
-}
-
-
-CColor	CCanvas::ColorAtPosition( const CPoint& pos )
-{
-	return CColor( [NSReadPixel( pos.mPoint ) colorUsingColorSpaceName: NSCalibratedRGBColorSpace] );
+	CGRect	theBox = { inPos.GetMacPoint(), inImage.GetSize().GetMacSize() };
+	CGContextDrawImage( mContext, theBox, inImage.GetMacImage() );
+	
+	ImageChanged();
 }
 
 
@@ -339,75 +421,36 @@ void	CCanvas::ApplyGraphicsStateIfNeeded( const CGraphicsState& inState )
 {
 	if( inState.mGraphicsStateSeed != mLastGraphicsStateSeed )
 	{
-		NSGraphicsContext*	ctx = NSGraphicsContext.currentContext;
+		CGContextSetStrokeColorWithColor( mContext, inState.mLineColor.mColor );
+		CGContextSetFillColorWithColor( mContext, inState.mFillColor.mColor );
+		CGContextSetLineWidth( mContext, inState.mLineThickness );
+		CGContextSetBlendMode( mContext, (CGBlendMode) inState.mCompositingMode );
+		CGContextSetLineDash( mContext, 0.0, (inState.mLineDash.size() > 0) ? inState.mLineDash.data() : NULL, inState.mLineDash.size());
 		
-		[inState.mLineColor.mColor setStroke];
-		[inState.mFillColor.mColor setFill];
-		[NSBezierPath setDefaultLineWidth: inState.mLineThickness];
 		mLastGraphicsStateSeed = inState.mGraphicsStateSeed;
-		[ctx setCompositingOperation: (NSCompositingOperation)inState.mCompositingMode];
-		mLineDash = inState.mLineDash;
 	}
 }
 
 
-CMacCanvas::CMacCanvas( WILDNSGraphicsContextPtr inContext, CGRect inBounds )
- : mBounds(inBounds), mPreviousContext(nil)
+CMacCanvas::CMacCanvas( CGContextRef inContext, CGRect inBounds )
+ : mBounds(inBounds)
 {
-	mContext = [inContext retain];
+	mContext = CGContextRetain(inContext);
 }
 
 
 CMacCanvas::~CMacCanvas()
 {
-	[mContext release];
+	CGContextRelease(mContext);
 }
 	
 void	CMacCanvas::BeginDrawing()
 {
-	assert(mPreviousContext == nil);
-	mPreviousContext = [[NSGraphicsContext currentContext] retain];
-	[NSGraphicsContext setCurrentContext: mContext];
 }
 
 
 void	CMacCanvas::EndDrawing()
 {
-	[NSGraphicsContext setCurrentContext: mPreviousContext];
-	[mPreviousContext release];
-	mPreviousContext = nil;
 }
-
-
-CImageCanvas CMacCanvas::GetImageForRect( const CRect& box )
-{
-	NSGraphicsContext* previousContext = [[NSGraphicsContext currentContext] retain];
-	[NSGraphicsContext setCurrentContext: mContext];
-	
-		NSImage * img = [[[NSImage alloc] initWithSize: box.GetSize().GetMacSize()] autorelease];
-		NSBitmapImageRep * bir = [[[NSBitmapImageRep alloc] initWithFocusedViewRect: box.GetMacRect()] autorelease];
-		[img addRepresentation: bir];
-	
-	[NSGraphicsContext setCurrentContext: previousContext];
-	[previousContext release];
-	previousContext = nil;
-	
-	return CImageCanvas( img );
-}
-
-
-CImageCanvas CImageCanvas::GetImageForRect( const CRect& box )
-{
-	[mImage lockFocus];
-	
-		NSImage * img = [[[NSImage alloc] initWithSize: box.GetSize().GetMacSize()] autorelease];
-		NSBitmapImageRep * bir = [[[NSBitmapImageRep alloc] initWithFocusedViewRect: box.GetMacRect()] autorelease];
-		[img addRepresentation: bir];
-	
-	[mImage unlockFocus];
-	
-	return CImageCanvas( img );
-}
-
 
 

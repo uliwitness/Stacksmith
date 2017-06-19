@@ -11,24 +11,23 @@
 
 #include "CObjectID.h"
 #include "CRefCountedObject.h"
+#include "CImageCanvas.h"
 #include "tinyxml2.h"
 #include <string>
 #include <functional>
 
+
 #if __OBJC__
-#import <Cocoa/Cocoa.h>
-typedef NSImage*			WILDNSImagePtr;
-typedef NSData*				WILDNSDataPtr;
-typedef NSString*			WILDNSStringPtr;
+@class NSString;
+typedef NSString * WILDNSStringPtr;
 #else
-typedef struct NSImage*		WILDNSImagePtr;
-typedef struct NSData*		WILDNSDataPtr;
-typedef struct NSString*	WILDNSStringPtr;
+typedef struct NSString * WILDNSStringPtr;
 #endif
+
 
 namespace Carlson
 {
-
+	
 enum
 {
 	EIncludeContent = true,
@@ -55,7 +54,7 @@ typedef enum
 } TMediaType;
 
 
-typedef std::function<void(WILDNSImagePtr inImage, int inHotspotLeft, int inHotspotTop)> CImageGetterCallback;
+typedef std::function<void(const CImageCanvas& inImage, int inHotspotLeft, int inHotspotTop)> CImageGetterCallback;
 
 
 class CMediaEntry
@@ -97,8 +96,8 @@ protected:
 	bool			mLoading;
 	bool			mIsBuiltIn;
 	size_t			mChangeCount;
-	WILDNSDataPtr	mFileData;
-	WILDNSImagePtr	mImage;
+	std::vector<uint8_t>	mFileData;
+	CImageCanvas			mImage;
 	std::vector<CImageGetterCallback>	mPendingClients;
 	
 	friend class CMediaCache;

@@ -7,7 +7,7 @@
 //
 
 #include "CTimer.h"
-#import <AppKit/AppKit.h>
+#import <Foundation/Foundation.h>
 
 
 using namespace Carlson;

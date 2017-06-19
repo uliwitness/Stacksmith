@@ -9,6 +9,8 @@
 #include "CMediaCache.h"
 #include "CTinyXMLUtils.h"
 #include "CURLConnection.h"
+#include <Foundation/Foundation.h>
+#include <cassert>
 
 
 using namespace Carlson;
@@ -304,7 +306,8 @@ ObjectID	CMediaCache::GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( CMediaEntry& n
 			if( currMedia->GetName().compare( newEntry.GetName() ) == 0
 				&& currMedia->GetHotspotLeft() == newEntry.GetHotspotLeft()
 				&& currMedia->GetHotspotTop() == newEntry.GetHotspotTop()
-				&& [newEntry.mFileData isEqualTo: currMedia->mFileData] )
+				&& newEntry.mFileData.size() == currMedia->mFileData.size()
+			    && memcmp( newEntry.mFileData.data(), currMedia->mFileData.data(), currMedia->mFileData.size() ) )
 				return 0;
 			else
 				return GetUniqueIDForMedia();
@@ -317,7 +320,7 @@ ObjectID	CMediaCache::GetUniqueMediaIDIfEntryOfTypeIsNoDuplicate( CMediaEntry& n
 
 void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, CImageGetterCallback completionBlock )
 {
-	NSCAssert( inType == EMediaTypeIcon || inType == EMediaTypePattern || inType == EMediaTypePicture || inType == EMediaTypeCursor, @"Requested image for non-image resource." );
+	assert( inType == EMediaTypeIcon || inType == EMediaTypePattern || inType == EMediaTypePicture || inType == EMediaTypeCursor );
 	
 	for( auto currMedia = mMediaList.begin(); currMedia != mMediaList.end(); currMedia++ )
 	{
@@ -329,38 +332,42 @@ void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, CIm
 				break;
 			}
 			
-			if( currMedia->mFileData == nil )
+			if( currMedia->mFileData.size() == 0 )
 			{
 				currMedia->mPendingClients.push_back( completionBlock );
 				CURLRequest		request( currMedia->GetFileName() );
 				CURLConnection::SendRequestWithCompletionHandler( request, [completionBlock,currMedia,inType](CURLResponse response, const char * data, size_t dataLen)
 				{
-					if( !currMedia->mFileData && dataLen > 0 )
+					if( currMedia->mFileData.size() == 0 && dataLen > 0 )
 					{
-						currMedia->mFileData = [[NSData alloc] initWithBytes: data length: dataLen];
-						assert( currMedia->mFileData != nil );
+						currMedia->mFileData.resize( dataLen );
+						memmove(currMedia->mFileData.data(), data, dataLen);
 					}
-					if( !currMedia->mImage && currMedia->mFileData )
-						currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
-					[currMedia->mImage setName: [NSString stringWithUTF8String: currMedia->GetFileName().c_str()].lastPathComponent];
+					if( !currMedia->mImage.IsValid() && currMedia->mFileData.size() > 0 )
+					{
+						currMedia->mImage.InitWithImageFileData( currMedia->mFileData.data(), currMedia->mFileData.size() );
+					}
 					
-					if( inType == EMediaTypeCursor && currMedia->mImage )
-					{
-						// Generate several pixel representations so we can use PDFs as cursors and they don't get rendered at the smallest pixellated scale:
-						NSImage	*oldImage = currMedia->mImage;
-						currMedia->mImage = [[NSImage alloc] initWithSize: [oldImage size]];
-						
-						for (int scale = 1; scale <= 4; scale++)
-						{
-							NSAffineTransform *xform = [[NSAffineTransform alloc] init];
-							[xform scaleBy:scale];
-							id hints = @{ NSImageHintCTM: xform };
-							CGImageRef rasterCGImage = [oldImage CGImageForProposedRect:NULL context:nil hints:hints];
-							NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:rasterCGImage];
-							[rep setSize: [oldImage size]];
-							[currMedia->mImage addRepresentation:rep];
-						}
-					}
+					
+//					[currMedia->mImage setName: [NSString stringWithUTF8String: currMedia->GetFileName().c_str()].lastPathComponent];
+//					
+//					if( inType == EMediaTypeCursor && currMedia->mImage )
+//					{
+//						// Generate several pixel representations so we can use PDFs as cursors and they don't get rendered at the smallest pixellated scale:
+//						NSImage	*oldImage = currMedia->mImage;
+//						currMedia->mImage = [[NSImage alloc] initWithSize: [oldImage size]];
+//						
+//						for (int scale = 1; scale <= 4; scale++)
+//						{
+//							NSAffineTransform *xform = [[NSAffineTransform alloc] init];
+//							[xform scaleBy:scale];
+//							id hints = @{ NSImageHintCTM: xform };
+//							CGImageRef rasterCGImage = [oldImage CGImageForProposedRect:NULL context:nil hints:hints];
+//							NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:rasterCGImage];
+//							[rep setSize: [oldImage size]];
+//							[currMedia->mImage addRepresentation:rep];
+//						}
+//					}
 					
 					for( const CImageGetterCallback& currBlock : currMedia->mPendingClients )
 					{
@@ -370,13 +377,12 @@ void	CMediaCache::GetMediaImageByIDOfType( ObjectID inID, TMediaType inType, CIm
 				});
 				break;
 			}
-			else if( currMedia->mImage == nil )
+			else if( !currMedia->mImage.IsValid() )
 			{
-				currMedia->mImage = [[NSImage alloc] initWithData: currMedia->mFileData];
-				[currMedia->mImage setName: [NSString stringWithUTF8String: currMedia->GetFileName().c_str()].lastPathComponent];
+				currMedia->mImage.InitWithImageFileData( currMedia->mFileData.data(), currMedia->mFileData.size() );
 			}
 			
-			if( currMedia->mImage )
+			if( currMedia->mImage.IsValid() )
 			{
 				completionBlock( currMedia->mImage, currMedia->mHotspotLeft, currMedia->mHotspotTop );
 				break;
@@ -524,8 +530,8 @@ CMediaEntry::CMediaEntry( const CMediaEntry& orig )
 	mChangeCount = orig.mChangeCount;
 	mFileName = orig.mFileName;
 	mIconName = orig.mIconName;
-	mFileData = [orig.mFileData retain];
-	mImage = [orig.mImage retain];
+	mFileData = orig.mFileData;
+	mImage = orig.mImage;
 	mLoading = false;
 }
 
@@ -540,8 +546,8 @@ CMediaEntry&	CMediaEntry::operator =( const CMediaEntry& orig )
 	mChangeCount = orig.mChangeCount;
 	mFileName = orig.mFileName;
 	mIconName = orig.mIconName;
-	mFileData = [orig.mFileData retain];
-	mImage = [orig.mImage retain];
+	mFileData = orig.mFileData;
+	mImage = orig.mImage;
 	mLoading = false;
 	
 	return *this;
@@ -550,10 +556,6 @@ CMediaEntry&	CMediaEntry::operator =( const CMediaEntry& orig )
 
 CMediaEntry::~CMediaEntry()
 {
-	if( mFileData )
-		[mFileData release];
-	if( mImage )
-		[mImage release];
 }
 
 
@@ -562,10 +564,10 @@ bool	CMediaEntry::SaveContents()
 	if( mFileName.find("file:///") != 0 )
 		return false;
 		
-	if( mFileData )
+	if( mFileData.size() > 0 )
 	{
 		NSURL*	fileURL = [NSURL URLWithString: [NSString stringWithUTF8String: GetFileName().c_str()]];
-		return [mFileData writeToURL: fileURL atomically: YES];
+		return [[NSData dataWithBytesNoCopy: mFileData.data() length: mFileData.size()] writeToURL: fileURL atomically: YES];
 	}
 	
 	return true;
@@ -630,7 +632,7 @@ void	CMediaEntry::CreateMediaElementInElement( tinyxml2::XMLElement* stackfile, 
 	{
         // +++ Copying from the background seems to crash because mFileData isn't loaded yet.
 		tinyxml2::XMLElement*	contentElem = stackfile->GetDocument()->NewElement("content");
-		tinyxml2::XMLText	*	cdata = stackfile->GetDocument()->NewText( [[mFileData base64EncodedStringWithOptions: NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed] UTF8String] );
+		tinyxml2::XMLText	*	cdata = stackfile->GetDocument()->NewText( [[[NSData dataWithBytesNoCopy: mFileData.data() length:mFileData.size()] base64EncodedStringWithOptions: NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed] UTF8String] );
 		contentElem->InsertEndChild( cdata );
 		mediaElement->InsertEndChild( contentElem );
 	}
@@ -681,8 +683,9 @@ bool	CMediaEntry::LoadFromElement( tinyxml2::XMLElement* currMediaElem, const st
 		tinyxml2::XMLElement	*	contentElem = currMediaElem->FirstChildElement( "content" );
 		if( contentElem )
 		{
-			mFileData = [[NSData alloc] initWithBase64EncodedData: [NSData dataWithBytes: contentElem->GetText() length: strlen(contentElem->GetText())] options: NSDataBase64DecodingIgnoreUnknownCharacters];
-			assert(mFileData != nil);
+			NSData * base64DecodedData = [[NSData alloc] initWithBase64EncodedData: [NSData dataWithBytes: contentElem->GetText() length: strlen(contentElem->GetText())] options: NSDataBase64DecodingIgnoreUnknownCharacters];
+			mFileData.resize( base64DecodedData.length );
+			[base64DecodedData getBytes: mFileData.data() length: mFileData.size()];
 		}
 		mIconID = iconID;
 		mIconName = iconName;

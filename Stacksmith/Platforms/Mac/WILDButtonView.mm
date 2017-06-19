@@ -55,9 +55,10 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 -(void)	reloadCursor
 {
 	ASSIGN( mCursor, [NSCursor arrowCursor] );
-	self->owningPart->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( self->owningPart->GetCursorID(), EMediaTypeCursor, [self]( WILDNSImagePtr theImage, int xHotSpot, int yHotSpot )
+	self->owningPart->GetDocument()->GetMediaCache().GetMediaImageByIDOfType( self->owningPart->GetCursorID(), EMediaTypeCursor, [self]( const CImageCanvas& inImageCanvas, int xHotSpot, int yHotSpot )
 	{
 		DESTROY(mCursor);
+		NSImage * theImage = [[[NSImage alloc] initWithCGImage: inImageCanvas.GetMacImage() size: NSZeroSize] autorelease];
 		mCursor = [[NSCursor alloc] initWithImage: theImage hotSpot: NSMakePoint(xHotSpot,yHotSpot)];
 	} );
 }

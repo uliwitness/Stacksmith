@@ -265,8 +265,10 @@ void	WILDScheduleResumeOfScript( void )
         {
             std::stringstream	errMsg;
             errMsg << "Can't find home stack at " << fileURL << ".";
-            CAlert::RunMessageAlert( errMsg.str() );
-			[[NSApplication sharedApplication] terminate: nil];
+			CAlert::RunMessageAlert( errMsg.str(), "", "", "", []( size_t buttonNumber ){
+				[[NSApplication sharedApplication] terminate: nil];
+			} );
+			return;
         }
 		CDocumentManager::GetSharedDocumentManager()->SetHomeDocument( inNewDocument );
 	}, "", EVisualEffectSpeedNormal, nullptr, EOpenInvisibly);
@@ -394,7 +396,7 @@ void	WILDScheduleResumeOfScript( void )
         {
             std::stringstream	errMsg;
             errMsg << "Can't find stack at " << fileURL << ".";
-            CAlert::RunMessageAlert( errMsg.str() );
+			CAlert::RunMessageAlert( errMsg.str(), "", "", "", [](size_t){} );
         }
 	}, "", EVisualEffectSpeedNormal, CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetScriptContextGroupObject(), EOpenVisibly);
 	

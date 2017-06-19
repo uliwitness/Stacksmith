@@ -78,13 +78,13 @@ using namespace Carlson;
 
 -(NSImage*)	image
 {
-	return mImage.GetMacImage();
+	return [[[NSImage alloc] initWithCGImage: mImage.GetMacImage() size: NSZeroSize] autorelease];
 }
 
 
 -(void)	setImage:(NSImage *)inImage
 {
-	mImage = CImageCanvas( inImage );
+	mImage = CImageCanvas( [inImage CGImageForProposedRect: NULL context: NULL hints: nil] );
 }
 
 
@@ -97,9 +97,9 @@ using namespace Carlson;
 			mImage = CImageCanvas(imagePath);
 	}
 	if( !mImage.IsValid() )
-		mImage = CImageCanvas( [NSImage imageNamed: @"NoIcon"] );
+		mImage = CImageCanvas( [[NSImage imageNamed: @"NoIcon"] CGImageForProposedRect: NULL context: NULL hints: nil] );
 	
-	return mImage.GetMacImage();
+	return [[[NSImage alloc] initWithCGImage: mImage.GetMacImage() size: NSZeroSize] autorelease];
 }
 
 -(NSString *) imageTitle
