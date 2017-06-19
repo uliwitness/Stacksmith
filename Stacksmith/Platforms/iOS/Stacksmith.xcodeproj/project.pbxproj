@@ -23,6 +23,7 @@
 		55464D1D1EF6A02C00AB920F /* CMediaCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55464D1C1EF6A02C00AB920F /* CMediaCache.mm */; };
 		55464D201EF6A05800AB920F /* CUndoStack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55464D1F1EF6A05800AB920F /* CUndoStack.mm */; };
 		55464D231EF84E2F00AB920F /* CAlert.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55464D221EF84E2F00AB920F /* CAlert.mm */; };
+		55464D261EF86E0A00AB920F /* CScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55464D251EF86E0A00AB920F /* CScreen.mm */; };
 		5558170D1EF5468B00A45CD5 /* Home.xstk in Resources */ = {isa = PBXBuildFile; fileRef = 5558170C1EF5468B00A45CD5 /* Home.xstk */; };
 		555817261EF547B900A45CD5 /* CCodeBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5558171A1EF547B900A45CD5 /* CCodeBlock.cpp */; };
 		555817271EF547B900A45CD5 /* CVariableEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5558171C1EF547B900A45CD5 /* CVariableEntry.cpp */; };
@@ -168,6 +169,8 @@
 		55464D1F1EF6A05800AB920F /* CUndoStack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CUndoStack.mm; path = ../Mac/CUndoStack.mm; sourceTree = "<group>"; };
 		55464D211EF84E2F00AB920F /* CAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAlert.h; sourceTree = "<group>"; };
 		55464D221EF84E2F00AB920F /* CAlert.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CAlert.mm; sourceTree = "<group>"; };
+		55464D241EF86E0A00AB920F /* CScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CScreen.h; sourceTree = "<group>"; };
+		55464D251EF86E0A00AB920F /* CScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CScreen.mm; sourceTree = "<group>"; };
 		5558170C1EF5468B00A45CD5 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Home.xstk; path = ../../Home.xstk; sourceTree = "<group>"; };
 		555817191EF547B900A45CD5 /* CCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CCodeBlock.h; path = /Users/uli/Programming/Stacksmith/Forge/ForgeFramework/ForgeFramework/../../CCodeBlock.h; sourceTree = "<absolute>"; };
 		5558171A1EF547B900A45CD5 /* CCodeBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CCodeBlock.cpp; path = /Users/uli/Programming/Stacksmith/Forge/ForgeFramework/ForgeFramework/../../CCodeBlock.cpp; sourceTree = "<absolute>"; };
@@ -432,6 +435,8 @@
 		55464CFD1EF66CA900AB920F /* Platform Abstraction */ = {
 			isa = PBXGroup;
 			children = (
+				55464D241EF86E0A00AB920F /* CScreen.h */,
+				55464D251EF86E0A00AB920F /* CScreen.mm */,
 				55464D1E1EF6A05800AB920F /* CUndoStack.h */,
 				55464D1F1EF6A05800AB920F /* CUndoStack.mm */,
 				55464D211EF84E2F00AB920F /* CAlert.h */,
@@ -862,6 +867,7 @@
 				555818521EF549DF00A45CD5 /* CRecentCardsList.cpp in Sources */,
 				5558173A1EF548BB00A45CD5 /* WILDObjCCallInstructions.mm in Sources */,
 				555817B21EF5495A00A45CD5 /* CReturnCommandNode.cpp in Sources */,
+				55464D261EF86E0A00AB920F /* CScreen.mm in Sources */,
 				555818481EF549DF00A45CD5 /* CPicturePart.cpp in Sources */,
 				555818501EF549DF00A45CD5 /* CMessageWatcher.cpp in Sources */,
 				5558172A1EF547B900A45CD5 /* CParser.cpp in Sources */,

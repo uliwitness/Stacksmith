@@ -14,7 +14,6 @@
 #include "LEOContextGroup.h"
 #include "CStack.h"
 #include "CDocument.h"
-#include "CDocumentMac.h"
 #include "CRecentCardsList.h"
 #include "CAlert.h"
 #include "CMessageBox.h"

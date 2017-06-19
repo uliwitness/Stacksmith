@@ -18,7 +18,7 @@
 #include "CMessageBox.h"
 #include "CMessageWatcher.h"
 #include "CVariableWatcher.h"
-#import <Cocoa/Cocoa.h>
+#include "CScreen.h"
 
 
 void	WILDStackInstruction( LEOContext* inContext );
@@ -1040,31 +1040,20 @@ void	WILDVariableWatcherInstruction( LEOContext* inContext )
 
 void	WILDPushNumberOfScreensInstruction( LEOContext* inContext )
 {
-	LEOPushIntegerOnStack( inContext, [NSScreen screens].count, kLEOUnitNone );
+	LEOPushIntegerOnStack( inContext, CScreen::GetNumScreens(), kLEOUnitNone );
 	
 	inContext->currentInstruction++;
-}
-
-
-static NSRect	WILDFlippedScreenRect( NSRect inBox )
-{
-	NSRect		mainScreenBox = [NSScreen.screens[0] frame];
-	inBox.origin.y += inBox.size.height;						// Calc upper left of the box.
-	mainScreenBox.origin.y += mainScreenBox.size.height;		// Calc upper left of main screen.
-	inBox.origin.y = mainScreenBox.origin.y -inBox.origin.y;	// Since upper left of main screen is 0,0 in flipped, difference between those two coordinates is new Y coordinate for flipped box
-	return inBox;
 }
 
 
 void	WILDPushScreenInstruction( LEOContext* inContext )
 {
 	LEOUnit						outUnit = kLEOUnitNone;
-	NSArray					*	screens = [NSScreen screens];
 	LEOValuePtr					screenIndexValue = (inContext->stackEndPtr -1);
 	
 	LEOInteger	screenIndex = LEOGetValueAsInteger( screenIndexValue, &outUnit, inContext );
 	
-	if( screenIndex < 1 || screenIndex > (long long)screens.count )
+	if( screenIndex < 1 || screenIndex > (long long)CScreen::GetNumScreens() )
 	{
 		size_t		lineNo = SIZE_T_MAX;
 		uint16_t	fileID = 0;
@@ -1073,14 +1062,14 @@ void	WILDPushScreenInstruction( LEOContext* inContext )
 		return;
 	}
 	
-	NSScreen *	currScreen = screens[screenIndex -1];
+	CScreen	currScreen = CScreen::GetScreen(screenIndex -1);
 	struct LEOArrayEntry	*	currScreenArray = NULL;
 	
-	NSRect screenFrame = WILDFlippedScreenRect(currScreen.frame);
-	LEOAddRectArrayEntryToRoot( &currScreenArray, "rectangle", NSMinX(screenFrame), NSMinY(screenFrame), NSMaxX(screenFrame), NSMaxY(screenFrame), inContext );
-	NSRect screenVisibleFrame = WILDFlippedScreenRect(currScreen.visibleFrame);
-	LEOAddRectArrayEntryToRoot( &currScreenArray, "working rectangle", NSMinX(screenVisibleFrame), (LEOInteger) NSMinY(screenVisibleFrame), NSMaxX(screenVisibleFrame), NSMaxY(screenVisibleFrame), inContext );
-	LEOAddIntegerArrayEntryToRoot( &currScreenArray, "scaleFactor", currScreen.backingScaleFactor, kLEOUnitNone, inContext );
+	CRect screenFrame = currScreen.GetRectangle();
+	LEOAddRectArrayEntryToRoot( &currScreenArray, "rectangle", screenFrame.GetH(), screenFrame.GetV(), screenFrame.GetMaxH(), screenFrame.GetMaxV(), inContext );
+	CRect screenVisibleFrame = currScreen.GetWorkingRectangle();
+	LEOAddRectArrayEntryToRoot( &currScreenArray, "working rectangle", screenVisibleFrame.GetH(), screenVisibleFrame.GetV(), screenVisibleFrame.GetMaxH(), screenVisibleFrame.GetMaxV(), inContext );
+	LEOAddIntegerArrayEntryToRoot( &currScreenArray, "scaleFactor", currScreen.GetScale(), kLEOUnitNone, inContext );
 	
 	LEOCleanUpValue( screenIndexValue, kLEOInvalidateReferences, inContext );
 	LEOInitArrayValue( &screenIndexValue->array, currScreenArray, kLEOInvalidateReferences, inContext );	// Takes over ownership of currScreenArray.

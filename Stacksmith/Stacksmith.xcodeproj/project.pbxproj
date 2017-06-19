@@ -282,6 +282,7 @@
 		55405BE218A6220D001D3C99 /* WILDMediaPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55405BDF18A6220D001D3C99 /* WILDMediaPickerViewController.xib */; };
 		5542CAC1113A2CB300555C64 /* UKPBMImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */; };
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
+		55464D2B1EF872FC00AB920F /* CScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55464D2A1EF872FC00AB920F /* CScreen.mm */; };
 		55469F0C1A9A784E0072A721 /* EditTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55469F0B1A9A784E0072A721 /* EditTextTool.tiff */; };
 		554AE1A51E9A628100B5E97D /* UKAudioStreamBasicDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 554AE1A21E9A628100B5E97D /* UKAudioStreamBasicDescription.m */; };
 		554AE1A61E9A628100B5E97D /* UKSoundFileRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 554AE1A41E9A628100B5E97D /* UKSoundFileRecorder.m */; };
@@ -970,6 +971,8 @@
 		5542CAC0113A2CB300555C64 /* UKPBMImageRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPBMImageRep.m; sourceTree = "<group>"; };
 		5542CFA9113B033800555C64 /* WILDBackgroundModeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WILDBackgroundModeIndicator.h; sourceTree = "<group>"; };
 		5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WILDBackgroundModeIndicator.m; sourceTree = "<group>"; };
+		55464D291EF872FC00AB920F /* CScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CScreen.h; path = Platforms/Mac/CScreen.h; sourceTree = "<group>"; };
+		55464D2A1EF872FC00AB920F /* CScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CScreen.mm; path = Platforms/Mac/CScreen.mm; sourceTree = "<group>"; };
 		55469F0B1A9A784E0072A721 /* EditTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = EditTextTool.tiff; path = Resources/EditTextTool.tiff; sourceTree = "<group>"; };
 		554AE1A11E9A628100B5E97D /* UKAudioStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKAudioStreamBasicDescription.h; path = ../UKSoundFileRecorder/UKAudioStreamBasicDescription.h; sourceTree = "<group>"; };
 		554AE1A21E9A628100B5E97D /* UKAudioStreamBasicDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKAudioStreamBasicDescription.m; path = ../UKSoundFileRecorder/UKAudioStreamBasicDescription.m; sourceTree = "<group>"; };
@@ -1553,6 +1556,8 @@
 		552386B8188336DD00D7FAB3 /* OS abstraction */ = {
 			isa = PBXGroup;
 			children = (
+				55464D291EF872FC00AB920F /* CScreen.h */,
+				55464D2A1EF872FC00AB920F /* CScreen.mm */,
 				556DB7BE1870A6EB002F7CB2 /* CURLRequest.h */,
 				556DB7BD1870A6EB002F7CB2 /* CURLRequest.mm */,
 				556DB7C41870ADE9002F7CB2 /* CURLResponse.h */,
@@ -2756,6 +2761,7 @@
 				55255A84114C178100279B03 /* UKSCTDColorWellPrefsController.m in Sources */,
 				55D3E59A1EA11035002EF547 /* CPaintEngineOvalTool.cpp in Sources */,
 				55405BD018A59D06001D3C99 /* WILDButtonInfoViewController.mm in Sources */,
+				55464D2B1EF872FC00AB920F /* CScreen.mm in Sources */,
 				55255A85114C178100279B03 /* UKSCTDUserIdentifiersPrefsController.m in Sources */,
 				55AC961B1870D50400488B51 /* CTinyXMLUtils.cpp in Sources */,
 				559331BD18DB06190061CC37 /* CMediaCache.mm in Sources */,
