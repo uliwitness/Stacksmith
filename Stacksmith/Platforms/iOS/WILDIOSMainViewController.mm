@@ -18,6 +18,7 @@
 #include "CMessageWatcher.h"
 #include "CVariableWatcher.h"
 #include "CDocumentIOS.h"
+#include "CButtonPartIOS.h"
 #include "CAlert.h"
 #include <sstream>
 
@@ -170,7 +171,7 @@ void	WILDScheduleResumeOfScript( void )
 #endif
 	
 	// Register Mac-specific variants of our card/background part classes:
-//	CStack::RegisterPartCreators();
+	CPart::RegisterPartCreator( new CPartCreator<CButtonPartIOS>("button") );
 	
 	CMessageBox::SetSharedInstance( new CMessageBox );
 	CMessageWatcher::SetSharedInstance( new CMessageWatcher );
@@ -178,6 +179,7 @@ void	WILDScheduleResumeOfScript( void )
 	CRecentCardsList::SetSharedInstance( new CRecentCardsListConcrete<CRecentCardInfo>() );
 	
 	Carlson::CMediaCache::SetStandardResourcesPath( [[[NSBundle mainBundle] pathForResource: @"resources" ofType: @"xml"] UTF8String] );
+	
 	
 	[self goHome];
 }
@@ -200,7 +202,7 @@ void	WILDScheduleResumeOfScript( void )
 	NSURL		*	theFile = [NSURL fileURLWithPath: self.homeStackPath];
 	std::string		fileURL( theFile.absoluteString.UTF8String );
 	CDocumentManager::GetSharedDocumentManager()->OpenDocumentFromURL( fileURL,
-																	  [fileURL]( CDocument * inNewDocument )
+																	  [fileURL,self]( CDocument * inNewDocument )
 																	  {
 																		  if( !inNewDocument )
 																		  {
@@ -209,9 +211,7 @@ void	WILDScheduleResumeOfScript( void )
 																			  CAlert::RunMessageAlert( errMsg.str(), "", "", "", [](size_t){} );
 																		  }
 																		  CDocumentManager::GetSharedDocumentManager()->SetHomeDocument( inNewDocument );
-																	  }, "", EVisualEffectSpeedNormal, nullptr, EOpenInvisibly);
-	if( !CDocumentManager::GetSharedDocumentManager()->HaveDocuments() )
-		[self openURL: theFile];
+																	  }, "", EVisualEffectSpeedNormal, nullptr, EOpenVisibly);
 }
 
 
@@ -244,6 +244,5 @@ void	WILDScheduleResumeOfScript( void )
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
 }
-
 
 @end

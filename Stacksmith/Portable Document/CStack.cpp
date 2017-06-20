@@ -15,6 +15,7 @@
 #include "CDocument.h"
 #include <sstream>
 #include "CUndoStack.h"
+#include "CCursor.h"
 
 
 using namespace Carlson;
@@ -831,6 +832,16 @@ void	CStack::SetName( const std::string &inName )
 		mDocument->IncrementChangeCount();	// Stack list contains our name so we needn't be loaded just to find another card by name, make sure that's updated.
 	}
 }
+
+
+void	CStack::GetMousePosition( LEONumber *x, LEONumber *y )
+{
+	CCursor::GetGlobalPosition( x, y );
+	
+	*x -= GetLeft();
+	*y -= GetTop();
+}
+
 
 
 void	CStack::IncrementChangeCount()

@@ -15,26 +15,28 @@
 namespace Carlson
 {
 
-class CDocumentIOS;
+	class CDocumentIOS;
 
 
-class CDocumentManagerIOS : public CDocumentManager
-{
-public:
-	virtual ~CDocumentManagerIOS()	{}
-	
-	virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup, TOpenInvisibly openInvisibly ) override;
-	
-	virtual void	Quit() override;
-};
+	class CDocumentManagerIOS : public CDocumentManager
+	{
+	public:
+		virtual ~CDocumentManagerIOS()	{}
+		
+		virtual void	OpenDocumentFromURL( const std::string& inURL, std::function<void(CDocument*)> inCompletionBlock, const std::string& inEffectType, TVisualEffectSpeed inSpeed, LEOContextGroup* inGroup, TOpenInvisibly openInvisibly ) override;
+		
+		virtual void	Quit() override;
+	};
 
 
-class CDocumentIOS : public CDocument
-{
-public:
-	CDocumentIOS( LEOContextGroup* inGroup ) : CDocument(inGroup) {}
-	~CDocumentIOS() {}
-};
+	class CDocumentIOS : public CDocument
+	{
+	public:
+		CDocumentIOS( LEOContextGroup* inGroup ) : CDocument(inGroup) {}
+		~CDocumentIOS() {}
+
+		virtual CStack	*	NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument ) override;
+	};
 
 }
 

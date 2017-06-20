@@ -7,10 +7,11 @@
 //
 
 #include "CDocumentIOS.h"
+#include "CStackIOS.h"
 #include "CAlert.h"
-#include <sstream>
 #include "CCompletionBlockCoalescer.h"
 #import "UKHelperMacros.h"
+#include <sstream>
 #import <Foundation/Foundation.h>
 
 
@@ -200,5 +201,11 @@ void	CDocumentManagerIOS::OpenDocumentFromURL( const std::string& inURL, std::fu
 void	CDocumentManagerIOS::Quit()
 {
 	exit(0);	// TODO: Implement for iOS.
+}
+
+
+CStack*		CDocumentIOS::NewStackWithURLIDNameForDocument( const std::string& inURL, ObjectID inID, const std::string& inName, const std::string& inFileName, CDocument * inDocument )
+{
+	return new CStackIOS( inURL, inID, inName, inFileName, inDocument );
 }
 

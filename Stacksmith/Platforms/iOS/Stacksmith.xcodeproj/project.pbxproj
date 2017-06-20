@@ -229,6 +229,9 @@
 		5558185E1EF549DF00A45CD5 /* CPaintEngineRegularPolygonTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555818321EF549DF00A45CD5 /* CPaintEngineRegularPolygonTool.cpp */; };
 		5558185F1EF549DF00A45CD5 /* CPaintEnginePolygonTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555818341EF549DF00A45CD5 /* CPaintEnginePolygonTool.cpp */; };
 		555818601EF549DF00A45CD5 /* CPaintEngineSelectionRectTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 555818361EF549DF00A45CD5 /* CPaintEngineSelectionRectTool.cpp */; };
+		556F4FE71EF92F9400E98062 /* CIOSPartBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556F4FE51EF92F9400E98062 /* CIOSPartBase.mm */; };
+		556F4FED1EF9308200E98062 /* CButtonPartIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556F4FEB1EF9308200E98062 /* CButtonPartIOS.mm */; };
+		556F4FF01EF934F400E98062 /* CStackIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556F4FEE1EF934F400E98062 /* CStackIOS.mm */; };
 		55C699571EF5418B0077FF71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550B329E1EF54095005420E9 /* LaunchScreen.storyboard */; };
 		55C699581EF5418F0077FF71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550B32991EF54095005420E9 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -586,6 +589,12 @@
 		555818341EF549DF00A45CD5 /* CPaintEnginePolygonTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEnginePolygonTool.cpp; path = ../../Editor/CPaintEnginePolygonTool.cpp; sourceTree = "<group>"; };
 		555818351EF549DF00A45CD5 /* CPaintEngineSelectionRectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPaintEngineSelectionRectTool.h; path = ../../Editor/CPaintEngineSelectionRectTool.h; sourceTree = "<group>"; };
 		555818361EF549DF00A45CD5 /* CPaintEngineSelectionRectTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPaintEngineSelectionRectTool.cpp; path = ../../Editor/CPaintEngineSelectionRectTool.cpp; sourceTree = "<group>"; };
+		556F4FE51EF92F9400E98062 /* CIOSPartBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CIOSPartBase.mm; sourceTree = "<group>"; };
+		556F4FE61EF92F9400E98062 /* CIOSPartBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIOSPartBase.h; sourceTree = "<group>"; };
+		556F4FEB1EF9308200E98062 /* CButtonPartIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CButtonPartIOS.mm; sourceTree = "<group>"; };
+		556F4FEC1EF9308200E98062 /* CButtonPartIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CButtonPartIOS.h; sourceTree = "<group>"; };
+		556F4FEE1EF934F400E98062 /* CStackIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CStackIOS.mm; sourceTree = "<group>"; };
+		556F4FEF1EF934F400E98062 /* CStackIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CStackIOS.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -625,19 +634,16 @@
 				550B32941EF54095005420E9 /* WILDIOSAppDelegate.m */,
 				550B32961EF54095005420E9 /* WILDIOSMainViewController.h */,
 				550B32971EF54095005420E9 /* WILDIOSMainViewController.mm */,
+				55464D081EF6702700AB920F /* UKHelperMacros.h */,
+				55464D3C1EF8763800AB920F /* StacksmithVersion.h */,
+				550B32911EF54095005420E9 /* main.m */,
 				550B32991EF54095005420E9 /* Main.storyboard */,
 				550B329E1EF54095005420E9 /* LaunchScreen.storyboard */,
 				550B329C1EF54095005420E9 /* Assets.xcassets */,
 				550B32A11EF54095005420E9 /* Info.plist */,
-				550B32911EF54095005420E9 /* main.m */,
 				5558170C1EF5468B00A45CD5 /* Home.xstk */,
 				55464D451EF89A3400AB920F /* new_part_descriptions.xml */,
-				55464D081EF6702700AB920F /* UKHelperMacros.h */,
-				55464D181EF6714800AB920F /* CPlatformLayer.h */,
-				55464D191EF6714800AB920F /* CPlatformLayer.mm */,
-				55464D421EF8963B00AB920F /* CDocumentIOS.h */,
-				55464D431EF8963B00AB920F /* CDocumentIOS.mm */,
-				55464D3C1EF8763800AB920F /* StacksmithVersion.h */,
+				556F4FE41EF92F6900E98062 /* iOS Subclasses */,
 				555817E01EF549BE00A45CD5 /* Portable Document */,
 				55464CFD1EF66CA900AB920F /* Platform Abstraction */,
 				555817181EF5479100A45CD5 /* Interpreter */,
@@ -1063,6 +1069,23 @@
 			name = "Portable Document";
 			sourceTree = "<group>";
 		};
+		556F4FE41EF92F6900E98062 /* iOS Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				55464D181EF6714800AB920F /* CPlatformLayer.h */,
+				55464D191EF6714800AB920F /* CPlatformLayer.mm */,
+				55464D421EF8963B00AB920F /* CDocumentIOS.h */,
+				55464D431EF8963B00AB920F /* CDocumentIOS.mm */,
+				556F4FE61EF92F9400E98062 /* CIOSPartBase.h */,
+				556F4FE51EF92F9400E98062 /* CIOSPartBase.mm */,
+				556F4FEC1EF9308200E98062 /* CButtonPartIOS.h */,
+				556F4FEB1EF9308200E98062 /* CButtonPartIOS.mm */,
+				556F4FEF1EF934F400E98062 /* CStackIOS.h */,
+				556F4FEE1EF934F400E98062 /* CStackIOS.mm */,
+			);
+			name = "iOS Subclasses";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1269,6 +1292,7 @@
 				555817CD1EF5496B00A45CD5 /* CCodeBlockNode.cpp in Sources */,
 				550B32981EF54095005420E9 /* WILDIOSMainViewController.mm in Sources */,
 				5558176E1EF5490600A45CD5 /* LEODownloadInstructions.c in Sources */,
+				556F4FED1EF9308200E98062 /* CButtonPartIOS.mm in Sources */,
 				55464D071EF66CF900AB920F /* UlisBresenham.c in Sources */,
 				555817BB1EF5495A00A45CD5 /* CGetArrayItemCountNode.cpp in Sources */,
 				555817BF1EF5495A00A45CD5 /* CSetChunkPropertyNode.cpp in Sources */,
@@ -1303,6 +1327,7 @@
 				5558183B1EF549DF00A45CD5 /* CCompletionBlockCoalescer.cpp in Sources */,
 				55464D231EF84E2F00AB920F /* CAlert.mm in Sources */,
 				555817351EF548BB00A45CD5 /* WILDDownloadInstructions.mm in Sources */,
+				556F4FE71EF92F9400E98062 /* CIOSPartBase.mm in Sources */,
 				555818571EF549DF00A45CD5 /* CCodeSnippets.cpp in Sources */,
 				5558183A1EF549DF00A45CD5 /* CDocument.cpp in Sources */,
 				5558185E1EF549DF00A45CD5 /* CPaintEngineRegularPolygonTool.cpp in Sources */,
@@ -1344,6 +1369,7 @@
 				55464D041EF66CC700AB920F /* CImageCanvas.mm in Sources */,
 				55464D3A1EF8751300AB920F /* CCursor.mm in Sources */,
 				550B32921EF54095005420E9 /* main.m in Sources */,
+				556F4FF01EF934F400E98062 /* CStackIOS.mm in Sources */,
 				555818401EF549DF00A45CD5 /* CPart.cpp in Sources */,
 				5558185F1EF549DF00A45CD5 /* CPaintEnginePolygonTool.cpp in Sources */,
 				555818561EF549DF00A45CD5 /* CMap.cpp in Sources */,

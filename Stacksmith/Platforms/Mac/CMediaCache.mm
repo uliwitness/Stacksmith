@@ -458,8 +458,10 @@ void	CMediaCache::LoadStandardResources()
 		}
 		
 		// Add system sounds to our list of built-in sounds:
+#if TARGET_OS_MAC
 		LoadSystemSoundsFromFolder( @"/System/Library/Sounds" );
 		LoadSystemSoundsFromFolder( [@"~/Library/Sounds" stringByExpandingTildeInPath] );
+#endif
 	}
 }
 
