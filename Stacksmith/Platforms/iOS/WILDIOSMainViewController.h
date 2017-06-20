@@ -10,6 +10,10 @@
 
 @interface WILDIOSMainViewController : UIViewController
 
++(WILDIOSMainViewController*) sharedMainViewController;
+
+-(void) goHome;
+-(void)	openURL: (NSURL*)theFile;
 
 @end
 

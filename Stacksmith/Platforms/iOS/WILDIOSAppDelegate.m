@@ -7,6 +7,7 @@
 //
 
 #import "WILDIOSAppDelegate.h"
+#import "WILDIOSMainViewController.h"
 
 @interface WILDIOSAppDelegate ()
 
@@ -15,8 +16,8 @@
 @implementation WILDIOSAppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	// Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
 	return YES;
 }
 
@@ -47,5 +48,10 @@
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+	[[WILDIOSMainViewController sharedMainViewController] openURL: url];
+	return YES;
+}
 
 @end

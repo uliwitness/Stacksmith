@@ -43,8 +43,8 @@ enum
 	ERightGrabberHitPart	= (1 << 2),	//!< Right resize handle was clicked. If only bit set, it was the right center.
 	EBottomGrabberHitPart	= (1 << 3),	//!< Bottom resize handle was clicked. If only bit set, it was the bottom center.
 	EContentHitPart			= (ELeftGrabberHitPart | ETopGrabberHitPart | ERightGrabberHitPart | EBottomGrabberHitPart),			//!< No grab handle was clicked, but the click was inside the part's rectangle.
-	EHorizontalMoveHitPart	= (ELeftGrabberHitPart | ERightGrabberHitPart),	//< Left & right == horizontal move with shift key.
-	EVerticalMoveHitPart	= (ETopGrabberHitPart | EBottomGrabberHitPart),	//< Top & bottom == vertical move with shift key.
+	EHorizontalMoveHitPart	= (ELeftGrabberHitPart | ERightGrabberHitPart),	//!< Left & right == horizontal move with shift key.
+	EVerticalMoveHitPart	= (ETopGrabberHitPart | EBottomGrabberHitPart),	//!< Top & bottom == vertical move with shift key.
 	ECustomGrabberHitPart	= (1 << 4)
 }; typedef uint32_t THitPart;
 
@@ -52,23 +52,23 @@ enum
 /*! Indicate to the callback block how to display this coordinate. */
 typedef enum
 {
-	EGuidelineCallbackActionAddHorizontal,			//< Request to add a guideline at the given h coordinate.
-	EGuidelineCallbackActionAddVertical,			//< Request to add a guideline at the given v coordinate.
-	EGuidelineCallbackActionAddHorizontalSpacer,	//< Request to add a 'distance indicator' between the corrected coordinate and the given h coordinate.
-	EGuidelineCallbackActionAddVerticalSpacer,		//< Request to add a 'distance indicator' between the corrected coordinate and the given v coordinate.
-	EGuidelineCallbackActionClearAllForFilling,		//< Request to clear your list of guidelines in preparation for us calling you back with the new set. (don't redraw yet)
-	EGuidelineCallbackActionClearAllDone			//< Request to clear your list of guidelines, we're done tracking. (redraw now)
+	EGuidelineCallbackActionAddHorizontal,			//!< Request to add a guideline at the given h coordinate.
+	EGuidelineCallbackActionAddVertical,			//!< Request to add a guideline at the given v coordinate.
+	EGuidelineCallbackActionAddHorizontalSpacer,	//!< Request to add a 'distance indicator' between the corrected coordinate and the given h coordinate.
+	EGuidelineCallbackActionAddVerticalSpacer,		//!< Request to add a 'distance indicator' between the corrected coordinate and the given v coordinate.
+	EGuidelineCallbackActionClearAllForFilling,		//!< Request to clear your list of guidelines in preparation for us calling you back with the new set. (don't redraw yet)
+	EGuidelineCallbackActionClearAllDone			//!< Request to clear your list of guidelines, we're done tracking. (redraw now)
 } TGuidelineCallbackAction;
 
 
 typedef enum
 {
-	EHitTestWithoutHandles = 0,		//< Only tell us whether the part's rect was hit (used when deciding which object to select, when handles are not visible yet).
-	EHitTestHandlesToo				//< The object is selected, the resize grabbers are visible, and should be hit-tested, too.
-} THitTestHandlesFlag;	//< Modify the hit-testing behaviour of the function. Values like EHitTestWithoutHandles.
+	EHitTestWithoutHandles = 0,		//!< Only tell us whether the part's rect was hit (used when deciding which object to select, when handles are not visible yet).
+	EHitTestHandlesToo				//!< The object is selected, the resize grabbers are visible, and should be hit-tested, too.
+} THitTestHandlesFlag;	//!< Modify the hit-testing behaviour of the function. Values like EHitTestWithoutHandles.
 
 
-// 0 is top/left alignment, i.e. the default that you'd expect from HyperCard:
+//! 0 is top/left alignment, i.e. the default that you'd expect from HyperCard:
 enum
 {
 	// First 2 bits are horizontal resize flags:
@@ -76,13 +76,13 @@ enum
 	EPartLayoutAlignLeft	= 0,
 	EPartLayoutAlignHBoth	= 1,
 	EPartLayoutAlignRight	= 2,
-	EPartLayoutAlignHCenter	= 3,	// Center, left & both are mutually exclusive, so this is left + both.
+	EPartLayoutAlignHCenter	= 3,	//!< Center, left & both are mutually exclusive, so this is left + both.
 	// Second 2 bits are vertical resize flags:
 	EPartLayoutAlignVerticalMask	=	0x0C,
 	EPartLayoutAlignTop		= 0,
 	EPartLayoutAlignVBoth	= 4,
 	EPartLayoutAlignBottom	= 8,
-	EPartLayoutAlignVCenter	= 12,	// Center, top & both are mutually exclusive, so this is top + both.
+	EPartLayoutAlignVCenter	= 12,	//!< Center, top & both are mutually exclusive, so this is top + both.
 };
 typedef unsigned	TPartLayoutFlags;
 
