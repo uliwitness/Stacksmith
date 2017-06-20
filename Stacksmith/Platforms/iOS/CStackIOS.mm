@@ -137,6 +137,10 @@ void	CStackIOS::SetCurrentCard( CCard* inCard, const std::string& inEffectType, 
 	
 	if( inCard )
 	{
+		CGSize cardSize = targetView.frame.size;
+		mCardWidth = cardSize.width;
+		mCardHeight = cardSize.height;
+		
 		CBackground * newBg = inCard->GetBackground();
 		for( size_t x = 0; x < newBg->GetNumParts(); ++x )
 		{
