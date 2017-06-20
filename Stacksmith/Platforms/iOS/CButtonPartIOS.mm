@@ -26,10 +26,23 @@ using namespace Carlson;
 
 -(void)	triggerMouseUpHandler
 {
+	CAutoreleasePool autoreleasePool;
+	
 	self.owningPart->SendMessage( NULL, [](const char * errMsg, size_t errLineNo, size_t errOffset, CScriptableObject * errObj, bool wasHandled)
 	{
 		CAlert::RunScriptErrorAlert( errObj, errMsg, errLineNo, errOffset );
 	}, EMayGoUnhandled, "mouseUp" );
+}
+
+
+-(void)	triggerMouseDownHandler
+{
+	CAutoreleasePool autoreleasePool;
+	
+	self.owningPart->SendMessage( NULL, [](const char * errMsg, size_t errLineNo, size_t errOffset, CScriptableObject * errObj, bool wasHandled)
+								 {
+									 CAlert::RunScriptErrorAlert( errObj, errMsg, errLineNo, errOffset );
+								 }, EMayGoUnhandled, "mouseDown" );
 }
 
 @end
@@ -44,6 +57,7 @@ void	CButtonPartIOS::CreateViewIn( UIView * inParentView )
 	mActionTarget = [WILDButtonActionTarget new];
 	mActionTarget.owningPart = this;
 	[mView addTarget: mActionTarget action: @selector(triggerMouseUpHandler) forControlEvents: UIControlEventTouchUpInside];
+	[mView addTarget: mActionTarget action: @selector(triggerMouseDownHandler) forControlEvents: UIControlEventTouchDown];
 	[inParentView addSubview: mView];
 }
 
