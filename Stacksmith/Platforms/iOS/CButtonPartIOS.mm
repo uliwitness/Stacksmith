@@ -50,15 +50,66 @@ using namespace Carlson;
 
 void	CButtonPartIOS::CreateViewIn( UIView * inParentView )
 {
-	mView = [[UIButton buttonWithType: UIButtonTypeSystem] retain];
-	[mView setTitle: [NSString stringWithUTF8String: GetName().c_str()] forState: UIControlStateNormal];
-	CGRect box = { { (CGFloat)GetLeft(), (CGFloat)GetTop() }, { (CGFloat)GetRight() - GetLeft(), (CGFloat)GetBottom() - GetTop() } };
-	[mView setFrame: box];
-	mActionTarget = [WILDButtonActionTarget new];
-	mActionTarget.owningPart = this;
-	[mView addTarget: mActionTarget action: @selector(triggerMouseUpHandler) forControlEvents: UIControlEventTouchUpInside];
-	[mView addTarget: mActionTarget action: @selector(triggerMouseDownHandler) forControlEvents: UIControlEventTouchDown];
-	[inParentView addSubview: mView];
+	if( !mActionTarget )
+	{
+		mActionTarget = [WILDButtonActionTarget new];
+		mActionTarget.owningPart = this;
+	}
+	if( mButtonStyle == EButtonStyleCheckBox || mButtonStyle == EButtonStyleRadioButton )
+	{
+		mView = [[UISwitch alloc] initWithFrame: CGRectZero];
+		[inParentView addSubview: mView];
+		[(UISwitch*)mView setOn: mHighlight != false];
+		[mView addTarget: mActionTarget action: @selector(triggerMouseUpHandler) forControlEvents: UIControlEventTouchUpInside];
+		[mView addTarget: mActionTarget action: @selector(triggerMouseDownHandler) forControlEvents: UIControlEventTouchDown];
+	}
+	else
+	{
+		mView = [[UIButton buttonWithType: UIButtonTypeSystem] retain];
+		[inParentView addSubview: mView];
+		[(UIButton*)mView setTitle: [NSString stringWithUTF8String: GetName().c_str()] forState: UIControlStateNormal];
+		[mView addTarget: mActionTarget action: @selector(triggerMouseUpHandler) forControlEvents: UIControlEventTouchUpInside];
+		[mView addTarget: mActionTarget action: @selector(triggerMouseDownHandler) forControlEvents: UIControlEventTouchDown];
+	}
+	mView.translatesAutoresizingMaskIntoConstraints = NO;
+	switch( PART_H_LAYOUT_MODE(mPartLayoutFlags) )
+	{
+		case EPartLayoutAlignHCenter:
+			[mView.centerXAnchor constraintEqualToAnchor: inParentView.centerXAnchor].active = YES;
+			[mView.widthAnchor constraintEqualToConstant: mRight -mLeft].active = YES;
+			break;
+		case EPartLayoutAlignLeft:
+			[mView.leftAnchor constraintEqualToAnchor: inParentView.leftAnchor constant: mLeft].active = YES;
+			[mView.widthAnchor constraintEqualToConstant: mRight -mLeft].active = YES;
+			break;
+		case EPartLayoutAlignRight:
+			[mView.rightAnchor constraintEqualToAnchor: inParentView.rightAnchor constant: -mRight].active = YES;
+			[mView.widthAnchor constraintEqualToConstant: -(mRight -mLeft)].active = YES;
+			break;
+		case EPartLayoutAlignHBoth:
+			[mView.leftAnchor constraintEqualToAnchor: inParentView.leftAnchor constant: mLeft].active = YES;
+			[mView.rightAnchor constraintEqualToAnchor: inParentView.rightAnchor constant: -mRight].active = YES;
+			break;
+	}
+	switch( PART_V_LAYOUT_MODE(mPartLayoutFlags) )
+	{
+		case EPartLayoutAlignVCenter:
+			[mView.centerYAnchor constraintEqualToAnchor: inParentView.centerYAnchor].active = YES;
+			[mView.heightAnchor constraintEqualToConstant: mBottom -mTop].active = YES;
+			break;
+		case EPartLayoutAlignTop:
+			[mView.topAnchor constraintEqualToAnchor: inParentView.topAnchor constant: mTop].active = YES;
+			[mView.heightAnchor constraintEqualToConstant: mBottom -mTop].active = YES;
+			break;
+		case EPartLayoutAlignBottom:
+			[mView.bottomAnchor constraintEqualToAnchor: inParentView.bottomAnchor constant: -mBottom].active = YES;
+			[mView.heightAnchor constraintEqualToConstant: -(mBottom -mTop)].active = YES;
+			break;
+		case EPartLayoutAlignVBoth:
+			[mView.topAnchor constraintEqualToAnchor: inParentView.topAnchor constant: mTop].active = YES;
+			[mView.bottomAnchor constraintEqualToAnchor: inParentView.bottomAnchor constant: -mBottom].active = YES;
+			break;
+	}
 }
 
 
@@ -69,4 +120,14 @@ void	CButtonPartIOS::DestroyView()
 	mView = nil;
 	[mActionTarget release];
 	mActionTarget = nil;
+}
+
+
+void	CButtonPartIOS::SetHighlight( bool inState )
+{
+	if( mButtonStyle == EButtonStyleCheckBox || mButtonStyle == EButtonStyleRadioButton )
+	{
+		[(UISwitch*)mView setOn: inState != false];
+	}
+	CButtonPart::SetHighlight(inState);
 }

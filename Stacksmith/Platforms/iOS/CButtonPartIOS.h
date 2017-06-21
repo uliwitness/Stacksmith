@@ -27,10 +27,12 @@ namespace Carlson
 		virtual UIView	*	GetView() override { return mView; };
 		virtual void		CreateViewIn( UIView * inParentView ) override;
 		virtual void		DestroyView() override;
+		
+		virtual void		SetHighlight( bool inState ) override;
 	
 	protected:
-		UIButton				*	mView;
-		WILDButtonActionTarget	*	mActionTarget;
+		UIControl				*	mView = nil;
+		WILDButtonActionTarget	*	mActionTarget = nil;
 	};
 	
 } /* namespace Carlson */

@@ -76,13 +76,13 @@ enum
 	EPartLayoutAlignLeft	= 0,
 	EPartLayoutAlignHBoth	= 1,
 	EPartLayoutAlignRight	= 2,
-	EPartLayoutAlignHCenter	= 3,	//!< Center, left & both are mutually exclusive, so this is left + both.
+	EPartLayoutAlignHCenter	= 3,	//!< Center, right & both are mutually exclusive, so this is right + both.
 	// Second 2 bits are vertical resize flags:
 	EPartLayoutAlignVerticalMask	=	0x0C,
 	EPartLayoutAlignTop		= 0,
 	EPartLayoutAlignVBoth	= 4,
 	EPartLayoutAlignBottom	= 8,
-	EPartLayoutAlignVCenter	= 12,	//!< Center, top & both are mutually exclusive, so this is top + both.
+	EPartLayoutAlignVCenter	= 12,	//!< Center, bottom & both are mutually exclusive, so this is bottom + both.
 };
 typedef unsigned	TPartLayoutFlags;
 
