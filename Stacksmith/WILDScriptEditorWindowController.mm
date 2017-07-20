@@ -25,6 +25,36 @@ static NSString	*	WILDScriptEditorTopAreaToolbarItemIdentifier = @"WILDScriptEdi
 void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowControllerKVOContext;
 
 
+
+@interface WILDScriptEditorUndoInfo : NSObject
+
+@property NSRange range;
+@property (copy) NSString * text;
+
++(instancetype) undoInfo;
+
+@end
+
+@implementation WILDScriptEditorUndoInfo : NSObject
+
++(instancetype) undoInfo
+{
+	return [[[[self class] alloc] init] autorelease];
+}
+
+
+-(void) dealloc
+{
+	[self->_text release];
+	self->_text = nil;
+	
+	[super dealloc];
+}
+
+@end
+
+
+
 @interface WILDScriptEditorRulerView : NSRulerView
 {
 	NSTextView			*	targetView;
@@ -255,6 +285,26 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 }
 
 
+- (void)replaceUndoableCharactersInRange:(NSRange)range withString:(NSString *)string
+{
+	WILDScriptEditorUndoInfo * undoInfo = [WILDScriptEditorUndoInfo undoInfo];
+	undoInfo.text = [mTextView.string substringWithRange: range];
+	undoInfo.range = NSMakeRange( range.location, string.length);
+	[mTextView replaceCharactersInRange: range withString: string];
+	[mTextView.undoManager registerUndoWithTarget: self selector: @selector(undoRange:) object:undoInfo];
+}
+
+
+-(void) undoRange: (WILDScriptEditorUndoInfo*)undoInfo
+{
+	WILDScriptEditorUndoInfo * redoInfo = [WILDScriptEditorUndoInfo undoInfo];
+	redoInfo.text = [mTextView.string substringWithRange: undoInfo.range];
+	redoInfo.range = NSMakeRange( undoInfo.range.location, undoInfo.text.length);
+	[mTextView replaceCharactersInRange: undoInfo.range withString: undoInfo.text];
+	[mTextView.undoManager registerUndoWithTarget: self selector: @selector(undoRange:) object:redoInfo];
+}
+
+
 -(void)	formatText
 {
 	char*			theText = NULL;
@@ -435,10 +485,15 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	if( commandSelector == @selector(insertTab:) )
 	{
-		[self reformatText];
+		[self performSelector: @selector(reformatText) withObject: nil afterDelay: 0.0];
 		return YES;
 	}
 	else if( commandSelector == @selector(insertNewline:) )
+	{
+		[self performSelector: @selector(reformatText) withObject: nil afterDelay: 0.0];
+		return NO;
+	}
+	else if( commandSelector == @selector(deleteBackward:) || commandSelector == @selector(deleteForward:) )
 	{
 		[self performSelector: @selector(reformatText) withObject: nil afterDelay: 0.0];
 		return NO;
@@ -476,67 +531,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 -(void) textViewControllerTextDidChange: (UKSyntaxColoredTextViewController*)sender;
 {
-	mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
-
-	size_t			theLine = 0;
-	size_t			errOffset = 0;
-	size_t			x = 0;
-	const char*		currErrMsg = "";
-	LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( mContainer->GetScript().c_str(), mContainer->GetScript().length(), 0 );
-	for( x = 0; currErrMsg != NULL; x++ )
-	{
-		LEOParserGetNonFatalErrorMessageAtIndex( x, &currErrMsg, &theLine, &errOffset );
-		if( !currErrMsg )
-			break;
-		fprintf( stderr, "Error: %s\n", currErrMsg );
-	}
-	if( parseTree )
-	{
-		LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
-	
-		[mPopUpButton removeAllItems];
-		handlerRanges.clear();
-		const char*	theName = "";
-		
-		bool		isCommand = false;
-		bool		isHandlerEnd = false;
-		for( x = 0; theName != NULL; x++ )
-		{
-			LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isHandlerEnd, &isCommand );
-			if( !theName ) break;
-			if( isHandlerEnd )
-			{
-				NSRange& theRange = handlerRanges.back();
-				theRange.length = theLine -theRange.location;
-				continue;
-			}
-			if( theName[0] == ':' )	// Skip any fake internal handlers we add.
-				continue;
-			
-			handlerRanges.push_back( NSMakeRange(theLine,0) );
-
-			NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
-			[theItem setImage: [NSImage imageNamed: isCommand ? @"CommandHandlerIcon" : @"FunctionHandlerIcon"]];
-			[theItem setRepresentedObject: @(theLine)];
-		}
-		LEOCleanUpDisplayInfoTable( displayInfo );
-		LEOCleanUpParseTree( parseTree );
-		
-//		for( const NSRange& currRange : handlerRanges )
-//		{
-//			NSLog(@"%lu,%lu", currRange.location, currRange.length);
-//		}
-		
-		if( x == 0 )	// We added no items?
-		{
-			[mPopUpButton addItemWithTitle: @"None"];
-			[mPopUpButton setEnabled: NO];
-		}
-		else
-		{
-			[mPopUpButton setEnabled: YES];
-		}
-	}
+//	[self reformatText];
 }
 
 

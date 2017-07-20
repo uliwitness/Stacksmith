@@ -24,16 +24,24 @@
 				<string>closeField</string>
 				<string>exitField</string>
 				<string>mouseUp</string>
+				<string>mouseUpOutside</string>
 				<string>mouseDown</string>
 				<string>mouseStillDown</string>
+				<string>mouseDrag</string>
 				<string>mouseEnter</string>
+				<string>mouseMove</string>
 				<string>mouseLeave</string>
+				<string>linkClicked</string>
 				<string>openStack</string>
 				<string>suspendStack</string>
 				<string>resumeStack</string>
 				<string>closeStack</string>
 				<string>openBackground</string>
 				<string>closeBackground</string>
+				<string>doMenu</string>
+				<string>functionKey</string>
+				<string>arrowKey</string>
+				<string>keyDown</string>
 				<string>return</string>
 				<string>put</string>
 				<string>into</string>
@@ -145,6 +153,7 @@
 				<string>get</string>
 				<string>contains</string>
 				<string>wait</string>
+				<string>loadPage</string>
 			</array>
 			<key>Name</key>
 			<string>Identifiers</string>
