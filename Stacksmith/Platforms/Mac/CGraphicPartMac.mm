@@ -28,6 +28,35 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 
 
 
+@interface CALayer (WILDPreciseHitTest)
+
+-(BOOL) preciselyContainsPoint: (CGPoint)pos;
+
+@end
+
+
+@implementation CALayer (WILDPreciseHitTest)
+
+-(BOOL) preciselyContainsPoint: (CGPoint)pos
+{
+	if( ![self containsPoint: pos] )
+		return NO;
+	
+	BOOL wasHit = NO;
+	NSImage * img = [[NSImage alloc] initWithSize: self.bounds.size];
+	[img lockFocus];
+		CGContextRef ctx = [NSGraphicsContext currentContext].CGContext;
+		[self renderInContext: ctx];
+	[img unlockFocus];
+	wasHit = [img hitTestRect: (NSRect){pos,{1,1}} withImageDestinationRect:(NSRect)self.bounds context: nil hints: nil flipped: NO];
+	
+	return wasHit;
+}
+
+@end
+
+
+
 using namespace Carlson;
 
 
@@ -39,6 +68,7 @@ using namespace Carlson;
 @property CGraphicPartMac* owningPart;
 
 @end
+
 
 @implementation WILDGraphicView
 
@@ -78,7 +108,7 @@ using namespace Carlson;
 	if( !fourthModifier ) fourthModifier = "";
 	
 	BOOL					keepLooping = YES;
-	BOOL					isInside = NSPointInRect([self convertPoint: [event locationInWindow] fromView: nil], self.bounds);
+	BOOL					isInside = [self.layer preciselyContainsPoint: [self.layer convertPoint: [event locationInWindow] fromLayer: nil]];
 	BOOL					newIsInside = isInside;
 	
 	if( !isInside || !owningPart->GetEnabled() )
@@ -108,7 +138,7 @@ using namespace Carlson;
 				case NSRightMouseDragged:
 				case NSOtherMouseDragged:
 				{
-					newIsInside = NSPointInRect([self convertPoint: [evt locationInWindow] fromView: nil], self.bounds);
+					newIsInside = [self.layer preciselyContainsPoint: [self.layer convertPoint: [evt locationInWindow] fromLayer: nil]];
 					if( isInside != newIsInside )
 					{
 						isInside = newIsInside;
@@ -223,7 +253,9 @@ void	CGraphicPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.animator removeFromSuperview];
 	DESTROY(mView);
 	NSRect	box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
-	mView = [[WILDGraphicView alloc] initWithFrame: box];
+	WILDGraphicView * grcView = [[WILDGraphicView alloc] initWithFrame: box];	// mView below will take ownership.
+	mView = grcView;
+	grcView.owningPart = this;
 	if( mStyle == EGraphicStyleRectangle || mStyle == EGraphicStyleRoundrect )
 	{
 		mView.wantsLayer = YES;
