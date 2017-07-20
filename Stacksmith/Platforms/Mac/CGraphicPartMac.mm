@@ -11,9 +11,194 @@
 #import "UKHelperMacros.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ULIWideningBezierPath.h"
+#import "CAlert.h"
+
+
+static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c, const char ** d, const char* theAppendee )
+{
+	if( *a == nil )
+		*a = theAppendee;
+	else if( *b == nil )
+		*b = theAppendee;
+	else if( *c == nil )
+		*c = theAppendee;
+	else if( *d == nil )
+		*d = theAppendee;
+}
+
 
 
 using namespace Carlson;
+
+
+@interface WILDGraphicView : NSView
+{
+	NSTrackingArea * mCursorTrackingArea;
+}
+
+@property CGraphicPartMac* owningPart;
+
+@end
+
+@implementation WILDGraphicView
+
+@synthesize owningPart = owningPart;
+
+-(void)	dealloc
+{
+	[self removeTrackingArea: mCursorTrackingArea];
+	DESTROY_DEALLOC(mCursorTrackingArea);
+	self->owningPart = NULL;
+	
+	[super dealloc];
+}
+
+
+-(void)	mouseDown: (NSEvent*)event
+{	
+	const char *        firstModifier = nil;
+	const char *        secondModifier = nil;
+	const char *        thirdModifier = nil;
+	const char *        fourthModifier = nil;
+	
+	if( event.modifierFlags & NSShiftKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shift" );
+	else if( event.modifierFlags & NSAlphaShiftKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shiftlock" );
+	if( event.modifierFlags & NSAlternateKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "alternate" );
+	if( event.modifierFlags & NSControlKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "control" );
+	if( event.modifierFlags & NSCommandKeyMask )
+		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "command" );
+	
+	if( !firstModifier ) firstModifier = "";
+	if( !secondModifier ) secondModifier = "";
+	if( !thirdModifier ) thirdModifier = "";
+	if( !fourthModifier ) fourthModifier = "";
+	
+	BOOL					keepLooping = YES;
+	BOOL					isInside = NSPointInRect([self convertPoint: [event locationInWindow] fromView: nil], self.bounds);
+	BOOL					newIsInside = isInside;
+	
+	if( !isInside || !owningPart->GetEnabled() )
+		return;
+	
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseDown %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+	}
+	
+	NSAutoreleasePool	*	pool = [[NSAutoreleasePool alloc] init];
+	
+	while( keepLooping )
+	{
+		NSEvent	*	evt = [NSApp nextEventMatchingMask: NSLeftMouseUpMask | NSRightMouseUpMask | NSOtherMouseUpMask | NSLeftMouseDraggedMask | NSRightMouseDraggedMask | NSOtherMouseDraggedMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
+		if( evt )
+		{
+			switch( [evt type] )
+			{
+				case NSLeftMouseUp:
+				case NSRightMouseUp:
+				case NSOtherMouseUp:
+					keepLooping = NO;
+					break;
+					
+				case NSLeftMouseDragged:
+				case NSRightMouseDragged:
+				case NSOtherMouseDragged:
+				{
+					newIsInside = NSPointInRect([self convertPoint: [evt locationInWindow] fromView: nil], self.bounds);
+					if( isInside != newIsInside )
+					{
+						isInside = newIsInside;
+					}
+					CAutoreleasePool	cppPool;
+					self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseDrag %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+					break;
+				}
+					
+				default:
+					break;
+			}
+		}
+		
+		[pool release];
+		pool = [[NSAutoreleasePool alloc] init];
+	}
+	
+	if( isInside )
+	{
+		self->owningPart->PrepareMouseUp();
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUp %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+	}
+	else
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseUpOutside %ld,%s,%s,%s,%s", [event buttonNumber] +1, firstModifier, secondModifier, thirdModifier, fourthModifier );
+	}
+	
+	[pool release];
+}
+
+
+-(void)	mouseEntered:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseEnter %ld", [theEvent buttonNumber] +1 );
+	}
+}
+
+
+-(void)	mouseExited:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseLeave %ld", [theEvent buttonNumber] +1 );
+	}
+}
+
+
+-(void)	mouseMoved:(NSEvent *)theEvent
+{
+	if( self->owningPart->GetShouldSendMouseEventsRightNow() )
+	{
+		CAutoreleasePool	cppPool;
+		self->owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "mouseMove" );
+	}
+}
+
+
+-(void)	updateTrackingAreas
+{
+	[super updateTrackingAreas];
+	
+	if( mCursorTrackingArea )
+	{
+		[self removeTrackingArea: mCursorTrackingArea];
+		DESTROY(mCursorTrackingArea);
+	}
+	NSTrackingAreaOptions	trackingOptions = 0;
+	
+	if( self.owningPart->HasOrInheritsMessageHandler("mouseEnter",nullptr) || self.owningPart->HasOrInheritsMessageHandler("mouseLeave",nullptr) )
+		trackingOptions |= NSTrackingMouseEnteredAndExited;
+	if( self.owningPart->HasOrInheritsMessageHandler("mouseMove",nullptr) )
+		trackingOptions |= NSTrackingMouseMoved;
+	
+	if( trackingOptions != 0 )
+	{
+		trackingOptions |= NSTrackingActiveInActiveApp;
+		mCursorTrackingArea = [[NSTrackingArea alloc] initWithRect: self.bounds options: trackingOptions owner: self userInfo: nil];
+		[self addTrackingArea: mCursorTrackingArea];
+	}
+}
+
+@end
+
 
 
 CGraphicPartMac::~CGraphicPartMac()
@@ -38,7 +223,7 @@ void	CGraphicPartMac::CreateViewIn( NSView* inSuperView )
 	[mView.animator removeFromSuperview];
 	DESTROY(mView);
 	NSRect	box = NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop());
-	mView = [[NSView alloc] initWithFrame: box];
+	mView = [[WILDGraphicView alloc] initWithFrame: box];
 	if( mStyle == EGraphicStyleRectangle || mStyle == EGraphicStyleRoundrect )
 	{
 		mView.wantsLayer = YES;
