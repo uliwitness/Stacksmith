@@ -70,8 +70,8 @@ using namespace Carlson;
 	[self.userPropertyEditor setPropertyContainer: mLayer];
 		
 	[mNameField setStringValue: [NSString stringWithUTF8String: mLayer->GetName().c_str()]];
-	[mCantDeleteSwitch setState: mLayer->GetCantDelete() ? NSOnState : NSOffState];
-	[mDontSearchSwitch setState: mLayer->GetDontSearch() ? NSOnState : NSOffState];
+	[mCantDeleteSwitch setState: mLayer->GetCantDelete() ? NSControlStateValueOn : NSControlStateValueOff];
+	[mDontSearchSwitch setState: mLayer->GetDontSearch() ? NSControlStateValueOn : NSControlStateValueOff];
 		
 	unsigned long	numFields = mLayer->GetPartCountOfType( CPart::GetPartCreatorForType("field") );
 	unsigned long	numButtons = mLayer->GetPartCountOfType( CPart::GetPartCreatorForType("button") );
@@ -94,13 +94,13 @@ using namespace Carlson;
 
 -(IBAction)	doCantDeleteSwitchChanged: (id)sender
 {
-	mLayer->SetCantDelete( [mCantDeleteSwitch state] == NSOnState );
+	mLayer->SetCantDelete( [mCantDeleteSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doDontSearchSwitchChanged: (id)sender
 {
-	mLayer->SetDontSearch( [mDontSearchSwitch state] == NSOnState );
+	mLayer->SetDontSearch( [mDontSearchSwitch state] == NSControlStateValueOn );
 }
 
 

@@ -41,7 +41,7 @@ static WILDViewFactory*		sViewFactory = nil;
 
 +(id)	anotherInstanceOfView: (NSView*)inView
 {
-	return [NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: inView]];
+	return [NSKeyedUnarchiver unarchivedObjectOfClass: [NSView class] fromData: [NSKeyedArchiver archivedDataWithRootObject: inView requiringSecureCoding:NO error:NULL] error:NULL];
 }
 
 

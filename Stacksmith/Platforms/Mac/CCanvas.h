@@ -147,7 +147,7 @@ public:
 	CGColorRef	GetMacColor() const	{ return mColor; }
 	
 protected:
-	CGColorRef		mColor;	// Always in NSCalibratedRGBColorSpace
+	CGColorRef		mColor;	// Always in NSColorSpace.genericRGBColorSpace
 
 	friend class CGraphicsState;
 	friend class CCanvas;

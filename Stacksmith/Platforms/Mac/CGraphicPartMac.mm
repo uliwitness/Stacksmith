@@ -91,15 +91,15 @@ using namespace Carlson;
 	const char *        thirdModifier = nil;
 	const char *        fourthModifier = nil;
 	
-	if( event.modifierFlags & NSShiftKeyMask )
+	if( event.modifierFlags & NSEventModifierFlagShift )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shift" );
-	else if( event.modifierFlags & NSAlphaShiftKeyMask )
+	else if( event.modifierFlags & NSEventModifierFlagCapsLock )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shiftlock" );
-	if( event.modifierFlags & NSAlternateKeyMask )
+	if( event.modifierFlags & NSEventModifierFlagOption )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "alternate" );
-	if( event.modifierFlags & NSControlKeyMask )
+	if( event.modifierFlags & NSEventModifierFlagControl )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "control" );
-	if( event.modifierFlags & NSCommandKeyMask )
+	if( event.modifierFlags & NSEventModifierFlagCommand )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "command" );
 	
 	if( !firstModifier ) firstModifier = "";
@@ -123,20 +123,20 @@ using namespace Carlson;
 	
 	while( keepLooping )
 	{
-		NSEvent	*	evt = [NSApp nextEventMatchingMask: NSLeftMouseUpMask | NSRightMouseUpMask | NSOtherMouseUpMask | NSLeftMouseDraggedMask | NSRightMouseDraggedMask | NSOtherMouseDraggedMask untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
+		NSEvent	*	evt = [NSApp nextEventMatchingMask: NSEventMaskLeftMouseUp | NSEventMaskRightMouseUp | NSEventMaskOtherMouseUp | NSEventMaskLeftMouseDragged | NSEventMaskRightMouseDragged | NSEventMaskOtherMouseDragged untilDate: [NSDate distantFuture] inMode: NSEventTrackingRunLoopMode dequeue: YES];
 		if( evt )
 		{
 			switch( [evt type] )
 			{
-				case NSLeftMouseUp:
-				case NSRightMouseUp:
-				case NSOtherMouseUp:
+				case NSEventMaskLeftMouseUp:
+				case NSEventMaskRightMouseUp:
+				case NSEventMaskOtherMouseUp:
 					keepLooping = NO;
 					break;
 					
-				case NSLeftMouseDragged:
-				case NSRightMouseDragged:
-				case NSOtherMouseDragged:
+				case NSEventMaskLeftMouseDragged:
+				case NSEventMaskRightMouseDragged:
+				case NSEventMaskOtherMouseDragged:
 				{
 					newIsInside = [self.layer preciselyContainsPoint: [self.layer convertPoint: [evt locationInWindow] fromLayer: nil]];
 					if( isInside != newIsInside )

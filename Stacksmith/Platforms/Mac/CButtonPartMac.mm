@@ -52,42 +52,42 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	if( mButtonStyle == EButtonStyleCheckBox )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
-		[mView setBezelStyle: NSRegularSquareBezelStyle];
-		[mView setButtonType: NSSwitchButton];
+		[mView setBezelStyle: NSBezelStyleRegularSquare];
+		[mView setButtonType: NSButtonTypeSwitch];
 	}
 	else if( mButtonStyle == EButtonStyleRadioButton )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
-		[mView setBezelStyle: NSRegularSquareBezelStyle];
-		[mView setButtonType: NSRadioButton];
+		[mView setBezelStyle: NSBezelStyleRegularSquare];
+		[mView setButtonType: NSButtonTypeRadio];
 	}
 	else if( mButtonStyle == EButtonStyleRectangle )
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
-		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
+		[mView setBezelStyle: NSBezelStyleShadowlessSquare];
 	}
 	else if( mButtonStyle == EButtonStyleOpaque )
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
-		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
+		[mView setBezelStyle: NSBezelStyleShadowlessSquare];
 		[mView setBordered: NO];
 	}
 	else if( mButtonStyle == EButtonStyleRoundrect )
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
-		[mView setBezelStyle: NSRoundedBezelStyle];
+		[mView setBezelStyle: NSBezelStyleRounded];
 	}
 	else if( mButtonStyle == EButtonStyleStandard )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
-		[mView setBezelStyle: NSRoundedBezelStyle];
+		[mView setBezelStyle: NSBezelStyleRounded];
 		box = NSInsetRect( box, -5, -3 );
 		box.size.height += 3;
 	}
 	else if( mButtonStyle == EButtonStyleDefault )
 	{
 		mView = [[WILDViewFactory systemButton] retain];
-		[mView setBezelStyle: NSRoundedBezelStyle];
+		[mView setBezelStyle: NSBezelStyleRounded];
 		[mView setKeyEquivalent: @"\r"];
 		box = NSInsetRect( box, -5, -3 );
 		box.size.height += 3;
@@ -95,7 +95,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	else if( mButtonStyle == EButtonStyleOval )
 	{
 		mView = [[WILDViewFactory shapeButton] retain];
-		[mView setBezelStyle: NSCircularBezelStyle];
+		[mView setBezelStyle: NSBezelStyleCircular];
 	}
 	else if( mButtonStyle == EButtonStylePopUp )
 	{
@@ -108,7 +108,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	{
 		box = NSInsetRect( box, -2, -2 );
 		mView = [[WILDViewFactory shapeButton] retain];
-		[mView setBezelStyle: NSShadowlessSquareBezelStyle];
+		[mView setBezelStyle: NSBezelStyleShadowlessSquare];
 		[mView setBordered: NO];
 	}
 	[mView setFrame: box];
@@ -141,7 +141,7 @@ void	CButtonPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else
 	{
-		[mView setState: GetHighlight() ? NSOnState : NSOffState];
+		[mView setState: GetHighlight() ? NSControlStateValueOn : NSControlStateValueOff];
 		[mView setTitle: mShowName ? [NSString stringWithUTF8String: mName.c_str()] : @""];
 		if( [mView.cell respondsToSelector: @selector(setLineColor:)] )
 		{
@@ -238,7 +238,7 @@ void	CButtonPartMac::SetHighlight( bool inHighlight )
 	CButtonPart::SetHighlight( inHighlight );
 	
 	if( mButtonStyle != EButtonStylePopUp )
-		[mView setState: inHighlight ? NSOnState : NSOffState];
+		[mView setState: inHighlight ? NSControlStateValueOn : NSControlStateValueOff];
 }
 
 
@@ -451,6 +451,14 @@ NSView*	CButtonPartMac::GetView()
 {
 	return mView;
 }
+
+
+void	CButtonPartMac::SetToolTip( const std::string& inToolTip )
+{
+	CButtonPart::SetToolTip(inToolTip);
+	[mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]];
+}
+
 
 
 void	CButtonPartMac::SetIconID( ObjectID inID )

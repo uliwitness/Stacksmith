@@ -74,49 +74,49 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction)	doAutoSelectSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetAutoSelect( [mAutoSelectSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetAutoSelect( [mAutoSelectSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doMultipleLinesSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetCanSelectMultipleLines( [mMultipleLinesSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetCanSelectMultipleLines( [mMultipleLinesSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doSharedTextSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetSharedText( [mSharedTextSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetSharedText( [mSharedTextSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doLockTextSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetLockText( [mLockTextSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetLockText( [mLockTextSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doDontWrapSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetDontWrap( [mDontWrapSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetDontWrap( [mDontWrapSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction) doDontSearchSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetDontSearch( [mDontSearchSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetDontSearch( [mDontSearchSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doHorizontalScrollerSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetHasHorizontalScroller( [mHorizontalScrollerSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetHasHorizontalScroller( [mHorizontalScrollerSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doVerticalScrollerSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetHasVerticalScroller( [mVerticalScrollerSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetHasVerticalScroller( [mVerticalScrollerSwitch state] == NSControlStateValueOn );
 }
 
 
@@ -128,7 +128,7 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction)	doAutoTabSwitchToggled: (id)sender
 {
-	((CFieldPart*)part)->SetAutoTab( [mAutoTabSwitch state] == NSOnState );
+	((CFieldPart*)part)->SetAutoTab( [mAutoTabSwitch state] == NSControlStateValueOn );
 }
 
 @end

@@ -36,7 +36,7 @@ public:
 	virtual void	SetRect( LEOInteger left, LEOInteger top, LEOInteger right, LEOInteger bottom );
 	virtual void	SetVisible( bool visible )		{ CWebBrowserPart::SetVisible(visible); [mView setHidden: !visible]; };
 	virtual void	LoadCurrentURL( const std::string& inURL );	// Triggers view update.
-	virtual void	SetToolTip( const std::string& inToolTip )	{ CWebBrowserPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
+	virtual void	SetToolTip( const std::string& inToolTip );
 	virtual NSView*	GetView();
 	virtual Class	GetPropertyEditorClass()	{ return [WILDWebBrowserInfoViewController class]; };
 	

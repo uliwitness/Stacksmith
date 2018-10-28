@@ -28,9 +28,9 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	iBox.size = [img size];
 	NSImage*	hImg = [[[NSImage alloc] initWithSize: iBox.size] autorelease];
 	[hImg lockFocus];
-		CGContextRef    theCtx = [[NSGraphicsContext currentContext] graphicsPort];
+		CGContextRef    theCtx = [[NSGraphicsContext currentContext] CGContext];
 		CGContextSaveGState( theCtx );
-		[img drawAtPoint: NSZeroPoint fromRect: NSZeroRect operation: NSCompositeCopy fraction: 1.0];
+		[img drawAtPoint: NSZeroPoint fromRect: NSZeroRect operation: NSCompositingOperationCopy fraction: 1.0];
 
 		// Make sure we only touch opaque pixels:
 		CGContextClipToMask( theCtx, NSRectToCGRect(iBox), [img CGImageForProposedRect: nil context: [NSGraphicsContext currentContext] hints: nil] );
@@ -64,8 +64,8 @@ NSImage*	WILDInvertedImage( NSImage* img )
 
 -(void)	drawWithFrame: (NSRect)origCellFrame inView: (NSView *)controlView
 {
-	//NSLog( @"state = %s", ([self state] == NSOnState) ? "on" : "off" );
-	BOOL			isHighlighted = [self isHighlighted] || [self state] == NSOnState;
+	//NSLog( @"state = %s", ([self state] == NSControlStateValueOn) ? "on" : "off" );
+	BOOL			isHighlighted = [self isHighlighted] || [self state] == NSControlStateValueOn;
 	NSRect			cellFrame = origCellFrame;
 	NSBezierPath*	buttonShape = nil;
 	NSBezierPath*	buttonStrokeShape = nil;
@@ -103,13 +103,13 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	cellFrame = NSInsetRect( cellFrame, ceilf(lineWidth /2), ceilf(lineWidth /2) );
 	clampedCellFrame = NSInsetRect( clampedCellFrame, ceilf(lineWidth /2), ceilf(lineWidth /2) );
 	
-	if( [self bezelStyle] == NSRoundedBezelStyle )
+	if( [self bezelStyle] == NSBezelStyleRounded )
 	{
 		CGFloat	cornerRoundness = drawAsDefault ? 7.0 : 8.0;
 		buttonShape = [NSBezierPath bezierPathWithRoundedRect: cellFrame xRadius: cornerRoundness yRadius: cornerRoundness];
 		buttonStrokeShape = [NSBezierPath bezierPathWithRoundedRect: clampedCellFrame xRadius: cornerRoundness yRadius: cornerRoundness];
 	}
-	else if( [self bezelStyle] == NSCircularBezelStyle )
+	else if( [self bezelStyle] == NSBezelStyleCircular )
 	{
 		buttonShape = [NSBezierPath bezierPathWithOvalInRect: cellFrame];
 		buttonStrokeShape = [NSBezierPath bezierPathWithOvalInRect: clampedCellFrame];
@@ -210,7 +210,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 		attrTitle = muAttrTitle;
 	}
 	
-	CGContextRef	theContext = [[NSGraphicsContext currentContext] graphicsPort];
+	CGContextRef	theContext = [[NSGraphicsContext currentContext] CGContext];
 	//UKLog( @"%@ %ld", self, [self imagePosition] );
 	if( [self image] != nil && [self imagePosition] == NSImageAbove )
 	{

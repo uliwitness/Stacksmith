@@ -198,8 +198,8 @@ void	WILDScheduleResumeOfScript( void )
 -(NSEvent*)	handleFlagsChangedEvent: (NSEvent*)inEvent
 {
 	BOOL		peekingStateDidChange = NO;
-	if( !mPeeking && ([inEvent modifierFlags] & NSAlternateKeyMask)
-		&& ([inEvent modifierFlags] & NSCommandKeyMask) )
+	if( !mPeeking && ([inEvent modifierFlags] & NSEventModifierFlagOption)
+		&& ([inEvent modifierFlags] & NSEventModifierFlagCommand) )
 	{
 		mPeeking = YES;
 		peekingStateDidChange = YES;
@@ -230,7 +230,7 @@ void	WILDScheduleResumeOfScript( void )
 		theItem.tag = x;
 	}
 	
-	mFlagsChangedEventMonitor = [[NSEvent addLocalMonitorForEventsMatchingMask: NSFlagsChangedMask handler: ^(NSEvent* inEvent){ return [self handleFlagsChangedEvent: inEvent]; }] retain];
+	mFlagsChangedEventMonitor = [[NSEvent addLocalMonitorForEventsMatchingMask: NSEventMaskFlagsChanged handler: ^(NSEvent* inEvent){ return [self handleFlagsChangedEvent: inEvent]; }] retain];
 	
 	[[NSColorPanel sharedColorPanel] setShowsAlpha: YES];
 	
@@ -318,7 +318,7 @@ void	WILDScheduleResumeOfScript( void )
 	[thePanel setAllowedFileTypes: @[ @"xstk" ]];
 	[thePanel beginWithCompletionHandler:^(NSInteger result)
 	{
-		if( result == NSFileHandlingPanelOKButton )
+		if( result == NSModalResponseOK )
 		{
 			for( NSURL* theFile in thePanel.URLs )
 			{
@@ -425,7 +425,7 @@ void	WILDScheduleResumeOfScript( void )
 			
 			[savePanel beginWithCompletionHandler: ^(NSInteger result)
 			{
-				if( result == NSFileHandlingPanelCancelButton )
+				if( result == NSModalResponseCancel )
 					return;
 				
 				NSError	*	err = nil;
@@ -511,7 +511,7 @@ void	WILDScheduleResumeOfScript( void )
 	savePanel.showsTagField = YES;
 	[savePanel beginWithCompletionHandler: ^(NSInteger result)
 	{
-		if( result == NSFileHandlingPanelCancelButton )
+		if( result == NSModalResponseCancel )
 			return;
 		
 		NSError	*	err = nil;
@@ -772,7 +772,7 @@ struct WILDAppDelegateValidatableButtonInfo
 	{
 		[buttons[x].button setEnabled: buttons[x].enable];
 		if( !buttons[x].enable )
-			[buttons[x].button setState: NSOffState];
+			[buttons[x].button setState: NSControlStateValueOff];
 	}
 }
 

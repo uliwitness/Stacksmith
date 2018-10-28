@@ -112,7 +112,7 @@ using namespace Carlson;
 	
 	[mIDField setIntegerValue: mStack->GetID()];
 	
-	[mResizableSwitch setState: mStack->IsResizable() ? NSOnState : NSOffState];
+	[mResizableSwitch setState: mStack->IsResizable() ? NSControlStateValueOn : NSControlStateValueOff];
 }
 
 
@@ -224,7 +224,7 @@ using namespace Carlson;
 
 -(IBAction)	doResizableSwitchChanged: (id)sender
 {
-	mStack->SetResizable( mResizableSwitch.state == NSOnState );
+	mStack->SetResizable( mResizableSwitch.state == NSControlStateValueOn );
 }
 
 

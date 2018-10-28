@@ -143,7 +143,7 @@ using namespace Carlson;
 	
 	if( currentTool != EBrowseTool || isPeeking )
 	{
-		bool		shiftKeyDown = [theEvt modifierFlags] & NSShiftKeyMask;
+		bool		shiftKeyDown = [theEvt modifierFlags] & NSEventModifierFlagShift;
 		size_t		numParts = 0;
 		CPart*		hitPart = NULL;
 		
@@ -447,15 +447,15 @@ using namespace Carlson;
 	const char *        thirdModifier = nil;
 	const char *        fourthModifier = nil;
 	
-	if( theEvent.modifierFlags & NSShiftKeyMask )
+	if( theEvent.modifierFlags & NSEventModifierFlagShift )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shift" );
-	else if( theEvent.modifierFlags & NSAlphaShiftKeyMask )
+	else if( theEvent.modifierFlags & NSEventModifierFlagCapsLock )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "shiftlock" );
-	if( theEvent.modifierFlags & NSAlternateKeyMask )
+	if( theEvent.modifierFlags & NSEventModifierFlagOption )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "alternate" );
-	if( theEvent.modifierFlags & NSControlKeyMask )
+	if( theEvent.modifierFlags & NSEventModifierFlagControl )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "control" );
-	if( theEvent.modifierFlags & NSCommandKeyMask )
+	if( theEvent.modifierFlags & NSEventModifierFlagCommand )
 		FillFirstFreeOne( &firstModifier, &secondModifier, &thirdModifier, &fourthModifier, "command" );
 	
 	if( !firstModifier ) firstModifier = "";
@@ -782,7 +782,7 @@ using namespace Carlson;
 	
 	size_t	cardHeight = mStack->GetCardHeight();
 	NSRect	partRect = NSMakeRect(currPart->GetLeft() +0.5, cardHeight -currPart->GetBottom() +0.5, currPart->GetRight() -currPart->GetLeft() -1.0, currPart->GetBottom() -currPart->GetTop() -1.0 );
-	NSRectFillUsingOperation( partRect, NSCompositeClear );
+	NSRectFillUsingOperation( partRect, NSCompositingOperationClear );
 	if( mStack->GetPeeking() || (currPart->IsSelected() && currPart->GetNumCustomHandlesForTool( mStack->GetTool() ) <= 0) )
 	{
 		[sPeekColor set];
@@ -891,7 +891,7 @@ using namespace Carlson;
 	CGColorSpaceRef	colorSpace = CGColorSpaceCreateWithName( kCGColorSpaceGenericRGB );
 	CGContextRef	bmContext = CGBitmapContextCreate( NULL, mStack->GetCardWidth() * scaleFactor, mStack->GetCardHeight() * scaleFactor, 8, mStack->GetCardWidth() * 8 * 4, colorSpace, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little );
 	CGColorSpaceRelease(colorSpace);
-	NSGraphicsContext	*	cocoaContext = [NSGraphicsContext graphicsContextWithGraphicsPort: bmContext flipped: NO];
+	NSGraphicsContext	*	cocoaContext = [NSGraphicsContext graphicsContextWithCGContext: bmContext flipped: NO];
 	[NSGraphicsContext saveGraphicsState];
 	[NSGraphicsContext setCurrentContext: cocoaContext];
 	
@@ -972,25 +972,25 @@ using namespace Carlson;
 	{
 		case EStackStyleStandard:
 		case EStackStyleDocument:
-			self.window = [[[NSWindow alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | (mStack->IsResizable() ? NSResizableWindowMask : 0) backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[NSWindow alloc] initWithContentRect: wdBox styleMask: NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable | (mStack->IsResizable() ? NSWindowStyleMaskResizable : 0) backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setCollectionBehavior: NSWindowCollectionBehaviorFullScreenPrimary];
 			break;
 		
 		case EStackStyleRectangle:
-			self.window = [[[WILDRectangleWindow alloc] initWithContentRect: wdBox styleMask: NSBorderlessWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
-			[self.window setStyleMask: NSBorderlessWindowMask];
+			self.window = [[[WILDRectangleWindow alloc] initWithContentRect: wdBox styleMask: NSWindowStyleMaskBorderless backing: NSBackingStoreBuffered defer: NO] autorelease];
+			[self.window setStyleMask: NSWindowStyleMaskBorderless];
 			[self.window setLevel: NSNormalWindowLevel];
 			[self.window setCollectionBehavior: NSWindowCollectionBehaviorFullScreenAuxiliary];
 			break;
 		
 		case EStackStylePalette:
-			self.window = [[[NSPanel alloc] initWithContentRect: wdBox styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | (mStack->IsResizable() ? NSResizableWindowMask : 0) | NSUtilityWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[NSPanel alloc] initWithContentRect: wdBox styleMask: NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable | (mStack->IsResizable() ? NSWindowStyleMaskResizable : 0) | NSWindowStyleMaskUtilityWindow backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setCollectionBehavior: NSWindowCollectionBehaviorFullScreenAuxiliary];
 			[(NSPanel*)self.window setFloatingPanel: YES];
 			break;
 		
 		case EStackStylePopup:
-			self.window = [[[WILDRectangleWindow alloc] initWithContentRect: NSMakeRect(wdBox.origin.x,wdBox.origin.y,10,10) styleMask: NSTitledWindowMask backing: NSBackingStoreBuffered defer: NO] autorelease];
+			self.window = [[[WILDRectangleWindow alloc] initWithContentRect: NSMakeRect(wdBox.origin.x,wdBox.origin.y,10,10) styleMask: NSWindowStyleMaskTitled backing: NSBackingStoreBuffered defer: NO] autorelease];
 			[self.window setBackgroundColor: NSColor.redColor];
 			//[self.window setLevel: NSFloatingWindowLevel];
 			[self.window setAlphaValue: 0.0];
@@ -1031,7 +1031,7 @@ using namespace Carlson;
             UKLog(@"Exception caught: %@", err);
         }
 	}
-	NSDisableScreenUpdates();
+	//NSDisableScreenUpdates();
 	if( strcasecmp(mStack->GetThemeName().c_str(),"dark") == 0 )
 	{
 		self.window.appearance = [NSAppearance appearanceNamed: NSAppearanceNameVibrantDark];
@@ -1051,7 +1051,7 @@ using namespace Carlson;
 		mPopover = nil;
 	}
 	[prevWindow release];
-	NSEnableScreenUpdates();
+	//NSEnableScreenUpdates();
 }
 
 
@@ -1435,7 +1435,7 @@ using namespace Carlson;
 	}
 	else if( theItem.action == @selector(toggleBackgroundEditMode:) )
 	{
-		[theItem setState: [self stackBeingEdited]->GetEditingBackground() ? NSOnState : NSOffState];
+		[theItem setState: [self stackBeingEdited]->GetEditingBackground() ? NSControlStateValueOn : NSControlStateValueOff];
 		return YES;
 	}
 	else if( theItem.action == @selector(saveDocument:) )
@@ -1445,12 +1445,12 @@ using namespace Carlson;
 	else if( theItem.action == @selector(projectMenuItemSelected:) )
 	{
 		CMenuItem*	currMenuItem = (CMenuItem*)[theItem tag];
-		NSInteger	itemState = NSOffState;
+		NSInteger	itemState = NSControlStateValueOff;
 		std::string	markChar( currMenuItem->GetMarkChar() );
 		if( markChar.compare(EMenuItemMarkCharMixed) == 0 )
-			itemState = NSMixedState;
+			itemState = NSControlStateValueMixed;
 		else if( markChar.compare(EMenuItemMarkCharChecked) == 0 )
-			itemState = NSOnState;
+			itemState = NSControlStateValueOn;
 		[theItem setState: itemState];
 		std::string	msg = currMenuItem->GetMessage();
 		if( msg.length() > 0 && !currMenuItem->HasOrInheritsMessageHandler( msg.c_str(), nullptr ) )
@@ -1612,14 +1612,14 @@ using namespace Carlson;
 	if( [sender action] == @selector(takeToolFromTag:) )
 	{
 		if( canEditStack && [sender tag] == theStack->GetTool() )
-			[(NSButton*)sender setState: NSOnState];
+			[(NSButton*)sender setState: NSControlStateValueOn];
 		else
-			[(NSButton*)sender setState: NSOffState];
+			[(NSButton*)sender setState: NSControlStateValueOff];
 		return canEditStack;
 	}
 	else if( sender.action == @selector(toggleBackgroundEditMode:) )
 	{
-		[(NSButton*)sender setState: (canEditStack && theStack->GetEditingBackground()) ? NSOnState : NSOffState];
+		[(NSButton*)sender setState: (canEditStack && theStack->GetEditingBackground()) ? NSControlStateValueOn : NSControlStateValueOff];
 		return canEditStack;
 	}
 	else if( sender.action == @selector(newPart:) )
@@ -1691,7 +1691,7 @@ using namespace Carlson;
 	CGImageRef	img = CGWindowListCreateImage( wdBox, kCGWindowListOptionIncludingWindow, (int)mContentView.window.windowNumber, kCGWindowImageBoundsIgnoreFraming | kCGWindowImageBestResolution );
 	NSBitmapImageRep*	bir = [[[NSBitmapImageRep alloc] initWithCGImage: img] autorelease];
 	CGImageRelease( img );
-	return [bir representationUsingType: NSJPEGFileType properties: @{}];
+	return [bir representationUsingType: NSBitmapImageFileTypeJPEG properties: @{}];
 	//return [mContentView dataWithPDFInsideRect: [mContentView bounds]];
 }
 

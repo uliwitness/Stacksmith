@@ -124,6 +124,13 @@ void	CWebBrowserPartMac::LoadCurrentURL( const std::string& inURL )
 }
 
 
+void	CWebBrowserPartMac::SetToolTip( const std::string& inToolTip )
+{
+	CWebBrowserPart::SetToolTip(inToolTip);
+	[mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]];	
+}
+
+
 NSView*	CWebBrowserPartMac::GetView()
 {
 	return mView;

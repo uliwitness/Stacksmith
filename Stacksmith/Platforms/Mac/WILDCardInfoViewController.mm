@@ -42,7 +42,7 @@ using namespace Carlson;
 	
 	[mIDField setIntegerValue: ((CCard*)mLayer)->GetID()];
 
-	[mMarkedSwitch setState: ((CCard*)mLayer)->IsMarked() ? NSOnState : NSOffState];
+	[mMarkedSwitch setState: ((CCard*)mLayer)->IsMarked() ? NSControlStateValueOn : NSControlStateValueOff];
 	
 	size_t		cardNum = mLayer->GetStack()->GetIndexOfCard( (CCard*) mLayer ) +1;
 	size_t		numOfCards = mLayer->GetStack()->GetNumCards();
@@ -52,7 +52,7 @@ using namespace Carlson;
 
 -(IBAction)	doMarkedSwitchChanged: (id)sender
 {
-	((CCard*)mLayer)->SetMarked( [mMarkedSwitch state] == NSOnState );
+	((CCard*)mLayer)->SetMarked( [mMarkedSwitch state] == NSControlStateValueOn );
 }
 
 @end

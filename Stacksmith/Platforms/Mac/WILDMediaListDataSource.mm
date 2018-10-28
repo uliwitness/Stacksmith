@@ -149,7 +149,7 @@ using namespace Carlson;
 		[mIconListView release];
 		mIconListView = [inIconListView retain];
 		
-		[mIconListView registerForDraggedTypes: [NSArray arrayWithObject: NSURLPboardType]];
+		[mIconListView registerForDraggedTypes: [NSArray arrayWithObject: NSPasteboardTypeURL]];
 	}
 }
 
@@ -286,7 +286,7 @@ using namespace Carlson;
 		[theImg lockFocus];
 			NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
 		[theImg unlockFocus];
-		NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
+		NSData	*	pngData = [bir representationUsingType: NSBitmapImageFileTypePNG properties: @{}];
 		[pngData writeToURL: imgFileURL atomically: YES];
 		
 		WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
@@ -351,7 +351,7 @@ using namespace Carlson;
 			[theImg lockFocus];
 				NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
 			[theImg unlockFocus];
-			NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
+			NSData	*	pngData = [bir representationUsingType: NSBitmapImageFileTypePNG properties: @{}];
 			[pngData writeToURL: imgFileURL atomically: YES];
 			
 			WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];
@@ -379,7 +379,7 @@ using namespace Carlson;
 			[theImg lockFocus];
 				NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
 			[theImg unlockFocus];
-			NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
+			NSData	*	pngData = [bir representationUsingType: NSBitmapImageFileTypePNG properties: @{}];
 			[pngData writeToURL: imgFileURL atomically: YES];
 			
 			WILDSimpleImageBrowserItem	*sibi = [[[WILDSimpleImageBrowserItem alloc] init] autorelease];

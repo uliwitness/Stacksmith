@@ -46,7 +46,7 @@ public:
 	virtual void	SetBevelAngle( int a );
 	
 	virtual NSView*	GetView();
-	virtual void	SetToolTip( const std::string& inToolTip )	{ CButtonPart::SetToolTip(inToolTip); [mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]]; };
+	virtual void	SetToolTip( const std::string& inToolTip );
 	
 	virtual void	SetIconID( ObjectID inID );
 	virtual void	SetCursorID( ObjectID inID );

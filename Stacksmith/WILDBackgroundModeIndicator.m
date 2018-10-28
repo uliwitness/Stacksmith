@@ -94,7 +94,7 @@ static NSPanel*	sMenuBarOverlayWindow = nil;
 		if( inWindow )
 			mbarBox = [inWindow contentRectForFrameRect: inWindow.frame];
 		sMenuBarOverlayWindow = [[NSPanel alloc] initWithContentRect: mbarBox
-									styleMask: NSBorderlessWindowMask
+									styleMask: NSWindowStyleMaskBorderless
 									backing: NSBackingStoreBuffered defer: YES];
 		[sMenuBarOverlayWindow setLevel: NSMainMenuWindowLevel +1];
 		[sMenuBarOverlayWindow setBackgroundColor: [NSColor clearColor]];

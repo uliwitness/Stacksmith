@@ -13,7 +13,7 @@
 -(void)	drawBezelWithFrame: (NSRect)frame inView: (NSView*)controlView
 {
 	NSColor		*	fillColor = nil;
-	if( [self state] == NSOnState )
+	if( [self state] == NSControlStateValueOn )
 		fillColor = [NSColor colorWithCalibratedWhite: 1.0 alpha: 0.4];
 	else
 		fillColor = [NSColor colorWithCalibratedWhite: 0.5 alpha: 0.2];

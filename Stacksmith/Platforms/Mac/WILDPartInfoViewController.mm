@@ -168,7 +168,7 @@ using namespace Carlson;
 {
 	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
-		visPart->SetVisible( [visibleSwitch state] == NSOnState );
+		visPart->SetVisible( [visibleSwitch state] == NSControlStateValueOn );
 }
 
 
@@ -176,13 +176,13 @@ using namespace Carlson;
 {
 	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
-		visPart->SetEnabled( [enabledSwitch state] == NSOnState );
+		visPart->SetEnabled( [enabledSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doFillColorChanged:(id)sender
 {
-	NSColor			*	fillColor = [fillColorWell.color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	NSColor			*	fillColor = [fillColorWell.color colorUsingColorSpace: NSColorSpace.genericRGBColorSpace];
 	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
 		visPart->SetFillColor( fillColor.redComponent * 65535.0, fillColor.greenComponent * 65535.0, fillColor.blueComponent * 65535.0, fillColor.alphaComponent * 65535.0 );
@@ -190,7 +190,7 @@ using namespace Carlson;
 
 -(IBAction)	doLineColorChanged:(id)sender
 {
-	NSColor			*	fillColor = [lineColorWell.color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	NSColor			*	fillColor = [lineColorWell.color colorUsingColorSpace: NSColorSpace.genericRGBColorSpace];
 	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
 		visPart->SetLineColor( fillColor.redComponent * 65535.0, fillColor.greenComponent * 65535.0, fillColor.blueComponent * 65535.0, fillColor.alphaComponent * 65535.0 );
@@ -199,7 +199,7 @@ using namespace Carlson;
 
 -(IBAction)	doShadowColorChanged:(id)sender
 {
-	NSColor			*	fillColor = [shadowColorWell.color colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+	NSColor			*	fillColor = [shadowColorWell.color colorUsingColorSpace: NSColorSpace.genericRGBColorSpace];
 	CVisiblePart	*	visPart = dynamic_cast<CVisiblePart*>(part);
 	if( visPart )
 		visPart->SetShadowColor( fillColor.redComponent * 65535.0, fillColor.greenComponent * 65535.0, fillColor.blueComponent * 65535.0, fillColor.alphaComponent * 65535.0 );

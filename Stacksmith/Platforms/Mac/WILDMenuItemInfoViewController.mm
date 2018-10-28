@@ -42,8 +42,8 @@ using namespace Carlson;
 	[_keyboardShortcutField setStringValue: [NSString stringWithUTF8String: mMenuItem->GetCommandChar().c_str()]];
 	[_markCharacterField setStringValue: [NSString stringWithUTF8String: mMenuItem->GetMarkChar().c_str()]];
 	
-	_enabledSwitch.state = mMenuItem->GetEnabled() ? NSOnState : NSOffState;
-	_visibleSwitch.state = mMenuItem->GetVisible() ? NSOnState : NSOffState;
+	_enabledSwitch.state = mMenuItem->GetEnabled() ? NSControlStateValueOn : NSControlStateValueOff;
+	_visibleSwitch.state = mMenuItem->GetVisible() ? NSControlStateValueOn : NSControlStateValueOff;
 	[_stylePopUp selectItemWithTag: mMenuItem->GetStyle()];
 }
 
@@ -54,12 +54,12 @@ using namespace Carlson;
 
 -(IBAction)	doEnabledSwitchChanged: (NSButton*)sender
 {
-	mMenuItem->SetEnabled( _enabledSwitch.state == NSOnState );
+	mMenuItem->SetEnabled( _enabledSwitch.state == NSControlStateValueOn );
 }
 
 -(IBAction)	doVisibleSwitchChanged: (NSButton*)sender
 {
-	mMenuItem->SetVisible( _visibleSwitch.state == NSOnState );
+	mMenuItem->SetVisible( _visibleSwitch.state == NSControlStateValueOn );
 }
 
 

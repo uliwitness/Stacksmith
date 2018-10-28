@@ -30,18 +30,18 @@ bool	CCursor::Grab( int mouseButtonNumber, std::function<bool( LEONumber x, LEON
 	NSAutoreleasePool	*	pool = [NSAutoreleasePool new];
 	bool					didEverMove = false;
 	
-	NSUInteger				eventMask = NSLeftMouseUpMask | NSLeftMouseDraggedMask;
+	NSUInteger				eventMask = NSEventMaskLeftMouseUp | NSEventMaskLeftMouseDragged;
 	if( mouseButtonNumber == 1 )
-		eventMask = NSRightMouseUpMask | NSRightMouseDraggedMask;
+		eventMask = NSEventMaskRightMouseUp | NSEventMaskRightMouseDragged;
 	else if( mouseButtonNumber > 1 )
-		eventMask = NSOtherMouseUpMask | NSOtherMouseDraggedMask;
+		eventMask = NSEventMaskOtherMouseUp | NSEventMaskOtherMouseDragged;
 	
 	while( true )
 	{
 		NSEvent	*	currEvt = [[NSApplication sharedApplication] nextEventMatchingMask: eventMask untilDate: theDate inMode: NSEventTrackingRunLoopMode dequeue: YES];
 		if( currEvt )
 		{
-			if( currEvt.type == NSLeftMouseDragged || currEvt.type == NSRightMouseDragged || currEvt.type == NSOtherMouseDragged )
+			if( currEvt.type == NSEventTypeLeftMouseDragged || currEvt.type == NSEventTypeRightMouseDragged || currEvt.type == NSEventTypeOtherMouseDragged )
 			{
 				didEverMove = true;
 				
@@ -57,9 +57,9 @@ bool	CCursor::Grab( int mouseButtonNumber, std::function<bool( LEONumber x, LEON
 				if( !trackingHandler( pos.x, pos.y, pressure ) )
 					break;
 			}
-			else if( currEvt.type == NSLeftMouseUp || currEvt.type == NSRightMouseUp || currEvt.type == NSOtherMouseUp )
+			else if( currEvt.type == NSEventTypeLeftMouseUp || currEvt.type == NSEventTypeRightMouseUp || currEvt.type == NSEventTypeOtherMouseUp )
 			{
-				if( currEvt.type != NSOtherMouseUp || currEvt.buttonNumber == mouseButtonNumber )	// For "other" mouse events, make sure button number matches.
+				if( currEvt.type != NSEventTypeOtherMouseUp || currEvt.buttonNumber == mouseButtonNumber )	// For "other" mouse events, make sure button number matches.
 					break;	// Exit tracking loop, mouse was released.
 			}
 //			else

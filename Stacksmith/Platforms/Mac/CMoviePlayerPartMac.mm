@@ -343,6 +343,12 @@ void	CMoviePlayerPartMac::SetLineWidth( int w )
 }
 
 
+void	CMoviePlayerPartMac::SetToolTip(const std::string &inToolTip)
+{
+	CMoviePlayerPart::SetToolTip(inToolTip);
+	[mView setToolTip: [NSString stringWithUTF8String: inToolTip.c_str()]];
+}
+
 void	CMoviePlayerPartMac::SetPeeking( bool inState )
 {
 	ApplyPeekingStateToView(inState, mView);

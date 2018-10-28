@@ -75,25 +75,25 @@ static 	NSArray*	sStylesInMenuOrder = nil;
 
 -(IBAction)	doShowNameSwitchToggled:(id)sender
 {
-	((CButtonPartMac*)part)->SetShowName( [mShowNameSwitch state] == NSOnState );
+	((CButtonPartMac*)part)->SetShowName( [mShowNameSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doSharedHighlightSwitchToggled: (id)sender
 {
-	((CButtonPartMac*)part)->SetSharedHighlight( [mSharedHighlightSwitch state] == NSOnState );
+	((CButtonPartMac*)part)->SetSharedHighlight( [mSharedHighlightSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doHighlightedSwitchToggled:(id)sender
 {
-	((CButtonPartMac*)part)->SetHighlight( [mHighlightedSwitch state] == NSOnState );
+	((CButtonPartMac*)part)->SetHighlight( [mHighlightedSwitch state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doAutoHighlightSwitchToggled:(id)sender
 {
-	((CButtonPartMac*)part)->SetAutoHighlight( [mAutoHighlightSwitch state] == NSOnState );
+	((CButtonPartMac*)part)->SetAutoHighlight( [mAutoHighlightSwitch state] == NSControlStateValueOn );
 }
 
 

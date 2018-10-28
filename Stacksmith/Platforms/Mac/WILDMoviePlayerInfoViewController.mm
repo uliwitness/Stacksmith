@@ -32,8 +32,8 @@ using namespace Carlson;
 	[super loadView];
 	
 	[mMoviePathField setStringValue: [NSString stringWithUTF8String: ((CMoviePlayerPart*)part)->GetMediaPath().c_str()]];
-	[self.controllerVisibleSwitch setState: ((CMoviePlayerPart*)part)->GetControllerVisible() ? NSOnState : NSOffState];
-	[self.playingSwitch setState: ((CMoviePlayerPart*)part)->GetStarted() ? NSOnState : NSOffState];
+	[self.controllerVisibleSwitch setState: ((CMoviePlayerPart*)part)->GetControllerVisible() ? NSControlStateValueOn : NSControlStateValueOff];
+	[self.playingSwitch setState: ((CMoviePlayerPart*)part)->GetStarted() ? NSControlStateValueOn : NSControlStateValueOff];
 }
 
 
@@ -42,7 +42,7 @@ using namespace Carlson;
 	NSOpenPanel	*	thePanel = [NSOpenPanel openPanel];
 	NSArray		*	types = [AVURLAsset audiovisualTypes];
 	[thePanel setAllowedFileTypes: types];
-	if( NSFileHandlingPanelOKButton == [thePanel runModal] )
+	if( NSModalResponseOK == [thePanel runModal] )
 	{
 		[[self retain] autorelease];	// Make sure we're not released if the movie player property change recreates its view.
 
@@ -53,12 +53,12 @@ using namespace Carlson;
 
 -(IBAction)	doToggleControllerVisibleSwitch: (id)sender
 {
-	((CMoviePlayerPart*)part)->SetControllerVisible( [self.controllerVisibleSwitch state] == NSOnState );
+	((CMoviePlayerPart*)part)->SetControllerVisible( [self.controllerVisibleSwitch state] == NSControlStateValueOn );
 }
 
 -(IBAction)	doTogglePlayingSwitch: (id)sender
 {
-	((CMoviePlayerPart*)part)->SetStarted( [self.playingSwitch state] == NSOnState );
+	((CMoviePlayerPart*)part)->SetStarted( [self.playingSwitch state] == NSControlStateValueOn );
 }
 
 @end

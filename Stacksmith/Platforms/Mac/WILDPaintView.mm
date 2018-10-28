@@ -149,7 +149,7 @@ using namespace Carlson;
 
 -(void) mouseDown: (NSEvent *)event
 {
-	if( event.modifierFlags & NSAlternateKeyMask )
+	if( event.modifierFlags & NSEventModifierFlagOption )
 	{
 		paintEngine.SetCurrentTool( &selectionRectTool );
 	}

@@ -25,8 +25,8 @@ using namespace Carlson;
 	
 	[mMessageField setStringValue: [NSString stringWithUTF8String: ((CTimerPart*)part)->GetMessage().c_str()]];
 	[mIntervalField setIntegerValue: ((CTimerPart*)part)->GetInterval()];
-	[self.startedSwitch setState: (((CTimerPart*)part)->GetStarted() ? NSOnState : NSOffState)];
-	[self.repeatSwitch setState: (((CTimerPart*)part)->GetRepeat() ? NSOnState : NSOffState)];
+	[self.startedSwitch setState: (((CTimerPart*)part)->GetStarted() ? NSControlStateValueOn : NSControlStateValueOff)];
+	[self.repeatSwitch setState: (((CTimerPart*)part)->GetRepeat() ? NSControlStateValueOn : NSControlStateValueOff)];
 }
 
 
@@ -45,13 +45,13 @@ using namespace Carlson;
 
 -(IBAction)	doStartedSwitchToggled: (id)sender
 {
-	((CTimerPart*)part)->SetStarted( [sender state] == NSOnState );
+	((CTimerPart*)part)->SetStarted( [sender state] == NSControlStateValueOn );
 }
 
 
 -(IBAction)	doRepeatSwitchToggled: (id)sender
 {
-	((CTimerPart*)part)->SetRepeat( [sender state] == NSOnState );
+	((CTimerPart*)part)->SetRepeat( [sender state] == NSControlStateValueOn );
 }
 
 @end

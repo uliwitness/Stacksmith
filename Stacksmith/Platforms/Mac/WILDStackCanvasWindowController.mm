@@ -450,7 +450,7 @@ struct CCanvasEntry
 		[theImg lockFocus];
 			NSBitmapImageRep	*	bir = [[[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)] autorelease];
 		[theImg unlockFocus];
-		NSData	*	pngData = [bir representationUsingType: NSPNGFileType properties: @{}];
+		NSData	*	pngData = [bir representationUsingType: NSBitmapImageFileTypePNG properties: @{}];
 		[pngData writeToURL: imgFileURL atomically: YES];
 		newIcon.mMediaID = pictureID;
 		newIcon.SetIcon( theImg );
@@ -549,7 +549,7 @@ struct CCanvasEntry
 	NSOpenPanel	*	openPanel = [NSOpenPanel openPanel];
 	[openPanel beginSheetModalForWindow: self.window completionHandler: ^(NSInteger result)
 	{
-		if( result == NSFileHandlingPanelOKButton )
+		if( result == NSModalResponseOK )
 		{
 			[self addMediaURLs: openPanel.URLs mediaType: EMediaTypeUnknown];
 		}

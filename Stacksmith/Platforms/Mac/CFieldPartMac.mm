@@ -437,7 +437,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 					case EColumnTypeCheckbox:
 					{
 						NSButtonCell*	btnCell = [[[NSButtonCell alloc] initTextCell: @""] autorelease];
-						[btnCell setButtonType: NSSwitchButton];
+						[btnCell setButtonType: NSButtonTypeSwitch];
 						[col setDataCell: btnCell];
 						break;
 					}
@@ -1305,7 +1305,7 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 			}
 			else if( [currAttr isEqualToString: NSForegroundColorAttributeName] )
 			{
-				NSColor*	rgbColor = [attrValue colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+				NSColor*	rgbColor = [attrValue colorUsingColorSpace: NSColorSpace.genericRGBColorSpace];
 				NSString*	colorString = [NSString stringWithFormat: @"#%02X%02X%02X%02X", int(rgbColor.redComponent * 255.0), int(rgbColor.greenComponent * 255.0), int(rgbColor.blueComponent * 255.0), int(rgbColor.alphaComponent * 255.0)];
 				stringToSet.AddAttributeValueForRange( "color", colorString.UTF8String, range.location, range.location +range.length );
 			//	stringToSet.Dump();
