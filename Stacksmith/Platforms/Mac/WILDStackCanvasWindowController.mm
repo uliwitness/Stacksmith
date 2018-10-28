@@ -79,7 +79,7 @@ struct CCanvasEntry
 	
 	[self reloadData];
 	
-	[self.stackCanvasView registerForDraggedTypes: [NSImage.imageTypes arrayByAddingObjectsFromArray: @[ NSFilenamesPboardType ]]];
+	[self.stackCanvasView registerForDraggedTypes: [NSImage.imageTypes arrayByAddingObjectsFromArray: @[ (NSString *)kUTTypeFileURL ]]];
 }
 
 
@@ -447,9 +447,8 @@ struct CCanvasEntry
 		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 		
-		[theImg lockFocus];
-			NSBitmapImageRep	*	bir = [[[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)] autorelease];
-		[theImg unlockFocus];
+		CGImageRef imageRef = [theImg CGImageForProposedRect:NULL context:NULL hints:nil];
+		NSBitmapImageRep *bir = [[NSBitmapImageRep alloc] initWithCGImage: imageRef];
 		NSData	*	pngData = [bir representationUsingType: NSBitmapImageFileTypePNG properties: @{}];
 		[pngData writeToURL: imgFileURL atomically: YES];
 		newIcon.mMediaID = pictureID;

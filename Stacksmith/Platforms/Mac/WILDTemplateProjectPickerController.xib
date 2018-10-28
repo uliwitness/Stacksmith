@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
-        <plugIn identifier="com.apple.imagekit.ibplugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDTemplateProjectPickerController">
             <connections>
-                <outlet property="iconListView" destination="QJk-SS-4oA" id="Stk-pa-D1D"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="New Project" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="WILDTemplateProjectPickerController" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="New Project" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="WILDTemplateProjectPickerController" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES"/>
             <rect key="contentRect" x="457" y="394" width="480" height="270"/>
@@ -51,33 +49,31 @@ Gw
                             <action selector="doCancel:" target="-2" id="qFo-HR-LnP"/>
                         </connections>
                     </button>
-                    <scrollView horizontalLineScroll="95" horizontalPageScroll="10" verticalLineScroll="95" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="pOp-ab-PdD">
-                        <rect key="frame" x="-1" y="60" width="482" height="211"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <clipView key="contentView" copiesOnScroll="NO" id="H74-bQ-Rw5">
-                            <rect key="frame" x="1" y="1" width="166" height="79"/>
+                    <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="wSX-lu-4Lj">
+                        <rect key="frame" x="-1" y="61" width="482" height="210"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <clipView key="contentView" id="ZKO-a1-okB">
+                            <rect key="frame" x="1" y="1" width="480" height="208"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.49999988079071045" allowsMultipleSelection="NO" allowsEmptySelection="NO" id="QJk-SS-4oA">
-                                    <rect key="frame" x="0.0" y="0.0" width="480" height="209"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    <ikCellsStyle key="cellsStyleMask" none="YES" titled="YES"/>
-                                    <autoresizingMask key="contentResizingMask" heightSizable="YES"/>
-                                    <size key="cellSize" width="75" height="75"/>
+                                <collectionView id="LV1-3K-9fN">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="158"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="qyS-D7-g7p">
+                                        <size key="itemSize" width="50" height="50"/>
+                                    </collectionViewFlowLayout>
+                                    <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
-                                        <outlet property="dataSource" destination="-2" id="9ML-94-QbF"/>
-                                        <outlet property="delegate" destination="-2" id="KT7-iY-E8L"/>
                                     </connections>
-                                </ikImageBrowserView>
+                                </collectionView>
                             </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="VZ9-NC-5Wz">
-                            <rect key="frame" x="1" y="80" width="166" height="15"/>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Kfy-8R-kh7">
+                            <rect key="frame" x="1" y="143" width="480" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="6cd-Zj-7xu">
-                            <rect key="frame" x="167" y="1" width="15" height="79"/>
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="S21-2K-KiJ">
+                            <rect key="frame" x="234" y="1" width="15" height="143"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -87,5 +83,39 @@ Gw
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
         </window>
+        <collectionViewItem identifier="StandardItem" id="65J-Ow-wXR">
+            <connections>
+                <outlet property="imageView" destination="cv7-tV-1qw" id="aLA-o7-ksX"/>
+                <outlet property="view" destination="hG9-4u-sf8" id="Z7P-k5-eWu"/>
+            </connections>
+        </collectionViewItem>
+        <customView id="hG9-4u-sf8" userLabel="Collection View Item View">
+            <rect key="frame" x="0.0" y="0.0" width="163" height="116"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="cv7-tV-1qw">
+                    <rect key="frame" x="13" y="29" width="137" height="75"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Ahw-9R-SPH"/>
+                    <connections>
+                        <binding destination="65J-Ow-wXR" name="value" keyPath="representedObject.image" id="bCw-LZ-rpa"/>
+                    </connections>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="rpZ-fU-zDM">
+                    <rect key="frame" x="6" y="7" width="152" height="14"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingMiddle" alignment="center" title="Label" usesSingleLineMode="YES" id="sZN-vq-Jyt">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="65J-Ow-wXR" name="value" keyPath="representedObject.name" id="exN-MD-ZnD"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="-32.5" y="544"/>
+        </customView>
+        <userDefaultsController representsSharedInstance="YES" id="6xe-ID-EHT"/>
     </objects>
 </document>

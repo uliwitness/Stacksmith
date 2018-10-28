@@ -11,11 +11,7 @@
 #import "UKHelperMacros.h"
 
 
-@interface WILDTemplateProjectPickerController ()
-
-@end
-
-@interface WILDSimpleTemplateProjectBrowserItem : NSObject // IKImageBrowserItem
+@interface WILDSimpleTemplateProjectBrowserItem : NSObject
 {
 	NSImage*					mImage;
 	NSString*					mName;
@@ -114,32 +110,28 @@
 			[[NSApplication sharedApplication] presentError: err];
 		}
 		
-		NSInteger		groupCount = 0;
-		NSInteger		itemCount = 0;
-		
 		for( NSString* currSubfolderSubPath in subfolderpaths )
 		{
 			NSString	*	currSubfolderPath = [templatesPath stringByAppendingPathComponent: currSubfolderSubPath];
 			NSArray*		subpaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: currSubfolderPath error: &err];
 			
-			NSUInteger	startItemCount = itemCount;
 			
+			if( !subpaths )
+			{
+				continue;
+			}
+			
+			NSMutableArray<WILDSimpleTemplateProjectBrowserItem *> *groupContents = [NSMutableArray new];
+			
+			[groups addObject: @{ @"name": currSubfolderSubPath, @"contents": groupContents } ];
+
 			for( NSString* currSubPath in subpaths )
 			{
 				NSString	*	currPath = [currSubfolderPath stringByAppendingPathComponent: currSubPath];
 				WILDSimpleTemplateProjectBrowserItem	*	tbi = [[[WILDSimpleTemplateProjectBrowserItem alloc] init] autorelease];
 				tbi.filename = currPath;
 				tbi.name = [[currPath lastPathComponent] stringByDeletingPathExtension];
-				[items addObject: tbi];
-				
-				itemCount++;
-			}
-			
-			if( subpaths )
-			{
-				groupCount++;
-				
-				[groups addObject: @{ IKImageBrowserGroupRangeKey: [NSValue valueWithRange: (NSRange){ startItemCount, itemCount -startItemCount }], IKImageBrowserGroupTitleKey: currSubfolderSubPath, IKImageBrowserGroupStyleKey: @(IKGroupDisclosureStyle) } ];
+				[groupContents addObject: tbi];
 			}
 		}
 	}
@@ -156,42 +148,32 @@
 }
 
 
--(NSUInteger) numberOfItemsInImageBrowser: (IKImageBrowserView *)aBrowser
+- (NSInteger)collectionView:(NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 	[self ensureItemsListExists];
 	
-	return [items count];
+	NSDictionary *group = groups[ section ];
+	return [(NSArray *)group[@"contents"] count];
 }
 
 
--(id /*IKImageBrowserItem*/) imageBrowser: (IKImageBrowserView *) aBrowser itemAtIndex: (NSUInteger)idx
+- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self ensureItemsListExists];
 	
-	return [items objectAtIndex: idx];
+	NSDictionary *group = groups[ [indexPath indexAtPosition:0] ];
+	
+	NSCollectionViewItem *theItem = [collectionView makeItemWithIdentifier: @"StandardItem" forIndexPath: indexPath];
+	
+	theItem.representedObject = group[@"contents"][ [indexPath indexAtPosition: 1] ];
+	
+	return theItem;
 }
 
 
-- (NSUInteger) numberOfGroupsInImageBrowser:(IKImageBrowserView *) aBrowser
+- (NSInteger)numberOfSectionsInCollectionView:(NSCollectionView *)collectionView
 {
 	return groups.count;
-}
-
-
-/*!
-	@method imageBrowser:groupAtIndex:
-	@abstract Returns the group at index 'index'
-	@discussion A group is defined by a dictionay. Keys for this dictionary are defined below.
-*/
-- (NSDictionary *) imageBrowser:(IKImageBrowserView *) aBrowser groupAtIndex:(NSUInteger) index
-{
-	return groups[index];
-}
-
-
--(void)	imageBrowserSelectionDidChange: (IKImageBrowserView *)aBrowser
-{
-	
 }
 
 

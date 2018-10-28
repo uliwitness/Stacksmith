@@ -16,7 +16,7 @@
 using namespace Carlson;
 
 
-@interface WILDSimpleImageBrowserItem : NSObject // IKImageBrowserItem
+@interface WILDSimpleImageBrowserItem : NSObject
 {
 	NSString*					mName;
 	NSString*					mFileName;
@@ -142,7 +142,7 @@ using namespace Carlson;
 }
 
 
--(void)	setIconListView: (IKImageBrowserView*)inIconListView
+-(void)	setIconListView: (NSCollectionView *)inIconListView
 {
 	if( mIconListView != inIconListView )
 	{
@@ -216,8 +216,7 @@ using namespace Carlson;
 	{
 		if( sibi.pictureID == theID )
 		{
-			[mIconListView setSelectionIndexes: [NSIndexSet indexSetWithIndex: x] byExtendingSelection: NO];
-			[mIconListView scrollIndexToVisible: x];
+			[mIconListView selectItemsAtIndexPaths: [NSIndexPath indexPathWithIndexes: x] scrollPosition: NSCollectionViewScrollPositionCenteredVertically];
 			break;
 		}
 		x++;
@@ -232,7 +231,7 @@ using namespace Carlson;
 }
 
 
--(NSUInteger) numberOfItemsInImageBrowser: (IKImageBrowserView *)aBrowser
+-(NSInteger)	collectionView: (NSCollectionView *)collectionView numberOfItemsInSection: (NSInteger)section
 {
 	[self ensureIconListExists];
 	
@@ -240,15 +239,25 @@ using namespace Carlson;
 }
 
 
--(id /*IKImageBrowserItem*/) imageBrowser: (IKImageBrowserView *) aBrowser itemAtIndex: (NSUInteger)idx
+- (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self ensureIconListExists];
-	
-	return [mIcons objectAtIndex: idx];
+	[mIcons objectAtIndex: [indexPath indexAtPosition: 1]];
 }
 
 
--(void)	imageBrowserSelectionDidChange: (IKImageBrowserView *)aBrowser
+-(void)	collectionView: (NSCollectionView *)collectionView didSelectItemsAtIndexPaths: (NSSet<NSIndexPath *> *)indexPaths
+{
+	[self selectionDidChange];
+}
+
+
+-(void)	collectionView: (NSCollectionView *)collectionView didDeselectItemsAtIndexPaths: (NSSet<NSIndexPath *> *)indexPaths
+{
+	[self selectionDidChange];
+}
+
+
+-(void)	selectionDidChange
 {
 	NSInteger							selectedIndex = [[mIconListView selectionIndexes] firstIndex];
 	if( selectedIndex != NSNotFound )
@@ -283,9 +292,8 @@ using namespace Carlson;
 		NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 		NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 		
-		[theImg lockFocus];
-			NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
-		[theImg unlockFocus];
+		CGImageRef imageRef = [theImg CGImageForProposedRect:NULL context:NULL hints:nil];
+		NSBitmapImageRep *bir = [[NSBitmapImageRep alloc] initWithCGImage: imageRef];
 		NSData	*	pngData = [bir representationUsingType: NSBitmapImageFileTypePNG properties: @{}];
 		[pngData writeToURL: imgFileURL atomically: YES];
 		
@@ -348,9 +356,8 @@ using namespace Carlson;
 			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 			
-			[theImg lockFocus];
-				NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
-			[theImg unlockFocus];
+			CGImageRef imageRef = [theImg CGImageForProposedRect:NULL context:NULL hints:nil];
+			NSBitmapImageRep *bir = [[NSBitmapImageRep alloc] initWithCGImage: imageRef];
 			NSData	*	pngData = [bir representationUsingType: NSBitmapImageFileTypePNG properties: @{}];
 			[pngData writeToURL: imgFileURL atomically: YES];
 			
@@ -376,9 +383,8 @@ using namespace Carlson;
 			NSString*	imgFileURLStr = [NSString stringWithUTF8String: filePath.c_str()];
 			NSURL*		imgFileURL = [NSURL URLWithString: imgFileURLStr];
 			
-			[theImg lockFocus];
-				NSBitmapImageRep	*	bir = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,theImg.size.width,theImg.size.height)];
-			[theImg unlockFocus];
+			CGImageRef imageRef = [theImg CGImageForProposedRect:NULL context:NULL hints:nil];
+			NSBitmapImageRep *bir = [[NSBitmapImageRep alloc] initWithCGImage: imageRef];
 			NSData	*	pngData = [bir representationUsingType: NSBitmapImageFileTypePNG properties: @{}];
 			[pngData writeToURL: imgFileURL atomically: YES];
 			

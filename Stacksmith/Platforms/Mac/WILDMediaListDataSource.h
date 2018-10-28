@@ -17,7 +17,6 @@ namespace Carlson
 };
 
 
-@class IKImageBrowserView;
 @class WILDMediaListDataSource;
 
 
@@ -29,18 +28,18 @@ namespace Carlson
 @end
 
 
-@interface WILDMediaListDataSource : NSObject
+@interface WILDMediaListDataSource : NSObject <NSCollectionViewDataSource, NSCollectionViewDelegate>
 {
 	Carlson::CDocument*		mDocument;			// This is who we get the icons from.
 	NSMutableArray*			mIcons;				// Cached lists of icon names/IDs.
-	IKImageBrowserView*		mIconListView;		// View in which we show the icons.
+	NSCollectionView*		mIconListView;		// View in which we show the icons.
 	NSTextField*			mImagePathField;	// Field where we show where the icon comes from.
 	id<WILDMediaListDataSourceDelegate>	mDelegate;
 	Carlson::TMediaType		mMediaType;			// Type of media to display, i.e. icons, cursors etc.
 }
 
 @property (assign,nonatomic) Carlson::CDocument*				document;
-@property (retain,nonatomic) IBOutlet IKImageBrowserView*		iconListView;
+@property (retain,nonatomic) IBOutlet NSCollectionView*			iconListView;
 @property (retain,nonatomic) IBOutlet NSTextField*				imagePathField;
 @property (assign,nonatomic) id<WILDMediaListDataSourceDelegate>	delegate;
 @property (assign,nonatomic) Carlson::TMediaType				mediaType;

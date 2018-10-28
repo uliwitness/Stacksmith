@@ -9,16 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class IKImageBrowserView;
-
-
-@interface WILDTemplateProjectPickerController : NSWindowController
+@interface WILDTemplateProjectPickerController : NSWindowController <NSCollectionViewDataSource>
 {
 	NSMutableArray	*	groups;
 	NSMutableArray	*	items;
 }
 
-@property (assign,nonatomic) IBOutlet IKImageBrowserView*	iconListView;
+@property (assign,nonatomic) IBOutlet NSCollectionView*	iconListView;
 @property (copy,nonatomic) void	(^callbackHandler)( NSString* inPickedFilePath );
 
 -(IBAction)	doOK: (id)sender;
