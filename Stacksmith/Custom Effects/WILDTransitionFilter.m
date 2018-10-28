@@ -51,8 +51,11 @@ static NSMutableDictionary<NSString*,CIKernel*>*	sFilterKernels = nil;
 			[self autorelease];
 			return nil;
 		}
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         NSArray     *kernels = [CIKernel kernelsWithString: code];
- 
+#pragma GCC diagnostic pop
+
         foundKernel = [kernels objectAtIndex: 0];
 		[sFilterKernels setObject: foundKernel forKey: kernelName];
     }
