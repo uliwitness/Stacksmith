@@ -15,7 +15,7 @@
 using namespace Carlson;
 
 
-@interface WILDWebBrowserDelegate : NSObject <WebFrameLoadDelegate>
+@interface WILDWebBrowserDelegate : NSObject <WKNavigationDelegate, WKUIDelegate>
 
 @property (assign,nonatomic) CWebBrowserPartMac*	owningBrowser;
 
@@ -28,19 +28,16 @@ using namespace Carlson;
 	[super dealloc];
 }
 
--(void)	webView: (WebView *)sender didFinishLoadForFrame: (WebFrame *)frame
+-(void)	webView: (WKWebView *)webView didFinishNavigation: (null_unspecified WKNavigation *)navigation
 {
-	if( frame == sender.mainFrame )
-	{
-		CAutoreleasePool		pool;
-		const char*	currURLStr = sender.mainFrame.dataSource.request.URL.absoluteString.UTF8String;
-		self.owningBrowser->SetCurrentURL( currURLStr );
-		self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "loadPage" );
-	}
+	CAutoreleasePool		pool;
+	const char*	currURLStr = webView.URL.absoluteString.UTF8String;
+	self.owningBrowser->SetCurrentURL( currURLStr );
+	self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "loadPage" );
 }
 
 
--(void)	webView: (WebView *)sender didFailLoadWithError: (NSError *)error forFrame: (WebFrame *)frame
+-(void)	webView: (WKWebView *)webView didFailNavigation: (null_unspecified WKNavigation *)navigation withError: (NSError *)error
 {
 	CAutoreleasePool		pool;
 	self.owningBrowser->SendMessage( NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); }, EMayGoUnhandled, "loadPage %s", error.localizedDescription.UTF8String );
@@ -59,7 +56,8 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	if( mView )
 	{
-		[mView setFrameLoadDelegate: nil];
+		[mView setNavigationDelegate: nil];
+		[mView setUIDelegate: nil];
 		[mView release];
 	}
 	if( !mMacDelegate )
@@ -67,9 +65,10 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 		mMacDelegate = [[WILDWebBrowserDelegate alloc] init];
 		mMacDelegate.owningBrowser = this;
 	}
-	mView = [[WebView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
+	mView = [[WKWebView alloc] initWithFrame: NSMakeRect(GetLeft(), GetTop(), GetRight() -GetLeft(), GetBottom() -GetTop())];
 	[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
-	[mView setFrameLoadDelegate: mMacDelegate];
+	[mView setNavigationDelegate: mMacDelegate];
+	[mView setUIDelegate: mMacDelegate];
 	[mView setWantsLayer: YES];
 	[mView.layer setShadowColor: [NSColor colorWithCalibratedRed: (mShadowColorRed / 65535.0) green: (mShadowColorGreen / 65535.0) blue: (mShadowColorBlue / 65535.0) alpha:(mShadowColorAlpha / 65535.0)].CGColor];
 	[mView.layer setShadowOffset: CGSizeMake(mShadowOffsetWidth, mShadowOffsetHeight)];
@@ -84,7 +83,8 @@ void	CWebBrowserPartMac::CreateViewIn( NSView* inSuperView )
 
 void	CWebBrowserPartMac::DestroyView()
 {
-	[mView setFrameLoadDelegate: nil];
+	[mView setNavigationDelegate: nil];
+	[mView setUIDelegate: nil];
 	[mView.animator removeFromSuperview];
 	[mView release];
 	mView = nil;
@@ -114,12 +114,12 @@ void	CWebBrowserPartMac::LoadCurrentURL( const std::string& inURL )
 	{
 		// CSS's rgb() is 0...255, we use 0...65535, so we divide by 65535/255, which is 257:
 		NSString* coloredBackgorundHTML = [NSString stringWithFormat: @"<html><head><title></title></head><body style=\"background-color: rgba(%d,%d,%d,%d);\"></body></html>",mFillColorRed / 257,mFillColorGreen / 257,mFillColorBlue / 257,mFillColorAlpha / 257];
-		[mView.mainFrame loadHTMLString: coloredBackgorundHTML baseURL: nil];
+		[mView loadHTMLString: coloredBackgorundHTML baseURL: nil];
 	}
 	else
 	{
 		NSURLRequest*	theRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithUTF8String: inURL.c_str()]]];
-		[mView.mainFrame loadRequest: theRequest];
+		[mView loadRequest: theRequest];
 	}
 }
 

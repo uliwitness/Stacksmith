@@ -262,8 +262,8 @@
 		5542CFAB113B033800555C64 /* WILDBackgroundModeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5542CFAA113B033800555C64 /* WILDBackgroundModeIndicator.m */; };
 		55464D2B1EF872FC00AB920F /* CScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55464D2A1EF872FC00AB920F /* CScreen.mm */; };
 		55469F0C1A9A784E0072A721 /* EditTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55469F0B1A9A784E0072A721 /* EditTextTool.tiff */; };
-		554AE1A51E9A628100B5E97D /* UKAudioStreamBasicDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 554AE1A21E9A628100B5E97D /* UKAudioStreamBasicDescription.m */; };
-		554AE1A61E9A628100B5E97D /* UKSoundFileRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 554AE1A41E9A628100B5E97D /* UKSoundFileRecorder.m */; };
+		554AE1A51E9A628100B5E97D /* UKAudioStreamBasicDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 554AE1A21E9A628100B5E97D /* UKAudioStreamBasicDescription.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		554AE1A61E9A628100B5E97D /* UKSoundFileRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 554AE1A41E9A628100B5E97D /* UKSoundFileRecorder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		554AE1B31E9A7DF500B5E97D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554AE1B21E9A7DF500B5E97D /* CoreAudio.framework */; };
 		554CC83C1CD7EC0200D5D7B6 /* CCanvas.mm in Sources */ = {isa = PBXBuildFile; fileRef = 554CC83A1CD7EC0200D5D7B6 /* CCanvas.mm */; };
 		554CC8471CD8033B00D5D7B6 /* CImageCanvas.mm in Sources */ = {isa = PBXBuildFile; fileRef = 554CC8451CD8033B00D5D7B6 /* CImageCanvas.mm */; };
@@ -514,6 +514,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 5AE13FB31E0D9E07000D2C2C;
 			remoteInfo = generate_appcast;
+		};
+		559BC1E92186357F00FDBB3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5AB8F19F214DA72000A1187F;
+			remoteInfo = generate_keys;
+		};
+		559BC1EB2186357F00FDBB3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5A5ADED7214EDE4900DF0099;
+			remoteInfo = sign_update;
 		};
 		55C9F964136E1E950096FC4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2112,6 +2126,8 @@
 				554E146A1CAF2D5F00430706 /* UI Tests.xctest */,
 				5500FDA91E4FA66800BD6BA7 /* fileop */,
 				5593D0C41E679C2600E7F31D /* generate_appcast */,
+				559BC1EA2186357F00FDBB3D /* generate_keys */,
+				559BC1EC2186357F00FDBB3D /* sign_update */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2280,6 +2296,20 @@
 			fileType = "compiled.mach-o.executable";
 			path = generate_appcast;
 			remoteRef = 5593D0C31E679C2600E7F31D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		559BC1EA2186357F00FDBB3D /* generate_keys */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = generate_keys;
+			remoteRef = 559BC1E92186357F00FDBB3D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		559BC1EC2186357F00FDBB3D /* sign_update */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = sign_update;
+			remoteRef = 559BC1EB2186357F00FDBB3D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		55C9F965136E1E950096FC4D /* Sparkle.framework */ = {

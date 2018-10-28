@@ -15,9 +15,7 @@
 #import "WILDWebBrowserInfoViewController.h"
 
 
-@class WebView;
-
-
+@class WKWebView;
 @class WILDWebBrowserDelegate;
 
 
@@ -49,8 +47,8 @@ public:
 protected:
 	~CWebBrowserPartMac()	{ DestroyView(); };
 	
-	WebView				*	mView;
-	WILDWebBrowserDelegate*	mMacDelegate;
+	WKWebView				*mView;
+	WILDWebBrowserDelegate	*mMacDelegate;
 };
 
 
