@@ -19,7 +19,7 @@
 @class WILDTextView;
 @class WILDTableView;
 
-@interface WILDViewFactory : NSViewController
+@interface WILDViewFactory : NSObject
 
 +(WILDButtonView*)		systemButton;	// with NSButtonCell.
 +(WILDButtonView*)		shapeButton;	// with WILDButtonCell.

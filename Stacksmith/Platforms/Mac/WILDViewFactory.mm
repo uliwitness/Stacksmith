@@ -17,11 +17,17 @@ static WILDViewFactory*		sViewFactory = nil;
 
 @interface WILDViewFactory ()
 
-@property (assign,nonatomic) IBOutlet NSButton* systemButton;
+@property (assign,nonatomic) IBOutlet WILDButtonView* systemButton;
 @property (assign,nonatomic) IBOutlet WILDButtonView* shapeButton;
 @property (assign,nonatomic) IBOutlet WILDScrollView* textViewInContainer;
 @property (assign,nonatomic) IBOutlet NSPopUpButton* popUpButton;
 @property (assign,nonatomic) IBOutlet WILDScrollView* tableViewInContainer;
+
+@property (retain, nonatomic) NSNib* systemButtonNib;
+@property (retain, nonatomic) NSNib* shapeButtonNib;
+@property (retain, nonatomic) NSNib* popUpButtonNib;
+@property (retain, nonatomic) NSNib* textViewInContainerNib;
+@property (retain, nonatomic) NSNib* tableViewInContainerNib;
 
 @end
 
@@ -32,47 +38,75 @@ static WILDViewFactory*		sViewFactory = nil;
 {
 	if( !sViewFactory )
 	{
-		sViewFactory = [[WILDViewFactory alloc] initWithNibName: @"WILDViewFactory" bundle: nil];
-		[sViewFactory view];
+		sViewFactory = [[WILDViewFactory alloc] init];
 	}
 	return sViewFactory;
 }
 
 
-+(id)	anotherInstanceOfView: (NSView*)inView
+-(id) init
 {
-	return [NSKeyedUnarchiver unarchivedObjectOfClass: [NSView class] fromData: [NSKeyedArchiver archivedDataWithRootObject: inView requiringSecureCoding:NO error:NULL] error:NULL];
+	self = [super init];
+	if( self )
+	{
+		@try
+		{
+			_systemButtonNib = [[NSNib alloc] initWithNibNamed: @"WILDViewFactorySystemButton" bundle: [NSBundle bundleForClass: self.class]];
+			_shapeButtonNib = [[NSNib alloc] initWithNibNamed: @"WILDViewFactoryShapeButton" bundle: [NSBundle bundleForClass: self.class]];
+			_popUpButtonNib = [[NSNib alloc] initWithNibNamed: @"WILDViewFactoryPopUpButton" bundle: [NSBundle bundleForClass: self.class]];
+			_textViewInContainerNib = [[NSNib alloc] initWithNibNamed: @"WILDViewFactoryTextViewInContainer" bundle: [NSBundle bundleForClass: self.class]];
+			_tableViewInContainerNib = [[NSNib alloc] initWithNibNamed: @"WILDViewFactoryTableViewInContainer" bundle: [NSBundle bundleForClass: self.class]];
+		}
+		@catch(NSException* localException)
+		{
+			NSLog(@"exception loading XIB: %@", localException);
+		}
+	}
+	return self;
 }
 
 
 +(WILDButtonView*)	systemButton
 {
-	return [self anotherInstanceOfView: [[self sharedViewFactory] systemButton]];
+	NSArray* topLevelObjects = nil;
+	[self.sharedViewFactory.systemButtonNib instantiateWithOwner: self.sharedViewFactory topLevelObjects: &topLevelObjects];
+	WILDButtonView* result = [[self.sharedViewFactory.systemButton retain] autorelease];
+	return result;
 }
 
 
 +(WILDButtonView*)	shapeButton
 {
-	return [self anotherInstanceOfView: [[self sharedViewFactory] shapeButton]];
+	NSArray* topLevelObjects = nil;
+	[self.sharedViewFactory.shapeButtonNib instantiateWithOwner: self.sharedViewFactory topLevelObjects: &topLevelObjects];
+	WILDButtonView* result = [[self.sharedViewFactory.shapeButton retain] autorelease];
+	return result;
 }
 
 
 +(WILDTextView*)		textViewInContainer
 {
-	WILDScrollView	*	scroller = [self anotherInstanceOfView: [[self sharedViewFactory] textViewInContainer]];
-	return scroller.documentView;
+	NSArray* topLevelObjects = nil;
+	[self.sharedViewFactory.textViewInContainerNib instantiateWithOwner: self.sharedViewFactory topLevelObjects: &topLevelObjects];
+	NSScrollView* result = [[self.sharedViewFactory.textViewInContainer retain] autorelease];
+	return result.documentView;
 }
 
 
 +(NSPopUpButton*)	popUpButton
 {
-	return [self anotherInstanceOfView: [[self sharedViewFactory] popUpButton]];
+	NSArray* topLevelObjects = nil;
+	[self.sharedViewFactory.popUpButtonNib instantiateWithOwner: self.sharedViewFactory topLevelObjects: &topLevelObjects];
+	NSPopUpButton* result = [[self.sharedViewFactory.popUpButton retain] autorelease];
+	return result;
 }
 
 +(WILDTableView*)	tableViewInContainer
 {
-	WILDScrollView	*	scroller = [self anotherInstanceOfView: [[self sharedViewFactory] tableViewInContainer]];
-	return scroller.documentView;
+	NSArray* topLevelObjects = nil;
+	[self.sharedViewFactory.tableViewInContainerNib instantiateWithOwner: self.sharedViewFactory topLevelObjects: &topLevelObjects];
+	NSScrollView* result = [[self.sharedViewFactory.tableViewInContainer retain] autorelease];
+	return result.documentView;
 }
 
 @end

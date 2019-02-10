@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="WILDViewFactory">
+            <connections>
+                <outlet property="popUpButton" destination="rTy-LC-svo" id="Tgq-ru-PFU"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <popUpButton wantsLayer="YES" verticalHuggingPriority="750" id="rTy-LC-svo" customClass="WILDPopUpButtonView">
+            <rect key="frame" x="0.0" y="0.0" width="101" height="26"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <shadow key="shadow" blurRadius="8">
+                <size key="offset" width="4" height="4"/>
+                <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            </shadow>
+            <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="oLM-wa-kDH" id="hQO-SO-0JP">
+                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="menu"/>
+                <menu key="menu" title="OtherViews" id="ijG-eb-Xlv">
+                    <items>
+                        <menuItem title="Item 1" state="on" id="oLM-wa-kDH"/>
+                        <menuItem title="Item 2" id="vaJ-ld-jvE"/>
+                        <menuItem title="Item 3" id="1rN-Oe-ui4"/>
+                    </items>
+                </menu>
+            </popUpButtonCell>
+            <point key="canvasLocation" x="92" y="-61"/>
+        </popUpButton>
+    </objects>
+</document>

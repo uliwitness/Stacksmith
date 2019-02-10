@@ -373,7 +373,6 @@
 		55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC5071744525F0084AAA9 /* CardIcon.icns */; };
 		55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC5081744525F0084AAA9 /* StackIcon.icns */; };
 		55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */; };
-		55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */; };
 		55AF101F18B6BFFD00819AE9 /* WILDScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55AF101E18B6BFFD00819AE9 /* WILDScrollView.mm */; };
 		55AF107A18B8F5D600819AE9 /* CRefCountedObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7B118709CAF002F7CB2 /* CRefCountedObject.cpp */; };
 		55B063E61A84369800DE26FB /* CommandHandlerIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B063E41A84369800DE26FB /* CommandHandlerIcon.tiff */; };
@@ -388,6 +387,11 @@
 		55B29CA617276E8E00B38E75 /* UKNibOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29CA317276E8E00B38E75 /* UKNibOwner.m */; };
 		55B29CA717276E8E00B38E75 /* UKSystemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B29CA517276E8E00B38E75 /* UKSystemInfo.m */; };
 		55B29CA91727731800B38E75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B29CA81727731800B38E75 /* AddressBook.framework */; };
+		55B55C1D22104EE4009CDFFC /* WILDViewFactoryTextViewInContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B55C1822104EE4009CDFFC /* WILDViewFactoryTextViewInContainer.xib */; };
+		55B55C2322105313009CDFFC /* WILDViewFactoryTableViewInContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B55C1F22105312009CDFFC /* WILDViewFactoryTableViewInContainer.xib */; };
+		55B55C2422105313009CDFFC /* WILDViewFactoryPopUpButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B55C2022105312009CDFFC /* WILDViewFactoryPopUpButton.xib */; };
+		55B55C2522105313009CDFFC /* WILDViewFactorySystemButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B55C2122105312009CDFFC /* WILDViewFactorySystemButton.xib */; };
+		55B55C2622105313009CDFFC /* WILDViewFactoryShapeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B55C2222105313009CDFFC /* WILDViewFactoryShapeButton.xib */; };
 		55B9225D11675D270073EC6C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B9225C11675D270073EC6C /* Quartz.framework */; };
 		55BA587E1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 55BA587D1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem */; };
 		55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC02E1116B2ADE00BB094E /* NoIcon.png */; };
@@ -1082,7 +1086,6 @@
 		55ADC5071744525F0084AAA9 /* CardIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CardIcon.icns; path = Resources/CardIcon.icns; sourceTree = "<group>"; };
 		55ADC5081744525F0084AAA9 /* StackIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = StackIcon.icns; path = Resources/StackIcon.icns; sourceTree = "<group>"; };
 		55ADC50E17445DDB0084AAA9 /* BackgroundEditIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = BackgroundEditIcon.icns; path = Resources/BackgroundEditIcon.icns; sourceTree = "<group>"; };
-		55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactory.xib; path = Windows/WILDViewFactory.xib; sourceTree = "<group>"; };
 		55AF101D18B6BFFC00819AE9 /* WILDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDScrollView.h; path = Platforms/Mac/WILDScrollView.h; sourceTree = "<group>"; };
 		55AF101E18B6BFFD00819AE9 /* WILDScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDScrollView.mm; path = Platforms/Mac/WILDScrollView.mm; sourceTree = "<group>"; };
 		55B063E41A84369800DE26FB /* CommandHandlerIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = CommandHandlerIcon.tiff; path = Resources/CommandHandlerIcon.tiff; sourceTree = "<group>"; };
@@ -1102,6 +1105,11 @@
 		55B29CA417276E8E00B38E75 /* UKSystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKSystemInfo.h; path = ../UliKit/UKSystemInfo.h; sourceTree = "<group>"; };
 		55B29CA517276E8E00B38E75 /* UKSystemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKSystemInfo.m; path = ../UliKit/UKSystemInfo.m; sourceTree = "<group>"; };
 		55B29CA81727731800B38E75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = ../../../../../System/Library/Frameworks/AddressBook.framework; sourceTree = "<group>"; };
+		55B55C1822104EE4009CDFFC /* WILDViewFactoryTextViewInContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactoryTextViewInContainer.xib; path = Windows/WILDViewFactoryTextViewInContainer.xib; sourceTree = "<group>"; };
+		55B55C1F22105312009CDFFC /* WILDViewFactoryTableViewInContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactoryTableViewInContainer.xib; path = Windows/WILDViewFactoryTableViewInContainer.xib; sourceTree = "<group>"; };
+		55B55C2022105312009CDFFC /* WILDViewFactoryPopUpButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactoryPopUpButton.xib; path = Windows/WILDViewFactoryPopUpButton.xib; sourceTree = "<group>"; };
+		55B55C2122105312009CDFFC /* WILDViewFactorySystemButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactorySystemButton.xib; path = Windows/WILDViewFactorySystemButton.xib; sourceTree = "<group>"; };
+		55B55C2222105313009CDFFC /* WILDViewFactoryShapeButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDViewFactoryShapeButton.xib; path = Windows/WILDViewFactoryShapeButton.xib; sourceTree = "<group>"; };
 		55B9225C11675D270073EC6C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		55BA587D1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = stacksmith_public_sparkle_dsa_key.pem; path = Resources/stacksmith_public_sparkle_dsa_key.pem; sourceTree = "<group>"; };
 		55BC02E1116B2ADE00BB094E /* NoIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoIcon.png; path = Resources/NoIcon.png; sourceTree = "<group>"; };
@@ -1450,7 +1458,11 @@
 				552386BD1883E1AF00D7FAB3 /* CMacPartBase.mm */,
 				552386C31883E2DF00D7FAB3 /* WILDViewFactory.h */,
 				552386C41883E2DF00D7FAB3 /* WILDViewFactory.mm */,
-				55ADC796187D3AE700FC1909 /* WILDViewFactory.xib */,
+				55B55C2022105312009CDFFC /* WILDViewFactoryPopUpButton.xib */,
+				55B55C2222105313009CDFFC /* WILDViewFactoryShapeButton.xib */,
+				55B55C2122105312009CDFFC /* WILDViewFactorySystemButton.xib */,
+				55B55C1F22105312009CDFFC /* WILDViewFactoryTableViewInContainer.xib */,
+				55B55C1822104EE4009CDFFC /* WILDViewFactoryTextViewInContainer.xib */,
 				552386C71883E7C800D7FAB3 /* CButtonPartMac.h */,
 				552386C61883E7C800D7FAB3 /* CButtonPartMac.mm */,
 				552386B1188335A000D7FAB3 /* WILDButtonCell.h */,
@@ -2361,6 +2373,7 @@
 				55BFEE1F137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel in Resources */,
 				552FF1FB113F23F3005742C8 /* PAT_1.pbm in Resources */,
 				552FF1FC113F23F3005742C8 /* PAT_2.pbm in Resources */,
+				55B55C1D22104EE4009CDFFC /* WILDViewFactoryTextViewInContainer.xib in Resources */,
 				552FF1FD113F23F3005742C8 /* PAT_3.pbm in Resources */,
 				552FF1FE113F23F3005742C8 /* PAT_4.pbm in Resources */,
 				552FF1FF113F23F3005742C8 /* PAT_5.pbm in Resources */,
@@ -2386,6 +2399,7 @@
 				5593D0C91E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib in Resources */,
 				552FF20D113F23F3005742C8 /* PAT_19.pbm in Resources */,
 				552FF20E113F23F3005742C8 /* PAT_20.pbm in Resources */,
+				55B55C2322105313009CDFFC /* WILDViewFactoryTableViewInContainer.xib in Resources */,
 				552FF20F113F23F3005742C8 /* PAT_21.pbm in Resources */,
 				55405B78189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib in Resources */,
 				552FF210113F23F3005742C8 /* PAT_22.pbm in Resources */,
@@ -2440,13 +2454,16 @@
 				55F34D3B136A50D600E8588D /* ICON_26425.pdf in Resources */,
 				55F34D3D136A554500E8588D /* ICON_31885.pdf in Resources */,
 				55F34D3F136A555300E8588D /* ICON_1000.pdf in Resources */,
+				55B55C2622105313009CDFFC /* WILDViewFactoryShapeButton.xib in Resources */,
 				5500FDC21E50989700BD6BA7 /* MenuItemIconSmall@2x.png in Resources */,
+				55B55C2422105313009CDFFC /* WILDViewFactoryPopUpButton.xib in Resources */,
 				55039F43136B52C80082E32E /* brush01.png in Resources */,
 				55B063E61A84369800DE26FB /* CommandHandlerIcon.tiff in Resources */,
 				55039F44136B52C80082E32E /* brush02.png in Resources */,
 				55039F45136B52C80082E32E /* brush03.png in Resources */,
 				5500FDC41E50989700BD6BA7 /* MenuIconSmall.png in Resources */,
 				55039F46136B52C80082E32E /* brush04.png in Resources */,
+				55B55C2522105313009CDFFC /* WILDViewFactorySystemButton.xib in Resources */,
 				55039F47136B52C80082E32E /* brush05.png in Resources */,
 				55039F48136B52C80082E32E /* brush06.png in Resources */,
 				55039F49136B52C80082E32E /* brush07.png in Resources */,
@@ -2463,7 +2480,6 @@
 				55039F51136B52C80082E32E /* brush15.png in Resources */,
 				55039F52136B52C80082E32E /* brush16.png in Resources */,
 				5593D0591E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib in Resources */,
-				55ADC797187D3AE700FC1909 /* WILDViewFactory.xib in Resources */,
 				55039F53136B52C80082E32E /* brush17.png in Resources */,
 				55039F54136B52C80082E32E /* brush18.png in Resources */,
 				55039F55136B52C80082E32E /* brush19.png in Resources */,
