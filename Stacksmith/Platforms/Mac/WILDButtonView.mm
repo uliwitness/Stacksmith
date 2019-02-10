@@ -173,15 +173,15 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 		{
 			switch( [evt type] )
 			{
-				 case NSEventMaskLeftMouseUp:
-				 case NSEventMaskRightMouseUp:
-				 case NSEventMaskOtherMouseUp:
+				 case NSEventTypeLeftMouseUp:
+				 case NSEventTypeRightMouseUp:
+				 case NSEventTypeOtherMouseUp:
 					keepLooping = NO;
 					break;
 				
-				case NSEventMaskLeftMouseDragged:
-				case NSEventMaskRightMouseDragged:
-				case NSEventMaskOtherMouseDragged:
+				case NSEventTypeLeftMouseDragged:
+				case NSEventTypeRightMouseDragged:
+				case NSEventTypeOtherMouseDragged:
 				{
 					newIsInside = [[self cell] hitTestForEvent: evt inRect: [self bounds] ofView: self] != NSCellHitNone;
 					if( isInside != newIsInside )

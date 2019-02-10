@@ -128,15 +128,15 @@ using namespace Carlson;
 		{
 			switch( [evt type] )
 			{
-				case NSEventMaskLeftMouseUp:
-				case NSEventMaskRightMouseUp:
-				case NSEventMaskOtherMouseUp:
+				case NSEventTypeLeftMouseUp:
+				case NSEventTypeRightMouseUp:
+				case NSEventTypeOtherMouseUp:
 					keepLooping = NO;
 					break;
 					
-				case NSEventMaskLeftMouseDragged:
-				case NSEventMaskRightMouseDragged:
-				case NSEventMaskOtherMouseDragged:
+				case NSEventTypeLeftMouseDragged:
+				case NSEventTypeRightMouseDragged:
+				case NSEventTypeOtherMouseDragged:
 				{
 					newIsInside = [self.layer preciselyContainsPoint: [self.layer convertPoint: [evt locationInWindow] fromLayer: nil]];
 					if( isInside != newIsInside )
