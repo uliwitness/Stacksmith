@@ -1,0 +1,396 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/1998/REC-html40-19980424/loose.dtd">
+<html>
+<head>
+    <title>LEORemoteDebugger</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="generator" content="HeaderDoc">
+<meta name="xcode-display" content="render">
+<style type="text/css"><!--.char {background: #ffffff; color:#666666;}.comment {background:#ffffff; color:#ff0000}.function {background:#ffffff; color:#0000dd;}.keyword {background:#ffffff; color:#0000ff;}.number {background: #ffffff; color:#000000;}.param {background:#ffffff; color:#000000;}.preprocessor {background:#ffffff; color:#236e25}.string {background: #ffffff; color:#666666;}.template {background:#ffffff; color:#761550;}.type {background:#ffffff; color:#0000ff;}.var {background:#ffffff; color:#000000;}body {border: 0px; margin: 0px;}div {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}td {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}span.hd_tocAccessSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroupSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroup { display: block; font-weight: bold; font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; margin-left: 0px; padding-left: 40px; }span.hd_tocGroup + span.hd_tocAccess { padding-top: 5px; }td.toc_contents_text {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; }li.tocSubEntry {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}p {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}a:link {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:active {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}h2.h2tight { margin-top: 0px; padding-top: 0px; }h1 { margin-top: 13px; padding-top: 0px; }h4 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: tiny; font-weight: bold;}h5 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: 10.1pt; font-weight: bold;}pre {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666; font-size: 10pt;}pre a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}pre a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}body  {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt; padding-left: 0px; padding-top: 0px; margin-left: 0px; margin-top: 0px; border: none; }#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }.afterName { display: none; }.list_indent { margin-left: 40px; }.declaration_indent { margin-left: 40px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; min-height: 12px; vertical-align: middle; }.declaration_indent pre { margin-top: 20px; padding-top: 0px; margin-bottom: 20px; padding-bottom: 0px; }.gapBeforeFooter { display: none; }hr { height: 0px; min-height: 0px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #909090;}hr.afterHeader { display: none }.param_group_indent { margin-left: 25px; }.param_indent { margin-left: 40px; margin-top: 0px; padding-top: 0px; }.param_indent dl { margin-top: 4px; padding-top: 0px; }dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.param_indent dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.group_indent { margin-left: 40px; }.group_desc_indent { margin-left: 20px; }.warning_indent { margin-left: 40px; }.important_indent { margin-left: 40px; }.note_indent { margin-left: 40px; }h3 {       color: #3C4C6C;}.tight {       margin-top: 2px; margin-bottom: 0px;       padding-top: 0px; padding-bottom: 0px;}h3 a {       color: #3C4C6C;	font-size: 16px;	font-style: normal;	font-variant: normal;	font-weight: bold;	height: 0px;	line-height: normal;}.hd_tocAccess { display: block; margin-left: 40px; font-style: italic; font-size: 10px; font-weight: normal; color: #303030; }.tocSubheading { margin-bottom: 4px; }--></style>
+<style><!--
+body {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+.toc_contents_text {
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+ul.tocSubEntryList li.tocSubEntry {
+    list-style: none;
+}
+
+#colorbox {
+		display: none;
+}
+.spec_sheet_line {
+		margin-bottom: 1px;
+}
+.collapsible {
+		display: none;
+}
+.toc_leadspace {
+		width: 10; min-width: 10;
+}
+.disclosure_triangle_td {
+		width: 14; min-width: 14;
+		font-size: 10px;
+		vertical-align: middle;
+}
+.specbox td {
+		font-size: 13px;
+}
+.specbox td a {
+		font-size: 13px;
+}
+.specbox td code {
+		font-size: 13px;
+}
+.specbox td tt {
+		font-size: 13px;
+}
+.specbox td pre {
+		font-size: 13px;
+}
+.specbox a {
+		font-size: 12px;
+}
+.disclosure_triangle_td a {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:link {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:active {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:visited:hover {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:hover {
+		text-decoration: none;
+}
+.hd_toc_box {
+		padding-top: 10px;
+		padding-right: 15px;
+}.tocSeparator {
+		margin-top: 15px;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+}
+.tocSubEntryList {
+		margin-left: 0px;
+		padding-left: 40px;
+		padding-top: 0px;
+		margin-top: 2px;
+		padding-bottom: 0px;
+		margin-bottom: 8px;
+}
+.hd_toc_heading_table {
+		margin-top: 2px;
+		margin-bottom: 2px;
+}
+.hd_toc_entry_table {
+		margin-top: 2px;
+		margin-bottom: 2px;
+}
+.tocSubEntry {
+		margin-left: 0px;
+		padding-left: 0px;
+		margin-top: 0px;
+		margin-bottom: 1px;
+}
+.tocSubEntry a {
+		font-size: 10pt;
+}
+.tocSubheading {
+		padding-left: 14px;
+		margin-left: 0px;
+		margin-top: 5px;
+		padding-top: 0px;
+		font-size: 16px;
+		color: #808080;
+}
+
+#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }
+#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }
+
+#tocMenu {
+		border-right: 1px solid #c0c0c0;
+		background-color: #f4f4ff;
+		top:0px;
+		left:0px;
+		width:230px;
+		height:100%;
+}
+#bodyContents {
+		width: auto;
+		padding-left: 15px;
+}
+--></style>
+<style id="disable_before_iOS_5"><!--
+#tocMenu {
+		position: fixed;
+		height: 100%;
+		overflow: auto;
+}
+#bodyContents {
+		width: auto;
+		left: 235px;
+		right: 0;
+		padding-left: 15px;
+		position: fixed;
+		height: 100%;
+		overflow-y: scroll;
+}
+--></style>
+<script language="JavaScript" type="text/javascript"><!--
+    if (navigator.platform && (navigator.platform.match(/iPad/) || navigator.platform.match(/iPhone/) || navigator.platform.match(/iPod/))) {
+        if (navigator.userAgent.match(/OS 1(_\d)+/) ||
+            navigator.userAgent.match(/OS 2(_\d)+/) ||
+            navigator.userAgent.match(/OS 3(_\d)+/) ||
+            navigator.userAgent.match(/OS 4(_\d)+/)) {
+                /* Earlier iOS versions require different scrolling gestures with position: fixed. */
+                var del_style_elt = document.getElementById("disable_before_iOS_5");
+                if (del_style_elt) del_style_elt.parentNode.removeChild(del_style_elt);
+        }
+    }
+// --></script>
+<script language="JavaScript" type="text/javascript"><!--
+function getNewHTTPObject()
+{
+        var xmlhttp;
+
+        /** Special IE only code ... */
+        /*@cc_on
+          @if (@_jscript_version >= 5)
+              try
+              {
+                  xmlhttp = new ActiveXObject('Msxml2.XMLHTTP');
+              }
+              catch (e)
+              {
+                  try
+                  {
+                      xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+                  }
+                  catch (E)
+                  {
+                      xmlhttp = false;
+                  }
+             }
+          @else
+             xmlhttp = false;
+        @end @*/
+
+        /** Every other browser on the planet */
+        if (!xmlhttp && typeof XMLHttpRequest != 'undefined')
+        {
+            try
+            {
+                xmlhttp = new XMLHttpRequest();
+            }
+            catch (e)
+            {
+                xmlhttp = false;
+            }
+        }
+
+        return xmlhttp;
+}
+
+function hidetoc() {
+	var toc = document.getElementById('tocMenu');
+	var src = toc.getAttribute('src');
+	var xhr = getNewHTTPObject();
+	xhr.open('GET', src, true);
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4) {
+			var toc = document.getElementById('tocMenu');
+			toc.innerHTML = xhr.responseText;
+		}
+	}
+	xhr.send(null);
+	var origURL = parent.document.URL;
+	var contentURL = origURL.substring(origURL.indexOf('?')+1, origURL.length);
+	if (contentURL.length == origURL.length) {
+		jumpPos = origURL.substring(origURL.indexOf('#')+1, origURL.length);
+	}
+	if (contentURL == "hidetoc") {
+		var body = document.getElementById('bodyContents');
+		if (toc && body) {
+			toc.style.display = 'none';
+			body.style.marginLeft = '0px';
+		}
+	}
+}
+
+function disclosure_triangle(elt) {
+   var linkelt = elt;
+   while (elt && elt.tagName != 'TABLE') { elt = elt.parentNode;}
+   if (!elt) { return; }
+   while (elt && elt.tagName != 'DIV') { elt = elt.nextSibling;}
+   if (!elt) { return; }
+   if (parseInt(linkelt.getAttribute('state'))) {
+      // It's open.  Close it
+      linkelt.innerHTML = '&#x25B7;';
+      linkelt.setAttribute('state', 0);
+      linkelt.setAttribute('class', 'closed_disclosure_triangle');
+      elt.style.display = 'none';
+   } else {
+      // It's closed.  Open it
+      linkelt.innerHTML = '&#x25BC;';
+      linkelt.setAttribute('state', 1);
+      linkelt.setAttribute('class', 'open_disclosure_triangle');
+      elt.style.display = 'block';
+   }
+}
+--></script>
+<style type="text/css"><!--.char {background: #ffffff; color:#666666;}.comment {background:#ffffff; color:#ff0000}.function {background:#ffffff; color:#0000dd;}.keyword {background:#ffffff; color:#0000ff;}.number {background: #ffffff; color:#000000;}.param {background:#ffffff; color:#000000;}.preprocessor {background:#ffffff; color:#236e25}.string {background: #ffffff; color:#666666;}.template {background:#ffffff; color:#761550;}.type {background:#ffffff; color:#0000ff;}.var {background:#ffffff; color:#000000;}body {border: 0px; margin: 0px;}div {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}td {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}span.hd_tocAccessSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroupSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroup { display: block; font-weight: bold; font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; margin-left: 0px; padding-left: 40px; }span.hd_tocGroup + span.hd_tocAccess { padding-top: 5px; }td.toc_contents_text {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; }li.tocSubEntry {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}p {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}a:link {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:active {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}h2.h2tight { margin-top: 0px; padding-top: 0px; }h1 { margin-top: 13px; padding-top: 0px; }h4 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: tiny; font-weight: bold;}h5 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: 10.1pt; font-weight: bold;}pre {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666; font-size: 10pt;}pre a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}pre a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}body  {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt; padding-left: 0px; padding-top: 0px; margin-left: 0px; margin-top: 0px; border: none; }#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }.afterName { display: none; }.list_indent { margin-left: 40px; }.declaration_indent { margin-left: 40px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; min-height: 12px; vertical-align: middle; }.declaration_indent pre { margin-top: 20px; padding-top: 0px; margin-bottom: 20px; padding-bottom: 0px; }.gapBeforeFooter { display: none; }hr { height: 0px; min-height: 0px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #909090;}hr.afterHeader { display: none }.param_group_indent { margin-left: 25px; }.param_indent { margin-left: 40px; margin-top: 0px; padding-top: 0px; }.param_indent dl { margin-top: 4px; padding-top: 0px; }dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.param_indent dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.group_indent { margin-left: 40px; }.group_desc_indent { margin-left: 20px; }.warning_indent { margin-left: 40px; }.important_indent { margin-left: 40px; }.note_indent { margin-left: 40px; }h3 {       color: #3C4C6C;}.tight {       margin-top: 2px; margin-bottom: 0px;       padding-top: 0px; padding-bottom: 0px;}h3 a {       color: #3C4C6C;	font-size: 16px;	font-style: normal;	font-variant: normal;	font-weight: bold;	height: 0px;	line-height: normal;}.hd_tocAccess { display: block; margin-left: 40px; font-style: italic; font-size: 10px; font-weight: normal; color: #303030; }.tocSubheading { margin-bottom: 4px; }--></style>
+</head>
+<body bgcolor="#ffffff" onload="hidetoc();">
+<!-- headerDoc=Header;  uid=//leo_ref/doc/header/LEORemoteDebugger.h;   name=LEORemoteDebugger -->
+<a name="//leo_ref/doc/header/LEORemoteDebugger.h"></a>
+<table id="hd_outermost_table" height="100%" width="100%"><tr>
+<td valign="top" id="tocMenu" src="toc.html"></td>
+<td id="bodyContents" valign="top">
+<a name="top"></a>
+<h1><a name="LEORemoteDebugger">LEORemoteDebugger</a></h1>
+<div class="spec_sheet_info_box"><table cellspacing="0" class="specbox">
+<tr>
+<td scope="row"><b>Includes:</b></td>
+<td><div style="margin-bottom:1px"><div class="content_text">
+<a machinegenerated="true" href="../LEOInterpreter_h/index.html#//leo_ref/doc/header/LEOInterpreter.h" logicalPath="//leo_ref/doc/header/LEOInterpreter.h" target="_top">"LEOInterpreter.h"</a></div></div></td>
+</tr>
+</table></div>
+<h2>Introduction</h2>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/doc/header/LEORemoteDebugger.h;name=start --><p>These are hooks and utility functions for communicating with the ForgeDebugger
+application that can be used to analyze your bytecode while it is running using
+a GUI.<!-- headerDoc=discussion;uid=//leo_ref/doc/header/LEORemoteDebugger.h;name=end --><!-- end discussion -->
+</p>
+<hr class="afterClassOrHeaderInfo">
+<br><a name="HeaderDoc_functions"></a>
+<h2 class="h2tight">Functions</h2>
+<dl>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOInitRemoteDebugger" target="_top">LEOInitRemoteDebugger</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEORemoteDebuggerAddBreakpoint" target="_top">LEORemoteDebuggerAddBreakpoint</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEORemoteDebuggerAddFile" target="_top">LEORemoteDebuggerAddFile</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEORemoteDebuggerPreInstructionProc" target="_top">LEORemoteDebuggerPreInstructionProc</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEORemoteDebuggerPrompt" target="_top">LEORemoteDebuggerPrompt</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint" target="_top">LEORemoteDebuggerRemoveBreakpoint</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOInitRemoteDebugger;   name=LEOInitRemoteDebugger -->
+<a name="//leo_ref/c/func/LEOInitRemoteDebugger"></a>
+<h3><a name="LEOInitRemoteDebugger">LEOInitRemoteDebugger</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOInitRemoteDebugger;name=start --><!-- a logicalPath="//leo_ref/c/cl/bool //leo_ref/c/tdef/bool //leo_ref/c/tag/bool //leo_ref/c/struct/bool //leo_ref/c/intf/bool //leo_ref/doc/anysymbol/bool" machineGenerated="true" --><span class="type">bool</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOInitRemoteDebugger" logicalPath="//leo_ref/c/instm/LEOInitRemoteDebugger //leo_ref/c/clm/LEOInitRemoteDebugger //leo_ref/c/intfcm/LEOInitRemoteDebugger //leo_ref/c/intfm/LEOInitRemoteDebugger //leo_ref/c/func/LEOInitRemoteDebugger" target="_top"><span class="function">LEOInitRemoteDebugger</span></a>(
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><span class="param">inHostName</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOInitRemoteDebugger;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOInitRemoteDebugger;name=start --><p>Initialize the debugger and establish a connection to the debugger process.
+To reconnect after a failed connection, pass NULL as the inHostName (it'll
+use the host name from the previous attempt). <!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOInitRemoteDebugger;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEORemoteDebuggerAddBreakpoint;   name=LEORemoteDebuggerAddBreakpoint -->
+<a name="//leo_ref/c/func/LEORemoteDebuggerAddBreakpoint"></a>
+<h3><a name="LEORemoteDebuggerAddBreakpoint">LEORemoteDebuggerAddBreakpoint</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerAddBreakpoint;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEORemoteDebuggerAddBreakpoint" logicalPath="//leo_ref/c/instm/LEORemoteDebuggerAddBreakpoint //leo_ref/c/clm/LEORemoteDebuggerAddBreakpoint //leo_ref/c/intfcm/LEORemoteDebuggerAddBreakpoint //leo_ref/c/intfm/LEORemoteDebuggerAddBreakpoint //leo_ref/c/func/LEORemoteDebuggerAddBreakpoint" target="_top"><span class="function">LEORemoteDebuggerAddBreakpoint</span></a>(
+    <a machinegenerated="true" href="../LEOInterpreter_h/index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> <span class="type">*</span><span class="param">targetInstruction</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerAddBreakpoint;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerAddBreakpoint;name=start --><p>Set a breakpoint on the given instruction. This will cause execution to be
+interrupted and a debugger console to be shown that allows examining the
+current stack.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerAddBreakpoint;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="../LEODebugger_h/index.html#//leo_ref/c/func/LEODebuggerRemoveBreakpoint" logicalPath="//leo_ref/c/func/LEODebuggerRemoveBreakpoint" target="_top">LEODebuggerRemoveBreakpoint</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEORemoteDebuggerAddFile;   name=LEORemoteDebuggerAddFile -->
+<a name="//leo_ref/c/func/LEORemoteDebuggerAddFile"></a>
+<h3><a name="LEORemoteDebuggerAddFile">LEORemoteDebuggerAddFile</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerAddFile;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEORemoteDebuggerAddFile" logicalPath="//leo_ref/c/instm/LEORemoteDebuggerAddFile //leo_ref/c/clm/LEORemoteDebuggerAddFile //leo_ref/c/intfcm/LEORemoteDebuggerAddFile //leo_ref/c/intfm/LEORemoteDebuggerAddFile //leo_ref/c/func/LEORemoteDebuggerAddFile" target="_top"><span class="function">LEORemoteDebuggerAddFile</span></a>(
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><span class="param">filecontents</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/uint16_t //leo_ref/c/tdef/uint16_t //leo_ref/c/tag/uint16_t //leo_ref/c/struct/uint16_t //leo_ref/c/intf/uint16_t //leo_ref/doc/anysymbol/uint16_t" machineGenerated="true" --><span class="type">uint16_t</span><!-- /a --> <span class="param">inFileID</span>,
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOScript" logicalPath="//leo_ref/c/cl/LEOScript //leo_ref/c/tdef/LEOScript" target="_top"><span class="type">LEOScript</span></a> <span class="type">*</span><span class="param">inScript</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerAddFile;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerAddFile;name=start --><p>Register a file name and its contents with the debugger, so it can display
+its contents and highlight the current line.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerAddFile;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEORemoteDebuggerPreInstructionProc;   name=LEORemoteDebuggerPreInstructionProc -->
+<a name="//leo_ref/c/func/LEORemoteDebuggerPreInstructionProc"></a>
+<h3><a name="LEORemoteDebuggerPreInstructionProc">LEORemoteDebuggerPreInstructionProc</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerPreInstructionProc;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEORemoteDebuggerPreInstructionProc" logicalPath="//leo_ref/c/instm/LEORemoteDebuggerPreInstructionProc //leo_ref/c/clm/LEORemoteDebuggerPreInstructionProc //leo_ref/c/intfcm/LEORemoteDebuggerPreInstructionProc //leo_ref/c/intfm/LEORemoteDebuggerPreInstructionProc //leo_ref/c/func/LEORemoteDebuggerPreInstructionProc" target="_top"><span class="function">LEORemoteDebuggerPreInstructionProc</span></a>(
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOInterpreter_h/index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerPreInstructionProc;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerPreInstructionProc;name=start --><p>Use this function as the preInstructionProc of your LEOContext to activate
+the debugger. <!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerPreInstructionProc;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEORemoteDebuggerPrompt;   name=LEORemoteDebuggerPrompt -->
+<a name="//leo_ref/c/func/LEORemoteDebuggerPrompt"></a>
+<h3><a name="LEORemoteDebuggerPrompt">LEORemoteDebuggerPrompt</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerPrompt;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEORemoteDebuggerPrompt" logicalPath="//leo_ref/c/instm/LEORemoteDebuggerPrompt //leo_ref/c/clm/LEORemoteDebuggerPrompt //leo_ref/c/intfcm/LEORemoteDebuggerPrompt //leo_ref/c/intfm/LEORemoteDebuggerPrompt //leo_ref/c/func/LEORemoteDebuggerPrompt" target="_top"><span class="function">LEORemoteDebuggerPrompt</span></a>(
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOInterpreter_h/index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerPrompt;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerPrompt;name=start --><p>Use this function as the promptProc of your LEOContext to activate
+the debugger. <!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerPrompt;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint;   name=LEORemoteDebuggerRemoveBreakpoint -->
+<a name="//leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint"></a>
+<h3><a name="LEORemoteDebuggerRemoveBreakpoint">LEORemoteDebuggerRemoveBreakpoint</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint" logicalPath="//leo_ref/c/instm/LEORemoteDebuggerRemoveBreakpoint //leo_ref/c/clm/LEORemoteDebuggerRemoveBreakpoint //leo_ref/c/intfcm/LEORemoteDebuggerRemoveBreakpoint //leo_ref/c/intfm/LEORemoteDebuggerRemoveBreakpoint //leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint" target="_top"><span class="function">LEORemoteDebuggerRemoveBreakpoint</span></a>(
+    <a machinegenerated="true" href="../LEOInterpreter_h/index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> <span class="type">*</span><span class="param">targetInstruction</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint;name=start --><p>Remove a breakpoint set using LEODebuggerAddBreakpoint().
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORemoteDebuggerRemoveBreakpoint;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="../LEODebugger_h/index.html#//leo_ref/c/func/LEODebuggerAddBreakpoint" logicalPath="//leo_ref/c/func/LEODebuggerAddBreakpoint" target="_top">LEODebuggerAddBreakpoint</a></p></dt>
+<dd></dd>
+</dl></div>
+<p class="gapBeforeFooter">&nbsp;</p>
+<hr class="afterFooter">
+<div class="hd_copyright_and_timestamp">
+<p class="hd_copyright">&copy; 2010-2013 Uli Kusterer, all rights reserved. </p>
+<p class="hd_timestamp">Last Updated: 2019-02-10
+</p>
+</div>
+</td>
+</tr></table>
+</body>
+</html>

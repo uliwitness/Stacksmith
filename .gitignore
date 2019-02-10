@@ -1,5 +1,4 @@
 svn_version.h
-/docs/
 /Stacksmith/BuildVersionHeader
 *.o
 *.lo
