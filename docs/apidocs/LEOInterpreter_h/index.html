@@ -1,0 +1,1869 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/1998/REC-html40-19980424/loose.dtd">
+<html>
+<head>
+    <title>LEOInterpreter</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="generator" content="HeaderDoc">
+<meta name="xcode-display" content="render">
+<style type="text/css"><!--.char {background: #ffffff; color:#666666;}.comment {background:#ffffff; color:#ff0000}.function {background:#ffffff; color:#0000dd;}.keyword {background:#ffffff; color:#0000ff;}.number {background: #ffffff; color:#000000;}.param {background:#ffffff; color:#000000;}.preprocessor {background:#ffffff; color:#236e25}.string {background: #ffffff; color:#666666;}.template {background:#ffffff; color:#761550;}.type {background:#ffffff; color:#0000ff;}.var {background:#ffffff; color:#000000;}body {border: 0px; margin: 0px;}div {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}td {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}span.hd_tocAccessSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroupSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroup { display: block; font-weight: bold; font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; margin-left: 0px; padding-left: 40px; }span.hd_tocGroup + span.hd_tocAccess { padding-top: 5px; }td.toc_contents_text {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; }li.tocSubEntry {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}p {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}a:link {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:active {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}h2.h2tight { margin-top: 0px; padding-top: 0px; }h1 { margin-top: 13px; padding-top: 0px; }h4 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: tiny; font-weight: bold;}h5 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: 10.1pt; font-weight: bold;}pre {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666; font-size: 10pt;}pre a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}pre a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}body  {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt; padding-left: 0px; padding-top: 0px; margin-left: 0px; margin-top: 0px; border: none; }#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }.afterName { display: none; }.list_indent { margin-left: 40px; }.declaration_indent { margin-left: 40px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; min-height: 12px; vertical-align: middle; }.declaration_indent pre { margin-top: 20px; padding-top: 0px; margin-bottom: 20px; padding-bottom: 0px; }.gapBeforeFooter { display: none; }hr { height: 0px; min-height: 0px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #909090;}hr.afterHeader { display: none }.param_group_indent { margin-left: 25px; }.param_indent { margin-left: 40px; margin-top: 0px; padding-top: 0px; }.param_indent dl { margin-top: 4px; padding-top: 0px; }dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.param_indent dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.group_indent { margin-left: 40px; }.group_desc_indent { margin-left: 20px; }.warning_indent { margin-left: 40px; }.important_indent { margin-left: 40px; }.note_indent { margin-left: 40px; }h3 {       color: #3C4C6C;}.tight {       margin-top: 2px; margin-bottom: 0px;       padding-top: 0px; padding-bottom: 0px;}h3 a {       color: #3C4C6C;	font-size: 16px;	font-style: normal;	font-variant: normal;	font-weight: bold;	height: 0px;	line-height: normal;}.hd_tocAccess { display: block; margin-left: 40px; font-style: italic; font-size: 10px; font-weight: normal; color: #303030; }.tocSubheading { margin-bottom: 4px; }--></style>
+<style><!--
+body {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+.toc_contents_text {
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+ul.tocSubEntryList li.tocSubEntry {
+    list-style: none;
+}
+
+#colorbox {
+		display: none;
+}
+.spec_sheet_line {
+		margin-bottom: 1px;
+}
+.collapsible {
+		display: none;
+}
+.toc_leadspace {
+		width: 10; min-width: 10;
+}
+.disclosure_triangle_td {
+		width: 14; min-width: 14;
+		font-size: 10px;
+		vertical-align: middle;
+}
+.specbox td {
+		font-size: 13px;
+}
+.specbox td a {
+		font-size: 13px;
+}
+.specbox td code {
+		font-size: 13px;
+}
+.specbox td tt {
+		font-size: 13px;
+}
+.specbox td pre {
+		font-size: 13px;
+}
+.specbox a {
+		font-size: 12px;
+}
+.disclosure_triangle_td a {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:link {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:active {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:visited:hover {
+		text-decoration: none;
+}
+.disclosure_triangle_td a:hover {
+		text-decoration: none;
+}
+.hd_toc_box {
+		padding-top: 10px;
+		padding-right: 15px;
+}.tocSeparator {
+		margin-top: 15px;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+}
+.tocSubEntryList {
+		margin-left: 0px;
+		padding-left: 40px;
+		padding-top: 0px;
+		margin-top: 2px;
+		padding-bottom: 0px;
+		margin-bottom: 8px;
+}
+.hd_toc_heading_table {
+		margin-top: 2px;
+		margin-bottom: 2px;
+}
+.hd_toc_entry_table {
+		margin-top: 2px;
+		margin-bottom: 2px;
+}
+.tocSubEntry {
+		margin-left: 0px;
+		padding-left: 0px;
+		margin-top: 0px;
+		margin-bottom: 1px;
+}
+.tocSubEntry a {
+		font-size: 10pt;
+}
+.tocSubheading {
+		padding-left: 14px;
+		margin-left: 0px;
+		margin-top: 5px;
+		padding-top: 0px;
+		font-size: 16px;
+		color: #808080;
+}
+
+#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }
+#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }
+#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }
+
+#tocMenu {
+		border-right: 1px solid #c0c0c0;
+		background-color: #f4f4ff;
+		top:0px;
+		left:0px;
+		width:230px;
+		height:100%;
+}
+#bodyContents {
+		width: auto;
+		padding-left: 15px;
+}
+--></style>
+<style id="disable_before_iOS_5"><!--
+#tocMenu {
+		position: fixed;
+		height: 100%;
+		overflow: auto;
+}
+#bodyContents {
+		width: auto;
+		left: 235px;
+		right: 0;
+		padding-left: 15px;
+		position: fixed;
+		height: 100%;
+		overflow-y: scroll;
+}
+--></style>
+<script language="JavaScript" type="text/javascript"><!--
+    if (navigator.platform && (navigator.platform.match(/iPad/) || navigator.platform.match(/iPhone/) || navigator.platform.match(/iPod/))) {
+        if (navigator.userAgent.match(/OS 1(_\d)+/) ||
+            navigator.userAgent.match(/OS 2(_\d)+/) ||
+            navigator.userAgent.match(/OS 3(_\d)+/) ||
+            navigator.userAgent.match(/OS 4(_\d)+/)) {
+                /* Earlier iOS versions require different scrolling gestures with position: fixed. */
+                var del_style_elt = document.getElementById("disable_before_iOS_5");
+                if (del_style_elt) del_style_elt.parentNode.removeChild(del_style_elt);
+        }
+    }
+// --></script>
+<script language="JavaScript" type="text/javascript"><!--
+function getNewHTTPObject()
+{
+        var xmlhttp;
+
+        /** Special IE only code ... */
+        /*@cc_on
+          @if (@_jscript_version >= 5)
+              try
+              {
+                  xmlhttp = new ActiveXObject('Msxml2.XMLHTTP');
+              }
+              catch (e)
+              {
+                  try
+                  {
+                      xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+                  }
+                  catch (E)
+                  {
+                      xmlhttp = false;
+                  }
+             }
+          @else
+             xmlhttp = false;
+        @end @*/
+
+        /** Every other browser on the planet */
+        if (!xmlhttp && typeof XMLHttpRequest != 'undefined')
+        {
+            try
+            {
+                xmlhttp = new XMLHttpRequest();
+            }
+            catch (e)
+            {
+                xmlhttp = false;
+            }
+        }
+
+        return xmlhttp;
+}
+
+function hidetoc() {
+	var toc = document.getElementById('tocMenu');
+	var src = toc.getAttribute('src');
+	var xhr = getNewHTTPObject();
+	xhr.open('GET', src, true);
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4) {
+			var toc = document.getElementById('tocMenu');
+			toc.innerHTML = xhr.responseText;
+		}
+	}
+	xhr.send(null);
+	var origURL = parent.document.URL;
+	var contentURL = origURL.substring(origURL.indexOf('?')+1, origURL.length);
+	if (contentURL.length == origURL.length) {
+		jumpPos = origURL.substring(origURL.indexOf('#')+1, origURL.length);
+	}
+	if (contentURL == "hidetoc") {
+		var body = document.getElementById('bodyContents');
+		if (toc && body) {
+			toc.style.display = 'none';
+			body.style.marginLeft = '0px';
+		}
+	}
+}
+
+function disclosure_triangle(elt) {
+   var linkelt = elt;
+   while (elt && elt.tagName != 'TABLE') { elt = elt.parentNode;}
+   if (!elt) { return; }
+   while (elt && elt.tagName != 'DIV') { elt = elt.nextSibling;}
+   if (!elt) { return; }
+   if (parseInt(linkelt.getAttribute('state'))) {
+      // It's open.  Close it
+      linkelt.innerHTML = '&#x25B7;';
+      linkelt.setAttribute('state', 0);
+      linkelt.setAttribute('class', 'closed_disclosure_triangle');
+      elt.style.display = 'none';
+   } else {
+      // It's closed.  Open it
+      linkelt.innerHTML = '&#x25BC;';
+      linkelt.setAttribute('state', 1);
+      linkelt.setAttribute('class', 'open_disclosure_triangle');
+      elt.style.display = 'block';
+   }
+}
+--></script>
+<style type="text/css"><!--.char {background: #ffffff; color:#666666;}.comment {background:#ffffff; color:#ff0000}.function {background:#ffffff; color:#0000dd;}.keyword {background:#ffffff; color:#0000ff;}.number {background: #ffffff; color:#000000;}.param {background:#ffffff; color:#000000;}.preprocessor {background:#ffffff; color:#236e25}.string {background: #ffffff; color:#666666;}.template {background:#ffffff; color:#761550;}.type {background:#ffffff; color:#0000ff;}.var {background:#ffffff; color:#000000;}body {border: 0px; margin: 0px;}div {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}td {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}span.hd_tocAccessSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroupSpace { display: block; font-size: 1px; height: 3px; min-height: 3px; }span.hd_tocGroup { display: block; font-weight: bold; font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; margin-left: 0px; padding-left: 40px; }span.hd_tocGroup + span.hd_tocAccess { padding-top: 5px; }td.toc_contents_text {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000; }li.tocSubEntry {font-size: 11pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}p {font-size: 10pt; text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #000000;}a:link {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:visited:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:active {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}a:hover {text-decoration: underline; font-family: lucida grande, geneva, helvetica, arial, sans-serif; color: #36c;}h2.h2tight { margin-top: 0px; padding-top: 0px; }h1 { margin-top: 13px; padding-top: 0px; }h4 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: tiny; font-weight: bold;}h5 {text-decoration: none; font-family: lucida grande, geneva, helvetica, arial, sans-serif; font-size: 10.1pt; font-weight: bold;}pre {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666; font-size: 10pt;}pre a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}pre a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}pre a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}code a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}code a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a { font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt;}tt a:link { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:visited:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:active { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}tt a:hover { font-family: Courier, Consolas, monospace; color: #36c;font-size: 10pt;}body  {text-decoration: none; font-family: Courier, Consolas, monospace; color: #666;font-size: 10pt; padding-left: 0px; padding-top: 0px; margin-left: 0px; margin-top: 0px; border: none; }#hd_outermost_table { margin-left: 0px; border-spacing: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; }#hd_outermost_table > tbody > tr { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-top: 0px; border: none; }#hd_outermost_table > tbody > tr > td { border-spacing: 0px; margin-left: 0px; margin-top: 0px; padding-top: 3px; }.afterName { display: none; }.list_indent { margin-left: 40px; }.declaration_indent { margin-left: 40px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; min-height: 12px; vertical-align: middle; }.declaration_indent pre { margin-top: 20px; padding-top: 0px; margin-bottom: 20px; padding-bottom: 0px; }.gapBeforeFooter { display: none; }hr { height: 0px; min-height: 0px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #909090;}hr.afterHeader { display: none }.param_group_indent { margin-left: 25px; }.param_indent { margin-left: 40px; margin-top: 0px; padding-top: 0px; }.param_indent dl { margin-top: 4px; padding-top: 0px; }dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.param_indent dl dd > p:first-child { margin-top: 2px; padding-top: 0px; }.group_indent { margin-left: 40px; }.group_desc_indent { margin-left: 20px; }.warning_indent { margin-left: 40px; }.important_indent { margin-left: 40px; }.note_indent { margin-left: 40px; }h3 {       color: #3C4C6C;}.tight {       margin-top: 2px; margin-bottom: 0px;       padding-top: 0px; padding-bottom: 0px;}h3 a {       color: #3C4C6C;	font-size: 16px;	font-style: normal;	font-variant: normal;	font-weight: bold;	height: 0px;	line-height: normal;}.hd_tocAccess { display: block; margin-left: 40px; font-style: italic; font-size: 10px; font-weight: normal; color: #303030; }.tocSubheading { margin-bottom: 4px; }--></style>
+</head>
+<body bgcolor="#ffffff" onload="hidetoc();">
+<!-- headerDoc=Header;  uid=//leo_ref/doc/header/LEOInterpreter.h;   name=LEOInterpreter -->
+<a name="//leo_ref/doc/header/LEOInterpreter.h"></a>
+<table id="hd_outermost_table" height="100%" width="100%"><tr>
+<td valign="top" id="tocMenu" src="toc.html"></td>
+<td id="bodyContents" valign="top">
+<a name="top"></a>
+<h1><a name="LEOInterpreter">LEOInterpreter</a></h1>
+<div class="spec_sheet_info_box"><table cellspacing="0" class="specbox">
+<tr>
+<td scope="row"><b>See Also:</b></td>
+<td><div style="margin-bottom:1px"><div class="content_text"><dl>
+<dt><p><a href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/tdef/LEOInstruction" target="_top">LEOInstruction</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/tdef/LEOContext" target="_top">LEOContext</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextCreate" logicalPath="//leo_ref/c/func/LEOContextCreate" target="_top">LEOContextCreate</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEORunInContext" logicalPath="//leo_ref/c/func/LEORunInContext" target="_top">LEORunInContext</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextRelease" logicalPath="//leo_ref/c/func/LEOContextRelease" target="_top">LEOContextRelease</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOContextGroup_h/index.html#//leo_ref/c/func/LEOContextGroupCreate" logicalPath="//leo_ref/c/func/LEOContextGroupCreate" target="_top">LEOContextGroupCreate</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOContextGroup_h/index.html#//leo_ref/c/func/LEOContextGroupRelease" logicalPath="//leo_ref/c/func/LEOContextGroupRelease" target="_top">LEOContextGroupRelease</a></p></dt>
+<dd></dd>
+</dl></div></div></td>
+</tr>
+<tr>
+<td scope="row"><b>Includes:</b></td>
+<td><div style="margin-bottom:1px"><div class="content_text">
+<a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/doc/header/LEOValue.h" logicalPath="//leo_ref/doc/header/LEOValue.h" target="_top">"LEOValue.h"</a><br>
+<a machinegenerated="true" href="../LEOHandlerID_h/index.html#//leo_ref/doc/header/LEOHandlerID.h" logicalPath="//leo_ref/doc/header/LEOHandlerID.h" target="_top">"LEOHandlerID.h"</a><br>
+<a machinegenerated="true" href="../LEOUserData_h/index.html#//leo_ref/doc/header/LEOUserData.h" logicalPath="//leo_ref/doc/header/LEOUserData.h" target="_top">"LEOUserData.h"</a><br>
+<!-- a logicalPath="//leo_ref/doc/header/stdint.h" machineGenerated="true" -->&lt;stdint.h&gt;<!-- /a --><br>
+<!-- a logicalPath="//leo_ref/doc/header/assert.h" machineGenerated="true" -->&lt;assert.h&gt;<!-- /a -->
+</div></div></td>
+</tr>
+</table></div>
+<h2>Introduction</h2>
+<p><!-- headerDoc=abstract;uid=//leo_ref/doc/header/LEOInterpreter.h;name=start --><!-- begin abstract -->Use the links in the table of contents to the left to access the documentation.<br>
+<!-- end abstract --><!-- headerDoc=abstract;uid=//leo_ref/doc/header/LEOInterpreter.h;name=end --></p>
+<hr class="afterClassOrHeaderInfo">
+<br><a name="HeaderDoc_groups"><h2 class="h2tight">Groups</h2></a>
+
+<h3>LEOContext calls for call stack management</h3>
+<div class="group_desc_indent">
+<p></p>
+<p>These are used by the CALL_HANDLER_INSTR and RETURN_FROM_HANDLER_INSTR
+instructions.</p>
+</div>
+<h4>Group members:</h4>
+<div class="group_indent">
+<dl>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPushHandlerScriptReturnAddressAndBasePtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPeekCurrentHandler" logicalPath="//leo_ref/c/func/LEOContextPeekCurrentHandler" target="_top">LEOContextPeekCurrentHandler</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPeekCurrentScript" logicalPath="//leo_ref/c/func/LEOContextPeekCurrentScript" target="_top">LEOContextPeekCurrentScript</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPeekReturnAddress" logicalPath="//leo_ref/c/func/LEOContextPeekReturnAddress" target="_top">LEOContextPeekReturnAddress</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPeekBasePtr" logicalPath="//leo_ref/c/func/LEOContextPeekBasePtr" target="_top">LEOContextPeekBasePtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPopHandlerScriptReturnAddressAndBasePtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOFileIDForFileName" logicalPath="//leo_ref/c/func/LEOFileIDForFileName" target="_top">LEOFileIDForFileName</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOFileNameForFileID" logicalPath="//leo_ref/c/func/LEOFileNameForFileID" target="_top">LEOFileNameForFileID</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore" logicalPath="//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore" target="_top">LEOSetInstructionIDToDebugPrintBefore</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter" logicalPath="//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter" target="_top">LEOSetInstructionIDToDebugPrintAfter</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOSetCheckForResumeProc" logicalPath="//leo_ref/c/func/LEOSetCheckForResumeProc" target="_top">LEOSetCheckForResumeProc</a></tt></dt>
+<dd></dd>
+</dl>
+</div>
+<p>&nbsp;</p>
+<h3>LEOContext methods</h3>
+<div class="group_desc_indent">
+</div>
+<h4>Group members:</h4>
+<div class="group_indent">
+<dl>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextCreate" logicalPath="//leo_ref/c/func/LEOContextCreate" target="_top">LEOContextCreate</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextRelease" logicalPath="//leo_ref/c/func/LEOContextRelease" target="_top">LEOContextRelease</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextRetain" logicalPath="//leo_ref/c/func/LEOContextRetain" target="_top">LEOContextRetain</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEORunInContext" logicalPath="//leo_ref/c/func/LEORunInContext" target="_top">LEORunInContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOResumeContext" logicalPath="//leo_ref/c/func/LEOResumeContext" target="_top">LEOResumeContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPauseContext" logicalPath="//leo_ref/c/func/LEOPauseContext" target="_top">LEOPauseContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextResumeIfAvailable" logicalPath="//leo_ref/c/func/LEOContextResumeIfAvailable" target="_top">LEOContextResumeIfAvailable</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPrepareContextForRunning" logicalPath="//leo_ref/c/func/LEOPrepareContextForRunning" target="_top">LEOPrepareContextForRunning</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContinueRunningContext" logicalPath="//leo_ref/c/func/LEOContinueRunningContext" target="_top">LEOContinueRunningContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextStopWithError" logicalPath="//leo_ref/c/func/LEOContextStopWithError" target="_top">LEOContextStopWithError</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextSetLocalVariable" logicalPath="//leo_ref/c/func/LEOContextSetLocalVariable" target="_top">LEOContextSetLocalVariable</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushIntegerOnStack" logicalPath="//leo_ref/c/func/LEOPushIntegerOnStack" target="_top">LEOPushIntegerOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushNumberOnStack" logicalPath="//leo_ref/c/func/LEOPushNumberOnStack" target="_top">LEOPushNumberOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushBooleanOnStack" logicalPath="//leo_ref/c/func/LEOPushBooleanOnStack" target="_top">LEOPushBooleanOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushPointOnStack" logicalPath="//leo_ref/c/func/LEOPushPointOnStack" target="_top">LEOPushPointOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushRectOnStack" logicalPath="//leo_ref/c/func/LEOPushRectOnStack" target="_top">LEOPushRectOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushArrayValueOnStack" logicalPath="//leo_ref/c/func/LEOPushArrayValueOnStack" target="_top">LEOPushArrayValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushUnsetValueOnStack" logicalPath="//leo_ref/c/func/LEOPushUnsetValueOnStack" target="_top">LEOPushUnsetValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushEmptyValueOnStack" logicalPath="//leo_ref/c/func/LEOPushEmptyValueOnStack" target="_top">LEOPushEmptyValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushStringValueOnStack" logicalPath="//leo_ref/c/func/LEOPushStringValueOnStack" target="_top">LEOPushStringValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushStringConstantValueOnStack" logicalPath="//leo_ref/c/func/LEOPushStringConstantValueOnStack" target="_top">LEOPushStringConstantValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEODebugPrintInstr" logicalPath="//leo_ref/c/func/LEODebugPrintInstr" target="_top">LEODebugPrintInstr</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEODebugPrintInstructions" logicalPath="//leo_ref/c/func/LEODebugPrintInstructions" target="_top">LEODebugPrintInstructions</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEODebugPrintContext" logicalPath="//leo_ref/c/func/LEODebugPrintContext" target="_top">LEODebugPrintContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextDebugPrintCallStack" logicalPath="//leo_ref/c/func/LEOContextDebugPrintCallStack" target="_top">LEOContextDebugPrintCallStack</a></tt></dt>
+<dd></dd>
+</dl>
+</div>
+<p>&nbsp;</p>
+<h3>Static typecasting functions</h3>
+<div class="group_desc_indent">
+</div>
+<h4>Group members:</h4>
+<div class="group_indent">
+<dl>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOCastUInt32ToInt32" logicalPath="//leo_ref/c/func/LEOCastUInt32ToInt32" target="_top">LEOCastUInt32ToInt32</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOCastUInt16ToInt16" logicalPath="//leo_ref/c/func/LEOCastUInt16ToInt16" target="_top">LEOCastUInt16ToInt16</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOCastUInt32ToLEONumber" logicalPath="//leo_ref/c/func/LEOCastUInt32ToLEONumber" target="_top">LEOCastUInt32ToLEONumber</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOInitInstructionArray" logicalPath="//leo_ref/c/func/LEOInitInstructionArray" target="_top">LEOInitInstructionArray</a></tt></dt>
+<dd></dd>
+<dt><tt><a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOAddInstructionsToInstructionArray" logicalPath="//leo_ref/c/func/LEOAddInstructionsToInstructionArray" target="_top">LEOAddInstructionsToInstructionArray</a></tt></dt>
+<dd></dd>
+</dl>
+</div>
+<hr class="afterGroupHeading">
+<a name="HeaderDoc_functions"></a>
+<h2 class="h2tight">Functions</h2>
+<dl>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOCastUInt32ToInt32" target="_top">LEOCastUInt32ToInt32</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOCastUInt16ToInt16" target="_top">LEOCastUInt16ToInt16</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOCastUInt32ToLEONumber" target="_top">LEOCastUInt32ToLEONumber</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOInitInstructionArray" target="_top">LEOInitInstructionArray</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOAddInstructionsToInstructionArray" target="_top">LEOAddInstructionsToInstructionArray</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextCreate" target="_top">LEOContextCreate</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextRelease" target="_top">LEOContextRelease</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextRetain" target="_top">LEOContextRetain</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEORunInContext" target="_top">LEORunInContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOResumeContext" target="_top">LEOResumeContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPauseContext" target="_top">LEOPauseContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextResumeIfAvailable" target="_top">LEOContextResumeIfAvailable</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPrepareContextForRunning" target="_top">LEOPrepareContextForRunning</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContinueRunningContext" target="_top">LEOContinueRunningContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextStopWithError" target="_top">LEOContextStopWithError</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextSetLocalVariable" target="_top">LEOContextSetLocalVariable</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushIntegerOnStack" target="_top">LEOPushIntegerOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushNumberOnStack" target="_top">LEOPushNumberOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushBooleanOnStack" target="_top">LEOPushBooleanOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushPointOnStack" target="_top">LEOPushPointOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushRectOnStack" target="_top">LEOPushRectOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushArrayValueOnStack" target="_top">LEOPushArrayValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushUnsetValueOnStack" target="_top">LEOPushUnsetValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushEmptyValueOnStack" target="_top">LEOPushEmptyValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushStringValueOnStack" target="_top">LEOPushStringValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOPushStringConstantValueOnStack" target="_top">LEOPushStringConstantValueOnStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEODebugPrintInstr" target="_top">LEODebugPrintInstr</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEODebugPrintInstructions" target="_top">LEODebugPrintInstructions</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEODebugPrintContext" target="_top">LEODebugPrintContext</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextDebugPrintCallStack" target="_top">LEOContextDebugPrintCallStack</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPushHandlerScriptReturnAddressAndBasePtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextPeekCurrentHandler" target="_top">LEOContextPeekCurrentHandler</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextPeekCurrentScript" target="_top">LEOContextPeekCurrentScript</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextPeekReturnAddress" target="_top">LEOContextPeekReturnAddress</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextPeekBasePtr" target="_top">LEOContextPeekBasePtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPopHandlerScriptReturnAddressAndBasePtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOFileIDForFileName" target="_top">LEOFileIDForFileName</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOFileNameForFileID" target="_top">LEOFileNameForFileID</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore" target="_top">LEOSetInstructionIDToDebugPrintBefore</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter" target="_top">LEOSetInstructionIDToDebugPrintAfter</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/func/LEOSetCheckForResumeProc" target="_top">LEOSetCheckForResumeProc</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOCastUInt32ToInt32;   name=LEOCastUInt32ToInt32 -->
+<a name="//leo_ref/c/func/LEOCastUInt32ToInt32"></a>
+<h3><a name="LEOCastUInt32ToInt32">LEOCastUInt32ToInt32</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOCastUInt32ToInt32;name=start --><span class="keyword">inline</span> <!-- a logicalPath="//leo_ref/c/cl/int32_t //leo_ref/c/tdef/int32_t //leo_ref/c/tag/int32_t //leo_ref/c/struct/int32_t //leo_ref/c/intf/int32_t //leo_ref/doc/anysymbol/int32_t" machineGenerated="true" --><span class="type">int32_t</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOCastUInt32ToInt32" logicalPath="//leo_ref/c/instm/LEOCastUInt32ToInt32 //leo_ref/c/clm/LEOCastUInt32ToInt32 //leo_ref/c/intfcm/LEOCastUInt32ToInt32 //leo_ref/c/intfm/LEOCastUInt32ToInt32 //leo_ref/c/func/LEOCastUInt32ToInt32" target="_top"><span class="function">LEOCastUInt32ToInt32</span></a>(
+    <!-- a logicalPath="//leo_ref/c/cl/uint32_t //leo_ref/c/tdef/uint32_t //leo_ref/c/tag/uint32_t //leo_ref/c/struct/uint32_t //leo_ref/c/intf/uint32_t //leo_ref/doc/anysymbol/uint32_t" machineGenerated="true" --><span class="type">uint32_t</span><!-- /a --> <span class="param">inNum</span> ) <span class="keyword">__attribute__</span>((<!-- a logicalPath="//leo_ref/c/econst/always_inline //leo_ref/c/data/always_inline //leo_ref/c/clconst/always_inline " machineGenerated="true" --><span class="var">always_inline</span><!-- /a -->));  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOCastUInt32ToInt32;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOCastUInt32ToInt32;name=start --><p>Reinterpret the given unsigned uint32_t as a signed int32_t. E.g. useful for an instruction's param2 field. <!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOCastUInt32ToInt32;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOCastUInt16ToInt16;   name=LEOCastUInt16ToInt16 -->
+<a name="//leo_ref/c/func/LEOCastUInt16ToInt16"></a>
+<h3><a name="LEOCastUInt16ToInt16">LEOCastUInt16ToInt16</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOCastUInt16ToInt16;name=start --><span class="keyword">inline</span> <!-- a logicalPath="//leo_ref/c/cl/int16_t //leo_ref/c/tdef/int16_t //leo_ref/c/tag/int16_t //leo_ref/c/struct/int16_t //leo_ref/c/intf/int16_t //leo_ref/doc/anysymbol/int16_t" machineGenerated="true" --><span class="type">int16_t</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOCastUInt16ToInt16" logicalPath="//leo_ref/c/instm/LEOCastUInt16ToInt16 //leo_ref/c/clm/LEOCastUInt16ToInt16 //leo_ref/c/intfcm/LEOCastUInt16ToInt16 //leo_ref/c/intfm/LEOCastUInt16ToInt16 //leo_ref/c/func/LEOCastUInt16ToInt16" target="_top"><span class="function">LEOCastUInt16ToInt16</span></a>(
+    <!-- a logicalPath="//leo_ref/c/cl/uint16_t //leo_ref/c/tdef/uint16_t //leo_ref/c/tag/uint16_t //leo_ref/c/struct/uint16_t //leo_ref/c/intf/uint16_t //leo_ref/doc/anysymbol/uint16_t" machineGenerated="true" --><span class="type">uint16_t</span><!-- /a --> <span class="param">inNum</span> ) <span class="keyword">__attribute__</span>((<!-- a logicalPath="//leo_ref/c/econst/always_inline //leo_ref/c/data/always_inline //leo_ref/c/clconst/always_inline " machineGenerated="true" --><span class="var">always_inline</span><!-- /a -->));  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOCastUInt16ToInt16;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOCastUInt16ToInt16;name=start --><p>Reinterpret the given unsigned uint16_t as a signed int16_t. E.g. useful for an instruction's param1 field. <!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOCastUInt16ToInt16;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOCastUInt32ToLEONumber;   name=LEOCastUInt32ToLEONumber -->
+<a name="//leo_ref/c/func/LEOCastUInt32ToLEONumber"></a>
+<h3><a name="LEOCastUInt32ToLEONumber">LEOCastUInt32ToLEONumber</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOCastUInt32ToLEONumber;name=start --><span class="keyword">inline</span> <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEONumber" logicalPath="//leo_ref/c/cl/LEONumber //leo_ref/c/tdef/LEONumber" target="_top"><span class="type">LEONumber</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOCastUInt32ToLEONumber" logicalPath="//leo_ref/c/instm/LEOCastUInt32ToLEONumber //leo_ref/c/clm/LEOCastUInt32ToLEONumber //leo_ref/c/intfcm/LEOCastUInt32ToLEONumber //leo_ref/c/intfm/LEOCastUInt32ToLEONumber //leo_ref/c/func/LEOCastUInt32ToLEONumber" target="_top"><span class="function">LEOCastUInt32ToLEONumber</span></a>(
+    <!-- a logicalPath="//leo_ref/c/cl/uint32_t //leo_ref/c/tdef/uint32_t //leo_ref/c/tag/uint32_t //leo_ref/c/struct/uint32_t //leo_ref/c/intf/uint32_t //leo_ref/doc/anysymbol/uint32_t" machineGenerated="true" --><span class="type">uint32_t</span><!-- /a --> <span class="param">inNum</span> ) <span class="keyword">__attribute__</span>((<!-- a logicalPath="//leo_ref/c/econst/always_inline //leo_ref/c/data/always_inline //leo_ref/c/clconst/always_inline " machineGenerated="true" --><span class="var">always_inline</span><!-- /a -->));  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOCastUInt32ToLEONumber;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOCastUInt32ToLEONumber;name=start --><p>Reinterpret the given unsigned uint32_t as a LEONumber floating point quantity. E.g. useful for an instruction's param2 field. <!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOCastUInt32ToLEONumber;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOInitInstructionArray;   name=LEOInitInstructionArray -->
+<a name="//leo_ref/c/func/LEOInitInstructionArray"></a>
+<h3><a name="LEOInitInstructionArray">LEOInitInstructionArray</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOInitInstructionArray;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOInitInstructionArray" logicalPath="//leo_ref/c/instm/LEOInitInstructionArray //leo_ref/c/clm/LEOInitInstructionArray //leo_ref/c/intfcm/LEOInitInstructionArray //leo_ref/c/intfm/LEOInitInstructionArray //leo_ref/c/func/LEOInitInstructionArray" target="_top"><span class="function">LEOInitInstructionArray</span></a>(
+    <span class="param">void</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOInitInstructionArray;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOInitInstructionArray;name=start --><p>Call this method once before calling any other interpreter functions. This initializes
+the instruction look-up table with the built-in instructions. <!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOInitInstructionArray;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOAddInstructionsToInstructionArray;   name=LEOAddInstructionsToInstructionArray -->
+<a name="//leo_ref/c/func/LEOAddInstructionsToInstructionArray"></a>
+<h3><a name="LEOAddInstructionsToInstructionArray">LEOAddInstructionsToInstructionArray</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOAddInstructionsToInstructionArray;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOAddInstructionsToInstructionArray" logicalPath="//leo_ref/c/instm/LEOAddInstructionsToInstructionArray //leo_ref/c/clm/LEOAddInstructionsToInstructionArray //leo_ref/c/intfcm/LEOAddInstructionsToInstructionArray //leo_ref/c/intfm/LEOAddInstructionsToInstructionArray //leo_ref/c/func/LEOAddInstructionsToInstructionArray" target="_top"><span class="function">LEOAddInstructionsToInstructionArray</span></a>(
+    <span class="keyword">struct</span> <a machinegenerated="true" href="index.html#//leo_ref/c/tag/LEOInstructionEntry" logicalPath="//leo_ref/c/cl/LEOInstructionEntry //leo_ref/c/tdef/LEOInstructionEntry //leo_ref/c/tag/LEOInstructionEntry" target="_top"><span class="type">LEOInstructionEntry</span></a> <span class="type">*</span><span class="param">inInstructionArray</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <span class="param">inNumInstructions</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <span class="type">*</span><span class="param">outFirstNewInstruction</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOAddInstructionsToInstructionArray;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOAddInstructionsToInstructionArray;name=start --><p>Use this method to register new instructions for your host application. The new
+entries will be appended to the built-in instruction array (and your array copied),
+and the index of your first instruction will be returned in outFirstNewInstruction.
+You can now add this value to your instruction indices to calculate the actual
+LEOInstructionID you need to generate Leonie bytecode.
+</p>
+<p>See the <tt>LEOInstructionEntry</tt> documentation on information on how to most easily
+declare your instruction array. <!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOAddInstructionsToInstructionArray;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextCreate;   name=LEOContextCreate -->
+<a name="//leo_ref/c/func/LEOContextCreate"></a>
+<h3><a name="LEOContextCreate">LEOContextCreate</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextCreate;name=start --><a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a><span class="type">*</span> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextCreate" logicalPath="//leo_ref/c/instm/LEOContextCreate //leo_ref/c/clm/LEOContextCreate //leo_ref/c/intfcm/LEOContextCreate //leo_ref/c/intfm/LEOContextCreate //leo_ref/c/func/LEOContextCreate" target="_top"><span class="function">LEOContextCreate</span></a>(
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOContextGroup_h/index.html#//leo_ref/c/tdef/LEOContextGroup" logicalPath="//leo_ref/c/cl/LEOContextGroup //leo_ref/c/tdef/LEOContextGroup" target="_top"><span class="type">LEOContextGroup</span></a> <span class="type">*</span><span class="param">inGroup</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <span class="type">*</span><span class="param">inUserData</span>, 
+    <a machinegenerated="true" href="../LEOUserData_h/index.html#//leo_ref/c/tdef/LEOUserDataCleanUpFuncPtr" logicalPath="//leo_ref/c/cl/LEOUserDataCleanUpFuncPtr //leo_ref/c/tdef/LEOUserDataCleanUpFuncPtr" target="_top"><span class="type">LEOUserDataCleanUpFuncPtr</span></a> <span class="param">inCleanUpFunc</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextCreate;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextCreate;name=start --><p>Create a new LEOContext.
+The context is added to the provided group, and will retain the context
+group until the context is released by its last client. So once you have
+added the context to the context group, you can release it if you don't
+intend to create any other contexts in that group directly.
+The context starts out with a reference count of 1. When you are done with
+it, release it using LEOContextRelease().
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextCreate;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextRelease" logicalPath="//leo_ref/c/func/LEOContextRelease" target="_top">LEOContextRelease</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextRetain" logicalPath="//leo_ref/c/func/LEOContextRetain" target="_top">LEOContextRetain</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOContextGroup_h/index.html#//leo_ref/c/func/LEOContextGroupCreate" logicalPath="//leo_ref/c/func/LEOContextGroupCreate" target="_top">LEOContextGroupCreate</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOContextGroup_h/index.html#//leo_ref/c/func/LEOContextGroupRelease" logicalPath="//leo_ref/c/func/LEOContextGroupRelease" target="_top">LEOContextGroupRelease</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextRelease;   name=LEOContextRelease -->
+<a name="//leo_ref/c/func/LEOContextRelease"></a>
+<h3><a name="LEOContextRelease">LEOContextRelease</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextRelease;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextRelease" logicalPath="//leo_ref/c/instm/LEOContextRelease //leo_ref/c/clm/LEOContextRelease //leo_ref/c/intfcm/LEOContextRelease //leo_ref/c/intfm/LEOContextRelease //leo_ref/c/func/LEOContextRelease" target="_top"><span class="function">LEOContextRelease</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextRelease;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextRelease;name=start --><p>Release your reference to this context. If you were the last owner of this
+context, disposes of the given context's associated data structures
+and releases the reference to its context group that the context
+holds.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextRelease;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextCreate" logicalPath="//leo_ref/c/func/LEOContextCreate" target="_top">LEOContextCreate</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextCreate" logicalPath="//leo_ref/c/func/LEOContextCreate" target="_top">LEOContextRetain</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextRetain;   name=LEOContextRetain -->
+<a name="//leo_ref/c/func/LEOContextRetain"></a>
+<h3><a name="LEOContextRetain">LEOContextRetain</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextRetain;name=start --><a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a><span class="type">*</span> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextRetain" logicalPath="//leo_ref/c/instm/LEOContextRetain //leo_ref/c/clm/LEOContextRetain //leo_ref/c/intfcm/LEOContextRetain //leo_ref/c/intfm/LEOContextRetain //leo_ref/c/func/LEOContextRetain" target="_top"><span class="function">LEOContextRetain</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <span class="comment">// returns inContext.</span> <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextRetain;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextRetain;name=start --><p>Acquire a reference to a context. Use this if, for example, you are
+passing LEOContext objects between functions, or otherwise sharing
+ownership of a context between several objects. Once you are done with
+the context, call LEOContextRelease on it to give up your reference.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextRetain;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextCreate" logicalPath="//leo_ref/c/func/LEOContextCreate" target="_top">LEOContextCreate</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextRelease" logicalPath="//leo_ref/c/func/LEOContextRelease" target="_top">LEOContextRelease</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEORunInContext;   name=LEORunInContext -->
+<a name="//leo_ref/c/func/LEORunInContext"></a>
+<h3><a name="LEORunInContext">LEORunInContext</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORunInContext;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEORunInContext" logicalPath="//leo_ref/c/instm/LEORunInContext //leo_ref/c/clm/LEORunInContext //leo_ref/c/intfcm/LEORunInContext //leo_ref/c/intfm/LEORunInContext //leo_ref/c/func/LEORunInContext" target="_top"><span class="function">LEORunInContext</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/doc/typedeffield/LEOHandler/instructions" logicalPath="//leo_ref/c/cl/instructions //leo_ref/c/tdef/instructions //leo_ref/c/tag/instructions //leo_ref/c/struct/instructions //leo_ref/c/intf/instructions //leo_ref/doc/anysymbol/instructions" target="_top"><span class="type">instructions</span></a>[],
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEORunInContext;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORunInContext;name=start --><p>Shorthand for LEOPrepareContextForRunning and a loop of LEOContinueRunningContext.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEORunInContext;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPrepareContextForRunning" logicalPath="//leo_ref/c/func/LEOPrepareContextForRunning" target="_top">LEOPrepareContextForRunning</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContinueRunningContext" logicalPath="//leo_ref/c/func/LEOContinueRunningContext" target="_top">LEOContinueRunningContext</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOResumeContext;   name=LEOResumeContext -->
+<a name="//leo_ref/c/func/LEOResumeContext"></a>
+<h3><a name="LEOResumeContext">LEOResumeContext</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOResumeContext;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOResumeContext" logicalPath="//leo_ref/c/instm/LEOResumeContext //leo_ref/c/clm/LEOResumeContext //leo_ref/c/intfcm/LEOResumeContext //leo_ref/c/intfm/LEOResumeContext //leo_ref/c/func/LEOResumeContext" target="_top"><span class="function">LEOResumeContext</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOResumeContext;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOResumeContext;name=start --><p>Queues up a paused context for resumption of execution the next time
+LEOContextResumeIfAvailable is called.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOResumeContext;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEORunInContext" logicalPath="//leo_ref/c/func/LEORunInContext" target="_top">LEORunInContext</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPauseContext" logicalPath="//leo_ref/c/func/LEOPauseContext" target="_top">LEOPauseContext</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextResumeIfAvailable" logicalPath="//leo_ref/c/func/LEOContextResumeIfAvailable" target="_top">LEOContextResumeIfAvailable</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPauseContext;   name=LEOPauseContext -->
+<a name="//leo_ref/c/func/LEOPauseContext"></a>
+<h3><a name="LEOPauseContext">LEOPauseContext</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPauseContext;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPauseContext" logicalPath="//leo_ref/c/instm/LEOPauseContext //leo_ref/c/clm/LEOPauseContext //leo_ref/c/intfcm/LEOPauseContext //leo_ref/c/intfm/LEOPauseContext //leo_ref/c/func/LEOPauseContext" target="_top"><span class="function">LEOPauseContext</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPauseContext;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPauseContext;name=start --><p>An instruction can call this to cause the given context so you can do some
+async work, then later come back to it with LEOResumeContext.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPauseContext;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOResumeContext" logicalPath="//leo_ref/c/func/LEOResumeContext" target="_top">LEOResumeContext</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextResumeIfAvailable;   name=LEOContextResumeIfAvailable -->
+<a name="//leo_ref/c/func/LEOContextResumeIfAvailable"></a>
+<h3><a name="LEOContextResumeIfAvailable">LEOContextResumeIfAvailable</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextResumeIfAvailable;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextResumeIfAvailable" logicalPath="//leo_ref/c/instm/LEOContextResumeIfAvailable //leo_ref/c/clm/LEOContextResumeIfAvailable //leo_ref/c/intfcm/LEOContextResumeIfAvailable //leo_ref/c/intfm/LEOContextResumeIfAvailable //leo_ref/c/func/LEOContextResumeIfAvailable" target="_top"><span class="function">LEOContextResumeIfAvailable</span></a>(
+    <span class="param">void</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextResumeIfAvailable;name=end --></pre>
+</div>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOResumeContext" logicalPath="//leo_ref/c/func/LEOResumeContext" target="_top">LEOResumeContext</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPauseContext" logicalPath="//leo_ref/c/func/LEOPauseContext" target="_top">LEOPauseContext</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPrepareContextForRunning;   name=LEOPrepareContextForRunning -->
+<a name="//leo_ref/c/func/LEOPrepareContextForRunning"></a>
+<h3><a name="LEOPrepareContextForRunning">LEOPrepareContextForRunning</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPrepareContextForRunning;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPrepareContextForRunning" logicalPath="//leo_ref/c/instm/LEOPrepareContextForRunning //leo_ref/c/clm/LEOPrepareContextForRunning //leo_ref/c/intfcm/LEOPrepareContextForRunning //leo_ref/c/intfm/LEOPrepareContextForRunning //leo_ref/c/func/LEOPrepareContextForRunning" target="_top"><span class="function">LEOPrepareContextForRunning</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/doc/typedeffield/LEOHandler/instructions" logicalPath="//leo_ref/c/cl/instructions //leo_ref/c/tdef/instructions //leo_ref/c/tag/instructions //leo_ref/c/struct/instructions //leo_ref/c/intf/instructions //leo_ref/doc/anysymbol/instructions" target="_top"><span class="type">instructions</span></a>[],
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPrepareContextForRunning;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPrepareContextForRunning;name=start --><p>Set the currentInstruction of the given LEOContext to the given instruction 
+array's first instruction, and initialize the Base pointer and stack end pointer
+and flags etc.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPrepareContextForRunning;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEORunInContext" logicalPath="//leo_ref/c/func/LEORunInContext" target="_top">LEORunInContext</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContinueRunningContext" logicalPath="//leo_ref/c/func/LEOContinueRunningContext" target="_top">LEOContinueRunningContext</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContinueRunningContext;   name=LEOContinueRunningContext -->
+<a name="//leo_ref/c/func/LEOContinueRunningContext"></a>
+<h3><a name="LEOContinueRunningContext">LEOContinueRunningContext</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContinueRunningContext;name=start --><!-- a logicalPath="//leo_ref/c/cl/bool //leo_ref/c/tdef/bool //leo_ref/c/tag/bool //leo_ref/c/struct/bool //leo_ref/c/intf/bool //leo_ref/doc/anysymbol/bool" machineGenerated="true" --><span class="type">bool</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContinueRunningContext" logicalPath="//leo_ref/c/instm/LEOContinueRunningContext //leo_ref/c/clm/LEOContinueRunningContext //leo_ref/c/intfcm/LEOContinueRunningContext //leo_ref/c/intfm/LEOContinueRunningContext //leo_ref/c/func/LEOContinueRunningContext" target="_top"><span class="function">LEOContinueRunningContext</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContinueRunningContext;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContinueRunningContext;name=start --><p>Execute the next instruction in the context. Returns false if the code has
+finished executing or exited with an error.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContinueRunningContext;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEORunInContext" logicalPath="//leo_ref/c/func/LEORunInContext" target="_top">LEORunInContext</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPrepareContextForRunning" logicalPath="//leo_ref/c/func/LEOPrepareContextForRunning" target="_top">LEOPrepareContextForRunning</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextStopWithError;   name=LEOContextStopWithError -->
+<a name="//leo_ref/c/func/LEOContextStopWithError"></a>
+<h3><a name="LEOContextStopWithError">LEOContextStopWithError</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextStopWithError;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextStopWithError" logicalPath="//leo_ref/c/instm/LEOContextStopWithError //leo_ref/c/clm/LEOContextStopWithError //leo_ref/c/intfcm/LEOContextStopWithError //leo_ref/c/intfm/LEOContextStopWithError //leo_ref/c/func/LEOContextStopWithError" target="_top"><span class="function">LEOContextStopWithError</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <span class="param">errLine</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <span class="param">errOffset</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/uint16_t //leo_ref/c/tdef/uint16_t //leo_ref/c/tag/uint16_t //leo_ref/c/struct/uint16_t //leo_ref/c/intf/uint16_t //leo_ref/doc/anysymbol/uint16_t" machineGenerated="true" --><span class="type">uint16_t</span><!-- /a --> <span class="param">fileID</span>,
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><span class="param">inErrorFmt</span>,
+    ... );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextStopWithError;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextStopWithError;name=start --><p>Stop execution in the given context with an error message.
+Currently sets the errMsg field of the context to the given string and set
+keepRunning to FALSE. inErrorFmt is a format string like you pass it to
+printf().
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextStopWithError;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextSetLocalVariable;   name=LEOContextSetLocalVariable -->
+<a name="//leo_ref/c/func/LEOContextSetLocalVariable"></a>
+<h3><a name="LEOContextSetLocalVariable">LEOContextSetLocalVariable</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextSetLocalVariable;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextSetLocalVariable" logicalPath="//leo_ref/c/instm/LEOContextSetLocalVariable //leo_ref/c/clm/LEOContextSetLocalVariable //leo_ref/c/intfcm/LEOContextSetLocalVariable //leo_ref/c/intfm/LEOContextSetLocalVariable //leo_ref/c/func/LEOContextSetLocalVariable" target="_top"><span class="function">LEOContextSetLocalVariable</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span>,
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><span class="param">varName</span>,
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><span class="param">inMessageFmt</span>,
+    ... );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextSetLocalVariable;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextSetLocalVariable;name=start --><p>Look up the local variable with name varName in the current script, if present, and set
+its value to the given string. inMessageFmt is a format string like you pass it to
+printf().
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextSetLocalVariable;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushValueOnStack;   name=LEOPushValueOnStack -->
+<a name="//leo_ref/c/func/LEOPushValueOnStack"></a>
+<h3><a name="LEOPushValueOnStack">LEOPushValueOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushValueOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/instm/LEOPushValueOnStack //leo_ref/c/clm/LEOPushValueOnStack //leo_ref/c/intfcm/LEOPushValueOnStack //leo_ref/c/intfm/LEOPushValueOnStack //leo_ref/c/func/LEOPushValueOnStack" target="_top"><span class="function">LEOPushValueOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <span class="param">inValueToCopy</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushValueOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushValueOnStack;name=start --><p>Push a copy of the given value onto the stack, returning a pointer to it.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushValueOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushIntegerOnStack" logicalPath="//leo_ref/c/func/LEOPushIntegerOnStack" target="_top">LEOPushIntegerOnStack</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushNumberOnStack" logicalPath="//leo_ref/c/func/LEOPushNumberOnStack" target="_top">LEOPushNumberOnStack</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushBooleanOnStack" logicalPath="//leo_ref/c/func/LEOPushBooleanOnStack" target="_top">LEOPushBooleanOnStack</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushEmptyValueOnStack" logicalPath="//leo_ref/c/func/LEOPushEmptyValueOnStack" target="_top">LEOPushEmptyValueOnStack</a></p></dt>
+<dd></dd>
+<dt><p><!-- a logicalPath="//leo_ref/c/func/LEOPushStringValueStack" -->LEOPushStringValueStack<!-- /a --></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushStringConstantValueOnStack" logicalPath="//leo_ref/c/func/LEOPushStringConstantValueOnStack" target="_top">LEOPushStringConstantValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushIntegerOnStack;   name=LEOPushIntegerOnStack -->
+<a name="//leo_ref/c/func/LEOPushIntegerOnStack"></a>
+<h3><a name="LEOPushIntegerOnStack">LEOPushIntegerOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushIntegerOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushIntegerOnStack" logicalPath="//leo_ref/c/instm/LEOPushIntegerOnStack //leo_ref/c/clm/LEOPushIntegerOnStack //leo_ref/c/intfcm/LEOPushIntegerOnStack //leo_ref/c/intfm/LEOPushIntegerOnStack //leo_ref/c/func/LEOPushIntegerOnStack" target="_top"><span class="function">LEOPushIntegerOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOInteger" logicalPath="//leo_ref/c/cl/LEOInteger //leo_ref/c/tdef/LEOInteger" target="_top"><span class="type">LEOInteger</span></a> <span class="param">inInteger</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOUnit" logicalPath="//leo_ref/c/cl/LEOUnit //leo_ref/c/tdef/LEOUnit" target="_top"><span class="type">LEOUnit</span></a> <span class="param">inUnit</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushIntegerOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushIntegerOnStack;name=start --><p>Push a copy of the given integer onto the stack, returning a pointer to it.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEOInitXXValue call.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushIntegerOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushNumberOnStack;   name=LEOPushNumberOnStack -->
+<a name="//leo_ref/c/func/LEOPushNumberOnStack"></a>
+<h3><a name="LEOPushNumberOnStack">LEOPushNumberOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushNumberOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushNumberOnStack" logicalPath="//leo_ref/c/instm/LEOPushNumberOnStack //leo_ref/c/clm/LEOPushNumberOnStack //leo_ref/c/intfcm/LEOPushNumberOnStack //leo_ref/c/intfm/LEOPushNumberOnStack //leo_ref/c/func/LEOPushNumberOnStack" target="_top"><span class="function">LEOPushNumberOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEONumber" logicalPath="//leo_ref/c/cl/LEONumber //leo_ref/c/tdef/LEONumber" target="_top"><span class="type">LEONumber</span></a> <span class="param">inNumber</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOUnit" logicalPath="//leo_ref/c/cl/LEOUnit //leo_ref/c/tdef/LEOUnit" target="_top"><span class="type">LEOUnit</span></a> <span class="param">inUnit</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushNumberOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushNumberOnStack;name=start --><p>Push a copy of the given number onto the stack, returning a pointer to it.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEOInitXXValue call.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushNumberOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushBooleanOnStack;   name=LEOPushBooleanOnStack -->
+<a name="//leo_ref/c/func/LEOPushBooleanOnStack"></a>
+<h3><a name="LEOPushBooleanOnStack">LEOPushBooleanOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushBooleanOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushBooleanOnStack" logicalPath="//leo_ref/c/instm/LEOPushBooleanOnStack //leo_ref/c/clm/LEOPushBooleanOnStack //leo_ref/c/intfcm/LEOPushBooleanOnStack //leo_ref/c/intfm/LEOPushBooleanOnStack //leo_ref/c/func/LEOPushBooleanOnStack" target="_top"><span class="function">LEOPushBooleanOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/bool //leo_ref/c/tdef/bool //leo_ref/c/tag/bool //leo_ref/c/struct/bool //leo_ref/c/intf/bool //leo_ref/doc/anysymbol/bool" machineGenerated="true" --><span class="type">bool</span><!-- /a --> <span class="param">inBoolean</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushBooleanOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushBooleanOnStack;name=start --><p>Push a copy of the given boolean onto the stack, returning a pointer to it.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEOInitXXValue call.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushBooleanOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushPointOnStack;   name=LEOPushPointOnStack -->
+<a name="//leo_ref/c/func/LEOPushPointOnStack"></a>
+<h3><a name="LEOPushPointOnStack">LEOPushPointOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushPointOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushPointOnStack" logicalPath="//leo_ref/c/instm/LEOPushPointOnStack //leo_ref/c/clm/LEOPushPointOnStack //leo_ref/c/intfcm/LEOPushPointOnStack //leo_ref/c/intfm/LEOPushPointOnStack //leo_ref/c/func/LEOPushPointOnStack" target="_top"><span class="function">LEOPushPointOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOInteger" logicalPath="//leo_ref/c/cl/LEOInteger //leo_ref/c/tdef/LEOInteger" target="_top"><span class="type">LEOInteger</span></a> <span class="param">l</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOInteger" logicalPath="//leo_ref/c/cl/LEOInteger //leo_ref/c/tdef/LEOInteger" target="_top"><span class="type">LEOInteger</span></a> <span class="param">t</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushPointOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushPointOnStack;name=start --><p>Push a copy of the given point onto the stack, returning a pointer to it.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEOInitXXValue call.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushPointOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushRectOnStack;   name=LEOPushRectOnStack -->
+<a name="//leo_ref/c/func/LEOPushRectOnStack"></a>
+<h3><a name="LEOPushRectOnStack">LEOPushRectOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushRectOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushRectOnStack" logicalPath="//leo_ref/c/instm/LEOPushRectOnStack //leo_ref/c/clm/LEOPushRectOnStack //leo_ref/c/intfcm/LEOPushRectOnStack //leo_ref/c/intfm/LEOPushRectOnStack //leo_ref/c/func/LEOPushRectOnStack" target="_top"><span class="function">LEOPushRectOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOInteger" logicalPath="//leo_ref/c/cl/LEOInteger //leo_ref/c/tdef/LEOInteger" target="_top"><span class="type">LEOInteger</span></a> <span class="param">l</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOInteger" logicalPath="//leo_ref/c/cl/LEOInteger //leo_ref/c/tdef/LEOInteger" target="_top"><span class="type">LEOInteger</span></a> <span class="param">t</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOInteger" logicalPath="//leo_ref/c/cl/LEOInteger //leo_ref/c/tdef/LEOInteger" target="_top"><span class="type">LEOInteger</span></a> <span class="param">r</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOInteger" logicalPath="//leo_ref/c/cl/LEOInteger //leo_ref/c/tdef/LEOInteger" target="_top"><span class="type">LEOInteger</span></a> <span class="param">b</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushRectOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushRectOnStack;name=start --><p>Push a copy of the given rectangle onto the stack, returning a pointer to it.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEOInitXXValue call.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushRectOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushArrayValueOnStack;   name=LEOPushArrayValueOnStack -->
+<a name="//leo_ref/c/func/LEOPushArrayValueOnStack"></a>
+<h3><a name="LEOPushArrayValueOnStack">LEOPushArrayValueOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushArrayValueOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushArrayValueOnStack" logicalPath="//leo_ref/c/instm/LEOPushArrayValueOnStack //leo_ref/c/clm/LEOPushArrayValueOnStack //leo_ref/c/intfcm/LEOPushArrayValueOnStack //leo_ref/c/intfm/LEOPushArrayValueOnStack //leo_ref/c/func/LEOPushArrayValueOnStack" target="_top"><span class="function">LEOPushArrayValueOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <span class="keyword">struct</span> <!-- a logicalPath="//leo_ref/c/cl/LEOArrayEntry //leo_ref/c/tdef/LEOArrayEntry //leo_ref/c/tag/LEOArrayEntry //leo_ref/c/struct/LEOArrayEntry //leo_ref/c/intf/LEOArrayEntry //leo_ref/doc/anysymbol/LEOArrayEntry" machineGenerated="true" --><span class="type">LEOArrayEntry</span><!-- /a --> <span class="type">*</span><span class="param">inArray</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushArrayValueOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushArrayValueOnStack;name=start --><p>Push the given array onto the stack, returning a pointer to the value.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEOInitXXValue call.
+You may pass NULL for inArray to push an empty array.
+*** This takes over ownership of the given array. ***
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushArrayValueOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushUnsetValueOnStack;   name=LEOPushUnsetValueOnStack -->
+<a name="//leo_ref/c/func/LEOPushUnsetValueOnStack"></a>
+<h3><a name="LEOPushUnsetValueOnStack">LEOPushUnsetValueOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushUnsetValueOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushUnsetValueOnStack" logicalPath="//leo_ref/c/instm/LEOPushUnsetValueOnStack //leo_ref/c/clm/LEOPushUnsetValueOnStack //leo_ref/c/intfcm/LEOPushUnsetValueOnStack //leo_ref/c/intfm/LEOPushUnsetValueOnStack //leo_ref/c/func/LEOPushUnsetValueOnStack" target="_top"><span class="function">LEOPushUnsetValueOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushUnsetValueOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushUnsetValueOnStack;name=start --><p>Pushes a special empty string on the stack that a user can't generate,
+and which returns TRUE from LEOGetValueIsUnset(). To the user it looks
+just like any empty string, but if the user replaces it with any other
+value (even an empty string), you can detect that.
+Used e.g. by the message box to detect whether the code the user entered
+returned a result (i.e. was an expression) or not (i.e. was a command).
+This is a shorthand for LEOPushValueOnStack and LEOInitUnsetValue.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushUnsetValueOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushEmptyValueOnStack" logicalPath="//leo_ref/c/func/LEOPushEmptyValueOnStack" target="_top">LEOPushEmptyValueOnStack</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOValue_h/index.html#//leo_ref/c/func/LEOInitUnsetValue" logicalPath="//leo_ref/c/func/LEOInitUnsetValue" target="_top">LEOInitUnsetValue</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushEmptyValueOnStack;   name=LEOPushEmptyValueOnStack -->
+<a name="//leo_ref/c/func/LEOPushEmptyValueOnStack"></a>
+<h3><a name="LEOPushEmptyValueOnStack">LEOPushEmptyValueOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushEmptyValueOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushEmptyValueOnStack" logicalPath="//leo_ref/c/instm/LEOPushEmptyValueOnStack //leo_ref/c/clm/LEOPushEmptyValueOnStack //leo_ref/c/intfcm/LEOPushEmptyValueOnStack //leo_ref/c/intfm/LEOPushEmptyValueOnStack //leo_ref/c/func/LEOPushEmptyValueOnStack" target="_top"><span class="function">LEOPushEmptyValueOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushEmptyValueOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushEmptyValueOnStack;name=start --><p>Push an empty string onto the stack, returning a pointer to it.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEInitStringConstantValue("") call.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushEmptyValueOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOValue_h/index.html#//leo_ref/c/func/LEOInitStringConstantValue" logicalPath="//leo_ref/c/func/LEOInitStringConstantValue" target="_top">LEInitStringConstantValue</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushUnsetValueOnStack" logicalPath="//leo_ref/c/func/LEOPushUnsetValueOnStack" target="_top">LEOPushUnsetValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushStringValueOnStack;   name=LEOPushStringValueOnStack -->
+<a name="//leo_ref/c/func/LEOPushStringValueOnStack"></a>
+<h3><a name="LEOPushStringValueOnStack">LEOPushStringValueOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushStringValueOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushStringValueOnStack" logicalPath="//leo_ref/c/instm/LEOPushStringValueOnStack //leo_ref/c/clm/LEOPushStringValueOnStack //leo_ref/c/intfcm/LEOPushStringValueOnStack //leo_ref/c/intfm/LEOPushStringValueOnStack //leo_ref/c/func/LEOPushStringValueOnStack" target="_top"><span class="function">LEOPushStringValueOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><span class="param">inString</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <span class="param">strLen</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushStringValueOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushStringValueOnStack;name=start --><p>Push a copy of the given string onto the stack, returning a pointer to it.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEOInitXXValue call.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushStringValueOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOValue_h/index.html#//leo_ref/c/func/LEOInitStringValue" logicalPath="//leo_ref/c/func/LEOInitStringValue" target="_top">LEInitStringValue</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOPushStringConstantValueOnStack;   name=LEOPushStringConstantValueOnStack -->
+<a name="//leo_ref/c/func/LEOPushStringConstantValueOnStack"></a>
+<h3><a name="LEOPushStringConstantValueOnStack">LEOPushStringConstantValueOnStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushStringConstantValueOnStack;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOPushStringConstantValueOnStack" logicalPath="//leo_ref/c/instm/LEOPushStringConstantValueOnStack //leo_ref/c/clm/LEOPushStringConstantValueOnStack //leo_ref/c/intfcm/LEOPushStringConstantValueOnStack //leo_ref/c/intfm/LEOPushStringConstantValueOnStack //leo_ref/c/func/LEOPushStringConstantValueOnStack" target="_top"><span class="function">LEOPushStringConstantValueOnStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><span class="param">inString</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOPushStringConstantValueOnStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushStringConstantValueOnStack;name=start --><p>Push a copy of the given string constant onto the stack, returning a pointer to it.
+This is a shorthand for LEOPushValueOnStack and the corresponding LEOInitXXValue call.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOPushStringConstantValueOnStack;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/func/LEOCleanUpStackToPtr" target="_top">LEOCleanUpStackToPtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOValue_h/index.html#//leo_ref/c/func/LEOInitStringConstantValue" logicalPath="//leo_ref/c/func/LEOInitStringConstantValue" target="_top">LEInitStringConstantValue</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOCleanUpStackToPtr;   name=LEOCleanUpStackToPtr -->
+<a name="//leo_ref/c/func/LEOCleanUpStackToPtr"></a>
+<h3><a name="LEOCleanUpStackToPtr">LEOCleanUpStackToPtr</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOCleanUpStackToPtr;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOCleanUpStackToPtr" logicalPath="//leo_ref/c/instm/LEOCleanUpStackToPtr //leo_ref/c/clm/LEOCleanUpStackToPtr //leo_ref/c/intfcm/LEOCleanUpStackToPtr //leo_ref/c/intfm/LEOCleanUpStackToPtr //leo_ref/c/func/LEOCleanUpStackToPtr" target="_top"><span class="function">LEOCleanUpStackToPtr</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">theContext</span>,
+    <span class="keyword">union</span> <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tag/LEOValue" logicalPath="//leo_ref/c/cl/LEOValue //leo_ref/c/tdef/LEOValue //leo_ref/c/tag/LEOValue" target="_top"><span class="type">LEOValue</span></a> <span class="type">*</span><span class="param">lastItemToDelete</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOCleanUpStackToPtr;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOCleanUpStackToPtr;name=start --><p>Used by instructions to unwind the stack (e.g. when removing their parameters) and ensure
+values get destructed correctly.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOCleanUpStackToPtr;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOPushValueOnStack" logicalPath="//leo_ref/c/func/LEOPushValueOnStack" target="_top">LEOPushValueOnStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEODebugPrintInstr;   name=LEODebugPrintInstr -->
+<a name="//leo_ref/c/func/LEODebugPrintInstr"></a>
+<h3><a name="LEODebugPrintInstr">LEODebugPrintInstr</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEODebugPrintInstr;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEODebugPrintInstr" logicalPath="//leo_ref/c/instm/LEODebugPrintInstr //leo_ref/c/clm/LEODebugPrintInstr //leo_ref/c/intfcm/LEODebugPrintInstr //leo_ref/c/intfm/LEODebugPrintInstr //leo_ref/c/func/LEODebugPrintInstr" target="_top"><span class="function">LEODebugPrintInstr</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> <span class="type">*</span><span class="param">instruction</span>,
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOScript" logicalPath="//leo_ref/c/cl/LEOScript //leo_ref/c/tdef/LEOScript" target="_top"><span class="type">LEOScript</span></a> <span class="type">*</span><span class="param">inScript</span>,
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOHandler" logicalPath="//leo_ref/c/cl/LEOHandler //leo_ref/c/tdef/LEOHandler" target="_top"><span class="type">LEOHandler</span></a> <span class="type">*</span><span class="param">inHandler</span>,
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEODebugPrintInstr;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//leo_ref/doc/functionparam/LEODebugPrintInstr/inContext;   name=inContext -->
+<a name="//leo_ref/doc/functionparam/LEODebugPrintInstr/inContext"></a>
+<code>inContext</code>
+</dt>
+<dd><p>may be NULL. If not NULL, this context will be used to display
+additional information about certain instructions.</p></dd>
+<dt>
+<!-- headerDoc=functionparam;  uid=//leo_ref/doc/functionparam/LEODebugPrintInstr/inHandler;   name=inHandler -->
+<a name="//leo_ref/doc/functionparam/LEODebugPrintInstr/inHandler"></a>
+<code>inHandler</code>
+</dt>
+<dd><p>may be NULL. If not NULL, this handler will be used to display
+additional information about certain instructions.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEODebugPrintInstr;name=start --><p>Print the given instruction to the console for debugging purposes.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEODebugPrintInstr;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEODebugPrintInstructions" logicalPath="//leo_ref/c/func/LEODebugPrintInstructions" target="_top">LEODebugPrintInstructions</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEODebugPrintInstructions;   name=LEODebugPrintInstructions -->
+<a name="//leo_ref/c/func/LEODebugPrintInstructions"></a>
+<h3><a name="LEODebugPrintInstructions">LEODebugPrintInstructions</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEODebugPrintInstructions;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEODebugPrintInstructions" logicalPath="//leo_ref/c/instm/LEODebugPrintInstructions //leo_ref/c/clm/LEODebugPrintInstructions //leo_ref/c/intfcm/LEODebugPrintInstructions //leo_ref/c/intfm/LEODebugPrintInstructions //leo_ref/c/func/LEODebugPrintInstructions" target="_top"><span class="function">LEODebugPrintInstructions</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/doc/typedeffield/LEOHandler/instructions" logicalPath="//leo_ref/c/cl/instructions //leo_ref/c/tdef/instructions //leo_ref/c/tag/instructions //leo_ref/c/struct/instructions //leo_ref/c/intf/instructions //leo_ref/doc/anysymbol/instructions" target="_top"><span class="type">instructions</span></a>[],
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <span class="param">numInstructions</span>,
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOScript" logicalPath="//leo_ref/c/cl/LEOScript //leo_ref/c/tdef/LEOScript" target="_top"><span class="type">LEOScript</span></a> <span class="type">*</span><span class="param">inScript</span>,
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOHandler" logicalPath="//leo_ref/c/cl/LEOHandler //leo_ref/c/tdef/LEOHandler" target="_top"><span class="type">LEOHandler</span></a> <span class="type">*</span><span class="param">inHandler</span>,
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEODebugPrintInstructions;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//leo_ref/doc/functionparam/LEODebugPrintInstructions/inContext;   name=inContext -->
+<a name="//leo_ref/doc/functionparam/LEODebugPrintInstructions/inContext"></a>
+<code>inContext</code>
+</dt>
+<dd><p>may be NULL. If not NULL, this context will be used to display
+additional information about certain instructions.</p></dd>
+<dt>
+<!-- headerDoc=functionparam;  uid=//leo_ref/doc/functionparam/LEODebugPrintInstructions/inHandler;   name=inHandler -->
+<a name="//leo_ref/doc/functionparam/LEODebugPrintInstructions/inHandler"></a>
+<code>inHandler</code>
+</dt>
+<dd><p>may be NULL. If not NULL, this handler will be used to display
+additional information about certain instructions.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEODebugPrintInstructions;name=start --><p>Print the given array of instructions to the console for debugging purposes using LEODebugPrintInstr.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEODebugPrintInstructions;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEODebugPrintInstr" logicalPath="//leo_ref/c/func/LEODebugPrintInstr" target="_top">LEODebugPrintInstr</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEODebugPrintContext;   name=LEODebugPrintContext -->
+<a name="//leo_ref/c/func/LEODebugPrintContext"></a>
+<h3><a name="LEODebugPrintContext">LEODebugPrintContext</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEODebugPrintContext;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEODebugPrintContext" logicalPath="//leo_ref/c/instm/LEODebugPrintContext //leo_ref/c/clm/LEODebugPrintContext //leo_ref/c/intfcm/LEODebugPrintContext //leo_ref/c/intfm/LEODebugPrintContext //leo_ref/c/func/LEODebugPrintContext" target="_top"><span class="function">LEODebugPrintContext</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">ctx</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEODebugPrintContext;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEODebugPrintContext;name=start --><p>Print the given context to the console for debugging purposes. This includes
+the stack, and is very useful for debugging new instructions.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEODebugPrintContext;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEODebugPrintInstr" logicalPath="//leo_ref/c/func/LEODebugPrintInstr" target="_top">LEODebugPrintInstr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextDebugPrintCallStack" logicalPath="//leo_ref/c/func/LEOContextDebugPrintCallStack" target="_top">LEOContextDebugPrintCallStack</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextDebugPrintCallStack;   name=LEOContextDebugPrintCallStack -->
+<a name="//leo_ref/c/func/LEOContextDebugPrintCallStack"></a>
+<h3><a name="LEOContextDebugPrintCallStack">LEOContextDebugPrintCallStack</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextDebugPrintCallStack;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextDebugPrintCallStack" logicalPath="//leo_ref/c/instm/LEOContextDebugPrintCallStack //leo_ref/c/clm/LEOContextDebugPrintCallStack //leo_ref/c/intfcm/LEOContextDebugPrintCallStack //leo_ref/c/intfm/LEOContextDebugPrintCallStack //leo_ref/c/func/LEOContextDebugPrintCallStack" target="_top"><span class="function">LEOContextDebugPrintCallStack</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextDebugPrintCallStack;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextDebugPrintCallStack;name=start --><p>Print the current call stack of the given context to the console for
+debugging purposes.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextDebugPrintCallStack;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr;   name=LEOContextPushHandlerScriptReturnAddressAndBasePtr -->
+<a name="//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr"></a>
+<h3><a name="LEOContextPushHandlerScriptReturnAddressAndBasePtr">LEOContextPushHandlerScriptReturnAddressAndBasePtr</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/instm/LEOContextPushHandlerScriptReturnAddressAndBasePtr //leo_ref/c/clm/LEOContextPushHandlerScriptReturnAddressAndBasePtr //leo_ref/c/intfcm/LEOContextPushHandlerScriptReturnAddressAndBasePtr //leo_ref/c/intfm/LEOContextPushHandlerScriptReturnAddressAndBasePtr //leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" target="_top"><span class="function">LEOContextPushHandlerScriptReturnAddressAndBasePtr</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span>,
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOHandler" logicalPath="//leo_ref/c/cl/LEOHandler //leo_ref/c/tdef/LEOHandler" target="_top"><span class="type">LEOHandler</span></a> <span class="type">*</span><span class="param">inHandler</span>,
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOScript" logicalPath="//leo_ref/c/cl/LEOScript //leo_ref/c/tdef/LEOScript" target="_top"><span class="type">LEOScript</span></a> <span class="type">*</span><span class="param">inScript</span>,
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> <span class="type">*</span><span class="param">returnAddress</span>,
+    <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <span class="param">oldBP</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr;name=start --><p>Push a reference to the current script, the handler in it that is current,
+the return address and the previous base pointer to restore onto a special
+stack so the call instruction can retain the script/handler while it is
+running even if the owning object goes away, and so the return instruction
+can restore the base pointer and knows what instruction to return to.
+</p>
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr;name=end --><!-- end discussion -->
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPeekCurrentHandler" logicalPath="//leo_ref/c/func/LEOContextPeekCurrentHandler" target="_top">LEOContextPeekCurrentHandler</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPeekCurrentScript" logicalPath="//leo_ref/c/func/LEOContextPeekCurrentScript" target="_top">LEOContextPeekCurrentScript</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPeekReturnAddress" logicalPath="//leo_ref/c/func/LEOContextPeekReturnAddress" target="_top">LEOContextPeekReturnAddress</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPeekBasePtr" logicalPath="//leo_ref/c/func/LEOContextPeekBasePtr" target="_top">LEOContextPeekBasePtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPopHandlerScriptReturnAddressAndBasePtr</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextPeekCurrentHandler;   name=LEOContextPeekCurrentHandler -->
+<a name="//leo_ref/c/func/LEOContextPeekCurrentHandler"></a>
+<h3><a name="LEOContextPeekCurrentHandler">LEOContextPeekCurrentHandler</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPeekCurrentHandler;name=start --><span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOHandler" logicalPath="//leo_ref/c/cl/LEOHandler //leo_ref/c/tdef/LEOHandler" target="_top"><span class="type">LEOHandler</span></a><span class="type">*</span> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPeekCurrentHandler" logicalPath="//leo_ref/c/instm/LEOContextPeekCurrentHandler //leo_ref/c/clm/LEOContextPeekCurrentHandler //leo_ref/c/intfcm/LEOContextPeekCurrentHandler //leo_ref/c/intfm/LEOContextPeekCurrentHandler //leo_ref/c/func/LEOContextPeekCurrentHandler" target="_top"><span class="function">LEOContextPeekCurrentHandler</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPeekCurrentHandler;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPeekCurrentHandler;name=start --><p>Retrieve the object representing the handler currently in progress, which
+was pushed last onto a special stack.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPeekCurrentHandler;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPushHandlerScriptReturnAddressAndBasePtr</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextPeekCurrentScript;   name=LEOContextPeekCurrentScript -->
+<a name="//leo_ref/c/func/LEOContextPeekCurrentScript"></a>
+<h3><a name="LEOContextPeekCurrentScript">LEOContextPeekCurrentScript</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPeekCurrentScript;name=start --><span class="keyword">struct</span> <a machinegenerated="true" href="../LEOScript_h/index.html#//leo_ref/c/tdef/LEOScript" logicalPath="//leo_ref/c/cl/LEOScript //leo_ref/c/tdef/LEOScript" target="_top"><span class="type">LEOScript</span></a><span class="type">*</span> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPeekCurrentScript" logicalPath="//leo_ref/c/instm/LEOContextPeekCurrentScript //leo_ref/c/clm/LEOContextPeekCurrentScript //leo_ref/c/intfcm/LEOContextPeekCurrentScript //leo_ref/c/intfm/LEOContextPeekCurrentScript //leo_ref/c/func/LEOContextPeekCurrentScript" target="_top"><span class="function">LEOContextPeekCurrentScript</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPeekCurrentScript;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPeekCurrentScript;name=start --><p>Retrieve the object representing the script owning the handler currently in
+progress, which was pushed last onto a special stack.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPeekCurrentScript;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPushHandlerScriptReturnAddressAndBasePtr</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextPeekReturnAddress;   name=LEOContextPeekReturnAddress -->
+<a name="//leo_ref/c/func/LEOContextPeekReturnAddress"></a>
+<h3><a name="LEOContextPeekReturnAddress">LEOContextPeekReturnAddress</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPeekReturnAddress;name=start --><a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a><span class="type">*</span> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPeekReturnAddress" logicalPath="//leo_ref/c/instm/LEOContextPeekReturnAddress //leo_ref/c/clm/LEOContextPeekReturnAddress //leo_ref/c/intfcm/LEOContextPeekReturnAddress //leo_ref/c/intfm/LEOContextPeekReturnAddress //leo_ref/c/func/LEOContextPeekReturnAddress" target="_top"><span class="function">LEOContextPeekReturnAddress</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPeekReturnAddress;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPeekReturnAddress;name=start --><p>Retrieve the address of the instruction that follows the CALL_HANDLER_INSTR
+instruction that brought you to this handler, and to which we are expected
+to return after this handler call. Note that this may be NULL to indicate
+you are the first handler pushed on the call stack (in C that would e.g. be
+main()).
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPeekReturnAddress;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPushHandlerScriptReturnAddressAndBasePtr</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextPeekBasePtr;   name=LEOContextPeekBasePtr -->
+<a name="//leo_ref/c/func/LEOContextPeekBasePtr"></a>
+<h3><a name="LEOContextPeekBasePtr">LEOContextPeekBasePtr</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPeekBasePtr;name=start --><a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/cl/LEOValuePtr //leo_ref/c/tdef/LEOValuePtr" target="_top"><span class="type">LEOValuePtr</span></a> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPeekBasePtr" logicalPath="//leo_ref/c/instm/LEOContextPeekBasePtr //leo_ref/c/clm/LEOContextPeekBasePtr //leo_ref/c/intfcm/LEOContextPeekBasePtr //leo_ref/c/intfm/LEOContextPeekBasePtr //leo_ref/c/func/LEOContextPeekBasePtr" target="_top"><span class="function">LEOContextPeekBasePtr</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPeekBasePtr;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPeekBasePtr;name=start --><p>Retrieve the address of the base pointer as it was before this handler was
+called. Used to restore the calling handler's base pointer when this handler
+returns.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPeekBasePtr;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPushHandlerScriptReturnAddressAndBasePtr</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr;   name=LEOContextPopHandlerScriptReturnAddressAndBasePtr -->
+<a name="//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr"></a>
+<h3><a name="LEOContextPopHandlerScriptReturnAddressAndBasePtr">LEOContextPopHandlerScriptReturnAddressAndBasePtr</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/instm/LEOContextPopHandlerScriptReturnAddressAndBasePtr //leo_ref/c/clm/LEOContextPopHandlerScriptReturnAddressAndBasePtr //leo_ref/c/intfcm/LEOContextPopHandlerScriptReturnAddressAndBasePtr //leo_ref/c/intfm/LEOContextPopHandlerScriptReturnAddressAndBasePtr //leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr" target="_top"><span class="function">LEOContextPopHandlerScriptReturnAddressAndBasePtr</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr;name=start --><p>Remove the reference to the current handler, current script, return address
+and base pointer before the current handler was called from the special
+stack. This is called when returning from the current handler.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOContextPopHandlerScriptReturnAddressAndBasePtr;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" logicalPath="//leo_ref/c/func/LEOContextPushHandlerScriptReturnAddressAndBasePtr" target="_top">LEOContextPushHandlerScriptReturnAddressAndBasePtr</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOFileIDForFileName;   name=LEOFileIDForFileName -->
+<a name="//leo_ref/c/func/LEOFileIDForFileName"></a>
+<h3><a name="LEOFileIDForFileName">LEOFileIDForFileName</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOFileIDForFileName;name=start --><!-- a logicalPath="//leo_ref/c/cl/uint16_t //leo_ref/c/tdef/uint16_t //leo_ref/c/tag/uint16_t //leo_ref/c/struct/uint16_t //leo_ref/c/intf/uint16_t //leo_ref/doc/anysymbol/uint16_t" machineGenerated="true" --><span class="type">uint16_t</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOFileIDForFileName" logicalPath="//leo_ref/c/instm/LEOFileIDForFileName //leo_ref/c/clm/LEOFileIDForFileName //leo_ref/c/intfcm/LEOFileIDForFileName //leo_ref/c/intfm/LEOFileIDForFileName //leo_ref/c/func/LEOFileIDForFileName" target="_top"><span class="function">LEOFileIDForFileName</span></a>(
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><span class="param">inFileName</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOFileIDForFileName;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOFileIDForFileName;name=start --><p>Generate a file ID for the given file name or file path (or could even be an
+object 'path' of some sort). This is used e.g. by the debugger to associate
+a source file with certain instructions.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOFileIDForFileName;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOFileIDForFileName" logicalPath="//leo_ref/c/func/LEOFileIDForFileName" target="_top">LEOFileIDForFileName</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOFileNameForFileID;   name=LEOFileNameForFileID -->
+<a name="//leo_ref/c/func/LEOFileNameForFileID"></a>
+<h3><a name="LEOFileNameForFileID">LEOFileNameForFileID</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOFileNameForFileID;name=start --><span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --><span class="type">*</span> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOFileNameForFileID" logicalPath="//leo_ref/c/instm/LEOFileNameForFileID //leo_ref/c/clm/LEOFileNameForFileID //leo_ref/c/intfcm/LEOFileNameForFileID //leo_ref/c/intfm/LEOFileNameForFileID //leo_ref/c/func/LEOFileNameForFileID" target="_top"><span class="function">LEOFileNameForFileID</span></a>(
+    <!-- a logicalPath="//leo_ref/c/cl/uint16_t //leo_ref/c/tdef/uint16_t //leo_ref/c/tag/uint16_t //leo_ref/c/struct/uint16_t //leo_ref/c/intf/uint16_t //leo_ref/doc/anysymbol/uint16_t" machineGenerated="true" --><span class="type">uint16_t</span><!-- /a --> <span class="param">inFileID</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOFileNameForFileID;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOFileNameForFileID;name=start --><p>Return the file name that corresponds to the given file ID.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOFileNameForFileID;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOFileIDForFileName" logicalPath="//leo_ref/c/func/LEOFileIDForFileName" target="_top">LEOFileIDForFileName</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore;   name=LEOSetInstructionIDToDebugPrintBefore -->
+<a name="//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore"></a>
+<h3><a name="LEOSetInstructionIDToDebugPrintBefore">LEOSetInstructionIDToDebugPrintBefore</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore" logicalPath="//leo_ref/c/instm/LEOSetInstructionIDToDebugPrintBefore //leo_ref/c/clm/LEOSetInstructionIDToDebugPrintBefore //leo_ref/c/intfcm/LEOSetInstructionIDToDebugPrintBefore //leo_ref/c/intfm/LEOSetInstructionIDToDebugPrintBefore //leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore" target="_top"><span class="function">LEOSetInstructionIDToDebugPrintBefore</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstructionID" logicalPath="//leo_ref/c/cl/LEOInstructionID //leo_ref/c/tdef/LEOInstructionID" target="_top"><span class="type">LEOInstructionID</span></a> <span class="param">inID</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//leo_ref/doc/functionparam/LEOSetInstructionIDToDebugPrintBefore/inID;   name=inID -->
+<a name="//leo_ref/doc/functionparam/LEOSetInstructionIDToDebugPrintBefore/inID"></a>
+<code>inID</code>
+</dt>
+<dd><p>The instruction ID constant of the instruction you're interested in.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore;name=start --><p>Tell the interpreter to log the current context (current instruction and stack) to the console before executing the specified instruction.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter" logicalPath="//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter" target="_top">LEOSetInstructionIDToDebugPrintAfter</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter;   name=LEOSetInstructionIDToDebugPrintAfter -->
+<a name="//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter"></a>
+<h3><a name="LEOSetInstructionIDToDebugPrintAfter">LEOSetInstructionIDToDebugPrintAfter</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter" logicalPath="//leo_ref/c/instm/LEOSetInstructionIDToDebugPrintAfter //leo_ref/c/clm/LEOSetInstructionIDToDebugPrintAfter //leo_ref/c/intfcm/LEOSetInstructionIDToDebugPrintAfter //leo_ref/c/intfm/LEOSetInstructionIDToDebugPrintAfter //leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter" target="_top"><span class="function">LEOSetInstructionIDToDebugPrintAfter</span></a>(
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstructionID" logicalPath="//leo_ref/c/cl/LEOInstructionID //leo_ref/c/tdef/LEOInstructionID" target="_top"><span class="type">LEOInstructionID</span></a> <span class="param">inID</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=functionparam;  uid=//leo_ref/doc/functionparam/LEOSetInstructionIDToDebugPrintAfter/inID;   name=inID -->
+<a name="//leo_ref/doc/functionparam/LEOSetInstructionIDToDebugPrintAfter/inID"></a>
+<code>inID</code>
+</dt>
+<dd><p>The instruction ID constant of the instruction you're interested in.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter;name=start --><p>Tell the interpreter to log the current context (current instruction and stack) to the console after executing the specified instruction.
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOSetInstructionIDToDebugPrintAfter;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="index.html#//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore" logicalPath="//leo_ref/c/func/LEOSetInstructionIDToDebugPrintBefore" target="_top">LEOSetInstructionIDToDebugPrintBefore</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=func;  uid=//leo_ref/c/func/LEOSetCheckForResumeProc;   name=LEOSetCheckForResumeProc -->
+<a name="//leo_ref/c/func/LEOSetCheckForResumeProc"></a>
+<h3><a name="LEOSetCheckForResumeProc">LEOSetCheckForResumeProc</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOSetCheckForResumeProc;name=start --><!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/c/func/LEOSetCheckForResumeProc" logicalPath="//leo_ref/c/instm/LEOSetCheckForResumeProc //leo_ref/c/clm/LEOSetCheckForResumeProc //leo_ref/c/intfcm/LEOSetCheckForResumeProc //leo_ref/c/intfm/LEOSetCheckForResumeProc //leo_ref/c/func/LEOSetCheckForResumeProc" target="_top"><span class="function">LEOSetCheckForResumeProc</span></a>(
+    <!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> (<span class="type">*</span><span class="param">checkForResumeProc</span>)() );  <!-- headerDoc=declaration;uid=//leo_ref/c/func/LEOSetCheckForResumeProc;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOSetCheckForResumeProc;name=start --><p>A script can be paused mid-instruction and later resumed. This is handy e.g.
+when an instruction actually involves an asynchronous operation. Once the
+async operation has finished, it can call to request for the script to be
+resumed. Since we don't want scripts piling up in async callbacks, scripts
+are resumed by calling LEOContextResumeIfAvailable() from somewhere farther
+up the main thread (e.g. where regular event handlers would be triggered).
+When a resume request is made, this callback is invoked to give you the
+opportunity to ensure a call to LEOContextResumeIfAvailable() will be triggered
+by whatever mechanism you choose (queue up an event, signal a semaphore, whatever).
+<!-- headerDoc=discussion;uid=//leo_ref/c/func/LEOSetCheckForResumeProc;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenSections">
+<a name="HeaderDoc_datatypes"></a>
+<h2 class="h2tight">Typedefs</h2>
+<dl>
+<dt><tt><a href="index.html#//leo_ref/c/tdef/LEOInstructionID" target="_top">LEOInstructionID</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/tdef/LEOInstructionFuncPtr" target="_top">LEOInstructionFuncPtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr" target="_top">LEONonexistentHandlerFuncPtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/tdef/LEOContextCompletionFuncPtr" target="_top">LEOContextCompletionFuncPtr</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/tdef/LEOInstruction" target="_top">LEOInstruction</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/tdef/LEOContext" target="_top">LEOContext</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tdef;  uid=//leo_ref/c/tdef/LEOInstructionID;   name=LEOInstructionID -->
+<a name="//leo_ref/c/tdef/LEOInstructionID"></a>
+<h3><a name="LEOInstructionID">LEOInstructionID</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOInstructionID;name=start --><span class="keyword">typedef</span> <!-- a logicalPath="//leo_ref/c/cl/uint16_t //leo_ref/c/tdef/uint16_t //leo_ref/c/tag/uint16_t //leo_ref/c/struct/uint16_t //leo_ref/c/intf/uint16_t //leo_ref/doc/anysymbol/uint16_t" machineGenerated="true" --><span class="type">uint16_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/LEOInstructionID //leo_ref/c/data/LEOInstructionID //leo_ref/c/clconst/LEOInstructionID " machineGenerated="true" --><span class="var">LEOInstructionID</span><!-- /a -->;  <!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOInstructionID;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOInstructionID;name=start --><p>Index into our instruction function array. Index 0 contains the
+"unimplemented" error exit function.
+</p>
+<p>Note that instruction IDs are sequential and not intended to be saved to
+disk. If you want to save bytecode to disk, you should save a look-up-table
+from some persistent instruction opcode along to the file and then when
+loading fix up all the instruction IDs based on that name. <!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOInstructionID;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tdef;  uid=//leo_ref/c/tdef/LEOInstructionFuncPtr;   name=LEOInstructionFuncPtr -->
+<a name="//leo_ref/c/tdef/LEOInstructionFuncPtr"></a>
+<h3><a name="LEOInstructionFuncPtr">LEOInstructionFuncPtr</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOInstructionFuncPtr;name=start --><span class="keyword">typedef</span> <!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> ( <span class="type">*</span><a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstructionFuncPtr" logicalPath="//leo_ref/c/instm/LEOInstructionFuncPtr //leo_ref/c/clm/LEOInstructionFuncPtr //leo_ref/c/intfcm/LEOInstructionFuncPtr //leo_ref/c/intfm/LEOInstructionFuncPtr //leo_ref/c/func/LEOInstructionFuncPtr //leo_ref/c/ftmplt/LEOInstructionFuncPtr //leo_ref/c/defn/LEOInstructionFuncPtr //leo_ref/c/macro/LEOInstructionFuncPtr //leo_ref/doc/anysymbol/LEOInstructionFuncPtr" target="_top"><span class="function">LEOInstructionFuncPtr</span></a>)(
+    <span class="keyword">struct</span> <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOInstructionFuncPtr;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOInstructionFuncPtr;name=start --><p>All instructions are implemented as functions with the following signature:
+Apart from branching instructions, every instruction has to increment the
+inContext-&gt;currentInstruction so it'll advance to the next instruction. The
+instruction functions are looked up in the gInstructions array. <!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOInstructionFuncPtr;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tdef;  uid=//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr;   name=LEONonexistentHandlerFuncPtr -->
+<a name="//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr"></a>
+<h3><a name="LEONonexistentHandlerFuncPtr">LEONonexistentHandlerFuncPtr</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr;name=start --><span class="keyword">typedef</span> <!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> ( <span class="type">*</span><a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr" logicalPath="//leo_ref/c/instm/LEONonexistentHandlerFuncPtr //leo_ref/c/clm/LEONonexistentHandlerFuncPtr //leo_ref/c/intfcm/LEONonexistentHandlerFuncPtr //leo_ref/c/intfm/LEONonexistentHandlerFuncPtr //leo_ref/c/func/LEONonexistentHandlerFuncPtr //leo_ref/c/ftmplt/LEONonexistentHandlerFuncPtr //leo_ref/c/defn/LEONonexistentHandlerFuncPtr //leo_ref/c/macro/LEONonexistentHandlerFuncPtr //leo_ref/doc/anysymbol/LEONonexistentHandlerFuncPtr" target="_top"><span class="function">LEONonexistentHandlerFuncPtr</span></a>)(
+    <span class="keyword">struct</span> <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span>,
+    <a machinegenerated="true" href="../LEOHandlerID_h/index.html#//leo_ref/c/tdef/LEOHandlerID" logicalPath="//leo_ref/c/cl/LEOHandlerID //leo_ref/c/tdef/LEOHandlerID" target="_top"><span class="type">LEOHandlerID</span></a> <span class="param">inHandler</span>,
+    <!-- a logicalPath="//leo_ref/c/cl/TMayGoUnhandledFlag //leo_ref/c/tdef/TMayGoUnhandledFlag //leo_ref/c/tag/TMayGoUnhandledFlag //leo_ref/c/struct/TMayGoUnhandledFlag //leo_ref/c/intf/TMayGoUnhandledFlag //leo_ref/doc/anysymbol/TMayGoUnhandledFlag" machineGenerated="true" --><span class="type">TMayGoUnhandledFlag</span><!-- /a --> <span class="param">mayGoUnhandled</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr;name=start --><p>If a handler call can't find the handler in the current script and no parent
+for that script exists that handles the call, this function is called to
+allow the host application to provide default behaviour for unhandled messages. <!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tdef;  uid=//leo_ref/c/tdef/LEOContextCompletionFuncPtr;   name=LEOContextCompletionFuncPtr -->
+<a name="//leo_ref/c/tdef/LEOContextCompletionFuncPtr"></a>
+<h3><a name="LEOContextCompletionFuncPtr">LEOContextCompletionFuncPtr</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOContextCompletionFuncPtr;name=start --><span class="keyword">typedef</span> <!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> ( <span class="type">*</span><a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContextCompletionFuncPtr" logicalPath="//leo_ref/c/instm/LEOContextCompletionFuncPtr //leo_ref/c/clm/LEOContextCompletionFuncPtr //leo_ref/c/intfcm/LEOContextCompletionFuncPtr //leo_ref/c/intfm/LEOContextCompletionFuncPtr //leo_ref/c/func/LEOContextCompletionFuncPtr //leo_ref/c/ftmplt/LEOContextCompletionFuncPtr //leo_ref/c/defn/LEOContextCompletionFuncPtr //leo_ref/c/macro/LEOContextCompletionFuncPtr //leo_ref/doc/anysymbol/LEOContextCompletionFuncPtr" target="_top"><span class="function">LEOContextCompletionFuncPtr</span></a>)(
+    <span class="keyword">struct</span> <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> <span class="type">*</span><span class="param">inContext</span> );  <!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOContextCompletionFuncPtr;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOContextCompletionFuncPtr;name=start --><p>This function is called when a context finishes execution, either
+because of an error, or because the outermost function finished
+executing. You can now look at the return value or pass the message
+on to the next object in the chain. <!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOContextCompletionFuncPtr;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tdef;  uid=//leo_ref/c/tdef/LEOInstruction;   name=LEOInstruction -->
+<a name="//leo_ref/c/tdef/LEOInstruction"></a>
+<h3><a name="LEOInstruction">LEOInstruction</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOInstruction;name=start --><span class="keyword">typedef</span> <span class="keyword">struct</span> <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> { 
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstructionID" logicalPath="//leo_ref/c/cl/LEOInstructionID //leo_ref/c/tdef/LEOInstructionID" target="_top"><span class="type">LEOInstructionID</span></a> <!-- a logicalPath="//leo_ref/c/econst/instructionID //leo_ref/c/data/instructionID //leo_ref/c/clconst/instructionID " machineGenerated="true" --><span class="var">instructionID</span><!-- /a -->; 
+    <!-- a logicalPath="//leo_ref/c/cl/uint16_t //leo_ref/c/tdef/uint16_t //leo_ref/c/tag/uint16_t //leo_ref/c/struct/uint16_t //leo_ref/c/intf/uint16_t //leo_ref/doc/anysymbol/uint16_t" machineGenerated="true" --><span class="type">uint16_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/param1 //leo_ref/c/data/param1 //leo_ref/c/clconst/param1 " machineGenerated="true" --><span class="var">param1</span><!-- /a -->; 
+    <!-- a logicalPath="//leo_ref/c/cl/uint32_t //leo_ref/c/tdef/uint32_t //leo_ref/c/tag/uint32_t //leo_ref/c/struct/uint32_t //leo_ref/c/intf/uint32_t //leo_ref/doc/anysymbol/uint32_t" machineGenerated="true" --><span class="type">uint32_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/param2 //leo_ref/c/data/param2 //leo_ref/c/clconst/param2 " machineGenerated="true" --><span class="var">param2</span><!-- /a -->; 
+} <!-- a logicalPath="//leo_ref/c/econst/LEOInstruction //leo_ref/c/data/LEOInstruction //leo_ref/c/clconst/LEOInstruction " machineGenerated="true" --><span class="var">LEOInstruction</span><!-- /a -->;  <!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOInstruction;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOInstruction;name=start --><p>A LEOInstruction is how an instruction looks in bytecode. It has the
+instruction's ID as the first item, and then one 16-bit and one 32-bit
+argument that depends on the particular instruction. <!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOInstruction;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tdef;  uid=//leo_ref/c/tdef/LEOContext;   name=LEOContext -->
+<a name="//leo_ref/c/tdef/LEOContext"></a>
+<h3><a name="LEOContext">LEOContext</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOContext;name=start --><span class="keyword">typedef</span> <span class="keyword">struct</span> <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContext" logicalPath="//leo_ref/c/cl/LEOContext //leo_ref/c/tdef/LEOContext" target="_top"><span class="type">LEOContext</span></a> { 
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/referenceCount //leo_ref/c/data/referenceCount //leo_ref/c/clconst/referenceCount " machineGenerated="true" --><span class="var">referenceCount</span><!-- /a -->; 
+    <span class="keyword">struct</span> <a machinegenerated="true" href="../LEOContextGroup_h/index.html#//leo_ref/c/tdef/LEOContextGroup" logicalPath="//leo_ref/c/cl/LEOContextGroup //leo_ref/c/tdef/LEOContextGroup" target="_top"><span class="type">LEOContextGroup</span></a> <span class="type">*</span><!-- a logicalPath="//leo_ref/c/econst/group //leo_ref/c/data/group //leo_ref/c/clconst/group " machineGenerated="true" --><span class="var">group</span><!-- /a -->; <span class="comment">// The group this context belongs to, containing its global state, references etc.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/LEOContextFlags //leo_ref/c/tdef/LEOContextFlags //leo_ref/c/tag/LEOContextFlags //leo_ref/c/struct/LEOContextFlags //leo_ref/c/intf/LEOContextFlags //leo_ref/doc/anysymbol/LEOContextFlags" machineGenerated="true" --><span class="type">LEOContextFlags</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/flags //leo_ref/c/data/flags //leo_ref/c/clconst/flags " machineGenerated="true" --><span class="var">flags</span><!-- /a -->; <span class="comment">// But flags for flow control etc.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <a machinegenerated="true" href="index.html#//leo_ref/doc/typedeffield/LEOContext/errMsg" logicalPath="//leo_ref/c/cl/errMsg //leo_ref/c/tdef/errMsg //leo_ref/c/tag/errMsg //leo_ref/c/struct/errMsg //leo_ref/c/intf/errMsg //leo_ref/doc/anysymbol/errMsg" target="_top"><span class="type">errMsg</span></a>[<span class="number">1024</span>]; <span class="comment">// Error message to display when kLEOContextKeepRunning flag has been set to FALSE.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/errLine //leo_ref/c/data/errLine //leo_ref/c/clconst/errLine " machineGenerated="true" --><span class="var">errLine</span><!-- /a -->; <span class="comment">// Line on which the error occurred. Or SIZE_T_MAX if we don't know.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/errOffset //leo_ref/c/data/errOffset //leo_ref/c/clconst/errOffset " machineGenerated="true" --><span class="var">errOffset</span><!-- /a -->; <span class="comment">// Byte offset in script at which the error occurred, or SIZE_T_MAX if we don't know. If this isn't present, errLine might still be set.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/uint16_t //leo_ref/c/tdef/uint16_t //leo_ref/c/tag/uint16_t //leo_ref/c/struct/uint16_t //leo_ref/c/intf/uint16_t //leo_ref/doc/anysymbol/uint16_t" machineGenerated="true" --><span class="type">uint16_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/errFileID //leo_ref/c/data/errFileID //leo_ref/c/clconst/errFileID " machineGenerated="true" --><span class="var">errFileID</span><!-- /a -->; <span class="comment">// ID of the file in which the error occurred.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/itemDelimiter //leo_ref/c/data/itemDelimiter //leo_ref/c/clconst/itemDelimiter " machineGenerated="true" --><span class="var">itemDelimiter</span><!-- /a -->; <span class="comment">// item delimiter to use for chunk expressions in values.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/numCallStackEntries //leo_ref/c/data/numCallStackEntries //leo_ref/c/clconst/numCallStackEntries " machineGenerated="true" --><span class="var">numCallStackEntries</span><!-- /a -->; <span class="comment">// Number of items in callStackEntries.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/LEOCallStackEntry //leo_ref/c/tdef/LEOCallStackEntry //leo_ref/c/tag/LEOCallStackEntry //leo_ref/c/struct/LEOCallStackEntry //leo_ref/c/intf/LEOCallStackEntry //leo_ref/doc/anysymbol/LEOCallStackEntry" machineGenerated="true" --><span class="type">LEOCallStackEntry</span><!-- /a --> <span class="type">*</span><!-- a logicalPath="//leo_ref/c/econst/callStackEntries //leo_ref/c/data/callStackEntries //leo_ref/c/clconst/callStackEntries " machineGenerated="true" --><span class="var">callStackEntries</span><!-- /a -->; <span class="comment">// Array of call stack entries to allow showing a simple backtrace and picking handlers from the current script.</span> 
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstructionFuncPtr" logicalPath="//leo_ref/c/cl/LEOInstructionFuncPtr //leo_ref/c/tdef/LEOInstructionFuncPtr" target="_top"><span class="type">LEOInstructionFuncPtr</span></a> <!-- a logicalPath="//leo_ref/c/econst/preInstructionProc //leo_ref/c/data/preInstructionProc //leo_ref/c/clconst/preInstructionProc " machineGenerated="true" --><span class="var">preInstructionProc</span><!-- /a -->; <span class="comment">// For each instruction, this function gets called, to let you do idle processing, hook in a debugger etc. This should NOT be an instruction, as that would advance the PC and screw up the call of the actual instruction.</span> 
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstructionFuncPtr" logicalPath="//leo_ref/c/cl/LEOInstructionFuncPtr //leo_ref/c/tdef/LEOInstructionFuncPtr" target="_top"><span class="type">LEOInstructionFuncPtr</span></a> <!-- a logicalPath="//leo_ref/c/econst/promptProc //leo_ref/c/data/promptProc //leo_ref/c/clconst/promptProc " machineGenerated="true" --><span class="var">promptProc</span><!-- /a -->; <span class="comment">// On certain errors, this function is called to enter into the debugger prompt.</span> 
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEONonexistentHandlerFuncPtr" logicalPath="//leo_ref/c/cl/LEONonexistentHandlerFuncPtr //leo_ref/c/tdef/LEONonexistentHandlerFuncPtr" target="_top"><span class="type">LEONonexistentHandlerFuncPtr</span></a> <!-- a logicalPath="//leo_ref/c/econst/callNonexistentHandlerProc //leo_ref/c/data/callNonexistentHandlerProc //leo_ref/c/clconst/callNonexistentHandlerProc " machineGenerated="true" --><span class="var">callNonexistentHandlerProc</span><!-- /a -->; <span class="comment">// When a handler is called that doesn't exist, and a script has no parent, this function is called (e.g. to display an error message or call an XCMD).</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/size_t //leo_ref/c/tdef/size_t //leo_ref/c/tag/size_t //leo_ref/c/struct/size_t //leo_ref/c/intf/size_t //leo_ref/doc/anysymbol/size_t" machineGenerated="true" --><span class="type">size_t</span><!-- /a --> <!-- a logicalPath="//leo_ref/c/econst/numSteps //leo_ref/c/data/numSteps //leo_ref/c/clconst/numSteps " machineGenerated="true" --><span class="var">numSteps</span><!-- /a -->; <span class="comment">// Used by LEODebugger's PreInstructionProc to implement single-stepping.</span> 
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/cl/LEOInstruction //leo_ref/c/tdef/LEOInstruction" target="_top"><span class="type">LEOInstruction</span></a> <span class="type">*</span><!-- a logicalPath="//leo_ref/c/econst/currentInstruction //leo_ref/c/data/currentInstruction //leo_ref/c/clconst/currentInstruction " machineGenerated="true" --><span class="var">currentInstruction</span><!-- /a -->; <span class="comment">// PC</span> 
+    <span class="keyword">union</span> <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tag/LEOValue" logicalPath="//leo_ref/c/cl/LEOValue //leo_ref/c/tdef/LEOValue //leo_ref/c/tag/LEOValue" target="_top"><span class="type">LEOValue</span></a> <span class="type">*</span><!-- a logicalPath="//leo_ref/c/econst/stackBasePtr //leo_ref/c/data/stackBasePtr //leo_ref/c/clconst/stackBasePtr " machineGenerated="true" --><span class="var">stackBasePtr</span><!-- /a -->; <span class="comment">// BP</span> 
+    <span class="keyword">union</span> <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tag/LEOValue" logicalPath="//leo_ref/c/cl/LEOValue //leo_ref/c/tdef/LEOValue //leo_ref/c/tag/LEOValue" target="_top"><span class="type">LEOValue</span></a> <span class="type">*</span><!-- a logicalPath="//leo_ref/c/econst/stackEndPtr //leo_ref/c/data/stackEndPtr //leo_ref/c/clconst/stackEndPtr " machineGenerated="true" --><span class="var">stackEndPtr</span><!-- /a -->; <span class="comment">// SP (always points at element after last element)</span> 
+    <span class="keyword">union</span> <a machinegenerated="true" href="../LEOValue_h/index.html#//leo_ref/c/tag/LEOValue" logicalPath="//leo_ref/c/cl/LEOValue //leo_ref/c/tdef/LEOValue //leo_ref/c/tag/LEOValue" target="_top"><span class="type">LEOValue</span></a> <a machinegenerated="true" href="index.html#//leo_ref/doc/typedeffield/LEOContext/stack" logicalPath="//leo_ref/c/cl/stack //leo_ref/c/tdef/stack //leo_ref/c/tag/stack //leo_ref/c/struct/stack //leo_ref/c/intf/stack //leo_ref/doc/anysymbol/stack" target="_top"><span class="type">stack</span></a>[<a machinegenerated="true" href="index.html#//leo_ref/c/macro/LEO_STACK_SIZE" logicalPath="//leo_ref/c/cl/LEO_STACK_SIZE //leo_ref/c/tdef/LEO_STACK_SIZE //leo_ref/c/tag/LEO_STACK_SIZE //leo_ref/c/struct/LEO_STACK_SIZE //leo_ref/c/intf/LEO_STACK_SIZE //leo_ref/doc/anysymbol/LEO_STACK_SIZE" target="_top"><span class="type">LEO_STACK_SIZE</span></a>]; <span class="comment">// The stack.</span> 
+    <!-- a logicalPath="//leo_ref/c/cl/void //leo_ref/c/tdef/void //leo_ref/c/tag/void //leo_ref/c/struct/void //leo_ref/c/intf/void //leo_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a --> <span class="type">*</span><!-- a logicalPath="//leo_ref/c/econst/userData //leo_ref/c/data/userData //leo_ref/c/clconst/userData " machineGenerated="true" --><span class="var">userData</span><!-- /a -->; 
+    <a machinegenerated="true" href="../LEOUserData_h/index.html#//leo_ref/c/tdef/LEOUserDataCleanUpFuncPtr" logicalPath="//leo_ref/c/cl/LEOUserDataCleanUpFuncPtr //leo_ref/c/tdef/LEOUserDataCleanUpFuncPtr" target="_top"><span class="type">LEOUserDataCleanUpFuncPtr</span></a> <!-- a logicalPath="//leo_ref/c/econst/cleanUpUserData //leo_ref/c/data/cleanUpUserData //leo_ref/c/clconst/cleanUpUserData " machineGenerated="true" --><span class="var">cleanUpUserData</span><!-- /a -->; 
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOContextCompletionFuncPtr" logicalPath="//leo_ref/c/cl/LEOContextCompletionFuncPtr //leo_ref/c/tdef/LEOContextCompletionFuncPtr" target="_top"><span class="type">LEOContextCompletionFuncPtr</span></a> <!-- a logicalPath="//leo_ref/c/econst/contextCompleted //leo_ref/c/data/contextCompleted //leo_ref/c/clconst/contextCompleted " machineGenerated="true" --><span class="var">contextCompleted</span><!-- /a -->; 
+} <!-- a logicalPath="//leo_ref/c/econst/LEOContext //leo_ref/c/data/LEOContext //leo_ref/c/clconst/LEOContext " machineGenerated="true" --><span class="var">LEOContext</span><!-- /a -->;  <!-- headerDoc=declaration;uid=//leo_ref/c/tdef/LEOContext;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/group;   name=group -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/group"></a>
+<code>group</code>
+</dt>
+<dd><p>The LEOContextGroup that collects the global state
+shared between this context and any others in
+its group.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/flags;   name=flags -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/flags"></a>
+<code>flags</code>
+</dt>
+<dd><p>flags that let you pause or exit scripts.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/errMsg;   name=errMsg -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/errMsg"></a>
+<code>errMsg</code>
+</dt>
+<dd><p>Error message to display when the kLEOContextKeepRunning flag has
+been set to FALSE. If this is an empty string, it was a benign exit.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/itemDelimiter;   name=itemDelimiter -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/itemDelimiter"></a>
+<code>itemDelimiter</code>
+</dt>
+<dd><p>The delimiter to use for the "item" chunk expression. Defaults to comma (',').</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/preInstructionProc;   name=preInstructionProc -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/preInstructionProc"></a>
+<code>preInstructionProc</code>
+</dt>
+<dd><p>A function to call on each instruction before it
+is executed. Useful as a hook-up-point for a debugger,
+or to process events while a script is running (e.g. user cancellation).</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/callNonexistentHandlerProc;   name=callNonexistentHandlerProc -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/callNonexistentHandlerProc"></a>
+<code>callNonexistentHandlerProc</code>
+</dt>
+<dd><p>When a handler is called that doesn't exist, and a script has no parent, this function is called (e.g. to display an error message or call an XCMD or equivalent third-party plugin).</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/numSteps;   name=numSteps -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/numSteps"></a>
+<code>numSteps</code>
+</dt>
+<dd><p>Used by LEODebugger's PreInstructionProc to implement single-stepping.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/currentInstruction;   name=currentInstruction -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/currentInstruction"></a>
+<code>currentInstruction</code>
+</dt>
+<dd><p>The instruction currently being executed. Essentially the Program Counter of our virtual CPU.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/stackBasePtr;   name=stackBasePtr -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/stackBasePtr"></a>
+<code>stackBasePtr</code>
+</dt>
+<dd><p>Base pointer into stack, used during function calls to find parameters &amp; start of local variable section.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/stackEndPtr;   name=stackEndPtr -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/stackEndPtr"></a>
+<code>stackEndPtr</code>
+</dt>
+<dd><p>Stack pointer indicating used size of our stack. Always points at element after last element.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/stack;   name=stack -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/stack"></a>
+<code>stack</code>
+</dt>
+<dd><p>The stack containing all our local variables, parameters etc.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/userData;   name=userData -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/userData"></a>
+<code>userData</code>
+</dt>
+<dd><p>A pointer for use by the client, for storing additional information in.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/cleanUpUserData;   name=cleanUpUserData -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/cleanUpUserData"></a>
+<code>cleanUpUserData</code>
+</dt>
+<dd><p>A function that will be passed the userData pointer and called right before we free the context's memory, which you can provide to free any memory used by the userData.</p></dd>
+<dt>
+<!-- headerDoc=typedeffield;  uid=//leo_ref/doc/typedeffield/LEOContext/contextCompleted;   name=contextCompleted -->
+<a name="//leo_ref/doc/typedeffield/LEOContext/contextCompleted"></a>
+<code>contextCompleted</code>
+</dt>
+<dd><p>A function that is called once execution aborts due to an error or the outermost function completes. It can retrieve result values from the context and free its memory.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOContext;name=start --><p>A LEOContext encapsulates all execution state needed to run bytecode. Speaking
+in CPU terms, it encapsulates the registers, the call stack, and a few
+thread-globals. Hence, each thread in which you want to run bytecode needs
+its own LEOContext.
+<!-- headerDoc=discussion;uid=//leo_ref/c/tdef/LEOContext;name=end --><!-- end discussion -->
+</p>
+<p><b>See Also</b></p>
+<div class="list_indent"><dl>
+<dt><p><a href="../LEOValue_h/index.html#//leo_ref/c/tag/LEOValueReference" logicalPath="//leo_ref/c/tag/LEOValueReference" target="_top">LEOValueReference</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOValue_h/index.html#//leo_ref/c/tdef/LEOValuePtr" logicalPath="//leo_ref/c/tdef/LEOValuePtr" target="_top">LEOValuePtr</a></p></dt>
+<dd></dd>
+<dt><p><a href="../LEOContextGroup_h/index.html#//leo_ref/c/tdef/LEOContextGroup" logicalPath="//leo_ref/c/tdef/LEOContextGroup" target="_top">LEOContextGroup</a></p></dt>
+<dd></dd>
+<dt><p><a href="index.html#//leo_ref/c/tdef/LEOInstruction" logicalPath="//leo_ref/c/tdef/LEOInstruction" target="_top">LEOInstruction</a></p></dt>
+<dd></dd>
+</dl></div>
+<hr class="betweenSections">
+<a name="HeaderDoc_structs"></a>
+<h2 class="h2tight">Structs&nbsp;and&nbsp;Unions</h2>
+<dl>
+<dt><tt><a href="index.html#//leo_ref/c/tag/LEOInstructionEntry" target="_top">LEOInstructionEntry</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tag;  uid=//leo_ref/c/tag/LEOInstructionEntry;   name=LEOInstructionEntry -->
+<a name="//leo_ref/c/tag/LEOInstructionEntry"></a>
+<h3><a name="LEOInstructionEntry">LEOInstructionEntry</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/tag/LEOInstructionEntry;name=start --><span class="keyword">struct</span> <a machinegenerated="true" href="index.html#//leo_ref/c/tag/LEOInstructionEntry" logicalPath="//leo_ref/c/cl/LEOInstructionEntry //leo_ref/c/tdef/LEOInstructionEntry //leo_ref/c/tag/LEOInstructionEntry" target="_top"><span class="type">LEOInstructionEntry</span></a> { 
+    <a machinegenerated="true" href="index.html#//leo_ref/c/tdef/LEOInstructionFuncPtr" logicalPath="//leo_ref/c/cl/LEOInstructionFuncPtr //leo_ref/c/tdef/LEOInstructionFuncPtr" target="_top"><span class="type">LEOInstructionFuncPtr</span></a> <!-- a logicalPath="//leo_ref/c/econst/proc //leo_ref/c/data/proc //leo_ref/c/clconst/proc " machineGenerated="true" --><span class="var">proc</span><!-- /a -->;
+    <span class="keyword">const</span> <!-- a logicalPath="//leo_ref/c/cl/char //leo_ref/c/tdef/char //leo_ref/c/tag/char //leo_ref/c/struct/char //leo_ref/c/intf/char //leo_ref/doc/anysymbol/char" machineGenerated="true" --><span class="type">char</span><!-- /a --> <span class="type">*</span><!-- a logicalPath="//leo_ref/c/econst/name //leo_ref/c/data/name //leo_ref/c/clconst/name " machineGenerated="true" --><span class="var">name</span><!-- /a -->;
+};  <!-- headerDoc=declaration;uid=//leo_ref/c/tag/LEOInstructionEntry;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Fields</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=structfield;  uid=//leo_ref/doc/structfield/LEOInstructionEntry/proc;   name=proc -->
+<a name="//leo_ref/doc/structfield/LEOInstructionEntry/proc"></a>
+<code>proc</code>
+</dt>
+<dd><p>The function to call for this instruction</p></dd>
+<dt>
+<!-- headerDoc=structfield;  uid=//leo_ref/doc/structfield/LEOInstructionEntry/name;   name=name -->
+<a name="//leo_ref/doc/structfield/LEOInstructionEntry/name"></a>
+<code>name</code>
+</dt>
+<dd><p>String representation of the function's name. *must be* a constant or otherwise guaranteed to stay around as long as Leonie needs it.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/tag/LEOInstructionEntry;name=start --><p>A LEOInstructionEntry is how we look up the function associated with an
+instruction ID. We keep a master table of all instructions we know, and you
+can add your own instructions by simply adding to that list. You
+generally do not use this directly. Instead, you use the LEOINSTR_START,
+LEOINSTR, and LEOINSTR_LAST macros below to declare a global array:
+</p>
+<p>LEOINSTR_START(FrobnitzWebService,NUM_WEBSERVICE_INSTRUCTIONS)
+LEOINSTR(MyWebServiceStartInstruction)
+LEOINSTR_LAST(MyWebServiceStopInstruction)
+</p>
+<p>and pass that to LEOAddInstructionsToInstructionArray:
+</p>
+<p>size_t outFirstNewInstruction = 0;
+LEOAddInstructionsToInstructionArray( gFrobnitzWebServiceInstructions,
+NUM_WEBSERVICE_INSTRUCTIONS, &amp;outFirstNewInstruction );
+</p>
+<p>Assuming you've declared your instruction IDs in an enum like this:
+</p>
+<p>enum
+{
+MY_WEBSERVICE_START_INSTR = 0,
+MY_WEBSERVICE_STOP_INSTR,
+NUM_WEBSERVICE_INSTRUCTIONS
+};
+</p>
+<p>The instruction IDs to generate can now be calculated like:
+</p>
+<p>LEOHandlerAddInstruction( theHandler, outFirstNewInstruction +MY_WEB_SERVICE_START_INSTR, 0, 0 );
+</p>
+<p>or the likes. <!-- headerDoc=discussion;uid=//leo_ref/c/tag/LEOInstructionEntry;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenSections">
+<a name="HeaderDoc_enums"></a>
+<h2 class="h2tight">Enumerated Types</h2>
+<dl>
+<dt><tt><a href="index.html#//leo_ref/c/tag/Possible" target="_top">Possible</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=tag;  uid=//leo_ref/c/tag/Possible;   name=Possible -->
+<a name="//leo_ref/c/tag/Possible"></a>
+<h3><a name="Possible">Possible</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/tag/Possible;name=start --><span class="keyword">enum</span> { 
+    <a machinegenerated="true" href="index.html#//leo_ref/c/econst/kLEOContextKeepRunning" logicalPath="//leo_ref/c/econst/kLEOContextKeepRunning" target="_top"><span class="var">kLEOContextKeepRunning</span></a> = (
+        <span class="number">1</span> &lt;&lt; <span class="number">0</span>),
+    <a machinegenerated="true" href="index.html#//leo_ref/c/econst/kLEOContextPause" logicalPath="//leo_ref/c/econst/kLEOContextPause" target="_top"><span class="var">kLEOContextPause</span></a> = (
+        <span class="number">1</span> &lt;&lt; <span class="number">1</span>),
+    <a machinegenerated="true" href="index.html#//leo_ref/c/econst/kLEOContextResuming" logicalPath="//leo_ref/c/econst/kLEOContextResuming" target="_top"><span class="var">kLEOContextResuming</span></a> = (
+        <span class="number">1</span> &lt;&lt; <span class="number">2</span>) 
+};  <!-- headerDoc=declaration;uid=//leo_ref/c/tag/Possible;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Constants</font></h5>
+<div class="param_indent">
+<dl>
+<dt><a name="//leo_ref/c/econst/kLEOContextKeepRunning"><code>kLEOContextKeepRunning</code></a></dt>
+<dd><p>Clear this bit to stop script execution. Used on errors and for ExitToTop.</p></dd>
+<dt><a name="//leo_ref/c/econst/kLEOContextPause"><code>kLEOContextPause</code></a></dt>
+<dd><p>Set by the current instruction when it wants to pause the current context (e.g. to perform some async tasks which should appear synchronous to scripts). The instruction should not advance the PC until the context is resumed, which it can detect by looking at the kLEOContextResuming flag.</p></dd>
+<dt><a name="//leo_ref/c/econst/kLEOContextResuming"><code>kLEOContextResuming</code></a></dt>
+<dd><p>Context was just resumed from being paused. The current instruction can now finish its work, advance the PC and return.</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/tag/Possible;name=start --><p>values for the 'flags' field in the LEOContext.</p>
+<!-- headerDoc=discussion;uid=//leo_ref/c/tag/Possible;name=end --><!-- end discussion -->
+<hr class="betweenSections">
+<a name="HeaderDoc_pdefines"></a>
+<h2 class="h2tight">Macro Definitions</h2>
+<dl>
+<dt><tt><a href="index.html#//leo_ref/c/macro/LEO_STACK_SIZE" target="_top">LEO_STACK_SIZE</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//leo_ref/c/macro/BACK_OF_STACK" target="_top">BACK_OF_STACK</a></tt></dt>
+<dd></dd>
+</dl>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=macro;  uid=//leo_ref/c/macro/LEO_STACK_SIZE;   name=LEO_STACK_SIZE -->
+<a name="//leo_ref/c/macro/LEO_STACK_SIZE"></a>
+<h3><a name="LEO_STACK_SIZE">LEO_STACK_SIZE</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/macro/LEO_STACK_SIZE;name=start --><span class="preprocessor">#define</span> <a machinegenerated="true" href="index.html#//leo_ref/c/macro/LEO_STACK_SIZE" logicalPath="//leo_ref/c/cl/LEO_STACK_SIZE //leo_ref/c/tdef/LEO_STACK_SIZE //leo_ref/c/tag/LEO_STACK_SIZE //leo_ref/c/struct/LEO_STACK_SIZE //leo_ref/c/intf/LEO_STACK_SIZE //leo_ref/c/econst/LEO_STACK_SIZE //leo_ref/c/data/LEO_STACK_SIZE //leo_ref/c/clconst/LEO_STACK_SIZE //leo_ref/c/instm/LEO_STACK_SIZE //leo_ref/c/clm/LEO_STACK_SIZE //leo_ref/c/intfcm/LEO_STACK_SIZE //leo_ref/c/intfm/LEO_STACK_SIZE //leo_ref/c/func/LEO_STACK_SIZE //leo_ref/c/ftmplt/LEO_STACK_SIZE //leo_ref/c/defn/LEO_STACK_SIZE //leo_ref/c/macro/LEO_STACK_SIZE" target="_top"><span class="preprocessor">LEO_STACK_SIZE</span></a> <span class="preprocessor">1024</span> <!-- headerDoc=declaration;uid=//leo_ref/c/macro/LEO_STACK_SIZE;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/macro/LEO_STACK_SIZE;name=start --><p>How many LEOValues can be on the stack before we run out of stack space. <!-- headerDoc=discussion;uid=//leo_ref/c/macro/LEO_STACK_SIZE;name=end --><!-- end discussion -->
+</p>
+<hr class="betweenAPIEntries">
+<!-- headerDoc=macro;  uid=//leo_ref/c/macro/BACK_OF_STACK;   name=BACK_OF_STACK -->
+<a name="//leo_ref/c/macro/BACK_OF_STACK"></a>
+<h3><a name="BACK_OF_STACK">BACK_OF_STACK</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//leo_ref/c/macro/BACK_OF_STACK;name=start --><span class="preprocessor">#define</span> <a machinegenerated="true" href="index.html#//leo_ref/c/macro/BACK_OF_STACK" logicalPath="//leo_ref/c/cl/BACK_OF_STACK //leo_ref/c/tdef/BACK_OF_STACK //leo_ref/c/tag/BACK_OF_STACK //leo_ref/c/struct/BACK_OF_STACK //leo_ref/c/intf/BACK_OF_STACK //leo_ref/c/econst/BACK_OF_STACK //leo_ref/c/data/BACK_OF_STACK //leo_ref/c/clconst/BACK_OF_STACK //leo_ref/c/instm/BACK_OF_STACK //leo_ref/c/clm/BACK_OF_STACK //leo_ref/c/intfcm/BACK_OF_STACK //leo_ref/c/intfm/BACK_OF_STACK //leo_ref/c/func/BACK_OF_STACK //leo_ref/c/ftmplt/BACK_OF_STACK //leo_ref/c/defn/BACK_OF_STACK //leo_ref/c/macro/BACK_OF_STACK" target="_top"><span class="preprocessor">BACK_OF_STACK</span></a> <span class="ignore"></span><span class="ignore"></span><span class="ignore"></span><span class="ignore"></span> <!-- headerDoc=declaration;uid=//leo_ref/c/macro/BACK_OF_STACK;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//leo_ref/c/macro/BACK_OF_STACK;name=start --><p>Pass this as param1 to some instructions that take a
+basePtr-relative address to make it pop the last
+value off the stack instead of reading a value from that
+address. Since they reinterpret the number as an int16_t, it needs to be
+a value in the middle of the unsigned range.
+<!-- headerDoc=discussion;uid=//leo_ref/c/macro/BACK_OF_STACK;name=end --><!-- end discussion -->
+</p>
+<p><b>Value</b></p>
+
+<p>0x8000 (32768)</p>
+<p class="gapBeforeFooter">&nbsp;</p>
+<hr class="afterFooter">
+<div class="hd_copyright_and_timestamp">
+<p class="hd_copyright">&copy; 2010-2013 Uli Kusterer, all rights reserved. </p>
+<p class="hd_timestamp">Last Updated: 2019-02-10
+</p>
+</div>
+</td>
+</tr></table>
+</body>
+</html>
