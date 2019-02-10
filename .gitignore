@@ -1,5 +1,9 @@
 svn_version.h
 /Stacksmith/BuildVersionHeader
+docs/_site
+docs/.sass-cache
+docs/.jekyll-metadata
+docs/Gemfile.lock
 *.o
 *.lo
 *.la
@@ -27,7 +31,4 @@ xcuserdata
 *.xcworkspace
 .idea
 *.xcuserdata
-docs/_site
-docs/.sass-cache
-docs/.jekyll-metadata
 
