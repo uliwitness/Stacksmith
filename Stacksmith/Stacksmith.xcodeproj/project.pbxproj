@@ -2190,7 +2190,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55E23BFB133FAB9E00E6B444 /* Build configuration list for PBXNativeTarget "BuildVersionHeader" */;
 			buildPhases = (
-				55E23BFE133FABBB00E6B444 /* ShellScript */,
+				55E23BFE133FABBB00E6B444 /* BuildVersionHeader */,
 			);
 			buildRules = (
 			);
@@ -2548,13 +2548,14 @@
 			shellScript = "${TARGET_BUILD_DIR}/${PRODUCT_NAME}";
 			showEnvVarsInLog = 0;
 		};
-		55E23BFE133FABBB00E6B444 /* ShellScript */ = {
+		55E23BFE133FABBB00E6B444 /* BuildVersionHeader */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = BuildVersionHeader;
 			outputPaths = (
 				svn_version.h,
 			);
