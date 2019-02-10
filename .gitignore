@@ -27,3 +27,7 @@ xcuserdata
 *.xcworkspace
 .idea
 *.xcuserdata
+docs/_site
+docs/.sass-cache
+docs/.jekyll-metadata
+
