@@ -47,6 +47,9 @@
 	echo "     Build: $argv[2]\n";
 	
 	$actualversion = $theversion;
+	$tag = str_replace( "__", "_", str_replace( ".", "_", str_replace( " ", "_", str_replace( "(", "_", str_replace( ")", "_", str_replace( "a", "_a", $theversion ) ) ) ) ) );
+	$tag = trim ( $tag, " _\t\n\r\0\x0B" );
+	$downloadurl="https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_$tag/".basename($argv[3]);
 	$feedstr = "<?xml version=\"1.0\"?>
 <rss version=\"2.0\" 
 	xmlns:sparkle=\"http://sparkle.andymatuschak.org/rss/1.0/modules/sparkle/\">
@@ -56,9 +59,9 @@
     <description>Updates for Stacksmith</description>
     <item>
        <title>Stacksmith $actualversion</title>
-       <link>http://stacksmith.org/nightlies/".basename($argv[3])."</link>
+       <link>$downloadurl</link>
        <description>".$updatemessage."</description>
-       <enclosure url=\"http://stacksmith.org/nightlies/".basename($argv[3])."\" length=\"".filesize($argv[3])."\" type=\"application/octet-stream\" sparkle:dsaSignature=\"".$argv[4]."\" />
+       <enclosure url=\"$downloadurl\" length=\"".filesize($argv[3])."\" type=\"application/octet-stream\" sparkle:dsaSignature=\"".$argv[4]."\" />
        <sparkle:version>$actualversion</sparkle:version>
      </item>
   </channel>
