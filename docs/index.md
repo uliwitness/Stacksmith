@@ -14,4 +14,4 @@ Stacksmith is still in development, and not yet really suitable for use by non-p
 
 ## Source Code
 
-There is [the Stacksmith Github repository](https://github.com/uliwitness/Stacksmith)
+There is [the Stacksmith Github repository](https://github.com/uliwitness/Stacksmith) where you can also find [releases](https://github.com/uliwitness/Stacksmith/releases).
