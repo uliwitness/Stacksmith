@@ -1,18 +1,28 @@
 <?xml version="1.0"?>
-<rss version="2.0" 
+<rss version="2.0"
 	xmlns:sparkle="http://sparkle.andymatuschak.org/rss/1.0/modules/sparkle/">
-  <channel>
-    <title>Stacksmith nightly Appcast</title>
-    <link>http://stacksmith.org/</link>
-    <description>Updates for Stacksmith</description>
-    <item>
-       <title>Stacksmith 1.0a11 (1718)</title>
-       <link>https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_0_a11_1718/Stacksmith.tgz</link>
-       <description>&lt;h3&gt;2019-02-11&lt;/h3&gt;
-Fix 'no property &quot;1:tool&quot;' error messages.&lt;br /&gt;
-</description>
-       <enclosure url="https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_0_a11_1718/Stacksmith.tgz" length="7407979" type="application/octet-stream" sparkle:dsaSignature="" />
-       <sparkle:version>1.0a11 (1718)</sparkle:version>
-     </item>
-  </channel>
+	<channel>
+		<title>Stacksmith nightly Appcast</title>
+		<link>http://stacksmith.org/</link>
+		<description>Updates for Stacksmith</description>
+		<item>
+			<title>Stacksmith 1.0a11 (1718)</title>
+			<link>https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_a11_1718/Stacksmith.tgz</link>
+			<description>&lt;h3&gt;2019-02-11&lt;/h3&gt;
+				Fix 'no property &quot;1:tool&quot;' error messages.&lt;br /&gt;
+				&lt;h3&gt;2019-02-10&lt;/h3&gt;
+				Fix accidental event masks where we should have been using event types and thus got a hang in mouse tracking.&lt;br /&gt;
+				Rewrite WILDViewFactory to create objects based on NSNib, not by archiving/unarchiving ourselves, which builds with the new SDK.&lt;br /&gt;
+				More informative build log messages.&lt;br /&gt;
+				Merge branch 'master' into development&lt;br /&gt;
+				Don't commit the Gemfile.lock&lt;br /&gt;
+				Merge branch 'master' into development&lt;br /&gt;
+				Restore content from our two old websites.&lt;br /&gt;
+				Merge branch 'master' into development&lt;br /&gt;
+				Commit generated API docs for website.&lt;br /&gt;
+			</description>
+			<enclosure url="https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_a11_1718/Stacksmith.tgz" length="7407984" type="application/octet-stream" sparkle:dsaSignature="MC0CFQDvH8NwdwEIftMP6bS0Tz7FwhWBGgIUfxwzlADDER5eCcwLFt5KrY+HvtE=" />
+			<sparkle:version>1.0a11 (1718)</sparkle:version>
+		</item>
+	</channel>
 </rss>
