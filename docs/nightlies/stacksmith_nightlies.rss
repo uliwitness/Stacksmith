@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<rss version="2.0" 
+	xmlns:sparkle="http://sparkle.andymatuschak.org/rss/1.0/modules/sparkle/">
+  <channel>
+    <title>Stacksmith nightly Appcast</title>
+    <link>http://stacksmith.org/</link>
+    <description>Updates for Stacksmith</description>
+    <item>
+       <title>Stacksmith 1.0a11 (1718)</title>
+       <link>https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_0_a11_1718/Stacksmith.tgz</link>
+       <description>&lt;h3&gt;2019-02-11&lt;/h3&gt;
+Fix 'no property &quot;1:tool&quot;' error messages.&lt;br /&gt;
+</description>
+       <enclosure url="https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_0_a11_1718/Stacksmith.tgz" length="7407979" type="application/octet-stream" sparkle:dsaSignature="" />
+       <sparkle:version>1.0a11 (1718)</sparkle:version>
+     </item>
+  </channel>
+</rss>
