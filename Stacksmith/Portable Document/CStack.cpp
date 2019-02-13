@@ -819,6 +819,15 @@ void	CStack::SetTool( TTool inTool )
 			GetCurrentCard()->ToolChangedFrom( oldTool );
 			GetCurrentCard()->GetBackground()->ToolChangedFrom( oldTool );
 		}
+		
+		CStack	*	frontStack = CStack::GetFrontStack();
+		CCard	*	frontCard = nullptr;
+		if( frontStack )
+			frontCard = frontStack->GetCurrentCard();
+		if( frontCard )
+		{
+			frontCard->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*,bool){}, EMayGoUnhandled, "choose %s", CStack::GetToolName(mCurrentTool) );
+		}
 	}
 }
 

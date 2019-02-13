@@ -240,6 +240,8 @@ bool	CButtonPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inC
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return true;
 		SetHighlight( theHighlight );
+		if( mFamily != 0 )
+			mOwner->UnhighlightFamilyMembersOfPart( this );
 	}
 	else if( strcasecmp("pressed", inPropertyName) == 0 )
 	{

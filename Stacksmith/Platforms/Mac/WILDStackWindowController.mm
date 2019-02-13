@@ -1191,6 +1191,11 @@ using namespace Carlson;
 	}
 	
 	mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while selecting window: " << errMsg << std::endl; } }, EMayGoUnhandled, "selectWindow" );
+	CStack *frontStack = CStack::GetFrontStack();
+	if( frontStack != mStack )
+	{
+		mStack->GetCurrentCard()->SendMessage(NULL, [](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj, bool wasHandled){ if( errMsg ) { std::cerr << "Error while selecting window: " << errMsg << std::endl; } }, EMayGoUnhandled, "mainStackChange" );
+	}
 }
 
 

@@ -45,11 +45,11 @@
         <lineWidth>1</lineWidth>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
-        <style>standard</style>
+        <style>rectangle</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
         <sharedHighlight><false/></sharedHighlight>
-        <family>0</family>
+        <family>1</family>
         <titleWidth>0</titleWidth>
         <icon>0</icon>
         <cursor>128</cursor>
@@ -102,11 +102,11 @@ end mouseUp</script>
         <lineWidth>1</lineWidth>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
-        <style>standard</style>
+        <style>rectangle</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
         <sharedHighlight><false/></sharedHighlight>
-        <family>0</family>
+        <family>1</family>
         <titleWidth>0</titleWidth>
         <icon>0</icon>
         <cursor>128</cursor>
@@ -122,5 +122,13 @@ end mouseUp</script>
 end mouseUp</script>
     </part>
     <name></name>
-    <script></script>
+    <script>on mainStackChange
+	if the mainStack is not empty then
+		set highlight of card button (the tool of the mainStack) to true
+	end if
+end mainStackChange
+
+on choose theTool
+	set highlight of card button theTool to true
+end choose</script>
 </card>
