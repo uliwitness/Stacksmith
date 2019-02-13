@@ -6,11 +6,11 @@ layout: home
 ---
 A tool for making apps for non-programmers
 
-<img src="/assets/stacksmith_icon.png" align="right" alt="The Stacksmith Icon" title="The Stacksmith Icon" hspace="8" vspace="8">
-
 ## Can I use it yet?
 
 Stacksmith is still in development, and not yet really suitable for use by non-programmers.
+
+![The structure of Stacksmith](/assets/StacksmithStructure.svg)
 
 ## Source Code
 

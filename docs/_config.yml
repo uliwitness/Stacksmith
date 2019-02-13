@@ -21,6 +21,12 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: stacksmith
 github_username:  uliwitness
+masthead: /assets/StacksmithMasthead.svg
+rss: RSS
+
+mastodon:
+  - username: stacksmith
+    instance: mastodon.cloud
 
 # Build settings
 markdown: kramdown

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="878px" height="669px" viewBox="0 0 878 669" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>StacksmithStructure</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#B789F7" offset="0%"></stop>
+            <stop stop-color="#661FC8" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="6" y="338" width="629" height="322" rx="5"></rect>
+        <filter x="-1.7%" y="-2.3%" width="103.3%" height="106.5%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.334295743   0 0 0 0 0.334295743   0 0 0 0 0.334295743  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#B789F7" offset="0%"></stop>
+            <stop stop-color="#661FC8" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-5" x="649" y="338" width="223" height="322" rx="5"></rect>
+        <filter x="-4.7%" y="-2.3%" width="109.4%" height="106.5%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.334295743   0 0 0 0 0.334295743   0 0 0 0 0.334295743  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-7">
+            <stop stop-color="#F79189" offset="0%"></stop>
+            <stop stop-color="#C8561F" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-8">
+            <stop stop-color="#39D5F8" offset="0%"></stop>
+            <stop stop-color="#0D4678" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-9">
+            <stop stop-color="#78CC06" offset="0%"></stop>
+            <stop stop-color="#3D780D" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-10">
+            <stop stop-color="#8C89F7" offset="0%"></stop>
+            <stop stop-color="#341FC8" offset="100%"></stop>
+        </linearGradient>
+        <path d="M624.560991,540.857143 L621,540.857143 L621,524.142857 L624.560991,524.142857 L653.224768,524.142857 L653.224768,515.326393 C653.224768,514.041562 654.260327,513 655.537753,513 C655.896833,513 656.250981,513.084088 656.572151,513.245604 L690.720907,530.418956 C691.863472,530.99355 692.326587,532.390952 691.755305,533.54014 C691.531492,533.99036 691.168533,534.355424 690.720907,534.580534 L656.572151,551.753887 C655.429586,552.328481 654.040239,551.86268 653.468956,550.713492 C653.308371,550.39046 653.224768,550.034259 653.224768,549.673098 L653.224768,540.857143 L624.560991,540.857143 Z" id="path-11"></path>
+        <filter x="-14.8%" y="-19.2%" width="129.6%" height="153.8%" filterUnits="objectBoundingBox" id="filter-12">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M624.560991,496.857143 L621,496.857143 L621,480.142857 L624.560991,480.142857 L653.224768,480.142857 L653.224768,471.326393 C653.224768,470.041562 654.260327,469 655.537753,469 C655.896833,469 656.250981,469.084088 656.572151,469.245604 L690.720907,486.418956 C691.863472,486.99355 692.326587,488.390952 691.755305,489.54014 C691.531492,489.99036 691.168533,490.355424 690.720907,490.580534 L656.572151,507.753887 C655.429586,508.328481 654.040239,507.86268 653.468956,506.713492 C653.308371,506.39046 653.224768,506.034259 653.224768,505.673098 L653.224768,496.857143 L624.560991,496.857143 Z" id="path-13"></path>
+        <filter x="-14.8%" y="-19.2%" width="129.6%" height="153.8%" filterUnits="objectBoundingBox" id="filter-14">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-15">
+            <stop stop-color="#78CC06" offset="0%"></stop>
+            <stop stop-color="#3D780D" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-16" cx="154" cy="154" r="154"></circle>
+        <filter x="-3.4%" y="-2.4%" width="106.8%" height="106.8%" filterUnits="objectBoundingBox" id="filter-17">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-18">
+            <stop stop-color="#39D5F8" offset="0%"></stop>
+            <stop stop-color="#0D4678" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-19" cx="154" cy="154" r="154"></circle>
+        <filter x="-3.4%" y="-2.4%" width="106.8%" height="106.8%" filterUnits="objectBoundingBox" id="filter-20">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle">
+            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+            <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+        </g>
+        <g id="Rectangle">
+            <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+            <use fill="url(#linearGradient-4)" fill-rule="evenodd" xlink:href="#path-5"></use>
+        </g>
+        <text id="Stacksmith" font-family="Futura-Bold, Futura" font-size="30" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="16" y="377">Stacksmith</tspan>
+        </text>
+        <text id="Forge-Debugger" font-family="Futura-Bold, Futura" font-size="30" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="662" y="377">Forge</tspan>
+            <tspan x="662" y="416">Debugger</tspan>
+        </text>
+        <rect id="Rectangle" fill="url(#linearGradient-7)" x="31" y="484" width="581" height="176" rx="5"></rect>
+        <path d="M507,484 L317,484 C314.238576,484 312,481.761424 312,479 L312,401 C312,398.238576 314.238576,396 317,396 L607,396 C609.761424,396 612,398.238576 612,401 L612,479 C612,481.761424 609.761424,484 607,484 L596,484 L596,500 L581,500 L581,484 L571,484 L571,500 L556,500 L556,484 L547,484 L547,500 L532,500 L532,484 L522,484 L522,500 L507,500 L507,484 Z" id="Combined-Shape" fill="url(#linearGradient-8)"></path>
+        <path d="M59,484 L59,500 L45,500 L45,484 L36,484 C33.2385763,484 31,481.761424 31,479 L31,401 C31,398.238576 33.2385763,396 36,396 L307,396 C309.761424,396 312,398.238576 312,401 L312,403.589815 L326.589318,403.844473 L326.344984,417.84234 L312,417.591948 L312,426.589815 L326.589318,426.844473 L326.344984,440.84234 L312,440.591948 L312,449.589815 L326.589318,449.844473 L326.344984,463.84234 L312,463.591948 L312,479 C312,481.761424 309.761424,484 307,484 L128,484 L128,500 L114,500 L114,484 L105,484 L105,500 L91,500 L91,484 L82,484 L82,500 L68,500 L68,484 L59,484 Z" id="Combined-Shape" fill="url(#linearGradient-9)"></path>
+        <text id="Forge-Compiler" font-family="Futura-Bold, Futura" font-size="30" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="197.38" y="544">Forge Compiler</tspan>
+        </text>
+        <text id="C++-Document-Model" font-family="Futura-Bold, Futura" font-size="30" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="141.095" y="432">C++</tspan>
+            <tspan x="35.765" y="471">Document Model</tspan>
+        </text>
+        <text id="Objective-C-Cocoa-AP" font-family="Futura-Bold, Futura" font-size="30" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="381.515" y="432">Objective-C</tspan>
+            <tspan x="390.02" y="471">Cocoa API</tspan>
+        </text>
+        <rect id="Rectangle" fill="url(#linearGradient-10)" x="53" y="572" width="539" height="88" rx="5"></rect>
+        <text id="Leonie-Bytecode-+-VM" font-family="Futura-Bold, Futura" font-size="30" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="143.465" y="628">Leonie Bytecode + VM</tspan>
+        </text>
+        <g id="Line" fill-rule="nonzero">
+            <use fill="black" fill-opacity="1" filter="url(#filter-12)" xlink:href="#path-11"></use>
+            <use fill="#FFDC55" xlink:href="#path-11"></use>
+        </g>
+        <g id="Line" fill-rule="nonzero" transform="translate(656.500000, 488.500000) scale(-1, 1) translate(-656.500000, -488.500000) ">
+            <use fill="black" fill-opacity="1" filter="url(#filter-14)" xlink:href="#path-13"></use>
+            <use fill="#FFDC55" xlink:href="#path-13"></use>
+        </g>
+        <g id="Group-2" transform="translate(74.000000, 3.000000)">
+            <polygon id="Path" fill-opacity="0.687418051" fill="#D8D8D8" points="205 411.5 61.2265625 276.167969 300.042969 202.761719 228 411.5"></polygon>
+            <circle id="Oval" fill="url(#linearGradient-15)" cx="216.5" cy="411.5" r="11.5"></circle>
+            <g id="Oval">
+                <use fill="black" fill-opacity="1" filter="url(#filter-17)" xlink:href="#path-16"></use>
+                <use fill="url(#linearGradient-15)" fill-rule="evenodd" xlink:href="#path-16"></use>
+            </g>
+        </g>
+        <g id="Group" transform="translate(495.000000, 6.000000)">
+            <polygon id="Path" fill-opacity="0.687418051" fill="#D8D8D8" transform="translate(125.408203, 309.369141) scale(-1, 1) translate(-125.408203, -309.369141) " points="149.773437 413.738281 6 278.40625 244.816406 205 172.773437 413.738281"></polygon>
+            <circle id="Oval" fill="url(#linearGradient-18)" transform="translate(89.500000, 410.500000) scale(-1, 1) translate(-89.500000, -410.500000) " cx="89.5" cy="410.5" r="11.5"></circle>
+            <g id="Oval" transform="translate(154.000000, 154.000000) scale(-1, 1) translate(-154.000000, -154.000000) ">
+                <use fill="black" fill-opacity="1" filter="url(#filter-20)" xlink:href="#path-19"></use>
+                <use fill="url(#linearGradient-18)" fill-rule="evenodd" xlink:href="#path-19"></use>
+            </g>
+        </g>
+        <text id="Sparkle" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="572" y="52">Sparkle</tspan>
+        </text>
+        <text id="UKDistributedView" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="601" y="214">UKDistributedView</tspan>
+        </text>
+        <text id="UKFeedbackReporter" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="578" y="109">UKFeedbackReporter</tspan>
+        </text>
+        <text id="UKSyntaxColoredTextV" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="507" y="162">UKSyntaxColoredTextView</tspan>
+        </text>
+        <text id="tinyxml2" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="96" y="155">tinyxml2</tspan>
+        </text>
+        <text id="CSocket" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="148" y="97">CSocket</tspan>
+        </text>
+        <text id="Catch2" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="263" y="121">Catch2</tspan>
+        </text>
+        <text id="CStyleSheet-(CSS)" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="197" y="195">CStyleSheet (CSS)</tspan>
+        </text>
+        <text id="CPaintEngine" font-family="Futura-Bold, Futura" font-size="18" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="138" y="253">CPaintEngine</tspan>
+        </text>
+        <text id="UKSoundFileRecorder" font-family="Futura-Bold, Futura" font-size="16" font-weight="bold" fill="#FFFFFF" fill-opacity="0.466202446">
+            <tspan x="546" y="267">UKSoundFileRecorder</tspan>
+        </text>
+    </g>
+</svg>
