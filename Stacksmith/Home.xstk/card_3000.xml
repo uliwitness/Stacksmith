@@ -2,7 +2,7 @@
 <!DOCTYPE card PUBLIC "-//Apple, Inc.//DTD card V 2.0//EN" "">
 <card>
     <id>3000</id>
-    <bitmap>bitmap_3000.tiff</bitmap>
+    <bitmap></bitmap>
     <cantDelete><false/></cantDelete>
     <showPict><true/></showPict>
     <dontSearch><false/></dontSearch>
@@ -46,7 +46,6 @@
         <lineWidth>1</lineWidth>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
-        <toolTip></toolTip>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -114,7 +113,6 @@
         <lineWidth>1</lineWidth>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
-        <toolTip></toolTip>
         <style>popup</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -175,7 +173,6 @@ end mouseUp</script>
         <lineWidth>1</lineWidth>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
-        <toolTip></toolTip>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -240,7 +237,6 @@ end mouseUp</script>
         <lineWidth>1</lineWidth>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
-        <toolTip></toolTip>
         <mediaPath>PlaceholderMovie.mov</mediaPath>
         <currentTime>600</currentTime>
         <controllerVisible><false/></controllerVisible>
@@ -288,7 +284,6 @@ end mouseUp</script>
         <lineWidth>1</lineWidth>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
-        <toolTip></toolTip>
         <style>rectangle</style>
         <showName><false/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -347,7 +342,6 @@ end mouseUp</script>
         <lineWidth>1</lineWidth>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
-        <toolTip></toolTip>
         <style>standard</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -403,7 +397,6 @@ end mouseUp</script>
         <lineWidth>0</lineWidth>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
-        <toolTip></toolTip>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -470,7 +463,6 @@ end textChange</script>
         <lineWidth>0</lineWidth>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
-        <toolTip></toolTip>
         <dontWrap><false/></dontWrap>
         <dontSearch><true/></dontSearch>
         <sharedText><false/></sharedText>
@@ -532,7 +524,6 @@ end textChange</script>
         <lineWidth>0</lineWidth>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
-        <toolTip></toolTip>
         <dontWrap><false/></dontWrap>
         <dontSearch><false/></dontSearch>
         <sharedText><false/></sharedText>
@@ -557,6 +548,67 @@ end textChange</script>
         <script>on textChange
 	put “Picked "” &amp; line 1 of me &amp; quote into cd fld "sstatus"
 end textChange</script>
+    </part>
+    <part>
+        <id>9</id>
+        <type>field</type>
+        <pinning><right/></pinning>
+        <rect>
+            <left>200</left>
+            <top>235</top>
+            <right>20</right>
+            <bottom>259</bottom>
+        </rect>
+        <visible><true/></visible>
+        <enabled><true/></enabled>
+        <fillColor>
+            <red>65535</red>
+            <green>65535</green>
+            <blue>65535</blue>
+            <alpha>65535</alpha>
+        </fillColor>
+        <lineColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>65535</alpha>
+        </lineColor>
+        <shadowColor>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+            <alpha>0</alpha>
+        </shadowColor>
+        <shadowOffset>
+            <width>0</width>
+            <height>0</height>
+        </shadowOffset>
+        <shadowBlurRadius>0</shadowBlurRadius>
+        <lineWidth>1</lineWidth>
+        <bevelWidth>0</bevelWidth>
+        <bevelAngle>0</bevelAngle>
+        <dontWrap><false/></dontWrap>
+        <dontSearch><false/></dontSearch>
+        <sharedText><false/></sharedText>
+        <fixedLineHeight><false/></fixedLineHeight>
+        <autoTab><false/></autoTab>
+        <lockText><false/></lockText>
+        <style>standard</style>
+        <autoSelect><false/></autoSelect>
+        <showLines><false/></showLines>
+        <wideMargins><false/></wideMargins>
+        <multipleLines><false/></multipleLines>
+        <cursor>128</cursor>
+        <hasHorizontalScroller><false/></hasHorizontalScroller>
+        <hasVerticalScroller><false/></hasVerticalScroller>
+        <hasColumnHeaders><false/></hasColumnHeaders>
+        <textAlign>default</textAlign>
+        <font></font>
+        <textSize>12</textSize>
+        <textStyle>plain</textStyle>
+        <textHeight>0</textHeight>
+        <name></name>
+        <script></script>
     </part>
     <content>
         <layer>card</layer>
@@ -620,6 +672,11 @@ more</text>
         <text><span class="style5">This
 That
 More</span></text>
+    </content>
+    <content>
+        <layer>card</layer>
+        <id>9</id>
+        <text><span class="style6">Foobar!</span></text>
     </content>
     <name></name>
     <script></script>

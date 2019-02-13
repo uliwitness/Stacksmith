@@ -504,7 +504,10 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	if( mView )
 	{
 		[mView setAutoresizingMask: GetCocoaResizeFlags( mPartLayoutFlags )];
-		[mView setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
+		if( mFieldStyle != EFieldStyleStandard )
+		{
+			[mView setBackgroundColor: [NSColor colorWithCalibratedRed: (mFillColorRed / 65535.0) green: (mFillColorGreen / 65535.0) blue: (mFillColorBlue / 65535.0) alpha:(mFillColorAlpha / 65535.0)]];
+		}
 		[mView setHasHorizontalScroller: mHasHorizontalScroller != false];
 		[mView setHasVerticalScroller: mHasVerticalScroller != false || mFieldStyle == EFieldStyleScrolling];
 		if( mFieldStyle == EFieldStyleTransparent )
@@ -722,7 +725,10 @@ void	CFieldPartMac::SetFillColor( int r, int g, int b, int a )
 {
 	CFieldPart::SetFillColor( r, g, b, a );
 
-	[mView setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+	if( mFieldStyle != EFieldStyleStandard )
+	{
+		[mView setBackgroundColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+	}
 }
 
 
@@ -730,7 +736,10 @@ void	CFieldPartMac::SetLineColor( int r, int g, int b, int a )
 {
 	CFieldPart::SetLineColor( r, g, b, a );
 
-	[mView setLineColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+	if( mFieldStyle != EFieldStyleStandard )
+	{
+		[mView setLineColor: [NSColor colorWithCalibratedRed: r / 65535.0 green: g / 65535.0 blue: b / 65535.0 alpha: a / 65535.0]];
+	}
 }
 
 
@@ -1253,6 +1262,10 @@ NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedS
 								blue = strtol( currStyle.second.substr(5,2).c_str(), NULL, 16 ),
 								alpha = strtol( currStyle.second.substr(7,2).c_str(), NULL, 16 );
 						[newAttrStr addAttribute: NSForegroundColorAttributeName value: [NSColor colorWithCalibratedRed: red / 255.0 green: green / 255.0 blue: blue / 255.0 alpha: alpha / 255.0] range: currCocoaRange];
+					}
+					else
+					{
+						[newAttrStr addAttribute: NSForegroundColorAttributeName value: [NSColor controlTextColor] range: currCocoaRange];
 					}
 //					std::cout << "\tAdded color." << std::endl;
 				}

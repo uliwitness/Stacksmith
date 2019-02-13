@@ -7,10 +7,8 @@
     <createdByVersion>Stacksmith 2.5</createdByVersion>
     <lastCompactedVersion>Stacksmith 2.5</lastCompactedVersion>
     <firstEditedVersion>Stacksmith 2.5</firstEditedVersion>
-    <lastEditedVersion>Stacksmith 1.0a11 (1570)</lastEditedVersion>
-    <stack id="1" file="stack_1.xml" name="Home" thumbnail="stack_1.jpg"/>
-    <stack id="2" file="stack_2.xml" name="Tools"/>
-	<script>on startUp
+    <lastEditedVersion>Stacksmith 1.0a11 (1722)</lastEditedVersion>
+    <script>on startUp
 	go to stack "Tools" in new window
 end startUp
 
@@ -20,4 +18,6 @@ end startUp
 -- 	add 1 to gTheCounter
 -- 	put "selection change" &amp;&amp; gTheCounter
 -- end selectionChangeWhileEditing</script>
+    <stack id="1" file="stack_1.xml" name="Home" thumbnail="stack_1.jpg"/>
+    <stack id="2" file="stack_2.xml" name="Tools"/>
 </project>

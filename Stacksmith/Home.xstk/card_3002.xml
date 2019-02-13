@@ -10,9 +10,7 @@
     <part>
         <id>1</id>
         <type>button</type>
-        <pinning>
-            <centerHorizontally/>
-        </pinning>
+        <pinning><centerHorizontally/></pinning>
         <rect>
             <left>206</left>
             <top>12</top>
@@ -69,9 +67,7 @@ end mouseUp</script>
     <part>
         <id>2</id>
         <type>button</type>
-        <pinning>
-            <centerHorizontally/>
-        </pinning>
+        <pinning><centerHorizontally/></pinning>
         <rect>
             <left>206</left>
             <top>42</top>

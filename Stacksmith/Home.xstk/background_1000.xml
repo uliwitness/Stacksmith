@@ -2,7 +2,7 @@
 <!DOCTYPE background PUBLIC "-//Apple, Inc.//DTD background V 2.0//EN" "">
 <background>
     <id>1000</id>
-    <bitmap>bitmap_1000.tiff</bitmap>
+    <bitmap></bitmap>
     <cantDelete><false/></cantDelete>
     <showPict><true/></showPict>
     <dontSearch><false/></dontSearch>
@@ -44,7 +44,6 @@
         <lineWidth>1</lineWidth>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
-        <toolTip></toolTip>
         <style>radiobutton</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>
@@ -102,7 +101,6 @@ end mouseUp</script>
         <lineWidth>1</lineWidth>
         <bevelWidth>1</bevelWidth>
         <bevelAngle>315</bevelAngle>
-        <toolTip></toolTip>
         <style>radiobutton</style>
         <showName><true/></showName>
         <autoHighlight><true/></autoHighlight>

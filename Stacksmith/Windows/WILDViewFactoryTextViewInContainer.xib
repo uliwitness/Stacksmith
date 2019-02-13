@@ -15,7 +15,7 @@
         <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="ifP-Hf-OYq" customClass="WILDScrollView">
             <rect key="frame" x="0.0" y="0.0" width="180" height="135"/>
             <autoresizingMask key="autoresizingMask"/>
-            <clipView key="contentView" drawsBackground="NO" id="b0e-W5-03U">
+            <clipView key="contentView" copiesOnScroll="NO" id="b0e-W5-03U">
                 <rect key="frame" x="1" y="1" width="178" height="133"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
