@@ -119,6 +119,8 @@ public:
 	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	virtual void				InitObjectDescriptorValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	
+	void 						RunHandlerForObjectInScriptAndContext( LEOHandlerID inID, CScriptableObject ** ioHandlingObject, LEOScript **ioScript, LEOContext *ctx, std::function<void(const char*,size_t,size_t,CScriptableObject*,bool)> errorHandler, TMayGoUnhandledFlag mayGoUnhandled, LEOHandler ** outHandler );
+
 // statics:
 	static void			InitScriptableObjectValue( LEOValueObject* inStorage, CScriptableObject* wildObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	static void			InitObjectDescriptorValue( LEOValueObject* inStorage, CScriptableObject* wildObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );

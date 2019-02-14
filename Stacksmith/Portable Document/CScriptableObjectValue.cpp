@@ -1314,44 +1314,10 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	bool				wasHandled = false;
 	LEOHandler*			theHandler = nullptr;
 	CScriptableObject*	handlingObject = nullptr;
-	CScriptableObject*	prevHandlingObject = nullptr;
 	while( !theHandler )
 	{
-		prevHandlingObject = handlingObject;
-		LEOValuePtr			theObjectVal = (LEOValuePtr)LEOContextGroupGetPointerForObjectIDAndSeed( ctx->group, theScript->ownerObject, theScript->ownerObjectSeed );
-		if( theObjectVal )
-			handlingObject = (CScriptableObject*) theObjectVal->object.object;
-		
-		theHandler = LEOScriptFindCommandHandlerWithID( theScript, handlerID );
-		if( theHandler )
-		{
-			LEOContextPushHandlerScriptReturnAddressAndBasePtr( ctx, theHandler, theScript, NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
-//			LEODebugPrintScript( GetScriptContextGroupObject(), theScript );
-//			LEODebuggerAddBreakpoint(theHandler->instructions);
-//			LEODebugPrintContext(ctx);
-			LEORunInContext( theHandler->instructions, ctx );
-			wasHandled = true;
-			if( ctx->errMsg[0] != 0 )
-				break;
-//			LEODebugPrintContext(ctx);
-		}
-		if( !theHandler )
-		{
-			if( theScript->GetParentScript )
-				theScript = theScript->GetParentScript( theScript, ctx, prevHandlingObject );
-			if( !theScript )
-			{
-				if( ctx->callNonexistentHandlerProc )
-				{
-					ctx->callNonexistentHandlerProc( ctx, handlerID, mayGoUnhandled );
-					if( ctx->errMsg[0] == 0 && mayGoUnhandled == EMayGoUnhandled )
-					{
-						errorHandler( nullptr, SIZE_T_MAX, SIZE_T_MAX, this, wasHandled );
-					}
-				}
-				break;
-			}
-		}
+		RunHandlerForObjectInScriptAndContext( handlerID, &handlingObject, &theScript, ctx, errorHandler, mayGoUnhandled, &theHandler );
+		wasHandled = theHandler != nullptr;
 	}
 	if( ctx->errMsg[0] != 0 )
 	{
@@ -1360,6 +1326,47 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	
 	if( !outContext )
 		LEOContextRelease( ctx );
+}
+
+
+void CScriptableObject::RunHandlerForObjectInScriptAndContext( LEOHandlerID handlerID, CScriptableObject ** handlingObject, LEOScript ** theScript, LEOContext *ctx, std::function<void(const char*,size_t,size_t,CScriptableObject*,bool)> errorHandler, TMayGoUnhandledFlag mayGoUnhandled, LEOHandler ** theHandler )
+{
+	CScriptableObject*	prevHandlingObject = (*handlingObject);
+	LEOValuePtr			theObjectVal = (LEOValuePtr)LEOContextGroupGetPointerForObjectIDAndSeed( ctx->group, (*theScript)->ownerObject, (*theScript)->ownerObjectSeed );
+	if( theObjectVal )
+		(*handlingObject) = (CScriptableObject*) theObjectVal->object.object;
+	
+	*theHandler = LEOScriptFindCommandHandlerWithID( (*theScript), handlerID );
+	if( *theHandler )
+	{
+		LEOContextPushHandlerScriptReturnAddressAndBasePtr( ctx, *theHandler, (*theScript), NULL, NULL );	// NULL return address is same as exit to top. basePtr is set to NULL as well on exit.
+		//			LEODebugPrintScript( GetScriptContextGroupObject(), (*theScript) );
+		//			LEODebuggerAddBreakpoint((*theHandler)->instructions);
+		//			LEODebugPrintContext(ctx);
+		LEORunInContext( (*theHandler)->instructions, ctx );
+		if( ctx->errMsg[0] != 0 )
+			return;
+		//			LEODebugPrintContext(ctx);
+	}
+	else
+	{
+		if( (*theScript)->GetParentScript )
+			(*theScript) = (*theScript)->GetParentScript( (*theScript), ctx, prevHandlingObject );
+		if( !(*theScript) )
+		{
+			if( ctx->callNonexistentHandlerProc )
+			{
+				ctx->callNonexistentHandlerProc( ctx, handlerID, mayGoUnhandled );
+				if( ctx->errMsg[0] == 0 && mayGoUnhandled == EMayGoUnhandled )
+				{
+					errorHandler( nullptr, SIZE_T_MAX, SIZE_T_MAX, this, false );
+				}
+			}
+			return;
+		}
+	}
+	
+	return;
 }
 
 
