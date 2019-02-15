@@ -243,6 +243,7 @@ end mouseUp</script>
         <cursor>128</cursor>
         <name>New Movie Player</name>
         <script>on mouseUp
+set the currentTime of me to 0
 start me
 end mouseUp</script>
     </part>
