@@ -45,4 +45,3 @@ exclude:
     - vendor/cache/
     - vendor/gems/
     - vendor/ruby/
-    - apidocs/ # Stacksmith-specific.
