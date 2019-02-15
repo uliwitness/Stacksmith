@@ -209,6 +209,14 @@ NSImage*	WILDInvertedImage( NSImage* img )
 						range: NSMakeRange(0,[muAttrTitle length])];
 		attrTitle = muAttrTitle;
 	}
+	else
+	{
+		NSMutableAttributedString*	muAttrTitle = [[attrTitle mutableCopy] autorelease];
+		
+		[muAttrTitle addAttribute: NSForegroundColorAttributeName value: lineColor
+							range: NSMakeRange(0,[muAttrTitle length])];
+		attrTitle = muAttrTitle;
+	}
 	
 	CGContextRef	theContext = [[NSGraphicsContext currentContext] CGContext];
 	//UKLog( @"%@ %ld", self, [self imagePosition] );

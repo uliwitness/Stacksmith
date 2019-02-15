@@ -10,6 +10,7 @@
 #import "UKHelperMacros.h"
 #include "CDocument.h"
 #include "CAlert.h"
+#import "WILDButtonCell.h"
 
 
 using namespace Carlson;
@@ -31,6 +32,7 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 @implementation WILDButtonView
 
 @synthesize owningPart = owningPart;
+@synthesize allowsVibrancy = _allowsVibrancy;
 
 -(void)	dealloc
 {
@@ -40,6 +42,22 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 	DESTROY_DEALLOC(mCursor);
 
 	[super dealloc];
+}
+
+
+-(void) setCell:(__kindof NSCell *)cell
+{
+	[super setCell:cell];
+	
+	self.allowsVibrancy = ![cell isKindOfClass: [WILDButtonCell class]];
+}
+
+
+-(void) awakeFromNib
+{
+	[super awakeFromNib];
+	
+	self.allowsVibrancy = ![self.cell isKindOfClass: [WILDButtonCell class]];
 }
 
 

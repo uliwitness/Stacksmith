@@ -24,6 +24,7 @@
 	NSCursor*			mCursor;
 }
 
+@property (assign, nonatomic) BOOL allowsVibrancy;
 #if __cplusplus
 @property (assign,nonatomic) Carlson::CButtonPart*	owningPart;
 #endif
