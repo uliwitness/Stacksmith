@@ -259,7 +259,7 @@ void	CDocumentMac::AddMacMenuForMenu( CMenu* currMenu )
 {
 	CStackMac*		mainStack = (CStackMac*) CStack::GetMainStack();
 	if( !mainStack )
-		mainStack = (CStackMac*) CStack::GetFrontStack();
+		mainStack = (CStackMac*) CStack::GetActiveStack();
 	
 	CMenuMac*	macMenu = dynamic_cast<CMenuMac*>(currMenu);
 	WILDStackWindowController* menuDelegate = mainStack->GetMacWindowController();

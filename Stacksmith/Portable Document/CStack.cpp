@@ -16,13 +16,14 @@
 #include <sstream>
 #include "CUndoStack.h"
 #include "CCursor.h"
+#include "CAlert.h"
 
 
 using namespace Carlson;
 
 
-CStack*							CStack::sFrontStack = NULL;
-std::function<void(CStack*)>	CStack::sFrontStackChangedBlock = NULL;
+CStack*							CStack::sActiveStack = NULL;
+std::function<void(CStack*)>	CStack::sActiveStackChangedBlock = NULL;
 CStack*							CStack::sMainStack = NULL;
 std::function<void(CStack*)>	CStack::sMainStackChangedBlock = NULL;
 
@@ -58,8 +59,8 @@ CStack::~CStack()
 	mUndoStack = (CUndoStack*)0x5555555555555555;
 	
 	//printf("deleting stack %s.\n", DebugNameForPointer(this) );
- 	if( sFrontStack == this )
-		sFrontStack = NULL;
+ 	if( sActiveStack == this )
+		sActiveStack = NULL;
  	if( sMainStack == this )
 		sMainStack = NULL;
 	mCurrentCard = CCardRef(NULL);
@@ -820,13 +821,13 @@ void	CStack::SetTool( TTool inTool )
 			GetCurrentCard()->GetBackground()->ToolChangedFrom( oldTool );
 		}
 		
-		CStack	*	frontStack = CStack::GetFrontStack();
+		CStack	*	frontStack = CStack::GetActiveStack();
 		CCard	*	frontCard = nullptr;
 		if( frontStack )
 			frontCard = frontStack->GetCurrentCard();
 		if( frontCard )
 		{
-			frontCard->SendMessage( NULL, [](const char*,size_t,size_t,CScriptableObject*,bool){}, EMayGoUnhandled, "choose %s", CStack::GetToolName(mCurrentTool) );
+			frontCard->SendMessage( NULL, [](const char* errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool handled){ if( errMsg ) { CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); } }, EMayGoUnhandled, "choose %s", CStack::GetToolName(mCurrentTool) );
 		}
 	}
 }
@@ -1225,12 +1226,12 @@ bool	CStack::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inContex
 
 
 
-/*static*/ void		CStack::SetFrontStack( CStack* inStack )
+/*static*/ void		CStack::SetActiveStack( CStack* inStack )
 {
-	sFrontStack = inStack;
+	sActiveStack = inStack;
 	CDocumentManager::GetSharedDocumentManager()->SetFrontDocument( inStack ? inStack->GetDocument() : NULL );
-	if( sFrontStackChangedBlock )
-		sFrontStackChangedBlock( inStack );
+	if( sActiveStackChangedBlock )
+		sActiveStackChangedBlock( inStack );
 }
 
 

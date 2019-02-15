@@ -271,7 +271,7 @@ bool	CMenu::SaveToElement( tinyxml2::XMLElement* inElement )
 
 CScriptableObject*	CMenu::GetParentObject( CScriptableObject* previousParent )
 {
-	CScriptableObject* parent = CStack::GetFrontStack()->GetCurrentCard();
+	CScriptableObject* parent = CStack::GetActiveStack()->GetCurrentCard();
 	if( !parent )
 		parent = mDocument;
 	return parent;

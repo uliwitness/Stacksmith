@@ -240,7 +240,7 @@ void	WILDScheduleResumeOfScript( void )
 	{
 		[mLockPseudoMenu setHidden: inMainStack == NULL || (inMainStack->GetEffectiveCantModify() == false)];
 	} );
-	CStack::SetFrontStackChangedCallback( [self]( CStack* inFrontStack )
+	CStack::SetActiveStackChangedCallback( [self]( CStack* inFrontStack )
 	{
 		if( CStack::GetMainStack() == NULL )	// User closed last document window?
 			[mLockPseudoMenu setHidden: YES];
@@ -789,7 +789,7 @@ struct WILDAppDelegateValidatableButtonInfo
 			theScreen = [NSScreen screens][0];
 		[self positionToolbarOnScreen: theScreen];
 		
-		CStack	*	frontStack = CStack::GetFrontStack();
+		CStack	*	frontStack = CStack::GetActiveStack();
 		CCard	*	frontCard = nullptr;
 		if( frontStack )
 			frontCard = frontStack->GetCurrentCard();

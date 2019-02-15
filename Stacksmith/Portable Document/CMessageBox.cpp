@@ -157,7 +157,7 @@ LEOContextGroup*	CMessageBox::GetScriptContextGroupObject()
 {
 	CStack*	theStack = CStack::GetMainStack();
 	if( !theStack )
-		theStack = CStack::GetFrontStack();
+		theStack = CStack::GetActiveStack();
 	if( !theStack )
 		theStack = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetStack(0);
 	return theStack->GetScriptContextGroupObject();
@@ -166,7 +166,7 @@ LEOContextGroup*	CMessageBox::GetScriptContextGroupObject()
 
 CScriptableObject*	CMessageBox::GetParentObject( CScriptableObject* previousParent )
 {
-	CStack*	theStack = CStack::GetFrontStack();
+	CStack*	theStack = CStack::GetActiveStack();
 	if( !theStack )
 		theStack = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetStack(0);
 	CCard* theCard = theStack->GetCurrentCard();
