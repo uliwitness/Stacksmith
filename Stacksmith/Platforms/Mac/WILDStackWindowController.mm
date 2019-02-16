@@ -1458,9 +1458,9 @@ using namespace Carlson;
 			itemState = NSControlStateValueOn;
 		[theItem setState: itemState];
 		std::string	msg = currMenuItem->GetMessage();
-		if( msg.length() > 0 && !currMenuItem->HasOrInheritsMessageHandler( msg.c_str(), nullptr ) )
+		if( msg.length() > 0 && !currMenuItem->HasOrInheritsMessageHandler( msg.c_str(), nullptr, nullptr) )
 			return NO;
-		else if( msg.length() == 0 && !currMenuItem->HasOrInheritsMessageHandler( "doMenu", nullptr ) )
+		else if( msg.length() == 0 && !currMenuItem->HasOrInheritsMessageHandler( "doMenu", nullptr, nullptr ) )
 			return NO;
 		return currMenuItem->GetEnabled();
 	}
