@@ -1318,6 +1318,8 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	{
 		RunHandlerForObjectInScriptAndContext( handlerID, &handlingObject, &theScript, ctx, errorHandler, mayGoUnhandled, &theHandler );
 		wasHandled = theHandler != nullptr;
+		if( !theScript )
+			break;
 	}
 	if( ctx->errMsg[0] != 0 )
 	{

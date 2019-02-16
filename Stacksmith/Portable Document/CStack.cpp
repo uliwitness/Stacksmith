@@ -963,6 +963,7 @@ void	CStack::Dump( size_t inIndent )
 	const char * indentStr = IndentString( inIndent );
 	printf( "%sStack ID %lld \"%s\" <%p>\n%s{\n", indentStr, mStackID, mName.c_str(), this, indentStr );
 	printf( "%s\tstyle = %s\n", indentStr, sStackStyleStrings[mStyle] );
+	printf( "%s\ttheme = %s\n", indentStr, GetThemeName().c_str() );
 	printf( "%s\tloaded = %s\n", indentStr, (mLoaded? "true" : "false") );
 	printf( "%s\tuserLevel = %d\n", indentStr, mUserLevel );
 	printf( "%s\twidth = %lld\n", indentStr, mCardWidth );
