@@ -12,6 +12,7 @@
 #import "UKGraphics.h"
 #import "UKHelperMacros.h"
 #import "WILDDrawAddColorBezel.h"
+#import "NSImage+NiceScaling.h"
 
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED == MAC_OS_X_VERSION_10_9
@@ -157,11 +158,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	
 	[NSGraphicsContext saveGraphicsState];
 	[buttonShape addClip];
-	NSRect				imgBox = origCellFrame;
-	imgBox.origin.x = imgBox.origin.x +truncf((origCellFrame.size.width -[self image].size.width) /2);
-	imgBox.origin.y = imgBox.origin.y +truncf((origCellFrame.size.height -[self image].size.height) /2);
-	imgBox.size = [self image].size;
-	
+
 	NSAttributedString*	attrTitle = [self attributedTitle];
 	NSSize		textExtents = [attrTitle size];
 	NSRect		txBox = origCellFrame;
@@ -171,6 +168,26 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	txBox.origin.y = txBox.origin.y +yHalf;
 	txBox.size = textExtents;
 		
+	NSRect				imgBox = origCellFrame;
+	imgBox.origin.x = imgBox.origin.x +truncf((origCellFrame.size.width -[self image].size.width) /2);
+	imgBox.origin.y = imgBox.origin.y +truncf((origCellFrame.size.height -[self image].size.height) /2);
+	imgBox.size = [self image].size;
+	
+	if( self.imageScaling == NSImageScaleProportionallyDown )
+	{
+		NSSize imgAvailable = origCellFrame.size;
+		if( [self imagePosition] != NSImageOnly )
+		{
+			imgAvailable.height -= txBox.size.height;
+		}
+		if( imgAvailable.width < imgBox.size.width )
+		{
+			imgBox.size = [NSImage scaledSize:imgBox.size toFitSize:imgAvailable];
+			imgBox.origin.x = origCellFrame.origin.x +truncf((origCellFrame.size.width -imgBox.size.width) /2);
+			imgBox.origin.y = origCellFrame.origin.y +truncf((origCellFrame.size.height -imgBox.size.height) /2);
+		}
+	}
+	
 	BOOL		iconHighlight = isHighlighted && [self image];
 	if( iconHighlight )
 	{

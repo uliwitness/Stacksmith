@@ -14,7 +14,7 @@
         <rect>
             <left>206</left>
             <top>12</top>
-            <right>306</right>
+            <right>242</right>
             <bottom>36</bottom>
         </rect>
         <visible><true/></visible>
@@ -46,12 +46,12 @@
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
         <style>rectangle</style>
-        <showName><true/></showName>
+        <showName><false/></showName>
         <autoHighlight><true/></autoHighlight>
         <sharedHighlight><false/></sharedHighlight>
         <family>1</family>
         <titleWidth>0</titleWidth>
-        <icon>0</icon>
+        <icon>13763</icon>
         <cursor>128</cursor>
         <textAlign>default</textAlign>
         <font></font>
@@ -71,7 +71,7 @@ end mouseUp</script>
         <rect>
             <left>206</left>
             <top>42</top>
-            <right>306</right>
+            <right>242</right>
             <bottom>66</bottom>
         </rect>
         <visible><true/></visible>
@@ -103,12 +103,12 @@ end mouseUp</script>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
         <style>rectangle</style>
-        <showName><true/></showName>
+        <showName><false/></showName>
         <autoHighlight><true/></autoHighlight>
         <sharedHighlight><false/></sharedHighlight>
         <family>1</family>
         <titleWidth>0</titleWidth>
-        <icon>0</icon>
+        <icon>13762</icon>
         <cursor>128</cursor>
         <textAlign>default</textAlign>
         <font></font>

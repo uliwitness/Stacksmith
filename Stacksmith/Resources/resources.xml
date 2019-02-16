@@ -56,6 +56,48 @@
 		<file>ICON_1000.pdf</file>
 	</media>
 	<media>
+		<id>13762</id>
+		<type>icon</type>
+		<name>PointerTool</name>
+		<file>PointerTool.tiff</file>
+	</media>
+	<media>
+		<id>13763</id>
+		<type>icon</type>
+		<name>BrowseTool</name>
+		<file>BrowseTool.tiff</file>
+	</media>
+	<media>
+		<id>13764</id>
+		<type>icon</type>
+		<name>EditTextTool</name>
+		<file>EditTextTool.tiff</file>
+	</media>
+	<media>
+		<id>13765</id>
+		<type>icon</type>
+		<name>MessageBoxIcon</name>
+		<file>MessageBoxIcon.tiff</file>
+	</media>
+	<media>
+		<id>13766</id>
+		<type>icon</type>
+		<name>MessageWatcherIcon</name>
+		<file>MessageWatcherIcon.tiff</file>
+	</media>
+	<media>
+		<id>13767</id>
+		<type>icon</type>
+		<name>VariableWatcherIcon</name>
+		<file>VariableWatcherIcon.tiff</file>
+	</media>
+	<media>
+		<id>13768</id>
+		<type>icon</type>
+		<name>StackCanvasIcon</name>
+		<file>StackCanvasIcon.tiff</file>
+	</media>
+	<media>
 		<id>128</id>
 		<type>cursor</type>
 		<name>Hand</name>
