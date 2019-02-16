@@ -6,12 +6,8 @@ layout: home
 ---
 A tool for making apps for non-programmers
 
+<img src="/assets/StylizedStack.png" align="right" hspace="8" vspace="8" alt="Stylized Stacksmith Icon" />
+
 ## Can I use it yet?
 
 Stacksmith is still in development, and not yet really suitable for use by non-programmers.
-
-![The structure of Stacksmith](/assets/StacksmithStructure.svg)
-
-## Source Code
-
-There is [the Stacksmith Github repository](https://github.com/uliwitness/Stacksmith) where you can also find [releases](https://github.com/uliwitness/Stacksmith/releases).
