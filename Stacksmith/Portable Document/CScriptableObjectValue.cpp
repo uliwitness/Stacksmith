@@ -973,6 +973,32 @@ LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* 
 	return theScript;
 }
 
+
+CScriptableObject*	CScriptableObject::GetNextFrontScript( LEOContext * ctx )
+{
+	if( !ctx )
+		return nullptr;
+	
+	CScriptContextUserData * ud = (CScriptContextUserData *)ctx->userData;
+	if( !ud->GetCurrentFrontScript() )
+		return nullptr;
+	
+	CScriptableObject * prevObject = nullptr;
+	for( CScriptableObject * currObject : CScriptableObject::sFrontScripts )
+	{
+		if( prevObject == ud->GetCurrentFrontScript() )
+		{
+			ud->SetCurrentFrontScript(currObject);
+			return currObject;
+		}
+		
+		prevObject = currObject;
+	}
+	
+	return nullptr;
+}
+
+
 CScriptableObject*		CScriptableObject::GetOwnerScriptableObjectFromContext( LEOContext * inContext )
 {
 	LEOScript	*	script = LEOContextPeekCurrentScript( inContext );

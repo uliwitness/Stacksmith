@@ -316,6 +316,10 @@ void	CPart::SetPartLayoutFlags( TPartLayoutFlags inFlags )
 
 CScriptableObject*	CPart::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
+	CScriptableObject * frontObj = GetNextFrontScript( ctx );
+	if( frontObj ) // We're doing frontscripts?
+		return frontObj; // Return next frontscript, not our parent.
+	
 	return mOwner;
 }
 

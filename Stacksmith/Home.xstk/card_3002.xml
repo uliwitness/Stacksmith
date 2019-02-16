@@ -10,27 +10,26 @@
     <part>
         <id>1</id>
         <type>button</type>
-        <pinning><centerHorizontally/></pinning>
         <rect>
-            <left>206</left>
+            <left>12</left>
             <top>12</top>
-            <right>242</right>
-            <bottom>36</bottom>
+            <right>48</right>
+            <bottom>48</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
-        <fillColor>
-            <red>65535</red>
-            <green>65535</green>
-            <blue>65535</blue>
-            <alpha>65535</alpha>
-        </fillColor>
-        <lineColor>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-            <alpha>65535</alpha>
-        </lineColor>
+		<fillColor>
+			<red>20000</red>
+			<green>20000</green>
+			<blue>20000</blue>
+			<alpha>30000</alpha>
+		</fillColor>
+		<lineColor>
+			<red>40000</red>
+			<green>40000</green>
+			<blue>40000</blue>
+			<alpha>30000</alpha>
+		</lineColor>
         <shadowColor>
             <red>0</red>
             <green>0</green>
@@ -42,10 +41,10 @@
             <height>0</height>
         </shadowOffset>
         <shadowBlurRadius>0</shadowBlurRadius>
-        <lineWidth>1</lineWidth>
+        <lineWidth>0</lineWidth>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
-        <style>rectangle</style>
+        <style>roundrect</style>
         <showName><false/></showName>
         <autoHighlight><true/></autoHighlight>
         <sharedHighlight><false/></sharedHighlight>
@@ -67,27 +66,26 @@ end mouseUp</script>
     <part>
         <id>2</id>
         <type>button</type>
-        <pinning><centerHorizontally/></pinning>
         <rect>
-            <left>206</left>
-            <top>42</top>
-            <right>242</right>
-            <bottom>66</bottom>
+            <left>60</left>
+            <top>12</top>
+            <right>96</right>
+            <bottom>48</bottom>
         </rect>
         <visible><true/></visible>
         <enabled><true/></enabled>
         <fillColor>
-            <red>65535</red>
-            <green>65535</green>
-            <blue>65535</blue>
-            <alpha>65535</alpha>
+			<red>20000</red>
+			<green>20000</green>
+			<blue>20000</blue>
+			<alpha>30000</alpha>
         </fillColor>
-        <lineColor>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-            <alpha>65535</alpha>
-        </lineColor>
+		<lineColor>
+			<red>40000</red>
+			<green>40000</green>
+			<blue>40000</blue>
+			<alpha>30000</alpha>
+		</lineColor>
         <shadowColor>
             <red>0</red>
             <green>0</green>
@@ -99,10 +97,10 @@ end mouseUp</script>
             <height>0</height>
         </shadowOffset>
         <shadowBlurRadius>0</shadowBlurRadius>
-        <lineWidth>1</lineWidth>
+        <lineWidth>0</lineWidth>
         <bevelWidth>0</bevelWidth>
         <bevelAngle>0</bevelAngle>
-        <style>rectangle</style>
+        <style>roundrect</style>
         <showName><false/></showName>
         <autoHighlight><true/></autoHighlight>
         <sharedHighlight><false/></sharedHighlight>
@@ -123,12 +121,14 @@ end mouseUp</script>
     </part>
     <name></name>
     <script>on mainStackChange
+	put "mainStack changed"
 	if the mainStack is not empty then
 		set highlight of card button (the tool of the mainStack) to true
 	end if
 end mainStackChange
 
 on choose theTool
+	put "tool changed"
 	set highlight of card button theTool to true
 end choose</script>
 </card>

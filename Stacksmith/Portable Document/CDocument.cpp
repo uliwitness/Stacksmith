@@ -375,7 +375,9 @@ void	CDocument::SaveThumbnailsForOpenStacks()
 
 CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
-	// TODO: Add function to call here to return next front/backscript if we're doing front scripts
+	CScriptableObject * frontObj = GetNextFrontScript( ctx );
+	if( frontObj ) // We're doing frontscripts?
+		return frontObj; // Return next frontscript, not our parent.
 	
 	if( previousParent )
 	{

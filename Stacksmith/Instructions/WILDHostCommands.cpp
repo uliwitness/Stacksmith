@@ -1250,6 +1250,42 @@ void	WILDStopRecordingSoundInstruction( LEOContext* inContext )
 }
 
 
+/*!
+ Implements the 'start recording sound' command. The first parameter must be a
+ string, the name to give the newly recorded sound.
+ 
+ (WILD_INSERT_SCRIPT_INSTR)
+ */
+void	WILDInsertScriptInstruction( LEOContext* inContext )
+{
+	LEOValuePtr				objectValue = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr - 2, &kLeoValueTypeScriptableObject, inContext );
+	LEOValuePtr				theLocation = inContext->stackEndPtr -1;
+
+	char locationStr[1024] = { 0 };
+	LEOGetValueAsString( theLocation, locationStr, sizeof(locationStr), inContext );
+	
+	if( inContext->errMsg[0] == 0 )
+	{
+		CScriptableObject * object = (CScriptableObject*)objectValue->object.object;
+		if( strcasecmp( locationStr, "front" ) == 0 )
+			CScriptableObject::sFrontScripts.push_back( object );
+		else if( strcasecmp( locationStr, "back" ) == 0 )
+			CScriptableObject::sBackScripts.push_back( object );
+		else
+		{
+			size_t		lineNo = SIZE_T_MAX;
+			uint16_t	fileID = 0;
+			LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+			LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "Don't know how to insert into this." );
+		}
+	}
+	
+	LEOCleanUpStackToPtr( inContext, inContext->stackEndPtr - 2 );
+	
+	inContext->currentInstruction++;
+}
+
+
 LEOINSTR_START(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 LEOINSTR(WILDGoInstruction)
 LEOINSTR(WILDGoBackInstruction)
@@ -1272,7 +1308,8 @@ LEOINSTR(WILDMoveInstruction)
 LEOINSTR(WILDChooseInstruction)
 LEOINSTR(WILDMarkInstruction)
 LEOINSTR(WILDStartRecordingSoundInstruction)
-LEOINSTR_LAST(WILDStopRecordingSoundInstruction)
+LEOINSTR(WILDStopRecordingSoundInstruction)
+LEOINSTR_LAST(WILDInsertScriptInstruction)
 
 
 struct THostCommandEntry	gStacksmithHostCommands[] =
@@ -1595,6 +1632,20 @@ struct THostCommandEntry	gStacksmithHostCommands[] =
 			{ EHostParamInvisibleIdentifier, ECardsIdentifier, EHostParameterRequired, WILD_MARK_INSTR, BACK_OF_STACK, WILDMarkModeClearMark | WILDMarkModeMarkAll, 'a', 'X' },
 			{ EHostParamContainer, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '1', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
+			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' }
+		}
+	},
+	{
+		EInsertIdentifier, WILD_INSERT_SCRIPT_INSTR, 0, 0, '1', 'X',
+		{
+			{ EHostParamInvisibleIdentifier, EScriptIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '1', '1' },
+			{ EHostParamLabeledValue, EOfIdentifier, EHostParameterRequired, INVALID_INSTR2, 0, 0, '1', '1' },
+			{ EHostParamInvisibleIdentifier, EIntoIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '1', '1' },
+			{ EHostParamIdentifier, EFrontIdentifier, EHostParameterOptional, INVALID_INSTR2, 0, 0, '1', 'X' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },
 			{ EHostParam_Sentinel, ELastIdentifier_Sentinel, EHostParameterOptional, INVALID_INSTR2, 0, 0, '\0', '\0' },

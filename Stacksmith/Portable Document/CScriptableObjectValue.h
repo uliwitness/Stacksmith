@@ -113,11 +113,13 @@ public:
 	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message.
 
 	virtual CStack*				GetStack()												{ return NULL; };
-	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )	{ return NULL; };
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )	{ return GetNextFrontScript(ctx); };
 	virtual LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )										{ return NULL; };
 	virtual LEOContextGroup*	GetScriptContextGroupObject()					{ return NULL; };
 	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
 	virtual void				InitObjectDescriptorValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
+	CScriptableObject*			GetNextFrontScript( LEOContext * ctx ); // Use this to shortcut GetParentObject() during frontscript processing.
+
 	
 	void 						RunHandlerForObjectInScriptAndContext( LEOHandlerID inID, CScriptableObject ** ioHandlingObject, LEOScript **ioScript, LEOContext *ctx, std::function<void(const char*,size_t,size_t,CScriptableObject*,bool)> errorHandler, TMayGoUnhandledFlag mayGoUnhandled, LEOHandler ** outHandler );
 

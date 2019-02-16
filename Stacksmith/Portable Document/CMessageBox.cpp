@@ -166,6 +166,10 @@ LEOContextGroup*	CMessageBox::GetScriptContextGroupObject()
 
 CScriptableObject*	CMessageBox::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
+	CScriptableObject * frontObj = GetNextFrontScript( ctx );
+	if( frontObj ) // We're doing frontscripts?
+		return frontObj; // Return next frontscript, not our parent.
+	
 	CStack*	theStack = CStack::GetActiveStack();
 	if( !theStack )
 		theStack = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetStack(0);

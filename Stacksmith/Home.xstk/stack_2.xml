@@ -14,13 +14,15 @@
     <resizable><false/></resizable>
     <cardSize>
         <width>139</width>
-        <height>83</height>
+        <height>60</height>
     </cardSize>
 	<position>
 		<left>200</left>
 		<top>150</top>
 	</position>
-    <script></script>
+    <script>on openStack
+	insert script of card id 3002 of me into front
+end openStack</script>
     <background id="1001" file="background_1001.xml" name=""/>
     <card id="3002" file="card_3002.xml" name="" owner="1001"/>
 </stack>

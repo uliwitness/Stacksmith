@@ -271,6 +271,10 @@ bool	CMenu::SaveToElement( tinyxml2::XMLElement* inElement )
 
 CScriptableObject*	CMenu::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
+	CScriptableObject * frontObj = GetNextFrontScript( ctx );
+	if( frontObj ) // We're doing frontscripts?
+		return frontObj; // Return next frontscript, not our parent.
+	
 	CScriptableObject* parent = CStack::GetActiveStack()->GetCurrentCard();
 	if( !parent )
 		parent = mDocument;
@@ -594,6 +598,10 @@ bool	CMenuItem::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCon
 
 CScriptableObject*	CMenuItem::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
+	CScriptableObject * frontObj = GetNextFrontScript( ctx );
+	if( frontObj ) // We're doing frontscripts?
+		return frontObj; // Return next frontscript, not our parent.
+	
 	return mParent;
 }
 
