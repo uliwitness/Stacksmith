@@ -373,28 +373,52 @@ void	CDocument::SaveThumbnailsForOpenStacks()
 }
 
 
-CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent )
+CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
+	// TODO: Add function to call here to return next front/backscript if we're doing front scripts
+	
 	if( previousParent )
 	{
 		CStack*	stackForwardingToUs = dynamic_cast<CStack*>(previousParent);
 		if( stackForwardingToUs )
 		{
-			if( stackForwardingToUs->GetShouldForwardToMainStack() )
+			if( stackForwardingToUs->GetShouldForwardToMainStack() ) // Make messages sent from palettes continue to document window.
 			{
 				CStack	*	currentMainStack = CStack::GetMainStack();
 				if( currentMainStack && currentMainStack != stackForwardingToUs && currentMainStack->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
 				{
 					CCard	*	currentCard = currentMainStack->GetCurrentCard();
 					if( currentCard )
+					{
 						return currentCard;
+					}
 				}
 			}
 		}
 	}
+	
+	// Forward message to home stack's document for a last shot:
 	CDocumentRef	homeDocument = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument();
 	if( homeDocument != this && homeDocument != nullptr && homeDocument->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
+	{
+		std::cout << " -> (" << homeDocument->GetObjectDescriptorString() << ")" << std::endl;
 		return homeDocument;
+	}
+	
+	// Still nothing? We're at end. See if there are any back scripts:
+	if( ctx )
+	{
+		CScriptContextUserData * ud = (CScriptContextUserData *)ctx->userData;
+		if( !CScriptableObject::sBackScripts.empty() )
+		{
+			assert(ud->GetCurrentBackScript() == nullptr);
+			assert(ud->GetCurrentFrontScript() == nullptr);
+			CScriptableObject * obj = CScriptableObject::sBackScripts.front();
+			ud->SetCurrentBackScript(obj);
+			return obj;
+		}
+
+	}
 	
 	return nullptr;
 }

@@ -21,6 +21,11 @@
 using namespace Carlson;
 
 
+std::vector<CRefCountedObjectRef<CScriptableObject>> Carlson::CScriptableObject::sFrontScripts;
+std::vector<CRefCountedObjectRef<CScriptableObject>> Carlson::CScriptableObject::sBackScripts;
+
+
+
 LEONumber	GetScriptableObjectValueAsNumber( LEOValuePtr self, LEOUnit* inUnit, LEOContext* inContext );
 
 LEOInteger	GetScriptableObjectValueAsInteger( LEOValuePtr self, LEOUnit* inUnit, LEOContext* inContext );
@@ -958,7 +963,7 @@ LEOScript*	CScriptableObject::GetParentScript( LEOScript* inScript, LEOContext* 
 	{
 		//printf( "Going up to parent %s\n", typeid(*theObject).name() );
 		
-		CScriptableObject*	scriptableParent = theObject->GetParentObject( (CScriptableObject*)inParam );
+		CScriptableObject*	scriptableParent = theObject->GetParentObject( (CScriptableObject*)inParam, inContext );
 		if( scriptableParent )
 		{
 			theScript = scriptableParent->GetScriptObject([](const char *errMsg, size_t inLine, size_t inOffs, CScriptableObject *obj){ CAlert::RunScriptErrorAlert( obj, errMsg, inLine, inOffs ); });
@@ -997,7 +1002,7 @@ void	CScriptableObject::ContextCompletedProc( LEOContext *ctx )
 }
 
 
-bool	CScriptableObject::HasOrInheritsMessageHandler( const char* inMsgName, CScriptableObject* previousParent )
+bool	CScriptableObject::HasOrInheritsMessageHandler( const char* inMsgName, CScriptableObject* previousParent, LEOContext * ctx )
 {
 	LEOScript*	theScript = GetScriptObject(NULL);
 	if( theScript )
@@ -1013,11 +1018,11 @@ bool	CScriptableObject::HasOrInheritsMessageHandler( const char* inMsgName, CScr
 		}
 	}
 	
-	CScriptableObject	* parent = GetParentObject( previousParent );
+	CScriptableObject	* parent = GetParentObject( previousParent, ctx );
 	if( !parent )
 		return false;
 	
-	return parent->HasOrInheritsMessageHandler( inMsgName, this );
+	return parent->HasOrInheritsMessageHandler( inMsgName, this, ctx );
 }
 
 
@@ -1070,7 +1075,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	
 	//printf("Sending: %s\n",msg);
 	
-	CScriptableObject*			parent = GetParentObject( nullptr );
+	CScriptableObject*			parent = GetParentObject( nullptr, nullptr );
 	CStack*						parentStack = parent ? parent->GetStack() : GetStack();
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parentStack, this, this );
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );

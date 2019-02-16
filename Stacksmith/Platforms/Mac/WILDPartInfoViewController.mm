@@ -80,7 +80,7 @@ using namespace Carlson;
 	
 	[self.userPropertyEditor setPropertyContainer: part];
 	
-	CLayer*		parent = dynamic_cast<CLayer*>(part->GetParentObject( nullptr ));
+	CLayer*		parent = dynamic_cast<CLayer*>(part->GetParentObject( nullptr, nullptr ));
 	NSString*	layerName = [[NSString stringWithUTF8String: parent->GetIdentityForDump()] capitalizedString];
 	[numberField setIntegerValue: parent->GetIndexOfPart( part, part->GetPartType() ) +1];
 	[partNumberLabel setStringValue: [NSString stringWithFormat: @"%@ Part Number:", layerName]];

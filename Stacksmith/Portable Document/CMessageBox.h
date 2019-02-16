@@ -40,7 +40,7 @@ public:
 
 	virtual LEOScript*	GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler ) override;
 	virtual LEOContextGroup*	GetScriptContextGroupObject() override;
-	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx ) override;
 	
 protected:
 	std::string				mScript;			// The actual text in the message box.

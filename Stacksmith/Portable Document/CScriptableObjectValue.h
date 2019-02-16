@@ -109,11 +109,11 @@ public:
 	
 	virtual void				SendMessage( LEOContext** outContext, std::function<void(const char*,size_t,size_t,CScriptableObject*,bool)> errorHandler, TMayGoUnhandledFlag inMayGoUnhandled, const char* fmt, ... );	//!< Error handler takes errMsg, line, offset, object, wasHandled.
     virtual void                ContextCompleted( LEOContext* ctx )                 {};
-	virtual bool				HasOrInheritsMessageHandler( const char* inMsgName, CScriptableObject* previousParent );	//!< To find whether this object implements the given message, or someone up the hierarchy does that this object will forward it to (e.g. to not ask the OS for mouseMoved events unless actually implemented).
+	virtual bool				HasOrInheritsMessageHandler( const char* inMsgName, CScriptableObject* previousParent, LEOContext * ctx );	//!< To find whether this object implements the given message, or someone up the hierarchy does that this object will forward it to (e.g. to not ask the OS for mouseMoved events unless actually implemented).
 	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message.
 
 	virtual CStack*				GetStack()												{ return NULL; };
-	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent )	{ return NULL; };
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )	{ return NULL; };
 	virtual LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )										{ return NULL; };
 	virtual LEOContextGroup*	GetScriptContextGroupObject()					{ return NULL; };
 	virtual void				InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext );
@@ -129,6 +129,9 @@ public:
 	static CScriptableObject*	GetOwnerScriptableObjectFromContext( LEOContext * inContext );
 	static void					PreInstructionProc( LEOContext* inContext );
 	static void					ContextCompletedProc( LEOContext* inContext );
+	
+	static std::vector<CRefCountedObjectRef<CScriptableObject>> sFrontScripts;
+	static std::vector<CRefCountedObjectRef<CScriptableObject>> sBackScripts;
 };
 
 typedef CRefCountedObjectRef<CScriptableObject>	CScriptableObjectRef;
@@ -136,7 +139,7 @@ typedef CRefCountedObjectRef<CScriptableObject>	CScriptableObjectRef;
 
 /*!
 	@class CScriptContextUserData
-	An instance of these class should be passed as the userData into every
+	An instance of this class should be passed as the userData into every
 	LEOCreateContext(). We use it to associate some Stacksmith-specific
 	state with each execution thread (not actually an OS thread, at least yet,
 	but sort of, due to our continuation-like approach to e.g. the "go" command).
@@ -158,14 +161,21 @@ public:
 	const std::string&	GetVisualEffectType()	{ return mVisualEffectType; };
 	TVisualEffectSpeed	GetVisualEffectSpeed()	{ return mVisualEffectSpeed; };
 	
+	void				SetCurrentFrontScript(CScriptableObject * o)	{ mCurrentFrontScript = o; }
+	CScriptableObject *	GetCurrentFrontScript() 						{ return mCurrentFrontScript; }
+	void				SetCurrentBackScript(CScriptableObject * o)		{ mCurrentBackScript = o; }
+	CScriptableObject *	GetCurrentBackScript() 							{ return mCurrentBackScript; }
+
 	static void			CleanUp( void* inData );
 	
 protected:
-	CStack				*	mCurrentStack;
-    CScriptableObject	*	mTarget;
-    CScriptableObject	*	mOwner;
+	CStack				*	mCurrentStack = nullptr;
+    CScriptableObject	*	mTarget = nullptr;
+    CScriptableObject	*	mOwner = nullptr;
 	std::string				mVisualEffectType;
 	TVisualEffectSpeed		mVisualEffectSpeed;
+	CScriptableObject	*	mCurrentFrontScript = nullptr;	// Just used as an "index" into CScriptableObject::sFrontScripts + indicator that we're looping through front scripts right now.
+	CScriptableObject	*	mCurrentBackScript = nullptr;	// Just used as an "index" into CScriptableObject::sBackScripts + indicator that we're looping through back scripts right now
 };
 
 

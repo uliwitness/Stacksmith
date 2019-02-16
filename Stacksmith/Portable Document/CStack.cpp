@@ -218,7 +218,7 @@ void	CStack::CallAllCompletionBlocks()
 }
 
 
-CScriptableObject*	CStack::GetParentObject( CScriptableObject* previousParent )
+CScriptableObject*	CStack::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
 	return mDocument;
 }

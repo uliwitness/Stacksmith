@@ -39,7 +39,7 @@ public:
 		
 	virtual void	SetPeeking( bool inState ) override;
 	
-	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx ) override;
 	virtual CBackground*		GetBackground()		{ return mOwningBackground; };
 	virtual void				SetBackground( CBackground* inBg )	{ mOwningBackground = inBg; };	// Used mainly for assigning a background to a newly-created, never-before saved card in RAM.
 	

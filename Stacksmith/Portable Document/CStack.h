@@ -61,7 +61,7 @@ public:
 	std::string			GetFileName()			{ return mFileName; };
 	virtual std::string	GetTypeName() override	{ return std::string("stack"); };
 	virtual bool		ShowHandlersForObjectType( std::string inTypeName ) override	{ return true; };	//!< Show all handlers in our popup, we may get them forwarded through the message path.
-	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx ) override;
 	
 	void			AddCard( CCard* inCard );	//!< Add at end.
 	void			InsertCardAfterCard( CCard* inNewCard, CCard *precedingCard = NULL );	// If precedingCard == NULL insert at start.

@@ -169,7 +169,7 @@ public:
 	virtual void				WakeUp()		{};
 	virtual void				GoToSleep()		{};
 	virtual void				SetPeeking( bool inState )				{};
-	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx ) override;
 	virtual CStack*				GetStack() override;
 	virtual CPartContents*		GetContentsOnCurrentCard();
 	virtual CUndoStack*			GetUndoStack();

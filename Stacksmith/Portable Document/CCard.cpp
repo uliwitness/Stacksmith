@@ -91,7 +91,7 @@ void	CCard::SetPeeking( bool inState )
 }
 
 
-CScriptableObject*	CCard::GetParentObject( CScriptableObject* previousParent )
+CScriptableObject*	CCard::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
 	return mOwningBackground;
 }

@@ -39,7 +39,7 @@ public:
 	virtual std::string			GetTypeName() override			{ return std::string("background"); };
 	virtual std::string			GetObjectDescriptorString() override;
 	
-	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent ) override;
+	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx ) override;
 	
 	virtual void				CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock ) override;
 	

@@ -314,7 +314,7 @@ void	CPart::SetPartLayoutFlags( TPartLayoutFlags inFlags )
 }
 
 
-CScriptableObject*	CPart::GetParentObject( CScriptableObject* previousParent )
+CScriptableObject*	CPart::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
 	return mOwner;
 }

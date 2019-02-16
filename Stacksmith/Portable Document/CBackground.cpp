@@ -43,7 +43,7 @@ void	CBackground::GoToSleep()
 }
 
 
-CScriptableObject*	CBackground::GetParentObject( CScriptableObject* previousParent )
+CScriptableObject*	CBackground::GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )
 {
 	return mStack;
 }
