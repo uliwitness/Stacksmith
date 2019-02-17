@@ -132,6 +132,8 @@ public:
 	static void					PreInstructionProc( LEOContext* inContext );
 	static void					ContextCompletedProc( LEOContext* inContext );
 	
+	static void					InsertObjectInList(CRefCountedObjectRef<CScriptableObject> o, std::vector<CRefCountedObjectRef<CScriptableObject>> & list);
+	
 	static std::vector<CRefCountedObjectRef<CScriptableObject>> sFrontScripts;
 	static std::vector<CRefCountedObjectRef<CScriptableObject>> sBackScripts;
 };
@@ -165,6 +167,8 @@ public:
 	
 	void				SetCurrentFrontScript(CScriptableObject * o)	{ mCurrentFrontScript = o; }
 	CScriptableObject *	GetCurrentFrontScript() 						{ return mCurrentFrontScript; }
+	void				SetRealReceiver(CScriptableObject * o)			{ mRealReceiver = o; }
+	CScriptableObject *	GetRealReceiver() 								{ return mRealReceiver; }
 	void				SetCurrentBackScript(CScriptableObject * o)		{ mCurrentBackScript = o; }
 	CScriptableObject *	GetCurrentBackScript() 							{ return mCurrentBackScript; }
 
@@ -178,6 +182,7 @@ protected:
 	TVisualEffectSpeed		mVisualEffectSpeed;
 	CScriptableObject	*	mCurrentFrontScript = nullptr;	// Just used as an "index" into CScriptableObject::sFrontScripts + indicator that we're looping through front scripts right now.
 	CScriptableObject	*	mCurrentBackScript = nullptr;	// Just used as an "index" into CScriptableObject::sBackScripts + indicator that we're looping through back scripts right now
+	CScriptableObject	*	mRealReceiver = nullptr;		// Object to send to once front scripts are done.
 };
 
 

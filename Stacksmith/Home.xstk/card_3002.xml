@@ -121,14 +121,12 @@ end mouseUp</script>
     </part>
     <name></name>
     <script>on mainStackChange
-	put "mainStack changed"
 	if the mainStack is not empty then
-		set highlight of card button (the tool of the mainStack) to true
+		set highlight of card button (the tool of the mainStack) of me to true
 	end if
 end mainStackChange
 
 on choose theTool
-	put "tool changed"
-	set highlight of card button theTool to true
+	set highlight of card button theTool of me to true
 end choose</script>
 </card>

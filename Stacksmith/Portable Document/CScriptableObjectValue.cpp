@@ -995,7 +995,8 @@ CScriptableObject*	CScriptableObject::GetNextFrontScript( LEOContext * ctx )
 		prevObject = currObject;
 	}
 	
-	return nullptr;
+	ud->SetCurrentFrontScript(nullptr);
+	return ud->GetRealReceiver();
 }
 
 
@@ -1078,9 +1079,6 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	#define DBGLOGPAR(args...)	
 #endif
 
-	LEOScript*	theScript = GetScriptObject([errorHandler](const char* msg,size_t line,size_t offs,CScriptableObject* obj){ errorHandler(msg,line,offs,obj,false); });
-	if( !theScript )
-		return;
 	LEOContextGroup*	contextGroup = GetScriptContextGroupObject();
 	LEOContext*	ctx = NULL;
 	bool		firstParamIsMessageName = false;
@@ -1342,19 +1340,35 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	if( ctx->group->messageSent )
 		ctx->group->messageSent( handlerID, ctx->group );
 
-	bool				wasHandled = false;
-	LEOHandler*			theHandler = nullptr;
-	CScriptableObject*	handlingObject = nullptr;
-	while( !theHandler )
+	LEOScript*	theScript = nullptr;
+	if( !CScriptableObject::sFrontScripts.empty() )
 	{
-		RunHandlerForObjectInScriptAndContext( handlerID, &handlingObject, &theScript, ctx, errorHandler, mayGoUnhandled, &theHandler );
-		wasHandled = theHandler != nullptr;
-		if( !theScript )
-			break;
+		CScriptableObject * firstFrontScriptObject = CScriptableObject::sFrontScripts.front();
+		ud->SetRealReceiver(this);
+		ud->SetCurrentFrontScript(firstFrontScriptObject);
+		theScript = firstFrontScriptObject->GetScriptObject([errorHandler](const char* msg,size_t line,size_t offs,CScriptableObject* obj){ errorHandler(msg,line,offs,obj,false); });
 	}
-	if( ctx->errMsg[0] != 0 )
+	else
 	{
-		errorHandler( ctx->errMsg, ctx->errLine, ctx->errOffset, handlingObject ?: this, wasHandled );
+		theScript = GetScriptObject([errorHandler](const char* msg,size_t line,size_t offs,CScriptableObject* obj){ errorHandler(msg,line,offs,obj,false); });
+	}
+
+	if( theScript )
+	{
+		bool				wasHandled = false;
+		LEOHandler*			theHandler = nullptr;
+		CScriptableObject*	handlingObject = nullptr;
+		while( !theHandler )
+		{
+			RunHandlerForObjectInScriptAndContext( handlerID, &handlingObject, &theScript, ctx, errorHandler, mayGoUnhandled, &theHandler );
+			wasHandled = theHandler != nullptr;
+			if( !theScript )
+				break;
+		}
+		if( ctx->errMsg[0] != 0 )
+		{
+			errorHandler( ctx->errMsg, ctx->errLine, ctx->errOffset, handlingObject ?: this, wasHandled );
+		}
 	}
 	
 	if( !outContext )
@@ -1412,6 +1426,18 @@ void	CScriptableObject::InitValue( LEOValuePtr outObject, LEOKeepReferencesFlag 
 void	CScriptableObject::InitObjectDescriptorValue( LEOValuePtr outObject, LEOKeepReferencesFlag keepReferences, LEOContext* inContext )
 {
 	InitObjectDescriptorValue( &outObject->object, this, keepReferences, inContext );
+}
+
+
+void	CScriptableObject::InsertObjectInList(CRefCountedObjectRef<CScriptableObject> o, std::vector<CRefCountedObjectRef<CScriptableObject>> & list)
+{
+	for( CScriptableObject * currObj : list )
+	{
+		if( currObj == o )
+			return;
+	}
+	
+	list.push_back(o);
 }
 
 

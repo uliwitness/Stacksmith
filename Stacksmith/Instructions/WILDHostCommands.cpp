@@ -1268,9 +1268,9 @@ void	WILDInsertScriptInstruction( LEOContext* inContext )
 	{
 		CScriptableObject * object = (CScriptableObject*)objectValue->object.object;
 		if( strcasecmp( locationStr, "front" ) == 0 )
-			CScriptableObject::sFrontScripts.push_back( object );
+			CScriptableObject::InsertObjectInList( object, CScriptableObject::sFrontScripts );
 		else if( strcasecmp( locationStr, "back" ) == 0 )
-			CScriptableObject::sBackScripts.push_back( object );
+			CScriptableObject::InsertObjectInList( object, CScriptableObject::sBackScripts );
 		else
 		{
 			size_t		lineNo = SIZE_T_MAX;
