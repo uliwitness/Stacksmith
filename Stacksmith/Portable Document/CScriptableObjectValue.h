@@ -131,11 +131,6 @@ public:
 	static CScriptableObject*	GetOwnerScriptableObjectFromContext( LEOContext * inContext );
 	static void					PreInstructionProc( LEOContext* inContext );
 	static void					ContextCompletedProc( LEOContext* inContext );
-	
-	static void					InsertObjectInList(CRefCountedObjectRef<CScriptableObject> o, std::vector<CRefCountedObjectRef<CScriptableObject>> & list);
-	
-	static std::vector<CRefCountedObjectRef<CScriptableObject>> sFrontScripts;
-	static std::vector<CRefCountedObjectRef<CScriptableObject>> sBackScripts;
 };
 
 typedef CRefCountedObjectRef<CScriptableObject>	CScriptableObjectRef;
@@ -180,9 +175,9 @@ protected:
     CScriptableObject	*	mOwner = nullptr;
 	std::string				mVisualEffectType;
 	TVisualEffectSpeed		mVisualEffectSpeed;
-	CScriptableObject	*	mCurrentFrontScript = nullptr;	// Just used as an "index" into CScriptableObject::sFrontScripts + indicator that we're looping through front scripts right now.
-	CScriptableObject	*	mCurrentBackScript = nullptr;	// Just used as an "index" into CScriptableObject::sBackScripts + indicator that we're looping through back scripts right now
-	CScriptableObject	*	mRealReceiver = nullptr;		// Object to send to once front scripts are done.
+	CScriptableObject	*	mCurrentFrontScript = nullptr;	// Just used as an "index" into CScriptContextGroupUserData::mFrontScripts + indicator that we're looping through front scripts right now.
+	CScriptableObject	*	mCurrentBackScript = nullptr;	// Just used as an "index" into CScriptContextGroupUserData::mBackScripts + indicator that we're looping through back scripts right now
+	CScriptableObjectRef	mRealReceiver = nullptr;		// Real first object to send to once front scripts are done.
 };
 
 
@@ -190,7 +185,10 @@ class CScriptContextGroupUserData
 {
 public:
 	std::vector<CScriptableObjectRef>	mFrontScripts;
+	std::vector<CScriptableObjectRef>	mBackScripts;
 	
+	static void					InsertObjectInList(CRefCountedObjectRef<CScriptableObject> o, std::vector<CRefCountedObjectRef<CScriptableObject>> & list);
+
 	static void			CleanUp( void* inData );
 };
 

@@ -21,11 +21,6 @@
 using namespace Carlson;
 
 
-std::vector<CRefCountedObjectRef<CScriptableObject>> Carlson::CScriptableObject::sFrontScripts;
-std::vector<CRefCountedObjectRef<CScriptableObject>> Carlson::CScriptableObject::sBackScripts;
-
-
-
 LEONumber	GetScriptableObjectValueAsNumber( LEOValuePtr self, LEOUnit* inUnit, LEOContext* inContext );
 
 LEOInteger	GetScriptableObjectValueAsInteger( LEOValuePtr self, LEOUnit* inUnit, LEOContext* inContext );
@@ -982,9 +977,11 @@ CScriptableObject*	CScriptableObject::GetNextFrontScript( LEOContext * ctx )
 	CScriptContextUserData * ud = (CScriptContextUserData *)ctx->userData;
 	if( !ud->GetCurrentFrontScript() )
 		return nullptr;
-	
+
+	CScriptContextGroupUserData * gud = (CScriptContextGroupUserData *)ctx->group->userData;
+
 	CScriptableObject * prevObject = nullptr;
-	for( CScriptableObject * currObject : CScriptableObject::sFrontScripts )
+	for( CScriptableObject * currObject : gud->mFrontScripts )
 	{
 		if( prevObject == ud->GetCurrentFrontScript() )
 		{
@@ -1102,6 +1099,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	CScriptableObject*			parent = GetParentObject( nullptr, nullptr );
 	CStack*						parentStack = parent ? parent->GetStack() : GetStack();
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parentStack, this, this );
+	CScriptContextGroupUserData * gud = (CScriptContextGroupUserData *)contextGroup->userData;
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
 	if( outContext )
 		*outContext = ctx;
@@ -1341,9 +1339,9 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 		ctx->group->messageSent( handlerID, ctx->group );
 
 	LEOScript*	theScript = nullptr;
-	if( !CScriptableObject::sFrontScripts.empty() )
+	if( !gud->mFrontScripts.empty() )
 	{
-		CScriptableObject * firstFrontScriptObject = CScriptableObject::sFrontScripts.front();
+		CScriptableObject * firstFrontScriptObject = gud->mFrontScripts.front();
 		ud->SetRealReceiver(this);
 		ud->SetCurrentFrontScript(firstFrontScriptObject);
 		theScript = firstFrontScriptObject->GetScriptObject([errorHandler](const char* msg,size_t line,size_t offs,CScriptableObject* obj){ errorHandler(msg,line,offs,obj,false); });
@@ -1429,7 +1427,7 @@ void	CScriptableObject::InitObjectDescriptorValue( LEOValuePtr outObject, LEOKee
 }
 
 
-void	CScriptableObject::InsertObjectInList(CRefCountedObjectRef<CScriptableObject> o, std::vector<CRefCountedObjectRef<CScriptableObject>> & list)
+void	CScriptContextGroupUserData::InsertObjectInList(CRefCountedObjectRef<CScriptableObject> o, std::vector<CRefCountedObjectRef<CScriptableObject>> & list)
 {
 	for( CScriptableObject * currObj : list )
 	{

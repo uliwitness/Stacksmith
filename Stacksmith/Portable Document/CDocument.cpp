@@ -411,11 +411,12 @@ CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent
 	if( ctx )
 	{
 		CScriptContextUserData * ud = (CScriptContextUserData *)ctx->userData;
-		if( !CScriptableObject::sBackScripts.empty() )
+		CScriptContextGroupUserData * gud = (CScriptContextGroupUserData *)ctx->group->userData;
+		if( !gud->mBackScripts.empty() )
 		{
 			assert(ud->GetCurrentBackScript() == nullptr);
 			assert(ud->GetCurrentFrontScript() == nullptr);
-			CScriptableObject * obj = CScriptableObject::sBackScripts.front();
+			CScriptableObject * obj = gud->mBackScripts.front();
 			ud->SetCurrentBackScript(obj);
 			return obj;
 		}

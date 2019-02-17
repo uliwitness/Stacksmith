@@ -1266,11 +1266,12 @@ void	WILDInsertScriptInstruction( LEOContext* inContext )
 	
 	if( inContext->errMsg[0] == 0 )
 	{
+		CScriptContextGroupUserData * gud = (CScriptContextGroupUserData *)inContext->group->userData;
 		CScriptableObject * object = (CScriptableObject*)objectValue->object.object;
 		if( strcasecmp( locationStr, "front" ) == 0 )
-			CScriptableObject::InsertObjectInList( object, CScriptableObject::sFrontScripts );
+			CScriptContextGroupUserData::InsertObjectInList( object, gud->mFrontScripts );
 		else if( strcasecmp( locationStr, "back" ) == 0 )
-			CScriptableObject::InsertObjectInList( object, CScriptableObject::sBackScripts );
+			CScriptContextGroupUserData::InsertObjectInList( object, gud->mBackScripts );
 		else
 		{
 			size_t		lineNo = SIZE_T_MAX;
