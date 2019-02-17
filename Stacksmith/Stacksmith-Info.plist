@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>WILDHomeStack</key>
-	<string>Home</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
@@ -14,7 +12,7 @@
 				<string>xstk</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>Stack</string>
+			<string>WILDDocIcon</string>
 			<key>CFBundleTypeName</key>
 			<string>Stacksmith Stack</string>
 			<key>CFBundleTypeRole</key>
@@ -43,8 +41,6 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>HCSV</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -123,5 +119,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>WILDHomeStack</key>
+	<string>Home</string>
 </dict>
 </plist>

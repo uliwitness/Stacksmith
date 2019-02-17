@@ -338,6 +338,7 @@
 		559700F4137C9ACC000264B8 /* WILDBarnDoorOpenFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700F1137C9ACC000264B8 /* WILDBarnDoorOpenFilter.cikernel */; };
 		559700F5137C9ACC000264B8 /* WILDIrisCloseFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 559700F2137C9ACC000264B8 /* WILDIrisCloseFilter.cikernel */; };
 		559700FE137C9B6B000264B8 /* WILDTransitionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 559700FB137C9B6B000264B8 /* WILDTransitionFilter.m */; };
+		5599FEEA2219854F0006E162 /* WILDDocIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5599FEE92219854F0006E162 /* WILDDocIcon.icns */; };
 		559BA99D18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */; };
 		559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */; };
 		559BA9A118A84BD800760273 /* CMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 559BA99F18A84BD700760273 /* CMap.cpp */; };
@@ -478,6 +479,8 @@
 		55FDD876171B27030045A2B9 /* UKTiledImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FDD875171B27020045A2B9 /* UKTiledImageView.m */; };
 		55FDD878171B29DE0045A2B9 /* CURS_0.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55FDD877171B29DC0045A2B9 /* CURS_0.pdf */; };
 		55FDD881171B456E0045A2B9 /* UKBorderlessWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FDD880171B456E0045A2B9 /* UKBorderlessWindow.m */; };
+		55FFB0CF22196905000EBB2D /* ForgeDebugger.app in Resources */ = {isa = PBXBuildFile; fileRef = 55FFB0CC221968C4000EBB2D /* ForgeDebugger.app */; };
+		55FFB0D122197464000EBB2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55FFB0D022197464000EBB2D /* Assets.xcassets */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -581,6 +584,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 55E23BF4133FAB9E00E6B444;
 			remoteInfo = BuildVersionHeader;
+		};
+		55FFB0CB221968C4000EBB2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FFB0C7221968C3000EBB2D /* ForgeDebugger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D1107320486CEB800E47090;
+			remoteInfo = ForgeDebugger;
+		};
+		55FFB0CD221968E1000EBB2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FFB0C7221968C3000EBB2D /* ForgeDebugger.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
+			remoteInfo = ForgeDebugger;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1030,6 +1047,7 @@
 		559700F2137C9ACC000264B8 /* WILDIrisCloseFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WILDIrisCloseFilter.cikernel; path = "Custom Effects/WILDIrisCloseFilter.cikernel"; sourceTree = "<group>"; };
 		559700FA137C9B6B000264B8 /* WILDTransitionFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTransitionFilter.h; path = "Custom Effects/WILDTransitionFilter.h"; sourceTree = "<group>"; };
 		559700FB137C9B6B000264B8 /* WILDTransitionFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTransitionFilter.m; path = "Custom Effects/WILDTransitionFilter.m"; sourceTree = "<group>"; };
+		5599FEE92219854F0006E162 /* WILDDocIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = WILDDocIcon.icns; sourceTree = "<group>"; };
 		559BA99A18A7AC3000760273 /* WILDWebBrowserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDWebBrowserInfoViewController.h; path = Platforms/Mac/WILDWebBrowserInfoViewController.h; sourceTree = "<group>"; };
 		559BA99B18A7AC3000760273 /* WILDWebBrowserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WILDWebBrowserInfoViewController.mm; path = Platforms/Mac/WILDWebBrowserInfoViewController.mm; sourceTree = "<group>"; };
 		559BA99C18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDWebBrowserInfoViewController.xib; path = Platforms/Mac/WILDWebBrowserInfoViewController.xib; sourceTree = "<group>"; };
@@ -1252,6 +1270,8 @@
 		55FDD877171B29DC0045A2B9 /* CURS_0.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = CURS_0.pdf; path = Resources/CURS_0.pdf; sourceTree = "<group>"; };
 		55FDD87F171B456E0045A2B9 /* UKBorderlessWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKBorderlessWindow.h; path = ../UliKit/UKBorderlessWindow.h; sourceTree = "<group>"; };
 		55FDD880171B456E0045A2B9 /* UKBorderlessWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKBorderlessWindow.m; path = ../UliKit/UKBorderlessWindow.m; sourceTree = "<group>"; };
+		55FFB0C7221968C3000EBB2D /* ForgeDebugger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ForgeDebugger.xcodeproj; path = ../ForgeDebugger/ForgeDebugger.xcodeproj; sourceTree = "<group>"; };
+		55FFB0D022197464000EBB2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Stacksmith-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Stacksmith-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Stacksmith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stacksmith.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1328,13 +1348,14 @@
 		2A37F4AAFDCFA73011CA2CEA /* Propaganda */ = {
 			isa = PBXGroup;
 			children = (
+				55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */,
+				55FFB0C7221968C3000EBB2D /* ForgeDebugger.xcodeproj */,
+				55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
+				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				555E53BE18959842001487C1 /* StacksmithTests */,
-				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
-				55CD60CF18753CA1002450E2 /* stackimport.xcodeproj */,
-				55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */,
 			);
 			name = Propaganda;
 			sourceTree = "<group>";
@@ -1355,6 +1376,7 @@
 			children = (
 				8D15AC360486D014006FF6A4 /* Stacksmith-Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
+				55FFB0D022197464000EBB2D /* Assets.xcassets */,
 				55A0BAFE113B4DF20095CAA6 /* Standard Resources */,
 				55EBC406114C273400BAA09D /* SyntaxDefinition.plist */,
 				55EBC41F114C2AE800BAA09D /* SyntaxColorDefaults.plist */,
@@ -1373,6 +1395,7 @@
 				55BC02E1116B2ADE00BB094E /* NoIcon.png */,
 				55E3A6F911519B45008411BB /* HCSV.icns */,
 				55E3A6FA11519B45008411BB /* Stack.icns */,
+				5599FEE92219854F0006E162 /* WILDDocIcon.icns */,
 				557B182E113C5CD600F85327 /* OldStack.icns */,
 				556C496E1731F48000C40D97 /* TimerIcon.pdf */,
 				55ADC5061744525F0084AAA9 /* BackgroundIcon.icns */,
@@ -2178,6 +2201,14 @@
 			name = UKPaintView;
 			sourceTree = "<group>";
 		};
+		55FFB0C8221968C3000EBB2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55FFB0CC221968C4000EBB2D /* ForgeDebugger.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2226,6 +2257,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55FFB0CE221968E1000EBB2D /* PBXTargetDependency */,
 				55CD60D618753CE6002450E2 /* PBXTargetDependency */,
 				55C9F96D136E1ED30096FC4D /* PBXTargetDependency */,
 				55E23C00133FAC0200E6B444 /* PBXTargetDependency */,
@@ -2256,6 +2288,10 @@
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Propaganda */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 55FFB0C8221968C3000EBB2D /* Products */;
+					ProjectRef = 55FFB0C7221968C3000EBB2D /* ForgeDebugger.xcodeproj */;
+				},
 				{
 					ProductGroup = 55C9F959136E1E940096FC4D /* Products */;
 					ProjectRef = 55C9F958136E1E940096FC4D /* Sparkle.xcodeproj */;
@@ -2352,6 +2388,13 @@
 			remoteRef = 55CD60D318753CA2002450E2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		55FFB0CC221968C4000EBB2D /* ForgeDebugger.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ForgeDebugger.app;
+			remoteRef = 55FFB0CB221968C4000EBB2D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -2359,11 +2402,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55CD60D818754007002450E2 /* stackimport in Resources */,
-				559BA9B018AE909100760273 /* WILDCardInfoViewController.xib in Resources */,
-				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
-				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
-				557B182F113C5CD600F85327 /* OldStack.icns in Resources */,
+				552FF22E113F23F3005742C8 /* resources.xml in Resources */,
+				55DD40D01C02821C00E35713 /* new_part_descriptions.xml in Resources */,
+				555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */,
+				55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */,
+				55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */,
+				5500FD9E1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist in Resources */,
+				5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */,
+				5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */,
+				551B368E1A8FAC1E006AFDFE /* Home.xstk in Resources */,
+				55BA587E1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem in Resources */,
 				559700EF137BBB3C000264B8 /* WILDIrisOpenFilter.cikernel in Resources */,
 				559700F3137C9ACC000264B8 /* WILDBarnDoorCloseFilter.cikernel in Resources */,
 				559700F4137C9ACC000264B8 /* WILDBarnDoorOpenFilter.cikernel in Resources */,
@@ -2371,44 +2419,102 @@
 				55BFEE15137CB16A008FC8BB /* WILDShrinkToTopFilter.cikernel in Resources */,
 				55BFEE1A137DBAC3008FC8BB /* WILDShrinkToBottomFilter.cikernel in Resources */,
 				55BFEE1F137E7BDC008FC8BB /* WILDStretchFromBottomFilter.cikernel in Resources */,
+				558AA68E1CD90133008AC095 /* WILDCheckerboardFilter.cikernel in Resources */,
+				558AA6841CD842EE008AC095 /* WILDVenetianBlindsFilter.cikernel in Resources */,
+				5587B8CF1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel in Resources */,
+				55CD60D818754007002450E2 /* stackimport in Resources */,
+				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
+				55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */,
+				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
+				559BA9B018AE909100760273 /* WILDCardInfoViewController.xib in Resources */,
+				55B55C1D22104EE4009CDFFC /* WILDViewFactoryTextViewInContainer.xib in Resources */,
+				55C476691A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib in Resources */,
+				55405BD318A59D06001D3C99 /* WILDFieldInfoViewController.xib in Resources */,
+				5593D0C91E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib in Resources */,
+				55B55C2322105313009CDFFC /* WILDViewFactoryTableViewInContainer.xib in Resources */,
+				55405B78189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib in Resources */,
+				557AECBA1A751DAC00086275 /* WILDTemplateProjectPickerController.xib in Resources */,
+				559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */,
+				5500FDB61E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib in Resources */,
+				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
+				555E53B5189472F9001487C1 /* WILDMessageWatcherWindowController.xib in Resources */,
+				55B55C2622105313009CDFFC /* WILDViewFactoryShapeButton.xib in Resources */,
+				55B55C2422105313009CDFFC /* WILDViewFactoryPopUpButton.xib in Resources */,
+				55B55C2522105313009CDFFC /* WILDViewFactorySystemButton.xib in Resources */,
+				559BA9CF18B1027500760273 /* WILDStackInfoViewController.xib in Resources */,
+				55405BD518A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib in Resources */,
+				5593D0591E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib in Resources */,
+				55405BD718A59D06001D3C99 /* WILDTimerInfoViewController.xib in Resources */,
+				55405BC318A4CD17001D3C99 /* WILDContentsEditorWindowController.xib in Resources */,
+				551B36861A8BF832006AFDFE /* WILDStackCanvasWindowController.xib in Resources */,
+				55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */,
+				5500FDC91E509B3600BD6BA7 /* WILDMenuItemInfoViewController.xib in Resources */,
+				559BA9C618B0F80800760273 /* WILDBackgroundInfoViewController.xib in Resources */,
+				55405BB918A39796001D3C99 /* WILDPartInfoViewController.xib in Resources */,
+				55405BD118A59D06001D3C99 /* WILDButtonInfoViewController.xib in Resources */,
+				55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */,
+				55405BE218A6220D001D3C99 /* WILDMediaPickerViewController.xib in Resources */,
+				55E3A69E11503456008411BB /* CURS_128.pdf in Resources */,
+				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
+				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
+				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
+				55F34D38136A50D600E8588D /* ICON_902.pdf in Resources */,
+				55F34D39136A50D600E8588D /* ICON_1009.pdf in Resources */,
+				55F34D3A136A50D600E8588D /* ICON_24830.pdf in Resources */,
+				55F34D3B136A50D600E8588D /* ICON_26425.pdf in Resources */,
+				55F34D3D136A554500E8588D /* ICON_31885.pdf in Resources */,
+				55F34D3F136A555300E8588D /* ICON_1000.pdf in Resources */,
+				55FDD878171B29DE0045A2B9 /* CURS_0.pdf in Resources */,
+				556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */,
+				55D872B61A7F011700D5FA30 /* CURS_4.tiff in Resources */,
+				55B063E71A84369800DE26FB /* FunctionHandlerIcon.tiff in Resources */,
+				554DBABC1A9B362300130864 /* MessageBoxIcon.tiff in Resources */,
+				55D872B51A7F011700D5FA30 /* CURS_3.tiff in Resources */,
+				554DBABD1A9B362300130864 /* MessageWatcherIcon.tiff in Resources */,
+				55B063E61A84369800DE26FB /* CommandHandlerIcon.tiff in Resources */,
+				551B36CD1A99567B006AFDFE /* PointerTool.tiff in Resources */,
+				5593D0D21E6B4FA900E7F31D /* VariableWatcherIcon.tiff in Resources */,
+				555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */,
+				555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */,
+				555F103B13881DB700E26037 /* UKPaintLassoTool.tiff in Resources */,
+				55469F0C1A9A784E0072A721 /* EditTextTool.tiff in Resources */,
+				555F103C13881DB700E26037 /* UKPaintLineTool.tiff in Resources */,
+				555F103D13881DB700E26037 /* UKPaintOvalTool.tiff in Resources */,
+				555F103E13881DB700E26037 /* UKPaintPathTool.tiff in Resources */,
+				555F103F13881DB700E26037 /* UKPaintRectTool.tiff in Resources */,
+				555F104013881DB700E26037 /* UKPaintRoundrectTool.tiff in Resources */,
+				555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */,
+				555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */,
+				555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */,
+				55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */,
+				55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */,
+				551B36CE1A99567B006AFDFE /* BrowseTool.tiff in Resources */,
 				552FF1FB113F23F3005742C8 /* PAT_1.pbm in Resources */,
 				552FF1FC113F23F3005742C8 /* PAT_2.pbm in Resources */,
-				55B55C1D22104EE4009CDFFC /* WILDViewFactoryTextViewInContainer.xib in Resources */,
 				552FF1FD113F23F3005742C8 /* PAT_3.pbm in Resources */,
 				552FF1FE113F23F3005742C8 /* PAT_4.pbm in Resources */,
 				552FF1FF113F23F3005742C8 /* PAT_5.pbm in Resources */,
+				5599FEEA2219854F0006E162 /* WILDDocIcon.icns in Resources */,
 				552FF200113F23F3005742C8 /* PAT_6.pbm in Resources */,
 				552FF201113F23F3005742C8 /* PAT_7.pbm in Resources */,
-				558AA68E1CD90133008AC095 /* WILDCheckerboardFilter.cikernel in Resources */,
 				552FF202113F23F3005742C8 /* PAT_8.pbm in Resources */,
-				55C476691A56068B004DFAB2 /* WILDScriptEditorHandlerListPopover.xib in Resources */,
-				55D872B61A7F011700D5FA30 /* CURS_4.tiff in Resources */,
 				552FF203113F23F3005742C8 /* PAT_9.pbm in Resources */,
 				552FF204113F23F3005742C8 /* PAT_10.pbm in Resources */,
 				552FF205113F23F3005742C8 /* PAT_11.pbm in Resources */,
 				552FF206113F23F3005742C8 /* PAT_12.pbm in Resources */,
 				552FF207113F23F3005742C8 /* PAT_13.pbm in Resources */,
-				55B063E71A84369800DE26FB /* FunctionHandlerIcon.tiff in Resources */,
-				55405BD318A59D06001D3C99 /* WILDFieldInfoViewController.xib in Resources */,
 				552FF208113F23F3005742C8 /* PAT_14.pbm in Resources */,
 				552FF209113F23F3005742C8 /* PAT_15.pbm in Resources */,
 				552FF20A113F23F3005742C8 /* PAT_16.pbm in Resources */,
 				552FF20B113F23F3005742C8 /* PAT_17.pbm in Resources */,
-				554DBABC1A9B362300130864 /* MessageBoxIcon.tiff in Resources */,
 				552FF20C113F23F3005742C8 /* PAT_18.pbm in Resources */,
-				5593D0C91E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib in Resources */,
 				552FF20D113F23F3005742C8 /* PAT_19.pbm in Resources */,
 				552FF20E113F23F3005742C8 /* PAT_20.pbm in Resources */,
-				55B55C2322105313009CDFFC /* WILDViewFactoryTableViewInContainer.xib in Resources */,
 				552FF20F113F23F3005742C8 /* PAT_21.pbm in Resources */,
-				55405B78189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib in Resources */,
 				552FF210113F23F3005742C8 /* PAT_22.pbm in Resources */,
-				5500FDAE1E4FE13200BD6BA7 /* MenuIcon.png in Resources */,
-				55D872B51A7F011700D5FA30 /* CURS_3.tiff in Resources */,
 				552FF211113F23F3005742C8 /* PAT_23.pbm in Resources */,
 				552FF212113F23F3005742C8 /* PAT_24.pbm in Resources */,
 				552FF213113F23F3005742C8 /* PAT_25.pbm in Resources */,
-				557AECBA1A751DAC00086275 /* WILDTemplateProjectPickerController.xib in Resources */,
 				552FF214113F23F3005742C8 /* PAT_26.pbm in Resources */,
 				552FF215113F23F3005742C8 /* PAT_27.pbm in Resources */,
 				552FF216113F23F3005742C8 /* PAT_28.pbm in Resources */,
@@ -2418,131 +2524,71 @@
 				552FF21A113F23F3005742C8 /* PAT_32.pbm in Resources */,
 				552FF21B113F23F3005742C8 /* PAT_33.pbm in Resources */,
 				552FF21C113F23F3005742C8 /* PAT_34.pbm in Resources */,
-				5500FDB01E4FE13200BD6BA7 /* MenuItemIcon.png in Resources */,
 				552FF21D113F23F3005742C8 /* PAT_35.pbm in Resources */,
 				552FF21E113F23F3005742C8 /* PAT_36.pbm in Resources */,
 				552FF21F113F23F3005742C8 /* PAT_37.pbm in Resources */,
 				552FF220113F23F3005742C8 /* PAT_38.pbm in Resources */,
 				552FF221113F23F3005742C8 /* PAT_39.pbm in Resources */,
 				552FF222113F23F3005742C8 /* PAT_40.pbm in Resources */,
+				557B182F113C5CD600F85327 /* OldStack.icns in Resources */,
 				554DBABE1A9B362300130864 /* StackCanvasIcon.icns in Resources */,
-				552FF22E113F23F3005742C8 /* resources.xml in Resources */,
-				55EBC407114C273400BAA09D /* SyntaxDefinition.plist in Resources */,
-				55EBC420114C2AE800BAA09D /* SyntaxColorDefaults.plist in Resources */,
-				558AA6841CD842EE008AC095 /* WILDVenetianBlindsFilter.cikernel in Resources */,
-				559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */,
+				55E3A6FB11519B45008411BB /* HCSV.icns in Resources */,
+				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
+				55ADC5091744525F0084AAA9 /* BackgroundIcon.icns in Resources */,
+				55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */,
+				55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */,
+				55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */,
+				5500FDAE1E4FE13200BD6BA7 /* MenuIcon.png in Resources */,
+				5500FDB01E4FE13200BD6BA7 /* MenuItemIcon.png in Resources */,
 				55EBC646114CFAE000BAA09D /* BackgroundIconSmall.png in Resources */,
 				5500FDC31E50989700BD6BA7 /* MenuItemIconSmall.png in Resources */,
 				55EBC647114CFAE000BAA09D /* ButtonIconSmall.png in Resources */,
 				55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */,
 				55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */,
-				55E3A69E11503456008411BB /* CURS_128.pdf in Resources */,
-				5500FDB61E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib in Resources */,
-				55E3A6FB11519B45008411BB /* HCSV.icns in Resources */,
-				55E3A6FC11519B45008411BB /* Stack.icns in Resources */,
 				55BC02E2116B2ADE00BB094E /* NoIcon.png in Resources */,
-				554DBABD1A9B362300130864 /* MessageWatcherIcon.tiff in Resources */,
-				555BB9A313198C8200B22D89 /* WILDObjectTemplates in Resources */,
-				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
-				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
-				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
-				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
-				555E53B5189472F9001487C1 /* WILDMessageWatcherWindowController.xib in Resources */,
-				55F34D38136A50D600E8588D /* ICON_902.pdf in Resources */,
-				55F34D39136A50D600E8588D /* ICON_1009.pdf in Resources */,
-				55F34D3A136A50D600E8588D /* ICON_24830.pdf in Resources */,
-				55F34D3B136A50D600E8588D /* ICON_26425.pdf in Resources */,
-				55F34D3D136A554500E8588D /* ICON_31885.pdf in Resources */,
-				55F34D3F136A555300E8588D /* ICON_1000.pdf in Resources */,
-				55B55C2622105313009CDFFC /* WILDViewFactoryShapeButton.xib in Resources */,
 				5500FDC21E50989700BD6BA7 /* MenuItemIconSmall@2x.png in Resources */,
-				55B55C2422105313009CDFFC /* WILDViewFactoryPopUpButton.xib in Resources */,
 				55039F43136B52C80082E32E /* brush01.png in Resources */,
-				55B063E61A84369800DE26FB /* CommandHandlerIcon.tiff in Resources */,
 				55039F44136B52C80082E32E /* brush02.png in Resources */,
 				55039F45136B52C80082E32E /* brush03.png in Resources */,
 				5500FDC41E50989700BD6BA7 /* MenuIconSmall.png in Resources */,
+				55FFB0D122197464000EBB2D /* Assets.xcassets in Resources */,
 				55039F46136B52C80082E32E /* brush04.png in Resources */,
-				55B55C2522105313009CDFFC /* WILDViewFactorySystemButton.xib in Resources */,
 				55039F47136B52C80082E32E /* brush05.png in Resources */,
 				55039F48136B52C80082E32E /* brush06.png in Resources */,
 				55039F49136B52C80082E32E /* brush07.png in Resources */,
 				55039F4A136B52C80082E32E /* brush08.png in Resources */,
-				559BA9CF18B1027500760273 /* WILDStackInfoViewController.xib in Resources */,
 				55039F4B136B52C80082E32E /* brush09.png in Resources */,
 				55039F4C136B52C80082E32E /* brush10.png in Resources */,
 				55039F4D136B52C80082E32E /* brush11.png in Resources */,
 				55039F4E136B52C80082E32E /* brush12.png in Resources */,
 				55039F4F136B52C80082E32E /* brush13.png in Resources */,
-				551B36CD1A99567B006AFDFE /* PointerTool.tiff in Resources */,
-				55405BD518A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib in Resources */,
 				55039F50136B52C80082E32E /* brush14.png in Resources */,
 				55039F51136B52C80082E32E /* brush15.png in Resources */,
 				55039F52136B52C80082E32E /* brush16.png in Resources */,
-				5593D0591E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib in Resources */,
 				55039F53136B52C80082E32E /* brush17.png in Resources */,
 				55039F54136B52C80082E32E /* brush18.png in Resources */,
 				55039F55136B52C80082E32E /* brush19.png in Resources */,
 				5500FDAF1E4FE13200BD6BA7 /* MenuIcon@2x.png in Resources */,
 				55039F56136B52C80082E32E /* brush20.png in Resources */,
-				55405BD718A59D06001D3C99 /* WILDTimerInfoViewController.xib in Resources */,
 				55039F57136B52C80082E32E /* brush21.png in Resources */,
 				55039F58136B52C80082E32E /* brush22.png in Resources */,
 				55039F59136B52C80082E32E /* brush23.png in Resources */,
 				55039F5A136B52C80082E32E /* brush24.png in Resources */,
 				55039F5B136B52C80082E32E /* brush25.png in Resources */,
-				55405BC318A4CD17001D3C99 /* WILDContentsEditorWindowController.xib in Resources */,
 				55039F5C136B52C80082E32E /* brush26.png in Resources */,
 				55039F5D136B52C80082E32E /* brush27.png in Resources */,
-				5593D0D21E6B4FA900E7F31D /* VariableWatcherIcon.tiff in Resources */,
-				555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */,
 				55039F5E136B52C80082E32E /* brush28.png in Resources */,
 				5500FDC11E50989700BD6BA7 /* MenuIconSmall@2x.png in Resources */,
 				55039F5F136B52C80082E32E /* brush29.png in Resources */,
 				55039F60136B52C80082E32E /* brush30.png in Resources */,
 				55039F61136B52C80082E32E /* brush31.png in Resources */,
-				5500FD9E1E4FA66800BD6BA7 /* WILDInitialUserDefaults.plist in Resources */,
-				551B368E1A8FAC1E006AFDFE /* Home.xstk in Resources */,
 				5500FDB11E4FE13200BD6BA7 /* MenuItemIcon@2x.png in Resources */,
 				55039F62136B52C80082E32E /* brush32.png in Resources */,
-				5589DD781378B16400B0F6CF /* TransitionMappings.plist in Resources */,
-				555F103813881DB700E26037 /* UKPaintbrushTool.tiff in Resources */,
-				555F103A13881DB700E26037 /* UKPaintEraserTool.tiff in Resources */,
-				555F103B13881DB700E26037 /* UKPaintLassoTool.tiff in Resources */,
-				55469F0C1A9A784E0072A721 /* EditTextTool.tiff in Resources */,
-				551B36861A8BF832006AFDFE /* WILDStackCanvasWindowController.xib in Resources */,
-				555F103C13881DB700E26037 /* UKPaintLineTool.tiff in Resources */,
-				55B074141889CC0E0023BA3E /* WILDMessageBoxWindowController.xib in Resources */,
-				555F103D13881DB700E26037 /* UKPaintOvalTool.tiff in Resources */,
-				555F103E13881DB700E26037 /* UKPaintPathTool.tiff in Resources */,
-				5500FDC91E509B3600BD6BA7 /* WILDMenuItemInfoViewController.xib in Resources */,
-				555F103F13881DB700E26037 /* UKPaintRectTool.tiff in Resources */,
-				559BA9C618B0F80800760273 /* WILDBackgroundInfoViewController.xib in Resources */,
-				555F104013881DB700E26037 /* UKPaintRoundrectTool.tiff in Resources */,
-				55405BB918A39796001D3C99 /* WILDPartInfoViewController.xib in Resources */,
-				555F104113881DB700E26037 /* UKPaintSelectTool.tiff in Resources */,
-				5587B8CF1CD3D9D6008819D2 /* WILDStretchFromTopFilter.cikernel in Resources */,
-				555F104213881DB700E26037 /* UKPaintShapeTool.tiff in Resources */,
-				55405BD118A59D06001D3C99 /* WILDButtonInfoViewController.xib in Resources */,
-				555F104313881DB700E26037 /* UKPaintTextTool.tiff in Resources */,
-				55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */,
-				55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */,
 				55A7BA4B14668D6E00AB0F34 /* harpsichord.aiff in Resources */,
 				55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */,
-				55BA587E1CB01CE500076B25 /* stacksmith_public_sparkle_dsa_key.pem in Resources */,
 				55A7BA4D14668D6E00AB0F34 /* flute.aiff in Resources */,
-				55FDD878171B29DE0045A2B9 /* CURS_0.pdf in Resources */,
-				5538246017272EC2007785D8 /* frameworkheaders.hhc in Resources */,
-				55B29CA017276D4100B38E75 /* UKCrashReporter.strings in Resources */,
-				55DD40D01C02821C00E35713 /* new_part_descriptions.xml in Resources */,
-				55B29CA117276D4100B38E75 /* UKCrashReporter.xib in Resources */,
-				556C496F1731F48000C40D97 /* TimerIcon.pdf in Resources */,
-				551B36CE1A99567B006AFDFE /* BrowseTool.tiff in Resources */,
-				55ADC5091744525F0084AAA9 /* BackgroundIcon.icns in Resources */,
-				55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */,
-				55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */,
-				55405BE218A6220D001D3C99 /* WILDMediaPickerViewController.xib in Resources */,
-				55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */,
+				555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */,
+				55FFB0CF22196905000EBB2D /* ForgeDebugger.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2887,6 +2933,11 @@
 			target = 55E23BF4133FAB9E00E6B444 /* BuildVersionHeader */;
 			targetProxy = 55E23BFF133FAC0200E6B444 /* PBXContainerItemProxy */;
 		};
+		55FFB0CE221968E1000EBB2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ForgeDebugger;
+			targetProxy = 55FFB0CD221968E1000EBB2D /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -3048,6 +3099,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = WILDAppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3094,6 +3146,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = WILDAppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
