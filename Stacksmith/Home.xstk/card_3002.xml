@@ -119,6 +119,63 @@ end mouseUp</script>
 	end if
 end mouseUp</script>
     </part>
+	<part>
+		<id>3</id>
+		<type>button</type>
+		<rect>
+			<left>108</left>
+			<top>12</top>
+			<right>144</right>
+			<bottom>48</bottom>
+		</rect>
+		<visible><true/></visible>
+		<enabled><true/></enabled>
+		<fillColor>
+			<red>20000</red>
+			<green>20000</green>
+			<blue>20000</blue>
+			<alpha>30000</alpha>
+		</fillColor>
+		<lineColor>
+			<red>40000</red>
+			<green>40000</green>
+			<blue>40000</blue>
+			<alpha>30000</alpha>
+		</lineColor>
+		<shadowColor>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+			<alpha>0</alpha>
+		</shadowColor>
+		<shadowOffset>
+			<width>0</width>
+			<height>0</height>
+		</shadowOffset>
+		<shadowBlurRadius>0</shadowBlurRadius>
+		<lineWidth>0</lineWidth>
+		<bevelWidth>0</bevelWidth>
+		<bevelAngle>0</bevelAngle>
+		<style>roundrect</style>
+		<showName><false/></showName>
+		<autoHighlight><true/></autoHighlight>
+		<sharedHighlight><false/></sharedHighlight>
+		<family>1</family>
+		<titleWidth>0</titleWidth>
+		<icon>13764</icon>
+		<cursor>128</cursor>
+		<textAlign>default</textAlign>
+		<font></font>
+		<textSize>12</textSize>
+		<textStyle>plain</textStyle>
+		<name>Edit Text</name>
+		<script>on mouseUp
+	if the mainStack is not empty then
+		set the tool of the mainStack to "edit text"
+	end if
+end mouseUp</script>
+	</part>
+
     <name></name>
     <script>on mainStackChange
 	if the mainStack is not empty then
