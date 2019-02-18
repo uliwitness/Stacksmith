@@ -441,6 +441,7 @@
 		55D3E5AF1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D3E5AD1EABD0F3002EF547 /* CPaintEngineSelectionRectTool.cpp */; };
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
+		55D728FB221B438000F2F7AC /* WILDMediaPickerViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D728EE221B437F00F2F7AC /* WILDMediaPickerViewItem.xib */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
 		55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */; };
 		55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */; };
@@ -1216,6 +1217,7 @@
 		55D5865C140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NE_SW_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D61D621AA275C2006D117F /* TTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TTool.h; path = "Portable Document/TTool.h"; sourceTree = "<group>"; };
+		55D728EE221B437F00F2F7AC /* WILDMediaPickerViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDMediaPickerViewItem.xib; path = Platforms/Mac/WILDMediaPickerViewItem.xib; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
 		55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+centerHorizontallyAndVertically.m"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.m"; sourceTree = "<group>"; };
 		55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNodeTransformation.cpp; path = ../../CNodeTransformation.cpp; sourceTree = "<group>"; };
@@ -1799,6 +1801,7 @@
 				55405BDD18A6220D001D3C99 /* WILDMediaPickerViewController.h */,
 				55405BDE18A6220D001D3C99 /* WILDMediaPickerViewController.mm */,
 				55405BDF18A6220D001D3C99 /* WILDMediaPickerViewController.xib */,
+				55D728EE221B437F00F2F7AC /* WILDMediaPickerViewItem.xib */,
 				559BA9B118AE90AD00760273 /* WILDLayerInfoViewController.h */,
 				559BA9B218AE90AE00760273 /* WILDLayerInfoViewController.mm */,
 				559BA9AC18AE909100760273 /* WILDCardInfoViewController.h */,
@@ -2574,6 +2577,7 @@
 				55039F58136B52C80082E32E /* brush22.png in Resources */,
 				55039F59136B52C80082E32E /* brush23.png in Resources */,
 				55039F5A136B52C80082E32E /* brush24.png in Resources */,
+				55D728FB221B438000F2F7AC /* WILDMediaPickerViewItem.xib in Resources */,
 				55039F5B136B52C80082E32E /* brush25.png in Resources */,
 				55039F5C136B52C80082E32E /* brush26.png in Resources */,
 				55039F5D136B52C80082E32E /* brush27.png in Resources */,

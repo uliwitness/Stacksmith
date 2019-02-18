@@ -3,7 +3,7 @@
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 05.04.10.
-//  Copyright 2010 Apple Inc. All rights reserved.
+//  Copyright 2010 Uli Kusterer All rights reserved.
 //
 
 #import "WILDMediaListDataSource.h"
@@ -76,15 +76,9 @@ using namespace Carlson;
 }
 
 
--(NSImage*)	image
+-(void)	setImageCanvas:(const CImageCanvas &)inImage
 {
-	return [[[NSImage alloc] initWithCGImage: mImage.GetMacImage() size: NSZeroSize] autorelease];
-}
-
-
--(void)	setImage:(NSImage *)inImage
-{
-	mImage = CImageCanvas( [inImage CGImageForProposedRect: NULL context: NULL hints: nil] );
+	mImage = inImage;
 }
 
 
@@ -97,9 +91,12 @@ using namespace Carlson;
 			mImage = CImageCanvas(imagePath);
 	}
 	if( !mImage.IsValid() )
+	{
 		mImage = CImageCanvas( [[NSImage imageNamed: @"NoIcon"] CGImageForProposedRect: NULL context: NULL hints: nil] );
+	}
 	
-	return [[[NSImage alloc] initWithCGImage: mImage.GetMacImage() size: NSZeroSize] autorelease];
+	CGImageRef img = mImage.GetMacImage();
+	return [[[NSImage alloc] initWithCGImage: img size: NSZeroSize] autorelease];
 }
 
 -(NSString *) imageTitle
@@ -148,6 +145,7 @@ using namespace Carlson;
 	{
 		[mIconListView release];
 		mIconListView = [inIconListView retain];
+		[mIconListView registerNib: [[[NSNib alloc] initWithNibNamed: @"WILDMediaPickerViewItem" bundle: [NSBundle bundleForClass: self.class]] autorelease] forItemWithIdentifier: @"MediaItem"];
 		
 		[mIconListView registerForDraggedTypes: [NSArray arrayWithObject: NSPasteboardTypeURL]];
 	}
@@ -209,19 +207,19 @@ using namespace Carlson;
 
 -(void)	setSelectedIconID: (ObjectID)theID
 {
-	[self ensureIconListExists];
-	
-	NSUInteger		x = 0;
-	for( WILDSimpleImageBrowserItem* sibi in mIcons )
-	{
-		if( sibi.pictureID == theID )
-		{
-			NSUInteger objectPath[2] = { 0, x };
-			[mIconListView selectItemsAtIndexPaths: [NSSet setWithObject: [NSIndexPath indexPathWithIndexes: objectPath length: sizeof(objectPath) / sizeof(NSInteger)]] scrollPosition: NSCollectionViewScrollPositionCenteredVertically];
-			break;
-		}
-		x++;
-	}
+//	[self ensureIconListExists];
+//
+//	NSUInteger		x = 0;
+//	for( WILDSimpleImageBrowserItem* sibi in mIcons )
+//	{
+//		if( sibi.pictureID == theID )
+//		{
+//			NSUInteger objectPath[2] = { 0, x };
+//			[mIconListView selectItemsAtIndexPaths: [NSSet setWithObject: [NSIndexPath indexPathWithIndexes: objectPath length: sizeof(objectPath) / sizeof(NSInteger)]] scrollPosition: NSCollectionViewScrollPositionCenteredVertically];
+//			break;
+//		}
+//		x++;
+//	}
 }
 
 
@@ -243,7 +241,14 @@ using namespace Carlson;
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSCollectionViewItem *theItem = [collectionView makeItemWithIdentifier: @"MediaItem" forIndexPath: indexPath];
-	theItem.representedObject = [mIcons objectAtIndex: [indexPath indexAtPosition: 1]];
+	WILDSimpleImageBrowserItem * model = [mIcons objectAtIndex: [indexPath indexAtPosition: 1]];
+//	[model retain];
+	theItem.representedObject = model;
+//	mDocument->GetMediaCache().GetMediaImageByIDOfType( model.pictureID, self.mediaType, [model](const CImageCanvas& inImage, int inHotspotLeft, int inHotspotTop)
+//	{
+//		[model setImageCanvas: inImage];
+//		[model release];
+//	} );
 	return theItem;
 }
 

@@ -88,6 +88,8 @@ void	CImageCanvas::InitWithImageFileURL( const std::string& inImageURL )
 		if( thePage )
 		{
 			CGRect pageRect = CGPDFPageGetBoxRect( thePage, kCGPDFMediaBox );
+			pageRect.size.width = ceil(pageRect.size.width);
+			pageRect.size.height = ceil(pageRect.size.height);
 			InitWithSize( CSize(pageRect.size) );
 			CGContextDrawPDFPage( mContext, thePage );
 		}
@@ -212,7 +214,7 @@ CImageCanvas& CImageCanvas::operator =( const CImageCanvas& inOriginal )
 	CGImageRef originalImage = inOriginal.GetMacImage();
 	if( mImage != originalImage )
 	{
-		CGImageRelease(originalImage);
+		CGImageRelease(mImage);
 		mImage = CGImageRetain(originalImage);
 	}
 

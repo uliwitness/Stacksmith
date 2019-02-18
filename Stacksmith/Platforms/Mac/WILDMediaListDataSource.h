@@ -3,7 +3,7 @@
 //  Stacksmith
 //
 //  Created by Uli Kusterer on 05.04.10.
-//  Copyright 2010 Apple Inc. All rights reserved.
+//  Copyright 2010 Uli Kusterer All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

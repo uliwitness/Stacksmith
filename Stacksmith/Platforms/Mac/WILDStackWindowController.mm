@@ -84,7 +84,8 @@ using namespace Carlson;
 -(void)	dealloc
 {
 	DESTROY_DEALLOC(currentCursor);
-	
+	DESTROY_DEALLOC(_findBarView);
+
 	[super dealloc];
 }
 
@@ -95,7 +96,7 @@ using namespace Carlson;
 }
 
 
-- (BOOL)acceptsFirstMouse:(nullable NSEvent *)event;
+- (BOOL)acceptsFirstMouse:(NSEvent *)event;
 {
 	return( mStack->GetTool() != EBrowseTool && mStack->GetTool() != EEditTextTool );
 }
@@ -509,6 +510,10 @@ using namespace Carlson;
 	}
 }
 
+-(void)	findBarViewDidChangeHeight
+{
+	
+}
 
 //-(void)	resetCursorRects
 //{

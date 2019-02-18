@@ -75,15 +75,18 @@ class CPart;
 @end
 
 
-@interface WILDFlippedContentView : NSView
+@interface WILDFlippedContentView : NSView <NSTextFinderBarContainer>
 {
 	NSView				*		lastHitView;
 	Carlson::CStackMac	*		mStack;
-	WILDStackWindowController*	mOwningStackWindowController;
+	WILDStackWindowController *	mOwningStackWindowController;
+	NSTextFinder		*		mTextFinder;
 }
 
 @property (assign,nonatomic) Carlson::CStackMac*		stack;
 @property (assign,nonatomic) WILDStackWindowController*	owningStackWindowController;
+@property (strong) NSView 							*	findBarView;
+@property (getter=isFindBarVisible) BOOL 				findBarVisible;
 
 @end
 
