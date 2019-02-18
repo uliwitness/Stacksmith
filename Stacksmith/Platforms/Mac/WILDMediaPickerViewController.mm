@@ -30,12 +30,19 @@ using namespace Carlson;
 }
 
 
--(void)	loadView
+-(void)	viewDidLoad
 {
-	[super loadView];
+	[super viewDidLoad];
 	
 	[iconListDataSource setDelegate: self];
 	[iconListDataSource setDocument: part->GetStack()->GetDocument()];
+}
+
+
+-(void) viewWillAppear
+{
+	[super viewWillAppear];
+	
 	[iconListDataSource setSelectedIconID: part->GetIconID()];
 }
 

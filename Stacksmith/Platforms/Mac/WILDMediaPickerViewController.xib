@@ -26,17 +26,17 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="kY9-D8-S0k">
+                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" id="kY9-D8-S0k">
                     <rect key="frame" x="20" y="42" width="375" height="266"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="VFY-jQ-48s">
                         <rect key="frame" x="1" y="1" width="373" height="264"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView selectable="YES" id="6f5-YX-a0M">
-                                <rect key="frame" x="0.0" y="0.0" width="373" height="158"/>
+                            <collectionView selectable="YES" allowsEmptySelection="NO" id="6f5-YX-a0M">
+                                <rect key="frame" x="0.0" y="0.0" width="373" height="264"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="8" minimumLineSpacing="8" id="3Or-tb-UTe">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="8" minimumLineSpacing="8" sectionHeadersPinToVisibleBounds="YES" sectionFootersPinToVisibleBounds="YES" id="3Or-tb-UTe">
                                     <size key="itemSize" width="163" height="96"/>
                                 </collectionViewFlowLayout>
                                 <color key="primaryBackgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -49,11 +49,11 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="tSm-Vo-fx0">
-                        <rect key="frame" x="1" y="144" width="233" height="15"/>
+                        <rect key="frame" x="-100" y="-100" width="233" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="5mw-P3-nSN">
-                        <rect key="frame" x="234" y="1" width="15" height="143"/>
+                        <rect key="frame" x="358" y="1" width="16" height="264"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>

@@ -148,6 +148,7 @@ using namespace Carlson;
 		[mIconListView registerNib: [[[NSNib alloc] initWithNibNamed: @"WILDMediaPickerViewItem" bundle: [NSBundle bundleForClass: self.class]] autorelease] forItemWithIdentifier: @"MediaItem"];
 		
 		[mIconListView registerForDraggedTypes: [NSArray arrayWithObject: NSPasteboardTypeURL]];
+		[mIconListView reloadData];
 	}
 }
 
@@ -207,26 +208,29 @@ using namespace Carlson;
 
 -(void)	setSelectedIconID: (ObjectID)theID
 {
-//	[self ensureIconListExists];
-//
-//	NSUInteger		x = 0;
-//	for( WILDSimpleImageBrowserItem* sibi in mIcons )
-//	{
-//		if( sibi.pictureID == theID )
-//		{
-//			NSUInteger objectPath[2] = { 0, x };
-//			[mIconListView selectItemsAtIndexPaths: [NSSet setWithObject: [NSIndexPath indexPathWithIndexes: objectPath length: sizeof(objectPath) / sizeof(NSInteger)]] scrollPosition: NSCollectionViewScrollPositionCenteredVertically];
-//			break;
-//		}
-//		x++;
-//	}
+	[self ensureIconListExists];
+
+	NSUInteger		x = 0;
+	for( WILDSimpleImageBrowserItem* sibi in mIcons )
+	{
+		if( sibi.pictureID == theID )
+		{
+			NSUInteger objectPath[2] = { 0, x };
+			[mIconListView selectItemsAtIndexPaths: [NSSet setWithObject: [NSIndexPath indexPathWithIndexes: objectPath length: sizeof(objectPath) / sizeof(NSInteger)]] scrollPosition: NSCollectionViewScrollPositionCenteredVertically];
+			break;
+		}
+		x++;
+	}
 }
 
 
 -(ObjectID)	selectedIconID
 {
 	NSInteger	selectedIndex = [[mIconListView selectionIndexes] firstIndex];
-	return [[mIcons objectAtIndex: selectedIndex] pictureID];
+	if( selectedIndex != NSNotFound )
+		return [[mIcons objectAtIndex: selectedIndex] pictureID];
+	else
+		return 0;
 }
 
 

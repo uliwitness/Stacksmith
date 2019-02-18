@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,8 +11,8 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <collectionViewItem id="kfs-UJ-hsM">
             <connections>
-                <outlet property="imageView" destination="YEm-lt-UGn" id="rO7-30-ZMP"/>
-                <outlet property="textField" destination="zJD-5U-bqH" id="mxg-8J-yzp"/>
+                <outlet property="imageView" destination="pMz-Va-V8x" id="k4m-pf-oFt"/>
+                <outlet property="textField" destination="w66-cG-dIR" id="U5Z-s5-hlU"/>
                 <outlet property="view" destination="0mn-H2-2Sx" id="deY-En-RMX"/>
             </connections>
         </collectionViewItem>
@@ -19,26 +20,48 @@
             <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="YEm-lt-UGn">
-                    <rect key="frame" x="9" y="20" width="145" height="67"/>
+                <box boxType="custom" borderType="line" borderWidth="4" cornerRadius="8" titlePosition="noTitle" id="QnY-8o-fW8">
+                    <rect key="frame" x="6" y="5" width="152" height="85"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="nxa-VC-g8S"/>
+                    <view key="contentView" id="QRd-GB-t2W">
+                        <rect key="frame" x="4" y="4" width="144" height="77"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <color key="borderColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
                     <connections>
-                        <binding destination="kfs-UJ-hsM" name="value" keyPath="representedObject.imageRepresentation" id="s7C-8U-eJw"/>
+                        <binding destination="kfs-UJ-hsM" name="hidden" keyPath="selected" id="fYD-JG-Lvd">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
                     </connections>
-                </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="zJD-5U-bqH">
-                    <rect key="frame" x="7" y="6" width="149" height="14"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="center" title="Label" drawsBackground="YES" id="tTL-2v-qIM">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="kfs-UJ-hsM" name="value" keyPath="representedObject.name" id="pG2-He-85l"/>
-                    </connections>
-                </textField>
+                </box>
+                <view id="brP-Fl-xHC">
+                    <rect key="frame" x="6" y="5" width="152" height="85"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pMz-Va-V8x">
+                            <rect key="frame" x="5" y="20" width="142" height="60"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="zHa-tU-JSK"/>
+                            <connections>
+                                <binding destination="kfs-UJ-hsM" name="value" keyPath="representedObject.imageRepresentation" id="3uO-xi-K0b"/>
+                            </connections>
+                        </imageView>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="w66-cG-dIR">
+                            <rect key="frame" x="5" y="5" width="142" height="14"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingMiddle" alignment="center" title="Label" drawsBackground="YES" id="Eo3-RA-0Y7">
+                                <font key="font" metaFont="smallSystem"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="kfs-UJ-hsM" name="value" keyPath="representedObject.name" id="VaJ-qj-pwO"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                </view>
             </subviews>
             <point key="canvasLocation" x="101.5" y="-123"/>
         </customView>
