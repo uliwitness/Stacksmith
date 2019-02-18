@@ -221,6 +221,8 @@ using namespace Carlson;
 		}
 		x++;
 	}
+	
+	[self selectionDidChange];
 }
 
 
@@ -279,7 +281,7 @@ using namespace Carlson;
 		NSString*							theName = [[NSFileManager defaultManager] displayNameAtPath: thePath];
 		NSString*							statusMsg = @"No Icon";
 		if( theName && [theItem pictureID] != 0 )
-			statusMsg = [NSString stringWithFormat: @"ID = %lld, from %@", [theItem pictureID], theName];
+			statusMsg = [NSString stringWithFormat: @"\"%@\" ID = %lld, from %@", theItem.name, [theItem pictureID], theName];
 		[mImagePathField setStringValue: statusMsg];
 	}
 	
