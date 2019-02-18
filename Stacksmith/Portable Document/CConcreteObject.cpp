@@ -621,7 +621,7 @@ LEOScript*	CConcreteObject::GetScriptObject( std::function<void(const char*,size
 	if( !mScriptObject )
 	{
 		const char*		scriptStr = mScript.c_str();
-		uint16_t		fileID = LEOFileIDForFileName( mName.c_str() );	// +++ TODO: Use long name!
+		uint16_t		fileID = LEOFileIDForFileName( GetDisplayName().c_str() );
 		LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( scriptStr, strlen(scriptStr), fileID );
 		if( LEOParserGetLastErrorMessage() == NULL )
 		{
