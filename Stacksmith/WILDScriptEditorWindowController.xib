@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,14 +18,14 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="1" userLabel="Script Editor Window">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="1" userLabel="Script Editor Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES"/>
             <rect key="contentRect" x="479" y="210" width="756" height="602"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="342" height="116"/>
-            <view key="contentView" misplaced="YES" id="2" userLabel="Content View">
+            <view key="contentView" id="2" userLabel="Content View">
                 <rect key="frame" x="0.0" y="0.0" width="756" height="602"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -37,13 +36,13 @@
                             <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="73A-b9-Mvf" userLabel="Code Blocks Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="252" height="604"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <clipView key="contentView" drawsBackground="NO" id="ea0-lM-RJ5">
+                                <clipView key="contentView" id="ea0-lM-RJ5">
                                     <rect key="frame" x="1" y="1" width="250" height="602"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="bBq-XX-eIJ" userLabel="Code Blocks Collection View">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="602"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" id="a4N-23-uI1">
                                                 <size key="itemSize" width="150" height="50"/>
                                                 <size key="headerReferenceSize" width="300" height="24"/>
@@ -57,11 +56,11 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="0Ra-FN-U82">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="0Ra-FN-U82">
                                     <rect key="frame" x="1" y="587" width="249" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="FOw-S9-WST">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="FOw-S9-WST">
                                     <rect key="frame" x="234" y="1" width="15" height="143"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -69,29 +68,29 @@
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="5">
                                 <rect key="frame" x="253" y="0.0" width="515" height="604"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <clipView key="contentView" id="0hs-nw-oxK">
+                                <clipView key="contentView" drawsBackground="NO" id="0hs-nw-oxK">
                                     <rect key="frame" x="1" y="1" width="513" height="602"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" findStyle="bar" incrementalSearchingEnabled="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" id="8" customClass="ULISyntaxColoredTextView">
-                                            <rect key="frame" x="0.0" y="0.0" width="513.5" height="602"/>
+                                        <textView importsGraphics="NO" verticallyResizable="YES" findStyle="bar" incrementalSearchingEnabled="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" id="8" customClass="ULISyntaxColoredTextView">
+                                            <rect key="frame" x="0.0" y="0.0" width="514" height="602"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="513" height="602"/>
                                             <size key="maxSize" width="614.5" height="10000000"/>
-                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
                                                 <outlet property="delegate" destination="10" id="13"/>
                                             </connections>
                                         </textView>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="7">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="7">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="6">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="6">
                                     <rect key="frame" x="498" y="1" width="16" height="602"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -117,16 +116,17 @@
         </customObject>
         <collectionViewItem identifier="WILDScriptEditorCollectionViewItem" id="vaD-NZ-aif">
             <connections>
+                <outlet property="imageView" destination="odM-rd-qsu" id="GJ1-kn-n93"/>
                 <outlet property="sourceItemView" destination="Xd8-jY-0nF" id="lTR-fi-Y71"/>
                 <outlet property="textField" destination="8Vy-oF-3Xw" id="uJm-dT-cAx"/>
                 <outlet property="view" destination="Xd8-jY-0nF" id="WSg-Cd-ZCj"/>
             </connections>
         </collectionViewItem>
-        <customView misplaced="YES" id="Xd8-jY-0nF" userLabel="Collection View Item">
+        <customView id="Xd8-jY-0nF" userLabel="Collection View Item">
             <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" allowsCharacterPickerTouchBarItem="NO" id="8Vy-oF-3Xw">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="8Vy-oF-3Xw">
                     <rect key="frame" x="-2" y="0.0" width="154" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Code Block" id="7X6-Hu-irs">
@@ -135,14 +135,11 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button misplaced="YES" id="f0V-gL-6Jb">
-                    <rect key="frame" x="59" y="18" width="32" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAdvanced" imagePosition="above" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YoB-E4-XPg">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="odM-rd-qsu">
+                    <rect key="frame" x="0.0" y="18" width="150" height="32"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSAdvanced" id="u4f-P3-5S7"/>
+                </imageView>
             </subviews>
             <point key="canvasLocation" x="-226" y="-529"/>
         </customView>
@@ -166,7 +163,7 @@
                         <action selector="handlerPopupSelectionChanged:" target="-2" id="25"/>
                     </connections>
                 </popUpButton>
-                <textField verticalHuggingPriority="750" id="21">
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="21">
                     <rect key="frame" x="-1" y="6" width="60" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Handlers:" id="22">

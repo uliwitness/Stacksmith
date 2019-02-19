@@ -641,6 +641,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	NSCollectionViewItem * theItem = [collectionView makeItemWithIdentifier: @"WILDScriptEditorCollectionViewItem" forIndexPath: indexPath];
 	
 	theItem.textField.stringValue = [NSString stringWithUTF8String: currEntry.GetName().c_str()];
+	theItem.imageView.image = [NSImage imageNamed: theItem.textField.stringValue.lowercaseString] ?: [NSImage imageNamed: NSImageNameAdvanced];
 	theItem.representedObject = indexPath;
 	
 	return theItem;

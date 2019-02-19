@@ -442,6 +442,9 @@
 		55D5865F140D9C9D0095129C /* NE_SW_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865B140D9C9D0095129C /* NE_SW_ResizeCursor.tiff */; };
 		55D58660140D9C9D0095129C /* NW_SE_ResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55D5865D140D9C9D0095129C /* NW_SE_ResizeCursor.tiff */; };
 		55D728FB221B438000F2F7AC /* WILDMediaPickerViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D728EE221B437F00F2F7AC /* WILDMediaPickerViewItem.xib */; };
+		55D72905221CC3E600F2F7AC /* mousedoubleclick.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D72902221CC3E400F2F7AC /* mousedoubleclick.png */; };
+		55D72906221CC3E600F2F7AC /* mouseup.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D72903221CC3E500F2F7AC /* mouseup.png */; };
+		55D72907221CC3E600F2F7AC /* mousedown.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D72904221CC3E500F2F7AC /* mousedown.png */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
 		55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */; };
 		55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */; };
@@ -1218,6 +1221,9 @@
 		55D5865E140D9C9D0095129C /* English */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = English; path = English.lproj/NW_SE_ResizeCursor.tiff; sourceTree = "<group>"; };
 		55D61D621AA275C2006D117F /* TTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TTool.h; path = "Portable Document/TTool.h"; sourceTree = "<group>"; };
 		55D728EE221B437F00F2F7AC /* WILDMediaPickerViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDMediaPickerViewItem.xib; path = Platforms/Mac/WILDMediaPickerViewItem.xib; sourceTree = "<group>"; };
+		55D72902221CC3E400F2F7AC /* mousedoubleclick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mousedoubleclick.png; sourceTree = "<group>"; };
+		55D72903221CC3E500F2F7AC /* mouseup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mouseup.png; sourceTree = "<group>"; };
+		55D72904221CC3E500F2F7AC /* mousedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mousedown.png; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
 		55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+centerHorizontallyAndVertically.m"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.m"; sourceTree = "<group>"; };
 		55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNodeTransformation.cpp; path = ../../CNodeTransformation.cpp; sourceTree = "<group>"; };
@@ -1417,6 +1423,9 @@
 				5500FDAB1E4FE13200BD6BA7 /* MenuIcon@2x.png */,
 				5500FDAC1E4FE13200BD6BA7 /* MenuItemIcon.png */,
 				5500FDAD1E4FE13200BD6BA7 /* MenuItemIcon@2x.png */,
+				55D72902221CC3E400F2F7AC /* mousedoubleclick.png */,
+				55D72904221CC3E500F2F7AC /* mousedown.png */,
+				55D72903221CC3E500F2F7AC /* mouseup.png */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
 				555E53A3189351AA001487C1 /* PlaceholderMovie.mov */,
@@ -2459,9 +2468,11 @@
 				55405BE218A6220D001D3C99 /* WILDMediaPickerViewController.xib in Resources */,
 				55E3A69E11503456008411BB /* CURS_128.pdf in Resources */,
 				55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */,
+				55D72906221CC3E600F2F7AC /* mouseup.png in Resources */,
 				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
 				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
 				55F34D38136A50D600E8588D /* ICON_902.pdf in Resources */,
+				55D72907221CC3E600F2F7AC /* mousedown.png in Resources */,
 				55F34D39136A50D600E8588D /* ICON_1009.pdf in Resources */,
 				55F34D3A136A50D600E8588D /* ICON_24830.pdf in Resources */,
 				55F34D3B136A50D600E8588D /* ICON_26425.pdf in Resources */,
@@ -2500,6 +2511,7 @@
 				5599FEEA2219854F0006E162 /* WILDDocIcon.icns in Resources */,
 				552FF200113F23F3005742C8 /* PAT_6.pbm in Resources */,
 				552FF201113F23F3005742C8 /* PAT_7.pbm in Resources */,
+				55D72905221CC3E600F2F7AC /* mousedoubleclick.png in Resources */,
 				552FF202113F23F3005742C8 /* PAT_8.pbm in Resources */,
 				552FF203113F23F3005742C8 /* PAT_9.pbm in Resources */,
 				552FF204113F23F3005742C8 /* PAT_10.pbm in Resources */,
