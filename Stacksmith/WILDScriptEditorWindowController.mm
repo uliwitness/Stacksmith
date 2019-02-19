@@ -564,26 +564,48 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	// Check if line is within any ranges in handlerRanges
 	for( const NSRange& currRange : handlerRanges )
 	{
-		if( (insertionLine >= currRange.location) && (insertionLine <= (currRange.location + currRange.length)) )
+		if( (insertionLine >= currRange.location) && (insertionLine <= NSMaxRange(currRange)) )
 		{
 			// If it is, adjust the line to be before/after the given handler (whatever is closer).
-			newInsertionLine = currRange.location -1;
-//			NSLog( @"\tadjusted!" );
+			NSUInteger startHandlerDistance = insertionLine - currRange.location;
+			NSUInteger endHandlerDistance = currRange.length - startHandlerDistance;
+			if( startHandlerDistance < endHandlerDistance )
+			{
+				newInsertionLine = currRange.location - 1;
+			}
+			else if( startHandlerDistance >= endHandlerDistance )
+			{
+				newInsertionLine = NSMaxRange(currRange) + 1;
+			}
+			NSLog(@"%lu -> %lu | %lu/%lu | %@", insertionLine, newInsertionLine, startHandlerDistance, endHandlerDistance, NSStringFromRange(currRange));
 			break;
 		}
 	}
 	
 	// Translate the line back into an offset and store it back in insertionRange.location.
 	if( newInsertionLine != insertionLine )
-		insertionRange->location = [sender rangeForLine: newInsertionLine].location;
+	{
+		insertionRange->location = [sender rangeForLine: (newInsertionLine != insertionLine) ? newInsertionLine : insertionLine].location;
+	}
 	
+	NSLog(@"\t%@", NSStringFromRange(*insertionRange));
+
 //	NSLog(@"%@ -> %@ [%lu -> %lu]", NSStringFromRange(oldInsertionRange), NSStringFromRange(*insertionRange), insertionLine, newInsertionLine);
 }
 
 
--(NSString*) textViewController: (UKSyntaxColoredTextViewController*)sender stringForSnippetOnPasteboard: (NSPasteboard*)pboard
+-(NSString*) textViewController: (UKSyntaxColoredTextViewController*)sender stringForSnippetOnPasteboard: (NSPasteboard*)pboard forRange: (NSRange)dropRange
 {
-	return [pboard stringForType: ((ULISyntaxColoredTextView*)sender.view).customSnippetPasteboardType];
+	NSString * dropSnippetText = [pboard stringForType: ((ULISyntaxColoredTextView*)sender.view).customSnippetPasteboardType];
+	NSString * myText = [(ULISyntaxColoredTextView *)sender.view textStorage].string;
+	NSUInteger endOffset = NSMaxRange(dropRange);
+	if (dropRange.location > 0 && [myText rangeOfString:@"\n\n" options:NSBackwardsSearch | NSAnchoredSearch range: NSMakeRange(0, dropRange.location)].location == NSNotFound) {
+		dropSnippetText = [@"\n\n" stringByAppendingString: dropSnippetText];
+	}
+	if (endOffset < myText.length && [myText rangeOfString:@"\n\n" options:NSAnchoredSearch range: NSMakeRange(endOffset, myText.length - endOffset)].location == NSNotFound) {
+		dropSnippetText = [dropSnippetText stringByAppendingString: @"\n\n"];
+	}
+	return dropSnippetText;
 }
 
 
@@ -634,7 +656,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	for( NSIndexPath* currItemPath in indexPaths )
 	{
 		CCodeSnippetsBlockEntry& currEntry = codeBlocksList.GetBlockEntryAt( currItemPath.section, currItemPath.item );
-		NSString * codeSnippet = [[NSString stringWithUTF8String: currEntry.mHandlerEntry.mHandlerTemplate.c_str()] stringByAppendingString: @"\n\n"];
+		NSString * codeSnippet = [NSString stringWithUTF8String: currEntry.mHandlerEntry.mHandlerTemplate.c_str()];
 		[thePasteboardData addObject: codeSnippet];
 	}
 	
@@ -661,7 +683,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 			mContainer->SetBreakpointLines( breakpointLines );
 			
 			#if REMOTE_DEBUGGER
-			if( !LEOInitRemoteDebugger( NULL ) )	// Try to connect to debugger. If not able, launch it.
+			if( !LEOInitRemoteDebugger( NULL ) && !breakpointLines.empty() )	// Try to connect to debugger. If not able, launch it.
 			{
 				NSString	*	debuggerPath = [[NSBundle mainBundle] pathForResource: @"ForgeDebugger" ofType: @"app"];
 				if( debuggerPath )
