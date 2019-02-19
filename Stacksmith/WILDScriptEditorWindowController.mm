@@ -343,16 +343,28 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		
 		bool		isCommand = false;
 		bool		isHandlerEnd = false;
+		NSRange 	currRange;
 		for( x = 0; theName != NULL; x++ )
 		{
 			LEODisplayInfoTableGetHandlerInfoAtIndex( displayInfo, x, &theName, &theLine, &isHandlerEnd, &isCommand );
 			if( !theName ) break;
-			if( isHandlerEnd ) continue;
 			if( theName[0] == ':' )	// Skip any fake internal handlers we add.
 				continue;
-			NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
-			[theItem setImage: [NSImage imageNamed: isCommand ? @"CommandHandlerIcon" : @"FunctionHandlerIcon"]];
-			[theItem setRepresentedObject: @(theLine)];
+			if( !isHandlerEnd )
+			{
+				NSMenuItem*	theItem = [mPopUpButton.menu addItemWithTitle: [NSString stringWithUTF8String: theName] action: Nil keyEquivalent: @""];
+				[theItem setImage: [NSImage imageNamed: isCommand ? @"CommandHandlerIcon" : @"FunctionHandlerIcon"]];
+				[theItem setRepresentedObject: @(theLine)];
+				
+				currRange.location = theLine;
+				currRange.length = 0;
+			}
+			
+			if( isHandlerEnd )
+			{
+				currRange.length = theLine - currRange.location;
+				handlerRanges.push_back(currRange);
+			}
 		}
 		LEOCleanUpDisplayInfoTable( displayInfo );
 		LEOCleanUpParseTree( parseTree );
