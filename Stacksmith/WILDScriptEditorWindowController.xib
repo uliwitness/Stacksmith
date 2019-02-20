@@ -43,8 +43,8 @@
                                         <collectionView selectable="YES" id="bBq-XX-eIJ" userLabel="Code Blocks Collection View">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="602"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" id="a4N-23-uI1">
-                                                <size key="itemSize" width="150" height="50"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" sectionHeadersPinToVisibleBounds="YES" id="a4N-23-uI1">
+                                                <size key="itemSize" width="150" height="54"/>
                                                 <size key="headerReferenceSize" width="300" height="24"/>
                                             </collectionViewFlowLayout>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -123,7 +123,7 @@
             </connections>
         </collectionViewItem>
         <customView id="Xd8-jY-0nF" userLabel="Collection View Item">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="150" height="54"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="8Vy-oF-3Xw">
@@ -136,7 +136,7 @@
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="odM-rd-qsu">
-                    <rect key="frame" x="0.0" y="18" width="150" height="32"/>
+                    <rect key="frame" x="0.0" y="17" width="150" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSAdvanced" id="u4f-P3-5S7"/>
                 </imageView>

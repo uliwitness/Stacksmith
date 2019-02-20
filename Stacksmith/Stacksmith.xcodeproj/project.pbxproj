@@ -445,6 +445,11 @@
 		55D72905221CC3E600F2F7AC /* mousedoubleclick.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D72902221CC3E400F2F7AC /* mousedoubleclick.png */; };
 		55D72906221CC3E600F2F7AC /* mouseup.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D72903221CC3E500F2F7AC /* mouseup.png */; };
 		55D72907221CC3E600F2F7AC /* mousedown.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D72904221CC3E500F2F7AC /* mousedown.png */; };
+		55D7291C221DF62000F2F7AC /* mouseupoutside.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D7290B221DF61C00F2F7AC /* mouseupoutside.png */; };
+		55D7291D221DF62000F2F7AC /* mousemove.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D72918221DF61D00F2F7AC /* mousemove.png */; };
+		55D7291E221DF62000F2F7AC /* mousedrag.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D72919221DF61E00F2F7AC /* mousedrag.png */; };
+		55D7291F221DF62000F2F7AC /* mouseenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D7291A221DF61F00F2F7AC /* mouseenter.png */; };
+		55D72920221DF62000F2F7AC /* mouseleave.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D7291B221DF61F00F2F7AC /* mouseleave.png */; };
 		55D794BF134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */; };
 		55D7AA4715715D0E00F33E78 /* CNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */; };
 		55D7AA4B1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AA4A1573814A00F33E78 /* CChunkPropertyNodeTransformation.cpp */; };
@@ -1224,6 +1229,11 @@
 		55D72902221CC3E400F2F7AC /* mousedoubleclick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mousedoubleclick.png; sourceTree = "<group>"; };
 		55D72903221CC3E500F2F7AC /* mouseup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mouseup.png; sourceTree = "<group>"; };
 		55D72904221CC3E500F2F7AC /* mousedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mousedown.png; sourceTree = "<group>"; };
+		55D7290B221DF61C00F2F7AC /* mouseupoutside.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mouseupoutside.png; sourceTree = "<group>"; };
+		55D72918221DF61D00F2F7AC /* mousemove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mousemove.png; sourceTree = "<group>"; };
+		55D72919221DF61E00F2F7AC /* mousedrag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mousedrag.png; sourceTree = "<group>"; };
+		55D7291A221DF61F00F2F7AC /* mouseenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mouseenter.png; sourceTree = "<group>"; };
+		55D7291B221DF61F00F2F7AC /* mouseleave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mouseleave.png; sourceTree = "<group>"; };
 		55D794BD134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSWindow+centerHorizontallyAndVertically.h"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.h"; sourceTree = "<group>"; };
 		55D794BE134E700600FA2DA4 /* NSWindow+centerHorizontallyAndVertically.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSWindow+centerHorizontallyAndVertically.m"; path = "../UliKit/NSWindow+centerHorizontallyAndVertically.m"; sourceTree = "<group>"; };
 		55D7AA4615715D0D00F33E78 /* CNodeTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNodeTransformation.cpp; path = ../../CNodeTransformation.cpp; sourceTree = "<group>"; };
@@ -1426,6 +1436,11 @@
 				55D72902221CC3E400F2F7AC /* mousedoubleclick.png */,
 				55D72904221CC3E500F2F7AC /* mousedown.png */,
 				55D72903221CC3E500F2F7AC /* mouseup.png */,
+				55D72919221DF61E00F2F7AC /* mousedrag.png */,
+				55D7291A221DF61F00F2F7AC /* mouseenter.png */,
+				55D7291B221DF61F00F2F7AC /* mouseleave.png */,
+				55D72918221DF61D00F2F7AC /* mousemove.png */,
+				55D7290B221DF61C00F2F7AC /* mouseupoutside.png */,
 				555BB9A213198C8200B22D89 /* WILDObjectTemplates */,
 				55818A77133199AC00480D30 /* Home.xstk */,
 				555E53A3189351AA001487C1 /* PlaceholderMovie.mov */,
@@ -2455,6 +2470,7 @@
 				55B55C2522105313009CDFFC /* WILDViewFactorySystemButton.xib in Resources */,
 				559BA9CF18B1027500760273 /* WILDStackInfoViewController.xib in Resources */,
 				55405BD518A59D06001D3C99 /* WILDMoviePlayerInfoViewController.xib in Resources */,
+				55D7291D221DF62000F2F7AC /* mousemove.png in Resources */,
 				5593D0591E58A2BB00E7F31D /* WILDScriptEditorCodeBlocksSectionHeader.xib in Resources */,
 				55405BD718A59D06001D3C99 /* WILDTimerInfoViewController.xib in Resources */,
 				55405BC318A4CD17001D3C99 /* WILDContentsEditorWindowController.xib in Resources */,
@@ -2472,6 +2488,7 @@
 				55F34D36136A50D600E8588D /* ICON_129.pdf in Resources */,
 				55F34D37136A50D600E8588D /* ICON_766.pdf in Resources */,
 				55F34D38136A50D600E8588D /* ICON_902.pdf in Resources */,
+				55D72920221DF62000F2F7AC /* mouseleave.png in Resources */,
 				55D72907221CC3E600F2F7AC /* mousedown.png in Resources */,
 				55F34D39136A50D600E8588D /* ICON_1009.pdf in Resources */,
 				55F34D3A136A50D600E8588D /* ICON_24830.pdf in Resources */,
@@ -2494,6 +2511,7 @@
 				55469F0C1A9A784E0072A721 /* EditTextTool.tiff in Resources */,
 				555F103C13881DB700E26037 /* UKPaintLineTool.tiff in Resources */,
 				555F103D13881DB700E26037 /* UKPaintOvalTool.tiff in Resources */,
+				55D7291C221DF62000F2F7AC /* mouseupoutside.png in Resources */,
 				555F103E13881DB700E26037 /* UKPaintPathTool.tiff in Resources */,
 				555F103F13881DB700E26037 /* UKPaintRectTool.tiff in Resources */,
 				555F104013881DB700E26037 /* UKPaintRoundrectTool.tiff in Resources */,
@@ -2553,6 +2571,7 @@
 				55ADC50A1744525F0084AAA9 /* CardIcon.icns in Resources */,
 				55ADC50B1744525F0084AAA9 /* StackIcon.icns in Resources */,
 				55ADC50F17445DDB0084AAA9 /* BackgroundEditIcon.icns in Resources */,
+				55D7291E221DF62000F2F7AC /* mousedrag.png in Resources */,
 				5500FDAE1E4FE13200BD6BA7 /* MenuIcon.png in Resources */,
 				5500FDB01E4FE13200BD6BA7 /* MenuItemIcon.png in Resources */,
 				55EBC646114CFAE000BAA09D /* BackgroundIconSmall.png in Resources */,
@@ -2604,6 +2623,7 @@
 				55A7BA4C14668D6E00AB0F34 /* boing.aiff in Resources */,
 				55A7BA4D14668D6E00AB0F34 /* flute.aiff in Resources */,
 				555E53A4189351AA001487C1 /* PlaceholderMovie.mov in Resources */,
+				55D7291F221DF62000F2F7AC /* mouseenter.png in Resources */,
 				55FFB0CF22196905000EBB2D /* ForgeDebugger.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

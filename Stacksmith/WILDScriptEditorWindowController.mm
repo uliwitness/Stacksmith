@@ -621,7 +621,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	if( [kind isEqualToString: NSCollectionElementKindSectionHeader] )
 	{
 		theView = [collectionView makeSupplementaryViewOfKind: kind withIdentifier: @"WILDScriptEditorCollectionViewSectionHeader" forIndexPath: indexPath];
-		NSTextField* titleView = ((NSBox*)theView).contentView.subviews.firstObject;
+		NSTextField* titleView = theView.subviews.firstObject;
 		titleView.stringValue = [NSString stringWithUTF8String: codeBlocksList.GetSectionAt(indexPath.section).GetName().c_str()];
 	}
 	return theView;
