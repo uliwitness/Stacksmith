@@ -40,7 +40,7 @@ release='"tag_name": "v'"$VERSION_TAG"'", "target_commitish": "master", "name": 
 body=\"$DESCRIPTION\"
 body='"body": '$body', '
 release=$release$body
-release=$release'"draft": false, "prerelease": '"$IS_PRERELEASE"
+release=$release'"draft": true, "prerelease": '"$IS_PRERELEASE"
 release='{'$release'}'
 url="https://api.github.com/repos/$OWNER/$REPO/releases"
 
