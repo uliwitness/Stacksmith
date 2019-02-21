@@ -40,7 +40,7 @@ release='"tag_name": "v'"$VERSION_TAG"'", "target_commitish": "master", "name": 
 body=\"$DESCRIPTION\"
 body='"body": '$body', '
 release=$release$body
-release=$release'"draft": true, "prerelease": '"$IS_PRERELEASE"
+release=$release'"draft": false, "prerelease": '"$IS_PRERELEASE"
 release='{'$release'}'
 url="https://api.github.com/repos/$OWNER/$REPO/releases"
 
@@ -62,23 +62,26 @@ ARCHIVE_NAME="`basename ${ARCHIVE_PATH}`"
 
 # $upload is like:
 # "upload_url": "https://uploads.github.com/repos/:owner/:repo/releases/:ID/assets{?name,label}",
+upload=$(echo "$upload" | egrep -o "\"upload_url\":[ \t]*\"(.+?)\"," | head -n 1)
 upload=$(echo $upload | cut -d "\"" -f4 | cut -d "{" -f1)
-upload="$upload?name=$ARCHIVE_NAME"
+upload="$upload?name=${ARCHIVE_NAME}"
+echo "Uploading to: $upload"
 
-echo "$upload"
-
-succ=$(curl -sSL -XPOST -H "Authorization: token $TOKEN" \
--H "Content-Length: $(stat -f %z $ARCHIVE_NAME)" \
+succ=$(curl -L --post301 --post302 --post303 \
+-H "Authorization: token $TOKEN" \
 -H "Content-Type: $(file -b --mime-type $ARCHIVE_NAME)" \
---upload-file $ARCHIVE_NAME $upload)
+-H "Accept: application/vnd.github.v3+json" \
+--data-binary @${ARCHIVE_NAME} $upload)
 
 echo "$succ"
 
-download=$(echo $succ | egrep -o "browser_download_url.+?")
+download=$(echo $succ | egrep -o "\"url\":[ \t]*\"(.+?)\"," | head -n 1)
 if [[ $? -eq 0 ]]; then
-	echo `$download | cut -d: -f2,3 | cut -d\" -f2`
-	#open -a "Safari" "`$download | cut -d: -f2,3 | cut -d\" -f2`"
+	releaseurl="https://github.com/${OWNER}/${REPO}/releases/tag/${VERSION_TAG}"
+	echo "New release at: $releaseurl"
+	open -a "Safari" "$releaseurl"
 else
 	echo Upload error!
+	echo "$download"
 	exit 2
 fi
