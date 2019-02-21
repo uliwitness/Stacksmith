@@ -1,4 +1,6 @@
-#! /bin/bash
+#!/bin/bash
+
+source "`dirname $0`/nightly_build.command"
 
 OWNER="uliwitness"
 REPO="Stacksmith"
@@ -77,7 +79,7 @@ echo "$succ"
 
 download=$(echo $succ | egrep -o "\"url\":[ \t]*\"(.+?)\"," | head -n 1)
 if [[ $? -eq 0 ]]; then
-	releaseurl="https://github.com/${OWNER}/${REPO}/releases/tag/${VERSION_TAG}"
+	releaseurl="https://github.com/${OWNER}/${REPO}/releases/tag/v${VERSION_TAG}"
 	echo "New release at: $releaseurl"
 	open -a "Safari" "$releaseurl"
 else
