@@ -27,7 +27,10 @@ else
 	IS_PRERELEASE="false"
 fi
 
-DESCRIPTION=$(xmllint --xpath '//channel/item/description/text()' "$RSS_PATH" | textutil -format html -convert txt -stdin -stdout | textutil -format html -convert txt -stdin -stdout)
+DESCRIPTION=$(xmllint --xpath '//channel/item/description/text()' "$RSS_PATH" | textutil -format html -convert txt -stdin -stdout)
+DESCRIPTION="${DESCRIPTION//<h3>/### }"
+DESCRIPTION="${DESCRIPTION//<\/h3>/<br/>}"
+DESCRIPTION=$(echo "$DESCRIPTION" | textutil -format html -convert txt -stdin -stdout)
 DESCRIPTION="${DESCRIPTION//\"/\\\"}"
 DESCRIPTION=$(echo -e "$DESCRIPTION" | sed -e :a -e '$!N;s/\n/\\n/;ta')
 
