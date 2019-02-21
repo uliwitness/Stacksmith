@@ -35,7 +35,7 @@ echo "Signature of ${SIGFILEPATH}: $DSASIGNATURE"
 cd ${REPO_DIR}
 ${REPO_DIR}/writerss.php ${BUILD_DEST_PATH}/Stacksmith.app/Contents/Info.plist nightly ${BUILD_DEST_PATH}/Stacksmith.tgz $DSASIGNATURE
 cd ${BUILD_DEST_PATH}
-mv nightly_feed.rss stacksmith_nightlies.rss
+mv -f nightly_feed.rss ${REPO_DIR}/docs/nightlies/stacksmith_nightlies.rss
 
 open ~/Programming/Output/
 echo -ne '\007'

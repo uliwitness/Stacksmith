@@ -2,6 +2,8 @@
 
 source "`dirname $0`/nightly_build.command"
 
+echo "$(tput setaf 6)$(tput bold)===== Creating Release =====$(tput sgr0)"
+
 OWNER="uliwitness"
 REPO="Stacksmith"
 TOKEN=`security 2>&1 >/dev/null find-generic-password -ga GithubStacksmithUploadToken | cut -f2 -d'"'`
@@ -62,6 +64,8 @@ else
 	exit 1
 fi
 
+echo "$(tput setaf 6)$(tput bold)===== Uploading Binary =====$(tput sgr0)"
+
 cd "`dirname ${ARCHIVE_PATH}`"
 ARCHIVE_NAME="`basename ${ARCHIVE_PATH}`"
 
@@ -85,8 +89,11 @@ if [[ $? -eq 0 ]]; then
 	releaseurl="https://github.com/${OWNER}/${REPO}/releases/tag/v${VERSION_TAG}"
 	echo "New release at: $releaseurl"
 	open -a "Safari" "$releaseurl"
+
+	echo -ne '\007'
 else
 	echo Upload error!
 	echo "$download"
+	echo -ne '\007'
 	exit 2
 fi

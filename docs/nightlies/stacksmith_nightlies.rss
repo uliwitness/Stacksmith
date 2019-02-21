@@ -1,28 +1,36 @@
 <?xml version="1.0"?>
-<rss version="2.0"
+<rss version="2.0" 
 	xmlns:sparkle="http://sparkle.andymatuschak.org/rss/1.0/modules/sparkle/">
-	<channel>
-		<title>Stacksmith nightly Appcast</title>
-		<link>http://stacksmith.org/</link>
-		<description>Updates for Stacksmith</description>
-		<item>
-			<title>Stacksmith 1.0a11 (1718)</title>
-			<link>https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_a11_1718/Stacksmith.tgz</link>
-			<description>&lt;h3&gt;2019-02-11&lt;/h3&gt;
-				Fix 'no property &quot;1:tool&quot;' error messages.&lt;br /&gt;
-				&lt;h3&gt;2019-02-10&lt;/h3&gt;
-				Fix accidental event masks where we should have been using event types and thus got a hang in mouse tracking.&lt;br /&gt;
-				Rewrite WILDViewFactory to create objects based on NSNib, not by archiving/unarchiving ourselves, which builds with the new SDK.&lt;br /&gt;
-				More informative build log messages.&lt;br /&gt;
-				Merge branch 'master' into development&lt;br /&gt;
-				Don't commit the Gemfile.lock&lt;br /&gt;
-				Merge branch 'master' into development&lt;br /&gt;
-				Restore content from our two old websites.&lt;br /&gt;
-				Merge branch 'master' into development&lt;br /&gt;
-				Commit generated API docs for website.&lt;br /&gt;
-			</description>
-			<enclosure url="https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_a11_1718/Stacksmith.tgz" length="7407984" type="application/octet-stream" sparkle:dsaSignature="MC0CFQDvH8NwdwEIftMP6bS0Tz7FwhWBGgIUfxwzlADDER5eCcwLFt5KrY+HvtE=" />
-			<sparkle:version>1.0a11 (1718)</sparkle:version>
-		</item>
-	</channel>
+  <channel>
+    <title>Stacksmith nightly Appcast</title>
+    <link>http://stacksmith.org/</link>
+    <description>Updates for Stacksmith</description>
+    <item>
+       <title>Stacksmith 1.0a11 (1765)</title>
+       <link>https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_a11_1765/Stacksmith.tgz</link>
+       <description>&lt;h3&gt;2019-02-21&lt;/h3&gt;
+Now have one &quot;build-and-upload&quot; script.&lt;br /&gt;
+Release script now actually works!&lt;br /&gt;
+We were parsing the JSON wrong and thus truncating the upload URL.&lt;br /&gt;
+For now, make our releases drafts.&lt;br /&gt;
+WIP on a script that uploads a release to Github that was built using the nightly_build.command script&lt;br /&gt;
+It successfully creates the release, but the upload fails (but can be done via the website).&lt;br /&gt;
+&lt;h3&gt;2019-02-20&lt;/h3&gt;
+Prettify the code snippet list a bit.&lt;br /&gt;
+Add icons to a few of the message snippets.&lt;br /&gt;
+&lt;h3&gt;2019-02-19&lt;/h3&gt;
+Make dropping snippets in a script work properly: You can't drop inside a handler, only between them.&lt;br /&gt;
+WIP on making snippet insertion work.&lt;br /&gt;
+Oops wromg suffix.&lt;br /&gt;
+Icon picker cleanup.&lt;br /&gt;
+&lt;h3&gt;2019-02-18&lt;/h3&gt;
+Icon picker now correctly shows the selection.&lt;br /&gt;
+Icon picker now displays images again, though hit-testing still seems to be intercepted by the icon and label.&lt;br /&gt;
+Touch-ups to magnifying glass.&lt;br /&gt;
+Better object (&quot;file&quot;) names in debugger.&lt;br /&gt;
+</description>
+       <enclosure url="https://github.com/uliwitness/Stacksmith/releases/download/Stacksmith_1_0_a11_1765/Stacksmith.tgz" length="9865665" type="application/octet-stream" sparkle:dsaSignature="MC0CFERYw7AxjRuPl2ZYQ23+gioOw2PoAhUAq8DAeptUTtGylpwXEel5jl9R3sQ=" />
+       <sparkle:version>1.0a11 (1765)</sparkle:version>
+     </item>
+  </channel>
 </rss>
