@@ -13,7 +13,7 @@ REPO_DIR=`pwd`
 cd ${REPO_DIR}/../
 BUILD_DEST_PATH=`pwd`/Output/
 ARCHIVE_PATH="$BUILD_DEST_PATH/Stacksmith.tgz"
-RSS_PATH="$BUILD_DEST_PATH/stacksmith_nightlies.rss"
+RSS_PATH="${REPO_DIR}/docs/nightlies/stacksmith_nightlies.rss"
 INFO_PLIST_PATH="${BUILD_DEST_PATH}/Stacksmith.app/Contents/Info.plist"
 
 VERSION=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$INFO_PLIST_PATH")

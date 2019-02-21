@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 echo "$(tput setaf 6)$(tput bold)===== Starting Build =====$(tput sgr0)"
 cd `dirname $0`
 REPO_DIR=`pwd`
@@ -37,5 +37,5 @@ ${REPO_DIR}/writerss.php ${BUILD_DEST_PATH}/Stacksmith.app/Contents/Info.plist n
 cd ${BUILD_DEST_PATH}
 mv -f nightly_feed.rss ${REPO_DIR}/docs/nightlies/stacksmith_nightlies.rss
 
-open ~/Programming/Output/
+open "${REPO_DIR}/../Output/"
 echo -ne '\007'

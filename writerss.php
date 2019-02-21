@@ -21,6 +21,7 @@
 	$updatemessage = "";
 	$lastdate = "";
 	$num = sizeof( $matches );
+	$haveul = false;
 	for( $x = 0; $x < $num; $x++ )
 	{
 		if( $matches[$x][1] == "Date:   " )
@@ -28,12 +29,28 @@
 			$thedate = date( "Y-m-d", strtotime($matches[$x][2]));
 			if( $thedate != $lastdate )
 			{
+				if( $haveul )
+				{
+					$updatemessage .= "&lt;/ul&gt;\n";
+					$haveul = false;
+				}
 				$updatemessage .= "&lt;h3&gt;".htmlentities($thedate)."&lt;/h3&gt;\n";
 				$lastdate = $thedate;
 			}
 		}
 		else
-			$updatemessage .= htmlentities($matches[$x][2])."&lt;br /&gt;\n";
+		{
+			if( !$haveul )
+			{
+				$updatemessage .= "&lt;ul&gt;\n";
+				$haveul = true;
+			}
+			$updatemessage .= "&lt;li&gt;".htmlentities($matches[$x][2])."&lt;/li&gt;\n";
+		}
+	}
+	if( $haveul )
+	{
+		$updatemessage .= "&lt;/ul&gt;\n";
 	}
 	
 	$infoplist = file_get_contents($argv[1]);
