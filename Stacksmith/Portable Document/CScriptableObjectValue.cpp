@@ -12,6 +12,7 @@
 #include "LEOScript.h"
 #include "CCancelPolling.h"
 #include "CStack.h"
+#include "CDocument.h"
 #include "CString.h"
 #include <sstream>
 #include <iostream>
@@ -1098,7 +1099,8 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	
 	CScriptableObject*			parent = GetParentObject( nullptr, nullptr );
 	CStack*						parentStack = parent ? parent->GetStack() : GetStack();
-	CScriptContextUserData	*	ud = new CScriptContextUserData( parentStack, this, this );
+	CDocument*					parentDoc = parent ? parent->GetDocument() : GetDocument();
+	CScriptContextUserData	*	ud = new CScriptContextUserData( parentStack, parentDoc, this, this );
 	CScriptContextGroupUserData * gud = (CScriptContextGroupUserData *)contextGroup->userData;
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
 	if( outContext )
@@ -1442,9 +1444,11 @@ void	CScriptContextGroupUserData::InsertObjectInList(CRefCountedObjectRef<CScrip
 //static int	sScriptUserDatasInExistence = 0;
 
 
-CScriptContextUserData::CScriptContextUserData( CStack* currStack, CScriptableObject* target, CScriptableObject* owner )
-	: mCurrentStack(currStack), mTarget(target), mOwner(owner), mVisualEffectSpeed(EVisualEffectSpeedNormal)
+CScriptContextUserData::CScriptContextUserData( CStack* currStack, CDocument* document, CScriptableObject* target, CScriptableObject* owner )
+	: mCurrentStack(currStack), mCurrentDocument(document), mTarget(target), mOwner(owner), mVisualEffectSpeed(EVisualEffectSpeedNormal)
 {
+	if( mCurrentDocument )
+		mCurrentDocument->Retain();
 	if( mCurrentStack )
 		mCurrentStack->Retain();
     if( mTarget )
@@ -1458,6 +1462,8 @@ CScriptContextUserData::CScriptContextUserData( CStack* currStack, CScriptableOb
 CScriptContextUserData::~CScriptContextUserData()
 {
 	//sScriptUserDatasInExistence--;
+	if( mCurrentDocument )
+		mCurrentDocument->Release();
 	if( mCurrentStack )
 		mCurrentStack->Release();
     if( mTarget )
@@ -1499,9 +1505,11 @@ void	CScriptContextUserData::SetOwner( CScriptableObject* owner )
 
 CDocument*	CScriptContextUserData::GetDocument()
 {
-	if( !mCurrentStack )
-		return NULL;
-	return mCurrentStack->GetDocument();
+	if( mCurrentDocument )
+		return mCurrentDocument;
+	if( mCurrentStack )
+		return mCurrentStack->GetDocument();
+	return nullptr;
 }
 
 

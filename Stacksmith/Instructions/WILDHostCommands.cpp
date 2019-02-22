@@ -687,7 +687,7 @@ void	WILDDeleteInstruction( LEOContext* inContext )
 
 void	WILDPlayMelodyInstruction( LEOContext* inContext )
 {
-	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	CDocument		*	ourDocument = ((CScriptContextUserData*)inContext->userData)->GetDocument();
 
 	bool		couldStart = false;
 	LEOValuePtr	theInstrument = inContext->stackEndPtr -2;
@@ -714,7 +714,7 @@ void	WILDPlayMelodyInstruction( LEOContext* inContext )
 		if( (inContext->flags & kLEOContextKeepRunning) == 0 )
 			return;
 		
-		std::string			mediaURL = frontStack->GetDocument()->GetMediaCache().GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
+		std::string			mediaURL = ourDocument->GetMediaCache().GetMediaURLByNameOfType( instrNameStr, EMediaTypeSound );
 			
 		if( mediaURL.length() == 0 )
 		{

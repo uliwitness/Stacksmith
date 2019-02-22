@@ -113,6 +113,7 @@ public:
 	virtual bool				HasMessageHandler( const char* inMsgName );	//!< To find whether this object implements the given message.
 
 	virtual CStack*				GetStack()												{ return NULL; };
+	virtual CDocument*			GetDocument()											{ return NULL; };
 	virtual CScriptableObject*	GetParentObject( CScriptableObject* previousParent, LEOContext * ctx )	{ return GetNextFrontScript(ctx); };
 	virtual LEOScript*			GetScriptObject( std::function<void(const char*,size_t,size_t,CScriptableObject*)> errorHandler )										{ return NULL; };
 	virtual LEOContextGroup*	GetScriptContextGroupObject()					{ return NULL; };
@@ -146,7 +147,7 @@ typedef CRefCountedObjectRef<CScriptableObject>	CScriptableObjectRef;
 class CScriptContextUserData
 {
 public:
-	CScriptContextUserData( CStack* currStack, CScriptableObject* target, CScriptableObject* owner );
+	CScriptContextUserData( CStack* currStack, CDocument* document, CScriptableObject* target, CScriptableObject* owner );
 	~CScriptContextUserData();
 	
 	void				SetStack( CStack* currStack );
@@ -171,6 +172,7 @@ public:
 	
 protected:
 	CStack				*	mCurrentStack = nullptr;
+	CDocument			*	mCurrentDocument = nullptr; // Stuff in project scripts and menus has no stack, but does have a document.
     CScriptableObject	*	mTarget = nullptr;
     CScriptableObject	*	mOwner = nullptr;
 	std::string				mVisualEffectType;

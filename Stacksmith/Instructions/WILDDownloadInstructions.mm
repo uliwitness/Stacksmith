@@ -71,7 +71,7 @@ void	LEOPushDownloadsInstruction( LEOContext* inContext );
 {
 	if(( self = [super init] ))
 	{
-		CScriptContextUserData	*	ud = new CScriptContextUserData( inUserData->GetStack(), inUserData->GetTarget(), inUserData->GetOwner() );
+		CScriptContextUserData	*	ud = new CScriptContextUserData( inUserData->GetStack(), inUserData->GetDocument(), inUserData->GetTarget(), inUserData->GetOwner() );
 		mContext = LEOContextCreate( inGroup, ud, CScriptContextUserData::CleanUp );
 		mOwningScript = LEOScriptRetain( inScript );
 		mProgressMessage = [inProgressMsg copy];
