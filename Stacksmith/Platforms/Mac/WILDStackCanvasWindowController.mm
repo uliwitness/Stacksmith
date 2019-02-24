@@ -628,6 +628,7 @@ struct CCanvasEntry
 	[self.plusButton.menu popUpMenuPositioningItem: self.plusButton.menu.itemArray.lastObject atLocation: NSMakePoint(NSMaxX(self.plusButton.bounds), NSMinY(self.plusButton.bounds)) inView: self.plusButton];
 }
 
+
 -(IBAction)	addStack: (id)sender
 {
 	CAutoreleasePool pool;
@@ -637,6 +638,7 @@ struct CCanvasEntry
 	[self.stackCanvasView reloadData];
 	[self selectScriptableObject: newStack];
 }
+
 
 -(IBAction)	addMenu: (id)sender
 {
@@ -742,6 +744,34 @@ struct CCanvasEntry
 		CCard * newCard = selectedStack->AddNewCardWithBackground();
 		[self.stackCanvasView reloadData];
 		[self selectScriptableObject: newCard];
+	}
+}
+
+
+-(BOOL) validateMenuItem:(NSMenuItem *)menuItem
+{
+	if( menuItem.action == @selector(addMenuItem:) )
+	{
+		CScriptableObject * selectedObject = self.selectedScriptableObject;
+		if( !selectedObject )
+			return NO;
+		CMenu * selectedMenu = dynamic_cast<CMenu *>(selectedObject);
+		CMenuItem * selectedMenuItem = dynamic_cast<CMenuItem *>(selectedObject);
+		return selectedMenu || selectedMenuItem;
+	}
+	else if( menuItem.action == @selector(addBackground:) || menuItem.action == @selector(addCard:) )
+	{
+		CScriptableObject * selectedObject = self.selectedScriptableObject;
+		if( !selectedObject )
+			return NO;
+		CStack * selectedStack = dynamic_cast<CStack *>(selectedObject);
+		CCard * selectedCard = dynamic_cast<CCard *>(selectedObject);
+		CBackground * selectedBackground = dynamic_cast<CBackground *>(selectedObject);
+		return selectedStack || selectedCard || selectedBackground;
+	}
+	else
+	{
+		return YES;
 	}
 }
 
