@@ -8,6 +8,7 @@
 
 #import "WILDTextView.h"
 #include "CAlert.h"
+#include "CStack.h"
 
 using namespace Carlson;
 
@@ -18,13 +19,13 @@ using namespace Carlson;
 
 -(void)	mouseDown: (NSEvent*)evt
 {
-	if( owningPart )
+	if( owningPart && owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool		pool;
 		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool wasHandled){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "mouseDown %ld", [evt buttonNumber] );
 	}
 	[super mouseDown: evt];
-	if( owningPart )
+	if( owningPart && owningPart->GetShouldSendMouseEventsRightNow() )
 	{
 		CAutoreleasePool		pool;
 		owningPart->SendMessage( NULL, [](const char *errMsg, size_t inLineOffset, size_t inOffset, CScriptableObject* inErrObj, bool wasHandled){ CAlert::RunScriptErrorAlert( inErrObj, errMsg, inLineOffset, inOffset ); }, EMayGoUnhandled, "mouseUp %ld", [evt buttonNumber] );

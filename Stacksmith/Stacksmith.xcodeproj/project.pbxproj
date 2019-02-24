@@ -474,6 +474,8 @@
 		55EBC648114CFAE000BAA09D /* CardIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC644114CFAE000BAA09D /* CardIconSmall.png */; };
 		55EBC649114CFAE000BAA09D /* FieldIconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EBC645114CFAE000BAA09D /* FieldIconSmall.png */; };
 		55EE385E1A91473B00E1C2E7 /* CGraphicPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55EE385C1A91473B00E1C2E7 /* CGraphicPart.cpp */; };
+		55F2C0B32222C199006E3BAA /* LEOFileInstructionsGeneric.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F2C0B12222C198006E3BAA /* LEOFileInstructionsGeneric.cpp */; };
+		55F2C0B62222C329006E3BAA /* fake_filesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F2C0B52222C329006E3BAA /* fake_filesystem.cpp */; };
 		55F2EAEF131DA23F00913200 /* WILDAboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */; };
 		55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */; };
 		55F34D35136A50D600E8588D /* ICON_128.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 55F34D2E136A50D600E8588D /* ICON_128.pdf */; };
@@ -838,7 +840,7 @@
 		553C469E13577334000219FA /* Forge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forge.h; sourceTree = "<group>"; };
 		553C469F13577334000219FA /* Forge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Forge.cpp; sourceTree = "<group>"; };
 		553C46A013577334000219FA /* CCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CCodeBlock.h; path = ../../CCodeBlock.h; sourceTree = "<group>"; };
-		553C46A113577334000219FA /* CCodeBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CCodeBlock.cpp; path = ../../CCodeBlock.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		553C46A113577334000219FA /* CCodeBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CCodeBlock.cpp; path = ../../CCodeBlock.cpp; sourceTree = "<group>"; };
 		553C46A213577334000219FA /* CVariableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVariableEntry.h; path = ../../CVariableEntry.h; sourceTree = "<group>"; };
 		553C46A313577334000219FA /* CVariableEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVariableEntry.cpp; path = ../../CVariableEntry.cpp; sourceTree = "<group>"; };
 		553C46A413577334000219FA /* UTF32CaseTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UTF32CaseTables.h; path = ../../../Forge/Leonie/generic/UTF32CaseTables.h; sourceTree = "<group>"; };
@@ -1271,6 +1273,10 @@
 		55EBC645114CFAE000BAA09D /* FieldIconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FieldIconSmall.png; sourceTree = "<group>"; };
 		55EE385C1A91473B00E1C2E7 /* CGraphicPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGraphicPart.cpp; path = "Portable Document/CGraphicPart.cpp"; sourceTree = "<group>"; };
 		55EE385D1A91473B00E1C2E7 /* CGraphicPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGraphicPart.h; path = "Portable Document/CGraphicPart.h"; sourceTree = "<group>"; };
+		55F2C0B12222C198006E3BAA /* LEOFileInstructionsGeneric.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LEOFileInstructionsGeneric.cpp; path = ../../Leonie/generic/LEOFileInstructionsGeneric.cpp; sourceTree = "<group>"; };
+		55F2C0B22222C198006E3BAA /* LEOFileInstructionsGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LEOFileInstructionsGeneric.h; path = ../../Leonie/generic/LEOFileInstructionsGeneric.h; sourceTree = "<group>"; };
+		55F2C0B42222C328006E3BAA /* fake_filesystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fake_filesystem.hpp; path = ../../fake_filesystem.hpp; sourceTree = "<group>"; };
+		55F2C0B52222C329006E3BAA /* fake_filesystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fake_filesystem.cpp; path = ../../fake_filesystem.cpp; sourceTree = "<group>"; };
 		55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDAboutPanelController.h; path = Windows/WILDAboutPanelController.h; sourceTree = "<group>"; };
 		55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDAboutPanelController.m; path = Windows/WILDAboutPanelController.m; sourceTree = "<group>"; };
 		55F2EAF1131DA26700913200 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WILDAboutPanelController.xib; sourceTree = "<group>"; };
@@ -1711,6 +1717,10 @@
 				55E805C21360AA25006F1287 /* LEOPropertyInstructions.c */,
 				5538245E17272775007785D8 /* LEOObjCCallInstructions.h */,
 				5538245817272767007785D8 /* LEOObjCCallInstructions.c */,
+				55F2C0B22222C198006E3BAA /* LEOFileInstructionsGeneric.h */,
+				55F2C0B12222C198006E3BAA /* LEOFileInstructionsGeneric.cpp */,
+				55F2C0B52222C329006E3BAA /* fake_filesystem.cpp */,
+				55F2C0B42222C328006E3BAA /* fake_filesystem.hpp */,
 			);
 			name = Leonie;
 			sourceTree = "<group>";
@@ -2806,6 +2816,7 @@
 				553C46F713577334000219FA /* CPushValueCommandNode.cpp in Sources */,
 				553C46F813577334000219FA /* CAssignCommandNode.cpp in Sources */,
 				553C46F913577334000219FA /* CPutCommandNode.cpp in Sources */,
+				55F2C0B62222C329006E3BAA /* fake_filesystem.cpp in Sources */,
 				553C46FA13577334000219FA /* CGetParamCommandNode.cpp in Sources */,
 				553C46FC13577334000219FA /* CReturnCommandNode.cpp in Sources */,
 				553C46FD13577334000219FA /* CFunctionCallNode.cpp in Sources */,
@@ -2816,6 +2827,7 @@
 				55CD60BE187510F0002450E2 /* CMoviePlayerPart.cpp in Sources */,
 				553C470013577334000219FA /* CLineMarkerNode.cpp in Sources */,
 				553C470113577334000219FA /* CAssignChunkArrayNode.cpp in Sources */,
+				55F2C0B32222C199006E3BAA /* LEOFileInstructionsGeneric.cpp in Sources */,
 				556DB7B61870A352002F7CB2 /* CLayer.cpp in Sources */,
 				553C470213577334000219FA /* CGetArrayItemCountNode.cpp in Sources */,
 				5593D0CC1E6B0E2D00E7F31D /* CVariableWatcherMac.mm in Sources */,

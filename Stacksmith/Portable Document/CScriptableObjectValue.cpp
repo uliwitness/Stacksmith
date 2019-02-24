@@ -1100,6 +1100,10 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	CScriptableObject*			parent = GetParentObject( nullptr, nullptr );
 	CStack*						parentStack = parent ? parent->GetStack() : GetStack();
 	CDocument*					parentDoc = parent ? parent->GetDocument() : GetDocument();
+	if( !parentStack )
+		parentStack = CStack::GetActiveStack();
+	if( !parentStack )
+		parentStack = parentDoc->GetStack(0);
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parentStack, parentDoc, this, this );
 	CScriptContextGroupUserData * gud = (CScriptContextGroupUserData *)contextGroup->userData;
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );

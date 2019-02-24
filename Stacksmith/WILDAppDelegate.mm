@@ -10,6 +10,7 @@
 #import "WILDBackgroundModeIndicator.h"
 #import "WILDAboutPanelController.h"
 #import "Forge.h"
+#import "LEOFileInstructionsGeneric.h"
 #import "WILDGlobalProperties.h"
 #import "WILDHostCommands.h"
 #import "WILDHostFunctions.h"
@@ -104,6 +105,11 @@ void	WILDScheduleResumeOfScript( void )
 		// Internet protocol stuff:
 	LEOAddInstructionsToInstructionArray( gDownloadInstructions, LEO_NUMBER_OF_DOWNLOAD_INSTRUCTIONS, &kFirstDownloadInstruction );
 	LEOAddGlobalPropertiesAndOffsetInstructions( gDownloadGlobalProperties, kFirstDownloadInstruction );
+	
+		// File Access:
+	LEOAddInstructionsToInstructionArray( gFileInstructions, LEO_NUMBER_OF_FILE_INSTRUCTIONS, &kFirstFileInstruction );
+	LEOAddHostCommandsAndOffsetInstructions( gFileCommands, kFirstFileInstruction );
+	LEOAddHostFunctionsAndOffsetInstructions( gFileHostFunctions, kFirstFileInstruction );
 	
 	// Now add the instructions for the syntax that Stacksmith adds itself:
 		// Commands specific to this host application:

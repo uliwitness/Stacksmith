@@ -403,7 +403,7 @@ CScriptableObject*	CDocument::GetParentObject( CScriptableObject* previousParent
 	CDocumentRef	homeDocument = CDocumentManager::GetSharedDocumentManager()->GetHomeDocument();
 	if( homeDocument != this && homeDocument != nullptr && homeDocument->GetScriptContextGroupObject() == GetScriptContextGroupObject() )
 	{
-		std::cout << " -> (" << homeDocument->GetObjectDescriptorString() << ")" << std::endl;
+		//std::cout << " -> (" << homeDocument->GetObjectDescriptorString() << ")" << std::endl;
 		return homeDocument;
 	}
 	

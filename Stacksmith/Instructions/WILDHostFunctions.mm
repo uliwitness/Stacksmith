@@ -242,7 +242,7 @@ void	WILDCardInstruction( LEOContext* inContext )
 				snprintf(cardName, sizeof(cardName) -1, "id %lld", theNumber );
 			
 		}
-		else if( theNumber > 0 && theNumber <= (LEOInteger)frontStack->GetNumBackgrounds() )
+		else if( theNumber > 0 && theNumber <= (LEOInteger)frontStack->GetNumCards() )
 		{
 			if( owningBg )
 				theCard = frontStack->GetCardAtIndexWithBackground( theNumber -1, owningBg );
@@ -284,7 +284,7 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 	CPart	*	thePart = NULL;
 	CStack	*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	char		partName[1024] = { 0 };
-	CCard	*	theCard = frontStack->GetCurrentCard();
+	CCard	*	theCard = nullptr;
 	LEOValuePtr	theOwner = inContext->stackEndPtr -1;
 	theOwner = LEOFollowReferencesAndReturnValueOfType( theOwner, &kLeoValueTypeScriptableObject, inContext );
 	if( theOwner && theOwner->base.isa == &kLeoValueTypeScriptableObject )
@@ -295,6 +295,18 @@ void	WILDCardPartInstructionInternal( LEOContext* inContext, const char* inType 
 			theCard = ownerObject;
 	}
 	
+	if( !theCard && frontStack )
+		theCard = frontStack->GetCurrentCard();
+	
+	if( !theCard )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
+		return;
+	}
+
 	if( !theCard->IsLoaded() )
 	{
 		LEOContextRetain( inContext );
@@ -359,7 +371,7 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 	CPart	*		thePart = NULL;
 	CStack	*		frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
 	char			partName[1024] = { 0 };
-	CBackground	*	theBackground = frontStack->GetCurrentCard()->GetBackground();
+	CBackground	*	theBackground = nullptr;
 	LEOValuePtr		theOwner = inContext->stackEndPtr -1;
 	theOwner = LEOFollowReferencesAndReturnValueOfType( theOwner, &kLeoValueTypeScriptableObject, inContext );
 	if( theOwner && theOwner->base.isa == &kLeoValueTypeScriptableObject )
@@ -371,6 +383,17 @@ void	WILDBackgroundPartInstructionInternal( LEOContext* inContext, const char* i
 		ownerObject = dynamic_cast<CBackground*>((CScriptableObject*)theOwner->object.object);
 		if( ownerObject )
 			theBackground = ownerObject;
+	}
+	if( !theBackground && frontStack && frontStack->GetCurrentCard() )
+		theBackground = frontStack->GetCurrentCard()->GetBackground();
+	
+	if( !theBackground )
+	{
+		size_t		lineNo = SIZE_T_MAX;
+		uint16_t	fileID = 0;
+		LEOInstructionsFindLineForInstruction( inContext->currentInstruction, &lineNo, &fileID );
+		LEOContextStopWithError( inContext, lineNo, SIZE_T_MAX, fileID, "No stack open at the moment." );
+		return;
 	}
 	
 	char			idStrBuf[256] = {};
@@ -944,9 +967,23 @@ void	WILDNumberOfBackgroundPartsInstruction( LEOContext* inContext )
 }
 
 
+/*
+	WILD_NUMBER_OF_CARDS_INSTRUCTION
+*/
 void	WILDNumberOfCardsInstruction( LEOContext* inContext )
 {
 	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
+	LEOValuePtr		theOwner = inContext->stackEndPtr -1;
+	theOwner = LEOFollowReferencesAndReturnValueOfType( theOwner, &kLeoValueTypeScriptableObject, inContext );
+	if( theOwner && theOwner->base.isa == &kLeoValueTypeScriptableObject )
+	{
+		CStack	*	ownerObject = dynamic_cast<CStack*>((CScriptableObject*)theOwner->object.object);
+		if( ownerObject )
+			frontStack = ownerObject;
+	}
+
+	LEOCleanUpStackToPtr(inContext, inContext->stackEndPtr -1);
+
 	if( frontStack )
 		LEOPushIntegerOnStack( inContext, frontStack->GetNumCards(), kLEOUnitNone );
 	else
@@ -961,6 +998,9 @@ void	WILDNumberOfCardsInstruction( LEOContext* inContext )
 }
 
 
+/*
+	WILD_NUMBER_OF_BACKGROUNDS_INSTRUCTION
+ */
 void	WILDNumberOfBackgroundsInstruction( LEOContext* inContext )
 {
 	CStack		*	frontStack = ((CScriptContextUserData*)inContext->userData)->GetStack();
@@ -973,6 +1013,9 @@ void	WILDNumberOfBackgroundsInstruction( LEOContext* inContext )
 		if( ownerObject )
 			frontStack = ownerObject;
 	}
+	
+	LEOCleanUpStackToPtr(inContext, inContext->stackEndPtr -1);
+	
 	if( frontStack )
 		LEOPushIntegerOnStack( inContext, frontStack->GetNumBackgrounds(), kLEOUnitNone );
 	else

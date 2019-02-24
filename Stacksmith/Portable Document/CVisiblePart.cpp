@@ -473,6 +473,16 @@ bool	CVisiblePart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* in
 }
 
 
+THitPart	CVisiblePart::HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo, LEOInteger *outCustomHandleIndex )
+{
+	if( !GetVisible() )
+	{
+		return ENothingHitPart;
+	}
+	
+	return CPart::HitTestForEditing( x, y, handlesToo, outCustomHandleIndex );
+}
+
 /*static*/ TPartTextAlign	CVisiblePart::GetTextAlignFromString( const char* inString )
 {
 	if( !inString )

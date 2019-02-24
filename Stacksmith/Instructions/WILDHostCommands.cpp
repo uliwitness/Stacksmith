@@ -163,7 +163,7 @@ void	WILDGoInstruction( LEOContext* inContext )
 		CScriptableObject*		destinationObject = NULL;
 		CPart			*		overPartObject = NULL;
 		CScriptContextUserData*	userData = (CScriptContextUserData*)inContext->userData;
-		CCard*					prevCard = userData->GetStack()->GetCurrentCard();
+		CCard*					prevCard = userData->GetStack() ? userData->GetStack()->GetCurrentCard() : nullptr;
 		if( prevCard )
 			CRecentCardsList::GetSharedInstance()->AddCard( prevCard );
 		LEOValuePtr				theObjectDestination = LEOFollowReferencesAndReturnValueOfType( inContext->stackEndPtr -2, &kLeoValueTypeScriptableObject, inContext );

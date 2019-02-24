@@ -126,6 +126,10 @@ public:
 	virtual void			SetTextAlign( TPartTextAlign a )			{};
 	virtual void			SetTextColor( int r, int g, int b, int a )	{};
 	
+	virtual THitPart		HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo, LEOInteger *outCustomHandleIndex );
+	virtual bool			IsSelected()					{ if( !GetVisible() ) return false; return CPart::IsSelected(); };
+
+	
 protected:
 	virtual void			LoadPropertiesFromElement( tinyxml2::XMLElement * inElement );
 	virtual void			SavePropertiesToElement( tinyxml2::XMLElement * inElement );
