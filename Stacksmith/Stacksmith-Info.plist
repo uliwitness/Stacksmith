@@ -38,6 +38,26 @@
 			<key>NSDocumentClass</key>
 			<string>WILDDocument</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>pbm</string>
+			</array>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>image/x-portable-bitmap</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Portable Bitmap Graphic</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.pbm</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
@@ -116,6 +136,36 @@
 			<dict>
 				<key>public.filename-extension</key>
 				<string>xstk</string>
+			</dict>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.image</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Portable Bitmap Graphic</string>
+			<key>UTTypeIdentifier</key>
+			<string>public.pbm</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>PPGM</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pbm</string>
+					<string>ppm</string>
+					<string>pgm</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>image/x-portable-bitmap</string>
+				</array>
 			</dict>
 		</dict>
 	</array>

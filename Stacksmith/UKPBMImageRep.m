@@ -221,17 +221,22 @@
 }
 
 
-+(NSArray*) imageUnfilteredFileTypes
+//+(NSArray*) imageUnfilteredFileTypes
+//{
+//    return [NSArray arrayWithObject: @"pbm"];
+//}
+//
+//
+//+(NSArray*) imageUnfilteredPasteboardTypes
+//{
+//    return [NSArray array];
+//}
+
+
++(NSArray*) imageUnfilteredTypes
 {
-    return [NSArray arrayWithObject: @"pbm"];
+	return @[ @"public.pbm" ];
 }
-
-
-+(NSArray*) imageUnfilteredPasteboardTypes
-{
-    return [NSArray array];
-}
-
 
 @end
 
