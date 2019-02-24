@@ -28,6 +28,8 @@ struct CCanvasEntry
 	
 	void	SetIcon( WILDNSImagePtr inImage )	{ if( mIcon != inImage ) { [mIcon release]; mIcon = [inImage retain]; } }
 	
+	CConcreteObject* GetActualObject() { if( mMediaType != EMediaTypeUnknown ) return nullptr; if( mCard ) return mCard; if( mBackground ) return mBackground; if( mStack ) return mStack; if( mMenuItem ) return mMenuItem; if( mMenu ) return mMenu; return mProject; }
+	
 	CDocumentRef	mProject;
 	CMenuRef		mMenu;
 	CMenuItemRef	mMenuItem;
@@ -314,7 +316,7 @@ struct CCanvasEntry
 
 -(void) distributedView: (UKDistributedView*)distributedView cellDoubleClickedAtItemIndex: (NSUInteger)row
 {
-	CCanvasEntry		currItem = items[row];
+	CCanvasEntry	&	currItem = items[row];
 	CStack*				currStack = nullptr;
 	CConcreteObject* 	currObj = nullptr;
 	[self concreteCppObject: &currObj image: NULL stack: &currStack forCanvasEntry: currItem];
@@ -401,6 +403,48 @@ struct CCanvasEntry
 -(void)				distributedView: (UKDistributedView*)dv dragEndedWithOperation: (NSDragOperation)operation
 {
 	
+}
+
+
+-(NSMenu*) distributedView: (UKDistributedView*)distributedView menuForItemIndex: (NSUInteger)item
+{
+	NSMenu * theMenu = nil;
+	CCanvasEntry &		currItem = items[item];
+	CScriptableObject * scriptableObject = currItem.GetActualObject();
+
+	if( scriptableObject )
+	{
+		theMenu = [[[NSMenu alloc] initWithTitle: @"Contextual Menu"] autorelease];
+		NSMenuItem * infoItem = [theMenu addItemWithTitle:@"Get Info…" action:@selector(showItemInfo:) keyEquivalent:@""];
+		infoItem.target = self;
+		infoItem.tag = item;
+	}
+	
+	return theMenu;
+}
+
+
+-(void) showItemInfo:(NSMenuItem *)sender
+{
+	NSUInteger row = sender.tag;
+	UKDistributedView * distributedView = self.stackCanvasView;
+	CCanvasEntry & currItem = items[row];
+	CConcreteObject * scriptableObject = currItem.GetActualObject();
+	CMacScriptableObjectBase * macPart = scriptableObject ? dynamic_cast<CMacScriptableObjectBase*>(scriptableObject) : nullptr;
+	if( macPart )
+	{
+		WILDConcreteObjectInfoViewController * piv = [[[macPart->GetPropertyEditorClass() alloc] initWithConcreteObject: scriptableObject] autorelease];
+		[popover release];
+		popover = [[NSPopover alloc] init];
+		//popover.delegate = self;
+		popover.contentSize = piv.view.frame.size;
+		popover.contentViewController = piv;
+		[popover setBehavior: NSPopoverBehaviorTransient];
+		NSRect itemRect = [distributedView rectForItemAtIndex: row];
+		CGFloat distViewHeight = distributedView.frame.size.height;
+		itemRect.origin.y = distViewHeight -NSMaxY(itemRect);
+		[popover showRelativeToRect: itemRect ofView: distributedView preferredEdge: NSMaxYEdge];
+	}
 }
 
 

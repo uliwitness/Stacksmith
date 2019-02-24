@@ -21,6 +21,6 @@ namespace Carlson
 	
 }
 
--(id)		initWithBackground: (Carlson::CBackground*)inCard;
+-(id)		initWithConcreteObject: (Carlson::CBackground*)inCard;
 
 @end

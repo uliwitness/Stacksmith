@@ -23,7 +23,7 @@ namespace Carlson
 
 @property (retain) IBOutlet	NSButton		*	markedSwitch;
 
--(id)		initWithCard: (Carlson::CCard*)inCard;
+-(id)		initWithConcreteObject: (Carlson::CCard*)inCard;
 
 -(IBAction)	doMarkedSwitchChanged: (id)sender;
 

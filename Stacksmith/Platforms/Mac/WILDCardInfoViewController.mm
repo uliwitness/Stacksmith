@@ -19,7 +19,7 @@ using namespace Carlson;
 
 @synthesize markedSwitch = mMarkedSwitch;
 
--(id)	initWithCard: (CCard*)inCard
+-(id)	initWithConcreteObject: (CCard*)inCard
 {
 	if(( self = [super initWithLayer: inCard] ))
 	{

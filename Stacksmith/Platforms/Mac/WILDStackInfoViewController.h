@@ -49,7 +49,7 @@ namespace Carlson
 @property (retain) IBOutlet	NSButton		*	resizableSwitch;
 @property (retain) IBOutlet WILDUserPropertyEditorController*		userPropertyEditor;
 
--(id)		initWithStack: (Carlson::CStack*)inStack;
+-(id)		initWithConcreteObject: (Carlson::CStack*)inStack;
 
 -(IBAction)	doEditScriptButton: (id)sender;
 

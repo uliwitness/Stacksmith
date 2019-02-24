@@ -16,7 +16,7 @@ using namespace Carlson;
 
 @implementation WILDBackgroundInfoViewController
 
--(id)	initWithBackground: (CBackground*)inBackground
+-(id)	initWithConcreteObject: (CBackground*)inBackground
 {
 	if(( self = [super initWithLayer: inBackground] ))
 	{

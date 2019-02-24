@@ -58,7 +58,7 @@ using namespace Carlson;
 @synthesize stylePopUpButton = mStylePopUpButton;
 @synthesize resizableSwitch = mResizableSwitch;
 
--(id)	initWithStack: (CStack*)inStack
+-(id)	initWithConcreteObject: (CStack*)inStack
 {
 	if(( self = [super initWithNibName: NSStringFromClass([self class]) bundle: nil] ))
 	{

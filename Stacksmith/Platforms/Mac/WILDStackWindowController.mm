@@ -1292,7 +1292,7 @@ using namespace Carlson;
 	if( mCurrentPopover )
 		[mCurrentPopover close];
 	
-	WILDCardInfoViewController*	cardInfo = [[[WILDCardInfoViewController alloc] initWithCard: mStack->GetCurrentCard()] autorelease];
+	WILDCardInfoViewController*	cardInfo = [[[WILDCardInfoViewController alloc] initWithConcreteObject: mStack->GetCurrentCard()] autorelease];
 	mCurrentPopover = [[NSPopover alloc] init];
 	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
 	[mCurrentPopover setDelegate: self];
@@ -1305,7 +1305,7 @@ using namespace Carlson;
 	if( mCurrentPopover )
 		[mCurrentPopover close];
 	
-	WILDBackgroundInfoViewController*	backgroundInfo = [[[WILDBackgroundInfoViewController alloc] initWithBackground: mStack->GetCurrentCard()->GetBackground()] autorelease];
+	WILDBackgroundInfoViewController*	backgroundInfo = [[[WILDBackgroundInfoViewController alloc] initWithConcreteObject: mStack->GetCurrentCard()->GetBackground()] autorelease];
 	mCurrentPopover = [[NSPopover alloc] init];
 	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
 	[mCurrentPopover setDelegate: self];
@@ -1318,7 +1318,7 @@ using namespace Carlson;
 	if( mCurrentPopover )
 		[mCurrentPopover close];
 	
-	WILDStackInfoViewController*	stackInfo = [[[WILDStackInfoViewController alloc] initWithStack: mStack] autorelease];
+	WILDStackInfoViewController*	stackInfo = [[[WILDStackInfoViewController alloc] initWithConcreteObject: mStack] autorelease];
 	mCurrentPopover = [[NSPopover alloc] init];
 	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
 	[mCurrentPopover setDelegate: self];
