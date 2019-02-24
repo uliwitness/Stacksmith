@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WILDStackCanvasWindowController">
             <connections>
+                <outlet property="plusButton" destination="tW2-oH-zGD" id="f89-ok-9ZG"/>
                 <outlet property="stackCanvasView" destination="gHw-aY-Nlr" id="ci8-Ye-EvC"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Stack Canvas" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="WILDStackCanvasWindow" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="Stack Canvas" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="WILDStackCanvasWindow" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="480" height="401"/>
@@ -32,48 +33,85 @@
                                 <customView id="gHw-aY-Nlr" customClass="UKDistributedView">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="380"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <animations/>
                                     <connections>
                                         <outlet property="dataSource" destination="-2" id="4YS-1W-T7T"/>
                                         <outlet property="delegate" destination="-2" id="SvU-gv-K2F"/>
                                     </connections>
                                 </customView>
                             </subviews>
-                            <animations/>
                             <color key="backgroundColor" red="0.27098289009999998" green="0.29317502629999997" blue="0.40624465320000003" alpha="1" colorSpace="deviceRGB"/>
                         </clipView>
-                        <animations/>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="JPn-8L-XSJ">
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="JPn-8L-XSJ">
                             <rect key="frame" x="1" y="80" width="166" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <animations/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cf2-8i-Qpt">
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cf2-8i-Qpt">
                             <rect key="frame" x="167" y="1" width="15" height="79"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <animations/>
                         </scroller>
                     </scrollView>
-                    <button verticalHuggingPriority="750" id="tW2-oH-zGD">
+                    <button verticalHuggingPriority="750" id="tW2-oH-zGD" customClass="WILDIconMenuButton">
                         <rect key="frame" x="0.0" y="-1" width="24" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <animations/>
-                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cm4-2J-xJG">
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cm4-2J-xJG">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="pickMediaFile:" target="-2" id="3eT-zB-y48"/>
+                            <action selector="plusButtonClicked:" target="-2" id="gDg-jb-CXp"/>
+                            <outlet property="menu" destination="AmO-uf-teK" id="94O-sy-83R"/>
                         </connections>
                     </button>
                 </subviews>
-                <animations/>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
             <point key="canvasLocation" x="223" y="263.5"/>
         </window>
+        <menu id="AmO-uf-teK">
+            <items>
+                <menuItem title="New Stack" id="kGb-Ue-pCP">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="addStack:" target="-2" id="muc-oL-OEa"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="New Card" id="St8-WL-9YN">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="addCard:" target="-2" id="hN2-fa-vh8"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="New Background" id="JLf-gG-F83">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="addBackground:" target="-2" id="Nir-Pd-bUz"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="jtb-Cv-I7j"/>
+                <menuItem title="New Menu" id="p3q-oQ-nVE">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="addMenu:" target="-2" id="5Fx-L5-hdC"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="New Menu Item" id="bDG-UX-33q">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="addMenuItem:" target="-2" id="uqh-DT-Eex"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="XWx-ma-owm"/>
+                <menuItem title="Add Media…" id="7Xu-4k-etJ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="pickMediaFile:" target="-2" id="WDj-Ef-uE6"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="107" y="614"/>
+        </menu>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>

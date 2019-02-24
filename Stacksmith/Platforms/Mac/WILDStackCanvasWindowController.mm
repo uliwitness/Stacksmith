@@ -18,6 +18,27 @@
 using namespace Carlson;
 
 
+@interface WILDIconMenuButton : NSButton
+
+@end
+
+@implementation WILDIconMenuButton
+
+- (nullable NSMenu *)menuForEvent:(NSEvent *)event
+{
+	if( event.type == NSEventTypeLeftMouseUp )
+	{
+		return self.menu;
+	}
+	else
+	{
+		return [super menuForEvent: event];
+	}
+}
+
+@end
+
+
 struct CCanvasEntry
 {
 	CCanvasEntry() : mMediaType(EMediaTypeUnknown), mMediaID(0), mColumnIdx(0),	mIndentLevel(0), mRowIdx(0), mIcon(nil) {};
@@ -65,6 +86,8 @@ struct CCanvasEntry
 -(void)	windowDidLoad
 {
     [super windowDidLoad];
+	
+	[self.plusButton sendActionOn: NSEventMaskLeftMouseDown];
 	
 	self.owningDocument->SaveThumbnailsForOpenStacks();
 	
@@ -597,6 +620,154 @@ struct CCanvasEntry
 			[self addMediaURLs: openPanel.URLs mediaType: EMediaTypeUnknown];
 		}
 	}];
+}
+
+
+-(IBAction) plusButtonClicked:(id)sender
+{
+	[self.plusButton.menu popUpMenuPositioningItem: self.plusButton.menu.itemArray.lastObject atLocation: NSMakePoint(NSMaxX(self.plusButton.bounds), NSMinY(self.plusButton.bounds)) inView: self.plusButton];
+}
+
+-(IBAction)	addStack: (id)sender
+{
+	CAutoreleasePool pool;
+	
+	CStack * newStack = self.owningDocument->AddNewStack();
+	
+	[self.stackCanvasView reloadData];
+	[self selectScriptableObject: newStack];
+}
+
+-(IBAction)	addMenu: (id)sender
+{
+	CAutoreleasePool pool;
+
+	tinyxml2::XMLDocument   document;
+	std::string             xml( "<menu><name>New Menu</name></menu>" );
+	document.Parse( xml.c_str() );
+	CMenu * newMenu = self.owningDocument->NewMenuWithElement(document.RootElement());
+	
+	[self.stackCanvasView reloadData];
+	[self selectScriptableObject: newMenu];
+}
+
+
+-(IBAction)	addMenuItem: (id)sender
+{
+	CAutoreleasePool pool;
+	
+	CScriptableObject * selectedObject = self.selectedScriptableObject;
+	if( !selectedObject )
+		return;
+	
+	CMenu * selectedMenu = dynamic_cast<CMenu *>(selectedObject);
+	CMenuItem * selectedMenuItem = dynamic_cast<CMenuItem *>(selectedObject);
+	
+	// An item is selected? Append to same menu, *we* probably selected the item when we added an item to the menu before.
+	if( !selectedMenu && selectedMenuItem ) {
+		selectedMenu = dynamic_cast<CMenu *>(selectedMenuItem->GetParentObject(NULL, NULL));
+	}
+	
+	if( selectedMenu )
+	{
+		tinyxml2::XMLDocument   document;
+		std::string             xml( "<menuitem><name>New Item</name></menuitem>" );
+		document.Parse( xml.c_str() );
+		CMenuItem * newMenuItem = selectedMenu->NewMenuItemWithElement( document.RootElement() );
+		
+		[self.stackCanvasView reloadData];
+		[self selectScriptableObject: newMenuItem];
+	}
+}
+
+
+-(IBAction)	addCard: (id)sender
+{
+	CAutoreleasePool pool;
+	
+	CScriptableObject * selectedObject = self.selectedScriptableObject;
+	if( !selectedObject )
+		return;
+	
+	CStack * selectedStack = dynamic_cast<CStack *>(selectedObject);
+	CCard * selectedCard = dynamic_cast<CCard *>(selectedObject);
+	CBackground * selectedBackground = dynamic_cast<CBackground *>(selectedObject);
+
+	if( !selectedBackground && selectedCard ) {
+		selectedBackground = selectedCard->GetBackground();
+	}
+
+	if( !selectedStack && selectedBackground )
+	{
+		selectedStack = selectedBackground->GetStack();
+	}
+	
+	if( !selectedBackground && selectedStack )
+	{
+		selectedBackground = selectedStack->GetBackground(selectedStack->GetNumBackgrounds() - 1);
+	}
+
+	if( selectedStack )
+	{
+		CCard * newCard = selectedStack->AddNewCardWithBackground( selectedBackground );
+		[self.stackCanvasView reloadData];
+		[self selectScriptableObject: newCard];
+	}
+}
+
+
+-(IBAction)	addBackground: (id)sender
+{
+	CAutoreleasePool pool;
+	
+	CScriptableObject * selectedObject = self.selectedScriptableObject;
+	if( !selectedObject )
+		return;
+	
+	CStack * selectedStack = dynamic_cast<CStack *>(selectedObject);
+	CCard * selectedCard = dynamic_cast<CCard *>(selectedObject);
+	CBackground * selectedBackground = dynamic_cast<CBackground *>(selectedObject);
+	
+	if( !selectedStack && selectedCard ) {
+		selectedStack = selectedCard->GetStack();
+	}
+	
+	if( !selectedStack && selectedBackground )
+	{
+		selectedStack = selectedBackground->GetStack();
+	}
+	
+	if( selectedStack )
+	{
+		CCard * newCard = selectedStack->AddNewCardWithBackground();
+		[self.stackCanvasView reloadData];
+		[self selectScriptableObject: newCard];
+	}
+}
+
+
+-(void) selectScriptableObject: (CConcreteObject *)obj
+{
+	NSUInteger x = 0;
+	for( CCanvasEntry& currItem : items )
+	{
+		if( currItem.GetActualObject() == obj )
+		{
+			[self.stackCanvasView selectItem: x byExtendingSelection: NO];
+			break;
+		}
+		
+		++x;
+	}
+}
+
+
+-(CScriptableObject *) selectedScriptableObject
+{
+	if( self.stackCanvasView.selectedItemIndex == NSNotFound )
+		return nullptr;
+	
+	return items[self.stackCanvasView.selectedItemIndex].GetActualObject();
 }
 
 
