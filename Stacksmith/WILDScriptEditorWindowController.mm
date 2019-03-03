@@ -423,6 +423,16 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 }
 
 
+-(IBAction) saveDocument: (id)sender
+{
+	if( mContainer )
+	{
+		mContainer->SetScript( std::string(mTextView.string.UTF8String, [mTextView.string lengthOfBytesUsingEncoding: NSUTF8StringEncoding]) );
+		mContainer->GetDocument()->Save();
+	}
+}
+
+
 -(void) setDocument: (NSDocument *)document
 {
 	[super setDocument: document];
