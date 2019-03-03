@@ -102,10 +102,11 @@ void	CDocument::LoadFromURL( const std::string& inURL, std::function<void(CDocum
 		slashOffset = 0;
 	mURL = inURL.substr(0,slashOffset);
 	mMediaCache.SetURL( mURL );
-	slashOffset = mURL.rfind( '/' );
+	std::string path = PathFromFileURL( mURL );
+	slashOffset = path.rfind( '/' );
 	if( slashOffset == std::string::npos )
 		slashOffset = 0;
-	mName = mURL.substr(slashOffset+1,std::string::npos);
+	mName = path.substr( slashOffset + 1, std::string::npos );
 	slashOffset = mName.rfind( '.' );
 	if( slashOffset == std::string::npos )
 		slashOffset = 0;
