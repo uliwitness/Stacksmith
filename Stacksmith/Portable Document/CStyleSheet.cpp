@@ -192,7 +192,7 @@ std::string CStyleSheet::GetOrAddClassForAttributes( const char* inBaseName, con
 		}
 		
 		if( stylesMatch )
-			return currStyle.first;
+			return currStyle.first.substr(1);
 	}
 	
 	std::string styleName = UniqueNameForClass( inBaseName );
