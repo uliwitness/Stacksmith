@@ -72,7 +72,8 @@ using namespace Carlson;
 	{
 		lines[0] = [notif.object attributedStringValue];
 	}
-	self.owningField->SetViewTextNeedsSync( true );
+	self.owningField->SetNeedsToImportTextFromView( true );
+	self.owningField->IncrementChangeCount(); // Ensure that background fields get a chance to re-import their contents from the view before the card contents are saved.
 	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
 	if( contents ) contents->IncrementChangeCount();
 //	NSLog( @"Edited SEARCH field text." );
@@ -84,7 +85,8 @@ using namespace Carlson;
 
 -(void)	textDidChange: (NSNotification *)notif	// Regular multi-line field text changed.
 {
-	self.owningField->SetViewTextNeedsSync( true );
+	self.owningField->SetNeedsToImportTextFromView( true );
+	self.owningField->IncrementChangeCount(); // Ensure that background fields get a chance to re-import their contents from the view before the card contents are saved.
 	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
 	if( contents ) contents->IncrementChangeCount();
 //	NSLog( @"Edited regular field text." );
@@ -105,7 +107,8 @@ using namespace Carlson;
 {
 	if( !self.dontSendSelectionChange )
 	{
-		self.owningField->SetViewTextNeedsSync( true );
+		self.owningField->SetNeedsToImportTextFromView( true );
+		self.owningField->IncrementChangeCount(); // Ensure that background fields get a chance to re-import their contents from the view before the card contents are saved.
 		CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
 		if( contents ) contents->IncrementChangeCount();
 	//	NSLog( @"Edited styles or so." );
@@ -243,7 +246,8 @@ using namespace Carlson;
 		[self.lines replaceObjectAtIndex: row withObject: theValue];
 	}
 	
-	self.owningField->SetViewTextNeedsSync( true );
+	self.owningField->SetNeedsToImportTextFromView( true );
+	self.owningField->IncrementChangeCount(); // Ensure that background fields get a chance to re-import their contents from the view before the card contents are saved.
 	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
 	if( contents ) contents->IncrementChangeCount();
 }
@@ -324,7 +328,7 @@ using namespace Carlson;
 {
 	self.lines[0] = self.lines[((WILDComboBox*)notification.object).indexOfSelectedItem +1];
 	
-	self.owningField->SetViewTextNeedsSync( true );
+	self.owningField->SetNeedsToImportTextFromView( true );
 	CPartContents*	contents = self.owningField->GetContentsOnCurrentCard();
 	if( contents ) contents->IncrementChangeCount();
 
@@ -363,7 +367,7 @@ CFieldPartMac::CFieldPartMac( CLayer *inOwner )
 
 void	CFieldPartMac::DestroyView()
 {
-	if( mViewTextNeedsSync )
+	if( mNeedsToImportTextFromView )
 		LoadChangedTextFromView();
 	
 	if( mSearchField )
@@ -1147,7 +1151,7 @@ void	CFieldPartMac::LoadChangedTextFromView()
 		}
 	}
 	
-	mViewTextNeedsSync = false;
+	mNeedsToImportTextFromView = false;
 }
 
 
@@ -1287,61 +1291,63 @@ NSAttributedString	*	CFieldPartMac::GetCocoaAttributedString( const CAttributedS
 
 void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet, NSAttributedString* cocoaAttrStr )
 {
-//	stringToSet.Dump();
-	
 	stringToSet.SetString( cocoaAttrStr.string.UTF8String );
-	
+	//stringToSet.Dump();
+
 	[cocoaAttrStr enumerateAttributesInRange: NSMakeRange(0,cocoaAttrStr.length) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop)
 	{
-		assert( range.location <= (range.location +range.length) );
+		size_t utf8Start = UTF8OffsetFromUTF16OffsetInCocoaString( range.location, cocoaAttrStr.string );
+		size_t utf8End = UTF8OffsetFromUTF16OffsetInCocoaString( NSMaxRange(range), cocoaAttrStr.string );
+
+		assert( utf8Start <= utf8End );
 		for( NSString* currAttr in attrs )
 		{
 			id attrValue = attrs[currAttr];
 			if( [currAttr isEqualToString: NSFontAttributeName] )
 			{
-				stringToSet.AddAttributeValueForRange( "font-family", [attrValue familyName].UTF8String, range.location, range.location +range.length );
+				stringToSet.AddAttributeValueForRange( "font-family", [attrValue familyName].UTF8String, utf8Start, utf8End );
 				
 				char		str[512] = {0};
 				snprintf(str, sizeof(str)-1, "%lld", (LEOInteger) [attrValue pointSize]);
-				stringToSet.AddAttributeValueForRange( "font-size", str, range.location, range.location +range.length );
+				stringToSet.AddAttributeValueForRange( "font-size", str, utf8Start, utf8End );
 				
 				NSFontTraitMask	traits = [[NSFontManager sharedFontManager] traitsOfFont: attrValue];
 				if( traits & NSBoldFontMask )
 				{
-					stringToSet.AddAttributeValueForRange( "font-weight", "bold", range.location, range.location +range.length );
+					stringToSet.AddAttributeValueForRange( "font-weight", "bold", utf8Start, utf8End );
 				}
 				if( traits & NSItalicFontMask )
 				{
-					stringToSet.AddAttributeValueForRange( "font-style", "italic", range.location, range.location +range.length );
+					stringToSet.AddAttributeValueForRange( "font-style", "italic", utf8Start, utf8End );
 				}
-			//	stringToSet.Dump();
+				//stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSForegroundColorAttributeName] )
 			{
 				NSColor*	rgbColor = [attrValue colorUsingColorSpace: NSColorSpace.genericRGBColorSpace];
 				NSString*	colorString = [NSString stringWithFormat: @"#%02X%02X%02X%02X", int(rgbColor.redComponent * 255.0), int(rgbColor.greenComponent * 255.0), int(rgbColor.blueComponent * 255.0), int(rgbColor.alphaComponent * 255.0)];
-				stringToSet.AddAttributeValueForRange( "color", colorString.UTF8String, range.location, range.location +range.length );
-			//	stringToSet.Dump();
+				stringToSet.AddAttributeValueForRange( "color", colorString.UTF8String, utf8Start, utf8End );
+				//stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSObliquenessAttributeName] && [attrValue integerValue] != 0 )
 			{
-				stringToSet.AddAttributeValueForRange( "font-style", "italic", range.location, range.location +range.length );
-			//	stringToSet.Dump();
+				stringToSet.AddAttributeValueForRange( "font-style", "italic", utf8Start, utf8End );
+				//stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSUnderlineStyleAttributeName] && [attrValue integerValue] == NSUnderlineStyleSingle )
 			{
-				stringToSet.AddAttributeValueForRange( "text-decoration", "underline", range.location, range.location +range.length );
-			//	stringToSet.Dump();
+				stringToSet.AddAttributeValueForRange( "text-decoration", "underline", utf8Start, utf8End );
+				//stringToSet.Dump();
 			}
 			else if( [currAttr isEqualToString: NSLinkAttributeName] )
 			{
-				stringToSet.AddAttributeValueForRange( "$link", [[attrValue absoluteString] UTF8String], range.location, range.location +range.length );
-			//	stringToSet.Dump();
+				stringToSet.AddAttributeValueForRange( "$link", [[attrValue absoluteString] UTF8String], utf8Start, utf8End );
+				//stringToSet.Dump();
 			}
 		}
 	}];
 
-//	stringToSet.Dump();
+	//stringToSet.Dump();
 }
 
 

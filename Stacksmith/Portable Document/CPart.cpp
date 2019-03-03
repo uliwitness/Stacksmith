@@ -375,7 +375,7 @@ CPartContents*	CPart::GetContentsOnCurrentCard()
 		return NULL;
 	bool	isBgPart = dynamic_cast<CBackground*>(mOwner) != NULL;
 	bool 	bgPartWithNonSharedText = (isBgPart && !GetSharedText());
-	if( isBgPart && !GetSharedText() )	// We're on the background layer, not on the card, and don't have shared text?
+	if( bgPartWithNonSharedText )	// We're on the background layer, not on the card, and don't have shared text?
 	{
 		contents = currCard->GetPartContentsByID( GetID(), isBgPart );
 	}

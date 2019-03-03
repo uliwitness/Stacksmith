@@ -172,6 +172,36 @@ std::string	CStyleSheet::GetCSS() const
 }
 
 
+std::string CStyleSheet::GetOrAddClassForAttributes( const char* inBaseName, const CMap<std::string>& attributes )
+{
+	for( const std::pair<std::string,CMap<std::string>>& currStyle : mStyles )
+	{
+		if( currStyle.second.size() != attributes.size() )
+			break;
+		
+		bool stylesMatch = true;
+		
+		for( const std::pair<std::string,std::string>& currAttributes : currStyle.second )
+		{
+			auto foundAttr = attributes.find( currAttributes.first );
+			if( foundAttr == attributes.end() || foundAttr->second != currAttributes.second )
+			{
+				stylesMatch = false;
+				break;
+			}
+		}
+		
+		if( stylesMatch )
+			return currStyle.first;
+	}
+	
+	std::string styleName = UniqueNameForClass( inBaseName );
+	SetStyleForClass( styleName.c_str(), attributes );
+	
+	return styleName;
+}
+
+
 std::string	CStyleSheet::UniqueNameForClass( const char* inBaseName )
 {
 	size_t			counter = 1;

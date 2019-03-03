@@ -261,7 +261,7 @@ void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocumen
 		tinyxml2::XMLElement* spanElement = inDoc->NewElement( "span" );
 		if( inlineStyles == EStyleModeSeparate )
 		{
-			styleName = styleSheet->UniqueNameForClass( "style" );
+			styleName = styleSheet->GetOrAddClassForAttributes( "style", currRun.GetAttributesWithoutInternal() );
 			spanElement->SetAttribute( "class", styleName.c_str() );
 		}
 		else
@@ -280,9 +280,6 @@ void	CAttributedString::SaveToXMLDocumentElementStyleSheet( tinyxml2::XMLDocumen
 		}
 		else
 			inElement->InsertEndChild( spanElement );
-		
-		if( inlineStyles == EStyleModeSeparate )
-			styleSheet->SetStyleForClass( styleName.c_str(), currRun.GetAttributesWithoutInternal() );
 		
 		currOffs = currRun.mEnd;
 	}

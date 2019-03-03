@@ -138,7 +138,7 @@ void	CFieldPart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 
 void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 {
-	if( mViewTextNeedsSync )
+	if( mNeedsToImportTextFromView )
 		LoadChangedTextFromView();
 
 	CVisiblePart::SavePropertiesToElement( inElement );
@@ -219,7 +219,7 @@ void	CFieldPart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 
 bool	CFieldPart::GetTextContents( std::string &outString )
 {
-	if( mViewTextNeedsSync )
+	if( mNeedsToImportTextFromView )
 		LoadChangedTextFromView();
 		
 	return CVisiblePart::GetTextContents( outString );
@@ -273,7 +273,7 @@ bool	CFieldPart::GetPropertyNamed( const char* inPropertyName, size_t byteRangeS
 
 	if( strcasecmp("textStyle", inPropertyName) == 0 )
 	{
-		if( mViewTextNeedsSync )
+		if( mNeedsToImportTextFromView )
 			LoadChangedTextFromView();
 		
 		CPartContents*	theContents = NULL;
@@ -490,7 +490,7 @@ bool	CFieldPart::SetValueForPropertyNamed( LEOValuePtr inValue, LEOContext* inCo
 	}
 	else if( strcasecmp("textStyle", inPropertyName) == 0 )
 	{
-		if( mViewTextNeedsSync )
+		if( mNeedsToImportTextFromView )
 			LoadChangedTextFromView();
 		
 		CPartContents*	theContents = NULL;
