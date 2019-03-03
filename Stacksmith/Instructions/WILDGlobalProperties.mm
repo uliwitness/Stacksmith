@@ -26,7 +26,7 @@ using namespace Carlson;
 #define TOSTRING(x)		TOSTRING2(x)
 
 
-size_t	kFirstGlobalPropertyInstruction = 0;
+LEOInstructionID	kFirstGlobalPropertyInstruction = 0;
 
 
 void	LEOSetCursorInstruction( LEOContext* inContext );

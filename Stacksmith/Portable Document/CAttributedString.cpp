@@ -642,7 +642,9 @@ size_t	CAttributedString::UTF32OffsetFromUTF8Offset( size_t inOffs ) const
 
 void	CAttributedString::Dump( size_t inIndent ) const
 {
+	std::cout << "==============================" << std::endl;
 	Dump( std::cout, inIndent );
+	std::cout << "------------------------------" << std::endl;
 }
 
 void	CAttributedString::Dump( std::ostream& stream, size_t inIndent ) const

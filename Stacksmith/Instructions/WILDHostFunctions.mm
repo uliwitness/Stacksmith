@@ -87,7 +87,7 @@ void	WILDPushMenuItemInstruction( LEOContext* inContext );
 using namespace Carlson;
 
 
-size_t	kFirstStacksmithHostFunctionInstruction = 0;
+LEOInstructionID	kFirstStacksmithHostFunctionInstruction = 0;
 
 
 void	WILDStackInstruction( LEOContext* inContext )

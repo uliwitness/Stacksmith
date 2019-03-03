@@ -733,7 +733,7 @@ struct THostCommandEntry	gStacksmithHostFunctions[] =
 
 LEOINSTR_DECL(StacksmithHostFunction,WILD_NUMBER_OF_HOST_FUNCTION_INSTRUCTIONS)
 
-size_t								kFirstStacksmithHostFunctionInstruction = 0;
+LEOInstructionID				kFirstStacksmithHostFunctionInstruction = 0;
 
 
 extern struct THostCommandEntry	gStacksmithHostFunctions[];
@@ -741,7 +741,7 @@ extern struct THostCommandEntry	gStacksmithHostFunctions[];
 
 LEOINSTR_DECL(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 
-size_t						kFirstStacksmithHostCommandInstruction = 0;
+LEOInstructionID				kFirstStacksmithHostCommandInstruction = 0;
 
 
 extern struct THostCommandEntry	gStacksmithHostCommands[];

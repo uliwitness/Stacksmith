@@ -63,7 +63,7 @@ enum
 
 LEOINSTR_DECL(StacksmithHostCommand,WILD_NUMBER_OF_HOST_COMMAND_INSTRUCTIONS)
 
-extern size_t						kFirstStacksmithHostCommandInstruction;
+extern LEOInstructionID				kFirstStacksmithHostCommandInstruction;
 
 
 extern struct THostCommandEntry	gStacksmithHostCommands[];

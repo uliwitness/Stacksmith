@@ -55,7 +55,7 @@ enum
 
 LEOINSTR_DECL(GlobalProperty,LEO_NUMBER_OF_GLOBAL_PROPERTY_INSTRUCTIONS)
 
-extern size_t						kFirstGlobalPropertyInstruction;
+extern LEOInstructionID				kFirstGlobalPropertyInstruction;
 
 
 extern struct TGlobalPropertyEntry	gHostGlobalProperties[];

@@ -56,6 +56,8 @@
 		55039F61136B52C80082E32E /* brush31.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F41136B52C80082E32E /* brush31.png */; };
 		55039F62136B52C80082E32E /* brush32.png in Resources */ = {isa = PBXBuildFile; fileRef = 55039F42136B52C80082E32E /* brush32.png */; };
 		55039FC4136D5CCF0082E32E /* UlisBresenham.c in Sources */ = {isa = PBXBuildFile; fileRef = 55039FAE136D5CCF0082E32E /* UlisBresenham.c */; };
+		5506AED3222BD6DD009C38B0 /* AnsiStrings.c in Sources */ = {isa = PBXBuildFile; fileRef = 5506AEC3222BD6DC009C38B0 /* AnsiStrings.c */; };
+		5506AED4222BD6DD009C38B0 /* AnsiFiles.c in Sources */ = {isa = PBXBuildFile; fileRef = 5506AED0222BD6DC009C38B0 /* AnsiFiles.c */; };
 		550AB88D1CEF935800338587 /* CMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 550AB88B1CEF935800338587 /* CMenu.cpp */; };
 		551583D618C37C8200DB3431 /* WILDTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583D518C37C8200DB3431 /* WILDTextView.mm */; };
 		551583DD18C3826100DB3431 /* WILDTableView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 551583DC18C3826100DB3431 /* WILDTableView.mm */; };
@@ -702,6 +704,10 @@
 		55039F42136B52C80082E32E /* brush32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brush32.png; path = Resources/brush32.png; sourceTree = "<group>"; };
 		55039FAD136D5CCF0082E32E /* UlisBresenham.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UlisBresenham.h; path = ../UKPaintView/UlisBresenham.h; sourceTree = "<group>"; };
 		55039FAE136D5CCF0082E32E /* UlisBresenham.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = UlisBresenham.c; path = ../UKPaintView/UlisBresenham.c; sourceTree = "<group>"; };
+		5506AEC3222BD6DC009C38B0 /* AnsiStrings.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AnsiStrings.c; path = ../../Leonie/macosx/AnsiStrings.c; sourceTree = "<group>"; };
+		5506AED0222BD6DC009C38B0 /* AnsiFiles.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AnsiFiles.c; path = ../../Leonie/macosx/AnsiFiles.c; sourceTree = "<group>"; };
+		5506AED1222BD6DD009C38B0 /* AnsiFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnsiFiles.h; path = ../../Leonie/macosx/AnsiFiles.h; sourceTree = "<group>"; };
+		5506AED2222BD6DD009C38B0 /* AnsiStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnsiStrings.h; path = ../../Leonie/macosx/AnsiStrings.h; sourceTree = "<group>"; };
 		550AB88B1CEF935800338587 /* CMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMenu.cpp; path = "Portable Document/CMenu.cpp"; sourceTree = "<group>"; };
 		550AB88C1CEF935800338587 /* CMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMenu.h; path = "Portable Document/CMenu.h"; sourceTree = "<group>"; };
 		551583D418C37C8200DB3431 /* WILDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTextView.h; path = Platforms/Mac/WILDTextView.h; sourceTree = "<group>"; };
@@ -1721,6 +1727,10 @@
 				55F2C0B12222C198006E3BAA /* LEOFileInstructionsGeneric.cpp */,
 				55F2C0B52222C329006E3BAA /* fake_filesystem.cpp */,
 				55F2C0B42222C328006E3BAA /* fake_filesystem.hpp */,
+				5506AED0222BD6DC009C38B0 /* AnsiFiles.c */,
+				5506AED1222BD6DD009C38B0 /* AnsiFiles.h */,
+				5506AEC3222BD6DC009C38B0 /* AnsiStrings.c */,
+				5506AED2222BD6DD009C38B0 /* AnsiStrings.h */,
 			);
 			name = Leonie;
 			sourceTree = "<group>";
@@ -2653,7 +2663,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${TARGET_BUILD_DIR}/${PRODUCT_NAME}";
+			shellScript = "#${TARGET_BUILD_DIR}/${PRODUCT_NAME}\n";
 			showEnvVarsInLog = 0;
 		};
 		55E23BFE133FABBB00E6B444 /* BuildVersionHeader */ = {
@@ -2748,6 +2758,7 @@
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				55CD60F018779641002450E2 /* CParseErrorCommandNode.cpp in Sources */,
 				559BA9D518B15EDD00760273 /* CMacScriptableObjectBase.mm in Sources */,
+				5506AED3222BD6DD009C38B0 /* AnsiStrings.c in Sources */,
 				55405BD418A59D06001D3C99 /* WILDMoviePlayerInfoViewController.mm in Sources */,
 				55D3E5A01EA1503E002EF547 /* CPaintEngineRectTool.cpp in Sources */,
 				552386D11883EAA300D7FAB3 /* CWebBrowserPartMac.mm in Sources */,
@@ -2804,6 +2815,7 @@
 				553C46F113577334000219FA /* CToken.cpp in Sources */,
 				553C46F213577334000219FA /* CParser.cpp in Sources */,
 				553C46F313577334000219FA /* CParseTree.cpp in Sources */,
+				5506AED4222BD6DD009C38B0 /* AnsiFiles.c in Sources */,
 				552386A71880D72E00D7FAB3 /* ULIURLHandlingApplication.m in Sources */,
 				559BA9B318AE90AE00760273 /* WILDLayerInfoViewController.mm in Sources */,
 				55CD60AF1874FE7D002450E2 /* CTimerPart.cpp in Sources */,

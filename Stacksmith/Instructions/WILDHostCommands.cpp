@@ -64,7 +64,7 @@ void	WILDStopRecordingSoundInstruction( LEOContext* inContext );
 void	WILDInsertScriptInstruction( LEOContext* inContext );
 
 
-size_t	kFirstStacksmithHostCommandInstruction = 0;
+LEOInstructionID	kFirstStacksmithHostCommandInstruction = 0;
 
 
 /*!
