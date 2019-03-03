@@ -69,6 +69,30 @@ public:
 
 	virtual void		Trigger();
 	
+	virtual void		SetTextFont( std::string inName )
+	{
+		CButtonPart::SetTextFont( inName );
+		
+		NSFont*	theFont = [GetCocoaAttributesForPart() objectForKey: NSFontAttributeName];
+		[mView setFont: theFont];
+	}
+
+	virtual void		SetTextSize( int s )
+	{
+		CButtonPart::SetTextSize( s );
+		
+		NSFont*	theFont = [GetCocoaAttributesForPart() objectForKey: NSFontAttributeName];
+		[mView setFont: theFont];
+	}
+	
+	virtual void		SetTextStyle( TPartTextStyle s )
+	{
+		CButtonPart::SetTextStyle( s );
+		
+		NSFont*	theFont = [GetCocoaAttributesForPart() objectForKey: NSFontAttributeName];
+		[mView setFont: theFont];
+	}
+
 protected:
 	~CButtonPartMac()	{ DestroyView(); };
 	

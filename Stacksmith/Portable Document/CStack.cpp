@@ -776,6 +776,25 @@ void	CStack::SetPeeking( bool inState )
 }
 
 
+void	CStack::ForEachSelectedPart(std::function<void(CPart*)> callback)
+{
+	CCard *currentCard = GetCurrentCard();
+	if( !currentCard )
+		return;
+	
+	if( !GetEditingBackground() )
+	{
+		currentCard->ForEachSelectedPart(callback);
+	}
+
+	CBackground *currentBackground = currentCard->GetBackground();
+	if( currentBackground )
+	{
+		currentBackground->ForEachSelectedPart(callback);
+	}
+}
+
+
 void	CStack::DeselectAllObjectsOnCard()
 {
 	CCard	*	theCard = GetCurrentCard();

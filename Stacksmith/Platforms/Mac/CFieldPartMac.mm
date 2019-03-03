@@ -565,11 +565,12 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 	}
 	else
 	{
+		NSDictionary* attrs = GetCocoaAttributesForPart();
 		CPartContents*	contents = GetContentsOnCurrentCard();
 		if( contents )
 		{
 			CAttributedString&		cppstr = contents->GetAttributedText();
-			NSAttributedString*		attrStr = GetCocoaAttributedString( cppstr, GetCocoaAttributesForPart() );
+			NSAttributedString*		attrStr = GetCocoaAttributedString( cppstr, attrs );
 			bool					oldRTF = cppstr.GetString().find("{\\rtf1\\ansi\\") == 0;
 			if( oldRTF )	// +++ Remove before shipping, this is to import old Stacksmith beta styles.
 			{
@@ -586,6 +587,7 @@ void	CFieldPartMac::CreateViewIn( NSView* inSuperView )
 			[mTextView setString: @""];
 		[mTextView setEditable: (!GetLockText() && GetEnabled()) || GetStack()->GetTool() == EEditTextTool];
 		[mTextView setSelectable: !GetLockText() || GetStack()->GetTool() == EEditTextTool];
+		[mTextView setTypingAttributes: attrs ?: @{}];
 	}
 	mMacDelegate.dontSendSelectionChange = NO;
 	if( mView )

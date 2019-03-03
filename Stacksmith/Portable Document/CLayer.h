@@ -106,6 +106,7 @@ public:
 	virtual void	ToolChangedFrom( TTool inOldTool );
 	virtual void	DeselectAllItems();
 	virtual void	SelectAllItems();
+	void			ForEachSelectedPart(std::function<void(CPart*)> callback);
 	
 	virtual void	CorrectRectOfPart( CPart* inMovedPart, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );	// addGuidelineBlock gets called to create guidelines.
 	void			CorrectRectOfPart( CPart* inMovedPart, std::vector<CPartRef> inEligibleParts, THitPart partsToCorrect, long long *ioLeft, long long *ioTop, long long *ioRight, long long *ioBottom, std::function<void(long long inGuidelineCoord,TGuidelineCallbackAction action)> addGuidelineBlock );

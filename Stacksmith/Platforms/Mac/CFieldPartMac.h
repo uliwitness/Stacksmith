@@ -81,6 +81,16 @@ public:
 	virtual void		OpenScriptEditorAndShowLine( size_t lineIndex )	{ CMacPartBase::OpenScriptEditorAndShowLine(lineIndex); };
 	virtual void		OpenContentsEditor()	{ CMacPartBase::OpenContentsEditor(); };
 	
+	virtual void		SetTextFont( std::string inName )
+	{
+		CFieldPart::SetTextFont( inName );
+		
+		if( mNeedsToImportTextFromView )
+			LoadChangedTextFromView();
+		
+		LoadChangedTextStylesIntoView();
+	}
+	
 protected:
 	~CFieldPartMac()	{ DestroyView(); };
 

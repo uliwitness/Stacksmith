@@ -675,9 +675,21 @@ void	CLayer::SelectAllItems()
 {
 	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
 	{
-		if( (*currPart)->IsSelected() )
+		if( !(*currPart)->IsSelected() )
 		{
 			(*currPart)->SetSelected(true);
+		}
+	}
+}
+
+
+void	CLayer::ForEachSelectedPart(std::function<void(CPart*)> callback)
+{
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); currPart++ )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			callback(*currPart);
 		}
 	}
 }

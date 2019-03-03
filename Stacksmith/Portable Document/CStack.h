@@ -105,6 +105,8 @@ public:
 	virtual void	SetCardHeight( LEOInteger n )			{ mCardHeight = n; IncrementChangeCount(); };
 	virtual void	StackRectDidChangeTo( LEOInteger l, LEOInteger t, LEOInteger r, LEOInteger b ) { mCardLeft = l; mCardTop = t; mCardWidth = r - l; mCardHeight = b - t; IncrementChangeCount(); };
 	
+	void			ForEachSelectedPart(std::function<void(CPart*)> callback);
+	
 	virtual void	SetPeeking( bool inState );
 	virtual bool	GetPeeking()							{ return mPeeking; };
 	virtual void	SetEditingBackground( bool inState )	{ mEditingBackground = inState; };

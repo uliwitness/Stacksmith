@@ -1724,25 +1724,21 @@ using namespace Carlson;
 	CStack* theStack = [self stackBeingEdited];
 	if( CStack::GetMainStack() == theStack )
 	{
-		CLayer		*	owner = theStack->GetCurrentLayer();
-		CMacPartBase*	currMacPart = NULL;
-		size_t			numParts = owner->GetNumParts();
-		for( size_t x = 0; x < numParts; x++ )
-		{
-			CPart*		currPart = owner->GetPart( x );
-			currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-			if( currMacPart && currPart->IsSelected() )
-			{
-				NSMutableDictionary*	oldAttrs = [currMacPart->GetCocoaAttributesForPart() mutableCopy];
-				NSFont*					theFont = [oldAttrs objectForKey: NSFontAttributeName];
-				if( theFont )
-				{
-					[oldAttrs setObject: [sender convertFont: theFont] forKey: NSFontAttributeName];
-					currMacPart->SetCocoaAttributesForPart( oldAttrs );
-				}
-				[oldAttrs release];
-			}
-		}
+		theStack->ForEachSelectedPart( [sender](CPart * currPart)
+		  {
+			  CMacPartBase*	currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+			  if( currMacPart )
+			  {
+				  NSMutableDictionary*	oldAttrs = [currMacPart->GetCocoaAttributesForPart() mutableCopy];
+				  NSFont*				theFont = [oldAttrs objectForKey: NSFontAttributeName];
+				  if( theFont )
+				  {
+					  [oldAttrs setObject: [sender convertFont: theFont] forKey: NSFontAttributeName];
+					  currMacPart->SetCocoaAttributesForPart( oldAttrs );
+				  }
+				  [oldAttrs release];
+			  }
+		  } );
 	}
 }
 
@@ -1753,19 +1749,15 @@ using namespace Carlson;
 	CStack* theStack = [self stackBeingEdited];
 	if( CStack::GetMainStack() == theStack )
 	{
-		CLayer		*	owner = theStack->GetCurrentLayer();
-		CMacPartBase*	currMacPart = NULL;
-		size_t			numParts = owner->GetNumParts();
-		for( size_t x = 0; x < numParts; x++ )
-		{
-			CPart*		currPart = owner->GetPart( x );
-			currMacPart = dynamic_cast<CMacPartBase*>(currPart);
-			if( currMacPart && currPart->IsSelected() )
-			{
-				NSDictionary*	oldAttrs = currMacPart->GetCocoaAttributesForPart();
-				currMacPart->SetCocoaAttributesForPart( [sender convertAttributes: oldAttrs] );
-			}
-		}
+		theStack->ForEachSelectedPart( [sender](CPart * currPart)
+									  {
+										  CMacPartBase*	currMacPart = dynamic_cast<CMacPartBase*>(currPart);
+										  if( currMacPart )
+										  {
+											  NSDictionary*	oldAttrs = currMacPart->GetCocoaAttributesForPart();
+											  currMacPart->SetCocoaAttributesForPart( [sender convertAttributes: oldAttrs] );
+										  }
+									  } );
 	}
 }
 
