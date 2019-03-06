@@ -1,9 +1,5 @@
 #!/bin/bash
 
-source "`dirname $0`/nightly_build.command"
-
-echo "$(tput setaf 6)$(tput bold)===== Creating Release =====$(tput sgr0)"
-
 OWNER="uliwitness"
 REPO="Stacksmith"
 TOKEN=`security 2>&1 >/dev/null find-generic-password -ga GithubStacksmithUploadToken | cut -f2 -d'"'`
@@ -33,15 +29,10 @@ DESCRIPTION=$(xmllint --xpath '//channel/item/description/text()' "$RSS_PATH" | 
 DESCRIPTION="${DESCRIPTION//<h3>/### }"
 DESCRIPTION="${DESCRIPTION//<\/h3>/<br/>}"
 DESCRIPTION=$(echo "$DESCRIPTION" | textutil -format html -convert txt -stdin -stdout)
+DESCRIPTION="${DESCRIPTION//•/-}"
 DESCRIPTION="${DESCRIPTION//	/ }"
 DESCRIPTION="${DESCRIPTION//\"/\\\"}"
 DESCRIPTION=$(echo -e "$DESCRIPTION" | sed -e :a -e '$!N;s/\n/\\n/;ta')
-
-#echo $VERSION_TAG
-#echo "$DESCRIPTION"
-#echo $ARCHIVE_PATH
-#echo $TOKEN
-#exit 1
 
 ## Make a draft release json with a markdown body
 release='"tag_name": "v'"$VERSION_TAG"'", "target_commitish": "master", "name": "Stacksmith '"$VERSION"'", '
@@ -61,6 +52,8 @@ upload=$(echo $succ | grep upload_url)
 if [[ $? -eq 0 ]]; then
 	echo Release created.
 else
+	echo "$succ"
+
 	echo Error creating release!
 	exit 1
 fi
