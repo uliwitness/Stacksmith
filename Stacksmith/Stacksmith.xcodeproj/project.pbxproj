@@ -3199,7 +3199,6 @@
 				INFOPLIST_PREFIX_HEADER = StacksmithVersion.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thevoidsoftware.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Stacksmith;
 			};
@@ -3244,7 +3243,6 @@
 				INFOPLIST_PREFIX_HEADER = StacksmithVersion.h;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thevoidsoftware.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Stacksmith;
 			};
