@@ -524,6 +524,7 @@ void	WILDDebugCheckpointInstruction( LEOContext* inContext )
 {
 	LEOInstruction	*	instr = inContext->currentInstruction;
 	
+	LEOInitRemoteDebugger( NULL );	// Re-launch debugger if it's been quit in the meantime.
 	LEORemoteDebuggerAddBreakpoint( instr );			// Ensure debugger knows to stop here.
 	LEORemoteDebuggerPreInstructionProc( inContext );	// Trigger debugger.
 	LEORemoteDebuggerRemoveBreakpoint( instr );			// Clean up after debugger.
@@ -1237,8 +1238,7 @@ void	WILDStartRecordingSoundInstruction( LEOContext* inContext )
 }
 
 /*!
-	Implements the 'start recording sound' command. The first parameter must be a
-	string, the name to give the newly recorded sound.
+	Implements the 'stop recording sound' command.
 	
 	(WILD_STOP_RECORDING_SOUND_INSTR)
 */
