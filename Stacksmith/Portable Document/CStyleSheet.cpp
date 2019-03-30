@@ -174,14 +174,14 @@ std::string	CStyleSheet::GetCSS() const
 
 std::string CStyleSheet::GetOrAddClassForAttributes( const char* inBaseName, const CMap<std::string>& attributes )
 {
-	for( const std::pair<std::string,CMap<std::string>>& currStyle : mStyles )
+	for( const auto& currStyle : mStyles )
 	{
 		if( currStyle.second.size() != attributes.size() )
 			break;
 		
 		bool stylesMatch = true;
 		
-		for( const std::pair<std::string,std::string>& currAttributes : currStyle.second )
+		for( const auto& currAttributes : currStyle.second )
 		{
 			auto foundAttr = attributes.find( currAttributes.first );
 			if( foundAttr == attributes.end() || foundAttr->second != currAttributes.second )
