@@ -59,25 +59,27 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	NSString * message;
 	NSInteger line;
+	TMessageType type;
 }
 
 @property (readonly) NSInteger line;
 @property (readonly) NSString * message;
 @property NSRect frame;
 
--(id) initWithMessage: (NSString *)inMessage line: (NSInteger)inLine;
+-(id) initWithMessage: (NSString *)inMessage type: (TMessageType)inType line: (NSInteger)inLine;
 
 @end
 
 @implementation WILDScriptEditorRulerMessage
 
--(id) initWithMessage: (NSString *)inMessage line: (NSInteger)inLine
+-(id) initWithMessage: (NSString *)inMessage type: (TMessageType)inType line: (NSInteger)inLine
 {
 	self = [super init];
 	if( self )
 	{
 		message = [inMessage copy];
 		line = inLine;
+		type = inType;
 	}
 	return self;
 }
@@ -106,6 +108,12 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 -(NSString *) description
 {
 	return message;
+}
+
+
+-(TMessageType) type
+{
+	return type;
 }
 
 @end
@@ -263,8 +271,11 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 -(void)	drawRect: (NSRect)inFrame
 {
-	[NSColor.whiteColor set];
+	[NSColor.windowBackgroundColor set];
 	[NSBezierPath fillRect: self.bounds];
+	[NSColor.separatorColor set];
+	[NSBezierPath strokeLineFromPoint: NSMakePoint(NSMaxX(self.bounds), NSMinY(self.bounds)) toPoint: NSMakePoint(NSMaxX(self.bounds), NSMaxY(self.bounds))];
+	
 	NSRect			theBox = [self bounds];
 	NSString	*	string = targetView.string;
 	
@@ -294,13 +305,54 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	{
 		NSRect		checkpointBox = msg.frame;
 		
-		NSBezierPath * triangle = [NSBezierPath bezierPath];
-		[triangle moveToPoint: NSMakePoint(NSMidX(checkpointBox), NSMinY(checkpointBox))];
-		[triangle lineToPoint: NSMakePoint(NSMaxX(checkpointBox), NSMaxY(checkpointBox))];
-		[triangle lineToPoint: NSMakePoint(NSMinX(checkpointBox), NSMaxY(checkpointBox))];
-		[triangle lineToPoint: NSMakePoint(NSMidX(checkpointBox), NSMinY(checkpointBox))];
-		[NSColor.redColor set];
-		[triangle fill];
+		if( msg.type == EMessageTypeError )
+		{
+			CGFloat third = floor(checkpointBox.size.height / 3);
+			
+			NSBezierPath * stopSign = [NSBezierPath bezierPath];
+			[stopSign moveToPoint: NSMakePoint(NSMinX(checkpointBox), NSMinY(checkpointBox) + third)];
+			[stopSign lineToPoint: NSMakePoint(NSMinX(checkpointBox) + third, NSMinY(checkpointBox))];
+			[stopSign lineToPoint: NSMakePoint(NSMaxX(checkpointBox) - third, NSMinY(checkpointBox))];
+			[stopSign lineToPoint: NSMakePoint(NSMaxX(checkpointBox), NSMinY(checkpointBox) + third)];
+			[stopSign lineToPoint: NSMakePoint(NSMaxX(checkpointBox), NSMaxY(checkpointBox) - third)];
+			[stopSign lineToPoint: NSMakePoint(NSMaxX(checkpointBox) - third, NSMaxY(checkpointBox))];
+			[stopSign lineToPoint: NSMakePoint(NSMinX(checkpointBox) + third, NSMaxY(checkpointBox))];
+			[stopSign lineToPoint: NSMakePoint(NSMinX(checkpointBox), NSMaxY(checkpointBox) - third)];
+			[stopSign lineToPoint: NSMakePoint(NSMinX(checkpointBox), NSMinY(checkpointBox) + third)];
+			[[NSColor colorWithRed: 1.0 green: 0.0 blue: 0.0 alpha: 0.3] set];
+			[stopSign fill];
+			[[NSColor colorWithRed: 1.0 green: 0.0 blue: 0.0 alpha: 1.0] set];
+			[stopSign stroke];
+		}
+		else if( msg.type == EMessageTypeWarning )
+		{
+			NSBezierPath * triangle = [NSBezierPath bezierPath];
+			[triangle moveToPoint: NSMakePoint(NSMidX(checkpointBox), NSMinY(checkpointBox))];
+			[triangle lineToPoint: NSMakePoint(NSMaxX(checkpointBox), NSMaxY(checkpointBox))];
+			[triangle lineToPoint: NSMakePoint(NSMinX(checkpointBox), NSMaxY(checkpointBox))];
+			[triangle lineToPoint: NSMakePoint(NSMidX(checkpointBox), NSMinY(checkpointBox))];
+			[[NSColor colorWithRed: 0.996 green: 0.800 blue: 0.400 alpha: 0.3] set];
+			[triangle fill];
+			[[NSColor colorWithRed: 0.996 green: 0.800 blue: 0.400 alpha: 1.000] set];
+			[triangle stroke];
+		}
+		else if( msg.type == EMessageTypeNote )
+		{
+			NSRect noteBox = checkpointBox;
+			noteBox.size.width = noteBox.size.height * 0.6;
+			noteBox.origin.x += floor((checkpointBox.size.width - noteBox.size.width) / 2.0);
+			[[NSColor colorWithRed: 0.060 green: 0.502 blue: 0.998 alpha: 0.3] set];
+			[NSBezierPath fillRect: noteBox];
+			[[NSColor colorWithRed: 0.060 green: 0.502 blue: 0.998 alpha: 1.000] set];
+			[NSBezierPath strokeRect: noteBox];
+		}
+		else
+		{
+			[[NSColor colorWithRed: 0.5 green: 0.5 blue: 0.6 alpha: 0.3] set];
+			[NSBezierPath fillRect: checkpointBox];
+			[[NSColor colorWithRed: 0.5 green: 0.5 blue: 0.6 alpha: 1.0] set];
+			[NSBezierPath strokeRect: checkpointBox];
+		}
 	}
 }
 
@@ -454,16 +506,22 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	size_t			errOffset = 0;
 	size_t			x = 0;
 	const char*		currErrMsg = "";
+	TMessageType	type;
 	LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( mContainer->GetScript().c_str(), mContainer->GetScript().length(), 0 );
+	size_t			lastErrorLine = SIZE_MAX;
 	NSMutableArray * messages = [NSMutableArray array];
 	for( x = 0; currErrMsg != NULL; x++ )
 	{
-		LEOParserGetNonFatalErrorMessageAtIndex( x, &currErrMsg, &theLine, &errOffset );
+		LEOParserGetNonFatalErrorMessageAtIndex( x, &currErrMsg, &theLine, &errOffset, &type );
 		if( !currErrMsg )
 			break;
-		WILDScriptEditorRulerMessage * msg = [[WILDScriptEditorRulerMessage alloc] initWithMessage: [NSString stringWithUTF8String: currErrMsg] line: theLine];
-		[messages addObject: msg];
-		[msg release];
+		if( theLine != lastErrorLine )
+		{
+			WILDScriptEditorRulerMessage * msg = [[WILDScriptEditorRulerMessage alloc] initWithMessage: [NSString stringWithUTF8String: currErrMsg] type: type line: theLine];
+			[messages addObject: msg];
+			[msg release];
+			lastErrorLine = theLine;
+		}
 	}
 	[mTextBreakpointsRulerView setMessages: messages];
 	if( parseTree )

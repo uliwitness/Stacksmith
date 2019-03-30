@@ -978,6 +978,7 @@ int main(int argc, const char * argv[])
 	{
 		const char*	errMsg = NULL;
 		size_t		errLine = 0, errOffset = 0;
+		TMessageType type = EMessageTypeInvalid;
 		
 		const char*scriptOne = "on mouseUp\n\tput card field 1 into theArray\n\tset the currentButton of theArray to the short name of me\n\tput theArray into card field 1\nend mouseUp";
 		const char*resultOne = "Command mouseUp\n{\n	# LINE 2\n	Command \"Put\"\n	{\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n			\"\"\n		}\n		localVar( var_thearray )\n	}\n	# LINE 3\n	Command \"Put\"\n	{\n		Property \"short name\"\n		{\n			Operator Call \"LEONoOpInstruction\"\n			{\n			}\n		}\n		Property \"currentbutton\"\n		{\n			localVar( var_thearray )\n		}\n	}\n	# LINE 4\n	Command \"Put\"\n	{\n		localVar( var_thearray )\n		Operator Call \"WILDCardFieldInstruction\"\n		{\n			\"\"\n			int( 1 )\n			\"\"\n		}\n	}\n}\n";
@@ -985,7 +986,7 @@ int main(int argc, const char * argv[])
 		std::stringstream	sstream;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream, 0 );
 		WILDTest( "Test a few object descriptors", sstream.str().c_str(), resultOne );
-		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset );
+		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset, &type );
 		WILDTest( "Test a few object descriptors (2)", errMsg, NULL );
 		LEOCleanUpParseTree(tree);
 
@@ -995,7 +996,7 @@ int main(int argc, const char * argv[])
 		std::stringstream	sstream2;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream2, 0 );
 		WILDTest( "Test conditionals parsing", sstream2.str().c_str(), resultTwo );
-		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset );
+		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset, &type );
 		WILDTest( "Test conditionals parsing (2)", errMsg, NULL );
 		LEOCleanUpParseTree(tree);
 
@@ -1005,7 +1006,7 @@ int main(int argc, const char * argv[])
 		std::stringstream	sstream3;
 		((Carlson::CParseTree*)tree)->DebugPrint( sstream3, 0 );
 		WILDTest( "Test conditionals after download parsing", sstream3.str().c_str(), result3 );
-		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset );
+		LEOParserGetNonFatalErrorMessageAtIndex( 0, &errMsg, &errLine, &errOffset, &type );
 		WILDTest( "Test conditionals after download parsing (2)", errMsg, NULL );
 		LEOCleanUpParseTree(tree);
 	}
