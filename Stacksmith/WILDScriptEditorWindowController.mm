@@ -55,10 +55,68 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 
 
 
+@interface WILDScriptEditorRulerMessage : NSObject
+{
+	NSString * message;
+	NSInteger line;
+}
+
+@property (readonly) NSInteger line;
+@property (readonly) NSString * message;
+@property NSRect frame;
+
+-(id) initWithMessage: (NSString *)inMessage line: (NSInteger)inLine;
+
+@end
+
+@implementation WILDScriptEditorRulerMessage
+
+-(id) initWithMessage: (NSString *)inMessage line: (NSInteger)inLine
+{
+	self = [super init];
+	if( self )
+	{
+		message = [inMessage copy];
+		line = inLine;
+	}
+	return self;
+}
+
+
+-(void) dealloc
+{
+	DESTROY_DEALLOC(message);
+	
+	[super dealloc];
+}
+
+
+-(NSInteger) line
+{
+	return line;
+}
+
+
+-(NSString *) message
+{
+	return message;
+}
+
+
+-(NSString *) description
+{
+	return message;
+}
+
+@end
+
+
+
 @interface WILDScriptEditorRulerView : NSRulerView
 {
 	NSTextView			*	targetView;
 	NSMutableIndexSet	*	selectedLines;
+	NSMutableArray		*	messages;
 }
 
 @property (copy,nonatomic) NSIndexSet	*	selectedLines;
@@ -74,6 +132,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	{
 		targetView = inTargetView;
 		selectedLines = [[NSMutableIndexSet alloc] init];
+		messages = [[NSMutableArray alloc] init];
 		
 		#if REMOTE_DEBUGGER
 		[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver: self selector: @selector(debuggerMayHaveLaunchedNotification:) name: NSWorkspaceDidLaunchApplicationNotification object: [NSWorkspace sharedWorkspace]];
@@ -92,6 +151,9 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	DESTROY_DEALLOC(selectedLines);
 	targetView = nil;
 	
+	DESTROY_DEALLOC(messages);
+	messages = nil;
+
 	[super dealloc];
 }
 
@@ -121,6 +183,69 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	selectedLines = [inSelectedLines mutableCopy];
 	[self didChangeValueForKey: PROPERTY(selectedLines)];
 	[self setNeedsDisplay: YES];
+}
+
+
+-(NSArray *)	messages
+{
+	return messages;
+}
+
+
+-(void)	setMessages: (NSArray *)inMessages
+{
+	[self willChangeValueForKey: PROPERTY(messages)];
+	DESTROY(messages);
+	messages = [inMessages mutableCopy];
+	[self didChangeValueForKey: PROPERTY(messages)];
+	[self updateMessagePositions];
+	[self setNeedsDisplay: YES];
+}
+
+
+-(void) setFrameSize: (NSSize)newSize
+{
+	[super setFrameSize: newSize];
+	
+	[self updateMessagePositions];
+}
+
+
+-(void) setFrame: (NSRect)box
+{
+	[super setFrame: box];
+	
+	[self updateMessagePositions];
+}
+
+
+-(void) updateMessagePositions
+{
+	NSRect			theBox = [self bounds];
+	NSString	*	string = targetView.string;
+	
+	[self removeAllToolTips];
+	
+	for( WILDScriptEditorRulerMessage * msg in messages )
+	{
+		NSUInteger numberOfLines = 1, index = 0;
+		NSUInteger	currIndex = msg.line;
+		
+		for( ; numberOfLines < currIndex; numberOfLines++ )
+			index = NSMaxRange([string lineRangeForRange:NSMakeRange(index, 0)]);
+		
+		NSUInteger	theGlyphIdx = [targetView.layoutManager glyphIndexForCharacterAtIndex: index];
+		NSRange		effectiveRange = { 0, 0 };
+		NSRect		lineFragmentBox = [targetView.layoutManager lineFragmentRectForGlyphAtIndex:theGlyphIdx effectiveRange: &effectiveRange];
+		NSRect		checkpointBox = { NSZeroPoint, { 8, 8 } };
+		
+		checkpointBox.origin.y = lineFragmentBox.origin.y + truncf((lineFragmentBox.size.height -checkpointBox.size.height) /2) -self.scrollView.documentVisibleRect.origin.y;
+		checkpointBox.origin.x = truncf((theBox.size.width -checkpointBox.size.width) /2);
+		
+		msg.frame = checkpointBox;
+		
+		[self addToolTipRect: checkpointBox owner: msg userData: NULL];
+	}
 }
 
 
@@ -163,6 +288,19 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 		[[NSBezierPath bezierPathWithOvalInRect: checkpointBox] fill];
 		
 		currIndex = [selectedLines indexGreaterThanIndex: currIndex];
+	}
+	
+	for( WILDScriptEditorRulerMessage * msg in messages )
+	{
+		NSRect		checkpointBox = msg.frame;
+		
+		NSBezierPath * triangle = [NSBezierPath bezierPath];
+		[triangle moveToPoint: NSMakePoint(NSMidX(checkpointBox), NSMinY(checkpointBox))];
+		[triangle lineToPoint: NSMakePoint(NSMaxX(checkpointBox), NSMaxY(checkpointBox))];
+		[triangle lineToPoint: NSMakePoint(NSMinX(checkpointBox), NSMaxY(checkpointBox))];
+		[triangle lineToPoint: NSMakePoint(NSMidX(checkpointBox), NSMinY(checkpointBox))];
+		[NSColor.redColor set];
+		[triangle fill];
 	}
 }
 
@@ -317,13 +455,17 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	size_t			x = 0;
 	const char*		currErrMsg = "";
 	LEOParseTree*	parseTree = LEOParseTreeCreateFromUTF8Characters( mContainer->GetScript().c_str(), mContainer->GetScript().length(), 0 );
+	NSMutableArray * messages = [NSMutableArray array];
 	for( x = 0; currErrMsg != NULL; x++ )
 	{
 		LEOParserGetNonFatalErrorMessageAtIndex( x, &currErrMsg, &theLine, &errOffset );
 		if( !currErrMsg )
 			break;
-		fprintf( stderr, "Error: %s\n", currErrMsg );
+		WILDScriptEditorRulerMessage * msg = [[WILDScriptEditorRulerMessage alloc] initWithMessage: [NSString stringWithUTF8String: currErrMsg] line: theLine];
+		[messages addObject: msg];
+		[msg release];
 	}
+	[mTextBreakpointsRulerView setMessages: messages];
 	if( parseTree )
 	{
 		LEODisplayInfoTable*	displayInfo = LEODisplayInfoTableCreateForParseTree( parseTree );
@@ -695,6 +837,7 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 			mContainer->SetBreakpointLines( breakpointLines );
 			
 			#if REMOTE_DEBUGGER
+			LEOInitRemoteDebugger( NULL );
 			if( !LEOInitRemoteDebugger( NULL ) && !breakpointLines.empty() )	// Try to connect to debugger. If not able, launch it.
 			{
 				NSString	*	debuggerPath = [[NSBundle mainBundle] pathForResource: @"ForgeDebugger" ofType: @"app"];
