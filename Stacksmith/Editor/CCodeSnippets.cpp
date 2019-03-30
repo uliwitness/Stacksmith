@@ -23,7 +23,7 @@ void	CCodeSnippets::AddSectionsAndBlocksFromHandlerList( const std::vector<CAddH
 			newSection.SetName( handlerEntry.mHandlerName );
 			currSection = AddSection( newSection );
 		}
-		else
+		else if( currSection )
 		{
 			CCodeSnippetsBlockEntry newEntry;
 			newEntry.mHandlerEntry = handlerEntry;
