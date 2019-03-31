@@ -1090,7 +1090,8 @@ using namespace Carlson;
 	NSMenu*	contextMenu = [[NSMenu alloc] initWithTitle: @"Part Actions"];
 	
 	[[contextMenu addItemWithTitle: @"Get Info…" action: @selector(showPartInfoWindow:) keyEquivalent: @""] setTarget: self];
-	
+	[[contextMenu addItemWithTitle: @"Edit Script…" action: @selector(showScriptEditorWindow:) keyEquivalent: @""] setTarget: self];
+
 	[contextMenu popUpMenuPositioningItem: nil atLocation: [NSEvent mouseLocation] inView: nil];
 	
 	[contextMenu release];
@@ -1128,6 +1129,40 @@ using namespace Carlson;
 		}
 	}
 }
+
+
+-(IBAction)	showScriptEditorWindow: (id)sender
+{
+	CCard*	theCard = mStack->GetCurrentCard();
+	size_t	numParts = theCard->GetNumParts();
+	BOOL	foundOne = false;
+	
+	if( !mStack->GetEditingBackground() )
+	{
+		for( size_t x = numParts; x > 0 && !foundOne; x-- )
+		{
+			CPart*	currPart = theCard->GetPart(x -1);
+			if( currPart->IsSelected() )
+			{
+				mStack->ShowScriptEditorForObject( currPart );
+				foundOne = true;
+			}
+		}
+	}
+	
+	CBackground* theLayer = theCard->GetBackground();
+	numParts = theLayer->GetNumParts();
+	for( size_t x = numParts; x > 0 && !foundOne; x-- )
+	{
+		CPart*	currPart = theLayer->GetPart(x -1);
+		if( currPart->IsSelected() )
+		{
+			mStack->ShowScriptEditorForObject( currPart );
+			foundOne = true;
+		}
+	}
+}
+
 
 
 -(Carlson::CStackMac*)	cppStack
@@ -1327,6 +1362,20 @@ using namespace Carlson;
 }
 
 
+-(IBAction)	showProjectInfoPanel: (id)sender
+{
+	if( mCurrentPopover )
+		[mCurrentPopover close];
+	
+	WILDConcreteObjectInfoViewController * projectInfo = [[[WILDConcreteObjectInfoViewController alloc] initWithConcreteObject: mStack->GetDocument()] autorelease];
+	mCurrentPopover = [[NSPopover alloc] init];
+	[mCurrentPopover setBehavior: NSPopoverBehaviorTransient];
+	[mCurrentPopover setDelegate: self];
+	[mCurrentPopover setContentViewController: projectInfo];
+	[mCurrentPopover showRelativeToRect: [sender bounds] ofView: sender preferredEdge: NSMinYEdge];
+}
+
+
 -(IBAction)	editCardScript: (id)sender
 {
 	mStack->GetCurrentCard()->OpenScriptEditorAndShowLine(0);
@@ -1418,6 +1467,30 @@ using namespace Carlson;
 	else if( theItem.action == @selector(cut:) )
 	{
 		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->CanCopySelectedItem() && [self stackBeingEdited]->GetCurrentLayer()->CanDeleteSelectedItem() );
+	}
+	else if( theItem.action == @selector(bringToFront:) )
+	{
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->CanBringSelectedItemToFront() );
+	}
+	else if( theItem.action == @selector(bringForward:) )
+	{
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->CanBringSelectedItemForward() );
+	}
+	else if( theItem.action == @selector(sendToBack:) )
+	{
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->CanBringSelectedItemToBack() );
+	}
+	else if( theItem.action == @selector(sendBackward:) )
+	{
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->CanBringSelectedItemBackward() );
+	}
+	else if( theItem.action == @selector(showScriptEditorWindow:) )
+	{
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->GetNumSelectedParts() > 0 );
+	}
+	else if( theItem.action == @selector(showPartInfoWindow:) )
+	{
+		return( [self stackBeingEdited]->GetTool() != EBrowseTool && [self stackBeingEdited]->GetCurrentLayer()->GetNumSelectedParts() > 0 );
 	}
 	else if( theItem.action == @selector(paste:) )
 	{

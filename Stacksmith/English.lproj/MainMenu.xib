@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -218,27 +218,6 @@
                             <menuItem title="Edit Background" keyEquivalent="B" id="htT-ns-xrL">
                                 <connections>
                                     <action selector="toggleBackgroundEditMode:" target="-1" id="VGR-ch-QE5"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="IzQ-Gu-6Dp">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Edit Card Script" keyEquivalent="c" id="Pir-Jb-Juv">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="editCardScript:" target="-1" id="Krm-e3-SZO"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Edit Background Script" keyEquivalent="b" id="887-1N-AdQ">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="editBackgroundScript:" target="-1" id="3Ae-OC-pNv"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Edit Stack Script" keyEquivalent="s" id="aho-rt-67r">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="editStackScript:" target="-1" id="qRH-iP-uge"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="7ic-2j-EWC">
@@ -461,6 +440,59 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="9Mn-xT-r4T">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Get Info" keyEquivalent="I" id="1HQ-O9-Vux">
+                                <connections>
+                                    <action selector="showPartInfoWindow:" target="-1" id="1hK-qZ-bvv"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Get Card Info" id="zPI-dY-qkn">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showCardInfoPanel:" target="-1" id="lfl-Oq-PcU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Get Background Info" id="fjd-ar-Ob4">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showBackgroundInfoPanel:" target="-1" id="TXC-OV-d9s"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Get Stack Info" id="Dl0-6V-Rm7">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showStackInfoPanel:" target="-1" id="LI3-6W-5Yq"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="M1p-4Y-N1f">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Edit Script" keyEquivalent="s" id="Pir-Jb-Juv">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                <connections>
+                                    <action selector="showScriptEditorWindow:" target="-1" id="kIR-MJ-JAW"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Edit Card Script" keyEquivalent="c" id="ALs-j1-AVU">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="editCardScript:" target="-1" id="scW-5i-Dcs"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Edit Background Script" keyEquivalent="b" id="887-1N-AdQ">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="editBackgroundScript:" target="-1" id="3Ae-OC-pNv"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Edit Stack Script" keyEquivalent="s" id="aho-rt-67r">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="editStackScript:" target="-1" id="qRH-iP-uge"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ILw-uj-hcn">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="New Stack" id="z6Z-Ih-7v1">
@@ -947,11 +979,11 @@
                                     </connections>
                                 </button>
                                 <customView id="tfF-pF-teQ">
-                                    <rect key="frame" x="329" y="-1" width="158" height="39"/>
+                                    <rect key="frame" x="329" y="-1" width="191" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <button toolTip="Stack Properties" verticalHuggingPriority="750" id="wkz-0c-d3L">
-                                            <rect key="frame" x="6" y="3" width="32" height="32"/>
+                                            <rect key="frame" x="39" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="StackIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dw5-bQ-tqg" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -962,7 +994,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="Background Properties" verticalHuggingPriority="750" id="1oD-UL-G2Q">
-                                            <rect key="frame" x="40" y="3" width="32" height="32"/>
+                                            <rect key="frame" x="73" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="BackgroundIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VRJ-0D-cxa" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -973,7 +1005,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="Card Properties" verticalHuggingPriority="750" id="GPp-md-4F2">
-                                            <rect key="frame" x="73" y="3" width="32" height="32"/>
+                                            <rect key="frame" x="106" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="CardIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="P5N-PE-3zU" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -984,7 +1016,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="Edit Background" verticalHuggingPriority="750" id="J38-Wh-F6i">
-                                            <rect key="frame" x="120" y="3" width="32" height="32"/>
+                                            <rect key="frame" x="153" y="3" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="BackgroundEditIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UmE-pK-cfg" customClass="WILDToolButtonCell">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -992,6 +1024,17 @@
                                             </buttonCell>
                                             <connections>
                                                 <action selector="toggleBackgroundEditMode:" target="-1" id="Zec-OY-cgV"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Stack Properties" verticalHuggingPriority="750" id="mmw-v5-LRy">
+                                            <rect key="frame" x="4" y="3" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="StackCanvasIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jqy-WS-SrW" customClass="WILDToolButtonCell">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="showProjectInfoPanel:" target="-1" id="Nd4-v8-hPp"/>
                                             </connections>
                                         </button>
                                     </subviews>

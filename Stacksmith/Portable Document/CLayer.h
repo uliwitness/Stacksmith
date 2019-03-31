@@ -53,6 +53,7 @@ public:
 	virtual void	SetStack( CStack* inStack );
 	size_t			GetNumParts()				{ return GetPartCountOfType( NULL ); };
 	CPart*			GetPart( size_t inIndex )	{ return GetPartOfType(inIndex,NULL); };
+	size_t			GetNumSelectedParts();
 	virtual size_t	GetPartCountOfType( CPartCreatorBase* inType );
 	virtual CPart*	GetPartOfType( size_t inIndex, CPartCreatorBase* inType );
 	virtual CPart*	GetPartWithNameOfType( const std::string& inName, CPartCreatorBase* inType );
@@ -86,6 +87,10 @@ public:
 	virtual void					BringSelectedItemForward();
 	virtual void					SendSelectedItemBackward();
 	virtual void					SendSelectedItemToBack();
+	virtual bool					CanBringSelectedItemToFront();
+	virtual bool					CanBringSelectedItemForward();
+	virtual bool					CanBringSelectedItemBackward();
+	virtual bool					CanBringSelectedItemToBack();
 
 	virtual void	WakeUp();		//!< Actually activate the completely loaded layer because the user is about to use it. All OS-specific UI objects (windows, views) already exist at this point. Use this to e.g. start the insertion point of a text field flashing, or start a movie player that was playing when we quit.
 	virtual void	GoToSleep();	//!< Opposite of WakeUp().

@@ -342,6 +342,22 @@ CPart*	CLayer::GetPartWithID( ObjectID inID )
 }
 
 
+size_t	CLayer::GetNumSelectedParts()
+{
+	size_t	numSelected = 0;
+	
+	for( auto currPart = mParts.begin(); currPart != mParts.end(); ++currPart )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			++numSelected;
+		}
+	}
+	
+	return numSelected > 0;
+}
+
+
 size_t	CLayer::GetPartCountOfType( CPartCreatorBase* inType )
 {
 	if( inType == NULL )
@@ -1034,6 +1050,84 @@ void	CLayer::SendSelectedItemToBack()
 	
 	IncrementChangeCount();
 	NumberOrOrderOfPartsChanged();
+}
+
+
+bool	CLayer::CanBringSelectedItemToFront()
+{
+	size_t	numPartsToMove = 0;
+	auto lastPart = mParts.end();
+	if( mParts.begin() != mParts.end() )
+		--lastPart;
+	
+	for( auto currPart = mParts.begin(); currPart != lastPart; ++currPart )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			++numPartsToMove;
+		}
+	}
+	
+	return numPartsToMove > 0;
+}
+
+
+bool	CLayer::CanBringSelectedItemForward()
+{
+	size_t	numPartsToMove = 0;
+	auto lastPart = mParts.end();
+	if( mParts.begin() != mParts.end() )
+		--lastPart;
+	
+	for( auto currPart = mParts.begin(); currPart != lastPart; ++currPart )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			++numPartsToMove;
+		}
+	}
+	
+	return numPartsToMove > 0;
+}
+
+
+bool	CLayer::CanBringSelectedItemBackward()
+{
+	size_t	numPartsToMove = 0;
+	auto 	currPart = mParts.begin();
+	
+	if( currPart != mParts.end() )
+		++currPart;
+	
+	for( ; currPart != mParts.end(); ++currPart )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			++numPartsToMove;
+		}
+	}
+	
+	return numPartsToMove > 0;
+}
+
+
+bool	CLayer::CanBringSelectedItemToBack()
+{
+	size_t	numPartsToMove = 0;
+	auto 	currPart = mParts.begin();
+	
+	if( currPart != mParts.end() )
+		++currPart;
+	
+	for( ; currPart != mParts.end(); ++currPart )
+	{
+		if( (*currPart)->IsSelected() )
+		{
+			++numPartsToMove;
+		}
+	}
+	
+	return numPartsToMove > 0;
 }
 
 
