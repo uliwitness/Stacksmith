@@ -126,6 +126,9 @@
 		5546579F1EF8C7BD00AB920F /* UKPaintSelectTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5546573E1EF8C7BC00AB920F /* UKPaintSelectTool.tiff */; };
 		554657A01EF8C7BD00AB920F /* UKPaintShapeTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5546573F1EF8C7BC00AB920F /* UKPaintShapeTool.tiff */; };
 		554657A11EF8C7BD00AB920F /* UKPaintTextTool.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 554657401EF8C7BC00AB920F /* UKPaintTextTool.tiff */; };
+		554D839422C158A8001B8EFD /* AnsiFiles.c in Sources */ = {isa = PBXBuildFile; fileRef = 554D839022C158A8001B8EFD /* AnsiFiles.c */; };
+		554D839522C158A8001B8EFD /* AnsiStrings.c in Sources */ = {isa = PBXBuildFile; fileRef = 554D839322C158A8001B8EFD /* AnsiStrings.c */; };
+		554D839822C15BDB001B8EFD /* CFieldPartIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 554D839622C15BDB001B8EFD /* CFieldPartIOS.mm */; };
 		5558170D1EF5468B00A45CD5 /* Home.xstk in Resources */ = {isa = PBXBuildFile; fileRef = 5558170C1EF5468B00A45CD5 /* Home.xstk */; };
 		555817261EF547B900A45CD5 /* CCodeBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5558171A1EF547B900A45CD5 /* CCodeBlock.cpp */; };
 		555817271EF547B900A45CD5 /* CVariableEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5558171C1EF547B900A45CD5 /* CVariableEntry.cpp */; };
@@ -382,6 +385,12 @@
 		5546573E1EF8C7BC00AB920F /* UKPaintSelectTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintSelectTool.tiff; path = ../../../UKPaintView/UKPaintSelectTool.tiff; sourceTree = "<group>"; };
 		5546573F1EF8C7BC00AB920F /* UKPaintShapeTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintShapeTool.tiff; path = ../../../UKPaintView/UKPaintShapeTool.tiff; sourceTree = "<group>"; };
 		554657401EF8C7BC00AB920F /* UKPaintTextTool.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = UKPaintTextTool.tiff; path = ../../../UKPaintView/UKPaintTextTool.tiff; sourceTree = "<group>"; };
+		554D839022C158A8001B8EFD /* AnsiFiles.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AnsiFiles.c; sourceTree = "<group>"; };
+		554D839122C158A8001B8EFD /* AnsiStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnsiStrings.h; sourceTree = "<group>"; };
+		554D839222C158A8001B8EFD /* AnsiFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnsiFiles.h; sourceTree = "<group>"; };
+		554D839322C158A8001B8EFD /* AnsiStrings.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AnsiStrings.c; sourceTree = "<group>"; };
+		554D839622C15BDB001B8EFD /* CFieldPartIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CFieldPartIOS.mm; sourceTree = "<group>"; };
+		554D839722C15BDB001B8EFD /* CFieldPartIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFieldPartIOS.h; sourceTree = "<group>"; };
 		5558170C1EF5468B00A45CD5 /* Home.xstk */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Home.xstk; path = ../../Home.xstk; sourceTree = "<group>"; };
 		555817191EF547B900A45CD5 /* CCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CCodeBlock.h; path = /Users/uli/Programming/Stacksmith/Forge/ForgeFramework/ForgeFramework/../../CCodeBlock.h; sourceTree = "<absolute>"; };
 		5558171A1EF547B900A45CD5 /* CCodeBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = CCodeBlock.cpp; path = /Users/uli/Programming/Stacksmith/Forge/ForgeFramework/ForgeFramework/../../CCodeBlock.cpp; sourceTree = "<absolute>"; };
@@ -801,10 +810,23 @@
 			name = "Standard Resources";
 			sourceTree = "<group>";
 		};
+		554D838F22C158A8001B8EFD /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				554D839122C158A8001B8EFD /* AnsiStrings.h */,
+				554D839322C158A8001B8EFD /* AnsiStrings.c */,
+				554D839222C158A8001B8EFD /* AnsiFiles.h */,
+				554D839022C158A8001B8EFD /* AnsiFiles.c */,
+			);
+			name = ios;
+			path = ../../../Forge/Leonie/ios;
+			sourceTree = "<group>";
+		};
 		555817181EF5479100A45CD5 /* Interpreter */ = {
 			isa = PBXGroup;
 			children = (
 				5558173B1EF548C700A45CD5 /* CInterfaces */,
+				554D838F22C158A8001B8EFD /* ios */,
 				5558174A1EF548E200A45CD5 /* Leonie */,
 				5558174B1EF548F200A45CD5 /* Parse Tree */,
 				555817191EF547B900A45CD5 /* CCodeBlock.h */,
@@ -1080,6 +1102,8 @@
 				556F4FE51EF92F9400E98062 /* CIOSPartBase.mm */,
 				556F4FEC1EF9308200E98062 /* CButtonPartIOS.h */,
 				556F4FEB1EF9308200E98062 /* CButtonPartIOS.mm */,
+				554D839722C15BDB001B8EFD /* CFieldPartIOS.h */,
+				554D839622C15BDB001B8EFD /* CFieldPartIOS.mm */,
 				556F4FEF1EF934F400E98062 /* CStackIOS.h */,
 				556F4FEE1EF934F400E98062 /* CStackIOS.mm */,
 			);
@@ -1260,6 +1284,7 @@
 				5558183D1EF549DF00A45CD5 /* CLayer.cpp in Sources */,
 				555817AE1EF5495A00A45CD5 /* CPushValueCommandNode.cpp in Sources */,
 				55464D201EF6A05800AB920F /* CUndoStack.mm in Sources */,
+				554D839522C158A8001B8EFD /* AnsiStrings.c in Sources */,
 				5558185A1EF549DF00A45CD5 /* CPaintEngineRectTool.cpp in Sources */,
 				5558184E1EF549DF00A45CD5 /* CMenu.cpp in Sources */,
 				555817291EF547B900A45CD5 /* CToken.cpp in Sources */,
@@ -1319,6 +1344,7 @@
 				5558173A1EF548BB00A45CD5 /* WILDObjCCallInstructions.mm in Sources */,
 				555817B21EF5495A00A45CD5 /* CReturnCommandNode.cpp in Sources */,
 				55464D261EF86E0A00AB920F /* CScreen.mm in Sources */,
+				554D839822C15BDB001B8EFD /* CFieldPartIOS.mm in Sources */,
 				555818481EF549DF00A45CD5 /* CPicturePart.cpp in Sources */,
 				555818501EF549DF00A45CD5 /* CMessageWatcher.cpp in Sources */,
 				5558172A1EF547B900A45CD5 /* CParser.cpp in Sources */,
@@ -1358,6 +1384,7 @@
 				5558185B1EF549DF00A45CD5 /* CPaintEngineRoundRectTool.cpp in Sources */,
 				5558183E1EF549DF00A45CD5 /* CBackground.cpp in Sources */,
 				55464D3B1EF8751300AB920F /* CSound.mm in Sources */,
+				554D839422C158A8001B8EFD /* AnsiFiles.c in Sources */,
 				5558184A1EF549DF00A45CD5 /* CPartContents.cpp in Sources */,
 				555817671EF5490600A45CD5 /* LEOInstructions.c in Sources */,
 				555817C31EF5495A00A45CD5 /* CDownloadCommandNode.cpp in Sources */,

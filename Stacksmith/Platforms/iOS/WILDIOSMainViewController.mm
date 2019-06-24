@@ -19,6 +19,7 @@
 #include "CVariableWatcher.h"
 #include "CDocumentIOS.h"
 #include "CButtonPartIOS.h"
+#include "CFieldPartIOS.h"
 #include "CAlert.h"
 #include <sstream>
 
@@ -172,7 +173,8 @@ void	WILDScheduleResumeOfScript( void )
 	
 	// Register Mac-specific variants of our card/background part classes:
 	CPart::RegisterPartCreator( new CPartCreator<CButtonPartIOS>("button") );
-	
+	CPart::RegisterPartCreator( new CPartCreator<CFieldPartIOS>("field") );
+
 	CMessageBox::SetSharedInstance( new CMessageBox );
 	CMessageWatcher::SetSharedInstance( new CMessageWatcher );
 	CVariableWatcher::SetSharedInstance( new CVariableWatcher );
