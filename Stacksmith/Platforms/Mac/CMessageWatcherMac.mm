@@ -47,7 +47,9 @@ using namespace Carlson;
 
 -(id)	tableView: (NSTableView *)tableView objectValueForTableColumn: (NSTableColumn *)tableColumn row: (NSInteger)row
 {
-	return [NSString stringWithUTF8String: self.messageWatcher->GetMessageAtIndex(row).c_str()];
+	std::string msg, target;
+	self.messageWatcher->GetMessageAtIndex( row, msg, target );
+	return [[NSString stringWithUTF8String: msg.c_str()] stringByAppendingFormat: @" (%@)", [NSString stringWithUTF8String: target.c_str()]];
 }
 
 @end
@@ -71,13 +73,13 @@ CMessageWatcherMac::~CMessageWatcherMac()
 }
 
 
-void	CMessageWatcherMac::AddMessage( const std::string &inMessage )
+void	CMessageWatcherMac::AddMessage( const std::string &inMessage, const std::string &inTarget )
 {
 	NSScrollView	*sv = mMacWindowController.messageList.enclosingScrollView;
 	NSRange			visibleRows = [mMacWindowController.messageList rowsInRect: sv.documentVisibleRect];
 	BOOL	wasAtBottom = ( (visibleRows.location +visibleRows.length) == mMessages.size() );
 	
-	CMessageWatcher::AddMessage( inMessage );
+	CMessageWatcher::AddMessage( inMessage, inTarget );
 	
 	[mMacWindowController.messageList reloadData];
 	

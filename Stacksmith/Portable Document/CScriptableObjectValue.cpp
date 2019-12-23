@@ -1105,6 +1105,7 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	if( !parentStack )
 		parentStack = parentDoc->GetStack(0);
 	CScriptContextUserData	*	ud = new CScriptContextUserData( parentStack, parentDoc, this, this );
+	CScriptableObjectRef target = ud->GetTarget();
 	CScriptContextGroupUserData * gud = (CScriptContextGroupUserData *)contextGroup->userData;
 	ctx = LEOContextCreate( contextGroup, ud, CScriptContextUserData::CleanUp );
 	if( outContext )
@@ -1339,11 +1340,6 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 	
 	ctx->contextCompleted = CScriptableObject::ContextCompletedProc;
 	
-	// Send message:
-	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( contextGroup, msg );
-	if( ctx->group->messageSent )
-		ctx->group->messageSent( handlerID, ctx->group );
-
 	LEOScript*	theScript = nullptr;
 	if( !gud->mFrontScripts.empty() )
 	{
@@ -1357,6 +1353,11 @@ void	CScriptableObject::SendMessage( LEOContext** outContext, std::function<void
 		theScript = GetScriptObject([errorHandler](const char* msg,size_t line,size_t offs,CScriptableObject* obj){ errorHandler(msg,line,offs,obj,false); });
 	}
 
+	// Send message:
+	LEOHandlerID	handlerID = LEOContextGroupHandlerIDForHandlerName( contextGroup, msg );
+	if( ctx->group->messageSent )
+		ctx->group->messageSent( handlerID, ctx, ctx->group );
+	
 	if( theScript )
 	{
 		bool				wasHandled = false;

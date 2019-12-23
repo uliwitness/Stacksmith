@@ -20,6 +20,7 @@ struct CMessageWatcherEntry
 {
 	std::string		mMessage;
 	size_t			mNumOccurrences;
+	std::string		mTarget;
 };
 
 
@@ -31,9 +32,9 @@ public:
 	
 	CMessageWatcher() {};
 	
-	virtual void		AddMessage( const std::string& inMessage );
+	virtual void		AddMessage( const std::string & inMessage, const std::string & inTarget );
 	size_t				GetNumMessages()							{ return mMessages.size(); };
-	std::string			GetMessageAtIndex( size_t inIndex );
+	void				GetMessageAtIndex( size_t inIndex, std::string & outMessage, std::string & outTarget );
 	// We don't provide InitValue here because the message watcher can be referenced from many context groups.
 	
 	virtual void		SetVisible( bool n )						{};

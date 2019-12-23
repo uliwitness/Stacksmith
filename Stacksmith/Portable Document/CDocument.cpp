@@ -724,9 +724,12 @@ ObjectID	CDocument::GetUniqueIDForMenu()
 }
 
 
-static void		CDocumentMessageSent( LEOHandlerID inHandlerID, LEOContextGroup* inContext )
+static void		CDocumentMessageSent( LEOHandlerID inHandlerID, struct LEOContext * ctx, LEOContextGroup* inContext )
 {
-	CMessageWatcher::GetSharedInstance()->AddMessage( LEOContextGroupHandlerNameForHandlerID( inContext, inHandlerID ) );
+	CScriptContextUserData * ud = (CScriptContextUserData *)ctx->userData;
+	CScriptableObjectRef target = ud->GetTarget();
+	std::string targetStr = target ? target->GetObjectDescriptorString() : "<no target>";
+	CMessageWatcher::GetSharedInstance()->AddMessage( LEOContextGroupHandlerNameForHandlerID( inContext, inHandlerID ), targetStr );
 }
 
 

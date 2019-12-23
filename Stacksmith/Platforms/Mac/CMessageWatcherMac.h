@@ -37,7 +37,7 @@ public:
 	virtual bool	IsVisible()					{ return mVisible; };
 	void			UpdateVisible( bool inVis )	{ mVisible = inVis; };
 
-	virtual void	AddMessage( const std::string &inMessage );
+	virtual void	AddMessage( const std::string &inMessage, const std::string &inTarget );
 	
 protected:
 	~CMessageWatcherMac();

@@ -31,7 +31,7 @@ CMessageWatcher*	CMessageWatcher::GetSharedInstance()
 }
 
 
-void	CMessageWatcher::AddMessage( const std::string& inMessage )
+void	CMessageWatcher::AddMessage( const std::string & inMessage, const std::string & inTarget )
 {
 	if( inMessage.compare(":run") == 0 )
 		return;	// Ignore message box
@@ -39,29 +39,33 @@ void	CMessageWatcher::AddMessage( const std::string& inMessage )
 		mMessages.erase( mMessages.begin() );
 	
 	size_t	msgCount = mMessages.size();
-	if( msgCount > 0 && mMessages[msgCount-1].mMessage.compare(inMessage) == 0 )
+	if( msgCount > 0 && mMessages[msgCount-1].mMessage.compare(inMessage) == 0 && mMessages[msgCount-1].mTarget.compare(inTarget) == 0 )
 		mMessages[msgCount-1].mNumOccurrences++;
 	else
 	{
-		CMessageWatcherEntry	entry = { inMessage, 1 };
+		CMessageWatcherEntry	entry = { inMessage, 1, inTarget };
 		mMessages.push_back( entry );
 	}
 }
 
 
-std::string		CMessageWatcher::GetMessageAtIndex( size_t inIndex )
+void	CMessageWatcher::GetMessageAtIndex( size_t inIndex, std::string & outMessage, std::string & outTarget )
 {
 	CMessageWatcherEntry&	entry = mMessages[inIndex];
 	size_t	occurrences = entry.mNumOccurrences;
 	if( occurrences == 1 )
-		return entry.mMessage;
+	{
+		outMessage = entry.mMessage;
+		outTarget = entry.mTarget;
+	}
 	else
 	{
 		std::stringstream	msg;
 		msg << entry.mMessage;
 		msg << " ×";
 		msg << entry.mNumOccurrences;
-		return msg.str();
+		outMessage = msg.str();
+		outTarget = entry.mTarget;
 	}
 }
 
