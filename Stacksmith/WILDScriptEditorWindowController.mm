@@ -421,7 +421,28 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 {
 	[super awakeFromNib];
 	
-	mTextView.customSnippetPasteboardType = @"WILDCodeSnippetPBoardType";
+    // Create a toolbar containing our handler list popup etc.:
+    NSToolbar    *    editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDScriptEditorToolbar"] autorelease];
+    [editToolbar setDelegate: self];
+    [editToolbar setAllowsUserCustomization: NO];
+    [editToolbar setVisible: NO];
+    [editToolbar setDisplayMode: NSToolbarDisplayModeIconOnly];
+    [editToolbar setSizeMode: NSToolbarSizeModeSmall];
+    [self.window setToolbar: editToolbar];
+    [self.window toggleToolbarShown: self];
+
+    // Make sure we don't do smart quotes in the script editor:
+    mTextView.automaticQuoteSubstitutionEnabled = NO;
+    mTextView.automaticDashSubstitutionEnabled = NO;
+    mTextView.automaticTextReplacementEnabled = NO;
+    
+    NSNib * sectionHeaderNib = [[[NSNib alloc] initWithNibNamed: @"WILDScriptEditorCodeBlocksSectionHeader" bundle: nil] autorelease];
+    [self.codeBlocksListView registerNib: sectionHeaderNib forSupplementaryViewOfKind: NSCollectionElementKindSectionHeader withIdentifier: @"WILDScriptEditorCollectionViewSectionHeader"];
+    NSNib * theNib = [[[NSNib alloc] initWithNibNamed: @"WILDScriptEditorWindowController" bundle: nil] autorelease];
+    [self.codeBlocksListView registerNib: theNib forItemWithIdentifier: @"WILDScriptEditorCollectionViewItem"];
+    [self rebuildCodeBlocksList];
+
+    mTextView.customSnippetPasteboardType = @"WILDCodeSnippetPBoardType";
 	mTextView.customSnippetsInsertionGranularity = NSSelectByParagraph;
 	
 	// Set up a ruler view (for indicating what lines breakpoints are on and setting/removing them):
@@ -441,27 +462,6 @@ void*	kWILDScriptEditorWindowControllerKVOContext = &kWILDScriptEditorWindowCont
 	
 	// Format our script so it looks pretty:
 	[self formatText];
-	
-	// Create a toolbar containing our handler list popup etc.:
-	NSToolbar	*	editToolbar = [[[NSToolbar alloc] initWithIdentifier: @"WILDScriptEditorToolbar"] autorelease];
-	[editToolbar setDelegate: self];
-	[editToolbar setAllowsUserCustomization: NO];
-	[editToolbar setVisible: NO];
-	[editToolbar setDisplayMode: NSToolbarDisplayModeIconOnly];
-	[editToolbar setSizeMode: NSToolbarSizeModeSmall];
-	[self.window setToolbar: editToolbar];
-	[self.window toggleToolbarShown: self];
-
-	// Make sure we don't do smart quotes in the script editor:
-	mTextView.automaticQuoteSubstitutionEnabled = NO;
-	mTextView.automaticDashSubstitutionEnabled = NO;
-	mTextView.automaticTextReplacementEnabled = NO;
-	
-	NSNib * sectionHeaderNib = [[[NSNib alloc] initWithNibNamed: @"WILDScriptEditorCodeBlocksSectionHeader" bundle: nil] autorelease];
-	[self.codeBlocksListView registerNib: sectionHeaderNib forSupplementaryViewOfKind: NSCollectionElementKindSectionHeader withIdentifier: @"WILDScriptEditorCollectionViewSectionHeader"];
-	NSNib * theNib = [[[NSNib alloc] initWithNibNamed: @"WILDScriptEditorWindowController" bundle: nil] autorelease];
-	[self.codeBlocksListView registerNib: theNib forItemWithIdentifier: @"WILDScriptEditorCollectionViewItem"];
-	[self rebuildCodeBlocksList];
 }
 
 
