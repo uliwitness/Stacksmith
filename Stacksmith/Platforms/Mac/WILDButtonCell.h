@@ -16,6 +16,7 @@
 }
 
 @property (assign) BOOL 	drawAsDefault;
+@property (assign) BOOL 	ignoreInactiveAppearance;
 @property (retain) NSColor*	lineColor;
 @property (assign) CGFloat	lineWidth;
 @property (assign) CGFloat	bevelWidth;

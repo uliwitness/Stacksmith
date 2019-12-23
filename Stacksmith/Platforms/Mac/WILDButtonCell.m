@@ -54,6 +54,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 @synthesize lineWidth;
 @synthesize bevelWidth;
 @synthesize bevelAngle;
+@synthesize ignoreInactiveAppearance;
 
 -(void)	dealloc
 {
@@ -85,7 +86,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	
 	[lineColor set];
 	
-	BOOL	isActive = [[controlView window] isKeyWindow] && [self isEnabled];
+	BOOL	isActive = ([[controlView window] isKeyWindow] || ignoreInactiveAppearance) && [self isEnabled];
 	if( drawAsDefault )
 	{
 		[NSBezierPath setDefaultLineWidth: 3];

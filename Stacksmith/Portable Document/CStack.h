@@ -40,6 +40,11 @@ enum
 	EStackStyle_Last
 };
 typedef uint16_t	TStackStyle;
+	
+static inline bool TStackStyleCanBeInactive( TStackStyle style )
+{
+	return style != EStackStylePopup && style != EStackStylePalette;
+}
 
 
 class CUndoStack;

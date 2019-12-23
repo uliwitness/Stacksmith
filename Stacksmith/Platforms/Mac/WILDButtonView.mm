@@ -294,6 +294,12 @@ static void FillFirstFreeOne( const char ** a, const char ** b, const char ** c,
 	
 	if( self.window )
 	{
+		WILDButtonCell * cell = (WILDButtonCell *) self.cell;
+		if( [cell respondsToSelector: @selector(setIgnoreInactiveAppearance:)] )
+		{
+			cell.ignoreInactiveAppearance = !TStackStyleCanBeInactive(owningPart->GetStack()->GetStyle());
+		}
+		
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidChangeKeyOrMain:) name: NSWindowDidBecomeKeyNotification object: self.window];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidChangeKeyOrMain:) name: NSWindowDidResignKeyNotification object: self.window];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidChangeKeyOrMain:) name: NSWindowDidBecomeMainNotification object: self.window];
