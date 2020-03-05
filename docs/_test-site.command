@@ -5,4 +5,4 @@
 # create a new site using $ jekyll new my-awesome-site
 
 cd "`dirname $0`"
-jekyll serve --watch --open-url
+jekyll serve --watch --open-url --drafts --future

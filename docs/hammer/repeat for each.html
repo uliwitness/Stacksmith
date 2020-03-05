@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+    <head>
+        <style>.style1
+{
+	font-family: Courier;
+	font-size: 12;
+}
+.style2
+{
+	font-family: Arial;
+	font-size: 13;
+}
+
+body
+{
+    white-space: pre-wrap;
+}
+</style>
+    </head>
+    <body><span class="style1">repeat for each line theLine of myText
+	put "(" &amp; theLine &amp; ")" after myBracketedText
+end repeat
+
+repeat for each chunkType counterVariable of chunkableVariable
+	commands
+end repeat
+</span><span class="style2">
+Break up the given variable chunkableVariable into the specified chunks (byte, character, word, item, line) and then repeat the given commands for each of them, setting the counter variable given to that chunk of the chunkableVariable.
+
+</span><span class="style1">repeat for each entry theItem of myArray
+	put "," &amp;&amp; theItem after listAsText
+end repeat
+
+repeat for each entry counterVariable of arrayVariable
+	commands
+end repeat
+</span><span class="style2">
+For each array entry in the given array, run the given commands once for each of them setting the given local variable counterVariable to that array entry.
+</span></body>
+</html>

@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: Technical Overview
+permalink: /technical-overview/
 ---
 
 ## What is Stacksmith?
