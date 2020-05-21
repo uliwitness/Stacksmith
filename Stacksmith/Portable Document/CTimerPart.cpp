@@ -151,6 +151,12 @@ std::vector<CAddHandlerListEntry>	CTimerPart::GetAddHandlerList()
 {
 	std::vector<CAddHandlerListEntry>	handlers = CPart::GetAddHandlerList();
 	
+	if( mScriptObject == NULL )
+	{
+		std::cout << "No script in CTimerPart::GetAddHandlerList()";
+		return handlers;
+	}
+	
 	if( mMessage.length() == 0 )
 		SetMessage("timerTriggered");
 	
