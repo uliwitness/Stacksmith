@@ -67,7 +67,7 @@ typedef unsigned	TPartTextStyle;	// Bit field of above constants.
 class CVisiblePart : public CPart
 {
 public:
-	CVisiblePart( CLayer * inOwner ) : CPart(inOwner), mVisible(true), mEnabled(true), mFillColorRed(65535), mFillColorGreen(65535), mFillColorBlue(65535), mFillColorAlpha(65535), mLineColorRed(0), mLineColorGreen(0), mLineColorBlue(0), mLineColorAlpha(65535), mShadowColorRed(0), mShadowColorGreen(0), mShadowColorBlue(0), mShadowColorAlpha(0), mShadowOffsetWidth(0), mShadowOffsetHeight(0), mShadowBlurRadius(0), mLineWidth(1), mBevelWidth(0), mBevelAngle(0) {};
+	CVisiblePart( CLayer * inOwner ) : CPart(inOwner), mVisible(true), mEnabled(true), mFillColorRed(65535), mFillColorGreen(65535), mFillColorBlue(65535), mFillColorAlpha(65535), mLineColorRed(0), mLineColorGreen(0), mLineColorBlue(0), mLineColorAlpha(65535), mShadowColorRed(0), mShadowColorGreen(0), mShadowColorBlue(0), mShadowColorAlpha(0), mShadowOffsetWidth(0), mShadowOffsetHeight(0), mShadowBlurRadius(0), mTextColorRed(-1), mTextColorGreen(-1), mTextColorBlue(-1), mTextColorAlpha(-1), mLineWidth(1), mBevelWidth(0), mBevelAngle(0) {};
 	
 	static TPartTextAlign	GetTextAlignFromString( const char* inString );
 	static const char*		GetStringFromTextAlign( TPartTextAlign inAlign );
@@ -93,6 +93,10 @@ public:
 	int						GetShadowColorGreen()			{ return mShadowColorGreen; };
 	int						GetShadowColorBlue()			{ return mShadowColorBlue; };
 	int						GetShadowColorAlpha()			{ return mShadowColorAlpha; };
+	int						GetTextColorRed()				{ return mTextColorRed; };
+	int						GetTextColorGreen()				{ return mTextColorGreen; };
+	int						GetTextColorBlue()				{ return mTextColorBlue; };
+	int						GetTextColorAlpha()				{ return mTextColorAlpha; };
 	virtual void			SetShadowOffset( double w, double h )	{ mShadowOffsetWidth = w; mShadowOffsetHeight = h; IncrementChangeCount(); };
 	double					GetShadowOffsetWidth()			{ return mShadowOffsetWidth; };
 	double					GetShadowOffsetHeight()			{ return mShadowOffsetHeight; };
@@ -116,15 +120,11 @@ public:
 	virtual int				GetTextSize()								{ return -1; };
 	virtual TPartTextStyle	GetTextStyle()								{ return EPartTextStyle_Last; };
 	virtual TPartTextAlign	GetTextAlign()								{ return EPartTextAlign_Last; };
-	virtual int				GetTextColorRed()							{ return -1; };
-	virtual int				GetTextColorGreen()							{ return -1; };
-	virtual int				GetTextColorBlue()							{ return -1; };
-	virtual int				GetTextColorAlpha()							{ return -1; };
 	virtual void			SetTextFont( std::string f )				{};
 	virtual void			SetTextSize( int s )						{};
 	virtual void			SetTextStyle( TPartTextStyle s )			{};
 	virtual void			SetTextAlign( TPartTextAlign a )			{};
-	virtual void			SetTextColor( int r, int g, int b, int a )	{};
+	virtual void			SetTextColor( int r, int g, int b, int a )	{ mTextColorRed = r; mTextColorGreen = g; mTextColorBlue = b; mTextColorAlpha = a; };
 	
 	virtual THitPart		HitTestForEditing( LEONumber x, LEONumber y, THitTestHandlesFlag handlesToo, LEOInteger *outCustomHandleIndex );
 	virtual bool			IsSelected()					{ if( !GetVisible() ) return false; return CPart::IsSelected(); };
@@ -157,6 +157,10 @@ protected:
 	double			mShadowOffsetWidth;
 	double			mShadowOffsetHeight;
 	double			mShadowBlurRadius;
+	int				mTextColorRed;
+	int				mTextColorGreen;
+	int				mTextColorBlue;
+	int				mTextColorAlpha;
 	int				mLineWidth;
 	int				mBevelWidth;
 	int				mBevelAngle;

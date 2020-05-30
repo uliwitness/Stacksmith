@@ -61,6 +61,11 @@ void	CVisiblePart::LoadPropertiesFromElement( tinyxml2::XMLElement * inElement )
 	mShadowOffsetWidth = shadowOffsetElem ? CTinyXMLUtils::GetDoubleNamed( shadowOffsetElem, "width", 0 ) : 0;
 	mShadowOffsetHeight = shadowOffsetElem ? CTinyXMLUtils::GetDoubleNamed( shadowOffsetElem, "height", 0 ) : 0;
 	mShadowBlurRadius = CTinyXMLUtils::GetDoubleNamed( inElement, "shadowBlurRadius", 0 );
+	tinyxml2::XMLElement *	textColorElem = inElement->FirstChildElement( "textColor" );
+	mShadowColorRed = textColorElem ? CTinyXMLUtils::GetIntNamed( textColorElem, "red", -1 ) : -1;
+	mShadowColorGreen = textColorElem ? CTinyXMLUtils::GetIntNamed( textColorElem, "green", -1 ) : -1;
+	mShadowColorBlue = textColorElem ? CTinyXMLUtils::GetIntNamed( textColorElem, "blue", -1 ) : -1;
+	mShadowColorAlpha = textColorElem ? CTinyXMLUtils::GetIntNamed( textColorElem, "alpha", -1 ) : -1;
 	mLineWidth = CTinyXMLUtils::GetIntNamed( inElement, "lineWidth", 1 );
 	mBevelWidth = CTinyXMLUtils::GetIntNamed( inElement, "bevelWidth", 1 );
 	mBevelAngle = CTinyXMLUtils::GetIntNamed( inElement, "bevelAngle", 315 );
@@ -146,6 +151,23 @@ void	CVisiblePart::SavePropertiesToElement( tinyxml2::XMLElement * inElement )
 	elem = document->NewElement("shadowBlurRadius");
 	elem->SetText(mShadowBlurRadius);
 	inElement->InsertEndChild(elem);
+	
+	if (mTextColorRed >= 0) {
+		elem = document->NewElement("textColor");
+		subElem = document->NewElement("red");
+		subElem->SetText(mTextColorRed);
+		elem->InsertEndChild(subElem);
+		subElem = document->NewElement("green");
+		subElem->SetText(mTextColorGreen);
+		elem->InsertEndChild(subElem);
+		subElem = document->NewElement("blue");
+		subElem->SetText(mTextColorBlue);
+		elem->InsertEndChild(subElem);
+		subElem = document->NewElement("alpha");
+		subElem->SetText(mTextColorAlpha);
+		elem->InsertEndChild(subElem);
+		inElement->InsertEndChild(elem);
+	}
 
 	elem = document->NewElement("lineWidth");
 	elem->SetText(mLineWidth);

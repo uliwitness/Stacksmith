@@ -72,8 +72,9 @@ void	CMacPartBase::SetCocoaAttributesForPart( NSDictionary* inAttrs )
 	myself->SetTextStyle( textStyle );
 	
 	NSColor*	textColor = [[inAttrs objectForKey: NSForegroundColorAttributeName] colorUsingColorSpace: NSColorSpace.genericRGBColorSpace];
-	if( textColor )
-	{
+	if (!textColor || [textColor isEqualTo: NSColor.controlTextColor]) {
+		myself->SetTextColor( -1, -1, -1, -1 );
+	} else {
 		myself->SetTextColor( textColor.redComponent * 65535.0, textColor.greenComponent * 65535.0, textColor.blueComponent * 65535.0, textColor.alphaComponent * 65535.0 );
 	}
 	
@@ -144,6 +145,8 @@ NSDictionary*	CMacPartBase::GetCocoaAttributesForPart()
 	if( myself->GetTextColorRed() >= 0 )
 	{
 		[styles setObject: [NSColor colorWithCalibratedRed: myself->GetTextColorRed() / 65535.0 green: myself->GetTextColorGreen() / 65535.0 blue: myself->GetTextColorBlue() / 65535.0 alpha: myself->GetTextColorAlpha() / 65535.0] forKey: NSForegroundColorAttributeName];
+	} else {
+		[styles setObject: NSColor.controlTextColor forKey: NSForegroundColorAttributeName];
 	}
 	
 	//NSLog( @"Styles: %@", styles );
