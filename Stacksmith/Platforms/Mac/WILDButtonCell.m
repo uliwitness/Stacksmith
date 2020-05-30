@@ -80,7 +80,7 @@ NSImage*	WILDInvertedImage( NSImage* img )
 	if( !lineColor )
 		lineColor = [[NSColor blackColor] retain];
 	NSColor		*	highlightColor = lineColor;
-	if( [highlightColor isEqualTo: self.backgroundColor] )
+	if( [highlightColor isEqual: self.backgroundColor] )
 		highlightColor = [self.backgroundColor blendedColorWithFraction: 0.3 ofColor: [NSColor blackColor]];
 	NSColor	*	disabledColor = [lineColor blendedColorWithFraction: 0.5 ofColor: [NSColor colorWithCalibratedWhite: 0.0 alpha: lineColor.alphaComponent]];
 	

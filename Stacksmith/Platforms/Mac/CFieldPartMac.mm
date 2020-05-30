@@ -1324,7 +1324,7 @@ void	CFieldPartMac::SetAttributedStringWithCocoa( CAttributedString& stringToSet
 				}
 				//stringToSet.Dump();
 			}
-			else if( [currAttr isEqualToString: NSForegroundColorAttributeName] )
+			else if( [currAttr isEqualToString: NSForegroundColorAttributeName] && ![attrValue isEqual: NSColor.controlTextColor] )
 			{
 				NSColor*	rgbColor = [attrValue colorUsingColorSpace: NSColorSpace.genericRGBColorSpace];
 				NSString*	colorString = [NSString stringWithFormat: @"#%02X%02X%02X%02X", int(rgbColor.redComponent * 255.0), int(rgbColor.greenComponent * 255.0), int(rgbColor.blueComponent * 255.0), int(rgbColor.alphaComponent * 255.0)];
