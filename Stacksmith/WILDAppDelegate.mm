@@ -29,7 +29,6 @@
 #include <sstream>
 #include "CRecentCardsList.h"
 #import "UKHelperMacros.h"
-#import "WILDTemplateProjectPickerController.h"
 #import "WILDStackWindowController.h"
 #import "WILDTransitionFilter.h"
 
@@ -412,77 +411,65 @@ void	WILDScheduleResumeOfScript( void )
 
 -(IBAction)	newDocumentFromTemplate: (id)sender
 {
-	if( mTemplatePickerWindow )
-	{
-		[mTemplatePickerWindow.window makeKeyAndOrderFront: self];
-	}
-	else
-	{
-		mTemplatePickerWindow = [[WILDTemplateProjectPickerController alloc] init];
-		mTemplatePickerWindow.callbackHandler = ^(NSString* inSelectedPath)
+	NSString * inSelectedPath = [NSBundle.mainBundle pathForResource: @"Empty Project" ofType: @"xstk" inDirectory: @"Project Templates/Empty Stacks"];
+	
+	NSSavePanel		*	savePanel = [NSSavePanel savePanel];
+	savePanel.allowedFileTypes = @[@"xstk"];
+	savePanel.allowsOtherFileTypes = NO;
+	savePanel.canCreateDirectories = YES;
+	savePanel.canSelectHiddenExtension = YES;
+	savePanel.showsTagField = YES;
+	savePanel.nameFieldStringValue = [inSelectedPath lastPathComponent];
+	
+	[savePanel beginWithCompletionHandler: ^(NSInteger result) {
+		if( result == NSModalResponseCancel )
+			return;
+		
+		NSError	*	err = nil;
+		NSString*	newPath = savePanel.URL.path;
+		[[NSFileManager defaultManager] removeItemAtPath: newPath error: &err];
+		
+		NSArray	*	filesInTemplate = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: inSelectedPath error:&err];
+		if( [filesInTemplate containsObject: @"_new_empty_file_template"] )
 		{
-			NSSavePanel		*	savePanel = [NSSavePanel savePanel];
-			savePanel.allowedFileTypes = @[@"xstk"];
-			savePanel.allowsOtherFileTypes = NO;
-			savePanel.canCreateDirectories = YES;
-			savePanel.canSelectHiddenExtension = YES;
-			savePanel.showsTagField = YES;
-			savePanel.nameFieldStringValue = [inSelectedPath lastPathComponent];
+			CAutoreleasePool	pool;
+			NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
+			CDocumentMac*	theDoc = new CDocumentMac( CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetScriptContextGroupObject() );
+			CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
+			theDoc->CreateAtURL( [newFileURL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String, [[newFileURL lastPathComponent] stringByDeletingPathExtension].UTF8String );
+			[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
+			[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
 			
-			[savePanel beginWithCompletionHandler: ^(NSInteger result)
+			theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  }, "", EVisualEffectSpeedNormal );
+			theDoc->Release();
+		}
+		else
+		{
+			if( ![[NSFileManager defaultManager] copyItemAtPath: inSelectedPath toPath: newPath error: &err])
 			{
-				if( result == NSModalResponseCancel )
-					return;
-				
-				NSError	*	err = nil;
-				NSString*	newPath = savePanel.URL.path;
-				[[NSFileManager defaultManager] removeItemAtPath: newPath error: &err];
-				
-				NSArray	*	filesInTemplate = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: inSelectedPath error:&err];
-				if( [filesInTemplate containsObject: @"_new_empty_file_template"] )
+				[[NSApplication sharedApplication] presentError: err];
+				return;
+			}
+			NSString*		stackName = [[newPath lastPathComponent] stringByDeletingPathExtension];
+			NSArray	*		filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: newPath error: NULL];
+			for( NSString* currName in filenames )
+			{
+				if( [currName hasPrefix: @"."] )
+					continue;
+				if( [currName hasSuffix: @".xml"] )
 				{
-					CAutoreleasePool	pool;
-					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
-					CDocumentMac*	theDoc = new CDocumentMac( CDocumentManager::GetSharedDocumentManager()->GetHomeDocument()->GetScriptContextGroupObject() );
-					CDocumentManager::GetSharedDocumentManager()->AddDocument( theDoc );
-					theDoc->CreateAtURL( [newFileURL URLByAppendingPathComponent: @"project.xml"].absoluteString.UTF8String, [[newFileURL lastPathComponent] stringByDeletingPathExtension].UTF8String );
-					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
-					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
-					
-					theDoc->GetStack(0)->GoThereInNewWindow( EOpenInNewWindow, NULL, NULL, [](){  }, "", EVisualEffectSpeedNormal );
-					theDoc->Release();
+					NSString*	templatePath = [newPath stringByAppendingPathComponent: currName];
+					[self replacePlaceholdersInTemplateFileAtPath: templatePath withStackName: stackName];
 				}
-				else
-				{
-					if( ![[NSFileManager defaultManager] copyItemAtPath: inSelectedPath toPath: newPath error: &err])
-					{
-						[[NSApplication sharedApplication] presentError: err];
-						return;
-					}
-					NSString*		stackName = [[newPath lastPathComponent] stringByDeletingPathExtension];
-					NSArray	*		filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: newPath error: NULL];
-					for( NSString* currName in filenames )
-					{
-						if( [currName hasPrefix: @"."] )
-							continue;
-						if( [currName hasSuffix: @".xml"] )
-						{
-							NSString*	templatePath = [newPath stringByAppendingPathComponent: currName];
-							[self replacePlaceholdersInTemplateFileAtPath: templatePath withStackName: stackName];
-						}
-					}
-
-					NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
-					[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
-					[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
-					
-					[self application: [NSApplication sharedApplication] openURL: newFileURL];
-				}
-			}];
+			}
 			
-		};
-		[mTemplatePickerWindow showWindow: self];
-	}
+			NSURL		*	newFileURL = [NSURL fileURLWithPath: newPath];
+			[newFileURL setResourceValue: @YES forKey: NSURLIsPackageKey error: NULL];
+			[newFileURL setResourceValue: savePanel.tagNames forKey: NSURLTagNamesKey error: NULL];
+			
+			[self application: [NSApplication sharedApplication] openURL: newFileURL];
+		}
+	}];
 }
 
 

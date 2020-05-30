@@ -316,8 +316,6 @@
 		556DB7C21870A971002F7CB2 /* CURLConnection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7C01870A971002F7CB2 /* CURLConnection.mm */; };
 		556DB7C51870ADE9002F7CB2 /* CURLResponse.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556DB7C31870ADE9002F7CB2 /* CURLResponse.mm */; };
 		5574AD321AC1FAC0004A27F8 /* ULIWideningBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574AD311AC1FAC0004A27F8 /* ULIWideningBezierPath.m */; };
-		557AECB91A751DAC00086275 /* WILDTemplateProjectPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557AECB71A751DAC00086275 /* WILDTemplateProjectPickerController.m */; };
-		557AECBA1A751DAC00086275 /* WILDTemplateProjectPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557AECB81A751DAC00086275 /* WILDTemplateProjectPickerController.xib */; };
 		557AECC41A7527C500086275 /* Sample Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 557AECC01A7527B200086275 /* Sample Stacks */; };
 		557AECC51A7527C700086275 /* Test Stacks in Copy Stack Templates */ = {isa = PBXBuildFile; fileRef = 557AECC11A7527B200086275 /* Test Stacks */; };
 		557B182F113C5CD600F85327 /* OldStack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 557B182E113C5CD600F85327 /* OldStack.icns */; };
@@ -1032,9 +1030,6 @@
 		556DB7C41870ADE9002F7CB2 /* CURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CURLResponse.h; path = Platforms/Mac/CURLResponse.h; sourceTree = "<group>"; };
 		5574AD301AC1FAC0004A27F8 /* ULIWideningBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ULIWideningBezierPath.h; path = ../ULIWideningBezierPath/WideningBezierPath/ULIWideningBezierPath.h; sourceTree = "<group>"; };
 		5574AD311AC1FAC0004A27F8 /* ULIWideningBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ULIWideningBezierPath.m; path = ../ULIWideningBezierPath/WideningBezierPath/ULIWideningBezierPath.m; sourceTree = "<group>"; };
-		557AECB61A751DAC00086275 /* WILDTemplateProjectPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WILDTemplateProjectPickerController.h; path = Platforms/Mac/WILDTemplateProjectPickerController.h; sourceTree = "<group>"; };
-		557AECB71A751DAC00086275 /* WILDTemplateProjectPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WILDTemplateProjectPickerController.m; path = Platforms/Mac/WILDTemplateProjectPickerController.m; sourceTree = "<group>"; };
-		557AECB81A751DAC00086275 /* WILDTemplateProjectPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WILDTemplateProjectPickerController.xib; path = Platforms/Mac/WILDTemplateProjectPickerController.xib; sourceTree = "<group>"; };
 		557AECC01A7527B200086275 /* Sample Stacks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Sample Stacks"; path = "../Stacks/Sample Stacks"; sourceTree = "<group>"; };
 		557AECC11A7527B200086275 /* Test Stacks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Test Stacks"; path = "../Stacks/Test Stacks"; sourceTree = "<group>"; };
 		557B182E113C5CD600F85327 /* OldStack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OldStack.icns; sourceTree = "<group>"; };
@@ -1611,9 +1606,6 @@
 				552558FC114BDE7C00279B03 /* WILDAppDelegate.h */,
 				552558FD114BDE7C00279B03 /* WILDAppDelegate.mm */,
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
-				557AECB61A751DAC00086275 /* WILDTemplateProjectPickerController.h */,
-				557AECB71A751DAC00086275 /* WILDTemplateProjectPickerController.m */,
-				557AECB81A751DAC00086275 /* WILDTemplateProjectPickerController.xib */,
 				55F2EAED131DA23F00913200 /* WILDAboutPanelController.h */,
 				55F2EAEE131DA23F00913200 /* WILDAboutPanelController.m */,
 				55F2EAF0131DA26700913200 /* WILDAboutPanelController.xib */,
@@ -2480,7 +2472,6 @@
 				5593D0C91E6B0DEF00E7F31D /* WILDVariableWatcherWindowController.xib in Resources */,
 				55B55C2322105313009CDFFC /* WILDViewFactoryTableViewInContainer.xib in Resources */,
 				55405B78189E8FD4001D3C99 /* WILDScriptEditorWindowController.xib in Resources */,
-				557AECBA1A751DAC00086275 /* WILDTemplateProjectPickerController.xib in Resources */,
 				559BA99E18A7AC3000760273 /* WILDWebBrowserInfoViewController.xib in Resources */,
 				5500FDB61E4FEF2B00BD6BA7 /* WILDConcreteObjectInfoViewController.xib in Resources */,
 				55F2EAF2131DA26700913200 /* WILDAboutPanelController.xib in Resources */,
@@ -2938,7 +2929,6 @@
 				553F680F157D3547009E0517 /* CGetChunkPropertyNode.cpp in Sources */,
 				55ADB13516F4B5E30056CB4D /* COperatorNodeTransformation.cpp in Sources */,
 				55ADB13C16F4B7B70056CB4D /* CConcatOperatorNodeTransformation.cpp in Sources */,
-				557AECB91A751DAC00086275 /* WILDTemplateProjectPickerController.m in Sources */,
 				55ADB13F16F4B9D30056CB4D /* CConcatSpaceOperatorNodeTransformation.cpp in Sources */,
 				55CD60BC187510F0002450E2 /* CButtonPart.cpp in Sources */,
 				551D938917058397003766DA /* CDownloadCommandNode.cpp in Sources */,

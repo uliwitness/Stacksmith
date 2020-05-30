@@ -38,7 +38,6 @@
 	IBOutlet NSButton			*			mGoPrevButton;
 	IBOutlet NSButton			*			mGoNextButton;
 	NSWindow					*			mObservedMainWindow;
-	WILDTemplateProjectPickerController*	mTemplatePickerWindow;
 }
 
 
